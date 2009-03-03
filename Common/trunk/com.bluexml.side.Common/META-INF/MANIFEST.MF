@@ -10,4 +10,5 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.ecore
 Eclipse-LazyStart: true
 Export-Package: com.bluexml.side.common,
+ com.bluexml.side.common.impl,
  com.bluexml.side.common.util
