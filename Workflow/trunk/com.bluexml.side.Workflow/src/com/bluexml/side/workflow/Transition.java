@@ -154,12 +154,12 @@ public interface Transition extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>To</em>' reference.
-	 * @see #setTo(Task)
+	 * @see #setTo(State)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getTransition_To()
 	 * @model required="true"
 	 * @generated
 	 */
-	Task getTo();
+	State getTo();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.workflow.Transition#getTo <em>To</em>}' reference.
@@ -169,7 +169,7 @@ public interface Transition extends EObject {
 	 * @see #getTo()
 	 * @generated
 	 */
-	void setTo(Task value);
+	void setTo(State value);
 
 	/**
 	 * Returns the value of the '<em><b>Title</b></em>' attribute.

@@ -298,7 +298,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getState()
 	 * @generated
 	 */
-	int STATE = 19;
+	int STATE = 18;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class.
@@ -467,22 +467,13 @@ public interface WorkflowPackage extends EPackage {
 	int TASK_NODE = 6;
 
 	/**
-	 * The feature id for the '<em><b>Task</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TASK_NODE__TASK = STATE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_NODE__NAME = STATE_FEATURE_COUNT + 1;
+	int TASK_NODE__NAME = STATE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Transition</b></em>' containment reference list.
@@ -491,7 +482,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_NODE__TRANSITION = STATE_FEATURE_COUNT + 2;
+	int TASK_NODE__TRANSITION = STATE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Event</b></em>' containment reference list.
@@ -500,7 +491,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_NODE__EVENT = STATE_FEATURE_COUNT + 3;
+	int TASK_NODE__EVENT = STATE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Timer</b></em>' containment reference list.
@@ -509,7 +500,25 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_NODE__TIMER = STATE_FEATURE_COUNT + 4;
+	int TASK_NODE__TIMER = STATE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Swimlane</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_NODE__SWIMLANE = STATE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Assignment</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_NODE__ASSIGNMENT = STATE_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Task Node</em>' class.
@@ -518,7 +527,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_NODE_FEATURE_COUNT = STATE_FEATURE_COUNT + 5;
+	int TASK_NODE_FEATURE_COUNT = STATE_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.ProcessStateImpl <em>Process State</em>}' class.
@@ -825,70 +834,6 @@ public interface WorkflowPackage extends EPackage {
 	int SCRIPT_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.TaskImpl <em>Task</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.workflow.impl.TaskImpl
-	 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getTask()
-	 * @generated
-	 */
-	int TASK = 14;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TASK__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Swimlane</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TASK__SWIMLANE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Assignment</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TASK__ASSIGNMENT = 2;
-
-	/**
-	 * The feature id for the '<em><b>Event</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TASK__EVENT = 3;
-
-	/**
-	 * The feature id for the '<em><b>Timer</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TASK__TIMER = 4;
-
-	/**
-	 * The number of structural features of the '<em>Task</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TASK_FEATURE_COUNT = 5;
-
-	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.TimerImpl <em>Timer</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -896,7 +841,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getTimer()
 	 * @generated
 	 */
-	int TIMER = 15;
+	int TIMER = 14;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -942,7 +887,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getAssignment()
 	 * @generated
 	 */
-	int ASSIGNMENT = 16;
+	int ASSIGNMENT = 15;
 
 	/**
 	 * The feature id for the '<em><b>Actorid</b></em>' attribute.
@@ -988,7 +933,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getVariable()
 	 * @generated
 	 */
-	int VARIABLE = 17;
+	int VARIABLE = 16;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1025,7 +970,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getTransition()
 	 * @generated
 	 */
-	int TRANSITION = 18;
+	int TRANSITION = 17;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1107,7 +1052,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getBPMEventType()
 	 * @generated
 	 */
-	int BPM_EVENT_TYPE = 20;
+	int BPM_EVENT_TYPE = 19;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.BPMAssignmentType <em>BPM Assignment Type</em>}' enum.
@@ -1117,7 +1062,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getBPMAssignmentType()
 	 * @generated
 	 */
-	int BPM_ASSIGNMENT_TYPE = 21;
+	int BPM_ASSIGNMENT_TYPE = 20;
 
 
 	/**
@@ -1433,17 +1378,6 @@ public interface WorkflowPackage extends EPackage {
 	EClass getTaskNode();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.workflow.TaskNode#getTask <em>Task</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Task</em>'.
-	 * @see com.bluexml.side.workflow.TaskNode#getTask()
-	 * @see #getTaskNode()
-	 * @generated
-	 */
-	EReference getTaskNode_Task();
-
-	/**
 	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.TaskNode#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1486,6 +1420,28 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTaskNode_Timer();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.bluexml.side.workflow.TaskNode#getSwimlane <em>Swimlane</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Swimlane</em>'.
+	 * @see com.bluexml.side.workflow.TaskNode#getSwimlane()
+	 * @see #getTaskNode()
+	 * @generated
+	 */
+	EReference getTaskNode_Swimlane();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.workflow.TaskNode#getAssignment <em>Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Assignment</em>'.
+	 * @see com.bluexml.side.workflow.TaskNode#getAssignment()
+	 * @see #getTaskNode()
+	 * @generated
+	 */
+	EReference getTaskNode_Assignment();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.ProcessState <em>Process State</em>}'.
@@ -1765,71 +1721,6 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getScript_Expression();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.workflow.Task <em>Task</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Task</em>'.
-	 * @see com.bluexml.side.workflow.Task
-	 * @generated
-	 */
-	EClass getTask();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.Task#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see com.bluexml.side.workflow.Task#getName()
-	 * @see #getTask()
-	 * @generated
-	 */
-	EAttribute getTask_Name();
-
-	/**
-	 * Returns the meta object for the reference '{@link com.bluexml.side.workflow.Task#getSwimlane <em>Swimlane</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Swimlane</em>'.
-	 * @see com.bluexml.side.workflow.Task#getSwimlane()
-	 * @see #getTask()
-	 * @generated
-	 */
-	EReference getTask_Swimlane();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.workflow.Task#getAssignment <em>Assignment</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Assignment</em>'.
-	 * @see com.bluexml.side.workflow.Task#getAssignment()
-	 * @see #getTask()
-	 * @generated
-	 */
-	EReference getTask_Assignment();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.workflow.Task#getEvent <em>Event</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Event</em>'.
-	 * @see com.bluexml.side.workflow.Task#getEvent()
-	 * @see #getTask()
-	 * @generated
-	 */
-	EReference getTask_Event();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.workflow.Task#getTimer <em>Timer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Timer</em>'.
-	 * @see com.bluexml.side.workflow.Task#getTimer()
-	 * @see #getTask()
-	 * @generated
-	 */
-	EReference getTask_Timer();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.Timer <em>Timer</em>}'.
@@ -2335,14 +2226,6 @@ public interface WorkflowPackage extends EPackage {
 		EClass TASK_NODE = eINSTANCE.getTaskNode();
 
 		/**
-		 * The meta object literal for the '<em><b>Task</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TASK_NODE__TASK = eINSTANCE.getTaskNode_Task();
-
-		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2373,6 +2256,22 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TASK_NODE__TIMER = eINSTANCE.getTaskNode_Timer();
+
+		/**
+		 * The meta object literal for the '<em><b>Swimlane</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TASK_NODE__SWIMLANE = eINSTANCE.getTaskNode_Swimlane();
+
+		/**
+		 * The meta object literal for the '<em><b>Assignment</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TASK_NODE__ASSIGNMENT = eINSTANCE.getTaskNode_Assignment();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.ProcessStateImpl <em>Process State</em>}' class.
@@ -2595,56 +2494,6 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SCRIPT__EXPRESSION = eINSTANCE.getScript_Expression();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.TaskImpl <em>Task</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.workflow.impl.TaskImpl
-		 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getTask()
-		 * @generated
-		 */
-		EClass TASK = eINSTANCE.getTask();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TASK__NAME = eINSTANCE.getTask_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Swimlane</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TASK__SWIMLANE = eINSTANCE.getTask_Swimlane();
-
-		/**
-		 * The meta object literal for the '<em><b>Assignment</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TASK__ASSIGNMENT = eINSTANCE.getTask_Assignment();
-
-		/**
-		 * The meta object literal for the '<em><b>Event</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TASK__EVENT = eINSTANCE.getTask_Event();
-
-		/**
-		 * The meta object literal for the '<em><b>Timer</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TASK__TIMER = eINSTANCE.getTask_Timer();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.TimerImpl <em>Timer</em>}' class.

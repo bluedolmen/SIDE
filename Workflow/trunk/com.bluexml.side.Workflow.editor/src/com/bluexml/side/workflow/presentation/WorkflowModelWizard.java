@@ -8,6 +8,7 @@ package com.bluexml.side.workflow.presentation;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -71,6 +72,24 @@ import com.bluexml.side.workflow.provider.WorkflowEditPlugin;
  * @generated
  */
 public class WorkflowModelWizard extends Wizard implements INewWizard {
+	/**
+	 * The supported extensions for created files.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final List<String> FILE_EXTENSIONS =
+		Collections.unmodifiableList(Arrays.asList(WorkflowEditorPlugin.INSTANCE.getString("_UI_WorkflowEditorFilenameExtensions").split("\\s*,\\s*")));
+
+	/**
+	 * A formatted list of supported file extensions, suitable for display.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String FORMATTED_FILE_EXTENSIONS =
+		WorkflowEditorPlugin.INSTANCE.getString("_UI_WorkflowEditorFilenameExtensions").replaceAll("\\s*,\\s*", ", ");
+
 	/**
 	 * This caches an instance of the model package.
 	 * <!-- begin-user-doc -->
@@ -292,21 +311,15 @@ public class WorkflowModelWizard extends Wizard implements INewWizard {
 	@Override
 		protected boolean validatePage() {
 			if (super.validatePage()) {
-				// Make sure the file ends in ".workflow".
-				//
-				String requiredExt = WorkflowEditorPlugin.INSTANCE.getString("_UI_WorkflowEditorFilenameExtension");
-				String enteredExt = new Path(getFileName()).getFileExtension();
-				if (enteredExt == null || !enteredExt.equals(requiredExt)) {
-					setErrorMessage(WorkflowEditorPlugin.INSTANCE.getString("_WARN_FilenameExtension", new Object [] { requiredExt }));
+				String extension = new Path(getFileName()).getFileExtension();
+				if (extension == null || !FILE_EXTENSIONS.contains(extension)) {
+					String key = FILE_EXTENSIONS.size() > 1 ? "_WARN_FilenameExtensions" : "_WARN_FilenameExtension";
+					setErrorMessage(WorkflowEditorPlugin.INSTANCE.getString(key, new Object [] { FORMATTED_FILE_EXTENSIONS }));
 					return false;
 				}
-				else {
-					return true;
-				}
+				return true;
 			}
-			else {
-				return false;
-			}
+			return false;
 		}
 
 		/**
@@ -540,7 +553,7 @@ public class WorkflowModelWizard extends Wizard implements INewWizard {
 		newFileCreationPage = new WorkflowModelWizardNewFileCreationPage("Whatever", selection);
 		newFileCreationPage.setTitle(WorkflowEditorPlugin.INSTANCE.getString("_UI_WorkflowModelWizard_label"));
 		newFileCreationPage.setDescription(WorkflowEditorPlugin.INSTANCE.getString("_UI_WorkflowModelWizard_description"));
-		newFileCreationPage.setFileName(WorkflowEditorPlugin.INSTANCE.getString("_UI_WorkflowEditorFilenameDefaultBase") + "." + WorkflowEditorPlugin.INSTANCE.getString("_UI_WorkflowEditorFilenameExtension"));
+		newFileCreationPage.setFileName(WorkflowEditorPlugin.INSTANCE.getString("_UI_WorkflowEditorFilenameDefaultBase") + "." + FILE_EXTENSIONS.get(0));
 		addPage(newFileCreationPage);
 
 		// Try and get the resource selection to determine a current directory for the file dialog.
@@ -567,7 +580,7 @@ public class WorkflowModelWizard extends Wizard implements INewWizard {
 					// Make up a unique new name here.
 					//
 					String defaultModelBaseFilename = WorkflowEditorPlugin.INSTANCE.getString("_UI_WorkflowEditorFilenameDefaultBase");
-					String defaultModelFilenameExtension = WorkflowEditorPlugin.INSTANCE.getString("_UI_WorkflowEditorFilenameExtension");
+					String defaultModelFilenameExtension = FILE_EXTENSIONS.get(0);
 					String modelFilename = defaultModelBaseFilename + "." + defaultModelFilenameExtension;
 					for (int i = 1; ((IContainer)selectedResource).findMember(modelFilename) != null; ++i) {
 						modelFilename = defaultModelBaseFilename + i + "." + defaultModelFilenameExtension;

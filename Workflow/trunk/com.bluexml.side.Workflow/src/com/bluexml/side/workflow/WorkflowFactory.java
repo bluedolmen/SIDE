@@ -152,15 +152,6 @@ public interface WorkflowFactory extends EFactory {
 	Script createScript();
 
 	/**
-	 * Returns a new object of class '<em>Task</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Task</em>'.
-	 * @generated
-	 */
-	Task createTask();
-
-	/**
 	 * Returns a new object of class '<em>Timer</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

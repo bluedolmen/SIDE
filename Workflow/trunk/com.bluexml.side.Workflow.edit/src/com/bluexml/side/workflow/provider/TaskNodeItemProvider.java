@@ -67,6 +67,7 @@ public class TaskNodeItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
+			addSwimlanePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -94,6 +95,28 @@ public class TaskNodeItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Swimlane feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSwimlanePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TaskNode_swimlane_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TaskNode_swimlane_feature", "_UI_TaskNode_type"),
+				 WorkflowPackage.Literals.TASK_NODE__SWIMLANE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -105,10 +128,10 @@ public class TaskNodeItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(WorkflowPackage.Literals.TASK_NODE__TASK);
 			childrenFeatures.add(WorkflowPackage.Literals.TASK_NODE__TRANSITION);
 			childrenFeatures.add(WorkflowPackage.Literals.TASK_NODE__EVENT);
 			childrenFeatures.add(WorkflowPackage.Literals.TASK_NODE__TIMER);
+			childrenFeatures.add(WorkflowPackage.Literals.TASK_NODE__ASSIGNMENT);
 		}
 		return childrenFeatures;
 	}
@@ -166,10 +189,10 @@ public class TaskNodeItemProvider
 			case WorkflowPackage.TASK_NODE__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case WorkflowPackage.TASK_NODE__TASK:
 			case WorkflowPackage.TASK_NODE__TRANSITION:
 			case WorkflowPackage.TASK_NODE__EVENT:
 			case WorkflowPackage.TASK_NODE__TIMER:
+			case WorkflowPackage.TASK_NODE__ASSIGNMENT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -189,11 +212,6 @@ public class TaskNodeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(WorkflowPackage.Literals.TASK_NODE__TASK,
-				 WorkflowFactory.eINSTANCE.createTask()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(WorkflowPackage.Literals.TASK_NODE__TRANSITION,
 				 WorkflowFactory.eINSTANCE.createTransition()));
 
@@ -206,17 +224,11 @@ public class TaskNodeItemProvider
 			(createChildParameter
 				(WorkflowPackage.Literals.TASK_NODE__TIMER,
 				 WorkflowFactory.eINSTANCE.createTimer()));
-	}
 
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return WorkflowEditPlugin.INSTANCE;
+		newChildDescriptors.add
+			(createChildParameter
+				(WorkflowPackage.Literals.TASK_NODE__ASSIGNMENT,
+				 WorkflowFactory.eINSTANCE.createAssignment()));
 	}
 
 }

@@ -6,28 +6,25 @@
  */
 package com.bluexml.side.workflow.impl;
 
-import com.bluexml.side.workflow.Event;
-import com.bluexml.side.workflow.Task;
-import com.bluexml.side.workflow.TaskNode;
-import com.bluexml.side.workflow.Timer;
-import com.bluexml.side.workflow.Transition;
-import com.bluexml.side.workflow.WorkflowPackage;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import com.bluexml.side.workflow.Assignment;
+import com.bluexml.side.workflow.Event;
+import com.bluexml.side.workflow.Swimlane;
+import com.bluexml.side.workflow.TaskNode;
+import com.bluexml.side.workflow.Timer;
+import com.bluexml.side.workflow.Transition;
+import com.bluexml.side.workflow.WorkflowPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,27 +33,18 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.workflow.impl.TaskNodeImpl#getTask <em>Task</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.TaskNodeImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.TaskNodeImpl#getTransition <em>Transition</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.TaskNodeImpl#getEvent <em>Event</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.TaskNodeImpl#getTimer <em>Timer</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.impl.TaskNodeImpl#getSwimlane <em>Swimlane</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.impl.TaskNodeImpl#getAssignment <em>Assignment</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class TaskNodeImpl extends StateImpl implements TaskNode {
-	/**
-	 * The cached value of the '{@link #getTask() <em>Task</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTask()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Task> task;
-
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -108,6 +96,26 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 	protected EList<Timer> timer;
 
 	/**
+	 * The cached value of the '{@link #getSwimlane() <em>Swimlane</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSwimlane()
+	 * @generated
+	 * @ordered
+	 */
+	protected Swimlane swimlane;
+
+	/**
+	 * The cached value of the '{@link #getAssignment() <em>Assignment</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAssignment()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Assignment> assignment;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -124,18 +132,6 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 	@Override
 	protected EClass eStaticClass() {
 		return WorkflowPackage.Literals.TASK_NODE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Task> getTask() {
-		if (task == null) {
-			task = new EObjectContainmentEList<Task>(Task.class, this, WorkflowPackage.TASK_NODE__TASK);
-		}
-		return task;
 	}
 
 	/**
@@ -200,12 +196,88 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Swimlane getSwimlane() {
+		if (swimlane != null && swimlane.eIsProxy()) {
+			InternalEObject oldSwimlane = (InternalEObject)swimlane;
+			swimlane = (Swimlane)eResolveProxy(oldSwimlane);
+			if (swimlane != oldSwimlane) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, WorkflowPackage.TASK_NODE__SWIMLANE, oldSwimlane, swimlane));
+			}
+		}
+		return swimlane;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Swimlane basicGetSwimlane() {
+		return swimlane;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetSwimlane(Swimlane newSwimlane, NotificationChain msgs) {
+		Swimlane oldSwimlane = swimlane;
+		swimlane = newSwimlane;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkflowPackage.TASK_NODE__SWIMLANE, oldSwimlane, newSwimlane);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSwimlane(Swimlane newSwimlane) {
+		if (newSwimlane != swimlane) {
+			NotificationChain msgs = null;
+			if (swimlane != null)
+				msgs = ((InternalEObject)swimlane).eInverseRemove(this, WorkflowPackage.SWIMLANE__MANAGE, Swimlane.class, msgs);
+			if (newSwimlane != null)
+				msgs = ((InternalEObject)newSwimlane).eInverseAdd(this, WorkflowPackage.SWIMLANE__MANAGE, Swimlane.class, msgs);
+			msgs = basicSetSwimlane(newSwimlane, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.TASK_NODE__SWIMLANE, newSwimlane, newSwimlane));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Assignment> getAssignment() {
+		if (assignment == null) {
+			assignment = new EObjectContainmentEList<Assignment>(Assignment.class, this, WorkflowPackage.TASK_NODE__ASSIGNMENT);
+		}
+		return assignment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case WorkflowPackage.TASK_NODE__TRANSITION:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTransition()).basicAdd(otherEnd, msgs);
+			case WorkflowPackage.TASK_NODE__SWIMLANE:
+				if (swimlane != null)
+					msgs = ((InternalEObject)swimlane).eInverseRemove(this, WorkflowPackage.SWIMLANE__MANAGE, Swimlane.class, msgs);
+				return basicSetSwimlane((Swimlane)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -218,14 +290,16 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case WorkflowPackage.TASK_NODE__TASK:
-				return ((InternalEList<?>)getTask()).basicRemove(otherEnd, msgs);
 			case WorkflowPackage.TASK_NODE__TRANSITION:
 				return ((InternalEList<?>)getTransition()).basicRemove(otherEnd, msgs);
 			case WorkflowPackage.TASK_NODE__EVENT:
 				return ((InternalEList<?>)getEvent()).basicRemove(otherEnd, msgs);
 			case WorkflowPackage.TASK_NODE__TIMER:
 				return ((InternalEList<?>)getTimer()).basicRemove(otherEnd, msgs);
+			case WorkflowPackage.TASK_NODE__SWIMLANE:
+				return basicSetSwimlane(null, msgs);
+			case WorkflowPackage.TASK_NODE__ASSIGNMENT:
+				return ((InternalEList<?>)getAssignment()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -238,8 +312,6 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case WorkflowPackage.TASK_NODE__TASK:
-				return getTask();
 			case WorkflowPackage.TASK_NODE__NAME:
 				return getName();
 			case WorkflowPackage.TASK_NODE__TRANSITION:
@@ -248,6 +320,11 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 				return getEvent();
 			case WorkflowPackage.TASK_NODE__TIMER:
 				return getTimer();
+			case WorkflowPackage.TASK_NODE__SWIMLANE:
+				if (resolve) return getSwimlane();
+				return basicGetSwimlane();
+			case WorkflowPackage.TASK_NODE__ASSIGNMENT:
+				return getAssignment();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -261,10 +338,6 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case WorkflowPackage.TASK_NODE__TASK:
-				getTask().clear();
-				getTask().addAll((Collection<? extends Task>)newValue);
-				return;
 			case WorkflowPackage.TASK_NODE__NAME:
 				setName((String)newValue);
 				return;
@@ -280,6 +353,13 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 				getTimer().clear();
 				getTimer().addAll((Collection<? extends Timer>)newValue);
 				return;
+			case WorkflowPackage.TASK_NODE__SWIMLANE:
+				setSwimlane((Swimlane)newValue);
+				return;
+			case WorkflowPackage.TASK_NODE__ASSIGNMENT:
+				getAssignment().clear();
+				getAssignment().addAll((Collection<? extends Assignment>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -292,9 +372,6 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case WorkflowPackage.TASK_NODE__TASK:
-				getTask().clear();
-				return;
 			case WorkflowPackage.TASK_NODE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -306,6 +383,12 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 				return;
 			case WorkflowPackage.TASK_NODE__TIMER:
 				getTimer().clear();
+				return;
+			case WorkflowPackage.TASK_NODE__SWIMLANE:
+				setSwimlane((Swimlane)null);
+				return;
+			case WorkflowPackage.TASK_NODE__ASSIGNMENT:
+				getAssignment().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -319,8 +402,6 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case WorkflowPackage.TASK_NODE__TASK:
-				return task != null && !task.isEmpty();
 			case WorkflowPackage.TASK_NODE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case WorkflowPackage.TASK_NODE__TRANSITION:
@@ -329,6 +410,10 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 				return event != null && !event.isEmpty();
 			case WorkflowPackage.TASK_NODE__TIMER:
 				return timer != null && !timer.isEmpty();
+			case WorkflowPackage.TASK_NODE__SWIMLANE:
+				return swimlane != null;
+			case WorkflowPackage.TASK_NODE__ASSIGNMENT:
+				return assignment != null && !assignment.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

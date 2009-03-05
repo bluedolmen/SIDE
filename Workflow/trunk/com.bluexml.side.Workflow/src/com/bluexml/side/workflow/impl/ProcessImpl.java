@@ -6,8 +6,18 @@
  */
 package com.bluexml.side.workflow.impl;
 
-import com.bluexml.side.common.impl.PackageImpl;
+import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import com.bluexml.side.common.impl.PackageImpl;
 import com.bluexml.side.workflow.Decision;
 import com.bluexml.side.workflow.EndState;
 import com.bluexml.side.workflow.Fork;
@@ -18,21 +28,6 @@ import com.bluexml.side.workflow.StartState;
 import com.bluexml.side.workflow.Swimlane;
 import com.bluexml.side.workflow.TaskNode;
 import com.bluexml.side.workflow.WorkflowPackage;
-
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->

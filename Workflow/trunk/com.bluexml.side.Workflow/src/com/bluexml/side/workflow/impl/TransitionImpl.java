@@ -6,29 +6,25 @@
  */
 package com.bluexml.side.workflow.impl;
 
-import com.bluexml.side.workflow.Action;
-import com.bluexml.side.workflow.Task;
-import com.bluexml.side.workflow.TaskNode;
-import com.bluexml.side.workflow.Timer;
-import com.bluexml.side.workflow.Transition;
-import com.bluexml.side.workflow.WorkflowPackage;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import com.bluexml.side.workflow.Action;
+import com.bluexml.side.workflow.State;
+import com.bluexml.side.workflow.TaskNode;
+import com.bluexml.side.workflow.Timer;
+import com.bluexml.side.workflow.Transition;
+import com.bluexml.side.workflow.WorkflowPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -118,7 +114,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * @generated
 	 * @ordered
 	 */
-	protected Task to;
+	protected State to;
 
 	/**
 	 * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
@@ -271,10 +267,10 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Task getTo() {
+	public State getTo() {
 		if (to != null && to.eIsProxy()) {
 			InternalEObject oldTo = (InternalEObject)to;
-			to = (Task)eResolveProxy(oldTo);
+			to = (State)eResolveProxy(oldTo);
 			if (to != oldTo) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, WorkflowPackage.TRANSITION__TO, oldTo, to));
@@ -288,7 +284,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Task basicGetTo() {
+	public State basicGetTo() {
 		return to;
 	}
 
@@ -297,8 +293,8 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTo(Task newTo) {
-		Task oldTo = to;
+	public void setTo(State newTo) {
+		State oldTo = to;
 		to = newTo;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.TRANSITION__TO, oldTo, to));
@@ -427,7 +423,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 				getTimer().addAll((Collection<? extends Timer>)newValue);
 				return;
 			case WorkflowPackage.TRANSITION__TO:
-				setTo((Task)newValue);
+				setTo((State)newValue);
 				return;
 			case WorkflowPackage.TRANSITION__TITLE:
 				setTitle((String)newValue);
@@ -460,7 +456,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 				getTimer().clear();
 				return;
 			case WorkflowPackage.TRANSITION__TO:
-				setTo((Task)null);
+				setTo((State)null);
 				return;
 			case WorkflowPackage.TRANSITION__TITLE:
 				setTitle(TITLE_EDEFAULT);

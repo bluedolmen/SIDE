@@ -6,6 +6,13 @@
  */
 package com.bluexml.side.workflow.impl;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.impl.EFactoryImpl;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
 import com.bluexml.side.workflow.Action;
 import com.bluexml.side.workflow.Assignment;
 import com.bluexml.side.workflow.BPMAssignmentType;
@@ -20,7 +27,6 @@ import com.bluexml.side.workflow.ProcessState;
 import com.bluexml.side.workflow.Script;
 import com.bluexml.side.workflow.StartState;
 import com.bluexml.side.workflow.Swimlane;
-import com.bluexml.side.workflow.Task;
 import com.bluexml.side.workflow.TaskNode;
 import com.bluexml.side.workflow.Timer;
 import com.bluexml.side.workflow.Transition;
@@ -28,15 +34,6 @@ import com.bluexml.side.workflow.Variable;
 import com.bluexml.side.workflow.WorkflowFactory;
 import com.bluexml.side.workflow.WorkflowModelElement;
 import com.bluexml.side.workflow.WorkflowPackage;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-
-import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 /**
  * <!-- begin-user-doc -->
@@ -96,7 +93,6 @@ public class WorkflowFactoryImpl extends EFactoryImpl implements WorkflowFactory
 			case WorkflowPackage.EVENT: return createEvent();
 			case WorkflowPackage.ACTION: return createAction();
 			case WorkflowPackage.SCRIPT: return createScript();
-			case WorkflowPackage.TASK: return createTask();
 			case WorkflowPackage.TIMER: return createTimer();
 			case WorkflowPackage.ASSIGNMENT: return createAssignment();
 			case WorkflowPackage.VARIABLE: return createVariable();
@@ -278,16 +274,6 @@ public class WorkflowFactoryImpl extends EFactoryImpl implements WorkflowFactory
 	public Script createScript() {
 		ScriptImpl script = new ScriptImpl();
 		return script;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Task createTask() {
-		TaskImpl task = new TaskImpl();
-		return task;
 	}
 
 	/**

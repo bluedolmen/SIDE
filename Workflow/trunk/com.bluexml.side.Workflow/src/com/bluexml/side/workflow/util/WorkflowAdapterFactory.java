@@ -6,9 +6,13 @@
  */
 package com.bluexml.side.workflow.util;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+import org.eclipse.emf.ecore.EObject;
+
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
-
 import com.bluexml.side.workflow.Action;
 import com.bluexml.side.workflow.Assignment;
 import com.bluexml.side.workflow.Decision;
@@ -22,20 +26,12 @@ import com.bluexml.side.workflow.Script;
 import com.bluexml.side.workflow.StartState;
 import com.bluexml.side.workflow.State;
 import com.bluexml.side.workflow.Swimlane;
-import com.bluexml.side.workflow.Task;
 import com.bluexml.side.workflow.TaskNode;
 import com.bluexml.side.workflow.Timer;
 import com.bluexml.side.workflow.Transition;
 import com.bluexml.side.workflow.Variable;
 import com.bluexml.side.workflow.WorkflowModelElement;
 import com.bluexml.side.workflow.WorkflowPackage;
-
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notifier;
-
-import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -86,7 +82,7 @@ public class WorkflowAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * The switch the delegates to the <code>createXXX</code> methods.
+	 * The switch that delegates to the <code>createXXX</code> methods.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -148,10 +144,6 @@ public class WorkflowAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseScript(Script object) {
 				return createScriptAdapter();
-			}
-			@Override
-			public Adapter caseTask(Task object) {
-				return createTaskAdapter();
 			}
 			@Override
 			public Adapter caseTimer(Timer object) {
@@ -398,20 +390,6 @@ public class WorkflowAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createScriptAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.workflow.Task <em>Task</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.workflow.Task
-	 * @generated
-	 */
-	public Adapter createTaskAdapter() {
 		return null;
 	}
 

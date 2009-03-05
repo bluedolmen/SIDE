@@ -4,7 +4,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.bluexml.side.Workflow/src"
     modelPluginID="com.bluexml.side.Workflow" modelName="Workflow" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="5.0" copyrightFields="false" usedGenPackages="../../com.bluexml.side.Common/model/Common.genmodel#//common">
-  <foreignModel>../../backup/Workflow.ecore</foreignModel>
+  <foreignModel>Workflow.ecore</foreignModel>
   <genPackages prefix="Workflow" basePackage="com.bluexml.side" disposableProviderFactory="true"
       ecorePackage="Workflow.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Workflow.ecore#//BPMEventType">
@@ -63,11 +63,12 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Node/event"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//TaskNode">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//TaskNode/task"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//TaskNode/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//TaskNode/transition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//TaskNode/event"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//TaskNode/timer"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Workflow.ecore#//TaskNode/swimlane"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//TaskNode/assignment"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//ProcessState">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Workflow.ecore#//ProcessState/subprocess"/>
@@ -101,13 +102,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Script/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Script/variable"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Script/expression"/>
-    </genClasses>
-    <genClasses ecoreClass="Workflow.ecore#//Task">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Task/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Workflow.ecore#//Task/swimlane"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Task/assignment"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Task/event"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Task/timer"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Timer">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Timer/name"/>

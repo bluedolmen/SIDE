@@ -83,8 +83,8 @@ public interface Swimlane extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Manage</b></em>' reference list.
-	 * The list contents are of type {@link com.bluexml.side.workflow.Task}.
-	 * It is bidirectional and its opposite is '{@link com.bluexml.side.workflow.Task#getSwimlane <em>Swimlane</em>}'.
+	 * The list contents are of type {@link com.bluexml.side.workflow.TaskNode}.
+	 * It is bidirectional and its opposite is '{@link com.bluexml.side.workflow.TaskNode#getSwimlane <em>Swimlane</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Manage</em>' reference list isn't clear,
@@ -93,10 +93,10 @@ public interface Swimlane extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Manage</em>' reference list.
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getSwimlane_Manage()
-	 * @see com.bluexml.side.workflow.Task#getSwimlane
+	 * @see com.bluexml.side.workflow.TaskNode#getSwimlane
 	 * @model opposite="swimlane"
 	 * @generated
 	 */
-	EList<Task> getManage();
+	EList<TaskNode> getManage();
 
 } // Swimlane

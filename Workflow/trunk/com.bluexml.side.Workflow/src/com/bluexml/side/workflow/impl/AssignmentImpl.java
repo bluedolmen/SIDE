@@ -6,15 +6,13 @@
  */
 package com.bluexml.side.workflow.impl;
 
-import com.bluexml.side.workflow.Assignment;
-import com.bluexml.side.workflow.WorkflowPackage;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import com.bluexml.side.workflow.Assignment;
+import com.bluexml.side.workflow.WorkflowPackage;
 
 /**
  * <!-- begin-user-doc -->

@@ -6,9 +6,13 @@
  */
 package com.bluexml.side.workflow.util;
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
-
 import com.bluexml.side.workflow.Action;
 import com.bluexml.side.workflow.Assignment;
 import com.bluexml.side.workflow.Decision;
@@ -22,18 +26,12 @@ import com.bluexml.side.workflow.Script;
 import com.bluexml.side.workflow.StartState;
 import com.bluexml.side.workflow.State;
 import com.bluexml.side.workflow.Swimlane;
-import com.bluexml.side.workflow.Task;
 import com.bluexml.side.workflow.TaskNode;
 import com.bluexml.side.workflow.Timer;
 import com.bluexml.side.workflow.Transition;
 import com.bluexml.side.workflow.Variable;
 import com.bluexml.side.workflow.WorkflowModelElement;
 import com.bluexml.side.workflow.WorkflowPackage;
-
-import java.util.List;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -200,12 +198,6 @@ public class WorkflowSwitch<T> {
 			case WorkflowPackage.SCRIPT: {
 				Script script = (Script)theEObject;
 				T result = caseScript(script);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case WorkflowPackage.TASK: {
-				Task task = (Task)theEObject;
-				T result = caseTask(task);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -450,21 +442,6 @@ public class WorkflowSwitch<T> {
 	 * @generated
 	 */
 	public T caseScript(Script object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Task</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Task</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTask(Task object) {
 		return null;
 	}
 

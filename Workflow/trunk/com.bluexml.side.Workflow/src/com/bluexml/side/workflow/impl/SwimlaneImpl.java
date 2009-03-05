@@ -6,26 +6,22 @@
  */
 package com.bluexml.side.workflow.impl;
 
-import com.bluexml.side.workflow.Assignment;
-import com.bluexml.side.workflow.Swimlane;
-import com.bluexml.side.workflow.Task;
-import com.bluexml.side.workflow.WorkflowPackage;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import com.bluexml.side.workflow.Assignment;
+import com.bluexml.side.workflow.Swimlane;
+import com.bluexml.side.workflow.TaskNode;
+import com.bluexml.side.workflow.WorkflowPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -81,7 +77,7 @@ public class SwimlaneImpl extends EObjectImpl implements Swimlane {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Task> manage;
+	protected EList<TaskNode> manage;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -171,9 +167,9 @@ public class SwimlaneImpl extends EObjectImpl implements Swimlane {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Task> getManage() {
+	public EList<TaskNode> getManage() {
 		if (manage == null) {
-			manage = new EObjectWithInverseResolvingEList<Task>(Task.class, this, WorkflowPackage.SWIMLANE__MANAGE, WorkflowPackage.TASK__SWIMLANE);
+			manage = new EObjectWithInverseResolvingEList<TaskNode>(TaskNode.class, this, WorkflowPackage.SWIMLANE__MANAGE, WorkflowPackage.TASK_NODE__SWIMLANE);
 		}
 		return manage;
 	}
@@ -244,7 +240,7 @@ public class SwimlaneImpl extends EObjectImpl implements Swimlane {
 				return;
 			case WorkflowPackage.SWIMLANE__MANAGE:
 				getManage().clear();
-				getManage().addAll((Collection<? extends Task>)newValue);
+				getManage().addAll((Collection<? extends TaskNode>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

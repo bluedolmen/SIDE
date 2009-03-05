@@ -398,29 +398,6 @@ public class WorkflowItemProviderAdapterFactory extends WorkflowAdapterFactory i
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.workflow.Task} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected TaskItemProvider taskItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.bluexml.side.workflow.Task}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createTaskAdapter() {
-		if (taskItemProvider == null) {
-			taskItemProvider = new TaskItemProvider(this);
-		}
-
-		return taskItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.workflow.Timer} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -625,7 +602,6 @@ public class WorkflowItemProviderAdapterFactory extends WorkflowAdapterFactory i
 		if (eventItemProvider != null) eventItemProvider.dispose();
 		if (actionItemProvider != null) actionItemProvider.dispose();
 		if (scriptItemProvider != null) scriptItemProvider.dispose();
-		if (taskItemProvider != null) taskItemProvider.dispose();
 		if (timerItemProvider != null) timerItemProvider.dispose();
 		if (assignmentItemProvider != null) assignmentItemProvider.dispose();
 		if (variableItemProvider != null) variableItemProvider.dispose();

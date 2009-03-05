@@ -30,7 +30,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="assignment" ordered="false"
         lowerBound="1" eType="#//Assignment" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="manage" upperBound="-1"
-        eType="#//Task" eOpposite="#//Task/swimlane"/>
+        eType="#//TaskNode" eOpposite="#//TaskNode/swimlane"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StartState" eSuperTypes="#//State">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
@@ -58,8 +58,6 @@
         eType="#//Event" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TaskNode" eSuperTypes="#//State">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="task" upperBound="-1" eType="#//Task"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
@@ -68,6 +66,10 @@
         eType="#//Event" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="timer" upperBound="-1"
         eType="#//Timer" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="swimlane" ordered="false"
+        lowerBound="1" eType="#//Swimlane" eOpposite="#//Swimlane/manage"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignment" upperBound="-1"
+        eType="#//Assignment" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ProcessState">
     <eStructuralFeatures xsi:type="ecore:EReference" name="subprocess" ordered="false"
@@ -120,18 +122,6 @@
         eType="#//Variable" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Task">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
-        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="swimlane" ordered="false"
-        lowerBound="1" eType="#//Swimlane" eOpposite="#//Swimlane/manage"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="assignment" upperBound="-1"
-        eType="#//Assignment" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="event" upperBound="-1"
-        eType="#//Event" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="timer" upperBound="-1"
-        eType="#//Timer" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Timer">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -165,7 +155,7 @@
         eType="#//TaskNode" eOpposite="#//TaskNode/transition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="timer" upperBound="-1"
         eType="#//Timer" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//Task"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//State"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="BPMEventType">

@@ -16,11 +16,12 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.bluexml.side.workflow.TaskNode#getTask <em>Task</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.TaskNode#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.TaskNode#getTransition <em>Transition</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.TaskNode#getEvent <em>Event</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.TaskNode#getTimer <em>Timer</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.TaskNode#getSwimlane <em>Swimlane</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.TaskNode#getAssignment <em>Assignment</em>}</li>
  * </ul>
  * </p>
  *
@@ -29,22 +30,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface TaskNode extends State {
-	/**
-	 * Returns the value of the '<em><b>Task</b></em>' containment reference list.
-	 * The list contents are of type {@link com.bluexml.side.workflow.Task}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Task</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Task</em>' containment reference list.
-	 * @see com.bluexml.side.workflow.WorkflowPackage#getTaskNode_Task()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Task> getTask();
-
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -120,5 +105,49 @@ public interface TaskNode extends State {
 	 * @generated
 	 */
 	EList<Timer> getTimer();
+
+	/**
+	 * Returns the value of the '<em><b>Swimlane</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link com.bluexml.side.workflow.Swimlane#getManage <em>Manage</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Swimlane</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Swimlane</em>' reference.
+	 * @see #setSwimlane(Swimlane)
+	 * @see com.bluexml.side.workflow.WorkflowPackage#getTaskNode_Swimlane()
+	 * @see com.bluexml.side.workflow.Swimlane#getManage
+	 * @model opposite="manage" required="true" ordered="false"
+	 * @generated
+	 */
+	Swimlane getSwimlane();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.workflow.TaskNode#getSwimlane <em>Swimlane</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Swimlane</em>' reference.
+	 * @see #getSwimlane()
+	 * @generated
+	 */
+	void setSwimlane(Swimlane value);
+
+	/**
+	 * Returns the value of the '<em><b>Assignment</b></em>' containment reference list.
+	 * The list contents are of type {@link com.bluexml.side.workflow.Assignment}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Assignment</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Assignment</em>' containment reference list.
+	 * @see com.bluexml.side.workflow.WorkflowPackage#getTaskNode_Assignment()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Assignment> getAssignment();
 
 } // TaskNode
