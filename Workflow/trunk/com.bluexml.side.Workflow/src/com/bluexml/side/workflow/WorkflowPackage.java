@@ -660,22 +660,13 @@ public interface WorkflowPackage extends EPackage {
 	int DECISION = 10;
 
 	/**
-	 * The feature id for the '<em><b>Transitioncondition</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DECISION__TRANSITIONCONDITION = STATE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Transition</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECISION__TRANSITION = STATE_FEATURE_COUNT + 1;
+	int DECISION__TRANSITION = STATE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Event</b></em>' containment reference list.
@@ -684,7 +675,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECISION__EVENT = STATE_FEATURE_COUNT + 2;
+	int DECISION__EVENT = STATE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Decision</em>' class.
@@ -693,7 +684,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECISION_FEATURE_COUNT = STATE_FEATURE_COUNT + 3;
+	int DECISION_FEATURE_COUNT = STATE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.EventImpl <em>Event</em>}' class.
@@ -1524,17 +1515,6 @@ public interface WorkflowPackage extends EPackage {
 	EClass getDecision();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.Decision#getTransitioncondition <em>Transitioncondition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Transitioncondition</em>'.
-	 * @see com.bluexml.side.workflow.Decision#getTransitioncondition()
-	 * @see #getDecision()
-	 * @generated
-	 */
-	EAttribute getDecision_Transitioncondition();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.workflow.Decision#getTransition <em>Transition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2299,14 +2279,6 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DECISION = eINSTANCE.getDecision();
-
-		/**
-		 * The meta object literal for the '<em><b>Transitioncondition</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DECISION__TRANSITIONCONDITION = eINSTANCE.getDecision_Transitioncondition();
 
 		/**
 		 * The meta object literal for the '<em><b>Transition</b></em>' containment reference list feature.

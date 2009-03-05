@@ -70,7 +70,7 @@ public interface Transition extends EObject {
 	 * @return the value of the '<em>Condition</em>' attribute.
 	 * @see #setCondition(String)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getTransition_Condition()
-	 * @model unique="false" required="true" ordered="false"
+	 * @model unique="false" ordered="false"
 	 * @generated
 	 */
 	String getCondition();

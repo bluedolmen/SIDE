@@ -29,7 +29,6 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.workflow.impl.DecisionImpl#getTransitioncondition <em>Transitioncondition</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.DecisionImpl#getTransition <em>Transition</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.DecisionImpl#getEvent <em>Event</em>}</li>
  * </ul>
@@ -38,26 +37,6 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * @generated
  */
 public class DecisionImpl extends StateImpl implements Decision {
-	/**
-	 * The default value of the '{@link #getTransitioncondition() <em>Transitioncondition</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTransitioncondition()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String TRANSITIONCONDITION_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getTransitioncondition() <em>Transitioncondition</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTransitioncondition()
-	 * @generated
-	 * @ordered
-	 */
-	protected String transitioncondition = TRANSITIONCONDITION_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getTransition() <em>Transition</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -95,27 +74,6 @@ public class DecisionImpl extends StateImpl implements Decision {
 	@Override
 	protected EClass eStaticClass() {
 		return WorkflowPackage.Literals.DECISION;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getTransitioncondition() {
-		return transitioncondition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTransitioncondition(String newTransitioncondition) {
-		String oldTransitioncondition = transitioncondition;
-		transitioncondition = newTransitioncondition;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.DECISION__TRANSITIONCONDITION, oldTransitioncondition, transitioncondition));
 	}
 
 	/**
@@ -166,8 +124,6 @@ public class DecisionImpl extends StateImpl implements Decision {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case WorkflowPackage.DECISION__TRANSITIONCONDITION:
-				return getTransitioncondition();
 			case WorkflowPackage.DECISION__TRANSITION:
 				return getTransition();
 			case WorkflowPackage.DECISION__EVENT:
@@ -185,9 +141,6 @@ public class DecisionImpl extends StateImpl implements Decision {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case WorkflowPackage.DECISION__TRANSITIONCONDITION:
-				setTransitioncondition((String)newValue);
-				return;
 			case WorkflowPackage.DECISION__TRANSITION:
 				getTransition().clear();
 				getTransition().addAll((Collection<? extends Transition>)newValue);
@@ -208,9 +161,6 @@ public class DecisionImpl extends StateImpl implements Decision {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case WorkflowPackage.DECISION__TRANSITIONCONDITION:
-				setTransitioncondition(TRANSITIONCONDITION_EDEFAULT);
-				return;
 			case WorkflowPackage.DECISION__TRANSITION:
 				getTransition().clear();
 				return;
@@ -229,30 +179,12 @@ public class DecisionImpl extends StateImpl implements Decision {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case WorkflowPackage.DECISION__TRANSITIONCONDITION:
-				return TRANSITIONCONDITION_EDEFAULT == null ? transitioncondition != null : !TRANSITIONCONDITION_EDEFAULT.equals(transitioncondition);
 			case WorkflowPackage.DECISION__TRANSITION:
 				return transition != null && !transition.isEmpty();
 			case WorkflowPackage.DECISION__EVENT:
 				return event != null && !event.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (transitioncondition: ");
-		result.append(transitioncondition);
-		result.append(')');
-		return result.toString();
 	}
 
 } //DecisionImpl

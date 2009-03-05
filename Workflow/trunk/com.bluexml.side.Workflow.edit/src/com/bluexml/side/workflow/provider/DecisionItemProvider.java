@@ -62,31 +62,8 @@ public class DecisionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTransitionconditionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Transitioncondition feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTransitionconditionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Decision_transitioncondition_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Decision_transitioncondition_feature", "_UI_Decision_type"),
-				 WorkflowPackage.Literals.DECISION__TRANSITIONCONDITION,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -139,10 +116,7 @@ public class DecisionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Decision)object).getTransitioncondition();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Decision_type") :
-			getString("_UI_Decision_type") + " " + label;
+		return getString("_UI_Decision_type");
 	}
 
 	/**
@@ -157,9 +131,6 @@ public class DecisionItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Decision.class)) {
-			case WorkflowPackage.DECISION__TRANSITIONCONDITION:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
 			case WorkflowPackage.DECISION__TRANSITION:
 			case WorkflowPackage.DECISION__EVENT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));

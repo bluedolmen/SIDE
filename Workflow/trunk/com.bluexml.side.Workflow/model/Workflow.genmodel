@@ -84,7 +84,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Join/event"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Decision">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Decision/transitioncondition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Decision/transition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Decision/event"/>
     </genClasses>
