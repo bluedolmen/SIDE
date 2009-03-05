@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EObject;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.workflow.Action;
-import com.bluexml.side.workflow.Assignment;
 import com.bluexml.side.workflow.Decision;
 import com.bluexml.side.workflow.EndState;
 import com.bluexml.side.workflow.Event;
@@ -204,12 +203,6 @@ public class WorkflowSwitch<T> {
 			case WorkflowPackage.TIMER: {
 				Timer timer = (Timer)theEObject;
 				T result = caseTimer(timer);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case WorkflowPackage.ASSIGNMENT: {
-				Assignment assignment = (Assignment)theEObject;
-				T result = caseAssignment(assignment);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -457,21 +450,6 @@ public class WorkflowSwitch<T> {
 	 * @generated
 	 */
 	public T caseTimer(Timer object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Assignment</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Assignment</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAssignment(Assignment object) {
 		return null;
 	}
 

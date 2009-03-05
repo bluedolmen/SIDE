@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import com.bluexml.side.workflow.Assignment;
 import com.bluexml.side.workflow.Event;
 import com.bluexml.side.workflow.Swimlane;
 import com.bluexml.side.workflow.TaskNode;
@@ -38,7 +37,6 @@ import com.bluexml.side.workflow.WorkflowPackage;
  *   <li>{@link com.bluexml.side.workflow.impl.TaskNodeImpl#getEvent <em>Event</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.TaskNodeImpl#getTimer <em>Timer</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.TaskNodeImpl#getSwimlane <em>Swimlane</em>}</li>
- *   <li>{@link com.bluexml.side.workflow.impl.TaskNodeImpl#getAssignment <em>Assignment</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,16 +102,6 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 	 * @ordered
 	 */
 	protected Swimlane swimlane;
-
-	/**
-	 * The cached value of the '{@link #getAssignment() <em>Assignment</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAssignment()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Assignment> assignment;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -256,18 +244,6 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Assignment> getAssignment() {
-		if (assignment == null) {
-			assignment = new EObjectContainmentEList<Assignment>(Assignment.class, this, WorkflowPackage.TASK_NODE__ASSIGNMENT);
-		}
-		return assignment;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -298,8 +274,6 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 				return ((InternalEList<?>)getTimer()).basicRemove(otherEnd, msgs);
 			case WorkflowPackage.TASK_NODE__SWIMLANE:
 				return basicSetSwimlane(null, msgs);
-			case WorkflowPackage.TASK_NODE__ASSIGNMENT:
-				return ((InternalEList<?>)getAssignment()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -323,8 +297,6 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 			case WorkflowPackage.TASK_NODE__SWIMLANE:
 				if (resolve) return getSwimlane();
 				return basicGetSwimlane();
-			case WorkflowPackage.TASK_NODE__ASSIGNMENT:
-				return getAssignment();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -356,10 +328,6 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 			case WorkflowPackage.TASK_NODE__SWIMLANE:
 				setSwimlane((Swimlane)newValue);
 				return;
-			case WorkflowPackage.TASK_NODE__ASSIGNMENT:
-				getAssignment().clear();
-				getAssignment().addAll((Collection<? extends Assignment>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -387,9 +355,6 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 			case WorkflowPackage.TASK_NODE__SWIMLANE:
 				setSwimlane((Swimlane)null);
 				return;
-			case WorkflowPackage.TASK_NODE__ASSIGNMENT:
-				getAssignment().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -412,8 +377,6 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 				return timer != null && !timer.isEmpty();
 			case WorkflowPackage.TASK_NODE__SWIMLANE:
 				return swimlane != null;
-			case WorkflowPackage.TASK_NODE__ASSIGNMENT:
-				return assignment != null && !assignment.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

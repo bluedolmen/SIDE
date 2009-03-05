@@ -264,22 +264,40 @@ public interface WorkflowPackage extends EPackage {
 	int SWIMLANE__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Assignment</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SWIMLANE__ASSIGNMENT = 1;
-
-	/**
 	 * The feature id for the '<em><b>Manage</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SWIMLANE__MANAGE = 2;
+	int SWIMLANE__MANAGE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Actorid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWIMLANE__ACTORID = 2;
+
+	/**
+	 * The feature id for the '<em><b>Pooledactors</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWIMLANE__POOLEDACTORS = 3;
+
+	/**
+	 * The feature id for the '<em><b>Clazz</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWIMLANE__CLAZZ = 4;
 
 	/**
 	 * The number of structural features of the '<em>Swimlane</em>' class.
@@ -288,7 +306,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SWIMLANE_FEATURE_COUNT = 3;
+	int SWIMLANE_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.StateImpl <em>State</em>}' class.
@@ -298,7 +316,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getState()
 	 * @generated
 	 */
-	int STATE = 18;
+	int STATE = 17;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class.
@@ -512,22 +530,13 @@ public interface WorkflowPackage extends EPackage {
 	int TASK_NODE__SWIMLANE = STATE_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Assignment</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TASK_NODE__ASSIGNMENT = STATE_FEATURE_COUNT + 5;
-
-	/**
 	 * The number of structural features of the '<em>Task Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_NODE_FEATURE_COUNT = STATE_FEATURE_COUNT + 6;
+	int TASK_NODE_FEATURE_COUNT = STATE_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.ProcessStateImpl <em>Process State</em>}' class.
@@ -880,52 +889,6 @@ public interface WorkflowPackage extends EPackage {
 	int TIMER_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.AssignmentImpl <em>Assignment</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.workflow.impl.AssignmentImpl
-	 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getAssignment()
-	 * @generated
-	 */
-	int ASSIGNMENT = 15;
-
-	/**
-	 * The feature id for the '<em><b>Actorid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT__ACTORID = 0;
-
-	/**
-	 * The feature id for the '<em><b>Pooledactors</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT__POOLEDACTORS = 1;
-
-	/**
-	 * The feature id for the '<em><b>Clazz</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT__CLAZZ = 2;
-
-	/**
-	 * The number of structural features of the '<em>Assignment</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT_FEATURE_COUNT = 3;
-
-	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.VariableImpl <em>Variable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -933,7 +896,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getVariable()
 	 * @generated
 	 */
-	int VARIABLE = 16;
+	int VARIABLE = 15;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -970,7 +933,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getTransition()
 	 * @generated
 	 */
-	int TRANSITION = 17;
+	int TRANSITION = 16;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1052,7 +1015,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getBPMEventType()
 	 * @generated
 	 */
-	int BPM_EVENT_TYPE = 19;
+	int BPM_EVENT_TYPE = 18;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.BPMAssignmentType <em>BPM Assignment Type</em>}' enum.
@@ -1062,7 +1025,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getBPMAssignmentType()
 	 * @generated
 	 */
-	int BPM_ASSIGNMENT_TYPE = 20;
+	int BPM_ASSIGNMENT_TYPE = 19;
 
 
 	/**
@@ -1206,17 +1169,6 @@ public interface WorkflowPackage extends EPackage {
 	EAttribute getSwimlane_Name();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.bluexml.side.workflow.Swimlane#getAssignment <em>Assignment</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Assignment</em>'.
-	 * @see com.bluexml.side.workflow.Swimlane#getAssignment()
-	 * @see #getSwimlane()
-	 * @generated
-	 */
-	EReference getSwimlane_Assignment();
-
-	/**
 	 * Returns the meta object for the reference list '{@link com.bluexml.side.workflow.Swimlane#getManage <em>Manage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1226,6 +1178,39 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSwimlane_Manage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.Swimlane#getActorid <em>Actorid</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Actorid</em>'.
+	 * @see com.bluexml.side.workflow.Swimlane#getActorid()
+	 * @see #getSwimlane()
+	 * @generated
+	 */
+	EAttribute getSwimlane_Actorid();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.Swimlane#getPooledactors <em>Pooledactors</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Pooledactors</em>'.
+	 * @see com.bluexml.side.workflow.Swimlane#getPooledactors()
+	 * @see #getSwimlane()
+	 * @generated
+	 */
+	EAttribute getSwimlane_Pooledactors();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.Swimlane#getClazz <em>Clazz</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Clazz</em>'.
+	 * @see com.bluexml.side.workflow.Swimlane#getClazz()
+	 * @see #getSwimlane()
+	 * @generated
+	 */
+	EAttribute getSwimlane_Clazz();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.StartState <em>Start State</em>}'.
@@ -1431,17 +1416,6 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTaskNode_Swimlane();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.workflow.TaskNode#getAssignment <em>Assignment</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Assignment</em>'.
-	 * @see com.bluexml.side.workflow.TaskNode#getAssignment()
-	 * @see #getTaskNode()
-	 * @generated
-	 */
-	EReference getTaskNode_Assignment();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.ProcessState <em>Process State</em>}'.
@@ -1766,49 +1740,6 @@ public interface WorkflowPackage extends EPackage {
 	EReference getTimer_Action();
 
 	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.workflow.Assignment <em>Assignment</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Assignment</em>'.
-	 * @see com.bluexml.side.workflow.Assignment
-	 * @generated
-	 */
-	EClass getAssignment();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.Assignment#getActorid <em>Actorid</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Actorid</em>'.
-	 * @see com.bluexml.side.workflow.Assignment#getActorid()
-	 * @see #getAssignment()
-	 * @generated
-	 */
-	EAttribute getAssignment_Actorid();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.Assignment#getPooledactors <em>Pooledactors</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Pooledactors</em>'.
-	 * @see com.bluexml.side.workflow.Assignment#getPooledactors()
-	 * @see #getAssignment()
-	 * @generated
-	 */
-	EAttribute getAssignment_Pooledactors();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.Assignment#getClazz <em>Clazz</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Clazz</em>'.
-	 * @see com.bluexml.side.workflow.Assignment#getClazz()
-	 * @see #getAssignment()
-	 * @generated
-	 */
-	EAttribute getAssignment_Clazz();
-
-	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.Variable <em>Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2090,20 +2021,36 @@ public interface WorkflowPackage extends EPackage {
 		EAttribute SWIMLANE__NAME = eINSTANCE.getSwimlane_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Assignment</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SWIMLANE__ASSIGNMENT = eINSTANCE.getSwimlane_Assignment();
-
-		/**
 		 * The meta object literal for the '<em><b>Manage</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference SWIMLANE__MANAGE = eINSTANCE.getSwimlane_Manage();
+
+		/**
+		 * The meta object literal for the '<em><b>Actorid</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SWIMLANE__ACTORID = eINSTANCE.getSwimlane_Actorid();
+
+		/**
+		 * The meta object literal for the '<em><b>Pooledactors</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SWIMLANE__POOLEDACTORS = eINSTANCE.getSwimlane_Pooledactors();
+
+		/**
+		 * The meta object literal for the '<em><b>Clazz</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SWIMLANE__CLAZZ = eINSTANCE.getSwimlane_Clazz();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.StartStateImpl <em>Start State</em>}' class.
@@ -2264,14 +2211,6 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TASK_NODE__SWIMLANE = eINSTANCE.getTaskNode_Swimlane();
-
-		/**
-		 * The meta object literal for the '<em><b>Assignment</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TASK_NODE__ASSIGNMENT = eINSTANCE.getTaskNode_Assignment();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.ProcessStateImpl <em>Process State</em>}' class.
@@ -2528,40 +2467,6 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TIMER__ACTION = eINSTANCE.getTimer_Action();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.AssignmentImpl <em>Assignment</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.workflow.impl.AssignmentImpl
-		 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getAssignment()
-		 * @generated
-		 */
-		EClass ASSIGNMENT = eINSTANCE.getAssignment();
-
-		/**
-		 * The meta object literal for the '<em><b>Actorid</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSIGNMENT__ACTORID = eINSTANCE.getAssignment_Actorid();
-
-		/**
-		 * The meta object literal for the '<em><b>Pooledactors</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSIGNMENT__POOLEDACTORS = eINSTANCE.getAssignment_Pooledactors();
-
-		/**
-		 * The meta object literal for the '<em><b>Clazz</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSIGNMENT__CLAZZ = eINSTANCE.getAssignment_Clazz();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.VariableImpl <em>Variable</em>}' class.

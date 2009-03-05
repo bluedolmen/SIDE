@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import com.bluexml.side.workflow.Assignment;
 import com.bluexml.side.workflow.Swimlane;
 import com.bluexml.side.workflow.TaskNode;
 import com.bluexml.side.workflow.WorkflowPackage;
@@ -31,8 +30,10 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.workflow.impl.SwimlaneImpl#getName <em>Name</em>}</li>
- *   <li>{@link com.bluexml.side.workflow.impl.SwimlaneImpl#getAssignment <em>Assignment</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.SwimlaneImpl#getManage <em>Manage</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.impl.SwimlaneImpl#getActorid <em>Actorid</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.impl.SwimlaneImpl#getPooledactors <em>Pooledactors</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.impl.SwimlaneImpl#getClazz <em>Clazz</em>}</li>
  * </ul>
  * </p>
  *
@@ -60,16 +61,6 @@ public class SwimlaneImpl extends EObjectImpl implements Swimlane {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getAssignment() <em>Assignment</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAssignment()
-	 * @generated
-	 * @ordered
-	 */
-	protected Assignment assignment;
-
-	/**
 	 * The cached value of the '{@link #getManage() <em>Manage</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,6 +69,66 @@ public class SwimlaneImpl extends EObjectImpl implements Swimlane {
 	 * @ordered
 	 */
 	protected EList<TaskNode> manage;
+
+	/**
+	 * The default value of the '{@link #getActorid() <em>Actorid</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActorid()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ACTORID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getActorid() <em>Actorid</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActorid()
+	 * @generated
+	 * @ordered
+	 */
+	protected String actorid = ACTORID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getPooledactors() <em>Pooledactors</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPooledactors()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String POOLEDACTORS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPooledactors() <em>Pooledactors</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPooledactors()
+	 * @generated
+	 * @ordered
+	 */
+	protected String pooledactors = POOLEDACTORS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getClazz() <em>Clazz</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClazz()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CLAZZ_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getClazz() <em>Clazz</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClazz()
+	 * @generated
+	 * @ordered
+	 */
+	protected String clazz = CLAZZ_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -124,54 +175,74 @@ public class SwimlaneImpl extends EObjectImpl implements Swimlane {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Assignment getAssignment() {
-		return assignment;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetAssignment(Assignment newAssignment, NotificationChain msgs) {
-		Assignment oldAssignment = assignment;
-		assignment = newAssignment;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkflowPackage.SWIMLANE__ASSIGNMENT, oldAssignment, newAssignment);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAssignment(Assignment newAssignment) {
-		if (newAssignment != assignment) {
-			NotificationChain msgs = null;
-			if (assignment != null)
-				msgs = ((InternalEObject)assignment).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkflowPackage.SWIMLANE__ASSIGNMENT, null, msgs);
-			if (newAssignment != null)
-				msgs = ((InternalEObject)newAssignment).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkflowPackage.SWIMLANE__ASSIGNMENT, null, msgs);
-			msgs = basicSetAssignment(newAssignment, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.SWIMLANE__ASSIGNMENT, newAssignment, newAssignment));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<TaskNode> getManage() {
 		if (manage == null) {
 			manage = new EObjectWithInverseResolvingEList<TaskNode>(TaskNode.class, this, WorkflowPackage.SWIMLANE__MANAGE, WorkflowPackage.TASK_NODE__SWIMLANE);
 		}
 		return manage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getActorid() {
+		return actorid;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setActorid(String newActorid) {
+		String oldActorid = actorid;
+		actorid = newActorid;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.SWIMLANE__ACTORID, oldActorid, actorid));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getPooledactors() {
+		return pooledactors;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPooledactors(String newPooledactors) {
+		String oldPooledactors = pooledactors;
+		pooledactors = newPooledactors;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.SWIMLANE__POOLEDACTORS, oldPooledactors, pooledactors));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getClazz() {
+		return clazz;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setClazz(String newClazz) {
+		String oldClazz = clazz;
+		clazz = newClazz;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.SWIMLANE__CLAZZ, oldClazz, clazz));
 	}
 
 	/**
@@ -197,8 +268,6 @@ public class SwimlaneImpl extends EObjectImpl implements Swimlane {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case WorkflowPackage.SWIMLANE__ASSIGNMENT:
-				return basicSetAssignment(null, msgs);
 			case WorkflowPackage.SWIMLANE__MANAGE:
 				return ((InternalEList<?>)getManage()).basicRemove(otherEnd, msgs);
 		}
@@ -215,10 +284,14 @@ public class SwimlaneImpl extends EObjectImpl implements Swimlane {
 		switch (featureID) {
 			case WorkflowPackage.SWIMLANE__NAME:
 				return getName();
-			case WorkflowPackage.SWIMLANE__ASSIGNMENT:
-				return getAssignment();
 			case WorkflowPackage.SWIMLANE__MANAGE:
 				return getManage();
+			case WorkflowPackage.SWIMLANE__ACTORID:
+				return getActorid();
+			case WorkflowPackage.SWIMLANE__POOLEDACTORS:
+				return getPooledactors();
+			case WorkflowPackage.SWIMLANE__CLAZZ:
+				return getClazz();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -235,12 +308,18 @@ public class SwimlaneImpl extends EObjectImpl implements Swimlane {
 			case WorkflowPackage.SWIMLANE__NAME:
 				setName((String)newValue);
 				return;
-			case WorkflowPackage.SWIMLANE__ASSIGNMENT:
-				setAssignment((Assignment)newValue);
-				return;
 			case WorkflowPackage.SWIMLANE__MANAGE:
 				getManage().clear();
 				getManage().addAll((Collection<? extends TaskNode>)newValue);
+				return;
+			case WorkflowPackage.SWIMLANE__ACTORID:
+				setActorid((String)newValue);
+				return;
+			case WorkflowPackage.SWIMLANE__POOLEDACTORS:
+				setPooledactors((String)newValue);
+				return;
+			case WorkflowPackage.SWIMLANE__CLAZZ:
+				setClazz((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -257,11 +336,17 @@ public class SwimlaneImpl extends EObjectImpl implements Swimlane {
 			case WorkflowPackage.SWIMLANE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case WorkflowPackage.SWIMLANE__ASSIGNMENT:
-				setAssignment((Assignment)null);
-				return;
 			case WorkflowPackage.SWIMLANE__MANAGE:
 				getManage().clear();
+				return;
+			case WorkflowPackage.SWIMLANE__ACTORID:
+				setActorid(ACTORID_EDEFAULT);
+				return;
+			case WorkflowPackage.SWIMLANE__POOLEDACTORS:
+				setPooledactors(POOLEDACTORS_EDEFAULT);
+				return;
+			case WorkflowPackage.SWIMLANE__CLAZZ:
+				setClazz(CLAZZ_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -277,10 +362,14 @@ public class SwimlaneImpl extends EObjectImpl implements Swimlane {
 		switch (featureID) {
 			case WorkflowPackage.SWIMLANE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case WorkflowPackage.SWIMLANE__ASSIGNMENT:
-				return assignment != null;
 			case WorkflowPackage.SWIMLANE__MANAGE:
 				return manage != null && !manage.isEmpty();
+			case WorkflowPackage.SWIMLANE__ACTORID:
+				return ACTORID_EDEFAULT == null ? actorid != null : !ACTORID_EDEFAULT.equals(actorid);
+			case WorkflowPackage.SWIMLANE__POOLEDACTORS:
+				return POOLEDACTORS_EDEFAULT == null ? pooledactors != null : !POOLEDACTORS_EDEFAULT.equals(pooledactors);
+			case WorkflowPackage.SWIMLANE__CLAZZ:
+				return CLAZZ_EDEFAULT == null ? clazz != null : !CLAZZ_EDEFAULT.equals(clazz);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -297,6 +386,12 @@ public class SwimlaneImpl extends EObjectImpl implements Swimlane {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", actorid: ");
+		result.append(actorid);
+		result.append(", pooledactors: ");
+		result.append(pooledactors);
+		result.append(", clazz: ");
+		result.append(clazz);
 		result.append(')');
 		return result.toString();
 	}

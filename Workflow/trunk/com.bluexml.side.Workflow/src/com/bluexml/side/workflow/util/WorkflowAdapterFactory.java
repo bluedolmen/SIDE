@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EObject;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.workflow.Action;
-import com.bluexml.side.workflow.Assignment;
 import com.bluexml.side.workflow.Decision;
 import com.bluexml.side.workflow.EndState;
 import com.bluexml.side.workflow.Event;
@@ -148,10 +147,6 @@ public class WorkflowAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTimer(Timer object) {
 				return createTimerAdapter();
-			}
-			@Override
-			public Adapter caseAssignment(Assignment object) {
-				return createAssignmentAdapter();
 			}
 			@Override
 			public Adapter caseVariable(Variable object) {
@@ -404,20 +399,6 @@ public class WorkflowAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTimerAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.workflow.Assignment <em>Assignment</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.workflow.Assignment
-	 * @generated
-	 */
-	public Adapter createAssignmentAdapter() {
 		return null;
 	}
 

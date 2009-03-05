@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.bluexml.side.workflow.TaskNode#getEvent <em>Event</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.TaskNode#getTimer <em>Timer</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.TaskNode#getSwimlane <em>Swimlane</em>}</li>
- *   <li>{@link com.bluexml.side.workflow.TaskNode#getAssignment <em>Assignment</em>}</li>
  * </ul>
  * </p>
  *
@@ -133,21 +132,5 @@ public interface TaskNode extends State {
 	 * @generated
 	 */
 	void setSwimlane(Swimlane value);
-
-	/**
-	 * Returns the value of the '<em><b>Assignment</b></em>' containment reference list.
-	 * The list contents are of type {@link com.bluexml.side.workflow.Assignment}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Assignment</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Assignment</em>' containment reference list.
-	 * @see com.bluexml.side.workflow.WorkflowPackage#getTaskNode_Assignment()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Assignment> getAssignment();
 
 } // TaskNode

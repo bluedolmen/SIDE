@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import com.bluexml.side.workflow.Action;
-import com.bluexml.side.workflow.Assignment;
 import com.bluexml.side.workflow.BPMAssignmentType;
 import com.bluexml.side.workflow.BPMEventType;
 import com.bluexml.side.workflow.Decision;
@@ -94,7 +93,6 @@ public class WorkflowFactoryImpl extends EFactoryImpl implements WorkflowFactory
 			case WorkflowPackage.ACTION: return createAction();
 			case WorkflowPackage.SCRIPT: return createScript();
 			case WorkflowPackage.TIMER: return createTimer();
-			case WorkflowPackage.ASSIGNMENT: return createAssignment();
 			case WorkflowPackage.VARIABLE: return createVariable();
 			case WorkflowPackage.TRANSITION: return createTransition();
 			default:
@@ -284,16 +282,6 @@ public class WorkflowFactoryImpl extends EFactoryImpl implements WorkflowFactory
 	public Timer createTimer() {
 		TimerImpl timer = new TimerImpl();
 		return timer;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Assignment createAssignment() {
-		AssignmentImpl assignment = new AssignmentImpl();
-		return assignment;
 	}
 
 	/**

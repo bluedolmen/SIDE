@@ -43,8 +43,10 @@
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Swimlane">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Swimlane/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Swimlane/assignment"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Workflow.ecore#//Swimlane/manage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Swimlane/actorid"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Swimlane/pooledactors"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Swimlane/clazz"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//StartState">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//StartState/name"/>
@@ -68,7 +70,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//TaskNode/event"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//TaskNode/timer"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Workflow.ecore#//TaskNode/swimlane"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//TaskNode/assignment"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//ProcessState">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Workflow.ecore#//ProcessState/subprocess"/>
@@ -107,11 +108,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Timer/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Timer/duedate"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Timer/action"/>
-    </genClasses>
-    <genClasses ecoreClass="Workflow.ecore#//Assignment">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Assignment/actorid"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Assignment/pooledactors"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Assignment/clazz"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Variable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Variable/name"/>

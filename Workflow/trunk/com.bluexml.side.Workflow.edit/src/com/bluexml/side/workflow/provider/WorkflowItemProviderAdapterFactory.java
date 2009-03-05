@@ -6,15 +6,12 @@
  */
 package com.bluexml.side.workflow.provider;
 
-import com.bluexml.side.workflow.util.WorkflowAdapterFactory;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.edit.provider.ChangeNotifier;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -26,6 +23,8 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+
+import com.bluexml.side.workflow.util.WorkflowAdapterFactory;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support Viewers.
@@ -421,29 +420,6 @@ public class WorkflowItemProviderAdapterFactory extends WorkflowAdapterFactory i
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.workflow.Assignment} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AssignmentItemProvider assignmentItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.bluexml.side.workflow.Assignment}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createAssignmentAdapter() {
-		if (assignmentItemProvider == null) {
-			assignmentItemProvider = new AssignmentItemProvider(this);
-		}
-
-		return assignmentItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.workflow.Variable} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -603,7 +579,6 @@ public class WorkflowItemProviderAdapterFactory extends WorkflowAdapterFactory i
 		if (actionItemProvider != null) actionItemProvider.dispose();
 		if (scriptItemProvider != null) scriptItemProvider.dispose();
 		if (timerItemProvider != null) timerItemProvider.dispose();
-		if (assignmentItemProvider != null) assignmentItemProvider.dispose();
 		if (variableItemProvider != null) variableItemProvider.dispose();
 		if (transitionItemProvider != null) transitionItemProvider.dispose();
 	}

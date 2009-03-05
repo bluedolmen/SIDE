@@ -19,8 +19,10 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.bluexml.side.workflow.Swimlane#getName <em>Name</em>}</li>
- *   <li>{@link com.bluexml.side.workflow.Swimlane#getAssignment <em>Assignment</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.Swimlane#getManage <em>Manage</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.Swimlane#getActorid <em>Actorid</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.Swimlane#getPooledactors <em>Pooledactors</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.Swimlane#getClazz <em>Clazz</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,32 +58,6 @@ public interface Swimlane extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Assignment</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Assignment</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Assignment</em>' containment reference.
-	 * @see #setAssignment(Assignment)
-	 * @see com.bluexml.side.workflow.WorkflowPackage#getSwimlane_Assignment()
-	 * @model containment="true" required="true" ordered="false"
-	 * @generated
-	 */
-	Assignment getAssignment();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.workflow.Swimlane#getAssignment <em>Assignment</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Assignment</em>' containment reference.
-	 * @see #getAssignment()
-	 * @generated
-	 */
-	void setAssignment(Assignment value);
-
-	/**
 	 * Returns the value of the '<em><b>Manage</b></em>' reference list.
 	 * The list contents are of type {@link com.bluexml.side.workflow.TaskNode}.
 	 * It is bidirectional and its opposite is '{@link com.bluexml.side.workflow.TaskNode#getSwimlane <em>Swimlane</em>}'.
@@ -98,5 +74,83 @@ public interface Swimlane extends EObject {
 	 * @generated
 	 */
 	EList<TaskNode> getManage();
+
+	/**
+	 * Returns the value of the '<em><b>Actorid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Actorid</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Actorid</em>' attribute.
+	 * @see #setActorid(String)
+	 * @see com.bluexml.side.workflow.WorkflowPackage#getSwimlane_Actorid()
+	 * @model unique="false" ordered="false"
+	 * @generated
+	 */
+	String getActorid();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.workflow.Swimlane#getActorid <em>Actorid</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Actorid</em>' attribute.
+	 * @see #getActorid()
+	 * @generated
+	 */
+	void setActorid(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Pooledactors</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Pooledactors</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Pooledactors</em>' attribute.
+	 * @see #setPooledactors(String)
+	 * @see com.bluexml.side.workflow.WorkflowPackage#getSwimlane_Pooledactors()
+	 * @model unique="false" ordered="false"
+	 * @generated
+	 */
+	String getPooledactors();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.workflow.Swimlane#getPooledactors <em>Pooledactors</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Pooledactors</em>' attribute.
+	 * @see #getPooledactors()
+	 * @generated
+	 */
+	void setPooledactors(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Clazz</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Clazz</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Clazz</em>' attribute.
+	 * @see #setClazz(String)
+	 * @see com.bluexml.side.workflow.WorkflowPackage#getSwimlane_Clazz()
+	 * @model unique="false" ordered="false"
+	 * @generated
+	 */
+	String getClazz();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.workflow.Swimlane#getClazz <em>Clazz</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Clazz</em>' attribute.
+	 * @see #getClazz()
+	 * @generated
+	 */
+	void setClazz(String value);
 
 } // Swimlane
