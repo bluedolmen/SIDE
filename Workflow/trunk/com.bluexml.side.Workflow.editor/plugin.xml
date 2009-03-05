@@ -14,14 +14,14 @@
   <extension
     point = "org.eclipse.ui.newWizards">
     <category
-      id = "org.eclipse.emf.ecore.Wizard.category.ID"
+      id = "com.bluexml.side.modeler.category.ID"
       name="%_UI_Wizard_category">
     </category>
     <wizard
       id = "com.bluexml.side.workflow.presentation.WorkflowModelWizardID"
       name = "%_UI_WorkflowModelWizard_label"
       class = "com.bluexml.side.workflow.presentation.WorkflowModelWizard"
-      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      category = "com.bluexml.side.modeler.category.ID"
       icon = "icons/full/obj16/WorkflowModelFile.gif">
       <description>%_UI_WorkflowModelWizard_description</description>
       <selection class = "org.eclipse.core.resources.IResource" />
