@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editorconfigurator:EditorConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:editorconfigurator="http://www.topcased.org/editorconfigurator/0.10" xmi:id="_bc130Qm7Ed6njOkWCso0oA" name="Workflow modeler" projectName="com.bluexml.side.Workflow.modeler" provider="Bluexml">
+  <genModel href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#/"/>
+</editorconfigurator:EditorConfiguration>
