@@ -29,7 +29,6 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.workflow.impl.ScriptImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.ScriptImpl#getVariable <em>Variable</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.ScriptImpl#getExpression <em>Expression</em>}</li>
  * </ul>
@@ -38,26 +37,6 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * @generated
  */
 public class ScriptImpl extends EObjectImpl implements Script {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getVariable() <em>Variable</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -105,27 +84,6 @@ public class ScriptImpl extends EObjectImpl implements Script {
 	@Override
 	protected EClass eStaticClass() {
 		return WorkflowPackage.Literals.SCRIPT;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.SCRIPT__NAME, oldName, name));
 	}
 
 	/**
@@ -183,8 +141,6 @@ public class ScriptImpl extends EObjectImpl implements Script {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case WorkflowPackage.SCRIPT__NAME:
-				return getName();
 			case WorkflowPackage.SCRIPT__VARIABLE:
 				return getVariable();
 			case WorkflowPackage.SCRIPT__EXPRESSION:
@@ -202,9 +158,6 @@ public class ScriptImpl extends EObjectImpl implements Script {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case WorkflowPackage.SCRIPT__NAME:
-				setName((String)newValue);
-				return;
 			case WorkflowPackage.SCRIPT__VARIABLE:
 				getVariable().clear();
 				getVariable().addAll((Collection<? extends Variable>)newValue);
@@ -224,9 +177,6 @@ public class ScriptImpl extends EObjectImpl implements Script {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case WorkflowPackage.SCRIPT__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case WorkflowPackage.SCRIPT__VARIABLE:
 				getVariable().clear();
 				return;
@@ -245,8 +195,6 @@ public class ScriptImpl extends EObjectImpl implements Script {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case WorkflowPackage.SCRIPT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case WorkflowPackage.SCRIPT__VARIABLE:
 				return variable != null && !variable.isEmpty();
 			case WorkflowPackage.SCRIPT__EXPRESSION:
@@ -265,9 +213,7 @@ public class ScriptImpl extends EObjectImpl implements Script {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", expression: ");
+		result.append(" (expression: ");
 		result.append(expression);
 		result.append(')');
 		return result.toString();

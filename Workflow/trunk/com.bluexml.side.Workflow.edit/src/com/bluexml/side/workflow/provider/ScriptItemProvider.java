@@ -64,32 +64,9 @@ public class ScriptItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
 			addExpressionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Script_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Script_name_feature", "_UI_Script_type"),
-				 WorkflowPackage.Literals.SCRIPT__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -163,7 +140,7 @@ public class ScriptItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Script)object).getName();
+		String label = ((Script)object).getExpression();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Script_type") :
 			getString("_UI_Script_type") + " " + label;
@@ -181,7 +158,6 @@ public class ScriptItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Script.class)) {
-			case WorkflowPackage.SCRIPT__NAME:
 			case WorkflowPackage.SCRIPT__EXPRESSION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

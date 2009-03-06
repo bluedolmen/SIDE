@@ -852,22 +852,13 @@ public interface WorkflowPackage extends EPackage {
 	int SCRIPT = 13;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCRIPT__NAME = 0;
-
-	/**
 	 * The feature id for the '<em><b>Variable</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCRIPT__VARIABLE = 1;
+	int SCRIPT__VARIABLE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' attribute.
@@ -876,7 +867,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCRIPT__EXPRESSION = 2;
+	int SCRIPT__EXPRESSION = 1;
 
 	/**
 	 * The number of structural features of the '<em>Script</em>' class.
@@ -885,7 +876,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCRIPT_FEATURE_COUNT = 3;
+	int SCRIPT_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.TimerImpl <em>Timer</em>}' class.
@@ -1707,17 +1698,6 @@ public interface WorkflowPackage extends EPackage {
 	EClass getScript();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.Script#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see com.bluexml.side.workflow.Script#getName()
-	 * @see #getScript()
-	 * @generated
-	 */
-	EAttribute getScript_Name();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.workflow.Script#getVariable <em>Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2422,14 +2402,6 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SCRIPT = eINSTANCE.getScript();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SCRIPT__NAME = eINSTANCE.getScript_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Variable</b></em>' containment reference list feature.

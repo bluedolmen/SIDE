@@ -15,12 +15,16 @@
 package com.bluexml.side.Workflow.modeler.diagram.edit;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.topcased.modeler.ModelerEditPolicyConstants;
+import org.topcased.modeler.di.model.DiagramElement;
+import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.EMFGraphNodeEditPart;
 import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
@@ -29,23 +33,26 @@ import org.topcased.modeler.edit.policies.RestoreEditPolicy;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
+import com.bluexml.side.Workflow.modeler.diagram.WfConfiguration;
 import com.bluexml.side.Workflow.modeler.diagram.WfEditPolicyConstants;
 import com.bluexml.side.Workflow.modeler.diagram.commands.StartStateRestoreConnectionCommand;
 import com.bluexml.side.Workflow.modeler.diagram.figures.StartStateFigure;
 import com.bluexml.side.Workflow.modeler.diagram.policies.TransitionEdgeCreationEditPolicy;
 import com.bluexml.side.Workflow.modeler.diagram.policies.initializeEdgeCreationEditPolicy;
 import com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferenceConstants;
+import com.bluexml.side.workflow.StartState;
 
 /**
  * The StartState object controller
- *
+ * 
  * @generated
  */
 public class StartStateEditPart extends EMFGraphNodeEditPart {
 	/**
 	 * Constructor
-	 *
-	 * @param obj the graph node
+	 * 
+	 * @param obj
+	 *            the graph node
 	 * @generated
 	 */
 	public StartStateEditPart(GraphNode obj) {
@@ -54,7 +61,7 @@ public class StartStateEditPart extends EMFGraphNodeEditPart {
 
 	/**
 	 * Creates edit policies and associates these with roles
-	 *
+	 * 
 	 * @generated
 	 */
 	protected void createEditPolicies() {
@@ -86,6 +93,19 @@ public class StartStateEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure createFigure() {
+		StartState state = (StartState) Utils.getElement(getGraphNode());
+		WfConfiguration config = new WfConfiguration();
+
+		if (getGraphNode().getContained().size() > 0) {
+			GraphNode attributesListNode = (GraphNode) getGraphNode().getContained().get(0);
+			EList<DiagramElement> attributesList = attributesListNode.getContained();
+			while (attributesList.size() > 0)
+				attributesList.remove(0);
+			for (Object o : state.getEvent()) {
+				GraphElement elt = config.getCreationUtils().createGraphElement((EObject) o);
+				attributesList.add(elt);
+			}
+		}
 
 		return new StartStateFigure();
 	}

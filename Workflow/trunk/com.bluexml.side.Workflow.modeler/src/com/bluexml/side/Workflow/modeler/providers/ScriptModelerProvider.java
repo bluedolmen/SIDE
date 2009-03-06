@@ -32,6 +32,6 @@ public class ScriptModelerProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	public EAttribute getLabelFeature(Object object) {
-		return WorkflowPackage.eINSTANCE.getScript_Name();
+		return WorkflowPackage.eINSTANCE.getScript_Expression();
 	}
 }

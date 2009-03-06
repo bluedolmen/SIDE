@@ -39,7 +39,7 @@ public interface Action extends WorkflowModelElement {
 	 * @return the value of the '<em>Java Class</em>' attribute.
 	 * @see #setJavaClass(String)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getAction_JavaClass()
-	 * @model unique="false" required="true" ordered="false"
+	 * @model unique="false" ordered="false"
 	 * @generated
 	 */
 	String getJavaClass();
@@ -65,7 +65,7 @@ public interface Action extends WorkflowModelElement {
 	 * @return the value of the '<em>Expression</em>' attribute.
 	 * @see #setExpression(String)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getAction_Expression()
-	 * @model unique="false" required="true" ordered="false"
+	 * @model unique="false" ordered="false"
 	 * @generated
 	 */
 	String getExpression();

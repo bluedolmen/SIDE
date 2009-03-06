@@ -100,7 +100,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Action/script"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Script">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Script/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Script/variable"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Script/expression"/>
     </genClasses>

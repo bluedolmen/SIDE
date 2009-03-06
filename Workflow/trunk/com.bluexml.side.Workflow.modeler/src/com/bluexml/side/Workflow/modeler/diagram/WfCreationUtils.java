@@ -31,6 +31,7 @@ import org.topcased.modeler.editor.AbstractCreationUtils;
 import org.topcased.modeler.graphconf.DiagramGraphConf;
 
 import com.bluexml.side.Workflow.modeler.WorkflowPlugin;
+import com.bluexml.side.workflow.WorkflowPackage;
 import com.bluexml.side.workflow.util.WorkflowSwitch;
 
 /**
@@ -259,13 +260,16 @@ public class WfCreationUtils extends AbstractCreationUtils {
 	 * @param element the model element
 	 * @param presentation the presentation of the graphical element
 	 * @return the complete GraphElement
-	 * @generated
+	 * @_generated
 	 */
 	protected GraphElement createGraphElementStartState(
 			com.bluexml.side.workflow.StartState element, String presentation) {
-		// TODO this snippet of code should be customized if it is not well generated
 		GraphNode nodeParent = createGraphNode(element, presentation);
 
+		GraphNode events = createGraphNode(element,
+				WorkflowPackage.START_STATE__EVENT, presentation);
+		events.setContainer(nodeParent);
+		
 		return nodeParent;
 	}
 
