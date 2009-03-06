@@ -29,8 +29,10 @@ import org.topcased.modeler.edit.policies.RestoreEditPolicy;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
+import com.bluexml.side.Workflow.modeler.diagram.WfEditPolicyConstants;
 import com.bluexml.side.Workflow.modeler.diagram.commands.ActionRestoreConnectionCommand;
 import com.bluexml.side.Workflow.modeler.diagram.figures.ActionFigure;
+import com.bluexml.side.Workflow.modeler.diagram.policies.actionsEdgeCreationEditPolicy;
 import com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferenceConstants;
 
 /**
@@ -56,6 +58,9 @@ public class ActionEditPart extends EMFGraphNodeEditPart {
 	 */
 	protected void createEditPolicies() {
 		super.createEditPolicies();
+
+		installEditPolicy(WfEditPolicyConstants.ACTIONS_EDITPOLICY,
+				new actionsEdgeCreationEditPolicy());
 
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {

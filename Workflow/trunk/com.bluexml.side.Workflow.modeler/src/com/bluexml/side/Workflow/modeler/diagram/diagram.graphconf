@@ -242,5 +242,14 @@
         lineStyle="SOLID">
         <bridge xsi:type="graphconf:StringBridge" type="initialize"/>
     </edge>
+    <edge
+        presentation="default"
+        defaultForegroundColor="34,40,161"
+        defaultFont="Lucida Grande-regular-11"
+        defaultRouter="ObliqueRouter"
+        lineWidth="1"
+        lineStyle="SOLID">
+        <bridge xsi:type="graphconf:StringBridge" type="actions"/>
+    </edge>
 </graphconf:DiagramGraphConf>
 

@@ -105,4 +105,10 @@ public interface WfEditPolicyConstants {
 	 */
 	String INITIALIZE_EDITPOLICY = "initialize EditPolicy";
 
+	/**
+	 * The key used to install an <i>actions</i> EditPolicy.
+	 * @generated
+	 */
+	String ACTIONS_EDITPOLICY = "actions EditPolicy";
+
 }

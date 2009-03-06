@@ -15,27 +15,23 @@
 package com.bluexml.side.Workflow.modeler.diagram.edit;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.PolylineConnection;
-import org.eclipse.draw2d.PolylineDecoration;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.GraphEdge;
-import org.topcased.modeler.edit.EMFGraphEdgeEditPart;
+import org.topcased.modeler.edit.GraphEdgeEditPart;
 import org.topcased.modeler.utils.Utils;
 
-import com.bluexml.side.Workflow.modeler.diagram.WfEditPolicyConstants;
-import com.bluexml.side.Workflow.modeler.diagram.figures.TransitionFigure;
-import com.bluexml.side.Workflow.modeler.diagram.policies.actionsEdgeCreationEditPolicy;
+import com.bluexml.side.Workflow.modeler.diagram.figures.actionsFigure;
 import com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferenceConstants;
 
 /**
- * Transition controller
+ * actions controller
  *
  * @generated
  */
-public class TransitionEditPart extends EMFGraphEdgeEditPart {
+public class actionsEditPart extends GraphEdgeEditPart {
 
 	/**
 	 * Constructor
@@ -43,7 +39,7 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	 * @param model the graph object
 	 * @generated
 	 */
-	public TransitionEditPart(GraphEdge model) {
+	public actionsEditPart(GraphEdge model) {
 		super(model);
 	}
 
@@ -53,9 +49,6 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	 */
 	protected void createEditPolicies() {
 		super.createEditPolicies();
-
-		installEditPolicy(WfEditPolicyConstants.ACTIONS_EDITPOLICY,
-				new actionsEdgeCreationEditPolicy());
 
 		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FONT_EDITPOLICY,
 				null);
@@ -67,23 +60,9 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	 * @generated
 	 */
 	protected IFigure createFigure() {
-		TransitionFigure connection = new TransitionFigure();
-
-		createTargetDecoration(connection);
+		actionsFigure connection = new actionsFigure();
 
 		return connection;
-	}
-
-	/**
-	 * @param connection the PolylineConnection
-	 * @generated
-	 */
-	private void createTargetDecoration(PolylineConnection connection) {
-
-		PolylineDecoration decoration = new PolylineDecoration();
-		decoration.setScale(10, 5);
-		connection.setTargetDecoration(decoration);
-
 	}
 
 	/**
@@ -93,7 +72,7 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	 */
 	protected String getPreferenceDefaultRouter() {
 		return getPreferenceStore().getString(
-				WfDiagramPreferenceConstants.TRANSITION_EDGE_DEFAULT_ROUTER);
+				WfDiagramPreferenceConstants.ACTIONS_EDGE_DEFAULT_ROUTER);
 	}
 
 	/**
@@ -104,7 +83,7 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	protected Color getPreferenceDefaultForegroundColor() {
 		String preferenceForeground = getPreferenceStore()
 				.getString(
-						WfDiagramPreferenceConstants.TRANSITION_EDGE_DEFAULT_FOREGROUND_COLOR);
+						WfDiagramPreferenceConstants.ACTIONS_EDGE_DEFAULT_FOREGROUND_COLOR);
 		if (preferenceForeground.length() != 0) {
 			return Utils.getColor(preferenceForeground);
 		}
@@ -119,7 +98,7 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	 */
 	protected Font getPreferenceDefaultFont() {
 		String preferenceFont = getPreferenceStore().getString(
-				WfDiagramPreferenceConstants.TRANSITION_EDGE_DEFAULT_FONT);
+				WfDiagramPreferenceConstants.ACTIONS_EDGE_DEFAULT_FONT);
 		if (preferenceFont.length() != 0) {
 			return Utils.getFont(new FontData(preferenceFont));
 		}

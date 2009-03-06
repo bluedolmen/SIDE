@@ -41,6 +41,7 @@ import com.bluexml.side.Workflow.modeler.diagram.edit.TaskNodeEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.TimerEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.TransitionEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.WfDiagramEditPart;
+import com.bluexml.side.Workflow.modeler.diagram.edit.actionsEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.initializeEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.manageEditPart;
 import com.bluexml.side.workflow.util.WorkflowSwitch;
@@ -94,6 +95,11 @@ public class WfEditPartFactory extends ModelerEditPartFactory {
 						.equals(((SimpleSemanticModelElement) edge
 								.getSemanticModel()).getTypeInfo())) {
 					return new initializeEditPart(edge);
+				}
+				if (WfSimpleObjectConstants.SIMPLE_OBJECT_ACTIONS
+						.equals(((SimpleSemanticModelElement) edge
+								.getSemanticModel()).getTypeInfo())) {
+					return new actionsEditPart(edge);
 				}
 			}
 		}
