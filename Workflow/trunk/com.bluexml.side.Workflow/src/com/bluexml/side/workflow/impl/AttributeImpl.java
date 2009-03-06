@@ -26,7 +26,6 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * <ul>
  *   <li>{@link com.bluexml.side.workflow.impl.AttributeImpl#getTyp <em>Typ</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.AttributeImpl#getTitle <em>Title</em>}</li>
- *   <li>{@link com.bluexml.side.workflow.impl.AttributeImpl#getValueList <em>Value List</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.AttributeImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
@@ -73,16 +72,6 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * @ordered
 	 */
 	protected String title = TITLE_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getValueList() <em>Value List</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValueList()
-	 * @generated
-	 * @ordered
-	 */
-	protected Enumeration valueList;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -170,44 +159,6 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Enumeration getValueList() {
-		if (valueList != null && valueList.eIsProxy()) {
-			InternalEObject oldValueList = (InternalEObject)valueList;
-			valueList = (Enumeration)eResolveProxy(oldValueList);
-			if (valueList != oldValueList) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, WorkflowPackage.ATTRIBUTE__VALUE_LIST, oldValueList, valueList));
-			}
-		}
-		return valueList;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Enumeration basicGetValueList() {
-		return valueList;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setValueList(Enumeration newValueList) {
-		Enumeration oldValueList = valueList;
-		valueList = newValueList;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.ATTRIBUTE__VALUE_LIST, oldValueList, valueList));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getName() {
 		return name;
 	}
@@ -236,9 +187,6 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				return getTyp();
 			case WorkflowPackage.ATTRIBUTE__TITLE:
 				return getTitle();
-			case WorkflowPackage.ATTRIBUTE__VALUE_LIST:
-				if (resolve) return getValueList();
-				return basicGetValueList();
 			case WorkflowPackage.ATTRIBUTE__NAME:
 				return getName();
 		}
@@ -258,9 +206,6 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				return;
 			case WorkflowPackage.ATTRIBUTE__TITLE:
 				setTitle((String)newValue);
-				return;
-			case WorkflowPackage.ATTRIBUTE__VALUE_LIST:
-				setValueList((Enumeration)newValue);
 				return;
 			case WorkflowPackage.ATTRIBUTE__NAME:
 				setName((String)newValue);
@@ -283,9 +228,6 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 			case WorkflowPackage.ATTRIBUTE__TITLE:
 				setTitle(TITLE_EDEFAULT);
 				return;
-			case WorkflowPackage.ATTRIBUTE__VALUE_LIST:
-				setValueList((Enumeration)null);
-				return;
 			case WorkflowPackage.ATTRIBUTE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -305,8 +247,6 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				return typ != TYP_EDEFAULT;
 			case WorkflowPackage.ATTRIBUTE__TITLE:
 				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
-			case WorkflowPackage.ATTRIBUTE__VALUE_LIST:
-				return valueList != null;
 			case WorkflowPackage.ATTRIBUTE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}

@@ -66,7 +66,6 @@ public class AttributeItemProvider
 
 			addTypPropertyDescriptor(object);
 			addTitlePropertyDescriptor(object);
-			addValueListPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -112,28 +111,6 @@ public class AttributeItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Value List feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addValueListPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Attribute_valueList_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Attribute_valueList_feature", "_UI_Attribute_type"),
-				 WorkflowPackage.Literals.ATTRIBUTE__VALUE_LIST,
-				 true,
-				 false,
-				 true,
-				 null,
 				 null,
 				 null));
 	}

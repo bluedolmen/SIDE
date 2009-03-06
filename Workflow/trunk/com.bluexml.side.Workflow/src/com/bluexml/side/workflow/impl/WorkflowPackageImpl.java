@@ -664,15 +664,6 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getProcessState_Variable() {
-		return (EReference)processStateEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getFork() {
 		return forkEClass;
 	}
@@ -997,17 +988,8 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAttribute_ValueList() {
-		return (EReference)attributeEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getAttribute_Name() {
-		return (EAttribute)attributeEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)attributeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1107,7 +1089,6 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 
 		processStateEClass = createEClass(PROCESS_STATE);
 		createEReference(processStateEClass, PROCESS_STATE__SUBPROCESS);
-		createEReference(processStateEClass, PROCESS_STATE__VARIABLE);
 
 		forkEClass = createEClass(FORK);
 		createEReference(forkEClass, FORK__TRANSITION);
@@ -1155,7 +1136,6 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		attributeEClass = createEClass(ATTRIBUTE);
 		createEAttribute(attributeEClass, ATTRIBUTE__TYP);
 		createEAttribute(attributeEClass, ATTRIBUTE__TITLE);
-		createEReference(attributeEClass, ATTRIBUTE__VALUE_LIST);
 		createEAttribute(attributeEClass, ATTRIBUTE__NAME);
 
 		// Create enums
@@ -1201,6 +1181,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		endStateEClass.getESuperTypes().add(this.getState());
 		nodeEClass.getESuperTypes().add(this.getState());
 		taskNodeEClass.getESuperTypes().add(this.getState());
+		processStateEClass.getESuperTypes().add(this.getState());
 		forkEClass.getESuperTypes().add(this.getState());
 		joinEClass.getESuperTypes().add(this.getState());
 		decisionEClass.getESuperTypes().add(this.getState());
@@ -1259,7 +1240,6 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 
 		initEClass(processStateEClass, ProcessState.class, "ProcessState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProcessState_Subprocess(), this.getProcess(), null, "subprocess", null, 1, 1, ProcessState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getProcessState_Variable(), this.getVariable(), null, "variable", null, 0, -1, ProcessState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(forkEClass, Fork.class, "Fork", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFork_Transition(), this.getTransition(), null, "transition", null, 0, -1, Fork.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1307,7 +1287,6 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAttribute_Typ(), theClazzPackage.getAttributeType(), "typ", "void", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_Title(), ecorePackage.getEString(), "title", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAttribute_ValueList(), theClazzPackage.getEnumeration(), null, "valueList", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_Name(), ecorePackage.getEString(), "name", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals

@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link com.bluexml.side.workflow.Attribute#getTyp <em>Typ</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.Attribute#getTitle <em>Title</em>}</li>
- *   <li>{@link com.bluexml.side.workflow.Attribute#getValueList <em>Value List</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.Attribute#getName <em>Name</em>}</li>
  * </ul>
  * </p>
@@ -86,32 +85,6 @@ public interface Attribute extends EObject {
 	 * @generated
 	 */
 	void setTitle(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Value List</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Value List</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value List</em>' reference.
-	 * @see #setValueList(Enumeration)
-	 * @see com.bluexml.side.workflow.WorkflowPackage#getAttribute_ValueList()
-	 * @model
-	 * @generated
-	 */
-	Enumeration getValueList();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.workflow.Attribute#getValueList <em>Value List</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value List</em>' reference.
-	 * @see #getValueList()
-	 * @generated
-	 */
-	void setValueList(Enumeration value);
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

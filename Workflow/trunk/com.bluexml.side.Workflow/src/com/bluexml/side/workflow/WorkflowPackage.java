@@ -636,16 +636,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_STATE__SUBPROCESS = 0;
-
-	/**
-	 * The feature id for the '<em><b>Variable</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROCESS_STATE__VARIABLE = 1;
+	int PROCESS_STATE__SUBPROCESS = STATE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Process State</em>' class.
@@ -654,7 +645,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_STATE_FEATURE_COUNT = 2;
+	int PROCESS_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.ForkImpl <em>Fork</em>}' class.
@@ -1117,22 +1108,13 @@ public interface WorkflowPackage extends EPackage {
 	int ATTRIBUTE__TITLE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Value List</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE__VALUE_LIST = 2;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__NAME = 3;
+	int ATTRIBUTE__NAME = 2;
 
 	/**
 	 * The number of structural features of the '<em>Attribute</em>' class.
@@ -1141,7 +1123,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_FEATURE_COUNT = 4;
+	int ATTRIBUTE_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.BPMEventType <em>BPM Event Type</em>}' enum.
@@ -1641,17 +1623,6 @@ public interface WorkflowPackage extends EPackage {
 	EReference getProcessState_Subprocess();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.workflow.ProcessState#getVariable <em>Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Variable</em>'.
-	 * @see com.bluexml.side.workflow.ProcessState#getVariable()
-	 * @see #getProcessState()
-	 * @generated
-	 */
-	EReference getProcessState_Variable();
-
-	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.Fork <em>Fork</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2035,17 +2006,6 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAttribute_Title();
-
-	/**
-	 * Returns the meta object for the reference '{@link com.bluexml.side.workflow.Attribute#getValueList <em>Value List</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Value List</em>'.
-	 * @see com.bluexml.side.workflow.Attribute#getValueList()
-	 * @see #getAttribute()
-	 * @generated
-	 */
-	EReference getAttribute_ValueList();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.Attribute#getName <em>Name</em>}'.
@@ -2469,14 +2429,6 @@ public interface WorkflowPackage extends EPackage {
 		EReference PROCESS_STATE__SUBPROCESS = eINSTANCE.getProcessState_Subprocess();
 
 		/**
-		 * The meta object literal for the '<em><b>Variable</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PROCESS_STATE__VARIABLE = eINSTANCE.getProcessState_Variable();
-
-		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.ForkImpl <em>Fork</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2785,14 +2737,6 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ATTRIBUTE__TITLE = eINSTANCE.getAttribute_Title();
-
-		/**
-		 * The meta object literal for the '<em><b>Value List</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ATTRIBUTE__VALUE_LIST = eINSTANCE.getAttribute_ValueList();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.

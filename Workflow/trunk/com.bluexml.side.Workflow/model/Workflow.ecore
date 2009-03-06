@@ -86,11 +86,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="clazz" upperBound="-1"
         eType="ecore:EClass ../../com.bluexml.side.Class/model/Class.ecore#//Clazz"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ProcessState">
+  <eClassifiers xsi:type="ecore:EClass" name="ProcessState" eSuperTypes="#//State">
     <eStructuralFeatures xsi:type="ecore:EReference" name="subprocess" ordered="false"
         lowerBound="1" eType="#//Process"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" upperBound="-1"
-        eType="#//Variable" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Fork" eSuperTypes="#//State">
     <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"

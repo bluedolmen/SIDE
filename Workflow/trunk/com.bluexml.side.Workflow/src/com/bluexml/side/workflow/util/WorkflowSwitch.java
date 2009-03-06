@@ -160,6 +160,7 @@ public class WorkflowSwitch<T> {
 			case WorkflowPackage.PROCESS_STATE: {
 				ProcessState processState = (ProcessState)theEObject;
 				T result = caseProcessState(processState);
+				if (result == null) result = caseState(processState);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
