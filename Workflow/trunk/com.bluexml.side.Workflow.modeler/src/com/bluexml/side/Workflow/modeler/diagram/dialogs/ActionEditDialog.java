@@ -24,11 +24,15 @@ import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
@@ -47,14 +51,19 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 	
 	public static final String ACTION_JAVA_CLASS = "action java class";
 
+	public static final String ACTION_VARIABLE = "action variables";
+
 	private static final int MIN_DIALOG_WIDTH = 400;
 
 	private static final int MIN_DIALOG_HEIGHT = 300;
 
+
+	private ScriptVariableViewer inputParameters;
+	
 	/** Current edited property */
 	private Action action;
 
-	protected Map<String,String> data;
+	protected HashMap<String, Object> data;
 
 	private Text scriptTxt;
 	
@@ -113,8 +122,55 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 		tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		createScriptTab(tabFolder);
+		createAttributesTabItem(tabFolder);
 	}
 	
+	private void createAttributesTabItem(TabFolder parent) {
+		TabItem secondItem = new TabItem(parent, SWT.NONE);
+		secondItem.setText("Variables");
+		Composite composite = new Composite(parent, SWT.NONE);
+		secondItem.setControl(composite);
+
+		// Add layout on composite
+		composite.setLayout(new GridLayout(2, false));
+		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
+
+		new Label(composite, SWT.NONE).setText("Input parameters");
+
+		Script s = null;
+		if (action.getScript().size() > 0)
+			s = action.getScript().get(0);
+		
+		inputParameters = new ScriptVariableViewer(composite,
+				new VariableDataStructure(s));
+
+		Button add = new Button(composite, SWT.PUSH | SWT.CENTER);
+		add.setText("Add");
+
+		GridData gd = new GridData(GridData.GRAB_HORIZONTAL
+				| GridData.HORIZONTAL_ALIGN_END);
+		gd.widthHint = 80;
+		add.setLayoutData(gd);
+		add.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				inputParameters.addParameter();
+			}
+		});
+
+		Button delete = new Button(composite, SWT.PUSH | SWT.CENTER);
+		delete.setText("Delete");
+		gd = new GridData(GridData.GRAB_HORIZONTAL
+				| GridData.HORIZONTAL_ALIGN_BEGINNING);
+		gd.widthHint = 80;
+		delete.setLayoutData(gd);
+
+		delete.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				inputParameters.removeParameter();
+			}
+		});
+	}
+
 	protected TabItem createScriptTab(TabFolder parent) {
 		// Create tab item and add it composite that fills it
 		TabItem scriptItem = new TabItem((TabFolder) parent, SWT.NONE);
@@ -155,10 +211,11 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 	 * @see org.eclipse.jface.dialogs.Dialog#okPressed()
 	 */
 	protected void okPressed() {
-		data = new HashMap<String,String>();
+		data = new HashMap<String,Object>();
 		try {
 			data.put(ACTION_SCRIPT, scriptTxt.getText());
 			data.put(ACTION_JAVA_CLASS, javaClass.getText());
+			data.put(ACTION_VARIABLE, inputParameters.getData());
 			super.okPressed();
 		} catch (Exception e) {
 			WorkflowPlugin.log("Required fields", IStatus.WARNING);
@@ -173,7 +230,7 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 	 * 
 	 * @return a Map
 	 */
-	public Map<String,String> getData() {
+	public Map<String,Object> getData() {
 		return data;
 	}
 

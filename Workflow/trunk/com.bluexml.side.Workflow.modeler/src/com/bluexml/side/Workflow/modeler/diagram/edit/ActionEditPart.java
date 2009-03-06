@@ -16,7 +16,10 @@ package com.bluexml.side.Workflow.modeler.diagram.edit;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.gef.Request;
+import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
@@ -26,25 +29,32 @@ import org.topcased.modeler.edit.EMFGraphNodeEditPart;
 import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
 import org.topcased.modeler.edit.policies.ResizableEditPolicy;
 import org.topcased.modeler.edit.policies.RestoreEditPolicy;
+import org.topcased.modeler.internal.ModelerPlugin;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
 import com.bluexml.side.Workflow.modeler.diagram.WfEditPolicyConstants;
 import com.bluexml.side.Workflow.modeler.diagram.commands.ActionRestoreConnectionCommand;
+import com.bluexml.side.Workflow.modeler.diagram.commands.update.ActionUpdateCommand;
+import com.bluexml.side.Workflow.modeler.diagram.dialogs.ActionEditDialog;
 import com.bluexml.side.Workflow.modeler.diagram.figures.ActionFigure;
 import com.bluexml.side.Workflow.modeler.diagram.policies.actionsEdgeCreationEditPolicy;
 import com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferenceConstants;
+import com.bluexml.side.workflow.Action;
+import com.bluexml.side.workflow.Event;
+import com.bluexml.side.workflow.WorkflowFactory;
 
 /**
  * The Action object controller
- *
+ * 
  * @generated
  */
 public class ActionEditPart extends EMFGraphNodeEditPart {
 	/**
 	 * Constructor
-	 *
-	 * @param obj the graph node
+	 * 
+	 * @param obj
+	 *            the graph node
 	 * @generated
 	 */
 	public ActionEditPart(GraphNode obj) {
@@ -53,7 +63,7 @@ public class ActionEditPart extends EMFGraphNodeEditPart {
 
 	/**
 	 * Creates edit policies and associates these with roles
-	 *
+	 * 
 	 * @generated
 	 */
 	protected void createEditPolicies() {
@@ -126,4 +136,31 @@ public class ActionEditPart extends EMFGraphNodeEditPart {
 
 	}
 
+	@Override
+	public void performRequest(Request request) {
+		if (request.getType() == RequestConstants.REQ_OPEN) {
+			Action action = (Action) Utils.getElement(getGraphNode());
+
+			ActionEditDialog dlg = new ActionEditDialog(action, ModelerPlugin
+					.getActiveWorkbenchShell());
+			if (dlg.open() == Window.OK) {
+				ActionUpdateCommand command = new ActionUpdateCommand(action,
+						dlg.getData());
+				getViewer().getEditDomain().getCommandStack().execute(command);
+				refresh();
+			}
+		} else {
+			super.performRequest(request);
+
+		}
+	}
+
+	@Override
+	protected void refreshHeaderLabel() {
+		Action action = (Action) Utils.getElement(getGraphNode());
+		if (action.getScript().size() > 0)
+			getLabel().setText(action.getScript().get(0).getExpression());
+		else
+			super.refreshHeaderLabel();
+	}
 }

@@ -181,7 +181,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="typ" eType="ecore:EEnum ../../com.bluexml.side.Class/model/Class.ecore#//AttributeType"
         defaultValueLiteral="void"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="valueList" eType="ecore:EClass ../../com.bluexml.side.Class/model/Class.ecore#//Enumeration"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>
