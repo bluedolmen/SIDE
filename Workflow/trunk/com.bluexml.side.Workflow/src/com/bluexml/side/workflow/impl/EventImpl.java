@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -115,24 +116,9 @@ public class EventImpl extends EObjectImpl implements Event {
 	 */
 	public EList<Action> getAction() {
 		if (action == null) {
-			action = new EObjectContainmentWithInverseEList<Action>(Action.class, this, WorkflowPackage.EVENT__ACTION, WorkflowPackage.ACTION__PARENT_EVENT);
+			action = new EObjectContainmentEList<Action>(Action.class, this, WorkflowPackage.EVENT__ACTION);
 		}
 		return action;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case WorkflowPackage.EVENT__ACTION:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAction()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**

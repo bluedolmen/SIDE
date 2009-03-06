@@ -78,7 +78,6 @@ public class WorkflowFactoryImpl extends EFactoryImpl implements WorkflowFactory
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case WorkflowPackage.WORKFLOW_MODEL_ELEMENT: return createWorkflowModelElement();
 			case WorkflowPackage.PROCESS: return createProcess();
 			case WorkflowPackage.SWIMLANE: return createSwimlane();
 			case WorkflowPackage.START_STATE: return createStartState();
@@ -132,16 +131,6 @@ public class WorkflowFactoryImpl extends EFactoryImpl implements WorkflowFactory
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public WorkflowModelElement createWorkflowModelElement() {
-		WorkflowModelElementImpl workflowModelElement = new WorkflowModelElementImpl();
-		return workflowModelElement;
 	}
 
 	/**

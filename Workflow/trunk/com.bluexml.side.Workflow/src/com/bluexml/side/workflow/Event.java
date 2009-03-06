@@ -60,7 +60,6 @@ public interface Event extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Action</b></em>' containment reference list.
 	 * The list contents are of type {@link com.bluexml.side.workflow.Action}.
-	 * It is bidirectional and its opposite is '{@link com.bluexml.side.workflow.Action#getParentEvent <em>Parent Event</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Action</em>' containment reference list isn't clear,
@@ -69,8 +68,7 @@ public interface Event extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Action</em>' containment reference list.
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getEvent_Action()
-	 * @see com.bluexml.side.workflow.Action#getParentEvent
-	 * @model opposite="parentEvent" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<Action> getAction();

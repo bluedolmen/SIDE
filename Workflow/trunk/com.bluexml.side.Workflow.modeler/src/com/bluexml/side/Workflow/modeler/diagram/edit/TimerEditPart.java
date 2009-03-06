@@ -15,6 +15,7 @@
 package com.bluexml.side.Workflow.modeler.diagram.edit;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
@@ -22,6 +23,7 @@ import org.eclipse.swt.graphics.FontData;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.EMFGraphNodeEditPart;
+import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
 import org.topcased.modeler.edit.policies.ResizableEditPolicy;
 import org.topcased.modeler.edit.policies.RestoreEditPolicy;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
@@ -77,6 +79,8 @@ public class TimerEditPart extends EMFGraphNodeEditPart {
 		installEditPolicy(
 				ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY,
 				null);
+		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
+				new LabelDirectEditPolicy());
 	}
 
 	/**

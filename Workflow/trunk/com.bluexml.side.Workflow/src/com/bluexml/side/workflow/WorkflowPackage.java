@@ -6,13 +6,13 @@
  */
 package com.bluexml.side.workflow;
 
-import com.bluexml.side.common.CommonPackage;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
+import com.bluexml.side.common.CommonPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -73,13 +73,40 @@ public interface WorkflowPackage extends EPackage {
 	int WORKFLOW_MODEL_ELEMENT = 0;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORKFLOW_MODEL_ELEMENT__STEREOTYPES = CommonPackage.MODEL_ELEMENT__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORKFLOW_MODEL_ELEMENT__TAGS = CommonPackage.MODEL_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORKFLOW_MODEL_ELEMENT__COMMENTS = CommonPackage.MODEL_ELEMENT__COMMENTS;
+
+	/**
 	 * The number of structural features of the '<em>Model Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WORKFLOW_MODEL_ELEMENT_FEATURE_COUNT = 0;
+	int WORKFLOW_MODEL_ELEMENT_FEATURE_COUNT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.ProcessImpl <em>Process</em>}' class.
@@ -236,13 +263,22 @@ public interface WorkflowPackage extends EPackage {
 	int PROCESS__DECISION = CommonPackage.PACKAGE_FEATURE_COUNT + 8;
 
 	/**
+	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS__ELEMENTS = CommonPackage.PACKAGE_FEATURE_COUNT + 9;
+
+	/**
 	 * The number of structural features of the '<em>Process</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_FEATURE_COUNT = CommonPackage.PACKAGE_FEATURE_COUNT + 9;
+	int PROCESS_FEATURE_COUNT = CommonPackage.PACKAGE_FEATURE_COUNT + 10;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.SwimlaneImpl <em>Swimlane</em>}' class.
@@ -743,13 +779,40 @@ public interface WorkflowPackage extends EPackage {
 	int ACTION = 12;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION__STEREOTYPES = WORKFLOW_MODEL_ELEMENT__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION__TAGS = WORKFLOW_MODEL_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION__COMMENTS = WORKFLOW_MODEL_ELEMENT__COMMENTS;
+
+	/**
 	 * The feature id for the '<em><b>Java Class</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION__JAVA_CLASS = 0;
+	int ACTION__JAVA_CLASS = WORKFLOW_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' attribute.
@@ -758,7 +821,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION__EXPRESSION = 1;
+	int ACTION__EXPRESSION = WORKFLOW_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Script</b></em>' containment reference list.
@@ -767,25 +830,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION__SCRIPT = 2;
-
-	/**
-	 * The feature id for the '<em><b>Parent Event</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION__PARENT_EVENT = 3;
-
-	/**
-	 * The feature id for the '<em><b>Parent Timer</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION__PARENT_TIMER = 4;
+	int ACTION__SCRIPT = WORKFLOW_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Action</em>' class.
@@ -794,7 +839,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION_FEATURE_COUNT = 5;
+	int ACTION_FEATURE_COUNT = WORKFLOW_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.ScriptImpl <em>Script</em>}' class.
@@ -853,13 +898,31 @@ public interface WorkflowPackage extends EPackage {
 	int TIMER = 14;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TIMER__NAME = 0;
+	int TIMER__STEREOTYPES = WORKFLOW_MODEL_ELEMENT__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIMER__TAGS = WORKFLOW_MODEL_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIMER__COMMENTS = WORKFLOW_MODEL_ELEMENT__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Duedate</b></em>' attribute.
@@ -868,16 +931,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TIMER__DUEDATE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Action</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIMER__ACTION = 2;
+	int TIMER__DUEDATE = WORKFLOW_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Timer</em>' class.
@@ -886,7 +940,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TIMER_FEATURE_COUNT = 3;
+	int TIMER_FEATURE_COUNT = WORKFLOW_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.VariableImpl <em>Variable</em>}' class.
@@ -1146,6 +1200,17 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getProcess_Decision();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.workflow.Process#getElements <em>Elements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Elements</em>'.
+	 * @see com.bluexml.side.workflow.Process#getElements()
+	 * @see #getProcess()
+	 * @generated
+	 */
+	EReference getProcess_Elements();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.Swimlane <em>Swimlane</em>}'.
@@ -1632,28 +1697,6 @@ public interface WorkflowPackage extends EPackage {
 	EReference getAction_Script();
 
 	/**
-	 * Returns the meta object for the container reference '{@link com.bluexml.side.workflow.Action#getParentEvent <em>Parent Event</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Parent Event</em>'.
-	 * @see com.bluexml.side.workflow.Action#getParentEvent()
-	 * @see #getAction()
-	 * @generated
-	 */
-	EReference getAction_ParentEvent();
-
-	/**
-	 * Returns the meta object for the container reference '{@link com.bluexml.side.workflow.Action#getParentTimer <em>Parent Timer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Parent Timer</em>'.
-	 * @see com.bluexml.side.workflow.Action#getParentTimer()
-	 * @see #getAction()
-	 * @generated
-	 */
-	EReference getAction_ParentTimer();
-
-	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.Script <em>Script</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1707,17 +1750,6 @@ public interface WorkflowPackage extends EPackage {
 	EClass getTimer();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.Timer#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see com.bluexml.side.workflow.Timer#getName()
-	 * @see #getTimer()
-	 * @generated
-	 */
-	EAttribute getTimer_Name();
-
-	/**
 	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.Timer#getDuedate <em>Duedate</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1727,17 +1759,6 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTimer_Duedate();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link com.bluexml.side.workflow.Timer#getAction <em>Action</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Action</em>'.
-	 * @see com.bluexml.side.workflow.Timer#getAction()
-	 * @see #getTimer()
-	 * @generated
-	 */
-	EReference getTimer_Action();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.Variable <em>Variable</em>}'.
@@ -2001,6 +2022,14 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROCESS__DECISION = eINSTANCE.getProcess_Decision();
+
+		/**
+		 * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROCESS__ELEMENTS = eINSTANCE.getProcess_Elements();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.SwimlaneImpl <em>Swimlane</em>}' class.
@@ -2385,22 +2414,6 @@ public interface WorkflowPackage extends EPackage {
 		EReference ACTION__SCRIPT = eINSTANCE.getAction_Script();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent Event</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ACTION__PARENT_EVENT = eINSTANCE.getAction_ParentEvent();
-
-		/**
-		 * The meta object literal for the '<em><b>Parent Timer</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ACTION__PARENT_TIMER = eINSTANCE.getAction_ParentTimer();
-
-		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.ScriptImpl <em>Script</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2445,28 +2458,12 @@ public interface WorkflowPackage extends EPackage {
 		EClass TIMER = eINSTANCE.getTimer();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TIMER__NAME = eINSTANCE.getTimer_Name();
-
-		/**
 		 * The meta object literal for the '<em><b>Duedate</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute TIMER__DUEDATE = eINSTANCE.getTimer_Duedate();
-
-		/**
-		 * The meta object literal for the '<em><b>Action</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TIMER__ACTION = eINSTANCE.getTimer_Action();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.VariableImpl <em>Variable</em>}' class.

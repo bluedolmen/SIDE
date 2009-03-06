@@ -27,6 +27,7 @@ import com.bluexml.side.workflow.ProcessState;
 import com.bluexml.side.workflow.StartState;
 import com.bluexml.side.workflow.Swimlane;
 import com.bluexml.side.workflow.TaskNode;
+import com.bluexml.side.workflow.WorkflowModelElement;
 import com.bluexml.side.workflow.WorkflowPackage;
 
 /**
@@ -45,6 +46,7 @@ import com.bluexml.side.workflow.WorkflowPackage;
  *   <li>{@link com.bluexml.side.workflow.impl.ProcessImpl#getFork <em>Fork</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.ProcessImpl#getJoin <em>Join</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.ProcessImpl#getDecision <em>Decision</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.impl.ProcessImpl#getElements <em>Elements</em>}</li>
  * </ul>
  * </p>
  *
@@ -140,6 +142,16 @@ public class ProcessImpl extends PackageImpl implements com.bluexml.side.workflo
 	 * @ordered
 	 */
 	protected EList<Decision> decision;
+
+	/**
+	 * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getElements()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<WorkflowModelElement> elements;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -304,6 +316,18 @@ public class ProcessImpl extends PackageImpl implements com.bluexml.side.workflo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<WorkflowModelElement> getElements() {
+		if (elements == null) {
+			elements = new EObjectContainmentEList<WorkflowModelElement>(WorkflowModelElement.class, this, WorkflowPackage.PROCESS__ELEMENTS);
+		}
+		return elements;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -325,6 +349,8 @@ public class ProcessImpl extends PackageImpl implements com.bluexml.side.workflo
 				return ((InternalEList<?>)getJoin()).basicRemove(otherEnd, msgs);
 			case WorkflowPackage.PROCESS__DECISION:
 				return ((InternalEList<?>)getDecision()).basicRemove(otherEnd, msgs);
+			case WorkflowPackage.PROCESS__ELEMENTS:
+				return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -355,6 +381,8 @@ public class ProcessImpl extends PackageImpl implements com.bluexml.side.workflo
 				return getJoin();
 			case WorkflowPackage.PROCESS__DECISION:
 				return getDecision();
+			case WorkflowPackage.PROCESS__ELEMENTS:
+				return getElements();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -403,6 +431,10 @@ public class ProcessImpl extends PackageImpl implements com.bluexml.side.workflo
 				getDecision().clear();
 				getDecision().addAll((Collection<? extends Decision>)newValue);
 				return;
+			case WorkflowPackage.PROCESS__ELEMENTS:
+				getElements().clear();
+				getElements().addAll((Collection<? extends WorkflowModelElement>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -442,6 +474,9 @@ public class ProcessImpl extends PackageImpl implements com.bluexml.side.workflo
 			case WorkflowPackage.PROCESS__DECISION:
 				getDecision().clear();
 				return;
+			case WorkflowPackage.PROCESS__ELEMENTS:
+				getElements().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -472,6 +507,8 @@ public class ProcessImpl extends PackageImpl implements com.bluexml.side.workflo
 				return join != null && !join.isEmpty();
 			case WorkflowPackage.PROCESS__DECISION:
 				return decision != null && !decision.isEmpty();
+			case WorkflowPackage.PROCESS__ELEMENTS:
+				return elements != null && !elements.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

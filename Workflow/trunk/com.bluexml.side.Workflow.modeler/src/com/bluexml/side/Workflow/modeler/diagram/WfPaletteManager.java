@@ -206,6 +206,14 @@ public class WfPaletteManager extends ModelerPaletteManager {
 						.getImageDescriptor("ACTIONS"), WfImageRegistry
 						.getImageDescriptor("ACTIONS_LARGE")));
 
+		factory = new GraphElementCreationFactory(creationUtils,
+				WfSimpleObjectConstants.SIMPLE_OBJECT_HASTIMER, "default",
+				false);
+		entries.add(new ModelerConnectionCreationToolEntry("Has timer",
+				"Has timer", factory, WfImageRegistry
+						.getImageDescriptor("HASTIMER"), WfImageRegistry
+						.getImageDescriptor("HASTIMER_LARGE")));
+
 		linksDrawer.addAll(entries);
 		getRoot().add(linksDrawer);
 	}

@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -62,8 +63,31 @@ public class ProcessItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addElementsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Elements feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addElementsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Process_elements_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Process_elements_feature", "_UI_Process_type"),
+				 WorkflowPackage.Literals.PROCESS__ELEMENTS,
+				 false,
+				 false,
+				 false,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -87,6 +111,7 @@ public class ProcessItemProvider
 			childrenFeatures.add(WorkflowPackage.Literals.PROCESS__FORK);
 			childrenFeatures.add(WorkflowPackage.Literals.PROCESS__JOIN);
 			childrenFeatures.add(WorkflowPackage.Literals.PROCESS__DECISION);
+			childrenFeatures.add(WorkflowPackage.Literals.PROCESS__ELEMENTS);
 		}
 		return childrenFeatures;
 	}
@@ -150,6 +175,7 @@ public class ProcessItemProvider
 			case WorkflowPackage.PROCESS__FORK:
 			case WorkflowPackage.PROCESS__JOIN:
 			case WorkflowPackage.PROCESS__DECISION:
+			case WorkflowPackage.PROCESS__ELEMENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}

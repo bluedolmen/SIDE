@@ -7,6 +7,7 @@
 package com.bluexml.side.workflow.provider;
 
 
+import com.bluexml.side.common.provider.ModelElementItemProvider;
 import java.util.Collection;
 import java.util.List;
 
@@ -28,7 +29,7 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
  * @generated
  */
 public class WorkflowModelElementItemProvider
-	extends ItemProviderAdapter
+	extends ModelElementItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	

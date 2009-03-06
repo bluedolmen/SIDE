@@ -40,6 +40,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Process/fork"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Process/join"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Process/decision"/>
+      <genFeatures property="Readonly" children="true" createChild="false" propertyCategory=""
+          propertyDescription="" ecoreFeature="ecore:EReference Workflow.ecore#//Process/elements"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Swimlane">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Swimlane/name"/>
@@ -96,8 +98,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Action/javaClass"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Action/expression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Action/script"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Workflow.ecore#//Action/parentEvent"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Workflow.ecore#//Action/parentTimer"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Script">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Script/name"/>
@@ -105,9 +105,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Script/expression"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Timer">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Timer/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Timer/duedate"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Timer/action"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Variable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Variable/name"/>

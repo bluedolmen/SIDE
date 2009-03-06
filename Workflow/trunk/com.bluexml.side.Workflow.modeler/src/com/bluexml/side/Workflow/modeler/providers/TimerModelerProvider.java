@@ -31,6 +31,6 @@ public class TimerModelerProvider extends WorkflowModelElementModelerProvider
 	 * @generated
 	 */
 	public EAttribute getLabelFeature(Object object) {
-		return WorkflowPackage.eINSTANCE.getTimer_Name();
+		return WorkflowPackage.eINSTANCE.getTimer_Duedate();
 	}
 }

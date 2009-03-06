@@ -358,6 +358,15 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getProcess_Elements() {
+		return (EReference)processEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSwimlane() {
 		return swimlaneEClass;
 	}
@@ -763,24 +772,6 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAction_ParentEvent() {
-		return (EReference)actionEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAction_ParentTimer() {
-		return (EReference)actionEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getScript() {
 		return scriptEClass;
 	}
@@ -826,26 +817,8 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTimer_Name() {
-		return (EAttribute)timerEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getTimer_Duedate() {
-		return (EAttribute)timerEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTimer_Action() {
-		return (EReference)timerEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)timerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1014,6 +987,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		createEReference(processEClass, PROCESS__FORK);
 		createEReference(processEClass, PROCESS__JOIN);
 		createEReference(processEClass, PROCESS__DECISION);
+		createEReference(processEClass, PROCESS__ELEMENTS);
 
 		swimlaneEClass = createEClass(SWIMLANE);
 		createEAttribute(swimlaneEClass, SWIMLANE__NAME);
@@ -1070,8 +1044,6 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		createEAttribute(actionEClass, ACTION__JAVA_CLASS);
 		createEAttribute(actionEClass, ACTION__EXPRESSION);
 		createEReference(actionEClass, ACTION__SCRIPT);
-		createEReference(actionEClass, ACTION__PARENT_EVENT);
-		createEReference(actionEClass, ACTION__PARENT_TIMER);
 
 		scriptEClass = createEClass(SCRIPT);
 		createEAttribute(scriptEClass, SCRIPT__NAME);
@@ -1079,9 +1051,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		createEAttribute(scriptEClass, SCRIPT__EXPRESSION);
 
 		timerEClass = createEClass(TIMER);
-		createEAttribute(timerEClass, TIMER__NAME);
 		createEAttribute(timerEClass, TIMER__DUEDATE);
-		createEReference(timerEClass, TIMER__ACTION);
 
 		variableEClass = createEClass(VARIABLE);
 		createEAttribute(variableEClass, VARIABLE__NAME);
@@ -1134,6 +1104,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		workflowModelElementEClass.getESuperTypes().add(theCommonPackage.getModelElement());
 		processEClass.getESuperTypes().add(theCommonPackage.getPackage());
 		startStateEClass.getESuperTypes().add(this.getState());
 		endStateEClass.getESuperTypes().add(this.getState());
@@ -1142,9 +1113,11 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		forkEClass.getESuperTypes().add(this.getState());
 		joinEClass.getESuperTypes().add(this.getState());
 		decisionEClass.getESuperTypes().add(this.getState());
+		actionEClass.getESuperTypes().add(this.getWorkflowModelElement());
+		timerEClass.getESuperTypes().add(this.getWorkflowModelElement());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(workflowModelElementEClass, WorkflowModelElement.class, "WorkflowModelElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(workflowModelElementEClass, WorkflowModelElement.class, "WorkflowModelElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(processEClass, com.bluexml.side.workflow.Process.class, "Process", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProcess_Swimlane(), this.getSwimlane(), null, "swimlane", null, 0, -1, com.bluexml.side.workflow.Process.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1156,6 +1129,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		initEReference(getProcess_Fork(), this.getFork(), null, "fork", null, 0, -1, com.bluexml.side.workflow.Process.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProcess_Join(), this.getJoin(), null, "join", null, 0, -1, com.bluexml.side.workflow.Process.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProcess_Decision(), this.getDecision(), null, "decision", null, 0, -1, com.bluexml.side.workflow.Process.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProcess_Elements(), this.getWorkflowModelElement(), null, "elements", null, 0, -1, com.bluexml.side.workflow.Process.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(swimlaneEClass, Swimlane.class, "Swimlane", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSwimlane_Name(), ecorePackage.getEString(), "name", null, 1, 1, Swimlane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -1176,7 +1150,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		initEReference(getEndState_Event(), this.getEvent(), null, "event", null, 0, -1, EndState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(nodeEClass, Node.class, "Node", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNode_Action(), this.getAction(), null, "action", null, 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getNode_Action(), this.getAction(), null, "action", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getNode_Name(), ecorePackage.getEString(), "name", null, 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getNode_Transition(), this.getTransition(), null, "transition", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNode_Event(), this.getEvent(), null, "event", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1206,24 +1180,20 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 
 		initEClass(eventEClass, Event.class, "Event", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEvent_Type(), this.getBPMEventType(), "type", null, 1, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getEvent_Action(), this.getAction(), this.getAction_ParentEvent(), "action", null, 0, -1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEvent_Action(), this.getAction(), null, "action", null, 0, -1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(actionEClass, Action.class, "Action", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAction_JavaClass(), ecorePackage.getEString(), "javaClass", null, 1, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getAction_Expression(), ecorePackage.getEString(), "expression", null, 1, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getAction_Script(), this.getScript(), null, "script", null, 0, -1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getAction_ParentEvent(), this.getEvent(), this.getEvent_Action(), "parentEvent", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getAction_ParentTimer(), this.getTimer(), this.getTimer_Action(), "parentTimer", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(scriptEClass, Script.class, "Script", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getScript_Name(), ecorePackage.getEString(), "name", null, 1, 1, Script.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getScript_Variable(), this.getVariable(), null, "variable", null, 0, -1, Script.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getScript_Expression(), ecorePackage.getEString(), "expression", null, 0, 1, Script.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getScript_Expression(), ecorePackage.getEString(), "expression", null, 1, 1, Script.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(timerEClass, Timer.class, "Timer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTimer_Name(), ecorePackage.getEString(), "name", null, 1, 1, Timer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getTimer_Duedate(), ecorePackage.getEString(), "duedate", null, 1, 1, Timer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getTimer_Action(), this.getAction(), this.getAction_ParentTimer(), "action", null, 1, 1, Timer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(variableEClass, Variable.class, "Variable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getVariable_Name(), ecorePackage.getEString(), "name", null, 1, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

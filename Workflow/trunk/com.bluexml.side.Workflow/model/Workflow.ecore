@@ -3,7 +3,8 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="workflow"
     nsURI="http://www.kerblue.org/workflow/1.0" nsPrefix="workflow">
-  <eClassifiers xsi:type="ecore:EClass" name="WorkflowModelElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="WorkflowModelElement" abstract="true"
+      eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Process" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Package">
     <eStructuralFeatures xsi:type="ecore:EReference" name="swimlane" upperBound="-1"
         eType="#//Swimlane" containment="true"/>
@@ -23,6 +24,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="decision" upperBound="-1"
         eType="#//Decision" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//WorkflowModelElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Swimlane">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
@@ -55,7 +58,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Node" eSuperTypes="#//State">
     <eStructuralFeatures xsi:type="ecore:EReference" name="action" ordered="false"
-        lowerBound="1" eType="#//Action" containment="true"/>
+        eType="#//Action" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
@@ -103,34 +106,27 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" ordered="false" unique="false"
         lowerBound="1" eType="#//BPMEventType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="action" upperBound="-1"
-        eType="#//Action" containment="true" eOpposite="#//Action/parentEvent"/>
+        eType="#//Action" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Action">
+  <eClassifiers xsi:type="ecore:EClass" name="Action" eSuperTypes="#//WorkflowModelElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="javaClass" ordered="false"
         unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" ordered="false"
         unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="script" ordered="false"
         upperBound="-1" eType="#//Script" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentEvent" ordered="false"
-        eType="#//Event" eOpposite="#//Event/action"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentTimer" ordered="false"
-        eType="#//Timer" eOpposite="#//Timer/action"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Script">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" upperBound="-1"
         eType="#//Variable" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Timer">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
-        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Timer" eSuperTypes="#//WorkflowModelElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="duedate" ordered="false"
         unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="action" ordered="false"
-        lowerBound="1" eType="#//Action" containment="true" eOpposite="#//Action/parentTimer"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Variable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"

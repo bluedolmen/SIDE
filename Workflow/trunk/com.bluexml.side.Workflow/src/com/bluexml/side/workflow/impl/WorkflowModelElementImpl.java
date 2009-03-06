@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.workflow.impl;
 
+import com.bluexml.side.common.impl.ModelElementImpl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
@@ -21,7 +22,7 @@ import com.bluexml.side.workflow.WorkflowPackage;
  *
  * @generated
  */
-public class WorkflowModelElementImpl extends EObjectImpl implements WorkflowModelElement {
+public abstract class WorkflowModelElementImpl extends ModelElementImpl implements WorkflowModelElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

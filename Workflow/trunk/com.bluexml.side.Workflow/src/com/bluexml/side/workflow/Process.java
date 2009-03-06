@@ -25,6 +25,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.bluexml.side.workflow.Process#getFork <em>Fork</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.Process#getJoin <em>Join</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.Process#getDecision <em>Decision</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.Process#getElements <em>Elements</em>}</li>
  * </ul>
  * </p>
  *
@@ -186,5 +187,21 @@ public interface Process extends com.bluexml.side.common.Package {
 	 * @generated
 	 */
 	EList<Decision> getDecision();
+
+	/**
+	 * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
+	 * The list contents are of type {@link com.bluexml.side.workflow.WorkflowModelElement}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Elements</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Elements</em>' containment reference list.
+	 * @see com.bluexml.side.workflow.WorkflowPackage#getProcess_Elements()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<WorkflowModelElement> getElements();
 
 } // Process

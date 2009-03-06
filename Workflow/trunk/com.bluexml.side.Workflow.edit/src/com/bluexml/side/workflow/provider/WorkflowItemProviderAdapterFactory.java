@@ -75,29 +75,6 @@ public class WorkflowItemProviderAdapterFactory extends WorkflowAdapterFactory i
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.workflow.WorkflowModelElement} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected WorkflowModelElementItemProvider workflowModelElementItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.bluexml.side.workflow.WorkflowModelElement}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createWorkflowModelElementAdapter() {
-		if (workflowModelElementItemProvider == null) {
-			workflowModelElementItemProvider = new WorkflowModelElementItemProvider(this);
-		}
-
-		return workflowModelElementItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.workflow.Process} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -564,7 +541,6 @@ public class WorkflowItemProviderAdapterFactory extends WorkflowAdapterFactory i
 	 * @generated
 	 */
 	public void dispose() {
-		if (workflowModelElementItemProvider != null) workflowModelElementItemProvider.dispose();
 		if (processItemProvider != null) processItemProvider.dispose();
 		if (swimlaneItemProvider != null) swimlaneItemProvider.dispose();
 		if (startStateItemProvider != null) startStateItemProvider.dispose();

@@ -36,7 +36,7 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * @generated
  */
 public class ActionItemProvider
-	extends ItemProviderAdapter
+	extends WorkflowModelElementItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -207,17 +207,6 @@ public class ActionItemProvider
 			(createChildParameter
 				(WorkflowPackage.Literals.ACTION__SCRIPT,
 				 WorkflowFactory.eINSTANCE.createScript()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return WorkflowEditPlugin.INSTANCE;
 	}
 
 }

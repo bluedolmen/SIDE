@@ -26,15 +26,6 @@ public interface WorkflowFactory extends EFactory {
 	WorkflowFactory eINSTANCE = com.bluexml.side.workflow.impl.WorkflowFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Model Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Model Element</em>'.
-	 * @generated
-	 */
-	WorkflowModelElement createWorkflowModelElement();
-
-	/**
 	 * Returns a new object of class '<em>Process</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

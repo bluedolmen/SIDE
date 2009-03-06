@@ -39,7 +39,7 @@ public interface Node extends State {
 	 * @return the value of the '<em>Action</em>' containment reference.
 	 * @see #setAction(Action)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getNode_Action()
-	 * @model containment="true" required="true" ordered="false"
+	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
 	Action getAction();

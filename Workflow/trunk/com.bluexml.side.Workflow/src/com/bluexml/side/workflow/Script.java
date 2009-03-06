@@ -82,7 +82,7 @@ public interface Script extends EObject {
 	 * @return the value of the '<em>Expression</em>' attribute.
 	 * @see #setExpression(String)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getScript_Expression()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getExpression();

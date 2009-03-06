@@ -36,7 +36,7 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * @generated
  */
 public class TimerItemProvider
-	extends ItemProviderAdapter
+	extends WorkflowModelElementItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -64,32 +64,9 @@ public class TimerItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
 			addDuedatePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Timer_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Timer_name_feature", "_UI_Timer_type"),
-				 WorkflowPackage.Literals.TIMER__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -115,36 +92,6 @@ public class TimerItemProvider
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(WorkflowPackage.Literals.TIMER__ACTION);
-		}
-		return childrenFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
-	}
-
-	/**
 	 * This returns Timer.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -159,11 +106,11 @@ public class TimerItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Timer)object).getName();
+		String label = ((Timer)object).getDuedate();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Timer_type") :
 			getString("_UI_Timer_type") + " " + label;
@@ -181,12 +128,8 @@ public class TimerItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Timer.class)) {
-			case WorkflowPackage.TIMER__NAME:
 			case WorkflowPackage.TIMER__DUEDATE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case WorkflowPackage.TIMER__ACTION:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -202,22 +145,6 @@ public class TimerItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(WorkflowPackage.Literals.TIMER__ACTION,
-				 WorkflowFactory.eINSTANCE.createAction()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return WorkflowEditPlugin.INSTANCE;
 	}
 
 }

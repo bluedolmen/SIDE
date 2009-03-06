@@ -109,6 +109,7 @@ public class WorkflowSwitch<T> {
 			case WorkflowPackage.WORKFLOW_MODEL_ELEMENT: {
 				WorkflowModelElement workflowModelElement = (WorkflowModelElement)theEObject;
 				T result = caseWorkflowModelElement(workflowModelElement);
+				if (result == null) result = caseModelElement(workflowModelElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -191,6 +192,8 @@ public class WorkflowSwitch<T> {
 			case WorkflowPackage.ACTION: {
 				Action action = (Action)theEObject;
 				T result = caseAction(action);
+				if (result == null) result = caseWorkflowModelElement(action);
+				if (result == null) result = caseModelElement(action);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -203,6 +206,8 @@ public class WorkflowSwitch<T> {
 			case WorkflowPackage.TIMER: {
 				Timer timer = (Timer)theEObject;
 				T result = caseTimer(timer);
+				if (result == null) result = caseWorkflowModelElement(timer);
+				if (result == null) result = caseModelElement(timer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

@@ -35,14 +35,12 @@ import com.bluexml.side.workflow.WorkflowPackage;
  *   <li>{@link com.bluexml.side.workflow.impl.ActionImpl#getJavaClass <em>Java Class</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.ActionImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.ActionImpl#getScript <em>Script</em>}</li>
- *   <li>{@link com.bluexml.side.workflow.impl.ActionImpl#getParentEvent <em>Parent Event</em>}</li>
- *   <li>{@link com.bluexml.side.workflow.impl.ActionImpl#getParentTimer <em>Parent Timer</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ActionImpl extends EObjectImpl implements Action {
+public class ActionImpl extends WorkflowModelElementImpl implements Action {
 	/**
 	 * The default value of the '{@link #getJavaClass() <em>Java Class</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -171,135 +169,13 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Event getParentEvent() {
-		if (eContainerFeatureID != WorkflowPackage.ACTION__PARENT_EVENT) return null;
-		return (Event)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetParentEvent(Event newParentEvent, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newParentEvent, WorkflowPackage.ACTION__PARENT_EVENT, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setParentEvent(Event newParentEvent) {
-		if (newParentEvent != eInternalContainer() || (eContainerFeatureID != WorkflowPackage.ACTION__PARENT_EVENT && newParentEvent != null)) {
-			if (EcoreUtil.isAncestor(this, newParentEvent))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newParentEvent != null)
-				msgs = ((InternalEObject)newParentEvent).eInverseAdd(this, WorkflowPackage.EVENT__ACTION, Event.class, msgs);
-			msgs = basicSetParentEvent(newParentEvent, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.ACTION__PARENT_EVENT, newParentEvent, newParentEvent));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Timer getParentTimer() {
-		if (eContainerFeatureID != WorkflowPackage.ACTION__PARENT_TIMER) return null;
-		return (Timer)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetParentTimer(Timer newParentTimer, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newParentTimer, WorkflowPackage.ACTION__PARENT_TIMER, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setParentTimer(Timer newParentTimer) {
-		if (newParentTimer != eInternalContainer() || (eContainerFeatureID != WorkflowPackage.ACTION__PARENT_TIMER && newParentTimer != null)) {
-			if (EcoreUtil.isAncestor(this, newParentTimer))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newParentTimer != null)
-				msgs = ((InternalEObject)newParentTimer).eInverseAdd(this, WorkflowPackage.TIMER__ACTION, Timer.class, msgs);
-			msgs = basicSetParentTimer(newParentTimer, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.ACTION__PARENT_TIMER, newParentTimer, newParentTimer));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case WorkflowPackage.ACTION__PARENT_EVENT:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetParentEvent((Event)otherEnd, msgs);
-			case WorkflowPackage.ACTION__PARENT_TIMER:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetParentTimer((Timer)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case WorkflowPackage.ACTION__SCRIPT:
 				return ((InternalEList<?>)getScript()).basicRemove(otherEnd, msgs);
-			case WorkflowPackage.ACTION__PARENT_EVENT:
-				return basicSetParentEvent(null, msgs);
-			case WorkflowPackage.ACTION__PARENT_TIMER:
-				return basicSetParentTimer(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
-			case WorkflowPackage.ACTION__PARENT_EVENT:
-				return eInternalContainer().eInverseRemove(this, WorkflowPackage.EVENT__ACTION, Event.class, msgs);
-			case WorkflowPackage.ACTION__PARENT_TIMER:
-				return eInternalContainer().eInverseRemove(this, WorkflowPackage.TIMER__ACTION, Timer.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -316,10 +192,6 @@ public class ActionImpl extends EObjectImpl implements Action {
 				return getExpression();
 			case WorkflowPackage.ACTION__SCRIPT:
 				return getScript();
-			case WorkflowPackage.ACTION__PARENT_EVENT:
-				return getParentEvent();
-			case WorkflowPackage.ACTION__PARENT_TIMER:
-				return getParentTimer();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -343,12 +215,6 @@ public class ActionImpl extends EObjectImpl implements Action {
 				getScript().clear();
 				getScript().addAll((Collection<? extends Script>)newValue);
 				return;
-			case WorkflowPackage.ACTION__PARENT_EVENT:
-				setParentEvent((Event)newValue);
-				return;
-			case WorkflowPackage.ACTION__PARENT_TIMER:
-				setParentTimer((Timer)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -370,12 +236,6 @@ public class ActionImpl extends EObjectImpl implements Action {
 			case WorkflowPackage.ACTION__SCRIPT:
 				getScript().clear();
 				return;
-			case WorkflowPackage.ACTION__PARENT_EVENT:
-				setParentEvent((Event)null);
-				return;
-			case WorkflowPackage.ACTION__PARENT_TIMER:
-				setParentTimer((Timer)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -394,10 +254,6 @@ public class ActionImpl extends EObjectImpl implements Action {
 				return EXPRESSION_EDEFAULT == null ? expression != null : !EXPRESSION_EDEFAULT.equals(expression);
 			case WorkflowPackage.ACTION__SCRIPT:
 				return script != null && !script.isEmpty();
-			case WorkflowPackage.ACTION__PARENT_EVENT:
-				return getParentEvent() != null;
-			case WorkflowPackage.ACTION__PARENT_TIMER:
-				return getParentTimer() != null;
 		}
 		return super.eIsSet(featureID);
 	}

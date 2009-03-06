@@ -19,6 +19,7 @@
       <items xmi:id="_90fxkAnIEd6njOkWCso0oA" name="Manage" part="_ZbR80AnIEd6njOkWCso0oA"/>
       <items xmi:id="_VWGzAAnPEd6njOkWCso0oA" name="Initialize" part="_Lmi9cAnPEd6njOkWCso0oA"/>
       <items xmi:id="_sPVFsApMEd6Mru3BnMqJHQ" name="Actions" part="_kqQKsApMEd6Mru3BnMqJHQ"/>
+      <items xmi:id="_3mhqoApQEd6Mru3BnMqJHQ" name="Has timer" part="_etrCEApNEd6Mru3BnMqJHQ"/>
     </paletteCategories>
   </palette>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_ExDMEIyBEdy0-r37LrMUlA" object="_6tdnQIyAEdy0-r37LrMUlA" type="Class" layout="ClassLayout" defaultWidth="-1" defaultHeight="-1" minimumWidth="50" minimumHeight="30" maximumHeight="-1"/>
@@ -322,7 +323,7 @@
   </objects>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_HFcw0AnPEd6njOkWCso0oA" name="initialize"/>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_jJosgQpMEd6Mru3BnMqJHQ" name="actions"/>
-  <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_dJ0CoApNEd6Mru3BnMqJHQ" name="has timer"/>
+  <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_dJ0CoApNEd6Mru3BnMqJHQ" name="hasTimer"/>
   <genModel href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#/"/>
   <templateRootObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/Process"/>
   <editorConfigurator href="Workflow.editorconfigurator#_bc130Qm7Ed6njOkWCso0oA"/>
