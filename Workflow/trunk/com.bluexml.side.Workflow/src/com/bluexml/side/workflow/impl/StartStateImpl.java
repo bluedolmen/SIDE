@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.workflow.Attribute;
 import com.bluexml.side.workflow.BPMAssignmentType;
 import com.bluexml.side.workflow.Event;
 import com.bluexml.side.workflow.StartState;

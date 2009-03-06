@@ -235,7 +235,7 @@ public class WfCreationUtils extends AbstractCreationUtils {
 				.getEPackage().getNsURI())) {
 			graphElt = new GraphicWorkflowSwitch(presentation).doSwitch(obj);
 		}
-		
+
 		return (GraphElement) graphElt;
 	}
 

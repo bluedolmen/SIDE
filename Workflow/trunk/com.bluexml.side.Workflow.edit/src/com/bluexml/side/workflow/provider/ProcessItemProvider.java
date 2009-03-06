@@ -64,31 +64,8 @@ public class ProcessItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addElementsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Elements feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addElementsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Process_elements_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Process_elements_feature", "_UI_Process_type"),
-				 WorkflowPackage.Literals.PROCESS__ELEMENTS,
-				 false,
-				 false,
-				 false,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -248,6 +225,16 @@ public class ProcessItemProvider
 			(createChildParameter
 				(WorkflowPackage.Literals.PROCESS__DECISION,
 				 WorkflowFactory.eINSTANCE.createDecision()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(WorkflowPackage.Literals.PROCESS__ELEMENTS,
+				 WorkflowFactory.eINSTANCE.createAction()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(WorkflowPackage.Literals.PROCESS__ELEMENTS,
+				 WorkflowFactory.eINSTANCE.createTimer()));
 	}
 
 	/**

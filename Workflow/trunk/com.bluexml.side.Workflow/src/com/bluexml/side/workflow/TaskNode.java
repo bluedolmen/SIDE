@@ -6,7 +6,6 @@
  */
 package com.bluexml.side.workflow;
 
-import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
 import org.eclipse.emf.common.util.EList;
 

@@ -29,7 +29,7 @@
       <genEnumLiterals ecoreEnumLiteral="Workflow.ecore#//BPMAssignmentType/One_user"/>
       <genEnumLiterals ecoreEnumLiteral="Workflow.ecore#//BPMAssignmentType/One_group"/>
     </genEnums>
-    <genClasses ecoreClass="Workflow.ecore#//WorkflowModelElement"/>
+    <genClasses image="false" ecoreClass="Workflow.ecore#//WorkflowModelElement"/>
     <genClasses ecoreClass="Workflow.ecore#//Process">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Process/swimlane"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Process/startstate"/>
@@ -40,8 +40,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Process/fork"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Process/join"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Process/decision"/>
-      <genFeatures property="Readonly" children="true" createChild="false" propertyCategory=""
-          propertyDescription="" ecoreFeature="ecore:EReference Workflow.ecore#//Process/elements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Process/elements"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Swimlane">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Swimlane/name"/>
