@@ -26,6 +26,7 @@ class KerblueEnvironment extends EcoreEnvironment {
         defineCustomOperations();
     }
     
+    
     // this constructor is used to initialize child environments
     KerblueEnvironment(KerblueEnvironment parent) {
         super(parent);

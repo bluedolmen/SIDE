@@ -1,5 +1,6 @@
 package com.bluexml.side.Utils.MetaModel.validate.OCLextension;
 
+import java.lang.reflect.Method;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,6 +21,12 @@ class KerblueEvaluationEnvironment extends EcoreEvaluationEnvironment {
 	public KerblueEvaluationEnvironment(
 			EvaluationEnvironment<EClassifier, EOperation, EStructuralFeature, EClass, EObject> parent) {
 		super(parent);
+	}
+	
+	@Override
+	protected Method getJavaMethodFor(EOperation operation, Object receiver) {
+		//TODO : search and all class and super class of receiver is the operation exists.
+		return super.getJavaMethodFor(operation, receiver);
 	}
 
 	public Object callOperation(EOperation operation, int opcode,
