@@ -269,7 +269,7 @@ public class WfCreationUtils extends AbstractCreationUtils {
 		GraphNode events = createGraphNode(element,
 				WorkflowPackage.START_STATE__EVENT, presentation);
 		events.setContainer(nodeParent);
-		
+
 		return nodeParent;
 	}
 

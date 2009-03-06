@@ -70,7 +70,7 @@ public class DecisionRestoreConnectionCommand extends
 						// autoRef not allowed
 					} else {
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createTransitionFromStartStateToDecision(
+						createTransitionFromStartStateToDecision_To(
 								graphElementTgt, graphElementSrc);
 					}
 				}
@@ -187,8 +187,8 @@ public class DecisionRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createTransitionFromStartStateToDecision(GraphElement srcElt,
-			GraphElement targetElt) {
+	private void createTransitionFromStartStateToDecision_To(
+			GraphElement srcElt, GraphElement targetElt) {
 		StartState sourceObject = (StartState) Utils.getElement(srcElt);
 		Decision targetObject = (Decision) Utils.getElement(targetElt);
 
@@ -197,7 +197,7 @@ public class DecisionRestoreConnectionCommand extends
 			Object obj = it.next();
 			if (obj instanceof Transition) {
 				Transition edgeObject = (Transition) obj;
-				if (sourceObject.equals(edgeObject.getTo())
+				if (targetObject.equals(edgeObject.getTo())
 						&& sourceObject.getTransition().contains(edgeObject)) {
 					// check if the relation does not exists yet
 					List<GraphEdge> existing = getExistingEdges(srcElt,

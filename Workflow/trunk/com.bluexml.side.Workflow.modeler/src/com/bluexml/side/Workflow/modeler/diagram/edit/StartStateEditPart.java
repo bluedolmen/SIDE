@@ -90,7 +90,7 @@ public class StartStateEditPart extends EMFGraphNodeEditPart {
 
 	/**
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
-	 * @generated
+	 * @_generated
 	 */
 	protected IFigure createFigure() {
 		StartState state = (StartState) Utils.getElement(getGraphNode());

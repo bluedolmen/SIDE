@@ -72,7 +72,7 @@ public class TaskNodeRestoreConnectionCommand extends
 						// autoRef not allowed
 					} else {
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createTransitionFromStartStateToTaskNode(
+						createTransitionFromStartStateToTaskNode_To(
 								graphElementTgt, graphElementSrc);
 					}
 				}
@@ -199,8 +199,8 @@ public class TaskNodeRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createTransitionFromStartStateToTaskNode(GraphElement srcElt,
-			GraphElement targetElt) {
+	private void createTransitionFromStartStateToTaskNode_To(
+			GraphElement srcElt, GraphElement targetElt) {
 		StartState sourceObject = (StartState) Utils.getElement(srcElt);
 		TaskNode targetObject = (TaskNode) Utils.getElement(targetElt);
 
@@ -209,7 +209,7 @@ public class TaskNodeRestoreConnectionCommand extends
 			Object obj = it.next();
 			if (obj instanceof Transition) {
 				Transition edgeObject = (Transition) obj;
-				if (sourceObject.equals(edgeObject.getTo())
+				if (targetObject.equals(edgeObject.getTo())
 						&& sourceObject.getTransition().contains(edgeObject)) {
 					// check if the relation does not exists yet
 					List<GraphEdge> existing = getExistingEdges(srcElt,

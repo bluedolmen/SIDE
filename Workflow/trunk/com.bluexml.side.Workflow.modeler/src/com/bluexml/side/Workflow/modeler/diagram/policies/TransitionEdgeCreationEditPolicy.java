@@ -467,26 +467,26 @@ public class TransitionEdgeCreationEditPolicy extends
 		if (sourceObject instanceof com.bluexml.side.workflow.StartState
 				&& targetObject instanceof com.bluexml.side.workflow.Decision) {
 			return new SourceTargetData(false, false, SourceTargetData.SOURCE,
-					"com.bluexml.side.workflow.StartState", "transition", "to",
-					null, "transition", null, null, null);
+					"com.bluexml.side.workflow.StartState", "transition", null,
+					"to", "transition", null, null, null);
 		}
 		if (sourceObject instanceof com.bluexml.side.workflow.StartState
 				&& targetObject instanceof com.bluexml.side.workflow.Join) {
 			return new SourceTargetData(false, false, SourceTargetData.SOURCE,
-					"com.bluexml.side.workflow.StartState", "transition", "to",
-					null, "transition", null, null, null);
+					"com.bluexml.side.workflow.StartState", "transition", null,
+					"to", "transition", null, null, null);
 		}
 		if (sourceObject instanceof com.bluexml.side.workflow.StartState
 				&& targetObject instanceof com.bluexml.side.workflow.Fork) {
 			return new SourceTargetData(false, false, SourceTargetData.SOURCE,
-					"com.bluexml.side.workflow.StartState", "transition", "to",
-					null, "transition", null, null, null);
+					"com.bluexml.side.workflow.StartState", "transition", null,
+					"to", "transition", null, null, null);
 		}
 		if (sourceObject instanceof com.bluexml.side.workflow.StartState
 				&& targetObject instanceof com.bluexml.side.workflow.TaskNode) {
 			return new SourceTargetData(false, false, SourceTargetData.SOURCE,
-					"com.bluexml.side.workflow.StartState", "transition", "to",
-					null, "transition", null, null, null);
+					"com.bluexml.side.workflow.StartState", "transition", null,
+					"to", "transition", null, null, null);
 		}
 		if (sourceObject instanceof com.bluexml.side.workflow.StartState
 				&& targetObject instanceof com.bluexml.side.workflow.Node) {

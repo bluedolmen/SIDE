@@ -125,14 +125,14 @@ public class EventEditPart extends EMFGraphNodeEditPart {
 		return null;
 
 	}
-	
+
 	@Override
 	protected void refreshTextAndFont() {
 		super.refreshTextAndFont();
 		Event e = (Event) Utils.getElement(getGraphNode());
 		getLabel().setText(e.getType().toString());
 	}
-	
+
 	@SuppressWarnings("restriction")
 	@Override
 	public void performRequest(Request request) {
@@ -142,12 +142,13 @@ public class EventEditPart extends EMFGraphNodeEditPart {
 			if (event.getAction().size() == 0) {
 				event.getAction().add(WorkflowFactory.eINSTANCE.createAction());
 			}
-			action = event.getAction().get(0);	
-				
+			action = event.getAction().get(0);
 
-			ActionEditDialog dlg = new ActionEditDialog(action, ModelerPlugin.getActiveWorkbenchShell());
+			ActionEditDialog dlg = new ActionEditDialog(action, ModelerPlugin
+					.getActiveWorkbenchShell());
 			if (dlg.open() == Window.OK) {
-				ActionUpdateCommand command = new ActionUpdateCommand(action,dlg.getData());
+				ActionUpdateCommand command = new ActionUpdateCommand(action,
+						dlg.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
 				refresh();
 			}

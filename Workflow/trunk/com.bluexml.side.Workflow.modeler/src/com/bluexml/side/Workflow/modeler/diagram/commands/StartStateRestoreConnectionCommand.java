@@ -82,7 +82,7 @@ public class StartStateRestoreConnectionCommand extends
 						// autoRef not allowed
 					} else {
 						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-						createTransitionFromStartStateToDecision(
+						createTransitionFromStartStateToDecision_To(
 								graphElementSrc, graphElementTgt);
 					}
 				}
@@ -92,8 +92,8 @@ public class StartStateRestoreConnectionCommand extends
 						// autoRef not allowed
 					} else {
 						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-						createTransitionFromStartStateToJoin(graphElementSrc,
-								graphElementTgt);
+						createTransitionFromStartStateToJoin_To(
+								graphElementSrc, graphElementTgt);
 					}
 				}
 
@@ -102,8 +102,8 @@ public class StartStateRestoreConnectionCommand extends
 						// autoRef not allowed
 					} else {
 						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-						createTransitionFromStartStateToFork(graphElementSrc,
-								graphElementTgt);
+						createTransitionFromStartStateToFork_To(
+								graphElementSrc, graphElementTgt);
 					}
 				}
 
@@ -112,7 +112,7 @@ public class StartStateRestoreConnectionCommand extends
 						// autoRef not allowed
 					} else {
 						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-						createTransitionFromStartStateToTaskNode(
+						createTransitionFromStartStateToTaskNode_To(
 								graphElementSrc, graphElementTgt);
 					}
 				}
@@ -195,8 +195,8 @@ public class StartStateRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createTransitionFromStartStateToDecision(GraphElement srcElt,
-			GraphElement targetElt) {
+	private void createTransitionFromStartStateToDecision_To(
+			GraphElement srcElt, GraphElement targetElt) {
 		StartState sourceObject = (StartState) Utils.getElement(srcElt);
 		Decision targetObject = (Decision) Utils.getElement(targetElt);
 
@@ -205,7 +205,7 @@ public class StartStateRestoreConnectionCommand extends
 			Object obj = it.next();
 			if (obj instanceof Transition) {
 				Transition edgeObject = (Transition) obj;
-				if (sourceObject.equals(edgeObject.getTo())
+				if (targetObject.equals(edgeObject.getTo())
 						&& sourceObject.getTransition().contains(edgeObject)) {
 					// check if the relation does not exists yet
 					List<GraphEdge> existing = getExistingEdges(srcElt,
@@ -234,7 +234,7 @@ public class StartStateRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createTransitionFromStartStateToJoin(GraphElement srcElt,
+	private void createTransitionFromStartStateToJoin_To(GraphElement srcElt,
 			GraphElement targetElt) {
 		StartState sourceObject = (StartState) Utils.getElement(srcElt);
 		Join targetObject = (Join) Utils.getElement(targetElt);
@@ -244,7 +244,7 @@ public class StartStateRestoreConnectionCommand extends
 			Object obj = it.next();
 			if (obj instanceof Transition) {
 				Transition edgeObject = (Transition) obj;
-				if (sourceObject.equals(edgeObject.getTo())
+				if (targetObject.equals(edgeObject.getTo())
 						&& sourceObject.getTransition().contains(edgeObject)) {
 					// check if the relation does not exists yet
 					List<GraphEdge> existing = getExistingEdges(srcElt,
@@ -273,7 +273,7 @@ public class StartStateRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createTransitionFromStartStateToFork(GraphElement srcElt,
+	private void createTransitionFromStartStateToFork_To(GraphElement srcElt,
 			GraphElement targetElt) {
 		StartState sourceObject = (StartState) Utils.getElement(srcElt);
 		Fork targetObject = (Fork) Utils.getElement(targetElt);
@@ -283,7 +283,7 @@ public class StartStateRestoreConnectionCommand extends
 			Object obj = it.next();
 			if (obj instanceof Transition) {
 				Transition edgeObject = (Transition) obj;
-				if (sourceObject.equals(edgeObject.getTo())
+				if (targetObject.equals(edgeObject.getTo())
 						&& sourceObject.getTransition().contains(edgeObject)) {
 					// check if the relation does not exists yet
 					List<GraphEdge> existing = getExistingEdges(srcElt,
@@ -312,8 +312,8 @@ public class StartStateRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createTransitionFromStartStateToTaskNode(GraphElement srcElt,
-			GraphElement targetElt) {
+	private void createTransitionFromStartStateToTaskNode_To(
+			GraphElement srcElt, GraphElement targetElt) {
 		StartState sourceObject = (StartState) Utils.getElement(srcElt);
 		TaskNode targetObject = (TaskNode) Utils.getElement(targetElt);
 
@@ -322,7 +322,7 @@ public class StartStateRestoreConnectionCommand extends
 			Object obj = it.next();
 			if (obj instanceof Transition) {
 				Transition edgeObject = (Transition) obj;
-				if (sourceObject.equals(edgeObject.getTo())
+				if (targetObject.equals(edgeObject.getTo())
 						&& sourceObject.getTransition().contains(edgeObject)) {
 					// check if the relation does not exists yet
 					List<GraphEdge> existing = getExistingEdges(srcElt,
