@@ -53,6 +53,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//StartState/transition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//StartState/event"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//StartState/assignmentType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Workflow.ecore#//StartState/initiator"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//EndState">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//EndState/name"/>

@@ -5,7 +5,7 @@
    <extension point="org.eclipse.ui.editors">
       <editor
             class="com.bluexml.side.Workflow.modeler.editor.WorkflowEditor"
-            icon="icons/Workflow.gif"
+            icon="icons/Editor.gif"
             default="true"
             name="Workflow modeler"
             id="com.bluexml.side.Workflow.modeler.editor.WorkflowEditor"
@@ -16,7 +16,7 @@
    
    <extension point="org.eclipse.ui.newWizards">
       <wizard
-            icon="icons/Workflow.gif"
+            icon="icons/Editor.gif"
             class="com.bluexml.side.Workflow.modeler.wizards.NewWorkflowDiagrams"
             category="com.bluexml.side.modeler.category.ID"
             name="Workflow Diagram"

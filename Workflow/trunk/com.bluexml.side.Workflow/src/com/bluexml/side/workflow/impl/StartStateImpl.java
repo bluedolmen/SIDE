@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import com.bluexml.side.workflow.BPMAssignmentType;
 import com.bluexml.side.workflow.Event;
 import com.bluexml.side.workflow.StartState;
+import com.bluexml.side.workflow.Swimlane;
 import com.bluexml.side.workflow.Transition;
 import com.bluexml.side.workflow.WorkflowPackage;
 
@@ -34,6 +35,7 @@ import com.bluexml.side.workflow.WorkflowPackage;
  *   <li>{@link com.bluexml.side.workflow.impl.StartStateImpl#getTransition <em>Transition</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.StartStateImpl#getEvent <em>Event</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.StartStateImpl#getAssignmentType <em>Assignment Type</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.impl.StartStateImpl#getInitiator <em>Initiator</em>}</li>
  * </ul>
  * </p>
  *
@@ -99,6 +101,16 @@ public class StartStateImpl extends StateImpl implements StartState {
 	 * @ordered
 	 */
 	protected BPMAssignmentType assignmentType = ASSIGNMENT_TYPE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getInitiator() <em>Initiator</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInitiator()
+	 * @generated
+	 * @ordered
+	 */
+	protected Swimlane initiator;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -190,6 +202,44 @@ public class StartStateImpl extends StateImpl implements StartState {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Swimlane getInitiator() {
+		if (initiator != null && initiator.eIsProxy()) {
+			InternalEObject oldInitiator = (InternalEObject)initiator;
+			initiator = (Swimlane)eResolveProxy(oldInitiator);
+			if (initiator != oldInitiator) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, WorkflowPackage.START_STATE__INITIATOR, oldInitiator, initiator));
+			}
+		}
+		return initiator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Swimlane basicGetInitiator() {
+		return initiator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInitiator(Swimlane newInitiator) {
+		Swimlane oldInitiator = initiator;
+		initiator = newInitiator;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.START_STATE__INITIATOR, oldInitiator, initiator));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -217,6 +267,9 @@ public class StartStateImpl extends StateImpl implements StartState {
 				return getEvent();
 			case WorkflowPackage.START_STATE__ASSIGNMENT_TYPE:
 				return getAssignmentType();
+			case WorkflowPackage.START_STATE__INITIATOR:
+				if (resolve) return getInitiator();
+				return basicGetInitiator();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -244,6 +297,9 @@ public class StartStateImpl extends StateImpl implements StartState {
 			case WorkflowPackage.START_STATE__ASSIGNMENT_TYPE:
 				setAssignmentType((BPMAssignmentType)newValue);
 				return;
+			case WorkflowPackage.START_STATE__INITIATOR:
+				setInitiator((Swimlane)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -268,6 +324,9 @@ public class StartStateImpl extends StateImpl implements StartState {
 			case WorkflowPackage.START_STATE__ASSIGNMENT_TYPE:
 				setAssignmentType(ASSIGNMENT_TYPE_EDEFAULT);
 				return;
+			case WorkflowPackage.START_STATE__INITIATOR:
+				setInitiator((Swimlane)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -288,6 +347,8 @@ public class StartStateImpl extends StateImpl implements StartState {
 				return event != null && !event.isEmpty();
 			case WorkflowPackage.START_STATE__ASSIGNMENT_TYPE:
 				return assignmentType != ASSIGNMENT_TYPE_EDEFAULT;
+			case WorkflowPackage.START_STATE__INITIATOR:
+				return initiator != null;
 		}
 		return super.eIsSet(featureID);
 	}

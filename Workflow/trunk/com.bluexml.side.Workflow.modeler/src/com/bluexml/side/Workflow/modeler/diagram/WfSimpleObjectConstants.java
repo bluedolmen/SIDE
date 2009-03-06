@@ -27,4 +27,9 @@ public interface WfSimpleObjectConstants {
 	 * @generated
 	 */
 	String SIMPLE_OBJECT_MANAGE = "manage";
+	/**
+	 * The name that identify the <i>initialize</i> SimpleObject.
+	 * @generated
+	 */
+	String SIMPLE_OBJECT_INITIALIZE = "initialize";
 }

@@ -64,6 +64,7 @@ public class StartStateItemProvider
 
 			addNamePropertyDescriptor(object);
 			addAssignmentTypePropertyDescriptor(object);
+			addInitiatorPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -108,6 +109,28 @@ public class StartStateItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Initiator feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addInitiatorPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_StartState_initiator_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_StartState_initiator_feature", "_UI_StartState_type"),
+				 WorkflowPackage.Literals.START_STATE__INITIATOR,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

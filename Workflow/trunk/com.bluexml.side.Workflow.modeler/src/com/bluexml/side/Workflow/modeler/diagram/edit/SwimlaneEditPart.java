@@ -32,6 +32,7 @@ import org.topcased.modeler.utils.Utils;
 import com.bluexml.side.Workflow.modeler.diagram.WfEditPolicyConstants;
 import com.bluexml.side.Workflow.modeler.diagram.commands.SwimlaneRestoreConnectionCommand;
 import com.bluexml.side.Workflow.modeler.diagram.figures.SwimlaneFigure;
+import com.bluexml.side.Workflow.modeler.diagram.policies.initializeEdgeCreationEditPolicy;
 import com.bluexml.side.Workflow.modeler.diagram.policies.manageEdgeCreationEditPolicy;
 import com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferenceConstants;
 
@@ -61,6 +62,9 @@ public class SwimlaneEditPart extends EMFGraphNodeEditPart {
 
 		installEditPolicy(WfEditPolicyConstants.MANAGE_EDITPOLICY,
 				new manageEdgeCreationEditPolicy());
+
+		installEditPolicy(WfEditPolicyConstants.INITIALIZE_EDITPOLICY,
+				new initializeEdgeCreationEditPolicy());
 
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {

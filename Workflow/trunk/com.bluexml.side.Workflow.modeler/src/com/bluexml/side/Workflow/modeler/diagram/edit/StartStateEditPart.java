@@ -33,6 +33,7 @@ import com.bluexml.side.Workflow.modeler.diagram.WfEditPolicyConstants;
 import com.bluexml.side.Workflow.modeler.diagram.commands.StartStateRestoreConnectionCommand;
 import com.bluexml.side.Workflow.modeler.diagram.figures.StartStateFigure;
 import com.bluexml.side.Workflow.modeler.diagram.policies.TransitionEdgeCreationEditPolicy;
+import com.bluexml.side.Workflow.modeler.diagram.policies.initializeEdgeCreationEditPolicy;
 import com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferenceConstants;
 
 /**
@@ -61,6 +62,9 @@ public class StartStateEditPart extends EMFGraphNodeEditPart {
 
 		installEditPolicy(WfEditPolicyConstants.TRANSITION_EDITPOLICY,
 				new TransitionEdgeCreationEditPolicy());
+
+		installEditPolicy(WfEditPolicyConstants.INITIALIZE_EDITPOLICY,
+				new initializeEdgeCreationEditPolicy());
 
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {

@@ -14,39 +14,22 @@
  ******************************************************************************/
 package com.bluexml.side.Workflow.modeler.diagram.figures;
 
-import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.LineBorder;
-import org.topcased.draw2d.figures.ComposedLabel;
-import org.topcased.draw2d.figures.EditableLabel;
-import org.topcased.draw2d.figures.ILabel;
-import org.topcased.draw2d.figures.Label;
-import org.topcased.draw2d.figures.ManFigure;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
+import org.eclipse.swt.SWT;
 
 /**
  * @generated
  */
-public class SwimlaneFigure extends
-		org.topcased.draw2d.figures.GraphicWithLabelFigure {
+public class initializeFigure extends PolylineConnectionEx {
+
 	/**
-	 * Constructor
+	 * The constructor
 	 *
-	 * @_generated
+	 * @generated
 	 */
-	public SwimlaneFigure() {
+	public initializeFigure() {
 		super();
-		setBorder(new LineBorder());
+		setLineStyle(SWT.LINE_SOLID);
 	}
 
-	@Override
-	protected IFigure createBodyFigure() {
-		ManFigure man = new ManFigure();
-		man.setSize(30, 30);
-		return man;
-	}
-
-	@Override
-	protected ILabel createLabel() {
-		return new ComposedLabel(new Label(), new EditableLabel(), new Label(),
-				false);
-	}
 }

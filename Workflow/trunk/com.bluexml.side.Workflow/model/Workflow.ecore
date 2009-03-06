@@ -44,6 +44,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="event" upperBound="-1"
         eType="#//Event" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="assignmentType" eType="#//BPMAssignmentType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initiator" lowerBound="1"
+        eType="#//Swimlane"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EndState" eSuperTypes="#//State">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"

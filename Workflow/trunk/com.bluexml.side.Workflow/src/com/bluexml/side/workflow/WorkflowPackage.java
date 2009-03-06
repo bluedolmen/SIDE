@@ -374,13 +374,22 @@ public interface WorkflowPackage extends EPackage {
 	int START_STATE__ASSIGNMENT_TYPE = STATE_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Initiator</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int START_STATE__INITIATOR = STATE_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Start State</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int START_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 4;
+	int START_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.EndStateImpl <em>End State</em>}' class.
@@ -1258,6 +1267,17 @@ public interface WorkflowPackage extends EPackage {
 	EAttribute getStartState_AssignmentType();
 
 	/**
+	 * Returns the meta object for the reference '{@link com.bluexml.side.workflow.StartState#getInitiator <em>Initiator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Initiator</em>'.
+	 * @see com.bluexml.side.workflow.StartState#getInitiator()
+	 * @see #getStartState()
+	 * @generated
+	 */
+	EReference getStartState_Initiator();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.EndState <em>End State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2073,6 +2093,14 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute START_STATE__ASSIGNMENT_TYPE = eINSTANCE.getStartState_AssignmentType();
+
+		/**
+		 * The meta object literal for the '<em><b>Initiator</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference START_STATE__INITIATOR = eINSTANCE.getStartState_Initiator();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.EndStateImpl <em>End State</em>}' class.

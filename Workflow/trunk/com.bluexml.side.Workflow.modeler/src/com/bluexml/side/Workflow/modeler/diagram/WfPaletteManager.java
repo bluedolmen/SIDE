@@ -191,6 +191,14 @@ public class WfPaletteManager extends ModelerPaletteManager {
 				factory, WfImageRegistry.getImageDescriptor("MANAGE"),
 				WfImageRegistry.getImageDescriptor("MANAGE_LARGE")));
 
+		factory = new GraphElementCreationFactory(creationUtils,
+				WfSimpleObjectConstants.SIMPLE_OBJECT_INITIALIZE, "default",
+				false);
+		entries.add(new ModelerConnectionCreationToolEntry("Initialize",
+				"Initialize", factory, WfImageRegistry
+						.getImageDescriptor("INITIALIZE"), WfImageRegistry
+						.getImageDescriptor("INITIALIZE_LARGE")));
+
 		linksDrawer.addAll(entries);
 		getRoot().add(linksDrawer);
 	}

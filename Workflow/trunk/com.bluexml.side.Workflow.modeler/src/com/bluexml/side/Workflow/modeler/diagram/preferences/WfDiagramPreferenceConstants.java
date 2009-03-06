@@ -254,4 +254,22 @@ public interface WfDiagramPreferenceConstants {
 	 */
 	String MANAGE_EDGE_DEFAULT_ROUTER = "manage Edge Default Router";
 
+	/**
+	 * The key used to install a <i>initialize Edge Default Font</i> Preference.
+	 * @generated
+	 */
+	String INITIALIZE_EDGE_DEFAULT_FONT = "initialize Edge Default Font";
+
+	/**
+	 * The key used to install a <i>initialize Edge Default Foreground Color</i> Preference.
+	 * @generated
+	 */
+	String INITIALIZE_EDGE_DEFAULT_FOREGROUND_COLOR = "initialize Edge Default Foreground Color";
+
+	/**
+	 * The key used to install a <i>initialize Edge Default Router</i> Preference.
+	 * @generated
+	 */
+	String INITIALIZE_EDGE_DEFAULT_ROUTER = "initialize Edge Default Router";
+
 }

@@ -17,6 +17,7 @@
     <paletteCategories xmi:id="_aiHJYAnFEd6njOkWCso0oA" name="Links">
       <items xmi:id="_beYkYAnFEd6njOkWCso0oA" name="Transition" part="_BqDDoAnFEd6njOkWCso0oA"/>
       <items xmi:id="_90fxkAnIEd6njOkWCso0oA" name="Manage" part="_ZbR80AnIEd6njOkWCso0oA"/>
+      <items xmi:id="_VWGzAAnPEd6njOkWCso0oA" name="Initialize" part="_Lmi9cAnPEd6njOkWCso0oA"/>
     </paletteCategories>
   </palette>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_ExDMEIyBEdy0-r37LrMUlA" object="_6tdnQIyAEdy0-r37LrMUlA" type="Class" layout="ClassLayout" defaultWidth="-1" defaultHeight="-1" minimumWidth="50" minimumHeight="30" maximumHeight="-1"/>
@@ -266,6 +267,11 @@
       <refTargetToSource xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//TaskNode/swimlane"/>
     </sourceTargetCouple>
   </parts>
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_Lmi9cAnPEd6njOkWCso0oA" object="_HFcw0AnPEd6njOkWCso0oA" defaultForegroundColor="27,134,199" targetDecoration="ARROW">
+    <sourceTargetCouple xmi:id="_R3ewAAnPEd6njOkWCso0oA" sourceNode="_IMmu4I0vEdy2iZ_dX7q7fg" targetNode="_xPUcYIyBEdy0-r37LrMUlA">
+      <refTargetToSource xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//StartState/initiator"/>
+    </sourceTargetCouple>
+  </parts>
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_3n4WYIyAEdy0-r37LrMUlA">
     <genClass href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/StartState"/>
   </objects>
@@ -303,6 +309,7 @@
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_3MCaYAnJEd6njOkWCso0oA">
     <genClass href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/Node"/>
   </objects>
+  <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_HFcw0AnPEd6njOkWCso0oA" name="initialize"/>
   <genModel href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#/"/>
   <templateRootObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/Process"/>
   <editorConfigurator href="Workflow.editorconfigurator#_bc130Qm7Ed6njOkWCso0oA"/>
