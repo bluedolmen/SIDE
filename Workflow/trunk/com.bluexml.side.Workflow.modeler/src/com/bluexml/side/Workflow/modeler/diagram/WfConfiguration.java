@@ -30,6 +30,7 @@ import org.topcased.modeler.graphconf.exceptions.MissingGraphConfFileException;
 
 import com.bluexml.side.Workflow.modeler.WorkflowPlugin;
 import com.bluexml.side.Workflow.modeler.diagram.edit.ActionEditPart;
+import com.bluexml.side.Workflow.modeler.diagram.edit.AttributeEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.DecisionEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.EndStateEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.EventEditPart;
@@ -132,6 +133,10 @@ public class WfConfiguration implements IConfiguration {
 				new EditPart2ModelAdapterFactory(TransitionEditPart.class,
 						com.bluexml.side.workflow.Transition.class),
 				TransitionEditPart.class);
+		Platform.getAdapterManager().registerAdapters(
+				new EditPart2ModelAdapterFactory(AttributeEditPart.class,
+						com.bluexml.side.workflow.Attribute.class),
+				AttributeEditPart.class);
 	}
 
 	/**

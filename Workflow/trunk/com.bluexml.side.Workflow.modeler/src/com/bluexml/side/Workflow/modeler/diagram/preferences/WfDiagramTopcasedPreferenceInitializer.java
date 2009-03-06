@@ -293,6 +293,24 @@ public class WfDiagramTopcasedPreferenceInitializer implements
 				WfDiagramPreferenceConstants.HASTIMER_EDGE_DEFAULT_ROUTER,
 				"ObliqueRouter");
 
+		// Initialize the default value of the ATTRIBUTE_DEFAULT_BACKGROUND_COLOR property 
+		defaultWfPreference
+				.put(
+						WfDiagramPreferenceConstants.ATTRIBUTE_DEFAULT_BACKGROUND_COLOR,
+						"255,255,255");
+
+		// Initialize the default value of the ATTRIBUTE_DEFAULT_FOREGROUND_COLOR property
+		defaultWfPreference
+				.put(
+						WfDiagramPreferenceConstants.ATTRIBUTE_DEFAULT_FOREGROUND_COLOR,
+						"0,0,0");
+
+		// Initialize the default value of the ATTRIBUTE_DEFAULT_FONT property
+		defaultWfPreference.put(
+				WfDiagramPreferenceConstants.ATTRIBUTE_DEFAULT_FONT,
+				StringConverter.asFontData("Lucida Grande-regular-11")
+						.toString());
+
 		return defaultWfPreference;
 	}
 }

@@ -7,6 +7,7 @@
 package com.bluexml.side.workflow.provider;
 
 
+import com.bluexml.side.clazz.ClazzFactory;
 import java.util.Collection;
 import java.util.List;
 
@@ -65,6 +66,7 @@ public class StartStateItemProvider
 			addNamePropertyDescriptor(object);
 			addAssignmentTypePropertyDescriptor(object);
 			addInitiatorPropertyDescriptor(object);
+			addClazzPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -136,6 +138,28 @@ public class StartStateItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Clazz feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addClazzPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_StartState_clazz_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_StartState_clazz_feature", "_UI_StartState_type"),
+				 WorkflowPackage.Literals.START_STATE__CLAZZ,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -149,6 +173,7 @@ public class StartStateItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(WorkflowPackage.Literals.START_STATE__TRANSITION);
 			childrenFeatures.add(WorkflowPackage.Literals.START_STATE__EVENT);
+			childrenFeatures.add(WorkflowPackage.Literals.START_STATE__ATTRIBUTES);
 		}
 		return childrenFeatures;
 	}
@@ -209,6 +234,7 @@ public class StartStateItemProvider
 				return;
 			case WorkflowPackage.START_STATE__TRANSITION:
 			case WorkflowPackage.START_STATE__EVENT:
+			case WorkflowPackage.START_STATE__ATTRIBUTES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -235,6 +261,11 @@ public class StartStateItemProvider
 			(createChildParameter
 				(WorkflowPackage.Literals.START_STATE__EVENT,
 				 WorkflowFactory.eINSTANCE.createEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(WorkflowPackage.Literals.START_STATE__ATTRIBUTES,
+				 WorkflowFactory.eINSTANCE.createAttribute()));
 	}
 
 }

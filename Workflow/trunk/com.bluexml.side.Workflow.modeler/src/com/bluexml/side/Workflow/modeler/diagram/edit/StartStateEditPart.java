@@ -97,13 +97,29 @@ public class StartStateEditPart extends EMFGraphNodeEditPart {
 		WfConfiguration config = new WfConfiguration();
 
 		if (getGraphNode().getContained().size() > 0) {
-			GraphNode attributesListNode = (GraphNode) getGraphNode().getContained().get(0);
-			EList<DiagramElement> attributesList = attributesListNode.getContained();
+			GraphNode attributesListNode = (GraphNode) getGraphNode()
+					.getContained().get(0);
+			EList<DiagramElement> attributesList = attributesListNode
+					.getContained();
 			while (attributesList.size() > 0)
 				attributesList.remove(0);
-			for (Object o : state.getEvent()) {
-				GraphElement elt = config.getCreationUtils().createGraphElement((EObject) o);
+			for (Object o : state.getAttributes()) {
+				GraphElement elt = config.getCreationUtils()
+						.createGraphElement((EObject) o);
 				attributesList.add(elt);
+			}
+		}
+
+		if (getGraphNode().getContained().size() > 1) {
+			GraphNode eventsListNode = (GraphNode) getGraphNode()
+					.getContained().get(1);
+			EList<DiagramElement> eventsList = eventsListNode.getContained();
+			while (eventsList.size() > 0)
+				eventsList.remove(0);
+			for (Object o : state.getEvent()) {
+				GraphElement elt = config.getCreationUtils()
+						.createGraphElement((EObject) o);
+				eventsList.add(elt);
 			}
 		}
 

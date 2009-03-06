@@ -13,5 +13,7 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Workflow;visibility:=reexport,
  org.eclipse.emf.edit;visibility:=reexport,
  com.bluexml.side.Common;visibility:=reexport,
- com.bluexml.side.Common.edit;visibility:=reexport
+ com.bluexml.side.Common.edit;visibility:=reexport,
+ com.bluexml.side.Class;bundle-version="1.0.0",
+ com.bluexml.side.Class.edit;bundle-version="1.0.0"
 Eclipse-LazyStart: true

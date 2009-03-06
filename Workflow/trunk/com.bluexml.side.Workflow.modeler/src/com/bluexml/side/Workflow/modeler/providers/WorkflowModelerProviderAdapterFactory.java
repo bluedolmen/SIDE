@@ -175,6 +175,13 @@ public class WorkflowModelerProviderAdapterFactory extends
 	private StateModelerProvider stateModelerProvider;
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.workflow.Attribute} instances.
+	 * 
+	 * @generated
+	 */
+	private AttributeModelerProvider attributeModelerProvider;
+
+	/**
 	 * This constructs an instance.
 	 * 
 	 * @generated
@@ -534,6 +541,20 @@ public class WorkflowModelerProviderAdapterFactory extends
 	}
 
 	/**
+	 * This creates an adapter for a {@link com.bluexml.side.workflow.Attribute}.
+	 *
+	 * @return the Adapter
+	 * @generated
+	 */
+	public Adapter createAttributeAdapter() {
+		if (attributeModelerProvider == null) {
+			attributeModelerProvider = new AttributeModelerProvider(this);
+		}
+
+		return attributeModelerProvider;
+	}
+
+	/**
 	 * This disposes all of the item providers created by this factory.
 	 * 
 	 * @generated
@@ -592,6 +613,9 @@ public class WorkflowModelerProviderAdapterFactory extends
 		}
 		if (stateModelerProvider != null) {
 			stateModelerProvider.dispose();
+		}
+		if (attributeModelerProvider != null) {
+			attributeModelerProvider.dispose();
 		}
 	}
 

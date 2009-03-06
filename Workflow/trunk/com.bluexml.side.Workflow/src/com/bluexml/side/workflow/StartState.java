@@ -6,6 +6,8 @@
  */
 package com.bluexml.side.workflow;
 
+import com.bluexml.side.clazz.Attribute;
+import com.bluexml.side.clazz.Clazz;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -21,6 +23,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.bluexml.side.workflow.StartState#getEvent <em>Event</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.StartState#getAssignmentType <em>Assignment Type</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.StartState#getInitiator <em>Initiator</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.StartState#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.StartState#getClazz <em>Clazz</em>}</li>
  * </ul>
  * </p>
  *
@@ -141,5 +145,37 @@ public interface StartState extends State {
 	 * @generated
 	 */
 	void setInitiator(Swimlane value);
+
+	/**
+	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
+	 * The list contents are of type {@link com.bluexml.side.workflow.Attribute}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Attributes</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Attributes</em>' containment reference list.
+	 * @see com.bluexml.side.workflow.WorkflowPackage#getStartState_Attributes()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Attribute> getAttributes();
+
+	/**
+	 * Returns the value of the '<em><b>Clazz</b></em>' reference list.
+	 * The list contents are of type {@link com.bluexml.side.clazz.Clazz}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Clazz</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Clazz</em>' reference list.
+	 * @see com.bluexml.side.workflow.WorkflowPackage#getStartState_Clazz()
+	 * @model
+	 * @generated
+	 */
+	EList<Clazz> getClazz();
 
 } // StartState

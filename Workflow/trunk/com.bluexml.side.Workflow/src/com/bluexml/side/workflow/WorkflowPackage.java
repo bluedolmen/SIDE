@@ -419,13 +419,31 @@ public interface WorkflowPackage extends EPackage {
 	int START_STATE__INITIATOR = STATE_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int START_STATE__ATTRIBUTES = STATE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Clazz</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int START_STATE__CLAZZ = STATE_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Start State</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int START_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 5;
+	int START_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.EndStateImpl <em>End State</em>}' class.
@@ -575,13 +593,31 @@ public interface WorkflowPackage extends EPackage {
 	int TASK_NODE__SWIMLANE = STATE_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_NODE__ATTRIBUTES = STATE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Clazz</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_NODE__CLAZZ = STATE_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Task Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_NODE_FEATURE_COUNT = STATE_FEATURE_COUNT + 5;
+	int TASK_NODE_FEATURE_COUNT = STATE_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.ProcessStateImpl <em>Process State</em>}' class.
@@ -1053,6 +1089,61 @@ public interface WorkflowPackage extends EPackage {
 	int TRANSITION_FEATURE_COUNT = 7;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.AttributeImpl <em>Attribute</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.workflow.impl.AttributeImpl
+	 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getAttribute()
+	 * @generated
+	 */
+	int ATTRIBUTE = 18;
+
+	/**
+	 * The feature id for the '<em><b>Typ</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__TYP = 0;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__TITLE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Value List</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__VALUE_LIST = 2;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__NAME = 3;
+
+	/**
+	 * The number of structural features of the '<em>Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_FEATURE_COUNT = 4;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.BPMEventType <em>BPM Event Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1060,7 +1151,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getBPMEventType()
 	 * @generated
 	 */
-	int BPM_EVENT_TYPE = 18;
+	int BPM_EVENT_TYPE = 19;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.BPMAssignmentType <em>BPM Assignment Type</em>}' enum.
@@ -1070,7 +1161,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getBPMAssignmentType()
 	 * @generated
 	 */
-	int BPM_ASSIGNMENT_TYPE = 19;
+	int BPM_ASSIGNMENT_TYPE = 20;
 
 
 	/**
@@ -1334,6 +1425,28 @@ public interface WorkflowPackage extends EPackage {
 	EReference getStartState_Initiator();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.workflow.StartState#getAttributes <em>Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Attributes</em>'.
+	 * @see com.bluexml.side.workflow.StartState#getAttributes()
+	 * @see #getStartState()
+	 * @generated
+	 */
+	EReference getStartState_Attributes();
+
+	/**
+	 * Returns the meta object for the reference list '{@link com.bluexml.side.workflow.StartState#getClazz <em>Clazz</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Clazz</em>'.
+	 * @see com.bluexml.side.workflow.StartState#getClazz()
+	 * @see #getStartState()
+	 * @generated
+	 */
+	EReference getStartState_Clazz();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.EndState <em>End State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1483,6 +1596,28 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTaskNode_Swimlane();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.workflow.TaskNode#getAttributes <em>Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Attributes</em>'.
+	 * @see com.bluexml.side.workflow.TaskNode#getAttributes()
+	 * @see #getTaskNode()
+	 * @generated
+	 */
+	EReference getTaskNode_Attributes();
+
+	/**
+	 * Returns the meta object for the reference list '{@link com.bluexml.side.workflow.TaskNode#getClazz <em>Clazz</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Clazz</em>'.
+	 * @see com.bluexml.side.workflow.TaskNode#getClazz()
+	 * @see #getTaskNode()
+	 * @generated
+	 */
+	EReference getTaskNode_Clazz();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.ProcessState <em>Process State</em>}'.
@@ -1870,6 +2005,60 @@ public interface WorkflowPackage extends EPackage {
 	EClass getState();
 
 	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.workflow.Attribute <em>Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Attribute</em>'.
+	 * @see com.bluexml.side.workflow.Attribute
+	 * @generated
+	 */
+	EClass getAttribute();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.Attribute#getTyp <em>Typ</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Typ</em>'.
+	 * @see com.bluexml.side.workflow.Attribute#getTyp()
+	 * @see #getAttribute()
+	 * @generated
+	 */
+	EAttribute getAttribute_Typ();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.Attribute#getTitle <em>Title</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Title</em>'.
+	 * @see com.bluexml.side.workflow.Attribute#getTitle()
+	 * @see #getAttribute()
+	 * @generated
+	 */
+	EAttribute getAttribute_Title();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.bluexml.side.workflow.Attribute#getValueList <em>Value List</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Value List</em>'.
+	 * @see com.bluexml.side.workflow.Attribute#getValueList()
+	 * @see #getAttribute()
+	 * @generated
+	 */
+	EReference getAttribute_ValueList();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.Attribute#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see com.bluexml.side.workflow.Attribute#getName()
+	 * @see #getAttribute()
+	 * @generated
+	 */
+	EAttribute getAttribute_Name();
+
+	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.workflow.BPMEventType <em>BPM Event Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2112,6 +2301,22 @@ public interface WorkflowPackage extends EPackage {
 		EReference START_STATE__INITIATOR = eINSTANCE.getStartState_Initiator();
 
 		/**
+		 * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference START_STATE__ATTRIBUTES = eINSTANCE.getStartState_Attributes();
+
+		/**
+		 * The meta object literal for the '<em><b>Clazz</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference START_STATE__CLAZZ = eINSTANCE.getStartState_Clazz();
+
+		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.EndStateImpl <em>End State</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2228,6 +2433,22 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TASK_NODE__SWIMLANE = eINSTANCE.getTaskNode_Swimlane();
+
+		/**
+		 * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TASK_NODE__ATTRIBUTES = eINSTANCE.getTaskNode_Attributes();
+
+		/**
+		 * The meta object literal for the '<em><b>Clazz</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TASK_NODE__CLAZZ = eINSTANCE.getTaskNode_Clazz();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.ProcessStateImpl <em>Process State</em>}' class.
@@ -2538,6 +2759,48 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EClass STATE = eINSTANCE.getState();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.AttributeImpl <em>Attribute</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.workflow.impl.AttributeImpl
+		 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getAttribute()
+		 * @generated
+		 */
+		EClass ATTRIBUTE = eINSTANCE.getAttribute();
+
+		/**
+		 * The meta object literal for the '<em><b>Typ</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE__TYP = eINSTANCE.getAttribute_Typ();
+
+		/**
+		 * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE__TITLE = eINSTANCE.getAttribute_Title();
+
+		/**
+		 * The meta object literal for the '<em><b>Value List</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ATTRIBUTE__VALUE_LIST = eINSTANCE.getAttribute_ValueList();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE__NAME = eINSTANCE.getAttribute_Name();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.BPMEventType <em>BPM Event Type</em>}' enum.

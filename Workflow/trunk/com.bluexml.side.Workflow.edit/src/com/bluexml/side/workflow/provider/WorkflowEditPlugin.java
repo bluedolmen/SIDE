@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.workflow.provider;
 
+import com.bluexml.side.clazz.provider.ClassEditPlugin;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
 
@@ -43,6 +44,7 @@ public final class WorkflowEditPlugin extends EMFPlugin {
 	public WorkflowEditPlugin() {
 		super
 		  (new ResourceLocator [] {
+		     ClassEditPlugin.INSTANCE,
 		     CommonEditPlugin.INSTANCE,
 		   });
 	}

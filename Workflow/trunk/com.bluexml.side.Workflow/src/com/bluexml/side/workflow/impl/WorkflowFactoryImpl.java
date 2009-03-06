@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import com.bluexml.side.workflow.Action;
+import com.bluexml.side.workflow.Attribute;
 import com.bluexml.side.workflow.BPMAssignmentType;
 import com.bluexml.side.workflow.BPMEventType;
 import com.bluexml.side.workflow.Decision;
@@ -31,7 +32,6 @@ import com.bluexml.side.workflow.Timer;
 import com.bluexml.side.workflow.Transition;
 import com.bluexml.side.workflow.Variable;
 import com.bluexml.side.workflow.WorkflowFactory;
-import com.bluexml.side.workflow.WorkflowModelElement;
 import com.bluexml.side.workflow.WorkflowPackage;
 
 /**
@@ -94,6 +94,7 @@ public class WorkflowFactoryImpl extends EFactoryImpl implements WorkflowFactory
 			case WorkflowPackage.TIMER: return createTimer();
 			case WorkflowPackage.VARIABLE: return createVariable();
 			case WorkflowPackage.TRANSITION: return createTransition();
+			case WorkflowPackage.ATTRIBUTE: return createAttribute();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -291,6 +292,16 @@ public class WorkflowFactoryImpl extends EFactoryImpl implements WorkflowFactory
 	public Transition createTransition() {
 		TransitionImpl transition = new TransitionImpl();
 		return transition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Attribute createAttribute() {
+		AttributeImpl attribute = new AttributeImpl();
+		return attribute;
 	}
 
 	/**

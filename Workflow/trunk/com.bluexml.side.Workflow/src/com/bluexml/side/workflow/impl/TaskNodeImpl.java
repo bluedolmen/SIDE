@@ -16,8 +16,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import com.bluexml.side.clazz.Attribute;
+import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.workflow.Event;
 import com.bluexml.side.workflow.Swimlane;
 import com.bluexml.side.workflow.TaskNode;
@@ -37,6 +40,8 @@ import com.bluexml.side.workflow.WorkflowPackage;
  *   <li>{@link com.bluexml.side.workflow.impl.TaskNodeImpl#getEvent <em>Event</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.TaskNodeImpl#getTimer <em>Timer</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.TaskNodeImpl#getSwimlane <em>Swimlane</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.impl.TaskNodeImpl#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.impl.TaskNodeImpl#getClazz <em>Clazz</em>}</li>
  * </ul>
  * </p>
  *
@@ -102,6 +107,26 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 	 * @ordered
 	 */
 	protected Swimlane swimlane;
+
+	/**
+	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAttributes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Attribute> attributes;
+
+	/**
+	 * The cached value of the '{@link #getClazz() <em>Clazz</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClazz()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Clazz> clazz;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -244,6 +269,30 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Attribute> getAttributes() {
+		if (attributes == null) {
+			attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, WorkflowPackage.TASK_NODE__ATTRIBUTES);
+		}
+		return attributes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Clazz> getClazz() {
+		if (clazz == null) {
+			clazz = new EObjectResolvingEList<Clazz>(Clazz.class, this, WorkflowPackage.TASK_NODE__CLAZZ);
+		}
+		return clazz;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -274,6 +323,8 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 				return ((InternalEList<?>)getTimer()).basicRemove(otherEnd, msgs);
 			case WorkflowPackage.TASK_NODE__SWIMLANE:
 				return basicSetSwimlane(null, msgs);
+			case WorkflowPackage.TASK_NODE__ATTRIBUTES:
+				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -297,6 +348,10 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 			case WorkflowPackage.TASK_NODE__SWIMLANE:
 				if (resolve) return getSwimlane();
 				return basicGetSwimlane();
+			case WorkflowPackage.TASK_NODE__ATTRIBUTES:
+				return getAttributes();
+			case WorkflowPackage.TASK_NODE__CLAZZ:
+				return getClazz();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -328,6 +383,14 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 			case WorkflowPackage.TASK_NODE__SWIMLANE:
 				setSwimlane((Swimlane)newValue);
 				return;
+			case WorkflowPackage.TASK_NODE__ATTRIBUTES:
+				getAttributes().clear();
+				getAttributes().addAll((Collection<? extends Attribute>)newValue);
+				return;
+			case WorkflowPackage.TASK_NODE__CLAZZ:
+				getClazz().clear();
+				getClazz().addAll((Collection<? extends Clazz>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -355,6 +418,12 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 			case WorkflowPackage.TASK_NODE__SWIMLANE:
 				setSwimlane((Swimlane)null);
 				return;
+			case WorkflowPackage.TASK_NODE__ATTRIBUTES:
+				getAttributes().clear();
+				return;
+			case WorkflowPackage.TASK_NODE__CLAZZ:
+				getClazz().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -377,6 +446,10 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 				return timer != null && !timer.isEmpty();
 			case WorkflowPackage.TASK_NODE__SWIMLANE:
 				return swimlane != null;
+			case WorkflowPackage.TASK_NODE__ATTRIBUTES:
+				return attributes != null && !attributes.isEmpty();
+			case WorkflowPackage.TASK_NODE__CLAZZ:
+				return clazz != null && !clazz.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -308,4 +308,22 @@ public interface WfDiagramPreferenceConstants {
 	 */
 	String HASTIMER_EDGE_DEFAULT_ROUTER = "hasTimer Edge Default Router";
 
+	/**
+	 * The key used to install a <i>Attribute Default Background Color</i> Preference.
+	 * @generated
+	 */
+	String ATTRIBUTE_DEFAULT_BACKGROUND_COLOR = "Attribute Default Background Color";
+
+	/**
+	 * The key used to install a <i>Attribute Default Foreground Color</i> Preference.
+	 * @generated
+	 */
+	String ATTRIBUTE_DEFAULT_FOREGROUND_COLOR = "Attribute Default Foreground Color";
+
+	/**
+	 * The key used to install a <i>Attribute Default Font</i> Preference.
+	 * @generated
+	 */
+	String ATTRIBUTE_DEFAULT_FONT = "Attribute Default Font";
+
 }

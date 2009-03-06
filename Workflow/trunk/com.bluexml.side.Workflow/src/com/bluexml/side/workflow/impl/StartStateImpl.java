@@ -15,8 +15,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import com.bluexml.side.clazz.Attribute;
+import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.workflow.BPMAssignmentType;
 import com.bluexml.side.workflow.Event;
 import com.bluexml.side.workflow.StartState;
@@ -36,6 +39,8 @@ import com.bluexml.side.workflow.WorkflowPackage;
  *   <li>{@link com.bluexml.side.workflow.impl.StartStateImpl#getEvent <em>Event</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.StartStateImpl#getAssignmentType <em>Assignment Type</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.StartStateImpl#getInitiator <em>Initiator</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.impl.StartStateImpl#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.impl.StartStateImpl#getClazz <em>Clazz</em>}</li>
  * </ul>
  * </p>
  *
@@ -111,6 +116,26 @@ public class StartStateImpl extends StateImpl implements StartState {
 	 * @ordered
 	 */
 	protected Swimlane initiator;
+
+	/**
+	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAttributes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Attribute> attributes;
+
+	/**
+	 * The cached value of the '{@link #getClazz() <em>Clazz</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClazz()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Clazz> clazz;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -240,6 +265,30 @@ public class StartStateImpl extends StateImpl implements StartState {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Attribute> getAttributes() {
+		if (attributes == null) {
+			attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, WorkflowPackage.START_STATE__ATTRIBUTES);
+		}
+		return attributes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Clazz> getClazz() {
+		if (clazz == null) {
+			clazz = new EObjectResolvingEList<Clazz>(Clazz.class, this, WorkflowPackage.START_STATE__CLAZZ);
+		}
+		return clazz;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -247,6 +296,8 @@ public class StartStateImpl extends StateImpl implements StartState {
 				return ((InternalEList<?>)getTransition()).basicRemove(otherEnd, msgs);
 			case WorkflowPackage.START_STATE__EVENT:
 				return ((InternalEList<?>)getEvent()).basicRemove(otherEnd, msgs);
+			case WorkflowPackage.START_STATE__ATTRIBUTES:
+				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -270,6 +321,10 @@ public class StartStateImpl extends StateImpl implements StartState {
 			case WorkflowPackage.START_STATE__INITIATOR:
 				if (resolve) return getInitiator();
 				return basicGetInitiator();
+			case WorkflowPackage.START_STATE__ATTRIBUTES:
+				return getAttributes();
+			case WorkflowPackage.START_STATE__CLAZZ:
+				return getClazz();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -300,6 +355,14 @@ public class StartStateImpl extends StateImpl implements StartState {
 			case WorkflowPackage.START_STATE__INITIATOR:
 				setInitiator((Swimlane)newValue);
 				return;
+			case WorkflowPackage.START_STATE__ATTRIBUTES:
+				getAttributes().clear();
+				getAttributes().addAll((Collection<? extends Attribute>)newValue);
+				return;
+			case WorkflowPackage.START_STATE__CLAZZ:
+				getClazz().clear();
+				getClazz().addAll((Collection<? extends Clazz>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -327,6 +390,12 @@ public class StartStateImpl extends StateImpl implements StartState {
 			case WorkflowPackage.START_STATE__INITIATOR:
 				setInitiator((Swimlane)null);
 				return;
+			case WorkflowPackage.START_STATE__ATTRIBUTES:
+				getAttributes().clear();
+				return;
+			case WorkflowPackage.START_STATE__CLAZZ:
+				getClazz().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -349,6 +418,10 @@ public class StartStateImpl extends StateImpl implements StartState {
 				return assignmentType != ASSIGNMENT_TYPE_EDEFAULT;
 			case WorkflowPackage.START_STATE__INITIATOR:
 				return initiator != null;
+			case WorkflowPackage.START_STATE__ATTRIBUTES:
+				return attributes != null && !attributes.isEmpty();
+			case WorkflowPackage.START_STATE__CLAZZ:
+				return clazz != null && !clazz.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

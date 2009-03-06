@@ -7,6 +7,7 @@
 package com.bluexml.side.workflow.provider;
 
 
+import com.bluexml.side.clazz.ClazzFactory;
 import java.util.Collection;
 import java.util.List;
 
@@ -64,6 +65,7 @@ public class TaskNodeItemProvider
 
 			addNamePropertyDescriptor(object);
 			addSwimlanePropertyDescriptor(object);
+			addClazzPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -113,6 +115,28 @@ public class TaskNodeItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Clazz feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addClazzPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TaskNode_clazz_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TaskNode_clazz_feature", "_UI_TaskNode_type"),
+				 WorkflowPackage.Literals.TASK_NODE__CLAZZ,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -127,6 +151,7 @@ public class TaskNodeItemProvider
 			childrenFeatures.add(WorkflowPackage.Literals.TASK_NODE__TRANSITION);
 			childrenFeatures.add(WorkflowPackage.Literals.TASK_NODE__EVENT);
 			childrenFeatures.add(WorkflowPackage.Literals.TASK_NODE__TIMER);
+			childrenFeatures.add(WorkflowPackage.Literals.TASK_NODE__ATTRIBUTES);
 		}
 		return childrenFeatures;
 	}
@@ -187,6 +212,7 @@ public class TaskNodeItemProvider
 			case WorkflowPackage.TASK_NODE__TRANSITION:
 			case WorkflowPackage.TASK_NODE__EVENT:
 			case WorkflowPackage.TASK_NODE__TIMER:
+			case WorkflowPackage.TASK_NODE__ATTRIBUTES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -218,6 +244,11 @@ public class TaskNodeItemProvider
 			(createChildParameter
 				(WorkflowPackage.Literals.TASK_NODE__TIMER,
 				 WorkflowFactory.eINSTANCE.createTimer()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(WorkflowPackage.Literals.TASK_NODE__ATTRIBUTES,
+				 WorkflowFactory.eINSTANCE.createAttribute()));
 	}
 
 }

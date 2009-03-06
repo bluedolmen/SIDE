@@ -117,4 +117,10 @@ public interface WfEditPolicyConstants {
 	 */
 	String HASTIMER_EDITPOLICY = "hasTimer EditPolicy";
 
+	/**
+	 * The key used to install an <i>Attribute</i> EditPolicy.
+	 * @generated
+	 */
+	String ATTRIBUTE_EDITPOLICY = "Attribute EditPolicy";
+
 }

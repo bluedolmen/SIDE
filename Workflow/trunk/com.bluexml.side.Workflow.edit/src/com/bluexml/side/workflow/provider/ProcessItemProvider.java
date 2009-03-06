@@ -7,6 +7,7 @@
 package com.bluexml.side.workflow.provider;
 
 
+import com.bluexml.side.clazz.ClazzFactory;
 import java.util.Collection;
 import java.util.List;
 
@@ -197,6 +198,11 @@ public class ProcessItemProvider
 			(createChildParameter
 				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
 				 WorkflowFactory.eINSTANCE.createProcess()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
+				 ClazzFactory.eINSTANCE.createClassPackage()));
 
 		newChildDescriptors.add
 			(createChildParameter

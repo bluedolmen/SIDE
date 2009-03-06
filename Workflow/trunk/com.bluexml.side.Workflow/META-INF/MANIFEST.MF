@@ -12,5 +12,6 @@ Export-Package: com.bluexml.side.workflow,
  com.bluexml.side.workflow.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- com.bluexml.side.Common;visibility:=reexport
+ com.bluexml.side.Common;visibility:=reexport,
+ com.bluexml.side.Class;bundle-version="1.0.0"
 Eclipse-LazyStart: true

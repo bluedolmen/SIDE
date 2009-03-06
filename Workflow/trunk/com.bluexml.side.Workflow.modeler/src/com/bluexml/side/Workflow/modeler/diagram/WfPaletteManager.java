@@ -98,6 +98,12 @@ public class WfPaletteManager extends ModelerPaletteManager {
 		CreationFactory factory;
 
 		factory = new GraphElementCreationFactory(creationUtils,
+				WorkflowPackage.eINSTANCE.getSwimlane(), "default");
+		entries.add(new ModelerCreationToolEntry("Actor", "Actor", factory,
+				WfImageRegistry.getImageDescriptor("SWIMLANE"), WfImageRegistry
+						.getImageDescriptor("SWIMLANE_LARGE")));
+
+		factory = new GraphElementCreationFactory(creationUtils,
 				WorkflowPackage.eINSTANCE.getTaskNode(), "default");
 		entries.add(new ModelerCreationToolEntry("Task", "Task", factory,
 				WfImageRegistry.getImageDescriptor("TASKNODE"), WfImageRegistry
@@ -158,10 +164,10 @@ public class WfPaletteManager extends ModelerPaletteManager {
 						.getImageDescriptor("EVENT_LARGE")));
 
 		factory = new GraphElementCreationFactory(creationUtils,
-				WorkflowPackage.eINSTANCE.getSwimlane(), "default");
-		entries.add(new ModelerCreationToolEntry("Actor", "Actor", factory,
-				WfImageRegistry.getImageDescriptor("SWIMLANE"), WfImageRegistry
-						.getImageDescriptor("SWIMLANE_LARGE")));
+				WorkflowPackage.eINSTANCE.getAttribute(), "default");
+		entries.add(new ModelerCreationToolEntry("Attribute", "Attribute",
+				factory, WfImageRegistry.getImageDescriptor("ATTRIBUTE"),
+				WfImageRegistry.getImageDescriptor("ATTRIBUTE_LARGE")));
 
 		objectsDrawer.addAll(entries);
 		getRoot().add(objectsDrawer);

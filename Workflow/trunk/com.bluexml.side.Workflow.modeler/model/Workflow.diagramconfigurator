@@ -2,6 +2,7 @@
 <diagramconfigurator:DiagramConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagramconfigurator="http://www.topcased.org/diagramconfigurator/0.10" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="_zpP9MHcBEdyUwq_XzqQQrw" name="Workflow" package="diagram" prefix="Wf" copyrightText="This program is free software; you can redistribute it and/or modify&#xD;&#xA; it under the terms of the GNU General Public License as published by&#xD;&#xA; the Free Software Foundation; either version 2.&#xD;&#xA;&#xD;&#xA;This program is distributed in the hope that it will be useful,&#xD;&#xA;but WITHOUT ANY WARRANTY; without even the implied warranty of&#xD;&#xA;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#xD;&#xA;GNU General Public License for more details.&#xD;&#xA;&#xD;&#xA;You should have received a copy of the GNU General Public License&#xD;&#xA;along with this program; if not, write to the Free Software&#xD;&#xA;Foundation, Inc., 59 Temple Place, Boston, MA 02111." pluginVersion="1.0" provider="blueXML" samePluginAsEditor="true">
   <palette xmi:id="_zpP9MXcBEdyUwq_XzqQQrw" name="Palette">
     <paletteCategories xmi:id="_vtTakIyCEdy0-r37LrMUlA" name="Objects">
+      <items xmi:id="_U5KhEI0vEdy2iZ_dX7q7fg" name="Actor" part="_IMmu4I0vEdy2iZ_dX7q7fg"/>
       <items xmi:id="_wqZU8IyCEdy0-r37LrMUlA" name="Task" part="_ExDMEIyBEdy0-r37LrMUlA"/>
       <items xmi:id="_5bgGIAnKEd6njOkWCso0oA" name="Node" part="__fjIsAnJEd6njOkWCso0oA"/>
       <items xmi:id="_zM9_YIyCEdy0-r37LrMUlA" name="Start state" part="_xPUcYIyBEdy0-r37LrMUlA"/>
@@ -12,7 +13,7 @@
       <items xmi:id="_1q8lUJgVEdyQBd4HDFrozA" name="Timer" part="_aXolIJgVEdyQBd4HDFrozA"/>
       <items xmi:id="_DR40gIyDEdy0-r37LrMUlA" name="Action" part="_Yz6oAIyCEdy0-r37LrMUlA"/>
       <items xmi:id="_E_HyYIyDEdy0-r37LrMUlA" name="Event" part="_TMDnoIyCEdy0-r37LrMUlA"/>
-      <items xmi:id="_U5KhEI0vEdy2iZ_dX7q7fg" name="Actor" part="_IMmu4I0vEdy2iZ_dX7q7fg"/>
+      <items xmi:id="_UznZcApdEd6Mru3BnMqJHQ" name="Attribute" part="_Ly5m4ApdEd6Mru3BnMqJHQ"/>
     </paletteCategories>
     <paletteCategories xmi:id="_aiHJYAnFEd6njOkWCso0oA" name="Links">
       <items xmi:id="_beYkYAnFEd6njOkWCso0oA" name="Transition" part="_BqDDoAnFEd6njOkWCso0oA"/>
@@ -284,6 +285,7 @@
       <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/timer"/>
     </sourceTargetCouple>
   </parts>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_Ly5m4ApdEd6Mru3BnMqJHQ" object="_9zvkYApcEd6Mru3BnMqJHQ" type="Label"/>
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_3n4WYIyAEdy0-r37LrMUlA">
     <genClass href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/StartState"/>
   </objects>
@@ -324,6 +326,9 @@
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_HFcw0AnPEd6njOkWCso0oA" name="initialize"/>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_jJosgQpMEd6Mru3BnMqJHQ" name="actions"/>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_dJ0CoApNEd6Mru3BnMqJHQ" name="hasTimer"/>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_9zvkYApcEd6Mru3BnMqJHQ">
+    <genClass href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/Attribute"/>
+  </objects>
   <genModel href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#/"/>
   <templateRootObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/Process"/>
   <editorConfigurator href="Workflow.editorconfigurator#_bc130Qm7Ed6njOkWCso0oA"/>

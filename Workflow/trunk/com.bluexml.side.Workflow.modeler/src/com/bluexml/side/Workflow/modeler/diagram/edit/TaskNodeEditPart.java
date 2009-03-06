@@ -15,12 +15,16 @@
 package com.bluexml.side.Workflow.modeler.diagram.edit;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.topcased.modeler.ModelerEditPolicyConstants;
+import org.topcased.modeler.di.model.DiagramElement;
+import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.EMFGraphNodeEditPart;
 import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
@@ -29,12 +33,14 @@ import org.topcased.modeler.edit.policies.RestoreEditPolicy;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
+import com.bluexml.side.Workflow.modeler.diagram.WfConfiguration;
 import com.bluexml.side.Workflow.modeler.diagram.WfEditPolicyConstants;
 import com.bluexml.side.Workflow.modeler.diagram.commands.TaskNodeRestoreConnectionCommand;
 import com.bluexml.side.Workflow.modeler.diagram.figures.TaskNodeFigure;
 import com.bluexml.side.Workflow.modeler.diagram.policies.TransitionEdgeCreationEditPolicy;
 import com.bluexml.side.Workflow.modeler.diagram.policies.manageEdgeCreationEditPolicy;
 import com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferenceConstants;
+import com.bluexml.side.workflow.TaskNode;
 
 /**
  * The TaskNode object controller
@@ -83,10 +89,38 @@ public class TaskNodeEditPart extends EMFGraphNodeEditPart {
 
 	/**
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
-	 * @generated
+	 * @_generated
 	 */
 	protected IFigure createFigure() {
+		TaskNode state = (TaskNode) Utils.getElement(getGraphNode());
+		WfConfiguration config = new WfConfiguration();
 
+		if (getGraphNode().getContained().size() > 0) {
+			GraphNode attributesListNode = (GraphNode) getGraphNode()
+					.getContained().get(0);
+			EList<DiagramElement> attributesList = attributesListNode
+					.getContained();
+			while (attributesList.size() > 0)
+				attributesList.remove(0);
+			for (Object o : state.getAttributes()) {
+				GraphElement elt = config.getCreationUtils()
+						.createGraphElement((EObject) o);
+				attributesList.add(elt);
+			}
+		}
+
+		if (getGraphNode().getContained().size() > 1) {
+			GraphNode eventsListNode = (GraphNode) getGraphNode()
+					.getContained().get(1);
+			EList<DiagramElement> eventsList = eventsListNode.getContained();
+			while (eventsList.size() > 0)
+				eventsList.remove(0);
+			for (Object o : state.getEvent()) {
+				GraphElement elt = config.getCreationUtils()
+						.createGraphElement((EObject) o);
+				eventsList.add(elt);
+			}
+		}
 		return new TaskNodeFigure();
 	}
 

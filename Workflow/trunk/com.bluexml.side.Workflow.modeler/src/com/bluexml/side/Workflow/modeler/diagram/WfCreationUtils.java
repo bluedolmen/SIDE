@@ -183,6 +183,17 @@ public class WfCreationUtils extends AbstractCreationUtils {
 		}
 
 		/**
+		 * @see com.bluexml.side.workflow.util.WorkflowSwitch#caseAttribute(com.bluexml.side.workflow.Attribute)
+		 * @generated
+		 */
+		public Object caseAttribute(com.bluexml.side.workflow.Attribute object) {
+			if ("default".equals(presentation)) {
+				return createGraphElementAttribute(object, presentation);
+			}
+			return null;
+		}
+
+		/**
 		 * @see com.bluexml.side.workflow.util.WorkflowSwitch#caseSwimlane(com.bluexml.side.workflow.Swimlane)
 		 * @generated
 		 */
@@ -224,7 +235,7 @@ public class WfCreationUtils extends AbstractCreationUtils {
 				.getEPackage().getNsURI())) {
 			graphElt = new GraphicWorkflowSwitch(presentation).doSwitch(obj);
 		}
-
+		
 		return (GraphElement) graphElt;
 	}
 
@@ -232,12 +243,19 @@ public class WfCreationUtils extends AbstractCreationUtils {
 	 * @param element the model element
 	 * @param presentation the presentation of the graphical element
 	 * @return the complete GraphElement
-	 * @generated
+	 * @_generated
 	 */
 	protected GraphElement createGraphElementTaskNode(
 			com.bluexml.side.workflow.TaskNode element, String presentation) {
-		// TODO this snippet of code should be customized if it is not well generated
 		GraphNode nodeParent = createGraphNode(element, presentation);
+
+		GraphNode attributes = createGraphNode(element,
+				WorkflowPackage.TASK_NODE__ATTRIBUTES, presentation);
+		attributes.setContainer(nodeParent);
+
+		GraphNode events = createGraphNode(element,
+				WorkflowPackage.TASK_NODE__EVENT, presentation);
+		events.setContainer(nodeParent);
 
 		return nodeParent;
 	}
@@ -246,12 +264,15 @@ public class WfCreationUtils extends AbstractCreationUtils {
 	 * @param element the model element
 	 * @param presentation the presentation of the graphical element
 	 * @return the complete GraphElement
-	 * @generated
+	 * @_generated
 	 */
 	protected GraphElement createGraphElementNode(
 			com.bluexml.side.workflow.Node element, String presentation) {
-		// TODO this snippet of code should be customized if it is not well generated
 		GraphNode nodeParent = createGraphNode(element, presentation);
+
+		GraphNode events = createGraphNode(element,
+				WorkflowPackage.NODE__EVENT, presentation);
+		events.setContainer(nodeParent);
 
 		return nodeParent;
 	}
@@ -266,6 +287,10 @@ public class WfCreationUtils extends AbstractCreationUtils {
 			com.bluexml.side.workflow.StartState element, String presentation) {
 		GraphNode nodeParent = createGraphNode(element, presentation);
 
+		GraphNode attributes = createGraphNode(element,
+				WorkflowPackage.START_STATE__ATTRIBUTES, presentation);
+		attributes.setContainer(nodeParent);
+
 		GraphNode events = createGraphNode(element,
 				WorkflowPackage.START_STATE__EVENT, presentation);
 		events.setContainer(nodeParent);
@@ -277,12 +302,15 @@ public class WfCreationUtils extends AbstractCreationUtils {
 	 * @param element the model element
 	 * @param presentation the presentation of the graphical element
 	 * @return the complete GraphElement
-	 * @generated
+	 * @_generated
 	 */
 	protected GraphElement createGraphElementEndState(
 			com.bluexml.side.workflow.EndState element, String presentation) {
-		// TODO this snippet of code should be customized if it is not well generated
 		GraphNode nodeParent = createGraphNode(element, presentation);
+
+		GraphNode events = createGraphNode(element,
+				WorkflowPackage.END_STATE__EVENT, presentation);
+		events.setContainer(nodeParent);
 
 		return nodeParent;
 	}
@@ -350,6 +378,17 @@ public class WfCreationUtils extends AbstractCreationUtils {
 	 */
 	protected GraphElement createGraphElementEvent(
 			com.bluexml.side.workflow.Event element, String presentation) {
+		return createGraphNode(element, presentation);
+	}
+
+	/**
+	 * @param element the model element
+	 * @param presentation the presentation of the graphical element
+	 * @return the complete GraphElement
+	 * @generated
+	 */
+	protected GraphElement createGraphElementAttribute(
+			com.bluexml.side.workflow.Attribute element, String presentation) {
 		return createGraphNode(element, presentation);
 	}
 

@@ -159,6 +159,7 @@ import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 
 import com.bluexml.side.workflow.provider.WorkflowItemProviderAdapterFactory;
 
+import com.bluexml.side.clazz.provider.ClazzItemProviderAdapterFactory;
 import com.bluexml.side.common.provider.CommonItemProviderAdapterFactory;
 
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
@@ -697,6 +698,7 @@ public class WorkflowEditor
 
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new WorkflowItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new ClazzItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new CommonItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 

@@ -29,6 +29,7 @@ import org.topcased.modeler.editor.ModelerEditPartFactory;
 import org.topcased.modeler.utils.Utils;
 
 import com.bluexml.side.Workflow.modeler.diagram.edit.ActionEditPart;
+import com.bluexml.side.Workflow.modeler.diagram.edit.AttributeEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.DecisionEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.EndStateEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.EventEditPart;
@@ -250,6 +251,14 @@ public class WfEditPartFactory extends ModelerEditPartFactory {
 		 */
 		public Object caseTimer(com.bluexml.side.workflow.Timer object) {
 			return new TimerEditPart(node);
+		}
+
+		/**
+		 * @see com.bluexml.side.workflow.util.WorkflowSwitch#caseAttribute(com.bluexml.side.workflow.Attribute)
+		 * @generated
+		 */
+		public Object caseAttribute(com.bluexml.side.workflow.Attribute object) {
+			return new AttributeEditPart(node);
 		}
 
 		/**
