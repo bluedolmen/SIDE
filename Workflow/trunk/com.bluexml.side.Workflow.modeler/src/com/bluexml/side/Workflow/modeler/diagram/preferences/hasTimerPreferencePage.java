@@ -29,13 +29,13 @@ import com.bluexml.side.Workflow.modeler.WorkflowPlugin;
  *
  * @generated
  */
-public class actionsPreferencePage extends AbstractEdgePreferencePage {
+public class hasTimerPreferencePage extends AbstractEdgePreferencePage {
 	/**
 	 * @see org.topcased.modeler.preferences.AbstractEdgePreferencePage#getEdgeFont()
 	 * @generated
 	 */
 	protected String getEdgeFont() {
-		return WfDiagramPreferenceConstants.ACTIONS_EDGE_DEFAULT_FONT;
+		return WfDiagramPreferenceConstants.HASTIMER_EDGE_DEFAULT_FONT;
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class actionsPreferencePage extends AbstractEdgePreferencePage {
 	 * @generated
 	 */
 	protected String getEdgeForegroundColor() {
-		return WfDiagramPreferenceConstants.ACTIONS_EDGE_DEFAULT_FOREGROUND_COLOR;
+		return WfDiagramPreferenceConstants.HASTIMER_EDGE_DEFAULT_FOREGROUND_COLOR;
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class actionsPreferencePage extends AbstractEdgePreferencePage {
 	 * @generated
 	 */
 	protected String getEdgeRouter() {
-		return WfDiagramPreferenceConstants.ACTIONS_EDGE_DEFAULT_ROUTER;
+		return WfDiagramPreferenceConstants.HASTIMER_EDGE_DEFAULT_ROUTER;
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class actionsPreferencePage extends AbstractEdgePreferencePage {
 	 * @see org.topcased.modeler.preferences.AbstractEdgePreferencePage#storeEdgeObjectVisibility(java.util.List)
 	 * @generated
 	 */
-	protected void storeEdgeObjectVisibility(List visibleElement) {
+	protected void storeEdgeObjectVisibility(List<String> visibleElement) {
 		IPreferenceStore ps = getPreferenceStore();
 	}
 

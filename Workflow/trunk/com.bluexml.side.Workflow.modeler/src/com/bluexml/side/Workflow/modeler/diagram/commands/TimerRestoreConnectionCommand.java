@@ -14,8 +14,16 @@
  ******************************************************************************/
 package com.bluexml.side.Workflow.modeler.diagram.commands;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.topcased.modeler.commands.AbstractRestoreConnectionCommand;
+import org.topcased.modeler.di.model.GraphEdge;
+import org.topcased.modeler.di.model.GraphElement;
+import org.topcased.modeler.utils.Utils;
+
+import com.bluexml.side.Workflow.modeler.diagram.WfSimpleObjectConstants;
+import com.bluexml.side.workflow.Timer;
+import com.bluexml.side.workflow.Transition;
 
 /**
  * Timer restore connection command
@@ -38,7 +46,50 @@ public class TimerRestoreConnectionCommand extends
 	 */
 	protected void initializeCommands() {
 
-		// Do nothing
+		GraphElement graphElementSrc = getGraphElement();
+		EObject eObjectSrc = Utils.getElement(graphElementSrc);
+
+		if (eObjectSrc instanceof Timer) {
+			for (GraphElement graphElementTgt : getAllGraphElements()) {
+				boolean autoRef = graphElementTgt.equals(graphElementSrc);
+
+				EObject eObjectTgt = Utils.getElement(graphElementTgt);
+				if (eObjectTgt instanceof Transition) {
+					if (autoRef) {
+						// autoRef not allowed
+					} else {
+						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
+						createhasTimerFromTransitionToTimer(graphElementTgt,
+								graphElementSrc);
+					}
+				}
+
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
+	private void createhasTimerFromTransitionToTimer(GraphElement srcElt,
+			GraphElement targetElt) {
+		Transition sourceObject = (Transition) Utils.getElement(srcElt);
+		Timer targetObject = (Timer) Utils.getElement(targetElt);
+
+		if (sourceObject.getTimer().contains(targetObject)) {
+			// check if the relation does not exists yet
+			if (getExistingEdges(srcElt, targetElt,
+					WfSimpleObjectConstants.SIMPLE_OBJECT_HASTIMER).size() == 0) {
+				GraphEdge edge = Utils
+						.createGraphEdge(WfSimpleObjectConstants.SIMPLE_OBJECT_HASTIMER);
+				hasTimerEdgeCreationCommand cmd = new hasTimerEdgeCreationCommand(
+						null, edge, srcElt, false);
+				cmd.setTarget(targetElt);
+				add(cmd);
+			}
+		}
 	}
 
 }

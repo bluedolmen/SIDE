@@ -12,34 +12,24 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Boston, MA 02111.
  ******************************************************************************/
-package com.bluexml.side.Workflow.modeler.diagram;
+package com.bluexml.side.Workflow.modeler.diagram.figures;
+
+import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
+import org.eclipse.swt.SWT;
 
 /**
- * A Set of properties that are used for the graphical objects that are not
- * associated with a model object. Each name is used as the typeInfo attribute
- * in the DI file.
- * 
  * @generated
  */
-public interface WfSimpleObjectConstants {
+public class hasTimerFigure extends PolylineConnectionEx {
+
 	/**
-	 * The name that identify the <i>manage</i> SimpleObject.
+	 * The constructor
+	 *
 	 * @generated
 	 */
-	String SIMPLE_OBJECT_MANAGE = "manage";
-	/**
-	 * The name that identify the <i>initialize</i> SimpleObject.
-	 * @generated
-	 */
-	String SIMPLE_OBJECT_INITIALIZE = "initialize";
-	/**
-	 * The name that identify the <i>actions</i> SimpleObject.
-	 * @generated
-	 */
-	String SIMPLE_OBJECT_ACTIONS = "actions";
-	/**
-	 * The name that identify the <i>hasTimer</i> SimpleObject.
-	 * @generated
-	 */
-	String SIMPLE_OBJECT_HASTIMER = "hasTimer";
+	public hasTimerFigure() {
+		super();
+		setLineStyle(SWT.LINE_SOLID);
+	}
+
 }

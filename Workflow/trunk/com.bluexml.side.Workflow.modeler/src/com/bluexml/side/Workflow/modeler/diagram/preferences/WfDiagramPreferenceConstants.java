@@ -290,4 +290,22 @@ public interface WfDiagramPreferenceConstants {
 	 */
 	String ACTIONS_EDGE_DEFAULT_ROUTER = "actions Edge Default Router";
 
+	/**
+	 * The key used to install a <i>hasTimer Edge Default Font</i> Preference.
+	 * @generated
+	 */
+	String HASTIMER_EDGE_DEFAULT_FONT = "hasTimer Edge Default Font";
+
+	/**
+	 * The key used to install a <i>hasTimer Edge Default Foreground Color</i> Preference.
+	 * @generated
+	 */
+	String HASTIMER_EDGE_DEFAULT_FOREGROUND_COLOR = "hasTimer Edge Default Foreground Color";
+
+	/**
+	 * The key used to install a <i>hasTimer Edge Default Router</i> Preference.
+	 * @generated
+	 */
+	String HASTIMER_EDGE_DEFAULT_ROUTER = "hasTimer Edge Default Router";
+
 }

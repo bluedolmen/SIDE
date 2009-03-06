@@ -27,8 +27,10 @@ import org.topcased.modeler.edit.policies.RestoreEditPolicy;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
+import com.bluexml.side.Workflow.modeler.diagram.WfEditPolicyConstants;
 import com.bluexml.side.Workflow.modeler.diagram.commands.TimerRestoreConnectionCommand;
 import com.bluexml.side.Workflow.modeler.diagram.figures.TimerFigure;
+import com.bluexml.side.Workflow.modeler.diagram.policies.hasTimerEdgeCreationEditPolicy;
 import com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferenceConstants;
 
 /**
@@ -54,6 +56,9 @@ public class TimerEditPart extends EMFGraphNodeEditPart {
 	 */
 	protected void createEditPolicies() {
 		super.createEditPolicies();
+
+		installEditPolicy(WfEditPolicyConstants.HASTIMER_EDITPOLICY,
+				new hasTimerEdgeCreationEditPolicy());
 
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {
