@@ -37,17 +37,17 @@ import com.bluexml.side.workflow.TaskNode;
 import com.bluexml.side.workflow.Transition;
 
 /**
- * Decision restore connection command
+ * ProcessState restore connection command
  *
  * @generated
  */
-public class DecisionRestoreConnectionCommand extends
+public class ProcessStateRestoreConnectionCommand extends
 		AbstractRestoreConnectionCommand {
 	/**
 	 * @param part the EditPart that is restored
 	 * @generated
 	 */
-	public DecisionRestoreConnectionCommand(EditPart part) {
+	public ProcessStateRestoreConnectionCommand(EditPart part) {
 		super(part);
 	}
 
@@ -60,7 +60,7 @@ public class DecisionRestoreConnectionCommand extends
 		GraphElement graphElementSrc = getGraphElement();
 		EObject eObjectSrc = Utils.getElement(graphElementSrc);
 
-		if (eObjectSrc instanceof Decision) {
+		if (eObjectSrc instanceof ProcessState) {
 			for (GraphElement graphElementTgt : getAllGraphElements()) {
 				boolean autoRef = graphElementTgt.equals(graphElementSrc);
 
@@ -71,7 +71,7 @@ public class DecisionRestoreConnectionCommand extends
 						// autoRef not allowed
 					} else {
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createTransitionFromStartStateToDecision_To(
+						createTransitionFromStartStateToProcessState_To(
 								graphElementTgt, graphElementSrc);
 					}
 				}
@@ -81,7 +81,70 @@ public class DecisionRestoreConnectionCommand extends
 						// autoRef not allowed
 					} else {
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createTransitionFromTaskNodeToDecision_To(
+						createTransitionFromTaskNodeToProcessState_To(
+								graphElementTgt, graphElementSrc);
+					}
+				}
+
+				if (eObjectTgt instanceof Decision) {
+					if (autoRef) {
+						// autoRef not allowed
+					} else {
+						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
+						createTransitionFromDecisionToProcessState_To(
+								graphElementTgt, graphElementSrc);
+					}
+				}
+
+				if (eObjectTgt instanceof Fork) {
+					if (autoRef) {
+						// autoRef not allowed
+					} else {
+						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
+						createTransitionFromForkToProcessState_To(
+								graphElementTgt, graphElementSrc);
+					}
+				}
+
+				if (eObjectTgt instanceof Join) {
+					if (autoRef) {
+						// autoRef not allowed
+					} else {
+						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
+						createTransitionFromJoinToProcessState_To(
+								graphElementTgt, graphElementSrc);
+					}
+				}
+
+				if (eObjectTgt instanceof Node) {
+					if (autoRef) {
+						// autoRef not allowed
+					} else {
+						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
+						createTransitionFromNodeToProcessState_To(
+								graphElementTgt, graphElementSrc);
+					}
+				}
+
+				if (eObjectTgt instanceof TaskNode) {
+					if (autoRef) {
+						// autoRef not allowed
+					} else {
+						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
+						createTransitionFromProcessStateToTaskNode_To(
+								graphElementSrc, graphElementTgt);
+					}
+				}
+
+				if (eObjectTgt instanceof ProcessState) {
+					if (autoRef) {
+						// autoRef not allowed
+					} else {
+						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
+						createTransitionFromProcessStateToProcessState_To(
+								graphElementSrc, graphElementTgt);
+						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
+						createTransitionFromProcessStateToProcessState_To(
 								graphElementTgt, graphElementSrc);
 					}
 				}
@@ -91,11 +154,8 @@ public class DecisionRestoreConnectionCommand extends
 						// autoRef not allowed
 					} else {
 						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-						createTransitionFromDecisionToDecision_To(
+						createTransitionFromProcessStateToDecision_To(
 								graphElementSrc, graphElementTgt);
-						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createTransitionFromDecisionToDecision_To(
-								graphElementTgt, graphElementSrc);
 					}
 				}
 
@@ -104,8 +164,8 @@ public class DecisionRestoreConnectionCommand extends
 						// autoRef not allowed
 					} else {
 						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-						createTransitionFromDecisionToFork_To(graphElementSrc,
-								graphElementTgt);
+						createTransitionFromProcessStateToFork_To(
+								graphElementSrc, graphElementTgt);
 					}
 				}
 
@@ -114,17 +174,17 @@ public class DecisionRestoreConnectionCommand extends
 						// autoRef not allowed
 					} else {
 						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-						createTransitionFromDecisionToJoin_To(graphElementSrc,
-								graphElementTgt);
+						createTransitionFromProcessStateToJoin_To(
+								graphElementSrc, graphElementTgt);
 					}
 				}
 
-				if (eObjectTgt instanceof TaskNode) {
+				if (eObjectTgt instanceof Node) {
 					if (autoRef) {
 						// autoRef not allowed
 					} else {
 						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-						createTransitionFromDecisionToTaskNode_To(
+						createTransitionFromProcessStateToNode_To(
 								graphElementSrc, graphElementTgt);
 					}
 				}
@@ -134,68 +194,8 @@ public class DecisionRestoreConnectionCommand extends
 						// autoRef not allowed
 					} else {
 						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-						createTransitionFromDecisionToEndState_To(
+						createTransitionFromProcessStateToEndState_To(
 								graphElementSrc, graphElementTgt);
-					}
-				}
-
-				if (eObjectTgt instanceof ProcessState) {
-					if (autoRef) {
-						// autoRef not allowed
-					} else {
-						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-						createTransitionFromDecisionToProcessState_To(
-								graphElementSrc, graphElementTgt);
-					}
-				}
-
-				if (eObjectTgt instanceof Node) {
-					if (autoRef) {
-						// autoRef not allowed
-					} else {
-						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-						createTransitionFromDecisionToNode_To(graphElementSrc,
-								graphElementTgt);
-					}
-				}
-
-				if (eObjectTgt instanceof Fork) {
-					if (autoRef) {
-						// autoRef not allowed
-					} else {
-						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createTransitionFromForkToDecision_To(graphElementTgt,
-								graphElementSrc);
-					}
-				}
-
-				if (eObjectTgt instanceof Join) {
-					if (autoRef) {
-						// autoRef not allowed
-					} else {
-						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createTransitionFromJoinToDecision_To(graphElementTgt,
-								graphElementSrc);
-					}
-				}
-
-				if (eObjectTgt instanceof Node) {
-					if (autoRef) {
-						// autoRef not allowed
-					} else {
-						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createTransitionFromNodeToDecision_To(graphElementTgt,
-								graphElementSrc);
-					}
-				}
-
-				if (eObjectTgt instanceof ProcessState) {
-					if (autoRef) {
-						// autoRef not allowed
-					} else {
-						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createTransitionFromProcessStateToDecision_To(
-								graphElementTgt, graphElementSrc);
 					}
 				}
 
@@ -208,10 +208,10 @@ public class DecisionRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createTransitionFromStartStateToDecision_To(
+	private void createTransitionFromStartStateToProcessState_To(
 			GraphElement srcElt, GraphElement targetElt) {
 		StartState sourceObject = (StartState) Utils.getElement(srcElt);
-		Decision targetObject = (Decision) Utils.getElement(targetElt);
+		ProcessState targetObject = (ProcessState) Utils.getElement(targetElt);
 
 		EList edgeObjectList = sourceObject.getTransition();
 		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
@@ -247,206 +247,10 @@ public class DecisionRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createTransitionFromTaskNodeToDecision_To(GraphElement srcElt,
-			GraphElement targetElt) {
+	private void createTransitionFromTaskNodeToProcessState_To(
+			GraphElement srcElt, GraphElement targetElt) {
 		TaskNode sourceObject = (TaskNode) Utils.getElement(srcElt);
-		Decision targetObject = (Decision) Utils.getElement(targetElt);
-
-		EList edgeObjectList = sourceObject.getTransition();
-		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
-			Object obj = it.next();
-			if (obj instanceof Transition) {
-				Transition edgeObject = (Transition) obj;
-				if (targetObject.equals(edgeObject.getTo())
-						&& sourceObject.equals(edgeObject.getParentTaskNode())
-						&& sourceObject.getTransition().contains(edgeObject)) {
-					// check if the relation does not exists yet
-					List<GraphEdge> existing = getExistingEdges(srcElt,
-							targetElt, Transition.class);
-					if (!isAlreadyPresent(existing, edgeObject)) {
-						ICreationUtils factory = getModeler()
-								.getActiveConfiguration().getCreationUtils();
-						// restore the link with its default presentation
-						GraphElement edge = factory
-								.createGraphElement(edgeObject);
-						if (edge instanceof GraphEdge) {
-							TransitionEdgeCreationCommand cmd = new TransitionEdgeCreationCommand(
-									getEditDomain(), (GraphEdge) edge, srcElt,
-									false);
-							cmd.setTarget(targetElt);
-							add(cmd);
-						}
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * @param srcElt the source element
-	 * @param targetElt the target element
-	 * @generated
-	 */
-	private void createTransitionFromDecisionToDecision_To(GraphElement srcElt,
-			GraphElement targetElt) {
-		Decision sourceObject = (Decision) Utils.getElement(srcElt);
-		Decision targetObject = (Decision) Utils.getElement(targetElt);
-
-		EList edgeObjectList = sourceObject.getTransition();
-		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
-			Object obj = it.next();
-			if (obj instanceof Transition) {
-				Transition edgeObject = (Transition) obj;
-				if (targetObject.equals(edgeObject.getTo())
-						&& sourceObject.getTransition().contains(edgeObject)) {
-					// check if the relation does not exists yet
-					List<GraphEdge> existing = getExistingEdges(srcElt,
-							targetElt, Transition.class);
-					if (!isAlreadyPresent(existing, edgeObject)) {
-						ICreationUtils factory = getModeler()
-								.getActiveConfiguration().getCreationUtils();
-						// restore the link with its default presentation
-						GraphElement edge = factory
-								.createGraphElement(edgeObject);
-						if (edge instanceof GraphEdge) {
-							TransitionEdgeCreationCommand cmd = new TransitionEdgeCreationCommand(
-									getEditDomain(), (GraphEdge) edge, srcElt,
-									false);
-							cmd.setTarget(targetElt);
-							add(cmd);
-						}
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * @param srcElt the source element
-	 * @param targetElt the target element
-	 * @generated
-	 */
-	private void createTransitionFromDecisionToFork_To(GraphElement srcElt,
-			GraphElement targetElt) {
-		Decision sourceObject = (Decision) Utils.getElement(srcElt);
-		Fork targetObject = (Fork) Utils.getElement(targetElt);
-
-		EList edgeObjectList = sourceObject.getTransition();
-		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
-			Object obj = it.next();
-			if (obj instanceof Transition) {
-				Transition edgeObject = (Transition) obj;
-				if (targetObject.equals(edgeObject.getTo())
-						&& sourceObject.getTransition().contains(edgeObject)) {
-					// check if the relation does not exists yet
-					List<GraphEdge> existing = getExistingEdges(srcElt,
-							targetElt, Transition.class);
-					if (!isAlreadyPresent(existing, edgeObject)) {
-						ICreationUtils factory = getModeler()
-								.getActiveConfiguration().getCreationUtils();
-						// restore the link with its default presentation
-						GraphElement edge = factory
-								.createGraphElement(edgeObject);
-						if (edge instanceof GraphEdge) {
-							TransitionEdgeCreationCommand cmd = new TransitionEdgeCreationCommand(
-									getEditDomain(), (GraphEdge) edge, srcElt,
-									false);
-							cmd.setTarget(targetElt);
-							add(cmd);
-						}
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * @param srcElt the source element
-	 * @param targetElt the target element
-	 * @generated
-	 */
-	private void createTransitionFromDecisionToJoin_To(GraphElement srcElt,
-			GraphElement targetElt) {
-		Decision sourceObject = (Decision) Utils.getElement(srcElt);
-		Join targetObject = (Join) Utils.getElement(targetElt);
-
-		EList edgeObjectList = sourceObject.getTransition();
-		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
-			Object obj = it.next();
-			if (obj instanceof Transition) {
-				Transition edgeObject = (Transition) obj;
-				if (targetObject.equals(edgeObject.getTo())
-						&& sourceObject.getTransition().contains(edgeObject)) {
-					// check if the relation does not exists yet
-					List<GraphEdge> existing = getExistingEdges(srcElt,
-							targetElt, Transition.class);
-					if (!isAlreadyPresent(existing, edgeObject)) {
-						ICreationUtils factory = getModeler()
-								.getActiveConfiguration().getCreationUtils();
-						// restore the link with its default presentation
-						GraphElement edge = factory
-								.createGraphElement(edgeObject);
-						if (edge instanceof GraphEdge) {
-							TransitionEdgeCreationCommand cmd = new TransitionEdgeCreationCommand(
-									getEditDomain(), (GraphEdge) edge, srcElt,
-									false);
-							cmd.setTarget(targetElt);
-							add(cmd);
-						}
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * @param srcElt the source element
-	 * @param targetElt the target element
-	 * @generated
-	 */
-	private void createTransitionFromDecisionToTaskNode_To(GraphElement srcElt,
-			GraphElement targetElt) {
-		Decision sourceObject = (Decision) Utils.getElement(srcElt);
-		TaskNode targetObject = (TaskNode) Utils.getElement(targetElt);
-
-		EList edgeObjectList = sourceObject.getTransition();
-		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
-			Object obj = it.next();
-			if (obj instanceof Transition) {
-				Transition edgeObject = (Transition) obj;
-				if (targetObject.equals(edgeObject.getTo())
-						&& sourceObject.getTransition().contains(edgeObject)) {
-					// check if the relation does not exists yet
-					List<GraphEdge> existing = getExistingEdges(srcElt,
-							targetElt, Transition.class);
-					if (!isAlreadyPresent(existing, edgeObject)) {
-						ICreationUtils factory = getModeler()
-								.getActiveConfiguration().getCreationUtils();
-						// restore the link with its default presentation
-						GraphElement edge = factory
-								.createGraphElement(edgeObject);
-						if (edge instanceof GraphEdge) {
-							TransitionEdgeCreationCommand cmd = new TransitionEdgeCreationCommand(
-									getEditDomain(), (GraphEdge) edge, srcElt,
-									false);
-							cmd.setTarget(targetElt);
-							add(cmd);
-						}
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * @param srcElt the source element
-	 * @param targetElt the target element
-	 * @generated
-	 */
-	private void createTransitionFromDecisionToEndState_To(GraphElement srcElt,
-			GraphElement targetElt) {
-		Decision sourceObject = (Decision) Utils.getElement(srcElt);
-		EndState targetObject = (EndState) Utils.getElement(targetElt);
+		ProcessState targetObject = (ProcessState) Utils.getElement(targetElt);
 
 		EList edgeObjectList = sourceObject.getTransition();
 		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
@@ -521,49 +325,10 @@ public class DecisionRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createTransitionFromDecisionToNode_To(GraphElement srcElt,
-			GraphElement targetElt) {
-		Decision sourceObject = (Decision) Utils.getElement(srcElt);
-		Node targetObject = (Node) Utils.getElement(targetElt);
-
-		EList edgeObjectList = sourceObject.getTransition();
-		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
-			Object obj = it.next();
-			if (obj instanceof Transition) {
-				Transition edgeObject = (Transition) obj;
-				if (targetObject.equals(edgeObject.getTo())
-						&& sourceObject.getTransition().contains(edgeObject)) {
-					// check if the relation does not exists yet
-					List<GraphEdge> existing = getExistingEdges(srcElt,
-							targetElt, Transition.class);
-					if (!isAlreadyPresent(existing, edgeObject)) {
-						ICreationUtils factory = getModeler()
-								.getActiveConfiguration().getCreationUtils();
-						// restore the link with its default presentation
-						GraphElement edge = factory
-								.createGraphElement(edgeObject);
-						if (edge instanceof GraphEdge) {
-							TransitionEdgeCreationCommand cmd = new TransitionEdgeCreationCommand(
-									getEditDomain(), (GraphEdge) edge, srcElt,
-									false);
-							cmd.setTarget(targetElt);
-							add(cmd);
-						}
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * @param srcElt the source element
-	 * @param targetElt the target element
-	 * @generated
-	 */
-	private void createTransitionFromForkToDecision_To(GraphElement srcElt,
+	private void createTransitionFromForkToProcessState_To(GraphElement srcElt,
 			GraphElement targetElt) {
 		Fork sourceObject = (Fork) Utils.getElement(srcElt);
-		Decision targetObject = (Decision) Utils.getElement(targetElt);
+		ProcessState targetObject = (ProcessState) Utils.getElement(targetElt);
 
 		EList edgeObjectList = sourceObject.getTransition();
 		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
@@ -599,10 +364,10 @@ public class DecisionRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createTransitionFromJoinToDecision_To(GraphElement srcElt,
+	private void createTransitionFromJoinToProcessState_To(GraphElement srcElt,
 			GraphElement targetElt) {
 		Join sourceObject = (Join) Utils.getElement(srcElt);
-		Decision targetObject = (Decision) Utils.getElement(targetElt);
+		ProcessState targetObject = (ProcessState) Utils.getElement(targetElt);
 
 		EList edgeObjectList = sourceObject.getTransition();
 		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
@@ -638,10 +403,88 @@ public class DecisionRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createTransitionFromNodeToDecision_To(GraphElement srcElt,
+	private void createTransitionFromNodeToProcessState_To(GraphElement srcElt,
 			GraphElement targetElt) {
 		Node sourceObject = (Node) Utils.getElement(srcElt);
-		Decision targetObject = (Decision) Utils.getElement(targetElt);
+		ProcessState targetObject = (ProcessState) Utils.getElement(targetElt);
+
+		EList edgeObjectList = sourceObject.getTransition();
+		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
+			Object obj = it.next();
+			if (obj instanceof Transition) {
+				Transition edgeObject = (Transition) obj;
+				if (targetObject.equals(edgeObject.getTo())
+						&& sourceObject.getTransition().contains(edgeObject)) {
+					// check if the relation does not exists yet
+					List<GraphEdge> existing = getExistingEdges(srcElt,
+							targetElt, Transition.class);
+					if (!isAlreadyPresent(existing, edgeObject)) {
+						ICreationUtils factory = getModeler()
+								.getActiveConfiguration().getCreationUtils();
+						// restore the link with its default presentation
+						GraphElement edge = factory
+								.createGraphElement(edgeObject);
+						if (edge instanceof GraphEdge) {
+							TransitionEdgeCreationCommand cmd = new TransitionEdgeCreationCommand(
+									getEditDomain(), (GraphEdge) edge, srcElt,
+									false);
+							cmd.setTarget(targetElt);
+							add(cmd);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
+	private void createTransitionFromProcessStateToTaskNode_To(
+			GraphElement srcElt, GraphElement targetElt) {
+		ProcessState sourceObject = (ProcessState) Utils.getElement(srcElt);
+		TaskNode targetObject = (TaskNode) Utils.getElement(targetElt);
+
+		EList edgeObjectList = sourceObject.getTransition();
+		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
+			Object obj = it.next();
+			if (obj instanceof Transition) {
+				Transition edgeObject = (Transition) obj;
+				if (targetObject.equals(edgeObject.getTo())
+						&& sourceObject.getTransition().contains(edgeObject)) {
+					// check if the relation does not exists yet
+					List<GraphEdge> existing = getExistingEdges(srcElt,
+							targetElt, Transition.class);
+					if (!isAlreadyPresent(existing, edgeObject)) {
+						ICreationUtils factory = getModeler()
+								.getActiveConfiguration().getCreationUtils();
+						// restore the link with its default presentation
+						GraphElement edge = factory
+								.createGraphElement(edgeObject);
+						if (edge instanceof GraphEdge) {
+							TransitionEdgeCreationCommand cmd = new TransitionEdgeCreationCommand(
+									getEditDomain(), (GraphEdge) edge, srcElt,
+									false);
+							cmd.setTarget(targetElt);
+							add(cmd);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
+	private void createTransitionFromProcessStateToProcessState_To(
+			GraphElement srcElt, GraphElement targetElt) {
+		ProcessState sourceObject = (ProcessState) Utils.getElement(srcElt);
+		ProcessState targetObject = (ProcessState) Utils.getElement(targetElt);
 
 		EList edgeObjectList = sourceObject.getTransition();
 		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
@@ -681,6 +524,162 @@ public class DecisionRestoreConnectionCommand extends
 			GraphElement srcElt, GraphElement targetElt) {
 		ProcessState sourceObject = (ProcessState) Utils.getElement(srcElt);
 		Decision targetObject = (Decision) Utils.getElement(targetElt);
+
+		EList edgeObjectList = sourceObject.getTransition();
+		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
+			Object obj = it.next();
+			if (obj instanceof Transition) {
+				Transition edgeObject = (Transition) obj;
+				if (targetObject.equals(edgeObject.getTo())
+						&& sourceObject.getTransition().contains(edgeObject)) {
+					// check if the relation does not exists yet
+					List<GraphEdge> existing = getExistingEdges(srcElt,
+							targetElt, Transition.class);
+					if (!isAlreadyPresent(existing, edgeObject)) {
+						ICreationUtils factory = getModeler()
+								.getActiveConfiguration().getCreationUtils();
+						// restore the link with its default presentation
+						GraphElement edge = factory
+								.createGraphElement(edgeObject);
+						if (edge instanceof GraphEdge) {
+							TransitionEdgeCreationCommand cmd = new TransitionEdgeCreationCommand(
+									getEditDomain(), (GraphEdge) edge, srcElt,
+									false);
+							cmd.setTarget(targetElt);
+							add(cmd);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
+	private void createTransitionFromProcessStateToFork_To(GraphElement srcElt,
+			GraphElement targetElt) {
+		ProcessState sourceObject = (ProcessState) Utils.getElement(srcElt);
+		Fork targetObject = (Fork) Utils.getElement(targetElt);
+
+		EList edgeObjectList = sourceObject.getTransition();
+		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
+			Object obj = it.next();
+			if (obj instanceof Transition) {
+				Transition edgeObject = (Transition) obj;
+				if (targetObject.equals(edgeObject.getTo())
+						&& sourceObject.getTransition().contains(edgeObject)) {
+					// check if the relation does not exists yet
+					List<GraphEdge> existing = getExistingEdges(srcElt,
+							targetElt, Transition.class);
+					if (!isAlreadyPresent(existing, edgeObject)) {
+						ICreationUtils factory = getModeler()
+								.getActiveConfiguration().getCreationUtils();
+						// restore the link with its default presentation
+						GraphElement edge = factory
+								.createGraphElement(edgeObject);
+						if (edge instanceof GraphEdge) {
+							TransitionEdgeCreationCommand cmd = new TransitionEdgeCreationCommand(
+									getEditDomain(), (GraphEdge) edge, srcElt,
+									false);
+							cmd.setTarget(targetElt);
+							add(cmd);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
+	private void createTransitionFromProcessStateToJoin_To(GraphElement srcElt,
+			GraphElement targetElt) {
+		ProcessState sourceObject = (ProcessState) Utils.getElement(srcElt);
+		Join targetObject = (Join) Utils.getElement(targetElt);
+
+		EList edgeObjectList = sourceObject.getTransition();
+		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
+			Object obj = it.next();
+			if (obj instanceof Transition) {
+				Transition edgeObject = (Transition) obj;
+				if (targetObject.equals(edgeObject.getTo())
+						&& sourceObject.getTransition().contains(edgeObject)) {
+					// check if the relation does not exists yet
+					List<GraphEdge> existing = getExistingEdges(srcElt,
+							targetElt, Transition.class);
+					if (!isAlreadyPresent(existing, edgeObject)) {
+						ICreationUtils factory = getModeler()
+								.getActiveConfiguration().getCreationUtils();
+						// restore the link with its default presentation
+						GraphElement edge = factory
+								.createGraphElement(edgeObject);
+						if (edge instanceof GraphEdge) {
+							TransitionEdgeCreationCommand cmd = new TransitionEdgeCreationCommand(
+									getEditDomain(), (GraphEdge) edge, srcElt,
+									false);
+							cmd.setTarget(targetElt);
+							add(cmd);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
+	private void createTransitionFromProcessStateToNode_To(GraphElement srcElt,
+			GraphElement targetElt) {
+		ProcessState sourceObject = (ProcessState) Utils.getElement(srcElt);
+		Node targetObject = (Node) Utils.getElement(targetElt);
+
+		EList edgeObjectList = sourceObject.getTransition();
+		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
+			Object obj = it.next();
+			if (obj instanceof Transition) {
+				Transition edgeObject = (Transition) obj;
+				if (targetObject.equals(edgeObject.getTo())
+						&& sourceObject.getTransition().contains(edgeObject)) {
+					// check if the relation does not exists yet
+					List<GraphEdge> existing = getExistingEdges(srcElt,
+							targetElt, Transition.class);
+					if (!isAlreadyPresent(existing, edgeObject)) {
+						ICreationUtils factory = getModeler()
+								.getActiveConfiguration().getCreationUtils();
+						// restore the link with its default presentation
+						GraphElement edge = factory
+								.createGraphElement(edgeObject);
+						if (edge instanceof GraphEdge) {
+							TransitionEdgeCreationCommand cmd = new TransitionEdgeCreationCommand(
+									getEditDomain(), (GraphEdge) edge, srcElt,
+									false);
+							cmd.setTarget(targetElt);
+							add(cmd);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
+	private void createTransitionFromProcessStateToEndState_To(
+			GraphElement srcElt, GraphElement targetElt) {
+		ProcessState sourceObject = (ProcessState) Utils.getElement(srcElt);
+		EndState targetObject = (EndState) Utils.getElement(targetElt);
 
 		EList edgeObjectList = sourceObject.getTransition();
 		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {

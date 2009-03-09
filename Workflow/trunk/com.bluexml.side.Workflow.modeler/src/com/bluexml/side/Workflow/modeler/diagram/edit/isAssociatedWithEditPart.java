@@ -15,30 +15,27 @@
 package com.bluexml.side.Workflow.modeler.diagram.edit;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.draw2d.PolylineDecoration;
+import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.GraphEdge;
-import org.topcased.modeler.edit.EMFGraphEdgeEditPart;
-import org.topcased.modeler.figures.EdgeObjectOffsetEditableLabel;
+import org.topcased.modeler.edit.GraphEdgeEditPart;
 import org.topcased.modeler.utils.Utils;
 
-import com.bluexml.side.Workflow.modeler.diagram.WfEditPolicyConstants;
-import com.bluexml.side.Workflow.modeler.diagram.figures.TransitionFigure;
-import com.bluexml.side.Workflow.modeler.diagram.policies.actionsEdgeCreationEditPolicy;
-import com.bluexml.side.Workflow.modeler.diagram.policies.hasTimerEdgeCreationEditPolicy;
+import com.bluexml.side.Workflow.modeler.diagram.figures.isAssociatedWithFigure;
 import com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferenceConstants;
-import com.bluexml.side.workflow.Transition;
 
 /**
- * Transition controller
+ * isAssociatedWith controller
  *
  * @generated
  */
-public class TransitionEditPart extends EMFGraphEdgeEditPart {
+public class isAssociatedWithEditPart extends GraphEdgeEditPart {
 
 	/**
 	 * Constructor
@@ -46,7 +43,7 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	 * @param model the graph object
 	 * @generated
 	 */
-	public TransitionEditPart(GraphEdge model) {
+	public isAssociatedWithEditPart(GraphEdge model) {
 		super(model);
 	}
 
@@ -57,14 +54,12 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(WfEditPolicyConstants.ACTIONS_EDITPOLICY,
-				new actionsEdgeCreationEditPolicy());
-		installEditPolicy(WfEditPolicyConstants.HASTIMER_EDITPOLICY,
-				new hasTimerEdgeCreationEditPolicy());
-
 		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FONT_EDITPOLICY,
 				null);
 
+		installEditPolicy(
+				ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY,
+				null);
 	}
 
 	/**
@@ -72,11 +67,31 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	 * @generated
 	 */
 	protected IFigure createFigure() {
-		TransitionFigure connection = new TransitionFigure();
+		isAssociatedWithFigure connection = new isAssociatedWithFigure();
+
+		createSourceDecoration(connection);
 
 		createTargetDecoration(connection);
 
 		return connection;
+	}
+
+	/**
+	 * @param connection the PolylineConnection
+	 * @generated
+	 */
+	private void createSourceDecoration(PolylineConnection connection) {
+
+		PolygonDecoration decoration = new PolygonDecoration();
+		PointList decorationPointList = new PointList();
+		decorationPointList.addPoint(0, 0);
+		decorationPointList.addPoint(-1, 1);
+		decorationPointList.addPoint(-2, 0);
+		decorationPointList.addPoint(-1, -1);
+		decoration.setTemplate(decorationPointList);
+		decoration.setScale(10, 5);
+		connection.setSourceDecoration(decoration);
+
 	}
 
 	/**
@@ -97,8 +112,9 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	 * @generated
 	 */
 	protected String getPreferenceDefaultRouter() {
-		return getPreferenceStore().getString(
-				WfDiagramPreferenceConstants.TRANSITION_EDGE_DEFAULT_ROUTER);
+		return getPreferenceStore()
+				.getString(
+						WfDiagramPreferenceConstants.ISASSOCIATEDWITH_EDGE_DEFAULT_ROUTER);
 	}
 
 	/**
@@ -109,7 +125,7 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	protected Color getPreferenceDefaultForegroundColor() {
 		String preferenceForeground = getPreferenceStore()
 				.getString(
-						WfDiagramPreferenceConstants.TRANSITION_EDGE_DEFAULT_FOREGROUND_COLOR);
+						WfDiagramPreferenceConstants.ISASSOCIATEDWITH_EDGE_DEFAULT_FOREGROUND_COLOR);
 		if (preferenceForeground.length() != 0) {
 			return Utils.getColor(preferenceForeground);
 		}
@@ -123,32 +139,12 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	 * @generated
 	 */
 	protected Font getPreferenceDefaultFont() {
-		String preferenceFont = getPreferenceStore().getString(
-				WfDiagramPreferenceConstants.TRANSITION_EDGE_DEFAULT_FONT);
+		String preferenceFont = getPreferenceStore()
+				.getString(
+						WfDiagramPreferenceConstants.ISASSOCIATEDWITH_EDGE_DEFAULT_FONT);
 		if (preferenceFont.length() != 0) {
 			return Utils.getFont(new FontData(preferenceFont));
 		}
 		return null;
 	}
-
-	private void updateMiddleNameLabel() {
-		Transition transition = (Transition) Utils.getElement(getGraphEdge());
-
-		TransitionFigure fig = ((TransitionFigure) getFigure());
-		EdgeObjectOffsetEditableLabel label = (EdgeObjectOffsetEditableLabel) fig
-				.getMiddleNameEdgeObject();
-		String name = transition.getName();
-
-		String condition = transition.getCondition();
-		if (condition != null && condition.length() > 0)
-			name += "[" + condition + "]";
-		label.setText(name);
-	}
-
-	@Override
-	protected void refreshTextAndFont() {
-		super.refreshTextAndFont();
-		updateMiddleNameLabel();
-	}
-
 }

@@ -7,6 +7,7 @@
       <items xmi:id="_5bgGIAnKEd6njOkWCso0oA" name="Node" part="__fjIsAnJEd6njOkWCso0oA"/>
       <items xmi:id="_zM9_YIyCEdy0-r37LrMUlA" name="Start state" part="_xPUcYIyBEdy0-r37LrMUlA"/>
       <items xmi:id="_1gVwMIyCEdy0-r37LrMUlA" name="End state" part="_ya3pgIyBEdy0-r37LrMUlA"/>
+      <items xmi:id="_urlcoAyEEd6Mru3BnMqJHQ" name="Sub process" part="_hAZ54ApyEd6Mru3BnMqJHQ"/>
       <items xmi:id="_HplrgJduEdyHY5QY11SiOA" name="Join" part="_UyuhcJdtEdyHY5QY11SiOA"/>
       <items xmi:id="_KUWooJduEdyHY5QY11SiOA" name="Fork" part="_EJSqAJdtEdyHY5QY11SiOA"/>
       <items xmi:id="_NPXoQJduEdyHY5QY11SiOA" name="Decision" part="_fowhwJdrEdyHY5QY11SiOA"/>
@@ -21,6 +22,7 @@
       <items xmi:id="_VWGzAAnPEd6njOkWCso0oA" name="Initialize" part="_Lmi9cAnPEd6njOkWCso0oA"/>
       <items xmi:id="_sPVFsApMEd6Mru3BnMqJHQ" name="Actions" part="_kqQKsApMEd6Mru3BnMqJHQ"/>
       <items xmi:id="_3mhqoApQEd6Mru3BnMqJHQ" name="Has timer" part="_etrCEApNEd6Mru3BnMqJHQ"/>
+      <items xmi:id="_yb9W8AyEEd6Mru3BnMqJHQ" name="Reference class" part="_GOeUoAyEEd6Mru3BnMqJHQ"/>
     </paletteCategories>
   </palette>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_ExDMEIyBEdy0-r37LrMUlA" object="_6tdnQIyAEdy0-r37LrMUlA" type="Class" layout="ClassLayout" defaultWidth="-1" defaultHeight="-1" minimumWidth="50" minimumHeight="30" maximumHeight="-1"/>
@@ -71,6 +73,12 @@
       <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//StartState/transition"/>
       <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
     </sourceTargetCouple>
+    <sourceTargetCouple xmi:id="_mHAT0AyBEd6Mru3BnMqJHQ" containerType="SOURCE" sourceNode="_xPUcYIyBEdy0-r37LrMUlA" targetNode="_hAZ54ApyEd6Mru3BnMqJHQ">
+      <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/StartState"/>
+      <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//StartState/transition"/>
+      <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//StartState/transition"/>
+      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
+    </sourceTargetCouple>
     <sourceTargetCouple xmi:id="_Lwf5wAnGEd6njOkWCso0oA" containerType="SOURCE" sourceNode="_ExDMEIyBEdy0-r37LrMUlA" targetNode="_ya3pgIyBEdy0-r37LrMUlA">
       <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/TaskNode"/>
       <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//TaskNode/transition"/>
@@ -113,6 +121,12 @@
       <refEdgeToSource xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/parentTaskNode"/>
       <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
     </sourceTargetCouple>
+    <sourceTargetCouple xmi:id="_sGJy0AyBEd6Mru3BnMqJHQ" containerType="SOURCE" sourceNode="_ExDMEIyBEdy0-r37LrMUlA" targetNode="_hAZ54ApyEd6Mru3BnMqJHQ">
+      <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/TaskNode"/>
+      <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//TaskNode/transition"/>
+      <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//TaskNode/transition"/>
+      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
+    </sourceTargetCouple>
     <sourceTargetCouple xmi:id="_bywccAnGEd6njOkWCso0oA" containerType="SOURCE" sourceNode="_fowhwJdrEdyHY5QY11SiOA" targetNode="_fowhwJdrEdyHY5QY11SiOA">
       <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/Decision"/>
       <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Decision/transition"/>
@@ -138,6 +152,12 @@
       <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
     </sourceTargetCouple>
     <sourceTargetCouple xmi:id="_czv_YAnGEd6njOkWCso0oA" containerType="SOURCE" sourceNode="_fowhwJdrEdyHY5QY11SiOA" targetNode="_ya3pgIyBEdy0-r37LrMUlA">
+      <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/Decision"/>
+      <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Decision/transition"/>
+      <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Decision/transition"/>
+      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
+    </sourceTargetCouple>
+    <sourceTargetCouple xmi:id="_wzcoYAyBEd6Mru3BnMqJHQ" containerType="SOURCE" sourceNode="_fowhwJdrEdyHY5QY11SiOA" targetNode="_hAZ54ApyEd6Mru3BnMqJHQ">
       <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/Decision"/>
       <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Decision/transition"/>
       <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Decision/transition"/>
@@ -179,6 +199,12 @@
       <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Fork/transition"/>
       <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
     </sourceTargetCouple>
+    <sourceTargetCouple xmi:id="_02TZ0AyBEd6Mru3BnMqJHQ" containerType="SOURCE" sourceNode="_EJSqAJdtEdyHY5QY11SiOA" targetNode="_hAZ54ApyEd6Mru3BnMqJHQ">
+      <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/Fork"/>
+      <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Fork/transition"/>
+      <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Fork/transition"/>
+      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
+    </sourceTargetCouple>
     <sourceTargetCouple xmi:id="_mMug8AnGEd6njOkWCso0oA" containerType="SOURCE" sourceNode="_EJSqAJdtEdyHY5QY11SiOA" targetNode="_ya3pgIyBEdy0-r37LrMUlA">
       <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/Fork"/>
       <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Fork/transition"/>
@@ -215,6 +241,12 @@
       <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Join/transition"/>
       <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
     </sourceTargetCouple>
+    <sourceTargetCouple xmi:id="_4LaUcAyBEd6Mru3BnMqJHQ" containerType="SOURCE" sourceNode="_UyuhcJdtEdyHY5QY11SiOA" targetNode="_hAZ54ApyEd6Mru3BnMqJHQ">
+      <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/Join"/>
+      <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Join/transition"/>
+      <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Join/transition"/>
+      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
+    </sourceTargetCouple>
     <sourceTargetCouple xmi:id="_K0JCYAnKEd6njOkWCso0oA" containerType="SOURCE" sourceNode="_UyuhcJdtEdyHY5QY11SiOA" targetNode="__fjIsAnJEd6njOkWCso0oA">
       <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/Join"/>
       <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Join/transition"/>
@@ -222,12 +254,6 @@
       <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
     </sourceTargetCouple>
     <sourceTargetCouple xmi:id="_RmZZUAnKEd6njOkWCso0oA" containerType="SOURCE" sourceNode="__fjIsAnJEd6njOkWCso0oA" targetNode="_fowhwJdrEdyHY5QY11SiOA">
-      <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/Node"/>
-      <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Node/transition"/>
-      <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Node/transition"/>
-      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
-    </sourceTargetCouple>
-    <sourceTargetCouple xmi:id="_SeVt8AnKEd6njOkWCso0oA" containerType="SOURCE" sourceNode="__fjIsAnJEd6njOkWCso0oA" targetNode="_xPUcYIyBEdy0-r37LrMUlA">
       <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/Node"/>
       <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Node/transition"/>
       <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Node/transition"/>
@@ -263,11 +289,62 @@
       <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Node/transition"/>
       <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
     </sourceTargetCouple>
+    <sourceTargetCouple xmi:id="_7EgogAyBEd6Mru3BnMqJHQ" containerType="SOURCE" sourceNode="__fjIsAnJEd6njOkWCso0oA" targetNode="_hAZ54ApyEd6Mru3BnMqJHQ">
+      <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/Node"/>
+      <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Node/transition"/>
+      <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Node/transition"/>
+      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
+    </sourceTargetCouple>
+    <sourceTargetCouple xmi:id="_uLNlYAyCEd6Mru3BnMqJHQ" containerType="SOURCE" sourceNode="_hAZ54ApyEd6Mru3BnMqJHQ" targetNode="_ExDMEIyBEdy0-r37LrMUlA">
+      <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/ProcessState"/>
+      <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//ProcessState/transition"/>
+      <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//ProcessState/transition"/>
+      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
+    </sourceTargetCouple>
+    <sourceTargetCouple xmi:id="_xRqY8AyCEd6Mru3BnMqJHQ" containerType="SOURCE" sourceNode="_hAZ54ApyEd6Mru3BnMqJHQ" targetNode="_hAZ54ApyEd6Mru3BnMqJHQ">
+      <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/ProcessState"/>
+      <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//ProcessState/transition"/>
+      <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//ProcessState/transition"/>
+      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
+    </sourceTargetCouple>
+    <sourceTargetCouple xmi:id="_zrnS4AyCEd6Mru3BnMqJHQ" containerType="SOURCE" sourceNode="_hAZ54ApyEd6Mru3BnMqJHQ" targetNode="_fowhwJdrEdyHY5QY11SiOA">
+      <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/ProcessState"/>
+      <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//ProcessState/transition"/>
+      <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//ProcessState/transition"/>
+      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
+    </sourceTargetCouple>
+    <sourceTargetCouple xmi:id="_2onPgAyCEd6Mru3BnMqJHQ" containerType="SOURCE" sourceNode="_hAZ54ApyEd6Mru3BnMqJHQ" targetNode="_EJSqAJdtEdyHY5QY11SiOA">
+      <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/ProcessState"/>
+      <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//ProcessState/transition"/>
+      <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//ProcessState/transition"/>
+      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
+    </sourceTargetCouple>
+    <sourceTargetCouple xmi:id="_5Rc6AAyCEd6Mru3BnMqJHQ" containerType="SOURCE" sourceNode="_hAZ54ApyEd6Mru3BnMqJHQ" targetNode="_UyuhcJdtEdyHY5QY11SiOA">
+      <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/ProcessState"/>
+      <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//ProcessState/transition"/>
+      <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//ProcessState/transition"/>
+      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
+    </sourceTargetCouple>
+    <sourceTargetCouple xmi:id="_A6u_kAyDEd6Mru3BnMqJHQ" containerType="SOURCE" sourceNode="_hAZ54ApyEd6Mru3BnMqJHQ" targetNode="__fjIsAnJEd6njOkWCso0oA">
+      <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/ProcessState"/>
+      <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//ProcessState/transition"/>
+      <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//ProcessState/transition"/>
+      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
+    </sourceTargetCouple>
+    <sourceTargetCouple xmi:id="_H79moAyDEd6Mru3BnMqJHQ" containerType="SOURCE" sourceNode="_hAZ54ApyEd6Mru3BnMqJHQ" targetNode="_ya3pgIyBEdy0-r37LrMUlA">
+      <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/ProcessState"/>
+      <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//ProcessState/transition"/>
+      <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//ProcessState/transition"/>
+      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
+    </sourceTargetCouple>
   </parts>
   <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_ZbR80AnIEd6njOkWCso0oA" object="_yL3hkAnIEd6njOkWCso0oA" defaultForegroundColor="27,134,199" targetDecoration="ARROW">
     <sourceTargetCouple xmi:id="_3c8ZoAnIEd6njOkWCso0oA" sourceNode="_IMmu4I0vEdy2iZ_dX7q7fg" targetNode="_ExDMEIyBEdy0-r37LrMUlA">
       <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Swimlane/manage"/>
       <refTargetToSource xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//TaskNode/swimlane"/>
+    </sourceTargetCouple>
+    <sourceTargetCouple xmi:id="_YH7FoAyIEd6Mru3BnMqJHQ" sourceNode="_IMmu4I0vEdy2iZ_dX7q7fg" targetNode="_xPUcYIyBEdy0-r37LrMUlA">
+      <refTargetToSource xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//StartState/initiator"/>
     </sourceTargetCouple>
   </parts>
   <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_Lmi9cAnPEd6njOkWCso0oA" object="_HFcw0AnPEd6njOkWCso0oA" defaultForegroundColor="27,134,199" targetDecoration="ARROW">
@@ -286,6 +363,16 @@
     </sourceTargetCouple>
   </parts>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_Ly5m4ApdEd6Mru3BnMqJHQ" object="_9zvkYApcEd6Mru3BnMqJHQ" type="Label"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_hAZ54ApyEd6Mru3BnMqJHQ" object="_drsn4ApyEd6Mru3BnMqJHQ" type="Class" layout="ClassLayout" directEditable="false"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_3Z-lkAyDEd6Mru3BnMqJHQ" object="_1wEogAyDEd6Mru3BnMqJHQ" foregroundColorChangeable="false" fontChangeable="false" type="Container With Inner Label" defaultBackgroundColor="25,202,255" backgroundColorChangeable="false" resizing="NONE" directEditable="false" defaultWidth="-1" defaultHeight="-1" minimumWidth="-1" minimumHeight="-1" maximumWidth="-1" maximumHeight="-1"/>
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_GOeUoAyEEd6Mru3BnMqJHQ" object="_D2-RwAyEEd6Mru3BnMqJHQ" defaultForegroundColor="49,125,171" foregroundColorChangeable="false" fontChangeable="false" sourceDecoration="DIAMOND" targetDecoration="ARROW">
+    <sourceTargetCouple xmi:id="_ekD_cAyEEd6Mru3BnMqJHQ" sourceNode="_ExDMEIyBEdy0-r37LrMUlA" targetNode="_3Z-lkAyDEd6Mru3BnMqJHQ">
+      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//TaskNode/clazz"/>
+    </sourceTargetCouple>
+    <sourceTargetCouple xmi:id="_gSTC4AyEEd6Mru3BnMqJHQ" sourceNode="_xPUcYIyBEdy0-r37LrMUlA" targetNode="_3Z-lkAyDEd6Mru3BnMqJHQ">
+      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//StartState/clazz"/>
+    </sourceTargetCouple>
+  </parts>
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_3n4WYIyAEdy0-r37LrMUlA">
     <genClass href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/StartState"/>
   </objects>
@@ -329,6 +416,13 @@
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_9zvkYApcEd6Mru3BnMqJHQ">
     <genClass href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/Attribute"/>
   </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_drsn4ApyEd6Mru3BnMqJHQ">
+    <genClass href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/ProcessState"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_1wEogAyDEd6Mru3BnMqJHQ">
+    <genClass href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/Clazz"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_D2-RwAyEEd6Mru3BnMqJHQ" name="isAssociatedWith"/>
   <genModel href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#/"/>
   <templateRootObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/Process"/>
   <editorConfigurator href="Workflow.editorconfigurator#_bc130Qm7Ed6njOkWCso0oA"/>

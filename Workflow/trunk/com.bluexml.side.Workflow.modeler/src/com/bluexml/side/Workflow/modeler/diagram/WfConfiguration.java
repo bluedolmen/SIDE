@@ -31,12 +31,14 @@ import org.topcased.modeler.graphconf.exceptions.MissingGraphConfFileException;
 import com.bluexml.side.Workflow.modeler.WorkflowPlugin;
 import com.bluexml.side.Workflow.modeler.diagram.edit.ActionEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.AttributeEditPart;
+import com.bluexml.side.Workflow.modeler.diagram.edit.ClazzEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.DecisionEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.EndStateEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.EventEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.ForkEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.JoinEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.NodeEditPart;
+import com.bluexml.side.Workflow.modeler.diagram.edit.ProcessStateEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.StartStateEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.SwimlaneEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.TaskNodeEditPart;
@@ -137,6 +139,14 @@ public class WfConfiguration implements IConfiguration {
 				new EditPart2ModelAdapterFactory(AttributeEditPart.class,
 						com.bluexml.side.workflow.Attribute.class),
 				AttributeEditPart.class);
+		Platform.getAdapterManager().registerAdapters(
+				new EditPart2ModelAdapterFactory(ProcessStateEditPart.class,
+						com.bluexml.side.workflow.ProcessState.class),
+				ProcessStateEditPart.class);
+		Platform.getAdapterManager().registerAdapters(
+				new EditPart2ModelAdapterFactory(ClazzEditPart.class,
+						com.bluexml.side.clazz.Clazz.class),
+				ClazzEditPart.class);
 	}
 
 	/**

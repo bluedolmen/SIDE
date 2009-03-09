@@ -648,13 +648,22 @@ public interface WorkflowPackage extends EPackage {
 	int PROCESS_STATE__TRANSITION = STATE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Event</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_STATE__EVENT = STATE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Process State</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 2;
+	int PROCESS_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.ForkImpl <em>Fork</em>}' class.
@@ -1643,6 +1652,17 @@ public interface WorkflowPackage extends EPackage {
 	EReference getProcessState_Transition();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.workflow.ProcessState#getEvent <em>Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Event</em>'.
+	 * @see com.bluexml.side.workflow.ProcessState#getEvent()
+	 * @see #getProcessState()
+	 * @generated
+	 */
+	EReference getProcessState_Event();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.Fork <em>Fork</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2455,6 +2475,14 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROCESS_STATE__TRANSITION = eINSTANCE.getProcessState_Transition();
+
+		/**
+		 * The meta object literal for the '<em><b>Event</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROCESS_STATE__EVENT = eINSTANCE.getProcessState_Event();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.ForkImpl <em>Fork</em>}' class.

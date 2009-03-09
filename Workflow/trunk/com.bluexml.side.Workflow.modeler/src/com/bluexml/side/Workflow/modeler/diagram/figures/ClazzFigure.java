@@ -12,27 +12,20 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Boston, MA 02111.
  ******************************************************************************/
-package com.bluexml.side.Workflow.modeler.diagram.policies;
-
-import org.topcased.modeler.di.model.GraphNode;
-import org.topcased.modeler.edit.policies.ModelerLayoutEditPolicy;
+package com.bluexml.side.Workflow.modeler.diagram.figures;
 
 /**
  * @generated
  */
-public class WfDiagramLayoutEditPolicy extends ModelerLayoutEditPolicy {
+public class ClazzFigure extends
+		org.topcased.draw2d.figures.ContainerWithInnerLabel {
 	/**
-	 * Default contructor.
+	 * Constructor
 	 *
 	 * @generated
 	 */
-	public WfDiagramLayoutEditPolicy() {
+	public ClazzFigure() {
 		super();
-	}
-
-	@Override
-	protected boolean isExternalObjectAllowed(GraphNode arg0, GraphNode arg1) {
-		return true;
 	}
 
 }

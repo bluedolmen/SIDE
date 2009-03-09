@@ -123,4 +123,22 @@ public interface WfEditPolicyConstants {
 	 */
 	String ATTRIBUTE_EDITPOLICY = "Attribute EditPolicy";
 
+	/**
+	 * The key used to install an <i>ProcessState</i> EditPolicy.
+	 * @generated
+	 */
+	String PROCESSSTATE_EDITPOLICY = "ProcessState EditPolicy";
+
+	/**
+	 * The key used to install an <i>Clazz</i> EditPolicy.
+	 * @generated
+	 */
+	String CLAZZ_EDITPOLICY = "Clazz EditPolicy";
+
+	/**
+	 * The key used to install an <i>isAssociatedWith</i> EditPolicy.
+	 * @generated
+	 */
+	String ISASSOCIATEDWITH_EDITPOLICY = "isAssociatedWith EditPolicy";
+
 }

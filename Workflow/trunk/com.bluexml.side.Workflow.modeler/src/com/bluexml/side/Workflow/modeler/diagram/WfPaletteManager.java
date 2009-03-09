@@ -128,6 +128,12 @@ public class WfPaletteManager extends ModelerPaletteManager {
 				WfImageRegistry.getImageDescriptor("ENDSTATE_LARGE")));
 
 		factory = new GraphElementCreationFactory(creationUtils,
+				WorkflowPackage.eINSTANCE.getProcessState(), "default");
+		entries.add(new ModelerCreationToolEntry("Sub process", "Sub process",
+				factory, WfImageRegistry.getImageDescriptor("PROCESSSTATE"),
+				WfImageRegistry.getImageDescriptor("PROCESSSTATE_LARGE")));
+
+		factory = new GraphElementCreationFactory(creationUtils,
 				WorkflowPackage.eINSTANCE.getJoin(), "default");
 		entries.add(new ModelerCreationToolEntry("Join", "Join", factory,
 				WfImageRegistry.getImageDescriptor("JOIN"), WfImageRegistry
@@ -219,6 +225,14 @@ public class WfPaletteManager extends ModelerPaletteManager {
 				"Has timer", factory, WfImageRegistry
 						.getImageDescriptor("HASTIMER"), WfImageRegistry
 						.getImageDescriptor("HASTIMER_LARGE")));
+
+		factory = new GraphElementCreationFactory(creationUtils,
+				WfSimpleObjectConstants.SIMPLE_OBJECT_ISASSOCIATEDWITH,
+				"default", false);
+		entries.add(new ModelerConnectionCreationToolEntry("Reference class",
+				"Reference class", factory, WfImageRegistry
+						.getImageDescriptor("ISASSOCIATEDWITH"),
+				WfImageRegistry.getImageDescriptor("ISASSOCIATEDWITH_LARGE")));
 
 		linksDrawer.addAll(entries);
 		getRoot().add(linksDrawer);

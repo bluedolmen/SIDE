@@ -12,27 +12,24 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Boston, MA 02111.
  ******************************************************************************/
-package com.bluexml.side.Workflow.modeler.diagram.policies;
+package com.bluexml.side.Workflow.modeler.diagram.figures;
 
-import org.topcased.modeler.di.model.GraphNode;
-import org.topcased.modeler.edit.policies.ModelerLayoutEditPolicy;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
+import org.eclipse.swt.SWT;
 
 /**
  * @generated
  */
-public class WfDiagramLayoutEditPolicy extends ModelerLayoutEditPolicy {
+public class isAssociatedWithFigure extends PolylineConnectionEx {
+
 	/**
-	 * Default contructor.
+	 * The constructor
 	 *
 	 * @generated
 	 */
-	public WfDiagramLayoutEditPolicy() {
+	public isAssociatedWithFigure() {
 		super();
-	}
-
-	@Override
-	protected boolean isExternalObjectAllowed(GraphNode arg0, GraphNode arg1) {
-		return true;
+		setLineStyle(SWT.LINE_SOLID);
 	}
 
 }

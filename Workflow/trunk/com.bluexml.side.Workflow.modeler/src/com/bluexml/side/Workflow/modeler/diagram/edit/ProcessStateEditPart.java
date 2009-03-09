@@ -15,83 +15,93 @@
 package com.bluexml.side.Workflow.modeler.diagram.edit;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.gef.EditPolicy;
-import org.eclipse.gef.Request;
-import org.eclipse.gef.RequestConstants;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.commands.Command;
-import org.eclipse.jface.window.Window;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.topcased.modeler.ModelerEditPolicyConstants;
+import org.topcased.modeler.di.model.DiagramElement;
+import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.EMFGraphNodeEditPart;
-import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
 import org.topcased.modeler.edit.policies.ResizableEditPolicy;
 import org.topcased.modeler.edit.policies.RestoreEditPolicy;
-import org.topcased.modeler.internal.ModelerPlugin;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
+import com.bluexml.side.Workflow.modeler.diagram.WfConfiguration;
 import com.bluexml.side.Workflow.modeler.diagram.WfEditPolicyConstants;
-import com.bluexml.side.Workflow.modeler.diagram.commands.ActionRestoreConnectionCommand;
-import com.bluexml.side.Workflow.modeler.diagram.commands.update.ActionUpdateCommand;
-import com.bluexml.side.Workflow.modeler.diagram.dialogs.ActionEditDialog;
-import com.bluexml.side.Workflow.modeler.diagram.figures.ActionFigure;
-import com.bluexml.side.Workflow.modeler.diagram.policies.actionsEdgeCreationEditPolicy;
+import com.bluexml.side.Workflow.modeler.diagram.commands.ProcessStateRestoreConnectionCommand;
+import com.bluexml.side.Workflow.modeler.diagram.figures.ProcessStateFigure;
+import com.bluexml.side.Workflow.modeler.diagram.policies.TransitionEdgeCreationEditPolicy;
 import com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferenceConstants;
-import com.bluexml.side.workflow.Action;
+import com.bluexml.side.workflow.ProcessState;
 
 /**
- * The Action object controller
- * 
+ * The ProcessState object controller
+ *
  * @generated
  */
-public class ActionEditPart extends EMFGraphNodeEditPart {
+public class ProcessStateEditPart extends EMFGraphNodeEditPart {
 	/**
 	 * Constructor
-	 * 
-	 * @param obj
-	 *            the graph node
+	 *
+	 * @param obj the graph node
 	 * @generated
 	 */
-	public ActionEditPart(GraphNode obj) {
+	public ProcessStateEditPart(GraphNode obj) {
 		super(obj);
 	}
 
 	/**
 	 * Creates edit policies and associates these with roles
-	 * 
+	 *
 	 * @generated
 	 */
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(WfEditPolicyConstants.ACTIONS_EDITPOLICY,
-				new actionsEdgeCreationEditPolicy());
+		installEditPolicy(WfEditPolicyConstants.TRANSITION_EDITPOLICY,
+				new TransitionEdgeCreationEditPolicy());
 
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {
 					protected Command getRestoreConnectionsCommand(
 							RestoreConnectionsRequest request) {
-						return new ActionRestoreConnectionCommand(getHost());
+						return new ProcessStateRestoreConnectionCommand(
+								getHost());
 					}
 				});
 
 		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY,
 				new ResizableEditPolicy());
 
-		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
-				new LabelDirectEditPolicy());
 	}
 
 	/**
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
-	 * @generated
+	 * @_generated
 	 */
 	protected IFigure createFigure() {
+		ProcessState state = (ProcessState) Utils.getElement(getGraphNode());
+		WfConfiguration config = new WfConfiguration();
 
-		return new ActionFigure();
+		if (getGraphNode().getContained().size() > 0) {
+			GraphNode eventsListNode = (GraphNode) getGraphNode()
+					.getContained().get(0);
+			EList<DiagramElement> eventsList = eventsListNode.getContained();
+			while (eventsList.size() > 0)
+				eventsList.remove(0);
+			for (Object o : state.getEvent()) {
+				GraphElement elt = config.getCreationUtils()
+						.createGraphElement((EObject) o);
+				eventsList.add(elt);
+			}
+		}
+
+		return new ProcessStateFigure();
 	}
 
 	/**
@@ -99,8 +109,9 @@ public class ActionEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultBackgroundColor() {
-		String backgroundColor = getPreferenceStore().getString(
-				WfDiagramPreferenceConstants.ACTION_DEFAULT_BACKGROUND_COLOR);
+		String backgroundColor = getPreferenceStore()
+				.getString(
+						WfDiagramPreferenceConstants.PROCESSSTATE_DEFAULT_BACKGROUND_COLOR);
 		if (backgroundColor.length() != 0) {
 			return Utils.getColor(backgroundColor);
 		}
@@ -112,8 +123,9 @@ public class ActionEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultForegroundColor() {
-		String foregroundColor = getPreferenceStore().getString(
-				WfDiagramPreferenceConstants.ACTION_DEFAULT_FOREGROUND_COLOR);
+		String foregroundColor = getPreferenceStore()
+				.getString(
+						WfDiagramPreferenceConstants.PROCESSSTATE_DEFAULT_FOREGROUND_COLOR);
 		if (foregroundColor.length() != 0) {
 			return Utils.getColor(foregroundColor);
 		}
@@ -126,7 +138,7 @@ public class ActionEditPart extends EMFGraphNodeEditPart {
 	 */
 	protected Font getPreferenceDefaultFont() {
 		String preferenceFont = getPreferenceStore().getString(
-				WfDiagramPreferenceConstants.ACTION_DEFAULT_FONT);
+				WfDiagramPreferenceConstants.PROCESSSTATE_DEFAULT_FONT);
 		if (preferenceFont.length() != 0) {
 			return Utils.getFont(new FontData(preferenceFont));
 		}
@@ -135,30 +147,11 @@ public class ActionEditPart extends EMFGraphNodeEditPart {
 	}
 
 	@Override
-	public void performRequest(Request request) {
-		if (request.getType() == RequestConstants.REQ_OPEN) {
-			Action action = (Action) Utils.getElement(getGraphNode());
-
-			ActionEditDialog dlg = new ActionEditDialog(action, ModelerPlugin
-					.getActiveWorkbenchShell());
-			if (dlg.open() == Window.OK) {
-				ActionUpdateCommand command = new ActionUpdateCommand(action,
-						dlg.getData());
-				getViewer().getEditDomain().getCommandStack().execute(command);
-				refresh();
-			}
-		} else {
-			super.performRequest(request);
-
-		}
-	}
-
-	@Override
 	protected void refreshHeaderLabel() {
-		Action action = (Action) Utils.getElement(getGraphNode());
-		if (action.getScript().size() > 0)
-			getLabel().setText(action.getScript().get(0).getExpression());
-		else
-			super.refreshHeaderLabel();
+		super.refreshHeaderLabel();
+		ProcessState state = (ProcessState) Utils.getElement(getGraphNode());
+		if (state.getSubprocess() != null)
+			getLabel().setText(state.getSubprocess().getName());
 	}
+
 }

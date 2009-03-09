@@ -673,6 +673,15 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getProcessState_Event() {
+		return (EReference)processStateEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFork() {
 		return forkEClass;
 	}
@@ -1099,6 +1108,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		processStateEClass = createEClass(PROCESS_STATE);
 		createEReference(processStateEClass, PROCESS_STATE__SUBPROCESS);
 		createEReference(processStateEClass, PROCESS_STATE__TRANSITION);
+		createEReference(processStateEClass, PROCESS_STATE__EVENT);
 
 		forkEClass = createEClass(FORK);
 		createEReference(forkEClass, FORK__TRANSITION);
@@ -1251,6 +1261,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		initEClass(processStateEClass, ProcessState.class, "ProcessState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProcessState_Subprocess(), this.getProcess(), null, "subprocess", null, 1, 1, ProcessState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getProcessState_Transition(), this.getTransition(), null, "transition", null, 0, -1, ProcessState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProcessState_Event(), this.getEvent(), null, "event", null, 0, -1, ProcessState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(forkEClass, Fork.class, "Fork", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFork_Transition(), this.getTransition(), null, "transition", null, 0, -1, Fork.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

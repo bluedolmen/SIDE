@@ -279,5 +279,52 @@
             <type href="http://www.kerblue.org/workflow/1.0#//Attribute"/>
         </bridge>
     </node>
+    <node
+        presentation="default"
+        defaultHeight="50"
+        defaultWidth="50"
+        minimumHeight="20"
+        minimumWidth="20"
+        maximumHeight="200"
+        maximumWidth="200"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Lucida Grande-regular-11"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="true"
+        isHeightResizable="true">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://www.kerblue.org/workflow/1.0#//ProcessState"/>
+        </bridge>
+    </node>
+    <node
+        presentation="default"
+        defaultHeight="-1"
+        defaultWidth="-1"
+        minimumHeight="-1"
+        minimumWidth="-1"
+        maximumHeight="-1"
+        maximumWidth="-1"
+        defaultBackgroundColor="25,202,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Lucida Grande-regular-11"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="false"
+        isHeightResizable="false">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://www.kerblue.org/class/1.0#//Clazz"/>
+        </bridge>
+    </node>
+    <edge
+        presentation="default"
+        defaultForegroundColor="49,125,171"
+        defaultFont="Lucida Grande-regular-11"
+        defaultRouter="ObliqueRouter"
+        lineWidth="1"
+        lineStyle="SOLID">
+        <bridge xsi:type="graphconf:StringBridge" type="isAssociatedWith"/>
+    </edge>
 </graphconf:DiagramGraphConf>
 

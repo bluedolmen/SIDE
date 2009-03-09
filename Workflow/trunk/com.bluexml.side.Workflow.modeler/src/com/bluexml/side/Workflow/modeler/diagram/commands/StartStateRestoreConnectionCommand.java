@@ -27,11 +27,13 @@ import org.topcased.modeler.editor.ICreationUtils;
 import org.topcased.modeler.utils.Utils;
 
 import com.bluexml.side.Workflow.modeler.diagram.WfSimpleObjectConstants;
+import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.workflow.Decision;
 import com.bluexml.side.workflow.EndState;
 import com.bluexml.side.workflow.Fork;
 import com.bluexml.side.workflow.Join;
 import com.bluexml.side.workflow.Node;
+import com.bluexml.side.workflow.ProcessState;
 import com.bluexml.side.workflow.StartState;
 import com.bluexml.side.workflow.Swimlane;
 import com.bluexml.side.workflow.TaskNode;
@@ -127,13 +129,13 @@ public class StartStateRestoreConnectionCommand extends
 					}
 				}
 
-				if (eObjectTgt instanceof Node) {
+				if (eObjectTgt instanceof ProcessState) {
 					if (autoRef) {
 						// autoRef not allowed
 					} else {
-						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createTransitionFromNodeToStartState_To(
-								graphElementTgt, graphElementSrc);
+						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
+						createTransitionFromStartStateToProcessState_To(
+								graphElementSrc, graphElementTgt);
 					}
 				}
 
@@ -142,8 +144,26 @@ public class StartStateRestoreConnectionCommand extends
 						// autoRef not allowed
 					} else {
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
+						createmanageFromSwimlaneToStartState_Initiator(
+								graphElementTgt, graphElementSrc);
+					}
+				}
+				if (eObjectTgt instanceof Swimlane) {
+					if (autoRef) {
+						// autoRef not allowed
+					} else {
+						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
 						createinitializeFromSwimlaneToStartState_Initiator(
 								graphElementTgt, graphElementSrc);
+					}
+				}
+				if (eObjectTgt instanceof Clazz) {
+					if (autoRef) {
+						// autoRef not allowed
+					} else {
+						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
+						createisAssociatedWithFromStartStateToClazz(
+								graphElementSrc, graphElementTgt);
 					}
 				}
 
@@ -390,10 +410,10 @@ public class StartStateRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createTransitionFromNodeToStartState_To(GraphElement srcElt,
-			GraphElement targetElt) {
-		Node sourceObject = (Node) Utils.getElement(srcElt);
-		StartState targetObject = (StartState) Utils.getElement(targetElt);
+	private void createTransitionFromStartStateToProcessState_To(
+			GraphElement srcElt, GraphElement targetElt) {
+		StartState sourceObject = (StartState) Utils.getElement(srcElt);
+		ProcessState targetObject = (ProcessState) Utils.getElement(targetElt);
 
 		EList edgeObjectList = sourceObject.getTransition();
 		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
@@ -429,6 +449,30 @@ public class StartStateRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
+	private void createmanageFromSwimlaneToStartState_Initiator(
+			GraphElement srcElt, GraphElement targetElt) {
+		Swimlane sourceObject = (Swimlane) Utils.getElement(srcElt);
+		StartState targetObject = (StartState) Utils.getElement(targetElt);
+
+		if (sourceObject.equals(targetObject.getInitiator())) {
+			// check if the relation does not exists yet
+			if (getExistingEdges(srcElt, targetElt,
+					WfSimpleObjectConstants.SIMPLE_OBJECT_MANAGE).size() == 0) {
+				GraphEdge edge = Utils
+						.createGraphEdge(WfSimpleObjectConstants.SIMPLE_OBJECT_MANAGE);
+				manageEdgeCreationCommand cmd = new manageEdgeCreationCommand(
+						null, edge, srcElt, false);
+				cmd.setTarget(targetElt);
+				add(cmd);
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
 	private void createinitializeFromSwimlaneToStartState_Initiator(
 			GraphElement srcElt, GraphElement targetElt) {
 		Swimlane sourceObject = (Swimlane) Utils.getElement(srcElt);
@@ -441,6 +485,31 @@ public class StartStateRestoreConnectionCommand extends
 				GraphEdge edge = Utils
 						.createGraphEdge(WfSimpleObjectConstants.SIMPLE_OBJECT_INITIALIZE);
 				initializeEdgeCreationCommand cmd = new initializeEdgeCreationCommand(
+						null, edge, srcElt, false);
+				cmd.setTarget(targetElt);
+				add(cmd);
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
+	private void createisAssociatedWithFromStartStateToClazz(
+			GraphElement srcElt, GraphElement targetElt) {
+		StartState sourceObject = (StartState) Utils.getElement(srcElt);
+		Clazz targetObject = (Clazz) Utils.getElement(targetElt);
+
+		if (sourceObject.getClazz().contains(targetObject)) {
+			// check if the relation does not exists yet
+			if (getExistingEdges(srcElt, targetElt,
+					WfSimpleObjectConstants.SIMPLE_OBJECT_ISASSOCIATEDWITH)
+					.size() == 0) {
+				GraphEdge edge = Utils
+						.createGraphEdge(WfSimpleObjectConstants.SIMPLE_OBJECT_ISASSOCIATEDWITH);
+				isAssociatedWithEdgeCreationCommand cmd = new isAssociatedWithEdgeCreationCommand(
 						null, edge, srcElt, false);
 				cmd.setTarget(targetElt);
 				add(cmd);

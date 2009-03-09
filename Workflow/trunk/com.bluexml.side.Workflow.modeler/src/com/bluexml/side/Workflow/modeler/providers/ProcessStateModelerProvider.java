@@ -5,7 +5,6 @@ package com.bluexml.side.Workflow.modeler.providers;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.topcased.modeler.providers.ILabelFeatureProvider;
 
 /**
@@ -13,7 +12,7 @@ import org.topcased.modeler.providers.ILabelFeatureProvider;
  *
  * @generated
  */
-public class ProcessStateModelerProvider extends ItemProviderAdapter implements
+public class ProcessStateModelerProvider extends StateModelerProvider implements
 		ILabelFeatureProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.

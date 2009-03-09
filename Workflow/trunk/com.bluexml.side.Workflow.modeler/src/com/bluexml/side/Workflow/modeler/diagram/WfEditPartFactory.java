@@ -36,6 +36,7 @@ import com.bluexml.side.Workflow.modeler.diagram.edit.EventEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.ForkEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.JoinEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.NodeEditPart;
+import com.bluexml.side.Workflow.modeler.diagram.edit.ProcessStateEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.StartStateEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.SwimlaneEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.TaskNodeEditPart;
@@ -45,6 +46,7 @@ import com.bluexml.side.Workflow.modeler.diagram.edit.WfDiagramEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.actionsEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.hasTimerEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.initializeEditPart;
+import com.bluexml.side.Workflow.modeler.diagram.edit.isAssociatedWithEditPart;
 import com.bluexml.side.Workflow.modeler.diagram.edit.manageEditPart;
 import com.bluexml.side.workflow.util.WorkflowSwitch;
 
@@ -107,6 +109,11 @@ public class WfEditPartFactory extends ModelerEditPartFactory {
 						.equals(((SimpleSemanticModelElement) edge
 								.getSemanticModel()).getTypeInfo())) {
 					return new hasTimerEditPart(edge);
+				}
+				if (WfSimpleObjectConstants.SIMPLE_OBJECT_ISASSOCIATEDWITH
+						.equals(((SimpleSemanticModelElement) edge
+								.getSemanticModel()).getTypeInfo())) {
+					return new isAssociatedWithEditPart(edge);
 				}
 			}
 		}
@@ -259,6 +266,23 @@ public class WfEditPartFactory extends ModelerEditPartFactory {
 		 */
 		public Object caseAttribute(com.bluexml.side.workflow.Attribute object) {
 			return new AttributeEditPart(node);
+		}
+
+		/**
+		 * @see com.bluexml.side.workflow.util.WorkflowSwitch#caseProcessState(com.bluexml.side.workflow.ProcessState)
+		 * @generated
+		 */
+		public Object caseProcessState(
+				com.bluexml.side.workflow.ProcessState object) {
+			String feature = DIUtils.getPropertyValue(node,
+					ModelerPropertyConstants.ESTRUCTURAL_FEATURE_ID);
+			if (!"".equals(feature)) {
+				int featureID = Integer.parseInt(feature);
+				return new EListEditPart(node, object.eClass()
+						.getEStructuralFeature(featureID));
+			} else {
+				return new ProcessStateEditPart(node);
+			}
 		}
 
 		/**

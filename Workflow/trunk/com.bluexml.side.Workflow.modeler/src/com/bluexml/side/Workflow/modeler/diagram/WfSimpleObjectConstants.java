@@ -42,4 +42,9 @@ public interface WfSimpleObjectConstants {
 	 * @generated
 	 */
 	String SIMPLE_OBJECT_HASTIMER = "hasTimer";
+	/**
+	 * The name that identify the <i>isAssociatedWith</i> SimpleObject.
+	 * @generated
+	 */
+	String SIMPLE_OBJECT_ISASSOCIATEDWITH = "isAssociatedWith";
 }

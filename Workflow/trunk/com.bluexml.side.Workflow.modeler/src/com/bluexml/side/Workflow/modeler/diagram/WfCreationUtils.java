@@ -117,6 +117,18 @@ public class WfCreationUtils extends AbstractCreationUtils {
 		}
 
 		/**
+		 * @see com.bluexml.side.workflow.util.WorkflowSwitch#caseProcessState(com.bluexml.side.workflow.ProcessState)
+		 * @generated
+		 */
+		public Object caseProcessState(
+				com.bluexml.side.workflow.ProcessState object) {
+			if ("default".equals(presentation)) {
+				return createGraphElementProcessState(object, presentation);
+			}
+			return null;
+		}
+
+		/**
 		 * @see com.bluexml.side.workflow.util.WorkflowSwitch#caseJoin(com.bluexml.side.workflow.Join)
 		 * @generated
 		 */
@@ -310,6 +322,23 @@ public class WfCreationUtils extends AbstractCreationUtils {
 
 		GraphNode events = createGraphNode(element,
 				WorkflowPackage.END_STATE__EVENT, presentation);
+		events.setContainer(nodeParent);
+
+		return nodeParent;
+	}
+
+	/**
+	 * @param element the model element
+	 * @param presentation the presentation of the graphical element
+	 * @return the complete GraphElement
+	 * @_generated
+	 */
+	protected GraphElement createGraphElementProcessState(
+			com.bluexml.side.workflow.ProcessState element, String presentation) {
+		GraphNode nodeParent = createGraphNode(element, presentation);
+
+		GraphNode events = createGraphNode(element,
+				WorkflowPackage.PROCESS_STATE__EVENT, presentation);
 		events.setContainer(nodeParent);
 
 		return nodeParent;

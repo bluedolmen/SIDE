@@ -14,22 +14,60 @@
  ******************************************************************************/
 package com.bluexml.side.Workflow.modeler.diagram.figures;
 
+import org.eclipse.draw2d.Locator;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.swt.SWT;
+import org.topcased.modeler.edit.locators.EdgeObjectOffsetLocator;
+import org.topcased.modeler.figures.EdgeObjectOffsetEditableLabel;
+import org.topcased.modeler.figures.IEdgeObjectFigure;
+import org.topcased.modeler.figures.IEdgeObjectOffsetFigure;
 
 /**
  * @generated
  */
 public class TransitionFigure extends PolylineConnectionEx {
 
+	private IEdgeObjectFigure middleNameEdgeObject;
+
+	private Locator middleNameLocator;
+
 	/**
 	 * The constructor
 	 *
-	 * @generated
+	 * @_generated
 	 */
 	public TransitionFigure() {
 		super();
 		setLineStyle(SWT.LINE_SOLID);
+
+		middleNameEdgeObject = new EdgeObjectOffsetEditableLabel(this);
+		middleNameLocator = new EdgeObjectOffsetLocator(
+				(IEdgeObjectOffsetFigure) middleNameEdgeObject);
+		add(middleNameEdgeObject, middleNameLocator);
 	}
 
+	public IEdgeObjectFigure getMiddleNameEdgeObject() {
+		return middleNameEdgeObject;
+	}
+
+	public void setMiddleNameEdgeObject(IEdgeObjectFigure middleNameEdgeObject) {
+		this.middleNameEdgeObject = middleNameEdgeObject;
+	}
+
+	public Locator getMiddleNameLocator() {
+		return middleNameLocator;
+	}
+
+	public void setMiddleNameLocator(Locator middleNameLocator) {
+		this.middleNameLocator = middleNameLocator;
+	}
+
+	public Locator getLocator(IEdgeObjectFigure edgeObjectfigure) {
+
+		if (edgeObjectfigure == middleNameEdgeObject) {
+			return middleNameLocator;
+		}
+
+		return null;
+	}
 }

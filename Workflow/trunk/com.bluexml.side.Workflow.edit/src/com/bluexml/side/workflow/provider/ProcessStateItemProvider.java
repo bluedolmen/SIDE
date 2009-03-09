@@ -103,6 +103,7 @@ public class ProcessStateItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(WorkflowPackage.Literals.PROCESS_STATE__TRANSITION);
+			childrenFeatures.add(WorkflowPackage.Literals.PROCESS_STATE__EVENT);
 		}
 		return childrenFeatures;
 	}
@@ -155,6 +156,7 @@ public class ProcessStateItemProvider
 
 		switch (notification.getFeatureID(ProcessState.class)) {
 			case WorkflowPackage.PROCESS_STATE__TRANSITION:
+			case WorkflowPackage.PROCESS_STATE__EVENT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -176,6 +178,11 @@ public class ProcessStateItemProvider
 			(createChildParameter
 				(WorkflowPackage.Literals.PROCESS_STATE__TRANSITION,
 				 WorkflowFactory.eINSTANCE.createTransition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(WorkflowPackage.Literals.PROCESS_STATE__EVENT,
+				 WorkflowFactory.eINSTANCE.createEvent()));
 	}
 
 }

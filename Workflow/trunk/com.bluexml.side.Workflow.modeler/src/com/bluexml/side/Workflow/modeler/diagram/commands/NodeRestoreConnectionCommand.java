@@ -31,6 +31,7 @@ import com.bluexml.side.workflow.EndState;
 import com.bluexml.side.workflow.Fork;
 import com.bluexml.side.workflow.Join;
 import com.bluexml.side.workflow.Node;
+import com.bluexml.side.workflow.ProcessState;
 import com.bluexml.side.workflow.StartState;
 import com.bluexml.side.workflow.TaskNode;
 import com.bluexml.side.workflow.Transition;
@@ -125,16 +126,6 @@ public class NodeRestoreConnectionCommand extends
 					}
 				}
 
-				if (eObjectTgt instanceof StartState) {
-					if (autoRef) {
-						// autoRef not allowed
-					} else {
-						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-						createTransitionFromNodeToStartState_To(
-								graphElementSrc, graphElementTgt);
-					}
-				}
-
 				if (eObjectTgt instanceof TaskNode) {
 					if (autoRef) {
 						// autoRef not allowed
@@ -185,6 +176,26 @@ public class NodeRestoreConnectionCommand extends
 						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
 						createTransitionFromNodeToEndState_To(graphElementSrc,
 								graphElementTgt);
+					}
+				}
+
+				if (eObjectTgt instanceof ProcessState) {
+					if (autoRef) {
+						// autoRef not allowed
+					} else {
+						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
+						createTransitionFromNodeToProcessState_To(
+								graphElementSrc, graphElementTgt);
+					}
+				}
+
+				if (eObjectTgt instanceof ProcessState) {
+					if (autoRef) {
+						// autoRef not allowed
+					} else {
+						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
+						createTransitionFromProcessStateToNode_To(
+								graphElementTgt, graphElementSrc);
 					}
 				}
 
@@ -432,45 +443,6 @@ public class NodeRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createTransitionFromNodeToStartState_To(GraphElement srcElt,
-			GraphElement targetElt) {
-		Node sourceObject = (Node) Utils.getElement(srcElt);
-		StartState targetObject = (StartState) Utils.getElement(targetElt);
-
-		EList edgeObjectList = sourceObject.getTransition();
-		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
-			Object obj = it.next();
-			if (obj instanceof Transition) {
-				Transition edgeObject = (Transition) obj;
-				if (targetObject.equals(edgeObject.getTo())
-						&& sourceObject.getTransition().contains(edgeObject)) {
-					// check if the relation does not exists yet
-					List<GraphEdge> existing = getExistingEdges(srcElt,
-							targetElt, Transition.class);
-					if (!isAlreadyPresent(existing, edgeObject)) {
-						ICreationUtils factory = getModeler()
-								.getActiveConfiguration().getCreationUtils();
-						// restore the link with its default presentation
-						GraphElement edge = factory
-								.createGraphElement(edgeObject);
-						if (edge instanceof GraphEdge) {
-							TransitionEdgeCreationCommand cmd = new TransitionEdgeCreationCommand(
-									getEditDomain(), (GraphEdge) edge, srcElt,
-									false);
-							cmd.setTarget(targetElt);
-							add(cmd);
-						}
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * @param srcElt the source element
-	 * @param targetElt the target element
-	 * @generated
-	 */
 	private void createTransitionFromNodeToTaskNode_To(GraphElement srcElt,
 			GraphElement targetElt) {
 		Node sourceObject = (Node) Utils.getElement(srcElt);
@@ -631,6 +603,84 @@ public class NodeRestoreConnectionCommand extends
 			GraphElement targetElt) {
 		Node sourceObject = (Node) Utils.getElement(srcElt);
 		EndState targetObject = (EndState) Utils.getElement(targetElt);
+
+		EList edgeObjectList = sourceObject.getTransition();
+		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
+			Object obj = it.next();
+			if (obj instanceof Transition) {
+				Transition edgeObject = (Transition) obj;
+				if (targetObject.equals(edgeObject.getTo())
+						&& sourceObject.getTransition().contains(edgeObject)) {
+					// check if the relation does not exists yet
+					List<GraphEdge> existing = getExistingEdges(srcElt,
+							targetElt, Transition.class);
+					if (!isAlreadyPresent(existing, edgeObject)) {
+						ICreationUtils factory = getModeler()
+								.getActiveConfiguration().getCreationUtils();
+						// restore the link with its default presentation
+						GraphElement edge = factory
+								.createGraphElement(edgeObject);
+						if (edge instanceof GraphEdge) {
+							TransitionEdgeCreationCommand cmd = new TransitionEdgeCreationCommand(
+									getEditDomain(), (GraphEdge) edge, srcElt,
+									false);
+							cmd.setTarget(targetElt);
+							add(cmd);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
+	private void createTransitionFromNodeToProcessState_To(GraphElement srcElt,
+			GraphElement targetElt) {
+		Node sourceObject = (Node) Utils.getElement(srcElt);
+		ProcessState targetObject = (ProcessState) Utils.getElement(targetElt);
+
+		EList edgeObjectList = sourceObject.getTransition();
+		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
+			Object obj = it.next();
+			if (obj instanceof Transition) {
+				Transition edgeObject = (Transition) obj;
+				if (targetObject.equals(edgeObject.getTo())
+						&& sourceObject.getTransition().contains(edgeObject)) {
+					// check if the relation does not exists yet
+					List<GraphEdge> existing = getExistingEdges(srcElt,
+							targetElt, Transition.class);
+					if (!isAlreadyPresent(existing, edgeObject)) {
+						ICreationUtils factory = getModeler()
+								.getActiveConfiguration().getCreationUtils();
+						// restore the link with its default presentation
+						GraphElement edge = factory
+								.createGraphElement(edgeObject);
+						if (edge instanceof GraphEdge) {
+							TransitionEdgeCreationCommand cmd = new TransitionEdgeCreationCommand(
+									getEditDomain(), (GraphEdge) edge, srcElt,
+									false);
+							cmd.setTarget(targetElt);
+							add(cmd);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
+	private void createTransitionFromProcessStateToNode_To(GraphElement srcElt,
+			GraphElement targetElt) {
+		ProcessState sourceObject = (ProcessState) Utils.getElement(srcElt);
+		Node targetObject = (Node) Utils.getElement(targetElt);
 
 		EList edgeObjectList = sourceObject.getTransition();
 		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {

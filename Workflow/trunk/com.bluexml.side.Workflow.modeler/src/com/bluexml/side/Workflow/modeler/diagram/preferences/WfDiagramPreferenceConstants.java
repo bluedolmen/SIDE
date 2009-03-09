@@ -326,4 +326,58 @@ public interface WfDiagramPreferenceConstants {
 	 */
 	String ATTRIBUTE_DEFAULT_FONT = "Attribute Default Font";
 
+	/**
+	 * The key used to install a <i>ProcessState Default Background Color</i> Preference.
+	 * @generated
+	 */
+	String PROCESSSTATE_DEFAULT_BACKGROUND_COLOR = "ProcessState Default Background Color";
+
+	/**
+	 * The key used to install a <i>ProcessState Default Foreground Color</i> Preference.
+	 * @generated
+	 */
+	String PROCESSSTATE_DEFAULT_FOREGROUND_COLOR = "ProcessState Default Foreground Color";
+
+	/**
+	 * The key used to install a <i>ProcessState Default Font</i> Preference.
+	 * @generated
+	 */
+	String PROCESSSTATE_DEFAULT_FONT = "ProcessState Default Font";
+
+	/**
+	 * The key used to install a <i>Clazz Default Background Color</i> Preference.
+	 * @generated
+	 */
+	String CLAZZ_DEFAULT_BACKGROUND_COLOR = "Clazz Default Background Color";
+
+	/**
+	 * The key used to install a <i>Clazz Default Foreground Color</i> Preference.
+	 * @generated
+	 */
+	String CLAZZ_DEFAULT_FOREGROUND_COLOR = "Clazz Default Foreground Color";
+
+	/**
+	 * The key used to install a <i>Clazz Default Font</i> Preference.
+	 * @generated
+	 */
+	String CLAZZ_DEFAULT_FONT = "Clazz Default Font";
+
+	/**
+	 * The key used to install a <i>isAssociatedWith Edge Default Font</i> Preference.
+	 * @generated
+	 */
+	String ISASSOCIATEDWITH_EDGE_DEFAULT_FONT = "isAssociatedWith Edge Default Font";
+
+	/**
+	 * The key used to install a <i>isAssociatedWith Edge Default Foreground Color</i> Preference.
+	 * @generated
+	 */
+	String ISASSOCIATEDWITH_EDGE_DEFAULT_FOREGROUND_COLOR = "isAssociatedWith Edge Default Foreground Color";
+
+	/**
+	 * The key used to install a <i>isAssociatedWith Edge Default Router</i> Preference.
+	 * @generated
+	 */
+	String ISASSOCIATEDWITH_EDGE_DEFAULT_ROUTER = "isAssociatedWith Edge Default Router";
+
 }

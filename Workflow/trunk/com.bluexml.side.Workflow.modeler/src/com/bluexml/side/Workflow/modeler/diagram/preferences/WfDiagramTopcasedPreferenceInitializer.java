@@ -311,6 +311,59 @@ public class WfDiagramTopcasedPreferenceInitializer implements
 				StringConverter.asFontData("Lucida Grande-regular-11")
 						.toString());
 
+		// Initialize the default value of the PROCESSSTATE_DEFAULT_BACKGROUND_COLOR property 
+		defaultWfPreference
+				.put(
+						WfDiagramPreferenceConstants.PROCESSSTATE_DEFAULT_BACKGROUND_COLOR,
+						"255,255,255");
+
+		// Initialize the default value of the PROCESSSTATE_DEFAULT_FOREGROUND_COLOR property
+		defaultWfPreference
+				.put(
+						WfDiagramPreferenceConstants.PROCESSSTATE_DEFAULT_FOREGROUND_COLOR,
+						"0,0,0");
+
+		// Initialize the default value of the PROCESSSTATE_DEFAULT_FONT property
+		defaultWfPreference.put(
+				WfDiagramPreferenceConstants.PROCESSSTATE_DEFAULT_FONT,
+				StringConverter.asFontData("Lucida Grande-regular-11")
+						.toString());
+
+		// Initialize the default value of the CLAZZ_DEFAULT_BACKGROUND_COLOR property 
+		defaultWfPreference.put(
+				WfDiagramPreferenceConstants.CLAZZ_DEFAULT_BACKGROUND_COLOR,
+				"25,202,255");
+
+		// Initialize the default value of the CLAZZ_DEFAULT_FOREGROUND_COLOR property
+		defaultWfPreference.put(
+				WfDiagramPreferenceConstants.CLAZZ_DEFAULT_FOREGROUND_COLOR,
+				"0,0,0");
+
+		// Initialize the default value of the CLAZZ_DEFAULT_FONT property
+		defaultWfPreference.put(
+				WfDiagramPreferenceConstants.CLAZZ_DEFAULT_FONT,
+				StringConverter.asFontData("Lucida Grande-regular-11")
+						.toString());
+
+		// Initialize the default value of the ISASSOCIATEDWITH_EDGE_DEFAULT_FONT property
+		defaultWfPreference
+				.put(
+						WfDiagramPreferenceConstants.ISASSOCIATEDWITH_EDGE_DEFAULT_FONT,
+						StringConverter.asFontData("Lucida Grande-regular-11")
+								.toString());
+
+		// Initialize the default value of the ISASSOCIATEDWITH_EDGE_DEFAULT_FOREGROUND_COLOR property
+		defaultWfPreference
+				.put(
+						WfDiagramPreferenceConstants.ISASSOCIATEDWITH_EDGE_DEFAULT_FOREGROUND_COLOR,
+						"49,125,171");
+
+		// Initialize the default value of the ISASSOCIATEDWITH_EDGE_DEFAULT_ROUTER property
+		defaultWfPreference
+				.put(
+						WfDiagramPreferenceConstants.ISASSOCIATEDWITH_EDGE_DEFAULT_ROUTER,
+						"ObliqueRouter");
+
 		return defaultWfPreference;
 	}
 }

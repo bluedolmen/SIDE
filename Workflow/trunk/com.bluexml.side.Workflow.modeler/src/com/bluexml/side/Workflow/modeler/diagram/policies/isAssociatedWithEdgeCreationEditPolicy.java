@@ -26,14 +26,14 @@ import org.topcased.modeler.utils.SourceTargetData;
 import org.topcased.modeler.utils.Utils;
 
 import com.bluexml.side.Workflow.modeler.diagram.WfSimpleObjectConstants;
-import com.bluexml.side.Workflow.modeler.diagram.commands.manageEdgeCreationCommand;
+import com.bluexml.side.Workflow.modeler.diagram.commands.isAssociatedWithEdgeCreationCommand;
 
 /**
- * manage edge creation
+ * isAssociatedWith edge creation
  *
  * @generated
  */
-public class manageEdgeCreationEditPolicy extends
+public class isAssociatedWithEdgeCreationEditPolicy extends
 		AbstractEdgeCreationEditPolicy {
 	/**
 	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#createCommand(org.eclipse.gef.EditDomain, org.topcased.modeler.di.model.GraphEdge, org.topcased.modeler.di.model.GraphElement)
@@ -41,7 +41,7 @@ public class manageEdgeCreationEditPolicy extends
 	 */
 	protected CreateTypedEdgeCommand createCommand(EditDomain domain,
 			GraphEdge edge, GraphElement source) {
-		return new manageEdgeCreationCommand(domain, edge, source);
+		return new isAssociatedWithEdgeCreationCommand(domain, edge, source);
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class manageEdgeCreationEditPolicy extends
 	 */
 	protected boolean checkEdge(GraphEdge edge) {
 		if (edge.getSemanticModel() instanceof SimpleSemanticModelElement) {
-			return WfSimpleObjectConstants.SIMPLE_OBJECT_MANAGE
+			return WfSimpleObjectConstants.SIMPLE_OBJECT_ISASSOCIATEDWITH
 					.equals(((SimpleSemanticModelElement) edge
 							.getSemanticModel()).getTypeInfo());
 		}
@@ -63,10 +63,10 @@ public class manageEdgeCreationEditPolicy extends
 	 */
 	protected boolean checkSource(GraphElement source) {
 		EObject object = Utils.getElement(source);
-		if (object instanceof com.bluexml.side.workflow.Swimlane) {
+		if (object instanceof com.bluexml.side.workflow.TaskNode) {
 			return true;
 		}
-		if (object instanceof com.bluexml.side.workflow.Swimlane) {
+		if (object instanceof com.bluexml.side.workflow.StartState) {
 			return true;
 		}
 		return false;
@@ -81,15 +81,15 @@ public class manageEdgeCreationEditPolicy extends
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 
-		if (sourceObject instanceof com.bluexml.side.workflow.Swimlane
-				&& targetObject instanceof com.bluexml.side.workflow.TaskNode) {
+		if (sourceObject instanceof com.bluexml.side.workflow.TaskNode
+				&& targetObject instanceof com.bluexml.side.clazz.Clazz) {
 			if (!sourceObject.equals(targetObject)) {
 				return true;
 			}
 		}
 
-		if (sourceObject instanceof com.bluexml.side.workflow.Swimlane
-				&& targetObject instanceof com.bluexml.side.workflow.StartState) {
+		if (sourceObject instanceof com.bluexml.side.workflow.StartState
+				&& targetObject instanceof com.bluexml.side.clazz.Clazz) {
 			if (!sourceObject.equals(targetObject)) {
 				return true;
 			}
@@ -102,7 +102,7 @@ public class manageEdgeCreationEditPolicy extends
 	 * @generated
 	 */
 	protected boolean checkCommand(Command command) {
-		return command instanceof manageEdgeCreationCommand;
+		return command instanceof isAssociatedWithEdgeCreationCommand;
 	}
 
 	/**
@@ -114,15 +114,15 @@ public class manageEdgeCreationEditPolicy extends
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 
-		if (sourceObject instanceof com.bluexml.side.workflow.Swimlane
-				&& targetObject instanceof com.bluexml.side.workflow.TaskNode) {
+		if (sourceObject instanceof com.bluexml.side.workflow.TaskNode
+				&& targetObject instanceof com.bluexml.side.clazz.Clazz) {
 			return new SourceTargetData(false, false, SourceTargetData.NONE,
-					null, null, null, null, null, "manage", null, "swimlane");
+					null, null, null, null, null, "clazz", null, null);
 		}
-		if (sourceObject instanceof com.bluexml.side.workflow.Swimlane
-				&& targetObject instanceof com.bluexml.side.workflow.StartState) {
+		if (sourceObject instanceof com.bluexml.side.workflow.StartState
+				&& targetObject instanceof com.bluexml.side.clazz.Clazz) {
 			return new SourceTargetData(false, false, SourceTargetData.NONE,
-					null, null, null, null, null, null, null, "initiator");
+					null, null, null, null, null, "clazz", null, null);
 		}
 		return null;
 	}

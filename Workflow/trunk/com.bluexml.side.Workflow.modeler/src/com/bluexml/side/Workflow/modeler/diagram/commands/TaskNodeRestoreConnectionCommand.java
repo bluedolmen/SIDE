@@ -27,11 +27,13 @@ import org.topcased.modeler.editor.ICreationUtils;
 import org.topcased.modeler.utils.Utils;
 
 import com.bluexml.side.Workflow.modeler.diagram.WfSimpleObjectConstants;
+import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.workflow.Decision;
 import com.bluexml.side.workflow.EndState;
 import com.bluexml.side.workflow.Fork;
 import com.bluexml.side.workflow.Join;
 import com.bluexml.side.workflow.Node;
+import com.bluexml.side.workflow.ProcessState;
 import com.bluexml.side.workflow.StartState;
 import com.bluexml.side.workflow.Swimlane;
 import com.bluexml.side.workflow.TaskNode;
@@ -140,6 +142,16 @@ public class TaskNodeRestoreConnectionCommand extends
 					}
 				}
 
+				if (eObjectTgt instanceof ProcessState) {
+					if (autoRef) {
+						// autoRef not allowed
+					} else {
+						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
+						createTransitionFromTaskNodeToProcessState_To(
+								graphElementSrc, graphElementTgt);
+					}
+				}
+
 				if (eObjectTgt instanceof Decision) {
 					if (autoRef) {
 						// autoRef not allowed
@@ -180,6 +192,16 @@ public class TaskNodeRestoreConnectionCommand extends
 					}
 				}
 
+				if (eObjectTgt instanceof ProcessState) {
+					if (autoRef) {
+						// autoRef not allowed
+					} else {
+						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
+						createTransitionFromProcessStateToTaskNode_To(
+								graphElementTgt, graphElementSrc);
+					}
+				}
+
 				if (eObjectTgt instanceof Swimlane) {
 					if (autoRef) {
 						// autoRef not allowed
@@ -187,6 +209,15 @@ public class TaskNodeRestoreConnectionCommand extends
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
 						createmanageFromSwimlaneToTaskNode_Swimlane(
 								graphElementTgt, graphElementSrc);
+					}
+				}
+				if (eObjectTgt instanceof Clazz) {
+					if (autoRef) {
+						// autoRef not allowed
+					} else {
+						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
+						createisAssociatedWithFromTaskNodeToClazz(
+								graphElementSrc, graphElementTgt);
 					}
 				}
 
@@ -478,6 +509,45 @@ public class TaskNodeRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
+	private void createTransitionFromTaskNodeToProcessState_To(
+			GraphElement srcElt, GraphElement targetElt) {
+		TaskNode sourceObject = (TaskNode) Utils.getElement(srcElt);
+		ProcessState targetObject = (ProcessState) Utils.getElement(targetElt);
+
+		EList edgeObjectList = sourceObject.getTransition();
+		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
+			Object obj = it.next();
+			if (obj instanceof Transition) {
+				Transition edgeObject = (Transition) obj;
+				if (targetObject.equals(edgeObject.getTo())
+						&& sourceObject.getTransition().contains(edgeObject)) {
+					// check if the relation does not exists yet
+					List<GraphEdge> existing = getExistingEdges(srcElt,
+							targetElt, Transition.class);
+					if (!isAlreadyPresent(existing, edgeObject)) {
+						ICreationUtils factory = getModeler()
+								.getActiveConfiguration().getCreationUtils();
+						// restore the link with its default presentation
+						GraphElement edge = factory
+								.createGraphElement(edgeObject);
+						if (edge instanceof GraphEdge) {
+							TransitionEdgeCreationCommand cmd = new TransitionEdgeCreationCommand(
+									getEditDomain(), (GraphEdge) edge, srcElt,
+									false);
+							cmd.setTarget(targetElt);
+							add(cmd);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
 	private void createTransitionFromDecisionToTaskNode_To(GraphElement srcElt,
 			GraphElement targetElt) {
 		Decision sourceObject = (Decision) Utils.getElement(srcElt);
@@ -634,6 +704,45 @@ public class TaskNodeRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
+	private void createTransitionFromProcessStateToTaskNode_To(
+			GraphElement srcElt, GraphElement targetElt) {
+		ProcessState sourceObject = (ProcessState) Utils.getElement(srcElt);
+		TaskNode targetObject = (TaskNode) Utils.getElement(targetElt);
+
+		EList edgeObjectList = sourceObject.getTransition();
+		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
+			Object obj = it.next();
+			if (obj instanceof Transition) {
+				Transition edgeObject = (Transition) obj;
+				if (targetObject.equals(edgeObject.getTo())
+						&& sourceObject.getTransition().contains(edgeObject)) {
+					// check if the relation does not exists yet
+					List<GraphEdge> existing = getExistingEdges(srcElt,
+							targetElt, Transition.class);
+					if (!isAlreadyPresent(existing, edgeObject)) {
+						ICreationUtils factory = getModeler()
+								.getActiveConfiguration().getCreationUtils();
+						// restore the link with its default presentation
+						GraphElement edge = factory
+								.createGraphElement(edgeObject);
+						if (edge instanceof GraphEdge) {
+							TransitionEdgeCreationCommand cmd = new TransitionEdgeCreationCommand(
+									getEditDomain(), (GraphEdge) edge, srcElt,
+									false);
+							cmd.setTarget(targetElt);
+							add(cmd);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
 	private void createmanageFromSwimlaneToTaskNode_Swimlane(
 			GraphElement srcElt, GraphElement targetElt) {
 		Swimlane sourceObject = (Swimlane) Utils.getElement(srcElt);
@@ -647,6 +756,31 @@ public class TaskNodeRestoreConnectionCommand extends
 				GraphEdge edge = Utils
 						.createGraphEdge(WfSimpleObjectConstants.SIMPLE_OBJECT_MANAGE);
 				manageEdgeCreationCommand cmd = new manageEdgeCreationCommand(
+						null, edge, srcElt, false);
+				cmd.setTarget(targetElt);
+				add(cmd);
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
+	private void createisAssociatedWithFromTaskNodeToClazz(GraphElement srcElt,
+			GraphElement targetElt) {
+		TaskNode sourceObject = (TaskNode) Utils.getElement(srcElt);
+		Clazz targetObject = (Clazz) Utils.getElement(targetElt);
+
+		if (sourceObject.getClazz().contains(targetObject)) {
+			// check if the relation does not exists yet
+			if (getExistingEdges(srcElt, targetElt,
+					WfSimpleObjectConstants.SIMPLE_OBJECT_ISASSOCIATEDWITH)
+					.size() == 0) {
+				GraphEdge edge = Utils
+						.createGraphEdge(WfSimpleObjectConstants.SIMPLE_OBJECT_ISASSOCIATEDWITH);
+				isAssociatedWithEdgeCreationCommand cmd = new isAssociatedWithEdgeCreationCommand(
 						null, edge, srcElt, false);
 				cmd.setTarget(targetElt);
 				add(cmd);

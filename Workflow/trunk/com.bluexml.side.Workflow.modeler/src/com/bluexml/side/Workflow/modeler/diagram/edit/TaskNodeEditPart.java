@@ -38,6 +38,7 @@ import com.bluexml.side.Workflow.modeler.diagram.WfEditPolicyConstants;
 import com.bluexml.side.Workflow.modeler.diagram.commands.TaskNodeRestoreConnectionCommand;
 import com.bluexml.side.Workflow.modeler.diagram.figures.TaskNodeFigure;
 import com.bluexml.side.Workflow.modeler.diagram.policies.TransitionEdgeCreationEditPolicy;
+import com.bluexml.side.Workflow.modeler.diagram.policies.isAssociatedWithEdgeCreationEditPolicy;
 import com.bluexml.side.Workflow.modeler.diagram.policies.manageEdgeCreationEditPolicy;
 import com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferenceConstants;
 import com.bluexml.side.workflow.TaskNode;
@@ -71,6 +72,9 @@ public class TaskNodeEditPart extends EMFGraphNodeEditPart {
 
 		installEditPolicy(WfEditPolicyConstants.MANAGE_EDITPOLICY,
 				new manageEdgeCreationEditPolicy());
+
+		installEditPolicy(WfEditPolicyConstants.ISASSOCIATEDWITH_EDITPOLICY,
+				new isAssociatedWithEdgeCreationEditPolicy());
 
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {

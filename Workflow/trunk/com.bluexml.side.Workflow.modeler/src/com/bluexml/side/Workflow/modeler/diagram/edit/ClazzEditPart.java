@@ -15,74 +15,64 @@
 package com.bluexml.side.Workflow.modeler.diagram.edit;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.gef.EditPolicy;
-import org.eclipse.gef.Request;
-import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.commands.Command;
-import org.eclipse.jface.window.Window;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.EMFGraphNodeEditPart;
-import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
-import org.topcased.modeler.edit.policies.ResizableEditPolicy;
 import org.topcased.modeler.edit.policies.RestoreEditPolicy;
-import org.topcased.modeler.internal.ModelerPlugin;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
 import com.bluexml.side.Workflow.modeler.diagram.WfEditPolicyConstants;
-import com.bluexml.side.Workflow.modeler.diagram.commands.ActionRestoreConnectionCommand;
-import com.bluexml.side.Workflow.modeler.diagram.commands.update.ActionUpdateCommand;
-import com.bluexml.side.Workflow.modeler.diagram.dialogs.ActionEditDialog;
-import com.bluexml.side.Workflow.modeler.diagram.figures.ActionFigure;
-import com.bluexml.side.Workflow.modeler.diagram.policies.actionsEdgeCreationEditPolicy;
+import com.bluexml.side.Workflow.modeler.diagram.commands.ClazzRestoreConnectionCommand;
+import com.bluexml.side.Workflow.modeler.diagram.figures.ClazzFigure;
+import com.bluexml.side.Workflow.modeler.diagram.policies.isAssociatedWithEdgeCreationEditPolicy;
 import com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferenceConstants;
-import com.bluexml.side.workflow.Action;
 
 /**
- * The Action object controller
- * 
+ * The Clazz object controller
+ *
  * @generated
  */
-public class ActionEditPart extends EMFGraphNodeEditPart {
+public class ClazzEditPart extends EMFGraphNodeEditPart {
 	/**
 	 * Constructor
-	 * 
-	 * @param obj
-	 *            the graph node
+	 *
+	 * @param obj the graph node
 	 * @generated
 	 */
-	public ActionEditPart(GraphNode obj) {
+	public ClazzEditPart(GraphNode obj) {
 		super(obj);
 	}
 
 	/**
 	 * Creates edit policies and associates these with roles
-	 * 
+	 *
 	 * @generated
 	 */
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(WfEditPolicyConstants.ACTIONS_EDITPOLICY,
-				new actionsEdgeCreationEditPolicy());
+		installEditPolicy(WfEditPolicyConstants.ISASSOCIATEDWITH_EDITPOLICY,
+				new isAssociatedWithEdgeCreationEditPolicy());
 
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {
 					protected Command getRestoreConnectionsCommand(
 							RestoreConnectionsRequest request) {
-						return new ActionRestoreConnectionCommand(getHost());
+						return new ClazzRestoreConnectionCommand(getHost());
 					}
 				});
 
-		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY,
-				new ResizableEditPolicy());
-
-		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
-				new LabelDirectEditPolicy());
+		installEditPolicy(
+				ModelerEditPolicyConstants.CHANGE_BACKGROUND_COLOR_EDITPOLICY,
+				null);
+		installEditPolicy(
+				ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY,
+				null);
 	}
 
 	/**
@@ -91,7 +81,7 @@ public class ActionEditPart extends EMFGraphNodeEditPart {
 	 */
 	protected IFigure createFigure() {
 
-		return new ActionFigure();
+		return new ClazzFigure();
 	}
 
 	/**
@@ -100,7 +90,7 @@ public class ActionEditPart extends EMFGraphNodeEditPart {
 	 */
 	protected Color getPreferenceDefaultBackgroundColor() {
 		String backgroundColor = getPreferenceStore().getString(
-				WfDiagramPreferenceConstants.ACTION_DEFAULT_BACKGROUND_COLOR);
+				WfDiagramPreferenceConstants.CLAZZ_DEFAULT_BACKGROUND_COLOR);
 		if (backgroundColor.length() != 0) {
 			return Utils.getColor(backgroundColor);
 		}
@@ -113,7 +103,7 @@ public class ActionEditPart extends EMFGraphNodeEditPart {
 	 */
 	protected Color getPreferenceDefaultForegroundColor() {
 		String foregroundColor = getPreferenceStore().getString(
-				WfDiagramPreferenceConstants.ACTION_DEFAULT_FOREGROUND_COLOR);
+				WfDiagramPreferenceConstants.CLAZZ_DEFAULT_FOREGROUND_COLOR);
 		if (foregroundColor.length() != 0) {
 			return Utils.getColor(foregroundColor);
 		}
@@ -126,7 +116,7 @@ public class ActionEditPart extends EMFGraphNodeEditPart {
 	 */
 	protected Font getPreferenceDefaultFont() {
 		String preferenceFont = getPreferenceStore().getString(
-				WfDiagramPreferenceConstants.ACTION_DEFAULT_FONT);
+				WfDiagramPreferenceConstants.CLAZZ_DEFAULT_FONT);
 		if (preferenceFont.length() != 0) {
 			return Utils.getFont(new FontData(preferenceFont));
 		}
@@ -134,31 +124,4 @@ public class ActionEditPart extends EMFGraphNodeEditPart {
 
 	}
 
-	@Override
-	public void performRequest(Request request) {
-		if (request.getType() == RequestConstants.REQ_OPEN) {
-			Action action = (Action) Utils.getElement(getGraphNode());
-
-			ActionEditDialog dlg = new ActionEditDialog(action, ModelerPlugin
-					.getActiveWorkbenchShell());
-			if (dlg.open() == Window.OK) {
-				ActionUpdateCommand command = new ActionUpdateCommand(action,
-						dlg.getData());
-				getViewer().getEditDomain().getCommandStack().execute(command);
-				refresh();
-			}
-		} else {
-			super.performRequest(request);
-
-		}
-	}
-
-	@Override
-	protected void refreshHeaderLabel() {
-		Action action = (Action) Utils.getElement(getGraphNode());
-		if (action.getScript().size() > 0)
-			getLabel().setText(action.getScript().get(0).getExpression());
-		else
-			super.refreshHeaderLabel();
-	}
 }

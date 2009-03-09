@@ -31,6 +31,7 @@ import com.bluexml.side.workflow.EndState;
 import com.bluexml.side.workflow.Fork;
 import com.bluexml.side.workflow.Join;
 import com.bluexml.side.workflow.Node;
+import com.bluexml.side.workflow.ProcessState;
 import com.bluexml.side.workflow.StartState;
 import com.bluexml.side.workflow.TaskNode;
 import com.bluexml.side.workflow.Transition;
@@ -148,6 +149,16 @@ public class ForkRestoreConnectionCommand extends
 					}
 				}
 
+				if (eObjectTgt instanceof ProcessState) {
+					if (autoRef) {
+						// autoRef not allowed
+					} else {
+						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
+						createTransitionFromForkToProcessState_To(
+								graphElementSrc, graphElementTgt);
+					}
+				}
+
 				if (eObjectTgt instanceof EndState) {
 					if (autoRef) {
 						// autoRef not allowed
@@ -175,6 +186,16 @@ public class ForkRestoreConnectionCommand extends
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
 						createTransitionFromNodeToFork_To(graphElementTgt,
 								graphElementSrc);
+					}
+				}
+
+				if (eObjectTgt instanceof ProcessState) {
+					if (autoRef) {
+						// autoRef not allowed
+					} else {
+						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
+						createTransitionFromProcessStateToFork_To(
+								graphElementTgt, graphElementSrc);
 					}
 				}
 
@@ -500,6 +521,45 @@ public class ForkRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
+	private void createTransitionFromForkToProcessState_To(GraphElement srcElt,
+			GraphElement targetElt) {
+		Fork sourceObject = (Fork) Utils.getElement(srcElt);
+		ProcessState targetObject = (ProcessState) Utils.getElement(targetElt);
+
+		EList edgeObjectList = sourceObject.getTransition();
+		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
+			Object obj = it.next();
+			if (obj instanceof Transition) {
+				Transition edgeObject = (Transition) obj;
+				if (targetObject.equals(edgeObject.getTo())
+						&& sourceObject.getTransition().contains(edgeObject)) {
+					// check if the relation does not exists yet
+					List<GraphEdge> existing = getExistingEdges(srcElt,
+							targetElt, Transition.class);
+					if (!isAlreadyPresent(existing, edgeObject)) {
+						ICreationUtils factory = getModeler()
+								.getActiveConfiguration().getCreationUtils();
+						// restore the link with its default presentation
+						GraphElement edge = factory
+								.createGraphElement(edgeObject);
+						if (edge instanceof GraphEdge) {
+							TransitionEdgeCreationCommand cmd = new TransitionEdgeCreationCommand(
+									getEditDomain(), (GraphEdge) edge, srcElt,
+									false);
+							cmd.setTarget(targetElt);
+							add(cmd);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
 	private void createTransitionFromForkToEndState_To(GraphElement srcElt,
 			GraphElement targetElt) {
 		Fork sourceObject = (Fork) Utils.getElement(srcElt);
@@ -581,6 +641,45 @@ public class ForkRestoreConnectionCommand extends
 	private void createTransitionFromNodeToFork_To(GraphElement srcElt,
 			GraphElement targetElt) {
 		Node sourceObject = (Node) Utils.getElement(srcElt);
+		Fork targetObject = (Fork) Utils.getElement(targetElt);
+
+		EList edgeObjectList = sourceObject.getTransition();
+		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
+			Object obj = it.next();
+			if (obj instanceof Transition) {
+				Transition edgeObject = (Transition) obj;
+				if (targetObject.equals(edgeObject.getTo())
+						&& sourceObject.getTransition().contains(edgeObject)) {
+					// check if the relation does not exists yet
+					List<GraphEdge> existing = getExistingEdges(srcElt,
+							targetElt, Transition.class);
+					if (!isAlreadyPresent(existing, edgeObject)) {
+						ICreationUtils factory = getModeler()
+								.getActiveConfiguration().getCreationUtils();
+						// restore the link with its default presentation
+						GraphElement edge = factory
+								.createGraphElement(edgeObject);
+						if (edge instanceof GraphEdge) {
+							TransitionEdgeCreationCommand cmd = new TransitionEdgeCreationCommand(
+									getEditDomain(), (GraphEdge) edge, srcElt,
+									false);
+							cmd.setTarget(targetElt);
+							add(cmd);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
+	private void createTransitionFromProcessStateToFork_To(GraphElement srcElt,
+			GraphElement targetElt) {
+		ProcessState sourceObject = (ProcessState) Utils.getElement(srcElt);
 		Fork targetObject = (Fork) Utils.getElement(targetElt);
 
 		EList edgeObjectList = sourceObject.getTransition();
