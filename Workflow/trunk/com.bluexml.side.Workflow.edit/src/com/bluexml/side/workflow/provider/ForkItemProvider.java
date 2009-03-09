@@ -114,7 +114,10 @@ public class ForkItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Fork_type");
+		String label = ((Fork)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Fork_type") :
+			getString("_UI_Fork_type") + " " + label;
 	}
 
 	/**

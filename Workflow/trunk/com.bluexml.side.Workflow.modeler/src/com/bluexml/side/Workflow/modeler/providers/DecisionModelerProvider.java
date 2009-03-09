@@ -7,6 +7,8 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EAttribute;
 import org.topcased.modeler.providers.ILabelFeatureProvider;
 
+import com.bluexml.side.workflow.WorkflowPackage;
+
 /**
  * This is the item provider adpater for a {@link com.bluexml.side.workflow.Decision} object.
  *
@@ -29,6 +31,6 @@ public class DecisionModelerProvider extends StateModelerProvider implements
 	 * @generated
 	 */
 	public EAttribute getLabelFeature(Object object) {
-		return null;
+		return WorkflowPackage.eINSTANCE.getState_Name();
 	}
 }

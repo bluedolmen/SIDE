@@ -31,6 +31,6 @@ public class StartStateModelerProvider extends StateModelerProvider implements
 	 * @generated
 	 */
 	public EAttribute getLabelFeature(Object object) {
-		return WorkflowPackage.eINSTANCE.getStartState_Name();
+		return WorkflowPackage.eINSTANCE.getState_Name();
 	}
 }

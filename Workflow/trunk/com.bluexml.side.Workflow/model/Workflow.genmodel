@@ -50,7 +50,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Swimlane/clazz"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//StartState">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//StartState/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//StartState/transition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//StartState/event"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//StartState/assignmentType"/>
@@ -59,17 +58,14 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Workflow.ecore#//StartState/clazz"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//EndState">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//EndState/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//EndState/event"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Node">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Node/action"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Node/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Node/transition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Node/event"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//TaskNode">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//TaskNode/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//TaskNode/transition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//TaskNode/event"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//TaskNode/timer"/>
@@ -123,7 +119,9 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Workflow.ecore#//Transition/to"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Transition/title"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="Workflow.ecore#//State"/>
+    <genClasses image="false" ecoreClass="Workflow.ecore#//State">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//State/name"/>
+    </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Attribute">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Attribute/typ"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Attribute/title"/>

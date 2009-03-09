@@ -8,6 +8,8 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.topcased.modeler.providers.ILabelFeatureProvider;
 
+import com.bluexml.side.workflow.WorkflowPackage;
+
 /**
  * This is the item provider adpater for a {@link com.bluexml.side.workflow.State} object.
  *
@@ -30,6 +32,6 @@ public class StateModelerProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	public EAttribute getLabelFeature(Object object) {
-		return null;
+		return WorkflowPackage.eINSTANCE.getState_Name();
 	}
 }

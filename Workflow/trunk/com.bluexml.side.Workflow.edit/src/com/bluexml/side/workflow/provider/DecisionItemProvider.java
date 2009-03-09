@@ -116,7 +116,10 @@ public class DecisionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Decision_type");
+		String label = ((Decision)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Decision_type") :
+			getString("_UI_Decision_type") + " " + label;
 	}
 
 	/**

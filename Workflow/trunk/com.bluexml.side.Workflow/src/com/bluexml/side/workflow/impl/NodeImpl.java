@@ -31,7 +31,6 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.workflow.impl.NodeImpl#getAction <em>Action</em>}</li>
- *   <li>{@link com.bluexml.side.workflow.impl.NodeImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.NodeImpl#getTransition <em>Transition</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.NodeImpl#getEvent <em>Event</em>}</li>
  * </ul>
@@ -49,26 +48,6 @@ public class NodeImpl extends StateImpl implements Node {
 	 * @ordered
 	 */
 	protected Action action;
-
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getTransition() <em>Transition</em>}' containment reference list.
@@ -157,27 +136,6 @@ public class NodeImpl extends StateImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.NODE__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Transition> getTransition() {
 		if (transition == null) {
 			transition = new EObjectContainmentEList<Transition>(Transition.class, this, WorkflowPackage.NODE__TRANSITION);
@@ -225,8 +183,6 @@ public class NodeImpl extends StateImpl implements Node {
 		switch (featureID) {
 			case WorkflowPackage.NODE__ACTION:
 				return getAction();
-			case WorkflowPackage.NODE__NAME:
-				return getName();
 			case WorkflowPackage.NODE__TRANSITION:
 				return getTransition();
 			case WorkflowPackage.NODE__EVENT:
@@ -246,9 +202,6 @@ public class NodeImpl extends StateImpl implements Node {
 		switch (featureID) {
 			case WorkflowPackage.NODE__ACTION:
 				setAction((Action)newValue);
-				return;
-			case WorkflowPackage.NODE__NAME:
-				setName((String)newValue);
 				return;
 			case WorkflowPackage.NODE__TRANSITION:
 				getTransition().clear();
@@ -273,9 +226,6 @@ public class NodeImpl extends StateImpl implements Node {
 			case WorkflowPackage.NODE__ACTION:
 				setAction((Action)null);
 				return;
-			case WorkflowPackage.NODE__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case WorkflowPackage.NODE__TRANSITION:
 				getTransition().clear();
 				return;
@@ -296,30 +246,12 @@ public class NodeImpl extends StateImpl implements Node {
 		switch (featureID) {
 			case WorkflowPackage.NODE__ACTION:
 				return action != null;
-			case WorkflowPackage.NODE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case WorkflowPackage.NODE__TRANSITION:
 				return transition != null && !transition.isEmpty();
 			case WorkflowPackage.NODE__EVENT:
 				return event != null && !event.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //NodeImpl

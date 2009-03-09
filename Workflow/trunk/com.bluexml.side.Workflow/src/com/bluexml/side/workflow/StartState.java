@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.bluexml.side.workflow.StartState#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.StartState#getTransition <em>Transition</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.StartState#getEvent <em>Event</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.StartState#getAssignmentType <em>Assignment Type</em>}</li>
@@ -32,32 +31,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface StartState extends State {
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see com.bluexml.side.workflow.WorkflowPackage#getStartState_Name()
-	 * @model unique="false" required="true" ordered="false"
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.workflow.StartState#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
 	/**
 	 * Returns the value of the '<em><b>Transition</b></em>' containment reference list.
 	 * The list contents are of type {@link com.bluexml.side.workflow.Transition}.

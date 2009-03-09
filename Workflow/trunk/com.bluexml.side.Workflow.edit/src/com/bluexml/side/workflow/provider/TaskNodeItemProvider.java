@@ -63,33 +63,10 @@ public class TaskNodeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
 			addSwimlanePropertyDescriptor(object);
 			addClazzPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_TaskNode_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TaskNode_name_feature", "_UI_TaskNode_type"),
-				 WorkflowPackage.Literals.TASK_NODE__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -206,9 +183,6 @@ public class TaskNodeItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(TaskNode.class)) {
-			case WorkflowPackage.TASK_NODE__NAME:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
 			case WorkflowPackage.TASK_NODE__TRANSITION:
 			case WorkflowPackage.TASK_NODE__EVENT:
 			case WorkflowPackage.TASK_NODE__TIMER:

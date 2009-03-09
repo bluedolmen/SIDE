@@ -31,6 +31,6 @@ public class NodeModelerProvider extends StateModelerProvider implements
 	 * @generated
 	 */
 	public EAttribute getLabelFeature(Object object) {
-		return WorkflowPackage.eINSTANCE.getNode_Name();
+		return WorkflowPackage.eINSTANCE.getState_Name();
 	}
 }

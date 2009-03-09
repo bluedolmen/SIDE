@@ -31,6 +31,6 @@ public class TaskNodeModelerProvider extends StateModelerProvider implements
 	 * @generated
 	 */
 	public EAttribute getLabelFeature(Object object) {
-		return WorkflowPackage.eINSTANCE.getTaskNode_Name();
+		return WorkflowPackage.eINSTANCE.getState_Name();
 	}
 }

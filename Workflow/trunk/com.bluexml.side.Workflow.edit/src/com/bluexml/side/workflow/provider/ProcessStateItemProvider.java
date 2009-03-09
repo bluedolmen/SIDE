@@ -140,7 +140,10 @@ public class ProcessStateItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_ProcessState_type");
+		String label = ((ProcessState)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_ProcessState_type") :
+			getString("_UI_ProcessState_type") + " " + label;
 	}
 
 	/**

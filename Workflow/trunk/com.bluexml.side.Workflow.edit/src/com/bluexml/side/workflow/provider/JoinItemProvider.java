@@ -114,7 +114,10 @@ public class JoinItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Join_type");
+		String label = ((Join)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Join_type") :
+			getString("_UI_Join_type") + " " + label;
 	}
 
 	/**

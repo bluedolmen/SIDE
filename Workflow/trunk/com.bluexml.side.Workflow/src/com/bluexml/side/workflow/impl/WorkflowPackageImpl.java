@@ -439,17 +439,8 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getStartState_Name() {
-		return (EAttribute)startStateEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getStartState_Transition() {
-		return (EReference)startStateEClass.getEStructuralFeatures().get(1);
+		return (EReference)startStateEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -458,7 +449,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * @generated
 	 */
 	public EReference getStartState_Event() {
-		return (EReference)startStateEClass.getEStructuralFeatures().get(2);
+		return (EReference)startStateEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -467,7 +458,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * @generated
 	 */
 	public EAttribute getStartState_AssignmentType() {
-		return (EAttribute)startStateEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)startStateEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -476,7 +467,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * @generated
 	 */
 	public EReference getStartState_Initiator() {
-		return (EReference)startStateEClass.getEStructuralFeatures().get(4);
+		return (EReference)startStateEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -485,7 +476,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * @generated
 	 */
 	public EReference getStartState_Attributes() {
-		return (EReference)startStateEClass.getEStructuralFeatures().get(5);
+		return (EReference)startStateEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -494,7 +485,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * @generated
 	 */
 	public EReference getStartState_Clazz() {
-		return (EReference)startStateEClass.getEStructuralFeatures().get(6);
+		return (EReference)startStateEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -511,17 +502,8 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEndState_Name() {
-		return (EAttribute)endStateEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getEndState_Event() {
-		return (EReference)endStateEClass.getEStructuralFeatures().get(1);
+		return (EReference)endStateEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -547,17 +529,8 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getNode_Name() {
-		return (EAttribute)nodeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getNode_Transition() {
-		return (EReference)nodeEClass.getEStructuralFeatures().get(2);
+		return (EReference)nodeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -566,7 +539,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * @generated
 	 */
 	public EReference getNode_Event() {
-		return (EReference)nodeEClass.getEStructuralFeatures().get(3);
+		return (EReference)nodeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -583,17 +556,8 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTaskNode_Name() {
-		return (EAttribute)taskNodeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getTaskNode_Transition() {
-		return (EReference)taskNodeEClass.getEStructuralFeatures().get(1);
+		return (EReference)taskNodeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -602,7 +566,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * @generated
 	 */
 	public EReference getTaskNode_Event() {
-		return (EReference)taskNodeEClass.getEStructuralFeatures().get(2);
+		return (EReference)taskNodeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -611,7 +575,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * @generated
 	 */
 	public EReference getTaskNode_Timer() {
-		return (EReference)taskNodeEClass.getEStructuralFeatures().get(3);
+		return (EReference)taskNodeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -620,7 +584,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * @generated
 	 */
 	public EReference getTaskNode_Swimlane() {
-		return (EReference)taskNodeEClass.getEStructuralFeatures().get(4);
+		return (EReference)taskNodeEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -629,7 +593,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * @generated
 	 */
 	public EReference getTaskNode_Attributes() {
-		return (EReference)taskNodeEClass.getEStructuralFeatures().get(5);
+		return (EReference)taskNodeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -638,7 +602,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * @generated
 	 */
 	public EReference getTaskNode_Clazz() {
-		return (EReference)taskNodeEClass.getEStructuralFeatures().get(6);
+		return (EReference)taskNodeEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -979,6 +943,15 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getState_Name() {
+		return (EAttribute)stateEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getAttribute() {
 		return attributeEClass;
 	}
@@ -1078,7 +1051,6 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		createEAttribute(swimlaneEClass, SWIMLANE__CLAZZ);
 
 		startStateEClass = createEClass(START_STATE);
-		createEAttribute(startStateEClass, START_STATE__NAME);
 		createEReference(startStateEClass, START_STATE__TRANSITION);
 		createEReference(startStateEClass, START_STATE__EVENT);
 		createEAttribute(startStateEClass, START_STATE__ASSIGNMENT_TYPE);
@@ -1087,17 +1059,14 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		createEReference(startStateEClass, START_STATE__CLAZZ);
 
 		endStateEClass = createEClass(END_STATE);
-		createEAttribute(endStateEClass, END_STATE__NAME);
 		createEReference(endStateEClass, END_STATE__EVENT);
 
 		nodeEClass = createEClass(NODE);
 		createEReference(nodeEClass, NODE__ACTION);
-		createEAttribute(nodeEClass, NODE__NAME);
 		createEReference(nodeEClass, NODE__TRANSITION);
 		createEReference(nodeEClass, NODE__EVENT);
 
 		taskNodeEClass = createEClass(TASK_NODE);
-		createEAttribute(taskNodeEClass, TASK_NODE__NAME);
 		createEReference(taskNodeEClass, TASK_NODE__TRANSITION);
 		createEReference(taskNodeEClass, TASK_NODE__EVENT);
 		createEReference(taskNodeEClass, TASK_NODE__TIMER);
@@ -1152,6 +1121,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		createEAttribute(transitionEClass, TRANSITION__TITLE);
 
 		stateEClass = createEClass(STATE);
+		createEAttribute(stateEClass, STATE__NAME);
 
 		attributeEClass = createEClass(ATTRIBUTE);
 		createEAttribute(attributeEClass, ATTRIBUTE__TYP);
@@ -1231,7 +1201,6 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		initEAttribute(getSwimlane_Clazz(), ecorePackage.getEString(), "clazz", null, 0, 1, Swimlane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(startStateEClass, StartState.class, "StartState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getStartState_Name(), ecorePackage.getEString(), "name", null, 1, 1, StartState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getStartState_Transition(), this.getTransition(), null, "transition", null, 0, -1, StartState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStartState_Event(), this.getEvent(), null, "event", null, 0, -1, StartState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStartState_AssignmentType(), this.getBPMAssignmentType(), "assignmentType", null, 0, 1, StartState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1240,17 +1209,14 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		initEReference(getStartState_Clazz(), theClazzPackage.getClazz(), null, "clazz", null, 0, -1, StartState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(endStateEClass, EndState.class, "EndState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEndState_Name(), ecorePackage.getEString(), "name", null, 1, 1, EndState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getEndState_Event(), this.getEvent(), null, "event", null, 0, -1, EndState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(nodeEClass, Node.class, "Node", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNode_Action(), this.getAction(), null, "action", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getNode_Name(), ecorePackage.getEString(), "name", null, 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getNode_Transition(), this.getTransition(), null, "transition", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNode_Event(), this.getEvent(), null, "event", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(taskNodeEClass, TaskNode.class, "TaskNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTaskNode_Name(), ecorePackage.getEString(), "name", null, 1, 1, TaskNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTaskNode_Transition(), this.getTransition(), this.getTransition_ParentTaskNode(), "transition", null, 0, -1, TaskNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTaskNode_Event(), this.getEvent(), null, "event", null, 0, -1, TaskNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTaskNode_Timer(), this.getTimer(), null, "timer", null, 0, -1, TaskNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1305,6 +1271,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		initEAttribute(getTransition_Title(), ecorePackage.getEString(), "title", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stateEClass, State.class, "State", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getState_Name(), ecorePackage.getEString(), "name", null, 1, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAttribute_Typ(), theClazzPackage.getAttributeType(), "typ", "void", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -35,7 +35,6 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.workflow.impl.TaskNodeImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.TaskNodeImpl#getTransition <em>Transition</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.TaskNodeImpl#getEvent <em>Event</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.TaskNodeImpl#getTimer <em>Timer</em>}</li>
@@ -48,26 +47,6 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * @generated
  */
 public class TaskNodeImpl extends StateImpl implements TaskNode {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getTransition() <em>Transition</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -145,27 +124,6 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 	@Override
 	protected EClass eStaticClass() {
 		return WorkflowPackage.Literals.TASK_NODE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.TASK_NODE__NAME, oldName, name));
 	}
 
 	/**
@@ -337,8 +295,6 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case WorkflowPackage.TASK_NODE__NAME:
-				return getName();
 			case WorkflowPackage.TASK_NODE__TRANSITION:
 				return getTransition();
 			case WorkflowPackage.TASK_NODE__EVENT:
@@ -365,9 +321,6 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case WorkflowPackage.TASK_NODE__NAME:
-				setName((String)newValue);
-				return;
 			case WorkflowPackage.TASK_NODE__TRANSITION:
 				getTransition().clear();
 				getTransition().addAll((Collection<? extends Transition>)newValue);
@@ -403,9 +356,6 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case WorkflowPackage.TASK_NODE__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case WorkflowPackage.TASK_NODE__TRANSITION:
 				getTransition().clear();
 				return;
@@ -436,8 +386,6 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case WorkflowPackage.TASK_NODE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case WorkflowPackage.TASK_NODE__TRANSITION:
 				return transition != null && !transition.isEmpty();
 			case WorkflowPackage.TASK_NODE__EVENT:
@@ -452,22 +400,6 @@ public class TaskNodeImpl extends StateImpl implements TaskNode {
 				return clazz != null && !clazz.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //TaskNodeImpl

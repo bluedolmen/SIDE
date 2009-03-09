@@ -34,7 +34,6 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.workflow.impl.StartStateImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.StartStateImpl#getTransition <em>Transition</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.StartStateImpl#getEvent <em>Event</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.StartStateImpl#getAssignmentType <em>Assignment Type</em>}</li>
@@ -47,26 +46,6 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * @generated
  */
 public class StartStateImpl extends StateImpl implements StartState {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getTransition() <em>Transition</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -154,27 +133,6 @@ public class StartStateImpl extends StateImpl implements StartState {
 	@Override
 	protected EClass eStaticClass() {
 		return WorkflowPackage.Literals.START_STATE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.START_STATE__NAME, oldName, name));
 	}
 
 	/**
@@ -310,8 +268,6 @@ public class StartStateImpl extends StateImpl implements StartState {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case WorkflowPackage.START_STATE__NAME:
-				return getName();
 			case WorkflowPackage.START_STATE__TRANSITION:
 				return getTransition();
 			case WorkflowPackage.START_STATE__EVENT:
@@ -338,9 +294,6 @@ public class StartStateImpl extends StateImpl implements StartState {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case WorkflowPackage.START_STATE__NAME:
-				setName((String)newValue);
-				return;
 			case WorkflowPackage.START_STATE__TRANSITION:
 				getTransition().clear();
 				getTransition().addAll((Collection<? extends Transition>)newValue);
@@ -375,9 +328,6 @@ public class StartStateImpl extends StateImpl implements StartState {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case WorkflowPackage.START_STATE__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case WorkflowPackage.START_STATE__TRANSITION:
 				getTransition().clear();
 				return;
@@ -408,8 +358,6 @@ public class StartStateImpl extends StateImpl implements StartState {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case WorkflowPackage.START_STATE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case WorkflowPackage.START_STATE__TRANSITION:
 				return transition != null && !transition.isEmpty();
 			case WorkflowPackage.START_STATE__EVENT:
@@ -436,9 +384,7 @@ public class StartStateImpl extends StateImpl implements StartState {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", assignmentType: ");
+		result.append(" (assignmentType: ");
 		result.append(assignmentType);
 		result.append(')');
 		return result.toString();

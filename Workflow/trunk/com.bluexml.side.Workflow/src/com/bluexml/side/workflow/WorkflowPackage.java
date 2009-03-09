@@ -355,13 +355,22 @@ public interface WorkflowPackage extends EPackage {
 	int STATE = 17;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__NAME = 0;
+
+	/**
 	 * The number of structural features of the '<em>State</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = 0;
+	int STATE_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.StartStateImpl <em>Start State</em>}' class.
@@ -380,7 +389,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int START_STATE__NAME = STATE_FEATURE_COUNT + 0;
+	int START_STATE__NAME = STATE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Transition</b></em>' containment reference list.
@@ -389,7 +398,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int START_STATE__TRANSITION = STATE_FEATURE_COUNT + 1;
+	int START_STATE__TRANSITION = STATE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Event</b></em>' containment reference list.
@@ -398,7 +407,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int START_STATE__EVENT = STATE_FEATURE_COUNT + 2;
+	int START_STATE__EVENT = STATE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Assignment Type</b></em>' attribute.
@@ -407,7 +416,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int START_STATE__ASSIGNMENT_TYPE = STATE_FEATURE_COUNT + 3;
+	int START_STATE__ASSIGNMENT_TYPE = STATE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Initiator</b></em>' reference.
@@ -416,7 +425,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int START_STATE__INITIATOR = STATE_FEATURE_COUNT + 4;
+	int START_STATE__INITIATOR = STATE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -425,7 +434,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int START_STATE__ATTRIBUTES = STATE_FEATURE_COUNT + 5;
+	int START_STATE__ATTRIBUTES = STATE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Clazz</b></em>' reference list.
@@ -434,7 +443,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int START_STATE__CLAZZ = STATE_FEATURE_COUNT + 6;
+	int START_STATE__CLAZZ = STATE_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Start State</em>' class.
@@ -443,7 +452,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int START_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 7;
+	int START_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.EndStateImpl <em>End State</em>}' class.
@@ -462,7 +471,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int END_STATE__NAME = STATE_FEATURE_COUNT + 0;
+	int END_STATE__NAME = STATE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Event</b></em>' containment reference list.
@@ -471,7 +480,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int END_STATE__EVENT = STATE_FEATURE_COUNT + 1;
+	int END_STATE__EVENT = STATE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>End State</em>' class.
@@ -480,7 +489,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int END_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 2;
+	int END_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.NodeImpl <em>Node</em>}' class.
@@ -493,6 +502,15 @@ public interface WorkflowPackage extends EPackage {
 	int NODE = 5;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__NAME = STATE__NAME;
+
+	/**
 	 * The feature id for the '<em><b>Action</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -502,22 +520,13 @@ public interface WorkflowPackage extends EPackage {
 	int NODE__ACTION = STATE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE__NAME = STATE_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Transition</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__TRANSITION = STATE_FEATURE_COUNT + 2;
+	int NODE__TRANSITION = STATE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Event</b></em>' containment reference list.
@@ -526,7 +535,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__EVENT = STATE_FEATURE_COUNT + 3;
+	int NODE__EVENT = STATE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Node</em>' class.
@@ -535,7 +544,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_FEATURE_COUNT = STATE_FEATURE_COUNT + 4;
+	int NODE_FEATURE_COUNT = STATE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.TaskNodeImpl <em>Task Node</em>}' class.
@@ -554,7 +563,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_NODE__NAME = STATE_FEATURE_COUNT + 0;
+	int TASK_NODE__NAME = STATE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Transition</b></em>' containment reference list.
@@ -563,7 +572,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_NODE__TRANSITION = STATE_FEATURE_COUNT + 1;
+	int TASK_NODE__TRANSITION = STATE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Event</b></em>' containment reference list.
@@ -572,7 +581,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_NODE__EVENT = STATE_FEATURE_COUNT + 2;
+	int TASK_NODE__EVENT = STATE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Timer</b></em>' containment reference list.
@@ -581,7 +590,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_NODE__TIMER = STATE_FEATURE_COUNT + 3;
+	int TASK_NODE__TIMER = STATE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Swimlane</b></em>' reference.
@@ -590,7 +599,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_NODE__SWIMLANE = STATE_FEATURE_COUNT + 4;
+	int TASK_NODE__SWIMLANE = STATE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -599,7 +608,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_NODE__ATTRIBUTES = STATE_FEATURE_COUNT + 5;
+	int TASK_NODE__ATTRIBUTES = STATE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Clazz</b></em>' reference list.
@@ -608,7 +617,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_NODE__CLAZZ = STATE_FEATURE_COUNT + 6;
+	int TASK_NODE__CLAZZ = STATE_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Task Node</em>' class.
@@ -617,7 +626,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_NODE_FEATURE_COUNT = STATE_FEATURE_COUNT + 7;
+	int TASK_NODE_FEATURE_COUNT = STATE_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.ProcessStateImpl <em>Process State</em>}' class.
@@ -628,6 +637,15 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 */
 	int PROCESS_STATE = 7;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_STATE__NAME = STATE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Subprocess</b></em>' reference.
@@ -676,6 +694,15 @@ public interface WorkflowPackage extends EPackage {
 	int FORK = 8;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK__NAME = STATE__NAME;
+
+	/**
 	 * The feature id for the '<em><b>Transition</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -713,6 +740,15 @@ public interface WorkflowPackage extends EPackage {
 	int JOIN = 9;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOIN__NAME = STATE__NAME;
+
+	/**
 	 * The feature id for the '<em><b>Transition</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -748,6 +784,15 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 */
 	int DECISION = 10;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION__NAME = STATE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Transition</b></em>' containment reference list.
@@ -1370,17 +1415,6 @@ public interface WorkflowPackage extends EPackage {
 	EClass getStartState();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.StartState#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see com.bluexml.side.workflow.StartState#getName()
-	 * @see #getStartState()
-	 * @generated
-	 */
-	EAttribute getStartState_Name();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.workflow.StartState#getTransition <em>Transition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1457,17 +1491,6 @@ public interface WorkflowPackage extends EPackage {
 	EClass getEndState();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.EndState#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see com.bluexml.side.workflow.EndState#getName()
-	 * @see #getEndState()
-	 * @generated
-	 */
-	EAttribute getEndState_Name();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.workflow.EndState#getEvent <em>Event</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1500,17 +1523,6 @@ public interface WorkflowPackage extends EPackage {
 	EReference getNode_Action();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.Node#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see com.bluexml.side.workflow.Node#getName()
-	 * @see #getNode()
-	 * @generated
-	 */
-	EAttribute getNode_Name();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.workflow.Node#getTransition <em>Transition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1541,17 +1553,6 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTaskNode();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.TaskNode#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see com.bluexml.side.workflow.TaskNode#getName()
-	 * @see #getTaskNode()
-	 * @generated
-	 */
-	EAttribute getTaskNode_Name();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.workflow.TaskNode#getTransition <em>Transition</em>}'.
@@ -2016,6 +2017,17 @@ public interface WorkflowPackage extends EPackage {
 	EClass getState();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.State#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see com.bluexml.side.workflow.State#getName()
+	 * @see #getState()
+	 * @generated
+	 */
+	EAttribute getState_Name();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.Attribute <em>Attribute</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2261,14 +2273,6 @@ public interface WorkflowPackage extends EPackage {
 		EClass START_STATE = eINSTANCE.getStartState();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute START_STATE__NAME = eINSTANCE.getStartState_Name();
-
-		/**
 		 * The meta object literal for the '<em><b>Transition</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2327,14 +2331,6 @@ public interface WorkflowPackage extends EPackage {
 		EClass END_STATE = eINSTANCE.getEndState();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute END_STATE__NAME = eINSTANCE.getEndState_Name();
-
-		/**
 		 * The meta object literal for the '<em><b>Event</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2361,14 +2357,6 @@ public interface WorkflowPackage extends EPackage {
 		EReference NODE__ACTION = eINSTANCE.getNode_Action();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NODE__NAME = eINSTANCE.getNode_Name();
-
-		/**
 		 * The meta object literal for the '<em><b>Transition</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2393,14 +2381,6 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TASK_NODE = eINSTANCE.getTaskNode();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TASK_NODE__NAME = eINSTANCE.getTaskNode_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Transition</b></em>' containment reference list feature.
@@ -2767,6 +2747,14 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EClass STATE = eINSTANCE.getState();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATE__NAME = eINSTANCE.getState_Name();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.AttributeImpl <em>Attribute</em>}' class.

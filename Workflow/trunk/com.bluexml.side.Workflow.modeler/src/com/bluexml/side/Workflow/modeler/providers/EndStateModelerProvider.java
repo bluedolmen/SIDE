@@ -31,6 +31,6 @@ public class EndStateModelerProvider extends StateModelerProvider implements
 	 * @generated
 	 */
 	public EAttribute getLabelFeature(Object object) {
-		return WorkflowPackage.eINSTANCE.getEndState_Name();
+		return WorkflowPackage.eINSTANCE.getState_Name();
 	}
 }

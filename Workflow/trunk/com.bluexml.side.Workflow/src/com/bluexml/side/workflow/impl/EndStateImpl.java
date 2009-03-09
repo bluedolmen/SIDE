@@ -28,7 +28,6 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.workflow.impl.EndStateImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.EndStateImpl#getEvent <em>Event</em>}</li>
  * </ul>
  * </p>
@@ -36,26 +35,6 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * @generated
  */
 public class EndStateImpl extends StateImpl implements EndState {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getEvent() <em>Event</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -83,27 +62,6 @@ public class EndStateImpl extends StateImpl implements EndState {
 	@Override
 	protected EClass eStaticClass() {
 		return WorkflowPackage.Literals.END_STATE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.END_STATE__NAME, oldName, name));
 	}
 
 	/**
@@ -140,8 +98,6 @@ public class EndStateImpl extends StateImpl implements EndState {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case WorkflowPackage.END_STATE__NAME:
-				return getName();
 			case WorkflowPackage.END_STATE__EVENT:
 				return getEvent();
 		}
@@ -157,9 +113,6 @@ public class EndStateImpl extends StateImpl implements EndState {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case WorkflowPackage.END_STATE__NAME:
-				setName((String)newValue);
-				return;
 			case WorkflowPackage.END_STATE__EVENT:
 				getEvent().clear();
 				getEvent().addAll((Collection<? extends Event>)newValue);
@@ -176,9 +129,6 @@ public class EndStateImpl extends StateImpl implements EndState {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case WorkflowPackage.END_STATE__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case WorkflowPackage.END_STATE__EVENT:
 				getEvent().clear();
 				return;
@@ -194,28 +144,10 @@ public class EndStateImpl extends StateImpl implements EndState {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case WorkflowPackage.END_STATE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case WorkflowPackage.END_STATE__EVENT:
 				return event != null && !event.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //EndStateImpl
