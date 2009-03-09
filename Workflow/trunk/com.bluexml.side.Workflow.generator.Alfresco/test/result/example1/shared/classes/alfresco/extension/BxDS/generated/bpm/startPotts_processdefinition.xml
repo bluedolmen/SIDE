@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<process-definition xmlns="urn:jbpm.org:jpdl-3.1" name="wfbx:startPotts">
+
+  	<swimlane name="initiator">
+  	</swimlane>
+  	<swimlane name="">
+  			
+  			<assignment class="org.alfresco.repo.workflow.jbpm.AlfrescoAssignment">
+  				<pooledactors>GROUP_engineering</pooledactors>  				
+        	</assignment>   
+  	</swimlane>
+  	<swimlane name="">
+  			
+  			<assignment class="org.alfresco.repo.workflow.jbpm.AlfrescoAssignment">
+  				<pooledactors>GROUP_marketing</pooledactors>  				
+        	</assignment>   
+  	</swimlane>
+
+	  <start-state name="StartPotts">
+	  	<task name="wfbx:StartPotts" swimlane="initiator">
+	  	</task>
+
+	  	
+	  	<transition name="" to="StartPotts">
+
+	  	</transition>
+	  	
+	  	<transition name="" to="SubmitPotts">
+
+	  	</transition>
+	  </start-state>
+
+	<end-state name="EndTask"/>
+
+	<task-node name="MarketingReview">
+		<task name="wfbx:MarketingReview" swimlane="EngineeringGroup">
+
+	  	</task>
+
+	  	
+	  	<transition name="" to="">
+
+	  	</transition>
+	  	
+	  	<transition name="" to="">
+	  			<action class="org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript">
+					<script>
+							<variable name="new" access="read,write"/>
+						approveCount = approveCount + 1;
+					</script>
+				</action>
+
+	  	</transition>
+	</task-node>
+	<task-node name="EngineeringReview">
+		<task name="wfbx:EngineeringReview" swimlane="MarketingGroup">
+
+	  	</task>
+
+	  	
+	  	<transition name="" to="">
+
+	  	</transition>
+	  	
+	  	<transition name="" to="">
+	  			<action class="org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript">
+					<script>
+							<variable name="new" access="read,write"/>
+						approveCount = approveCount + 1;
+					</script>
+				</action>
+
+	  	</transition>
+	</task-node>
+	<task-node name="Revise">
+		<task name="wfbx:Revise" swimlane="User">
+
+	  			<timer name="Timer" duedate="1 minutes" transition="">
+	  			</timer>
+	  	</task>
+
+	  	
+	  	<transition name="" to="EndTask">
+
+	  	</transition>
+	  	
+	  	<transition name="" to="SubmitPotts">
+
+	  	</transition>
+	</task-node>
+	<task-node name="ThirdPartyReview">
+		<task name="wfbx:ThirdPartyReview" swimlane="User">
+		<event type="node-enter">
+			<action class="org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript">
+					<script>
+							<variable name="notificationRecipient" access="read,write"/>
+							<variable name="bxwf_reviewerEmail" access="access"/>
+						notificationRecipient = bxwf_reviewerEmail;
+					</script>
+			</action>
+		</event>
+
+	  	</task>
+
+	  	
+	  	<transition name="" to="Revise">
+
+	  	</transition>
+	  	
+	  	<transition name="" to="Approved">
+
+	  	</transition>
+	</task-node>
+
+	<node name="Approved">
+
+	  	</task>
+
+	  	
+	  	<transition name="" to="EndTask">
+	  			<action class="org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript">
+					<script>
+						logger.log("Action to realize");
+					</script>
+				</action>
+
+	  	</transition>
+	</node>
+	<node name="SubmitPotts">
+		<event type="node-enter">
+			<action class="org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript">
+					<script>
+							<variable name="approveCount" access="read,write"/>
+						approveCount = 0;
+					</script>
+			</action>
+		</event>
+
+	  	</task>
+
+	  	
+	  	<transition name="" to="">
+
+	  	</transition>
+	</node>
+
+	<join name="">
+	  	
+		<transition name="" to="">
+	  	</transition>
+	</join>
+
+	<fork name="">
+	  	
+		<transition name="" to="">
+	  	</transition>
+	</fork>
+
+
+	<decision name="">
+	  	
+		<transition name="" to="">
+	  	<condition>#{approveCount == 2}</condition>
+	  	</transition>
+	  	
+		<transition name="Revise" to="Revise">
+	  	</transition>
+	</decision>
+	<decision name="">
+	  	
+		<transition name="ThirdPartyReview" to="ThirdPartyReview">
+	  	<condition>#{wfbx_reviewerEmail!=""}</condition>
+	  	</transition>
+	  	
+		<transition name="Approved" to="Approved">
+	  	</transition>
+	</decision>
+
+</process-definition>
