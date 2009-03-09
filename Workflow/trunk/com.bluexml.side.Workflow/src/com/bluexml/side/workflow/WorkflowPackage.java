@@ -639,13 +639,22 @@ public interface WorkflowPackage extends EPackage {
 	int PROCESS_STATE__SUBPROCESS = STATE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Transition</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_STATE__TRANSITION = STATE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Process State</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 1;
+	int PROCESS_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.ForkImpl <em>Fork</em>}' class.
@@ -1623,6 +1632,17 @@ public interface WorkflowPackage extends EPackage {
 	EReference getProcessState_Subprocess();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.workflow.ProcessState#getTransition <em>Transition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Transition</em>'.
+	 * @see com.bluexml.side.workflow.ProcessState#getTransition()
+	 * @see #getProcessState()
+	 * @generated
+	 */
+	EReference getProcessState_Transition();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.Fork <em>Fork</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2427,6 +2447,14 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROCESS_STATE__SUBPROCESS = eINSTANCE.getProcessState_Subprocess();
+
+		/**
+		 * The meta object literal for the '<em><b>Transition</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROCESS_STATE__TRANSITION = eINSTANCE.getProcessState_Transition();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.ForkImpl <em>Fork</em>}' class.

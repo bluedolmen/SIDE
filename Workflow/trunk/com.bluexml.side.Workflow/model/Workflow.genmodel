@@ -79,6 +79,7 @@
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//ProcessState">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Workflow.ecore#//ProcessState/subprocess"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//ProcessState/transition"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Fork">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Fork/transition"/>

@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.bluexml.side.workflow.ProcessState#getSubprocess <em>Subprocess</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.ProcessState#getTransition <em>Transition</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,5 +53,21 @@ public interface ProcessState extends State {
 	 * @generated
 	 */
 	void setSubprocess(com.bluexml.side.workflow.Process value);
+
+	/**
+	 * Returns the value of the '<em><b>Transition</b></em>' containment reference list.
+	 * The list contents are of type {@link com.bluexml.side.workflow.Transition}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Transition</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Transition</em>' containment reference list.
+	 * @see com.bluexml.side.workflow.WorkflowPackage#getProcessState_Transition()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Transition> getTransition();
 
 } // ProcessState
