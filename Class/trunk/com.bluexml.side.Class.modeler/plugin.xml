@@ -10,7 +10,7 @@
             name="Class Modeler"
             id="com.bluexml.side.Class.modeler.editor.ClazzEditor"
             contributorClass="com.bluexml.side.Class.modeler.actions.ClazzEditorActionBarContributor"
-            extensions="clazzdi">
+            extensions="classdi">
       </editor>
    </extension>
    

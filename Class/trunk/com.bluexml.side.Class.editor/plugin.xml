@@ -33,7 +33,7 @@
         id = "com.bluexml.side.clazz.presentation.ClazzEditorID"
         name = "%_UI_ClazzEditor_label"
         icon = "icons/full/obj16/ClazzModelFile.gif"
-        extensions = "clazz"
+        extensions = "class"
         class = "com.bluexml.side.clazz.presentation.ClazzEditor" 
         contributorClass="com.bluexml.side.clazz.presentation.ClazzActionBarContributor" >
     </editor>
