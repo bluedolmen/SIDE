@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<diagramconfigurator:DiagramConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagramconfigurator="http://www.topcased.org/diagramconfigurator/0.10" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="_yP16QHcBEdyUwq_XzqQQrw" projectName="BlueXMLModeler_project" name="Class Diagram" package="org.bluexml.modeler.classdiagram" prefix="Cd" copyrightText="This program is free software; you can redistribute it and/or modify&#xD;&#xA; it under the terms of the GNU General Public License as published by&#xD;&#xA; the Free Software Foundation; either version 2.&#xD;&#xA;&#xD;&#xA;This program is distributed in the hope that it will be useful,&#xD;&#xA;but WITHOUT ANY WARRANTY; without even the implied warranty of&#xD;&#xA;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#xD;&#xA;GNU General Public License for more details.&#xD;&#xA;&#xD;&#xA;You should have received a copy of the GNU General Public License&#xD;&#xA;along with this program; if not, write to the Free Software&#xD;&#xA;Foundation, Inc., 59 Temple Place, Boston, MA 02111." pluginVersion="1.1.0" samePluginAsEditor="true">
+<diagramconfigurator:DiagramConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagramconfigurator="http://www.topcased.org/diagramconfigurator/0.10" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="_yP16QHcBEdyUwq_XzqQQrw" projectName="S-IDE Class" name="Class Diagram" package="org.bluexml.modeler.classdiagram" prefix="Cd" copyrightText="This program is free software; you can redistribute it and/or modify&#xD;&#xA; it under the terms of the GNU General Public License as published by&#xD;&#xA; the Free Software Foundation; either version 2.&#xD;&#xA;&#xD;&#xA;This program is distributed in the hope that it will be useful,&#xD;&#xA;but WITHOUT ANY WARRANTY; without even the implied warranty of&#xD;&#xA;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#xD;&#xA;GNU General Public License for more details.&#xD;&#xA;&#xD;&#xA;You should have received a copy of the GNU General Public License&#xD;&#xA;along with this program; if not, write to the Free Software&#xD;&#xA;Foundation, Inc., 59 Temple Place, Boston, MA 02111." pluginVersion="1.1.0" samePluginAsEditor="true">
   <palette xmi:id="_yP16QXcBEdyUwq_XzqQQrw" name="Palette">
     <paletteCategories xmi:id="_yP16QncBEdyUwq_XzqQQrw" name="Objects">
       <items xmi:id="_yP16Q3cBEdyUwq_XzqQQrw" name="Class" part="_yP16T3cBEdyUwq_XzqQQrw"/>
@@ -48,22 +48,22 @@
     </sourceTargetCouple>
   </parts>
   <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_yP_ENHcBEdyUwq_XzqQQrw" object="_yP_ESncBEdyUwq_XzqQQrw" defaultForegroundColor="128,128,192" foregroundColorChangeable="false" fontChangeable="false">
-    <sourceTargetCouple xmi:id="_yP_ENXcBEdyUwq_XzqQQrw" sourceNode="_yP16T3cBEdyUwq_XzqQQrw" targetNode="_yP16UncBEdyUwq_XzqQQrw">
-      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//ModelElement/comments"/>
+    <sourceTargetCouple xmi:id="_Xa7aoA4mEd6Wf853iHsJzA" sourceNode="_yP16T3cBEdyUwq_XzqQQrw" targetNode="_yP16UncBEdyUwq_XzqQQrw">
+      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement/comments"/>
     </sourceTargetCouple>
-    <sourceTargetCouple xmi:id="_yP_ENncBEdyUwq_XzqQQrw" sourceNode="_yP_EMHcBEdyUwq_XzqQQrw" targetNode="_yP16UncBEdyUwq_XzqQQrw">
-      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//ModelElement/comments"/>
+    <sourceTargetCouple xmi:id="_dbsDMA4mEd6Wf853iHsJzA" sourceNode="_yP_EMHcBEdyUwq_XzqQQrw" targetNode="_yP16UncBEdyUwq_XzqQQrw">
+      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement/comments"/>
     </sourceTargetCouple>
   </parts>
   <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_yP_EN3cBEdyUwq_XzqQQrw" object="_yP_ES3cBEdyUwq_XzqQQrw" defaultForegroundColor="214,214,214">
-    <sourceTargetCouple xmi:id="_yP_EOHcBEdyUwq_XzqQQrw" sourceNode="_yP16T3cBEdyUwq_XzqQQrw" targetNode="_yP16TncBEdyUwq_XzqQQrw">
-      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//ModelElement/stereotypes"/>
+    <sourceTargetCouple xmi:id="_gJGrsA4mEd6Wf853iHsJzA" sourceNode="_yP16T3cBEdyUwq_XzqQQrw" targetNode="_yP16TncBEdyUwq_XzqQQrw">
+      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement/stereotypes"/>
     </sourceTargetCouple>
-    <sourceTargetCouple xmi:id="_yP_EOXcBEdyUwq_XzqQQrw" sourceNode="_yP_EMHcBEdyUwq_XzqQQrw" targetNode="_yP16TncBEdyUwq_XzqQQrw">
-      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//ModelElement/stereotypes"/>
+    <sourceTargetCouple xmi:id="_hW7wwA4mEd6Wf853iHsJzA" sourceNode="_yP_EMHcBEdyUwq_XzqQQrw" targetNode="_yP16TncBEdyUwq_XzqQQrw">
+      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement/stereotypes"/>
     </sourceTargetCouple>
-    <sourceTargetCouple xmi:id="_yP_EOncBEdyUwq_XzqQQrw" sourceNode="_yP16UncBEdyUwq_XzqQQrw" targetNode="_yP16TncBEdyUwq_XzqQQrw">
-      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//ModelElement/stereotypes"/>
+    <sourceTargetCouple xmi:id="_kDgEsA4mEd6Wf853iHsJzA" sourceNode="_yP16UncBEdyUwq_XzqQQrw" targetNode="_yP16TncBEdyUwq_XzqQQrw">
+      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement/stereotypes"/>
     </sourceTargetCouple>
   </parts>
   <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_yP_EO3cBEdyUwq_XzqQQrw" object="_yP_ETHcBEdyUwq_XzqQQrw" defaultForegroundColor="192,192,192" foregroundColorChangeable="false" fontChangeable="false" targetDecoration="ARROW">
