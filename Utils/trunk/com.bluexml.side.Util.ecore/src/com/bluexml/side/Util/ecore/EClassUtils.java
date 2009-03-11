@@ -18,8 +18,10 @@ package com.bluexml.side.Util.ecore;
 
 import java.util.ListIterator;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
@@ -109,6 +111,49 @@ public class EClassUtils {
 		return result;
 	}
 	
+	/**
+	 * Method semi recursive, which search for the first EOperation similar to the first method arguments
+	 * and nearest to the second method argument (inheritance path).
+	 * Beware, an EClass can inherit from more than one EClass
+	 * @param operation the similar eoperation to find
+	 * @param receiverEclass the context from which to search the EOperation
+	 * @return
+	 */
+	public static EOperation getEOperationFor(EOperation operation, EClass receiverEclass) {
+		boolean founded = false;
+		EOperation resolved = null;
+		if(receiverEclass != null){
+			// looking into receiverEClass Eoperation
+			// >!< getEoperations returns operation declared in the EClass
+			// >!< getEALLEoperation returns operations declared in the EClass and all superTypes
+			ListIterator<EOperation> eoplist = receiverEclass.getEOperations().listIterator();
+			while(eoplist.hasNext() && !founded){
+				EOperation current = eoplist.next();
+				if(EOperationUtils.isTheSameEoperation(operation, current)){
+					founded = true;
+					resolved = current;
+				}
+			}
+			// if the Eoperation is not directly founded in the current EClass
+			// recursive call on all DIRECT superType
+			// >!< getESuperTypes returns direct superTypes
+			// >!< getEAllSuperTypes returns DIRECT SUperTypes and their superTypes and so on
+			if(!founded){
+				EList<EClass> superTypesList = receiverEclass.getESuperTypes();
+				if(superTypesList !=null && superTypesList.size()>0 ){
+					int cpt = 0;
+					int limit = superTypesList.size();
+
+					while (resolved == null && cpt<limit){
+						EClass superType = superTypesList.get(cpt);
+						resolved = getEOperationFor(operation,superType);
+						cpt++;
+					}
+				} 
+			}
+		}
+		return resolved;
+	}
 
 	
 
