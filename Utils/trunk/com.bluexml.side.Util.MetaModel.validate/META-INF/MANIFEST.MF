@@ -8,6 +8,7 @@ Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.ocl,
- org.eclipse.ocl.ecore
+ org.eclipse.ocl.ecore,
+ com.bluexml.side.Util.ecore
 Eclipse-LazyStart: true
 Export-Package: com.bluexml.side.Utils.MetaModel.validate.OCLextension

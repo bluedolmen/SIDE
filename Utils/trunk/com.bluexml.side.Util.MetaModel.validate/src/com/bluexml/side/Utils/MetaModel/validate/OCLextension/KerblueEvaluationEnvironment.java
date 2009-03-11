@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.ocl.EvaluationEnvironment;
 import org.eclipse.ocl.ecore.EcoreEvaluationEnvironment;
 
+import com.bluexml.side.Util.ecore.EClassUtils;
+
 class KerblueEvaluationEnvironment extends EcoreEvaluationEnvironment {
 
 	public KerblueEvaluationEnvironment() {
@@ -22,12 +24,35 @@ class KerblueEvaluationEnvironment extends EcoreEvaluationEnvironment {
 			EvaluationEnvironment<EClassifier, EOperation, EStructuralFeature, EClass, EObject> parent) {
 		super(parent);
 	}
-	
+	/**
+	 * Overides OCL enviroment evaluation method
+	 * We overide this method because the operation return is always the oepration
+	 * from the top superType of the context from wich is called the operation
+	 * In this method, we will find the nearest corresponding method from the call context
+	 * and forward this this operation to the former method
+	 * @param operation the operation to resolve
+	 * @param receiver the call context
+	 */
 	@Override
 	protected Method getJavaMethodFor(EOperation operation, Object receiver) {
-		//TODO : search and all class and super class of receiver is the operation exists.
-		return super.getJavaMethodFor(operation, receiver);
+		Method result =null;
+		EOperation resolved = null;
+		EObject eo = (EObject) receiver;
+		if(eo != null){
+
+		EClass eoClass = eo.eClass();
+		resolved = EClassUtils.getEOperationFor(operation,eoClass);
+		}
+		if(resolved == null){
+			result = super.getJavaMethodFor(operation, receiver);
+		}else{
+			result = super.getJavaMethodFor(resolved, receiver);
+		}
+		return result;
 	}
+
+	
+
 
 	public Object callOperation(EOperation operation, int opcode,
 			Object source, Object[] args) {
