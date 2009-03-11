@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Modeler Plug-in
+Bundle-SymbolicName: com.bluexml.side.Class.modeler
+Bundle-Version: 1.0.0
+Bundle-Activator: com.bluexml.side.clazz.modeler.Activator
+Bundle-Vendor: BLUEXML
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Eclipse-LazyStart: true
