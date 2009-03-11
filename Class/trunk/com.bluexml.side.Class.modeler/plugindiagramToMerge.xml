@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+   <extension point="org.topcased.modeler.templates">
+      <template
+            di="templates/diagram/%name%.clazzdi"
+            model="templates/diagram/%name%.clazz"
+            name="Class Diagram"
+            id="com.bluexml.side.Class.modeler.templates.diagram"
+            editorId="com.bluexml.side.Class.modeler.editor.ClazzEditor"/>
+   </extension>
+   
+   <extension point="org.topcased.modeler.diagrams">
+      <diagram
+            configuration="com.bluexml.side.Class.modeler.diagram.CdConfiguration"
+            id="com.bluexml.side.Class.modeler.diagram"
+            name="Class Diagram">
+      </diagram>
+	</extension>
+	
+   
+</plugin>
