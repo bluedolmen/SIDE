@@ -31,6 +31,7 @@ import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.View;
+import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.Stereotype;
 
 /**
