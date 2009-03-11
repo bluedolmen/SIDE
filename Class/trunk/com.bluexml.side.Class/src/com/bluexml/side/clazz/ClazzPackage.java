@@ -600,13 +600,22 @@ public interface ClazzPackage extends EPackage {
 	int CLAZZ__IS_DEPRECATED = ABSTRACT_CLASS_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Has View</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLAZZ__HAS_VIEW = ABSTRACT_CLASS_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Clazz</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLAZZ_FEATURE_COUNT = ABSTRACT_CLASS_FEATURE_COUNT + 5;
+	int CLAZZ_FEATURE_COUNT = ABSTRACT_CLASS_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.AssociationImpl <em>Association</em>}' class.
@@ -1638,6 +1647,17 @@ public interface ClazzPackage extends EPackage {
 	EAttribute getClazz_IsDeprecated();
 
 	/**
+	 * Returns the meta object for the reference list '{@link com.bluexml.side.clazz.Clazz#getHasView <em>Has View</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Has View</em>'.
+	 * @see com.bluexml.side.clazz.Clazz#getHasView()
+	 * @see #getClazz()
+	 * @generated
+	 */
+	EReference getClazz_HasView();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.clazz.Association <em>Association</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2355,6 +2375,14 @@ public interface ClazzPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CLAZZ__IS_DEPRECATED = eINSTANCE.getClazz_IsDeprecated();
+
+		/**
+		 * The meta object literal for the '<em><b>Has View</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLAZZ__HAS_VIEW = eINSTANCE.getClazz_HasView();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.AssociationImpl <em>Association</em>}' class.

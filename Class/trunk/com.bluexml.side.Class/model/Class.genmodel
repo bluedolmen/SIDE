@@ -4,7 +4,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.bluexml.side.Class/src"
     modelPluginID="com.bluexml.side.Class" modelName="Class" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="5.0" copyrightFields="false" usedGenPackages="../../com.bluexml.side.Common/model/Common.genmodel#//common">
-  <foreignModel>../../backup/Class.ecore</foreignModel>
+  <foreignModel>Class.ecore</foreignModel>
   <genPackages prefix="Clazz" basePackage="com.bluexml.side" disposableProviderFactory="true"
       ecorePackage="Class.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Class.ecore#//AssociationType">
@@ -50,6 +50,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//Clazz/aspects"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Clazz/isAbstract"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Clazz/isDeprecated"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//Clazz/hasView"/>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//Association">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//Association/source"/>

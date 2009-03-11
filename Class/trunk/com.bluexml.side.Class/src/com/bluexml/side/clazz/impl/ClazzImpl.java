@@ -11,6 +11,7 @@ import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Operation;
 
+import com.bluexml.side.clazz.View;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -39,6 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.bluexml.side.clazz.impl.ClazzImpl#getAspects <em>Aspects</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.ClazzImpl#isIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.ClazzImpl#isIsDeprecated <em>Is Deprecated</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.impl.ClazzImpl#getHasView <em>Has View</em>}</li>
  * </ul>
  * </p>
  *
@@ -114,6 +116,16 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * @ordered
 	 */
 	protected boolean isDeprecated = IS_DEPRECATED_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getHasView() <em>Has View</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHasView()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<View> hasView;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -217,6 +229,18 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<View> getHasView() {
+		if (hasView == null) {
+			hasView = new EObjectResolvingEList<View>(View.class, this, ClazzPackage.CLAZZ__HAS_VIEW);
+		}
+		return hasView;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -246,6 +270,8 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 				return isIsAbstract() ? Boolean.TRUE : Boolean.FALSE;
 			case ClazzPackage.CLAZZ__IS_DEPRECATED:
 				return isIsDeprecated() ? Boolean.TRUE : Boolean.FALSE;
+			case ClazzPackage.CLAZZ__HAS_VIEW:
+				return getHasView();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -277,6 +303,10 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 			case ClazzPackage.CLAZZ__IS_DEPRECATED:
 				setIsDeprecated(((Boolean)newValue).booleanValue());
 				return;
+			case ClazzPackage.CLAZZ__HAS_VIEW:
+				getHasView().clear();
+				getHasView().addAll((Collection<? extends View>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -304,6 +334,9 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 			case ClazzPackage.CLAZZ__IS_DEPRECATED:
 				setIsDeprecated(IS_DEPRECATED_EDEFAULT);
 				return;
+			case ClazzPackage.CLAZZ__HAS_VIEW:
+				getHasView().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -326,6 +359,8 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 				return isAbstract != IS_ABSTRACT_EDEFAULT;
 			case ClazzPackage.CLAZZ__IS_DEPRECATED:
 				return isDeprecated != IS_DEPRECATED_EDEFAULT;
+			case ClazzPackage.CLAZZ__HAS_VIEW:
+				return hasView != null && !hasView.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
