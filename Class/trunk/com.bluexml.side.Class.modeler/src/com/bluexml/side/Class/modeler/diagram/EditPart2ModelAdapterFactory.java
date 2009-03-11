@@ -17,8 +17,7 @@ package com.bluexml.side.Class.modeler.diagram;
 /**
  * @generated
  */
-public class EditPart2ModelAdapterFactory extends
-		org.topcased.modeler.editor.EditPart2ModelAdapterFactory {
+public class EditPart2ModelAdapterFactory extends org.topcased.modeler.editor.EditPart2ModelAdapterFactory {
 
 	/**
 	 * Constructor

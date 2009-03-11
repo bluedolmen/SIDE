@@ -53,8 +53,7 @@ public final class CdImageRegistry {
 	 * @generated
 	 */
 	public static Image getImage(String key) {
-		return ImageRegistry.getInstance().get(
-				ClazzPlugin.getDefault().getBundle(), getImageLocation(key));
+		return ImageRegistry.getInstance().get(ClazzPlugin.getDefault().getBundle(), getImageLocation(key));
 	}
 
 	/**
@@ -77,9 +76,7 @@ public final class CdImageRegistry {
 	 */
 	public static ImageDescriptor getImageDescriptor(String key) {
 		try {
-			return ImageRegistry.getInstance()
-					.getDescriptor(ClazzPlugin.getDefault().getBundle(),
-							getImageLocation(key));
+			return ImageRegistry.getInstance().getDescriptor(ClazzPlugin.getDefault().getBundle(), getImageLocation(key));
 		} catch (MissingResourceException mre) {
 			return null;
 		}

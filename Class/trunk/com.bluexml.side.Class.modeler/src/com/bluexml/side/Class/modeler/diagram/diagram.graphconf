@@ -3,7 +3,7 @@
     id="com.bluexml.side.Class.modeler.diagram"
     defaultBackgroundColor="255,255,255"
     defaultForegroundColor="0,0,0"
-    defaultFont="Segoe UI-regular-9">
+    defaultFont="Lucida Grande-regular-11">
     <node
         presentation="default"
         defaultHeight="-1"
@@ -14,7 +14,7 @@
         maximumWidth="200"
         defaultBackgroundColor="191,249,217"
         defaultForegroundColor="0,0,0"
-        defaultFont="Segoe UI-regular-9"
+        defaultFont="Lucida Grande-regular-11"
         lineWidth="1"
         lineStyle="SOLID"
         isWidthResizable="true"
@@ -33,7 +33,7 @@
         maximumWidth="800"
         defaultBackgroundColor="255,255,255"
         defaultForegroundColor="0,0,0"
-        defaultFont="Segoe UI-regular-9"
+        defaultFont="Lucida Grande-regular-11"
         lineWidth="1"
         lineStyle="SOLID"
         isWidthResizable="true"
@@ -52,7 +52,7 @@
         maximumWidth="800"
         defaultBackgroundColor="255,255,255"
         defaultForegroundColor="0,0,0"
-        defaultFont="Segoe UI-regular-9"
+        defaultFont="Lucida Grande-regular-11"
         lineWidth="1"
         lineStyle="SOLID"
         isWidthResizable="true"
@@ -71,7 +71,7 @@
         maximumWidth="200"
         defaultBackgroundColor="255,255,255"
         defaultForegroundColor="0,0,0"
-        defaultFont="Segoe UI-regular-9"
+        defaultFont="Lucida Grande-regular-11"
         lineWidth="1"
         lineStyle="SOLID"
         isWidthResizable="true"
@@ -90,7 +90,7 @@
         maximumWidth="200"
         defaultBackgroundColor="255,255,255"
         defaultForegroundColor="0,0,0"
-        defaultFont="Segoe UI-regular-9"
+        defaultFont="Lucida Grande-regular-11"
         lineWidth="1"
         lineStyle="SOLID"
         isWidthResizable="true"
@@ -109,7 +109,7 @@
         maximumWidth="-1"
         defaultBackgroundColor="191,249,217"
         defaultForegroundColor="0,0,0"
-        defaultFont="Segoe UI-regular-9"
+        defaultFont="Lucida Grande-regular-11"
         lineWidth="1"
         lineStyle="SOLID"
         isWidthResizable="true"
@@ -128,7 +128,7 @@
         maximumWidth="-1"
         defaultBackgroundColor="255,255,255"
         defaultForegroundColor="0,0,0"
-        defaultFont="Segoe UI-regular-9"
+        defaultFont="Lucida Grande-regular-11"
         lineWidth="1"
         lineStyle="SOLID"
         isWidthResizable="true"
@@ -147,7 +147,7 @@
         maximumWidth="200"
         defaultBackgroundColor="255,255,255"
         defaultForegroundColor="0,0,0"
-        defaultFont="Segoe UI-regular-9"
+        defaultFont="Lucida Grande-regular-11"
         lineWidth="1"
         lineStyle="SOLID"
         isWidthResizable="true"
@@ -166,7 +166,7 @@
         maximumWidth="-1"
         defaultBackgroundColor="218,248,239"
         defaultForegroundColor="0,0,0"
-        defaultFont="Segoe UI-regular-9"
+        defaultFont="Lucida Grande-regular-11"
         lineWidth="1"
         lineStyle="SOLID"
         isWidthResizable="true"
@@ -178,7 +178,7 @@
     <edge
         presentation="default"
         defaultForegroundColor="0,0,0"
-        defaultFont="Segoe UI-regular-9"
+        defaultFont="Lucida Grande-regular-11"
         defaultRouter="ObliqueRouter"
         lineWidth="1"
         lineStyle="SOLID">
@@ -189,7 +189,7 @@
     <edge
         presentation="default"
         defaultForegroundColor="128,128,192"
-        defaultFont="Segoe UI-regular-9"
+        defaultFont="Lucida Grande-regular-11"
         defaultRouter="ObliqueRouter"
         lineWidth="1"
         lineStyle="SOLID">
@@ -198,7 +198,7 @@
     <edge
         presentation="default"
         defaultForegroundColor="214,214,214"
-        defaultFont="Segoe UI-regular-9"
+        defaultFont="Lucida Grande-regular-11"
         defaultRouter="ObliqueRouter"
         lineWidth="1"
         lineStyle="SOLID">
@@ -207,7 +207,7 @@
     <edge
         presentation="default"
         defaultForegroundColor="192,192,192"
-        defaultFont="Segoe UI-regular-9"
+        defaultFont="Lucida Grande-regular-11"
         defaultRouter="ObliqueRouter"
         lineWidth="1"
         lineStyle="SOLID">
@@ -216,7 +216,7 @@
     <edge
         presentation="default"
         defaultForegroundColor="192,192,192"
-        defaultFont="Segoe UI-regular-9"
+        defaultFont="Lucida Grande-regular-11"
         defaultRouter="ObliqueRouter"
         lineWidth="1"
         lineStyle="SOLID">
@@ -225,7 +225,7 @@
     <edge
         presentation="default"
         defaultForegroundColor="0,128,128"
-        defaultFont="Segoe UI-regular-9"
+        defaultFont="Lucida Grande-regular-11"
         defaultRouter="ObliqueRouter"
         lineWidth="1"
         lineStyle="SOLID">
@@ -234,7 +234,7 @@
     <edge
         presentation="default"
         defaultForegroundColor="0,0,255"
-        defaultFont="Segoe UI-regular-9"
+        defaultFont="Lucida Grande-regular-11"
         defaultRouter="ObliqueRouter"
         lineWidth="1"
         lineStyle="SOLID">
