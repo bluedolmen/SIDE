@@ -153,6 +153,20 @@ public class ClazzModelerProviderAdapterFactory extends ClazzAdapterFactory
 	private ViewItemModelerProvider viewitemModelerProvider;
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.MetaInfo} instances.
+	 * 
+	 * @generated
+	 */
+	private MetaInfoModelerProvider metainfoModelerProvider;
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.MetaInfoGroup} instances.
+	 * 
+	 * @generated
+	 */
+	private MetaInfoGroupModelerProvider metainfogroupModelerProvider;
+
+	/**
 	 * This constructs an instance.
 	 * 
 	 * @generated
@@ -474,6 +488,35 @@ public class ClazzModelerProviderAdapterFactory extends ClazzAdapterFactory
 	}
 
 	/**
+	 * This creates an adapter for a {@link com.bluexml.side.clazz.MetaInfo}.
+	 *
+	 * @return the Adapter
+	 * @generated
+	 */
+	public Adapter createMetaInfoAdapter() {
+		if (metainfoModelerProvider == null) {
+			metainfoModelerProvider = new MetaInfoModelerProvider(this);
+		}
+
+		return metainfoModelerProvider;
+	}
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.clazz.MetaInfoGroup}.
+	 *
+	 * @return the Adapter
+	 * @generated
+	 */
+	public Adapter createMetaInfoGroupAdapter() {
+		if (metainfogroupModelerProvider == null) {
+			metainfogroupModelerProvider = new MetaInfoGroupModelerProvider(
+					this);
+		}
+
+		return metainfogroupModelerProvider;
+	}
+
+	/**
 	 * This disposes all of the item providers created by this factory.
 	 * 
 	 * @generated
@@ -523,6 +566,12 @@ public class ClazzModelerProviderAdapterFactory extends ClazzAdapterFactory
 		}
 		if (viewitemModelerProvider != null) {
 			viewitemModelerProvider.dispose();
+		}
+		if (metainfoModelerProvider != null) {
+			metainfoModelerProvider.dispose();
+		}
+		if (metainfogroupModelerProvider != null) {
+			metainfogroupModelerProvider.dispose();
 		}
 	}
 

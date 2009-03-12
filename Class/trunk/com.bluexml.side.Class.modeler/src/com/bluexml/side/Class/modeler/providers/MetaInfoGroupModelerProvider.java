@@ -11,11 +11,11 @@ import org.topcased.modeler.providers.ILabelFeatureProvider;
 import com.bluexml.side.clazz.ClazzPackage;
 
 /**
- * This is the item provider adpater for a {@link com.bluexml.side.clazz.ViewItem} object.
+ * This is the item provider adpater for a {@link com.bluexml.side.clazz.MetaInfoGroup} object.
  *
  * @generated
  */
-public class ViewItemModelerProvider extends ItemProviderAdapter implements
+public class MetaInfoGroupModelerProvider extends ItemProviderAdapter implements
 		ILabelFeatureProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -23,7 +23,7 @@ public class ViewItemModelerProvider extends ItemProviderAdapter implements
 	 * @param adapterFactory the adapter factory
 	 * @generated
 	 */
-	public ViewItemModelerProvider(AdapterFactory adapterFactory) {
+	public MetaInfoGroupModelerProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -32,6 +32,6 @@ public class ViewItemModelerProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	public EAttribute getLabelFeature(Object object) {
-		return ClazzPackage.eINSTANCE.getViewItem_Role();
+		return ClazzPackage.eINSTANCE.getMetaInfoGroup_Name();
 	}
 }

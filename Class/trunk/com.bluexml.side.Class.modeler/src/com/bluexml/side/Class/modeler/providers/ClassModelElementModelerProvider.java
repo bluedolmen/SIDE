@@ -8,6 +8,8 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.topcased.modeler.providers.ILabelFeatureProvider;
 
+import com.bluexml.side.clazz.ClazzPackage;
+
 /**
  * This is the item provider adpater for a {@link com.bluexml.side.clazz.ClassModelElement} object.
  *
@@ -30,6 +32,6 @@ public class ClassModelElementModelerProvider extends ItemProviderAdapter
 	 * @generated
 	 */
 	public EAttribute getLabelFeature(Object object) {
-		return null;
+		return ClazzPackage.eINSTANCE.getClassModelElement_Documentation();
 	}
 }
