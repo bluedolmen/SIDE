@@ -39,11 +39,11 @@
 	  	</task>
 
 	  	
-	  	<transition name="" to="">
+	  	<transition name="" to="join1">
 
 	  	</transition>
 	  	
-	  	<transition name="" to="">
+	  	<transition name="" to="join1">
 	  			<action class="org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript">
 					<script>
 							<variable name="new" access="read,write"/>
@@ -59,11 +59,11 @@
 	  	</task>
 
 	  	
-	  	<transition name="" to="">
+	  	<transition name="" to="join1">
 
 	  	</transition>
 	  	
-	  	<transition name="" to="">
+	  	<transition name="" to="join1">
 	  			<action class="org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript">
 					<script>
 							<variable name="new" access="read,write"/>
@@ -115,6 +115,7 @@
 
 	<node name="Approved">
 
+		<task>
 	  	</task>
 
 	  	
@@ -137,37 +138,38 @@
 			</action>
 		</event>
 
+		<task>
 	  	</task>
 
 	  	
-	  	<transition name="" to="">
+	  	<transition name="" to="fork1">
 
 	  	</transition>
 	</node>
 
-	<join name="">
+	<join name="join1">
 	  	
-		<transition name="" to="">
+		<transition name="decision1" to="decision1">
 	  	</transition>
 	</join>
 
-	<fork name="">
+	<fork name="join1">
 	  	
-		<transition name="" to="">
+		<transition name="decision1" to="decision1">
 	  	</transition>
 	</fork>
 
 
-	<decision name="">
+	<decision name="decision1">
 	  	
-		<transition name="" to="">
+		<transition name="decision2" to="decision2">
 	  	<condition>#{approveCount == 2}</condition>
 	  	</transition>
 	  	
 		<transition name="Revise" to="Revise">
 	  	</transition>
 	</decision>
-	<decision name="">
+	<decision name="decision2">
 	  	
 		<transition name="ThirdPartyReview" to="ThirdPartyReview">
 	  	<condition>#{wfbx_reviewerEmail!=""}</condition>

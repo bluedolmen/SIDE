@@ -35,6 +35,7 @@
         </script>
       </action>
     </transition>
+    <clazz href="My.clazz#//@packageSet.0/@packageSet.0/@classSet.0"/>
   </tasknode>
   <tasknode name="EngineeringReview" swimlane="//@swimlane.2">
     <transition name="reject" to="//@join.0"/>
@@ -64,18 +65,18 @@
       </action>
     </event>
   </tasknode>
-  <fork name="fork1">
+  <fork>
     <transition name="" to="//@tasknode.0"/>
     <transition name="" to="//@tasknode.1"/>
   </fork>
-  <join name="join1">
+  <join>
     <transition name="" to="//@decision.0"/>
   </join>
-  <decision name="decision1">
+  <decision>
     <transition name="" condition="#{approveCount == 2}" to="//@decision.1" title=""/>
     <transition name="" to="//@tasknode.2"/>
   </decision>
-  <decision name="decision2">
+  <decision>
     <transition name="" condition="#{wfbx_reviewerEmail!=&quot;&quot;}" to="//@tasknode.3"/>
     <transition name="" to="//@node.0"/>
   </decision>

@@ -38,6 +38,7 @@
 			<!-- Associations -->
 			<associations>
 			</associations>
+	</type>
 
 	<type name="wfbx:MarketingReview">
 		<parent>bpm:workflowTask</parent>
@@ -47,12 +48,8 @@
 			
 			<!-- Associations -->
 			<associations>
-				<association name="wfbx:MyClazz">
-					<target>
-						<class>ID:MyClazz</class>
-					</target>
-				</association>
 			</associations>
+	</type>
 	<type name="wfbx:EngineeringReview">
 		<parent>bpm:workflowTask</parent>
 			<!-- Properties -->
@@ -62,6 +59,7 @@
 			<!-- Associations -->
 			<associations>
 			</associations>
+	</type>
 	<type name="wfbx:Revise">
 		<parent>bpm:workflowTask</parent>
 			<!-- Properties -->
@@ -71,6 +69,7 @@
 			<!-- Associations -->
 			<associations>
 			</associations>
+	</type>
 	<type name="wfbx:ThirdPartyReview">
 		<parent>bpm:workflowTask</parent>
 			<!-- Properties -->
@@ -80,6 +79,7 @@
 			<!-- Associations -->
 			<associations>
 			</associations>
+	</type>
     
   </types>
    
