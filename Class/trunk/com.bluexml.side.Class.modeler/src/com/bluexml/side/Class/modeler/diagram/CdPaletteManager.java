@@ -97,32 +97,62 @@ public class CdPaletteManager extends ModelerPaletteManager {
 
 		CreationFactory factory;
 
-		factory = new GraphElementCreationFactory(creationUtils, ClazzPackage.eINSTANCE.getClazz(), "default");
-		entries.add(new ModelerCreationToolEntry("Class", "Class", factory, CdImageRegistry.getImageDescriptor("CLAZZ"), CdImageRegistry.getImageDescriptor("CLAZZ_LARGE")));
+		factory = new GraphElementCreationFactory(creationUtils,
+				ClazzPackage.eINSTANCE.getClazz(), "default");
+		entries.add(new ModelerCreationToolEntry("Class", "Class", factory,
+				CdImageRegistry.getImageDescriptor("CLAZZ"), CdImageRegistry
+						.getImageDescriptor("CLAZZ_LARGE")));
 
-		factory = new GraphElementCreationFactory(creationUtils, ClazzPackage.eINSTANCE.getAspect(), "default");
-		entries.add(new ModelerCreationToolEntry("Aspect", "Aspect", factory, CdImageRegistry.getImageDescriptor("ASPECT"), CdImageRegistry.getImageDescriptor("ASPECT_LARGE")));
+		factory = new GraphElementCreationFactory(creationUtils,
+				ClazzPackage.eINSTANCE.getAspect(), "default");
+		entries.add(new ModelerCreationToolEntry("Aspect", "Aspect", factory,
+				CdImageRegistry.getImageDescriptor("ASPECT"), CdImageRegistry
+						.getImageDescriptor("ASPECT_LARGE")));
 
-		factory = new GraphElementCreationFactory(creationUtils, ClazzPackage.eINSTANCE.getAttribute(), "default");
-		entries.add(new ModelerCreationToolEntry("Property", "Property", factory, CdImageRegistry.getImageDescriptor("ATTRIBUTE"), CdImageRegistry.getImageDescriptor("ATTRIBUTE_LARGE")));
+		factory = new GraphElementCreationFactory(creationUtils,
+				ClazzPackage.eINSTANCE.getAttribute(), "default");
+		entries.add(new ModelerCreationToolEntry("Property", "Property",
+				factory, CdImageRegistry.getImageDescriptor("ATTRIBUTE"),
+				CdImageRegistry.getImageDescriptor("ATTRIBUTE_LARGE")));
 
-		factory = new GraphElementCreationFactory(creationUtils, ClazzPackage.eINSTANCE.getOperation(), "default");
-		entries.add(new ModelerCreationToolEntry("Operation", "Operation", factory, CdImageRegistry.getImageDescriptor("OPERATION"), CdImageRegistry.getImageDescriptor("OPERATION_LARGE")));
+		factory = new GraphElementCreationFactory(creationUtils,
+				ClazzPackage.eINSTANCE.getOperation(), "default");
+		entries.add(new ModelerCreationToolEntry("Operation", "Operation",
+				factory, CdImageRegistry.getImageDescriptor("OPERATION"),
+				CdImageRegistry.getImageDescriptor("OPERATION_LARGE")));
 
-		factory = new GraphElementCreationFactory(creationUtils, CommonPackage.eINSTANCE.getStereotype(), "default");
-		entries.add(new ModelerCreationToolEntry("Stereotype", "Stereotype", factory, CdImageRegistry.getImageDescriptor("STEREOTYPE"), CdImageRegistry.getImageDescriptor("STEREOTYPE_LARGE")));
+		factory = new GraphElementCreationFactory(creationUtils,
+				CommonPackage.eINSTANCE.getStereotype(), "default");
+		entries.add(new ModelerCreationToolEntry("Stereotype", "Stereotype",
+				factory, CdImageRegistry.getImageDescriptor("STEREOTYPE"),
+				CdImageRegistry.getImageDescriptor("STEREOTYPE_LARGE")));
 
-		factory = new GraphElementCreationFactory(creationUtils, CommonPackage.eINSTANCE.getComment(), "default");
-		entries.add(new ModelerCreationToolEntry("Comment", "Comment", factory, CdImageRegistry.getImageDescriptor("COMMENT"), CdImageRegistry.getImageDescriptor("COMMENT_LARGE")));
+		factory = new GraphElementCreationFactory(creationUtils,
+				CommonPackage.eINSTANCE.getComment(), "default");
+		entries.add(new ModelerCreationToolEntry("Comment", "Comment", factory,
+				CdImageRegistry.getImageDescriptor("COMMENT"), CdImageRegistry
+						.getImageDescriptor("COMMENT_LARGE")));
 
-		factory = new GraphElementCreationFactory(creationUtils, ClazzPackage.eINSTANCE.getEnumeration(), "default");
-		entries.add(new ModelerCreationToolEntry("Enumeration", "Enumeration", factory, CdImageRegistry.getImageDescriptor("ENUMERATION"), CdImageRegistry.getImageDescriptor("ENUMERATION_LARGE")));
+		factory = new GraphElementCreationFactory(creationUtils,
+				ClazzPackage.eINSTANCE.getEnumeration(), "default");
+		entries.add(new ModelerCreationToolEntry("Enumeration", "Enumeration",
+				factory, CdImageRegistry.getImageDescriptor("ENUMERATION"),
+				CdImageRegistry.getImageDescriptor("ENUMERATION_LARGE")));
 
-		factory = new GraphElementCreationFactory(creationUtils, ClazzPackage.eINSTANCE.getEnumerationLiteral(), "default");
-		entries.add(new ModelerCreationToolEntry("Enumeration Literal", "Enumeration Literal", factory, CdImageRegistry.getImageDescriptor("ENUMERATIONLITERAL"), CdImageRegistry.getImageDescriptor("ENUMERATIONLITERAL_LARGE")));
+		factory = new GraphElementCreationFactory(creationUtils,
+				ClazzPackage.eINSTANCE.getEnumerationLiteral(), "default");
+		entries
+				.add(new ModelerCreationToolEntry("Enumeration Literal",
+						"Enumeration Literal", factory, CdImageRegistry
+								.getImageDescriptor("ENUMERATIONLITERAL"),
+						CdImageRegistry
+								.getImageDescriptor("ENUMERATIONLITERAL_LARGE")));
 
-		factory = new GraphElementCreationFactory(creationUtils, ClazzPackage.eINSTANCE.getView(), "default");
-		entries.add(new ModelerCreationToolEntry("View", "View", factory, CdImageRegistry.getImageDescriptor("VIEW"), CdImageRegistry.getImageDescriptor("VIEW_LARGE")));
+		factory = new GraphElementCreationFactory(creationUtils,
+				ClazzPackage.eINSTANCE.getView(), "default");
+		entries.add(new ModelerCreationToolEntry("View", "View", factory,
+				CdImageRegistry.getImageDescriptor("VIEW"), CdImageRegistry
+						.getImageDescriptor("VIEW_LARGE")));
 
 		objectsDrawer.addAll(entries);
 		getRoot().add(objectsDrawer);
@@ -139,23 +169,54 @@ public class CdPaletteManager extends ModelerPaletteManager {
 
 		CreationFactory factory;
 
-		factory = new GraphElementCreationFactory(creationUtils, ClazzPackage.eINSTANCE.getAssociation(), "default");
-		entries.add(new ModelerConnectionCreationToolEntry("Association", "Association", factory, CdImageRegistry.getImageDescriptor("ASSOCIATION"), CdImageRegistry.getImageDescriptor("ASSOCIATION_LARGE")));
+		factory = new GraphElementCreationFactory(creationUtils,
+				ClazzPackage.eINSTANCE.getAssociation(), "default");
+		entries.add(new ModelerConnectionCreationToolEntry("Association",
+				"Association", factory, CdImageRegistry
+						.getImageDescriptor("ASSOCIATION"), CdImageRegistry
+						.getImageDescriptor("ASSOCIATION_LARGE")));
 
-		factory = new GraphElementCreationFactory(creationUtils, CdSimpleObjectConstants.SIMPLE_OBJECT_GENERALIZATION, "default", false);
-		entries.add(new ModelerConnectionCreationToolEntry("Generalization", "Generalization", factory, CdImageRegistry.getImageDescriptor("GENERALIZATION"), CdImageRegistry.getImageDescriptor("GENERALIZATION_LARGE")));
+		factory = new GraphElementCreationFactory(creationUtils,
+				CdSimpleObjectConstants.SIMPLE_OBJECT_GENERALIZATION,
+				"default", false);
+		entries.add(new ModelerConnectionCreationToolEntry("Generalization",
+				"Generalization", factory, CdImageRegistry
+						.getImageDescriptor("GENERALIZATION"), CdImageRegistry
+						.getImageDescriptor("GENERALIZATION_LARGE")));
 
-		factory = new GraphElementCreationFactory(creationUtils, CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED, "default", false);
-		entries.add(new ModelerConnectionCreationToolEntry("Is commented", "Is commented", factory, CdImageRegistry.getImageDescriptor("ISCOMMENTED"), CdImageRegistry.getImageDescriptor("ISCOMMENTED_LARGE")));
+		factory = new GraphElementCreationFactory(creationUtils,
+				CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED, "default",
+				false);
+		entries.add(new ModelerConnectionCreationToolEntry("Is commented",
+				"Is commented", factory, CdImageRegistry
+						.getImageDescriptor("ISCOMMENTED"), CdImageRegistry
+						.getImageDescriptor("ISCOMMENTED_LARGE")));
 
-		factory = new GraphElementCreationFactory(creationUtils, CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED, "default", false);
-		entries.add(new ModelerConnectionCreationToolEntry("Is stereotyped", "Is stereotyped", factory, CdImageRegistry.getImageDescriptor("ISSTEREOTYPED"), CdImageRegistry.getImageDescriptor("ISSTEREOTYPED_LARGE")));
+		factory = new GraphElementCreationFactory(creationUtils,
+				CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED, "default",
+				false);
+		entries.add(new ModelerConnectionCreationToolEntry("Is stereotyped",
+				"Is stereotyped", factory, CdImageRegistry
+						.getImageDescriptor("ISSTEREOTYPED"), CdImageRegistry
+						.getImageDescriptor("ISSTEREOTYPED_LARGE")));
 
-		factory = new GraphElementCreationFactory(creationUtils, CdSimpleObjectConstants.SIMPLE_OBJECT_ISASSOCIATIONCLASS, "default", false);
-		entries.add(new ModelerConnectionCreationToolEntry("Is association class", "Is association class", factory, CdImageRegistry.getImageDescriptor("ISASSOCIATIONCLASS"), CdImageRegistry.getImageDescriptor("ISASSOCIATIONCLASS_LARGE")));
+		factory = new GraphElementCreationFactory(creationUtils,
+				CdSimpleObjectConstants.SIMPLE_OBJECT_ISASSOCIATIONCLASS,
+				"default", false);
+		entries
+				.add(new ModelerConnectionCreationToolEntry(
+						"Is association class", "Is association class",
+						factory, CdImageRegistry
+								.getImageDescriptor("ISASSOCIATIONCLASS"),
+						CdImageRegistry
+								.getImageDescriptor("ISASSOCIATIONCLASS_LARGE")));
 
-		factory = new GraphElementCreationFactory(creationUtils, CdSimpleObjectConstants.SIMPLE_OBJECT_HASVIEW, "default", false);
-		entries.add(new ModelerConnectionCreationToolEntry("Has view", "Has view", factory, CdImageRegistry.getImageDescriptor("HASVIEW"), CdImageRegistry.getImageDescriptor("HASVIEW_LARGE")));
+		factory = new GraphElementCreationFactory(creationUtils,
+				CdSimpleObjectConstants.SIMPLE_OBJECT_HASVIEW, "default", false);
+		entries.add(new ModelerConnectionCreationToolEntry("Has view",
+				"Has view", factory, CdImageRegistry
+						.getImageDescriptor("HASVIEW"), CdImageRegistry
+						.getImageDescriptor("HASVIEW_LARGE")));
 
 		linksDrawer.addAll(entries);
 		getRoot().add(linksDrawer);

@@ -82,16 +82,46 @@ public class CdConfiguration implements IConfiguration {
 	 * @generated
 	 */
 	private void registerAdapters() {
-		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(StereotypeEditPart.class, com.bluexml.side.common.Stereotype.class), StereotypeEditPart.class);
-		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(ClazzEditPart.class, com.bluexml.side.clazz.Clazz.class), ClazzEditPart.class);
-		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(AspectEditPart.class, com.bluexml.side.clazz.Aspect.class), AspectEditPart.class);
-		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(AttributeEditPart.class, com.bluexml.side.clazz.Attribute.class), AttributeEditPart.class);
-		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(OperationEditPart.class, com.bluexml.side.clazz.Operation.class), OperationEditPart.class);
-		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(CommentEditPart.class, com.bluexml.side.common.Comment.class), CommentEditPart.class);
-		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(EnumerationEditPart.class, com.bluexml.side.clazz.Enumeration.class), EnumerationEditPart.class);
-		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(EnumerationLiteralEditPart.class, com.bluexml.side.clazz.EnumerationLiteral.class), EnumerationLiteralEditPart.class);
-		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(ViewEditPart.class, com.bluexml.side.clazz.View.class), ViewEditPart.class);
-		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(AssociationEditPart.class, com.bluexml.side.clazz.Association.class), AssociationEditPart.class);
+		Platform.getAdapterManager().registerAdapters(
+				new EditPart2ModelAdapterFactory(StereotypeEditPart.class,
+						com.bluexml.side.common.Stereotype.class),
+				StereotypeEditPart.class);
+		Platform.getAdapterManager().registerAdapters(
+				new EditPart2ModelAdapterFactory(ClazzEditPart.class,
+						com.bluexml.side.clazz.Clazz.class),
+				ClazzEditPart.class);
+		Platform.getAdapterManager().registerAdapters(
+				new EditPart2ModelAdapterFactory(AspectEditPart.class,
+						com.bluexml.side.clazz.Aspect.class),
+				AspectEditPart.class);
+		Platform.getAdapterManager().registerAdapters(
+				new EditPart2ModelAdapterFactory(AttributeEditPart.class,
+						com.bluexml.side.clazz.Attribute.class),
+				AttributeEditPart.class);
+		Platform.getAdapterManager().registerAdapters(
+				new EditPart2ModelAdapterFactory(OperationEditPart.class,
+						com.bluexml.side.clazz.Operation.class),
+				OperationEditPart.class);
+		Platform.getAdapterManager().registerAdapters(
+				new EditPart2ModelAdapterFactory(CommentEditPart.class,
+						com.bluexml.side.common.Comment.class),
+				CommentEditPart.class);
+		Platform.getAdapterManager().registerAdapters(
+				new EditPart2ModelAdapterFactory(EnumerationEditPart.class,
+						com.bluexml.side.clazz.Enumeration.class),
+				EnumerationEditPart.class);
+		Platform.getAdapterManager().registerAdapters(
+				new EditPart2ModelAdapterFactory(
+						EnumerationLiteralEditPart.class,
+						com.bluexml.side.clazz.EnumerationLiteral.class),
+				EnumerationLiteralEditPart.class);
+		Platform.getAdapterManager().registerAdapters(
+				new EditPart2ModelAdapterFactory(ViewEditPart.class,
+						com.bluexml.side.clazz.View.class), ViewEditPart.class);
+		Platform.getAdapterManager().registerAdapters(
+				new EditPart2ModelAdapterFactory(AssociationEditPart.class,
+						com.bluexml.side.clazz.Association.class),
+				AssociationEditPart.class);
 	}
 
 	/**
@@ -152,16 +182,20 @@ public class CdConfiguration implements IConfiguration {
 	 */
 	public DiagramGraphConf getDiagramGraphConf() {
 		if (diagramGraphConf == null) {
-			URL url = ClazzPlugin.getDefault().getBundle().getResource("com/bluexml/side/Class/modeler/diagram/diagram.graphconf");
+			URL url = ClazzPlugin.getDefault().getBundle().getResource(
+					"com/bluexml/side/Class/modeler/diagram/diagram.graphconf");
 			if (url != null) {
 				URI fileURI = URI.createURI(url.toString());
 				ResourceSet resourceSet = new ResourceSetImpl();
 				Resource resource = resourceSet.getResource(fileURI, true);
-				if (resource != null && resource.getContents().get(0) instanceof DiagramGraphConf) {
-					diagramGraphConf = (DiagramGraphConf) resource.getContents().get(0);
+				if (resource != null
+						&& resource.getContents().get(0) instanceof DiagramGraphConf) {
+					diagramGraphConf = (DiagramGraphConf) resource
+							.getContents().get(0);
 				}
 			} else {
-				new MissingGraphConfFileException("The *.diagramgraphconf file can not be retrieved. Check if the path is correct in the Configuration class of your diagram.");
+				new MissingGraphConfFileException(
+						"The *.diagramgraphconf file can not be retrieved. Check if the path is correct in the Configuration class of your diagram.");
 			}
 		}
 
