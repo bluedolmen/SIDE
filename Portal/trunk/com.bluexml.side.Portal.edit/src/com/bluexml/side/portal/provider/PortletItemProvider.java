@@ -11,6 +11,8 @@ import com.bluexml.side.portal.PortalFactory;
 import com.bluexml.side.portal.PortalPackage;
 import com.bluexml.side.portal.Portlet;
 
+
+
 import java.util.Collection;
 import java.util.List;
 
@@ -208,17 +210,6 @@ public class PortletItemProvider
 			(createChildParameter
 				(PortalPackage.Literals.PORTLET__IS_INSTANCE_OF_PORTLET_TYPE,
 				 PortalFactory.eINSTANCE.createInstanciatePortletType()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return PortalEditPlugin.INSTANCE;
 	}
 
 }

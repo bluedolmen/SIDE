@@ -10,6 +10,7 @@ package com.bluexml.side.portal.provider;
 import com.bluexml.side.portal.PortalPackage;
 import com.bluexml.side.portal.PortletAttributeInstance;
 
+
 import java.util.Collection;
 import java.util.List;
 

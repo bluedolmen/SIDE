@@ -8,6 +8,7 @@ package com.bluexml.side.portal.provider;
 
 
 import com.bluexml.side.portal.Column;
+
 import com.bluexml.side.portal.PortalPackage;
 
 import java.util.Collection;

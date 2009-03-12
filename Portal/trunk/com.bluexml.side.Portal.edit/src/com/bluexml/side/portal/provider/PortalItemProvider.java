@@ -7,11 +7,14 @@
 package com.bluexml.side.portal.provider;
 
 
+import com.bluexml.side.clazz.ClazzFactory;
 import com.bluexml.side.common.CommonPackage;
 
 import com.bluexml.side.common.provider.PackageItemProvider;
 
 import com.bluexml.side.portal.Portal;
+
+
 import com.bluexml.side.portal.PortalFactory;
 import com.bluexml.side.portal.PortalPackage;
 
@@ -169,6 +172,11 @@ public class PortalItemProvider
 			(createChildParameter
 				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
 				 PortalFactory.eINSTANCE.createPortal()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
+				 ClazzFactory.eINSTANCE.createClassPackage()));
 
 		newChildDescriptors.add
 			(createChildParameter

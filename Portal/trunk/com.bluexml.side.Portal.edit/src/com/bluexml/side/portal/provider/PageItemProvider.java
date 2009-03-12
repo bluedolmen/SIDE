@@ -8,6 +8,8 @@ package com.bluexml.side.portal.provider;
 
 
 import com.bluexml.side.portal.Page;
+
+
 import com.bluexml.side.portal.PortalFactory;
 import com.bluexml.side.portal.PortalPackage;
 
@@ -287,17 +289,6 @@ public class PageItemProvider
 			(createChildParameter
 				(PortalPackage.Literals.PAGE__IS_CHILD_PAGE_OF,
 				 PortalFactory.eINSTANCE.createisChildPage()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return PortalEditPlugin.INSTANCE;
 	}
 
 }

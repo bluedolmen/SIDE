@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagramconfigurator:DiagramConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagramconfigurator="http://www.topcased.org/diagramconfigurator/0.10" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="_dte6UGIuEd26muzWYCR5yw" projectName="com.bluexml.side.Portal.modeler" name="PortalDiagram" package="diagram" prefix="Pd" copyrightText="This program is free software; you can redistribute it and/or modify&#xD;&#xA; it under the terms of the GNU General Public License as published by&#xD;&#xA; the Free Software Foundation; either version 2.&#xD;&#xA;&#xD;&#xA;This program is distributed in the hope that it will be useful,&#xD;&#xA;but WITHOUT ANY WARRANTY; without even the implied warranty of&#xD;&#xA;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#xD;&#xA;GNU General Public License for more details.&#xD;&#xA;&#xD;&#xA;You should have received a copy of the GNU General Public License&#xD;&#xA;along with this program; if not, write to the Free Software&#xD;&#xA;Foundation, Inc., 59 Temple Place, Boston, MA 02111." pluginVersion="1.0" provider="BlueXML" samePluginAsEditor="true">
+  <palette xmi:id="_0P460GIvEd26muzWYCR5yw" name="Palette">
+    <paletteCategories xmi:id="_2bi6EGIvEd26muzWYCR5yw" name="Object">
+      <items xmi:id="_39TnwGIvEd26muzWYCR5yw" name="Page" part="_O5lywGIvEd26muzWYCR5yw"/>
+      <items xmi:id="_sAJ4AGLZEd2BMYlQJ3YqOg" name="Layout" part="_9D00YGLZEd2BMYlQJ3YqOg"/>
+      <items xmi:id="_wlhGUGLpEd2BMYlQJ3YqOg" name="Portlet" part="_Ir8TwGLqEd2BMYlQJ3YqOg"/>
+      <items xmi:id="_zi5dcGLpEd2BMYlQJ3YqOg" name="Portal Portlet" part="_3NWggGLqEd2BMYlQJ3YqOg"/>
+      <items xmi:id="_1j_LcGLpEd2BMYlQJ3YqOg" name="Generated Portlet" part="_GA3YIGLrEd2BMYlQJ3YqOg"/>
+    </paletteCategories>
+    <paletteCategories xmi:id="_6YROUGIvEd26muzWYCR5yw" name="Link">
+      <items xmi:id="_7aZZsGIvEd26muzWYCR5yw" name="ChildPage" part="_YsDyYGIvEd26muzWYCR5yw"/>
+      <items xmi:id="_bFlX0GLaEd2BMYlQJ3YqOg" name="Use Layout" part="_dnhwIGLaEd2BMYlQJ3YqOg"/>
+      <items xmi:id="_9DTcsGLpEd2BMYlQJ3YqOg" name="Is Portal Portlet" part="_Ol10UJVIEd2qKsmIcebR8g"/>
+      <items xmi:id="_ghptMGMBEd2DgaUhBfJOfg" name="Is Generated Portlet" part="_xtp7oGMAEd2DgaUhBfJOfg"/>
+      <items xmi:id="_7CH48I-oEd28deDONK53gw" name="Is On Page" part="_78SNYI-jEd28deDONK53gw"/>
+    </paletteCategories>
+  </palette>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_O5lywGIvEd26muzWYCR5yw" object="_Mfu_cGIvEd26muzWYCR5yw" foregroundColorChangeable="false" fontChangeable="false" lineStyle="CUSTOM" type="Container With Inner Label" defaultBackgroundColor="157,210,60" backgroundColorChangeable="false" defaultWidth="53" defaultHeight="89" minimumWidth="53" minimumHeight="89" maximumWidth="100" maximumHeight="89"/>
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_YsDyYGIvEd26muzWYCR5yw" object="_2zxdgKczEd2vCsoBD9PtWw" targetDecoration="TRIANGLE">
+    <sourceTargetCouple xmi:id="_NqQMYKc8Ed2Sku2YC9cHsw" containerType="SOURCE" sourceNode="_O5lywGIvEd26muzWYCR5yw" targetNode="_O5lywGIvEd26muzWYCR5yw">
+      <containerObject href="../../com.bluexml.side.Portal/model/Portal.genmodel#//portal/Page"/>
+      <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Portal/model/Portal.ecore#//Page/isChildPageOf"/>
+      <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Portal/model/Portal.ecore#//Page/isChildPageOf"/>
+      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Portal/model/Portal.ecore#//isChildPage/isChildPageOf"/>
+    </sourceTargetCouple>
+  </parts>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_9D00YGLZEd2BMYlQJ3YqOg" object="_B9AJ0GLaEd2BMYlQJ3YqOg" foregroundColorChangeable="false" fontChangeable="false" defaultBackgroundColor="202,223,83" backgroundColorChangeable="false" defaultWidth="64" defaultHeight="76" minimumWidth="64" minimumHeight="76" maximumWidth="100" maximumHeight="76"/>
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_dnhwIGLaEd2BMYlQJ3YqOg" object="_ZSEy0GLaEd2BMYlQJ3YqOg">
+    <sourceTargetCouple xmi:id="_k8kEAGLaEd2BMYlQJ3YqOg" sourceNode="_O5lywGIvEd26muzWYCR5yw" targetNode="_9D00YGLZEd2BMYlQJ3YqOg">
+      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Portal/model/Portal.ecore#//Page/useLayout"/>
+    </sourceTargetCouple>
+  </parts>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_Ir8TwGLqEd2BMYlQJ3YqOg" object="_BZpK0GLqEd2BMYlQJ3YqOg" type="RectangleFigure" defaultWidth="64" defaultHeight="78" minimumWidth="64" minimumHeight="78" maximumWidth="100" maximumHeight="78"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_3NWggGLqEd2BMYlQJ3YqOg" object="_yrvWgGLqEd2BMYlQJ3YqOg" type="Container With Inner Label" defaultWidth="64" defaultHeight="77" minimumWidth="64" minimumHeight="77" maximumWidth="100" maximumHeight="77"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_GA3YIGLrEd2BMYlQJ3YqOg" object="_DrT2AGLrEd2BMYlQJ3YqOg" type="Container With Inner Label" defaultWidth="64" defaultHeight="78" minimumWidth="64" minimumHeight="78" maximumWidth="100" maximumHeight="78"/>
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_xtp7oGMAEd2DgaUhBfJOfg" object="_JHOsIGLrEd2BMYlQJ3YqOg">
+    <sourceTargetCouple xmi:id="_0vswUGMAEd2DgaUhBfJOfg" sourceNode="_Ir8TwGLqEd2BMYlQJ3YqOg" targetNode="_GA3YIGLrEd2BMYlQJ3YqOg">
+      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Portal/model/Portal.ecore#//Portlet/isPortletInternal"/>
+    </sourceTargetCouple>
+  </parts>
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_78SNYI-jEd28deDONK53gw" object="_vlcXEI-kEd28deDONK53gw" defaultForegroundColor="231,5,5">
+    <sourceTargetCouple xmi:id="_yMKbALC8Ed25KN0qqBZyFw" containerType="SOURCE" sourceNode="_O5lywGIvEd26muzWYCR5yw" targetNode="_Ir8TwGLqEd2BMYlQJ3YqOg">
+      <containerObject href="../../com.bluexml.side.Portal/model/Portal.genmodel#//portal/Page"/>
+      <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Portal/model/Portal.ecore#//Page/portlets"/>
+      <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Portal/model/Portal.ecore#//Page/portlets"/>
+      <refEdgeToSource xsi:type="ecore:EReference" href="../../com.bluexml.side.Portal/model/Portal.ecore#//HavePortlet/associationPage"/>
+      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Portal/model/Portal.ecore#//HavePortlet/associationPortlet"/>
+    </sourceTargetCouple>
+  </parts>
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_Ol10UJVIEd2qKsmIcebR8g" object="_LGtbAJVIEd2qKsmIcebR8g">
+    <sourceTargetCouple xmi:id="_wi9IIJVKEd2qKsmIcebR8g" containerType="SOURCE" sourceNode="_Ir8TwGLqEd2BMYlQJ3YqOg" targetNode="_3NWggGLqEd2BMYlQJ3YqOg">
+      <containerObject href="../../com.bluexml.side.Portal/model/Portal.genmodel#//portal/Portlet"/>
+      <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Portal/model/Portal.ecore#//Portlet/isInstanceOfPortletType"/>
+      <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Portal/model/Portal.ecore#//Portlet/isInstanceOfPortletType"/>
+      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Portal/model/Portal.ecore#//InstanciatePortletType/portletType"/>
+    </sourceTargetCouple>
+  </parts>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_Mfu_cGIvEd26muzWYCR5yw">
+    <genClass href="../../com.bluexml.side.Portal/model/Portal.genmodel#//portal/Page"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_B9AJ0GLaEd2BMYlQJ3YqOg">
+    <genClass href="../../com.bluexml.side.Portal/model/Portal.genmodel#//portal/PortalLayout"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_ZSEy0GLaEd2BMYlQJ3YqOg" name="UseLayout"/>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_BZpK0GLqEd2BMYlQJ3YqOg">
+    <genClass href="../../com.bluexml.side.Portal/model/Portal.genmodel#//portal/Portlet"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_yrvWgGLqEd2BMYlQJ3YqOg">
+    <genClass href="../../com.bluexml.side.Portal/model/Portal.genmodel#//portal/PortletType"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_638i8GLqEd2BMYlQJ3YqOg" name="isPortletType"/>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_DrT2AGLrEd2BMYlQJ3YqOg">
+    <genClass href="../../com.bluexml.side.Portal/model/Portal.genmodel#//portal/PortletInternal"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_JHOsIGLrEd2BMYlQJ3YqOg" name="isInternalPortlet"/>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_vlcXEI-kEd28deDONK53gw">
+    <genClass href="../../com.bluexml.side.Portal/model/Portal.genmodel#//portal/HavePortlet"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_LGtbAJVIEd2qKsmIcebR8g">
+    <genClass href="../../com.bluexml.side.Portal/model/Portal.genmodel#//portal/InstanciatePortletType"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_2zxdgKczEd2vCsoBD9PtWw">
+    <genClass href="../../com.bluexml.side.Portal/model/Portal.genmodel#//portal/isChildPage"/>
+  </objects>
+  <genModel href="../../com.bluexml.side.Portal/model/Portal.genmodel#/"/>
+  <templateRootObject href="../../com.bluexml.side.Portal/model/Portal.genmodel#//portal/Portal"/>
+  <editorConfigurator href="Portal.editorconfigurator#_zVIHUHcBEdyUwq_XzqQQrw"/>
+</diagramconfigurator:DiagramConfiguration>

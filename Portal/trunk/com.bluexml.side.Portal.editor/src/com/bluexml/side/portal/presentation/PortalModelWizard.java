@@ -8,6 +8,7 @@ package com.bluexml.side.portal.presentation;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -95,6 +96,24 @@ import org.eclipse.ui.PartInitException;
  * @generated
  */
 public class PortalModelWizard extends Wizard implements INewWizard {
+	/**
+	 * The supported extensions for created files.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final List<String> FILE_EXTENSIONS =
+		Collections.unmodifiableList(Arrays.asList(PortalEditorPlugin.INSTANCE.getString("_UI_PortalEditorFilenameExtensions").split("\\s*,\\s*")));
+
+	/**
+	 * A formatted list of supported file extensions, suitable for display.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String FORMATTED_FILE_EXTENSIONS =
+		PortalEditorPlugin.INSTANCE.getString("_UI_PortalEditorFilenameExtensions").replaceAll("\\s*,\\s*", ", ");
+
 	/**
 	 * This caches an instance of the model package.
 	 * <!-- begin-user-doc -->
@@ -315,21 +334,15 @@ public class PortalModelWizard extends Wizard implements INewWizard {
 	@Override
 		protected boolean validatePage() {
 			if (super.validatePage()) {
-				// Make sure the file ends in ".portal".
-				//
-				String requiredExt = PortalEditorPlugin.INSTANCE.getString("_UI_PortalEditorFilenameExtension");
-				String enteredExt = new Path(getFileName()).getFileExtension();
-				if (enteredExt == null || !enteredExt.equals(requiredExt)) {
-					setErrorMessage(PortalEditorPlugin.INSTANCE.getString("_WARN_FilenameExtension", new Object [] { requiredExt }));
+				String extension = new Path(getFileName()).getFileExtension();
+				if (extension == null || !FILE_EXTENSIONS.contains(extension)) {
+					String key = FILE_EXTENSIONS.size() > 1 ? "_WARN_FilenameExtensions" : "_WARN_FilenameExtension";
+					setErrorMessage(PortalEditorPlugin.INSTANCE.getString(key, new Object [] { FORMATTED_FILE_EXTENSIONS }));
 					return false;
 				}
-				else {
-					return true;
-				}
+				return true;
 			}
-			else {
-				return false;
-			}
+			return false;
 		}
 
 		/**
@@ -386,8 +399,7 @@ public class PortalModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		public void createControl(Composite parent) {
-			Composite composite = new Composite(parent, SWT.NONE);
-			{
+			Composite composite = new Composite(parent, SWT.NONE); {
 				GridLayout layout = new GridLayout();
 				layout.numColumns = 1;
 				layout.verticalSpacing = 12;
@@ -564,7 +576,7 @@ public class PortalModelWizard extends Wizard implements INewWizard {
 		newFileCreationPage = new PortalModelWizardNewFileCreationPage("Whatever", selection);
 		newFileCreationPage.setTitle(PortalEditorPlugin.INSTANCE.getString("_UI_PortalModelWizard_label"));
 		newFileCreationPage.setDescription(PortalEditorPlugin.INSTANCE.getString("_UI_PortalModelWizard_description"));
-		newFileCreationPage.setFileName(PortalEditorPlugin.INSTANCE.getString("_UI_PortalEditorFilenameDefaultBase") + "." + PortalEditorPlugin.INSTANCE.getString("_UI_PortalEditorFilenameExtension"));
+		newFileCreationPage.setFileName(PortalEditorPlugin.INSTANCE.getString("_UI_PortalEditorFilenameDefaultBase") + "." + FILE_EXTENSIONS.get(0));
 		addPage(newFileCreationPage);
 
 		// Try and get the resource selection to determine a current directory for the file dialog.
@@ -591,7 +603,7 @@ public class PortalModelWizard extends Wizard implements INewWizard {
 					// Make up a unique new name here.
 					//
 					String defaultModelBaseFilename = PortalEditorPlugin.INSTANCE.getString("_UI_PortalEditorFilenameDefaultBase");
-					String defaultModelFilenameExtension = PortalEditorPlugin.INSTANCE.getString("_UI_PortalEditorFilenameExtension");
+					String defaultModelFilenameExtension = FILE_EXTENSIONS.get(0);
 					String modelFilename = defaultModelBaseFilename + "." + defaultModelFilenameExtension;
 					for (int i = 1; ((IContainer)selectedResource).findMember(modelFilename) != null; ++i) {
 						modelFilename = defaultModelBaseFilename + i + "." + defaultModelFilenameExtension;

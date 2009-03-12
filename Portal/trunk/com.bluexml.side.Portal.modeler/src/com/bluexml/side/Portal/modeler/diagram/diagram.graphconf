@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphconf:DiagramGraphConf xmlns:graphconf="http://www.topcased.org/1.0/graphconf"
+    id="com.bluexml.side.Portal.modeler.diagram"
+    defaultBackgroundColor="255,255,255"
+    defaultForegroundColor="0,0,0"
+    defaultFont="Lucida Grande-regular-11">
+    <node
+        presentation="default"
+        defaultHeight="89"
+        defaultWidth="53"
+        minimumHeight="89"
+        minimumWidth="53"
+        maximumHeight="89"
+        maximumWidth="100"
+        defaultBackgroundColor="157,210,60"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Lucida Grande-regular-11"
+        lineWidth="1"
+        lineStyle="CUSTOM"
+        isWidthResizable="true"
+        isHeightResizable="true">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://www.kerblue.org/portal/1.0#//Page"/>
+        </bridge>
+    </node>
+    <edge
+        presentation="default"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Lucida Grande-regular-11"
+        defaultRouter="ObliqueRouter"
+        lineWidth="1"
+        lineStyle="SOLID">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://www.kerblue.org/portal/1.0#//isChildPage"/>
+        </bridge>
+    </edge>
+    <node
+        presentation="default"
+        defaultHeight="76"
+        defaultWidth="64"
+        minimumHeight="76"
+        minimumWidth="64"
+        maximumHeight="76"
+        maximumWidth="100"
+        defaultBackgroundColor="202,223,83"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Lucida Grande-regular-11"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="true"
+        isHeightResizable="true">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://www.kerblue.org/portal/1.0#//PortalLayout"/>
+        </bridge>
+    </node>
+    <edge
+        presentation="default"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Lucida Grande-regular-11"
+        defaultRouter="ObliqueRouter"
+        lineWidth="1"
+        lineStyle="SOLID">
+        <bridge xsi:type="graphconf:StringBridge" type="UseLayout"/>
+    </edge>
+    <node
+        presentation="default"
+        defaultHeight="78"
+        defaultWidth="64"
+        minimumHeight="78"
+        minimumWidth="64"
+        maximumHeight="78"
+        maximumWidth="100"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Lucida Grande-regular-11"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="true"
+        isHeightResizable="true">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://www.kerblue.org/portal/1.0#//Portlet"/>
+        </bridge>
+    </node>
+    <node
+        presentation="default"
+        defaultHeight="77"
+        defaultWidth="64"
+        minimumHeight="77"
+        minimumWidth="64"
+        maximumHeight="77"
+        maximumWidth="100"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Lucida Grande-regular-11"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="true"
+        isHeightResizable="true">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://www.kerblue.org/portal/1.0#//PortletType"/>
+        </bridge>
+    </node>
+    <node
+        presentation="default"
+        defaultHeight="78"
+        defaultWidth="64"
+        minimumHeight="78"
+        minimumWidth="64"
+        maximumHeight="78"
+        maximumWidth="100"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Lucida Grande-regular-11"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="true"
+        isHeightResizable="true">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://www.kerblue.org/portal/1.0#//PortletInternal"/>
+        </bridge>
+    </node>
+    <edge
+        presentation="default"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Lucida Grande-regular-11"
+        defaultRouter="ObliqueRouter"
+        lineWidth="1"
+        lineStyle="SOLID">
+        <bridge xsi:type="graphconf:StringBridge" type="isInternalPortlet"/>
+    </edge>
+    <edge
+        presentation="default"
+        defaultForegroundColor="231,5,5"
+        defaultFont="Lucida Grande-regular-11"
+        defaultRouter="ObliqueRouter"
+        lineWidth="1"
+        lineStyle="SOLID">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://www.kerblue.org/portal/1.0#//HavePortlet"/>
+        </bridge>
+    </edge>
+    <edge
+        presentation="default"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Lucida Grande-regular-11"
+        defaultRouter="ObliqueRouter"
+        lineWidth="1"
+        lineStyle="SOLID">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://www.kerblue.org/portal/1.0#//InstanciatePortletType"/>
+        </bridge>
+    </edge>
+</graphconf:DiagramGraphConf>
+

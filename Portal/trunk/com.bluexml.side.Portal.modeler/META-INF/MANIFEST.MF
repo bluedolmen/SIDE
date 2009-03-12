@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Portal Modeler
+Bundle-SymbolicName: com.bluexml.side.Portal.modeler; singleton:=true
+Bundle-Version: 1.0.3.v200702151548
+Bundle-Activator: com.bluexml.side.Portal.modeler.PortalPlugin
+Bundle-Vendor: BlueXML
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore.edit,
+ org.eclipse.emf.edit.ui,
+ com.bluexml.side.Portal.edit,
+ org.eclipse.core.resources,
+ com.bluexml.side.Portal,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.ui.ide,
+ com.bluexml.side.Class.edit,
+ com.bluexml.side.Class,
+ org.eclipse.emf.edit,
+ com.bluexml.side.Common.edit,
+ org.eclipse.emf.ecore,
+ com.bluexml.side.Common,
+ org.topcased.modeler
+Eclipse-LazyStart: true

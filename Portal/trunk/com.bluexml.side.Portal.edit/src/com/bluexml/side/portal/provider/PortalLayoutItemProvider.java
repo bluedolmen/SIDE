@@ -9,6 +9,8 @@ package com.bluexml.side.portal.provider;
 
 import com.bluexml.side.portal.PortalFactory;
 import com.bluexml.side.portal.PortalLayout;
+
+
 import com.bluexml.side.portal.PortalPackage;
 
 import java.util.Collection;
@@ -209,17 +211,6 @@ public class PortalLayoutItemProvider
 			(createChildParameter
 				(PortalPackage.Literals.PORTAL_LAYOUT__COLUMNS,
 				 PortalFactory.eINSTANCE.createColumn()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return PortalEditPlugin.INSTANCE;
 	}
 
 }

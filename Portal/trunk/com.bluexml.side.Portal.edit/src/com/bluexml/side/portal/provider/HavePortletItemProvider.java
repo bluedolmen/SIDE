@@ -8,6 +8,8 @@ package com.bluexml.side.portal.provider;
 
 
 import com.bluexml.side.portal.HavePortlet;
+
+
 import com.bluexml.side.portal.PortalFactory;
 import com.bluexml.side.portal.PortalPackage;
 
