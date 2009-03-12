@@ -385,5 +385,72 @@ public class OperationImpl extends NamedClassModelElementImpl implements Operati
 		result.append(')');
 		return result.toString();
 	}
+	
+	/**
+	 * Get the defintion in a String
+	 * 
+	 * @return the definition
+	 * @_generated
+	 */
+	public String getDefinition() {
+		String result = new String(getName());
+		result += "(";
+		
+		for (int i = 0; i < getParameters().size() ; ++i) {
+			Parameter p = (Parameter) getParameters().get(i);
+			result += p.getValueType().toString();
+			
+			if (i < getParameters().size()-1)
+				result += ";";
+		}
+		
+		result += "):" + getReturnType().toString();
+		return result;
+	}
+	
+	/**
+	 * Returns the value of a '<em><b>Parameter</b></em>' with a name
+	 * equals to the parameter.
+	 * 
+	 * @param the
+	 *            name of the parameter
+	 * @return the value of the '<em>Parameter</em>'.
+	 * @_generated
+	 */
+	public Parameter getParameter(String displayName) {
+		Parameter result = null;
+		for (Object o : getParameters()) {
+			if (o instanceof Parameter) {
+				Parameter p = (Parameter) o;
+				if (p.getName().equals(displayName))
+					result = p;
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * Sets the value of the '{@link org.topcased.MMUseCase.Operation#getReturnType <em>Return Type</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Return Type</em>' attribute.
+	 * @see org.topcased.MMUseCase.AttributeType
+	 * @see #getReturnType()
+	 * @_generated
+	 */
+	public void setReturnType(String returnType) {
+		setReturnType(AttributeType.getByName(returnType));
+	}
+	
+	/**
+	 * Normalize the name of the paramerer
+	 * 
+	 * @_generated
+	 */
+	public void normalizeName() {
+		name = name.substring(0, 1).toLowerCase() + name.substring(1);
+		name.replaceAll(" ", "");
+	}
 
 } //OperationImpl

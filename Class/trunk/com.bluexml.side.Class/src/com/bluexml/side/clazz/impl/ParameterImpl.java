@@ -164,4 +164,16 @@ public class ParameterImpl extends NamedClassModelElementImpl implements Paramet
 		return result.toString();
 	}
 
+	/**
+	 * Sets the value of the '{@link org.topcased.MMUseCase.Parameter#getValueType <em>Value Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Value Type</em>' attribute.
+	 * @see org.topcased.MMUseCase.AttributeType
+	 * @see #getValueType()
+	 * @_generated
+	 */
+	public void setValueType(String string) {
+		setValueType(AttributeType.getByName(string));
+	}
 } //ParameterImpl

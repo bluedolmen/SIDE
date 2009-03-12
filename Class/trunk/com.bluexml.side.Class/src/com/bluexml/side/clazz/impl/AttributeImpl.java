@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link com.bluexml.side.clazz.impl.AttributeImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AttributeImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AttributeImpl#getValueList <em>Value List</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.impl.AttributeImpl#isUnique <em>Unique</em>}</li>
  * </ul>
  * </p>
  *
@@ -126,6 +127,26 @@ public class AttributeImpl extends NamedClassModelElementImpl implements Attribu
 	 * @ordered
 	 */
 	protected Enumeration valueList;
+
+	/**
+	 * The default value of the '{@link #isUnique() <em>Unique</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUnique()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean UNIQUE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isUnique() <em>Unique</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUnique()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean unique = UNIQUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -273,6 +294,27 @@ public class AttributeImpl extends NamedClassModelElementImpl implements Attribu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isUnique() {
+		return unique;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUnique(boolean newUnique) {
+		boolean oldUnique = unique;
+		unique = newUnique;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.ATTRIBUTE__UNIQUE, oldUnique, unique));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -287,6 +329,8 @@ public class AttributeImpl extends NamedClassModelElementImpl implements Attribu
 			case ClazzPackage.ATTRIBUTE__VALUE_LIST:
 				if (resolve) return getValueList();
 				return basicGetValueList();
+			case ClazzPackage.ATTRIBUTE__UNIQUE:
+				return isUnique() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -313,6 +357,9 @@ public class AttributeImpl extends NamedClassModelElementImpl implements Attribu
 				return;
 			case ClazzPackage.ATTRIBUTE__VALUE_LIST:
 				setValueList((Enumeration)newValue);
+				return;
+			case ClazzPackage.ATTRIBUTE__UNIQUE:
+				setUnique(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -341,6 +388,9 @@ public class AttributeImpl extends NamedClassModelElementImpl implements Attribu
 			case ClazzPackage.ATTRIBUTE__VALUE_LIST:
 				setValueList((Enumeration)null);
 				return;
+			case ClazzPackage.ATTRIBUTE__UNIQUE:
+				setUnique(UNIQUE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -363,6 +413,8 @@ public class AttributeImpl extends NamedClassModelElementImpl implements Attribu
 				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
 			case ClazzPackage.ATTRIBUTE__VALUE_LIST:
 				return valueList != null;
+			case ClazzPackage.ATTRIBUTE__UNIQUE:
+				return unique != UNIQUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -385,6 +437,8 @@ public class AttributeImpl extends NamedClassModelElementImpl implements Attribu
 		result.append(visibility);
 		result.append(", title: ");
 		result.append(title);
+		result.append(", unique: ");
+		result.append(unique);
 		result.append(')');
 		return result.toString();
 	}

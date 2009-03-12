@@ -135,6 +135,14 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 				return createViewItemAdapter();
 			}
 			@Override
+			public Adapter caseMetaInfo(MetaInfo object) {
+				return createMetaInfoAdapter();
+			}
+			@Override
+			public Adapter caseMetaInfoGroup(MetaInfoGroup object) {
+				return createMetaInfoGroupAdapter();
+			}
+			@Override
 			public Adapter caseModelElement(ModelElement object) {
 				return createModelElementAdapter();
 			}
@@ -373,6 +381,34 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createViewItemAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.clazz.MetaInfo <em>Meta Info</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.clazz.MetaInfo
+	 * @generated
+	 */
+	public Adapter createMetaInfoAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.clazz.MetaInfoGroup <em>Meta Info Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.clazz.MetaInfoGroup
+	 * @generated
+	 */
+	public Adapter createMetaInfoGroupAdapter() {
 		return null;
 	}
 

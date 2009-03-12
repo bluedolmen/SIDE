@@ -143,6 +143,24 @@ public interface ClazzFactory extends EFactory {
 	ViewItem createViewItem();
 
 	/**
+	 * Returns a new object of class '<em>Meta Info</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Meta Info</em>'.
+	 * @generated
+	 */
+	MetaInfo createMetaInfo();
+
+	/**
+	 * Returns a new object of class '<em>Meta Info Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Meta Info Group</em>'.
+	 * @generated
+	 */
+	MetaInfoGroup createMetaInfoGroup();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -8,6 +8,7 @@ package com.bluexml.side.clazz;
 
 import org.eclipse.emf.common.util.EList;
 
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Operation</b></em>'.
@@ -154,5 +155,38 @@ public interface Operation extends NamedClassModelElement {
 	 * @generated
 	 */
 	void setBody(String value);
-
+	
+	/**
+	 * Sets the value of the '{@link org.topcased.MMUseCase.Operation#getReturnType <em>Return Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Return Type</em>' attribute.
+	 * @see org.topcased.MMUseCase.AttributeType
+	 * @see #getReturnType()
+	 * @_generated
+	 */
+	void setReturnType(String returnType);
+	
+	/**
+	 * Normalize the name of the paramerer
+	 *
+	 *@_generated
+	 */
+	void normalizeName();
+	
+	/**
+	 * Returns the value of a '<em><b>Parameter</b></em>' with a name equals to the parameter.
+	 * @param the name of the parameter
+	 * @return the value of the '<em>Parameter</em>'.
+	 * @_generated
+	 */
+	Parameter getParameter(String displayName);
+	
+	/**
+	 * Get the defintion in a String
+	 * 
+	 * @return the definition
+	 * @_generated
+	 */
+	String getDefinition();
 } // Operation

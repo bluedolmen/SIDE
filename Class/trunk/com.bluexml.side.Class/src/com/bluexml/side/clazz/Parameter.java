@@ -52,5 +52,15 @@ public interface Parameter extends NamedClassModelElement {
 	 * @generated
 	 */
 	void setValueType(AttributeType value);
-
+	
+	/**
+	 * Sets the value of the '{@link org.topcased.MMUseCase.Parameter#getValueType <em>Value Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Value Type</em>' attribute.
+	 * @see org.topcased.MMUseCase.AttributeType
+	 * @see #getValueType()
+	 * @_generated
+	 */
+	void setValueType(String value);
 } // Parameter

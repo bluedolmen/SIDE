@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.bluexml.side.clazz.ViewItem#getAttribute <em>Attribute</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.ViewItem#getClasse <em>Classe</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.ViewItem#getAspect <em>Aspect</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.ViewItem#getRole <em>Role</em>}</li>
  * </ul>
  * </p>
  *
@@ -131,5 +132,31 @@ public interface ViewItem extends EObject {
 	 * @generated
 	 */
 	void setAspect(Aspect value);
+
+	/**
+	 * Returns the value of the '<em><b>Role</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Role</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Role</em>' attribute.
+	 * @see #setRole(String)
+	 * @see com.bluexml.side.clazz.ClazzPackage#getViewItem_Role()
+	 * @model
+	 * @generated
+	 */
+	String getRole();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.clazz.ViewItem#getRole <em>Role</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Role</em>' attribute.
+	 * @see #getRole()
+	 * @generated
+	 */
+	void setRole(String value);
 
 } // ViewItem

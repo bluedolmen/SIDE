@@ -221,6 +221,18 @@ public class ClazzSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ClazzPackage.META_INFO: {
+				MetaInfo metaInfo = (MetaInfo)theEObject;
+				T result = caseMetaInfo(metaInfo);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ClazzPackage.META_INFO_GROUP: {
+				MetaInfoGroup metaInfoGroup = (MetaInfoGroup)theEObject;
+				T result = caseMetaInfoGroup(metaInfoGroup);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -447,6 +459,36 @@ public class ClazzSwitch<T> {
 	 * @generated
 	 */
 	public T caseViewItem(ViewItem object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Meta Info</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Meta Info</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMetaInfo(MetaInfo object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Meta Info Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Meta Info Group</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMetaInfoGroup(MetaInfoGroup object) {
 		return null;
 	}
 
