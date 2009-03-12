@@ -29,10 +29,11 @@ import com.bluexml.side.common.Stereotype;
 
 /**
  * Comment restore connection command
- *
+ * 
  * @generated
  */
-public class CommentRestoreConnectionCommand extends AbstractRestoreConnectionCommand {
+public class CommentRestoreConnectionCommand extends
+		AbstractRestoreConnectionCommand {
 	/**
 	 * @param part the EditPart that is restored
 	 * @generated
@@ -60,7 +61,8 @@ public class CommentRestoreConnectionCommand extends AbstractRestoreConnectionCo
 						// autoRef not allowed
 					} else {
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createisCommentedFromClazzToComment(graphElementTgt, graphElementSrc);
+						createisCommentedFromClazzToComment(graphElementTgt,
+								graphElementSrc);
 					}
 				}
 				if (eObjectTgt instanceof Association) {
@@ -68,7 +70,8 @@ public class CommentRestoreConnectionCommand extends AbstractRestoreConnectionCo
 						// autoRef not allowed
 					} else {
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createisCommentedFromAssociationToComment(graphElementTgt, graphElementSrc);
+						createisCommentedFromAssociationToComment(
+								graphElementTgt, graphElementSrc);
 					}
 				}
 				if (eObjectTgt instanceof Stereotype) {
@@ -76,7 +79,8 @@ public class CommentRestoreConnectionCommand extends AbstractRestoreConnectionCo
 						// autoRef not allowed
 					} else {
 						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-						createisStereotypedFromCommentToStereotype(graphElementSrc, graphElementTgt);
+						createisStereotypedFromCommentToStereotype(
+								graphElementSrc, graphElementTgt);
 					}
 				}
 
@@ -89,15 +93,19 @@ public class CommentRestoreConnectionCommand extends AbstractRestoreConnectionCo
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createisCommentedFromClazzToComment(GraphElement srcElt, GraphElement targetElt) {
+	private void createisCommentedFromClazzToComment(GraphElement srcElt,
+			GraphElement targetElt) {
 		Clazz sourceObject = (Clazz) Utils.getElement(srcElt);
 		Comment targetObject = (Comment) Utils.getElement(targetElt);
 
 		if (sourceObject.getComments().contains(targetObject)) {
 			// check if the relation does not exists yet
-			if (getExistingEdges(srcElt, targetElt, CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED).size() == 0) {
-				GraphEdge edge = Utils.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED);
-				isCommentedEdgeCreationCommand cmd = new isCommentedEdgeCreationCommand(null, edge, srcElt, false);
+			if (getExistingEdges(srcElt, targetElt,
+					CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED).size() == 0) {
+				GraphEdge edge = Utils
+						.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED);
+				isCommentedEdgeCreationCommand cmd = new isCommentedEdgeCreationCommand(
+						null, edge, srcElt, false);
 				cmd.setTarget(targetElt);
 				add(cmd);
 			}
@@ -109,15 +117,19 @@ public class CommentRestoreConnectionCommand extends AbstractRestoreConnectionCo
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createisCommentedFromAssociationToComment(GraphElement srcElt, GraphElement targetElt) {
+	private void createisCommentedFromAssociationToComment(GraphElement srcElt,
+			GraphElement targetElt) {
 		Association sourceObject = (Association) Utils.getElement(srcElt);
 		Comment targetObject = (Comment) Utils.getElement(targetElt);
 
 		if (sourceObject.getComments().contains(targetObject)) {
 			// check if the relation does not exists yet
-			if (getExistingEdges(srcElt, targetElt, CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED).size() == 0) {
-				GraphEdge edge = Utils.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED);
-				isCommentedEdgeCreationCommand cmd = new isCommentedEdgeCreationCommand(null, edge, srcElt, false);
+			if (getExistingEdges(srcElt, targetElt,
+					CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED).size() == 0) {
+				GraphEdge edge = Utils
+						.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED);
+				isCommentedEdgeCreationCommand cmd = new isCommentedEdgeCreationCommand(
+						null, edge, srcElt, false);
 				cmd.setTarget(targetElt);
 				add(cmd);
 			}
@@ -129,15 +141,19 @@ public class CommentRestoreConnectionCommand extends AbstractRestoreConnectionCo
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createisStereotypedFromCommentToStereotype(GraphElement srcElt, GraphElement targetElt) {
+	private void createisStereotypedFromCommentToStereotype(
+			GraphElement srcElt, GraphElement targetElt) {
 		Comment sourceObject = (Comment) Utils.getElement(srcElt);
 		Stereotype targetObject = (Stereotype) Utils.getElement(targetElt);
 
 		if (sourceObject.getStereotypes().contains(targetObject)) {
 			// check if the relation does not exists yet
-			if (getExistingEdges(srcElt, targetElt, CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED).size() == 0) {
-				GraphEdge edge = Utils.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED);
-				isStereotypedEdgeCreationCommand cmd = new isStereotypedEdgeCreationCommand(null, edge, srcElt, false);
+			if (getExistingEdges(srcElt, targetElt,
+					CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED).size() == 0) {
+				GraphEdge edge = Utils
+						.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED);
+				isStereotypedEdgeCreationCommand cmd = new isStereotypedEdgeCreationCommand(
+						null, edge, srcElt, false);
 				cmd.setTarget(targetElt);
 				add(cmd);
 			}

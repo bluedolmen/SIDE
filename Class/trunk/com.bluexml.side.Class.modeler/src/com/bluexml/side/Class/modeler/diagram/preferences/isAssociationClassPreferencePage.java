@@ -29,7 +29,8 @@ import com.bluexml.side.Class.modeler.ClazzPlugin;
  *
  * @generated
  */
-public class isAssociationClassPreferencePage extends AbstractEdgePreferencePage {
+public class isAssociationClassPreferencePage extends
+		AbstractEdgePreferencePage {
 	/**
 	 * @see org.topcased.modeler.preferences.AbstractEdgePreferencePage#getEdgeFont()
 	 * @generated
@@ -98,7 +99,7 @@ public class isAssociationClassPreferencePage extends AbstractEdgePreferencePage
 	 * @see org.topcased.modeler.preferences.AbstractEdgePreferencePage#storeEdgeObjectVisibility(java.util.List)
 	 * @generated
 	 */
-	protected void storeEdgeObjectVisibility(List<String> visibleElement) {
+	protected void storeEdgeObjectVisibility(List visibleElement) {
 		IPreferenceStore ps = getPreferenceStore();
 	}
 

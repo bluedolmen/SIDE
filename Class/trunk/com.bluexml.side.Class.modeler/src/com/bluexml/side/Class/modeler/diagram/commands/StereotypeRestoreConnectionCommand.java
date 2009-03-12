@@ -29,10 +29,11 @@ import com.bluexml.side.common.Stereotype;
 
 /**
  * Stereotype restore connection command
- *
+ * 
  * @generated
  */
-public class StereotypeRestoreConnectionCommand extends AbstractRestoreConnectionCommand {
+public class StereotypeRestoreConnectionCommand extends
+		AbstractRestoreConnectionCommand {
 	/**
 	 * @param part the EditPart that is restored
 	 * @generated
@@ -60,7 +61,8 @@ public class StereotypeRestoreConnectionCommand extends AbstractRestoreConnectio
 						// autoRef not allowed
 					} else {
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createisStereotypedFromClazzToStereotype(graphElementTgt, graphElementSrc);
+						createisStereotypedFromClazzToStereotype(
+								graphElementTgt, graphElementSrc);
 					}
 				}
 				if (eObjectTgt instanceof Association) {
@@ -68,7 +70,8 @@ public class StereotypeRestoreConnectionCommand extends AbstractRestoreConnectio
 						// autoRef not allowed
 					} else {
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createisStereotypedFromAssociationToStereotype(graphElementTgt, graphElementSrc);
+						createisStereotypedFromAssociationToStereotype(
+								graphElementTgt, graphElementSrc);
 					}
 				}
 				if (eObjectTgt instanceof Comment) {
@@ -76,7 +79,8 @@ public class StereotypeRestoreConnectionCommand extends AbstractRestoreConnectio
 						// autoRef not allowed
 					} else {
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createisStereotypedFromCommentToStereotype(graphElementTgt, graphElementSrc);
+						createisStereotypedFromCommentToStereotype(
+								graphElementTgt, graphElementSrc);
 					}
 				}
 
@@ -89,15 +93,19 @@ public class StereotypeRestoreConnectionCommand extends AbstractRestoreConnectio
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createisStereotypedFromClazzToStereotype(GraphElement srcElt, GraphElement targetElt) {
+	private void createisStereotypedFromClazzToStereotype(GraphElement srcElt,
+			GraphElement targetElt) {
 		Clazz sourceObject = (Clazz) Utils.getElement(srcElt);
 		Stereotype targetObject = (Stereotype) Utils.getElement(targetElt);
 
 		if (sourceObject.getStereotypes().contains(targetObject)) {
 			// check if the relation does not exists yet
-			if (getExistingEdges(srcElt, targetElt, CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED).size() == 0) {
-				GraphEdge edge = Utils.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED);
-				isStereotypedEdgeCreationCommand cmd = new isStereotypedEdgeCreationCommand(null, edge, srcElt, false);
+			if (getExistingEdges(srcElt, targetElt,
+					CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED).size() == 0) {
+				GraphEdge edge = Utils
+						.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED);
+				isStereotypedEdgeCreationCommand cmd = new isStereotypedEdgeCreationCommand(
+						null, edge, srcElt, false);
 				cmd.setTarget(targetElt);
 				add(cmd);
 			}
@@ -109,15 +117,19 @@ public class StereotypeRestoreConnectionCommand extends AbstractRestoreConnectio
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createisStereotypedFromAssociationToStereotype(GraphElement srcElt, GraphElement targetElt) {
+	private void createisStereotypedFromAssociationToStereotype(
+			GraphElement srcElt, GraphElement targetElt) {
 		Association sourceObject = (Association) Utils.getElement(srcElt);
 		Stereotype targetObject = (Stereotype) Utils.getElement(targetElt);
 
 		if (sourceObject.getStereotypes().contains(targetObject)) {
 			// check if the relation does not exists yet
-			if (getExistingEdges(srcElt, targetElt, CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED).size() == 0) {
-				GraphEdge edge = Utils.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED);
-				isStereotypedEdgeCreationCommand cmd = new isStereotypedEdgeCreationCommand(null, edge, srcElt, false);
+			if (getExistingEdges(srcElt, targetElt,
+					CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED).size() == 0) {
+				GraphEdge edge = Utils
+						.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED);
+				isStereotypedEdgeCreationCommand cmd = new isStereotypedEdgeCreationCommand(
+						null, edge, srcElt, false);
 				cmd.setTarget(targetElt);
 				add(cmd);
 			}
@@ -129,15 +141,19 @@ public class StereotypeRestoreConnectionCommand extends AbstractRestoreConnectio
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createisStereotypedFromCommentToStereotype(GraphElement srcElt, GraphElement targetElt) {
+	private void createisStereotypedFromCommentToStereotype(
+			GraphElement srcElt, GraphElement targetElt) {
 		Comment sourceObject = (Comment) Utils.getElement(srcElt);
 		Stereotype targetObject = (Stereotype) Utils.getElement(targetElt);
 
 		if (sourceObject.getStereotypes().contains(targetObject)) {
 			// check if the relation does not exists yet
-			if (getExistingEdges(srcElt, targetElt, CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED).size() == 0) {
-				GraphEdge edge = Utils.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED);
-				isStereotypedEdgeCreationCommand cmd = new isStereotypedEdgeCreationCommand(null, edge, srcElt, false);
+			if (getExistingEdges(srcElt, targetElt,
+					CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED).size() == 0) {
+				GraphEdge edge = Utils
+						.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED);
+				isStereotypedEdgeCreationCommand cmd = new isStereotypedEdgeCreationCommand(
+						null, edge, srcElt, false);
 				cmd.setTarget(targetElt);
 				add(cmd);
 			}

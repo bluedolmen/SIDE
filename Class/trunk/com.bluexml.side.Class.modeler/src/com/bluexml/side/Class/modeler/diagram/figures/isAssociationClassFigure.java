@@ -14,13 +14,14 @@
  ******************************************************************************/
 package com.bluexml.side.Class.modeler.diagram.figures;
 
-import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.swt.SWT;
 
+import com.bluexml.side.Class.modeler.diagram.figure.ConveyorLineFigure;
+
 /**
- * @generated
+ * @_generated
  */
-public class isAssociationClassFigure extends PolylineConnectionEx {
+public class isAssociationClassFigure extends ConveyorLineFigure {
 
 	/**
 	 * The constructor

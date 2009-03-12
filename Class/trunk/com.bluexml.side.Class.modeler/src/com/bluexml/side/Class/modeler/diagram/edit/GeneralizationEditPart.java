@@ -17,24 +17,19 @@ package com.bluexml.side.Class.modeler.diagram.edit;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.PolylineConnection;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.FontData;
 import org.topcased.modeler.ModelerColorConstants;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.GraphEdge;
-import org.topcased.modeler.edit.GraphEdgeEditPart;
-import org.topcased.modeler.utils.Utils;
+import org.topcased.modeler.edit.EMFGraphEdgeEditPart;
 
 import com.bluexml.side.Class.modeler.diagram.figures.GeneralizationFigure;
-import com.bluexml.side.Class.modeler.diagram.preferences.CdDiagramPreferenceConstants;
 
 /**
  * Generalization controller
  *
  * @generated
  */
-public class GeneralizationEditPart extends GraphEdgeEditPart {
+public class GeneralizationEditPart extends EMFGraphEdgeEditPart {
 
 	/**
 	 * Constructor
@@ -53,8 +48,12 @@ public class GeneralizationEditPart extends GraphEdgeEditPart {
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FONT_EDITPOLICY, null);
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FONT_EDITPOLICY,
+				null);
 
+		installEditPolicy(
+				ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY,
+				null);
 	}
 
 	/**
@@ -82,39 +81,4 @@ public class GeneralizationEditPart extends GraphEdgeEditPart {
 
 	}
 
-	/**
-	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#getPreferenceDefaultRouter()
-	 * 
-	 * @generated
-	 */
-	protected String getPreferenceDefaultRouter() {
-		return getPreferenceStore().getString(CdDiagramPreferenceConstants.GENERALIZATION_EDGE_DEFAULT_ROUTER);
-	}
-
-	/**
-	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#getPreferenceDefaultForegroundColor()
-	 * 
-	 * @generated
-	 */
-	protected Color getPreferenceDefaultForegroundColor() {
-		String preferenceForeground = getPreferenceStore().getString(CdDiagramPreferenceConstants.GENERALIZATION_EDGE_DEFAULT_FOREGROUND_COLOR);
-		if (preferenceForeground.length() != 0) {
-			return Utils.getColor(preferenceForeground);
-		}
-		return null;
-
-	}
-
-	/**
-	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#getPreferenceDefaultFont()
-	 * 
-	 * @generated
-	 */
-	protected Font getPreferenceDefaultFont() {
-		String preferenceFont = getPreferenceStore().getString(CdDiagramPreferenceConstants.GENERALIZATION_EDGE_DEFAULT_FONT);
-		if (preferenceFont.length() != 0) {
-			return Utils.getFont(new FontData(preferenceFont));
-		}
-		return null;
-	}
 }

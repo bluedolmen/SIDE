@@ -25,7 +25,8 @@ import com.bluexml.side.Class.modeler.ClazzPlugin;
  *
  * @generated
  */
-public class EnumerationLiteralPreferencePage extends AbstractNodePreferencePage {
+public class EnumerationLiteralPreferencePage extends
+		AbstractNodePreferencePage {
 	/**
 	 * @see org.topcased.modeler.preferences.AbstractNodePreferencePage#getNodeBackgroundColor()
 	 * @generated

@@ -14,6 +14,7 @@
  ******************************************************************************/
 package com.bluexml.side.Class.modeler.diagram.policies;
 
+import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.policies.ModelerLayoutEditPolicy;
 
 /**
@@ -28,5 +29,9 @@ public class CdDiagramLayoutEditPolicy extends ModelerLayoutEditPolicy {
 	public CdDiagramLayoutEditPolicy() {
 		super();
 	}
-
+	
+	@Override
+	protected boolean isExternalObjectAllowed(GraphNode arg0, GraphNode arg1) {
+		return true;
+	}
 }

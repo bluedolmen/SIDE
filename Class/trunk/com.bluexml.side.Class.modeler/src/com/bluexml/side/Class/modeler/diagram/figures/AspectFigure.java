@@ -14,6 +14,19 @@
  ******************************************************************************/
 package com.bluexml.side.Class.modeler.diagram.figures;
 
+import org.eclipse.draw2d.CompoundBorder;
+import org.eclipse.draw2d.Figure;
+import org.eclipse.draw2d.Graphics;
+import org.eclipse.draw2d.LineBorder;
+import org.eclipse.draw2d.MarginBorder;
+import org.eclipse.draw2d.ToolbarLayout;
+import org.topcased.draw2d.figures.ComposedLabel;
+import org.topcased.draw2d.figures.EditableLabel;
+import org.topcased.draw2d.figures.Label;
+
+import com.bluexml.side.Class.modeler.diagram.figure.ColorScaleUtil;
+
+
 /**
  * @generated
  */
@@ -27,4 +40,32 @@ public class AspectFigure extends org.topcased.draw2d.figures.ClassFigure {
 		super();
 	}
 
+	@Override
+	protected void drawFigure() {
+		ToolbarLayout layout = new ToolbarLayout();
+		setLayoutManager(layout);
+
+		setBorder(new CompoundBorder(new LineBorder(), new MarginBorder(1)));
+		setOpaque(true);
+
+		setLabel(new ComposedLabel(new Label(), new EditableLabel(),
+				new Label(), false));
+		add(getLabel());
+
+		Figure fig = new Figure();
+		ToolbarLayout l = new ToolbarLayout(true);
+		l.setMinorAlignment(ToolbarLayout.ALIGN_CENTER);
+		fig.setLayoutManager(l);
+		add(fig);
+
+		setContentPane(new Figure());
+		getContentPane().setLayoutManager(new ToolbarLayout());
+		add(getContentPane());
+	}
+
+	@Override
+	protected void paintFigure(Graphics graphics) {
+		super.paintFigure(graphics);
+		ColorScaleUtil.paintFigure(graphics, this);
+	}
 }

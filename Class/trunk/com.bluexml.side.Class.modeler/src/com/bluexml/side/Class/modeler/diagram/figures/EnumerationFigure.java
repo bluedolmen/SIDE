@@ -14,6 +14,11 @@
  ******************************************************************************/
 package com.bluexml.side.Class.modeler.diagram.figures;
 
+import org.eclipse.draw2d.Graphics;
+
+import com.bluexml.side.Class.modeler.diagram.figure.ColorScaleUtil;
+import com.bluexml.side.Class.modeler.diagram.figure.colorScaler.BlueScale;
+
 /**
  * @generated
  */
@@ -27,4 +32,9 @@ public class EnumerationFigure extends org.topcased.draw2d.figures.ClassFigure {
 		super();
 	}
 
+	@Override
+	protected void paintFigure(Graphics graphics) {
+		super.paintFigure(graphics);
+		ColorScaleUtil.paintFigure(graphics, this, new BlueScale());
+	}
 }

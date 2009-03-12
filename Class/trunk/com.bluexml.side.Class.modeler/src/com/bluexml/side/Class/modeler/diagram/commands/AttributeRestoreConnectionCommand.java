@@ -19,10 +19,11 @@ import org.topcased.modeler.commands.AbstractRestoreConnectionCommand;
 
 /**
  * Attribute restore connection command
- *
+ * 
  * @generated
  */
-public class AttributeRestoreConnectionCommand extends AbstractRestoreConnectionCommand {
+public class AttributeRestoreConnectionCommand extends
+		AbstractRestoreConnectionCommand {
 	/**
 	 * @param part the EditPart that is restored
 	 * @generated

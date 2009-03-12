@@ -30,7 +30,8 @@ import com.bluexml.side.clazz.View;
  *
  * @generated
  */
-public class ViewRestoreConnectionCommand extends AbstractRestoreConnectionCommand {
+public class ViewRestoreConnectionCommand extends
+		AbstractRestoreConnectionCommand {
 	/**
 	 * @param part the EditPart that is restored
 	 * @generated
@@ -58,7 +59,8 @@ public class ViewRestoreConnectionCommand extends AbstractRestoreConnectionComma
 						// autoRef not allowed
 					} else {
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createhasViewFromClazzToView(graphElementTgt, graphElementSrc);
+						createhasViewFromClazzToView(graphElementTgt,
+								graphElementSrc);
 					}
 				}
 
@@ -71,15 +73,19 @@ public class ViewRestoreConnectionCommand extends AbstractRestoreConnectionComma
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createhasViewFromClazzToView(GraphElement srcElt, GraphElement targetElt) {
+	private void createhasViewFromClazzToView(GraphElement srcElt,
+			GraphElement targetElt) {
 		Clazz sourceObject = (Clazz) Utils.getElement(srcElt);
 		View targetObject = (View) Utils.getElement(targetElt);
 
 		if (sourceObject.getHasView().contains(targetObject)) {
 			// check if the relation does not exists yet
-			if (getExistingEdges(srcElt, targetElt, CdSimpleObjectConstants.SIMPLE_OBJECT_HASVIEW).size() == 0) {
-				GraphEdge edge = Utils.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_HASVIEW);
-				hasViewEdgeCreationCommand cmd = new hasViewEdgeCreationCommand(null, edge, srcElt, false);
+			if (getExistingEdges(srcElt, targetElt,
+					CdSimpleObjectConstants.SIMPLE_OBJECT_HASVIEW).size() == 0) {
+				GraphEdge edge = Utils
+						.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_HASVIEW);
+				hasViewEdgeCreationCommand cmd = new hasViewEdgeCreationCommand(
+						null, edge, srcElt, false);
 				cmd.setTarget(targetElt);
 				add(cmd);
 			}

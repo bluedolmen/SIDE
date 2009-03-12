@@ -14,10 +14,14 @@
  ******************************************************************************/
 package com.bluexml.side.Class.modeler.diagram.figures;
 
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.RoundedRectangle;
+
 /**
  * @generated
  */
-public class StereotypeFigure extends org.topcased.draw2d.figures.ContainerWithInnerLabel {
+public class StereotypeFigure extends
+		org.topcased.draw2d.figures.ContainerWithInnerLabel {
 	/**
 	 * Constructor
 	 *
@@ -27,4 +31,8 @@ public class StereotypeFigure extends org.topcased.draw2d.figures.ContainerWithI
 		super();
 	}
 
+	@Override
+	protected IFigure createBackgroundFigure() {
+		return new RoundedRectangle();
+	}
 }

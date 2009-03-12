@@ -14,10 +14,20 @@
  ******************************************************************************/
 package com.bluexml.side.Class.modeler.diagram.figures;
 
+import org.eclipse.draw2d.Graphics;
+import org.eclipse.draw2d.IFigure;
+import org.topcased.draw2d.figures.ComposedLabel;
+import org.topcased.draw2d.figures.ILabel;
+import org.topcased.draw2d.figures.Label;
+
+import com.bluexml.side.Class.modeler.diagram.figures.common.RectangleFigure;
+
 /**
- * @generated
+ * @_generated
  */
-public class ViewFigure extends org.topcased.draw2d.figures.ContainerWithInnerLabel {
+public class ViewFigure extends
+		org.topcased.draw2d.figures.ContainerWithInnerLabel {
+
 	/**
 	 * Constructor
 	 *
@@ -27,4 +37,19 @@ public class ViewFigure extends org.topcased.draw2d.figures.ContainerWithInnerLa
 		super();
 	}
 
+	@Override
+	protected IFigure createBackgroundFigure() {
+		return new RectangleFigure(this);
+	}
+
+	@Override
+	protected ILabel createLabel() {
+		return new ComposedLabel(new Label(), new Label(), new Label(), false);
+	}
+
+	@Override
+	protected void paintFigure(Graphics graphics) {
+		super.paintFigure(graphics);
+		((RectangleFigure) getBackgroundFigure()).paint(graphics);
+	}
 }

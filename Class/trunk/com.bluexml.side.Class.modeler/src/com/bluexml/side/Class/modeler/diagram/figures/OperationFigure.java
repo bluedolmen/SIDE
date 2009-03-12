@@ -27,4 +27,11 @@ public class OperationFigure extends org.topcased.draw2d.figures.ClassFigure {
 		super();
 	}
 
+	@Override
+	protected void drawFigure() {
+		super.drawFigure();
+		setOpaque(false);
+		setBorder(null);
+	}
+
 }

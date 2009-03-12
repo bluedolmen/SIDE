@@ -32,7 +32,8 @@ public class includeEdgeCreationCommand extends CreateTypedEdgeCommand {
 	 * @param src the graph element of the source
 	 * @generated
 	 */
-	public includeEdgeCreationCommand(EditDomain domain, GraphEdge newObj, GraphElement src) {
+	public includeEdgeCreationCommand(EditDomain domain, GraphEdge newObj,
+			GraphElement src) {
 		this(domain, newObj, src, true);
 	}
 
@@ -43,7 +44,8 @@ public class includeEdgeCreationCommand extends CreateTypedEdgeCommand {
 	 * @param needModelUpdate set it to true if the model need to be updated
 	 * @generated
 	 */
-	public includeEdgeCreationCommand(EditDomain domain, GraphEdge newObj, GraphElement src, boolean needModelUpdate) {
+	public includeEdgeCreationCommand(EditDomain domain, GraphEdge newObj,
+			GraphElement src, boolean needModelUpdate) {
 		super(domain, newObj, src, needModelUpdate);
 	}
 

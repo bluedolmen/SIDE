@@ -27,4 +27,9 @@ public class AttributeFigure extends org.topcased.draw2d.figures.ClassFigure {
 		super();
 	}
 
+	@Override
+	protected void drawFigure() {
+		super.drawFigure();
+		setBorder(null);
+	}
 }

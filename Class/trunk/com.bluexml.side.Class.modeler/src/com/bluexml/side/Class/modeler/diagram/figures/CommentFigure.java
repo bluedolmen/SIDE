@@ -14,10 +14,18 @@
  ******************************************************************************/
 package com.bluexml.side.Class.modeler.diagram.figures;
 
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.geometry.Dimension;
+import org.topcased.draw2d.figures.ComposedLabel;
+import org.topcased.draw2d.figures.EditableLabel;
+import org.topcased.draw2d.figures.ILabel;
+import org.topcased.draw2d.figures.Label;
+
 /**
  * @generated
  */
-public class CommentFigure extends org.topcased.draw2d.figures.ContainerWithInnerLabel {
+public class CommentFigure extends
+		org.topcased.draw2d.figures.ContainerWithInnerLabel {
 	/**
 	 * Constructor
 	 *
@@ -25,6 +33,24 @@ public class CommentFigure extends org.topcased.draw2d.figures.ContainerWithInne
 	 */
 	public CommentFigure() {
 		super();
+	}
+
+	@Override
+	protected ILabel createLabel() {
+		return new ComposedLabel(new Label(), new EditableLabel(), new Label(),
+				false);
+	}
+
+	@Override
+	protected IFigure createBackgroundFigure() {
+		return new org.topcased.draw2d.figures.CommentFigure();
+	}
+
+	@Override
+	public Dimension getPreferredSize(int wHint, int hHint) {
+		Dimension d = super.getPreferredSize(wHint, hHint);
+		d.width = getLabel().getPreferredSize().width + 25;
+		return d;
 	}
 
 }

@@ -14,22 +14,147 @@
  ******************************************************************************/
 package com.bluexml.side.Class.modeler.diagram.figures;
 
-import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
-import org.eclipse.swt.SWT;
+import org.eclipse.draw2d.ConnectionEndpointLocator;
+import org.eclipse.draw2d.Locator;
+import org.topcased.modeler.edit.locators.EdgeObjectOffsetLocator;
+import org.topcased.modeler.figures.EdgeObjectEditableLabel;
+import org.topcased.modeler.figures.EdgeObjectOffsetEditableLabel;
+import org.topcased.modeler.figures.IEdgeObjectFigure;
+import org.topcased.modeler.figures.IEdgeObjectOffsetFigure;
+import org.topcased.modeler.figures.IGraphEdgeFigure;
+
+import com.bluexml.side.Class.modeler.diagram.figure.ConveyorLineFigure;
+
 
 /**
- * @generated
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * 
+ * @_generated
  */
-public class AssociationFigure extends PolylineConnectionEx {
+public class AssociationFigure extends ConveyorLineFigure implements
+		IGraphEdgeFigure {
+
+	private IEdgeObjectFigure srcNameEdgeObject;
+
+	private Locator srcCountLocator;
+
+	private IEdgeObjectFigure targetNameEdgeObject;
+
+	private Locator srcNameLocator;
+
+	private IEdgeObjectFigure srcCountEdgeObject;
+
+	private Locator targetCountLocator;
+
+	private IEdgeObjectFigure middleNameEdgeObject;
+
+	private Locator targetNameLocator;
+
+	private IEdgeObjectFigure targetCountEdgeObject;
+
+	private Locator middleNameLocator;
 
 	/**
-	 * The constructor
-	 *
-	 * @generated
+	 * The constructor <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @_generated
 	 */
 	public AssociationFigure() {
 		super();
-		setLineStyle(SWT.LINE_SOLID);
+
+		srcNameEdgeObject = new EdgeObjectEditableLabel(this);
+		srcNameLocator = new ConnectionEndpointLocator(this, false);
+		add(srcNameEdgeObject, srcNameLocator);
+		srcCountEdgeObject = new EdgeObjectEditableLabel(this);
+		srcCountLocator = new ConnectionEndpointLocator(this, false);
+		add(srcCountEdgeObject, srcCountLocator);
+		targetNameEdgeObject = new EdgeObjectEditableLabel(this);
+		targetNameLocator = new ConnectionEndpointLocator(this, true);
+		add(targetNameEdgeObject, targetNameLocator);
+		targetCountEdgeObject = new EdgeObjectEditableLabel(this);
+		targetCountLocator = new ConnectionEndpointLocator(this, true);
+		add(targetCountEdgeObject, targetCountLocator);
+		middleNameEdgeObject = new EdgeObjectOffsetEditableLabel(this);
+		middleNameLocator = new EdgeObjectOffsetLocator(
+				(IEdgeObjectOffsetFigure) middleNameEdgeObject);
+		add(middleNameEdgeObject, middleNameLocator);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the object figure
+	 * @_generated
+	 */
+	public IEdgeObjectFigure getsrcNameEdgeObjectFigure() {
+		return srcNameEdgeObject;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the object figure
+	 * @_generated
+	 */
+	public IEdgeObjectFigure getsrcCountEdgeObjectFigure() {
+		return srcCountEdgeObject;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the object figure
+	 * @_generated
+	 */
+	public IEdgeObjectFigure gettargetNameEdgeObjectFigure() {
+		return targetNameEdgeObject;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the object figure
+	 * @_generated
+	 */
+	public IEdgeObjectFigure gettargetCountEdgeObjectFigure() {
+		return targetCountEdgeObject;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the object figure
+	 * @_generated
+	 */
+	public IEdgeObjectFigure getmiddleNameEdgeObjectFigure() {
+		return middleNameEdgeObject;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see org.topcased.modeler.figures.IGraphEdgeFigure#getLocator(org.topcased.modeler.figures.IEdgeObjectFigure)
+	 * @_generated
+	 */
+	public Locator getLocator(IEdgeObjectFigure edgeObjectfigure) {
+
+		if (edgeObjectfigure == srcNameEdgeObject) {
+			return srcNameLocator;
+		}
+		if (edgeObjectfigure == srcCountEdgeObject) {
+			return srcCountLocator;
+		}
+		if (edgeObjectfigure == targetNameEdgeObject) {
+			return targetNameLocator;
+		}
+		if (edgeObjectfigure == targetCountEdgeObject) {
+			return targetCountLocator;
+		}
+		if (edgeObjectfigure == middleNameEdgeObject) {
+			return middleNameLocator;
+		}
+
+		return null;
 	}
 
 }

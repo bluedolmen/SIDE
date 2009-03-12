@@ -22,7 +22,8 @@ import org.topcased.modeler.commands.AbstractRestoreConnectionCommand;
  *
  * @generated
  */
-public class EnumerationRestoreConnectionCommand extends AbstractRestoreConnectionCommand {
+public class EnumerationRestoreConnectionCommand extends
+		AbstractRestoreConnectionCommand {
 	/**
 	 * @param part the EditPart that is restored
 	 * @generated

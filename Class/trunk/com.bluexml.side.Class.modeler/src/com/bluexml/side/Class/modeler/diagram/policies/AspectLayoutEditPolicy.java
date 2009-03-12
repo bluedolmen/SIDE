@@ -17,7 +17,8 @@ package com.bluexml.side.Class.modeler.diagram.policies;
 /**
  * @generated
  */
-public class AspectLayoutEditPolicy extends org.topcased.modeler.edit.policies.ClassLayoutEditPolicy {
+public class AspectLayoutEditPolicy extends
+		org.topcased.modeler.edit.policies.ClassLayoutEditPolicy {
 	/**
 	 * Default contructor.
 	 *
