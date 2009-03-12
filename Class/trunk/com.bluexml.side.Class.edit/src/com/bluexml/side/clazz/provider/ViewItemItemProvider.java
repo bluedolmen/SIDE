@@ -9,6 +9,7 @@ package com.bluexml.side.clazz.provider;
 
 import com.bluexml.side.clazz.ClazzPackage;
 
+import com.bluexml.side.clazz.ViewItem;
 import java.util.Collection;
 import java.util.List;
 
@@ -24,7 +25,9 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.clazz.ViewItem} object.
@@ -65,6 +68,7 @@ public class ViewItemItemProvider
 			addAttributePropertyDescriptor(object);
 			addClassePropertyDescriptor(object);
 			addAspectPropertyDescriptor(object);
+			addRolePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -158,6 +162,28 @@ public class ViewItemItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Role feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRolePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ViewItem_Role_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ViewItem_Role_feature", "_UI_ViewItem_type"),
+				 ClazzPackage.Literals.VIEW_ITEM__ROLE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns ViewItem.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -176,7 +202,10 @@ public class ViewItemItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_ViewItem_type");
+		String label = ((ViewItem)object).getRole();
+		return label == null || label.length() == 0 ?
+			getString("_UI_ViewItem_type") :
+			getString("_UI_ViewItem_type") + " " + label;
 	}
 
 	/**
@@ -189,6 +218,12 @@ public class ViewItemItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(ViewItem.class)) {
+			case ClazzPackage.VIEW_ITEM__ROLE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 

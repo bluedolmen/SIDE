@@ -69,6 +69,7 @@ public class ClazzItemProvider
 			addAspectsPropertyDescriptor(object);
 			addIsAbstractPropertyDescriptor(object);
 			addIsDeprecatedPropertyDescriptor(object);
+			addHasViewPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -135,6 +136,28 @@ public class ClazzItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Has View feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addHasViewPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Clazz_hasView_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Clazz_hasView_feature", "_UI_Clazz_type"),
+				 ClazzPackage.Literals.CLAZZ__HAS_VIEW,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}
@@ -239,17 +262,6 @@ public class ClazzItemProvider
 			(createChildParameter
 				(ClazzPackage.Literals.CLAZZ__GENERALIZATIONS,
 				 ClazzFactory.eINSTANCE.createClazz()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return ClassEditPlugin.INSTANCE;
 	}
 
 }

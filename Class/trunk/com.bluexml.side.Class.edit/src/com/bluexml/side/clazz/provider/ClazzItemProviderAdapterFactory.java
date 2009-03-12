@@ -375,6 +375,29 @@ public class ClazzItemProviderAdapterFactory extends ClazzAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.MetaInfo} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MetaInfoItemProvider metaInfoItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.clazz.MetaInfo}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMetaInfoAdapter() {
+		if (metaInfoItemProvider == null) {
+			metaInfoItemProvider = new MetaInfoItemProvider(this);
+		}
+
+		return metaInfoItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -486,6 +509,7 @@ public class ClazzItemProviderAdapterFactory extends ClazzAdapterFactory impleme
 		if (aspectItemProvider != null) aspectItemProvider.dispose();
 		if (viewItemProvider != null) viewItemProvider.dispose();
 		if (viewItemItemProvider != null) viewItemItemProvider.dispose();
+		if (metaInfoItemProvider != null) metaInfoItemProvider.dispose();
 	}
 
 }
