@@ -1,0 +1,43 @@
+package com.bluexml.side.Portal.modeler.diagram.commands.update;
+
+import java.util.Map;
+
+import org.eclipse.gef.commands.Command;
+
+import com.bluexml.side.Portal.modeler.diagram.dialogs.PortletInternalEditDialog;
+import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.clazz.View;
+import com.bluexml.side.portal.InternalPortletType;
+import com.bluexml.side.portal.PortletInternal;
+
+public class PortletInternalUpdateCommand extends Command  {
+	
+	protected PortletInternal portletInternal;
+	
+private Map<String,Object> newData;
+	
+	public PortletInternalUpdateCommand(PortletInternal p_portletInternal, Map<String,Object> p_data) {
+		this.portletInternal = p_portletInternal;		
+		this.newData = p_data;
+	}
+	
+	/**
+	 * Get the old values and set the new ones
+	 * 
+	 * @see org.eclipse.gef.commands.Command#execute()
+	 */
+	public void execute() {
+		redo();
+	}
+	
+	/**
+	 * Set the new values
+	 * 
+	 * @see org.eclipse.gef.commands.Command#redo()
+	 */
+	public void redo() {
+		portletInternal.setClass((Clazz) newData.get(PortletInternalEditDialog.PORTLETINTERNAL_Class));
+		portletInternal.setType((InternalPortletType) newData.get(PortletInternalEditDialog.PORTLETINTERNAL_Type));
+		portletInternal.setView((View) newData.get(PortletInternalEditDialog.PORTLETINTERNAL_View));
+	}
+}
