@@ -29,7 +29,7 @@ public class CdDiagramLayoutEditPolicy extends ModelerLayoutEditPolicy {
 	public CdDiagramLayoutEditPolicy() {
 		super();
 	}
-	
+
 	@Override
 	protected boolean isExternalObjectAllowed(GraphNode arg0, GraphNode arg1) {
 		return true;

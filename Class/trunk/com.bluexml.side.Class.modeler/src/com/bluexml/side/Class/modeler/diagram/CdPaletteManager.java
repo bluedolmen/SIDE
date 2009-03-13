@@ -218,6 +218,14 @@ public class CdPaletteManager extends ModelerPaletteManager {
 						.getImageDescriptor("HASVIEW"), CdImageRegistry
 						.getImageDescriptor("HASVIEW_LARGE")));
 
+		factory = new GraphElementCreationFactory(creationUtils,
+				CdSimpleObjectConstants.SIMPLE_OBJECT_HASASPECT, "default",
+				false);
+		entries.add(new ModelerConnectionCreationToolEntry("hasAspect",
+				"hasAspect", factory, CdImageRegistry
+						.getImageDescriptor("HASASPECT"), CdImageRegistry
+						.getImageDescriptor("HASASPECT_LARGE")));
+
 		linksDrawer.addAll(entries);
 		getRoot().add(linksDrawer);
 	}

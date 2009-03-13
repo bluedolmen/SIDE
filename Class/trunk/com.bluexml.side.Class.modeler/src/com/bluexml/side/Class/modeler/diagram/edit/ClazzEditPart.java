@@ -51,11 +51,13 @@ import com.bluexml.side.Class.modeler.diagram.figures.NomenclatureFigure;
 import com.bluexml.side.Class.modeler.diagram.policies.AssociationEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.ClazzLayoutEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.GeneralizationEdgeCreationEditPolicy;
+import com.bluexml.side.Class.modeler.diagram.policies.hasAspectEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.hasViewEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.includeEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.isAssociationClassEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.isCommentedEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.isStereotypedEdgeCreationEditPolicy;
+import com.bluexml.side.Class.modeler.diagram.preferences.CdDiagramPreferenceConstants;
 import com.bluexml.side.Class.modeler.tools.ClazzNotation;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.common.Comment;
@@ -76,7 +78,7 @@ public class ClazzEditPart extends EMFGraphNodeEditPart {
 	public ClazzEditPart(GraphNode obj) {
 		super(obj);
 	}
-	
+
 	private Clazz object;
 
 	/**
@@ -120,6 +122,9 @@ public class ClazzEditPart extends EMFGraphNodeEditPart {
 
 		installEditPolicy(CdEditPolicyConstants.GENERALIZATION_EDITPOLICY,
 				new GeneralizationEdgeCreationEditPolicy());
+
+		installEditPolicy(CdEditPolicyConstants.HASASPECT_EDITPOLICY,
+				new hasAspectEdgeCreationEditPolicy());
 
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {
@@ -192,6 +197,46 @@ public class ClazzEditPart extends EMFGraphNodeEditPart {
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getPreferenceDefaultBackgroundColor()
+	 * @generated
+	 */
+	protected Color getPreferenceDefaultBackgroundColor() {
+		String backgroundColor = getPreferenceStore().getString(
+				CdDiagramPreferenceConstants.CLAZZ_DEFAULT_BACKGROUND_COLOR);
+		if (backgroundColor.length() != 0) {
+			return Utils.getColor(backgroundColor);
+		}
+		return null;
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getPreferenceDefaultForegroundColor()
+	 * @generated
+	 */
+	protected Color getPreferenceDefaultForegroundColor() {
+		String foregroundColor = getPreferenceStore().getString(
+				CdDiagramPreferenceConstants.CLAZZ_DEFAULT_FOREGROUND_COLOR);
+		if (foregroundColor.length() != 0) {
+			return Utils.getColor(foregroundColor);
+		}
+		return null;
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getPreferenceDefaultFont()
+	 * @generated
+	 */
+	protected Font getPreferenceDefaultFont() {
+		String preferenceFont = getPreferenceStore().getString(
+				CdDiagramPreferenceConstants.CLAZZ_DEFAULT_FONT);
+		if (preferenceFont.length() != 0) {
+			return Utils.getFont(new FontData(preferenceFont));
+		}
+		return null;
+
 	}
 
 	@Override
@@ -293,8 +338,8 @@ public class ClazzEditPart extends EMFGraphNodeEditPart {
 			ClazzEditDialog dlg = new ClazzEditDialog(classe, ModelerPlugin
 					.getActiveWorkbenchShell());
 			if (dlg.open() == Window.OK) {
-				ClazzUpdateCommand command = new ClazzUpdateCommand(classe,
-						dlg.getData());
+				ClazzUpdateCommand command = new ClazzUpdateCommand(classe, dlg
+						.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
 
 				refresh();

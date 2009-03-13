@@ -141,11 +141,20 @@ public class ClazzRestoreConnectionCommand extends
 						// autoRef not allowed
 					} else {
 						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-						createGeneralizationFromClazzToClazz_Generalizations(
-								graphElementSrc, graphElementTgt);
+						createGeneralizationFromClazzToClazz(graphElementSrc,
+								graphElementTgt);
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createGeneralizationFromClazzToClazz_Generalizations(
-								graphElementTgt, graphElementSrc);
+						createGeneralizationFromClazzToClazz(graphElementTgt,
+								graphElementSrc);
+					}
+				}
+				if (eObjectTgt instanceof Aspect) {
+					if (autoRef) {
+						// autoRef not allowed
+					} else {
+						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
+						createhasAspectFromClazzToAspect(graphElementSrc,
+								graphElementTgt);
 					}
 				}
 
@@ -419,13 +428,12 @@ public class ClazzRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createGeneralizationFromClazzToClazz_Generalizations(
-			GraphElement srcElt, GraphElement targetElt) {
+	private void createGeneralizationFromClazzToClazz(GraphElement srcElt,
+			GraphElement targetElt) {
 		Clazz sourceObject = (Clazz) Utils.getElement(srcElt);
 		Clazz targetObject = (Clazz) Utils.getElement(targetElt);
 
-		if (sourceObject.getGeneralizations().contains(targetObject)
-				&& targetObject.getGeneralizations().contains(sourceObject)) {
+		if (sourceObject.getGeneralizations().contains(targetObject)) {
 			// check if the relation does not exists yet
 			if (getExistingEdges(srcElt, targetElt,
 					CdSimpleObjectConstants.SIMPLE_OBJECT_GENERALIZATION)
@@ -433,6 +441,30 @@ public class ClazzRestoreConnectionCommand extends
 				GraphEdge edge = Utils
 						.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_GENERALIZATION);
 				GeneralizationEdgeCreationCommand cmd = new GeneralizationEdgeCreationCommand(
+						null, edge, srcElt, false);
+				cmd.setTarget(targetElt);
+				add(cmd);
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
+	private void createhasAspectFromClazzToAspect(GraphElement srcElt,
+			GraphElement targetElt) {
+		Clazz sourceObject = (Clazz) Utils.getElement(srcElt);
+		Aspect targetObject = (Aspect) Utils.getElement(targetElt);
+
+		if (sourceObject.getAspects().contains(targetObject)) {
+			// check if the relation does not exists yet
+			if (getExistingEdges(srcElt, targetElt,
+					CdSimpleObjectConstants.SIMPLE_OBJECT_HASASPECT).size() == 0) {
+				GraphEdge edge = Utils
+						.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_HASASPECT);
+				hasAspectEdgeCreationCommand cmd = new hasAspectEdgeCreationCommand(
 						null, edge, srcElt, false);
 				cmd.setTarget(targetElt);
 				add(cmd);

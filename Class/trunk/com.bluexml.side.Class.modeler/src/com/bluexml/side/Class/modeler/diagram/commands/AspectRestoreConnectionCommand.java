@@ -80,6 +80,15 @@ public class AspectRestoreConnectionCommand extends
 								graphElementSrc);
 					}
 				}
+				if (eObjectTgt instanceof Clazz) {
+					if (autoRef) {
+						// autoRef not allowed
+					} else {
+						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
+						createhasAspectFromClazzToAspect(graphElementTgt,
+								graphElementSrc);
+					}
+				}
 
 			}
 		}
@@ -143,6 +152,30 @@ public class AspectRestoreConnectionCommand extends
 				GraphEdge edge = Utils
 						.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_INCLUDE);
 				includeEdgeCreationCommand cmd = new includeEdgeCreationCommand(
+						null, edge, srcElt, false);
+				cmd.setTarget(targetElt);
+				add(cmd);
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
+	private void createhasAspectFromClazzToAspect(GraphElement srcElt,
+			GraphElement targetElt) {
+		Clazz sourceObject = (Clazz) Utils.getElement(srcElt);
+		Aspect targetObject = (Aspect) Utils.getElement(targetElt);
+
+		if (sourceObject.getAspects().contains(targetObject)) {
+			// check if the relation does not exists yet
+			if (getExistingEdges(srcElt, targetElt,
+					CdSimpleObjectConstants.SIMPLE_OBJECT_HASASPECT).size() == 0) {
+				GraphEdge edge = Utils
+						.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_HASASPECT);
+				hasAspectEdgeCreationCommand cmd = new hasAspectEdgeCreationCommand(
 						null, edge, srcElt, false);
 				cmd.setTarget(targetElt);
 				add(cmd);

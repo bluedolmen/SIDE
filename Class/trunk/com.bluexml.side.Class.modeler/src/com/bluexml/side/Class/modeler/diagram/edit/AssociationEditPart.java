@@ -23,6 +23,9 @@ import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.RequestConstants;
 import org.eclipse.jface.window.Window;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.topcased.draw2d.figures.Label;
 import org.topcased.modeler.ModelerColorConstants;
 import org.topcased.modeler.ModelerEditPolicyConstants;
@@ -39,6 +42,7 @@ import com.bluexml.side.Class.modeler.diagram.figures.AssociationFigure;
 import com.bluexml.side.Class.modeler.diagram.policies.isAssociationClassEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.isCommentedEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.isStereotypedEdgeCreationEditPolicy;
+import com.bluexml.side.Class.modeler.diagram.preferences.CdDiagramPreferenceConstants;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.AssociationType;
 
@@ -143,6 +147,46 @@ public class AssociationEditPart extends EMFGraphEdgeEditPart {
 	 */
 	protected IFigure createFigure() {
 		return new AssociationFigure();
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#getPreferenceDefaultRouter()
+	 * 
+	 * @generated
+	 */
+	protected String getPreferenceDefaultRouter() {
+		return getPreferenceStore().getString(
+				CdDiagramPreferenceConstants.ASSOCIATION_EDGE_DEFAULT_ROUTER);
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#getPreferenceDefaultForegroundColor()
+	 * 
+	 * @generated
+	 */
+	protected Color getPreferenceDefaultForegroundColor() {
+		String preferenceForeground = getPreferenceStore()
+				.getString(
+						CdDiagramPreferenceConstants.ASSOCIATION_EDGE_DEFAULT_FOREGROUND_COLOR);
+		if (preferenceForeground.length() != 0) {
+			return Utils.getColor(preferenceForeground);
+		}
+		return null;
+
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#getPreferenceDefaultFont()
+	 * 
+	 * @generated
+	 */
+	protected Font getPreferenceDefaultFont() {
+		String preferenceFont = getPreferenceStore().getString(
+				CdDiagramPreferenceConstants.ASSOCIATION_EDGE_DEFAULT_FONT);
+		if (preferenceFont.length() != 0) {
+			return Utils.getFont(new FontData(preferenceFont));
+		}
+		return null;
 	}
 
 	/**

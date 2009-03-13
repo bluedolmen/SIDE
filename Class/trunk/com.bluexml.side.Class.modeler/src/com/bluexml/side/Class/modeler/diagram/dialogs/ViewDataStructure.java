@@ -165,10 +165,11 @@ public class ViewDataStructure {
 
 	private void getAllClasses(Clazz classe, List<Clazz> result) {
 		result.add(classe);
-
-		EList<Clazz> generalizations = classe.getGeneralizations();
-		for (Clazz cl : generalizations) {
-			getAllClasses( cl, result);
+		if (classe != null) {
+			EList<Clazz> generalizations = classe.getGeneralizations();
+			for (Clazz cl : generalizations) {
+				getAllClasses( cl, result);
+			}
 		}
 	}
 

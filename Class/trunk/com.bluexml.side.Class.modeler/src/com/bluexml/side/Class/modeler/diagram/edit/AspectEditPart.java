@@ -23,6 +23,8 @@ import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.topcased.draw2d.figures.ComposedLabel;
 import org.topcased.modeler.ModelerColorConstants;
 import org.topcased.modeler.ModelerEditPolicyConstants;
@@ -44,7 +46,9 @@ import com.bluexml.side.Class.modeler.diagram.dialogs.AspectEditDialog;
 import com.bluexml.side.Class.modeler.diagram.figures.AspectFigure;
 import com.bluexml.side.Class.modeler.diagram.policies.AspectLayoutEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.AssociationEdgeCreationEditPolicy;
+import com.bluexml.side.Class.modeler.diagram.policies.hasAspectEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.includeEdgeCreationEditPolicy;
+import com.bluexml.side.Class.modeler.diagram.preferences.CdDiagramPreferenceConstants;
 import com.bluexml.side.clazz.Aspect;
 
 /**
@@ -76,6 +80,9 @@ public class AspectEditPart extends EMFGraphNodeEditPart {
 
 		installEditPolicy(CdEditPolicyConstants.INCLUDE_EDITPOLICY,
 				new includeEdgeCreationEditPolicy());
+
+		installEditPolicy(CdEditPolicyConstants.HASASPECT_EDITPOLICY,
+				new hasAspectEdgeCreationEditPolicy());
 
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {
@@ -122,6 +129,46 @@ public class AspectEditPart extends EMFGraphNodeEditPart {
 		IFigure result = new AspectFigure();
 
 		return result;
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getPreferenceDefaultBackgroundColor()
+	 * @generated
+	 */
+	protected Color getPreferenceDefaultBackgroundColor() {
+		String backgroundColor = getPreferenceStore().getString(
+				CdDiagramPreferenceConstants.ASPECT_DEFAULT_BACKGROUND_COLOR);
+		if (backgroundColor.length() != 0) {
+			return Utils.getColor(backgroundColor);
+		}
+		return null;
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getPreferenceDefaultForegroundColor()
+	 * @generated
+	 */
+	protected Color getPreferenceDefaultForegroundColor() {
+		String foregroundColor = getPreferenceStore().getString(
+				CdDiagramPreferenceConstants.ASPECT_DEFAULT_FOREGROUND_COLOR);
+		if (foregroundColor.length() != 0) {
+			return Utils.getColor(foregroundColor);
+		}
+		return null;
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getPreferenceDefaultFont()
+	 * @generated
+	 */
+	protected Font getPreferenceDefaultFont() {
+		String preferenceFont = getPreferenceStore().getString(
+				CdDiagramPreferenceConstants.ASPECT_DEFAULT_FONT);
+		if (preferenceFont.length() != 0) {
+			return Utils.getFont(new FontData(preferenceFont));
+		}
+		return null;
+
 	}
 
 	@Override

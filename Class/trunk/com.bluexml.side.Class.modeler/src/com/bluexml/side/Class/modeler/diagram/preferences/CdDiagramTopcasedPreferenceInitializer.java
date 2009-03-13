@@ -293,6 +293,22 @@ public class CdDiagramTopcasedPreferenceInitializer implements
 						CdDiagramPreferenceConstants.GENERALIZATION_EDGE_DEFAULT_ROUTER,
 						"ObliqueRouter");
 
+		// Initialize the default value of the HASASPECT_EDGE_DEFAULT_FONT property
+		defaultCdPreference.put(
+				CdDiagramPreferenceConstants.HASASPECT_EDGE_DEFAULT_FONT,
+				StringConverter.asFontData("Segoe UI-regular-9").toString());
+
+		// Initialize the default value of the HASASPECT_EDGE_DEFAULT_FOREGROUND_COLOR property
+		defaultCdPreference
+				.put(
+						CdDiagramPreferenceConstants.HASASPECT_EDGE_DEFAULT_FOREGROUND_COLOR,
+						"0,0,0");
+
+		// Initialize the default value of the HASASPECT_EDGE_DEFAULT_ROUTER property
+		defaultCdPreference.put(
+				CdDiagramPreferenceConstants.HASASPECT_EDGE_DEFAULT_ROUTER,
+				"ObliqueRouter");
+
 		return defaultCdPreference;
 	}
 }

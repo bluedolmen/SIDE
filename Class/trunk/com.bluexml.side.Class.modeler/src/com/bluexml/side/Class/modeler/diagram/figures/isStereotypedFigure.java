@@ -18,7 +18,6 @@ import org.eclipse.swt.SWT;
 
 import com.bluexml.side.Class.modeler.diagram.figure.ConveyorLineFigure;
 
-
 /**
  * @_generated
  */

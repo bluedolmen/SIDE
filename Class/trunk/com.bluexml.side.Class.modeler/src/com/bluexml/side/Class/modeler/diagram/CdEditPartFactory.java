@@ -38,11 +38,14 @@ import com.bluexml.side.Class.modeler.diagram.edit.EnumerationLiteralEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.GeneralizationEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.OperationEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.ViewEditPart;
+import com.bluexml.side.Class.modeler.diagram.edit.hasAspectEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.hasViewEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.includeEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.isAssociationClassEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.isCommentedEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.isStereotypedEditPart;
+import com.bluexml.side.clazz.Attribute;
+import com.bluexml.side.clazz.Operation;
 import com.bluexml.side.clazz.util.ClazzSwitch;
 
 /**
@@ -115,6 +118,11 @@ public class CdEditPartFactory extends ModelerEditPartFactory {
 								.getSemanticModel()).getTypeInfo())) {
 					return new GeneralizationEditPart(edge);
 				}
+				if (CdSimpleObjectConstants.SIMPLE_OBJECT_HASASPECT
+						.equals(((SimpleSemanticModelElement) edge
+								.getSemanticModel()).getTypeInfo())) {
+					return new hasAspectEditPart(edge);
+				}
 			}
 		}
 		return super.createEditPart(context, model);
@@ -172,20 +180,22 @@ public class CdEditPartFactory extends ModelerEditPartFactory {
 			}
 		}
 
+		
+
 		/**
-		 * @see com.bluexml.side.clazz.util.ClazzSwitch#caseAttribute(com.bluexml.side.clazz.Attribute)
-		 * @generated
+		 * @see org.topcased.MMUseCase.util.OblSwitch#caseAttribute(org.topcased.MMUseCase.Attribute)
+		 * @_generated
 		 */
-		public Object caseAttribute(com.bluexml.side.clazz.Attribute object) {
-			return new AttributeEditPart(node);
+		public Object caseAttribute(Attribute object) {
+			return new AttributeEditPart(node, object);
 		}
 
 		/**
-		 * @see com.bluexml.side.clazz.util.ClazzSwitch#caseOperation(com.bluexml.side.clazz.Operation)
-		 * @generated
+		 * @see org.topcased.MMUseCase.util.OblSwitch#caseOperation(org.topcased.MMUseCase.Operation)
+		 * @_generated
 		 */
-		public Object caseOperation(com.bluexml.side.clazz.Operation object) {
-			return new OperationEditPart(node);
+		public Object caseOperation(Operation object) {
+			return new OperationEditPart(node, object);
 		}
 
 		/**

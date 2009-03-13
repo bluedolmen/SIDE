@@ -19,6 +19,7 @@
       <items xmi:id="_yP16THcBEdyUwq_XzqQQrw" name="Is stereotyped" part="_yP_EN3cBEdyUwq_XzqQQrw"/>
       <items xmi:id="_yP16TXcBEdyUwq_XzqQQrw" name="Is association class" part="_yP_EO3cBEdyUwq_XzqQQrw"/>
       <items xmi:id="_tizmkKy7EdyIeNPv3dqFqw" name="Has view" part="_tHziEKy6EdyIeNPv3dqFqw"/>
+      <items xmi:id="_pEAaIA_nEd6WE5atyWwk_g" name="hasAspect" part="_kRcDAA_nEd6WE5atyWwk_g"/>
     </paletteCategories>
   </palette>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_yP16TncBEdyUwq_XzqQQrw" object="_yP_EP3cBEdyUwq_XzqQQrw" type="Container With Inner Label" defaultBackgroundColor="191,249,217" defaultWidth="-1" defaultHeight="-1" minimumWidth="50" maximumHeight="20"/>
@@ -85,7 +86,11 @@
   <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_6boWkA4hEd6vHfpmvyY_hg" object="_yP_ESXcBEdyUwq_XzqQQrw" defaultForegroundColor="0,0,255" targetDecoration="TRIANGLE">
     <sourceTargetCouple xmi:id="_IAx9oA4iEd6vHfpmvyY_hg" sourceNode="_yP16T3cBEdyUwq_XzqQQrw" targetNode="_yP16T3cBEdyUwq_XzqQQrw">
       <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//Clazz/generalizations"/>
-      <refTargetToSource xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//Clazz/generalizations"/>
+    </sourceTargetCouple>
+  </parts>
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_kRcDAA_nEd6WE5atyWwk_g" object="_h7wlEA_nEd6WE5atyWwk_g">
+    <sourceTargetCouple xmi:id="_n75ikA_nEd6WE5atyWwk_g" sourceNode="_yP16T3cBEdyUwq_XzqQQrw" targetNode="_2n-_MHcBEdyUwq_XzqQQrw">
+      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//Clazz/aspects"/>
     </sourceTargetCouple>
   </parts>
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_yP_EP3cBEdyUwq_XzqQQrw">
@@ -125,9 +130,9 @@
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_yP_ESncBEdyUwq_XzqQQrw" name="isCommented"/>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_yP_ES3cBEdyUwq_XzqQQrw" name="isStereotyped"/>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_yP_ETHcBEdyUwq_XzqQQrw" name="isAssociationClass"/>
-  <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_yP_ETXcBEdyUwq_XzqQQrw" name="Herite"/>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_NPn6cHcCEdyUwq_XzqQQrw" name="include"/>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_uDaOsKy6EdyIeNPv3dqFqw" name="hasView"/>
+  <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_h7wlEA_nEd6WE5atyWwk_g" name="hasAspect"/>
   <genModel href="../../com.bluexml.side.Class/model/Class.genmodel#/"/>
   <templateRootObject href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/ClassPackage"/>
   <editorConfigurator href="Class.editorconfigurator#_zVIHUHcBEdyUwq_XzqQQrw"/>

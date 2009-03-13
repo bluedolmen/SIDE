@@ -462,70 +462,75 @@ public class ClazzEditor
 	protected IResourceChangeListener resourceChangeListener =
 		new IResourceChangeListener() {
 			public void resourceChanged(IResourceChangeEvent event) {
-				IResourceDelta delta = event.getDelta();
-				try {
-					class ResourceDeltaVisitor implements IResourceDeltaVisitor {
-						protected ResourceSet resourceSet = editingDomain.getResourceSet();
-						protected Collection<Resource> changedResources = new ArrayList<Resource>();
-						protected Collection<Resource> removedResources = new ArrayList<Resource>();
+				// Only listening to these.
+				// if (event.getType() == IResourceDelta.POST_CHANGE)
+				{
+					IResourceDelta delta = event.getDelta();
+					try {
+						class ResourceDeltaVisitor implements IResourceDeltaVisitor {
+							protected ResourceSet resourceSet = editingDomain.getResourceSet();
+							protected Collection<Resource> changedResources = new ArrayList<Resource>();
+							protected Collection<Resource> removedResources = new ArrayList<Resource>();
 
-						public boolean visit(IResourceDelta delta) {
-							if (delta.getResource().getType() == IResource.FILE) {
-								if (delta.getKind() == IResourceDelta.REMOVED ||
-								    delta.getKind() == IResourceDelta.CHANGED && delta.getFlags() != IResourceDelta.MARKERS) {
-									Resource resource = resourceSet.getResource(URI.createURI(delta.getFullPath().toString()), false);
-									if (resource != null) {
-										if (delta.getKind() == IResourceDelta.REMOVED) {
-											removedResources.add(resource);
-										}
-										else if (!savedResources.remove(resource)) {
-											changedResources.add(resource);
+							public boolean visit(IResourceDelta delta) {
+								if (delta.getFlags() != IResourceDelta.MARKERS &&
+								    delta.getResource().getType() == IResource.FILE) {
+									if ((delta.getKind() & (IResourceDelta.CHANGED | IResourceDelta.REMOVED)) != 0) {
+										Resource resource = resourceSet.getResource(URI.createURI(delta.getFullPath().toString()), false);
+										if (resource != null) {
+											if ((delta.getKind() & IResourceDelta.REMOVED) != 0) {
+												removedResources.add(resource);
+											}
+											else if (!savedResources.remove(resource)) {
+												changedResources.add(resource);
+											}
 										}
 									}
 								}
+
+								return true;
 							}
 
-							return true;
+							public Collection<Resource> getChangedResources() {
+								return changedResources;
+							}
+
+							public Collection<Resource> getRemovedResources() {
+								return removedResources;
+							}
 						}
 
-						public Collection<Resource> getChangedResources() {
-							return changedResources;
+						ResourceDeltaVisitor visitor = new ResourceDeltaVisitor();
+						delta.accept(visitor);
+
+						if (!visitor.getRemovedResources().isEmpty()) {
+							removedResources.addAll(visitor.getRemovedResources());
+							if (!isDirty()) {
+								getSite().getShell().getDisplay().asyncExec
+									(new Runnable() {
+										 public void run() {
+											 getSite().getPage().closeEditor(ClazzEditor.this, false);
+											 ClazzEditor.this.dispose();
+										 }
+									 });
+							}
 						}
 
-						public Collection<Resource> getRemovedResources() {
-							return removedResources;
+						if (!visitor.getChangedResources().isEmpty()) {
+							changedResources.addAll(visitor.getChangedResources());
+							if (getSite().getPage().getActiveEditor() == ClazzEditor.this) {
+								getSite().getShell().getDisplay().asyncExec
+									(new Runnable() {
+										 public void run() {
+											 handleActivate();
+										 }
+									 });
+							}
 						}
 					}
-
-					ResourceDeltaVisitor visitor = new ResourceDeltaVisitor();
-					delta.accept(visitor);
-
-					if (!visitor.getRemovedResources().isEmpty()) {
-						removedResources.addAll(visitor.getRemovedResources());
-						if (!isDirty()) {
-							getSite().getShell().getDisplay().asyncExec
-								(new Runnable() {
-									 public void run() {
-										 getSite().getPage().closeEditor(ClazzEditor.this, false);
-									 }
-								 });
-						}
+					catch (CoreException exception) {
+						ClassEditorPlugin.INSTANCE.log(exception);
 					}
-
-					if (!visitor.getChangedResources().isEmpty()) {
-						changedResources.addAll(visitor.getChangedResources());
-						if (getSite().getPage().getActiveEditor() == ClazzEditor.this) {
-							getSite().getShell().getDisplay().asyncExec
-								(new Runnable() {
-									 public void run() {
-										 handleActivate();
-									 }
-								 });
-						}
-					}
-				}
-				catch (CoreException exception) {
-					ClassEditorPlugin.INSTANCE.log(exception);
 				}
 			}
 		};
@@ -550,6 +555,7 @@ public class ClazzEditor
 		if (!removedResources.isEmpty()) {
 			if (handleDirtyConflict()) {
 				getSite().getPage().closeEditor(ClazzEditor.this, false);
+				ClazzEditor.this.dispose();
 			}
 			else {
 				removedResources.clear();
@@ -573,9 +579,6 @@ public class ClazzEditor
 	 */
 	protected void handleChangedResources() {
 		if (!changedResources.isEmpty() && (!isDirty() || handleDirtyConflict())) {
-			if (isDirty()) {
-				changedResources.addAll(editingDomain.getResourceSet().getResources());
-			}
 			editingDomain.getCommandStack().flush();
 
 			updateProblemIndication = false;
@@ -592,11 +595,6 @@ public class ClazzEditor
 					}
 				}
 			}
-
-			if (AdapterFactoryEditingDomain.isStale(editorSelection)) {
-				setSelection(StructuredSelection.EMPTY);
-			}
-
 			updateProblemIndication = true;
 			updateProblemIndication();
 		}
@@ -1011,7 +1009,8 @@ public class ClazzEditor
 
 		// Only creates the other pages if there is something that can be edited
 		//
-		if (!getEditingDomain().getResourceSet().getResources().isEmpty()) {
+		if (!getEditingDomain().getResourceSet().getResources().isEmpty() &&
+		    !(getEditingDomain().getResourceSet().getResources().get(0)).getContents().isEmpty()) {
 			// Create a page for the selection tree view.
 			//
 			{
@@ -1488,11 +1487,8 @@ public class ClazzEditor
 					for (Resource resource : editingDomain.getResourceSet().getResources()) {
 						if ((first || !resource.getContents().isEmpty() || isPersisted(resource)) && !editingDomain.isReadOnly(resource)) {
 							try {
-								long timeStamp = resource.getTimeStamp();
+								savedResources.add(resource);
 								resource.save(saveOptions);
-								if (resource.getTimeStamp() != timeStamp) {
-									savedResources.add(resource);
-								}
 							}
 							catch (Exception exception) {
 								resourceToDiagnosticMap.put(resource, analyzeResourceProblems(resource, exception));

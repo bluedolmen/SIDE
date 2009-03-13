@@ -43,11 +43,6 @@ public interface CdSimpleObjectConstants {
 	 */
 	String SIMPLE_OBJECT_ISASSOCIATIONCLASS = "isAssociationClass";
 	/**
-	 * The name that identify the <i>Herite</i> SimpleObject.
-	 * @generated
-	 */
-	String SIMPLE_OBJECT_HERITE = "Herite";
-	/**
 	 * The name that identify the <i>include</i> SimpleObject.
 	 * @generated
 	 */
@@ -57,4 +52,9 @@ public interface CdSimpleObjectConstants {
 	 * @generated
 	 */
 	String SIMPLE_OBJECT_HASVIEW = "hasView";
+	/**
+	 * The name that identify the <i>hasAspect</i> SimpleObject.
+	 * @generated
+	 */
+	String SIMPLE_OBJECT_HASASPECT = "hasAspect";
 }

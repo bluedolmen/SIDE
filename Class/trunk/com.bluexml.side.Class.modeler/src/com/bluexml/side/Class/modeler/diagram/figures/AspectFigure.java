@@ -26,7 +26,6 @@ import org.topcased.draw2d.figures.Label;
 
 import com.bluexml.side.Class.modeler.diagram.figure.ColorScaleUtil;
 
-
 /**
  * @generated
  */

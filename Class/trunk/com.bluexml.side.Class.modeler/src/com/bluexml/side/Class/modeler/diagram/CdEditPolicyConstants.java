@@ -117,4 +117,10 @@ public interface CdEditPolicyConstants {
 	 */
 	String GENERALIZATION_EDITPOLICY = "Generalization EditPolicy";
 
+	/**
+	 * The key used to install an <i>hasAspect</i> EditPolicy.
+	 * @generated
+	 */
+	String HASASPECT_EDITPOLICY = "hasAspect EditPolicy";
+
 }

@@ -25,6 +25,8 @@ import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Composite;
 import org.topcased.draw2d.figures.ComposedLabel;
 import org.topcased.draw2d.figures.ILabel;
@@ -48,6 +50,7 @@ import com.bluexml.side.Class.modeler.diagram.dialogs.CommentEditDialog;
 import com.bluexml.side.Class.modeler.diagram.figures.CommentFigure;
 import com.bluexml.side.Class.modeler.diagram.policies.isCommentedEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.isStereotypedEdgeCreationEditPolicy;
+import com.bluexml.side.Class.modeler.diagram.preferences.CdDiagramPreferenceConstants;
 import com.bluexml.side.Class.modeler.tools.ClazzNotation;
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.Stereotype;
@@ -111,6 +114,46 @@ public class CommentEditPart extends EMFGraphNodeEditPart {
 	protected IFigure createFigure() {
 
 		return new CommentFigure();
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getPreferenceDefaultBackgroundColor()
+	 * @generated
+	 */
+	protected Color getPreferenceDefaultBackgroundColor() {
+		String backgroundColor = getPreferenceStore().getString(
+				CdDiagramPreferenceConstants.COMMENT_DEFAULT_BACKGROUND_COLOR);
+		if (backgroundColor.length() != 0) {
+			return Utils.getColor(backgroundColor);
+		}
+		return null;
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getPreferenceDefaultForegroundColor()
+	 * @generated
+	 */
+	protected Color getPreferenceDefaultForegroundColor() {
+		String foregroundColor = getPreferenceStore().getString(
+				CdDiagramPreferenceConstants.COMMENT_DEFAULT_FOREGROUND_COLOR);
+		if (foregroundColor.length() != 0) {
+			return Utils.getColor(foregroundColor);
+		}
+		return null;
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getPreferenceDefaultFont()
+	 * @generated
+	 */
+	protected Font getPreferenceDefaultFont() {
+		String preferenceFont = getPreferenceStore().getString(
+				CdDiagramPreferenceConstants.COMMENT_DEFAULT_FONT);
+		if (preferenceFont.length() != 0) {
+			return Utils.getFont(new FontData(preferenceFont));
+		}
+		return null;
+
 	}
 
 	protected void performDirectEdit() {

@@ -25,7 +25,6 @@ import org.topcased.modeler.figures.IGraphEdgeFigure;
 
 import com.bluexml.side.Class.modeler.diagram.figure.ConveyorLineFigure;
 
-
 /**
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 

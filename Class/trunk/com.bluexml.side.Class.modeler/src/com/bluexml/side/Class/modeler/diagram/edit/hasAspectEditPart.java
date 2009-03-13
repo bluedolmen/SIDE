@@ -15,26 +15,23 @@
 package com.bluexml.side.Class.modeler.diagram.edit;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.PolygonDecoration;
-import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
-import org.topcased.modeler.ModelerColorConstants;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.edit.GraphEdgeEditPart;
 import org.topcased.modeler.utils.Utils;
 
-import com.bluexml.side.Class.modeler.diagram.figures.GeneralizationFigure;
+import com.bluexml.side.Class.modeler.diagram.figures.hasAspectFigure;
 import com.bluexml.side.Class.modeler.diagram.preferences.CdDiagramPreferenceConstants;
 
 /**
- * Generalization controller
+ * hasAspect controller
  *
  * @generated
  */
-public class GeneralizationEditPart extends GraphEdgeEditPart {
+public class hasAspectEditPart extends GraphEdgeEditPart {
 
 	/**
 	 * Constructor
@@ -42,7 +39,7 @@ public class GeneralizationEditPart extends GraphEdgeEditPart {
 	 * @param model the graph object
 	 * @generated
 	 */
-	public GeneralizationEditPart(GraphEdge model) {
+	public hasAspectEditPart(GraphEdge model) {
 		super(model);
 	}
 
@@ -63,24 +60,9 @@ public class GeneralizationEditPart extends GraphEdgeEditPart {
 	 * @generated
 	 */
 	protected IFigure createFigure() {
-		GeneralizationFigure connection = new GeneralizationFigure();
-
-		createTargetDecoration(connection);
+		hasAspectFigure connection = new hasAspectFigure();
 
 		return connection;
-	}
-
-	/**
-	 * @param connection the PolylineConnection
-	 * @generated
-	 */
-	private void createTargetDecoration(PolylineConnection connection) {
-
-		PolygonDecoration decoration = new PolygonDecoration();
-		decoration.setScale(14, 6);
-		decoration.setBackgroundColor(ModelerColorConstants.white);
-		connection.setTargetDecoration(decoration);
-
 	}
 
 	/**
@@ -89,9 +71,8 @@ public class GeneralizationEditPart extends GraphEdgeEditPart {
 	 * @generated
 	 */
 	protected String getPreferenceDefaultRouter() {
-		return getPreferenceStore()
-				.getString(
-						CdDiagramPreferenceConstants.GENERALIZATION_EDGE_DEFAULT_ROUTER);
+		return getPreferenceStore().getString(
+				CdDiagramPreferenceConstants.HASASPECT_EDGE_DEFAULT_ROUTER);
 	}
 
 	/**
@@ -102,7 +83,7 @@ public class GeneralizationEditPart extends GraphEdgeEditPart {
 	protected Color getPreferenceDefaultForegroundColor() {
 		String preferenceForeground = getPreferenceStore()
 				.getString(
-						CdDiagramPreferenceConstants.GENERALIZATION_EDGE_DEFAULT_FOREGROUND_COLOR);
+						CdDiagramPreferenceConstants.HASASPECT_EDGE_DEFAULT_FOREGROUND_COLOR);
 		if (preferenceForeground.length() != 0) {
 			return Utils.getColor(preferenceForeground);
 		}
@@ -117,7 +98,7 @@ public class GeneralizationEditPart extends GraphEdgeEditPart {
 	 */
 	protected Font getPreferenceDefaultFont() {
 		String preferenceFont = getPreferenceStore().getString(
-				CdDiagramPreferenceConstants.GENERALIZATION_EDGE_DEFAULT_FONT);
+				CdDiagramPreferenceConstants.HASASPECT_EDGE_DEFAULT_FONT);
 		if (preferenceFont.length() != 0) {
 			return Utils.getFont(new FontData(preferenceFont));
 		}

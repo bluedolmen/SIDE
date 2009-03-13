@@ -22,6 +22,8 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Display;
 import org.topcased.draw2d.figures.ComposedLabel;
@@ -41,6 +43,7 @@ import com.bluexml.side.Class.modeler.diagram.dialogs.ViewEditDialog;
 import com.bluexml.side.Class.modeler.diagram.dialogs.view.ViewContainerType;
 import com.bluexml.side.Class.modeler.diagram.figures.ViewFigure;
 import com.bluexml.side.Class.modeler.diagram.policies.hasViewEdgeCreationEditPolicy;
+import com.bluexml.side.Class.modeler.diagram.preferences.CdDiagramPreferenceConstants;
 import com.bluexml.side.Class.modeler.diagram.utils.AssociationHelper;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
@@ -75,19 +78,26 @@ public class ViewEditPart extends EMFGraphNodeEditPart {
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(CdEditPolicyConstants.HASVIEW_EDITPOLICY, new hasViewEdgeCreationEditPolicy());
+		installEditPolicy(CdEditPolicyConstants.HASVIEW_EDITPOLICY,
+				new hasViewEdgeCreationEditPolicy());
 
-		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY, new RestoreEditPolicy() {
-			@Override
-			protected Command getRestoreConnectionsCommand(RestoreConnectionsRequest request) {
-				return new ViewRestoreConnectionCommand(getHost());
-			}
-		});
+		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
+				new RestoreEditPolicy() {
+					protected Command getRestoreConnectionsCommand(
+							RestoreConnectionsRequest request) {
+						return new ViewRestoreConnectionCommand(getHost());
+					}
+				});
 
-		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY, new ResizableEditPolicy());
+		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY,
+				new ResizableEditPolicy());
 
-		installEditPolicy(ModelerEditPolicyConstants.CHANGE_BACKGROUND_COLOR_EDITPOLICY, null);
-		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY, null);
+		installEditPolicy(
+				ModelerEditPolicyConstants.CHANGE_BACKGROUND_COLOR_EDITPOLICY,
+				null);
+		installEditPolicy(
+				ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY,
+				null);
 	}
 
 	/**
@@ -98,6 +108,46 @@ public class ViewEditPart extends EMFGraphNodeEditPart {
 	protected IFigure createFigure() {
 
 		return new ViewFigure();
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getPreferenceDefaultBackgroundColor()
+	 * @generated
+	 */
+	protected Color getPreferenceDefaultBackgroundColor() {
+		String backgroundColor = getPreferenceStore().getString(
+				CdDiagramPreferenceConstants.VIEW_DEFAULT_BACKGROUND_COLOR);
+		if (backgroundColor.length() != 0) {
+			return Utils.getColor(backgroundColor);
+		}
+		return null;
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getPreferenceDefaultForegroundColor()
+	 * @generated
+	 */
+	protected Color getPreferenceDefaultForegroundColor() {
+		String foregroundColor = getPreferenceStore().getString(
+				CdDiagramPreferenceConstants.VIEW_DEFAULT_FOREGROUND_COLOR);
+		if (foregroundColor.length() != 0) {
+			return Utils.getColor(foregroundColor);
+		}
+		return null;
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getPreferenceDefaultFont()
+	 * @generated
+	 */
+	protected Font getPreferenceDefaultFont() {
+		String preferenceFont = getPreferenceStore().getString(
+				CdDiagramPreferenceConstants.VIEW_DEFAULT_FONT);
+		if (preferenceFont.length() != 0) {
+			return Utils.getFont(new FontData(preferenceFont));
+		}
+		return null;
+
 	}
 
 	@Override
@@ -135,23 +185,29 @@ public class ViewEditPart extends EMFGraphNodeEditPart {
 						containerName = ((Clazz) container).getName();
 					}
 				}
-				
+
 				Association association = vi.getAssociation();
 				if (association != null) {
 					ViewContainerType containertype = ViewContainerType.ASSOCIATION_TARGET;
 					ViewContainerType asso_classCT = ViewContainerType.ASSOCIATION_CLASS;
-					if (association != null && association.getSource().equals(association.getDestination())) {
+					if (association != null
+							&& association.getSource().equals(
+									association.getDestination())) {
 						containertype = ViewContainerType.ASSOCIATION_RECUR;
 						asso_classCT = ViewContainerType.ASSOCIATION_CLASS_RECUR;
 					}
 					ViewContainerType viewContainerType;
-					if (association != null && association.getAssociationsClass().indexOf(vi.getClasse()) != -1) {
+					if (association != null
+							&& association.getAssociationsClass().indexOf(
+									vi.getClasse()) != -1) {
 						// attribute from associated classe
 						viewContainerType = asso_classCT;
 					} else {
 						viewContainerType = containertype;
 					}
-					viewItemName = AssociationHelper.getViewItemContainerName(vi.getClasse(), vi.getAssociation(), viewContainerType, vi.getRole());
+					viewItemName = AssociationHelper.getViewItemContainerName(
+							vi.getClasse(), vi.getAssociation(),
+							viewContainerType, vi.getRole());
 				} else {
 					if (containerName != null) {
 						viewItemName += containerName;
@@ -160,7 +216,7 @@ public class ViewEditPart extends EMFGraphNodeEditPart {
 				if (attributeName != null) {
 					viewItemName += "@" + attributeName;
 				}
-				
+
 				t += viewItemName + "\n";
 			}
 		}
@@ -174,9 +230,11 @@ public class ViewEditPart extends EMFGraphNodeEditPart {
 		if (request.getType() == RequestConstants.REQ_OPEN) {
 			View view = (View) Utils.getElement(getGraphNode());
 
-			ViewEditDialog dlg = new ViewEditDialog(view, ModelerPlugin.getActiveWorkbenchShell());
+			ViewEditDialog dlg = new ViewEditDialog(view, ModelerPlugin
+					.getActiveWorkbenchShell());
 			if (dlg.open() == Window.OK) {
-				ViewUpdateCommand command = new ViewUpdateCommand(view, dlg.getData());
+				ViewUpdateCommand command = new ViewUpdateCommand(view, dlg
+						.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
 
 				refresh();

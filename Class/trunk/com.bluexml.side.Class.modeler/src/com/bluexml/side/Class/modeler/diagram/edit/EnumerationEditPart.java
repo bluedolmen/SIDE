@@ -49,6 +49,7 @@ import com.bluexml.side.Class.modeler.diagram.commands.update.EnumerationUpdateC
 import com.bluexml.side.Class.modeler.diagram.dialogs.EnumerationEditDialog;
 import com.bluexml.side.Class.modeler.diagram.figures.EnumerationFigure;
 import com.bluexml.side.Class.modeler.diagram.policies.EnumerationLayoutEditPolicy;
+import com.bluexml.side.Class.modeler.diagram.preferences.CdDiagramPreferenceConstants;
 import com.bluexml.side.clazz.Enumeration;
 
 /**
@@ -107,6 +108,48 @@ public class EnumerationEditPart extends EMFGraphNodeEditPart {
 	protected IFigure createFigure() {
 
 		return new EnumerationFigure();
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getPreferenceDefaultBackgroundColor()
+	 * @generated
+	 */
+	protected Color getPreferenceDefaultBackgroundColor() {
+		String backgroundColor = getPreferenceStore()
+				.getString(
+						CdDiagramPreferenceConstants.ENUMERATION_DEFAULT_BACKGROUND_COLOR);
+		if (backgroundColor.length() != 0) {
+			return Utils.getColor(backgroundColor);
+		}
+		return null;
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getPreferenceDefaultForegroundColor()
+	 * @generated
+	 */
+	protected Color getPreferenceDefaultForegroundColor() {
+		String foregroundColor = getPreferenceStore()
+				.getString(
+						CdDiagramPreferenceConstants.ENUMERATION_DEFAULT_FOREGROUND_COLOR);
+		if (foregroundColor.length() != 0) {
+			return Utils.getColor(foregroundColor);
+		}
+		return null;
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getPreferenceDefaultFont()
+	 * @generated
+	 */
+	protected Font getPreferenceDefaultFont() {
+		String preferenceFont = getPreferenceStore().getString(
+				CdDiagramPreferenceConstants.ENUMERATION_DEFAULT_FONT);
+		if (preferenceFont.length() != 0) {
+			return Utils.getFont(new FontData(preferenceFont));
+		}
+		return null;
+
 	}
 
 	@Override

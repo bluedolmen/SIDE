@@ -41,6 +41,7 @@ import com.bluexml.side.Class.modeler.diagram.commands.AttributeRestoreConnectio
 import com.bluexml.side.Class.modeler.diagram.commands.update.AttributeUpdateCommand;
 import com.bluexml.side.Class.modeler.diagram.dialogs.AttributeEditDialog;
 import com.bluexml.side.Class.modeler.diagram.figures.AttributeFigure;
+import com.bluexml.side.Class.modeler.diagram.preferences.CdDiagramPreferenceConstants;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Visibility;
 
@@ -103,6 +104,48 @@ public class AttributeEditPart extends EMFGraphNodeEditPart {
 	protected IFigure createFigure() {
 
 		return new AttributeFigure();
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getPreferenceDefaultBackgroundColor()
+	 * @generated
+	 */
+	protected Color getPreferenceDefaultBackgroundColor() {
+		String backgroundColor = getPreferenceStore()
+				.getString(
+						CdDiagramPreferenceConstants.ATTRIBUTE_DEFAULT_BACKGROUND_COLOR);
+		if (backgroundColor.length() != 0) {
+			return Utils.getColor(backgroundColor);
+		}
+		return null;
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getPreferenceDefaultForegroundColor()
+	 * @generated
+	 */
+	protected Color getPreferenceDefaultForegroundColor() {
+		String foregroundColor = getPreferenceStore()
+				.getString(
+						CdDiagramPreferenceConstants.ATTRIBUTE_DEFAULT_FOREGROUND_COLOR);
+		if (foregroundColor.length() != 0) {
+			return Utils.getColor(foregroundColor);
+		}
+		return null;
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getPreferenceDefaultFont()
+	 * @generated
+	 */
+	protected Font getPreferenceDefaultFont() {
+		String preferenceFont = getPreferenceStore().getString(
+				CdDiagramPreferenceConstants.ATTRIBUTE_DEFAULT_FONT);
+		if (preferenceFont.length() != 0) {
+			return Utils.getFont(new FontData(preferenceFont));
+		}
+		return null;
+
 	}
 
 	@Override

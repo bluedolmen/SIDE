@@ -26,14 +26,14 @@ import org.topcased.modeler.utils.SourceTargetData;
 import org.topcased.modeler.utils.Utils;
 
 import com.bluexml.side.Class.modeler.diagram.CdSimpleObjectConstants;
-import com.bluexml.side.Class.modeler.diagram.commands.GeneralizationEdgeCreationCommand;
+import com.bluexml.side.Class.modeler.diagram.commands.hasAspectEdgeCreationCommand;
 
 /**
- * Generalization edge creation
+ * hasAspect edge creation
  *
  * @generated
  */
-public class GeneralizationEdgeCreationEditPolicy extends
+public class hasAspectEdgeCreationEditPolicy extends
 		AbstractEdgeCreationEditPolicy {
 	/**
 	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#createCommand(org.eclipse.gef.EditDomain, org.topcased.modeler.di.model.GraphEdge, org.topcased.modeler.di.model.GraphElement)
@@ -41,7 +41,7 @@ public class GeneralizationEdgeCreationEditPolicy extends
 	 */
 	protected CreateTypedEdgeCommand createCommand(EditDomain domain,
 			GraphEdge edge, GraphElement source) {
-		return new GeneralizationEdgeCreationCommand(domain, edge, source);
+		return new hasAspectEdgeCreationCommand(domain, edge, source);
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class GeneralizationEdgeCreationEditPolicy extends
 	 */
 	protected boolean checkEdge(GraphEdge edge) {
 		if (edge.getSemanticModel() instanceof SimpleSemanticModelElement) {
-			return CdSimpleObjectConstants.SIMPLE_OBJECT_GENERALIZATION
+			return CdSimpleObjectConstants.SIMPLE_OBJECT_HASASPECT
 					.equals(((SimpleSemanticModelElement) edge
 							.getSemanticModel()).getTypeInfo());
 		}
@@ -79,7 +79,7 @@ public class GeneralizationEdgeCreationEditPolicy extends
 		EObject targetObject = Utils.getElement(target);
 
 		if (sourceObject instanceof com.bluexml.side.clazz.Clazz
-				&& targetObject instanceof com.bluexml.side.clazz.Clazz) {
+				&& targetObject instanceof com.bluexml.side.clazz.Aspect) {
 			if (!sourceObject.equals(targetObject)) {
 				return true;
 			}
@@ -92,7 +92,7 @@ public class GeneralizationEdgeCreationEditPolicy extends
 	 * @generated
 	 */
 	protected boolean checkCommand(Command command) {
-		return command instanceof GeneralizationEdgeCreationCommand;
+		return command instanceof hasAspectEdgeCreationCommand;
 	}
 
 	/**
@@ -105,9 +105,9 @@ public class GeneralizationEdgeCreationEditPolicy extends
 		EObject targetObject = Utils.getElement(target);
 
 		if (sourceObject instanceof com.bluexml.side.clazz.Clazz
-				&& targetObject instanceof com.bluexml.side.clazz.Clazz) {
+				&& targetObject instanceof com.bluexml.side.clazz.Aspect) {
 			return new SourceTargetData(false, false, SourceTargetData.NONE,
-					null, null, null, null, null, "generalizations", null, null);
+					null, null, null, null, null, "aspects", null, null);
 		}
 		return null;
 	}

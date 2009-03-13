@@ -14,21 +14,20 @@
  ******************************************************************************/
 package com.bluexml.side.Class.modeler.diagram.figures;
 
+import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.swt.SWT;
 
-import com.bluexml.side.Class.modeler.diagram.figure.ConveyorLineFigure;
-
 /**
- * @_generated
+ * @generated
  */
-public class isCommentedFigure extends ConveyorLineFigure {
+public class hasAspectFigure extends PolylineConnectionEx {
 
 	/**
 	 * The constructor
 	 *
 	 * @generated
 	 */
-	public isCommentedFigure() {
+	public hasAspectFigure() {
 		super();
 		setLineStyle(SWT.LINE_SOLID);
 	}
