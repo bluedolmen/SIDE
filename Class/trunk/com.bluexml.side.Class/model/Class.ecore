@@ -21,6 +21,8 @@
         eType="#//Aspect" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="enumerationSet" upperBound="-1"
         eType="#//Enumeration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
+        eType="#//View" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Clazz" eSuperTypes="#//AbstractClass">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
