@@ -494,7 +494,11 @@ public abstract class  MergeUtils {
 	}
 
 
-	/** debug method *
+	/**Method called after the merge process to resolve external links
+	 * We browse all EObject and wath if they are proxies
+	 * if it is the case we attempt to resolve them using the resourceSet used during the merging
+	 * if object is resolvable we find the similar object in the  merge result and repalce it with it
+	 * otherwise the object remains an external reference
 	 * @throws NoSuchMethodException 
 	 * @throws SecurityException 
 	 * @throws InvocationTargetException 
@@ -537,7 +541,21 @@ public abstract class  MergeUtils {
 	}
 
 
-
+	/**
+	 * Method called to find An EObject in a model 
+	 * Method is recursih he Eobject we are looking for until equals for merger between the eboject returns true..
+	 * Each object is compared wit
+	 * @param toFind
+	 * @param root
+	 * @param cl
+	 * @return
+	 * @throws SecurityException
+	 * @throws NoSuchMethodException
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 * @throws InvocationTargetException
+	 * @throws ClassNotFoundException
+	 */
 	public static EObject find(EObject toFind,EObject root,ClassLoader cl) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, ClassNotFoundException{
 		boolean founded =false;
 		EObject result = null;
