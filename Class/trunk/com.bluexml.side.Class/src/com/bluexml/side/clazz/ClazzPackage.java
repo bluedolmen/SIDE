@@ -318,13 +318,22 @@ public interface ClazzPackage extends EPackage {
 	int CLASS_PACKAGE__ENUMERATION_SET = CommonPackage.PACKAGE_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Views</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_PACKAGE__VIEWS = CommonPackage.PACKAGE_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Class Package</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_PACKAGE_FEATURE_COUNT = CommonPackage.PACKAGE_FEATURE_COUNT + 4;
+	int CLASS_PACKAGE_FEATURE_COUNT = CommonPackage.PACKAGE_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.AbstractContainerImpl <em>Abstract Container</em>}' class.
@@ -654,7 +663,7 @@ public interface ClazzPackage extends EPackage {
 	int CLAZZ__OPERATIONS = ABSTRACT_CLASS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Generalizations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Generalizations</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1939,6 +1948,17 @@ public interface ClazzPackage extends EPackage {
 	EReference getClassPackage_EnumerationSet();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.clazz.ClassPackage#getViews <em>Views</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Views</em>'.
+	 * @see com.bluexml.side.clazz.ClassPackage#getViews()
+	 * @see #getClassPackage()
+	 * @generated
+	 */
+	EReference getClassPackage_Views();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.clazz.Clazz <em>Clazz</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1960,10 +1980,10 @@ public interface ClazzPackage extends EPackage {
 	EReference getClazz_Operations();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.clazz.Clazz#getGeneralizations <em>Generalizations</em>}'.
+	 * Returns the meta object for the reference list '{@link com.bluexml.side.clazz.Clazz#getGeneralizations <em>Generalizations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Generalizations</em>'.
+	 * @return the meta object for the reference list '<em>Generalizations</em>'.
 	 * @see com.bluexml.side.clazz.Clazz#getGeneralizations()
 	 * @see #getClazz()
 	 * @generated
@@ -2819,6 +2839,14 @@ public interface ClazzPackage extends EPackage {
 		EReference CLASS_PACKAGE__ENUMERATION_SET = eINSTANCE.getClassPackage_EnumerationSet();
 
 		/**
+		 * The meta object literal for the '<em><b>Views</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_PACKAGE__VIEWS = eINSTANCE.getClassPackage_Views();
+
+		/**
 		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.ClazzImpl <em>Clazz</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2837,7 +2865,7 @@ public interface ClazzPackage extends EPackage {
 		EReference CLAZZ__OPERATIONS = eINSTANCE.getClazz_Operations();
 
 		/**
-		 * The meta object literal for the '<em><b>Generalizations</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Generalizations</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

@@ -13,6 +13,7 @@ import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Enumeration;
 
+import com.bluexml.side.clazz.View;
 import com.bluexml.side.common.impl.PackageImpl;
 
 import java.util.Collection;
@@ -38,6 +39,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.bluexml.side.clazz.impl.ClassPackageImpl#getAssociationSet <em>Association Set</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.ClassPackageImpl#getAspectSet <em>Aspect Set</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.ClassPackageImpl#getEnumerationSet <em>Enumeration Set</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.impl.ClassPackageImpl#getViews <em>Views</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,6 +85,16 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * @ordered
 	 */
 	protected EList<Enumeration> enumerationSet;
+
+	/**
+	 * The cached value of the '{@link #getViews() <em>Views</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getViews()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<View> views;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -156,6 +168,18 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<View> getViews() {
+		if (views == null) {
+			views = new EObjectContainmentEList<View>(View.class, this, ClazzPackage.CLASS_PACKAGE__VIEWS);
+		}
+		return views;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -167,6 +191,8 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 				return ((InternalEList<?>)getAspectSet()).basicRemove(otherEnd, msgs);
 			case ClazzPackage.CLASS_PACKAGE__ENUMERATION_SET:
 				return ((InternalEList<?>)getEnumerationSet()).basicRemove(otherEnd, msgs);
+			case ClazzPackage.CLASS_PACKAGE__VIEWS:
+				return ((InternalEList<?>)getViews()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -187,6 +213,8 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 				return getAspectSet();
 			case ClazzPackage.CLASS_PACKAGE__ENUMERATION_SET:
 				return getEnumerationSet();
+			case ClazzPackage.CLASS_PACKAGE__VIEWS:
+				return getViews();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -216,6 +244,10 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 				getEnumerationSet().clear();
 				getEnumerationSet().addAll((Collection<? extends Enumeration>)newValue);
 				return;
+			case ClazzPackage.CLASS_PACKAGE__VIEWS:
+				getViews().clear();
+				getViews().addAll((Collection<? extends View>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -240,6 +272,9 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 			case ClazzPackage.CLASS_PACKAGE__ENUMERATION_SET:
 				getEnumerationSet().clear();
 				return;
+			case ClazzPackage.CLASS_PACKAGE__VIEWS:
+				getViews().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -260,6 +295,8 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 				return aspectSet != null && !aspectSet.isEmpty();
 			case ClazzPackage.CLASS_PACKAGE__ENUMERATION_SET:
 				return enumerationSet != null && !enumerationSet.isEmpty();
+			case ClazzPackage.CLASS_PACKAGE__VIEWS:
+				return views != null && !views.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

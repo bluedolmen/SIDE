@@ -47,7 +47,7 @@ public interface Clazz extends AbstractClass {
 	EList<Operation> getOperations();
 
 	/**
-	 * Returns the value of the '<em><b>Generalizations</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Generalizations</b></em>' reference list.
 	 * The list contents are of type {@link com.bluexml.side.clazz.Clazz}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -55,9 +55,9 @@ public interface Clazz extends AbstractClass {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Generalizations</em>' containment reference list.
+	 * @return the value of the '<em>Generalizations</em>' reference list.
 	 * @see com.bluexml.side.clazz.ClazzPackage#getClazz_Generalizations()
-	 * @model containment="true"
+	 * @model
 	 * @generated
 	 */
 	EList<Clazz> getGeneralizations();

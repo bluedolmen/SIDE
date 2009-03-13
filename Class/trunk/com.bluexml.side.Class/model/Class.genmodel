@@ -46,6 +46,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/associationSet"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/aspectSet"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/enumerationSet"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/views"/>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//Clazz">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//Clazz/operations"/>

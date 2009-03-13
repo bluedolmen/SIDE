@@ -58,7 +58,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	protected EList<Operation> operations;
 
 	/**
-	 * The cached value of the '{@link #getGeneralizations() <em>Generalizations</em>}' containment reference list.
+	 * The cached value of the '{@link #getGeneralizations() <em>Generalizations</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getGeneralizations()
@@ -165,7 +165,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<Clazz> getGeneralizations() {
 		if (generalizations == null) {
-			generalizations = new EObjectContainmentEList<Clazz>(Clazz.class, this, ClazzPackage.CLAZZ__GENERALIZATIONS);
+			generalizations = new EObjectResolvingEList<Clazz>(Clazz.class, this, ClazzPackage.CLAZZ__GENERALIZATIONS);
 		}
 		return generalizations;
 	}
@@ -246,8 +246,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 		switch (featureID) {
 			case ClazzPackage.CLAZZ__OPERATIONS:
 				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
-			case ClazzPackage.CLAZZ__GENERALIZATIONS:
-				return ((InternalEList<?>)getGeneralizations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
