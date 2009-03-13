@@ -68,6 +68,7 @@ public class AttributeItemProvider
 			addVisibilityPropertyDescriptor(object);
 			addTitlePropertyDescriptor(object);
 			addValueListPropertyDescriptor(object);
+			addUniquePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -183,6 +184,28 @@ public class AttributeItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Unique feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addUniquePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Attribute_unique_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Attribute_unique_feature", "_UI_Attribute_type"),
+				 ClazzPackage.Literals.ATTRIBUTE__UNIQUE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Attribute.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -223,6 +246,7 @@ public class AttributeItemProvider
 			case ClazzPackage.ATTRIBUTE__INITIAL_VALUE:
 			case ClazzPackage.ATTRIBUTE__VISIBILITY:
 			case ClazzPackage.ATTRIBUTE__TITLE:
+			case ClazzPackage.ATTRIBUTE__UNIQUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -239,6 +263,17 @@ public class AttributeItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
+
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		return ClassEditPlugin.INSTANCE;
 	}
 
 }

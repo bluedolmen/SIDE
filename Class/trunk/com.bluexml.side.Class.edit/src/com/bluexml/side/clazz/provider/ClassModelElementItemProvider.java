@@ -7,6 +7,9 @@
 package com.bluexml.side.clazz.provider;
 
 
+import com.bluexml.side.clazz.ClassModelElement;
+import com.bluexml.side.clazz.ClazzFactory;
+import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.common.provider.ModelElementItemProvider;
 
 import java.util.Collection;
@@ -17,12 +20,16 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.clazz.ClassModelElement} object.
@@ -59,8 +66,61 @@ public class ClassModelElementItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addDocumentationPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Documentation feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDocumentationPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ClassModelElement_documentation_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ClassModelElement_documentation_feature", "_UI_ClassModelElement_type"),
+				 ClazzPackage.Literals.CLASS_MODEL_ELEMENT__DOCUMENTATION,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(ClazzPackage.Literals.CLASS_MODEL_ELEMENT__METAINFO);
+		}
+		return childrenFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
 	}
 
 	/**
@@ -82,7 +142,10 @@ public class ClassModelElementItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_ClassModelElement_type");
+		String label = ((ClassModelElement)object).getDocumentation();
+		return label == null || label.length() == 0 ?
+			getString("_UI_ClassModelElement_type") :
+			getString("_UI_ClassModelElement_type") + " " + label;
 	}
 
 	/**
@@ -95,6 +158,15 @@ public class ClassModelElementItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(ClassModelElement.class)) {
+			case ClazzPackage.CLASS_MODEL_ELEMENT__DOCUMENTATION:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case ClazzPackage.CLASS_MODEL_ELEMENT__METAINFO:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
@@ -108,6 +180,11 @@ public class ClassModelElementItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ClazzPackage.Literals.CLASS_MODEL_ELEMENT__METAINFO,
+				 ClazzFactory.eINSTANCE.createMetaInfo()));
 	}
 
 	/**
