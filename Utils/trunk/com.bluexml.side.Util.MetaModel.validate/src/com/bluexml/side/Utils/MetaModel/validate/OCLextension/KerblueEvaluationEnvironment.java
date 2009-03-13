@@ -20,51 +20,56 @@ class KerblueEvaluationEnvironment extends EcoreEvaluationEnvironment {
 		super();
 	}
 
-	public KerblueEvaluationEnvironment(
-			EvaluationEnvironment<EClassifier, EOperation, EStructuralFeature, EClass, EObject> parent) {
+	public KerblueEvaluationEnvironment(EvaluationEnvironment<EClassifier, EOperation, EStructuralFeature, EClass, EObject> parent) {
 		super(parent);
 	}
+
 	/**
-	 * Overides OCL enviroment evaluation method
-	 * We overide this method because the operation return is always the oepration
-	 * from the top superType of the context from wich is called the operation
-	 * In this method, we will find the nearest corresponding method from the call context
-	 * and forward this this operation to the former method
-	 * @param operation the operation to resolve
-	 * @param receiver the call context
+	 * Overides OCL enviroment evaluation method We overide this method because
+	 * the operation return is always the oepration from the top superType of
+	 * the context from wich is called the operation In this method, we will
+	 * find the nearest corresponding method from the call context and forward
+	 * this this operation to the former method
+	 * 
+	 * @param operation
+	 *            the operation to resolve
+	 * @param receiver
+	 *            the call context
 	 */
 	@Override
 	protected Method getJavaMethodFor(EOperation operation, Object receiver) {
-		Method result =null;
+		Method result = null;
 		EOperation resolved = null;
 		EObject eo = (EObject) receiver;
-		if(eo != null){
+		if (eo != null) {
 
-		EClass eoClass = eo.eClass();
-		resolved = EClassUtils.getEOperationFor(operation,eoClass);
+			EClass eoClass = eo.eClass();
+			resolved = EClassUtils.getEOperationFor(operation, eoClass);
 		}
-		if(resolved == null){
+		if (resolved == null) {
 			result = super.getJavaMethodFor(operation, receiver);
-		}else{
+		} else {
 			result = super.getJavaMethodFor(resolved, receiver);
 		}
 		return result;
 	}
 
-	
-
-
-	public Object callOperation(EOperation operation, int opcode,
-			Object source, Object[] args) {
-		if (operation.getEAnnotation("KerblueEnvironment") == null) {
+	public Object callOperation(EOperation operation, int opcode, Object source, Object[] args) {
+		if (operation.getEAnnotation(KerblueEnvironment.KERBLUEENV) == null) {
 			// not our custom regex operation
 			return super.callOperation(operation, opcode, source, args);
 		}
 
-		if ("regexMatch".equals(operation.getName())) {
+		if (KerblueEnvironment.OP_REGEXMATCH.equals(operation.getName())) {
 			Pattern pattern = Pattern.compile((String) args[0]);
 			Matcher matcher = pattern.matcher((String) source);
 			return matcher.matches() ? matcher.group() : null;
+		}
+		
+		if (KerblueEnvironment.OP_GETCONTENER.equals(operation.getName())) {
+			if (source instanceof EObject) {
+				return (EObject)((EObject) source).eContainer();
+			}
 		}
 
 		throw new UnsupportedOperationException(); // unknown operation
