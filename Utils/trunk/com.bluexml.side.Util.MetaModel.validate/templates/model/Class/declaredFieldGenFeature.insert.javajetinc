@@ -16,19 +16,19 @@
     <%}
   }
     
-  for (GenFeature genFeature : genClass.getImplementedGenFeatures()) {
+  for (GenFeature genFeatures : genClass.getImplementedGenFeatures()) {
 	String derive = null;
-	EAnnotation ocl = genFeature.getEcoreFeature().getEAnnotation(oclNsURI);
+	EAnnotation ocl = genFeatures.getEcoreFeature().getEAnnotation(oclNsURI);
 	if (ocl != null) derive = ocl.getDetails().get("derive");
 	if (derive != null) { hasOCL = true;%>
 	/**
-	 * The parsed OCL expression for the derivation of '{@link #<%=genFeature.getGetAccessor()%> <em><%=genFeature.getFormattedName()%></em>}' property.
+	 * The parsed OCL expression for the derivation of '{@link #<%=genFeatures.getGetAccessor()%> <em><%=genFeatures.getFormattedName()%></em>}' property.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #<%=genFeature.getGetAccessor()%>
+	 * @see #<%=genFeatures.getGetAccessor()%>
 	 * @generated
 	 */
-	private static <%=genModel.getImportedName("org.eclipse.ocl.expressions.OCLExpression")%><<%=genModel.getImportedName("org.eclipse.emf.ecore.EClassifier")%>> <%=genFeature.getSafeName()%>DeriveOCL;
+	private static <%=genModel.getImportedName("org.eclipse.ocl.expressions.OCLExpression")%><<%=genModel.getImportedName("org.eclipse.emf.ecore.EClassifier")%>> <%=genFeatures.getSafeName()%>DeriveOCL;
 	
     <%}
   }
