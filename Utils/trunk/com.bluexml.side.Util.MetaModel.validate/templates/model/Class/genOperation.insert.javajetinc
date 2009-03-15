@@ -1,0 +1,15 @@
+<%if (isImplementation) {
+	String body = null;
+	EAnnotation ocl = genOperation.getEcoreOperation().getEAnnotation(oclNsURI);
+	if (ocl != null) body = ocl.getDetails().get("body");
+	if (body != null) { %>
+	/**
+	 * The parsed OCL expression for the body of the '{@link #<%=genOperation.getName()%> <em><%=genOperation.getFormattedName()%></em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #<%=genOperation.getName()%>
+	 * @generated
+	 */
+	private static <%=genModel.getImportedName("org.eclipse.ocl.expressions.OCLExpression")%><<%=genModel.getImportedName("org.eclipse.emf.ecore.EClassifier")%>> <%=genOperation.getName()%>BodyOCL;
+    <%}
+}%>
