@@ -18,6 +18,7 @@ package com.bluexml.side.Util.ecore;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -29,6 +30,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
@@ -44,9 +46,9 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
  */
 
 public class EResourceUtils {
-	
+
 	// TODO VisibilityCheck
-	
+
 	/********************** <b>CREATING</b> ************************
 	 *  
 	 * <b>Creating :<b> a resource means returning a new resource
@@ -113,7 +115,7 @@ public class EResourceUtils {
 		return  createResource(modelFileUri,resourceSet);
 	}
 
-	
+
 	/**
 	 * Create a Resource From an URI in a given ResourceSet
 	 * Will load XMiFactoryResourceImpl for default extension if
@@ -167,7 +169,7 @@ public class EResourceUtils {
 	 * @return
 	 * @throws IOException
 	 _________________ ABANDON ____________________________________
-	 
+
       public static Resource openModel(Model model,Map<?,?> map,ResourceSet rs) throws IOException{
 		// model aperas whitha relative path 
 		// to folowing manipulation mains only to get an aabsolute path
@@ -239,12 +241,12 @@ public class EResourceUtils {
 		}
 		return result;
 	}
-	
+
 	/************************ SAVING ***************************
- 	 * Method that helps to store the resource
- 	 * TODO, Serialize, dans outputStream
- 	 ***********************************************************/
-	
+	 * Method that helps to store the resource
+	 * TODO, Serialize, dans outputStream
+	 ***********************************************************/
+
 	/**
 	 * Method wich save the model in th sfile system
 	 * @param resource
@@ -259,14 +261,14 @@ public class EResourceUtils {
 		//root.eResource().save(fos, map);
 		resource.save(map);
 	}
-	
-	
+
+
 	/**************************** CHECKING ***************************
 	 * Method that helps to know the state of the resource
 	 * 
 	 * 
 	 *****************************************************************/
-	
+
 	/**
 	 * Querying method which returns true
 	 * if the resource has no content
@@ -286,12 +288,12 @@ public class EResourceUtils {
 		result = content ==null || content.size() == 0;
 		return result;
 	}
-		
+
 	/******************************************
 	 * DIVERSE 
 	 * Various help method
 	 ******************************************/
-		
+
 	/**
 	 * Returning an iFile located a the given path
 	 * the path is relative of the worspace
@@ -349,6 +351,28 @@ public class EResourceUtils {
 	private static Map<String,Object> getDefaultMapForIO(){
 		Map<String,Object> result = new HashMap<String,Object>();
 		result.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
+		return result;
+	}
+	/**
+	 * method wich returns true if uri in parameters is amongst on of the resource's uri of the resourceSet
+	 * this method was written because "EcoreUtil.resolve(InternalEobject,ResourceSet)" resolve the proxy
+	 * even if the proxy does not refer a resource included in the resourceSet
+	 * @param rs
+	 * @param uri
+	 * @return
+	 */
+	public static boolean resourceSetDoContainsUri(ResourceSet rs, URI uri){
+		boolean result = false;
+		//precondition 
+		if(uri != null && uri.devicePath().length()>0 && rs != null){
+			
+			Iterator<Resource> iterResource = rs.getResources().iterator();
+			while(iterResource.hasNext() && !result){
+				Resource r = iterResource.next();
+				result = r.getURI().devicePath().equals(uri.devicePath());
+			}
+			
+		}
 		return result;
 	}
 
