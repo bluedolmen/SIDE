@@ -54,7 +54,7 @@ import com.bluexml.side.Util.ecore.EStructuralFeatureUtils;
  * TODO should replace merge class, by a merge manager class, merge should use an object
  * TODO some information need to be stored through the merging process
  * 
- * @author Constantin Madola <a href="mailto:gmadola@bluexml.com">Gérard Constantin Madola</a>
+ * @author Constantin Madola <a href="mailto:gmadola@bluexml.com">Gï¿½rard Constantin Madola</a>
  * TODO those info shoulb be reported in a changes.xml file
  * <p><b>META</b></p>
  * <li> Last modification date : </li>
@@ -101,22 +101,40 @@ public abstract class  MergeUtils {
 	 * @throws IOException
 	 */
 	public static String  merge(IFile chain, File[] models,ClassLoader cl) throws IOException{
-		
-		EPackage metaModelPackage = null;
 		String pathToMergedFile="";
 		// the model file resulted from the merge method is stored at the same level as the chain used
 		//IFile iFileChain= EResourceUtils.toIFile(chain.eResource().getURI().toPlatformString(true));	
 		pathToMergedFile = chain.getParent().getLocation().append(DEFAULT_MERGED_MODEL_NAME).toFile().getAbsolutePath();
-		File f = new File(pathToMergedFile);
-
+		File mergedFile = new File(pathToMergedFile);
+		return merge(mergedFile, models, cl);
+	}
+	
+	/**<b>First level method to merge models</b>
+	 * <li>creating resource for the result</li>
+	 * <li>retrieving models from chain</li>
+	 * <ul> 
+	 * 	<i>for each model</i>
+	 *	<li>load current model resource</li>
+	 * 	<li>load <i>metamodel package</i> if not already loaded and register it</li>
+	 *  <li>check that the current model's metamodel is the same has the loaded<i>metamodel package</i> 
+	 * 	<li>call method wich merge current model wich merge resource</li>
+	 * </ul>
+	 * <li>export merge resource</li>
+	 * @param chain IFile of the chain
+	 * @param models File[] containing models
+	 * @cl the classLoader of the generator
+	 * @throws IOException
+	 */
+	public static String  merge(File mergedFile, File[] models,ClassLoader cl) throws IOException{
+		EPackage metaModelPackage = null;
 		// deletion of the previous result
-		if (f.exists()){
-			f.delete();
+		if (mergedFile.exists()){
+			mergedFile.delete();
 		}
 		
 		//EList<Model> models = chain.getRepository().getModels();
 		// Creating mergemodel resource
-		Resource mergedResource = EResourceUtils.createResource(pathToMergedFile);
+		Resource mergedResource = EResourceUtils.createResource(mergedFile.getAbsolutePath());
 		// We use the same resourceSet
 		ResourceSet rs = mergedResource.getResourceSet();
 		int compteur = 0;
@@ -283,7 +301,7 @@ public abstract class  MergeUtils {
 	 * @param esf
 	 */
 	public static void doMerge(EObject elMergeResource,EObject elModelToMerge,ClassLoader cl){
-		// ON n'a pas déjà ce package la quelque part dans le model actuellement
+		// ON n'a pas dï¿½jï¿½ ce package la quelque part dans le model actuellement
 		EClass elMergeEClass = elMergeResource.eClass();
 		EClass elModelEClass = elModelToMerge.eClass();
 
