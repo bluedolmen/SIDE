@@ -124,7 +124,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Timer" eSuperTypes="#//WorkflowModelElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Timer" eSuperTypes="#//Action">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="duedate" ordered="false"
         unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>

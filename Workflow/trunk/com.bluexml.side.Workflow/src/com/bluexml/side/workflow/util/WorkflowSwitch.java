@@ -208,6 +208,7 @@ public class WorkflowSwitch<T> {
 			case WorkflowPackage.TIMER: {
 				Timer timer = (Timer)theEObject;
 				T result = caseTimer(timer);
+				if (result == null) result = caseAction(timer);
 				if (result == null) result = caseWorkflowModelElement(timer);
 				if (result == null) result = caseModelElement(timer);
 				if (result == null) result = defaultCase(theEObject);

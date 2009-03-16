@@ -26,7 +26,7 @@ import com.bluexml.side.workflow.WorkflowPackage;
  *
  * @generated
  */
-public class TimerImpl extends WorkflowModelElementImpl implements Timer {
+public class TimerImpl extends ActionImpl implements Timer {
 	/**
 	 * The default value of the '{@link #getDuedate() <em>Duedate</em>}' attribute.
 	 * <!-- begin-user-doc -->

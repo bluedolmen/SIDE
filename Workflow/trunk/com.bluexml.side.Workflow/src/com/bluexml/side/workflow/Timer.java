@@ -23,7 +23,7 @@ package com.bluexml.side.workflow;
  * @model
  * @generated
  */
-public interface Timer extends WorkflowModelElement {
+public interface Timer extends Action {
 	/**
 	 * Returns the value of the '<em><b>Duedate</b></em>' attribute.
 	 * <!-- begin-user-doc -->

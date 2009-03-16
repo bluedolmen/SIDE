@@ -985,7 +985,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TIMER__STEREOTYPES = WORKFLOW_MODEL_ELEMENT__STEREOTYPES;
+	int TIMER__STEREOTYPES = ACTION__STEREOTYPES;
 
 	/**
 	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
@@ -994,7 +994,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TIMER__TAGS = WORKFLOW_MODEL_ELEMENT__TAGS;
+	int TIMER__TAGS = ACTION__TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
@@ -1003,7 +1003,34 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TIMER__COMMENTS = WORKFLOW_MODEL_ELEMENT__COMMENTS;
+	int TIMER__COMMENTS = ACTION__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Java Class</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIMER__JAVA_CLASS = ACTION__JAVA_CLASS;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIMER__EXPRESSION = ACTION__EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Script</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIMER__SCRIPT = ACTION__SCRIPT;
 
 	/**
 	 * The feature id for the '<em><b>Duedate</b></em>' attribute.
@@ -1012,7 +1039,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TIMER__DUEDATE = WORKFLOW_MODEL_ELEMENT_FEATURE_COUNT + 0;
+	int TIMER__DUEDATE = ACTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Timer</em>' class.
@@ -1021,7 +1048,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TIMER_FEATURE_COUNT = WORKFLOW_MODEL_ELEMENT_FEATURE_COUNT + 1;
+	int TIMER_FEATURE_COUNT = ACTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.VariableImpl <em>Variable</em>}' class.
