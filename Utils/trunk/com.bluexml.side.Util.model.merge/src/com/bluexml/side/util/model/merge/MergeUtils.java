@@ -525,7 +525,7 @@ public abstract class  MergeUtils {
 	 * @throws ClassNotFoundException */
 	public static void browse2(EObject eo,ResourceSet rs,EObject mergeRoot,ClassLoader cl) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, ClassNotFoundException{
 		
-
+		String proxy_resolved = " - Unsolved - ";
 		for(EStructuralFeature esf : eo.eClass().getEAllStructuralFeatures()){
 			Object o = eo.eGet(esf,false);
 			if(o instanceof List<?>){
@@ -541,15 +541,21 @@ public abstract class  MergeUtils {
 						EObject eo2 = (EObject) o;
 						if(eo2.eIsProxy()){
 							if(eo2 instanceof InternalEObject){
+								System.out.println("proxy found deep");
+								System.out.println(eo2.toString());
 								InternalEObject ieo = (InternalEObject) eo2;
+								if(EResourceUtils.resourceSetDoContainsUri(rs,ieo.eProxyURI())){
+									proxy_resolved =" - Resolved -";
+									EObject resolved = EcoreUtil.resolve(eo2,rs);
+									EObject copy = find(resolved,mergeRoot,cl);
+									eo.eSet(esf, copy);
+									
+								}
+								
+									System.out.println(proxy_resolved);
+								
 
-								EObject resolved = EcoreUtil.resolve(eo2,rs);
-								EObject copy = find(resolved,mergeRoot,cl);
-								eo.eSet(esf, copy);
-								System.out.println(ieo.eProxyURI());
 							}
-							System.out.println("proxy found deep");
-							System.out.println(eo2.toString());
 
 						}
 					}
@@ -561,7 +567,7 @@ public abstract class  MergeUtils {
 
 	/**
 	 * Method called to find An EObject in a model 
-	 * Method is recursih he Eobject we are looking for until equals for merger between the eboject returns true..
+	 * Method is recursive he Eobject we are looking for until equals for merger between the eboject returns true..
 	 * Each object is compared wit
 	 * @param toFind
 	 * @param root
