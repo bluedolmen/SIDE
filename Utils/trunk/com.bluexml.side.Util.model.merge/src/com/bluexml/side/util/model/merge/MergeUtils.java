@@ -106,7 +106,7 @@ public abstract class  MergeUtils {
 		String pathToMergedFile="";
 		// the model file resulted from the merge method is stored at the same level as the chain used
 		//IFile iFileChain= EResourceUtils.toIFile(chain.eResource().getURI().toPlatformString(true));	
-		pathToMergedFile = chain.getParent().getRawLocation().append(DEFAULT_MERGED_MODEL_NAME).toFile().getAbsolutePath();
+		pathToMergedFile = chain.getParent().getLocation().append(DEFAULT_MERGED_MODEL_NAME).toFile().getAbsolutePath();
 		File f = new File(pathToMergedFile);
 
 		// deletion of the previous result
