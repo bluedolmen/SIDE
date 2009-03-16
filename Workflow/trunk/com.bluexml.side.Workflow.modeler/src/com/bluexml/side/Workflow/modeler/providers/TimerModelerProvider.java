@@ -14,8 +14,8 @@ import com.bluexml.side.workflow.WorkflowPackage;
  *
  * @generated
  */
-public class TimerModelerProvider extends WorkflowModelElementModelerProvider
-		implements ILabelFeatureProvider {
+public class TimerModelerProvider extends ActionModelerProvider implements
+		ILabelFeatureProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 *
@@ -31,6 +31,6 @@ public class TimerModelerProvider extends WorkflowModelElementModelerProvider
 	 * @generated
 	 */
 	public EAttribute getLabelFeature(Object object) {
-		return WorkflowPackage.eINSTANCE.getTimer_Duedate();
+		return WorkflowPackage.eINSTANCE.getAction_JavaClass();
 	}
 }

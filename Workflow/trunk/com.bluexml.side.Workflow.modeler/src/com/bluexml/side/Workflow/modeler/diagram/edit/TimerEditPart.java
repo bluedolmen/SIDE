@@ -16,7 +16,10 @@ package com.bluexml.side.Workflow.modeler.diagram.edit;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.gef.Request;
+import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
@@ -26,14 +29,18 @@ import org.topcased.modeler.edit.EMFGraphNodeEditPart;
 import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
 import org.topcased.modeler.edit.policies.ResizableEditPolicy;
 import org.topcased.modeler.edit.policies.RestoreEditPolicy;
+import org.topcased.modeler.internal.ModelerPlugin;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
 import com.bluexml.side.Workflow.modeler.diagram.WfEditPolicyConstants;
 import com.bluexml.side.Workflow.modeler.diagram.commands.TimerRestoreConnectionCommand;
+import com.bluexml.side.Workflow.modeler.diagram.commands.update.ActionUpdateCommand;
+import com.bluexml.side.Workflow.modeler.diagram.dialogs.ActionEditDialog;
 import com.bluexml.side.Workflow.modeler.diagram.figures.TimerFigure;
 import com.bluexml.side.Workflow.modeler.diagram.policies.hasTimerEdgeCreationEditPolicy;
 import com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferenceConstants;
+import com.bluexml.side.workflow.Timer;
 
 /**
  * The Timer object controller
@@ -130,6 +137,31 @@ public class TimerEditPart extends EMFGraphNodeEditPart {
 		}
 		return null;
 
+	}
+	
+	@Override
+	public void performRequest(Request request) {
+		if (request.getType() == RequestConstants.REQ_OPEN) {
+			Timer timer = (Timer) Utils.getElement(getGraphNode());
+
+			ActionEditDialog dlg = new ActionEditDialog(timer, ModelerPlugin
+					.getActiveWorkbenchShell());
+			if (dlg.open() == Window.OK) {
+				ActionUpdateCommand command = new ActionUpdateCommand(timer,
+						dlg.getData());
+				getViewer().getEditDomain().getCommandStack().execute(command);
+				refresh();
+			}
+		} else {
+			super.performRequest(request);
+
+		}
+	}
+	
+	@Override
+	protected void refreshHeaderLabel() {
+		Timer timer = (Timer) Utils.getElement(getGraphNode());
+		getLabel().setText(timer.getDuedate());
 	}
 
 }
