@@ -109,4 +109,13 @@ public interface ClassPackage extends com.bluexml.side.common.Package {
 	 */
 	EList<View> getViews();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='if self.getContainer().oclIsUndefined() then\r\tself.name\relse\r\tself.getContainer().oclAsType(ClassPackage).getFullName().concat(\'.\').concat(self.name)\rendif'"
+	 * @generated
+	 */
+	String getFullName();
+
 } // ClassPackage

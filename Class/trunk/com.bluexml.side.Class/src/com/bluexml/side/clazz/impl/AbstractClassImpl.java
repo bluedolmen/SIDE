@@ -6,10 +6,12 @@
  */
 package com.bluexml.side.clazz.impl;
 
+import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.ClazzPackage;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,5 +41,8 @@ public abstract class AbstractClassImpl extends AbstractContainerImpl implements
 	protected EClass eStaticClass() {
 		return ClazzPackage.Literals.ABSTRACT_CLASS;
 	}
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 
 } //AbstractClassImpl

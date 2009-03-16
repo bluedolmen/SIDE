@@ -6,21 +6,30 @@
  */
 package com.bluexml.side.clazz.impl;
 
+import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
+
 import com.bluexml.side.clazz.ClassModelElement;
 import com.bluexml.side.clazz.ClazzPackage;
-
 import com.bluexml.side.clazz.MetaInfo;
+
 import com.bluexml.side.common.impl.ModelElementImpl;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->
@@ -56,6 +65,7 @@ public class ClassModelElementImpl extends ModelElementImpl implements ClassMode
 	 * @ordered
 	 */
 	protected static final String DOCUMENTATION_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getDocumentation() <em>Documentation</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -218,4 +228,6 @@ public class ClassModelElementImpl extends ModelElementImpl implements ClassMode
 		return result.toString();
 	}
 
+		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+		private static final OCL OCL_ENV = KerblueOCL.newInstance();		
 } //ClassModelElementImpl

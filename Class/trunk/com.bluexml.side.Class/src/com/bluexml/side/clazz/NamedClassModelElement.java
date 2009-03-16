@@ -6,6 +6,10 @@
  */
 package com.bluexml.side.clazz;
 
+import org.eclipse.emf.ecore.EObject;
+import com.bluexml.side.common.NamedModelElement;
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -76,5 +80,14 @@ public interface NamedClassModelElement extends ClassModelElement {
 	 * @generated
 	 */
 	void setDescription(String value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='if self.getContainer().oclIsUndefined() then\r\tself.name\relse\r\tif self.getContainer().oclIsKindOf(NamedClassModelElement) then\r\t\tself.getContainer().oclAsType(NamedClassModelElement).getFullName().concat(\'.\').concat(self.name)\r\telse\r\t\tself.getContainer().oclAsType(ClassPackage).getFullName().concat(\'.\').concat(self.name)\r\tendif\t\rendif'"
+	 * @generated
+	 */
+	String getFullName();
 
 } // NamedClassModelElement

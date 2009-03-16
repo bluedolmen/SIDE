@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.clazz.impl;
 
+import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.clazz.AttributeType;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Parameter;
@@ -15,6 +16,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->
@@ -163,6 +165,10 @@ public class ParameterImpl extends NamedClassModelElementImpl implements Paramet
 		result.append(')');
 		return result.toString();
 	}
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+
+	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 
 	/**
 	 * Sets the value of the '{@link org.topcased.MMUseCase.Parameter#getValueType <em>Value Type</em>}' attribute.

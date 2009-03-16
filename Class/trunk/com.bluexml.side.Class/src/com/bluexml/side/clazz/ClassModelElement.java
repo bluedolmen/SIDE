@@ -8,6 +8,7 @@ package com.bluexml.side.clazz;
 
 import com.bluexml.side.common.ModelElement;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
