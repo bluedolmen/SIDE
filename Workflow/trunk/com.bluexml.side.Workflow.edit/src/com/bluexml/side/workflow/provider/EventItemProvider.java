@@ -185,6 +185,11 @@ public class EventItemProvider
 			(createChildParameter
 				(WorkflowPackage.Literals.EVENT__ACTION,
 				 WorkflowFactory.eINSTANCE.createAction()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(WorkflowPackage.Literals.EVENT__ACTION,
+				 WorkflowFactory.eINSTANCE.createTimer()));
 	}
 
 	/**

@@ -259,8 +259,36 @@ public class TransitionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(WorkflowPackage.Literals.TRANSITION__ACTION,
+				 WorkflowFactory.eINSTANCE.createTimer()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(WorkflowPackage.Literals.TRANSITION__TIMER,
 				 WorkflowFactory.eINSTANCE.createTimer()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == WorkflowPackage.Literals.TRANSITION__ACTION ||
+			childFeature == WorkflowPackage.Literals.TRANSITION__TIMER;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

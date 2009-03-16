@@ -36,7 +36,7 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * @generated
  */
 public class TimerItemProvider
-	extends WorkflowModelElementItemProvider
+	extends ActionItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	

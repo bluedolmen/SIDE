@@ -162,6 +162,11 @@ public class NodeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(WorkflowPackage.Literals.NODE__ACTION,
+				 WorkflowFactory.eINSTANCE.createTimer()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(WorkflowPackage.Literals.NODE__TRANSITION,
 				 WorkflowFactory.eINSTANCE.createTransition()));
 
