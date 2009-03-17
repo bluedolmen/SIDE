@@ -54,9 +54,7 @@
    	<extension point="org.eclipse.core.runtime.preferences">
 		<initializer class="com.bluexml.side.Class.modeler.preferences.AllDiagramPreferenceInitializer"/>
 	</extension>
-	
-	
-   <extension point="org.topcased.modeler.templates">
+	 <extension point="org.topcased.modeler.templates">
       <template
             di="templates/diagram/%name%.clazzdi"
             model="templates/diagram/%name%.clazz"

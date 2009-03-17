@@ -64,6 +64,7 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 */
 	protected EList<Clazz> classSet;
 
+	
 	/**
 	 * The cached value of the '{@link #getAssociationSet() <em>Association Set</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -75,6 +76,14 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	protected EList<Association> associationSet;
 
 	/**
+	 * The parsed OCL expression for the body of the '{@link #getFullName <em>Get Full Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFullName
+	 * @generated
+	 */
+	
+	/**
 	 * The cached value of the '{@link #getAspectSet() <em>Aspect Set</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -84,6 +93,7 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 */
 	protected EList<Aspect> aspectSet;
 
+	
 	/**
 	 * The cached value of the '{@link #getEnumerationSet() <em>Enumeration Set</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -94,6 +104,7 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 */
 	protected EList<Enumeration> enumerationSet;
 
+	
 	/**
 	 * The cached value of the '{@link #getViews() <em>Views</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

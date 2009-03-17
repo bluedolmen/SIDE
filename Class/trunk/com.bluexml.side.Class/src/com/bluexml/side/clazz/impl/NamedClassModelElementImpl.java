@@ -75,6 +75,7 @@ public class NamedClassModelElementImpl extends ClassModelElementImpl implements
 	 */
 	protected String name = NAME_EDEFAULT;
 
+	
 	/**
 	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->

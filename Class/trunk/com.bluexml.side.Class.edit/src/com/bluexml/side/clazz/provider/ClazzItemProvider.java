@@ -66,12 +66,35 @@ public class ClazzItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addGeneralizationsPropertyDescriptor(object);
 			addAspectsPropertyDescriptor(object);
 			addIsAbstractPropertyDescriptor(object);
 			addIsDeprecatedPropertyDescriptor(object);
 			addHasViewPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Generalizations feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addGeneralizationsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Clazz_generalizations_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Clazz_generalizations_feature", "_UI_Clazz_type"),
+				 ClazzPackage.Literals.CLAZZ__GENERALIZATIONS,
+				 true,
+				 false,
+				 false,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -175,7 +198,6 @@ public class ClazzItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ClazzPackage.Literals.CLAZZ__OPERATIONS);
-			childrenFeatures.add(ClazzPackage.Literals.CLAZZ__GENERALIZATIONS);
 		}
 		return childrenFeatures;
 	}
@@ -235,7 +257,6 @@ public class ClazzItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case ClazzPackage.CLAZZ__OPERATIONS:
-			case ClazzPackage.CLAZZ__GENERALIZATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -257,22 +278,6 @@ public class ClazzItemProvider
 			(createChildParameter
 				(ClazzPackage.Literals.CLAZZ__OPERATIONS,
 				 ClazzFactory.eINSTANCE.createOperation()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ClazzPackage.Literals.CLAZZ__GENERALIZATIONS,
-				 ClazzFactory.eINSTANCE.createClazz()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return ClassEditPlugin.INSTANCE;
 	}
 
 }
