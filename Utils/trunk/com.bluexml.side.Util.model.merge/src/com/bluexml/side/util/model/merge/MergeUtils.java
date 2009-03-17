@@ -120,7 +120,7 @@ public abstract class  MergeUtils {
 	 * 	<li>call method wich merge current model wich merge resource</li>
 	 * </ul>
 	 * <li>export merge resource</li>
-	 * @param chain IFile of the chain
+	 * @param mergedFile File which will contain merged model
 	 * @param models File[] containing models
 	 * @cl the classLoader of the generator
 	 * @throws IOException
