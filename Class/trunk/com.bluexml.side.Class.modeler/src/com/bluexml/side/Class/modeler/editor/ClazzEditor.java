@@ -9,6 +9,7 @@ import java.util.List;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.gef.ContextMenuProvider;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
@@ -18,8 +19,10 @@ import org.topcased.modeler.commands.GEFtoEMFCommandStackWrapper;
 import org.topcased.modeler.documentation.EAnnotationDocPage;
 import org.topcased.modeler.documentation.IDocPage;
 import org.topcased.modeler.editor.Modeler;
+import org.topcased.modeler.editor.ModelerGraphicalViewer;
 
 import com.bluexml.side.Class.modeler.ClazzPlugin;
+import com.bluexml.side.Class.modeler.SideClassContextMenuProvider;
 
 /**
  * Generated Model editor
@@ -88,5 +91,12 @@ public class ClazzEditor extends Modeler {
 		}
 		return ClazzPlugin.getDefault().getPreferenceStore();
 	}
-
+	
+	/**
+     * @see org.topcased.modeler.editor.Modeler#getContextMenuProvider(org.topcased.modeler.editor.ModelerGraphicalViewer)
+     */
+    protected ContextMenuProvider getContextMenuProvider(ModelerGraphicalViewer viewer)
+    {
+        return new SideClassContextMenuProvider(viewer, getActionRegistry());
+    }
 }

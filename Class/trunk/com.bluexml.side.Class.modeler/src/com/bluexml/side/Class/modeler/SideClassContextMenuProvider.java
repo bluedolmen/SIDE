@@ -1,0 +1,89 @@
+/*******************************************************************************
+ * Copyright (c) 2005 AIRBUS FRANCE.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    David Sciamma (Anyware Technologies), Mathieu Garcia (Anyware Technologies),
+ *    Jacques Lescot (Anyware Technologies) - initial API and implementation
+ *******************************************************************************/
+package com.bluexml.side.Class.modeler;
+
+import org.eclipse.gef.EditPartViewer;
+import org.eclipse.gef.ui.actions.ActionRegistry;
+import org.eclipse.gef.ui.actions.GEFActionConstants;
+import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.topcased.modeler.editor.ModelerContextMenuProvider;
+
+import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassAspectAction;
+import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassViewAction;
+import com.bluexml.side.Class.modeler.diagram.edit.hasViewEditPart;
+import com.bluexml.side.Class.modeler.diagram.edit.includeEditPart;
+
+/**
+ * Provide a Context Menu for the SAM Editor with customized actions
+ * 
+ * @author jako
+ */
+public class SideClassContextMenuProvider extends ModelerContextMenuProvider
+{
+    /**
+     * Constructs a context menu for the specified EditPartViewer and the Actions registered in the ActionRegistry
+     * 
+     * @param viewer the EditPartViewer
+     * @param registry the ActionRegistry
+     */
+    public SideClassContextMenuProvider(EditPartViewer viewer, ActionRegistry registry)
+    {
+        super(viewer, registry);
+    }
+
+    /**
+     * Called when the menu is about to show. Construct the context menu by adding actions common to all editparts.
+     * 
+     * @see org.eclipse.gef.ContextMenuProvider#buildContextMenu(org.eclipse.jface.action.IMenuManager)
+     */
+    public void buildContextMenu(IMenuManager manager)
+    {
+        super.buildContextMenu(manager);
+        
+        // HasView
+        if (checkAllElements(getViewer().getSelection(),hasViewEditPart.class)) {
+        	
+        	IAction action = getActionRegistry().getAction(DeleteLinkClassViewAction.ID);
+            if (action.isEnabled())
+            {
+                manager.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
+            }
+        }
+        
+        // HasAspect
+        if (checkAllElements(getViewer().getSelection(),includeEditPart.class)) {
+        	IAction action = getActionRegistry().getAction(DeleteLinkClassAspectAction.ID);
+            if (action.isEnabled())
+            {
+                manager.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
+            }
+        }
+        
+    }
+
+	private boolean checkAllElements(ISelection selection,
+			Class className) {
+		if (selection instanceof StructuredSelection) {
+			StructuredSelection ss = (StructuredSelection) selection;
+			for (Object o : ss.toList()) {
+				if (!o.getClass().equals(className)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+}
