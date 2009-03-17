@@ -159,22 +159,23 @@ public class ClassPackageItemProvider
 	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
+		
 		newChildDescriptors.add
 			(createChildParameter
 				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
 				 ClazzFactory.eINSTANCE.createClassPackage()));
-
+		/*
 		newChildDescriptors.add
 			(createChildParameter
 				(ClazzPackage.Literals.CLASS_PACKAGE__CLASS_SET,
 				 ClazzFactory.eINSTANCE.createClazz()));
-
+		
 		newChildDescriptors.add
 			(createChildParameter
 				(ClazzPackage.Literals.CLASS_PACKAGE__ASSOCIATION_SET,
@@ -194,6 +195,7 @@ public class ClassPackageItemProvider
 			(createChildParameter
 				(ClazzPackage.Literals.CLASS_PACKAGE__VIEWS,
 				 ClazzFactory.eINSTANCE.createView()));
+		*/
 	}
 
 	/**
