@@ -153,7 +153,7 @@ public class PackageItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
+/*
 		newChildDescriptors.add
 			(createChildParameter
 				(CommonPackage.Literals.PACKAGE__STEREOTYPE_SET,
@@ -162,7 +162,7 @@ public class PackageItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
-				 CommonFactory.eINSTANCE.createPackage()));
+				 CommonFactory.eINSTANCE.createPackage()));*/
 	}
 
 	/**

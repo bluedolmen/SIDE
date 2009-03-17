@@ -176,12 +176,12 @@ public class ModelElementItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
+		/*
 		newChildDescriptors.add
 			(createChildParameter
 				(CommonPackage.Literals.MODEL_ELEMENT__TAGS,
 				 CommonFactory.eINSTANCE.createTag()));
-
+*/
 		newChildDescriptors.add
 			(createChildParameter
 				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
