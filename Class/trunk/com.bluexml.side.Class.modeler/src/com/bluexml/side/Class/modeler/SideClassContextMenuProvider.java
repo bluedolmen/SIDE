@@ -22,6 +22,7 @@ import org.topcased.modeler.editor.ModelerContextMenuProvider;
 
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassAspectAction;
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassViewAction;
+import com.bluexml.side.Class.modeler.diagram.edit.hasAspectEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.hasViewEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.includeEditPart;
 
@@ -63,7 +64,7 @@ public class SideClassContextMenuProvider extends ModelerContextMenuProvider
         }
         
         // HasAspect
-        if (checkAllElements(getViewer().getSelection(),includeEditPart.class)) {
+        if (checkAllElements(getViewer().getSelection(),hasAspectEditPart.class)) {
         	IAction action = getActionRegistry().getAction(DeleteLinkClassAspectAction.ID);
             if (action.isEnabled())
             {

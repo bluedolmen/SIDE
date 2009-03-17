@@ -13,6 +13,7 @@ import org.topcased.modeler.utils.Utils;
 
 import com.bluexml.side.Class.modeler.diagram.edit.AspectEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.ClazzEditPart;
+import com.bluexml.side.Class.modeler.diagram.edit.hasAspectEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.includeEditPart;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Clazz;
@@ -45,9 +46,9 @@ public class DeleteLinkClassAspectAction extends WorkbenchPartAction implements 
     {
     	StructuredSelection ss = (StructuredSelection) this.selection;
     	for (Object o : ss.toList()) {
-    		if (o instanceof includeEditPart) {
+    		if (o instanceof hasAspectEditPart) {
 				//Get edit part and graph element
-				includeEditPart editPart = (includeEditPart) o;
+    			hasAspectEditPart editPart = (hasAspectEditPart) o;
 				GraphEdge eo = (GraphEdge) editPart.getModel();
 				
 				//Get source and target edit part

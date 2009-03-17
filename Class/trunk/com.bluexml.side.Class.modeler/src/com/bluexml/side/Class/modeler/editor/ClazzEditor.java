@@ -10,7 +10,13 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.gef.ContextMenuProvider;
+import org.eclipse.gef.DefaultEditDomain;
+import org.eclipse.gef.GraphicalViewer;
+import org.eclipse.gef.ui.actions.ActionRegistry;
+import org.eclipse.gef.ui.palette.PaletteViewer;
+import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.osgi.service.prefs.BackingStoreException;
@@ -23,6 +29,8 @@ import org.topcased.modeler.editor.ModelerGraphicalViewer;
 
 import com.bluexml.side.Class.modeler.ClazzPlugin;
 import com.bluexml.side.Class.modeler.SideClassContextMenuProvider;
+import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassAspectAction;
+import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassViewAction;
 
 /**
  * Generated Model editor
@@ -99,4 +107,40 @@ public class ClazzEditor extends Modeler {
     {
         return new SideClassContextMenuProvider(viewer, getActionRegistry());
     }
+    
+    @Override
+    protected void createActions()
+    {
+        super.createActions();
+
+        ActionRegistry registry = getActionRegistry();
+        
+        // Delete link between Class and View
+        DeleteLinkClassViewAction deleteLinkClassViewAction = new DeleteLinkClassViewAction(this);
+        registry.registerAction(deleteLinkClassViewAction);
+        getSelectionActions().add(deleteLinkClassViewAction.getId());
+        
+        // Delete link between Class and Aspect
+        DeleteLinkClassAspectAction deleteLinkToAspect = new DeleteLinkClassAspectAction(this);
+        registry.registerAction(deleteLinkToAspect);
+        getSelectionActions().add(deleteLinkToAspect.getId());
+    }
+    
+    @Override
+    protected void configureGraphicalViewer()
+    {
+        super.configureGraphicalViewer();
+
+        IAction deleteLinkClassViewAction = getActionRegistry().getAction(DeleteLinkClassViewAction.ID);
+        getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) deleteLinkClassViewAction);
+        
+        IAction deleteLinkToAspect = getActionRegistry().getAction(DeleteLinkClassAspectAction.ID);
+        getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) deleteLinkToAspect);
+    }
+    
+    public void intializeExport(GraphicalViewer viewer) {
+		setEditDomain((DefaultEditDomain) viewer.getEditDomain());
+		getEditDomain().setPaletteViewer(new PaletteViewer());
+		setGraphicalViewer(viewer);
+	}
 }
