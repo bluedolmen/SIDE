@@ -33,7 +33,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="manage" upperBound="-1"
         eType="#//TaskNode" eOpposite="#//TaskNode/swimlane"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="actorid" ordered="false"
-        unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="pooledactors" ordered="false"
         unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="clazz" ordered="false"

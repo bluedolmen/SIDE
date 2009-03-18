@@ -86,7 +86,7 @@ public interface Swimlane extends EObject {
 	 * @return the value of the '<em>Actorid</em>' attribute.
 	 * @see #setActorid(String)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getSwimlane_Actorid()
-	 * @model unique="false" ordered="false"
+	 * @model unique="false" required="true" ordered="false"
 	 * @generated
 	 */
 	String getActorid();
