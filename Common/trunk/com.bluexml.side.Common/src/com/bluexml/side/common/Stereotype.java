@@ -18,4 +18,12 @@ package com.bluexml.side.common;
  * @generated
  */
 public interface Stereotype extends NamedModelElement {
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.bluexml.com/OCL body='self.name = other.name'"
+	 * @generated
+	 */
+	boolean EqualsForMerge(Stereotype other);
 } // Stereotype

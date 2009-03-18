@@ -14,11 +14,14 @@ import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.common.Stereotype;
 import com.bluexml.side.common.Tag;
 
+import com.bluexml.side.common.util.CommonValidator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
@@ -131,6 +134,15 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 
 		// Initialize created meta-data
 		theCommonPackage.initializePackageContents();
+
+		// Register package validator
+		EValidator.Registry.INSTANCE.put
+			(theCommonPackage, 
+			 new EValidator.Descriptor() {
+				 public EValidator getEValidator() {
+					 return CommonValidator.INSTANCE;
+				 }
+			 });
 
 		// Mark meta-data to indicate it can't be changed
 		theCommonPackage.freeze();
@@ -383,14 +395,79 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		initEAttribute(getTag_Key(), ecorePackage.getEString(), "key", null, 0, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTag_Value(), ecorePackage.getEString(), "value", null, 0, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		EOperation op = addEOperation(tagEClass, ecorePackage.getEBoolean(), "equalsForMerge", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getTag(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(stereotypeEClass, Stereotype.class, "Stereotype", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		op = addEOperation(stereotypeEClass, ecorePackage.getEBoolean(), "EqualsForMerge", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getStereotype(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(packageEClass, com.bluexml.side.common.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPackage_StereotypeSet(), this.getStereotype(), null, "stereotypeSet", null, 0, -1, com.bluexml.side.common.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPackage_PackageSet(), this.getPackage(), null, "packageSet", null, 0, -1, com.bluexml.side.common.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		op = addEOperation(packageEClass, ecorePackage.getEBoolean(), "equalsForMerge", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getPackage(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// http://www.bluexml.com/OCL
+		createOCLAnnotations();
+		// http://www.eclipse.org/emf/2002/Ecore
+		createEcoreAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.bluexml.com/OCL</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createOCLAnnotations() {
+		String source = "http://www.bluexml.com/OCL";		
+		addAnnotation
+		  (tagEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "self.key = other.key"
+		   });		
+		addAnnotation
+		  (stereotypeEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "self.name = other.name"
+		   });			
+		addAnnotation
+		  (packageEClass, 
+		   source, 
+		   new String[] {
+			 "PackageNameNull", "not self.name.oclIsUndefined() and self.name <> \'\'"
+		   });		
+		addAnnotation
+		  (packageEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "self.name = other.name"
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEcoreAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore";				
+		addAnnotation
+		  (packageEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "PackageNameNull"
+		   });		
 	}
 
 } //CommonPackageImpl

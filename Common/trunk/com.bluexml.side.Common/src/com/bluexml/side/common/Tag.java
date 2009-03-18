@@ -78,4 +78,12 @@ public interface Tag extends EObject {
 	 */
 	void setValue(String value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.bluexml.com/OCL body='self.key = other.key'"
+	 * @generated
+	 */
+	boolean equalsForMerge(Tag other);
+
 } // Tag

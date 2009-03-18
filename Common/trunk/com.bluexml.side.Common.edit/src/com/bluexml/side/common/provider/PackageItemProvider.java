@@ -153,7 +153,7 @@ public class PackageItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-/*
+
 		newChildDescriptors.add
 			(createChildParameter
 				(CommonPackage.Literals.PACKAGE__STEREOTYPE_SET,
@@ -162,18 +162,7 @@ public class PackageItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
-				 CommonFactory.eINSTANCE.createPackage()));*/
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return CommonEditPlugin.INSTANCE;
+				 CommonFactory.eINSTANCE.createPackage()));
 	}
 
 }

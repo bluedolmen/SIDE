@@ -19,11 +19,36 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Tag">
+    <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.key = other.key"/>
+      </eAnnotations>
+      <eParameters name="other" eType="#//Tag"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Stereotype" eSuperTypes="#//NamedModelElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Stereotype" eSuperTypes="#//NamedModelElement">
+    <eOperations name="EqualsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.name = other.name"/>
+      </eAnnotations>
+      <eParameters name="other" eType="#//Stereotype"/>
+    </eOperations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//NamedModelElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="PackageNameNull"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="PackageNameNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
+    </eAnnotations>
+    <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.name = other.name"/>
+      </eAnnotations>
+      <eParameters name="other" eType="#//Package"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="stereotypeSet" upperBound="-1"
         eType="#//Stereotype" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="packageSet" upperBound="-1"

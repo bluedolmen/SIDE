@@ -12,11 +12,18 @@ import com.bluexml.side.common.Tag;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.ocl.EvaluationEnvironment;
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
+import org.eclipse.ocl.expressions.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -133,6 +140,45 @@ public class TagImpl extends EObjectImpl implements Tag {
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CommonPackage.TAG__VALUE, oldValue, value));
 	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean equalsForMerge(Tag other) {
+		if (equalsForMergeBodyOCL == null) {
+			EOperation eOperation = CommonPackage.Literals.TAG.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(CommonPackage.Literals.TAG, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				equalsForMergeBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(equalsForMergeBodyOCL);
+	 
+		EvaluationEnvironment<?, ?, ?, ?, ?> evalEnv = query.getEvaluationEnvironment();
+		
+		evalEnv.add("other", other);
+	  
+		return ((Boolean) query.evaluate(this)).booleanValue();
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #equalsForMerge <em>Equals For Merge</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #equalsForMerge
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> equalsForMergeBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->

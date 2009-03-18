@@ -19,10 +19,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -30,10 +27,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.ocl.ParserException;
-import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
-import org.eclipse.ocl.expressions.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -80,10 +74,6 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 	 * @ordered
 	 */
 	protected EList<Comment> comments;
-
-	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
-
-	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -237,5 +227,9 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 		}
 		return super.eIsSet(featureID);
 	}
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+
+	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 
 } //ModelElementImpl
