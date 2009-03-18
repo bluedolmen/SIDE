@@ -19,7 +19,7 @@ metamodel http://www.kerblue.org/workflow/1.0
 %>
 
 <%script type="workflow.Process" name="validatedFilename"%>
-shared/classes/alfresco/extension/BxDS/generated/bpm/model-<%name%>.xml
+shared/classes/alfresco/extension/generated/bpm/model-<%name%>.xml
 <%script type="workflow.Process" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
@@ -74,6 +74,7 @@ shared/classes/alfresco/extension/BxDS/generated/bpm/model-<%name%>.xml
 				</association>
 			<%}%>
 			</associations>
+	</type>
   <%}%>
 
  <%for (tasknode){%>
@@ -101,6 +102,7 @@ shared/classes/alfresco/extension/BxDS/generated/bpm/model-<%name%>.xml
 				</association>
 			<%}%>
 			</associations>
+	</type>
   <%}%>
     
   </types>

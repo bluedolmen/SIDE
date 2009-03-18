@@ -19,14 +19,14 @@ metamodel http://www.kerblue.org/workflow/1.0
 %>
 
 <%script type="workflow.Process" name="validatedFilename"%>
-/shared/classes/alfresco/extension/BxDS/generated/bpm/<%name%>_processdefinition.xml
+/shared/classes/alfresco/extension/generated/bpm/<%name%>_processdefinition.xml
 <%script type="workflow.Process" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <?xml version="1.0" encoding="iso-8859-1"?>
 
 <process-definition xmlns="urn:jbpm.org:jpdl-3.1" name="wfbx:<%name%>">
 
 <%for (swimlane) {%>
-  	<swimlane name="<%actorid%>">
+  	<swimlane name="<%name%>">
   		<%if (current("Process").startstate.initiator != current()) {%>
   			<%if (actorid != null){%>
   			<assignment actor-id="<%actorid%>"/>
@@ -47,26 +47,26 @@ metamodel http://www.kerblue.org/workflow/1.0
 	  		<%for (transition){%>
 	  			<%for (timer){%>
 	  			<timer name="Timer" duedate="<%duedate%>" transition="<%current("Transition").name%>">
-	  			<%for (current("Transition").action) {%>
 	  			<action class="<%javaClass.replaceAll("\"","")%>">
 	  			<%for (script) {%>
 					<script>
 						<%for (variable){%>
 							<variable name="<%name%>" access="<%access%>"/>
 						<%}%>
+						<expression>
 						<%expression%>
+						</expression>
 					</script>
-	  			<%}%>
-				</action>
 				<%}%>
+				</action>
 	  			</timer>
 	  			<%}%>	  		
 	  		<%}%>
 	  	</task>
 
-	  	<%for (transition){%>
+	  	<%for (transition.sort("condition")){%>
 	  	
-	  	<transition name="<%title%>" to="<%to.name%>">
+	  	<transition name="<%name%>" to="<%to.name%>">
 	  		<%for (action) {%>
 	  			<action class="<%javaClass.replaceAll("\"","")%>">
 	  			<%for (script) {%>
@@ -74,7 +74,9 @@ metamodel http://www.kerblue.org/workflow/1.0
 						<%for (variable){%>
 							<variable name="<%name%>" access="<%access%>"/>
 						<%}%>
+						<expression>
 						<%expression%>
+						</expression>
 					</script>
 	  			<%}%>
 				</action>
@@ -104,7 +106,9 @@ metamodel http://www.kerblue.org/workflow/1.0
 						<%for (variable){%>
 							<variable name="<%name%>" access="<%access%>"/>
 						<%}%>
+						<expression>
 						<%expression%>
+						</expression>
 					</script>
 	  			<%}%>
 			</action>
@@ -115,26 +119,26 @@ metamodel http://www.kerblue.org/workflow/1.0
 		 <%for (transition){%>
 	  			<%for (timer){%>
 	  			<timer name="Timer" duedate="<%duedate%>" transition="<%current("Transition").name%>">
-	  			<%for (current("Transition").action) {%>
 	  			<action class="<%javaClass.replaceAll("\"","")%>">
 	  			<%for (script) {%>
 					<script>
 						<%for (variable){%>
 							<variable name="<%name%>" access="<%access%>"/>
 						<%}%>
+						<expression>
 						<%expression%>
+						</expression>
 					</script>
-	  			<%}%>
-				</action>
 				<%}%>
+				</action>
 	  			</timer>
 	  			<%}%>	  		
 	  		<%}%>
 	  	</task>
 
-	  	<%for (transition){%>
+	  	<%for (transition.sort("condition")){%>
 	  	
-	  	<transition name="<%title%>" to="<%to.name%>">
+	  	<transition name="<%name%>" to="<%to.name%>">
 	  		<%for (action) {%>
 	  			<action class="<%javaClass.replaceAll("\"","")%>">
 	  			<%for (script) {%>
@@ -142,7 +146,9 @@ metamodel http://www.kerblue.org/workflow/1.0
 						<%for (variable){%>
 							<variable name="<%name%>" access="<%access%>"/>
 						<%}%>
+						<expression>
 						<%expression%>
+						</expression>
 					</script>
 	  			<%}%>
 				</action>
@@ -167,7 +173,9 @@ metamodel http://www.kerblue.org/workflow/1.0
 						<%for (variable){%>
 							<variable name="<%name%>" access="<%access%>"/>
 						<%}%>
+						<expression>
 						<%expression%>
+						</expression>
 					</script>
 	  			<%}%>
 			</action>
@@ -178,26 +186,25 @@ metamodel http://www.kerblue.org/workflow/1.0
 		 <%for (transition){%>
 	  			<%for (timer){%>
 	  			<timer name="Timer" duedate="<%duedate%>" transition="<%current("Transition").name%>">
-	  			<%for (current("Transition").action) {%>
 	  			<action class="<%javaClass.replaceAll("\"","")%>">
 	  			<%for (script) {%>
 					<script>
 						<%for (variable){%>
 							<variable name="<%name%>" access="<%access%>"/>
 						<%}%>
+						<expression>
 						<%expression%>
+						</expression>
 					</script>
-	  			<%}%>
-				</action>
 				<%}%>
+				</action>
 	  			</timer>
 	  			<%}%>	  		
 	  		<%}%>
-	  	</task>
 
-	  	<%for (transition){%>
+	  	<%for (transition.sort("condition")){%>
 	  	
-	  	<transition name="<%title%>" to="<%to.name%>">
+	  	<transition name="<%name%>" to="<%to.name%>">
 	  		<%for (action) {%>
 	  			<action class="<%javaClass.replaceAll("\"","")%>">
 	  			<%for (script) {%>
@@ -205,7 +212,9 @@ metamodel http://www.kerblue.org/workflow/1.0
 						<%for (variable){%>
 							<variable name="<%name%>" access="<%access%>"/>
 						<%}%>
+						<expression>
 						<%expression%>
+						</expression>
 					</script>
 	  			<%}%>
 				</action>
@@ -221,9 +230,9 @@ metamodel http://www.kerblue.org/workflow/1.0
 
 <%for (join){%>
 	<join name="<%name%>">
-		<%for (transition){%>
+		<%for (transition.sort("condition")){%>
 	  	
-		<transition name="<%to.name%>" to="<%to.name%>">
+		<transition name="<%name%>" to="<%to.name%>">
 	  		<%for (action) {%>
 	  			<action class="<%javaClass.replaceAll("\"","")%>">
 	  			<%for (script) {%>
@@ -231,7 +240,9 @@ metamodel http://www.kerblue.org/workflow/1.0
 						<%for (variable){%>
 							<variable name="<%name%>" access="<%access%>"/>
 						<%}%>
+						<expression>
 						<%expression%>
+						</expression>
 					</script>
 	  			<%}%>
 				</action>
@@ -244,9 +255,9 @@ metamodel http://www.kerblue.org/workflow/1.0
 	</join>
 <%}%>
 
-<%for (join){%>
+<%for (fork){%>
 	<fork name="<%name%>">
-		<%for (transition){%>
+		<%for (transition.sort("condition")){%>
 	  	
 		<transition name="<%to.name%>" to="<%to.name%>">
 	  		<%for (action) {%>
@@ -256,7 +267,9 @@ metamodel http://www.kerblue.org/workflow/1.0
 						<%for (variable){%>
 							<variable name="<%name%>" access="<%access%>"/>
 						<%}%>
+						<expression>
 						<%expression%>
+						</expression>
 					</script>
 	  			<%}%>
 				</action>
@@ -272,7 +285,7 @@ metamodel http://www.kerblue.org/workflow/1.0
 
 <%for (decision){%>
 	<decision name="<%name%>">
-		<%for (transition){%>
+		<%for (transition.sort("condition")){%>
 	  	
 		<transition name="<%to.name%>" to="<%to.name%>">
 	  		<%for (action) {%>
@@ -282,7 +295,9 @@ metamodel http://www.kerblue.org/workflow/1.0
 						<%for (variable){%>
 							<variable name="<%name%>" access="<%access%>"/>
 						<%}%>
+						<expression>
 						<%expression%>
+						</expression>
 					</script>
 	  			<%}%>
 				</action>
@@ -293,6 +308,34 @@ metamodel http://www.kerblue.org/workflow/1.0
 	  	</transition>
 	  	<%}%>
 	</decision>
+<%}%>
+
+<%for (processstate){%>
+	<process-state name="<%name%>">
+		<sub-process name="<%subprocess.name%>"/>
+		<%for (transition.sort("condition")){%>
+	  	
+		<transition name="<%to.name%>" to="<%to.name%>">
+	  		<%for (action) {%>
+	  			<action class="<%javaClass.replaceAll("\"","")%>">
+	  			<%for (script) {%>
+					<script>
+						<%for (variable){%>
+							<variable name="<%name%>" access="<%access%>"/>
+						<%}%>
+						<expression>
+						<%expression%>
+						</expression>
+					</script>
+	  			<%}%>
+				</action>
+			<%}%>
+	  	<%if (condition != null && condition.length()>0){%>
+	  	<condition><%condition%></condition>
+      	<%}%>
+	  	</transition>
+	  	<%}%>
+	</process-state>
 <%}%>
 
 </process-definition>

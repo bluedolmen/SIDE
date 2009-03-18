@@ -30,7 +30,7 @@ shared/classes/alfresco/extension/workflow-<%name%>-context.xml
 			<list>
 				<props>
 					<prop key="engineId">jbpm</prop>
-					<prop key="location">alfresco/extension/BxDS/generated/bpm/<%name%>_processdefinition.xml</prop>
+					<prop key="location">alfresco/extension/generated/bpm/<%name%>_processdefinition.xml</prop>
 					<prop key="mimetype">text/xml</prop>
 					<prop key="redeploy">true</prop>
 				</props>
@@ -38,12 +38,12 @@ shared/classes/alfresco/extension/workflow-<%name%>-context.xml
 		</property>
 		<property name="models">
 			<list>
-                <value>alfresco/extension/BxDS/generated/bpm/model-<%name%>.xml</value>
+                <value>alfresco/extension/generated/bpm/model-<%name%>.xml</value>
 			</list>
 		</property>
 		<property name="labels">
 			<list>
-                <value>alfresco/extension/BxDS/generated/bpm/workflow-<%name%>-messages</value>
+                <value>alfresco/extension/generated/bpm/workflow-<%name%>-messages</value>
 			</list>
 		</property>
 	</bean>
