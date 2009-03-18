@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link com.bluexml.side.clazz.Enumeration#getLiterals <em>Literals</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Enumeration#getIsDynamic <em>Is Dynamic</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.Enumeration#getDepends <em>Depends</em>}</li>
  * </ul>
  * </p>
  *
@@ -70,5 +71,31 @@ public interface Enumeration extends NamedClassModelElement {
 	 * @generated
 	 */
 	void setIsDynamic(Boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Depends</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Depends</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Depends</em>' reference.
+	 * @see #setDepends(Enumeration)
+	 * @see com.bluexml.side.clazz.ClazzPackage#getEnumeration_Depends()
+	 * @model
+	 * @generated
+	 */
+	Enumeration getDepends();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.clazz.Enumeration#getDepends <em>Depends</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Depends</em>' reference.
+	 * @see #getDepends()
+	 * @generated
+	 */
+	void setDepends(Enumeration value);
 
 } // Enumeration

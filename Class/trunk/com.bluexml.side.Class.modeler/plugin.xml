@@ -18,8 +18,8 @@
       <wizard
             icon="icons/Clazz.gif"
             class="com.bluexml.side.Class.modeler.wizards.NewClazzDiagrams"
-            category="org.topcased.facilities.newWizards/org.topcased.modeler.newdiagram"
-            name="Clazz Diagram"
+            category="com.bluexml.side.modeler.category.ID"
+            name="Class Diagram"
             id="com.bluexml.side.Class.modeler.wizards.NewClazzDiagrams">
          <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>
@@ -64,10 +64,11 @@
    </extension>
    
    <extension point="org.topcased.modeler.diagrams">
-      <diagram
+      <diagram 
             configuration="com.bluexml.side.Class.modeler.diagram.CdConfiguration"
             id="com.bluexml.side.Class.modeler.diagram"
             name="Class Diagram">
+            	<enableFor class="com.bluexml.side.clazz.ClassPackage"/>
       </diagram>
 	</extension>
 </plugin>

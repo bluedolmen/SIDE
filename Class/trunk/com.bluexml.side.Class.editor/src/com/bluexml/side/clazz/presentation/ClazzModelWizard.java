@@ -75,7 +75,9 @@ import org.eclipse.ui.part.ISetSelectionTarget;
 
 import com.bluexml.side.clazz.ClazzFactory;
 import com.bluexml.side.clazz.ClazzPackage;
+import com.bluexml.side.clazz.impl.ClassPackageImpl;
 import com.bluexml.side.clazz.provider.ClassEditPlugin;
+import com.bluexml.side.clazz.provider.ClassPackageItemProvider;
 
 
 import org.eclipse.core.runtime.Path;
@@ -192,6 +194,8 @@ public class ClazzModelWizard extends Wizard implements INewWizard {
 	protected Collection<String> getInitialObjectNames() {
 		if (initialObjectNames == null) {
 			initialObjectNames = new ArrayList<String>();
+			initialObjectNames.add(clazzPackage.getClassPackage().getName());
+			/*
 			for (EClassifier eClassifier : clazzPackage.getEClassifiers()) {
 				if (eClassifier instanceof EClass) {
 					EClass eClass = (EClass)eClassifier;
@@ -199,7 +203,7 @@ public class ClazzModelWizard extends Wizard implements INewWizard {
 						initialObjectNames.add(eClass.getName());
 					}
 				}
-			}
+			}*/
 			Collections.sort(initialObjectNames, CommonPlugin.INSTANCE.getComparator());
 		}
 		return initialObjectNames;

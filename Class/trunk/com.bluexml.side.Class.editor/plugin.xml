@@ -14,14 +14,14 @@
   <extension
     point = "org.eclipse.ui.newWizards">
     <category
-      id = "org.eclipse.emf.ecore.Wizard.category.ID"
+      id = "com.bluexml.side.modeler.category.ID"
       name="%_UI_Wizard_category">
     </category>
     <wizard
       id = "com.bluexml.side.clazz.presentation.ClazzModelWizardID"
       name = "%_UI_ClazzModelWizard_label"
       class = "com.bluexml.side.clazz.presentation.ClazzModelWizard"
-      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      category = "com.bluexml.side.modeler.category.ID"
       icon = "icons/full/obj16/ClazzModelFile.gif">
       <description>%_UI_ClazzModelWizard_description</description>
       <selection class = "org.eclipse.core.resources.IResource" />

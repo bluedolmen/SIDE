@@ -29,6 +29,8 @@ import org.topcased.modeler.editor.ModelerGraphicalViewer;
 
 import com.bluexml.side.Class.modeler.ClazzPlugin;
 import com.bluexml.side.Class.modeler.SideClassContextMenuProvider;
+import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassGeneralizationAction;
+import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkEnumerationDependsAction;
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassAspectAction;
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassViewAction;
 
@@ -124,6 +126,16 @@ public class ClazzEditor extends Modeler {
         DeleteLinkClassAspectAction deleteLinkToAspect = new DeleteLinkClassAspectAction(this);
         registry.registerAction(deleteLinkToAspect);
         getSelectionActions().add(deleteLinkToAspect.getId());
+        
+        // Delete link between Enumerations (depends)
+        DeleteLinkEnumerationDependsAction deleteEnumerationDependsAction = new DeleteLinkEnumerationDependsAction(this);
+        registry.registerAction(deleteEnumerationDependsAction);
+        getSelectionActions().add(deleteEnumerationDependsAction.getId());
+        
+        // Delete generalization between Class
+        DeleteLinkClassGeneralizationAction deleteLinkClassGeneralizationAction = new DeleteLinkClassGeneralizationAction(this);
+        registry.registerAction(deleteLinkClassGeneralizationAction);
+        getSelectionActions().add(deleteLinkClassGeneralizationAction.getId());
     }
     
     @Override
@@ -136,6 +148,12 @@ public class ClazzEditor extends Modeler {
         
         IAction deleteLinkToAspect = getActionRegistry().getAction(DeleteLinkClassAspectAction.ID);
         getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) deleteLinkToAspect);
+        
+        IAction deleteEnumerationDependsAction = getActionRegistry().getAction(DeleteLinkEnumerationDependsAction.ID);
+        getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) deleteEnumerationDependsAction);
+        
+        IAction deleteLinkClassGeneralizationAction = getActionRegistry().getAction(DeleteLinkClassGeneralizationAction.ID);
+        getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) deleteLinkClassGeneralizationAction);
     }
     
     public void intializeExport(GraphicalViewer viewer) {

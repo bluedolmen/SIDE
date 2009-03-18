@@ -13,13 +13,14 @@ import org.topcased.modeler.utils.Utils;
 
 import com.bluexml.side.Class.modeler.diagram.edit.AspectEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.ClazzEditPart;
+import com.bluexml.side.Class.modeler.diagram.edit.GeneralizationEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.hasAspectEditPart;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Clazz;
 
-public class DeleteLinkClassAspectAction extends WorkbenchPartAction implements ISelectionChangedListener
+public class DeleteLinkClassGeneralizationAction extends WorkbenchPartAction implements ISelectionChangedListener
 {
-	public static String ID = "Unlink Aspect";
+	public static String ID = "Unlink Generalization";
 	
     /**
      * The selected EditPart object
@@ -29,37 +30,36 @@ public class DeleteLinkClassAspectAction extends WorkbenchPartAction implements 
     /**
      * @param part
      */
-    public DeleteLinkClassAspectAction(IWorkbenchPart part)
+    public DeleteLinkClassGeneralizationAction(IWorkbenchPart part)
     {
         super(part);
-        //setImageDescriptor(OblPlugin.getImageDescriptor("icons/actions/add.gif"));
     }
     
     protected void init()
     {
         setId(ID);
-        setText("Unlink Aspect");
+        setText("Unlink Generalization");
     }
 
     public void run()
     {
     	StructuredSelection ss = (StructuredSelection) this.selection;
     	for (Object o : ss.toList()) {
-    		if (o instanceof hasAspectEditPart) {
+    		if (o instanceof GeneralizationEditPart) {
 				//Get edit part and graph element
-    			hasAspectEditPart editPart = (hasAspectEditPart) o;
+    			GeneralizationEditPart editPart = (GeneralizationEditPart) o;
 				GraphEdge eo = (GraphEdge) editPart.getModel();
 				
 				//Get source and target edit part
-				ClazzEditPart cep = (ClazzEditPart) editPart.getSource();
-				AspectEditPart aep = (AspectEditPart) editPart.getTarget();
+				ClazzEditPart sp = (ClazzEditPart) editPart.getSource();
+				ClazzEditPart tp = (ClazzEditPart) editPart.getTarget();
 				
 				//Get source and target model element
-				Clazz c = (Clazz) Utils.getElement((GraphElement) cep.getModel());
-				Aspect a = (Aspect) Utils.getElement((GraphElement) aep.getModel());
+				Clazz cs = (Clazz) Utils.getElement((GraphElement) sp.getModel());
+				Clazz ct = (Clazz) Utils.getElement((GraphElement) tp.getModel());
 				
 				//Remove aspect from class
-				c.getAspects().remove(a);
+				cs.getGeneralizations().remove(ct);
 				
 				//Create delete command and execute it
 				DeleteGraphElementCommand cmd = new DeleteGraphElementCommand(eo,true);

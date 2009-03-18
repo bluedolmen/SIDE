@@ -123,4 +123,10 @@ public interface CdEditPolicyConstants {
 	 */
 	String HASASPECT_EDITPOLICY = "hasAspect EditPolicy";
 
+	/**
+	 * The key used to install an <i>depends</i> EditPolicy.
+	 * @generated
+	 */
+	String DEPENDS_EDITPOLICY = "depends EditPolicy";
+
 }

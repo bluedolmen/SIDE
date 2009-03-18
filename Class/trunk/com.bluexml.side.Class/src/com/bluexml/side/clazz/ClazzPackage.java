@@ -1161,13 +1161,22 @@ public interface ClazzPackage extends EPackage {
 	int ENUMERATION__IS_DYNAMIC = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Depends</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION__DEPENDS = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Enumeration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION_FEATURE_COUNT = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int ENUMERATION_FEATURE_COUNT = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.EnumerationLiteralImpl <em>Enumeration Literal</em>}' class.
@@ -2318,6 +2327,17 @@ public interface ClazzPackage extends EPackage {
 	EAttribute getEnumeration_IsDynamic();
 
 	/**
+	 * Returns the meta object for the reference '{@link com.bluexml.side.clazz.Enumeration#getDepends <em>Depends</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Depends</em>'.
+	 * @see com.bluexml.side.clazz.Enumeration#getDepends()
+	 * @see #getEnumeration()
+	 * @generated
+	 */
+	EReference getEnumeration_Depends();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.clazz.EnumerationLiteral <em>Enumeration Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3117,6 +3137,14 @@ public interface ClazzPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ENUMERATION__IS_DYNAMIC = eINSTANCE.getEnumeration_IsDynamic();
+
+		/**
+		 * The meta object literal for the '<em><b>Depends</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENUMERATION__DEPENDS = eINSTANCE.getEnumeration_Depends();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.EnumerationLiteralImpl <em>Enumeration Literal</em>}' class.

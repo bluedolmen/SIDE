@@ -117,5 +117,5 @@ public interface ClassPackage extends com.bluexml.side.common.Package {
 	 * @generated
 	 */
 	String getFullName();
-
+		
 } // ClassPackage

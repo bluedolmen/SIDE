@@ -106,17 +106,6 @@ public class CdCreationUtils extends AbstractCreationUtils {
 		}
 
 		/**
-		 * @see com.bluexml.side.clazz.util.ClazzSwitch#caseOperation(com.bluexml.side.clazz.Operation)
-		 * @generated
-		 */
-		public Object caseOperation(com.bluexml.side.clazz.Operation object) {
-			if ("default".equals(presentation)) {
-				return createGraphElementOperation(object, presentation);
-			}
-			return null;
-		}
-
-		/**
 		 * @see com.bluexml.side.clazz.util.ClazzSwitch#caseEnumeration(com.bluexml.side.clazz.Enumeration)
 		 * @generated
 		 */
@@ -238,17 +227,6 @@ public class CdCreationUtils extends AbstractCreationUtils {
 	 */
 	protected GraphElement createGraphElementAttribute(
 			com.bluexml.side.clazz.Attribute element, String presentation) {
-		return createGraphNode(element, presentation);
-	}
-
-	/**
-	 * @param element the model element
-	 * @param presentation the presentation of the graphical element
-	 * @return the complete GraphElement
-	 * @generated
-	 */
-	protected GraphElement createGraphElementOperation(
-			com.bluexml.side.clazz.Operation element, String presentation) {
 		return createGraphNode(element, presentation);
 	}
 

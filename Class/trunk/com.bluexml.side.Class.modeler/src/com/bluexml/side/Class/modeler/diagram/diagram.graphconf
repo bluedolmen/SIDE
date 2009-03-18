@@ -249,5 +249,14 @@
         lineStyle="SOLID">
         <bridge xsi:type="graphconf:StringBridge" type="hasAspect"/>
     </edge>
+    <edge
+        presentation="default"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Segoe UI-regular-9"
+        defaultRouter="ObliqueRouter"
+        lineWidth="1"
+        lineStyle="DASHDOT">
+        <bridge xsi:type="graphconf:StringBridge" type="depends"/>
+    </edge>
 </graphconf:DiagramGraphConf>
 

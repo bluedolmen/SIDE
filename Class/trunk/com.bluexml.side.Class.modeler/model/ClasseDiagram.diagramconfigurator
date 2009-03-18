@@ -5,7 +5,6 @@
       <items xmi:id="_yP16Q3cBEdyUwq_XzqQQrw" name="Class" part="_yP16T3cBEdyUwq_XzqQQrw"/>
       <items xmi:id="_DyyzoHcCEdyUwq_XzqQQrw" name="Aspect" part="_2n-_MHcBEdyUwq_XzqQQrw"/>
       <items xmi:id="_yP16RHcBEdyUwq_XzqQQrw" name="Property" part="_yP16UHcBEdyUwq_XzqQQrw"/>
-      <items xmi:id="_yP16RXcBEdyUwq_XzqQQrw" name="Operation" part="_yP16UXcBEdyUwq_XzqQQrw"/>
       <items xmi:id="_yP16RncBEdyUwq_XzqQQrw" name="Stereotype" part="_yP16TncBEdyUwq_XzqQQrw"/>
       <items xmi:id="_yP16R3cBEdyUwq_XzqQQrw" name="Comment" part="_yP16UncBEdyUwq_XzqQQrw"/>
       <items xmi:id="_lcsD0KSTEdyN7Noj7sl7yA" name="Enumeration" part="_fpn6AHsHEdyp6M5rXUMfSA"/>
@@ -17,9 +16,9 @@
       <items xmi:id="_yP16SncBEdyUwq_XzqQQrw" name="Generalization" part="_6boWkA4hEd6vHfpmvyY_hg"/>
       <items xmi:id="_yP16S3cBEdyUwq_XzqQQrw" name="Is commented" part="_yP_ENHcBEdyUwq_XzqQQrw"/>
       <items xmi:id="_yP16THcBEdyUwq_XzqQQrw" name="Is stereotyped" part="_yP_EN3cBEdyUwq_XzqQQrw"/>
-      <items xmi:id="_yP16TXcBEdyUwq_XzqQQrw" name="Is association class" part="_yP_EO3cBEdyUwq_XzqQQrw"/>
       <items xmi:id="_tizmkKy7EdyIeNPv3dqFqw" name="Has view" part="_tHziEKy6EdyIeNPv3dqFqw"/>
       <items xmi:id="_pEAaIA_nEd6WE5atyWwk_g" name="hasAspect" part="_kRcDAA_nEd6WE5atyWwk_g"/>
+      <items xmi:id="_LFOLgBOzEd6rfbeEUErmOQ" name="Depends of" part="_GzJ5YBOzEd6rfbeEUErmOQ"/>
     </paletteCategories>
   </palette>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_yP16TncBEdyUwq_XzqQQrw" object="_yP_EP3cBEdyUwq_XzqQQrw" type="Container With Inner Label" defaultBackgroundColor="191,249,217" defaultWidth="-1" defaultHeight="-1" minimumWidth="50" maximumHeight="20"/>
@@ -93,6 +92,11 @@
       <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//Clazz/aspects"/>
     </sourceTargetCouple>
   </parts>
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_GzJ5YBOzEd6rfbeEUErmOQ" object="_FWBNABOzEd6rfbeEUErmOQ" lineStyle="DASHDOT" targetDecoration="ARROW">
+    <sourceTargetCouple xmi:id="_KLcq4BOzEd6rfbeEUErmOQ" sourceNode="_fpn6AHsHEdyp6M5rXUMfSA" targetNode="_fpn6AHsHEdyp6M5rXUMfSA">
+      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//Enumeration/depends"/>
+    </sourceTargetCouple>
+  </parts>
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_yP_EP3cBEdyUwq_XzqQQrw">
     <genClass href="../../com.bluexml.side.Common/model/Common.genmodel#//common/Stereotype"/>
   </objects>
@@ -133,6 +137,7 @@
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_NPn6cHcCEdyUwq_XzqQQrw" name="include"/>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_uDaOsKy6EdyIeNPv3dqFqw" name="hasView"/>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_h7wlEA_nEd6WE5atyWwk_g" name="hasAspect"/>
+  <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_FWBNABOzEd6rfbeEUErmOQ" name="depends"/>
   <genModel href="../../com.bluexml.side.Class/model/Class.genmodel#/"/>
   <templateRootObject href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/ClassPackage"/>
   <editorConfigurator href="Class.editorconfigurator#_zVIHUHcBEdyUwq_XzqQQrw"/>

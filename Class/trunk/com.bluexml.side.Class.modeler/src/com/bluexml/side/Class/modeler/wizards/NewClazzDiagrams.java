@@ -60,7 +60,7 @@ public class NewClazzDiagrams extends Wizard implements INewWizard {
 		setDefaultPageImageDescriptor(ClazzImageRegistry
 				.getImageDescriptor("NEW_PAGE_WZD"));
 		setDialogSettings(ClazzPlugin.getDefault().getDialogSettings());
-		setWindowTitle("Create new Clazz diagrams");
+		setWindowTitle("Create new Class diagrams");
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class NewClazzDiagrams extends Wizard implements INewWizard {
 	 */
 	public void addPages() {
 		diagPage = new ClazzDiagramsPage("New Class Modeler Diagram", selection);
-		diagPage.setTitle("Clazz Diagrams");
+		diagPage.setTitle("Class Diagrams");
 		diagPage.setDescription("Define the model diagram informations.");
 		addPage(diagPage);
 	}

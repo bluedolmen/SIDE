@@ -36,6 +36,7 @@ import org.eclipse.ocl.ecore.OCL;
  * <ul>
  *   <li>{@link com.bluexml.side.clazz.impl.EnumerationImpl#getLiterals <em>Literals</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.EnumerationImpl#getIsDynamic <em>Is Dynamic</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.impl.EnumerationImpl#getDepends <em>Depends</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,6 +72,16 @@ public class EnumerationImpl extends NamedClassModelElementImpl implements Enume
 	 * @ordered
 	 */
 	protected Boolean isDynamic = IS_DYNAMIC_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getDepends() <em>Depends</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDepends()
+	 * @generated
+	 * @ordered
+	 */
+	protected Enumeration depends;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -129,6 +140,44 @@ public class EnumerationImpl extends NamedClassModelElementImpl implements Enume
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Enumeration getDepends() {
+		if (depends != null && depends.eIsProxy()) {
+			InternalEObject oldDepends = (InternalEObject)depends;
+			depends = (Enumeration)eResolveProxy(oldDepends);
+			if (depends != oldDepends) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClazzPackage.ENUMERATION__DEPENDS, oldDepends, depends));
+			}
+		}
+		return depends;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Enumeration basicGetDepends() {
+		return depends;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDepends(Enumeration newDepends) {
+		Enumeration oldDepends = depends;
+		depends = newDepends;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.ENUMERATION__DEPENDS, oldDepends, depends));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -165,6 +214,9 @@ public class EnumerationImpl extends NamedClassModelElementImpl implements Enume
 				return getLiterals();
 			case ClazzPackage.ENUMERATION__IS_DYNAMIC:
 				return getIsDynamic();
+			case ClazzPackage.ENUMERATION__DEPENDS:
+				if (resolve) return getDepends();
+				return basicGetDepends();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -185,6 +237,9 @@ public class EnumerationImpl extends NamedClassModelElementImpl implements Enume
 			case ClazzPackage.ENUMERATION__IS_DYNAMIC:
 				setIsDynamic((Boolean)newValue);
 				return;
+			case ClazzPackage.ENUMERATION__DEPENDS:
+				setDepends((Enumeration)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -203,6 +258,9 @@ public class EnumerationImpl extends NamedClassModelElementImpl implements Enume
 			case ClazzPackage.ENUMERATION__IS_DYNAMIC:
 				setIsDynamic(IS_DYNAMIC_EDEFAULT);
 				return;
+			case ClazzPackage.ENUMERATION__DEPENDS:
+				setDepends((Enumeration)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -219,6 +277,8 @@ public class EnumerationImpl extends NamedClassModelElementImpl implements Enume
 				return literals != null && !literals.isEmpty();
 			case ClazzPackage.ENUMERATION__IS_DYNAMIC:
 				return IS_DYNAMIC_EDEFAULT == null ? isDynamic != null : !IS_DYNAMIC_EDEFAULT.equals(isDynamic);
+			case ClazzPackage.ENUMERATION__DEPENDS:
+				return depends != null;
 		}
 		return super.eIsSet(featureID);
 	}

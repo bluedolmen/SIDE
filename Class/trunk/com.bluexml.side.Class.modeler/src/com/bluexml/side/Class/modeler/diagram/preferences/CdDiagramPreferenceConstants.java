@@ -326,4 +326,22 @@ public interface CdDiagramPreferenceConstants {
 	 */
 	String HASASPECT_EDGE_DEFAULT_ROUTER = "hasAspect Edge Default Router";
 
+	/**
+	 * The key used to install a <i>depends Edge Default Font</i> Preference.
+	 * @generated
+	 */
+	String DEPENDS_EDGE_DEFAULT_FONT = "depends Edge Default Font";
+
+	/**
+	 * The key used to install a <i>depends Edge Default Foreground Color</i> Preference.
+	 * @generated
+	 */
+	String DEPENDS_EDGE_DEFAULT_FOREGROUND_COLOR = "depends Edge Default Foreground Color";
+
+	/**
+	 * The key used to install a <i>depends Edge Default Router</i> Preference.
+	 * @generated
+	 */
+	String DEPENDS_EDGE_DEFAULT_ROUTER = "depends Edge Default Router";
+
 }

@@ -116,12 +116,6 @@ public class CdPaletteManager extends ModelerPaletteManager {
 				CdImageRegistry.getImageDescriptor("ATTRIBUTE_LARGE")));
 
 		factory = new GraphElementCreationFactory(creationUtils,
-				ClazzPackage.eINSTANCE.getOperation(), "default");
-		entries.add(new ModelerCreationToolEntry("Operation", "Operation",
-				factory, CdImageRegistry.getImageDescriptor("OPERATION"),
-				CdImageRegistry.getImageDescriptor("OPERATION_LARGE")));
-
-		factory = new GraphElementCreationFactory(creationUtils,
 				CommonPackage.eINSTANCE.getStereotype(), "default");
 		entries.add(new ModelerCreationToolEntry("Stereotype", "Stereotype",
 				factory, CdImageRegistry.getImageDescriptor("STEREOTYPE"),
@@ -201,17 +195,6 @@ public class CdPaletteManager extends ModelerPaletteManager {
 						.getImageDescriptor("ISSTEREOTYPED_LARGE")));
 
 		factory = new GraphElementCreationFactory(creationUtils,
-				CdSimpleObjectConstants.SIMPLE_OBJECT_ISASSOCIATIONCLASS,
-				"default", false);
-		entries
-				.add(new ModelerConnectionCreationToolEntry(
-						"Is association class", "Is association class",
-						factory, CdImageRegistry
-								.getImageDescriptor("ISASSOCIATIONCLASS"),
-						CdImageRegistry
-								.getImageDescriptor("ISASSOCIATIONCLASS_LARGE")));
-
-		factory = new GraphElementCreationFactory(creationUtils,
 				CdSimpleObjectConstants.SIMPLE_OBJECT_HASVIEW, "default", false);
 		entries.add(new ModelerConnectionCreationToolEntry("Has view",
 				"Has view", factory, CdImageRegistry
@@ -225,6 +208,13 @@ public class CdPaletteManager extends ModelerPaletteManager {
 				"hasAspect", factory, CdImageRegistry
 						.getImageDescriptor("HASASPECT"), CdImageRegistry
 						.getImageDescriptor("HASASPECT_LARGE")));
+
+		factory = new GraphElementCreationFactory(creationUtils,
+				CdSimpleObjectConstants.SIMPLE_OBJECT_DEPENDS, "default", false);
+		entries.add(new ModelerConnectionCreationToolEntry("Depends of",
+				"Depends of", factory, CdImageRegistry
+						.getImageDescriptor("DEPENDS"), CdImageRegistry
+						.getImageDescriptor("DEPENDS_LARGE")));
 
 		linksDrawer.addAll(entries);
 		getRoot().add(linksDrawer);

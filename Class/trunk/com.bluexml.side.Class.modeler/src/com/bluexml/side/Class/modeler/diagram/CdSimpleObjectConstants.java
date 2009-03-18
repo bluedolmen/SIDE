@@ -57,4 +57,9 @@ public interface CdSimpleObjectConstants {
 	 * @generated
 	 */
 	String SIMPLE_OBJECT_HASASPECT = "hasAspect";
+	/**
+	 * The name that identify the <i>depends</i> SimpleObject.
+	 * @generated
+	 */
+	String SIMPLE_OBJECT_DEPENDS = "depends";
 }

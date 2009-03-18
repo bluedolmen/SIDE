@@ -44,11 +44,13 @@ import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
 import com.bluexml.side.Class.modeler.diagram.CdConfiguration;
+import com.bluexml.side.Class.modeler.diagram.CdEditPolicyConstants;
 import com.bluexml.side.Class.modeler.diagram.commands.EnumerationRestoreConnectionCommand;
 import com.bluexml.side.Class.modeler.diagram.commands.update.EnumerationUpdateCommand;
 import com.bluexml.side.Class.modeler.diagram.dialogs.EnumerationEditDialog;
 import com.bluexml.side.Class.modeler.diagram.figures.EnumerationFigure;
 import com.bluexml.side.Class.modeler.diagram.policies.EnumerationLayoutEditPolicy;
+import com.bluexml.side.Class.modeler.diagram.policies.dependsEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.preferences.CdDiagramPreferenceConstants;
 import com.bluexml.side.clazz.Enumeration;
 
@@ -76,6 +78,9 @@ public class EnumerationEditPart extends EMFGraphNodeEditPart {
 	 */
 	protected void createEditPolicies() {
 		super.createEditPolicies();
+
+		installEditPolicy(CdEditPolicyConstants.DEPENDS_EDITPOLICY,
+				new dependsEdgeCreationEditPolicy());
 
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {

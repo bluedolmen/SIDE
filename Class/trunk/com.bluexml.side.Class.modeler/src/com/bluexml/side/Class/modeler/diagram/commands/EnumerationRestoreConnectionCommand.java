@@ -14,8 +14,15 @@
  ******************************************************************************/
 package com.bluexml.side.Class.modeler.diagram.commands;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.topcased.modeler.commands.AbstractRestoreConnectionCommand;
+import org.topcased.modeler.di.model.GraphEdge;
+import org.topcased.modeler.di.model.GraphElement;
+import org.topcased.modeler.utils.Utils;
+
+import com.bluexml.side.Class.modeler.diagram.CdSimpleObjectConstants;
+import com.bluexml.side.clazz.Enumeration;
 
 /**
  * Enumeration restore connection command
@@ -38,7 +45,53 @@ public class EnumerationRestoreConnectionCommand extends
 	 */
 	protected void initializeCommands() {
 
-		// Do nothing
+		GraphElement graphElementSrc = getGraphElement();
+		EObject eObjectSrc = Utils.getElement(graphElementSrc);
+
+		if (eObjectSrc instanceof Enumeration) {
+			for (GraphElement graphElementTgt : getAllGraphElements()) {
+				boolean autoRef = graphElementTgt.equals(graphElementSrc);
+
+				EObject eObjectTgt = Utils.getElement(graphElementTgt);
+				if (eObjectTgt instanceof Enumeration) {
+					if (autoRef) {
+						// autoRef not allowed
+					} else {
+						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
+						createdependsFromEnumerationToEnumeration(
+								graphElementSrc, graphElementTgt);
+						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
+						createdependsFromEnumerationToEnumeration(
+								graphElementTgt, graphElementSrc);
+					}
+				}
+
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
+	private void createdependsFromEnumerationToEnumeration(GraphElement srcElt,
+			GraphElement targetElt) {
+		Enumeration sourceObject = (Enumeration) Utils.getElement(srcElt);
+		Enumeration targetObject = (Enumeration) Utils.getElement(targetElt);
+
+		if (targetObject.equals(sourceObject.getDepends())) {
+			// check if the relation does not exists yet
+			if (getExistingEdges(srcElt, targetElt,
+					CdSimpleObjectConstants.SIMPLE_OBJECT_DEPENDS).size() == 0) {
+				GraphEdge edge = Utils
+						.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_DEPENDS);
+				dependsEdgeCreationCommand cmd = new dependsEdgeCreationCommand(
+						null, edge, srcElt, false);
+				cmd.setTarget(targetElt);
+				add(cmd);
+			}
+		}
 	}
 
 }

@@ -11,15 +11,17 @@ import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.utils.Utils;
 
-import com.bluexml.side.Class.modeler.diagram.edit.AspectEditPart;
-import com.bluexml.side.Class.modeler.diagram.edit.ClazzEditPart;
-import com.bluexml.side.Class.modeler.diagram.edit.hasAspectEditPart;
-import com.bluexml.side.clazz.Aspect;
+import com.bluexml.side.Class.modeler.diagram.edit.EnumerationEditPart;
+import com.bluexml.side.Class.modeler.diagram.edit.dependsEditPart;
+import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.clazz.Enumeration;
+import com.bluexml.side.clazz.View;
 
-public class DeleteLinkClassAspectAction extends WorkbenchPartAction implements ISelectionChangedListener
+
+public class DeleteLinkEnumerationDependsAction extends WorkbenchPartAction implements ISelectionChangedListener
 {
-	public static String ID = "Unlink Aspect";
+	public static String ID = "Unlink Depends Of";
 	
     /**
      * The selected EditPart object
@@ -29,7 +31,7 @@ public class DeleteLinkClassAspectAction extends WorkbenchPartAction implements 
     /**
      * @param part
      */
-    public DeleteLinkClassAspectAction(IWorkbenchPart part)
+    public DeleteLinkEnumerationDependsAction(IWorkbenchPart part)
     {
         super(part);
         //setImageDescriptor(OblPlugin.getImageDescriptor("icons/actions/add.gif"));
@@ -38,28 +40,28 @@ public class DeleteLinkClassAspectAction extends WorkbenchPartAction implements 
     protected void init()
     {
         setId(ID);
-        setText("Unlink Aspect");
+        setText("Unlink Depends Of");
     }
 
     public void run()
     {
     	StructuredSelection ss = (StructuredSelection) this.selection;
     	for (Object o : ss.toList()) {
-    		if (o instanceof hasAspectEditPart) {
-				//Get edit part and graph element
-    			hasAspectEditPart editPart = (hasAspectEditPart) o;
+    		if (o instanceof dependsEditPart) {
+    			//Get edit part and graph element
+    			dependsEditPart editPart = (dependsEditPart) o;
 				GraphEdge eo = (GraphEdge) editPart.getModel();
 				
 				//Get source and target edit part
-				ClazzEditPart cep = (ClazzEditPart) editPart.getSource();
-				AspectEditPart aep = (AspectEditPart) editPart.getTarget();
+				EnumerationEditPart e1ep = (EnumerationEditPart) editPart.getSource();
+				//EnumerationEditPart e2p = (EnumerationEditPart) editPart.getTarget();
 				
 				//Get source and target model element
-				Clazz c = (Clazz) Utils.getElement((GraphElement) cep.getModel());
-				Aspect a = (Aspect) Utils.getElement((GraphElement) aep.getModel());
+				Enumeration e1 = (Enumeration) Utils.getElement((GraphElement) e1ep.getModel());
+				//Enumeration e2 = (Enumeration) Utils.getElement((GraphElement) e2p.getModel());
 				
-				//Remove aspect from class
-				c.getAspects().remove(a);
+				//Remove view from class
+				e1.setDepends(null);		
 				
 				//Create delete command and execute it
 				DeleteGraphElementCommand cmd = new DeleteGraphElementCommand(eo,true);
