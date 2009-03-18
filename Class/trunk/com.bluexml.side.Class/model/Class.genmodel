@@ -46,10 +46,10 @@
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//ClassPackage">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/classSet"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/associationSet"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/aspectSet"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/enumerationSet"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/views"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/associationSet"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/aspectSet"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/enumerationSet"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/views"/>
       <genOperations ecoreOperation="Class.ecore#//ClassPackage/getFullName"/>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//Clazz">
