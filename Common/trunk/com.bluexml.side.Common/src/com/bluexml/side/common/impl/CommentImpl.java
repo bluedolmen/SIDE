@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.common.impl;
 
+import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonPackage;
 
@@ -14,6 +15,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->
@@ -162,5 +164,9 @@ public class CommentImpl extends ModelElementImpl implements Comment {
 		result.append(')');
 		return result.toString();
 	}
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+
+	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 
 } //CommentImpl

@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.common.impl;
 
+import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.common.Stereotype;
 
@@ -20,6 +21,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->
@@ -185,5 +187,9 @@ public class PackageImpl extends NamedModelElementImpl implements com.bluexml.si
 		}
 		return super.eIsSet(featureID);
 	}
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+
+	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 
 } //PackageImpl

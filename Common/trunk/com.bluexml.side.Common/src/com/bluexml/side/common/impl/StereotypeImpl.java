@@ -6,10 +6,12 @@
  */
 package com.bluexml.side.common.impl;
 
+import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.common.Stereotype;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,5 +41,8 @@ public class StereotypeImpl extends NamedModelElementImpl implements Stereotype 
 	protected EClass eStaticClass() {
 		return CommonPackage.Literals.STEREOTYPE;
 	}
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 
 } //StereotypeImpl
