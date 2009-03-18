@@ -20,7 +20,11 @@ import java.util.List;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.gef.ContextMenuProvider;
+import org.eclipse.gef.ui.actions.ActionRegistry;
+import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.osgi.service.prefs.BackingStoreException;
@@ -29,8 +33,11 @@ import org.topcased.modeler.commands.GEFtoEMFCommandStackWrapper;
 import org.topcased.modeler.documentation.EAnnotationDocPage;
 import org.topcased.modeler.documentation.IDocPage;
 import org.topcased.modeler.editor.Modeler;
+import org.topcased.modeler.editor.ModelerGraphicalViewer;
 
 import com.bluexml.side.Portal.modeler.PortalPlugin;
+import com.bluexml.side.Portal.modeler.SidePortalContextMenuProvider;
+import com.bluexml.side.Portal.modeler.diagram.actions.DeleteLinkPageLayoutAction;
 
 /**
  * Generated Model editor
@@ -93,5 +100,31 @@ public class PortalEditor extends Modeler {
 		}
 		return PortalPlugin.getDefault().getPreferenceStore();
 	}
+	
+	/**
+     * @see org.topcased.modeler.editor.Modeler#getContextMenuProvider(org.topcased.modeler.editor.ModelerGraphicalViewer)
+     */
+    protected ContextMenuProvider getContextMenuProvider(ModelerGraphicalViewer viewer)
+    {
+        return new SidePortalContextMenuProvider(viewer, getActionRegistry());
+    }
+	
+	@Override
+    protected void createActions()
+    {
+        super.createActions();
+        ActionRegistry registry = getActionRegistry();
+        // Delete link between Page and Layout
+        DeleteLinkPageLayoutAction deleteLinkToLayout = new DeleteLinkPageLayoutAction(this);
+        registry.registerAction(deleteLinkToLayout);
+        getSelectionActions().add(deleteLinkToLayout.getId());
+    }
 
+	@Override
+    protected void configureGraphicalViewer()
+    {
+        super.configureGraphicalViewer();
+        IAction exampleAction = getActionRegistry().getAction(DeleteLinkPageLayoutAction.ID);
+        getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) exampleAction);
+    }
 }
