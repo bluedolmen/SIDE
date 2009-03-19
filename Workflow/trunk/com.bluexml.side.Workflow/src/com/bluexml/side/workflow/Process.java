@@ -61,7 +61,7 @@ public interface Process extends com.bluexml.side.common.Package {
 	 * @return the value of the '<em>Startstate</em>' containment reference.
 	 * @see #setStartstate(StartState)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getProcess_Startstate()
-	 * @model containment="true" ordered="false"
+	 * @model containment="true" required="true" ordered="false"
 	 * @generated
 	 */
 	StartState getStartstate();
@@ -87,7 +87,7 @@ public interface Process extends com.bluexml.side.common.Package {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Endstate</em>' containment reference list.
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getProcess_Endstate()
-	 * @model containment="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	EList<EndState> getEndstate();

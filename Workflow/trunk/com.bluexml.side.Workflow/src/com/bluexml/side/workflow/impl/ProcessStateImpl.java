@@ -6,7 +6,6 @@
  */
 package com.bluexml.side.workflow.impl;
 
-import com.bluexml.side.workflow.Event;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -15,13 +14,14 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.ecore.OCL;
 
+import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
+import com.bluexml.side.workflow.Event;
 import com.bluexml.side.workflow.ProcessState;
 import com.bluexml.side.workflow.Transition;
-import com.bluexml.side.workflow.Variable;
 import com.bluexml.side.workflow.WorkflowPackage;
 
 /**
@@ -248,5 +248,9 @@ public class ProcessStateImpl extends StateImpl implements ProcessState {
 		}
 		return super.eIsSet(featureID);
 	}
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+
+	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 
 } //ProcessStateImpl

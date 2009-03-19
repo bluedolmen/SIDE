@@ -7,7 +7,9 @@
 package com.bluexml.side.workflow.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.ocl.ecore.OCL;
 
+import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.common.impl.ModelElementImpl;
 import com.bluexml.side.workflow.WorkflowModelElement;
 import com.bluexml.side.workflow.WorkflowPackage;
@@ -40,5 +42,8 @@ public abstract class WorkflowModelElementImpl extends ModelElementImpl implemen
 	protected EClass eStaticClass() {
 		return WorkflowPackage.Literals.WORKFLOW_MODEL_ELEMENT;
 	}
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 
 } //WorkflowModelElementImpl

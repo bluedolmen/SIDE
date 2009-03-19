@@ -13,5 +13,7 @@ Export-Package: com.bluexml.side.workflow,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  com.bluexml.side.Common;visibility:=reexport,
- com.bluexml.side.Class;bundle-version="1.0.0"
+ com.bluexml.side.Class,
+ com.bluexml.side.Util.MetaModel.validate,
+ org.eclipse.ocl.ecore
 Eclipse-LazyStart: true

@@ -6,10 +6,9 @@
  */
 package com.bluexml.side.workflow;
 
-import com.bluexml.side.clazz.AttributeType;
-import com.bluexml.side.clazz.Enumeration;
-
 import org.eclipse.emf.ecore.EObject;
+
+import com.bluexml.side.clazz.AttributeType;
 
 /**
  * <!-- begin-user-doc -->

@@ -9,9 +9,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="swimlane" upperBound="-1"
         eType="#//Swimlane" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="startstate" ordered="false"
-        eType="#//StartState" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="endstate" upperBound="-1"
-        eType="#//EndState" containment="true"/>
+        lowerBound="1" eType="#//StartState" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="endstate" lowerBound="1"
+        upperBound="-1" eType="#//EndState" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="node" upperBound="-1" eType="#//Node"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tasknode" upperBound="-1"
@@ -28,6 +28,12 @@
         eType="#//WorkflowModelElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Swimlane">
+    <eOperations name="EqualsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.name = other.name"/>
+      </eAnnotations>
+      <eParameters name="other" eType="#//Swimlane"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="manage" upperBound="-1"

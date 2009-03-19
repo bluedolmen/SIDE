@@ -7,7 +7,6 @@
 package com.bluexml.side.workflow;
 
 import com.bluexml.side.common.ModelElement;
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->

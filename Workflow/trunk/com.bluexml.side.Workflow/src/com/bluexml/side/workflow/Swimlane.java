@@ -7,7 +7,6 @@
 package com.bluexml.side.workflow;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -152,5 +151,13 @@ public interface Swimlane extends EObject {
 	 * @generated
 	 */
 	void setClazz(String value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.bluexml.com/OCL body='self.name = other.name'"
+	 * @generated
+	 */
+	boolean EqualsForMerge(Swimlane other);
 
 } // Swimlane
