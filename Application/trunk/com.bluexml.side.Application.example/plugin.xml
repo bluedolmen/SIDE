@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         id="com.bluexml.application.example"
+         name="com.bluexml.application.example"
+         point="com.bluexml.side.Application.com_bluexml_application_configuration">
+      <metamodel
+            description="Alfresco provides the foundations for enterprises which need a robust and effective content management solution. But, very quickly, enterprises need more sphisticated content types to better manage documents and apply correct workflows. BxDS provides the modeler to easily and quickly create new content types, with the ability to inherit from existing ones. Because configuration is automatically generated withtout any errors, your productivity increases in a very important way."
+            id="KSR500"
+            name="KSR500 Class"
+            url="http://www.kerblue.org/v2/ksr500-class/">
+      </metamodel>
+      <technology
+            id="alfresco"
+            idMetamodel="KSR500"
+            name="Alfresco"
+            url="http://www.alfresco.com">
+      </technology>
+      <technologyVersion
+            id="alfresco_2.9b"
+            idTechnology="alfresco"
+            version="2.9B">
+      </technologyVersion>
+      <technologyVersion
+            id="alfresco_3.0_labs"
+            idTechnology="alfresco"
+            version="3.0 Labs">
+      </technologyVersion>
+      <technologyVersion
+            id="alfresco_3.0E"
+            idTechnology="alfresco"
+            version="3.0 Entreprise">
+      </technologyVersion>         
+      <generatorVersion
+            idTechnologyVersion="alfresco_2.9b"
+            version="1.0" id="com.bluexml.application.example.generatorVersion1">
+         <option
+               key="sql"
+               label="SQL Support">
+         </option>
+         <option
+               documentation="Generate all web scripts !"
+               key="webscripts"
+               label="WebScripts">
+         </option>
+      </generatorVersion>
+      <generatorVersion
+            idTechnologyVersion="alfresco_2.9b" id="com.bluexml.application.example.generatorVersion2"
+            version="1.1">
+         <option
+               key="sql"
+               label="SQL Support">
+         </option>
+         <option
+               documentation="Generate all web scripts !"
+               key="webscripts"
+               label="WebScripts">
+         </option>
+      </generatorVersion>
+            <generatorVersion
+            idTechnologyVersion="alfresco_3.0_labs" id="com.bluexml.application.example.generatorVersion3"
+            version="1.0">
+         <option
+               key="sql"
+               label="SQL Support">
+         </option>
+         <option
+               documentation="Generate all web scripts !"
+               key="webscripts"
+               label="WebScripts">
+         </option>
+      </generatorVersion>
+      <generatorVersion
+            idTechnologyVersion="alfresco_3.0E" id="com.bluexml.application.example.generatorVersion4"
+            version="1.1">
+         <option
+               key="sql"
+               label="SQL Support">
+         </option>
+         <option
+               documentation="Generate all web scripts !"
+               key="webscripts"
+               label="WebScripts">
+         </option>
+      </generatorVersion>
+      <metamodel
+            description="Which portal is suitable to your needs? Alfresco Web Client or future Alfresco Portal in 3.0? Liferay? JBoss? Which version? BxDS allows you to model your portal and generate the configuration corresponding to your needs. BxDS makes also migration from one technology to another very easy. Just choose another generator."
+            id="KSR200"
+            name="KSR200 Portal"
+            url="http://www.kerblue.org/v2/ksr200-portal/">
+      </metamodel>
+      <technology
+            description="JBoss Application Server (or JBoss AS) is a free software/open source Java EE-based application server. Because it is Java-based, the JBoss application server is cross-platform: usable on any operating system that Java supports."
+            id="http://www.jboss.org/portal/"
+            idMetamodel="KSR200"
+            name="JBoss Portal"
+            url="http://www.jboss.org/">
+      </technology>
+      <technology
+            description="&apos;Liferay, Inc.&apos; is a professional open-source company that provides free documentation and paid professional service to users of its software. Mainly focused on enterprise portal technology, the company was founded in 2000 by Brian Chan and currently has its headquarters in Los Angeles, California, United States."
+            id="http://www.liferay.com/"
+            idMetamodel="KSR200"
+            name="Liferay"
+            url="http://www.liferay.com/web/guest/home">
+      </technology>
+      <technology
+            description="Alfresco Share is built on the Alfresco enterprise-class document repository and delivers out-of-the-box collaborative content management. It simplifies capturing, sharing and retrieval of information across virtual teams. Team or project members can rapidly find relevant content, experts, look at past or similar projects and keep on top of any relevant changes to make them more efficient. "
+            id="http://www.alfresco.org/share/"
+            idMetamodel="KSR200"
+            name="Alfresco Share"
+            url="http://www.alfresco.com/products/collaboration/">
+      </technology>
+      <technologyVersion
+            id="http://www.jboss.org/portal/2.7.1/"
+            idTechnology="http://www.jboss.org/portal/"
+            version="2.7.1">
+      </technologyVersion>
+      <technologyVersion
+            id="http://www.liferay.com/5.2/"
+            idTechnology="http://www.liferay.com/"
+            version="5.2">
+      </technologyVersion>
+      <technologyVersion
+            id="http://www.alfresco.org/share/3.0/"
+            idTechnology="http://www.alfresco.org/share/"
+            version="3.0">
+      </technologyVersion>
+      <generatorVersion
+            id="com.bluexml.application.example.generatorVersion5"
+            idTechnologyVersion="http://www.jboss.org/portal/2.7.1/"
+            version="1.0A">
+      </generatorVersion>
+      <generatorVersion
+            id="com.bluexml.application.example.generatorVersion6"
+            idTechnologyVersion="http://www.liferay.com/5.2/"
+            version="1.0">
+      </generatorVersion>
+      <generatorVersion
+            id="com.bluexml.application.example.generatorVersion7"
+            idTechnologyVersion="http://www.liferay.com/5.2/"
+            version="1.1">
+      </generatorVersion>
+      <generatorVersion
+            id="com.bluexml.application.example.generatorVersion8"
+            idTechnologyVersion="http://www.alfresco.org/share/3.0/"
+            version="0.9B">
+      </generatorVersion>
+   </extension>
+
+</plugin>
