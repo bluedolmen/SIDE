@@ -163,4 +163,13 @@ public interface ClassPackage extends com.bluexml.side.common.Package {
 	 */
 	EList<Association> getAllAssociations();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='AbstractClass.allInstances()'"
+	 * @generated
+	 */
+	EList<AbstractClass> getAllAbstractClasses();
+
 } // ClassPackage

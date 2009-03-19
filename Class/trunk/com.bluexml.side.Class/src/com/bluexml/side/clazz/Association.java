@@ -28,7 +28,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.bluexml.side.clazz.Association#getAssociationsClass <em>Associations Class</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Association#getRoleSrc <em>Role Src</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Association#getRoleTarget <em>Role Target</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.Association#getTitle <em>Title</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Association#getRoleSrcTitle <em>Role Src Title</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Association#getRoleTargetTitle <em>Role Target Title</em>}</li>
  * </ul>
@@ -39,7 +38,7 @@ import org.eclipse.emf.common.util.EList;
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource AssociatioClassCantBeAgregationOrComposition NameNull SourceNull TargetNull AtLeastOneNavigableEdge'"
  * @generated
  */
-public interface Association extends NamedClassModelElement {
+public interface Association extends TitledNamedClassModelElement {
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -349,32 +348,6 @@ public interface Association extends NamedClassModelElement {
 	 * @generated
 	 */
 	void setRoleTarget(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Title</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Title</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Title</em>' attribute.
-	 * @see #setTitle(String)
-	 * @see com.bluexml.side.clazz.ClazzPackage#getAssociation_Title()
-	 * @model
-	 * @generated
-	 */
-	String getTitle();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.clazz.Association#getTitle <em>Title</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Title</em>' attribute.
-	 * @see #getTitle()
-	 * @generated
-	 */
-	void setTitle(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Role Src Title</b></em>' attribute.

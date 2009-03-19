@@ -43,7 +43,6 @@ import org.eclipse.ocl.expressions.OCLExpression;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.clazz.impl.AbstractContainerImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AbstractContainerImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AbstractContainerImpl#getAssociations <em>Associations</em>}</li>
  * </ul>
@@ -51,27 +50,7 @@ import org.eclipse.ocl.expressions.OCLExpression;
  *
  * @generated
  */
-public abstract class AbstractContainerImpl extends NamedClassModelElementImpl implements AbstractContainer {
-	/**
-	 * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTitle()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String TITLE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTitle()
-	 * @generated
-	 * @ordered
-	 */
-	protected String title = TITLE_EDEFAULT;
-
+public abstract class AbstractContainerImpl extends TitledNamedClassModelElementImpl implements AbstractContainer {
 	/**
 	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -109,27 +88,6 @@ public abstract class AbstractContainerImpl extends NamedClassModelElementImpl i
 	@Override
 	protected EClass eStaticClass() {
 		return ClazzPackage.Literals.ABSTRACT_CONTAINER;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getTitle() {
-		return title;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTitle(String newTitle) {
-		String oldTitle = title;
-		title = newTitle;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.ABSTRACT_CONTAINER__TITLE, oldTitle, title));
 	}
 
 	/**
@@ -217,8 +175,6 @@ public abstract class AbstractContainerImpl extends NamedClassModelElementImpl i
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClazzPackage.ABSTRACT_CONTAINER__TITLE:
-				return getTitle();
 			case ClazzPackage.ABSTRACT_CONTAINER__ATTRIBUTES:
 				return getAttributes();
 			case ClazzPackage.ABSTRACT_CONTAINER__ASSOCIATIONS:
@@ -236,9 +192,6 @@ public abstract class AbstractContainerImpl extends NamedClassModelElementImpl i
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClazzPackage.ABSTRACT_CONTAINER__TITLE:
-				setTitle((String)newValue);
-				return;
 			case ClazzPackage.ABSTRACT_CONTAINER__ATTRIBUTES:
 				getAttributes().clear();
 				getAttributes().addAll((Collection<? extends Attribute>)newValue);
@@ -259,9 +212,6 @@ public abstract class AbstractContainerImpl extends NamedClassModelElementImpl i
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClazzPackage.ABSTRACT_CONTAINER__TITLE:
-				setTitle(TITLE_EDEFAULT);
-				return;
 			case ClazzPackage.ABSTRACT_CONTAINER__ATTRIBUTES:
 				getAttributes().clear();
 				return;
@@ -280,30 +230,12 @@ public abstract class AbstractContainerImpl extends NamedClassModelElementImpl i
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClazzPackage.ABSTRACT_CONTAINER__TITLE:
-				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
 			case ClazzPackage.ABSTRACT_CONTAINER__ATTRIBUTES:
 				return attributes != null && !attributes.isEmpty();
 			case ClazzPackage.ABSTRACT_CONTAINER__ASSOCIATIONS:
 				return associations != null && !associations.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (title: ");
-		result.append(title);
-		result.append(')');
-		return result.toString();
 	}
 
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";

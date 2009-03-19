@@ -55,7 +55,6 @@ import org.eclipse.ocl.expressions.OCLExpression;
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationImpl#getAssociationsClass <em>Associations Class</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationImpl#getRoleSrc <em>Role Src</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationImpl#getRoleTarget <em>Role Target</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.impl.AssociationImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationImpl#getRoleSrcTitle <em>Role Src Title</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationImpl#getRoleTargetTitle <em>Role Target Title</em>}</li>
  * </ul>
@@ -63,7 +62,7 @@ import org.eclipse.ocl.expressions.OCLExpression;
  *
  * @generated
  */
-public class AssociationImpl extends NamedClassModelElementImpl implements Association {
+public class AssociationImpl extends TitledNamedClassModelElementImpl implements Association {
 	/**
 	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -273,26 +272,6 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 	 * @ordered
 	 */
 	protected String roleTarget = ROLE_TARGET_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTitle()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String TITLE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTitle()
-	 * @generated
-	 * @ordered
-	 */
-	protected String title = TITLE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getRoleSrcTitle() <em>Role Src Title</em>}' attribute.
@@ -635,27 +614,6 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getTitle() {
-		return title;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTitle(String newTitle) {
-		String oldTitle = title;
-		title = newTitle;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.ASSOCIATION__TITLE, oldTitle, title));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getRoleSrcTitle() {
 		return roleSrcTitle;
 	}
@@ -766,8 +724,6 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 				return getRoleSrc();
 			case ClazzPackage.ASSOCIATION__ROLE_TARGET:
 				return getRoleTarget();
-			case ClazzPackage.ASSOCIATION__TITLE:
-				return getTitle();
 			case ClazzPackage.ASSOCIATION__ROLE_SRC_TITLE:
 				return getRoleSrcTitle();
 			case ClazzPackage.ASSOCIATION__ROLE_TARGET_TITLE:
@@ -821,9 +777,6 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 				return;
 			case ClazzPackage.ASSOCIATION__ROLE_TARGET:
 				setRoleTarget((String)newValue);
-				return;
-			case ClazzPackage.ASSOCIATION__TITLE:
-				setTitle((String)newValue);
 				return;
 			case ClazzPackage.ASSOCIATION__ROLE_SRC_TITLE:
 				setRoleSrcTitle((String)newValue);
@@ -879,9 +832,6 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 			case ClazzPackage.ASSOCIATION__ROLE_TARGET:
 				setRoleTarget(ROLE_TARGET_EDEFAULT);
 				return;
-			case ClazzPackage.ASSOCIATION__TITLE:
-				setTitle(TITLE_EDEFAULT);
-				return;
 			case ClazzPackage.ASSOCIATION__ROLE_SRC_TITLE:
 				setRoleSrcTitle(ROLE_SRC_TITLE_EDEFAULT);
 				return;
@@ -924,8 +874,6 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 				return ROLE_SRC_EDEFAULT == null ? roleSrc != null : !ROLE_SRC_EDEFAULT.equals(roleSrc);
 			case ClazzPackage.ASSOCIATION__ROLE_TARGET:
 				return ROLE_TARGET_EDEFAULT == null ? roleTarget != null : !ROLE_TARGET_EDEFAULT.equals(roleTarget);
-			case ClazzPackage.ASSOCIATION__TITLE:
-				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
 			case ClazzPackage.ASSOCIATION__ROLE_SRC_TITLE:
 				return ROLE_SRC_TITLE_EDEFAULT == null ? roleSrcTitle != null : !ROLE_SRC_TITLE_EDEFAULT.equals(roleSrcTitle);
 			case ClazzPackage.ASSOCIATION__ROLE_TARGET_TITLE:
@@ -962,8 +910,6 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 		result.append(roleSrc);
 		result.append(", roleTarget: ");
 		result.append(roleTarget);
-		result.append(", title: ");
-		result.append(title);
 		result.append(", roleSrcTitle: ");
 		result.append(roleSrcTitle);
 		result.append(", roleTargetTitle: ");

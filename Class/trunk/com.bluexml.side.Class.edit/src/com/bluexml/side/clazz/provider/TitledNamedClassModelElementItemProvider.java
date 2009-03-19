@@ -7,19 +7,14 @@
 package com.bluexml.side.clazz.provider;
 
 
-import com.bluexml.side.clazz.AbstractContainer;
-import com.bluexml.side.clazz.ClazzFactory;
 import com.bluexml.side.clazz.ClazzPackage;
+import com.bluexml.side.clazz.TitledNamedClassModelElement;
 
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.ResourceLocator;
-
-import org.eclipse.emf.ecore.EStructuralFeature;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -32,18 +27,18 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link com.bluexml.side.clazz.AbstractContainer} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.clazz.TitledNamedClassModelElement} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class AbstractContainerItemProvider
-	extends TitledNamedClassModelElementItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
+public class TitledNamedClassModelElementItemProvider
+	extends NamedClassModelElementItemProvider
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
 		IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -51,7 +46,7 @@ public class AbstractContainerItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbstractContainerItemProvider(AdapterFactory adapterFactory) {
+	public TitledNamedClassModelElementItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -66,61 +61,31 @@ public class AbstractContainerItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addAssociationsPropertyDescriptor(object);
+			addTitlePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Associations feature.
+	 * This adds a property descriptor for the Title feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addAssociationsPropertyDescriptor(Object object) {
+	protected void addTitlePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_AbstractContainer_associations_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractContainer_associations_feature", "_UI_AbstractContainer_type"),
-				 ClazzPackage.Literals.ABSTRACT_CONTAINER__ASSOCIATIONS,
+				 getString("_UI_TitledNamedClassModelElement_title_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TitledNamedClassModelElement_title_feature", "_UI_TitledNamedClassModelElement_type"),
+				 ClazzPackage.Literals.TITLED_NAMED_CLASS_MODEL_ELEMENT__TITLE,
 				 true,
 				 false,
-				 true,
-				 null,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
-	}
-
-	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(ClazzPackage.Literals.ABSTRACT_CONTAINER__ATTRIBUTES);
-		}
-		return childrenFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
 	}
 
 	/**
@@ -131,10 +96,10 @@ public class AbstractContainerItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((AbstractContainer)object).getName();
+		String label = ((TitledNamedClassModelElement)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_AbstractContainer_type") :
-			getString("_UI_AbstractContainer_type") + " " + label;
+			getString("_UI_TitledNamedClassModelElement_type") :
+			getString("_UI_TitledNamedClassModelElement_type") + " " + label;
 	}
 
 	/**
@@ -148,9 +113,9 @@ public class AbstractContainerItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(AbstractContainer.class)) {
-			case ClazzPackage.ABSTRACT_CONTAINER__ATTRIBUTES:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+		switch (notification.getFeatureID(TitledNamedClassModelElement.class)) {
+			case ClazzPackage.TITLED_NAMED_CLASS_MODEL_ELEMENT__TITLE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -166,11 +131,6 @@ public class AbstractContainerItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ClazzPackage.Literals.ABSTRACT_CONTAINER__ATTRIBUTES,
-				 ClazzFactory.eINSTANCE.createAttribute()));
 	}
 
 }

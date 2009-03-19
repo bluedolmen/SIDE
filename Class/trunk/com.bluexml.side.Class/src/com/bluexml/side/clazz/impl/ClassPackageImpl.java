@@ -7,6 +7,7 @@
 package com.bluexml.side.clazz.impl;
 
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.ClassPackage;
@@ -414,6 +415,43 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllAssociationsBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<AbstractClass> getAllAbstractClasses() {
+		if (getAllAbstractClassesBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(6);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.CLASS_PACKAGE, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllAbstractClassesBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllAbstractClassesBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<AbstractClass> result = (Collection<AbstractClass>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<AbstractClass>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllAbstractClasses <em>Get All Abstract Classes</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllAbstractClasses
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllAbstractClassesBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->

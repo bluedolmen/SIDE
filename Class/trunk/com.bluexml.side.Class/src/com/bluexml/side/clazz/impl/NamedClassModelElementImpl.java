@@ -233,41 +233,6 @@ public class NamedClassModelElementImpl extends ClassModelElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getLabel() {
-		if (getLabelBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.NAMED_CLASS_MODEL_ELEMENT.getEOperations().get(2);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.NAMED_CLASS_MODEL_ELEMENT, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				getLabelBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getLabelBodyOCL);
-	
-		return (String) query.evaluate(this);
-	
-	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #getLabel <em>Get Label</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLabel
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> getLabelBodyOCL;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {

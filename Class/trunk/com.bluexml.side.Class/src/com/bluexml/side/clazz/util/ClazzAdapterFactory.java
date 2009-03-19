@@ -143,6 +143,10 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 				return createMetaInfoGroupAdapter();
 			}
 			@Override
+			public Adapter caseTitledNamedClassModelElement(TitledNamedClassModelElement object) {
+				return createTitledNamedClassModelElementAdapter();
+			}
+			@Override
 			public Adapter caseModelElement(ModelElement object) {
 				return createModelElementAdapter();
 			}
@@ -409,6 +413,20 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMetaInfoGroupAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.clazz.TitledNamedClassModelElement <em>Titled Named Class Model Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.clazz.TitledNamedClassModelElement
+	 * @generated
+	 */
+	public Adapter createTitledNamedClassModelElementAdapter() {
 		return null;
 	}
 

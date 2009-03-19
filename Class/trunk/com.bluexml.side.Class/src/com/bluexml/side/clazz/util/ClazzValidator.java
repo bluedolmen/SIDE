@@ -241,6 +241,8 @@ public class ClazzValidator extends EObjectValidator {
 				return validateMetaInfo((MetaInfo)value, diagnostics, context);
 			case ClazzPackage.META_INFO_GROUP:
 				return validateMetaInfoGroup((MetaInfoGroup)value, diagnostics, context);
+			case ClazzPackage.TITLED_NAMED_CLASS_MODEL_ELEMENT:
+				return validateTitledNamedClassModelElement((TitledNamedClassModelElement)value, diagnostics, context);
 			case ClazzPackage.ASSOCIATION_TYPE:
 				return validateAssociationType((AssociationType)value, diagnostics, context);
 			case ClazzPackage.ATTRIBUTE_TYPE:
@@ -969,6 +971,15 @@ public class ClazzValidator extends EObjectValidator {
 	 */
 	public boolean validateMetaInfoGroup(MetaInfoGroup metaInfoGroup, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(metaInfoGroup, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTitledNamedClassModelElement(TitledNamedClassModelElement titledNamedClassModelElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(titledNamedClassModelElement, diagnostics, context);
 	}
 
 	/**

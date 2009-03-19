@@ -96,13 +96,4 @@ public interface NamedClassModelElement extends ClassModelElement {
 	 */
 	String getDescriptionOrName();
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation" required="true"
-	 *        annotation="http://www.bluexml.com/OCL body='if self.title.oclIsUndefined() or self.title.size() <0 then\r\tself.name\relse\r\tself.title\rendif'"
-	 * @generated
-	 */
-	String getLabel();
-
 } // NamedClassModelElement

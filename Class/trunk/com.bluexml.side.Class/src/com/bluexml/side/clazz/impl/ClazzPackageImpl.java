@@ -25,6 +25,7 @@ import com.bluexml.side.clazz.MetaInfoGroup;
 import com.bluexml.side.clazz.NamedClassModelElement;
 import com.bluexml.side.clazz.Operation;
 import com.bluexml.side.clazz.Parameter;
+import com.bluexml.side.clazz.TitledNamedClassModelElement;
 import com.bluexml.side.clazz.View;
 import com.bluexml.side.clazz.ViewItem;
 import com.bluexml.side.clazz.Visibility;
@@ -168,6 +169,13 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * @generated
 	 */
 	private EClass metaInfoGroupEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass titledNamedClassModelElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -563,7 +571,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAssociation_Title() {
+	public EAttribute getAssociation_RoleSrcTitle() {
 		return (EAttribute)associationEClass.getEStructuralFeatures().get(12);
 	}
 
@@ -572,17 +580,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAssociation_RoleSrcTitle() {
-		return (EAttribute)associationEClass.getEStructuralFeatures().get(13);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getAssociation_RoleTargetTitle() {
-		return (EAttribute)associationEClass.getEStructuralFeatures().get(14);
+		return (EAttribute)associationEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -626,17 +625,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAttribute_Title() {
-		return (EAttribute)attributeEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getAttribute_ValueList() {
-		return (EReference)attributeEClass.getEStructuralFeatures().get(4);
+		return (EReference)attributeEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -645,7 +635,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * @generated
 	 */
 	public EAttribute getAttribute_Unique() {
-		return (EAttribute)attributeEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)attributeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -824,17 +814,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbstractContainer_Title() {
-		return (EAttribute)abstractContainerEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getAbstractContainer_Attributes() {
-		return (EReference)abstractContainerEClass.getEStructuralFeatures().get(1);
+		return (EReference)abstractContainerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -843,7 +824,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * @generated
 	 */
 	public EReference getAbstractContainer_Associations() {
-		return (EReference)abstractContainerEClass.getEStructuralFeatures().get(2);
+		return (EReference)abstractContainerEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1004,6 +985,24 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTitledNamedClassModelElement() {
+		return titledNamedClassModelElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTitledNamedClassModelElement_Title() {
+		return (EAttribute)titledNamedClassModelElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getAssociationType() {
 		return associationTypeEEnum;
 	}
@@ -1090,7 +1089,6 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		createEReference(associationEClass, ASSOCIATION__ASSOCIATIONS_CLASS);
 		createEAttribute(associationEClass, ASSOCIATION__ROLE_SRC);
 		createEAttribute(associationEClass, ASSOCIATION__ROLE_TARGET);
-		createEAttribute(associationEClass, ASSOCIATION__TITLE);
 		createEAttribute(associationEClass, ASSOCIATION__ROLE_SRC_TITLE);
 		createEAttribute(associationEClass, ASSOCIATION__ROLE_TARGET_TITLE);
 
@@ -1098,7 +1096,6 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		createEAttribute(attributeEClass, ATTRIBUTE__TYP);
 		createEAttribute(attributeEClass, ATTRIBUTE__INITIAL_VALUE);
 		createEAttribute(attributeEClass, ATTRIBUTE__VISIBILITY);
-		createEAttribute(attributeEClass, ATTRIBUTE__TITLE);
 		createEReference(attributeEClass, ATTRIBUTE__VALUE_LIST);
 		createEAttribute(attributeEClass, ATTRIBUTE__UNIQUE);
 
@@ -1127,7 +1124,6 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		abstractClassEClass = createEClass(ABSTRACT_CLASS);
 
 		abstractContainerEClass = createEClass(ABSTRACT_CONTAINER);
-		createEAttribute(abstractContainerEClass, ABSTRACT_CONTAINER__TITLE);
 		createEReference(abstractContainerEClass, ABSTRACT_CONTAINER__ATTRIBUTES);
 		createEReference(abstractContainerEClass, ABSTRACT_CONTAINER__ASSOCIATIONS);
 
@@ -1151,6 +1147,9 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		metaInfoGroupEClass = createEClass(META_INFO_GROUP);
 		createEAttribute(metaInfoGroupEClass, META_INFO_GROUP__NAME);
 		createEReference(metaInfoGroupEClass, META_INFO_GROUP__CONTRAINTS);
+
+		titledNamedClassModelElementEClass = createEClass(TITLED_NAMED_CLASS_MODEL_ELEMENT);
+		createEAttribute(titledNamedClassModelElementEClass, TITLED_NAMED_CLASS_MODEL_ELEMENT__TITLE);
 
 		// Create enums
 		associationTypeEEnum = createEEnum(ASSOCIATION_TYPE);
@@ -1193,15 +1192,16 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		namedClassModelElementEClass.getESuperTypes().add(this.getClassModelElement());
 		classPackageEClass.getESuperTypes().add(theCommonPackage.getPackage());
 		clazzEClass.getESuperTypes().add(this.getAbstractClass());
-		associationEClass.getESuperTypes().add(this.getNamedClassModelElement());
-		attributeEClass.getESuperTypes().add(this.getNamedClassModelElement());
+		associationEClass.getESuperTypes().add(this.getTitledNamedClassModelElement());
+		attributeEClass.getESuperTypes().add(this.getTitledNamedClassModelElement());
 		enumerationEClass.getESuperTypes().add(this.getNamedClassModelElement());
 		operationEClass.getESuperTypes().add(this.getNamedClassModelElement());
 		parameterEClass.getESuperTypes().add(this.getNamedClassModelElement());
 		aspectEClass.getESuperTypes().add(this.getAbstractClass());
 		abstractClassEClass.getESuperTypes().add(this.getAbstractContainer());
-		abstractContainerEClass.getESuperTypes().add(this.getNamedClassModelElement());
+		abstractContainerEClass.getESuperTypes().add(this.getTitledNamedClassModelElement());
 		viewEClass.getESuperTypes().add(this.getNamedClassModelElement());
+		titledNamedClassModelElementEClass.getESuperTypes().add(this.getNamedClassModelElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(classModelElementEClass, ClassModelElement.class, "ClassModelElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1215,8 +1215,6 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		addEOperation(namedClassModelElementEClass, ecorePackage.getEString(), "getFullName", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(namedClassModelElementEClass, ecorePackage.getEString(), "getDescriptionOrName", 1, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(namedClassModelElementEClass, ecorePackage.getEString(), "getLabel", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(classPackageEClass, ClassPackage.class, "ClassPackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getClassPackage_ClassSet(), this.getClazz(), null, "classSet", null, 0, -1, ClassPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1236,6 +1234,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		addEOperation(classPackageEClass, this.getAspect(), "getAllAspects", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(classPackageEClass, this.getAssociation(), "getAllAssociations", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(classPackageEClass, this.getAbstractClass(), "getAllAbstractClasses", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(clazzEClass, Clazz.class, "Clazz", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getClazz_Operations(), this.getOperation(), null, "operations", null, 0, -1, Clazz.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1288,7 +1288,6 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		initEReference(getAssociation_AssociationsClass(), this.getClazz(), null, "associationsClass", null, 0, -1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAssociation_RoleSrc(), ecorePackage.getEString(), "roleSrc", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAssociation_RoleTarget(), ecorePackage.getEString(), "roleTarget", "", 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAssociation_Title(), ecorePackage.getEString(), "title", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAssociation_RoleSrcTitle(), ecorePackage.getEString(), "roleSrcTitle", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAssociation_RoleTargetTitle(), ecorePackage.getEString(), "roleTargetTitle", "", 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1299,7 +1298,6 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		initEAttribute(getAttribute_Typ(), this.getAttributeType(), "typ", "void", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_InitialValue(), ecorePackage.getEString(), "initialValue", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_Visibility(), this.getVisibility(), "visibility", "Private", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAttribute_Title(), ecorePackage.getEString(), "title", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAttribute_ValueList(), this.getEnumeration(), null, "valueList", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_Unique(), ecorePackage.getEBoolean(), "unique", "false", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1337,7 +1335,6 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		addEParameter(op, this.getAbstractClass(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(abstractContainerEClass, AbstractContainer.class, "AbstractContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAbstractContainer_Title(), ecorePackage.getEString(), "title", null, 0, 1, AbstractContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractContainer_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, AbstractContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractContainer_Associations(), this.getAssociation(), null, "associations", null, 0, -1, AbstractContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1376,6 +1373,11 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		initEClass(metaInfoGroupEClass, MetaInfoGroup.class, "MetaInfoGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMetaInfoGroup_Name(), ecorePackage.getEString(), "name", null, 0, 1, MetaInfoGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMetaInfoGroup_Contraints(), this.getMetaInfo(), null, "contraints", null, 0, -1, MetaInfoGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(titledNamedClassModelElementEClass, TitledNamedClassModelElement.class, "TitledNamedClassModelElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTitledNamedClassModelElement_Title(), ecorePackage.getEString(), "title", null, 0, 1, TitledNamedClassModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(titledNamedClassModelElementEClass, ecorePackage.getEString(), "getLabel", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(associationTypeEEnum, AssociationType.class, "AssociationType");
@@ -1435,12 +1437,6 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 			 "body", "if self.description.oclIsUndefined() or self.description.size() <0 then\r\tself.name\relse\r\tself.description\rendif"
 		   });		
 		addAnnotation
-		  (namedClassModelElementEClass.getEOperations().get(2), 
-		   source, 
-		   new String[] {
-			 "body", "if self.title.oclIsUndefined() or self.title.size() <0 then\r\tself.name\relse\r\tself.title\rendif"
-		   });		
-		addAnnotation
 		  (classPackageEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
@@ -1475,6 +1471,12 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "body", "Association.allInstances()"
+		   });		
+		addAnnotation
+		  (classPackageEClass.getEOperations().get(6), 
+		   source, 
+		   new String[] {
+			 "body", "AbstractClass.allInstances()"
 		   });		
 		addAnnotation
 		  (clazzEClass, 
@@ -1650,6 +1652,12 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "body", "self.key = other.key"
+		   });		
+		addAnnotation
+		  (titledNamedClassModelElementEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "if self.title.oclIsUndefined() or self.title.size() <0 then\r\tself.name\relse\r\tself.title\rendif"
 		   });
 	}
 
@@ -1684,7 +1692,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "TwoModelElementWithSameName NameNull noSpecialCharacters"
-		   });				
+		   });					
 	}
 
 } //ClazzPackageImpl
