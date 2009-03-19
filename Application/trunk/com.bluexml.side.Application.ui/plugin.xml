@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+ <extension
+       id="com.bluexml.application.ui"
+       name="Create generation configuration"
+       point="org.eclipse.ui.popupMenus">
+    <objectContribution
+          id="com.bluexml.application.ui.createGeneration"
+          nameFilter="*.application"
+          objectClass="org.eclipse.core.resources.IFile">
+       <action
+             class="com.bluexml.side.application.ui.action.CreateGenerationConfiguration"
+             enablesFor="1"
+             id="com.bluexml.application.ui.createGeneration"
+             label="Create generation configuration">
+       </action>
+    </objectContribution>
+ </extension>
+</plugin>
