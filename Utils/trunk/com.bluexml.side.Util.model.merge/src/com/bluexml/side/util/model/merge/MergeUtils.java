@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EObjectEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 
@@ -68,18 +69,17 @@ import com.bluexml.side.Util.ecore.EStructuralFeatureUtils;
 public abstract class  MergeUtils {
 	// --------------------------------------------------------------------------------------------------------- //
 	public static String DEFAULT_MERGED_MODEL_NAME = "bx_side_merged_model.obl";
-	public static final String DEFAULT_MERGED_ROOT_PACKAGE_NAME = "BX_S_IDE";
+	// renaming BX_S_IDE to BXSIDE ( problem with caracter '_')
+	public static final String DEFAULT_MERGED_ROOT_PACKAGE_NAME = "BXSIDE";
 	public static final String DEFAULT_MERGED_ROOT_PACKAGE_DOCUMENTATION ="This is the root package resulted from merging";
 	public static final String DEFAULT_MERGED_ROOT_PACKAGE_ATTRIBUTE_NAME = "name";
 	public static final String DEFAULT_MERGED_ROOT_PACKAGE_ATTRIBUTE_DOCUMENTATION ="documentation";
 
-	//public static List<EObject> listProxy = new ArrayList<EObject>();
 	public static String padding="";
-	//public static List<EObject> TOO_RESOLVE_LIST = new ArrayList<EObject>();
 
 	// --------------------------------------------------------------------------------------------------------- //
 	// TODO manage exception(mergeExeption)<==>(mergeExceptionMEssage)
-	// TODO manage debug mesage
+	// TODO manage debug message
 	// TODO manage options {force merge?export as file|outputstream?resolve links ?|
 	// TODO Clever merging, from one model, loading all references to other model and merging it all
 	// TODO remove system.outSSSSSSSSS
@@ -108,7 +108,7 @@ public abstract class  MergeUtils {
 		File mergedFile = new File(pathToMergedFile);
 		return merge(mergedFile, models, cl);
 	}
-	
+
 	/**<b>First level method to merge models</b>
 	 * <li>creating resource for the result</li>
 	 * <li>retrieving models from chain</li>
@@ -128,10 +128,11 @@ public abstract class  MergeUtils {
 	public static String  merge(File mergedFile, File[] models,ClassLoader cl) throws IOException{
 		EPackage metaModelPackage = null;
 		// deletion of the previous result
+
 		if (mergedFile.exists()){
 			mergedFile.delete();
 		}
-		
+
 		//EList<Model> models = chain.getRepository().getModels();
 		// Creating mergemodel resource
 		Resource mergedResource = EResourceUtils.createResource(mergedFile.getAbsolutePath());
@@ -166,7 +167,20 @@ public abstract class  MergeUtils {
 		// storing the merging result
 		try {
 			System.out.println(" resolving external references ");
-			browse2(mergedResource.getContents().get(0), rs,mergedResource.getContents().get(0),cl);
+
+			// Post treatment Operations
+			// reloading of the result to be sure to see proxy element
+			EResourceUtils.export(mergedResource);
+			mergedResource = null;
+			Resource reloaded = EResourceUtils.openModel(mergedFile.getAbsolutePath(), null);
+
+			// resolving proxies (keeping previous resultSet)
+			browse2(reloaded.getContents().get(0), rs,reloaded.getContents().get(0),cl);
+
+			// justifying the root package
+			justifyRoot(reloaded.getContents().get(0),reloaded);
+			EResourceUtils.export(reloaded);
+
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -186,7 +200,7 @@ public abstract class  MergeUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		EResourceUtils.export(mergedResource);
+
 		// return the file name
 		return DEFAULT_MERGED_MODEL_NAME;
 	}
@@ -201,7 +215,7 @@ public abstract class  MergeUtils {
 	 * <li> call indepth method</li>
 	 *  Note that this method can be used to merge resource themselves(without any waranty :) ), knowing that the first
 	 *  parameter will store the result.
-	 * @param mergeResource the resource in which is stocked the reslut of the merge
+	 * @param mergeResource the resource in which is stocked the result of the merge
 	 * @param resourceModelToMerge the resource linked to the model to merge
 	 * @throws IOException
 	 */
@@ -217,7 +231,7 @@ public abstract class  MergeUtils {
 		EObject rootResourceModelToMerge  = listContentResourceModelToMerge.get(0);
 		// H1 . All contents is under a single package (other package included)
 		if(EResourceUtils.isResourceEmptyContent(mergeResource)){
-			// Which means we are merging empty root whith the first model
+			// Which means we are merging empty root with the first model
 			System.out.println("initializing the root of the merge resource");
 			initializeRootContainerForMergeResource(mergeResource,resourceModelToMerge);
 		}
@@ -229,7 +243,7 @@ public abstract class  MergeUtils {
 	/**
 	 * this method will add (if necessary) and EObject of the same "kind" as the EObject root of target
 	 * to the root resource
-	 * this EObject is setted whith a default attribute "name" :  "BX_S_IDE", and a "default" : "documentation"
+	 * this EObject is setted whith a default attribute "name" :  "BXSIDE", and a "default" : "documentation"
 	 * those attributes are EStructural <b><i>DEDUCED</i></b> from the EObject Eclass, if corresponding ESF
 	 * are not present, we create default <li>@see static declaration in top of class</li>
 	 * <li>@see initializeRootForMerge</li>
@@ -385,6 +399,33 @@ public abstract class  MergeUtils {
 		padding = padding.length()>3?padding.substring(0, padding.length()-3):"";
 	}
 
+
+	/**
+	 * Remove the constructed root package of the merge if possible
+	 * The root package of the merge (BXSIDE) can be removed if it owns exactly one child 
+	 * and that unique child is from the same ECLASS
+	 * 
+	 * @param root  the root element of the model
+	 * @parent the merge model resource
+	 */
+	public static void  justifyRoot(EObject root, Resource parent){
+		// precondition checking
+		//1 non null, not empty
+		if( root != null && !EResourceUtils.isResourceEmptyContent(parent)){
+			// root is really the root content of the parent, and root has exactly one child
+			if( root == parent.getContents().get(0) && root.eContents().size() == 0){
+				EObject uniqueChild = root.eContents().get(0);
+				// uniqueChild is eligible as root
+				if(EObjectUtils.areFromSameEClassName(root, uniqueChild)){
+					parent.getContents().remove(root);
+					parent.getContents().add(uniqueChild);
+					System.out.println(" BXDS root package removed ");
+				}
+			}
+		}
+	}
+
+
 	/**
 	 * Add target element has child of source element, link is made using the specified Ereference
 	 * @param source
@@ -483,7 +524,7 @@ public abstract class  MergeUtils {
 
 	/**
 	 * method used before insertion to resolve update links.
-	 * the method will replace all occurence of parent EObject by source EObject in target EObject 
+	 * the method will replace all occurrence of parent EObject by source EObject in target EObject 
 	 * @param source
 	 * @param target
 	 * @param parent
@@ -524,14 +565,22 @@ public abstract class  MergeUtils {
 	 * @throws IllegalArgumentException 
 	 * @throws ClassNotFoundException */
 	public static void browse2(EObject eo,ResourceSet rs,EObject mergeRoot,ClassLoader cl) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, ClassNotFoundException{
-		
+
 		String proxy_resolved = " - Unsolved - ";
 		for(EStructuralFeature esf : eo.eClass().getEAllStructuralFeatures()){
 			Object o = eo.eGet(esf,false);
 			if(o instanceof List<?>){
-				List<EObject> leo = (List<EObject> )o;
-				for(EObject cur : leo){
+				//	List<EObject> leo = (List<EObject> )o;
+				EObjectEList<EObject> listeEObject = (EObjectEList) o;
+
+				int walker = 0;
+				while( walker<listeEObject.size()){
+					EObject cur = listeEObject.basicGet(walker);
+					if(cur.eIsProxy()){
+						resolveProxyFromElist(cur, rs, mergeRoot, cl, listeEObject);
+					}
 					browse2(cur,rs,mergeRoot,cl);
+					walker++;
 				}
 
 			}
@@ -540,26 +589,108 @@ public abstract class  MergeUtils {
 					if(o instanceof EObject){
 						EObject eo2 = (EObject) o;
 						if(eo2.eIsProxy()){
-							if(eo2 instanceof InternalEObject){
-								System.out.println("proxy found deep");
-								System.out.println(eo2.toString());
-								InternalEObject ieo = (InternalEObject) eo2;
-								if(EResourceUtils.resourceSetDoContainsUri(rs,ieo.eProxyURI())){
-									proxy_resolved =" - Resolved -";
-									EObject resolved = EcoreUtil.resolve(eo2,rs);
-									EObject copy = find(resolved,mergeRoot,cl);
-									eo.eSet(esf, copy);
-									
-								}
-								
-									System.out.println(proxy_resolved);
-								
-
-							}
-
+							resolveProxyFromEStructuralFeature(eo2, rs, mergeRoot, cl, esf, eo);
 						}
 					}
 				}
+			}
+		}
+	}
+	/**
+	 * Method called to resolve proxy reference in a EObjectList
+	 * 
+	 * @param eo   		to EObject to resolve
+	 * @param rs   		to resultSet used during the merge process
+	 * @param mergeRoot the root element of the merge
+	 * @param cl    	the classLoader used for method invocation
+	 * @param leo		the list in wich the EObject to resolve is contained
+	 * 
+	 * @throws SecurityException
+	 * @throws IllegalArgumentException
+	 * @throws NoSuchMethodException
+	 * @throws IllegalAccessException
+	 * @throws InvocationTargetException
+	 * @throws ClassNotFoundException
+	 */
+
+	public static void resolveProxyFromElist(EObject eo,ResourceSet rs,EObject mergeRoot,ClassLoader cl,
+			List<EObject> leo) 
+	throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, ClassNotFoundException
+	{
+
+		String proxy_resolved = " not resolved ";
+		if(eo !=null){
+			if(eo instanceof EObject){
+				EObject eo2 = (EObject) eo;
+				if(eo2.eIsProxy()){
+					if(eo2  instanceof InternalEObject){
+						System.out.println("proxy found deep");
+						System.out.println(eo2.toString());
+						InternalEObject ieo = (InternalEObject) eo2;
+						if(EResourceUtils.resourceSetDoContainsUri(rs,ieo.eProxyURI())){
+							proxy_resolved =" - Resolved -";
+
+							int index = leo.lastIndexOf(eo);
+							EObject resolved = EcoreUtil.resolve(eo2,rs);
+							EObject copy = find(resolved,mergeRoot,cl);
+							if(copy == null || copy == eo2){
+								System.out.println("big problem big big problem");
+							}
+							else{
+								leo.remove(index);
+								leo.add(index, copy);
+							}
+
+						}
+						System.out.println(proxy_resolved);
+					}
+
+				}
+			}
+		}
+	}
+
+	/**
+	 * method called to resolve proxy reference from an EStructuralFeature (not List)
+	 * resolving references in merging process means to check if the proxy element refers to a model
+	 * used during the generation and if it is the case, to replace that reference with the appropriate EOBject already
+	 * present in the merge model
+	 * 
+	 * @param eo 		The proxy reference to resolve
+	 * @param rs		the result set
+	 * @param mergeRoot the root element of the merge model
+	 * @param cl		the classLoader to use for method invocation
+	 * @param esf		the esf which link proxy to its parent
+	 * @param parent	the EObject which refers to the proxy
+	 * 
+	 * @throws SecurityException
+	 * @throws IllegalArgumentException
+	 * @throws NoSuchMethodException
+	 * @throws IllegalAccessException
+	 * @throws InvocationTargetException
+	 * @throws ClassNotFoundException
+	 */
+
+	public static void resolveProxyFromEStructuralFeature(EObject eo,ResourceSet rs,EObject mergeRoot,ClassLoader cl,
+			EStructuralFeature  esf,EObject parent) 
+	throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, ClassNotFoundException{
+		String proxy_resolved = " not resolved ";
+		if(eo !=null){
+			if(eo.eIsProxy()){
+				if(eo  instanceof InternalEObject){
+					System.out.println("proxy found deep");
+					System.out.println(eo.toString());
+					InternalEObject ieo = (InternalEObject) eo;
+					if(EResourceUtils.resourceSetDoContainsUri(rs,ieo.eProxyURI())){
+						proxy_resolved =" - Resolved -";
+						EObject resolved = EcoreUtil.resolve(eo,rs);
+						EObject copy = find(resolved,mergeRoot,cl);
+						parent.eSet(esf, copy);
+
+					}
+					System.out.println(proxy_resolved);
+				}
+
 			}
 		}
 	}
@@ -586,7 +717,7 @@ public abstract class  MergeUtils {
 		TreeIterator<EObject> it = root.eAllContents();
 		while(it.hasNext() && !founded){
 			EObject current = it.next();
-			if(EObjectUtils.equalsForMerge(current, toFind,cl)){
+			if(EObjectUtils.equalsForMerge(current, toFind,cl) && current != toFind){
 				founded = true;
 				EObject browser = toFind.eContainer();
 				EObject browser2 = current.eContainer();
