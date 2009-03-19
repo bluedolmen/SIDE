@@ -8,6 +8,7 @@ package com.bluexml.side.application;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -226,13 +227,22 @@ public interface ApplicationPackage extends EPackage {
 	int CONFIGURATION__ELEMENTS = MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION__PARAMETERS = MODEL_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Configuration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 1;
+	int CONFIGURATION_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.application.impl.ConfigurationElementImpl <em>Configuration Element</em>}' class.
@@ -307,6 +317,55 @@ public interface ApplicationPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPTION_FEATURE_COUNT = 1;
+
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.application.impl.ConfigurationParametersImpl <em>Configuration Parameters</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.application.impl.ConfigurationParametersImpl
+	 * @see com.bluexml.side.application.impl.ApplicationPackageImpl#getConfigurationParameters()
+	 * @generated
+	 */
+	int CONFIGURATION_PARAMETERS = 6;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION_PARAMETERS__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION_PARAMETERS__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Configuration Parameters</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION_PARAMETERS_FEATURE_COUNT = 2;
+
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.application.StaticConfigurationParameters <em>Static Configuration Parameters</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.application.StaticConfigurationParameters
+	 * @see com.bluexml.side.application.impl.ApplicationPackageImpl#getStaticConfigurationParameters()
+	 * @generated
+	 */
+	int STATIC_CONFIGURATION_PARAMETERS = 7;
 
 
 	/**
@@ -405,6 +464,17 @@ public interface ApplicationPackage extends EPackage {
 	EReference getConfiguration_Elements();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.application.Configuration#getParameters <em>Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
+	 * @see com.bluexml.side.application.Configuration#getParameters()
+	 * @see #getConfiguration()
+	 * @generated
+	 */
+	EReference getConfiguration_Parameters();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.application.ConfigurationElement <em>Configuration Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -467,6 +537,48 @@ public interface ApplicationPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getOption_Key();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.application.ConfigurationParameters <em>Configuration Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Configuration Parameters</em>'.
+	 * @see com.bluexml.side.application.ConfigurationParameters
+	 * @generated
+	 */
+	EClass getConfigurationParameters();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.ConfigurationParameters#getKey <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see com.bluexml.side.application.ConfigurationParameters#getKey()
+	 * @see #getConfigurationParameters()
+	 * @generated
+	 */
+	EAttribute getConfigurationParameters_Key();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.ConfigurationParameters#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see com.bluexml.side.application.ConfigurationParameters#getValue()
+	 * @see #getConfigurationParameters()
+	 * @generated
+	 */
+	EAttribute getConfigurationParameters_Value();
+
+	/**
+	 * Returns the meta object for enum '{@link com.bluexml.side.application.StaticConfigurationParameters <em>Static Configuration Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Static Configuration Parameters</em>'.
+	 * @see com.bluexml.side.application.StaticConfigurationParameters
+	 * @generated
+	 */
+	EEnum getStaticConfigurationParameters();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -571,6 +683,14 @@ public interface ApplicationPackage extends EPackage {
 		EReference CONFIGURATION__ELEMENTS = eINSTANCE.getConfiguration_Elements();
 
 		/**
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONFIGURATION__PARAMETERS = eINSTANCE.getConfiguration_Parameters();
+
+		/**
 		 * The meta object literal for the '{@link com.bluexml.side.application.impl.ConfigurationElementImpl <em>Configuration Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -621,6 +741,42 @@ public interface ApplicationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute OPTION__KEY = eINSTANCE.getOption_Key();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.application.impl.ConfigurationParametersImpl <em>Configuration Parameters</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.application.impl.ConfigurationParametersImpl
+		 * @see com.bluexml.side.application.impl.ApplicationPackageImpl#getConfigurationParameters()
+		 * @generated
+		 */
+		EClass CONFIGURATION_PARAMETERS = eINSTANCE.getConfigurationParameters();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONFIGURATION_PARAMETERS__KEY = eINSTANCE.getConfigurationParameters_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONFIGURATION_PARAMETERS__VALUE = eINSTANCE.getConfigurationParameters_Value();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.application.StaticConfigurationParameters <em>Static Configuration Parameters</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.application.StaticConfigurationParameters
+		 * @see com.bluexml.side.application.impl.ApplicationPackageImpl#getStaticConfigurationParameters()
+		 * @generated
+		 */
+		EEnum STATIC_CONFIGURATION_PARAMETERS = eINSTANCE.getStaticConfigurationParameters();
 
 	}
 

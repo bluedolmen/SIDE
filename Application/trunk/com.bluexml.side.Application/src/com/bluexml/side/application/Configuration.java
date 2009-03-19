@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.bluexml.side.application.Configuration#getElements <em>Elements</em>}</li>
+ *   <li>{@link com.bluexml.side.application.Configuration#getParameters <em>Parameters</em>}</li>
  * </ul>
  * </p>
  *
@@ -40,5 +41,21 @@ public interface Configuration extends ModelElement {
 	 * @generated
 	 */
 	EList<ConfigurationElement> getElements();
+
+	/**
+	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
+	 * The list contents are of type {@link com.bluexml.side.application.ConfigurationParameters}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parameters</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parameters</em>' containment reference list.
+	 * @see com.bluexml.side.application.ApplicationPackage#getConfiguration_Parameters()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ConfigurationParameters> getParameters();
 
 } // Configuration

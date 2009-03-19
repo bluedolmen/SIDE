@@ -19,6 +19,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -79,6 +80,7 @@ public class ConfigurationItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ApplicationPackage.Literals.CONFIGURATION__ELEMENTS);
+			childrenFeatures.add(ApplicationPackage.Literals.CONFIGURATION__PARAMETERS);
 		}
 		return childrenFeatures;
 	}
@@ -134,6 +136,7 @@ public class ConfigurationItemProvider
 
 		switch (notification.getFeatureID(Configuration.class)) {
 			case ApplicationPackage.CONFIGURATION__ELEMENTS:
+			case ApplicationPackage.CONFIGURATION__PARAMETERS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -155,6 +158,11 @@ public class ConfigurationItemProvider
 			(createChildParameter
 				(ApplicationPackage.Literals.CONFIGURATION__ELEMENTS,
 				 ApplicationFactory.eINSTANCE.createConfigurationElement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ApplicationPackage.Literals.CONFIGURATION__PARAMETERS,
+				 ApplicationFactory.eINSTANCE.createConfigurationParameters()));
 	}
 
 }

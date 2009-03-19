@@ -190,7 +190,7 @@ public class ApplicationModelWizard extends Wizard implements INewWizard {
 	 * @not-generated
 	 */
 	protected Collection<String> getInitialObjectNames() {
-		initialObjectNames = new ArrayList<String>();
+			initialObjectNames = new ArrayList<String>();
 		initialObjectNames.add(ApplicationPackage.eINSTANCE.getApplication().getName());
 		return initialObjectNames;
 		
@@ -403,8 +403,7 @@ public class ApplicationModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		public void createControl(Composite parent) {
-			Composite composite = new Composite(parent, SWT.NONE);
-			{
+			Composite composite = new Composite(parent, SWT.NONE); {
 				GridLayout layout = new GridLayout();
 				layout.numColumns = 1;
 				layout.verticalSpacing = 12;

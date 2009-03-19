@@ -191,6 +191,29 @@ public class ApplicationItemProviderAdapterFactory extends ApplicationAdapterFac
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.application.ConfigurationParameters} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ConfigurationParametersItemProvider configurationParametersItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.application.ConfigurationParameters}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createConfigurationParametersAdapter() {
+		if (configurationParametersItemProvider == null) {
+			configurationParametersItemProvider = new ConfigurationParametersItemProvider(this);
+		}
+
+		return configurationParametersItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -294,6 +317,7 @@ public class ApplicationItemProviderAdapterFactory extends ApplicationAdapterFac
 		if (configurationItemProvider != null) configurationItemProvider.dispose();
 		if (configurationElementItemProvider != null) configurationElementItemProvider.dispose();
 		if (optionItemProvider != null) optionItemProvider.dispose();
+		if (configurationParametersItemProvider != null) configurationParametersItemProvider.dispose();
 	}
 
 }

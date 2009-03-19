@@ -4,9 +4,16 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.bluexml.side.Application/src"
     modelPluginID="com.bluexml.side.Application" modelName="Application" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="5.0" copyrightFields="false">
-  <foreignModel>../../com.bluexml.application/metamodel/application.ecore</foreignModel>
+  <foreignModel>application.ecore</foreignModel>
   <genPackages prefix="Application" basePackage="com.bluexml.side" disposableProviderFactory="true"
       ecorePackage="application.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="application.ecore#//StaticConfigurationParameters">
+      <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionsclean"/>
+      <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionsverbose"/>
+      <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionsupdateTgt"/>
+      <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionslogPath"/>
+      <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionsdestinationPath"/>
+    </genEnums>
     <genClasses image="false" ecoreClass="application.ecore#//ModelElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ModelElement/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ModelElement/description"/>
@@ -19,6 +26,7 @@
     </genClasses>
     <genClasses ecoreClass="application.ecore#//Configuration">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference application.ecore#//Configuration/elements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference application.ecore#//Configuration/parameters"/>
     </genClasses>
     <genClasses ecoreClass="application.ecore#//ConfigurationElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ConfigurationElement/id_metamodel"/>
@@ -27,6 +35,10 @@
     </genClasses>
     <genClasses ecoreClass="application.ecore#//Option">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//Option/key"/>
+    </genClasses>
+    <genClasses ecoreClass="application.ecore#//ConfigurationParameters">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ConfigurationParameters/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ConfigurationParameters/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

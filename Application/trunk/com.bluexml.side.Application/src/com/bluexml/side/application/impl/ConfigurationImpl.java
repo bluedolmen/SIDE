@@ -10,6 +10,7 @@ import com.bluexml.side.application.ApplicationPackage;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ConfigurationElement;
 
+import com.bluexml.side.application.ConfigurationParameters;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -20,6 +21,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -30,6 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.application.impl.ConfigurationImpl#getElements <em>Elements</em>}</li>
+ *   <li>{@link com.bluexml.side.application.impl.ConfigurationImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,6 +48,16 @@ public class ConfigurationImpl extends ModelElementImpl implements Configuration
 	 * @ordered
 	 */
 	protected EList<ConfigurationElement> elements;
+
+	/**
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConfigurationParameters> parameters;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -82,11 +95,25 @@ public class ConfigurationImpl extends ModelElementImpl implements Configuration
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ConfigurationParameters> getParameters() {
+		if (parameters == null) {
+			parameters = new EObjectContainmentEList<ConfigurationParameters>(ConfigurationParameters.class, this, ApplicationPackage.CONFIGURATION__PARAMETERS);
+		}
+		return parameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ApplicationPackage.CONFIGURATION__ELEMENTS:
 				return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
+			case ApplicationPackage.CONFIGURATION__PARAMETERS:
+				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -101,6 +128,8 @@ public class ConfigurationImpl extends ModelElementImpl implements Configuration
 		switch (featureID) {
 			case ApplicationPackage.CONFIGURATION__ELEMENTS:
 				return getElements();
+			case ApplicationPackage.CONFIGURATION__PARAMETERS:
+				return getParameters();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -118,6 +147,10 @@ public class ConfigurationImpl extends ModelElementImpl implements Configuration
 				getElements().clear();
 				getElements().addAll((Collection<? extends ConfigurationElement>)newValue);
 				return;
+			case ApplicationPackage.CONFIGURATION__PARAMETERS:
+				getParameters().clear();
+				getParameters().addAll((Collection<? extends ConfigurationParameters>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -133,6 +166,9 @@ public class ConfigurationImpl extends ModelElementImpl implements Configuration
 			case ApplicationPackage.CONFIGURATION__ELEMENTS:
 				getElements().clear();
 				return;
+			case ApplicationPackage.CONFIGURATION__PARAMETERS:
+				getParameters().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -147,6 +183,8 @@ public class ConfigurationImpl extends ModelElementImpl implements Configuration
 		switch (featureID) {
 			case ApplicationPackage.CONFIGURATION__ELEMENTS:
 				return elements != null && !elements.isEmpty();
+			case ApplicationPackage.CONFIGURATION__PARAMETERS:
+				return parameters != null && !parameters.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -71,6 +71,15 @@ public interface ApplicationFactory extends EFactory {
 	Option createOption();
 
 	/**
+	 * Returns a new object of class '<em>Configuration Parameters</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Configuration Parameters</em>'.
+	 * @generated
+	 */
+	ConfigurationParameters createConfigurationParameters();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

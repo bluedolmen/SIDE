@@ -17,6 +17,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Configuration" eSuperTypes="#//ModelElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
         eType="#//ConfigurationElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//ConfigurationParameters" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConfigurationElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id_metamodel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -26,5 +28,16 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Option">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigurationParameters">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="StaticConfigurationParameters">
+    <eLiterals name="generationoptionsclean" literal="generation.options.clean"/>
+    <eLiterals name="generationoptionsverbose" value="1" literal="generation.options.verbose"/>
+    <eLiterals name="generationoptionsupdateTgt" value="3" literal="generation.options.updateTgt"/>
+    <eLiterals name="generationoptionslogPath" value="4" literal="generation.options.logPath"/>
+    <eLiterals name="generationoptionsdestinationPath" value="5" literal="generation.options.destinationPath"/>
   </eClassifiers>
 </ecore:EPackage>
