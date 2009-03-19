@@ -22,13 +22,18 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.accessibility.AccessibleAdapter;
+import org.eclipse.swt.accessibility.AccessibleEvent;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -42,6 +47,10 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.TabFolder;
+import org.eclipse.swt.widgets.TabItem;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
@@ -66,9 +75,9 @@ public class ApplicationDialog extends Dialog {
 	private Text config_description;
 	private TreeViewer viewer;
 	private Tree tree_1;
-	private static Combo combo_1;
+	private static Combo configurationList;
 	public static boolean loadingTree = false;
-	
+
 	private Set<Metamodel> metamodelSet;
 	private Set<Technology> technologySet;
 	private Set<TechnologyVersion> technologyVersionSet;
@@ -76,31 +85,38 @@ public class ApplicationDialog extends Dialog {
 	private Browser documentationText;
 	private static Application application;
 	private IFile model;
-	
+	private Table generatorParameters;
+	private String[] columnNames;
+
 	/**
 	 * Create the dialog
+	 * 
 	 * @param parentShell
-	 * @param rwm_model 
+	 * @param rwm_model
 	 */
 	public ApplicationDialog(Shell parentShell, IFile file) {
 		super(parentShell);
-		
+
 		try {
-			URI uri = URI.createFileURI(file.getRawLocation().toFile().getAbsolutePath());
+			URI uri = URI.createFileURI(file.getRawLocation().toFile()
+					.getAbsolutePath());
 			XMIResource resource = new XMIResourceImpl(uri);
 
-			FileInputStream fi = new FileInputStream(file.getRawLocation().toFile());
-			Map<Object,Object> map = new HashMap<Object,Object>();
-			map.put(ApplicationPackage.eINSTANCE.getNsURI(), ApplicationPackage.eINSTANCE);
-			map.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
+			FileInputStream fi = new FileInputStream(file.getRawLocation()
+					.toFile());
+			Map<Object, Object> map = new HashMap<Object, Object>();
+			map.put(ApplicationPackage.eINSTANCE.getNsURI(),
+					ApplicationPackage.eINSTANCE);
+			map.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION,
+					Boolean.TRUE);
 			resource.load(fi, map);
-			
+
 			application = (Application) resource.getContents().get(0);
 			model = file;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		metamodelSet = new HashSet<Metamodel>();
 		technologySet = new HashSet<Technology>();
 		technologyVersionSet = new HashSet<TechnologyVersion>();
@@ -109,23 +125,24 @@ public class ApplicationDialog extends Dialog {
 
 	private void refreshConfiguration() {
 		loadingTree = true;
-		if (combo_1.getSelectionIndex() != -1) {
-			String name = combo_1.getItem(combo_1.getSelectionIndex());
+		if (configurationList.getSelectionIndex() != -1) {
+			String name = configurationList.getItem(configurationList
+					.getSelectionIndex());
 			Configuration configuration = application.getConfiguration(name);
 
-			//Refresh documentation
+			// Refresh documentation
 			if (configuration != null)
 				if (configuration.getDescription() != null)
 					config_description.setText(configuration.getDescription());
-			
-			//Refresh tree
+
+			// Refresh tree
 			initializeTree();
 			Set<TreeItem> generators = collectGenerators();
 			configureTree(configuration, generators);
 		}
 		loadingTree = false;
 	}
-	
+
 	private Set<TreeItem> collectGenerators() {
 		Set<TreeItem> generators = new HashSet<TreeItem>();
 		collectGenerators(viewer.getTree().getItems(), generators);
@@ -140,7 +157,8 @@ public class ApplicationDialog extends Dialog {
 		}
 	}
 
-	private void configureTree(Configuration configuration, Set<TreeItem> generators) {
+	private void configureTree(Configuration configuration,
+			Set<TreeItem> generators) {
 		for (TreeItem item : generators) {
 			Generator g = (Generator) item.getData();
 			for (ConfigurationElement ce : configuration.getElements())
@@ -148,7 +166,7 @@ public class ApplicationDialog extends Dialog {
 					g.setChecked(true);
 					g.setEnabled(true);
 					viewer.update(g, null);
-			
+
 					for (OptionGenerator o : g.getOptions())
 						for (Option opt : ce.getOptions()) {
 							o.setEnabled(true);
@@ -156,11 +174,11 @@ public class ApplicationDialog extends Dialog {
 								o.setChecked(true);
 							}
 						}
-					//Refresh options
+					// Refresh options
 					for (TreeItem option : item.getItems()) {
 						viewer.update(option.getData(), null);
 					}
-			
+
 					refreshParents(item);
 				}
 		}
@@ -169,19 +187,19 @@ public class ApplicationDialog extends Dialog {
 	private void refreshParents(TreeItem item) {
 		TreeItem parent = item.getParentItem();
 		if (parent != null) {
-			//Check and enable parent
+			// Check and enable parent
 			TreeElement el = (TreeElement) parent.getData();
 			el.setChecked(true);
 			el.setEnabled(true);
 			viewer.update(parent.getData(), null);
-			
-			//Enable all sibling nodes
+
+			// Enable all sibling nodes
 			for (TreeItem sibItem : parent.getItems()) {
 				TreeElement sibEl = (TreeElement) sibItem.getData();
 				sibEl.setEnabled(true);
 				viewer.update(sibItem.getData(), null);
 			}
-			
+
 			refreshParents(parent);
 		}
 	}
@@ -190,23 +208,24 @@ public class ApplicationDialog extends Dialog {
 		TreeItem[] items = viewer.getTree().getItems();
 		initializeTree(items);
 	}
-	
+
 	private void initializeTree(TreeItem[] items) {
 		for (TreeItem item : items) {
 			TreeElement el = (TreeElement) item.getData();
 			el.setChecked(false);
-			el.setEnabled(false);			
+			el.setEnabled(false);
 			if (item.getData() instanceof Metamodel)
 				el.setEnabled(true);
-			
+
 			viewer.update(item.getData(), null);
-			
+
 			initializeTree(item.getItems());
 		}
 	}
 
 	/**
 	 * Create contents of the dialog
+	 * 
 	 * @param parent
 	 */
 	@Override
@@ -214,110 +233,33 @@ public class ApplicationDialog extends Dialog {
 		Composite container = (Composite) super.createDialogArea(parent);
 		container.setLayout(null);
 
-		final Composite composite = new Composite(container, SWT.NONE);
-		composite.setBounds(10, 10, 477, 36);
+		config_description = new Text(container, SWT.READ_ONLY | SWT.BORDER
+				| SWT.WRAP);
+		config_description.setBounds(493, 10, 297, 169);
 
-		combo_1 = new Combo(composite, SWT.READ_ONLY);
-		combo_1.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(final SelectionEvent e) {
-				refreshConfiguration();
-			}
-		});
-		combo_1.setBounds(150, 3, 209, 25);
+		documentationText = new Browser(container, SWT.NONE);
+		documentationText.setBounds(500, 185, 287, 331);
+
+		final TabFolder tabFolder = new TabFolder(container, SWT.NONE);
+		tabFolder.setBounds(5, 45, 482, 468);
+
+		final TabItem globalConfigurationTabItem = new TabItem(tabFolder,
+				SWT.NONE);
+		globalConfigurationTabItem.setText("Global Configuration");
+
+		final Composite composite_1 = new Composite(tabFolder, SWT.NONE);
+		globalConfigurationTabItem.setControl(composite_1);
+
 		
-		//Fill the combo
-		for (ModelElement elt : application.getElements()) {
-			if (elt instanceof Configuration) {
-				Configuration configuration = (Configuration) elt;
-				combo_1.add(configuration.getName());
-			}
-		}
-		if (combo_1.getItemCount() > 0)
-			combo_1.select(0);
 
-		final Label listOfConfigurayionsLabel = new Label(composite, SWT.NONE);
-		listOfConfigurayionsLabel.setBounds(10, 10, 134, 15);
-		listOfConfigurayionsLabel.setText("List of configurations :");
-
-		final Button button = new Button(composite, SWT.NONE);
-		button.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(final SelectionEvent e) {
-				Configuration config = ApplicationFactory.eINSTANCE.createConfiguration();
-
-				int i = 0;
-				String newName = "New configuration";
-				while (application.getConfiguration(newName) != null) {
-					i++;
-					newName = "New configuration ("+i+")";
-				}
-				config.setName(newName);
-				combo_1.add(newName);
-				combo_1.select(combo_1.getItemCount()-1);
-				application.getElements().add(config);
-				
-				refreshConfiguration();
-			}
-		});
-		button.setImage(SWTResourceManager.getImage(ApplicationDialog.class, "tree/img/add.png"));
-		button.setBounds(433, 2, 42, 28);
-
-		final Button button_1 = new Button(composite, SWT.NONE);
-		button_1.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(final SelectionEvent e) {
-				if (combo_1.getItemCount() > 0) {
-					if (combo_1.getSelectionIndex() != -1) {
-						String name = combo_1.getItem(combo_1.getSelectionIndex());
-						Configuration config = application.getConfiguration(name);
-						if (config != null) {
-							application.getElements().remove(config);
-							combo_1.remove(name);
-							if (combo_1.getItemCount() > 0)
-								combo_1.select(0);
-						}
-					}
-				}
-				
-				refreshConfiguration();
-			}
-		});
-		button_1.setImage(SWTResourceManager.getImage(ApplicationDialog.class, "tree/img/delete.png"));
-		button_1.setBounds(396, 2, 42, 28);
-
-		final Button button_2 = new Button(composite, SWT.NONE);
-		button_2.setBounds(359, 2,42, 28);
-		button_2.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(final SelectionEvent e) {
-				if (combo_1.getItemCount() > 0) {
-					if (combo_1.getSelectionIndex() != -1) {
-						String name = combo_1.getItem(combo_1.getSelectionIndex());
-						Configuration config = application.getConfiguration(name);						
-						ConfigurationDialog dialog = new ConfigurationDialog(new Shell(), config.getName(), config.getDescription());
-						if (dialog.open() == Window.OK) {
-							config.setName(dialog.getName());
-							config.setDescription(dialog.getDescription());
-							
-							String[] items = combo_1.getItems();
-							int index = combo_1.getSelectionIndex();
-							items[index] = dialog.getName();
-							combo_1.removeAll();
-							combo_1.setItems(items);
-							combo_1.select(index);
-							config_description.setText(config.getDescription());
-						}
-					}
-				}
-			}
-		});
-		button_2.setImage(SWTResourceManager.getImage(ApplicationDialog.class, "tree/img/edit.png"));
-
-		viewer = new TreeViewer(container, SWT.BORDER);
+		viewer = new TreeViewer(composite_1, SWT.BORDER);
 		tree_1 = viewer.getTree();
-		tree_1.setBounds(10, 52, 480, 466);
+		tree_1.setBounds(10, 52, 454, 392);
 		viewer.setContentProvider(new ConfigurationContentProvider());
 		viewer.setLabelProvider(new ConfigurationLabelProvider());
 		viewer.setInput(this);
 		viewer.expandAll();
-		
+
 		viewer.getTree().addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event event) {
 				documentationText.setText(builDocumentationText());
@@ -339,7 +281,8 @@ public class ApplicationDialog extends Dialog {
 						if (!(item.getData() instanceof OptionGenerator)) {
 							for (TreeItem ti : item.getParentItem().getItems())
 								if (!ti.equals(item)) {
-									TreeElement subEl = (TreeElement) ti.getData();
+									TreeElement subEl = (TreeElement) ti
+											.getData();
 									if (subEl.isChecked()) {
 										subEl.setChecked(false);
 										disableAllSubElements(ti);
@@ -365,7 +308,7 @@ public class ApplicationDialog extends Dialog {
 						enableAllSubElements(ti);
 				}
 			}
-			
+
 			private void disableAllSubElements(TreeItem item) {
 				for (TreeItem ti : item.getItems()) {
 					TreeElement el = (TreeElement) ti.getData();
@@ -378,18 +321,221 @@ public class ApplicationDialog extends Dialog {
 			}
 		});
 
-		config_description = new Text(container, SWT.READ_ONLY | SWT.BORDER | SWT.WRAP);
-		config_description.setBounds(493, 10, 297, 169);
+		final Composite composite = new Composite(tabFolder, SWT.NONE);
 
-		documentationText = new Browser(container, SWT.NONE);
-		documentationText.setBounds(500, 185, 287, 331);
+		final TabItem optionsTabItem = new TabItem(tabFolder, SWT.NONE);
+		optionsTabItem.setText("Options");
 
+		final Composite composite_2 = new Composite(tabFolder, SWT.NONE);
+		optionsTabItem.setControl(composite_2);
+
+		final Button cleanButton = new Button(composite_2, SWT.CHECK);
+		cleanButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(final SelectionEvent e) {
+			}
+		});
+		cleanButton.setText("Clean");
+		cleanButton.setBounds(20, 40, 120, 16);
+
+		final Label generationsOptionsLabel = new Label(composite_2, SWT.NONE);
+		generationsOptionsLabel.setFont(SWTResourceManager.getFont("", 12,
+				SWT.BOLD));
+		generationsOptionsLabel.setText("General generation options");
+		generationsOptionsLabel.setBounds(10, 10, 240, 24);
+
+		final Button verboseButton = new Button(composite_2, SWT.CHECK);
+		verboseButton.setText("Verbose");
+		verboseButton.setBounds(20, 60, 93, 16);
+
+		final Button updateTargetButton = new Button(composite_2, SWT.CHECK);
+		updateTargetButton
+				.setToolTipText("If checked will move uploaded files to your application.");
+		updateTargetButton.getAccessible().addAccessibleListener(
+				new AccessibleAdapter() {
+					public void getHelp(AccessibleEvent e) {
+						e.result = "If checked will move uploaded files to your application.";
+					}
+				});
+		updateTargetButton.setText("Update target");
+		updateTargetButton.setBounds(20, 80, 93, 16);
+
+		final Label generationsOptionsLabel_1 = new Label(composite_2, SWT.NONE);
+		generationsOptionsLabel_1.setBounds(10, 172, 439, 24);
+		generationsOptionsLabel_1.setFont(SWTResourceManager.getFont("", 12,
+				SWT.BOLD));
+		generationsOptionsLabel_1
+				.setText("Specific configuration generation options");
+
+		generatorParameters = new Table(composite_2, SWT.BORDER);
+		generatorParameters.getHorizontalBar().setVisible(false);
+		generatorParameters.getHorizontalBar().setEnabled(false);
+		generatorParameters.setLinesVisible(true);
+		generatorParameters.setHeaderVisible(true);
+		generatorParameters.setBounds(20, 202, 420, 218);
+
+		final TableColumn newColumnTableColumn = new TableColumn(
+				generatorParameters, SWT.RIGHT);
+		generatorParameters.setSortColumn(newColumnTableColumn);
+		newColumnTableColumn.setWidth(100);
+		newColumnTableColumn.setText("Label");
+
+		final TableColumn newColumnTableColumn_1 = new TableColumn(
+				generatorParameters, SWT.NONE);
+		newColumnTableColumn_1.setWidth(315);
+		newColumnTableColumn_1.setText("Value");
+
+		final Text logText = new Text(composite_2, SWT.BORDER);
+		logText.setBounds(115, 110, 323, 22);
+
+		final Label logLabel = new Label(composite_2, SWT.NONE);
+		logLabel.setAlignment(SWT.RIGHT);
+		logLabel.setText("Log path :");
+		logLabel.setBounds(20, 115, 93, 15);
+
+		final Label destinationLabel = new Label(composite_2, SWT.NONE);
+		destinationLabel.setAlignment(SWT.RIGHT);
+		destinationLabel.setBounds(20, 145, 93, 15);
+		destinationLabel.setText("Generation path :");
+
+		final Text destinationText = new Text(composite_2, SWT.BORDER);
+		destinationText.setBounds(115, 144, 323, 22);
+
+		configurationList = new Combo(container, SWT.READ_ONLY);
+		configurationList.setBounds(128, 10, 191, 23);
+		configurationList.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(final SelectionEvent e) {
+				refreshConfiguration();
+			}
+		});
 		
+		// Fill the combo
+		for (ModelElement elt : application.getElements()) {
+			if (elt instanceof Configuration) {
+				Configuration configuration = (Configuration) elt;
+				configurationList.add(configuration.getName());
+			}
+		}
+		
+		if (configurationList.getItemCount() > 0)
+			configurationList.select(0);
+
+		final Label listOfConfigurayionsLabel = new Label(container, SWT.NONE);
+		listOfConfigurayionsLabel.setBounds(5, 13, 136, 23);
+		listOfConfigurayionsLabel.setText("List of configurations :");
+
+		final Button editBt = new Button(container, SWT.NONE);
+		editBt.setBounds(325, 10, 20, 20);
+		editBt.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(final SelectionEvent e) {
+				if (configurationList.getItemCount() > 0) {
+					if (configurationList.getSelectionIndex() != -1) {
+						String name = configurationList
+								.getItem(configurationList.getSelectionIndex());
+						Configuration config = application
+								.getConfiguration(name);
+						ConfigurationDialog dialog = new ConfigurationDialog(
+								new Shell(), config.getName(), config
+										.getDescription());
+						if (dialog.open() == Window.OK) {
+							config.setName(dialog.getName());
+							config.setDescription(dialog.getDescription());
+
+							String[] items = configurationList.getItems();
+							int index = configurationList.getSelectionIndex();
+							items[index] = dialog.getName();
+							configurationList.removeAll();
+							configurationList.setItems(items);
+							configurationList.select(index);
+							config_description.setText(config.getDescription());
+						}
+					}
+				}
+			}
+		});
+		editBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class,
+				"tree/img/edit.png"));
+
+		final Button addBt = new Button(container, SWT.NONE);
+		addBt.setBounds(351, 10, 20, 20);
+		addBt.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(final SelectionEvent e) {
+				Configuration config = ApplicationFactory.eINSTANCE
+						.createConfiguration();
+
+				int i = 0;
+				String newName = "New configuration";
+				while (application.getConfiguration(newName) != null) {
+					i++;
+					newName = "New configuration (" + i + ")";
+				}
+				config.setName(newName);
+				configurationList.add(newName);
+				configurationList.select(configurationList.getItemCount() - 1);
+				application.getElements().add(config);
+
+				refreshConfiguration();
+			}
+		});
+		addBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class,
+				"tree/img/add.png"));
+
+		final Button deleteBt = new Button(container, SWT.NONE);
+		deleteBt.setBounds(377, 10, 20, 20);
+		deleteBt.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(final SelectionEvent e) {
+				if (configurationList.getItemCount() > 0) {
+					if (configurationList.getSelectionIndex() != -1) {
+						String name = configurationList
+								.getItem(configurationList.getSelectionIndex());
+						Configuration config = application
+								.getConfiguration(name);
+						if (config != null) {
+							application.getElements().remove(config);
+							configurationList.remove(name);
+							if (configurationList.getItemCount() > 0)
+								configurationList.select(0);
+						}
+					}
+				}
+
+				refreshConfiguration();
+			}
+		});
+		deleteBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class,
+				"tree/img/delete.png"));
+
 		refreshConfiguration();
-		
+
 		return container;
 	}
-	
+
+	/**
+	 * Create the TableViewer
+	 */
+	private void createTableViewer() {
+		TableViewer generatorParametersViewer = new TableViewer(generatorParameters);
+		generatorParametersViewer.setUseHashlookup(true);
+		//generatorParametersViewer.setColumnProperties(columnNames );
+
+		// Create the cell editors
+		org.eclipse.jface.viewers.CellEditor[] editors = new CellEditor[2];
+
+		// Column 1 : Label (Text, readonly)
+		editors[0] = new TextCellEditor(generatorParameters);
+
+		// Column 2 : Value (Text, editable)
+		TextCellEditor textEditor = new TextCellEditor(generatorParameters);
+		((Text) textEditor.getControl()).setTextLimit(60);
+		editors[1] =  (CellEditor) textEditor;
+
+
+		// Assign the cell editors to the viewer
+		generatorParametersViewer.setCellEditors(editors);
+		// Set the cell modifier for the viewer
+		//TODO
+//		generatorParametersViewer.setCellModifier(new ExampleCellModifier(this));
+	}
+
 	private String builDocumentationText() {
 		String result = "<font face=\"Helvetica, Arial\" size=\"2\">";
 		TreeItem[] items = viewer.getTree().getSelection();
@@ -433,7 +579,7 @@ public class ApplicationDialog extends Dialog {
 		result += "</font>";
 		return result;
 	}
-	
+
 	class ConfigurationContentProvider implements ITreeContentProvider {
 
 		public ConfigurationContentProvider() {
@@ -516,7 +662,14 @@ public class ApplicationDialog extends Dialog {
 						}
 					}
 				}
-				
+
+			}
+
+			// Scan for generator parameters
+			for (IConfigurationElement config : contributions) {
+				if (config.getName().equalsIgnoreCase("configurationParameter")) {
+
+				}
 			}
 		}
 
@@ -620,6 +773,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Create contents of the button bar
+	 * 
 	 * @param parent
 	 */
 	@Override
@@ -637,16 +791,23 @@ public class ApplicationDialog extends Dialog {
 	protected Point getInitialSize() {
 		return new Point(800, 600);
 	}
+
 	protected void buttonPressed(int buttonId) {
 		if (buttonId == IDialogConstants.OK_ID) {
 			ResourceSet resourceSet = new ResourceSetImpl();
-			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("application", new XMIResourceFactoryImpl());
-			resourceSet.getPackageRegistry().put(ApplicationPackage.eNS_URI, ApplicationPackage.eINSTANCE);
-			org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource(URI.createURI(model.getRawLocation().toFile().getAbsolutePath()));
+			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+					.put("application", new XMIResourceFactoryImpl());
+			resourceSet.getPackageRegistry().put(ApplicationPackage.eNS_URI,
+					ApplicationPackage.eINSTANCE);
+			org.eclipse.emf.ecore.resource.Resource resource = resourceSet
+					.createResource(URI.createURI(model.getRawLocation()
+							.toFile().getAbsolutePath()));
 			resource.getContents().add(application);
-			
+
 			try {
-				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(model.getRawLocation().toFile().getAbsolutePath()));
+				BufferedOutputStream out = new BufferedOutputStream(
+						new FileOutputStream(model.getRawLocation().toFile()
+								.getAbsolutePath()));
 				Map<String, Object> saveOptions = new HashMap<String, Object>();
 				resource.save(out, saveOptions);
 				out.close();
@@ -654,18 +815,20 @@ public class ApplicationDialog extends Dialog {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		}
 		super.buttonPressed(buttonId);
 	}
+
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		newShell.setText("Configuration");
 	}
-	
+
 	static public Configuration getCurrentConfiguration() {
-		if (combo_1.getSelectionIndex() != -1) {
-			String name = combo_1.getItem(combo_1.getSelectionIndex());
+		if (configurationList.getSelectionIndex() != -1) {
+			String name = configurationList.getItem(configurationList
+					.getSelectionIndex());
 			Configuration configuration = application.getConfiguration(name);
 			return configuration;
 		}
