@@ -7,6 +7,7 @@
 package com.bluexml.side.clazz.impl;
 
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.AssociationType;
 import com.bluexml.side.clazz.ClassModelElement;
@@ -17,15 +18,22 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
+import org.eclipse.ocl.expressions.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,7 +54,6 @@ import org.eclipse.ocl.ecore.OCL;
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationImpl#getAssociationsClass <em>Associations Class</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationImpl#getRoleSrc <em>Role Src</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationImpl#getRoleTarget <em>Role Target</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.impl.AssociationImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationImpl#getRoleSrcTitle <em>Role Src Title</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationImpl#getRoleTargetTitle <em>Role Target Title</em>}</li>
  * </ul>
@@ -63,7 +70,7 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 	 * @generated
 	 * @ordered
 	 */
-	protected ClassModelElement source;
+	protected AbstractClass source;
 
 	/**
 	 * The cached value of the '{@link #getDestination() <em>Destination</em>}' reference.
@@ -73,7 +80,7 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 	 * @generated
 	 * @ordered
 	 */
-	protected ClassModelElement destination;
+	protected AbstractClass destination;
 
 	/**
 	 * The default value of the '{@link #isIsNavigableSRC() <em>Is Navigable SRC</em>}' attribute.
@@ -266,26 +273,6 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 	protected String roleTarget = ROLE_TARGET_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTitle()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String TITLE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTitle()
-	 * @generated
-	 * @ordered
-	 */
-	protected String title = TITLE_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getRoleSrcTitle() <em>Role Src Title</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -349,10 +336,10 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassModelElement getSource() {
+	public AbstractClass getSource() {
 		if (source != null && source.eIsProxy()) {
 			InternalEObject oldSource = (InternalEObject)source;
-			source = (ClassModelElement)eResolveProxy(oldSource);
+			source = (AbstractClass)eResolveProxy(oldSource);
 			if (source != oldSource) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClazzPackage.ASSOCIATION__SOURCE, oldSource, source));
@@ -366,7 +353,7 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassModelElement basicGetSource() {
+	public AbstractClass basicGetSource() {
 		return source;
 	}
 
@@ -375,8 +362,8 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSource(ClassModelElement newSource) {
-		ClassModelElement oldSource = source;
+	public void setSource(AbstractClass newSource) {
+		AbstractClass oldSource = source;
 		source = newSource;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.ASSOCIATION__SOURCE, oldSource, source));
@@ -387,10 +374,10 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassModelElement getDestination() {
+	public AbstractClass getDestination() {
 		if (destination != null && destination.eIsProxy()) {
 			InternalEObject oldDestination = (InternalEObject)destination;
-			destination = (ClassModelElement)eResolveProxy(oldDestination);
+			destination = (AbstractClass)eResolveProxy(oldDestination);
 			if (destination != oldDestination) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClazzPackage.ASSOCIATION__DESTINATION, oldDestination, destination));
@@ -404,7 +391,7 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassModelElement basicGetDestination() {
+	public AbstractClass basicGetDestination() {
 		return destination;
 	}
 
@@ -413,8 +400,8 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDestination(ClassModelElement newDestination) {
-		ClassModelElement oldDestination = destination;
+	public void setDestination(AbstractClass newDestination) {
+		AbstractClass oldDestination = destination;
 		destination = newDestination;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.ASSOCIATION__DESTINATION, oldDestination, destination));
@@ -626,27 +613,6 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getTitle() {
-		return title;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTitle(String newTitle) {
-		String oldTitle = title;
-		title = newTitle;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.ASSOCIATION__TITLE, oldTitle, title));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getRoleSrcTitle() {
 		return roleSrcTitle;
 	}
@@ -718,8 +684,6 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 				return getRoleSrc();
 			case ClazzPackage.ASSOCIATION__ROLE_TARGET:
 				return getRoleTarget();
-			case ClazzPackage.ASSOCIATION__TITLE:
-				return getTitle();
 			case ClazzPackage.ASSOCIATION__ROLE_SRC_TITLE:
 				return getRoleSrcTitle();
 			case ClazzPackage.ASSOCIATION__ROLE_TARGET_TITLE:
@@ -738,10 +702,10 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ClazzPackage.ASSOCIATION__SOURCE:
-				setSource((ClassModelElement)newValue);
+				setSource((AbstractClass)newValue);
 				return;
 			case ClazzPackage.ASSOCIATION__DESTINATION:
-				setDestination((ClassModelElement)newValue);
+				setDestination((AbstractClass)newValue);
 				return;
 			case ClazzPackage.ASSOCIATION__IS_NAVIGABLE_SRC:
 				setIsNavigableSRC(((Boolean)newValue).booleanValue());
@@ -774,9 +738,6 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 			case ClazzPackage.ASSOCIATION__ROLE_TARGET:
 				setRoleTarget((String)newValue);
 				return;
-			case ClazzPackage.ASSOCIATION__TITLE:
-				setTitle((String)newValue);
-				return;
 			case ClazzPackage.ASSOCIATION__ROLE_SRC_TITLE:
 				setRoleSrcTitle((String)newValue);
 				return;
@@ -796,10 +757,10 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ClazzPackage.ASSOCIATION__SOURCE:
-				setSource((ClassModelElement)null);
+				setSource((AbstractClass)null);
 				return;
 			case ClazzPackage.ASSOCIATION__DESTINATION:
-				setDestination((ClassModelElement)null);
+				setDestination((AbstractClass)null);
 				return;
 			case ClazzPackage.ASSOCIATION__IS_NAVIGABLE_SRC:
 				setIsNavigableSRC(IS_NAVIGABLE_SRC_EDEFAULT);
@@ -830,9 +791,6 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 				return;
 			case ClazzPackage.ASSOCIATION__ROLE_TARGET:
 				setRoleTarget(ROLE_TARGET_EDEFAULT);
-				return;
-			case ClazzPackage.ASSOCIATION__TITLE:
-				setTitle(TITLE_EDEFAULT);
 				return;
 			case ClazzPackage.ASSOCIATION__ROLE_SRC_TITLE:
 				setRoleSrcTitle(ROLE_SRC_TITLE_EDEFAULT);
@@ -876,8 +834,6 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 				return ROLE_SRC_EDEFAULT == null ? roleSrc != null : !ROLE_SRC_EDEFAULT.equals(roleSrc);
 			case ClazzPackage.ASSOCIATION__ROLE_TARGET:
 				return ROLE_TARGET_EDEFAULT == null ? roleTarget != null : !ROLE_TARGET_EDEFAULT.equals(roleTarget);
-			case ClazzPackage.ASSOCIATION__TITLE:
-				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
 			case ClazzPackage.ASSOCIATION__ROLE_SRC_TITLE:
 				return ROLE_SRC_TITLE_EDEFAULT == null ? roleSrcTitle != null : !ROLE_SRC_TITLE_EDEFAULT.equals(roleSrcTitle);
 			case ClazzPackage.ASSOCIATION__ROLE_TARGET_TITLE:
@@ -914,8 +870,6 @@ public class AssociationImpl extends NamedClassModelElementImpl implements Assoc
 		result.append(roleSrc);
 		result.append(", roleTarget: ");
 		result.append(roleTarget);
-		result.append(", title: ");
-		result.append(title);
 		result.append(", roleSrcTitle: ");
 		result.append(roleSrcTitle);
 		result.append(", roleTargetTitle: ");

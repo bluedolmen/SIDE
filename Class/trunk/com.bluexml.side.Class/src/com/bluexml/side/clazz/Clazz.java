@@ -146,4 +146,130 @@ public interface Clazz extends AbstractClass {
 	 */
 	EList<View> getHasView();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.getAllInheritedClassAndAspectAttributes() -> union(self.getClassAndAspectAttributes())' description='search for class attributes, inherited one and finaly added to the class by aspect'"
+	 * @generated
+	 */
+	EList<Attribute> getAllAttributes();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.getInheritedClasses() ->asSet() ->iterate(cl:Clazz;result:Set(Attribute)=Set{}|result->union(cl.attributes) ->asSet()))' description='search attributes than is describe in inherited classes (without Aspects)'"
+	 * @generated
+	 */
+	EList<Attribute> getAllInheritedAttributes();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.attributes -> asSet() -> union(self.getAspectAttributes())'"
+	 * @generated
+	 */
+	EList<Attribute> getClassAndAspectAttributes();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.generalizations  ->  asSet()  -> iterate(e:Clazz;result :Set(Clazz)= Set{}| result -> including(e) -> union(e.getInheritedClasses()))'"
+	 * @generated
+	 */
+	EList<Clazz> getInheritedClasses();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.aspects ->  asSet()  -> iterate(e:Aspect;result :Set(Attribute)= Set{}| result -> union(e.attributes ->asSet()))'"
+	 * @generated
+	 */
+	EList<Attribute> getAspectAttributes();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.getAllInheritedAttributes() -> union(self.getClassAndAspectAttributes())'"
+	 * @generated
+	 */
+	EList<Attribute> getSubTypes();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.getInheritedClasses() ->asSet() ->iterate(cl:Clazz;result:Set(Attribute)=Set{}|result->union(cl.getClassAndAspectAttributes() ->asSet()))' description='search attributes than is describe in inherited classes (with Aspects)'"
+	 * @generated
+	 */
+	EList<Attribute> getAllInheritedClassAndAspectAttributes();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='Association.allInstances() ->select(c:Association|self.isSource(c))' description='search association where this clazz is source'"
+	 * @generated
+	 */
+	EList<Association> getSourceAssociations();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model required="true" assoRequired="true"
+	 *        annotation="http://www.bluexml.com/OCL body='asso.source = self and asso.isNavigableTARGET or asso.destination = self and asso.isNavigableSRC' description='search for class attributes, inherited one and finaly added to the class by aspect'"
+	 * @generated
+	 */
+	boolean isSource(Association asso);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model required="true" assoRequired="true"
+	 *        annotation="http://www.bluexml.com/OCL body='asso.source = self and asso.isNavigableSRC or asso.destination = self and asso.isNavigableTARGET' description='search for class attributes, inherited one and finaly added to the class by aspect'"
+	 * @generated
+	 */
+	boolean isTarget(Association asso);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='Association.allInstances() ->select(c:Association|self.isTarget(c))' description='search association where this clazz is target'"
+	 * @generated
+	 */
+	EList<Association> getTargetAssociations();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.getInheritedClasses() -> including(self) ->iterate(e:Clazz;result:Set(Association)=Set{}|result->union(e.getSourceAssociations()))' description='search association where this clazz is source'"
+	 * @generated
+	 */
+	EList<Association> getAllSourceAssociations();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.getInheritedClasses() -> including(self) ->iterate(e:Clazz;result:Set(Association)=Set{}|result->union(e.getTargetAssociations()))' description='search associations where this clazz is source or one of inheritedClass'"
+	 * @generated
+	 */
+	EList<Association> getAllTargetAssociations();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='Association.allInstances() ->select(e:Association| self.getInheritedClasses() ->including(self) -> includesAll(e.associationsClass))' description='give the list of associations where this clazz is the associatedClazz'"
+	 * @generated
+	 */
+	EList<Association> isClassAssociationsIn();
+
 } // Clazz

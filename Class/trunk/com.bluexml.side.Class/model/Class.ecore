@@ -9,18 +9,54 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="documentation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedClassModelElement" eSuperTypes="#//ClassModelElement">
-    <eOperations name="getFullName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+    <eOperations name="getFullName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="if self.getContainer().oclIsUndefined() then&#xD;&#x9;self.name&#xD;else&#xD;&#x9;if self.getContainer().oclIsKindOf(NamedClassModelElement) then&#xD;&#x9;&#x9;self.getContainer().oclAsType(NamedClassModelElement).getFullName().concat('.').concat(self.name)&#xD;&#x9;else&#xD;&#x9;&#x9;self.getContainer().oclAsType(ClassPackage).getFullName().concat('.').concat(self.name)&#xD;&#x9;endif&#x9;&#xD;endif"/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="getDescriptionOrName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="if self.description.oclIsUndefined() or self.description.size() &lt;0 then&#xD;&#x9;self.name&#xD;else&#xD;&#x9;self.description&#xD;endif"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getLabel" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="if self.title.oclIsUndefined() or self.title.size() &lt;0 then&#xD;&#x9;self.name&#xD;else&#xD;&#x9;self.title&#xD;endif"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassPackage" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Package">
     <eOperations name="getFullName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="if self.getContainer().oclIsUndefined() then&#xD;&#x9;self.name&#xD;else&#xD;&#x9;self.getContainer().oclAsType(ClassPackage).getFullName().concat('.').concat(self.name)&#xD;endif"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAllPackages" upperBound="-1" eType="#//ClassPackage">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="ClassPackage.allInstances()"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAllClasses" upperBound="-1" eType="#//Clazz">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="Clazz.allInstances()"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAllEnumerations" upperBound="-1" eType="#//Enumeration">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="Enumeration.allInstances()"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAllAspects" upperBound="-1" eType="#//Aspect">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="Aspect.allInstances()"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAllAssociations" upperBound="-1" eType="#//Association">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="Association.allInstances()"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classSet" upperBound="-1"
@@ -35,6 +71,88 @@
         eType="#//View" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Clazz" eSuperTypes="#//AbstractClass">
+    <eOperations name="getAllAttributes" upperBound="-1" eType="#//Attribute">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.getAllInheritedClassAndAspectAttributes() -> union(self.getClassAndAspectAttributes())"/>
+        <details key="description" value="search for class attributes, inherited one and finaly added to the class by aspect"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAllInheritedAttributes" upperBound="-1" eType="#//Attribute">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.getInheritedClasses() ->asSet() ->iterate(cl:Clazz;result:Set(Attribute)=Set{}|result->union(cl.attributes) ->asSet()))"/>
+        <details key="description" value="search attributes than is describe in inherited classes (without Aspects)"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getClassAndAspectAttributes" upperBound="-1" eType="#//Attribute">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.attributes -> asSet() -> union(self.getAspectAttributes())"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getInheritedClasses" upperBound="-1" eType="#//Clazz">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.generalizations  ->  asSet()  -> iterate(e:Clazz;result :Set(Clazz)= Set{}| result -> including(e) -> union(e.getInheritedClasses()))"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAspectAttributes" upperBound="-1" eType="#//Attribute">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.aspects ->  asSet()  -> iterate(e:Aspect;result :Set(Attribute)= Set{}| result -> union(e.attributes ->asSet()))"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getSubTypes" upperBound="-1" eType="#//Attribute">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.getAllInheritedAttributes() -> union(self.getClassAndAspectAttributes())"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAllInheritedClassAndAspectAttributes" upperBound="-1" eType="#//Attribute">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.getInheritedClasses() ->asSet() ->iterate(cl:Clazz;result:Set(Attribute)=Set{}|result->union(cl.getClassAndAspectAttributes() ->asSet()))"/>
+        <details key="description" value="search attributes than is describe in inherited classes (with Aspects)"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getSourceAssociations" upperBound="-1" eType="#//Association">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="Association.allInstances() ->select(c:Association|self.isSource(c))"/>
+        <details key="description" value="search association where this clazz is source"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isSource" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="asso.source = self and asso.isNavigableTARGET or asso.destination = self and asso.isNavigableSRC"/>
+        <details key="description" value="search for class attributes, inherited one and finaly added to the class by aspect"/>
+      </eAnnotations>
+      <eParameters name="asso" lowerBound="1" eType="#//Association"/>
+    </eOperations>
+    <eOperations name="isTarget" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="asso.source = self and asso.isNavigableSRC or asso.destination = self and asso.isNavigableTARGET"/>
+        <details key="description" value="search for class attributes, inherited one and finaly added to the class by aspect"/>
+      </eAnnotations>
+      <eParameters name="asso" lowerBound="1" eType="#//Association"/>
+    </eOperations>
+    <eOperations name="getTargetAssociations" upperBound="-1" eType="#//Association">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="Association.allInstances() ->select(c:Association|self.isTarget(c))"/>
+        <details key="description" value="search association where this clazz is target"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAllSourceAssociations" upperBound="-1" eType="#//Association">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.getInheritedClasses() -> including(self) ->iterate(e:Clazz;result:Set(Association)=Set{}|result->union(e.getSourceAssociations()))"/>
+        <details key="description" value="search association where this clazz is source"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAllTargetAssociations" upperBound="-1" eType="#//Association">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.getInheritedClasses() -> including(self) ->iterate(e:Clazz;result:Set(Association)=Set{}|result->union(e.getTargetAssociations()))"/>
+        <details key="description" value="search associations where this clazz is source or one of inheritedClass"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isClassAssociationsIn" upperBound="-1" eType="#//Association">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="Association.allInstances() ->select(e:Association| self.getInheritedClasses() ->including(self) -> includesAll(e.associationsClass))"/>
+        <details key="description" value="give the list of associations where this clazz is the associatedClazz"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
         eType="#//Operation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="generalizations" upperBound="-1"
@@ -47,8 +165,8 @@
         eType="#//View"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="#//NamedClassModelElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//ClassModelElement"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="destination" eType="#//ClassModelElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//AbstractClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="destination" eType="#//AbstractClass"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isNavigableSRC" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isNavigableTARGET" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="minSRC" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -65,7 +183,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="roleSrc" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="roleTarget" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="roleSrcTitle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="roleTargetTitle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
@@ -76,7 +193,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="initialValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="#//Visibility"
         defaultValueLiteral="Private"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="valueList" eType="#//Enumeration"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
@@ -134,7 +250,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="Aspect" eSuperTypes="#//AbstractClass"/>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractClass" abstract="true" eSuperTypes="#//AbstractContainer"/>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractContainer" abstract="true" eSuperTypes="#//NamedClassModelElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
         eType="#//Attribute" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="associations" upperBound="-1"

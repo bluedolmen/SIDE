@@ -65,6 +65,7 @@ public class NamedClassModelElementItemProvider
 
 			addNamePropertyDescriptor(object);
 			addDescriptionPropertyDescriptor(object);
+			addTitlePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -114,6 +115,28 @@ public class NamedClassModelElementItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Title feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTitlePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_NamedClassModelElement_title_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NamedClassModelElement_title_feature", "_UI_NamedClassModelElement_type"),
+				 ClazzPackage.Literals.NAMED_CLASS_MODEL_ELEMENT__TITLE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns NamedClassModelElement.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -152,6 +175,7 @@ public class NamedClassModelElementItemProvider
 		switch (notification.getFeatureID(NamedClassModelElement.class)) {
 			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__NAME:
 			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION:
+			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__TITLE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

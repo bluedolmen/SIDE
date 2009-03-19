@@ -21,6 +21,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EAnnotation;
@@ -228,6 +229,191 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getFullNameBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ClassPackage> getAllPackages() {
+		if (getAllPackagesBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(1);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.CLASS_PACKAGE, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllPackagesBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllPackagesBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<ClassPackage> result = (Collection<ClassPackage>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<ClassPackage>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllPackages <em>Get All Packages</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllPackages
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllPackagesBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Clazz> getAllClasses() {
+		if (getAllClassesBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(2);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.CLASS_PACKAGE, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllClassesBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllClassesBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Clazz> result = (Collection<Clazz>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Clazz>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllClasses <em>Get All Classes</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllClasses
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllClassesBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Enumeration> getAllEnumerations() {
+		if (getAllEnumerationsBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(3);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.CLASS_PACKAGE, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllEnumerationsBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllEnumerationsBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Enumeration> result = (Collection<Enumeration>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Enumeration>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllEnumerations <em>Get All Enumerations</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllEnumerations
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllEnumerationsBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Aspect> getAllAspects() {
+		if (getAllAspectsBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(4);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.CLASS_PACKAGE, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllAspectsBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllAspectsBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Aspect> result = (Collection<Aspect>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Aspect>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllAspects <em>Get All Aspects</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllAspects
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllAspectsBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Association> getAllAssociations() {
+		if (getAllAssociationsBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(5);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.CLASS_PACKAGE, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllAssociationsBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllAssociationsBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Association> result = (Collection<Association>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Association>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllAssociations <em>Get All Associations</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllAssociations
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllAssociationsBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -117,5 +117,50 @@ public interface ClassPackage extends com.bluexml.side.common.Package {
 	 * @generated
 	 */
 	String getFullName();
-		
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='ClassPackage.allInstances()'"
+	 * @generated
+	 */
+	EList<ClassPackage> getAllPackages();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='Clazz.allInstances()'"
+	 * @generated
+	 */
+	EList<Clazz> getAllClasses();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='Enumeration.allInstances()'"
+	 * @generated
+	 */
+	EList<Enumeration> getAllEnumerations();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='Aspect.allInstances()'"
+	 * @generated
+	 */
+	EList<Aspect> getAllAspects();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='Association.allInstances()'"
+	 * @generated
+	 */
+	EList<Association> getAllAssociations();
+
 } // ClassPackage

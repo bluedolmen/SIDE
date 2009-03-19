@@ -16,7 +16,6 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.bluexml.side.clazz.AbstractContainer#getTitle <em>Title</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.AbstractContainer#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.AbstractContainer#getAssociations <em>Associations</em>}</li>
  * </ul>
@@ -27,32 +26,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface AbstractContainer extends NamedClassModelElement {
-	/**
-	 * Returns the value of the '<em><b>Title</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Title</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Title</em>' attribute.
-	 * @see #setTitle(String)
-	 * @see com.bluexml.side.clazz.ClazzPackage#getAbstractContainer_Title()
-	 * @model
-	 * @generated
-	 */
-	String getTitle();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.clazz.AbstractContainer#getTitle <em>Title</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Title</em>' attribute.
-	 * @see #getTitle()
-	 * @generated
-	 */
-	void setTitle(String value);
-
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
 	 * The list contents are of type {@link com.bluexml.side.clazz.Attribute}.

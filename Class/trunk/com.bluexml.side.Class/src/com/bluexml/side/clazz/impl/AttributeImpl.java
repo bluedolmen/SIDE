@@ -13,13 +13,22 @@ import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.clazz.Visibility;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
+import org.eclipse.ocl.expressions.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +40,6 @@ import org.eclipse.ocl.ecore.OCL;
  *   <li>{@link com.bluexml.side.clazz.impl.AttributeImpl#getTyp <em>Typ</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AttributeImpl#getInitialValue <em>Initial Value</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AttributeImpl#getVisibility <em>Visibility</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.impl.AttributeImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AttributeImpl#getValueList <em>Value List</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AttributeImpl#isUnique <em>Unique</em>}</li>
  * </ul>
@@ -99,26 +107,6 @@ public class AttributeImpl extends NamedClassModelElementImpl implements Attribu
 	 * @ordered
 	 */
 	protected Visibility visibility = VISIBILITY_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTitle()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String TITLE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTitle()
-	 * @generated
-	 * @ordered
-	 */
-	protected String title = TITLE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getValueList() <em>Value List</em>}' reference.
@@ -237,27 +225,6 @@ public class AttributeImpl extends NamedClassModelElementImpl implements Attribu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getTitle() {
-		return title;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTitle(String newTitle) {
-		String oldTitle = title;
-		title = newTitle;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.ATTRIBUTE__TITLE, oldTitle, title));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Enumeration getValueList() {
 		if (valueList != null && valueList.eIsProxy()) {
 			InternalEObject oldValueList = (InternalEObject)valueList;
@@ -326,8 +293,6 @@ public class AttributeImpl extends NamedClassModelElementImpl implements Attribu
 				return getInitialValue();
 			case ClazzPackage.ATTRIBUTE__VISIBILITY:
 				return getVisibility();
-			case ClazzPackage.ATTRIBUTE__TITLE:
-				return getTitle();
 			case ClazzPackage.ATTRIBUTE__VALUE_LIST:
 				if (resolve) return getValueList();
 				return basicGetValueList();
@@ -353,9 +318,6 @@ public class AttributeImpl extends NamedClassModelElementImpl implements Attribu
 				return;
 			case ClazzPackage.ATTRIBUTE__VISIBILITY:
 				setVisibility((Visibility)newValue);
-				return;
-			case ClazzPackage.ATTRIBUTE__TITLE:
-				setTitle((String)newValue);
 				return;
 			case ClazzPackage.ATTRIBUTE__VALUE_LIST:
 				setValueList((Enumeration)newValue);
@@ -384,9 +346,6 @@ public class AttributeImpl extends NamedClassModelElementImpl implements Attribu
 			case ClazzPackage.ATTRIBUTE__VISIBILITY:
 				setVisibility(VISIBILITY_EDEFAULT);
 				return;
-			case ClazzPackage.ATTRIBUTE__TITLE:
-				setTitle(TITLE_EDEFAULT);
-				return;
 			case ClazzPackage.ATTRIBUTE__VALUE_LIST:
 				setValueList((Enumeration)null);
 				return;
@@ -411,8 +370,6 @@ public class AttributeImpl extends NamedClassModelElementImpl implements Attribu
 				return INITIAL_VALUE_EDEFAULT == null ? initialValue != null : !INITIAL_VALUE_EDEFAULT.equals(initialValue);
 			case ClazzPackage.ATTRIBUTE__VISIBILITY:
 				return visibility != VISIBILITY_EDEFAULT;
-			case ClazzPackage.ATTRIBUTE__TITLE:
-				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
 			case ClazzPackage.ATTRIBUTE__VALUE_LIST:
 				return valueList != null;
 			case ClazzPackage.ATTRIBUTE__UNIQUE:
@@ -437,8 +394,6 @@ public class AttributeImpl extends NamedClassModelElementImpl implements Attribu
 		result.append(initialValue);
 		result.append(", visibility: ");
 		result.append(visibility);
-		result.append(", title: ");
-		result.append(title);
 		result.append(", unique: ");
 		result.append(unique);
 		result.append(')');

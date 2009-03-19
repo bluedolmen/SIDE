@@ -6,6 +6,8 @@
  */
 package com.bluexml.side.clazz;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->

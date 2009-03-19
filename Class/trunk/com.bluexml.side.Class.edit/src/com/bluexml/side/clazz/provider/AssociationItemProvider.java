@@ -75,7 +75,6 @@ public class AssociationItemProvider
 			addAssociationsClassPropertyDescriptor(object);
 			addRoleSrcPropertyDescriptor(object);
 			addRoleTargetPropertyDescriptor(object);
-			addTitlePropertyDescriptor(object);
 			addRoleSrcTitlePropertyDescriptor(object);
 			addRoleTargetTitlePropertyDescriptor(object);
 		}
@@ -347,28 +346,6 @@ public class AssociationItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Title feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTitlePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Association_title_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Association_title_feature", "_UI_Association_type"),
-				 ClazzPackage.Literals.ASSOCIATION__TITLE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This adds a property descriptor for the Role Src Title feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -458,7 +435,6 @@ public class AssociationItemProvider
 			case ClazzPackage.ASSOCIATION__ASSOCIATION_TYPE:
 			case ClazzPackage.ASSOCIATION__ROLE_SRC:
 			case ClazzPackage.ASSOCIATION__ROLE_TARGET:
-			case ClazzPackage.ASSOCIATION__TITLE:
 			case ClazzPackage.ASSOCIATION__ROLE_SRC_TITLE:
 			case ClazzPackage.ASSOCIATION__ROLE_TARGET_TITLE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

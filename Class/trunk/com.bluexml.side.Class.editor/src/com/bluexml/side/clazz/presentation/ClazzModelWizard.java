@@ -75,9 +75,7 @@ import org.eclipse.ui.part.ISetSelectionTarget;
 
 import com.bluexml.side.clazz.ClazzFactory;
 import com.bluexml.side.clazz.ClazzPackage;
-import com.bluexml.side.clazz.impl.ClassPackageImpl;
 import com.bluexml.side.clazz.provider.ClassEditPlugin;
-import com.bluexml.side.clazz.provider.ClassPackageItemProvider;
 
 
 import org.eclipse.core.runtime.Path;

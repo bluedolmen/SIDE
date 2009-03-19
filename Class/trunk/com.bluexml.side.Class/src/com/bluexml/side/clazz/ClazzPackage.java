@@ -200,13 +200,22 @@ public interface ClazzPackage extends EPackage {
 	int NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION = CLASS_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_CLASS_MODEL_ELEMENT__TITLE = CLASS_MODEL_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Named Class Model Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT = CLASS_MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT = CLASS_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.ClassPackageImpl <em>Class Package</em>}' class.
@@ -415,7 +424,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CONTAINER__TITLE = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 0;
+	int ABSTRACT_CONTAINER__TITLE = NAMED_CLASS_MODEL_ELEMENT__TITLE;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -424,7 +433,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CONTAINER__ATTRIBUTES = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 1;
+	int ABSTRACT_CONTAINER__ATTRIBUTES = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Associations</b></em>' reference list.
@@ -433,7 +442,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CONTAINER__ASSOCIATIONS = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int ABSTRACT_CONTAINER__ASSOCIATIONS = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Container</em>' class.
@@ -442,7 +451,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CONTAINER_FEATURE_COUNT = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 3;
+	int ABSTRACT_CONTAINER_FEATURE_COUNT = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.AbstractClassImpl <em>Abstract Class</em>}' class.
@@ -790,6 +799,15 @@ public interface ClazzPackage extends EPackage {
 	int ASSOCIATION__DESCRIPTION = NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION;
 
 	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION__TITLE = NAMED_CLASS_MODEL_ELEMENT__TITLE;
+
+	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -898,22 +916,13 @@ public interface ClazzPackage extends EPackage {
 	int ASSOCIATION__ROLE_TARGET = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
-	 * The feature id for the '<em><b>Title</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION__TITLE = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 12;
-
-	/**
 	 * The feature id for the '<em><b>Role Src Title</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__ROLE_SRC_TITLE = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 13;
+	int ASSOCIATION__ROLE_SRC_TITLE = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Role Target Title</b></em>' attribute.
@@ -922,7 +931,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__ROLE_TARGET_TITLE = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 14;
+	int ASSOCIATION__ROLE_TARGET_TITLE = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 13;
 
 	/**
 	 * The number of structural features of the '<em>Association</em>' class.
@@ -931,7 +940,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_FEATURE_COUNT = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 15;
+	int ASSOCIATION_FEATURE_COUNT = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 14;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.AttributeImpl <em>Attribute</em>}' class.
@@ -1007,6 +1016,15 @@ public interface ClazzPackage extends EPackage {
 	int ATTRIBUTE__DESCRIPTION = NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION;
 
 	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__TITLE = NAMED_CLASS_MODEL_ELEMENT__TITLE;
+
+	/**
 	 * The feature id for the '<em><b>Typ</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1034,22 +1052,13 @@ public interface ClazzPackage extends EPackage {
 	int ATTRIBUTE__VISIBILITY = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Title</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE__TITLE = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
 	 * The feature id for the '<em><b>Value List</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__VALUE_LIST = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 4;
+	int ATTRIBUTE__VALUE_LIST = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Unique</b></em>' attribute.
@@ -1058,7 +1067,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__UNIQUE = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 5;
+	int ATTRIBUTE__UNIQUE = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Attribute</em>' class.
@@ -1067,7 +1076,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_FEATURE_COUNT = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 6;
+	int ATTRIBUTE_FEATURE_COUNT = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.EnumerationImpl <em>Enumeration</em>}' class.
@@ -1141,6 +1150,15 @@ public interface ClazzPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION__DESCRIPTION = NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION__TITLE = NAMED_CLASS_MODEL_ELEMENT__TITLE;
 
 	/**
 	 * The feature id for the '<em><b>Literals</b></em>' containment reference list.
@@ -1298,6 +1316,15 @@ public interface ClazzPackage extends EPackage {
 	int OPERATION__DESCRIPTION = NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION;
 
 	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__TITLE = NAMED_CLASS_MODEL_ELEMENT__TITLE;
+
+	/**
 	 * The feature id for the '<em><b>Return Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1423,6 +1450,15 @@ public interface ClazzPackage extends EPackage {
 	 * @ordered
 	 */
 	int PARAMETER__DESCRIPTION = NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__TITLE = NAMED_CLASS_MODEL_ELEMENT__TITLE;
 
 	/**
 	 * The feature id for the '<em><b>Value Type</b></em>' attribute.
@@ -1623,6 +1659,15 @@ public interface ClazzPackage extends EPackage {
 	 * @ordered
 	 */
 	int VIEW__DESCRIPTION = NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIEW__TITLE = NAMED_CLASS_MODEL_ELEMENT__TITLE;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -1901,6 +1946,17 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getNamedClassModelElement_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.NamedClassModelElement#getTitle <em>Title</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Title</em>'.
+	 * @see com.bluexml.side.clazz.NamedClassModelElement#getTitle()
+	 * @see #getNamedClassModelElement()
+	 * @generated
+	 */
+	EAttribute getNamedClassModelElement_Title();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.clazz.ClassPackage <em>Class Package</em>}'.
@@ -2186,17 +2242,6 @@ public interface ClazzPackage extends EPackage {
 	EAttribute getAssociation_RoleTarget();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Association#getTitle <em>Title</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Title</em>'.
-	 * @see com.bluexml.side.clazz.Association#getTitle()
-	 * @see #getAssociation()
-	 * @generated
-	 */
-	EAttribute getAssociation_Title();
-
-	/**
 	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Association#getRoleSrcTitle <em>Role Src Title</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2260,17 +2305,6 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAttribute_Visibility();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Attribute#getTitle <em>Title</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Title</em>'.
-	 * @see com.bluexml.side.clazz.Attribute#getTitle()
-	 * @see #getAttribute()
-	 * @generated
-	 */
-	EAttribute getAttribute_Title();
 
 	/**
 	 * Returns the meta object for the reference '{@link com.bluexml.side.clazz.Attribute#getValueList <em>Value List</em>}'.
@@ -2495,17 +2529,6 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getAbstractContainer();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.AbstractContainer#getTitle <em>Title</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Title</em>'.
-	 * @see com.bluexml.side.clazz.AbstractContainer#getTitle()
-	 * @see #getAbstractContainer()
-	 * @generated
-	 */
-	EAttribute getAbstractContainer_Title();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.clazz.AbstractContainer#getAttributes <em>Attributes</em>}'.
@@ -2817,6 +2840,14 @@ public interface ClazzPackage extends EPackage {
 		EAttribute NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION = eINSTANCE.getNamedClassModelElement_Description();
 
 		/**
+		 * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NAMED_CLASS_MODEL_ELEMENT__TITLE = eINSTANCE.getNamedClassModelElement_Title();
+
+		/**
 		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.ClassPackageImpl <em>Class Package</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3031,14 +3062,6 @@ public interface ClazzPackage extends EPackage {
 		EAttribute ASSOCIATION__ROLE_TARGET = eINSTANCE.getAssociation_RoleTarget();
 
 		/**
-		 * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSOCIATION__TITLE = eINSTANCE.getAssociation_Title();
-
-		/**
 		 * The meta object literal for the '<em><b>Role Src Title</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3087,14 +3110,6 @@ public interface ClazzPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ATTRIBUTE__VISIBILITY = eINSTANCE.getAttribute_Visibility();
-
-		/**
-		 * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ATTRIBUTE__TITLE = eINSTANCE.getAttribute_Title();
 
 		/**
 		 * The meta object literal for the '<em><b>Value List</b></em>' reference feature.
@@ -3277,14 +3292,6 @@ public interface ClazzPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ABSTRACT_CONTAINER = eINSTANCE.getAbstractContainer();
-
-		/**
-		 * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ABSTRACT_CONTAINER__TITLE = eINSTANCE.getAbstractContainer_Title();
 
 		/**
 		 * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.

@@ -22,6 +22,7 @@ import com.bluexml.side.common.Tag;
 import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -49,6 +50,7 @@ import org.eclipse.ocl.expressions.OCLExpression;
  * <ul>
  *   <li>{@link com.bluexml.side.clazz.impl.NamedClassModelElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.NamedClassModelElementImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.impl.NamedClassModelElementImpl#getTitle <em>Title</em>}</li>
  * </ul>
  * </p>
  *
@@ -95,6 +97,26 @@ public class NamedClassModelElementImpl extends ClassModelElementImpl implements
 	 * @ordered
 	 */
 	protected String description = DESCRIPTION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTitle()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TITLE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTitle()
+	 * @generated
+	 * @ordered
+	 */
+	protected String title = TITLE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -162,6 +184,27 @@ public class NamedClassModelElementImpl extends ClassModelElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTitle(String newTitle) {
+		String oldTitle = title;
+		title = newTitle;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__TITLE, oldTitle, title));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getFullName() {
 		if (getFullNameBodyOCL == null) {
 			EOperation eOperation = ClazzPackage.Literals.NAMED_CLASS_MODEL_ELEMENT.getEOperations().get(0);
@@ -197,6 +240,76 @@ public class NamedClassModelElementImpl extends ClassModelElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDescriptionOrName() {
+		if (getDescriptionOrNameBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.NAMED_CLASS_MODEL_ELEMENT.getEOperations().get(1);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.NAMED_CLASS_MODEL_ELEMENT, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getDescriptionOrNameBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getDescriptionOrNameBodyOCL);
+	
+		return (String) query.evaluate(this);
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getDescriptionOrName <em>Get Description Or Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescriptionOrName
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getDescriptionOrNameBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLabel() {
+		if (getLabelBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.NAMED_CLASS_MODEL_ELEMENT.getEOperations().get(2);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.NAMED_CLASS_MODEL_ELEMENT, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getLabelBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getLabelBodyOCL);
+	
+		return (String) query.evaluate(this);
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getLabel <em>Get Label</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabel
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getLabelBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -204,6 +317,8 @@ public class NamedClassModelElementImpl extends ClassModelElementImpl implements
 				return getName();
 			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION:
 				return getDescription();
+			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__TITLE:
+				return getTitle();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -223,6 +338,9 @@ public class NamedClassModelElementImpl extends ClassModelElementImpl implements
 			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION:
 				setDescription((String)newValue);
 				return;
+			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__TITLE:
+				setTitle((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -241,6 +359,9 @@ public class NamedClassModelElementImpl extends ClassModelElementImpl implements
 			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
 				return;
+			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__TITLE:
+				setTitle(TITLE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -257,6 +378,8 @@ public class NamedClassModelElementImpl extends ClassModelElementImpl implements
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__TITLE:
+				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -275,6 +398,8 @@ public class NamedClassModelElementImpl extends ClassModelElementImpl implements
 		result.append(name);
 		result.append(", description: ");
 		result.append(description);
+		result.append(", title: ");
+		result.append(title);
 		result.append(')');
 		return result.toString();
 	}

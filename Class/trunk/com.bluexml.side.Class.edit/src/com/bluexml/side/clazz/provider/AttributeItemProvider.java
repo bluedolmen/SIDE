@@ -66,7 +66,6 @@ public class AttributeItemProvider
 			addTypPropertyDescriptor(object);
 			addInitialValuePropertyDescriptor(object);
 			addVisibilityPropertyDescriptor(object);
-			addTitlePropertyDescriptor(object);
 			addValueListPropertyDescriptor(object);
 			addUniquePropertyDescriptor(object);
 		}
@@ -131,28 +130,6 @@ public class AttributeItemProvider
 				 getString("_UI_Attribute_visibility_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Attribute_visibility_feature", "_UI_Attribute_type"),
 				 ClazzPackage.Literals.ATTRIBUTE__VISIBILITY,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Title feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTitlePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Attribute_title_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Attribute_title_feature", "_UI_Attribute_type"),
-				 ClazzPackage.Literals.ATTRIBUTE__TITLE,
 				 true,
 				 false,
 				 false,
@@ -245,7 +222,6 @@ public class AttributeItemProvider
 			case ClazzPackage.ATTRIBUTE__TYP:
 			case ClazzPackage.ATTRIBUTE__INITIAL_VALUE:
 			case ClazzPackage.ATTRIBUTE__VISIBILITY:
-			case ClazzPackage.ATTRIBUTE__TITLE:
 			case ClazzPackage.ATTRIBUTE__UNIQUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

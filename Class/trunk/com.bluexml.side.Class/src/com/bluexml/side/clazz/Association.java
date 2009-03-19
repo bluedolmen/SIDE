@@ -28,7 +28,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.bluexml.side.clazz.Association#getAssociationsClass <em>Associations Class</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Association#getRoleSrc <em>Role Src</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Association#getRoleTarget <em>Role Target</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.Association#getTitle <em>Title</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Association#getRoleSrcTitle <em>Role Src Title</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Association#getRoleTargetTitle <em>Role Target Title</em>}</li>
  * </ul>
@@ -48,12 +47,12 @@ public interface Association extends NamedClassModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Source</em>' reference.
-	 * @see #setSource(ClassModelElement)
+	 * @see #setSource(AbstractClass)
 	 * @see com.bluexml.side.clazz.ClazzPackage#getAssociation_Source()
 	 * @model
 	 * @generated
 	 */
-	ClassModelElement getSource();
+	AbstractClass getSource();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.clazz.Association#getSource <em>Source</em>}' reference.
@@ -63,7 +62,7 @@ public interface Association extends NamedClassModelElement {
 	 * @see #getSource()
 	 * @generated
 	 */
-	void setSource(ClassModelElement value);
+	void setSource(AbstractClass value);
 
 	/**
 	 * Returns the value of the '<em><b>Destination</b></em>' reference.
@@ -74,12 +73,12 @@ public interface Association extends NamedClassModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Destination</em>' reference.
-	 * @see #setDestination(ClassModelElement)
+	 * @see #setDestination(AbstractClass)
 	 * @see com.bluexml.side.clazz.ClazzPackage#getAssociation_Destination()
 	 * @model
 	 * @generated
 	 */
-	ClassModelElement getDestination();
+	AbstractClass getDestination();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.clazz.Association#getDestination <em>Destination</em>}' reference.
@@ -89,7 +88,7 @@ public interface Association extends NamedClassModelElement {
 	 * @see #getDestination()
 	 * @generated
 	 */
-	void setDestination(ClassModelElement value);
+	void setDestination(AbstractClass value);
 
 	/**
 	 * Returns the value of the '<em><b>Is Navigable SRC</b></em>' attribute.
@@ -348,32 +347,6 @@ public interface Association extends NamedClassModelElement {
 	 * @generated
 	 */
 	void setRoleTarget(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Title</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Title</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Title</em>' attribute.
-	 * @see #setTitle(String)
-	 * @see com.bluexml.side.clazz.ClazzPackage#getAssociation_Title()
-	 * @model
-	 * @generated
-	 */
-	String getTitle();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.clazz.Association#getTitle <em>Title</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Title</em>' attribute.
-	 * @see #getTitle()
-	 * @generated
-	 */
-	void setTitle(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Role Src Title</b></em>' attribute.
