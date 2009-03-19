@@ -42,17 +42,16 @@
     <genClasses ecoreClass="Class.ecore#//NamedClassModelElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//NamedClassModelElement/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//NamedClassModelElement/description"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//NamedClassModelElement/title"/>
       <genOperations ecoreOperation="Class.ecore#//NamedClassModelElement/getFullName"/>
       <genOperations ecoreOperation="Class.ecore#//NamedClassModelElement/getDescriptionOrName"/>
       <genOperations ecoreOperation="Class.ecore#//NamedClassModelElement/getLabel"/>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//ClassPackage">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/classSet"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/associationSet"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/aspectSet"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/enumerationSet"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/views"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/associationSet"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/aspectSet"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/enumerationSet"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/views"/>
       <genOperations ecoreOperation="Class.ecore#//ClassPackage/getFullName"/>
       <genOperations ecoreOperation="Class.ecore#//ClassPackage/getAllPackages"/>
       <genOperations ecoreOperation="Class.ecore#//ClassPackage/getAllClasses"/>
@@ -99,13 +98,18 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//Association/associationsClass"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/roleSrc"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/roleTarget"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/title"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/roleSrcTitle"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/roleTargetTitle"/>
+      <genOperations ecoreOperation="Class.ecore#//Association/equalsForMerge">
+        <genParameters ecoreParameter="Class.ecore#//Association/equalsForMerge/other"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//Attribute">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Attribute/typ"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Attribute/initialValue"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Attribute/visibility"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Attribute/title"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//Attribute/valueList"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Attribute/unique"/>
     </genClasses>
@@ -125,18 +129,36 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Operation/visibility"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Operation/static"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Operation/body"/>
+      <genOperations ecoreOperation="Class.ecore#//Operation/equalsForMerge">
+        <genParameters ecoreParameter="Class.ecore#//Operation/equalsForMerge/other"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//Parameter">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Parameter/valueType"/>
     </genClasses>
-    <genClasses ecoreClass="Class.ecore#//Aspect"/>
-    <genClasses image="false" ecoreClass="Class.ecore#//AbstractClass"/>
+    <genClasses ecoreClass="Class.ecore#//Aspect">
+      <genOperations ecoreOperation="Class.ecore#//Aspect/equalsForMerge">
+        <genParameters ecoreParameter="Class.ecore#//Aspect/equalsForMerge/other"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Class.ecore#//AbstractClass">
+      <genOperations ecoreOperation="Class.ecore#//AbstractClass/equalsForMerge">
+        <genParameters ecoreParameter="Class.ecore#//AbstractClass/equalsForMerge/other"/>
+      </genOperations>
+    </genClasses>
     <genClasses image="false" ecoreClass="Class.ecore#//AbstractContainer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//AbstractContainer/title"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//AbstractContainer/attributes"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//AbstractContainer/associations"/>
+      <genOperations ecoreOperation="Class.ecore#//AbstractContainer/equalsForMerge">
+        <genParameters ecoreParameter="Class.ecore#//AbstractContainer/equalsForMerge/other"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//View">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//View/attributes"/>
+      <genOperations ecoreOperation="Class.ecore#//View/equalsForMerge">
+        <genParameters ecoreParameter="Class.ecore#//View/equalsForMerge/other"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//ViewItem">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//ViewItem/association"/>
@@ -144,6 +166,9 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//ViewItem/classe"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//ViewItem/aspect"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//ViewItem/Role"/>
+      <genOperations ecoreOperation="Class.ecore#//ViewItem/equalsForMerge">
+        <genParameters ecoreParameter="Class.ecore#//ViewItem/equalsForMerge/other"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//MetaInfo">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//MetaInfo/key"/>
@@ -151,6 +176,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//MetaInfo/valueType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//MetaInfo/constraintType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//MetaInfo/valueSet"/>
+      <genOperations ecoreOperation="Class.ecore#//MetaInfo/equalsForMerge">
+        <genParameters ecoreParameter="Class.ecore#//MetaInfo/equalsForMerge/other"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//MetaInfoGroup">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//MetaInfoGroup/name"/>

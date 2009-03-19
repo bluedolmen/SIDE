@@ -41,4 +41,12 @@ public interface View extends NamedClassModelElement {
 	 */
 	EList<ViewItem> getAttributes();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.bluexml.com/OCL body='self.name = other.name'"
+	 * @generated
+	 */
+	boolean equalsForMerge(View other);
+
 } // View

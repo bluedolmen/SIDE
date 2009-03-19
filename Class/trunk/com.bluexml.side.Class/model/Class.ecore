@@ -26,7 +26,6 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassPackage" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Package">
     <eOperations name="getFullName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
@@ -71,6 +70,12 @@
         eType="#//View" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Clazz" eSuperTypes="#//AbstractClass">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="TwoModelElementWithSameName" value="Classe.allInstances()->select(a | a.name = self.name and a &lt;> self)->size() = 0"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="TwoModelElementWithSameName"/>
+    </eAnnotations>
     <eOperations name="getAllAttributes" upperBound="-1" eType="#//Attribute">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="self.getAllInheritedClassAndAspectAttributes() -> union(self.getClassAndAspectAttributes())"/>
@@ -165,6 +170,25 @@
         eType="#//View"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="#//NamedClassModelElement">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="recursiveAssociationMustHaveRole" value="( self.source = self.destination and self.isNavigableSRC and self.isNavigableTARGET ) implies ( ( not self.roleSrc.oclIsUndefined() and self.roleSrc &lt;> '' ) or ( not self.roleTarget.oclIsUndefined() and self.roleTarget &lt;> '' ))"/>
+      <details key="AssociatioClassCantBeAgregationOrComposition" value="(self.associationType = AssociationType::Aggregation or self.associationType = AssociationType::Composition) implies self.associationsClass->isEmpty()"/>
+      <details key="MinAndMaxTarget" value="( self.maxTARGET &lt;> '-1' ) implies ( self.minTARGET &lt;= self.maxTARGET )"/>
+      <details key="MinAndMaxSource" value="( self.maxSRC &lt;> '-1' ) implies ( self.minSRC &lt;= self.maxSRC )"/>
+      <details key="NameNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
+      <details key="SourceNull" value="self.source->notEmpty()"/>
+      <details key="TargetNull" value="self.destination->notEmpty()"/>
+      <details key="AtLeastOneNavigableEdge" value="(isNavigableSRC or isNavigableTARGET)"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource AssociatioClassCantBeAgregationOrComposition NameNull SourceNull TargetNull AtLeastOneNavigableEdge"/>
+    </eAnnotations>
+    <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="if( self.destination.oclIsKindOf(Classe))&#xD;&#xA;then&#xD;&#xA;self.destination.oclAsType(Classe).equalsForMerge(other.destination.oclAsType(Classe)) and self.source.oclAsType(Classe).equalsForMerge(other.source.oclAsType(Classe))&#xD;&#xA;and self.name = other.name&#xD;&#xA;else&#xD;&#xA;true&#xD;&#xA;endif&#xD;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="other" eType="#//Association"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//AbstractClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="destination" eType="#//AbstractClass"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isNavigableSRC" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -183,16 +207,24 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="roleSrc" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="roleTarget" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="roleSrcTitle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="roleTargetTitle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="#//NamedClassModelElement">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="UniqueNameForTaskAttribute" value="Package.allInstances()->select(&#xD;&#xA;   p | p.tasks->includes(&#xD;&#xA;        BPMTask.allInstances()->select(&#xD;&#xA;           t | t.attributes->includes(self)&#xD;&#xA;        )->asOrderedSet()->first()&#xD;&#xA;       )&#xD;&#xA;      ).tasks->collect(t | t.attributes)->flatten()->select(a | a.name = self.name and a &lt;> self)->isEmpty()"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="UniqueNameForTaskAttribute"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="typ" eType="#//AttributeType"
         defaultValueLiteral="void"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="initialValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="#//Visibility"
         defaultValueLiteral="Private"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="valueList" eType="#//Enumeration"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
@@ -232,6 +264,12 @@
     <eLiterals name="Time" value="13"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//NamedClassModelElement">
+    <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="&#xD;&#xA;self.name = other.name and &#xD;&#xA;&#xD;&#xA;self.parameters->forAll(p:Parameter |   &#xD;&#xA;   other.parameters->exists(z : Parameter | z.name = p.name and z.valueType = p.valueType ))"/>
+      </eAnnotations>
+      <eParameters name="other" eType="#//Operation"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="returnType" eType="#//AttributeType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//Parameter" containment="true"/>
@@ -247,19 +285,60 @@
     <eLiterals name="Private" value="1"/>
     <eLiterals name="Protected" value="2"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Aspect" eSuperTypes="#//AbstractClass"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractClass" abstract="true" eSuperTypes="#//AbstractContainer"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Aspect" eSuperTypes="#//AbstractClass">
+    <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.name = other.name and self.title = other.title"/>
+      </eAnnotations>
+      <eParameters name="other" eType="#//Aspect"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractClass" abstract="true" eSuperTypes="#//AbstractContainer">
+    <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.name = other.name and self.title = other.title"/>
+      </eAnnotations>
+      <eParameters name="other" eType="#//AbstractClass"/>
+    </eOperations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractContainer" abstract="true" eSuperTypes="#//NamedClassModelElement">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="TwoModelElementWithSameName" value="AbstractContainer.allInstances()->select(a | a.name = self.name and a &lt;> self)->size() = 0"/>
+      <details key="NameNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
+      <details key="noSpecialCharacters" value="self.name.regexMatch('\w') &lt;> null"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="TwoModelElementWithSameName NameNull noSpecialCharacters"/>
+    </eAnnotations>
+    <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.name = other.name and self.title = other.title"/>
+      </eAnnotations>
+      <eParameters name="other" eType="#//AbstractContainer"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
         eType="#//Attribute" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="associations" upperBound="-1"
         eType="#//Association"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="View" eSuperTypes="#//NamedClassModelElement">
+    <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.name = other.name"/>
+      </eAnnotations>
+      <eParameters name="other" eType="#//View"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
         eType="#//ViewItem" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ViewItem">
+    <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.classe.equalsForMerge(other.classe) &#xD;&#xA;and &#xD;&#xA;self.association.equalsForMerge(other.association)"/>
+      </eAnnotations>
+      <eParameters name="other" eType="#//ViewItem"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="association" eType="#//Association"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//Attribute"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classe" eType="#//Clazz"/>
@@ -267,6 +346,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Role" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MetaInfo">
+    <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.key = other.key"/>
+      </eAnnotations>
+      <eParameters name="other" eType="#//MetaInfo"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueType">

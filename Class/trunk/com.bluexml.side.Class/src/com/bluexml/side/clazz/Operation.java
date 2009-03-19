@@ -157,6 +157,14 @@ public interface Operation extends NamedClassModelElement {
 	void setBody(String value);
 	
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.bluexml.com/OCL body='\r\nself.name = other.name and \r\n\r\nself.parameters->forAll(p:Parameter |   \r\n   other.parameters->exists(z : Parameter | z.name = p.name and z.valueType = p.valueType ))'"
+	 * @generated
+	 */
+	boolean equalsForMerge(Operation other);
+
+	/**
 	 * Sets the value of the '{@link org.topcased.MMUseCase.Operation#getReturnType <em>Return Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

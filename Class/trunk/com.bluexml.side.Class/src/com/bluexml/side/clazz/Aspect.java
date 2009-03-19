@@ -18,4 +18,12 @@ package com.bluexml.side.clazz;
  * @generated
  */
 public interface Aspect extends AbstractClass {
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.bluexml.com/OCL body='self.name = other.name and self.title = other.title'"
+	 * @generated
+	 */
+	boolean equalsForMerge(Aspect other);
 } // Aspect

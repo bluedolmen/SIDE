@@ -13,11 +13,18 @@ import com.bluexml.side.clazz.MetaInfo;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.ocl.EvaluationEnvironment;
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
+import org.eclipse.ocl.expressions.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -253,6 +260,45 @@ public class MetaInfoImpl extends EObjectImpl implements MetaInfo {
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.META_INFO__VALUE_SET, oldValueSet, valueSet));
 	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean equalsForMerge(MetaInfo other) {
+		if (equalsForMergeBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.META_INFO.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.META_INFO, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				equalsForMergeBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(equalsForMergeBodyOCL);
+	 
+		EvaluationEnvironment<?, ?, ?, ?, ?> evalEnv = query.getEvaluationEnvironment();
+		
+		evalEnv.add("other", other);
+	  
+		return ((Boolean) query.evaluate(this)).booleanValue();
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #equalsForMerge <em>Equals For Merge</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #equalsForMerge
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> equalsForMergeBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->

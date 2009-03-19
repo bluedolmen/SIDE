@@ -50,7 +50,6 @@ import org.eclipse.ocl.expressions.OCLExpression;
  * <ul>
  *   <li>{@link com.bluexml.side.clazz.impl.NamedClassModelElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.NamedClassModelElementImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.impl.NamedClassModelElementImpl#getTitle <em>Title</em>}</li>
  * </ul>
  * </p>
  *
@@ -97,26 +96,6 @@ public class NamedClassModelElementImpl extends ClassModelElementImpl implements
 	 * @ordered
 	 */
 	protected String description = DESCRIPTION_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTitle()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String TITLE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTitle()
-	 * @generated
-	 * @ordered
-	 */
-	protected String title = TITLE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -177,27 +156,6 @@ public class NamedClassModelElementImpl extends ClassModelElementImpl implements
 		description = newDescription;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION, oldDescription, description));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getTitle() {
-		return title;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTitle(String newTitle) {
-		String oldTitle = title;
-		title = newTitle;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__TITLE, oldTitle, title));
 	}
 
 	/**
@@ -317,8 +275,6 @@ public class NamedClassModelElementImpl extends ClassModelElementImpl implements
 				return getName();
 			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION:
 				return getDescription();
-			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__TITLE:
-				return getTitle();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -338,9 +294,6 @@ public class NamedClassModelElementImpl extends ClassModelElementImpl implements
 			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION:
 				setDescription((String)newValue);
 				return;
-			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__TITLE:
-				setTitle((String)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -359,9 +312,6 @@ public class NamedClassModelElementImpl extends ClassModelElementImpl implements
 			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
 				return;
-			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__TITLE:
-				setTitle(TITLE_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -378,8 +328,6 @@ public class NamedClassModelElementImpl extends ClassModelElementImpl implements
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
-			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT__TITLE:
-				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -398,8 +346,6 @@ public class NamedClassModelElementImpl extends ClassModelElementImpl implements
 		result.append(name);
 		result.append(", description: ");
 		result.append(description);
-		result.append(", title: ");
-		result.append(title);
 		result.append(')');
 		return result.toString();
 	}

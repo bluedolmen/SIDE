@@ -164,6 +164,14 @@ public interface MetaInfo extends EObject {
 	void setValueSet(Object value);
 	
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.bluexml.com/OCL body='self.key = other.key'"
+	 * @generated
+	 */
+	boolean equalsForMerge(MetaInfo other);
+
+	/**
 	 * Clone the meta-information
 	 * 
 	 * @param mi The meta-information to clone

@@ -159,4 +159,12 @@ public interface ViewItem extends EObject {
 	 */
 	void setRole(String value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.bluexml.com/OCL body='self.classe.equalsForMerge(other.classe) \r\nand \r\nself.association.equalsForMerge(other.association)'"
+	 * @generated
+	 */
+	boolean equalsForMerge(ViewItem other);
+
 } // ViewItem

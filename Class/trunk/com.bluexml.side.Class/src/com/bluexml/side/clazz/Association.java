@@ -28,13 +28,15 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.bluexml.side.clazz.Association#getAssociationsClass <em>Associations Class</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Association#getRoleSrc <em>Role Src</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Association#getRoleTarget <em>Role Target</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.Association#getTitle <em>Title</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Association#getRoleSrcTitle <em>Role Src Title</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Association#getRoleTargetTitle <em>Role Target Title</em>}</li>
  * </ul>
  * </p>
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getAssociation()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL recursiveAssociationMustHaveRole='( self.source = self.destination and self.isNavigableSRC and self.isNavigableTARGET ) implies ( ( not self.roleSrc.oclIsUndefined() and self.roleSrc <> \'\' ) or ( not self.roleTarget.oclIsUndefined() and self.roleTarget <> \'\' ))' AssociatioClassCantBeAgregationOrComposition='(self.associationType = AssociationType::Aggregation or self.associationType = AssociationType::Composition) implies self.associationsClass->isEmpty()' MinAndMaxTarget='( self.maxTARGET <> \'-1\' ) implies ( self.minTARGET <= self.maxTARGET )' MinAndMaxSource='( self.maxSRC <> \'-1\' ) implies ( self.minSRC <= self.maxSRC )' NameNull='not self.name.oclIsUndefined() and self.name <> \'\'' SourceNull='self.source->notEmpty()' TargetNull='self.destination->notEmpty()' AtLeastOneNavigableEdge='(isNavigableSRC or isNavigableTARGET)'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource AssociatioClassCantBeAgregationOrComposition NameNull SourceNull TargetNull AtLeastOneNavigableEdge'"
  * @generated
  */
 public interface Association extends NamedClassModelElement {
@@ -349,6 +351,32 @@ public interface Association extends NamedClassModelElement {
 	void setRoleTarget(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Title</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Title</em>' attribute.
+	 * @see #setTitle(String)
+	 * @see com.bluexml.side.clazz.ClazzPackage#getAssociation_Title()
+	 * @model
+	 * @generated
+	 */
+	String getTitle();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.clazz.Association#getTitle <em>Title</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Title</em>' attribute.
+	 * @see #getTitle()
+	 * @generated
+	 */
+	void setTitle(String value);
+
+	/**
 	 * Returns the value of the '<em><b>Role Src Title</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -400,5 +428,13 @@ public interface Association extends NamedClassModelElement {
 	 * @generated
 	 */
 	void setRoleTargetTitle(String value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.bluexml.com/OCL body='if( self.destination.oclIsKindOf(Classe))\r\nthen\r\nself.destination.oclAsType(Classe).equalsForMerge(other.destination.oclAsType(Classe)) and self.source.oclAsType(Classe).equalsForMerge(other.source.oclAsType(Classe))\r\nand self.name = other.name\r\nelse\r\ntrue\r\nendif\r\n'"
+	 * @generated
+	 */
+	boolean equalsForMerge(Association other);
 
 } // Association

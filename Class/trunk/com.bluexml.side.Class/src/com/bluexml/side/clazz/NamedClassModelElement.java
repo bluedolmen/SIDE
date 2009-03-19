@@ -6,9 +6,6 @@
  */
 package com.bluexml.side.clazz;
 
-import org.eclipse.emf.ecore.EObject;
-import com.bluexml.side.common.NamedModelElement;
-import org.eclipse.emf.common.util.EList;
 
 
 /**
@@ -21,7 +18,6 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link com.bluexml.side.clazz.NamedClassModelElement#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.NamedClassModelElement#getDescription <em>Description</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.NamedClassModelElement#getTitle <em>Title</em>}</li>
  * </ul>
  * </p>
  *
@@ -81,32 +77,6 @@ public interface NamedClassModelElement extends ClassModelElement {
 	 * @generated
 	 */
 	void setDescription(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Title</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Title</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Title</em>' attribute.
-	 * @see #setTitle(String)
-	 * @see com.bluexml.side.clazz.ClazzPackage#getNamedClassModelElement_Title()
-	 * @model
-	 * @generated
-	 */
-	String getTitle();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.clazz.NamedClassModelElement#getTitle <em>Title</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Title</em>' attribute.
-	 * @see #getTitle()
-	 * @generated
-	 */
-	void setTitle(String value);
 
 	/**
 	 * <!-- begin-user-doc -->

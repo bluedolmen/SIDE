@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link com.bluexml.side.clazz.AbstractContainer#getTitle <em>Title</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.AbstractContainer#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.AbstractContainer#getAssociations <em>Associations</em>}</li>
  * </ul>
@@ -23,9 +24,37 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getAbstractContainer()
  * @model abstract="true"
+ *        annotation="http://www.bluexml.com/OCL TwoModelElementWithSameName='AbstractContainer.allInstances()->select(a | a.name = self.name and a <> self)->size() = 0' NameNull='not self.name.oclIsUndefined() and self.name <> \'\'' noSpecialCharacters='self.name.regexMatch(\'\\w\') <> null'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='TwoModelElementWithSameName NameNull noSpecialCharacters'"
  * @generated
  */
 public interface AbstractContainer extends NamedClassModelElement {
+	/**
+	 * Returns the value of the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Title</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Title</em>' attribute.
+	 * @see #setTitle(String)
+	 * @see com.bluexml.side.clazz.ClazzPackage#getAbstractContainer_Title()
+	 * @model
+	 * @generated
+	 */
+	String getTitle();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.clazz.AbstractContainer#getTitle <em>Title</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Title</em>' attribute.
+	 * @see #getTitle()
+	 * @generated
+	 */
+	void setTitle(String value);
+
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
 	 * The list contents are of type {@link com.bluexml.side.clazz.Attribute}.
@@ -57,5 +86,13 @@ public interface AbstractContainer extends NamedClassModelElement {
 	 * @generated
 	 */
 	EList<Association> getAssociations();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.bluexml.com/OCL body='self.name = other.name and self.title = other.title'"
+	 * @generated
+	 */
+	boolean equalsForMerge(AbstractContainer other);
 
 } // AbstractContainer

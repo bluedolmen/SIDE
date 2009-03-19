@@ -6,7 +6,6 @@
  */
 package com.bluexml.side.clazz;
 
-import org.eclipse.emf.common.util.EList;
 
 
 /**
@@ -20,13 +19,15 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.bluexml.side.clazz.Attribute#getTyp <em>Typ</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Attribute#getInitialValue <em>Initial Value</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Attribute#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.Attribute#getTitle <em>Title</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Attribute#getValueList <em>Value List</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Attribute#isUnique <em>Unique</em>}</li>
  * </ul>
  * </p>
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getAttribute()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL UniqueNameForTaskAttribute='Package.allInstances()->select(\r\n   p | p.tasks->includes(\r\n        BPMTask.allInstances()->select(\r\n           t | t.attributes->includes(self)\r\n        )->asOrderedSet()->first()\r\n       )\r\n      ).tasks->collect(t | t.attributes)->flatten()->select(a | a.name = self.name and a <> self)->isEmpty()'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='UniqueNameForTaskAttribute'"
  * @generated
  */
 public interface Attribute extends NamedClassModelElement {
@@ -115,6 +116,32 @@ public interface Attribute extends NamedClassModelElement {
 	 * @generated
 	 */
 	void setVisibility(Visibility value);
+
+	/**
+	 * Returns the value of the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Title</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Title</em>' attribute.
+	 * @see #setTitle(String)
+	 * @see com.bluexml.side.clazz.ClazzPackage#getAttribute_Title()
+	 * @model
+	 * @generated
+	 */
+	String getTitle();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.clazz.Attribute#getTitle <em>Title</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Title</em>' attribute.
+	 * @see #getTitle()
+	 * @generated
+	 */
+	void setTitle(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Value List</b></em>' reference.

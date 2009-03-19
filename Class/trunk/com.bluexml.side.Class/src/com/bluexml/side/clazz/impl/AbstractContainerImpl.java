@@ -19,7 +19,10 @@ import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -27,7 +30,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.EvaluationEnvironment;
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
+import org.eclipse.ocl.expressions.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,6 +43,7 @@ import org.eclipse.ocl.ecore.OCL;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link com.bluexml.side.clazz.impl.AbstractContainerImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AbstractContainerImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AbstractContainerImpl#getAssociations <em>Associations</em>}</li>
  * </ul>
@@ -44,6 +52,26 @@ import org.eclipse.ocl.ecore.OCL;
  * @generated
  */
 public abstract class AbstractContainerImpl extends NamedClassModelElementImpl implements AbstractContainer {
+	/**
+	 * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTitle()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TITLE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTitle()
+	 * @generated
+	 * @ordered
+	 */
+	protected String title = TITLE_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -88,6 +116,27 @@ public abstract class AbstractContainerImpl extends NamedClassModelElementImpl i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTitle(String newTitle) {
+		String oldTitle = title;
+		title = newTitle;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.ABSTRACT_CONTAINER__TITLE, oldTitle, title));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Attribute> getAttributes() {
 		if (attributes == null) {
 			attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, ClazzPackage.ABSTRACT_CONTAINER__ATTRIBUTES);
@@ -112,6 +161,45 @@ public abstract class AbstractContainerImpl extends NamedClassModelElementImpl i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean equalsForMerge(AbstractContainer other) {
+		if (equalsForMergeBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.ABSTRACT_CONTAINER.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.ABSTRACT_CONTAINER, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				equalsForMergeBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(equalsForMergeBodyOCL);
+	 
+		EvaluationEnvironment<?, ?, ?, ?, ?> evalEnv = query.getEvaluationEnvironment();
+		
+		evalEnv.add("other", other);
+	  
+		return ((Boolean) query.evaluate(this)).booleanValue();
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #equalsForMerge <em>Equals For Merge</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #equalsForMerge
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> equalsForMergeBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -129,6 +217,8 @@ public abstract class AbstractContainerImpl extends NamedClassModelElementImpl i
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case ClazzPackage.ABSTRACT_CONTAINER__TITLE:
+				return getTitle();
 			case ClazzPackage.ABSTRACT_CONTAINER__ATTRIBUTES:
 				return getAttributes();
 			case ClazzPackage.ABSTRACT_CONTAINER__ASSOCIATIONS:
@@ -146,6 +236,9 @@ public abstract class AbstractContainerImpl extends NamedClassModelElementImpl i
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case ClazzPackage.ABSTRACT_CONTAINER__TITLE:
+				setTitle((String)newValue);
+				return;
 			case ClazzPackage.ABSTRACT_CONTAINER__ATTRIBUTES:
 				getAttributes().clear();
 				getAttributes().addAll((Collection<? extends Attribute>)newValue);
@@ -166,6 +259,9 @@ public abstract class AbstractContainerImpl extends NamedClassModelElementImpl i
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case ClazzPackage.ABSTRACT_CONTAINER__TITLE:
+				setTitle(TITLE_EDEFAULT);
+				return;
 			case ClazzPackage.ABSTRACT_CONTAINER__ATTRIBUTES:
 				getAttributes().clear();
 				return;
@@ -184,12 +280,30 @@ public abstract class AbstractContainerImpl extends NamedClassModelElementImpl i
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case ClazzPackage.ABSTRACT_CONTAINER__TITLE:
+				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
 			case ClazzPackage.ABSTRACT_CONTAINER__ATTRIBUTES:
 				return attributes != null && !attributes.isEmpty();
 			case ClazzPackage.ABSTRACT_CONTAINER__ASSOCIATIONS:
 				return associations != null && !associations.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (title: ");
+		result.append(title);
+		result.append(')');
+		return result.toString();
 	}
 
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";

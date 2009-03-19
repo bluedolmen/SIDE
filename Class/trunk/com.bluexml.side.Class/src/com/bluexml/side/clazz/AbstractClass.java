@@ -6,7 +6,6 @@
  */
 package com.bluexml.side.clazz;
 
-import org.eclipse.emf.common.util.EList;
 
 
 /**
@@ -20,4 +19,12 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface AbstractClass extends AbstractContainer {
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.bluexml.com/OCL body='self.name = other.name and self.title = other.title'"
+	 * @generated
+	 */
+	boolean equalsForMerge(AbstractClass other);
 } // AbstractClass

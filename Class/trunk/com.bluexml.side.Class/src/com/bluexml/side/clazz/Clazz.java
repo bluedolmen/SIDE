@@ -26,7 +26,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getClazz()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL TwoModelElementWithSameName='Classe.allInstances()->select(a | a.name = self.name and a <> self)->size() = 0'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='TwoModelElementWithSameName'"
  * @generated
  */
 public interface Clazz extends AbstractClass {
