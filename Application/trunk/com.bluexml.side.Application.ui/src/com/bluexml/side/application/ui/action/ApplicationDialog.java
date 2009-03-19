@@ -477,7 +477,7 @@ public class ApplicationDialog extends Dialog {
 		}
 
 		public void initialize() {
-			String extensionPointId = "com.bluexml.application.com_bluexml_application_configuration";
+			String extensionPointId = "com.bluexml.side.Application.com_bluexml_application_configuration";
 			IConfigurationElement[] contributions = Platform
 					.getExtensionRegistry().getConfigurationElementsFor(
 							extensionPointId);
