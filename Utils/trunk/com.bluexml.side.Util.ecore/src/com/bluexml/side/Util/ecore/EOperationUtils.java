@@ -58,23 +58,27 @@ public class EOperationUtils {
 		result &= eop.getEType().getName().equals(otherEop.getEType().getName());
 		EList<EParameter> eopParamList = eop.getEParameters();
 		EList<EParameter> otherEopParamList = otherEop.getEParameters();
+		// compare parameters number before made advanced compare this to avoid BasicIndexOutOfBoundsException
 		result &= eopParamList.size() == otherEopParamList.size();
-		int limit = eopParamList.size();
-		int cpt = 0;
-		boolean stop = false;
-		while ((cpt < limit) && !stop) {
-			stop = true;
-			// compare parameters number before made advanced compare this to avoid BasicIndexOutOfBoundsException
-			if (eopParamList.size() == otherEopParamList.size()) {
+		
+		// no need to go trough if result is already false 
+		if(result == true){
+			int limit = eopParamList.size();
+			int cpt = 0;
+			boolean stop = false;
+			while ((cpt < limit) && !stop) {
+				stop = true;
+
 				EParameter eopParam = eopParamList.get(cpt);
 				EParameter otherEopParam = otherEopParamList.get(cpt);
 				if (isSubType(eopParam, otherEopParam) || isSubType(otherEopParam, eopParam)) {
 					stop = false;
 				}
+				cpt++;
 			}
-			cpt++;
+
+			result &= !stop;
 		}
-		result &= !stop;
 		return result;
 	}
 

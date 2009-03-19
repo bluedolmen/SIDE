@@ -250,7 +250,7 @@ public abstract class EObjectUtils {
 	 * @throws ClassNotFoundException 
 	 */
 	public static boolean equalsForMerge(EObject eObject, EObject otherEObject,ClassLoader cl) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, ClassNotFoundException{
-
+			
 		boolean result = false;
 		if(eObject.eClass().getName().equals(otherEObject.eClass().getName())){
 			result = true;
@@ -267,7 +267,7 @@ public abstract class EObjectUtils {
 				}
 			}
 
-
+		
 			if (founded){
 				//Class[] parameters = {eObject.getClass()};
 				//AssociationImpl asoc;
@@ -459,7 +459,8 @@ public abstract class EObjectUtils {
 		Object result = null;
 		EStructuralFeature esf = source.eClass().getEStructuralFeature(esfString);
 		if(esf != null){
-			result = source.eGet(esf);
+			// the using of eGet(EStructuralFeature,Boolean)  prevent from resolving proxies during the get
+			result = source.eGet(esf,false);
 		}
 
 		return result;
