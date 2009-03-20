@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: S-IDE Acceleo Generator Plug-in
+Bundle-SymbolicName: com.bluexml.side.Application.generator.acceleo
+Bundle-Version: 1.0.0
+Bundle-Activator: com.bluexml.side.application.generator.acceleo.Activator
+Bundle-Vendor: BLUEXML
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ fr.obeo.acceleo.chain,
+ fr.obeo.acceleo.gen,
+ com.bluexml.side.Application.generator,
+ org.eclipse.core.resources,
+ org.eclipse.emf.ecore.xmi,
+ com.bluexml.side.Application
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Export-Package: com.bluexml.side.application.generator.acceleo
