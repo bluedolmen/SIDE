@@ -1,20 +1,4 @@
-<%--
-Copyright (C) BlueXML 2005-2008
-
-This program is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Boston, MA 02111.
- --%>
- <%
+<%
 metamodel http://www.kerblue.org/workflow/1.0
 %>
 
@@ -34,6 +18,12 @@ shared/classes/alfresco/extension/generated/bpm/<%name%>-model.xml.temporary
       	<import uri="http://www.alfresco.org/model/forum/1.0" prefix="fm"/>
       	<import uri="http://www.alfresco.org/model/bpm/1.0" prefix="bpm" />
       	<import uri="http://www.alfresco.org/model/blogintegration/1.0" prefix="blg"/>
+      	<%for (tasknode.clazz){%>
+      	<import uri="http://www.bluexml.com/model/content/<%getRootContainer().name%>/1.0" prefix="<%getRootContainer().name%>"/>
+      	<%}%>
+      	<%for (startstate.clazz){%>
+      	<import uri="http://www.bluexml.com/model/content/<%getRootContainer().name%>/1.0" prefix="<%getRootContainer().name%>"/>
+      	<%}%>
   </imports>
 
   <namespaces>
@@ -67,9 +57,9 @@ shared/classes/alfresco/extension/generated/bpm/<%name%>-model.xml.temporary
 			<!-- Associations -->
 			<associations>
 			<%for (clazz){%>
-				<association name="wfbx:<%name%>">
+				<association name="wfbx:<%current("StartState").name%>_<%name%>">
 					<target>
-						<class><%getRootContainer().name%>:<%name%></class>
+						<class><%getFullName().replaceFirst(".",":")%></class>
 					</target>
 				</association>
 			<%}%>
@@ -95,9 +85,9 @@ shared/classes/alfresco/extension/generated/bpm/<%name%>-model.xml.temporary
 			<!-- Associations -->
 			<associations>
 			<%for (clazz){%>
-				<association name="wfbx:<%name%>">
+				<association name="wfbx:<%current("TaskNode").name%>_<%name%>">
 					<target>
-						<class><%getRootContainer().name%>:<%name%></class>
+						<class><%getFullName().replaceFirst("\.",":")%></class>
 					</target>
 				</association>
 			<%}%>

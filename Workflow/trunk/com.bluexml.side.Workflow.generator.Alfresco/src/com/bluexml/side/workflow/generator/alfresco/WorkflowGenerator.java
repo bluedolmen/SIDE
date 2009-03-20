@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
@@ -49,6 +50,8 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 				.add("/com.bluexml.side.Workflow.generator.Alfresco/templates/alfrescoGenerator_model.mt");
 		result
 				.add("/com.bluexml.side.Workflow.generator.Alfresco/templates/alfrescoGenerator_properties.mt");
+		result
+				.add("/com.bluexml.side.Workflow.generator.Alfresco/templates/alfrescoGenerator_web_client_config.mt");
 		return result;
 	}
 
@@ -64,6 +67,11 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 		result.add(getTargetPath()
 				+ "/shared/classes/alfresco/extension/generated/bpm/model.xml");
 
+		// Aggregate web client configuration
+		aggregateWebClientConfiguration();
+		result.add(getTargetPath()
+				+ "/shared/classes/alfresco/extension/web-client-config-custom.xml");
+		
 		return result;
 	}
 
@@ -100,7 +108,8 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 				Node tnode = searchNode(tproperties, "name",
 						"workflowDefinitions");
 				Node list = getFirstChild(node);
-				Node props = getFirstChild(getFirstChild(tnode));
+				Node props = getFirstChild(getFirstChild(tnode))
+						.cloneNode(true);
 				wcFile.adoptNode(props);
 				list.appendChild(props);
 
@@ -108,7 +117,8 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 				node = searchNode(properties, "name", "labels");
 				tnode = searchNode(tproperties, "name", "labels");
 				list = getFirstChild(node);
-				Node value = getFirstChild(getFirstChild(tnode));
+				Node value = getFirstChild(getFirstChild(tnode))
+						.cloneNode(true);
 				wcFile.adoptNode(value);
 				list.appendChild(value);
 
@@ -116,6 +126,10 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 				TransformerFactory tranFactory = TransformerFactory
 						.newInstance();
 				Transformer aTransformer = tranFactory.newTransformer();
+				aTransformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC,
+						wcFile.getDoctype().getPublicId());
+				aTransformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM,
+						wcFile.getDoctype().getSystemId());
 				Source src = new DOMSource(wcFile);
 				Result dest = new StreamResult(workflowContext.getRawLocation()
 						.toFile());
@@ -142,8 +156,7 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 		if (workflowModel.exists()) {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document wmFile = db.parse(workflowModel.getRawLocation()
-					.toFile());
+			Document wmFile = db.parse(workflowModel.getRawLocation().toFile());
 			wmFile.getDocumentElement().normalize();
 
 			IFile searchedFile = null;
@@ -155,10 +168,20 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 						.toFile());
 				twmFile.getDocumentElement().normalize();
 
+				// Add all imports
+				Node imports = wmFile.getElementsByTagName("imports").item(0);
+				NodeList timports = twmFile.getElementsByTagName("import");
+				for (int i = 0; i < timports.getLength(); ++i) {
+					Node node = timports.item(i).cloneNode(true);
+					wmFile.adoptNode(node);
+					imports.appendChild(node);
+				}
+
+				// Add all types
 				Node types = wmFile.getElementsByTagName("types").item(0);
-				NodeList type = twmFile.getElementsByTagName("type");
-				for (int i = 0; i < type.getLength(); ++i) {
-					Node node = type.item(i).cloneNode(true);
+				Node ttypes = twmFile.getElementsByTagName("types").item(0);
+				for (int i = 0; i < ttypes.getChildNodes().getLength(); ++i) {
+					Node node = ttypes.getChildNodes().item(i).cloneNode(true);
 					wmFile.adoptNode(node);
 					types.appendChild(node);
 				}
@@ -176,6 +199,58 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 			IFile searchedFile = null;
 			for (IFile f : generatedFiles)
 				if (f.getName().endsWith("-model.xml.temporary"))
+					searchedFile = f;
+			searchedFile.copy(workflowModel.getFullPath(), true,
+					new NullProgressMonitor());
+		}
+	}
+	
+	private void aggregateWebClientConfiguration() throws Exception {
+		IPath outputPath = new Path(getTargetPath());
+		IPath extensionPath = outputPath
+		.append("/shared/classes/alfresco/extension/");
+		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace()
+		.getRoot();
+		IFolder extensionFolder = myWorkspaceRoot.getFolder(extensionPath);
+		IFile workflowModel = extensionFolder.getFile("web-client-config-custom.xml");
+		if (workflowModel.exists()) {
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document wmFile = db.parse(workflowModel.getRawLocation().toFile());
+			wmFile.getDocumentElement().normalize();
+			
+			IFile searchedFile = null;
+			for (IFile f : generatedFiles)
+				if (f.getName().endsWith("_web-client-config.xml.temporary"))
+					searchedFile = f;
+			if (searchedFile != null) {
+				Document twmFile = db.parse(searchedFile.getRawLocation()
+						.toFile());
+				twmFile.getDocumentElement().normalize();
+				
+				// Add all configurations
+				Node alfrescoConfig = wmFile.getElementsByTagName("alfresco-config").item(0);
+				Node talfrescoConfig = twmFile.getElementsByTagName("alfresco-config").item(0);
+				
+				for (int i = 0; i < talfrescoConfig.getChildNodes().getLength(); ++i) {
+					Node node = talfrescoConfig.getChildNodes().item(i).cloneNode(true);
+					wmFile.adoptNode(node);
+					alfrescoConfig.appendChild(node);
+				}
+				
+				// Save web-client-config-custom.xml
+				TransformerFactory tranFactory = TransformerFactory
+				.newInstance();
+				Transformer aTransformer = tranFactory.newTransformer();
+				Source src = new DOMSource(wmFile);
+				Result dest = new StreamResult(workflowModel.getRawLocation()
+						.toFile());
+				aTransformer.transform(src, dest);
+			}
+		} else {
+			IFile searchedFile = null;
+			for (IFile f : generatedFiles)
+				if (f.getName().endsWith("_web-client-config.xml.temporary"))
 					searchedFile = f;
 			searchedFile.copy(workflowModel.getFullPath(), true,
 					new NullProgressMonitor());
