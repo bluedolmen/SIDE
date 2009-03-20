@@ -2,13 +2,14 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Validate Plug-in
 Bundle-SymbolicName: com.bluexml.side.Util.MetaModel.validate;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.1
 Bundle-Activator: com.bluexml.side.util.metamodel.validate.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.ocl,
  org.eclipse.ocl.ecore,
- com.bluexml.side.Util.ecore
+ com.bluexml.side.Util.ecore;bundle-version="1.0.1",
+ com.bluexml.side.Util.model.merge;bundle-version="1.0.1"
 Eclipse-LazyStart: true
 Export-Package: com.bluexml.side.Utils.MetaModel.validate.OCLextension
