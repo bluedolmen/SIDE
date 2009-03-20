@@ -413,7 +413,7 @@ public abstract class  MergeUtils {
 		//1 non null, not empty
 		if( root != null && !EResourceUtils.isResourceEmptyContent(parent)){
 			// root is really the root content of the parent, and root has exactly one child
-			if( root == parent.getContents().get(0) && root.eContents().size() == 0){
+			if( root == parent.getContents().get(0) && root.eContents().size() == 1){
 				EObject uniqueChild = root.eContents().get(0);
 				// uniqueChild is eligible as root
 				if(EObjectUtils.areFromSameEClassName(root, uniqueChild)){
