@@ -44,6 +44,24 @@ metamodel http://www.kerblue.org/workflow/1.0
 <%for (startstate){%>
 	  <start-state name="<%name%>">
 	  	<task name="wfbx:<%name%>" swimlane="<%initiator.actorid%>">
+			<%for (event){%>
+			<event type="<%type%>">
+				<%for (action){%>
+				<action class="<%javaClass.replaceAll("\"","")%>">
+		  			<%for (script) {%>
+						<script>
+							<%for (variable){%>
+								<variable name="<%name%>" access="<%access%>"/>
+							<%}%>
+							<expression>
+							<%expression%>
+							</expression>
+						</script>
+		  			<%}%>
+				</action>
+				<%}%>
+			</event>
+			<%}%>	  	
 	  		<%for (transition){%>
 	  			<%for (timer){%>
 	  			<timer name="Timer" duedate="<%duedate%>" transition="<%current("Transition").name%>">
@@ -312,7 +330,8 @@ metamodel http://www.kerblue.org/workflow/1.0
 
 <%for (processstate){%>
 	<process-state name="<%name%>">
-		<sub-process name="<%subprocess.name%>"/>
+		<sub-process name="wfbx:<%subprocess.name%>"/>
+		<variable name="bpm_package"/>
 		<%for (transition.sort("condition")){%>
 	  	
 		<transition name="<%to.name%>" to="<%to.name%>">

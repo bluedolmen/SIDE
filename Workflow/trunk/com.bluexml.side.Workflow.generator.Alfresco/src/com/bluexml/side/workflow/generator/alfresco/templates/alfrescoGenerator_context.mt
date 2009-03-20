@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Boston, MA 02111.
 metamodel http://www.kerblue.org/workflow/1.0
 %>
 <%script type="workflow.Process" name="validatedFilename"%>
-shared/classes/alfresco/extension/workflow-<%name%>-context.xml
+shared/classes/alfresco/extension/<%name%>-workflow-context.xml.temporary
 <%script type="workflow.Process" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
@@ -38,7 +38,7 @@ shared/classes/alfresco/extension/workflow-<%name%>-context.xml
 		</property>
 		<property name="models">
 			<list>
-                <value>alfresco/extension/generated/bpm/model-<%name%>.xml</value>
+                <value>alfresco/extension/generated/bpm/model.xml</value>
 			</list>
 		</property>
 		<property name="labels">
