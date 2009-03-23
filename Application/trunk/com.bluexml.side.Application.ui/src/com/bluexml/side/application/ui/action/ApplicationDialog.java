@@ -35,8 +35,13 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.accessibility.AccessibleAdapter;
 import org.eclipse.swt.accessibility.AccessibleEvent;
 import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.events.FocusAdapter;
+import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Button;
@@ -60,18 +65,26 @@ import com.bluexml.side.application.ApplicationFactory;
 import com.bluexml.side.application.ApplicationPackage;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ConfigurationElement;
+import com.bluexml.side.application.ConfigurationParameters;
 import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.Option;
 import com.bluexml.side.application.ui.SWTResourceManager;
+import com.bluexml.side.application.ui.action.table.GeneratorParameter;
+import com.bluexml.side.application.ui.action.table.GeneratorParameterCellModifier;
+import com.bluexml.side.application.ui.action.table.GeneratorParameterContentProvider;
+import com.bluexml.side.application.ui.action.table.GeneratorParameterDataStructure;
+import com.bluexml.side.application.ui.action.table.GeneratorParameterLabelProvider;
 import com.bluexml.side.application.ui.action.tree.Generator;
 import com.bluexml.side.application.ui.action.tree.Metamodel;
 import com.bluexml.side.application.ui.action.tree.OptionGenerator;
 import com.bluexml.side.application.ui.action.tree.Technology;
 import com.bluexml.side.application.ui.action.tree.TechnologyVersion;
 import com.bluexml.side.application.ui.action.tree.TreeElement;
+import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 
 public class ApplicationDialog extends Dialog {
 
+	private static final int GEN_ID = IDialogConstants.CLIENT_ID + 1;
 	private Text config_description;
 	private TreeViewer viewer;
 	private Tree tree_1;
@@ -87,6 +100,23 @@ public class ApplicationDialog extends Dialog {
 	private IFile model;
 	private Table generatorParameters;
 	private String[] columnNames;
+	private String columnNameValue = "Value";
+	private String columnNameLabel = "Label";
+	private GeneratorParameterDataStructure dataStructure;
+	private TableViewer generatorParametersViewer;
+	private Button verboseButton;
+	private Button updateTargetButton;
+	private Button cleanButton;
+	private Text destinationText;
+	private Text logText;
+	
+	private static String KEY_VERBOSE = "genConf.verbose";
+	private static String KEY_CLEAN = "genConf.clean";
+	private static String KEY_UPDATE = "genConf.update";
+	private static String KEY_LOGPATH = "genConf.logPath";
+	private static String KEY_GENPATH = "genConf.genPath";
+	
+	private static String EXTENSIONPOINT_ID = "com.bluexml.side.Application.com_bluexml_application_configuration";
 
 	/**
 	 * Create the dialog
@@ -139,8 +169,40 @@ public class ApplicationDialog extends Dialog {
 			initializeTree();
 			Set<TreeItem> generators = collectGenerators();
 			configureTree(configuration, generators);
+			configureGeneratorOptions(configuration);
+			
+			// Refresh generator parameter
+			initializeStaticGeneratorParameters();
 		}
 		loadingTree = false;
+	}
+	
+	private void initializeStaticGeneratorParameters() {
+		Configuration conf = getCurrentConfiguration();
+		ConfigurationParameters verboseParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_VERBOSE);
+		if (verboseParam != null) {
+			verboseButton.setSelection(Boolean.parseBoolean(verboseParam.getValue()));
+		}
+		
+		ConfigurationParameters cleanParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_CLEAN);
+		if (cleanParam != null) {
+			cleanButton.setSelection(Boolean.parseBoolean(cleanParam.getValue()));
+		}
+		
+		ConfigurationParameters updateParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_UPDATE);
+		if (updateParam != null) {
+			updateTargetButton.setSelection(Boolean.parseBoolean(updateParam.getValue()));
+		}
+		
+		ConfigurationParameters logPathParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_LOGPATH);
+		if (logPathParam != null) {
+			logText.setText(logPathParam.getValue());
+		}
+		
+		ConfigurationParameters updatePathParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_GENPATH);
+		if (updatePathParam != null) {
+			destinationText.setText(updatePathParam.getValue());
+		}
 	}
 
 	private Set<TreeItem> collectGenerators() {
@@ -155,6 +217,29 @@ public class ApplicationDialog extends Dialog {
 				generators.add(item);
 			collectGenerators(item.getItems(), generators);
 		}
+	}
+
+	/**
+	 * Will search the dataStructure where is save all generation option and
+	 * will add value from the application model
+	 * 
+	 * @param configuration
+	 */
+	private void configureGeneratorOptions(Configuration configuration) {
+		for (ModelElement me : application.getElements()) {
+			if (me instanceof Configuration) {
+				Configuration conf = (Configuration) me;
+				for (ConfigurationParameters confParam : conf.getParameters()) {
+					GeneratorParameter genParam = dataStructure
+							.getParamMatching(confParam.getKey());
+					if (genParam != null) {
+						genParam.setValue(confParam.getValue());
+					}
+				}
+			}
+		}
+		// Update
+		generatorParametersViewer.refresh();
 	}
 
 	private void configureTree(Configuration configuration,
@@ -230,6 +315,10 @@ public class ApplicationDialog extends Dialog {
 	 */
 	@Override
 	protected Control createDialogArea(Composite parent) {
+		columnNames = new String[2];
+		columnNames[0] = columnNameLabel;
+		columnNames[1] = columnNameValue;
+
 		Composite container = (Composite) super.createDialogArea(parent);
 		container.setLayout(null);
 
@@ -249,8 +338,6 @@ public class ApplicationDialog extends Dialog {
 
 		final Composite composite_1 = new Composite(tabFolder, SWT.NONE);
 		globalConfigurationTabItem.setControl(composite_1);
-
-		
 
 		viewer = new TreeViewer(composite_1, SWT.BORDER);
 		tree_1 = viewer.getTree();
@@ -329,9 +416,14 @@ public class ApplicationDialog extends Dialog {
 		final Composite composite_2 = new Composite(tabFolder, SWT.NONE);
 		optionsTabItem.setControl(composite_2);
 
-		final Button cleanButton = new Button(composite_2, SWT.CHECK);
+		cleanButton = new Button(composite_2, SWT.CHECK);
 		cleanButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
+				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_CLEAN);
+				if (param != null) {
+					Button b = (Button)e.getSource();
+					param.setValue(Boolean.toString(b.getSelection()));
+				}
 			}
 		});
 		cleanButton.setText("Clean");
@@ -343,11 +435,29 @@ public class ApplicationDialog extends Dialog {
 		generationsOptionsLabel.setText("General generation options");
 		generationsOptionsLabel.setBounds(10, 10, 240, 24);
 
-		final Button verboseButton = new Button(composite_2, SWT.CHECK);
+		verboseButton = new Button(composite_2, SWT.CHECK);
+		verboseButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(final SelectionEvent e) {
+				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_VERBOSE);
+				if (param != null) {
+					Button b = (Button)e.getSource();
+					param.setValue(Boolean.toString(b.getSelection()));
+				}
+			}
+		});
 		verboseButton.setText("Verbose");
 		verboseButton.setBounds(20, 60, 93, 16);
 
-		final Button updateTargetButton = new Button(composite_2, SWT.CHECK);
+		updateTargetButton = new Button(composite_2, SWT.CHECK);
+		updateTargetButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(final SelectionEvent e) {
+				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_UPDATE);
+				if (param != null) {
+					Button b = (Button)e.getSource();
+					param.setValue(Boolean.toString(b.getSelection()));
+				}
+			}
+		});
 		updateTargetButton
 				.setToolTipText("If checked will move uploaded files to your application.");
 		updateTargetButton.getAccessible().addAccessibleListener(
@@ -377,14 +487,26 @@ public class ApplicationDialog extends Dialog {
 				generatorParameters, SWT.RIGHT);
 		generatorParameters.setSortColumn(newColumnTableColumn);
 		newColumnTableColumn.setWidth(100);
-		newColumnTableColumn.setText("Label");
+		newColumnTableColumn.setText(columnNames[0]);
 
 		final TableColumn newColumnTableColumn_1 = new TableColumn(
-				generatorParameters, SWT.NONE);
+				generatorParameters, SWT.LEFT);
 		newColumnTableColumn_1.setWidth(315);
-		newColumnTableColumn_1.setText("Value");
+		newColumnTableColumn_1.setText(columnNames[1]);
 
-		final Text logText = new Text(composite_2, SWT.BORDER);
+		createTableViewer();
+
+		logText = new Text(composite_2, SWT.BORDER);
+		logText.addFocusListener(new FocusAdapter() {
+			public void focusLost(final FocusEvent e) {
+				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_LOGPATH);
+				if (param != null) {
+					Text t = (Text)e.getSource();
+					param.setValue(t.getText());
+				}
+			}
+		});
+		
 		logText.setBounds(115, 110, 323, 22);
 
 		final Label logLabel = new Label(composite_2, SWT.NONE);
@@ -397,7 +519,16 @@ public class ApplicationDialog extends Dialog {
 		destinationLabel.setBounds(20, 145, 93, 15);
 		destinationLabel.setText("Generation path :");
 
-		final Text destinationText = new Text(composite_2, SWT.BORDER);
+		destinationText = new Text(composite_2, SWT.BORDER);
+		destinationText.addFocusListener(new FocusAdapter() {
+			public void focusLost(final FocusEvent e) {
+				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_LOGPATH);
+				if (param != null) {
+					Text t = (Text)e.getSource();
+					param.setValue(t.getText());
+				}
+			}
+		});
 		destinationText.setBounds(115, 144, 323, 22);
 
 		configurationList = new Combo(container, SWT.READ_ONLY);
@@ -407,7 +538,7 @@ public class ApplicationDialog extends Dialog {
 				refreshConfiguration();
 			}
 		});
-		
+
 		// Fill the combo
 		for (ModelElement elt : application.getElements()) {
 			if (elt instanceof Configuration) {
@@ -415,7 +546,7 @@ public class ApplicationDialog extends Dialog {
 				configurationList.add(configuration.getName());
 			}
 		}
-		
+
 		if (configurationList.getItemCount() > 0)
 			configurationList.select(0);
 
@@ -471,9 +602,37 @@ public class ApplicationDialog extends Dialog {
 				config.setName(newName);
 				configurationList.add(newName);
 				configurationList.select(configurationList.getItemCount() - 1);
+				addStaticParameters(config);
 				application.getElements().add(config);
 
 				refreshConfiguration();
+			}
+
+			private void addStaticParameters(Configuration config) {
+				ConfigurationParameters verboseParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
+				verboseParam.setKey(KEY_VERBOSE);
+				verboseParam.setValue("false");
+				config.getParameters().add(verboseParam);
+				
+				ConfigurationParameters cleanParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
+				cleanParam.setKey(KEY_CLEAN);
+				cleanParam.setValue("false");
+				config.getParameters().add(cleanParam);
+				
+				ConfigurationParameters updateParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
+				updateParam.setKey(KEY_UPDATE);
+				updateParam.setValue("false");
+				config.getParameters().add(updateParam);
+				
+				ConfigurationParameters logPathParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
+				logPathParam.setKey(KEY_LOGPATH);
+				logPathParam.setValue("");
+				config.getParameters().add(logPathParam);
+				
+				ConfigurationParameters generationPathParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
+				generationPathParam.setKey(KEY_GENPATH);
+				generationPathParam.setValue("");
+				config.getParameters().add(generationPathParam);
 			}
 		});
 		addBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class,
@@ -513,9 +672,9 @@ public class ApplicationDialog extends Dialog {
 	 * Create the TableViewer
 	 */
 	private void createTableViewer() {
-		TableViewer generatorParametersViewer = new TableViewer(generatorParameters);
+		generatorParametersViewer = new TableViewer(generatorParameters);
 		generatorParametersViewer.setUseHashlookup(true);
-		//generatorParametersViewer.setColumnProperties(columnNames );
+		generatorParametersViewer.setColumnProperties(columnNames);
 
 		// Create the cell editors
 		org.eclipse.jface.viewers.CellEditor[] editors = new CellEditor[2];
@@ -526,14 +685,46 @@ public class ApplicationDialog extends Dialog {
 		// Column 2 : Value (Text, editable)
 		TextCellEditor textEditor = new TextCellEditor(generatorParameters);
 		((Text) textEditor.getControl()).setTextLimit(60);
-		editors[1] =  (CellEditor) textEditor;
-
+		editors[1] = (CellEditor) textEditor;
 
 		// Assign the cell editors to the viewer
 		generatorParametersViewer.setCellEditors(editors);
 		// Set the cell modifier for the viewer
-		//TODO
-//		generatorParametersViewer.setCellModifier(new ExampleCellModifier(this));
+		generatorParametersViewer
+				.setContentProvider(new GeneratorParameterContentProvider(
+						dataStructure));
+		generatorParametersViewer
+				.setLabelProvider(new GeneratorParameterLabelProvider(
+						dataStructure));
+		generatorParametersViewer
+				.setCellModifier(new GeneratorParameterCellModifier(
+						dataStructure, columnNames, generatorParametersViewer));
+		generatorParametersViewer.setInput(dataStructure);
+		
+		initializeDynamicGeneratorParameters();
+	}
+
+	private void initializeDynamicGeneratorParameters() {
+		// Scan For configurationParameter
+		HashMap<String, String> hm = new HashMap<String, String>();
+		IConfigurationElement[] contributions = Platform.getExtensionRegistry().getConfigurationElementsFor(
+				EXTENSIONPOINT_ID);
+		dataStructure = new GeneratorParameterDataStructure();
+		for (IConfigurationElement config : contributions) {
+			for (IConfigurationElement options : config.getChildren()) {
+				if (options.getName().equalsIgnoreCase(
+						"configurationParameter")) {
+					String key = options.getAttribute("key");
+					if (!hm.containsKey(key)) {
+						dataStructure.addGeneratorParameter(options);
+						hm.put(key, "");
+					}
+					
+				}
+			}
+		}
+		// Update
+		generatorParametersViewer.refresh();
 	}
 
 	private String builDocumentationText() {
@@ -623,10 +814,9 @@ public class ApplicationDialog extends Dialog {
 		}
 
 		public void initialize() {
-			String extensionPointId = "com.bluexml.side.Application.com_bluexml_application_configuration";
 			IConfigurationElement[] contributions = Platform
 					.getExtensionRegistry().getConfigurationElementsFor(
-							extensionPointId);
+							EXTENSIONPOINT_ID);
 			// Scan for metamodels
 			for (IConfigurationElement config : contributions) {
 				if (config.getName().equalsIgnoreCase("metamodel")) {
@@ -662,16 +852,9 @@ public class ApplicationDialog extends Dialog {
 						}
 					}
 				}
-
-			}
-
-			// Scan for generator parameters
-			for (IConfigurationElement config : contributions) {
-				if (config.getName().equalsIgnoreCase("configurationParameter")) {
-
-				}
 			}
 		}
+
 
 		public void dispose() {
 		}
@@ -778,10 +961,9 @@ public class ApplicationDialog extends Dialog {
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL,
-				true);
-		createButton(parent, IDialogConstants.CANCEL_ID,
-				IDialogConstants.CANCEL_LABEL, false);
+		createButton(parent, GEN_ID, "Generate", false);
+		createButton(parent, IDialogConstants.OK_ID, "Apply", true);
+		createButton(parent, IDialogConstants.CANCEL_ID, "Close", false);
 	}
 
 	/**

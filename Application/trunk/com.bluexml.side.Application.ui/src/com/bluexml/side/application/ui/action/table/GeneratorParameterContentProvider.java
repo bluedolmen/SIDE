@@ -5,9 +5,15 @@ import org.eclipse.jface.viewers.Viewer;
 
 public class GeneratorParameterContentProvider implements IStructuredContentProvider {
 
+	private GeneratorParameterDataStructure dataStructure;
+
+	public GeneratorParameterContentProvider(
+			GeneratorParameterDataStructure p_dataStructure) {
+		dataStructure = p_dataStructure;
+	}
+
 	public Object[] getElements(Object inputElement) {
-		// TODO Auto-generated method stub
-		return null;
+		return dataStructure.getData().toArray();
 	}
 
 	public void dispose() {
