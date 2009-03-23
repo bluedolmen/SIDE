@@ -20,5 +20,6 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Common.edit,
  org.eclipse.emf.ecore,
  com.bluexml.side.Common,
- org.topcased.modeler
+ org.topcased.modeler,
+ com.bluexml.side.Class.modeler;bundle-version="2.0.0"
 Eclipse-LazyStart: true
