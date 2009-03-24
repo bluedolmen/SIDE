@@ -36,49 +36,42 @@
          id="com.bluexml.side.Application"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.0"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.edit"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.0"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.editor"
          download-size="0"
          install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Application.example"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
+         version="1.0.0"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.generator"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.0"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.generator.acceleo"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.0"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.ui"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.0"
          unpack="false"/>
 
 </feature>

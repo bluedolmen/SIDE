@@ -32,6 +32,7 @@
       <import plugin="com.bluexml.side.Util.libs" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.bluexml.side.Application.generator.acceleo" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.bluexml.side.Application.generator" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Application" version="1.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.bluexml.side.Util"
-      label="Util Features"
+      label="S-IDE Utils"
       version="1.0.1"
       provider-name="BLUEXML">
 
@@ -33,5 +33,11 @@
          install-size="0"
          version="1.0.1"
          unpack="false"/>
+
+   <plugin
+         id="com.bluexml.side.Util.libs"
+         download-size="0"
+         install-size="0"
+         version="1.0.0"/>
 
 </feature>

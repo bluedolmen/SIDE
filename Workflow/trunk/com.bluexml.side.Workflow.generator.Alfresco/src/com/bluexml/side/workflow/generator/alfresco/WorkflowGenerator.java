@@ -42,16 +42,11 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 	@Override
 	protected List<String> getTemplates() {
 		List<String> result = new ArrayList<String>();
-		result
-				.add("/com.bluexml.side.Workflow.generator.Alfresco/templates/alfrescoGenerator_context.mt");
-		result
-				.add("/com.bluexml.side.Workflow.generator.Alfresco/templates/alfrescoGenerator_jpdl.mt");
-		result
-				.add("/com.bluexml.side.Workflow.generator.Alfresco/templates/alfrescoGenerator_model.mt");
-		result
-				.add("/com.bluexml.side.Workflow.generator.Alfresco/templates/alfrescoGenerator_properties.mt");
-		result
-				.add("/com.bluexml.side.Workflow.generator.Alfresco/templates/alfrescoGenerator_web_client_config.mt");
+		result.add("/com.bluexml.side.Workflow.generator.Alfresco/templates/alfrescoGenerator_context.mt");
+		result.add("/com.bluexml.side.Workflow.generator.Alfresco/templates/alfrescoGenerator_jpdl.mt");
+		result.add("/com.bluexml.side.Workflow.generator.Alfresco/templates/alfrescoGenerator_model.mt");
+		result.add("/com.bluexml.side.Workflow.generator.Alfresco/templates/alfrescoGenerator_properties.mt");
+		result.add("/com.bluexml.side.Workflow.generator.Alfresco/templates/alfrescoGenerator_web_client_config.mt");
 		return result;
 	}
 
@@ -59,35 +54,29 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 		List<String> result = new ArrayList<String>();
 		// Aggregate workflow context
 		aggregateWorkflowContext();
-		result.add(getTargetPath()
-				+ "/shared/classes/alfresco/extension/workflow-context.xml");
+		result.add(getTargetPath() + "/shared/classes/alfresco/extension/workflow-context.xml");
 
 		// Aggregate alfresco model
 		aggregateWorkflowModel();
-		result.add(getTargetPath()
-				+ "/shared/classes/alfresco/extension/generated/bpm/model.xml");
+		result.add(getTargetPath() + "/shared/classes/alfresco/extension/generated/bpm/model.xml");
 
 		// Aggregate web client configuration
 		aggregateWebClientConfiguration();
-		result.add(getTargetPath()
-				+ "/shared/classes/alfresco/extension/web-client-config-custom.xml");
-		
+		result.add(getTargetPath() + "/shared/classes/alfresco/extension/web-client-config-custom.xml");
+
 		return result;
 	}
 
 	private void aggregateWorkflowContext() throws Exception {
 		IPath outputPath = new Path(getTargetPath());
-		IPath extensionPath = outputPath
-				.append("/shared/classes/alfresco/extension");
-		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace()
-				.getRoot();
+		IPath extensionPath = outputPath.append("/shared/classes/alfresco/extension");
+		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		IFolder extensionFolder = myWorkspaceRoot.getFolder(extensionPath);
 		IFile workflowContext = extensionFolder.getFile("workflow-context.xml");
 		if (workflowContext.exists()) {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document wcFile = db.parse(workflowContext.getRawLocation()
-					.toFile());
+			Document wcFile = db.parse(workflowContext.getRawLocation().toFile());
 			wcFile.getDocumentElement().normalize();
 
 			IFile searchedFile = null;
@@ -95,21 +84,17 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 				if (f.getName().endsWith("-workflow-context.xml.temporary"))
 					searchedFile = f;
 			if (searchedFile != null) {
-				Document twcFile = db.parse(searchedFile.getRawLocation()
-						.toFile());
+				Document twcFile = db.parse(searchedFile.getRawLocation().toFile());
 				twcFile.getDocumentElement().normalize();
 
 				NodeList properties = wcFile.getElementsByTagName("property");
 				NodeList tproperties = twcFile.getElementsByTagName("property");
 
 				// Copy workflowDefinitions
-				Node node = searchNode(properties, "name",
-						"workflowDefinitions");
-				Node tnode = searchNode(tproperties, "name",
-						"workflowDefinitions");
+				Node node = searchNode(properties, "name", "workflowDefinitions");
+				Node tnode = searchNode(tproperties, "name", "workflowDefinitions");
 				Node list = getFirstChild(node);
-				Node props = getFirstChild(getFirstChild(tnode))
-						.cloneNode(true);
+				Node props = getFirstChild(getFirstChild(tnode)).cloneNode(true);
 				wcFile.adoptNode(props);
 				list.appendChild(props);
 
@@ -117,22 +102,17 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 				node = searchNode(properties, "name", "labels");
 				tnode = searchNode(tproperties, "name", "labels");
 				list = getFirstChild(node);
-				Node value = getFirstChild(getFirstChild(tnode))
-						.cloneNode(true);
+				Node value = getFirstChild(getFirstChild(tnode)).cloneNode(true);
 				wcFile.adoptNode(value);
 				list.appendChild(value);
 
 				// Save workflow-context.xml
-				TransformerFactory tranFactory = TransformerFactory
-						.newInstance();
+				TransformerFactory tranFactory = TransformerFactory.newInstance();
 				Transformer aTransformer = tranFactory.newTransformer();
-				aTransformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC,
-						wcFile.getDoctype().getPublicId());
-				aTransformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM,
-						wcFile.getDoctype().getSystemId());
+				aTransformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, wcFile.getDoctype().getPublicId());
+				aTransformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, wcFile.getDoctype().getSystemId());
 				Source src = new DOMSource(wcFile);
-				Result dest = new StreamResult(workflowContext.getRawLocation()
-						.toFile());
+				Result dest = new StreamResult(workflowContext.getRawLocation().toFile());
 				aTransformer.transform(src, dest);
 			}
 		} else {
@@ -140,17 +120,14 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 			for (IFile f : generatedFiles)
 				if (f.getName().endsWith("-workflow-context.xml.temporary"))
 					searchedFile = f;
-			searchedFile.copy(workflowContext.getFullPath(), true,
-					new NullProgressMonitor());
+			searchedFile.copy(workflowContext.getFullPath(), true, new NullProgressMonitor());
 		}
 	}
 
 	private void aggregateWorkflowModel() throws Exception {
 		IPath outputPath = new Path(getTargetPath());
-		IPath extensionPath = outputPath
-				.append("/shared/classes/alfresco/extension/generated/bpm");
-		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace()
-				.getRoot();
+		IPath extensionPath = outputPath.append("/shared/classes/alfresco/extension/generated/bpm");
+		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		IFolder extensionFolder = myWorkspaceRoot.getFolder(extensionPath);
 		IFile workflowModel = extensionFolder.getFile("model.xml");
 		if (workflowModel.exists()) {
@@ -164,8 +141,7 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 				if (f.getName().endsWith("-model.xml.temporary"))
 					searchedFile = f;
 			if (searchedFile != null) {
-				Document twmFile = db.parse(searchedFile.getRawLocation()
-						.toFile());
+				Document twmFile = db.parse(searchedFile.getRawLocation().toFile());
 				twmFile.getDocumentElement().normalize();
 
 				// Add all imports
@@ -187,12 +163,10 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 				}
 
 				// Save model.xml
-				TransformerFactory tranFactory = TransformerFactory
-						.newInstance();
+				TransformerFactory tranFactory = TransformerFactory.newInstance();
 				Transformer aTransformer = tranFactory.newTransformer();
 				Source src = new DOMSource(wmFile);
-				Result dest = new StreamResult(workflowModel.getRawLocation()
-						.toFile());
+				Result dest = new StreamResult(workflowModel.getRawLocation().toFile());
 				aTransformer.transform(src, dest);
 			}
 		} else {
@@ -200,17 +174,14 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 			for (IFile f : generatedFiles)
 				if (f.getName().endsWith("-model.xml.temporary"))
 					searchedFile = f;
-			searchedFile.copy(workflowModel.getFullPath(), true,
-					new NullProgressMonitor());
+			searchedFile.copy(workflowModel.getFullPath(), true, new NullProgressMonitor());
 		}
 	}
-	
+
 	private void aggregateWebClientConfiguration() throws Exception {
 		IPath outputPath = new Path(getTargetPath());
-		IPath extensionPath = outputPath
-		.append("/shared/classes/alfresco/extension/");
-		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace()
-		.getRoot();
+		IPath extensionPath = outputPath.append("/shared/classes/alfresco/extension/");
+		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		IFolder extensionFolder = myWorkspaceRoot.getFolder(extensionPath);
 		IFile workflowModel = extensionFolder.getFile("web-client-config-custom.xml");
 		if (workflowModel.exists()) {
@@ -218,33 +189,30 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document wmFile = db.parse(workflowModel.getRawLocation().toFile());
 			wmFile.getDocumentElement().normalize();
-			
+
 			IFile searchedFile = null;
 			for (IFile f : generatedFiles)
 				if (f.getName().endsWith("_web-client-config.xml.temporary"))
 					searchedFile = f;
 			if (searchedFile != null) {
-				Document twmFile = db.parse(searchedFile.getRawLocation()
-						.toFile());
+				Document twmFile = db.parse(searchedFile.getRawLocation().toFile());
 				twmFile.getDocumentElement().normalize();
-				
+
 				// Add all configurations
 				Node alfrescoConfig = wmFile.getElementsByTagName("alfresco-config").item(0);
 				Node talfrescoConfig = twmFile.getElementsByTagName("alfresco-config").item(0);
-				
+
 				for (int i = 0; i < talfrescoConfig.getChildNodes().getLength(); ++i) {
 					Node node = talfrescoConfig.getChildNodes().item(i).cloneNode(true);
 					wmFile.adoptNode(node);
 					alfrescoConfig.appendChild(node);
 				}
-				
+
 				// Save web-client-config-custom.xml
-				TransformerFactory tranFactory = TransformerFactory
-				.newInstance();
+				TransformerFactory tranFactory = TransformerFactory.newInstance();
 				Transformer aTransformer = tranFactory.newTransformer();
 				Source src = new DOMSource(wmFile);
-				Result dest = new StreamResult(workflowModel.getRawLocation()
-						.toFile());
+				Result dest = new StreamResult(workflowModel.getRawLocation().toFile());
 				aTransformer.transform(src, dest);
 			}
 		} else {
@@ -252,8 +220,7 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 			for (IFile f : generatedFiles)
 				if (f.getName().endsWith("_web-client-config.xml.temporary"))
 					searchedFile = f;
-			searchedFile.copy(workflowModel.getFullPath(), true,
-					new NullProgressMonitor());
+			searchedFile.copy(workflowModel.getFullPath(), true, new NullProgressMonitor());
 		}
 	}
 
@@ -266,8 +233,7 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 		return null;
 	}
 
-	private Node searchNode(NodeList nodeList, String attributeName,
-			String attributeValue) {
+	private Node searchNode(NodeList nodeList, String attributeName, String attributeValue) {
 		for (int i = 0; i < nodeList.getLength(); ++i) {
 			Node node = nodeList.item(i);
 			Node attribute = node.getAttributes().getNamedItem(attributeName);

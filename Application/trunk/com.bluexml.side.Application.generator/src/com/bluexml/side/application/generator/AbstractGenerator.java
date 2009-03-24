@@ -30,7 +30,7 @@ public abstract class AbstractGenerator implements IGenerator {
 		return null;
 	}
 	
-	protected String getTargetPath(){
+	protected final String getTargetPath(){
 		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral());
 	}
 }
