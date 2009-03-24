@@ -61,24 +61,24 @@
    <extension
          point="com.bluexml.side.Application.com_bluexml_application_configuration">
       <metamodel
-            id="com.bluexml.side.Class"
-            name="Kerblue Class"
+            id="KSR500"
+            name="KSR500 Class"
             url="http://www.kerblue.org/class/1.0">
       </metamodel>
       <technology
-            id="com.alfresco"
-            idMetamodel="com.bluexml.side.Class"
+            id="alfresco"
+            idMetamodel="KSR500"
             name="Alfresco"
             url="http://www.alfresco.com">
       </technology>
       <technologyVersion
-            id="com.alfresco.3.x"
-            idTechnology="com.alfresco"
-            version="Alfresco3.x">
+            id="alfresco_3.0_labs"
+            idTechnology="alfresco"
+            version="Alfresco3.0 Labs">
       </technologyVersion>
       <generatorVersion
             id="com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator"
-            idTechnologyVersion="com.alfresco.3.x"
+            idTechnologyVersion="alfresco_3.0_labs"
             version="S-IDE Alfresco Generator 1.0.0">
          <configurationParameter
                documentation="http://www.bluexml.com"

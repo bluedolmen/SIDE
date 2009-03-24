@@ -20,7 +20,7 @@ public class TestRunner {
 		String[] generationParameters=null;
 		String[] generatorOptions=null;
 		Map<String,String> configurationParameters=null;
-		cag.initialize(generationParameters, generatorOptions, configurationParameters);
+		//cag.initialize(generationParameters, generatorOptions, configurationParameters);
 		IFile model = ClassAlfrescoGenerator.getIFile("/com.bluexml.side.Class.generator.alfresco/modelTest/");
 		Collection<String> r = cag.generate(model);
 	}
