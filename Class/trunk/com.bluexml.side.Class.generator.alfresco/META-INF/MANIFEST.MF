@@ -22,3 +22,4 @@ Require-Bundle: org.eclipse.ui,
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Import-Package: fr.obeo.acceleo.gen.template.eval
+Export-Package: com.bluexml.side.clazz.generator.alfresco
