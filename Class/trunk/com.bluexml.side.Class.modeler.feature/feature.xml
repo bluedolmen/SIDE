@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.bluexml.side.Class.modeler.feature"
+      label="S-IDE Class Modeler"
+      version="1.0.0"
+      provider-name="BLUEXML">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <plugin
+         id="com.bluexml.side.Class"
+         download-size="0"
+         install-size="0"
+         version="1.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.bluexml.side.Class.edit"
+         download-size="0"
+         install-size="0"
+         version="1.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.bluexml.side.Class.editor"
+         download-size="0"
+         install-size="0"
+         version="1.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.bluexml.side.Class.modeler"
+         download-size="0"
+         install-size="0"
+         version="2.0.0.v200702151548"
+         unpack="false"/>
+
+</feature>
