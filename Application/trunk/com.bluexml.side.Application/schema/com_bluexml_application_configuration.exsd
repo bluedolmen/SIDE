@@ -187,7 +187,7 @@
    <element name="option">
       <annotation>
          <appinfo>
-            <meta.element labelAttribute="key"/>
+            <meta.element labelAttribute="label"/>
          </appinfo>
       </annotation>
       <complexType>
@@ -216,6 +216,11 @@
    </element>
 
    <element name="configurationParameter">
+      <annotation>
+         <appinfo>
+            <meta.element labelAttribute="label"/>
+         </appinfo>
+      </annotation>
       <complexType>
          <attribute name="key" type="string" use="required">
             <annotation>
