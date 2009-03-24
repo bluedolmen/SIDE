@@ -25,7 +25,9 @@ import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -37,11 +39,8 @@ import org.eclipse.swt.accessibility.AccessibleEvent;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Button;
@@ -109,13 +108,13 @@ public class ApplicationDialog extends Dialog {
 	private Button cleanButton;
 	private Text destinationText;
 	private Text logText;
-	
+
 	private static String KEY_VERBOSE = "genConf.verbose";
 	private static String KEY_CLEAN = "genConf.clean";
 	private static String KEY_UPDATE = "genConf.update";
 	private static String KEY_LOGPATH = "genConf.logPath";
 	private static String KEY_GENPATH = "genConf.genPath";
-	
+
 	private static String EXTENSIONPOINT_ID = "com.bluexml.side.Application.com_bluexml_application_configuration";
 
 	/**
@@ -153,7 +152,7 @@ public class ApplicationDialog extends Dialog {
 		generatorSet = new HashSet<Generator>();
 	}
 
-	private void refreshConfiguration() {
+	public void refreshConfiguration() {
 		loadingTree = true;
 		if (configurationList.getSelectionIndex() != -1) {
 			String name = configurationList.getItem(configurationList
@@ -167,41 +166,94 @@ public class ApplicationDialog extends Dialog {
 
 			// Refresh tree
 			initializeTree();
+
 			Set<TreeItem> generators = collectGenerators();
 			configureTree(configuration, generators);
-			configureGeneratorOptions(configuration);
-			
-			// Refresh generator parameter
+
+			// Refresh static generator parameters
 			initializeStaticGeneratorParameters();
+			// Refresh dynamic generator parameters
+			refreshGeneratorOptions(configuration);
 		}
 		loadingTree = false;
 	}
-	
+
+	public void refreshGeneratorOptions(Configuration configuration) {
+		initializeDynamicGeneratorParameters();
+		configureGeneratorOptions(configuration);
+	}
+
+	public void refreshGeneratorOptions() {
+		String name = configurationList.getItem(configurationList
+				.getSelectionIndex());
+		Configuration configuration = application.getConfiguration(name);
+		refreshGeneratorOptions(configuration);
+	}
+
 	private void initializeStaticGeneratorParameters() {
-		Configuration conf = getCurrentConfiguration();
-		ConfigurationParameters verboseParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_VERBOSE);
+		ConfigurationParameters verboseParam = ApplicationUtil
+				.getConfigurationParmeterByKey(KEY_VERBOSE);
 		if (verboseParam != null) {
-			verboseButton.setSelection(Boolean.parseBoolean(verboseParam.getValue()));
+			verboseButton.setSelection(Boolean.parseBoolean(verboseParam
+					.getValue()));
 		}
-		
-		ConfigurationParameters cleanParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_CLEAN);
+
+		ConfigurationParameters cleanParam = ApplicationUtil
+				.getConfigurationParmeterByKey(KEY_CLEAN);
 		if (cleanParam != null) {
-			cleanButton.setSelection(Boolean.parseBoolean(cleanParam.getValue()));
+			cleanButton.setSelection(Boolean
+					.parseBoolean(cleanParam.getValue()));
 		}
-		
-		ConfigurationParameters updateParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_UPDATE);
+
+		ConfigurationParameters updateParam = ApplicationUtil
+				.getConfigurationParmeterByKey(KEY_UPDATE);
 		if (updateParam != null) {
-			updateTargetButton.setSelection(Boolean.parseBoolean(updateParam.getValue()));
+			updateTargetButton.setSelection(Boolean.parseBoolean(updateParam
+					.getValue()));
 		}
-		
-		ConfigurationParameters logPathParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_LOGPATH);
+
+		ConfigurationParameters logPathParam = ApplicationUtil
+				.getConfigurationParmeterByKey(KEY_LOGPATH);
 		if (logPathParam != null) {
 			logText.setText(logPathParam.getValue());
 		}
-		
-		ConfigurationParameters updatePathParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_GENPATH);
+
+		ConfigurationParameters updatePathParam = ApplicationUtil
+				.getConfigurationParmeterByKey(KEY_GENPATH);
 		if (updatePathParam != null) {
 			destinationText.setText(updatePathParam.getValue());
+		}
+	}
+
+	private void initializeDynamicGeneratorParameters() {
+		// List Generator Id used
+		Configuration conf = getCurrentConfiguration();
+		List<String> confIds = new ArrayList<String>();
+		for (ConfigurationElement elem : conf.getElements()) {
+			confIds.add(elem.getId_generator());
+		}
+		if (dataStructure != null) {
+			dataStructure.getData().clear();
+		}
+
+		// Scan For configurationParameter
+		List<String> genOptions = new ArrayList<String>();
+		IConfigurationElement[] contributions = Platform.getExtensionRegistry()
+				.getConfigurationElementsFor(EXTENSIONPOINT_ID);
+		dataStructure = new GeneratorParameterDataStructure();
+		for (IConfigurationElement config : contributions) {
+			if (confIds.contains(config.getAttribute("id"))) {
+				for (IConfigurationElement options : config.getChildren()) {
+					if (options.getName().equalsIgnoreCase(
+							"configurationParameter")) {
+						String key = options.getAttribute("key");
+						if (!genOptions.contains(key)) {
+							dataStructure.addGeneratorParameter(options);
+							genOptions.add(key);
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -226,20 +278,17 @@ public class ApplicationDialog extends Dialog {
 	 * @param configuration
 	 */
 	private void configureGeneratorOptions(Configuration configuration) {
-		for (ModelElement me : application.getElements()) {
-			if (me instanceof Configuration) {
-				Configuration conf = (Configuration) me;
-				for (ConfigurationParameters confParam : conf.getParameters()) {
-					GeneratorParameter genParam = dataStructure
-							.getParamMatching(confParam.getKey());
-					if (genParam != null) {
-						genParam.setValue(confParam.getValue());
-					}
-				}
+		Configuration conf = getCurrentConfiguration();
+		for (ConfigurationParameters confParam : conf.getParameters()) {
+			GeneratorParameter genParam = dataStructure
+					.getParamMatching(confParam.getKey());
+			if (genParam != null) {
+				genParam.setValue(confParam.getValue());
 			}
 		}
 		// Update
-		generatorParametersViewer.refresh();
+		createTableViewer();
+		// generatorParametersViewer.refresh();
 	}
 
 	private void configureTree(Configuration configuration,
@@ -322,15 +371,11 @@ public class ApplicationDialog extends Dialog {
 		Composite container = (Composite) super.createDialogArea(parent);
 		container.setLayout(null);
 
-		config_description = new Text(container, SWT.READ_ONLY | SWT.BORDER
-				| SWT.WRAP);
-		config_description.setBounds(493, 10, 297, 169);
-
 		documentationText = new Browser(container, SWT.NONE);
-		documentationText.setBounds(500, 185, 287, 331);
+		documentationText.setBounds(493, 185, 294, 318);
 
 		final TabFolder tabFolder = new TabFolder(container, SWT.NONE);
-		tabFolder.setBounds(5, 45, 482, 468);
+		tabFolder.setBounds(15, 39, 472, 464);
 
 		final TabItem globalConfigurationTabItem = new TabItem(tabFolder,
 				SWT.NONE);
@@ -365,7 +410,7 @@ public class ApplicationDialog extends Dialog {
 						enableAllSubElements(item);
 
 						// Unckeck all sibling nodes
-						if (!(item.getData() instanceof OptionGenerator)) {
+						if (!(el instanceof OptionGenerator)) {
 							for (TreeItem ti : item.getParentItem().getItems())
 								if (!ti.equals(item)) {
 									TreeElement subEl = (TreeElement) ti
@@ -377,10 +422,14 @@ public class ApplicationDialog extends Dialog {
 									}
 								}
 						}
+						if (el instanceof Generator) {
+							refreshGeneratorOptions();
+						}
 					} else {
 						// Enable all sub elements
 						disableAllSubElements(item);
 					}
+
 				}
 			}
 
@@ -391,8 +440,12 @@ public class ApplicationDialog extends Dialog {
 						el.setEnabled(true);
 						viewer.update(el, null);
 					}
-					if (el.isChecked())
+					if (el.isChecked()) {
+						if (el instanceof Generator) {
+							refreshGeneratorOptions();
+						}
 						enableAllSubElements(ti);
+					}
 				}
 			}
 
@@ -401,14 +454,15 @@ public class ApplicationDialog extends Dialog {
 					TreeElement el = (TreeElement) ti.getData();
 					if (el.isEnabled()) {
 						el.setEnabled(false);
+						if (el instanceof Generator) {
+							refreshGeneratorOptions();
+						}
 						viewer.update(el, null);
 					}
 					disableAllSubElements(ti);
 				}
 			}
 		});
-
-		final Composite composite = new Composite(tabFolder, SWT.NONE);
 
 		final TabItem optionsTabItem = new TabItem(tabFolder, SWT.NONE);
 		optionsTabItem.setText("Options");
@@ -419,9 +473,10 @@ public class ApplicationDialog extends Dialog {
 		cleanButton = new Button(composite_2, SWT.CHECK);
 		cleanButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_CLEAN);
+				ConfigurationParameters param = ApplicationUtil
+						.getConfigurationParmeterByKey(KEY_CLEAN);
 				if (param != null) {
-					Button b = (Button)e.getSource();
+					Button b = (Button) e.getSource();
 					param.setValue(Boolean.toString(b.getSelection()));
 				}
 			}
@@ -438,9 +493,10 @@ public class ApplicationDialog extends Dialog {
 		verboseButton = new Button(composite_2, SWT.CHECK);
 		verboseButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_VERBOSE);
+				ConfigurationParameters param = ApplicationUtil
+						.getConfigurationParmeterByKey(KEY_VERBOSE);
 				if (param != null) {
-					Button b = (Button)e.getSource();
+					Button b = (Button) e.getSource();
 					param.setValue(Boolean.toString(b.getSelection()));
 				}
 			}
@@ -451,9 +507,10 @@ public class ApplicationDialog extends Dialog {
 		updateTargetButton = new Button(composite_2, SWT.CHECK);
 		updateTargetButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_UPDATE);
+				ConfigurationParameters param = ApplicationUtil
+						.getConfigurationParmeterByKey(KEY_UPDATE);
 				if (param != null) {
-					Button b = (Button)e.getSource();
+					Button b = (Button) e.getSource();
 					param.setValue(Boolean.toString(b.getSelection()));
 				}
 			}
@@ -482,7 +539,15 @@ public class ApplicationDialog extends Dialog {
 		generatorParameters.setLinesVisible(true);
 		generatorParameters.setHeaderVisible(true);
 		generatorParameters.setBounds(20, 202, 420, 218);
+		generatorParameters.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
+				GeneratorParameter param = (GeneratorParameter) ((StructuredSelection) generatorParametersViewer
+						.getSelection()).getFirstElement();
+				documentationText.setText(buildHelpDocumentationText(param
+						.getDocumentation()));
 
+			}
+		});
 		final TableColumn newColumnTableColumn = new TableColumn(
 				generatorParameters, SWT.RIGHT);
 		generatorParameters.setSortColumn(newColumnTableColumn);
@@ -494,19 +559,18 @@ public class ApplicationDialog extends Dialog {
 		newColumnTableColumn_1.setWidth(315);
 		newColumnTableColumn_1.setText(columnNames[1]);
 
-		createTableViewer();
-
 		logText = new Text(composite_2, SWT.BORDER);
 		logText.addFocusListener(new FocusAdapter() {
 			public void focusLost(final FocusEvent e) {
-				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_LOGPATH);
+				ConfigurationParameters param = ApplicationUtil
+						.getConfigurationParmeterByKey(KEY_LOGPATH);
 				if (param != null) {
-					Text t = (Text)e.getSource();
+					Text t = (Text) e.getSource();
 					param.setValue(t.getText());
 				}
 			}
 		});
-		
+
 		logText.setBounds(115, 110, 323, 22);
 
 		final Label logLabel = new Label(composite_2, SWT.NONE);
@@ -522,14 +586,19 @@ public class ApplicationDialog extends Dialog {
 		destinationText = new Text(composite_2, SWT.BORDER);
 		destinationText.addFocusListener(new FocusAdapter() {
 			public void focusLost(final FocusEvent e) {
-				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_LOGPATH);
+				ConfigurationParameters param = ApplicationUtil
+						.getConfigurationParmeterByKey(KEY_LOGPATH);
 				if (param != null) {
-					Text t = (Text)e.getSource();
+					Text t = (Text) e.getSource();
 					param.setValue(t.getText());
 				}
 			}
 		});
 		destinationText.setBounds(115, 144, 323, 22);
+
+		config_description = new Text(container, SWT.READ_ONLY | SWT.BORDER
+				| SWT.WRAP);
+		config_description.setBounds(493, 10, 297, 169);
 
 		configurationList = new Combo(container, SWT.READ_ONLY);
 		configurationList.setBounds(128, 10, 191, 23);
@@ -609,27 +678,32 @@ public class ApplicationDialog extends Dialog {
 			}
 
 			private void addStaticParameters(Configuration config) {
-				ConfigurationParameters verboseParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
+				ConfigurationParameters verboseParam = ApplicationFactory.eINSTANCE
+						.createConfigurationParameters();
 				verboseParam.setKey(KEY_VERBOSE);
 				verboseParam.setValue("false");
 				config.getParameters().add(verboseParam);
-				
-				ConfigurationParameters cleanParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
+
+				ConfigurationParameters cleanParam = ApplicationFactory.eINSTANCE
+						.createConfigurationParameters();
 				cleanParam.setKey(KEY_CLEAN);
 				cleanParam.setValue("false");
 				config.getParameters().add(cleanParam);
-				
-				ConfigurationParameters updateParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
+
+				ConfigurationParameters updateParam = ApplicationFactory.eINSTANCE
+						.createConfigurationParameters();
 				updateParam.setKey(KEY_UPDATE);
 				updateParam.setValue("false");
 				config.getParameters().add(updateParam);
-				
-				ConfigurationParameters logPathParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
+
+				ConfigurationParameters logPathParam = ApplicationFactory.eINSTANCE
+						.createConfigurationParameters();
 				logPathParam.setKey(KEY_LOGPATH);
 				logPathParam.setValue("");
 				config.getParameters().add(logPathParam);
-				
-				ConfigurationParameters generationPathParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
+
+				ConfigurationParameters generationPathParam = ApplicationFactory.eINSTANCE
+						.createConfigurationParameters();
 				generationPathParam.setKey(KEY_GENPATH);
 				generationPathParam.setValue("");
 				config.getParameters().add(generationPathParam);
@@ -677,7 +751,7 @@ public class ApplicationDialog extends Dialog {
 		generatorParametersViewer.setColumnProperties(columnNames);
 
 		// Create the cell editors
-		org.eclipse.jface.viewers.CellEditor[] editors = new CellEditor[2];
+		CellEditor[] editors = new CellEditor[2];
 
 		// Column 1 : Label (Text, readonly)
 		editors[0] = new TextCellEditor(generatorParameters);
@@ -700,31 +774,20 @@ public class ApplicationDialog extends Dialog {
 				.setCellModifier(new GeneratorParameterCellModifier(
 						dataStructure, columnNames, generatorParametersViewer));
 		generatorParametersViewer.setInput(dataStructure);
-		
-		initializeDynamicGeneratorParameters();
+		generatorParametersViewer.refresh();
+
 	}
 
-	private void initializeDynamicGeneratorParameters() {
-		// Scan For configurationParameter
-		HashMap<String, String> hm = new HashMap<String, String>();
-		IConfigurationElement[] contributions = Platform.getExtensionRegistry().getConfigurationElementsFor(
-				EXTENSIONPOINT_ID);
-		dataStructure = new GeneratorParameterDataStructure();
-		for (IConfigurationElement config : contributions) {
-			for (IConfigurationElement options : config.getChildren()) {
-				if (options.getName().equalsIgnoreCase(
-						"configurationParameter")) {
-					String key = options.getAttribute("key");
-					if (!hm.containsKey(key)) {
-						dataStructure.addGeneratorParameter(options);
-						hm.put(key, "");
-					}
-					
-				}
-			}
-		}
-		// Update
-		generatorParametersViewer.refresh();
+	/**
+	 * Build a html string for documentation on generator parameter
+	 * 
+	 * @return
+	 */
+	private String buildHelpDocumentationText(String documentation) {
+		String result = "<font face=\"Helvetica, Arial\" size=\"2\">";
+		result += documentation;
+		result += "</font>";
+		return result;
 	}
 
 	private String builDocumentationText() {
@@ -855,7 +918,6 @@ public class ApplicationDialog extends Dialog {
 			}
 		}
 
-
 		public void dispose() {
 		}
 
@@ -975,31 +1037,38 @@ public class ApplicationDialog extends Dialog {
 	}
 
 	protected void buttonPressed(int buttonId) {
+		if (buttonId == GEN_ID) {
+			
+			return;
+		}
 		if (buttonId == IDialogConstants.OK_ID) {
-			ResourceSet resourceSet = new ResourceSetImpl();
-			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
-					.put("application", new XMIResourceFactoryImpl());
-			resourceSet.getPackageRegistry().put(ApplicationPackage.eNS_URI,
-					ApplicationPackage.eINSTANCE);
-			org.eclipse.emf.ecore.resource.Resource resource = resourceSet
-					.createResource(URI.createURI(model.getRawLocation()
-							.toFile().getAbsolutePath()));
-			resource.getContents().add(application);
-
-			try {
-				BufferedOutputStream out = new BufferedOutputStream(
-						new FileOutputStream(model.getRawLocation().toFile()
-								.getAbsolutePath()));
-				Map<String, Object> saveOptions = new HashMap<String, Object>();
-				resource.save(out, saveOptions);
-				out.close();
-				model.refreshLocal(-1, null);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
+			saveData();
 		}
 		super.buttonPressed(buttonId);
+	}
+	
+	protected void saveData() {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+				.put("application", new XMIResourceFactoryImpl());
+		resourceSet.getPackageRegistry().put(ApplicationPackage.eNS_URI,
+				ApplicationPackage.eINSTANCE);
+		org.eclipse.emf.ecore.resource.Resource resource = resourceSet
+				.createResource(URI.createURI(model.getRawLocation()
+						.toFile().getAbsolutePath()));
+		resource.getContents().add(application);
+
+		try {
+			BufferedOutputStream out = new BufferedOutputStream(
+					new FileOutputStream(model.getRawLocation().toFile()
+							.getAbsolutePath()));
+			Map<String, Object> saveOptions = new HashMap<String, Object>();
+			resource.save(out, saveOptions);
+			out.close();
+			model.refreshLocal(-1, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	protected void configureShell(Shell newShell) {

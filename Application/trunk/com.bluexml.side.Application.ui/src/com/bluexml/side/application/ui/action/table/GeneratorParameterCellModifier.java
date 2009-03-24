@@ -60,7 +60,9 @@ public class GeneratorParameterCellModifier implements ICellModifier {
 			dataStructure.setLabel(item.getData(), (String) value);
 			break;
 		case 1:
-			dataStructure.setValue(item.getData(), (String) value);
+			if (value != null) {
+				dataStructure.setValue(item.getData(), (String) value);
+			}
 			break;
 		default:
 			break;

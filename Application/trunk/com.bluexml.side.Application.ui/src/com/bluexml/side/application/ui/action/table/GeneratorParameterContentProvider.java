@@ -13,7 +13,12 @@ public class GeneratorParameterContentProvider implements IStructuredContentProv
 	}
 
 	public Object[] getElements(Object inputElement) {
-		return dataStructure.getData().toArray();
+		if (dataStructure != null && dataStructure.getData() != null) {
+			return dataStructure.getData().toArray();
+		} else {
+			return null;
+		}
+			
 	}
 
 	public void dispose() {
