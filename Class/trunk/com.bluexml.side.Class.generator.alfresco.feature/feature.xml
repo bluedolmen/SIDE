@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.bluexml.side.Class.generator.alfresco.feature"
+      label="S-IDE Alfresco Class Generator"
+      version="1.0.0"
+      provider-name="BLUEXML">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="com.bluexml.side.Common"/>
+      <import plugin="com.bluexml.side.Util.ecore" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.MetaModel.validate" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ocl" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ocl.ecore" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="fr.obeo.acceleo.gen" version="2.5.1" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Class.modeler" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.resources" version="3.4.2" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.libs" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Application.generator.acceleo" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Application.generator" version="1.0.0" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="com.bluexml.side.Class"
+         download-size="0"
+         install-size="0"
+         version="1.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.bluexml.side.Class.generator.alfresco"
+         download-size="0"
+         install-size="0"
+         version="1.0.0"
+         unpack="false"/>
+
+</feature>
