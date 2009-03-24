@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            name="Sample Category"
+            id="com.bluexml.side.Class.generator.alfresco.commands.category">
+      </category>
+      <command
+            name="Sample Command"
+            categoryId="com.bluexml.side.Class.generator.alfresco.commands.category"
+            id="com.bluexml.side.Class.generator.alfresco.commands.sampleCommand">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="com.bluexml.side.Class.generator.alfresco.commands.sampleCommand"
+            class="com.bluexml.side.clazz.generator.alfresco.handlers.SampleHandler">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="com.bluexml.side.Class.generator.alfresco.commands.sampleCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+6"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               label="Sample Menu"
+               mnemonic="M"
+               id="com.bluexml.side.Class.generator.alfresco.menus.sampleMenu">
+            <command
+                  commandId="com.bluexml.side.Class.generator.alfresco.commands.sampleCommand"
+                  mnemonic="S"
+                  id="com.bluexml.side.Class.generator.alfresco.menus.sampleCommand">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="com.bluexml.side.Class.generator.alfresco.toolbars.sampleToolbar">
+            <command
+                  commandId="com.bluexml.side.Class.generator.alfresco.commands.sampleCommand"
+                  icon="icons/sample.gif"
+                  tooltip="Say hello world"
+                  id="com.bluexml.side.Class.generator.alfresco.toolbars.sampleCommand">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+   <extension
+         point="com.bluexml.side.Application.com_bluexml_application_configuration">
+      <metamodel
+            id="com.bluexml.side.Class"
+            name="Kerblue Class"
+            url="http://www.kerblue.org/class/1.0">
+      </metamodel>
+      <technology
+            id="com.alfresco"
+            idMetamodel="com.bluexml.side.Class"
+            name="Alfresco"
+            url="http://www.alfresco.com">
+      </technology>
+      <technologyVersion
+            id="com.alfresco.3.x"
+            idTechnology="com.alfresco"
+            version="Alfresco3.x">
+      </technologyVersion>
+      <generatorVersion
+            id="com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator"
+            idTechnologyVersion="com.alfresco.3.x"
+            version="S-IDE Alfresco Generator 1.0.0">
+         <configurationParameter
+               documentation="http://www.bluexml.com"
+               key="CATALINA_HOME"
+               label="Tomcat installation directory">
+         </configurationParameter>
+         <option
+               documentation="http://www.bluexml.com"
+               key="alfresco.dataModel"
+               label="Alfresco data model">
+         </option>
+         <option
+               documentation="http://www.bluexml.com"
+               key="alfresco.share.extention"
+               label="Alfreco Share Extension">
+         </option>
+      </generatorVersion>
+   </extension>
+
+</plugin>

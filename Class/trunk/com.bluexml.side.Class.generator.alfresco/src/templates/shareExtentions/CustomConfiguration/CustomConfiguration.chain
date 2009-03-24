@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<chain:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:chain="http://www.obeo.fr/acceleo/chain" documentation="CustomConfiguration">
+  <repository documentation="CustomConfiguration">
+    <files xsi:type="chain:Model" path="/com.bluexml.side.Class.generator.alfresco/test/DefaultName.clazz"/>
+    <files xsi:type="chain:Folder" path="/com.bluexml.side.Class.generator.alfresco/generated"/>
+    <files xsi:type="chain:Log" path="/com.bluexml.side.Class.generator.alfresco/log.txt"/>
+    <files xsi:type="chain:EmfMetamodel" path="/com.bluexml.side.Class/model/Class.ecore"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco/src/templates/shareExtentions/CustomConfiguration/web-framework-config-custom.mt"/>
+  </repository>
+  <actions documentation="CustomWebFrameworkConfig">
+    <actions xsi:type="chain:Generate" documentation="CustomWebFrameworkConfigGenerator" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>
+  </actions>
+</chain:Chain>
