@@ -25,7 +25,6 @@ import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
@@ -80,6 +79,7 @@ import com.bluexml.side.application.ui.action.tree.Technology;
 import com.bluexml.side.application.ui.action.tree.TechnologyVersion;
 import com.bluexml.side.application.ui.action.tree.TreeElement;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
+import com.bluexml.side.application.ui.action.utils.Generate;
 
 public class ApplicationDialog extends Dialog {
 
@@ -108,6 +108,7 @@ public class ApplicationDialog extends Dialog {
 	private Button cleanButton;
 	private Text destinationText;
 	private Text logText;
+	private List<String> staticFieldsName;
 
 	private static String KEY_VERBOSE = "genConf.verbose";
 	private static String KEY_CLEAN = "genConf.clean";
@@ -880,6 +881,14 @@ public class ApplicationDialog extends Dialog {
 			IConfigurationElement[] contributions = Platform
 					.getExtensionRegistry().getConfigurationElementsFor(
 							EXTENSIONPOINT_ID);
+			// Add the static option field to a List
+			staticFieldsName = new ArrayList<String>();
+			staticFieldsName.add(KEY_VERBOSE);
+			staticFieldsName.add(KEY_CLEAN);
+			staticFieldsName.add(KEY_UPDATE);
+			staticFieldsName.add(KEY_GENPATH);
+			staticFieldsName.add(KEY_LOGPATH);
+			
 			// Scan for metamodels
 			for (IConfigurationElement config : contributions) {
 				if (config.getName().equalsIgnoreCase("metamodel")) {
@@ -1037,8 +1046,20 @@ public class ApplicationDialog extends Dialog {
 	}
 
 	protected void buttonPressed(int buttonId) {
+		//TODO : gérer les erreurs!
 		if (buttonId == GEN_ID) {
-			
+			try {
+				Generate.launch(getCurrentConfiguration(),staticFieldsName);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return;
 		}
 		if (buttonId == IDialogConstants.OK_ID) {
