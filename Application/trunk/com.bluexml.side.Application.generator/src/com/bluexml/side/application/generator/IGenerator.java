@@ -18,8 +18,8 @@ public interface IGenerator {
 	 * @param configurationParamers
 	 *            the list of technical parameters.
 	 */
-	public void initialize(String[] generationParameters,
-			String[] generatorOptions,
+	public void initialize(Map<String, String> generationParameters,
+			Map<String, Boolean> generatorOptions,
 			Map<String, String> configurationParameters);
 
 	/**
