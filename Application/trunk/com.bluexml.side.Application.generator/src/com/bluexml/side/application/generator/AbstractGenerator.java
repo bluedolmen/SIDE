@@ -6,12 +6,12 @@ import com.bluexml.side.application.StaticConfigurationParameters;
 
 public abstract class AbstractGenerator implements IGenerator {
 
-	protected String[] generationParameters;
-	protected String[] generatorOptions;
+	protected Map<String, String> generationParameters;
+	protected Map<String, Boolean> generatorOptions;
 	protected Map<String,String> configurationParameters;
 	
-	public void initialize(String[] generationParameters,
-			String[] generatorOptions,
+	public void initialize(Map<String, String> generationParameters,
+			Map<String, Boolean> generatorOptions,
 			Map<String, String> configurationParameters) {
 		this.generationParameters = generationParameters;
 		this.generatorOptions = generatorOptions;
