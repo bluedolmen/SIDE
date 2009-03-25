@@ -1,5 +1,6 @@
 package com.bluexml.side.application.ui.action.utils;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -104,20 +105,36 @@ public class Generate {
 			try {
 				modelResource = EResourceUtils.createResource(model.getFile());
 				ResourceSet rs = modelResource.getResourceSet();
+				
+				String fullPath = ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString();
+				if (fullPath.charAt(fullPath.length()-1) != File.separatorChar) {
+					if (model.getFile().charAt(model.getFile().length()-1) != File.separatorChar) {
+						fullPath += File.separatorChar;
+					}
+				} else {
+					if (model.getFile().charAt(model.getFile().length()-1) != File.separatorChar){
+						model.setFile(model.getFile().substring(1));
+					}
+				}
+				fullPath += model.getFile();
+				
 				Resource loadedModel = EResourceUtils.openModel(
-						model.getFile(), null, rs);
+						fullPath, null, rs);
 
 				EPackage metaModel = getMetaModelEpackage(loadedModel);
 
 				if (metaModel != null) {
 					if (!result.containsKey(metaModel.getNsURI())) {
-						result
-								.put(metaModel.getNsURI(),
-										new ArrayList<IFile>());
+						result.put(metaModel.getNsURI(), new ArrayList<IFile>());
 					}
-					IFile file = ResourcesPlugin.getWorkspace().getRoot()
-							.getFile(new Path(model.getFile()));
-					result.get(metaModel.getNsURI()).add(file);
+					
+					IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(model.getFile()));
+					if (file.exists()) {
+						result.get(metaModel.getNsURI()).add(file);
+					} else {
+						//TODO 
+						throw new IOException("No model found at " + file.getFullPath());
+					}
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
