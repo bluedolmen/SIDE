@@ -61,13 +61,13 @@
    <extension
          point="com.bluexml.side.Application.com_bluexml_application_configuration">
       <metamodel
-            id="KSR500"
+            id="http://www.kerblue.org/class/1.0"
             name="KSR500 Class"
             url="http://www.kerblue.org/class/1.0">
       </metamodel>
       <technology
             id="alfresco"
-            idMetamodel="KSR500"
+            idMetamodel="http://www.kerblue.org/class/1.0"
             name="Alfresco"
             url="http://www.alfresco.com">
       </technology>

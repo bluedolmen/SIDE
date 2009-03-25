@@ -3,6 +3,7 @@ package com.bluexml.side.application.ui.action;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -64,6 +65,7 @@ import com.bluexml.side.application.ApplicationPackage;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ConfigurationElement;
 import com.bluexml.side.application.ConfigurationParameters;
+import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.Option;
 import com.bluexml.side.application.ui.SWTResourceManager;
@@ -110,11 +112,11 @@ public class ApplicationDialog extends Dialog {
 	private Text logText;
 	private List<String> staticFieldsName;
 
-	private static String KEY_VERBOSE = "genConf.verbose";
-	private static String KEY_CLEAN = "genConf.clean";
-	private static String KEY_UPDATE = "genConf.update";
-	private static String KEY_LOGPATH = "genConf.logPath";
-	private static String KEY_GENPATH = "genConf.genPath";
+	private static String KEY_VERBOSE = "generation.options.verbose";
+	private static String KEY_CLEAN = "generation.options.clean";
+	private static String KEY_UPDATE = "generation.options.updateTgt";
+	private static String KEY_LOGPATH = "generation.options.logPath";
+	private static String KEY_GENPATH = "generation.options.destinationPath";
 
 	private static String EXTENSIONPOINT_ID = "com.bluexml.side.Application.com_bluexml_application_configuration";
 
@@ -588,7 +590,7 @@ public class ApplicationDialog extends Dialog {
 		destinationText.addFocusListener(new FocusAdapter() {
 			public void focusLost(final FocusEvent e) {
 				ConfigurationParameters param = ApplicationUtil
-						.getConfigurationParmeterByKey(KEY_LOGPATH);
+						.getConfigurationParmeterByKey(KEY_GENPATH);
 				if (param != null) {
 					Text t = (Text) e.getSource();
 					param.setValue(t.getText());
@@ -1049,7 +1051,7 @@ public class ApplicationDialog extends Dialog {
 		//TODO : gérer les erreurs!
 		if (buttonId == GEN_ID) {
 			try {
-				Generate.launch(getCurrentConfiguration(),staticFieldsName);
+				Generate.launch(getCurrentConfiguration(),staticFieldsName,getModels());
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -1057,6 +1059,9 @@ public class ApplicationDialog extends Dialog {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -1068,6 +1073,16 @@ public class ApplicationDialog extends Dialog {
 		super.buttonPressed(buttonId);
 	}
 	
+	private List<Model> getModels() {
+		List<Model> result = new ArrayList<Model>();
+		for (ModelElement elem : application.getElements()) {
+			if (elem instanceof Model) {
+				result.add((Model)elem);
+			}
+		}
+		return result;
+	}
+
 	protected void saveData() {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
