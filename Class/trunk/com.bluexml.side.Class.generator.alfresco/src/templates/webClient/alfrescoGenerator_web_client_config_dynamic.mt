@@ -68,7 +68,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 		</property-sheet>
 		
 
-			<%if (attributes.nSize()>0 || isSourceOfAssociation() || getAllInheritedAttributes().nSize()>0){%>
+			<%if (attributes.nSize()>0 || isSourceOfAssociation() || getAllAttributes().nSize()>0){%>
 			
 				<%for (getAllAttributes()){%>
 					<property name="<%getFolder()%>:<%getQualifiedName()%>" />

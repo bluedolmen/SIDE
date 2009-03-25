@@ -38,10 +38,11 @@ public class ClassAlfrescoGenerator extends AbstractAcceleoGenerator {
 
 	public ClassAlfrescoGenerator() {
 		List<String> result = new ArrayList<String>();
-		result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoGenerator_model");
-		result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoGenerator_web_client_properties");
-		result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoGenerator_model_properties");
-		result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoGenerator_web_client_config");
+		result.add("/com.bluexml.side.Class.generator.alfresco/templates/Model/alfrescoGenerator_model.mt");		
+		result.add("/com.bluexml.side.Class.generator.alfresco/templates/Model/alfrescoGenerator_model_properties.mt");
+		
+		result.add("/com.bluexml.side.Class.generator.alfresco/templates/webClient/alfrescoGenerator_web_client_config.mt");
+		result.add("/com.bluexml.side.Class.generator.alfresco/templates/webClient/alfrescoGenerator_web_client_properties.mt");
 		
 		// only to extends alfresco share Forms
 		result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/CustomConfiguration/web-framework-config-custom.mt");

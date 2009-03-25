@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="ASCII"?>
 <chain:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:chain="http://www.obeo.fr/acceleo/chain">
   <repository>
-    <files xsi:type="chain:Model" path="/com.bluexml.side.Class.tests/src/com/bluexml/side/clazz/tests/models/DefaultName.clazz"/>
-    <files xsi:type="chain:Folder" path="/com.bluexml.side.Class.tests/generated"/>
-    <files xsi:type="chain:Log" path="/com.bluexml.side.Class.generator.alfresco/src/acceleoTemplates/webClient/default.log.txt"/>
+    <files xsi:type="chain:Model" path="/com.bluexml.side.Class.generator.alfresco/modelTest/modelTest.clazz"/>
+    <files xsi:type="chain:Folder" path="/com.bluexml.side.Class.generator.alfresco/generated"/>
+    <files xsi:type="chain:Log" path="/com.bluexml.side.Class.generator.alfresco/default.log.txt"/>
     <files xsi:type="chain:EmfMetamodel" path="/com.bluexml.side.Class/model/Class.ecore"/>
-    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco/src/acceleoTemplates/webClient/alfrescoGenerator_web_client_config.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco/src/templates/webClient/alfrescoGenerator_web_client_config.mt"/>
     <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco/src/templates/webClient/alfrescoGenerator_web_client_properties.mt"/>
   </repository>
   <actions>
