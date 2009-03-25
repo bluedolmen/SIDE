@@ -105,8 +105,8 @@ public class Generate {
 			try {
 				modelResource = EResourceUtils.createResource(model.getFile());
 				ResourceSet rs = modelResource.getResourceSet();
-				
-				String fullPath = ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString();
+				IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(model.getFile()));
+				String fullPath = file.getFullPath().toOSString();
 				if (fullPath.charAt(fullPath.length()-1) != File.separatorChar) {
 					if (model.getFile().charAt(model.getFile().length()-1) != File.separatorChar) {
 						fullPath += File.separatorChar;
@@ -128,7 +128,7 @@ public class Generate {
 						result.put(metaModel.getNsURI(), new ArrayList<IFile>());
 					}
 					
-					IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(model.getFile()));
+					
 					if (file.exists()) {
 						result.get(metaModel.getNsURI()).add(file);
 					} else {
