@@ -92,7 +92,7 @@
          </option>
          <option
                documentation="http://www.bluexml.com"
-               key="alfresco.share.extention"
+               key="alfresco.share.extension"
                label="Alfreco Share Extension">
          </option>
       </generatorVersion>
