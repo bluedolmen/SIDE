@@ -72,10 +72,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="Clazz" eSuperTypes="#//AbstractClass">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="TwoModelElementWithSameName" value="Classe.allInstances()->select(a | a.name = self.name and a &lt;> self)->size() = 0"/>
-      <details key="NoInheritanceCycle" value="not self.generalizations.generalizations -> includes(self)"/>
+      <details key="InheritanceCycle" value="not self.generalizations.generalizations -> includes(self)"/>
+      <details key="ClassWithTwoAttributesSameName" value="self.attributes -> forAll( a1, a2 | a1 &lt;> a2 implies a1.name &lt;>a2.name)"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="TwoModelElementWithSameName NoInheritanceCycle"/>
+      <details key="constraints" value="TwoModelElementWithSameName InheritanceCycle ClassWithTwoAttributesSameName"/>
     </eAnnotations>
     <eOperations name="getAllAttributes" upperBound="-1" eType="#//Attribute">
       <eAnnotations source="http://www.bluexml.com/OCL">
@@ -287,6 +288,12 @@
     <eLiterals name="Protected" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Aspect" eSuperTypes="#//AbstractClass">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="AspectWithTwoAttributesSameName" value="self.attributes -> forAll( a1, a2 | a1 &lt;> a2 implies a1.name &lt;>a2.name)"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="AspectWithTwoAttributesSameName"/>
+    </eAnnotations>
     <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="self.name = other.name and self.title = other.title"/>
@@ -325,9 +332,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="View" eSuperTypes="#//NamedClassModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="AtLeastOneAttribute" value="self.attributes -> notEmpty()"/>
+      <details key="ViewWithTwoAttributesSameName" value="self.attributes -> forAll( a1, a2 | a1 &lt;> a2 implies a1.name &lt;>a2.name)"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="AtLeastOneAttribute"/>
+      <details key="constraints" value="AtLeastOneAttribute ViewWithTwoAttributesSameName"/>
     </eAnnotations>
     <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
