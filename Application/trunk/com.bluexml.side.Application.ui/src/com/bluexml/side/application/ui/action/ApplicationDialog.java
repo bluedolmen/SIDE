@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
@@ -47,7 +49,9 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
@@ -58,6 +62,9 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
+import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
+import org.eclipse.ui.model.BaseWorkbenchContentProvider;
+import org.eclipse.ui.model.WorkbenchLabelProvider;
 
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationFactory;
@@ -111,6 +118,7 @@ public class ApplicationDialog extends Dialog {
 	private Text destinationText;
 	private Text logText;
 	private List<String> staticFieldsName;
+	private org.eclipse.swt.widgets.List list;
 
 	private static String KEY_VERBOSE = "generation.options.verbose";
 	private static String KEY_CLEAN = "generation.options.clean";
@@ -361,6 +369,41 @@ public class ApplicationDialog extends Dialog {
 	}
 
 	/**
+	 * Open file dialog box to select files (here a model)
+	 */
+	protected void SelectModelFileDialog() {
+		String filePath = null;
+		String fileName = null;
+		ElementTreeSelectionDialog ets = new ElementTreeSelectionDialog(Display
+				.getDefault().getActiveShell(), new WorkbenchLabelProvider(),
+				new BaseWorkbenchContentProvider());
+		ets.setBlockOnOpen(true);
+		ets.setAllowMultiple(true);
+		ets.setTitle("Select model file");
+		ets.setMessage("Select model file (no diagram file)");
+		ets.setInput(ResourcesPlugin.getWorkspace().getRoot());
+
+		if (ElementTreeSelectionDialog.OK == ets.open()) {
+			Object[] result = ets.getResult();
+			for (Object o : result) {
+				IFile file = (IFile) o;
+				filePath = file.getFullPath().toPortableString();
+				fileName = file.getName();
+				if (filePath != null) {
+					// Add to list
+					list.add(filePath);
+					// Register it
+					Model model = ApplicationFactory.eINSTANCE.createModel();
+					model.setFile(filePath);
+					model.setName(fileName);
+					application.getElements().add(model);
+				}
+			}
+		}
+		
+	}
+
+	/**
 	 * Create contents of the dialog
 	 * 
 	 * @param parent
@@ -599,6 +642,51 @@ public class ApplicationDialog extends Dialog {
 		});
 		destinationText.setBounds(115, 144, 323, 22);
 
+		final TabItem modelsTabItem = new TabItem(tabFolder, SWT.NONE);
+		modelsTabItem.setText("Models");
+
+		final Composite composite = new Composite(tabFolder, SWT.NONE);
+		modelsTabItem.setControl(composite);
+
+		final Button addModelButton = new Button(composite, SWT.NONE);
+		addModelButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(final SelectionEvent e) {
+				SelectModelFileDialog();
+			}
+		});
+		addModelButton.setText("Add Model");
+		addModelButton.setBounds(10, 175, 88, 25);
+
+		list = new org.eclipse.swt.widgets.List(composite, SWT.BORDER);
+		list.setBounds(10, 38, 444, 115);
+
+		for (ModelElement elem : application.getElements()) {
+			if (elem instanceof Model) {
+				Model model = (Model) elem;
+				list.add(model.getFile());
+			}
+		}
+
+		final Button removeModelButton = new Button(composite, SWT.NONE);
+		removeModelButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(final SelectionEvent e) {
+				int select = list.getSelectionIndex();
+				if (select != -1) {
+					removeModel(list.getSelection());
+					list.remove(select);
+				}
+			}
+
+		});
+		removeModelButton.setText("Remove Model");
+		removeModelButton.setBounds(104, 175, 88, 25);
+
+		final Label generationsOptionsLabel_2 = new Label(composite, SWT.NONE);
+		generationsOptionsLabel_2.setBounds(10, 8, 240, 24);
+		generationsOptionsLabel_2.setFont(SWTResourceManager.getFont("", 12,
+				SWT.BOLD));
+		generationsOptionsLabel_2.setText("Model Lists");
+
 		config_description = new Text(container, SWT.READ_ONLY | SWT.BORDER
 				| SWT.WRAP);
 		config_description.setBounds(493, 10, 297, 169);
@@ -743,6 +831,20 @@ public class ApplicationDialog extends Dialog {
 		refreshConfiguration();
 
 		return container;
+	}
+
+	private void removeModel(String[] selection) {
+		List<String> list = Arrays.asList(selection);
+		List<Model> toRemove = new ArrayList<Model>();
+		for (ModelElement elem : application.getElements()) {
+			if (elem instanceof Model) {
+				Model model = (Model) elem;
+				if (list.contains(model.getFile())) {
+					toRemove.add(model);
+				}
+			}
+		}
+		application.getElements().removeAll(toRemove);
 	}
 
 	/**
@@ -890,7 +992,7 @@ public class ApplicationDialog extends Dialog {
 			staticFieldsName.add(KEY_UPDATE);
 			staticFieldsName.add(KEY_GENPATH);
 			staticFieldsName.add(KEY_LOGPATH);
-			
+
 			// Scan for metamodels
 			for (IConfigurationElement config : contributions) {
 				if (config.getName().equalsIgnoreCase("metamodel")) {
@@ -927,6 +1029,7 @@ public class ApplicationDialog extends Dialog {
 					}
 				}
 			}
+
 		}
 
 		public void dispose() {
@@ -1048,10 +1151,11 @@ public class ApplicationDialog extends Dialog {
 	}
 
 	protected void buttonPressed(int buttonId) {
-		//TODO : gérer les erreurs!
+		// TODO : gérer les erreurs!
 		if (buttonId == GEN_ID) {
 			try {
-				Generate.launch(getCurrentConfiguration(),staticFieldsName,getModels());
+				Generate.launch(getCurrentConfiguration(), staticFieldsName,
+						getModels());
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -1072,12 +1176,12 @@ public class ApplicationDialog extends Dialog {
 		}
 		super.buttonPressed(buttonId);
 	}
-	
+
 	private List<Model> getModels() {
 		List<Model> result = new ArrayList<Model>();
 		for (ModelElement elem : application.getElements()) {
 			if (elem instanceof Model) {
-				result.add((Model)elem);
+				result.add((Model) elem);
 			}
 		}
 		return result;
@@ -1090,8 +1194,8 @@ public class ApplicationDialog extends Dialog {
 		resourceSet.getPackageRegistry().put(ApplicationPackage.eNS_URI,
 				ApplicationPackage.eINSTANCE);
 		org.eclipse.emf.ecore.resource.Resource resource = resourceSet
-				.createResource(URI.createURI(model.getRawLocation()
-						.toFile().getAbsolutePath()));
+				.createResource(URI.createURI(model.getRawLocation().toFile()
+						.getAbsolutePath()));
 		resource.getContents().add(application);
 
 		try {
