@@ -13,6 +13,6 @@ Export-Package: com.bluexml.side.common,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  com.bluexml.side.Util.MetaModel.validate;bundle-version="1.0.0",
- org.eclipse.ocl;bundle-version="1.2.2",
- org.eclipse.ocl.ecore;bundle-version="1.2.1"
+ org.eclipse.ocl,
+ org.eclipse.ocl.ecore
 Eclipse-LazyStart: true
