@@ -50,8 +50,10 @@ public class AttributeServices {
 				return "d:text";
 			} else if (object.getTyp() == AttributeType.VOID) {
 				return "d:any";
+			} else if (object.getTyp() == AttributeType.TIME) {
+				return "d:datetime";
 			}
 		}
-		return "";
+		return "d:any";
 	}
 }
