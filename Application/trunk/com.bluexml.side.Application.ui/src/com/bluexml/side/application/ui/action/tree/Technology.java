@@ -15,8 +15,8 @@ public class Technology extends TreeElement {
 	private Metamodel parent;
 	private Set<TechnologyVersion> versions;
 
-	public Technology(IConfigurationElement elt, Collection<Metamodel> metamodelSet) {
-		parent = searchMetamodel(elt.getAttribute("idMetamodel"),metamodelSet);
+	public Technology(IConfigurationElement elt, Metamodel m) {
+		parent = m;
 		parent.addTechnology(this);
 		id = elt.getAttribute("id");
 		label = elt.getAttribute("name");
@@ -43,13 +43,6 @@ public class Technology extends TreeElement {
 	
 	public Metamodel getMetamodel() {
 		return parent;
-	}
-
-	private Metamodel searchMetamodel(String idMetamodel, Collection<Metamodel> metamodelSet) {
-		for (Metamodel m : metamodelSet)
-			if (m.getId().equalsIgnoreCase(idMetamodel))
-				return m;
-		return null;
 	}
 
 	public String getId() {

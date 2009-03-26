@@ -13,6 +13,7 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.Application.generator;bundle-version="1.0.0",
  com.bluexml.side.Application.generator.acceleo;bundle-version="1.0.0",
  com.bluexml.side.Class.generator.alfresco,
- com.bluexml.side.Util.ecore;bundle-version="1.0.1"
+ com.bluexml.side.Util.ecore;bundle-version="1.0.1",
+ com.bluexml.side.Workflow.generator.Alfresco;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

@@ -1,5 +1,9 @@
 package com.bluexml.side.application.ui.action.table;
 
+import org.eclipse.core.runtime.IConfigurationElement;
+
+import com.bluexml.side.application.ui.action.tree.Generator;
+
 public class GeneratorParameter {
 	private String key;
 	private String value;
@@ -7,11 +11,17 @@ public class GeneratorParameter {
 	private String documentation;
 
 	public GeneratorParameter(String key, String label, String value, String documentation) {
-		super();
 		this.key = key;
 		this.label = label;
 		this.value = value;
 		this.documentation = documentation;
+	}
+
+	public GeneratorParameter(IConfigurationElement confParam, Generator g) {
+		this.key = confParam.getAttribute("key");
+		this.label = confParam.getAttribute("label");
+		this.value = null;
+		this.documentation = confParam.getAttribute("documentation");
 	}
 
 	public String getDocumentation() {

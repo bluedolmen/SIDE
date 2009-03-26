@@ -51,7 +51,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
@@ -99,10 +98,12 @@ public class ApplicationDialog extends Dialog {
 	private static Combo configurationList;
 	public static boolean loadingTree = false;
 
-	private Set<Metamodel> metamodelSet;
-	private Set<Technology> technologySet;
-	private Set<TechnologyVersion> technologyVersionSet;
-	private Set<Generator> generatorSet;
+	private Map<String, Metamodel> metamodelSet;
+	private Map<String, Technology> technologySet;
+	private Map<String, TechnologyVersion> technologyVersionSet;
+	private Map<String, Generator> generatorSet;
+	private Map<String, GeneratorParameter> configurationParameters;
+	private Map<String, List<String>> paramConfByGenerator;
 	private Browser documentationText;
 	private static Application application;
 	private IFile model;
@@ -157,10 +158,12 @@ public class ApplicationDialog extends Dialog {
 			e.printStackTrace();
 		}
 
-		metamodelSet = new HashSet<Metamodel>();
-		technologySet = new HashSet<Technology>();
-		technologyVersionSet = new HashSet<TechnologyVersion>();
-		generatorSet = new HashSet<Generator>();
+		metamodelSet = new HashMap<String, Metamodel>();
+		technologySet = new HashMap<String, Technology>();
+		technologyVersionSet = new HashMap<String, TechnologyVersion>();
+		generatorSet = new HashMap<String, Generator>();
+		configurationParameters = new HashMap<String, GeneratorParameter>();
+		paramConfByGenerator = new HashMap<String, List<String>>();
 	}
 
 	public void refreshConfiguration() {
@@ -246,25 +249,20 @@ public class ApplicationDialog extends Dialog {
 		if (dataStructure != null) {
 			dataStructure.getData().clear();
 		}
-
-		// Scan For configurationParameter
-		List<String> genOptions = new ArrayList<String>();
-		IConfigurationElement[] contributions = Platform.getExtensionRegistry()
-				.getConfigurationElementsFor(EXTENSIONPOINT_ID);
+		HashMap<String, GeneratorParameter> neededParam = new HashMap<String,GeneratorParameter>();
 		dataStructure = new GeneratorParameterDataStructure();
-		for (IConfigurationElement config : contributions) {
-			if (confIds.contains(config.getAttribute("id"))) {
-				for (IConfigurationElement options : config.getChildren()) {
-					if (options.getName().equalsIgnoreCase(
-							"configurationParameter")) {
-						String key = options.getAttribute("key");
-						if (!genOptions.contains(key)) {
-							dataStructure.addGeneratorParameter(options);
-							genOptions.add(key);
-						}
-					}
+		// We get all param key needed by Generator
+		for (String genId : confIds ){
+			List<String> paramList = paramConfByGenerator.get(genId);
+			// We construct one list without twice the same id
+			for (String paramId : paramList) {
+				if (!neededParam.containsKey(paramId)) {
+					neededParam.put(paramId,configurationParameters.get(paramId));
 				}
 			}
+		}
+		for (GeneratorParameter genParam : neededParam.values()) {
+			dataStructure.addGeneratorParameter(genParam);
 		}
 	}
 
@@ -291,8 +289,7 @@ public class ApplicationDialog extends Dialog {
 	private void configureGeneratorOptions(Configuration configuration) {
 		Configuration conf = getCurrentConfiguration();
 		for (ConfigurationParameters confParam : conf.getParameters()) {
-			GeneratorParameter genParam = dataStructure
-					.getParamMatching(confParam.getKey());
+			GeneratorParameter genParam = dataStructure.getParamMatching(confParam.getKey());
 			if (genParam != null) {
 				genParam.setValue(confParam.getValue());
 			}
@@ -400,7 +397,7 @@ public class ApplicationDialog extends Dialog {
 				}
 			}
 		}
-		
+
 	}
 
 	/**
@@ -655,7 +652,7 @@ public class ApplicationDialog extends Dialog {
 			}
 		});
 		addModelButton.setText("Add Model");
-		addModelButton.setBounds(10, 175, 88, 25);
+		addModelButton.setBounds(10, 175, 130, 25);
 
 		list = new org.eclipse.swt.widgets.List(composite, SWT.BORDER);
 		list.setBounds(10, 38, 444, 115);
@@ -679,7 +676,7 @@ public class ApplicationDialog extends Dialog {
 
 		});
 		removeModelButton.setText("Remove Model");
-		removeModelButton.setBounds(104, 175, 88, 25);
+		removeModelButton.setBounds(146, 175, 130, 25);
 
 		final Label generationsOptionsLabel_2 = new Label(composite, SWT.NONE);
 		generationsOptionsLabel_2.setBounds(10, 8, 240, 24);
@@ -976,7 +973,7 @@ public class ApplicationDialog extends Dialog {
 		public Object[] getElements(Object object) {
 			if (object instanceof ApplicationDialog) {
 				initialize();
-				return metamodelSet.toArray();
+				return metamodelSet.values().toArray();
 			} else
 				return getChildren(object);
 		}
@@ -997,39 +994,77 @@ public class ApplicationDialog extends Dialog {
 			for (IConfigurationElement config : contributions) {
 				if (config.getName().equalsIgnoreCase("metamodel")) {
 					Metamodel m = new Metamodel(config);
-					metamodelSet.add(m);
-				}
-			}
-			// Scan for technology
-			for (IConfigurationElement config : contributions) {
-				if (config.getName().equalsIgnoreCase("technology")) {
-					Technology t = new Technology(config, metamodelSet);
-					technologySet.add(t);
-				}
-			}
-			// Scan for technology version
-			for (IConfigurationElement config : contributions) {
-				if (config.getName().equalsIgnoreCase("technologyVersion")) {
-					TechnologyVersion tv = new TechnologyVersion(config,
-							technologySet);
-					technologyVersionSet.add(tv);
-				}
-			}
-			// Scan for generator
-			for (IConfigurationElement config : contributions) {
-				if (config.getName().equalsIgnoreCase("generatorVersion")) {
-					Generator g = new Generator(config, technologyVersionSet);
-					generatorSet.add(g);
 
-					// Scan for generator options
-					for (IConfigurationElement options : config.getChildren()) {
-						if (options.getName().equalsIgnoreCase("option")) {
-							new OptionGenerator(options, g);
+					if (!metamodelSet.containsKey(m.getId())) {
+						metamodelSet.put(m.getId(), m);
+					} else {
+						m = metamodelSet.get(m.getId());
+					}
+					technologySet.clear();
+
+					// Scan for technology
+					for (IConfigurationElement techno : config
+							.getChildren("technology")) {
+						Technology t = new Technology(techno, m);
+
+						if (!technologySet.containsKey(t.getId())) {
+							technologySet.put(t.getId(), t);
+						} else {
+							t = technologySet.get(t.getId());
+						}
+						technologyVersionSet.clear();
+
+						// Scan for technology version
+						for (IConfigurationElement technoV : techno
+								.getChildren("technologyVersion")) {
+							TechnologyVersion tv = new TechnologyVersion(
+									technoV, t);
+
+							if (!technologyVersionSet.containsKey(tv.getId())) {
+								technologyVersionSet.put(tv.getId(), tv);
+							} else {
+								tv = technologyVersionSet.get(tv.getId());
+							}
+
+							generatorSet.clear();
+							// Scan for Generator Version
+							for (IConfigurationElement gen : technoV
+									.getChildren("generatorVersion")) {
+								Generator g = new Generator(gen, tv);
+
+								if (!generatorSet.containsKey(g.getId())) {
+									generatorSet.put(g.getId(), g);
+								} else {
+									g = generatorSet.get(g.getId());
+								}
+
+								// Scan for option
+								for (IConfigurationElement option : gen
+										.getChildren("option")) {
+									new OptionGenerator(option, g);
+								}
+
+								// Scan for configuration parameter
+								for (IConfigurationElement confParam : gen
+										.getChildren("configurationParameter")) {
+									GeneratorParameter param = new GeneratorParameter(
+											confParam, g);
+
+									if (!paramConfByGenerator.containsKey(g
+											.getId())) {
+										paramConfByGenerator.put(g.getId(),
+												new ArrayList<String>());
+									}
+									paramConfByGenerator.get(g.getId()).add(
+											param.getKey());
+									configurationParameters.put(param.getKey(),
+											param);
+								}
+							}
 						}
 					}
 				}
 			}
-
 		}
 
 		public void dispose() {

@@ -11,7 +11,8 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.Application.generator.acceleo,
  com.bluexml.side.Application.generator,
  javax.xml,
- org.eclipse.emf.ecore.xmi
+ org.eclipse.emf.ecore.xmi,
+ com.bluexml.side.Application;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.workflow.generator.alfresco

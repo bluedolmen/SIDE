@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension
+         point="com.bluexml.side.Application.com_bluexml_application_configuration">
+      <metamodel
+            id="http://www.kerblue.org/workflow/1.0"
+            name="KSR600 Workflow"
+            url="http://www.kerblue.org/v2/ksr600-workflow/">
+         <technology
+               id="alfresco"
+               idMetamodel="http://www.kerblue.org/workflow/1.0"
+               name="Alfresco"
+               url="http://www.alfresco.com">
+            <technologyVersion
+                  id="alfresco_3.0_labs"
+                  idTechnology="alfresco"
+                  version="Alfresco3.0 Labs">
+               <generatorVersion
+                     id="com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator"
+                     idTechnologyVersion="alfresco_3.0_labs"
+                     version="S-IDE Alfresco Generator 1.0.0">
+                  <configurationParameter
+                        key="CATALINA_HOME"
+                        label="Tomcat installation directory">
+                  </configurationParameter>
+               </generatorVersion>
+            </technologyVersion>
+         </technology>
+      </metamodel>
+   </extension>
 
 </plugin>

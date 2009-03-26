@@ -18,9 +18,8 @@ public class Generator extends TreeElement {
 	private TechnologyVersion technologyVersion;
 	private Set<OptionGenerator> options;
 
-	public Generator(IConfigurationElement elt, Collection<TechnologyVersion> technologyVersionSet) {
-		technologyVersion = searchTechnologyVersion(elt
-				.getAttribute("idTechnologyVersion"), technologyVersionSet);
+	public Generator(IConfigurationElement elt, TechnologyVersion tv) {
+		technologyVersion = tv;
 		technologyVersion.addGenerator(this);
 		id = elt.getAttribute("id");
 		version = elt.getAttribute("version");

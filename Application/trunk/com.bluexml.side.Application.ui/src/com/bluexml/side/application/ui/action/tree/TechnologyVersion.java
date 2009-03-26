@@ -12,8 +12,8 @@ public class TechnologyVersion extends TreeElement {
 	private Technology technology;
 	private Set<Generator> generator;
 
-	public TechnologyVersion(IConfigurationElement elt, Collection<Technology> technologySet) {
-		technology = searchTechnology(elt.getAttribute("idTechnology"), technologySet);
+	public TechnologyVersion(IConfigurationElement elt, Technology t) {
+		technology = t;
 		technology.addTechnologyVersion(this);
 		id = elt.getAttribute("id");
 		version = elt.getAttribute("version");
@@ -26,13 +26,6 @@ public class TechnologyVersion extends TreeElement {
 
 	public Set<Generator> getGenerator() {
 		return generator;
-	}
-
-	private Technology searchTechnology(String idTechnology, Collection<Technology> technologySet) {
-		for (Technology t : technologySet)
-			if (t.getId().equalsIgnoreCase(idTechnology))
-				return t;
-		return null;
 	}
 
 	public void addGenerator(Generator g) {
