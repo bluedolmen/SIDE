@@ -47,7 +47,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
             <action idref="edit_doc_cifs"  hide="true"/>
             <action idref="checkout_doc" hide="true" />
             <action idref="checkin_doc"  hide="true"/>
-            <action idref="edit_doc_details"/>
+            <!--<action idref="edit_doc_details"/>-->
             <action idref="details_doc" />
             <action idref="delete_doc" />
          </action-group>

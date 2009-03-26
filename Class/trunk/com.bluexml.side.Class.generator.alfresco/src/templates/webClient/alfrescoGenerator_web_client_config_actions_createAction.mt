@@ -41,7 +41,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
             <action-listener>#{DialogManager.setupParameters}</action-listener> 
             <params>
                <param name="typeContent">{<%getNameSpace()%>}<%getQualifiedName()%></param>
-            </params> 
+            </params>
    		</action>
    		<%}%>
   		<%}%>

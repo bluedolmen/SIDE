@@ -31,8 +31,9 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 
 	<config xmlns:xi="http://www.w3.org/2001/XInclude">
       <actions>
-      <%alfrescoGenerator_createAction()%>     	
+      <%alfrescoGenerator_createAction()%>
 
+<!--
    		<action id="edit_doc_details">
             <permissions>
                <permission allow="true">Write</permission>
@@ -44,7 +45,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
                <param name="id">#{actionContext.id}</param>
             </params>
          </action>
-   		  		
+-->   		  		
    		<action-group id="browse_create_menu">
    			<%alfrescoGenerator_browseCreateMenu()%>      		
         </action-group>  
