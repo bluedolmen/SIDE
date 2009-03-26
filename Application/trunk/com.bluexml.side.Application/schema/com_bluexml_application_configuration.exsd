@@ -57,6 +57,9 @@
          </appinfo>
       </annotation>
       <complexType>
+         <sequence minOccurs="0" maxOccurs="unbounded">
+            <element ref="technology"/>
+         </sequence>
          <attribute name="name" type="string" use="required">
             <annotation>
                <documentation>
@@ -90,6 +93,9 @@
 
    <element name="technology">
       <complexType>
+         <sequence minOccurs="0" maxOccurs="unbounded">
+            <element ref="technologyVersion"/>
+         </sequence>
          <attribute name="name" type="string" use="required">
             <annotation>
                <documentation>
@@ -98,13 +104,6 @@
             </annotation>
          </attribute>
          <attribute name="id" type="string" use="required">
-            <annotation>
-               <documentation>
-                  
-               </documentation>
-            </annotation>
-         </attribute>
-         <attribute name="idMetamodel" type="string" use="required">
             <annotation>
                <documentation>
                   
@@ -130,14 +129,10 @@
 
    <element name="technologyVersion">
       <complexType>
+         <sequence minOccurs="0" maxOccurs="unbounded">
+            <element ref="generatorVersion"/>
+         </sequence>
          <attribute name="version" type="string" use="required">
-            <annotation>
-               <documentation>
-                  
-               </documentation>
-            </annotation>
-         </attribute>
-         <attribute name="idTechnology" type="string" use="required">
             <annotation>
                <documentation>
                   
@@ -161,13 +156,6 @@
             <element ref="configurationParameter" minOccurs="0" maxOccurs="unbounded"/>
          </sequence>
          <attribute name="version" type="string" use="required">
-            <annotation>
-               <documentation>
-                  
-               </documentation>
-            </annotation>
-         </attribute>
-         <attribute name="idTechnologyVersion" type="string" use="required">
             <annotation>
                <documentation>
                   
