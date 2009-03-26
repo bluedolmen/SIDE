@@ -72,9 +72,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="Clazz" eSuperTypes="#//AbstractClass">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="TwoModelElementWithSameName" value="Classe.allInstances()->select(a | a.name = self.name and a &lt;> self)->size() = 0"/>
+      <details key="NoInheritanceCycle" value="not self.generalizations.generalizations -> includes(self)"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="TwoModelElementWithSameName"/>
+      <details key="constraints" value="TwoModelElementWithSameName NoInheritanceCycle"/>
     </eAnnotations>
     <eOperations name="getAllAttributes" upperBound="-1" eType="#//Attribute">
       <eAnnotations source="http://www.bluexml.com/OCL">
@@ -180,9 +181,10 @@
       <details key="TargetNull" value="self.destination->notEmpty()"/>
       <details key="AtLeastOneNavigableEdge" value="(isNavigableSRC or isNavigableTARGET)"/>
       <details key="ClassCantBeReferencedbyTwoSameNameAssociation" value="Association.allInstances()->select(a | a.name = self.name and  a.source = self.source  and a.destination = self.destination and a &lt;> self)->size() = 0"/>
+      <details key="IfAggregationOrCompositionThenUnidirectionalAssociation" value="(self.associationType &lt;> AssociationType::Direct) implies (self.isNavigableSRC xor self.isNavigableTARGET )"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource AssociatioClassCantBeAgregationOrComposition NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation"/>
+      <details key="constraints" value="recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource AssociatioClassCantBeAgregationOrComposition NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation"/>
     </eAnnotations>
     <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
