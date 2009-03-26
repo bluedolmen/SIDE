@@ -71,7 +71,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Clazz" eSuperTypes="#//AbstractClass">
     <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="TwoModelElementWithSameName" value="Classe.allInstances()->select(a | a.name = self.name and a &lt;> self)->size() = 0"/>
+      <details key="TwoModelElementWithSameName" value="Clazz.allInstances()->select(a | a.name = self.name and a &lt;> self)->size() = 0"/>
       <details key="InheritanceCycle" value="not self.generalizations.generalizations -> includes(self)"/>
       <details key="ClassWithTwoAttributesSameName" value="self.attributes -> forAll( a1, a2 | a1 &lt;> a2 implies a1.name &lt;>a2.name)"/>
     </eAnnotations>
