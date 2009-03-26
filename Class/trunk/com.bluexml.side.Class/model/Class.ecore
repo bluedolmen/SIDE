@@ -179,9 +179,10 @@
       <details key="SourceNull" value="self.source->notEmpty()"/>
       <details key="TargetNull" value="self.destination->notEmpty()"/>
       <details key="AtLeastOneNavigableEdge" value="(isNavigableSRC or isNavigableTARGET)"/>
+      <details key="ClassCantBeReferencedbyTwoSameNameAssociation" value="Association.allInstances()->select(a | a.name = self.name and  a.source = self.source  and a.destination = self.destination and a &lt;> self)->size() = 0"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource AssociatioClassCantBeAgregationOrComposition NameNull SourceNull TargetNull AtLeastOneNavigableEdge"/>
+      <details key="constraints" value="recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource AssociatioClassCantBeAgregationOrComposition NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation"/>
     </eAnnotations>
     <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
@@ -320,6 +321,12 @@
         eType="#//Association"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="View" eSuperTypes="#//NamedClassModelElement">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="AtLeastOneAttribute" value="self.attributes -> notEmpty()"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="AtLeastOneAttribute"/>
+    </eAnnotations>
     <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="self.name = other.name"/>
