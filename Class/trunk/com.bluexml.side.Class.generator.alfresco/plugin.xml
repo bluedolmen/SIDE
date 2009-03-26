@@ -64,38 +64,38 @@
             id="http://www.kerblue.org/class/1.0"
             name="KSR500 Class"
             url="http://www.kerblue.org/class/1.0">
+         <technology
+               id="alfresco"
+               idMetamodel="http://www.kerblue.org/class/1.0"
+               name="Alfresco"
+               url="http://www.alfresco.com">
+            <technologyVersion
+                  id="alfresco_3.0_labs"
+                  idTechnology="alfresco"
+                  version="Alfresco3.0 Labs">
+               <generatorVersion
+                     id="com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator"
+                     idTechnologyVersion="alfresco_3.0_labs"
+                     version="S-IDE Alfresco Generator 1.0.0">
+                  <configurationParameter
+                        documentation="http://www.bluexml.com"
+                        key="CATALINA_HOME"
+                        label="Tomcat installation directory">
+                  </configurationParameter>
+                  <option
+                        documentation="Generate the alfresco&apos;s model."
+                        key="alfresco.dataModel"
+                        label="Alfresco data model">
+                  </option>
+                  <option
+                        documentation="http://www.bluexml.com"
+                        key="alfresco.share.extention"
+                        label="Alfreco Share Extension">
+                  </option>
+               </generatorVersion>
+            </technologyVersion>
+         </technology>
       </metamodel>
-      <technology
-            id="alfresco"
-            idMetamodel="http://www.kerblue.org/class/1.0"
-            name="Alfresco"
-            url="http://www.alfresco.com">
-      </technology>
-      <technologyVersion
-            id="alfresco_3.0_labs"
-            idTechnology="alfresco"
-            version="Alfresco3.0 Labs">
-      </technologyVersion>
-      <generatorVersion
-            id="com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator"
-            idTechnologyVersion="alfresco_3.0_labs"
-            version="S-IDE Alfresco Generator 1.0.0">
-         <configurationParameter
-               documentation="http://www.bluexml.com"
-               key="CATALINA_HOME"
-               label="Tomcat installation directory">
-         </configurationParameter>
-         <option
-               documentation="http://www.bluexml.com"
-               key="alfresco.dataModel"
-               label="Alfresco data model">
-         </option>
-         <option
-               documentation="http://www.bluexml.com"
-               key="alfresco.share.extension"
-               label="Alfreco Share Extension">
-         </option>
-      </generatorVersion>
    </extension>
 
 </plugin>
