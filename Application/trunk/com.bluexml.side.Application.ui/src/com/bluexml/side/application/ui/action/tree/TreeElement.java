@@ -1,5 +1,7 @@
 package com.bluexml.side.application.ui.action.tree;
 
+import com.bluexml.side.application.ui.action.ApplicationDialog;
+
 public class TreeElement {
 
 	private boolean checked;

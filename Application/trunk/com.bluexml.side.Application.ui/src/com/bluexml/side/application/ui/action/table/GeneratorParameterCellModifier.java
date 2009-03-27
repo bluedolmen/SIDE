@@ -72,6 +72,7 @@ public class GeneratorParameterCellModifier implements ICellModifier {
 			default:
 				break;
 			}
+			ApplicationDialog.modificationMade();
 			updateApplication(item);
 			generatorParametersViewer.update(item.getData(), null);
 		} else {

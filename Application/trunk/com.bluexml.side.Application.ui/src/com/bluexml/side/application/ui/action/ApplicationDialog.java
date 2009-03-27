@@ -53,6 +53,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
@@ -91,12 +92,14 @@ import com.bluexml.side.application.ui.action.utils.Generate;
 
 public class ApplicationDialog extends Dialog {
 
+	private static final int APPLY_ID = IDialogConstants.CLIENT_ID + 2;
 	private static final int GEN_ID = IDialogConstants.CLIENT_ID + 1;
 	private Text config_description;
 	private TreeViewer viewer;
 	private Tree tree_1;
 	private static Combo configurationList;
 	public static boolean loadingTree = false;
+	public static boolean applicationModified = false;
 
 	private Map<String, Metamodel> metamodelSet;
 	private Map<String, Technology> technologySet;
@@ -123,6 +126,7 @@ public class ApplicationDialog extends Dialog {
 	private GeneratorParameterContentProvider generatorParameterContentProvider;
 	private GeneratorParameterLabelProvider generatorParameterLabelProvider;
 	private GeneratorParameterCellModifier generatorParameterCellModifier;
+	private Button applyButton;
 
 	private static String KEY_VERBOSE = "generation.options.verbose";
 	private static String KEY_CLEAN = "generation.options.clean";
@@ -397,6 +401,7 @@ public class ApplicationDialog extends Dialog {
 				if (filePath != null) {
 					// Add to list
 					list.add(filePath);
+					ApplicationDialog.modificationMade();
 					// Register it
 					Model model = ApplicationFactory.eINSTANCE.createModel();
 					model.setFile(filePath);
@@ -530,6 +535,7 @@ public class ApplicationDialog extends Dialog {
 					Button b = (Button) e.getSource();
 					param.setValue(Boolean.toString(b.getSelection()));
 				}
+				ApplicationDialog.modificationMade();
 			}
 		});
 		cleanButton.setText("Clean");
@@ -550,6 +556,7 @@ public class ApplicationDialog extends Dialog {
 					Button b = (Button) e.getSource();
 					param.setValue(Boolean.toString(b.getSelection()));
 				}
+				ApplicationDialog.modificationMade();
 			}
 		});
 		verboseButton.setText("Verbose");
@@ -564,6 +571,7 @@ public class ApplicationDialog extends Dialog {
 					Button b = (Button) e.getSource();
 					param.setValue(Boolean.toString(b.getSelection()));
 				}
+				ApplicationDialog.modificationMade();
 			}
 		});
 		updateTargetButton
@@ -619,6 +627,7 @@ public class ApplicationDialog extends Dialog {
 					Text t = (Text) e.getSource();
 					param.setValue(t.getText());
 				}
+				ApplicationDialog.modificationMade();
 			}
 		});
 
@@ -643,6 +652,7 @@ public class ApplicationDialog extends Dialog {
 					Text t = (Text) e.getSource();
 					param.setValue(t.getText());
 				}
+				ApplicationDialog.modificationMade();
 			}
 		});
 		destinationText.setBounds(115, 144, 323, 22);
@@ -677,6 +687,7 @@ public class ApplicationDialog extends Dialog {
 			public void widgetSelected(final SelectionEvent e) {
 				int select = list.getSelectionIndex();
 				if (select != -1) {
+					ApplicationDialog.modificationMade();
 					removeModel(list.getSelection());
 					list.remove(select);
 				}
@@ -769,7 +780,7 @@ public class ApplicationDialog extends Dialog {
 				configurationList.select(configurationList.getItemCount() - 1);
 				addStaticParameters(config);
 				application.getElements().add(config);
-
+				modificationMade();
 				refreshConfiguration();
 			}
 
@@ -826,7 +837,7 @@ public class ApplicationDialog extends Dialog {
 						}
 					}
 				}
-
+				modificationMade();
 				refreshConfiguration();
 			}
 		});
@@ -1188,8 +1199,8 @@ public class ApplicationDialog extends Dialog {
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
 		createButton(parent, GEN_ID, "Generate", false);
-		createButton(parent, IDialogConstants.OK_ID, "Apply", true);
-		createButton(parent, IDialogConstants.CANCEL_ID, "Close", false);
+		applyButton = createButton(parent, APPLY_ID, "Apply", false);
+		createButton(parent, IDialogConstants.CLOSE_ID, "Close", false);
 	}
 
 	/**
@@ -1201,17 +1212,33 @@ public class ApplicationDialog extends Dialog {
 	}
 
 	protected void buttonPressed(int buttonId) {
-		// TODO : gérer les erreurs!
+		if (buttonId == IDialogConstants.CLOSE_ID) {
+			if (applicationModified) {
+				int result = showConfirmation("Configuration Modified.", "Configuration modified, do you want to save it before closing?");
+				if (result == SWT.OK) {
+					saveData();
+				}
+			}
+			close();
+		}
+		if (buttonId == APPLY_ID) {
+			saveData();
+			applicationModified = false;
+		}
 		if (buttonId == GEN_ID) {
+			if (applicationModified) {
+				int result = showConfirmation("Configuration Modified.", "Configuration modified, do you want to save it before generating?");
+				if (result == SWT.OK) {
+					saveData();
+				}
+			}
 			GeneratePopUp generationPopUp = new GeneratePopUp(Display
 					.getDefault().getActiveShell(),getCurrentConfiguration(), staticFieldsName,
 					getModels());
 			generationPopUp.open();
 			return;
 		}
-		if (buttonId == IDialogConstants.OK_ID) {
-			saveData();
-		}
+		
 		super.buttonPressed(buttonId);
 	}
 
@@ -1264,4 +1291,19 @@ public class ApplicationDialog extends Dialog {
 		return null;
 	}
 
+	public static void modificationMade() {
+		if (!applicationModified) {
+			applicationModified = true;
+		}
+	}
+	
+	public static int showConfirmation(String title, String message) {
+		int style = 0;
+		style |= SWT.YES | SWT.NO;
+		MessageBox mb = new MessageBox(Display.getCurrent().getActiveShell(), style	);
+		mb.setText(title);
+        mb.setMessage(message);
+        int val = mb.open();
+        return val;
+	}
 }

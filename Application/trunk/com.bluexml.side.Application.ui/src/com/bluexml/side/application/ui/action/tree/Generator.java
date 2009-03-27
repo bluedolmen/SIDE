@@ -64,6 +64,7 @@ public class Generator extends TreeElement {
 
 	public void updateApplication() {
 		if (!ApplicationDialog.loadingTree) {
+			ApplicationDialog.modificationMade();
 			Configuration config = ApplicationDialog.getCurrentConfiguration();
 			if (config != null) {
 				//Delete all linked elements
