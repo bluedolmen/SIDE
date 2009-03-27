@@ -21,6 +21,10 @@ public class GeneratorParameterContentProvider implements IStructuredContentProv
 			
 	}
 
+	public void setDataStructure(GeneratorParameterDataStructure dataStructure) {
+		this.dataStructure = dataStructure;
+	}
+
 	public void dispose() {
 		//nothing to do
 	}

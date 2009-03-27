@@ -26,6 +26,10 @@ public class GeneratorParameterCellModifier implements ICellModifier {
 		dataStructure = p_dataStructure;
 		generatorParametersViewer = p_generatorParametersViewer;
 	}
+	
+	public void setDataStructure(GeneratorParameterDataStructure dataStructure) {
+		this.dataStructure = dataStructure;
+	}
 
 	public boolean canModify(Object element, String property) {
 		boolean result = false;
@@ -55,20 +59,24 @@ public class GeneratorParameterCellModifier implements ICellModifier {
 	public void modify(Object element, String property, Object value) {
 		TableItem item = (TableItem) element;
 		int index = Arrays.asList(columnNames).indexOf(property);
-		switch (index) {
-		case 0:
-			dataStructure.setLabel(item.getData(), (String) value);
-			break;
-		case 1:
-			if (value != null) {
-				dataStructure.setValue(item.getData(), (String) value);
+		if (item != null) {
+			switch (index) {
+			case 0:
+				dataStructure.setLabel(item.getData(), (String) value);
+				break;
+			case 1:
+				if (value != null) {
+					dataStructure.setValue(item.getData(), (String) value);
+				}
+				break;
+			default:
+				break;
 			}
-			break;
-		default:
-			break;
+			updateApplication(item);
+			generatorParametersViewer.update(item.getData(), null);
+		} else {
+			throw new RuntimeException("Error on data, selection was null");
 		}
-		updateApplication(item);
-		generatorParametersViewer.update(item.getData(), null);
 	}
 
 	private void updateApplication(TableItem item) {

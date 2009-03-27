@@ -120,6 +120,9 @@ public class ApplicationDialog extends Dialog {
 	private Text logText;
 	private List<String> staticFieldsName;
 	private org.eclipse.swt.widgets.List list;
+	private GeneratorParameterContentProvider generatorParameterContentProvider;
+	private GeneratorParameterLabelProvider generatorParameterLabelProvider;
+	private GeneratorParameterCellModifier generatorParameterCellModifier;
 
 	private static String KEY_VERBOSE = "generation.options.verbose";
 	private static String KEY_CLEAN = "generation.options.clean";
@@ -262,8 +265,10 @@ public class ApplicationDialog extends Dialog {
 			}
 		}
 		for (GeneratorParameter genParam : neededParam.values()) {
+			genParam.setValue("");
 			dataStructure.addGeneratorParameter(genParam);
 		}
+		
 	}
 
 	private Set<TreeItem> collectGenerators() {
@@ -295,8 +300,11 @@ public class ApplicationDialog extends Dialog {
 			}
 		}
 		// Update
-		createTableViewer();
-		// generatorParametersViewer.refresh();
+		if (generatorParametersViewer == null) {
+			createTableViewer();
+		} else {
+			refreshDataStructure();
+		}
 	}
 
 	private void configureTree(Configuration configuration,
@@ -844,6 +852,15 @@ public class ApplicationDialog extends Dialog {
 		application.getElements().removeAll(toRemove);
 	}
 
+	private void refreshDataStructure(){
+		if (generatorParametersViewer != null) {
+			generatorParameterContentProvider.setDataStructure(dataStructure);
+			generatorParameterLabelProvider.setDataStructure(dataStructure);
+			generatorParameterCellModifier.setDataStructure(dataStructure);
+			generatorParametersViewer.setInput(dataStructure);
+		}
+	}
+	
 	/**
 	 * Create the TableViewer
 	 */
@@ -866,15 +883,13 @@ public class ApplicationDialog extends Dialog {
 		// Assign the cell editors to the viewer
 		generatorParametersViewer.setCellEditors(editors);
 		// Set the cell modifier for the viewer
-		generatorParametersViewer
-				.setContentProvider(new GeneratorParameterContentProvider(
-						dataStructure));
-		generatorParametersViewer
-				.setLabelProvider(new GeneratorParameterLabelProvider(
-						dataStructure));
-		generatorParametersViewer
-				.setCellModifier(new GeneratorParameterCellModifier(
-						dataStructure, columnNames, generatorParametersViewer));
+		generatorParameterContentProvider = new GeneratorParameterContentProvider(dataStructure);
+		generatorParametersViewer.setContentProvider(generatorParameterContentProvider);
+		generatorParameterLabelProvider = new GeneratorParameterLabelProvider(dataStructure);
+		generatorParametersViewer.setLabelProvider(generatorParameterLabelProvider);
+		generatorParameterCellModifier = new GeneratorParameterCellModifier(dataStructure, columnNames, generatorParametersViewer);
+		generatorParametersViewer.setCellModifier(generatorParameterCellModifier);
+		
 		generatorParametersViewer.setInput(dataStructure);
 		generatorParametersViewer.refresh();
 
@@ -1188,22 +1203,10 @@ public class ApplicationDialog extends Dialog {
 	protected void buttonPressed(int buttonId) {
 		// TODO : gérer les erreurs!
 		if (buttonId == GEN_ID) {
-			try {
-				Generate.launch(getCurrentConfiguration(), staticFieldsName,
-						getModels());
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			GeneratePopUp generationPopUp = new GeneratePopUp(Display
+					.getDefault().getActiveShell(),getCurrentConfiguration(), staticFieldsName,
+					getModels());
+			generationPopUp.open();
 			return;
 		}
 		if (buttonId == IDialogConstants.OK_ID) {

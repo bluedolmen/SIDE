@@ -19,6 +19,10 @@ public class GeneratorParameterLabelProvider extends LabelProvider implements
 	public Image getColumnImage(Object element, int columnIndex) {
 		return null;
 	}
+	
+	public void setDataStructure(GeneratorParameterDataStructure dataStructure) {
+		this.dataStructure = dataStructure;
+	}
 
 	public String getColumnText(Object element, int columnIndex) {
 
