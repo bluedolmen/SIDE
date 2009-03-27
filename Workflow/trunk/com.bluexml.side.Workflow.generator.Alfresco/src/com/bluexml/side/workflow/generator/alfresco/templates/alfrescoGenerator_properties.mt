@@ -30,7 +30,7 @@ wfbx_workflowmodel.type.wfbx_<%name%>.title=<%name%>
 wfbx_<%current("Process").name%>.node.<%name%>.title=<%name%>
 ## Transitions
 <%for (transition){%>
-wfbx_<%current("Process").name%>.node.<%current("TaskNode").name%>.transition.<%name%>.title=<%title%>
+wfbx_<%current("Process").name%>.node.<%current("StartState").name%>.transition.<%name%>.title=<%title%>
 <%}%>
 ## Attributes
 <%for (attributes){%>
