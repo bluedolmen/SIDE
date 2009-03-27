@@ -3,7 +3,7 @@
 <plugin>
  <extension
        id="com.bluexml.application.ui"
-       name="Create generation configuration"
+       name="Manage Configuration"
        point="org.eclipse.ui.popupMenus">
     <objectContribution
           id="com.bluexml.application.ui.createGeneration"
@@ -12,8 +12,9 @@
        <action
              class="com.bluexml.side.application.ui.action.CreateGenerationConfiguration"
              enablesFor="1"
+             icon="icon/manage.png"
              id="com.bluexml.application.ui.createGeneration"
-             label="Create generation configuration">
+             label="Manage Configuration">
        </action>
     </objectContribution>
  </extension>
