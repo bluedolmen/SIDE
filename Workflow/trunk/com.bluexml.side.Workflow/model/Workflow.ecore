@@ -6,6 +6,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="WorkflowModelElement" abstract="true"
       eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Process" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Package">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="PackageNameNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="PackageNameNull"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="swimlane" upperBound="-1"
         eType="#//Swimlane" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="startstate" ordered="false"
@@ -28,6 +34,15 @@
         eType="#//WorkflowModelElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Swimlane">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="ActorNameMustBeUnique" value="Swimlane.allInstances() -> forAll(s1,s2 | s1 &lt;> s2 implies s1.name &lt;> s2.name)"/>
+      <details key="MustManageAtLeastOneTask" value="not self.manage->isEmpty()"/>
+      <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') &lt;> null"/>
+      <details key="OnlyOneActorCalledInitiator" value="Swimlane.allInstances() -> select(s| s.name ='initiator')->size() = 1"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ActorNameMustBeUnique MustManageAtLeastOneTask noSpecialCharacters OnlyOneActorCalledInitiator"/>
+    </eAnnotations>
     <eOperations name="EqualsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="self.name = other.name"/>
@@ -46,6 +61,12 @@
         unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StartState" eSuperTypes="#//State">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="OneStartTask" value="StartState.allInstances() -> size() = 1"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="OneStartTask"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
         eType="#//Transition" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="event" upperBound="-1"
@@ -59,6 +80,12 @@
         eType="ecore:EClass ../../com.bluexml.side.Class/model/Class.ecore#//Clazz"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EndState" eSuperTypes="#//State">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="atLeastOneEndTask" value="EndState.allInstances() -> size() = 1"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="atLeastOneEndTask"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="event" upperBound="-1"
         eType="#//Event" containment="true"/>
   </eClassifiers>
@@ -141,6 +168,14 @@
         unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="NoTransitionWithSameName" value="Transition.allInstances() -> forAll(s1,s2 | s1 &lt;> s2 implies s1.name &lt;> s2.name)"/>
+      <details key="SourceAndTargetMustBeSet" value="not self.to.oclIsUndefined() and not self.getContainer().oclIsUndefined()"/>
+      <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') &lt;> null"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="NoTransitionWithSameName SourceAndTargetMustBeSet noSpecialCharacters"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" ordered="false"
@@ -173,6 +208,13 @@
     <eLiterals name="process_end" value="15" literal="process-end"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="State" abstract="true">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="NoStateWithSameName" value="State.allInstances() -> forAll(s1,s2 | s1 &lt;> s2 implies s1.name &lt;> s2.name)"/>
+      <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') &lt;> null"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="NoStateWithSameName noSpecialCharacters"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -181,6 +223,12 @@
     <eLiterals name="One_group" value="2" literal="One group"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Attribute">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="UniqueNameForTaskAttribute" value="Attribute.allInstances() -> forAll(a1,a2| a1 &lt;>a2 implies a1.name &lt;> a2.name)"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="UniqueNameForTaskAttribute"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="typ" eType="ecore:EEnum ../../com.bluexml.side.Class/model/Class.ecore#//AttributeType"
         defaultValueLiteral="void"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
