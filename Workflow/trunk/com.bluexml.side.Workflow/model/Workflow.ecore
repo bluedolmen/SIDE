@@ -39,9 +39,10 @@
       <details key="MustManageAtLeastOneTask" value="not self.manage->isEmpty()"/>
       <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') &lt;> null"/>
       <details key="OnlyOneActorCalledInitiator" value="Swimlane.allInstances() -> select(s| s.name ='initiator')->size() = 1"/>
+      <details key="AssignementMustBeSetForAllExeptOneActor" value="Swimlane.allInstances() -> select(s | s.name &lt;>'initiator' and (s.actorid -> isEmpty() or s.actorid='')  and (s.pooledactors  -> isEmpty() or s.pooledactors =''))->size() &lt;=1&#xA;"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="ActorNameMustBeUnique MustManageAtLeastOneTask noSpecialCharacters OnlyOneActorCalledInitiator"/>
+      <details key="constraints" value="ActorNameMustBeUnique MustManageAtLeastOneTask noSpecialCharacters OnlyOneActorCalledInitiator AssignementMustBeSetForAllExeptOneActor"/>
     </eAnnotations>
     <eOperations name="EqualsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
