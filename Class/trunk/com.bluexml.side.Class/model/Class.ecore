@@ -216,12 +216,6 @@
         defaultValueLiteral=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="#//TitledNamedClassModelElement">
-    <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="UniqueNameForTaskAttribute" value="Package.allInstances()->select(&#xD;&#xA;   p | p.tasks->includes(&#xD;&#xA;        BPMTask.allInstances()->select(&#xD;&#xA;           t | t.attributes->includes(self)&#xD;&#xA;        )->asOrderedSet()->first()&#xD;&#xA;       )&#xD;&#xA;      ).tasks->collect(t | t.attributes)->flatten()->select(a | a.name = self.name and a &lt;> self)->isEmpty()"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="UniqueNameForTaskAttribute"/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="typ" eType="#//AttributeType"
         defaultValueLiteral="void"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="initialValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
