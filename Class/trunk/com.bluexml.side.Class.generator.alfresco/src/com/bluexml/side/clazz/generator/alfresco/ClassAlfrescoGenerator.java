@@ -90,7 +90,7 @@ public class ClassAlfrescoGenerator extends AbstractAcceleoGenerator {
 		return true;
 	}
 
-	public Collection<String> complete() throws Exception {
+	public Collection<IFile> complete() throws Exception {
 		// register additional generated files :
 
 		// manage all post process
@@ -117,7 +117,8 @@ public class ClassAlfrescoGenerator extends AbstractAcceleoGenerator {
 		getCresolver().copyToFinalFolder();
 		// delete temporary folder
 		ConflitResolverHelper.deleteFolder(getTemporaryFolder());
-		return new ArrayList<String>();
+		
+		return generatedFiles;
 	}
 	
 

@@ -67,7 +67,7 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 		return result;
 	}
 
-	public Collection<String> complete() throws Exception {
+	public Collection<IFile> complete() throws Exception {
 		List<IFile> conflict = searchForConflict();
 		List<IFile> unresolvedconflict = new ArrayList<IFile>();
 		boolean allresolved = true;
@@ -91,7 +91,7 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 		getCresolver().copyToFinalFolder();
 		// delete temporary folder
 		ConflitResolverHelper.deleteFolder(getTemporaryFolder());
-		return new ArrayList<String>();
+		return generatedFiles;
 	}
 
 	

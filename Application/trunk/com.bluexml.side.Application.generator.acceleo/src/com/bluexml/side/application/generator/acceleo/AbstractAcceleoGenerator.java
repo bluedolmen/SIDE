@@ -61,7 +61,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 
 	abstract protected String getMetamodelURI();
 
-	public Collection<String> generate(IFile model) throws Exception {
+	public Collection<IFile> generate(IFile model) throws Exception {
 		// References to files in the project
 		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		// Temporary project
@@ -148,10 +148,10 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		IProject myproject = myWorkspaceRoot.getProject(".side_generation");
 		myproject.delete(true, null);
 
-		Collection<String> result = new ArrayList<String>();
+		Collection<IFile> result = new ArrayList<IFile>();
 		for (Object o : chain.getGeneratedFiles())
 			if (o instanceof IFile)
-				result.add(((IFile) o).getFullPath().toString());
+				result.add((IFile) o);
 
 		return result;
 	}
