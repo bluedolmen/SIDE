@@ -1236,7 +1236,7 @@ public class ApplicationDialog extends Dialog {
 			if (applicationModified) {
 				int result = showConfirmation("Configuration Modified.",
 						"Configuration modified, do you want to save it before closing?");
-				if (result == SWT.OK) {
+				if (result == SWT.YES) {
 					saveData();
 				}
 			}
@@ -1249,7 +1249,7 @@ public class ApplicationDialog extends Dialog {
 			if (applicationModified) {
 				int result = showConfirmation("Configuration Modified.",
 						"Configuration modified, do you want to save it before generating?");
-				if (result == SWT.OK) {
+				if (result == SWT.YES) {
 					saveData();
 				}
 			}
