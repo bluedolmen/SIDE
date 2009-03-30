@@ -24,7 +24,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 <%script type="workflow.Process" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <?xml version="1.0" encoding="iso-8859-1"?>
 
-<process-definition xmlns="urn:jbpm.org:jpdl-3.1" name="wfbx:<%name%>">
+<process-definition name="wfbx:<%name%>">
 
 <%for (swimlane) {%>
   	<swimlane name="<%name%>">
