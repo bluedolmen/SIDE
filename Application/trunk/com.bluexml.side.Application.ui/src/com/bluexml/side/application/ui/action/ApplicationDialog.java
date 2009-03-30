@@ -458,7 +458,7 @@ public class ApplicationDialog extends Dialog {
 
 		viewer = new TreeViewer(composite_1, SWT.BORDER);
 		tree_1 = viewer.getTree();
-		tree_1.setBounds(10, 52, 454, 392);
+		tree_1.setBounds(5, 5, 454, 392);
 		viewer.setContentProvider(new ConfigurationContentProvider());
 		viewer.setLabelProvider(new ConfigurationLabelProvider());
 		viewer.setInput(this);
@@ -647,7 +647,7 @@ public class ApplicationDialog extends Dialog {
 			}
 		});
 
-		logText.setBounds(115, 108, 280, 25);
+		logText.setBounds(115, 108, 260, 25);
 
 		final Label logLabel = new Label(composite_2, SWT.NONE);
 		logLabel.setAlignment(SWT.RIGHT);
@@ -671,7 +671,7 @@ public class ApplicationDialog extends Dialog {
 				ApplicationDialog.modificationMade();
 			}
 		});
-		destinationText.setBounds(115, 140, 280, 25);
+		destinationText.setBounds(115, 140, 260, 25);
 
 		final Button browseLogPathButton = new Button(composite_2, SWT.NONE);
 		browseLogPathButton.addSelectionListener(new SelectionAdapter() {
@@ -694,7 +694,7 @@ public class ApplicationDialog extends Dialog {
 			}
 		});
 		browseLogPathButton.setText("Browse");
-		browseLogPathButton.setBounds(401, 106, 48, 25);
+		browseLogPathButton.setBounds(381, 106, 75, 25);
 
 		final Button browseGenPathButton = new Button(composite_2, SWT.NONE);
 		browseGenPathButton.addSelectionListener(new SelectionAdapter() {
@@ -715,7 +715,7 @@ public class ApplicationDialog extends Dialog {
 			}
 		});
 		browseGenPathButton.setText("Browse");
-		browseGenPathButton.setBounds(401, 140, 48, 25);
+		browseGenPathButton.setBounds(381, 140, 75, 25);
 
 		final TabItem modelsTabItem = new TabItem(tabFolder, SWT.NONE);
 		modelsTabItem.setText("Models");
@@ -794,7 +794,7 @@ public class ApplicationDialog extends Dialog {
 		listOfConfigurayionsLabel.setText("List of configurations :");
 
 		final Button editBt = new Button(container, SWT.NONE);
-		editBt.setBounds(325, 10, 20, 20);
+		editBt.setBounds(325, 10, 40, 20);
 		editBt.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
 				if (configurationList.getItemCount() > 0) {
@@ -827,7 +827,7 @@ public class ApplicationDialog extends Dialog {
 				"tree/img/edit.png"));
 
 		final Button addBt = new Button(container, SWT.NONE);
-		addBt.setBounds(351, 10, 20, 20);
+		addBt.setBounds(365, 10, 40, 20);
 		addBt.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
 				Configuration config = ApplicationFactory.eINSTANCE
@@ -885,7 +885,7 @@ public class ApplicationDialog extends Dialog {
 				"tree/img/add.png"));
 
 		final Button deleteBt = new Button(container, SWT.NONE);
-		deleteBt.setBounds(377, 10, 20, 20);
+		deleteBt.setBounds(400, 10, 40, 20);
 		deleteBt.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
 				if (configurationList.getItemCount() > 0) {
