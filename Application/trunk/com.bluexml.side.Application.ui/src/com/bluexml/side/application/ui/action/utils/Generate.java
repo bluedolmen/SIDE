@@ -10,6 +10,7 @@ import java.util.Map;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -17,6 +18,7 @@ import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.ProgressBar;
+import org.osgi.framework.Bundle;
 
 import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.application.Configuration;
@@ -89,12 +91,16 @@ public class Generate extends Thread {
 				boolean error = false;
 
 				for (ConfigurationElement elem : configuration.getElements()) {
+					String launchGeneratorClass = elem.getClass_generator();
 					String idGenerator = elem.getId_generator();
-
+					Bundle plugin = Platform.getBundle(idGenerator);
+					
+					
 					Class<?> gen;
 					Object genObj = null;
 					try {
-						gen = Class.forName(idGenerator);
+						gen = plugin.loadClass(launchGeneratorClass);
+						//gen = Class.forName(launchGeneratorClass);
 						genObj = gen.newInstance();
 					} catch (ClassNotFoundException e1) {
 						error = true;

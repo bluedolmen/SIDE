@@ -69,6 +69,7 @@ public class ConfigurationElementItemProvider
 
 			addId_metamodelPropertyDescriptor(object);
 			addId_generatorPropertyDescriptor(object);
+			addClass_generatorPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -109,6 +110,28 @@ public class ConfigurationElementItemProvider
 				 getString("_UI_ConfigurationElement_id_generator_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ConfigurationElement_id_generator_feature", "_UI_ConfigurationElement_type"),
 				 ApplicationPackage.Literals.CONFIGURATION_ELEMENT__ID_GENERATOR,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Class generator feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addClass_generatorPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ConfigurationElement_class_generator_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ConfigurationElement_class_generator_feature", "_UI_ConfigurationElement_type"),
+				 ApplicationPackage.Literals.CONFIGURATION_ELEMENT__CLASS_GENERATOR,
 				 true,
 				 false,
 				 false,
@@ -186,6 +209,7 @@ public class ConfigurationElementItemProvider
 		switch (notification.getFeatureID(ConfigurationElement.class)) {
 			case ApplicationPackage.CONFIGURATION_ELEMENT__ID_METAMODEL:
 			case ApplicationPackage.CONFIGURATION_ELEMENT__ID_GENERATOR:
+			case ApplicationPackage.CONFIGURATION_ELEMENT__CLASS_GENERATOR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case ApplicationPackage.CONFIGURATION_ELEMENT__OPTIONS:

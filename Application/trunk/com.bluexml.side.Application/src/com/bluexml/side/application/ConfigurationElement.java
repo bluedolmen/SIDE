@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.bluexml.side.application.ConfigurationElement#getId_metamodel <em>Id metamodel</em>}</li>
  *   <li>{@link com.bluexml.side.application.ConfigurationElement#getId_generator <em>Id generator</em>}</li>
  *   <li>{@link com.bluexml.side.application.ConfigurationElement#getOptions <em>Options</em>}</li>
+ *   <li>{@link com.bluexml.side.application.ConfigurationElement#getClass_generator <em>Class generator</em>}</li>
  * </ul>
  * </p>
  *
@@ -96,5 +97,31 @@ public interface ConfigurationElement extends EObject {
 	 * @generated
 	 */
 	EList<Option> getOptions();
+
+	/**
+	 * Returns the value of the '<em><b>Class generator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Class generator</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Class generator</em>' attribute.
+	 * @see #setClass_generator(String)
+	 * @see com.bluexml.side.application.ApplicationPackage#getConfigurationElement_Class_generator()
+	 * @model
+	 * @generated
+	 */
+	String getClass_generator();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.application.ConfigurationElement#getClass_generator <em>Class generator</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Class generator</em>' attribute.
+	 * @see #getClass_generator()
+	 * @generated
+	 */
+	void setClass_generator(String value);
 
 } // ConfigurationElement

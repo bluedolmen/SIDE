@@ -169,6 +169,13 @@
                </documentation>
             </annotation>
          </attribute>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The id of the generator class
+               </documentation>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 

@@ -15,6 +15,7 @@ import com.bluexml.side.application.ui.action.ApplicationDialog;
 public class Generator extends TreeElement {
 	private String id;
 	private String version;
+	private String launchClass;
 	private TechnologyVersion technologyVersion;
 	private Set<OptionGenerator> options;
 
@@ -23,7 +24,16 @@ public class Generator extends TreeElement {
 		technologyVersion.addGenerator(this);
 		id = elt.getAttribute("id");
 		version = elt.getAttribute("version");
+		launchClass = elt.getAttribute("class");
 		options = new HashSet<OptionGenerator>();
+	}
+
+	public String getLaunchClass() {
+		return launchClass;
+	}
+
+	public void setLaunchClass(String launchClass) {
+		this.launchClass = launchClass;
 	}
 
 	public TechnologyVersion getTechnologyVersion() {
@@ -80,6 +90,7 @@ public class Generator extends TreeElement {
 					ConfigurationElement elt = ApplicationFactory.eINSTANCE.createConfigurationElement();
 					elt.setId_generator(getId());
 					elt.setId_metamodel(technologyVersion.getTechnology().getMetamodel().getId());
+					elt.setClass_generator(getLaunchClass());
 					
 					//Launch options
 					for (OptionGenerator o : options) {

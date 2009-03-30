@@ -282,13 +282,22 @@ public interface ApplicationPackage extends EPackage {
 	int CONFIGURATION_ELEMENT__OPTIONS = 2;
 
 	/**
+	 * The feature id for the '<em><b>Class generator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION_ELEMENT__CLASS_GENERATOR = 3;
+
+	/**
 	 * The number of structural features of the '<em>Configuration Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION_ELEMENT_FEATURE_COUNT = 3;
+	int CONFIGURATION_ELEMENT_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.application.impl.OptionImpl <em>Option</em>}' class.
@@ -518,6 +527,17 @@ public interface ApplicationPackage extends EPackage {
 	EReference getConfigurationElement_Options();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.ConfigurationElement#getClass_generator <em>Class generator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Class generator</em>'.
+	 * @see com.bluexml.side.application.ConfigurationElement#getClass_generator()
+	 * @see #getConfigurationElement()
+	 * @generated
+	 */
+	EAttribute getConfigurationElement_Class_generator();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.application.Option <em>Option</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -723,6 +743,14 @@ public interface ApplicationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CONFIGURATION_ELEMENT__OPTIONS = eINSTANCE.getConfigurationElement_Options();
+
+		/**
+		 * The meta object literal for the '<em><b>Class generator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONFIGURATION_ELEMENT__CLASS_GENERATOR = eINSTANCE.getConfigurationElement_Class_generator();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.application.impl.OptionImpl <em>Option</em>}' class.

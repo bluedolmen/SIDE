@@ -32,6 +32,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ConfigurationElement/id_metamodel"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ConfigurationElement/id_generator"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference application.ecore#//ConfigurationElement/options"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ConfigurationElement/class_generator"/>
     </genClasses>
     <genClasses ecoreClass="application.ecore#//Option">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//Option/key"/>

@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.bluexml.side.application.impl.ConfigurationElementImpl#getId_metamodel <em>Id metamodel</em>}</li>
  *   <li>{@link com.bluexml.side.application.impl.ConfigurationElementImpl#getId_generator <em>Id generator</em>}</li>
  *   <li>{@link com.bluexml.side.application.impl.ConfigurationElementImpl#getOptions <em>Options</em>}</li>
+ *   <li>{@link com.bluexml.side.application.impl.ConfigurationElementImpl#getClass_generator <em>Class generator</em>}</li>
  * </ul>
  * </p>
  *
@@ -91,6 +92,26 @@ public class ConfigurationElementImpl extends EObjectImpl implements Configurati
 	 * @ordered
 	 */
 	protected EList<Option> options;
+
+	/**
+	 * The default value of the '{@link #getClass_generator() <em>Class generator</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClass_generator()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CLASS_GENERATOR_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getClass_generator() <em>Class generator</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClass_generator()
+	 * @generated
+	 * @ordered
+	 */
+	protected String class_generator = CLASS_GENERATOR_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -170,6 +191,27 @@ public class ConfigurationElementImpl extends EObjectImpl implements Configurati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getClass_generator() {
+		return class_generator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setClass_generator(String newClass_generator) {
+		String oldClass_generator = class_generator;
+		class_generator = newClass_generator;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ApplicationPackage.CONFIGURATION_ELEMENT__CLASS_GENERATOR, oldClass_generator, class_generator));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -193,6 +235,8 @@ public class ConfigurationElementImpl extends EObjectImpl implements Configurati
 				return getId_generator();
 			case ApplicationPackage.CONFIGURATION_ELEMENT__OPTIONS:
 				return getOptions();
+			case ApplicationPackage.CONFIGURATION_ELEMENT__CLASS_GENERATOR:
+				return getClass_generator();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -216,6 +260,9 @@ public class ConfigurationElementImpl extends EObjectImpl implements Configurati
 				getOptions().clear();
 				getOptions().addAll((Collection<? extends Option>)newValue);
 				return;
+			case ApplicationPackage.CONFIGURATION_ELEMENT__CLASS_GENERATOR:
+				setClass_generator((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -237,6 +284,9 @@ public class ConfigurationElementImpl extends EObjectImpl implements Configurati
 			case ApplicationPackage.CONFIGURATION_ELEMENT__OPTIONS:
 				getOptions().clear();
 				return;
+			case ApplicationPackage.CONFIGURATION_ELEMENT__CLASS_GENERATOR:
+				setClass_generator(CLASS_GENERATOR_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -255,6 +305,8 @@ public class ConfigurationElementImpl extends EObjectImpl implements Configurati
 				return ID_GENERATOR_EDEFAULT == null ? id_generator != null : !ID_GENERATOR_EDEFAULT.equals(id_generator);
 			case ApplicationPackage.CONFIGURATION_ELEMENT__OPTIONS:
 				return options != null && !options.isEmpty();
+			case ApplicationPackage.CONFIGURATION_ELEMENT__CLASS_GENERATOR:
+				return CLASS_GENERATOR_EDEFAULT == null ? class_generator != null : !CLASS_GENERATOR_EDEFAULT.equals(class_generator);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -273,6 +325,8 @@ public class ConfigurationElementImpl extends EObjectImpl implements Configurati
 		result.append(id_metamodel);
 		result.append(", id_generator: ");
 		result.append(id_generator);
+		result.append(", class_generator: ");
+		result.append(class_generator);
 		result.append(')');
 		return result.toString();
 	}
