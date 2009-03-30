@@ -74,7 +74,8 @@
                   idTechnology="alfresco"
                   version="Alfresco3.0 Labs">
                <generatorVersion
-                     id="com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator"
+                     class="com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator"
+                     id="com.bluexml.side.Class.generator.alfresco"
                      idTechnologyVersion="alfresco_3.0_labs"
                      version="S-IDE Alfresco Generator 1.0.0">
                   <configurationParameter
