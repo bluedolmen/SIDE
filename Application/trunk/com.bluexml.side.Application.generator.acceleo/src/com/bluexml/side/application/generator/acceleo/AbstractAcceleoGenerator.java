@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import com.bluexml.side.application.generator.AbstractGenerator;
+import com.bluexml.side.application.generator.ConflitResolverHelper;
 import com.bluexml.side.application.generator.acceleo.chain.CustomCChain;
 
 import fr.obeo.acceleo.chain.ActionSet;
@@ -45,25 +46,26 @@ import fr.obeo.acceleo.tools.resources.Resources;
 public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 
 	protected List<IFile> generatedFiles;
-	
+	ConflitResolverHelper cresolver;
+	protected final String projectName = ".side_generation";
 	private static final IGenFilter genFilter = new IGenFilter() {
 		public boolean filter(java.io.File script, IFile targetFile, EObject object) throws CoreException {
 			return true;
 		}
 	};
-	
+
 	private static final String DEFAULT_ENCODING = "ISO-8859-1";
 	private String fileEncoding = System.getProperty("file.encoding");
-	
+
 	abstract protected List<String> getTemplates();
-	
+
 	abstract protected String getMetamodelURI();
-	
+
 	public Collection<String> generate(IFile model) throws Exception {
 		// References to files in the project
 		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		// Temporary project
-		IProject tmpProject = myWorkspaceRoot.getProject(".side_generation");
+		IProject tmpProject = myWorkspaceRoot.getProject(projectName);
 
 		// create and open if necessary
 		if (!tmpProject.exists()) {
@@ -145,15 +147,15 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 
 		IProject myproject = myWorkspaceRoot.getProject(".side_generation");
 		myproject.delete(true, null);
-		
+
 		Collection<String> result = new ArrayList<String>();
 		for (Object o : chain.getGeneratedFiles())
 			if (o instanceof IFile)
 				result.add(((IFile) o).getFullPath().toString());
-		
+
 		return result;
 	}
-	
+
 	public void filter(IFile file) {
 		BufferedReader br = null;
 		PrintWriter pw = null;
@@ -189,4 +191,14 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		}
 	}
 
+	public ConflitResolverHelper getCresolver() {
+		if (cresolver == null) {
+			cresolver = new ConflitResolverHelper(getTargetPath(), getTemporaryFolder());
+		}
+		return cresolver;
+	}
+
+	protected List<IFile> searchForConflict() {
+		return getCresolver().searchForConflict(getTargetPath(), generatedFiles, getTemporaryFolder());
+	}
 }

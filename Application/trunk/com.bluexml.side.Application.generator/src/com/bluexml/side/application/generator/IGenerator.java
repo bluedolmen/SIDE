@@ -12,11 +12,11 @@ public interface IGenerator {
 	 * 
 	 * @param generationParameters
 	 *            the list of selected options for the generation (clean,
-	 *            verbose...)
+	 *            verbose...), shared by all generators.
 	 * @param generatorOptions
 	 *            the list of selected options for the generator.
 	 * @param configurationParamers
-	 *            the list of technical parameters.
+	 *            the list of technical parameters, shared by all generators.
 	 */
 	public void initialize(Map<String, String> generationParameters,
 			Map<String, Boolean> generatorOptions,
