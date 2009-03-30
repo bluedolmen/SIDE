@@ -42,7 +42,6 @@ import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseTrackAdapter;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
@@ -261,7 +260,7 @@ public class ApplicationDialog extends Dialog {
 		}
 		HashMap<String, GeneratorParameter> neededParam = new HashMap<String, GeneratorParameter>();
 		dataStructure = new GeneratorParameterDataStructure();
-		// We get all param key needed by Generator
+		// We get all params key needed by Generator
 		for (String genId : confIds) {
 			List<String> paramList = paramConfByGenerator.get(genId);
 			if (paramList != null) {
@@ -1245,7 +1244,6 @@ public class ApplicationDialog extends Dialog {
 		}
 		if (buttonId == APPLY_ID) {
 			saveData();
-			applicationModified = false;
 		}
 		if (buttonId == GEN_ID) {
 			if (applicationModified) {
@@ -1284,6 +1282,7 @@ public class ApplicationDialog extends Dialog {
 			resource.save(out, saveOptions);
 			out.close();
 			model.refreshLocal(-1, null);
+			applicationModified = false;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
