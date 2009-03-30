@@ -17,7 +17,8 @@
                   idTechnology="alfresco"
                   version="Alfresco3.0 Labs">
                <generatorVersion
-                     id="com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator"
+                     class="com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator"
+                     id="com.bluexml.side.Workflow.generator.Alfresco"
                      idTechnologyVersion="alfresco_3.0_labs"
                      version="S-IDE Alfresco Generator 1.0.0">
                   <configurationParameter
