@@ -17,9 +17,10 @@ Foundation, Inc., 59 Temple Place, Boston, MA 02111.
  --%>
  <%
 metamodel http://www.kerblue.org/workflow/1.0
+import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 %>
 <%script type="workflow.Process" name="validatedFilename"%>
-shared/classes/alfresco/extension/generated/bpm/workflow-<%name%>-messages.properties
+<%getTEMP_FOLDER()%>/shared/classes/alfresco/extension/generated/bpm/workflow-<%name%>-messages.properties
 <%script type="workflow.Process" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 #Messages for workflow named <%name%>
 wfbx_<%name%>.workflow.title=<%name%>

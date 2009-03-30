@@ -12,7 +12,7 @@ import templates.shareExtentions.SiteWebscripts.AlfrescoFileUploadPatch.file-upl
 
 
 <%script type="clazz.ClassPackage" name="getFlashUploadJsOutputFile"%>
-<%getProperty("alf.share.paths.core.site-webscripts")%>org/alfresco/components/upload/flash-upload.get.js
+<%if (eContainer() == null) {%><%getTEMP_FOLDER()%>/<%getProperty("alf.share.paths.core.site-webscripts")%>org/alfresco/components/upload/flash-upload.get.js<%}%>
 
 <%script type="clazz.ClassPackage" name="flashUploadJs" file="<%getFlashUploadJsOutputFile%>"%>
 <%getHtmlOrFlashUploadJs()%>

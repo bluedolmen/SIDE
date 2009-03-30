@@ -21,14 +21,31 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.ecore.EObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.bluexml.side.application.generator.ConflitResolverHelper;
+import com.bluexml.side.application.generator.UnresolvedConflictException;
+import com.bluexml.side.application.generator.XMLConflictResolver;
 import com.bluexml.side.application.generator.acceleo.AbstractAcceleoGenerator;
 
 public class WorkflowGenerator extends AbstractAcceleoGenerator {
 
+	XMLConflictResolver xmlresolver = null;
+
+	public XMLConflictResolver getXmlresolver() {
+		if (xmlresolver == null) {
+			xmlresolver = new XMLConflictResolver(new ConflitResolverHelper(getTargetPath(), getTemporaryFolder()));
+		}
+		return xmlresolver;
+	}
+
+	public static String getTEMP_FOLDER(EObject node) {
+		return TEMP_FOLDER;
+	}
+	
 	public boolean check() {
 		// Already usable
 		return true;
@@ -51,196 +68,32 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 	}
 
 	public Collection<String> complete() throws Exception {
-		List<String> result = new ArrayList<String>();
-		// Aggregate workflow context
-		aggregateWorkflowContext();
-		result.add(getTargetPath() + "/shared/classes/alfresco/extension/workflow-context.xml");
+		List<IFile> conflict = searchForConflict();
+		List<IFile> unresolvedconflict = new ArrayList<IFile>();
+		boolean allresolved = true;
+		for (IFile f : conflict) {
+			if (f.getFullPath().toString().indexOf("/shared/classes/alfresco/extension/web-client-config-custom.xml") != -1 || f.getFullPath().toString().indexOf("/shared/classes/alfresco/extension/workflow-context.xml") != -1
+					|| f.getFullPath().toString().indexOf("/shared/classes/alfresco/extension/generated/bpm/model.xml") != -1) {
+				// known conflict, apply specific process
 
-		// Aggregate alfresco model
-		aggregateWorkflowModel();
-		result.add(getTargetPath() + "/shared/classes/alfresco/extension/generated/bpm/model.xml");
-
-		// Aggregate web client configuration
-		aggregateWebClientConfiguration();
-		result.add(getTargetPath() + "/shared/classes/alfresco/extension/web-client-config-custom.xml");
-
-		return result;
-	}
-
-	private void aggregateWorkflowContext() throws Exception {
-		IPath outputPath = new Path(getTargetPath());
-		IPath extensionPath = outputPath.append("/shared/classes/alfresco/extension");
-		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-		IFolder extensionFolder = myWorkspaceRoot.getFolder(extensionPath);
-		IFile workflowContext = extensionFolder.getFile("workflow-context.xml");
-		if (workflowContext.exists()) {
-			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document wcFile = db.parse(workflowContext.getRawLocation().toFile());
-			wcFile.getDocumentElement().normalize();
-
-			IFile searchedFile = null;
-			for (IFile f : generatedFiles)
-				if (f.getName().endsWith("-workflow-context.xml.temporary"))
-					searchedFile = f;
-			if (searchedFile != null) {
-				Document twcFile = db.parse(searchedFile.getRawLocation().toFile());
-				twcFile.getDocumentElement().normalize();
-
-				NodeList properties = wcFile.getElementsByTagName("property");
-				NodeList tproperties = twcFile.getElementsByTagName("property");
-
-				// Copy workflowDefinitions
-				Node node = searchNode(properties, "name", "workflowDefinitions");
-				Node tnode = searchNode(tproperties, "name", "workflowDefinitions");
-				Node list = getFirstChild(node);
-				Node props = getFirstChild(getFirstChild(tnode)).cloneNode(true);
-				wcFile.adoptNode(props);
-				list.appendChild(props);
-
-				// Copy properties
-				node = searchNode(properties, "name", "labels");
-				tnode = searchNode(tproperties, "name", "labels");
-				list = getFirstChild(node);
-				Node value = getFirstChild(getFirstChild(tnode)).cloneNode(true);
-				wcFile.adoptNode(value);
-				list.appendChild(value);
-
-				// Save workflow-context.xml
-				TransformerFactory tranFactory = TransformerFactory.newInstance();
-				Transformer aTransformer = tranFactory.newTransformer();
-				aTransformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, wcFile.getDoctype().getPublicId());
-				aTransformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, wcFile.getDoctype().getSystemId());
-				Source src = new DOMSource(wcFile);
-				Result dest = new StreamResult(workflowContext.getRawLocation().toFile());
-				aTransformer.transform(src, dest);
+				getXmlresolver().resolveByMerging(f);
+				System.out.println("resolved conflict on :" + f.getFullPath());
+			} else {
+				// unknown conflict
+				allresolved = false;
+				System.err.println("Unknow conflict detected on :" + f.getFullPath());
 			}
-		} else {
-			IFile searchedFile = null;
-			for (IFile f : generatedFiles)
-				if (f.getName().endsWith("-workflow-context.xml.temporary"))
-					searchedFile = f;
-			searchedFile.copy(workflowContext.getFullPath(), true, new NullProgressMonitor());
 		}
+		if (!allresolved) {
+			throw new UnresolvedConflictException(unresolvedconflict);
+		}
+		// conflicts are resolved
+		getCresolver().copyToFinalFolder();
+		// delete temporary folder
+		ConflitResolverHelper.deleteFolder(getTemporaryFolder());
+		return new ArrayList<String>();
 	}
 
-	private void aggregateWorkflowModel() throws Exception {
-		IPath outputPath = new Path(getTargetPath());
-		IPath extensionPath = outputPath.append("/shared/classes/alfresco/extension/generated/bpm");
-		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-		IFolder extensionFolder = myWorkspaceRoot.getFolder(extensionPath);
-		IFile workflowModel = extensionFolder.getFile("model.xml");
-		if (workflowModel.exists()) {
-			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document wmFile = db.parse(workflowModel.getRawLocation().toFile());
-			wmFile.getDocumentElement().normalize();
-
-			IFile searchedFile = null;
-			for (IFile f : generatedFiles)
-				if (f.getName().endsWith("-model.xml.temporary"))
-					searchedFile = f;
-			if (searchedFile != null) {
-				Document twmFile = db.parse(searchedFile.getRawLocation().toFile());
-				twmFile.getDocumentElement().normalize();
-
-				// Add all imports
-				Node imports = wmFile.getElementsByTagName("imports").item(0);
-				NodeList timports = twmFile.getElementsByTagName("import");
-				for (int i = 0; i < timports.getLength(); ++i) {
-					Node node = timports.item(i).cloneNode(true);
-					wmFile.adoptNode(node);
-					imports.appendChild(node);
-				}
-
-				// Add all types
-				Node types = wmFile.getElementsByTagName("types").item(0);
-				Node ttypes = twmFile.getElementsByTagName("types").item(0);
-				for (int i = 0; i < ttypes.getChildNodes().getLength(); ++i) {
-					Node node = ttypes.getChildNodes().item(i).cloneNode(true);
-					wmFile.adoptNode(node);
-					types.appendChild(node);
-				}
-
-				// Save model.xml
-				TransformerFactory tranFactory = TransformerFactory.newInstance();
-				Transformer aTransformer = tranFactory.newTransformer();
-				Source src = new DOMSource(wmFile);
-				Result dest = new StreamResult(workflowModel.getRawLocation().toFile());
-				aTransformer.transform(src, dest);
-			}
-		} else {
-			IFile searchedFile = null;
-			for (IFile f : generatedFiles)
-				if (f.getName().endsWith("-model.xml.temporary"))
-					searchedFile = f;
-			searchedFile.copy(workflowModel.getFullPath(), true, new NullProgressMonitor());
-		}
-	}
-
-	private void aggregateWebClientConfiguration() throws Exception {
-		IPath outputPath = new Path(getTargetPath());
-		IPath extensionPath = outputPath.append("/shared/classes/alfresco/extension/");
-		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-		IFolder extensionFolder = myWorkspaceRoot.getFolder(extensionPath);
-		IFile workflowModel = extensionFolder.getFile("web-client-config-custom.xml");
-		if (workflowModel.exists()) {
-			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document wmFile = db.parse(workflowModel.getRawLocation().toFile());
-			wmFile.getDocumentElement().normalize();
-
-			IFile searchedFile = null;
-			for (IFile f : generatedFiles)
-				if (f.getName().endsWith("_web-client-config.xml.temporary"))
-					searchedFile = f;
-			if (searchedFile != null) {
-				Document twmFile = db.parse(searchedFile.getRawLocation().toFile());
-				twmFile.getDocumentElement().normalize();
-
-				// Add all configurations
-				Node alfrescoConfig = wmFile.getElementsByTagName("alfresco-config").item(0);
-				Node talfrescoConfig = twmFile.getElementsByTagName("alfresco-config").item(0);
-
-				for (int i = 0; i < talfrescoConfig.getChildNodes().getLength(); ++i) {
-					Node node = talfrescoConfig.getChildNodes().item(i).cloneNode(true);
-					wmFile.adoptNode(node);
-					alfrescoConfig.appendChild(node);
-				}
-
-				// Save web-client-config-custom.xml
-				TransformerFactory tranFactory = TransformerFactory.newInstance();
-				Transformer aTransformer = tranFactory.newTransformer();
-				Source src = new DOMSource(wmFile);
-				Result dest = new StreamResult(workflowModel.getRawLocation().toFile());
-				aTransformer.transform(src, dest);
-			}
-		} else {
-			IFile searchedFile = null;
-			for (IFile f : generatedFiles)
-				if (f.getName().endsWith("_web-client-config.xml.temporary"))
-					searchedFile = f;
-			searchedFile.copy(workflowModel.getFullPath(), true, new NullProgressMonitor());
-		}
-	}
-
-	private Node getFirstChild(Node node) {
-		for (int i = 0; i < node.getChildNodes().getLength(); ++i) {
-			Node child = node.getChildNodes().item(i);
-			if (child.getNodeType() != Node.TEXT_NODE)
-				return child;
-		}
-		return null;
-	}
-
-	private Node searchNode(NodeList nodeList, String attributeName, String attributeValue) {
-		for (int i = 0; i < nodeList.getLength(); ++i) {
-			Node node = nodeList.item(i);
-			Node attribute = node.getAttributes().getNamedItem(attributeName);
-			if (attribute.getNodeValue().equalsIgnoreCase(attributeValue))
-				return node;
-		}
-		return null;
-	}
+	
 
 }

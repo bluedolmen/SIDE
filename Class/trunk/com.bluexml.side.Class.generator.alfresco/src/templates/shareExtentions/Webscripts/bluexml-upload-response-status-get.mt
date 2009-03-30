@@ -11,7 +11,7 @@ metamodel http://www.kerblue.org/class/1.0
 
 
 <%script type="clazz.ClassPackage" name="getBlueXmlUploadStatusOutputFile"%>
-<%getProperty("alf.paths.extension.webscripts")%>com/bluexml/upload/bluexml-upload.get.html.status.ftl
+<%if (eContainer() == null) {%><%getTEMP_FOLDER()%>/<%getProperty("alf.paths.extension.webscripts")%>com/bluexml/upload/bluexml-upload.get.html.status.ftl<%}%>
 
 <%script type="clazz.ClassPackage" name="blueXmlUploadStatus" file="<%getBlueXmlUploadStatusOutputFile%>"%>
 <html>

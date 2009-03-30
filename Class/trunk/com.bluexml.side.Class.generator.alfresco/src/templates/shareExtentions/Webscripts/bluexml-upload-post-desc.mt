@@ -9,7 +9,7 @@ metamodel http://www.kerblue.org/class/1.0
 
 
 <%script type="clazz.ClassPackage" name="getBlueXmlUploadDescOutputFile"%>
-<%getProperty("alf.paths.extension.webscripts")%>com/bluexml/upload/bluexml-upload.post.desc.xml
+<%if (eContainer() == null) {%><%getTEMP_FOLDER()%>/<%getProperty("alf.paths.extension.webscripts")%>com/bluexml/upload/bluexml-upload.post.desc.xml<%}%>
 
 <%script type="clazz.ClassPackage" name="blueXmlUploadDesc" file="<%getBlueXmlUploadDescOutputFile%>"%>
 <webscript>

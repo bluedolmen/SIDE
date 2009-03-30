@@ -35,7 +35,4 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 		    	<type name="<%getFolder()%>:<%getQualifiedName()%>" />
 		    <%}%>
 		<%}%>
-		<type name="<%getFolder()%>:Litteral"/>
-		<type name="<%getFolder()%>:EnumerationType"/>
-		<type name="<%getFolder()%>:LitteralTranslation"/>
-		<type name="<%getFolder()%>:VisibilityContext"/>
+		

@@ -22,9 +22,10 @@ import templates.servicesTemplates.Attribute
 import templates.servicesTemplates.Association
 import com.bluexml.side.clazz.generator.alfresco.services.AttributeServices
 import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
+import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 %>
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
-<%if (eContainer() == null) {%>shared/classes/alfresco/messages/webclient_fr_FR.properties<%}%>
+<%if (eContainer() == null) {%><%getTEMP_FOLDER()%>/shared/classes/alfresco/messages/webclient_fr_FR.properties<%}%>
 <%script type="clazz.ClassPackage" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 ##################
 #Begin of your own properties here. <%startUserCode%>

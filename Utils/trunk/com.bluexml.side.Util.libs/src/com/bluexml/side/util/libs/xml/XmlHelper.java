@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.Iterator;
+import java.util.List;
 
+import org.jdom.Content;
 import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
@@ -19,19 +22,41 @@ public class XmlHelper {
 		doc = builder.build(sr);
 		return doc;
 	}
-	
-	
-	public static Document buildJdomDocument(File xmlFile) throws Exception {		
+
+	public static Document buildJdomDocument(File xmlFile) throws Exception {
 		Document doc;
 		org.jdom.input.SAXBuilder builder = new SAXBuilder();
 		doc = builder.build(xmlFile);
-		return doc;		
+		return doc;
 	}
-	
-	public static void writeXmlFile(File f,Document doc) throws Exception {
+
+	public static void writeXmlFile(File f, Document doc) throws Exception {
 		XMLOutputter outputer = new XMLOutputter();
 		FileWriter fwriter = new FileWriter(f);
 		outputer.output(doc, fwriter);
 	}
 	
+/**
+ * Use this method to include a Document into another one
+ * @param base the document where include
+ * @param toInclude the document to include
+ * @param keepRoot true if the root
+ * @return
+ */
+	public static Document includeDocument(Document base, Document toInclude, boolean keepRoot) {
+		if (keepRoot) {
+			base.getRootElement().addContent(toInclude.getRootElement().detach());
+		} else {
+			List<Content> ch = toInclude.getRootElement().getChildren();
+			// use ultimate tips to avoid
+			// java.util.ConcurrentModificationException
+			Iterator<Content> it = ch.iterator();
+			while (it.hasNext()) {
+				Content current = it.next();
+				it.remove();
+				base.getRootElement().addContent(current);
+			}
+		}
+		return base;
+	}
 }

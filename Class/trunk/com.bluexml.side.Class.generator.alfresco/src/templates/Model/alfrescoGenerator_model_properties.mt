@@ -22,10 +22,10 @@ import templates.servicesTemplates.Attribute
 import templates.servicesTemplates.Association
 import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 import com.bluexml.side.clazz.generator.alfresco.services.ClassServices
-
+import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 %>
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
-<%if (eContainer() == null) {%>shared/classes/alfresco/extension/BxDS/model.properties<%}%>
+<%if (eContainer() == null) {%><%getTEMP_FOLDER()%>/shared/classes/alfresco/extension/BxDS/model.properties<%}%>
 <%script type="clazz.ClassPackage" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 
 #Model's messages

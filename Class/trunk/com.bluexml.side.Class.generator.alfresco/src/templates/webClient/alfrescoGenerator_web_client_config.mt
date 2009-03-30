@@ -37,10 +37,10 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 
 %>
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
-<%if (eContainer() == null) {%>shared/classes/alfresco/extension/web-client-config-custom.xml<%}%>
+<%if (eContainer() == null) {%><%getTEMP_FOLDER()%>/shared/classes/alfresco/extension/web-client-config-custom.xml<%}%>
 <%script type="clazz.ClassPackage" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <?xml version='1.0' encoding='iso-8859-1'?>
-<alfresco-config xmlns:xi="http://www.w3.org/2001/XInclude">
+<alfresco-config>
 	
 	<%-- GENERATE THE POSSIBILITY OF CREATE CONTENTS  --%>
 	<config evaluator="string-compare" condition="Content Wizards">

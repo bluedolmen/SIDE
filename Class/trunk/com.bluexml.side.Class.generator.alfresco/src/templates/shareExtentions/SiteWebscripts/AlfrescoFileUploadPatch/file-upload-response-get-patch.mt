@@ -14,7 +14,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
   --%>
 
 <%script type="clazz.ClassPackage" name="getFileUploadOutputFile"%>
-<%getProperty("alf.share.paths.core.site-webscripts")%>org/alfresco/components/upload/file-upload.get.html.ftl
+<%if (eContainer() == null) {%><%getTEMP_FOLDER()%>/<%getProperty("alf.share.paths.core.site-webscripts")%>org/alfresco/components/upload/file-upload.get.html.ftl<%}%>
 
 <%script type="clazz.ClassPackage" name="addCustomSiteProfile" file="<%getFileUploadOutputFile%>"%>
 <!-- Make sure that bothe the flash-upload and the html-upload component are included on the page -->

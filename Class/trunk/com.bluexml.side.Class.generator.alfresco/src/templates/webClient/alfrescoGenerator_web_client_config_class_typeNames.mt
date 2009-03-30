@@ -28,7 +28,3 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 			<%for (getAllClasses()) {%>
 			<type name="<%getFolder()%>:<%getQualifiedName()%>"/>
 			<%}%>
-			<type name="crm:Litteral"/>
-			<type name="crm:EnumerationType"/>
-			<type name="crm:LitteralTranslation"/>
-			<type name="crm:VisibilityContext"/>

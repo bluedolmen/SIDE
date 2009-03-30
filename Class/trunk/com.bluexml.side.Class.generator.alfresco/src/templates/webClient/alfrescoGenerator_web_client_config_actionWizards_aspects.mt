@@ -22,8 +22,7 @@ import templates.servicesTemplates.Association
 import com.bluexml.side.clazz.generator.alfresco.services.AttributeServices
 import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 %>
-<%script type="clazz.ClassPackage" name="validatedFilename"%>
-<%if (eContainer() == null) {%>shared/classes/alfresco/extension/web-client-config-custom/web-client-config-custom-actionWizards_aspects.xml<%}%>
+
 <%script type="clazz.ClassPackage" name="alfrescoGenerator_actionWizards_aspects"%>
 
 			<%for (getAllAspects()) {%>
