@@ -651,7 +651,7 @@ public class ApplicationDialog extends Dialog {
 
 		final Label logLabel = new Label(composite_2, SWT.NONE);
 		logLabel.setAlignment(SWT.RIGHT);
-		logLabel.setText("Log path :");
+		logLabel.setText("Log File :");
 		logLabel.setBounds(20, 115, 93, 15);
 
 		final Label destinationLabel = new Label(composite_2, SWT.NONE);
