@@ -264,11 +264,13 @@ public class ApplicationDialog extends Dialog {
 		// We get all param key needed by Generator
 		for (String genId : confIds) {
 			List<String> paramList = paramConfByGenerator.get(genId);
-			// We construct one list without twice the same id
-			for (String paramId : paramList) {
-				if (!neededParam.containsKey(paramId)) {
-					neededParam.put(paramId, configurationParameters
-							.get(paramId));
+			if (paramList != null) {
+				// We construct one list without twice the same id
+				for (String paramId : paramList) {
+					if (!neededParam.containsKey(paramId)) {
+						neededParam.put(paramId, configurationParameters
+								.get(paramId));
+					}
 				}
 			}
 		}
