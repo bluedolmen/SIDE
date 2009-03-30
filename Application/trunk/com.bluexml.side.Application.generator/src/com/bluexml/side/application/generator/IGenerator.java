@@ -36,7 +36,7 @@ public interface IGenerator {
 	 * @return the list of generated files
 	 * @throws Exception 
 	 */
-	public Collection<String> generate(IFile model) throws Exception;
+	public Collection<IFile> generate(IFile model) throws Exception;
 	
 	/**
 	 * This method run the post-action after the generation. 
@@ -44,5 +44,5 @@ public interface IGenerator {
 	 * @return the list of modified files
 	 * @throws Exception 
 	 */
-	public Collection<String> complete() throws Exception;
+	public Collection<IFile> complete() throws Exception;
 }
