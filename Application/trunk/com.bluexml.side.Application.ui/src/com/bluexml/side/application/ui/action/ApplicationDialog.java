@@ -817,6 +817,7 @@ public class ApplicationDialog extends Dialog {
 							configurationList.setItems(items);
 							configurationList.select(index);
 							config_description.setText(config.getDescription());
+							modificationMade();
 						}
 					}
 				}
