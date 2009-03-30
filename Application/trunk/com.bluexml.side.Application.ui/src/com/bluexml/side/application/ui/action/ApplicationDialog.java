@@ -50,8 +50,10 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
@@ -645,7 +647,7 @@ public class ApplicationDialog extends Dialog {
 			}
 		});
 
-		logText.setBounds(115, 110, 323, 22);
+		logText.setBounds(115, 108, 280, 25);
 
 		final Label logLabel = new Label(composite_2, SWT.NONE);
 		logLabel.setAlignment(SWT.RIGHT);
@@ -669,7 +671,51 @@ public class ApplicationDialog extends Dialog {
 				ApplicationDialog.modificationMade();
 			}
 		});
-		destinationText.setBounds(115, 144, 323, 22);
+		destinationText.setBounds(115, 140, 280, 25);
+
+		final Button browseLogPathButton = new Button(composite_2, SWT.NONE);
+		browseLogPathButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(final SelectionEvent e) {
+				String filePath = null;
+				FileDialog fd = new FileDialog(getShell(), SWT.OK);
+				fd.setFilterNames(new String[] { "Log Files", "All Files (*.*)" });
+				fd.setFilterExtensions(new String[] { "*.log", "*.*" });
+				if (logText.getText() == null || logText.getText().length() == 0) {
+					fd.setFilterPath(ResourcesPlugin.getWorkspace().getRoot().getRawLocation().toPortableString());
+				} else {
+					fd.setFilterPath(logText.getText());
+				}
+				
+				filePath = fd.open();
+				if (filePath != null) {
+					logText.setText(filePath);
+					modificationMade();
+				}
+			}
+		});
+		browseLogPathButton.setText("Browse");
+		browseLogPathButton.setBounds(401, 106, 48, 25);
+
+		final Button browseGenPathButton = new Button(composite_2, SWT.NONE);
+		browseGenPathButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(final SelectionEvent e) {
+				String folderPath = null;
+				DirectoryDialog dd = new DirectoryDialog(getShell(), SWT.OK);
+				if (destinationText.getText() == null || destinationText.getText().length() == 0) {
+					dd.setFilterPath(ResourcesPlugin.getWorkspace().getRoot().getRawLocation().toPortableString());
+				} else {
+					dd.setFilterPath(destinationText.getText());
+				}
+				
+				folderPath = dd.open();
+				if (folderPath != null) {
+					destinationText.setText(folderPath);
+					modificationMade();
+				}
+			}
+		});
+		browseGenPathButton.setText("Browse");
+		browseGenPathButton.setBounds(401, 140, 48, 25);
 
 		final TabItem modelsTabItem = new TabItem(tabFolder, SWT.NONE);
 		modelsTabItem.setText("Models");
