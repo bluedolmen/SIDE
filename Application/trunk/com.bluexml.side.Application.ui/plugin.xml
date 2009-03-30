@@ -18,4 +18,21 @@
        </action>
     </objectContribution>
  </extension>
+     <extension point = "org.eclipse.ui.popupMenus">
+      <objectContribution
+         	objectClass="org.eclipse.core.resources.IFile"
+        	adaptable="true"
+        	nameFilter="*.application"
+            id="com.bluexml.application.ui.generate">
+         <action
+               label="Launch Generation"
+               style="pulldown"
+               class="com.bluexml.side.application.ui.menu.DynamicMenuAction"
+               menubarPath="additions"
+               enablesFor="+"
+               icon="icon/launch.png"
+               id="com.bluexml.application.ui.generate">
+         </action>
+      </objectContribution>
+    </extension>
 </plugin>

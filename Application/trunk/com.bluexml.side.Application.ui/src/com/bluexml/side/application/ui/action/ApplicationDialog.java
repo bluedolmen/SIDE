@@ -3,7 +3,6 @@ package com.bluexml.side.application.ui.action;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,6 +16,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
@@ -88,7 +88,6 @@ import com.bluexml.side.application.ui.action.tree.Technology;
 import com.bluexml.side.application.ui.action.tree.TechnologyVersion;
 import com.bluexml.side.application.ui.action.tree.TreeElement;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
-import com.bluexml.side.application.ui.action.utils.Generate;
 
 public class ApplicationDialog extends Dialog {
 
@@ -121,7 +120,6 @@ public class ApplicationDialog extends Dialog {
 	private Button cleanButton;
 	private Text destinationText;
 	private Text logText;
-	private List<String> staticFieldsName;
 	private org.eclipse.swt.widgets.List list;
 	private GeneratorParameterContentProvider generatorParameterContentProvider;
 	private GeneratorParameterLabelProvider generatorParameterLabelProvider;
@@ -133,6 +131,8 @@ public class ApplicationDialog extends Dialog {
 	private static String KEY_UPDATE = "generation.options.updateTgt";
 	private static String KEY_LOGPATH = "generation.options.logPath";
 	private static String KEY_GENPATH = "generation.options.destinationPath";
+	
+	public static List<String> staticFieldsName = Arrays.asList(KEY_CLEAN, KEY_GENPATH, KEY_LOGPATH, KEY_UPDATE, KEY_VERBOSE);
 
 	private static String EXTENSIONPOINT_ID = "com.bluexml.side.Application.com_bluexml_application_configuration";
 
@@ -144,7 +144,6 @@ public class ApplicationDialog extends Dialog {
 	 */
 	public ApplicationDialog(Shell parentShell, IFile file) {
 		super(parentShell);
-
 		try {
 			URI uri = URI.createFileURI(file.getRawLocation().toFile()
 					.getAbsolutePath());
@@ -1008,13 +1007,6 @@ public class ApplicationDialog extends Dialog {
 			IConfigurationElement[] contributions = Platform
 					.getExtensionRegistry().getConfigurationElementsFor(
 							EXTENSIONPOINT_ID);
-			// Add the static option field to a List
-			staticFieldsName = new ArrayList<String>();
-			staticFieldsName.add(KEY_VERBOSE);
-			staticFieldsName.add(KEY_CLEAN);
-			staticFieldsName.add(KEY_UPDATE);
-			staticFieldsName.add(KEY_GENPATH);
-			staticFieldsName.add(KEY_LOGPATH);
 
 			// Scan for metamodels
 			for (IConfigurationElement config : contributions) {
@@ -1234,7 +1226,7 @@ public class ApplicationDialog extends Dialog {
 			}
 			GeneratePopUp generationPopUp = new GeneratePopUp(Display
 					.getDefault().getActiveShell(),getCurrentConfiguration(), staticFieldsName,
-					getModels());
+					ApplicationUtil.getModels(application));
 			generationPopUp.open();
 			return;
 		}
@@ -1242,15 +1234,7 @@ public class ApplicationDialog extends Dialog {
 		super.buttonPressed(buttonId);
 	}
 
-	private List<Model> getModels() {
-		List<Model> result = new ArrayList<Model>();
-		for (ModelElement elem : application.getElements()) {
-			if (elem instanceof Model) {
-				result.add((Model) elem);
-			}
-		}
-		return result;
-	}
+	
 
 	protected void saveData() {
 		ResourceSet resourceSet = new ResourceSetImpl();
