@@ -16,7 +16,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
@@ -41,6 +40,9 @@ import org.eclipse.swt.accessibility.AccessibleEvent;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseTrackAdapter;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
@@ -125,14 +127,16 @@ public class ApplicationDialog extends Dialog {
 	private GeneratorParameterLabelProvider generatorParameterLabelProvider;
 	private GeneratorParameterCellModifier generatorParameterCellModifier;
 	private Button applyButton;
+	private TabFolder tabFolder;
 
 	private static String KEY_VERBOSE = "generation.options.verbose";
 	private static String KEY_CLEAN = "generation.options.clean";
 	private static String KEY_UPDATE = "generation.options.updateTgt";
 	private static String KEY_LOGPATH = "generation.options.logPath";
 	private static String KEY_GENPATH = "generation.options.destinationPath";
-	
-	public static List<String> staticFieldsName = Arrays.asList(KEY_CLEAN, KEY_GENPATH, KEY_LOGPATH, KEY_UPDATE, KEY_VERBOSE);
+
+	public static List<String> staticFieldsName = Arrays.asList(KEY_CLEAN,
+			KEY_GENPATH, KEY_LOGPATH, KEY_UPDATE, KEY_VERBOSE);
 
 	private static String EXTENSIONPOINT_ID = "com.bluexml.side.Application.com_bluexml_application_configuration";
 
@@ -255,15 +259,16 @@ public class ApplicationDialog extends Dialog {
 		if (dataStructure != null) {
 			dataStructure.getData().clear();
 		}
-		HashMap<String, GeneratorParameter> neededParam = new HashMap<String,GeneratorParameter>();
+		HashMap<String, GeneratorParameter> neededParam = new HashMap<String, GeneratorParameter>();
 		dataStructure = new GeneratorParameterDataStructure();
 		// We get all param key needed by Generator
-		for (String genId : confIds ){
+		for (String genId : confIds) {
 			List<String> paramList = paramConfByGenerator.get(genId);
 			// We construct one list without twice the same id
 			for (String paramId : paramList) {
 				if (!neededParam.containsKey(paramId)) {
-					neededParam.put(paramId,configurationParameters.get(paramId));
+					neededParam.put(paramId, configurationParameters
+							.get(paramId));
 				}
 			}
 		}
@@ -271,7 +276,7 @@ public class ApplicationDialog extends Dialog {
 			genParam.setValue("");
 			dataStructure.addGeneratorParameter(genParam);
 		}
-		
+
 	}
 
 	private Set<TreeItem> collectGenerators() {
@@ -297,7 +302,8 @@ public class ApplicationDialog extends Dialog {
 	private void configureGeneratorOptions(Configuration configuration) {
 		Configuration conf = getCurrentConfiguration();
 		for (ConfigurationParameters confParam : conf.getParameters()) {
-			GeneratorParameter genParam = dataStructure.getParamMatching(confParam.getKey());
+			GeneratorParameter genParam = dataStructure
+					.getParamMatching(confParam.getKey());
 			if (genParam != null) {
 				genParam.setValue(confParam.getValue());
 			}
@@ -429,7 +435,8 @@ public class ApplicationDialog extends Dialog {
 		documentationText = new Browser(container, SWT.NONE);
 		documentationText.setBounds(493, 185, 294, 318);
 
-		final TabFolder tabFolder = new TabFolder(container, SWT.NONE);
+		tabFolder = new TabFolder(container, SWT.NONE);
+		
 		tabFolder.setBounds(15, 39, 472, 464);
 
 		final TabItem globalConfigurationTabItem = new TabItem(tabFolder,
@@ -437,6 +444,13 @@ public class ApplicationDialog extends Dialog {
 		globalConfigurationTabItem.setText("Global Configuration");
 
 		final Composite composite_1 = new Composite(tabFolder, SWT.NONE);
+		composite_1.addMouseListener(new MouseAdapter() {
+			public void mouseDown(final MouseEvent e) {
+				if (!tabFolder.getEnabled()) {
+					showAlert("No Configuration", "You must create a configuration to edit it.");
+				}
+			}
+		});
 		globalConfigurationTabItem.setControl(composite_1);
 
 		viewer = new TreeViewer(composite_1, SWT.BORDER);
@@ -722,8 +736,11 @@ public class ApplicationDialog extends Dialog {
 			}
 		}
 
-		if (configurationList.getItemCount() > 0)
+		if (configurationList.getItemCount() > 0) {
 			configurationList.select(0);
+		} else {
+			tabFolder.setEnabled(false);
+		}
 
 		final Label listOfConfigurayionsLabel = new Label(container, SWT.NONE);
 		listOfConfigurayionsLabel.setBounds(5, 13, 136, 23);
@@ -780,6 +797,7 @@ public class ApplicationDialog extends Dialog {
 				addStaticParameters(config);
 				application.getElements().add(config);
 				modificationMade();
+				tabFolder.setEnabled(true);
 				refreshConfiguration();
 			}
 
@@ -837,6 +855,9 @@ public class ApplicationDialog extends Dialog {
 					}
 				}
 				modificationMade();
+				if (configurationList.getItemCount() == 0) {
+					tabFolder.setEnabled(false);
+				}
 				refreshConfiguration();
 			}
 		});
@@ -862,7 +883,7 @@ public class ApplicationDialog extends Dialog {
 		application.getElements().removeAll(toRemove);
 	}
 
-	private void refreshDataStructure(){
+	private void refreshDataStructure() {
 		if (generatorParametersViewer != null) {
 			generatorParameterContentProvider.setDataStructure(dataStructure);
 			generatorParameterLabelProvider.setDataStructure(dataStructure);
@@ -870,7 +891,7 @@ public class ApplicationDialog extends Dialog {
 			generatorParametersViewer.setInput(dataStructure);
 		}
 	}
-	
+
 	/**
 	 * Create the TableViewer
 	 */
@@ -893,13 +914,19 @@ public class ApplicationDialog extends Dialog {
 		// Assign the cell editors to the viewer
 		generatorParametersViewer.setCellEditors(editors);
 		// Set the cell modifier for the viewer
-		generatorParameterContentProvider = new GeneratorParameterContentProvider(dataStructure);
-		generatorParametersViewer.setContentProvider(generatorParameterContentProvider);
-		generatorParameterLabelProvider = new GeneratorParameterLabelProvider(dataStructure);
-		generatorParametersViewer.setLabelProvider(generatorParameterLabelProvider);
-		generatorParameterCellModifier = new GeneratorParameterCellModifier(dataStructure, columnNames, generatorParametersViewer);
-		generatorParametersViewer.setCellModifier(generatorParameterCellModifier);
-		
+		generatorParameterContentProvider = new GeneratorParameterContentProvider(
+				dataStructure);
+		generatorParametersViewer
+				.setContentProvider(generatorParameterContentProvider);
+		generatorParameterLabelProvider = new GeneratorParameterLabelProvider(
+				dataStructure);
+		generatorParametersViewer
+				.setLabelProvider(generatorParameterLabelProvider);
+		generatorParameterCellModifier = new GeneratorParameterCellModifier(
+				dataStructure, columnNames, generatorParametersViewer);
+		generatorParametersViewer
+				.setCellModifier(generatorParameterCellModifier);
+
 		generatorParametersViewer.setInput(dataStructure);
 		generatorParametersViewer.refresh();
 
@@ -1206,7 +1233,8 @@ public class ApplicationDialog extends Dialog {
 	protected void buttonPressed(int buttonId) {
 		if (buttonId == IDialogConstants.CLOSE_ID) {
 			if (applicationModified) {
-				int result = showConfirmation("Configuration Modified.", "Configuration modified, do you want to save it before closing?");
+				int result = showConfirmation("Configuration Modified.",
+						"Configuration modified, do you want to save it before closing?");
 				if (result == SWT.OK) {
 					saveData();
 				}
@@ -1219,22 +1247,21 @@ public class ApplicationDialog extends Dialog {
 		}
 		if (buttonId == GEN_ID) {
 			if (applicationModified) {
-				int result = showConfirmation("Configuration Modified.", "Configuration modified, do you want to save it before generating?");
+				int result = showConfirmation("Configuration Modified.",
+						"Configuration modified, do you want to save it before generating?");
 				if (result == SWT.OK) {
 					saveData();
 				}
 			}
 			GeneratePopUp generationPopUp = new GeneratePopUp(Display
-					.getDefault().getActiveShell(),getCurrentConfiguration(), staticFieldsName,
-					ApplicationUtil.getModels(application));
+					.getDefault().getActiveShell(), getCurrentConfiguration(),
+					staticFieldsName, ApplicationUtil.getModels(application));
 			generationPopUp.open();
 			return;
 		}
-		
+
 		super.buttonPressed(buttonId);
 	}
-
-	
 
 	protected void saveData() {
 		ResourceSet resourceSet = new ResourceSetImpl();
@@ -1280,14 +1307,24 @@ public class ApplicationDialog extends Dialog {
 			applicationModified = true;
 		}
 	}
-	
+
 	public static int showConfirmation(String title, String message) {
 		int style = 0;
 		style |= SWT.YES | SWT.NO;
-		MessageBox mb = new MessageBox(Display.getCurrent().getActiveShell(), style	);
+		MessageBox mb = new MessageBox(Display.getCurrent().getActiveShell(),
+				style);
 		mb.setText(title);
-        mb.setMessage(message);
-        int val = mb.open();
-        return val;
+		mb.setMessage(message);
+		int val = mb.open();
+		return val;
+	}
+
+	public static void showAlert(String title, String message) {
+		int style = 0;
+		style |= SWT.OK;
+		MessageBox mb = new MessageBox(Display.getCurrent().getActiveShell(),
+				style);
+		mb.setText(title);
+		mb.setMessage(message);
 	}
 }
