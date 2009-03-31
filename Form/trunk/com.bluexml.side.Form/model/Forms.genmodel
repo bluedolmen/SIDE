@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.bluexml.side.Form/src"
+    modelPluginID="com.bluexml.side.Form" templateDirectory="/com.bluexml.side.Util.MetaModel.validate/templates"
+    dynamicTemplates="true" redirection="" modelName="Forms" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false" usedGenPackages="../../com.bluexml.side.Class/model/Class.genmodel#//clazz ../../com.bluexml.side.Common/model/Common.genmodel#//common">
+  <foreignModel>Forms.ecore</foreignModel>
+  <modelPluginVariables>OCL_ECORE=org.eclipse.ocl.ecore</modelPluginVariables>
+  <genPackages prefix="form" basePackage="com.bluexml.side" disposableProviderFactory="true"
+      fileExtensions="form" ecorePackage="Forms.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Forms.ecore#//FormGroupPresentationType">
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//FormGroupPresentationType/auto"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//FormGroupPresentationType/horizontal"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//FormGroupPresentationType/vertical"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//FormGroupPresentationType/Tabbed"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//FormGroupPresentationType/borderless"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Forms.ecore#//TextWidgetType">
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//TextWidgetType/TextArea"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//TextWidgetType/RichTextEditor"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Forms.ecore#//ChoiceWidgetType">
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//ChoiceWidgetType/Select"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//ChoiceWidgetType/Inline"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Forms.ecore#//ReferenceWidgetType">
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//ReferenceWidgetType/AssociationClassInline"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//ReferenceWidgetType/AssociationClassSelect"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//ReferenceWidgetType/Inline"/>
+    </genEnums>
+    <genClasses ecoreClass="Forms.ecore#//Form">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Forms.ecore#//Form/root"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Form/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Forms.ecore#//FormElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FormElement/label"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FormElement/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FormElement/help_text"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Forms.ecore#//FormElement/ref"/>
+    </genClasses>
+    <genClasses ecoreClass="Forms.ecore#//FormGroup">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Forms.ecore#//FormGroup/children"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FormGroup/presentation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Forms.ecore#//FormGroup/disabled"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Forms.ecore#//Field">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/mandatory"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/hidden"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/error_messages"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/initial"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/disabled"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/fieldSize"/>
+    </genClasses>
+    <genClasses ecoreClass="Forms.ecore#//BooleanField"/>
+    <genClasses ecoreClass="Forms.ecore#//CharField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//CharField/min_length"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//CharField/max_length"/>
+    </genClasses>
+    <genClasses ecoreClass="Forms.ecore#//DateField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//DateField/input_formats"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//DateField/min_date"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//DateField/max_date"/>
+    </genClasses>
+    <genClasses ecoreClass="Forms.ecore#//DateTimeField"/>
+    <genClasses ecoreClass="Forms.ecore#//DecimalField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//DecimalField/min_value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//DecimalField/max_value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//DecimalField/max_digits"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//DecimalField/decimal_places"/>
+    </genClasses>
+    <genClasses ecoreClass="Forms.ecore#//FloatField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FloatField/min_value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FloatField/max_value"/>
+    </genClasses>
+    <genClasses ecoreClass="Forms.ecore#//IntegerField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//IntegerField/min_value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//IntegerField/max_value"/>
+    </genClasses>
+    <genClasses ecoreClass="Forms.ecore#//ModelChoiceField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//ModelChoiceField/min_bound"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//ModelChoiceField/max_bound"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Forms.ecore#//ModelChoiceField/target"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Forms.ecore#//ModelChoiceField/association_formClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//ModelChoiceField/widget"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//ModelChoiceField/show_actions"/>
+    </genClasses>
+    <genClasses ecoreClass="Forms.ecore#//EmailField"/>
+    <genClasses ecoreClass="Forms.ecore#//FileField"/>
+    <genClasses ecoreClass="Forms.ecore#//ImageField"/>
+    <genClasses ecoreClass="Forms.ecore#//TimeField"/>
+    <genClasses ecoreClass="Forms.ecore#//URLField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//URLField/verify_exists"/>
+    </genClasses>
+    <genClasses ecoreClass="Forms.ecore#//PhoneNumberField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//PhoneNumberField/input_formats"/>
+    </genClasses>
+    <genClasses ecoreClass="Forms.ecore#//FormAspect"/>
+    <genClasses ecoreClass="Forms.ecore#//FormClass"/>
+    <genClasses ecoreClass="Forms.ecore#//Reference"/>
+    <genClasses ecoreClass="Forms.ecore#//FormCollection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Forms.ecore#//FormCollection/forms"/>
+    </genClasses>
+    <genClasses ecoreClass="Forms.ecore#//ChoiceField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//ChoiceField/min_bound"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//ChoiceField/max_bound"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//ChoiceField/widget"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//ChoiceField/multiple"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//ChoiceField/filterParent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//ChoiceField/filterData"/>
+    </genClasses>
+    <genClasses ecoreClass="Forms.ecore#//RegexField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//RegexField/regex"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Forms.ecore#//ClassReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Forms.ecore#//ClassReference/real_class"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Forms.ecore#//ClassReference/association_class"/>
+    </genClasses>
+    <genClasses ecoreClass="Forms.ecore#//PasswordField"/>
+    <genClasses ecoreClass="Forms.ecore#//VirtualField">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Forms.ecore#//VirtualField/link"/>
+    </genClasses>
+    <genClasses ecoreClass="Forms.ecore#//ActionField"/>
+    <genClasses ecoreClass="Forms.ecore#//TextField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//TextField/widget"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
