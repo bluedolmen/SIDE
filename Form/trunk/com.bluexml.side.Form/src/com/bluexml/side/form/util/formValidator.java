@@ -21,9 +21,9 @@ import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.OCL;
 
-import com.bluexml.side.KerblueForms.ChoiceField;
-import com.bluexml.side.KerblueForms.ChoiceWidgetType;
+
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
+import com.bluexml.side.form.*;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.BooleanField;
 import com.bluexml.side.form.CharField;

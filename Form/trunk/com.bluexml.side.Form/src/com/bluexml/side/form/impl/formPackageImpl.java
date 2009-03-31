@@ -15,12 +15,12 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import com.bluexml.side.KerblueForms.ChoiceField;
-import com.bluexml.side.KerblueForms.ChoiceWidgetType;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.BooleanField;
 import com.bluexml.side.form.CharField;
+import com.bluexml.side.form.ChoiceField;
+import com.bluexml.side.form.ChoiceWidgetType;
 import com.bluexml.side.form.ClassReference;
 import com.bluexml.side.form.DateField;
 import com.bluexml.side.form.DateTimeField;
@@ -781,6 +781,15 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getModelChoiceField_Show_actions() {
+		return (EAttribute)modelChoiceFieldEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEmailField() {
 		return emailFieldEClass;
 	}
@@ -907,7 +916,7 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getChoiceField_Choices() {
+	public EAttribute getChoiceField_Min_bound() {
 		return (EAttribute)choiceFieldEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -916,7 +925,7 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getChoiceField_Min_bound() {
+	public EAttribute getChoiceField_Max_bound() {
 		return (EAttribute)choiceFieldEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -925,7 +934,7 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getChoiceField_Max_bound() {
+	public EAttribute getChoiceField_Widget() {
 		return (EAttribute)choiceFieldEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -934,8 +943,26 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getChoiceField_Widget() {
+	public EAttribute getChoiceField_Multiple() {
 		return (EAttribute)choiceFieldEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getChoiceField_FilterParent() {
+		return (EAttribute)choiceFieldEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getChoiceField_FilterData() {
+		return (EAttribute)choiceFieldEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1157,6 +1184,7 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 		createEReference(modelChoiceFieldEClass, MODEL_CHOICE_FIELD__TARGET);
 		createEReference(modelChoiceFieldEClass, MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS);
 		createEAttribute(modelChoiceFieldEClass, MODEL_CHOICE_FIELD__WIDGET);
+		createEAttribute(modelChoiceFieldEClass, MODEL_CHOICE_FIELD__SHOW_ACTIONS);
 
 		emailFieldEClass = createEClass(EMAIL_FIELD);
 
@@ -1182,10 +1210,12 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 		createEReference(formCollectionEClass, FORM_COLLECTION__FORMS);
 
 		choiceFieldEClass = createEClass(CHOICE_FIELD);
-		createEAttribute(choiceFieldEClass, CHOICE_FIELD__CHOICES);
 		createEAttribute(choiceFieldEClass, CHOICE_FIELD__MIN_BOUND);
 		createEAttribute(choiceFieldEClass, CHOICE_FIELD__MAX_BOUND);
 		createEAttribute(choiceFieldEClass, CHOICE_FIELD__WIDGET);
+		createEAttribute(choiceFieldEClass, CHOICE_FIELD__MULTIPLE);
+		createEAttribute(choiceFieldEClass, CHOICE_FIELD__FILTER_PARENT);
+		createEAttribute(choiceFieldEClass, CHOICE_FIELD__FILTER_DATA);
 
 		regexFieldEClass = createEClass(REGEX_FIELD);
 		createEAttribute(regexFieldEClass, REGEX_FIELD__REGEX);
@@ -1332,6 +1362,7 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 		initEReference(getModelChoiceField_Target(), this.getFormClass(), null, "target", null, 0, -1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelChoiceField_Association_formClass(), this.getFormClass(), null, "association_formClass", null, 0, -1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getModelChoiceField_Widget(), this.getReferenceWidgetType(), "widget", null, 0, 1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModelChoiceField_Show_actions(), ecorePackage.getEBoolean(), "show_actions", "true", 0, 1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(emailFieldEClass, EmailField.class, "EmailField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1357,16 +1388,18 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 		initEReference(getFormCollection_Forms(), this.getForm(), null, "forms", null, 0, -1, FormCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(choiceFieldEClass, ChoiceField.class, "ChoiceField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getChoiceField_Choices(), ecorePackage.getEString(), "choices", null, 0, -1, ChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getChoiceField_Min_bound(), ecorePackage.getEInt(), "min_bound", null, 0, 1, ChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getChoiceField_Max_bound(), ecorePackage.getEInt(), "max_bound", null, 0, 1, ChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getChoiceField_Widget(), this.getChoiceWidgetType(), "widget", null, 0, 1, ChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getChoiceField_Multiple(), ecorePackage.getEBoolean(), "multiple", null, 0, 1, ChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getChoiceField_FilterParent(), ecorePackage.getEString(), "filterParent", null, 0, 1, ChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getChoiceField_FilterData(), ecorePackage.getEString(), "filterData", null, 0, 1, ChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(regexFieldEClass, RegexField.class, "RegexField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRegexField_Regex(), ecorePackage.getEString(), "regex", null, 0, 1, RegexField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classReferenceEClass, ClassReference.class, "ClassReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getClassReference_Real_class(), theClazzPackage.getClazz(), null, "real_class", null, 0, 1, ClassReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassReference_Real_class(), this.getCharField(), null, "real_class", null, 0, 1, ClassReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassReference_Association_class(), theClazzPackage.getClazz(), null, "association_class", null, 0, 1, ClassReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(passwordFieldEClass, PasswordField.class, "PasswordField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1385,14 +1418,20 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 		addEEnumLiteral(formGroupPresentationTypeEEnum, FormGroupPresentationType.HORIZONTAL);
 		addEEnumLiteral(formGroupPresentationTypeEEnum, FormGroupPresentationType.VERTICAL);
 		addEEnumLiteral(formGroupPresentationTypeEEnum, FormGroupPresentationType.TABBED);
+		addEEnumLiteral(formGroupPresentationTypeEEnum, FormGroupPresentationType.BORDERLESS);
 
 		initEEnum(textWidgetTypeEEnum, TextWidgetType.class, "TextWidgetType");
 		addEEnumLiteral(textWidgetTypeEEnum, TextWidgetType.TEXT_AREA);
 		addEEnumLiteral(textWidgetTypeEEnum, TextWidgetType.RICH_TEXT_EDITOR);
 
+		initEEnum(choiceWidgetTypeEEnum, ChoiceWidgetType.class, "ChoiceWidgetType");
+		addEEnumLiteral(choiceWidgetTypeEEnum, ChoiceWidgetType.SELECT);
+		addEEnumLiteral(choiceWidgetTypeEEnum, ChoiceWidgetType.INLINE);
+
 		initEEnum(referenceWidgetTypeEEnum, ReferenceWidgetType.class, "ReferenceWidgetType");
 		addEEnumLiteral(referenceWidgetTypeEEnum, ReferenceWidgetType.ASSOCIATION_CLASS_INLINE);
 		addEEnumLiteral(referenceWidgetTypeEEnum, ReferenceWidgetType.ASSOCIATION_CLASS_SELECT);
+		addEEnumLiteral(referenceWidgetTypeEEnum, ReferenceWidgetType.INLINE);
 
 		// Create resource
 		createResource(eNS_URI);

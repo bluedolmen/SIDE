@@ -8,7 +8,6 @@ package com.bluexml.side.form;
 
 import org.eclipse.emf.ecore.EFactory;
 
-import com.bluexml.side.KerblueForms.ChoiceField;
 
 /**
  * <!-- begin-user-doc -->

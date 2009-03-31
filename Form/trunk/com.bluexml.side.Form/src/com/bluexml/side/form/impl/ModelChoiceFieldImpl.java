@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.form.CharField;
 import com.bluexml.side.form.ClassReference;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.ModelChoiceField;
@@ -38,6 +39,7 @@ import com.bluexml.side.form.formPackage;
  *   <li>{@link com.bluexml.side.form.impl.ModelChoiceFieldImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.ModelChoiceFieldImpl#getAssociation_formClass <em>Association form Class</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.ModelChoiceFieldImpl#getWidget <em>Widget</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.ModelChoiceFieldImpl#isShow_actions <em>Show actions</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,7 +54,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * @generated
 	 * @ordered
 	 */
-	protected Clazz real_class;
+	protected CharField real_class;
 
 	/**
 	 * The cached value of the '{@link #getAssociation_class() <em>Association class</em>}' reference.
@@ -145,6 +147,26 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	protected ReferenceWidgetType widget = WIDGET_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #isShow_actions() <em>Show actions</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isShow_actions()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean SHOW_ACTIONS_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isShow_actions() <em>Show actions</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isShow_actions()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean show_actions = SHOW_ACTIONS_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -168,10 +190,10 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Clazz getReal_class() {
+	public CharField getReal_class() {
 		if (real_class != null && real_class.eIsProxy()) {
 			InternalEObject oldReal_class = (InternalEObject)real_class;
-			real_class = (Clazz)eResolveProxy(oldReal_class);
+			real_class = (CharField)eResolveProxy(oldReal_class);
 			if (real_class != oldReal_class) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, formPackage.MODEL_CHOICE_FIELD__REAL_CLASS, oldReal_class, real_class));
@@ -185,7 +207,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Clazz basicGetReal_class() {
+	public CharField basicGetReal_class() {
 		return real_class;
 	}
 
@@ -194,8 +216,8 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setReal_class(Clazz newReal_class) {
-		Clazz oldReal_class = real_class;
+	public void setReal_class(CharField newReal_class) {
+		CharField oldReal_class = real_class;
 		real_class = newReal_class;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.MODEL_CHOICE_FIELD__REAL_CLASS, oldReal_class, real_class));
@@ -331,6 +353,27 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isShow_actions() {
+		return show_actions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setShow_actions(boolean newShow_actions) {
+		boolean oldShow_actions = show_actions;
+		show_actions = newShow_actions;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS, oldShow_actions, show_actions));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -350,6 +393,8 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 				return getAssociation_formClass();
 			case formPackage.MODEL_CHOICE_FIELD__WIDGET:
 				return getWidget();
+			case formPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
+				return isShow_actions() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -364,7 +409,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case formPackage.MODEL_CHOICE_FIELD__REAL_CLASS:
-				setReal_class((Clazz)newValue);
+				setReal_class((CharField)newValue);
 				return;
 			case formPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS:
 				setAssociation_class((Clazz)newValue);
@@ -386,6 +431,9 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 			case formPackage.MODEL_CHOICE_FIELD__WIDGET:
 				setWidget((ReferenceWidgetType)newValue);
 				return;
+			case formPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
+				setShow_actions(((Boolean)newValue).booleanValue());
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -399,7 +447,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case formPackage.MODEL_CHOICE_FIELD__REAL_CLASS:
-				setReal_class((Clazz)null);
+				setReal_class((CharField)null);
 				return;
 			case formPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS:
 				setAssociation_class((Clazz)null);
@@ -418,6 +466,9 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 				return;
 			case formPackage.MODEL_CHOICE_FIELD__WIDGET:
 				setWidget(WIDGET_EDEFAULT);
+				return;
+			case formPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
+				setShow_actions(SHOW_ACTIONS_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -445,6 +496,8 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 				return association_formClass != null && !association_formClass.isEmpty();
 			case formPackage.MODEL_CHOICE_FIELD__WIDGET:
 				return widget != WIDGET_EDEFAULT;
+			case formPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
+				return show_actions != SHOW_ACTIONS_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -499,6 +552,8 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 		result.append(max_bound);
 		result.append(", widget: ");
 		result.append(widget);
+		result.append(", show_actions: ");
+		result.append(show_actions);
 		result.append(')');
 		return result.toString();
 	}

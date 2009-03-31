@@ -6,7 +6,7 @@
  */
 package com.bluexml.side.form.util;
 
-import com.bluexml.side.KerblueForms.ChoiceField;
+
 import com.bluexml.side.form.*;
 
 import org.eclipse.emf.common.notify.Adapter;

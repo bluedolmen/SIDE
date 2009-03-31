@@ -58,7 +58,15 @@ public enum FormGroupPresentationType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	TABBED(3, "Tabbed", "Tabbed");
+	TABBED(3, "Tabbed", "Tabbed"), /**
+	 * The '<em><b>Borderless</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BORDERLESS_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	BORDERLESS(4, "borderless", "borderless");
 
 	/**
 	 * The '<em><b>Auto</b></em>' literal value.
@@ -121,6 +129,21 @@ public enum FormGroupPresentationType implements Enumerator {
 	public static final int TABBED_VALUE = 3;
 
 	/**
+	 * The '<em><b>Borderless</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Borderless</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #BORDERLESS
+	 * @model name="borderless"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BORDERLESS_VALUE = 4;
+
+	/**
 	 * An array of all the '<em><b>Form Group Presentation Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -132,6 +155,7 @@ public enum FormGroupPresentationType implements Enumerator {
 			HORIZONTAL,
 			VERTICAL,
 			TABBED,
+			BORDERLESS,
 		};
 
 	/**
@@ -186,6 +210,7 @@ public enum FormGroupPresentationType implements Enumerator {
 			case HORIZONTAL_VALUE: return HORIZONTAL;
 			case VERTICAL_VALUE: return VERTICAL;
 			case TABBED_VALUE: return TABBED;
+			case BORDERLESS_VALUE: return BORDERLESS;
 		}
 		return null;
 	}

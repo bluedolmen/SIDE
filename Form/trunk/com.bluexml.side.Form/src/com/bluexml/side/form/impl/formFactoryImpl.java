@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.form.impl;
 
+import com.bluexml.side.form.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -13,11 +14,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import com.bluexml.side.KerblueForms.ChoiceField;
-import com.bluexml.side.KerblueForms.impl.ChoiceFieldImpl;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.BooleanField;
 import com.bluexml.side.form.CharField;
+import com.bluexml.side.form.ChoiceField;
 import com.bluexml.side.form.DateField;
 import com.bluexml.side.form.DateTimeField;
 import com.bluexml.side.form.DecimalField;
@@ -133,6 +133,8 @@ public class formFactoryImpl extends EFactoryImpl implements formFactory {
 				return createFormGroupPresentationTypeFromString(eDataType, initialValue);
 			case formPackage.TEXT_WIDGET_TYPE:
 				return createTextWidgetTypeFromString(eDataType, initialValue);
+			case formPackage.CHOICE_WIDGET_TYPE:
+				return createChoiceWidgetTypeFromString(eDataType, initialValue);
 			case formPackage.REFERENCE_WIDGET_TYPE:
 				return createReferenceWidgetTypeFromString(eDataType, initialValue);
 			default:
@@ -461,6 +463,17 @@ public class formFactoryImpl extends EFactoryImpl implements formFactory {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ChoiceWidgetType createChoiceWidgetTypeFromString(EDataType eDataType, String initialValue) {
+		ChoiceWidgetType result = ChoiceWidgetType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

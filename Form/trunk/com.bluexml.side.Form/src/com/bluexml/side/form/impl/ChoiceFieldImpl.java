@@ -6,12 +6,14 @@
  */
 package com.bluexml.side.form.impl;
 
+import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import com.bluexml.side.KerblueForms.ChoiceField;
-import com.bluexml.side.KerblueForms.ChoiceWidgetType;
+import org.eclipse.ocl.ecore.OCL;
+import com.bluexml.side.form.ChoiceField;
+import com.bluexml.side.form.ChoiceWidgetType;
 import com.bluexml.side.form.formPackage;
 
 /**
@@ -21,12 +23,12 @@ import com.bluexml.side.form.formPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link KerblueForms.impl.ChoiceFieldImpl#getMin_bound <em>Min bound</em>}</li>
- *   <li>{@link KerblueForms.impl.ChoiceFieldImpl#getMax_bound <em>Max bound</em>}</li>
- *   <li>{@link KerblueForms.impl.ChoiceFieldImpl#getWidget <em>Widget</em>}</li>
- *   <li>{@link KerblueForms.impl.ChoiceFieldImpl#isMultiple <em>Multiple</em>}</li>
- *   <li>{@link KerblueForms.impl.ChoiceFieldImpl#getFilterParent <em>Filter Parent</em>}</li>
- *   <li>{@link KerblueForms.impl.ChoiceFieldImpl#getFilterData <em>Filter Data</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.ChoiceFieldImpl#getMin_bound <em>Min bound</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.ChoiceFieldImpl#getMax_bound <em>Max bound</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.ChoiceFieldImpl#getWidget <em>Widget</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.ChoiceFieldImpl#isMultiple <em>Multiple</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.ChoiceFieldImpl#getFilterParent <em>Filter Parent</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.ChoiceFieldImpl#getFilterData <em>Filter Data</em>}</li>
  * </ul>
  * </p>
  *
@@ -417,20 +419,24 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (min_bound: "); //$NON-NLS-1$
+		result.append(" (min_bound: ");
 		result.append(min_bound);
-		result.append(", max_bound: "); //$NON-NLS-1$
+		result.append(", max_bound: ");
 		result.append(max_bound);
-		result.append(", widget: "); //$NON-NLS-1$
+		result.append(", widget: ");
 		result.append(widget);
-		result.append(", multiple: "); //$NON-NLS-1$
+		result.append(", multiple: ");
 		result.append(multiple);
-		result.append(", filterParent: "); //$NON-NLS-1$
+		result.append(", filterParent: ");
 		result.append(filterParent);
-		result.append(", filterData: "); //$NON-NLS-1$
+		result.append(", filterData: ");
 		result.append(filterData);
 		result.append(')');
 		return result.toString();
 	}
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+
+	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 
 } //ChoiceFieldImpl

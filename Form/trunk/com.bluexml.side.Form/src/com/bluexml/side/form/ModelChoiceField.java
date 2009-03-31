@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.bluexml.side.form.ModelChoiceField#getTarget <em>Target</em>}</li>
  *   <li>{@link com.bluexml.side.form.ModelChoiceField#getAssociation_formClass <em>Association form Class</em>}</li>
  *   <li>{@link com.bluexml.side.form.ModelChoiceField#getWidget <em>Widget</em>}</li>
+ *   <li>{@link com.bluexml.side.form.ModelChoiceField#isShow_actions <em>Show actions</em>}</li>
  * </ul>
  * </p>
  *
@@ -141,5 +142,32 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * @generated
 	 */
 	void setWidget(ReferenceWidgetType value);
+
+	/**
+	 * Returns the value of the '<em><b>Show actions</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Show actions</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Show actions</em>' attribute.
+	 * @see #setShow_actions(boolean)
+	 * @see com.bluexml.side.form.formPackage#getModelChoiceField_Show_actions()
+	 * @model default="true"
+	 * @generated
+	 */
+	boolean isShow_actions();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.form.ModelChoiceField#isShow_actions <em>Show actions</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Show actions</em>' attribute.
+	 * @see #isShow_actions()
+	 * @generated
+	 */
+	void setShow_actions(boolean value);
 
 } // ModelChoiceField

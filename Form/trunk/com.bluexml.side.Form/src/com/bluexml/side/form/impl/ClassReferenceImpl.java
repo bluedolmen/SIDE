@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.form.CharField;
 import com.bluexml.side.form.ClassReference;
 import com.bluexml.side.form.formPackage;
 
@@ -41,7 +42,7 @@ public abstract class ClassReferenceImpl extends EObjectImpl implements ClassRef
 	 * @generated
 	 * @ordered
 	 */
-	protected Clazz real_class;
+	protected CharField real_class;
 
 	/**
 	 * The cached value of the '{@link #getAssociation_class() <em>Association class</em>}' reference.
@@ -77,10 +78,10 @@ public abstract class ClassReferenceImpl extends EObjectImpl implements ClassRef
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Clazz getReal_class() {
+	public CharField getReal_class() {
 		if (real_class != null && real_class.eIsProxy()) {
 			InternalEObject oldReal_class = (InternalEObject)real_class;
-			real_class = (Clazz)eResolveProxy(oldReal_class);
+			real_class = (CharField)eResolveProxy(oldReal_class);
 			if (real_class != oldReal_class) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, formPackage.CLASS_REFERENCE__REAL_CLASS, oldReal_class, real_class));
@@ -94,7 +95,7 @@ public abstract class ClassReferenceImpl extends EObjectImpl implements ClassRef
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Clazz basicGetReal_class() {
+	public CharField basicGetReal_class() {
 		return real_class;
 	}
 
@@ -103,8 +104,8 @@ public abstract class ClassReferenceImpl extends EObjectImpl implements ClassRef
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setReal_class(Clazz newReal_class) {
-		Clazz oldReal_class = real_class;
+	public void setReal_class(CharField newReal_class) {
+		CharField oldReal_class = real_class;
 		real_class = newReal_class;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.CLASS_REFERENCE__REAL_CLASS, oldReal_class, real_class));
@@ -175,7 +176,7 @@ public abstract class ClassReferenceImpl extends EObjectImpl implements ClassRef
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case formPackage.CLASS_REFERENCE__REAL_CLASS:
-				setReal_class((Clazz)newValue);
+				setReal_class((CharField)newValue);
 				return;
 			case formPackage.CLASS_REFERENCE__ASSOCIATION_CLASS:
 				setAssociation_class((Clazz)newValue);
@@ -193,7 +194,7 @@ public abstract class ClassReferenceImpl extends EObjectImpl implements ClassRef
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case formPackage.CLASS_REFERENCE__REAL_CLASS:
-				setReal_class((Clazz)null);
+				setReal_class((CharField)null);
 				return;
 			case formPackage.CLASS_REFERENCE__ASSOCIATION_CLASS:
 				setAssociation_class((Clazz)null);

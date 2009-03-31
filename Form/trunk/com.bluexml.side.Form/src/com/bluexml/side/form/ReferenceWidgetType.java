@@ -40,7 +40,15 @@ public enum ReferenceWidgetType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	ASSOCIATION_CLASS_SELECT(1, "AssociationClassSelect", "Association Class Select");
+	ASSOCIATION_CLASS_SELECT(1, "AssociationClassSelect", "Association Class Select"), /**
+	 * The '<em><b>Inline</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #INLINE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	INLINE(2, "Inline", "Inline");
 
 	/**
 	 * The '<em><b>Association Class Inline</b></em>' literal value.
@@ -73,6 +81,21 @@ public enum ReferenceWidgetType implements Enumerator {
 	public static final int ASSOCIATION_CLASS_SELECT_VALUE = 1;
 
 	/**
+	 * The '<em><b>Inline</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Inline</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #INLINE
+	 * @model name="Inline"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INLINE_VALUE = 2;
+
+	/**
 	 * An array of all the '<em><b>Reference Widget Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -82,6 +105,7 @@ public enum ReferenceWidgetType implements Enumerator {
 		new ReferenceWidgetType[] {
 			ASSOCIATION_CLASS_INLINE,
 			ASSOCIATION_CLASS_SELECT,
+			INLINE,
 		};
 
 	/**
@@ -134,6 +158,7 @@ public enum ReferenceWidgetType implements Enumerator {
 		switch (value) {
 			case ASSOCIATION_CLASS_INLINE_VALUE: return ASSOCIATION_CLASS_INLINE;
 			case ASSOCIATION_CLASS_SELECT_VALUE: return ASSOCIATION_CLASS_SELECT;
+			case INLINE_VALUE: return INLINE;
 		}
 		return null;
 	}

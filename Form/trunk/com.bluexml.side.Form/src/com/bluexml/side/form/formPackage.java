@@ -25,7 +25,7 @@ import com.bluexml.side.form.impl.formPackageImpl;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see KerblueForms.KerblueFormsFactory
+ * @see com.bluexml.side.form.formFactory
  * @model kind="package"
  * @generated
  */
@@ -36,7 +36,7 @@ public interface formPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNAME = "KerblueForms";
+	String eNAME = "form";
 
 	/**
 	 * The package namespace URI.
@@ -44,7 +44,7 @@ public interface formPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.bluexml.com/kerblue/forms";
+	String eNS_URI = "http://www.kerblue.org/form/1.0";
 
 	/**
 	 * The package namespace name.
@@ -52,7 +52,7 @@ public interface formPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "kerblue.com.bluexml.forms";
+	String eNS_PREFIX = "form";
 
 	/**
 	 * The singleton instance of the package.
@@ -60,14 +60,14 @@ public interface formPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	formPackage eINSTANCE = formPackageImpl.init();
+	formPackage eINSTANCE = com.bluexml.side.form.impl.formPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.FormImpl <em>Form</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormImpl <em>Form</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.FormImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getForm()
+	 * @see com.bluexml.side.form.impl.FormImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getForm()
 	 * @generated
 	 */
 	int FORM = 0;
@@ -100,11 +100,11 @@ public interface formPackage extends EPackage {
 	int FORM_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.FormElementImpl <em>Form Element</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormElementImpl <em>Form Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.FormElementImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getFormElement()
+	 * @see com.bluexml.side.form.impl.FormElementImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getFormElement()
 	 * @generated
 	 */
 	int FORM_ELEMENT = 1;
@@ -155,11 +155,11 @@ public interface formPackage extends EPackage {
 	int FORM_ELEMENT_FEATURE_COUNT = 4;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.FormGroupImpl <em>Form Group</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormGroupImpl <em>Form Group</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.FormGroupImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getFormGroup()
+	 * @see com.bluexml.side.form.impl.FormGroupImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getFormGroup()
 	 * @generated
 	 */
 	int FORM_GROUP = 2;
@@ -237,11 +237,11 @@ public interface formPackage extends EPackage {
 	int FORM_GROUP_FEATURE_COUNT = FORM_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.FieldImpl <em>Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.FieldImpl <em>Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.FieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getField()
+	 * @see com.bluexml.side.form.impl.FieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getField()
 	 * @generated
 	 */
 	int FIELD = 3;
@@ -346,11 +346,11 @@ public interface formPackage extends EPackage {
 	int FIELD_FEATURE_COUNT = FORM_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.BooleanFieldImpl <em>Boolean Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.BooleanFieldImpl <em>Boolean Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.BooleanFieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getBooleanField()
+	 * @see com.bluexml.side.form.impl.BooleanFieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getBooleanField()
 	 * @generated
 	 */
 	int BOOLEAN_FIELD = 4;
@@ -455,11 +455,11 @@ public interface formPackage extends EPackage {
 	int BOOLEAN_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.CharFieldImpl <em>Char Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.CharFieldImpl <em>Char Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.CharFieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getCharField()
+	 * @see com.bluexml.side.form.impl.CharFieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getCharField()
 	 * @generated
 	 */
 	int CHAR_FIELD = 5;
@@ -582,11 +582,11 @@ public interface formPackage extends EPackage {
 	int CHAR_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.DateFieldImpl <em>Date Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.DateFieldImpl <em>Date Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.DateFieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getDateField()
+	 * @see com.bluexml.side.form.impl.DateFieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getDateField()
 	 * @generated
 	 */
 	int DATE_FIELD = 6;
@@ -718,11 +718,11 @@ public interface formPackage extends EPackage {
 	int DATE_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.DateTimeFieldImpl <em>Date Time Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.DateTimeFieldImpl <em>Date Time Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.DateTimeFieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getDateTimeField()
+	 * @see com.bluexml.side.form.impl.DateTimeFieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getDateTimeField()
 	 * @generated
 	 */
 	int DATE_TIME_FIELD = 7;
@@ -854,11 +854,11 @@ public interface formPackage extends EPackage {
 	int DATE_TIME_FIELD_FEATURE_COUNT = DATE_FIELD_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.DecimalFieldImpl <em>Decimal Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.DecimalFieldImpl <em>Decimal Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.DecimalFieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getDecimalField()
+	 * @see com.bluexml.side.form.impl.DecimalFieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getDecimalField()
 	 * @generated
 	 */
 	int DECIMAL_FIELD = 8;
@@ -999,11 +999,11 @@ public interface formPackage extends EPackage {
 	int DECIMAL_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.FloatFieldImpl <em>Float Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.FloatFieldImpl <em>Float Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.FloatFieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getFloatField()
+	 * @see com.bluexml.side.form.impl.FloatFieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getFloatField()
 	 * @generated
 	 */
 	int FLOAT_FIELD = 9;
@@ -1126,11 +1126,11 @@ public interface formPackage extends EPackage {
 	int FLOAT_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.IntegerFieldImpl <em>Integer Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.IntegerFieldImpl <em>Integer Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.IntegerFieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getIntegerField()
+	 * @see com.bluexml.side.form.impl.IntegerFieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getIntegerField()
 	 * @generated
 	 */
 	int INTEGER_FIELD = 10;
@@ -1253,11 +1253,11 @@ public interface formPackage extends EPackage {
 	int INTEGER_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.ModelChoiceFieldImpl <em>Model Choice Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.ModelChoiceFieldImpl <em>Model Choice Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.ModelChoiceFieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getModelChoiceField()
+	 * @see com.bluexml.side.form.impl.ModelChoiceFieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getModelChoiceField()
 	 * @generated
 	 */
 	int MODEL_CHOICE_FIELD = 11;
@@ -1434,11 +1434,11 @@ public interface formPackage extends EPackage {
 	int MODEL_CHOICE_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 8;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.EmailFieldImpl <em>Email Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.EmailFieldImpl <em>Email Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.EmailFieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getEmailField()
+	 * @see com.bluexml.side.form.impl.EmailFieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getEmailField()
 	 * @generated
 	 */
 	int EMAIL_FIELD = 12;
@@ -1561,11 +1561,11 @@ public interface formPackage extends EPackage {
 	int EMAIL_FIELD_FEATURE_COUNT = CHAR_FIELD_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.FileFieldImpl <em>File Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.FileFieldImpl <em>File Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.FileFieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getFileField()
+	 * @see com.bluexml.side.form.impl.FileFieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getFileField()
 	 * @generated
 	 */
 	int FILE_FIELD = 13;
@@ -1670,11 +1670,11 @@ public interface formPackage extends EPackage {
 	int FILE_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.ImageFieldImpl <em>Image Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.ImageFieldImpl <em>Image Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.ImageFieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getImageField()
+	 * @see com.bluexml.side.form.impl.ImageFieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getImageField()
 	 * @generated
 	 */
 	int IMAGE_FIELD = 14;
@@ -1779,11 +1779,11 @@ public interface formPackage extends EPackage {
 	int IMAGE_FIELD_FEATURE_COUNT = FILE_FIELD_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.TimeFieldImpl <em>Time Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.TimeFieldImpl <em>Time Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.TimeFieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getTimeField()
+	 * @see com.bluexml.side.form.impl.TimeFieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getTimeField()
 	 * @generated
 	 */
 	int TIME_FIELD = 15;
@@ -1915,11 +1915,11 @@ public interface formPackage extends EPackage {
 	int TIME_FIELD_FEATURE_COUNT = DATE_FIELD_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.URLFieldImpl <em>URL Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.URLFieldImpl <em>URL Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.URLFieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getURLField()
+	 * @see com.bluexml.side.form.impl.URLFieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getURLField()
 	 * @generated
 	 */
 	int URL_FIELD = 16;
@@ -2051,11 +2051,11 @@ public interface formPackage extends EPackage {
 	int URL_FIELD_FEATURE_COUNT = CHAR_FIELD_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.PhoneNumberFieldImpl <em>Phone Number Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.PhoneNumberFieldImpl <em>Phone Number Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.PhoneNumberFieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getPhoneNumberField()
+	 * @see com.bluexml.side.form.impl.PhoneNumberFieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getPhoneNumberField()
 	 * @generated
 	 */
 	int PHONE_NUMBER_FIELD = 17;
@@ -2187,11 +2187,11 @@ public interface formPackage extends EPackage {
 	int PHONE_NUMBER_FIELD_FEATURE_COUNT = CHAR_FIELD_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.FormAspectImpl <em>Form Aspect</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormAspectImpl <em>Form Aspect</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.FormAspectImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getFormAspect()
+	 * @see com.bluexml.side.form.impl.FormAspectImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getFormAspect()
 	 * @generated
 	 */
 	int FORM_ASPECT = 18;
@@ -2269,11 +2269,11 @@ public interface formPackage extends EPackage {
 	int FORM_ASPECT_FEATURE_COUNT = FORM_GROUP_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.FormClassImpl <em>Form Class</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormClassImpl <em>Form Class</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.FormClassImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getFormClass()
+	 * @see com.bluexml.side.form.impl.FormClassImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getFormClass()
 	 * @generated
 	 */
 	int FORM_CLASS = 19;
@@ -2369,11 +2369,11 @@ public interface formPackage extends EPackage {
 	int FORM_CLASS_FEATURE_COUNT = FORM_GROUP_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.ReferenceImpl <em>Reference</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.ReferenceImpl <em>Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.ReferenceImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getReference()
+	 * @see com.bluexml.side.form.impl.ReferenceImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getReference()
 	 * @generated
 	 */
 	int REFERENCE = 20;
@@ -2551,11 +2551,11 @@ public interface formPackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.FormCollectionImpl <em>Form Collection</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormCollectionImpl <em>Form Collection</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.FormCollectionImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getFormCollection()
+	 * @see com.bluexml.side.form.impl.FormCollectionImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getFormCollection()
 	 * @generated
 	 */
 	int FORM_COLLECTION = 21;
@@ -2579,11 +2579,11 @@ public interface formPackage extends EPackage {
 	int FORM_COLLECTION_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.ChoiceFieldImpl <em>Choice Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.ChoiceFieldImpl <em>Choice Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.ChoiceFieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getChoiceField()
+	 * @see com.bluexml.side.form.impl.ChoiceFieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getChoiceField()
 	 * @generated
 	 */
 	int CHOICE_FIELD = 22;
@@ -2742,11 +2742,11 @@ public interface formPackage extends EPackage {
 	int CHOICE_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 6;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.RegexFieldImpl <em>Regex Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.RegexFieldImpl <em>Regex Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.RegexFieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getRegexField()
+	 * @see com.bluexml.side.form.impl.RegexFieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getRegexField()
 	 * @generated
 	 */
 	int REGEX_FIELD = 23;
@@ -2878,11 +2878,11 @@ public interface formPackage extends EPackage {
 	int REGEX_FIELD_FEATURE_COUNT = CHAR_FIELD_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.ClassReferenceImpl <em>Class Reference</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.ClassReferenceImpl <em>Class Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.ClassReferenceImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getClassReference()
+	 * @see com.bluexml.side.form.impl.ClassReferenceImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getClassReference()
 	 * @generated
 	 */
 	int CLASS_REFERENCE = 24;
@@ -2915,11 +2915,11 @@ public interface formPackage extends EPackage {
 	int CLASS_REFERENCE_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.PasswordFieldImpl <em>Password Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.PasswordFieldImpl <em>Password Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.PasswordFieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getPasswordField()
+	 * @see com.bluexml.side.form.impl.PasswordFieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getPasswordField()
 	 * @generated
 	 */
 	int PASSWORD_FIELD = 25;
@@ -3042,11 +3042,11 @@ public interface formPackage extends EPackage {
 	int PASSWORD_FIELD_FEATURE_COUNT = CHAR_FIELD_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.VirtualFieldImpl <em>Virtual Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.VirtualFieldImpl <em>Virtual Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.VirtualFieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getVirtualField()
+	 * @see com.bluexml.side.form.impl.VirtualFieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getVirtualField()
 	 * @generated
 	 */
 	int VIRTUAL_FIELD = 26;
@@ -3160,11 +3160,11 @@ public interface formPackage extends EPackage {
 	int VIRTUAL_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.ActionFieldImpl <em>Action Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.ActionFieldImpl <em>Action Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.ActionFieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getActionField()
+	 * @see com.bluexml.side.form.impl.ActionFieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getActionField()
 	 * @generated
 	 */
 	int ACTION_FIELD = 27;
@@ -3269,11 +3269,11 @@ public interface formPackage extends EPackage {
 	int ACTION_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.impl.TextFieldImpl <em>Text Field</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.TextFieldImpl <em>Text Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.impl.TextFieldImpl
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getTextField()
+	 * @see com.bluexml.side.form.impl.TextFieldImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getTextField()
 	 * @generated
 	 */
 	int TEXT_FIELD = 28;
@@ -3405,901 +3405,901 @@ public interface formPackage extends EPackage {
 	int TEXT_FIELD_FEATURE_COUNT = CHAR_FIELD_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.FormGroupPresentationType <em>Form Group Presentation Type</em>}' enum.
+	 * The meta object id for the '{@link com.bluexml.side.form.FormGroupPresentationType <em>Form Group Presentation Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.FormGroupPresentationType
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getFormGroupPresentationType()
+	 * @see com.bluexml.side.form.FormGroupPresentationType
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getFormGroupPresentationType()
 	 * @generated
 	 */
 	int FORM_GROUP_PRESENTATION_TYPE = 29;
 
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.TextWidgetType <em>Text Widget Type</em>}' enum.
+	 * The meta object id for the '{@link com.bluexml.side.form.TextWidgetType <em>Text Widget Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.TextWidgetType
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getTextWidgetType()
+	 * @see com.bluexml.side.form.TextWidgetType
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getTextWidgetType()
 	 * @generated
 	 */
 	int TEXT_WIDGET_TYPE = 30;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.ChoiceWidgetType <em>Choice Widget Type</em>}' enum.
+	 * The meta object id for the '{@link com.bluexml.side.form.ChoiceWidgetType <em>Choice Widget Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.ChoiceWidgetType
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getChoiceWidgetType()
+	 * @see com.bluexml.side.form.ChoiceWidgetType
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getChoiceWidgetType()
 	 * @generated
 	 */
 	int CHOICE_WIDGET_TYPE = 31;
 
 	/**
-	 * The meta object id for the '{@link KerblueForms.ReferenceWidgetType <em>Reference Widget Type</em>}' enum.
+	 * The meta object id for the '{@link com.bluexml.side.form.ReferenceWidgetType <em>Reference Widget Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see KerblueForms.ReferenceWidgetType
-	 * @see KerblueForms.impl.KerblueFormsPackageImpl#getReferenceWidgetType()
+	 * @see com.bluexml.side.form.ReferenceWidgetType
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getReferenceWidgetType()
 	 * @generated
 	 */
 	int REFERENCE_WIDGET_TYPE = 32;
 
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.Form <em>Form</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.Form <em>Form</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Form</em>'.
-	 * @see KerblueForms.Form
+	 * @see com.bluexml.side.form.Form
 	 * @generated
 	 */
 	EClass getForm();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link KerblueForms.Form#getRoot <em>Root</em>}'.
+	 * Returns the meta object for the containment reference '{@link com.bluexml.side.form.Form#getRoot <em>Root</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Root</em>'.
-	 * @see KerblueForms.Form#getRoot()
+	 * @see com.bluexml.side.form.Form#getRoot()
 	 * @see #getForm()
 	 * @generated
 	 */
 	EReference getForm_Root();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.Form#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.Form#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see KerblueForms.Form#getName()
+	 * @see com.bluexml.side.form.Form#getName()
 	 * @see #getForm()
 	 * @generated
 	 */
 	EAttribute getForm_Name();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.FormElement <em>Form Element</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.FormElement <em>Form Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Form Element</em>'.
-	 * @see KerblueForms.FormElement
+	 * @see com.bluexml.side.form.FormElement
 	 * @generated
 	 */
 	EClass getFormElement();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.FormElement#getLabel <em>Label</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.FormElement#getLabel <em>Label</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Label</em>'.
-	 * @see KerblueForms.FormElement#getLabel()
+	 * @see com.bluexml.side.form.FormElement#getLabel()
 	 * @see #getFormElement()
 	 * @generated
 	 */
 	EAttribute getFormElement_Label();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.FormElement#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.FormElement#getId <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see KerblueForms.FormElement#getId()
+	 * @see com.bluexml.side.form.FormElement#getId()
 	 * @see #getFormElement()
 	 * @generated
 	 */
 	EAttribute getFormElement_Id();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.FormElement#getHelp_text <em>Help text</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.FormElement#getHelp_text <em>Help text</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Help text</em>'.
-	 * @see KerblueForms.FormElement#getHelp_text()
+	 * @see com.bluexml.side.form.FormElement#getHelp_text()
 	 * @see #getFormElement()
 	 * @generated
 	 */
 	EAttribute getFormElement_Help_text();
 
 	/**
-	 * Returns the meta object for the reference '{@link KerblueForms.FormElement#getRef <em>Ref</em>}'.
+	 * Returns the meta object for the reference '{@link com.bluexml.side.form.FormElement#getRef <em>Ref</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Ref</em>'.
-	 * @see KerblueForms.FormElement#getRef()
+	 * @see com.bluexml.side.form.FormElement#getRef()
 	 * @see #getFormElement()
 	 * @generated
 	 */
 	EReference getFormElement_Ref();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.FormGroup <em>Form Group</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.FormGroup <em>Form Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Form Group</em>'.
-	 * @see KerblueForms.FormGroup
+	 * @see com.bluexml.side.form.FormGroup
 	 * @generated
 	 */
 	EClass getFormGroup();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link KerblueForms.FormGroup#getChildren <em>Children</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.form.FormGroup#getChildren <em>Children</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Children</em>'.
-	 * @see KerblueForms.FormGroup#getChildren()
+	 * @see com.bluexml.side.form.FormGroup#getChildren()
 	 * @see #getFormGroup()
 	 * @generated
 	 */
 	EReference getFormGroup_Children();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.FormGroup#getPresentation <em>Presentation</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.FormGroup#getPresentation <em>Presentation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Presentation</em>'.
-	 * @see KerblueForms.FormGroup#getPresentation()
+	 * @see com.bluexml.side.form.FormGroup#getPresentation()
 	 * @see #getFormGroup()
 	 * @generated
 	 */
 	EAttribute getFormGroup_Presentation();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link KerblueForms.FormGroup#getDisabled <em>Disabled</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.form.FormGroup#getDisabled <em>Disabled</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Disabled</em>'.
-	 * @see KerblueForms.FormGroup#getDisabled()
+	 * @see com.bluexml.side.form.FormGroup#getDisabled()
 	 * @see #getFormGroup()
 	 * @generated
 	 */
 	EReference getFormGroup_Disabled();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.Field <em>Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.Field <em>Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Field</em>'.
-	 * @see KerblueForms.Field
+	 * @see com.bluexml.side.form.Field
 	 * @generated
 	 */
 	EClass getField();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.Field#isMandatory <em>Mandatory</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.Field#isMandatory <em>Mandatory</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Mandatory</em>'.
-	 * @see KerblueForms.Field#isMandatory()
+	 * @see com.bluexml.side.form.Field#isMandatory()
 	 * @see #getField()
 	 * @generated
 	 */
 	EAttribute getField_Mandatory();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.Field#isHidden <em>Hidden</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.Field#isHidden <em>Hidden</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Hidden</em>'.
-	 * @see KerblueForms.Field#isHidden()
+	 * @see com.bluexml.side.form.Field#isHidden()
 	 * @see #getField()
 	 * @generated
 	 */
 	EAttribute getField_Hidden();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.Field#getError_messages <em>Error messages</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.Field#getError_messages <em>Error messages</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Error messages</em>'.
-	 * @see KerblueForms.Field#getError_messages()
+	 * @see com.bluexml.side.form.Field#getError_messages()
 	 * @see #getField()
 	 * @generated
 	 */
 	EAttribute getField_Error_messages();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.Field#getInitial <em>Initial</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.Field#getInitial <em>Initial</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Initial</em>'.
-	 * @see KerblueForms.Field#getInitial()
+	 * @see com.bluexml.side.form.Field#getInitial()
 	 * @see #getField()
 	 * @generated
 	 */
 	EAttribute getField_Initial();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.Field#isDisabled <em>Disabled</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.Field#isDisabled <em>Disabled</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Disabled</em>'.
-	 * @see KerblueForms.Field#isDisabled()
+	 * @see com.bluexml.side.form.Field#isDisabled()
 	 * @see #getField()
 	 * @generated
 	 */
 	EAttribute getField_Disabled();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.Field#getFieldSize <em>Field Size</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.Field#getFieldSize <em>Field Size</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Field Size</em>'.
-	 * @see KerblueForms.Field#getFieldSize()
+	 * @see com.bluexml.side.form.Field#getFieldSize()
 	 * @see #getField()
 	 * @generated
 	 */
 	EAttribute getField_FieldSize();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.BooleanField <em>Boolean Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.BooleanField <em>Boolean Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Boolean Field</em>'.
-	 * @see KerblueForms.BooleanField
+	 * @see com.bluexml.side.form.BooleanField
 	 * @generated
 	 */
 	EClass getBooleanField();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.CharField <em>Char Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.CharField <em>Char Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Char Field</em>'.
-	 * @see KerblueForms.CharField
+	 * @see com.bluexml.side.form.CharField
 	 * @generated
 	 */
 	EClass getCharField();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.CharField#getMin_length <em>Min length</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.CharField#getMin_length <em>Min length</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Min length</em>'.
-	 * @see KerblueForms.CharField#getMin_length()
+	 * @see com.bluexml.side.form.CharField#getMin_length()
 	 * @see #getCharField()
 	 * @generated
 	 */
 	EAttribute getCharField_Min_length();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.CharField#getMax_length <em>Max length</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.CharField#getMax_length <em>Max length</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Max length</em>'.
-	 * @see KerblueForms.CharField#getMax_length()
+	 * @see com.bluexml.side.form.CharField#getMax_length()
 	 * @see #getCharField()
 	 * @generated
 	 */
 	EAttribute getCharField_Max_length();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.DateField <em>Date Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.DateField <em>Date Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Date Field</em>'.
-	 * @see KerblueForms.DateField
+	 * @see com.bluexml.side.form.DateField
 	 * @generated
 	 */
 	EClass getDateField();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link KerblueForms.DateField#getInput_formats <em>Input formats</em>}'.
+	 * Returns the meta object for the attribute list '{@link com.bluexml.side.form.DateField#getInput_formats <em>Input formats</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Input formats</em>'.
-	 * @see KerblueForms.DateField#getInput_formats()
+	 * @see com.bluexml.side.form.DateField#getInput_formats()
 	 * @see #getDateField()
 	 * @generated
 	 */
 	EAttribute getDateField_Input_formats();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.DateField#getMin_date <em>Min date</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.DateField#getMin_date <em>Min date</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Min date</em>'.
-	 * @see KerblueForms.DateField#getMin_date()
+	 * @see com.bluexml.side.form.DateField#getMin_date()
 	 * @see #getDateField()
 	 * @generated
 	 */
 	EAttribute getDateField_Min_date();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.DateField#getMax_date <em>Max date</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.DateField#getMax_date <em>Max date</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Max date</em>'.
-	 * @see KerblueForms.DateField#getMax_date()
+	 * @see com.bluexml.side.form.DateField#getMax_date()
 	 * @see #getDateField()
 	 * @generated
 	 */
 	EAttribute getDateField_Max_date();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.DateTimeField <em>Date Time Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.DateTimeField <em>Date Time Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Date Time Field</em>'.
-	 * @see KerblueForms.DateTimeField
+	 * @see com.bluexml.side.form.DateTimeField
 	 * @generated
 	 */
 	EClass getDateTimeField();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.DecimalField <em>Decimal Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.DecimalField <em>Decimal Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Decimal Field</em>'.
-	 * @see KerblueForms.DecimalField
+	 * @see com.bluexml.side.form.DecimalField
 	 * @generated
 	 */
 	EClass getDecimalField();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.DecimalField#getMin_value <em>Min value</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.DecimalField#getMin_value <em>Min value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Min value</em>'.
-	 * @see KerblueForms.DecimalField#getMin_value()
+	 * @see com.bluexml.side.form.DecimalField#getMin_value()
 	 * @see #getDecimalField()
 	 * @generated
 	 */
 	EAttribute getDecimalField_Min_value();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.DecimalField#getMax_value <em>Max value</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.DecimalField#getMax_value <em>Max value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Max value</em>'.
-	 * @see KerblueForms.DecimalField#getMax_value()
+	 * @see com.bluexml.side.form.DecimalField#getMax_value()
 	 * @see #getDecimalField()
 	 * @generated
 	 */
 	EAttribute getDecimalField_Max_value();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.DecimalField#getMax_digits <em>Max digits</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.DecimalField#getMax_digits <em>Max digits</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Max digits</em>'.
-	 * @see KerblueForms.DecimalField#getMax_digits()
+	 * @see com.bluexml.side.form.DecimalField#getMax_digits()
 	 * @see #getDecimalField()
 	 * @generated
 	 */
 	EAttribute getDecimalField_Max_digits();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.DecimalField#getDecimal_places <em>Decimal places</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.DecimalField#getDecimal_places <em>Decimal places</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Decimal places</em>'.
-	 * @see KerblueForms.DecimalField#getDecimal_places()
+	 * @see com.bluexml.side.form.DecimalField#getDecimal_places()
 	 * @see #getDecimalField()
 	 * @generated
 	 */
 	EAttribute getDecimalField_Decimal_places();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.FloatField <em>Float Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.FloatField <em>Float Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Float Field</em>'.
-	 * @see KerblueForms.FloatField
+	 * @see com.bluexml.side.form.FloatField
 	 * @generated
 	 */
 	EClass getFloatField();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.FloatField#getMin_value <em>Min value</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.FloatField#getMin_value <em>Min value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Min value</em>'.
-	 * @see KerblueForms.FloatField#getMin_value()
+	 * @see com.bluexml.side.form.FloatField#getMin_value()
 	 * @see #getFloatField()
 	 * @generated
 	 */
 	EAttribute getFloatField_Min_value();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.FloatField#getMax_value <em>Max value</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.FloatField#getMax_value <em>Max value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Max value</em>'.
-	 * @see KerblueForms.FloatField#getMax_value()
+	 * @see com.bluexml.side.form.FloatField#getMax_value()
 	 * @see #getFloatField()
 	 * @generated
 	 */
 	EAttribute getFloatField_Max_value();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.IntegerField <em>Integer Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.IntegerField <em>Integer Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Integer Field</em>'.
-	 * @see KerblueForms.IntegerField
+	 * @see com.bluexml.side.form.IntegerField
 	 * @generated
 	 */
 	EClass getIntegerField();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.IntegerField#getMin_value <em>Min value</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.IntegerField#getMin_value <em>Min value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Min value</em>'.
-	 * @see KerblueForms.IntegerField#getMin_value()
+	 * @see com.bluexml.side.form.IntegerField#getMin_value()
 	 * @see #getIntegerField()
 	 * @generated
 	 */
 	EAttribute getIntegerField_Min_value();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.IntegerField#getMax_value <em>Max value</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.IntegerField#getMax_value <em>Max value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Max value</em>'.
-	 * @see KerblueForms.IntegerField#getMax_value()
+	 * @see com.bluexml.side.form.IntegerField#getMax_value()
 	 * @see #getIntegerField()
 	 * @generated
 	 */
 	EAttribute getIntegerField_Max_value();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.ModelChoiceField <em>Model Choice Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.ModelChoiceField <em>Model Choice Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Model Choice Field</em>'.
-	 * @see KerblueForms.ModelChoiceField
+	 * @see com.bluexml.side.form.ModelChoiceField
 	 * @generated
 	 */
 	EClass getModelChoiceField();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.ModelChoiceField#getMin_bound <em>Min bound</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.ModelChoiceField#getMin_bound <em>Min bound</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Min bound</em>'.
-	 * @see KerblueForms.ModelChoiceField#getMin_bound()
+	 * @see com.bluexml.side.form.ModelChoiceField#getMin_bound()
 	 * @see #getModelChoiceField()
 	 * @generated
 	 */
 	EAttribute getModelChoiceField_Min_bound();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.ModelChoiceField#getMax_bound <em>Max bound</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.ModelChoiceField#getMax_bound <em>Max bound</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Max bound</em>'.
-	 * @see KerblueForms.ModelChoiceField#getMax_bound()
+	 * @see com.bluexml.side.form.ModelChoiceField#getMax_bound()
 	 * @see #getModelChoiceField()
 	 * @generated
 	 */
 	EAttribute getModelChoiceField_Max_bound();
 
 	/**
-	 * Returns the meta object for the reference list '{@link KerblueForms.ModelChoiceField#getTarget <em>Target</em>}'.
+	 * Returns the meta object for the reference list '{@link com.bluexml.side.form.ModelChoiceField#getTarget <em>Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Target</em>'.
-	 * @see KerblueForms.ModelChoiceField#getTarget()
+	 * @see com.bluexml.side.form.ModelChoiceField#getTarget()
 	 * @see #getModelChoiceField()
 	 * @generated
 	 */
 	EReference getModelChoiceField_Target();
 
 	/**
-	 * Returns the meta object for the reference list '{@link KerblueForms.ModelChoiceField#getAssociation_formClass <em>Association form Class</em>}'.
+	 * Returns the meta object for the reference list '{@link com.bluexml.side.form.ModelChoiceField#getAssociation_formClass <em>Association form Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Association form Class</em>'.
-	 * @see KerblueForms.ModelChoiceField#getAssociation_formClass()
+	 * @see com.bluexml.side.form.ModelChoiceField#getAssociation_formClass()
 	 * @see #getModelChoiceField()
 	 * @generated
 	 */
 	EReference getModelChoiceField_Association_formClass();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.ModelChoiceField#getWidget <em>Widget</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.ModelChoiceField#getWidget <em>Widget</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Widget</em>'.
-	 * @see KerblueForms.ModelChoiceField#getWidget()
+	 * @see com.bluexml.side.form.ModelChoiceField#getWidget()
 	 * @see #getModelChoiceField()
 	 * @generated
 	 */
 	EAttribute getModelChoiceField_Widget();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.ModelChoiceField#isShow_actions <em>Show actions</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.ModelChoiceField#isShow_actions <em>Show actions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Show actions</em>'.
-	 * @see KerblueForms.ModelChoiceField#isShow_actions()
+	 * @see com.bluexml.side.form.ModelChoiceField#isShow_actions()
 	 * @see #getModelChoiceField()
 	 * @generated
 	 */
 	EAttribute getModelChoiceField_Show_actions();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.EmailField <em>Email Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.EmailField <em>Email Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Email Field</em>'.
-	 * @see KerblueForms.EmailField
+	 * @see com.bluexml.side.form.EmailField
 	 * @generated
 	 */
 	EClass getEmailField();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.FileField <em>File Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.FileField <em>File Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>File Field</em>'.
-	 * @see KerblueForms.FileField
+	 * @see com.bluexml.side.form.FileField
 	 * @generated
 	 */
 	EClass getFileField();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.ImageField <em>Image Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.ImageField <em>Image Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Image Field</em>'.
-	 * @see KerblueForms.ImageField
+	 * @see com.bluexml.side.form.ImageField
 	 * @generated
 	 */
 	EClass getImageField();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.TimeField <em>Time Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.TimeField <em>Time Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Time Field</em>'.
-	 * @see KerblueForms.TimeField
+	 * @see com.bluexml.side.form.TimeField
 	 * @generated
 	 */
 	EClass getTimeField();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.URLField <em>URL Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.URLField <em>URL Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>URL Field</em>'.
-	 * @see KerblueForms.URLField
+	 * @see com.bluexml.side.form.URLField
 	 * @generated
 	 */
 	EClass getURLField();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.URLField#isVerify_exists <em>Verify exists</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.URLField#isVerify_exists <em>Verify exists</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Verify exists</em>'.
-	 * @see KerblueForms.URLField#isVerify_exists()
+	 * @see com.bluexml.side.form.URLField#isVerify_exists()
 	 * @see #getURLField()
 	 * @generated
 	 */
 	EAttribute getURLField_Verify_exists();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.PhoneNumberField <em>Phone Number Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.PhoneNumberField <em>Phone Number Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Phone Number Field</em>'.
-	 * @see KerblueForms.PhoneNumberField
+	 * @see com.bluexml.side.form.PhoneNumberField
 	 * @generated
 	 */
 	EClass getPhoneNumberField();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.PhoneNumberField#getInput_formats <em>Input formats</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.PhoneNumberField#getInput_formats <em>Input formats</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Input formats</em>'.
-	 * @see KerblueForms.PhoneNumberField#getInput_formats()
+	 * @see com.bluexml.side.form.PhoneNumberField#getInput_formats()
 	 * @see #getPhoneNumberField()
 	 * @generated
 	 */
 	EAttribute getPhoneNumberField_Input_formats();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.FormAspect <em>Form Aspect</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.FormAspect <em>Form Aspect</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Form Aspect</em>'.
-	 * @see KerblueForms.FormAspect
+	 * @see com.bluexml.side.form.FormAspect
 	 * @generated
 	 */
 	EClass getFormAspect();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.FormClass <em>Form Class</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.FormClass <em>Form Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Form Class</em>'.
-	 * @see KerblueForms.FormClass
+	 * @see com.bluexml.side.form.FormClass
 	 * @generated
 	 */
 	EClass getFormClass();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.Reference <em>Reference</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.Reference <em>Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Reference</em>'.
-	 * @see KerblueForms.Reference
+	 * @see com.bluexml.side.form.Reference
 	 * @generated
 	 */
 	EClass getReference();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.FormCollection <em>Form Collection</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.FormCollection <em>Form Collection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Form Collection</em>'.
-	 * @see KerblueForms.FormCollection
+	 * @see com.bluexml.side.form.FormCollection
 	 * @generated
 	 */
 	EClass getFormCollection();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link KerblueForms.FormCollection#getForms <em>Forms</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.form.FormCollection#getForms <em>Forms</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Forms</em>'.
-	 * @see KerblueForms.FormCollection#getForms()
+	 * @see com.bluexml.side.form.FormCollection#getForms()
 	 * @see #getFormCollection()
 	 * @generated
 	 */
 	EReference getFormCollection_Forms();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.ChoiceField <em>Choice Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.ChoiceField <em>Choice Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Choice Field</em>'.
-	 * @see KerblueForms.ChoiceField
+	 * @see com.bluexml.side.form.ChoiceField
 	 * @generated
 	 */
 	EClass getChoiceField();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.ChoiceField#getMin_bound <em>Min bound</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.ChoiceField#getMin_bound <em>Min bound</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Min bound</em>'.
-	 * @see KerblueForms.ChoiceField#getMin_bound()
+	 * @see com.bluexml.side.form.ChoiceField#getMin_bound()
 	 * @see #getChoiceField()
 	 * @generated
 	 */
 	EAttribute getChoiceField_Min_bound();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.ChoiceField#getMax_bound <em>Max bound</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.ChoiceField#getMax_bound <em>Max bound</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Max bound</em>'.
-	 * @see KerblueForms.ChoiceField#getMax_bound()
+	 * @see com.bluexml.side.form.ChoiceField#getMax_bound()
 	 * @see #getChoiceField()
 	 * @generated
 	 */
 	EAttribute getChoiceField_Max_bound();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.ChoiceField#getWidget <em>Widget</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.ChoiceField#getWidget <em>Widget</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Widget</em>'.
-	 * @see KerblueForms.ChoiceField#getWidget()
+	 * @see com.bluexml.side.form.ChoiceField#getWidget()
 	 * @see #getChoiceField()
 	 * @generated
 	 */
 	EAttribute getChoiceField_Widget();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.ChoiceField#isMultiple <em>Multiple</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.ChoiceField#isMultiple <em>Multiple</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Multiple</em>'.
-	 * @see KerblueForms.ChoiceField#isMultiple()
+	 * @see com.bluexml.side.form.ChoiceField#isMultiple()
 	 * @see #getChoiceField()
 	 * @generated
 	 */
 	EAttribute getChoiceField_Multiple();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.ChoiceField#getFilterParent <em>Filter Parent</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.ChoiceField#getFilterParent <em>Filter Parent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Filter Parent</em>'.
-	 * @see KerblueForms.ChoiceField#getFilterParent()
+	 * @see com.bluexml.side.form.ChoiceField#getFilterParent()
 	 * @see #getChoiceField()
 	 * @generated
 	 */
 	EAttribute getChoiceField_FilterParent();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.ChoiceField#getFilterData <em>Filter Data</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.ChoiceField#getFilterData <em>Filter Data</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Filter Data</em>'.
-	 * @see KerblueForms.ChoiceField#getFilterData()
+	 * @see com.bluexml.side.form.ChoiceField#getFilterData()
 	 * @see #getChoiceField()
 	 * @generated
 	 */
 	EAttribute getChoiceField_FilterData();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.RegexField <em>Regex Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.RegexField <em>Regex Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Regex Field</em>'.
-	 * @see KerblueForms.RegexField
+	 * @see com.bluexml.side.form.RegexField
 	 * @generated
 	 */
 	EClass getRegexField();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.RegexField#getRegex <em>Regex</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.RegexField#getRegex <em>Regex</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Regex</em>'.
-	 * @see KerblueForms.RegexField#getRegex()
+	 * @see com.bluexml.side.form.RegexField#getRegex()
 	 * @see #getRegexField()
 	 * @generated
 	 */
 	EAttribute getRegexField_Regex();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.ClassReference <em>Class Reference</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.ClassReference <em>Class Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Class Reference</em>'.
-	 * @see KerblueForms.ClassReference
+	 * @see com.bluexml.side.form.ClassReference
 	 * @generated
 	 */
 	EClass getClassReference();
 
 	/**
-	 * Returns the meta object for the reference '{@link KerblueForms.ClassReference#getReal_class <em>Real class</em>}'.
+	 * Returns the meta object for the reference '{@link com.bluexml.side.form.ClassReference#getReal_class <em>Real class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Real class</em>'.
-	 * @see KerblueForms.ClassReference#getReal_class()
+	 * @see com.bluexml.side.form.ClassReference#getReal_class()
 	 * @see #getClassReference()
 	 * @generated
 	 */
 	EReference getClassReference_Real_class();
 
 	/**
-	 * Returns the meta object for the reference '{@link KerblueForms.ClassReference#getAssociation_class <em>Association class</em>}'.
+	 * Returns the meta object for the reference '{@link com.bluexml.side.form.ClassReference#getAssociation_class <em>Association class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Association class</em>'.
-	 * @see KerblueForms.ClassReference#getAssociation_class()
+	 * @see com.bluexml.side.form.ClassReference#getAssociation_class()
 	 * @see #getClassReference()
 	 * @generated
 	 */
 	EReference getClassReference_Association_class();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.PasswordField <em>Password Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.PasswordField <em>Password Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Password Field</em>'.
-	 * @see KerblueForms.PasswordField
+	 * @see com.bluexml.side.form.PasswordField
 	 * @generated
 	 */
 	EClass getPasswordField();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.VirtualField <em>Virtual Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.VirtualField <em>Virtual Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Virtual Field</em>'.
-	 * @see KerblueForms.VirtualField
+	 * @see com.bluexml.side.form.VirtualField
 	 * @generated
 	 */
 	EClass getVirtualField();
 
 	/**
-	 * Returns the meta object for the reference '{@link KerblueForms.VirtualField#getLink <em>Link</em>}'.
+	 * Returns the meta object for the reference '{@link com.bluexml.side.form.VirtualField#getLink <em>Link</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Link</em>'.
-	 * @see KerblueForms.VirtualField#getLink()
+	 * @see com.bluexml.side.form.VirtualField#getLink()
 	 * @see #getVirtualField()
 	 * @generated
 	 */
 	EReference getVirtualField_Link();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.ActionField <em>Action Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.ActionField <em>Action Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Action Field</em>'.
-	 * @see KerblueForms.ActionField
+	 * @see com.bluexml.side.form.ActionField
 	 * @generated
 	 */
 	EClass getActionField();
 
 	/**
-	 * Returns the meta object for class '{@link KerblueForms.TextField <em>Text Field</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.TextField <em>Text Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Text Field</em>'.
-	 * @see KerblueForms.TextField
+	 * @see com.bluexml.side.form.TextField
 	 * @generated
 	 */
 	EClass getTextField();
 
 	/**
-	 * Returns the meta object for the attribute '{@link KerblueForms.TextField#getWidget <em>Widget</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.TextField#getWidget <em>Widget</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Widget</em>'.
-	 * @see KerblueForms.TextField#getWidget()
+	 * @see com.bluexml.side.form.TextField#getWidget()
 	 * @see #getTextField()
 	 * @generated
 	 */
 	EAttribute getTextField_Widget();
 
 	/**
-	 * Returns the meta object for enum '{@link KerblueForms.FormGroupPresentationType <em>Form Group Presentation Type</em>}'.
+	 * Returns the meta object for enum '{@link com.bluexml.side.form.FormGroupPresentationType <em>Form Group Presentation Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for enum '<em>Form Group Presentation Type</em>'.
-	 * @see KerblueForms.FormGroupPresentationType
+	 * @see com.bluexml.side.form.FormGroupPresentationType
 	 * @generated
 	 */
 	EEnum getFormGroupPresentationType();
 
 	/**
-	 * Returns the meta object for enum '{@link KerblueForms.TextWidgetType <em>Text Widget Type</em>}'.
+	 * Returns the meta object for enum '{@link com.bluexml.side.form.TextWidgetType <em>Text Widget Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for enum '<em>Text Widget Type</em>'.
-	 * @see KerblueForms.TextWidgetType
+	 * @see com.bluexml.side.form.TextWidgetType
 	 * @generated
 	 */
 	EEnum getTextWidgetType();
 
 	/**
-	 * Returns the meta object for enum '{@link KerblueForms.ChoiceWidgetType <em>Choice Widget Type</em>}'.
+	 * Returns the meta object for enum '{@link com.bluexml.side.form.ChoiceWidgetType <em>Choice Widget Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for enum '<em>Choice Widget Type</em>'.
-	 * @see KerblueForms.ChoiceWidgetType
+	 * @see com.bluexml.side.form.ChoiceWidgetType
 	 * @generated
 	 */
 	EEnum getChoiceWidgetType();
 
 	/**
-	 * Returns the meta object for enum '{@link KerblueForms.ReferenceWidgetType <em>Reference Widget Type</em>}'.
+	 * Returns the meta object for enum '{@link com.bluexml.side.form.ReferenceWidgetType <em>Reference Widget Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for enum '<em>Reference Widget Type</em>'.
-	 * @see KerblueForms.ReferenceWidgetType
+	 * @see com.bluexml.side.form.ReferenceWidgetType
 	 * @generated
 	 */
 	EEnum getReferenceWidgetType();
@@ -4311,7 +4311,7 @@ public interface formPackage extends EPackage {
 	 * @return the factory that creates the instances of the model.
 	 * @generated
 	 */
-	formFactory getKerblueFormsFactory();
+	formFactory getformFactory();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -4327,11 +4327,11 @@ public interface formPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.FormImpl <em>Form</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormImpl <em>Form</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.FormImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getForm()
+		 * @see com.bluexml.side.form.impl.FormImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getForm()
 		 * @generated
 		 */
 		EClass FORM = eINSTANCE.getForm();
@@ -4353,11 +4353,11 @@ public interface formPackage extends EPackage {
 		EAttribute FORM__NAME = eINSTANCE.getForm_Name();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.FormElementImpl <em>Form Element</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormElementImpl <em>Form Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.FormElementImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getFormElement()
+		 * @see com.bluexml.side.form.impl.FormElementImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getFormElement()
 		 * @generated
 		 */
 		EClass FORM_ELEMENT = eINSTANCE.getFormElement();
@@ -4395,11 +4395,11 @@ public interface formPackage extends EPackage {
 		EReference FORM_ELEMENT__REF = eINSTANCE.getFormElement_Ref();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.FormGroupImpl <em>Form Group</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormGroupImpl <em>Form Group</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.FormGroupImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getFormGroup()
+		 * @see com.bluexml.side.form.impl.FormGroupImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getFormGroup()
 		 * @generated
 		 */
 		EClass FORM_GROUP = eINSTANCE.getFormGroup();
@@ -4429,11 +4429,11 @@ public interface formPackage extends EPackage {
 		EReference FORM_GROUP__DISABLED = eINSTANCE.getFormGroup_Disabled();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.FieldImpl <em>Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FieldImpl <em>Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.FieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getField()
+		 * @see com.bluexml.side.form.impl.FieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getField()
 		 * @generated
 		 */
 		EClass FIELD = eINSTANCE.getField();
@@ -4487,21 +4487,21 @@ public interface formPackage extends EPackage {
 		EAttribute FIELD__FIELD_SIZE = eINSTANCE.getField_FieldSize();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.BooleanFieldImpl <em>Boolean Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.BooleanFieldImpl <em>Boolean Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.BooleanFieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getBooleanField()
+		 * @see com.bluexml.side.form.impl.BooleanFieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getBooleanField()
 		 * @generated
 		 */
 		EClass BOOLEAN_FIELD = eINSTANCE.getBooleanField();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.CharFieldImpl <em>Char Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.CharFieldImpl <em>Char Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.CharFieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getCharField()
+		 * @see com.bluexml.side.form.impl.CharFieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getCharField()
 		 * @generated
 		 */
 		EClass CHAR_FIELD = eINSTANCE.getCharField();
@@ -4523,11 +4523,11 @@ public interface formPackage extends EPackage {
 		EAttribute CHAR_FIELD__MAX_LENGTH = eINSTANCE.getCharField_Max_length();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.DateFieldImpl <em>Date Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.DateFieldImpl <em>Date Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.DateFieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getDateField()
+		 * @see com.bluexml.side.form.impl.DateFieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getDateField()
 		 * @generated
 		 */
 		EClass DATE_FIELD = eINSTANCE.getDateField();
@@ -4557,21 +4557,21 @@ public interface formPackage extends EPackage {
 		EAttribute DATE_FIELD__MAX_DATE = eINSTANCE.getDateField_Max_date();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.DateTimeFieldImpl <em>Date Time Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.DateTimeFieldImpl <em>Date Time Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.DateTimeFieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getDateTimeField()
+		 * @see com.bluexml.side.form.impl.DateTimeFieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getDateTimeField()
 		 * @generated
 		 */
 		EClass DATE_TIME_FIELD = eINSTANCE.getDateTimeField();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.DecimalFieldImpl <em>Decimal Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.DecimalFieldImpl <em>Decimal Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.DecimalFieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getDecimalField()
+		 * @see com.bluexml.side.form.impl.DecimalFieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getDecimalField()
 		 * @generated
 		 */
 		EClass DECIMAL_FIELD = eINSTANCE.getDecimalField();
@@ -4609,11 +4609,11 @@ public interface formPackage extends EPackage {
 		EAttribute DECIMAL_FIELD__DECIMAL_PLACES = eINSTANCE.getDecimalField_Decimal_places();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.FloatFieldImpl <em>Float Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FloatFieldImpl <em>Float Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.FloatFieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getFloatField()
+		 * @see com.bluexml.side.form.impl.FloatFieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getFloatField()
 		 * @generated
 		 */
 		EClass FLOAT_FIELD = eINSTANCE.getFloatField();
@@ -4635,11 +4635,11 @@ public interface formPackage extends EPackage {
 		EAttribute FLOAT_FIELD__MAX_VALUE = eINSTANCE.getFloatField_Max_value();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.IntegerFieldImpl <em>Integer Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.IntegerFieldImpl <em>Integer Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.IntegerFieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getIntegerField()
+		 * @see com.bluexml.side.form.impl.IntegerFieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getIntegerField()
 		 * @generated
 		 */
 		EClass INTEGER_FIELD = eINSTANCE.getIntegerField();
@@ -4661,11 +4661,11 @@ public interface formPackage extends EPackage {
 		EAttribute INTEGER_FIELD__MAX_VALUE = eINSTANCE.getIntegerField_Max_value();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.ModelChoiceFieldImpl <em>Model Choice Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.ModelChoiceFieldImpl <em>Model Choice Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.ModelChoiceFieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getModelChoiceField()
+		 * @see com.bluexml.side.form.impl.ModelChoiceFieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getModelChoiceField()
 		 * @generated
 		 */
 		EClass MODEL_CHOICE_FIELD = eINSTANCE.getModelChoiceField();
@@ -4719,51 +4719,51 @@ public interface formPackage extends EPackage {
 		EAttribute MODEL_CHOICE_FIELD__SHOW_ACTIONS = eINSTANCE.getModelChoiceField_Show_actions();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.EmailFieldImpl <em>Email Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.EmailFieldImpl <em>Email Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.EmailFieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getEmailField()
+		 * @see com.bluexml.side.form.impl.EmailFieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getEmailField()
 		 * @generated
 		 */
 		EClass EMAIL_FIELD = eINSTANCE.getEmailField();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.FileFieldImpl <em>File Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FileFieldImpl <em>File Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.FileFieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getFileField()
+		 * @see com.bluexml.side.form.impl.FileFieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getFileField()
 		 * @generated
 		 */
 		EClass FILE_FIELD = eINSTANCE.getFileField();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.ImageFieldImpl <em>Image Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.ImageFieldImpl <em>Image Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.ImageFieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getImageField()
+		 * @see com.bluexml.side.form.impl.ImageFieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getImageField()
 		 * @generated
 		 */
 		EClass IMAGE_FIELD = eINSTANCE.getImageField();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.TimeFieldImpl <em>Time Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.TimeFieldImpl <em>Time Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.TimeFieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getTimeField()
+		 * @see com.bluexml.side.form.impl.TimeFieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getTimeField()
 		 * @generated
 		 */
 		EClass TIME_FIELD = eINSTANCE.getTimeField();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.URLFieldImpl <em>URL Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.URLFieldImpl <em>URL Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.URLFieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getURLField()
+		 * @see com.bluexml.side.form.impl.URLFieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getURLField()
 		 * @generated
 		 */
 		EClass URL_FIELD = eINSTANCE.getURLField();
@@ -4777,11 +4777,11 @@ public interface formPackage extends EPackage {
 		EAttribute URL_FIELD__VERIFY_EXISTS = eINSTANCE.getURLField_Verify_exists();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.PhoneNumberFieldImpl <em>Phone Number Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.PhoneNumberFieldImpl <em>Phone Number Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.PhoneNumberFieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getPhoneNumberField()
+		 * @see com.bluexml.side.form.impl.PhoneNumberFieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getPhoneNumberField()
 		 * @generated
 		 */
 		EClass PHONE_NUMBER_FIELD = eINSTANCE.getPhoneNumberField();
@@ -4795,41 +4795,41 @@ public interface formPackage extends EPackage {
 		EAttribute PHONE_NUMBER_FIELD__INPUT_FORMATS = eINSTANCE.getPhoneNumberField_Input_formats();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.FormAspectImpl <em>Form Aspect</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormAspectImpl <em>Form Aspect</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.FormAspectImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getFormAspect()
+		 * @see com.bluexml.side.form.impl.FormAspectImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getFormAspect()
 		 * @generated
 		 */
 		EClass FORM_ASPECT = eINSTANCE.getFormAspect();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.FormClassImpl <em>Form Class</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormClassImpl <em>Form Class</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.FormClassImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getFormClass()
+		 * @see com.bluexml.side.form.impl.FormClassImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getFormClass()
 		 * @generated
 		 */
 		EClass FORM_CLASS = eINSTANCE.getFormClass();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.ReferenceImpl <em>Reference</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.ReferenceImpl <em>Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.ReferenceImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getReference()
+		 * @see com.bluexml.side.form.impl.ReferenceImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getReference()
 		 * @generated
 		 */
 		EClass REFERENCE = eINSTANCE.getReference();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.FormCollectionImpl <em>Form Collection</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormCollectionImpl <em>Form Collection</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.FormCollectionImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getFormCollection()
+		 * @see com.bluexml.side.form.impl.FormCollectionImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getFormCollection()
 		 * @generated
 		 */
 		EClass FORM_COLLECTION = eINSTANCE.getFormCollection();
@@ -4843,11 +4843,11 @@ public interface formPackage extends EPackage {
 		EReference FORM_COLLECTION__FORMS = eINSTANCE.getFormCollection_Forms();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.ChoiceFieldImpl <em>Choice Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.ChoiceFieldImpl <em>Choice Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.ChoiceFieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getChoiceField()
+		 * @see com.bluexml.side.form.impl.ChoiceFieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getChoiceField()
 		 * @generated
 		 */
 		EClass CHOICE_FIELD = eINSTANCE.getChoiceField();
@@ -4901,11 +4901,11 @@ public interface formPackage extends EPackage {
 		EAttribute CHOICE_FIELD__FILTER_DATA = eINSTANCE.getChoiceField_FilterData();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.RegexFieldImpl <em>Regex Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.RegexFieldImpl <em>Regex Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.RegexFieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getRegexField()
+		 * @see com.bluexml.side.form.impl.RegexFieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getRegexField()
 		 * @generated
 		 */
 		EClass REGEX_FIELD = eINSTANCE.getRegexField();
@@ -4919,11 +4919,11 @@ public interface formPackage extends EPackage {
 		EAttribute REGEX_FIELD__REGEX = eINSTANCE.getRegexField_Regex();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.ClassReferenceImpl <em>Class Reference</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.ClassReferenceImpl <em>Class Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.ClassReferenceImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getClassReference()
+		 * @see com.bluexml.side.form.impl.ClassReferenceImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getClassReference()
 		 * @generated
 		 */
 		EClass CLASS_REFERENCE = eINSTANCE.getClassReference();
@@ -4945,21 +4945,21 @@ public interface formPackage extends EPackage {
 		EReference CLASS_REFERENCE__ASSOCIATION_CLASS = eINSTANCE.getClassReference_Association_class();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.PasswordFieldImpl <em>Password Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.PasswordFieldImpl <em>Password Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.PasswordFieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getPasswordField()
+		 * @see com.bluexml.side.form.impl.PasswordFieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getPasswordField()
 		 * @generated
 		 */
 		EClass PASSWORD_FIELD = eINSTANCE.getPasswordField();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.VirtualFieldImpl <em>Virtual Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.VirtualFieldImpl <em>Virtual Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.VirtualFieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getVirtualField()
+		 * @see com.bluexml.side.form.impl.VirtualFieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getVirtualField()
 		 * @generated
 		 */
 		EClass VIRTUAL_FIELD = eINSTANCE.getVirtualField();
@@ -4973,21 +4973,21 @@ public interface formPackage extends EPackage {
 		EReference VIRTUAL_FIELD__LINK = eINSTANCE.getVirtualField_Link();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.ActionFieldImpl <em>Action Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.ActionFieldImpl <em>Action Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.ActionFieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getActionField()
+		 * @see com.bluexml.side.form.impl.ActionFieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getActionField()
 		 * @generated
 		 */
 		EClass ACTION_FIELD = eINSTANCE.getActionField();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.impl.TextFieldImpl <em>Text Field</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.TextFieldImpl <em>Text Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.impl.TextFieldImpl
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getTextField()
+		 * @see com.bluexml.side.form.impl.TextFieldImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getTextField()
 		 * @generated
 		 */
 		EClass TEXT_FIELD = eINSTANCE.getTextField();
@@ -5001,41 +5001,41 @@ public interface formPackage extends EPackage {
 		EAttribute TEXT_FIELD__WIDGET = eINSTANCE.getTextField_Widget();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.FormGroupPresentationType <em>Form Group Presentation Type</em>}' enum.
+		 * The meta object literal for the '{@link com.bluexml.side.form.FormGroupPresentationType <em>Form Group Presentation Type</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.FormGroupPresentationType
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getFormGroupPresentationType()
+		 * @see com.bluexml.side.form.FormGroupPresentationType
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getFormGroupPresentationType()
 		 * @generated
 		 */
 		EEnum FORM_GROUP_PRESENTATION_TYPE = eINSTANCE.getFormGroupPresentationType();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.TextWidgetType <em>Text Widget Type</em>}' enum.
+		 * The meta object literal for the '{@link com.bluexml.side.form.TextWidgetType <em>Text Widget Type</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.TextWidgetType
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getTextWidgetType()
+		 * @see com.bluexml.side.form.TextWidgetType
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getTextWidgetType()
 		 * @generated
 		 */
 		EEnum TEXT_WIDGET_TYPE = eINSTANCE.getTextWidgetType();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.ChoiceWidgetType <em>Choice Widget Type</em>}' enum.
+		 * The meta object literal for the '{@link com.bluexml.side.form.ChoiceWidgetType <em>Choice Widget Type</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.ChoiceWidgetType
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getChoiceWidgetType()
+		 * @see com.bluexml.side.form.ChoiceWidgetType
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getChoiceWidgetType()
 		 * @generated
 		 */
 		EEnum CHOICE_WIDGET_TYPE = eINSTANCE.getChoiceWidgetType();
 
 		/**
-		 * The meta object literal for the '{@link KerblueForms.ReferenceWidgetType <em>Reference Widget Type</em>}' enum.
+		 * The meta object literal for the '{@link com.bluexml.side.form.ReferenceWidgetType <em>Reference Widget Type</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see KerblueForms.ReferenceWidgetType
-		 * @see KerblueForms.impl.KerblueFormsPackageImpl#getReferenceWidgetType()
+		 * @see com.bluexml.side.form.ReferenceWidgetType
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getReferenceWidgetType()
 		 * @generated
 		 */
 		EEnum REFERENCE_WIDGET_TYPE = eINSTANCE.getReferenceWidgetType();

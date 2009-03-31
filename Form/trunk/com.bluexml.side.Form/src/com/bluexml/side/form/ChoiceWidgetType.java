@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package com.bluexml.side.KerblueForms;
+package com.bluexml.side.form;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,93 +14,93 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Text Widget Type</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Choice Widget Type</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see com.bluexml.side.KerblueForms.formPackage#getTextWidgetType()
+ * @see com.bluexml.side.form.formPackage#getChoiceWidgetType()
  * @model
  * @generated
  */
-public enum TextWidgetType implements Enumerator {
+public enum ChoiceWidgetType implements Enumerator {
 	/**
-	 * The '<em><b>Text Area</b></em>' literal object.
+	 * The '<em><b>Select</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #TEXT_AREA_VALUE
+	 * @see #SELECT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	TEXT_AREA(0, "TextArea", "Text Area"),
+	SELECT(0, "Select", "Select"),
 
 	/**
-	 * The '<em><b>Rich Text Editor</b></em>' literal object.
+	 * The '<em><b>Inline</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #RICH_TEXT_EDITOR_VALUE
+	 * @see #INLINE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	RICH_TEXT_EDITOR(1, "RichTextEditor", "Rich Text Editor");
+	INLINE(1, "Inline", "Inline");
 
 	/**
-	 * The '<em><b>Text Area</b></em>' literal value.
+	 * The '<em><b>Select</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Text Area</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Select</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #TEXT_AREA
-	 * @model name="TextArea" literal="Text Area"
+	 * @see #SELECT
+	 * @model name="Select"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TEXT_AREA_VALUE = 0;
+	public static final int SELECT_VALUE = 0;
 
 	/**
-	 * The '<em><b>Rich Text Editor</b></em>' literal value.
+	 * The '<em><b>Inline</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Rich Text Editor</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Inline</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #RICH_TEXT_EDITOR
-	 * @model name="RichTextEditor" literal="Rich Text Editor"
+	 * @see #INLINE
+	 * @model name="Inline"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int RICH_TEXT_EDITOR_VALUE = 1;
+	public static final int INLINE_VALUE = 1;
 
 	/**
-	 * An array of all the '<em><b>Text Widget Type</b></em>' enumerators.
+	 * An array of all the '<em><b>Choice Widget Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final TextWidgetType[] VALUES_ARRAY =
-		new TextWidgetType[] {
-			TEXT_AREA,
-			RICH_TEXT_EDITOR,
+	private static final ChoiceWidgetType[] VALUES_ARRAY =
+		new ChoiceWidgetType[] {
+			SELECT,
+			INLINE,
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>Text Widget Type</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>Choice Widget Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<TextWidgetType> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<ChoiceWidgetType> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Text Widget Type</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>Choice Widget Type</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static TextWidgetType get(String literal) {
+	public static ChoiceWidgetType get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			TextWidgetType result = VALUES_ARRAY[i];
+			ChoiceWidgetType result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -109,14 +109,14 @@ public enum TextWidgetType implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Text Widget Type</b></em>' literal with the specified name.
+	 * Returns the '<em><b>Choice Widget Type</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static TextWidgetType getByName(String name) {
+	public static ChoiceWidgetType getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			TextWidgetType result = VALUES_ARRAY[i];
+			ChoiceWidgetType result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -125,15 +125,15 @@ public enum TextWidgetType implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Text Widget Type</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>Choice Widget Type</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static TextWidgetType get(int value) {
+	public static ChoiceWidgetType get(int value) {
 		switch (value) {
-			case TEXT_AREA_VALUE: return TEXT_AREA;
-			case RICH_TEXT_EDITOR_VALUE: return RICH_TEXT_EDITOR;
+			case SELECT_VALUE: return SELECT;
+			case INLINE_VALUE: return INLINE;
 		}
 		return null;
 	}
@@ -165,7 +165,7 @@ public enum TextWidgetType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private TextWidgetType(int value, String name, String literal) {
+	private ChoiceWidgetType(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -209,4 +209,4 @@ public enum TextWidgetType implements Enumerator {
 		return literal;
 	}
 	
-} //TextWidgetType
+} //ChoiceWidgetType
