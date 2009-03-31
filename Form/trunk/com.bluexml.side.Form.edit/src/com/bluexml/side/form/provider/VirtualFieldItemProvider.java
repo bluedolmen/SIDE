@@ -25,7 +25,7 @@ import com.bluexml.side.form.VirtualField;
 import com.bluexml.side.form.formPackage;
 
 /**
- * This is the item provider adapter for a {@link KerblueForms.VirtualField} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.VirtualField} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -75,8 +75,8 @@ public class VirtualFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_VirtualField_link_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_VirtualField_link_feature", "_UI_VirtualField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_VirtualField_link_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_VirtualField_link_feature", "_UI_VirtualField_type"),
 				 formPackage.Literals.VIRTUAL_FIELD__LINK,
 				 true,
 				 false,
@@ -94,7 +94,7 @@ public class VirtualFieldItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/VirtualField")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/VirtualField"));
 	}
 
 	/**
@@ -133,17 +133,6 @@ public class VirtualFieldItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return FormsEditPlugin.INSTANCE;
 	}
 
 }

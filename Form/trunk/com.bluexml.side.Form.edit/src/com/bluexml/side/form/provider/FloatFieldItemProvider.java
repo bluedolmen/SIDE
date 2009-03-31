@@ -27,7 +27,7 @@ import com.bluexml.side.form.FloatField;
 import com.bluexml.side.form.formPackage;
 
 /**
- * This is the item provider adapter for a {@link KerblueForms.FloatField} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.FloatField} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -78,8 +78,8 @@ public class FloatFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_FloatField_min_value_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_FloatField_min_value_feature", "_UI_FloatField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_FloatField_min_value_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FloatField_min_value_feature", "_UI_FloatField_type"),
 				 formPackage.Literals.FLOAT_FIELD__MIN_VALUE,
 				 true,
 				 false,
@@ -100,8 +100,8 @@ public class FloatFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_FloatField_max_value_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_FloatField_max_value_feature", "_UI_FloatField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_FloatField_max_value_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FloatField_max_value_feature", "_UI_FloatField_type"),
 				 formPackage.Literals.FLOAT_FIELD__MAX_VALUE,
 				 true,
 				 false,
@@ -119,7 +119,7 @@ public class FloatFieldItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/FloatField")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/FloatField"));
 	}
 
 	/**
@@ -132,8 +132,8 @@ public class FloatFieldItemProvider
 	public String getText(Object object) {
 		String label = ((FloatField)object).getId();
 		return label == null || label.length() == 0 ?
-			getString("_UI_FloatField_type") : //$NON-NLS-1$
-			getString("_UI_FloatField_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+			getString("_UI_FloatField_type") :
+			getString("_UI_FloatField_type") + " " + label;
 	}
 
 	/**
@@ -166,17 +166,6 @@ public class FloatFieldItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return FormsEditPlugin.INSTANCE;
 	}
 
 }

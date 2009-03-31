@@ -23,7 +23,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import com.bluexml.side.form.DateTimeField;
 
 /**
- * This is the item provider adapter for a {@link KerblueForms.DateTimeField} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.DateTimeField} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -69,7 +69,7 @@ public class DateTimeFieldItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/DateTimeField")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/DateTimeField"));
 	}
 
 	/**
@@ -82,8 +82,8 @@ public class DateTimeFieldItemProvider
 	public String getText(Object object) {
 		String label = ((DateTimeField)object).getId();
 		return label == null || label.length() == 0 ?
-			getString("_UI_DateTimeField_type") : //$NON-NLS-1$
-			getString("_UI_DateTimeField_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+			getString("_UI_DateTimeField_type") :
+			getString("_UI_DateTimeField_type") + " " + label;
 	}
 
 	/**
@@ -109,17 +109,6 @@ public class DateTimeFieldItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return FormsEditPlugin.INSTANCE;
 	}
 
 }

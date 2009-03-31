@@ -27,7 +27,7 @@ import com.bluexml.side.form.IntegerField;
 import com.bluexml.side.form.formPackage;
 
 /**
- * This is the item provider adapter for a {@link KerblueForms.IntegerField} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.IntegerField} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -78,8 +78,8 @@ public class IntegerFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IntegerField_min_value_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_IntegerField_min_value_feature", "_UI_IntegerField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_IntegerField_min_value_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_IntegerField_min_value_feature", "_UI_IntegerField_type"),
 				 formPackage.Literals.INTEGER_FIELD__MIN_VALUE,
 				 true,
 				 false,
@@ -100,8 +100,8 @@ public class IntegerFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IntegerField_max_value_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_IntegerField_max_value_feature", "_UI_IntegerField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_IntegerField_max_value_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_IntegerField_max_value_feature", "_UI_IntegerField_type"),
 				 formPackage.Literals.INTEGER_FIELD__MAX_VALUE,
 				 true,
 				 false,
@@ -119,7 +119,7 @@ public class IntegerFieldItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/IntegerField")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/IntegerField"));
 	}
 
 	/**
@@ -165,17 +165,6 @@ public class IntegerFieldItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return FormsEditPlugin.INSTANCE;
 	}
 
 }

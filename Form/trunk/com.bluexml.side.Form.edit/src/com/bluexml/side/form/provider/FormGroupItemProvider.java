@@ -35,13 +35,14 @@ import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormAspect;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormGroup;
+import com.bluexml.side.form.formFactory;
 import com.bluexml.side.form.VirtualField;
 import com.bluexml.side.form.formPackage;
 import com.bluexml.side.form.utils.FormDiagramUtils;
 import com.bluexml.side.form.utils.InternalModification;
 
 /**
- * This is the item provider adapter for a {@link KerblueForms.FormGroup} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.FormGroup} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -76,7 +77,6 @@ public class FormGroupItemProvider
 			super.getPropertyDescriptors(object);
 
 			addPresentationPropertyDescriptor(object);
-			addDisabledPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -92,8 +92,8 @@ public class FormGroupItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_FormGroup_presentation_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_FormGroup_presentation_feature", "_UI_FormGroup_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_FormGroup_presentation_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FormGroup_presentation_feature", "_UI_FormGroup_type"),
 				 formPackage.Literals.FORM_GROUP__PRESENTATION,
 				 true,
 				 false,
@@ -104,28 +104,6 @@ public class FormGroupItemProvider
 	}
 
 	
-
-	/**
-	 * This adds a property descriptor for the Disabled feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDisabledPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_FormGroup_disabled_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_FormGroup_disabled_feature", "_UI_FormGroup_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				 formPackage.Literals.FORM_GROUP__DISABLED,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
 
 	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
@@ -165,7 +143,7 @@ public class FormGroupItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/FormGroup")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/FormGroup"));
 	}
 
 	/**
@@ -197,6 +175,7 @@ public class FormGroupItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case formPackage.FORM_GROUP__CHILDREN:
+			case formPackage.FORM_GROUP__DISABLED:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -327,14 +306,26 @@ public class FormGroupItemProvider
 	}
 
 	/**
-	 * Return the resource locator for this item provider's resources.
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public ResourceLocator getResourceLocator() {
-		return FormsEditPlugin.INSTANCE;
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == formPackage.Literals.FORM_GROUP__CHILDREN ||
+			childFeature == formPackage.Literals.FORM_GROUP__DISABLED;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	@Override

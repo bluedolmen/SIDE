@@ -23,7 +23,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import com.bluexml.side.form.EmailField;
 
 /**
- * This is the item provider adapter for a {@link KerblueForms.EmailField} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.EmailField} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -69,7 +69,7 @@ public class EmailFieldItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/EmailField")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/EmailField"));
 	}
 
 	/**
@@ -108,17 +108,6 @@ public class EmailFieldItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return FormsEditPlugin.INSTANCE;
 	}
 
 }

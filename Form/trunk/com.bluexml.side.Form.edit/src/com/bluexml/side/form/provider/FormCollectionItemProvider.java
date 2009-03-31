@@ -28,7 +28,7 @@ import com.bluexml.side.form.formFactory;
 import com.bluexml.side.form.formPackage;
 
 /**
- * This is the item provider adapter for a {@link KerblueForms.FormCollection} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.FormCollection} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -104,7 +104,7 @@ public class FormCollectionItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/FormCollection")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/FormCollection"));
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class FormCollectionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_FormCollection_type"); //$NON-NLS-1$
+		return getString("_UI_FormCollection_type");
 	}
 
 	/**

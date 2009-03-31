@@ -27,7 +27,7 @@ import com.bluexml.side.form.DecimalField;
 import com.bluexml.side.form.formPackage;
 
 /**
- * This is the item provider adapter for a {@link KerblueForms.DecimalField} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.DecimalField} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -80,8 +80,8 @@ public class DecimalFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_DecimalField_min_value_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_DecimalField_min_value_feature", "_UI_DecimalField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_DecimalField_min_value_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DecimalField_min_value_feature", "_UI_DecimalField_type"),
 				 formPackage.Literals.DECIMAL_FIELD__MIN_VALUE,
 				 true,
 				 false,
@@ -102,8 +102,8 @@ public class DecimalFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_DecimalField_max_value_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_DecimalField_max_value_feature", "_UI_DecimalField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_DecimalField_max_value_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DecimalField_max_value_feature", "_UI_DecimalField_type"),
 				 formPackage.Literals.DECIMAL_FIELD__MAX_VALUE,
 				 true,
 				 false,
@@ -124,8 +124,8 @@ public class DecimalFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_DecimalField_max_digits_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_DecimalField_max_digits_feature", "_UI_DecimalField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_DecimalField_max_digits_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DecimalField_max_digits_feature", "_UI_DecimalField_type"),
 				 formPackage.Literals.DECIMAL_FIELD__MAX_DIGITS,
 				 true,
 				 false,
@@ -146,8 +146,8 @@ public class DecimalFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_DecimalField_decimal_places_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_DecimalField_decimal_places_feature", "_UI_DecimalField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_DecimalField_decimal_places_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DecimalField_decimal_places_feature", "_UI_DecimalField_type"),
 				 formPackage.Literals.DECIMAL_FIELD__DECIMAL_PLACES,
 				 true,
 				 false,
@@ -165,7 +165,7 @@ public class DecimalFieldItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/DecimalField")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/DecimalField"));
 	}
 
 	/**
@@ -213,17 +213,6 @@ public class DecimalFieldItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return FormsEditPlugin.INSTANCE;
 	}
 
 }

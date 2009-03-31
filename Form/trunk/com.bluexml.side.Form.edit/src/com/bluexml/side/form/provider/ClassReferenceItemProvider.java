@@ -25,7 +25,7 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import com.bluexml.side.form.formPackage;
 
 /**
- * This is the item provider adapter for a {@link KerblueForms.ClassReference} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.ClassReference} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -76,8 +76,8 @@ public class ClassReferenceItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ClassReference_real_class_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_ClassReference_real_class_feature", "_UI_ClassReference_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_ClassReference_real_class_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ClassReference_real_class_feature", "_UI_ClassReference_type"),
 				 formPackage.Literals.CLASS_REFERENCE__REAL_CLASS,
 				 true,
 				 false,
@@ -98,8 +98,8 @@ public class ClassReferenceItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ClassReference_association_class_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_ClassReference_association_class_feature", "_UI_ClassReference_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_ClassReference_association_class_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ClassReference_association_class_feature", "_UI_ClassReference_type"),
 				 formPackage.Literals.CLASS_REFERENCE__ASSOCIATION_CLASS,
 				 true,
 				 false,
@@ -117,7 +117,7 @@ public class ClassReferenceItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_ClassReference_type"); //$NON-NLS-1$
+		return getString("_UI_ClassReference_type");
 	}
 
 	/**

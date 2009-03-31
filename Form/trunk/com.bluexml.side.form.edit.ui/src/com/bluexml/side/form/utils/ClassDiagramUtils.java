@@ -45,7 +45,6 @@ public class ClassDiagramUtils {
 			// Choice Field
 			if (att.getValueList() != null) {
 				field = formFactory.eINSTANCE.createChoiceField();
-				((ChoiceField) field).getChoices().addAll(getChoices(att.getValueList().getLiterals()));
 				if (metaInfoMap.containsKey("multiple") && metaInfoMap.get("multiple") != null && metaInfoMap.get("multiple").equals("True")) {
 					((ChoiceField) field).setMultiple(true);
 				}

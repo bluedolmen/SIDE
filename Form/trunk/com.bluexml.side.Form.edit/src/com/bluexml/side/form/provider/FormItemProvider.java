@@ -30,7 +30,7 @@ import com.bluexml.side.form.formFactory;
 import com.bluexml.side.form.formPackage;
 
 /**
- * This is the item provider adapter for a {@link KerblueForms.Form} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.Form} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -80,8 +80,8 @@ public class FormItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Form_name_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_Form_name_feature", "_UI_Form_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_Form_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Form_name_feature", "_UI_Form_type"),
 				 formPackage.Literals.FORM__NAME,
 				 true,
 				 false,
@@ -129,7 +129,7 @@ public class FormItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Form")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Form"));
 	}
 
 	/**

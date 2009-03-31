@@ -27,7 +27,7 @@ import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.formPackage;
 
 /**
- * This is the item provider adapter for a {@link KerblueForms.ModelChoiceField} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.ModelChoiceField} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -68,6 +68,7 @@ public class ModelChoiceFieldItemProvider
 			addTargetPropertyDescriptor(object);
 			addAssociation_formClassPropertyDescriptor(object);
 			addWidgetPropertyDescriptor(object);
+			addShow_actionsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -83,8 +84,8 @@ public class ModelChoiceFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ClassReference_real_class_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_ClassReference_real_class_feature", "_UI_ClassReference_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_ClassReference_real_class_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ClassReference_real_class_feature", "_UI_ClassReference_type"),
 				 formPackage.Literals.CLASS_REFERENCE__REAL_CLASS,
 				 true,
 				 false,
@@ -105,8 +106,8 @@ public class ModelChoiceFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ClassReference_association_class_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_ClassReference_association_class_feature", "_UI_ClassReference_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_ClassReference_association_class_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ClassReference_association_class_feature", "_UI_ClassReference_type"),
 				 formPackage.Literals.CLASS_REFERENCE__ASSOCIATION_CLASS,
 				 true,
 				 false,
@@ -127,8 +128,8 @@ public class ModelChoiceFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ModelChoiceField_min_bound_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_ModelChoiceField_min_bound_feature", "_UI_ModelChoiceField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_ModelChoiceField_min_bound_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ModelChoiceField_min_bound_feature", "_UI_ModelChoiceField_type"),
 				 formPackage.Literals.MODEL_CHOICE_FIELD__MIN_BOUND,
 				 true,
 				 false,
@@ -149,8 +150,8 @@ public class ModelChoiceFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ModelChoiceField_max_bound_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_ModelChoiceField_max_bound_feature", "_UI_ModelChoiceField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_ModelChoiceField_max_bound_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ModelChoiceField_max_bound_feature", "_UI_ModelChoiceField_type"),
 				 formPackage.Literals.MODEL_CHOICE_FIELD__MAX_BOUND,
 				 true,
 				 false,
@@ -171,8 +172,8 @@ public class ModelChoiceFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ModelChoiceField_target_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_ModelChoiceField_target_feature", "_UI_ModelChoiceField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_ModelChoiceField_target_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ModelChoiceField_target_feature", "_UI_ModelChoiceField_type"),
 				 formPackage.Literals.MODEL_CHOICE_FIELD__TARGET,
 				 true,
 				 false,
@@ -193,8 +194,8 @@ public class ModelChoiceFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ModelChoiceField_association_formClass_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_ModelChoiceField_association_formClass_feature", "_UI_ModelChoiceField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_ModelChoiceField_association_formClass_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ModelChoiceField_association_formClass_feature", "_UI_ModelChoiceField_type"),
 				 formPackage.Literals.MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS,
 				 true,
 				 false,
@@ -215,13 +216,35 @@ public class ModelChoiceFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ModelChoiceField_widget_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_ModelChoiceField_widget_feature", "_UI_ModelChoiceField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_ModelChoiceField_widget_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ModelChoiceField_widget_feature", "_UI_ModelChoiceField_type"),
 				 formPackage.Literals.MODEL_CHOICE_FIELD__WIDGET,
 				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Show actions feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addShow_actionsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ModelChoiceField_show_actions_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ModelChoiceField_show_actions_feature", "_UI_ModelChoiceField_type"),
+				 formPackage.Literals.MODEL_CHOICE_FIELD__SHOW_ACTIONS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -234,7 +257,7 @@ public class ModelChoiceFieldItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ModelChoiceField")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ModelChoiceField"));
 	}
 
 	/**
@@ -265,6 +288,7 @@ public class ModelChoiceFieldItemProvider
 			case formPackage.MODEL_CHOICE_FIELD__MIN_BOUND:
 			case formPackage.MODEL_CHOICE_FIELD__MAX_BOUND:
 			case formPackage.MODEL_CHOICE_FIELD__WIDGET:
+			case formPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -281,17 +305,6 @@ public class ModelChoiceFieldItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return FormsEditPlugin.INSTANCE;
 	}
 
 }

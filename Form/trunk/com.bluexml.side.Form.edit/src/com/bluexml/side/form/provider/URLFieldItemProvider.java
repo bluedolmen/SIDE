@@ -27,7 +27,7 @@ import com.bluexml.side.form.URLField;
 import com.bluexml.side.form.formPackage;
 
 /**
- * This is the item provider adapter for a {@link KerblueForms.URLField} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.URLField} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -77,8 +77,8 @@ public class URLFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_URLField_verify_exists_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_URLField_verify_exists_feature", "_UI_URLField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_URLField_verify_exists_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_URLField_verify_exists_feature", "_UI_URLField_type"),
 				 formPackage.Literals.URL_FIELD__VERIFY_EXISTS,
 				 true,
 				 false,
@@ -96,7 +96,7 @@ public class URLFieldItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/URLField")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/URLField"));
 	}
 
 	/**
@@ -141,17 +141,6 @@ public class URLFieldItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return FormsEditPlugin.INSTANCE;
 	}
 
 }

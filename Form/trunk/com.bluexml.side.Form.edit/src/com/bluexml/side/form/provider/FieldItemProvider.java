@@ -27,7 +27,7 @@ import com.bluexml.side.form.Field;
 import com.bluexml.side.form.formPackage;
 
 /**
- * This is the item provider adapter for a {@link KerblueForms.Field} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.Field} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -82,8 +82,8 @@ public class FieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Field_mandatory_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_Field_mandatory_feature", "_UI_Field_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_Field_mandatory_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Field_mandatory_feature", "_UI_Field_type"),
 				 formPackage.Literals.FIELD__MANDATORY,
 				 true,
 				 false,
@@ -104,8 +104,8 @@ public class FieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Field_hidden_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_Field_hidden_feature", "_UI_Field_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_Field_hidden_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Field_hidden_feature", "_UI_Field_type"),
 				 formPackage.Literals.FIELD__HIDDEN,
 				 true,
 				 false,
@@ -126,8 +126,8 @@ public class FieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Field_error_messages_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_Field_error_messages_feature", "_UI_Field_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_Field_error_messages_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Field_error_messages_feature", "_UI_Field_type"),
 				 formPackage.Literals.FIELD__ERROR_MESSAGES,
 				 true,
 				 false,
@@ -148,8 +148,8 @@ public class FieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Field_initial_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_Field_initial_feature", "_UI_Field_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_Field_initial_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Field_initial_feature", "_UI_Field_type"),
 				 formPackage.Literals.FIELD__INITIAL,
 				 true,
 				 false,
@@ -170,8 +170,8 @@ public class FieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Field_disabled_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_Field_disabled_feature", "_UI_Field_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_Field_disabled_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Field_disabled_feature", "_UI_Field_type"),
 				 formPackage.Literals.FIELD__DISABLED,
 				 true,
 				 false,
@@ -192,8 +192,8 @@ public class FieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Field_fieldSize_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_Field_fieldSize_feature", "_UI_Field_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_Field_fieldSize_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Field_fieldSize_feature", "_UI_Field_type"),
 				 formPackage.Literals.FIELD__FIELD_SIZE,
 				 true,
 				 false,
@@ -201,17 +201,6 @@ public class FieldItemProvider
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
-	}
-
-	/**
-	 * This returns Field.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Field")); //$NON-NLS-1$
 	}
 
 	/**
@@ -261,16 +250,5 @@ public class FieldItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return FormsEditPlugin.INSTANCE;
 	}
 }

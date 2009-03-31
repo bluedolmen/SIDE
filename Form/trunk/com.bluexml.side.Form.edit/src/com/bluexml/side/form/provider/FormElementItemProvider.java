@@ -36,7 +36,7 @@ import com.bluexml.side.form.provider.command.DragAndDropFormElementCommand;
 import com.bluexml.side.form.utils.InternalModification;
 
 /**
- * This is the item provider adapter for a {@link KerblueForms.FormElement} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.FormElement} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -89,8 +89,8 @@ public class FormElementItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_FormElement_label_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_FormElement_label_feature", "_UI_FormElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_FormElement_label_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FormElement_label_feature", "_UI_FormElement_type"),
 				 formPackage.Literals.FORM_ELEMENT__LABEL,
 				 true,
 				 false,
@@ -111,8 +111,8 @@ public class FormElementItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_FormElement_id_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_FormElement_id_feature", "_UI_FormElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_FormElement_id_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FormElement_id_feature", "_UI_FormElement_type"),
 				 formPackage.Literals.FORM_ELEMENT__ID,
 				 true,
 				 false,
@@ -133,8 +133,8 @@ public class FormElementItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_FormElement_help_text_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_FormElement_help_text_feature", "_UI_FormElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_FormElement_help_text_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FormElement_help_text_feature", "_UI_FormElement_type"),
 				 formPackage.Literals.FORM_ELEMENT__HELP_TEXT,
 				 true,
 				 false,
@@ -155,26 +155,15 @@ public class FormElementItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_FormElement_ref_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_FormElement_ref_feature", "_UI_FormElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_FormElement_ref_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FormElement_ref_feature", "_UI_FormElement_type"),
 				 formPackage.Literals.FORM_ELEMENT__REF,
 				 true,
 				 false,
-				 false,
+				 true,
 				 null,
 				 null,
 				 null));
-	}
-
-	/**
-	 * This returns FormElement.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/FormElement")); //$NON-NLS-1$
 	}
 
 	/**
@@ -187,8 +176,8 @@ public class FormElementItemProvider
 	public String getText(Object object) {
 		String label = ((FormElement)object).getId();
 		return label == null || label.length() == 0 ?
-			getString("_UI_FormElement_type") : //$NON-NLS-1$
-			getString("_UI_FormElement_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+			getString("_UI_FormElement_type") :
+			getString("_UI_FormElement_type") + " " + label;
 	}
 
 	/**
@@ -206,7 +195,6 @@ public class FormElementItemProvider
 			case formPackage.FORM_ELEMENT__LABEL:
 			case formPackage.FORM_ELEMENT__ID:
 			case formPackage.FORM_ELEMENT__HELP_TEXT:
-			case formPackage.FORM_ELEMENT__REF:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

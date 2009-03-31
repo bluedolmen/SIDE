@@ -27,7 +27,7 @@ import com.bluexml.side.form.RegexField;
 import com.bluexml.side.form.formPackage;
 
 /**
- * This is the item provider adapter for a {@link KerblueForms.RegexField} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.RegexField} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -77,8 +77,8 @@ public class RegexFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RegexField_regex_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_RegexField_regex_feature", "_UI_RegexField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_RegexField_regex_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RegexField_regex_feature", "_UI_RegexField_type"),
 				 formPackage.Literals.REGEX_FIELD__REGEX,
 				 true,
 				 false,
@@ -96,7 +96,7 @@ public class RegexFieldItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/RegexField")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/RegexField"));
 	}
 
 	/**
@@ -109,8 +109,8 @@ public class RegexFieldItemProvider
 	public String getText(Object object) {
 		String label = ((RegexField)object).getId();
 		return label == null || label.length() == 0 ?
-			getString("_UI_RegexField_type") : //$NON-NLS-1$
-			getString("_UI_RegexField_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+			getString("_UI_RegexField_type") :
+			getString("_UI_RegexField_type") + " " + label;
 	}
 
 	/**
@@ -142,17 +142,6 @@ public class RegexFieldItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return FormsEditPlugin.INSTANCE;
 	}
 
 }

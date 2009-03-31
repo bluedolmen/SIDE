@@ -430,107 +430,12 @@ public class formActionBarContributor
 	 */
 	@Override
 	protected void addGlobalActions(IMenuManager menuManager) {
-		Object o =  ((this.selectionProvider != null && this.selectionProvider.getSelection() != null )? ((TreeSelection) this.selectionProvider.getSelection()).getFirstElement() : null);
-		
 		menuManager.insertAfter("additions-end", new Separator("ui-actions"));
 		menuManager.insertAfter("ui-actions", showPropertiesViewAction);
 
 		refreshViewerAction.setEnabled(refreshViewerAction.isEnabled());		
 		menuManager.insertAfter("ui-actions", refreshViewerAction);
 
-		menuManager.insertAfter("ui-actions", new Separator("ui-commonActions"));
-		
-		// Addition of ImageDescriptor isn't available in current jface version.
-		if (o instanceof ModelChoiceField) {
-			MenuManager refMenu = new MenuManager("Relation","relation");
-			collapseReferenceAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/collapse.gif"));
-			refMenu.add(collapseReferenceAction);
-			
-			// ---- Expand Menu
-			IMenuManager expandMenu = new MenuManager("Expand to","expand");
-			expandMenu.setRemoveAllWhenShown(true);
-			if (this.selectionProvider != null && this.selectionProvider.getSelection() != null 
-					&& ((TreeSelection) this.selectionProvider.getSelection()).size() == 1
-					&& ((TreeSelection) this.selectionProvider.getSelection()).getFirstElement() instanceof ModelChoiceField) {
-				expandMenu.add(new Action("never shown entry"){});//needed if it's a submenu
-			    IMenuListener expandListener = new IMenuListener() {
-			        public void menuAboutToShow(IMenuManager m) {
-			        	fillExpandContextMenu(m);
-			        }
-			     };
-			    expandMenu.addMenuListener(expandListener);
-			} 
-			refMenu.add(expandMenu);
-		
-			// ---- Add Menu
-			IMenuManager addRefMenu = new MenuManager("Add reference","addRef");
-			addRefMenu.setRemoveAllWhenShown(true);
-			if (this.selectionProvider != null && this.selectionProvider.getSelection() != null 
-					&& ((TreeSelection) this.selectionProvider.getSelection()).size() == 1
-					&& ((TreeSelection) this.selectionProvider.getSelection()).getFirstElement() instanceof Reference
-					 ) {
-				Reference ref = ((Reference)((TreeSelection) this.selectionProvider.getSelection()).getFirstElement());
-				if (ref.getMax_bound() == -1 || ref.getMax_bound() > ref.getTarget().size()) {
-					addRefMenu.add(new Action("never shown entry"){});//needed if it's a submenu
-				    IMenuListener expandListener = new IMenuListener() {
-				        public void menuAboutToShow(IMenuManager m) {
-				        	fillAddRefContextMenu(m);
-				        }
-				     };
-				     addRefMenu.addMenuListener(expandListener);
-				}
-			} 
-			refMenu.add(addRefMenu);
-			menuManager.insertAfter("ui-actions",refMenu);
-		}
-		// ---- Transform Menu
-		if (o instanceof Field) {
-			IMenuManager transformMenu = new MenuManager("Transform","transform");
-			transformMenu.add(new Action("never shown entry"){}); //needed if it's a submenu
-			transformMenu.setRemoveAllWhenShown(true);
-		    IMenuListener transformListener = new IMenuListener() {
-		        public void menuAboutToShow(IMenuManager m) {
-		        	fillTransformContextMenu(m);
-		        }
-		     };
-		     transformMenu.addMenuListener(transformListener);
-		     menuManager.insertAfter("ui-actions",transformMenu);
-		}
-		
-		
-		if (o instanceof Form) {
-			copyFormAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/copy.png"));
-			menuManager.insertAfter("ui-actions", copyFormAction);
-		}
-		
-		groupAttributeAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/group.png"));
-		menuManager.insertAfter("ui-actions", groupAttributeAction);
-		
-		if (o instanceof FormClass) {
-			initializeFormClassAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/initializeFromClass.png"));
-			menuManager.insertAfter("ui-actions", initializeFormClassAction);
-			
-			MenuManager restoreMenu = new MenuManager("Restore","restore");
-			if (((FormClass)o).getDisabled().size() > 0) {
-				restoreMenu.add(new Action("never shown entry"){});
-				restoreMenu.setRemoveAllWhenShown(true);
-				IMenuListener restoreListener = new IMenuListener() {
-			        public void menuAboutToShow(IMenuManager m) {
-			        	fillRestoreContextMenu(m);
-			        }
-			     };
-			     restoreMenu.addMenuListener(restoreListener);
-			}
-			menuManager.insertAfter("ui-actions",restoreMenu);
-		}
-		
-		refreshOutlineAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/refreshOutline.png"));
-		menuManager.insertAfter("ui-actions", refreshOutlineAction);
-		
-		if (o instanceof FormCollection) {
-			synchronizeWithClassDiagram.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/synchronizeWithClassDiagram.png"));
-			menuManager.insertAfter("ui-actions", synchronizeWithClassDiagram);
-		}
 		super.addGlobalActions(menuManager);
 	}
 

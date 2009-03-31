@@ -27,7 +27,7 @@ import com.bluexml.side.form.ChoiceField;
 import com.bluexml.side.form.formPackage;
 
 /**
- * This is the item provider adapter for a {@link KerblueForms.ChoiceField} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.ChoiceField} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -61,34 +61,14 @@ public class ChoiceFieldItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addChoicesPropertyDescriptor(object);
 			addMin_boundPropertyDescriptor(object);
 			addMax_boundPropertyDescriptor(object);
 			addWidgetPropertyDescriptor(object);
+			addMultiplePropertyDescriptor(object);
+			addFilterParentPropertyDescriptor(object);
+			addFilterDataPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Choices feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addChoicesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ChoiceField_choices_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_ChoiceField_choices_feature", "_UI_ChoiceField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				 formPackage.Literals.CHOICE_FIELD__CHOICES,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -102,8 +82,8 @@ public class ChoiceFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ChoiceField_min_bound_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_ChoiceField_min_bound_feature", "_UI_ChoiceField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_ChoiceField_min_bound_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ChoiceField_min_bound_feature", "_UI_ChoiceField_type"),
 				 formPackage.Literals.CHOICE_FIELD__MIN_BOUND,
 				 true,
 				 false,
@@ -124,8 +104,8 @@ public class ChoiceFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ChoiceField_max_bound_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_ChoiceField_max_bound_feature", "_UI_ChoiceField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_ChoiceField_max_bound_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ChoiceField_max_bound_feature", "_UI_ChoiceField_type"),
 				 formPackage.Literals.CHOICE_FIELD__MAX_BOUND,
 				 true,
 				 false,
@@ -146,9 +126,75 @@ public class ChoiceFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ChoiceField_widget_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_ChoiceField_widget_feature", "_UI_ChoiceField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_ChoiceField_widget_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ChoiceField_widget_feature", "_UI_ChoiceField_type"),
 				 formPackage.Literals.CHOICE_FIELD__WIDGET,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Multiple feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addMultiplePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ChoiceField_multiple_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ChoiceField_multiple_feature", "_UI_ChoiceField_type"),
+				 formPackage.Literals.CHOICE_FIELD__MULTIPLE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Filter Parent feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addFilterParentPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ChoiceField_filterParent_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ChoiceField_filterParent_feature", "_UI_ChoiceField_type"),
+				 formPackage.Literals.CHOICE_FIELD__FILTER_PARENT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Filter Data feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addFilterDataPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ChoiceField_filterData_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ChoiceField_filterData_feature", "_UI_ChoiceField_type"),
+				 formPackage.Literals.CHOICE_FIELD__FILTER_DATA,
 				 true,
 				 false,
 				 false,
@@ -165,7 +211,7 @@ public class ChoiceFieldItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ChoiceField")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ChoiceField"));
 	}
 
 	/**
@@ -193,10 +239,12 @@ public class ChoiceFieldItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ChoiceField.class)) {
-			case formPackage.CHOICE_FIELD__CHOICES:
 			case formPackage.CHOICE_FIELD__MIN_BOUND:
 			case formPackage.CHOICE_FIELD__MAX_BOUND:
 			case formPackage.CHOICE_FIELD__WIDGET:
+			case formPackage.CHOICE_FIELD__MULTIPLE:
+			case formPackage.CHOICE_FIELD__FILTER_PARENT:
+			case formPackage.CHOICE_FIELD__FILTER_DATA:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -213,17 +261,6 @@ public class ChoiceFieldItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return FormsEditPlugin.INSTANCE;
 	}
 
 }

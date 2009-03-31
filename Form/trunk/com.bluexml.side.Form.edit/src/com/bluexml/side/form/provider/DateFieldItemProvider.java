@@ -27,7 +27,7 @@ import com.bluexml.side.form.DateField;
 import com.bluexml.side.form.formPackage;
 
 /**
- * This is the item provider adapter for a {@link KerblueForms.DateField} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.DateField} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -79,8 +79,8 @@ public class DateFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_DateField_input_formats_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_DateField_input_formats_feature", "_UI_DateField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_DateField_input_formats_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DateField_input_formats_feature", "_UI_DateField_type"),
 				 formPackage.Literals.DATE_FIELD__INPUT_FORMATS,
 				 true,
 				 false,
@@ -101,8 +101,8 @@ public class DateFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_DateField_min_date_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_DateField_min_date_feature", "_UI_DateField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_DateField_min_date_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DateField_min_date_feature", "_UI_DateField_type"),
 				 formPackage.Literals.DATE_FIELD__MIN_DATE,
 				 true,
 				 false,
@@ -123,8 +123,8 @@ public class DateFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_DateField_max_date_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_DateField_max_date_feature", "_UI_DateField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_DateField_max_date_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DateField_max_date_feature", "_UI_DateField_type"),
 				 formPackage.Literals.DATE_FIELD__MAX_DATE,
 				 true,
 				 false,
@@ -142,7 +142,7 @@ public class DateFieldItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/DateField")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/DateField"));
 	}
 
 	/**
@@ -189,17 +189,6 @@ public class DateFieldItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return FormsEditPlugin.INSTANCE;
 	}
 
 }

@@ -6,15 +6,16 @@
  */
 package com.bluexml.side.form.provider;
 
+import com.bluexml.side.clazz.provider.ClassEditPlugin;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
 
 import com.bluexml.side.common.provider.CommonEditPlugin;
 
 /**
- * This is the central singleton for the Forms edit plugin. <!-- begin-user-doc
+ * This is the central singleton for the Forms edit plugin.
+ * <!-- begin-user-doc
  * --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public final class FormsEditPlugin extends EMFPlugin {
@@ -35,18 +36,22 @@ public final class FormsEditPlugin extends EMFPlugin {
 	private static Implementation plugin;
 
 	/**
-	 * Create the instance. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Create the instance.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public FormsEditPlugin() {
-		super(new ResourceLocator[] { CommonEditPlugin.INSTANCE, });
+		super
+		  (new ResourceLocator [] {
+		     ClassEditPlugin.INSTANCE,
+		     CommonEditPlugin.INSTANCE,
+		   });
 	}
 
 	/**
-	 * Returns the singleton instance of the Eclipse plugin. <!-- begin-user-doc
+	 * Returns the singleton instance of the Eclipse plugin.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @return the singleton instance.
 	 * @generated
 	 */
@@ -56,9 +61,9 @@ public final class FormsEditPlugin extends EMFPlugin {
 	}
 
 	/**
-	 * Returns the singleton instance of the Eclipse plugin. <!-- begin-user-doc
+	 * Returns the singleton instance of the Eclipse plugin.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @return the singleton instance.
 	 * @generated
 	 */
@@ -74,8 +79,8 @@ public final class FormsEditPlugin extends EMFPlugin {
 	 */
 	public static class Implementation extends EclipsePlugin {
 		/**
-		 * Creates an instance. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * Creates an instance.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		public Implementation() {

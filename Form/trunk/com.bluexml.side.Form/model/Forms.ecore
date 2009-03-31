@@ -118,7 +118,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="regex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassReference" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="real_class" eType="#//CharField"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="real_class" eType="ecore:EClass ../../com.bluexml.side.Class/model/Class.ecore#//Clazz"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="association_class" eType="ecore:EClass ../../com.bluexml.side.Class/model/Class.ecore#//Clazz"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PasswordField" eSuperTypes="#//CharField"/>

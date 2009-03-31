@@ -27,7 +27,7 @@ import com.bluexml.side.form.CharField;
 import com.bluexml.side.form.formPackage;
 
 /**
- * This is the item provider adapter for a {@link KerblueForms.CharField} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.CharField} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -78,8 +78,8 @@ public class CharFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_CharField_min_length_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_CharField_min_length_feature", "_UI_CharField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_CharField_min_length_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_CharField_min_length_feature", "_UI_CharField_type"),
 				 formPackage.Literals.CHAR_FIELD__MIN_LENGTH,
 				 true,
 				 false,
@@ -100,8 +100,8 @@ public class CharFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_CharField_max_length_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_CharField_max_length_feature", "_UI_CharField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_CharField_max_length_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_CharField_max_length_feature", "_UI_CharField_type"),
 				 formPackage.Literals.CHAR_FIELD__MAX_LENGTH,
 				 true,
 				 false,
@@ -119,7 +119,7 @@ public class CharFieldItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/CharField")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/CharField"));
 	}
 
 	/**
@@ -165,17 +165,6 @@ public class CharFieldItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return FormsEditPlugin.INSTANCE;
 	}
 
 }

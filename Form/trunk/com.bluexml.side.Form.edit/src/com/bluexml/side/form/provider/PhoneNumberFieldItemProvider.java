@@ -27,7 +27,7 @@ import com.bluexml.side.form.PhoneNumberField;
 import com.bluexml.side.form.formPackage;
 
 /**
- * This is the item provider adapter for a {@link KerblueForms.PhoneNumberField} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.PhoneNumberField} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -77,8 +77,8 @@ public class PhoneNumberFieldItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_PhoneNumberField_input_formats_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_PhoneNumberField_input_formats_feature", "_UI_PhoneNumberField_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 getString("_UI_PhoneNumberField_input_formats_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PhoneNumberField_input_formats_feature", "_UI_PhoneNumberField_type"),
 				 formPackage.Literals.PHONE_NUMBER_FIELD__INPUT_FORMATS,
 				 true,
 				 false,
@@ -96,7 +96,7 @@ public class PhoneNumberFieldItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/PhoneNumberField")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/PhoneNumberField"));
 	}
 
 	/**
@@ -109,8 +109,8 @@ public class PhoneNumberFieldItemProvider
 	public String getText(Object object) {
 		String label = ((PhoneNumberField)object).getId();
 		return label == null || label.length() == 0 ?
-			getString("_UI_PhoneNumberField_type") : //$NON-NLS-1$
-			getString("_UI_PhoneNumberField_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+			getString("_UI_PhoneNumberField_type") :
+			getString("_UI_PhoneNumberField_type") + " " + label;
 	}
 
 	/**
@@ -142,17 +142,6 @@ public class PhoneNumberFieldItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return FormsEditPlugin.INSTANCE;
 	}
 
 }
