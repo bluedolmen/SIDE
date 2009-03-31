@@ -399,7 +399,7 @@ public class ApplicationDialog extends Dialog {
 		ets.setTitle("Select model file");
 		ets.setMessage("Select model file (no diagram file)");
 		ets.setInput(ResourcesPlugin.getWorkspace().getRoot());
-
+		
 		if (ElementTreeSelectionDialog.OK == ets.open()) {
 			Object[] result = ets.getResult();
 			for (Object o : result) {
@@ -677,7 +677,7 @@ public class ApplicationDialog extends Dialog {
 		browseLogPathButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
 				String filePath = null;
-				FileDialog fd = new FileDialog(getShell(), SWT.OK);
+				FileDialog fd = new FileDialog(getShell(), SWT.SAVE);
 				fd.setFilterNames(new String[] { "Log Files", "All Files (*.*)" });
 				fd.setFilterExtensions(new String[] { "*.log", "*.*" });
 				if (logText.getText() == null || logText.getText().length() == 0) {
