@@ -448,6 +448,15 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getFormElement_Hidden() {
+		return (EAttribute)formElementEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFormGroup() {
 		return formGroupEClass;
 	}
@@ -502,7 +511,7 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getField_Hidden() {
+	public EAttribute getField_Error_messages() {
 		return (EAttribute)fieldEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -511,7 +520,7 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getField_Error_messages() {
+	public EAttribute getField_Initial() {
 		return (EAttribute)fieldEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -520,7 +529,7 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getField_Initial() {
+	public EAttribute getField_Disabled() {
 		return (EAttribute)fieldEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -529,17 +538,8 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getField_Disabled() {
-		return (EAttribute)fieldEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getField_FieldSize() {
-		return (EAttribute)fieldEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)fieldEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1137,6 +1137,7 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 		createEAttribute(formElementEClass, FORM_ELEMENT__ID);
 		createEAttribute(formElementEClass, FORM_ELEMENT__HELP_TEXT);
 		createEReference(formElementEClass, FORM_ELEMENT__REF);
+		createEAttribute(formElementEClass, FORM_ELEMENT__HIDDEN);
 
 		formGroupEClass = createEClass(FORM_GROUP);
 		createEReference(formGroupEClass, FORM_GROUP__CHILDREN);
@@ -1145,7 +1146,6 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 
 		fieldEClass = createEClass(FIELD);
 		createEAttribute(fieldEClass, FIELD__MANDATORY);
-		createEAttribute(fieldEClass, FIELD__HIDDEN);
 		createEAttribute(fieldEClass, FIELD__ERROR_MESSAGES);
 		createEAttribute(fieldEClass, FIELD__INITIAL);
 		createEAttribute(fieldEClass, FIELD__DISABLED);
@@ -1310,6 +1310,7 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 		initEAttribute(getFormElement_Id(), ecorePackage.getEString(), "id", null, 1, 1, FormElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFormElement_Help_text(), ecorePackage.getEString(), "help_text", null, 0, 1, FormElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFormElement_Ref(), theClazzPackage.getClassModelElement(), null, "ref", null, 0, 1, FormElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFormElement_Hidden(), ecorePackage.getEBoolean(), "hidden", null, 0, 1, FormElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(formGroupEClass, FormGroup.class, "FormGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFormGroup_Children(), this.getFormElement(), null, "children", null, 0, -1, FormGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1318,7 +1319,6 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 
 		initEClass(fieldEClass, Field.class, "Field", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getField_Mandatory(), ecorePackage.getEBoolean(), "mandatory", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getField_Hidden(), ecorePackage.getEBoolean(), "hidden", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
 		EGenericType g2 = createEGenericType(ecorePackage.getEString());
 		g1.getETypeArguments().add(g2);

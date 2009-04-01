@@ -29,6 +29,7 @@ import com.bluexml.side.form.formPackage;
  *   <li>{@link com.bluexml.side.form.impl.FormElementImpl#getId <em>Id</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FormElementImpl#getHelp_text <em>Help text</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FormElementImpl#getRef <em>Ref</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.FormElementImpl#isHidden <em>Hidden</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,6 +105,26 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 	 * @ordered
 	 */
 	protected ClassModelElement ref;
+
+	/**
+	 * The default value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHidden()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean HIDDEN_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHidden()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean hidden = HIDDEN_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -230,6 +251,27 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isHidden() {
+		return hidden;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHidden(boolean newHidden) {
+		boolean oldHidden = hidden;
+		hidden = newHidden;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.FORM_ELEMENT__HIDDEN, oldHidden, hidden));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -242,6 +284,8 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 			case formPackage.FORM_ELEMENT__REF:
 				if (resolve) return getRef();
 				return basicGetRef();
+			case formPackage.FORM_ELEMENT__HIDDEN:
+				return isHidden() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -265,6 +309,9 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 				return;
 			case formPackage.FORM_ELEMENT__REF:
 				setRef((ClassModelElement)newValue);
+				return;
+			case formPackage.FORM_ELEMENT__HIDDEN:
+				setHidden(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -290,6 +337,9 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 			case formPackage.FORM_ELEMENT__REF:
 				setRef((ClassModelElement)null);
 				return;
+			case formPackage.FORM_ELEMENT__HIDDEN:
+				setHidden(HIDDEN_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -310,6 +360,8 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 				return HELP_TEXT_EDEFAULT == null ? help_text != null : !HELP_TEXT_EDEFAULT.equals(help_text);
 			case formPackage.FORM_ELEMENT__REF:
 				return ref != null;
+			case formPackage.FORM_ELEMENT__HIDDEN:
+				return hidden != HIDDEN_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -330,6 +382,8 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 		result.append(id);
 		result.append(", help_text: ");
 		result.append(help_text);
+		result.append(", hidden: ");
+		result.append(hidden);
 		result.append(')');
 		return result.toString();
 	}

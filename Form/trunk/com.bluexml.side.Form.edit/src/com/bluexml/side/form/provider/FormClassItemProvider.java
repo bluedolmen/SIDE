@@ -127,10 +127,16 @@ public class FormClassItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
+		String text = "";
 		String label = ((FormClass)object).getLabel();
-		return label == null || label.length() == 0 ?
+		if (label == null || label.length() > 0){
+			text = label;
+		} else {
+			text = ((FormClass)object).getId();
+		}
+		return text == null || text.length() == 0 ?
 			getString("_UI_FormClass_type") :
-			label;
+				text;
 	}
 
 	/**

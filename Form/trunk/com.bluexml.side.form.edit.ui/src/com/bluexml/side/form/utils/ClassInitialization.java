@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 
@@ -13,6 +14,7 @@ import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.Operation;
 import com.bluexml.side.form.Field;
+import com.bluexml.side.form.Form;
 import com.bluexml.side.form.FormAspect;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormElement;
@@ -40,6 +42,11 @@ public class ClassInitialization {
 				if (fc.getId() == null || fc.getId().length() == 0) {
 					fc.setId(cl.getName());
 				}
+				
+				if (((Form)fc.eContainer()).getName() == null || ((Form)fc.eContainer()).getName().length() == 0) {
+					((Form)fc.eContainer()).setName(cl.getName());
+				}
+				
 				Collection<FormElement> c = new ArrayList<FormElement>();
 				Collection<Clazz> listClazz = new ArrayList<Clazz>();
 				listClazz = ClassDiagramUtils.getInheritedClazzs(cl);

@@ -25,7 +25,6 @@ import com.bluexml.side.form.formPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#isMandatory <em>Mandatory</em>}</li>
- *   <li>{@link com.bluexml.side.form.impl.FieldImpl#isHidden <em>Hidden</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getError_messages <em>Error messages</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getInitial <em>Initial</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#isDisabled <em>Disabled</em>}</li>
@@ -55,26 +54,6 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	 * @ordered
 	 */
 	protected boolean mandatory = MANDATORY_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isHidden()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean HIDDEN_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isHidden()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean hidden = HIDDEN_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getError_messages() <em>Error messages</em>}' attribute.
@@ -191,27 +170,6 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isHidden() {
-		return hidden;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setHidden(boolean newHidden) {
-		boolean oldHidden = hidden;
-		hidden = newHidden;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.FIELD__HIDDEN, oldHidden, hidden));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Map<String, String> getError_messages() {
 		return error_messages;
 	}
@@ -301,8 +259,6 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 		switch (featureID) {
 			case formPackage.FIELD__MANDATORY:
 				return isMandatory() ? Boolean.TRUE : Boolean.FALSE;
-			case formPackage.FIELD__HIDDEN:
-				return isHidden() ? Boolean.TRUE : Boolean.FALSE;
 			case formPackage.FIELD__ERROR_MESSAGES:
 				return getError_messages();
 			case formPackage.FIELD__INITIAL:
@@ -326,9 +282,6 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 		switch (featureID) {
 			case formPackage.FIELD__MANDATORY:
 				setMandatory(((Boolean)newValue).booleanValue());
-				return;
-			case formPackage.FIELD__HIDDEN:
-				setHidden(((Boolean)newValue).booleanValue());
 				return;
 			case formPackage.FIELD__ERROR_MESSAGES:
 				setError_messages((Map<String, String>)newValue);
@@ -357,9 +310,6 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 			case formPackage.FIELD__MANDATORY:
 				setMandatory(MANDATORY_EDEFAULT);
 				return;
-			case formPackage.FIELD__HIDDEN:
-				setHidden(HIDDEN_EDEFAULT);
-				return;
 			case formPackage.FIELD__ERROR_MESSAGES:
 				setError_messages((Map<String, String>)null);
 				return;
@@ -386,8 +336,6 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 		switch (featureID) {
 			case formPackage.FIELD__MANDATORY:
 				return mandatory != MANDATORY_EDEFAULT;
-			case formPackage.FIELD__HIDDEN:
-				return hidden != HIDDEN_EDEFAULT;
 			case formPackage.FIELD__ERROR_MESSAGES:
 				return error_messages != null;
 			case formPackage.FIELD__INITIAL:
@@ -412,8 +360,6 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (mandatory: ");
 		result.append(mandatory);
-		result.append(", hidden: ");
-		result.append(hidden);
 		result.append(", error_messages: ");
 		result.append(error_messages);
 		result.append(", initial: ");

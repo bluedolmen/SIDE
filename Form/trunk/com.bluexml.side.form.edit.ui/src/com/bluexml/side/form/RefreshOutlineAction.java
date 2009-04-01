@@ -116,14 +116,14 @@ public class RefreshOutlineAction extends Action implements
 
 	@SuppressWarnings("deprecation")
 	private void doAction(URI uri) throws CoreException, FactoryException, IOException {
-		String metamodelURI = "http://www.bluexml.com/kerblue/forms";
+		String metamodelURI = "http://www.kerblue.org/form/1.0";
 		OutlineViewService.setNameOfSelectedForm(((Form)selectedObject).getName());
 		
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().saveAllEditors(true);
 		// References to files in the project
 		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		// Temporary project
-		IProject tmpProject = myWorkspaceRoot.getProject(".kerblueforms");
+		IProject tmpProject = myWorkspaceRoot.getProject(".form");
 
 		// create and open if necessary
 		if (!tmpProject.exists()) {
@@ -167,7 +167,7 @@ public class RefreshOutlineAction extends Action implements
 
 		List<String> templates = new ArrayList<String>();
 
-		templates.add("/KerBlue.Forms.editor/kerblue/forms/editor/views/default.mt");
+		templates.add("/com.bluexml.side.form.edit.ui/src/com/bluexml/side/form/editor/views/default.mt");
 
 		for (String templateFile : templates) {
 			// Generator
@@ -187,7 +187,7 @@ public class RefreshOutlineAction extends Action implements
 
 		// Register the default resource factory -- only needed for
 		// stand-alone!
-		IFile fchain = tmpProject.getFile("kerblueforms.chain");
+		IFile fchain = tmpProject.getFile("form.chain");
 		URI chainURI = Resources.createPlatformResourceURI(fchain.getFullPath().toString());
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
@@ -209,10 +209,10 @@ public class RefreshOutlineAction extends Action implements
 		while (dis.available() != 0) {
 			content += dis.readLine();
 		}
-		OutlineHTMLView v = (OutlineHTMLView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("kerblue.forms.editor.views.OutlineHTMLView");
+		OutlineHTMLView v = (OutlineHTMLView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("com.bluexml.side.form.editor.views.OutlineHTMLView");
 		v.setContent(content);
 		
-		IProject myproject = myWorkspaceRoot.getProject(".kerblueforms");
+		IProject myproject = myWorkspaceRoot.getProject(".form");
 		myproject.delete(true, new NullProgressMonitor());
 	}
 

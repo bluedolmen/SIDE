@@ -320,7 +320,7 @@ public class ClassDiagramUtils {
 			return null;
 		}
 		if (elt.eContainer() == null) {
-			if (elt instanceof Package) {
+			if (elt instanceof ClassPackage) {
 				ClassPackage p = (ClassPackage) elt;
 				return p;
 			} else
@@ -340,12 +340,15 @@ public class ClassDiagramUtils {
 	 */
 	private static List<ClassPackage> getAllChildrens(ClassPackage p) {
 		List<ClassPackage> l = new ArrayList<ClassPackage>();
-		l.add(p);
-		for (Object o : p.getPackageSet())
-			if (o instanceof ClassPackage) {
-				ClassPackage p2 = (ClassPackage) o;
-				l.addAll(getAllChildrens(p2));
+		if (p != null) {
+			l.add(p);
+			for (Object o : p.getPackageSet()) {
+				if (o instanceof ClassPackage) {
+					ClassPackage p2 = (ClassPackage) o;
+					l.addAll(getAllChildrens(p2));
+				}
 			}
+		}
 		return l;
 	}
 

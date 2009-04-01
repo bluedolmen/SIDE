@@ -17,7 +17,6 @@ import java.util.Map;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.bluexml.side.form.Field#isMandatory <em>Mandatory</em>}</li>
- *   <li>{@link com.bluexml.side.form.Field#isHidden <em>Hidden</em>}</li>
  *   <li>{@link com.bluexml.side.form.Field#getError_messages <em>Error messages</em>}</li>
  *   <li>{@link com.bluexml.side.form.Field#getInitial <em>Initial</em>}</li>
  *   <li>{@link com.bluexml.side.form.Field#isDisabled <em>Disabled</em>}</li>
@@ -55,32 +54,6 @@ public interface Field extends FormElement {
 	 * @generated
 	 */
 	void setMandatory(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Hidden</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Hidden</em>' attribute.
-	 * @see #setHidden(boolean)
-	 * @see com.bluexml.side.form.formPackage#getField_Hidden()
-	 * @model
-	 * @generated
-	 */
-	boolean isHidden();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.form.Field#isHidden <em>Hidden</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Hidden</em>' attribute.
-	 * @see #isHidden()
-	 * @generated
-	 */
-	void setHidden(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Error messages</b></em>' attribute.

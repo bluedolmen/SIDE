@@ -23,6 +23,7 @@ import com.bluexml.side.clazz.ClassModelElement;
  *   <li>{@link com.bluexml.side.form.FormElement#getId <em>Id</em>}</li>
  *   <li>{@link com.bluexml.side.form.FormElement#getHelp_text <em>Help text</em>}</li>
  *   <li>{@link com.bluexml.side.form.FormElement#getRef <em>Ref</em>}</li>
+ *   <li>{@link com.bluexml.side.form.FormElement#isHidden <em>Hidden</em>}</li>
  * </ul>
  * </p>
  *
@@ -136,5 +137,31 @@ public interface FormElement extends EObject {
 	 * @generated
 	 */
 	void setRef(ClassModelElement value);
+
+	/**
+	 * Returns the value of the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Hidden</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Hidden</em>' attribute.
+	 * @see #setHidden(boolean)
+	 * @see com.bluexml.side.form.formPackage#getFormElement_Hidden()
+	 * @model
+	 * @generated
+	 */
+	boolean isHidden();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.form.FormElement#isHidden <em>Hidden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Hidden</em>' attribute.
+	 * @see #isHidden()
+	 * @generated
+	 */
+	void setHidden(boolean value);
 
 } // FormElement

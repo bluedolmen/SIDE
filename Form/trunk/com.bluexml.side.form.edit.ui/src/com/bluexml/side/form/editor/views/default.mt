@@ -1,9 +1,9 @@
 <%
-metamodel http://www.bluexml.com/kerblue/forms
-import kerblue.forms.editor.views.service.OutlineViewService
-import kerblue.forms.editor.views.service.HTMLEncoder
+metamodel http://www.kerblue.org/workflow/1.0
+import com.bluexml.side.form.editor.views.service.OutlineViewService
+import com.bluexml.side.form.editor.views.service.HTMLEncoder
 %> 
-<%script type="KerblueForms.FormCollection" name="default" file="output.html"%>
+<%script type="form.FormCollection" name="default" file="output.html"%>
 <html>
 	<head>
 	<style type="text/css">
@@ -131,7 +131,7 @@ li.tabs, ul.tabs {
 			 </ul>
 			
 			<%for (current().children){%>
-				<%current().getHtmlForFormElem()%>
+				<%current().getHtmlForFormElem(true)%>
 			<%}%>
 			
 			<script type="text/javascript">
@@ -154,18 +154,22 @@ li.tabs, ul.tabs {
 </body>
 </html>
 
-<%script type="KerblueForms.FormElement" name="getHtmlForFormElem"%>
+<%script type="form.FormElement" name="getHtmlForFormElem"%>
 <%if (cast("VirtualField")){%>
 	<%if (current("VirtualField").link != null){%>
-		<%current("VirtualField").link.getHtmlForFormElem()%>
+		<%current("VirtualField").link.getHtmlForFormElem(false)%>
 	<%}%>
-<%}else if (cast("FormAspect") || cast("FormGroup") || cast("Reference")) {%>
+<%}else if ((cast("FormAspect") || cast("FormGroup") || cast("Reference")) && !current().hidden) {%>
 	<%if (cast("FormGroup") && current("FormGroup").presentation.equalsIgnoreCase("Tabbed")){%>
 		<div class="tab" id="tab-<%id%>">
 	<%}else if (cast("FormGroup") && current("FormGroup").presentation.equalsIgnoreCase("horizontal")){%>
 	&nbsp;<table><tr>
+	<%}else if((cast("Reference") && (current("Reference").target.nSize() == 1 && !current("Reference").target.nGet(0).hidden)) || !cast("Reference")){%>
+	<%if (current().presentation.equalsIgnoreCase("borderless")){%>
+		<fieldset style="border:0px;">
 	<%}else{%>
-	<fieldset>
+		<fieldset>
+	<%}%>
 		<legend><%label.encode()%></legend>
 			<ol>
 	<%}%>
@@ -174,42 +178,46 @@ li.tabs, ul.tabs {
 					<%if (current("FormGroup") && current("FormGroup").presentation.equalsIgnoreCase("horizontal")){%>
 						<td>
 					<%}%>
-					<%current().getHtmlForFormElem()%>
+					<%current().getHtmlForFormElem(true)%>
 					<%if (current("FormGroup") && current("FormGroup").presentation.equalsIgnoreCase("horizontal")){%>
 						</td>
 					<%}%>
 				<%}%>
 			<%}else if(cast("Reference")){%>
 				<%-- For each target we display the widget --%>
-				<%for (current("Reference").target){%>
-				
-					<%if (current("Reference").association_formClass != null){%> 
-						<table><tr><td valign="top">
-					<%}%>
-				
-					<%-- Default widget : list of type with Add button or inline form --%>
-					<%if (current("Reference").widget.equalsIgnoreCase("AssociationClassSelect")){%>
-						<%if ((!current("Reference").max_bound.equalsIgnoreCase("1")) && (current("Reference").real_class.isAbstract || current("Reference").real_class.generalizations.length() > 0)){%>
-							<%-- TODO : manage differents cases--%>
-							<%current().getHtmlForFormElem()%>
-						<%}else{%>
-							<%current().getHtmlForFormElem()%>
+				<%if ((current("Reference").target.nSize() == 1 && !current("Reference").target.nGet(0).hidden)
+				 || current("Reference").target.nSize() > 1){%>
+					<%for (current("Reference").target){%>
+						<%if (!current().hidden){%>
+							<%if (current("Reference").association_formClass != null){%> 
+								<table><tr><td valign="top">
+							<%}%>
+						
+							<%-- Default widget : list of type with Add button or inline form --%>
+							<%if (current("Reference").widget.equalsIgnoreCase("AssociationClassSelect")){%>
+								<%if ((!current("Reference").max_bound.equalsIgnoreCase("1")) && (current("Reference").real_class.isAbstract || current("Reference").real_class.generalizations.length() > 0)){%>
+									<%-- TODO : manage differents cases--%>
+									<%current().getHtmlForFormElem(true)%>
+								<%}else{%>
+									<%current().getHtmlForFormElem(true)%>
+								<%}%>
+							<%}else{%>
+								<%current().getHtmlForFormElem(true)%>
+							<%}%>
+							
+							<%if (current("Reference").association_formClass != null){%> 
+								</td>
+								<td  valign="top">
+									<%current("Reference").association_formClass.getHtmlForFormElem(true)%>
+								</td>
+								</tr>
+								</table>
+							<%}%>
 						<%}%>
-					<%}else{%>
-						<%current().getHtmlForFormElem()%>
 					<%}%>
-					
-					<%if (current("Reference").association_formClass != null){%> 
-						</td>
-						<td  valign="top">
-							<%current("Reference").association_formClass.getHtmlForFormElem()%>
-						</td>
-						</tr>
-						</table>
+					<%if (current("Reference").max_bound > 1 || current("Reference").max_bound == -1){%>
+						<input type="button" value=" + " width="20px">
 					<%}%>
-				<%}%>
-				<%if (current("Reference").max_bound > 1 || current("Reference").max_bound == -1){%>
-					<input type="button" value=" + " width="20px">
 				<%}%>
 			<%}%>
 	
@@ -222,10 +230,10 @@ li.tabs, ul.tabs {
 	</fieldset>	
 	<%}%>
 			
-<%}else{%>
-	<%if (!current("KerblueForms.Field").isVirtualized()){%>
+<%}else if (cast("Field")){%>
+	<%if ((args(0) && !current("Field").isVirtualized()) || !args(0)){%>
 		<li> 
-		<%if (current("KerblueForms.Field").hidden) {%>
+		<%if (current("Field").hidden) {%>
 			<input type="hidden" name="<%id%>" id="<%id%>">
 		<%}else{%>
 			<%if (!cast("ActionField")){%>
@@ -295,9 +303,10 @@ li.tabs, ul.tabs {
 				<%}%>
 			<%}%>
 		<%}%>
-		<%if (current("KerblueForms.Field").mandatory) {%>
+		<%if (current("Form.Field").mandatory) {%>
 			<em>*</em>
 		<%}%>
 		</li>
+	<%}%>
 	<%}%>
 <%}%>

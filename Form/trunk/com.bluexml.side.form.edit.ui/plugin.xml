@@ -12,14 +12,14 @@
       <extension
         point="org.eclipse.ui.views">
      <category
-           id="KerBlue.Forms.editor"
+           id="com.bluexml.side"
            name="BlueXML">
      </category>
      <view
            category="KerBlue.Forms.editor"
            class="com.bluexml.side.form.editor.views.OutlineHTMLView"
-           icon="icons/sample.gif"
-           id="kerblue.forms.editor.views.OutlineHTMLView"
+           icon="icon/outlineView.png"
+           id="com.bluexml.side.form.editor.views.OutlineHTMLView"
            name="OutlineHTMLView">
      </view>
   </extension>   

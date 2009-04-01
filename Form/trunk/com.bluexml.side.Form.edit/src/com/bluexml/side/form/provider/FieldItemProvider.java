@@ -62,7 +62,6 @@ public class FieldItemProvider
 			super.getPropertyDescriptors(object);
 
 			addMandatoryPropertyDescriptor(object);
-			addHiddenPropertyDescriptor(object);
 			addError_messagesPropertyDescriptor(object);
 			addInitialPropertyDescriptor(object);
 			addDisabledPropertyDescriptor(object);
@@ -85,28 +84,6 @@ public class FieldItemProvider
 				 getString("_UI_Field_mandatory_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Field_mandatory_feature", "_UI_Field_type"),
 				 formPackage.Literals.FIELD__MANDATORY,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Hidden feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addHiddenPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Field_hidden_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Field_hidden_feature", "_UI_Field_type"),
-				 formPackage.Literals.FIELD__HIDDEN,
 				 true,
 				 false,
 				 false,
@@ -229,7 +206,6 @@ public class FieldItemProvider
 
 		switch (notification.getFeatureID(Field.class)) {
 			case formPackage.FIELD__MANDATORY:
-			case formPackage.FIELD__HIDDEN:
 			case formPackage.FIELD__ERROR_MESSAGES:
 			case formPackage.FIELD__INITIAL:
 			case formPackage.FIELD__DISABLED:

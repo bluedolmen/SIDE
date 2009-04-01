@@ -146,13 +146,22 @@ public interface formPackage extends EPackage {
 	int FORM_ELEMENT__REF = 3;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_ELEMENT__HIDDEN = 4;
+
+	/**
 	 * The number of structural features of the '<em>Form Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_ELEMENT_FEATURE_COUNT = 4;
+	int FORM_ELEMENT_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormGroupImpl <em>Form Group</em>}' class.
@@ -199,6 +208,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int FORM_GROUP__REF = FORM_ELEMENT__REF;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_GROUP__HIDDEN = FORM_ELEMENT__HIDDEN;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -283,6 +301,15 @@ public interface formPackage extends EPackage {
 	int FIELD__REF = FORM_ELEMENT__REF;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__HIDDEN = FORM_ELEMENT__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -292,22 +319,13 @@ public interface formPackage extends EPackage {
 	int FIELD__MANDATORY = FORM_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD__HIDDEN = FORM_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD__ERROR_MESSAGES = FORM_ELEMENT_FEATURE_COUNT + 2;
+	int FIELD__ERROR_MESSAGES = FORM_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Initial</b></em>' attribute.
@@ -316,7 +334,7 @@ public interface formPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD__INITIAL = FORM_ELEMENT_FEATURE_COUNT + 3;
+	int FIELD__INITIAL = FORM_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
@@ -325,7 +343,7 @@ public interface formPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD__DISABLED = FORM_ELEMENT_FEATURE_COUNT + 4;
+	int FIELD__DISABLED = FORM_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
@@ -334,7 +352,7 @@ public interface formPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD__FIELD_SIZE = FORM_ELEMENT_FEATURE_COUNT + 5;
+	int FIELD__FIELD_SIZE = FORM_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Field</em>' class.
@@ -343,7 +361,7 @@ public interface formPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_FEATURE_COUNT = FORM_ELEMENT_FEATURE_COUNT + 6;
+	int FIELD_FEATURE_COUNT = FORM_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.BooleanFieldImpl <em>Boolean Field</em>}' class.
@@ -392,15 +410,6 @@ public interface formPackage extends EPackage {
 	int BOOLEAN_FIELD__REF = FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_FIELD__MANDATORY = FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -408,6 +417,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOLEAN_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__MANDATORY = FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -501,15 +519,6 @@ public interface formPackage extends EPackage {
 	int CHAR_FIELD__REF = FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHAR_FIELD__MANDATORY = FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -517,6 +526,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int CHAR_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_FIELD__MANDATORY = FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -628,15 +646,6 @@ public interface formPackage extends EPackage {
 	int DATE_FIELD__REF = FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_FIELD__MANDATORY = FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -644,6 +653,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATE_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__MANDATORY = FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -764,15 +782,6 @@ public interface formPackage extends EPackage {
 	int DATE_TIME_FIELD__REF = DATE_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_TIME_FIELD__MANDATORY = DATE_FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -780,6 +789,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATE_TIME_FIELD__HIDDEN = DATE_FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__MANDATORY = DATE_FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -900,15 +918,6 @@ public interface formPackage extends EPackage {
 	int DECIMAL_FIELD__REF = FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DECIMAL_FIELD__MANDATORY = FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -916,6 +925,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int DECIMAL_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__MANDATORY = FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -1045,15 +1063,6 @@ public interface formPackage extends EPackage {
 	int FLOAT_FIELD__REF = FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOAT_FIELD__MANDATORY = FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1061,6 +1070,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int FLOAT_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__MANDATORY = FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -1172,15 +1190,6 @@ public interface formPackage extends EPackage {
 	int INTEGER_FIELD__REF = FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_FIELD__MANDATORY = FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1188,6 +1197,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int INTEGER_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__MANDATORY = FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -1299,15 +1317,6 @@ public interface formPackage extends EPackage {
 	int MODEL_CHOICE_FIELD__REF = FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_CHOICE_FIELD__MANDATORY = FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1315,6 +1324,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int MODEL_CHOICE_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_FIELD__MANDATORY = FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -1480,15 +1498,6 @@ public interface formPackage extends EPackage {
 	int EMAIL_FIELD__REF = CHAR_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_FIELD__MANDATORY = CHAR_FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1496,6 +1505,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int EMAIL_FIELD__HIDDEN = CHAR_FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__MANDATORY = CHAR_FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -1607,15 +1625,6 @@ public interface formPackage extends EPackage {
 	int FILE_FIELD__REF = FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FIELD__MANDATORY = FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1623,6 +1632,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int FILE_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__MANDATORY = FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -1716,15 +1734,6 @@ public interface formPackage extends EPackage {
 	int IMAGE_FIELD__REF = FILE_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMAGE_FIELD__MANDATORY = FILE_FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1732,6 +1741,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMAGE_FIELD__HIDDEN = FILE_FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__MANDATORY = FILE_FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -1825,15 +1843,6 @@ public interface formPackage extends EPackage {
 	int TIME_FIELD__REF = DATE_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_FIELD__MANDATORY = DATE_FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1841,6 +1850,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int TIME_FIELD__HIDDEN = DATE_FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__MANDATORY = DATE_FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -1961,15 +1979,6 @@ public interface formPackage extends EPackage {
 	int URL_FIELD__REF = CHAR_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int URL_FIELD__MANDATORY = CHAR_FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1977,6 +1986,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int URL_FIELD__HIDDEN = CHAR_FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__MANDATORY = CHAR_FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -2097,15 +2115,6 @@ public interface formPackage extends EPackage {
 	int PHONE_NUMBER_FIELD__REF = CHAR_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHONE_NUMBER_FIELD__MANDATORY = CHAR_FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2113,6 +2122,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int PHONE_NUMBER_FIELD__HIDDEN = CHAR_FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__MANDATORY = CHAR_FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -2233,6 +2251,15 @@ public interface formPackage extends EPackage {
 	int FORM_ASPECT__REF = FORM_GROUP__REF;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_ASPECT__HIDDEN = FORM_GROUP__HIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2313,6 +2340,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int FORM_CLASS__REF = FORM_GROUP__REF;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CLASS__HIDDEN = FORM_GROUP__HIDDEN;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -2415,15 +2451,6 @@ public interface formPackage extends EPackage {
 	int REFERENCE__REF = MODEL_CHOICE_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCE__MANDATORY = MODEL_CHOICE_FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2431,6 +2458,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int REFERENCE__HIDDEN = MODEL_CHOICE_FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__MANDATORY = MODEL_CHOICE_FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -2625,15 +2661,6 @@ public interface formPackage extends EPackage {
 	int CHOICE_FIELD__REF = FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHOICE_FIELD__MANDATORY = FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2641,6 +2668,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int CHOICE_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_FIELD__MANDATORY = FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -2788,15 +2824,6 @@ public interface formPackage extends EPackage {
 	int REGEX_FIELD__REF = CHAR_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REGEX_FIELD__MANDATORY = CHAR_FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2804,6 +2831,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int REGEX_FIELD__HIDDEN = CHAR_FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGEX_FIELD__MANDATORY = CHAR_FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -2961,15 +2997,6 @@ public interface formPackage extends EPackage {
 	int PASSWORD_FIELD__REF = CHAR_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__MANDATORY = CHAR_FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2977,6 +3004,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int PASSWORD_FIELD__HIDDEN = CHAR_FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__MANDATORY = CHAR_FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -3088,15 +3124,6 @@ public interface formPackage extends EPackage {
 	int VIRTUAL_FIELD__REF = FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIRTUAL_FIELD__MANDATORY = FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3104,6 +3131,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int VIRTUAL_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_FIELD__MANDATORY = FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -3206,15 +3242,6 @@ public interface formPackage extends EPackage {
 	int ACTION_FIELD__REF = FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FIELD__MANDATORY = FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3222,6 +3249,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int ACTION_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__MANDATORY = FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -3315,15 +3351,6 @@ public interface formPackage extends EPackage {
 	int TEXT_FIELD__REF = CHAR_FIELD__REF;
 
 	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT_FIELD__MANDATORY = CHAR_FIELD__MANDATORY;
-
-	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3331,6 +3358,15 @@ public interface formPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEXT_FIELD__HIDDEN = CHAR_FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__MANDATORY = CHAR_FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -3533,6 +3569,17 @@ public interface formPackage extends EPackage {
 	EReference getFormElement_Ref();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.FormElement#isHidden <em>Hidden</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Hidden</em>'.
+	 * @see com.bluexml.side.form.FormElement#isHidden()
+	 * @see #getFormElement()
+	 * @generated
+	 */
+	EAttribute getFormElement_Hidden();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.FormGroup <em>Form Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3595,17 +3642,6 @@ public interface formPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getField_Mandatory();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.Field#isHidden <em>Hidden</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Hidden</em>'.
-	 * @see com.bluexml.side.form.Field#isHidden()
-	 * @see #getField()
-	 * @generated
-	 */
-	EAttribute getField_Hidden();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.Field#getError_messages <em>Error messages</em>}'.
@@ -4395,6 +4431,14 @@ public interface formPackage extends EPackage {
 		EReference FORM_ELEMENT__REF = eINSTANCE.getFormElement_Ref();
 
 		/**
+		 * The meta object literal for the '<em><b>Hidden</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FORM_ELEMENT__HIDDEN = eINSTANCE.getFormElement_Hidden();
+
+		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormGroupImpl <em>Form Group</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4445,14 +4489,6 @@ public interface formPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute FIELD__MANDATORY = eINSTANCE.getField_Mandatory();
-
-		/**
-		 * The meta object literal for the '<em><b>Hidden</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FIELD__HIDDEN = eINSTANCE.getField_Hidden();
 
 		/**
 		 * The meta object literal for the '<em><b>Error messages</b></em>' attribute feature.
