@@ -35,7 +35,7 @@ public class GeneratorParameterDataStructure {
 		String result = "";
 		if (element instanceof GeneratorParameter) {
 			GeneratorParameter genParam = (GeneratorParameter) element;
-			result = genParam.getKey();
+			result = genParam.getLabel();
 		}
 		return result;
 	}

@@ -434,9 +434,10 @@ public class ApplicationDialog extends Dialog {
 
 		Composite container = (Composite) super.createDialogArea(parent);
 		container.setLayout(null);
+		
 
 		documentationText = new Browser(container, SWT.NONE);
-		documentationText.setBounds(493, 185, 294, 318);
+		documentationText.setBounds(493, 67, 294, 436);
 
 		tabFolder = new TabFolder(container, SWT.NONE);
 		
@@ -765,7 +766,7 @@ public class ApplicationDialog extends Dialog {
 
 		config_description = new Text(container, SWT.READ_ONLY | SWT.BORDER
 				| SWT.WRAP);
-		config_description.setBounds(493, 10, 297, 169);
+		config_description.setBounds(493, 10, 297, 51);
 
 		configurationList = new Combo(container, SWT.READ_ONLY);
 		configurationList.setBounds(128, 10, 191, 23);
@@ -885,7 +886,7 @@ public class ApplicationDialog extends Dialog {
 				"tree/img/add.png"));
 
 		final Button deleteBt = new Button(container, SWT.NONE);
-		deleteBt.setBounds(400, 10, 40, 20);
+		deleteBt.setBounds(405, 10, 40, 20);
 		deleteBt.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
 				if (configurationList.getItemCount() > 0) {
@@ -1270,13 +1271,6 @@ public class ApplicationDialog extends Dialog {
 		createButton(parent, IDialogConstants.CLOSE_ID, "Close", false);
 	}
 
-	/**
-	 * Return the initial size of the dialog
-	 */
-	@Override
-	protected Point getInitialSize() {
-		return new Point(800, 600);
-	}
 
 	protected void buttonPressed(int buttonId) {
 		if (buttonId == IDialogConstants.CLOSE_ID) {
