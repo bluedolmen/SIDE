@@ -35,14 +35,14 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Swimlane">
     <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="ActorNameMustBeUnique" value="Swimlane.allInstances() -> forAll(s1,s2 | s1 &lt;> s2 implies s1.name &lt;> s2.name)"/>
+      <details key="ActorNameMustBeUnique" value="Swimlane.allInstances() -> select(n|n.name = self.name and n &lt;> self )->size()=0"/>
       <details key="MustManageAtLeastOneTask" value="not self.manage->isEmpty()"/>
       <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') &lt;> null"/>
       <details key="OnlyOneActorCalledInitiator" value="Swimlane.allInstances() -> select(s| s.name ='initiator')->size() = 1"/>
-      <details key="AssignementMustBeSetForAllExeptOneActor" value="Swimlane.allInstances() -> select(s | s.name &lt;>'initiator' and (s.actorid -> isEmpty() or s.actorid='')  and (s.pooledactors  -> isEmpty() or s.pooledactors =''))->size() &lt;=1&#xA;"/>
+      <details key="ActoridOrPooledactorMustBeSetForAllExeptOneActor" value="Swimlane.allInstances() -> select(s | s.name &lt;>'initiator' and (s.actorid -> isEmpty() or s.actorid='')  and (s.pooledactors  -> isEmpty() or s.pooledactors =''))->size() &lt;=1&#xA;"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="ActorNameMustBeUnique MustManageAtLeastOneTask noSpecialCharacters OnlyOneActorCalledInitiator AssignementMustBeSetForAllExeptOneActor"/>
+      <details key="constraints" value="ActorNameMustBeUnique MustManageAtLeastOneTask noSpecialCharacters OnlyOneActorCalledInitiator ActoridOrPooledactorMustBeSetForAllExeptOneActor"/>
     </eAnnotations>
     <eOperations name="EqualsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
@@ -99,6 +99,12 @@
         eType="#//Event" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TaskNode" eSuperTypes="#//State">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="TaskMustBePointerByTransition" value="Transition.allInstances()-> select(t| t.to = self)->size()=1 or self.transition -> notEmpty()&#xA;"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="NoTaskWithSameName TaskMustBePointerByTransition"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
         eType="#//Transition" containment="true" eOpposite="#//Transition/parentTaskNode"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="event" upperBound="-1"
@@ -170,7 +176,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transition">
     <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="NoTransitionWithSameName" value="Transition.allInstances() -> forAll(s1,s2 | s1 &lt;> s2 implies s1.name &lt;> s2.name)"/>
+      <details key="NoTransitionWithSameName" value="Transition.allInstances() -> select(n|n.name = self.name and n &lt;> self )->size()=0"/>
       <details key="SourceAndTargetMustBeSet" value="not self.to.oclIsUndefined() and not self.getContainer().oclIsUndefined()"/>
       <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') &lt;> null"/>
     </eAnnotations>
@@ -210,8 +216,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="State" abstract="true">
     <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="NoStateWithSameName" value="State.allInstances() -> forAll(s1,s2 | s1 &lt;> s2 implies s1.name &lt;> s2.name)"/>
       <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') &lt;> null"/>
+      <details key="NoStateWithSameName" value="State.allInstances() -> select(n|n.name = self.name and n &lt;> self )->size()=0"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="NoStateWithSameName noSpecialCharacters"/>
@@ -225,7 +231,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Attribute">
     <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="UniqueNameForTaskAttribute" value="Attribute.allInstances() -> forAll(a1,a2| a1 &lt;>a2 implies a1.name &lt;> a2.name)"/>
+      <details key="UniqueNameForTaskAttribute" value="Attribute.allInstances() -> select(n|n.name = self.name and n &lt;> self )->size()=0"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="UniqueNameForTaskAttribute"/>
