@@ -13,10 +13,7 @@ import org.topcased.modeler.utils.Utils;
 
 import com.bluexml.side.Class.modeler.diagram.edit.EnumerationEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.dependsEditPart;
-import com.bluexml.side.clazz.ClassPackage;
-import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.Enumeration;
-import com.bluexml.side.clazz.View;
 
 
 public class DeleteLinkEnumerationDependsAction extends WorkbenchPartAction implements ISelectionChangedListener

@@ -31,9 +31,9 @@ import org.topcased.modeler.utils.Utils;
 import com.bluexml.side.Class.modeler.diagram.CdSimpleObjectConstants;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
+import com.bluexml.side.clazz.ClassComment;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.View;
-import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.Stereotype;
 
 /**
@@ -91,13 +91,13 @@ public class ClazzRestoreConnectionCommand extends
 					}
 				}
 
-				if (eObjectTgt instanceof Comment) {
+				if (eObjectTgt instanceof ClassComment) {
 					if (autoRef) {
 						// autoRef not allowed
 					} else {
 						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-						createisCommentedFromClazzToComment(graphElementSrc,
-								graphElementTgt);
+						createisCommentedFromClazzToClassComment(
+								graphElementSrc, graphElementTgt);
 					}
 				}
 				if (eObjectTgt instanceof Stereotype) {
@@ -246,6 +246,30 @@ public class ClazzRestoreConnectionCommand extends
 	}
 
 	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
+	private void createisCommentedFromClazzToClassComment(GraphElement srcElt,
+			GraphElement targetElt) {
+		Clazz sourceObject = (Clazz) Utils.getElement(srcElt);
+		ClassComment targetObject = (ClassComment) Utils.getElement(targetElt);
+
+		if (sourceObject.getHasComments().contains(targetObject)) {
+			// check if the relation does not exists yet
+			if (getExistingEdges(srcElt, targetElt,
+					CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED).size() == 0) {
+				GraphEdge edge = Utils
+						.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED);
+				isCommentedEdgeCreationCommand cmd = new isCommentedEdgeCreationCommand(
+						null, edge, srcElt, false);
+				cmd.setTarget(targetElt);
+				add(cmd);
+			}
+		}
+	}
+
+	/**
 	 * @param srcElt
 	 *            the source element
 	 * @param targetElt
@@ -294,32 +318,6 @@ public class ClazzRestoreConnectionCommand extends
 						}
 					}
 				}
-			}
-		}
-	}
-
-	/**
-	 * @param srcElt
-	 *            the source element
-	 * @param targetElt
-	 *            the target element
-	 * @generated
-	 */
-	private void createisCommentedFromClazzToComment(GraphElement srcElt,
-			GraphElement targetElt) {
-		Clazz sourceObject = (Clazz) Utils.getElement(srcElt);
-		Comment targetObject = (Comment) Utils.getElement(targetElt);
-
-		if (sourceObject.getComments().contains(targetObject)) {
-			// check if the relation does not exists yet
-			if (getExistingEdges(srcElt, targetElt,
-					CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED).size() == 0) {
-				GraphEdge edge = Utils
-						.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED);
-				isCommentedEdgeCreationCommand cmd = new isCommentedEdgeCreationCommand(
-						null, edge, srcElt, false);
-				cmd.setTarget(targetElt);
-				add(cmd);
 			}
 		}
 	}

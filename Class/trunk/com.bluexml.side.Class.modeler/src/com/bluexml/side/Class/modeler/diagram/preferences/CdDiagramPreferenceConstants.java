@@ -111,22 +111,22 @@ public interface CdDiagramPreferenceConstants {
 	String OPERATION_DEFAULT_FONT = "Operation Default Font";
 
 	/**
-	 * The key used to install a <i>Comment Default Background Color</i> Preference.
+	 * The key used to install a <i>ClassComment Default Background Color</i> Preference.
 	 * @generated
 	 */
-	String COMMENT_DEFAULT_BACKGROUND_COLOR = "Comment Default Background Color";
+	String CLASSCOMMENT_DEFAULT_BACKGROUND_COLOR = "ClassComment Default Background Color";
 
 	/**
-	 * The key used to install a <i>Comment Default Foreground Color</i> Preference.
+	 * The key used to install a <i>ClassComment Default Foreground Color</i> Preference.
 	 * @generated
 	 */
-	String COMMENT_DEFAULT_FOREGROUND_COLOR = "Comment Default Foreground Color";
+	String CLASSCOMMENT_DEFAULT_FOREGROUND_COLOR = "ClassComment Default Foreground Color";
 
 	/**
-	 * The key used to install a <i>Comment Default Font</i> Preference.
+	 * The key used to install a <i>ClassComment Default Font</i> Preference.
 	 * @generated
 	 */
-	String COMMENT_DEFAULT_FONT = "Comment Default Font";
+	String CLASSCOMMENT_DEFAULT_FONT = "ClassComment Default Font";
 
 	/**
 	 * The key used to install a <i>Enumeration Default Background Color</i> Preference.

@@ -52,10 +52,10 @@ public interface CdEditPolicyConstants {
 	String OPERATION_EDITPOLICY = "Operation EditPolicy";
 
 	/**
-	 * The key used to install an <i>Comment</i> EditPolicy.
+	 * The key used to install an <i>ClassComment</i> EditPolicy.
 	 * @generated
 	 */
-	String COMMENT_EDITPOLICY = "Comment EditPolicy";
+	String CLASSCOMMENT_EDITPOLICY = "ClassComment EditPolicy";
 
 	/**
 	 * The key used to install an <i>Enumeration</i> EditPolicy.

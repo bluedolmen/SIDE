@@ -76,6 +76,7 @@ public class ClazzFactoryImpl extends EFactoryImpl implements ClazzFactory {
 			case ClazzPackage.VIEW_ITEM: return createViewItem();
 			case ClazzPackage.META_INFO: return createMetaInfo();
 			case ClazzPackage.META_INFO_GROUP: return createMetaInfoGroup();
+			case ClazzPackage.CLASS_COMMENT: return createClassComment();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -267,6 +268,16 @@ public class ClazzFactoryImpl extends EFactoryImpl implements ClazzFactory {
 	public MetaInfoGroup createMetaInfoGroup() {
 		MetaInfoGroupImpl metaInfoGroup = new MetaInfoGroupImpl();
 		return metaInfoGroup;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassComment createClassComment() {
+		ClassCommentImpl classComment = new ClassCommentImpl();
+		return classComment;
 	}
 
 	/**

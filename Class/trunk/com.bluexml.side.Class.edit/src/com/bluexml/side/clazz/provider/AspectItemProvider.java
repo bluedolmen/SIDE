@@ -9,6 +9,8 @@ package com.bluexml.side.clazz.provider;
 
 import com.bluexml.side.clazz.Aspect;
 
+import com.bluexml.side.clazz.ClazzPackage;
+import com.bluexml.side.common.CommonPackage;
 import java.util.Collection;
 import java.util.List;
 
@@ -111,6 +113,29 @@ public class AspectItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == CommonPackage.Literals.MODEL_ELEMENT__COMMENTS ||
+			childFeature == ClazzPackage.Literals.CLASS_MODEL_ELEMENT__HAS_COMMENTS;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

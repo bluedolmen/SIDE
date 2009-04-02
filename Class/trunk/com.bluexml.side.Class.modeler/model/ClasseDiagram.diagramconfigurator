@@ -49,10 +49,10 @@
   </parts>
   <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_yP_ENHcBEdyUwq_XzqQQrw" object="_yP_ESncBEdyUwq_XzqQQrw" defaultForegroundColor="128,128,192" foregroundColorChangeable="false" fontChangeable="false">
     <sourceTargetCouple xmi:id="_Xa7aoA4mEd6Wf853iHsJzA" sourceNode="_yP16T3cBEdyUwq_XzqQQrw" targetNode="_yP16UncBEdyUwq_XzqQQrw">
-      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement/comments"/>
+      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//ClassModelElement/hasComments"/>
     </sourceTargetCouple>
     <sourceTargetCouple xmi:id="_dbsDMA4mEd6Wf853iHsJzA" sourceNode="_yP_EMHcBEdyUwq_XzqQQrw" targetNode="_yP16UncBEdyUwq_XzqQQrw">
-      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement/comments"/>
+      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//ClassModelElement/hasComments"/>
     </sourceTargetCouple>
   </parts>
   <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_yP_EN3cBEdyUwq_XzqQQrw" object="_yP_ES3cBEdyUwq_XzqQQrw" defaultForegroundColor="214,214,214">
@@ -113,7 +113,7 @@
     <genClass href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/Operation"/>
   </objects>
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_yP_EQ3cBEdyUwq_XzqQQrw">
-    <genClass href="../../com.bluexml.side.Common/model/Common.genmodel#//common/Comment"/>
+    <genClass href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/ClassComment"/>
   </objects>
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_yP_ERHcBEdyUwq_XzqQQrw">
     <genClass href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/Association"/>

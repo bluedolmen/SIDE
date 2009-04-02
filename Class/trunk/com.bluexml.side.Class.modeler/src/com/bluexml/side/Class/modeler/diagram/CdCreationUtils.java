@@ -106,6 +106,18 @@ public class CdCreationUtils extends AbstractCreationUtils {
 		}
 
 		/**
+		 * @see com.bluexml.side.clazz.util.ClazzSwitch#caseClassComment(com.bluexml.side.clazz.ClassComment)
+		 * @generated
+		 */
+		public Object caseClassComment(
+				com.bluexml.side.clazz.ClassComment object) {
+			if ("default".equals(presentation)) {
+				return createGraphElementClassComment(object, presentation);
+			}
+			return null;
+		}
+
+		/**
 		 * @see com.bluexml.side.clazz.util.ClazzSwitch#caseEnumeration(com.bluexml.side.clazz.Enumeration)
 		 * @generated
 		 */
@@ -247,8 +259,8 @@ public class CdCreationUtils extends AbstractCreationUtils {
 	 * @return the complete GraphElement
 	 * @generated
 	 */
-	protected GraphElement createGraphElementComment(
-			com.bluexml.side.common.Comment element, String presentation) {
+	protected GraphElement createGraphElementClassComment(
+			com.bluexml.side.clazz.ClassComment element, String presentation) {
 		return createGraphNode(element, presentation);
 	}
 

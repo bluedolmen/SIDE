@@ -38,6 +38,7 @@
     <genClasses ecoreClass="Class.ecore#//ClassModelElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//ClassModelElement/metainfo"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//ClassModelElement/documentation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//ClassModelElement/hasComments"/>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//NamedClassModelElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//NamedClassModelElement/name"/>
@@ -186,5 +187,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//TitledNamedClassModelElement/title"/>
       <genOperations ecoreOperation="Class.ecore#//TitledNamedClassModelElement/getLabel"/>
     </genClasses>
+    <genClasses ecoreClass="Class.ecore#//ClassComment"/>
   </genPackages>
 </genmodel:GenModel>

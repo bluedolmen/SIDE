@@ -8,6 +8,7 @@ package com.bluexml.side.clazz.util;
 
 import com.bluexml.side.clazz.*;
 
+import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
 
@@ -245,6 +246,14 @@ public class ClazzSwitch<T> {
 				if (result == null) result = caseNamedClassModelElement(titledNamedClassModelElement);
 				if (result == null) result = caseClassModelElement(titledNamedClassModelElement);
 				if (result == null) result = caseModelElement(titledNamedClassModelElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ClazzPackage.CLASS_COMMENT: {
+				ClassComment classComment = (ClassComment)theEObject;
+				T result = caseClassComment(classComment);
+				if (result == null) result = caseComment(classComment);
+				if (result == null) result = caseModelElement(classComment);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -523,6 +532,21 @@ public class ClazzSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Class Comment</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Class Comment</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseClassComment(ClassComment object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Model Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -564,6 +588,21 @@ public class ClazzSwitch<T> {
 	 * @generated
 	 */
 	public T casePackage(com.bluexml.side.common.Package object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Comment</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Comment</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseComment(Comment object) {
 		return null;
 	}
 

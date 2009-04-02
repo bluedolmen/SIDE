@@ -20,10 +20,10 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.topcased.modeler.editor.ModelerContextMenuProvider;
 
-import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassGeneralizationAction;
-import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkEnumerationDependsAction;
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassAspectAction;
+import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassGeneralizationAction;
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassViewAction;
+import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkEnumerationDependsAction;
 import com.bluexml.side.Class.modeler.diagram.edit.GeneralizationEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.dependsEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.hasAspectEditPart;

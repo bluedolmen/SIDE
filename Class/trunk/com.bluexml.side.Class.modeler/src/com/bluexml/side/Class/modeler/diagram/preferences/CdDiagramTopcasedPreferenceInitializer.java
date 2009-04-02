@@ -114,19 +114,21 @@ public class CdDiagramTopcasedPreferenceInitializer implements
 				CdDiagramPreferenceConstants.OPERATION_DEFAULT_FONT,
 				StringConverter.asFontData("Segoe UI-regular-9").toString());
 
-		// Initialize the default value of the COMMENT_DEFAULT_BACKGROUND_COLOR property 
-		defaultCdPreference.put(
-				CdDiagramPreferenceConstants.COMMENT_DEFAULT_BACKGROUND_COLOR,
-				"191,249,217");
+		// Initialize the default value of the CLASSCOMMENT_DEFAULT_BACKGROUND_COLOR property 
+		defaultCdPreference
+				.put(
+						CdDiagramPreferenceConstants.CLASSCOMMENT_DEFAULT_BACKGROUND_COLOR,
+						"191,249,217");
 
-		// Initialize the default value of the COMMENT_DEFAULT_FOREGROUND_COLOR property
-		defaultCdPreference.put(
-				CdDiagramPreferenceConstants.COMMENT_DEFAULT_FOREGROUND_COLOR,
-				"0,0,0");
+		// Initialize the default value of the CLASSCOMMENT_DEFAULT_FOREGROUND_COLOR property
+		defaultCdPreference
+				.put(
+						CdDiagramPreferenceConstants.CLASSCOMMENT_DEFAULT_FOREGROUND_COLOR,
+						"0,0,0");
 
-		// Initialize the default value of the COMMENT_DEFAULT_FONT property
+		// Initialize the default value of the CLASSCOMMENT_DEFAULT_FONT property
 		defaultCdPreference.put(
-				CdDiagramPreferenceConstants.COMMENT_DEFAULT_FONT,
+				CdDiagramPreferenceConstants.CLASSCOMMENT_DEFAULT_FONT,
 				StringConverter.asFontData("Segoe UI-regular-9").toString());
 
 		// Initialize the default value of the ENUMERATION_DEFAULT_BACKGROUND_COLOR property 

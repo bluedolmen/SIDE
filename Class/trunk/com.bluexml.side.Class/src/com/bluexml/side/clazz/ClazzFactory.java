@@ -161,6 +161,15 @@ public interface ClazzFactory extends EFactory {
 	MetaInfoGroup createMetaInfoGroup();
 
 	/**
+	 * Returns a new object of class '<em>Class Comment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Class Comment</em>'.
+	 * @generated
+	 */
+	ClassComment createClassComment();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

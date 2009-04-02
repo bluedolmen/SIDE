@@ -69,7 +69,7 @@ public class isStereotypedEdgeCreationEditPolicy extends
 		if (object instanceof com.bluexml.side.clazz.Association) {
 			return true;
 		}
-		if (object instanceof com.bluexml.side.common.Comment) {
+		if (object instanceof com.bluexml.side.clazz.ClassComment) {
 			return true;
 		}
 		return false;
@@ -98,7 +98,7 @@ public class isStereotypedEdgeCreationEditPolicy extends
 			}
 		}
 
-		if (sourceObject instanceof com.bluexml.side.common.Comment
+		if (sourceObject instanceof com.bluexml.side.clazz.ClassComment
 				&& targetObject instanceof com.bluexml.side.common.Stereotype) {
 			if (!sourceObject.equals(targetObject)) {
 				return true;
@@ -134,7 +134,7 @@ public class isStereotypedEdgeCreationEditPolicy extends
 			return new SourceTargetData(false, false, SourceTargetData.NONE,
 					null, null, null, null, null, "stereotypes", null, null);
 		}
-		if (sourceObject instanceof com.bluexml.side.common.Comment
+		if (sourceObject instanceof com.bluexml.side.clazz.ClassComment
 				&& targetObject instanceof com.bluexml.side.common.Stereotype) {
 			return new SourceTargetData(false, false, SourceTargetData.NONE,
 					null, null, null, null, null, "stereotypes", null, null);

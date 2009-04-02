@@ -24,17 +24,17 @@ import org.topcased.draw2d.figures.Label;
 /**
  * @generated
  */
-public class CommentFigure extends
+public class ClassCommentFigure extends
 		org.topcased.draw2d.figures.ContainerWithInnerLabel {
 	/**
 	 * Constructor
 	 *
 	 * @generated
 	 */
-	public CommentFigure() {
+	public ClassCommentFigure() {
 		super();
 	}
-
+	
 	@Override
 	protected ILabel createLabel() {
 		return new ComposedLabel(new Label(), new EditableLabel(), new Label(),
@@ -52,5 +52,4 @@ public class CommentFigure extends
 		d.width = getLabel().getPreferredSize().width + 25;
 		return d;
 	}
-
 }

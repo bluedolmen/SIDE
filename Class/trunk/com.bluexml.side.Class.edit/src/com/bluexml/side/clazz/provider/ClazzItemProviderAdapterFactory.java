@@ -421,6 +421,29 @@ public class ClazzItemProviderAdapterFactory extends ClazzAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.ClassComment} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ClassCommentItemProvider classCommentItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.clazz.ClassComment}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createClassCommentAdapter() {
+		if (classCommentItemProvider == null) {
+			classCommentItemProvider = new ClassCommentItemProvider(this);
+		}
+
+		return classCommentItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -534,6 +557,7 @@ public class ClazzItemProviderAdapterFactory extends ClazzAdapterFactory impleme
 		if (viewItemItemProvider != null) viewItemItemProvider.dispose();
 		if (metaInfoItemProvider != null) metaInfoItemProvider.dispose();
 		if (metaInfoGroupItemProvider != null) metaInfoGroupItemProvider.dispose();
+		if (classCommentItemProvider != null) classCommentItemProvider.dispose();
 	}
 
 }

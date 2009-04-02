@@ -14,6 +14,7 @@
  ******************************************************************************/
 package com.bluexml.side.Class.modeler.diagram.policies;
 
+import org.eclipse.emf.ecore.EObject;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.policies.ModelerLayoutEditPolicy;
 
@@ -33,5 +34,11 @@ public class CdDiagramLayoutEditPolicy extends ModelerLayoutEditPolicy {
 	@Override
 	protected boolean isExternalObjectAllowed(GraphNode arg0, GraphNode arg1) {
 		return true;
+	}
+
+	@Override
+	protected boolean isValid(EObject child, EObject parent) {
+		// TODO Auto-generated method stub
+		return super.isValid(child, parent);
 	}
 }

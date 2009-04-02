@@ -7,6 +7,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="metainfo" upperBound="-1"
         eType="#//MetaInfo" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="documentation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasComments" upperBound="-1"
+        eType="#//ClassComment" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedClassModelElement" eSuperTypes="#//ClassModelElement">
     <eOperations name="getFullName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
@@ -389,4 +391,5 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassComment" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Comment"/>
 </ecore:EPackage>

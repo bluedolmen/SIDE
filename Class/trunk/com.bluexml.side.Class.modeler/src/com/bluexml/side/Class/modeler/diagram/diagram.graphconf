@@ -115,7 +115,7 @@
         isWidthResizable="true"
         isHeightResizable="true">
         <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kerblue.org/common/1.0/#//Comment"/>
+            <type href="http://www.kerblue.org/class/1.0#//ClassComment"/>
         </bridge>
     </node>
     <node

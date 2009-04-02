@@ -10,6 +10,7 @@ package com.bluexml.side.clazz.provider;
 import com.bluexml.side.clazz.ClassModelElement;
 import com.bluexml.side.clazz.ClazzFactory;
 import com.bluexml.side.clazz.ClazzPackage;
+import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.common.provider.ModelElementItemProvider;
 
 import java.util.Collection;
@@ -106,6 +107,7 @@ public class ClassModelElementItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ClazzPackage.Literals.CLASS_MODEL_ELEMENT__METAINFO);
+			childrenFeatures.add(ClazzPackage.Literals.CLASS_MODEL_ELEMENT__HAS_COMMENTS);
 		}
 		return childrenFeatures;
 	}
@@ -164,6 +166,7 @@ public class ClassModelElementItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case ClazzPackage.CLASS_MODEL_ELEMENT__METAINFO:
+			case ClazzPackage.CLASS_MODEL_ELEMENT__HAS_COMMENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -183,8 +186,41 @@ public class ClassModelElementItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+				 ClazzFactory.eINSTANCE.createClassComment()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(ClazzPackage.Literals.CLASS_MODEL_ELEMENT__METAINFO,
 				 ClazzFactory.eINSTANCE.createMetaInfo()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ClazzPackage.Literals.CLASS_MODEL_ELEMENT__HAS_COMMENTS,
+				 ClazzFactory.eINSTANCE.createClassComment()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == CommonPackage.Literals.MODEL_ELEMENT__COMMENTS ||
+			childFeature == ClazzPackage.Literals.CLASS_MODEL_ELEMENT__HAS_COMMENTS;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

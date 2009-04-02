@@ -25,13 +25,13 @@ import com.bluexml.side.Class.modeler.ClazzPlugin;
  *
  * @generated
  */
-public class CommentPreferencePage extends AbstractNodePreferencePage {
+public class ClassCommentPreferencePage extends AbstractNodePreferencePage {
 	/**
 	 * @see org.topcased.modeler.preferences.AbstractNodePreferencePage#getNodeBackgroundColor()
 	 * @generated
 	 */
 	protected String getNodeBackgroundColor() {
-		return CdDiagramPreferenceConstants.COMMENT_DEFAULT_BACKGROUND_COLOR;
+		return CdDiagramPreferenceConstants.CLASSCOMMENT_DEFAULT_BACKGROUND_COLOR;
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class CommentPreferencePage extends AbstractNodePreferencePage {
 	 * @generated
 	 */
 	protected String getNodeFont() {
-		return CdDiagramPreferenceConstants.COMMENT_DEFAULT_FONT;
+		return CdDiagramPreferenceConstants.CLASSCOMMENT_DEFAULT_FONT;
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class CommentPreferencePage extends AbstractNodePreferencePage {
 	 * @generated
 	 */
 	protected String getNodeForegroundColor() {
-		return CdDiagramPreferenceConstants.COMMENT_DEFAULT_FOREGROUND_COLOR;
+		return CdDiagramPreferenceConstants.CLASSCOMMENT_DEFAULT_FOREGROUND_COLOR;
 	}
 
 	/**

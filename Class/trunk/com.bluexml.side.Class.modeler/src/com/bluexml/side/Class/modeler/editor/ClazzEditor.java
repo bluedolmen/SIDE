@@ -29,10 +29,10 @@ import org.topcased.modeler.editor.ModelerGraphicalViewer;
 
 import com.bluexml.side.Class.modeler.ClazzPlugin;
 import com.bluexml.side.Class.modeler.SideClassContextMenuProvider;
-import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassGeneralizationAction;
-import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkEnumerationDependsAction;
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassAspectAction;
+import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassGeneralizationAction;
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassViewAction;
+import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkEnumerationDependsAction;
 
 /**
  * Generated Model editor

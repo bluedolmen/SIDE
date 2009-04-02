@@ -8,6 +8,7 @@ package com.bluexml.side.clazz.impl;
 
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 
+import com.bluexml.side.clazz.ClassComment;
 import com.bluexml.side.clazz.ClassModelElement;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.MetaInfo;
@@ -40,6 +41,7 @@ import org.eclipse.ocl.ecore.OCL;
  * <ul>
  *   <li>{@link com.bluexml.side.clazz.impl.ClassModelElementImpl#getMetainfo <em>Metainfo</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.ClassModelElementImpl#getDocumentation <em>Documentation</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.impl.ClassModelElementImpl#getHasComments <em>Has Comments</em>}</li>
  * </ul>
  * </p>
  *
@@ -75,6 +77,16 @@ public class ClassModelElementImpl extends ModelElementImpl implements ClassMode
 	 * @ordered
 	 */
 	protected String documentation = DOCUMENTATION_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getHasComments() <em>Has Comments</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHasComments()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ClassComment> hasComments;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -133,11 +145,25 @@ public class ClassModelElementImpl extends ModelElementImpl implements ClassMode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ClassComment> getHasComments() {
+		if (hasComments == null) {
+			hasComments = new EObjectContainmentEList<ClassComment>(ClassComment.class, this, ClazzPackage.CLASS_MODEL_ELEMENT__HAS_COMMENTS);
+		}
+		return hasComments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ClazzPackage.CLASS_MODEL_ELEMENT__METAINFO:
 				return ((InternalEList<?>)getMetainfo()).basicRemove(otherEnd, msgs);
+			case ClazzPackage.CLASS_MODEL_ELEMENT__HAS_COMMENTS:
+				return ((InternalEList<?>)getHasComments()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -154,6 +180,8 @@ public class ClassModelElementImpl extends ModelElementImpl implements ClassMode
 				return getMetainfo();
 			case ClazzPackage.CLASS_MODEL_ELEMENT__DOCUMENTATION:
 				return getDocumentation();
+			case ClazzPackage.CLASS_MODEL_ELEMENT__HAS_COMMENTS:
+				return getHasComments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -174,6 +202,10 @@ public class ClassModelElementImpl extends ModelElementImpl implements ClassMode
 			case ClazzPackage.CLASS_MODEL_ELEMENT__DOCUMENTATION:
 				setDocumentation((String)newValue);
 				return;
+			case ClazzPackage.CLASS_MODEL_ELEMENT__HAS_COMMENTS:
+				getHasComments().clear();
+				getHasComments().addAll((Collection<? extends ClassComment>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -192,6 +224,9 @@ public class ClassModelElementImpl extends ModelElementImpl implements ClassMode
 			case ClazzPackage.CLASS_MODEL_ELEMENT__DOCUMENTATION:
 				setDocumentation(DOCUMENTATION_EDEFAULT);
 				return;
+			case ClazzPackage.CLASS_MODEL_ELEMENT__HAS_COMMENTS:
+				getHasComments().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -208,6 +243,8 @@ public class ClassModelElementImpl extends ModelElementImpl implements ClassMode
 				return metainfo != null && !metainfo.isEmpty();
 			case ClazzPackage.CLASS_MODEL_ELEMENT__DOCUMENTATION:
 				return DOCUMENTATION_EDEFAULT == null ? documentation != null : !DOCUMENTATION_EDEFAULT.equals(documentation);
+			case ClazzPackage.CLASS_MODEL_ELEMENT__HAS_COMMENTS:
+				return hasComments != null && !hasComments.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

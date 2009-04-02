@@ -82,14 +82,14 @@ public class isCommentedEdgeCreationEditPolicy extends
 		EObject targetObject = Utils.getElement(target);
 
 		if (sourceObject instanceof com.bluexml.side.clazz.Clazz
-				&& targetObject instanceof com.bluexml.side.common.Comment) {
+				&& targetObject instanceof com.bluexml.side.clazz.ClassComment) {
 			if (!sourceObject.equals(targetObject)) {
 				return true;
 			}
 		}
 
 		if (sourceObject instanceof com.bluexml.side.clazz.Association
-				&& targetObject instanceof com.bluexml.side.common.Comment) {
+				&& targetObject instanceof com.bluexml.side.clazz.ClassComment) {
 			if (!sourceObject.equals(targetObject)) {
 				return true;
 			}
@@ -115,14 +115,14 @@ public class isCommentedEdgeCreationEditPolicy extends
 		EObject targetObject = Utils.getElement(target);
 
 		if (sourceObject instanceof com.bluexml.side.clazz.Clazz
-				&& targetObject instanceof com.bluexml.side.common.Comment) {
+				&& targetObject instanceof com.bluexml.side.clazz.ClassComment) {
 			return new SourceTargetData(false, false, SourceTargetData.NONE,
-					null, null, null, null, null, "comments", null, null);
+					null, null, null, null, null, "hasComments", null, null);
 		}
 		if (sourceObject instanceof com.bluexml.side.clazz.Association
-				&& targetObject instanceof com.bluexml.side.common.Comment) {
+				&& targetObject instanceof com.bluexml.side.clazz.ClassComment) {
 			return new SourceTargetData(false, false, SourceTargetData.NONE,
-					null, null, null, null, null, "comments", null, null);
+					null, null, null, null, null, "hasComments", null, null);
 		}
 		return null;
 	}

@@ -28,17 +28,17 @@ import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.common.Stereotype;
 
 /**
- * Stereotype restore connection command
- * 
+ * ClassComment restore connection command
+ *
  * @generated
  */
-public class StereotypeRestoreConnectionCommand extends
+public class ClassCommentRestoreConnectionCommand extends
 		AbstractRestoreConnectionCommand {
 	/**
 	 * @param part the EditPart that is restored
 	 * @generated
 	 */
-	public StereotypeRestoreConnectionCommand(EditPart part) {
+	public ClassCommentRestoreConnectionCommand(EditPart part) {
 		super(part);
 	}
 
@@ -51,7 +51,7 @@ public class StereotypeRestoreConnectionCommand extends
 		GraphElement graphElementSrc = getGraphElement();
 		EObject eObjectSrc = Utils.getElement(graphElementSrc);
 
-		if (eObjectSrc instanceof Stereotype) {
+		if (eObjectSrc instanceof ClassComment) {
 			for (GraphElement graphElementTgt : getAllGraphElements()) {
 				boolean autoRef = graphElementTgt.equals(graphElementSrc);
 
@@ -61,7 +61,7 @@ public class StereotypeRestoreConnectionCommand extends
 						// autoRef not allowed
 					} else {
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createisStereotypedFromClazzToStereotype(
+						createisCommentedFromClazzToClassComment(
 								graphElementTgt, graphElementSrc);
 					}
 				}
@@ -70,17 +70,17 @@ public class StereotypeRestoreConnectionCommand extends
 						// autoRef not allowed
 					} else {
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createisStereotypedFromAssociationToStereotype(
+						createisCommentedFromAssociationToClassComment(
 								graphElementTgt, graphElementSrc);
 					}
 				}
-				if (eObjectTgt instanceof ClassComment) {
+				if (eObjectTgt instanceof Stereotype) {
 					if (autoRef) {
 						// autoRef not allowed
 					} else {
-						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
+						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
 						createisStereotypedFromClassCommentToStereotype(
-								graphElementTgt, graphElementSrc);
+								graphElementSrc, graphElementTgt);
 					}
 				}
 
@@ -93,18 +93,18 @@ public class StereotypeRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createisStereotypedFromClazzToStereotype(GraphElement srcElt,
+	private void createisCommentedFromClazzToClassComment(GraphElement srcElt,
 			GraphElement targetElt) {
 		Clazz sourceObject = (Clazz) Utils.getElement(srcElt);
-		Stereotype targetObject = (Stereotype) Utils.getElement(targetElt);
+		ClassComment targetObject = (ClassComment) Utils.getElement(targetElt);
 
-		if (sourceObject.getStereotypes().contains(targetObject)) {
+		if (sourceObject.getHasComments().contains(targetObject)) {
 			// check if the relation does not exists yet
 			if (getExistingEdges(srcElt, targetElt,
-					CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED).size() == 0) {
+					CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED).size() == 0) {
 				GraphEdge edge = Utils
-						.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED);
-				isStereotypedEdgeCreationCommand cmd = new isStereotypedEdgeCreationCommand(
+						.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED);
+				isCommentedEdgeCreationCommand cmd = new isCommentedEdgeCreationCommand(
 						null, edge, srcElt, false);
 				cmd.setTarget(targetElt);
 				add(cmd);
@@ -117,18 +117,18 @@ public class StereotypeRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createisStereotypedFromAssociationToStereotype(
+	private void createisCommentedFromAssociationToClassComment(
 			GraphElement srcElt, GraphElement targetElt) {
 		Association sourceObject = (Association) Utils.getElement(srcElt);
-		Stereotype targetObject = (Stereotype) Utils.getElement(targetElt);
+		ClassComment targetObject = (ClassComment) Utils.getElement(targetElt);
 
-		if (sourceObject.getStereotypes().contains(targetObject)) {
+		if (sourceObject.getHasComments().contains(targetObject)) {
 			// check if the relation does not exists yet
 			if (getExistingEdges(srcElt, targetElt,
-					CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED).size() == 0) {
+					CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED).size() == 0) {
 				GraphEdge edge = Utils
-						.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED);
-				isStereotypedEdgeCreationCommand cmd = new isStereotypedEdgeCreationCommand(
+						.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED);
+				isCommentedEdgeCreationCommand cmd = new isCommentedEdgeCreationCommand(
 						null, edge, srcElt, false);
 				cmd.setTarget(targetElt);
 				add(cmd);

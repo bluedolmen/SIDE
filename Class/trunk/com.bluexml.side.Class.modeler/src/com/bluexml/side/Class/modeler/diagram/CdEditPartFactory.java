@@ -32,6 +32,7 @@ import com.bluexml.side.Class.modeler.diagram.edit.AspectEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.AssociationEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.AttributeEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.CdDiagramEditPart;
+import com.bluexml.side.Class.modeler.diagram.edit.ClassCommentEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.ClazzEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.EnumerationEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.EnumerationLiteralEditPart;
@@ -198,6 +199,15 @@ public class CdEditPartFactory extends ModelerEditPartFactory {
 		 */
 		public Object caseOperation(com.bluexml.side.clazz.Operation object) {
 			return new OperationEditPart(node, object);
+		}
+
+		/**
+		 * @see com.bluexml.side.clazz.util.ClazzSwitch#caseClassComment(com.bluexml.side.clazz.ClassComment)
+		 * @generated
+		 */
+		public Object caseClassComment(
+				com.bluexml.side.clazz.ClassComment object) {
+			return new ClassCommentEditPart(node);
 		}
 
 		/**

@@ -36,7 +36,6 @@ import com.bluexml.side.Class.modeler.diagram.utils.AssociationHelper;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
-import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.View;
 import com.bluexml.side.clazz.ViewItem;

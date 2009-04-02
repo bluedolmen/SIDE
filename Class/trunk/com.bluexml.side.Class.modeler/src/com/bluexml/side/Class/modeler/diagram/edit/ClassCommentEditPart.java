@@ -44,37 +44,37 @@ import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
 import com.bluexml.side.Class.modeler.diagram.CdEditPolicyConstants;
-import com.bluexml.side.Class.modeler.diagram.commands.CommentRestoreConnectionCommand;
+import com.bluexml.side.Class.modeler.diagram.commands.ClassCommentRestoreConnectionCommand;
 import com.bluexml.side.Class.modeler.diagram.commands.update.CommentUpdateCommand;
 import com.bluexml.side.Class.modeler.diagram.dialogs.CommentEditDialog;
-import com.bluexml.side.Class.modeler.diagram.figures.CommentFigure;
+import com.bluexml.side.Class.modeler.diagram.figures.ClassCommentFigure;
 import com.bluexml.side.Class.modeler.diagram.policies.isCommentedEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.isStereotypedEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.preferences.CdDiagramPreferenceConstants;
 import com.bluexml.side.Class.modeler.tools.ClazzNotation;
+import com.bluexml.side.clazz.ClassComment;
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.Stereotype;
 
 /**
- * The Comment object controller
- * 
+ * The ClassComment object controller
+ *
  * @generated
  */
-public class CommentEditPart extends EMFGraphNodeEditPart {
+public class ClassCommentEditPart extends EMFGraphNodeEditPart {
 	/**
 	 * Constructor
-	 * 
-	 * @param obj
-	 *            the graph node
+	 *
+	 * @param obj the graph node
 	 * @generated
 	 */
-	public CommentEditPart(GraphNode obj) {
+	public ClassCommentEditPart(GraphNode obj) {
 		super(obj);
 	}
 
 	/**
 	 * Creates edit policies and associates these with roles
-	 * 
+	 *
 	 * @generated
 	 */
 	protected void createEditPolicies() {
@@ -90,7 +90,8 @@ public class CommentEditPart extends EMFGraphNodeEditPart {
 				new RestoreEditPolicy() {
 					protected Command getRestoreConnectionsCommand(
 							RestoreConnectionsRequest request) {
-						return new CommentRestoreConnectionCommand(getHost());
+						return new ClassCommentRestoreConnectionCommand(
+								getHost());
 					}
 				});
 
@@ -113,7 +114,7 @@ public class CommentEditPart extends EMFGraphNodeEditPart {
 	 */
 	protected IFigure createFigure() {
 
-		return new CommentFigure();
+		return new ClassCommentFigure();
 	}
 
 	/**
@@ -121,8 +122,9 @@ public class CommentEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultBackgroundColor() {
-		String backgroundColor = getPreferenceStore().getString(
-				CdDiagramPreferenceConstants.COMMENT_DEFAULT_BACKGROUND_COLOR);
+		String backgroundColor = getPreferenceStore()
+				.getString(
+						CdDiagramPreferenceConstants.CLASSCOMMENT_DEFAULT_BACKGROUND_COLOR);
 		if (backgroundColor.length() != 0) {
 			return Utils.getColor(backgroundColor);
 		}
@@ -134,8 +136,9 @@ public class CommentEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultForegroundColor() {
-		String foregroundColor = getPreferenceStore().getString(
-				CdDiagramPreferenceConstants.COMMENT_DEFAULT_FOREGROUND_COLOR);
+		String foregroundColor = getPreferenceStore()
+				.getString(
+						CdDiagramPreferenceConstants.CLASSCOMMENT_DEFAULT_FOREGROUND_COLOR);
 		if (foregroundColor.length() != 0) {
 			return Utils.getColor(foregroundColor);
 		}
@@ -148,18 +151,18 @@ public class CommentEditPart extends EMFGraphNodeEditPart {
 	 */
 	protected Font getPreferenceDefaultFont() {
 		String preferenceFont = getPreferenceStore().getString(
-				CdDiagramPreferenceConstants.COMMENT_DEFAULT_FONT);
+				CdDiagramPreferenceConstants.CLASSCOMMENT_DEFAULT_FONT);
 		if (preferenceFont.length() != 0) {
 			return Utils.getFont(new FontData(preferenceFont));
 		}
 		return null;
 
 	}
-
+	
 	protected void performDirectEdit() {
 		DirectEditManager manager = getDirectEditManager();
 		if (manager == null) {
-			ILabel label = ((CommentFigure) getFigure()).getLabel();
+			ILabel label = ((ClassCommentFigure) getFigure()).getLabel();
 			manager = new ModelerLabelDirectEditManager(this,
 					TextCellEditor.class, new LabelCellEditorLocator(
 							getFigure()), label) {
@@ -171,7 +174,7 @@ public class CommentEditPart extends EMFGraphNodeEditPart {
 		}
 		manager.show();
 	}
-
+	
 	@Override
 	protected Color getDefaultBackgroundColor() {
 		Comment com = (Comment) Utils.getElement(getGraphNode());
@@ -196,20 +199,21 @@ public class CommentEditPart extends EMFGraphNodeEditPart {
 				return ModelerColorConstants.classlightGreen;
 		}
 	}
-
+	
+	
 	@Override
 	protected void refreshHeaderLabel() {
-		CommentFigure fig = (CommentFigure) getFigure();
-		Comment com = (Comment) Utils.getElement(getGraphNode());
+		ClassCommentFigure fig = (ClassCommentFigure) getFigure();
+		ClassComment com = (ClassComment) Utils.getElement(getGraphNode());
 		((ComposedLabel) fig.getLabel()).setPrefix(ClazzNotation
 				.getStereotypesNotation(com));
 		((ComposedLabel) fig.getLabel()).setMain(com.getValue());
 	}
-
+	
 	@Override
 	public void performRequest(Request request) {
 		if (request.getType() == RequestConstants.REQ_OPEN) {
-			Comment comment = (Comment) Utils.getElement(getGraphNode());
+			ClassComment comment = (ClassComment) Utils.getElement(getGraphNode());
 
 			CommentEditDialog dlg = new CommentEditDialog(comment,
 					ModelerPlugin.getActiveWorkbenchShell());
@@ -224,4 +228,5 @@ public class CommentEditPart extends EMFGraphNodeEditPart {
 			super.performRequest(request);
 		}
 	}
+
 }

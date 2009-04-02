@@ -11,11 +11,8 @@ import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.utils.Utils;
 
-import com.bluexml.side.Class.modeler.diagram.edit.AspectEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.ClazzEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.GeneralizationEditPart;
-import com.bluexml.side.Class.modeler.diagram.edit.hasAspectEditPart;
-import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Clazz;
 
 public class DeleteLinkClassGeneralizationAction extends WorkbenchPartAction implements ISelectionChangedListener

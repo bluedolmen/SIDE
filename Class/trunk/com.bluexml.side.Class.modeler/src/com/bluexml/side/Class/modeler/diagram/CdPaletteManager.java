@@ -122,10 +122,10 @@ public class CdPaletteManager extends ModelerPaletteManager {
 				CdImageRegistry.getImageDescriptor("STEREOTYPE_LARGE")));
 
 		factory = new GraphElementCreationFactory(creationUtils,
-				CommonPackage.eINSTANCE.getComment(), "default");
+				ClazzPackage.eINSTANCE.getClassComment(), "default");
 		entries.add(new ModelerCreationToolEntry("Comment", "Comment", factory,
-				CdImageRegistry.getImageDescriptor("COMMENT"), CdImageRegistry
-						.getImageDescriptor("COMMENT_LARGE")));
+				CdImageRegistry.getImageDescriptor("CLASSCOMMENT"),
+				CdImageRegistry.getImageDescriptor("CLASSCOMMENT_LARGE")));
 
 		factory = new GraphElementCreationFactory(creationUtils,
 				ClazzPackage.eINSTANCE.getEnumeration(), "default");

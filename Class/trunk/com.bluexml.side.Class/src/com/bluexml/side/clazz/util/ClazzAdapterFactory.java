@@ -8,6 +8,7 @@ package com.bluexml.side.clazz.util;
 
 import com.bluexml.side.clazz.*;
 
+import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
 
@@ -147,6 +148,10 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 				return createTitledNamedClassModelElementAdapter();
 			}
 			@Override
+			public Adapter caseClassComment(ClassComment object) {
+				return createClassCommentAdapter();
+			}
+			@Override
 			public Adapter caseModelElement(ModelElement object) {
 				return createModelElementAdapter();
 			}
@@ -157,6 +162,10 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter casePackage(com.bluexml.side.common.Package object) {
 				return createPackageAdapter();
+			}
+			@Override
+			public Adapter caseComment(Comment object) {
+				return createCommentAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -431,6 +440,20 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.clazz.ClassComment <em>Class Comment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.clazz.ClassComment
+	 * @generated
+	 */
+	public Adapter createClassCommentAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.ModelElement <em>Model Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -469,6 +492,20 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPackageAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.Comment <em>Comment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.common.Comment
+	 * @generated
+	 */
+	public Adapter createCommentAdapter() {
 		return null;
 	}
 

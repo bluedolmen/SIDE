@@ -32,8 +32,8 @@ import com.bluexml.side.Class.modeler.ClazzPlugin;
 import com.bluexml.side.Class.modeler.diagram.edit.AspectEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.AssociationEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.AttributeEditPart;
+import com.bluexml.side.Class.modeler.diagram.edit.ClassCommentEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.ClazzEditPart;
-import com.bluexml.side.Class.modeler.diagram.edit.CommentEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.EnumerationEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.EnumerationLiteralEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.OperationEditPart;
@@ -103,9 +103,9 @@ public class CdConfiguration implements IConfiguration {
 						com.bluexml.side.clazz.Operation.class),
 				OperationEditPart.class);
 		Platform.getAdapterManager().registerAdapters(
-				new EditPart2ModelAdapterFactory(CommentEditPart.class,
-						com.bluexml.side.common.Comment.class),
-				CommentEditPart.class);
+				new EditPart2ModelAdapterFactory(ClassCommentEditPart.class,
+						com.bluexml.side.clazz.ClassComment.class),
+				ClassCommentEditPart.class);
 		Platform.getAdapterManager().registerAdapters(
 				new EditPart2ModelAdapterFactory(EnumerationEditPart.class,
 						com.bluexml.side.clazz.Enumeration.class),
