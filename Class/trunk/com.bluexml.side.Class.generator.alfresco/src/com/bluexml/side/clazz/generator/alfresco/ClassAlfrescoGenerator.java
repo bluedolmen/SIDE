@@ -2,39 +2,41 @@ package com.bluexml.side.clazz.generator.alfresco;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 
-import com.bluexml.side.application.generator.ConflitResolverHelper;
+import com.bluexml.side.application.generator.AbstractGenerator;
 import com.bluexml.side.application.generator.UnresolvedConflictException;
 import com.bluexml.side.application.generator.XMLConflictResolver;
 import com.bluexml.side.application.generator.acceleo.AbstractAcceleoGenerator;
+import com.bluexml.side.deployer.alfresco.Packager;
+import com.bluexml.side.util.libs.IFileHelper;
 
 public class ClassAlfrescoGenerator extends AbstractAcceleoGenerator {
 
+	
+	
 	/*
 	 * final fields used in generation too
 	 */
-	
+
 	public static String CONFIGURATION_PARAMETER_CATALINA_HOME = "CATALINA_HOME";
 	public static String GENERATOR_OPTIONS_DATAMODEL = "alfresco.dataModel";
 	public static String GENERATOR_OPTIONS_SHARE_EXTENSION = "alfresco.share.extension";
 	
-	public static String getTEMP_FOLDER(EObject node) {
-		return TEMP_FOLDER;
-	}
-	
-	
 	XMLConflictResolver xmlresolver = null;
+
 	public XMLConflictResolver getXmlresolver() {
 		if (xmlresolver == null) {
-			xmlresolver = new XMLConflictResolver(new ConflitResolverHelper(getTargetPath(), getTemporaryFolder()));
+			xmlresolver = new XMLConflictResolver(this.getCresolver());
 		}
 		return xmlresolver;
 	}
-	
 
 	public static String MMUri = "http://www.kerblue.org/class/1.0";
 
@@ -50,7 +52,8 @@ public class ClassAlfrescoGenerator extends AbstractAcceleoGenerator {
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/Model/alfrescoGenerator_model_properties.mt");
 
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webClient/alfrescoGenerator_web_client_config.mt");
-				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webClient/alfrescoGenerator_web_client_properties.mt");
+				
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoGenerator_context.mt");
 			}
 
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_SHARE_EXTENSION)) {
@@ -85,19 +88,36 @@ public class ClassAlfrescoGenerator extends AbstractAcceleoGenerator {
 		return getClassTemplates();
 	}
 
-	public boolean check() {
-		// TODO Auto-generated method stub
+	public boolean check() {		
 		return true;
 	}
 
 	public Collection<IFile> complete() throws Exception {
-		// register additional generated files :
+		solveConflict();
+		// TODO : packaging may be done on other level ... deploy too
+		
+		Packager alfrescoPakager = new Packager(IFileHelper.getIFolder(getTemporaryFolder()), buildModuleProperties());
+		IFile ampIFile = alfrescoPakager.buildAMP(generatedFiles);		
+		generatedFiles.add(ampIFile);		
+		
+		return generatedFiles;
+	}
 
-		// manage all post process
+	
+	private Properties buildModuleProperties() {
+		Properties props = new Properties();
+		props.put("module.id", getGenerationParameter("com.bluexml.side.Class.generator.alfresco.module.id"));
+		props.put("module.version", getGenerationParameter("com.bluexml.side.Class.generator.alfresco.module.version"));
+		props.put("module.title", getGenerationParameter("com.bluexml.side.Class.generator.alfresco.module.title"));
+		props.put("module.description", getGenerationParameter("com.bluexml.side.Class.generator.alfresco.module.description"));
+		return props;
+	}
+	
+	private void solveConflict() throws Exception {
 		// manage file that can be in conflict
 		List<IFile> conflict = searchForConflict();
-		List<IFile> unresolvedconflict= new ArrayList<IFile>();
-		boolean allresolved =true;
+		List<IFile> unresolvedconflict = new ArrayList<IFile>();
+		boolean allresolved = true;
 		for (IFile f : conflict) {
 			if (f.getFullPath().toString().indexOf("/shared/classes/alfresco/extension/web-client-config-custom.xml") != -1) {
 				// known conflict, apply specific process
@@ -114,16 +134,21 @@ public class ClassAlfrescoGenerator extends AbstractAcceleoGenerator {
 			throw new UnresolvedConflictException(unresolvedconflict);
 		}
 		// conflicts are resolved
-		getCresolver().copyToFinalFolder();
-		// delete temporary folder
-		ConflitResolverHelper.deleteFolder(getTemporaryFolder());
-		
-		return generatedFiles;
+		getCresolver().copyToFinalFolder();		
+	}
+/**
+ * method usable as Acceleo Templates Services
+ */
+	@Override
+	public String getTEMP_FOLDER(EObject node) {
+		return this.getTEMP_FOLDER();
 	}
 	
-
-	
-
-	
-
+	public static String getModuleIdService(EObject node) {
+		//AbstractGenerator.printConfiguration();
+		if (!AbstractGenerator.generationParameters.containsKey("com.bluexml.side.Class.generator.alfresco.module.id")) {
+			return Packager.buildDefaultModuleProperties().getProperty("module.id");
+		}
+		return AbstractGenerator.generationParameters.get("com.bluexml.side.Class.generator.alfresco.module.id");
+	}
 }

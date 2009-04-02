@@ -16,6 +16,7 @@ Foundation, Inc., 59 Temple Place, Boston, MA 02111.
  --%>
  <%
 metamodel http://www.kerblue.org/class/1.0
+import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 %>
 <%script type="clazz.ClassModelElement" name="getFolder" description="Get the folder to export" %>
@@ -37,4 +38,7 @@ tmp<%}%>
 <%getFullName().replaceAll("\.","_")%>
 <%script type="clazz.ClassModelElement" name="getNameSpace"%>
 http://www.bluexml.com/model/content/<%getFolder()%>/1.0
-
+<%script type="EObject" name="getModulePath"%>
+alfresco/module/<%getModuleIdService()%>
+<%script type="EObject" name="getConfModulePath"%>
+config/<%getModulePath()%>
