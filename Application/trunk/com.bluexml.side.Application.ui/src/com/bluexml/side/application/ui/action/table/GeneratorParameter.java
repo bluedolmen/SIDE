@@ -4,7 +4,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 
 import com.bluexml.side.application.ui.action.tree.Generator;
 
-public class GeneratorParameter {
+public class GeneratorParameter implements Comparable<GeneratorParameter>{
 	private String key;
 	private String value;
 	private String label;
@@ -54,5 +54,9 @@ public class GeneratorParameter {
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	public int compareTo(GeneratorParameter o) {
+		return label.compareTo(o.getLabel());
 	}
 }

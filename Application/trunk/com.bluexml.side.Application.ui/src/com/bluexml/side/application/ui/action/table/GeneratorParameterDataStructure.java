@@ -1,6 +1,7 @@
 package com.bluexml.side.application.ui.action.table;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -10,6 +11,7 @@ public class GeneratorParameterDataStructure {
 	List<GeneratorParameter> data = new ArrayList<GeneratorParameter>();
 
 	public List<GeneratorParameter> getData() {
+		Collections.sort(data);
 		return data;
 	}
 

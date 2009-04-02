@@ -45,7 +45,6 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
@@ -127,7 +126,6 @@ public class ApplicationDialog extends Dialog {
 	private GeneratorParameterContentProvider generatorParameterContentProvider;
 	private GeneratorParameterLabelProvider generatorParameterLabelProvider;
 	private GeneratorParameterCellModifier generatorParameterCellModifier;
-	private Button applyButton;
 	private TabFolder tabFolder;
 
 	private static String KEY_VERBOSE = "generation.options.verbose";
@@ -1267,7 +1265,7 @@ public class ApplicationDialog extends Dialog {
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
 		createButton(parent, GEN_ID, "Generate", false);
-		applyButton = createButton(parent, APPLY_ID, "Apply", false);
+		createButton(parent, APPLY_ID, "Apply", false);
 		createButton(parent, IDialogConstants.CLOSE_ID, "Close", false);
 	}
 

@@ -1,5 +1,9 @@
 package com.bluexml.side.application.ui.action.table;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
@@ -11,6 +15,7 @@ public class GeneratorParameterContentProvider implements IStructuredContentProv
 			GeneratorParameterDataStructure p_dataStructure) {
 		dataStructure = p_dataStructure;
 	}
+
 
 	public Object[] getElements(Object inputElement) {
 		if (dataStructure != null && dataStructure.getData() != null) {
