@@ -179,10 +179,8 @@ public class AttributeEditPart extends EMFGraphNodeEditPart {
 
 	@Override
 	protected Color getDefaultBackgroundColor() {
-		boolean highlight = ClazzPlugin.getDefault().getPreferenceStore()
-				.getBoolean(PreferenceConstants.VIEW_METAINFO_MARK_PREFERENCE);
-
-		if ((highlight) && (attribute.getMetainfo().size() > 0)) {
+		
+		if (attribute.getMetainfo().size() > 0) {
 			getFigure().setOpaque(true);
 			return ModelerColorConstants.lightOrange;
 		} else {
