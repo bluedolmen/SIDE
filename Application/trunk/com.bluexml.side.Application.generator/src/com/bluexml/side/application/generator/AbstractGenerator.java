@@ -1,11 +1,14 @@
 package com.bluexml.side.application.generator;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.application.StaticConfigurationParameters;
+import com.bluexml.side.util.libs.IFileHelper;
 
 public abstract class AbstractGenerator implements IGenerator {
 
@@ -16,19 +19,29 @@ public abstract class AbstractGenerator implements IGenerator {
 	 * configurationParameters : the list of technical parameters, shared by all
 	 * generators.
 	 */
-	protected Map<String, String> generationParameters;
-	protected Map<String, Boolean> generatorOptions;
-	protected Map<String, String> configurationParameters;
+	protected static Map<String, String> generationParameters = new HashMap<String, String>();
+	protected static Map<String, Boolean> generatorOptions = new HashMap<String, Boolean>();
+	protected static Map<String, String> configurationParameters = new HashMap<String, String>();
 	public static final String TEMP_FOLDER = "tmp";
 
-	public static String getTEMP_FOLDER(EObject node) {
-		return TEMP_FOLDER;
+	public abstract String getTEMP_FOLDER(EObject node);
+
+	public String getTEMP_FOLDER() {
+		return TEMP_FOLDER + this.getClass().getName();
+	}
+
+	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_) {
+		generationParameters = generationParameters_;
+		generatorOptions = generatorOptions_;
+		configurationParameters = configurationParameters_;
+
 	}
 	
-	public void initialize(Map<String, String> generationParameters, Map<String, Boolean> generatorOptions, Map<String, String> configurationParameters) {
-		this.generationParameters = generationParameters;
-		this.generatorOptions = generatorOptions;
-		this.configurationParameters = configurationParameters;
+	public static void initialize_(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_) {
+		generationParameters = generationParameters_;
+		generatorOptions = generatorOptions_;
+		configurationParameters = configurationParameters_;
+
 	}
 
 	protected boolean doLog() {
@@ -43,32 +56,47 @@ public abstract class AbstractGenerator implements IGenerator {
 		return null;
 	}
 
+	protected final String getTargetSystemPath() {
+		IFolder ff = IFileHelper.getIFolder(getTargetPath());
+		return ff.getRawLocation().makeAbsolute().toOSString();
+	}
+
 	protected final String getTargetPath() {
 		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral());
 	}
 
-	protected boolean getGeneratorOptionValue(String key) {
-		if (generatorOptions.containsKey(key)) {
-			return generatorOptions.get(key);
+	public static boolean getGeneratorOptionValue(String key) {
+		if (AbstractGenerator.generatorOptions.containsKey(key)) {
+			return AbstractGenerator.generatorOptions.get(key);
 		}
 		return false;
 	}
 
-	protected String getGenerationParameter(String key) {
-		if (generationParameters.containsKey(key)) {
-			return generationParameters.get(key);
+	public static String getGenerationParameter(String key) {
+		if (AbstractGenerator.generationParameters.containsKey(key)) {
+			return AbstractGenerator.generationParameters.get(key);
 		}
-		return null;
+		return "";
 	}
 
-	protected String getConfigurationParameter(String key) {
-		if (configurationParameters.containsKey(key)) {
-			return configurationParameters.get(key);
+	public static String getConfigurationParameter(String key) {
+		if (AbstractGenerator.configurationParameters.containsKey(key)) {
+			return AbstractGenerator.configurationParameters.get(key);
 		}
-		return null;
+		return "";
+	}
+
+	protected final String getTemporarySystemFolder() {
+		return getTargetSystemPath() + File.separator + getTEMP_FOLDER();
 	}
 
 	protected final String getTemporaryFolder() {
-		return getTargetPath() + File.separator + TEMP_FOLDER;
+		return getTargetPath() + File.separator + getTEMP_FOLDER();
+	}
+
+	public static void printConfiguration() {
+		System.out.println("GenerationOptions :"+generatorOptions);
+		System.out.println("GenerationParameters :"+generationParameters);
+		System.out.println("ConfigurationParameters :"+configurationParameters);
 	}
 }

@@ -15,7 +15,7 @@ public class XMLConflictResolver {
 	}
 
 	/**
-	 * the merged file override the generated one (in temporary folder)
+	 * the merged file override the final one (in final folder)
 	 * @param f
 	 * @throws Exception
 	 */
@@ -32,6 +32,6 @@ public class XMLConflictResolver {
 
 		alreadyGenerated = XmlHelper.includeDocument(alreadyGenerated, generated, false);
 		// write to file
-		XmlHelper.writeXmlFile(gf, alreadyGenerated);
+		XmlHelper.writeXmlFile(ff, alreadyGenerated);
 	}
 }
