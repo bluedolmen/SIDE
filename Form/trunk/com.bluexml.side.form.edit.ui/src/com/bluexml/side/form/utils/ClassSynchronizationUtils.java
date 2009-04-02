@@ -24,6 +24,7 @@ import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.ModelChoiceField;
+import com.bluexml.side.form.VirtualField;
 import com.bluexml.side.form.formFactory;
 import com.bluexml.side.form.formPackage;
 
@@ -48,10 +49,12 @@ public class ClassSynchronizationUtils {
 			// Then for delete
 			for (String id : formChild.keySet()) {
 				if (!ClazzChild.containsKey(id)){
-					if (formChild.get(id) instanceof Field) {
-						((Field)formChild.get(id)).setMandatory(false);
+					if(!(formChild.get(id) instanceof VirtualField)) {
+						if (formChild.get(id) instanceof Field) {
+							((Field)formChild.get(id)).setMandatory(false);
+						}
+						cToDelete.add(formChild.get(id));
 					}
-					cToDelete.add(formChild.get(id));
 				}
 			}
 			if (cToDelete.size() > 0) {;
@@ -138,7 +141,9 @@ public class ClassSynchronizationUtils {
 			// Modification
 			Field mcf = (ModelChoiceField)formChild.get(associationId);
 			if(ass.isIsNavigableTARGET() && ass.getSource().equals(Clazz) && mcf != null) {
-				cc.append(SetCommand.create(domain, mcf, formPackage.eINSTANCE.getModelChoiceField_Max_bound(), Integer.parseInt(ass.getMaxTARGET())));
+				if (((ModelChoiceField)mcf).getMax_bound() > Integer.parseInt(ass.getMaxTARGET()) && Integer.parseInt(ass.getMaxTARGET()) != -1) {
+					cc.append(SetCommand.create(domain, mcf, formPackage.eINSTANCE.getModelChoiceField_Max_bound(), Integer.parseInt(ass.getMaxTARGET())));
+				}
 			}
 		}
 		
@@ -155,7 +160,9 @@ public class ClassSynchronizationUtils {
 			// Modification
 			Field mcf = (ModelChoiceField)formChild.get(associationId);
 			if(ass.isIsNavigableSRC() && ass.getSource().equals(Clazz) && mcf != null) {
-				cc.append(SetCommand.create(domain, mcf, formPackage.eINSTANCE.getModelChoiceField_Max_bound(), Integer.parseInt(ass.getMaxSRC())));
+				if (((ModelChoiceField)mcf).getMax_bound() > Integer.parseInt(ass.getMaxSRC())  && Integer.parseInt(ass.getMaxSRC()) != -1) {
+					cc.append(SetCommand.create(domain, mcf, formPackage.eINSTANCE.getModelChoiceField_Max_bound(), Integer.parseInt(ass.getMaxSRC())));
+				}
 			}
 		}
 	}

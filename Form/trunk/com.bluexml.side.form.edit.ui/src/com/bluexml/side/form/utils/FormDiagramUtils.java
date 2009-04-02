@@ -184,7 +184,7 @@ public class FormDiagramUtils {
 		List<VirtualField> lvf = new ArrayList<VirtualField>();
 		for (FormElement fe : form.getChildren()) {
 			if (fe instanceof FormGroup) {
-				getVirtualizedFieldsForGroup((FormGroup)fe,f);
+				lvf.addAll(getVirtualizedFieldsForGroup((FormGroup)fe,f));
 			} else if (fe instanceof VirtualField) {
 				if (((VirtualField)fe).getLink().equals(f)) {
 					lvf.add((VirtualField)fe);
