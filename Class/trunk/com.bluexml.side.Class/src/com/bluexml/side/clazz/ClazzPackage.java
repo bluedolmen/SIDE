@@ -790,7 +790,7 @@ public interface ClazzPackage extends EPackage {
 	int CLAZZ__IS_DEPRECATED = ABSTRACT_CLASS_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Has View</b></em>' reference list.
+	 * The feature id for the '<em><b>Has View</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2124,10 +2124,10 @@ public interface ClazzPackage extends EPackage {
 	EAttribute getClazz_IsDeprecated();
 
 	/**
-	 * Returns the meta object for the reference list '{@link com.bluexml.side.clazz.Clazz#getHasView <em>Has View</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.clazz.Clazz#getHasView <em>Has View</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Has View</em>'.
+	 * @return the meta object for the containment reference list '<em>Has View</em>'.
 	 * @see com.bluexml.side.clazz.Clazz#getHasView()
 	 * @see #getClazz()
 	 * @generated
@@ -2996,7 +2996,7 @@ public interface ClazzPackage extends EPackage {
 		EAttribute CLAZZ__IS_DEPRECATED = eINSTANCE.getClazz_IsDeprecated();
 
 		/**
-		 * The meta object literal for the '<em><b>Has View</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Has View</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

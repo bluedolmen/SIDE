@@ -130,7 +130,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	protected boolean isDeprecated = IS_DEPRECATED_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getHasView() <em>Has View</em>}' reference list.
+	 * The cached value of the '{@link #getHasView() <em>Has View</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getHasView()
@@ -243,7 +243,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<View> getHasView() {
 		if (hasView == null) {
-			hasView = new EObjectResolvingEList<View>(View.class, this, ClazzPackage.CLAZZ__HAS_VIEW);
+			hasView = new EObjectContainmentEList<View>(View.class, this, ClazzPackage.CLAZZ__HAS_VIEW);
 		}
 		return hasView;
 	}
@@ -780,6 +780,8 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 		switch (featureID) {
 			case ClazzPackage.CLAZZ__OPERATIONS:
 				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
+			case ClazzPackage.CLAZZ__HAS_VIEW:
+				return ((InternalEList<?>)getHasView()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}

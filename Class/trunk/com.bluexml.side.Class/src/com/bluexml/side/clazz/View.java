@@ -21,7 +21,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getView()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL AtLeastOneAttribute='self.attributes -> notEmpty()' ViewWithTwoAttributesSameName='self.attributes -> forAll( a1, a2 | a1 <> a2 implies a1.name <>a2.name)'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='AtLeastOneAttribute ViewWithTwoAttributesSameName'"
  * @generated
  */
 public interface View extends NamedClassModelElement {

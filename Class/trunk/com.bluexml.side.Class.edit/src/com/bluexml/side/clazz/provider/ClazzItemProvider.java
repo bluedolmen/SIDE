@@ -198,6 +198,7 @@ public class ClazzItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ClazzPackage.Literals.CLAZZ__OPERATIONS);
+			childrenFeatures.add(ClazzPackage.Literals.CLAZZ__HAS_VIEW);
 		}
 		return childrenFeatures;
 	}
@@ -278,6 +279,11 @@ public class ClazzItemProvider
 			(createChildParameter
 				(ClazzPackage.Literals.CLAZZ__OPERATIONS,
 				 ClazzFactory.eINSTANCE.createOperation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ClazzPackage.Literals.CLAZZ__HAS_VIEW,
+				 ClazzFactory.eINSTANCE.createView()));
 	}
 
 }

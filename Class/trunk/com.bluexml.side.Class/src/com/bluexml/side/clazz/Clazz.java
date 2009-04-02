@@ -26,8 +26,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getClazz()
- * @model annotation="http://www.bluexml.com/OCL TwoModelElementWithSameName='Classe.allInstances()->select(a | a.name = self.name and a <> self)->size() = 0'"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='TwoModelElementWithSameName'"
+ * @model annotation="http://www.bluexml.com/OCL InheritanceCycle='not self.generalizations.generalizations -> includes(self)' ClassWithTwoAttributesSameName='self.attributes -> forAll( a1, a2 | a1 <> a2 implies a1.name <>a2.name)'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='ClassWithTwoAttributesSameName InheritanceCycle'"
  * @generated
  */
 public interface Clazz extends AbstractClass {
@@ -132,7 +132,7 @@ public interface Clazz extends AbstractClass {
 	void setIsDeprecated(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Has View</b></em>' reference list.
+	 * Returns the value of the '<em><b>Has View</b></em>' containment reference list.
 	 * The list contents are of type {@link com.bluexml.side.clazz.View}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -140,9 +140,9 @@ public interface Clazz extends AbstractClass {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Has View</em>' reference list.
+	 * @return the value of the '<em>Has View</em>' containment reference list.
 	 * @see com.bluexml.side.clazz.ClazzPackage#getClazz_HasView()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<View> getHasView();

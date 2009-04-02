@@ -65,7 +65,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//Clazz/aspects"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Clazz/isAbstract"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Clazz/isDeprecated"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//Clazz/hasView"/>
+      <genFeatures notify="false" children="true" createChild="true" propertySortChoices="true"
+          ecoreFeature="ecore:EReference Class.ecore#//Clazz/hasView"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getAllAttributes"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getAllInheritedAttributes"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getClassAndAspectAttributes"/>

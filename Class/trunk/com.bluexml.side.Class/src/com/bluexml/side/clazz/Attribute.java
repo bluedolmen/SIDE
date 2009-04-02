@@ -25,8 +25,7 @@ package com.bluexml.side.clazz;
  * </p>
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getAttribute()
- * @model annotation="http://www.bluexml.com/OCL UniqueNameForTaskAttribute='Package.allInstances()->select(\r\n   p | p.tasks->includes(\r\n        BPMTask.allInstances()->select(\r\n           t | t.attributes->includes(self)\r\n        )->asOrderedSet()->first()\r\n       )\r\n      ).tasks->collect(t | t.attributes)->flatten()->select(a | a.name = self.name and a <> self)->isEmpty()'"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='UniqueNameForTaskAttribute'"
+ * @model
  * @generated
  */
 public interface Attribute extends TitledNamedClassModelElement {

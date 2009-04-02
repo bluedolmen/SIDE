@@ -83,12 +83,29 @@ public class ClazzValidator extends EObjectValidator {
 	protected CommonValidator commonValidator;
 
 	/**
-	 * The parsed OCL expression for the definition of the '<em>TwoModelElementWithSameName</em>' invariant constraint.
+	 * The parsed OCL expression for the definition of the '<em>PackageNameNull</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static Constraint clazz_TwoModelElementWithSameNameInvOCL;
+	private static Constraint classPackage_PackageNameNullInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>ClassWithTwoAttributesSameName</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint clazz_ClassWithTwoAttributesSameNameInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>InheritanceCycle</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint clazz_InheritanceCycleInvOCL;
+
 	/**
 	 * The parsed OCL expression for the definition of the '<em>recursiveAssociationMustHaveRole</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
@@ -146,12 +163,29 @@ public class ClazzValidator extends EObjectValidator {
 	 */
 	private static Constraint association_AtLeastOneNavigableEdgeInvOCL;
 	/**
-	 * The parsed OCL expression for the definition of the '<em>UniqueNameForTaskAttribute</em>' invariant constraint.
+	 * The parsed OCL expression for the definition of the '<em>ClassCantBeReferencedbyTwoSameNameAssociation</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static Constraint attribute_UniqueNameForTaskAttributeInvOCL;
+	private static Constraint association_ClassCantBeReferencedbyTwoSameNameAssociationInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>IfAggregationOrCompositionThenUnidirectionalAssociation</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint association_IfAggregationOrCompositionThenUnidirectionalAssociationInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>AspectWithTwoAttributesSameName</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint aspect_AspectWithTwoAttributesSameNameInvOCL;
+
 	/**
 	 * The parsed OCL expression for the definition of the '<em>TwoModelElementWithSameName</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
@@ -173,6 +207,22 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	private static Constraint abstractContainer_noSpecialCharactersInvOCL;
+	/**
+	 * The parsed OCL expression for the definition of the '<em>AtLeastOneAttribute</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint view_AtLeastOneAttributeInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>ViewWithTwoAttributesSameName</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint view_ViewWithTwoAttributesSameNameInvOCL;
+
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
 	
 	private static final OCL OCL_ENV = KerblueOCL.newInstance();
@@ -285,8 +335,35 @@ public class ClazzValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(classPackage, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(classPackage, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(classPackage, diagnostics, context);
-		if (result || diagnostics != null) result &= commonValidator.validatePackage_PackageNameNull(classPackage, diagnostics, context);
+		if (result || diagnostics != null) result &= validateClassPackage_PackageNameNull(classPackage, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the PackageNameNull constraint of '<em>Class Package</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateClassPackage_PackageNameNull(ClassPackage classPackage, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		// TODO override the constraint, if desired
+		// -> uncomment the scaffolding
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "PackageNameNull", getObjectLabel(classPackage, context) }),
+						 new Object[] { classPackage }));
+			}
+			return false;
+		}
+		return commonValidator.validatePackage_PackageNameNull(classPackage, diagnostics, context);
 	}
 
 	/**
@@ -302,37 +379,90 @@ public class ClazzValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(clazz, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(clazz, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(clazz, diagnostics, context);
-		if (result || diagnostics != null) result &= validateClazz_TwoModelElementWithSameName(clazz, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractContainer_TwoModelElementWithSameName(clazz, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractContainer_NameNull(clazz, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractContainer_noSpecialCharacters(clazz, diagnostics, context);
+		if (result || diagnostics != null) result &= validateClazz_ClassWithTwoAttributesSameName(clazz, diagnostics, context);
+		if (result || diagnostics != null) result &= validateClazz_InheritanceCycle(clazz, diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * Validates the TwoModelElementWithSameName constraint of '<em>Clazz</em>'.
+	 * Validates the ClassWithTwoAttributesSameName constraint of '<em>Clazz</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateClazz_TwoModelElementWithSameName(Clazz clazz, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO override the constraint, if desired
-		// -> uncomment the scaffolding
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
+	public boolean validateClazz_ClassWithTwoAttributesSameName(Clazz clazz, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (clazz_ClassWithTwoAttributesSameNameInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(ClazzPackage.Literals.CLAZZ);
+			
+			EAnnotation ocl = ClazzPackage.Literals.CLAZZ.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("ClassWithTwoAttributesSameName");
+			
+			try {
+				clazz_ClassWithTwoAttributesSameNameInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(clazz_ClassWithTwoAttributesSameNameInvOCL);
+		
+		if (!query.check(clazz)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
 						(Diagnostic.ERROR,
 						 DIAGNOSTIC_SOURCE,
 						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "TwoModelElementWithSameName", getObjectLabel(clazz, context) }),
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ClassWithTwoAttributesSameName", getObjectLabel(clazz, context) }),
 						 new Object[] { clazz }));
 			}
 			return false;
 		}
-		return validateAbstractContainer_TwoModelElementWithSameName(clazz, diagnostics, context);
+		return true;
+	}
+
+	/**
+	 * Validates the InheritanceCycle constraint of '<em>Clazz</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateClazz_InheritanceCycle(Clazz clazz, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (clazz_InheritanceCycleInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(ClazzPackage.Literals.CLAZZ);
+			
+			EAnnotation ocl = ClazzPackage.Literals.CLAZZ.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("InheritanceCycle");
+			
+			try {
+				clazz_InheritanceCycleInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(clazz_InheritanceCycleInvOCL);
+		
+		if (!query.check(clazz)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "InheritanceCycle", getObjectLabel(clazz, context) }),
+						 new Object[] { clazz }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -356,6 +486,8 @@ public class ClazzValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateAssociation_SourceNull(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAssociation_TargetNull(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAssociation_AtLeastOneNavigableEdge(association, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAssociation_ClassCantBeReferencedbyTwoSameNameAssociation(association, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAssociation_IfAggregationOrCompositionThenUnidirectionalAssociation(association, diagnostics, context);
 		return result;
 	}
 
@@ -672,59 +804,90 @@ public class ClazzValidator extends EObjectValidator {
 	}
 
 	/**
+	 * Validates the ClassCantBeReferencedbyTwoSameNameAssociation constraint of '<em>Association</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateAttribute(Attribute attribute, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(attribute, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(attribute, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(attribute, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(attribute, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(attribute, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(attribute, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(attribute, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAttribute_UniqueNameForTaskAttribute(attribute, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * Validates the UniqueNameForTaskAttribute constraint of '<em>Attribute</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateAttribute_UniqueNameForTaskAttribute(Attribute attribute, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (attribute_UniqueNameForTaskAttributeInvOCL == null) {
+	public boolean validateAssociation_ClassCantBeReferencedbyTwoSameNameAssociation(Association association, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (association_ClassCantBeReferencedbyTwoSameNameAssociationInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(ClazzPackage.Literals.ATTRIBUTE);
+			helper.setContext(ClazzPackage.Literals.ASSOCIATION);
 			
-			EAnnotation ocl = ClazzPackage.Literals.ATTRIBUTE.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String expr = ocl.getDetails().get("UniqueNameForTaskAttribute");
+			EAnnotation ocl = ClazzPackage.Literals.ASSOCIATION.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("ClassCantBeReferencedbyTwoSameNameAssociation");
 			
 			try {
-				attribute_UniqueNameForTaskAttributeInvOCL = helper.createInvariant(expr);
+				association_ClassCantBeReferencedbyTwoSameNameAssociationInvOCL = helper.createInvariant(expr);
 			}
 			catch (ParserException e) {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
 		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(attribute_UniqueNameForTaskAttributeInvOCL);
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(association_ClassCantBeReferencedbyTwoSameNameAssociationInvOCL);
 		
-		if (!query.check(attribute)) {
+		if (!query.check(association)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
 						(Diagnostic.ERROR,
 						 DIAGNOSTIC_SOURCE,
 						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "UniqueNameForTaskAttribute", getObjectLabel(attribute, context) }),
-						 new Object[] { attribute }));
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ClassCantBeReferencedbyTwoSameNameAssociation", getObjectLabel(association, context) }),
+						 new Object[] { association }));
 			}
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * Validates the IfAggregationOrCompositionThenUnidirectionalAssociation constraint of '<em>Association</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAssociation_IfAggregationOrCompositionThenUnidirectionalAssociation(Association association, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (association_IfAggregationOrCompositionThenUnidirectionalAssociationInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(ClazzPackage.Literals.ASSOCIATION);
+			
+			EAnnotation ocl = ClazzPackage.Literals.ASSOCIATION.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("IfAggregationOrCompositionThenUnidirectionalAssociation");
+			
+			try {
+				association_IfAggregationOrCompositionThenUnidirectionalAssociationInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(association_IfAggregationOrCompositionThenUnidirectionalAssociationInvOCL);
+		
+		if (!query.check(association)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "IfAggregationOrCompositionThenUnidirectionalAssociation", getObjectLabel(association, context) }),
+						 new Object[] { association }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAttribute(Attribute attribute, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(attribute, diagnostics, context);
 	}
 
 	/**
@@ -779,7 +942,47 @@ public class ClazzValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateAbstractContainer_TwoModelElementWithSameName(aspect, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractContainer_NameNull(aspect, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractContainer_noSpecialCharacters(aspect, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAspect_AspectWithTwoAttributesSameName(aspect, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the AspectWithTwoAttributesSameName constraint of '<em>Aspect</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAspect_AspectWithTwoAttributesSameName(Aspect aspect, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (aspect_AspectWithTwoAttributesSameNameInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(ClazzPackage.Literals.ASPECT);
+			
+			EAnnotation ocl = ClazzPackage.Literals.ASPECT.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("AspectWithTwoAttributesSameName");
+			
+			try {
+				aspect_AspectWithTwoAttributesSameNameInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(aspect_AspectWithTwoAttributesSameNameInvOCL);
+		
+		if (!query.check(aspect)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "AspectWithTwoAttributesSameName", getObjectLabel(aspect, context) }),
+						 new Object[] { aspect }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -943,7 +1146,94 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateView(View view, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(view, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(view, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(view, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(view, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(view, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(view, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(view, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(view, diagnostics, context);
+		if (result || diagnostics != null) result &= validateView_AtLeastOneAttribute(view, diagnostics, context);
+		if (result || diagnostics != null) result &= validateView_ViewWithTwoAttributesSameName(view, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the AtLeastOneAttribute constraint of '<em>View</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateView_AtLeastOneAttribute(View view, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (view_AtLeastOneAttributeInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(ClazzPackage.Literals.VIEW);
+			
+			EAnnotation ocl = ClazzPackage.Literals.VIEW.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("AtLeastOneAttribute");
+			
+			try {
+				view_AtLeastOneAttributeInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(view_AtLeastOneAttributeInvOCL);
+		
+		if (!query.check(view)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "AtLeastOneAttribute", getObjectLabel(view, context) }),
+						 new Object[] { view }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the ViewWithTwoAttributesSameName constraint of '<em>View</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateView_ViewWithTwoAttributesSameName(View view, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (view_ViewWithTwoAttributesSameNameInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(ClazzPackage.Literals.VIEW);
+			
+			EAnnotation ocl = ClazzPackage.Literals.VIEW.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("ViewWithTwoAttributesSameName");
+			
+			try {
+				view_ViewWithTwoAttributesSameNameInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(view_ViewWithTwoAttributesSameNameInvOCL);
+		
+		if (!query.check(view)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ViewWithTwoAttributesSameName", getObjectLabel(view, context) }),
+						 new Object[] { view }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**

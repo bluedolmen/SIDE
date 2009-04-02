@@ -1243,7 +1243,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		initEReference(getClazz_Aspects(), this.getAspect(), null, "aspects", null, 0, -1, Clazz.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getClazz_IsAbstract(), ecorePackage.getEBoolean(), "isAbstract", null, 0, 1, Clazz.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getClazz_IsDeprecated(), ecorePackage.getEBoolean(), "isDeprecated", null, 0, 1, Clazz.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClazz_HasView(), this.getView(), null, "hasView", null, 0, -1, Clazz.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClazz_HasView(), this.getView(), null, "hasView", null, 0, -1, Clazz.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(clazzEClass, this.getAttribute(), "getAllAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
 
@@ -1437,6 +1437,12 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 			 "body", "if self.description.oclIsUndefined() or self.description.size() <0 then\r\tself.name\relse\r\tself.description\rendif"
 		   });		
 		addAnnotation
+		  (classPackageEClass, 
+		   source, 
+		   new String[] {
+			 "PackageNameNull", "not self.name.oclIsUndefined() and self.name <> \'\'"
+		   });			
+		addAnnotation
 		  (classPackageEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
@@ -1482,7 +1488,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		  (clazzEClass, 
 		   source, 
 		   new String[] {
-			 "TwoModelElementWithSameName", "Classe.allInstances()->select(a | a.name = self.name and a <> self)->size() = 0"
+			 "InheritanceCycle", "not self.generalizations.generalizations -> includes(self)",
+			 "ClassWithTwoAttributesSameName", "self.attributes -> forAll( a1, a2 | a1 <> a2 implies a1.name <>a2.name)"
 		   });			
 		addAnnotation
 		  (clazzEClass.getEOperations().get(0), 
@@ -1589,7 +1596,9 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 			 "NameNull", "not self.name.oclIsUndefined() and self.name <> \'\'",
 			 "SourceNull", "self.source->notEmpty()",
 			 "TargetNull", "self.destination->notEmpty()",
-			 "AtLeastOneNavigableEdge", "(isNavigableSRC or isNavigableTARGET)"
+			 "AtLeastOneNavigableEdge", "(isNavigableSRC or isNavigableTARGET)",
+			 "ClassCantBeReferencedbyTwoSameNameAssociation", "Association.allInstances()->select(a | a.name = self.name and  a.source = self.source  and a.destination = self.destination and a <> self and self.isNavigableSRC=a.isNavigableSRC and self.isNavigableSRC=true)->size() = 0\nand  \nAssociation.allInstances()->select(a | a.name = self.name and  a.source = self.source  and a.destination = self.destination and a <> self and self.isNavigableTARGET=a.isNavigableTARGET and self.isNavigableTARGET=true)->size() = 0\nand \nAssociation.allInstances()->select(a | a.name = self.name and  a.source = self.destination  and a.destination = self.source and a <> self and self.isNavigableSRC=a.isNavigableTARGET and self.isNavigableSRC=true)->size() = 0\nand \nAssociation.allInstances()->select(a | a.name = self.name and  a.source = self.destination  and a.destination = self.source and a <> self and self.isNavigableTARGET=a.isNavigableSRC and self.isNavigableTARGET=true)->size() = 0\n",
+			 "IfAggregationOrCompositionThenUnidirectionalAssociation", "(self.associationType <> AssociationType::Direct) implies (self.isNavigableSRC xor self.isNavigableTARGET )"
 		   });			
 		addAnnotation
 		  (associationEClass.getEOperations().get(0), 
@@ -1598,17 +1607,17 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 			 "body", "if( self.destination.oclIsKindOf(Classe))\r\nthen\r\nself.destination.oclAsType(Classe).equalsForMerge(other.destination.oclAsType(Classe)) and self.source.oclAsType(Classe).equalsForMerge(other.source.oclAsType(Classe))\r\nand self.name = other.name\r\nelse\r\ntrue\r\nendif\r\n"
 		   });		
 		addAnnotation
-		  (attributeEClass, 
-		   source, 
-		   new String[] {
-			 "UniqueNameForTaskAttribute", "Package.allInstances()->select(\r\n   p | p.tasks->includes(\r\n        BPMTask.allInstances()->select(\r\n           t | t.attributes->includes(self)\r\n        )->asOrderedSet()->first()\r\n       )\r\n      ).tasks->collect(t | t.attributes)->flatten()->select(a | a.name = self.name and a <> self)->isEmpty()"
-		   });			
-		addAnnotation
 		  (operationEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "body", "\r\nself.name = other.name and \r\n\r\nself.parameters->forAll(p:Parameter |   \r\n   other.parameters->exists(z : Parameter | z.name = p.name and z.valueType = p.valueType ))"
 		   });		
+		addAnnotation
+		  (aspectEClass, 
+		   source, 
+		   new String[] {
+			 "AspectWithTwoAttributesSameName", "self.attributes -> forAll( a1, a2 | a1 <> a2 implies a1.name <>a2.name)"
+		   });			
 		addAnnotation
 		  (aspectEClass.getEOperations().get(0), 
 		   source, 
@@ -1625,9 +1634,9 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		  (abstractContainerEClass, 
 		   source, 
 		   new String[] {
-			 "TwoModelElementWithSameName", "AbstractContainer.allInstances()->select(a | a.name = self.name and a <> self)->size() = 0",
+			 "TwoModelElementWithSameName", "AbstractContainer.allInstances()->select(a | a.name = self.name and a.getContainer() = self.getContainer() and a <> self)->size() = 0",
 			 "NameNull", "not self.name.oclIsUndefined() and self.name <> \'\'",
-			 "noSpecialCharacters", "self.name.regexMatch(\'\\w\') <> null"
+			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') <> null"
 		   });			
 		addAnnotation
 		  (abstractContainerEClass.getEOperations().get(0), 
@@ -1635,6 +1644,13 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   new String[] {
 			 "body", "self.name = other.name and self.title = other.title"
 		   });		
+		addAnnotation
+		  (viewEClass, 
+		   source, 
+		   new String[] {
+			 "AtLeastOneAttribute", "self.attributes -> notEmpty()",
+			 "ViewWithTwoAttributesSameName", "self.attributes -> forAll( a1, a2 | a1 <> a2 implies a1.name <>a2.name)"
+		   });			
 		addAnnotation
 		  (viewEClass.getEOperations().get(0), 
 		   source, 
@@ -1668,31 +1684,43 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";												
+		String source = "http://www.eclipse.org/emf/2002/Ecore";					
+		addAnnotation
+		  (classPackageEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "PackageNameNull"
+		   });										
 		addAnnotation
 		  (clazzEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "TwoModelElementWithSameName"
+			 "constraints", "ClassWithTwoAttributesSameName InheritanceCycle"
 		   });																	
 		addAnnotation
 		  (associationEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource AssociatioClassCantBeAgregationOrComposition NameNull SourceNull TargetNull AtLeastOneNavigableEdge"
-		   });				
+			 "constraints", "recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource AssociatioClassCantBeAgregationOrComposition NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation"
+		   });					
 		addAnnotation
-		  (attributeEClass, 
+		  (aspectEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "UniqueNameForTaskAttribute"
-		   });						
+			 "constraints", "AspectWithTwoAttributesSameName"
+		   });					
 		addAnnotation
 		  (abstractContainerEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "TwoModelElementWithSameName NameNull noSpecialCharacters"
-		   });					
+		   });				
+		addAnnotation
+		  (viewEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "AtLeastOneAttribute ViewWithTwoAttributesSameName"
+		   });				
 	}
 
 } //ClazzPackageImpl
