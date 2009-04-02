@@ -57,6 +57,7 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 		super.canExecute();
 		initializeFormClassTarget();
 		FormClass previousFc = null;
+		logCanExecute("___________________________________", owner);
 		logCanExecute("owner", owner);
 		logCanExecute("fcTarget", fcTarget);
 		logCanExecute("fcOrigin", fcOrigin);
@@ -81,39 +82,44 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 					logCanExecute("previousFc", previousFc);
 					logCanExecute("fcOrigin", fcOrigin);
 					// Move of virtual field between form class isn't authorized
-					if (fcTarget != fcOrigin && (f instanceof VirtualField)){
+					if (fcTarget != fcOrigin && (owner instanceof FormGroup)) {
 						isExecutable &= false;
-						logCanExecute("fcTarget != fcOrigin && (f instanceof VirtualField)");
+						System.err.println("FormGroup!!!!");;
 					} else {
-						// Field already virtualized can't be drag & drop
-						if (fcTarget != fcOrigin && FormDiagramUtils.IsVirtualized(f)) {
-								isExecutable &= false;
-								logCanExecute("fcTarget != fcOrigin && FormDiagramUtils.IsVirtualized(f)");
+						if (fcTarget != fcOrigin && (f instanceof VirtualField)){
+							isExecutable &= false;
+							logCanExecute("fcTarget != fcOrigin && (f instanceof VirtualField)");
 						} else {
-							if (previousFc != fcOrigin) {
-								isExecutable &= false;
-								logCanExecute("previousFc != fcOrigin");
-							} else {
-								if (fcOrigin != null && fcTarget != null) {
-									logCanExecute("fcOrigin != null && fcTarget != null");
-									if (fcTarget == fcOrigin) {
-										isExecutable &= true;
-										logCanExecute("fcTarget == fcOrigin");
-									} else {
-										// Does the target formClass have a Reference to the
-										// origin formclass?
-										if (FormDiagramUtils.haveReferenceTo(fcOrigin,
-												(FormGroup) fcTarget)) {
-											isExecutable = true;
-											logCanExecute("FormDiagramUtils.haveReferenceTo(fcOrigin, (FormGroup) fcTarget)");
-										} else {
-											isExecutable &= false;
-											logCanExecute("NOT FormDiagramUtils.haveReferenceTo(fcOrigin, (FormGroup) fcTarget)");
-										}
-									}
-								} else {
+							// Field already virtualized can't be drag & drop
+							if (fcTarget != fcOrigin && FormDiagramUtils.IsVirtualized(f)) {
 									isExecutable &= false;
-									logCanExecute("NOT FormDiagramUtils.haveReferenceTo(fcOrigin, (FormGroup) fcTarget)");
+									logCanExecute("fcTarget != fcOrigin && FormDiagramUtils.IsVirtualized(f)");
+							} else {
+								if (previousFc != fcOrigin) {
+									isExecutable &= false;
+									logCanExecute("previousFc != fcOrigin");
+								} else {
+									if (fcOrigin != null && fcTarget != null) {
+										logCanExecute("fcOrigin != null && fcTarget != null");
+										if (fcTarget == fcOrigin) {
+											isExecutable &= true;
+											logCanExecute("fcTarget == fcOrigin");
+										} else {
+											// Does the target formClass have a Reference to the
+											// origin formclass?
+											if (FormDiagramUtils.haveReferenceTo(fcOrigin,
+													(FormGroup) fcTarget)) {
+												isExecutable = true;
+												logCanExecute("FormDiagramUtils.haveReferenceTo(fcOrigin, (FormGroup) fcTarget)");
+											} else {
+												isExecutable &= false;
+												logCanExecute("NOT FormDiagramUtils.haveReferenceTo(fcOrigin, (FormGroup) fcTarget)");
+											}
+										}
+									} else {
+										isExecutable &= false;
+										logCanExecute("NOT FormDiagramUtils.haveReferenceTo(fcOrigin, (FormGroup) fcTarget)");
+									}
 								}
 							}
 						}
@@ -126,7 +132,7 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 	}
 
 	private void logCanExecute(Object... logs) {
-	/*
+	
 		StringBuffer sb = new StringBuffer();
 		sb.append("isExecutable :");
 		sb.append(isExecutable);
@@ -139,8 +145,8 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 			}
 			sb.append(" ");
 		}
-		System.out.println(sb.toString());
-	*/
+		System.err.println(sb.toString());
+	
 	}
 
 	public void execute() {
@@ -198,8 +204,6 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 							FieldTransformation.transform((Field) o, vf);
 							vf.setLink((Field)o);
 							newCollection.add(vf);
-						} else {
-							newCollection.add((Field) o);
 						}
 					}
 					
