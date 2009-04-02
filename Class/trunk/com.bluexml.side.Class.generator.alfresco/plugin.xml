@@ -83,6 +83,23 @@
                         key="CATALINA_HOME"
                         label="Tomcat installation directory">
                   </configurationParameter>
+                  <configurationParameter
+                        key="com.bluexml.side.Class.generator.alfresco.module.id"
+                        label="Class Unique module id">
+                  </configurationParameter>
+                  <configurationParameter
+                        key="com.bluexml.side.Class.generator.alfresco.module.title"
+                        label="Class module title">
+                  </configurationParameter>
+                  <configurationParameter
+                        documentation="&lt;toto&gt;&quot;tutu&lt;/toto&gt;"
+                        key="com.bluexml.side.Class.generator.alfresco.module.version"
+                        label="Class Module version">
+                  </configurationParameter>
+                  <configurationParameter
+                        key="com.bluexml.side.Class.generator.alfresco.module.description"
+                        label="Class Module description">
+                  </configurationParameter>
                   <option
                         documentation="Generate the alfresco&apos;s model."
                         key="alfresco.dataModel"
