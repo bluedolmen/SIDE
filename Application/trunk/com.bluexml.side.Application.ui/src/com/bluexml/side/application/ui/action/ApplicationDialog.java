@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.internal.resources.Folder;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -44,6 +45,7 @@ import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
@@ -52,7 +54,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
@@ -65,6 +66,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
+import org.eclipse.ui.dialogs.ISelectionStatusValidator;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
@@ -90,6 +92,7 @@ import com.bluexml.side.application.ui.action.tree.Technology;
 import com.bluexml.side.application.ui.action.tree.TechnologyVersion;
 import com.bluexml.side.application.ui.action.tree.TreeElement;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
+import com.bluexml.side.application.ui.action.utils.validator.FolderSelectionValidator;
 
 public class ApplicationDialog extends Dialog {
 
@@ -397,6 +400,7 @@ public class ApplicationDialog extends Dialog {
 		ets.setTitle("Select model file");
 		ets.setMessage("Select model file (no diagram file)");
 		ets.setInput(ResourcesPlugin.getWorkspace().getRoot());
+		ets.setHelpAvailable(false);
 		
 		if (ElementTreeSelectionDialog.OK == ets.open()) {
 			Object[] result = ets.getResult();
@@ -641,8 +645,8 @@ public class ApplicationDialog extends Dialog {
 				if (param != null) {
 					Text t = (Text) e.getSource();
 					param.setValue(t.getText());
+					ApplicationDialog.modificationMade();
 				}
-				ApplicationDialog.modificationMade();
 			}
 		});
 
@@ -650,7 +654,7 @@ public class ApplicationDialog extends Dialog {
 
 		final Label logLabel = new Label(composite_2, SWT.NONE);
 		logLabel.setAlignment(SWT.RIGHT);
-		logLabel.setText("Log File :");
+		logLabel.setText("Log Path :");
 		logLabel.setBounds(20, 115, 93, 15);
 
 		final Label destinationLabel = new Label(composite_2, SWT.NONE);
@@ -666,8 +670,9 @@ public class ApplicationDialog extends Dialog {
 				if (param != null) {
 					Text t = (Text) e.getSource();
 					param.setValue(t.getText());
+					ApplicationDialog.modificationMade();
 				}
-				ApplicationDialog.modificationMade();
+				
 			}
 		});
 		destinationText.setBounds(115, 140, 260, 25);
@@ -675,22 +680,22 @@ public class ApplicationDialog extends Dialog {
 		final Button browseLogPathButton = new Button(composite_2, SWT.NONE);
 		browseLogPathButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				String filePath = null;
-				FileDialog fd = new FileDialog(getShell(), SWT.SAVE);
-				fd.setFilterNames(new String[] { "Log Files", "All Files (*.*)" });
-				fd.setFilterExtensions(new String[] { "*.log", "*.*" });
-				if (logText.getText() == null || logText.getText().length() == 0) {
-					fd.setFilterPath(ResourcesPlugin.getWorkspace().getRoot().getRawLocation().toPortableString());
-				} else {
-					fd.setFilterPath(logText.getText());
-				}
+				String filePath = "";
+				Folder folder = displaySelectFolderInWorkspace("Select Log Path");
 				
-				filePath = fd.open();
-				if (filePath != null) {
+				if (folder != null) {
+					filePath = folder.getFullPath().toPortableString();
 					logText.setText(filePath);
-					modificationMade();
+					
+					ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_LOGPATH);
+					if (param != null) {
+						param.setValue(filePath);
+						modificationMade();
+					}
 				}
 			}
+
+			
 		});
 		browseLogPathButton.setText("Browse");
 		browseLogPathButton.setBounds(381, 106, 75, 25);
@@ -698,18 +703,19 @@ public class ApplicationDialog extends Dialog {
 		final Button browseGenPathButton = new Button(composite_2, SWT.NONE);
 		browseGenPathButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				String folderPath = null;
-				DirectoryDialog dd = new DirectoryDialog(getShell(), SWT.OK);
-				if (destinationText.getText() == null || destinationText.getText().length() == 0) {
-					dd.setFilterPath(ResourcesPlugin.getWorkspace().getRoot().getRawLocation().toPortableString());
-				} else {
-					dd.setFilterPath(destinationText.getText());
-				}
+				String filePath = "";
+				Folder folder = displaySelectFolderInWorkspace("Select Generation Path");
 				
-				folderPath = dd.open();
-				if (folderPath != null) {
-					destinationText.setText(folderPath);
-					modificationMade();
+				if (folder != null) {
+					filePath = folder.getFullPath().toPortableString();
+					destinationText.setText(filePath);
+					
+					
+					ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_GENPATH);
+					if (param != null) {
+						param.setValue(filePath);
+						modificationMade();
+					}
 				}
 			}
 		});
@@ -916,6 +922,30 @@ public class ApplicationDialog extends Dialog {
 		return container;
 	}
 
+	private Folder displaySelectFolderInWorkspace(String message) {
+		Folder result = null;
+		ElementTreeSelectionDialog ets = new ElementTreeSelectionDialog(Display
+				.getDefault().getActiveShell(), new WorkbenchLabelProvider(),
+				new BaseWorkbenchContentProvider());
+		ets.setBlockOnOpen(true);
+		ets.setValidator((ISelectionStatusValidator)new FolderSelectionValidator());
+		ets.setAllowMultiple(true);
+		ets.setTitle("Select Folder");
+		ets.setMessage(message);
+		ets.setInput(ResourcesPlugin.getWorkspace().getRoot());
+		ets.setHelpAvailable(false);
+		
+		if (ElementTreeSelectionDialog.OK == ets.open()) {
+			Object[] choice = ets.getResult();
+			for (Object o : choice) {
+				if (o instanceof Folder) {
+					result = (Folder) o;
+				}
+			}
+		}
+		return result;
+	}
+	
 	private void removeModel(String[] selection) {
 		List<String> list = Arrays.asList(selection);
 		List<Model> toRemove = new ArrayList<Model>();
@@ -1265,7 +1295,7 @@ public class ApplicationDialog extends Dialog {
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
 		createButton(parent, GEN_ID, "Generate", false);
-		createButton(parent, APPLY_ID, "Apply", false);
+		createButton(parent, APPLY_ID, "Save", false);
 		createButton(parent, IDialogConstants.CLOSE_ID, "Close", false);
 	}
 
@@ -1282,7 +1312,9 @@ public class ApplicationDialog extends Dialog {
 			close();
 		}
 		if (buttonId == APPLY_ID) {
+			Display.getCurrent().getActiveShell().setCursor(new Cursor(Display.getCurrent(),SWT.CURSOR_WAIT));
 			saveData();
+			Display.getCurrent().getActiveShell().setCursor(new Cursor(Display.getCurrent(),SWT.CURSOR_ARROW));
 		}
 		if (buttonId == GEN_ID) {
 			if (applicationModified) {
