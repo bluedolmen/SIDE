@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+  <Styles>
+    <Style ss:ID="heading">
+	  <Interior ss:Color="#AFAFAF" ss:Pattern="Solid" />
+      <Font ss:FontName="Arial" ss:Bold="1" />
+      <Alignment ss:Horizontal="Center"/>
+	</Style>
+	<Style ss:ID="italic">
+      <Font ss:FontName="Arial" ss:Italic="1" />
+	</Style>
+	<Style ss:ID="bold">
+      <Font ss:FontName="Arial" ss:Bold="1" />
+	</Style>
+	<Style ss:ID="risk_level_0">
+	  <Interior ss:Color="#00FF00" ss:Pattern="Solid" />
+      <Font ss:FontName="Arial" ss:Bold="1" />
+      <Alignment ss:Horizontal="Center"/>
+	</Style>
+	<Style ss:ID="risk_level_1">
+	  <Interior ss:Color="#19E600" ss:Pattern="Solid" />
+      <Font ss:FontName="Arial" ss:Bold="1" />
+      <Alignment ss:Horizontal="Center"/>
+	</Style>
+	<Style ss:ID="risk_level_2">
+	  <Interior ss:Color="#33CC00" ss:Pattern="Solid" />
+      <Font ss:FontName="Arial" ss:Bold="1" />
+      <Alignment ss:Horizontal="Center"/>
+	</Style>
+	<Style ss:ID="risk_level_3">
+	  <Interior ss:Color="#4CB300" ss:Pattern="Solid" />
+      <Font ss:FontName="Arial" ss:Bold="1" />
+      <Alignment ss:Horizontal="Center"/>
+	</Style>
+	<Style ss:ID="risk_level_4">
+	  <Interior ss:Color="#669900" ss:Pattern="Solid" />
+      <Font ss:FontName="Arial" ss:Bold="1" />
+      <Alignment ss:Horizontal="Center"/>
+	</Style>
+	<Style ss:ID="risk_level_5">
+	  <Interior ss:Color="#7F8000" ss:Pattern="Solid" />
+      <Font ss:FontName="Arial" ss:Bold="1" />
+      <Alignment ss:Horizontal="Center"/>
+	</Style>
+	<Style ss:ID="risk_level_6">
+	  <Interior ss:Color="#996600" ss:Pattern="Solid" />
+      <Font ss:FontName="Arial" ss:Bold="1" />
+      <Alignment ss:Horizontal="Center"/>
+	</Style>
+	<Style ss:ID="risk_level_7">
+	  <Interior ss:Color="#996600" ss:Pattern="Solid" />
+      <Font ss:FontName="Arial" ss:Bold="1" />
+      <Alignment ss:Horizontal="Center"/>
+	</Style>
+	<Style ss:ID="risk_level_8">
+	  <Interior ss:Color="#B34C00" ss:Pattern="Solid" />
+      <Font ss:FontName="Arial" ss:Bold="1" />
+      <Alignment ss:Horizontal="Center"/>
+	</Style>
+	<Style ss:ID="risk_level_9">
+	  <Interior ss:Color="#CC3300" ss:Pattern="Solid" />
+      <Font ss:FontName="Arial" ss:Bold="1" />
+      <Alignment ss:Horizontal="Center"/>
+	</Style>
+	<Style ss:ID="risk_level_10">
+	  <Interior ss:Color="#E61900" ss:Pattern="Solid" />
+      <Font ss:FontName="Arial" ss:Bold="1" />
+      <Alignment ss:Horizontal="Center"/>
+	</Style>
+	<Style ss:ID="risk_level_11">
+	  <Interior ss:Color="#FF0000" ss:Pattern="Solid" />
+      <Font ss:FontName="Arial" ss:Bold="1" />
+      <Alignment ss:Horizontal="Center"/>
+	</Style>
+  </Styles>
+  <Worksheet ss:Name="Diagnostic">
+    <Table>
+      <Column ss:Width="70.0"/>
+      <Column ss:Width="300.0"/>
+      <Column ss:Width="70.0"/>
+      <Row>
+        <Cell ss:StyleID="heading">
+          <Data ss:Type="String">Type</Data>
+        </Cell>
+        <Cell ss:StyleID="heading">
+          <Data ss:Type="String">Name</Data>
+        </Cell>
+        <Cell ss:StyleID="heading">
+          <Data ss:Type="String">Risk [0;1]</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Goal</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Gérer l'inter-opérabilité des systèmes</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_8">
+          <Data ss:Type="Double">0,75</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Goal</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Historisation des synchronisation</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_2">
+          <Data ss:Type="Double">0,25</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Goal</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Vérifier la cohérence</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_6">
+          <Data ss:Type="Double">0,58</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Goal</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Synchronization des nomenclatures</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_5">
+          <Data ss:Type="Double">0,489</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Goal</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Sauvegarder les différences</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_2">
+          <Data ss:Type="Double">0,25</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Goal</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Vérif des params</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_3">
+          <Data ss:Type="Double">0,341</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Goal</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Impacter les modifs de l'ERP vers la CAO</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_6">
+          <Data ss:Type="Double">0,557</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Goal</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Changement des params</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_5">
+          <Data ss:Type="Double">0,528</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Goal</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Validation</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_3">
+          <Data ss:Type="Double">0,341</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Goal</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Impacter les modifications de la CAO sur l'ERP</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_9">
+          <Data ss:Type="Double">0,875</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Goal</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Changement de la structure</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_5">
+          <Data ss:Type="Double">0,511</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Goal</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Ré-organisation</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_2">
+          <Data ss:Type="Double">0,25</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Goal</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Ajout/Suppression d'un composant</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_5">
+          <Data ss:Type="Double">0,511</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Goal</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Mise en place par défaut</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_2">
+          <Data ss:Type="Double">0,25</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Goal</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Validation</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_5">
+          <Data ss:Type="Double">0,511</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Goal</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Changement des param</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_4">
+          <Data ss:Type="Double">0,386</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Goal</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Validation</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_5">
+          <Data ss:Type="Double">0,511</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Goal</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Initialisation de la structure</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_8">
+          <Data ss:Type="Double">0,761</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Goal</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Validation</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_5">
+          <Data ss:Type="Double">0,511</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Entity</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Nomenclature</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_0">
+          <Data ss:Type="Double">0,004</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Entity</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Composant</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_0">
+          <Data ss:Type="Double">0,027</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Entity</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Nomenclature ERP</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_0">
+          <Data ss:Type="Double">0,033</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Entity</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Composant ERP</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_3">
+          <Data ss:Type="Double">0,294</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Agent</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Responsable industriel</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_4">
+          <Data ss:Type="Double">0,368</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Agent</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Responsable BE</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_6">
+          <Data ss:Type="Double">0,579</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="bold">
+          <Data ss:Type="String">Agent</Data>
+        </Cell>
+        <Cell ss:StyleID="italic">
+          <Data ss:Type="String">Publication dans CAO</Data>
+        </Cell>
+        <Cell ss:StyleID="risk_level_1">
+          <Data ss:Type="Double">0,158</Data>
+        </Cell>
+      </Row>
+    </Table>
+  </Worksheet>
+</Workbook>

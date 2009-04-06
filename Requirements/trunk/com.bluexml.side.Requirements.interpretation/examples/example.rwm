@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rwm:RequirementsDefinition xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rwm="http://www.bluexml.com/requirements/" xmi:id="_TnQCYKb7Edyg0-Q2ek6f8g" name="MyRequirements">
+  <childElements xsi:type="rwm:Agent" xmi:id="Ni1SmNFS1H" name="Responsable industriel" documentation="Un responsable industriel est un expert gestion de prod (dans l'atelier). Il conna�t les produits, les stocks... Chef de l'atelier&amp;lt;br>&amp;lt;br>Passerelle r�elle entre ERP et CAO. Re-Structuration ERP&amp;lt;br>" isHuman="true" isResponsible="FHrKyLGNam LrxncFJi75 xnfM96l62d WzAaIAc5TG"/>
+  <childElements xsi:type="rwm:Agent" xmi:id="3rsgk7O9yh" name="Responsable BE" documentation="CAO OK pour partir&amp;lt;br>" isHuman="true" isResponsible="4MISM0xElf Ls0dowBhnI"/>
+  <childElements xsi:type="rwm:Agent" xmi:id="48QPNXcqpu" name="Publication dans CAO" documentation="" isResponsible="mPMPuDTteM"/>
+  <childElements xsi:type="rwm:Goal" xmi:id="HLSKgmfTVC" name="Gérer l'inter-opérabilité des systèmes" documentation="Gestion des sous-nomenclatures" priority="Normal">
+    <subgoals xmi:id="kotyfe0ile" name="Historisation des synchronisation" documentation="Qui a fait quoi et quand ?" priority="Normal"/>
+    <subgoals xmi:id="WzAaIAc5TG" name="Vérifier la cohérence" documentation="" priority="Normal" responsible="Ni1SmNFS1H">
+      <subgoals xmi:id="zto3uL3DIt" name="Synchronization des nomenclatures" documentation="On suppose" priority="Normal">
+        <subgoals xmi:id="J2vIomVa34" name="Sauvegarder les différences" documentation="" priority="Normal"/>
+        <privilegeGroup entryPoint="7Sarf3VL5T" documentation="">
+          <privileges element="7Sarf3VL5T" category="read"/>
+          <privileges element="aQsRfX66Kw" category="read"/>
+          <privileges category="read"/>
+          <privileges element="T9OM7CuvcS" category="read"/>
+          <privileges element="S2LRq62e1v" category="read"/>
+          <privileges element="srUO5UZhlQ" category="read"/>
+          <privileges element="hbebEmlq2n" category="read"/>
+          <privileges element="nwEuTBBnn0" category="read"/>
+        </privilegeGroup>
+      </subgoals>
+      <subgoals xmi:id="MXGCKvDXCR" name="Vérif des params" documentation="" priority="Normal">
+        <privilegeGroup entryPoint="cVQ46PIOKe" documentation="">
+          <privileges element="K4us8ha1Ti" category="read"/>
+          <privileges element="0aKeNDBWVZ" category="read"/>
+          <privileges element="GD9WrtVT7H" category="read"/>
+          <privileges element="7bJe3ooQ0t" category="read"/>
+        </privilegeGroup>
+      </subgoals>
+    </subgoals>
+    <subgoals xmi:id="mPMPuDTteM" name="Impacter les modifs de l'ERP vers la CAO" documentation="Pas de validation avant publication" priority="Normal" responsible="48QPNXcqpu">
+      <subgoals xmi:id="X2D1NW7wLl" name="Changement des params" documentation="Si non impact dans CAO alors intiialisation suivante ERP KO" priority="High">
+        <subgoals xmi:id="Ls0dowBhnI" name="Validation" documentation="" priority="Normal" responsible="3rsgk7O9yh">
+          <privilegeGroup entryPoint="T9OM7CuvcS" documentation="">
+            <privileges element="S2LRq62e1v" category="read"/>
+            <privileges element="srUO5UZhlQ" category="read"/>
+            <privileges element="hbebEmlq2n" category="read"/>
+            <privileges element="nwEuTBBnn0" category="read"/>
+          </privilegeGroup>
+        </subgoals>
+        <privilegeGroup entryPoint="T9OM7CuvcS" documentation="">
+          <privileges element="nwEuTBBnn0" category="read"/>
+          <privileges element="nwEuTBBnn0" category="update"/>
+          <privileges element="hbebEmlq2n" category="read"/>
+          <privileges element="hbebEmlq2n" category="update"/>
+          <privileges element="srUO5UZhlQ" category="read"/>
+          <privileges element="srUO5UZhlQ" category="update"/>
+          <privileges element="S2LRq62e1v" category="read"/>
+          <privileges element="S2LRq62e1v" category="update"/>
+          <privileges element="7Sarf3VL5T" category="read"/>
+        </privilegeGroup>
+      </subgoals>
+      <privilegeGroup entryPoint="cVQ46PIOKe" documentation="">
+        <privileges element="K4us8ha1Ti" category="read"/>
+        <privileges element="0aKeNDBWVZ" category="read"/>
+        <privileges element="GD9WrtVT7H" category="read"/>
+        <privileges element="7bJe3ooQ0t" category="read"/>
+        <privileges element="cVQ46PIOKe" category="read"/>
+      </privilegeGroup>
+    </subgoals>
+    <subgoals xmi:id="4MISM0xElf" name="Impacter les modifications de la CAO sur l'ERP" documentation="Sous la responsabilité du chef d'équipe" priority="High" responsible="3rsgk7O9yh">
+      <subgoals xmi:id="cUKb4umLSL" name="Changement de la structure" documentation="" priority="Normal">
+        <subgoals xmi:id="eF4Vau5OUl" name="Ré-organisation" documentation="" priority="Normal"/>
+        <subgoals xmi:id="uzHSAta8Tc" name="Ajout/Suppression d'un composant" documentation="" priority="Normal">
+          <subgoals xmi:id="cnITTdG05Q" name="Mise en place par défaut" documentation="" priority="Normal"/>
+          <subgoals xmi:id="xnfM96l62d" name="Validation" documentation="Avant insertion ERP" priority="Normal" responsible="Ni1SmNFS1H">
+            <privilegeGroup entryPoint="1e1eT4uesR" documentation="">
+              <privileges element="q8i3ntBsrs" category="read"/>
+              <privileges element="9gu6TJEJis" category="read"/>
+              <privileges element="9gu6TJEJis" category="update"/>
+              <privileges element="1e1eT4uesR" category="read"/>
+              <privileges element="cVQ46PIOKe" category="read"/>
+              <privileges element="7bJe3ooQ0t" category="read"/>
+              <privileges element="0aKeNDBWVZ" category="read"/>
+              <privileges element="K4us8ha1Ti" category="read"/>
+              <privileges element="GD9WrtVT7H" category="read"/>
+            </privilegeGroup>
+          </subgoals>
+          <privilegeGroup entryPoint="1e1eT4uesR" documentation="">
+            <privileges element="cVQ46PIOKe"/>
+            <privileges element="cVQ46PIOKe" category="read"/>
+            <privileges element="cVQ46PIOKe" category="update"/>
+            <privileges element="7bJe3ooQ0t" category="read"/>
+            <privileges element="7bJe3ooQ0t" category="update"/>
+            <privileges element="0aKeNDBWVZ" category="read"/>
+            <privileges element="0aKeNDBWVZ" category="update"/>
+            <privileges element="K4us8ha1Ti" category="read"/>
+            <privileges element="K4us8ha1Ti" category="update"/>
+            <privileges element="GD9WrtVT7H" category="read"/>
+            <privileges element="GD9WrtVT7H" category="update"/>
+          </privilegeGroup>
+        </subgoals>
+      </subgoals>
+      <subgoals xmi:id="T2pwrfJpMm" name="Changement des param" documentation="" priority="Low">
+        <subgoals xmi:id="LrxncFJi75" name="Validation" documentation="avant ERP" priority="Normal" responsible="Ni1SmNFS1H">
+          <privilegeGroup entryPoint="1e1eT4uesR" documentation="">
+            <privileges element="K4us8ha1Ti" category="read"/>
+            <privileges element="0aKeNDBWVZ" category="read"/>
+            <privileges element="GD9WrtVT7H" category="read"/>
+            <privileges element="7bJe3ooQ0t" category="read"/>
+            <privileges element="cVQ46PIOKe" category="read"/>
+            <privileges element="q8i3ntBsrs" category="read"/>
+            <privileges element="9gu6TJEJis" category="read"/>
+            <privileges element="9gu6TJEJis" category="update"/>
+            <privileges element="1e1eT4uesR" category="read"/>
+          </privilegeGroup>
+        </subgoals>
+        <privilegeGroup entryPoint="cVQ46PIOKe" documentation="">
+          <privileges element="K4us8ha1Ti" category="read"/>
+          <privileges element="K4us8ha1Ti" category="update"/>
+          <privileges element="0aKeNDBWVZ" category="read"/>
+          <privileges element="0aKeNDBWVZ" category="update"/>
+          <privileges element="GD9WrtVT7H" category="read"/>
+          <privileges element="GD9WrtVT7H" category="update"/>
+          <privileges element="7bJe3ooQ0t" category="read"/>
+          <privileges element="7bJe3ooQ0t" category="update"/>
+          <privileges element="cVQ46PIOKe" category="read"/>
+          <privileges element="cVQ46PIOKe" category="update"/>
+        </privilegeGroup>
+      </subgoals>
+      <subgoals xmi:id="NmLZCIA5Ul" name="Initialisation de la structure" documentation="">
+        <subgoals xmi:id="FHrKyLGNam" name="Validation" documentation="Validation avant ERP" priority="Normal" responsible="Ni1SmNFS1H">
+          <privilegeGroup entryPoint="1e1eT4uesR" documentation="">
+            <privileges element="q8i3ntBsrs" category="read"/>
+            <privileges element="9gu6TJEJis" category="read"/>
+            <privileges element="9gu6TJEJis" category="update"/>
+            <privileges element="1e1eT4uesR" category="read"/>
+            <privileges element="cVQ46PIOKe" category="read"/>
+            <privileges element="7bJe3ooQ0t" category="read"/>
+            <privileges element="0aKeNDBWVZ" category="read"/>
+            <privileges element="K4us8ha1Ti" category="read"/>
+            <privileges element="GD9WrtVT7H" category="read"/>
+          </privilegeGroup>
+        </subgoals>
+        <privilegeGroup entryPoint="1e1eT4uesR" documentation="">
+          <privileges element="K4us8ha1Ti" category="update"/>
+          <privileges element="0aKeNDBWVZ" category="update"/>
+          <privileges element="GD9WrtVT7H" category="update"/>
+          <privileges element="7bJe3ooQ0t" category="update"/>
+          <privileges element="cVQ46PIOKe"/>
+          <privileges element="cVQ46PIOKe" category="read"/>
+          <privileges element="cVQ46PIOKe" category="update"/>
+          <privileges element="q8i3ntBsrs" category="update"/>
+          <privileges element="9gu6TJEJis" category="update"/>
+          <privileges element="1e1eT4uesR"/>
+          <privileges element="1e1eT4uesR" category="update"/>
+        </privilegeGroup>
+      </subgoals>
+      <privilegeGroup entryPoint="7Sarf3VL5T" documentation="">
+        <privileges element="aQsRfX66Kw" category="read"/>
+        <privileges element="7Sarf3VL5T" category="read"/>
+        <privileges element="T9OM7CuvcS" category="read"/>
+        <privileges element="S2LRq62e1v" category="read"/>
+        <privileges element="srUO5UZhlQ" category="read"/>
+        <privileges element="hbebEmlq2n" category="read"/>
+        <privileges element="nwEuTBBnn0" category="read"/>
+      </privilegeGroup>
+    </subgoals>
+  </childElements>
+  <childElements xsi:type="rwm:Entity" xmi:id="7Sarf3VL5T" name="Nomenclature" documentation="Une nomenclature est la liste d'un composant d'un produit.">
+    <attributes xmi:id="aQsRfX66Kw" name="quantité par composant" documentation="" type="NumericalValue"/>
+  </childElements>
+  <childElements xsi:type="rwm:Entity" xmi:id="T9OM7CuvcS" name="Composant" documentation="">
+    <attributes xmi:id="S2LRq62e1v" name="description" documentation=""/>
+    <attributes xmi:id="srUO5UZhlQ" name="fournisseur" documentation=""/>
+    <attributes xmi:id="hbebEmlq2n" name="référence fournisseur" documentation=""/>
+    <attributes xmi:id="nwEuTBBnn0" name="référence interne" documentation="Utile car il peut y avoir différentes ref fournisseurs&amp;lt;br>"/>
+  </childElements>
+  <childElements xsi:type="rwm:Entity" xmi:id="1e1eT4uesR" name="Nomenclature ERP" documentation="">
+    <attributes xmi:id="9gu6TJEJis" name="est stable" documentation=""/>
+    <attributes xmi:id="q8i3ntBsrs" name="quantité par composant" documentation="" type="NumericalValue"/>
+  </childElements>
+  <childElements xsi:type="rwm:Entity" xmi:id="cVQ46PIOKe" name="Composant ERP" documentation="">
+    <attributes xmi:id="7bJe3ooQ0t" name="description" documentation=""/>
+    <attributes xmi:id="0aKeNDBWVZ" name="ref fournisseur" documentation=""/>
+    <attributes xmi:id="K4us8ha1Ti" name="ref interne" documentation=""/>
+    <attributes xmi:id="GD9WrtVT7H" name="fournisseur" documentation=""/>
+  </childElements>
+  <childElements xsi:type="rwm:RelationShip" name="structure" source="7Sarf3VL5T" target="T9OM7CuvcS"/>
+  <childElements xsi:type="rwm:RelationShip" name="structure" source="1e1eT4uesR" target="cVQ46PIOKe"/>
+</rwm:RequirementsDefinition>

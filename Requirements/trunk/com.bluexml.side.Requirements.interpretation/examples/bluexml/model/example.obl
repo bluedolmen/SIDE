@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<MMUseCase:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:MMUseCase="http://MMUseCase" xmi:id="_Mh8xkOeoEd272qcqI1bIDw" name="MyRequirements">
+  <packageSet xmi:id="_Mh8xkeeoEd272qcqI1bIDw" name="Portal Definition">
+    <packageSet xmi:id="_Mh9YoOeoEd272qcqI1bIDw" name="Internal Portlet Definition">
+      <pageSet xmi:id="_Mh-mwOeoEd272qcqI1bIDw" title="Gérer l'inter-opérabilité des systèmes" description="Gestion des sous-nomenclatures"/>
+      <pageSet xmi:id="_Mh-mweeoEd272qcqI1bIDw" title="Historisation des synchronisation" description="Qui a fait quoi et quand ?">
+        <isChildPageOf xmi:id="_MknrEOeoEd272qcqI1bIDw" inherit="true" isChildPageOf="_Mh-mwOeoEd272qcqI1bIDw"/>
+      </pageSet>
+      <pageSet xmi:id="_Mh-mwueoEd272qcqI1bIDw" title="Vérifier la cohérence" description="">
+        <isChildPageOf xmi:id="_MkoSIOeoEd272qcqI1bIDw" inherit="true" isChildPageOf="_Mh-mwOeoEd272qcqI1bIDw"/>
+      </pageSet>
+      <pageSet xmi:id="_Mh-mw-eoEd272qcqI1bIDw" title="Synchronization des nomenclatures" description="On suppose">
+        <portlets xmi:id="_Mko5MOeoEd272qcqI1bIDw" associationPortlet="_Mko5MeeoEd272qcqI1bIDw"/>
+        <portlets xmi:id="_Mko5MueoEd272qcqI1bIDw" associationPortlet="_Mko5M-eoEd272qcqI1bIDw"/>
+        <isChildPageOf xmi:id="_MkoSIeeoEd272qcqI1bIDw" inherit="true" isChildPageOf="_Mh-mwueoEd272qcqI1bIDw"/>
+      </pageSet>
+      <pageSet xmi:id="_Mh-mxOeoEd272qcqI1bIDw" title="Sauvegarder les différences" description="">
+        <isChildPageOf xmi:id="_Mko5NOeoEd272qcqI1bIDw" inherit="true" isChildPageOf="_Mh-mw-eoEd272qcqI1bIDw"/>
+      </pageSet>
+      <pageSet xmi:id="_Mh-mxeeoEd272qcqI1bIDw" title="Vérif des params" description="">
+        <isChildPageOf xmi:id="_MkpgQOeoEd272qcqI1bIDw" inherit="true" isChildPageOf="_Mh-mwueoEd272qcqI1bIDw"/>
+      </pageSet>
+      <pageSet xmi:id="_Mh-mxueoEd272qcqI1bIDw" title="Impacter les modifs de l'ERP vers la CAO" description="Pas de validation avant publication">
+        <portlets xmi:id="_MkqHUeeoEd272qcqI1bIDw" associationPortlet="_MkqHUueoEd272qcqI1bIDw"/>
+        <isChildPageOf xmi:id="_MkqHUOeoEd272qcqI1bIDw" inherit="true" isChildPageOf="_Mh-mwOeoEd272qcqI1bIDw"/>
+      </pageSet>
+      <pageSet xmi:id="_Mh-mx-eoEd272qcqI1bIDw" title="Changement des params" description="Si non impact dans CAO alors intiialisation suivante ERP KO">
+        <portlets xmi:id="_MkquYeeoEd272qcqI1bIDw" associationPortlet="_MkquYueoEd272qcqI1bIDw"/>
+        <isChildPageOf xmi:id="_MkquYOeoEd272qcqI1bIDw" inherit="true" isChildPageOf="_Mh-mxueoEd272qcqI1bIDw"/>
+      </pageSet>
+      <pageSet xmi:id="_Mh-myOeoEd272qcqI1bIDw" title="Validation" description="">
+        <isChildPageOf xmi:id="_MkrVcOeoEd272qcqI1bIDw" inherit="true" isChildPageOf="_Mh-mx-eoEd272qcqI1bIDw"/>
+      </pageSet>
+      <pageSet xmi:id="_Mh-myeeoEd272qcqI1bIDw" title="Impacter les modifications de la CAO sur l'ERP" description="Sous la responsabilité du chef d'équipe">
+        <portlets xmi:id="_Mkr8gOeoEd272qcqI1bIDw" associationPortlet="_Mkr8geeoEd272qcqI1bIDw"/>
+        <portlets xmi:id="_Mkr8gueoEd272qcqI1bIDw" associationPortlet="_Mkr8g-eoEd272qcqI1bIDw"/>
+        <isChildPageOf xmi:id="_MkrVceeoEd272qcqI1bIDw" inherit="true" isChildPageOf="_Mh-mwOeoEd272qcqI1bIDw"/>
+      </pageSet>
+      <pageSet xmi:id="_Mh-myueoEd272qcqI1bIDw" title="Changement de la structure" description="">
+        <isChildPageOf xmi:id="_Mkr8hOeoEd272qcqI1bIDw" inherit="true" isChildPageOf="_Mh-myeeoEd272qcqI1bIDw"/>
+      </pageSet>
+      <pageSet xmi:id="_Mh-my-eoEd272qcqI1bIDw" title="Ré-organisation" description="">
+        <isChildPageOf xmi:id="_MksjkOeoEd272qcqI1bIDw" inherit="true" isChildPageOf="_Mh-myueoEd272qcqI1bIDw"/>
+      </pageSet>
+      <pageSet xmi:id="_Mh-mzOeoEd272qcqI1bIDw" title="Ajout/Suppression d'un composant" description="">
+        <portlets xmi:id="_MktKoOeoEd272qcqI1bIDw" associationPortlet="_MktKoeeoEd272qcqI1bIDw"/>
+        <isChildPageOf xmi:id="_MksjkeeoEd272qcqI1bIDw" inherit="true" isChildPageOf="_Mh-myueoEd272qcqI1bIDw"/>
+      </pageSet>
+      <pageSet xmi:id="_Mh-mzeeoEd272qcqI1bIDw" title="Mise en place par défaut" description="">
+        <isChildPageOf xmi:id="_MktKoueoEd272qcqI1bIDw" inherit="true" isChildPageOf="_Mh-mzOeoEd272qcqI1bIDw"/>
+      </pageSet>
+      <pageSet xmi:id="_Mh-mzueoEd272qcqI1bIDw" title="Validation" description="Avant insertion ERP">
+        <portlets xmi:id="_MktxseeoEd272qcqI1bIDw" associationPortlet="_MktxsueoEd272qcqI1bIDw"/>
+        <portlets xmi:id="_MkuYwOeoEd272qcqI1bIDw" associationPortlet="_MkuYweeoEd272qcqI1bIDw"/>
+        <isChildPageOf xmi:id="_MktxsOeoEd272qcqI1bIDw" inherit="true" isChildPageOf="_Mh-mzOeoEd272qcqI1bIDw"/>
+      </pageSet>
+      <pageSet xmi:id="_Mh-mz-eoEd272qcqI1bIDw" title="Changement des param" description="">
+        <portlets xmi:id="_Mku_0OeoEd272qcqI1bIDw" associationPortlet="_Mku_0eeoEd272qcqI1bIDw"/>
+        <isChildPageOf xmi:id="_MkuYwueoEd272qcqI1bIDw" inherit="true" isChildPageOf="_Mh-myeeoEd272qcqI1bIDw"/>
+      </pageSet>
+      <pageSet xmi:id="_Mh-m0OeoEd272qcqI1bIDw" title="Validation" description="avant ERP">
+        <portlets xmi:id="_Mkvm4OeoEd272qcqI1bIDw" associationPortlet="_Mkvm4eeoEd272qcqI1bIDw"/>
+        <portlets xmi:id="_Mkvm4ueoEd272qcqI1bIDw" associationPortlet="_Mkvm4-eoEd272qcqI1bIDw"/>
+        <isChildPageOf xmi:id="_Mku_0ueoEd272qcqI1bIDw" inherit="true" isChildPageOf="_Mh-mz-eoEd272qcqI1bIDw"/>
+      </pageSet>
+      <pageSet xmi:id="_Mh_N0OeoEd272qcqI1bIDw" title="Initialisation de la structure" description="">
+        <portlets xmi:id="_MkwN8OeoEd272qcqI1bIDw" associationPortlet="_MkwN8eeoEd272qcqI1bIDw"/>
+        <portlets xmi:id="_MkwN8ueoEd272qcqI1bIDw" associationPortlet="_MkwN8-eoEd272qcqI1bIDw"/>
+        <isChildPageOf xmi:id="_Mkvm5OeoEd272qcqI1bIDw" inherit="true" isChildPageOf="_Mh-myeeoEd272qcqI1bIDw"/>
+      </pageSet>
+      <pageSet xmi:id="_Mh_N0eeoEd272qcqI1bIDw" title="Validation" description="Validation avant ERP">
+        <portlets xmi:id="_Mkw1AeeoEd272qcqI1bIDw" associationPortlet="_Mkw1AueoEd272qcqI1bIDw"/>
+        <portlets xmi:id="_MkyqMOeoEd272qcqI1bIDw" associationPortlet="_MkyqMeeoEd272qcqI1bIDw"/>
+        <isChildPageOf xmi:id="_Mkw1AOeoEd272qcqI1bIDw" inherit="true" isChildPageOf="_Mh_N0OeoEd272qcqI1bIDw"/>
+      </pageSet>
+      <portletSet xmi:id="_Mko5MeeoEd272qcqI1bIDw" name="Composant" isPortletInternal="_Mh9YpeeoEd272qcqI1bIDw"/>
+      <portletSet xmi:id="_Mko5M-eoEd272qcqI1bIDw" name="Nomenclature" isPortletInternal="_Mh9Yo-eoEd272qcqI1bIDw"/>
+      <portletSet xmi:id="_MkqHUueoEd272qcqI1bIDw" name="Composant ERP" isPortletInternal="_Mh9YqeeoEd272qcqI1bIDw"/>
+      <portletSet xmi:id="_MkquYueoEd272qcqI1bIDw" name="Nomenclature" isPortletInternal="_Mh9Yo-eoEd272qcqI1bIDw"/>
+      <portletSet xmi:id="_Mkr8geeoEd272qcqI1bIDw" name="Composant" isPortletInternal="_Mh9YpeeoEd272qcqI1bIDw"/>
+      <portletSet xmi:id="_Mkr8g-eoEd272qcqI1bIDw" name="Nomenclature" isPortletInternal="_Mh9Yo-eoEd272qcqI1bIDw"/>
+      <portletSet xmi:id="_MktKoeeoEd272qcqI1bIDw" name="Composant ERP" isPortletInternal="_Mh9YqeeoEd272qcqI1bIDw"/>
+      <portletSet xmi:id="_MktxsueoEd272qcqI1bIDw" name="Composant ERP" isPortletInternal="_Mh9YqeeoEd272qcqI1bIDw"/>
+      <portletSet xmi:id="_MkuYweeoEd272qcqI1bIDw" name="Nomenclature ERP" isPortletInternal="_Mh9Yp-eoEd272qcqI1bIDw"/>
+      <portletSet xmi:id="_Mku_0eeoEd272qcqI1bIDw" name="Composant ERP" isPortletInternal="_Mh9YqeeoEd272qcqI1bIDw"/>
+      <portletSet xmi:id="_Mkvm4eeoEd272qcqI1bIDw" name="Composant ERP" isPortletInternal="_Mh9YqeeoEd272qcqI1bIDw"/>
+      <portletSet xmi:id="_Mkvm4-eoEd272qcqI1bIDw" name="Nomenclature ERP" isPortletInternal="_Mh9Yp-eoEd272qcqI1bIDw"/>
+      <portletSet xmi:id="_MkwN8eeoEd272qcqI1bIDw" name="Composant ERP" isPortletInternal="_Mh9YqeeoEd272qcqI1bIDw"/>
+      <portletSet xmi:id="_MkwN8-eoEd272qcqI1bIDw" name="Nomenclature ERP" isPortletInternal="_Mh9Yp-eoEd272qcqI1bIDw"/>
+      <portletSet xmi:id="_Mkw1AueoEd272qcqI1bIDw" name="Composant ERP" isPortletInternal="_Mh9YqeeoEd272qcqI1bIDw"/>
+      <portletSet xmi:id="_MkyqMeeoEd272qcqI1bIDw" name="Nomenclature ERP" isPortletInternal="_Mh9Yp-eoEd272qcqI1bIDw"/>
+      <internalPortletSet xmi:id="_Mh9Yo-eoEd272qcqI1bIDw" type="Array" class="_Mh9YoueoEd272qcqI1bIDw"/>
+      <internalPortletSet xmi:id="_Mh9YpeeoEd272qcqI1bIDw" type="Array" class="_Mh9YpOeoEd272qcqI1bIDw"/>
+      <internalPortletSet xmi:id="_Mh9Yp-eoEd272qcqI1bIDw" type="Array" class="_Mh9YpueoEd272qcqI1bIDw"/>
+      <internalPortletSet xmi:id="_Mh9YqeeoEd272qcqI1bIDw" type="Array" class="_Mh9YqOeoEd272qcqI1bIDw"/>
+    </packageSet>
+  </packageSet>
+  <packageSet xmi:id="_Mh9YoeeoEd272qcqI1bIDw" name="Security Definition">
+    <profileset xmi:id="_Mh9_t-eoEd272qcqI1bIDw" documentation="Un responsable industriel est un expert gestion de prod (dans l'atelier). Il conna&#xfffd;t les produits, les stocks... Chef de l'atelier&amp;lt;br>&amp;lt;br>Passerelle r&#xfffd;elle entre ERP et CAO. Re-Structuration ERP&amp;lt;br>" name="Responsable industriel">
+      <access xmi:id="_MiHwsOeoEd272qcqI1bIDw" target="_Mh9YqueoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MiRhsOeoEd272qcqI1bIDw" target="_Mh9YpueoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MiT98OeoEd272qcqI1bIDw" target="_Mh9YrueoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MiXBQOeoEd272qcqI1bIDw" target="_Mh9_sueoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MiaEkOeoEd272qcqI1bIDw" target="_Mh9_tOeoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MidH4OeoEd272qcqI1bIDw" target="_Mh9_sOeoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MikcoOeoEd272qcqI1bIDw" target="_Mh9YqOeoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_Minf8OeoEd272qcqI1bIDw" target="_Mh9YpOeoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MiqjQOeoEd272qcqI1bIDw" target="_Mh9YrOeoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_Mis_gOeoEd272qcqI1bIDw" target="_Mh9Yq-eoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MiwC0OeoEd272qcqI1bIDw" target="_Mh9YoueoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_Mi07UOeoEd272qcqI1bIDw" target="_Mh9_s-eoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_Mi3-oOeoEd272qcqI1bIDw" target="_Mh9YreeoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_Mi7B8OeoEd272qcqI1bIDw" target="_Mh9Yr-eoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_Mi-FQOeoEd272qcqI1bIDw" target="_Mh9_seeoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MjBIkOeoEd272qcqI1bIDw" Read="true"/>
+    </profileset>
+    <profileset xmi:id="_Mh9_uOeoEd272qcqI1bIDw" documentation="CAO OK pour partir&amp;lt;br>" name="Responsable BE">
+      <access xmi:id="_MjGoIOeoEd272qcqI1bIDw" target="_Mh9YpueoEd272qcqI1bIDw" Read="true" AddChildren="true"/>
+      <access xmi:id="_MjK5kOeoEd272qcqI1bIDw" target="_Mh9_tOeoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MjPyEOeoEd272qcqI1bIDw" target="_Mh9YpOeoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MjV4sOeoEd272qcqI1bIDw" target="_Mh9YreeoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MjaxMOeoEd272qcqI1bIDw" target="_Mh9_seeoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MjfpsOeoEd272qcqI1bIDw" target="_Mh9YqueoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MjlJQOeoEd272qcqI1bIDw" target="_Mh9YrueoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MjqBwOeoEd272qcqI1bIDw" target="_Mh9_sueoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_Mju6QOeoEd272qcqI1bIDw" target="_Mh9_sOeoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_Mj1A4OeoEd272qcqI1bIDw" target="_Mh9YqOeoEd272qcqI1bIDw" Read="true" AddChildren="true"/>
+      <access xmi:id="_Mj55YOeoEd272qcqI1bIDw" target="_Mh9YrOeoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_Mj-x4OeoEd272qcqI1bIDw" target="_Mh9Yq-eoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MkE4gOeoEd272qcqI1bIDw" target="_Mh9_s-eoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MkJxAOeoEd272qcqI1bIDw" target="_Mh9YoueoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MkOpgOeoEd272qcqI1bIDw" target="_Mh9Yr-eoEd272qcqI1bIDw" Read="true"/>
+    </profileset>
+    <profileset xmi:id="_Mh9_ueeoEd272qcqI1bIDw" documentation="" name="Publication dans CAO">
+      <access xmi:id="_MkVXMOeoEd272qcqI1bIDw" target="_Mh9YqOeoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MkXMYOeoEd272qcqI1bIDw" target="_Mh9YrOeoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MkZBkOeoEd272qcqI1bIDw" target="_Mh9Yq-eoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MkaPsOeoEd272qcqI1bIDw" target="_Mh9YoueoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MkcE4OeoEd272qcqI1bIDw" target="_Mh9_s-eoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_Mkd6EOeoEd272qcqI1bIDw" target="_Mh9YreeoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MkgWUOeoEd272qcqI1bIDw" target="_Mh9YrueoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MkiLgOeoEd272qcqI1bIDw" target="_Mh9_sueoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MkjZoOeoEd272qcqI1bIDw" target="_Mh9_tOeoEd272qcqI1bIDw" Read="true"/>
+      <access xmi:id="_MklO0OeoEd272qcqI1bIDw" target="_Mh9_seeoEd272qcqI1bIDw" Read="true"/>
+    </profileset>
+  </packageSet>
+  <classSet xmi:id="_Mh9YoueoEd272qcqI1bIDw" name="Nomenclature" associations="_Mh9_teeoEd272qcqI1bIDw">
+    <attributes xmi:id="_Mh9YqueoEd272qcqI1bIDw" name="quantité par composant" typ="int"/>
+  </classSet>
+  <classSet xmi:id="_Mh9YpOeoEd272qcqI1bIDw" name="Composant" associations="_Mh9_teeoEd272qcqI1bIDw">
+    <attributes xmi:id="_Mh9Yq-eoEd272qcqI1bIDw" name="description" typ="String"/>
+    <attributes xmi:id="_Mh9YrOeoEd272qcqI1bIDw" name="fournisseur" typ="String"/>
+    <attributes xmi:id="_Mh9YreeoEd272qcqI1bIDw" name="référence fournisseur" typ="String"/>
+    <attributes xmi:id="_Mh9YrueoEd272qcqI1bIDw" name="référence interne" typ="String"/>
+  </classSet>
+  <classSet xmi:id="_Mh9YpueoEd272qcqI1bIDw" name="Nomenclature ERP" associations="_Mh9_tueoEd272qcqI1bIDw">
+    <attributes xmi:id="_Mh9Yr-eoEd272qcqI1bIDw" name="est stable" typ="String"/>
+    <attributes xmi:id="_Mh9_sOeoEd272qcqI1bIDw" name="quantité par composant" typ="int"/>
+  </classSet>
+  <classSet xmi:id="_Mh9YqOeoEd272qcqI1bIDw" name="Composant ERP" associations="_Mh9_tueoEd272qcqI1bIDw">
+    <attributes xmi:id="_Mh9_seeoEd272qcqI1bIDw" name="description" typ="String"/>
+    <attributes xmi:id="_Mh9_sueoEd272qcqI1bIDw" name="ref fournisseur" typ="String"/>
+    <attributes xmi:id="_Mh9_s-eoEd272qcqI1bIDw" name="ref interne" typ="String"/>
+    <attributes xmi:id="_Mh9_tOeoEd272qcqI1bIDw" name="fournisseur" typ="String"/>
+  </classSet>
+  <associationSet xmi:id="_Mh9_teeoEd272qcqI1bIDw" name="structure" source="_Mh9YoueoEd272qcqI1bIDw" destination="_Mh9YpOeoEd272qcqI1bIDw" minSRC="0" maxSRC="0" minTARGET="0" maxTARGET="0"/>
+  <associationSet xmi:id="_Mh9_tueoEd272qcqI1bIDw" name="structure" source="_Mh9YpueoEd272qcqI1bIDw" destination="_Mh9YqOeoEd272qcqI1bIDw" minSRC="0" maxSRC="0" minTARGET="0" maxTARGET="0"/>
+</MMUseCase:Package>

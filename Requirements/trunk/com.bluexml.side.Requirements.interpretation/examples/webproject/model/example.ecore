@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<WebProject:Project xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:WebProject="http://www.bluexml.com/rwm/webproject/1.0/" name="My Web Project">
+  <pages xsi:type="WebProject:LoginPage" name="index.html" title="List of users">
+    <links label="Responsable industriel" page="//@pages.2"/>
+    <links label="Responsable BE" page="//@pages.4"/>
+    <links label="Publication dans CAO" page="//@pages.6"/>
+  </pages>
+  <pages xsi:type="WebProject:FramePage" name="frame_Ni1SmNFS1H.html" title="My Web Project"
+      col1="//@pages.2"/>
+  <pages xsi:type="WebProject:GoalPage" name="Ni1SmNFS1H.html" title="Goals of Responsable industriel">
+    <items label="Validation" page="//@pages.18"/>
+    <items label="Validation" page="//@pages.16"/>
+    <items label="Validation" page="//@pages.14"/>
+    <items label="Vérifier la cohérence" page="//@pages.21">
+      <sub label="Synchronization des nomenclatures" page="//@pages.7">
+        <sub label="Sauvegarder les différences" page="//@pages.22"/>
+      </sub>
+      <sub label="Vérif des params" page="//@pages.8"/>
+    </items>
+  </pages>
+  <pages xsi:type="WebProject:FramePage" name="frame_3rsgk7O9yh.html" title="My Web Project"
+      col1="//@pages.4"/>
+  <pages xsi:type="WebProject:GoalPage" name="3rsgk7O9yh.html" title="Goals of Responsable BE">
+    <items label="Impacter les modifications de la CAO sur l'ERP" page="//@pages.12">
+      <sub label="Changement de la structure" page="//@pages.23">
+        <sub label="Ré-organisation" page="//@pages.24"/>
+        <sub label="Ajout/Suppression d'un composant" page="//@pages.13">
+          <sub label="Mise en place par défaut" page="//@pages.25"/>
+          <sub label="Validation" page="//@pages.14"/>
+        </sub>
+      </sub>
+      <sub label="Changement des param" page="//@pages.15">
+        <sub label="Validation" page="//@pages.16"/>
+      </sub>
+      <sub label="Initialisation de la structure" page="//@pages.17">
+        <sub label="Validation" page="//@pages.18"/>
+      </sub>
+    </items>
+    <items label="Validation" page="//@pages.11"/>
+  </pages>
+  <pages xsi:type="WebProject:FramePage" name="frame_48QPNXcqpu.html" title="My Web Project"
+      col1="//@pages.6"/>
+  <pages xsi:type="WebProject:GoalPage" name="48QPNXcqpu.html" title="Goals of Publication dans CAO">
+    <items label="Impacter les modifs de l'ERP vers la CAO" page="//@pages.9">
+      <sub label="Changement des params" page="//@pages.10">
+        <sub label="Validation" page="//@pages.11"/>
+      </sub>
+    </items>
+  </pages>
+  <pages xsi:type="WebProject:DataPage" name="zto3uL3DIt.php" title="Synchronization des nomenclatures"
+      mainComponent="//@pages.7/@components.0">
+    <components name="Nomenclature" canRead="true" table="//@schema/@tables.0">
+      <properties xsi:type="WebProject:ComponentAttribute" name="quantité par composant"
+          canRead="true" field="//@schema/@tables.0/@fields.1"/>
+    </components>
+    <components name="Composant" canRead="true" table="//@schema/@tables.1">
+      <properties xsi:type="WebProject:ComponentAttribute" name="description" canRead="true"
+          field="//@schema/@tables.1/@fields.1"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="fournisseur" canRead="true"
+          field="//@schema/@tables.1/@fields.2"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="référence fournisseur"
+          canRead="true" field="//@schema/@tables.1/@fields.3"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="référence interne"
+          canRead="true" field="//@schema/@tables.1/@fields.4"/>
+    </components>
+  </pages>
+  <pages xsi:type="WebProject:DataPage" name="MXGCKvDXCR.php" title="Vérif des params"/>
+  <pages xsi:type="WebProject:DataPage" name="mPMPuDTteM.php" title="Impacter les modifs de l'ERP vers la CAO"
+      mainComponent="//@pages.9/@components.0">
+    <components name="Composant ERP" canRead="true" table="//@schema/@tables.3">
+      <properties xsi:type="WebProject:ComponentAttribute" name="description" canRead="true"
+          field="//@schema/@tables.3/@fields.1"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="ref fournisseur"
+          canRead="true" field="//@schema/@tables.3/@fields.2"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="ref interne" canRead="true"
+          field="//@schema/@tables.3/@fields.3"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="fournisseur" canRead="true"
+          field="//@schema/@tables.3/@fields.4"/>
+    </components>
+  </pages>
+  <pages xsi:type="WebProject:DataPage" name="X2D1NW7wLl.php" title="Changement des params">
+    <components name="Nomenclature" canRead="true" table="//@schema/@tables.0"/>
+  </pages>
+  <pages xsi:type="WebProject:DataPage" name="Ls0dowBhnI.php" title="Validation"/>
+  <pages xsi:type="WebProject:DataPage" name="4MISM0xElf.php" title="Impacter les modifications de la CAO sur l'ERP"
+      mainComponent="//@pages.12/@components.0">
+    <components name="Nomenclature" canRead="true" table="//@schema/@tables.0">
+      <properties xsi:type="WebProject:ComponentAttribute" name="quantité par composant"
+          canRead="true" field="//@schema/@tables.0/@fields.1"/>
+    </components>
+    <components name="Composant" canRead="true" table="//@schema/@tables.1">
+      <properties xsi:type="WebProject:ComponentAttribute" name="description" canRead="true"
+          field="//@schema/@tables.1/@fields.1"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="fournisseur" canRead="true"
+          field="//@schema/@tables.1/@fields.2"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="référence fournisseur"
+          canRead="true" field="//@schema/@tables.1/@fields.3"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="référence interne"
+          canRead="true" field="//@schema/@tables.1/@fields.4"/>
+    </components>
+  </pages>
+  <pages xsi:type="WebProject:DataPage" name="uzHSAta8Tc.php" title="Ajout/Suppression d'un composant">
+    <components name="Composant ERP" canCreate="true" canRead="true" canUpdate="true"
+        table="//@schema/@tables.3">
+      <properties xsi:type="WebProject:ComponentAttribute" name="description" canRead="true"
+          canUpdate="true" field="//@schema/@tables.3/@fields.1"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="ref fournisseur"
+          canRead="true" canUpdate="true" field="//@schema/@tables.3/@fields.2"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="ref interne" canRead="true"
+          canUpdate="true" field="//@schema/@tables.3/@fields.3"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="fournisseur" canRead="true"
+          canUpdate="true" field="//@schema/@tables.3/@fields.4"/>
+    </components>
+  </pages>
+  <pages xsi:type="WebProject:DataPage" name="xnfM96l62d.php" title="Validation" mainComponent="//@pages.14/@components.0">
+    <components name="Nomenclature ERP" canRead="true" table="//@schema/@tables.2">
+      <properties xsi:type="WebProject:ComponentAttribute" name="est stable" canRead="true"
+          canUpdate="true" field="//@schema/@tables.2/@fields.1"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="quantité par composant"
+          canRead="true" field="//@schema/@tables.2/@fields.2"/>
+    </components>
+    <components name="Composant ERP" canRead="true" table="//@schema/@tables.3">
+      <properties xsi:type="WebProject:ComponentAttribute" name="description" canRead="true"
+          field="//@schema/@tables.3/@fields.1"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="ref fournisseur"
+          canRead="true" field="//@schema/@tables.3/@fields.2"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="ref interne" canRead="true"
+          field="//@schema/@tables.3/@fields.3"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="fournisseur" canRead="true"
+          field="//@schema/@tables.3/@fields.4"/>
+    </components>
+  </pages>
+  <pages xsi:type="WebProject:DataPage" name="T2pwrfJpMm.php" title="Changement des param"
+      mainComponent="//@pages.15/@components.0">
+    <components name="Composant ERP" canRead="true" canUpdate="true" table="//@schema/@tables.3">
+      <properties xsi:type="WebProject:ComponentAttribute" name="description" canRead="true"
+          canUpdate="true" field="//@schema/@tables.3/@fields.1"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="ref fournisseur"
+          canRead="true" canUpdate="true" field="//@schema/@tables.3/@fields.2"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="ref interne" canRead="true"
+          canUpdate="true" field="//@schema/@tables.3/@fields.3"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="fournisseur" canRead="true"
+          canUpdate="true" field="//@schema/@tables.3/@fields.4"/>
+    </components>
+  </pages>
+  <pages xsi:type="WebProject:DataPage" name="LrxncFJi75.php" title="Validation" mainComponent="//@pages.16/@components.0">
+    <components name="Nomenclature ERP" canRead="true" table="//@schema/@tables.2">
+      <properties xsi:type="WebProject:ComponentAttribute" name="est stable" canRead="true"
+          canUpdate="true" field="//@schema/@tables.2/@fields.1"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="quantité par composant"
+          canRead="true" field="//@schema/@tables.2/@fields.2"/>
+    </components>
+    <components name="Composant ERP" canRead="true" table="//@schema/@tables.3">
+      <properties xsi:type="WebProject:ComponentAttribute" name="description" canRead="true"
+          field="//@schema/@tables.3/@fields.1"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="ref fournisseur"
+          canRead="true" field="//@schema/@tables.3/@fields.2"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="ref interne" canRead="true"
+          field="//@schema/@tables.3/@fields.3"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="fournisseur" canRead="true"
+          field="//@schema/@tables.3/@fields.4"/>
+    </components>
+  </pages>
+  <pages xsi:type="WebProject:DataPage" name="NmLZCIA5Ul.php" title="Initialisation de la structure"
+      mainComponent="//@pages.17/@components.0">
+    <components name="Nomenclature ERP" canCreate="true" canUpdate="true" table="//@schema/@tables.2">
+      <properties xsi:type="WebProject:ComponentAttribute" name="est stable" canUpdate="true"
+          field="//@schema/@tables.2/@fields.1"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="quantité par composant"
+          canUpdate="true" field="//@schema/@tables.2/@fields.2"/>
+    </components>
+    <components name="Composant ERP" canCreate="true" canRead="true" canUpdate="true"
+        table="//@schema/@tables.3">
+      <properties xsi:type="WebProject:ComponentAttribute" name="description" canUpdate="true"
+          field="//@schema/@tables.3/@fields.1"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="ref fournisseur"
+          canUpdate="true" field="//@schema/@tables.3/@fields.2"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="ref interne" canUpdate="true"
+          field="//@schema/@tables.3/@fields.3"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="fournisseur" canUpdate="true"
+          field="//@schema/@tables.3/@fields.4"/>
+    </components>
+  </pages>
+  <pages xsi:type="WebProject:DataPage" name="FHrKyLGNam.php" title="Validation" mainComponent="//@pages.18/@components.0">
+    <components name="Nomenclature ERP" canRead="true" table="//@schema/@tables.2">
+      <properties xsi:type="WebProject:ComponentAttribute" name="est stable" canRead="true"
+          canUpdate="true" field="//@schema/@tables.2/@fields.1"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="quantité par composant"
+          canRead="true" field="//@schema/@tables.2/@fields.2"/>
+    </components>
+    <components name="Composant ERP" canRead="true" table="//@schema/@tables.3">
+      <properties xsi:type="WebProject:ComponentAttribute" name="description" canRead="true"
+          field="//@schema/@tables.3/@fields.1"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="ref fournisseur"
+          canRead="true" field="//@schema/@tables.3/@fields.2"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="ref interne" canRead="true"
+          field="//@schema/@tables.3/@fields.3"/>
+      <properties xsi:type="WebProject:ComponentAttribute" name="fournisseur" canRead="true"
+          field="//@schema/@tables.3/@fields.4"/>
+    </components>
+  </pages>
+  <pages xsi:type="WebProject:GoalPage" name="HLSKgmfTVC.html" title="Gérer l'inter-opérabilité des systèmes">
+    <items label="Gérer l'inter-opérabilité des systèmes" page="//@pages.19">
+      <sub label="Historisation des synchronisation" page="//@pages.20"/>
+      <sub label="Vérifier la cohérence" page="//@pages.21">
+        <sub label="Synchronization des nomenclatures" page="//@pages.7">
+          <sub label="Sauvegarder les différences" page="//@pages.22"/>
+        </sub>
+        <sub label="Vérif des params" page="//@pages.8"/>
+      </sub>
+      <sub label="Impacter les modifs de l'ERP vers la CAO" page="//@pages.9">
+        <sub label="Changement des params" page="//@pages.10">
+          <sub label="Validation" page="//@pages.11"/>
+        </sub>
+      </sub>
+      <sub label="Impacter les modifications de la CAO sur l'ERP" page="//@pages.12">
+        <sub label="Changement de la structure" page="//@pages.23">
+          <sub label="Ré-organisation" page="//@pages.24"/>
+          <sub label="Ajout/Suppression d'un composant" page="//@pages.13">
+            <sub label="Mise en place par défaut" page="//@pages.25"/>
+            <sub label="Validation" page="//@pages.14"/>
+          </sub>
+        </sub>
+        <sub label="Changement des param" page="//@pages.15">
+          <sub label="Validation" page="//@pages.16"/>
+        </sub>
+        <sub label="Initialisation de la structure" page="//@pages.17">
+          <sub label="Validation" page="//@pages.18"/>
+        </sub>
+      </sub>
+    </items>
+  </pages>
+  <pages xsi:type="WebProject:GoalPage" name="kotyfe0ile.html" title="Historisation des synchronisation">
+    <items label="Historisation des synchronisation" page="//@pages.20"/>
+  </pages>
+  <pages xsi:type="WebProject:GoalPage" name="WzAaIAc5TG.html" title="Vérifier la cohérence">
+    <items label="Vérifier la cohérence" page="//@pages.21">
+      <sub label="Synchronization des nomenclatures" page="//@pages.7">
+        <sub label="Sauvegarder les différences" page="//@pages.22"/>
+      </sub>
+      <sub label="Vérif des params" page="//@pages.8"/>
+    </items>
+  </pages>
+  <pages xsi:type="WebProject:GoalPage" name="J2vIomVa34.html" title="Sauvegarder les différences">
+    <items label="Sauvegarder les différences" page="//@pages.22"/>
+  </pages>
+  <pages xsi:type="WebProject:GoalPage" name="cUKb4umLSL.html" title="Changement de la structure">
+    <items label="Changement de la structure" page="//@pages.23">
+      <sub label="Ré-organisation" page="//@pages.24"/>
+      <sub label="Ajout/Suppression d'un composant" page="//@pages.13">
+        <sub label="Mise en place par défaut" page="//@pages.25"/>
+        <sub label="Validation" page="//@pages.14"/>
+      </sub>
+    </items>
+  </pages>
+  <pages xsi:type="WebProject:GoalPage" name="eF4Vau5OUl.html" title="Ré-organisation">
+    <items label="Ré-organisation" page="//@pages.24"/>
+  </pages>
+  <pages xsi:type="WebProject:GoalPage" name="cnITTdG05Q.html" title="Mise en place par défaut">
+    <items label="Mise en place par défaut" page="//@pages.25"/>
+  </pages>
+  <schema>
+    <tables name="Nomenclature" primaryKey="//@schema/@tables.0/@fields.0">
+      <fields name="id_7Sarf3VL5T" dataType="integer" autoincrement="true"/>
+      <fields name="quantitparcomposant" dataType="real"/>
+    </tables>
+    <tables name="Composant" primaryKey="//@schema/@tables.1/@fields.0">
+      <fields name="id_T9OM7CuvcS" dataType="integer" autoincrement="true"/>
+      <fields name="description"/>
+      <fields name="fournisseur"/>
+      <fields name="rfrencefournisseur"/>
+      <fields name="rfrenceinterne"/>
+    </tables>
+    <tables name="NomenclatureERP" primaryKey="//@schema/@tables.2/@fields.0">
+      <fields name="id_1e1eT4uesR" dataType="integer" autoincrement="true"/>
+      <fields name="eststable"/>
+      <fields name="quantitparcomposant" dataType="real"/>
+    </tables>
+    <tables name="ComposantERP" primaryKey="//@schema/@tables.3/@fields.0">
+      <fields name="id_cVQ46PIOKe" dataType="integer" autoincrement="true"/>
+      <fields name="description"/>
+      <fields name="reffournisseur"/>
+      <fields name="refinterne"/>
+      <fields name="fournisseur"/>
+    </tables>
+    <tables name="Nomenclature2Composant" primaryKey="//@schema/@tables.4/@fields.0 //@schema/@tables.4/@fields.1">
+      <fields name="id_7Sarf3VL5T" dataType="integer"/>
+      <fields name="id_T9OM7CuvcS" dataType="integer"/>
+    </tables>
+    <tables name="NomenclatureERP2ComposantERP" primaryKey="//@schema/@tables.5/@fields.0 //@schema/@tables.5/@fields.1">
+      <fields name="id_1e1eT4uesR" dataType="integer"/>
+      <fields name="id_cVQ46PIOKe" dataType="integer"/>
+    </tables>
+  </schema>
+</WebProject:Project>

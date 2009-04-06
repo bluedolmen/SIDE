@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<MindMap:Map xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:MindMap="http://www.bluexml.com/rwm/mindmap/1.0/">
+  <node folded="false" text="Structure d'information">
+    <sub folded="false" text="Nomenclature" id="7Sarf3VL5T">
+      <sub text="Une nomenclature est la liste d'un composant d'un produit.">
+        <font bold="false" italic="true" name="SansSerif" size="10"/>
+      </sub>
+      <sub folded="true" text="quantité par composant"/>
+    </sub>
+    <sub folded="false" text="Composant" id="T9OM7CuvcS">
+      <sub folded="true" text="description"/>
+      <sub folded="true" text="fournisseur"/>
+      <sub folded="true" text="référence fournisseur"/>
+      <sub folded="true" text="référence interne">
+        <sub text="Utile car il peut y avoir différentes ref fournisseurs">
+          <font bold="false" italic="true" name="SansSerif" size="10"/>
+        </sub>
+      </sub>
+    </sub>
+    <sub folded="false" text="Nomenclature ERP" id="1e1eT4uesR">
+      <sub folded="true" text="est stable"/>
+      <sub folded="true" text="quantité par composant"/>
+    </sub>
+    <sub folded="false" text="Composant ERP" id="cVQ46PIOKe">
+      <sub folded="true" text="description"/>
+      <sub folded="true" text="ref fournisseur"/>
+      <sub folded="true" text="ref interne"/>
+      <sub folded="true" text="fournisseur"/>
+    </sub>
+  </node>
+</MindMap:Map>

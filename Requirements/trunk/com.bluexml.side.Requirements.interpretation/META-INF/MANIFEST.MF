@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Interpretation
+Bundle-SymbolicName: com.bluexml.side.Requirements.interpretation;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: blueXML
+Require-Bundle: com.bluexml.side.Requirements.transformation
+Bundle-ClassPath: metamodel/

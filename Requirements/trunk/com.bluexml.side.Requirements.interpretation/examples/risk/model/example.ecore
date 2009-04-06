@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Risk:Diagnostic xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:Risk="http://www.bluexml.com/rwm/risk/1.0/">
+  <estimation value="0.75" elementType="Goal" elementName="Gérer l'inter-opérabilité des systèmes"/>
+  <estimation value="0.25" elementType="Goal" elementName="Historisation des synchronisation"/>
+  <estimation value="0.5795454545454546" elementType="Goal" elementName="Vérifier la cohérence"/>
+  <estimation value="0.48863636363636365" elementType="Goal" elementName="Synchronization des nomenclatures"/>
+  <estimation value="0.25" elementType="Goal" elementName="Sauvegarder les différences"/>
+  <estimation value="0.34090909090909094" elementType="Goal" elementName="Vérif des params"/>
+  <estimation value="0.5568181818181819" elementType="Goal" elementName="Impacter les modifs de l'ERP vers la CAO"/>
+  <estimation value="0.5284090909090909" elementType="Goal" elementName="Changement des params"/>
+  <estimation value="0.34090909090909094" elementType="Goal" elementName="Validation"/>
+  <estimation value="0.875" elementType="Goal" elementName="Impacter les modifications de la CAO sur l'ERP"/>
+  <estimation value="0.5113636363636364" elementType="Goal" elementName="Changement de la structure"/>
+  <estimation value="0.25" elementType="Goal" elementName="Ré-organisation"/>
+  <estimation value="0.5113636363636364" elementType="Goal" elementName="Ajout/Suppression d'un composant"/>
+  <estimation value="0.25" elementType="Goal" elementName="Mise en place par défaut"/>
+  <estimation value="0.5113636363636364" elementType="Goal" elementName="Validation"/>
+  <estimation value="0.38636363636363635" elementType="Goal" elementName="Changement des param"/>
+  <estimation value="0.5113636363636364" elementType="Goal" elementName="Validation"/>
+  <estimation value="0.7613636363636364" elementType="Goal" elementName="Initialisation de la structure"/>
+  <estimation value="0.5113636363636364" elementType="Goal" elementName="Validation"/>
+  <estimation value="0.004009355162044771" elementType="Entity" elementName="Nomenclature"/>
+  <estimation value="0.026729034413631808" elementType="Entity" elementName="Composant"/>
+  <estimation value="0.033077180086869364" elementType="Entity" elementName="Nomenclature ERP"/>
+  <estimation value="0.29401937854994986" elementType="Entity" elementName="Composant ERP"/>
+  <estimation value="0.3684210526315789" elementType="Agent" elementName="Responsable industriel"/>
+  <estimation value="0.5789473684210527" elementType="Agent" elementName="Responsable BE"/>
+  <estimation value="0.15789473684210525" elementType="Agent" elementName="Publication dans CAO"/>
+</Risk:Diagnostic>

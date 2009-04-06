@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<chain:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:chain="http://www.obeo.fr/acceleo/chain">
+  <repository>
+    <files xsi:type="chain:Folder" path="/com.bluexml.requirements.interpretation/examples/risk/spreadsheet"/>
+    <files xsi:type="chain:Log" path="/com.bluexml.requirements.interpretation/examples/risk/spreadsheet/error.log"/>
+    <files xsi:type="chain:EmfMetamodel" path="http://www.bluexml.com/rwm/risk/1.0/"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.requirements.interpretation/metamodel/risk/generation/spreadsheet/spreadsheet.mt"/>
+    <files xsi:type="chain:ModelSet" path="/com.bluexml.requirements.interpretation/examples/risk/model"/>
+  </repository>
+  <actions>
+    <actions xsi:type="chain:Generate" documentation="" log="//@repository/@files.1" model="//@repository/@files.4" metamodel="//@repository/@files.2" generator="//@repository/@files.3" folder="//@repository/@files.0"/>
+  </actions>
+</chain:Chain>

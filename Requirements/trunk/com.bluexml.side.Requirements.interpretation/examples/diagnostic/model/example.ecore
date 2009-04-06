@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Diagnostic:Diagnostic xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:Diagnostic="http://www.bluexml.com/rwm/diagnostic/1.0/">
+  <problem severity="warning" elementType="RWM!RequirementsDefinition" elementName="MyRequirements"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Agent" elementName="Publication dans CAO"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Goal" elementName="Vérifier la cohérence"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Goal" elementName="Sauvegarder les différences"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Goal" elementName="Vérif des params"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Goal" elementName="Validation" description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Goal" elementName="Changement de la structure"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Goal" elementName="Ré-organisation"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Goal" elementName="Ajout/Suppression d'un composant"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Goal" elementName="Mise en place par défaut"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Goal" elementName="Changement des param"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Goal" elementName="Initialisation de la structure"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Attribute" elementName="quantité par composant"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Entity" elementName="Composant" description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Attribute" elementName="description"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Attribute" elementName="fournisseur"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Attribute" elementName="référence fournisseur"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Entity" elementName="Nomenclature ERP"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Attribute" elementName="est stable"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Attribute" elementName="quantité par composant"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Entity" elementName="Composant ERP"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Attribute" elementName="description"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Attribute" elementName="ref fournisseur"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Attribute" elementName="ref interne"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!Attribute" elementName="fournisseur"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!RelationShip" elementName="structure"
+      description="Documentation empty."/>
+  <problem severity="warning" elementType="RWM!RelationShip" elementName="structure"
+      description="Documentation empty."/>
+  <problem severity="critic" elementType="RWM!Goal" elementName="Gérer l'inter-opérabilité des systèmes"
+      description="No privilege."/>
+  <problem severity="critic" elementType="RWM!Goal" elementName="Vérifier la cohérence"
+      description="No privilege."/>
+  <problem severity="critic" elementType="RWM!Goal" elementName="Synchronization des nomenclatures"
+      description="No privilege."/>
+  <problem severity="critic" elementType="RWM!Goal" elementName="Vérif des params"
+      description="No privilege."/>
+  <problem severity="critic" elementType="RWM!Goal" elementName="Impacter les modifs de l'ERP vers la CAO"
+      description="No privilege."/>
+  <problem severity="critic" elementType="RWM!Goal" elementName="Changement des params"
+      description="No privilege."/>
+  <problem severity="critic" elementType="RWM!Goal" elementName="Validation" description="No privilege."/>
+  <problem severity="critic" elementType="RWM!Goal" elementName="Impacter les modifications de la CAO sur l'ERP"
+      description="No privilege."/>
+  <problem severity="critic" elementType="RWM!Goal" elementName="Changement de la structure"
+      description="No privilege."/>
+  <problem severity="critic" elementType="RWM!Goal" elementName="Ajout/Suppression d'un composant"
+      description="No privilege."/>
+  <problem severity="critic" elementType="RWM!Goal" elementName="Validation" description="No privilege."/>
+  <problem severity="critic" elementType="RWM!Goal" elementName="Changement des param"
+      description="No privilege."/>
+  <problem severity="critic" elementType="RWM!Goal" elementName="Validation" description="No privilege."/>
+  <problem severity="critic" elementType="RWM!Goal" elementName="Initialisation de la structure"
+      description="No privilege."/>
+  <problem severity="critic" elementType="RWM!Goal" elementName="Validation" description="No privilege."/>
+  <problem severity="critic" elementType="RWM!RelationShip" elementName="structure"
+      description="No privilege on this element."/>
+  <problem severity="critic" elementType="RWM!RelationShip" elementName="structure"
+      description="No privilege on this element."/>
+</Diagnostic:Diagnostic>

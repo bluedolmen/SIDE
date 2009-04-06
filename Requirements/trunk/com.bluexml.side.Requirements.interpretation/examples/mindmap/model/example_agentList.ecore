@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<MindMap:Map xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:MindMap="http://www.bluexml.com/rwm/mindmap/1.0/">
+  <node folded="false" text="Liste des agents">
+    <sub folded="true" text="Responsable industriel">
+      <sub text="Un responsable industriel est un expert gestion de prod (dans l'atelier). Il conna&#xfffd;t les produits, les stocks... Chef de l'atelierPasserelle r&#xfffd;elle entre ERP et CAO. Re-Structuration ERP">
+        <font bold="false" italic="true" name="SansSerif" size="10"/>
+      </sub>
+    </sub>
+    <sub folded="true" text="Responsable BE">
+      <sub text="CAO OK pour partir">
+        <font bold="false" italic="true" name="SansSerif" size="10"/>
+      </sub>
+    </sub>
+    <sub folded="true" text="Publication dans CAO"/>
+  </node>
+</MindMap:Map>

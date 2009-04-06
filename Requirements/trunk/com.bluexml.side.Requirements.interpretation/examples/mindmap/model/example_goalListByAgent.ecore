@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<MindMap:Maps xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:MindMap="http://www.bluexml.com/rwm/mindmap/1.0/">
+  <maps>
+    <node folded="false" text="Responsable industriel - Objectifs">
+      <sub folded="true" text="Validation">
+        <sub text="Validation avant ERP">
+          <font bold="false" italic="true" name="SansSerif" size="10"/>
+        </sub>
+      </sub>
+      <sub folded="true" text="Validation">
+        <sub text="avant ERP">
+          <font bold="false" italic="true" name="SansSerif" size="10"/>
+        </sub>
+      </sub>
+      <sub folded="true" text="Validation">
+        <sub text="Avant insertion ERP">
+          <font bold="false" italic="true" name="SansSerif" size="10"/>
+        </sub>
+      </sub>
+      <sub folded="true" text="Vérifier la cohérence">
+        <sub text="">
+          <font bold="false" italic="true" name="SansSerif" size="10"/>
+        </sub>
+        <sub folded="true" text="Synchronization des nomenclatures">
+          <sub text="On suppose">
+            <font bold="false" italic="true" name="SansSerif" size="10"/>
+          </sub>
+          <sub folded="true" text="Sauvegarder les différences">
+            <sub text="">
+              <font bold="false" italic="true" name="SansSerif" size="10"/>
+            </sub>
+          </sub>
+        </sub>
+        <sub folded="true" text="Vérif des params">
+          <sub text="">
+            <font bold="false" italic="true" name="SansSerif" size="10"/>
+          </sub>
+        </sub>
+      </sub>
+    </node>
+  </maps>
+  <maps>
+    <node folded="false" text="Responsable BE - Objectifs">
+      <sub folded="true" text="Impacter les modifications de la CAO sur l'ERP">
+        <sub text="Sous la responsabilité du chef d'équipe">
+          <font bold="false" italic="true" name="SansSerif" size="10"/>
+        </sub>
+        <sub folded="true" text="Changement de la structure">
+          <sub text="">
+            <font bold="false" italic="true" name="SansSerif" size="10"/>
+          </sub>
+          <sub folded="true" text="Ré-organisation">
+            <sub text="">
+              <font bold="false" italic="true" name="SansSerif" size="10"/>
+            </sub>
+          </sub>
+          <sub folded="true" text="Ajout/Suppression d'un composant">
+            <sub text="">
+              <font bold="false" italic="true" name="SansSerif" size="10"/>
+            </sub>
+            <sub folded="true" text="Mise en place par défaut">
+              <sub text="">
+                <font bold="false" italic="true" name="SansSerif" size="10"/>
+              </sub>
+            </sub>
+            <sub folded="true" text="Validation">
+              <sub text="Avant insertion ERP">
+                <font bold="false" italic="true" name="SansSerif" size="10"/>
+              </sub>
+            </sub>
+          </sub>
+        </sub>
+        <sub folded="true" text="Changement des param">
+          <sub text="">
+            <font bold="false" italic="true" name="SansSerif" size="10"/>
+          </sub>
+          <sub folded="true" text="Validation">
+            <sub text="avant ERP">
+              <font bold="false" italic="true" name="SansSerif" size="10"/>
+            </sub>
+          </sub>
+        </sub>
+        <sub folded="true" text="Initialisation de la structure">
+          <sub text="">
+            <font bold="false" italic="true" name="SansSerif" size="10"/>
+          </sub>
+          <sub folded="true" text="Validation">
+            <sub text="Validation avant ERP">
+              <font bold="false" italic="true" name="SansSerif" size="10"/>
+            </sub>
+          </sub>
+        </sub>
+      </sub>
+      <sub folded="true" text="Validation">
+        <sub text="">
+          <font bold="false" italic="true" name="SansSerif" size="10"/>
+        </sub>
+      </sub>
+    </node>
+  </maps>
+  <maps>
+    <node folded="false" text="Publication dans CAO - Objectifs">
+      <sub folded="true" text="Impacter les modifs de l'ERP vers la CAO">
+        <sub text="Pas de validation avant publication">
+          <font bold="false" italic="true" name="SansSerif" size="10"/>
+        </sub>
+        <sub folded="true" text="Changement des params">
+          <sub text="Si non impact dans CAO alors intiialisation suivante ERP KO">
+            <font bold="false" italic="true" name="SansSerif" size="10"/>
+          </sub>
+          <sub folded="true" text="Validation">
+            <sub text="">
+              <font bold="false" italic="true" name="SansSerif" size="10"/>
+            </sub>
+          </sub>
+        </sub>
+      </sub>
+    </node>
+  </maps>
+</MindMap:Maps>

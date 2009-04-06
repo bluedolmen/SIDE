@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launchConfiguration type="org.eclipse.m2m.atl.adt.launching.atlTransformation">
+<stringAttribute key="ATL File Name" value="/com.bluexml.requirements.interpretation/metamodel/diagnostic/transformation/RWM2Diagnostic.atl"/>
+<stringAttribute key="ATL VM" value="Regular VM (with debugger)"/>
+<booleanAttribute key="AllowInterModelReferences" value="false"/>
+<mapAttribute key="Input">
+<mapEntry key="IN" value="RWM"/>
+</mapAttribute>
+<mapAttribute key="Libs"/>
+<booleanAttribute key="Mode Debug" value="false"/>
+<mapAttribute key="Model Handler">
+<mapEntry key="Diagnostic" value="EMF"/>
+<mapEntry key="RWM" value="EMF"/>
+</mapAttribute>
+<mapAttribute key="ModelType">
+<mapEntry key="OUT" value="MODELOUTPUT"/>
+<mapEntry key="Diagnostic" value="METAMODELOUTPUT"/>
+<mapEntry key="RWM" value="METAMODELINPUT"/>
+<mapEntry key="IN" value="MODELINPUT"/>
+</mapAttribute>
+<mapAttribute key="Output">
+<mapEntry key="OUT" value="Diagnostic"/>
+</mapAttribute>
+<mapAttribute key="Path">
+<mapEntry key="OUT" value="/com.bluexml.requirements.interpretation/examples/diagnostic/model/example.ecore"/>
+<mapEntry key="Diagnostic" value="/com.bluexml.requirements.interpretation/metamodel/diagnostic/diagnostic.ecore"/>
+<mapEntry key="IN" value="/com.bluexml.requirements.interpretation/examples/example.rwm"/>
+<mapEntry key="RWM" value="uri:http://www.bluexml.com/requirements/"/>
+</mapAttribute>
+<stringAttribute key="Project Name" value="com.bluexml.requirements.interpretation"/>
+<listAttribute key="Superimpose"/>
+<booleanAttribute key="continueAfterError" value="false"/>
+<booleanAttribute key="disableAttributeHelperCache" value="false"/>
+<booleanAttribute key="printExecutionTime" value="false"/>
+<booleanAttribute key="profile" value="false"/>
+<booleanAttribute key="showSummary" value="false"/>
+<booleanAttribute key="step" value="false"/>
+<booleanAttribute key="supportUML2Stereotypes" value="false"/>
+</launchConfiguration>
