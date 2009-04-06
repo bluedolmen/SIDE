@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Requirements modeler
+Bundle-SymbolicName: com.bluexml.side.Requirements.modeler; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: com.bluexml.side.Requirements.modeler.RequirementsPlugin
+Bundle-Vendor: blueXML
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore.edit,
+ org.eclipse.emf.edit.ui,
+ org.eclipse.ui.ide,
+ com.bluexml.side.Requirements,
+ org.eclipse.emf.edit,
+ com.bluexml.side.Requirements.edit,
+ org.eclipse.core.resources,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.emf.ecore,
+ org.topcased.modeler,
+ org.eclipse.ui
+Eclipse-LazyStart: true
