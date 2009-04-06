@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.bluexml.side.Requirements/src"
+    modelPluginID="com.bluexml.side.Requirements" modelName="Requirements" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>requirements.ecore</foreignModel>
+  <genPackages prefix="Requirements" basePackage="com.bluexml.side" disposableProviderFactory="true"
+      ecorePackage="requirements.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="requirements.ecore#//AttributeType">
+      <genEnumLiterals ecoreEnumLiteral="requirements.ecore#//AttributeType/TextualValue"/>
+      <genEnumLiterals ecoreEnumLiteral="requirements.ecore#//AttributeType/NumericalValue"/>
+      <genEnumLiterals ecoreEnumLiteral="requirements.ecore#//AttributeType/TemporalValue"/>
+      <genEnumLiterals ecoreEnumLiteral="requirements.ecore#//AttributeType/Other"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="requirements.ecore#//PriorityLevel">
+      <genEnumLiterals ecoreEnumLiteral="requirements.ecore#//PriorityLevel/VeryHigh"/>
+      <genEnumLiterals ecoreEnumLiteral="requirements.ecore#//PriorityLevel/High"/>
+      <genEnumLiterals ecoreEnumLiteral="requirements.ecore#//PriorityLevel/Normal"/>
+      <genEnumLiterals ecoreEnumLiteral="requirements.ecore#//PriorityLevel/Low"/>
+      <genEnumLiterals ecoreEnumLiteral="requirements.ecore#//PriorityLevel/VeryLow"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="requirements.ecore#//PrivilegeNature">
+      <genEnumLiterals ecoreEnumLiteral="requirements.ecore#//PrivilegeNature/create"/>
+      <genEnumLiterals ecoreEnumLiteral="requirements.ecore#//PrivilegeNature/read"/>
+      <genEnumLiterals ecoreEnumLiteral="requirements.ecore#//PrivilegeNature/update"/>
+      <genEnumLiterals ecoreEnumLiteral="requirements.ecore#//PrivilegeNature/delete"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="requirements.ecore#//ModelElement"/>
+    <genClasses image="false" ecoreClass="requirements.ecore#//BasicElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//BasicElement/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//BasicElement/documentation"/>
+    </genClasses>
+    <genClasses ecoreClass="requirements.ecore#//Entity">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requirements.ecore#//Entity/parent"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference requirements.ecore#//Entity/attributes"/>
+    </genClasses>
+    <genClasses ecoreClass="requirements.ecore#//RelationShip">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requirements.ecore#//RelationShip/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requirements.ecore#//RelationShip/target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//RelationShip/sourceMin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//RelationShip/sourceMax"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//RelationShip/targetMin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//RelationShip/targetMax"/>
+    </genClasses>
+    <genClasses ecoreClass="requirements.ecore#//Attribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//Attribute/type"/>
+    </genClasses>
+    <genClasses ecoreClass="requirements.ecore#//Organization">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference requirements.ecore#//Organization/childElements"/>
+    </genClasses>
+    <genClasses ecoreClass="requirements.ecore#//Agent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//Agent/isHuman"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requirements.ecore#//Agent/isResponsible"/>
+    </genClasses>
+    <genClasses ecoreClass="requirements.ecore#//Goal">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference requirements.ecore#//Goal/subgoals"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//Goal/priority"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requirements.ecore#//Goal/responsible"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference requirements.ecore#//Goal/privilegeGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="requirements.ecore#//Privilege">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requirements.ecore#//Privilege/element"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//Privilege/category"/>
+    </genClasses>
+    <genClasses ecoreClass="requirements.ecore#//RequirementsDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//RequirementsDefinition/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//RequirementsDefinition/date"/>
+    </genClasses>
+    <genClasses ecoreClass="requirements.ecore#//PrivilegeGroup">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requirements.ecore#//PrivilegeGroup/entryPoint"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference requirements.ecore#//PrivilegeGroup/privileges"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//PrivilegeGroup/documentation"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
