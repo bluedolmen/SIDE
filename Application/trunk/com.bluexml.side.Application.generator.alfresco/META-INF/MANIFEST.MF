@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Alfresco Plug-in
+Bundle-SymbolicName: com.bluexml.side.Application.generator.alfresco
+Bundle-Version: 1.0.0
+Bundle-Activator: com.bluexml.side.application.generator.alfresco.Activator
+Bundle-Vendor: BLUEXML
+Require-Bundle: org.eclipse.core.runtime,
+ com.bluexml.side.Application.generator.acceleo;bundle-version="1.0.0",
+ com.bluexml.side.Application;bundle-version="1.0.0",
+ com.bluexml.side.Application.generator;bundle-version="1.0.0",
+ org.eclipse.core.resources
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Import-Package: com.bluexml.side.deployer.alfresco,
+ com.bluexml.side.util.libs
+Export-Package: com.bluexml.side.application.generator.alfresco
