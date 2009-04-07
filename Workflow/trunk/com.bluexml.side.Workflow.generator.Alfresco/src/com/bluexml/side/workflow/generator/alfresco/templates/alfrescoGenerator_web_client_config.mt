@@ -1,9 +1,10 @@
 <%
 metamodel http://www.kerblue.org/workflow/1.0
+import com.bluexml.side.workflow.generator.alfresco.templates.servicesTemplates.Common
 import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 %>
 <%script type="workflow.Process" name="validatedFilename"%>
-<%getTEMP_FOLDER()%>/shared/classes/alfresco/extension/web-client-config-custom.xml
+<%getTEMP_FOLDER()%>/<%getConfModulePath()%>/web-client-config-custom.xml
 <%script type="workflow.Process" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <?xml version='1.0' encoding='iso-8859-1'?>
 

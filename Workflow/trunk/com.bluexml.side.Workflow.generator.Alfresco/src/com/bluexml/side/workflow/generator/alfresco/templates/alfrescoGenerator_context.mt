@@ -16,22 +16,23 @@ Foundation, Inc., 59 Temple Place, Boston, MA 02111.
  --%>
 <%
 metamodel http://www.kerblue.org/workflow/1.0
+import com.bluexml.side.workflow.generator.alfresco.templates.servicesTemplates.Common
 import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 %>
 <%script type="workflow.Process" name="validatedFilename"%>
-<%getTEMP_FOLDER()%>/shared/classes/alfresco/extension/<%name%>-workflow-context.xml
+<%getTEMP_FOLDER()%>/<%getConfModulePath()%>/module-context.xml
 <%script type="workflow.Process" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
  
 <beans>
  
-    <bean id="BlueXML_Workflows.workflowBootstrap" parent="workflowDeployer">
+    <bean id="<%getModuleIdService()%>.workflowBootstrap" parent="workflowDeployer">
 		<property name="workflowDefinitions">
 			<list>
 				<props>
 					<prop key="engineId">jbpm</prop>
-					<prop key="location">alfresco/extension/generated/bpm/<%name%>_processdefinition.xml</prop>
+					<prop key="location"><%getModulePath()%>/bpm/processdefinition.xml</prop>
 					<prop key="mimetype">text/xml</prop>
 					<prop key="redeploy">true</prop>
 				</props>
@@ -39,14 +40,21 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 		</property>
 		<property name="models">
 			<list>
-                <value>alfresco/extension/generated/bpm/<%name%>-model.xml</value>
+                <value><%getModulePath()%>/bpm/model.xml</value>
 			</list>
 		</property>
 		<property name="labels">
 			<list>
-                <value>alfresco/extension/generated/bpm/workflow-<%name%>-messages</value>
+                <value><%getModulePath()%>/bpm/messages</value>
 			</list>
 		</property>
 	</bean>
- 
+	
+ 	<bean id="<%getModuleIdService()%>_configBootstrap" class="org.alfresco.web.config.WebClientConfigBootstrap" init-method="init">
+      <property name="configs">
+        <list>
+           <value>classpath:<%getModulePath()%>/web-client-config-custom.xml</value>
+        </list>
+      </property>
+   </bean>
 </beans>

@@ -3,49 +3,30 @@ package com.bluexml.side.workflow.generator.alfresco;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
+import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.EObject;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
-import com.bluexml.side.application.generator.ConflitResolverHelper;
-import com.bluexml.side.application.generator.UnresolvedConflictException;
+import com.bluexml.side.application.generator.AbstractGenerator;
 import com.bluexml.side.application.generator.XMLConflictResolver;
-import com.bluexml.side.application.generator.acceleo.AbstractAcceleoGenerator;
+import com.bluexml.side.application.generator.alfresco.AbstractAlfrescoGenerator;
 
-public class WorkflowGenerator extends AbstractAcceleoGenerator {
+public class WorkflowGenerator extends AbstractAlfrescoGenerator {
 
 	XMLConflictResolver xmlresolver = null;
 
 	public XMLConflictResolver getXmlresolver() {
 		if (xmlresolver == null) {
-			xmlresolver = new XMLConflictResolver(new ConflitResolverHelper(getTargetPath(), getTemporaryFolder()));
+			xmlresolver = new XMLConflictResolver(this.getCresolver());
 		}
 		return xmlresolver;
 	}
 
-	public static String getTEMP_FOLDER(EObject node) {
-		return TEMP_FOLDER;
-	}
+	protected Properties moduleProperties;
+
 	
+
 	public boolean check() {
 		// Already usable
 		return true;
@@ -68,32 +49,45 @@ public class WorkflowGenerator extends AbstractAcceleoGenerator {
 	}
 
 	public Collection<IFile> complete() throws Exception {
-		List<IFile> conflict = searchForConflict();
-		List<IFile> unresolvedconflict = new ArrayList<IFile>();
-		boolean allresolved = true;
-		for (IFile f : conflict) {
-			if (f.getFullPath().toString().indexOf("/shared/classes/alfresco/extension/web-client-config-custom.xml") != -1 || f.getFullPath().toString().indexOf("/shared/classes/alfresco/extension/workflow-context.xml") != -1
-					|| f.getFullPath().toString().indexOf("/shared/classes/alfresco/extension/generated/bpm/model.xml") != -1) {
-				// known conflict, apply specific process
+		// solveConflict();
+		IFile ampIFile = buildAMPPackage();
+		generatedFiles.add(ampIFile);
 
-				getXmlresolver().resolveByMerging(f);
-				System.out.println("resolved conflict on :" + f.getFullPath());
-			} else {
-				// unknown conflict
-				allresolved = false;
-				System.err.println("Unknow conflict detected on :" + f.getFullPath());
-			}
-		}
-		if (!allresolved) {
-			throw new UnresolvedConflictException(unresolvedconflict);
-		}
-		// conflicts are resolved
-		getCresolver().copyToFinalFolder();
-		// delete temporary folder
-		ConflitResolverHelper.deleteFolder(getTemporaryFolder());
 		return generatedFiles;
 	}
 
+	public Properties buildModuleProperties() {
+		Properties props = new Properties();
+		props.put("module.id", "SIDE_WorkflowExtension");
+		props.put("module.version", "1.0");
+		props.put("module.title", "S-IDE workflow extension");
+		props.put("module.description", "this module contains S-IDE generated extension to add new workflow");
+		/*
+		 * props.put("module.id",getGenerationParameter(
+		 * "com.bluexml.side.Class.generator.alfresco.module.id"));
+		 * props.put("module.version",getGenerationParameter(
+		 * "com.bluexml.side.Class.generator.alfresco.module.version"));
+		 * props.put("module.title",getGenerationParameter(
+		 * "com.bluexml.side.Class.generator.alfresco.module.title"));
+		 * props.put("module.description",getGenerationParameter(
+		 * "com.bluexml.side.Class.generator.alfresco.module.description"));
+		 */
+		return props;
+	}
+	/**
+	 * method usable as Acceleo Templates Services
+	 */
 	
+	public String getTEMP_FOLDER(EObject node) {
+		return this.getTEMP_FOLDER();
+	}
+	
+	public String getModuleIdService(EObject node) throws Exception {
+		// AbstractGenerator.printConfiguration();
+		if (!AbstractGenerator.generationParameters.containsKey("com.bluexml.side.Class.generator.alfresco.module.id")) {
+			return buildModuleProperties().getProperty("module.id");
+		}
+		return AbstractGenerator.generationParameters.get("com.bluexml.side.Class.generator.alfresco.module.id");
+	}
 
 }
