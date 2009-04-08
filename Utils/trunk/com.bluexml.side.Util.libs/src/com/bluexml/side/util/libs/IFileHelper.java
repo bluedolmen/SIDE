@@ -67,5 +67,9 @@ public class IFileHelper {
 		return ff.getRawLocation().makeAbsolute().toOSString();
 	}
 	
+	public static File getFile(IFile ifile) {
+		return ifile.getLocation().makeAbsolute().toFile();
+	}
+	
 	
 }
