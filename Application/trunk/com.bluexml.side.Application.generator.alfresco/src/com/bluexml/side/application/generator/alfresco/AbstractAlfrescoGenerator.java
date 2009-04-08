@@ -1,10 +1,12 @@
 package com.bluexml.side.application.generator.alfresco;
 
+import java.io.File;
 import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
 
 import com.bluexml.side.application.generator.acceleo.AbstractAcceleoGenerator;
+import com.bluexml.side.deployer.alfresco.AMPDeployer;
 import com.bluexml.side.deployer.alfresco.Packager;
 import com.bluexml.side.util.libs.IFileHelper;
 
@@ -12,6 +14,7 @@ public abstract class AbstractAlfrescoGenerator extends AbstractAcceleoGenerator
 
 	public static String CONFIGURATION_PARAMETER_CATALINA_HOME = "CATALINA_HOME";
 	protected Properties moduleProperties;
+	protected IFile ampIFile = null;
 
 	public Properties getModuleProperties() throws Exception {
 		if (moduleProperties == null) {
@@ -24,7 +27,15 @@ public abstract class AbstractAlfrescoGenerator extends AbstractAcceleoGenerator
 
 	public IFile buildAMPPackage() throws Exception {
 		Packager alfrescoPakager = new Packager(IFileHelper.getIFolder(getTemporaryFolder()), getModuleProperties());
-		IFile ampIFile = alfrescoPakager.buildAMP(generatedFiles);
+		ampIFile = alfrescoPakager.buildAMP(generatedFiles);
 		return ampIFile;
+	}
+
+	public void deploy() throws Exception {
+		if (ampIFile == null) {
+			throw new Exception("ampFile not found");
+		}
+		String cataHome = generationParameters.get(CONFIGURATION_PARAMETER_CATALINA_HOME);
+		AMPDeployer.deploy(IFileHelper.getFile(ampIFile), new File(cataHome));
 	}
 }

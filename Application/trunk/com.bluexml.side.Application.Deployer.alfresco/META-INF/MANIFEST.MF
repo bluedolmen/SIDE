@@ -13,3 +13,7 @@ Import-Package: com.bluexml.side.application.generator,
  com.bluexml.side.util.libs.zip,
  org.eclipse.core.resources
 Export-Package: com.bluexml.side.deployer.alfresco
+Bundle-ClassPath: lib/jug-lgpl-2.0.0.jar,
+ lib/truezip.jar,
+ lib/alfresco-ModuleManagementTool.jar,
+ ./

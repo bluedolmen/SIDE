@@ -10,8 +10,6 @@ import org.eclipse.emf.ecore.EObject;
 import com.bluexml.side.application.generator.AbstractGenerator;
 import com.bluexml.side.application.generator.XMLConflictResolver;
 import com.bluexml.side.application.generator.alfresco.AbstractAlfrescoGenerator;
-import com.bluexml.side.deployer.alfresco.Packager;
-import com.bluexml.side.util.libs.IFileHelper;
 
 public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
@@ -89,7 +87,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	}
 
 	public Collection<IFile> complete() throws Exception {
-		//solveConflict();		
+		//solveConflict();
 		IFile ampIFile = buildAMPPackage();
 		generatedFiles.add(ampIFile);
 

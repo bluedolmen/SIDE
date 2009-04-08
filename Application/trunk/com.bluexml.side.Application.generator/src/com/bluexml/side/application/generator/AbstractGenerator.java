@@ -60,11 +60,31 @@ public abstract class AbstractGenerator implements IGenerator {
 		IFolder ff = IFileHelper.getIFolder(getTargetPath());
 		return ff.getRawLocation().makeAbsolute().toOSString();
 	}
+	
+	protected final File getTargetSystemFile() {
+		IFolder ff = IFileHelper.getIFolder(getTargetPath());
+		return ff.getRawLocation().makeAbsolute().toFile();
+	}
 
-	protected final String getTargetPath() {
+	
+	public final String getTargetPath() {
 		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral());
 	}
 
+	public boolean doDeploy() {
+		if (configurationParameters != null) {
+			return configurationParameters.containsKey(StaticConfigurationParameters.GENERATIONOPTIONSUPDATE_TGT.getLiteral());
+		}
+		return false;
+	}
+	
+	protected static boolean doVerbose() {
+		if (configurationParameters != null) {
+			return configurationParameters.containsKey(StaticConfigurationParameters.GENERATIONOPTIONSVERBOSE.getLiteral());
+		}
+		return false;
+	}
+	
 	public static boolean getGeneratorOptionValue(String key) {
 		if (AbstractGenerator.generatorOptions.containsKey(key)) {
 			return AbstractGenerator.generatorOptions.get(key);
@@ -72,12 +92,7 @@ public abstract class AbstractGenerator implements IGenerator {
 		return false;
 	}
 
-	public static String getGenerationParameter(String key) {
-		if (AbstractGenerator.generationParameters.containsKey(key)) {
-			return AbstractGenerator.generationParameters.get(key);
-		}
-		return "";
-	}
+	
 
 	public static String getConfigurationParameter(String key) {
 		if (AbstractGenerator.configurationParameters.containsKey(key)) {

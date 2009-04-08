@@ -45,4 +45,12 @@ public interface IGenerator {
 	 * @throws Exception 
 	 */
 	public Collection<IFile> complete() throws Exception;
+	
+	/**
+	 * This method is run after generation and post-action
+	 * packaged files can be deployed into webserver or other target
+	 * 
+	 * @throws Exception
+	 */
+	public void deploy() throws Exception;
 }
