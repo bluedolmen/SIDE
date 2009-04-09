@@ -254,7 +254,7 @@ public class TransformModelDialog extends Dialog implements IDialogConstants {
 		}
 
 		public void initialize() {
-			String extensionPointId = "com.bluexml.requirements.transformation.requirements_interpretation";
+			String extensionPointId = "com.bluexml.side.Requirements.transformation.requirements_interpretation";
 			IConfigurationElement[] contributions = Platform.getExtensionRegistry().getConfigurationElementsFor(extensionPointId);
 			for (IConfigurationElement config : contributions) {
 				add(config, config.getAttribute("category"), this);

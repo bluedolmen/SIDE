@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launchConfiguration type="org.eclipse.m2m.atl.adt.launching.atlTransformation">
-<stringAttribute key="ATL File Name" value="/com.bluexml.requirements.interpretation/metamodel/documentation/transformation/RWM2CdCF.atl"/>
+<stringAttribute key="ATL File Name" value="/com.bluexml.side.Requirements.interpretation/metamodel/documentation/transformation/RWM2CdCF.atl"/>
 <stringAttribute key="ATL VM" value="Regular VM (with debugger)"/>
 <booleanAttribute key="AllowInterModelReferences" value="false"/>
 <mapAttribute key="Input">
@@ -22,12 +22,12 @@
 <mapEntry key="OUT" value="Documentation"/>
 </mapAttribute>
 <mapAttribute key="Path">
-<mapEntry key="OUT" value="/com.bluexml.requirements.interpretation/examples/documentation/model/example.ecore"/>
-<mapEntry key="Documentation" value="/com.bluexml.requirements.interpretation/metamodel/documentation/documentation.ecore"/>
-<mapEntry key="IN" value="/com.bluexml.requirements.interpretation/examples/example.rwm"/>
-<mapEntry key="RWM" value="uri:http://www.bluexml.com/requirements/"/>
+<mapEntry key="OUT" value="/com.bluexml.side.Requirements.interpretation/examples/documentation/model/example.ecore"/>
+<mapEntry key="Documentation" value="/com.bluexml.side.Requirements.interpretation/metamodel/documentation/documentation.ecore"/>
+<mapEntry key="IN" value="/com.bluexml.side.Requirements.interpretation/examples/example.requirements"/>
+<mapEntry key="RWM" value="uri:http://www.kerblue.org/requirements/1.0"/>
 </mapAttribute>
-<stringAttribute key="Project Name" value="com.bluexml.requirements.interpretation"/>
+<stringAttribute key="Project Name" value="com.bluexml.side.Requirements.interpretation"/>
 <listAttribute key="Superimpose"/>
 <booleanAttribute key="continueAfterError" value="false"/>
 <booleanAttribute key="disableAttributeHelperCache" value="false"/>

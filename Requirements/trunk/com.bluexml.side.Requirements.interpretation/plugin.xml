@@ -2,7 +2,7 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension
-         point="com.bluexml.requirements.transformation.requirements_interpretation">
+         point="com.bluexml.side.Requirements.transformation.requirements_interpretation">
       <interpretation
             category="Mind Map/FreeMind"
             label="List of agents : FreeMind">

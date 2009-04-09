@@ -6,6 +6,7 @@ import java.util.Set;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -56,6 +57,8 @@ public class InterpretModel implements IObjectActionDelegate {
 						if (!tmpProject.isOpen()) {
 							tmpProject.open(null);
 						}
+						
+						tmpProject.setDefaultCharset("UTF-8", null);
 
 						IFolder outputFolder = tmpProject.getFolder("output");
 						if (!outputFolder.exists())
@@ -78,12 +81,13 @@ public class InterpretModel implements IObjectActionDelegate {
 							}
 
 						// Copy all files
+						outputFolder.refreshLocal(IResource.DEPTH_INFINITE, null);
 						outputFolder.copy(newFolder.getFullPath(), true, new NullProgressMonitor());
-						newFolder.refreshLocal(-1, new NullProgressMonitor());
+						newFolder.refreshLocal(IResource.DEPTH_INFINITE, null);
 
 						// Delete the temporary project
 
-						tmpProject.delete(true, new NullProgressMonitor());
+						//tmpProject.delete(true, new NullProgressMonitor());
 
 					} catch (CoreException e) {
 						e.printStackTrace();

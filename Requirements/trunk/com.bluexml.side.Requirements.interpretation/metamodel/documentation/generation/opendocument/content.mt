@@ -1,4 +1,4 @@
-<%--encoding=iso-8859-1--%>
+<%--encoding=ISO-8859-1--%>
 <%
 metamodel http://www.bluexml.com/rwm/documentation/1.0/
 import documentation.generation.opendocument.content_chapter

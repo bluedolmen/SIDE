@@ -7,6 +7,13 @@ helper context String def : normalize() : String =
 	    .regexReplaceAll('&lt;([a-zA-Z0-9]*)>(.*)&lt;/\\1>','$2').regexReplaceAll('&lt;([a-zA-Z0-9]*)>','')
 		.regexReplaceAll('\\\\(.)','$1');
 
+helper context RWM!BasicElement def : normalizeDoc() : String =
+	if (self.documentation <> OclUndefined) then
+		self.documentation.normalize()
+	else
+		''
+	endif;
+
 helper context RWM!Goal def : getAllSubGoals() : Sequence(RWM!Goal) =
 	Sequence{self}->union(self.subgoals->collect(goal | goal.getAllSubGoals())->flatten());
 
@@ -24,7 +31,7 @@ rule createLinkItem(element : RWM!BasicElement) {
 		value <- ')'
 	),
 	t_description : Documentation!EmphasisValue (
-		value <- '(' + element.documentation.normalize() + ')'
+		value <- '(' + element.normalizeDoc() + ')'
 	)
 	do {
 		t;
@@ -54,7 +61,7 @@ rule createLink(element : RWM!BasicElement) {
 		value <- ')'
 	),
 	t_description : Documentation!EmphasisValue (
-		value <- '(' + element.documentation.normalize() + ')'
+		value <- '(' + element.normalizeDoc() + ')'
 	)
 	do {
 		t;
@@ -72,7 +79,7 @@ rule createLinkWithoutParagraph(element : RWM!BasicElement) {
 		value <- ')'
 	),
 	t_description : Documentation!EmphasisValue (
-		value <- '(' + element.documentation.normalize() + ')'
+		value <- '(' + element.normalizeDoc() + ')'
 	)
 	do {
 		Sequence{t_value,t_xref,t_value2,t_description};
@@ -123,7 +130,7 @@ rule Member {
 		values <- Sequence{t_para_description_value}
 	),
 	t_para_description_value:Documentation!TextualValue (
-		value <- s.documentation.normalize()
+		value <- s.normalizeDoc()
 	),
 	t_para_description_isHuman:Documentation!Paragraph (
 		values <- Sequence{t_para_description_isHuman_value1,t_para_description_isHuman_value2}
@@ -221,7 +228,7 @@ rule Goal {
 		values <- Sequence{t_para_description_value}
 	),
 	t_para_description_value:Documentation!TextualValue (
-		value <- s.documentation.normalize()
+		value <- s.normalizeDoc()
 	),
 	t_para_description_level:Documentation!Paragraph (
 		values <- Sequence{t_para_description_level_value1,t_para_description_level_value2}
@@ -392,7 +399,7 @@ rule Entity {
 		values <- Sequence{t_para_description_value}
 	),
 	t_para_description_value:Documentation!TextualValue (
-		value <- s.documentation.normalize()
+		value <- s.normalizeDoc()
 	),
 	t_section_relationship:Documentation!Section (
 		title <- 'Relation(s)',
@@ -471,6 +478,6 @@ rule Attribute {
 		value <- s."type".toString()
 	), 
 	t_entry_description:Documentation!InformalTableValueEntry(
-		value <- s.documentation.normalize()
+		value <- s.normalizeDoc()
 	)
 }

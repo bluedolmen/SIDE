@@ -1,7 +1,11 @@
-#Mon Mar 16 17:51:50 CET 2009
+#Tue Apr 07 09:10:16 CEST 2009
 eclipse.preferences.version=1
 encoding//examples/documentation/model/example.ecore=ISO-8859-1
-encoding//examples/example.rwm=UTF-8
+encoding//examples/example.requirements=UTF-8
 encoding//metamodel/documentation/generation/opendocument/content.mt=ISO-8859-1
-encoding//metamodel/documentation/generation/opendocument/meta.mt=UTF-8
+encoding//metamodel/documentation/generation/opendocument/content_chapter.mt=ISO-8859-1
+encoding//metamodel/documentation/generation/opendocument/manifest.mt=ISO-8859-1
+encoding//metamodel/documentation/generation/opendocument/meta.mt=ISO-8859-1
+encoding//metamodel/documentation/generation/opendocument/mimetype.mt=ISO-8859-1
+encoding//metamodel/documentation/generation/opendocument/styles.mt=ISO-8859-1
 encoding//metamodel/documentation/transformation/RWM2CdCF.atl=ISO-8859-1

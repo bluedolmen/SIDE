@@ -250,22 +250,6 @@
           </separator>
        </menu>
     </objectContribution>
-    <objectContribution
-          id="com.bluexml.side.Requirements.modeler.contribution1"
-          objectClass="org.eclipse.core.resources.IFile">
-       <menu
-             id="com.bluexml.side.Requirements.modeler.menu1"
-             label="New Submenu"
-             path="additions">
-       </menu>
-       <action
-             class="com.bluexml.side.Requirements.modeler.popup.actions.NewAction"
-             enablesFor="1"
-             id="com.bluexml.side.Requirements.modeler.newAction"
-             label="New Action"
-             menubarPath="com.bluexml.side.Requirements.modeler.menu1/group1">
-       </action>
-    </objectContribution>
  </extension>
 	
 </plugin>

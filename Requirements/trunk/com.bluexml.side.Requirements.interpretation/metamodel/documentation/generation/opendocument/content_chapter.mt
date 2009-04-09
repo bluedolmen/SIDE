@@ -1,3 +1,4 @@
+<%--encoding=ISO-8859-1--%>
 <%
 metamodel http://www.bluexml.com/rwm/documentation/1.0/
 %>
