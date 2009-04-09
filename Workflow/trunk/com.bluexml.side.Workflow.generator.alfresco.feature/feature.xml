@@ -25,13 +25,17 @@
       <import plugin="com.bluexml.side.Application.generator"/>
       <import plugin="javax.xml"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="com.bluexml.side.Application" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Application.generator.alfresco"/>
+      <import plugin="com.bluexml.side.Application.Deployer.alfresco"/>
+      <import plugin="com.bluexml.side.Util.libs"/>
    </requires>
 
    <plugin
          id="com.bluexml.side.Workflow.generator.Alfresco"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.0"
          unpack="false"/>
 
 </feature>

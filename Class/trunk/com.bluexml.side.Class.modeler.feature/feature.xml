@@ -17,6 +17,26 @@
       [Enter License Description here.]
    </license>
 
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="com.bluexml.side.Common"/>
+      <import plugin="com.bluexml.side.Util.ecore" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.MetaModel.validate" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ocl" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ocl.ecore" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Class"/>
+      <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="com.bluexml.side.Common.edit"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="com.bluexml.side.Class.edit"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.emf.ecore.edit"/>
+      <import plugin="org.topcased.modeler"/>
+   </requires>
+
    <plugin
          id="com.bluexml.side.Class"
          download-size="0"
