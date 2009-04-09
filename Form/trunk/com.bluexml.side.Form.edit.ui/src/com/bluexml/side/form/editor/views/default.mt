@@ -27,7 +27,7 @@ form.cmxform label {
   display: inline-block;
   line-height: 1.8;
   vertical-align: top;
-  text-align:left;
+  text-align:justify;
   font-size:13px;
 }
 form.cmxform fieldset ol {
