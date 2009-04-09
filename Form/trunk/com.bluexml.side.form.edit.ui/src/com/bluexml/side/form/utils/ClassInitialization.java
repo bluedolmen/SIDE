@@ -55,7 +55,9 @@ public class ClassInitialization {
 					for (Attribute att : Clazz.getAttributes()) {
 						Field field = null;
 						field = ClassDiagramUtils.getFieldForAttribute(att);
-						c.add(field);
+						if (field != null) {
+							c.add(field);
+						}
 					}
 					
 					// Aspects

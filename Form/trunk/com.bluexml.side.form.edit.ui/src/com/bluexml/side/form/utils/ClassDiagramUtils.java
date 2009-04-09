@@ -12,6 +12,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import com.bluexml.side.clazz.AbstractContainer;
 import com.bluexml.side.clazz.Aspect;
@@ -83,7 +84,12 @@ public class ClassDiagramUtils {
 			} else if(att.getTyp().equals(AttributeType.DOUBLE)) {
 			// Decimal Field
 				field = formFactory.eINSTANCE.createDecimalField();
-			} 
+			} else if(att.getTyp().equals(AttributeType.SHORT)) {
+			// Short Field
+				field = formFactory.eINSTANCE.createIntegerField();
+			} else {
+				EcorePlugin.INSTANCE.log("No field available for " + att.getTyp());
+			}
 			
 			if (field == null) {
 				//field = formFactory.eINSTANCE.createField();
