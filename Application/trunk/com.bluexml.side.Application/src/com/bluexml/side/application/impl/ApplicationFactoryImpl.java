@@ -6,16 +6,22 @@
  */
 package com.bluexml.side.application.impl;
 
-import com.bluexml.side.application.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import com.bluexml.side.application.Application;
+import com.bluexml.side.application.ApplicationFactory;
+import com.bluexml.side.application.ApplicationPackage;
+import com.bluexml.side.application.Configuration;
+import com.bluexml.side.application.ConfigurationElement;
+import com.bluexml.side.application.ConfigurationParameters;
+import com.bluexml.side.application.Model;
+import com.bluexml.side.application.Option;
+import com.bluexml.side.application.StaticConfigurationParameters;
 
 /**
  * <!-- begin-user-doc -->

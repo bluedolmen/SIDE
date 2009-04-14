@@ -6,12 +6,19 @@
  */
 package com.bluexml.side.application.util;
 
-import com.bluexml.side.application.*;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import com.bluexml.side.application.Application;
+import com.bluexml.side.application.ApplicationPackage;
+import com.bluexml.side.application.Configuration;
+import com.bluexml.side.application.ConfigurationElement;
+import com.bluexml.side.application.ConfigurationParameters;
+import com.bluexml.side.application.Model;
+import com.bluexml.side.application.ModelElement;
+import com.bluexml.side.application.Option;
 
 /**
  * <!-- begin-user-doc -->
