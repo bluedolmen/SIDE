@@ -1,9 +1,5 @@
 package com.bluexml.side.application.ui.action.table;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 

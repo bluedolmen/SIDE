@@ -1,7 +1,5 @@
 package com.bluexml.side.application.ui.action.table;
 
-import java.util.Arrays;
-
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
