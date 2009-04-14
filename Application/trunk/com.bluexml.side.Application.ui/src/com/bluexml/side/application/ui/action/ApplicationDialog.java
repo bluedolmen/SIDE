@@ -47,6 +47,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
@@ -149,6 +150,7 @@ public class ApplicationDialog extends Dialog {
 	 */
 	public ApplicationDialog(Shell parentShell, IFile file) {
 		super(parentShell);
+		
 		try {
 			URI uri = URI.createFileURI(file.getRawLocation().toFile()
 					.getAbsolutePath());
@@ -438,7 +440,7 @@ public class ApplicationDialog extends Dialog {
 		
 
 		documentationText = new Browser(container, SWT.NONE);
-		documentationText.setBounds(493, 67, 294, 436);
+		documentationText.setBounds(493, 67, 297, 436);
 
 		tabFolder = new TabFolder(container, SWT.NONE);
 		
@@ -557,7 +559,7 @@ public class ApplicationDialog extends Dialog {
 			}
 		});
 		cleanButton.setText("Clean");
-		cleanButton.setBounds(20, 40, 120, 16);
+		cleanButton.setBounds(20, 40, 436, 20);
 
 		final Label generationsOptionsLabel = new Label(composite_2, SWT.NONE);
 		generationsOptionsLabel.setFont(SWTResourceManager.getFont("", 12,
@@ -578,7 +580,7 @@ public class ApplicationDialog extends Dialog {
 			}
 		});
 		verboseButton.setText("Verbose");
-		verboseButton.setBounds(20, 60, 93, 16);
+		verboseButton.setBounds(20, 60, 436, 20);
 
 		updateTargetButton = new Button(composite_2, SWT.CHECK);
 		updateTargetButton.addSelectionListener(new SelectionAdapter() {
@@ -601,7 +603,7 @@ public class ApplicationDialog extends Dialog {
 					}
 				});
 		updateTargetButton.setText("Update target");
-		updateTargetButton.setBounds(20, 80, 93, 16);
+		updateTargetButton.setBounds(20, 80, 436, 20);
 
 		final Label generationsOptionsLabel_1 = new Label(composite_2, SWT.NONE);
 		generationsOptionsLabel_1.setBounds(10, 172, 439, 24);
@@ -628,7 +630,7 @@ public class ApplicationDialog extends Dialog {
 		final TableColumn newColumnTableColumn = new TableColumn(
 				generatorParameters, SWT.RIGHT);
 		generatorParameters.setSortColumn(newColumnTableColumn);
-		newColumnTableColumn.setWidth(100);
+		newColumnTableColumn.setWidth(150);
 		newColumnTableColumn.setText(columnNames[0]);
 
 		final TableColumn newColumnTableColumn_1 = new TableColumn(
@@ -649,7 +651,7 @@ public class ApplicationDialog extends Dialog {
 			}
 		});
 
-		logText.setBounds(115, 108, 260, 25);
+		logText.setBounds(115, 108, 260, 30);
 
 		final Label logLabel = new Label(composite_2, SWT.NONE);
 		logLabel.setAlignment(SWT.RIGHT);
@@ -674,7 +676,7 @@ public class ApplicationDialog extends Dialog {
 				
 			}
 		});
-		destinationText.setBounds(115, 140, 260, 25);
+		destinationText.setBounds(115, 140, 260, 30);
 
 		final Button browseLogPathButton = new Button(composite_2, SWT.NONE);
 		browseLogPathButton.addSelectionListener(new SelectionAdapter() {
@@ -798,7 +800,7 @@ public class ApplicationDialog extends Dialog {
 		listOfConfigurayionsLabel.setText("List of configurations :");
 
 		final Button editBt = new Button(container, SWT.NONE);
-		editBt.setBounds(325, 10, 40, 20);
+		editBt.setBounds(325, 10, 48, 26);
 		editBt.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
 				if (configurationList.getItemCount() > 0) {
@@ -831,7 +833,7 @@ public class ApplicationDialog extends Dialog {
 				"tree/img/edit.png"));
 
 		final Button addBt = new Button(container, SWT.NONE);
-		addBt.setBounds(365, 10, 40, 20);
+		addBt.setBounds(368, 10, 48, 26);
 		addBt.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
 				Configuration config = ApplicationFactory.eINSTANCE
@@ -889,7 +891,7 @@ public class ApplicationDialog extends Dialog {
 				"tree/img/add.png"));
 
 		final Button deleteBt = new Button(container, SWT.NONE);
-		deleteBt.setBounds(405, 10, 40, 20);
+		deleteBt.setBounds(412, 10, 48, 26);
 		deleteBt.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
 				if (configurationList.getItemCount() > 0) {
@@ -1362,6 +1364,12 @@ public class ApplicationDialog extends Dialog {
 		super.configureShell(newShell);
 		newShell.setText("Configuration");
 	}
+	
+	@Override
+	protected Point getInitialSize() {
+		return new Point(800,600);
+	}
+	
 
 	static public Configuration getCurrentConfiguration() {
 		if (configurationList.getSelectionIndex() != -1) {
