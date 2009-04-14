@@ -116,6 +116,8 @@ public class formFactoryImpl extends EFactoryImpl implements formFactory {
 			case formPackage.VIRTUAL_FIELD: return createVirtualField();
 			case formPackage.ACTION_FIELD: return createActionField();
 			case formPackage.TEXT_FIELD: return createTextField();
+			case formPackage.WORKFLOW_FORM_COLLECTION: return createWorkflowFormCollection();
+			case formPackage.FORM_WORKFLOW: return createFormWorkflow();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -421,6 +423,26 @@ public class formFactoryImpl extends EFactoryImpl implements formFactory {
 	public TextField createTextField() {
 		TextFieldImpl textField = new TextFieldImpl();
 		return textField;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WorkflowFormCollection createWorkflowFormCollection() {
+		WorkflowFormCollectionImpl workflowFormCollection = new WorkflowFormCollectionImpl();
+		return workflowFormCollection;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FormWorkflow createFormWorkflow() {
+		FormWorkflowImpl formWorkflow = new FormWorkflowImpl();
+		return formWorkflow;
 	}
 
 	/**

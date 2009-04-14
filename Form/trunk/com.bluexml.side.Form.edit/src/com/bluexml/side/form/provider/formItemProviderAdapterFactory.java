@@ -674,6 +674,52 @@ public class formItemProviderAdapterFactory extends formAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.WorkflowFormCollection} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected WorkflowFormCollectionItemProvider workflowFormCollectionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.form.WorkflowFormCollection}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createWorkflowFormCollectionAdapter() {
+		if (workflowFormCollectionItemProvider == null) {
+			workflowFormCollectionItemProvider = new WorkflowFormCollectionItemProvider(this);
+		}
+
+		return workflowFormCollectionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.FormWorkflow} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FormWorkflowItemProvider formWorkflowItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.form.FormWorkflow}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createFormWorkflowAdapter() {
+		if (formWorkflowItemProvider == null) {
+			formWorkflowItemProvider = new FormWorkflowItemProvider(this);
+		}
+
+		return formWorkflowItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -798,6 +844,8 @@ public class formItemProviderAdapterFactory extends formAdapterFactory implement
 		if (virtualFieldItemProvider != null) virtualFieldItemProvider.dispose();
 		if (actionFieldItemProvider != null) actionFieldItemProvider.dispose();
 		if (textFieldItemProvider != null) textFieldItemProvider.dispose();
+		if (workflowFormCollectionItemProvider != null) workflowFormCollectionItemProvider.dispose();
+		if (formWorkflowItemProvider != null) formWorkflowItemProvider.dispose();
 	}
 
 }

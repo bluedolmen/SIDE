@@ -36,12 +36,12 @@ public interface Form extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Root</em>' containment reference.
-	 * @see #setRoot(FormClass)
+	 * @see #setRoot(FormContainer)
 	 * @see com.bluexml.side.form.formPackage#getForm_Root()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	FormClass getRoot();
+	FormContainer getRoot();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.form.Form#getRoot <em>Root</em>}' containment reference.
@@ -51,7 +51,7 @@ public interface Form extends EObject {
 	 * @see #getRoot()
 	 * @generated
 	 */
-	void setRoot(FormClass value);
+	void setRoot(FormContainer value);
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

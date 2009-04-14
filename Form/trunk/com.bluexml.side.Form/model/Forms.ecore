@@ -10,7 +10,7 @@
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="validName" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="root" lowerBound="1" eType="#//FormClass"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="root" lowerBound="1" eType="#//FormContainer"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -24,7 +24,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="help_text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="ecore:EClass ../../com.bluexml.side.Class/model/Class.ecore#//ClassModelElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//ModelElement"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="hidden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormGroup" eSuperTypes="#//FormElement">
@@ -82,9 +82,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="min_bound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="max_bound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" upperBound="-1"
-        eType="#//FormClass"/>
+        eType="#//FormContainer"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="association_formClass"
-        upperBound="-1" eType="#//FormClass"/>
+        upperBound="-1" eType="#//FormContainer"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="widget" eType="#//ReferenceWidgetType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="show_actions" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="true"/>
@@ -100,7 +100,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="input_formats" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormAspect" eSuperTypes="#//FormGroup"/>
-  <eClassifiers xsi:type="ecore:EClass" name="FormClass" eSuperTypes="#//FormGroup #//ClassReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FormClass" eSuperTypes="#//FormContainer #//ClassReference"/>
   <eClassifiers xsi:type="ecore:EClass" name="Reference" eSuperTypes="#//ModelChoiceField"/>
   <eClassifiers xsi:type="ecore:EClass" name="FormCollection">
     <eStructuralFeatures xsi:type="ecore:EReference" name="forms" upperBound="-1"
@@ -155,4 +155,9 @@
     <eLiterals name="AssociationClassSelect" value="1" literal="Association Class Select"/>
     <eLiterals name="Inline" value="2" literal="Inline"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WorkflowFormCollection" eSuperTypes="#//FormCollection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="linked_process" eType="ecore:EClass ../../com.bluexml.side.Workflow/model/Workflow.ecore#//Process"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormWorkflow" eSuperTypes="#//FormContainer"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FormContainer" abstract="true" eSuperTypes="#//FormGroup"/>
 </ecore:EPackage>

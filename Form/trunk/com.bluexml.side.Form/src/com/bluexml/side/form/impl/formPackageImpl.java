@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import com.bluexml.side.clazz.ClazzPackage;
+import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.BooleanField;
 import com.bluexml.side.form.CharField;
@@ -33,9 +34,11 @@ import com.bluexml.side.form.Form;
 import com.bluexml.side.form.FormAspect;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormCollection;
+import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormGroupPresentationType;
+import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.ImageField;
 import com.bluexml.side.form.IntegerField;
 import com.bluexml.side.form.ModelChoiceField;
@@ -49,9 +52,11 @@ import com.bluexml.side.form.TextWidgetType;
 import com.bluexml.side.form.TimeField;
 import com.bluexml.side.form.URLField;
 import com.bluexml.side.form.VirtualField;
+import com.bluexml.side.form.WorkflowFormCollection;
 import com.bluexml.side.form.formFactory;
 import com.bluexml.side.form.formPackage;
 import com.bluexml.side.form.util.formValidator;
+import com.bluexml.side.workflow.WorkflowPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -268,6 +273,27 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass workflowFormCollectionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass formWorkflowEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass formContainerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum formGroupPresentationTypeEEnum = null;
 
 	/**
@@ -348,7 +374,7 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 		isInited = true;
 
 		// Initialize simple dependencies
-		ClazzPackage.eINSTANCE.eClass();
+		WorkflowPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theformPackage.createPackageContents();
@@ -1069,6 +1095,42 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getWorkflowFormCollection() {
+		return workflowFormCollectionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getWorkflowFormCollection_Linked_process() {
+		return (EReference)workflowFormCollectionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFormWorkflow() {
+		return formWorkflowEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFormContainer() {
+		return formContainerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getFormGroupPresentationType() {
 		return formGroupPresentationTypeEEnum;
 	}
@@ -1234,6 +1296,13 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 		textFieldEClass = createEClass(TEXT_FIELD);
 		createEAttribute(textFieldEClass, TEXT_FIELD__WIDGET);
 
+		workflowFormCollectionEClass = createEClass(WORKFLOW_FORM_COLLECTION);
+		createEReference(workflowFormCollectionEClass, WORKFLOW_FORM_COLLECTION__LINKED_PROCESS);
+
+		formWorkflowEClass = createEClass(FORM_WORKFLOW);
+
+		formContainerEClass = createEClass(FORM_CONTAINER);
+
 		// Create enums
 		formGroupPresentationTypeEEnum = createEEnum(FORM_GROUP_PRESENTATION_TYPE);
 		textWidgetTypeEEnum = createEEnum(TEXT_WIDGET_TYPE);
@@ -1265,7 +1334,9 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
+		CommonPackage theCommonPackage = (CommonPackage)EPackage.Registry.INSTANCE.getEPackage(CommonPackage.eNS_URI);
 		ClazzPackage theClazzPackage = (ClazzPackage)EPackage.Registry.INSTANCE.getEPackage(ClazzPackage.eNS_URI);
+		WorkflowPackage theWorkflowPackage = (WorkflowPackage)EPackage.Registry.INSTANCE.getEPackage(WorkflowPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -1290,7 +1361,7 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 		urlFieldEClass.getESuperTypes().add(this.getCharField());
 		phoneNumberFieldEClass.getESuperTypes().add(this.getCharField());
 		formAspectEClass.getESuperTypes().add(this.getFormGroup());
-		formClassEClass.getESuperTypes().add(this.getFormGroup());
+		formClassEClass.getESuperTypes().add(this.getFormContainer());
 		formClassEClass.getESuperTypes().add(this.getClassReference());
 		referenceEClass.getESuperTypes().add(this.getModelChoiceField());
 		choiceFieldEClass.getESuperTypes().add(this.getField());
@@ -1299,17 +1370,20 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 		virtualFieldEClass.getESuperTypes().add(this.getField());
 		actionFieldEClass.getESuperTypes().add(this.getField());
 		textFieldEClass.getESuperTypes().add(this.getCharField());
+		workflowFormCollectionEClass.getESuperTypes().add(this.getFormCollection());
+		formWorkflowEClass.getESuperTypes().add(this.getFormContainer());
+		formContainerEClass.getESuperTypes().add(this.getFormGroup());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(formEClass, Form.class, "Form", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getForm_Root(), this.getFormClass(), null, "root", null, 1, 1, Form.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getForm_Root(), this.getFormContainer(), null, "root", null, 1, 1, Form.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getForm_Name(), ecorePackage.getEString(), "name", null, 0, 1, Form.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(formElementEClass, FormElement.class, "FormElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFormElement_Label(), ecorePackage.getEString(), "label", null, 0, 1, FormElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFormElement_Id(), ecorePackage.getEString(), "id", null, 1, 1, FormElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFormElement_Help_text(), ecorePackage.getEString(), "help_text", null, 0, 1, FormElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFormElement_Ref(), theClazzPackage.getClassModelElement(), null, "ref", null, 0, 1, FormElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFormElement_Ref(), theCommonPackage.getModelElement(), null, "ref", null, 0, 1, FormElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFormElement_Hidden(), ecorePackage.getEBoolean(), "hidden", null, 0, 1, FormElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(formGroupEClass, FormGroup.class, "FormGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1359,8 +1433,8 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 		initEClass(modelChoiceFieldEClass, ModelChoiceField.class, "ModelChoiceField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getModelChoiceField_Min_bound(), ecorePackage.getEInt(), "min_bound", null, 0, 1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getModelChoiceField_Max_bound(), ecorePackage.getEInt(), "max_bound", null, 0, 1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModelChoiceField_Target(), this.getFormClass(), null, "target", null, 0, -1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModelChoiceField_Association_formClass(), this.getFormClass(), null, "association_formClass", null, 0, -1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelChoiceField_Target(), this.getFormContainer(), null, "target", null, 0, -1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelChoiceField_Association_formClass(), this.getFormContainer(), null, "association_formClass", null, 0, -1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getModelChoiceField_Widget(), this.getReferenceWidgetType(), "widget", null, 0, 1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getModelChoiceField_Show_actions(), ecorePackage.getEBoolean(), "show_actions", "true", 0, 1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1411,6 +1485,13 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 
 		initEClass(textFieldEClass, TextField.class, "TextField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTextField_Widget(), this.getTextWidgetType(), "widget", null, 0, 1, TextField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(workflowFormCollectionEClass, WorkflowFormCollection.class, "WorkflowFormCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getWorkflowFormCollection_Linked_process(), theWorkflowPackage.getProcess(), null, "linked_process", null, 0, 1, WorkflowFormCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(formWorkflowEClass, FormWorkflow.class, "FormWorkflow", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(formContainerEClass, FormContainer.class, "FormContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(formGroupPresentationTypeEEnum, FormGroupPresentationType.class, "FormGroupPresentationType");

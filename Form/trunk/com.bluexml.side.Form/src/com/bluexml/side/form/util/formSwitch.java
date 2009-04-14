@@ -243,8 +243,9 @@ public class formSwitch<T> {
 			case formPackage.FORM_CLASS: {
 				FormClass formClass = (FormClass)theEObject;
 				T result = caseFormClass(formClass);
-				if (result == null) result = caseFormGroup(formClass);
+				if (result == null) result = caseFormContainer(formClass);
 				if (result == null) result = caseClassReference(formClass);
+				if (result == null) result = caseFormGroup(formClass);
 				if (result == null) result = caseFormElement(formClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -319,6 +320,30 @@ public class formSwitch<T> {
 				if (result == null) result = caseCharField(textField);
 				if (result == null) result = caseField(textField);
 				if (result == null) result = caseFormElement(textField);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case formPackage.WORKFLOW_FORM_COLLECTION: {
+				WorkflowFormCollection workflowFormCollection = (WorkflowFormCollection)theEObject;
+				T result = caseWorkflowFormCollection(workflowFormCollection);
+				if (result == null) result = caseFormCollection(workflowFormCollection);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case formPackage.FORM_WORKFLOW: {
+				FormWorkflow formWorkflow = (FormWorkflow)theEObject;
+				T result = caseFormWorkflow(formWorkflow);
+				if (result == null) result = caseFormContainer(formWorkflow);
+				if (result == null) result = caseFormGroup(formWorkflow);
+				if (result == null) result = caseFormElement(formWorkflow);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case formPackage.FORM_CONTAINER: {
+				FormContainer formContainer = (FormContainer)theEObject;
+				T result = caseFormContainer(formContainer);
+				if (result == null) result = caseFormGroup(formContainer);
+				if (result == null) result = caseFormElement(formContainer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -758,6 +783,51 @@ public class formSwitch<T> {
 	 * @generated
 	 */
 	public T caseTextField(TextField object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Workflow Form Collection</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Workflow Form Collection</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseWorkflowFormCollection(WorkflowFormCollection object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Form Workflow</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Form Workflow</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFormWorkflow(FormWorkflow object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Form Container</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Form Container</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFormContainer(FormContainer object) {
 		return null;
 	}
 

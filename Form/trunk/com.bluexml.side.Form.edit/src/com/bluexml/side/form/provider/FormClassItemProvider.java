@@ -31,7 +31,7 @@ import com.bluexml.side.form.formPackage;
  * @generated
  */
 public class FormClassItemProvider
-	extends FormGroupItemProvider
+	extends FormContainerItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -187,4 +187,5 @@ public class FormClassItemProvider
 		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
+	
 }

@@ -11,6 +11,7 @@ import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
 
 import com.bluexml.side.common.provider.CommonEditPlugin;
+import com.bluexml.side.workflow.provider.WorkflowEditPlugin;
 
 /**
  * This is the central singleton for the Forms edit plugin.
@@ -45,6 +46,7 @@ public final class FormsEditPlugin extends EMFPlugin {
 		  (new ResourceLocator [] {
 		     ClassEditPlugin.INSTANCE,
 		     CommonEditPlugin.INSTANCE,
+		     WorkflowEditPlugin.INSTANCE,
 		   });
 	}
 

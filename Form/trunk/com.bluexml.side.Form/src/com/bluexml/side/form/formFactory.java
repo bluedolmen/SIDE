@@ -261,6 +261,24 @@ public interface formFactory extends EFactory {
 	TextField createTextField();
 
 	/**
+	 * Returns a new object of class '<em>Workflow Form Collection</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Workflow Form Collection</em>'.
+	 * @generated
+	 */
+	WorkflowFormCollection createWorkflowFormCollection();
+
+	/**
+	 * Returns a new object of class '<em>Form Workflow</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Form Workflow</em>'.
+	 * @generated
+	 */
+	FormWorkflow createFormWorkflow();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

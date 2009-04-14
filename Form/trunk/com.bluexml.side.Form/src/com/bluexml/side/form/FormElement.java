@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.form;
 
+import com.bluexml.side.common.ModelElement;
 import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.clazz.ClassModelElement;
@@ -121,12 +122,12 @@ public interface FormElement extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ref</em>' reference.
-	 * @see #setRef(ClassModelElement)
+	 * @see #setRef(ModelElement)
 	 * @see com.bluexml.side.form.formPackage#getFormElement_Ref()
 	 * @model
 	 * @generated
 	 */
-	ClassModelElement getRef();
+	ModelElement getRef();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.form.FormElement#getRef <em>Ref</em>}' reference.
@@ -136,7 +137,7 @@ public interface FormElement extends EObject {
 	 * @see #getRef()
 	 * @generated
 	 */
-	void setRef(ClassModelElement value);
+	void setRef(ModelElement value);
 
 	/**
 	 * Returns the value of the '<em><b>Hidden</b></em>' attribute.

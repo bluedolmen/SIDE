@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.ocl.ecore.OCL;
 
 import com.bluexml.side.form.Form;
+import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.formPackage;
 
@@ -42,7 +43,7 @@ public class FormImpl extends EObjectImpl implements Form {
 	 * @generated
 	 * @ordered
 	 */
-	protected FormClass root;
+	protected FormContainer root;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -92,7 +93,7 @@ public class FormImpl extends EObjectImpl implements Form {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FormClass getRoot() {
+	public FormContainer getRoot() {
 		return root;
 	}
 
@@ -101,8 +102,8 @@ public class FormImpl extends EObjectImpl implements Form {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetRoot(FormClass newRoot, NotificationChain msgs) {
-		FormClass oldRoot = root;
+	public NotificationChain basicSetRoot(FormContainer newRoot, NotificationChain msgs) {
+		FormContainer oldRoot = root;
 		root = newRoot;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, formPackage.FORM__ROOT, oldRoot, newRoot);
@@ -116,7 +117,7 @@ public class FormImpl extends EObjectImpl implements Form {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRoot(FormClass newRoot) {
+	public void setRoot(FormContainer newRoot) {
 		if (newRoot != root) {
 			NotificationChain msgs = null;
 			if (root != null)
@@ -190,7 +191,7 @@ public class FormImpl extends EObjectImpl implements Form {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case formPackage.FORM__ROOT:
-				setRoot((FormClass)newValue);
+				setRoot((FormContainer)newValue);
 				return;
 			case formPackage.FORM__NAME:
 				setName((String)newValue);
@@ -208,7 +209,7 @@ public class FormImpl extends EObjectImpl implements Form {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case formPackage.FORM__ROOT:
-				setRoot((FormClass)null);
+				setRoot((FormContainer)null);
 				return;
 			case formPackage.FORM__NAME:
 				setName(NAME_EDEFAULT);

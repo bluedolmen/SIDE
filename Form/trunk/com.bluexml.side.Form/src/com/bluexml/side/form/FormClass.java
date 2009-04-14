@@ -19,5 +19,5 @@ package com.bluexml.side.form;
  * @model
  * @generated
  */
-public interface FormClass extends FormGroup, ClassReference {
+public interface FormClass extends FormContainer, ClassReference {
 } // FormClass

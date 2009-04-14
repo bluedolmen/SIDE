@@ -189,6 +189,18 @@ public class formAdapterFactory extends AdapterFactoryImpl {
 				return createTextFieldAdapter();
 			}
 			@Override
+			public Adapter caseWorkflowFormCollection(WorkflowFormCollection object) {
+				return createWorkflowFormCollectionAdapter();
+			}
+			@Override
+			public Adapter caseFormWorkflow(FormWorkflow object) {
+				return createFormWorkflowAdapter();
+			}
+			@Override
+			public Adapter caseFormContainer(FormContainer object) {
+				return createFormContainerAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -611,6 +623,48 @@ public class formAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTextFieldAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.WorkflowFormCollection <em>Workflow Form Collection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.form.WorkflowFormCollection
+	 * @generated
+	 */
+	public Adapter createWorkflowFormCollectionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.FormWorkflow <em>Form Workflow</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.form.FormWorkflow
+	 * @generated
+	 */
+	public Adapter createFormWorkflowAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.FormContainer <em>Form Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.form.FormContainer
+	 * @generated
+	 */
+	public Adapter createFormContainerAdapter() {
 		return null;
 	}
 

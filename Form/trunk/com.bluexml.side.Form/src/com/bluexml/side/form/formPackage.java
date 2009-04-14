@@ -2296,6 +2296,97 @@ public interface formPackage extends EPackage {
 	int FORM_ASPECT_FEATURE_COUNT = FORM_GROUP_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormContainerImpl <em>Form Container</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.impl.FormContainerImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getFormContainer()
+	 * @generated
+	 */
+	int FORM_CONTAINER = 31;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CONTAINER__LABEL = FORM_GROUP__LABEL;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CONTAINER__ID = FORM_GROUP__ID;
+
+	/**
+	 * The feature id for the '<em><b>Help text</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CONTAINER__HELP_TEXT = FORM_GROUP__HELP_TEXT;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CONTAINER__REF = FORM_GROUP__REF;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CONTAINER__HIDDEN = FORM_GROUP__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CONTAINER__CHILDREN = FORM_GROUP__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Presentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CONTAINER__PRESENTATION = FORM_GROUP__PRESENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CONTAINER__DISABLED = FORM_GROUP__DISABLED;
+
+	/**
+	 * The number of structural features of the '<em>Form Container</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CONTAINER_FEATURE_COUNT = FORM_GROUP_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormClassImpl <em>Form Class</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2312,7 +2403,7 @@ public interface formPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_CLASS__LABEL = FORM_GROUP__LABEL;
+	int FORM_CLASS__LABEL = FORM_CONTAINER__LABEL;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -2321,7 +2412,7 @@ public interface formPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_CLASS__ID = FORM_GROUP__ID;
+	int FORM_CLASS__ID = FORM_CONTAINER__ID;
 
 	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
@@ -2330,7 +2421,7 @@ public interface formPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_CLASS__HELP_TEXT = FORM_GROUP__HELP_TEXT;
+	int FORM_CLASS__HELP_TEXT = FORM_CONTAINER__HELP_TEXT;
 
 	/**
 	 * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2339,7 +2430,7 @@ public interface formPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_CLASS__REF = FORM_GROUP__REF;
+	int FORM_CLASS__REF = FORM_CONTAINER__REF;
 
 	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
@@ -2348,7 +2439,7 @@ public interface formPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_CLASS__HIDDEN = FORM_GROUP__HIDDEN;
+	int FORM_CLASS__HIDDEN = FORM_CONTAINER__HIDDEN;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -2357,7 +2448,7 @@ public interface formPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_CLASS__CHILDREN = FORM_GROUP__CHILDREN;
+	int FORM_CLASS__CHILDREN = FORM_CONTAINER__CHILDREN;
 
 	/**
 	 * The feature id for the '<em><b>Presentation</b></em>' attribute.
@@ -2366,7 +2457,7 @@ public interface formPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_CLASS__PRESENTATION = FORM_GROUP__PRESENTATION;
+	int FORM_CLASS__PRESENTATION = FORM_CONTAINER__PRESENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Disabled</b></em>' containment reference list.
@@ -2375,7 +2466,7 @@ public interface formPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_CLASS__DISABLED = FORM_GROUP__DISABLED;
+	int FORM_CLASS__DISABLED = FORM_CONTAINER__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Real class</b></em>' reference.
@@ -2384,7 +2475,7 @@ public interface formPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_CLASS__REAL_CLASS = FORM_GROUP_FEATURE_COUNT + 0;
+	int FORM_CLASS__REAL_CLASS = FORM_CONTAINER_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Association class</b></em>' reference.
@@ -2393,7 +2484,7 @@ public interface formPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_CLASS__ASSOCIATION_CLASS = FORM_GROUP_FEATURE_COUNT + 1;
+	int FORM_CLASS__ASSOCIATION_CLASS = FORM_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Form Class</em>' class.
@@ -2402,7 +2493,7 @@ public interface formPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_CLASS_FEATURE_COUNT = FORM_GROUP_FEATURE_COUNT + 2;
+	int FORM_CLASS_FEATURE_COUNT = FORM_CONTAINER_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.ReferenceImpl <em>Reference</em>}' class.
@@ -3441,6 +3532,134 @@ public interface formPackage extends EPackage {
 	int TEXT_FIELD_FEATURE_COUNT = CHAR_FIELD_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.WorkflowFormCollectionImpl <em>Workflow Form Collection</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.impl.WorkflowFormCollectionImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getWorkflowFormCollection()
+	 * @generated
+	 */
+	int WORKFLOW_FORM_COLLECTION = 29;
+
+	/**
+	 * The feature id for the '<em><b>Forms</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORKFLOW_FORM_COLLECTION__FORMS = FORM_COLLECTION__FORMS;
+
+	/**
+	 * The feature id for the '<em><b>Linked process</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORKFLOW_FORM_COLLECTION__LINKED_PROCESS = FORM_COLLECTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Workflow Form Collection</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORKFLOW_FORM_COLLECTION_FEATURE_COUNT = FORM_COLLECTION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormWorkflowImpl <em>Form Workflow</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.impl.FormWorkflowImpl
+	 * @see com.bluexml.side.form.impl.formPackageImpl#getFormWorkflow()
+	 * @generated
+	 */
+	int FORM_WORKFLOW = 30;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_WORKFLOW__LABEL = FORM_CONTAINER__LABEL;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_WORKFLOW__ID = FORM_CONTAINER__ID;
+
+	/**
+	 * The feature id for the '<em><b>Help text</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_WORKFLOW__HELP_TEXT = FORM_CONTAINER__HELP_TEXT;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_WORKFLOW__REF = FORM_CONTAINER__REF;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_WORKFLOW__HIDDEN = FORM_CONTAINER__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_WORKFLOW__CHILDREN = FORM_CONTAINER__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Presentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_WORKFLOW__PRESENTATION = FORM_CONTAINER__PRESENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_WORKFLOW__DISABLED = FORM_CONTAINER__DISABLED;
+
+	/**
+	 * The number of structural features of the '<em>Form Workflow</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_WORKFLOW_FEATURE_COUNT = FORM_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.FormGroupPresentationType <em>Form Group Presentation Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3448,7 +3667,7 @@ public interface formPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.formPackageImpl#getFormGroupPresentationType()
 	 * @generated
 	 */
-	int FORM_GROUP_PRESENTATION_TYPE = 29;
+	int FORM_GROUP_PRESENTATION_TYPE = 32;
 
 
 	/**
@@ -3459,7 +3678,7 @@ public interface formPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.formPackageImpl#getTextWidgetType()
 	 * @generated
 	 */
-	int TEXT_WIDGET_TYPE = 30;
+	int TEXT_WIDGET_TYPE = 33;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.ChoiceWidgetType <em>Choice Widget Type</em>}' enum.
@@ -3469,7 +3688,7 @@ public interface formPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.formPackageImpl#getChoiceWidgetType()
 	 * @generated
 	 */
-	int CHOICE_WIDGET_TYPE = 31;
+	int CHOICE_WIDGET_TYPE = 34;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.ReferenceWidgetType <em>Reference Widget Type</em>}' enum.
@@ -3479,7 +3698,7 @@ public interface formPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.formPackageImpl#getReferenceWidgetType()
 	 * @generated
 	 */
-	int REFERENCE_WIDGET_TYPE = 32;
+	int REFERENCE_WIDGET_TYPE = 35;
 
 
 	/**
@@ -4301,6 +4520,47 @@ public interface formPackage extends EPackage {
 	EAttribute getTextField_Widget();
 
 	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.form.WorkflowFormCollection <em>Workflow Form Collection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Workflow Form Collection</em>'.
+	 * @see com.bluexml.side.form.WorkflowFormCollection
+	 * @generated
+	 */
+	EClass getWorkflowFormCollection();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.bluexml.side.form.WorkflowFormCollection#getLinked_process <em>Linked process</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Linked process</em>'.
+	 * @see com.bluexml.side.form.WorkflowFormCollection#getLinked_process()
+	 * @see #getWorkflowFormCollection()
+	 * @generated
+	 */
+	EReference getWorkflowFormCollection_Linked_process();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.form.FormWorkflow <em>Form Workflow</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Form Workflow</em>'.
+	 * @see com.bluexml.side.form.FormWorkflow
+	 * @generated
+	 */
+	EClass getFormWorkflow();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.form.FormContainer <em>Form Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Form Container</em>'.
+	 * @see com.bluexml.side.form.FormContainer
+	 * @generated
+	 */
+	EClass getFormContainer();
+
+	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.form.FormGroupPresentationType <em>Form Group Presentation Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5035,6 +5295,44 @@ public interface formPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TEXT_FIELD__WIDGET = eINSTANCE.getTextField_Widget();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.WorkflowFormCollectionImpl <em>Workflow Form Collection</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.impl.WorkflowFormCollectionImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getWorkflowFormCollection()
+		 * @generated
+		 */
+		EClass WORKFLOW_FORM_COLLECTION = eINSTANCE.getWorkflowFormCollection();
+
+		/**
+		 * The meta object literal for the '<em><b>Linked process</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference WORKFLOW_FORM_COLLECTION__LINKED_PROCESS = eINSTANCE.getWorkflowFormCollection_Linked_process();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormWorkflowImpl <em>Form Workflow</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.impl.FormWorkflowImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getFormWorkflow()
+		 * @generated
+		 */
+		EClass FORM_WORKFLOW = eINSTANCE.getFormWorkflow();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormContainerImpl <em>Form Container</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.impl.FormContainerImpl
+		 * @see com.bluexml.side.form.impl.formPackageImpl#getFormContainer()
+		 * @generated
+		 */
+		EClass FORM_CONTAINER = eINSTANCE.getFormContainer();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.FormGroupPresentationType <em>Form Group Presentation Type</em>}' enum.

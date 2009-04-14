@@ -223,6 +223,12 @@ public class formValidator extends EObjectValidator {
 				return validateActionField((ActionField)value, diagnostics, context);
 			case formPackage.TEXT_FIELD:
 				return validateTextField((TextField)value, diagnostics, context);
+			case formPackage.WORKFLOW_FORM_COLLECTION:
+				return validateWorkflowFormCollection((WorkflowFormCollection)value, diagnostics, context);
+			case formPackage.FORM_WORKFLOW:
+				return validateFormWorkflow((FormWorkflow)value, diagnostics, context);
+			case formPackage.FORM_CONTAINER:
+				return validateFormContainer((FormContainer)value, diagnostics, context);
 			case formPackage.FORM_GROUP_PRESENTATION_TYPE:
 				return validateFormGroupPresentationType((FormGroupPresentationType)value, diagnostics, context);
 			case formPackage.TEXT_WIDGET_TYPE:
@@ -901,6 +907,49 @@ public class formValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(textField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(textField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCharField_MinSuperiorToMax(textField, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateWorkflowFormCollection(WorkflowFormCollection workflowFormCollection, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(workflowFormCollection, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateFormWorkflow(FormWorkflow formWorkflow, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_EveryMultiplicityConforms(formWorkflow, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(formWorkflow, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(formWorkflow, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(formWorkflow, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(formWorkflow, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formWorkflow, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(formWorkflow, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formWorkflow, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateFormContainer(FormContainer formContainer, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_EveryMultiplicityConforms(formContainer, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(formContainer, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(formContainer, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(formContainer, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(formContainer, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formContainer, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(formContainer, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formContainer, diagnostics, context);
 		return result;
 	}
 

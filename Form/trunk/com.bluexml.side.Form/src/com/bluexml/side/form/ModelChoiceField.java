@@ -84,7 +84,7 @@ public interface ModelChoiceField extends Field, ClassReference {
 
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' reference list.
-	 * The list contents are of type {@link com.bluexml.side.form.FormClass}.
+	 * The list contents are of type {@link com.bluexml.side.form.FormContainer}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Target</em>' reference list isn't clear,
@@ -96,11 +96,11 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * @model
 	 * @generated
 	 */
-	EList<FormClass> getTarget();
+	EList<FormContainer> getTarget();
 
 	/**
 	 * Returns the value of the '<em><b>Association form Class</b></em>' reference list.
-	 * The list contents are of type {@link com.bluexml.side.form.FormClass}.
+	 * The list contents are of type {@link com.bluexml.side.form.FormContainer}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Association form Class</em>' reference list isn't clear,
@@ -112,7 +112,7 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * @model
 	 * @generated
 	 */
-	EList<FormClass> getAssociation_formClass();
+	EList<FormContainer> getAssociation_formClass();
 
 	/**
 	 * Returns the value of the '<em><b>Widget</b></em>' attribute.

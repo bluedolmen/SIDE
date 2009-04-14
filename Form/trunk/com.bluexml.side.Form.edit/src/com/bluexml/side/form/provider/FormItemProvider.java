@@ -26,6 +26,8 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.form.Form;
+import com.bluexml.side.form.FormCollection;
+import com.bluexml.side.form.WorkflowFormCollection;
 import com.bluexml.side.form.formFactory;
 import com.bluexml.side.form.formPackage;
 
@@ -177,7 +179,20 @@ public class FormItemProvider
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		
+		if (object instanceof Form) {
+			Form f = (Form) object;
+			if (f.eContainer() instanceof WorkflowFormCollection) {
+				newChildDescriptors.add
+				(createChildParameter
+					(formPackage.Literals.FORM__ROOT,
+					 formFactory.eINSTANCE.createFormWorkflow()));
+			} else if (f.eContainer() instanceof FormCollection) {
+				newChildDescriptors.add
+				(createChildParameter
+					(formPackage.Literals.FORM__ROOT,
+					 formFactory.eINSTANCE.createFormClass()));
+			} 
+		}
 		newChildDescriptors.add
 			(createChildParameter
 				(formPackage.Literals.FORM__ROOT,
@@ -283,10 +298,6 @@ public class FormItemProvider
 				(formPackage.Literals.FORM__ROOT,
 				 KerblueFormsFactory.eINSTANCE.createVirtualField()));
 				 */
-		newChildDescriptors.add
-		(createChildParameter
-			(formPackage.Literals.FORM__ROOT,
-			 formFactory.eINSTANCE.createFormClass()));
 	}
 
 	/**

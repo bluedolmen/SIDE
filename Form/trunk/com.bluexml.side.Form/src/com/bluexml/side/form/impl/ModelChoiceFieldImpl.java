@@ -20,6 +20,7 @@ import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.form.CharField;
 import com.bluexml.side.form.ClassReference;
+import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.ReferenceWidgetType;
@@ -114,7 +115,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<FormClass> target;
+	protected EList<FormContainer> target;
 
 	/**
 	 * The cached value of the '{@link #getAssociation_formClass() <em>Association form Class</em>}' reference list.
@@ -124,7 +125,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<FormClass> association_formClass;
+	protected EList<FormContainer> association_formClass;
 
 	/**
 	 * The default value of the '{@link #getWidget() <em>Widget</em>}' attribute.
@@ -308,9 +309,9 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<FormClass> getTarget() {
+	public EList<FormContainer> getTarget() {
 		if (target == null) {
-			target = new EObjectResolvingEList<FormClass>(FormClass.class, this, formPackage.MODEL_CHOICE_FIELD__TARGET);
+			target = new EObjectResolvingEList<FormContainer>(FormContainer.class, this, formPackage.MODEL_CHOICE_FIELD__TARGET);
 		}
 		return target;
 	}
@@ -320,9 +321,9 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<FormClass> getAssociation_formClass() {
+	public EList<FormContainer> getAssociation_formClass() {
 		if (association_formClass == null) {
-			association_formClass = new EObjectResolvingEList<FormClass>(FormClass.class, this, formPackage.MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS);
+			association_formClass = new EObjectResolvingEList<FormContainer>(FormContainer.class, this, formPackage.MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS);
 		}
 		return association_formClass;
 	}
@@ -422,11 +423,11 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 				return;
 			case formPackage.MODEL_CHOICE_FIELD__TARGET:
 				getTarget().clear();
-				getTarget().addAll((Collection<? extends FormClass>)newValue);
+				getTarget().addAll((Collection<? extends FormContainer>)newValue);
 				return;
 			case formPackage.MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS:
 				getAssociation_formClass().clear();
-				getAssociation_formClass().addAll((Collection<? extends FormClass>)newValue);
+				getAssociation_formClass().addAll((Collection<? extends FormContainer>)newValue);
 				return;
 			case formPackage.MODEL_CHOICE_FIELD__WIDGET:
 				setWidget((ReferenceWidgetType)newValue);

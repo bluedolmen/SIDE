@@ -7,6 +7,7 @@
 package com.bluexml.side.form.impl;
 
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
+import com.bluexml.side.common.ModelElement;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -104,7 +105,7 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 	 * @generated
 	 * @ordered
 	 */
-	protected ClassModelElement ref;
+	protected ModelElement ref;
 
 	/**
 	 * The default value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
@@ -213,10 +214,10 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassModelElement getRef() {
+	public ModelElement getRef() {
 		if (ref != null && ref.eIsProxy()) {
 			InternalEObject oldRef = (InternalEObject)ref;
-			ref = (ClassModelElement)eResolveProxy(oldRef);
+			ref = (ModelElement)eResolveProxy(oldRef);
 			if (ref != oldRef) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, formPackage.FORM_ELEMENT__REF, oldRef, ref));
@@ -230,7 +231,7 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassModelElement basicGetRef() {
+	public ModelElement basicGetRef() {
 		return ref;
 	}
 
@@ -239,8 +240,8 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRef(ClassModelElement newRef) {
-		ClassModelElement oldRef = ref;
+	public void setRef(ModelElement newRef) {
+		ModelElement oldRef = ref;
 		ref = newRef;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.FORM_ELEMENT__REF, oldRef, ref));
@@ -308,7 +309,7 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 				setHelp_text((String)newValue);
 				return;
 			case formPackage.FORM_ELEMENT__REF:
-				setRef((ClassModelElement)newValue);
+				setRef((ModelElement)newValue);
 				return;
 			case formPackage.FORM_ELEMENT__HIDDEN:
 				setHidden(((Boolean)newValue).booleanValue());
@@ -335,7 +336,7 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 				setHelp_text(HELP_TEXT_EDEFAULT);
 				return;
 			case formPackage.FORM_ELEMENT__REF:
-				setRef((ClassModelElement)null);
+				setRef((ModelElement)null);
 				return;
 			case formPackage.FORM_ELEMENT__HIDDEN:
 				setHidden(HIDDEN_EDEFAULT);

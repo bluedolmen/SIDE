@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
@@ -74,15 +75,19 @@ ISelectionChangedListener {
 		}
 		
 		boolean doWork = UIUtils.showConfirmation("Delete pointed Form Class", "Do your want to delete pointed Form Class?");
-
+		
 		if (doWork) {
-			for(FormClass fc : ref.getTarget()) {
-				Command delFcCmd = RemoveCommand.create(domain, fc.eContainer());
-				cc.append(delFcCmd);
+			for(FormContainer fc : ref.getTarget()) {
+				if (fc instanceof FormClass) {
+					Command delFcCmd = RemoveCommand.create(domain, fc.eContainer());
+					cc.append(delFcCmd);
+				}
 			}
-			for(FormClass fc : ref.getAssociation_formClass()) {
-				Command delFcCmd = RemoveCommand.create(domain, fc.eContainer());
-				cc.append(delFcCmd);
+			for(FormContainer fc : ref.getAssociation_formClass()) {
+				if (fc instanceof FormClass) {
+					Command delFcCmd = RemoveCommand.create(domain, fc.eContainer());
+					cc.append(delFcCmd);
+				}
 			}
 		}
 		

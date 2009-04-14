@@ -130,6 +130,7 @@ import com.bluexml.side.form.Field;
 import com.bluexml.side.form.Reference;
 import com.bluexml.side.form.VirtualField;
 import com.bluexml.side.form.provider.formItemProviderAdapterFactory;
+import com.bluexml.side.workflow.provider.WorkflowItemProviderAdapterFactory;
 
 
 /**
@@ -667,6 +668,7 @@ public class formEditor
 		adapterFactory.addAdapterFactory(new formItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ClazzItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new CommonItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new WorkflowItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 
 		// Create the command stack that will notify this editor as commands are executed.

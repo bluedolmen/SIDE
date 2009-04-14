@@ -108,14 +108,10 @@ public class PhoneNumberFieldItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Field)object).getId();
-		if (((Field)object).getLabel() != null && ((Field)object).getLabel().length() > 0) {
-			label = ((Field)object).getLabel();
-		}
-		
+		String label = ((PhoneNumberField)object).getId();
 		return label == null || label.length() == 0 ?
 			getString("_UI_PhoneNumberField_type") :
-			label;
+			getString("_UI_PhoneNumberField_type") + " " + label;
 	}
 
 	/**

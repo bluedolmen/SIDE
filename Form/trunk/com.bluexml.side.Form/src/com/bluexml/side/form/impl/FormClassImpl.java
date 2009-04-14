@@ -33,7 +33,7 @@ import com.bluexml.side.form.formPackage;
  *
  * @generated
  */
-public class FormClassImpl extends FormGroupImpl implements FormClass {
+public class FormClassImpl extends FormContainerImpl implements FormClass {
 	/**
 	 * The cached value of the '{@link #getReal_class() <em>Real class</em>}' reference.
 	 * <!-- begin-user-doc -->
