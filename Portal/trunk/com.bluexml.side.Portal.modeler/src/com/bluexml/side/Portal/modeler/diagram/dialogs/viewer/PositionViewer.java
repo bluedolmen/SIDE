@@ -71,8 +71,8 @@ public class PositionViewer {
         ((Text) layoutEditor.getControl()).setTextLimit(60);  
         layoutEditor.getControl().setEnabled(false);
         editors[0] = layoutEditor; 
-        
-        editors[1] = new DynamicComboBoxCellEditor(table, dataStruct);
+        // TODO : make dynamic combo cell editor for portal
+        //editors[1] = new DynamicComboBoxCellEditor(table, dataStruct);
         
         getNbPortletAsArray();
         editors[2] = new ComboBoxCellEditor(table, nbPortlets, SWT.READ_ONLY);
