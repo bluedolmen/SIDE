@@ -2,7 +2,7 @@
 <feature
       id="com.bluexml.side.Application.feature"
       label="S-IDE Application"
-      version="1.0.0"
+      version="1.0.3"
       provider-name="BLUEXML">
 
    <description url="http://www.example.com/description">
@@ -74,7 +74,7 @@
          id="com.bluexml.side.Application.ui"
          download-size="0"
          install-size="0"
-         version="1.0.0"
+         version="1.0.3"
          unpack="false"/>
 
    <plugin
