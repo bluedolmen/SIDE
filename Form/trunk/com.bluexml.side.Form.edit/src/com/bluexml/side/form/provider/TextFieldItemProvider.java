@@ -23,6 +23,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import com.bluexml.side.form.Field;
 import com.bluexml.side.form.TextField;
 import com.bluexml.side.form.formPackage;
 
@@ -103,14 +104,18 @@ public class TextFieldItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((TextField)object).getId();
+		String label = ((Field)object).getId();
+		if (((Field)object).getLabel() != null && ((Field)object).getLabel().length() > 0) {
+			label = ((Field)object).getLabel();
+		}
+		
 		return label == null || label.length() == 0 ?
 			getString("_UI_TextField_type") :
-			getString("_UI_TextField_type") + " " + label;
+			label;
 	}
 
 	/**

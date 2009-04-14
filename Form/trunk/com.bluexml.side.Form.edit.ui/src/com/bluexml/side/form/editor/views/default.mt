@@ -239,21 +239,32 @@ li.tabs, ul.tabs {
 			<%if (!cast("ActionField")){%>
 				<label for="<%id%>"><%label.encode()%>  :</label>
 			<%}%>
-			<%if (cast("CharField") || cast("RegexField")) {%>
+			
+			<%if (eClass().name.equalsIgnoreCase("CharField") || eClass().name.equalsIgnoreCase("RegexField")) {%>
 				<input type="text" name="<%id%>" id="<%id%>" <%if (current("KerblueForms.CharField").max_length > 0){%>maxlength="<%current("KerblueForms.CharField").max_length%>"<%}%> <%if (!current("KerblueForms.CharField").initial.equalsIgnoreCase("")){%>value="<%current("KerblueForms.CharField").initial.encode()%>"<%}%>>
+			<%}else{%>
+				<%if (cast("EmailField")) {%>
+					<input type="text" name="<%id%>" id="<%id%>" value="@" class="email">
+				<%}%>
+				<%if (cast("URLField") ) {%>
+					<input type="text" name="<%id%>" id="<%id%>" value="http://">
+				<%}%>
+				<%if (cast("PhoneNumberField")) {%>
+					<input type="text" name="<%id%>" id="<%id%>" value="">
+				<%}%>
+				<%if (cast("PasswordField")) {%>
+					<input type="password" name="<%id%>" id="<%id%>">
+				<%}%>
+				<%if (cast("TextField")) {%>
+					<textarea name="<%id%>" id="<%id%>" cols="40" rows="8"></textarea>
+				<%}%>
+				<%if (cast("FileField") || cast("ImageField")) {%>
+					<input type="file" name="<%id%>" id="<%id%>">
+				<%}%>
 			<%}%>
 			<%if (cast("TimeField")) {%>
-				<input type="text" name="<%id%>" id="<%id%>" value=":">
-			<%}%>
-			<%if (cast("EmailField")) {%>
-				<input type="text" name="<%id%>" id="<%id%>" value="@" class="email">
-			<%}%>
-			<%if (cast("URLField")) {%>
-				<input type="text" name="<%id%>" id="<%id%>" value="http://">
-			<%}%>
-			<%if (cast("PhoneNumberField")) {%>
-				<input type="text" name="<%id%>" id="<%id%>" value="">
-			<%}%>
+					<input type="text" name="<%id%>" id="<%id%>" value=":">
+				<%}%>
 			<%if (cast("IntegerField") || cast("DecimalField") || cast("FloatField")) {%>
 				<input type="text" name="<%id%>" id="<%id%>" value="">
 			<%}%>
@@ -278,9 +289,6 @@ li.tabs, ul.tabs {
 											<option>Min</option>
 										</select>
 				<%}%>
-			<%}%>
-			<%if (cast("FileField") || cast("ImageField")) {%>
-				<input type="file" name="<%id%>" id="<%id%>">
 			<%}%>
 			<%if (cast("ActionField")) {%>
 				<input type="button" name="<%id%>" id="<%id%>" value="<%label%>">

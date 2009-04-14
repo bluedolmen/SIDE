@@ -23,6 +23,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import com.bluexml.side.form.Field;
 import com.bluexml.side.form.PhoneNumberField;
 import com.bluexml.side.form.formPackage;
 
@@ -107,10 +108,14 @@ public class PhoneNumberFieldItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((PhoneNumberField)object).getId();
+		String label = ((Field)object).getId();
+		if (((Field)object).getLabel() != null && ((Field)object).getLabel().length() > 0) {
+			label = ((Field)object).getLabel();
+		}
+		
 		return label == null || label.length() == 0 ?
 			getString("_UI_PhoneNumberField_type") :
-			getString("_UI_PhoneNumberField_type") + " " + label;
+			label;
 	}
 
 	/**
