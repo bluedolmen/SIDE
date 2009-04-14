@@ -18,6 +18,7 @@ package com.bluexml.modeler.dialog;
 
 import org.eclipse.jface.viewers.ComboBoxCellEditor;
 import org.eclipse.jface.viewers.ICellEditorListener;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
@@ -26,15 +27,25 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 
+import com.bluexml.side.Class.modeler.diagram.dialogs.ViewDataStructure;
+import com.bluexml.side.Class.modeler.diagram.dialogs.view.ViewAttribute;
+
 public class DynamicComboBoxCellEditor extends ComboBoxCellEditor {
 
 	private Table table;
 
-	public DynamicComboBoxCellEditor(Table table, Object dataStructure) {
+	private CCombo comboBox;
 
+	private ViewDataStructure viewDataStructure;
+
+	// private PositionDataStructure posDataStructure;
+
+	public DynamicComboBoxCellEditor(Table table,
+			ViewDataStructure dataStructure) {
+		super(table, new String[0], SWT.READ_ONLY);
+		this.viewDataStructure = dataStructure;
+		this.table = table;
 	}
-
-	
 
 	@Override
 	public void addListener(ICellEditorListener listener) {
@@ -45,8 +56,8 @@ public class DynamicComboBoxCellEditor extends ComboBoxCellEditor {
 	protected Control createControl(Composite parent) {
 		Control c = super.createControl(parent);
 		if (c instanceof CCombo) {
-			CCombo combo = (CCombo) c;
-			combo.addFocusListener(new FocusAdapter() {
+			comboBox = (CCombo) c;
+			comboBox.addFocusListener(new FocusAdapter() {
 				@Override
 				public void focusGained(FocusEvent e) {
 					super.focusGained(e);
@@ -54,14 +65,18 @@ public class DynamicComboBoxCellEditor extends ComboBoxCellEditor {
 					try {
 						TableItem ti = table.getItem(i);
 						Object o = ti.getData();
-						
+						if (o instanceof ViewAttribute) {
+							ViewAttribute ao = (ViewAttribute) o;
+							setItems(viewDataStructure.getAttributeList(ao));
+							doSetValue(viewDataStructure.findAttributeIndex(ao));
+						}
 					} catch (Exception ex) {
 						setItems(new String[0]);
 					}
 				}
 			});
 		}
-		return c;
+		return comboBox;
 	}
 
 }
