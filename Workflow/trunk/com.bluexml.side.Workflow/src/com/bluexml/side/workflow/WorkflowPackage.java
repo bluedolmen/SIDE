@@ -272,13 +272,22 @@ public interface WorkflowPackage extends EPackage {
 	int PROCESS__ELEMENTS = CommonPackage.PACKAGE_FEATURE_COUNT + 9;
 
 	/**
+	 * The feature id for the '<em><b>Content Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS__CONTENT_TYPE = CommonPackage.PACKAGE_FEATURE_COUNT + 10;
+
+	/**
 	 * The number of structural features of the '<em>Process</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_FEATURE_COUNT = CommonPackage.PACKAGE_FEATURE_COUNT + 10;
+	int PROCESS_FEATURE_COUNT = CommonPackage.PACKAGE_FEATURE_COUNT + 11;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.SwimlaneImpl <em>Swimlane</em>}' class.
@@ -1367,6 +1376,17 @@ public interface WorkflowPackage extends EPackage {
 	EReference getProcess_Elements();
 
 	/**
+	 * Returns the meta object for the reference '{@link com.bluexml.side.workflow.Process#getContentType <em>Content Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Content Type</em>'.
+	 * @see com.bluexml.side.workflow.Process#getContentType()
+	 * @see #getProcess()
+	 * @generated
+	 */
+	EReference getProcess_ContentType();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.Swimlane <em>Swimlane</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2238,6 +2258,14 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROCESS__ELEMENTS = eINSTANCE.getProcess_Elements();
+
+		/**
+		 * The meta object literal for the '<em><b>Content Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROCESS__CONTENT_TYPE = eINSTANCE.getProcess_ContentType();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.SwimlaneImpl <em>Swimlane</em>}' class.

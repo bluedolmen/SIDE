@@ -28,7 +28,8 @@ import com.bluexml.side.clazz.Clazz;
  * </p>
  *
  * @see com.bluexml.side.workflow.WorkflowPackage#getTaskNode()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL TaskMustBePointerByTransition='Transition.allInstances()-> select(t| t.to = self)->size()=1 or self.transition -> notEmpty()\n'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NoTaskWithSameName TaskMustBePointerByTransition'"
  * @generated
  */
 public interface TaskNode extends State {

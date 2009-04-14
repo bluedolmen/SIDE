@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import com.bluexml.side.clazz.ClazzPackage;
@@ -38,6 +39,7 @@ import com.bluexml.side.workflow.Variable;
 import com.bluexml.side.workflow.WorkflowFactory;
 import com.bluexml.side.workflow.WorkflowModelElement;
 import com.bluexml.side.workflow.WorkflowPackage;
+import com.bluexml.side.workflow.util.WorkflowValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -258,6 +260,15 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		// Initialize created meta-data
 		theWorkflowPackage.initializePackageContents();
 
+		// Register package validator
+		EValidator.Registry.INSTANCE.put
+			(theWorkflowPackage, 
+			 new EValidator.Descriptor() {
+				 public EValidator getEValidator() {
+					 return WorkflowValidator.INSTANCE;
+				 }
+			 });
+
 		// Mark meta-data to indicate it can't be changed
 		theWorkflowPackage.freeze();
 
@@ -370,6 +381,15 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 */
 	public EReference getProcess_Elements() {
 		return (EReference)processEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getProcess_ContentType() {
+		return (EReference)processEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -1043,6 +1063,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		createEReference(processEClass, PROCESS__JOIN);
 		createEReference(processEClass, PROCESS__DECISION);
 		createEReference(processEClass, PROCESS__ELEMENTS);
+		createEReference(processEClass, PROCESS__CONTENT_TYPE);
 
 		swimlaneEClass = createEClass(SWIMLANE);
 		createEAttribute(swimlaneEClass, SWIMLANE__NAME);
@@ -1193,6 +1214,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		initEReference(getProcess_Join(), this.getJoin(), null, "join", null, 0, -1, com.bluexml.side.workflow.Process.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProcess_Decision(), this.getDecision(), null, "decision", null, 0, -1, com.bluexml.side.workflow.Process.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProcess_Elements(), this.getWorkflowModelElement(), null, "elements", null, 0, -1, com.bluexml.side.workflow.Process.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProcess_ContentType(), theClazzPackage.getClazz(), null, "contentType", null, 1, 1, com.bluexml.side.workflow.Process.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(swimlaneEClass, Swimlane.class, "Swimlane", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSwimlane_Name(), ecorePackage.getEString(), "name", null, 1, 1, Swimlane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -1311,6 +1333,8 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		// Create annotations
 		// http://www.bluexml.com/OCL
 		createOCLAnnotations();
+		// http://www.eclipse.org/emf/2002/Ecore
+		createEcoreAnnotations();
 	}
 
 	/**
@@ -1322,10 +1346,123 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	protected void createOCLAnnotations() {
 		String source = "http://www.bluexml.com/OCL";		
 		addAnnotation
+		  (processEClass, 
+		   source, 
+		   new String[] {
+			 "PackageNameNull", "not self.name.oclIsUndefined() and self.name <> \'\'"
+		   });			
+		addAnnotation
+		  (swimlaneEClass, 
+		   source, 
+		   new String[] {
+			 "ActorNameMustBeUnique", "Swimlane.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0",
+			 "MustManageAtLeastOneTask", "not self.manage->isEmpty()",
+			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') <> null",
+			 "OnlyOneActorCalledInitiator", "Swimlane.allInstances() -> select(s| s.name =\'initiator\')->size() = 1",
+			 "ActoridOrPooledactorMustBeSetForAllExeptOneActor", "Swimlane.allInstances() -> select(s | s.name <>\'initiator\' and (s.actorid -> isEmpty() or s.actorid=\'\')  and (s.pooledactors  -> isEmpty() or s.pooledactors =\'\'))->size() <=1\n"
+		   });			
+		addAnnotation
 		  (swimlaneEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "body", "self.name = other.name"
+		   });		
+		addAnnotation
+		  (startStateEClass, 
+		   source, 
+		   new String[] {
+			 "OneStartTask", "StartState.allInstances() -> size() = 1"
+		   });			
+		addAnnotation
+		  (endStateEClass, 
+		   source, 
+		   new String[] {
+			 "atLeastOneEndTask", "EndState.allInstances() -> size() = 1"
+		   });			
+		addAnnotation
+		  (taskNodeEClass, 
+		   source, 
+		   new String[] {
+			 "TaskMustBePointerByTransition", "Transition.allInstances()-> select(t| t.to = self)->size()=1 or self.transition -> notEmpty()\n"
+		   });			
+		addAnnotation
+		  (transitionEClass, 
+		   source, 
+		   new String[] {
+			 "NoTransitionWithSameName", "Transition.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0",
+			 "SourceAndTargetMustBeSet", "not self.to.oclIsUndefined() and not self.getContainer().oclIsUndefined()",
+			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') <> null"
+		   });			
+		addAnnotation
+		  (stateEClass, 
+		   source, 
+		   new String[] {
+			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') <> null",
+			 "NoStateWithSameName", "State.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0"
+		   });			
+		addAnnotation
+		  (attributeEClass, 
+		   source, 
+		   new String[] {
+			 "UniqueNameForTaskAttribute", "Attribute.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0"
+		   });	
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEcoreAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore";			
+		addAnnotation
+		  (processEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "PackageNameNull"
+		   });			
+		addAnnotation
+		  (swimlaneEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "ActorNameMustBeUnique MustManageAtLeastOneTask noSpecialCharacters OnlyOneActorCalledInitiator ActoridOrPooledactorMustBeSetForAllExeptOneActor"
+		   });				
+		addAnnotation
+		  (startStateEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "OneStartTask"
+		   });			
+		addAnnotation
+		  (endStateEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "atLeastOneEndTask"
+		   });			
+		addAnnotation
+		  (taskNodeEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "NoTaskWithSameName TaskMustBePointerByTransition"
+		   });			
+		addAnnotation
+		  (transitionEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "NoTransitionWithSameName SourceAndTargetMustBeSet noSpecialCharacters"
+		   });			
+		addAnnotation
+		  (stateEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "NoStateWithSameName noSpecialCharacters"
+		   });			
+		addAnnotation
+		  (attributeEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "UniqueNameForTaskAttribute"
 		   });
 	}
 

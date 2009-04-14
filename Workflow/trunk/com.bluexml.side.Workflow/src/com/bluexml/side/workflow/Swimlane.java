@@ -26,7 +26,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see com.bluexml.side.workflow.WorkflowPackage#getSwimlane()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL ActorNameMustBeUnique='Swimlane.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0' MustManageAtLeastOneTask='not self.manage->isEmpty()' noSpecialCharacters='self.name.regexMatch(\'[\\w]*\') <> null' OnlyOneActorCalledInitiator='Swimlane.allInstances() -> select(s| s.name =\'initiator\')->size() = 1' ActoridOrPooledactorMustBeSetForAllExeptOneActor='Swimlane.allInstances() -> select(s | s.name <>\'initiator\' and (s.actorid -> isEmpty() or s.actorid=\'\')  and (s.pooledactors  -> isEmpty() or s.pooledactors =\'\'))->size() <=1\n'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='ActorNameMustBeUnique MustManageAtLeastOneTask noSpecialCharacters OnlyOneActorCalledInitiator ActoridOrPooledactorMustBeSetForAllExeptOneActor'"
  * @generated
  */
 public interface Swimlane extends EObject {

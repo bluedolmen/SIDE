@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.workflow;
 
+import com.bluexml.side.clazz.Clazz;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -26,11 +27,13 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.bluexml.side.workflow.Process#getJoin <em>Join</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.Process#getDecision <em>Decision</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.Process#getElements <em>Elements</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.Process#getContentType <em>Content Type</em>}</li>
  * </ul>
  * </p>
  *
  * @see com.bluexml.side.workflow.WorkflowPackage#getProcess()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL PackageNameNull='not self.name.oclIsUndefined() and self.name <> \'\''"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='PackageNameNull'"
  * @generated
  */
 public interface Process extends com.bluexml.side.common.Package {
@@ -203,5 +206,31 @@ public interface Process extends com.bluexml.side.common.Package {
 	 * @generated
 	 */
 	EList<WorkflowModelElement> getElements();
+
+	/**
+	 * Returns the value of the '<em><b>Content Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Content Type</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Content Type</em>' reference.
+	 * @see #setContentType(Clazz)
+	 * @see com.bluexml.side.workflow.WorkflowPackage#getProcess_ContentType()
+	 * @model required="true"
+	 * @generated
+	 */
+	Clazz getContentType();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.workflow.Process#getContentType <em>Content Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Content Type</em>' reference.
+	 * @see #getContentType()
+	 * @generated
+	 */
+	void setContentType(Clazz value);
 
 } // Process

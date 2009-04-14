@@ -25,7 +25,8 @@ import com.bluexml.side.clazz.AttributeType;
  * </p>
  *
  * @see com.bluexml.side.workflow.WorkflowPackage#getAttribute()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL UniqueNameForTaskAttribute='Attribute.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='UniqueNameForTaskAttribute'"
  * @generated
  */
 public interface Attribute extends EObject {

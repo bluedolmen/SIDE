@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.ecore.OCL;
 
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
+import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.common.impl.PackageImpl;
 import com.bluexml.side.workflow.Decision;
 import com.bluexml.side.workflow.EndState;
@@ -49,6 +50,7 @@ import com.bluexml.side.workflow.WorkflowPackage;
  *   <li>{@link com.bluexml.side.workflow.impl.ProcessImpl#getJoin <em>Join</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.ProcessImpl#getDecision <em>Decision</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.ProcessImpl#getElements <em>Elements</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.impl.ProcessImpl#getContentType <em>Content Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -154,6 +156,16 @@ public class ProcessImpl extends PackageImpl implements com.bluexml.side.workflo
 	 * @ordered
 	 */
 	protected EList<WorkflowModelElement> elements;
+
+	/**
+	 * The cached value of the '{@link #getContentType() <em>Content Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContentType()
+	 * @generated
+	 * @ordered
+	 */
+	protected Clazz contentType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -330,6 +342,44 @@ public class ProcessImpl extends PackageImpl implements com.bluexml.side.workflo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Clazz getContentType() {
+		if (contentType != null && contentType.eIsProxy()) {
+			InternalEObject oldContentType = (InternalEObject)contentType;
+			contentType = (Clazz)eResolveProxy(oldContentType);
+			if (contentType != oldContentType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, WorkflowPackage.PROCESS__CONTENT_TYPE, oldContentType, contentType));
+			}
+		}
+		return contentType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Clazz basicGetContentType() {
+		return contentType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setContentType(Clazz newContentType) {
+		Clazz oldContentType = contentType;
+		contentType = newContentType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.PROCESS__CONTENT_TYPE, oldContentType, contentType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -385,6 +435,9 @@ public class ProcessImpl extends PackageImpl implements com.bluexml.side.workflo
 				return getDecision();
 			case WorkflowPackage.PROCESS__ELEMENTS:
 				return getElements();
+			case WorkflowPackage.PROCESS__CONTENT_TYPE:
+				if (resolve) return getContentType();
+				return basicGetContentType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -437,6 +490,9 @@ public class ProcessImpl extends PackageImpl implements com.bluexml.side.workflo
 				getElements().clear();
 				getElements().addAll((Collection<? extends WorkflowModelElement>)newValue);
 				return;
+			case WorkflowPackage.PROCESS__CONTENT_TYPE:
+				setContentType((Clazz)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -479,6 +535,9 @@ public class ProcessImpl extends PackageImpl implements com.bluexml.side.workflo
 			case WorkflowPackage.PROCESS__ELEMENTS:
 				getElements().clear();
 				return;
+			case WorkflowPackage.PROCESS__CONTENT_TYPE:
+				setContentType((Clazz)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -511,6 +570,8 @@ public class ProcessImpl extends PackageImpl implements com.bluexml.side.workflo
 				return decision != null && !decision.isEmpty();
 			case WorkflowPackage.PROCESS__ELEMENTS:
 				return elements != null && !elements.isEmpty();
+			case WorkflowPackage.PROCESS__CONTENT_TYPE:
+				return contentType != null;
 		}
 		return super.eIsSet(featureID);
 	}
