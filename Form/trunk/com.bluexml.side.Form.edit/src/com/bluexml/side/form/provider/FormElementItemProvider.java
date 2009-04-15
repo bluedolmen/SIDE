@@ -32,8 +32,8 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.form.common.utils.InternalModification;
 import com.bluexml.side.form.provider.command.DragAndDropFormElementCommand;
-import com.bluexml.side.form.utils.InternalModification;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.FormElement} object.

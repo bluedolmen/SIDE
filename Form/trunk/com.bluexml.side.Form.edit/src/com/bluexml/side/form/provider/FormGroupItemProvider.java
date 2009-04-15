@@ -37,8 +37,8 @@ import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.VirtualField;
 import com.bluexml.side.form.FormPackage;
-import com.bluexml.side.form.utils.FormDiagramUtils;
-import com.bluexml.side.form.utils.InternalModification;
+import com.bluexml.side.form.common.utils.FormDiagramUtils;
+import com.bluexml.side.form.common.utils.InternalModification;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.FormGroup} object.

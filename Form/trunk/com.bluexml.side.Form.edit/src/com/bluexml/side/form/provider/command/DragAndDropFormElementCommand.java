@@ -22,9 +22,9 @@ import com.bluexml.side.form.Reference;
 import com.bluexml.side.form.VirtualField;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormPackage;
-import com.bluexml.side.form.utils.FieldTransformation;
-import com.bluexml.side.form.utils.FormDiagramUtils;
-import com.bluexml.side.form.utils.InternalModification;
+import com.bluexml.side.form.common.utils.FieldTransformation;
+import com.bluexml.side.form.common.utils.FormDiagramUtils;
+import com.bluexml.side.form.common.utils.InternalModification;
 
 public class DragAndDropFormElementCommand extends DragAndDropCommand {
 
