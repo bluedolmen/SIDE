@@ -1,4 +1,4 @@
-package com.bluexml.side.form;
+package com.bluexml.side.form.common;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
@@ -31,6 +31,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.PlatformUI;
 
+import com.bluexml.side.form.Form;
 import com.bluexml.side.form.editor.views.OutlineHTMLView;
 import com.bluexml.side.form.editor.views.service.OutlineViewService;
 

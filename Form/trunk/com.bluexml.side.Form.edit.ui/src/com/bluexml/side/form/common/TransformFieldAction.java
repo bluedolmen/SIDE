@@ -1,4 +1,4 @@
-package com.bluexml.side.form;
+package com.bluexml.side.form.common;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -16,8 +16,12 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
-import com.bluexml.side.form.utils.FieldTransformation;
-import com.bluexml.side.form.utils.InternalModification;
+import com.bluexml.side.form.Field;
+import com.bluexml.side.form.FormFactory;
+import com.bluexml.side.form.FormGroup;
+import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.form.common.utils.FieldTransformation;
+import com.bluexml.side.form.common.utils.InternalModification;
 
 public class TransformFieldAction extends Action implements
 ISelectionChangedListener {

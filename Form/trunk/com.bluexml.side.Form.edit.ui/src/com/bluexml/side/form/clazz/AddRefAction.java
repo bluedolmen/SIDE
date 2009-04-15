@@ -1,4 +1,4 @@
-package com.bluexml.side.form;
+package com.bluexml.side.form.clazz;
 
 import java.util.Iterator;
 import java.util.Random;
@@ -16,7 +16,12 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.form.utils.ClassInitialization;
+import com.bluexml.side.form.Form;
+import com.bluexml.side.form.FormClass;
+import com.bluexml.side.form.FormFactory;
+import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.form.Reference;
+import com.bluexml.side.form.clazz.utils.ClassInitialization;
 
 public class AddRefAction extends Action implements
 ISelectionChangedListener {

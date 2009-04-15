@@ -1,4 +1,4 @@
-package com.bluexml.side.form;
+package com.bluexml.side.form.workflow;
 
 import java.util.Iterator;
 
@@ -11,9 +11,12 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
-import com.bluexml.side.form.utils.ClassInitialization;
+import com.bluexml.side.form.FormClass;
+import com.bluexml.side.form.WorkflowFormCollection;
+import com.bluexml.side.form.clazz.utils.ClassInitialization;
+import com.bluexml.side.form.workflow.utils.WorkflowInitialization;
 
-public class InitializeFormClassAction extends Action implements
+public class InitializeFormWorkflowAction extends Action implements
 		ISelectionChangedListener {
 
 	protected EObject selectedObject;
@@ -45,17 +48,16 @@ public class InitializeFormClassAction extends Action implements
 	@Override
 	public void run() {
 		super.run();
-		doAction((FormClass) selectedObject);
+		doAction((WorkflowFormCollection) selectedObject);
 	}
 
-	@SuppressWarnings("unchecked")
-	private void doAction(FormClass fc) {
-		domain.getCommandStack().execute(ClassInitialization.initializeClass(fc, domain));
+	private void doAction(WorkflowFormCollection fc) {
+		domain.getCommandStack().execute(WorkflowInitialization.initialize(fc, domain));
 	}
 
 	@Override
 	public String getText() {
-		return "Initialize form class";
+		return "Initialize Workflow Forms";
 	}
 
 	public void setActiveWorkbenchPart(IWorkbenchPart workbenchPart) {

@@ -1,4 +1,4 @@
-package com.bluexml.side.form;
+package com.bluexml.side.form.common;
 
 import java.util.Iterator;
 
@@ -12,6 +12,10 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
+
+import com.bluexml.side.form.FormClass;
+import com.bluexml.side.form.FormElement;
+import com.bluexml.side.form.FormPackage;
 
 public class RestoreFormElementAction  extends Action implements
 ISelectionChangedListener {

@@ -3,7 +3,7 @@ package com.bluexml.side.form.editor.views.service;
 import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.form.Field;
-import com.bluexml.side.form.utils.FormDiagramUtils;
+import com.bluexml.side.form.common.utils.FormDiagramUtils;
 
 public class OutlineViewService {
 	

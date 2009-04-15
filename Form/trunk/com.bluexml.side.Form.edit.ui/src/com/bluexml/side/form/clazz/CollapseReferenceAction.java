@@ -1,4 +1,4 @@
-package com.bluexml.side.form;
+package com.bluexml.side.form.clazz;
 
 import java.util.Iterator;
 import java.util.List;
@@ -18,10 +18,18 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
-import com.bluexml.side.form.utils.FieldTransformation;
-import com.bluexml.side.form.utils.FormDiagramUtils;
-import com.bluexml.side.form.utils.InternalModification;
-import com.bluexml.side.form.utils.UIUtils;
+import com.bluexml.side.form.FormClass;
+import com.bluexml.side.form.FormContainer;
+import com.bluexml.side.form.FormFactory;
+import com.bluexml.side.form.FormGroup;
+import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.form.ModelChoiceField;
+import com.bluexml.side.form.Reference;
+import com.bluexml.side.form.VirtualField;
+import com.bluexml.side.form.common.utils.FieldTransformation;
+import com.bluexml.side.form.common.utils.FormDiagramUtils;
+import com.bluexml.side.form.common.utils.InternalModification;
+import com.bluexml.side.form.common.utils.UIUtils;
 
 public class CollapseReferenceAction  extends Action implements
 ISelectionChangedListener {

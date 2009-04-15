@@ -1,4 +1,4 @@
-package com.bluexml.side.form;
+package com.bluexml.side.form.clazz;
 
 import java.util.Iterator;
 
@@ -11,7 +11,10 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
-import com.bluexml.side.form.utils.ClassSynchronizationUtils;
+import com.bluexml.side.form.Form;
+import com.bluexml.side.form.FormClass;
+import com.bluexml.side.form.FormCollection;
+import com.bluexml.side.form.clazz.utils.ClassSynchronizationUtils;
 
 public class SynchonizeWithClassDiagramAction  extends Action implements
 ISelectionChangedListener {

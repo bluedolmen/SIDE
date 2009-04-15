@@ -1,4 +1,4 @@
-package com.bluexml.side.form;
+package com.bluexml.side.form.common;
 
 import java.util.Iterator;
 
@@ -13,6 +13,9 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
+
+import com.bluexml.side.form.Form;
+import com.bluexml.side.form.FormPackage;
 
 
 public class CopyFormAction extends Action implements

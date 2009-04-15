@@ -1,4 +1,4 @@
-package com.bluexml.side.form;
+package com.bluexml.side.form.common;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,6 +15,13 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
+
+import com.bluexml.side.form.Field;
+import com.bluexml.side.form.FormAspect;
+import com.bluexml.side.form.FormElement;
+import com.bluexml.side.form.FormFactory;
+import com.bluexml.side.form.FormGroup;
+import com.bluexml.side.form.FormPackage;
 
 public class GroupAttributeAction extends Action implements
 		ISelectionChangedListener {
