@@ -15,7 +15,9 @@
  * Foundation, Inc., 59 Temple Place, Boston, MA 02111.
  ******************************************************************************/
 package com.bluexml.side.clazz.generator.alfresco.services;
-import com.bluexml.side.clazz.*;
+import com.bluexml.side.clazz.Attribute;
+import com.bluexml.side.clazz.AttributeType;
+
 import fr.obeo.acceleo.gen.template.eval.ENode;
 import fr.obeo.acceleo.gen.template.eval.ENodeCastException;
 

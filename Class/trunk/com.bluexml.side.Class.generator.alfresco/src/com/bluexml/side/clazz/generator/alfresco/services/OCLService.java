@@ -10,6 +10,7 @@ import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.expressions.OCLExpression;
+
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 /**
  * WARN : Not tested yet

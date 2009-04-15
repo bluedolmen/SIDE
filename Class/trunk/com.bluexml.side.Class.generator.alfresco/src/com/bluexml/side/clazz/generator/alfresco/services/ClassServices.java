@@ -186,5 +186,9 @@ public class ClassServices {
 		return resultLine.replaceAll("\\s", "");
 	}
 
+	public static String getQualifiedName(AbstractClass classe) {
+		return classe.getFullName().replace(".", "_");
+	}
+
 	
 }

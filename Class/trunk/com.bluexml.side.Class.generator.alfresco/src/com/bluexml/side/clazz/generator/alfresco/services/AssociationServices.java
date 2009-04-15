@@ -18,9 +18,16 @@ package com.bluexml.side.clazz.generator.alfresco.services;
 
 import java.util.Collection;
 import java.util.HashSet;
-import com.bluexml.side.clazz.*;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+
+import com.bluexml.side.clazz.AbstractClass;
+import com.bluexml.side.clazz.Aspect;
+import com.bluexml.side.clazz.Association;
+import com.bluexml.side.clazz.AssociationType;
+import com.bluexml.side.clazz.ClassModelElement;
+import com.bluexml.side.clazz.Clazz;
 
 
 
