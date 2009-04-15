@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.form.IntegerField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -86,7 +86,7 @@ public class IntegerFieldImpl extends FieldImpl implements IntegerField {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.INTEGER_FIELD;
+		return FormPackage.Literals.INTEGER_FIELD;
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class IntegerFieldImpl extends FieldImpl implements IntegerField {
 		int oldMin_value = min_value;
 		min_value = newMin_value;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.INTEGER_FIELD__MIN_VALUE, oldMin_value, min_value));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.INTEGER_FIELD__MIN_VALUE, oldMin_value, min_value));
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class IntegerFieldImpl extends FieldImpl implements IntegerField {
 		int oldMax_value = max_value;
 		max_value = newMax_value;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.INTEGER_FIELD__MAX_VALUE, oldMax_value, max_value));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.INTEGER_FIELD__MAX_VALUE, oldMax_value, max_value));
 	}
 
 	/**
@@ -139,9 +139,9 @@ public class IntegerFieldImpl extends FieldImpl implements IntegerField {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case formPackage.INTEGER_FIELD__MIN_VALUE:
+			case FormPackage.INTEGER_FIELD__MIN_VALUE:
 				return new Integer(getMin_value());
-			case formPackage.INTEGER_FIELD__MAX_VALUE:
+			case FormPackage.INTEGER_FIELD__MAX_VALUE:
 				return new Integer(getMax_value());
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -155,10 +155,10 @@ public class IntegerFieldImpl extends FieldImpl implements IntegerField {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case formPackage.INTEGER_FIELD__MIN_VALUE:
+			case FormPackage.INTEGER_FIELD__MIN_VALUE:
 				setMin_value(((Integer)newValue).intValue());
 				return;
-			case formPackage.INTEGER_FIELD__MAX_VALUE:
+			case FormPackage.INTEGER_FIELD__MAX_VALUE:
 				setMax_value(((Integer)newValue).intValue());
 				return;
 		}
@@ -173,10 +173,10 @@ public class IntegerFieldImpl extends FieldImpl implements IntegerField {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case formPackage.INTEGER_FIELD__MIN_VALUE:
+			case FormPackage.INTEGER_FIELD__MIN_VALUE:
 				setMin_value(MIN_VALUE_EDEFAULT);
 				return;
-			case formPackage.INTEGER_FIELD__MAX_VALUE:
+			case FormPackage.INTEGER_FIELD__MAX_VALUE:
 				setMax_value(MAX_VALUE_EDEFAULT);
 				return;
 		}
@@ -191,9 +191,9 @@ public class IntegerFieldImpl extends FieldImpl implements IntegerField {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case formPackage.INTEGER_FIELD__MIN_VALUE:
+			case FormPackage.INTEGER_FIELD__MIN_VALUE:
 				return min_value != MIN_VALUE_EDEFAULT;
-			case formPackage.INTEGER_FIELD__MAX_VALUE:
+			case FormPackage.INTEGER_FIELD__MAX_VALUE:
 				return max_value != MAX_VALUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

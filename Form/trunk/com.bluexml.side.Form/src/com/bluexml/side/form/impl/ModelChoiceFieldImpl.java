@@ -24,7 +24,7 @@ import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.ReferenceWidgetType;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -183,7 +183,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.MODEL_CHOICE_FIELD;
+		return FormPackage.Literals.MODEL_CHOICE_FIELD;
 	}
 
 	/**
@@ -197,7 +197,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 			real_class = (Clazz)eResolveProxy(oldReal_class);
 			if (real_class != oldReal_class) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, formPackage.MODEL_CHOICE_FIELD__REAL_CLASS, oldReal_class, real_class));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FormPackage.MODEL_CHOICE_FIELD__REAL_CLASS, oldReal_class, real_class));
 			}
 		}
 		return real_class;
@@ -221,7 +221,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 		Clazz oldReal_class = real_class;
 		real_class = newReal_class;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.MODEL_CHOICE_FIELD__REAL_CLASS, oldReal_class, real_class));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.MODEL_CHOICE_FIELD__REAL_CLASS, oldReal_class, real_class));
 	}
 
 	/**
@@ -235,7 +235,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 			association_class = (Clazz)eResolveProxy(oldAssociation_class);
 			if (association_class != oldAssociation_class) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, formPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS, oldAssociation_class, association_class));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS, oldAssociation_class, association_class));
 			}
 		}
 		return association_class;
@@ -259,7 +259,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 		Clazz oldAssociation_class = association_class;
 		association_class = newAssociation_class;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS, oldAssociation_class, association_class));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS, oldAssociation_class, association_class));
 	}
 
 	/**
@@ -280,7 +280,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 		int oldMin_bound = min_bound;
 		min_bound = newMin_bound;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.MODEL_CHOICE_FIELD__MIN_BOUND, oldMin_bound, min_bound));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.MODEL_CHOICE_FIELD__MIN_BOUND, oldMin_bound, min_bound));
 	}
 
 	/**
@@ -301,7 +301,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 		int oldMax_bound = max_bound;
 		max_bound = newMax_bound;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.MODEL_CHOICE_FIELD__MAX_BOUND, oldMax_bound, max_bound));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.MODEL_CHOICE_FIELD__MAX_BOUND, oldMax_bound, max_bound));
 	}
 
 	/**
@@ -311,7 +311,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 */
 	public EList<FormContainer> getTarget() {
 		if (target == null) {
-			target = new EObjectResolvingEList<FormContainer>(FormContainer.class, this, formPackage.MODEL_CHOICE_FIELD__TARGET);
+			target = new EObjectResolvingEList<FormContainer>(FormContainer.class, this, FormPackage.MODEL_CHOICE_FIELD__TARGET);
 		}
 		return target;
 	}
@@ -323,7 +323,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 */
 	public EList<FormContainer> getAssociation_formClass() {
 		if (association_formClass == null) {
-			association_formClass = new EObjectResolvingEList<FormContainer>(FormContainer.class, this, formPackage.MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS);
+			association_formClass = new EObjectResolvingEList<FormContainer>(FormContainer.class, this, FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS);
 		}
 		return association_formClass;
 	}
@@ -346,7 +346,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 		ReferenceWidgetType oldWidget = widget;
 		widget = newWidget == null ? WIDGET_EDEFAULT : newWidget;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.MODEL_CHOICE_FIELD__WIDGET, oldWidget, widget));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.MODEL_CHOICE_FIELD__WIDGET, oldWidget, widget));
 	}
 
 	/**
@@ -367,7 +367,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 		boolean oldShow_actions = show_actions;
 		show_actions = newShow_actions;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS, oldShow_actions, show_actions));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS, oldShow_actions, show_actions));
 	}
 
 	/**
@@ -378,23 +378,23 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case formPackage.MODEL_CHOICE_FIELD__REAL_CLASS:
+			case FormPackage.MODEL_CHOICE_FIELD__REAL_CLASS:
 				if (resolve) return getReal_class();
 				return basicGetReal_class();
-			case formPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS:
+			case FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS:
 				if (resolve) return getAssociation_class();
 				return basicGetAssociation_class();
-			case formPackage.MODEL_CHOICE_FIELD__MIN_BOUND:
+			case FormPackage.MODEL_CHOICE_FIELD__MIN_BOUND:
 				return new Integer(getMin_bound());
-			case formPackage.MODEL_CHOICE_FIELD__MAX_BOUND:
+			case FormPackage.MODEL_CHOICE_FIELD__MAX_BOUND:
 				return new Integer(getMax_bound());
-			case formPackage.MODEL_CHOICE_FIELD__TARGET:
+			case FormPackage.MODEL_CHOICE_FIELD__TARGET:
 				return getTarget();
-			case formPackage.MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS:
+			case FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS:
 				return getAssociation_formClass();
-			case formPackage.MODEL_CHOICE_FIELD__WIDGET:
+			case FormPackage.MODEL_CHOICE_FIELD__WIDGET:
 				return getWidget();
-			case formPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
+			case FormPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
 				return isShow_actions() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -409,30 +409,30 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case formPackage.MODEL_CHOICE_FIELD__REAL_CLASS:
+			case FormPackage.MODEL_CHOICE_FIELD__REAL_CLASS:
 				setReal_class((Clazz)newValue);
 				return;
-			case formPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS:
+			case FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS:
 				setAssociation_class((Clazz)newValue);
 				return;
-			case formPackage.MODEL_CHOICE_FIELD__MIN_BOUND:
+			case FormPackage.MODEL_CHOICE_FIELD__MIN_BOUND:
 				setMin_bound(((Integer)newValue).intValue());
 				return;
-			case formPackage.MODEL_CHOICE_FIELD__MAX_BOUND:
+			case FormPackage.MODEL_CHOICE_FIELD__MAX_BOUND:
 				setMax_bound(((Integer)newValue).intValue());
 				return;
-			case formPackage.MODEL_CHOICE_FIELD__TARGET:
+			case FormPackage.MODEL_CHOICE_FIELD__TARGET:
 				getTarget().clear();
 				getTarget().addAll((Collection<? extends FormContainer>)newValue);
 				return;
-			case formPackage.MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS:
+			case FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS:
 				getAssociation_formClass().clear();
 				getAssociation_formClass().addAll((Collection<? extends FormContainer>)newValue);
 				return;
-			case formPackage.MODEL_CHOICE_FIELD__WIDGET:
+			case FormPackage.MODEL_CHOICE_FIELD__WIDGET:
 				setWidget((ReferenceWidgetType)newValue);
 				return;
-			case formPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
+			case FormPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
 				setShow_actions(((Boolean)newValue).booleanValue());
 				return;
 		}
@@ -447,28 +447,28 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case formPackage.MODEL_CHOICE_FIELD__REAL_CLASS:
+			case FormPackage.MODEL_CHOICE_FIELD__REAL_CLASS:
 				setReal_class((Clazz)null);
 				return;
-			case formPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS:
+			case FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS:
 				setAssociation_class((Clazz)null);
 				return;
-			case formPackage.MODEL_CHOICE_FIELD__MIN_BOUND:
+			case FormPackage.MODEL_CHOICE_FIELD__MIN_BOUND:
 				setMin_bound(MIN_BOUND_EDEFAULT);
 				return;
-			case formPackage.MODEL_CHOICE_FIELD__MAX_BOUND:
+			case FormPackage.MODEL_CHOICE_FIELD__MAX_BOUND:
 				setMax_bound(MAX_BOUND_EDEFAULT);
 				return;
-			case formPackage.MODEL_CHOICE_FIELD__TARGET:
+			case FormPackage.MODEL_CHOICE_FIELD__TARGET:
 				getTarget().clear();
 				return;
-			case formPackage.MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS:
+			case FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS:
 				getAssociation_formClass().clear();
 				return;
-			case formPackage.MODEL_CHOICE_FIELD__WIDGET:
+			case FormPackage.MODEL_CHOICE_FIELD__WIDGET:
 				setWidget(WIDGET_EDEFAULT);
 				return;
-			case formPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
+			case FormPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
 				setShow_actions(SHOW_ACTIONS_EDEFAULT);
 				return;
 		}
@@ -483,21 +483,21 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case formPackage.MODEL_CHOICE_FIELD__REAL_CLASS:
+			case FormPackage.MODEL_CHOICE_FIELD__REAL_CLASS:
 				return real_class != null;
-			case formPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS:
+			case FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS:
 				return association_class != null;
-			case formPackage.MODEL_CHOICE_FIELD__MIN_BOUND:
+			case FormPackage.MODEL_CHOICE_FIELD__MIN_BOUND:
 				return min_bound != MIN_BOUND_EDEFAULT;
-			case formPackage.MODEL_CHOICE_FIELD__MAX_BOUND:
+			case FormPackage.MODEL_CHOICE_FIELD__MAX_BOUND:
 				return max_bound != MAX_BOUND_EDEFAULT;
-			case formPackage.MODEL_CHOICE_FIELD__TARGET:
+			case FormPackage.MODEL_CHOICE_FIELD__TARGET:
 				return target != null && !target.isEmpty();
-			case formPackage.MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS:
+			case FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS:
 				return association_formClass != null && !association_formClass.isEmpty();
-			case formPackage.MODEL_CHOICE_FIELD__WIDGET:
+			case FormPackage.MODEL_CHOICE_FIELD__WIDGET:
 				return widget != WIDGET_EDEFAULT;
-			case formPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
+			case FormPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
 				return show_actions != SHOW_ACTIONS_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -512,8 +512,8 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ClassReference.class) {
 			switch (derivedFeatureID) {
-				case formPackage.MODEL_CHOICE_FIELD__REAL_CLASS: return formPackage.CLASS_REFERENCE__REAL_CLASS;
-				case formPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS: return formPackage.CLASS_REFERENCE__ASSOCIATION_CLASS;
+				case FormPackage.MODEL_CHOICE_FIELD__REAL_CLASS: return FormPackage.CLASS_REFERENCE__REAL_CLASS;
+				case FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS: return FormPackage.CLASS_REFERENCE__ASSOCIATION_CLASS;
 				default: return -1;
 			}
 		}
@@ -529,8 +529,8 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ClassReference.class) {
 			switch (baseFeatureID) {
-				case formPackage.CLASS_REFERENCE__REAL_CLASS: return formPackage.MODEL_CHOICE_FIELD__REAL_CLASS;
-				case formPackage.CLASS_REFERENCE__ASSOCIATION_CLASS: return formPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS;
+				case FormPackage.CLASS_REFERENCE__REAL_CLASS: return FormPackage.MODEL_CHOICE_FIELD__REAL_CLASS;
+				case FormPackage.CLASS_REFERENCE__ASSOCIATION_CLASS: return FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS;
 				default: return -1;
 			}
 		}

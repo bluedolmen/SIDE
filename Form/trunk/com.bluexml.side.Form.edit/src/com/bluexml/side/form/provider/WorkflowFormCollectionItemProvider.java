@@ -7,7 +7,7 @@
 package com.bluexml.side.form.provider;
 
 
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 import java.util.Collection;
 import java.util.List;
@@ -76,7 +76,7 @@ public class WorkflowFormCollectionItemProvider
 				 getResourceLocator(),
 				 getString("_UI_WorkflowFormCollection_linked_process_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_WorkflowFormCollection_linked_process_feature", "_UI_WorkflowFormCollection_type"),
-				 formPackage.Literals.WORKFLOW_FORM_COLLECTION__LINKED_PROCESS,
+				 FormPackage.Literals.WORKFLOW_FORM_COLLECTION__LINKED_PROCESS,
 				 true,
 				 false,
 				 true,

@@ -55,7 +55,7 @@ ISelectionChangedListener {
 		Form newForm = (Form) EcoreUtil.copy(form);
 		newForm.setName("Copy of " + newForm.getName());
 		((Form) newForm).getRoot().setLabel("Copy of " + ((Form) newForm).getRoot().getLabel());
-		Command addFormCmd = AddCommand.create(domain, form.eContainer(), formPackage.eINSTANCE.getFormCollection_Forms(), newForm);
+		Command addFormCmd = AddCommand.create(domain, form.eContainer(), FormPackage.eINSTANCE.getFormCollection_Forms(), newForm);
 		//Form newForm = (Form) cpyCmd.getResult().iterator().next();
 		domain.getCommandStack().execute(addFormCmd);
 	}

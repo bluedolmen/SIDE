@@ -18,8 +18,8 @@ import com.bluexml.side.form.Form;
 import com.bluexml.side.form.FormAspect;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormElement;
-import com.bluexml.side.form.formFactory;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormFactory;
+import com.bluexml.side.form.FormPackage;
 
 public class ClassInitialization {
 	
@@ -62,7 +62,7 @@ public class ClassInitialization {
 					
 					// Aspects
 					for (Aspect asp : Clazz.getAspects()) {
-						FormAspect fa = formFactory.eINSTANCE.createFormAspect();
+						FormAspect fa = FormFactory.eINSTANCE.createFormAspect();
 						fa.setRef(asp);
 						fa.setId(asp.getName());
 						fa.setLabel(ClassDiagramUtils.getLabel(asp));
@@ -92,7 +92,7 @@ public class ClassInitialization {
 						c.add(field);
 					}
 				}
-				cmd = AddCommand.create(domain, fc, formPackage.eINSTANCE.getFormGroup_Children(), c);
+				cmd = AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormGroup_Children(), c);
 			}
 		} else {
 			UIUtils.showError("No Class defined","No class have been defined. \n"

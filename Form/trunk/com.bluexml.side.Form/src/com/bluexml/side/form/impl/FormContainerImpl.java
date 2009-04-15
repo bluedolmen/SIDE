@@ -9,7 +9,7 @@ package com.bluexml.side.form.impl;
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 
 import com.bluexml.side.form.FormContainer;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -41,7 +41,7 @@ public abstract class FormContainerImpl extends FormGroupImpl implements FormCon
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.FORM_CONTAINER;
+		return FormPackage.Literals.FORM_CONTAINER;
 	}
 
 		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";

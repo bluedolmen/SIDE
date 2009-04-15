@@ -13,7 +13,7 @@ package com.bluexml.side.form;
  * <!-- end-user-doc -->
  *
  *
- * @see com.bluexml.side.form.formPackage#getFormWorkflow()
+ * @see com.bluexml.side.form.FormPackage#getFormWorkflow()
  * @model
  * @generated
  */

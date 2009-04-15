@@ -24,7 +24,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.form.Field;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.Field} object.
@@ -83,7 +83,7 @@ public class FieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Field_mandatory_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Field_mandatory_feature", "_UI_Field_type"),
-				 formPackage.Literals.FIELD__MANDATORY,
+				 FormPackage.Literals.FIELD__MANDATORY,
 				 true,
 				 false,
 				 false,
@@ -105,7 +105,7 @@ public class FieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Field_error_messages_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Field_error_messages_feature", "_UI_Field_type"),
-				 formPackage.Literals.FIELD__ERROR_MESSAGES,
+				 FormPackage.Literals.FIELD__ERROR_MESSAGES,
 				 true,
 				 false,
 				 false,
@@ -127,7 +127,7 @@ public class FieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Field_initial_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Field_initial_feature", "_UI_Field_type"),
-				 formPackage.Literals.FIELD__INITIAL,
+				 FormPackage.Literals.FIELD__INITIAL,
 				 true,
 				 false,
 				 false,
@@ -149,7 +149,7 @@ public class FieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Field_disabled_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Field_disabled_feature", "_UI_Field_type"),
-				 formPackage.Literals.FIELD__DISABLED,
+				 FormPackage.Literals.FIELD__DISABLED,
 				 true,
 				 false,
 				 false,
@@ -171,7 +171,7 @@ public class FieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Field_fieldSize_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Field_fieldSize_feature", "_UI_Field_type"),
-				 formPackage.Literals.FIELD__FIELD_SIZE,
+				 FormPackage.Literals.FIELD__FIELD_SIZE,
 				 true,
 				 false,
 				 false,
@@ -205,11 +205,11 @@ public class FieldItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Field.class)) {
-			case formPackage.FIELD__MANDATORY:
-			case formPackage.FIELD__ERROR_MESSAGES:
-			case formPackage.FIELD__INITIAL:
-			case formPackage.FIELD__DISABLED:
-			case formPackage.FIELD__FIELD_SIZE:
+			case FormPackage.FIELD__MANDATORY:
+			case FormPackage.FIELD__ERROR_MESSAGES:
+			case FormPackage.FIELD__INITIAL:
+			case FormPackage.FIELD__DISABLED:
+			case FormPackage.FIELD__FIELD_SIZE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

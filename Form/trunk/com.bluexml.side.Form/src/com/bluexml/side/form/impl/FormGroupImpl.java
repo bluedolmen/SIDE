@@ -22,7 +22,7 @@ import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormGroupPresentationType;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -96,7 +96,7 @@ public class FormGroupImpl extends FormElementImpl implements FormGroup {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.FORM_GROUP;
+		return FormPackage.Literals.FORM_GROUP;
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class FormGroupImpl extends FormElementImpl implements FormGroup {
 	 */
 	public EList<FormElement> getChildren() {
 		if (children == null) {
-			children = new EObjectContainmentEList<FormElement>(FormElement.class, this, formPackage.FORM_GROUP__CHILDREN);
+			children = new EObjectContainmentEList<FormElement>(FormElement.class, this, FormPackage.FORM_GROUP__CHILDREN);
 		}
 		return children;
 	}
@@ -129,7 +129,7 @@ public class FormGroupImpl extends FormElementImpl implements FormGroup {
 		FormGroupPresentationType oldPresentation = presentation;
 		presentation = newPresentation == null ? PRESENTATION_EDEFAULT : newPresentation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.FORM_GROUP__PRESENTATION, oldPresentation, presentation));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FORM_GROUP__PRESENTATION, oldPresentation, presentation));
 	}
 
 	/**
@@ -139,7 +139,7 @@ public class FormGroupImpl extends FormElementImpl implements FormGroup {
 	 */
 	public EList<FormElement> getDisabled() {
 		if (disabled == null) {
-			disabled = new EObjectContainmentEList<FormElement>(FormElement.class, this, formPackage.FORM_GROUP__DISABLED);
+			disabled = new EObjectContainmentEList<FormElement>(FormElement.class, this, FormPackage.FORM_GROUP__DISABLED);
 		}
 		return disabled;
 	}
@@ -152,9 +152,9 @@ public class FormGroupImpl extends FormElementImpl implements FormGroup {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case formPackage.FORM_GROUP__CHILDREN:
+			case FormPackage.FORM_GROUP__CHILDREN:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
-			case formPackage.FORM_GROUP__DISABLED:
+			case FormPackage.FORM_GROUP__DISABLED:
 				return ((InternalEList<?>)getDisabled()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -168,11 +168,11 @@ public class FormGroupImpl extends FormElementImpl implements FormGroup {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case formPackage.FORM_GROUP__CHILDREN:
+			case FormPackage.FORM_GROUP__CHILDREN:
 				return getChildren();
-			case formPackage.FORM_GROUP__PRESENTATION:
+			case FormPackage.FORM_GROUP__PRESENTATION:
 				return getPresentation();
-			case formPackage.FORM_GROUP__DISABLED:
+			case FormPackage.FORM_GROUP__DISABLED:
 				return getDisabled();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -187,14 +187,14 @@ public class FormGroupImpl extends FormElementImpl implements FormGroup {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case formPackage.FORM_GROUP__CHILDREN:
+			case FormPackage.FORM_GROUP__CHILDREN:
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends FormElement>)newValue);
 				return;
-			case formPackage.FORM_GROUP__PRESENTATION:
+			case FormPackage.FORM_GROUP__PRESENTATION:
 				setPresentation((FormGroupPresentationType)newValue);
 				return;
-			case formPackage.FORM_GROUP__DISABLED:
+			case FormPackage.FORM_GROUP__DISABLED:
 				getDisabled().clear();
 				getDisabled().addAll((Collection<? extends FormElement>)newValue);
 				return;
@@ -210,13 +210,13 @@ public class FormGroupImpl extends FormElementImpl implements FormGroup {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case formPackage.FORM_GROUP__CHILDREN:
+			case FormPackage.FORM_GROUP__CHILDREN:
 				getChildren().clear();
 				return;
-			case formPackage.FORM_GROUP__PRESENTATION:
+			case FormPackage.FORM_GROUP__PRESENTATION:
 				setPresentation(PRESENTATION_EDEFAULT);
 				return;
-			case formPackage.FORM_GROUP__DISABLED:
+			case FormPackage.FORM_GROUP__DISABLED:
 				getDisabled().clear();
 				return;
 		}
@@ -231,11 +231,11 @@ public class FormGroupImpl extends FormElementImpl implements FormGroup {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case formPackage.FORM_GROUP__CHILDREN:
+			case FormPackage.FORM_GROUP__CHILDREN:
 				return children != null && !children.isEmpty();
-			case formPackage.FORM_GROUP__PRESENTATION:
+			case FormPackage.FORM_GROUP__PRESENTATION:
 				return presentation != PRESENTATION_EDEFAULT;
-			case formPackage.FORM_GROUP__DISABLED:
+			case FormPackage.FORM_GROUP__DISABLED:
 				return disabled != null && !disabled.isEmpty();
 		}
 		return super.eIsSet(featureID);

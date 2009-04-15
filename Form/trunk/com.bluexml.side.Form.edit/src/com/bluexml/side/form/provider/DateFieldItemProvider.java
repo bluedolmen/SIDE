@@ -24,7 +24,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.form.DateField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.DateField} object.
@@ -81,7 +81,7 @@ public class DateFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_DateField_input_formats_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_DateField_input_formats_feature", "_UI_DateField_type"),
-				 formPackage.Literals.DATE_FIELD__INPUT_FORMATS,
+				 FormPackage.Literals.DATE_FIELD__INPUT_FORMATS,
 				 true,
 				 false,
 				 false,
@@ -103,7 +103,7 @@ public class DateFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_DateField_min_date_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_DateField_min_date_feature", "_UI_DateField_type"),
-				 formPackage.Literals.DATE_FIELD__MIN_DATE,
+				 FormPackage.Literals.DATE_FIELD__MIN_DATE,
 				 true,
 				 false,
 				 false,
@@ -125,7 +125,7 @@ public class DateFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_DateField_max_date_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_DateField_max_date_feature", "_UI_DateField_type"),
-				 formPackage.Literals.DATE_FIELD__MAX_DATE,
+				 FormPackage.Literals.DATE_FIELD__MAX_DATE,
 				 true,
 				 false,
 				 false,
@@ -170,9 +170,9 @@ public class DateFieldItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(DateField.class)) {
-			case formPackage.DATE_FIELD__INPUT_FORMATS:
-			case formPackage.DATE_FIELD__MIN_DATE:
-			case formPackage.DATE_FIELD__MAX_DATE:
+			case FormPackage.DATE_FIELD__INPUT_FORMATS:
+			case FormPackage.DATE_FIELD__MIN_DATE:
+			case FormPackage.DATE_FIELD__MAX_DATE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

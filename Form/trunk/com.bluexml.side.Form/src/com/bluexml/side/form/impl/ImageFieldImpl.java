@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.form.ImageField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,7 +39,7 @@ public class ImageFieldImpl extends FileFieldImpl implements ImageField {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.IMAGE_FIELD;
+		return FormPackage.Literals.IMAGE_FIELD;
 	}
 
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";

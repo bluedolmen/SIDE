@@ -25,7 +25,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.PhoneNumberField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.PhoneNumberField} object.
@@ -80,7 +80,7 @@ public class PhoneNumberFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_PhoneNumberField_input_formats_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_PhoneNumberField_input_formats_feature", "_UI_PhoneNumberField_type"),
-				 formPackage.Literals.PHONE_NUMBER_FIELD__INPUT_FORMATS,
+				 FormPackage.Literals.PHONE_NUMBER_FIELD__INPUT_FORMATS,
 				 true,
 				 false,
 				 false,
@@ -126,7 +126,7 @@ public class PhoneNumberFieldItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(PhoneNumberField.class)) {
-			case formPackage.PHONE_NUMBER_FIELD__INPUT_FORMATS:
+			case FormPackage.PHONE_NUMBER_FIELD__INPUT_FORMATS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

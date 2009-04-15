@@ -21,7 +21,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 import com.bluexml.side.form.FormAspect;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.FormAspect} object.
@@ -123,8 +123,8 @@ public class FormAspectItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == formPackage.Literals.FORM_GROUP__CHILDREN ||
-			childFeature == formPackage.Literals.FORM_GROUP__DISABLED;
+			childFeature == FormPackage.Literals.FORM_GROUP__CHILDREN ||
+			childFeature == FormPackage.Literals.FORM_GROUP__DISABLED;
 
 		if (qualify) {
 			return getString

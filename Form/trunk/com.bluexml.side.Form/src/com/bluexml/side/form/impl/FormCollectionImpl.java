@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.form.Form;
 import com.bluexml.side.form.FormCollection;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -62,7 +62,7 @@ public class FormCollectionImpl extends EObjectImpl implements FormCollection {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.FORM_COLLECTION;
+		return FormPackage.Literals.FORM_COLLECTION;
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class FormCollectionImpl extends EObjectImpl implements FormCollection {
 	 */
 	public EList<Form> getForms() {
 		if (forms == null) {
-			forms = new EObjectContainmentEList<Form>(Form.class, this, formPackage.FORM_COLLECTION__FORMS);
+			forms = new EObjectContainmentEList<Form>(Form.class, this, FormPackage.FORM_COLLECTION__FORMS);
 		}
 		return forms;
 	}
@@ -85,7 +85,7 @@ public class FormCollectionImpl extends EObjectImpl implements FormCollection {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case formPackage.FORM_COLLECTION__FORMS:
+			case FormPackage.FORM_COLLECTION__FORMS:
 				return ((InternalEList<?>)getForms()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -99,7 +99,7 @@ public class FormCollectionImpl extends EObjectImpl implements FormCollection {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case formPackage.FORM_COLLECTION__FORMS:
+			case FormPackage.FORM_COLLECTION__FORMS:
 				return getForms();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -114,7 +114,7 @@ public class FormCollectionImpl extends EObjectImpl implements FormCollection {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case formPackage.FORM_COLLECTION__FORMS:
+			case FormPackage.FORM_COLLECTION__FORMS:
 				getForms().clear();
 				getForms().addAll((Collection<? extends Form>)newValue);
 				return;
@@ -130,7 +130,7 @@ public class FormCollectionImpl extends EObjectImpl implements FormCollection {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case formPackage.FORM_COLLECTION__FORMS:
+			case FormPackage.FORM_COLLECTION__FORMS:
 				getForms().clear();
 				return;
 		}
@@ -145,7 +145,7 @@ public class FormCollectionImpl extends EObjectImpl implements FormCollection {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case formPackage.FORM_COLLECTION__FORMS:
+			case FormPackage.FORM_COLLECTION__FORMS:
 				return forms != null && !forms.isEmpty();
 		}
 		return super.eIsSet(featureID);

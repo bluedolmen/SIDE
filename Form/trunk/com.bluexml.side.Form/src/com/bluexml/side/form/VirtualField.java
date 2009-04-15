@@ -18,7 +18,7 @@ package com.bluexml.side.form;
  * </ul>
  * </p>
  *
- * @see com.bluexml.side.form.formPackage#getVirtualField()
+ * @see com.bluexml.side.form.FormPackage#getVirtualField()
  * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NoLinkForVirtualField'"
  *        annotation="http://www.bluexml.com/OCL NoLinkForVirtualField='not self.link.oclIsUndefined()'"
  * @generated
@@ -34,7 +34,7 @@ public interface VirtualField extends Field {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Link</em>' reference.
 	 * @see #setLink(Field)
-	 * @see com.bluexml.side.form.formPackage#getVirtualField_Link()
+	 * @see com.bluexml.side.form.FormPackage#getVirtualField_Link()
 	 * @model
 	 * @generated
 	 */

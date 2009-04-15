@@ -64,9 +64,9 @@ ISelectionChangedListener {
 	@SuppressWarnings("unchecked")
 	private void doAction() {
 		if (c != null && ref != null) {
-			Form form =  formFactory.eINSTANCE.createForm();
+			Form form =  FormFactory.eINSTANCE.createForm();
 			
-			FormClass formClass = formFactory.eINSTANCE.createFormClass();
+			FormClass formClass = FormFactory.eINSTANCE.createFormClass();
 			form.setRoot(formClass);
 			
 			formClass.setReal_class(c);
@@ -84,7 +84,7 @@ ISelectionChangedListener {
 			ref.getTarget().add(formClass);
 			// Commands :
 			// Add the Form	
-			Command addFormCmd = AddCommand.create(domain, ref.eContainer().eContainer().eContainer(), formPackage.eINSTANCE.getFormCollection_Forms(), form);
+			Command addFormCmd = AddCommand.create(domain, ref.eContainer().eContainer().eContainer(), FormPackage.eINSTANCE.getFormCollection_Forms(), form);
 			// Add the reference
 			CompoundCommand cc = new CompoundCommand();
 			cc.append(addFormCmd);

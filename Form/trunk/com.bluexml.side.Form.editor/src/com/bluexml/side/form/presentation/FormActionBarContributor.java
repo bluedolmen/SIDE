@@ -63,12 +63,12 @@ import com.bluexml.side.form.TransformFieldAction;
 import com.bluexml.side.form.utils.ClassDiagramUtils;
 import com.bluexml.side.form.utils.FieldTransformation;
 /**
- * This is the action bar contributor for the form model editor.
+ * This is the action bar contributor for the Form model editor.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class formActionBarContributor
+public class FormActionBarContributor
 	extends EditingDomainActionBarContributor
 	implements ISelectionChangedListener {
 	/**
@@ -178,7 +178,7 @@ public class formActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public formActionBarContributor() {
+	public FormActionBarContributor() {
 		super(ADDITIONS_LAST_STYLE);
 		loadResourceAction = new LoadResourceAction();
 		validateAction = new ValidateAction();
@@ -208,7 +208,7 @@ public class formActionBarContributor
 	public void contributeToMenu(IMenuManager menuManager) {
 		super.contributeToMenu(menuManager);
 
-		IMenuManager submenuManager = new MenuManager(FormsEditorPlugin.INSTANCE.getString("_UI_formEditor_menu"), "com.bluexml.side.formMenuID");
+		IMenuManager submenuManager = new MenuManager(FormsEditorPlugin.INSTANCE.getString("_UI_FormEditor_menu"), "com.bluexml.side.formMenuID");
 		menuManager.insertAfter("additions", submenuManager);
 		submenuManager.add(new Separator("settings"));
 		submenuManager.add(new Separator("actions"));

@@ -8,7 +8,7 @@ package com.bluexml.side.form.provider;
 
 
 import com.bluexml.side.form.FormContainer;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 import java.util.Collection;
 import java.util.List;
@@ -113,8 +113,8 @@ public class FormContainerItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == formPackage.Literals.FORM_GROUP__CHILDREN ||
-			childFeature == formPackage.Literals.FORM_GROUP__DISABLED;
+			childFeature == FormPackage.Literals.FORM_GROUP__CHILDREN ||
+			childFeature == FormPackage.Literals.FORM_GROUP__DISABLED;
 
 		if (qualify) {
 			return getString

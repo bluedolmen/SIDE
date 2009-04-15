@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Reference Widget Type</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see com.bluexml.side.form.formPackage#getReferenceWidgetType()
+ * @see com.bluexml.side.form.FormPackage#getReferenceWidgetType()
  * @model
  * @generated
  */

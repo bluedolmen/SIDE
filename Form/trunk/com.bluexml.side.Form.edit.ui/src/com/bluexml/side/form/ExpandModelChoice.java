@@ -71,7 +71,7 @@ ISelectionChangedListener {
 	private void doAction() {
 		if (c != null && mcf != null) {
 			InternalModification.dontMoveToDisabled();
-			Reference ref = formFactory.eINSTANCE.createReference();
+			Reference ref = FormFactory.eINSTANCE.createReference();
 			FieldTransformation.transform(mcf, ref);
 			
 			Form form = createFormForRealClass(c,mcf);
@@ -89,13 +89,13 @@ ISelectionChangedListener {
 			
 			// Add the Form	
 			CompoundCommand cc = new CompoundCommand();
-			Command addFormCmd = AddCommand.create(domain, FormDiagramUtils.getParentFormCollection(mcf), formPackage.eINSTANCE.getFormCollection_Forms(), form);
+			Command addFormCmd = AddCommand.create(domain, FormDiagramUtils.getParentFormCollection(mcf), FormPackage.eINSTANCE.getFormCollection_Forms(), form);
 			cc.append(addFormCmd);
 			
 			// We seek virtualized fields of this mcf to change link to the reference
 			List<VirtualField> listVf = FormDiagramUtils.getVirtualizedFields(mcf);
 			for (VirtualField vf : listVf) {
-				cc.append(SetCommand.create(domain, vf, formPackage.eINSTANCE.getVirtualField_Link(), ref));
+				cc.append(SetCommand.create(domain, vf, FormPackage.eINSTANCE.getVirtualField_Link(), ref));
 			}
 			
 			// Commands :
@@ -105,12 +105,12 @@ ISelectionChangedListener {
 			
 			// Add the form class if needed :
 			if (formAssoClass != null) {
-				Command addFormCmdAssoClass = AddCommand.create(domain, FormDiagramUtils.getParentFormCollection(mcf), formPackage.eINSTANCE.getFormCollection_Forms(), formAssoClass);
+				Command addFormCmdAssoClass = AddCommand.create(domain, FormDiagramUtils.getParentFormCollection(mcf), FormPackage.eINSTANCE.getFormCollection_Forms(), formAssoClass);
 				cc.append(addFormCmdAssoClass);
 				cc.append(ClassInitialization.initializeClass(formClassAssoClass, domain));
 			}
 			// Add the reference
-			Command addRefCmd = AddCommand.create(domain, mcf.eContainer(), formPackage.eINSTANCE.getFormGroup_Children(), ref, ((FormGroup)mcf.eContainer()).getChildren().lastIndexOf(mcf));
+			Command addRefCmd = AddCommand.create(domain, mcf.eContainer(), FormPackage.eINSTANCE.getFormGroup_Children(), ref, ((FormGroup)mcf.eContainer()).getChildren().lastIndexOf(mcf));
 			cc.append(addRefCmd);
 
 			cc.append(ClassInitialization.initializeClass(formClass, domain));
@@ -121,8 +121,8 @@ ISelectionChangedListener {
 	}
 	
 	protected Form createFormForRealClass(Clazz p_class, ModelChoiceField p_mcf) {
-		Form form =  formFactory.eINSTANCE.createForm();
-		FormClass formClass = formFactory.eINSTANCE.createFormClass();
+		Form form =  FormFactory.eINSTANCE.createForm();
+		FormClass formClass = FormFactory.eINSTANCE.createFormClass();
 		form.setRoot(formClass);
 		
 		formClass.setReal_class(p_class);

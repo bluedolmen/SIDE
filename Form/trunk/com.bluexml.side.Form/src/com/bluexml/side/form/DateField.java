@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  * </p>
  *
- * @see com.bluexml.side.form.formPackage#getDateField()
+ * @see com.bluexml.side.form.FormPackage#getDateField()
  * @model
  * @generated
  */
@@ -38,7 +38,7 @@ public interface DateField extends Field {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Input formats</em>' attribute list.
-	 * @see com.bluexml.side.form.formPackage#getDateField_Input_formats()
+	 * @see com.bluexml.side.form.FormPackage#getDateField_Input_formats()
 	 * @model
 	 * @generated
 	 */
@@ -54,7 +54,7 @@ public interface DateField extends Field {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Min date</em>' attribute.
 	 * @see #setMin_date(Date)
-	 * @see com.bluexml.side.form.formPackage#getDateField_Min_date()
+	 * @see com.bluexml.side.form.FormPackage#getDateField_Min_date()
 	 * @model
 	 * @generated
 	 */
@@ -80,7 +80,7 @@ public interface DateField extends Field {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Max date</em>' attribute.
 	 * @see #setMax_date(Date)
-	 * @see com.bluexml.side.form.formPackage#getDateField_Max_date()
+	 * @see com.bluexml.side.form.FormPackage#getDateField_Max_date()
 	 * @model
 	 * @generated
 	 */

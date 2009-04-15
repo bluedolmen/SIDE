@@ -18,7 +18,7 @@ package com.bluexml.side.form;
  * </ul>
  * </p>
  *
- * @see com.bluexml.side.form.formPackage#getPhoneNumberField()
+ * @see com.bluexml.side.form.FormPackage#getPhoneNumberField()
  * @model
  * @generated
  */
@@ -33,7 +33,7 @@ public interface PhoneNumberField extends CharField {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Input formats</em>' attribute.
 	 * @see #setInput_formats(String)
-	 * @see com.bluexml.side.form.formPackage#getPhoneNumberField_Input_formats()
+	 * @see com.bluexml.side.form.FormPackage#getPhoneNumberField_Input_formats()
 	 * @model
 	 * @generated
 	 */

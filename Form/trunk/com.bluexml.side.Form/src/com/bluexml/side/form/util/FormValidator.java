@@ -55,23 +55,23 @@ import com.bluexml.side.form.TextWidgetType;
 import com.bluexml.side.form.TimeField;
 import com.bluexml.side.form.URLField;
 import com.bluexml.side.form.VirtualField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Validator</b> for the model.
  * <!-- end-user-doc -->
- * @see com.bluexml.side.form.formPackage
+ * @see com.bluexml.side.form.FormPackage
  * @generated
  */
-public class formValidator extends EObjectValidator {
+public class FormValidator extends EObjectValidator {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final formValidator INSTANCE = new formValidator();
+	public static final FormValidator INSTANCE = new FormValidator();
 
 	/**
 	 * A constant for the {@link org.eclipse.emf.common.util.Diagnostic#getSource() source} of diagnostic {@link org.eclipse.emf.common.util.Diagnostic#getCode() codes} from this package.
@@ -141,7 +141,7 @@ public class formValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public formValidator() {
+	public FormValidator() {
 		super();
 	}
 
@@ -153,7 +153,7 @@ public class formValidator extends EObjectValidator {
 	 */
 	@Override
 	protected EPackage getEPackage() {
-	  return formPackage.eINSTANCE;
+	  return FormPackage.eINSTANCE;
 	}
 
 	/**
@@ -165,77 +165,77 @@ public class formValidator extends EObjectValidator {
 	@Override
 	protected boolean validate(int classifierID, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		switch (classifierID) {
-			case formPackage.FORM:
+			case FormPackage.FORM:
 				return validateForm((Form)value, diagnostics, context);
-			case formPackage.FORM_ELEMENT:
+			case FormPackage.FORM_ELEMENT:
 				return validateFormElement((FormElement)value, diagnostics, context);
-			case formPackage.FORM_GROUP:
+			case FormPackage.FORM_GROUP:
 				return validateFormGroup((FormGroup)value, diagnostics, context);
-			case formPackage.FIELD:
+			case FormPackage.FIELD:
 				return validateField((Field)value, diagnostics, context);
-			case formPackage.BOOLEAN_FIELD:
+			case FormPackage.BOOLEAN_FIELD:
 				return validateBooleanField((BooleanField)value, diagnostics, context);
-			case formPackage.CHAR_FIELD:
+			case FormPackage.CHAR_FIELD:
 				return validateCharField((CharField)value, diagnostics, context);
-			case formPackage.DATE_FIELD:
+			case FormPackage.DATE_FIELD:
 				return validateDateField((DateField)value, diagnostics, context);
-			case formPackage.DATE_TIME_FIELD:
+			case FormPackage.DATE_TIME_FIELD:
 				return validateDateTimeField((DateTimeField)value, diagnostics, context);
-			case formPackage.DECIMAL_FIELD:
+			case FormPackage.DECIMAL_FIELD:
 				return validateDecimalField((DecimalField)value, diagnostics, context);
-			case formPackage.FLOAT_FIELD:
+			case FormPackage.FLOAT_FIELD:
 				return validateFloatField((FloatField)value, diagnostics, context);
-			case formPackage.INTEGER_FIELD:
+			case FormPackage.INTEGER_FIELD:
 				return validateIntegerField((IntegerField)value, diagnostics, context);
-			case formPackage.MODEL_CHOICE_FIELD:
+			case FormPackage.MODEL_CHOICE_FIELD:
 				return validateModelChoiceField((ModelChoiceField)value, diagnostics, context);
-			case formPackage.EMAIL_FIELD:
+			case FormPackage.EMAIL_FIELD:
 				return validateEmailField((EmailField)value, diagnostics, context);
-			case formPackage.FILE_FIELD:
+			case FormPackage.FILE_FIELD:
 				return validateFileField((FileField)value, diagnostics, context);
-			case formPackage.IMAGE_FIELD:
+			case FormPackage.IMAGE_FIELD:
 				return validateImageField((ImageField)value, diagnostics, context);
-			case formPackage.TIME_FIELD:
+			case FormPackage.TIME_FIELD:
 				return validateTimeField((TimeField)value, diagnostics, context);
-			case formPackage.URL_FIELD:
+			case FormPackage.URL_FIELD:
 				return validateURLField((URLField)value, diagnostics, context);
-			case formPackage.PHONE_NUMBER_FIELD:
+			case FormPackage.PHONE_NUMBER_FIELD:
 				return validatePhoneNumberField((PhoneNumberField)value, diagnostics, context);
-			case formPackage.FORM_ASPECT:
+			case FormPackage.FORM_ASPECT:
 				return validateFormAspect((FormAspect)value, diagnostics, context);
-			case formPackage.FORM_CLASS:
+			case FormPackage.FORM_CLASS:
 				return validateFormClass((FormClass)value, diagnostics, context);
-			case formPackage.REFERENCE:
+			case FormPackage.REFERENCE:
 				return validateReference((Reference)value, diagnostics, context);
-			case formPackage.FORM_COLLECTION:
+			case FormPackage.FORM_COLLECTION:
 				return validateFormCollection((FormCollection)value, diagnostics, context);
-			case formPackage.CHOICE_FIELD:
+			case FormPackage.CHOICE_FIELD:
 				return validateChoiceField((ChoiceField)value, diagnostics, context);
-			case formPackage.REGEX_FIELD:
+			case FormPackage.REGEX_FIELD:
 				return validateRegexField((RegexField)value, diagnostics, context);
-			case formPackage.CLASS_REFERENCE:
+			case FormPackage.CLASS_REFERENCE:
 				return validateClassReference((ClassReference)value, diagnostics, context);
-			case formPackage.PASSWORD_FIELD:
+			case FormPackage.PASSWORD_FIELD:
 				return validatePasswordField((PasswordField)value, diagnostics, context);
-			case formPackage.VIRTUAL_FIELD:
+			case FormPackage.VIRTUAL_FIELD:
 				return validateVirtualField((VirtualField)value, diagnostics, context);
-			case formPackage.ACTION_FIELD:
+			case FormPackage.ACTION_FIELD:
 				return validateActionField((ActionField)value, diagnostics, context);
-			case formPackage.TEXT_FIELD:
+			case FormPackage.TEXT_FIELD:
 				return validateTextField((TextField)value, diagnostics, context);
-			case formPackage.WORKFLOW_FORM_COLLECTION:
+			case FormPackage.WORKFLOW_FORM_COLLECTION:
 				return validateWorkflowFormCollection((WorkflowFormCollection)value, diagnostics, context);
-			case formPackage.FORM_WORKFLOW:
+			case FormPackage.FORM_WORKFLOW:
 				return validateFormWorkflow((FormWorkflow)value, diagnostics, context);
-			case formPackage.FORM_CONTAINER:
+			case FormPackage.FORM_CONTAINER:
 				return validateFormContainer((FormContainer)value, diagnostics, context);
-			case formPackage.FORM_GROUP_PRESENTATION_TYPE:
+			case FormPackage.FORM_GROUP_PRESENTATION_TYPE:
 				return validateFormGroupPresentationType((FormGroupPresentationType)value, diagnostics, context);
-			case formPackage.TEXT_WIDGET_TYPE:
+			case FormPackage.TEXT_WIDGET_TYPE:
 				return validateTextWidgetType((TextWidgetType)value, diagnostics, context);
-			case formPackage.CHOICE_WIDGET_TYPE:
+			case FormPackage.CHOICE_WIDGET_TYPE:
 				return validateChoiceWidgetType((ChoiceWidgetType)value, diagnostics, context);
-			case formPackage.REFERENCE_WIDGET_TYPE:
+			case FormPackage.REFERENCE_WIDGET_TYPE:
 				return validateReferenceWidgetType((ReferenceWidgetType)value, diagnostics, context);
 			default: 
 				return true;
@@ -269,9 +269,9 @@ public class formValidator extends EObjectValidator {
 	public boolean validateForm_validName(Form form, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (form_validNameInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(formPackage.Literals.FORM);
+			helper.setContext(FormPackage.Literals.FORM);
 			
-			EAnnotation ocl = formPackage.Literals.FORM.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			EAnnotation ocl = FormPackage.Literals.FORM.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("validName");
 			
 			try {
@@ -343,7 +343,7 @@ public class formValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the noSpecialCharacters constraint of '<em>Form Element</em>'.
+	 * Validates the noSpecialCharacters constraint of '<em>Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -351,9 +351,9 @@ public class formValidator extends EObjectValidator {
 	public boolean validateFormElement_noSpecialCharacters(FormElement formElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (formElement_noSpecialCharactersInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(formPackage.Literals.FORM_ELEMENT);
+			helper.setContext(FormPackage.Literals.FORM_ELEMENT);
 			
-			EAnnotation ocl = formPackage.Literals.FORM_ELEMENT.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			EAnnotation ocl = FormPackage.Literals.FORM_ELEMENT.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("noSpecialCharacters");
 			
 			try {
@@ -459,9 +459,9 @@ public class formValidator extends EObjectValidator {
 	public boolean validateCharField_MinSuperiorToMax(CharField charField, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (charField_MinSuperiorToMaxInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(formPackage.Literals.CHAR_FIELD);
+			helper.setContext(FormPackage.Literals.CHAR_FIELD);
 			
-			EAnnotation ocl = formPackage.Literals.CHAR_FIELD.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			EAnnotation ocl = FormPackage.Literals.CHAR_FIELD.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("MinSuperiorToMax");
 			
 			try {
@@ -845,9 +845,9 @@ public class formValidator extends EObjectValidator {
 	public boolean validateVirtualField_NoLinkForVirtualField(VirtualField virtualField, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (virtualField_NoLinkForVirtualFieldInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(formPackage.Literals.VIRTUAL_FIELD);
+			helper.setContext(FormPackage.Literals.VIRTUAL_FIELD);
 			
-			EAnnotation ocl = formPackage.Literals.VIRTUAL_FIELD.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			EAnnotation ocl = FormPackage.Literals.VIRTUAL_FIELD.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("NoLinkForVirtualField");
 			
 			try {

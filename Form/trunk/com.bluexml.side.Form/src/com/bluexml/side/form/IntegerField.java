@@ -19,7 +19,7 @@ package com.bluexml.side.form;
  * </ul>
  * </p>
  *
- * @see com.bluexml.side.form.formPackage#getIntegerField()
+ * @see com.bluexml.side.form.FormPackage#getIntegerField()
  * @model
  * @generated
  */
@@ -34,7 +34,7 @@ public interface IntegerField extends Field {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Min value</em>' attribute.
 	 * @see #setMin_value(int)
-	 * @see com.bluexml.side.form.formPackage#getIntegerField_Min_value()
+	 * @see com.bluexml.side.form.FormPackage#getIntegerField_Min_value()
 	 * @model
 	 * @generated
 	 */
@@ -60,7 +60,7 @@ public interface IntegerField extends Field {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Max value</em>' attribute.
 	 * @see #setMax_value(int)
-	 * @see com.bluexml.side.form.formPackage#getIntegerField_Max_value()
+	 * @see com.bluexml.side.form.FormPackage#getIntegerField_Max_value()
 	 * @model
 	 * @generated
 	 */

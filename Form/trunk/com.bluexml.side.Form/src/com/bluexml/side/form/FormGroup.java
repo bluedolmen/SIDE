@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  * </p>
  *
- * @see com.bluexml.side.form.formPackage#getFormGroup()
+ * @see com.bluexml.side.form.FormPackage#getFormGroup()
  * @model
  * @generated
  */
@@ -37,7 +37,7 @@ public interface FormGroup extends FormElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Children</em>' containment reference list.
-	 * @see com.bluexml.side.form.formPackage#getFormGroup_Children()
+	 * @see com.bluexml.side.form.FormPackage#getFormGroup_Children()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -55,7 +55,7 @@ public interface FormGroup extends FormElement {
 	 * @return the value of the '<em>Presentation</em>' attribute.
 	 * @see com.bluexml.side.form.FormGroupPresentationType
 	 * @see #setPresentation(FormGroupPresentationType)
-	 * @see com.bluexml.side.form.formPackage#getFormGroup_Presentation()
+	 * @see com.bluexml.side.form.FormPackage#getFormGroup_Presentation()
 	 * @model
 	 * @generated
 	 */
@@ -82,7 +82,7 @@ public interface FormGroup extends FormElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Disabled</em>' containment reference list.
-	 * @see com.bluexml.side.form.formPackage#getFormGroup_Disabled()
+	 * @see com.bluexml.side.form.FormPackage#getFormGroup_Disabled()
 	 * @model containment="true"
 	 * @generated
 	 */

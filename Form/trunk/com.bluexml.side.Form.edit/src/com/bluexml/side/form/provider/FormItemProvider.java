@@ -28,8 +28,8 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import com.bluexml.side.form.Form;
 import com.bluexml.side.form.FormCollection;
 import com.bluexml.side.form.WorkflowFormCollection;
-import com.bluexml.side.form.formFactory;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormFactory;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.Form} object.
@@ -84,7 +84,7 @@ public class FormItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Form_name_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Form_name_feature", "_UI_Form_type"),
-				 formPackage.Literals.FORM__NAME,
+				 FormPackage.Literals.FORM__NAME,
 				 true,
 				 false,
 				 false,
@@ -105,7 +105,7 @@ public class FormItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(formPackage.Literals.FORM__ROOT);
+			childrenFeatures.add(FormPackage.Literals.FORM__ROOT);
 		}
 		return childrenFeatures;
 	}
@@ -159,10 +159,10 @@ public class FormItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Form.class)) {
-			case formPackage.FORM__NAME:
+			case FormPackage.FORM__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case formPackage.FORM__ROOT:
+			case FormPackage.FORM__ROOT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -184,19 +184,19 @@ public class FormItemProvider
 			if (f.eContainer() instanceof WorkflowFormCollection) {
 				newChildDescriptors.add
 				(createChildParameter
-					(formPackage.Literals.FORM__ROOT,
-					 formFactory.eINSTANCE.createFormWorkflow()));
+					(FormPackage.Literals.FORM__ROOT,
+					 FormFactory.eINSTANCE.createFormWorkflow()));
 			} else if (f.eContainer() instanceof FormCollection) {
 				newChildDescriptors.add
 				(createChildParameter
-					(formPackage.Literals.FORM__ROOT,
-					 formFactory.eINSTANCE.createFormClass()));
+					(FormPackage.Literals.FORM__ROOT,
+					 FormFactory.eINSTANCE.createFormClass()));
 			} 
 		}
 		newChildDescriptors.add
 			(createChildParameter
-				(formPackage.Literals.FORM__ROOT,
-				 formFactory.eINSTANCE.createFormGroup()));
+				(FormPackage.Literals.FORM__ROOT,
+				 FormFactory.eINSTANCE.createFormGroup()));
 		/*
 		newChildDescriptors.add
 			(createChildParameter

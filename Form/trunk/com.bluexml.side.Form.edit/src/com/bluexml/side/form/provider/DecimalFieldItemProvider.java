@@ -24,7 +24,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.form.DecimalField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.DecimalField} object.
@@ -82,7 +82,7 @@ public class DecimalFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_DecimalField_min_value_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_DecimalField_min_value_feature", "_UI_DecimalField_type"),
-				 formPackage.Literals.DECIMAL_FIELD__MIN_VALUE,
+				 FormPackage.Literals.DECIMAL_FIELD__MIN_VALUE,
 				 true,
 				 false,
 				 false,
@@ -104,7 +104,7 @@ public class DecimalFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_DecimalField_max_value_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_DecimalField_max_value_feature", "_UI_DecimalField_type"),
-				 formPackage.Literals.DECIMAL_FIELD__MAX_VALUE,
+				 FormPackage.Literals.DECIMAL_FIELD__MAX_VALUE,
 				 true,
 				 false,
 				 false,
@@ -126,7 +126,7 @@ public class DecimalFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_DecimalField_max_digits_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_DecimalField_max_digits_feature", "_UI_DecimalField_type"),
-				 formPackage.Literals.DECIMAL_FIELD__MAX_DIGITS,
+				 FormPackage.Literals.DECIMAL_FIELD__MAX_DIGITS,
 				 true,
 				 false,
 				 false,
@@ -148,7 +148,7 @@ public class DecimalFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_DecimalField_decimal_places_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_DecimalField_decimal_places_feature", "_UI_DecimalField_type"),
-				 formPackage.Literals.DECIMAL_FIELD__DECIMAL_PLACES,
+				 FormPackage.Literals.DECIMAL_FIELD__DECIMAL_PLACES,
 				 true,
 				 false,
 				 false,
@@ -193,10 +193,10 @@ public class DecimalFieldItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(DecimalField.class)) {
-			case formPackage.DECIMAL_FIELD__MIN_VALUE:
-			case formPackage.DECIMAL_FIELD__MAX_VALUE:
-			case formPackage.DECIMAL_FIELD__MAX_DIGITS:
-			case formPackage.DECIMAL_FIELD__DECIMAL_PLACES:
+			case FormPackage.DECIMAL_FIELD__MIN_VALUE:
+			case FormPackage.DECIMAL_FIELD__MAX_VALUE:
+			case FormPackage.DECIMAL_FIELD__MAX_DIGITS:
+			case FormPackage.DECIMAL_FIELD__DECIMAL_PLACES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

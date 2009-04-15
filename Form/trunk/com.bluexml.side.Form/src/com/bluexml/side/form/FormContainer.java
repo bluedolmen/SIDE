@@ -13,7 +13,7 @@ package com.bluexml.side.form;
  * <!-- end-user-doc -->
  *
  *
- * @see com.bluexml.side.form.formPackage#getFormContainer()
+ * @see com.bluexml.side.form.FormPackage#getFormContainer()
  * @model abstract="true"
  * @generated
  */

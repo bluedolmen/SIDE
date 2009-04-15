@@ -18,7 +18,7 @@ import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.form.Form;
 import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormClass;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -85,7 +85,7 @@ public class FormImpl extends EObjectImpl implements Form {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.FORM;
+		return FormPackage.Literals.FORM;
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class FormImpl extends EObjectImpl implements Form {
 		FormContainer oldRoot = root;
 		root = newRoot;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, formPackage.FORM__ROOT, oldRoot, newRoot);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FormPackage.FORM__ROOT, oldRoot, newRoot);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -121,14 +121,14 @@ public class FormImpl extends EObjectImpl implements Form {
 		if (newRoot != root) {
 			NotificationChain msgs = null;
 			if (root != null)
-				msgs = ((InternalEObject)root).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - formPackage.FORM__ROOT, null, msgs);
+				msgs = ((InternalEObject)root).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FormPackage.FORM__ROOT, null, msgs);
 			if (newRoot != null)
-				msgs = ((InternalEObject)newRoot).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - formPackage.FORM__ROOT, null, msgs);
+				msgs = ((InternalEObject)newRoot).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FormPackage.FORM__ROOT, null, msgs);
 			msgs = basicSetRoot(newRoot, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.FORM__ROOT, newRoot, newRoot));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FORM__ROOT, newRoot, newRoot));
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class FormImpl extends EObjectImpl implements Form {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.FORM__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FORM__NAME, oldName, name));
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class FormImpl extends EObjectImpl implements Form {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case formPackage.FORM__ROOT:
+			case FormPackage.FORM__ROOT:
 				return basicSetRoot(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -174,9 +174,9 @@ public class FormImpl extends EObjectImpl implements Form {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case formPackage.FORM__ROOT:
+			case FormPackage.FORM__ROOT:
 				return getRoot();
-			case formPackage.FORM__NAME:
+			case FormPackage.FORM__NAME:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -190,10 +190,10 @@ public class FormImpl extends EObjectImpl implements Form {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case formPackage.FORM__ROOT:
+			case FormPackage.FORM__ROOT:
 				setRoot((FormContainer)newValue);
 				return;
-			case formPackage.FORM__NAME:
+			case FormPackage.FORM__NAME:
 				setName((String)newValue);
 				return;
 		}
@@ -208,10 +208,10 @@ public class FormImpl extends EObjectImpl implements Form {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case formPackage.FORM__ROOT:
+			case FormPackage.FORM__ROOT:
 				setRoot((FormContainer)null);
 				return;
-			case formPackage.FORM__NAME:
+			case FormPackage.FORM__NAME:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -226,9 +226,9 @@ public class FormImpl extends EObjectImpl implements Form {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case formPackage.FORM__ROOT:
+			case FormPackage.FORM__ROOT:
 				return root != null;
-			case formPackage.FORM__NAME:
+			case FormPackage.FORM__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);

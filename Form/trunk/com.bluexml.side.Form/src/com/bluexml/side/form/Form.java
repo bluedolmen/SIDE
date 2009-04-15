@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  * </p>
  *
- * @see com.bluexml.side.form.formPackage#getForm()
+ * @see com.bluexml.side.form.FormPackage#getForm()
  * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='validName noSpecialCharacters'"
  *        annotation="http://www.bluexml.com/OCL validName='not self.name.oclIsUndefined() and self.name <> \'\''"
  * @generated
@@ -37,7 +37,7 @@ public interface Form extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Root</em>' containment reference.
 	 * @see #setRoot(FormContainer)
-	 * @see com.bluexml.side.form.formPackage#getForm_Root()
+	 * @see com.bluexml.side.form.FormPackage#getForm_Root()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
@@ -63,7 +63,7 @@ public interface Form extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see com.bluexml.side.form.formPackage#getForm_Name()
+	 * @see com.bluexml.side.form.FormPackage#getForm_Name()
 	 * @model
 	 * @generated
 	 */

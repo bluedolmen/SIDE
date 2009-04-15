@@ -24,8 +24,8 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.form.FormCollection;
-import com.bluexml.side.form.formFactory;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormFactory;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.FormCollection} object.
@@ -78,7 +78,7 @@ public class FormCollectionItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(formPackage.Literals.FORM_COLLECTION__FORMS);
+			childrenFeatures.add(FormPackage.Literals.FORM_COLLECTION__FORMS);
 		}
 		return childrenFeatures;
 	}
@@ -130,7 +130,7 @@ public class FormCollectionItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(FormCollection.class)) {
-			case formPackage.FORM_COLLECTION__FORMS:
+			case FormPackage.FORM_COLLECTION__FORMS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -150,8 +150,8 @@ public class FormCollectionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(formPackage.Literals.FORM_COLLECTION__FORMS,
-				 formFactory.eINSTANCE.createForm()));
+				(FormPackage.Literals.FORM_COLLECTION__FORMS,
+				 FormFactory.eINSTANCE.createForm()));
 	}
 
 	/**

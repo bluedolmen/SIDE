@@ -24,7 +24,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.form.URLField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.URLField} object.
@@ -79,7 +79,7 @@ public class URLFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_URLField_verify_exists_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_URLField_verify_exists_feature", "_UI_URLField_type"),
-				 formPackage.Literals.URL_FIELD__VERIFY_EXISTS,
+				 FormPackage.Literals.URL_FIELD__VERIFY_EXISTS,
 				 true,
 				 false,
 				 false,
@@ -124,7 +124,7 @@ public class URLFieldItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(URLField.class)) {
-			case formPackage.URL_FIELD__VERIFY_EXISTS:
+			case FormPackage.URL_FIELD__VERIFY_EXISTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

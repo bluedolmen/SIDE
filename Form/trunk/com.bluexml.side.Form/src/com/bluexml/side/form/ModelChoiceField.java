@@ -25,7 +25,7 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  * </p>
  *
- * @see com.bluexml.side.form.formPackage#getModelChoiceField()
+ * @see com.bluexml.side.form.FormPackage#getModelChoiceField()
  * @model
  * @generated
  */
@@ -40,7 +40,7 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Min bound</em>' attribute.
 	 * @see #setMin_bound(int)
-	 * @see com.bluexml.side.form.formPackage#getModelChoiceField_Min_bound()
+	 * @see com.bluexml.side.form.FormPackage#getModelChoiceField_Min_bound()
 	 * @model
 	 * @generated
 	 */
@@ -66,7 +66,7 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Max bound</em>' attribute.
 	 * @see #setMax_bound(int)
-	 * @see com.bluexml.side.form.formPackage#getModelChoiceField_Max_bound()
+	 * @see com.bluexml.side.form.FormPackage#getModelChoiceField_Max_bound()
 	 * @model
 	 * @generated
 	 */
@@ -92,7 +92,7 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Target</em>' reference list.
-	 * @see com.bluexml.side.form.formPackage#getModelChoiceField_Target()
+	 * @see com.bluexml.side.form.FormPackage#getModelChoiceField_Target()
 	 * @model
 	 * @generated
 	 */
@@ -108,7 +108,7 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Association form Class</em>' reference list.
-	 * @see com.bluexml.side.form.formPackage#getModelChoiceField_Association_formClass()
+	 * @see com.bluexml.side.form.FormPackage#getModelChoiceField_Association_formClass()
 	 * @model
 	 * @generated
 	 */
@@ -126,7 +126,7 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * @return the value of the '<em>Widget</em>' attribute.
 	 * @see com.bluexml.side.form.ReferenceWidgetType
 	 * @see #setWidget(ReferenceWidgetType)
-	 * @see com.bluexml.side.form.formPackage#getModelChoiceField_Widget()
+	 * @see com.bluexml.side.form.FormPackage#getModelChoiceField_Widget()
 	 * @model
 	 * @generated
 	 */
@@ -154,7 +154,7 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Show actions</em>' attribute.
 	 * @see #setShow_actions(boolean)
-	 * @see com.bluexml.side.form.formPackage#getModelChoiceField_Show_actions()
+	 * @see com.bluexml.side.form.FormPackage#getModelChoiceField_Show_actions()
 	 * @model default="true"
 	 * @generated
 	 */

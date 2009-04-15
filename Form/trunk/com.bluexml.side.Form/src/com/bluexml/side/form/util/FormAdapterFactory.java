@@ -21,17 +21,17 @@ import org.eclipse.emf.ecore.EObject;
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see com.bluexml.side.form.formPackage
+ * @see com.bluexml.side.form.FormPackage
  * @generated
  */
-public class formAdapterFactory extends AdapterFactoryImpl {
+public class FormAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static formPackage modelPackage;
+	protected static FormPackage modelPackage;
 
 	/**
 	 * Creates an instance of the adapter factory.
@@ -39,9 +39,9 @@ public class formAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public formAdapterFactory() {
+	public FormAdapterFactory() {
 		if (modelPackage == null) {
-			modelPackage = formPackage.eINSTANCE;
+			modelPackage = FormPackage.eINSTANCE;
 		}
 	}
 
@@ -70,8 +70,8 @@ public class formAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected formSwitch<Adapter> modelSwitch =
-		new formSwitch<Adapter>() {
+	protected FormSwitch<Adapter> modelSwitch =
+		new FormSwitch<Adapter>() {
 			@Override
 			public Adapter caseForm(Form object) {
 				return createFormAdapter();
@@ -235,7 +235,7 @@ public class formAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.FormElement <em>Form Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.FormElement <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -249,7 +249,7 @@ public class formAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.FormGroup <em>Form Group</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.FormGroup <em>Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -473,7 +473,7 @@ public class formAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.FormAspect <em>Form Aspect</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.FormAspect <em>Aspect</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -487,7 +487,7 @@ public class formAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.FormClass <em>Form Class</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.FormClass <em>Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -515,7 +515,7 @@ public class formAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.FormCollection <em>Form Collection</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.FormCollection <em>Collection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -641,7 +641,7 @@ public class formAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.FormWorkflow <em>Form Workflow</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.FormWorkflow <em>Workflow</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -655,7 +655,7 @@ public class formAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.FormContainer <em>Form Container</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.FormContainer <em>Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.

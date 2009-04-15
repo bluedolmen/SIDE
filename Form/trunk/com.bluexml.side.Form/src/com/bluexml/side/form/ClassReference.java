@@ -25,7 +25,7 @@ import com.bluexml.side.clazz.Clazz;
  * </ul>
  * </p>
  *
- * @see com.bluexml.side.form.formPackage#getClassReference()
+ * @see com.bluexml.side.form.FormPackage#getClassReference()
  * @model abstract="true"
  * @generated
  */
@@ -40,7 +40,7 @@ public interface ClassReference extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Real class</em>' reference.
 	 * @see #setReal_class(Clazz)
-	 * @see com.bluexml.side.form.formPackage#getClassReference_Real_class()
+	 * @see com.bluexml.side.form.FormPackage#getClassReference_Real_class()
 	 * @model
 	 * @generated
 	 */
@@ -66,7 +66,7 @@ public interface ClassReference extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Association class</em>' reference.
 	 * @see #setAssociation_class(Clazz)
-	 * @see com.bluexml.side.form.formPackage#getClassReference_Association_class()
+	 * @see com.bluexml.side.form.FormPackage#getClassReference_Association_class()
 	 * @model
 	 * @generated
 	 */

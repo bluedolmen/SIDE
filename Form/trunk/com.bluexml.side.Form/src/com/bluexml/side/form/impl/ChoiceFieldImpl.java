@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.form.ChoiceField;
 import com.bluexml.side.form.ChoiceWidgetType;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -171,7 +171,7 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.CHOICE_FIELD;
+		return FormPackage.Literals.CHOICE_FIELD;
 	}
 
 	/**
@@ -192,7 +192,7 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 		int oldMin_bound = min_bound;
 		min_bound = newMin_bound;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.CHOICE_FIELD__MIN_BOUND, oldMin_bound, min_bound));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.CHOICE_FIELD__MIN_BOUND, oldMin_bound, min_bound));
 	}
 
 	/**
@@ -213,7 +213,7 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 		int oldMax_bound = max_bound;
 		max_bound = newMax_bound;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.CHOICE_FIELD__MAX_BOUND, oldMax_bound, max_bound));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.CHOICE_FIELD__MAX_BOUND, oldMax_bound, max_bound));
 	}
 
 	/**
@@ -234,7 +234,7 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 		ChoiceWidgetType oldWidget = widget;
 		widget = newWidget == null ? WIDGET_EDEFAULT : newWidget;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.CHOICE_FIELD__WIDGET, oldWidget, widget));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.CHOICE_FIELD__WIDGET, oldWidget, widget));
 	}
 
 	/**
@@ -255,7 +255,7 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 		boolean oldMultiple = multiple;
 		multiple = newMultiple;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.CHOICE_FIELD__MULTIPLE, oldMultiple, multiple));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.CHOICE_FIELD__MULTIPLE, oldMultiple, multiple));
 	}
 
 	/**
@@ -276,7 +276,7 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 		String oldFilterParent = filterParent;
 		filterParent = newFilterParent;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.CHOICE_FIELD__FILTER_PARENT, oldFilterParent, filterParent));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.CHOICE_FIELD__FILTER_PARENT, oldFilterParent, filterParent));
 	}
 
 	/**
@@ -297,7 +297,7 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 		String oldFilterData = filterData;
 		filterData = newFilterData;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.CHOICE_FIELD__FILTER_DATA, oldFilterData, filterData));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.CHOICE_FIELD__FILTER_DATA, oldFilterData, filterData));
 	}
 
 	/**
@@ -308,17 +308,17 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case formPackage.CHOICE_FIELD__MIN_BOUND:
+			case FormPackage.CHOICE_FIELD__MIN_BOUND:
 				return new Integer(getMin_bound());
-			case formPackage.CHOICE_FIELD__MAX_BOUND:
+			case FormPackage.CHOICE_FIELD__MAX_BOUND:
 				return new Integer(getMax_bound());
-			case formPackage.CHOICE_FIELD__WIDGET:
+			case FormPackage.CHOICE_FIELD__WIDGET:
 				return getWidget();
-			case formPackage.CHOICE_FIELD__MULTIPLE:
+			case FormPackage.CHOICE_FIELD__MULTIPLE:
 				return isMultiple() ? Boolean.TRUE : Boolean.FALSE;
-			case formPackage.CHOICE_FIELD__FILTER_PARENT:
+			case FormPackage.CHOICE_FIELD__FILTER_PARENT:
 				return getFilterParent();
-			case formPackage.CHOICE_FIELD__FILTER_DATA:
+			case FormPackage.CHOICE_FIELD__FILTER_DATA:
 				return getFilterData();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -333,22 +333,22 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case formPackage.CHOICE_FIELD__MIN_BOUND:
+			case FormPackage.CHOICE_FIELD__MIN_BOUND:
 				setMin_bound(((Integer)newValue).intValue());
 				return;
-			case formPackage.CHOICE_FIELD__MAX_BOUND:
+			case FormPackage.CHOICE_FIELD__MAX_BOUND:
 				setMax_bound(((Integer)newValue).intValue());
 				return;
-			case formPackage.CHOICE_FIELD__WIDGET:
+			case FormPackage.CHOICE_FIELD__WIDGET:
 				setWidget((ChoiceWidgetType)newValue);
 				return;
-			case formPackage.CHOICE_FIELD__MULTIPLE:
+			case FormPackage.CHOICE_FIELD__MULTIPLE:
 				setMultiple(((Boolean)newValue).booleanValue());
 				return;
-			case formPackage.CHOICE_FIELD__FILTER_PARENT:
+			case FormPackage.CHOICE_FIELD__FILTER_PARENT:
 				setFilterParent((String)newValue);
 				return;
-			case formPackage.CHOICE_FIELD__FILTER_DATA:
+			case FormPackage.CHOICE_FIELD__FILTER_DATA:
 				setFilterData((String)newValue);
 				return;
 		}
@@ -363,22 +363,22 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case formPackage.CHOICE_FIELD__MIN_BOUND:
+			case FormPackage.CHOICE_FIELD__MIN_BOUND:
 				setMin_bound(MIN_BOUND_EDEFAULT);
 				return;
-			case formPackage.CHOICE_FIELD__MAX_BOUND:
+			case FormPackage.CHOICE_FIELD__MAX_BOUND:
 				setMax_bound(MAX_BOUND_EDEFAULT);
 				return;
-			case formPackage.CHOICE_FIELD__WIDGET:
+			case FormPackage.CHOICE_FIELD__WIDGET:
 				setWidget(WIDGET_EDEFAULT);
 				return;
-			case formPackage.CHOICE_FIELD__MULTIPLE:
+			case FormPackage.CHOICE_FIELD__MULTIPLE:
 				setMultiple(MULTIPLE_EDEFAULT);
 				return;
-			case formPackage.CHOICE_FIELD__FILTER_PARENT:
+			case FormPackage.CHOICE_FIELD__FILTER_PARENT:
 				setFilterParent(FILTER_PARENT_EDEFAULT);
 				return;
-			case formPackage.CHOICE_FIELD__FILTER_DATA:
+			case FormPackage.CHOICE_FIELD__FILTER_DATA:
 				setFilterData(FILTER_DATA_EDEFAULT);
 				return;
 		}
@@ -393,17 +393,17 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case formPackage.CHOICE_FIELD__MIN_BOUND:
+			case FormPackage.CHOICE_FIELD__MIN_BOUND:
 				return min_bound != MIN_BOUND_EDEFAULT;
-			case formPackage.CHOICE_FIELD__MAX_BOUND:
+			case FormPackage.CHOICE_FIELD__MAX_BOUND:
 				return max_bound != MAX_BOUND_EDEFAULT;
-			case formPackage.CHOICE_FIELD__WIDGET:
+			case FormPackage.CHOICE_FIELD__WIDGET:
 				return widget != WIDGET_EDEFAULT;
-			case formPackage.CHOICE_FIELD__MULTIPLE:
+			case FormPackage.CHOICE_FIELD__MULTIPLE:
 				return multiple != MULTIPLE_EDEFAULT;
-			case formPackage.CHOICE_FIELD__FILTER_PARENT:
+			case FormPackage.CHOICE_FIELD__FILTER_PARENT:
 				return FILTER_PARENT_EDEFAULT == null ? filterParent != null : !FILTER_PARENT_EDEFAULT.equals(filterParent);
-			case formPackage.CHOICE_FIELD__FILTER_DATA:
+			case FormPackage.CHOICE_FIELD__FILTER_DATA:
 				return FILTER_DATA_EDEFAULT == null ? filterData != null : !FILTER_DATA_EDEFAULT.equals(filterData);
 		}
 		return super.eIsSet(featureID);

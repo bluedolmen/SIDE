@@ -7,6 +7,7 @@
 package com.bluexml.side.form.provider;
 
 
+import com.bluexml.side.form.FormFactory;
 import java.util.Collection;
 import java.util.List;
 
@@ -35,7 +36,7 @@ import com.bluexml.side.form.FormAspect;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.VirtualField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.utils.FormDiagramUtils;
 import com.bluexml.side.form.utils.InternalModification;
 
@@ -92,7 +93,7 @@ public class FormGroupItemProvider
 				 getResourceLocator(),
 				 getString("_UI_FormGroup_presentation_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_FormGroup_presentation_feature", "_UI_FormGroup_type"),
-				 formPackage.Literals.FORM_GROUP__PRESENTATION,
+				 FormPackage.Literals.FORM_GROUP__PRESENTATION,
 				 true,
 				 false,
 				 false,
@@ -114,7 +115,7 @@ public class FormGroupItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(formPackage.Literals.FORM_GROUP__CHILDREN);
+			childrenFeatures.add(FormPackage.Literals.FORM_GROUP__CHILDREN);
 			//childrenFeatures.add(formPackage.Literals.FORM_GROUP__DISABLED);
 		}
 		return childrenFeatures;
@@ -169,11 +170,11 @@ public class FormGroupItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(FormGroup.class)) {
-			case formPackage.FORM_GROUP__PRESENTATION:
+			case FormPackage.FORM_GROUP__PRESENTATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case formPackage.FORM_GROUP__CHILDREN:
-			case formPackage.FORM_GROUP__DISABLED:
+			case FormPackage.FORM_GROUP__CHILDREN:
+			case FormPackage.FORM_GROUP__DISABLED:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -315,8 +316,8 @@ public class FormGroupItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == formPackage.Literals.FORM_GROUP__CHILDREN ||
-			childFeature == formPackage.Literals.FORM_GROUP__DISABLED;
+			childFeature == FormPackage.Literals.FORM_GROUP__CHILDREN ||
+			childFeature == FormPackage.Literals.FORM_GROUP__DISABLED;
 
 		if (qualify) {
 			return getString
@@ -337,13 +338,13 @@ public class FormGroupItemProvider
 						cmd.append(getMoveCommandForFormGroup(domain, owner, feature, (FormGroup)o));
 					} else {
 						FormGroup fg = (FormGroup) EcoreUtil.copy((FormGroup)o);
-						Command createCmd = AddCommand.create(domain, FormDiagramUtils.getParentFormClass((FormElement)owner), formPackage.eINSTANCE.getFormGroup_Disabled(), fg);
+						Command createCmd = AddCommand.create(domain, FormDiagramUtils.getParentFormClass((FormElement)owner), FormPackage.eINSTANCE.getFormGroup_Disabled(), fg);
 						cmd.append(createCmd);
 					}
 				} else if (o instanceof Field & !(o instanceof VirtualField)) {
 					Field f = (Field) o;
 					Field fcpy = (Field) EcoreUtil.copy(f);
-					Command createCmd = AddCommand.create(domain, FormDiagramUtils.getParentFormClass((FormElement)owner), formPackage.eINSTANCE.getFormGroup_Disabled(), fcpy);
+					Command createCmd = AddCommand.create(domain, FormDiagramUtils.getParentFormClass((FormElement)owner), FormPackage.eINSTANCE.getFormGroup_Disabled(), fcpy);
 					cmd.append(createCmd);
 				} else {
 					
@@ -362,7 +363,7 @@ public class FormGroupItemProvider
 			} else if (fe instanceof Field & !(fe instanceof VirtualField)) {
 				Field f = (Field) fe;
 				Field fcpy = (Field) EcoreUtil.copy(f);
-				Command createCmd = AddCommand.create(domain, FormDiagramUtils.getParentFormClass((FormElement)owner), formPackage.eINSTANCE.getFormGroup_Disabled(), fcpy);
+				Command createCmd = AddCommand.create(domain, FormDiagramUtils.getParentFormClass((FormElement)owner), FormPackage.eINSTANCE.getFormGroup_Disabled(), fcpy);
 				cmd.append(createCmd);
 			} 
 		}

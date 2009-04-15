@@ -28,7 +28,7 @@ import com.bluexml.side.clazz.ClassModelElement;
  * </ul>
  * </p>
  *
- * @see com.bluexml.side.form.formPackage#getFormElement()
+ * @see com.bluexml.side.form.FormPackage#getFormElement()
  * @model abstract="true"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='noSpecialCharacters'"
  *        annotation="http://www.bluexml.com/OCL noSpecialCharacters='self.id.regexMatch(\'\\w\') <> null'"
@@ -45,7 +45,7 @@ public interface FormElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Label</em>' attribute.
 	 * @see #setLabel(String)
-	 * @see com.bluexml.side.form.formPackage#getFormElement_Label()
+	 * @see com.bluexml.side.form.FormPackage#getFormElement_Label()
 	 * @model
 	 * @generated
 	 */
@@ -71,7 +71,7 @@ public interface FormElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
-	 * @see com.bluexml.side.form.formPackage#getFormElement_Id()
+	 * @see com.bluexml.side.form.FormPackage#getFormElement_Id()
 	 * @model required="true"
 	 * @generated
 	 */
@@ -97,7 +97,7 @@ public interface FormElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Help text</em>' attribute.
 	 * @see #setHelp_text(String)
-	 * @see com.bluexml.side.form.formPackage#getFormElement_Help_text()
+	 * @see com.bluexml.side.form.FormPackage#getFormElement_Help_text()
 	 * @model
 	 * @generated
 	 */
@@ -123,7 +123,7 @@ public interface FormElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ref</em>' reference.
 	 * @see #setRef(ModelElement)
-	 * @see com.bluexml.side.form.formPackage#getFormElement_Ref()
+	 * @see com.bluexml.side.form.FormPackage#getFormElement_Ref()
 	 * @model
 	 * @generated
 	 */
@@ -149,7 +149,7 @@ public interface FormElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Hidden</em>' attribute.
 	 * @see #setHidden(boolean)
-	 * @see com.bluexml.side.form.formPackage#getFormElement_Hidden()
+	 * @see com.bluexml.side.form.FormPackage#getFormElement_Hidden()
 	 * @model
 	 * @generated
 	 */

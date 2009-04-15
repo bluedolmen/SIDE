@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.form.TimeField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,7 +39,7 @@ public class TimeFieldImpl extends DateFieldImpl implements TimeField {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.TIME_FIELD;
+		return FormPackage.Literals.TIME_FIELD;
 	}
 
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";

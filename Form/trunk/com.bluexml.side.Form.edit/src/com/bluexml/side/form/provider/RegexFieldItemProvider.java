@@ -24,7 +24,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.form.RegexField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.RegexField} object.
@@ -79,7 +79,7 @@ public class RegexFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_RegexField_regex_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_RegexField_regex_feature", "_UI_RegexField_type"),
-				 formPackage.Literals.REGEX_FIELD__REGEX,
+				 FormPackage.Literals.REGEX_FIELD__REGEX,
 				 true,
 				 false,
 				 false,
@@ -125,7 +125,7 @@ public class RegexFieldItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(RegexField.class)) {
-			case formPackage.REGEX_FIELD__REGEX:
+			case FormPackage.REGEX_FIELD__REGEX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

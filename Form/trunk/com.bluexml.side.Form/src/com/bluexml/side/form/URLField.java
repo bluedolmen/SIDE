@@ -18,7 +18,7 @@ package com.bluexml.side.form;
  * </ul>
  * </p>
  *
- * @see com.bluexml.side.form.formPackage#getURLField()
+ * @see com.bluexml.side.form.FormPackage#getURLField()
  * @model
  * @generated
  */
@@ -33,7 +33,7 @@ public interface URLField extends CharField {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Verify exists</em>' attribute.
 	 * @see #setVerify_exists(boolean)
-	 * @see com.bluexml.side.form.formPackage#getURLField_Verify_exists()
+	 * @see com.bluexml.side.form.FormPackage#getURLField_Verify_exists()
 	 * @model
 	 * @generated
 	 */

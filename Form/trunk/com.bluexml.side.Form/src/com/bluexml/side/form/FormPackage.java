@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
-import com.bluexml.side.form.impl.formPackageImpl;
+import com.bluexml.side.form.impl.FormPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,11 +25,11 @@ import com.bluexml.side.form.impl.formPackageImpl;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see com.bluexml.side.form.formFactory
+ * @see com.bluexml.side.form.FormFactory
  * @model kind="package"
  * @generated
  */
-public interface formPackage extends EPackage {
+public interface FormPackage extends EPackage {
 	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
@@ -60,14 +60,14 @@ public interface formPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	formPackage eINSTANCE = com.bluexml.side.form.impl.formPackageImpl.init();
+	FormPackage eINSTANCE = com.bluexml.side.form.impl.FormPackageImpl.init();
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormImpl <em>Form</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.FormImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getForm()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getForm()
 	 * @generated
 	 */
 	int FORM = 0;
@@ -100,11 +100,11 @@ public interface formPackage extends EPackage {
 	int FORM_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormElementImpl <em>Form Element</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormElementImpl <em>Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.FormElementImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getFormElement()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormElement()
 	 * @generated
 	 */
 	int FORM_ELEMENT = 1;
@@ -155,7 +155,7 @@ public interface formPackage extends EPackage {
 	int FORM_ELEMENT__HIDDEN = 4;
 
 	/**
-	 * The number of structural features of the '<em>Form Element</em>' class.
+	 * The number of structural features of the '<em>Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -164,11 +164,11 @@ public interface formPackage extends EPackage {
 	int FORM_ELEMENT_FEATURE_COUNT = 5;
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormGroupImpl <em>Form Group</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormGroupImpl <em>Group</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.FormGroupImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getFormGroup()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormGroup()
 	 * @generated
 	 */
 	int FORM_GROUP = 2;
@@ -246,7 +246,7 @@ public interface formPackage extends EPackage {
 	int FORM_GROUP__DISABLED = FORM_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>Form Group</em>' class.
+	 * The number of structural features of the '<em>Group</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -259,7 +259,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.FieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getField()
 	 * @generated
 	 */
 	int FIELD = 3;
@@ -368,7 +368,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.BooleanFieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getBooleanField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getBooleanField()
 	 * @generated
 	 */
 	int BOOLEAN_FIELD = 4;
@@ -477,7 +477,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.CharFieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getCharField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getCharField()
 	 * @generated
 	 */
 	int CHAR_FIELD = 5;
@@ -604,7 +604,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.DateFieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getDateField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getDateField()
 	 * @generated
 	 */
 	int DATE_FIELD = 6;
@@ -740,7 +740,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.DateTimeFieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getDateTimeField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getDateTimeField()
 	 * @generated
 	 */
 	int DATE_TIME_FIELD = 7;
@@ -876,7 +876,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.DecimalFieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getDecimalField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getDecimalField()
 	 * @generated
 	 */
 	int DECIMAL_FIELD = 8;
@@ -1021,7 +1021,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.FloatFieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getFloatField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFloatField()
 	 * @generated
 	 */
 	int FLOAT_FIELD = 9;
@@ -1148,7 +1148,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.IntegerFieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getIntegerField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getIntegerField()
 	 * @generated
 	 */
 	int INTEGER_FIELD = 10;
@@ -1275,7 +1275,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.ModelChoiceFieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getModelChoiceField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getModelChoiceField()
 	 * @generated
 	 */
 	int MODEL_CHOICE_FIELD = 11;
@@ -1456,7 +1456,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.EmailFieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getEmailField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getEmailField()
 	 * @generated
 	 */
 	int EMAIL_FIELD = 12;
@@ -1583,7 +1583,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.FileFieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getFileField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFileField()
 	 * @generated
 	 */
 	int FILE_FIELD = 13;
@@ -1692,7 +1692,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.ImageFieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getImageField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getImageField()
 	 * @generated
 	 */
 	int IMAGE_FIELD = 14;
@@ -1801,7 +1801,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.TimeFieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getTimeField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getTimeField()
 	 * @generated
 	 */
 	int TIME_FIELD = 15;
@@ -1937,7 +1937,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.URLFieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getURLField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getURLField()
 	 * @generated
 	 */
 	int URL_FIELD = 16;
@@ -2073,7 +2073,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.PhoneNumberFieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getPhoneNumberField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getPhoneNumberField()
 	 * @generated
 	 */
 	int PHONE_NUMBER_FIELD = 17;
@@ -2205,11 +2205,11 @@ public interface formPackage extends EPackage {
 	int PHONE_NUMBER_FIELD_FEATURE_COUNT = CHAR_FIELD_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormAspectImpl <em>Form Aspect</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormAspectImpl <em>Aspect</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.FormAspectImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getFormAspect()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormAspect()
 	 * @generated
 	 */
 	int FORM_ASPECT = 18;
@@ -2287,7 +2287,7 @@ public interface formPackage extends EPackage {
 	int FORM_ASPECT__DISABLED = FORM_GROUP__DISABLED;
 
 	/**
-	 * The number of structural features of the '<em>Form Aspect</em>' class.
+	 * The number of structural features of the '<em>Aspect</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2296,11 +2296,11 @@ public interface formPackage extends EPackage {
 	int FORM_ASPECT_FEATURE_COUNT = FORM_GROUP_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormContainerImpl <em>Form Container</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormContainerImpl <em>Container</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.FormContainerImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getFormContainer()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormContainer()
 	 * @generated
 	 */
 	int FORM_CONTAINER = 31;
@@ -2378,7 +2378,7 @@ public interface formPackage extends EPackage {
 	int FORM_CONTAINER__DISABLED = FORM_GROUP__DISABLED;
 
 	/**
-	 * The number of structural features of the '<em>Form Container</em>' class.
+	 * The number of structural features of the '<em>Container</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2387,11 +2387,11 @@ public interface formPackage extends EPackage {
 	int FORM_CONTAINER_FEATURE_COUNT = FORM_GROUP_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormClassImpl <em>Form Class</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormClassImpl <em>Class</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.FormClassImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getFormClass()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormClass()
 	 * @generated
 	 */
 	int FORM_CLASS = 19;
@@ -2487,7 +2487,7 @@ public interface formPackage extends EPackage {
 	int FORM_CLASS__ASSOCIATION_CLASS = FORM_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Form Class</em>' class.
+	 * The number of structural features of the '<em>Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2500,7 +2500,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.ReferenceImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getReference()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getReference()
 	 * @generated
 	 */
 	int REFERENCE = 20;
@@ -2678,11 +2678,11 @@ public interface formPackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormCollectionImpl <em>Form Collection</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormCollectionImpl <em>Collection</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.FormCollectionImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getFormCollection()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormCollection()
 	 * @generated
 	 */
 	int FORM_COLLECTION = 21;
@@ -2697,7 +2697,7 @@ public interface formPackage extends EPackage {
 	int FORM_COLLECTION__FORMS = 0;
 
 	/**
-	 * The number of structural features of the '<em>Form Collection</em>' class.
+	 * The number of structural features of the '<em>Collection</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2710,7 +2710,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.ChoiceFieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getChoiceField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getChoiceField()
 	 * @generated
 	 */
 	int CHOICE_FIELD = 22;
@@ -2873,7 +2873,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.RegexFieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getRegexField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getRegexField()
 	 * @generated
 	 */
 	int REGEX_FIELD = 23;
@@ -3009,7 +3009,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.ClassReferenceImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getClassReference()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getClassReference()
 	 * @generated
 	 */
 	int CLASS_REFERENCE = 24;
@@ -3046,7 +3046,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.PasswordFieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getPasswordField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getPasswordField()
 	 * @generated
 	 */
 	int PASSWORD_FIELD = 25;
@@ -3173,7 +3173,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.VirtualFieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getVirtualField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getVirtualField()
 	 * @generated
 	 */
 	int VIRTUAL_FIELD = 26;
@@ -3291,7 +3291,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.ActionFieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getActionField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getActionField()
 	 * @generated
 	 */
 	int ACTION_FIELD = 27;
@@ -3400,7 +3400,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.TextFieldImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getTextField()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getTextField()
 	 * @generated
 	 */
 	int TEXT_FIELD = 28;
@@ -3536,7 +3536,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.WorkflowFormCollectionImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getWorkflowFormCollection()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getWorkflowFormCollection()
 	 * @generated
 	 */
 	int WORKFLOW_FORM_COLLECTION = 29;
@@ -3569,11 +3569,11 @@ public interface formPackage extends EPackage {
 	int WORKFLOW_FORM_COLLECTION_FEATURE_COUNT = FORM_COLLECTION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormWorkflowImpl <em>Form Workflow</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormWorkflowImpl <em>Workflow</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.impl.FormWorkflowImpl
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getFormWorkflow()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormWorkflow()
 	 * @generated
 	 */
 	int FORM_WORKFLOW = 30;
@@ -3651,7 +3651,7 @@ public interface formPackage extends EPackage {
 	int FORM_WORKFLOW__DISABLED = FORM_CONTAINER__DISABLED;
 
 	/**
-	 * The number of structural features of the '<em>Form Workflow</em>' class.
+	 * The number of structural features of the '<em>Workflow</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3660,11 +3660,11 @@ public interface formPackage extends EPackage {
 	int FORM_WORKFLOW_FEATURE_COUNT = FORM_CONTAINER_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.form.FormGroupPresentationType <em>Form Group Presentation Type</em>}' enum.
+	 * The meta object id for the '{@link com.bluexml.side.form.FormGroupPresentationType <em>Group Presentation Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.FormGroupPresentationType
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getFormGroupPresentationType()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormGroupPresentationType()
 	 * @generated
 	 */
 	int FORM_GROUP_PRESENTATION_TYPE = 32;
@@ -3675,7 +3675,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.TextWidgetType
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getTextWidgetType()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getTextWidgetType()
 	 * @generated
 	 */
 	int TEXT_WIDGET_TYPE = 33;
@@ -3685,7 +3685,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.ChoiceWidgetType
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getChoiceWidgetType()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getChoiceWidgetType()
 	 * @generated
 	 */
 	int CHOICE_WIDGET_TYPE = 34;
@@ -3695,7 +3695,7 @@ public interface formPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.bluexml.side.form.ReferenceWidgetType
-	 * @see com.bluexml.side.form.impl.formPackageImpl#getReferenceWidgetType()
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getReferenceWidgetType()
 	 * @generated
 	 */
 	int REFERENCE_WIDGET_TYPE = 35;
@@ -3734,10 +3734,10 @@ public interface formPackage extends EPackage {
 	EAttribute getForm_Name();
 
 	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.form.FormElement <em>Form Element</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.FormElement <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Form Element</em>'.
+	 * @return the meta object for class '<em>Element</em>'.
 	 * @see com.bluexml.side.form.FormElement
 	 * @generated
 	 */
@@ -3799,10 +3799,10 @@ public interface formPackage extends EPackage {
 	EAttribute getFormElement_Hidden();
 
 	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.form.FormGroup <em>Form Group</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.FormGroup <em>Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Form Group</em>'.
+	 * @return the meta object for class '<em>Group</em>'.
 	 * @see com.bluexml.side.form.FormGroup
 	 * @generated
 	 */
@@ -4278,20 +4278,20 @@ public interface formPackage extends EPackage {
 	EAttribute getPhoneNumberField_Input_formats();
 
 	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.form.FormAspect <em>Form Aspect</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.FormAspect <em>Aspect</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Form Aspect</em>'.
+	 * @return the meta object for class '<em>Aspect</em>'.
 	 * @see com.bluexml.side.form.FormAspect
 	 * @generated
 	 */
 	EClass getFormAspect();
 
 	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.form.FormClass <em>Form Class</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.FormClass <em>Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Form Class</em>'.
+	 * @return the meta object for class '<em>Class</em>'.
 	 * @see com.bluexml.side.form.FormClass
 	 * @generated
 	 */
@@ -4308,10 +4308,10 @@ public interface formPackage extends EPackage {
 	EClass getReference();
 
 	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.form.FormCollection <em>Form Collection</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.FormCollection <em>Collection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Form Collection</em>'.
+	 * @return the meta object for class '<em>Collection</em>'.
 	 * @see com.bluexml.side.form.FormCollection
 	 * @generated
 	 */
@@ -4541,30 +4541,30 @@ public interface formPackage extends EPackage {
 	EReference getWorkflowFormCollection_Linked_process();
 
 	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.form.FormWorkflow <em>Form Workflow</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.FormWorkflow <em>Workflow</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Form Workflow</em>'.
+	 * @return the meta object for class '<em>Workflow</em>'.
 	 * @see com.bluexml.side.form.FormWorkflow
 	 * @generated
 	 */
 	EClass getFormWorkflow();
 
 	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.form.FormContainer <em>Form Container</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.form.FormContainer <em>Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Form Container</em>'.
+	 * @return the meta object for class '<em>Container</em>'.
 	 * @see com.bluexml.side.form.FormContainer
 	 * @generated
 	 */
 	EClass getFormContainer();
 
 	/**
-	 * Returns the meta object for enum '{@link com.bluexml.side.form.FormGroupPresentationType <em>Form Group Presentation Type</em>}'.
+	 * Returns the meta object for enum '{@link com.bluexml.side.form.FormGroupPresentationType <em>Group Presentation Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Form Group Presentation Type</em>'.
+	 * @return the meta object for enum '<em>Group Presentation Type</em>'.
 	 * @see com.bluexml.side.form.FormGroupPresentationType
 	 * @generated
 	 */
@@ -4607,7 +4607,7 @@ public interface formPackage extends EPackage {
 	 * @return the factory that creates the instances of the model.
 	 * @generated
 	 */
-	formFactory getformFactory();
+	FormFactory getFormFactory();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -4627,7 +4627,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.FormImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getForm()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getForm()
 		 * @generated
 		 */
 		EClass FORM = eINSTANCE.getForm();
@@ -4649,11 +4649,11 @@ public interface formPackage extends EPackage {
 		EAttribute FORM__NAME = eINSTANCE.getForm_Name();
 
 		/**
-		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormElementImpl <em>Form Element</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormElementImpl <em>Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.FormElementImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getFormElement()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormElement()
 		 * @generated
 		 */
 		EClass FORM_ELEMENT = eINSTANCE.getFormElement();
@@ -4699,11 +4699,11 @@ public interface formPackage extends EPackage {
 		EAttribute FORM_ELEMENT__HIDDEN = eINSTANCE.getFormElement_Hidden();
 
 		/**
-		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormGroupImpl <em>Form Group</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormGroupImpl <em>Group</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.FormGroupImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getFormGroup()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormGroup()
 		 * @generated
 		 */
 		EClass FORM_GROUP = eINSTANCE.getFormGroup();
@@ -4737,7 +4737,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.FieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getField()
 		 * @generated
 		 */
 		EClass FIELD = eINSTANCE.getField();
@@ -4787,7 +4787,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.BooleanFieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getBooleanField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getBooleanField()
 		 * @generated
 		 */
 		EClass BOOLEAN_FIELD = eINSTANCE.getBooleanField();
@@ -4797,7 +4797,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.CharFieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getCharField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getCharField()
 		 * @generated
 		 */
 		EClass CHAR_FIELD = eINSTANCE.getCharField();
@@ -4823,7 +4823,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.DateFieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getDateField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getDateField()
 		 * @generated
 		 */
 		EClass DATE_FIELD = eINSTANCE.getDateField();
@@ -4857,7 +4857,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.DateTimeFieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getDateTimeField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getDateTimeField()
 		 * @generated
 		 */
 		EClass DATE_TIME_FIELD = eINSTANCE.getDateTimeField();
@@ -4867,7 +4867,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.DecimalFieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getDecimalField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getDecimalField()
 		 * @generated
 		 */
 		EClass DECIMAL_FIELD = eINSTANCE.getDecimalField();
@@ -4909,7 +4909,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.FloatFieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getFloatField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getFloatField()
 		 * @generated
 		 */
 		EClass FLOAT_FIELD = eINSTANCE.getFloatField();
@@ -4935,7 +4935,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.IntegerFieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getIntegerField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getIntegerField()
 		 * @generated
 		 */
 		EClass INTEGER_FIELD = eINSTANCE.getIntegerField();
@@ -4961,7 +4961,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.ModelChoiceFieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getModelChoiceField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getModelChoiceField()
 		 * @generated
 		 */
 		EClass MODEL_CHOICE_FIELD = eINSTANCE.getModelChoiceField();
@@ -5019,7 +5019,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.EmailFieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getEmailField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getEmailField()
 		 * @generated
 		 */
 		EClass EMAIL_FIELD = eINSTANCE.getEmailField();
@@ -5029,7 +5029,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.FileFieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getFileField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getFileField()
 		 * @generated
 		 */
 		EClass FILE_FIELD = eINSTANCE.getFileField();
@@ -5039,7 +5039,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.ImageFieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getImageField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getImageField()
 		 * @generated
 		 */
 		EClass IMAGE_FIELD = eINSTANCE.getImageField();
@@ -5049,7 +5049,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.TimeFieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getTimeField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getTimeField()
 		 * @generated
 		 */
 		EClass TIME_FIELD = eINSTANCE.getTimeField();
@@ -5059,7 +5059,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.URLFieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getURLField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getURLField()
 		 * @generated
 		 */
 		EClass URL_FIELD = eINSTANCE.getURLField();
@@ -5077,7 +5077,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.PhoneNumberFieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getPhoneNumberField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getPhoneNumberField()
 		 * @generated
 		 */
 		EClass PHONE_NUMBER_FIELD = eINSTANCE.getPhoneNumberField();
@@ -5091,21 +5091,21 @@ public interface formPackage extends EPackage {
 		EAttribute PHONE_NUMBER_FIELD__INPUT_FORMATS = eINSTANCE.getPhoneNumberField_Input_formats();
 
 		/**
-		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormAspectImpl <em>Form Aspect</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormAspectImpl <em>Aspect</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.FormAspectImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getFormAspect()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormAspect()
 		 * @generated
 		 */
 		EClass FORM_ASPECT = eINSTANCE.getFormAspect();
 
 		/**
-		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormClassImpl <em>Form Class</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormClassImpl <em>Class</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.FormClassImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getFormClass()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormClass()
 		 * @generated
 		 */
 		EClass FORM_CLASS = eINSTANCE.getFormClass();
@@ -5115,17 +5115,17 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.ReferenceImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getReference()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getReference()
 		 * @generated
 		 */
 		EClass REFERENCE = eINSTANCE.getReference();
 
 		/**
-		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormCollectionImpl <em>Form Collection</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormCollectionImpl <em>Collection</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.FormCollectionImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getFormCollection()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormCollection()
 		 * @generated
 		 */
 		EClass FORM_COLLECTION = eINSTANCE.getFormCollection();
@@ -5143,7 +5143,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.ChoiceFieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getChoiceField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getChoiceField()
 		 * @generated
 		 */
 		EClass CHOICE_FIELD = eINSTANCE.getChoiceField();
@@ -5201,7 +5201,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.RegexFieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getRegexField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getRegexField()
 		 * @generated
 		 */
 		EClass REGEX_FIELD = eINSTANCE.getRegexField();
@@ -5219,7 +5219,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.ClassReferenceImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getClassReference()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getClassReference()
 		 * @generated
 		 */
 		EClass CLASS_REFERENCE = eINSTANCE.getClassReference();
@@ -5245,7 +5245,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.PasswordFieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getPasswordField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getPasswordField()
 		 * @generated
 		 */
 		EClass PASSWORD_FIELD = eINSTANCE.getPasswordField();
@@ -5255,7 +5255,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.VirtualFieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getVirtualField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getVirtualField()
 		 * @generated
 		 */
 		EClass VIRTUAL_FIELD = eINSTANCE.getVirtualField();
@@ -5273,7 +5273,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.ActionFieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getActionField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getActionField()
 		 * @generated
 		 */
 		EClass ACTION_FIELD = eINSTANCE.getActionField();
@@ -5283,7 +5283,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.TextFieldImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getTextField()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getTextField()
 		 * @generated
 		 */
 		EClass TEXT_FIELD = eINSTANCE.getTextField();
@@ -5301,7 +5301,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.WorkflowFormCollectionImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getWorkflowFormCollection()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getWorkflowFormCollection()
 		 * @generated
 		 */
 		EClass WORKFLOW_FORM_COLLECTION = eINSTANCE.getWorkflowFormCollection();
@@ -5315,31 +5315,31 @@ public interface formPackage extends EPackage {
 		EReference WORKFLOW_FORM_COLLECTION__LINKED_PROCESS = eINSTANCE.getWorkflowFormCollection_Linked_process();
 
 		/**
-		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormWorkflowImpl <em>Form Workflow</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormWorkflowImpl <em>Workflow</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.FormWorkflowImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getFormWorkflow()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormWorkflow()
 		 * @generated
 		 */
 		EClass FORM_WORKFLOW = eINSTANCE.getFormWorkflow();
 
 		/**
-		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormContainerImpl <em>Form Container</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormContainerImpl <em>Container</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.impl.FormContainerImpl
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getFormContainer()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormContainer()
 		 * @generated
 		 */
 		EClass FORM_CONTAINER = eINSTANCE.getFormContainer();
 
 		/**
-		 * The meta object literal for the '{@link com.bluexml.side.form.FormGroupPresentationType <em>Form Group Presentation Type</em>}' enum.
+		 * The meta object literal for the '{@link com.bluexml.side.form.FormGroupPresentationType <em>Group Presentation Type</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.FormGroupPresentationType
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getFormGroupPresentationType()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormGroupPresentationType()
 		 * @generated
 		 */
 		EEnum FORM_GROUP_PRESENTATION_TYPE = eINSTANCE.getFormGroupPresentationType();
@@ -5349,7 +5349,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.TextWidgetType
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getTextWidgetType()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getTextWidgetType()
 		 * @generated
 		 */
 		EEnum TEXT_WIDGET_TYPE = eINSTANCE.getTextWidgetType();
@@ -5359,7 +5359,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.ChoiceWidgetType
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getChoiceWidgetType()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getChoiceWidgetType()
 		 * @generated
 		 */
 		EEnum CHOICE_WIDGET_TYPE = eINSTANCE.getChoiceWidgetType();
@@ -5369,7 +5369,7 @@ public interface formPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see com.bluexml.side.form.ReferenceWidgetType
-		 * @see com.bluexml.side.form.impl.formPackageImpl#getReferenceWidgetType()
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getReferenceWidgetType()
 		 * @generated
 		 */
 		EEnum REFERENCE_WIDGET_TYPE = eINSTANCE.getReferenceWidgetType();

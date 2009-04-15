@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.form.PhoneNumberField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -65,7 +65,7 @@ public class PhoneNumberFieldImpl extends CharFieldImpl implements PhoneNumberFi
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.PHONE_NUMBER_FIELD;
+		return FormPackage.Literals.PHONE_NUMBER_FIELD;
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class PhoneNumberFieldImpl extends CharFieldImpl implements PhoneNumberFi
 		String oldInput_formats = input_formats;
 		input_formats = newInput_formats;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.PHONE_NUMBER_FIELD__INPUT_FORMATS, oldInput_formats, input_formats));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.PHONE_NUMBER_FIELD__INPUT_FORMATS, oldInput_formats, input_formats));
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class PhoneNumberFieldImpl extends CharFieldImpl implements PhoneNumberFi
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case formPackage.PHONE_NUMBER_FIELD__INPUT_FORMATS:
+			case FormPackage.PHONE_NUMBER_FIELD__INPUT_FORMATS:
 				return getInput_formats();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -111,7 +111,7 @@ public class PhoneNumberFieldImpl extends CharFieldImpl implements PhoneNumberFi
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case formPackage.PHONE_NUMBER_FIELD__INPUT_FORMATS:
+			case FormPackage.PHONE_NUMBER_FIELD__INPUT_FORMATS:
 				setInput_formats((String)newValue);
 				return;
 		}
@@ -126,7 +126,7 @@ public class PhoneNumberFieldImpl extends CharFieldImpl implements PhoneNumberFi
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case formPackage.PHONE_NUMBER_FIELD__INPUT_FORMATS:
+			case FormPackage.PHONE_NUMBER_FIELD__INPUT_FORMATS:
 				setInput_formats(INPUT_FORMATS_EDEFAULT);
 				return;
 		}
@@ -141,7 +141,7 @@ public class PhoneNumberFieldImpl extends CharFieldImpl implements PhoneNumberFi
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case formPackage.PHONE_NUMBER_FIELD__INPUT_FORMATS:
+			case FormPackage.PHONE_NUMBER_FIELD__INPUT_FORMATS:
 				return INPUT_FORMATS_EDEFAULT == null ? input_formats != null : !INPUT_FORMATS_EDEFAULT.equals(input_formats);
 		}
 		return super.eIsSet(featureID);

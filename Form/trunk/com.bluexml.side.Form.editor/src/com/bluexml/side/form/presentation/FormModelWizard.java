@@ -73,8 +73,8 @@ import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ISetSelectionTarget;
 
-import com.bluexml.side.form.formFactory;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormFactory;
+import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.provider.FormsEditPlugin;
 
 
@@ -95,7 +95,7 @@ import org.eclipse.ui.PartInitException;
  * <!-- end-user-doc -->
  * @generated
  */
-public class formModelWizard extends Wizard implements INewWizard {
+public class FormModelWizard extends Wizard implements INewWizard {
 	/**
 	 * The supported extensions for created files.
 	 * <!-- begin-user-doc -->
@@ -103,7 +103,7 @@ public class formModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	public static final List<String> FILE_EXTENSIONS =
-		Collections.unmodifiableList(Arrays.asList(FormsEditorPlugin.INSTANCE.getString("_UI_formEditorFilenameExtensions").split("\\s*,\\s*")));
+		Collections.unmodifiableList(Arrays.asList(FormsEditorPlugin.INSTANCE.getString("_UI_FormEditorFilenameExtensions").split("\\s*,\\s*")));
 
 	/**
 	 * A formatted list of supported file extensions, suitable for display.
@@ -112,7 +112,7 @@ public class formModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	public static final String FORMATTED_FILE_EXTENSIONS =
-		FormsEditorPlugin.INSTANCE.getString("_UI_formEditorFilenameExtensions").replaceAll("\\s*,\\s*", ", ");
+		FormsEditorPlugin.INSTANCE.getString("_UI_FormEditorFilenameExtensions").replaceAll("\\s*,\\s*", ", ");
 
 	/**
 	 * This caches an instance of the model package.
@@ -120,7 +120,7 @@ public class formModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected formPackage _formPackage = formPackage.eINSTANCE;
+	protected FormPackage formPackage = FormPackage.eINSTANCE;
 
 	/**
 	 * This caches an instance of the model factory.
@@ -128,7 +128,7 @@ public class formModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected formFactory _formFactory = _formPackage.getformFactory();
+	protected FormFactory formFactory = formPackage.getFormFactory();
 
 	/**
 	 * This is the file creation page.
@@ -136,7 +136,7 @@ public class formModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected formModelWizardNewFileCreationPage newFileCreationPage;
+	protected FormModelWizardNewFileCreationPage newFileCreationPage;
 
 	/**
 	 * This is the initial object creation page.
@@ -144,7 +144,7 @@ public class formModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected formModelWizardInitialObjectCreationPage initialObjectCreationPage;
+	protected FormModelWizardInitialObjectCreationPage initialObjectCreationPage;
 
 	/**
 	 * Remember the selection during initialization for populating the default container.
@@ -180,7 +180,7 @@ public class formModelWizard extends Wizard implements INewWizard {
 		this.workbench = workbench;
 		this.selection = selection;
 		setWindowTitle(FormsEditorPlugin.INSTANCE.getString("_UI_Wizard_label"));
-		setDefaultPageImageDescriptor(ExtendedImageRegistry.INSTANCE.getImageDescriptor(FormsEditorPlugin.INSTANCE.getImage("full/wizban/Newform")));
+		setDefaultPageImageDescriptor(ExtendedImageRegistry.INSTANCE.getImageDescriptor(FormsEditorPlugin.INSTANCE.getImage("full/wizban/NewForm")));
 	}
 
 	/**
@@ -192,7 +192,7 @@ public class formModelWizard extends Wizard implements INewWizard {
 	protected Collection<String> getInitialObjectNames() {
 		if (initialObjectNames == null) {
 			initialObjectNames = new ArrayList<String>();
-			for (EClassifier eClassifier : _formPackage.getEClassifiers()) {
+			for (EClassifier eClassifier : formPackage.getEClassifiers()) {
 				if (eClassifier instanceof EClass) {
 					EClass eClass = (EClass)eClassifier;
 					if (!eClass.isAbstract()) {
@@ -212,8 +212,8 @@ public class formModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	protected EObject createInitialModel() {
-		EClass eClass = (EClass)_formPackage.getEClassifier(initialObjectCreationPage.getInitialObjectName());
-		EObject rootObject = _formFactory.create(eClass);
+		EClass eClass = (EClass)formPackage.getEClassifier(initialObjectCreationPage.getInitialObjectName());
+		EObject rootObject = formFactory.create(eClass);
 		return rootObject;
 	}
 
@@ -314,14 +314,14 @@ public class formModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public class formModelWizardNewFileCreationPage extends WizardNewFileCreationPage {
+	public class FormModelWizardNewFileCreationPage extends WizardNewFileCreationPage {
 		/**
 		 * Pass in the selection.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public formModelWizardNewFileCreationPage(String pageId, IStructuredSelection selection) {
+		public FormModelWizardNewFileCreationPage(String pageId, IStructuredSelection selection) {
 			super(pageId, selection);
 		}
 
@@ -361,7 +361,7 @@ public class formModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public class formModelWizardInitialObjectCreationPage extends WizardPage {
+	public class FormModelWizardInitialObjectCreationPage extends WizardPage {
 		/**
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -389,7 +389,7 @@ public class formModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public formModelWizardInitialObjectCreationPage(String pageId) {
+		public FormModelWizardInitialObjectCreationPage(String pageId) {
 			super(pageId);
 		}
 
@@ -573,10 +573,10 @@ public class formModelWizard extends Wizard implements INewWizard {
 	public void addPages() {
 		// Create a page, set the title, and the initial model file name.
 		//
-		newFileCreationPage = new formModelWizardNewFileCreationPage("Whatever", selection);
-		newFileCreationPage.setTitle(FormsEditorPlugin.INSTANCE.getString("_UI_formModelWizard_label"));
-		newFileCreationPage.setDescription(FormsEditorPlugin.INSTANCE.getString("_UI_formModelWizard_description"));
-		newFileCreationPage.setFileName(FormsEditorPlugin.INSTANCE.getString("_UI_formEditorFilenameDefaultBase") + "." + FILE_EXTENSIONS.get(0));
+		newFileCreationPage = new FormModelWizardNewFileCreationPage("Whatever", selection);
+		newFileCreationPage.setTitle(FormsEditorPlugin.INSTANCE.getString("_UI_FormModelWizard_label"));
+		newFileCreationPage.setDescription(FormsEditorPlugin.INSTANCE.getString("_UI_FormModelWizard_description"));
+		newFileCreationPage.setFileName(FormsEditorPlugin.INSTANCE.getString("_UI_FormEditorFilenameDefaultBase") + "." + FILE_EXTENSIONS.get(0));
 		addPage(newFileCreationPage);
 
 		// Try and get the resource selection to determine a current directory for the file dialog.
@@ -602,7 +602,7 @@ public class formModelWizard extends Wizard implements INewWizard {
 
 					// Make up a unique new name here.
 					//
-					String defaultModelBaseFilename = FormsEditorPlugin.INSTANCE.getString("_UI_formEditorFilenameDefaultBase");
+					String defaultModelBaseFilename = FormsEditorPlugin.INSTANCE.getString("_UI_FormEditorFilenameDefaultBase");
 					String defaultModelFilenameExtension = FILE_EXTENSIONS.get(0);
 					String modelFilename = defaultModelBaseFilename + "." + defaultModelFilenameExtension;
 					for (int i = 1; ((IContainer)selectedResource).findMember(modelFilename) != null; ++i) {
@@ -612,8 +612,8 @@ public class formModelWizard extends Wizard implements INewWizard {
 				}
 			}
 		}
-		initialObjectCreationPage = new formModelWizardInitialObjectCreationPage("Whatever2");
-		initialObjectCreationPage.setTitle(FormsEditorPlugin.INSTANCE.getString("_UI_formModelWizard_label"));
+		initialObjectCreationPage = new FormModelWizardInitialObjectCreationPage("Whatever2");
+		initialObjectCreationPage.setTitle(FormsEditorPlugin.INSTANCE.getString("_UI_FormModelWizard_label"));
 		initialObjectCreationPage.setDescription(FormsEditorPlugin.INSTANCE.getString("_UI_Wizard_initial_object_description"));
 		addPage(initialObjectCreationPage);
 	}

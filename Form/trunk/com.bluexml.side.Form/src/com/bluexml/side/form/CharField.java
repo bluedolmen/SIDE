@@ -19,7 +19,7 @@ package com.bluexml.side.form;
  * </ul>
  * </p>
  *
- * @see com.bluexml.side.form.formPackage#getCharField()
+ * @see com.bluexml.side.form.FormPackage#getCharField()
  * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='MinSuperiorToMax'"
  *        annotation="http://www.bluexml.com/OCL MinSuperiorToMax='self.min_length <= self.max_length'"
  * @generated
@@ -35,7 +35,7 @@ public interface CharField extends Field {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Min length</em>' attribute.
 	 * @see #setMin_length(int)
-	 * @see com.bluexml.side.form.formPackage#getCharField_Min_length()
+	 * @see com.bluexml.side.form.FormPackage#getCharField_Min_length()
 	 * @model
 	 * @generated
 	 */
@@ -61,7 +61,7 @@ public interface CharField extends Field {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Max length</em>' attribute.
 	 * @see #setMax_length(int)
-	 * @see com.bluexml.side.form.formPackage#getCharField_Max_length()
+	 * @see com.bluexml.side.form.FormPackage#getCharField_Max_length()
 	 * @model
 	 * @generated
 	 */

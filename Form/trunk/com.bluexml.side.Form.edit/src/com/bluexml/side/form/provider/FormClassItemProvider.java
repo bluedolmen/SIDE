@@ -22,7 +22,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 import com.bluexml.side.form.FormClass;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.FormClass} object.
@@ -78,7 +78,7 @@ public class FormClassItemProvider
 				 getResourceLocator(),
 				 getString("_UI_ClassReference_real_class_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ClassReference_real_class_feature", "_UI_ClassReference_type"),
-				 formPackage.Literals.CLASS_REFERENCE__REAL_CLASS,
+				 FormPackage.Literals.CLASS_REFERENCE__REAL_CLASS,
 				 true,
 				 false,
 				 true,
@@ -100,7 +100,7 @@ public class FormClassItemProvider
 				 getResourceLocator(),
 				 getString("_UI_ClassReference_association_class_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ClassReference_association_class_feature", "_UI_ClassReference_type"),
-				 formPackage.Literals.CLASS_REFERENCE__ASSOCIATION_CLASS,
+				 FormPackage.Literals.CLASS_REFERENCE__ASSOCIATION_CLASS,
 				 true,
 				 false,
 				 true,
@@ -176,8 +176,8 @@ public class FormClassItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == formPackage.Literals.FORM_GROUP__CHILDREN ||
-			childFeature == formPackage.Literals.FORM_GROUP__DISABLED;
+			childFeature == FormPackage.Literals.FORM_GROUP__CHILDREN ||
+			childFeature == FormPackage.Literals.FORM_GROUP__DISABLED;
 
 		if (qualify) {
 			return getString

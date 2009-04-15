@@ -17,7 +17,7 @@ import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.form.CharField;
 import com.bluexml.side.form.ClassReference;
 import com.bluexml.side.form.FormClass;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -70,7 +70,7 @@ public class FormClassImpl extends FormContainerImpl implements FormClass {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.FORM_CLASS;
+		return FormPackage.Literals.FORM_CLASS;
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class FormClassImpl extends FormContainerImpl implements FormClass {
 			real_class = (Clazz)eResolveProxy(oldReal_class);
 			if (real_class != oldReal_class) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, formPackage.FORM_CLASS__REAL_CLASS, oldReal_class, real_class));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FormPackage.FORM_CLASS__REAL_CLASS, oldReal_class, real_class));
 			}
 		}
 		return real_class;
@@ -108,7 +108,7 @@ public class FormClassImpl extends FormContainerImpl implements FormClass {
 		Clazz oldReal_class = real_class;
 		real_class = newReal_class;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.FORM_CLASS__REAL_CLASS, oldReal_class, real_class));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FORM_CLASS__REAL_CLASS, oldReal_class, real_class));
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class FormClassImpl extends FormContainerImpl implements FormClass {
 			association_class = (Clazz)eResolveProxy(oldAssociation_class);
 			if (association_class != oldAssociation_class) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, formPackage.FORM_CLASS__ASSOCIATION_CLASS, oldAssociation_class, association_class));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FormPackage.FORM_CLASS__ASSOCIATION_CLASS, oldAssociation_class, association_class));
 			}
 		}
 		return association_class;
@@ -146,7 +146,7 @@ public class FormClassImpl extends FormContainerImpl implements FormClass {
 		Clazz oldAssociation_class = association_class;
 		association_class = newAssociation_class;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.FORM_CLASS__ASSOCIATION_CLASS, oldAssociation_class, association_class));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FORM_CLASS__ASSOCIATION_CLASS, oldAssociation_class, association_class));
 	}
 
 	/**
@@ -157,10 +157,10 @@ public class FormClassImpl extends FormContainerImpl implements FormClass {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case formPackage.FORM_CLASS__REAL_CLASS:
+			case FormPackage.FORM_CLASS__REAL_CLASS:
 				if (resolve) return getReal_class();
 				return basicGetReal_class();
-			case formPackage.FORM_CLASS__ASSOCIATION_CLASS:
+			case FormPackage.FORM_CLASS__ASSOCIATION_CLASS:
 				if (resolve) return getAssociation_class();
 				return basicGetAssociation_class();
 		}
@@ -175,10 +175,10 @@ public class FormClassImpl extends FormContainerImpl implements FormClass {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case formPackage.FORM_CLASS__REAL_CLASS:
+			case FormPackage.FORM_CLASS__REAL_CLASS:
 				setReal_class((Clazz)newValue);
 				return;
-			case formPackage.FORM_CLASS__ASSOCIATION_CLASS:
+			case FormPackage.FORM_CLASS__ASSOCIATION_CLASS:
 				setAssociation_class((Clazz)newValue);
 				return;
 		}
@@ -193,10 +193,10 @@ public class FormClassImpl extends FormContainerImpl implements FormClass {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case formPackage.FORM_CLASS__REAL_CLASS:
+			case FormPackage.FORM_CLASS__REAL_CLASS:
 				setReal_class((Clazz)null);
 				return;
-			case formPackage.FORM_CLASS__ASSOCIATION_CLASS:
+			case FormPackage.FORM_CLASS__ASSOCIATION_CLASS:
 				setAssociation_class((Clazz)null);
 				return;
 		}
@@ -211,9 +211,9 @@ public class FormClassImpl extends FormContainerImpl implements FormClass {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case formPackage.FORM_CLASS__REAL_CLASS:
+			case FormPackage.FORM_CLASS__REAL_CLASS:
 				return real_class != null;
-			case formPackage.FORM_CLASS__ASSOCIATION_CLASS:
+			case FormPackage.FORM_CLASS__ASSOCIATION_CLASS:
 				return association_class != null;
 		}
 		return super.eIsSet(featureID);
@@ -228,8 +228,8 @@ public class FormClassImpl extends FormContainerImpl implements FormClass {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ClassReference.class) {
 			switch (derivedFeatureID) {
-				case formPackage.FORM_CLASS__REAL_CLASS: return formPackage.CLASS_REFERENCE__REAL_CLASS;
-				case formPackage.FORM_CLASS__ASSOCIATION_CLASS: return formPackage.CLASS_REFERENCE__ASSOCIATION_CLASS;
+				case FormPackage.FORM_CLASS__REAL_CLASS: return FormPackage.CLASS_REFERENCE__REAL_CLASS;
+				case FormPackage.FORM_CLASS__ASSOCIATION_CLASS: return FormPackage.CLASS_REFERENCE__ASSOCIATION_CLASS;
 				default: return -1;
 			}
 		}
@@ -245,8 +245,8 @@ public class FormClassImpl extends FormContainerImpl implements FormClass {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ClassReference.class) {
 			switch (baseFeatureID) {
-				case formPackage.CLASS_REFERENCE__REAL_CLASS: return formPackage.FORM_CLASS__REAL_CLASS;
-				case formPackage.CLASS_REFERENCE__ASSOCIATION_CLASS: return formPackage.FORM_CLASS__ASSOCIATION_CLASS;
+				case FormPackage.CLASS_REFERENCE__REAL_CLASS: return FormPackage.FORM_CLASS__REAL_CLASS;
+				case FormPackage.CLASS_REFERENCE__ASSOCIATION_CLASS: return FormPackage.FORM_CLASS__ASSOCIATION_CLASS;
 				default: return -1;
 			}
 		}

@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.form.FloatField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -86,7 +86,7 @@ public class FloatFieldImpl extends FieldImpl implements FloatField {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.FLOAT_FIELD;
+		return FormPackage.Literals.FLOAT_FIELD;
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class FloatFieldImpl extends FieldImpl implements FloatField {
 		int oldMin_value = min_value;
 		min_value = newMin_value;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.FLOAT_FIELD__MIN_VALUE, oldMin_value, min_value));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FLOAT_FIELD__MIN_VALUE, oldMin_value, min_value));
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class FloatFieldImpl extends FieldImpl implements FloatField {
 		int oldMax_value = max_value;
 		max_value = newMax_value;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.FLOAT_FIELD__MAX_VALUE, oldMax_value, max_value));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FLOAT_FIELD__MAX_VALUE, oldMax_value, max_value));
 	}
 
 	/**
@@ -139,9 +139,9 @@ public class FloatFieldImpl extends FieldImpl implements FloatField {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case formPackage.FLOAT_FIELD__MIN_VALUE:
+			case FormPackage.FLOAT_FIELD__MIN_VALUE:
 				return new Integer(getMin_value());
-			case formPackage.FLOAT_FIELD__MAX_VALUE:
+			case FormPackage.FLOAT_FIELD__MAX_VALUE:
 				return new Integer(getMax_value());
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -155,10 +155,10 @@ public class FloatFieldImpl extends FieldImpl implements FloatField {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case formPackage.FLOAT_FIELD__MIN_VALUE:
+			case FormPackage.FLOAT_FIELD__MIN_VALUE:
 				setMin_value(((Integer)newValue).intValue());
 				return;
-			case formPackage.FLOAT_FIELD__MAX_VALUE:
+			case FormPackage.FLOAT_FIELD__MAX_VALUE:
 				setMax_value(((Integer)newValue).intValue());
 				return;
 		}
@@ -173,10 +173,10 @@ public class FloatFieldImpl extends FieldImpl implements FloatField {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case formPackage.FLOAT_FIELD__MIN_VALUE:
+			case FormPackage.FLOAT_FIELD__MIN_VALUE:
 				setMin_value(MIN_VALUE_EDEFAULT);
 				return;
-			case formPackage.FLOAT_FIELD__MAX_VALUE:
+			case FormPackage.FLOAT_FIELD__MAX_VALUE:
 				setMax_value(MAX_VALUE_EDEFAULT);
 				return;
 		}
@@ -191,9 +191,9 @@ public class FloatFieldImpl extends FieldImpl implements FloatField {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case formPackage.FLOAT_FIELD__MIN_VALUE:
+			case FormPackage.FLOAT_FIELD__MIN_VALUE:
 				return min_value != MIN_VALUE_EDEFAULT;
-			case formPackage.FLOAT_FIELD__MAX_VALUE:
+			case FormPackage.FLOAT_FIELD__MAX_VALUE:
 				return max_value != MAX_VALUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

@@ -65,11 +65,11 @@ ISelectionChangedListener {
 		// Transform field in a selected one
 		try {
 			InternalModification.dontMoveToDisabled();
-			Method m = formFactory.eINSTANCE.getClass().getDeclaredMethod("create" + transFormTo, (Class[])null);
-			Field f = (Field) m.invoke(formFactory.eINSTANCE, (Object[])null);
+			Method m = FormFactory.eINSTANCE.getClass().getDeclaredMethod("create" + transFormTo, (Class[])null);
+			Field f = (Field) m.invoke(FormFactory.eINSTANCE, (Object[])null);
 			FieldTransformation.transform(field,f);
 			
-			Command addMcfCmd = AddCommand.create(domain, field.eContainer(), formPackage.eINSTANCE.getFormGroup_Children(), f,((FormGroup)field.eContainer()).getChildren().lastIndexOf(field));
+			Command addMcfCmd = AddCommand.create(domain, field.eContainer(), FormPackage.eINSTANCE.getFormGroup_Children(), f,((FormGroup)field.eContainer()).getChildren().lastIndexOf(field));
 			Command delCmd = RemoveCommand.create(domain, (Object)field);
 			CompoundCommand cc = new CompoundCommand();
 			cc.append(addMcfCmd);

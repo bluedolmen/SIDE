@@ -43,8 +43,8 @@ import com.bluexml.side.form.TextWidgetType;
 import com.bluexml.side.form.TimeField;
 import com.bluexml.side.form.URLField;
 import com.bluexml.side.form.VirtualField;
-import com.bluexml.side.form.formFactory;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormFactory;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -52,24 +52,24 @@ import com.bluexml.side.form.formPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class formFactoryImpl extends EFactoryImpl implements formFactory {
+public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static formFactory init() {
+	public static FormFactory init() {
 		try {
-			formFactory theformFactory = (formFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kerblue.org/form/1.0"); 
-			if (theformFactory != null) {
-				return theformFactory;
+			FormFactory theFormFactory = (FormFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kerblue.org/form/1.0"); 
+			if (theFormFactory != null) {
+				return theFormFactory;
 			}
 		}
 		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
-		return new formFactoryImpl();
+		return new FormFactoryImpl();
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class formFactoryImpl extends EFactoryImpl implements formFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public formFactoryImpl() {
+	public FormFactoryImpl() {
 		super();
 	}
 
@@ -90,34 +90,34 @@ public class formFactoryImpl extends EFactoryImpl implements formFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case formPackage.FORM: return createForm();
-			case formPackage.FORM_GROUP: return createFormGroup();
-			case formPackage.BOOLEAN_FIELD: return createBooleanField();
-			case formPackage.CHAR_FIELD: return createCharField();
-			case formPackage.DATE_FIELD: return createDateField();
-			case formPackage.DATE_TIME_FIELD: return createDateTimeField();
-			case formPackage.DECIMAL_FIELD: return createDecimalField();
-			case formPackage.FLOAT_FIELD: return createFloatField();
-			case formPackage.INTEGER_FIELD: return createIntegerField();
-			case formPackage.MODEL_CHOICE_FIELD: return createModelChoiceField();
-			case formPackage.EMAIL_FIELD: return createEmailField();
-			case formPackage.FILE_FIELD: return createFileField();
-			case formPackage.IMAGE_FIELD: return createImageField();
-			case formPackage.TIME_FIELD: return createTimeField();
-			case formPackage.URL_FIELD: return createURLField();
-			case formPackage.PHONE_NUMBER_FIELD: return createPhoneNumberField();
-			case formPackage.FORM_ASPECT: return createFormAspect();
-			case formPackage.FORM_CLASS: return createFormClass();
-			case formPackage.REFERENCE: return createReference();
-			case formPackage.FORM_COLLECTION: return createFormCollection();
-			case formPackage.CHOICE_FIELD: return createChoiceField();
-			case formPackage.REGEX_FIELD: return createRegexField();
-			case formPackage.PASSWORD_FIELD: return createPasswordField();
-			case formPackage.VIRTUAL_FIELD: return createVirtualField();
-			case formPackage.ACTION_FIELD: return createActionField();
-			case formPackage.TEXT_FIELD: return createTextField();
-			case formPackage.WORKFLOW_FORM_COLLECTION: return createWorkflowFormCollection();
-			case formPackage.FORM_WORKFLOW: return createFormWorkflow();
+			case FormPackage.FORM: return createForm();
+			case FormPackage.FORM_GROUP: return createFormGroup();
+			case FormPackage.BOOLEAN_FIELD: return createBooleanField();
+			case FormPackage.CHAR_FIELD: return createCharField();
+			case FormPackage.DATE_FIELD: return createDateField();
+			case FormPackage.DATE_TIME_FIELD: return createDateTimeField();
+			case FormPackage.DECIMAL_FIELD: return createDecimalField();
+			case FormPackage.FLOAT_FIELD: return createFloatField();
+			case FormPackage.INTEGER_FIELD: return createIntegerField();
+			case FormPackage.MODEL_CHOICE_FIELD: return createModelChoiceField();
+			case FormPackage.EMAIL_FIELD: return createEmailField();
+			case FormPackage.FILE_FIELD: return createFileField();
+			case FormPackage.IMAGE_FIELD: return createImageField();
+			case FormPackage.TIME_FIELD: return createTimeField();
+			case FormPackage.URL_FIELD: return createURLField();
+			case FormPackage.PHONE_NUMBER_FIELD: return createPhoneNumberField();
+			case FormPackage.FORM_ASPECT: return createFormAspect();
+			case FormPackage.FORM_CLASS: return createFormClass();
+			case FormPackage.REFERENCE: return createReference();
+			case FormPackage.FORM_COLLECTION: return createFormCollection();
+			case FormPackage.CHOICE_FIELD: return createChoiceField();
+			case FormPackage.REGEX_FIELD: return createRegexField();
+			case FormPackage.PASSWORD_FIELD: return createPasswordField();
+			case FormPackage.VIRTUAL_FIELD: return createVirtualField();
+			case FormPackage.ACTION_FIELD: return createActionField();
+			case FormPackage.TEXT_FIELD: return createTextField();
+			case FormPackage.WORKFLOW_FORM_COLLECTION: return createWorkflowFormCollection();
+			case FormPackage.FORM_WORKFLOW: return createFormWorkflow();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -131,13 +131,13 @@ public class formFactoryImpl extends EFactoryImpl implements formFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case formPackage.FORM_GROUP_PRESENTATION_TYPE:
+			case FormPackage.FORM_GROUP_PRESENTATION_TYPE:
 				return createFormGroupPresentationTypeFromString(eDataType, initialValue);
-			case formPackage.TEXT_WIDGET_TYPE:
+			case FormPackage.TEXT_WIDGET_TYPE:
 				return createTextWidgetTypeFromString(eDataType, initialValue);
-			case formPackage.CHOICE_WIDGET_TYPE:
+			case FormPackage.CHOICE_WIDGET_TYPE:
 				return createChoiceWidgetTypeFromString(eDataType, initialValue);
-			case formPackage.REFERENCE_WIDGET_TYPE:
+			case FormPackage.REFERENCE_WIDGET_TYPE:
 				return createReferenceWidgetTypeFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -152,13 +152,13 @@ public class formFactoryImpl extends EFactoryImpl implements formFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case formPackage.FORM_GROUP_PRESENTATION_TYPE:
+			case FormPackage.FORM_GROUP_PRESENTATION_TYPE:
 				return convertFormGroupPresentationTypeToString(eDataType, instanceValue);
-			case formPackage.TEXT_WIDGET_TYPE:
+			case FormPackage.TEXT_WIDGET_TYPE:
 				return convertTextWidgetTypeToString(eDataType, instanceValue);
-			case formPackage.CHOICE_WIDGET_TYPE:
+			case FormPackage.CHOICE_WIDGET_TYPE:
 				return convertChoiceWidgetTypeToString(eDataType, instanceValue);
-			case formPackage.REFERENCE_WIDGET_TYPE:
+			case FormPackage.REFERENCE_WIDGET_TYPE:
 				return convertReferenceWidgetTypeToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -531,8 +531,8 @@ public class formFactoryImpl extends EFactoryImpl implements formFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public formPackage getformPackage() {
-		return (formPackage)getEPackage();
+	public FormPackage getFormPackage() {
+		return (FormPackage)getEPackage();
 	}
 
 	/**
@@ -542,8 +542,8 @@ public class formFactoryImpl extends EFactoryImpl implements formFactory {
 	 * @generated
 	 */
 	@Deprecated
-	public static formPackage getPackage() {
-		return formPackage.eINSTANCE;
+	public static FormPackage getPackage() {
+		return FormPackage.eINSTANCE;
 	}
 
 	

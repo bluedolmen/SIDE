@@ -18,7 +18,7 @@ package com.bluexml.side.form;
  * </ul>
  * </p>
  *
- * @see com.bluexml.side.form.formPackage#getTextField()
+ * @see com.bluexml.side.form.FormPackage#getTextField()
  * @model
  * @generated
  */
@@ -35,7 +35,7 @@ public interface TextField extends CharField {
 	 * @return the value of the '<em>Widget</em>' attribute.
 	 * @see com.bluexml.side.form.TextWidgetType
 	 * @see #setWidget(TextWidgetType)
-	 * @see com.bluexml.side.form.formPackage#getTextField_Widget()
+	 * @see com.bluexml.side.form.FormPackage#getTextField_Widget()
 	 * @model
 	 * @generated
 	 */

@@ -9,7 +9,7 @@ package com.bluexml.side.form.impl;
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 
 import com.bluexml.side.form.WorkflowFormCollection;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -60,7 +60,7 @@ public class WorkflowFormCollectionImpl extends FormCollectionImpl implements Wo
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.WORKFLOW_FORM_COLLECTION;
+		return FormPackage.Literals.WORKFLOW_FORM_COLLECTION;
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class WorkflowFormCollectionImpl extends FormCollectionImpl implements Wo
 			linked_process = (com.bluexml.side.workflow.Process)eResolveProxy(oldLinked_process);
 			if (linked_process != oldLinked_process) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, formPackage.WORKFLOW_FORM_COLLECTION__LINKED_PROCESS, oldLinked_process, linked_process));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FormPackage.WORKFLOW_FORM_COLLECTION__LINKED_PROCESS, oldLinked_process, linked_process));
 			}
 		}
 		return linked_process;
@@ -98,7 +98,7 @@ public class WorkflowFormCollectionImpl extends FormCollectionImpl implements Wo
 		com.bluexml.side.workflow.Process oldLinked_process = linked_process;
 		linked_process = newLinked_process;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.WORKFLOW_FORM_COLLECTION__LINKED_PROCESS, oldLinked_process, linked_process));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.WORKFLOW_FORM_COLLECTION__LINKED_PROCESS, oldLinked_process, linked_process));
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class WorkflowFormCollectionImpl extends FormCollectionImpl implements Wo
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case formPackage.WORKFLOW_FORM_COLLECTION__LINKED_PROCESS:
+			case FormPackage.WORKFLOW_FORM_COLLECTION__LINKED_PROCESS:
 				if (resolve) return getLinked_process();
 				return basicGetLinked_process();
 		}
@@ -124,7 +124,7 @@ public class WorkflowFormCollectionImpl extends FormCollectionImpl implements Wo
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case formPackage.WORKFLOW_FORM_COLLECTION__LINKED_PROCESS:
+			case FormPackage.WORKFLOW_FORM_COLLECTION__LINKED_PROCESS:
 				setLinked_process((com.bluexml.side.workflow.Process)newValue);
 				return;
 		}
@@ -139,7 +139,7 @@ public class WorkflowFormCollectionImpl extends FormCollectionImpl implements Wo
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case formPackage.WORKFLOW_FORM_COLLECTION__LINKED_PROCESS:
+			case FormPackage.WORKFLOW_FORM_COLLECTION__LINKED_PROCESS:
 				setLinked_process((com.bluexml.side.workflow.Process)null);
 				return;
 		}
@@ -154,7 +154,7 @@ public class WorkflowFormCollectionImpl extends FormCollectionImpl implements Wo
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case formPackage.WORKFLOW_FORM_COLLECTION__LINKED_PROCESS:
+			case FormPackage.WORKFLOW_FORM_COLLECTION__LINKED_PROCESS:
 				return linked_process != null;
 		}
 		return super.eIsSet(featureID);

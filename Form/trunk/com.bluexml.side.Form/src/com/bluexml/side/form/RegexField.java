@@ -18,7 +18,7 @@ package com.bluexml.side.form;
  * </ul>
  * </p>
  *
- * @see com.bluexml.side.form.formPackage#getRegexField()
+ * @see com.bluexml.side.form.FormPackage#getRegexField()
  * @model
  * @generated
  */
@@ -33,7 +33,7 @@ public interface RegexField extends CharField {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Regex</em>' attribute.
 	 * @see #setRegex(String)
-	 * @see com.bluexml.side.form.formPackage#getRegexField_Regex()
+	 * @see com.bluexml.side.form.FormPackage#getRegexField_Regex()
 	 * @model
 	 * @generated
 	 */

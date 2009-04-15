@@ -61,17 +61,17 @@ ISelectionChangedListener {
 	@SuppressWarnings("unchecked")
 	private void doAction(Reference ref) {
 		InternalModification.dontMoveToDisabled();
-		ModelChoiceField mcf = formFactory.eINSTANCE.createModelChoiceField();
+		ModelChoiceField mcf = FormFactory.eINSTANCE.createModelChoiceField();
 		FieldTransformation.transform(ref,mcf);
 		
 		CompoundCommand cc = new CompoundCommand();
 		Command delCmd = RemoveCommand.create(domain, (Object)ref);
-		Command addMcfCmd = AddCommand.create(domain, ref.eContainer(), formPackage.eINSTANCE.getFormGroup_Children(), mcf, ((FormGroup)ref.eContainer()).getChildren().lastIndexOf(ref));
+		Command addMcfCmd = AddCommand.create(domain, ref.eContainer(), FormPackage.eINSTANCE.getFormGroup_Children(), mcf, ((FormGroup)ref.eContainer()).getChildren().lastIndexOf(ref));
 		
 		// We seek virtualized fields of this ref to change link to the mcf
 		List<VirtualField> listVf = FormDiagramUtils.getVirtualizedFields(ref);
 		for (VirtualField vf : listVf) {
-			cc.append(SetCommand.create(domain, vf, formPackage.eINSTANCE.getVirtualField_Link(), mcf));
+			cc.append(SetCommand.create(domain, vf, FormPackage.eINSTANCE.getVirtualField_Link(), mcf));
 		}
 		
 		boolean doWork = UIUtils.showConfirmation("Delete pointed Form Class", "Do your want to delete pointed Form Class?");

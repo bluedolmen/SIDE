@@ -12,7 +12,7 @@ package com.bluexml.side.form;
  * <!-- end-user-doc -->
  *
  *
- * @see com.bluexml.side.form.formPackage#getPasswordField()
+ * @see com.bluexml.side.form.FormPackage#getPasswordField()
  * @model
  * @generated
  */

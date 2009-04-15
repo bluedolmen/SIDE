@@ -24,7 +24,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.form.IntegerField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.IntegerField} object.
@@ -80,7 +80,7 @@ public class IntegerFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_IntegerField_min_value_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_IntegerField_min_value_feature", "_UI_IntegerField_type"),
-				 formPackage.Literals.INTEGER_FIELD__MIN_VALUE,
+				 FormPackage.Literals.INTEGER_FIELD__MIN_VALUE,
 				 true,
 				 false,
 				 false,
@@ -102,7 +102,7 @@ public class IntegerFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_IntegerField_max_value_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_IntegerField_max_value_feature", "_UI_IntegerField_type"),
-				 formPackage.Literals.INTEGER_FIELD__MAX_VALUE,
+				 FormPackage.Literals.INTEGER_FIELD__MAX_VALUE,
 				 true,
 				 false,
 				 false,
@@ -147,8 +147,8 @@ public class IntegerFieldItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(IntegerField.class)) {
-			case formPackage.INTEGER_FIELD__MIN_VALUE:
-			case formPackage.INTEGER_FIELD__MAX_VALUE:
+			case FormPackage.INTEGER_FIELD__MIN_VALUE:
+			case FormPackage.INTEGER_FIELD__MAX_VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

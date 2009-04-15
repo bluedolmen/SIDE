@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Choice Widget Type</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see com.bluexml.side.form.formPackage#getChoiceWidgetType()
+ * @see com.bluexml.side.form.FormPackage#getChoiceWidgetType()
  * @model
  * @generated
  */

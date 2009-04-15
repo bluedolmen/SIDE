@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.form.RegexField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -65,7 +65,7 @@ public class RegexFieldImpl extends CharFieldImpl implements RegexField {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.REGEX_FIELD;
+		return FormPackage.Literals.REGEX_FIELD;
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class RegexFieldImpl extends CharFieldImpl implements RegexField {
 		String oldRegex = regex;
 		regex = newRegex;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.REGEX_FIELD__REGEX, oldRegex, regex));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.REGEX_FIELD__REGEX, oldRegex, regex));
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class RegexFieldImpl extends CharFieldImpl implements RegexField {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case formPackage.REGEX_FIELD__REGEX:
+			case FormPackage.REGEX_FIELD__REGEX:
 				return getRegex();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -111,7 +111,7 @@ public class RegexFieldImpl extends CharFieldImpl implements RegexField {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case formPackage.REGEX_FIELD__REGEX:
+			case FormPackage.REGEX_FIELD__REGEX:
 				setRegex((String)newValue);
 				return;
 		}
@@ -126,7 +126,7 @@ public class RegexFieldImpl extends CharFieldImpl implements RegexField {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case formPackage.REGEX_FIELD__REGEX:
+			case FormPackage.REGEX_FIELD__REGEX:
 				setRegex(REGEX_EDEFAULT);
 				return;
 		}
@@ -141,7 +141,7 @@ public class RegexFieldImpl extends CharFieldImpl implements RegexField {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case formPackage.REGEX_FIELD__REGEX:
+			case FormPackage.REGEX_FIELD__REGEX:
 				return REGEX_EDEFAULT == null ? regex != null : !REGEX_EDEFAULT.equals(regex);
 		}
 		return super.eIsSet(featureID);

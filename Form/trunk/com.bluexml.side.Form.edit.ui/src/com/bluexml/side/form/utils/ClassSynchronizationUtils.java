@@ -25,8 +25,8 @@ import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.VirtualField;
-import com.bluexml.side.form.formFactory;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormFactory;
+import com.bluexml.side.form.FormPackage;
 
 public class ClassSynchronizationUtils {
 	
@@ -86,7 +86,7 @@ public class ClassSynchronizationUtils {
 					}
 				} else {
 					// Add
-					FormAspect fa = formFactory.eINSTANCE.createFormAspect();;
+					FormAspect fa = FormFactory.eINSTANCE.createFormAspect();;
 					fa.setId(asp.getName());
 					fa.setRef(asp);
 					fa.setLabel(ClassDiagramUtils.getLabel(asp));
@@ -116,7 +116,7 @@ public class ClassSynchronizationUtils {
 			}
 		}
 		if (cToAdd.size() >0) {
-			cc.append(AddCommand.create(domain, fc, formPackage.eINSTANCE.getFormGroup_Children(), cToAdd));
+			cc.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormGroup_Children(), cToAdd));
 		}
 		
 		if (cToDel.size() > 0) {
@@ -136,13 +136,13 @@ public class ClassSynchronizationUtils {
 		
 		// Add
 		if (associationId.length() > 0 && !formChild.containsKey(associationId)) {
-			cc.append(AddCommand.create(domain, fc, formPackage.eINSTANCE.getFormGroup_Children(), ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass,false)));
+			cc.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormGroup_Children(), ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass,false)));
 		} else {
 			// Modification
 			Field mcf = (ModelChoiceField)formChild.get(associationId);
 			if(ass.isIsNavigableTARGET() && ass.getSource().equals(Clazz) && mcf != null) {
 				if (((ModelChoiceField)mcf).getMax_bound() > Integer.parseInt(ass.getMaxTARGET()) && Integer.parseInt(ass.getMaxTARGET()) != -1) {
-					cc.append(SetCommand.create(domain, mcf, formPackage.eINSTANCE.getModelChoiceField_Max_bound(), Integer.parseInt(ass.getMaxTARGET())));
+					cc.append(SetCommand.create(domain, mcf, FormPackage.eINSTANCE.getModelChoiceField_Max_bound(), Integer.parseInt(ass.getMaxTARGET())));
 				}
 			}
 		}
@@ -155,13 +155,13 @@ public class ClassSynchronizationUtils {
 		
 		// Add
 		if (associationId.length() > 0 && !formChild.containsKey(associationId)) {
-			cc.append(AddCommand.create(domain, fc, formPackage.eINSTANCE.getFormGroup_Children(), ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass,true)));
+			cc.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormGroup_Children(), ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass,true)));
 		} else {
 			// Modification
 			Field mcf = (ModelChoiceField)formChild.get(associationId);
 			if(ass.isIsNavigableSRC() && ass.getSource().equals(Clazz) && mcf != null) {
 				if (((ModelChoiceField)mcf).getMax_bound() > Integer.parseInt(ass.getMaxSRC())  && Integer.parseInt(ass.getMaxSRC()) != -1) {
-					cc.append(SetCommand.create(domain, mcf, formPackage.eINSTANCE.getModelChoiceField_Max_bound(), Integer.parseInt(ass.getMaxSRC())));
+					cc.append(SetCommand.create(domain, mcf, FormPackage.eINSTANCE.getModelChoiceField_Max_bound(), Integer.parseInt(ass.getMaxSRC())));
 				}
 			}
 		}
@@ -178,7 +178,7 @@ public class ClassSynchronizationUtils {
 				// If a field have been transformed we won't change it
 				// so we check that the field could be of the actual type
 				if (!FieldTransformation.getAvailableTransformation(transformedAttribute).contains(actualField.eClass().getName())) {
-					cc.append(AddCommand.create(domain, fg, formPackage.eINSTANCE.getFormGroup_Children(), transformedAttribute, ((FormGroup)actualField.eContainer()).getChildren().lastIndexOf(actualField))); //
+					cc.append(AddCommand.create(domain, fg, FormPackage.eINSTANCE.getFormGroup_Children(), transformedAttribute, ((FormGroup)actualField.eContainer()).getChildren().lastIndexOf(actualField))); //
 					actualField.setMandatory(false);
 					Command rmCmd = RemoveCommand.create(domain, actualField);
 					cc.append(rmCmd);
@@ -186,12 +186,12 @@ public class ClassSynchronizationUtils {
 			// Field set to mandatory :
 			} else if (transformedAttribute.isMandatory() && !actualField.isMandatory()) {
 				// If field is mandatory but put in disabled we must move it to Children
-				if (actualField.eContainmentFeature().equals(formPackage.eINSTANCE.getFormGroup_Disabled())) {
+				if (actualField.eContainmentFeature().equals(FormPackage.eINSTANCE.getFormGroup_Disabled())) {
 					actualField.setMandatory(false);
-					Command addCmd = AddCommand.create(domain, fg, formPackage.eINSTANCE.getFormGroup_Children(), actualField);
+					Command addCmd = AddCommand.create(domain, fg, FormPackage.eINSTANCE.getFormGroup_Children(), actualField);
 					cc.append(addCmd);
 				} else {
-					cc.append(SetCommand.create(domain, actualField, formPackage.eINSTANCE.getField_Mandatory(), true));
+					cc.append(SetCommand.create(domain, actualField, FormPackage.eINSTANCE.getField_Mandatory(), true));
 				}
 			}
 			// TODO
@@ -199,7 +199,7 @@ public class ClassSynchronizationUtils {
 			// Add
 			Field field = null;
 			field = ClassDiagramUtils.getFieldForAttribute(att);
-			cc.append(AddCommand.create(domain, fg, formPackage.eINSTANCE.getFormGroup_Children(), field));
+			cc.append(AddCommand.create(domain, fg, FormPackage.eINSTANCE.getFormGroup_Children(), field));
 		}
 	}
 }

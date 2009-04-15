@@ -25,7 +25,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.form.CharField;
 import com.bluexml.side.form.Field;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.CharField} object.
@@ -81,7 +81,7 @@ public class CharFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_CharField_min_length_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_CharField_min_length_feature", "_UI_CharField_type"),
-				 formPackage.Literals.CHAR_FIELD__MIN_LENGTH,
+				 FormPackage.Literals.CHAR_FIELD__MIN_LENGTH,
 				 true,
 				 false,
 				 false,
@@ -103,7 +103,7 @@ public class CharFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_CharField_max_length_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_CharField_max_length_feature", "_UI_CharField_type"),
-				 formPackage.Literals.CHAR_FIELD__MAX_LENGTH,
+				 FormPackage.Literals.CHAR_FIELD__MAX_LENGTH,
 				 true,
 				 false,
 				 false,
@@ -152,8 +152,8 @@ public class CharFieldItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(CharField.class)) {
-			case formPackage.CHAR_FIELD__MIN_LENGTH:
-			case formPackage.CHAR_FIELD__MAX_LENGTH:
+			case FormPackage.CHAR_FIELD__MIN_LENGTH:
+			case FormPackage.CHAR_FIELD__MAX_LENGTH:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

@@ -19,7 +19,7 @@ package com.bluexml.side.form;
  * </ul>
  * </p>
  *
- * @see com.bluexml.side.form.formPackage#getWorkflowFormCollection()
+ * @see com.bluexml.side.form.FormPackage#getWorkflowFormCollection()
  * @model
  * @generated
  */
@@ -34,7 +34,7 @@ public interface WorkflowFormCollection extends FormCollection {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Linked process</em>' reference.
 	 * @see #setLinked_process(com.bluexml.side.workflow.Process)
-	 * @see com.bluexml.side.form.formPackage#getWorkflowFormCollection_Linked_process()
+	 * @see com.bluexml.side.form.FormPackage#getWorkflowFormCollection_Linked_process()
 	 * @model
 	 * @generated
 	 */

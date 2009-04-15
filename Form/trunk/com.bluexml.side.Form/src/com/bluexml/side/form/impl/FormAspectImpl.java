@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.form.FormAspect;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,7 +39,7 @@ public class FormAspectImpl extends FormGroupImpl implements FormAspect {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.FORM_ASPECT;
+		return FormPackage.Literals.FORM_ASPECT;
 	}
 
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";

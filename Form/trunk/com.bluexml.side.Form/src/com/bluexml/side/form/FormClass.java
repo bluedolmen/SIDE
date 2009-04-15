@@ -15,7 +15,7 @@ package com.bluexml.side.form;
  * <!-- end-user-doc -->
  *
  *
- * @see com.bluexml.side.form.formPackage#getFormClass()
+ * @see com.bluexml.side.form.FormPackage#getFormClass()
  * @model
  * @generated
  */

@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.form.DecimalField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -128,7 +128,7 @@ public class DecimalFieldImpl extends FieldImpl implements DecimalField {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.DECIMAL_FIELD;
+		return FormPackage.Literals.DECIMAL_FIELD;
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class DecimalFieldImpl extends FieldImpl implements DecimalField {
 		int oldMin_value = min_value;
 		min_value = newMin_value;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.DECIMAL_FIELD__MIN_VALUE, oldMin_value, min_value));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.DECIMAL_FIELD__MIN_VALUE, oldMin_value, min_value));
 	}
 
 	/**
@@ -170,7 +170,7 @@ public class DecimalFieldImpl extends FieldImpl implements DecimalField {
 		int oldMax_value = max_value;
 		max_value = newMax_value;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.DECIMAL_FIELD__MAX_VALUE, oldMax_value, max_value));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.DECIMAL_FIELD__MAX_VALUE, oldMax_value, max_value));
 	}
 
 	/**
@@ -191,7 +191,7 @@ public class DecimalFieldImpl extends FieldImpl implements DecimalField {
 		int oldMax_digits = max_digits;
 		max_digits = newMax_digits;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.DECIMAL_FIELD__MAX_DIGITS, oldMax_digits, max_digits));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.DECIMAL_FIELD__MAX_DIGITS, oldMax_digits, max_digits));
 	}
 
 	/**
@@ -212,7 +212,7 @@ public class DecimalFieldImpl extends FieldImpl implements DecimalField {
 		int oldDecimal_places = decimal_places;
 		decimal_places = newDecimal_places;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.DECIMAL_FIELD__DECIMAL_PLACES, oldDecimal_places, decimal_places));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.DECIMAL_FIELD__DECIMAL_PLACES, oldDecimal_places, decimal_places));
 	}
 
 	/**
@@ -223,13 +223,13 @@ public class DecimalFieldImpl extends FieldImpl implements DecimalField {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case formPackage.DECIMAL_FIELD__MIN_VALUE:
+			case FormPackage.DECIMAL_FIELD__MIN_VALUE:
 				return new Integer(getMin_value());
-			case formPackage.DECIMAL_FIELD__MAX_VALUE:
+			case FormPackage.DECIMAL_FIELD__MAX_VALUE:
 				return new Integer(getMax_value());
-			case formPackage.DECIMAL_FIELD__MAX_DIGITS:
+			case FormPackage.DECIMAL_FIELD__MAX_DIGITS:
 				return new Integer(getMax_digits());
-			case formPackage.DECIMAL_FIELD__DECIMAL_PLACES:
+			case FormPackage.DECIMAL_FIELD__DECIMAL_PLACES:
 				return new Integer(getDecimal_places());
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -243,16 +243,16 @@ public class DecimalFieldImpl extends FieldImpl implements DecimalField {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case formPackage.DECIMAL_FIELD__MIN_VALUE:
+			case FormPackage.DECIMAL_FIELD__MIN_VALUE:
 				setMin_value(((Integer)newValue).intValue());
 				return;
-			case formPackage.DECIMAL_FIELD__MAX_VALUE:
+			case FormPackage.DECIMAL_FIELD__MAX_VALUE:
 				setMax_value(((Integer)newValue).intValue());
 				return;
-			case formPackage.DECIMAL_FIELD__MAX_DIGITS:
+			case FormPackage.DECIMAL_FIELD__MAX_DIGITS:
 				setMax_digits(((Integer)newValue).intValue());
 				return;
-			case formPackage.DECIMAL_FIELD__DECIMAL_PLACES:
+			case FormPackage.DECIMAL_FIELD__DECIMAL_PLACES:
 				setDecimal_places(((Integer)newValue).intValue());
 				return;
 		}
@@ -267,16 +267,16 @@ public class DecimalFieldImpl extends FieldImpl implements DecimalField {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case formPackage.DECIMAL_FIELD__MIN_VALUE:
+			case FormPackage.DECIMAL_FIELD__MIN_VALUE:
 				setMin_value(MIN_VALUE_EDEFAULT);
 				return;
-			case formPackage.DECIMAL_FIELD__MAX_VALUE:
+			case FormPackage.DECIMAL_FIELD__MAX_VALUE:
 				setMax_value(MAX_VALUE_EDEFAULT);
 				return;
-			case formPackage.DECIMAL_FIELD__MAX_DIGITS:
+			case FormPackage.DECIMAL_FIELD__MAX_DIGITS:
 				setMax_digits(MAX_DIGITS_EDEFAULT);
 				return;
-			case formPackage.DECIMAL_FIELD__DECIMAL_PLACES:
+			case FormPackage.DECIMAL_FIELD__DECIMAL_PLACES:
 				setDecimal_places(DECIMAL_PLACES_EDEFAULT);
 				return;
 		}
@@ -291,13 +291,13 @@ public class DecimalFieldImpl extends FieldImpl implements DecimalField {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case formPackage.DECIMAL_FIELD__MIN_VALUE:
+			case FormPackage.DECIMAL_FIELD__MIN_VALUE:
 				return min_value != MIN_VALUE_EDEFAULT;
-			case formPackage.DECIMAL_FIELD__MAX_VALUE:
+			case FormPackage.DECIMAL_FIELD__MAX_VALUE:
 				return max_value != MAX_VALUE_EDEFAULT;
-			case formPackage.DECIMAL_FIELD__MAX_DIGITS:
+			case FormPackage.DECIMAL_FIELD__MAX_DIGITS:
 				return max_digits != MAX_DIGITS_EDEFAULT;
-			case formPackage.DECIMAL_FIELD__DECIMAL_PLACES:
+			case FormPackage.DECIMAL_FIELD__DECIMAL_PLACES:
 				return decimal_places != DECIMAL_PLACES_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

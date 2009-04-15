@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.clazz.ClassModelElement;
 import com.bluexml.side.form.FormElement;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -143,7 +143,7 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.FORM_ELEMENT;
+		return FormPackage.Literals.FORM_ELEMENT;
 	}
 
 	/**
@@ -164,7 +164,7 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 		String oldLabel = label;
 		label = newLabel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.FORM_ELEMENT__LABEL, oldLabel, label));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FORM_ELEMENT__LABEL, oldLabel, label));
 	}
 
 	/**
@@ -185,7 +185,7 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 		String oldId = id;
 		id = newId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.FORM_ELEMENT__ID, oldId, id));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FORM_ELEMENT__ID, oldId, id));
 	}
 
 	/**
@@ -206,7 +206,7 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 		String oldHelp_text = help_text;
 		help_text = newHelp_text;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.FORM_ELEMENT__HELP_TEXT, oldHelp_text, help_text));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FORM_ELEMENT__HELP_TEXT, oldHelp_text, help_text));
 	}
 
 	/**
@@ -220,7 +220,7 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 			ref = (ModelElement)eResolveProxy(oldRef);
 			if (ref != oldRef) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, formPackage.FORM_ELEMENT__REF, oldRef, ref));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FormPackage.FORM_ELEMENT__REF, oldRef, ref));
 			}
 		}
 		return ref;
@@ -244,7 +244,7 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 		ModelElement oldRef = ref;
 		ref = newRef;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.FORM_ELEMENT__REF, oldRef, ref));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FORM_ELEMENT__REF, oldRef, ref));
 	}
 
 	/**
@@ -265,7 +265,7 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 		boolean oldHidden = hidden;
 		hidden = newHidden;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.FORM_ELEMENT__HIDDEN, oldHidden, hidden));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FORM_ELEMENT__HIDDEN, oldHidden, hidden));
 	}
 
 	/**
@@ -276,16 +276,16 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case formPackage.FORM_ELEMENT__LABEL:
+			case FormPackage.FORM_ELEMENT__LABEL:
 				return getLabel();
-			case formPackage.FORM_ELEMENT__ID:
+			case FormPackage.FORM_ELEMENT__ID:
 				return getId();
-			case formPackage.FORM_ELEMENT__HELP_TEXT:
+			case FormPackage.FORM_ELEMENT__HELP_TEXT:
 				return getHelp_text();
-			case formPackage.FORM_ELEMENT__REF:
+			case FormPackage.FORM_ELEMENT__REF:
 				if (resolve) return getRef();
 				return basicGetRef();
-			case formPackage.FORM_ELEMENT__HIDDEN:
+			case FormPackage.FORM_ELEMENT__HIDDEN:
 				return isHidden() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -299,19 +299,19 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case formPackage.FORM_ELEMENT__LABEL:
+			case FormPackage.FORM_ELEMENT__LABEL:
 				setLabel((String)newValue);
 				return;
-			case formPackage.FORM_ELEMENT__ID:
+			case FormPackage.FORM_ELEMENT__ID:
 				setId((String)newValue);
 				return;
-			case formPackage.FORM_ELEMENT__HELP_TEXT:
+			case FormPackage.FORM_ELEMENT__HELP_TEXT:
 				setHelp_text((String)newValue);
 				return;
-			case formPackage.FORM_ELEMENT__REF:
+			case FormPackage.FORM_ELEMENT__REF:
 				setRef((ModelElement)newValue);
 				return;
-			case formPackage.FORM_ELEMENT__HIDDEN:
+			case FormPackage.FORM_ELEMENT__HIDDEN:
 				setHidden(((Boolean)newValue).booleanValue());
 				return;
 		}
@@ -326,19 +326,19 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case formPackage.FORM_ELEMENT__LABEL:
+			case FormPackage.FORM_ELEMENT__LABEL:
 				setLabel(LABEL_EDEFAULT);
 				return;
-			case formPackage.FORM_ELEMENT__ID:
+			case FormPackage.FORM_ELEMENT__ID:
 				setId(ID_EDEFAULT);
 				return;
-			case formPackage.FORM_ELEMENT__HELP_TEXT:
+			case FormPackage.FORM_ELEMENT__HELP_TEXT:
 				setHelp_text(HELP_TEXT_EDEFAULT);
 				return;
-			case formPackage.FORM_ELEMENT__REF:
+			case FormPackage.FORM_ELEMENT__REF:
 				setRef((ModelElement)null);
 				return;
-			case formPackage.FORM_ELEMENT__HIDDEN:
+			case FormPackage.FORM_ELEMENT__HIDDEN:
 				setHidden(HIDDEN_EDEFAULT);
 				return;
 		}
@@ -353,15 +353,15 @@ public abstract class FormElementImpl extends EObjectImpl implements FormElement
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case formPackage.FORM_ELEMENT__LABEL:
+			case FormPackage.FORM_ELEMENT__LABEL:
 				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
-			case formPackage.FORM_ELEMENT__ID:
+			case FormPackage.FORM_ELEMENT__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-			case formPackage.FORM_ELEMENT__HELP_TEXT:
+			case FormPackage.FORM_ELEMENT__HELP_TEXT:
 				return HELP_TEXT_EDEFAULT == null ? help_text != null : !HELP_TEXT_EDEFAULT.equals(help_text);
-			case formPackage.FORM_ELEMENT__REF:
+			case FormPackage.FORM_ELEMENT__REF:
 				return ref != null;
-			case formPackage.FORM_ELEMENT__HIDDEN:
+			case FormPackage.FORM_ELEMENT__HIDDEN:
 				return hidden != HIDDEN_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

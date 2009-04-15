@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.form.Field;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -141,7 +141,7 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.FIELD;
+		return FormPackage.Literals.FIELD;
 	}
 
 	/**
@@ -162,7 +162,7 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 		boolean oldMandatory = mandatory;
 		mandatory = newMandatory;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.FIELD__MANDATORY, oldMandatory, mandatory));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FIELD__MANDATORY, oldMandatory, mandatory));
 	}
 
 	/**
@@ -183,7 +183,7 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 		Map<String, String> oldError_messages = error_messages;
 		error_messages = newError_messages;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.FIELD__ERROR_MESSAGES, oldError_messages, error_messages));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FIELD__ERROR_MESSAGES, oldError_messages, error_messages));
 	}
 
 	/**
@@ -204,7 +204,7 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 		String oldInitial = initial;
 		initial = newInitial;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.FIELD__INITIAL, oldInitial, initial));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FIELD__INITIAL, oldInitial, initial));
 	}
 
 	/**
@@ -225,7 +225,7 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 		boolean oldDisabled = disabled;
 		disabled = newDisabled;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.FIELD__DISABLED, oldDisabled, disabled));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FIELD__DISABLED, oldDisabled, disabled));
 	}
 
 	/**
@@ -246,7 +246,7 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 		Integer oldFieldSize = fieldSize;
 		fieldSize = newFieldSize;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.FIELD__FIELD_SIZE, oldFieldSize, fieldSize));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FIELD__FIELD_SIZE, oldFieldSize, fieldSize));
 	}
 
 	/**
@@ -257,15 +257,15 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case formPackage.FIELD__MANDATORY:
+			case FormPackage.FIELD__MANDATORY:
 				return isMandatory() ? Boolean.TRUE : Boolean.FALSE;
-			case formPackage.FIELD__ERROR_MESSAGES:
+			case FormPackage.FIELD__ERROR_MESSAGES:
 				return getError_messages();
-			case formPackage.FIELD__INITIAL:
+			case FormPackage.FIELD__INITIAL:
 				return getInitial();
-			case formPackage.FIELD__DISABLED:
+			case FormPackage.FIELD__DISABLED:
 				return isDisabled() ? Boolean.TRUE : Boolean.FALSE;
-			case formPackage.FIELD__FIELD_SIZE:
+			case FormPackage.FIELD__FIELD_SIZE:
 				return getFieldSize();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -280,19 +280,19 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case formPackage.FIELD__MANDATORY:
+			case FormPackage.FIELD__MANDATORY:
 				setMandatory(((Boolean)newValue).booleanValue());
 				return;
-			case formPackage.FIELD__ERROR_MESSAGES:
+			case FormPackage.FIELD__ERROR_MESSAGES:
 				setError_messages((Map<String, String>)newValue);
 				return;
-			case formPackage.FIELD__INITIAL:
+			case FormPackage.FIELD__INITIAL:
 				setInitial((String)newValue);
 				return;
-			case formPackage.FIELD__DISABLED:
+			case FormPackage.FIELD__DISABLED:
 				setDisabled(((Boolean)newValue).booleanValue());
 				return;
-			case formPackage.FIELD__FIELD_SIZE:
+			case FormPackage.FIELD__FIELD_SIZE:
 				setFieldSize((Integer)newValue);
 				return;
 		}
@@ -307,19 +307,19 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case formPackage.FIELD__MANDATORY:
+			case FormPackage.FIELD__MANDATORY:
 				setMandatory(MANDATORY_EDEFAULT);
 				return;
-			case formPackage.FIELD__ERROR_MESSAGES:
+			case FormPackage.FIELD__ERROR_MESSAGES:
 				setError_messages((Map<String, String>)null);
 				return;
-			case formPackage.FIELD__INITIAL:
+			case FormPackage.FIELD__INITIAL:
 				setInitial(INITIAL_EDEFAULT);
 				return;
-			case formPackage.FIELD__DISABLED:
+			case FormPackage.FIELD__DISABLED:
 				setDisabled(DISABLED_EDEFAULT);
 				return;
-			case formPackage.FIELD__FIELD_SIZE:
+			case FormPackage.FIELD__FIELD_SIZE:
 				setFieldSize(FIELD_SIZE_EDEFAULT);
 				return;
 		}
@@ -334,15 +334,15 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case formPackage.FIELD__MANDATORY:
+			case FormPackage.FIELD__MANDATORY:
 				return mandatory != MANDATORY_EDEFAULT;
-			case formPackage.FIELD__ERROR_MESSAGES:
+			case FormPackage.FIELD__ERROR_MESSAGES:
 				return error_messages != null;
-			case formPackage.FIELD__INITIAL:
+			case FormPackage.FIELD__INITIAL:
 				return INITIAL_EDEFAULT == null ? initial != null : !INITIAL_EDEFAULT.equals(initial);
-			case formPackage.FIELD__DISABLED:
+			case FormPackage.FIELD__DISABLED:
 				return disabled != DISABLED_EDEFAULT;
-			case formPackage.FIELD__FIELD_SIZE:
+			case FormPackage.FIELD__FIELD_SIZE:
 				return FIELD_SIZE_EDEFAULT == null ? fieldSize != null : !FIELD_SIZE_EDEFAULT.equals(fieldSize);
 		}
 		return super.eIsSet(featureID);

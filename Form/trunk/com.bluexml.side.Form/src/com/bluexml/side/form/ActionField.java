@@ -12,7 +12,7 @@ package com.bluexml.side.form;
  * <!-- end-user-doc -->
  *
  *
- * @see com.bluexml.side.form.formPackage#getActionField()
+ * @see com.bluexml.side.form.FormPackage#getActionField()
  * @model
  * @generated
  */

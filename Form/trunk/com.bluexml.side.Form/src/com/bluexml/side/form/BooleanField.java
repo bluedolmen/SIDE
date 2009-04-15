@@ -12,7 +12,7 @@ package com.bluexml.side.form;
  * <!-- end-user-doc -->
  *
  *
- * @see com.bluexml.side.form.formPackage#getBooleanField()
+ * @see com.bluexml.side.form.FormPackage#getBooleanField()
  * @model
  * @generated
  */

@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.form.CharField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -86,7 +86,7 @@ public class CharFieldImpl extends FieldImpl implements CharField {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.CHAR_FIELD;
+		return FormPackage.Literals.CHAR_FIELD;
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class CharFieldImpl extends FieldImpl implements CharField {
 		int oldMin_length = min_length;
 		min_length = newMin_length;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.CHAR_FIELD__MIN_LENGTH, oldMin_length, min_length));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.CHAR_FIELD__MIN_LENGTH, oldMin_length, min_length));
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class CharFieldImpl extends FieldImpl implements CharField {
 		int oldMax_length = max_length;
 		max_length = newMax_length;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.CHAR_FIELD__MAX_LENGTH, oldMax_length, max_length));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.CHAR_FIELD__MAX_LENGTH, oldMax_length, max_length));
 	}
 
 	/**
@@ -139,9 +139,9 @@ public class CharFieldImpl extends FieldImpl implements CharField {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case formPackage.CHAR_FIELD__MIN_LENGTH:
+			case FormPackage.CHAR_FIELD__MIN_LENGTH:
 				return new Integer(getMin_length());
-			case formPackage.CHAR_FIELD__MAX_LENGTH:
+			case FormPackage.CHAR_FIELD__MAX_LENGTH:
 				return new Integer(getMax_length());
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -155,10 +155,10 @@ public class CharFieldImpl extends FieldImpl implements CharField {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case formPackage.CHAR_FIELD__MIN_LENGTH:
+			case FormPackage.CHAR_FIELD__MIN_LENGTH:
 				setMin_length(((Integer)newValue).intValue());
 				return;
-			case formPackage.CHAR_FIELD__MAX_LENGTH:
+			case FormPackage.CHAR_FIELD__MAX_LENGTH:
 				setMax_length(((Integer)newValue).intValue());
 				return;
 		}
@@ -173,10 +173,10 @@ public class CharFieldImpl extends FieldImpl implements CharField {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case formPackage.CHAR_FIELD__MIN_LENGTH:
+			case FormPackage.CHAR_FIELD__MIN_LENGTH:
 				setMin_length(MIN_LENGTH_EDEFAULT);
 				return;
-			case formPackage.CHAR_FIELD__MAX_LENGTH:
+			case FormPackage.CHAR_FIELD__MAX_LENGTH:
 				setMax_length(MAX_LENGTH_EDEFAULT);
 				return;
 		}
@@ -191,9 +191,9 @@ public class CharFieldImpl extends FieldImpl implements CharField {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case formPackage.CHAR_FIELD__MIN_LENGTH:
+			case FormPackage.CHAR_FIELD__MIN_LENGTH:
 				return min_length != MIN_LENGTH_EDEFAULT;
-			case formPackage.CHAR_FIELD__MAX_LENGTH:
+			case FormPackage.CHAR_FIELD__MAX_LENGTH:
 				return max_length != MAX_LENGTH_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

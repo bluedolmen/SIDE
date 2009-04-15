@@ -56,11 +56,11 @@ public class GroupAttributeAction extends Action implements
 		
 		FormElement fe = (FormElement) l.get(0).eContainer();
 		int index = ((FormGroup)fe).getChildren().lastIndexOf(l.get(0));
-		FormGroup newGroup = formFactory.eINSTANCE.createFormGroup();
+		FormGroup newGroup = FormFactory.eINSTANCE.createFormGroup();
 		newGroup.setLabel("New group");
 		newGroup.getChildren().addAll((Collection<? extends FormElement>) l);
 		
-		Command cmd = AddCommand.create(domain, fe, formPackage.eINSTANCE.getFormGroup_Children(), newGroup, index);
+		Command cmd = AddCommand.create(domain, fe, FormPackage.eINSTANCE.getFormGroup_Children(), newGroup, index);
 		domain.getCommandStack().execute(cmd);
 	}
 

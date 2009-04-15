@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  * </p>
  *
- * @see com.bluexml.side.form.formPackage#getFormCollection()
+ * @see com.bluexml.side.form.FormPackage#getFormCollection()
  * @model
  * @generated
  */
@@ -37,7 +37,7 @@ public interface FormCollection extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Forms</em>' containment reference list.
-	 * @see com.bluexml.side.form.formPackage#getFormCollection_Forms()
+	 * @see com.bluexml.side.form.FormPackage#getFormCollection_Forms()
 	 * @model containment="true"
 	 * @generated
 	 */

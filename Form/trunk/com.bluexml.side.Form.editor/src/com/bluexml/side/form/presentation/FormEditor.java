@@ -129,17 +129,17 @@ import com.bluexml.side.common.provider.CommonItemProviderAdapterFactory;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.Reference;
 import com.bluexml.side.form.VirtualField;
-import com.bluexml.side.form.provider.formItemProviderAdapterFactory;
+import com.bluexml.side.form.provider.FormItemProviderAdapterFactory;
 import com.bluexml.side.workflow.provider.WorkflowItemProviderAdapterFactory;
 
 
 /**
- * This is an example of a form model editor.
+ * This is an example of a Form model editor.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class formEditor
+public class FormEditor
 	extends MultiPageEditorPart
 	implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
 	/**
@@ -301,18 +301,18 @@ public class formEditor
 			public void partActivated(IWorkbenchPart p) {
 				if (p instanceof ContentOutline) {
 					if (((ContentOutline)p).getCurrentPage() == contentOutlinePage) {
-						getActionBarContributor().setActiveEditor(formEditor.this);
+						getActionBarContributor().setActiveEditor(FormEditor.this);
 
 						setCurrentViewer(contentOutlineViewer);
 					}
 				}
 				else if (p instanceof PropertySheet) {
 					if (((PropertySheet)p).getCurrentPage() == propertySheetPage) {
-						getActionBarContributor().setActiveEditor(formEditor.this);
+						getActionBarContributor().setActiveEditor(FormEditor.this);
 						handleActivate();
 					}
 				}
-				else if (p == formEditor.this) {
+				else if (p == FormEditor.this) {
 					handleActivate();
 				}
 			}
@@ -475,7 +475,7 @@ public class formEditor
 							getSite().getShell().getDisplay().asyncExec
 								(new Runnable() {
 									 public void run() {
-										 getSite().getPage().closeEditor(formEditor.this, false);
+										 getSite().getPage().closeEditor(FormEditor.this, false);
 									 }
 								 });
 						}
@@ -483,7 +483,7 @@ public class formEditor
 
 					if (!visitor.getChangedResources().isEmpty()) {
 						changedResources.addAll(visitor.getChangedResources());
-						if (getSite().getPage().getActiveEditor() == formEditor.this) {
+						if (getSite().getPage().getActiveEditor() == FormEditor.this) {
 							getSite().getShell().getDisplay().asyncExec
 								(new Runnable() {
 									 public void run() {
@@ -518,7 +518,7 @@ public class formEditor
 
 		if (!removedResources.isEmpty()) {
 			if (handleDirtyConflict()) {
-				getSite().getPage().closeEditor(formEditor.this, false);
+				getSite().getPage().closeEditor(FormEditor.this, false);
 			}
 			else {
 				removedResources.clear();
@@ -648,7 +648,7 @@ public class formEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public formEditor() {
+	public FormEditor() {
 		super();
 		initializeEditingDomain();
 	}
@@ -665,7 +665,7 @@ public class formEditor
 		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new formItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new FormItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ClazzItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new CommonItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new WorkflowItemProviderAdapterFactory());
@@ -1035,7 +1035,7 @@ public class formEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), formEditor.this) {
+					new ViewerPane(getSite().getPage(), FormEditor.this) {
 						@Override
 						public Viewer createViewer(Composite composite) {
 							Tree tree = new Tree(composite, SWT.MULTI);
@@ -1069,7 +1069,7 @@ public class formEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), formEditor.this) {
+					new ViewerPane(getSite().getPage(), FormEditor.this) {
 						@Override
 						public Viewer createViewer(Composite composite) {
 							Tree tree = new Tree(composite, SWT.MULTI);
@@ -1098,7 +1098,7 @@ public class formEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), formEditor.this) {
+					new ViewerPane(getSite().getPage(), FormEditor.this) {
 						@Override
 						public Viewer createViewer(Composite composite) {
 							return new ListViewer(composite);
@@ -1123,7 +1123,7 @@ public class formEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), formEditor.this) {
+					new ViewerPane(getSite().getPage(), FormEditor.this) {
 						@Override
 						public Viewer createViewer(Composite composite) {
 							return new TreeViewer(composite);
@@ -1150,7 +1150,7 @@ public class formEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), formEditor.this) {
+					new ViewerPane(getSite().getPage(), FormEditor.this) {
 						@Override
 						public Viewer createViewer(Composite composite) {
 							return new TableViewer(composite);
@@ -1193,7 +1193,7 @@ public class formEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), formEditor.this) {
+					new ViewerPane(getSite().getPage(), FormEditor.this) {
 						@Override
 						public Viewer createViewer(Composite composite) {
 							return new TreeViewer(composite);
@@ -1414,8 +1414,8 @@ public class formEditor
 				new ExtendedPropertySheetPage(editingDomain) {
 					@Override
 					public void setSelectionToViewer(List<?> selection) {
-						formEditor.this.setSelectionToViewer(selection);
-						formEditor.this.setFocus();
+						FormEditor.this.setSelectionToViewer(selection);
+						FormEditor.this.setFocus();
 					}
 
 					@Override

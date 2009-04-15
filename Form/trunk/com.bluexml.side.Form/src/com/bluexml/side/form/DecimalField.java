@@ -21,7 +21,7 @@ package com.bluexml.side.form;
  * </ul>
  * </p>
  *
- * @see com.bluexml.side.form.formPackage#getDecimalField()
+ * @see com.bluexml.side.form.FormPackage#getDecimalField()
  * @model
  * @generated
  */
@@ -36,7 +36,7 @@ public interface DecimalField extends Field {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Min value</em>' attribute.
 	 * @see #setMin_value(int)
-	 * @see com.bluexml.side.form.formPackage#getDecimalField_Min_value()
+	 * @see com.bluexml.side.form.FormPackage#getDecimalField_Min_value()
 	 * @model
 	 * @generated
 	 */
@@ -62,7 +62,7 @@ public interface DecimalField extends Field {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Max value</em>' attribute.
 	 * @see #setMax_value(int)
-	 * @see com.bluexml.side.form.formPackage#getDecimalField_Max_value()
+	 * @see com.bluexml.side.form.FormPackage#getDecimalField_Max_value()
 	 * @model
 	 * @generated
 	 */
@@ -88,7 +88,7 @@ public interface DecimalField extends Field {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Max digits</em>' attribute.
 	 * @see #setMax_digits(int)
-	 * @see com.bluexml.side.form.formPackage#getDecimalField_Max_digits()
+	 * @see com.bluexml.side.form.FormPackage#getDecimalField_Max_digits()
 	 * @model
 	 * @generated
 	 */
@@ -114,7 +114,7 @@ public interface DecimalField extends Field {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Decimal places</em>' attribute.
 	 * @see #setDecimal_places(int)
-	 * @see com.bluexml.side.form.formPackage#getDecimalField_Decimal_places()
+	 * @see com.bluexml.side.form.FormPackage#getDecimalField_Decimal_places()
 	 * @model
 	 * @generated
 	 */

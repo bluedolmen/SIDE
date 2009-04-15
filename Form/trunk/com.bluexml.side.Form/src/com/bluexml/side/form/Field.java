@@ -24,7 +24,7 @@ import java.util.Map;
  * </ul>
  * </p>
  *
- * @see com.bluexml.side.form.formPackage#getField()
+ * @see com.bluexml.side.form.FormPackage#getField()
  * @model abstract="true"
  * @generated
  */
@@ -39,7 +39,7 @@ public interface Field extends FormElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Mandatory</em>' attribute.
 	 * @see #setMandatory(boolean)
-	 * @see com.bluexml.side.form.formPackage#getField_Mandatory()
+	 * @see com.bluexml.side.form.FormPackage#getField_Mandatory()
 	 * @model
 	 * @generated
 	 */
@@ -65,7 +65,7 @@ public interface Field extends FormElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Error messages</em>' attribute.
 	 * @see #setError_messages(Map)
-	 * @see com.bluexml.side.form.formPackage#getField_Error_messages()
+	 * @see com.bluexml.side.form.FormPackage#getField_Error_messages()
 	 * @model transient="true"
 	 * @generated
 	 */
@@ -91,7 +91,7 @@ public interface Field extends FormElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Initial</em>' attribute.
 	 * @see #setInitial(String)
-	 * @see com.bluexml.side.form.formPackage#getField_Initial()
+	 * @see com.bluexml.side.form.FormPackage#getField_Initial()
 	 * @model
 	 * @generated
 	 */
@@ -117,7 +117,7 @@ public interface Field extends FormElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Disabled</em>' attribute.
 	 * @see #setDisabled(boolean)
-	 * @see com.bluexml.side.form.formPackage#getField_Disabled()
+	 * @see com.bluexml.side.form.FormPackage#getField_Disabled()
 	 * @model
 	 * @generated
 	 */
@@ -143,7 +143,7 @@ public interface Field extends FormElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Field Size</em>' attribute.
 	 * @see #setFieldSize(Integer)
-	 * @see com.bluexml.side.form.formPackage#getField_FieldSize()
+	 * @see com.bluexml.side.form.FormPackage#getField_FieldSize()
 	 * @model
 	 * @generated
 	 */

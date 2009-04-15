@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.form.URLField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -65,7 +65,7 @@ public class URLFieldImpl extends CharFieldImpl implements URLField {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.URL_FIELD;
+		return FormPackage.Literals.URL_FIELD;
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class URLFieldImpl extends CharFieldImpl implements URLField {
 		boolean oldVerify_exists = verify_exists;
 		verify_exists = newVerify_exists;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.URL_FIELD__VERIFY_EXISTS, oldVerify_exists, verify_exists));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.URL_FIELD__VERIFY_EXISTS, oldVerify_exists, verify_exists));
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class URLFieldImpl extends CharFieldImpl implements URLField {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case formPackage.URL_FIELD__VERIFY_EXISTS:
+			case FormPackage.URL_FIELD__VERIFY_EXISTS:
 				return isVerify_exists() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -111,7 +111,7 @@ public class URLFieldImpl extends CharFieldImpl implements URLField {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case formPackage.URL_FIELD__VERIFY_EXISTS:
+			case FormPackage.URL_FIELD__VERIFY_EXISTS:
 				setVerify_exists(((Boolean)newValue).booleanValue());
 				return;
 		}
@@ -126,7 +126,7 @@ public class URLFieldImpl extends CharFieldImpl implements URLField {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case formPackage.URL_FIELD__VERIFY_EXISTS:
+			case FormPackage.URL_FIELD__VERIFY_EXISTS:
 				setVerify_exists(VERIFY_EXISTS_EDEFAULT);
 				return;
 		}
@@ -141,7 +141,7 @@ public class URLFieldImpl extends CharFieldImpl implements URLField {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case formPackage.URL_FIELD__VERIFY_EXISTS:
+			case FormPackage.URL_FIELD__VERIFY_EXISTS:
 				return verify_exists != VERIFY_EXISTS_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

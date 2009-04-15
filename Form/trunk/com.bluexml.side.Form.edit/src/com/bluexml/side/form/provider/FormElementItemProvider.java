@@ -31,7 +31,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormElement;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.provider.command.DragAndDropFormElementCommand;
 import com.bluexml.side.form.utils.InternalModification;
 
@@ -92,7 +92,7 @@ public class FormElementItemProvider
 				 getResourceLocator(),
 				 getString("_UI_FormElement_label_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_FormElement_label_feature", "_UI_FormElement_type"),
-				 formPackage.Literals.FORM_ELEMENT__LABEL,
+				 FormPackage.Literals.FORM_ELEMENT__LABEL,
 				 true,
 				 false,
 				 false,
@@ -114,7 +114,7 @@ public class FormElementItemProvider
 				 getResourceLocator(),
 				 getString("_UI_FormElement_id_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_FormElement_id_feature", "_UI_FormElement_type"),
-				 formPackage.Literals.FORM_ELEMENT__ID,
+				 FormPackage.Literals.FORM_ELEMENT__ID,
 				 true,
 				 false,
 				 false,
@@ -136,7 +136,7 @@ public class FormElementItemProvider
 				 getResourceLocator(),
 				 getString("_UI_FormElement_help_text_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_FormElement_help_text_feature", "_UI_FormElement_type"),
-				 formPackage.Literals.FORM_ELEMENT__HELP_TEXT,
+				 FormPackage.Literals.FORM_ELEMENT__HELP_TEXT,
 				 true,
 				 false,
 				 false,
@@ -158,7 +158,7 @@ public class FormElementItemProvider
 				 getResourceLocator(),
 				 getString("_UI_FormElement_ref_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_FormElement_ref_feature", "_UI_FormElement_type"),
-				 formPackage.Literals.FORM_ELEMENT__REF,
+				 FormPackage.Literals.FORM_ELEMENT__REF,
 				 true,
 				 false,
 				 true,
@@ -180,7 +180,7 @@ public class FormElementItemProvider
 				 getResourceLocator(),
 				 getString("_UI_FormElement_hidden_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_FormElement_hidden_feature", "_UI_FormElement_type"),
-				 formPackage.Literals.FORM_ELEMENT__HIDDEN,
+				 FormPackage.Literals.FORM_ELEMENT__HIDDEN,
 				 true,
 				 false,
 				 false,
@@ -215,10 +215,10 @@ public class FormElementItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(FormElement.class)) {
-			case formPackage.FORM_ELEMENT__LABEL:
-			case formPackage.FORM_ELEMENT__ID:
-			case formPackage.FORM_ELEMENT__HELP_TEXT:
-			case formPackage.FORM_ELEMENT__HIDDEN:
+			case FormPackage.FORM_ELEMENT__LABEL:
+			case FormPackage.FORM_ELEMENT__ID:
+			case FormPackage.FORM_ELEMENT__HELP_TEXT:
+			case FormPackage.FORM_ELEMENT__HIDDEN:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

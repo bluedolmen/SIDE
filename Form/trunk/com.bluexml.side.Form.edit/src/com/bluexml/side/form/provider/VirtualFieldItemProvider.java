@@ -22,7 +22,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 import com.bluexml.side.form.VirtualField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.VirtualField} object.
@@ -77,7 +77,7 @@ public class VirtualFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_VirtualField_link_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_VirtualField_link_feature", "_UI_VirtualField_type"),
-				 formPackage.Literals.VIRTUAL_FIELD__LINK,
+				 FormPackage.Literals.VIRTUAL_FIELD__LINK,
 				 true,
 				 false,
 				 true,

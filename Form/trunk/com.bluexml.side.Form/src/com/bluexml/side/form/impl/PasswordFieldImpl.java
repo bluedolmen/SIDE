@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.form.PasswordField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,7 +39,7 @@ public class PasswordFieldImpl extends CharFieldImpl implements PasswordField {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.PASSWORD_FIELD;
+		return FormPackage.Literals.PASSWORD_FIELD;
 	}
 
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";

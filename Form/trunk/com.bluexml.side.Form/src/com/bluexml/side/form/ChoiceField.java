@@ -25,7 +25,7 @@ package com.bluexml.side.form;
  * </ul>
  * </p>
  *
- * @see com.bluexml.side.form.formPackage#getChoiceField()
+ * @see com.bluexml.side.form.FormPackage#getChoiceField()
  * @model
  * @generated
  */
@@ -40,7 +40,7 @@ public interface ChoiceField extends Field {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Min bound</em>' attribute.
 	 * @see #setMin_bound(int)
-	 * @see com.bluexml.side.form.formPackage#getChoiceField_Min_bound()
+	 * @see com.bluexml.side.form.FormPackage#getChoiceField_Min_bound()
 	 * @model
 	 * @generated
 	 */
@@ -66,7 +66,7 @@ public interface ChoiceField extends Field {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Max bound</em>' attribute.
 	 * @see #setMax_bound(int)
-	 * @see com.bluexml.side.form.formPackage#getChoiceField_Max_bound()
+	 * @see com.bluexml.side.form.FormPackage#getChoiceField_Max_bound()
 	 * @model
 	 * @generated
 	 */
@@ -94,7 +94,7 @@ public interface ChoiceField extends Field {
 	 * @return the value of the '<em>Widget</em>' attribute.
 	 * @see com.bluexml.side.form.ChoiceWidgetType
 	 * @see #setWidget(ChoiceWidgetType)
-	 * @see com.bluexml.side.form.formPackage#getChoiceField_Widget()
+	 * @see com.bluexml.side.form.FormPackage#getChoiceField_Widget()
 	 * @model
 	 * @generated
 	 */
@@ -121,7 +121,7 @@ public interface ChoiceField extends Field {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Multiple</em>' attribute.
 	 * @see #setMultiple(boolean)
-	 * @see com.bluexml.side.form.formPackage#getChoiceField_Multiple()
+	 * @see com.bluexml.side.form.FormPackage#getChoiceField_Multiple()
 	 * @model
 	 * @generated
 	 */
@@ -147,7 +147,7 @@ public interface ChoiceField extends Field {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Filter Parent</em>' attribute.
 	 * @see #setFilterParent(String)
-	 * @see com.bluexml.side.form.formPackage#getChoiceField_FilterParent()
+	 * @see com.bluexml.side.form.FormPackage#getChoiceField_FilterParent()
 	 * @model
 	 * @generated
 	 */
@@ -173,7 +173,7 @@ public interface ChoiceField extends Field {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Filter Data</em>' attribute.
 	 * @see #setFilterData(String)
-	 * @see com.bluexml.side.form.formPackage#getChoiceField_FilterData()
+	 * @see com.bluexml.side.form.FormPackage#getChoiceField_FilterData()
 	 * @model
 	 * @generated
 	 */

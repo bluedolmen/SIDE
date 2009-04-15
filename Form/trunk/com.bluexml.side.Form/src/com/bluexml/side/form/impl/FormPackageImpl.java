@@ -53,9 +53,9 @@ import com.bluexml.side.form.TimeField;
 import com.bluexml.side.form.URLField;
 import com.bluexml.side.form.VirtualField;
 import com.bluexml.side.form.WorkflowFormCollection;
-import com.bluexml.side.form.formFactory;
-import com.bluexml.side.form.formPackage;
-import com.bluexml.side.form.util.formValidator;
+import com.bluexml.side.form.FormFactory;
+import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.form.util.FormValidator;
 import com.bluexml.side.workflow.WorkflowPackage;
 
 /**
@@ -64,7 +64,7 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class formPackageImpl extends EPackageImpl implements formPackage {
+public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -328,12 +328,12 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see com.bluexml.side.form.formPackage#eNS_URI
+	 * @see com.bluexml.side.form.FormPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
-	private formPackageImpl() {
-		super(eNS_URI, formFactory.eINSTANCE);
+	private FormPackageImpl() {
+		super(eNS_URI, FormFactory.eINSTANCE);
 	}
 
 	/**
@@ -365,11 +365,11 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-	public static formPackage init() {
-		if (isInited) return (formPackage)EPackage.Registry.INSTANCE.getEPackage(formPackage.eNS_URI);
+	public static FormPackage init() {
+		if (isInited) return (FormPackage)EPackage.Registry.INSTANCE.getEPackage(FormPackage.eNS_URI);
 
 		// Obtain or create and register package
-		formPackageImpl theformPackage = (formPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof formPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new formPackageImpl());
+		FormPackageImpl theFormPackage = (FormPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof FormPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new FormPackageImpl());
 
 		isInited = true;
 
@@ -377,24 +377,24 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 		WorkflowPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
-		theformPackage.createPackageContents();
+		theFormPackage.createPackageContents();
 
 		// Initialize created meta-data
-		theformPackage.initializePackageContents();
+		theFormPackage.initializePackageContents();
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
-			(theformPackage, 
+			(theFormPackage, 
 			 new EValidator.Descriptor() {
 				 public EValidator getEValidator() {
-					 return formValidator.INSTANCE;
+					 return FormValidator.INSTANCE;
 				 }
 			 });
 
 		// Mark meta-data to indicate it can't be changed
-		theformPackage.freeze();
+		theFormPackage.freeze();
 
-		return theformPackage;
+		return theFormPackage;
 	}
 
 	/**
@@ -1167,8 +1167,8 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public formFactory getformFactory() {
-		return (formFactory)getEFactoryInstance();
+	public FormFactory getFormFactory() {
+		return (FormFactory)getEFactoryInstance();
 	}
 
 	/**
@@ -1592,7 +1592,7 @@ public class formPackageImpl extends EPackageImpl implements formPackage {
 		   });
 	}
 
-	public formFactory getFormsFactory() {
+	public FormFactory getFormsFactory() {
 		// TODO Auto-generated method stub
 		return null;
 	}

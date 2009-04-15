@@ -25,7 +25,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.TextField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.TextField} object.
@@ -80,7 +80,7 @@ public class TextFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_TextField_widget_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_TextField_widget_feature", "_UI_TextField_type"),
-				 formPackage.Literals.TEXT_FIELD__WIDGET,
+				 FormPackage.Literals.TEXT_FIELD__WIDGET,
 				 true,
 				 false,
 				 false,
@@ -130,7 +130,7 @@ public class TextFieldItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(TextField.class)) {
-			case formPackage.TEXT_FIELD__WIDGET:
+			case FormPackage.TEXT_FIELD__WIDGET:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

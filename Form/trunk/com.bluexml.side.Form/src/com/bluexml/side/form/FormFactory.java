@@ -14,17 +14,17 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see com.bluexml.side.form.formPackage
+ * @see com.bluexml.side.form.FormPackage
  * @generated
  */
-public interface formFactory extends EFactory {
+public interface FormFactory extends EFactory {
 	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	formFactory eINSTANCE = com.bluexml.side.form.impl.formFactoryImpl.init();
+	FormFactory eINSTANCE = com.bluexml.side.form.impl.FormFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Form</em>'.
@@ -36,10 +36,10 @@ public interface formFactory extends EFactory {
 	Form createForm();
 
 	/**
-	 * Returns a new object of class '<em>Form Group</em>'.
+	 * Returns a new object of class '<em>Group</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Form Group</em>'.
+	 * @return a new object of class '<em>Group</em>'.
 	 * @generated
 	 */
 	FormGroup createFormGroup();
@@ -171,19 +171,19 @@ public interface formFactory extends EFactory {
 	PhoneNumberField createPhoneNumberField();
 
 	/**
-	 * Returns a new object of class '<em>Form Aspect</em>'.
+	 * Returns a new object of class '<em>Aspect</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Form Aspect</em>'.
+	 * @return a new object of class '<em>Aspect</em>'.
 	 * @generated
 	 */
 	FormAspect createFormAspect();
 
 	/**
-	 * Returns a new object of class '<em>Form Class</em>'.
+	 * Returns a new object of class '<em>Class</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Form Class</em>'.
+	 * @return a new object of class '<em>Class</em>'.
 	 * @generated
 	 */
 	FormClass createFormClass();
@@ -198,10 +198,10 @@ public interface formFactory extends EFactory {
 	Reference createReference();
 
 	/**
-	 * Returns a new object of class '<em>Form Collection</em>'.
+	 * Returns a new object of class '<em>Collection</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Form Collection</em>'.
+	 * @return a new object of class '<em>Collection</em>'.
 	 * @generated
 	 */
 	FormCollection createFormCollection();
@@ -270,10 +270,10 @@ public interface formFactory extends EFactory {
 	WorkflowFormCollection createWorkflowFormCollection();
 
 	/**
-	 * Returns a new object of class '<em>Form Workflow</em>'.
+	 * Returns a new object of class '<em>Workflow</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Form Workflow</em>'.
+	 * @return a new object of class '<em>Workflow</em>'.
 	 * @generated
 	 */
 	FormWorkflow createFormWorkflow();
@@ -285,6 +285,6 @@ public interface formFactory extends EFactory {
 	 * @return the package supported by this factory.
 	 * @generated
 	 */
-	formPackage getformPackage();
+	FormPackage getFormPackage();
 
 } //KerblueFormsFactory

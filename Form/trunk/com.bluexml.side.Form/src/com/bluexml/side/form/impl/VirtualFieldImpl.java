@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.VirtualField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -57,7 +57,7 @@ public class VirtualFieldImpl extends FieldImpl implements VirtualField {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.VIRTUAL_FIELD;
+		return FormPackage.Literals.VIRTUAL_FIELD;
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class VirtualFieldImpl extends FieldImpl implements VirtualField {
 			link = (Field)eResolveProxy(oldLink);
 			if (link != oldLink) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, formPackage.VIRTUAL_FIELD__LINK, oldLink, link));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FormPackage.VIRTUAL_FIELD__LINK, oldLink, link));
 			}
 		}
 		return link;
@@ -95,7 +95,7 @@ public class VirtualFieldImpl extends FieldImpl implements VirtualField {
 		Field oldLink = link;
 		link = newLink;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.VIRTUAL_FIELD__LINK, oldLink, link));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.VIRTUAL_FIELD__LINK, oldLink, link));
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class VirtualFieldImpl extends FieldImpl implements VirtualField {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case formPackage.VIRTUAL_FIELD__LINK:
+			case FormPackage.VIRTUAL_FIELD__LINK:
 				if (resolve) return getLink();
 				return basicGetLink();
 		}
@@ -121,7 +121,7 @@ public class VirtualFieldImpl extends FieldImpl implements VirtualField {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case formPackage.VIRTUAL_FIELD__LINK:
+			case FormPackage.VIRTUAL_FIELD__LINK:
 				setLink((Field)newValue);
 				return;
 		}
@@ -136,7 +136,7 @@ public class VirtualFieldImpl extends FieldImpl implements VirtualField {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case formPackage.VIRTUAL_FIELD__LINK:
+			case FormPackage.VIRTUAL_FIELD__LINK:
 				setLink((Field)null);
 				return;
 		}
@@ -151,7 +151,7 @@ public class VirtualFieldImpl extends FieldImpl implements VirtualField {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case formPackage.VIRTUAL_FIELD__LINK:
+			case FormPackage.VIRTUAL_FIELD__LINK:
 				return link != null;
 		}
 		return super.eIsSet(featureID);

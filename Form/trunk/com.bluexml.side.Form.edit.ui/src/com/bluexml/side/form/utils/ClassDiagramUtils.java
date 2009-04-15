@@ -30,7 +30,7 @@ import com.bluexml.side.form.ChoiceField;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.ModelChoiceField;
-import com.bluexml.side.form.formFactory;
+import com.bluexml.side.form.FormFactory;
 
 public class ClassDiagramUtils {
 	
@@ -45,17 +45,17 @@ public class ClassDiagramUtils {
 			Map<String, String> metaInfoMap = InitializeMetaInfo(att.getMetainfo());
 			// Choice Field
 			if (att.getValueList() != null) {
-				field = formFactory.eINSTANCE.createChoiceField();
+				field = FormFactory.eINSTANCE.createChoiceField();
 				if (metaInfoMap.containsKey("multiple") && metaInfoMap.get("multiple") != null && metaInfoMap.get("multiple").equals("True")) {
 					((ChoiceField) field).setMultiple(true);
 				}
 			} else if (att.getTyp().equals(AttributeType.STRING)) { 
 				// Email Field
 				if (Boolean.parseBoolean(metaInfoMap.get("email"))) {
-					field = formFactory.eINSTANCE.createEmailField();
+					field = FormFactory.eINSTANCE.createEmailField();
 				} else {
 				// Char Field
-					field = formFactory.eINSTANCE.createCharField();
+					field = FormFactory.eINSTANCE.createCharField();
 					if (metaInfoMap.containsKey("max-length") && metaInfoMap.get("max-length") != null) {
 						((CharField)field).setMax_length(Integer.parseInt(metaInfoMap.get("max-length")));
 					}
@@ -65,28 +65,28 @@ public class ClassDiagramUtils {
 				}
 			// Date Time Field
 			} else if (att.getTyp().equals(AttributeType.DATE_TIME)) {
-				field = formFactory.eINSTANCE.createDateTimeField();
+				field = FormFactory.eINSTANCE.createDateTimeField();
 			// Date Field
 			} else if (att.getTyp().equals(AttributeType.DATE)) {
-				field = formFactory.eINSTANCE.createDateField();
+				field = FormFactory.eINSTANCE.createDateField();
 			// Time Field
 			} else if (att.getTyp().equals(AttributeType.TIME)) {
-				field = formFactory.eINSTANCE.createTimeField();
+				field = FormFactory.eINSTANCE.createTimeField();
 			} else if(att.getTyp().equals(AttributeType.BOOLEAN)) {
 			// Boolean Field
-				field = formFactory.eINSTANCE.createBooleanField();
+				field = FormFactory.eINSTANCE.createBooleanField();
 			} else if(att.getTyp().equals(AttributeType.INT)) {
 			// Integer Field
-				field = formFactory.eINSTANCE.createIntegerField();
+				field = FormFactory.eINSTANCE.createIntegerField();
 			} else if(att.getTyp().equals(AttributeType.FLOAT)) {
 			// Float Field
-				field = formFactory.eINSTANCE.createFloatField();
+				field = FormFactory.eINSTANCE.createFloatField();
 			} else if(att.getTyp().equals(AttributeType.DOUBLE)) {
 			// Decimal Field
-				field = formFactory.eINSTANCE.createDecimalField();
+				field = FormFactory.eINSTANCE.createDecimalField();
 			} else if(att.getTyp().equals(AttributeType.SHORT)) {
 			// Short Field
-				field = formFactory.eINSTANCE.createIntegerField();
+				field = FormFactory.eINSTANCE.createIntegerField();
 			} else {
 				EcorePlugin.INSTANCE.log("No field available for " + att.getTyp());
 			}
@@ -114,7 +114,7 @@ public class ClassDiagramUtils {
 	public static Field getFieldForOperation(Operation op) {
 		Field f = null;
 		if (op != null) {
-			f = formFactory.eINSTANCE.createActionField();
+			f = FormFactory.eINSTANCE.createActionField();
 			f.setId(op.getName());
 			f.setLabel(op.getName());
 			f.setRef(op);
@@ -129,7 +129,7 @@ public class ClassDiagramUtils {
 	 * @return
 	 */
 	public static FormElement transformAssociationIntoModelChoiceField(Association ass, boolean useSource) {
-		ModelChoiceField f = formFactory.eINSTANCE.createModelChoiceField();
+		ModelChoiceField f = FormFactory.eINSTANCE.createModelChoiceField();
 		
 		String id = getAssociationName(ass, useSource);
 		

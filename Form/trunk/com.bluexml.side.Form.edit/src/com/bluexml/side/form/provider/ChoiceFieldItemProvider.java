@@ -24,7 +24,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.form.ChoiceField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.ChoiceField} object.
@@ -84,7 +84,7 @@ public class ChoiceFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_ChoiceField_min_bound_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ChoiceField_min_bound_feature", "_UI_ChoiceField_type"),
-				 formPackage.Literals.CHOICE_FIELD__MIN_BOUND,
+				 FormPackage.Literals.CHOICE_FIELD__MIN_BOUND,
 				 true,
 				 false,
 				 false,
@@ -106,7 +106,7 @@ public class ChoiceFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_ChoiceField_max_bound_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ChoiceField_max_bound_feature", "_UI_ChoiceField_type"),
-				 formPackage.Literals.CHOICE_FIELD__MAX_BOUND,
+				 FormPackage.Literals.CHOICE_FIELD__MAX_BOUND,
 				 true,
 				 false,
 				 false,
@@ -128,7 +128,7 @@ public class ChoiceFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_ChoiceField_widget_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ChoiceField_widget_feature", "_UI_ChoiceField_type"),
-				 formPackage.Literals.CHOICE_FIELD__WIDGET,
+				 FormPackage.Literals.CHOICE_FIELD__WIDGET,
 				 true,
 				 false,
 				 false,
@@ -150,7 +150,7 @@ public class ChoiceFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_ChoiceField_multiple_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ChoiceField_multiple_feature", "_UI_ChoiceField_type"),
-				 formPackage.Literals.CHOICE_FIELD__MULTIPLE,
+				 FormPackage.Literals.CHOICE_FIELD__MULTIPLE,
 				 true,
 				 false,
 				 false,
@@ -172,7 +172,7 @@ public class ChoiceFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_ChoiceField_filterParent_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ChoiceField_filterParent_feature", "_UI_ChoiceField_type"),
-				 formPackage.Literals.CHOICE_FIELD__FILTER_PARENT,
+				 FormPackage.Literals.CHOICE_FIELD__FILTER_PARENT,
 				 true,
 				 false,
 				 false,
@@ -194,7 +194,7 @@ public class ChoiceFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_ChoiceField_filterData_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ChoiceField_filterData_feature", "_UI_ChoiceField_type"),
-				 formPackage.Literals.CHOICE_FIELD__FILTER_DATA,
+				 FormPackage.Literals.CHOICE_FIELD__FILTER_DATA,
 				 true,
 				 false,
 				 false,
@@ -239,12 +239,12 @@ public class ChoiceFieldItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ChoiceField.class)) {
-			case formPackage.CHOICE_FIELD__MIN_BOUND:
-			case formPackage.CHOICE_FIELD__MAX_BOUND:
-			case formPackage.CHOICE_FIELD__WIDGET:
-			case formPackage.CHOICE_FIELD__MULTIPLE:
-			case formPackage.CHOICE_FIELD__FILTER_PARENT:
-			case formPackage.CHOICE_FIELD__FILTER_DATA:
+			case FormPackage.CHOICE_FIELD__MIN_BOUND:
+			case FormPackage.CHOICE_FIELD__MAX_BOUND:
+			case FormPackage.CHOICE_FIELD__WIDGET:
+			case FormPackage.CHOICE_FIELD__MULTIPLE:
+			case FormPackage.CHOICE_FIELD__FILTER_PARENT:
+			case FormPackage.CHOICE_FIELD__FILTER_DATA:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

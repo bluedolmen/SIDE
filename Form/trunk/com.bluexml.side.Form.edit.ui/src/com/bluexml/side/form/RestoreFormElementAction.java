@@ -56,7 +56,7 @@ ISelectionChangedListener {
 	
 	private void doAction() {
 		CompoundCommand cc = new CompoundCommand();
-		Command addCmd = AddCommand.create(domain, selectedObject, formPackage.eINSTANCE.getFormGroup_Children(), toRestore);
+		Command addCmd = AddCommand.create(domain, selectedObject, FormPackage.eINSTANCE.getFormGroup_Children(), toRestore);
 		cc.append(addCmd);
 		domain.getCommandStack().execute(cc);
 	}

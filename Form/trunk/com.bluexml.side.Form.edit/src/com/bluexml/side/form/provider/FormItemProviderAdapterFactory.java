@@ -6,7 +6,7 @@
  */
 package com.bluexml.side.form.provider;
 
-import com.bluexml.side.form.util.formAdapterFactory;
+import com.bluexml.side.form.util.FormAdapterFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,7 +36,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * <!-- end-user-doc -->
  * @generated
  */
-public class formItemProviderAdapterFactory extends formAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class FormItemProviderAdapterFactory extends FormAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc -->
@@ -67,7 +67,7 @@ public class formItemProviderAdapterFactory extends formAdapterFactory implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public formItemProviderAdapterFactory() {
+	public FormItemProviderAdapterFactory() {
 		supportedTypes.add(IEditingDomainItemProvider.class);
 		supportedTypes.add(IStructuredItemContentProvider.class);
 		supportedTypes.add(ITreeItemContentProvider.class);

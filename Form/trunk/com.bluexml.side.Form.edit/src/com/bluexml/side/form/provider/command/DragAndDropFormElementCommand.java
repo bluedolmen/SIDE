@@ -20,8 +20,8 @@ import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.Reference;
 import com.bluexml.side.form.VirtualField;
-import com.bluexml.side.form.formFactory;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormFactory;
+import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.utils.FieldTransformation;
 import com.bluexml.side.form.utils.FormDiagramUtils;
 import com.bluexml.side.form.utils.InternalModification;
@@ -199,7 +199,7 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 					Collection<Field> newCollection = new ArrayList<Field>();
 					for (Object o : collection) {
 						if (o instanceof Field) {
-							VirtualField vf = formFactory.eINSTANCE
+							VirtualField vf = FormFactory.eINSTANCE
 									.createVirtualField();
 							FieldTransformation.transform((Field) o, vf);
 							vf.setLink((Field)o);
@@ -213,7 +213,7 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 						target = (EObject)owner;
 					}
 					
-					cc.append(AddCommand.create(domain, target, formPackage.eINSTANCE
+					cc.append(AddCommand.create(domain, target, FormPackage.eINSTANCE
 							.getFormGroup_Children(), newCollection, j));
 					dropCommand = cc;
 				} else {

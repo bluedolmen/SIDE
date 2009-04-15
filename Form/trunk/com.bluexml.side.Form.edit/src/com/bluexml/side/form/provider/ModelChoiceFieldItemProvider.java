@@ -24,7 +24,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.form.ModelChoiceField;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.ModelChoiceField} object.
@@ -86,7 +86,7 @@ public class ModelChoiceFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_ClassReference_real_class_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ClassReference_real_class_feature", "_UI_ClassReference_type"),
-				 formPackage.Literals.CLASS_REFERENCE__REAL_CLASS,
+				 FormPackage.Literals.CLASS_REFERENCE__REAL_CLASS,
 				 true,
 				 false,
 				 true,
@@ -108,7 +108,7 @@ public class ModelChoiceFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_ClassReference_association_class_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ClassReference_association_class_feature", "_UI_ClassReference_type"),
-				 formPackage.Literals.CLASS_REFERENCE__ASSOCIATION_CLASS,
+				 FormPackage.Literals.CLASS_REFERENCE__ASSOCIATION_CLASS,
 				 true,
 				 false,
 				 true,
@@ -130,7 +130,7 @@ public class ModelChoiceFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_ModelChoiceField_min_bound_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ModelChoiceField_min_bound_feature", "_UI_ModelChoiceField_type"),
-				 formPackage.Literals.MODEL_CHOICE_FIELD__MIN_BOUND,
+				 FormPackage.Literals.MODEL_CHOICE_FIELD__MIN_BOUND,
 				 true,
 				 false,
 				 false,
@@ -152,7 +152,7 @@ public class ModelChoiceFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_ModelChoiceField_max_bound_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ModelChoiceField_max_bound_feature", "_UI_ModelChoiceField_type"),
-				 formPackage.Literals.MODEL_CHOICE_FIELD__MAX_BOUND,
+				 FormPackage.Literals.MODEL_CHOICE_FIELD__MAX_BOUND,
 				 true,
 				 false,
 				 false,
@@ -174,7 +174,7 @@ public class ModelChoiceFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_ModelChoiceField_target_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ModelChoiceField_target_feature", "_UI_ModelChoiceField_type"),
-				 formPackage.Literals.MODEL_CHOICE_FIELD__TARGET,
+				 FormPackage.Literals.MODEL_CHOICE_FIELD__TARGET,
 				 true,
 				 false,
 				 true,
@@ -196,7 +196,7 @@ public class ModelChoiceFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_ModelChoiceField_association_formClass_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ModelChoiceField_association_formClass_feature", "_UI_ModelChoiceField_type"),
-				 formPackage.Literals.MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS,
+				 FormPackage.Literals.MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS,
 				 true,
 				 false,
 				 true,
@@ -218,7 +218,7 @@ public class ModelChoiceFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_ModelChoiceField_widget_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ModelChoiceField_widget_feature", "_UI_ModelChoiceField_type"),
-				 formPackage.Literals.MODEL_CHOICE_FIELD__WIDGET,
+				 FormPackage.Literals.MODEL_CHOICE_FIELD__WIDGET,
 				 true,
 				 false,
 				 false,
@@ -240,7 +240,7 @@ public class ModelChoiceFieldItemProvider
 				 getResourceLocator(),
 				 getString("_UI_ModelChoiceField_show_actions_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ModelChoiceField_show_actions_feature", "_UI_ModelChoiceField_type"),
-				 formPackage.Literals.MODEL_CHOICE_FIELD__SHOW_ACTIONS,
+				 FormPackage.Literals.MODEL_CHOICE_FIELD__SHOW_ACTIONS,
 				 true,
 				 false,
 				 false,
@@ -285,10 +285,10 @@ public class ModelChoiceFieldItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ModelChoiceField.class)) {
-			case formPackage.MODEL_CHOICE_FIELD__MIN_BOUND:
-			case formPackage.MODEL_CHOICE_FIELD__MAX_BOUND:
-			case formPackage.MODEL_CHOICE_FIELD__WIDGET:
-			case formPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
+			case FormPackage.MODEL_CHOICE_FIELD__MIN_BOUND:
+			case FormPackage.MODEL_CHOICE_FIELD__MAX_BOUND:
+			case FormPackage.MODEL_CHOICE_FIELD__WIDGET:
+			case FormPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

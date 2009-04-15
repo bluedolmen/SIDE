@@ -17,7 +17,7 @@
       <wizard
             id="com.bluexml.side.form.presentation.formModelWizardID"
             name="%_UI_formModelWizard_label"
-            class="com.bluexml.side.form.presentation.formModelWizard"
+            class="com.bluexml.side.form.presentation.FormModelWizard"
             category="org.eclipse.emf.ecore.Wizard.category.ID"
             icon="icons/full/obj16/formModelFile.gif">
          <description>%_UI_formModelWizard_description</description>
@@ -31,8 +31,8 @@
             name="%_UI_formEditor_label"
             icon="icons/full/obj16/formModelFile.gif"
             extensions="form"
-            class="com.bluexml.side.form.presentation.formEditor"
-            contributorClass="com.bluexml.side.form.presentation.formActionBarContributor">
+            class="com.bluexml.side.form.presentation.FormEditor"
+            contributorClass="com.bluexml.side.form.presentation.FormActionBarContributor">
       </editor>
    </extension>
 

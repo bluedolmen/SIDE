@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.form.TextField;
 import com.bluexml.side.form.TextWidgetType;
-import com.bluexml.side.form.formPackage;
+import com.bluexml.side.form.FormPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -66,7 +66,7 @@ public class TextFieldImpl extends CharFieldImpl implements TextField {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return formPackage.Literals.TEXT_FIELD;
+		return FormPackage.Literals.TEXT_FIELD;
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class TextFieldImpl extends CharFieldImpl implements TextField {
 		TextWidgetType oldWidget = widget;
 		widget = newWidget == null ? WIDGET_EDEFAULT : newWidget;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, formPackage.TEXT_FIELD__WIDGET, oldWidget, widget));
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.TEXT_FIELD__WIDGET, oldWidget, widget));
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class TextFieldImpl extends CharFieldImpl implements TextField {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case formPackage.TEXT_FIELD__WIDGET:
+			case FormPackage.TEXT_FIELD__WIDGET:
 				return getWidget();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -112,7 +112,7 @@ public class TextFieldImpl extends CharFieldImpl implements TextField {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case formPackage.TEXT_FIELD__WIDGET:
+			case FormPackage.TEXT_FIELD__WIDGET:
 				setWidget((TextWidgetType)newValue);
 				return;
 		}
@@ -127,7 +127,7 @@ public class TextFieldImpl extends CharFieldImpl implements TextField {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case formPackage.TEXT_FIELD__WIDGET:
+			case FormPackage.TEXT_FIELD__WIDGET:
 				setWidget(WIDGET_EDEFAULT);
 				return;
 		}
@@ -142,7 +142,7 @@ public class TextFieldImpl extends CharFieldImpl implements TextField {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case formPackage.TEXT_FIELD__WIDGET:
+			case FormPackage.TEXT_FIELD__WIDGET:
 				return widget != WIDGET_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
