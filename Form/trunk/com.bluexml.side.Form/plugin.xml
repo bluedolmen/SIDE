@@ -13,7 +13,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.kerblue.org/form/1.0"
-            class="com.bluexml.side.form.formPackage"
+            class="com.bluexml.side.form.FormPackage"
             genModel="model/Forms.genmodel"/>
    </extension>
 
