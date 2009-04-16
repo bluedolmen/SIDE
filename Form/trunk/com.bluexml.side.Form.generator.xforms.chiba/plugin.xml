@@ -17,7 +17,7 @@
                idTechnology="alfresco"
                version="Alfresco3.0 Labs">
             <generatorVersion
-                  class="com.bluexml.side.forms.generator.alfresco.FormGenerator"
+                  class="com.bluexml.side.forms.generator.alfresco.chiba.FormGenerator"
                   id="com.bluexml.side.Form.generator.xforms.chiba"
                   idTechnologyVersion="alfresco_3.0_labs"
                   version="S-IDE Alfresco Generator 1.0.0">

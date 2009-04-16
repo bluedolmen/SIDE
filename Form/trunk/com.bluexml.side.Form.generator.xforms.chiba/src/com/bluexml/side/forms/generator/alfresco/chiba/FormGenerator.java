@@ -1,4 +1,4 @@
-package com.bluexml.side.forms.generator.alfresco;
+package com.bluexml.side.forms.generator.alfresco.chiba;
 
 import java.io.File;
 import java.io.FileInputStream;
