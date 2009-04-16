@@ -113,7 +113,7 @@ public class Generate extends Thread {
 					if (genObj instanceof AbstractGenerator) {
 						// We generate only if there is meta-model available for
 						// the generator
-						if (modelsInfo.containsKey(elem.getId_metamodel())) {
+//						if (modelsInfo.containsKey(elem.getId_metamodel())) {
 							AbstractGenerator generator = (AbstractGenerator) genObj;
 							String name = elem.getId_generator().substring(elem.getId_generator().lastIndexOf(".") + 1);
 							label.setText("Initialize " + name);
@@ -129,7 +129,13 @@ public class Generate extends Thread {
 							if (modelsInfo.size() > 0) {
 								try {
 									label.setText("Generate for " + name);
-									generator.generate(modelsInfo.get(elem.getId_metamodel()).get(0));
+									generator.generate(modelsInfo);
+									if (modelsInfo.get(elem.getId_metamodel()) != null
+										&& modelsInfo.get(
+												elem.getId_metamodel()).size() > 0) {
+										generator.generate(modelsInfo.get(
+												elem.getId_metamodel()).get(0));
+									}
 
 									label.setText("\nCompleting generation for " + name);
 									Collection<IFile> generatedFiles = new ArrayList<IFile>();
@@ -154,7 +160,7 @@ public class Generate extends Thread {
 									e.printStackTrace();
 								}
 								addOneStep(progressBar);
-							}
+//							}
 						}
 					}
 				}

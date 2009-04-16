@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -60,6 +61,10 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 	abstract protected List<String> getTemplates();
 
 	abstract protected String getMetamodelURI();
+
+	public void generate(HashMap<String, List<IFile>> modelsInfo) {
+		// nothing
+	}
 
 	public Collection<IFile> generate(IFile model) throws Exception {
 		
