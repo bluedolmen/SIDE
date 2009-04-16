@@ -1,6 +1,8 @@
 package com.bluexml.side.application.generator;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -38,6 +40,8 @@ public interface IGenerator {
 	 */
 	public Collection<IFile> generate(IFile model) throws Exception;
 	
+	public void generate(HashMap<String, List<IFile>> modelsInfo);
+
 	/**
 	 * This method run the post-action after the generation. 
 	 *  

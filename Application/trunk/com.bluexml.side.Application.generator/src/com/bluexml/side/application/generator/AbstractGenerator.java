@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.util.libs.IFileHelper;
@@ -23,8 +22,6 @@ public abstract class AbstractGenerator implements IGenerator {
 	protected static Map<String, Boolean> generatorOptions = new HashMap<String, Boolean>();
 	protected static Map<String, String> configurationParameters = new HashMap<String, String>();
 	public static final String TEMP_FOLDER = "tmp";
-
-	public abstract String getTEMP_FOLDER(EObject node);
 
 	public String getTEMP_FOLDER() {
 		return TEMP_FOLDER + this.getClass().getName();
@@ -114,4 +111,5 @@ public abstract class AbstractGenerator implements IGenerator {
 		System.out.println("GenerationParameters :"+generationParameters);
 		System.out.println("ConfigurationParameters :"+configurationParameters);
 	}
+
 }
