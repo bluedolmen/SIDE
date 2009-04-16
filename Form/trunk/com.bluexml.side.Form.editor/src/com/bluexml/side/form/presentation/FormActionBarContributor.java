@@ -43,25 +43,25 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.form.AddRefAction;
-import com.bluexml.side.form.CollapseReferenceAction;
-import com.bluexml.side.form.CopyFormAction;
-import com.bluexml.side.form.ExpandModelChoice;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.Form;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormCollection;
 import com.bluexml.side.form.FormElement;
-import com.bluexml.side.form.GroupAttributeAction;
-import com.bluexml.side.form.InitializeFormClassAction;
 import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.Reference;
-import com.bluexml.side.form.RefreshOutlineAction;
-import com.bluexml.side.form.RestoreFormElementAction;
-import com.bluexml.side.form.SynchonizeWithClassDiagramAction;
-import com.bluexml.side.form.TransformFieldAction;
-import com.bluexml.side.form.utils.ClassDiagramUtils;
-import com.bluexml.side.form.utils.FieldTransformation;
+import com.bluexml.side.form.clazz.AddRefAction;
+import com.bluexml.side.form.clazz.CollapseReferenceAction;
+import com.bluexml.side.form.clazz.ExpandModelChoice;
+import com.bluexml.side.form.clazz.InitializeFormClassAction;
+import com.bluexml.side.form.clazz.SynchonizeWithClassDiagramAction;
+import com.bluexml.side.form.clazz.utils.ClassDiagramUtils;
+import com.bluexml.side.form.common.CopyFormAction;
+import com.bluexml.side.form.common.GroupAttributeAction;
+import com.bluexml.side.form.common.RefreshOutlineAction;
+import com.bluexml.side.form.common.RestoreFormElementAction;
+import com.bluexml.side.form.common.TransformFieldAction;
+import com.bluexml.side.form.common.utils.FieldTransformation;
 /**
  * This is the action bar contributor for the Form model editor.
  * <!-- begin-user-doc -->
