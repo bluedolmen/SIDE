@@ -60,6 +60,12 @@ public class FormGenerator extends AbstractGenerator {
 		return true;
 	}
 
+	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo,
+			String id_metamodel) {
+		return modelsInfo.containsKey(ClazzPackage.eNS_URI)
+				|| modelsInfo.containsKey(FormPackage.eNS_URI);
+	}
+
 	public Collection<IFile> complete() throws Exception {
 		// FIXME should return WAR IFile
 		return new ArrayList<IFile>();
@@ -69,13 +75,8 @@ public class FormGenerator extends AbstractGenerator {
 		// FIXME should copy WAR IFile
 	}
 
-	public Collection<IFile> generate(IFile model) throws Exception {
-		// nothing
-		return null;
-	}
-
-	public void generate(HashMap<String, List<IFile>> modelsInfo) {
-
+	public Collection<IFile> generate(HashMap<String, List<IFile>> modelsInfo,
+			String id_mm) {
 		String path = getTargetPath();
 		if (path == null || path.length() == 0)
 			throw new RuntimeException("Target path must be setted !");
@@ -104,6 +105,7 @@ public class FormGenerator extends AbstractGenerator {
 			}
 			throw new RuntimeException(e);
 		}
+		return null;
 	}
 
 	private void deleteProject() throws Exception {
@@ -122,8 +124,8 @@ public class FormGenerator extends AbstractGenerator {
 	private MavenExecutionResult buildProject() {
 		DefaultMavenExecutionRequest cleanPackageRequest = new DefaultMavenExecutionRequest();
 		cleanPackageRequest.setBaseDirectory(projectFolder);
-		cleanPackageRequest.setGoals(Arrays
-				.asList(new String[] { "clean", "package" }));
+		cleanPackageRequest.setGoals(Arrays.asList(new String[] { "clean",
+				"package" }));
 		MavenExecutionResult cleanPackageResult = embedder
 				.execute(cleanPackageRequest);
 
@@ -151,10 +153,15 @@ public class FormGenerator extends AbstractGenerator {
 		archetypeCreateRequest.setProperty("archetypeArtifactId",
 				ARCHETYPE_ARTIFACT);
 		archetypeCreateRequest.setProperty("archetypeGroupId", ARCHETYPE_GROUP);
-		archetypeCreateRequest.setProperty("archetypeRepository",
-				SNAPSHOTREPOSITORY);
 		archetypeCreateRequest.setProperty("archetypeVersion",
 				ARCHETYPE_VERSION);
+		if (ARCHETYPE_VERSION.endsWith("SNAPSHOT")) {
+			archetypeCreateRequest.setProperty("archetypeRepository",
+					SNAPSHOTREPOSITORY);
+		} else {
+			archetypeCreateRequest.setProperty("archetypeRepository",
+					REPOSITORY);
+		}
 		archetypeCreateRequest.setProperty("basedir", workFolder
 				.getAbsolutePath());
 		archetypeCreateRequest.setProperty("groupId", TARGET_GROUP);

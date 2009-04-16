@@ -2,8 +2,10 @@ package com.bluexml.side.application.generator;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 
 import com.bluexml.side.application.StaticConfigurationParameters;
@@ -111,5 +113,6 @@ public abstract class AbstractGenerator implements IGenerator {
 		System.out.println("GenerationParameters :"+generationParameters);
 		System.out.println("ConfigurationParameters :"+configurationParameters);
 	}
+
 
 }

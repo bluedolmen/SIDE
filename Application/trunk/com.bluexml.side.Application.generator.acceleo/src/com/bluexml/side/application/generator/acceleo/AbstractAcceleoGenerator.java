@@ -62,8 +62,19 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 
 	abstract protected String getMetamodelURI();
 
-	public void generate(HashMap<String, List<IFile>> modelsInfo) {
-		// nothing
+
+	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo,
+			String id_metamodel) {
+		return modelsInfo.containsKey(id_metamodel);
+	}
+	
+	public Collection<IFile> generate(HashMap<String, List<IFile>> modelsInfo,
+			String id_metamodel) throws Exception {
+		if (modelsInfo.get(id_metamodel) != null
+				&& modelsInfo.get(id_metamodel).size() > 0) {
+			return generate(modelsInfo.get(id_metamodel).get(0));
+		}
+		return null;
 	}
 
 	public Collection<IFile> generate(IFile model) throws Exception {

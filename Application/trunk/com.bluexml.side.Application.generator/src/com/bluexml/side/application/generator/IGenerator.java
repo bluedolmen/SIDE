@@ -31,16 +31,17 @@ public interface IGenerator {
 	 */
 	public boolean check();
 
+	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo,
+			String id_metamodel);
+	
 	/**
 	 * This method launch the generation.
 	 * 
-	 * @param model the input model
+	 * @param models the input models
 	 * @return the list of generated files
 	 * @throws Exception 
 	 */
-	public Collection<IFile> generate(IFile model) throws Exception;
-	
-	public void generate(HashMap<String, List<IFile>> modelsInfo);
+	public Collection<IFile> generate(HashMap<String, List<IFile>> models, String id_metamodel) throws Exception;
 
 	/**
 	 * This method run the post-action after the generation. 
