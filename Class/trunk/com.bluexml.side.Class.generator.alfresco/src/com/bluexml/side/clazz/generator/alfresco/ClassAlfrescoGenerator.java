@@ -144,7 +144,6 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	/**
 	 * method usable as Acceleo Templates Services
 	 */
-	@Override
 	public String getTEMP_FOLDER(EObject node) {
 		return this.getTEMP_FOLDER();
 	}
