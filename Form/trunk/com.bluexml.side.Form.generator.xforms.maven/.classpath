@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="lib" path="jars/maven-embedder-2.1-SNAPSHOT.jar" sourcepath="org.maven.ide.components.maven-embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/maven-core-2.1-SNAPSHOT.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/maven-workspace-2.1-SNAPSHOT.jar" sourcepath="org.maven.ide.components.maven-embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/plexus-container-default-1.0-alpha-44.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/aspectjrt-1.5.3.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/plexus-utils-1.5.1.jar" sourcepath="org.maven.ide.components.maven-embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/plexus-classworlds-1.2-alpha-12.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/maven-lifecycle-2.1-SNAPSHOT.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/maven-reporting-api-2.1-SNAPSHOT.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/doxia-sink-api-1.0-alpha-9.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/maven-profile-2.1-SNAPSHOT.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/maven-model-2.1-SNAPSHOT.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/maven-artifact-3.0-SNAPSHOT.jar" sourcepath="/maven-artifact-3.0-SNAPSHOT/src/main/java"/>
+	<classpathentry exported="true" kind="lib" path="jars/wagon-provider-api-1.0-beta-2.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/maven-plugin-api-2.1-SNAPSHOT.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/maven-project-2.1-SNAPSHOT.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/plexus-interpolation-1.0-SNAPSHOT.jar" sourcepath="org.maven.ide.components.maven-embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/commons-cli-1.0.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/plexus-interactivity-api-1.0-alpha-6.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/maven-toolchain-2.1-SNAPSHOT.jar" sourcepath="org.maven.ide.components.maven-embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/wagon-http-lightweight-1.0-beta-2.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/wagon-http-shared-1.0-beta-2.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/jtidy-4aug2000r7-dev.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/wagon-ssh-1.0-beta-2.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/jsch-0.1.27.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/wagon-ssh-common-1.0-beta-2.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/wagon-ssh-external-1.0-beta-2.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jars/wagon-file-1.0-beta-2.jar" sourcepath="org.maven.ide.eclipse.embeddersrc.zip"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

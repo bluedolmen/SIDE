@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+<extension
+         point="com.bluexml.side.Application.com_bluexml_application_configuration">
+   <metamodel
+         id="http://www.kerblue.org/form/1.0"
+         name="KSR400 Form"
+         url="http://www.kerblue.org/v2/ksr500-form/">
+      <technology
+            id="alfresco"
+            idMetamodel="http://www.kerblue.org/form/1.0"
+            name="Alfresco"
+            url="http://www.alfresco.com">
+         <technologyVersion
+               id="alfresco_3.0_labs"
+               idTechnology="alfresco"
+               version="Alfresco3.0 Labs">
+            <generatorVersion
+                  class="com.bluexml.side.forms.generator.alfresco.FormGenerator"
+                  id="com.bluexml.side.Form.generator.xforms.chiba"
+                  idTechnologyVersion="alfresco_3.0_labs"
+                  version="S-IDE Alfresco Generator 1.0.0">
+               <configurationParameter
+                     key="war.folder"
+                     label="Folder output for war">
+               </configurationParameter>
+            </generatorVersion>
+         </technologyVersion>
+      </technology>
+   </metamodel>
+         </extension>
+</plugin>
