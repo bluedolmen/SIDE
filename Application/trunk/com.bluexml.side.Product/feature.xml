@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.bluexml.side.Product"
+      label="S-IDE"
+      version="1.0.0"
+      provider-name="BLUEXML">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <includes
+         id="com.bluexml.side.Application.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Class.generator.alfresco.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Class.modeler.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Common.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Form.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Form.generator.xforms.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Portal.modeler.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Requirements.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Util"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Workflow.generator.alfresco.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Workflow.modeler.feature"
+         version="0.0.0"/>
+
+</feature>
