@@ -25,14 +25,14 @@
       <import plugin="com.bluexml.side.Util.MetaModel.validate"/>
       <import plugin="org.eclipse.ocl.ecore"/>
       <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="com.bluexml.side.Common.edit"/>
-      <import plugin="com.bluexml.side.Class" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Class.edit" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.ui"/>
+      <import plugin="com.bluexml.side.Common.edit"/>
+      <import plugin="com.bluexml.side.Class" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Class.edit" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.topcased.modeler"/>
       <import plugin="com.bluexml.side.Workflow" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.bluexml.side.Workflow.edit" version="1.0.0" match="greaterOrEqual"/>
