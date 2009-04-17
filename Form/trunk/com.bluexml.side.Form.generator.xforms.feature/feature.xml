@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.bluexml.side.Form.generator.xforms.feature"
-      label="XForms generator Feature"
+      label="S-IDE XForms generator Feature"
       version="1.0.0"
       provider-name="BLUEXML">
 
