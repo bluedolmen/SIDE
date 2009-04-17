@@ -20,6 +20,7 @@ import org.apache.maven.execution.MavenExecutionResult;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.Namespace;
@@ -115,9 +116,8 @@ public class FormGenerator extends AbstractGenerator {
 	private void copyResult() throws Exception {
 		String destFilename = getTargetPath() + "/" + TARGET_ARTIFACT + ".war";
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		File workspaceFolder = root.getLocation().toFile();
-
-		File destFile = new File(workspaceFolder, destFilename);
+		IFile destIFile = root.getFile(new Path(destFilename));
+		File destFile = destIFile.getLocation().toFile();
 		FileUtils.copyFile(warFile, destFile);
 	}
 
