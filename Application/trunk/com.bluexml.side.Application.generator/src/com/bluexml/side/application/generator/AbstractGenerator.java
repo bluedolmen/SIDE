@@ -2,10 +2,8 @@ package com.bluexml.side.application.generator;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 
 import com.bluexml.side.application.StaticConfigurationParameters;
@@ -71,15 +69,15 @@ public abstract class AbstractGenerator implements IGenerator {
 	}
 
 	public boolean doDeploy() {
-		if (configurationParameters != null) {
-			return configurationParameters.containsKey(StaticConfigurationParameters.GENERATIONOPTIONSUPDATE_TGT.getLiteral());
+		if (configurationParameters != null && configurationParameters.containsKey(StaticConfigurationParameters.GENERATIONOPTIONSUPDATE_TGT.getLiteral())) {
+			return Boolean.parseBoolean(configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSUPDATE_TGT.getLiteral()));
 		}
 		return false;
 	}
 	
 	protected static boolean doVerbose() {
-		if (configurationParameters != null) {
-			return configurationParameters.containsKey(StaticConfigurationParameters.GENERATIONOPTIONSVERBOSE.getLiteral());
+		if (configurationParameters != null && configurationParameters.containsKey(StaticConfigurationParameters.GENERATIONOPTIONSVERBOSE.getLiteral())) {
+			return Boolean.parseBoolean(configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSVERBOSE.getLiteral()));
 		}
 		return false;
 	}

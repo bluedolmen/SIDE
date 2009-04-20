@@ -36,6 +36,9 @@ public abstract class AbstractAlfrescoGenerator extends AbstractAcceleoGenerator
 			throw new Exception("ampFile not found");
 		}
 		String cataHome = generationParameters.get(CONFIGURATION_PARAMETER_CATALINA_HOME);
+		if (cataHome == null) {
+			throw new Exception("Update Target is enable so YOU MUST fill CATALINA_HOME parameter");
+		}
 		AMPDeployer.deploy(IFileHelper.getFile(ampIFile), new File(cataHome));
 	}
 }
