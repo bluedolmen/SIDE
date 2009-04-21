@@ -224,7 +224,7 @@ public class EResourceUtils {
 	}
 
 	/**
-	 * Return a new resource creted with the given uri, in the given resource set
+	 * Return a new resource created with the given uri, in the given resource set
 	 * and loaded whith the given map if the given map is null default map is used
 	 * @param resourceURI
 	 * @param resourceSet
