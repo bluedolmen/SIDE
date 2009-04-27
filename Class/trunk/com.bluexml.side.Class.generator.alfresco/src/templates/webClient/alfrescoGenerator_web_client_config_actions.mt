@@ -46,9 +46,11 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
             </params>
          </action>
 -->   		  		
+   		<!-- bug 842
    		<action-group id="browse_create_menu">
    			<%alfrescoGenerator_browseCreateMenu()%>      		
-        </action-group>  
+        </action-group>
+        -->  
      </actions>
      
      <dialogs>
