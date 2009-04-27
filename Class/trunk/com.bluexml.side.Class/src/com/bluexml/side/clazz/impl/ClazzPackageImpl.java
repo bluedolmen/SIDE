@@ -1580,14 +1580,14 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		  (clazzEClass.getEOperations().get(8), 
 		   source, 
 		   new String[] {
-			 "body", "asso.source = self and asso.isNavigableTARGET or asso.destination = self and asso.isNavigableSRC",
+			 "body", "(asso.source = self and asso.isNavigableTARGET) or (asso.destination = self and asso.isNavigableSRC)",
 			 "description", "search for class attributes, inherited one and finaly added to the class by aspect"
 		   });		
 		addAnnotation
 		  (clazzEClass.getEOperations().get(9), 
 		   source, 
 		   new String[] {
-			 "body", "asso.source = self and asso.isNavigableSRC or asso.destination = self and asso.isNavigableTARGET",
+			 "body", "(asso.source = self and asso.isNavigableSRC) or (asso.destination = self and asso.isNavigableTARGET)",
 			 "description", "search for class attributes, inherited one and finaly added to the class by aspect"
 		   });		
 		addAnnotation

@@ -131,14 +131,14 @@
     </eOperations>
     <eOperations name="isSource" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="asso.source = self and asso.isNavigableTARGET or asso.destination = self and asso.isNavigableSRC"/>
+        <details key="body" value="(asso.source = self and asso.isNavigableTARGET) or (asso.destination = self and asso.isNavigableSRC)"/>
         <details key="description" value="search for class attributes, inherited one and finaly added to the class by aspect"/>
       </eAnnotations>
       <eParameters name="asso" lowerBound="1" eType="#//Association"/>
     </eOperations>
     <eOperations name="isTarget" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="asso.source = self and asso.isNavigableSRC or asso.destination = self and asso.isNavigableTARGET"/>
+        <details key="body" value="(asso.source = self and asso.isNavigableSRC) or (asso.destination = self and asso.isNavigableTARGET)"/>
         <details key="description" value="search for class attributes, inherited one and finaly added to the class by aspect"/>
       </eAnnotations>
       <eParameters name="asso" lowerBound="1" eType="#//Association"/>
