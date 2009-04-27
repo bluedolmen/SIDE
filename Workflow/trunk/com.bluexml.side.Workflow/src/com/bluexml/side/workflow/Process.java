@@ -32,8 +32,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.workflow.WorkflowPackage#getProcess()
- * @model annotation="http://www.bluexml.com/OCL PackageNameNull='not self.name.oclIsUndefined() and self.name <> \'\''"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='PackageNameNull'"
+ * @model annotation="http://www.bluexml.com/OCL PackageNameNull='not self.name.oclIsUndefined() and self.name <> \'\'' OneStartTask='self.startstate -> size() = 1' atLeastOneEndTask='self.endstate -> size() >= 1'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='PackageNameNull OneStartTask atLeastOneEndTask'"
  * @generated
  */
 public interface Process extends com.bluexml.side.common.Package {

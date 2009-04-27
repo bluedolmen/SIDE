@@ -182,7 +182,7 @@ public interface Transition extends EObject {
 	 * @return the value of the '<em>Title</em>' attribute.
 	 * @see #setTitle(String)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getTransition_Title()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getTitle();

@@ -21,8 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.workflow.WorkflowPackage#getEndState()
- * @model annotation="http://www.bluexml.com/OCL atLeastOneEndTask='EndState.allInstances() -> size() = 1'"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='atLeastOneEndTask'"
+ * @model
  * @generated
  */
 public interface EndState extends State {

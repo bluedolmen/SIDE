@@ -110,6 +110,22 @@ public class WorkflowValidator extends EObjectValidator {
 	 */
 	private static Constraint process_PackageNameNullInvOCL;
 	/**
+	 * The parsed OCL expression for the definition of the '<em>OneStartTask</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint process_OneStartTaskInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>atLeastOneEndTask</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint process_atLeastOneEndTaskInvOCL;
+
+	/**
 	 * The parsed OCL expression for the definition of the '<em>ActorNameMustBeUnique</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -144,20 +160,6 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	private static Constraint swimlane_ActoridOrPooledactorMustBeSetForAllExeptOneActorInvOCL;
-	/**
-	 * The parsed OCL expression for the definition of the '<em>OneStartTask</em>' invariant constraint.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private static Constraint startState_OneStartTaskInvOCL;
-	/**
-	 * The parsed OCL expression for the definition of the '<em>atLeastOneEndTask</em>' invariant constraint.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private static Constraint endState_atLeastOneEndTaskInvOCL;
 	/**
 	 * The parsed OCL expression for the definition of the '<em>TaskMustBePointerByTransition</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
@@ -311,6 +313,8 @@ public class WorkflowValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(process, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(process, diagnostics, context);
 		if (result || diagnostics != null) result &= validateProcess_PackageNameNull(process, diagnostics, context);
+		if (result || diagnostics != null) result &= validateProcess_OneStartTask(process, diagnostics, context);
+		if (result || diagnostics != null) result &= validateProcess_atLeastOneEndTask(process, diagnostics, context);
 		return result;
 	}
 
@@ -339,6 +343,84 @@ public class WorkflowValidator extends EObjectValidator {
 			return false;
 		}
 		return commonValidator.validatePackage_PackageNameNull(process, diagnostics, context);
+	}
+
+	/**
+	 * Validates the OneStartTask constraint of '<em>Process</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateProcess_OneStartTask(com.bluexml.side.workflow.Process process, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (process_OneStartTaskInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(WorkflowPackage.Literals.PROCESS);
+			
+			EAnnotation ocl = WorkflowPackage.Literals.PROCESS.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("OneStartTask");
+			
+			try {
+				process_OneStartTaskInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(process_OneStartTaskInvOCL);
+		
+		if (!query.check(process)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "OneStartTask", getObjectLabel(process, context) }),
+						 new Object[] { process }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the atLeastOneEndTask constraint of '<em>Process</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateProcess_atLeastOneEndTask(com.bluexml.side.workflow.Process process, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (process_atLeastOneEndTaskInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(WorkflowPackage.Literals.PROCESS);
+			
+			EAnnotation ocl = WorkflowPackage.Literals.PROCESS.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("atLeastOneEndTask");
+			
+			try {
+				process_atLeastOneEndTaskInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(process_atLeastOneEndTaskInvOCL);
+		
+		if (!query.check(process)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "atLeastOneEndTask", getObjectLabel(process, context) }),
+						 new Object[] { process }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -572,47 +654,7 @@ public class WorkflowValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(startState, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_NoStateWithSameName(startState, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_noSpecialCharacters(startState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateStartState_OneStartTask(startState, diagnostics, context);
 		return result;
-	}
-
-	/**
-	 * Validates the OneStartTask constraint of '<em>Start State</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateStartState_OneStartTask(StartState startState, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (startState_OneStartTaskInvOCL == null) {
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(WorkflowPackage.Literals.START_STATE);
-			
-			EAnnotation ocl = WorkflowPackage.Literals.START_STATE.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String expr = ocl.getDetails().get("OneStartTask");
-			
-			try {
-				startState_OneStartTaskInvOCL = helper.createInvariant(expr);
-			}
-			catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(startState_OneStartTaskInvOCL);
-		
-		if (!query.check(startState)) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(new BasicDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "OneStartTask", getObjectLabel(startState, context) }),
-						 new Object[] { startState }));
-			}
-			return false;
-		}
-		return true;
 	}
 
 	/**
@@ -630,47 +672,7 @@ public class WorkflowValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(endState, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_NoStateWithSameName(endState, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_noSpecialCharacters(endState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateEndState_atLeastOneEndTask(endState, diagnostics, context);
 		return result;
-	}
-
-	/**
-	 * Validates the atLeastOneEndTask constraint of '<em>End State</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateEndState_atLeastOneEndTask(EndState endState, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (endState_atLeastOneEndTaskInvOCL == null) {
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(WorkflowPackage.Literals.END_STATE);
-			
-			EAnnotation ocl = WorkflowPackage.Literals.END_STATE.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String expr = ocl.getDetails().get("atLeastOneEndTask");
-			
-			try {
-				endState_atLeastOneEndTaskInvOCL = helper.createInvariant(expr);
-			}
-			catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(endState_atLeastOneEndTaskInvOCL);
-		
-		if (!query.check(endState)) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(new BasicDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "atLeastOneEndTask", getObjectLabel(endState, context) }),
-						 new Object[] { endState }));
-			}
-			return false;
-		}
-		return true;
 	}
 
 	/**

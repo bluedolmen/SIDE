@@ -28,8 +28,7 @@ import com.bluexml.side.clazz.Clazz;
  * </p>
  *
  * @see com.bluexml.side.workflow.WorkflowPackage#getStartState()
- * @model annotation="http://www.bluexml.com/OCL OneStartTask='StartState.allInstances() -> size() = 1'"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='OneStartTask'"
+ * @model
  * @generated
  */
 public interface StartState extends State {

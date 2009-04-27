@@ -8,9 +8,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="Process" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Package">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="PackageNameNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
+      <details key="OneStartTask" value="self.startstate -> size() = 1"/>
+      <details key="atLeastOneEndTask" value="self.endstate -> size() >= 1"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="PackageNameNull"/>
+      <details key="constraints" value="PackageNameNull OneStartTask atLeastOneEndTask"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="swimlane" upperBound="-1"
         eType="#//Swimlane" containment="true"/>
@@ -64,12 +66,6 @@
         unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StartState" eSuperTypes="#//State">
-    <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="OneStartTask" value="StartState.allInstances() -> size() = 1"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="OneStartTask"/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
         eType="#//Transition" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="event" upperBound="-1"
@@ -83,12 +79,6 @@
         eType="ecore:EClass ../../com.bluexml.side.Class/model/Class.ecore#//Clazz"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EndState" eSuperTypes="#//State">
-    <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="atLeastOneEndTask" value="EndState.allInstances() -> size() = 1"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="atLeastOneEndTask"/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="event" upperBound="-1"
         eType="#//Event" containment="true"/>
   </eClassifiers>
@@ -196,7 +186,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="timer" upperBound="-1"
         eType="#//Timer" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//State"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="BPMEventType">
     <eLiterals name="task_create" literal="task-create"/>

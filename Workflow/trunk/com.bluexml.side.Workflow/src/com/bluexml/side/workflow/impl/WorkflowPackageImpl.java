@@ -1295,7 +1295,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		initEReference(getTransition_ParentTaskNode(), this.getTaskNode(), this.getTaskNode_Transition(), "parentTaskNode", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTransition_Timer(), this.getTimer(), null, "timer", null, 0, -1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransition_To(), this.getState(), null, "to", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTransition_Title(), ecorePackage.getEString(), "title", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTransition_Title(), ecorePackage.getEString(), "title", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stateEClass, State.class, "State", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getState_Name(), ecorePackage.getEString(), "name", null, 1, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -1350,7 +1350,9 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		  (processEClass, 
 		   source, 
 		   new String[] {
-			 "PackageNameNull", "not self.name.oclIsUndefined() and self.name <> \'\'"
+			 "PackageNameNull", "not self.name.oclIsUndefined() and self.name <> \'\'",
+			 "OneStartTask", "self.startstate -> size() = 1",
+			 "atLeastOneEndTask", "self.endstate -> size() >= 1"
 		   });			
 		addAnnotation
 		  (swimlaneEClass, 
@@ -1368,18 +1370,6 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		   new String[] {
 			 "body", "self.name = other.name"
 		   });		
-		addAnnotation
-		  (startStateEClass, 
-		   source, 
-		   new String[] {
-			 "OneStartTask", "StartState.allInstances() -> size() = 1"
-		   });			
-		addAnnotation
-		  (endStateEClass, 
-		   source, 
-		   new String[] {
-			 "atLeastOneEndTask", "EndState.allInstances() -> size() = 1"
-		   });			
 		addAnnotation
 		  (taskNodeEClass, 
 		   source, 
@@ -1421,7 +1411,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		  (processEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "PackageNameNull"
+			 "constraints", "PackageNameNull OneStartTask atLeastOneEndTask"
 		   });			
 		addAnnotation
 		  (swimlaneEClass, 
@@ -1429,18 +1419,6 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		   new String[] {
 			 "constraints", "ActorNameMustBeUnique MustManageAtLeastOneTask noSpecialCharacters OnlyOneActorCalledInitiator ActoridOrPooledactorMustBeSetForAllExeptOneActor"
 		   });				
-		addAnnotation
-		  (startStateEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "OneStartTask"
-		   });			
-		addAnnotation
-		  (endStateEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "atLeastOneEndTask"
-		   });			
 		addAnnotation
 		  (taskNodeEClass, 
 		   source, 
