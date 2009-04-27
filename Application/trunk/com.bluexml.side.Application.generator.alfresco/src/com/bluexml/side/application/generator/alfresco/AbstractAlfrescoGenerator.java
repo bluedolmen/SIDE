@@ -27,18 +27,18 @@ public abstract class AbstractAlfrescoGenerator extends AbstractAcceleoGenerator
 
 	public IFile buildAMPPackage() throws Exception {
 		Packager alfrescoPakager = new Packager(IFileHelper.getIFolder(getTemporaryFolder()), getModuleProperties());
-		ampIFile = alfrescoPakager.buildAMP(generatedFiles);
+		ampIFile = alfrescoPakager.buildAMP(generatedFiles,doClean());
 		return ampIFile;
 	}
 
 	public void deploy() throws Exception {
 		if (ampIFile == null) {
-			throw new Exception("ampFile not found");
+			throw new Exception("amp file not found");
 		}
 		String cataHome = generationParameters.get(CONFIGURATION_PARAMETER_CATALINA_HOME);
 		if (cataHome == null) {
 			throw new Exception("Update Target is enable so YOU MUST fill CATALINA_HOME parameter");
 		}
-		AMPDeployer.deploy(IFileHelper.getFile(ampIFile), new File(cataHome));
+		AMPDeployer.deploy(IFileHelper.getFile(ampIFile), new File(cataHome),doClean());
 	}
 }

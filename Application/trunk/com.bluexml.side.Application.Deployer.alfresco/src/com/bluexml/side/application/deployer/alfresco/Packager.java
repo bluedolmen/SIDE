@@ -31,15 +31,16 @@ public class Packager {
 
 	
 
-	public IFile buildAMP(List<IFile> generatedFiles) throws Exception {
+	public IFile buildAMP(List<IFile> generatedFiles,boolean doClean) throws Exception {
 		Map<String, File> mapper = createAMPSkelleton();
 		 dispatchFiles(generatedFiles, mapper);
 		buildModuleProperties();
 		File ampFile = getAMPFile();
 		ampFile.createNewFile();
 		ZipManager.zip(getAMPFolder(), ampFile, false);
-		FileHelper.deleteFile(getWorkingFolder());
-
+		if (doClean) {
+			FileHelper.deleteFile(getWorkingFolder());
+		}
 		IFile ampIFile = getAMPIFile();
 		return ampIFile;
 	}

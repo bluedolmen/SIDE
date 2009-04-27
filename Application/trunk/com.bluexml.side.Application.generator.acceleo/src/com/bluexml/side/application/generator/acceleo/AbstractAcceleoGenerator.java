@@ -62,23 +62,19 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 
 	abstract protected String getMetamodelURI();
 
-
-	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo,
-			String id_metamodel) {
+	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo, String id_metamodel) {
 		return modelsInfo.containsKey(id_metamodel);
 	}
-	
-	public Collection<IFile> generate(HashMap<String, List<IFile>> modelsInfo,
-			String id_metamodel) throws Exception {
-		if (modelsInfo.get(id_metamodel) != null
-				&& modelsInfo.get(id_metamodel).size() > 0) {
+
+	public Collection<IFile> generate(HashMap<String, List<IFile>> modelsInfo, String id_metamodel) throws Exception {
+		if (modelsInfo.get(id_metamodel) != null && modelsInfo.get(id_metamodel).size() > 0) {
 			return generate(modelsInfo.get(id_metamodel).get(0));
 		}
 		return null;
 	}
 
 	public Collection<IFile> generate(IFile model) throws Exception {
-		
+
 		// References to files in the project
 		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		// Temporary project
@@ -153,11 +149,11 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		chainResource.getContents().add(chain);
 		chain.setFile(fchain);
 		chainResource.save(Collections.EMPTY_MAP);
-		//System.out.println("BeforeGen");
-		//AbstractGenerator.printConfiguration();
+		// System.out.println("BeforeGen");
+		// AbstractGenerator.printConfiguration();
 		chain.launch(genFilter, new NullProgressMonitor(), LaunchManager.create("run", true));
-		//System.out.println("AfterGen");
-		//AbstractGenerator.printConfiguration();
+		// System.out.println("AfterGen");
+		// AbstractGenerator.printConfiguration();
 		generatedFiles = (List<IFile>) chain.getGeneratedFiles();
 		List<?> generatedFiles = chain.getGeneratedFiles();
 		for (Object file : generatedFiles) {

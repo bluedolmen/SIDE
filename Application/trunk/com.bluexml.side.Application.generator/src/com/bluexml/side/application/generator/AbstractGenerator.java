@@ -82,6 +82,13 @@ public abstract class AbstractGenerator implements IGenerator {
 		return false;
 	}
 	
+	protected static boolean doClean() {
+		if (configurationParameters != null && configurationParameters.containsKey(StaticConfigurationParameters.GENERATIONOPTIONSCLEAN.getLiteral())) {
+			return Boolean.parseBoolean(configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSCLEAN.getLiteral()));
+		}
+		return false;
+	}
+	
 	public static boolean getGeneratorOptionValue(String key) {
 		if (AbstractGenerator.generatorOptions.containsKey(key)) {
 			return AbstractGenerator.generatorOptions.get(key);

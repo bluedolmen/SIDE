@@ -61,19 +61,20 @@ public class FileHelper {
 					// copy the file as child of dest
 					// compute the new filePath
 					dest = new File(dest.getAbsolutePath() + File.separator + src.getName());
-				}				
-				
+				}
+
 				if (!dest.exists() || override) {
 					// create parents before create the file if needed
 					dest.getParentFile().mkdirs();
 					// dest do not exist or override is allowed
-					// while bytesRead indicates a successful read, lets write...
+					// while bytesRead indicates a successful read, lets
+					// write...
 					fout = new FileOutputStream(dest);
 					while ((bytesRead = fin.read(buffer)) >= 0) {
 						fout.write(buffer, 0, bytesRead);
 					}
 				}
-				
+
 			} catch (IOException e) { // Error copying file...
 				IOException wrapper = new IOException("copyFiles: Unable to copy file: " + src.getAbsolutePath() + "to" + dest.getAbsolutePath() + ".");
 				wrapper.initCause(e);
@@ -89,18 +90,17 @@ public class FileHelper {
 			}
 		}
 	}
-	
-	public static void deleteFile(File f) {
+
+	public static boolean deleteFile(File f) {
 		if (f.isDirectory()) {
 			File[] fl = f.listFiles();
 			for (int i = 0; i < fl.length; i++) {
 				deleteFile(fl[i]);
 			}
-			f.delete();
-		} else {
-			if (f.exists() && f.canWrite()) {
-				f.delete();
-			}
 		}
+		if (f.exists() && f.canWrite()) {
+			return f.delete();
+		}
+		return false;
 	}
 }

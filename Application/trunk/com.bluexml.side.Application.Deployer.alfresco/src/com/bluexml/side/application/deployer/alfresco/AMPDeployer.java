@@ -14,16 +14,18 @@ import com.bluexml.side.util.libs.FileHelper;
  */
 public class AMPDeployer {
 	static final String webapps = "webapps";
-	static final String alfrescoWar = "alfresco.war";
-	static final String alfrescoWarOrg = "alfresco.war.org";
+	static String webappName ="alfresco";
+	static final String alfrescoWar = webappName+".war";
+	static final String alfrescoWarOrg = webappName+".war.org";
 
-	public static File getWarToPath(File tomcatHome) throws Exception {
+	public static File getWarToPath(File tomcatHome,boolean doClean) throws Exception {
 		File orgWar = new File(tomcatHome + File.separator + webapps + File.separator + alfrescoWarOrg);
 		File alfWar = new File(tomcatHome + File.separator + webapps + File.separator + alfrescoWar);
 		if (!orgWar.exists()) {
 			// buid backup
 			FileHelper.copyFiles(alfWar, orgWar, true);
-		} else {
+		} else if(doClean) {
+			// TODO : Clean MUST BE DONE AFTER ALL GENERATION PROCESS so is't a generator job
 			// purge
 			//FileHelper.deleteFile(alfWar);
 			//FileHelper.copyFiles(orgWar, alfWar, true);
@@ -31,11 +33,19 @@ public class AMPDeployer {
 		return alfWar;
 	}
 
-	public static void deploy(File ampPath, File tomcatHome) throws Exception {
-		File filetoPatch = getWarToPath(tomcatHome);
+	public static void deploy(File ampPath, File tomcatHome,boolean doClean) throws Exception {
+		boolean deleted = false;
+		if (doClean) {
+			// remove existing deployed alfresco webapp.
+			File alfWebapp = new File(tomcatHome + File.separator + webapps + File.separator + webappName);
+			deleted = FileHelper.deleteFile(alfWebapp);
+		}
+		if (!deleted) {
+			System.out.println("Alfresco webapp not cleaned !");
+		}
+		File filetoPatch = getWarToPath(tomcatHome,doClean);
 		String argInstall = "install " + ampPath + " " + filetoPatch.getAbsolutePath() + " -nobackup -force";
 		String[] args = argInstall.split(" ");
-
 		ModuleManagementTool.main(args);
 
 		// String argList = "list " + ampPath;
