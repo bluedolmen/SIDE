@@ -3,17 +3,6 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="form"
     nsURI="http://www.kerblue.org/form/1.0" nsPrefix="form">
-  <eClassifiers xsi:type="ecore:EClass" name="Form">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="validName noSpecialCharacters"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="validName" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="root" lowerBound="1" eType="#//FormContainer"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormElement" abstract="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="noSpecialCharacters"/>
@@ -104,7 +93,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Reference" eSuperTypes="#//ModelChoiceField"/>
   <eClassifiers xsi:type="ecore:EClass" name="FormCollection">
     <eStructuralFeatures xsi:type="ecore:EReference" name="forms" upperBound="-1"
-        eType="#//Form" containment="true"/>
+        eType="#//FormContainer" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ChoiceField" eSuperTypes="#//Field">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="min_bound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
@@ -159,5 +148,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="linked_process" eType="ecore:EClass ../../com.bluexml.side.Workflow/model/Workflow.ecore#//Process"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormWorkflow" eSuperTypes="#//FormContainer"/>
-  <eClassifiers xsi:type="ecore:EClass" name="FormContainer" abstract="true" eSuperTypes="#//FormGroup"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FormContainer" abstract="true" eSuperTypes="#//FormGroup">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="validName noSpecialCharacters"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="validName" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
 </ecore:EPackage>

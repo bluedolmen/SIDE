@@ -30,14 +30,15 @@ import com.bluexml.side.form.EmailField;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FileField;
 import com.bluexml.side.form.FloatField;
-import com.bluexml.side.form.Form;
 import com.bluexml.side.form.FormAspect;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormCollection;
 import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormElement;
+import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormGroupPresentationType;
+import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.ImageField;
 import com.bluexml.side.form.IntegerField;
@@ -53,8 +54,6 @@ import com.bluexml.side.form.TimeField;
 import com.bluexml.side.form.URLField;
 import com.bluexml.side.form.VirtualField;
 import com.bluexml.side.form.WorkflowFormCollection;
-import com.bluexml.side.form.FormFactory;
-import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.util.FormValidator;
 import com.bluexml.side.workflow.WorkflowPackage;
 
@@ -65,13 +64,6 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * @generated
  */
 public class FormPackageImpl extends EPackageImpl implements FormPackage {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass formEClass = null;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -395,33 +387,6 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		theFormPackage.freeze();
 
 		return theFormPackage;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getForm() {
-		return formEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getForm_Root() {
-		return (EReference)formEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getForm_Name() {
-		return (EAttribute)formEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1131,6 +1096,15 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getFormContainer_Name() {
+		return (EAttribute)formContainerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getFormGroupPresentationType() {
 		return formGroupPresentationTypeEEnum;
 	}
@@ -1190,10 +1164,6 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		formEClass = createEClass(FORM);
-		createEReference(formEClass, FORM__ROOT);
-		createEAttribute(formEClass, FORM__NAME);
-
 		formElementEClass = createEClass(FORM_ELEMENT);
 		createEAttribute(formElementEClass, FORM_ELEMENT__LABEL);
 		createEAttribute(formElementEClass, FORM_ELEMENT__ID);
@@ -1302,6 +1272,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		formWorkflowEClass = createEClass(FORM_WORKFLOW);
 
 		formContainerEClass = createEClass(FORM_CONTAINER);
+		createEAttribute(formContainerEClass, FORM_CONTAINER__NAME);
 
 		// Create enums
 		formGroupPresentationTypeEEnum = createEEnum(FORM_GROUP_PRESENTATION_TYPE);
@@ -1375,10 +1346,6 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		formContainerEClass.getESuperTypes().add(this.getFormGroup());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(formEClass, Form.class, "Form", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getForm_Root(), this.getFormContainer(), null, "root", null, 1, 1, Form.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getForm_Name(), ecorePackage.getEString(), "name", null, 0, 1, Form.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(formElementEClass, FormElement.class, "FormElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFormElement_Label(), ecorePackage.getEString(), "label", null, 0, 1, FormElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFormElement_Id(), ecorePackage.getEString(), "id", null, 1, 1, FormElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1459,7 +1426,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEClass(referenceEClass, Reference.class, "Reference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(formCollectionEClass, FormCollection.class, "FormCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFormCollection_Forms(), this.getForm(), null, "forms", null, 0, -1, FormCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFormCollection_Forms(), this.getFormContainer(), null, "forms", null, 0, -1, FormCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(choiceFieldEClass, ChoiceField.class, "ChoiceField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getChoiceField_Min_bound(), ecorePackage.getEInt(), "min_bound", null, 0, 1, ChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1492,6 +1459,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEClass(formWorkflowEClass, FormWorkflow.class, "FormWorkflow", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(formContainerEClass, FormContainer.class, "FormContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFormContainer_Name(), ecorePackage.getEString(), "name", null, 0, 1, FormContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(formGroupPresentationTypeEEnum, FormGroupPresentationType.class, "FormGroupPresentationType");
@@ -1533,12 +1501,6 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	protected void createEcoreAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/Ecore";		
 		addAnnotation
-		  (formEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "validName noSpecialCharacters"
-		   });			
-		addAnnotation
 		  (formElementEClass, 
 		   source, 
 		   new String[] {
@@ -1555,6 +1517,12 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "NoLinkForVirtualField"
+		   });			
+		addAnnotation
+		  (formContainerEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "validName noSpecialCharacters"
 		   });	
 	}
 
@@ -1566,12 +1534,6 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 */
 	protected void createOCLAnnotations() {
 		String source = "http://www.bluexml.com/OCL";			
-		addAnnotation
-		  (formEClass, 
-		   source, 
-		   new String[] {
-			 "validName", "not self.name.oclIsUndefined() and self.name <> \'\'"
-		   });			
 		addAnnotation
 		  (formElementEClass, 
 		   source, 
@@ -1589,6 +1551,12 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "NoLinkForVirtualField", "not self.link.oclIsUndefined()"
+		   });			
+		addAnnotation
+		  (formContainerEClass, 
+		   source, 
+		   new String[] {
+			 "validName", "not self.name.oclIsUndefined() and self.name <> \'\'"
 		   });
 	}
 

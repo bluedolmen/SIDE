@@ -6,7 +6,6 @@
  */
 package com.bluexml.side.form.impl;
 
-import com.bluexml.side.form.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -18,18 +17,21 @@ import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.BooleanField;
 import com.bluexml.side.form.CharField;
 import com.bluexml.side.form.ChoiceField;
+import com.bluexml.side.form.ChoiceWidgetType;
 import com.bluexml.side.form.DateField;
 import com.bluexml.side.form.DateTimeField;
 import com.bluexml.side.form.DecimalField;
 import com.bluexml.side.form.EmailField;
 import com.bluexml.side.form.FileField;
 import com.bluexml.side.form.FloatField;
-import com.bluexml.side.form.Form;
 import com.bluexml.side.form.FormAspect;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormCollection;
+import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormGroupPresentationType;
+import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.ImageField;
 import com.bluexml.side.form.IntegerField;
 import com.bluexml.side.form.ModelChoiceField;
@@ -43,8 +45,7 @@ import com.bluexml.side.form.TextWidgetType;
 import com.bluexml.side.form.TimeField;
 import com.bluexml.side.form.URLField;
 import com.bluexml.side.form.VirtualField;
-import com.bluexml.side.form.FormFactory;
-import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.form.WorkflowFormCollection;
 
 /**
  * <!-- begin-user-doc -->
@@ -90,7 +91,6 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case FormPackage.FORM: return createForm();
 			case FormPackage.FORM_GROUP: return createFormGroup();
 			case FormPackage.BOOLEAN_FIELD: return createBooleanField();
 			case FormPackage.CHAR_FIELD: return createCharField();
@@ -163,16 +163,6 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Form createForm() {
-		FormImpl form = new FormImpl();
-		return form;
 	}
 
 	/**

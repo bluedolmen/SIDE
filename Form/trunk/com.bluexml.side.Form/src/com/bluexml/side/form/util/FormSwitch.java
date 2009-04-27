@@ -87,12 +87,6 @@ public class FormSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case FormPackage.FORM: {
-				Form form = (Form)theEObject;
-				T result = caseForm(form);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case FormPackage.FORM_ELEMENT: {
 				FormElement formElement = (FormElement)theEObject;
 				T result = caseFormElement(formElement);
@@ -349,21 +343,6 @@ public class FormSwitch<T> {
 			}
 			default: return defaultCase(theEObject);
 		}
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Form</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Form</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseForm(Form object) {
-		return null;
 	}
 
 	/**

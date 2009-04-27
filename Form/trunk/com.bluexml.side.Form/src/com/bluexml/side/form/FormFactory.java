@@ -27,15 +27,6 @@ public interface FormFactory extends EFactory {
 	FormFactory eINSTANCE = com.bluexml.side.form.impl.FormFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Form</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Form</em>'.
-	 * @generated
-	 */
-	Form createForm();
-
-	/**
 	 * Returns a new object of class '<em>Group</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

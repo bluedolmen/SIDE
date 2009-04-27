@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface FormCollection extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Forms</b></em>' containment reference list.
-	 * The list contents are of type {@link com.bluexml.side.form.Form}.
+	 * The list contents are of type {@link com.bluexml.side.form.FormContainer}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Forms</em>' containment reference list isn't clear,
@@ -41,6 +41,6 @@ public interface FormCollection extends EObject {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Form> getForms();
+	EList<FormContainer> getForms();
 
 } // FormCollection

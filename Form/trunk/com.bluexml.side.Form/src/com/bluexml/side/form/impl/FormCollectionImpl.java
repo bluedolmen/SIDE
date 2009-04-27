@@ -6,7 +6,6 @@
  */
 package com.bluexml.side.form.impl;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -16,10 +15,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.ocl.ecore.OCL;
-import com.bluexml.side.form.Form;
+
+import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.form.FormCollection;
+import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormPackage;
 
 /**
@@ -44,7 +44,7 @@ public class FormCollectionImpl extends EObjectImpl implements FormCollection {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Form> forms;
+	protected EList<FormContainer> forms;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -70,9 +70,9 @@ public class FormCollectionImpl extends EObjectImpl implements FormCollection {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Form> getForms() {
+	public EList<FormContainer> getForms() {
 		if (forms == null) {
-			forms = new EObjectContainmentEList<Form>(Form.class, this, FormPackage.FORM_COLLECTION__FORMS);
+			forms = new EObjectContainmentEList<FormContainer>(FormContainer.class, this, FormPackage.FORM_COLLECTION__FORMS);
 		}
 		return forms;
 	}
@@ -116,7 +116,7 @@ public class FormCollectionImpl extends EObjectImpl implements FormCollection {
 		switch (featureID) {
 			case FormPackage.FORM_COLLECTION__FORMS:
 				getForms().clear();
-				getForms().addAll((Collection<? extends Form>)newValue);
+				getForms().addAll((Collection<? extends FormContainer>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

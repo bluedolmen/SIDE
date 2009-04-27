@@ -73,10 +73,6 @@ public class FormAdapterFactory extends AdapterFactoryImpl {
 	protected FormSwitch<Adapter> modelSwitch =
 		new FormSwitch<Adapter>() {
 			@Override
-			public Adapter caseForm(Form object) {
-				return createFormAdapter();
-			}
-			@Override
 			public Adapter caseFormElement(FormElement object) {
 				return createFormElementAdapter();
 			}
@@ -219,20 +215,6 @@ public class FormAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.Form <em>Form</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.form.Form
-	 * @generated
-	 */
-	public Adapter createFormAdapter() {
-		return null;
-	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.FormElement <em>Element</em>}'.

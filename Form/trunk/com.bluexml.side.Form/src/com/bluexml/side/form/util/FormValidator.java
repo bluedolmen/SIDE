@@ -21,12 +21,12 @@ import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.OCL;
 
-
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
-import com.bluexml.side.form.*;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.BooleanField;
 import com.bluexml.side.form.CharField;
+import com.bluexml.side.form.ChoiceField;
+import com.bluexml.side.form.ChoiceWidgetType;
 import com.bluexml.side.form.ClassReference;
 import com.bluexml.side.form.DateField;
 import com.bluexml.side.form.DateTimeField;
@@ -35,13 +35,15 @@ import com.bluexml.side.form.EmailField;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FileField;
 import com.bluexml.side.form.FloatField;
-import com.bluexml.side.form.Form;
 import com.bluexml.side.form.FormAspect;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormCollection;
+import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormGroupPresentationType;
+import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.ImageField;
 import com.bluexml.side.form.IntegerField;
 import com.bluexml.side.form.ModelChoiceField;
@@ -55,7 +57,7 @@ import com.bluexml.side.form.TextWidgetType;
 import com.bluexml.side.form.TimeField;
 import com.bluexml.side.form.URLField;
 import com.bluexml.side.form.VirtualField;
-import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.form.WorkflowFormCollection;
 
 /**
  * <!-- begin-user-doc -->
@@ -100,14 +102,6 @@ public class FormValidator extends EObjectValidator {
 	protected static final int DIAGNOSTIC_CODE_COUNT = GENERATED_DIAGNOSTIC_CODE_COUNT;
 
 	/**
-	 * The parsed OCL expression for the definition of the '<em>validName</em>' invariant constraint.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private static Constraint form_validNameInvOCL;
-
-	/**
 	 * The parsed OCL expression for the definition of the '<em>noSpecialCharacters</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -130,6 +124,14 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	private static Constraint virtualField_NoLinkForVirtualFieldInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>validName</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint formContainer_validNameInvOCL;
 
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
 
@@ -165,8 +167,6 @@ public class FormValidator extends EObjectValidator {
 	@Override
 	protected boolean validate(int classifierID, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		switch (classifierID) {
-			case FormPackage.FORM:
-				return validateForm((Form)value, diagnostics, context);
 			case FormPackage.FORM_ELEMENT:
 				return validateFormElement((FormElement)value, diagnostics, context);
 			case FormPackage.FORM_GROUP:
@@ -240,89 +240,6 @@ public class FormValidator extends EObjectValidator {
 			default: 
 				return true;
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateForm(Form form, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(form, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(form, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(form, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(form, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(form, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(form, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(form, diagnostics, context);
-		if (result || diagnostics != null) result &= validateForm_validName(form, diagnostics, context);
-		if (result || diagnostics != null) result &= validateForm_noSpecialCharacters(form, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * Validates the validName constraint of '<em>Form</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateForm_validName(Form form, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (form_validNameInvOCL == null) {
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(FormPackage.Literals.FORM);
-			
-			EAnnotation ocl = FormPackage.Literals.FORM.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String expr = ocl.getDetails().get("validName");
-			
-			try {
-				form_validNameInvOCL = helper.createInvariant(expr);
-			}
-			catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(form_validNameInvOCL);
-		
-		if (!query.check(form)) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(new BasicDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "validName", getObjectLabel(form, context) }),
-						 new Object[] { form }));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the noSpecialCharacters constraint of '<em>Form</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateForm_noSpecialCharacters(Form form, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(new BasicDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noSpecialCharacters", getObjectLabel(form, context) }),
-						 new Object[] { form }));
-			}
-			return false;
-		}
-		return true;
 	}
 
 	/**
@@ -726,7 +643,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(formClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(formClass, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormContainer_noSpecialCharacters(formClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormContainer_validName(formClass, diagnostics, context);
 		return result;
 	}
 
@@ -932,7 +850,8 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(formWorkflow, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formWorkflow, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(formWorkflow, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formWorkflow, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormContainer_noSpecialCharacters(formWorkflow, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormContainer_validName(formWorkflow, diagnostics, context);
 		return result;
 	}
 
@@ -949,8 +868,75 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(formContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(formContainer, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formContainer, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormContainer_noSpecialCharacters(formContainer, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormContainer_validName(formContainer, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the validName constraint of '<em>Container</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateFormContainer_validName(FormContainer formContainer, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (formContainer_validNameInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(FormPackage.Literals.FORM_CONTAINER);
+			
+			EAnnotation ocl = FormPackage.Literals.FORM_CONTAINER.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("validName");
+			
+			try {
+				formContainer_validNameInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(formContainer_validNameInvOCL);
+		
+		if (!query.check(formContainer)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "validName", getObjectLabel(formContainer, context) }),
+						 new Object[] { formContainer }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the noSpecialCharacters constraint of '<em>Container</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateFormContainer_noSpecialCharacters(FormContainer formContainer, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		// TODO override the constraint, if desired
+		// -> uncomment the scaffolding
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noSpecialCharacters", getObjectLabel(formContainer, context) }),
+						 new Object[] { formContainer }));
+			}
+			return false;
+		}
+		return validateFormElement_noSpecialCharacters(formContainer, diagnostics, context);
 	}
 
 	/**

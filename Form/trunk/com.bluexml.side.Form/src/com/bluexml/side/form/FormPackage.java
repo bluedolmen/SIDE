@@ -63,43 +63,6 @@ public interface FormPackage extends EPackage {
 	FormPackage eINSTANCE = com.bluexml.side.form.impl.FormPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormImpl <em>Form</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.form.impl.FormImpl
-	 * @see com.bluexml.side.form.impl.FormPackageImpl#getForm()
-	 * @generated
-	 */
-	int FORM = 0;
-
-	/**
-	 * The feature id for the '<em><b>Root</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FORM__ROOT = 0;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FORM__NAME = 1;
-
-	/**
-	 * The number of structural features of the '<em>Form</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FORM_FEATURE_COUNT = 2;
-
-	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormElementImpl <em>Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -107,7 +70,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormElement()
 	 * @generated
 	 */
-	int FORM_ELEMENT = 1;
+	int FORM_ELEMENT = 0;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -171,7 +134,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormGroup()
 	 * @generated
 	 */
-	int FORM_GROUP = 2;
+	int FORM_GROUP = 1;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -262,7 +225,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getField()
 	 * @generated
 	 */
-	int FIELD = 3;
+	int FIELD = 2;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -371,7 +334,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getBooleanField()
 	 * @generated
 	 */
-	int BOOLEAN_FIELD = 4;
+	int BOOLEAN_FIELD = 3;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -480,7 +443,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getCharField()
 	 * @generated
 	 */
-	int CHAR_FIELD = 5;
+	int CHAR_FIELD = 4;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -607,7 +570,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getDateField()
 	 * @generated
 	 */
-	int DATE_FIELD = 6;
+	int DATE_FIELD = 5;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -743,7 +706,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getDateTimeField()
 	 * @generated
 	 */
-	int DATE_TIME_FIELD = 7;
+	int DATE_TIME_FIELD = 6;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -879,7 +842,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getDecimalField()
 	 * @generated
 	 */
-	int DECIMAL_FIELD = 8;
+	int DECIMAL_FIELD = 7;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -1024,7 +987,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFloatField()
 	 * @generated
 	 */
-	int FLOAT_FIELD = 9;
+	int FLOAT_FIELD = 8;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -1151,7 +1114,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getIntegerField()
 	 * @generated
 	 */
-	int INTEGER_FIELD = 10;
+	int INTEGER_FIELD = 9;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -1278,7 +1241,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getModelChoiceField()
 	 * @generated
 	 */
-	int MODEL_CHOICE_FIELD = 11;
+	int MODEL_CHOICE_FIELD = 10;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -1459,7 +1422,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getEmailField()
 	 * @generated
 	 */
-	int EMAIL_FIELD = 12;
+	int EMAIL_FIELD = 11;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -1586,7 +1549,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFileField()
 	 * @generated
 	 */
-	int FILE_FIELD = 13;
+	int FILE_FIELD = 12;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -1695,7 +1658,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getImageField()
 	 * @generated
 	 */
-	int IMAGE_FIELD = 14;
+	int IMAGE_FIELD = 13;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -1804,7 +1767,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getTimeField()
 	 * @generated
 	 */
-	int TIME_FIELD = 15;
+	int TIME_FIELD = 14;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -1940,7 +1903,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getURLField()
 	 * @generated
 	 */
-	int URL_FIELD = 16;
+	int URL_FIELD = 15;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -2076,7 +2039,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getPhoneNumberField()
 	 * @generated
 	 */
-	int PHONE_NUMBER_FIELD = 17;
+	int PHONE_NUMBER_FIELD = 16;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -2212,7 +2175,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormAspect()
 	 * @generated
 	 */
-	int FORM_ASPECT = 18;
+	int FORM_ASPECT = 17;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -2303,7 +2266,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormContainer()
 	 * @generated
 	 */
-	int FORM_CONTAINER = 31;
+	int FORM_CONTAINER = 30;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -2378,13 +2341,22 @@ public interface FormPackage extends EPackage {
 	int FORM_CONTAINER__DISABLED = FORM_GROUP__DISABLED;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CONTAINER__NAME = FORM_GROUP_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Container</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_CONTAINER_FEATURE_COUNT = FORM_GROUP_FEATURE_COUNT + 0;
+	int FORM_CONTAINER_FEATURE_COUNT = FORM_GROUP_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormClassImpl <em>Class</em>}' class.
@@ -2394,7 +2366,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormClass()
 	 * @generated
 	 */
-	int FORM_CLASS = 19;
+	int FORM_CLASS = 18;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -2469,6 +2441,15 @@ public interface FormPackage extends EPackage {
 	int FORM_CLASS__DISABLED = FORM_CONTAINER__DISABLED;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CLASS__NAME = FORM_CONTAINER__NAME;
+
+	/**
 	 * The feature id for the '<em><b>Real class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2503,7 +2484,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getReference()
 	 * @generated
 	 */
-	int REFERENCE = 20;
+	int REFERENCE = 19;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -2685,7 +2666,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormCollection()
 	 * @generated
 	 */
-	int FORM_COLLECTION = 21;
+	int FORM_COLLECTION = 20;
 
 	/**
 	 * The feature id for the '<em><b>Forms</b></em>' containment reference list.
@@ -2713,7 +2694,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getChoiceField()
 	 * @generated
 	 */
-	int CHOICE_FIELD = 22;
+	int CHOICE_FIELD = 21;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -2876,7 +2857,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getRegexField()
 	 * @generated
 	 */
-	int REGEX_FIELD = 23;
+	int REGEX_FIELD = 22;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -3012,7 +2993,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getClassReference()
 	 * @generated
 	 */
-	int CLASS_REFERENCE = 24;
+	int CLASS_REFERENCE = 23;
 
 	/**
 	 * The feature id for the '<em><b>Real class</b></em>' reference.
@@ -3049,7 +3030,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getPasswordField()
 	 * @generated
 	 */
-	int PASSWORD_FIELD = 25;
+	int PASSWORD_FIELD = 24;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -3176,7 +3157,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getVirtualField()
 	 * @generated
 	 */
-	int VIRTUAL_FIELD = 26;
+	int VIRTUAL_FIELD = 25;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -3294,7 +3275,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getActionField()
 	 * @generated
 	 */
-	int ACTION_FIELD = 27;
+	int ACTION_FIELD = 26;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -3403,7 +3384,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getTextField()
 	 * @generated
 	 */
-	int TEXT_FIELD = 28;
+	int TEXT_FIELD = 27;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -3539,7 +3520,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getWorkflowFormCollection()
 	 * @generated
 	 */
-	int WORKFLOW_FORM_COLLECTION = 29;
+	int WORKFLOW_FORM_COLLECTION = 28;
 
 	/**
 	 * The feature id for the '<em><b>Forms</b></em>' containment reference list.
@@ -3576,7 +3557,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormWorkflow()
 	 * @generated
 	 */
-	int FORM_WORKFLOW = 30;
+	int FORM_WORKFLOW = 29;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -3651,6 +3632,15 @@ public interface FormPackage extends EPackage {
 	int FORM_WORKFLOW__DISABLED = FORM_CONTAINER__DISABLED;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_WORKFLOW__NAME = FORM_CONTAINER__NAME;
+
+	/**
 	 * The number of structural features of the '<em>Workflow</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3667,7 +3657,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormGroupPresentationType()
 	 * @generated
 	 */
-	int FORM_GROUP_PRESENTATION_TYPE = 32;
+	int FORM_GROUP_PRESENTATION_TYPE = 31;
 
 
 	/**
@@ -3678,7 +3668,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getTextWidgetType()
 	 * @generated
 	 */
-	int TEXT_WIDGET_TYPE = 33;
+	int TEXT_WIDGET_TYPE = 32;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.ChoiceWidgetType <em>Choice Widget Type</em>}' enum.
@@ -3688,7 +3678,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getChoiceWidgetType()
 	 * @generated
 	 */
-	int CHOICE_WIDGET_TYPE = 34;
+	int CHOICE_WIDGET_TYPE = 33;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.ReferenceWidgetType <em>Reference Widget Type</em>}' enum.
@@ -3698,40 +3688,8 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getReferenceWidgetType()
 	 * @generated
 	 */
-	int REFERENCE_WIDGET_TYPE = 35;
+	int REFERENCE_WIDGET_TYPE = 34;
 
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.form.Form <em>Form</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Form</em>'.
-	 * @see com.bluexml.side.form.Form
-	 * @generated
-	 */
-	EClass getForm();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link com.bluexml.side.form.Form#getRoot <em>Root</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Root</em>'.
-	 * @see com.bluexml.side.form.Form#getRoot()
-	 * @see #getForm()
-	 * @generated
-	 */
-	EReference getForm_Root();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.Form#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see com.bluexml.side.form.Form#getName()
-	 * @see #getForm()
-	 * @generated
-	 */
-	EAttribute getForm_Name();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.FormElement <em>Element</em>}'.
@@ -4561,6 +4519,17 @@ public interface FormPackage extends EPackage {
 	EClass getFormContainer();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.FormContainer#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see com.bluexml.side.form.FormContainer#getName()
+	 * @see #getFormContainer()
+	 * @generated
+	 */
+	EAttribute getFormContainer_Name();
+
+	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.form.FormGroupPresentationType <em>Group Presentation Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4622,32 +4591,6 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	interface Literals {
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormImpl <em>Form</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.form.impl.FormImpl
-		 * @see com.bluexml.side.form.impl.FormPackageImpl#getForm()
-		 * @generated
-		 */
-		EClass FORM = eINSTANCE.getForm();
-
-		/**
-		 * The meta object literal for the '<em><b>Root</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FORM__ROOT = eINSTANCE.getForm_Root();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FORM__NAME = eINSTANCE.getForm_Name();
-
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormElementImpl <em>Element</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -5333,6 +5276,14 @@ public interface FormPackage extends EPackage {
 		 * @generated
 		 */
 		EClass FORM_CONTAINER = eINSTANCE.getFormContainer();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FORM_CONTAINER__NAME = eINSTANCE.getFormContainer_Name();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.FormGroupPresentationType <em>Group Presentation Type</em>}' enum.
