@@ -9,6 +9,7 @@ package com.bluexml.side.workflow;
 import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.clazz.AttributeType;
+import com.bluexml.side.common.ModelElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +30,7 @@ import com.bluexml.side.clazz.AttributeType;
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='UniqueNameForTaskAttribute'"
  * @generated
  */
-public interface Attribute extends EObject {
+public interface Attribute extends ModelElement {
 	/**
 	 * Returns the value of the '<em><b>Typ</b></em>' attribute.
 	 * The default value is <code>"void"</code>.

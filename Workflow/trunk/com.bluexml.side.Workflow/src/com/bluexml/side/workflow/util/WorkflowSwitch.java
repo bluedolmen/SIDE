@@ -235,6 +235,7 @@ public class WorkflowSwitch<T> {
 			case WorkflowPackage.ATTRIBUTE: {
 				Attribute attribute = (Attribute)theEObject;
 				T result = caseAttribute(attribute);
+				if (result == null) result = caseModelElement(attribute);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

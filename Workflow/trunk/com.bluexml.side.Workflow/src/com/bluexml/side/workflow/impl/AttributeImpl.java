@@ -14,6 +14,7 @@ import org.eclipse.ocl.ecore.OCL;
 
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.clazz.AttributeType;
+import com.bluexml.side.common.impl.ModelElementImpl;
 import com.bluexml.side.workflow.Attribute;
 import com.bluexml.side.workflow.WorkflowPackage;
 
@@ -32,7 +33,7 @@ import com.bluexml.side.workflow.WorkflowPackage;
  *
  * @generated
  */
-public class AttributeImpl extends EObjectImpl implements Attribute {
+public class AttributeImpl extends ModelElementImpl implements Attribute {
 	/**
 	 * The default value of the '{@link #getTyp() <em>Typ</em>}' attribute.
 	 * <!-- begin-user-doc -->

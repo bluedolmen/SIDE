@@ -231,7 +231,7 @@
     <eLiterals name="One_user" literal="One user"/>
     <eLiterals name="One_group" value="2" literal="One group"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Attribute">
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="UniqueNameForTaskAttribute" value="Attribute.allInstances() -> select(n|n.name = self.name and n &lt;> self )->size()=0"/>
     </eAnnotations>
