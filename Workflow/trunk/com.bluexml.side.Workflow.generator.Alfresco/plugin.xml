@@ -26,20 +26,9 @@
                         label="Tomcat installation directory">
                   </configurationParameter>
                   <configurationParameter
-                        key="com.bluexml.side.Workflow.generator.alfresco.module.id"
-                        label="Workflow Unique module id">
-                  </configurationParameter>
-                  <configurationParameter
+                        documentation="default value : 1.0, alfresco module version can be set here"
                         key="com.bluexml.side.Workflow.generator.alfresco.module.version"
                         label="Workflow Module version">
-                  </configurationParameter>
-                  <configurationParameter
-                        key="com.bluexml.side.Workflow.generator.alfresco.module.description"
-                        label="Workflow Module description">
-                  </configurationParameter>
-                  <configurationParameter
-                        key="com.bluexml.side.Workflow.generator.alfresco.module.title"
-                        label="Workflow module title">
                   </configurationParameter>
                </generatorVersion>
             </technologyVersion>

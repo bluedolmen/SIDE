@@ -59,21 +59,21 @@ public class WorkflowGenerator extends AbstractAlfrescoGenerator {
 	public Properties buildModuleProperties() {
 		Properties props = new Properties();
 		props.put("module.id", "SIDE_WorkflowExtension");
-		props.put("module.version", "1.0");
+		props.put("module.version", getVersioNumber());
 		props.put("module.title", "S-IDE workflow extension");
 		props.put("module.description", "this module contains S-IDE generated extension to add new workflow");
-		/*
-		 * props.put("module.id",getGenerationParameter(
-		 * "com.bluexml.side.Class.generator.alfresco.module.id"));
-		 * props.put("module.version",getGenerationParameter(
-		 * "com.bluexml.side.Class.generator.alfresco.module.version"));
-		 * props.put("module.title",getGenerationParameter(
-		 * "com.bluexml.side.Class.generator.alfresco.module.title"));
-		 * props.put("module.description",getGenerationParameter(
-		 * "com.bluexml.side.Class.generator.alfresco.module.description"));
-		 */
+		
 		return props;
 	}
+	
+	public String getVersioNumber() {
+		String vn = getGenerationParameter("com.bluexml.side.Workflow.generator.alfresco.module.version");
+		if (vn == null || vn.equals("")) {
+			vn ="1.0";
+		}
+		return vn;
+	}
+	
 	/**
 	 * method usable as Acceleo Templates Services
 	 */
