@@ -1,6 +1,9 @@
 package com.bluexml.side.clazz.generator.alfresco;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -17,11 +20,8 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	 * final fields used in generation too
 	 */
 
-	
 	public static String GENERATOR_OPTIONS_DATAMODEL = "alfresco.dataModel";
 	public static String GENERATOR_OPTIONS_SHARE_EXTENSION = "alfresco.share.extension";
-
-	
 
 	XMLConflictResolver xmlresolver = null;
 
@@ -87,22 +87,21 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	}
 
 	public Collection<IFile> complete() throws Exception {
-		//solveConflict();
+		// solveConflict();
 		IFile ampIFile = buildAMPPackage();
 		generatedFiles.add(ampIFile);
 
 		return generatedFiles;
 	}
 
-	
-	
-	
 	public Properties buildModuleProperties() {
+		Date now = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 		Properties props = new Properties();
 		props.put("module.id", "SIDE_ModelExtension");
-		props.put("module.version", "1.0");
+		props.put("module.version",getVersioNumber());
 		props.put("module.title", "S-IDE model extension");
-		props.put("module.description", "this module contains S-IDE generated extension to extends Alfresco Data Model");
+		props.put("module.description", "this module contains S-IDE generated extension to extends Alfresco Data Model,\n build at " + sdf.format(now));
 		/*
 		 * props.put("module.id",getGenerationParameter(
 		 * "com.bluexml.side.Class.generator.alfresco.module.id"));
@@ -116,31 +115,22 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		return props;
 	}
 
-/*
-	private void solveConflict() throws Exception {
-		// manage file that can be in conflict
-		List<IFile> conflict = searchForConflict();
-		List<IFile> unresolvedconflict = new ArrayList<IFile>();
-		boolean allresolved = true;
-		for (IFile f : conflict) {
-			if (f.getFullPath().toString().indexOf("/shared/classes/alfresco/extension/web-client-config-custom.xml") != -1) {
-				// known conflict, apply specific process
-
-				getXmlresolver().resolveByMerging(f);
-				System.out.println("resolved conflict on :" + f.getFullPath());
-			} else {
-				// unknown conflict
-				allresolved = false;
-				System.err.println("Unknow conflict detected on :" + f.getFullPath());
-			}
-		}
-		if (!allresolved) {
-			throw new UnresolvedConflictException(unresolvedconflict);
-		}
-		// conflicts are resolved
-		getCresolver().copyToFinalFolder();
-	}
-*/
+	/*
+	 * private void solveConflict() throws Exception { // manage file that can
+	 * be in conflict List<IFile> conflict = searchForConflict(); List<IFile>
+	 * unresolvedconflict = new ArrayList<IFile>(); boolean allresolved = true;
+	 * for (IFile f : conflict) { if(f.getFullPath().toString().indexOf(
+	 * "/shared/classes/alfresco/extension/web-client-config-custom.xml") != -1)
+	 * { // known conflict, apply specific process
+	 * 
+	 * getXmlresolver().resolveByMerging(f);
+	 * System.out.println("resolved conflict on :" + f.getFullPath()); } else {
+	 * // unknown conflict allresolved = false;
+	 * System.err.println("Unknow conflict detected on :" + f.getFullPath()); }
+	 * } if (!allresolved) { throw new
+	 * UnresolvedConflictException(unresolvedconflict); } // conflicts are
+	 * resolved getCresolver().copyToFinalFolder(); }
+	 */
 	/**
 	 * method usable as Acceleo Templates Services
 	 */
@@ -148,6 +138,15 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		return this.getTEMP_FOLDER();
 	}
 
+	
+	public String getVersioNumber() {
+		String vn = getGenerationParameter("com.bluexml.side.Class.generator.alfresco.module.version");
+		if (vn == null || vn.equals("")) {
+			vn ="1.0";
+		}
+		return vn;
+	}
+	
 	public String getModuleIdService(EObject node) throws Exception {
 		// AbstractGenerator.printConfiguration();
 		if (!AbstractGenerator.generationParameters.containsKey("com.bluexml.side.Class.generator.alfresco.module.id")) {

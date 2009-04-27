@@ -96,11 +96,16 @@ public abstract class AbstractGenerator implements IGenerator {
 		return false;
 	}
 
-	
-
 	public static String getConfigurationParameter(String key) {
 		if (AbstractGenerator.configurationParameters.containsKey(key)) {
 			return AbstractGenerator.configurationParameters.get(key);
+		}
+		return "";
+	}
+
+	public static String getGenerationParameter(String key) {
+		if (AbstractGenerator.generationParameters.containsKey(key)) {
+			return AbstractGenerator.generationParameters.get(key);
 		}
 		return "";
 	}
