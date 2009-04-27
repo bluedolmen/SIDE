@@ -44,12 +44,14 @@ import org.eclipse.ui.PartInitException;
 
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.form.Field;
-import com.bluexml.side.form.Form;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormCollection;
+import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormElement;
+import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.Reference;
+import com.bluexml.side.form.WorkflowFormCollection;
 import com.bluexml.side.form.clazz.AddRefAction;
 import com.bluexml.side.form.clazz.CollapseReferenceAction;
 import com.bluexml.side.form.clazz.ExpandModelChoice;
@@ -62,6 +64,8 @@ import com.bluexml.side.form.common.RefreshOutlineAction;
 import com.bluexml.side.form.common.RestoreFormElementAction;
 import com.bluexml.side.form.common.TransformFieldAction;
 import com.bluexml.side.form.common.utils.FieldTransformation;
+import com.bluexml.side.form.workflow.InitializeFormWorkflowAction;
+
 /**
  * This is the action bar contributor for the Form model editor.
  * <!-- begin-user-doc -->
@@ -133,6 +137,7 @@ public class FormActionBarContributor
 	
 	protected GroupAttributeAction groupAttributeAction = new GroupAttributeAction();
 	protected InitializeFormClassAction initializeFormClassAction = new InitializeFormClassAction();
+	protected InitializeFormWorkflowAction initializeFormWorkflowAction = new InitializeFormWorkflowAction();
 	protected RefreshOutlineAction refreshOutlineAction = new RefreshOutlineAction();
 	protected CollapseReferenceAction collapseReferenceAction = new CollapseReferenceAction();
 	protected CopyFormAction copyFormAction = new CopyFormAction();
@@ -498,7 +503,7 @@ public class FormActionBarContributor
 		}
 		
 		
-		if (o instanceof Form) {
+		if (o instanceof FormContainer) {
 			copyFormAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/copy.png"));
 			menuManager.insertAfter("ui-actions", copyFormAction);
 		}
@@ -509,9 +514,16 @@ public class FormActionBarContributor
 		if (o instanceof FormClass) {
 			initializeFormClassAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/initializeFromClass.png"));
 			menuManager.insertAfter("ui-actions", initializeFormClassAction);
-			
+		}
+		
+		if (o instanceof WorkflowFormCollection) {
+			initializeFormWorkflowAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/initializeFromClass.png"));
+			menuManager.insertAfter("ui-actions", initializeFormWorkflowAction);
+		}
+		
+		if (o instanceof FormContainer) {
 			MenuManager restoreMenu = new MenuManager("Restore","restore");
-			if (((FormClass)o).getDisabled().size() > 0) {
+			if (((FormContainer)o).getDisabled().size() > 0) {
 				restoreMenu.add(new Action("never shown entry"){});
 				restoreMenu.setRemoveAllWhenShown(true);
 				IMenuListener restoreListener = new IMenuListener() {
@@ -612,6 +624,7 @@ public class FormActionBarContributor
 		super.activate();
 		groupAttributeAction.setActiveWorkbenchPart(activeEditor);
 		initializeFormClassAction.setActiveWorkbenchPart(activeEditor);
+		initializeFormWorkflowAction.setActiveWorkbenchPart(activeEditor);
 		collapseReferenceAction.setActiveWorkbenchPart(activeEditor);
 		copyFormAction.setActiveWorkbenchPart(activeEditor);
 		synchronizeWithClassDiagram.setActiveWorkbenchPart(activeEditor);
@@ -622,6 +635,7 @@ public class FormActionBarContributor
 			         activeEditor.getEditorSite().getSelectionProvider();
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) groupAttributeAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) initializeFormClassAction);
+		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) initializeFormWorkflowAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) refreshOutlineAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) collapseReferenceAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) copyFormAction);
