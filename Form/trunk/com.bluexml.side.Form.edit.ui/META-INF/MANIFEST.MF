@@ -23,4 +23,8 @@ Require-Bundle: org.eclipse.ui,
 Export-Package: com.bluexml.side.form.clazz,
  com.bluexml.side.form.clazz.utils,
  com.bluexml.side.form.common,
- com.bluexml.side.form.common.utils
+ com.bluexml.side.form.common.utils,
+ com.bluexml.side.form.editor.views,
+ com.bluexml.side.form.editor.views.service,
+ com.bluexml.side.form.workflow,
+ com.bluexml.side.form.workflow.utils

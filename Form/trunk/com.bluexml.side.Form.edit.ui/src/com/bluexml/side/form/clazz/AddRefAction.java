@@ -15,9 +15,11 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
+import sun.misc.FormattedFloatingDecimal.Form;
+
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.form.Form;
 import com.bluexml.side.form.FormClass;
+import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.Reference;
@@ -69,10 +71,10 @@ ISelectionChangedListener {
 	@SuppressWarnings("unchecked")
 	private void doAction() {
 		if (c != null && ref != null) {
-			Form form =  FormFactory.eINSTANCE.createForm();
+			//FormContainer form =  FormFactory.eINSTANCE.createFormClass();
 			
 			FormClass formClass = FormFactory.eINSTANCE.createFormClass();
-			form.setRoot(formClass);
+			//form.setRoot(formClass);
 			
 			formClass.setReal_class(c);
 			Random random = new Random();
@@ -80,16 +82,16 @@ ISelectionChangedListener {
 			formClass.setId(c.getName() + "_" + pick);
 			if (c.getTitle() != null && c.getTitle().length() > 0) {
 				formClass.setLabel(c.getTitle());
-				form.setName(c.getTitle() + " ref from " + ((FormClass)ref.eContainer()).getLabel() + " (" + ref.getLabel() + ")");
+				//form.setName(c.getTitle() + " ref from " + ((FormClass)ref.eContainer()).getLabel() + " (" + ref.getLabel() + ")");
 			} else {
 				formClass.setLabel(c.getName());
-				form.setName(c.getName() + " ref from " + ((FormClass)ref.eContainer()).getLabel() + " (" + ref.getLabel() + ")");
+				//form.setName(c.getName() + " ref from " + ((FormClass)ref.eContainer()).getLabel() + " (" + ref.getLabel() + ")");
 			};
 			
 			ref.getTarget().add(formClass);
 			// Commands :
 			// Add the Form	
-			Command addFormCmd = AddCommand.create(domain, ref.eContainer().eContainer().eContainer(), FormPackage.eINSTANCE.getFormCollection_Forms(), form);
+			Command addFormCmd = AddCommand.create(domain, ref.eContainer().eContainer().eContainer(), FormPackage.eINSTANCE.getFormCollection_Forms(), formClass);
 			// Add the reference
 			CompoundCommand cc = new CompoundCommand();
 			cc.append(addFormCmd);

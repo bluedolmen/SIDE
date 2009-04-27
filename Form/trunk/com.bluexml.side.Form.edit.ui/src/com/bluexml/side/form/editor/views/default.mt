@@ -112,7 +112,7 @@ li.tabs, ul.tabs {
 <em>Outline view, generation output may change.</em>
 <%for (forms){%>
 	<%if (current().name == getNameOfSelectedForm()){%>
-		<%for (root){%>
+		
 		<form name="exampleForm" method="post" class="cmxform">
 			<fieldset>
 				<legend><%label.encode()%></legend>
@@ -148,7 +148,7 @@ li.tabs, ul.tabs {
 			</fieldset>
 		</form>
 		<hr>
-		<%}%>
+		
 	<%}%>
 <%}%>
 </body>

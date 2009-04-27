@@ -12,8 +12,8 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
 import com.bluexml.side.form.FormClass;
+import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.WorkflowFormCollection;
-import com.bluexml.side.form.clazz.utils.ClassInitialization;
 import com.bluexml.side.form.workflow.utils.WorkflowInitialization;
 
 public class InitializeFormWorkflowAction extends Action implements
@@ -35,7 +35,7 @@ public class InitializeFormWorkflowAction extends Action implements
 		selectedObject = null;
 		for (Iterator<?> objects = selection.iterator(); objects.hasNext();) {
 			Object object = objects.next();
-			if (object instanceof FormClass) {
+			if (object instanceof WorkflowFormCollection) {
 				selectedObject = (EObject) object;
 			} else {
 				return false;

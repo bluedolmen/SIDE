@@ -19,8 +19,8 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.form.Form;
 import com.bluexml.side.form.FormClass;
+import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormPackage;
@@ -82,16 +82,16 @@ ISelectionChangedListener {
 			Reference ref = FormFactory.eINSTANCE.createReference();
 			FieldTransformation.transform(mcf, ref);
 			
-			Form form = createFormForRealClass(c,mcf);
-			FormClass formClass = (FormClass) form.getRoot();
+			FormContainer form = createFormForRealClass(c,mcf);
+			FormClass formClass = (FormClass) form;
 			ref.getTarget().add(formClass);
 			
 			// If association class
-			Form formAssoClass = null;
+			FormContainer formAssoClass = null;
 			FormClass formClassAssoClass = null;
 			if (mcf.getAssociation_class() != null) {
 				formAssoClass = createFormForRealClass(mcf.getAssociation_class(),mcf);
-				formClassAssoClass = (FormClass) formAssoClass.getRoot();
+				formClassAssoClass = (FormClass) formAssoClass;
 				ref.getAssociation_formClass().add(formClassAssoClass);
 			}
 			
@@ -128,10 +128,10 @@ ISelectionChangedListener {
 		
 	}
 	
-	protected Form createFormForRealClass(Clazz p_class, ModelChoiceField p_mcf) {
-		Form form =  FormFactory.eINSTANCE.createForm();
+	protected FormContainer createFormForRealClass(Clazz p_class, ModelChoiceField p_mcf) {
+		//FormContainer form =  FormFactory.eINSTANCE.createFormContainer();
 		FormClass formClass = FormFactory.eINSTANCE.createFormClass();
-		form.setRoot(formClass);
+		//form.setRoot(formClass);
 		
 		formClass.setReal_class(p_class);
 		Random random = new Random();
@@ -141,12 +141,12 @@ ISelectionChangedListener {
 		
 		if (p_class.getTitle() != null && p_class.getTitle().length() > 0) {
 			formClass.setLabel(p_class.getTitle());
-			form.setName(p_class.getTitle() + " ref from " + ((FormGroup)p_mcf.eContainer()).getLabel() + " (" + p_mcf.getLabel() + ")");
+			//form.setName(p_class.getTitle() + " ref from " + ((FormGroup)p_mcf.eContainer()).getLabel() + " (" + p_mcf.getLabel() + ")");
 		} else {
 			formClass.setLabel(p_class.getName());
-			form.setName(p_class.getName() + " ref from " + ((FormGroup)p_mcf.eContainer()).getLabel() + " (" + p_mcf.getLabel() + ")");
+			//form.setName(p_class.getName() + " ref from " + ((FormGroup)p_mcf.eContainer()).getLabel() + " (" + p_mcf.getLabel() + ")");
 		};
-		return form;
+		return formClass;
 	}
 	
 	

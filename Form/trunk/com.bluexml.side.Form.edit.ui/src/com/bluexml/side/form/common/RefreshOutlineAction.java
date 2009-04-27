@@ -31,7 +31,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.PlatformUI;
 
-import com.bluexml.side.form.Form;
+import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.editor.views.OutlineHTMLView;
 import com.bluexml.side.form.editor.views.service.OutlineViewService;
 
@@ -70,8 +70,8 @@ public class RefreshOutlineAction extends Action implements
 		selectedObject = null;
 		for (Iterator<?> objects = selection.iterator(); objects.hasNext();) {
 			Object object = objects.next();
-			if (object instanceof Form) {
-				selectedObject = (Form) object;
+			if (object instanceof FormContainer) {
+				selectedObject = (FormContainer) object;
 				XMIResource xmiRessource = (XMIResource)((EObject)object).eResource();;
 				fileURI = xmiRessource.getURI();
 			} else {
@@ -118,7 +118,7 @@ public class RefreshOutlineAction extends Action implements
 	@SuppressWarnings("deprecation")
 	private void doAction(URI uri) throws CoreException, FactoryException, IOException {
 		String metamodelURI = "http://www.kerblue.org/form/1.0";
-		OutlineViewService.setNameOfSelectedForm(((Form)selectedObject).getName());
+		OutlineViewService.setNameOfSelectedForm(((FormContainer)selectedObject).getName());
 		
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().saveAllEditors(true);
 		// References to files in the project

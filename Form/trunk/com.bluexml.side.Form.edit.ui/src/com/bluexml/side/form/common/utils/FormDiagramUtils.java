@@ -6,11 +6,13 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 
+import sun.misc.FormattedFloatingDecimal.Form;
+
 import com.bluexml.side.form.Field;
-import com.bluexml.side.form.Form;
 import com.bluexml.side.form.FormAspect;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormCollection;
+import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.Reference;
@@ -21,10 +23,10 @@ public class FormDiagramUtils {
 	/**
 	 * Return the parent form class
 	 */
-	public static FormClass getParentFormClass(FormElement fe) {
-		FormClass fc = null;
-		if(fe != null && fe instanceof FormClass) {
-			return (FormClass) fe;
+	public static FormContainer getParentFormContainer(FormElement fe) {
+		FormContainer fc = null;
+		if(fe != null && fe instanceof FormContainer) {
+			return (FormContainer) fe;
 		} else {
 			if (fe != null) {
 				return getParentFormClass((FormElement)fe.eContainer());
@@ -34,14 +36,26 @@ public class FormDiagramUtils {
 	}
 	
 	/**
+	 * Return the parent form class
+	 */
+	public static FormClass getParentFormClass(FormElement fe) {
+		FormContainer fc = getParentFormContainer(fe);
+		FormClass result = null;
+		if (fc instanceof FormClass) {
+			result = (FormClass) fc;
+		}
+		return result;
+	}
+	
+	/**
 	 * Get the parent forme
 	 * @param fe
 	 * @return
 	 */
-	public static Form getParentForm(FormElement fe) {
-		Form f = null;
-		if(fe.eContainer() != null && fe.eContainer() instanceof Form) {
-			f = (Form) fe.eContainer();
+	public static FormContainer getParentForm(FormElement fe) {
+		FormContainer f = null;
+		if(fe.eContainer() != null && fe.eContainer() instanceof FormContainer) {
+			f = (FormContainer) fe.eContainer();
 		} else {
 			if (fe.eContainer() != null) {
 				f = getParentForm((FormElement)fe.eContainer());
@@ -202,8 +216,8 @@ public class FormDiagramUtils {
 	public static List<VirtualField> getVirtualizedFields(Field f) {
 		List<VirtualField> lvf = new ArrayList<VirtualField>();
 		FormCollection fc = getParentFormCollection((EObject)f);
-		for (Form form : fc.getForms()) {
-			lvf.addAll(getVirtualizedFieldsForGroup((FormGroup)form.getRoot(),f));
+		for (FormContainer form : fc.getForms()) {
+			lvf.addAll(getVirtualizedFieldsForGroup((FormGroup)form,f));
 		}
 		return lvf;
 	}

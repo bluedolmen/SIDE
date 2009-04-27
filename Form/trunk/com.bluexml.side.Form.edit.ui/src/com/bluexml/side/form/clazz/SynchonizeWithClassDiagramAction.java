@@ -11,9 +11,9 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
-import com.bluexml.side.form.Form;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormCollection;
+import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.clazz.utils.ClassSynchronizationUtils;
 
 public class SynchonizeWithClassDiagramAction  extends Action implements
@@ -53,9 +53,9 @@ ISelectionChangedListener {
 	@SuppressWarnings("unchecked")
 	private void doAction(FormCollection fc) {
 		// We will iterate on each child on make action for each FormClass
-		for(Form form : fc.getForms()) {
-			if (form.getRoot() instanceof FormClass) {
-				domain.getCommandStack().execute(ClassSynchronizationUtils.synchronizeClass((FormClass)form.getRoot(), domain));
+		for(FormContainer form : fc.getForms()) {
+			if (form instanceof FormClass) {
+				domain.getCommandStack().execute(ClassSynchronizationUtils.synchronizeClass((FormClass)form, domain));
 			}
 		}
 	}

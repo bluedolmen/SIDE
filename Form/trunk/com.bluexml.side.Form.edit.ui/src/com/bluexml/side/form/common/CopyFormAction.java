@@ -14,7 +14,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
-import com.bluexml.side.form.Form;
+import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormPackage;
 
 
@@ -37,7 +37,7 @@ ISelectionChangedListener {
 		selectedObject = null;
 		for (Iterator<?> objects = selection.iterator(); objects.hasNext();) {
 			Object object = objects.next();
-			if (object instanceof Form) {
+			if (object instanceof FormContainer) {
 				selectedObject = (EObject) object;
 			} else {
 				return false;
@@ -50,14 +50,14 @@ ISelectionChangedListener {
 	@Override
 	public void run() {
 		super.run();
-		doAction((Form) selectedObject);
+		doAction((FormContainer) selectedObject);
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void doAction(Form form) {
-		Form newForm = (Form) EcoreUtil.copy(form);
+	private void doAction(FormContainer form) {
+		FormContainer newForm = (FormContainer) EcoreUtil.copy(form);
 		newForm.setName("Copy of " + newForm.getName());
-		((Form) newForm).getRoot().setLabel("Copy of " + ((Form) newForm).getRoot().getLabel());
+		((FormContainer) newForm).setLabel("Copy of " + ((FormContainer) newForm).getLabel());
 		Command addFormCmd = AddCommand.create(domain, form.eContainer(), FormPackage.eINSTANCE.getFormCollection_Forms(), newForm);
 		//Form newForm = (Form) cpyCmd.getResult().iterator().next();
 		domain.getCommandStack().execute(addFormCmd);
