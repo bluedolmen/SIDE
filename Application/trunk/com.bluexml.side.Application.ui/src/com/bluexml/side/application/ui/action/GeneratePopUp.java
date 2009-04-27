@@ -15,8 +15,10 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 
+import com.bluexml.side.application.Application;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.Model;
+import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 import com.bluexml.side.application.ui.action.utils.Generate;
 import com.swtdesigner.SWTResourceManager;
 
@@ -34,11 +36,11 @@ public class GeneratePopUp extends Dialog {
 	 * @param staticFieldsName 
 	 * @param configuration 
 	 */
-	public GeneratePopUp(Shell parentShell, Configuration p_configuration, List<String> p_staticFieldsName, List<Model> p_list) {
+	public GeneratePopUp(Shell parentShell, Configuration p_configuration) {
 		super(parentShell);
 		configuration = p_configuration;
-		staticParameters = p_staticFieldsName;
-		models = p_list;
+		staticParameters = ApplicationDialog.staticFieldsName;
+		models = ApplicationUtil.getModels((Application)p_configuration.eContainer());
 	}
 
 	/**

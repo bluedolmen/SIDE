@@ -1326,8 +1326,7 @@ public class ApplicationDialog extends Dialog {
 				}
 			}
 			GeneratePopUp generationPopUp = new GeneratePopUp(Display
-					.getDefault().getActiveShell(), getCurrentConfiguration(),
-					staticFieldsName, ApplicationUtil.getModels(application));
+					.getDefault().getActiveShell(), getCurrentConfiguration());
 			generationPopUp.open();
 			return;
 		}
@@ -1370,6 +1369,18 @@ public class ApplicationDialog extends Dialog {
 		return new Point(800,600);
 	}
 	
+	static public Configuration getConfigurationByName(String p_name){
+		return application.getConfiguration(p_name);
+	}
+	
+	static public String getCurrentConfiguratioName() {
+		String confName = null;
+		if (configurationList.getSelectionIndex() != -1) {
+			confName = configurationList.getItem(configurationList
+					.getSelectionIndex());
+		}
+		return confName;
+	}
 
 	static public Configuration getCurrentConfiguration() {
 		if (configurationList.getSelectionIndex() != -1) {

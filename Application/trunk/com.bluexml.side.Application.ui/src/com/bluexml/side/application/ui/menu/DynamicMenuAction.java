@@ -85,9 +85,7 @@ public class DynamicMenuAction extends CompoundContributionItem implements
 						item.addSelectionListener( new SelectionAdapter() {
 							public void widgetSelected(SelectionEvent e) {
 								GeneratePopUp generationPopUp = new GeneratePopUp(Display
-										.getDefault().getActiveShell(),application.getConfiguration(conf.getName()), 
-										ApplicationDialog.staticFieldsName,
-										ApplicationUtil.getModels(application));
+										.getDefault().getActiveShell(),application.getConfiguration(conf.getName()));
 								generationPopUp.open();
 							}
 						});
@@ -101,11 +99,15 @@ public class DynamicMenuAction extends CompoundContributionItem implements
 
 		return menu;
 	}
+	
+	public boolean isDynamic() {
+		return true;
+	}
 
 	public void selectionChanged(IAction action, ISelection myselection) {
 		this.selection = (StructuredSelection) myselection;
 		action.setMenuCreator(this);
-
+		action.setEnabled(true);
 	}
 
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
