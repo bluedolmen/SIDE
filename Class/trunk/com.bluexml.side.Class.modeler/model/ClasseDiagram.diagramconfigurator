@@ -5,18 +5,14 @@
       <items xmi:id="_yP16Q3cBEdyUwq_XzqQQrw" name="Class" part="_yP16T3cBEdyUwq_XzqQQrw"/>
       <items xmi:id="_DyyzoHcCEdyUwq_XzqQQrw" name="Aspect" part="_2n-_MHcBEdyUwq_XzqQQrw"/>
       <items xmi:id="_yP16RHcBEdyUwq_XzqQQrw" name="Property" part="_yP16UHcBEdyUwq_XzqQQrw"/>
-      <items xmi:id="_yP16RncBEdyUwq_XzqQQrw" name="Stereotype" part="_yP16TncBEdyUwq_XzqQQrw"/>
       <items xmi:id="_yP16R3cBEdyUwq_XzqQQrw" name="Comment" part="_yP16UncBEdyUwq_XzqQQrw"/>
       <items xmi:id="_lcsD0KSTEdyN7Noj7sl7yA" name="Enumeration" part="_fpn6AHsHEdyp6M5rXUMfSA"/>
       <items xmi:id="_pVF4wKSTEdyN7Noj7sl7yA" name="Enumeration Literal" part="_5KhE4HsIEdy7uoUms_Eq3g"/>
-      <items xmi:id="_rlMDUKy7EdyIeNPv3dqFqw" name="View" part="_duiSAKy6EdyIeNPv3dqFqw"/>
     </paletteCategories>
     <paletteCategories xmi:id="_yP16SHcBEdyUwq_XzqQQrw" name="Links">
       <items xmi:id="_yP16SXcBEdyUwq_XzqQQrw" name="Association" part="_yP_EMHcBEdyUwq_XzqQQrw"/>
       <items xmi:id="_yP16SncBEdyUwq_XzqQQrw" name="Generalization" part="_6boWkA4hEd6vHfpmvyY_hg"/>
       <items xmi:id="_yP16S3cBEdyUwq_XzqQQrw" name="Is commented" part="_yP_ENHcBEdyUwq_XzqQQrw"/>
-      <items xmi:id="_yP16THcBEdyUwq_XzqQQrw" name="Is stereotyped" part="_yP_EN3cBEdyUwq_XzqQQrw"/>
-      <items xmi:id="_tizmkKy7EdyIeNPv3dqFqw" name="Has view" part="_tHziEKy6EdyIeNPv3dqFqw"/>
       <items xmi:id="_pEAaIA_nEd6WE5atyWwk_g" name="hasAspect" part="_kRcDAA_nEd6WE5atyWwk_g"/>
       <items xmi:id="_LFOLgBOzEd6rfbeEUErmOQ" name="Depends of" part="_GzJ5YBOzEd6rfbeEUErmOQ"/>
     </paletteCategories>

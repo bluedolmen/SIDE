@@ -35,8 +35,6 @@ import org.topcased.modeler.internal.ModelerPlugin;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
-import com.bluexml.preferences.PreferenceConstants;
-import com.bluexml.side.Class.modeler.ClazzPlugin;
 import com.bluexml.side.Class.modeler.diagram.commands.AttributeRestoreConnectionCommand;
 import com.bluexml.side.Class.modeler.diagram.commands.update.AttributeUpdateCommand;
 import com.bluexml.side.Class.modeler.diagram.dialogs.AttributeEditDialog;
@@ -179,7 +177,7 @@ public class AttributeEditPart extends EMFGraphNodeEditPart {
 
 	@Override
 	protected Color getDefaultBackgroundColor() {
-		
+
 		if (attribute.getMetainfo().size() > 0) {
 			getFigure().setOpaque(true);
 			return ModelerColorConstants.lightOrange;

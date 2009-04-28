@@ -142,17 +142,6 @@ public class CdCreationUtils extends AbstractCreationUtils {
 		}
 
 		/**
-		 * @see com.bluexml.side.clazz.util.ClazzSwitch#caseView(com.bluexml.side.clazz.View)
-		 * @generated
-		 */
-		public Object caseView(com.bluexml.side.clazz.View object) {
-			if ("default".equals(presentation)) {
-				return createGraphElementView(object, presentation);
-			}
-			return null;
-		}
-
-		/**
 		 * @see com.bluexml.side.clazz.util.ClazzSwitch#caseAssociation(com.bluexml.side.clazz.Association)
 		 * @generated
 		 */
@@ -248,17 +237,6 @@ public class CdCreationUtils extends AbstractCreationUtils {
 	 * @return the complete GraphElement
 	 * @generated
 	 */
-	protected GraphElement createGraphElementStereotype(
-			com.bluexml.side.common.Stereotype element, String presentation) {
-		return createGraphNode(element, presentation);
-	}
-
-	/**
-	 * @param element the model element
-	 * @param presentation the presentation of the graphical element
-	 * @return the complete GraphElement
-	 * @generated
-	 */
 	protected GraphElement createGraphElementClassComment(
 			com.bluexml.side.clazz.ClassComment element, String presentation) {
 		return createGraphNode(element, presentation);
@@ -291,17 +269,6 @@ public class CdCreationUtils extends AbstractCreationUtils {
 	protected GraphElement createGraphElementEnumerationLiteral(
 			com.bluexml.side.clazz.EnumerationLiteral element,
 			String presentation) {
-		return createGraphNode(element, presentation);
-	}
-
-	/**
-	 * @param element the model element
-	 * @param presentation the presentation of the graphical element
-	 * @return the complete GraphElement
-	 * @generated
-	 */
-	protected GraphElement createGraphElementView(
-			com.bluexml.side.clazz.View element, String presentation) {
 		return createGraphNode(element, presentation);
 	}
 

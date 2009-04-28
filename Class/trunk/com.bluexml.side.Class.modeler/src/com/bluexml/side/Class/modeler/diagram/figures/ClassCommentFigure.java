@@ -34,7 +34,7 @@ public class ClassCommentFigure extends
 	public ClassCommentFigure() {
 		super();
 	}
-	
+
 	@Override
 	protected ILabel createLabel() {
 		return new ComposedLabel(new Label(), new EditableLabel(), new Label(),

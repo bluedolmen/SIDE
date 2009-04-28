@@ -27,7 +27,6 @@ import org.topcased.modeler.editor.palette.ModelerCreationToolEntry;
 import org.topcased.modeler.editor.palette.ModelerPaletteManager;
 
 import com.bluexml.side.clazz.ClazzPackage;
-import com.bluexml.side.common.CommonPackage;
 
 /**
  * Generated Palette Manager
@@ -116,12 +115,6 @@ public class CdPaletteManager extends ModelerPaletteManager {
 				CdImageRegistry.getImageDescriptor("ATTRIBUTE_LARGE")));
 
 		factory = new GraphElementCreationFactory(creationUtils,
-				CommonPackage.eINSTANCE.getStereotype(), "default");
-		entries.add(new ModelerCreationToolEntry("Stereotype", "Stereotype",
-				factory, CdImageRegistry.getImageDescriptor("STEREOTYPE"),
-				CdImageRegistry.getImageDescriptor("STEREOTYPE_LARGE")));
-
-		factory = new GraphElementCreationFactory(creationUtils,
 				ClazzPackage.eINSTANCE.getClassComment(), "default");
 		entries.add(new ModelerCreationToolEntry("Comment", "Comment", factory,
 				CdImageRegistry.getImageDescriptor("CLASSCOMMENT"),
@@ -141,12 +134,6 @@ public class CdPaletteManager extends ModelerPaletteManager {
 								.getImageDescriptor("ENUMERATIONLITERAL"),
 						CdImageRegistry
 								.getImageDescriptor("ENUMERATIONLITERAL_LARGE")));
-
-		factory = new GraphElementCreationFactory(creationUtils,
-				ClazzPackage.eINSTANCE.getView(), "default");
-		entries.add(new ModelerCreationToolEntry("View", "View", factory,
-				CdImageRegistry.getImageDescriptor("VIEW"), CdImageRegistry
-						.getImageDescriptor("VIEW_LARGE")));
 
 		objectsDrawer.addAll(entries);
 		getRoot().add(objectsDrawer);
@@ -185,21 +172,6 @@ public class CdPaletteManager extends ModelerPaletteManager {
 				"Is commented", factory, CdImageRegistry
 						.getImageDescriptor("ISCOMMENTED"), CdImageRegistry
 						.getImageDescriptor("ISCOMMENTED_LARGE")));
-
-		factory = new GraphElementCreationFactory(creationUtils,
-				CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED, "default",
-				false);
-		entries.add(new ModelerConnectionCreationToolEntry("Is stereotyped",
-				"Is stereotyped", factory, CdImageRegistry
-						.getImageDescriptor("ISSTEREOTYPED"), CdImageRegistry
-						.getImageDescriptor("ISSTEREOTYPED_LARGE")));
-
-		factory = new GraphElementCreationFactory(creationUtils,
-				CdSimpleObjectConstants.SIMPLE_OBJECT_HASVIEW, "default", false);
-		entries.add(new ModelerConnectionCreationToolEntry("Has view",
-				"Has view", factory, CdImageRegistry
-						.getImageDescriptor("HASVIEW"), CdImageRegistry
-						.getImageDescriptor("HASVIEW_LARGE")));
 
 		factory = new GraphElementCreationFactory(creationUtils,
 				CdSimpleObjectConstants.SIMPLE_OBJECT_HASASPECT, "default",

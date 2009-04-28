@@ -158,7 +158,7 @@ public class ClassCommentEditPart extends EMFGraphNodeEditPart {
 		return null;
 
 	}
-	
+
 	protected void performDirectEdit() {
 		DirectEditManager manager = getDirectEditManager();
 		if (manager == null) {
@@ -174,7 +174,7 @@ public class ClassCommentEditPart extends EMFGraphNodeEditPart {
 		}
 		manager.show();
 	}
-	
+
 	@Override
 	protected Color getDefaultBackgroundColor() {
 		Comment com = (Comment) Utils.getElement(getGraphNode());
@@ -199,8 +199,7 @@ public class ClassCommentEditPart extends EMFGraphNodeEditPart {
 				return ModelerColorConstants.classlightGreen;
 		}
 	}
-	
-	
+
 	@Override
 	protected void refreshHeaderLabel() {
 		ClassCommentFigure fig = (ClassCommentFigure) getFigure();
@@ -209,11 +208,12 @@ public class ClassCommentEditPart extends EMFGraphNodeEditPart {
 				.getStereotypesNotation(com));
 		((ComposedLabel) fig.getLabel()).setMain(com.getValue());
 	}
-	
+
 	@Override
 	public void performRequest(Request request) {
 		if (request.getType() == RequestConstants.REQ_OPEN) {
-			ClassComment comment = (ClassComment) Utils.getElement(getGraphNode());
+			ClassComment comment = (ClassComment) Utils
+					.getElement(getGraphNode());
 
 			CommentEditDialog dlg = new CommentEditDialog(comment,
 					ModelerPlugin.getActiveWorkbenchShell());
