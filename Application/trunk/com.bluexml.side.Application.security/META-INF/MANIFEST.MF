@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: S-IDE Security Plug-in
+Bundle-SymbolicName: com.bluexml.side.Application.security
+Bundle-Version: 1.0.0
+Bundle-Activator: com.bluexml.side.application.security.Activator
+Bundle-Vendor: blueXML
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Eclipse-LazyStart: true
