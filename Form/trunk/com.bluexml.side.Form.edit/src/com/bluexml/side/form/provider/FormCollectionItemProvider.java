@@ -152,11 +152,6 @@ public class FormCollectionItemProvider
 			(createChildParameter
 				(FormPackage.Literals.FORM_COLLECTION__FORMS,
 				 FormFactory.eINSTANCE.createFormClass()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(FormPackage.Literals.FORM_COLLECTION__FORMS,
-				 FormFactory.eINSTANCE.createFormWorkflow()));
 	}
 
 	/**

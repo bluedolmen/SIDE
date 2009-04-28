@@ -9,6 +9,8 @@ import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 
+import com.bluexml.side.clazz.Operation;
+import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormPackage;
@@ -20,6 +22,8 @@ import com.bluexml.side.workflow.Process;
 import com.bluexml.side.workflow.StartState;
 import com.bluexml.side.workflow.State;
 import com.bluexml.side.workflow.TaskNode;
+import com.bluexml.side.workflow.Transition;
+import com.bluexml.side.workflow.UserTask;
 
 public class WorkflowInitialization {
 	
@@ -53,23 +57,21 @@ public class WorkflowInitialization {
 					fw.setLabel(s.getName());
 					
 					// For all attribute we get the field :
-					if (s instanceof StartState) {
-						StartState ss = (StartState) s;
-						for (Attribute a : ss.getAttributes()) {
+					if (s instanceof UserTask) {
+						UserTask ut = (UserTask) s;
+						for (Attribute a : ut.getAttributes()) {
 							Field f = WorkflowDiagramUtils.getFieldForAttribute(a);
 							if (f != null) {
 								fw.getChildren().add(f);
 							}
 						}
-					} else if (s instanceof TaskNode) {
-						TaskNode tn = (TaskNode) s;
-						for (Attribute a : tn.getAttributes()) {
-							Field f = WorkflowDiagramUtils.getFieldForAttribute(a);
-							if (f != null) {
-								fw.getChildren().add(f);
-							}
+						for (Transition t : ut.getTransition()) {
+							 ActionField af = WorkflowDiagramUtils.getOperationForTransition(t);
+							 if (af != null) {
+								 fw.getChildren().add(af);
+							 }
 						}
-					}
+					} 
 					
 					lf.add(fw);
 				}

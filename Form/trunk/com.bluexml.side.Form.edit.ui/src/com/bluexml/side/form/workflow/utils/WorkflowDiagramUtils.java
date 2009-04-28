@@ -4,9 +4,11 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import com.bluexml.side.clazz.AttributeType;
 import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.workflow.Attribute;
+import com.bluexml.side.workflow.Transition;
 
 public class WorkflowDiagramUtils {
 	
@@ -62,6 +64,17 @@ public class WorkflowDiagramUtils {
 			}
 		}
 		return field;
+	}
+
+	public static ActionField getOperationForTransition(Transition t) {
+		ActionField af = null;
+		if (t != null) {
+			af = FormFactory.eINSTANCE.createActionField();
+			af.setId(t.getName());
+			af.setLabel(t.getTitle());
+			af.setRef(t);
+		}
+		return af;
 	}
 	
 	}
