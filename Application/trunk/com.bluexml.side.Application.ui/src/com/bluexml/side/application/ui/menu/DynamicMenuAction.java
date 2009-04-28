@@ -29,9 +29,7 @@ import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationPackage;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ModelElement;
-import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.application.ui.action.GeneratePopUp;
-import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 
 public class DynamicMenuAction extends CompoundContributionItem implements
 		IObjectActionDelegate, IMenuCreator {
