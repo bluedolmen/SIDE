@@ -6,8 +6,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 
-import sun.misc.FormattedFloatingDecimal.Form;
-
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormAspect;
 import com.bluexml.side.form.FormClass;

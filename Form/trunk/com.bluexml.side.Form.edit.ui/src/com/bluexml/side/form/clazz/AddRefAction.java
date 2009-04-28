@@ -15,11 +15,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
-import sun.misc.FormattedFloatingDecimal.Form;
-
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.form.FormClass;
-import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.Reference;
