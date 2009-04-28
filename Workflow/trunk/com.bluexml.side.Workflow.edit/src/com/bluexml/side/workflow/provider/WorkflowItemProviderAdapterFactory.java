@@ -213,6 +213,29 @@ public class WorkflowItemProviderAdapterFactory extends WorkflowAdapterFactory i
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.workflow.UserTask} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UserTaskItemProvider userTaskItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.workflow.UserTask}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUserTaskAdapter() {
+		if (userTaskItemProvider == null) {
+			userTaskItemProvider = new UserTaskItemProvider(this);
+		}
+
+		return userTaskItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.workflow.ProcessState} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -466,6 +489,29 @@ public class WorkflowItemProviderAdapterFactory extends WorkflowAdapterFactory i
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.workflow.TransitionTask} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TransitionTaskItemProvider transitionTaskItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.workflow.TransitionTask}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTransitionTaskAdapter() {
+		if (transitionTaskItemProvider == null) {
+			transitionTaskItemProvider = new TransitionTaskItemProvider(this);
+		}
+
+		return transitionTaskItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -567,9 +613,10 @@ public class WorkflowItemProviderAdapterFactory extends WorkflowAdapterFactory i
 		if (processItemProvider != null) processItemProvider.dispose();
 		if (swimlaneItemProvider != null) swimlaneItemProvider.dispose();
 		if (startStateItemProvider != null) startStateItemProvider.dispose();
+		if (taskNodeItemProvider != null) taskNodeItemProvider.dispose();
+		if (userTaskItemProvider != null) userTaskItemProvider.dispose();
 		if (endStateItemProvider != null) endStateItemProvider.dispose();
 		if (nodeItemProvider != null) nodeItemProvider.dispose();
-		if (taskNodeItemProvider != null) taskNodeItemProvider.dispose();
 		if (processStateItemProvider != null) processStateItemProvider.dispose();
 		if (forkItemProvider != null) forkItemProvider.dispose();
 		if (joinItemProvider != null) joinItemProvider.dispose();
@@ -581,6 +628,7 @@ public class WorkflowItemProviderAdapterFactory extends WorkflowAdapterFactory i
 		if (variableItemProvider != null) variableItemProvider.dispose();
 		if (transitionItemProvider != null) transitionItemProvider.dispose();
 		if (attributeItemProvider != null) attributeItemProvider.dispose();
+		if (transitionTaskItemProvider != null) transitionTaskItemProvider.dispose();
 	}
 
 }

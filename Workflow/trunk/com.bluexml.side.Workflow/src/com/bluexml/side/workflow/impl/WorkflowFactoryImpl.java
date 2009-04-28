@@ -30,6 +30,8 @@ import com.bluexml.side.workflow.Swimlane;
 import com.bluexml.side.workflow.TaskNode;
 import com.bluexml.side.workflow.Timer;
 import com.bluexml.side.workflow.Transition;
+import com.bluexml.side.workflow.TransitionTask;
+import com.bluexml.side.workflow.UserTask;
 import com.bluexml.side.workflow.Variable;
 import com.bluexml.side.workflow.WorkflowFactory;
 import com.bluexml.side.workflow.WorkflowPackage;
@@ -81,9 +83,10 @@ public class WorkflowFactoryImpl extends EFactoryImpl implements WorkflowFactory
 			case WorkflowPackage.PROCESS: return createProcess();
 			case WorkflowPackage.SWIMLANE: return createSwimlane();
 			case WorkflowPackage.START_STATE: return createStartState();
+			case WorkflowPackage.TASK_NODE: return createTaskNode();
+			case WorkflowPackage.USER_TASK: return createUserTask();
 			case WorkflowPackage.END_STATE: return createEndState();
 			case WorkflowPackage.NODE: return createNode();
-			case WorkflowPackage.TASK_NODE: return createTaskNode();
 			case WorkflowPackage.PROCESS_STATE: return createProcessState();
 			case WorkflowPackage.FORK: return createFork();
 			case WorkflowPackage.JOIN: return createJoin();
@@ -95,6 +98,7 @@ public class WorkflowFactoryImpl extends EFactoryImpl implements WorkflowFactory
 			case WorkflowPackage.VARIABLE: return createVariable();
 			case WorkflowPackage.TRANSITION: return createTransition();
 			case WorkflowPackage.ATTRIBUTE: return createAttribute();
+			case WorkflowPackage.TRANSITION_TASK: return createTransitionTask();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -192,6 +196,16 @@ public class WorkflowFactoryImpl extends EFactoryImpl implements WorkflowFactory
 	public TaskNode createTaskNode() {
 		TaskNodeImpl taskNode = new TaskNodeImpl();
 		return taskNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UserTask createUserTask() {
+		UserTaskImpl userTask = new UserTaskImpl();
+		return userTask;
 	}
 
 	/**
@@ -302,6 +316,16 @@ public class WorkflowFactoryImpl extends EFactoryImpl implements WorkflowFactory
 	public Attribute createAttribute() {
 		AttributeImpl attribute = new AttributeImpl();
 		return attribute;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TransitionTask createTransitionTask() {
+		TransitionTaskImpl transitionTask = new TransitionTaskImpl();
+		return transitionTask;
 	}
 
 	/**

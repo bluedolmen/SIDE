@@ -65,77 +65,41 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="clazz" ordered="false"
         unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StartState" eSuperTypes="#//State">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
-        eType="#//Transition" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="event" upperBound="-1"
-        eType="#//Event" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StartState" eSuperTypes="#//UserTask">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="assignmentType" eType="#//BPMAssignmentType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initiator" lowerBound="1"
         eType="#//Swimlane"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
-        eType="#//Attribute" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="clazz" upperBound="-1"
-        eType="ecore:EClass ../../com.bluexml.side.Class/model/Class.ecore#//Clazz"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EndState" eSuperTypes="#//State">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="event" upperBound="-1"
-        eType="#//Event" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Node" eSuperTypes="#//State">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="action" ordered="false"
-        eType="#//Action" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
-        eType="#//Transition" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="event" upperBound="-1"
-        eType="#//Event" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TaskNode" eSuperTypes="#//State">
+  <eClassifiers xsi:type="ecore:EClass" name="TaskNode" eSuperTypes="#//UserTask">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="TaskMustBePointerByTransition" value="Transition.allInstances()-> select(t| t.to = self)->size()=1 or self.transition -> notEmpty()&#xA;"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="NoTaskWithSameName TaskMustBePointerByTransition"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
-        eType="#//Transition" containment="true" eOpposite="#//Transition/parentTaskNode"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="event" upperBound="-1"
-        eType="#//Event" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="timer" upperBound="-1"
         eType="#//Timer" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="swimlane" ordered="false"
         lowerBound="1" eType="#//Swimlane" eOpposite="#//Swimlane/manage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UserTask" eSuperTypes="#//TransitionTask">
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
         eType="#//Attribute" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="clazz" upperBound="-1"
         eType="ecore:EClass ../../com.bluexml.side.Class/model/Class.ecore#//Clazz"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ProcessState" eSuperTypes="#//State">
+  <eClassifiers xsi:type="ecore:EClass" name="EndState" eSuperTypes="#//State"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Node" eSuperTypes="#//TransitionTask">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" ordered="false"
+        eType="#//Action" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProcessState" eSuperTypes="#//TransitionTask">
     <eStructuralFeatures xsi:type="ecore:EReference" name="subprocess" ordered="false"
         lowerBound="1" eType="#//Process"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
-        eType="#//Transition" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="event" upperBound="-1"
-        eType="#//Event" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Fork" eSuperTypes="#//State">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
-        eType="#//Transition" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="event" upperBound="-1"
-        eType="#//Event" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//State">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
-        eType="#//Transition" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="event" upperBound="-1"
-        eType="#//Event" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Decision" eSuperTypes="#//State">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
-        eType="#//Transition" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="event" upperBound="-1"
-        eType="#//Event" containment="true"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Fork" eSuperTypes="#//TransitionTask"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//TransitionTask"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Decision" eSuperTypes="#//TransitionTask"/>
   <eClassifiers xsi:type="ecore:EClass" name="Event">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" ordered="false" unique="false"
         lowerBound="1" eType="#//BPMEventType"/>
@@ -166,7 +130,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="access" ordered="false"
         unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="NoTransitionWithSameName" value="Transition.allInstances() -> select(n|n.name = self.name and n &lt;> self )->size()=0"/>
       <details key="SourceAndTargetMustBeSet" value="not self.to.oclIsUndefined() and not self.getContainer().oclIsUndefined()"/>
@@ -182,7 +146,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="action" upperBound="-1"
         eType="#//Action" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentTaskNode" ordered="false"
-        eType="#//TaskNode" eOpposite="#//TaskNode/transition"/>
+        eType="#//TaskNode"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="timer" upperBound="-1"
         eType="#//Timer" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//State"/>
@@ -216,6 +180,8 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" upperBound="-1"
+        eType="#//Event" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="BPMAssignmentType">
     <eLiterals name="One_user" literal="One user"/>
@@ -232,5 +198,9 @@
         defaultValueLiteral="void"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransitionTask" eSuperTypes="#//State">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
+        eType="#//Transition" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

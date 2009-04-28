@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.workflow;
 
+import com.bluexml.side.common.ModelElement;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -32,7 +33,7 @@ import org.eclipse.emf.ecore.EObject;
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NoTransitionWithSameName SourceAndTargetMustBeSet noSpecialCharacters'"
  * @generated
  */
-public interface Transition extends EObject {
+public interface Transition extends ModelElement {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -102,28 +103,26 @@ public interface Transition extends EObject {
 	EList<Action> getAction();
 
 	/**
-	 * Returns the value of the '<em><b>Parent Task Node</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link com.bluexml.side.workflow.TaskNode#getTransition <em>Transition</em>}'.
+	 * Returns the value of the '<em><b>Parent Task Node</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parent Task Node</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parent Task Node</em>' container reference.
+	 * @return the value of the '<em>Parent Task Node</em>' reference.
 	 * @see #setParentTaskNode(TaskNode)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getTransition_ParentTaskNode()
-	 * @see com.bluexml.side.workflow.TaskNode#getTransition
-	 * @model opposite="transition" transient="false" ordered="false"
+	 * @model ordered="false"
 	 * @generated
 	 */
 	TaskNode getParentTaskNode();
 
 	/**
-	 * Sets the value of the '{@link com.bluexml.side.workflow.Transition#getParentTaskNode <em>Parent Task Node</em>}' container reference.
+	 * Sets the value of the '{@link com.bluexml.side.workflow.Transition#getParentTaskNode <em>Parent Task Node</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parent Task Node</em>' container reference.
+	 * @param value the new value of the '<em>Parent Task Node</em>' reference.
 	 * @see #getParentTaskNode()
 	 * @generated
 	 */

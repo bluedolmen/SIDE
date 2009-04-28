@@ -35,6 +35,8 @@ import com.bluexml.side.workflow.Swimlane;
 import com.bluexml.side.workflow.TaskNode;
 import com.bluexml.side.workflow.Timer;
 import com.bluexml.side.workflow.Transition;
+import com.bluexml.side.workflow.TransitionTask;
+import com.bluexml.side.workflow.UserTask;
 import com.bluexml.side.workflow.Variable;
 import com.bluexml.side.workflow.WorkflowFactory;
 import com.bluexml.side.workflow.WorkflowModelElement;
@@ -96,6 +98,13 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * @generated
 	 */
 	private EClass taskNodeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass userTaskEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -180,6 +189,13 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * @generated
 	 */
 	private EClass attributeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass transitionTaskEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -460,26 +476,8 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStartState_Transition() {
-		return (EReference)startStateEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getStartState_Event() {
-		return (EReference)startStateEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getStartState_AssignmentType() {
-		return (EAttribute)startStateEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)startStateEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -488,25 +486,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * @generated
 	 */
 	public EReference getStartState_Initiator() {
-		return (EReference)startStateEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getStartState_Attributes() {
-		return (EReference)startStateEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getStartState_Clazz() {
-		return (EReference)startStateEClass.getEStructuralFeatures().get(5);
+		return (EReference)startStateEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -516,15 +496,6 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 */
 	public EClass getEndState() {
 		return endStateEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEndState_Event() {
-		return (EReference)endStateEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -550,24 +521,6 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getNode_Transition() {
-		return (EReference)nodeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getNode_Event() {
-		return (EReference)nodeEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getTaskNode() {
 		return taskNodeEClass;
 	}
@@ -577,7 +530,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTaskNode_Transition() {
+	public EReference getTaskNode_Timer() {
 		return (EReference)taskNodeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -586,7 +539,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTaskNode_Event() {
+	public EReference getTaskNode_Swimlane() {
 		return (EReference)taskNodeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -595,8 +548,8 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTaskNode_Timer() {
-		return (EReference)taskNodeEClass.getEStructuralFeatures().get(2);
+	public EClass getUserTask() {
+		return userTaskEClass;
 	}
 
 	/**
@@ -604,8 +557,8 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTaskNode_Swimlane() {
-		return (EReference)taskNodeEClass.getEStructuralFeatures().get(3);
+	public EReference getUserTask_Attributes() {
+		return (EReference)userTaskEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -613,17 +566,8 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTaskNode_Attributes() {
-		return (EReference)taskNodeEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTaskNode_Clazz() {
-		return (EReference)taskNodeEClass.getEStructuralFeatures().get(5);
+	public EReference getUserTask_Clazz() {
+		return (EReference)userTaskEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -649,44 +593,8 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getProcessState_Transition() {
-		return (EReference)processStateEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getProcessState_Event() {
-		return (EReference)processStateEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getFork() {
 		return forkEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getFork_Transition() {
-		return (EReference)forkEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getFork_Event() {
-		return (EReference)forkEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -703,44 +611,8 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getJoin_Transition() {
-		return (EReference)joinEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getJoin_Event() {
-		return (EReference)joinEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getDecision() {
 		return decisionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDecision_Transition() {
-		return (EReference)decisionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDecision_Event() {
-		return (EReference)decisionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -973,6 +845,15 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getState_Event() {
+		return (EReference)stateEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getAttribute() {
 		return attributeEClass;
 	}
@@ -1002,6 +883,24 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 */
 	public EAttribute getAttribute_Name() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTransitionTask() {
+		return transitionTaskEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTransitionTask_Transition() {
+		return (EReference)transitionTaskEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1073,45 +972,30 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		createEAttribute(swimlaneEClass, SWIMLANE__CLAZZ);
 
 		startStateEClass = createEClass(START_STATE);
-		createEReference(startStateEClass, START_STATE__TRANSITION);
-		createEReference(startStateEClass, START_STATE__EVENT);
 		createEAttribute(startStateEClass, START_STATE__ASSIGNMENT_TYPE);
 		createEReference(startStateEClass, START_STATE__INITIATOR);
-		createEReference(startStateEClass, START_STATE__ATTRIBUTES);
-		createEReference(startStateEClass, START_STATE__CLAZZ);
+
+		taskNodeEClass = createEClass(TASK_NODE);
+		createEReference(taskNodeEClass, TASK_NODE__TIMER);
+		createEReference(taskNodeEClass, TASK_NODE__SWIMLANE);
+
+		userTaskEClass = createEClass(USER_TASK);
+		createEReference(userTaskEClass, USER_TASK__ATTRIBUTES);
+		createEReference(userTaskEClass, USER_TASK__CLAZZ);
 
 		endStateEClass = createEClass(END_STATE);
-		createEReference(endStateEClass, END_STATE__EVENT);
 
 		nodeEClass = createEClass(NODE);
 		createEReference(nodeEClass, NODE__ACTION);
-		createEReference(nodeEClass, NODE__TRANSITION);
-		createEReference(nodeEClass, NODE__EVENT);
-
-		taskNodeEClass = createEClass(TASK_NODE);
-		createEReference(taskNodeEClass, TASK_NODE__TRANSITION);
-		createEReference(taskNodeEClass, TASK_NODE__EVENT);
-		createEReference(taskNodeEClass, TASK_NODE__TIMER);
-		createEReference(taskNodeEClass, TASK_NODE__SWIMLANE);
-		createEReference(taskNodeEClass, TASK_NODE__ATTRIBUTES);
-		createEReference(taskNodeEClass, TASK_NODE__CLAZZ);
 
 		processStateEClass = createEClass(PROCESS_STATE);
 		createEReference(processStateEClass, PROCESS_STATE__SUBPROCESS);
-		createEReference(processStateEClass, PROCESS_STATE__TRANSITION);
-		createEReference(processStateEClass, PROCESS_STATE__EVENT);
 
 		forkEClass = createEClass(FORK);
-		createEReference(forkEClass, FORK__TRANSITION);
-		createEReference(forkEClass, FORK__EVENT);
 
 		joinEClass = createEClass(JOIN);
-		createEReference(joinEClass, JOIN__TRANSITION);
-		createEReference(joinEClass, JOIN__EVENT);
 
 		decisionEClass = createEClass(DECISION);
-		createEReference(decisionEClass, DECISION__TRANSITION);
-		createEReference(decisionEClass, DECISION__EVENT);
 
 		eventEClass = createEClass(EVENT);
 		createEAttribute(eventEClass, EVENT__TYPE);
@@ -1144,11 +1028,15 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 
 		stateEClass = createEClass(STATE);
 		createEAttribute(stateEClass, STATE__NAME);
+		createEReference(stateEClass, STATE__EVENT);
 
 		attributeEClass = createEClass(ATTRIBUTE);
 		createEAttribute(attributeEClass, ATTRIBUTE__TYP);
 		createEAttribute(attributeEClass, ATTRIBUTE__TITLE);
 		createEAttribute(attributeEClass, ATTRIBUTE__NAME);
+
+		transitionTaskEClass = createEClass(TRANSITION_TASK);
+		createEReference(transitionTaskEClass, TRANSITION_TASK__TRANSITION);
 
 		// Create enums
 		bpmEventTypeEEnum = createEEnum(BPM_EVENT_TYPE);
@@ -1189,17 +1077,20 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		// Add supertypes to classes
 		workflowModelElementEClass.getESuperTypes().add(theCommonPackage.getModelElement());
 		processEClass.getESuperTypes().add(theCommonPackage.getPackage());
-		startStateEClass.getESuperTypes().add(this.getState());
+		startStateEClass.getESuperTypes().add(this.getUserTask());
+		taskNodeEClass.getESuperTypes().add(this.getUserTask());
+		userTaskEClass.getESuperTypes().add(this.getTransitionTask());
 		endStateEClass.getESuperTypes().add(this.getState());
-		nodeEClass.getESuperTypes().add(this.getState());
-		taskNodeEClass.getESuperTypes().add(this.getState());
-		processStateEClass.getESuperTypes().add(this.getState());
-		forkEClass.getESuperTypes().add(this.getState());
-		joinEClass.getESuperTypes().add(this.getState());
-		decisionEClass.getESuperTypes().add(this.getState());
+		nodeEClass.getESuperTypes().add(this.getTransitionTask());
+		processStateEClass.getESuperTypes().add(this.getTransitionTask());
+		forkEClass.getESuperTypes().add(this.getTransitionTask());
+		joinEClass.getESuperTypes().add(this.getTransitionTask());
+		decisionEClass.getESuperTypes().add(this.getTransitionTask());
 		actionEClass.getESuperTypes().add(this.getWorkflowModelElement());
 		timerEClass.getESuperTypes().add(this.getAction());
+		transitionEClass.getESuperTypes().add(theCommonPackage.getModelElement());
 		attributeEClass.getESuperTypes().add(theCommonPackage.getModelElement());
+		transitionTaskEClass.getESuperTypes().add(this.getState());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(workflowModelElementEClass, WorkflowModelElement.class, "WorkflowModelElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1228,45 +1119,30 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		addEParameter(op, this.getSwimlane(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(startStateEClass, StartState.class, "StartState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStartState_Transition(), this.getTransition(), null, "transition", null, 0, -1, StartState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStartState_Event(), this.getEvent(), null, "event", null, 0, -1, StartState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStartState_AssignmentType(), this.getBPMAssignmentType(), "assignmentType", null, 0, 1, StartState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStartState_Initiator(), this.getSwimlane(), null, "initiator", null, 1, 1, StartState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStartState_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, StartState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStartState_Clazz(), theClazzPackage.getClazz(), null, "clazz", null, 0, -1, StartState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(taskNodeEClass, TaskNode.class, "TaskNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTaskNode_Timer(), this.getTimer(), null, "timer", null, 0, -1, TaskNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTaskNode_Swimlane(), this.getSwimlane(), this.getSwimlane_Manage(), "swimlane", null, 1, 1, TaskNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		initEClass(userTaskEClass, UserTask.class, "UserTask", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUserTask_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, UserTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUserTask_Clazz(), theClazzPackage.getClazz(), null, "clazz", null, 0, -1, UserTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(endStateEClass, EndState.class, "EndState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEndState_Event(), this.getEvent(), null, "event", null, 0, -1, EndState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(nodeEClass, Node.class, "Node", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNode_Action(), this.getAction(), null, "action", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getNode_Transition(), this.getTransition(), null, "transition", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNode_Event(), this.getEvent(), null, "event", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(taskNodeEClass, TaskNode.class, "TaskNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTaskNode_Transition(), this.getTransition(), this.getTransition_ParentTaskNode(), "transition", null, 0, -1, TaskNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTaskNode_Event(), this.getEvent(), null, "event", null, 0, -1, TaskNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTaskNode_Timer(), this.getTimer(), null, "timer", null, 0, -1, TaskNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTaskNode_Swimlane(), this.getSwimlane(), this.getSwimlane_Manage(), "swimlane", null, 1, 1, TaskNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getTaskNode_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, TaskNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTaskNode_Clazz(), theClazzPackage.getClazz(), null, "clazz", null, 0, -1, TaskNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(processStateEClass, ProcessState.class, "ProcessState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProcessState_Subprocess(), this.getProcess(), null, "subprocess", null, 1, 1, ProcessState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getProcessState_Transition(), this.getTransition(), null, "transition", null, 0, -1, ProcessState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProcessState_Event(), this.getEvent(), null, "event", null, 0, -1, ProcessState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(forkEClass, Fork.class, "Fork", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFork_Transition(), this.getTransition(), null, "transition", null, 0, -1, Fork.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFork_Event(), this.getEvent(), null, "event", null, 0, -1, Fork.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(joinEClass, Join.class, "Join", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getJoin_Transition(), this.getTransition(), null, "transition", null, 0, -1, Join.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getJoin_Event(), this.getEvent(), null, "event", null, 0, -1, Join.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(decisionEClass, Decision.class, "Decision", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDecision_Transition(), this.getTransition(), null, "transition", null, 0, -1, Decision.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDecision_Event(), this.getEvent(), null, "event", null, 0, -1, Decision.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(eventEClass, Event.class, "Event", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEvent_Type(), this.getBPMEventType(), "type", null, 1, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -1292,18 +1168,22 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		initEAttribute(getTransition_Name(), ecorePackage.getEString(), "name", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getTransition_Condition(), ecorePackage.getEString(), "condition", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTransition_Action(), this.getAction(), null, "action", null, 0, -1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTransition_ParentTaskNode(), this.getTaskNode(), this.getTaskNode_Transition(), "parentTaskNode", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getTransition_ParentTaskNode(), this.getTaskNode(), null, "parentTaskNode", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTransition_Timer(), this.getTimer(), null, "timer", null, 0, -1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransition_To(), this.getState(), null, "to", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTransition_Title(), ecorePackage.getEString(), "title", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stateEClass, State.class, "State", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getState_Name(), ecorePackage.getEString(), "name", null, 1, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getState_Event(), this.getEvent(), null, "event", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAttribute_Typ(), theClazzPackage.getAttributeType(), "typ", "void", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_Title(), ecorePackage.getEString(), "title", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_Name(), ecorePackage.getEString(), "name", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(transitionTaskEClass, TransitionTask.class, "TransitionTask", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTransitionTask_Transition(), this.getTransition(), null, "transition", null, 0, -1, TransitionTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(bpmEventTypeEEnum, BPMEventType.class, "BPMEventType");

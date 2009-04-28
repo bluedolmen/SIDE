@@ -17,8 +17,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.bluexml.side.workflow.Node#getAction <em>Action</em>}</li>
- *   <li>{@link com.bluexml.side.workflow.Node#getTransition <em>Transition</em>}</li>
- *   <li>{@link com.bluexml.side.workflow.Node#getEvent <em>Event</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,7 +24,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Node extends State {
+public interface Node extends TransitionTask {
 	/**
 	 * Returns the value of the '<em><b>Action</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -52,37 +50,5 @@ public interface Node extends State {
 	 * @generated
 	 */
 	void setAction(Action value);
-
-	/**
-	 * Returns the value of the '<em><b>Transition</b></em>' containment reference list.
-	 * The list contents are of type {@link com.bluexml.side.workflow.Transition}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Transition</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Transition</em>' containment reference list.
-	 * @see com.bluexml.side.workflow.WorkflowPackage#getNode_Transition()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Transition> getTransition();
-
-	/**
-	 * Returns the value of the '<em><b>Event</b></em>' containment reference list.
-	 * The list contents are of type {@link com.bluexml.side.workflow.Event}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Event</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Event</em>' containment reference list.
-	 * @see com.bluexml.side.workflow.WorkflowPackage#getNode_Event()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Event> getEvent();
 
 } // Node

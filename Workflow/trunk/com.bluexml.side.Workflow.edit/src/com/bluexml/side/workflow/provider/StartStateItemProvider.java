@@ -35,7 +35,7 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * @generated
  */
 public class StartStateItemProvider
-	extends StateItemProvider
+	extends UserTaskItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -65,7 +65,6 @@ public class StartStateItemProvider
 
 			addAssignmentTypePropertyDescriptor(object);
 			addInitiatorPropertyDescriptor(object);
-			addClazzPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -115,60 +114,6 @@ public class StartStateItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Clazz feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addClazzPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_StartState_clazz_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_StartState_clazz_feature", "_UI_StartState_type"),
-				 WorkflowPackage.Literals.START_STATE__CLAZZ,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(WorkflowPackage.Literals.START_STATE__TRANSITION);
-			childrenFeatures.add(WorkflowPackage.Literals.START_STATE__EVENT);
-			childrenFeatures.add(WorkflowPackage.Literals.START_STATE__ATTRIBUTES);
-		}
-		return childrenFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
-	}
-
-	/**
 	 * This returns StartState.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -208,11 +153,6 @@ public class StartStateItemProvider
 			case WorkflowPackage.START_STATE__ASSIGNMENT_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case WorkflowPackage.START_STATE__TRANSITION:
-			case WorkflowPackage.START_STATE__EVENT:
-			case WorkflowPackage.START_STATE__ATTRIBUTES:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -227,21 +167,6 @@ public class StartStateItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(WorkflowPackage.Literals.START_STATE__TRANSITION,
-				 WorkflowFactory.eINSTANCE.createTransition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(WorkflowPackage.Literals.START_STATE__EVENT,
-				 WorkflowFactory.eINSTANCE.createEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(WorkflowPackage.Literals.START_STATE__ATTRIBUTES,
-				 WorkflowFactory.eINSTANCE.createAttribute()));
 	}
 
 }

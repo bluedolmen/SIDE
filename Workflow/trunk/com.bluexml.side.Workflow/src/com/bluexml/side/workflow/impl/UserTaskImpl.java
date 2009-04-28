@@ -1,0 +1,197 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package com.bluexml.side.workflow.impl;
+
+import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
+
+import com.bluexml.side.clazz.Clazz;
+
+import com.bluexml.side.workflow.Attribute;
+import com.bluexml.side.workflow.UserTask;
+import com.bluexml.side.workflow.WorkflowPackage;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eclipse.ocl.ecore.OCL;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>User Task</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link com.bluexml.side.workflow.impl.UserTaskImpl#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.impl.UserTaskImpl#getClazz <em>Clazz</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class UserTaskImpl extends TransitionTaskImpl implements UserTask {
+	/**
+	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAttributes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Attribute> attributes;
+
+	/**
+	 * The cached value of the '{@link #getClazz() <em>Clazz</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClazz()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Clazz> clazz;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UserTaskImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return WorkflowPackage.Literals.USER_TASK;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Attribute> getAttributes() {
+		if (attributes == null) {
+			attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, WorkflowPackage.USER_TASK__ATTRIBUTES);
+		}
+		return attributes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Clazz> getClazz() {
+		if (clazz == null) {
+			clazz = new EObjectResolvingEList<Clazz>(Clazz.class, this, WorkflowPackage.USER_TASK__CLAZZ);
+		}
+		return clazz;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case WorkflowPackage.USER_TASK__ATTRIBUTES:
+				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case WorkflowPackage.USER_TASK__ATTRIBUTES:
+				return getAttributes();
+			case WorkflowPackage.USER_TASK__CLAZZ:
+				return getClazz();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case WorkflowPackage.USER_TASK__ATTRIBUTES:
+				getAttributes().clear();
+				getAttributes().addAll((Collection<? extends Attribute>)newValue);
+				return;
+			case WorkflowPackage.USER_TASK__CLAZZ:
+				getClazz().clear();
+				getClazz().addAll((Collection<? extends Clazz>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case WorkflowPackage.USER_TASK__ATTRIBUTES:
+				getAttributes().clear();
+				return;
+			case WorkflowPackage.USER_TASK__CLAZZ:
+				getClazz().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case WorkflowPackage.USER_TASK__ATTRIBUTES:
+				return attributes != null && !attributes.isEmpty();
+			case WorkflowPackage.USER_TASK__CLAZZ:
+				return clazz != null && !clazz.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
+
+		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+		private static final OCL OCL_ENV = KerblueOCL.newInstance();		
+} //UserTaskImpl

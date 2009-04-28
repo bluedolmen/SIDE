@@ -34,7 +34,7 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * @generated
  */
 public class NodeItemProvider
-	extends StateItemProvider
+	extends TransitionTaskItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -79,8 +79,6 @@ public class NodeItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(WorkflowPackage.Literals.NODE__ACTION);
-			childrenFeatures.add(WorkflowPackage.Literals.NODE__TRANSITION);
-			childrenFeatures.add(WorkflowPackage.Literals.NODE__EVENT);
 		}
 		return childrenFeatures;
 	}
@@ -136,8 +134,6 @@ public class NodeItemProvider
 
 		switch (notification.getFeatureID(Node.class)) {
 			case WorkflowPackage.NODE__ACTION:
-			case WorkflowPackage.NODE__TRANSITION:
-			case WorkflowPackage.NODE__EVENT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -164,16 +160,6 @@ public class NodeItemProvider
 			(createChildParameter
 				(WorkflowPackage.Literals.NODE__ACTION,
 				 WorkflowFactory.eINSTANCE.createTimer()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(WorkflowPackage.Literals.NODE__TRANSITION,
-				 WorkflowFactory.eINSTANCE.createTransition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(WorkflowPackage.Literals.NODE__EVENT,
-				 WorkflowFactory.eINSTANCE.createEvent()));
 	}
 
 }

@@ -7,14 +7,21 @@
 package com.bluexml.side.workflow.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.ecore.OCL;
 
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
+import com.bluexml.side.workflow.Event;
 import com.bluexml.side.workflow.State;
 import com.bluexml.side.workflow.WorkflowPackage;
+import java.util.Collection;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,6 +31,7 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.workflow.impl.StateImpl#getName <em>Name</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.impl.StateImpl#getEvent <em>Event</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,6 +56,16 @@ public abstract class StateImpl extends EObjectImpl implements State {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getEvent() <em>Event</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEvent()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Event> event;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -94,11 +112,39 @@ public abstract class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Event> getEvent() {
+		if (event == null) {
+			event = new EObjectContainmentEList<Event>(Event.class, this, WorkflowPackage.STATE__EVENT);
+		}
+		return event;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case WorkflowPackage.STATE__EVENT:
+				return ((InternalEList<?>)getEvent()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case WorkflowPackage.STATE__NAME:
 				return getName();
+			case WorkflowPackage.STATE__EVENT:
+				return getEvent();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -108,11 +154,16 @@ public abstract class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case WorkflowPackage.STATE__NAME:
 				setName((String)newValue);
+				return;
+			case WorkflowPackage.STATE__EVENT:
+				getEvent().clear();
+				getEvent().addAll((Collection<? extends Event>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -129,6 +180,9 @@ public abstract class StateImpl extends EObjectImpl implements State {
 			case WorkflowPackage.STATE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case WorkflowPackage.STATE__EVENT:
+				getEvent().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -143,6 +197,8 @@ public abstract class StateImpl extends EObjectImpl implements State {
 		switch (featureID) {
 			case WorkflowPackage.STATE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case WorkflowPackage.STATE__EVENT:
+				return event != null && !event.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

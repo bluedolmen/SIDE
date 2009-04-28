@@ -28,6 +28,8 @@ import com.bluexml.side.workflow.Swimlane;
 import com.bluexml.side.workflow.TaskNode;
 import com.bluexml.side.workflow.Timer;
 import com.bluexml.side.workflow.Transition;
+import com.bluexml.side.workflow.TransitionTask;
+import com.bluexml.side.workflow.UserTask;
 import com.bluexml.side.workflow.Variable;
 import com.bluexml.side.workflow.WorkflowModelElement;
 import com.bluexml.side.workflow.WorkflowPackage;
@@ -251,12 +253,14 @@ public class WorkflowValidator extends EObjectValidator {
 				return validateSwimlane((Swimlane)value, diagnostics, context);
 			case WorkflowPackage.START_STATE:
 				return validateStartState((StartState)value, diagnostics, context);
+			case WorkflowPackage.TASK_NODE:
+				return validateTaskNode((TaskNode)value, diagnostics, context);
+			case WorkflowPackage.USER_TASK:
+				return validateUserTask((UserTask)value, diagnostics, context);
 			case WorkflowPackage.END_STATE:
 				return validateEndState((EndState)value, diagnostics, context);
 			case WorkflowPackage.NODE:
 				return validateNode((Node)value, diagnostics, context);
-			case WorkflowPackage.TASK_NODE:
-				return validateTaskNode((TaskNode)value, diagnostics, context);
 			case WorkflowPackage.PROCESS_STATE:
 				return validateProcessState((ProcessState)value, diagnostics, context);
 			case WorkflowPackage.FORK:
@@ -281,6 +285,8 @@ public class WorkflowValidator extends EObjectValidator {
 				return validateState((State)value, diagnostics, context);
 			case WorkflowPackage.ATTRIBUTE:
 				return validateAttribute((Attribute)value, diagnostics, context);
+			case WorkflowPackage.TRANSITION_TASK:
+				return validateTransitionTask((TransitionTask)value, diagnostics, context);
 			case WorkflowPackage.BPM_EVENT_TYPE:
 				return validateBPMEventType((BPMEventType)value, diagnostics, context);
 			case WorkflowPackage.BPM_ASSIGNMENT_TYPE:
@@ -783,6 +789,24 @@ public class WorkflowValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean validateUserTask(UserTask userTask, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_EveryMultiplicityConforms(userTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(userTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(userTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(userTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(userTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(userTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(userTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validateState_NoStateWithSameName(userTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validateState_noSpecialCharacters(userTask, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean validateProcessState(ProcessState processState, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = validate_EveryMultiplicityConforms(processState, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(processState, diagnostics, context);
@@ -1181,6 +1205,24 @@ public class WorkflowValidator extends EObjectValidator {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTransitionTask(TransitionTask transitionTask, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_EveryMultiplicityConforms(transitionTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(transitionTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(transitionTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(transitionTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(transitionTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(transitionTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(transitionTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validateState_NoStateWithSameName(transitionTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validateState_noSpecialCharacters(transitionTask, diagnostics, context);
+		return result;
 	}
 
 	/**

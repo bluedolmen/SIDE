@@ -32,14 +32,12 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.workflow.impl.ProcessStateImpl#getSubprocess <em>Subprocess</em>}</li>
- *   <li>{@link com.bluexml.side.workflow.impl.ProcessStateImpl#getTransition <em>Transition</em>}</li>
- *   <li>{@link com.bluexml.side.workflow.impl.ProcessStateImpl#getEvent <em>Event</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ProcessStateImpl extends StateImpl implements ProcessState {
+public class ProcessStateImpl extends TransitionTaskImpl implements ProcessState {
 	/**
 	 * The cached value of the '{@link #getSubprocess() <em>Subprocess</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -49,26 +47,6 @@ public class ProcessStateImpl extends StateImpl implements ProcessState {
 	 * @ordered
 	 */
 	protected com.bluexml.side.workflow.Process subprocess;
-
-	/**
-	 * The cached value of the '{@link #getTransition() <em>Transition</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTransition()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Transition> transition;
-
-	/**
-	 * The cached value of the '{@link #getEvent() <em>Event</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEvent()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Event> event;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -132,56 +110,12 @@ public class ProcessStateImpl extends StateImpl implements ProcessState {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Transition> getTransition() {
-		if (transition == null) {
-			transition = new EObjectContainmentEList<Transition>(Transition.class, this, WorkflowPackage.PROCESS_STATE__TRANSITION);
-		}
-		return transition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Event> getEvent() {
-		if (event == null) {
-			event = new EObjectContainmentEList<Event>(Event.class, this, WorkflowPackage.PROCESS_STATE__EVENT);
-		}
-		return event;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case WorkflowPackage.PROCESS_STATE__TRANSITION:
-				return ((InternalEList<?>)getTransition()).basicRemove(otherEnd, msgs);
-			case WorkflowPackage.PROCESS_STATE__EVENT:
-				return ((InternalEList<?>)getEvent()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case WorkflowPackage.PROCESS_STATE__SUBPROCESS:
 				if (resolve) return getSubprocess();
 				return basicGetSubprocess();
-			case WorkflowPackage.PROCESS_STATE__TRANSITION:
-				return getTransition();
-			case WorkflowPackage.PROCESS_STATE__EVENT:
-				return getEvent();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -198,14 +132,6 @@ public class ProcessStateImpl extends StateImpl implements ProcessState {
 			case WorkflowPackage.PROCESS_STATE__SUBPROCESS:
 				setSubprocess((com.bluexml.side.workflow.Process)newValue);
 				return;
-			case WorkflowPackage.PROCESS_STATE__TRANSITION:
-				getTransition().clear();
-				getTransition().addAll((Collection<? extends Transition>)newValue);
-				return;
-			case WorkflowPackage.PROCESS_STATE__EVENT:
-				getEvent().clear();
-				getEvent().addAll((Collection<? extends Event>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -221,12 +147,6 @@ public class ProcessStateImpl extends StateImpl implements ProcessState {
 			case WorkflowPackage.PROCESS_STATE__SUBPROCESS:
 				setSubprocess((com.bluexml.side.workflow.Process)null);
 				return;
-			case WorkflowPackage.PROCESS_STATE__TRANSITION:
-				getTransition().clear();
-				return;
-			case WorkflowPackage.PROCESS_STATE__EVENT:
-				getEvent().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -241,10 +161,6 @@ public class ProcessStateImpl extends StateImpl implements ProcessState {
 		switch (featureID) {
 			case WorkflowPackage.PROCESS_STATE__SUBPROCESS:
 				return subprocess != null;
-			case WorkflowPackage.PROCESS_STATE__TRANSITION:
-				return transition != null && !transition.isEmpty();
-			case WorkflowPackage.PROCESS_STATE__EVENT:
-				return event != null && !event.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

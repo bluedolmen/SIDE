@@ -18,12 +18,8 @@ import com.bluexml.side.clazz.Clazz;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.bluexml.side.workflow.TaskNode#getTransition <em>Transition</em>}</li>
- *   <li>{@link com.bluexml.side.workflow.TaskNode#getEvent <em>Event</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.TaskNode#getTimer <em>Timer</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.TaskNode#getSwimlane <em>Swimlane</em>}</li>
- *   <li>{@link com.bluexml.side.workflow.TaskNode#getAttributes <em>Attributes</em>}</li>
- *   <li>{@link com.bluexml.side.workflow.TaskNode#getClazz <em>Clazz</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,41 +28,7 @@ import com.bluexml.side.clazz.Clazz;
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NoTaskWithSameName TaskMustBePointerByTransition'"
  * @generated
  */
-public interface TaskNode extends State {
-	/**
-	 * Returns the value of the '<em><b>Transition</b></em>' containment reference list.
-	 * The list contents are of type {@link com.bluexml.side.workflow.Transition}.
-	 * It is bidirectional and its opposite is '{@link com.bluexml.side.workflow.Transition#getParentTaskNode <em>Parent Task Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Transition</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Transition</em>' containment reference list.
-	 * @see com.bluexml.side.workflow.WorkflowPackage#getTaskNode_Transition()
-	 * @see com.bluexml.side.workflow.Transition#getParentTaskNode
-	 * @model opposite="parentTaskNode" containment="true"
-	 * @generated
-	 */
-	EList<Transition> getTransition();
-
-	/**
-	 * Returns the value of the '<em><b>Event</b></em>' containment reference list.
-	 * The list contents are of type {@link com.bluexml.side.workflow.Event}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Event</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Event</em>' containment reference list.
-	 * @see com.bluexml.side.workflow.WorkflowPackage#getTaskNode_Event()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Event> getEvent();
-
+public interface TaskNode extends UserTask {
 	/**
 	 * Returns the value of the '<em><b>Timer</b></em>' containment reference list.
 	 * The list contents are of type {@link com.bluexml.side.workflow.Timer}.
@@ -110,37 +72,5 @@ public interface TaskNode extends State {
 	 * @generated
 	 */
 	void setSwimlane(Swimlane value);
-
-	/**
-	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
-	 * The list contents are of type {@link com.bluexml.side.workflow.Attribute}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Attributes</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Attributes</em>' containment reference list.
-	 * @see com.bluexml.side.workflow.WorkflowPackage#getTaskNode_Attributes()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Attribute> getAttributes();
-
-	/**
-	 * Returns the value of the '<em><b>Clazz</b></em>' reference list.
-	 * The list contents are of type {@link com.bluexml.side.clazz.Clazz}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Clazz</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Clazz</em>' reference list.
-	 * @see com.bluexml.side.workflow.WorkflowPackage#getTaskNode_Clazz()
-	 * @model
-	 * @generated
-	 */
-	EList<Clazz> getClazz();
 
 } // TaskNode

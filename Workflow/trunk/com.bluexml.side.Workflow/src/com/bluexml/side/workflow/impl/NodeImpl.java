@@ -33,14 +33,12 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.workflow.impl.NodeImpl#getAction <em>Action</em>}</li>
- *   <li>{@link com.bluexml.side.workflow.impl.NodeImpl#getTransition <em>Transition</em>}</li>
- *   <li>{@link com.bluexml.side.workflow.impl.NodeImpl#getEvent <em>Event</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class NodeImpl extends StateImpl implements Node {
+public class NodeImpl extends TransitionTaskImpl implements Node {
 	/**
 	 * The cached value of the '{@link #getAction() <em>Action</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -50,26 +48,6 @@ public class NodeImpl extends StateImpl implements Node {
 	 * @ordered
 	 */
 	protected Action action;
-
-	/**
-	 * The cached value of the '{@link #getTransition() <em>Transition</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTransition()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Transition> transition;
-
-	/**
-	 * The cached value of the '{@link #getEvent() <em>Event</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEvent()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Event> event;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -138,39 +116,11 @@ public class NodeImpl extends StateImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Transition> getTransition() {
-		if (transition == null) {
-			transition = new EObjectContainmentEList<Transition>(Transition.class, this, WorkflowPackage.NODE__TRANSITION);
-		}
-		return transition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Event> getEvent() {
-		if (event == null) {
-			event = new EObjectContainmentEList<Event>(Event.class, this, WorkflowPackage.NODE__EVENT);
-		}
-		return event;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case WorkflowPackage.NODE__ACTION:
 				return basicSetAction(null, msgs);
-			case WorkflowPackage.NODE__TRANSITION:
-				return ((InternalEList<?>)getTransition()).basicRemove(otherEnd, msgs);
-			case WorkflowPackage.NODE__EVENT:
-				return ((InternalEList<?>)getEvent()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -185,10 +135,6 @@ public class NodeImpl extends StateImpl implements Node {
 		switch (featureID) {
 			case WorkflowPackage.NODE__ACTION:
 				return getAction();
-			case WorkflowPackage.NODE__TRANSITION:
-				return getTransition();
-			case WorkflowPackage.NODE__EVENT:
-				return getEvent();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -205,14 +151,6 @@ public class NodeImpl extends StateImpl implements Node {
 			case WorkflowPackage.NODE__ACTION:
 				setAction((Action)newValue);
 				return;
-			case WorkflowPackage.NODE__TRANSITION:
-				getTransition().clear();
-				getTransition().addAll((Collection<? extends Transition>)newValue);
-				return;
-			case WorkflowPackage.NODE__EVENT:
-				getEvent().clear();
-				getEvent().addAll((Collection<? extends Event>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -228,12 +166,6 @@ public class NodeImpl extends StateImpl implements Node {
 			case WorkflowPackage.NODE__ACTION:
 				setAction((Action)null);
 				return;
-			case WorkflowPackage.NODE__TRANSITION:
-				getTransition().clear();
-				return;
-			case WorkflowPackage.NODE__EVENT:
-				getEvent().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -248,10 +180,6 @@ public class NodeImpl extends StateImpl implements Node {
 		switch (featureID) {
 			case WorkflowPackage.NODE__ACTION:
 				return action != null;
-			case WorkflowPackage.NODE__TRANSITION:
-				return transition != null && !transition.isEmpty();
-			case WorkflowPackage.NODE__EVENT:
-				return event != null && !event.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

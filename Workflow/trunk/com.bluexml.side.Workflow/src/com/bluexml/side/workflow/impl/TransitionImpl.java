@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.ecore.OCL;
 
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
+import com.bluexml.side.common.impl.ModelElementImpl;
 import com.bluexml.side.workflow.Action;
 import com.bluexml.side.workflow.State;
 import com.bluexml.side.workflow.TaskNode;
@@ -47,7 +48,7 @@ import com.bluexml.side.workflow.WorkflowPackage;
  *
  * @generated
  */
-public class TransitionImpl extends EObjectImpl implements Transition {
+public class TransitionImpl extends ModelElementImpl implements Transition {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -97,6 +98,16 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * @ordered
 	 */
 	protected EList<Action> action;
+
+	/**
+	 * The cached value of the '{@link #getParentTaskNode() <em>Parent Task Node</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParentTaskNode()
+	 * @generated
+	 * @ordered
+	 */
+	protected TaskNode parentTaskNode;
 
 	/**
 	 * The cached value of the '{@link #getTimer() <em>Timer</em>}' containment reference list.
@@ -217,8 +228,15 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * @generated
 	 */
 	public TaskNode getParentTaskNode() {
-		if (eContainerFeatureID != WorkflowPackage.TRANSITION__PARENT_TASK_NODE) return null;
-		return (TaskNode)eContainer();
+		if (parentTaskNode != null && parentTaskNode.eIsProxy()) {
+			InternalEObject oldParentTaskNode = (InternalEObject)parentTaskNode;
+			parentTaskNode = (TaskNode)eResolveProxy(oldParentTaskNode);
+			if (parentTaskNode != oldParentTaskNode) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, WorkflowPackage.TRANSITION__PARENT_TASK_NODE, oldParentTaskNode, parentTaskNode));
+			}
+		}
+		return parentTaskNode;
 	}
 
 	/**
@@ -226,9 +244,8 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetParentTaskNode(TaskNode newParentTaskNode, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newParentTaskNode, WorkflowPackage.TRANSITION__PARENT_TASK_NODE, msgs);
-		return msgs;
+	public TaskNode basicGetParentTaskNode() {
+		return parentTaskNode;
 	}
 
 	/**
@@ -237,19 +254,10 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * @generated
 	 */
 	public void setParentTaskNode(TaskNode newParentTaskNode) {
-		if (newParentTaskNode != eInternalContainer() || (eContainerFeatureID != WorkflowPackage.TRANSITION__PARENT_TASK_NODE && newParentTaskNode != null)) {
-			if (EcoreUtil.isAncestor(this, newParentTaskNode))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newParentTaskNode != null)
-				msgs = ((InternalEObject)newParentTaskNode).eInverseAdd(this, WorkflowPackage.TASK_NODE__TRANSITION, TaskNode.class, msgs);
-			msgs = basicSetParentTaskNode(newParentTaskNode, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.TRANSITION__PARENT_TASK_NODE, newParentTaskNode, newParentTaskNode));
+		TaskNode oldParentTaskNode = parentTaskNode;
+		parentTaskNode = newParentTaskNode;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.TRANSITION__PARENT_TASK_NODE, oldParentTaskNode, parentTaskNode));
 	}
 
 	/**
@@ -329,46 +337,14 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case WorkflowPackage.TRANSITION__PARENT_TASK_NODE:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetParentTaskNode((TaskNode)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case WorkflowPackage.TRANSITION__ACTION:
 				return ((InternalEList<?>)getAction()).basicRemove(otherEnd, msgs);
-			case WorkflowPackage.TRANSITION__PARENT_TASK_NODE:
-				return basicSetParentTaskNode(null, msgs);
 			case WorkflowPackage.TRANSITION__TIMER:
 				return ((InternalEList<?>)getTimer()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
-			case WorkflowPackage.TRANSITION__PARENT_TASK_NODE:
-				return eInternalContainer().eInverseRemove(this, WorkflowPackage.TASK_NODE__TRANSITION, TaskNode.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -386,7 +362,8 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 			case WorkflowPackage.TRANSITION__ACTION:
 				return getAction();
 			case WorkflowPackage.TRANSITION__PARENT_TASK_NODE:
-				return getParentTaskNode();
+				if (resolve) return getParentTaskNode();
+				return basicGetParentTaskNode();
 			case WorkflowPackage.TRANSITION__TIMER:
 				return getTimer();
 			case WorkflowPackage.TRANSITION__TO:
@@ -482,7 +459,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 			case WorkflowPackage.TRANSITION__ACTION:
 				return action != null && !action.isEmpty();
 			case WorkflowPackage.TRANSITION__PARENT_TASK_NODE:
-				return getParentTaskNode() != null;
+				return parentTaskNode != null;
 			case WorkflowPackage.TRANSITION__TIMER:
 				return timer != null && !timer.isEmpty();
 			case WorkflowPackage.TRANSITION__TO:

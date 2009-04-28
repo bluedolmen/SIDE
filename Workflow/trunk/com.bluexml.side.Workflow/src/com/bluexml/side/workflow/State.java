@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.workflow;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -17,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.bluexml.side.workflow.State#getName <em>Name</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.State#getEvent <em>Event</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,4 +55,20 @@ public interface State extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Event</b></em>' containment reference list.
+	 * The list contents are of type {@link com.bluexml.side.workflow.Event}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Event</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Event</em>' containment reference list.
+	 * @see com.bluexml.side.workflow.WorkflowPackage#getState_Event()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Event> getEvent();
 } // State

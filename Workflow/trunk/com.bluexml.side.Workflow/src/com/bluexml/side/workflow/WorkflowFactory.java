@@ -80,6 +80,15 @@ public interface WorkflowFactory extends EFactory {
 	TaskNode createTaskNode();
 
 	/**
+	 * Returns a new object of class '<em>User Task</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>User Task</em>'.
+	 * @generated
+	 */
+	UserTask createUserTask();
+
+	/**
 	 * Returns a new object of class '<em>Process State</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -177,6 +186,15 @@ public interface WorkflowFactory extends EFactory {
 	 * @generated
 	 */
 	Attribute createAttribute();
+
+	/**
+	 * Returns a new object of class '<em>Transition Task</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Transition Task</em>'.
+	 * @generated
+	 */
+	TransitionTask createTransitionTask();
 
 	/**
 	 * Returns the package supported by this factory.
