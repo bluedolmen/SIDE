@@ -1,0 +1,17 @@
+CODE_GED_M_CLASS,1,Code composant du modeleur de classes
+CODE_GED_M_WORKFLOW,2,Code composant du modeleur de workflow
+CODE_GED_G_C_ALFRESCO_29B,16,Code composant du générateur de classes sur alfresco 2.9B
+CODE_GED_G_C_ALFRESCO_30L,32,Code composant du générateur de classes  sur alfresco 3.0L
+CODE_GED_G_C_ALFRESCO_30E,64,Code composant du générateur de classes  sur alfresco 3.0 Enterprise
+CODE_GED_G_C_ALFRESCO_31L,128,Code composant du générateur de classes  sur alfresco 3.1 Labs
+CODE_GED_G_C_ALFRESCO_31E,256,Code composant du générateur de classes  sur alfresco 3.1 Enterprise
+CODE_GED_G_W_ALFRESCO_29B,1024,Code composant du générateur de workflow  sur alfresco 2.9B
+CODE_GED_G_W_ALFRESCO_30L,2048,Code composant du générateur de workflow sur alfresco 3.0 Labs
+CODE_GED_G_W_ALFRESCO_30E,4096,Code composant du générateur de workflow sur alfresco 3.0 Enterprise
+CODE_GED_G_W_ALFRESCO_31L,8192,Code composant du générateur de classes  sur alfresco 3.1 Labs
+CODE_GED_G_W_ALFRESCO_31E,16384,Code composant du générateur de classes  sur alfresco 3.1 Enterprise
+CODE_GEDPP_M_PORTAL,4,Code composant du modeleur de portail (version GED++)
+CODE_GEDPP_M_FORM,8,Code composant du modeleur de formulaires (version GED++)
+CODE_GEDPP_G_P_ALFRESCO_SHARE_30,32768,Code composant du générateur de portail sur alfresco SHARE (version GED++)
+CODE_GEDPP_G_P_LIFERAY_511,65536,Code composant du générateur de portail sur liferay (version GED++)
+CODE_GEDPP_G_F_CHIBA,131072,Code composant du générateur de formulaires sur Chiba (version GED++)
