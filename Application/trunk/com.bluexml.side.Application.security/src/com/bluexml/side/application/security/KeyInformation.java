@@ -64,6 +64,10 @@ public class KeyInformation implements GeneratorConstants {
 				DateFormat dateFormat = new SimpleDateFormat(FORMAT_DATE);
 				try {
 					validationDate = dateFormat.parse(dateTmp);
+					Date actuelle = new Date();
+					if (validationDate.before(actuelle)){
+						validity = false;
+					}
 				} catch (ParseException e1) {
 					validity = false;
 				}
@@ -139,7 +143,6 @@ public class KeyInformation implements GeneratorConstants {
 	 */
 	public Boolean hasCode(String code) {
 		Boolean result = ((codes & CodeReader.getCode(code)) != 0);
-		System.out.println("HasCode "+code+" ("+CodeReader.getCode(code)+") = "+result);
 		return result;
 	}
 }

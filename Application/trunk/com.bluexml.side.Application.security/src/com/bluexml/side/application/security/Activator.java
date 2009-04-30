@@ -1,3 +1,19 @@
+/*******************************************************************************
+ * 	Copyright (C) BlueXML 2005-2009
+ *
+ * This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Boston, MA 02111.
+ ******************************************************************************/
 package com.bluexml.side.application.security;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -10,6 +26,7 @@ public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "com.bluexml.side.Application.security";
+
 
 	// The shared instance
 	private static Activator plugin;
@@ -38,6 +55,7 @@ public class Activator extends AbstractUIPlugin {
 		super.stop(context);
 	}
 
+	
 	/**
 	 * Returns the shared instance
 	 *
@@ -46,5 +64,4 @@ public class Activator extends AbstractUIPlugin {
 	public static Activator getDefault() {
 		return plugin;
 	}
-
 }
