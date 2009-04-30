@@ -80,7 +80,7 @@ public class FormGenerator extends AbstractGenerator {
 			String id_mm) {
 		String path = getTargetPath();
 		if (path == null || path.length() == 0)
-			throw new RuntimeException("Target path must be setted !");
+			throw new RuntimeException("Target path must be set !");
 
 		getModels(modelsInfo);
 		try {
