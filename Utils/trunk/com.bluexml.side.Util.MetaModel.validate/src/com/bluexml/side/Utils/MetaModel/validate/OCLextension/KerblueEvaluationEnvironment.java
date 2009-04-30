@@ -62,8 +62,11 @@ class KerblueEvaluationEnvironment extends EcoreEvaluationEnvironment {
 
 		if (KerblueEnvironment.OP_REGEXMATCH.equals(operation.getName())) {
 			Pattern pattern = Pattern.compile((String) args[0]);
+			//Pattern pattern = Pattern.compile("\\w*");
 			Matcher matcher = pattern.matcher((String) source);
-			return matcher.matches() ? matcher.group() : null;
+			//Matcher matcher = pattern.matcher("Start");
+			
+			return matcher.matches();
 		}
 		
 		if (KerblueEnvironment.OP_GETCONTENER.equals(operation.getName())) {
