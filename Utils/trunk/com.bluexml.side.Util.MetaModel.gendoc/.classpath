@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/home/antoine/Bureau/eclipse_bxds_rcp_linux/plugins/org.eclipse.emf.common_2.3.2.v200802051830.jar"/>
+	<classpathentry kind="lib" path="/home/antoine/Bureau/eclipse_bxds_rcp_linux/plugins/org.eclipse.emf.ecore.xmi_2.3.2.v200802051830.jar"/>
+	<classpathentry kind="lib" path="/home/antoine/Bureau/eclipse_bxds_rcp_linux/plugins/org.eclipse.emf.ecore_2.3.2.v200802051830.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
