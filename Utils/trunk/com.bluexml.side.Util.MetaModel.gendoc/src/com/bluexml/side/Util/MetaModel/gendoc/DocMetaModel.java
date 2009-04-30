@@ -1,11 +1,13 @@
 package com.bluexml.side.Util.MetaModel.gendoc;
 
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -218,7 +220,7 @@ public class DocMetaModel {
 				for (EClassifier classifier : classifiers) {
 					if (ObjectsFromPalette.contains(classifier.getName())){
 						file.write("<row><entry spanname='hspan3' align='center'>");
-						file.write("title"+classifier.getName()+"title");
+						file.write("<title>"+classifier.getName()+"</title>");
 						file.write("</entry></row>");
 						if (docOk.get(classifier)) {
 							file.write("<row><entry align='center'>");
@@ -521,7 +523,18 @@ public class DocMetaModel {
 	 */
 	public static void main(String[] args){
 		
-		EPackage ePackage = Main.getEPackage(args[0]);
+		Properties properties = new Properties();
+		 try {
+		     properties.load(new FileInputStream("modelspath.properties"));
+		 } catch (IOException e) {
+			 StringBuffer sb = new StringBuffer();
+				for (int i = 0; i < e.getStackTrace().length; i++){
+					sb.append(e.getStackTrace()[i]+"\n");
+				}
+			logger.log(Level.SEVERE, e.toString()+"\n"+sb.toString());
+		 }
+		String formFileEcore = properties.getProperty("xForms");
+		EPackage ePackage = Main.getEPackage(formFileEcore);
 		List<String> objects = new ArrayList<String>();
 		List<EClassifier> classifiers = ePackage.getEClassifiers();
 		for (EClassifier classifier : classifiers) {
