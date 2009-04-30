@@ -22,6 +22,7 @@ public abstract class AbstractGenerator implements IGenerator {
 	protected static Map<String, Boolean> generatorOptions = new HashMap<String, Boolean>();
 	protected static Map<String, String> configurationParameters = new HashMap<String, String>();
 	public static final String TEMP_FOLDER = "tmp";
+	public static String GENERATOR_CODE = "";
 
 	public String getTEMP_FOLDER() {
 		return TEMP_FOLDER + this.getClass().getName();
@@ -124,5 +125,7 @@ public abstract class AbstractGenerator implements IGenerator {
 		System.out.println("ConfigurationParameters :"+configurationParameters);
 	}
 
-
+	public boolean check(){
+		return SecurityHelper.check(GENERATOR_CODE);
+	}
 }

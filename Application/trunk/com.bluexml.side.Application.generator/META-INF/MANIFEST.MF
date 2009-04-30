@@ -4,12 +4,14 @@ Bundle-Name: S-IDE Generator Plug-in
 Bundle-SymbolicName: com.bluexml.side.Application.generator
 Bundle-Version: 1.0.6
 Bundle-Activator: com.bluexml.side.application.generator.Activator
-Bundle-Vendor: BLUEXML
+Bundle-Vendor: blueXML
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,
  com.bluexml.side.Application,
- com.bluexml.side.Util.libs;bundle-version="1.0.0"
+ com.bluexml.side.Util.libs,
+ com.bluexml.application.security,
+ com.bluexml.side.settings
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.application.generator
