@@ -41,7 +41,7 @@ public class SideSettingsKeyPreferencePage
 		lbl.setText("Licence Key");
 		
 		key = new Text(entryTable,SWT.NONE);
-		key.setText(Activator.getDefault().getPreferenceStore().getString(Activator.KEY_PREFERENCE));
+		key.setText(Activator.getKey());
 		key.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		key.addListener(SWT.Modify, new Listener() {
 			public void handleEvent(Event event) {
@@ -94,10 +94,5 @@ public class SideSettingsKeyPreferencePage
 			lblValidity.setForeground(new Color(lblValidity.getDisplay(),255,33,33));
 			lblValidity.setText("KO");
 		}
-		System.out.println(ki.getDecodedString());
-		System.out.println(ki.getidCompte());
-		System.out.println(ki.getCodes());
-		System.out.println(ki.getValidationDate());
-		System.out.println(ki.getValidity());
 	}
 }
