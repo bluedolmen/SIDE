@@ -56,12 +56,4 @@ public class Activator extends AbstractUIPlugin {
 	public static void initializeDefaultPreferences() {
 		Activator.getDefault().getPreferenceStore().setDefault(KEY_PREFERENCE, KEY_DEFAULT);
 	}
-	
-	public static void setKey(String key){
-		Activator.getDefault().getPreferenceStore().setValue(KEY_PREFERENCE, key);
-	}
-	
-	public static String getKey(){
-		return Activator.getDefault().getPreferenceStore().getString(Activator.KEY_PREFERENCE);
-	}
 }

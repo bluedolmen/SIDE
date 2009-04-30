@@ -41,7 +41,7 @@ public class SideSettingsKeyPreferencePage
 		lbl.setText("Licence Key");
 		
 		key = new Text(entryTable,SWT.NONE);
-		key.setText(Activator.getKey());
+		key.setText(SidePreferences.getKey());
 		key.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		key.addListener(SWT.Modify, new Listener() {
 			public void handleEvent(Event event) {
@@ -80,7 +80,7 @@ public class SideSettingsKeyPreferencePage
 	 * color preference to the preference store.
 	 */
 	public boolean performOk() {
-		Activator.setKey(key.getText());
+		SidePreferences.setKey(key.getText());
 		return super.performOk();
 	}
 	
