@@ -1,7 +1,7 @@
 package com.bluexml.side.application.generator;
 
-import com.bluexml.side.settings.Activator;
 import com.bluexml.side.application.security.KeyInformation;
+import com.bluexml.side.settings.SidePreferences;
 
 /**
  * 
@@ -29,7 +29,7 @@ public class SecurityHelper {
 	 */
 	public static boolean check(String generatorCode) {
 		//Décoder la clef
-		KeyInformation ki = new KeyInformation(Activator.getKey()); 
+		KeyInformation ki = new KeyInformation(SidePreferences.getKey()); 
 		//Retourner le test sur la clef
 		return checkValidity(ki,generatorCode);
 	}
