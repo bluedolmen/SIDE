@@ -1,7 +1,10 @@
 package com.bluexml.side.Util.MetaModel.gendoc;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,17 +34,30 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
-		HashMap<String, List<String>> palette = ParsePalette.extractNames(ParsePalette.extractGenClass(args[0]));
-		Set<String> metamodels = palette.keySet();
-		for (String metamodel : metamodels) {
-			List<String> objects = palette.get(metamodel);
-			DocMetaModel processDoc = new DocMetaModel();
-			EPackage ePackage = getEPackage(metamodel);
-			processDoc.head(ePackage);
-			processDoc.processPackage(ePackage, objects);
-			processDoc.foot(ePackage);
-		}
-			
+		 Properties properties = new Properties();
+		 try {
+		     properties.load(new FileInputStream("modelspath.properties"));
+		 } catch (IOException e) {
+			 StringBuffer sb = new StringBuffer();
+				for (int i = 0; i < e.getStackTrace().length; i++){
+					sb.append(e.getStackTrace()[i]+"\n");
+				}
+			logger.log(Level.SEVERE, e.toString()+"\n"+sb.toString());
+		 }
+		 Set<Object> keys = properties.keySet();
+		 for (Object key : keys) {
+			String palettePath = properties.getProperty((String) key);
+			HashMap<String, List<String>> palette = ParsePalette.extractNames(ParsePalette.extractGenClass(palettePath));
+			Set<String> metamodels = palette.keySet();
+			for (String metamodel : metamodels) {
+				List<String> objects = palette.get(metamodel);
+				DocMetaModel processDoc = new DocMetaModel();
+				EPackage ePackage = getEPackage(metamodel);
+				processDoc.head(ePackage);
+				processDoc.processPackage(ePackage, objects);
+				processDoc.foot(ePackage);
+			}
+		 }	
 	}
 	
 	/**
