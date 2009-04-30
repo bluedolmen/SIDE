@@ -41,7 +41,7 @@
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="ActorNameMustBeUnique" value="Swimlane.allInstances() -> select(n|n.name = self.name and n &lt;> self )->size()=0"/>
       <details key="MustManageAtLeastOneTask" value="not self.manage->isEmpty()"/>
-      <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') &lt;> null"/>
+      <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*')"/>
       <details key="OnlyOneActorCalledInitiator" value="Swimlane.allInstances() -> select(s| s.name ='initiator')->size() = 1"/>
       <details key="ActoridOrPooledactorMustBeSetForAllExeptOneActor" value="Swimlane.allInstances() -> select(s | s.name &lt;>'initiator' and (s.actorid -> isEmpty() or s.actorid='')  and (s.pooledactors  -> isEmpty() or s.pooledactors =''))->size() &lt;=1&#xA;"/>
     </eAnnotations>
@@ -134,7 +134,7 @@
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="NoTransitionWithSameName" value="Transition.allInstances() -> select(n|n.name = self.name and n &lt;> self )->size()=0"/>
       <details key="SourceAndTargetMustBeSet" value="not self.to.oclIsUndefined() and not self.getContainer().oclIsUndefined()"/>
-      <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') &lt;> null"/>
+      <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*')"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="NoTransitionWithSameName SourceAndTargetMustBeSet noSpecialCharacters"/>
@@ -172,7 +172,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="State" abstract="true">
     <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') &lt;> null"/>
+      <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*')"/>
       <details key="NoStateWithSameName" value="State.allInstances() -> select(n|n.name = self.name and n &lt;> self )->size()=0"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
