@@ -47,12 +47,12 @@ public class Main {
 		 Set<Object> keys = properties.keySet();
 		 for (Object key : keys) {
 			String palettePath = properties.getProperty((String) key);
-			HashMap<String, List<String>> palette = ParsePalette.extractNames(ParsePalette.extractGenClass(palettePath));
+			HashMap<String, List<String>> palette = ParsePalette.extractNames(ParsePalette.extractGenClass("../"+palettePath));
 			Set<String> metamodels = palette.keySet();
 			for (String metamodel : metamodels) {
 				List<String> objects = palette.get(metamodel);
 				DocMetaModel processDoc = new DocMetaModel();
-				EPackage ePackage = getEPackage(metamodel);
+				EPackage ePackage = getEPackage("../"+metamodel);
 				processDoc.head(ePackage);
 				processDoc.processPackage(ePackage, objects);
 				processDoc.foot(ePackage);
