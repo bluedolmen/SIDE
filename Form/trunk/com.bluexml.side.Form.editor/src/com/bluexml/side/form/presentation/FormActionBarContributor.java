@@ -48,7 +48,6 @@ import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormCollection;
 import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormElement;
-import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.Reference;
 import com.bluexml.side.form.WorkflowFormCollection;
@@ -65,6 +64,7 @@ import com.bluexml.side.form.common.RestoreFormElementAction;
 import com.bluexml.side.form.common.TransformFieldAction;
 import com.bluexml.side.form.common.utils.FieldTransformation;
 import com.bluexml.side.form.workflow.InitializeFormWorkflowAction;
+import com.bluexml.side.form.workflow.SynchonizeWithWorkflowDiagramAction;
 
 /**
  * This is the action bar contributor for the Form model editor.
@@ -142,6 +142,7 @@ public class FormActionBarContributor
 	protected CollapseReferenceAction collapseReferenceAction = new CollapseReferenceAction();
 	protected CopyFormAction copyFormAction = new CopyFormAction();
 	protected SynchonizeWithClassDiagramAction synchronizeWithClassDiagram = new SynchonizeWithClassDiagramAction();
+	protected SynchonizeWithWorkflowDiagramAction synchronizeWithWorkflowDiagram = new SynchonizeWithWorkflowDiagramAction();
 	
 	/**
 	 * This will contain one {@link org.eclipse.emf.edit.ui.action.CreateChildAction} corresponding to each descriptor
@@ -540,8 +541,13 @@ public class FormActionBarContributor
 		menuManager.insertAfter("ui-actions", refreshOutlineAction);
 		
 		if (o instanceof FormCollection) {
-			synchronizeWithClassDiagram.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/synchronizeWithClassDiagram.png"));
-			menuManager.insertAfter("ui-actions", synchronizeWithClassDiagram);
+			if (o instanceof WorkflowFormCollection) {
+				synchronizeWithWorkflowDiagram.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/synchronizeWithClassDiagram.png"));
+				menuManager.insertAfter("ui-actions", synchronizeWithWorkflowDiagram);
+			} else {
+				synchronizeWithClassDiagram.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/synchronizeWithClassDiagram.png"));
+				menuManager.insertAfter("ui-actions", synchronizeWithClassDiagram);
+			}
 		}
 		
 		super.addGlobalActions(menuManager);
@@ -628,7 +634,8 @@ public class FormActionBarContributor
 		collapseReferenceAction.setActiveWorkbenchPart(activeEditor);
 		copyFormAction.setActiveWorkbenchPart(activeEditor);
 		synchronizeWithClassDiagram.setActiveWorkbenchPart(activeEditor);
-		//refreshOutlineAction.setActiveWorkbenchPart(activeEditor);
+		synchronizeWithWorkflowDiagram.setActiveWorkbenchPart(activeEditor);
+
 		ISelectionProvider selectionProvider =
 			       activeEditor instanceof ISelectionProvider ?
 			         (ISelectionProvider)activeEditor :
@@ -640,5 +647,6 @@ public class FormActionBarContributor
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) collapseReferenceAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) copyFormAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) synchronizeWithClassDiagram);
+		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) synchronizeWithWorkflowDiagram);
 	}
 }

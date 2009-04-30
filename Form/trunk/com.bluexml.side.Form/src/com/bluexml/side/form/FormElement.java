@@ -31,7 +31,7 @@ import com.bluexml.side.clazz.ClassModelElement;
  * @see com.bluexml.side.form.FormPackage#getFormElement()
  * @model abstract="true"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='noSpecialCharacters'"
- *        annotation="http://www.bluexml.com/OCL noSpecialCharacters='self.id.regexMatch(\'\\w\') <> null'"
+ *        annotation="http://www.bluexml.com/OCL noSpecialCharacters='self.id.regexMatch(\'\\w*\') = true'"
  * @generated
  */
 public interface FormElement extends EObject {

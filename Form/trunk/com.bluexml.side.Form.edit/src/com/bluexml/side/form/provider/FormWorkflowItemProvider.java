@@ -81,16 +81,10 @@ public class FormWorkflowItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((FormWorkflow)object).getLabel();
-		if (label == null || label.length() == 0) {
-			label = ((FormWorkflow)object).getName();
-		}
-		if (label == null || label.length() == 0) {
-			label = ((FormWorkflow)object).getId();
-		}
+		String label = ((FormWorkflow)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_FormWorkflow_type") :
-			label;
+			getString("_UI_FormWorkflow_type") + " " + label;
 	}
 
 	/**

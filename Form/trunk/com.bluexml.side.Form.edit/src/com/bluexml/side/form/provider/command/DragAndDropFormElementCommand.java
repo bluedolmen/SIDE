@@ -16,8 +16,10 @@ import org.eclipse.swt.widgets.MessageBox;
 
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormClass;
+import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormGroup;
+import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.Reference;
 import com.bluexml.side.form.VirtualField;
 import com.bluexml.side.form.FormFactory;
@@ -28,8 +30,8 @@ import com.bluexml.side.form.common.utils.InternalModification;
 
 public class DragAndDropFormElementCommand extends DragAndDropCommand {
 
-	protected FormClass fcTarget;
-	protected FormClass fcOrigin;
+	protected FormContainer fcTarget;
+	protected FormContainer fcOrigin;
 
 	public DragAndDropFormElementCommand(EditingDomain domain, Object owner,
 			float location, int operations, int operation,
@@ -40,7 +42,7 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 	public boolean validate(Object owner, float location, int operations,
 			int operation, Collection<?> collection) {
 		if (this.owner != owner) {
-			fcTarget = FormDiagramUtils.getParentFormClass((FormElement)owner);
+			fcTarget = FormDiagramUtils.getParentFormContainer((FormElement)owner);
 		}
 		return super.validate(owner, location, operations, operation,
 				collection);
@@ -56,7 +58,7 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 		InternalModification.dontMoveToDisabled();
 		super.canExecute();
 		initializeFormClassTarget();
-		FormClass previousFc = null;
+		FormContainer previousFc = null;
 		logCanExecute("___________________________________", owner);
 		logCanExecute("owner", owner);
 		logCanExecute("fcTarget", fcTarget);
@@ -65,16 +67,16 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 			logCanExecute("o", o);
 			// If we move a field we must check :
 			if (o instanceof Field){
-				if (owner instanceof FormClass) {
+				if (owner instanceof FormContainer) {
 					isExecutable &= false;
-					logCanExecute("owner instanceof FormClass");
+					logCanExecute("owner instanceof FormContainer");
 				} else {
 					Field f = (Field) o;
-					// Is it a move to the same FormClass? Move to same FormClass is
+					// Is it a move to the same FormClass? Move to same FormContainer is
 					// authorized
-					FormClass fcOrigin = FormDiagramUtils.getParentFormClass(f);
+					FormContainer fcOrigin = FormDiagramUtils.getParentFormContainer(f);
 					// To simplify : we don't authorized drag & drop
-					// from different formclass
+					// from different FormContainer
 					if (previousFc == null) {
 						previousFc = fcOrigin;
 					}
@@ -89,7 +91,7 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 						if (fcTarget != fcOrigin && (f instanceof VirtualField)){
 							isExecutable &= false;
 							logCanExecute("fcTarget != fcOrigin && (f instanceof VirtualField)");
-						} else {
+						} else if (previousFc instanceof FormClass) {
 							// Field already virtualized can't be drag & drop
 							if (fcTarget != fcOrigin && FormDiagramUtils.IsVirtualized(f)) {
 									isExecutable &= false;
@@ -107,7 +109,7 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 										} else {
 											// Does the target formClass have a Reference to the
 											// origin formclass?
-											if (FormDiagramUtils.haveReferenceTo(fcOrigin,
+											if (FormDiagramUtils.haveReferenceTo((FormClass)fcOrigin,
 													(FormGroup) fcTarget)) {
 												isExecutable = true;
 												logCanExecute("FormDiagramUtils.haveReferenceTo(fcOrigin, (FormGroup) fcTarget)");
@@ -122,17 +124,24 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 									}
 								}
 							}
+						} else if (previousFc instanceof FormWorkflow) {
+							if (fcTarget == fcOrigin) {
+								isExecutable = true;
+							} else {
+								isExecutable &= false;
+							}
 						}
 					}
 				}
 			}
 		}
 		InternalModification.moveToDisabled();
+		System.err.println(">>>>>>>>>>>>>>>>>>>>>>" + isExecutable);
 		return isExecutable;
 	}
 
 	private void logCanExecute(Object... logs) {
-	
+		
 		StringBuffer sb = new StringBuffer();
 		sb.append("isExecutable :");
 		sb.append(isExecutable);
@@ -153,7 +162,7 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 		// We will check if the drag & drop use a reference with max cardinality equals to -1
 		boolean doWork = true;
 		if (fcTarget != fcOrigin) {
-			List<Reference> listRef = FormDiagramUtils.getReferenceBetween(fcOrigin, fcTarget);
+			List<Reference> listRef = FormDiagramUtils.getReferenceBetween((FormClass)fcOrigin, (FormClass)fcTarget);
 			// We seek if there is a reference with a >1 max cardinality
 			for(Reference ref : listRef) {
 				if (ref.getMax_bound() == -1) {
@@ -189,7 +198,7 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 		boolean result = false;
 		if (fcTarget != null) { 
 			if (collection.size() > 0) {
-				fcOrigin = FormDiagramUtils.getParentFormClass((FormElement)collection.toArray()[0]);
+				fcOrigin = FormDiagramUtils.getParentFormContainer((FormElement)collection.toArray()[0]);
 				if (fcTarget != fcOrigin) {
 					CompoundCommand cc = new CompoundCommand();
 					// Special case
@@ -257,7 +266,7 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 
 	private void initializeFormClassTarget() {
 		if (fcTarget == null) {
-			fcTarget = FormDiagramUtils.getParentFormClass((FormElement)owner);
+			fcTarget = FormDiagramUtils.getParentFormContainer((FormElement)owner);
 		}
 	}
 

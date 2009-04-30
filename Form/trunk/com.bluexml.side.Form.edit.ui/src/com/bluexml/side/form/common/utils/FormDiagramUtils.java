@@ -27,7 +27,7 @@ public class FormDiagramUtils {
 			return (FormContainer) fe;
 		} else {
 			if (fe != null) {
-				return getParentFormClass((FormElement) fe.eContainer());
+				return getParentFormContainer((FormElement) fe.eContainer());
 			}
 		}
 		return fc;

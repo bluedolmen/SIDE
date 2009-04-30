@@ -8,7 +8,7 @@
       <details key="constraints" value="noSpecialCharacters"/>
     </eAnnotations>
     <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="noSpecialCharacters" value="self.id.regexMatch('\w') &lt;> null"/>
+      <details key="noSpecialCharacters" value="self.id.regexMatch('\w*') = true"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

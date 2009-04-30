@@ -1538,7 +1538,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		  (formElementEClass, 
 		   source, 
 		   new String[] {
-			 "noSpecialCharacters", "self.id.regexMatch(\'\\w\') <> null"
+			 "noSpecialCharacters", "self.id.regexMatch(\'\\w*\') = true"
 		   });			
 		addAnnotation
 		  (charFieldEClass, 
