@@ -5,5 +5,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="/com.bluexml.side.Util.libs/libs/jdom.jar"/>
 	<classpathentry kind="lib" path="/com.bluexml.side.Util.libs/libs/json.jar"/>
+	<classpathentry kind="src" path="/com.bluexml.Settings"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

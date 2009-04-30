@@ -3,24 +3,33 @@ package com.bluexml.side.application.generator;
 import com.bluexml.side.settings.Activator;
 import com.bluexml.side.application.security.KeyInformation;
 
+/**
+ * 
+ * @author Pierre BERTRAND
+ * @author Benjamin CHEVALLEREAU
+ */
 public class SecurityHelper {
 
-	private static String getKey(){
-		return Activator.getDefault().getPreferenceStore().getString(Activator.KEY_PREFERENCE);
-		//return "2q8575bwohia4rrdauo1us3e26f0g2f";
-	}
-	
+	/**
+	 *  return true if the key of the KeyInformation is valid an possess the code
+	 * @param ki
+	 * @param code
+	 * @return true if valid
+	 */
 	private static boolean checkValidity(KeyInformation ki, String code){
 		boolean validity = ki.getValidity();
 		boolean hascode = ki.hasCode(code);
 		return (hascode && validity);
 	}
 	
+	/**
+	 * return true if the generator can be lanched
+	 * @param generatorCode
+	 * @return true if the key is valid and has the code of the generator
+	 */
 	public static boolean check(String generatorCode) {
-		//Récupérer la clef
-		String key = getKey();
 		//Décoder la clef
-		KeyInformation ki = new KeyInformation(key); 
+		KeyInformation ki = new KeyInformation(Activator.getKey()); 
 		//Retourner le test sur la clef
 		return checkValidity(ki,generatorCode);
 	}
