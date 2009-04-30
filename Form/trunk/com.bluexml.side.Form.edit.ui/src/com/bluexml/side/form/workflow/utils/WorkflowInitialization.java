@@ -9,24 +9,30 @@ import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 
-import com.bluexml.side.clazz.Operation;
+import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.Field;
+import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.WorkflowFormCollection;
+import com.bluexml.side.form.clazz.utils.ClassInitialization;
 import com.bluexml.side.form.common.utils.UIUtils;
 import com.bluexml.side.workflow.Attribute;
 import com.bluexml.side.workflow.Process;
-import com.bluexml.side.workflow.StartState;
 import com.bluexml.side.workflow.State;
-import com.bluexml.side.workflow.TaskNode;
 import com.bluexml.side.workflow.Transition;
 import com.bluexml.side.workflow.UserTask;
 
 public class WorkflowInitialization {
 	
+	/**
+	 * Launch initialization from a Workflow Form Collection
+	 * @param fc
+	 * @param domain
+	 * @return
+	 */
 	public static Command initialize(WorkflowFormCollection fc, EditingDomain domain) {
 		CompoundCommand cmd = null;
 		Process p = fc.getLinked_process();
@@ -52,26 +58,7 @@ public class WorkflowInitialization {
 				
 				// For each task we create a form
 				for (State s : l) {
-					FormWorkflow fw = FormFactory.eINSTANCE.createFormWorkflow();
-					fw.setId(s.getName());
-					fw.setLabel(s.getName());
-					
-					// For all attribute we get the field :
-					if (s instanceof UserTask) {
-						UserTask ut = (UserTask) s;
-						for (Attribute a : ut.getAttributes()) {
-							Field f = WorkflowDiagramUtils.getFieldForAttribute(a);
-							if (f != null) {
-								fw.getChildren().add(f);
-							}
-						}
-						for (Transition t : ut.getTransition()) {
-							 ActionField af = WorkflowDiagramUtils.getOperationForTransition(t);
-							 if (af != null) {
-								 fw.getChildren().add(af);
-							 }
-						}
-					} 
+					FormWorkflow fw = createTaskForForm(s); 
 					
 					lf.add(fw);
 				}
@@ -82,5 +69,55 @@ public class WorkflowInitialization {
 					+ "Choose one and run Initiliaze again.");
 		}
 		return cmd;
+	}
+	
+	/**
+	 * Return a form a Task
+	 * @param s
+	 * @return
+	 */
+	public static FormWorkflow createTaskForForm(State s) {
+		FormWorkflow fw = FormFactory.eINSTANCE.createFormWorkflow();
+		fw.setId(s.getName());
+		fw.setLabel(s.getName());
+		
+		
+		if (s instanceof UserTask) {
+			UserTask ut = (UserTask) s;
+			// For all attribute we get the field :
+			for (Attribute a : ut.getAttributes()) {
+				Field f = WorkflowDiagramUtils.getFieldForAttribute(a);
+				if (f != null) {
+					fw.getChildren().add(f);
+				}
+			}
+			
+			// For attached class :
+			if (((UserTask) s).getClazz().size() > 0) {
+				for (Clazz c : ((UserTask) s).getClazz()) {
+					Field f = WorkflowDiagramUtils.getFieldForClazzLink(c);
+					if (f != null) {
+						fw.getChildren().add(f);
+					}
+					
+					// Commented : add the form class instead of model choice field
+					/*FormClass fc = FormFactory.eINSTANCE.createFormClass();
+					fc.setReal_class(c);
+					fc.getChildren().addAll(ClassInitialization.getChildForFormClassFromClazz(fc));
+					fw.getChildren().add(fc);*/
+				}
+			}
+			
+			// Same for Transition
+			for (Transition t : ut.getTransition()) {
+				 ActionField af = WorkflowDiagramUtils.getOperationForTransition(t);
+				 if (af != null) {
+					 fw.getChildren().add(af);
+				 }
+			}
+			
+			
+		}
+		return fw;
 	}
 }

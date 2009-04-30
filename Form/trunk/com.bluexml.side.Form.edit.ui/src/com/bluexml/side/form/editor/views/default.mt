@@ -111,7 +111,7 @@ li.tabs, ul.tabs {
 </script>
 <em>Outline view, generation output may change.</em>
 <%for (forms){%>
-	<%if (current().name == getNameOfSelectedForm()){%>
+	<%if (current().id == getNameOfSelectedForm()){%>
 		
 		<form name="exampleForm" method="post" class="cmxform">
 			<fieldset>
@@ -139,10 +139,11 @@ li.tabs, ul.tabs {
 				id: 'tab-container-<%id%>'
 				});
 			</script>
-			
-			<div style="margin-left: 150px;">
-				<input type="submit" value="Submit" /> <input type="reset" value="Reset" />
-			</div>
+			<%if (cast("FormClass")){%>
+				<div style="margin-left: 150px;">
+					<input type="submit" value="Submit"/> <input type="reset" value="Reset"/>
+				</div>
+			<%}%>
 			</ol>
 			</div>
 			</fieldset>
@@ -237,7 +238,7 @@ li.tabs, ul.tabs {
 			<input type="hidden" name="<%id%>" id="<%id%>">
 		<%}else{%>
 			<%if (!cast("ActionField")){%>
-				<label for="<%id%>"><%label.encode()%>  :</label>
+				<label for="<%id%>"><%label.encode()%> :</label>
 			<%}%>
 			
 			<%if (eClass().name.equalsIgnoreCase("CharField") || eClass().name.equalsIgnoreCase("RegexField")) {%>
@@ -291,7 +292,7 @@ li.tabs, ul.tabs {
 				<%}%>
 			<%}%>
 			<%if (cast("ActionField")) {%>
-				<input type="button" name="<%id%>" id="<%id%>" value="<%label%>">
+				<input type="button" name="<%id%>" id="<%id%>" value="<%if (label.length > 0){%><%label.encode()%><%}else{%><%id%><%}%>">
 			<%}%>
 			<%if (cast("ModelChoiceField") || cast("ChoiceField")) {%>
 				<select name="<%id%>" id="<%id%>" <%if (current().max_bound > 1 || current().max_bound == -1){%>MULTIPLE<%}%>

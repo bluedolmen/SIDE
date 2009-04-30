@@ -118,7 +118,7 @@ public class RefreshOutlineAction extends Action implements
 	@SuppressWarnings("deprecation")
 	private void doAction(URI uri) throws CoreException, FactoryException, IOException {
 		String metamodelURI = "http://www.kerblue.org/form/1.0";
-		OutlineViewService.setNameOfSelectedForm(((FormContainer)selectedObject).getName());
+		OutlineViewService.setNameOfSelectedForm(((FormContainer)selectedObject).getId());
 		
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().saveAllEditors(true);
 		// References to files in the project

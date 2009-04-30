@@ -1,7 +1,8 @@
-package com.bluexml.side.form.clazz;
+package com.bluexml.side.form.workflow;
 
 import java.util.Iterator;
 
+import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
@@ -11,12 +12,11 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
-import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormCollection;
-import com.bluexml.side.form.FormContainer;
-import com.bluexml.side.form.clazz.utils.ClassSynchronizationUtils;
+import com.bluexml.side.form.WorkflowFormCollection;
+import com.bluexml.side.form.workflow.utils.WorkflowSynchronizationUtils;
 
-public class SynchonizeWithClassDiagramAction  extends Action implements
+public class SynchonizeWithWorkflowDiagramAction  extends Action implements
 ISelectionChangedListener {
 	protected EObject selectedObject;
 	private EditingDomain domain;
@@ -51,17 +51,15 @@ ISelectionChangedListener {
 	}
 	
 	private void doAction(FormCollection fc) {
-		// We will iterate on each child on make action for each FormClass
-		for(FormContainer form : fc.getForms()) {
-			if (form instanceof FormClass) {
-				domain.getCommandStack().execute(ClassSynchronizationUtils.synchronizeClass((FormClass)form, domain));
-			}
+		if (fc instanceof WorkflowFormCollection) {
+			Command c = WorkflowSynchronizationUtils.synchronizeProcess((WorkflowFormCollection)fc, domain);
+			domain.getCommandStack().execute(c);
 		}
 	}
 
 	@Override
 	public String getText() {
-		return "Synchronize with Class Diagram";
+		return "Synchronize with Workflow Diagram";
 	}
 
 	public void setActiveWorkbenchPart(IWorkbenchPart workbenchPart) {

@@ -3,10 +3,12 @@ package com.bluexml.side.form.workflow.utils;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import com.bluexml.side.clazz.AttributeType;
+import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormFactory;
+import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.workflow.Attribute;
 import com.bluexml.side.workflow.Transition;
 
@@ -75,6 +77,20 @@ public class WorkflowDiagramUtils {
 			af.setRef(t);
 		}
 		return af;
+	}
+
+	public static Field getFieldForClazzLink(Clazz c) {
+		Field f = null;
+		
+		if (c != null) {
+			ModelChoiceField mcf = FormFactory.eINSTANCE.createModelChoiceField();
+			mcf.setReal_class(c);
+			mcf.setId(c.getName());
+			mcf.setLabel(c.getTitle());
+			f = mcf;
+		}
+		
+		return f;
 	}
 	
 	}
