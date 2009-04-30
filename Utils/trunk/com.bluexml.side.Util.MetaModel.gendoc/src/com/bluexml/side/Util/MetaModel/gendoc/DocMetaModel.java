@@ -533,8 +533,8 @@ public class DocMetaModel {
 				}
 			logger.log(Level.SEVERE, e.toString()+"\n"+sb.toString());
 		 }
-		String formFileEcore = properties.getProperty("xForms");
-		EPackage ePackage = Main.getEPackage(formFileEcore);
+		String formFileEcore = properties.getProperty("forms.ecore");
+		EPackage ePackage = Main.getEPackage("../"+formFileEcore);
 		List<String> objects = new ArrayList<String>();
 		List<EClassifier> classifiers = ePackage.getEClassifiers();
 		for (EClassifier classifier : classifiers) {
