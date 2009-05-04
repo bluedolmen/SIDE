@@ -7,7 +7,7 @@ Bundle-Activator: com.bluexml.side.application.deployer.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Util.libs;bundle-version="1.0.6",
- org.eclipse.core.resources;bundle-version="3.4.2"
+ org.eclipse.core.resources
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.application.deployer
