@@ -2,7 +2,7 @@
 <feature
       id="com.bluexml.side.Application.feature"
       label="S-IDE Application"
-      version="1.0.7"
+      version="1.0.8"
       provider-name="BLUEXML">
 
    <description url="http://www.example.com/description">
@@ -29,66 +29,93 @@
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="com.bluexml.side.Util.libs" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.settings"/>
       <import plugin="fr.obeo.acceleo.chain"/>
       <import plugin="fr.obeo.acceleo.gen"/>
       <import plugin="com.bluexml.side.Application.generator"/>
       <import plugin="com.bluexml.side.Util.ecore" version="1.0.1" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Application.deployer"/>
+      <import plugin="com.bluexml.side.Application.deployer.alfresco"/>
+      <import plugin="com.bluexml.side.Util.libs" version="1.0.6" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.resources" version="3.4.2" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Application.security"/>
    </requires>
 
    <plugin
          id="com.bluexml.side.Application"
          download-size="0"
          install-size="0"
-         version="1.0.7"
+         version="1.0.8"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.edit"
          download-size="0"
          install-size="0"
-         version="1.0.7"
+         version="1.0.8"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.editor"
          download-size="0"
          install-size="0"
-         version="1.0.7"
+         version="1.0.8"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.generator"
          download-size="0"
          install-size="0"
-         version="1.0.7"
+         version="1.0.8"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.generator.acceleo"
          download-size="0"
          install-size="0"
-         version="1.0.7"
+         version="1.0.8"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.ui"
          download-size="0"
          install-size="0"
-         version="1.0.7"
+         version="1.0.8"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.generator.alfresco"
          download-size="0"
          install-size="0"
-         version="1.0.7"
+         version="1.0.8"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.deployer.alfresco"
          download-size="0"
          install-size="0"
-         version="1.0.7"
+         version="1.0.8"
+         unpack="false"/>
+
+   <plugin
+         id="com.bluexml.side.settings"
+         download-size="0"
+         install-size="0"
+         version="1.0.8"
+         unpack="false"/>
+
+   <plugin
+         id="com.bluexml.side.Application.security"
+         download-size="0"
+         install-size="0"
+         version="1.0.8"
+         unpack="false"/>
+
+   <plugin
+         id="com.bluexml.side.Application.deployer"
+         download-size="0"
+         install-size="0"
+         version="1.0.8"
          unpack="false"/>
 
 </feature>

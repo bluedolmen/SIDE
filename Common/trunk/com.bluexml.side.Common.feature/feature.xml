@@ -2,7 +2,7 @@
 <feature
       id="com.bluexml.side.Common.feature"
       label="S-IDE Common"
-      version="1.0.7"
+      version="1.0.8"
       provider-name="BLUEXML">
 
    <description url="http://www.example.com/description">
@@ -24,20 +24,21 @@
       <import plugin="org.eclipse.ocl"/>
       <import plugin="org.eclipse.ocl.ecore"/>
       <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="com.bluexml.side.Common"/>
    </requires>
 
    <plugin
          id="com.bluexml.side.Common"
          download-size="0"
          install-size="0"
-         version="1.0.7"
+         version="1.0.8"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Common.edit"
          download-size="0"
          install-size="0"
-         version="1.0.7"
+         version="1.0.8"
          unpack="false"/>
 
 </feature>

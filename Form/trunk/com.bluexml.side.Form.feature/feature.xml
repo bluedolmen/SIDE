@@ -2,7 +2,7 @@
 <feature
       id="com.bluexml.side.Form.feature"
       label="S-IDE Form Modeler"
-      version="1.0.7"
+      version="1.0.8"
       provider-name="BLUEXML">
 
    <description url="http://www.example.com/description">
@@ -35,37 +35,42 @@
       <import plugin="fr.obeo.acceleo.ecore"/>
       <import plugin="fr.obeo.acceleo.gen"/>
       <import plugin="org.eclipse.core.resources"/>
+      <import plugin="com.bluexml.side.Form.edit"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="com.bluexml.side.Form.edit"/>
+      <import plugin="com.bluexml.side.Workflow"/>
+      <import plugin="com.bluexml.side.Workflow.edit"/>
+      <import plugin="com.bluexml.side.Workflow" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Workflow.edit" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Form.edit.ui"/>
    </requires>
 
    <plugin
          id="com.bluexml.side.Form"
          download-size="0"
          install-size="0"
-         version="1.0.7"
+         version="1.0.8"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Form.edit"
          download-size="0"
          install-size="0"
-         version="1.0.7"
+         version="1.0.8"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Form.edit.ui"
          download-size="0"
          install-size="0"
-         version="1.0.7"
+         version="1.0.8"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Form.editor"
          download-size="0"
          install-size="0"
-         version="1.0.7"
+         version="1.0.8"
          unpack="false"/>
 
 </feature>

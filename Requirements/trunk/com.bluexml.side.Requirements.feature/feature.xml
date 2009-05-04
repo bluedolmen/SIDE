@@ -2,7 +2,7 @@
 <feature
       id="com.bluexml.side.Requirements.feature"
       label="S-IDE Requirements Feature"
-      version="1.0.7"
+      version="1.0.8"
       provider-name="blueXML">
 
    <description url="http://www.example.com/description">
@@ -34,47 +34,50 @@
       <import plugin="fr.obeo.acceleo.gen"/>
       <import plugin="org.eclipse.ant.core"/>
       <import plugin="org.eclipse.m2m.atl.engine"/>
+      <import plugin="com.bluexml.side.Requirements"/>
+      <import plugin="com.bluexml.side.Requirements.edit"/>
+      <import plugin="com.bluexml.side.Requirements.transformation"/>
    </requires>
 
    <plugin
          id="com.bluexml.side.Requirements"
          download-size="0"
          install-size="0"
-         version="1.0.7"
+         version="1.0.8"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Requirements.edit"
          download-size="0"
          install-size="0"
-         version="1.0.7"
+         version="1.0.8"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Requirements.editor"
          download-size="0"
          install-size="0"
-         version="1.0.7"
+         version="1.0.8"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Requirements.interpretation"
          download-size="0"
          install-size="0"
-         version="1.0.7"/>
+         version="1.0.8"/>
 
    <plugin
          id="com.bluexml.side.Requirements.modeler"
          download-size="0"
          install-size="0"
-         version="1.0.7"
+         version="1.0.8"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Requirements.transformation"
          download-size="0"
          install-size="0"
-         version="1.0.7"
+         version="1.0.8"
          unpack="false"/>
 
 </feature>
