@@ -1,0 +1,16 @@
+The com.bluexml.side.Util.MetaModel.gendoc contains methods and mains to generate documentation about metamodels in two ways.
+Fisrt, we can generate documentation about 'objects' contained in the console of S-IDE modeler (class, ...) only (this a filter on 'objects' having a metamodel to describe them).
+So we work with the files called xxx.diagramconfigurator.
+Then, we can generate documentation directly from the metamodel of an 'object'. This is the case for the Forms (because that part has not a xxx.diagramconfogurator).
+So we generate documentation directly from the form.ecore metamodel.
+
+To do that, the package is decomposed in three classes:
+one is called ParsePalette; its goal is to select objects of the S-IDE console having a metamodel (i.e for wich we can generate documentation).
+An other one is called DocMetamodel. Its goal is to check if a metamodel contains documentation; if this is the case, a xxx.docbook is generated, if not, nothing is generated.
+Finally, the last one is called Main: it is in that class that the first type of generation can be done; it gets xxx.diagramconfigurator (entry in the .properties file) and genrate the associated xxx.docbook,
+calling methods in ParsePalette and DocMetamodel.
+It is important to note that for Forms the call of ParsePalette methods is shunted: we just call the DocMetaModel methods; to do that, a main is inclued in
+DocMetamodel, getting the .ecore file (entry) and generating the documentation.
+
+IMPORTANT NOTE: the rules applied in the algorithms to generate documentation are based on rules to write that documentation in the metamodels.
+To know them, see S-IDE_LLD_Model_Assistants_2.0.odt on legolas.
