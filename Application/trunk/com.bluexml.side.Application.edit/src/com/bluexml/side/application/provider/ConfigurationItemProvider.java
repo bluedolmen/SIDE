@@ -76,8 +76,9 @@ public class ConfigurationItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ApplicationPackage.Literals.CONFIGURATION__ELEMENTS);
+			childrenFeatures.add(ApplicationPackage.Literals.CONFIGURATION__GENERATOR_CONFIGURATIONS);
 			childrenFeatures.add(ApplicationPackage.Literals.CONFIGURATION__PARAMETERS);
+			childrenFeatures.add(ApplicationPackage.Literals.CONFIGURATION__DEPLOYER_CONFIGURATIONS);
 		}
 		return childrenFeatures;
 	}
@@ -132,8 +133,9 @@ public class ConfigurationItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Configuration.class)) {
-			case ApplicationPackage.CONFIGURATION__ELEMENTS:
+			case ApplicationPackage.CONFIGURATION__GENERATOR_CONFIGURATIONS:
 			case ApplicationPackage.CONFIGURATION__PARAMETERS:
+			case ApplicationPackage.CONFIGURATION__DEPLOYER_CONFIGURATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -153,13 +155,18 @@ public class ConfigurationItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ApplicationPackage.Literals.CONFIGURATION__ELEMENTS,
-				 ApplicationFactory.eINSTANCE.createConfigurationElement()));
+				(ApplicationPackage.Literals.CONFIGURATION__GENERATOR_CONFIGURATIONS,
+				 ApplicationFactory.eINSTANCE.createGeneratorConfiguration()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ApplicationPackage.Literals.CONFIGURATION__PARAMETERS,
 				 ApplicationFactory.eINSTANCE.createConfigurationParameters()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ApplicationPackage.Literals.CONFIGURATION__DEPLOYER_CONFIGURATIONS,
+				 ApplicationFactory.eINSTANCE.createDeployerConfiguration()));
 	}
 
 }

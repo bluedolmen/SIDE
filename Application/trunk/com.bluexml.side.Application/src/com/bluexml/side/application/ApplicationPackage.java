@@ -218,13 +218,13 @@ public interface ApplicationPackage extends EPackage {
 	int CONFIGURATION__DESCRIPTION = MODEL_ELEMENT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Generator Configurations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION__ELEMENTS = MODEL_ELEMENT_FEATURE_COUNT + 0;
+	int CONFIGURATION__GENERATOR_CONFIGURATIONS = MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -236,41 +236,41 @@ public interface ApplicationPackage extends EPackage {
 	int CONFIGURATION__PARAMETERS = MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Deployer Configurations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION__DEPLOYER_CONFIGURATIONS = MODEL_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Configuration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int CONFIGURATION_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.application.impl.ConfigurationElementImpl <em>Configuration Element</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.application.impl.ComponantConfigurationImpl <em>Componant Configuration</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.application.impl.ConfigurationElementImpl
-	 * @see com.bluexml.side.application.impl.ApplicationPackageImpl#getConfigurationElement()
+	 * @see com.bluexml.side.application.impl.ComponantConfigurationImpl
+	 * @see com.bluexml.side.application.impl.ApplicationPackageImpl#getComponantConfiguration()
 	 * @generated
 	 */
-	int CONFIGURATION_ELEMENT = 4;
+	int COMPONANT_CONFIGURATION = 8;
 
 	/**
-	 * The feature id for the '<em><b>Id metamodel</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONFIGURATION_ELEMENT__ID_METAMODEL = 0;
-
-	/**
-	 * The feature id for the '<em><b>Id generator</b></em>' attribute.
+	 * The feature id for the '<em><b>Id techno version</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION_ELEMENT__ID_GENERATOR = 1;
+	int COMPONANT_CONFIGURATION__ID_TECHNO_VERSION = 0;
 
 	/**
 	 * The feature id for the '<em><b>Options</b></em>' containment reference list.
@@ -279,25 +279,98 @@ public interface ApplicationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION_ELEMENT__OPTIONS = 2;
+	int COMPONANT_CONFIGURATION__OPTIONS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Class generator</b></em>' attribute.
+	 * The feature id for the '<em><b>Impl class</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION_ELEMENT__CLASS_GENERATOR = 3;
+	int COMPONANT_CONFIGURATION__IMPL_CLASS = 2;
 
 	/**
-	 * The number of structural features of the '<em>Configuration Element</em>' class.
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION_ELEMENT_FEATURE_COUNT = 4;
+	int COMPONANT_CONFIGURATION__ID = 3;
+
+	/**
+	 * The number of structural features of the '<em>Componant Configuration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONANT_CONFIGURATION_FEATURE_COUNT = 4;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.application.impl.GeneratorConfigurationImpl <em>Generator Configuration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.application.impl.GeneratorConfigurationImpl
+	 * @see com.bluexml.side.application.impl.ApplicationPackageImpl#getGeneratorConfiguration()
+	 * @generated
+	 */
+	int GENERATOR_CONFIGURATION = 4;
+
+	/**
+	 * The feature id for the '<em><b>Id techno version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_CONFIGURATION__ID_TECHNO_VERSION = COMPONANT_CONFIGURATION__ID_TECHNO_VERSION;
+
+	/**
+	 * The feature id for the '<em><b>Options</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_CONFIGURATION__OPTIONS = COMPONANT_CONFIGURATION__OPTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Impl class</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_CONFIGURATION__IMPL_CLASS = COMPONANT_CONFIGURATION__IMPL_CLASS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_CONFIGURATION__ID = COMPONANT_CONFIGURATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Id metamodel</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_CONFIGURATION__ID_METAMODEL = COMPONANT_CONFIGURATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Generator Configuration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_CONFIGURATION_FEATURE_COUNT = COMPONANT_CONFIGURATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.application.impl.OptionImpl <em>Option</em>}' class.
@@ -367,6 +440,61 @@ public interface ApplicationPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.application.impl.DeployerConfigurationImpl <em>Deployer Configuration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.application.impl.DeployerConfigurationImpl
+	 * @see com.bluexml.side.application.impl.ApplicationPackageImpl#getDeployerConfiguration()
+	 * @generated
+	 */
+	int DEPLOYER_CONFIGURATION = 7;
+
+	/**
+	 * The feature id for the '<em><b>Id techno version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYER_CONFIGURATION__ID_TECHNO_VERSION = COMPONANT_CONFIGURATION__ID_TECHNO_VERSION;
+
+	/**
+	 * The feature id for the '<em><b>Options</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYER_CONFIGURATION__OPTIONS = COMPONANT_CONFIGURATION__OPTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Impl class</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYER_CONFIGURATION__IMPL_CLASS = COMPONANT_CONFIGURATION__IMPL_CLASS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYER_CONFIGURATION__ID = COMPONANT_CONFIGURATION__ID;
+
+	/**
+	 * The number of structural features of the '<em>Deployer Configuration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYER_CONFIGURATION_FEATURE_COUNT = COMPONANT_CONFIGURATION_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.application.StaticConfigurationParameters <em>Static Configuration Parameters</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -374,7 +502,7 @@ public interface ApplicationPackage extends EPackage {
 	 * @see com.bluexml.side.application.impl.ApplicationPackageImpl#getStaticConfigurationParameters()
 	 * @generated
 	 */
-	int STATIC_CONFIGURATION_PARAMETERS = 7;
+	int STATIC_CONFIGURATION_PARAMETERS = 9;
 
 
 	/**
@@ -462,15 +590,15 @@ public interface ApplicationPackage extends EPackage {
 	EClass getConfiguration();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.application.Configuration#getElements <em>Elements</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.application.Configuration#getGeneratorConfigurations <em>Generator Configurations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Elements</em>'.
-	 * @see com.bluexml.side.application.Configuration#getElements()
+	 * @return the meta object for the containment reference list '<em>Generator Configurations</em>'.
+	 * @see com.bluexml.side.application.Configuration#getGeneratorConfigurations()
 	 * @see #getConfiguration()
 	 * @generated
 	 */
-	EReference getConfiguration_Elements();
+	EReference getConfiguration_GeneratorConfigurations();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.application.Configuration#getParameters <em>Parameters</em>}'.
@@ -484,58 +612,36 @@ public interface ApplicationPackage extends EPackage {
 	EReference getConfiguration_Parameters();
 
 	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.application.ConfigurationElement <em>Configuration Element</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.application.Configuration#getDeployerConfigurations <em>Deployer Configurations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Configuration Element</em>'.
-	 * @see com.bluexml.side.application.ConfigurationElement
+	 * @return the meta object for the containment reference list '<em>Deployer Configurations</em>'.
+	 * @see com.bluexml.side.application.Configuration#getDeployerConfigurations()
+	 * @see #getConfiguration()
 	 * @generated
 	 */
-	EClass getConfigurationElement();
+	EReference getConfiguration_DeployerConfigurations();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.ConfigurationElement#getId_metamodel <em>Id metamodel</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.application.GeneratorConfiguration <em>Generator Configuration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Generator Configuration</em>'.
+	 * @see com.bluexml.side.application.GeneratorConfiguration
+	 * @generated
+	 */
+	EClass getGeneratorConfiguration();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.GeneratorConfiguration#getId_metamodel <em>Id metamodel</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Id metamodel</em>'.
-	 * @see com.bluexml.side.application.ConfigurationElement#getId_metamodel()
-	 * @see #getConfigurationElement()
+	 * @see com.bluexml.side.application.GeneratorConfiguration#getId_metamodel()
+	 * @see #getGeneratorConfiguration()
 	 * @generated
 	 */
-	EAttribute getConfigurationElement_Id_metamodel();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.ConfigurationElement#getId_generator <em>Id generator</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id generator</em>'.
-	 * @see com.bluexml.side.application.ConfigurationElement#getId_generator()
-	 * @see #getConfigurationElement()
-	 * @generated
-	 */
-	EAttribute getConfigurationElement_Id_generator();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.application.ConfigurationElement#getOptions <em>Options</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Options</em>'.
-	 * @see com.bluexml.side.application.ConfigurationElement#getOptions()
-	 * @see #getConfigurationElement()
-	 * @generated
-	 */
-	EReference getConfigurationElement_Options();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.ConfigurationElement#getClass_generator <em>Class generator</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Class generator</em>'.
-	 * @see com.bluexml.side.application.ConfigurationElement#getClass_generator()
-	 * @see #getConfigurationElement()
-	 * @generated
-	 */
-	EAttribute getConfigurationElement_Class_generator();
+	EAttribute getGeneratorConfiguration_Id_metamodel();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.application.Option <em>Option</em>}'.
@@ -589,6 +695,70 @@ public interface ApplicationPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getConfigurationParameters_Value();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.application.DeployerConfiguration <em>Deployer Configuration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Deployer Configuration</em>'.
+	 * @see com.bluexml.side.application.DeployerConfiguration
+	 * @generated
+	 */
+	EClass getDeployerConfiguration();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.application.ComponantConfiguration <em>Componant Configuration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Componant Configuration</em>'.
+	 * @see com.bluexml.side.application.ComponantConfiguration
+	 * @generated
+	 */
+	EClass getComponantConfiguration();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.ComponantConfiguration#getId_techno_version <em>Id techno version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id techno version</em>'.
+	 * @see com.bluexml.side.application.ComponantConfiguration#getId_techno_version()
+	 * @see #getComponantConfiguration()
+	 * @generated
+	 */
+	EAttribute getComponantConfiguration_Id_techno_version();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.application.ComponantConfiguration#getOptions <em>Options</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Options</em>'.
+	 * @see com.bluexml.side.application.ComponantConfiguration#getOptions()
+	 * @see #getComponantConfiguration()
+	 * @generated
+	 */
+	EReference getComponantConfiguration_Options();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.ComponantConfiguration#getImpl_class <em>Impl class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Impl class</em>'.
+	 * @see com.bluexml.side.application.ComponantConfiguration#getImpl_class()
+	 * @see #getComponantConfiguration()
+	 * @generated
+	 */
+	EAttribute getComponantConfiguration_Impl_class();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.ComponantConfiguration#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see com.bluexml.side.application.ComponantConfiguration#getId()
+	 * @see #getComponantConfiguration()
+	 * @generated
+	 */
+	EAttribute getComponantConfiguration_Id();
 
 	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.application.StaticConfigurationParameters <em>Static Configuration Parameters</em>}'.
@@ -695,12 +865,12 @@ public interface ApplicationPackage extends EPackage {
 		EClass CONFIGURATION = eINSTANCE.getConfiguration();
 
 		/**
-		 * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Generator Configurations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONFIGURATION__ELEMENTS = eINSTANCE.getConfiguration_Elements();
+		EReference CONFIGURATION__GENERATOR_CONFIGURATIONS = eINSTANCE.getConfiguration_GeneratorConfigurations();
 
 		/**
 		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
@@ -711,14 +881,22 @@ public interface ApplicationPackage extends EPackage {
 		EReference CONFIGURATION__PARAMETERS = eINSTANCE.getConfiguration_Parameters();
 
 		/**
-		 * The meta object literal for the '{@link com.bluexml.side.application.impl.ConfigurationElementImpl <em>Configuration Element</em>}' class.
+		 * The meta object literal for the '<em><b>Deployer Configurations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.application.impl.ConfigurationElementImpl
-		 * @see com.bluexml.side.application.impl.ApplicationPackageImpl#getConfigurationElement()
 		 * @generated
 		 */
-		EClass CONFIGURATION_ELEMENT = eINSTANCE.getConfigurationElement();
+		EReference CONFIGURATION__DEPLOYER_CONFIGURATIONS = eINSTANCE.getConfiguration_DeployerConfigurations();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.application.impl.GeneratorConfigurationImpl <em>Generator Configuration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.application.impl.GeneratorConfigurationImpl
+		 * @see com.bluexml.side.application.impl.ApplicationPackageImpl#getGeneratorConfiguration()
+		 * @generated
+		 */
+		EClass GENERATOR_CONFIGURATION = eINSTANCE.getGeneratorConfiguration();
 
 		/**
 		 * The meta object literal for the '<em><b>Id metamodel</b></em>' attribute feature.
@@ -726,31 +904,7 @@ public interface ApplicationPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONFIGURATION_ELEMENT__ID_METAMODEL = eINSTANCE.getConfigurationElement_Id_metamodel();
-
-		/**
-		 * The meta object literal for the '<em><b>Id generator</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CONFIGURATION_ELEMENT__ID_GENERATOR = eINSTANCE.getConfigurationElement_Id_generator();
-
-		/**
-		 * The meta object literal for the '<em><b>Options</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CONFIGURATION_ELEMENT__OPTIONS = eINSTANCE.getConfigurationElement_Options();
-
-		/**
-		 * The meta object literal for the '<em><b>Class generator</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CONFIGURATION_ELEMENT__CLASS_GENERATOR = eINSTANCE.getConfigurationElement_Class_generator();
+		EAttribute GENERATOR_CONFIGURATION__ID_METAMODEL = eINSTANCE.getGeneratorConfiguration_Id_metamodel();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.application.impl.OptionImpl <em>Option</em>}' class.
@@ -795,6 +949,58 @@ public interface ApplicationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CONFIGURATION_PARAMETERS__VALUE = eINSTANCE.getConfigurationParameters_Value();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.application.impl.DeployerConfigurationImpl <em>Deployer Configuration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.application.impl.DeployerConfigurationImpl
+		 * @see com.bluexml.side.application.impl.ApplicationPackageImpl#getDeployerConfiguration()
+		 * @generated
+		 */
+		EClass DEPLOYER_CONFIGURATION = eINSTANCE.getDeployerConfiguration();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.application.impl.ComponantConfigurationImpl <em>Componant Configuration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.application.impl.ComponantConfigurationImpl
+		 * @see com.bluexml.side.application.impl.ApplicationPackageImpl#getComponantConfiguration()
+		 * @generated
+		 */
+		EClass COMPONANT_CONFIGURATION = eINSTANCE.getComponantConfiguration();
+
+		/**
+		 * The meta object literal for the '<em><b>Id techno version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPONANT_CONFIGURATION__ID_TECHNO_VERSION = eINSTANCE.getComponantConfiguration_Id_techno_version();
+
+		/**
+		 * The meta object literal for the '<em><b>Options</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPONANT_CONFIGURATION__OPTIONS = eINSTANCE.getComponantConfiguration_Options();
+
+		/**
+		 * The meta object literal for the '<em><b>Impl class</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPONANT_CONFIGURATION__IMPL_CLASS = eINSTANCE.getComponantConfiguration_Impl_class();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPONANT_CONFIGURATION__ID = eINSTANCE.getComponantConfiguration_Id();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.application.StaticConfigurationParameters <em>Static Configuration Parameters</em>}' enum.

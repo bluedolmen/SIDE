@@ -5,14 +5,14 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 
-public class Technology extends TreeElement {
+public class Technology extends TreeNode {
 
-	private String id;
+	
 	private String label;
 	private String url;
 	private String description;
 	private Metamodel parent;
-	private Set<TechnologyVersion> versions;
+	private Set<TreeNode> versions;
 
 	public Technology(IConfigurationElement elt, Metamodel m) {
 		parent = m;
@@ -21,7 +21,7 @@ public class Technology extends TreeElement {
 		label = elt.getAttribute("name");
 		url = elt.getAttribute("url");
 		description = elt.getAttribute("description");
-		versions = new HashSet<TechnologyVersion>();
+		versions = new HashSet<TreeNode>();
 	}
 
 	public String getURL() {
@@ -30,11 +30,7 @@ public class Technology extends TreeElement {
 
 	public String getDescription() {
 		return description;
-	}
-
-	public Set<TechnologyVersion> getTechnologyVersion() {
-		return versions;
-	}
+	}	
 
 	public String getLabel() {
 		return label;
@@ -44,12 +40,15 @@ public class Technology extends TreeElement {
 		return parent;
 	}
 
-	public String getId() {
-		return id;
-	}
+	
 
 	public void addTechnologyVersion(TechnologyVersion technologyVersion) {
 		versions.add(technologyVersion);
+	}
+
+	public Set<TreeNode> getChildren() {
+		// TODO Auto-generated method stub
+		return versions;
 	}
 
 }

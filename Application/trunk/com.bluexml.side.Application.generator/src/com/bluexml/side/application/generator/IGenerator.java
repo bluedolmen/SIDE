@@ -22,7 +22,7 @@ public interface IGenerator {
 	 */
 	public void initialize(Map<String, String> generationParameters,
 			Map<String, Boolean> generatorOptions,
-			Map<String, String> configurationParameters);
+			Map<String, String> configurationParameters, String techVersion_);
 
 	/**
 	 * This method check if the user have the license to use this generator.
@@ -57,5 +57,5 @@ public interface IGenerator {
 	 * 
 	 * @throws Exception
 	 */
-	public void deploy() throws Exception;
+	//public void deploy() throws Exception;
 }

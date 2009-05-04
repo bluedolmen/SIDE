@@ -16,9 +16,11 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationFactory;
 import com.bluexml.side.application.ApplicationPackage;
+import com.bluexml.side.application.ComponantConfiguration;
 import com.bluexml.side.application.Configuration;
-import com.bluexml.side.application.ConfigurationElement;
 import com.bluexml.side.application.ConfigurationParameters;
+import com.bluexml.side.application.DeployerConfiguration;
+import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.Option;
@@ -64,7 +66,7 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass configurationElementEClass = null;
+	private EClass generatorConfigurationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -79,6 +81,20 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 	 * @generated
 	 */
 	private EClass configurationParametersEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass deployerConfigurationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass componantConfigurationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -232,7 +248,7 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getConfiguration_Elements() {
+	public EReference getConfiguration_GeneratorConfigurations() {
 		return (EReference)configurationEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -250,8 +266,8 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getConfigurationElement() {
-		return configurationElementEClass;
+	public EReference getConfiguration_DeployerConfigurations() {
+		return (EReference)configurationEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -259,8 +275,8 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getConfigurationElement_Id_metamodel() {
-		return (EAttribute)configurationElementEClass.getEStructuralFeatures().get(0);
+	public EClass getGeneratorConfiguration() {
+		return generatorConfigurationEClass;
 	}
 
 	/**
@@ -268,26 +284,8 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getConfigurationElement_Id_generator() {
-		return (EAttribute)configurationElementEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getConfigurationElement_Options() {
-		return (EReference)configurationElementEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getConfigurationElement_Class_generator() {
-		return (EAttribute)configurationElementEClass.getEStructuralFeatures().get(3);
+	public EAttribute getGeneratorConfiguration_Id_metamodel() {
+		return (EAttribute)generatorConfigurationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -340,6 +338,60 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDeployerConfiguration() {
+		return deployerConfigurationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getComponantConfiguration() {
+		return componantConfigurationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getComponantConfiguration_Id_techno_version() {
+		return (EAttribute)componantConfigurationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComponantConfiguration_Options() {
+		return (EReference)componantConfigurationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getComponantConfiguration_Impl_class() {
+		return (EAttribute)componantConfigurationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getComponantConfiguration_Id() {
+		return (EAttribute)componantConfigurationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getStaticConfigurationParameters() {
 		return staticConfigurationParametersEEnum;
 	}
@@ -383,14 +435,12 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 		createEAttribute(modelEClass, MODEL__FILE);
 
 		configurationEClass = createEClass(CONFIGURATION);
-		createEReference(configurationEClass, CONFIGURATION__ELEMENTS);
+		createEReference(configurationEClass, CONFIGURATION__GENERATOR_CONFIGURATIONS);
 		createEReference(configurationEClass, CONFIGURATION__PARAMETERS);
+		createEReference(configurationEClass, CONFIGURATION__DEPLOYER_CONFIGURATIONS);
 
-		configurationElementEClass = createEClass(CONFIGURATION_ELEMENT);
-		createEAttribute(configurationElementEClass, CONFIGURATION_ELEMENT__ID_METAMODEL);
-		createEAttribute(configurationElementEClass, CONFIGURATION_ELEMENT__ID_GENERATOR);
-		createEReference(configurationElementEClass, CONFIGURATION_ELEMENT__OPTIONS);
-		createEAttribute(configurationElementEClass, CONFIGURATION_ELEMENT__CLASS_GENERATOR);
+		generatorConfigurationEClass = createEClass(GENERATOR_CONFIGURATION);
+		createEAttribute(generatorConfigurationEClass, GENERATOR_CONFIGURATION__ID_METAMODEL);
 
 		optionEClass = createEClass(OPTION);
 		createEAttribute(optionEClass, OPTION__KEY);
@@ -398,6 +448,14 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 		configurationParametersEClass = createEClass(CONFIGURATION_PARAMETERS);
 		createEAttribute(configurationParametersEClass, CONFIGURATION_PARAMETERS__KEY);
 		createEAttribute(configurationParametersEClass, CONFIGURATION_PARAMETERS__VALUE);
+
+		deployerConfigurationEClass = createEClass(DEPLOYER_CONFIGURATION);
+
+		componantConfigurationEClass = createEClass(COMPONANT_CONFIGURATION);
+		createEAttribute(componantConfigurationEClass, COMPONANT_CONFIGURATION__ID_TECHNO_VERSION);
+		createEReference(componantConfigurationEClass, COMPONANT_CONFIGURATION__OPTIONS);
+		createEAttribute(componantConfigurationEClass, COMPONANT_CONFIGURATION__IMPL_CLASS);
+		createEAttribute(componantConfigurationEClass, COMPONANT_CONFIGURATION__ID);
 
 		// Create enums
 		staticConfigurationParametersEEnum = createEEnum(STATIC_CONFIGURATION_PARAMETERS);
@@ -434,6 +492,8 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 		applicationEClass.getESuperTypes().add(this.getModelElement());
 		modelEClass.getESuperTypes().add(this.getModelElement());
 		configurationEClass.getESuperTypes().add(this.getModelElement());
+		generatorConfigurationEClass.getESuperTypes().add(this.getComponantConfiguration());
+		deployerConfigurationEClass.getESuperTypes().add(this.getComponantConfiguration());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(modelElementEClass, ModelElement.class, "ModelElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -447,14 +507,12 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 		initEAttribute(getModel_File(), ecorePackage.getEString(), "file", null, 1, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(configurationEClass, Configuration.class, "Configuration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getConfiguration_Elements(), this.getConfigurationElement(), null, "elements", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConfiguration_GeneratorConfigurations(), this.getGeneratorConfiguration(), null, "generatorConfigurations", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConfiguration_Parameters(), this.getConfigurationParameters(), null, "parameters", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConfiguration_DeployerConfigurations(), this.getDeployerConfiguration(), null, "deployerConfigurations", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(configurationElementEClass, ConfigurationElement.class, "ConfigurationElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getConfigurationElement_Id_metamodel(), ecorePackage.getEString(), "id_metamodel", null, 0, 1, ConfigurationElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getConfigurationElement_Id_generator(), ecorePackage.getEString(), "id_generator", null, 0, 1, ConfigurationElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getConfigurationElement_Options(), this.getOption(), null, "options", null, 0, -1, ConfigurationElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getConfigurationElement_Class_generator(), ecorePackage.getEString(), "class_generator", null, 0, 1, ConfigurationElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(generatorConfigurationEClass, GeneratorConfiguration.class, "GeneratorConfiguration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getGeneratorConfiguration_Id_metamodel(), ecorePackage.getEString(), "id_metamodel", null, 0, 1, GeneratorConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(optionEClass, Option.class, "Option", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOption_Key(), ecorePackage.getEString(), "key", null, 0, 1, Option.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -462,6 +520,14 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 		initEClass(configurationParametersEClass, ConfigurationParameters.class, "ConfigurationParameters", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getConfigurationParameters_Key(), ecorePackage.getEString(), "key", null, 0, 1, ConfigurationParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getConfigurationParameters_Value(), ecorePackage.getEString(), "value", null, 0, 1, ConfigurationParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(deployerConfigurationEClass, DeployerConfiguration.class, "DeployerConfiguration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(componantConfigurationEClass, ComponantConfiguration.class, "ComponantConfiguration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getComponantConfiguration_Id_techno_version(), ecorePackage.getEString(), "id_techno_version", null, 0, 1, ComponantConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponantConfiguration_Options(), this.getOption(), null, "options", null, 0, -1, ComponantConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getComponantConfiguration_Impl_class(), ecorePackage.getEString(), "impl_class", null, 0, 1, ComponantConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getComponantConfiguration_Id(), ecorePackage.getEString(), "id", null, 0, 1, ComponantConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(staticConfigurationParametersEEnum, StaticConfigurationParameters.class, "StaticConfigurationParameters");

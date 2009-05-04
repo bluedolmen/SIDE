@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.application.util;
 
+import com.bluexml.side.application.*;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
@@ -13,9 +14,11 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationPackage;
+import com.bluexml.side.application.ComponantConfiguration;
 import com.bluexml.side.application.Configuration;
-import com.bluexml.side.application.ConfigurationElement;
 import com.bluexml.side.application.ConfigurationParameters;
+import com.bluexml.side.application.DeployerConfiguration;
+import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.Option;
@@ -121,9 +124,10 @@ public class ApplicationSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ApplicationPackage.CONFIGURATION_ELEMENT: {
-				ConfigurationElement configurationElement = (ConfigurationElement)theEObject;
-				T result = caseConfigurationElement(configurationElement);
+			case ApplicationPackage.GENERATOR_CONFIGURATION: {
+				GeneratorConfiguration generatorConfiguration = (GeneratorConfiguration)theEObject;
+				T result = caseGeneratorConfiguration(generatorConfiguration);
+				if (result == null) result = caseComponantConfiguration(generatorConfiguration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -136,6 +140,19 @@ public class ApplicationSwitch<T> {
 			case ApplicationPackage.CONFIGURATION_PARAMETERS: {
 				ConfigurationParameters configurationParameters = (ConfigurationParameters)theEObject;
 				T result = caseConfigurationParameters(configurationParameters);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ApplicationPackage.DEPLOYER_CONFIGURATION: {
+				DeployerConfiguration deployerConfiguration = (DeployerConfiguration)theEObject;
+				T result = caseDeployerConfiguration(deployerConfiguration);
+				if (result == null) result = caseComponantConfiguration(deployerConfiguration);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ApplicationPackage.COMPONANT_CONFIGURATION: {
+				ComponantConfiguration componantConfiguration = (ComponantConfiguration)theEObject;
+				T result = caseComponantConfiguration(componantConfiguration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -204,17 +221,17 @@ public class ApplicationSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Configuration Element</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Generator Configuration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Configuration Element</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Generator Configuration</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConfigurationElement(ConfigurationElement object) {
+	public T caseGeneratorConfiguration(GeneratorConfiguration object) {
 		return null;
 	}
 
@@ -245,6 +262,36 @@ public class ApplicationSwitch<T> {
 	 * @generated
 	 */
 	public T caseConfigurationParameters(ConfigurationParameters object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Deployer Configuration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Deployer Configuration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDeployerConfiguration(DeployerConfiguration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Componant Configuration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Componant Configuration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseComponantConfiguration(ComponantConfiguration object) {
 		return null;
 	}
 

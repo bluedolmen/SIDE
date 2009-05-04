@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.application.util;
 
+import com.bluexml.side.application.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
@@ -13,9 +14,11 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationPackage;
+import com.bluexml.side.application.ComponantConfiguration;
 import com.bluexml.side.application.Configuration;
-import com.bluexml.side.application.ConfigurationElement;
 import com.bluexml.side.application.ConfigurationParameters;
+import com.bluexml.side.application.DeployerConfiguration;
+import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.Option;
@@ -93,8 +96,8 @@ public class ApplicationAdapterFactory extends AdapterFactoryImpl {
 				return createConfigurationAdapter();
 			}
 			@Override
-			public Adapter caseConfigurationElement(ConfigurationElement object) {
-				return createConfigurationElementAdapter();
+			public Adapter caseGeneratorConfiguration(GeneratorConfiguration object) {
+				return createGeneratorConfigurationAdapter();
 			}
 			@Override
 			public Adapter caseOption(Option object) {
@@ -103,6 +106,14 @@ public class ApplicationAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseConfigurationParameters(ConfigurationParameters object) {
 				return createConfigurationParametersAdapter();
+			}
+			@Override
+			public Adapter caseDeployerConfiguration(DeployerConfiguration object) {
+				return createDeployerConfigurationAdapter();
+			}
+			@Override
+			public Adapter caseComponantConfiguration(ComponantConfiguration object) {
+				return createComponantConfigurationAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -181,16 +192,16 @@ public class ApplicationAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.application.ConfigurationElement <em>Configuration Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.application.GeneratorConfiguration <em>Generator Configuration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see com.bluexml.side.application.ConfigurationElement
+	 * @see com.bluexml.side.application.GeneratorConfiguration
 	 * @generated
 	 */
-	public Adapter createConfigurationElementAdapter() {
+	public Adapter createGeneratorConfigurationAdapter() {
 		return null;
 	}
 
@@ -219,6 +230,34 @@ public class ApplicationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createConfigurationParametersAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.application.DeployerConfiguration <em>Deployer Configuration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.application.DeployerConfiguration
+	 * @generated
+	 */
+	public Adapter createDeployerConfigurationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.application.ComponantConfiguration <em>Componant Configuration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.application.ComponantConfiguration
+	 * @generated
+	 */
+	public Adapter createComponantConfigurationAdapter() {
 		return null;
 	}
 

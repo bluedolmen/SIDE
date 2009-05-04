@@ -131,6 +131,7 @@
       <complexType>
          <sequence minOccurs="0" maxOccurs="unbounded">
             <element ref="generatorVersion"/>
+            <element ref="deployerVersion"/>
          </sequence>
          <attribute name="version" type="string" use="required">
             <annotation>
@@ -232,6 +233,36 @@
             </annotation>
          </attribute>
          <attribute name="documentation" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="deployerVersion">
+      <complexType>
+         <sequence>
+            <element ref="configurationParameter" minOccurs="0" maxOccurs="unbounded"/>
+            <element ref="option" minOccurs="0" maxOccurs="unbounded"/>
+         </sequence>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="version" type="string" use="required">
             <annotation>
                <documentation>
                   

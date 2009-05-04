@@ -53,13 +53,13 @@ public interface ApplicationFactory extends EFactory {
 	Configuration createConfiguration();
 
 	/**
-	 * Returns a new object of class '<em>Configuration Element</em>'.
+	 * Returns a new object of class '<em>Generator Configuration</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Configuration Element</em>'.
+	 * @return a new object of class '<em>Generator Configuration</em>'.
 	 * @generated
 	 */
-	ConfigurationElement createConfigurationElement();
+	GeneratorConfiguration createGeneratorConfiguration();
 
 	/**
 	 * Returns a new object of class '<em>Option</em>'.
@@ -78,6 +78,15 @@ public interface ApplicationFactory extends EFactory {
 	 * @generated
 	 */
 	ConfigurationParameters createConfigurationParameters();
+
+	/**
+	 * Returns a new object of class '<em>Deployer Configuration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Deployer Configuration</em>'.
+	 * @generated
+	 */
+	DeployerConfiguration createDeployerConfiguration();
 
 	/**
 	 * Returns the package supported by this factory.

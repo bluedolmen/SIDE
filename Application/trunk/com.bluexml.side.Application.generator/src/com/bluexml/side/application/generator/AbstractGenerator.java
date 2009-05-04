@@ -23,22 +23,25 @@ public abstract class AbstractGenerator implements IGenerator {
 	protected static Map<String, String> configurationParameters = new HashMap<String, String>();
 	public static final String TEMP_FOLDER = "tmp";
 	public static String GENERATOR_CODE = "";
+	protected static String techVersion = null;
+
+	public String getTechVersion() {
+		return techVersion;
+	}
+
+	public void setTechVersion(String techVersion_) {
+		techVersion = techVersion_;
+	}
 
 	public String getTEMP_FOLDER() {
 		return TEMP_FOLDER + this.getClass().getName();
 	}
 
-	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_) {
+	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, String techVersion_) {
 		generationParameters = generationParameters_;
 		generatorOptions = generatorOptions_;
 		configurationParameters = configurationParameters_;
-
-	}
-	
-	public static void initialize_(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_) {
-		generationParameters = generationParameters_;
-		generatorOptions = generatorOptions_;
-		configurationParameters = configurationParameters_;
+		techVersion = techVersion_;
 
 	}
 
@@ -58,13 +61,12 @@ public abstract class AbstractGenerator implements IGenerator {
 		IFolder ff = IFileHelper.getIFolder(getTargetPath());
 		return ff.getRawLocation().makeAbsolute().toOSString();
 	}
-	
+
 	protected final File getTargetSystemFile() {
 		IFolder ff = IFileHelper.getIFolder(getTargetPath());
 		return ff.getRawLocation().makeAbsolute().toFile();
 	}
 
-	
 	public final String getTargetPath() {
 		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral());
 	}
@@ -75,21 +77,21 @@ public abstract class AbstractGenerator implements IGenerator {
 		}
 		return false;
 	}
-	
+
 	protected static boolean doVerbose() {
 		if (configurationParameters != null && configurationParameters.containsKey(StaticConfigurationParameters.GENERATIONOPTIONSVERBOSE.getLiteral())) {
 			return Boolean.parseBoolean(configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSVERBOSE.getLiteral()));
 		}
 		return false;
 	}
-	
+
 	protected static boolean doClean() {
 		if (configurationParameters != null && configurationParameters.containsKey(StaticConfigurationParameters.GENERATIONOPTIONSCLEAN.getLiteral())) {
 			return Boolean.parseBoolean(configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSCLEAN.getLiteral()));
 		}
 		return false;
 	}
-	
+
 	public static boolean getGeneratorOptionValue(String key) {
 		if (AbstractGenerator.generatorOptions.containsKey(key)) {
 			return AbstractGenerator.generatorOptions.get(key);
@@ -120,10 +122,13 @@ public abstract class AbstractGenerator implements IGenerator {
 	}
 
 	public static void printConfiguration() {
-		System.out.println("GenerationOptions :"+generatorOptions);
-		System.out.println("GenerationParameters :"+generationParameters);
-		System.out.println("ConfigurationParameters :"+configurationParameters);
+		System.out.println("GenerationOptions :" + generatorOptions);
+		System.out.println("GenerationParameters :" + generationParameters);
+		System.out.println("ConfigurationParameters :" + configurationParameters);
+		System.out.println("TechVersion :" + techVersion);
+		
 	}
+
 
 	public boolean check(){
 		return SecurityHelper.check(GENERATOR_CODE);

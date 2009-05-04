@@ -7,13 +7,20 @@
 package com.bluexml.side.application.provider;
 
 
+import com.bluexml.side.application.ApplicationFactory;
+import com.bluexml.side.application.ApplicationPackage;
+import com.bluexml.side.application.ComponantConfiguration;
+
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -25,17 +32,13 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import com.bluexml.side.application.ApplicationFactory;
-import com.bluexml.side.application.ApplicationPackage;
-import com.bluexml.side.application.ConfigurationElement;
-
 /**
- * This is the item provider adapter for a {@link com.bluexml.side.application.ConfigurationElement} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.application.ComponantConfiguration} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ConfigurationElementItemProvider
+public class ComponantConfigurationItemProvider
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -49,7 +52,7 @@ public class ConfigurationElementItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ConfigurationElementItemProvider(AdapterFactory adapterFactory) {
+	public ComponantConfigurationItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -64,27 +67,27 @@ public class ConfigurationElementItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addId_metamodelPropertyDescriptor(object);
-			addId_generatorPropertyDescriptor(object);
-			addClass_generatorPropertyDescriptor(object);
+			addId_techno_versionPropertyDescriptor(object);
+			addImpl_classPropertyDescriptor(object);
+			addIdPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Id metamodel feature.
+	 * This adds a property descriptor for the Id techno version feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addId_metamodelPropertyDescriptor(Object object) {
+	protected void addId_techno_versionPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ConfigurationElement_id_metamodel_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ConfigurationElement_id_metamodel_feature", "_UI_ConfigurationElement_type"),
-				 ApplicationPackage.Literals.CONFIGURATION_ELEMENT__ID_METAMODEL,
+				 getString("_UI_ComponantConfiguration_id_techno_version_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ComponantConfiguration_id_techno_version_feature", "_UI_ComponantConfiguration_type"),
+				 ApplicationPackage.Literals.COMPONANT_CONFIGURATION__ID_TECHNO_VERSION,
 				 true,
 				 false,
 				 false,
@@ -94,19 +97,19 @@ public class ConfigurationElementItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Id generator feature.
+	 * This adds a property descriptor for the Impl class feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addId_generatorPropertyDescriptor(Object object) {
+	protected void addImpl_classPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ConfigurationElement_id_generator_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ConfigurationElement_id_generator_feature", "_UI_ConfigurationElement_type"),
-				 ApplicationPackage.Literals.CONFIGURATION_ELEMENT__ID_GENERATOR,
+				 getString("_UI_ComponantConfiguration_impl_class_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ComponantConfiguration_impl_class_feature", "_UI_ComponantConfiguration_type"),
+				 ApplicationPackage.Literals.COMPONANT_CONFIGURATION__IMPL_CLASS,
 				 true,
 				 false,
 				 false,
@@ -116,19 +119,19 @@ public class ConfigurationElementItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Class generator feature.
+	 * This adds a property descriptor for the Id feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addClass_generatorPropertyDescriptor(Object object) {
+	protected void addIdPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ConfigurationElement_class_generator_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ConfigurationElement_class_generator_feature", "_UI_ConfigurationElement_type"),
-				 ApplicationPackage.Literals.CONFIGURATION_ELEMENT__CLASS_GENERATOR,
+				 getString("_UI_ComponantConfiguration_id_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ComponantConfiguration_id_feature", "_UI_ComponantConfiguration_type"),
+				 ApplicationPackage.Literals.COMPONANT_CONFIGURATION__ID,
 				 true,
 				 false,
 				 false,
@@ -149,7 +152,7 @@ public class ConfigurationElementItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ApplicationPackage.Literals.CONFIGURATION_ELEMENT__OPTIONS);
+			childrenFeatures.add(ApplicationPackage.Literals.COMPONANT_CONFIGURATION__OPTIONS);
 		}
 		return childrenFeatures;
 	}
@@ -168,17 +171,6 @@ public class ConfigurationElementItemProvider
 	}
 
 	/**
-	 * This returns ConfigurationElement.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ConfigurationElement"));
-	}
-
-	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -186,10 +178,10 @@ public class ConfigurationElementItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ConfigurationElement)object).getId_metamodel();
+		String label = ((ComponantConfiguration)object).getId();
 		return label == null || label.length() == 0 ?
-			getString("_UI_ConfigurationElement_type") :
-			getString("_UI_ConfigurationElement_type") + " " + label;
+			getString("_UI_ComponantConfiguration_type") :
+			getString("_UI_ComponantConfiguration_type") + " " + label;
 	}
 
 	/**
@@ -203,13 +195,13 @@ public class ConfigurationElementItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ConfigurationElement.class)) {
-			case ApplicationPackage.CONFIGURATION_ELEMENT__ID_METAMODEL:
-			case ApplicationPackage.CONFIGURATION_ELEMENT__ID_GENERATOR:
-			case ApplicationPackage.CONFIGURATION_ELEMENT__CLASS_GENERATOR:
+		switch (notification.getFeatureID(ComponantConfiguration.class)) {
+			case ApplicationPackage.COMPONANT_CONFIGURATION__ID_TECHNO_VERSION:
+			case ApplicationPackage.COMPONANT_CONFIGURATION__IMPL_CLASS:
+			case ApplicationPackage.COMPONANT_CONFIGURATION__ID:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case ApplicationPackage.CONFIGURATION_ELEMENT__OPTIONS:
+			case ApplicationPackage.COMPONANT_CONFIGURATION__OPTIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -229,7 +221,7 @@ public class ConfigurationElementItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ApplicationPackage.Literals.CONFIGURATION_ELEMENT__OPTIONS,
+				(ApplicationPackage.Literals.COMPONANT_CONFIGURATION__OPTIONS,
 				 ApplicationFactory.eINSTANCE.createOption()));
 	}
 

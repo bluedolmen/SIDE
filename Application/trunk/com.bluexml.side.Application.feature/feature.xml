@@ -85,7 +85,7 @@
          unpack="false"/>
 
    <plugin
-         id="com.bluexml.side.Application.Deployer.alfresco"
+         id="com.bluexml.side.Application.deployer.alfresco"
          download-size="0"
          install-size="0"
          version="1.0.7"

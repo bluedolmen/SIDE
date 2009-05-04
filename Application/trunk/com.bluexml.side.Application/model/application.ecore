@@ -15,17 +15,15 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="file" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Configuration" eSuperTypes="#//ModelElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
-        eType="#//ConfigurationElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generatorConfigurations"
+        upperBound="-1" eType="#//GeneratorConfiguration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//ConfigurationParameters" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deployerConfigurations"
+        upperBound="-1" eType="#//DeployerConfiguration" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ConfigurationElement">
+  <eClassifiers xsi:type="ecore:EClass" name="GeneratorConfiguration" eSuperTypes="#//ComponantConfiguration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id_metamodel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id_generator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="options" upperBound="-1"
-        eType="#//Option" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="class_generator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Option">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -40,5 +38,13 @@
     <eLiterals name="generationoptionsupdateTgt" value="3" literal="generation.options.updateTgt"/>
     <eLiterals name="generationoptionslogPath" value="4" literal="generation.options.logPath"/>
     <eLiterals name="generationoptionsdestinationPath" value="5" literal="generation.options.destinationPath"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DeployerConfiguration" eSuperTypes="#//ComponantConfiguration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ComponantConfiguration" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id_techno_version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="options" upperBound="-1"
+        eType="#//Option" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="impl_class" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

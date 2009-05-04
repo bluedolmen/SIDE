@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.application.impl;
 
+import com.bluexml.side.application.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -17,8 +18,9 @@ import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationFactory;
 import com.bluexml.side.application.ApplicationPackage;
 import com.bluexml.side.application.Configuration;
-import com.bluexml.side.application.ConfigurationElement;
 import com.bluexml.side.application.ConfigurationParameters;
+import com.bluexml.side.application.DeployerConfiguration;
+import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.Option;
 import com.bluexml.side.application.StaticConfigurationParameters;
@@ -70,9 +72,10 @@ public class ApplicationFactoryImpl extends EFactoryImpl implements ApplicationF
 			case ApplicationPackage.APPLICATION: return createApplication();
 			case ApplicationPackage.MODEL: return createModel();
 			case ApplicationPackage.CONFIGURATION: return createConfiguration();
-			case ApplicationPackage.CONFIGURATION_ELEMENT: return createConfigurationElement();
+			case ApplicationPackage.GENERATOR_CONFIGURATION: return createGeneratorConfiguration();
 			case ApplicationPackage.OPTION: return createOption();
 			case ApplicationPackage.CONFIGURATION_PARAMETERS: return createConfigurationParameters();
+			case ApplicationPackage.DEPLOYER_CONFIGURATION: return createDeployerConfiguration();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -143,9 +146,9 @@ public class ApplicationFactoryImpl extends EFactoryImpl implements ApplicationF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ConfigurationElement createConfigurationElement() {
-		ConfigurationElementImpl configurationElement = new ConfigurationElementImpl();
-		return configurationElement;
+	public GeneratorConfiguration createGeneratorConfiguration() {
+		GeneratorConfigurationImpl generatorConfiguration = new GeneratorConfigurationImpl();
+		return generatorConfiguration;
 	}
 
 	/**
@@ -166,6 +169,16 @@ public class ApplicationFactoryImpl extends EFactoryImpl implements ApplicationF
 	public ConfigurationParameters createConfigurationParameters() {
 		ConfigurationParametersImpl configurationParameters = new ConfigurationParametersImpl();
 		return configurationParameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DeployerConfiguration createDeployerConfiguration() {
+		DeployerConfigurationImpl deployerConfiguration = new DeployerConfigurationImpl();
+		return deployerConfiguration;
 	}
 
 	/**

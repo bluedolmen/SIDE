@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bluexml.side.application.Application;
+import com.bluexml.side.application.ComponantConfiguration;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ConfigurationParameters;
 import com.bluexml.side.application.Model;
@@ -18,8 +19,7 @@ public class ApplicationUtil {
 	 * @param key
 	 * @return
 	 */
-	public static ConfigurationParameters getConfigurationParmeterByKey(
-			String key) {
+	public static ConfigurationParameters getConfigurationParmeterByKey(String key) {
 		ConfigurationParameters result = null;
 		Configuration config = ApplicationDialog.getCurrentConfiguration();
 		int i = 0;
@@ -33,9 +33,10 @@ public class ApplicationUtil {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Return models of the application
+	 * 
 	 * @param application
 	 * @return
 	 */
@@ -47,5 +48,29 @@ public class ApplicationUtil {
 			}
 		}
 		return result;
+	}
+
+	public static List<ComponantConfiguration> getComponantConfigurations(Configuration config) {
+		List<ComponantConfiguration> l = new ArrayList<ComponantConfiguration>();
+		l.addAll(config.getDeployerConfigurations());
+		l.addAll(config.getGeneratorConfigurations());
+		return l;
+	}
+
+	public static ComponantConfiguration getComponantConfiguration(Configuration config, String componantId) {
+		List<ComponantConfiguration> l = getComponantConfigurations(config);
+		for (ComponantConfiguration c : l) {
+			if (c.getId().equals(componantId)) {
+				return c;
+			}
+		}
+		return null;
+	}
+
+	public static boolean ComponantConfigurationsContains(Configuration config, String componantId) {
+		if (getComponantConfiguration(config, componantId) != null) {
+			return true;
+		}
+		return false;
 	}
 }

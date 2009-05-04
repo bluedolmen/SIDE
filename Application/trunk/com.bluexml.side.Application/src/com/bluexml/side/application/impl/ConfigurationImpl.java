@@ -8,17 +8,21 @@ package com.bluexml.side.application.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import com.bluexml.side.application.ApplicationPackage;
+import com.bluexml.side.application.ComponantConfiguration;
 import com.bluexml.side.application.Configuration;
-import com.bluexml.side.application.ConfigurationElement;
 import com.bluexml.side.application.ConfigurationParameters;
+import com.bluexml.side.application.DeployerConfiguration;
+import com.bluexml.side.application.GeneratorConfiguration;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,8 +31,9 @@ import com.bluexml.side.application.ConfigurationParameters;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.application.impl.ConfigurationImpl#getElements <em>Elements</em>}</li>
+ *   <li>{@link com.bluexml.side.application.impl.ConfigurationImpl#getGeneratorConfigurations <em>Generator Configurations</em>}</li>
  *   <li>{@link com.bluexml.side.application.impl.ConfigurationImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link com.bluexml.side.application.impl.ConfigurationImpl#getDeployerConfigurations <em>Deployer Configurations</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,14 +41,14 @@ import com.bluexml.side.application.ConfigurationParameters;
  */
 public class ConfigurationImpl extends ModelElementImpl implements Configuration {
 	/**
-	 * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
+	 * The cached value of the '{@link #getGeneratorConfigurations() <em>Generator Configurations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getElements()
+	 * @see #getGeneratorConfigurations()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ConfigurationElement> elements;
+	protected EList<GeneratorConfiguration> generatorConfigurations;
 
 	/**
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
@@ -54,6 +59,16 @@ public class ConfigurationImpl extends ModelElementImpl implements Configuration
 	 * @ordered
 	 */
 	protected EList<ConfigurationParameters> parameters;
+
+	/**
+	 * The cached value of the '{@link #getDeployerConfigurations() <em>Deployer Configurations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDeployerConfigurations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DeployerConfiguration> deployerConfigurations;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -79,11 +94,11 @@ public class ConfigurationImpl extends ModelElementImpl implements Configuration
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ConfigurationElement> getElements() {
-		if (elements == null) {
-			elements = new EObjectContainmentEList<ConfigurationElement>(ConfigurationElement.class, this, ApplicationPackage.CONFIGURATION__ELEMENTS);
+	public EList<GeneratorConfiguration> getGeneratorConfigurations() {
+		if (generatorConfigurations == null) {
+			generatorConfigurations = new EObjectContainmentEList<GeneratorConfiguration>(GeneratorConfiguration.class, this, ApplicationPackage.CONFIGURATION__GENERATOR_CONFIGURATIONS);
 		}
-		return elements;
+		return generatorConfigurations;
 	}
 
 	/**
@@ -103,13 +118,27 @@ public class ConfigurationImpl extends ModelElementImpl implements Configuration
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<DeployerConfiguration> getDeployerConfigurations() {
+		if (deployerConfigurations == null) {
+			deployerConfigurations = new EObjectContainmentEList<DeployerConfiguration>(DeployerConfiguration.class, this, ApplicationPackage.CONFIGURATION__DEPLOYER_CONFIGURATIONS);
+		}
+		return deployerConfigurations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ApplicationPackage.CONFIGURATION__ELEMENTS:
-				return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
+			case ApplicationPackage.CONFIGURATION__GENERATOR_CONFIGURATIONS:
+				return ((InternalEList<?>)getGeneratorConfigurations()).basicRemove(otherEnd, msgs);
 			case ApplicationPackage.CONFIGURATION__PARAMETERS:
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+			case ApplicationPackage.CONFIGURATION__DEPLOYER_CONFIGURATIONS:
+				return ((InternalEList<?>)getDeployerConfigurations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -122,10 +151,12 @@ public class ConfigurationImpl extends ModelElementImpl implements Configuration
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ApplicationPackage.CONFIGURATION__ELEMENTS:
-				return getElements();
+			case ApplicationPackage.CONFIGURATION__GENERATOR_CONFIGURATIONS:
+				return getGeneratorConfigurations();
 			case ApplicationPackage.CONFIGURATION__PARAMETERS:
 				return getParameters();
+			case ApplicationPackage.CONFIGURATION__DEPLOYER_CONFIGURATIONS:
+				return getDeployerConfigurations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -139,13 +170,17 @@ public class ConfigurationImpl extends ModelElementImpl implements Configuration
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ApplicationPackage.CONFIGURATION__ELEMENTS:
-				getElements().clear();
-				getElements().addAll((Collection<? extends ConfigurationElement>)newValue);
+			case ApplicationPackage.CONFIGURATION__GENERATOR_CONFIGURATIONS:
+				getGeneratorConfigurations().clear();
+				getGeneratorConfigurations().addAll((Collection<? extends GeneratorConfiguration>)newValue);
 				return;
 			case ApplicationPackage.CONFIGURATION__PARAMETERS:
 				getParameters().clear();
 				getParameters().addAll((Collection<? extends ConfigurationParameters>)newValue);
+				return;
+			case ApplicationPackage.CONFIGURATION__DEPLOYER_CONFIGURATIONS:
+				getDeployerConfigurations().clear();
+				getDeployerConfigurations().addAll((Collection<? extends DeployerConfiguration>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -159,11 +194,14 @@ public class ConfigurationImpl extends ModelElementImpl implements Configuration
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ApplicationPackage.CONFIGURATION__ELEMENTS:
-				getElements().clear();
+			case ApplicationPackage.CONFIGURATION__GENERATOR_CONFIGURATIONS:
+				getGeneratorConfigurations().clear();
 				return;
 			case ApplicationPackage.CONFIGURATION__PARAMETERS:
 				getParameters().clear();
+				return;
+			case ApplicationPackage.CONFIGURATION__DEPLOYER_CONFIGURATIONS:
+				getDeployerConfigurations().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -177,10 +215,12 @@ public class ConfigurationImpl extends ModelElementImpl implements Configuration
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ApplicationPackage.CONFIGURATION__ELEMENTS:
-				return elements != null && !elements.isEmpty();
+			case ApplicationPackage.CONFIGURATION__GENERATOR_CONFIGURATIONS:
+				return generatorConfigurations != null && !generatorConfigurations.isEmpty();
 			case ApplicationPackage.CONFIGURATION__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
+			case ApplicationPackage.CONFIGURATION__DEPLOYER_CONFIGURATIONS:
+				return deployerConfigurations != null && !deployerConfigurations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

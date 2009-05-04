@@ -24,7 +24,7 @@
       <import plugin="com.bluexml.side.Application" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.bluexml.side.Application.generator"/>
       <import plugin="com.bluexml.side.Application.generator.acceleo"/>
-      <import plugin="com.bluexml.side.Application.Deployer.alfresco" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Application.deployer.alfresco" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.bluexml.side.Application.generator.alfresco"/>
       <import plugin="javax.xml"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>

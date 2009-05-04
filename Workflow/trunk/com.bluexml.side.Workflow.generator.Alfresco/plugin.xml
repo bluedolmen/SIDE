@@ -13,9 +13,9 @@
                name="Alfresco"
                url="http://www.alfresco.com">
             <technologyVersion
-                  id="alfresco_3.0_labs"
+                  id="alfresco_3.x"
                   idTechnology="alfresco"
-                  version="Alfresco3.0 Labs">
+                  version="Alfresco3.x Labs and Entreprise">
                <generatorVersion
                      class="com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator"
                      id="com.bluexml.side.Workflow.generator.Alfresco"

@@ -144,26 +144,26 @@ public class ApplicationItemProviderAdapterFactory extends ApplicationAdapterFac
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.application.ConfigurationElement} instances.
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.application.GeneratorConfiguration} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ConfigurationElementItemProvider configurationElementItemProvider;
+	protected GeneratorConfigurationItemProvider generatorConfigurationItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link com.bluexml.side.application.ConfigurationElement}.
+	 * This creates an adapter for a {@link com.bluexml.side.application.GeneratorConfiguration}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createConfigurationElementAdapter() {
-		if (configurationElementItemProvider == null) {
-			configurationElementItemProvider = new ConfigurationElementItemProvider(this);
+	public Adapter createGeneratorConfigurationAdapter() {
+		if (generatorConfigurationItemProvider == null) {
+			generatorConfigurationItemProvider = new GeneratorConfigurationItemProvider(this);
 		}
 
-		return configurationElementItemProvider;
+		return generatorConfigurationItemProvider;
 	}
 
 	/**
@@ -210,6 +210,29 @@ public class ApplicationItemProviderAdapterFactory extends ApplicationAdapterFac
 		}
 
 		return configurationParametersItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.application.DeployerConfiguration} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DeployerConfigurationItemProvider deployerConfigurationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.application.DeployerConfiguration}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDeployerConfigurationAdapter() {
+		if (deployerConfigurationItemProvider == null) {
+			deployerConfigurationItemProvider = new DeployerConfigurationItemProvider(this);
+		}
+
+		return deployerConfigurationItemProvider;
 	}
 
 	/**
@@ -314,9 +337,10 @@ public class ApplicationItemProviderAdapterFactory extends ApplicationAdapterFac
 		if (applicationItemProvider != null) applicationItemProvider.dispose();
 		if (modelItemProvider != null) modelItemProvider.dispose();
 		if (configurationItemProvider != null) configurationItemProvider.dispose();
-		if (configurationElementItemProvider != null) configurationElementItemProvider.dispose();
+		if (generatorConfigurationItemProvider != null) generatorConfigurationItemProvider.dispose();
 		if (optionItemProvider != null) optionItemProvider.dispose();
 		if (configurationParametersItemProvider != null) configurationParametersItemProvider.dispose();
+		if (deployerConfigurationItemProvider != null) deployerConfigurationItemProvider.dispose();
 	}
 
 }

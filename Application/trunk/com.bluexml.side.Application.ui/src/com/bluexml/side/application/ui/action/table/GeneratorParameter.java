@@ -2,8 +2,6 @@ package com.bluexml.side.application.ui.action.table;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 
-import com.bluexml.side.application.ui.action.tree.Generator;
-
 public class GeneratorParameter implements Comparable<GeneratorParameter>{
 	private String key;
 	private String value;
@@ -17,7 +15,7 @@ public class GeneratorParameter implements Comparable<GeneratorParameter>{
 		this.documentation = documentation;
 	}
 
-	public GeneratorParameter(IConfigurationElement confParam, Generator g) {
+	public GeneratorParameter(IConfigurationElement confParam) {
 		this.key = confParam.getAttribute("key");
 		this.label = confParam.getAttribute("label");
 		this.value = null;
