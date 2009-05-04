@@ -80,7 +80,7 @@ public class WorkflowInitialization {
 		FormWorkflow fw = FormFactory.eINSTANCE.createFormWorkflow();
 		fw.setId(s.getName());
 		fw.setLabel(s.getName());
-		
+		fw.setName(s.getName());
 		
 		if (s instanceof UserTask) {
 			UserTask ut = (UserTask) s;
