@@ -14,18 +14,30 @@
  ******************************************************************************/
 package com.bluexml.side.Workflow.modeler.diagram.figures;
 
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.ImageFigure;
+import org.eclipse.draw2d.PositionConstants;
+import org.eclipse.draw2d.geometry.Dimension;
+
+import com.bluexml.side.Workflow.modeler.diagram.WfImageRegistry;
+
 /**
- * @generated
+ * @_generated
  */
 public class AttributeFigure extends
-		org.topcased.draw2d.figures.EditableLabelFigure {
+		org.topcased.draw2d.figures.GraphicWithLabelFigure {
 	/**
 	 * Constructor
-	 *
+	 * 
 	 * @generated
 	 */
 	public AttributeFigure() {
-		super();
+		super(PositionConstants.RIGHT);
 	}
 
+	@Override
+	protected IFigure createBodyFigure() {
+		ImageFigure fig = new ImageFigure(WfImageRegistry.getImage("ATTRIBUTE"));
+		return fig;
+	}
 }

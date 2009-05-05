@@ -122,5 +122,5 @@ public class AttributeEditPart extends EMFGraphNodeEditPart {
 		return null;
 
 	}
-
+	
 }
