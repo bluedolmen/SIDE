@@ -105,10 +105,10 @@ public class DocMetaModel {
 		
 	}
 	
-	/**
-	 * parcourt les sous_packages d'un métamodèle et les traite
-	 * @param ePack
-	 */
+//	/**
+//	 * parcourt les sous_packages d'un métamodèle et les traite
+//	 * @param ePack
+//	 */
 //	public void processSubPackages(EPackage ePack){
 //		
 //		processPackage(ePack);
@@ -136,7 +136,7 @@ public class DocMetaModel {
 				EList<EAnnotation> annotations = classifier.getEAnnotations();
 				for (EAnnotation annotation : annotations) {
 					//Vérification d'existence de doc générale
-					if (annotation.getSource() == "http://www.bluexml.com/doc" && !classifiersOk.contains(classifier)){
+					if (annotation.getSource() == "http://www.eclipse.org/emf/2002/GenModel" && !classifiersOk.contains(classifier)){
 						docOk.put(classifier, true);
 						classifiersOk.add(classifier);
 					}
@@ -165,29 +165,23 @@ public class DocMetaModel {
 					//Vérification des attributs avec doc
 					if (object instanceof EAttributeImpl){
 						EAttributeImpl attribute = (EAttributeImpl) object;
-						EList<EAnnotation> docsAttribut = attribute.getEAnnotations();
-						if (docsAttribut.size() != 0){
-							nbAttWithDoc++;
-							docAttOk.put(classifier, true);
-							//(on suppose l'EAnnotation renseignée si elle existe)
+						EList<EAnnotation> docsAttributes = attribute.getEAnnotations();
+						for (EAnnotation annotation : docsAttributes) {
+							if (annotation.getSource().equals("http://www.eclipse.org/emf/2002/GenModel")){
+								nbAttWithDoc++;
+								docAttOk.put(classifier, true);
+							}
 						}
 					}
 					//Vérification des opérations avec doc
-					//cette dernière est située dans une EAnnotation dont la detailEntry 
-					//a pour key "description"
+					//cette dernière est située dans une EAnnotation GenModel
 					if (object instanceof EOperationImpl){
 						EOperationImpl operation = (EOperationImpl) object;
 						EList<EAnnotation> docsOperation = operation.getEAnnotations();
 						for (EAnnotation annotation : docsOperation) {
-							if (annotation.getSource().equals("http://www.bluexml.com/OCL")){
-								EMap<String,String> details = annotation.getDetails();
-								Set<String> keys = details.keySet();
-								for (String key : keys) {
-									if (key.equals("description")){
-										nbOpWithDoc++;
-										docOpOk.put(classifier, true);
-									}
-								}
+							if (annotation.getSource().equals("http://www.eclipse.org/emf/2002/GenModel")){
+								nbOpWithDoc++;
+								docOpOk.put(classifier, true);
 							}
 						}
 					}
@@ -200,7 +194,7 @@ public class DocMetaModel {
 				}
 			}
 		}
-
+		
 		return classifiersOk;
 
 	}
@@ -210,7 +204,7 @@ public class DocMetaModel {
 	 * @param ePackage
 	 */
 	public void processPackage(EPackage ePackage, List<String> ObjectsFromPalette){
-
+		
 		init(ePackage);
 		List<EEnum> types = getTypes(ePackage);
 		List<EClassifier> classifiers = checkDoc(ePackage);
@@ -248,8 +242,8 @@ public class DocMetaModel {
 							writeDocGen(getDocOp(classifier), file);
 						}
 					}
-					file.close();
 				}
+				file.close();
 			}
 			catch(IOException e){
 				StringBuffer sb = new StringBuffer();
@@ -274,12 +268,11 @@ public class DocMetaModel {
 		
 		EList<EAnnotation> annotations = classifier.getEAnnotations();
 		for (EAnnotation annotation : annotations) {
-			if (annotation.getSource().equals("http://www.bluexml.com/doc")){
+			if (annotation.getSource().equals("http://www.eclipse.org/emf/2002/GenModel")){
 				EMap<String, String> details = annotation.getDetails();
 				doc = details.values();
 			}
 		}
-		
 		return doc;
 		
 	}
@@ -450,13 +443,11 @@ public class DocMetaModel {
 				EOperationImpl operation = (EOperationImpl) object;
 				EList<EAnnotation> annotations = operation.getEAnnotations();
 				for (EAnnotation annotation : annotations) {
-					if (annotation.getSource().equals("http://www.bluexml.com/OCL")){
+					if (annotation.getSource().equals("http://www.eclipse.org/emf/2002/GenModel")){
 						EMap<String,String> details = annotation.getDetails();
 						Set<String> keys = details.keySet();
 						for (String key : keys) {
-							if (key.equals("description")){
-								doc.put(operation.getName(),details.get(key));
-							}
+							doc.put(operation.getName(),details.get(key));
 						}
 					}
 				}
