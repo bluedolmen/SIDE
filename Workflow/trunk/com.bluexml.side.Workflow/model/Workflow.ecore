@@ -40,7 +40,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Swimlane">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="ActorNameMustBeUnique" value="Swimlane.allInstances() -> select(n|n.name = self.name and n &lt;> self )->size()=0"/>
-      <details key="MustManageAtLeastOneTask" value="not self.manage->isEmpty()"/>
+      <details key="MustManageAtLeastOneTask" value="(not (self.manage->isEmpty())) or (StartState.allInstances()->collect(ss | ss.initiator)->includes(self))"/>
       <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') = true"/>
       <details key="OnlyOneActorCalledInitiator" value="Swimlane.allInstances() -> select(s| s.name ='initiator')->size() = 1"/>
       <details key="ActoridOrPooledactorMustBeSetForAllExeptOneActor" value="Swimlane.allInstances() -> select(s | s.name &lt;>'initiator' and (s.actorid -> isEmpty() or s.actorid='')  and (s.pooledactors  -> isEmpty() or s.pooledactors =''))->size() &lt;=1&#xA;"/>

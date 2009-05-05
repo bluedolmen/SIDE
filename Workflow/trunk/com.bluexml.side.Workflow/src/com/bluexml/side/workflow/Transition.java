@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see com.bluexml.side.workflow.WorkflowPackage#getTransition()
- * @model annotation="http://www.bluexml.com/OCL NoTransitionWithSameName='Transition.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0' SourceAndTargetMustBeSet='not self.to.oclIsUndefined() and not self.getContainer().oclIsUndefined()' noSpecialCharacters='self.name.regexMatch(\'[\\w]*\') <> null'"
+ * @model annotation="http://www.bluexml.com/OCL NoTransitionWithSameName='Transition.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0' SourceAndTargetMustBeSet='not self.to.oclIsUndefined() and not self.getContainer().oclIsUndefined()' noSpecialCharacters='self.name.regexMatch(\'[\\w]*\') = true'"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NoTransitionWithSameName SourceAndTargetMustBeSet noSpecialCharacters'"
  * @generated
  */
