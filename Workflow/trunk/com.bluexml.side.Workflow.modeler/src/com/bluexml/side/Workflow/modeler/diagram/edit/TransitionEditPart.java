@@ -148,7 +148,12 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	@Override
 	protected void refreshTextAndFont() {
 		super.refreshTextAndFont();
-		updateMiddleNameLabel();
 	}
-
+	
+	@Override
+	protected void refreshEdgeObjects() {
+		updateMiddleNameLabel();
+		super.refreshEdgeObjects();
+	}
+	
 }
