@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import com.bluexml.side.application.generator.AbstractGenerator;
 import com.bluexml.side.application.generator.XMLConflictResolver;
 import com.bluexml.side.application.generator.alfresco.AbstractAlfrescoGenerator;
-import com.bluexml.side.application.security.SecurityHelper;
+import com.bluexml.side.application.security.*;
 import com.bluexml.side.settings.SidePreferences;
 
 public class WorkflowGenerator extends AbstractAlfrescoGenerator {
