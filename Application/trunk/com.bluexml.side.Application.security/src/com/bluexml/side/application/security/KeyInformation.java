@@ -26,12 +26,14 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import com.bluexml.side.util.libs.SystemInfoGetter;
+
 /**
  * This class decodes the S-IDE Key and extract important informations from it
  * 
  * @author <a href="mailto:pbertrand@bluexml.com">Pierre BERTRAND</a>
  */
-public class KeyInformation implements GeneratorConstants {
+public class KeyInformation implements SecurityConstants {
 
 	// The decoded key
 	private String decodedString;
@@ -41,6 +43,8 @@ public class KeyInformation implements GeneratorConstants {
 	private Date validationDate;
 	// ID of the count in the silverstripe database
 	private String idCompte;
+	// Tells if the key is valid or not
+	private String iDMach;
 	// Tells if the key is valid or not
 	private Boolean validity;
 
@@ -56,6 +60,7 @@ public class KeyInformation implements GeneratorConstants {
 		codes = 0;
 		validationDate = new Date(0);
 		idCompte = "";
+		iDMach="";
 		try {
 			decodedString = decodeKey(criptedKey);
 			String[] result = decodedString.split("\\" + TEXT_SEPARATOR);
@@ -73,6 +78,10 @@ public class KeyInformation implements GeneratorConstants {
 				}
 				codes = Integer.parseInt(Encoder.desencode(result[INDEX_CODES]));
 				idCompte = Encoder.desencode(result[INDEX_ID]);
+				iDMach = result[INDEX_ID_MACH];
+				if (!iDMach.equals(SystemInfoGetter.getHostWithHash())){
+					validity = false;
+				}
 			} else {
 				validity = false;
 			}
@@ -144,5 +153,9 @@ public class KeyInformation implements GeneratorConstants {
 	public Boolean hasCode(String code) {
 		Boolean result = ((codes & CodeReader.getCode(code)) != 0);
 		return result;
+	}
+
+	public String getIDMach() {
+		return iDMach;
 	}
 }

@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import com.bluexml.side.application.generator.AbstractGenerator;
+import com.bluexml.side.application.security.Checkable;
 import com.bluexml.side.application.generator.ConflitResolverHelper;
 import com.bluexml.side.application.generator.acceleo.chain.CustomCChain;
 

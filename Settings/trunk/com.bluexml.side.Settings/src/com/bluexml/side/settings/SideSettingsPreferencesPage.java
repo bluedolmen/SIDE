@@ -6,8 +6,11 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
+
+import com.bluexml.side.util.libs.SystemInfoGetter;
 
 /**
  * The BadWordsColorPreferencePage is a preference page that
@@ -27,8 +30,14 @@ public class SideSettingsPreferencesPage
 		Composite entryTable = new Composite(parent, SWT.NULL);
 		GridLayout layout = new GridLayout();
 		entryTable.setLayout(layout);
-		Label lbl = new Label(entryTable,SWT.NONE);
-		lbl.setText("General settings for S-IDE");
+
+		String nomMachine = SystemInfoGetter.getHostWithHash();
+
+		Label lblName = new Label(entryTable,SWT.NONE);
+		lblName.setText("Unique ID for Registering : (Copy/paste enable)");
+		Text textNomMachine = new Text(entryTable,SWT.NONE);
+		textNomMachine.setEditable(false);
+		textNomMachine.setText(nomMachine);
 		return entryTable;
 	}
 

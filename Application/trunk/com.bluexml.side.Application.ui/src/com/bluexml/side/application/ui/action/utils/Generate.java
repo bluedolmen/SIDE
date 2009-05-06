@@ -32,6 +32,7 @@ import com.bluexml.side.application.Option;
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.deployer.Deployer;
 import com.bluexml.side.application.generator.AbstractGenerator;
+import com.bluexml.side.application.security.Checkable;
 
 public class Generate extends Thread {
 

@@ -1,7 +1,5 @@
-package com.bluexml.side.application.generator;
+package com.bluexml.side.application.security;
 
-import com.bluexml.side.application.security.KeyInformation;
-import com.bluexml.side.settings.SidePreferences;
 
 /**
  * 
@@ -9,6 +7,13 @@ import com.bluexml.side.settings.SidePreferences;
  * @author Benjamin CHEVALLEREAU
  */
 public class SecurityHelper {
+	
+	/**
+	 * Utility classes don't need to (and shouldn't) be instantiated.
+	 */
+	private SecurityHelper() {
+		// prevents instantiation
+	}
 
 	/**
 	 *  return true if the key of the KeyInformation is valid an possess the code
@@ -27,9 +32,9 @@ public class SecurityHelper {
 	 * @param generatorCode
 	 * @return true if the key is valid and has the code of the generator
 	 */
-	public static boolean check(String generatorCode) {
+	public static boolean check(String generatorCode,String Key) {
 		//Décoder la clef
-		KeyInformation ki = new KeyInformation(SidePreferences.getKey()); 
+		KeyInformation ki = new KeyInformation(Key); 
 		//Retourner le test sur la clef
 		return checkValidity(ki,generatorCode);
 	}

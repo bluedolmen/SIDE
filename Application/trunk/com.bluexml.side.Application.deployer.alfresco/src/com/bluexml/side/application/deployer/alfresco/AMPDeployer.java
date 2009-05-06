@@ -5,6 +5,8 @@ import java.io.File;
 import org.alfresco.repo.module.tool.ModuleManagementTool;
 
 import com.bluexml.side.application.deployer.Deployer;
+import com.bluexml.side.application.security.SecurityHelper;
+import com.bluexml.side.settings.SidePreferences;
 import com.bluexml.side.util.libs.FileHelper;
 
 /**
@@ -19,6 +21,8 @@ public class AMPDeployer extends Deployer {
 	static String webappName = "alfresco";
 	static final String alfrescoWar = webappName + ".war";
 	static final String alfrescoWarOrg = webappName + ".war.org";
+	//TODO mettre le vrai code
+	public static String DEPLOYER_CODE = "CODE_GED_G_W_ALFRESCO_30L";
 
 	
 
@@ -66,6 +70,15 @@ public class AMPDeployer extends Deployer {
 			FileHelper.copyFiles(alfWar, orgWar, true);
 		}
 		return alfWar;
+	}
+	
+	/**
+	 * This method check if the user have the license to use this deployer.
+	 * 
+	 * @return true if the deployer can be used.
+	 */
+	public boolean check(){
+		return SecurityHelper.check(DEPLOYER_CODE,SidePreferences.getKey());
 	}
 
 }

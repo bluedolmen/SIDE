@@ -7,9 +7,10 @@ import java.util.Map;
 import org.eclipse.core.resources.IFolder;
 
 import com.bluexml.side.application.StaticConfigurationParameters;
+import com.bluexml.side.application.security.Checkable;
 import com.bluexml.side.util.libs.IFileHelper;
 
-public abstract class AbstractGenerator implements IGenerator {
+public abstract class AbstractGenerator implements IGenerator,Checkable {
 
 	/**
 	 * generationParameters : the list of selected options for the generation
@@ -22,7 +23,7 @@ public abstract class AbstractGenerator implements IGenerator {
 	protected static Map<String, Boolean> generatorOptions = new HashMap<String, Boolean>();
 	protected static Map<String, String> configurationParameters = new HashMap<String, String>();
 	public static final String TEMP_FOLDER = "tmp";
-	public static String GENERATOR_CODE = "";
+	public static String GENERATOR_CODE = null;
 	protected static String techVersion = null;
 
 	public String getTechVersion() {
@@ -127,10 +128,5 @@ public abstract class AbstractGenerator implements IGenerator {
 		System.out.println("ConfigurationParameters :" + configurationParameters);
 		System.out.println("TechVersion :" + techVersion);
 		
-	}
-
-
-	public boolean check(){
-		return SecurityHelper.check(GENERATOR_CODE);
 	}
 }

@@ -11,9 +11,11 @@ import org.eclipse.emf.ecore.EObject;
 import com.bluexml.side.application.generator.AbstractGenerator;
 import com.bluexml.side.application.generator.XMLConflictResolver;
 import com.bluexml.side.application.generator.alfresco.AbstractAlfrescoGenerator;
+import com.bluexml.side.application.security.SecurityHelper;
+import com.bluexml.side.settings.SidePreferences;
 
 public class WorkflowGenerator extends AbstractAlfrescoGenerator {
-
+	public static String GENERATOR_CODE = "CODE_GED_G_W_ALFRESCO_30L";
 	XMLConflictResolver xmlresolver = null;
 
 	public XMLConflictResolver getXmlresolver() {
@@ -24,13 +26,6 @@ public class WorkflowGenerator extends AbstractAlfrescoGenerator {
 	}
 
 	protected Properties moduleProperties;
-
-	
-
-	public boolean check() {
-		// Already usable
-		return true;
-	}
 
 	@Override
 	protected String getMetamodelURI() {
@@ -89,5 +84,14 @@ public class WorkflowGenerator extends AbstractAlfrescoGenerator {
 		}
 		return AbstractGenerator.generationParameters.get("com.bluexml.side.Class.generator.alfresco.module.id");
 	}
-
+	
+	/**
+	 * This method check if the user have the license to use this generator.
+	 * 
+	 * @return true if the generator can be used.
+	 */
+	public boolean check(){
+		return SecurityHelper.check(GENERATOR_CODE,SidePreferences.getKey());
+	}
+	
 }

@@ -19,3 +19,5 @@ Bundle-ClassPath: lib/,
  lib/truezip.jar,
  .
 Export-Package: com.bluexml.side.application.deployer.alfresco
+Import-Package: com.bluexml.side.application.security,
+ com.bluexml.side.settings

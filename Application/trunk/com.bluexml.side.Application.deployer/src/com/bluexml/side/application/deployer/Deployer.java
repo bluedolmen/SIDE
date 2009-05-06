@@ -10,14 +10,16 @@ import java.util.Map;
 import com.bluexml.side.application.Option;
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.util.libs.IFileHelper;
+import com.bluexml.side.application.security.Checkable;
 /**
  * @author davidabad
  * generic Deployer must be implemented to match with target technology
  */
-public abstract class Deployer {
+public abstract class Deployer implements Checkable{
 	String workingDirKey = "generation.options.destinationPath";
 	private Map<String, String> configurationParameters;
 	private Map<String, String> generationParameters;
+	public static String DEPLOYER_CODE = null;
 	
 	
 	public Map<String, String> getGenerationParameters() {

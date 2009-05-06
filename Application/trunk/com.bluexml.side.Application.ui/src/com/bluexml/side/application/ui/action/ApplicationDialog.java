@@ -3,6 +3,8 @@ package com.bluexml.side.application.ui.action;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -10,6 +12,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.swing.JOptionPane;
 
 import org.eclipse.core.internal.resources.Folder;
 import org.eclipse.core.resources.IFile;
@@ -25,6 +29,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
@@ -69,6 +74,7 @@ import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
 import org.eclipse.ui.dialogs.ISelectionStatusValidator;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
+import org.osgi.framework.Bundle;
 
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationFactory;
@@ -79,6 +85,8 @@ import com.bluexml.side.application.ConfigurationParameters;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.Option;
+import com.bluexml.side.application.generator.AbstractGenerator;
+import com.bluexml.side.application.security.Checkable;
 import com.bluexml.side.application.ui.SWTResourceManager;
 import com.bluexml.side.application.ui.action.table.GeneratorParameter;
 import com.bluexml.side.application.ui.action.table.GeneratorParameterCellModifier;
@@ -467,7 +475,6 @@ public class ApplicationDialog extends Dialog {
 					if (el.isChecked()) {
 						// Enable all sub elements
 						enableAllSubElements(item);
-
 						/*
 						 * 
 						 * // Unckeck all sibling nodes if (!(el instanceof
@@ -479,7 +486,26 @@ public class ApplicationDialog extends Dialog {
 						 * viewer.update(subEl, null); } } }
 						 */
 						if (el instanceof ImplNode) {
-							refreshImplNodeOptions();
+							//Check if the generator is valid
+							try {
+								ImplNode iN = ((ImplNode) el);
+								Class<Checkable> gen =  Platform.getBundle( iN.getId()).loadClass(iN.getLaunchClass());
+								Checkable gener = gen.newInstance();
+
+								if (!gener.check()){
+									MessageDialog.openInformation(null, "Component not valid", "This component is not active");
+								}
+							} catch (SecurityException e) {
+								e.printStackTrace();
+							} catch (IllegalArgumentException e) {
+								e.printStackTrace();
+							} catch (IllegalAccessException e) {
+								e.printStackTrace();
+							} catch (ClassNotFoundException e) {
+								e.printStackTrace();
+							} catch (InstantiationException e) {
+								e.printStackTrace();
+							}
 						}
 					} else {
 						// Enable all sub elements

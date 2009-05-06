@@ -13,6 +13,8 @@ import org.eclipse.emf.ecore.EObject;
 import com.bluexml.side.application.generator.AbstractGenerator;
 import com.bluexml.side.application.generator.XMLConflictResolver;
 import com.bluexml.side.application.generator.alfresco.AbstractAlfrescoGenerator;
+import com.bluexml.side.application.security.SecurityHelper;
+import com.bluexml.side.settings.SidePreferences;
 
 public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
@@ -22,7 +24,8 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
 	public static String GENERATOR_OPTIONS_DATAMODEL = "alfresco.dataModel";
 	public static String GENERATOR_OPTIONS_SHARE_EXTENSION = "alfresco.share.extension";
-
+	public static String GENERATOR_CODE = "CODE_GED_G_C_ALFRESCO_30L";
+	
 	XMLConflictResolver xmlresolver = null;
 
 	public XMLConflictResolver getXmlresolver() {
@@ -80,10 +83,6 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	@Override
 	protected List<String> getTemplates() {
 		return getClassTemplates();
-	}
-
-	public boolean check() {
-		return true;
 	}
 
 	public Collection<IFile> complete() throws Exception {
@@ -153,5 +152,14 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 			return buildModuleProperties().getProperty("module.id");
 		}
 		return AbstractGenerator.generationParameters.get("com.bluexml.side.Class.generator.alfresco.module.id");
+	}
+	
+	/**
+	 * This method check if the user have the license to use this generator.
+	 * 
+	 * @return true if the generator can be used.
+	 */
+	public boolean check(){
+		return SecurityHelper.check(GENERATOR_CODE,SidePreferences.getKey());
 	}
 }

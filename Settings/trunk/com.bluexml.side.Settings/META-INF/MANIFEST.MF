@@ -10,3 +10,5 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.Application.security;bundle-version="1.0.0"
 Eclipse-LazyStart: true
 Export-Package: com.bluexml.side.settings
+Import-Package: com.bluexml.side.util.libs,
+ com.bluexml.side.util.libs.md5

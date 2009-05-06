@@ -7,6 +7,9 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 
+import com.bluexml.side.application.security.SecurityHelper;
+import com.bluexml.side.settings.SidePreferences;
+
 public interface IGenerator {
 
 	/**
@@ -23,14 +26,7 @@ public interface IGenerator {
 	public void initialize(Map<String, String> generationParameters,
 			Map<String, Boolean> generatorOptions,
 			Map<String, String> configurationParameters, String techVersion_);
-
-	/**
-	 * This method check if the user have the license to use this generator.
-	 * 
-	 * @return true if the generator can be used.
-	 */
-	public boolean check();
-
+	
 	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo,
 			String id_metamodel);
 	

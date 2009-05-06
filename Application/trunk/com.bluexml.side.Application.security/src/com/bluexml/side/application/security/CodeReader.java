@@ -28,7 +28,7 @@ import java.util.HashMap;
  * 
  * @author <a href="mailto:pbertrand@bluexml.com">Pierre BERTRAND</a>
  */
-public class CodeReader implements GeneratorConstants {
+public class CodeReader implements SecurityConstants {
 	// This hashmap contains the values of the codes, the key is the
 	// denomination of the code and refers to its integer value
 	private static HashMap<String, Integer> codeTable = makeHashTable();
@@ -47,7 +47,7 @@ public class CodeReader implements GeneratorConstants {
 	private static HashMap<String, Integer> makeHashTable() {
 		HashMap<String, Integer> tableOfCode = new HashMap<String, Integer>();
 		InputStream ipsCODE = null;
-		ipsCODE = System.class.getClass().getResourceAsStream(FILE_PATH_CODE);
+		ipsCODE = CodeReader.class.getResourceAsStream(FILE_NAME);
 		InputStreamReader ipsrCODE = new InputStreamReader(ipsCODE);
 		BufferedReader brCODE = new BufferedReader(ipsrCODE);
 		String ligneCODE;
