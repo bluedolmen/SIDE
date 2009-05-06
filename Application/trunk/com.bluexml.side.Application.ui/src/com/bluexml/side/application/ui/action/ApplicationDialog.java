@@ -3,8 +3,6 @@ package com.bluexml.side.application.ui.action;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -12,8 +10,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import javax.swing.JOptionPane;
 
 import org.eclipse.core.internal.resources.Folder;
 import org.eclipse.core.resources.IFile;
@@ -50,6 +46,7 @@ import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
@@ -74,7 +71,6 @@ import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
 import org.eclipse.ui.dialogs.ISelectionStatusValidator;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
-import org.osgi.framework.Bundle;
 
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationFactory;
@@ -85,7 +81,6 @@ import com.bluexml.side.application.ConfigurationParameters;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.Option;
-import com.bluexml.side.application.generator.AbstractGenerator;
 import com.bluexml.side.application.security.Checkable;
 import com.bluexml.side.application.ui.SWTResourceManager;
 import com.bluexml.side.application.ui.action.table.GeneratorParameter;
@@ -112,6 +107,7 @@ public class ApplicationDialog extends Dialog {
 	private static final int APPLY_ID = IDialogConstants.CLIENT_ID + 2;
 	private static final int GEN_ID = IDialogConstants.CLIENT_ID + 1;
 	private Text config_description;
+	private Label component_validity;
 	private TreeViewer viewer;
 	private Tree tree_1;
 	private static Combo configurationList;
@@ -371,17 +367,52 @@ public class ApplicationDialog extends Dialog {
 	private void initializeTree(TreeItem[] items) {
 		for (TreeItem item : items) {
 			TreeElement el = (TreeElement) item.getData();
-			el.setChecked(false);
-			el.setEnabled(false);
-			if (item.getData() instanceof Metamodel)
-				el.setEnabled(true);
+			//Check if el is active or not in the key if it is a component
+			if (el instanceof ImplNode) {
+				if (!checkElementValidity(el)){
+					el.setChecked(false);
+					el.setEnabled(false);
+				}
+				else
+					initializeTree(item.getItems());
+				viewer.update(item.getData(), null);
+			}
+			//if el is not a component
+			else{
+				el.setChecked(false);
+				el.setEnabled(false);
 
-			viewer.update(item.getData(), null);
-
-			initializeTree(item.getItems());
+				if (item.getData() instanceof Metamodel)
+					el.setEnabled(true);
+				viewer.update(item.getData(), null);
+				initializeTree(item.getItems());
+			}
 		}
 	}
 
+	/**
+	 * Check if the element given is active in the key
+	 * @param el : the element
+	 * @return true if valid, false if not
+	 */
+	private Boolean checkElementValidity(TreeElement el){
+		//If the element is a component and not valid we don't enable it
+		try {
+			ImplNode iN = ((ImplNode) el);
+			Class<Checkable> gen;
+			gen = Platform.getBundle( iN.getId()).loadClass(iN.getLaunchClass());
+			Checkable gener = gen.newInstance();
+			return gener.check();
+		} catch (ClassNotFoundException e){
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	/**
 	 * Open file dialog box to select files (here a model)
 	 */
@@ -431,12 +462,9 @@ public class ApplicationDialog extends Dialog {
 		Composite container = (Composite) super.createDialogArea(parent);
 		container.setLayout(null);
 
-		documentationText = new Browser(container, SWT.NONE);
-		documentationText.setBounds(493, 67, 297, 436);
-
 		tabFolder = new TabFolder(container, SWT.NONE);
 
-		tabFolder.setBounds(15, 39, 472, 464);
+		tabFolder.setBounds(15, 39, 472, 484);
 
 		final TabItem globalConfigurationTabItem = new TabItem(tabFolder, SWT.NONE);
 		globalConfigurationTabItem.setText("Global Configuration");
@@ -465,6 +493,17 @@ public class ApplicationDialog extends Dialog {
 				TreeItem item = (TreeItem) event.item;
 				TreeElement el = (TreeElement) item.getData();
 
+				//Check if el is active or not in the key if it is a component
+				if (el instanceof ImplNode) {
+					if (!checkElementValidity(el)){
+						component_validity.setText("This element is not active in your key");
+					} else{
+						component_validity.setText("");
+					}
+				} else{
+					component_validity.setText("");
+				}
+
 				// Check if enabled
 				if (el.isEnabled()) {
 
@@ -485,28 +524,6 @@ public class ApplicationDialog extends Dialog {
 						 * subEl.setChecked(false); disableAllSubElements(ti);
 						 * viewer.update(subEl, null); } } }
 						 */
-						if (el instanceof ImplNode) {
-							//Check if the generator is valid
-							try {
-								ImplNode iN = ((ImplNode) el);
-								Class<Checkable> gen =  Platform.getBundle( iN.getId()).loadClass(iN.getLaunchClass());
-								Checkable gener = gen.newInstance();
-
-								if (!gener.check()){
-									MessageDialog.openInformation(null, "Component not valid", "This component is not active");
-								}
-							} catch (SecurityException e) {
-								e.printStackTrace();
-							} catch (IllegalArgumentException e) {
-								e.printStackTrace();
-							} catch (IllegalAccessException e) {
-								e.printStackTrace();
-							} catch (ClassNotFoundException e) {
-								e.printStackTrace();
-							} catch (InstantiationException e) {
-								e.printStackTrace();
-							}
-						}
 					} else {
 						// Enable all sub elements
 						disableAllSubElements(item);
@@ -518,7 +535,14 @@ public class ApplicationDialog extends Dialog {
 			private void enableAllSubElements(TreeItem item) {
 				for (TreeItem ti : item.getItems()) {
 					TreeElement el = (TreeElement) ti.getData();
-					if (!el.isEnabled()) {
+					//Check the validity if the component
+					if (el instanceof ImplNode) {
+						if (checkElementValidity(el)){
+							el.setEnabled(true);
+						}
+						viewer.update(el, null);
+					}
+					else if (!el.isEnabled()) {
 						el.setEnabled(true);
 						viewer.update(el, null);
 					}
@@ -716,10 +740,10 @@ public class ApplicationDialog extends Dialog {
 		final TabItem modelsTabItem = new TabItem(tabFolder, SWT.NONE);
 		modelsTabItem.setText("Models");
 
-		final Composite composite = new Composite(tabFolder, SWT.NONE);
-		modelsTabItem.setControl(composite);
+		final Composite composite_3 = new Composite(tabFolder, SWT.NONE);
+		modelsTabItem.setControl(composite_3);
 
-		final Button addModelButton = new Button(composite, SWT.NONE);
+		final Button addModelButton = new Button(composite_3, SWT.NONE);
 		addModelButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
 				SelectModelFileDialog();
@@ -728,7 +752,7 @@ public class ApplicationDialog extends Dialog {
 		addModelButton.setText("Add Model");
 		addModelButton.setBounds(10, 175, 130, 25);
 
-		list = new org.eclipse.swt.widgets.List(composite, SWT.BORDER);
+		list = new org.eclipse.swt.widgets.List(composite_3, SWT.BORDER);
 		list.setBounds(10, 38, 444, 115);
 
 		for (ModelElement elem : application.getElements()) {
@@ -738,7 +762,7 @@ public class ApplicationDialog extends Dialog {
 			}
 		}
 
-		final Button removeModelButton = new Button(composite, SWT.NONE);
+		final Button removeModelButton = new Button(composite_3, SWT.NONE);
 		removeModelButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
 				int select = list.getSelectionIndex();
@@ -753,14 +777,25 @@ public class ApplicationDialog extends Dialog {
 		removeModelButton.setText("Remove Model");
 		removeModelButton.setBounds(146, 175, 130, 25);
 
-		final Label generationsOptionsLabel_2 = new Label(composite, SWT.NONE);
+		final Label generationsOptionsLabel_2 = new Label(composite_3, SWT.NONE);
 		generationsOptionsLabel_2.setBounds(10, 8, 240, 24);
 		generationsOptionsLabel_2.setFont(SWTResourceManager.getFont("", 12, SWT.BOLD));
 		generationsOptionsLabel_2.setText("Model Lists");
 
+		// Component thaht shows the description in the top right of the scree
 		config_description = new Text(container, SWT.READ_ONLY | SWT.BORDER | SWT.WRAP);
 		config_description.setBounds(493, 10, 297, 51);
-
+		
+		// Show a warning if the component is not valid
+		component_validity = new Label(container, SWT.BOLD);
+		component_validity.setBounds(493, 67, 297, 15);
+		component_validity.setForeground(new Color(container.getDisplay(),255,0,0));
+		
+		// Browser that shows informations on the selected component (right)
+		documentationText = new Browser(container, SWT.BORDER);
+		documentationText.setBounds(493, 89, 297, 432);
+		documentationText.setText(buildHelpDocumentationText(""));
+		
 		configurationList = new Combo(container, SWT.READ_ONLY);
 		configurationList.setBounds(128, 10, 191, 23);
 		configurationList.addSelectionListener(new SelectionAdapter() {

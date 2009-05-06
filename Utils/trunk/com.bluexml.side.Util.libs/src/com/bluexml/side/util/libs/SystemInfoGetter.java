@@ -18,19 +18,28 @@ public class SystemInfoGetter {
 		}
 		else{
 			nomMachine = System.getenv("HOST");
+			nomMachine = nomMachine.split("/")[1];
 		}
 		return nomMachine;
 	}
 	
+	/**
+	 * Parse the 5 first letters of the host name and hash it with md5
+	 * @return the host name hashed in md5
+	 */
 	public static String getHostWithHash(){
+		String result  = "";
 		try {
-			return MD5Hasher.hash(getHostName());
+			result=getHostName();
+			if (result.length()>=5)
+				result.substring(0, 5);
+			result =MD5Hasher.hash(result);
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		return "";
+		return result;
 	}
 
 }
