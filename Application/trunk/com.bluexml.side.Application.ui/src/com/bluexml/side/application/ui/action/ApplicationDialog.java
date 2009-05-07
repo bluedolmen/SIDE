@@ -1285,7 +1285,7 @@ public class ApplicationDialog extends Dialog {
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, GEN_ID, "Generate", false);
+		createButton(parent, GEN_ID, "Launch", false);
 		createButton(parent, APPLY_ID, "Save", false);
 		createButton(parent, IDialogConstants.CLOSE_ID, "Close", false);
 	}

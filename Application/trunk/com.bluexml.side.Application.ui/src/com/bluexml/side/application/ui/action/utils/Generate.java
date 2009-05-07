@@ -11,9 +11,13 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
@@ -24,23 +28,22 @@ import org.osgi.framework.Bundle;
 
 import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.application.Configuration;
-import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.ConfigurationParameters;
 import com.bluexml.side.application.DeployerConfiguration;
+import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.Option;
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.deployer.Deployer;
 import com.bluexml.side.application.generator.AbstractGenerator;
-import com.bluexml.side.application.security.Checkable;
 
 public class Generate extends Thread {
 
-	private static int NB_GENERATION_STEP = 5;
-	private static int NB_DEPLOY_STEP = 4;
-	private static ProgressBar progressBar;
-	private static Label label;
-	private static StyledText styletext;
+	private int NB_GENERATION_STEP = 6;
+	private int NB_DEPLOY_STEP = 4;
+	private ProgressBar progressBar;
+	private Label label;
+	private StyledText styletext;
 
 	/**
 	 * Launch generation on all generator version selected
@@ -56,7 +59,7 @@ public class Generate extends Thread {
 	 * @throws IllegalAccessException
 	 * @throws IOException
 	 */
-	public static void run(Configuration configuration, List<String> staticParameters, List<Model> models, ProgressBar p_progressBar, Label p_label, StyledText p_styletext) throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
+	public void run(Configuration configuration, List<String> staticParameters, List<Model> models, ProgressBar p_progressBar, Label p_label, StyledText p_styletext) throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
 
 		progressBar = p_progressBar;
 		label = p_label;
@@ -70,7 +73,7 @@ public class Generate extends Thread {
 			e.printStackTrace();
 		}
 
-		// Secondly we seek the generator parameters, and separate static fields
+		// Secondly we seek the generator parameters, and separate fields
 		// of dynamic fields
 		Map<String, String> configurationParameters = new HashMap<String, String>();
 		Map<String, String> generationParameters = new HashMap<String, String>();
@@ -93,19 +96,19 @@ public class Generate extends Thread {
 		generate(configuration, modelsInfo, configurationParameters, generationParameters);
 	}
 
-	static private void addText(String text) {
+	private void addText(String text) {
 		addText(text, SWT.COLOR_BLACK);
 	}
 
-	static private void addErrorText(String text) {
+	private void addErrorText(String text) {
 		addText(text, SWT.COLOR_RED);
 	}
 
-	static private void addWarningText(String text) {
+	private void addWarningText(String text) {
 		addText(text, SWT.COLOR_DARK_YELLOW);
 	}
 
-	static private void addText(String text, int color) {
+	private void addText(String text, int color) {
 		StyleRange style2 = new StyleRange();
 		style2.start = styletext.getText().length();
 		style2.length = text.length();
@@ -114,7 +117,7 @@ public class Generate extends Thread {
 		styletext.setStyleRange(style2);
 	}
 
-	private static void generate(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) throws ClassNotFoundException, InstantiationException,
+	private void generate(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) throws ClassNotFoundException, InstantiationException,
 			IllegalAccessException {
 
 		Display.getDefault().asyncExec(new Runnable() {
@@ -135,7 +138,7 @@ public class Generate extends Thread {
 
 	}
 
-	private static boolean generate_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) {
+	private boolean generate_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) {
 		// For all generator version we will call generation method
 		int nbTask = configuration.getGeneratorConfigurations().size() * NB_GENERATION_STEP;
 		progressBar.setMaximum(nbTask);
@@ -151,7 +154,6 @@ public class Generate extends Thread {
 			Object genObj = null;
 			try {
 				gen = plugin.loadClass(launchGeneratorClass);
-				// gen = Class.forName(launchGeneratorClass);
 				genObj = gen.newInstance();
 			} catch (ClassNotFoundException e1) {
 				error = true;
@@ -207,7 +209,7 @@ public class Generate extends Thread {
 
 						} catch (Exception e) {
 							error = true;
-							addErrorText(System.getProperty("line.separator") + "ERROR : " + (e.getMessage() != null ? e.getMessage() : "") + " see log file.");
+							addErrorText(System.getProperty("line.separator") + "ERROR : " + (e.getMessage() != null ? e.getMessage() : ""));
 							e.printStackTrace();
 						}
 						addOneStep(progressBar);
@@ -218,18 +220,19 @@ public class Generate extends Thread {
 		return error;
 	}
 
-	private static void addOneStep(ProgressBar progressBar) {
+
+	private void addOneStep(ProgressBar progressBar) {
 		progressBar.setSelection(progressBar.getSelection() + 1);
 	}
 
-	public static boolean doDeploy(Map<String, String> configurationParameters) {
+	public boolean doDeploy(Map<String, String> configurationParameters) {
 		if (configurationParameters != null && configurationParameters.containsKey(StaticConfigurationParameters.GENERATIONOPTIONSUPDATE_TGT.getLiteral())) {
 			return Boolean.parseBoolean(configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSUPDATE_TGT.getLiteral()));
 		}
 		return false;
 	}
 
-	private static boolean deploy_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) {
+	private boolean deploy_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) {
 		progressBar.setSelection(0);
 		int nbTask = configuration.getDeployerConfigurations().size() * NB_DEPLOY_STEP;
 		progressBar.setMaximum(nbTask);
@@ -283,7 +286,7 @@ public class Generate extends Thread {
 	 * @throws IOException
 	 * @throws IOException
 	 */
-	private static Map<String, List<IFile>> getAssociatedMetaModel(List<Model> models) throws IOException {
+	private Map<String, List<IFile>> getAssociatedMetaModel(List<Model> models) throws IOException {
 		Map<String, List<IFile>> result = new HashMap<String, List<IFile>>();
 		for (Model model : models) {
 			Resource modelResource = null;
@@ -321,9 +324,59 @@ public class Generate extends Thread {
 					throw new IOException("No model found at " + file.getFullPath());
 				}
 			}
-
+			
+			//TODO : DO VALIDATE
+			EObject te = getRootElement(loadedModel);
+			if (te != null) {
+				label.setText("Validating model " + loadedModel.getURI());
+				if (!validate(te)) {
+					throw new IOException("You have error in your model (" + file.getFullPath() + "), please run validate on first element of your model and correct error(s).");
+				}
+				addOneStep(progressBar);
+			} else {
+				throw new IOException("No root element found in " + file.getFullPath() + ". Model empty?");
+			}
 		}
 		return result;
+	}
+	
+	/**
+	 * Launch validation on given EObject
+	 * @param eo
+	 * @return
+	 */
+	private boolean validate(EObject eo) {
+		Diagnostician diag = new Diagnostician();
+		BasicDiagnostic diagnostics = diag.createDefaultDiagnostic(eo);
+		return diag.validate(eo, diagnostics);
+	}
+
+	/**
+	 * Return the root element of a model
+	 * @param model
+	 * @return
+	 */
+	private EObject getRootElement(Resource model) {
+		EObject te = null;
+		if (model.getContents() != null && model.getContents().size() > 0) {
+			EObject eo = model.getContents().get(0);
+			te = getTopElement(eo);
+			
+		}
+		return te;
+	}
+
+	/**
+	 * Take a EObject and will return the top container
+	 * @param eo
+	 * @return
+	 */
+	private EObject getTopElement(EObject eo) {
+		if (eo.eContainer() != null) {
+			return getTopElement(eo.eContainer());
+		} else {
+			return eo;
+		}
 	}
 
 	/**
@@ -332,7 +385,7 @@ public class Generate extends Thread {
 	 * @param r
 	 * @return
 	 */
-	public static EPackage getMetaModelEpackage(Resource r) {
+	public EPackage getMetaModelEpackage(Resource r) {
 		EPackage result = null;
 		if (r != null) {
 			if (r.getContents() != null && r.getContents().size() > 0) {

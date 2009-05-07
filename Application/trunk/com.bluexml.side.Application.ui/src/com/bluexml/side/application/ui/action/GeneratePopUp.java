@@ -72,7 +72,8 @@ public class GeneratePopUp extends Dialog {
 		styletext.setBounds(10, 135, 464, 128);
 		
 		try {
-			Generate.run(configuration, staticParameters, models, progressBar, label, styletext);
+			Generate gen = new Generate();
+			gen.run(configuration, staticParameters, models, progressBar, label, styletext);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
