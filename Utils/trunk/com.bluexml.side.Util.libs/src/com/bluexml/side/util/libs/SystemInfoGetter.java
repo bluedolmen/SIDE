@@ -18,11 +18,11 @@ public class SystemInfoGetter {
 		}
 		else{
 			nomMachine = System.getenv("HOST");
-			if (!nomMachine.equals(null))
+			if (nomMachine != null)
 				nomMachine = nomMachine.split("/")[1];
 		}
-		if (nomMachine.equals(null))
-			System.getProperty("user.name");
+		if (nomMachine == null)
+			nomMachine = System.getProperty("user.name");
 		return nomMachine;
 	}
 	
