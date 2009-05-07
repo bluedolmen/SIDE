@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import com.bluexml.side.application.generator.AbstractGenerator;
-import com.bluexml.side.application.security.Checkable;
 import com.bluexml.side.application.generator.ConflitResolverHelper;
 import com.bluexml.side.application.generator.acceleo.chain.CustomCChain;
 
@@ -64,7 +63,9 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 	abstract protected String getMetamodelURI();
 
 	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo, String id_metamodel) {
-		return modelsInfo.containsKey(id_metamodel);
+		boolean shouldGenerate =false;
+		shouldGenerate = check() && modelsInfo.containsKey(id_metamodel); 
+		return shouldGenerate;
 	}
 
 	public Collection<IFile> generate(HashMap<String, List<IFile>> modelsInfo, String id_metamodel) throws Exception {
