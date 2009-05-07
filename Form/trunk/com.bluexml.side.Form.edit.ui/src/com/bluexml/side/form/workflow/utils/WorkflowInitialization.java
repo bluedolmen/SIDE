@@ -58,7 +58,7 @@ public class WorkflowInitialization {
 				
 				// For each task we create a form
 				for (State s : l) {
-					FormWorkflow fw = createTaskForForm(s); 
+					FormWorkflow fw = createTaskForForm(p, s); 
 					
 					lf.add(fw);
 				}
@@ -73,14 +73,16 @@ public class WorkflowInitialization {
 	
 	/**
 	 * Return a form a Task
+	 * @param p 
 	 * @param s
 	 * @return
 	 */
-	public static FormWorkflow createTaskForForm(State s) {
+	public static FormWorkflow createTaskForForm(Process p, State s) {
 		FormWorkflow fw = FormFactory.eINSTANCE.createFormWorkflow();
-		fw.setId(s.getName());
+		fw.setId(p.getName() + "_" + s.getName());
 		fw.setLabel(s.getName());
 		fw.setName(s.getName());
+		fw.setRef(s);
 		
 		if (s instanceof UserTask) {
 			UserTask ut = (UserTask) s;

@@ -59,14 +59,14 @@ public class WorkflowSynchronizationUtils {
 		taskList.add(st.getName());
 		
 		// We manage all add and update
-		c = synchronizeTask(st);
+		c = synchronizeTask(p, st);
 		if (c != null && c.canExecute()) {
 			cc.append(c);
 		}
 
 		for (TaskNode t : p.getTasknode()) {
 			c = null;
-			c = synchronizeTask(t);
+			c = synchronizeTask(p, t);
 			taskList.add(t.getName());
 			if (c != null  && c.canExecute()) {
 				cc.append(c);
@@ -89,11 +89,12 @@ public class WorkflowSynchronizationUtils {
 
 	/**
 	 * Will synchronize the given task with the form
+	 * @param p 
 	 * 
 	 * @param st
 	 * @return
 	 */
-	private static Command synchronizeTask(UserTask st) {
+	private static Command synchronizeTask(Process p, UserTask st) {
 		Command c = null;
 		if (formList == null) {
 			buildFormsList();
@@ -141,7 +142,7 @@ public class WorkflowSynchronizationUtils {
 			}
 		} else {
 			// If no, we add it
-			FormWorkflow fw = WorkflowInitialization.createTaskForForm(st);
+			FormWorkflow fw = WorkflowInitialization.createTaskForForm(p, st);
 			c = AddCommand.create(domain, fc, FormPackage.eINSTANCE
 					.getFormCollection_Forms(), fw);
 		}
