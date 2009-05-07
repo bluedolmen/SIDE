@@ -2,6 +2,8 @@ package com.bluexml.side.settings;
 
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -38,6 +40,9 @@ public class SideSettingsPreferencesPage
 		Text textNomMachine = new Text(entryTable,SWT.NONE);
 		textNomMachine.setEditable(false);
 		textNomMachine.setText(nomMachine);
+		Browser link = new Browser(entryTable, SWT.NONE);
+		link.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+		link.setText("To register go to the <a href=\"http://www.bluexml.com/v2/key-management/\" target=\"blank\">Key management page</A> on our website.");
 		return entryTable;
 	}
 

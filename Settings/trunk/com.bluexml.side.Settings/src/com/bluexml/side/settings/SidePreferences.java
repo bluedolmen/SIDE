@@ -15,4 +15,8 @@ public class SidePreferences {
 	public static String getKey(){
 		return Activator.getDefault().getPreferenceStore().getString(Activator.KEY_PREFERENCE);
 	}
+
+	public static void setDefaultKey() {
+		Activator.getDefault().getPreferenceStore().setValue(Activator.KEY_PREFERENCE, Activator.KEY_DEFAULT);
+	}
 }

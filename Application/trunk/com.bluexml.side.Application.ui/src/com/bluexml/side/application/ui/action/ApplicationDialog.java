@@ -366,26 +366,13 @@ public class ApplicationDialog extends Dialog {
 	private void initializeTree(TreeItem[] items) {
 		for (TreeItem item : items) {
 			TreeElement el = (TreeElement) item.getData();
-			//Check if el is active or not in the key if it is a component
-			if (el instanceof ImplNode) {
-				if (!checkElementValidity(el)){
-					el.setChecked(false);
-					el.setEnabled(false);
-				}
-				else
-					initializeTree(item.getItems());
-				viewer.update(item.getData(), null);
-			}
-			//if el is not a component
-			else{
-				el.setChecked(false);
-				el.setEnabled(false);
+			el.setChecked(false);
+			el.setEnabled(false);
 
-				if (item.getData() instanceof Metamodel)
-					el.setEnabled(true);
-				viewer.update(item.getData(), null);
-				initializeTree(item.getItems());
-			}
+			if (item.getData() instanceof Metamodel)
+				el.setEnabled(true);
+			viewer.update(item.getData(), null);
+			initializeTree(item.getItems());
 		}
 	}
 
@@ -1134,11 +1121,14 @@ public class ApplicationDialog extends Dialog {
 							for (IConfigurationElement gen : technoV.getChildren("generatorVersion")) {
 								Generator g = null;
 								String genId = gen.getAttribute("id");
+								
+								Checkable genTemp = (Checkable) tv.getChild(genId);
 								if (tv.contains(genId)) {
 									g = (Generator) tv.getChild(genId);
 								} else {
 									g = new Generator(gen, tv);
 								}
+								//g.setChecked(genTemp.check());
 
 								// Scan for option
 								for (IConfigurationElement option : gen.getChildren("option")) {
@@ -1160,11 +1150,13 @@ public class ApplicationDialog extends Dialog {
 							for (IConfigurationElement gen : technoV.getChildren("deployerVersion")) {
 								Deployer d = null;
 								String depId = gen.getAttribute("id");
+								Checkable depTemp = (Checkable) tv.getChild(depId);
 								if (tv.contains(depId)) {
 									d = (Deployer) tv.getChild(depId);
 								} else {
 									d = new Deployer(gen, tv);
 								}
+								//d.setChecked(depTemp.check());
 
 								// Scan for option
 								for (IConfigurationElement option : gen.getChildren("option")) {

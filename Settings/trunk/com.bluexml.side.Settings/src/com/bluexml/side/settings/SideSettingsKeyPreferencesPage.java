@@ -1,16 +1,19 @@
 package com.bluexml.side.settings;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
@@ -21,12 +24,16 @@ import com.bluexml.side.application.security.KeyInformation;
  * The home of the preferences in S-IDE
  */
 
-public class SideSettingsKeyPreferencePage
+public class SideSettingsKeyPreferencesPage
 	extends PreferencePage
 	implements IWorkbenchPreferencePage {
+	private Label lbl;
 	private Label lblValidity;
+	private static final String validationTextOk ="Your key is valid until ";
+	private static final String validationTextKo ="Your key is not valid.";
+	private Label validationDate;
 	private Text key;
-
+	
 	/*
 	 * @see PreferencePage#createContents(Composite)
 	 */
@@ -34,26 +41,33 @@ public class SideSettingsKeyPreferencePage
 		Composite entryTable = new Composite(parent, SWT.NULL);
 
 		GridLayout layout = new GridLayout();
-		layout.numColumns = 3;
+		layout.numColumns = 2;
 		entryTable.setLayout(layout);
 
-		Label lbl = new Label(entryTable,SWT.NONE);
-		lbl.setText("Licence Key");
-		
-		key = new Text(entryTable,SWT.NONE);
+		lblValidity = new Label(entryTable, SWT.RIGHT);
+		lblValidity.setAlignment(SWT.RIGHT);
+		lblValidity.setFont(new Font(entryTable.getDisplay(), "Courier New", 12, SWT.BOLD));
+
+		lbl = new Label(entryTable,SWT.NONE);
+		lbl.setLayoutData(new GridData());
+		lbl.setText("Licence Key :");
+
+		key = new Text(entryTable, SWT.BORDER);
 		key.setText(SidePreferences.getKey());
-		key.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		key.addListener(SWT.Modify, new Listener() {
-			public void handleEvent(Event event) {
+		key.addModifyListener(new ModifyListener() {
+			public void modifyText(final ModifyEvent e) {
 				check();
 			}
-        });
+		});
+		final GridData gd_key = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
+		key.setLayoutData(gd_key);
 
+		validationDate = new Label(entryTable, SWT.NONE);
+		final GridData gd_validationDate = new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1);
+		validationDate.setLayoutData(gd_validationDate);
 		
-		lblValidity = new Label(entryTable,SWT.NONE);
-		lblValidity.setFont(new Font(lblValidity.getDisplay(),"Arial",12,SWT.BOLD));
+		
 		check();
-
 		return entryTable;
 	}
 
@@ -72,7 +86,7 @@ public class SideSettingsKeyPreferencePage
 	 * store.
 	 */
 	protected void performDefaults() {
-		key.setText(Activator.KEY_DEFAULT);
+		SidePreferences.setDefaultKey();
 		performOk();
 	}
 	/** 
@@ -86,13 +100,16 @@ public class SideSettingsKeyPreferencePage
 	
 	private void check(){
 		KeyInformation ki = new KeyInformation(key.getText());
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 		if (ki.getValidity()){
-			lblValidity.setForeground(new Color(lblValidity.getDisplay(),120,255,120));
+			lblValidity.setForeground(new Color(lblValidity.getDisplay(),66,255,66));
 			lblValidity.setText("OK");
+			validationDate.setText(validationTextOk + df.format(ki.getValidationDate())+".");
 		}
 		else{
 			lblValidity.setForeground(new Color(lblValidity.getDisplay(),255,33,33));
 			lblValidity.setText("KO");
+			validationDate.setText(validationTextKo);
 		}
 	}
 }
