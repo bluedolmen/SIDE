@@ -15,7 +15,7 @@ import com.bluexml.side.application.security.*;
 import com.bluexml.side.settings.SidePreferences;
 
 public class WorkflowGenerator extends AbstractAlfrescoGenerator {
-	public static String GENERATOR_CODE = "CODE_GED_G_W_ALFRESCO_30L";
+	public static String GENERATOR_CODE = "CODE_GED_G_W_ALFRESCO_3";
 	XMLConflictResolver xmlresolver = null;
 
 	public XMLConflictResolver getXmlresolver() {

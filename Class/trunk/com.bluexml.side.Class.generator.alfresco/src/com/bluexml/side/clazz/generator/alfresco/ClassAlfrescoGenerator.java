@@ -24,7 +24,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
 	public static String GENERATOR_OPTIONS_DATAMODEL = "alfresco.dataModel";
 	public static String GENERATOR_OPTIONS_SHARE_EXTENSION = "alfresco.share.extension";
-	public static String GENERATOR_CODE = "CODE_GED_G_C_ALFRESCO_30L";
+	public static String GENERATOR_CODE = "CODE_GED_G_C_ALFRESCO_3";
 	
 	XMLConflictResolver xmlresolver = null;
 
