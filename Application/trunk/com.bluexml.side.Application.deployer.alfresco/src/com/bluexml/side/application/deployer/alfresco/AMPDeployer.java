@@ -78,7 +78,7 @@ public class AMPDeployer extends Deployer {
 	 * @return true if the deployer can be used.
 	 */
 	public boolean check(){
-		return SecurityHelper.check(DEPLOYER_CODE,SidePreferences.getKey());
+		return true;
 	}
 
 }
