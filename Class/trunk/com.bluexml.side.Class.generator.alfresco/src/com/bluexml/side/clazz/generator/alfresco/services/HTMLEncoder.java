@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HTMLEncoder {
-	private static Map mapChar2HTMLEntity;
+	private static Map<Character, String> mapChar2HTMLEntity;
 	
 	private final static char[] characters = { '\u00DC', '\u00C4', '\u00D6',
 			'\u00CB', '\u00C7', '\u00C6', '\u00C5', '\u00D8', '\u00FC',
@@ -30,7 +30,7 @@ public class HTMLEncoder {
 			"&ordm;", "&divide", "&sup2;", "&sup3;", "&plusmn;" };
 
 	public HTMLEncoder() {
-		mapChar2HTMLEntity = new HashMap();
+		mapChar2HTMLEntity = new HashMap<Character, String>();
 		int longueur = characters.length;
 		for (int i = 0; i < longueur; i++)
 			mapChar2HTMLEntity.put(new Character(characters[i]), entities[i]);
