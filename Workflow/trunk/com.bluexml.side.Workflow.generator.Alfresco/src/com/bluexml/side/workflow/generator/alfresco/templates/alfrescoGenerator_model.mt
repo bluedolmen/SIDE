@@ -89,7 +89,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 			<%for (clazz){%>
 				<association name="wfbx:<%current("TaskNode").name%>_<%name%>">
 					<target>
-						<class><%getFullName().replaceFirst("\.",":")%></class>
+						<class><%getFolder()%>:<%getQualifiedName()%></class>
 					</target>
 				</association>
 			<%}%>
@@ -114,3 +114,13 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 <%if (typ.toString().equalsIgnoreCase("short")){%>d:int<%}%>
 <%if (typ.toString().equalsIgnoreCase("string")){%>d:text<%}%>
 <%if (typ.toString().equalsIgnoreCase("void")){%>d:any<%}%>
+<%script type="clazz.ClassModelElement" name="getFolder" description="Get the folder to export" %>
+<%if (getRootContainer().name != null && getRootContainer().name.length() > 0){%>
+<%getRootContainer().name%><%}else{%>
+tmp<%}%>
+<%script type="clazz.ClassPackage" name="getFolder" description="Get the folder to export" %>
+<%if (getRootContainer().name != null && getRootContainer().name.length() > 0){%>
+<%getRootContainer().name%><%}else{%>
+tmp<%}%>
+<%script type="clazz.NamedClassModelElement" name="getQualifiedName"%>
+<%getFullName().replaceAll("\.","_")%>
