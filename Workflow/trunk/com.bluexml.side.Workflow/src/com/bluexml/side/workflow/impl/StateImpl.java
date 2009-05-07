@@ -37,7 +37,7 @@ import java.util.Collection;
  *
  * @generated
  */
-public abstract class StateImpl extends EObjectImpl implements State {
+public abstract class StateImpl extends WorkflowModelElementImpl implements State {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->

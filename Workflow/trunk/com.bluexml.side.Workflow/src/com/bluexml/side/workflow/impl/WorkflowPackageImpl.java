@@ -1089,6 +1089,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		actionEClass.getESuperTypes().add(this.getWorkflowModelElement());
 		timerEClass.getESuperTypes().add(this.getAction());
 		transitionEClass.getESuperTypes().add(theCommonPackage.getModelElement());
+		stateEClass.getESuperTypes().add(this.getWorkflowModelElement());
 		attributeEClass.getESuperTypes().add(theCommonPackage.getModelElement());
 		transitionTaskEClass.getESuperTypes().add(this.getState());
 

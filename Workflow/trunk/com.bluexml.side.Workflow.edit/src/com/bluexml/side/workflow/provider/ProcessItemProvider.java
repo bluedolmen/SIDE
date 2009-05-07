@@ -257,12 +257,92 @@ public class ProcessItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(WorkflowPackage.Literals.PROCESS__ELEMENTS,
+				 WorkflowFactory.eINSTANCE.createTransitionTask()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(WorkflowPackage.Literals.PROCESS__ELEMENTS,
+				 WorkflowFactory.eINSTANCE.createUserTask()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(WorkflowPackage.Literals.PROCESS__ELEMENTS,
+				 WorkflowFactory.eINSTANCE.createStartState()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(WorkflowPackage.Literals.PROCESS__ELEMENTS,
+				 WorkflowFactory.eINSTANCE.createTaskNode()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(WorkflowPackage.Literals.PROCESS__ELEMENTS,
+				 WorkflowFactory.eINSTANCE.createEndState()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(WorkflowPackage.Literals.PROCESS__ELEMENTS,
+				 WorkflowFactory.eINSTANCE.createNode()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(WorkflowPackage.Literals.PROCESS__ELEMENTS,
+				 WorkflowFactory.eINSTANCE.createProcessState()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(WorkflowPackage.Literals.PROCESS__ELEMENTS,
+				 WorkflowFactory.eINSTANCE.createFork()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(WorkflowPackage.Literals.PROCESS__ELEMENTS,
+				 WorkflowFactory.eINSTANCE.createJoin()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(WorkflowPackage.Literals.PROCESS__ELEMENTS,
+				 WorkflowFactory.eINSTANCE.createDecision()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(WorkflowPackage.Literals.PROCESS__ELEMENTS,
 				 WorkflowFactory.eINSTANCE.createAction()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(WorkflowPackage.Literals.PROCESS__ELEMENTS,
 				 WorkflowFactory.eINSTANCE.createTimer()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == WorkflowPackage.Literals.PROCESS__STARTSTATE ||
+			childFeature == WorkflowPackage.Literals.PROCESS__ELEMENTS ||
+			childFeature == WorkflowPackage.Literals.PROCESS__ENDSTATE ||
+			childFeature == WorkflowPackage.Literals.PROCESS__NODE ||
+			childFeature == WorkflowPackage.Literals.PROCESS__TASKNODE ||
+			childFeature == WorkflowPackage.Literals.PROCESS__PROCESSSTATE ||
+			childFeature == WorkflowPackage.Literals.PROCESS__FORK ||
+			childFeature == WorkflowPackage.Literals.PROCESS__JOIN ||
+			childFeature == WorkflowPackage.Literals.PROCESS__DECISION;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

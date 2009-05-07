@@ -137,6 +137,8 @@ public class WorkflowSwitch<T> {
 				if (result == null) result = caseUserTask(startState);
 				if (result == null) result = caseTransitionTask(startState);
 				if (result == null) result = caseState(startState);
+				if (result == null) result = caseWorkflowModelElement(startState);
+				if (result == null) result = caseModelElement(startState);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -146,6 +148,8 @@ public class WorkflowSwitch<T> {
 				if (result == null) result = caseUserTask(taskNode);
 				if (result == null) result = caseTransitionTask(taskNode);
 				if (result == null) result = caseState(taskNode);
+				if (result == null) result = caseWorkflowModelElement(taskNode);
+				if (result == null) result = caseModelElement(taskNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -154,6 +158,8 @@ public class WorkflowSwitch<T> {
 				T result = caseUserTask(userTask);
 				if (result == null) result = caseTransitionTask(userTask);
 				if (result == null) result = caseState(userTask);
+				if (result == null) result = caseWorkflowModelElement(userTask);
+				if (result == null) result = caseModelElement(userTask);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -161,6 +167,8 @@ public class WorkflowSwitch<T> {
 				EndState endState = (EndState)theEObject;
 				T result = caseEndState(endState);
 				if (result == null) result = caseState(endState);
+				if (result == null) result = caseWorkflowModelElement(endState);
+				if (result == null) result = caseModelElement(endState);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -169,6 +177,8 @@ public class WorkflowSwitch<T> {
 				T result = caseNode(node);
 				if (result == null) result = caseTransitionTask(node);
 				if (result == null) result = caseState(node);
+				if (result == null) result = caseWorkflowModelElement(node);
+				if (result == null) result = caseModelElement(node);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -177,6 +187,8 @@ public class WorkflowSwitch<T> {
 				T result = caseProcessState(processState);
 				if (result == null) result = caseTransitionTask(processState);
 				if (result == null) result = caseState(processState);
+				if (result == null) result = caseWorkflowModelElement(processState);
+				if (result == null) result = caseModelElement(processState);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -185,6 +197,8 @@ public class WorkflowSwitch<T> {
 				T result = caseFork(fork);
 				if (result == null) result = caseTransitionTask(fork);
 				if (result == null) result = caseState(fork);
+				if (result == null) result = caseWorkflowModelElement(fork);
+				if (result == null) result = caseModelElement(fork);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -193,6 +207,8 @@ public class WorkflowSwitch<T> {
 				T result = caseJoin(join);
 				if (result == null) result = caseTransitionTask(join);
 				if (result == null) result = caseState(join);
+				if (result == null) result = caseWorkflowModelElement(join);
+				if (result == null) result = caseModelElement(join);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -201,6 +217,8 @@ public class WorkflowSwitch<T> {
 				T result = caseDecision(decision);
 				if (result == null) result = caseTransitionTask(decision);
 				if (result == null) result = caseState(decision);
+				if (result == null) result = caseWorkflowModelElement(decision);
+				if (result == null) result = caseModelElement(decision);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -249,6 +267,8 @@ public class WorkflowSwitch<T> {
 			case WorkflowPackage.STATE: {
 				State state = (State)theEObject;
 				T result = caseState(state);
+				if (result == null) result = caseWorkflowModelElement(state);
+				if (result == null) result = caseModelElement(state);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -263,6 +283,8 @@ public class WorkflowSwitch<T> {
 				TransitionTask transitionTask = (TransitionTask)theEObject;
 				T result = caseTransitionTask(transitionTask);
 				if (result == null) result = caseState(transitionTask);
+				if (result == null) result = caseWorkflowModelElement(transitionTask);
+				if (result == null) result = caseModelElement(transitionTask);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

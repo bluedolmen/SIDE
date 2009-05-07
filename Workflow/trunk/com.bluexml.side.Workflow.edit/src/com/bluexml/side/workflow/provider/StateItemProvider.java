@@ -35,7 +35,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class StateItemProvider
-	extends ItemProviderAdapter
+	extends WorkflowModelElementItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -171,17 +171,6 @@ public class StateItemProvider
 			(createChildParameter
 				(WorkflowPackage.Literals.STATE__EVENT,
 				 WorkflowFactory.eINSTANCE.createEvent()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return WorkflowEditPlugin.INSTANCE;
 	}
 
 }

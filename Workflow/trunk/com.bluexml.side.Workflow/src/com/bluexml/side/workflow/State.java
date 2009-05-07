@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NoStateWithSameName noSpecialCharacters'"
  * @generated
  */
-public interface State extends EObject {
+public interface State extends WorkflowModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
