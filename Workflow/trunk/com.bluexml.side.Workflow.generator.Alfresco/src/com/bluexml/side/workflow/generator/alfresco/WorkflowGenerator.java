@@ -91,7 +91,7 @@ public class WorkflowGenerator extends AbstractAlfrescoGenerator {
 	 * @return true if the generator can be used.
 	 */
 	public boolean check(){
-		return true;//SecurityHelper.check(GENERATOR_CODE,SidePreferences.getKey());
+		return SecurityHelper.check(GENERATOR_CODE,SidePreferences.getKey());
 	}
 	
 }
