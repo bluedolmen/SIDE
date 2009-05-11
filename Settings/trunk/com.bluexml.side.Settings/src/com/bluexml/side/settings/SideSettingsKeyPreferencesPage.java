@@ -104,7 +104,7 @@ public class SideSettingsKeyPreferencesPage
 		DateFormat df = new SimpleDateFormat(dateFormat);
 		if (ki.getValidity()){
 			lblValidity.setImage(new Image(lblValidity.getDisplay(),SideSettingsKeyPreferencesPage.class.getResourceAsStream("OK.png")));
-			validationDate.setText(validationTextOk + df.format(ki.getValidationDate())+".");
+			validationDate.setText(validationTextOk + df.format(ki.getValidationDate())+". ("+dateFormat+")");
 		}
 		else{
 			lblValidity.setImage(new Image(lblValidity.getDisplay(),SideSettingsKeyPreferencesPage.class.getResourceAsStream("KO.png")));

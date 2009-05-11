@@ -1122,14 +1122,12 @@ public class ApplicationDialog extends Dialog {
 								Generator g = null;
 								String genId = gen.getAttribute("id");
 								
-								Checkable genTemp = (Checkable) tv.getChild(genId);
 								if (tv.contains(genId)) {
 									g = (Generator) tv.getChild(genId);
 								} else {
 									g = new Generator(gen, tv);
 								}
-								//g.setChecked(genTemp.check());
-
+								
 								// Scan for option
 								for (IConfigurationElement option : gen.getChildren("option")) {
 									new OptionGenerator(option, g);
@@ -1150,13 +1148,12 @@ public class ApplicationDialog extends Dialog {
 							for (IConfigurationElement gen : technoV.getChildren("deployerVersion")) {
 								Deployer d = null;
 								String depId = gen.getAttribute("id");
-								Checkable depTemp = (Checkable) tv.getChild(depId);
+
 								if (tv.contains(depId)) {
 									d = (Deployer) tv.getChild(depId);
 								} else {
 									d = new Deployer(gen, tv);
 								}
-								//d.setChecked(depTemp.check());
 
 								// Scan for option
 								for (IConfigurationElement option : gen.getChildren("option")) {
@@ -1179,6 +1176,15 @@ public class ApplicationDialog extends Dialog {
 					}
 				}
 			}
+			initializeFromKey();
+		}
+		
+		/**
+		 * Initialise les éléments de l'arbre en les checkant sur la clé.
+		 * Si l'élément est invalide il sera desactivé
+		 */
+		public void initializeFromKey(){
+			 
 		}
 
 		public void dispose() {
