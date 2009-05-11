@@ -61,7 +61,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 			<%for (clazz){%>
 				<association name="wfbx:<%current("StartState").name%>_<%name%>">
 					<target>
-						<class><%getFullName().replaceFirst(".",":")%></class>
+						<class><%getFolder()%>:<%getQualifiedName()%></class>
 					</target>
 				</association>
 			<%}%>
