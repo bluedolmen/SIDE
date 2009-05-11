@@ -30,7 +30,7 @@ public class SideSettingsKeyPreferencesPage
 	private Label lbl;
 	private Label lblValidity;
 	private static final String validationTextOk ="Your key is valid until ";
-	private static final String validationTextKo ="Your key is not valid.                       ";
+	private static final String validationTextKo ="Your key is not valid.                                               ";
 	private static final String dateFormat ="MM/dd/yyyy";
 	private Label validationDate;
 	private Text key;
