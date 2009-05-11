@@ -1242,7 +1242,6 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 			 "ActorNameMustBeUnique", "Swimlane.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0",
 			 "MustManageAtLeastOneTask", "(not (self.manage->isEmpty())) or (StartState.allInstances()->collect(ss | ss.initiator)->includes(self))",
 			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true",
-			 "OnlyOneActorCalledInitiator", "Swimlane.allInstances() -> select(s| s.name =\'initiator\')->size() = 1",
 			 "ActoridOrPooledactorMustBeSetForAllExeptOneActor", "Swimlane.allInstances() -> select(s | s.name <>\'initiator\' and (s.actorid -> isEmpty() or s.actorid=\'\')  and (s.pooledactors  -> isEmpty() or s.pooledactors =\'\'))->size() <=1\n"
 		   });			
 		addAnnotation
@@ -1298,7 +1297,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		  (swimlaneEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "ActorNameMustBeUnique MustManageAtLeastOneTask noSpecialCharacters OnlyOneActorCalledInitiator ActoridOrPooledactorMustBeSetForAllExeptOneActor"
+			 "constraints", "ActorNameMustBeUnique MustManageAtLeastOneTask noSpecialCharacters ActoridOrPooledactorMustBeSetForAllExeptOneActor"
 		   });				
 		addAnnotation
 		  (taskNodeEClass, 

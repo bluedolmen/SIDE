@@ -149,13 +149,6 @@ public class WorkflowValidator extends EObjectValidator {
 	 */
 	private static Constraint swimlane_noSpecialCharactersInvOCL;
 	/**
-	 * The parsed OCL expression for the definition of the '<em>OnlyOneActorCalledInitiator</em>' invariant constraint.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private static Constraint swimlane_OnlyOneActorCalledInitiatorInvOCL;
-	/**
 	 * The parsed OCL expression for the definition of the '<em>ActoridOrPooledactorMustBeSetForAllExeptOneActor</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -445,7 +438,6 @@ public class WorkflowValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateSwimlane_ActorNameMustBeUnique(swimlane, diagnostics, context);
 		if (result || diagnostics != null) result &= validateSwimlane_MustManageAtLeastOneTask(swimlane, diagnostics, context);
 		if (result || diagnostics != null) result &= validateSwimlane_noSpecialCharacters(swimlane, diagnostics, context);
-		if (result || diagnostics != null) result &= validateSwimlane_OnlyOneActorCalledInitiator(swimlane, diagnostics, context);
 		if (result || diagnostics != null) result &= validateSwimlane_ActoridOrPooledactorMustBeSetForAllExeptOneActor(swimlane, diagnostics, context);
 		return result;
 	}
@@ -560,45 +552,6 @@ public class WorkflowValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noSpecialCharacters", getObjectLabel(swimlane, context) }),
-						 new Object[] { swimlane }));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the OnlyOneActorCalledInitiator constraint of '<em>Swimlane</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateSwimlane_OnlyOneActorCalledInitiator(Swimlane swimlane, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (swimlane_OnlyOneActorCalledInitiatorInvOCL == null) {
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(WorkflowPackage.Literals.SWIMLANE);
-			
-			EAnnotation ocl = WorkflowPackage.Literals.SWIMLANE.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String expr = ocl.getDetails().get("OnlyOneActorCalledInitiator");
-			
-			try {
-				swimlane_OnlyOneActorCalledInitiatorInvOCL = helper.createInvariant(expr);
-			}
-			catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(swimlane_OnlyOneActorCalledInitiatorInvOCL);
-		
-		if (!query.check(swimlane)) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(new BasicDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "OnlyOneActorCalledInitiator", getObjectLabel(swimlane, context) }),
 						 new Object[] { swimlane }));
 			}
 			return false;
