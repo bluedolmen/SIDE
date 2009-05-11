@@ -7,8 +7,8 @@ import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -30,7 +30,8 @@ public class SideSettingsKeyPreferencesPage
 	private Label lbl;
 	private Label lblValidity;
 	private static final String validationTextOk ="Your key is valid until ";
-	private static final String validationTextKo ="Your key is not valid.";
+	private static final String validationTextKo ="Your key is not valid.                       ";
+	private static final String dateFormat ="MM/dd/yyyy";
 	private Label validationDate;
 	private Text key;
 	
@@ -100,15 +101,13 @@ public class SideSettingsKeyPreferencesPage
 	
 	private void check(){
 		KeyInformation ki = new KeyInformation(key.getText());
-		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+		DateFormat df = new SimpleDateFormat(dateFormat);
 		if (ki.getValidity()){
-			lblValidity.setForeground(new Color(lblValidity.getDisplay(),66,255,66));
-			lblValidity.setText("OK");
+			lblValidity.setImage(new Image(lblValidity.getDisplay(),SideSettingsKeyPreferencesPage.class.getResourceAsStream("OK.png")));
 			validationDate.setText(validationTextOk + df.format(ki.getValidationDate())+".");
 		}
 		else{
-			lblValidity.setForeground(new Color(lblValidity.getDisplay(),255,33,33));
-			lblValidity.setText("KO");
+			lblValidity.setImage(new Image(lblValidity.getDisplay(),SideSettingsKeyPreferencesPage.class.getResourceAsStream("KO.png")));
 			validationDate.setText(validationTextKo);
 		}
 	}
