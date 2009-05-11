@@ -43,16 +43,6 @@ public enum StaticConfigurationParameters implements Enumerator {
 	GENERATIONOPTIONSVERBOSE(1, "generationoptionsverbose", "generation.options.verbose"),
 
 	/**
-	 * The '<em><b>Generationoptionsupdate Tgt</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #GENERATIONOPTIONSUPDATE_TGT_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	GENERATIONOPTIONSUPDATE_TGT(3, "generationoptionsupdateTgt", "generation.options.updateTgt"),
-
-	/**
 	 * The '<em><b>Generationoptionslog Path</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -70,7 +60,15 @@ public enum StaticConfigurationParameters implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	GENERATIONOPTIONSDESTINATION_PATH(5, "generationoptionsdestinationPath", "generation.options.destinationPath");
+	GENERATIONOPTIONSDESTINATION_PATH(5, "generationoptionsdestinationPath", "generation.options.destinationPath"), /**
+	 * The '<em><b>Generationoption Skip Validation</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #GENERATIONOPTION_SKIP_VALIDATION_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	GENERATIONOPTION_SKIP_VALIDATION(6, "generationoptionSkipValidation", "generation.option.Skip.Validation");
 
 	/**
 	 * The '<em><b>Generationoptionsclean</b></em>' literal value.
@@ -103,21 +101,6 @@ public enum StaticConfigurationParameters implements Enumerator {
 	public static final int GENERATIONOPTIONSVERBOSE_VALUE = 1;
 
 	/**
-	 * The '<em><b>Generationoptionsupdate Tgt</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Generationoptionsupdate Tgt</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #GENERATIONOPTIONSUPDATE_TGT
-	 * @model name="generationoptionsupdateTgt" literal="generation.options.updateTgt"
-	 * @generated
-	 * @ordered
-	 */
-	public static final int GENERATIONOPTIONSUPDATE_TGT_VALUE = 3;
-
-	/**
 	 * The '<em><b>Generationoptionslog Path</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -148,6 +131,21 @@ public enum StaticConfigurationParameters implements Enumerator {
 	public static final int GENERATIONOPTIONSDESTINATION_PATH_VALUE = 5;
 
 	/**
+	 * The '<em><b>Generationoption Skip Validation</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Generationoption Skip Validation</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #GENERATIONOPTION_SKIP_VALIDATION
+	 * @model name="generationoptionSkipValidation" literal="generation.option.Skip.Validation"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GENERATIONOPTION_SKIP_VALIDATION_VALUE = 6;
+
+	/**
 	 * An array of all the '<em><b>Static Configuration Parameters</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -157,9 +155,9 @@ public enum StaticConfigurationParameters implements Enumerator {
 		new StaticConfigurationParameters[] {
 			GENERATIONOPTIONSCLEAN,
 			GENERATIONOPTIONSVERBOSE,
-			GENERATIONOPTIONSUPDATE_TGT,
 			GENERATIONOPTIONSLOG_PATH,
 			GENERATIONOPTIONSDESTINATION_PATH,
+			GENERATIONOPTION_SKIP_VALIDATION,
 		};
 
 	/**
@@ -212,9 +210,9 @@ public enum StaticConfigurationParameters implements Enumerator {
 		switch (value) {
 			case GENERATIONOPTIONSCLEAN_VALUE: return GENERATIONOPTIONSCLEAN;
 			case GENERATIONOPTIONSVERBOSE_VALUE: return GENERATIONOPTIONSVERBOSE;
-			case GENERATIONOPTIONSUPDATE_TGT_VALUE: return GENERATIONOPTIONSUPDATE_TGT;
 			case GENERATIONOPTIONSLOG_PATH_VALUE: return GENERATIONOPTIONSLOG_PATH;
 			case GENERATIONOPTIONSDESTINATION_PATH_VALUE: return GENERATIONOPTIONSDESTINATION_PATH;
+			case GENERATIONOPTION_SKIP_VALIDATION_VALUE: return GENERATIONOPTION_SKIP_VALIDATION;
 		}
 		return null;
 	}

@@ -127,7 +127,7 @@ public class ApplicationDialog extends Dialog {
 	private GeneratorParameterDataStructure dataStructure;
 	private TableViewer generatorParametersViewer;
 	private Button verboseButton;
-	private Button updateTargetButton;
+	private Button skipValidationButton;
 	private Button cleanButton;
 	private Text destinationText;
 	private Text logText;
@@ -137,13 +137,13 @@ public class ApplicationDialog extends Dialog {
 	private GeneratorParameterCellModifier generatorParameterCellModifier;
 	private TabFolder tabFolder;
 
-	private static String KEY_VERBOSE = "generation.options.verbose";
-	private static String KEY_CLEAN = "generation.options.clean";
-	private static String KEY_UPDATE = "generation.options.updateTgt";
-	private static String KEY_LOGPATH = "generation.options.logPath";
-	private static String KEY_GENPATH = "generation.options.destinationPath";
+	public static String KEY_VERBOSE = "generation.options.verbose";
+	public static String KEY_CLEAN = "generation.options.clean";
+	public static String KEY_SKIPVALIDATION = "generation.option.Skip.Validation";
+	public static String KEY_LOGPATH = "generation.options.logPath";
+	public static String KEY_GENPATH = "generation.options.destinationPath";
 
-	public static List<String> staticFieldsName = Arrays.asList(KEY_CLEAN, KEY_GENPATH, KEY_LOGPATH, KEY_UPDATE, KEY_VERBOSE);
+	public static List<String> staticFieldsName = Arrays.asList(KEY_CLEAN, KEY_GENPATH, KEY_LOGPATH, KEY_SKIPVALIDATION, KEY_VERBOSE);
 
 	private static String EXTENSIONPOINT_ID = "com.bluexml.side.Application.com_bluexml_application_configuration";
 
@@ -224,9 +224,9 @@ public class ApplicationDialog extends Dialog {
 			cleanButton.setSelection(Boolean.parseBoolean(cleanParam.getValue()));
 		}
 
-		ConfigurationParameters updateParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_UPDATE);
-		if (updateParam != null) {
-			updateTargetButton.setSelection(Boolean.parseBoolean(updateParam.getValue()));
+		ConfigurationParameters skipValidationParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_SKIPVALIDATION);
+		if (skipValidationParam != null) {
+			skipValidationButton.setSelection(Boolean.parseBoolean(skipValidationParam.getValue()));
 		}
 
 		ConfigurationParameters logPathParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_LOGPATH);
@@ -595,10 +595,10 @@ public class ApplicationDialog extends Dialog {
 		verboseButton.setText("Verbose");
 		verboseButton.setBounds(20, 60, 436, 20);
 
-		updateTargetButton = new Button(composite_2, SWT.CHECK);
-		updateTargetButton.addSelectionListener(new SelectionAdapter() {
+		skipValidationButton = new Button(composite_2, SWT.CHECK);
+		skipValidationButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_UPDATE);
+				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_SKIPVALIDATION);
 				if (param != null) {
 					Button b = (Button) e.getSource();
 					param.setValue(Boolean.toString(b.getSelection()));
@@ -606,14 +606,14 @@ public class ApplicationDialog extends Dialog {
 				ApplicationDialog.modificationMade();
 			}
 		});
-		updateTargetButton.setToolTipText("If checked will move uploaded files to your application.");
-		updateTargetButton.getAccessible().addAccessibleListener(new AccessibleAdapter() {
+		skipValidationButton.setToolTipText("If checked will skip the validation task.");
+		skipValidationButton.getAccessible().addAccessibleListener(new AccessibleAdapter() {
 			public void getHelp(AccessibleEvent e) {
 				e.result = "If checked will move uploaded files to your application.";
 			}
 		});
-		updateTargetButton.setText("Update target");
-		updateTargetButton.setBounds(20, 80, 436, 20);
+		skipValidationButton.setText("Skip Validation");
+		skipValidationButton.setBounds(20, 80, 436, 20);
 
 		final Label generationsOptionsLabel_1 = new Label(composite_2, SWT.NONE);
 		generationsOptionsLabel_1.setBounds(10, 172, 439, 24);
@@ -870,7 +870,7 @@ public class ApplicationDialog extends Dialog {
 				config.getParameters().add(cleanParam);
 
 				ConfigurationParameters updateParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
-				updateParam.setKey(KEY_UPDATE);
+				updateParam.setKey(KEY_SKIPVALIDATION);
 				updateParam.setValue("false");
 				config.getParameters().add(updateParam);
 

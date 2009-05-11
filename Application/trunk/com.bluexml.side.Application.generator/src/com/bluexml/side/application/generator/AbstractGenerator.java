@@ -72,13 +72,6 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral());
 	}
 
-	public boolean doDeploy() {
-		if (configurationParameters != null && configurationParameters.containsKey(StaticConfigurationParameters.GENERATIONOPTIONSUPDATE_TGT.getLiteral())) {
-			return Boolean.parseBoolean(configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSUPDATE_TGT.getLiteral()));
-		}
-		return false;
-	}
-
 	protected static boolean doVerbose() {
 		if (configurationParameters != null && configurationParameters.containsKey(StaticConfigurationParameters.GENERATIONOPTIONSVERBOSE.getLiteral())) {
 			return Boolean.parseBoolean(configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSVERBOSE.getLiteral()));

@@ -35,9 +35,9 @@
   <eClassifiers xsi:type="ecore:EEnum" name="StaticConfigurationParameters">
     <eLiterals name="generationoptionsclean" literal="generation.options.clean"/>
     <eLiterals name="generationoptionsverbose" value="1" literal="generation.options.verbose"/>
-    <eLiterals name="generationoptionsupdateTgt" value="3" literal="generation.options.updateTgt"/>
     <eLiterals name="generationoptionslogPath" value="4" literal="generation.options.logPath"/>
     <eLiterals name="generationoptionsdestinationPath" value="5" literal="generation.options.destinationPath"/>
+    <eLiterals name="generationoptionSkipValidation" value="6" literal="generation.option.Skip.Validation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeployerConfiguration" eSuperTypes="#//ComponantConfiguration"/>
   <eClassifiers xsi:type="ecore:EClass" name="ComponantConfiguration" abstract="true">

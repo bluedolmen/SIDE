@@ -10,9 +10,9 @@
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="application.ecore#//StaticConfigurationParameters">
       <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionsclean"/>
       <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionsverbose"/>
-      <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionsupdateTgt"/>
       <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionslogPath"/>
       <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionsdestinationPath"/>
+      <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionSkipValidation"/>
     </genEnums>
     <genClasses image="false" ecoreClass="application.ecore#//ModelElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ModelElement/name"/>

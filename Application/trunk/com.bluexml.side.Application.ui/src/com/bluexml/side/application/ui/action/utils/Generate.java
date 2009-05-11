@@ -12,7 +12,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -33,9 +32,9 @@ import com.bluexml.side.application.DeployerConfiguration;
 import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.Option;
-import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.deployer.Deployer;
 import com.bluexml.side.application.generator.AbstractGenerator;
+import com.bluexml.side.application.ui.action.ApplicationDialog;
 
 public class Generate extends Thread {
 
@@ -64,16 +63,8 @@ public class Generate extends Thread {
 		progressBar = p_progressBar;
 		label = p_label;
 		styletext = p_styletext;
-		// First we get the meta-model associated to a model
-		HashMap<String, List<IFile>> modelsInfo = null;
-		try {
-			modelsInfo = (HashMap<String, List<IFile>>) getAssociatedMetaModel(models);
-		} catch (IOException e) {
-			addErrorText("Error with model : " + e.getMessage());
-			e.printStackTrace();
-		}
 
-		// Secondly we seek the generator parameters, and separate fields
+		// First we seek the generator parameters, and separate fields
 		// of dynamic fields
 		Map<String, String> configurationParameters = new HashMap<String, String>();
 		Map<String, String> generationParameters = new HashMap<String, String>();
@@ -92,7 +83,21 @@ public class Generate extends Thread {
 				}
 			}
 		}
-
+		
+		// Secondly we get the meta-model associated to a model
+		HashMap<String, List<IFile>> modelsInfo = null;
+		boolean skipValidation = true;
+		if (configurationParameters.containsKey(ApplicationDialog.KEY_SKIPVALIDATION)) {
+			skipValidation = Boolean.valueOf(configurationParameters.get(ApplicationDialog.KEY_SKIPVALIDATION));
+		}
+		
+		try {
+			modelsInfo = (HashMap<String, List<IFile>>) getAssociatedMetaModel(models,skipValidation);
+		} catch (IOException e) {
+			addErrorText("Error with model : " + e.getMessage());
+			e.printStackTrace();
+		}
+		
 		generate(configuration, modelsInfo, configurationParameters, generationParameters);
 	}
 
@@ -123,9 +128,9 @@ public class Generate extends Thread {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				boolean error = generate_(configuration, modelsInfo, configurationParameters, generationParameters);
-				if (doDeploy(configurationParameters)) {
-					error &= deploy_(configuration, modelsInfo, configurationParameters, generationParameters);
-				}
+				
+				error &= deploy_(configuration, modelsInfo, configurationParameters, generationParameters);
+				
 				progressBar.setSelection(progressBar.getMaximum());
 				if (!error) {
 					label.setText("Generation Completed");
@@ -225,12 +230,6 @@ public class Generate extends Thread {
 		progressBar.setSelection(progressBar.getSelection() + 1);
 	}
 
-	public boolean doDeploy(Map<String, String> configurationParameters) {
-		if (configurationParameters != null && configurationParameters.containsKey(StaticConfigurationParameters.GENERATIONOPTIONSUPDATE_TGT.getLiteral())) {
-			return Boolean.parseBoolean(configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSUPDATE_TGT.getLiteral()));
-		}
-		return false;
-	}
 
 	private boolean deploy_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) {
 		progressBar.setSelection(0);
@@ -282,11 +281,12 @@ public class Generate extends Thread {
 	 * Return a map with association model <> metaModel name
 	 * 
 	 * @param models
+	 * @param doValidation 
 	 * @return
 	 * @throws IOException
 	 * @throws IOException
 	 */
-	private Map<String, List<IFile>> getAssociatedMetaModel(List<Model> models) throws IOException {
+	private Map<String, List<IFile>> getAssociatedMetaModel(List<Model> models, boolean skipValidation) throws IOException {
 		Map<String, List<IFile>> result = new HashMap<String, List<IFile>>();
 		for (Model model : models) {
 			Resource modelResource = null;
@@ -324,17 +324,22 @@ public class Generate extends Thread {
 					throw new IOException("No model found at " + file.getFullPath());
 				}
 			}
-			
-			//TODO : DO VALIDATE
+			if (!skipValidation) {
 			EObject te = getRootElement(loadedModel);
-			if (te != null) {
-				label.setText("Validating model " + loadedModel.getURI());
-				if (!validate(te)) {
-					throw new IOException("You have error in your model (" + file.getFullPath() + "), please run validate on first element of your model and correct error(s).");
+				if (te != null) {
+					label.setText("Validating model " + loadedModel.getURI());
+					if (!validate(te)) {
+						throw new IOException("You have error in your model (" + file.getFullPath() + "), please run validate on first element of your model and correct error(s).");
+					} else {
+						addText(System.getProperty("line.separator") + "Model validated : " + file.getFullPath() + " with success.");
+					}
+					addOneStep(progressBar);
+				} else {
+					throw new IOException("No root element found in " + file.getFullPath() + ". Model empty?");
 				}
-				addOneStep(progressBar);
 			} else {
-				throw new IOException("No root element found in " + file.getFullPath() + ". Model empty?");
+				label.setText("Validatiion skipped.");
+				addOneStep(progressBar);
 			}
 		}
 		return result;

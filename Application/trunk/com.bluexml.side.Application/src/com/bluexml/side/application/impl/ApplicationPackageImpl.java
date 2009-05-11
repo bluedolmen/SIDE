@@ -533,9 +533,9 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 		initEEnum(staticConfigurationParametersEEnum, StaticConfigurationParameters.class, "StaticConfigurationParameters");
 		addEEnumLiteral(staticConfigurationParametersEEnum, StaticConfigurationParameters.GENERATIONOPTIONSCLEAN);
 		addEEnumLiteral(staticConfigurationParametersEEnum, StaticConfigurationParameters.GENERATIONOPTIONSVERBOSE);
-		addEEnumLiteral(staticConfigurationParametersEEnum, StaticConfigurationParameters.GENERATIONOPTIONSUPDATE_TGT);
 		addEEnumLiteral(staticConfigurationParametersEEnum, StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH);
 		addEEnumLiteral(staticConfigurationParametersEEnum, StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH);
+		addEEnumLiteral(staticConfigurationParametersEEnum, StaticConfigurationParameters.GENERATIONOPTION_SKIP_VALIDATION);
 
 		// Create resource
 		createResource(eNS_URI);
