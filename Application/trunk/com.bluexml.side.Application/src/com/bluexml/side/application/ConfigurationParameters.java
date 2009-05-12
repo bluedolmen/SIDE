@@ -13,6 +13,10 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Configuration Parameters</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * store parameters, defined by components and StaticConfigurationParameters
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

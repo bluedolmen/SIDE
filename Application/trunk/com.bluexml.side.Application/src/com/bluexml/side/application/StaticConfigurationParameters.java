@@ -17,6 +17,9 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Static Configuration Parameters</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * List of default configurations parameters.
+ * <!-- end-model-doc -->
  * @see com.bluexml.side.application.ApplicationPackage#getStaticConfigurationParameters()
  * @model
  * @generated

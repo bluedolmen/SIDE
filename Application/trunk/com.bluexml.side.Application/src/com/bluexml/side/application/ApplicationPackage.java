@@ -23,6 +23,9 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * Use to add optionals setting like generation part or clean options.
+ * <!-- end-model-doc -->
  * @see com.bluexml.side.application.ApplicationFactory
  * @model kind="package"
  * @generated

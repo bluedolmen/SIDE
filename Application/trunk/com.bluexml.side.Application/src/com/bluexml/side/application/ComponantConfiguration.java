@@ -80,6 +80,9 @@ public interface ComponantConfiguration extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * doc impl_class
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Impl class</em>' attribute.
 	 * @see #setImpl_class(String)
 	 * @see com.bluexml.side.application.ApplicationPackage#getComponantConfiguration_Impl_class()
