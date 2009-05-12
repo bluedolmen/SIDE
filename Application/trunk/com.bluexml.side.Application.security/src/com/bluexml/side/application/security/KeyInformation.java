@@ -103,7 +103,7 @@ public class KeyInformation implements SecurityConstants {
 		IvParameterSpec salt = new IvParameterSpec(iv);
 		strKey = Encoder.desencode(strKey);
 
-		byte[] raw = SECRET_KEY.getBytes("ISO8859_1");
+		byte[] raw = SECRET_KEY.getBytes("ISO-8859-1");
 		SecretKey skeySpec = new SecretKeySpec(raw, "Blowfish");
 		// Decryption
 		Cipher c = Cipher.getInstance(ALGORYTHM);
