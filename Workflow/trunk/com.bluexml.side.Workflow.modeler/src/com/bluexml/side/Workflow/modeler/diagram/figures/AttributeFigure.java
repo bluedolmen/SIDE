@@ -15,9 +15,8 @@
 package com.bluexml.side.Workflow.modeler.diagram.figures;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.ImageFigure;
 import org.eclipse.draw2d.PositionConstants;
-import org.eclipse.draw2d.geometry.Dimension;
+import org.topcased.draw2d.figures.Label;
 
 import com.bluexml.side.Workflow.modeler.diagram.WfImageRegistry;
 
@@ -29,7 +28,7 @@ public class AttributeFigure extends
 	/**
 	 * Constructor
 	 * 
-	 * @generated
+	 * @_generated
 	 */
 	public AttributeFigure() {
 		super(PositionConstants.RIGHT);
@@ -37,7 +36,8 @@ public class AttributeFigure extends
 
 	@Override
 	protected IFigure createBodyFigure() {
-		ImageFigure fig = new ImageFigure(WfImageRegistry.getImage("ATTRIBUTE"));
+		Label fig = new Label(WfImageRegistry.getImage("ATTRIBUTE"));
+		fig.setAlignment(PositionConstants.LEFT);
 		return fig;
 	}
 }
