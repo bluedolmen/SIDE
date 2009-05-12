@@ -262,9 +262,9 @@
     </edge>
     <node
         presentation="default"
-        defaultHeight="50"
+        defaultHeight="17"
         defaultWidth="50"
-        minimumHeight="20"
+        minimumHeight="17"
         minimumWidth="20"
         maximumHeight="200"
         maximumWidth="200"
