@@ -34,7 +34,7 @@ public interface SecurityConstants {
 	public static int KEY_SIZE = 512; // [512..2048]
 	//public static String SECRET_KEY = "efQqf$FaiCiG((è8";
 	//Key used to crypt informations
-	public static String SECRET_KEY = "bLu3XmLcRyPt1nG¤";
+	public static String SECRET_KEY = "bLu3XmLcRyPt1nGB";
 	// the format of the Date stored in the key
 	public static String FORMAT_DATE = "yyyyddMM";
 	// Algorithm used to crypt data
