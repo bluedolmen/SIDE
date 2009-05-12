@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.imageio.stream.ImageOutputStream;
+
 import org.eclipse.core.internal.resources.Folder;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -475,13 +477,13 @@ public class ApplicationDialog extends Dialog {
 		viewer.setLabelProvider(new ConfigurationLabelProvider());
 		viewer.setInput(this);
 		viewer.expandAll();
-
+		
 		viewer.getTree().addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event event) {
 				documentationText.setText(builDocumentationText());
 				TreeItem item = (TreeItem) event.item;
+				
 				TreeElement el = (TreeElement) item.getData();
-
 				//Check if el is active or not in the key if it is a component
 				if (el instanceof ImplNode) {
 					if (!checkElementValidity(el)){
@@ -559,6 +561,8 @@ public class ApplicationDialog extends Dialog {
 			}
 		});
 
+		
+		
 		final TabItem optionsTabItem = new TabItem(tabFolder, SWT.NONE);
 		optionsTabItem.setText("Options");
 
@@ -577,13 +581,17 @@ public class ApplicationDialog extends Dialog {
 			}
 		});
 		cleanButton.setText("Clean");
-		cleanButton.setBounds(20, 40, 436, 20);
-
+		cleanButton.setBounds(20, 40, 108, 20);
+			
+		
 		final Label generationsOptionsLabel = new Label(composite_2, SWT.NONE);
 		generationsOptionsLabel.setFont(SWTResourceManager.getFont("", 12, SWT.BOLD));
 		generationsOptionsLabel.setText("General generation options");
 		generationsOptionsLabel.setBounds(10, 10, 240, 24);
 
+		
+		
+		
 		verboseButton = new Button(composite_2, SWT.CHECK);
 		verboseButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
@@ -596,8 +604,9 @@ public class ApplicationDialog extends Dialog {
 			}
 		});
 		verboseButton.setText("Verbose");
-		verboseButton.setBounds(20, 60, 436, 20);
-
+		verboseButton.setBounds(20, 60, 108, 20);
+		
+		
 		skipValidationButton = new Button(composite_2, SWT.CHECK);
 		skipValidationButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
@@ -616,8 +625,9 @@ public class ApplicationDialog extends Dialog {
 			}
 		});
 		skipValidationButton.setText("Skip Validation");
-		skipValidationButton.setBounds(20, 80, 436, 20);
-
+		skipValidationButton.setBounds(20, 80, 108, 20);
+		
+		
 		final Label generationsOptionsLabel_1 = new Label(composite_2, SWT.NONE);
 		generationsOptionsLabel_1.setBounds(10, 172, 439, 24);
 		generationsOptionsLabel_1.setFont(SWTResourceManager.getFont("", 12, SWT.BOLD));
@@ -724,7 +734,11 @@ public class ApplicationDialog extends Dialog {
 			}
 		});
 		browseGenPathButton.setText("Browse");
-		browseGenPathButton.setBounds(368, 144, 75, 25);
+		browseGenPathButton.setBounds(368, 144, 75, 25);		
+
+		
+
+		
 
 		final TabItem modelsTabItem = new TabItem(tabFolder, SWT.NONE);
 		modelsTabItem.setText("Models");
@@ -1098,7 +1112,6 @@ public class ApplicationDialog extends Dialog {
 					} else {
 						m = metamodelSet.get(m.getId());
 					}
-					// technologySet.clear();
 
 					// Scan for technology
 					for (IConfigurationElement techno : config.getChildren("technology")) {
@@ -1221,7 +1234,9 @@ public class ApplicationDialog extends Dialog {
 				else
 					suffix += "_unchecked";
 			}
-
+			
+			Image t= new Image(null, ApplicationDialog.class.getResourceAsStream("tree/img/metamodel/metamodel" + suffix + ".png"));
+			
 			if (object instanceof Metamodel) {
 				return new Image(null, ApplicationDialog.class.getResourceAsStream("tree/img/metamodel/metamodel" + suffix + ".png"));
 			} else if (object instanceof Technology) {
