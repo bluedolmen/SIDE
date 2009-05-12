@@ -34,6 +34,7 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.accessibility.AccessibleAdapter;
@@ -100,6 +101,7 @@ import com.bluexml.side.application.ui.action.tree.TreeElement;
 import com.bluexml.side.application.ui.action.tree.TreeNode;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 import com.bluexml.side.application.ui.action.utils.validator.FolderSelectionValidator;
+import com.bluexml.side.application.ui.action.utils.viewFilter.SideFileFiter;
 
 public class ApplicationDialog extends Dialog {
 
@@ -412,7 +414,8 @@ public class ApplicationDialog extends Dialog {
 		ets.setMessage("Select model file (no diagram file)");
 		ets.setInput(ResourcesPlugin.getWorkspace().getRoot());
 		ets.setHelpAvailable(false);
-
+		ets.addFilter(new SideFileFiter());
+		
 		if (ElementTreeSelectionDialog.OK == ets.open()) {
 			Object[] result = ets.getResult();
 			for (Object o : result) {
@@ -721,7 +724,7 @@ public class ApplicationDialog extends Dialog {
 			}
 		});
 		browseGenPathButton.setText("Browse");
-		browseGenPathButton.setBounds(381, 140, 75, 25);
+		browseGenPathButton.setBounds(368, 144, 75, 25);
 
 		final TabItem modelsTabItem = new TabItem(tabFolder, SWT.NONE);
 		modelsTabItem.setText("Models");
