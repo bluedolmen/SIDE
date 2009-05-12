@@ -104,6 +104,7 @@ public class StartStateEditPart extends EMFGraphNodeEditPart {
 		StartState state = (StartState) Utils.getElement(getGraphNode());
 		WfConfiguration config = new WfConfiguration();
 
+		//Attribute
 		if (getGraphNode().getContained().size() > 0) {
 			GraphNode attributesListNode = (GraphNode) getGraphNode()
 					.getContained().get(0);
@@ -118,6 +119,7 @@ public class StartStateEditPart extends EMFGraphNodeEditPart {
 			}
 		}
 
+		//Event
 		if (getGraphNode().getContained().size() > 1) {
 			GraphNode eventsListNode = (GraphNode) getGraphNode()
 					.getContained().get(1);
