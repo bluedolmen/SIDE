@@ -12,13 +12,13 @@
 
    <extension point="org.eclipse.ui.newWizards">
       <category
-            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            id="com.bluexml.side.modeler.category.ID"
             name="%_UI_Wizard_category"/>
       <wizard
             id="com.bluexml.side.form.presentation.formModelWizardID"
             name="%_UI_formModelWizard_label"
             class="com.bluexml.side.form.presentation.FormModelWizard"
-            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            category="com.bluexml.side.modeler.category.ID"
             icon="icons/full/obj16/formModelFile.gif">
          <description>%_UI_formModelWizard_description</description>
          <selection class="org.eclipse.core.resources.IResource"/>
