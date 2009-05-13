@@ -87,6 +87,7 @@ public class WorkflowDiagramUtils {
 			mcf.setReal_class(c);
 			mcf.setId(c.getName());
 			mcf.setLabel(c.getTitle());
+			mcf.setMax_bound(1);
 			f = mcf;
 		}
 		
