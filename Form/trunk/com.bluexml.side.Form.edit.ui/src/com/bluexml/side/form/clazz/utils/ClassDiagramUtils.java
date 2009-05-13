@@ -78,6 +78,9 @@ public class ClassDiagramUtils {
 			} else if(att.getTyp().equals(AttributeType.INT)) {
 			// Integer Field
 				field = FormFactory.eINSTANCE.createIntegerField();
+			} else if(att.getTyp().equals(AttributeType.LONG)) {
+			// Long Field
+				field = FormFactory.eINSTANCE.createIntegerField();
 			} else if(att.getTyp().equals(AttributeType.FLOAT)) {
 			// Float Field
 				field = FormFactory.eINSTANCE.createFloatField();
