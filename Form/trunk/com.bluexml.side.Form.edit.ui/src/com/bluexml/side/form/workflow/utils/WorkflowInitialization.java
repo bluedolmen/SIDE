@@ -58,7 +58,7 @@ public class WorkflowInitialization {
 				
 				// For each task we create a form
 				for (State s : l) {
-					FormWorkflow fw = createTaskForForm(s); 
+					FormWorkflow fw = createTaskForForm(p,s); 
 					fw.setRef(s);
 					lf.add(fw);
 				}
