@@ -58,8 +58,8 @@ public class WorkflowInitialization {
 				
 				// For each task we create a form
 				for (State s : l) {
-					FormWorkflow fw = createTaskForForm(p, s); 
-					
+					FormWorkflow fw = createTaskForForm(s); 
+					fw.setRef(s);
 					lf.add(fw);
 				}
 				cmd.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormCollection_Forms(), lf));
