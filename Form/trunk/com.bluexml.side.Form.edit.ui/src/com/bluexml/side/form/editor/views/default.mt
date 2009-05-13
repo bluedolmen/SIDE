@@ -295,13 +295,16 @@ li.tabs, ul.tabs {
 				<input type="button" name="<%id%>" id="<%id%>" value="<%if (label.length > 0){%><%label.encode()%><%}else{%><%id%><%}%>">
 			<%}%>
 			<%if (cast("ModelChoiceField") || cast("ChoiceField")) {%>
+				
 				<select name="<%id%>" id="<%id%>" <%if (current().max_bound > 1 || current().max_bound == -1){%>MULTIPLE<%}%>
 					<%if (cast("ModelChoiceField")){%>class="association"<%}%>>
 					<%if (cast("ModelChoiceField")){%>
-					<option><%current("ModelChoiceField").real_class.title.encode()%></option>
+						<option><%current("ModelChoiceField").real_class.title.encode()%></option>
 					<%}else{%>
-						<%for (current("KerblueForms.ChoiceField").choices){%>
-							<option><%current().encode()%></option>
+						<%if (current().ref != null && current().ref.valueList != null){%>
+							<%for (current().ref.valueList.literals){%>
+								<option value="<%current().value%>"><%current().name%></option>
+							<%}%>
 						<%}%>
 					<%}%>
 				</select>
