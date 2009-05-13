@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Merge Plug-in
 Bundle-SymbolicName: com.bluexml.side.Util.model.merge
-Bundle-Version: 1.0.8
+Bundle-Version: 1.0.9
 Bundle-Activator: com.bluexml.side.util.model.merge.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,

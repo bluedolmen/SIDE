@@ -29,8 +29,10 @@ import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
 import com.bluexml.side.application.generator.AbstractGenerator;
+import com.bluexml.side.application.security.SecurityHelper;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.settings.SidePreferences;
 
 public class FormGenerator extends AbstractGenerator {
 	public static final Namespace NAMESPACE_MAVENPOM = Namespace.getNamespace(
@@ -57,8 +59,13 @@ public class FormGenerator extends AbstractGenerator {
 	private File alfrescoProperties;
 	private File warFile;
 
-	public boolean check() {
-		return true;
+	/**
+	 * This method check if the user have the license to use this generator.
+	 * 
+	 * @return true if the generator can be used.
+	 */
+	public boolean check(){
+		return SecurityHelper.check(GENERATOR_CODE,SidePreferences.getKey());
 	}
 
 	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo,

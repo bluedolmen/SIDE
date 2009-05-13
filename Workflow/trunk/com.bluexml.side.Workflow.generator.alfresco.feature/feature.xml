@@ -2,7 +2,7 @@
 <feature
       id="com.bluexml.side.Workflow.generator.alfresco.feature"
       label="S-IDE Alfresco Wokflow Generator"
-      version="1.0.8"
+      version="1.0.9"
       provider-name="BLUEXML">
 
    <description url="http://www.example.com/description">
@@ -41,7 +41,7 @@
          id="com.bluexml.side.Workflow.generator.Alfresco"
          download-size="0"
          install-size="0"
-         version="1.0.8"
+         version="1.0.9"
          unpack="false"/>
 
 </feature>

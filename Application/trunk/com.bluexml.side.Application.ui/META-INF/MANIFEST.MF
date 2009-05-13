@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Application UI Plug-in
 Bundle-SymbolicName: com.bluexml.side.Application.ui;singleton:=true
-Bundle-Version: 1.0.8
+Bundle-Version: 1.0.9
 Bundle-Activator: com.bluexml.side.application.ui.Activator
 Bundle-Vendor: blueXML
 Require-Bundle: org.eclipse.ui,
@@ -14,6 +14,7 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.Util.ecore;bundle-version="1.0.1"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Import-Package: com.bluexml.side.application.deployer,
+ com.bluexml.side.application.deployer.alfresco,
  com.bluexml.side.application.security
 Export-Package: com.bluexml.side.application.ui,
  com.bluexml.side.application.ui.action

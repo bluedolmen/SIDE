@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Chiba XForms generator Plug-in
 Bundle-SymbolicName: com.bluexml.side.Form.generator.xforms.chiba;singleton:=true
-Bundle-Version: 1.0.8
+Bundle-Version: 1.0.9
 Bundle-Vendor: BLUEXML
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: com.bluexml.side.Form.generator.xforms.maven;bundle-version="1.0.0",
@@ -12,4 +12,5 @@ Require-Bundle: com.bluexml.side.Form.generator.xforms.maven;bundle-version="1.0
  com.bluexml.side.Util.libs;bundle-version="1.0.0",
  com.bluexml.side.Class;bundle-version="1.0.0",
  com.bluexml.side.Form;bundle-version="1.0.0",
- com.bluexml.side.Application.security;bundle-version="1.0.8"
+ com.bluexml.side.Application.security;bundle-version="1.0.8",
+ com.bluexml.side.settings;bundle-version="1.0.9"
