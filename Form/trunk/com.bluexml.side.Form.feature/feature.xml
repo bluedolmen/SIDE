@@ -2,7 +2,7 @@
 <feature
       id="com.bluexml.side.Form.feature"
       label="S-IDE Form Modeler"
-      version="1.0.9"
+      version="1.0.10"
       provider-name="BLUEXML">
 
    <description url="http://www.example.com/description">
@@ -49,28 +49,28 @@
          id="com.bluexml.side.Form"
          download-size="0"
          install-size="0"
-         version="1.0.9"
+         version="1.0.10"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Form.edit"
          download-size="0"
          install-size="0"
-         version="1.0.9"
+         version="1.0.10"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Form.edit.ui"
          download-size="0"
          install-size="0"
-         version="1.0.9"
+         version="1.0.10"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Form.editor"
          download-size="0"
          install-size="0"
-         version="1.0.9"
+         version="1.0.10"
          unpack="false"/>
 
 </feature>

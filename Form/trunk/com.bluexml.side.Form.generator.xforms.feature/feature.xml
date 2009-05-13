@@ -2,7 +2,7 @@
 <feature
       id="com.bluexml.side.Form.generator.xforms.feature"
       label="S-IDE XForms generator Feature"
-      version="1.0.9"
+      version="1.0.10"
       provider-name="BLUEXML">
 
    <description url="http://www.example.com/description">
@@ -32,13 +32,13 @@
          id="com.bluexml.side.Form.generator.xforms.chiba"
          download-size="0"
          install-size="0"
-         version="1.0.9"
+         version="1.0.10"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Form.generator.xforms.maven"
          download-size="0"
          install-size="0"
-         version="1.0.9"/>
+         version="1.0.10"/>
 
 </feature>
