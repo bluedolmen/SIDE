@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.bluexml.side.Class.generator.facetmap.feature"
+      label="Facetmap Feature"
+      version="1.0.0"
+      provider-name="BLUEXML">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="com.bluexml.side.Common"/>
+      <import plugin="com.bluexml.side.Util.ecore" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.MetaModel.validate" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ocl"/>
+      <import plugin="org.eclipse.ocl.ecore"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="com.bluexml.side.Application"/>
+      <import plugin="com.bluexml.side.Application.security"/>
+      <import plugin="com.bluexml.side.Application.generator"/>
+      <import plugin="com.bluexml.side.Application.generator.acceleo"/>
+      <import plugin="org.eclipse.core.resources"/>
+   </requires>
+
+   <plugin
+         id="com.bluexml.side.Class"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.bluexml.side.Class.generator.facetmap"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
