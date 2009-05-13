@@ -79,9 +79,13 @@ public class ClassInitialization {
 					Collection<Field> cf = new ArrayList<Field>();
 					for (Attribute att : asp.getAttributes()) {
 						Field field = ClassDiagramUtils.getFieldForAttribute(att);
-						cf.add( field);
+						if (field != null) {
+							cf.add( field);
+						}
 					}
-					fa.getChildren().addAll(cf);
+					if (cf.size() > 0 || fa.getChildren() != null) {
+						fa.getChildren().addAll(cf);
+					}
 					c.add(fa);
 				}
 				
