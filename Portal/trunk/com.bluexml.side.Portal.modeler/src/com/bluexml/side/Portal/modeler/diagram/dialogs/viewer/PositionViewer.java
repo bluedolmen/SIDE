@@ -20,9 +20,9 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
-import com.bluexml.modeler.dialog.DynamicComboBoxCellEditor;
 import com.bluexml.side.Portal.modeler.diagram.dialogs.dataStructure.PositionDataStructure;
 import com.bluexml.side.Portal.modeler.diagram.dialogs.dataStructure.PositionDataStructure.PositionObject;
+import com.bluexml.side.Portal.modeler.dialog.DynamicComboBoxCellEditor;
 
 public class PositionViewer {
 
@@ -72,7 +72,7 @@ public class PositionViewer {
         layoutEditor.getControl().setEnabled(false);
         editors[0] = layoutEditor; 
         // TODO : make dynamic combo cell editor for portal
-        //editors[1] = new DynamicComboBoxCellEditor(table, dataStruct);
+        editors[1] = new DynamicComboBoxCellEditor(table, dataStruct);
         
         getNbPortletAsArray();
         editors[2] = new ComboBoxCellEditor(table, nbPortlets, SWT.READ_ONLY);
