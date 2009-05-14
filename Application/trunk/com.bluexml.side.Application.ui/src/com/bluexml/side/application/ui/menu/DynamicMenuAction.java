@@ -1,6 +1,7 @@
 package com.bluexml.side.application.ui.menu;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.actions.CompoundContributionItem;
@@ -59,7 +61,7 @@ public class DynamicMenuAction extends CompoundContributionItem implements
 		try {
 			if (selection != null && selection.getFirstElement() != null
 					&& selection.getFirstElement() instanceof IFile) {
-				IFile file = (IFile) selection.getFirstElement();
+				final IFile file = (IFile) selection.getFirstElement();
 				URI uri = URI.createFileURI(file.getRawLocation().toFile()
 						.getAbsolutePath());
 				XMIResource resource = new XMIResourceImpl(uri);
@@ -82,10 +84,16 @@ public class DynamicMenuAction extends CompoundContributionItem implements
 						item.setText(conf.getName());
 						item.addSelectionListener( new SelectionAdapter() {
 							public void widgetSelected(SelectionEvent e) {
-								GeneratePopUp generationPopUp = new GeneratePopUp(Display
-										.getDefault().getActiveShell(),application.getConfiguration(conf.getName()));
+								GeneratePopUp generationPopUp = null;
+								try {
+									generationPopUp = new GeneratePopUp(Display.getDefault().getActiveShell(),file,conf.getName());
+								} catch (IOException e1) {
+									e1.printStackTrace();
+								}
 								generationPopUp.open();
 							}
+
+							
 						});
 					}
 				}

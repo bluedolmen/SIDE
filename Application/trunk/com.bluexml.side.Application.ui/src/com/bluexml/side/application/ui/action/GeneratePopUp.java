@@ -1,8 +1,17 @@
 package com.bluexml.side.application.ui.action;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.SWT;
@@ -16,6 +25,7 @@ import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 
 import com.bluexml.side.application.Application;
+import com.bluexml.side.application.ApplicationPackage;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
@@ -41,6 +51,26 @@ public class GeneratePopUp extends Dialog {
 		configuration = p_configuration;
 		staticParameters = ApplicationDialog.staticFieldsName;
 		models = ApplicationUtil.getModels((Application)p_configuration.eContainer());
+	}
+
+	public GeneratePopUp(Shell parentShell, IFile file, String name) throws IOException {
+		super(parentShell);
+		URI uri = URI.createFileURI(file.getRawLocation().toFile()
+				.getAbsolutePath());
+		XMIResource resource = new XMIResourceImpl(uri);
+
+		FileInputStream fi = new FileInputStream(file.getRawLocation()
+				.toFile());
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put(ApplicationPackage.eINSTANCE.getNsURI(),
+				ApplicationPackage.eINSTANCE);
+		map.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION,
+				Boolean.TRUE);
+		resource.load(fi, map);
+		Application application = (Application) resource.getContents().get(0);
+		configuration = application.getConfiguration(name);
+		staticParameters = ApplicationDialog.staticFieldsName;
+		models = ApplicationUtil.getModels((Application)configuration.eContainer());
 	}
 
 	/**
