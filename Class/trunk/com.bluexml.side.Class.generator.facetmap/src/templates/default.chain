@@ -5,7 +5,7 @@
     <files xsi:type="chain:Folder" path="/com.bluexml.side.Class.generator.facetmap"/>
     <files xsi:type="chain:Log" path="/com.bluexml.side.Class.generator.facetmap/log.txt"/>
     <files xsi:type="chain:EmfMetamodel" path="http://www.kerblue.org/class/1.0"/>
-    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-xmis2xfml-generation.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-cmis2xfml-generation.mt"/>
     <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-cmis-generation.mt"/>
   </repository>
   <actions>

@@ -1,7 +1,7 @@
+<%--encoding=ISO-8859-1--%>
 <%
 metamodel http://www.kerblue.org/class/1.0
 import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
-
 %>
 
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
