@@ -66,17 +66,14 @@
             url="http://www.kerblue.org/class/1.0">
          <technology
                id="alfresco"
-               idMetamodel="http://www.kerblue.org/class/1.0"
                name="Alfresco"
                url="http://www.alfresco.com">
             <technologyVersion
                   id="alfresco_3.x"
-                  idTechnology="alfresco"
                   version="Alfresco3.x Labs and Entreprise">
                <generatorVersion
                      class="com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator"
                      id="com.bluexml.side.Class.generator.alfresco"
-                     idTechnologyVersion="alfresco_3.0_labs"
                      version="S-IDE Alfresco Generator 1.0.0">
                   <configurationParameter
                         documentation="default value 1.0, ca be set by user"

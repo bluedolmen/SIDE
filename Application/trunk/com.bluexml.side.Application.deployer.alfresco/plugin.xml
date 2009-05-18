@@ -9,12 +9,10 @@
             url="http://www.kerblue.org/class/1.0">
          <technology
                id="alfresco"
-               idMetamodel="http://www.kerblue.org/class/1.0"
                name="Alfresco"
                url="http://www.alfresco.com">
             <technologyVersion
                   id="alfresco_3.x"
-                  idTechnology="alfresco"
                   version="Alfresco3.x Labs and Entreprise">
                <deployerVersion
                      class="com.bluexml.side.application.deployer.alfresco.AMPDeployer"
