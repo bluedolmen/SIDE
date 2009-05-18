@@ -23,6 +23,8 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 
 import com.bluexml.side.application.generator.acceleo.AbstractAcceleoGenerator;
+import com.bluexml.side.application.security.SecurityHelper;
+import com.bluexml.side.settings.SidePreferences;
 
 /**
  * @author <a href="mailto:pbertrand@bluexml.com"> Pierre BERTRAND </a>
@@ -47,7 +49,8 @@ public class ClassFacetmapGenerator extends AbstractAcceleoGenerator {
 	@Override
 	protected List<String> getTemplates() {
 			List<String> result = new ArrayList<String>();
-			result.add("/com.bluexml.side.Class.generator.alfresco/templates/facetmap-generation.mt.mt");
+				result.add("/com.bluexml.side.Class.generator.facetmap/templates/facetmap-cmis2xfml-generation.mt");
+				result.add("/com.bluexml.side.Class.generator.facetmap/templates/facetmap-cmis-generation.mt");
 			return result;
 	}
 
@@ -55,8 +58,7 @@ public class ClassFacetmapGenerator extends AbstractAcceleoGenerator {
 	 * @see com.bluexml.side.application.security.Checkable#check()
 	 */
 	public boolean check() {
-		return true;
-		//return SecurityHelper.check(GENERATOR_CODE,SidePreferences.getKey()); »
+		return SecurityHelper.check(GENERATOR_CODE,SidePreferences.getKey());
 	}
 
 	public Collection<IFile> complete() throws Exception {

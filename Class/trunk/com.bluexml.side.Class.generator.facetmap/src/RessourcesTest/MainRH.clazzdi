@@ -16,7 +16,7 @@
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="com.bluexml.side.Class.modeler.diagram">
         <element href="MainRH.clazz#//@packageSet.0/@packageSet.0/@packageSet.0"/>
       </semanticModel>
-      <contained xsi:type="di:GraphNode" position="305,149" size="100,127">
+      <contained xsi:type="di:GraphNode" position="305,149" size="118,156">
         <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.7 //@subdiagrams.0/@diagrams.0/@contained.8 //@subdiagrams.0/@diagrams.0/@contained.9 //@subdiagrams.0/@diagrams.0/@contained.10 //@subdiagrams.0/@diagrams.0/@contained.11"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="MainRH.clazz#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>

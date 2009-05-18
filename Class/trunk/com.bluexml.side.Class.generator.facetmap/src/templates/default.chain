@@ -7,6 +7,7 @@
     <files xsi:type="chain:EmfMetamodel" path="http://www.kerblue.org/class/1.0"/>
     <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-cmis2xfml-generation.mt"/>
     <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-cmis-generation.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-cmis-properties-generation.mt"/>
   </repository>
   <actions>
     <actions xsi:type="chain:Generate" documentation="Generation de la xsl" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>

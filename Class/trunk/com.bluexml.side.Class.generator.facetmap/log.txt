@@ -4,3 +4,29 @@ Mot-clé requis "import" introuvable.
 
 Erreur de compilation dans le fichier /home/pbertrand/workspace/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-cmis2xfml-generation.mt.
 Mot-clé requis "import" introuvable.
+
+Erreur de compilation dans le fichier /home/pbertrand/workspace/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-cmis2xfml-generation.mt.
+Appel non résolu "} else {".
+
+Erreur de compilation dans le fichier /home/pbertrand/workspace/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-cmis2xfml-generation.mt.
+Appel non résolu "} else {".
+
+Erreur de compilation dans le fichier /home/pbertrand/workspace/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-cmis2xfml-generation.mt.
+Appel non résolu "} else {".
+
+Erreur de compilation dans le fichier /home/pbertrand/workspace/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-cmis2xfml-generation.mt.
+Appel non résolu "} else {".
+
+Erreur de compilation dans le fichier /home/pbertrand/workspace/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-cmis2xfml-generation.mt.
+Appel non résolu "<%typ%>".
+Erreur de compilation dans le fichier /home/pbertrand/workspace/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-cmis2xfml-generation.mt.
+Appel non résolu "} else {".
+
+Erreur de compilation dans le fichier /home/pbertrand/workspace/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-cmis2xfml-generation.mt.
+Appel non résolu "} else {".
+
+Erreur de compilation dans le fichier /home/pbertrand/workspace/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-cmis2xfml-generation.mt.
+Appel non résolu "} else {".
+
+Erreur de compilation dans le fichier /home/pbertrand/workspace/com.bluexml.side.Class.generator.facetmap/src/templates/facetmap-cmis2xfml-generation.mt.
+Appel non résolu "} else {".

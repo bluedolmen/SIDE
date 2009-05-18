@@ -5,22 +5,26 @@ import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
 %>
 
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
-	./generation/xsl/cmis2xfml.xsl
+	./facetmap/xsl/cmis2xfml.xsl
 
 <%script type="clazz.Clazz" name="taxonomy"%>
-	<%for (getAllAttributes()){%>
-			<taxonomy title="<%args(0)%>-><%getLabel()%>" root-heading-title="<%args(0)%>-><%getLabel()%>" facetid="<%getFullName()%>">
-				<!-- criteria -->
-			    <!-- On ne prend pas en compte les différentes occurences d'un même critère car facetmap les réunit. -->
-			    <xsl:for-each select="child::entry/cmis:object/cmis:properties/cmis:propertyString[@cmis:name='<%getFullName()%>']/cmis:value">          
-			        <heading id="{current()}" title="{current()}"/>             
-			    </xsl:for-each> 
-			</taxonomy>
+	<%if getLabel()=="Personne"{%>
+		<%for (getAllAttributes()){%>
+				<taxonomy title="<%args(0)%>-><%getLabel()%>" root-heading-title="<%args(0)%>-><%getLabel()%>" facetid="<%getFullName()%>">
+					<!-- criteria -->
+				    <!-- On ne prend pas en compte les différentes occurences d'un même critère car facetmap les réunit. -->
+				    <xsl:for-each select="child::entry/cmis:object/cmis:properties/cmis:property<%if typ!="int"{%><%typ%><%}else{%>Integer<%}%>[@cmis:name='<%getFullName()%>']/cmis:value">          
+				        <heading id="{current()}" title="{current()}"/>             
+				    </xsl:for-each> 
+				</taxonomy>
+		<%}%>
 	<%}%>
 	
 <%script type="clazz.Clazz" name="ressource"%>
-	<%for (getAllAttributes()){%>
-           <map heading="{child::cmis:object/cmis:properties/cmis:propertyString[@cmis:name='<%getFullName()%>']/cmis:value}"/>
+	<%if getLabel()=="Personne"{%>
+		<%for (getAllAttributes()){%>
+	           <map heading="{child::cmis:object/cmis:properties/cmis:property<%if typ!="int"{%><%typ%><%}else{%>Integer<%}%>[@cmis:name='<%getFullName()%>']/cmis:value}"/>
+		<%}%>
 	<%}%>
 
 <%script type="clazz.ClassPackage" name="facetmapGenerator"  file="<%validatedFilename%>" %>
