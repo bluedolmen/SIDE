@@ -14,6 +14,7 @@ public class TechnologyVersion extends TreeNode {
 
 	public TechnologyVersion(IConfigurationElement elt, Technology t) {
 		technology = t;
+		parent = t;
 		technology.addTechnologyVersion(this);
 		id = elt.getAttribute("id");
 		version = elt.getAttribute("version");

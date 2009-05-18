@@ -16,6 +16,8 @@ public class Generator extends ImplNode {
 
 	public Generator(IConfigurationElement elt, TechnologyVersion tv) {
 		technologyVersion = tv;
+		parent = (TreeNode)tv;
+		
 		technologyVersion.addGenerator(this);
 		id = elt.getAttribute("id");
 		version = elt.getAttribute("version");

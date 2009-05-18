@@ -11,12 +11,11 @@ public class Technology extends TreeNode {
 	private String label;
 	private String url;
 	private String description;
-	private Metamodel parent;
 	private Set<TreeNode> versions;
 
 	public Technology(IConfigurationElement elt, Metamodel m) {
 		parent = m;
-		parent.addTechnology(this);
+		((Metamodel)parent).addTechnology(this);
 		id = elt.getAttribute("id");
 		label = elt.getAttribute("name");
 		url = elt.getAttribute("url");
@@ -37,7 +36,7 @@ public class Technology extends TreeNode {
 	}
 	
 	public Metamodel getMetamodel() {
-		return parent;
+		return (Metamodel)parent;
 	}
 
 	

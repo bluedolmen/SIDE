@@ -13,6 +13,7 @@ public abstract class OptionComponant  extends TreeNode {
 	ImplNode impl;
 
 	public OptionComponant(IConfigurationElement elt,ImplNode implNode) {
+		parent = (TreeNode)implNode;
 		key = elt.getAttribute("key");
 		label = elt.getAttribute("label");
 		description = elt.getAttribute("documentation");

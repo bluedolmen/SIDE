@@ -15,6 +15,7 @@ public class Metamodel extends TreeNode {
 	private String _description;
 
 	public Metamodel(IConfigurationElement elt) {
+		parent = null;
 		_id = elt.getAttribute("id");
 		_label = elt.getAttribute("name");
 		_url = elt.getAttribute("url");

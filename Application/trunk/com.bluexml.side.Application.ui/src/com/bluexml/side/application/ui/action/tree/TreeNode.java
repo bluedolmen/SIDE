@@ -5,6 +5,12 @@ import java.util.Collection;
 public abstract class TreeNode extends TreeElement {
 	protected String id;
 	public abstract Collection<TreeNode> getChildren();
+	public TreeNode parent;
+	
+	public TreeNode(){
+		
+	}
+	
 	public String getId() {
 		return id;
 	}
@@ -27,5 +33,7 @@ public abstract class TreeNode extends TreeElement {
 		return null;
 	}
 	
-	
+	public TreeNode getParent() {
+		return parent;
+	}
 }
