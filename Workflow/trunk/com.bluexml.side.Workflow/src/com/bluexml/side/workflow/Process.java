@@ -218,7 +218,7 @@ public interface Process extends com.bluexml.side.common.Package {
 	 * @return the value of the '<em>Content Type</em>' reference.
 	 * @see #setContentType(Clazz)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getProcess_ContentType()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Clazz getContentType();
