@@ -45,6 +45,7 @@ public class FormGenerator extends AbstractGenerator {
 	private static final String ARCHETYPE_VERSION = "2.0.0-SNAPSHOT";
 	private static final String SNAPSHOTREPOSITORY = "http://merry.bluexml.com/m2/snapshotrepository";
 	private static final String REPOSITORY = "http://merry.bluexml.com/m2/repository";
+	private static final String GENERATOR_CODE = "CODE_GED_G_F_CHIBA";
 	private static final SAXBuilder sxb = new SAXBuilder();
 	private static final XMLOutputter outputter = new XMLOutputter(Format
 			.getPrettyFormat());
