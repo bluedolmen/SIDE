@@ -51,6 +51,7 @@ public class ClassFacetmapGenerator extends AbstractAcceleoGenerator {
 			List<String> result = new ArrayList<String>();
 				result.add("/com.bluexml.side.Class.generator.facetmap/templates/facetmap-cmis2xfml-generation.mt");
 				result.add("/com.bluexml.side.Class.generator.facetmap/templates/facetmap-cmis-generation.mt");
+				result.add("/com.bluexml.side.Class.generator.facetmap/templates/facetmap-cmis-properties-generation.mt");
 			return result;
 	}
 

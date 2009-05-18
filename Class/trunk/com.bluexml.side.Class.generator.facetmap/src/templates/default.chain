@@ -12,5 +12,6 @@
   <actions>
     <actions xsi:type="chain:Generate" documentation="Generation de la xsl" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>
     <actions xsi:type="chain:Generate" documentation="G&#xe9;n&#xe9;ration de la requette CMIS" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.5" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="G&#xe9;n&#xe9;ration du fichier de propri&#xe9;t&#xe9;s" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.6" folder="//@repository/@files.1"/>
   </actions>
 </chain:Chain>
