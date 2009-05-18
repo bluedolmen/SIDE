@@ -1,5 +1,6 @@
-CODE_GED_G_C_ALFRESCO_3,1,Code composant du générateur de classes  sur alfresco 3.0 et 3.1
-CODE_GED_G_W_ALFRESCO_3,2,Code composant du générateur de workflow sur alfresco 3.0 et 3.1
-CODE_GED_G_P_ALFRESCO_SHARE_30,4,Code composant du générateur de portail sur alfresco SHARE (version GED++)
-CODE_GED_G_P_LIFERAY_511,8,Code composant du générateur de portail sur liferay (version GED++)
-CODE_GED_G_F_CHIBA,16,Code composant du générateur de formulaires sur Chiba (version GED++)
+CODE_GED_G_C_ALFRESCO_3,1
+CODE_GED_G_W_ALFRESCO_3,2
+CODE_GED_G_P_ALFRESCO_SHARE_30,4
+CODE_GED_G_P_LIFERAY_511,8
+CODE_GED_G_F_CHIBA,16
+CODE_GED_G_C_FACETMAP_2,32

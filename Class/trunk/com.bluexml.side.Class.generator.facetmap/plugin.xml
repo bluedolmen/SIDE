@@ -18,6 +18,11 @@
                      class="com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator"
                      id="com.bluexml.side.Class.generator.facetmap"
                      version="S-IDE Facetmap Generator 1.0.0">
+                  <configurationParameter
+                        documentation="Host of the server where alfresco is installed"
+                        key="com.bluexml.side.Class.generator.facetmap.host"
+                        label="Host">
+                  </configurationParameter>
                </generatorVersion>
             </technologyVersion>
          </technology>
