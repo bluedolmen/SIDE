@@ -1,9 +1,6 @@
 package com.bluexml.side.clazz.generator.alfresco.test;
 
-import java.util.Collection;
 import java.util.Map;
-
-import org.eclipse.core.resources.IFile;
 
 import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator;
 

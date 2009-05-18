@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.imageio.stream.ImageOutputStream;
-
 import org.eclipse.core.internal.resources.Folder;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -36,7 +34,6 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.accessibility.AccessibleAdapter;
@@ -1196,8 +1193,8 @@ public class ApplicationDialog extends Dialog {
 		}
 		
 		/**
-		 * Initialise les éléments de l'arbre en les checkant sur la clé.
-		 * Si l'élément est invalide il sera desactivé
+		 * Initialise les ï¿½lï¿½ments de l'arbre en les checkant sur la clï¿½.
+		 * Si l'ï¿½lï¿½ment est invalide il sera desactivï¿½
 		 */
 		public void initializeFromKey(){
 			 

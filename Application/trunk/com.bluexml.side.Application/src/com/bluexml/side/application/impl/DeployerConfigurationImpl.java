@@ -6,14 +6,10 @@
  */
 package com.bluexml.side.application.impl;
 
-import com.bluexml.side.application.ApplicationPackage;
-import com.bluexml.side.application.DeployerConfiguration;
-
-import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import com.bluexml.side.application.ApplicationPackage;
+import com.bluexml.side.application.DeployerConfiguration;
 
 /**
  * <!-- begin-user-doc -->

@@ -6,7 +6,6 @@
  */
 package com.bluexml.side.application.util;
 
-import com.bluexml.side.application.*;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;

@@ -6,35 +6,29 @@
  */
 package com.bluexml.side.clazz.impl;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
-import com.bluexml.side.clazz.AbstractClass;
-import com.bluexml.side.clazz.Association;
-import com.bluexml.side.clazz.AssociationType;
-import com.bluexml.side.clazz.ClassModelElement;
-import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.clazz.ClazzPackage;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.ocl.EvaluationEnvironment;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.expressions.OCLExpression;
+
+import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
+import com.bluexml.side.clazz.AbstractClass;
+import com.bluexml.side.clazz.Association;
+import com.bluexml.side.clazz.AssociationType;
+import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.clazz.ClazzPackage;
 
 /**
  * <!-- begin-user-doc -->

@@ -6,29 +6,18 @@
  */
 package com.bluexml.side.clazz.impl;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.ocl.ecore.OCL;
+
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.AttributeType;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.clazz.Visibility;
-
-import java.util.Collection;
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EAnnotation;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.ParserException;
-import org.eclipse.ocl.Query;
-import org.eclipse.ocl.ecore.OCL;
-import org.eclipse.ocl.expressions.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->

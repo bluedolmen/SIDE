@@ -7,9 +7,6 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 
-import com.bluexml.side.application.security.SecurityHelper;
-import com.bluexml.side.settings.SidePreferences;
-
 public interface IGenerator {
 
 	/**

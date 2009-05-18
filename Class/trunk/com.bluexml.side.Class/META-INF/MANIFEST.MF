@@ -17,4 +17,4 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Util.MetaModel.validate;bundle-version="1.0.0",
  org.eclipse.ocl,
  org.eclipse.ocl.ecore
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy

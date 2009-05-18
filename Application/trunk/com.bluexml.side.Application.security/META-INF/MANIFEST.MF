@@ -10,3 +10,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-SymbolicName: com.bluexml.side.Application.security
 Export-Package: com.bluexml.side.application.security
 Import-Package: com.bluexml.side.util.libs
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
