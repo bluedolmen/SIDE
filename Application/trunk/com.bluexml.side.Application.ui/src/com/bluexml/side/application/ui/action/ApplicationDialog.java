@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.internal.resources.Folder;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -105,7 +104,7 @@ import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 import com.bluexml.side.application.ui.action.utils.validator.FolderSelectionValidator;
 import com.bluexml.side.application.ui.action.utils.viewFilter.SideFileFiter;
 
-
+@SuppressWarnings("restriction")
 public class ApplicationDialog extends Dialog {
 
 	private Group optionsGroup;
@@ -119,8 +118,6 @@ public class ApplicationDialog extends Dialog {
 	public static boolean loadingTree = false;
 	public static boolean applicationModified = false;
 
-	private Map<String, Metamodel> metamodelSet;
-	private Map<String, Technology> technologySet;
 
 	private Map<String, GeneratorParameter> configurationParameters;
 	private Map<String, List<String>> genParamConfByGenerator;
@@ -145,15 +142,14 @@ public class ApplicationDialog extends Dialog {
 	private TabFolder tabFolder;
 	private TabItem generationConfigurationTabItem;
 	private TreeViewer deployOptionsTree;
-	private DataBindingContext m_bindingContext;
+	private TabItem deployementTabItem;
 
 	public static String KEY_VERBOSE = "generation.options.verbose";
-	public static String KEY_CLEAN = "generation.options.clean";
 	public static String KEY_SKIPVALIDATION = "generation.option.Skip.Validation";
 	public static String KEY_LOGPATH = "generation.options.logPath";
 	public static String KEY_GENPATH = "generation.options.destinationPath";
 
-	public static List<String> staticFieldsName = Arrays.asList(KEY_CLEAN, KEY_GENPATH, KEY_LOGPATH, KEY_SKIPVALIDATION, KEY_VERBOSE);
+	public static List<String> staticFieldsName = Arrays.asList(KEY_GENPATH, KEY_LOGPATH, KEY_SKIPVALIDATION, KEY_VERBOSE);
 
 	private static String EXTENSIONPOINT_ID = "com.bluexml.side.Application.com_bluexml_application_configuration";
 
@@ -167,13 +163,17 @@ public class ApplicationDialog extends Dialog {
 		super(parentShell);
 
 		try {
-			URI uri = URI.createFileURI(file.getRawLocation().toFile().getAbsolutePath());
+			URI uri = URI.createFileURI(file.getRawLocation().toFile()
+					.getAbsolutePath());
 			XMIResource resource = new XMIResourceImpl(uri);
 
-			FileInputStream fi = new FileInputStream(file.getRawLocation().toFile());
+			FileInputStream fi = new FileInputStream(file.getRawLocation()
+					.toFile());
 			Map<Object, Object> map = new HashMap<Object, Object>();
-			map.put(ApplicationPackage.eINSTANCE.getNsURI(), ApplicationPackage.eINSTANCE);
-			map.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
+			map.put(ApplicationPackage.eINSTANCE.getNsURI(),
+					ApplicationPackage.eINSTANCE);
+			map.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION,
+					Boolean.TRUE);
 			resource.load(fi, map);
 
 			application = (Application) resource.getContents().get(0);
@@ -182,8 +182,6 @@ public class ApplicationDialog extends Dialog {
 			e.printStackTrace();
 		}
 
-		metamodelSet = new HashMap<String, Metamodel>();
-		technologySet = new HashMap<String, Technology>();
 		configurationParameters = new HashMap<String, GeneratorParameter>();
 		genParamConfByGenerator = new HashMap<String, List<String>>();
 		deployParamConfByGenerator = new HashMap<String, List<String>>();
@@ -192,7 +190,8 @@ public class ApplicationDialog extends Dialog {
 	public void refreshConfiguration() {
 		loadingTree = true;
 		if (configurationList.getSelectionIndex() != -1) {
-			String name = configurationList.getItem(configurationList.getSelectionIndex());
+			String name = configurationList.getItem(configurationList
+					.getSelectionIndex());
 			Configuration configuration = application.getConfiguration(name);
 
 			// Refresh documentation
@@ -213,45 +212,54 @@ public class ApplicationDialog extends Dialog {
 		}
 		loadingTree = false;
 	}
-
+	
+	/**
+	 * Refresh option for the current configuration
+	 */
 	public void refreshOptions() {
-		String name = configurationList.getItem(configurationList.getSelectionIndex());
-		Configuration configuration = application.getConfiguration(name);
+		Configuration configuration = getCurrentConfiguration();
 		refreshOptions(configuration);
 	}
-	
+
+	/**
+	 * Refresh option for the given configuration
+	 * @param configuration
+	 */
 	public void refreshOptions(Configuration configuration) {
 		initializeDynamicParameters();
 		configureGeneratorOptions(configuration);
 	}
 
 	public void refreshImplNodeOptions() {
-		String name = configurationList.getItem(configurationList.getSelectionIndex());
+		String name = configurationList.getItem(configurationList
+				.getSelectionIndex());
 		Configuration configuration = application.getConfiguration(name);
 		refreshOptions(configuration);
 	}
 
 	private void initializeStaticParameters() {
-		ConfigurationParameters verboseParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_VERBOSE);
+		ConfigurationParameters verboseParam = ApplicationUtil
+				.getConfigurationParmeterByKey(KEY_VERBOSE);
 		if (verboseParam != null) {
-			verboseButton.setSelection(Boolean.parseBoolean(verboseParam.getValue()));
+			verboseButton.setSelection(Boolean.parseBoolean(verboseParam
+					.getValue()));
 		}
 
-		ConfigurationParameters cleanParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_CLEAN);
-		if (cleanParam != null) {
-		}
-
-		ConfigurationParameters skipValidationParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_SKIPVALIDATION);
+		ConfigurationParameters skipValidationParam = ApplicationUtil
+				.getConfigurationParmeterByKey(KEY_SKIPVALIDATION);
 		if (skipValidationParam != null) {
-			skipValidationButton.setSelection(Boolean.parseBoolean(skipValidationParam.getValue()));
+			skipValidationButton.setSelection(Boolean
+					.parseBoolean(skipValidationParam.getValue()));
 		}
 
-		ConfigurationParameters logPathParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_LOGPATH);
+		ConfigurationParameters logPathParam = ApplicationUtil
+				.getConfigurationParmeterByKey(KEY_LOGPATH);
 		if (logPathParam != null) {
 			logText.setText(logPathParam.getValue());
 		}
 
-		ConfigurationParameters updatePathParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_GENPATH);
+		ConfigurationParameters updatePathParam = ApplicationUtil
+				.getConfigurationParmeterByKey(KEY_GENPATH);
 		if (updatePathParam != null) {
 			destinationText.setText(updatePathParam.getValue());
 		}
@@ -262,8 +270,9 @@ public class ApplicationDialog extends Dialog {
 		Generator gen = getSelectedGenerator();
 		List<String> confIds = new ArrayList<String>();
 		if (gen == null) {
-			Configuration conf = getCurrentConfiguration(); 
-			for (ComponantConfiguration elem : ApplicationUtil.getComponantConfigurations(conf)) {
+			Configuration conf = getCurrentConfiguration();
+			for (ComponantConfiguration elem : ApplicationUtil
+					.getComponantConfigurations(conf)) {
 				confIds.add(elem.getId());
 			}
 			optionsGroup.setText("Options");
@@ -283,7 +292,8 @@ public class ApplicationDialog extends Dialog {
 				// We construct one list without twice the same id
 				for (String paramId : paramList) {
 					if (!neededParam.containsKey(paramId)) {
-						neededParam.put(paramId, configurationParameters.get(paramId));
+						neededParam.put(paramId, configurationParameters
+								.get(paramId));
 					}
 				}
 			}
@@ -318,12 +328,13 @@ public class ApplicationDialog extends Dialog {
 	private void configureGeneratorOptions(Configuration configuration) {
 		Configuration conf = getCurrentConfiguration();
 		for (ConfigurationParameters confParam : conf.getParameters()) {
-			GeneratorParameter genParam = dataStructure.getParamMatching(confParam.getKey());
+			GeneratorParameter genParam = dataStructure
+					.getParamMatching(confParam.getKey());
 			if (genParam != null) {
 				genParam.setValue(confParam.getValue());
 			}
 		}
-		
+
 		// Update
 		if (generatorParametersViewer == null) {
 			createTableViewer();
@@ -333,24 +344,26 @@ public class ApplicationDialog extends Dialog {
 	}
 
 	private Generator getSelectedGenerator() {
-		TreeSelection ts = (TreeSelection)viewer.getSelection();
+		TreeSelection ts = (TreeSelection) viewer.getSelection();
 		Object o = ts.getFirstElement();
-		if(o instanceof TreeNode) {
-			return getSelectedGenerator((TreeNode)o);
+		if (o instanceof TreeNode) {
+			return getSelectedGenerator((TreeNode) o);
 		} else {
 			return null;
 		}
 	}
 
 	/**
-	 * Return the selected generator, or null if no generator top to the selected element or non selected generator.
+	 * Return the selected generator, or null if no generator top to the
+	 * selected element or non selected generator.
+	 * 
 	 * @param o
 	 * @return
 	 */
 	private Generator getSelectedGenerator(TreeNode o) {
 		if (o instanceof Generator) {
 			if (o.isChecked()) {
-				return (Generator)o;
+				return (Generator) o;
 			} else {
 				return null;
 			}
@@ -362,12 +375,14 @@ public class ApplicationDialog extends Dialog {
 			}
 		}
 	}
-	
-	private void configureTree(Configuration configuration, Set<TreeItem> generators) {
+
+	private void configureTree(Configuration configuration,
+			Set<TreeItem> generators) {
 		for (TreeItem item : generators) {
 
 			ImplNode g = (ImplNode) item.getData();
-			for (ComponantConfiguration ce : ApplicationUtil.getComponantConfigurations(configuration)) {
+			for (ComponantConfiguration ce : ApplicationUtil
+					.getComponantConfigurations(configuration)) {
 				if (ce.getId().equals(g.getId())) {
 					g.setChecked(true);
 					g.setEnabled(true);
@@ -434,18 +449,20 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Check if the element given is active in the key
-	 * @param el : the element
+	 * 
+	 * @param el
+	 *            : the element
 	 * @return true if valid, false if not
 	 */
-	private Boolean checkElementValidity(TreeElement el){
-		//If the element is a component and not valid we don't enable it
+	private Boolean checkElementValidity(TreeElement el) {
+		// If the element is a component and not valid we don't enable it
 		try {
 			ImplNode iN = ((ImplNode) el);
 			Class<Checkable> gen;
-			gen = Platform.getBundle( iN.getId()).loadClass(iN.getLaunchClass());
+			gen = Platform.getBundle(iN.getId()).loadClass(iN.getLaunchClass());
 			Checkable gener = gen.newInstance();
 			return gener.check();
-		} catch (ClassNotFoundException e){
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
@@ -454,14 +471,16 @@ public class ApplicationDialog extends Dialog {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Open file dialog box to select files (here a model)
 	 */
 	protected void SelectModelFileDialog() {
 		String filePath = null;
 		String fileName = null;
-		ElementTreeSelectionDialog ets = new ElementTreeSelectionDialog(Display.getDefault().getActiveShell(), new WorkbenchLabelProvider(), new BaseWorkbenchContentProvider());
+		ElementTreeSelectionDialog ets = new ElementTreeSelectionDialog(Display
+				.getDefault().getActiveShell(), new WorkbenchLabelProvider(),
+				new BaseWorkbenchContentProvider());
 		ets.setBlockOnOpen(true);
 		ets.setAllowMultiple(true);
 		ets.setTitle("Select model file");
@@ -469,7 +488,7 @@ public class ApplicationDialog extends Dialog {
 		ets.setInput(ResourcesPlugin.getWorkspace().getRoot());
 		ets.setHelpAvailable(false);
 		ets.addFilter(new SideFileFiter());
-		
+
 		if (ElementTreeSelectionDialog.OK == ets.open()) {
 			Object[] result = ets.getResult();
 			for (Object o : result) {
@@ -508,7 +527,6 @@ public class ApplicationDialog extends Dialog {
 		tabFolder = new TabFolder(container, SWT.NONE);
 		tabFolder.setBounds(15, 39, 472, 484);
 
-
 		final TabItem modelsTabItem = new TabItem(tabFolder, SWT.NONE);
 		modelsTabItem.setText("Models");
 
@@ -544,28 +562,21 @@ public class ApplicationDialog extends Dialog {
 
 		final Label generationsOptionsLabel_2 = new Label(composite_3, SWT.NONE);
 		generationsOptionsLabel_2.setBounds(10, 8, 240, 24);
-		generationsOptionsLabel_2.setFont(SWTResourceManager.getFont("", 12, SWT.BOLD));
+		generationsOptionsLabel_2.setFont(SWTResourceManager.getFont("", 12,
+				SWT.BOLD));
 		generationsOptionsLabel_2.setText("Model Lists");
 
 		generationConfigurationTabItem = new TabItem(tabFolder, SWT.NONE);
 		generationConfigurationTabItem.setText("Generation");
 
-		tabFolder.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(final SelectionEvent e) {
-				if (tabFolder.getSelection().length > 0 && tabFolder.getSelection()[0].equals(generationConfigurationTabItem)) {
-					optionsGroup.setVisible(true);
-				} else {
-					optionsGroup.setVisible(false);
-				}
-			}
-		});
 		
-		
+
 		final Composite composite_1 = new Composite(tabFolder, SWT.NONE);
 		composite_1.addMouseListener(new MouseAdapter() {
 			public void mouseDown(final MouseEvent e) {
 				if (!tabFolder.getEnabled()) {
-					showAlert("No Configuration", "You must create a configuration to edit it.");
+					showAlert("No Configuration",
+							"You must create a configuration to edit it.");
 				}
 			}
 		});
@@ -574,102 +585,21 @@ public class ApplicationDialog extends Dialog {
 		viewer = new TreeViewer(composite_1, SWT.BORDER);
 		tree_1 = viewer.getTree();
 		tree_1.setBounds(0, 142, 459, 304);
-		viewer.setContentProvider(new ConfigurationContentProvider(metamodelSet));
+		List<Class<?>> omitedClassForGen = new ArrayList<Class<?>>();
+		omitedClassForGen.add(Deployer.class);
+		viewer.setContentProvider(new ConfigurationContentProvider(Metamodel.class,omitedClassForGen));
 		viewer.setLabelProvider(new ConfigurationLabelProvider());
 		viewer.setInput(this);
 		viewer.expandAll();
-		
-		
-		Listener checkOnClick = new Listener() {
-			public void handleEvent(Event event) {
-				Point point = new Point(event.x, event.y);
-				documentationText.setText(builDocumentationText());
-				//TreeItem item = (TreeItem) event.item;
-				TreeItem item =  viewer.getTree().getItem(point);
 
-				TreeElement el = (TreeElement) item.getData();
-				//Check if el is active or not in the key if it is a component
-				boolean canCheck = true;
-				if (el instanceof ImplNode) {
-					canCheck = checkElementValidity(el);
-					if (!canCheck){
-						component_validity.setText("This element is not active in your key");
-					} else{
-						component_validity.setText("");
-					}
-				} else{
-					component_validity.setText("");
-				}
-				refreshOptions();
-				
-				// If click on image : check it, else : just show informations
-				if (canCheck && (item.getImageBounds(0) != null && event.x <= item.getImageBounds(0).x + item.getImageBounds(0).width)) {
-					// Check if enabled
-					if (el.isEnabled()) {
-						// Inverse
-						el.setChecked(!(el.isChecked()));
-						viewer.update(el, null);
-						
-						if (el.isChecked()) {
-							// Enable all sub elements
-							enableAllSubElements(item);
-						} else {
-							// Enable all sub elements
-							disableAllSubElements(item);
-							optionsGroup.setVisible(false);
-						}
-					} else {
-						
-					}
-				}
-}
-
-			
-
-			private void enableAllSubElements(TreeItem item) {
-				for (TreeItem ti : item.getItems()) {
-					TreeElement el = (TreeElement) ti.getData();
-					//Check the validity if the component
-					if (el instanceof ImplNode) {
-						if (checkElementValidity(el)){
-							el.setEnabled(true);
-						}
-						viewer.update(el, null);
-					}
-					else if (!el.isEnabled()) {
-						el.setEnabled(true);
-						viewer.update(el, null);
-					}
-					if (el.isChecked()) {
-						if (el instanceof ImplNode) {
-							refreshImplNodeOptions();
-						}
-						enableAllSubElements(ti);
-					}
-				}
-			}
-
-			private void disableAllSubElements(TreeItem item) {
-				for (TreeItem ti : item.getItems()) {
-					TreeElement el = (TreeElement) ti.getData();
-					if (el.isEnabled()) {
-						el.setEnabled(false);
-						if (el instanceof ImplNode) {
-							refreshImplNodeOptions();
-						}
-						viewer.update(el, null);
-					}
-					disableAllSubElements(ti);
-				}
-			}
-		};
-		
+		Listener checkOnClick = new GenerationOptionTreeListener();
 		viewer.getTree().addListener(SWT.MouseDown, checkOnClick);
 
 		logText = new Text(composite_1, SWT.BORDER);
 		logText.addFocusListener(new FocusAdapter() {
 			public void focusLost(final FocusEvent e) {
-				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_LOGPATH);
+				ConfigurationParameters param = ApplicationUtil
+						.getConfigurationParmeterByKey(KEY_LOGPATH);
 				if (param != null) {
 					Text t = (Text) e.getSource();
 					param.setValue(t.getText());
@@ -693,7 +623,8 @@ public class ApplicationDialog extends Dialog {
 		destinationText = new Text(composite_1, SWT.BORDER);
 		destinationText.addFocusListener(new FocusAdapter() {
 			public void focusLost(final FocusEvent e) {
-				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_GENPATH);
+				ConfigurationParameters param = ApplicationUtil
+						.getConfigurationParmeterByKey(KEY_GENPATH);
 				if (param != null) {
 					Text t = (Text) e.getSource();
 					param.setValue(t.getText());
@@ -714,7 +645,8 @@ public class ApplicationDialog extends Dialog {
 					filePath = folder.getFullPath().toPortableString();
 					logText.setText(filePath);
 
-					ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_LOGPATH);
+					ConfigurationParameters param = ApplicationUtil
+							.getConfigurationParmeterByKey(KEY_LOGPATH);
 					if (param != null) {
 						param.setValue(filePath);
 						modificationMade();
@@ -736,7 +668,8 @@ public class ApplicationDialog extends Dialog {
 					filePath = folder.getFullPath().toPortableString();
 					destinationText.setText(filePath);
 
-					ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_GENPATH);
+					ConfigurationParameters param = ApplicationUtil
+							.getConfigurationParmeterByKey(KEY_GENPATH);
 					if (param != null) {
 						param.setValue(filePath);
 						modificationMade();
@@ -750,12 +683,13 @@ public class ApplicationDialog extends Dialog {
 		final Label chooseYourGenerationLabel = new Label(composite_1, SWT.NONE);
 		chooseYourGenerationLabel.setText("Choose your generation options :");
 		chooseYourGenerationLabel.setBounds(0, 95, 456, 15);
-		
+
 		verboseButton = new Button(composite_1, SWT.CHECK);
 		verboseButton.setToolTipText("Will print out generation information.");
 		verboseButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_VERBOSE);
+				ConfigurationParameters param = ApplicationUtil
+						.getConfigurationParmeterByKey(KEY_VERBOSE);
 				if (param != null) {
 					Button b = (Button) e.getSource();
 					param.setValue(Boolean.toString(b.getSelection()));
@@ -765,11 +699,12 @@ public class ApplicationDialog extends Dialog {
 		});
 		verboseButton.setText("Verbose");
 		verboseButton.setBounds(10, 116, 108, 20);
-		
+
 		skipValidationButton = new Button(composite_1, SWT.CHECK);
 		skipValidationButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_SKIPVALIDATION);
+				ConfigurationParameters param = ApplicationUtil
+						.getConfigurationParmeterByKey(KEY_SKIPVALIDATION);
 				if (param != null) {
 					Button b = (Button) e.getSource();
 					param.setValue(Boolean.toString(b.getSelection()));
@@ -777,17 +712,32 @@ public class ApplicationDialog extends Dialog {
 				ApplicationDialog.modificationMade();
 			}
 		});
-		skipValidationButton.setToolTipText("If checked will skip the validation task.");
-		skipValidationButton.getAccessible().addAccessibleListener(new AccessibleAdapter() {
-			public void getHelp(AccessibleEvent e) {
-				e.result = "If checked will move uploaded files to your application.";
-			}
-		});
+		skipValidationButton
+				.setToolTipText("If checked will skip the validation task.");
+		skipValidationButton.getAccessible().addAccessibleListener(
+				new AccessibleAdapter() {
+					public void getHelp(AccessibleEvent e) {
+						e.result = "If checked will move uploaded files to your application.";
+					}
+				});
 		skipValidationButton.setText("Skip Validation");
 		skipValidationButton.setBounds(160, 116, 108, 20);
-		
-		final TabItem deployementTabItem = new TabItem(tabFolder, SWT.NONE);
+
+		deployementTabItem = new TabItem(tabFolder, SWT.NONE);
 		deployementTabItem.setText("Deployement");
+		
+		tabFolder.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(final SelectionEvent e) {
+				if (tabFolder.getSelection().length > 0
+						&& (tabFolder.getSelection()[0]
+								.equals(generationConfigurationTabItem) || tabFolder.getSelection()[0].equals(deployementTabItem))) {
+					optionsGroup.setVisible(true);
+				} else {
+					optionsGroup.setVisible(false);
+				}
+				documentationText.setText("");
+			}
+		});
 
 		final Composite composite = new Composite(tabFolder, SWT.NONE);
 		deployementTabItem.setControl(composite);
@@ -795,17 +745,20 @@ public class ApplicationDialog extends Dialog {
 		deployOptionsTree = new TreeViewer(composite, SWT.BORDER);
 		Tree tree_2 = deployOptionsTree.getTree();
 		tree_2.setBounds(0, 36, 459, 410);
-		tree_2.addListener(SWT.MouseDown, checkOnClick);
+		Listener deployementListener = new DeployementOptionTreeListener();
+		tree_2.addListener(SWT.MouseDown, deployementListener);
 		
-		deployOptionsTree.setContentProvider(new ConfigurationContentProvider(technologySet));
+		List<Class<?>> omitedClassForDeploy = new ArrayList<Class<?>>();
+		omitedClassForDeploy.add(Generator.class);
+		deployOptionsTree.setContentProvider(new ConfigurationContentProvider(Metamodel.class,omitedClassForDeploy));
 		deployOptionsTree.setLabelProvider(new ConfigurationLabelProvider());
 		deployOptionsTree.setInput(this);
 		deployOptionsTree.expandAll();
-		
-		
+
 		final Label chooseYourGenerationLabel_1 = new Label(composite, SWT.NONE);
 		chooseYourGenerationLabel_1.setBounds(10, 15, 456, 15);
-		chooseYourGenerationLabel_1.setText("Choose your deployement options :");
+		chooseYourGenerationLabel_1
+				.setText("Choose your deployement options :");
 
 		for (ModelElement elem : application.getElements()) {
 			if (elem instanceof Model) {
@@ -815,19 +768,21 @@ public class ApplicationDialog extends Dialog {
 		}
 
 		// Component thaht shows the description in the top right of the scree
-		config_description = new Text(container, SWT.READ_ONLY | SWT.BORDER | SWT.WRAP);
+		config_description = new Text(container, SWT.READ_ONLY | SWT.BORDER
+				| SWT.WRAP);
 		config_description.setBounds(493, 10, 297, 51);
-		
+
 		// Show a warning if the component is not valid
 		component_validity = new Label(container, SWT.BOLD);
 		component_validity.setBounds(493, 67, 297, 15);
-		component_validity.setForeground(new Color(container.getDisplay(),255,0,0));
-		
+		component_validity.setForeground(new Color(container.getDisplay(), 255,
+				0, 0));
+
 		// Browser that shows informations on the selected component (right)
 		documentationText = new Browser(container, SWT.BORDER);
 		documentationText.setBounds(493, 88, 297, 104);
 		documentationText.setText(buildHelpDocumentationText(""));
-		
+
 		configurationList = new Combo(container, SWT.READ_ONLY);
 		configurationList.setBounds(128, 10, 191, 23);
 		configurationList.addSelectionListener(new SelectionAdapter() {
@@ -860,9 +815,13 @@ public class ApplicationDialog extends Dialog {
 			public void widgetSelected(final SelectionEvent e) {
 				if (configurationList.getItemCount() > 0) {
 					if (configurationList.getSelectionIndex() != -1) {
-						String name = configurationList.getItem(configurationList.getSelectionIndex());
-						Configuration config = application.getConfiguration(name);
-						ConfigurationDialog dialog = new ConfigurationDialog(new Shell(), config.getName(), config.getDescription());
+						String name = configurationList
+								.getItem(configurationList.getSelectionIndex());
+						Configuration config = application
+								.getConfiguration(name);
+						ConfigurationDialog dialog = new ConfigurationDialog(
+								new Shell(), config.getName(), config
+										.getDescription());
 						if (dialog.open() == Window.OK) {
 							config.setName(dialog.getName());
 							config.setDescription(dialog.getDescription());
@@ -880,13 +839,15 @@ public class ApplicationDialog extends Dialog {
 				}
 			}
 		});
-		editBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class, "tree/img/edit.png"));
+		editBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class,
+				"tree/img/edit.png"));
 
 		final Button addBt = new Button(container, SWT.NONE);
 		addBt.setBounds(375, 10, 48, 26);
 		addBt.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				Configuration config = ApplicationFactory.eINSTANCE.createConfiguration();
+				Configuration config = ApplicationFactory.eINSTANCE
+						.createConfiguration();
 
 				int i = 0;
 				String newName = "New configuration";
@@ -905,33 +866,33 @@ public class ApplicationDialog extends Dialog {
 			}
 
 			private void addStaticParameters(Configuration config) {
-				ConfigurationParameters verboseParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
+				ConfigurationParameters verboseParam = ApplicationFactory.eINSTANCE
+						.createConfigurationParameters();
 				verboseParam.setKey(KEY_VERBOSE);
 				verboseParam.setValue("false");
 				config.getParameters().add(verboseParam);
 
-				ConfigurationParameters cleanParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
-				cleanParam.setKey(KEY_CLEAN);
-				cleanParam.setValue("false");
-				config.getParameters().add(cleanParam);
-
-				ConfigurationParameters updateParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
+				ConfigurationParameters updateParam = ApplicationFactory.eINSTANCE
+						.createConfigurationParameters();
 				updateParam.setKey(KEY_SKIPVALIDATION);
 				updateParam.setValue("false");
 				config.getParameters().add(updateParam);
 
-				ConfigurationParameters logPathParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
+				ConfigurationParameters logPathParam = ApplicationFactory.eINSTANCE
+						.createConfigurationParameters();
 				logPathParam.setKey(KEY_LOGPATH);
 				logPathParam.setValue("");
 				config.getParameters().add(logPathParam);
 
-				ConfigurationParameters generationPathParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
+				ConfigurationParameters generationPathParam = ApplicationFactory.eINSTANCE
+						.createConfigurationParameters();
 				generationPathParam.setKey(KEY_GENPATH);
 				generationPathParam.setValue("");
 				config.getParameters().add(generationPathParam);
 			}
 		});
-		addBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class, "tree/img/add.png"));
+		addBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class,
+				"tree/img/add.png"));
 
 		final Button deleteBt = new Button(container, SWT.NONE);
 		deleteBt.setBounds(425, 10, 48, 26);
@@ -939,8 +900,10 @@ public class ApplicationDialog extends Dialog {
 			public void widgetSelected(final SelectionEvent e) {
 				if (configurationList.getItemCount() > 0) {
 					if (configurationList.getSelectionIndex() != -1) {
-						String name = configurationList.getItem(configurationList.getSelectionIndex());
-						Configuration config = application.getConfiguration(name);
+						String name = configurationList
+								.getItem(configurationList.getSelectionIndex());
+						Configuration config = application
+								.getConfiguration(name);
 						if (config != null) {
 							application.getElements().remove(config);
 							configurationList.remove(name);
@@ -956,13 +919,14 @@ public class ApplicationDialog extends Dialog {
 				refreshConfiguration();
 			}
 		});
-		deleteBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class, "tree/img/delete.png"));
+		deleteBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class,
+				"tree/img/delete.png"));
 
 		optionsGroup = new Group(container, SWT.NONE);
 		optionsGroup.setText("Options");
 		optionsGroup.setBounds(490, 198, 300, 315);
 		optionsGroup.setVisible(false);
-		
+
 		generatorParameters = new Table(optionsGroup, SWT.BORDER);
 		generatorParameters.setBounds(0, 23, 295, 292);
 		generatorParameters.setTopIndex(3);
@@ -972,34 +936,49 @@ public class ApplicationDialog extends Dialog {
 		generatorParameters.setHeaderVisible(true);
 		generatorParameters.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
-				GeneratorParameter param = (GeneratorParameter) ((StructuredSelection) generatorParametersViewer.getSelection()).getFirstElement();
-				documentationText.setText(buildHelpDocumentationText(param.getDocumentation()));
+				GeneratorParameter param = (GeneratorParameter) ((StructuredSelection) generatorParametersViewer
+						.getSelection()).getFirstElement();
+				documentationText.setText(buildHelpDocumentationText(param
+						.getDocumentation()));
 
 			}
 		});
-		final TableColumn newColumnTableColumn = new TableColumn(generatorParameters, SWT.RIGHT);
+		final TableColumn newColumnTableColumn = new TableColumn(
+				generatorParameters, SWT.RIGHT);
 		generatorParameters.setSortColumn(newColumnTableColumn);
 		newColumnTableColumn.setWidth(109);
 		newColumnTableColumn.setText(columnNames[0]);
 
-		final TableColumn newColumnTableColumn_1 = new TableColumn(generatorParameters, SWT.LEFT);
+		final TableColumn newColumnTableColumn_1 = new TableColumn(
+				generatorParameters, SWT.LEFT);
 		newColumnTableColumn_1.setWidth(315);
 		newColumnTableColumn_1.setText(columnNames[1]);
 
-		final Label generationsOptionsLabel_1 = new Label(optionsGroup, SWT.NONE);
-		generationsOptionsLabel_1.setFont(SWTResourceManager.getFont("", 11, SWT.NONE));
-		generationsOptionsLabel_1.setText("Specific configuration generation options");
+		final Label generationsOptionsLabel_1 = new Label(optionsGroup,
+				SWT.NONE);
+		generationsOptionsLabel_1.setFont(SWTResourceManager.getFont("", 11,
+				SWT.NONE));
+		generationsOptionsLabel_1
+				.setText("Specific configuration generation options");
 
 		refreshConfiguration();
 
 		return container;
 	}
-
+	
+	/**
+	 * Display the select folder box (only in workspace)
+	 * @param message
+	 * @return
+	 */
 	private Folder displaySelectFolderInWorkspace(String message) {
 		Folder result = null;
-		ElementTreeSelectionDialog ets = new ElementTreeSelectionDialog(Display.getDefault().getActiveShell(), new WorkbenchLabelProvider(), new BaseWorkbenchContentProvider());
+		ElementTreeSelectionDialog ets = new ElementTreeSelectionDialog(Display
+				.getDefault().getActiveShell(), new WorkbenchLabelProvider(),
+				new BaseWorkbenchContentProvider());
 		ets.setBlockOnOpen(true);
-		ets.setValidator((ISelectionStatusValidator) new FolderSelectionValidator());
+		ets
+				.setValidator((ISelectionStatusValidator) new FolderSelectionValidator());
 		ets.setAllowMultiple(true);
 		ets.setTitle("Select Folder");
 		ets.setMessage(message);
@@ -1017,6 +996,10 @@ public class ApplicationDialog extends Dialog {
 		return result;
 	}
 
+	/**
+	 * Remove the selected model(s)
+	 * @param selection
+	 */
 	private void removeModel(String[] selection) {
 		List<String> list = Arrays.asList(selection);
 		List<Model> toRemove = new ArrayList<Model>();
@@ -1031,6 +1014,9 @@ public class ApplicationDialog extends Dialog {
 		application.getElements().removeAll(toRemove);
 	}
 
+	/**
+	 * Will refresh in option table the dataStructure (don't refresh the datastructure itself)
+	 */
 	private void refreshDataStructure() {
 		if (generatorParametersViewer != null) {
 			generatorParameterContentProvider.setDataStructure(dataStructure);
@@ -1062,12 +1048,18 @@ public class ApplicationDialog extends Dialog {
 		// Assign the cell editors to the viewer
 		generatorParametersViewer.setCellEditors(editors);
 		// Set the cell modifier for the viewer
-		generatorParameterContentProvider = new GeneratorParameterContentProvider(dataStructure);
-		generatorParametersViewer.setContentProvider(generatorParameterContentProvider);
-		generatorParameterLabelProvider = new GeneratorParameterLabelProvider(dataStructure);
-		generatorParametersViewer.setLabelProvider(generatorParameterLabelProvider);
-		generatorParameterCellModifier = new GeneratorParameterCellModifier(dataStructure, columnNames, generatorParametersViewer);
-		generatorParametersViewer.setCellModifier(generatorParameterCellModifier);
+		generatorParameterContentProvider = new GeneratorParameterContentProvider(
+				dataStructure);
+		generatorParametersViewer
+				.setContentProvider(generatorParameterContentProvider);
+		generatorParameterLabelProvider = new GeneratorParameterLabelProvider(
+				dataStructure);
+		generatorParametersViewer
+				.setLabelProvider(generatorParameterLabelProvider);
+		generatorParameterCellModifier = new GeneratorParameterCellModifier(
+				dataStructure, columnNames, generatorParametersViewer);
+		generatorParametersViewer
+				.setCellModifier(generatorParameterCellModifier);
 
 		generatorParametersViewer.setInput(dataStructure);
 		generatorParametersViewer.refresh();
@@ -1086,6 +1078,10 @@ public class ApplicationDialog extends Dialog {
 		return result;
 	}
 
+	/**
+	 * Build the documentation text
+	 * @return
+	 */
 	private String builDocumentationText() {
 		String result = "<font face=\"Helvetica, Arial\" size=\"2\">";
 		TreeItem[] items = viewer.getTree().getSelection();
@@ -1099,19 +1095,23 @@ public class ApplicationDialog extends Dialog {
 					result += m.getDescription();
 				result += "<br/><br/>";
 				result += "Lien : ";
-				result += "<a href=\"" + m.getURL() + "\">" + m.getURL() + "</a>";
+				result += "<a href=\"" + m.getURL() + "\">" + m.getURL()
+						+ "</a>";
 			} else if (item.getData() instanceof OptionGenerator) {
 				OptionGenerator o = (OptionGenerator) item.getData();
 				if (o.getDescription() != null)
 					result += o.getDescription();
 			} else {
+				//TODO : make this re work
+				/*
 				Technology t = null;
 				if (item.getData() instanceof Technology)
 					t = (Technology) item.getData();
 				else if (item.getData() instanceof TechnologyVersion)
-					t = ((TechnologyVersion) item.getData()).getTechnology();
+					t = ((TechnologyVersion) item.getData()).getParent();
 				else if (item.getData() instanceof Generator)
-					t = ((Generator) item.getData()).getTechnologyVersion().getTechnology();
+					t = ((Generator) item.getData()).getParent()
+							.getTechnology();
 
 				if (t != null) {
 					result += "<b>Documentation :</b><br/><br/>";
@@ -1119,20 +1119,230 @@ public class ApplicationDialog extends Dialog {
 						result += t.getDescription();
 					result += "<br/><br/>";
 					result += "Lien : ";
-					result += "<a href=\"" + t.getURL() + "\">" + t.getURL() + "</a>";
-				}
+					result += "<a href=\"" + t.getURL() + "\">" + t.getURL()
+							+ "</a>";
+				}*/
 			}
 		}
 		result += "</font>";
 		return result;
 	}
 
+
+	/**
+	 * Create contents of the button bar
+	 * 
+	 * @param parent
+	 */
+	@Override
+	protected void createButtonsForButtonBar(Composite parent) {
+		createButton(parent, GEN_ID, "Launch", false);
+		createButton(parent, APPLY_ID, "Save", false);
+		createButton(parent, IDialogConstants.CLOSE_ID, "Close", false);
+	}
+
+	/**
+	 * Action for Close, Save and Launch
+	 */
+	protected void buttonPressed(int buttonId) {
+		if (buttonId == IDialogConstants.CLOSE_ID) {
+			if (applicationModified) {
+				int result = showConfirmation("Configuration Modified.",
+						"Configuration modified, do you want to save it before closing?");
+				if (result == SWT.YES) {
+					saveData();
+				}
+			}
+			close();
+		}
+		if (buttonId == APPLY_ID) {
+			Display.getCurrent().getActiveShell().setCursor(
+					new Cursor(Display.getCurrent(), SWT.CURSOR_WAIT));
+			saveData();
+			Display.getCurrent().getActiveShell().setCursor(
+					new Cursor(Display.getCurrent(), SWT.CURSOR_ARROW));
+		}
+		if (buttonId == GEN_ID) {
+			if (applicationModified) {
+				int result = showConfirmation("Configuration Modified.",
+						"Configuration modified, do you want to save it before generating?");
+				if (result == SWT.YES) {
+					saveData();
+				}
+			}
+			GeneratePopUp generationPopUp = new GeneratePopUp(Display
+					.getDefault().getActiveShell(), getCurrentConfiguration());
+			generationPopUp.open();
+			return;
+		}
+
+		super.buttonPressed(buttonId);
+	}
+
+	/**
+	 * Save data in XML file
+	 */
+	protected void saveData() {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+				.put("application", new XMIResourceFactoryImpl());
+		resourceSet.getPackageRegistry().put(ApplicationPackage.eNS_URI,
+				ApplicationPackage.eINSTANCE);
+		org.eclipse.emf.ecore.resource.Resource resource = resourceSet
+				.createResource(URI.createURI(model.getRawLocation().toFile()
+						.getAbsolutePath()));
+		resource.getContents().add(application);
+
+		try {
+			BufferedOutputStream out = new BufferedOutputStream(
+					new FileOutputStream(model.getRawLocation().toFile()
+							.getAbsolutePath()));
+			Map<String, Object> saveOptions = new HashMap<String, Object>();
+			resource.save(out, saveOptions);
+			out.close();
+			model.refreshLocal(-1, null);
+			applicationModified = false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	protected void configureShell(Shell newShell) {
+		super.configureShell(newShell);
+		newShell.setText("Configuration");
+	}
+
+	/**
+	 * Return the initialize size
+	 */
+	@Override
+	protected Point getInitialSize() {
+		return new Point(800, 600);
+	}
+
+	/**
+	 * Return the configuration equals to the given name.
+	 * @param p_name
+	 * @return
+	 */
+	static public Configuration getConfigurationByName(String p_name) {
+		return application.getConfiguration(p_name);
+	}
+
+	/**
+	 * Return the current configuration name
+	 * @return
+	 */
+	static public String getCurrentConfiguratioName() {
+		String confName = null;
+		if (configurationList.getSelectionIndex() != -1) {
+			confName = configurationList.getItem(configurationList
+					.getSelectionIndex());
+		}
+		return confName;
+	}
+
+	/**
+	 * Return the configuration being edited
+	 * @return
+	 */
+	static public Configuration getCurrentConfiguration() {
+		if (configurationList.getSelectionIndex() != -1) {
+			String name = configurationList.getItem(configurationList
+					.getSelectionIndex());
+			Configuration configuration = application.getConfiguration(name);
+			return configuration;
+		}
+		return null;
+	}
+
+	/**
+	 * To call when a data is changed, will prompt the "Do you want to save changes" message at the close or launch action.
+	 */
+	public static void modificationMade() {
+		if (!applicationModified) {
+			applicationModified = true;
+		}
+	}
+
+	/**
+	 * Show a confirmation message
+	 * @param title
+	 * @param message
+	 * @return
+	 */
+	public static int showConfirmation(String title, String message) {
+		int style = 0;
+		style |= SWT.YES | SWT.NO;
+		MessageBox mb = new MessageBox(Display.getCurrent().getActiveShell(),
+				style);
+		mb.setText(title);
+		mb.setMessage(message);
+		int val = mb.open();
+		return val;
+	}
+
+	/**
+	 * Show an alert message
+	 * @param title
+	 * @param message
+	 */
+	public static void showAlert(String title, String message) {
+		int style = 0;
+		style |= SWT.OK;
+		MessageBox mb = new MessageBox(Display.getCurrent().getActiveShell(),
+				style);
+		mb.setText(title);
+		mb.setMessage(message);
+	}
+
+	/**
+	 ******************** INTERNAL CLASS ********************************
+	 */
+	
+	/**
+	 * Content provider for Tree
+	 */
 	class ConfigurationContentProvider implements ITreeContentProvider {
 
-		Map rootSet;
+		private Map<?,?> rootSet;
+		private Map<String, Metamodel> metamodelSet = new HashMap<String, Metamodel>();
+		private Map<String, Technology> technologySet = new HashMap<String, Technology>();
+		private Map<String, TechnologyVersion> technologyVersionSet  = new HashMap<String, TechnologyVersion>();
+		private Map<String, Generator> generatorSet = new HashMap<String, Generator>();
+		private Map<String, Deployer> deployerSet = new HashMap<String, Deployer>();
+		private Map<String, OptionGenerator> optGeneratorSet = new HashMap<String, OptionGenerator>();
+		private Map<String, OptionDeployer> optDeployerSet = new HashMap<String, OptionDeployer>();
+		private Map<Class<?>, Map<?,?>> classByLevel = new HashMap<Class<?>, Map<?,?>>();
+		private Class<?> neededRootClass;
+		List<?> omitedObject;
 		
-		public ConfigurationContentProvider(Map p_rootSet) {
-			this.rootSet = p_rootSet;
+		public ConfigurationContentProvider(Class<?> p_neededRootClass, List<?> p_ommitedObject) {
+			neededRootClass = p_neededRootClass;
+			if (p_ommitedObject != null) {
+				omitedObject = p_ommitedObject;
+			} else {
+				omitedObject = new ArrayList<Class<?>>();
+			}
+			initializeClassByLevel();
+			if (classByLevel.containsKey(neededRootClass)) {
+				rootSet = classByLevel.get(neededRootClass);
+			} else {
+				rootSet = metamodelSet;
+			}
+		}
+
+		/**
+		 * Initialize the map with Class --> Set corresponding
+		 */
+		private void initializeClassByLevel() {
+			classByLevel.put(Metamodel.class, metamodelSet);
+			classByLevel.put(Technology.class, technologySet);
+			classByLevel.put(TechnologyVersion.class, technologyVersionSet);
+			classByLevel.put(Generator.class, generatorSet);
+			classByLevel.put(Deployer.class, deployerSet);
+			classByLevel.put(OptionGenerator.class, optGeneratorSet);
+			classByLevel.put(OptionDeployer.class, optDeployerSet);
 		}
 
 		public Object[] getChildren(Object object) {
@@ -1158,117 +1368,151 @@ public class ApplicationDialog extends Dialog {
 		public Object[] getElements(Object object) {
 			if (object instanceof ApplicationDialog) {
 				initialize();
+				for (Object o : rootSet.values()) {
+					if (o instanceof TreeNode) {
+						((TreeNode) o).setEnabled(true);
+					}
+				}
 				return rootSet.values().toArray();
 			} else
 				return getChildren(object);
 		}
 
 		public void initialize() {
-			IConfigurationElement[] contributions = Platform.getExtensionRegistry().getConfigurationElementsFor(EXTENSIONPOINT_ID);
+			IConfigurationElement[] contributions = Platform
+					.getExtensionRegistry().getConfigurationElementsFor(
+							EXTENSIONPOINT_ID);
 
-			// Scan for metamodels
 			for (IConfigurationElement config : contributions) {
-				if (config.getName().equalsIgnoreCase("metamodel")) {
-					Metamodel m = new Metamodel(config);
-
-					if (!metamodelSet.containsKey(m.getId())) {
-						metamodelSet.put(m.getId(), m);
-					} else {
-						m = metamodelSet.get(m.getId());
-					}
-
-					// Scan for technology
-					for (IConfigurationElement techno : config.getChildren("technology")) {
-						Technology t = null;
-						String technoId = techno.getAttribute("id");
-						if (m.contains(technoId)) {
-							t = (Technology) m.getChild(technoId);
-						} else {
-							t = new Technology(techno, m);
-							t.setEnabled(true);
-							if (!technologySet.containsKey(t.getId())) {
-								technologySet.put(t.getId(), t);
-							}
-						}
-
-						// Scan for technology version
-						for (IConfigurationElement technoV : techno.getChildren("technologyVersion")) {
-							TechnologyVersion tv = null;
-							String technologyVersionId = technoV.getAttribute("id");
-							if (t.contains(technologyVersionId)) {
-								tv = (TechnologyVersion) t.getChild(technologyVersionId);
-							} else {
-								tv = new TechnologyVersion(technoV, t);
-							}
-
-							// Scan for Generator Version
-							for (IConfigurationElement gen : technoV.getChildren("generatorVersion")) {
-								Generator g = null;
-								String genId = gen.getAttribute("id");
-								
-								if (tv.contains(genId)) {
-									g = (Generator) tv.getChild(genId);
-								} else {
-									g = new Generator(gen, tv);
-								}
-								
-								// Scan for option
-								for (IConfigurationElement option : gen.getChildren("option")) {
-									new OptionGenerator(option, g);
-								}
-
-								// Scan for configuration parameter
-								for (IConfigurationElement confParam : gen.getChildren("configurationParameter")) {
-									GeneratorParameter param = new GeneratorParameter(confParam);
-
-									if (!genParamConfByGenerator.containsKey(g.getId())) {
-										genParamConfByGenerator.put(g.getId(), new ArrayList<String>());
-									}
-									genParamConfByGenerator.get(g.getId()).add(param.getKey());
-									configurationParameters.put(param.getKey(), param);
-								}
-							}
-
-							for (IConfigurationElement gen : technoV.getChildren("deployerVersion")) {
-								Deployer d = null;
-								String depId = gen.getAttribute("id");
-
-								if (tv.contains(depId)) {
-									d = (Deployer) tv.getChild(depId);
-								} else {
-									d = new Deployer(gen, tv);
-								}
-
-								// Scan for option
-								for (IConfigurationElement option : gen.getChildren("option")) {
-									new OptionDeployer(option, d);
-								}
-
-								// Scan for configuration parameter
-								for (IConfigurationElement confParam : gen.getChildren("configurationParameter")) {
-									GeneratorParameter param = new GeneratorParameter(confParam);
-
-									if (!deployParamConfByGenerator.containsKey(d.getId())) {
-										deployParamConfByGenerator.put(d.getId(), new ArrayList<String>());
-									}
-									deployParamConfByGenerator.get(d.getId()).add(param.getKey());
-									configurationParameters.put(param.getKey(), param);
-								}
-							}
-
-						}
-					}
-				}
+				manageConfiguration(config,null);
 			}
 			initializeFromKey();
 		}
-		
+
+		private void manageConfiguration(IConfigurationElement config, TreeNode parent) {
+			TreeNode futurParent = null;
+			// Scan for metamodels
+			if (config.getName().equalsIgnoreCase("metamodel")) {
+				// We create the metal for this config element
+				Metamodel m = new Metamodel(config);
+				// We check if we already have this metamodel in your set
+				if (!metamodelSet.containsKey(m.getId())) {
+					metamodelSet.put(m.getId(), m);
+				} else {
+					m = metamodelSet.get(m.getId());
+				}
+				futurParent = m;
+			}
+			
+			// Scan for technology
+			if (!omitedObject.contains(Technology.class) && config.getName().equalsIgnoreCase("technology")) {
+				Technology t = new Technology(config, (Metamodel)parent);
+				if (!technologySet.containsKey(t.getId()) 
+						|| !technologySet.get(t.getId()).getParent().equals(parent)) {
+					technologySet.put(t.getId(), t);
+				} else {
+					t = technologySet.get(t.getId());
+				}
+				futurParent = t;
+			}
+			
+			// Scan for technology version
+			if (!omitedObject.contains(TechnologyVersion.class) && config.getName().equalsIgnoreCase("technologyVersion")) {
+				TechnologyVersion tv = new TechnologyVersion(config, (Technology)parent);
+				if (!technologyVersionSet.containsKey(tv.getId())
+						|| !technologyVersionSet.get(tv.getId()).getParent().equals(parent)) {
+					technologyVersionSet.put(tv.getId(), tv);
+				} else {
+					tv = technologyVersionSet.get(tv.getId());
+				}
+				futurParent = tv;
+			}
+			
+			// Scan for Generator Version
+			if (!omitedObject.contains(Generator.class) && config.getName().equalsIgnoreCase("generatorVersion")) {
+				Generator gv = new Generator(config, (TechnologyVersion)parent);
+				if (!generatorSet.containsKey(gv.getId())
+						|| !generatorSet.get(gv.getId()).getParent().equals(parent)) {
+					generatorSet.put(gv.getId(), gv);
+				} else {
+					gv = generatorSet.get(gv.getId());
+				}
+				futurParent = gv;
+			}
+			
+			// Scan for deployer version
+			if (!omitedObject.contains(Deployer.class) && config.getName().equalsIgnoreCase("deployerVersion")) {
+				Deployer dv = new Deployer(config, (TechnologyVersion)parent);
+				if (!deployerSet.containsKey(dv.getId())) {
+					deployerSet.put(dv.getId(), dv);
+				} else {
+					dv = deployerSet.get(dv.getId());
+				}
+				futurParent = dv;
+			}
+			
+			// Scan for generator or deployer option
+			if (!omitedObject.contains(OptionComponant.class) && config.getName().equalsIgnoreCase("option")) {
+				OptionComponant opt = null;
+				if (parent instanceof Generator) {
+					opt = new OptionGenerator(config, (Generator)parent);
+					if (!optGeneratorSet.containsKey(opt.getId())) {
+						optGeneratorSet.put(opt.getId(), (OptionGenerator)opt);
+					} else {
+						opt = optGeneratorSet.get(opt.getId());
+					}
+				} else if (parent instanceof Deployer) {
+					opt = new OptionDeployer(config, (Deployer)parent);
+					if (!optDeployerSet.containsKey(opt.getId())) {
+						optDeployerSet.put(opt.getId(), (OptionDeployer)opt);
+					} else {
+						opt = optDeployerSet.get(opt.getId());
+					}
+				}
+				futurParent = opt;
+			}
+			
+			// Scan for generator or deployer parameter
+			if (config.getName().equalsIgnoreCase("configurationParameter")) {
+				GeneratorParameter param = null;
+				if (parent instanceof Generator) {
+					Generator g = (Generator) parent;
+					param = new GeneratorParameter(config);
+					if (!genParamConfByGenerator.containsKey(g.getId())) {
+						genParamConfByGenerator.put(g.getId(),new ArrayList<String>());
+					}
+					genParamConfByGenerator.get(g.getId()).add(param.getKey());
+					configurationParameters.put(param.getKey(),param);
+				} else if (parent instanceof Deployer) {
+					Deployer d = (Deployer) parent;
+					param = new GeneratorParameter(config);
+					if (!deployParamConfByGenerator.containsKey(d.getId())) {
+						deployParamConfByGenerator.put(d.getId(),new ArrayList<String>());
+					}
+					deployParamConfByGenerator.get(d.getId()).add(param.getKey());
+					//configurationParameters.put(param.getKey(),param);
+				}
+				futurParent = null;
+			}
+			
+			// Will add children if not already set
+			if (parent != null && futurParent != null) {
+				if (parent.getChild(futurParent.getId()) == null) {
+					parent.addChildren(futurParent);
+				}
+			}
+			
+			for (IConfigurationElement child : config.getChildren()) {
+				manageConfiguration(child,futurParent);
+			}
+		}
+
 		/**
-		 * Initialise les ï¿½lï¿½ments de l'arbre en les checkant sur la clï¿½.
-		 * Si l'ï¿½lï¿½ment est invalide il sera desactivï¿½
+		 * Initialise les éléments de l'arbre en les checkant sur la clé.
+		 * Si l'élément est invalide il sera desactivé
 		 */
-		public void initializeFromKey(){
-			 
+		public void initializeFromKey() {
+
 		}
 
 		public void dispose() {
@@ -1277,7 +1521,12 @@ public class ApplicationDialog extends Dialog {
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		}
 	}
-
+	
+	/**
+	 * Internal class for label of the tree element
+	 * @author Eric
+	 *
+	 */
 	class ConfigurationLabelProvider implements ILabelProvider {
 
 		private List<Object> listeners;
@@ -1302,23 +1551,37 @@ public class ApplicationDialog extends Dialog {
 				else
 					suffix += "_unchecked";
 			}
-			
-			Image t= new Image(null, ApplicationDialog.class.getResourceAsStream("tree/img/metamodel/metamodel" + suffix + ".png"));
-			
+
 			if (object instanceof Metamodel) {
-				return new Image(null, ApplicationDialog.class.getResourceAsStream("tree/img/metamodel/metamodel" + suffix + ".png"));
+				return new Image(null, ApplicationDialog.class
+						.getResourceAsStream("tree/img/metamodel/metamodel"
+								+ suffix + ".png"));
 			} else if (object instanceof Technology) {
-				return new Image(null, ApplicationDialog.class.getResourceAsStream("tree/img/technology/technology" + suffix + ".png"));
+				return new Image(null, ApplicationDialog.class
+						.getResourceAsStream("tree/img/technology/technology"
+								+ suffix + ".png"));
 			} else if (object instanceof TechnologyVersion) {
-				return new Image(null, ApplicationDialog.class.getResourceAsStream("tree/img/technologyVersion/technologyVersion" + suffix + ".png"));
+				return new Image(
+						null,
+						ApplicationDialog.class
+								.getResourceAsStream("tree/img/technologyVersion/technologyVersion"
+										+ suffix + ".png"));
 			} else if (object instanceof Generator) {
-				return new Image(null, ApplicationDialog.class.getResourceAsStream("tree/img/generator/generator" + suffix + ".png"));
+				return new Image(null, ApplicationDialog.class
+						.getResourceAsStream("tree/img/generator/generator"
+								+ suffix + ".png"));
 			} else if (object instanceof OptionGenerator) {
-				return new Image(null, ApplicationDialog.class.getResourceAsStream("tree/img/optionGenerator/options" + suffix + ".png"));
+				return new Image(null, ApplicationDialog.class
+						.getResourceAsStream("tree/img/optionGenerator/options"
+								+ suffix + ".png"));
 			} else if (object instanceof Deployer) {
-				return new Image(null, ApplicationDialog.class.getResourceAsStream("tree/img/deployer/deployer" + suffix + ".png"));
+				return new Image(null, ApplicationDialog.class
+						.getResourceAsStream("tree/img/deployer/deployer"
+								+ suffix + ".png"));
 			} else if (object instanceof OptionDeployer) {
-				return new Image(null, ApplicationDialog.class.getResourceAsStream("tree/img/optionDeployer/options" + suffix + ".png"));
+				return new Image(null, ApplicationDialog.class
+						.getResourceAsStream("tree/img/optionDeployer/options"
+								+ suffix + ".png"));
 			}
 			return null;
 		}
@@ -1370,128 +1633,146 @@ public class ApplicationDialog extends Dialog {
 
 	}
 
+	public class ElementTreeListener {
+		
+		TreeViewer tv;
+		
+		/**
+		 * Enable sub element of the given item.
+		 * @param item
+		 */
+		protected void enableAllSubElements(TreeItem item) {
+			for (TreeItem ti : item.getItems()) {
+				TreeElement el = (TreeElement) ti.getData();
+				// Check the validity if the component
+				if (el instanceof ImplNode) {
+					if (checkElementValidity(el)) {
+						el.setEnabled(true);
+					}
+					tv.update(el, null);
+				} else if (!el.isEnabled()) {
+					el.setEnabled(true);
+					tv.update(el, null);
+				}
+				if (el.isChecked()) {
+					if (el instanceof ImplNode) {
+						refreshImplNodeOptions();
+					}
+					enableAllSubElements(ti);
+				}
+			}
+		}
+		
+		/**
+		 * Disable sub element of the given item.
+		 * @param item
+		 */
+		protected void disableAllSubElements(TreeItem item) {
+			for (TreeItem ti : item.getItems()) {
+				TreeElement el = (TreeElement) ti.getData();
+				if (el.isEnabled()) {
+					el.setEnabled(false);
+					if (el instanceof ImplNode) {
+						refreshImplNodeOptions();
+					}
+					tv.update(el, null);
+				}
+				disableAllSubElements(ti);
+			}
+		}
+	}
+	
 	/**
-	 * Create contents of the button bar
-	 * 
-	 * @param parent
+	 * Internal class : use by generation option tree.
+	 * @author Eric
+	 *
 	 */
-	@Override
-	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, GEN_ID, "Launch", false);
-		createButton(parent, APPLY_ID, "Save", false);
-		createButton(parent, IDialogConstants.CLOSE_ID, "Close", false);
-		m_bindingContext = initDataBindings();
-	}
+	public class GenerationOptionTreeListener extends ElementTreeListener implements Listener {
+		
+		GenerationOptionTreeListener() {
+			tv = viewer;
+		}
+		
+		public void handleEvent(Event event) {
+			Point point = new Point(event.x, event.y);
+			documentationText.setText(builDocumentationText());
+			TreeItem item = tv.getTree().getItem(point);
 
-	protected void buttonPressed(int buttonId) {
-		if (buttonId == IDialogConstants.CLOSE_ID) {
-			if (applicationModified) {
-				int result = showConfirmation("Configuration Modified.", "Configuration modified, do you want to save it before closing?");
-				if (result == SWT.YES) {
-					saveData();
+			TreeElement el = (TreeElement) item.getData();
+			// Check if el is active or not in the key if it is a component
+			boolean canCheck = true;
+			if (el instanceof ImplNode) {
+				canCheck = checkElementValidity(el);
+				if (!canCheck) {
+					component_validity
+							.setText("This element is not active in your key");
+				} else {
+					component_validity.setText("");
+				}
+			} else {
+				component_validity.setText("");
+			}
+			refreshOptions();
+
+			// If click on image : check it, else : just show informations
+			if (canCheck
+					&& (item.getImageBounds(0) != null && event.x <= item
+							.getImageBounds(0).x
+							+ item.getImageBounds(0).width)) {
+				// Check if enabled
+				if (el.isEnabled()) {
+					// Inverse
+					el.setChecked(!(el.isChecked()));
+					tv.update(el, null);
+
+					if (el.isChecked()) {
+						// Enable all sub elements
+						enableAllSubElements(item);
+					} else {
+						// Enable all sub elements
+						disableAllSubElements(item);
+					}
 				}
 			}
-			close();
 		}
-		if (buttonId == APPLY_ID) {
-			Display.getCurrent().getActiveShell().setCursor(new Cursor(Display.getCurrent(), SWT.CURSOR_WAIT));
-			saveData();
-			Display.getCurrent().getActiveShell().setCursor(new Cursor(Display.getCurrent(), SWT.CURSOR_ARROW));
+	}
+		
+	/**
+	 * Internal class : use by generation option tree.
+	 * @author Eric
+	 *
+	 */
+	public class DeployementOptionTreeListener extends ElementTreeListener implements Listener {
+		
+		public DeployementOptionTreeListener() {
+			tv = deployOptionsTree;
 		}
-		if (buttonId == GEN_ID) {
-			if (applicationModified) {
-				int result = showConfirmation("Configuration Modified.", "Configuration modified, do you want to save it before generating?");
-				if (result == SWT.YES) {
-					saveData();
-				}
+		
+		public void handleEvent(Event event) {
+			Point point = new Point(event.x, event.y);
+			documentationText.setText(builDocumentationText());
+			TreeItem item = tv.getTree().getItem(point);
+			TreeElement el = (TreeElement) item.getData();
+			refreshOptions();
+			// If click on image : check it, else : just show informations
+			if (item.getImageBounds(0) != null && event.x <= item
+							.getImageBounds(0).x
+							+ item.getImageBounds(0).width) {
+				// Check if enabled
+				if (el.isEnabled()) {
+					// Inverse
+					el.setChecked(!(el.isChecked()));
+					tv.update(el, null);
+
+					if (el.isChecked()) {
+						// Enable all sub elements
+						enableAllSubElements(item);
+					} else {
+						// Enable all sub elements
+						disableAllSubElements(item);
+					}
+				} 
 			}
-			GeneratePopUp generationPopUp = new GeneratePopUp(Display.getDefault().getActiveShell(), getCurrentConfiguration());
-			generationPopUp.open();
-			return;
 		}
-
-		super.buttonPressed(buttonId);
-	}
-
-	protected void saveData() {
-		ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("application", new XMIResourceFactoryImpl());
-		resourceSet.getPackageRegistry().put(ApplicationPackage.eNS_URI, ApplicationPackage.eINSTANCE);
-		org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource(URI.createURI(model.getRawLocation().toFile().getAbsolutePath()));
-		resource.getContents().add(application);
-
-		try {
-			BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(model.getRawLocation().toFile().getAbsolutePath()));
-			Map<String, Object> saveOptions = new HashMap<String, Object>();
-			resource.save(out, saveOptions);
-			out.close();
-			model.refreshLocal(-1, null);
-			applicationModified = false;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	protected void configureShell(Shell newShell) {
-		super.configureShell(newShell);
-		newShell.setText("Configuration");
-	}
-
-	@Override
-	protected Point getInitialSize() {
-		return new Point(800, 600);
-	}
-
-	static public Configuration getConfigurationByName(String p_name) {
-		return application.getConfiguration(p_name);
-	}
-
-	static public String getCurrentConfiguratioName() {
-		String confName = null;
-		if (configurationList.getSelectionIndex() != -1) {
-			confName = configurationList.getItem(configurationList.getSelectionIndex());
-		}
-		return confName;
-	}
-
-	static public Configuration getCurrentConfiguration() {
-		if (configurationList.getSelectionIndex() != -1) {
-			String name = configurationList.getItem(configurationList.getSelectionIndex());
-			Configuration configuration = application.getConfiguration(name);
-			return configuration;
-		}
-		return null;
-	}
-
-	public static void modificationMade() {
-		if (!applicationModified) {
-			applicationModified = true;
-		}
-	}
-
-	public static int showConfirmation(String title, String message) {
-		int style = 0;
-		style |= SWT.YES | SWT.NO;
-		MessageBox mb = new MessageBox(Display.getCurrent().getActiveShell(), style);
-		mb.setText(title);
-		mb.setMessage(message);
-		int val = mb.open();
-		return val;
-	}
-
-	public static void showAlert(String title, String message) {
-		int style = 0;
-		style |= SWT.OK;
-		MessageBox mb = new MessageBox(Display.getCurrent().getActiveShell(), style);
-		mb.setText(title);
-		mb.setMessage(message);
-	}
-	protected DataBindingContext initDataBindings() {
-		//
-		//
-		DataBindingContext bindingContext = new DataBindingContext();
-		//
-		//
-		return bindingContext;
 	}
 }

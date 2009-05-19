@@ -10,7 +10,9 @@ public class OptionGenerator extends OptionComponant {
 		super(elt,g);		
 	}
 
-	
+	@Override
+	public void addChildren(TreeNode child) {
+		
+	}
 
-	
 }

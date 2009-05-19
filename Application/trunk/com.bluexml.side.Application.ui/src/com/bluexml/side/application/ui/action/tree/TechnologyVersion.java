@@ -8,14 +8,11 @@ import org.eclipse.core.runtime.IConfigurationElement;
 public class TechnologyVersion extends TreeNode {
 	private String id;
 	private String version;
-	private Technology technology;
 	private Set<Generator> generator;
 	private Set<Deployer> deployer;
 
 	public TechnologyVersion(IConfigurationElement elt, Technology t) {
-		technology = t;
 		parent = t;
-		technology.addTechnologyVersion(this);
 		id = elt.getAttribute("id");
 		version = elt.getAttribute("version");
 		generator = new HashSet<Generator>();
@@ -43,8 +40,14 @@ public class TechnologyVersion extends TreeNode {
 	
 	public Set<TreeNode> getChildren() {
 		Set<TreeNode> childrens = new HashSet<TreeNode>();
-		childrens.addAll(getGenerator());
-		childrens.addAll(getDeployer());		
+		Set<Generator> generators = getGenerator();
+		if (generators.size() > 0) {
+			childrens.addAll(generators);
+		}
+		Set<Deployer> deployers = getDeployer();
+		if (deployers.size() > 0) {
+			childrens.addAll(deployers);
+		}
 		return childrens;
 	}
 
@@ -52,7 +55,12 @@ public class TechnologyVersion extends TreeNode {
 		return id;
 	}
 
-	public Technology getTechnology() {
-		return technology;
+	@Override
+	public void addChildren(TreeNode child) {
+		if (child instanceof Generator) {
+			getGenerator().add((Generator) child);
+		} else if (child instanceof Deployer){
+			getDeployer().add((Deployer) child);
+		}
 	}
 }

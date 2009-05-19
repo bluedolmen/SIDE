@@ -57,7 +57,10 @@ public abstract class OptionComponant  extends TreeNode {
 		impl.updateApplication();
 	}
 	public Set<TreeNode> getChildren() {
-		// TODO Auto-generated method stub
 		return new HashSet<TreeNode>();
+	}
+	
+	public void addChildren() {
+		
 	}
 }

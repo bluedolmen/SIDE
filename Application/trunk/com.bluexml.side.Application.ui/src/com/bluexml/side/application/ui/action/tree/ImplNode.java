@@ -14,10 +14,6 @@ public abstract class ImplNode extends TreeNode {
 	protected String version;
 	protected String launchClass;
 	protected Set<TreeNode> options = new HashSet<TreeNode>();
-	protected TechnologyVersion technologyVersion;
-	
-	
-	
 	
 	@Override
 	public void setChecked(boolean checked) {
@@ -64,8 +60,5 @@ public abstract class ImplNode extends TreeNode {
 
 	public Collection<TreeNode> getChildren() {
 		return options;
-	}
-	public TechnologyVersion getTechnologyVersion() {
-		return technologyVersion;
 	}
 }

@@ -4,7 +4,9 @@ import java.util.Collection;
 
 public abstract class TreeNode extends TreeElement {
 	protected String id;
+	
 	public abstract Collection<TreeNode> getChildren();
+	public abstract void addChildren(TreeNode child);
 	public TreeNode parent;
 	
 	public TreeNode(){
@@ -24,10 +26,12 @@ public abstract class TreeNode extends TreeElement {
 		}
 		return true;
 	}
-	public TreeNode getChild(String tn) {		
-		for (TreeNode c: getChildren()) {
-			if (tn.equals(c.getId())) {
-				return c;
+	public TreeNode getChild(String tn) {
+		if (tn != null) {
+			for (TreeNode c: getChildren()) {
+				if (tn.equals(c.getId())) {
+					return c;
+				}
 			}
 		}
 		return null;

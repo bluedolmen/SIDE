@@ -10,4 +10,9 @@ public class OptionDeployer extends OptionComponant {
 
 	}
 
+	@Override
+	public void addChildren(TreeNode child) {
+		
+	}
+
 }

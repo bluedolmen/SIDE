@@ -15,10 +15,7 @@ import com.bluexml.side.application.ui.action.ApplicationDialog;
 public class Generator extends ImplNode {
 
 	public Generator(IConfigurationElement elt, TechnologyVersion tv) {
-		technologyVersion = tv;
 		parent = (TreeNode)tv;
-		
-		technologyVersion.addGenerator(this);
 		id = elt.getAttribute("id");
 		version = elt.getAttribute("version");
 		launchClass = elt.getAttribute("class");
@@ -33,7 +30,7 @@ public class Generator extends ImplNode {
 				// Delete all linked elements
 				Set<ComponantConfiguration> elts = new HashSet<ComponantConfiguration>();
 				for (GeneratorConfiguration elt : config.getGeneratorConfigurations()) {
-					if (elt.getId_metamodel().equals(technologyVersion.getTechnology().getMetamodel().getId())) {
+					if (elt.getId_metamodel().equals(parent.getParent().getParent().getId())) {
 						elts.add(elt);
 					}
 				}
@@ -43,9 +40,9 @@ public class Generator extends ImplNode {
 				if (isChecked() && isEnabled()) {
 					GeneratorConfiguration elt = ApplicationFactory.eINSTANCE.createGeneratorConfiguration();
 					elt.setId(getId());
-					elt.setId_techno_version(technologyVersion.getId());
+					elt.setId_techno_version(parent.getId());
 					elt.setImpl_class(getLaunchClass());
-					elt.setId_metamodel(technologyVersion.getTechnology().getMetamodel().getId());
+					elt.setId_metamodel(parent.getParent().getParent().getId());
 					// Launch options
 					for (TreeNode tn : options) {
 						OptionComponant o = (OptionComponant) tn;
@@ -60,6 +57,11 @@ public class Generator extends ImplNode {
 				}
 			}
 		}
+	}
+
+	@Override
+	public void addChildren(TreeNode child) {
+		options.add(child);
 	}
 
 }

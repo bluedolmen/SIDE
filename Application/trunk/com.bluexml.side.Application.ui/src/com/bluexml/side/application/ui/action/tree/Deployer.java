@@ -15,8 +15,7 @@ import com.bluexml.side.application.ui.action.ApplicationDialog;
 public class Deployer extends ImplNode {
 
 	public Deployer(IConfigurationElement elt, TechnologyVersion tv) {
-		technologyVersion = tv;
-		technologyVersion.addDeployer(this);
+		parent = tv;
 		id = elt.getAttribute("id");
 		version = elt.getAttribute("version");
 		launchClass = elt.getAttribute("class");
@@ -31,7 +30,7 @@ public class Deployer extends ImplNode {
 				// Delete all linked elements
 				Set<ComponantConfiguration> elts = new HashSet<ComponantConfiguration>();
 				for (ComponantConfiguration elt : config.getDeployerConfigurations()) {
-					if (elt.getId_techno_version().equals(technologyVersion.getId()))
+					if (elt.getId_techno_version().equals(parent.getId()))
 						elts.add(elt);
 				}
 				config.getDeployerConfigurations().removeAll(elts);
@@ -41,7 +40,7 @@ public class Deployer extends ImplNode {
 					
 					DeployerConfiguration elt = ApplicationFactory.eINSTANCE.createDeployerConfiguration();
 					elt.setId(getId());
-					elt.setId_techno_version(technologyVersion.getId());
+					elt.setId_techno_version(parent.getId());
 					elt.setImpl_class(getLaunchClass());
 
 					// Launch options
@@ -59,6 +58,11 @@ public class Deployer extends ImplNode {
 				}
 			}
 		}
+	}
+
+	@Override
+	public void addChildren(TreeNode child) {
+		options.add(child);
 	}
 
 

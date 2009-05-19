@@ -61,6 +61,11 @@ public class Metamodel extends TreeNode {
 		this._technology.add(t);
 	}
 
+	@Override
+	public void addChildren(TreeNode child) {
+		_technology.add(child);
+	}
+
 	
 
 }
