@@ -31,7 +31,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 <%script type="clazz.ClassPackage" name="generator" file="<%validatedFilename%>"%>
 <?xml version='1.0' encoding='iso-8859-1'?>
 
-<model name="bxds:model" xmlns="http://www.alfresco.org/model/dictionary/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+<model name="<%name%>:model" xmlns="http://www.alfresco.org/model/dictionary/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
 	<!-- Definition of the model -->
 
 	<description><%name%></description>
@@ -52,14 +52,14 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 	
 	<!-- Introduction of new namespaces defined by this model -->
 	<namespaces>
-		<namespace uri="http://www.bluexml.com/model/content/bxds/1.0" prefix="bxds" />
+		
 		<!-- STARTMMLOOP -->
 		<namespace uri="http://www.bluexml.com/model/content/<%name%>/1.0" prefix="<%name%>" />
 		<!-- ENDMMLOOP -->
 	</namespaces>
 	
 	<constraints>
-		<constraint name="bxds:nomenclature:comparison" type="LIST">
+		<constraint name="<%name%>:nomenclature:comparison" type="LIST">
             <parameter name="allowedValues">
                 <list>
                     <value>&lt;</value>
@@ -69,7 +69,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
             </parameter>
         </constraint>
         
-        <constraint name="bxds:nomenclature:booleanoperator" type="LIST">
+        <constraint name="<%name%>:nomenclature:booleanoperator" type="LIST">
             <parameter name="allowedValues">
                 <list>
                     <value>AND</value>
@@ -79,7 +79,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
             </parameter>
         </constraint>
         
-		<constraint name="bxds:constraint:mail" type="REGEX">
+		<constraint name="<%name%>:constraint:mail" type="REGEX">
 	        <parameter name="expression"><value>^(|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+)$</value></parameter>
 	        <parameter name="requiresMatch"><value>true</value></parameter>
 	    </constraint>
