@@ -25,6 +25,7 @@ import org.eclipse.core.resources.IFile;
 import com.bluexml.side.application.generator.acceleo.AbstractAcceleoGenerator;
 import com.bluexml.side.application.security.SecurityHelper;
 import com.bluexml.side.settings.SidePreferences;
+import com.bluexml.side.util.libs.xml.XslTransformer;
 
 /**
  * @author <a href="mailto:pbertrand@bluexml.com"> Pierre BERTRAND </a>
@@ -62,8 +63,10 @@ public class ClassFacetmapGenerator extends AbstractAcceleoGenerator {
 		return SecurityHelper.check(GENERATOR_CODE,SidePreferences.getKey());
 	}
 
+
+    
 	public Collection<IFile> complete() throws Exception {
-		// TODO Auto-generated method stub
+		XslTransformer.transform(ClassFacetmapGenerator.generationParameters.get("FACETMAP_SOURCEFILE"), "xsl/cmis2xfml.xsl", "Result.xml");
 		return null;
 	}
 

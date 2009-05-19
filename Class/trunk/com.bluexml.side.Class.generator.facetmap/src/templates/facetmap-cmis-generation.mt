@@ -44,8 +44,6 @@ var cmisQuery = new XML(query);
         break script;
     }
     
-    // TODO: process allowableActions
-    
     // process paging
     var skipCount = parseInt(cmisQuery.skipCount);
     var pageSize = parseInt(cmisQuery.pageSize);

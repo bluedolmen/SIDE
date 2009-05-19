@@ -20,8 +20,13 @@
                      version="S-IDE Facetmap Generator 1.0.0">
                   <configurationParameter
                         documentation="Host of the server where alfresco is installed"
-                        key="com.bluexml.side.Class.generator.facetmap.host"
+                        key="FACETMAP_HOST"
                         label="Host">
+                  </configurationParameter>
+                  <configurationParameter
+                        documentation="The file with the CMIS result"
+                        key="FACETMAP_SOURCEFILE"
+                        label="Source file">
                   </configurationParameter>
                </generatorVersion>
             </technologyVersion>
