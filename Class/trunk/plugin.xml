@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="com.bluexml.side.Application.com_bluexml_application_configuration">
+      <metamodel
+            id="http://www.kerblue.org/class/1.0"
+            name="KSR500 Class"
+            url="http://www.kerblue.org/class/1.0">
+         <technology
+               id="facetmap"
+               name="Facetmap"
+               url="http://facetmap.com/spec/facetmap2_0.dtd">
+            <technologyVersion
+                  id="facetmap"
+                  version="Facetmap 2.0">
+               <deployerVersion
+                     class="com.bluexml.side.clazz.deployer.facetmap.ClassFacetMapDeployer"
+                     id="com.bluexml.side.Class.deployer.facetmap.ClassFacetMapDeployer"
+                     version="S-IDE FacetMap Deployer 1.0.0">
+                  <configurationParameter
+                        documentation="the webapp folder of the facetmap application"
+                        key="FACETMAP_FOLDER"
+                        label="Facetmap webapp folder">
+                  </configurationParameter>
+                  <configurationParameter
+                        key="FACETMAP_FILENAME"
+                        label="Facetmap source filename">
+                  </configurationParameter>
+               </deployerVersion>
+            </technologyVersion>
+         </technology>
+      </metamodel>
+   </extension>
+
+</plugin>
