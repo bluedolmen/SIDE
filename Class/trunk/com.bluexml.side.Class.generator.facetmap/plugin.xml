@@ -21,12 +21,7 @@
                   <configurationParameter
                         documentation="Host of the server where alfresco is installed"
                         key="FACETMAP_HOST"
-                        label="Host">
-                  </configurationParameter>
-                  <configurationParameter
-                        documentation="The file with the CMIS result"
-                        key="FACETMAP_SOURCEFILE"
-                        label="Source file">
+                        label="FacetMap Host">
                   </configurationParameter>
                </generatorVersion>
             </technologyVersion>

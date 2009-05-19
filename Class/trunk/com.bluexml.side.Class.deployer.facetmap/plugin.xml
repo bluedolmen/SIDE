@@ -23,10 +23,6 @@
                         key="FACETMAP_FOLDER"
                         label="Facetmap webapp folder">
                   </configurationParameter>
-                  <configurationParameter
-                        key="FACETMAP_FILENAME"
-                        label="Facetmap source filename">
-                  </configurationParameter>
                </deployerVersion>
             </technologyVersion>
          </technology>
