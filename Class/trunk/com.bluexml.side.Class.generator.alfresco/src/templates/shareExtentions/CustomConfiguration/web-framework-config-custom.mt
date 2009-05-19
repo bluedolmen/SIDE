@@ -12,7 +12,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 --%>
 
 <%script type="clazz.ClassPackage" name="getCustomWebFwkConfigOutputFile"%>
-<%if (eContainer() == null) {%><%getTEMP_FOLDER()%>/<%getProperty("alf.share.paths.web-ext")%>web-framework-config-custom.xml<%}%>
+<%if (eContainer() == null) {%><%getProperty("alf.share.paths.web-ext")%>web-framework-config-custom.xml<%}%>
 
 <%script type="clazz.ClassPackage" name="customWebFrameworkConfig" file="<%getCustomWebFwkConfigOutputFile%>"%>
 <alfresco-config>

@@ -410,6 +410,10 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		op = addEOperation(packageEClass, ecorePackage.getEBoolean(), "equalsForMerge", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getPackage(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(packageEClass, ecorePackage.getEString(), "getFullName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(packageEClass, this.getPackage(), "getRootPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		// Create resource
 		createResource(eNS_URI);
 
@@ -451,6 +455,18 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		   source, 
 		   new String[] {
 			 "body", "self.name = other.name"
+		   });		
+		addAnnotation
+		  (packageEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+			 "body", "if self.getContainer().oclIsUndefined() then\r\tself.name\relse\r\tself.getContainer().oclAsType(Package).getFullName().concat(\'.\').concat(self.name)\rendif"
+		   });		
+		addAnnotation
+		  (packageEClass.getEOperations().get(2), 
+		   source, 
+		   new String[] {
+			 "body", "if self.getContainer().oclIsUndefined() then\r\tself\relse\r\tself.getContainer().oclAsType(Package).getRootPackage()\rendif"
 		   });
 	}
 
@@ -467,7 +483,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "PackageNameNull"
-		   });		
+		   });				
 	}
 
 } //CommonPackageImpl

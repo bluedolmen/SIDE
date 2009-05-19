@@ -22,7 +22,7 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 	protected static Map<String, String> generationParameters = new HashMap<String, String>();
 	protected static Map<String, Boolean> generatorOptions = new HashMap<String, Boolean>();
 	protected static Map<String, String> configurationParameters = new HashMap<String, String>();
-	public static final String TEMP_FOLDER = "tmp";
+	public String TEMP_FOLDER = "tmp";
 	public static String GENERATOR_CODE = null;
 	protected static String techVersion = null;
 
@@ -34,8 +34,11 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 		techVersion = techVersion_;
 	}
 
+	public void setTEMP_FOLDER(String s) {
+		TEMP_FOLDER = s;
+	}
 	public String getTEMP_FOLDER() {
-		return TEMP_FOLDER + this.getClass().getName();
+		return TEMP_FOLDER;
 	}
 
 	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, String techVersion_) {

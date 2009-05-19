@@ -1,10 +1,12 @@
 package com.bluexml.side.clazz.generator.alfresco;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
@@ -25,7 +27,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	public static String GENERATOR_OPTIONS_DATAMODEL = "alfresco.dataModel";
 	public static String GENERATOR_OPTIONS_SHARE_EXTENSION = "alfresco.share.extension";
 	public static String GENERATOR_CODE = "CODE_GED_G_C_ALFRESCO_3";
-	
+
 	XMLConflictResolver xmlresolver = null;
 
 	public XMLConflictResolver getXmlresolver() {
@@ -38,8 +40,6 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	public static String MMUri = "http://www.kerblue.org/class/1.0";
 
 	public List<String> classTemplates = null;
-
-	public static String wClientTmpFile = TEMP_FOLDER + "/shared/classes/alfresco/extension/web-client-config-custom.xml";
 
 	public List<String> getClassTemplates() {
 		if (classTemplates == null) {
@@ -85,20 +85,12 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		return getClassTemplates();
 	}
 
-	public Collection<IFile> complete() throws Exception {
-		// solveConflict();
-		IFile ampIFile = buildAMPPackage();
-		generatedFiles.add(ampIFile);
-
-		return generatedFiles;
-	}
-
-	public Properties buildModuleProperties() {
+	public Properties buildModuleProperties(String rootPackage) {
 		Date now = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 		Properties props = new Properties();
-		props.put("module.id", "SIDE_ModelExtension");
-		props.put("module.version",getVersioNumber());
+		props.put("module.id", "SIDE_ModelExtension_" + rootPackage);
+		props.put("module.version", getVersioNumber());
 		props.put("module.title", "S-IDE model extension");
 		props.put("module.description", "this module contains S-IDE generated extension to extends Alfresco Data Model,\n build at " + sdf.format(now));
 		/*
@@ -133,33 +125,25 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	/**
 	 * method usable as Acceleo Templates Services
 	 */
-	public String getTEMP_FOLDER(EObject node) {
-		return this.getTEMP_FOLDER();
-	}
 
-	
 	public String getVersioNumber() {
 		String vn = getGenerationParameter("com.bluexml.side.Class.generator.alfresco.module.version");
 		if (vn == null || vn.equals("")) {
-			vn ="1.0";
+			vn = "1.0";
 		}
 		return vn;
 	}
-	
-	public String getModuleIdService(EObject node) throws Exception {
-		// AbstractGenerator.printConfiguration();
-		if (!AbstractGenerator.generationParameters.containsKey("com.bluexml.side.Class.generator.alfresco.module.id")) {
-			return buildModuleProperties().getProperty("module.id");
-		}
-		return AbstractGenerator.generationParameters.get("com.bluexml.side.Class.generator.alfresco.module.id");
+
+	public String getModuleIdService(EObject ob,String modelId) throws Exception {
+		return buildModuleProperties(modelId).getProperty("module.id");
 	}
-	
+
 	/**
 	 * This method check if the user have the license to use this generator.
 	 * 
 	 * @return true if the generator can be used.
 	 */
-	public boolean check(){
-		return SecurityHelper.check(GENERATOR_CODE,SidePreferences.getKey());
+	public boolean check() {
+		return SecurityHelper.check(GENERATOR_CODE, SidePreferences.getKey());
 	}
 }

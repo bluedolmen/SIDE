@@ -11,7 +11,7 @@ metamodel http://www.kerblue.org/class/1.0
 
 
 <%script type="clazz.ClassPackage" name="getBlueXmlUploadJsonOutputFile"%>
-<%if (eContainer() == null) {%><%getTEMP_FOLDER()%>/<%getProperty("alf.paths.extension.webscripts")%>com/bluexml/upload/bluexml-upload.post.json.ftl<%}%>
+<%if (eContainer() == null) {%><%getProperty("alf.paths.extension.webscripts")%>com/bluexml/upload/bluexml-upload.post.json.ftl<%}%>
 
 <%script type="clazz.ClassPackage" name="blueXmlUploadJson" file="<%getBlueXmlUploadJsonOutputFile%>"%>
 {

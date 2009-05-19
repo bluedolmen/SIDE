@@ -21,14 +21,14 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 
 %>
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
-<%if (eContainer() == null) {%><%getTEMP_FOLDER()%>/<%getConfModulePath()%>/module-context.xml<%}%>
+<%if (eContainer() == null) {%><%getConfModulePath()%>/module-context.xml<%}%>
 <%script type="clazz.ClassPackage" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
 
 <beans>
     <!-- Registration of new models -->
-    <bean id="extension.dictionaryBootstrap" parent="dictionaryModelBootstrap" depends-on="dictionaryBootstrap">
+    <bean id="<%getModuleIdService(name)%>.dictionaryBootstrap" parent="dictionaryModelBootstrap" depends-on="dictionaryBootstrap">
         <property name="models">
             <list>
                 <value><%getModulePath()%>/model/model.xml</value>
@@ -41,7 +41,7 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
         </property>
     </bean>
     
-    <bean id="<%getModuleIdService()%>_configBootstrap" class="org.alfresco.web.config.WebClientConfigBootstrap" init-method="init">
+    <bean id="<%getModuleIdService(name)%>_configBootstrap" class="org.alfresco.web.config.WebClientConfigBootstrap" init-method="init">
       <property name="configs">
         <list>
            <value>classpath:<%getModulePath()%>/web-client-config-custom.xml</value>

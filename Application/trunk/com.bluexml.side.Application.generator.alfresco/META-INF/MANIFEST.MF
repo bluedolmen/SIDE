@@ -11,7 +11,9 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Application.generator.acceleo;bundle-version="1.0.0",
  com.bluexml.side.Application.generator;bundle-version="1.0.0",
  com.bluexml.side.Application.deployer.alfresco,
- com.bluexml.side.Application.security;bundle-version="1.0.8"
+ com.bluexml.side.Application.security;bundle-version="1.0.8",
+ com.bluexml.side.Util.ecore;bundle-version="1.0.10",
+ com.bluexml.side.Util.model.merge;bundle-version="1.0.10"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.application.generator.alfresco;
@@ -19,3 +21,8 @@ Export-Package: com.bluexml.side.application.generator.alfresco;
    com.bluexml.side.application.generator.acceleo,
    org.eclipse.core.resources,
    org.eclipse.core.runtime"
+Import-Package: com.bluexml.side.Util.ecore,
+ com.bluexml.side.common,
+ org.eclipse.emf.common.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.resource

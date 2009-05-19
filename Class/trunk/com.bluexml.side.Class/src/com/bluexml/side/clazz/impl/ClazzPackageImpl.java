@@ -1254,8 +1254,6 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		initEReference(getClassPackage_EnumerationSet(), this.getEnumeration(), null, "enumerationSet", null, 0, -1, ClassPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassPackage_Views(), this.getView(), null, "views", null, 0, -1, ClassPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(classPackageEClass, ecorePackage.getEString(), "getFullName", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		addEOperation(classPackageEClass, this.getClassPackage(), "getAllPackages", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(classPackageEClass, this.getClazz(), "getAllClasses", 0, -1, IS_UNIQUE, IS_ORDERED);
@@ -1479,40 +1477,34 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		  (classPackageEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
-			 "body", "if self.getContainer().oclIsUndefined() then\r\tself.name\relse\r\tself.getContainer().oclAsType(ClassPackage).getFullName().concat(\'.\').concat(self.name)\rendif"
+			 "body", "ClassPackage.allInstances()"
 		   });		
 		addAnnotation
 		  (classPackageEClass.getEOperations().get(1), 
 		   source, 
 		   new String[] {
-			 "body", "ClassPackage.allInstances()"
+			 "body", "Clazz.allInstances()"
 		   });		
 		addAnnotation
 		  (classPackageEClass.getEOperations().get(2), 
 		   source, 
 		   new String[] {
-			 "body", "Clazz.allInstances()"
+			 "body", "Enumeration.allInstances()"
 		   });		
 		addAnnotation
 		  (classPackageEClass.getEOperations().get(3), 
 		   source, 
 		   new String[] {
-			 "body", "Enumeration.allInstances()"
+			 "body", "Aspect.allInstances()"
 		   });		
 		addAnnotation
 		  (classPackageEClass.getEOperations().get(4), 
 		   source, 
 		   new String[] {
-			 "body", "Aspect.allInstances()"
-		   });		
-		addAnnotation
-		  (classPackageEClass.getEOperations().get(5), 
-		   source, 
-		   new String[] {
 			 "body", "Association.allInstances()"
 		   });		
 		addAnnotation
-		  (classPackageEClass.getEOperations().get(6), 
+		  (classPackageEClass.getEOperations().get(5), 
 		   source, 
 		   new String[] {
 			 "body", "AbstractClass.allInstances()"
@@ -1669,7 +1661,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   new String[] {
 			 "TwoModelElementWithSameName", "AbstractContainer.allInstances()->select(a | a.name = self.name and a.getContainer() = self.getContainer() and a <> self)->size() = 0",
 			 "NameNull", "not self.name.oclIsUndefined() and self.name <> \'\'",
-			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') <> null"
+			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true"
 		   });			
 		addAnnotation
 		  (abstractContainerEClass.getEOperations().get(0), 
@@ -1723,7 +1715,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "PackageNameNull"
-		   });										
+		   });									
 		addAnnotation
 		  (clazzEClass, 
 		   source, 

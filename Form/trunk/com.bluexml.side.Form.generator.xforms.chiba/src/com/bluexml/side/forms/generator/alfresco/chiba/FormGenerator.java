@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
@@ -84,7 +85,7 @@ public class FormGenerator extends AbstractGenerator {
 		// FIXME should copy WAR IFile
 	}
 
-	public Collection<IFile> generate(HashMap<String, List<IFile>> modelsInfo,
+	public Collection<IFile> generate(Map<String, List<IFile>> modelsInfo,
 			String id_mm) {
 		String path = getTargetPath();
 		if (path == null || path.length() == 0)
@@ -223,12 +224,12 @@ public class FormGenerator extends AbstractGenerator {
 		}
 	}
 
-	private void getModels(HashMap<String, List<IFile>> modelsInfo) {
+	private void getModels(Map<String, List<IFile>> modelsInfo) {
 		clazzModels = getModels(modelsInfo, ClazzPackage.eNS_URI);
 		formModels = getModels(modelsInfo, FormPackage.eNS_URI);
 	}
 
-	private List<String> getModels(HashMap<String, List<IFile>> modelsInfo,
+	private List<String> getModels(Map<String, List<IFile>> modelsInfo,
 			String nsURI) {
 		List<String> models = new ArrayList<String>();
 		List<IFile> modelsIFile = modelsInfo.get(nsURI);

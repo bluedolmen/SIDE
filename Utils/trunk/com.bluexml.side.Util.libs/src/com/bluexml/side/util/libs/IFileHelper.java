@@ -1,6 +1,8 @@
 package com.bluexml.side.util.libs;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -71,5 +73,15 @@ public class IFileHelper {
 		return ifile.getLocation().makeAbsolute().toFile();
 	}
 	
-	
+	public static List<IFile> getAllFiles(IFolder folder) throws Exception {
+		List<IFile> results = new ArrayList<IFile>();
+		for (IResource r : folder.members()) {
+			if (r instanceof IFile) {
+				results.add((IFile)r);
+			} else {
+				results.addAll(getAllFiles((IFolder)r));
+			}
+		}
+		return results;
+	}
 }

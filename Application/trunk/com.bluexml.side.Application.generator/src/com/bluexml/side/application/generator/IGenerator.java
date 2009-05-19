@@ -34,7 +34,7 @@ public interface IGenerator {
 	 * @return the list of generated files
 	 * @throws Exception 
 	 */
-	public Collection<IFile> generate(HashMap<String, List<IFile>> models, String id_metamodel) throws Exception;
+	public Collection<IFile> generate(Map<String, List<IFile>> models, String id_metamodel) throws Exception;
 
 	/**
 	 * This method run the post-action after the generation. 

@@ -31,11 +31,6 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="PackageNameNull"/>
     </eAnnotations>
-    <eOperations name="getFullName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="if self.getContainer().oclIsUndefined() then&#xD;&#x9;self.name&#xD;else&#xD;&#x9;self.getContainer().oclAsType(ClassPackage).getFullName().concat('.').concat(self.name)&#xD;endif"/>
-      </eAnnotations>
-    </eOperations>
     <eOperations name="getAllPackages" upperBound="-1" eType="#//ClassPackage">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="ClassPackage.allInstances()"/>

@@ -25,7 +25,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.ClassServices
 import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 %>
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
-<%if (eContainer() == null) {%><%getTEMP_FOLDER()%>/<%getConfModulePath()%>/model/messages.properties<%}%>
+<%if (eContainer() == null) {%><%getConfModulePath()%>/model/messages.properties<%}%>
 <%script type="clazz.ClassPackage" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 
 #Model's messages

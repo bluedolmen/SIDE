@@ -11,7 +11,7 @@ import templates.shareExtentions.SiteWebscripts.AlfrescoFileUploadPatch.file-upl
   --%>
   
 <%script type="clazz.ClassPackage" name="getHtmlUploadJsOutputFile"%>
-<%if (eContainer() == null) {%><%getTEMP_FOLDER()%>/<%getProperty("alf.share.paths.core.site-webscripts")%>org/alfresco/components/upload/html-upload.get.js<%}%>
+<%if (eContainer() == null) {%><%getProperty("alf.share.paths.core.site-webscripts")%>org/alfresco/components/upload/html-upload.get.js<%}%>
 
 <%script type="clazz.ClassPackage" name="htmlUploadJs" file="<%getHtmlUploadJsOutputFile%>"%>
 <%getHtmlOrFlashUploadJs()%>

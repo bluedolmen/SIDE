@@ -8,7 +8,7 @@ metamodel http://www.kerblue.org/class/1.0
   --%>
 
 <%script type="clazz.ClassPackage" name="getBlueXmlUploadJsOutputFile"%>
-<%if (eContainer() == null) {%><%getTEMP_FOLDER()%>/<%getProperty("alf.paths.extension.webscripts")%>com/bluexml/upload/bluexml-upload.post.js<%}%>
+<%if (eContainer() == null) {%><%getProperty("alf.paths.extension.webscripts")%>com/bluexml/upload/bluexml-upload.post.js<%}%>
 
 <%script type="clazz.ClassPackage" name="blueXmlUploadJs" file="<%getBlueXmlUploadJsOutputFile%>"%>
 function main()

@@ -201,44 +201,9 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getFullName() {
-		if (getFullNameBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(0);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.CLASS_PACKAGE, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				getFullNameBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getFullNameBodyOCL);
-	
-		return (String) query.evaluate(this);
-	
-	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #getFullName <em>Get Full Name</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFullName
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> getFullNameBodyOCL;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<ClassPackage> getAllPackages() {
 		if (getAllPackagesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(1);
+			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(0);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLASS_PACKAGE, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -275,7 +240,7 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 */
 	public EList<Clazz> getAllClasses() {
 		if (getAllClassesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(2);
+			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(1);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLASS_PACKAGE, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -312,7 +277,7 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 */
 	public EList<Enumeration> getAllEnumerations() {
 		if (getAllEnumerationsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(3);
+			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(2);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLASS_PACKAGE, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -349,7 +314,7 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 */
 	public EList<Aspect> getAllAspects() {
 		if (getAllAspectsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(4);
+			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(3);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLASS_PACKAGE, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -386,7 +351,7 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 */
 	public EList<Association> getAllAssociations() {
 		if (getAllAssociationsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(5);
+			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(4);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLASS_PACKAGE, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -423,7 +388,7 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 */
 	public EList<AbstractClass> getAllAbstractClasses() {
 		if (getAllAbstractClassesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(6);
+			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(5);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLASS_PACKAGE, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);

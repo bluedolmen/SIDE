@@ -38,7 +38,7 @@ tmp<%}%>
 <%getFullName().replaceAll("\.","_")%>
 <%script type="clazz.ClassModelElement" name="getNameSpace"%>
 http://www.bluexml.com/model/content/<%getFolder()%>/1.0
-<%script type="EObject" name="getModulePath"%>
-alfresco/module/<%getModuleIdService()%>
-<%script type="EObject" name="getConfModulePath"%>
+<%script type="clazz.ClassPackage" name="getModulePath"%>
+alfresco/module/<%getModuleIdService(name)%>
+<%script type="clazz.ClassPackage" name="getConfModulePath"%>
 config/<%getModulePath()%>

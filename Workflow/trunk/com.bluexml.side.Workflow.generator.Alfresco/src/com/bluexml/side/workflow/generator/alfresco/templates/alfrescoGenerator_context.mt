@@ -27,7 +27,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
  
 <beans>
  
-    <bean id="<%getModuleIdService()%>.workflowBootstrap" parent="workflowDeployer">
+    <bean id="<%getModuleIdService(name)%>.workflowBootstrap" parent="workflowDeployer">
 		<property name="workflowDefinitions">
 			<list>
 				<props>
@@ -50,7 +50,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 		</property>
 	</bean>
 	
- 	<bean id="<%getModuleIdService()%>_configBootstrap" class="org.alfresco.web.config.WebClientConfigBootstrap" init-method="init">
+ 	<bean id="<%getModuleIdService(name)%>_configBootstrap" class="org.alfresco.web.config.WebClientConfigBootstrap" init-method="init">
       <property name="configs">
         <list>
            <value>classpath:<%getModulePath()%>/web-client-config-custom.xml</value>

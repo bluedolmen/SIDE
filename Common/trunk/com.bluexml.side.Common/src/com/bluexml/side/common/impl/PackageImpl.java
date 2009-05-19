@@ -152,6 +152,76 @@ public class PackageImpl extends NamedModelElementImpl implements com.bluexml.si
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getFullName() {
+		if (getFullNameBodyOCL == null) {
+			EOperation eOperation = CommonPackage.Literals.PACKAGE.getEOperations().get(1);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(CommonPackage.Literals.PACKAGE, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getFullNameBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getFullNameBodyOCL);
+	
+		return (String) query.evaluate(this);
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getFullName <em>Get Full Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFullName
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getFullNameBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public com.bluexml.side.common.Package getRootPackage() {
+		if (getRootPackageBodyOCL == null) {
+			EOperation eOperation = CommonPackage.Literals.PACKAGE.getEOperations().get(2);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(CommonPackage.Literals.PACKAGE, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getRootPackageBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getRootPackageBodyOCL);
+	
+		return (com.bluexml.side.common.Package) query.evaluate(this);
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getRootPackage <em>Get Root Package</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRootPackage
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getRootPackageBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {

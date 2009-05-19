@@ -52,7 +52,6 @@
       <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/aspectSet"/>
       <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/enumerationSet"/>
       <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/views"/>
-      <genOperations ecoreOperation="Class.ecore#//ClassPackage/getFullName"/>
       <genOperations ecoreOperation="Class.ecore#//ClassPackage/getAllPackages"/>
       <genOperations ecoreOperation="Class.ecore#//ClassPackage/getAllClasses"/>
       <genOperations ecoreOperation="Class.ecore#//ClassPackage/getAllEnumerations"/>

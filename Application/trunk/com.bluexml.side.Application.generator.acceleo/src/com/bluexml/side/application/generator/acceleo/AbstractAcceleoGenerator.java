@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -29,7 +30,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import com.bluexml.side.application.generator.AbstractGenerator;
 import com.bluexml.side.application.generator.ConflitResolverHelper;
 import com.bluexml.side.application.generator.acceleo.chain.CustomCChain;
-
+import com.bluexml.side.util.libs.IFileHelper;
 import fr.obeo.acceleo.chain.ActionSet;
 import fr.obeo.acceleo.chain.ChainFactory;
 import fr.obeo.acceleo.chain.EmfMetamodel;
@@ -67,9 +68,13 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		shouldGenerate = check() && modelsInfo.containsKey(id_metamodel); 
 		return shouldGenerate;
 	}
-
-	public Collection<IFile> generate(HashMap<String, List<IFile>> modelsInfo, String id_metamodel) throws Exception {
+	/**
+	 * each generator must manage all case of multi-model
+	 * this default are not very smart ..., just take the first to generate
+	 */
+	public Collection<IFile> generate(Map<String, List<IFile>> modelsInfo, String id_metamodel) throws Exception {
 		if (modelsInfo.get(id_metamodel) != null && modelsInfo.get(id_metamodel).size() > 0) {
+			List<IFile> models = modelsInfo.get(id_metamodel);			
 			return generate(modelsInfo.get(id_metamodel).get(0));
 		}
 		return null;
@@ -110,9 +115,11 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		Folder folder = ChainFactory.eINSTANCE.createFolder();
 
 		EFactory.eAdd(repository, "files", folder);
-		String path = getTargetPath();
+		String path = getTemporaryFolder();
 		if (path == null || path.length() == 0)
 			throw new Exception("Target path must be setted !");
+		
+		new File(IFileHelper.getSystemFolderPath(path)).mkdirs();
 		EFactory.eSet(folder, "path", path);
 
 		// Log
@@ -218,4 +225,6 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 	protected List<IFile> searchForConflict() {
 		return getCresolver().searchForConflict(generatedFiles);
 	}
+	
+	
 }

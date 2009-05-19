@@ -83,21 +83,21 @@ public class Generate extends Thread {
 				}
 			}
 		}
-		
+
 		// Secondly we get the meta-model associated to a model
 		HashMap<String, List<IFile>> modelsInfo = null;
 		boolean skipValidation = true;
 		if (configurationParameters.containsKey(ApplicationDialog.KEY_SKIPVALIDATION)) {
 			skipValidation = Boolean.valueOf(configurationParameters.get(ApplicationDialog.KEY_SKIPVALIDATION));
 		}
-		
+
 		try {
-			modelsInfo = (HashMap<String, List<IFile>>) getAssociatedMetaModel(models,skipValidation);
+			modelsInfo = (HashMap<String, List<IFile>>) getAssociatedMetaModel(models, skipValidation);
 		} catch (IOException e) {
 			addErrorText("Error with model : " + e.getMessage());
 			e.printStackTrace();
 		}
-		
+
 		generate(configuration, modelsInfo, configurationParameters, generationParameters);
 	}
 
@@ -128,9 +128,9 @@ public class Generate extends Thread {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				boolean error = generate_(configuration, modelsInfo, configurationParameters, generationParameters);
-				
+
 				error &= deploy_(configuration, modelsInfo, configurationParameters, generationParameters);
-				
+
 				progressBar.setSelection(progressBar.getMaximum());
 				if (!error) {
 					label.setText("Generation Completed");
@@ -143,6 +143,29 @@ public class Generate extends Thread {
 
 	}
 
+	private AbstractGenerator getGeneratorInstance(GeneratorConfiguration elem) {
+		String launchGeneratorClass = elem.getImpl_class();
+		String idGenerator = elem.getId();
+		Bundle plugin = Platform.getBundle(idGenerator);
+		Class<?> gen;
+		Object genObj = null;
+		try {
+			gen = plugin.loadClass(launchGeneratorClass);
+			genObj = gen.newInstance();
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		if (genObj instanceof AbstractGenerator) {
+			AbstractGenerator generator = (AbstractGenerator) genObj;
+			return generator;
+		}
+		return null;
+	}
+
 	private boolean generate_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) {
 		// For all generator version we will call generation method
 		int nbTask = configuration.getGeneratorConfigurations().size() * NB_GENERATION_STEP;
@@ -150,26 +173,8 @@ public class Generate extends Thread {
 		boolean error = false;
 
 		for (GeneratorConfiguration elem : configuration.getGeneratorConfigurations()) {
-			String launchGeneratorClass = elem.getImpl_class();
-			String idGenerator = elem.getId();
-			Bundle plugin = Platform.getBundle(idGenerator);
 			String id_techno_version = elem.getId_techno_version();
 			configurationParameters.put("technologyVersion", id_techno_version);
-			Class<?> gen;
-			Object genObj = null;
-			try {
-				gen = plugin.loadClass(launchGeneratorClass);
-				genObj = gen.newInstance();
-			} catch (ClassNotFoundException e1) {
-				error = true;
-				e1.printStackTrace();
-			} catch (InstantiationException e) {
-				error = true;
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				error = true;
-				e.printStackTrace();
-			}
 
 			// We get the option for this generator
 			Map<String, Boolean> generatorOptions = new HashMap<String, Boolean>();
@@ -177,21 +182,22 @@ public class Generate extends Thread {
 				generatorOptions.put(option.getKey(), true);
 			}
 
+			AbstractGenerator generator = getGeneratorInstance(elem);
+
 			// We initialize the generator with all data collected in
 			// application model
-			if (genObj instanceof AbstractGenerator) {
-				AbstractGenerator generator = (AbstractGenerator) genObj;
+			if (generator != null) {
 				// We generate only if there is meta-model available for
 				// the generator
 				if (generator.shouldGenerate(modelsInfo, elem.getId_metamodel())) {
 					String name = elem.getId().substring(elem.getId().lastIndexOf(".") + 1);
 					label.setText("Initialize " + name);
 					addText(System.getProperty("line.separator") + "Generation for " + name);
-					generator.initialize(generationParameters, generatorOptions, configurationParameters,id_techno_version);
+					generator.initialize(generationParameters, generatorOptions, configurationParameters, id_techno_version);
 					addOneStep(progressBar);
 
 					label.setText("Merging models for " + name);
-					// TODO : CALL MERGE METHOD!!!
+					
 					addOneStep(progressBar);
 
 					// The first one
@@ -220,16 +226,16 @@ public class Generate extends Thread {
 						addOneStep(progressBar);
 					}
 				}
+			} else {
+				error = true;
 			}
 		}
 		return error;
 	}
 
-
 	private void addOneStep(ProgressBar progressBar) {
 		progressBar.setSelection(progressBar.getSelection() + 1);
 	}
-
 
 	private boolean deploy_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) {
 		progressBar.setSelection(0);
@@ -240,7 +246,7 @@ public class Generate extends Thread {
 		for (DeployerConfiguration depConf : ldeployers) {
 			String deployerClassName = depConf.getImpl_class();
 			String id_deployer = depConf.getId();
-			String id_techno = depConf.getId_techno_version();			
+			String id_techno = depConf.getId_techno_version();
 			List<Option> options = depConf.getOptions();
 
 			Bundle plugin = Platform.getBundle(id_deployer);
@@ -281,7 +287,7 @@ public class Generate extends Thread {
 	 * Return a map with association model <> metaModel name
 	 * 
 	 * @param models
-	 * @param doValidation 
+	 * @param doValidation
 	 * @return
 	 * @throws IOException
 	 * @throws IOException
@@ -325,7 +331,7 @@ public class Generate extends Thread {
 				}
 			}
 			if (!skipValidation) {
-			EObject te = getRootElement(loadedModel);
+				EObject te = getRootElement(loadedModel);
 				if (te != null) {
 					label.setText("Validating model " + loadedModel.getURI());
 					if (!validate(te)) {
@@ -344,9 +350,10 @@ public class Generate extends Thread {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Launch validation on given EObject
+	 * 
 	 * @param eo
 	 * @return
 	 */
@@ -358,6 +365,7 @@ public class Generate extends Thread {
 
 	/**
 	 * Return the root element of a model
+	 * 
 	 * @param model
 	 * @return
 	 */
@@ -366,13 +374,14 @@ public class Generate extends Thread {
 		if (model.getContents() != null && model.getContents().size() > 0) {
 			EObject eo = model.getContents().get(0);
 			te = getTopElement(eo);
-			
+
 		}
 		return te;
 	}
 
 	/**
 	 * Take a EObject and will return the top container
+	 * 
 	 * @param eo
 	 * @return
 	 */
