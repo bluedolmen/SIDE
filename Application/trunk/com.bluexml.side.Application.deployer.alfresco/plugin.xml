@@ -3,33 +3,28 @@
 <plugin>
    <extension
          point="com.bluexml.side.Application.com_bluexml_application_configuration">
-      <metamodel
-            id="http://www.kerblue.org/class/1.0"
-            name="KSR500 Class"
-            url="http://www.kerblue.org/class/1.0">
-         <technology
-               id="alfresco"
-               name="Alfresco"
-               url="http://www.alfresco.com">
-            <technologyVersion
-                  id="alfresco_3.x"
-                  version="Alfresco3.x Labs and Entreprise">
-               <deployerVersion
-                     class="com.bluexml.side.application.deployer.alfresco.AMPDeployer"
-                     id="com.bluexml.side.Application.deployer.alfresco"
-                     version="S-IDE Alfresco Deployer 1.0.0">
-                  <configurationParameter
-                        key="CATALINA_HOME"
-                        label="Tomcat installation directory">
-                  </configurationParameter>
-                  <option
-                        key="com.bluexml.side.Application.deployer.alfresco.option1"
-                        label="clean">
-                  </option>
-               </deployerVersion>
-            </technologyVersion>
-         </technology>
-      </metamodel>
+      <technology
+            id="alfresco"
+            name="Alfresco"
+            url="http://www.alfresco.com">
+         <technologyVersion
+               id="alfresco_3.x"
+               version="Alfresco3.x Labs and Entreprise">
+            <deployerVersion
+                  class="com.bluexml.side.application.deployer.alfresco.AMPDeployer"
+                  id="com.bluexml.side.Application.deployer.alfresco"
+                  version="S-IDE Alfresco Deployer 1.0.0">
+               <configurationParameter
+                     key="CATALINA_HOME"
+                     label="Tomcat installation directory">
+               </configurationParameter>
+               <option
+                     key="com.bluexml.side.Application.deployer.alfresco.option1"
+                     label="clean">
+               </option>
+            </deployerVersion>
+         </technologyVersion>
+      </technology>
    </extension>
 
 </plugin>
