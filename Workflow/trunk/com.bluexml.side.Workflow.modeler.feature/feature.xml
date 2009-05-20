@@ -2,7 +2,7 @@
 <feature
       id="com.bluexml.side.Workflow.modeler.feature"
       label="S-IDE Workflow Modeler"
-      version="1.0.10"
+      version="1.0.11"
       provider-name="BLUEXML">
 
    <description url="http://www.example.com/description">
@@ -42,28 +42,28 @@
          id="com.bluexml.side.Workflow"
          download-size="0"
          install-size="0"
-         version="1.0.10"
+         version="1.0.11"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Workflow.edit"
          download-size="0"
          install-size="0"
-         version="1.0.10"
+         version="1.0.11"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Workflow.editor"
          download-size="0"
          install-size="0"
-         version="1.0.10"
+         version="1.0.11"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Workflow.modeler"
          download-size="0"
          install-size="0"
-         version="1.0.10"
+         version="1.0.11"
          unpack="false"/>
 
 </feature>

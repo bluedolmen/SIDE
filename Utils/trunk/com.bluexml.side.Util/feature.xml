@@ -2,7 +2,7 @@
 <feature
       id="com.bluexml.side.Util"
       label="S-IDE Utils"
-      version="1.0.10"
+      version="1.0.11"
       provider-name="BLUEXML">
 
    <description url="CRM.obl CRM.obldi">
@@ -29,27 +29,27 @@
          id="com.bluexml.side.Util.ecore"
          download-size="0"
          install-size="0"
-         version="1.0.10"
+         version="1.0.11"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Util.MetaModel.validate"
          download-size="0"
          install-size="0"
-         version="1.0.10"
+         version="1.0.11"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Util.model.merge"
          download-size="0"
          install-size="0"
-         version="1.0.10"
+         version="1.0.11"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Util.libs"
          download-size="0"
          install-size="0"
-         version="1.0.10"/>
+         version="1.0.11"/>
 
 </feature>
