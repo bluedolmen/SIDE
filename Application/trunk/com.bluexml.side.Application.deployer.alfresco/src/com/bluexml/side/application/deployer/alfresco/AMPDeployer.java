@@ -25,8 +25,6 @@ public class AMPDeployer extends Deployer {
 	File orgWar = null;
 	File alfWar = null;
 	File alfWebapp = null;
-	// TODO mettre le vrai code
-	public static String DEPLOYER_CODE = "CODE_GED_G_W_ALFRESCO_30L";
 
 	public File getOrgWar() {
 		if (orgWar == null) {

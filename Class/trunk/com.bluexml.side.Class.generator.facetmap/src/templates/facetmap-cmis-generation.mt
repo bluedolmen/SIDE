@@ -17,7 +17,7 @@ default xml namespace = 'http://www.cmis.org/2008/05';
 var query="
 <cmis:query xmlns:cmis='http://www.cmis.org/2008/05' xmlns:p='http://www.w3.org/1999/xhtml' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.cmis.org/2008/05 CMIS.xsd '>
 	<cmis:statement>
-		SELECT * FROM DOCUMENT  WHERE (NOT((CreatedBy = 'System') OR (Name = 'doclib.png') OR (Name = 'webpreview.swf') ) <%--AND (BaseType = '<%typeDocument()%>')--%>)
+		SELECT * FROM DOCUMENT  WHERE (NOT((CreatedBy = 'System') OR (Name = 'doclib.png') OR (Name = 'webpreview.swf') ) <AND (BaseType = '<%typeDocument()%>'))
 	</cmis:statement>
 	<cmis:searchAllVersions>false</cmis:searchAllVersions>
 	<cmis:pageSize>0</cmis:pageSize>

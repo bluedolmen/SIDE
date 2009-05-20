@@ -1,18 +1,13 @@
 package com.bluexml.side.clazz.generator.alfresco;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 
-import com.bluexml.side.application.generator.AbstractGenerator;
 import com.bluexml.side.application.generator.XMLConflictResolver;
 import com.bluexml.side.application.generator.alfresco.AbstractAlfrescoGenerator;
 import com.bluexml.side.application.security.SecurityHelper;

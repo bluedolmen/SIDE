@@ -10,7 +10,7 @@ import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
 <%script type="clazz.Clazz" name="taxonomy"%>
 	<%if getLabel()=="Personne"{%>
 		<%for (getAllAttributes()){%>
-				<taxonomy title="<%args(0)%>-><%getLabel()%>" root-heading-title="<%args(0)%>-><%getLabel()%>" facetid="<%getFullName()%>">
+				<taxonomy title="<%args(0)%>.<%name%>" root-heading-title="<%args(0)%>.<%name%>" facetid="<%getFullName()%>">
 					<!-- criteria -->
 				    <!-- On ne prend pas en compte les différentes occurences d'un même critère car facetmap les réunit. -->
 				    <xsl:for-each select="child::entry/cmis:object/cmis:properties/cmis:property<%if typ!="int"{%><%typ%><%}else{%>Integer<%}%>[@cmis:name='<%getFullName()%>']/cmis:value">          
@@ -37,7 +37,7 @@ import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
 	        <resources>
 	            <xsl:apply-templates/>
 	        </resources>
-<%for (getAllClasses()) {%><%taxonomy(getLabel())%><%}%>
+<%for (getAllClasses()) {%><%taxonomy(name)%><%}%>
 	    </facetmap>
 	</xsl:template>
 

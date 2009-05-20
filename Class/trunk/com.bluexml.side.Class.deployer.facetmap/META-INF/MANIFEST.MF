@@ -9,6 +9,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  com.bluexml.side.Application,
  com.bluexml.side.Application.deployer,
- com.bluexml.side.Application.security
+ com.bluexml.side.Application.security,
+ com.bluexml.side.Util.libs
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
