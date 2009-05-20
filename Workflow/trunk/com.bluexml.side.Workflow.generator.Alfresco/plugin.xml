@@ -20,7 +20,7 @@
                      class="com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator"
                      id="com.bluexml.side.Workflow.generator.Alfresco"
                      idTechnologyVersion="alfresco_3.0_labs"
-                     version="S-IDE Alfresco Generator 1.0.0">
+                     version="S-IDE Alfresco Workflow Generator 1.0.0">
                   <configurationParameter
                         key="CATALINA_HOME"
                         label="Tomcat installation directory">
