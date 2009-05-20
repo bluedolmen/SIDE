@@ -11,7 +11,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.internal.resources.Container;
 import org.eclipse.core.internal.resources.Folder;
+import org.eclipse.core.internal.resources.Project;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -112,7 +114,7 @@ public class ApplicationDialog extends Dialog {
 	private static final int GEN_ID = IDialogConstants.CLIENT_ID + 1;
 	private Text config_description;
 	private Label component_validity;
-	private TreeViewer viewer;
+	private TreeViewer genOptionsTree;
 	private Tree tree_1;
 	private static Combo configurationList;
 	public static boolean loadingTree = false;
@@ -202,9 +204,12 @@ public class ApplicationDialog extends Dialog {
 			// Refresh tree
 			initializeTree();
 
-			Set<TreeItem> generators = collectGenerators();
-			configureTree(configuration, generators);
-
+			Set<TreeItem> generators = collectImplNode(genOptionsTree);
+			configureTree(configuration, generators, genOptionsTree);
+			
+			Set<TreeItem> deployers = collectImplNode(deployOptionsTree);
+			configureTree(configuration, deployers, deployOptionsTree);
+			
 			// Refresh static generator parameters
 			initializeStaticParameters();
 			// Refresh dynamic generator parameters
@@ -226,7 +231,11 @@ public class ApplicationDialog extends Dialog {
 	 * @param configuration
 	 */
 	public void refreshOptions(Configuration configuration) {
-		initializeDynamicParameters();
+		if (tabFolder.getSelection() != null && tabFolder.getSelection()[0].equals(generationConfigurationTabItem)) {
+			initializeDynamicGenerationParameters();
+		} else {
+			initializeDynamicDeployementParameters();
+		}
 		configureGeneratorOptions(configuration);
 	}
 
@@ -265,7 +274,10 @@ public class ApplicationDialog extends Dialog {
 		}
 	}
 
-	private void initializeDynamicParameters() {
+	/**
+	 * Initialize the table with options for generation
+	 */
+	private void initializeDynamicGenerationParameters() {
 		// List Generator Id used
 		Generator gen = getSelectedGenerator();
 		List<String> confIds = new ArrayList<String>();
@@ -275,7 +287,7 @@ public class ApplicationDialog extends Dialog {
 					.getComponantConfigurations(conf)) {
 				confIds.add(elem.getId());
 			}
-			optionsGroup.setText("Options");
+			optionsGroup.setText("Options for Generation");
 		} else {
 			confIds.add(gen.getId());
 			optionsGroup.setText("Options for " + gen.getVersion());
@@ -304,18 +316,65 @@ public class ApplicationDialog extends Dialog {
 		}
 
 	}
+	
+	/**
+	 * Initialize the table with options for deployement
+	 */
+	public void initializeDynamicDeployementParameters() {
+		// List deployer Id used
+		Deployer dep = getSelectedDeployer();
+		List<String> confIds = new ArrayList<String>();
+		if (dep == null) {
+			Configuration conf = getCurrentConfiguration();
+			for (ComponantConfiguration elem : ApplicationUtil
+					.getComponantConfigurations(conf)) {
+				confIds.add(elem.getId());
+			}
+			optionsGroup.setText("Options for Deployement");
+		} else {
+			confIds.add(dep.getId());
+			optionsGroup.setText("Options for " + dep.getVersion());
+		}
+		if (dataStructure != null) {
+			dataStructure.getData().clear();
+		}
+		HashMap<String, GeneratorParameter> neededParam = new HashMap<String, GeneratorParameter>();
+		dataStructure = new GeneratorParameterDataStructure();
+		// We get all params key needed by Deployer
+		for (String genId : confIds) {
+			List<String> paramList = deployParamConfByGenerator.get(genId);
+			if (paramList != null) {
+				// We construct one list without twice the same id
+				for (String paramId : paramList) {
+					if (!neededParam.containsKey(paramId)) {
+						neededParam.put(paramId, configurationParameters
+								.get(paramId));
+					}
+				}
+			}
+		}
+		for (GeneratorParameter genParam : neededParam.values()) {
+			genParam.setValue("");
+			dataStructure.addGeneratorParameter(genParam);
+		}
+	}
 
-	private Set<TreeItem> collectGenerators() {
+	/**
+	 * Return all ImplNode (Generator, Deployer) for the given tree
+	 * @param tv
+	 * @return
+	 */
+	private Set<TreeItem> collectImplNode(TreeViewer tv) {
 		Set<TreeItem> generators = new HashSet<TreeItem>();
-		collectGenerators(viewer.getTree().getItems(), generators);
+		collectImplNode(tv.getTree().getItems(), generators);
 		return generators;
 	}
 
-	private void collectGenerators(TreeItem[] items, Set<TreeItem> generators) {
+	private void collectImplNode(TreeItem[] items, Set<TreeItem> generators) {
 		for (TreeItem item : items) {
 			if (item.getData() instanceof ImplNode)
 				generators.add(item);
-			collectGenerators(item.getItems(), generators);
+			collectImplNode(item.getItems(), generators);
 		}
 	}
 
@@ -344,7 +403,7 @@ public class ApplicationDialog extends Dialog {
 	}
 
 	private Generator getSelectedGenerator() {
-		TreeSelection ts = (TreeSelection) viewer.getSelection();
+		TreeSelection ts = (TreeSelection) genOptionsTree.getSelection();
 		Object o = ts.getFirstElement();
 		if (o instanceof TreeNode) {
 			return getSelectedGenerator((TreeNode) o);
@@ -375,9 +434,47 @@ public class ApplicationDialog extends Dialog {
 			}
 		}
 	}
-
+	
+	private Deployer getSelectedDeployer() {
+		TreeSelection ts = (TreeSelection) deployOptionsTree.getSelection();
+		Object o = ts.getFirstElement();
+		if (o instanceof TreeNode) {
+			return getSelectedDeployer((TreeNode) o);
+		} else {
+			return null;
+		}
+	}
+	
+	/**
+	 * Return the selected generator, or null if no generator top to the
+	 * selected element or non selected generator.
+	 * 
+	 * @param o
+	 * @return
+	 */
+	private Deployer getSelectedDeployer(TreeNode o) {
+		if (o instanceof Deployer) {
+			if (o.isChecked()) {
+				return (Deployer) o;
+			} else {
+				return null;
+			}
+		} else {
+			if (o != null) {
+				return getSelectedDeployer(o.getParent());
+			} else {
+				return null;
+			}
+		}
+	}
+	
+	/**
+	 * Load data in given tree for the given configuration
+	 * @param configuration
+	 * @param generators
+	 */
 	private void configureTree(Configuration configuration,
-			Set<TreeItem> generators) {
+			Set<TreeItem> generators, TreeViewer tv) {
 		for (TreeItem item : generators) {
 
 			ImplNode g = (ImplNode) item.getData();
@@ -386,8 +483,8 @@ public class ApplicationDialog extends Dialog {
 				if (ce.getId().equals(g.getId())) {
 					g.setChecked(true);
 					g.setEnabled(true);
-					viewer.update(g, null);
-
+					tv.update(g, null);
+					
 					for (TreeNode tn : g.getChildren()) {
 						OptionComponant o = (OptionComponant) tn;
 						for (Option opt : ce.getOptions()) {
@@ -398,52 +495,59 @@ public class ApplicationDialog extends Dialog {
 						}
 					}
 
+					for (TreeNode tn : g.getChildren()) {
+						tn.setEnabled(true);
+					}
+					
 					// Refresh options
 					for (TreeItem option : item.getItems()) {
-						viewer.update(option.getData(), null);
+						tv.update(option.getData(), null);
 					}
 
-					refreshParents(item);
+					refreshParents(item,tv);
 				}
 			}
 		}
 	}
 
-	private void refreshParents(TreeItem item) {
+	private void refreshParents(TreeItem item, TreeViewer tv) {
 		TreeItem parent = item.getParentItem();
 		if (parent != null) {
 			// Check and enable parent
 			TreeElement el = (TreeElement) parent.getData();
 			el.setChecked(true);
 			el.setEnabled(true);
-			viewer.update(parent.getData(), null);
+			tv.update(parent.getData(), null);
 
 			// Enable all sibling nodes
 			for (TreeItem sibItem : parent.getItems()) {
 				TreeElement sibEl = (TreeElement) sibItem.getData();
 				sibEl.setEnabled(true);
-				viewer.update(sibItem.getData(), null);
+				tv.update(sibItem.getData(), null);
 			}
 
-			refreshParents(parent);
+			refreshParents(parent,tv);
 		}
 	}
 
 	private void initializeTree() {
-		TreeItem[] items = viewer.getTree().getItems();
-		initializeTree(items);
+		TreeItem[] genItems = genOptionsTree.getTree().getItems();
+		initializeTree(genItems,genOptionsTree, 0);
+		TreeItem[] deployItems = deployOptionsTree.getTree().getItems();
+		initializeTree(deployItems,deployOptionsTree, 0);
 	}
 
-	private void initializeTree(TreeItem[] items) {
+	private void initializeTree(TreeItem[] items, TreeViewer tv, int level) {
 		for (TreeItem item : items) {
 			TreeElement el = (TreeElement) item.getData();
 			el.setChecked(false);
 			el.setEnabled(false);
-
-			if (item.getData() instanceof Metamodel)
+			//if (item.getData() instanceof Metamodel)
+			if (level == 0) {
 				el.setEnabled(true);
-			viewer.update(item.getData(), null);
-			initializeTree(item.getItems());
+			}
+			tv.update(item.getData(), null);
+			initializeTree(item.getItems(),tv, level + 1);
 		}
 	}
 
@@ -582,18 +686,18 @@ public class ApplicationDialog extends Dialog {
 		});
 		generationConfigurationTabItem.setControl(composite_1);
 
-		viewer = new TreeViewer(composite_1, SWT.BORDER);
-		tree_1 = viewer.getTree();
+		genOptionsTree = new TreeViewer(composite_1, SWT.BORDER);
+		tree_1 = genOptionsTree.getTree();
 		tree_1.setBounds(0, 142, 459, 304);
 		List<Class<?>> omitedClassForGen = new ArrayList<Class<?>>();
 		omitedClassForGen.add(Deployer.class);
-		viewer.setContentProvider(new ConfigurationContentProvider(Metamodel.class,omitedClassForGen));
-		viewer.setLabelProvider(new ConfigurationLabelProvider());
-		viewer.setInput(this);
-		viewer.expandAll();
+		genOptionsTree.setContentProvider(new ConfigurationContentProvider(Metamodel.class,omitedClassForGen));
+		genOptionsTree.setLabelProvider(new ConfigurationLabelProvider());
+		genOptionsTree.setInput(this);
+		genOptionsTree.expandAll();
 
 		Listener checkOnClick = new GenerationOptionTreeListener();
-		viewer.getTree().addListener(SWT.MouseDown, checkOnClick);
+		genOptionsTree.getTree().addListener(SWT.MouseDown, checkOnClick);
 
 		logText = new Text(composite_1, SWT.BORDER);
 		logText.addFocusListener(new FocusAdapter() {
@@ -639,8 +743,8 @@ public class ApplicationDialog extends Dialog {
 		browseLogPathButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
 				String filePath = "";
-				Folder folder = displaySelectFolderInWorkspace("Select Log Path");
-
+				Container folder = displaySelectFolderInWorkspace("Select Log Path");
+				
 				if (folder != null) {
 					filePath = folder.getFullPath().toPortableString();
 					logText.setText(filePath);
@@ -662,7 +766,7 @@ public class ApplicationDialog extends Dialog {
 		browseGenPathButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
 				String filePath = "";
-				Folder folder = displaySelectFolderInWorkspace("Select Generation Path");
+				Container folder = displaySelectFolderInWorkspace("Select Generation Path");
 
 				if (folder != null) {
 					filePath = folder.getFullPath().toPortableString();
@@ -727,11 +831,13 @@ public class ApplicationDialog extends Dialog {
 		deployementTabItem.setText("Deployement");
 		
 		tabFolder.addSelectionListener(new SelectionAdapter() {
+
 			public void widgetSelected(final SelectionEvent e) {
 				if (tabFolder.getSelection().length > 0
 						&& (tabFolder.getSelection()[0]
 								.equals(generationConfigurationTabItem) || tabFolder.getSelection()[0].equals(deployementTabItem))) {
 					optionsGroup.setVisible(true);
+					refreshOptions();
 				} else {
 					optionsGroup.setVisible(false);
 				}
@@ -750,7 +856,7 @@ public class ApplicationDialog extends Dialog {
 		
 		List<Class<?>> omitedClassForDeploy = new ArrayList<Class<?>>();
 		omitedClassForDeploy.add(Generator.class);
-		deployOptionsTree.setContentProvider(new ConfigurationContentProvider(Metamodel.class,omitedClassForDeploy));
+		deployOptionsTree.setContentProvider(new ConfigurationContentProvider(Technology.class,omitedClassForDeploy));
 		deployOptionsTree.setLabelProvider(new ConfigurationLabelProvider());
 		deployOptionsTree.setInput(this);
 		deployOptionsTree.expandAll();
@@ -971,14 +1077,13 @@ public class ApplicationDialog extends Dialog {
 	 * @param message
 	 * @return
 	 */
-	private Folder displaySelectFolderInWorkspace(String message) {
-		Folder result = null;
+	private Container displaySelectFolderInWorkspace(String message) {
+		Container result = null;
 		ElementTreeSelectionDialog ets = new ElementTreeSelectionDialog(Display
 				.getDefault().getActiveShell(), new WorkbenchLabelProvider(),
 				new BaseWorkbenchContentProvider());
 		ets.setBlockOnOpen(true);
-		ets
-				.setValidator((ISelectionStatusValidator) new FolderSelectionValidator());
+		ets.setValidator((ISelectionStatusValidator) new FolderSelectionValidator());
 		ets.setAllowMultiple(true);
 		ets.setTitle("Select Folder");
 		ets.setMessage(message);
@@ -990,6 +1095,8 @@ public class ApplicationDialog extends Dialog {
 			for (Object o : choice) {
 				if (o instanceof Folder) {
 					result = (Folder) o;
+				} else if (o instanceof Project) {
+					result = (Project) o;
 				}
 			}
 		}
@@ -1084,7 +1191,7 @@ public class ApplicationDialog extends Dialog {
 	 */
 	private String builDocumentationText() {
 		String result = "<font face=\"Helvetica, Arial\" size=\"2\">";
-		TreeItem[] items = viewer.getTree().getSelection();
+		TreeItem[] items = genOptionsTree.getTree().getSelection();
 		if (items.length > 0) {
 			TreeItem item = items[0];
 
@@ -1354,6 +1461,9 @@ public class ApplicationDialog extends Dialog {
 		}
 
 		public Object getParent(Object object) {
+			if (object instanceof TreeNode) {
+				return ((TreeNode)object).getParent();
+			}
 			return null;
 		}
 
@@ -1365,6 +1475,9 @@ public class ApplicationDialog extends Dialog {
 			return obj == null ? false : obj.length > 0;
 		}
 
+		/**
+		 * Return the elements corresponding (root nodes or childrens)
+		 */
 		public Object[] getElements(Object object) {
 			if (object instanceof ApplicationDialog) {
 				initialize();
@@ -1377,7 +1490,10 @@ public class ApplicationDialog extends Dialog {
 			} else
 				return getChildren(object);
 		}
-
+		
+		/**
+		 * Read all extension point and construct the tree
+		 */
 		public void initialize() {
 			IConfigurationElement[] contributions = Platform
 					.getExtensionRegistry().getConfigurationElementsFor(
@@ -1388,7 +1504,12 @@ public class ApplicationDialog extends Dialog {
 			}
 			initializeFromKey();
 		}
-
+		
+		/**
+		 * For each element of the extension will manage it and create the corresponding object
+		 * @param config
+		 * @param parent
+		 */
 		private void manageConfiguration(IConfigurationElement config, TreeNode parent) {
 			TreeNode futurParent = null;
 			// Scan for metamodels
@@ -1408,7 +1529,7 @@ public class ApplicationDialog extends Dialog {
 			if (!omitedObject.contains(Technology.class) && config.getName().equalsIgnoreCase("technology")) {
 				Technology t = new Technology(config, (Metamodel)parent);
 				if (!technologySet.containsKey(t.getId()) 
-						|| !technologySet.get(t.getId()).getParent().equals(parent)) {
+						|| (rootSet != technologySet && parent != technologySet.get(t.getId()).getParent())) {
 					technologySet.put(t.getId(), t);
 				} else {
 					t = technologySet.get(t.getId());
@@ -1420,7 +1541,7 @@ public class ApplicationDialog extends Dialog {
 			if (!omitedObject.contains(TechnologyVersion.class) && config.getName().equalsIgnoreCase("technologyVersion")) {
 				TechnologyVersion tv = new TechnologyVersion(config, (Technology)parent);
 				if (!technologyVersionSet.containsKey(tv.getId())
-						|| !technologyVersionSet.get(tv.getId()).getParent().equals(parent)) {
+						|| (rootSet != technologyVersionSet && parent != technologyVersionSet.get(tv.getId()).getParent())) {
 					technologyVersionSet.put(tv.getId(), tv);
 				} else {
 					tv = technologyVersionSet.get(tv.getId());
@@ -1432,7 +1553,7 @@ public class ApplicationDialog extends Dialog {
 			if (!omitedObject.contains(Generator.class) && config.getName().equalsIgnoreCase("generatorVersion")) {
 				Generator gv = new Generator(config, (TechnologyVersion)parent);
 				if (!generatorSet.containsKey(gv.getId())
-						|| !generatorSet.get(gv.getId()).getParent().equals(parent)) {
+						|| (rootSet != technologyVersionSet && parent != generatorSet.get(gv.getId()).getParent())) {
 					generatorSet.put(gv.getId(), gv);
 				} else {
 					gv = generatorSet.get(gv.getId());
@@ -1443,7 +1564,8 @@ public class ApplicationDialog extends Dialog {
 			// Scan for deployer version
 			if (!omitedObject.contains(Deployer.class) && config.getName().equalsIgnoreCase("deployerVersion")) {
 				Deployer dv = new Deployer(config, (TechnologyVersion)parent);
-				if (!deployerSet.containsKey(dv.getId())) {
+				if (!deployerSet.containsKey(dv.getId())
+						|| (rootSet != deployerSet && parent != deployerSet.get(dv.getId()).getParent())) {
 					deployerSet.put(dv.getId(), dv);
 				} else {
 					dv = deployerSet.get(dv.getId());
@@ -1690,7 +1812,7 @@ public class ApplicationDialog extends Dialog {
 	public class GenerationOptionTreeListener extends ElementTreeListener implements Listener {
 		
 		GenerationOptionTreeListener() {
-			tv = viewer;
+			tv = genOptionsTree;
 		}
 		
 		public void handleEvent(Event event) {
@@ -1712,8 +1834,6 @@ public class ApplicationDialog extends Dialog {
 			} else {
 				component_validity.setText("");
 			}
-			refreshOptions();
-
 			// If click on image : check it, else : just show informations
 			if (canCheck
 					&& (item.getImageBounds(0) != null && event.x <= item
@@ -1734,6 +1854,7 @@ public class ApplicationDialog extends Dialog {
 					}
 				}
 			}
+			refreshOptions();
 		}
 	}
 		
@@ -1753,7 +1874,6 @@ public class ApplicationDialog extends Dialog {
 			documentationText.setText(builDocumentationText());
 			TreeItem item = tv.getTree().getItem(point);
 			TreeElement el = (TreeElement) item.getData();
-			refreshOptions();
 			// If click on image : check it, else : just show informations
 			if (item.getImageBounds(0) != null && event.x <= item
 							.getImageBounds(0).x
@@ -1773,6 +1893,7 @@ public class ApplicationDialog extends Dialog {
 					}
 				} 
 			}
+			refreshOptions();
 		}
 	}
 }

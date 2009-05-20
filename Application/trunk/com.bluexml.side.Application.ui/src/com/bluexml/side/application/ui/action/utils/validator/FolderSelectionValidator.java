@@ -1,6 +1,7 @@
 package com.bluexml.side.application.ui.action.utils.validator;
 
 import org.eclipse.core.internal.resources.Folder;
+import org.eclipse.core.internal.resources.Project;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.dialogs.ISelectionStatusValidator;
@@ -17,7 +18,7 @@ public class FolderSelectionValidator implements ISelectionStatusValidator {
 		if (selection.length == 0) {
 			result = new Status(IStatus.ERROR, "not_used", 0, "No Selection" , null);
 		} else {
-			if (!(selection[0] instanceof Folder)) {
+			if (!(selection[0] instanceof Folder || selection[0] instanceof Project)) {
 				result = new Status(IStatus.ERROR, "not_used", 0, "You Must Select a Folder" , null);
 			}
 		}
