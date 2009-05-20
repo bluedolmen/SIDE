@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="com.bluexml.side.Application.com_bluexml_application_configuration">
+      <metamodel
+            id="http://www.kerblue.org/class/1.0"
+            name="KSR500 Class"
+            url="http://www.kerblue.org/class/1.0">
+         <technology
+               id="birt"
+               name="Birt"
+               url="http://www.eclipse.org/birt/">
+            <technologyVersion
+                  id="birt_2.3.x"
+                  version="Birt_2.3.x">
+               <generatorVersion
+                     class="com.bluexml.side.application.generator.report.ReportGenerator"
+                     id="com.bluexml.side.Application.generator.report"
+                     version="S-IDE Alfresco Report 1.0.0">
+                  <option
+                        documentation="Generate Birt&apos;s report"
+                        key="report.birt"
+                        label="Birt Report">
+                  </option>
+                  <configurationParameter
+                        documentation="The author of the report"
+                        key="report.author"
+                        label="Author">
+                  </configurationParameter>
+               </generatorVersion>
+            </technologyVersion>
+         </technology>
+      </metamodel>
+   </extension>
+
+</plugin>

@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Birt Plug-in
+Bundle-SymbolicName: com.bluexml.side.Class.generator.report;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: com.bluexml.side.clazz.generator.report.Activator
+Bundle-Vendor: BLUEXML
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ com.bluexml.side.Application.deployer;bundle-version="1.0.8",
+ com.bluexml.side.Application.generator;bundle-version="1.0.8",
+ com.bluexml.side.Application.generator.acceleo;bundle-version="1.0.8",
+ com.bluexml.side.Application.security;bundle-version="1.0.8",
+ com.bluexml.side.Application.generator.alfresco;bundle-version="1.0.8",
+ org.eclipse.core.resources;bundle-version="3.4.1",
+ com.bluexml.side.Application,
+ com.bluexml.side.Class.generator.alfresco;bundle-version="1.0.8"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Import-Package: com.bluexml.side.Class.modeler.diagram.utils.metainfo.value,
+ com.bluexml.side.clazz,
+ com.bluexml.side.common

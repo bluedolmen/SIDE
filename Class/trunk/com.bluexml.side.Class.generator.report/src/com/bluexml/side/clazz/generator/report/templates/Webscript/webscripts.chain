@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="ASCII"?>
+<chain:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:chain="http://www.obeo.fr/acceleo/chain" parametersFiles="//@repository/@files.0 //@repository/@files.1 //@repository/@files.2">
+  <repository>
+    <members documentation="Datatable">
+      <members documentation="dhx">
+        <members documentation="xml">
+          <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/datatable/dhx/xml/alfrescoGenerator_template_xml.mt"/>
+        </members>
+        <members documentation="tags">
+          <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/datatable/dhx/tags/alfrescoGenerator_template_tag.html.mt"/>
+        </members>
+        <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/datatable/dhx/alfrescoGenerator_template_def.mt"/>
+        <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/datatable/dhx/alfrescoGenerator_template_result_get.mt"/>
+        <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/datatable/dhx/alfrescoGenerator_template_result.mt"/>
+        <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/datatable/dhx/alfrescoGenerator_template_js_get.mt"/>
+      </members>
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/datatable/alfrescoGenerator_template_def.mt"/>
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/datatable/alfrescoGenerator_template_result.mt"/>
+    </members>
+    <members documentation="XML">
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/xml/alfrescoGenerator_template_xml.mt"/>
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/xml/alfrescoGenerator_template_result_get.mt"/>
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/xml/alfrescoGenerator_template_result_post.mt"/>
+    </members>
+    <members documentation="JSON">
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/json/alfrescoGenerator_template_json.mt"/>
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/json/alfrescoGenerator_template_result_post.mt"/>
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/json/alfrescoGenerator_template_result_get.mt"/>
+    </members>
+    <members documentation="Operation">
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/operation/alfrescoGenerator_template_def.mt"/>
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/operation/alfrescoGenerator_template_result.mt"/>
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/operation/alfrescoGenerator_template_datatable_def.mt"/>
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/operation/alfrescoGenerator_template_datatable_result.mt"/>
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/operation/alfrescoGenerator_template_js_post.mt"/>
+    </members>
+    <members documentation="General">
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/alfrescoGenerator_template_def_get.mt"/>
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/alfrescoGenerator_template_def_post.mt"/>
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/alfrescoGenerator_template_js_get.mt"/>
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/alfrescoGenerator_template_js_post.mt"/>
+    </members>
+    <members documentation="HTML">
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/html/alfrescoGenerator_template_html.mt"/>
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/html/alfrescoGenerator_template_result_get.mt"/>
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/html/alfrescoGenerator_template_result_post.mt"/>
+    </members>
+    <members documentation="RSS">
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/rss/alfrescoGenerator_template_rss.mt"/>
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/rss/alfrescoGenerator_template_result_get.mt"/>
+      <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/rss/alfrescoGenerator_template_result_post.mt"/>
+    </members>
+    <members documentation="Week Planner">
+      <members documentation="dHTML">
+        <members documentation="XML">
+          <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/weekPlanner/dHTML/xml/alfrescoGenerator_template_def.mt"/>
+          <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/weekPlanner/dHTML/xml/alfrescoGenerator_template_xml.mt"/>
+        </members>
+        <members documentation="HTML">
+          <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/weekPlanner/dHTML/html/definition.mt"/>
+          <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/weekPlanner/dHTML/html/htmlFile.mt"/>
+        </members>
+      </members>
+      <members documentation="Actions">
+        <members documentation="setValue">
+          <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/weekPlanner/actions/setValue/alfrescoGenerator_template_def.mt"/>
+          <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/weekPlanner/actions/setValue/alfrescoGenerator_template_html.mt"/>
+          <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/weekPlanner/actions/setValue/alfrescoGenerator_template_js.mt"/>
+        </members>
+        <members documentation="createNode">
+          <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/weekPlanner/actions/createNode/alfrescoGenerator_template_def.mt"/>
+          <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/weekPlanner/actions/createNode/alfrescoGenerator_template_html.mt"/>
+          <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/weekPlanner/actions/createNode/alfrescoGenerator_template_js.mt"/>
+        </members>
+        <members documentation="deleteNode">
+          <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/weekPlanner/actions/deleteNode/alfrescoGenerator_template_def.mt"/>
+          <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/weekPlanner/actions/deleteNode/alfrescoGenerator_template_html.mt"/>
+          <files xsi:type="chain:Generator" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/FreemarkerTemplates/Webscript/weekPlanner/actions/deleteNode/alfrescoGenerator_template_js.mt"/>
+        </members>
+      </members>
+    </members>
+    <files xsi:type="chain:Model" path="/SEM/CRM.obl"/>
+    <files xsi:type="chain:Folder" path="/SEM/generated"/>
+    <files xsi:type="chain:Log" path="/com.bluexml.generator.alfresco/src/AcceleoTemplates/log.txt"/>
+    <files xsi:type="chain:EmfMetamodel" path="http://MMUseCase"/>
+  </repository>
+  <actions>
+    <actions xsi:type="chain:Generate" documentation="JSON" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.2/@files.0" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="XML" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.1/@files.0" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="HTML" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.5/@files.0" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="RSS" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.6/@files.0" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Global : JSON Template POST" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.2/@files.1" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Global : JSON Template GET" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.2/@files.2" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Global : XML Template POST" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.1/@files.2" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Global : XML Template GET" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.1/@files.1" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Global : HTML Template POST" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.5/@files.2" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Global : HTML Template GET" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.5/@files.1" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Global : RSS Template POST" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.6/@files.2" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Global : RSS Template GET" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.6/@files.1" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Global : Definition GET" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.4/@files.0" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Global : Definition POST" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.4/@files.1" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Global : JS GET" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.4/@files.2" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Global : JS POST" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.4/@files.3" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Datatable : Template" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.0/@files.1" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Datatable : Definition" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.0/@files.0" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Datatable dhx : Definition" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.0/@members.0/@files.0" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Datatable dhx : HTML Template GET" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.0/@members.0/@files.2" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Datatable dhx : XML Template GET" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.0/@members.0/@files.1" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Datatable dhx : XML Item Template GET" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.0/@members.0/@members.0/@files.0" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Datatable dhx : JS" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.0/@members.0/@files.3" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Operation : Template" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.3/@files.1" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Operation : Definition" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.3/@files.0" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Operation : Datatable Template" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.3/@files.3" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Operation : Datatable Definition" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.3/@files.2" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Week Planner dHTML : Data Def" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.7/@members.0/@members.0/@files.0" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Week Planner dHTML : Data Result" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.7/@members.0/@members.0/@files.1" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Week Planner dHTML : HTML Def" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.7/@members.0/@members.1/@files.0" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Week Planner dHTML : HTML Result" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.7/@members.0/@members.1/@files.1" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Week Planner : Acton Set Value Def" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.7/@members.1/@members.0/@files.0" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Week Planner : Acton Set Value Result" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.7/@members.1/@members.0/@files.1" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Week Planner : Acton Set Value JavaScript" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.7/@members.1/@members.0/@files.2" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Week Planner : Acton Create Node Def" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.7/@members.1/@members.1/@files.0" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Week Planner : Acton Create Node Result" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.7/@members.1/@members.1/@files.1" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Week Planner : Acton Create Node JavaScript" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.7/@members.1/@members.1/@files.2" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Week Planner : Acton Delete Node Def" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.7/@members.1/@members.2/@files.0" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Week Planner : Acton Delete Node Result" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.7/@members.1/@members.2/@files.1" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Week Planner : Acton Delete Node JavaScript" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.7/@members.1/@members.2/@files.2" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="Tags Management : webservice Html" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@members.0/@members.0/@members.1/@files.0" folder="//@repository/@files.1"/>
+  </actions>
+</chain:Chain>
