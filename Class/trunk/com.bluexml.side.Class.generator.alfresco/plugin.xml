@@ -74,7 +74,7 @@
                <generatorVersion
                      class="com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator"
                      id="com.bluexml.side.Class.generator.alfresco"
-                     version="S-IDE Alfresco Generator 1.0.0">
+                     version="S-IDE Alfresco Class Generator 1.0.0">
                   <configurationParameter
                         documentation="default value 1.0, ca be set by user"
                         key="com.bluexml.side.Class.generator.alfresco.module.version"
