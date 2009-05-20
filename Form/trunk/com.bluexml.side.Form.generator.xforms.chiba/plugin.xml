@@ -20,7 +20,7 @@
                   class="com.bluexml.side.forms.generator.alfresco.chiba.FormGenerator"
                   id="com.bluexml.side.Form.generator.xforms.chiba"
                   idTechnologyVersion="alfresco_3.0_labs"
-                  version="S-IDE Alfresco Generator 1.0.0">
+                  version="S-IDE Alfresco Form Generator 1.0.0">
                <configurationParameter
                      key="war.folder"
                      label="Folder output for war">
