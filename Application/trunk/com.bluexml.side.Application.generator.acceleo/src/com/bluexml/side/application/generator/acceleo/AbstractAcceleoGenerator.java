@@ -64,17 +64,16 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 	abstract protected String getMetamodelURI();
 
 	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo, String id_metamodel) {
-		boolean shouldGenerate =false;
-		shouldGenerate = check() && modelsInfo.containsKey(id_metamodel); 
-		return shouldGenerate;
+		return modelsInfo.containsKey(id_metamodel);
 	}
+
 	/**
-	 * each generator must manage all case of multi-model
-	 * this default are not very smart ..., just take the first to generate
+	 * each generator must manage all case of multi-model this default are not
+	 * very smart ..., just take the first to generate
 	 */
 	public Collection<IFile> generate(Map<String, List<IFile>> modelsInfo, String id_metamodel) throws Exception {
 		if (modelsInfo.get(id_metamodel) != null && modelsInfo.get(id_metamodel).size() > 0) {
-			List<IFile> models = modelsInfo.get(id_metamodel);			
+			List<IFile> models = modelsInfo.get(id_metamodel);
 			return generate(modelsInfo.get(id_metamodel).get(0));
 		}
 		return null;
@@ -118,7 +117,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		String path = getTemporaryFolder();
 		if (path == null || path.length() == 0)
 			throw new Exception("Target path must be setted !");
-		
+
 		new File(IFileHelper.getSystemFolderPath(path)).mkdirs();
 		EFactory.eSet(folder, "path", path);
 
@@ -225,6 +224,5 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 	protected List<IFile> searchForConflict() {
 		return getCresolver().searchForConflict(generatedFiles);
 	}
-	
-	
+
 }
