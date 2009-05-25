@@ -19,7 +19,7 @@
                      label="Tomcat installation directory">
                </configurationParameter>
                <option
-                     key="com.bluexml.side.Application.deployer.alfresco.option1"
+                     key="com.bluexml.side.Application.deployer.alfresco.clean"
                      label="clean">
                </option>
             </deployerVersion>

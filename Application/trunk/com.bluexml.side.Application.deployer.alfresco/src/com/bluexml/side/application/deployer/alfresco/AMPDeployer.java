@@ -17,7 +17,7 @@ import com.bluexml.side.util.libs.FileHelper;
  * 
  */
 public class AMPDeployer extends Deployer {
-	public static String CONFIGURATION_PARAMETER_CATALINA_HOME = "CATALINA_HOME";
+	public static String CONFIGURATION_PARAMETER_CATALINA_HOME = "CATALINA_HOME";	
 	static final String webapps = "webapps";
 	static final String webappName = "alfresco";
 	static final String alfrescoWar = webappName + ".war";
@@ -26,6 +26,9 @@ public class AMPDeployer extends Deployer {
 	File alfWar = null;
 	File alfWebapp = null;
 
+	public AMPDeployer() {
+		cleanKey = "com.bluexml.side.Application.deployer.alfresco.clean";
+	}
 	public File getOrgWar() {
 		if (orgWar == null) {
 			orgWar = new File(getTomcatHome() + File.separator + webapps + File.separator + alfrescoWarOrg);
