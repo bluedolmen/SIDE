@@ -354,8 +354,11 @@ public class ApplicationDialog extends Dialog {
 			}
 		}
 		for (GeneratorParameter genParam : neededParam.values()) {
-			genParam.setValue("");
-			dataStructure.addGeneratorParameter(genParam);
+			if (genParam != null) {
+				genParam.setValue("");
+				dataStructure.addGeneratorParameter(genParam);
+			}
+			
 		}
 	}
 
@@ -1179,9 +1182,16 @@ public class ApplicationDialog extends Dialog {
 	 * @return
 	 */
 	private String buildHelpDocumentationText(String documentation) {
-		String result = "<font face=\"Helvetica, Arial\" size=\"2\">";
+		String result = "<html><body style=\"font-family: Verdana; " +
+		"color: #444;" +
+		"text-decoration: none;" +
+		"word-spacing: normal;" +
+		"text-align: justify;" +
+		"letter-spacing: 0;" +
+		"line-height: 1.2em;" +
+		"font-size: 11px;\">";
 		result += documentation;
-		result += "</font>";
+		result += "</body></html>";
 		return result;
 	}
 
@@ -1190,48 +1200,34 @@ public class ApplicationDialog extends Dialog {
 	 * @return
 	 */
 	private String builDocumentationText() {
-		String result = "<font face=\"Helvetica, Arial\" size=\"2\">";
+		String result = "<html><body style=\"font-family: Verdana; " +
+		"color: #444;" +
+		"text-decoration: none;" +
+		"word-spacing: normal;" +
+		"text-align: justify;" +
+		"letter-spacing: 0;" +
+		"line-height: 1.2em;" +
+		"font-size: 11px;\">";
 		TreeItem[] items = genOptionsTree.getTree().getSelection();
 		if (items.length > 0) {
 			TreeItem item = items[0];
-
-			if (item.getData() instanceof Metamodel) {
-				result += "<b>Documentation :</b><br/><br/>";
-				Metamodel m = (Metamodel) item.getData();
-				if (m.getDescription() != null)
-					result += m.getDescription();
-				result += "<br/><br/>";
-				result += "Lien : ";
-				result += "<a href=\"" + m.getURL() + "\">" + m.getURL()
-						+ "</a>";
-			} else if (item.getData() instanceof OptionGenerator) {
-				OptionGenerator o = (OptionGenerator) item.getData();
-				if (o.getDescription() != null)
-					result += o.getDescription();
-			} else {
-				//TODO : make this re work
-				/*
-				Technology t = null;
-				if (item.getData() instanceof Technology)
-					t = (Technology) item.getData();
-				else if (item.getData() instanceof TechnologyVersion)
-					t = ((TechnologyVersion) item.getData()).getParent();
-				else if (item.getData() instanceof Generator)
-					t = ((Generator) item.getData()).getParent()
-							.getTechnology();
-
-				if (t != null) {
-					result += "<b>Documentation :</b><br/><br/>";
-					if (t.getDescription() != null)
-						result += t.getDescription();
-					result += "<br/><br/>";
+			
+			if (item.getData() instanceof TreeElement) {
+				TreeElement treeElem = (TreeElement) item.getData();
+				if (treeElem.getDescription() != null) {
+					result += treeElem.getDescription();
+				}
+				
+				if (treeElem instanceof Metamodel) {
+					Metamodel m = (Metamodel) treeElem;
+					result += "<br/>";
 					result += "Lien : ";
-					result += "<a href=\"" + t.getURL() + "\">" + t.getURL()
+					result += "<a href=\"" + m.getURL() + "\">" + m.getURL()
 							+ "</a>";
-				}*/
+				}
 			}
 		}
-		result += "</font>";
+		result += "</body></html>";
 		return result;
 	}
 
@@ -1455,7 +1451,7 @@ public class ApplicationDialog extends Dialog {
 		public Object[] getChildren(Object object) {
 			if (object instanceof TreeNode) {
 				TreeNode elt = (TreeNode) object;
-				return elt.getChildren().toArray();
+				return elt.getChildren().toArray(); 
 			}
 			return null;
 		}
@@ -1598,7 +1594,7 @@ public class ApplicationDialog extends Dialog {
 			if (config.getName().equalsIgnoreCase("configurationParameter")) {
 				GeneratorParameter param = null;
 				if (parent instanceof Generator) {
-					Generator g = (Generator) parent;
+					Generator g = (Generator) parent; 
 					param = new GeneratorParameter(config);
 					if (!genParamConfByGenerator.containsKey(g.getId())) {
 						genParamConfByGenerator.put(g.getId(),new ArrayList<String>());
@@ -1612,7 +1608,6 @@ public class ApplicationDialog extends Dialog {
 						deployParamConfByGenerator.put(d.getId(),new ArrayList<String>());
 					}
 					deployParamConfByGenerator.get(d.getId()).add(param.getKey());
-					//configurationParameters.put(param.getKey(),param);
 				}
 				futurParent = null;
 			}
@@ -1625,7 +1620,9 @@ public class ApplicationDialog extends Dialog {
 			}
 			
 			for (IConfigurationElement child : config.getChildren()) {
+				//System.err.println("Manage conf for child " + (child.getAttribute("id") != null ? child.getAttribute("id") : child.getAttribute("key"))  + " and parent " + (parent != null ? parent.getId() : ""));
 				manageConfiguration(child,futurParent);
+				
 			}
 		}
 

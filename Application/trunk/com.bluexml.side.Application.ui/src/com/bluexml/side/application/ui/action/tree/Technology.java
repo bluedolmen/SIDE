@@ -10,7 +10,6 @@ public class Technology extends TreeNode {
 	
 	private String label;
 	private String url;
-	private String description;
 	private Set<TreeNode> versions;
 
 	public Technology(IConfigurationElement elt, Metamodel m) {

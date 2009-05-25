@@ -4,10 +4,11 @@ import java.util.Collection;
 
 public abstract class TreeNode extends TreeElement {
 	protected String id;
+	protected TreeNode parent;
 	
 	public abstract Collection<TreeNode> getChildren();
 	public abstract void addChildren(TreeNode child);
-	public TreeNode parent;
+	
 	
 	public TreeNode(){
 		

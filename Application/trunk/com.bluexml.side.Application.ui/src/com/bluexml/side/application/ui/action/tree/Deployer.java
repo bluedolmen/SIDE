@@ -11,12 +11,14 @@ import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.DeployerConfiguration;
 import com.bluexml.side.application.Option;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
+import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 
 public class Deployer extends ImplNode {
 
 	public Deployer(IConfigurationElement elt, TechnologyVersion tv) {
 		parent = tv;
 		id = elt.getAttribute("id");
+		description = elt.getAttribute("description");
 		version = elt.getAttribute("version");
 		launchClass = elt.getAttribute("class");
 		options = new HashSet<TreeNode>();
@@ -27,13 +29,8 @@ public class Deployer extends ImplNode {
 			ApplicationDialog.modificationMade();
 			Configuration config = ApplicationDialog.getCurrentConfiguration();
 			if (config != null) {
-				// Delete all linked elements
-				Set<ComponantConfiguration> elts = new HashSet<ComponantConfiguration>();
-				for (ComponantConfiguration elt : config.getDeployerConfigurations()) {
-					if (elt.getId_techno_version().equals(parent.getId()))
-						elts.add(elt);
-				}
-				config.getDeployerConfigurations().removeAll(elts);
+				// Remove element
+				ApplicationUtil.deleteImplNodeFromConf(config,this);
 
 				// Add the new element
 				if (isChecked() && isEnabled()) {

@@ -1,15 +1,20 @@
 package com.bluexml.side.application.ui.action.utils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ComponantConfiguration;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ConfigurationParameters;
+import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
+import com.bluexml.side.application.ui.action.tree.Generator;
+import com.bluexml.side.application.ui.action.tree.ImplNode;
 
 public class ApplicationUtil {
 	/**
@@ -50,6 +55,26 @@ public class ApplicationUtil {
 		return result;
 	}
 
+	/**
+	 * Delete the given generator from the given configuration
+	 * @param config
+	 */
+	public static void deleteImplNodeFromConf(Configuration config, ImplNode gen) {
+		Set<ComponantConfiguration> elts = new HashSet<ComponantConfiguration>();
+		for (GeneratorConfiguration elt : config.getGeneratorConfigurations()) {
+			if (elt.getId().equals(gen.getId()) 
+					&& elt.getId_techno_version().equals(gen.getParent().getId()) 
+					&& elt.getId_metamodel().equals(gen.getParent().getParent().getParent().getId()) ) {
+				elts.add(elt);
+			}
+		}
+		config.getGeneratorConfigurations().removeAll(elts);
+	}
+	/**
+	 * Return the list of componant configuration for a specific config
+	 * @param config
+	 * @return
+	 */
 	public static List<ComponantConfiguration> getComponantConfigurations(Configuration config) {
 		List<ComponantConfiguration> l = new ArrayList<ComponantConfiguration>();
 		l.addAll(config.getDeployerConfigurations());

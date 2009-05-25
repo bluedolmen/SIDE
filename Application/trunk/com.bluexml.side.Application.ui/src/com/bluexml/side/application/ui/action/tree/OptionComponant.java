@@ -10,15 +10,13 @@ public abstract class OptionComponant  extends TreeNode {
 	private String key;
 	private String label;
 	private String description;
-	ImplNode impl;
 
 	public OptionComponant(IConfigurationElement elt,ImplNode implNode) {
 		parent = (TreeNode)implNode;
+		id = elt.getAttribute("key");
 		key = elt.getAttribute("key");
 		label = elt.getAttribute("label");
 		description = elt.getAttribute("documentation");
-		impl = implNode;
-		impl.addOption(this);
 	}
 
 	public String getKey() {
@@ -48,13 +46,13 @@ public abstract class OptionComponant  extends TreeNode {
 	@Override
 	public void setChecked(boolean checked) {
 		super.setChecked(checked);
-		impl.updateApplication();
+		((ImplNode)parent).updateApplication();
 	}
 
 	@Override
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
-		impl.updateApplication();
+		((ImplNode)parent).updateApplication();
 	}
 	public Set<TreeNode> getChildren() {
 		return new HashSet<TreeNode>();

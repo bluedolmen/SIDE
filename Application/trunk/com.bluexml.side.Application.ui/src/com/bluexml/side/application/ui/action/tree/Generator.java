@@ -11,6 +11,7 @@ import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Option;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
+import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 
 public class Generator extends ImplNode {
 
@@ -19,6 +20,7 @@ public class Generator extends ImplNode {
 		id = elt.getAttribute("id");
 		version = elt.getAttribute("version");
 		launchClass = elt.getAttribute("class");
+		description = elt.getAttribute("description");
 		options = new HashSet<TreeNode>();
 	}
 
@@ -27,15 +29,9 @@ public class Generator extends ImplNode {
 			ApplicationDialog.modificationMade();
 			Configuration config = ApplicationDialog.getCurrentConfiguration();
 			if (config != null) {
-				// Delete all linked elements
-				Set<ComponantConfiguration> elts = new HashSet<ComponantConfiguration>();
-				for (GeneratorConfiguration elt : config.getGeneratorConfigurations()) {
-					if (elt.getId_metamodel().equals(parent.getParent().getParent().getId())) {
-						elts.add(elt);
-					}
-				}
-				config.getGeneratorConfigurations().removeAll(elts);
-
+				// Remove element
+				ApplicationUtil.deleteImplNodeFromConf(config,this);
+				
 				// Add the new element
 				if (isChecked() && isEnabled()) {
 					GeneratorConfiguration elt = ApplicationFactory.eINSTANCE.createGeneratorConfiguration();

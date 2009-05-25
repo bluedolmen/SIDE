@@ -3,8 +3,9 @@ package com.bluexml.side.application.ui.action.tree;
 
 public class TreeElement {
 
-	private boolean checked;
-	private boolean enabled;
+	protected boolean checked;
+	protected boolean enabled;
+	protected String description;
 	
 	public TreeElement() {
 		checked = false;
@@ -17,6 +18,13 @@ public class TreeElement {
 
 	public void setChecked(boolean checked) {
 		this.checked = checked;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public boolean isEnabled() {

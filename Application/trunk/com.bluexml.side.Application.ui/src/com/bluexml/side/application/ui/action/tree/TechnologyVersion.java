@@ -15,6 +15,7 @@ public class TechnologyVersion extends TreeNode {
 		parent = t;
 		id = elt.getAttribute("id");
 		version = elt.getAttribute("version");
+		description = elt.getAttribute("description");
 		generator = new HashSet<Generator>();
 		deployer = new HashSet<Deployer>();
 	}

@@ -8,62 +8,61 @@ import org.eclipse.core.runtime.IConfigurationElement;
 
 public class Metamodel extends TreeNode {
 
-	private String _label;
-	private String _id;
-	private String _url;
-	private List<TreeNode> _technology;
-	private String _description;
+	private String label;
+	private String url;
+	private List<TreeNode> technology;
+	private String description;
 
 	public Metamodel(IConfigurationElement elt) {
 		parent = null;
-		_id = elt.getAttribute("id");
-		_label = elt.getAttribute("name");
-		_url = elt.getAttribute("url");
-		_description = elt.getAttribute("description");
-		_technology = new ArrayList<TreeNode>();
+		id = elt.getAttribute("id");
+		label = elt.getAttribute("name");
+		url = elt.getAttribute("url");
+		description = elt.getAttribute("description");
+		technology = new ArrayList<TreeNode>();
 		
 		setEnabled(true);
 	}
 
 	public String getURL() {
-		return _url;
+		return url;
 	}
 
 	public String getDescription() {
-		return _description;
+		return description;
 	}
 
 	public Metamodel(String id) {
-		_id = id;
-		_label = "";
-		_technology = new ArrayList<TreeNode>();
+		this.id = id;
+		label = "";
+		technology = new ArrayList<TreeNode>();
 	}
 
 	public Metamodel(String id, String label) {
-		_id = id;
-		_label = label;
-		_technology = new ArrayList<TreeNode>();
+		this.id = id;
+		this.label = label;
+		technology = new ArrayList<TreeNode>();
 	}
 
 	public Collection<TreeNode> getChildren() {
-		return _technology;
+		return technology;
 	}
 
 	public String getLabel() {
-		return _label;
+		return label;
 	}
 
 	public String getId() {
-		return _id;
+		return id;
 	}
 
 	public void addTechnology(Technology t) {
-		this._technology.add(t);
+		this.technology.add(t);
 	}
 
 	@Override
 	public void addChildren(TreeNode child) {
-		_technology.add(child);
+		technology.add(child);
 	}
 
 	
