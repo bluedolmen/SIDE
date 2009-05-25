@@ -15,8 +15,8 @@
                   id="birt_2.3.x"
                   version="Birt_2.3.x">
                <generatorVersion
-                     class="com.bluexml.side.application.generator.report.ReportGenerator"
-                     id="com.bluexml.side.Application.generator.report"
+                     class="com.bluexml.side.clazz.generator.report.ReportGenerator"
+                     id="com.bluexml.side.Class.generator.report"
                      version="S-IDE Alfresco Report 1.0.0">
                   <option
                         documentation="Generate Birt&apos;s report"

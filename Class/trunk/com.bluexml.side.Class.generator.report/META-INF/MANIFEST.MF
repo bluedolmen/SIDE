@@ -20,3 +20,4 @@ Bundle-ActivationPolicy: lazy
 Import-Package: com.bluexml.side.Class.modeler.diagram.utils.metainfo.value,
  com.bluexml.side.clazz,
  com.bluexml.side.common
+Export-Package: com.bluexml.side.clazz.generator.report
