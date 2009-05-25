@@ -36,6 +36,7 @@ webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/<%getQualifiedNam
 	<icon32>${child.icon32}</icon32>
 	<nodeRef>${child.nodeRef}</nodeRef>
 	<parent>${child.parent.nodeRef}</parent>
+	<size>${child.size}</size>
 	<%for (getAllAttributes()){%>
 	<#if (child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?exists)>
 		<#if child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?is_sequence>
