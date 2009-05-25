@@ -54,13 +54,13 @@ public class ReportGenerator extends AbstractAcceleoGenerator {
 		return birtTemplates;
 	}
 
-	@Override
+	
 	public Collection<IFile> complete() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public boolean check() {
 		return true;
 	}
