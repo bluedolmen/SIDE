@@ -23,7 +23,7 @@ public class SideSettingsPreferencesPage
 	extends PreferencePage
 	implements IWorkbenchPreferencePage {
 
-	private static final String linkText ="To register go to the <a href=\"http://www.bluexml.com/v2/key-management/\" target=\"blank\">Key management page</A> on our website.";
+	private static final String linkText ="To register go to the <a href=\"http://www.bluexml.com/v2/membership/\" target=\"blank\">Membership page</A> on our website.";
 	private static final String iDText ="Unique ID for Registering : (Copy/paste enable)";
 	/*
 	 * @see PreferencePage#createContents(Composite)
