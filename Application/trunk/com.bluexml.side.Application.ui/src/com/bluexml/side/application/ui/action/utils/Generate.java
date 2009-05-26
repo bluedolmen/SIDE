@@ -302,20 +302,20 @@ public class Generate extends Thread {
 			try {
 				modelResource = EResourceUtils.createResource(model.getFile());
 			} catch (IOException e) {
-				throw new IOException("Error for file/model " + model.getName());
+				throw new IOException(System.getProperty("line.separator") + "Error for file/model " + model.getName());
 			}
 			ResourceSet rs = modelResource.getResourceSet();
 
 			IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(model.getFile()));
 			if (!file.exists()) {
-				throw new IOException("File " + file.getName() + " doesn't exist.");
+				throw new IOException(System.getProperty("line.separator") + "File " + file.getName() + " doesn't exist.");
 			}
 			String fullPath = file.getRawLocation().toOSString();
 			Resource loadedModel;
 			try {
 				loadedModel = EResourceUtils.openModel(fullPath, null, rs);
 			} catch (IOException e) {
-				IOException ioe = new IOException("Error with file " + file.getName() + " (check that it's a correct model file)");
+				IOException ioe = new IOException(System.getProperty("line.separator") + "Error with file " + file.getName() + " (check that it's a correct model file)");
 				ioe.setStackTrace(e.getStackTrace());
 				throw ioe;
 			}
@@ -330,24 +330,24 @@ public class Generate extends Thread {
 				if (file.exists()) {
 					result.get(metaModel.getNsURI()).add(file);
 				} else {
-					throw new IOException("No model found at " + file.getFullPath());
+					throw new IOException(System.getProperty("line.separator") + "No model found at " + file.getFullPath());
 				}
 			}
 			if (!skipValidation) {
 				EObject te = getRootElement(loadedModel);
 				if (te != null) {
-					label.setText("Validating model " + loadedModel.getURI());
+					label.setText(System.getProperty("line.separator") + "Validating model " + loadedModel.getURI());
 					if (!validate(te)) {
-						throw new IOException("You have error in your model (" + file.getFullPath() + "), please run validate on first element of your model and correct error(s).");
+						throw new IOException(System.getProperty("line.separator") + "You have error in your model (" + file.getFullPath() + "), please run validate on first element of your model and correct error(s).");
 					} else {
 						addText(System.getProperty("line.separator") + "Model validated : " + file.getFullPath() + " with success.");
 					}
 					addOneStep(progressBar);
 				} else {
-					throw new IOException("No root element found in " + file.getFullPath() + ". Model empty?");
+					throw new IOException(System.getProperty("line.separator") + "No root element found in " + file.getFullPath() + ". Model empty?");
 				}
 			} else {
-				label.setText("Validatiion skipped.");
+				label.setText(System.getProperty("line.separator") + "Validatiion skipped.");
 				addOneStep(progressBar);
 			}
 		}
