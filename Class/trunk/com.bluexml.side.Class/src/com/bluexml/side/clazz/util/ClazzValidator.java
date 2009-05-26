@@ -128,13 +128,6 @@ public class ClazzValidator extends EObjectValidator {
 	 */
 	private static Constraint association_MinAndMaxSourceInvOCL;
 	/**
-	 * The parsed OCL expression for the definition of the '<em>AssociatioClassCantBeAgregationOrComposition</em>' invariant constraint.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private static Constraint association_AssociatioClassCantBeAgregationOrCompositionInvOCL;
-	/**
 	 * The parsed OCL expression for the definition of the '<em>NameNull</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -443,7 +436,6 @@ public class ClazzValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateAssociation_recursiveAssociationMustHaveRole(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAssociation_MinAndMaxTarget(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAssociation_MinAndMaxSource(association, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAssociation_AssociatioClassCantBeAgregationOrComposition(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAssociation_NameNull(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAssociation_SourceNull(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAssociation_TargetNull(association, diagnostics, context);
@@ -563,45 +555,6 @@ public class ClazzValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "MinAndMaxSource", getObjectLabel(association, context) }),
-						 new Object[] { association }));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the AssociatioClassCantBeAgregationOrComposition constraint of '<em>Association</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateAssociation_AssociatioClassCantBeAgregationOrComposition(Association association, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (association_AssociatioClassCantBeAgregationOrCompositionInvOCL == null) {
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(ClazzPackage.Literals.ASSOCIATION);
-			
-			EAnnotation ocl = ClazzPackage.Literals.ASSOCIATION.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String expr = ocl.getDetails().get("AssociatioClassCantBeAgregationOrComposition");
-			
-			try {
-				association_AssociatioClassCantBeAgregationOrCompositionInvOCL = helper.createInvariant(expr);
-			}
-			catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(association_AssociatioClassCantBeAgregationOrCompositionInvOCL);
-		
-		if (!query.check(association)) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(new BasicDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "AssociatioClassCantBeAgregationOrComposition", getObjectLabel(association, context) }),
 						 new Object[] { association }));
 			}
 			return false;

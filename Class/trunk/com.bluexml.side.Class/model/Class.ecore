@@ -171,23 +171,22 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="#//TitledNamedClassModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="recursiveAssociationMustHaveRole" value="( self.source = self.destination and self.isNavigableSRC and self.isNavigableTARGET ) implies ( ( not self.roleSrc.oclIsUndefined() and self.roleSrc &lt;> '' ) or ( not self.roleTarget.oclIsUndefined() and self.roleTarget &lt;> '' ))"/>
-      <details key="AssociatioClassCantBeAgregationOrComposition" value="(self.associationType = AssociationType::Aggregation or self.associationType = AssociationType::Composition) implies self.associationsClass->isEmpty()"/>
-      <details key="MinAndMaxTarget" value="( self.maxTARGET &lt;> '-1' ) implies ( self.minTARGET &lt;= self.maxTARGET )"/>
-      <details key="MinAndMaxSource" value="( self.maxSRC &lt;> '-1' ) implies ( self.minSRC &lt;= self.maxSRC )"/>
+      <details key="recursiveAssociationMustHaveRole" value="( self.firstEnd.linkedClass = self.secondEnd.linkedClass and self.firstEnd.isNavigable and self.secondEnd.isNavigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name &lt;> '' ) or ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name &lt;> '' ))"/>
+      <details key="MinAndMaxTarget" value="( self.secondEnd.cardMax &lt;> '-1' ) implies ( self.secondEnd.cardMin &lt;= self.secondEnd.cardMax )"/>
+      <details key="MinAndMaxSource" value="( self.firstEnd.cardMax &lt;> '-1' ) implies ( self.firstEnd.cardMin &lt;= self.firstEnd.cardMax )"/>
       <details key="NameNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
-      <details key="SourceNull" value="self.source->notEmpty()"/>
-      <details key="TargetNull" value="self.destination->notEmpty()"/>
-      <details key="AtLeastOneNavigableEdge" value="(isNavigableSRC or isNavigableTARGET)"/>
-      <details key="ClassCantBeReferencedbyTwoSameNameAssociation" value="Association.allInstances()->select(a | a.name = self.name and  a.source = self.source  and a.destination = self.destination and a &lt;> self and self.isNavigableSRC=a.isNavigableSRC and self.isNavigableSRC=true)->size() = 0&#xA;and  &#xA;Association.allInstances()->select(a | a.name = self.name and  a.source = self.source  and a.destination = self.destination and a &lt;> self and self.isNavigableTARGET=a.isNavigableTARGET and self.isNavigableTARGET=true)->size() = 0&#xA;and &#xA;Association.allInstances()->select(a | a.name = self.name and  a.source = self.destination  and a.destination = self.source and a &lt;> self and self.isNavigableSRC=a.isNavigableTARGET and self.isNavigableSRC=true)->size() = 0&#xA;and &#xA;Association.allInstances()->select(a | a.name = self.name and  a.source = self.destination  and a.destination = self.source and a &lt;> self and self.isNavigableTARGET=a.isNavigableSRC and self.isNavigableTARGET=true)->size() = 0&#xA;"/>
-      <details key="IfAggregationOrCompositionThenUnidirectionalAssociation" value="(self.associationType &lt;> AssociationType::Direct) implies (self.isNavigableSRC xor self.isNavigableTARGET )"/>
+      <details key="SourceNull" value="self.firstEnd.linkedClass->notEmpty()"/>
+      <details key="TargetNull" value="self.secondEnd.linkedClass->notEmpty()"/>
+      <details key="AtLeastOneNavigableEdge" value="(firstEnd.isNavigable or secondEnd.isNavigable)"/>
+      <details key="ClassCantBeReferencedbyTwoSameNameAssociation" value="Association.allInstances()->select(a | a.name = self.name and  a.firstEnd.linkedClass = self.firstEnd.linkedClass  and a.secondEnd.linkedClass = self.secondEnd.linkedClass and a &lt;> self and self.firstEnd.isNavigable=a.firstEnd.isNavigable and self.firstEnd.isNavigable=true)->size() = 0&#xA;and  &#xA;Association.allInstances()->select(a | a.name = self.name and  a.firstEnd.linkedClass = self.firstEnd.linkedClass  and a.secondEnd.linkedClass = self.secondEnd.linkedClass and a &lt;> self and self.secondEnd.isNavigable=a.secondEnd.isNavigable and self.secondEnd.isNavigable=true)->size() = 0&#xA;and &#xA;Association.allInstances()->select(a | a.name = self.name and  a.firstEnd.linkedClass = self.secondEnd.linkedClass  and a.secondEnd.linkedClass = self.firstEnd.linkedClass and a &lt;> self and self.firstEnd.isNavigable=a.secondEnd.isNavigable and self.firstEnd.isNavigable=true)->size() = 0&#xA;and &#xA;Association.allInstances()->select(a | a.name = self.name and  a.firstEnd.linkedClass = self.secondEnd.linkedClass  and a.secondEnd.linkedClass = self.firstEnd.linkedClass and a &lt;> self and self.secondEnd.isNavigable=a.firstEnd.isNavigable and self.secondEnd.isNavigable=true)->size() = 0&#xA;"/>
+      <details key="IfAggregationOrCompositionThenUnidirectionalAssociation" value="(self.associationType &lt;> AssociationType::Direct) implies (self.firstEnd.isNavigable xor self.secondEnd.isNavigable )"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource AssociatioClassCantBeAgregationOrComposition NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation"/>
+      <details key="constraints" value="recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation"/>
     </eAnnotations>
     <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="if( self.destination.oclIsKindOf(Classe))&#xD;&#xA;then&#xD;&#xA;self.destination.oclAsType(Classe).equalsForMerge(other.destination.oclAsType(Classe)) and self.source.oclAsType(Classe).equalsForMerge(other.source.oclAsType(Classe))&#xD;&#xA;and self.name = other.name&#xD;&#xA;else&#xD;&#xA;true&#xD;&#xA;endif&#xD;&#xA;"/>
+        <details key="body" value="if( self.secondEnd.linkedClass.oclIsKindOf(Classe))&#xD;&#xA;then&#xD;&#xA;self.secondEnd.linkedClass.oclAsType(Classe).equalsForMerge(other.secondEnd.linkedClass.oclAsType(Classe)) and self.firstEnd.linkedClass.oclAsType(Classe).equalsForMerge(other.firstEnd.linkedClass.oclAsType(Classe))&#xD;&#xA;and self.name = other.name&#xD;&#xA;else&#xD;&#xA;true&#xD;&#xA;endif&#xD;&#xA;"/>
       </eAnnotations>
       <eParameters name="other" eType="#//Association"/>
     </eOperations>

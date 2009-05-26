@@ -1432,22 +1432,21 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		  (associationEClass, 
 		   source, 
 		   new String[] {
-			 "recursiveAssociationMustHaveRole", "( self.source = self.destination and self.isNavigableSRC and self.isNavigableTARGET ) implies ( ( not self.roleSrc.oclIsUndefined() and self.roleSrc <> \'\' ) or ( not self.roleTarget.oclIsUndefined() and self.roleTarget <> \'\' ))",
-			 "AssociatioClassCantBeAgregationOrComposition", "(self.associationType = AssociationType::Aggregation or self.associationType = AssociationType::Composition) implies self.associationsClass->isEmpty()",
-			 "MinAndMaxTarget", "( self.maxTARGET <> \'-1\' ) implies ( self.minTARGET <= self.maxTARGET )",
-			 "MinAndMaxSource", "( self.maxSRC <> \'-1\' ) implies ( self.minSRC <= self.maxSRC )",
+			 "recursiveAssociationMustHaveRole", "( self.firstEnd.linkedClass = self.secondEnd.linkedClass and self.firstEnd.isNavigable and self.secondEnd.isNavigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name <> \'\' ) or ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name <> \'\' ))",
+			 "MinAndMaxTarget", "( self.secondEnd.cardMax <> \'-1\' ) implies ( self.secondEnd.cardMin <= self.secondEnd.cardMax )",
+			 "MinAndMaxSource", "( self.firstEnd.cardMax <> \'-1\' ) implies ( self.firstEnd.cardMin <= self.firstEnd.cardMax )",
 			 "NameNull", "not self.name.oclIsUndefined() and self.name <> \'\'",
-			 "SourceNull", "self.source->notEmpty()",
-			 "TargetNull", "self.destination->notEmpty()",
-			 "AtLeastOneNavigableEdge", "(isNavigableSRC or isNavigableTARGET)",
-			 "ClassCantBeReferencedbyTwoSameNameAssociation", "Association.allInstances()->select(a | a.name = self.name and  a.source = self.source  and a.destination = self.destination and a <> self and self.isNavigableSRC=a.isNavigableSRC and self.isNavigableSRC=true)->size() = 0\nand  \nAssociation.allInstances()->select(a | a.name = self.name and  a.source = self.source  and a.destination = self.destination and a <> self and self.isNavigableTARGET=a.isNavigableTARGET and self.isNavigableTARGET=true)->size() = 0\nand \nAssociation.allInstances()->select(a | a.name = self.name and  a.source = self.destination  and a.destination = self.source and a <> self and self.isNavigableSRC=a.isNavigableTARGET and self.isNavigableSRC=true)->size() = 0\nand \nAssociation.allInstances()->select(a | a.name = self.name and  a.source = self.destination  and a.destination = self.source and a <> self and self.isNavigableTARGET=a.isNavigableSRC and self.isNavigableTARGET=true)->size() = 0\n",
-			 "IfAggregationOrCompositionThenUnidirectionalAssociation", "(self.associationType <> AssociationType::Direct) implies (self.isNavigableSRC xor self.isNavigableTARGET )"
+			 "SourceNull", "self.firstEnd.linkedClass->notEmpty()",
+			 "TargetNull", "self.secondEnd.linkedClass->notEmpty()",
+			 "AtLeastOneNavigableEdge", "(firstEnd.isNavigable or secondEnd.isNavigable)",
+			 "ClassCantBeReferencedbyTwoSameNameAssociation", "Association.allInstances()->select(a | a.name = self.name and  a.firstEnd.linkedClass = self.firstEnd.linkedClass  and a.secondEnd.linkedClass = self.secondEnd.linkedClass and a <> self and self.firstEnd.isNavigable=a.firstEnd.isNavigable and self.firstEnd.isNavigable=true)->size() = 0\nand  \nAssociation.allInstances()->select(a | a.name = self.name and  a.firstEnd.linkedClass = self.firstEnd.linkedClass  and a.secondEnd.linkedClass = self.secondEnd.linkedClass and a <> self and self.secondEnd.isNavigable=a.secondEnd.isNavigable and self.secondEnd.isNavigable=true)->size() = 0\nand \nAssociation.allInstances()->select(a | a.name = self.name and  a.firstEnd.linkedClass = self.secondEnd.linkedClass  and a.secondEnd.linkedClass = self.firstEnd.linkedClass and a <> self and self.firstEnd.isNavigable=a.secondEnd.isNavigable and self.firstEnd.isNavigable=true)->size() = 0\nand \nAssociation.allInstances()->select(a | a.name = self.name and  a.firstEnd.linkedClass = self.secondEnd.linkedClass  and a.secondEnd.linkedClass = self.firstEnd.linkedClass and a <> self and self.secondEnd.isNavigable=a.firstEnd.isNavigable and self.secondEnd.isNavigable=true)->size() = 0\n",
+			 "IfAggregationOrCompositionThenUnidirectionalAssociation", "(self.associationType <> AssociationType::Direct) implies (self.firstEnd.isNavigable xor self.secondEnd.isNavigable )"
 		   });			
 		addAnnotation
 		  (associationEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
-			 "body", "if( self.destination.oclIsKindOf(Classe))\r\nthen\r\nself.destination.oclAsType(Classe).equalsForMerge(other.destination.oclAsType(Classe)) and self.source.oclAsType(Classe).equalsForMerge(other.source.oclAsType(Classe))\r\nand self.name = other.name\r\nelse\r\ntrue\r\nendif\r\n"
+			 "body", "if( self.secondEnd.linkedClass.oclIsKindOf(Classe))\r\nthen\r\nself.secondEnd.linkedClass.oclAsType(Classe).equalsForMerge(other.secondEnd.linkedClass.oclAsType(Classe)) and self.firstEnd.linkedClass.oclAsType(Classe).equalsForMerge(other.firstEnd.linkedClass.oclAsType(Classe))\r\nand self.name = other.name\r\nelse\r\ntrue\r\nendif\r\n"
 		   });		
 		addAnnotation
 		  (operationEClass.getEOperations().get(0), 
@@ -1511,7 +1510,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		  (associationEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource AssociatioClassCantBeAgregationOrComposition NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation"
+			 "constraints", "recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation"
 		   });					
 		addAnnotation
 		  (aspectEClass, 
