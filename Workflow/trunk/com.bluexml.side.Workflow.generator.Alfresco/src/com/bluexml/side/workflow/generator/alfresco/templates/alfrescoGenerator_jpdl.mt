@@ -334,7 +334,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 	<process-state name="<%name%>">
 		<sub-process name="wfbx:<%subprocess.name%>"/>
 		<variable name="bpm_package"/>		
-		<%for (variables){%>
+		<%for (variable){%>
 		<variable name="<%name%>" access="<%access%>" mapped-name="<%mappedName%>" />
 		<%}%>
 		
