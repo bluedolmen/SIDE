@@ -163,6 +163,14 @@ public class WorkflowValidator extends EObjectValidator {
 	 */
 	private static Constraint taskNode_TaskMustBePointerByTransitionInvOCL;
 	/**
+	 * The parsed OCL expression for the definition of the '<em>accessMatchesWithReadWriteRequired</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint variable_accessMatchesWithReadWriteRequiredInvOCL;
+
+	/**
 	 * The parsed OCL expression for the definition of the '<em>NoTransitionWithSameName</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -869,7 +877,54 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateVariable(Variable variable, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(variable, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(variable, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(variable, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(variable, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(variable, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(variable, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(variable, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(variable, diagnostics, context);
+		if (result || diagnostics != null) result &= validateVariable_accessMatchesWithReadWriteRequired(variable, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the accessMatchesWithReadWriteRequired constraint of '<em>Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateVariable_accessMatchesWithReadWriteRequired(Variable variable, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (variable_accessMatchesWithReadWriteRequiredInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(WorkflowPackage.Literals.VARIABLE);
+			
+			EAnnotation ocl = WorkflowPackage.Literals.VARIABLE.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("accessMatchesWithReadWriteRequired");
+			
+			try {
+				variable_accessMatchesWithReadWriteRequiredInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(variable_accessMatchesWithReadWriteRequiredInvOCL);
+		
+		if (!query.check(variable)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "accessMatchesWithReadWriteRequired", getObjectLabel(variable, context) }),
+						 new Object[] { variable }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**

@@ -21,6 +21,7 @@ import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.workflow.Event;
 import com.bluexml.side.workflow.ProcessState;
+import com.bluexml.side.workflow.Variable;
 import com.bluexml.side.workflow.Transition;
 import com.bluexml.side.workflow.WorkflowPackage;
 
@@ -32,6 +33,7 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.workflow.impl.ProcessStateImpl#getSubprocess <em>Subprocess</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.impl.ProcessStateImpl#getVariable <em>Variable</em>}</li>
  * </ul>
  * </p>
  *
@@ -47,6 +49,16 @@ public class ProcessStateImpl extends TransitionTaskImpl implements ProcessState
 	 * @ordered
 	 */
 	protected com.bluexml.side.workflow.Process subprocess;
+
+	/**
+	 * The cached value of the '{@link #getVariable() <em>Variable</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVariable()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Variable> variable;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -110,12 +122,40 @@ public class ProcessStateImpl extends TransitionTaskImpl implements ProcessState
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Variable> getVariable() {
+		if (variable == null) {
+			variable = new EObjectContainmentEList<Variable>(Variable.class, this, WorkflowPackage.PROCESS_STATE__VARIABLE);
+		}
+		return variable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case WorkflowPackage.PROCESS_STATE__VARIABLE:
+				return ((InternalEList<?>)getVariable()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case WorkflowPackage.PROCESS_STATE__SUBPROCESS:
 				if (resolve) return getSubprocess();
 				return basicGetSubprocess();
+			case WorkflowPackage.PROCESS_STATE__VARIABLE:
+				return getVariable();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -132,6 +172,10 @@ public class ProcessStateImpl extends TransitionTaskImpl implements ProcessState
 			case WorkflowPackage.PROCESS_STATE__SUBPROCESS:
 				setSubprocess((com.bluexml.side.workflow.Process)newValue);
 				return;
+			case WorkflowPackage.PROCESS_STATE__VARIABLE:
+				getVariable().clear();
+				getVariable().addAll((Collection<? extends Variable>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -147,6 +191,9 @@ public class ProcessStateImpl extends TransitionTaskImpl implements ProcessState
 			case WorkflowPackage.PROCESS_STATE__SUBPROCESS:
 				setSubprocess((com.bluexml.side.workflow.Process)null);
 				return;
+			case WorkflowPackage.PROCESS_STATE__VARIABLE:
+				getVariable().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -161,6 +208,8 @@ public class ProcessStateImpl extends TransitionTaskImpl implements ProcessState
 		switch (featureID) {
 			case WorkflowPackage.PROCESS_STATE__SUBPROCESS:
 				return subprocess != null;
+			case WorkflowPackage.PROCESS_STATE__VARIABLE:
+				return variable != null && !variable.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

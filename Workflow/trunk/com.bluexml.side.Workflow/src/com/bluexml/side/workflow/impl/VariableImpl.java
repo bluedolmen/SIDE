@@ -25,6 +25,7 @@ import com.bluexml.side.workflow.WorkflowPackage;
  * <ul>
  *   <li>{@link com.bluexml.side.workflow.impl.VariableImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.VariableImpl#getAccess <em>Access</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.impl.VariableImpl#getMappedName <em>Mapped Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -70,6 +71,26 @@ public class VariableImpl extends EObjectImpl implements Variable {
 	 * @ordered
 	 */
 	protected String access = ACCESS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMappedName() <em>Mapped Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMappedName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String MAPPED_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getMappedName() <em>Mapped Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMappedName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String mappedName = MAPPED_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -137,6 +158,27 @@ public class VariableImpl extends EObjectImpl implements Variable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getMappedName() {
+		return mappedName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMappedName(String newMappedName) {
+		String oldMappedName = mappedName;
+		mappedName = newMappedName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.VARIABLE__MAPPED_NAME, oldMappedName, mappedName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -144,6 +186,8 @@ public class VariableImpl extends EObjectImpl implements Variable {
 				return getName();
 			case WorkflowPackage.VARIABLE__ACCESS:
 				return getAccess();
+			case WorkflowPackage.VARIABLE__MAPPED_NAME:
+				return getMappedName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -161,6 +205,9 @@ public class VariableImpl extends EObjectImpl implements Variable {
 				return;
 			case WorkflowPackage.VARIABLE__ACCESS:
 				setAccess((String)newValue);
+				return;
+			case WorkflowPackage.VARIABLE__MAPPED_NAME:
+				setMappedName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -180,6 +227,9 @@ public class VariableImpl extends EObjectImpl implements Variable {
 			case WorkflowPackage.VARIABLE__ACCESS:
 				setAccess(ACCESS_EDEFAULT);
 				return;
+			case WorkflowPackage.VARIABLE__MAPPED_NAME:
+				setMappedName(MAPPED_NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -196,6 +246,8 @@ public class VariableImpl extends EObjectImpl implements Variable {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case WorkflowPackage.VARIABLE__ACCESS:
 				return ACCESS_EDEFAULT == null ? access != null : !ACCESS_EDEFAULT.equals(access);
+			case WorkflowPackage.VARIABLE__MAPPED_NAME:
+				return MAPPED_NAME_EDEFAULT == null ? mappedName != null : !MAPPED_NAME_EDEFAULT.equals(mappedName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -214,6 +266,8 @@ public class VariableImpl extends EObjectImpl implements Variable {
 		result.append(name);
 		result.append(", access: ");
 		result.append(access);
+		result.append(", mappedName: ");
+		result.append(mappedName);
 		result.append(')');
 		return result.toString();
 	}

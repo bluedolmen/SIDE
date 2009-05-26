@@ -73,6 +73,7 @@
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//ProcessState">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Workflow.ecore#//ProcessState/subprocess"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//ProcessState/variable"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Fork"/>
     <genClasses ecoreClass="Workflow.ecore#//Join"/>
@@ -96,6 +97,7 @@
     <genClasses ecoreClass="Workflow.ecore#//Variable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Variable/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Variable/access"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Variable/mappedName"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Transition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Transition/name"/>

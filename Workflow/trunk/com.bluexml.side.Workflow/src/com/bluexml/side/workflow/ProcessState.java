@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.bluexml.side.workflow.ProcessState#getSubprocess <em>Subprocess</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.ProcessState#getVariable <em>Variable</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,5 +51,21 @@ public interface ProcessState extends TransitionTask {
 	 * @generated
 	 */
 	void setSubprocess(com.bluexml.side.workflow.Process value);
+
+	/**
+	 * Returns the value of the '<em><b>Variable</b></em>' containment reference list.
+	 * The list contents are of type {@link com.bluexml.side.workflow.Variable}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Variable</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Variable</em>' containment reference list.
+	 * @see com.bluexml.side.workflow.WorkflowPackage#getProcessState_Variable()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Variable> getVariable();
 
 } // ProcessState

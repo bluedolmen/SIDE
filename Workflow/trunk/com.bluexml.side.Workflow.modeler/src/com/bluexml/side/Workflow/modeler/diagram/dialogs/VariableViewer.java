@@ -36,11 +36,13 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
-public class ScriptVariableViewer
+public class VariableViewer
 {
     private static final int NAME_COLUMN_WIDTH = 150;
 
     private static final int ACCESS_COLUMN_WIDTH = 180;
+
+    private static final int MAPPED_NAME_COLUMN_WIDTH = 150;
 
     private TableViewer tableViewer;
 
@@ -48,20 +50,16 @@ public class ScriptVariableViewer
 
     private VariableDataStructure dataStructure;
 
-    /**
-     * 
-     * @param parent
-     * @param dataStruct
-     * @param ty
-     * @param tyNames
-     */
-    public ScriptVariableViewer(Composite parent,VariableDataStructure dataStruct)
-    {
-        dataStructure = dataStruct;
-        createTableViewer(parent);
-    }
 
-    /**
+    public VariableViewer(Composite parent,
+			VariableDataStructure dataStruct, boolean addMappedName) {
+    	if (addMappedName)
+    		columnNames = new String[] {"Name", "Access", "Mapped-name"};
+    	dataStructure = dataStruct;
+    	createTableViewer(parent);
+	}
+
+	/**
      * 
      *
      */
@@ -107,6 +105,13 @@ public class ScriptVariableViewer
         TableColumn typeColumn = new TableColumn(table, SWT.LEFT);
         typeColumn.setText(columnNames[1]);
         typeColumn.setWidth(ACCESS_COLUMN_WIDTH);
+        
+        //if we can show mapped names
+        if (columnNames.length > 2) {
+        	TableColumn mappedNameColumn = new TableColumn(table, SWT.LEFT);
+        	mappedNameColumn.setText(columnNames[2]);
+        	mappedNameColumn.setWidth(MAPPED_NAME_COLUMN_WIDTH);
+        }
 
         table.setHeaderVisible(true);
         table.setLinesVisible(true);
@@ -130,8 +135,11 @@ public class ScriptVariableViewer
 
         tableViewer.setUseHashlookup(true);
         tableViewer.setColumnProperties(columnNames);
-
+        
         CellEditor[] editors = new CellEditor[2];
+        //if we can show mapped names
+        if (columnNames.length > 2)
+        	editors = new CellEditor[3];
 
         TextCellEditor textEditor = new TextCellEditor(table);
         ((Text) textEditor.getControl()).setTextLimit(60);
@@ -140,6 +148,13 @@ public class ScriptVariableViewer
         TextCellEditor textEditor2 = new TextCellEditor(table);
         ((Text) textEditor2.getControl()).setTextLimit(60);
         editors[1] = textEditor2;
+        
+      //if we can show mapped names
+        if (columnNames.length > 2) {
+        	TextCellEditor textEditor3 = new TextCellEditor(table);
+        	((Text) textEditor3.getControl()).setTextLimit(100);
+        	editors[2] = textEditor3;
+        }
 
         tableViewer.setCellEditors(editors);
         tableViewer.setContentProvider(new ParameterContentProvider());
@@ -174,6 +189,9 @@ public class ScriptVariableViewer
                 case 1:
                     result = dataStructure.getAccess(element);
                     break;
+                case 2:
+                	result = dataStructure.getMappedName(element);
+                	break;
                 default:
                     break;
             }
@@ -193,8 +211,11 @@ public class ScriptVariableViewer
                     dataStructure.setName(item.getData(), (String) value);
                     break;
                 case 1:
-                    dataStructure.setType(item.getData(), (String) value);
-                    break;
+                	dataStructure.setType(item.getData(), (String) value);
+                	break;
+                case 2:
+                	dataStructure.setMappedName(item.getData(), (String) value);
+                	break;
                 default:
                     break;
             }
@@ -261,6 +282,13 @@ public class ScriptVariableViewer
                     if (type != null)
                     {
                         result = type;
+                    }
+                    break;
+                case 2:
+                    String mName = dataStructure.getMappedName(element);
+                    if (mName != null)
+                    {
+                        result = mName;
                     }
                     break;
                 default:

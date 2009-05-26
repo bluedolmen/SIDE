@@ -64,6 +64,7 @@ public class VariableItemProvider
 
 			addNamePropertyDescriptor(object);
 			addAccessPropertyDescriptor(object);
+			addMappedNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -113,6 +114,28 @@ public class VariableItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Mapped Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addMappedNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Variable_mappedName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Variable_mappedName_feature", "_UI_Variable_type"),
+				 WorkflowPackage.Literals.VARIABLE__MAPPED_NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Variable.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -151,6 +174,7 @@ public class VariableItemProvider
 		switch (notification.getFeatureID(Variable.class)) {
 			case WorkflowPackage.VARIABLE__NAME:
 			case WorkflowPackage.VARIABLE__ACCESS:
+			case WorkflowPackage.VARIABLE__MAPPED_NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

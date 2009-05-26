@@ -18,11 +18,13 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link com.bluexml.side.workflow.Variable#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.Variable#getAccess <em>Access</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.Variable#getMappedName <em>Mapped Name</em>}</li>
  * </ul>
  * </p>
  *
  * @see com.bluexml.side.workflow.WorkflowPackage#getVariable()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL accessMatchesWithReadWriteRequired='self.access.regexMatch(\'[read,|write,|required,]*[read|write|required]\') = true'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='accessMatchesWithReadWriteRequired'"
  * @generated
  */
 public interface Variable extends EObject {
@@ -77,5 +79,31 @@ public interface Variable extends EObject {
 	 * @generated
 	 */
 	void setAccess(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Mapped Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Mapped Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Mapped Name</em>' attribute.
+	 * @see #setMappedName(String)
+	 * @see com.bluexml.side.workflow.WorkflowPackage#getVariable_MappedName()
+	 * @model unique="false" ordered="false"
+	 * @generated
+	 */
+	String getMappedName();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.workflow.Variable#getMappedName <em>Mapped Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Mapped Name</em>' attribute.
+	 * @see #getMappedName()
+	 * @generated
+	 */
+	void setMappedName(String value);
 
 } // Variable

@@ -593,6 +593,15 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getProcessState_Variable() {
+		return (EReference)processStateEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFork() {
 		return forkEClass;
 	}
@@ -748,6 +757,15 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 */
 	public EAttribute getVariable_Access() {
 		return (EAttribute)variableEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getVariable_MappedName() {
+		return (EAttribute)variableEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -990,6 +1008,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 
 		processStateEClass = createEClass(PROCESS_STATE);
 		createEReference(processStateEClass, PROCESS_STATE__SUBPROCESS);
+		createEReference(processStateEClass, PROCESS_STATE__VARIABLE);
 
 		forkEClass = createEClass(FORK);
 
@@ -1016,6 +1035,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		variableEClass = createEClass(VARIABLE);
 		createEAttribute(variableEClass, VARIABLE__NAME);
 		createEAttribute(variableEClass, VARIABLE__ACCESS);
+		createEAttribute(variableEClass, VARIABLE__MAPPED_NAME);
 
 		transitionEClass = createEClass(TRANSITION);
 		createEAttribute(transitionEClass, TRANSITION__NAME);
@@ -1138,6 +1158,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 
 		initEClass(processStateEClass, ProcessState.class, "ProcessState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProcessState_Subprocess(), this.getProcess(), null, "subprocess", null, 1, 1, ProcessState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getProcessState_Variable(), this.getVariable(), null, "variable", null, 0, -1, ProcessState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(forkEClass, Fork.class, "Fork", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1164,6 +1185,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		initEClass(variableEClass, Variable.class, "Variable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getVariable_Name(), ecorePackage.getEString(), "name", null, 1, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getVariable_Access(), ecorePackage.getEString(), "access", null, 1, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getVariable_MappedName(), ecorePackage.getEString(), "mappedName", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTransition_Name(), ecorePackage.getEString(), "name", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -1257,6 +1279,12 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 			 "TaskMustBePointerByTransition", "Transition.allInstances()-> select(t| t.to = self)->size()=1 or self.transition -> notEmpty()\n"
 		   });			
 		addAnnotation
+		  (variableEClass, 
+		   source, 
+		   new String[] {
+			 "accessMatchesWithReadWriteRequired", "self.access.regexMatch(\'[read,|write,|required,]*[read|write|required]\') = true"
+		   });			
+		addAnnotation
 		  (transitionEClass, 
 		   source, 
 		   new String[] {
@@ -1304,6 +1332,12 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		   source, 
 		   new String[] {
 			 "constraints", "NoTaskWithSameName TaskMustBePointerByTransition"
+		   });			
+		addAnnotation
+		  (variableEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "accessMatchesWithReadWriteRequired"
 		   });			
 		addAnnotation
 		  (transitionEClass, 

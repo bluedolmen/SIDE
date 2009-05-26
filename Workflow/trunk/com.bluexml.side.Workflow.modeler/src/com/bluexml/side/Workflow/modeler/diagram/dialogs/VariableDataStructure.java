@@ -20,7 +20,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import com.bluexml.side.workflow.Script;
+import org.eclipse.emf.common.util.EList;
+
 import com.bluexml.side.workflow.Variable;
 
 public class VariableDataStructure
@@ -37,6 +38,9 @@ public class VariableDataStructure
 
         /** Parameter type */
         private String access;
+        
+        /** Parameter mapped-name */
+        private String mappedName;
 
         /**
          * The constructor
@@ -46,9 +50,16 @@ public class VariableDataStructure
          */
         public ParameterObject(String n, String a)
         {
-            name = n;
-            access = a;
+        	name = n;
+        	access = a;
+        	mappedName = "";
         }
+        
+        public ParameterObject(String n, String a, String mn) {
+        	name = n;
+        	access = a;
+        	mappedName = mn;
+		}
 
         /**
          * Get property name
@@ -90,6 +101,14 @@ public class VariableDataStructure
             access = newAccess;
         }
 
+		public String getMappedName() {
+			return mappedName;
+		}
+
+		public void setMappedName(String mappedName) {
+			this.mappedName = mappedName;
+		}
+
     } // End internal class
 
     /** A collection for ParameterObject objects */
@@ -100,12 +119,12 @@ public class VariableDataStructure
      * 
      * @param operation the Operation
      */
-    public VariableDataStructure(Script script)
+    public VariableDataStructure(EList<Variable> list)
     {
         data = new ArrayList<Object>();
-        if (script != null)
+        if (list != null)
         {
-            addAll(script.getVariable());
+            addAll(list);
         }
     }
 
@@ -116,7 +135,7 @@ public class VariableDataStructure
      */
     public void add(Variable variable)
     {
-        data.add(new ParameterObject(variable.getName(), variable.getAccess()));
+        data.add(new ParameterObject(variable.getName(), variable.getAccess(), variable.getMappedName()));
     }
 
     /**
@@ -196,7 +215,28 @@ public class VariableDataStructure
         }
         return type;
     }
+    
+    /**
+     * Get the mapped name of a given object
+     */
+    public String getDisplayMappedName(Object object)
+    {
+        String mName = getMappedName(object);
+        if (mName == null)
+        {
+            return null;
+        }
+        return mName;
+    }
 
+    /**
+     * Get the mapped name of a given object
+     */
+    public String getMappedName(Object object)
+    {
+        return ((ParameterObject) object).getMappedName();
+    }
+    
     /**
      * Get the type of a given object
      * 
@@ -228,5 +268,10 @@ public class VariableDataStructure
     public void setType(Object object, String access)
     {
         ((ParameterObject) object).setAccess(access);
+    }
+    
+    public void setMappedName(Object object, String mName)
+    {
+        ((ParameterObject) object).setMappedName(mName);
     }
 }

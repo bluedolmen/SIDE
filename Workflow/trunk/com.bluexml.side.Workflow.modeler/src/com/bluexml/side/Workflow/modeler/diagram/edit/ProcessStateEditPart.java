@@ -17,7 +17,10 @@ package com.bluexml.side.Workflow.modeler.diagram.edit;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.gef.Request;
+import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
@@ -28,12 +31,15 @@ import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.EMFGraphNodeEditPart;
 import org.topcased.modeler.edit.policies.ResizableEditPolicy;
 import org.topcased.modeler.edit.policies.RestoreEditPolicy;
+import org.topcased.modeler.internal.ModelerPlugin;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
 import com.bluexml.side.Workflow.modeler.diagram.WfConfiguration;
 import com.bluexml.side.Workflow.modeler.diagram.WfEditPolicyConstants;
 import com.bluexml.side.Workflow.modeler.diagram.commands.ProcessStateRestoreConnectionCommand;
+import com.bluexml.side.Workflow.modeler.diagram.commands.update.ProcessStateUpdateCommand;
+import com.bluexml.side.Workflow.modeler.diagram.dialogs.ProcessStateEditDialog;
 import com.bluexml.side.Workflow.modeler.diagram.figures.ProcessStateFigure;
 import com.bluexml.side.Workflow.modeler.diagram.policies.TransitionEdgeCreationEditPolicy;
 import com.bluexml.side.Workflow.modeler.diagram.preferences.WfDiagramPreferenceConstants;
@@ -152,6 +158,25 @@ public class ProcessStateEditPart extends EMFGraphNodeEditPart {
 		ProcessState state = (ProcessState) Utils.getElement(getGraphNode());
 		if (state.getSubprocess() != null)
 			getLabel().setText(state.getSubprocess().getName());
+	}
+	
+	@Override
+	public void performRequest(Request request) {
+		if (request.getType() == RequestConstants.REQ_OPEN) {
+			ProcessState pState = (ProcessState) Utils.getElement(getGraphNode());
+
+			ProcessStateEditDialog dlg = new ProcessStateEditDialog(pState, ModelerPlugin
+					.getActiveWorkbenchShell());
+			if (dlg.open() == Window.OK) {
+				ProcessStateUpdateCommand command = new ProcessStateUpdateCommand(pState,
+						dlg.getData());
+				getViewer().getEditDomain().getCommandStack().execute(command);
+				refresh();
+			}
+		} else {
+			super.performRequest(request);
+
+		}
 	}
 
 }

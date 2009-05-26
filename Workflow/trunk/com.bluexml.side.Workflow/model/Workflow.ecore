@@ -94,6 +94,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="ProcessState" eSuperTypes="#//TransitionTask">
     <eStructuralFeatures xsi:type="ecore:EReference" name="subprocess" ordered="false"
         lowerBound="1" eType="#//Process"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" upperBound="-1"
+        eType="#//Variable" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Fork" eSuperTypes="#//TransitionTask"/>
   <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//TransitionTask"/>
@@ -123,10 +125,18 @@
         unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Variable">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="accessMatchesWithReadWriteRequired" value="self.access.regexMatch('[read,|write,|required,]*[read|write|required]') = true"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="accessMatchesWithReadWriteRequired"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="access" ordered="false"
         unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mappedName" ordered="false"
+        unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">

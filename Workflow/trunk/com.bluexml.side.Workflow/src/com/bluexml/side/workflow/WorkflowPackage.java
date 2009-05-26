@@ -1019,13 +1019,22 @@ public interface WorkflowPackage extends EPackage {
 	int PROCESS_STATE__SUBPROCESS = TRANSITION_TASK_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Variable</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_STATE__VARIABLE = TRANSITION_TASK_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Process State</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_STATE_FEATURE_COUNT = TRANSITION_TASK_FEATURE_COUNT + 1;
+	int PROCESS_STATE_FEATURE_COUNT = TRANSITION_TASK_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.ForkImpl <em>Fork</em>}' class.
@@ -1504,13 +1513,22 @@ public interface WorkflowPackage extends EPackage {
 	int VARIABLE__ACCESS = 1;
 
 	/**
+	 * The feature id for the '<em><b>Mapped Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE__MAPPED_NAME = 2;
+
+	/**
 	 * The number of structural features of the '<em>Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_FEATURE_COUNT = 2;
+	int VARIABLE_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.TransitionImpl <em>Transition</em>}' class.
@@ -2070,6 +2088,17 @@ public interface WorkflowPackage extends EPackage {
 	EReference getProcessState_Subprocess();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.workflow.ProcessState#getVariable <em>Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Variable</em>'.
+	 * @see com.bluexml.side.workflow.ProcessState#getVariable()
+	 * @see #getProcessState()
+	 * @generated
+	 */
+	EReference getProcessState_Variable();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.Fork <em>Fork</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2258,6 +2287,17 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getVariable_Access();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.Variable#getMappedName <em>Mapped Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Mapped Name</em>'.
+	 * @see com.bluexml.side.workflow.Variable#getMappedName()
+	 * @see #getVariable()
+	 * @generated
+	 */
+	EAttribute getVariable_MappedName();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.Transition <em>Transition</em>}'.
@@ -2767,6 +2807,14 @@ public interface WorkflowPackage extends EPackage {
 		EReference PROCESS_STATE__SUBPROCESS = eINSTANCE.getProcessState_Subprocess();
 
 		/**
+		 * The meta object literal for the '<em><b>Variable</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROCESS_STATE__VARIABLE = eINSTANCE.getProcessState_Variable();
+
+		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.ForkImpl <em>Fork</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2925,6 +2973,14 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute VARIABLE__ACCESS = eINSTANCE.getVariable_Access();
+
+		/**
+		 * The meta object literal for the '<em><b>Mapped Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VARIABLE__MAPPED_NAME = eINSTANCE.getVariable_MappedName();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.TransitionImpl <em>Transition</em>}' class.
