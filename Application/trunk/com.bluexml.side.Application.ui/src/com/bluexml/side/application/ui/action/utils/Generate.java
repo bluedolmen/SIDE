@@ -248,7 +248,11 @@ public class Generate extends Thread {
 			String id_deployer = depConf.getId();
 			String id_techno = depConf.getId_techno_version();
 			List<Option> options = depConf.getOptions();
-
+			// We get the option for this generator
+			List<String> deployerOptions = new ArrayList<String>();
+			for (Option option : options) {
+				deployerOptions.add(option.getKey());
+			}
 			Bundle plugin = Platform.getBundle(id_deployer);
 
 			Class<?> gen;
@@ -268,12 +272,11 @@ public class Generate extends Thread {
 			}
 
 			if (genObj instanceof Deployer) {
-				Deployer deployer = (Deployer) genObj;
-				deployer.setConfigurationParameters(configurationParameters);
-				deployer.setGenerationParameters(generationParameters);
-
+				Deployer deployer = (Deployer) genObj;				
+				deployer.initialize(configurationParameters, generationParameters, deployerOptions);
+				
 				try {
-					deployer.deploy(id_techno, options);
+					deployer.deploy(id_techno);
 				} catch (Exception e) {
 					e.printStackTrace();
 					error = true;
