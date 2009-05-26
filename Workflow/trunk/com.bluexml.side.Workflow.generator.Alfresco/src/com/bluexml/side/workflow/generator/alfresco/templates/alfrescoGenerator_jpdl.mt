@@ -333,7 +333,11 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 <%for (processstate){%>
 	<process-state name="<%name%>">
 		<sub-process name="wfbx:<%subprocess.name%>"/>
-		<variable name="bpm_package"/>
+		<variable name="bpm_package"/>		
+		<%for (variables){%>
+		<variable name="<%name%>" access="<%access%>" mapped-name="<%mappedName%>" />
+		<%}%>
+		
 		<%for (transition.sort("condition")){%>
 	  	
 		<transition name="<%to.name%>" to="<%to.name%>">
