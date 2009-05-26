@@ -97,7 +97,7 @@ public class GeneratePopUp extends Dialog {
 		generationsOptionsLabel.setFont(SWTResourceManager.getFont("", 12, SWT.BOLD));
 		generationsOptionsLabel.setText("Generation");
 		
-		final StyledText styletext = new StyledText(container, SWT.BORDER);
+		final StyledText styletext = new StyledText(container, SWT.BORDER |SWT.H_SCROLL |SWT.V_SCROLL);
 		styletext.setBounds(10, 135, 464, 128);
 		
 		try {
