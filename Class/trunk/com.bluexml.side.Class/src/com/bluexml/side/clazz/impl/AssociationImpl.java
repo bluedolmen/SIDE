@@ -41,7 +41,6 @@ import com.bluexml.side.clazz.SecondEnd;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationImpl#getAssociationType <em>Association Type</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.impl.AssociationImpl#getAssociationsClass <em>Associations Class</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationImpl#getFirstEnd <em>First End</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationImpl#getSecondEnd <em>Second End</em>}</li>
  * </ul>
@@ -69,16 +68,6 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 	 * @ordered
 	 */
 	protected AssociationType associationType = ASSOCIATION_TYPE_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getAssociationsClass() <em>Associations Class</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAssociationsClass()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Clazz> associationsClass;
 
 	/**
 	 * The cached value of the '{@link #getFirstEnd() <em>First End</em>}' containment reference.
@@ -138,18 +127,6 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 		associationType = newAssociationType == null ? ASSOCIATION_TYPE_EDEFAULT : newAssociationType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.ASSOCIATION__ASSOCIATION_TYPE, oldAssociationType, associationType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Clazz> getAssociationsClass() {
-		if (associationsClass == null) {
-			associationsClass = new EObjectResolvingEList<Clazz>(Clazz.class, this, ClazzPackage.ASSOCIATION__ASSOCIATIONS_CLASS);
-		}
-		return associationsClass;
 	}
 
 	/**
@@ -303,8 +280,6 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 		switch (featureID) {
 			case ClazzPackage.ASSOCIATION__ASSOCIATION_TYPE:
 				return getAssociationType();
-			case ClazzPackage.ASSOCIATION__ASSOCIATIONS_CLASS:
-				return getAssociationsClass();
 			case ClazzPackage.ASSOCIATION__FIRST_END:
 				return getFirstEnd();
 			case ClazzPackage.ASSOCIATION__SECOND_END:
@@ -324,10 +299,6 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 		switch (featureID) {
 			case ClazzPackage.ASSOCIATION__ASSOCIATION_TYPE:
 				setAssociationType((AssociationType)newValue);
-				return;
-			case ClazzPackage.ASSOCIATION__ASSOCIATIONS_CLASS:
-				getAssociationsClass().clear();
-				getAssociationsClass().addAll((Collection<? extends Clazz>)newValue);
 				return;
 			case ClazzPackage.ASSOCIATION__FIRST_END:
 				setFirstEnd((FirstEnd)newValue);
@@ -350,9 +321,6 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 			case ClazzPackage.ASSOCIATION__ASSOCIATION_TYPE:
 				setAssociationType(ASSOCIATION_TYPE_EDEFAULT);
 				return;
-			case ClazzPackage.ASSOCIATION__ASSOCIATIONS_CLASS:
-				getAssociationsClass().clear();
-				return;
 			case ClazzPackage.ASSOCIATION__FIRST_END:
 				setFirstEnd((FirstEnd)null);
 				return;
@@ -373,8 +341,6 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 		switch (featureID) {
 			case ClazzPackage.ASSOCIATION__ASSOCIATION_TYPE:
 				return associationType != ASSOCIATION_TYPE_EDEFAULT;
-			case ClazzPackage.ASSOCIATION__ASSOCIATIONS_CLASS:
-				return associationsClass != null && !associationsClass.isEmpty();
 			case ClazzPackage.ASSOCIATION__FIRST_END:
 				return firstEnd != null;
 			case ClazzPackage.ASSOCIATION__SECOND_END:

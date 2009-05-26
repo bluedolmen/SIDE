@@ -92,7 +92,7 @@ public class ClassSynchronizationUtils {
 					FormAspect fa = FormFactory.eINSTANCE.createFormAspect();;
 					fa.setId(asp.getName());
 					fa.setRef(asp);
-					fa.setLabel(ClassDiagramUtils.getLabel(asp));
+					fa.setLabel(asp.getLabel());
 					Collection<Field> cf = new ArrayList<Field>();
 					for (Attribute att : asp.getAttributes()) {
 						Field field = ClassDiagramUtils.getFieldForAttribute(att);
@@ -106,7 +106,7 @@ public class ClassSynchronizationUtils {
 			
 			// Associations :
 			
-			for (Association ass : Clazz.getAssociations()) {
+			for (Association ass : Clazz.getSourceAssociations()) {
 				getCommandsForAssociation(fc, domain, formChild, Clazz, ass);
 			}
 			

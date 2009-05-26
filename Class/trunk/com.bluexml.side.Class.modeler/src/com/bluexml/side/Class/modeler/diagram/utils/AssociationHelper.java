@@ -19,13 +19,10 @@ package com.bluexml.side.Class.modeler.diagram.utils;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.EList;
-import org.topcased.modeler.di.model.GraphConnector;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.utils.Utils;
 
-import com.bluexml.side.Class.modeler.diagram.dialogs.view.ViewContainerType;
 import com.bluexml.side.Class.modeler.diagram.edit.AssociationEditPart;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Clazz;
@@ -112,37 +109,9 @@ public class AssociationHelper {
 		return role;
 	}
 
-	public static String getViewItemContainerName(Clazz cl, Association association, ViewContainerType viewContainerType, String role_) {
-		if (association == null) {
-			return cl.getName();
-		} else {
-			String name = cl.getName() + "[" + association.getName() + "]";
-			String associationViewRole = AssociationHelper.getAssociationViewRole(cl, association, viewContainerType, role_);
-			if (!associationViewRole.equals("")) {
-				name += "(" + associationViewRole + ")";
-			}
+	
 
-			return name;
-		}
-	}
-
-	public static String getAssociationViewRole(Clazz cl, Association association, ViewContainerType viewContainerType, String role_) {
-		String role = "";
-
-		if ((viewContainerType.equals(ViewContainerType.ASSOCIATION_RECUR) || viewContainerType.equals(ViewContainerType.ASSOCIATION_CLASS_RECUR)) && role_ != null) {
-			if (AssociationHelper.getRoleTargetOrTitle(association).equals(role_)) {
-				role = AssociationHelper.getRoleTargetOrTitle(association);
-			} else if (AssociationHelper.getRoleSrcOrTitle(association).equals(role_)) {
-				role = AssociationHelper.getRoleSrcOrTitle(association);
-			}
-		} else if (cl.equals(association.getSecondEnd().getLinkedClass())) {
-			role = AssociationHelper.getRoleTargetOrTitle(association);
-		} else {
-			role = AssociationHelper.getRoleSrcOrTitle(association);
-		}
-
-		return role;
-	}
+	
 
 	public static String getRoleSrcOrTitle(Association association) {
 		String role = "";

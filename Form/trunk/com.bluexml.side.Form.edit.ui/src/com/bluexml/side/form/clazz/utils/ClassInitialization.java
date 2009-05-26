@@ -74,7 +74,7 @@ public class ClassInitialization {
 					FormAspect fa = FormFactory.eINSTANCE.createFormAspect();
 					fa.setRef(asp);
 					fa.setId(asp.getName());
-					fa.setLabel(ClassDiagramUtils.getLabel(asp));
+					fa.setLabel(asp.getLabel());
 					Collection<Field> cf = new ArrayList<Field>();
 					for (Attribute att : asp.getAttributes()) {
 						Field field = ClassDiagramUtils.getFieldForAttribute(att);

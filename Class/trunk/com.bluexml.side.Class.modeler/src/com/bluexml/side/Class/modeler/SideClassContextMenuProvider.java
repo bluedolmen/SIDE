@@ -22,7 +22,7 @@ import org.topcased.modeler.editor.ModelerContextMenuProvider;
 
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassAspectAction;
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassGeneralizationAction;
-import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassViewAction;
+
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkEnumerationDependsAction;
 import com.bluexml.side.Class.modeler.diagram.edit.GeneralizationEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.dependsEditPart;
@@ -55,17 +55,7 @@ public class SideClassContextMenuProvider extends ModelerContextMenuProvider
     public void buildContextMenu(IMenuManager manager)
     {
         super.buildContextMenu(manager);
-        
-        // HasView
-        if (checkAllElements(getViewer().getSelection(),hasViewEditPart.class)) {
-        	
-        	IAction action = getActionRegistry().getAction(DeleteLinkClassViewAction.ID);
-            if (action.isEnabled())
-            {
-                manager.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
-            }
-        }
-        
+                        
         // HasAspect
         if (checkAllElements(getViewer().getSelection(),hasAspectEditPart.class)) {
         	IAction action = getActionRegistry().getAction(DeleteLinkClassAspectAction.ID);

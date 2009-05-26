@@ -88,7 +88,6 @@ public class ClassPackageItemProvider
 			childrenFeatures.add(ClazzPackage.Literals.CLASS_PACKAGE__ASSOCIATION_SET);
 			childrenFeatures.add(ClazzPackage.Literals.CLASS_PACKAGE__ASPECT_SET);
 			childrenFeatures.add(ClazzPackage.Literals.CLASS_PACKAGE__ENUMERATION_SET);
-			childrenFeatures.add(ClazzPackage.Literals.CLASS_PACKAGE__VIEWS);
 		}
 		return childrenFeatures;
 	}
@@ -147,7 +146,6 @@ public class ClassPackageItemProvider
 			case ClazzPackage.CLASS_PACKAGE__ASSOCIATION_SET:
 			case ClazzPackage.CLASS_PACKAGE__ASPECT_SET:
 			case ClazzPackage.CLASS_PACKAGE__ENUMERATION_SET:
-			case ClazzPackage.CLASS_PACKAGE__VIEWS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}

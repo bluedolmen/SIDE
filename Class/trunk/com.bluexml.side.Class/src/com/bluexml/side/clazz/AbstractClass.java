@@ -6,6 +6,8 @@
  */
 package com.bluexml.side.clazz;
 
+import org.eclipse.emf.common.util.EList;
+
 
 
 /**
@@ -13,12 +15,34 @@ package com.bluexml.side.clazz;
  * A representation of the model object '<em><b>Abstract Class</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link com.bluexml.side.clazz.AbstractClass#getAttributes <em>Attributes</em>}</li>
+ * </ul>
+ * </p>
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getAbstractClass()
  * @model abstract="true"
  * @generated
  */
-public interface AbstractClass extends AbstractContainer {
+public interface AbstractClass extends TitledNamedClassModelElement {
+
+	/**
+	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
+	 * The list contents are of type {@link com.bluexml.side.clazz.Attribute}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Attributes</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Attributes</em>' containment reference list.
+	 * @see com.bluexml.side.clazz.ClazzPackage#getAbstractClass_Attributes()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Attribute> getAttributes();
 
 	/**
 	 * <!-- begin-user-doc -->

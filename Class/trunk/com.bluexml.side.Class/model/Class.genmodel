@@ -51,7 +51,6 @@
       <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/associationSet"/>
       <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/aspectSet"/>
       <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/enumerationSet"/>
-      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/views"/>
       <genOperations ecoreOperation="Class.ecore#//ClassPackage/getAllPackages"/>
       <genOperations ecoreOperation="Class.ecore#//ClassPackage/getAllClasses"/>
       <genOperations ecoreOperation="Class.ecore#//ClassPackage/getAllEnumerations"/>
@@ -65,8 +64,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//Clazz/aspects"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Clazz/isAbstract"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Clazz/isDeprecated"/>
-      <genFeatures notify="false" children="true" createChild="true" propertySortChoices="true"
-          ecoreFeature="ecore:EReference Class.ecore#//Clazz/hasView"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getAllAttributes"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getAllInheritedAttributes"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getClassAndAspectAttributes"/>
@@ -88,7 +85,6 @@
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//Association">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/associationType"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//Association/associationsClass"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//Association/firstEnd"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//Association/secondEnd"/>
       <genOperations ecoreOperation="Class.ecore#//Association/equalsForMerge">
@@ -131,31 +127,9 @@
       </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="Class.ecore#//AbstractClass">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//AbstractClass/attributes"/>
       <genOperations ecoreOperation="Class.ecore#//AbstractClass/equalsForMerge">
         <genParameters ecoreParameter="Class.ecore#//AbstractClass/equalsForMerge/other"/>
-      </genOperations>
-    </genClasses>
-    <genClasses image="false" ecoreClass="Class.ecore#//AbstractContainer">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//AbstractContainer/attributes"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//AbstractContainer/associations"/>
-      <genOperations ecoreOperation="Class.ecore#//AbstractContainer/equalsForMerge">
-        <genParameters ecoreParameter="Class.ecore#//AbstractContainer/equalsForMerge/other"/>
-      </genOperations>
-    </genClasses>
-    <genClasses ecoreClass="Class.ecore#//View">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//View/attributes"/>
-      <genOperations ecoreOperation="Class.ecore#//View/equalsForMerge">
-        <genParameters ecoreParameter="Class.ecore#//View/equalsForMerge/other"/>
-      </genOperations>
-    </genClasses>
-    <genClasses ecoreClass="Class.ecore#//ViewItem">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//ViewItem/association"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//ViewItem/attribute"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//ViewItem/classe"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//ViewItem/aspect"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//ViewItem/Role"/>
-      <genOperations ecoreOperation="Class.ecore#//ViewItem/equalsForMerge">
-        <genParameters ecoreParameter="Class.ecore#//ViewItem/equalsForMerge/other"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//MetaInfo">

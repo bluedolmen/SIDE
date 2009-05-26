@@ -14,7 +14,6 @@ import java.util.TreeSet;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import com.bluexml.side.clazz.AbstractContainer;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
@@ -158,10 +157,7 @@ public class ClassDiagramUtils {
 			f.setMax_bound(Integer.parseInt(ass.getSecondEnd().getCardMax()));
 		}
 		
-		// Association class
-		if (ass.getAssociationsClass().size() > 0) {
-			f.setAssociation_class(ass.getAssociationsClass().get(0));
-		}
+		
 		
 		return f;
 	}
@@ -207,8 +203,8 @@ public class ClassDiagramUtils {
 
 		public int compare(Clazz c1, Clazz c2) {
 			String name1, name2;
-			name1 = ClassDiagramUtils.getLabel(c1);
-			name2 = ClassDiagramUtils.getLabel(c2);
+			name1 = c1.getLabel();
+			name2 = c2.getLabel();
 			return name1.compareToIgnoreCase(name2);
 		}
 		
@@ -258,18 +254,7 @@ public class ClassDiagramUtils {
 		return choicesList;
 	}
 	
-	/**
-	 * Return the label of an abstractContainer
-	 * @param cont
-	 * @return
-	 */
-	public static String getLabel(AbstractContainer cont) {
-		String label = cont.getName();
-		if (cont.getTitle() != null && cont.getTitle().length() > 0) {
-			label = cont.getTitle();
-		}
-		return label;
-	}
+	
 	
 	/**
 	 * Return all instanceable Clazzs that inherit from the current class
@@ -369,13 +354,14 @@ public class ClassDiagramUtils {
 	public static HashMap<String, ModelElement> getClazzChild(Collection<Clazz> listClazz) {
 		HashMap<String, ModelElement> listChild = new HashMap<String, ModelElement>();
 		for (Clazz cl : listClazz) {
+			// TODO use OCL method
 			for (Aspect asp : cl.getAspects()) {
 				listChild.put(asp.getName(), asp);
 				for (Attribute att : asp.getAttributes()) {
 					listChild.put(att.getName(), att);
 				}
 			}
-			for (Association ass : cl.getAssociations()) {
+			for (Association ass : cl.getAllSourceAssociations()) {
 				if (ass.getFirstEnd().getLinkedClass().equals(cl) && ass.getSecondEnd().isIsNavigable()) {
 					listChild.put(ClassDiagramUtils.getAssociationName(ass, false), ass);
 				}
@@ -383,7 +369,7 @@ public class ClassDiagramUtils {
 					listChild.put(ClassDiagramUtils.getAssociationName(ass, true), ass);
 				}
 			}
-			for (Attribute att : cl.getAttributes()) {
+			for (Attribute att : cl.getAllInheritedAttributes()) {
 				listChild.put(att.getName(), att);
 			}
 			for (Operation op : cl.getOperations()) {

@@ -124,18 +124,6 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 				return createAbstractClassAdapter();
 			}
 			@Override
-			public Adapter caseAbstractContainer(AbstractContainer object) {
-				return createAbstractContainerAdapter();
-			}
-			@Override
-			public Adapter caseView(View object) {
-				return createViewAdapter();
-			}
-			@Override
-			public Adapter caseViewItem(ViewItem object) {
-				return createViewItemAdapter();
-			}
-			@Override
 			public Adapter caseMetaInfo(MetaInfo object) {
 				return createMetaInfoAdapter();
 			}
@@ -364,48 +352,6 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAbstractClassAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.clazz.AbstractContainer <em>Abstract Container</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.clazz.AbstractContainer
-	 * @generated
-	 */
-	public Adapter createAbstractContainerAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.clazz.View <em>View</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.clazz.View
-	 * @generated
-	 */
-	public Adapter createViewAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.clazz.ViewItem <em>View Item</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.clazz.ViewItem
-	 * @generated
-	 */
-	public Adapter createViewItemAdapter() {
 		return null;
 	}
 

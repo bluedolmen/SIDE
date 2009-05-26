@@ -20,7 +20,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.bluexml.side.clazz.ClassPackage#getAssociationSet <em>Association Set</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.ClassPackage#getAspectSet <em>Aspect Set</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.ClassPackage#getEnumerationSet <em>Enumeration Set</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.ClassPackage#getViews <em>Views</em>}</li>
  * </ul>
  * </p>
  *
@@ -93,22 +92,6 @@ public interface ClassPackage extends com.bluexml.side.common.Package {
 	 * @generated
 	 */
 	EList<Enumeration> getEnumerationSet();
-
-	/**
-	 * Returns the value of the '<em><b>Views</b></em>' containment reference list.
-	 * The list contents are of type {@link com.bluexml.side.clazz.View}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Views</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Views</em>' containment reference list.
-	 * @see com.bluexml.side.clazz.ClazzPackage#getClassPackage_Views()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<View> getViews();
 
 	/**
 	 * <!-- begin-user-doc -->

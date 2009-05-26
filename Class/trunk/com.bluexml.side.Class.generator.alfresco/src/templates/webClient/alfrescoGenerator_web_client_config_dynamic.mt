@@ -53,7 +53,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 				<%if (isSource(current(1))) {%>
 					<show-<%getAssociationType()%> name="<%getFolder()%>:<%getAssociationName(current("clazz.Clazz"))%>"/>			
 				<%}%>
-				<%if (source == destination && current("clazz.Association").isNavigableSRC && current("clazz.Association").isNavigableTARGET) {%>
+				<%if (firstEnd.linkedClass == secondEnd.linkedClass && current("clazz.Association").firstEnd.isNavigable && current("clazz.Association").secondEnd.isNavigable) {%>
 					<show-<%getAssociationType()%> name="<%getFolder()%>:<%current("clazz.Association").getQualifiedNameReverse(current("clazz.Clazz"))%>"/>	
 				<%}%>
 			<%}%>
@@ -77,7 +77,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 					<%if (isSource(current(1))) {%>
 						<property name="<%getFolder()%>:<%getAssociationName(current(2))%>"/>
 					<%}%>
-					<%if (source == destination && current("clazz.Association").isNavigableSRC && current("clazz.Association").isNavigableTARGET) {%>
+					<%if (firstEnd.linkedClass == secondEnd.linkedClass && current("clazz.Association").firstEnd.isNavigable && current("clazz.Association").secondEnd.isNavigable) {%>
 						<property name="<%getFolder()%>:<%current("clazz.Association").getQualifiedNameReverse(current("clazz.Clazz"))%>"/>	
 					<%}%>
 				<%}%>
@@ -87,12 +87,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 			<%for (current("clazz.ClassPackage").getAllAspects()){%>
 				<%for (attributes){%>
 					<property name="<%getFolder()%>:<%getQualifiedName()%>" />
-				<%}%>
-				<%for (associations){%>
-					<%if (isSource(current(1))) {%>
-						<property name="<%getFolder()%>:<%getQualifiedName(current(2))%>"/>
-					<%}%>
-				<%}%>	
+				<%}%>				
 			<%}%>
 			
 			<!-- from Alfresco content model -->			
@@ -126,12 +121,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 					read-only="true"
 				<%}%>
 				/>
-			<%}%>
-			<%for (associations){%>
-				<%if (isSource(current(1))) {%>
-					<show-<%getAssociationType()%> name="<%getFolder()%>:<%getQualifiedName(current(2))%>"/>
-				<%}%>
-			<%}%>
+			<%}%>			
 		</property-sheet>
    </config>
 	<%}%>

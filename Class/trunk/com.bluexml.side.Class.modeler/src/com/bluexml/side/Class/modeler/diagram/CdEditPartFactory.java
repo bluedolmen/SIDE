@@ -38,7 +38,6 @@ import com.bluexml.side.Class.modeler.diagram.edit.EnumerationEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.EnumerationLiteralEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.GeneralizationEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.OperationEditPart;
-import com.bluexml.side.Class.modeler.diagram.edit.ViewEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.dependsEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.hasAspectEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.hasViewEditPart;
@@ -207,14 +206,7 @@ public class CdEditPartFactory extends ModelerEditPartFactory {
 			return new EnumerationLiteralEditPart(node);
 		}
 
-		/**
-		 * @see com.bluexml.side.clazz.util.ClazzSwitch#caseView(com.bluexml.side.clazz.View)
-		 * @generated
-		 */
-		public Object caseView(com.bluexml.side.clazz.View object) {
-			return new ViewEditPart(node);
-		}
-
+		
 		/**
 		 * @see com.bluexml.side.clazz.util.ClazzSwitch#defaultCase(org.eclipse.emf.ecore.EObject)
 		 * @generated

@@ -67,7 +67,6 @@ public class ClazzItemProvider
 			addAspectsPropertyDescriptor(object);
 			addIsAbstractPropertyDescriptor(object);
 			addIsDeprecatedPropertyDescriptor(object);
-			addHasViewPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -161,28 +160,6 @@ public class ClazzItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Has View feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addHasViewPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Clazz_hasView_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Clazz_hasView_feature", "_UI_Clazz_type"),
-				 ClazzPackage.Literals.CLAZZ__HAS_VIEW,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -195,7 +172,6 @@ public class ClazzItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ClazzPackage.Literals.CLAZZ__OPERATIONS);
-			childrenFeatures.add(ClazzPackage.Literals.CLAZZ__HAS_VIEW);
 		}
 		return childrenFeatures;
 	}
@@ -276,11 +252,6 @@ public class ClazzItemProvider
 			(createChildParameter
 				(ClazzPackage.Literals.CLAZZ__OPERATIONS,
 				 ClazzFactory.eINSTANCE.createOperation()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ClazzPackage.Literals.CLAZZ__HAS_VIEW,
-				 ClazzFactory.eINSTANCE.createView()));
 	}
 
 	/**

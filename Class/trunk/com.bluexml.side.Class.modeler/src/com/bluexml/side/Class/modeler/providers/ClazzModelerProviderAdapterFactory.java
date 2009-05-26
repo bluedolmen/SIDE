@@ -137,21 +137,7 @@ public class ClazzModelerProviderAdapterFactory extends ClazzAdapterFactory
 	 * @generated
 	 */
 	private AbstractContainerModelerProvider abstractcontainerModelerProvider;
-
-	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.View} instances.
-	 * 
-	 * @generated
-	 */
-	private ViewModelerProvider viewModelerProvider;
-
-	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.ViewItem} instances.
-	 * 
-	 * @generated
-	 */
-	private ViewItemModelerProvider viewitemModelerProvider;
-
+	
 	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.MetaInfo} instances.
 	 * 
@@ -458,35 +444,7 @@ public class ClazzModelerProviderAdapterFactory extends ClazzAdapterFactory
 
 		return abstractcontainerModelerProvider;
 	}
-
-	/**
-	 * This creates an adapter for a {@link com.bluexml.side.clazz.View}.
-	 *
-	 * @return the Adapter
-	 * @generated
-	 */
-	public Adapter createViewAdapter() {
-		if (viewModelerProvider == null) {
-			viewModelerProvider = new ViewModelerProvider(this);
-		}
-
-		return viewModelerProvider;
-	}
-
-	/**
-	 * This creates an adapter for a {@link com.bluexml.side.clazz.ViewItem}.
-	 *
-	 * @return the Adapter
-	 * @generated
-	 */
-	public Adapter createViewItemAdapter() {
-		if (viewitemModelerProvider == null) {
-			viewitemModelerProvider = new ViewItemModelerProvider(this);
-		}
-
-		return viewitemModelerProvider;
-	}
-
+	
 	/**
 	 * This creates an adapter for a {@link com.bluexml.side.clazz.MetaInfo}.
 	 *
@@ -560,13 +518,7 @@ public class ClazzModelerProviderAdapterFactory extends ClazzAdapterFactory
 		}
 		if (abstractcontainerModelerProvider != null) {
 			abstractcontainerModelerProvider.dispose();
-		}
-		if (viewModelerProvider != null) {
-			viewModelerProvider.dispose();
-		}
-		if (viewitemModelerProvider != null) {
-			viewitemModelerProvider.dispose();
-		}
+		}		
 		if (metainfoModelerProvider != null) {
 			metainfoModelerProvider.dispose();
 		}

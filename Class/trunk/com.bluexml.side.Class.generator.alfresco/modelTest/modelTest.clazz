@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:ClassPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:clazz="http://www.kerblue.org/class/1.0" name="test">
+  <classSet name="Clazz1" aspects="//@aspectSet.0">
+    <attributes documentation="" name="Attribute1" description="" title="" typ="String"/>
+  </classSet>
+  <classSet name="Clazz2">
+    <attributes documentation="" name="Attribute1" description="" title="" typ="String"/>
+  </classSet>
+  <classSet name="Clazz3" generalizations="//@classSet.0" aspects="//@aspectSet.1">
+    <attributes documentation="" name="Attribute1" description="" title="" typ="String"/>
+  </classSet>
+  <classSet name="Clazz4">
+    <attributes documentation="" name="Attribute1" description="" title="" typ="String"/>
+  </classSet>
+  <classSet name="Clazz5">
+    <attributes documentation="" name="Attribute1" description="" title="" typ="String"/>
+  </classSet>
+  <associationSet name="Association" description="" title="">
+    <firstEnd name="" title="" linkedClass="//@classSet.0"/>
+    <secondEnd name="R2" title="" isNavigable="true" linkedClass="//@classSet.1"/>
+  </associationSet>
+  <associationSet name="Association2" description="" title="">
+    <firstEnd name="R1" title="" isNavigable="true" linkedClass="//@classSet.1"/>
+    <secondEnd name="R2" title="" isNavigable="true" linkedClass="//@classSet.3"/>
+  </associationSet>
+  <associationSet name="Association">
+    <firstEnd name="" title="" linkedClass="//@classSet.4"/>
+    <secondEnd name="R2" title="" isNavigable="true" linkedClass="//@classSet.3"/>
+  </associationSet>
+  <aspectSet name="Aspect1">
+    <attributes documentation="" name="Attribute1" description="" title="" typ="String" valueList="//@enumerationSet.0"/>
+  </aspectSet>
+  <aspectSet name="Aspect2">
+    <attributes documentation="" name="Attribute1" description="" title="" typ="String" valueList="//@enumerationSet.1"/>
+  </aspectSet>
+  <enumerationSet name="Enumeration1">
+    <literals name="EnumerationLiteral1"/>
+    <literals name="EnumerationLiteral2"/>
+  </enumerationSet>
+  <enumerationSet name="Enumeration2" depends="//@enumerationSet.0">
+    <literals name="EnumerationLiteral1"/>
+    <literals name="EnumerationLiteral2"/>
+  </enumerationSet>
+</clazz:ClassPackage>

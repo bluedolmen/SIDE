@@ -31,7 +31,6 @@ import com.bluexml.side.Class.modeler.ClazzPlugin;
 import com.bluexml.side.Class.modeler.SideClassContextMenuProvider;
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassAspectAction;
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassGeneralizationAction;
-import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassViewAction;
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkEnumerationDependsAction;
 
 /**
@@ -117,10 +116,7 @@ public class ClazzEditor extends Modeler {
 
         ActionRegistry registry = getActionRegistry();
         
-        // Delete link between Class and View
-        DeleteLinkClassViewAction deleteLinkClassViewAction = new DeleteLinkClassViewAction(this);
-        registry.registerAction(deleteLinkClassViewAction);
-        getSelectionActions().add(deleteLinkClassViewAction.getId());
+        
         
         // Delete link between Class and Aspect
         DeleteLinkClassAspectAction deleteLinkToAspect = new DeleteLinkClassAspectAction(this);
@@ -142,10 +138,7 @@ public class ClazzEditor extends Modeler {
     protected void configureGraphicalViewer()
     {
         super.configureGraphicalViewer();
-
-        IAction deleteLinkClassViewAction = getActionRegistry().getAction(DeleteLinkClassViewAction.ID);
-        getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) deleteLinkClassViewAction);
-        
+               
         IAction deleteLinkToAspect = getActionRegistry().getAction(DeleteLinkClassAspectAction.ID);
         getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) deleteLinkToAspect);
         

@@ -98,7 +98,7 @@ public class ClazzRestoreConnectionCommand extends AbstractRestoreConnectionComm
 						// autoRef not allowed
 					} else {
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createisAssociationClassFromAssociationToClazz(graphElementTgt, graphElementSrc);
+						
 					}
 				}
 				if (eObjectTgt instanceof Aspect) {
@@ -109,14 +109,7 @@ public class ClazzRestoreConnectionCommand extends AbstractRestoreConnectionComm
 						createincludeFromClazzToAspect(graphElementSrc, graphElementTgt);
 					}
 				}
-				if (eObjectTgt instanceof View) {
-					if (autoRef) {
-						// autoRef not allowed
-					} else {
-						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-						createhasViewFromClazzToView(graphElementSrc, graphElementTgt);
-					}
-				}
+				
 				if (eObjectTgt instanceof Clazz) {
 					if (autoRef) {
 						// autoRef not allowed
@@ -154,7 +147,7 @@ public class ClazzRestoreConnectionCommand extends AbstractRestoreConnectionComm
 			Object obj = it.next();
 			if (obj instanceof Association) {
 				Association edgeObject = (Association) obj;
-				if (sourceObject.getAssociations().contains(edgeObject) && targetObject.getAssociations().contains(edgeObject)) {
+				if (sourceObject.getSourceAssociations().contains(edgeObject) && targetObject.getSourceAssociations().contains(edgeObject)) {
 					// check if the relation does not exists yet
 					List<GraphEdge> existing = getExistingEdges(srcElt, targetElt, Association.class);
 					if (!isAlreadyPresent(existing, edgeObject)) {
@@ -192,51 +185,7 @@ public class ClazzRestoreConnectionCommand extends AbstractRestoreConnectionComm
 		}
 	}
 
-	/**
-	 * @param srcElt
-	 *            the source element
-	 * @param targetElt
-	 *            the target element
-	 * @_generated
-	 */
-	private void createAssociationFromClazzToClazz(GraphElement srcElt, GraphElement targetElt) {
-		Clazz sourceObject = (Clazz) Utils.getElement(srcElt);
-		Clazz targetObject = (Clazz) Utils.getElement(targetElt);
-
-		Set<Association> s = new HashSet<Association>();
-		s.addAll(sourceObject.getAssociations());
-		s.addAll(targetObject.getAssociations());
-
-		for (Association a : s) {
-			Object obj = a;
-
-			if (obj instanceof Association) {
-				Association edgeObject = (Association) obj;
-
-				if (targetObject.equals(edgeObject.getSecondEnd().getLinkedClass()) && sourceObject.equals(edgeObject.getFirstEnd().getLinkedClass())) {
-
-					if (!sourceObject.getAssociations().contains(edgeObject))
-						sourceObject.getAssociations().add(edgeObject);
-
-					if (!targetObject.getAssociations().contains(edgeObject))
-						targetObject.getAssociations().add(edgeObject);
-
-					// check if the relation does not exists yet
-					List existing = getExistingEdges(srcElt, targetElt, Association.class);
-					if (!isAlreadyPresent(existing, edgeObject)) {
-						ICreationUtils factory = getModeler().getActiveConfiguration().getCreationUtils();
-						// restore the link with its default presentation
-						GraphElement edge = factory.createGraphElement(edgeObject);
-						if (edge instanceof GraphEdge) {
-							AssociationEdgeCreationCommand cmd = new AssociationEdgeCreationCommand(getEditDomain(), (GraphEdge) edge, srcElt, false);
-							cmd.setTarget(targetElt);
-							add(cmd);
-						}
-					}
-				}
-			}
-		}
-	}
+	
 
 	/**
 	 * @param srcElt
@@ -260,25 +209,7 @@ public class ClazzRestoreConnectionCommand extends AbstractRestoreConnectionComm
 		}
 	}
 
-	/**
-	 * @param srcElt the source element
-	 * @param targetElt the target element
-	 * @generated
-	 */
-	private void createisAssociationClassFromAssociationToClazz(GraphElement srcElt, GraphElement targetElt) {
-		Association sourceObject = (Association) Utils.getElement(srcElt);
-		Clazz targetObject = (Clazz) Utils.getElement(targetElt);
-
-		if (sourceObject.getAssociationsClass().contains(targetObject)) {
-			// check if the relation does not exists yet
-			if (getExistingEdges(srcElt, targetElt, CdSimpleObjectConstants.SIMPLE_OBJECT_ISASSOCIATIONCLASS).size() == 0) {
-				GraphEdge edge = Utils.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_ISASSOCIATIONCLASS);
-				isAssociationClassEdgeCreationCommand cmd = new isAssociationClassEdgeCreationCommand(null, edge, srcElt, false);
-				cmd.setTarget(targetElt);
-				add(cmd);
-			}
-		}
-	}
+	
 
 	/**
 	 * @param srcElt the source element
@@ -300,25 +231,6 @@ public class ClazzRestoreConnectionCommand extends AbstractRestoreConnectionComm
 		}
 	}
 
-	/**
-	 * @param srcElt the source element
-	 * @param targetElt the target element
-	 * @generated
-	 */
-	private void createhasViewFromClazzToView(GraphElement srcElt, GraphElement targetElt) {
-		Clazz sourceObject = (Clazz) Utils.getElement(srcElt);
-		View targetObject = (View) Utils.getElement(targetElt);
-
-		if (sourceObject.getHasView().contains(targetObject)) {
-			// check if the relation does not exists yet
-			if (getExistingEdges(srcElt, targetElt, CdSimpleObjectConstants.SIMPLE_OBJECT_HASVIEW).size() == 0) {
-				GraphEdge edge = Utils.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_HASVIEW);
-				hasViewEdgeCreationCommand cmd = new hasViewEdgeCreationCommand(null, edge, srcElt, false);
-				cmd.setTarget(targetElt);
-				add(cmd);
-			}
-		}
-	}
 
 	/**
 	 * @param srcElt the source element

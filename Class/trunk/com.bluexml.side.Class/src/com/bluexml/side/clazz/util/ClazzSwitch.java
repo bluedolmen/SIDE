@@ -119,7 +119,6 @@ public class ClazzSwitch<T> {
 				Clazz clazz = (Clazz)theEObject;
 				T result = caseClazz(clazz);
 				if (result == null) result = caseAbstractClass(clazz);
-				if (result == null) result = caseAbstractContainer(clazz);
 				if (result == null) result = caseTitledNamedClassModelElement(clazz);
 				if (result == null) result = caseNamedClassModelElement(clazz);
 				if (result == null) result = caseClassModelElement(clazz);
@@ -184,7 +183,6 @@ public class ClazzSwitch<T> {
 				Aspect aspect = (Aspect)theEObject;
 				T result = caseAspect(aspect);
 				if (result == null) result = caseAbstractClass(aspect);
-				if (result == null) result = caseAbstractContainer(aspect);
 				if (result == null) result = caseTitledNamedClassModelElement(aspect);
 				if (result == null) result = caseNamedClassModelElement(aspect);
 				if (result == null) result = caseClassModelElement(aspect);
@@ -195,36 +193,10 @@ public class ClazzSwitch<T> {
 			case ClazzPackage.ABSTRACT_CLASS: {
 				AbstractClass abstractClass = (AbstractClass)theEObject;
 				T result = caseAbstractClass(abstractClass);
-				if (result == null) result = caseAbstractContainer(abstractClass);
 				if (result == null) result = caseTitledNamedClassModelElement(abstractClass);
 				if (result == null) result = caseNamedClassModelElement(abstractClass);
 				if (result == null) result = caseClassModelElement(abstractClass);
 				if (result == null) result = caseModelElement(abstractClass);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ClazzPackage.ABSTRACT_CONTAINER: {
-				AbstractContainer abstractContainer = (AbstractContainer)theEObject;
-				T result = caseAbstractContainer(abstractContainer);
-				if (result == null) result = caseTitledNamedClassModelElement(abstractContainer);
-				if (result == null) result = caseNamedClassModelElement(abstractContainer);
-				if (result == null) result = caseClassModelElement(abstractContainer);
-				if (result == null) result = caseModelElement(abstractContainer);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ClazzPackage.VIEW: {
-				View view = (View)theEObject;
-				T result = caseView(view);
-				if (result == null) result = caseNamedClassModelElement(view);
-				if (result == null) result = caseClassModelElement(view);
-				if (result == null) result = caseModelElement(view);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ClazzPackage.VIEW_ITEM: {
-				ViewItem viewItem = (ViewItem)theEObject;
-				T result = caseViewItem(viewItem);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -470,51 +442,6 @@ public class ClazzSwitch<T> {
 	 * @generated
 	 */
 	public T caseAbstractClass(AbstractClass object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract Container</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract Container</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAbstractContainer(AbstractContainer object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>View</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>View</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseView(View object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>View Item</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>View Item</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseViewItem(ViewItem object) {
 		return null;
 	}
 

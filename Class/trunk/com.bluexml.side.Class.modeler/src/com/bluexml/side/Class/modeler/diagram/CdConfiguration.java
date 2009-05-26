@@ -38,7 +38,7 @@ import com.bluexml.side.Class.modeler.diagram.edit.EnumerationEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.EnumerationLiteralEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.OperationEditPart;
 import com.bluexml.side.Class.modeler.diagram.edit.StereotypeEditPart;
-import com.bluexml.side.Class.modeler.diagram.edit.ViewEditPart;
+
 
 /**
  * A diagram configuration : manages Palette, EditPartFactory for this diagram.
@@ -89,8 +89,7 @@ public class CdConfiguration implements IConfiguration {
 		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(OperationEditPart.class, com.bluexml.side.clazz.Operation.class), OperationEditPart.class);
 		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(ClassCommentEditPart.class, com.bluexml.side.clazz.ClassComment.class), ClassCommentEditPart.class);
 		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(EnumerationEditPart.class, com.bluexml.side.clazz.Enumeration.class), EnumerationEditPart.class);
-		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(EnumerationLiteralEditPart.class, com.bluexml.side.clazz.EnumerationLiteral.class), EnumerationLiteralEditPart.class);
-		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(ViewEditPart.class, com.bluexml.side.clazz.View.class), ViewEditPart.class);
+		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(EnumerationLiteralEditPart.class, com.bluexml.side.clazz.EnumerationLiteral.class), EnumerationLiteralEditPart.class);		
 		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(AssociationEditPart.class, com.bluexml.side.clazz.Association.class), AssociationEditPart.class);
 	}
 

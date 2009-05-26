@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.bluexml.side.clazz.Clazz#getAspects <em>Aspects</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Clazz#isIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Clazz#isIsDeprecated <em>Is Deprecated</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.Clazz#getHasView <em>Has View</em>}</li>
  * </ul>
  * </p>
  *
@@ -130,22 +129,6 @@ public interface Clazz extends AbstractClass {
 	 * @generated
 	 */
 	void setIsDeprecated(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Has View</b></em>' containment reference list.
-	 * The list contents are of type {@link com.bluexml.side.clazz.View}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Has View</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Has View</em>' containment reference list.
-	 * @see com.bluexml.side.clazz.ClazzPackage#getClazz_HasView()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<View> getHasView();
 
 	/**
 	 * <!-- begin-user-doc -->

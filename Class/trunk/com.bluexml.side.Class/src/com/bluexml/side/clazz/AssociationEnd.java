@@ -117,12 +117,12 @@ public interface AssociationEnd extends TitledNamedClassModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Linked Class</em>' reference.
-	 * @see #setLinkedClass(AbstractClass)
+	 * @see #setLinkedClass(Clazz)
 	 * @see com.bluexml.side.clazz.ClazzPackage#getAssociationEnd_LinkedClass()
 	 * @model
 	 * @generated
 	 */
-	AbstractClass getLinkedClass();
+	Clazz getLinkedClass();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.clazz.AssociationEnd#getLinkedClass <em>Linked Class</em>}' reference.
@@ -132,6 +132,6 @@ public interface AssociationEnd extends TitledNamedClassModelElement {
 	 * @see #getLinkedClass()
 	 * @generated
 	 */
-	void setLinkedClass(AbstractClass value);
+	void setLinkedClass(Clazz value);
 		
 } // AssociationEnd

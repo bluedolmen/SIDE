@@ -16,8 +16,10 @@
  ******************************************************************************/
 package com.bluexml.side.clazz.generator.alfresco.services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -27,7 +29,9 @@ import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.AssociationType;
 import com.bluexml.side.clazz.ClassModelElement;
+import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.clazz.ClazzPackage;
 
 
 
@@ -202,17 +206,8 @@ public class AssociationServices {
 
 	public boolean isSourceOfAssociation(ClassModelElement elt) {
 		if (elt instanceof Clazz) {
-			Clazz c = (Clazz) elt;
-			for (Object obj : c.getAssociations()) {
-				if (obj instanceof Association) {
-					Association asso = (Association) obj;
-					if (asso.getSecondEnd().isIsNavigable() && asso.getFirstEnd().getLinkedClass() == c) {
-						return true;
-					} else if (asso.getFirstEnd().isIsNavigable() && asso.getSecondEnd().getLinkedClass() == c) {
-						return true;
-					}
-				}
-			}
+			Clazz c = (Clazz) elt;			
+			return c.getAllSourceAssociations().size() >0;			
 		}
 		return false;
 	}
@@ -453,8 +448,5 @@ public class AssociationServices {
 		}
 	}
 
-	public Clazz getAssociationClass(Association a) {
-		return a.getAssociationsClass().get(0);
-	}
 	
 }

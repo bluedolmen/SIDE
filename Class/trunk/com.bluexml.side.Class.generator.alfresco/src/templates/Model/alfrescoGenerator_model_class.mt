@@ -134,11 +134,11 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 						<%}%>
 					</source>
 					<target>
-						<%if (isNavigableSRC && isNavigableTARGET){%>
-						  <%if (source == current(2)){%>
-						<class><%destination.getFolder()%>:<%destination.getQualifiedName()%></class>
+						<%if (firstEnd.isNavigable && secondEnd.isNavigable){%>
+						  <%if (firstEnd.linkedClass == current(2)){%>
+						<class><%secondEnd.linkedClass.getFolder()%>:<%secondEnd.linkedClass.getQualifiedName()%></class>
 						  <%}else{%>
-						<class><%source.getFolder()%>:<%source.getQualifiedName()%></class>
+						<class><%firstEnd.linkedClass.getFolder()%>:<%firstEnd.linkedClass.getQualifiedName()%></class>
 						  <%}%>
 						<%}else{%>
 						<class><%getTarget(current("clazz.Clazz")).getFolder()%>:<%getTarget(current("clazz.Clazz")).getQualifiedName()%></class>
@@ -156,7 +156,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 					</target>
 				</<%getAssociationType()%>>	
 				<!-- For Recursive association, special case -->
-				<%if (source == destination && current("clazz.Association").isNavigableSRC && current("clazz.Association").isNavigableTARGET) {%>
+				<%if (firstEnd.linkedClass == secondEnd.linkedClass && current("clazz.Association").firstEnd.isNavigable && current("clazz.Association").secondEnd.isNavigable) {%>
 					<!-- Recursive Association -->	
 					<<%getAssociationType()%> name="<%getFolder()%>:<%current("clazz.Association").getQualifiedNameReverse(current("clazz.Clazz"))%>">													
 
@@ -174,11 +174,11 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 						<%}%>
 					</source>
 					<target>
-						<%if (isNavigableSRC && isNavigableTARGET){%>
-						  <%if (source == current("clazz.Clazz")){%>
-						<class><%destination.getFolder()%>:<%destination.getQualifiedName()%></class>
+						<%if (firstEnd.isNavigable && secondEnd.isNavigable){%>
+						  <%if (firstEnd.linkedClass == current("clazz.Clazz")){%>
+						<class><%secondEnd.linkedClass.getFolder()%>:<%secondEnd.linkedClass.getQualifiedName()%></class>
 						  <%}else{%>
-						<class><%source.getFolder()%>:<%source.getQualifiedName()%></class>
+						<class><%firstEnd.linkedClass.getFolder()%>:<%firstEnd.linkedClass.getQualifiedName()%></class>
 						  <%}%>
 						<%}else{%>
 						<class><%getTarget(current("clazz.Clazz")).getFolder()%>:<%getTarget(current("clazz.Clazz")).getQualifiedName()%></class>

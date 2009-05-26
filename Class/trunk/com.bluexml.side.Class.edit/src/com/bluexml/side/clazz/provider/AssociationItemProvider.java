@@ -64,7 +64,6 @@ public class AssociationItemProvider
 			super.getPropertyDescriptors(object);
 
 			addAssociationTypePropertyDescriptor(object);
-			addAssociationsClassPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -87,28 +86,6 @@ public class AssociationItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Associations Class feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addAssociationsClassPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Association_associationsClass_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Association_associationsClass_feature", "_UI_Association_type"),
-				 ClazzPackage.Literals.ASSOCIATION__ASSOCIATIONS_CLASS,
-				 true,
-				 false,
-				 true,
-				 null,
 				 null,
 				 null));
 	}

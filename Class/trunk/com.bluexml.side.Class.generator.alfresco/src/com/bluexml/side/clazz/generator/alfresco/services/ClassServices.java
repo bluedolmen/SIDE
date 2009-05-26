@@ -49,35 +49,7 @@ public class ClassServices {
 		result.addAll(cl.getAllTargetAssociations());
 		return result;
 	}
-
-	/**
-	 * Return association for a class (don't give inherited Clazzs) where
-	 * association source can be "cl"
-	 * 
-	 * @param cl
-	 * @return
-	 */
-	public List<Association> getSourceAssociations(Clazz cl) {
-		List<Association> result = cl.getSourceAssociations();
-
-		return result;
-	}
-
-	public static View getViewDefinition(Clazz cl) {
-		if (cl.getHasView().size() == 0)
-			return null;
-
-		View first = null;
-		for (Object o2 : cl.getHasView())
-			if (o2 instanceof View) {
-				View v = (View) o2;
-				if (first == null)
-					first = v;
-				if (v.getName().equalsIgnoreCase("default"))
-					return v;
-			}
-		return first;
-	}
+	
 
 	public static boolean useTabComponent(Clazz c) {
 		for (Object obj : c.getMetainfo()) {

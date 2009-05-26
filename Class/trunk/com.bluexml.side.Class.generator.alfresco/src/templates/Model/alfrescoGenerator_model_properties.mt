@@ -40,7 +40,7 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 <%getFolder()%>_<%current(2).name%>model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.title=<%getLabel()%>
 <%getFolder()%>_<%current(2).name%>model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.description=<%getDescriptionOrName()%>
 	<%}%>
-	<%for (associations){%>
+	<%for (getSourceAssociations()){%>
 <%getFolder()%>_<%current(2).name%>model.association.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.title=<%getRoleOrTitle(current(1))%>
 <%--<%getFolder()%>_<%current(2).name%>model.association.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>_search.title=<%getRoleOrTitle(current(1))%>--%>
 <%--<%getFolder()%>_<%current(2).name%>model.association.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>_search_operator=Option <%getLabel()%>--%>
@@ -56,9 +56,4 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 <%getFolder()%>_<%current(2).name%>model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.title=<%getLabel()%>
 <%getFolder()%>_<%current(2).name%>model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.description=<%getDescriptionOrName()%>
 	<%}%>
-	<%for (associations){%>
-<%getFolder()%>_<%current(2).name%>model.association.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.title=<%getLabel()%>
-<%getFolder()%>_<%current(2).name%>model.association.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.description=Description of <%getLabel()%>
-	<%}%>	
-	
 <%}%>

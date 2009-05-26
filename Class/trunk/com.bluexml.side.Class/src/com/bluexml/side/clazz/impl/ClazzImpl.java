@@ -52,7 +52,6 @@ import org.eclipse.ocl.expressions.OCLExpression;
  *   <li>{@link com.bluexml.side.clazz.impl.ClazzImpl#getAspects <em>Aspects</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.ClazzImpl#isIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.ClazzImpl#isIsDeprecated <em>Is Deprecated</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.impl.ClazzImpl#getHasView <em>Has View</em>}</li>
  * </ul>
  * </p>
  *
@@ -128,16 +127,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * @ordered
 	 */
 	protected boolean isDeprecated = IS_DEPRECATED_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getHasView() <em>Has View</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getHasView()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<View> hasView;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -234,18 +223,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 		isDeprecated = newIsDeprecated;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.CLAZZ__IS_DEPRECATED, oldIsDeprecated, isDeprecated));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<View> getHasView() {
-		if (hasView == null) {
-			hasView = new EObjectContainmentEList<View>(View.class, this, ClazzPackage.CLAZZ__HAS_VIEW);
-		}
-		return hasView;
 	}
 
 	/**
@@ -780,8 +757,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 		switch (featureID) {
 			case ClazzPackage.CLAZZ__OPERATIONS:
 				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
-			case ClazzPackage.CLAZZ__HAS_VIEW:
-				return ((InternalEList<?>)getHasView()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -804,8 +779,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 				return isIsAbstract() ? Boolean.TRUE : Boolean.FALSE;
 			case ClazzPackage.CLAZZ__IS_DEPRECATED:
 				return isIsDeprecated() ? Boolean.TRUE : Boolean.FALSE;
-			case ClazzPackage.CLAZZ__HAS_VIEW:
-				return getHasView();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -837,10 +810,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 			case ClazzPackage.CLAZZ__IS_DEPRECATED:
 				setIsDeprecated(((Boolean)newValue).booleanValue());
 				return;
-			case ClazzPackage.CLAZZ__HAS_VIEW:
-				getHasView().clear();
-				getHasView().addAll((Collection<? extends View>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -868,9 +837,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 			case ClazzPackage.CLAZZ__IS_DEPRECATED:
 				setIsDeprecated(IS_DEPRECATED_EDEFAULT);
 				return;
-			case ClazzPackage.CLAZZ__HAS_VIEW:
-				getHasView().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -893,8 +859,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 				return isAbstract != IS_ABSTRACT_EDEFAULT;
 			case ClazzPackage.CLAZZ__IS_DEPRECATED:
 				return isDeprecated != IS_DEPRECATED_EDEFAULT;
-			case ClazzPackage.CLAZZ__HAS_VIEW:
-				return hasView != null && !hasView.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -72,8 +72,6 @@ public class ClazzFactoryImpl extends EFactoryImpl implements ClazzFactory {
 			case ClazzPackage.OPERATION: return createOperation();
 			case ClazzPackage.PARAMETER: return createParameter();
 			case ClazzPackage.ASPECT: return createAspect();
-			case ClazzPackage.VIEW: return createView();
-			case ClazzPackage.VIEW_ITEM: return createViewItem();
 			case ClazzPackage.META_INFO: return createMetaInfo();
 			case ClazzPackage.META_INFO_GROUP: return createMetaInfoGroup();
 			case ClazzPackage.CLASS_COMMENT: return createClassComment();
@@ -230,26 +228,6 @@ public class ClazzFactoryImpl extends EFactoryImpl implements ClazzFactory {
 	public Aspect createAspect() {
 		AspectImpl aspect = new AspectImpl();
 		return aspect;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public View createView() {
-		ViewImpl view = new ViewImpl();
-		return view;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ViewItem createViewItem() {
-		ViewItemImpl viewItem = new ViewItemImpl();
-		return viewItem;
 	}
 
 	/**

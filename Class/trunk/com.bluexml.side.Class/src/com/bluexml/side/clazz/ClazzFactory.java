@@ -125,24 +125,6 @@ public interface ClazzFactory extends EFactory {
 	Aspect createAspect();
 
 	/**
-	 * Returns a new object of class '<em>View</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>View</em>'.
-	 * @generated
-	 */
-	View createView();
-
-	/**
-	 * Returns a new object of class '<em>View Item</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>View Item</em>'.
-	 * @generated
-	 */
-	ViewItem createViewItem();
-
-	/**
 	 * Returns a new object of class '<em>Meta Info</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

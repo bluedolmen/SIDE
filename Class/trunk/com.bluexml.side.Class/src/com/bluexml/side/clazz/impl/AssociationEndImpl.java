@@ -10,6 +10,7 @@ import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 
 import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.AssociationEnd;
+import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.ClazzPackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -107,7 +108,7 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 	 * @generated
 	 * @ordered
 	 */
-	protected AbstractClass linkedClass;
+	protected Clazz linkedClass;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -196,10 +197,10 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbstractClass getLinkedClass() {
+	public Clazz getLinkedClass() {
 		if (linkedClass != null && linkedClass.eIsProxy()) {
 			InternalEObject oldLinkedClass = (InternalEObject)linkedClass;
-			linkedClass = (AbstractClass)eResolveProxy(oldLinkedClass);
+			linkedClass = (Clazz)eResolveProxy(oldLinkedClass);
 			if (linkedClass != oldLinkedClass) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClazzPackage.ASSOCIATION_END__LINKED_CLASS, oldLinkedClass, linkedClass));
@@ -213,7 +214,7 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbstractClass basicGetLinkedClass() {
+	public Clazz basicGetLinkedClass() {
 		return linkedClass;
 	}
 
@@ -222,8 +223,8 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLinkedClass(AbstractClass newLinkedClass) {
-		AbstractClass oldLinkedClass = linkedClass;
+	public void setLinkedClass(Clazz newLinkedClass) {
+		Clazz oldLinkedClass = linkedClass;
 		linkedClass = newLinkedClass;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.ASSOCIATION_END__LINKED_CLASS, oldLinkedClass, linkedClass));
@@ -268,7 +269,7 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 				setIsNavigable(((Boolean)newValue).booleanValue());
 				return;
 			case ClazzPackage.ASSOCIATION_END__LINKED_CLASS:
-				setLinkedClass((AbstractClass)newValue);
+				setLinkedClass((Clazz)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -292,7 +293,7 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 				setIsNavigable(IS_NAVIGABLE_EDEFAULT);
 				return;
 			case ClazzPackage.ASSOCIATION_END__LINKED_CLASS:
-				setLinkedClass((AbstractClass)null);
+				setLinkedClass((Clazz)null);
 				return;
 		}
 		super.eUnset(featureID);

@@ -27,10 +27,11 @@ tmp<%}%>
 <%if (getRootContainer().name != null && getRootContainer().name.length() > 0){%>
 <%getRootContainer().name%><%}else{%>
 tmp<%}%>
-<%script type="clazz.ClassModelElement" name="getDocumentation" description="Get the folder documentation" %>
+<%script type="clazz.NamedClassModelElement" name="getDocumentation" description="Get the folder documentation" %>
 <%if (documentation != null && documentation.length() > 0){%>
 <%documentation%><%}else{%>
-<%name%>
+name: <%name%>
+descrition: <%description%>
 <%}%>
 <%script type="clazz.Association" name="getQualifiedName"%>
 <%getAssociationName(args(0))%>

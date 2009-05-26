@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.bluexml.side.clazz.Association#getAssociationType <em>Association Type</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.Association#getAssociationsClass <em>Associations Class</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Association#getFirstEnd <em>First End</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Association#getSecondEnd <em>Second End</em>}</li>
  * </ul>
@@ -57,22 +56,6 @@ public interface Association extends TitledNamedClassModelElement {
 	 * @generated
 	 */
 	void setAssociationType(AssociationType value);
-
-	/**
-	 * Returns the value of the '<em><b>Associations Class</b></em>' reference list.
-	 * The list contents are of type {@link com.bluexml.side.clazz.Clazz}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Associations Class</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Associations Class</em>' reference list.
-	 * @see com.bluexml.side.clazz.ClazzPackage#getAssociation_AssociationsClass()
-	 * @model
-	 * @generated
-	 */
-	EList<Clazz> getAssociationsClass();
 
 	/**
 	 * Returns the value of the '<em><b>First End</b></em>' containment reference.
