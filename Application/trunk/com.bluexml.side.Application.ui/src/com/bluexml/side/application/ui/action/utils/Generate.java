@@ -120,6 +120,7 @@ public class Generate extends Thread {
 		style2.foreground = Display.getDefault().getSystemColor(color);
 		styletext.append(text);
 		styletext.setStyleRange(style2);
+		styletext.setTopIndex(styletext.getLineCount());
 	}
 
 	private void generate(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) throws ClassNotFoundException, InstantiationException,
