@@ -133,7 +133,7 @@ public class ClassSynchronizationUtils {
 			Clazz Clazz, Association ass) {
 		// SOURCE
 		String associationId = "";
-		if (ass.getSource().equals(Clazz) && ass.isIsNavigableTARGET()) {
+		if (ass.getFirstEnd().getLinkedClass().equals(Clazz) && ass.getSecondEnd().isIsNavigable()) {
 			associationId = ClassDiagramUtils.getAssociationName(ass, false);
 		}
 		
@@ -143,16 +143,16 @@ public class ClassSynchronizationUtils {
 		} else {
 			// Modification
 			Field mcf = (ModelChoiceField)formChild.get(associationId);
-			if(ass.isIsNavigableTARGET() && ass.getSource().equals(Clazz) && mcf != null) {
-				if (((ModelChoiceField)mcf).getMax_bound() > Integer.parseInt(ass.getMaxTARGET()) && Integer.parseInt(ass.getMaxTARGET()) != -1) {
-					cc.append(SetCommand.create(domain, mcf, FormPackage.eINSTANCE.getModelChoiceField_Max_bound(), Integer.parseInt(ass.getMaxTARGET())));
+			if(ass.getSecondEnd().isIsNavigable() && ass.getFirstEnd().getLinkedClass().equals(Clazz) && mcf != null) {
+				if (((ModelChoiceField)mcf).getMax_bound() > Integer.parseInt(ass.getSecondEnd().getCardMax()) && Integer.parseInt(ass.getSecondEnd().getCardMax()) != -1) {
+					cc.append(SetCommand.create(domain, mcf, FormPackage.eINSTANCE.getModelChoiceField_Max_bound(), Integer.parseInt(ass.getSecondEnd().getCardMax())));
 				}
 			}
 		}
 		
 		// TARGET
 		associationId = "";
-		if (ass.getDestination().equals(Clazz) && ass.isIsNavigableSRC()) {
+		if (ass.getSecondEnd().getLinkedClass().equals(Clazz) && ass.getFirstEnd().isIsNavigable()) {
 			associationId = ClassDiagramUtils.getAssociationName(ass, true);
 		}
 		
@@ -162,9 +162,9 @@ public class ClassSynchronizationUtils {
 		} else {
 			// Modification
 			Field mcf = (ModelChoiceField)formChild.get(associationId);
-			if(ass.isIsNavigableSRC() && ass.getSource().equals(Clazz) && mcf != null) {
-				if (((ModelChoiceField)mcf).getMax_bound() > Integer.parseInt(ass.getMaxSRC())  && Integer.parseInt(ass.getMaxSRC()) != -1) {
-					cc.append(SetCommand.create(domain, mcf, FormPackage.eINSTANCE.getModelChoiceField_Max_bound(), Integer.parseInt(ass.getMaxSRC())));
+			if(ass.getFirstEnd().isIsNavigable() && ass.getFirstEnd().getLinkedClass().equals(Clazz) && mcf != null) {
+				if (((ModelChoiceField)mcf).getMax_bound() > Integer.parseInt(ass.getFirstEnd().getCardMax())  && Integer.parseInt(ass.getFirstEnd().getCardMax()) != -1) {
+					cc.append(SetCommand.create(domain, mcf, FormPackage.eINSTANCE.getModelChoiceField_Max_bound(), Integer.parseInt(ass.getFirstEnd().getCardMax())));
 				}
 			}
 		}

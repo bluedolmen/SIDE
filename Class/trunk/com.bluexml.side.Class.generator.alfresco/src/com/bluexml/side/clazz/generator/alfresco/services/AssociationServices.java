@@ -53,7 +53,7 @@ public class AssociationServices {
 	 * @return
 	 */
 	public static boolean isInnerAssociation(Association a) {
-		return getTopPackage(a.getSource()) == getTopPackage(a.getDestination());
+		return getTopPackage(a.getFirstEnd().getLinkedClass()) == getTopPackage(a.getSecondEnd().getLinkedClass());
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class AssociationServices {
 	 * @return
 	 */
 	public static boolean isAssociationBetweenClazzs(Association a) {
-		return a.getSource().eClass().getName() == "Clazz" && a.getDestination().eClass().getName() == "Clazz";
+		return a.getFirstEnd().getLinkedClass().eClass().getName() == "Clazz" && a.getSecondEnd().getLinkedClass().eClass().getName() == "Clazz";
 	}
 
 	public static boolean isContainment(Association a) {
@@ -78,61 +78,42 @@ public class AssociationServices {
 	 * @param elt
 	 * @return
 	 */
-	public static boolean isSource(Association a, ClassModelElement elt) {
-
-		Collection<ClassModelElement> allInheritedClazzs = new HashSet<ClassModelElement>();
-		if (elt instanceof Clazz) {
-			Clazz cl = (Clazz) elt;
-			allInheritedClazzs.addAll(cl.getInheritedClasses());
-		}
-		allInheritedClazzs.add(elt);
-
-		if (!(elt.equals(a.getSource()) || elt.equals(a.getDestination())))
-			if (allInheritedClazzs.contains(a.getSource()))
-				elt = a.getSource();
-			else if (allInheritedClazzs.contains(a.getDestination()))
-				elt = a.getDestination();
-
-		if (a.isIsNavigableTARGET() && a.getSource() == elt) {
-			return true;
-		} else if (a.isIsNavigableSRC() && a.getDestination() == elt) {
-			return true;
-		}
-		return false;
+	public static boolean isSource(Association a, Clazz elt) {
+		return elt.isSource(a);		
 	}
 
 	public boolean isMandatorySrc(Association a, ClassModelElement elt) {
-		if (a.isIsNavigableTARGET() && a.getSource() == elt) {
-			return Integer.valueOf(a.getMinSRC()) > 0;
-		} else if (a.isIsNavigableSRC() && a.getDestination() == elt) {
-			return Integer.valueOf(a.getMinTARGET()) > 0;
+		if (a.getSecondEnd().isIsNavigable() && a.getFirstEnd().getLinkedClass() == elt) {
+			return Integer.valueOf(a.getFirstEnd().getCardMin()) > 0;
+		} else if (a.getFirstEnd().isIsNavigable() && a.getSecondEnd().getLinkedClass() == elt) {
+			return Integer.valueOf(a.getSecondEnd().getCardMin()) > 0;
 		}
 		return false;
 	}
 
 	public boolean isManySrc(Association a, ClassModelElement elt) {
-		if (a.isIsNavigableTARGET() && a.getSource() == elt) {
-			return Integer.valueOf(a.getMaxSRC()) > 1 || Integer.valueOf(a.getMaxSRC()) == -1;
-		} else if (a.isIsNavigableSRC() && a.getDestination() == elt) {
-			return Integer.valueOf(a.getMaxTARGET()) > 1 || Integer.valueOf(a.getMaxTARGET()) == -1;
+		if (a.getSecondEnd().isIsNavigable() && a.getFirstEnd().getLinkedClass() == elt) {
+			return Integer.valueOf(a.getFirstEnd().getCardMax()) > 1 || Integer.valueOf(a.getFirstEnd().getCardMax()) == -1;
+		} else if (a.getFirstEnd().isIsNavigable() && a.getSecondEnd().getLinkedClass() == elt) {
+			return Integer.valueOf(a.getSecondEnd().getCardMax()) > 1 || Integer.valueOf(a.getSecondEnd().getCardMax()) == -1;
 		}
 		return false;
 	}
 
 	public boolean isMandatoryTarget(Association a, ClassModelElement elt) {
-		if (a.isIsNavigableTARGET() && a.getSource() == elt) {
-			return Integer.valueOf(a.getMinTARGET()) > 0;
-		} else if (a.isIsNavigableSRC() && a.getDestination() == elt) {
-			return Integer.valueOf(a.getMinSRC()) > 0;
+		if (a.getSecondEnd().isIsNavigable() && a.getFirstEnd().getLinkedClass() == elt) {
+			return Integer.valueOf(a.getSecondEnd().getCardMin()) > 0;
+		} else if (a.getFirstEnd().isIsNavigable() && a.getSecondEnd().getLinkedClass() == elt) {
+			return Integer.valueOf(a.getFirstEnd().getCardMin()) > 0;
 		}
 		return false;
 	}
 
 	public boolean isManyTarget(Association a, ClassModelElement elt) {
-		if (a.getSource() == elt) {
-			return Integer.valueOf(a.getMaxTARGET()) > 1 || Integer.valueOf(a.getMaxTARGET()) == -1;
-		} else if (a.getDestination() == elt) {
-			return Integer.valueOf(a.getMaxSRC()) > 1 || Integer.valueOf(a.getMaxSRC()) == -1;
+		if (a.getFirstEnd().getLinkedClass() == elt) {
+			return Integer.valueOf(a.getSecondEnd().getCardMax()) > 1 || Integer.valueOf(a.getSecondEnd().getCardMax()) == -1;
+		} else if (a.getSecondEnd().getLinkedClass() == elt) {
+			return Integer.valueOf(a.getFirstEnd().getCardMax()) > 1 || Integer.valueOf(a.getFirstEnd().getCardMax()) == -1;
 		}
 		return false;
 	}
@@ -144,22 +125,22 @@ public class AssociationServices {
 	 * @return
 	 */
 	public AbstractClass getTarget(Association a, ClassModelElement elt) throws Exception {
-		if (a.getSource().equals(elt)) {
-			if (a.getDestination() instanceof Aspect) {
-				Aspect aspect = (Aspect) a.getDestination();
+		if (a.getFirstEnd().getLinkedClass().equals(elt)) {
+			if (a.getSecondEnd().getLinkedClass() instanceof Aspect) {
+				Aspect aspect = (Aspect) a.getSecondEnd().getLinkedClass();
 				return aspect;
 			}
-			if (a.getDestination() instanceof Clazz) {
-				Clazz Clazz = (Clazz) a.getDestination();
+			if (a.getSecondEnd().getLinkedClass() instanceof Clazz) {
+				Clazz Clazz = (Clazz) a.getSecondEnd().getLinkedClass();
 				return Clazz;
 			}
-		} else if (a.getDestination().equals(elt)) {
-			if (a.getSource() instanceof Aspect) {
-				Aspect aspect = (Aspect) a.getSource();
+		} else if (a.getSecondEnd().getLinkedClass().equals(elt)) {
+			if (a.getFirstEnd().getLinkedClass() instanceof Aspect) {
+				Aspect aspect = (Aspect) a.getFirstEnd().getLinkedClass();
 				return aspect;
 			}
-			if (a.getSource() instanceof Clazz) {
-				Clazz Clazz = (Clazz) a.getSource();
+			if (a.getFirstEnd().getLinkedClass() instanceof Clazz) {
+				Clazz Clazz = (Clazz) a.getFirstEnd().getLinkedClass();
 				return Clazz;
 			}
 		} else {
@@ -180,7 +161,7 @@ public class AssociationServices {
 
 	/**
 	 * get the Clazz source where the Clazz have the associations the source
-	 * for A->B is A but beware a.getSource() is the start of the line draw
+	 * for A->B is A but beware a.getFirstEnd().getLinkedClass() is the start of the line draw
 	 * between Clazz not the source ! must use navigation to avoid mistake
 	 * 
 	 * @param a
@@ -190,17 +171,17 @@ public class AssociationServices {
 	 * @throws Exception
 	 */
 	public static AbstractClass getRealSource(Association a, ClassModelElement elt) throws Exception {
-		if (a.getSource().equals(elt) && a.getDestination().equals(elt)) {
-			if (a.isIsNavigableSRC() || a.isIsNavigableTARGET()) {
+		if (a.getFirstEnd().getLinkedClass().equals(elt) && a.getSecondEnd().getLinkedClass().equals(elt)) {
+			if (a.getFirstEnd().isIsNavigable() || a.getSecondEnd().isIsNavigable()) {
 				return (AbstractClass) elt;
 			}
-		} else if (a.getSource().equals(elt)) {
-			if (a.isIsNavigableTARGET()) {
+		} else if (a.getFirstEnd().getLinkedClass().equals(elt)) {
+			if (a.getSecondEnd().isIsNavigable()) {
 				// elt is the source
 				return (AbstractClass) elt;
 			}
-		} else if (a.getDestination().equals(elt)) {
-			if (a.isIsNavigableSRC()) {
+		} else if (a.getSecondEnd().getLinkedClass().equals(elt)) {
+			if (a.getFirstEnd().isIsNavigable()) {
 				return (AbstractClass) elt;
 			}
 		} else {
@@ -225,9 +206,9 @@ public class AssociationServices {
 			for (Object obj : c.getAssociations()) {
 				if (obj instanceof Association) {
 					Association asso = (Association) obj;
-					if (asso.isIsNavigableTARGET() && asso.getSource() == c) {
+					if (asso.getSecondEnd().isIsNavigable() && asso.getFirstEnd().getLinkedClass() == c) {
 						return true;
-					} else if (asso.isIsNavigableSRC() && asso.getDestination() == c) {
+					} else if (asso.getFirstEnd().isIsNavigable() && asso.getSecondEnd().getLinkedClass() == c) {
 						return true;
 					}
 				}
@@ -255,13 +236,13 @@ public class AssociationServices {
 		if (e instanceof Clazz) {
 			Clazz c = (Clazz) e;
 			// Check if association is on this class or is inherited :
-			if (a.getSource() == c || a.getDestination() == c) {
+			if (a.getFirstEnd().getLinkedClass() == c || a.getSecondEnd().getLinkedClass() == c) {
 				associationName = constructAssociationName(a, c, reverse);
 			} else {
 				// We must find the parent class
 				Collection<Clazz> s = c.getInheritedClasses();
 				for (Clazz Clazz : s) {
-					if (a.getSource() == Clazz || a.getDestination() == Clazz) {
+					if (a.getFirstEnd().getLinkedClass() == Clazz || a.getSecondEnd().getLinkedClass() == Clazz) {
 						associationName = constructAssociationName(a, Clazz, reverse);
 					}
 				}
@@ -282,16 +263,16 @@ public class AssociationServices {
 		String associationName = "";
 
 		associationName = c.getFullName().replace(".", "_") + "_" + a.getName();
-		if (a.getDestination() == c && !reverse) {
-			if (a.getRoleTarget() != null && !"".equalsIgnoreCase(a.getRoleTarget())) {
-				associationName += "_" + a.getRoleTarget();
+		if (a.getSecondEnd().getLinkedClass() == c && !reverse) {
+			if (a.getSecondEnd().getName() != null && !"".equalsIgnoreCase(a.getSecondEnd().getName())) {
+				associationName += "_" + a.getSecondEnd().getName();
 			}
-			associationName += "_" + ((Clazz) a.getSource()).getFullName().replace(".", "_");
+			associationName += "_" + ((Clazz) a.getFirstEnd().getLinkedClass()).getFullName().replace(".", "_");
 		} else {
-			if (a.getRoleSrc() != null && !"".equalsIgnoreCase(a.getRoleSrc())) {
-				associationName += "_" + a.getRoleSrc();
+			if (a.getFirstEnd().getName() != null && !"".equalsIgnoreCase(a.getFirstEnd().getName())) {
+				associationName += "_" + a.getFirstEnd().getName();
 			}
-			associationName += "_" + ((Clazz) a.getDestination()).getFullName().replace(".", "_");
+			associationName += "_" + ((Clazz) a.getSecondEnd().getLinkedClass()).getFullName().replace(".", "_");
 		}
 
 		return associationName;
@@ -326,11 +307,11 @@ public class AssociationServices {
 
 		associationName = a.getFullName().replace(".", "_") + "_" + assoc.getName();
 
-		 if (assoc.getRoleTarget() != null && !"".equalsIgnoreCase(assoc.getRoleTarget()) && !reverse) {
-			associationName += "_" + assoc.getRoleTarget();
+		 if (assoc.getSecondEnd().getName() != null && !"".equalsIgnoreCase(assoc.getSecondEnd().getName()) && !reverse) {
+			associationName += "_" + assoc.getSecondEnd().getName();
 		 } else {
-			 if (assoc.getRoleSrc() != null && !"".equalsIgnoreCase(assoc.getRoleSrc())) {
-				 associationName += "_" + assoc.getRoleSrc();
+			 if (assoc.getFirstEnd().getName() != null && !"".equalsIgnoreCase(assoc.getFirstEnd().getName())) {
+				 associationName += "_" + assoc.getFirstEnd().getName();
 		}
 		 }
 
@@ -362,10 +343,10 @@ public class AssociationServices {
 
 		associationName = c.getFullName().replace(".", "_") + "_" + assoc.getName() + "_CA";
 
-		if (assoc.getRoleTarget() != null && !reverse && !"".equalsIgnoreCase(assoc.getRoleTarget())) {
-			associationName += "_" + assoc.getRoleTarget();
-		} else if (assoc.getRoleTarget() != null && reverse && !"".equalsIgnoreCase(assoc.getRoleTarget())) {
-			associationName += "_" + assoc.getRoleSrc();
+		if (assoc.getSecondEnd().getName() != null && !reverse && !"".equalsIgnoreCase(assoc.getSecondEnd().getName())) {
+			associationName += "_" + assoc.getSecondEnd().getName();
+		} else if (assoc.getSecondEnd().getName() != null && reverse && !"".equalsIgnoreCase(assoc.getSecondEnd().getName())) {
+			associationName += "_" + assoc.getFirstEnd().getName();
 		}
 
 		associationName += "_" + b.getFullName().replace(".", "_");
@@ -373,7 +354,7 @@ public class AssociationServices {
 		// When we have a class associated to itself with a class association to
 		// itself too
 		if (c == b) {
-			associationName += "_" + assoc.getRoleSrc();
+			associationName += "_" + assoc.getFirstEnd().getName();
 		}
 
 		return associationName;
@@ -398,7 +379,7 @@ public class AssociationServices {
 	public String getRoleOrTitle(Association a, ClassModelElement e, boolean reverse) throws Exception {
 		String title = "";
 		// If e is destination, check if there is a role title
-		if (a.getDestination() == e || a.getSource() == e) {
+		if (a.getSecondEnd().getLinkedClass() == e || a.getFirstEnd().getLinkedClass() == e) {
 			if (e instanceof Clazz) {
 				Clazz c = (Clazz) e;
 				title = constructTitleFromRole(a, c, reverse);
@@ -409,7 +390,7 @@ public class AssociationServices {
 				Clazz c = (Clazz) e;
 				Collection<Clazz> s = c.getInheritedClasses();
 				for (Clazz Clazz : s) {
-					if (a.getSource() == Clazz || a.getDestination() == Clazz) {
+					if (a.getFirstEnd().getLinkedClass() == Clazz || a.getSecondEnd().getLinkedClass() == Clazz) {
 						title = constructTitleFromRole(a, Clazz, reverse);
 					}
 				}
@@ -437,25 +418,25 @@ public class AssociationServices {
 	 */
 	public String constructTitleFromRole(Association a, Clazz c, boolean reverse) {
 		String title = "";
-		if (a.getDestination() == c && reverse) {
-			if (a.getRoleSrcTitle() != null) {
-				title = a.getRoleSrcTitle();
+		if (a.getSecondEnd().getLinkedClass() == c && reverse) {
+			if (a.getFirstEnd().getTitle() != null) {
+				title = a.getFirstEnd().getTitle();
 			} else {
 				if (a.getTitle() != null) {
 					title = a.getTitle();
 				} else {
-					title = a.getRoleSrc();
+					title = a.getFirstEnd().getName();
 				}
 			}
 			// If e is target, check if there is a role title
-		} else if (a.getSource() == c) {
-			if (a.getRoleTargetTitle() != null) {
-				title = a.getRoleTargetTitle();
+		} else if (a.getFirstEnd().getLinkedClass() == c) {
+			if (a.getSecondEnd().getTitle() != null) {
+				title = a.getSecondEnd().getTitle();
 			} else {
 				if (a.getTitle() != null) {
 					title = a.getTitle();
 				} else {
-					title = a.getRoleTarget();
+					title = a.getSecondEnd().getName();
 				}
 			}
 		}
@@ -463,10 +444,10 @@ public class AssociationServices {
 	}
 
 	public String getRole(Association a, ClassModelElement e) throws Exception {
-		if (a.getSource().equals(e)) {
-			return a.getRoleSrc();
-		} else if (a.getDestination().equals(e)) {
-			return a.getRoleTarget();
+		if (a.getFirstEnd().getLinkedClass().equals(e)) {
+			return a.getFirstEnd().getName();
+		} else if (a.getSecondEnd().getLinkedClass().equals(e)) {
+			return a.getSecondEnd().getName();
 		} else {
 			throw new Exception("Bad ClassModelElement, not found in this association :" + a);
 		}

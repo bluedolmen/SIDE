@@ -17,8 +17,7 @@ package com.bluexml.side.Class.modeler.diagram.policies;
 /**
  * @generated
  */
-public class EnumerationLayoutEditPolicy extends
-		org.topcased.modeler.edit.policies.ClassLayoutEditPolicy {
+public class EnumerationLayoutEditPolicy extends org.topcased.modeler.edit.policies.ClassLayoutEditPolicy {
 	/**
 	 * Default contructor.
 	 *

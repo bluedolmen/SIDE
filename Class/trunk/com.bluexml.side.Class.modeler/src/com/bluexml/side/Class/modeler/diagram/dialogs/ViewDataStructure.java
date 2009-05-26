@@ -212,7 +212,7 @@ public class ViewDataStructure {
 		for (Association association : associations) {
 			ViewContainerType containertype = ViewContainerType.ASSOCIATION_TARGET;
 			ViewContainerType asso_classCT = ViewContainerType.ASSOCIATION_CLASS;
-			if (association.getSource().equals(association.getDestination())) {
+			if (association.getFirstEnd().getLinkedClass().equals(association.getSecondEnd().getLinkedClass())) {
 				containertype = ViewContainerType.ASSOCIATION_RECUR;
 				asso_classCT = ViewContainerType.ASSOCIATION_CLASS_RECUR;
 			}
@@ -220,12 +220,12 @@ public class ViewDataStructure {
 
 			// target class attributes
 			Clazz other = null;
-			if (inhertedClasses.contains(association.getSource())) {
-				other = (Clazz) association.getDestination();
+			if (inhertedClasses.contains(association.getFirstEnd().getLinkedClass())) {
+				other = (Clazz) association.getSecondEnd().getLinkedClass();
 				buildAssociationAttributes(association, containertype, asso_classCT, associationsClass, other, AssociationHelper.getRoleSrcOrTitle(association));
 			}
-			if (inhertedClasses.contains(association.getDestination())) {
-				other = (Clazz) association.getSource();
+			if (inhertedClasses.contains(association.getSecondEnd().getLinkedClass())) {
+				other = (Clazz) association.getFirstEnd().getLinkedClass();
 				buildAssociationAttributes(association, containertype, asso_classCT, associationsClass, other, AssociationHelper.getRoleTargetOrTitle(association));
 			}
 		}

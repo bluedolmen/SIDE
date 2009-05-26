@@ -33,14 +33,12 @@ import com.bluexml.side.Class.modeler.diagram.commands.isCommentedEdgeCreationCo
  *
  * @generated
  */
-public class isCommentedEdgeCreationEditPolicy extends
-		AbstractEdgeCreationEditPolicy {
+public class isCommentedEdgeCreationEditPolicy extends AbstractEdgeCreationEditPolicy {
 	/**
 	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#createCommand(org.eclipse.gef.EditDomain, org.topcased.modeler.di.model.GraphEdge, org.topcased.modeler.di.model.GraphElement)
 	 * @generated
 	 */
-	protected CreateTypedEdgeCommand createCommand(EditDomain domain,
-			GraphEdge edge, GraphElement source) {
+	protected CreateTypedEdgeCommand createCommand(EditDomain domain, GraphEdge edge, GraphElement source) {
 		return new isCommentedEdgeCreationCommand(domain, edge, source);
 	}
 
@@ -50,9 +48,7 @@ public class isCommentedEdgeCreationEditPolicy extends
 	 */
 	protected boolean checkEdge(GraphEdge edge) {
 		if (edge.getSemanticModel() instanceof SimpleSemanticModelElement) {
-			return CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED
-					.equals(((SimpleSemanticModelElement) edge
-							.getSemanticModel()).getTypeInfo());
+			return CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED.equals(((SimpleSemanticModelElement) edge.getSemanticModel()).getTypeInfo());
 		}
 		return false;
 	}
@@ -76,20 +72,17 @@ public class isCommentedEdgeCreationEditPolicy extends
 	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#checkTargetForSource(org.topcased.modeler.di.model.GraphElement, org.topcased.modeler.di.model.GraphElement)
 	 * @generated
 	 */
-	protected boolean checkTargetForSource(GraphElement source,
-			GraphElement target) {
+	protected boolean checkTargetForSource(GraphElement source, GraphElement target) {
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 
-		if (sourceObject instanceof com.bluexml.side.clazz.Clazz
-				&& targetObject instanceof com.bluexml.side.clazz.ClassComment) {
+		if (sourceObject instanceof com.bluexml.side.clazz.Clazz && targetObject instanceof com.bluexml.side.clazz.ClassComment) {
 			if (!sourceObject.equals(targetObject)) {
 				return true;
 			}
 		}
 
-		if (sourceObject instanceof com.bluexml.side.clazz.Association
-				&& targetObject instanceof com.bluexml.side.clazz.ClassComment) {
+		if (sourceObject instanceof com.bluexml.side.clazz.Association && targetObject instanceof com.bluexml.side.clazz.ClassComment) {
 			if (!sourceObject.equals(targetObject)) {
 				return true;
 			}
@@ -109,20 +102,15 @@ public class isCommentedEdgeCreationEditPolicy extends
 	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#getSourceTargetData(org.topcased.modeler.di.model.GraphElement, org.topcased.modeler.di.model.GraphElement)
 	 * @generated
 	 */
-	protected SourceTargetData getSourceTargetData(GraphElement source,
-			GraphElement target) {
+	protected SourceTargetData getSourceTargetData(GraphElement source, GraphElement target) {
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 
-		if (sourceObject instanceof com.bluexml.side.clazz.Clazz
-				&& targetObject instanceof com.bluexml.side.clazz.ClassComment) {
-			return new SourceTargetData(false, false, SourceTargetData.NONE,
-					null, null, null, null, null, "hasComments", null, null);
+		if (sourceObject instanceof com.bluexml.side.clazz.Clazz && targetObject instanceof com.bluexml.side.clazz.ClassComment) {
+			return new SourceTargetData(false, false, SourceTargetData.NONE, null, null, null, null, null, "hasComments", null, null);
 		}
-		if (sourceObject instanceof com.bluexml.side.clazz.Association
-				&& targetObject instanceof com.bluexml.side.clazz.ClassComment) {
-			return new SourceTargetData(false, false, SourceTargetData.NONE,
-					null, null, null, null, null, "hasComments", null, null);
+		if (sourceObject instanceof com.bluexml.side.clazz.Association && targetObject instanceof com.bluexml.side.clazz.ClassComment) {
+			return new SourceTargetData(false, false, SourceTargetData.NONE, null, null, null, null, null, "hasComments", null, null);
 		}
 		return null;
 	}

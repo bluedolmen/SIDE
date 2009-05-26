@@ -295,6 +295,12 @@ public class ClazzValidator extends EObjectValidator {
 				return validateTitledNamedClassModelElement((TitledNamedClassModelElement)value, diagnostics, context);
 			case ClazzPackage.CLASS_COMMENT:
 				return validateClassComment((ClassComment)value, diagnostics, context);
+			case ClazzPackage.ASSOCIATION_END:
+				return validateAssociationEnd((AssociationEnd)value, diagnostics, context);
+			case ClazzPackage.FIRST_END:
+				return validateFirstEnd((FirstEnd)value, diagnostics, context);
+			case ClazzPackage.SECOND_END:
+				return validateSecondEnd((SecondEnd)value, diagnostics, context);
 			case ClazzPackage.ASSOCIATION_TYPE:
 				return validateAssociationType((AssociationType)value, diagnostics, context);
 			case ClazzPackage.ATTRIBUTE_TYPE:
@@ -1281,6 +1287,33 @@ public class ClazzValidator extends EObjectValidator {
 	 */
 	public boolean validateClassComment(ClassComment classComment, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(classComment, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAssociationEnd(AssociationEnd associationEnd, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(associationEnd, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateFirstEnd(FirstEnd firstEnd, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(firstEnd, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateSecondEnd(SecondEnd secondEnd, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(secondEnd, diagnostics, context);
 	}
 
 	/**

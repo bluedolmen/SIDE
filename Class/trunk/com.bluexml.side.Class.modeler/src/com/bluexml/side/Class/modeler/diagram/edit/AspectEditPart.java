@@ -45,7 +45,6 @@ import com.bluexml.side.Class.modeler.diagram.commands.update.AspectUpdateComman
 import com.bluexml.side.Class.modeler.diagram.dialogs.AspectEditDialog;
 import com.bluexml.side.Class.modeler.diagram.figures.AspectFigure;
 import com.bluexml.side.Class.modeler.diagram.policies.AspectLayoutEditPolicy;
-import com.bluexml.side.Class.modeler.diagram.policies.AssociationEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.hasAspectEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.includeEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.preferences.CdDiagramPreferenceConstants;
@@ -75,35 +74,22 @@ public class AspectEditPart extends EMFGraphNodeEditPart {
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(CdEditPolicyConstants.ASSOCIATION_EDITPOLICY,
-				new AssociationEdgeCreationEditPolicy());
+		installEditPolicy(CdEditPolicyConstants.INCLUDE_EDITPOLICY, new includeEdgeCreationEditPolicy());
 
-		installEditPolicy(CdEditPolicyConstants.INCLUDE_EDITPOLICY,
-				new includeEdgeCreationEditPolicy());
+		installEditPolicy(CdEditPolicyConstants.HASASPECT_EDITPOLICY, new hasAspectEdgeCreationEditPolicy());
 
-		installEditPolicy(CdEditPolicyConstants.HASASPECT_EDITPOLICY,
-				new hasAspectEdgeCreationEditPolicy());
+		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY, new RestoreEditPolicy() {
+			protected Command getRestoreConnectionsCommand(RestoreConnectionsRequest request) {
+				return new AspectRestoreConnectionCommand(getHost());
+			}
+		});
 
-		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
-				new RestoreEditPolicy() {
-					protected Command getRestoreConnectionsCommand(
-							RestoreConnectionsRequest request) {
-						return new AspectRestoreConnectionCommand(getHost());
-					}
-				});
+		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY, new ResizableEditPolicy());
 
-		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY,
-				new ResizableEditPolicy());
-
-		installEditPolicy(
-				ModelerEditPolicyConstants.CHANGE_BACKGROUND_COLOR_EDITPOLICY,
-				null);
-		installEditPolicy(
-				ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY,
-				null);
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_BACKGROUND_COLOR_EDITPOLICY, null);
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY, null);
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, new AspectLayoutEditPolicy());
-		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
-				new LabelDirectEditPolicy());
+		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new LabelDirectEditPolicy());
 	}
 
 	/**
@@ -115,14 +101,12 @@ public class AspectEditPart extends EMFGraphNodeEditPart {
 
 		CdConfiguration config = new CdConfiguration();
 
-		GraphNode attributesListNode = (GraphNode) getGraphNode()
-				.getContained().get(0);
+		GraphNode attributesListNode = (GraphNode) getGraphNode().getContained().get(0);
 		EList attributesList = attributesListNode.getContained();
 		while (attributesList.size() > 0)
 			attributesList.remove(0);
 		for (Object o : object.getAttributes()) {
-			GraphElement elt = config.getCreationUtils().createGraphElement(
-					(EObject) o);
+			GraphElement elt = config.getCreationUtils().createGraphElement((EObject) o);
 			attributesList.add(elt);
 		}
 
@@ -136,8 +120,7 @@ public class AspectEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultBackgroundColor() {
-		String backgroundColor = getPreferenceStore().getString(
-				CdDiagramPreferenceConstants.ASPECT_DEFAULT_BACKGROUND_COLOR);
+		String backgroundColor = getPreferenceStore().getString(CdDiagramPreferenceConstants.ASPECT_DEFAULT_BACKGROUND_COLOR);
 		if (backgroundColor.length() != 0) {
 			return Utils.getColor(backgroundColor);
 		}
@@ -149,8 +132,7 @@ public class AspectEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultForegroundColor() {
-		String foregroundColor = getPreferenceStore().getString(
-				CdDiagramPreferenceConstants.ASPECT_DEFAULT_FOREGROUND_COLOR);
+		String foregroundColor = getPreferenceStore().getString(CdDiagramPreferenceConstants.ASPECT_DEFAULT_FOREGROUND_COLOR);
 		if (foregroundColor.length() != 0) {
 			return Utils.getColor(foregroundColor);
 		}
@@ -162,8 +144,7 @@ public class AspectEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Font getPreferenceDefaultFont() {
-		String preferenceFont = getPreferenceStore().getString(
-				CdDiagramPreferenceConstants.ASPECT_DEFAULT_FONT);
+		String preferenceFont = getPreferenceStore().getString(CdDiagramPreferenceConstants.ASPECT_DEFAULT_FONT);
 		if (preferenceFont.length() != 0) {
 			return Utils.getFont(new FontData(preferenceFont));
 		}
@@ -203,11 +184,9 @@ public class AspectEditPart extends EMFGraphNodeEditPart {
 		if (request.getType() == RequestConstants.REQ_OPEN) {
 			Aspect object = (Aspect) Utils.getElement(getGraphNode());
 
-			AspectEditDialog dlg = new AspectEditDialog(object, ModelerPlugin
-					.getActiveWorkbenchShell());
+			AspectEditDialog dlg = new AspectEditDialog(object, ModelerPlugin.getActiveWorkbenchShell());
 			if (dlg.open() == Window.OK) {
-				AspectUpdateCommand command = new AspectUpdateCommand(object,
-						dlg.getData());
+				AspectUpdateCommand command = new AspectUpdateCommand(object, dlg.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
 
 				refresh();

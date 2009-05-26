@@ -57,8 +57,7 @@ public class ClazzFigure extends org.topcased.draw2d.figures.ClassFigure {
 		setBorder(new CompoundBorder(new LineBorder(), new MarginBorder(1)));
 		setOpaque(true);
 
-		setLabel(new ComposedLabel(new Label(), new EditableLabel(),
-				new Label(), false));
+		setLabel(new ComposedLabel(new Label(), new EditableLabel(), new Label(), false));
 		add(getLabel());
 
 		if (fig == null)

@@ -195,39 +195,39 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 			associationDescription = new String();
 		
 		associationKind = association.getAssociationType();
-		associationRoleSrc = association.getRoleSrc();
-		associationRoleTarget = association.getRoleTarget();
+		associationRoleSrc = association.getFirstEnd().getName();
+		associationRoleTarget = association.getSecondEnd().getName();
 		
-		associationRoleSrcTitle = association.getRoleSrcTitle();
-		associationRoleTargetTitle = association.getRoleTargetTitle();
+		associationRoleSrcTitle = association.getFirstEnd().getTitle();
+		associationRoleTargetTitle = association.getSecondEnd().getTitle();
 
-		firstEndIsNavigable = association.isIsNavigableSRC();
-		firstEndLowerBound = association.getMinSRC();
-		firstEndUpperBound = association.getMaxSRC();
+		firstEndIsNavigable = association.getFirstEnd().isIsNavigable();
+		firstEndLowerBound = association.getFirstEnd().getCardMin();
+		firstEndUpperBound = association.getFirstEnd().getCardMax();
 		if (firstEndLowerBound == null)
 			firstEndLowerBound = "0";
 		if (firstEndUpperBound == null)
 			firstEndUpperBound = "0";
 		if (firstEndUpperBound.equals("-1"))
 			firstEndUpperBound = "*";
-		if (association.getSource() instanceof Clazz)
-			firstEndClass = ((Clazz)association.getSource()).getName();
-		if (association.getSource() instanceof Aspect)
-			firstEndClass = ((Aspect)association.getSource()).getName();
+		if (association.getFirstEnd().getLinkedClass() instanceof Clazz)
+			firstEndClass = ((Clazz)association.getFirstEnd().getLinkedClass()).getName();
+		if (association.getFirstEnd().getLinkedClass() instanceof Aspect)
+			firstEndClass = ((Aspect)association.getFirstEnd().getLinkedClass()).getName();
 		
-		secondEndIsNavigable = association.isIsNavigableTARGET();
-		secondEndLowerBound = association.getMinTARGET();
-		secondEndUpperBound = association.getMaxTARGET();
+		secondEndIsNavigable = association.getSecondEnd().isIsNavigable();
+		secondEndLowerBound = association.getSecondEnd().getCardMin();
+		secondEndUpperBound = association.getSecondEnd().getCardMax();
 		if (secondEndLowerBound == null)
 			secondEndLowerBound = "0";
 		if (secondEndUpperBound == null)
 			secondEndUpperBound = "0";
 		if (secondEndUpperBound.equals("-1"))
 			secondEndUpperBound = "*";
-		if (association.getDestination() instanceof Clazz)
-			secondEndClass = ((Clazz)association.getDestination()).getName();
-		if (association.getDestination() instanceof Aspect)
-			secondEndClass = ((Aspect)association.getDestination()).getName();
+		if (association.getSecondEnd().getLinkedClass() instanceof Clazz)
+			secondEndClass = ((Clazz)association.getSecondEnd().getLinkedClass()).getName();
+		if (association.getSecondEnd().getLinkedClass() instanceof Aspect)
+			secondEndClass = ((Aspect)association.getSecondEnd().getLinkedClass()).getName();
 	}
 
 	/**

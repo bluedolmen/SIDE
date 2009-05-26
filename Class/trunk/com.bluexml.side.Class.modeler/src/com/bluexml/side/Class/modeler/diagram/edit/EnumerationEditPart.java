@@ -79,31 +79,20 @@ public class EnumerationEditPart extends EMFGraphNodeEditPart {
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(CdEditPolicyConstants.DEPENDS_EDITPOLICY,
-				new dependsEdgeCreationEditPolicy());
+		installEditPolicy(CdEditPolicyConstants.DEPENDS_EDITPOLICY, new dependsEdgeCreationEditPolicy());
 
-		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
-				new RestoreEditPolicy() {
-					protected Command getRestoreConnectionsCommand(
-							RestoreConnectionsRequest request) {
-						return new EnumerationRestoreConnectionCommand(
-								getHost());
-					}
-				});
+		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY, new RestoreEditPolicy() {
+			protected Command getRestoreConnectionsCommand(RestoreConnectionsRequest request) {
+				return new EnumerationRestoreConnectionCommand(getHost());
+			}
+		});
 
-		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY,
-				new ResizableEditPolicy());
+		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY, new ResizableEditPolicy());
 
-		installEditPolicy(
-				ModelerEditPolicyConstants.CHANGE_BACKGROUND_COLOR_EDITPOLICY,
-				null);
-		installEditPolicy(
-				ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY,
-				null);
-		installEditPolicy(EditPolicy.LAYOUT_ROLE,
-				new EnumerationLayoutEditPolicy());
-		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
-				new LabelDirectEditPolicy());
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_BACKGROUND_COLOR_EDITPOLICY, null);
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY, null);
+		installEditPolicy(EditPolicy.LAYOUT_ROLE, new EnumerationLayoutEditPolicy());
+		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new LabelDirectEditPolicy());
 	}
 
 	/**
@@ -120,9 +109,7 @@ public class EnumerationEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultBackgroundColor() {
-		String backgroundColor = getPreferenceStore()
-				.getString(
-						CdDiagramPreferenceConstants.ENUMERATION_DEFAULT_BACKGROUND_COLOR);
+		String backgroundColor = getPreferenceStore().getString(CdDiagramPreferenceConstants.ENUMERATION_DEFAULT_BACKGROUND_COLOR);
 		if (backgroundColor.length() != 0) {
 			return Utils.getColor(backgroundColor);
 		}
@@ -134,9 +121,7 @@ public class EnumerationEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultForegroundColor() {
-		String foregroundColor = getPreferenceStore()
-				.getString(
-						CdDiagramPreferenceConstants.ENUMERATION_DEFAULT_FOREGROUND_COLOR);
+		String foregroundColor = getPreferenceStore().getString(CdDiagramPreferenceConstants.ENUMERATION_DEFAULT_FOREGROUND_COLOR);
 		if (foregroundColor.length() != 0) {
 			return Utils.getColor(foregroundColor);
 		}
@@ -148,8 +133,7 @@ public class EnumerationEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Font getPreferenceDefaultFont() {
-		String preferenceFont = getPreferenceStore().getString(
-				CdDiagramPreferenceConstants.ENUMERATION_DEFAULT_FONT);
+		String preferenceFont = getPreferenceStore().getString(CdDiagramPreferenceConstants.ENUMERATION_DEFAULT_FONT);
 		if (preferenceFont.length() != 0) {
 			return Utils.getFont(new FontData(preferenceFont));
 		}
@@ -162,22 +146,18 @@ public class EnumerationEditPart extends EMFGraphNodeEditPart {
 		if (request.getType() == RequestConstants.REQ_OPEN) {
 			Enumeration object = (Enumeration) Utils.getElement(getGraphNode());
 
-			EnumerationEditDialog dlg = new EnumerationEditDialog(object,
-					ModelerPlugin.getActiveWorkbenchShell());
+			EnumerationEditDialog dlg = new EnumerationEditDialog(object, ModelerPlugin.getActiveWorkbenchShell());
 			if (dlg.open() == Window.OK) {
-				EnumerationUpdateCommand command = new EnumerationUpdateCommand(
-						object, dlg.getData());
+				EnumerationUpdateCommand command = new EnumerationUpdateCommand(object, dlg.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
 
 				CdConfiguration config = new CdConfiguration();
-				GraphNode literalsListNode = (GraphNode) getGraphNode()
-						.getContained().get(0);
+				GraphNode literalsListNode = (GraphNode) getGraphNode().getContained().get(0);
 				EList literals = literalsListNode.getContained();
 				while (literals.size() > 0)
 					literals.remove(0);
 				for (Object o : object.getLiterals()) {
-					GraphElement elt = config.getCreationUtils()
-							.createGraphElement((EObject) o);
+					GraphElement elt = config.getCreationUtils().createGraphElement((EObject) o);
 					literals.add(elt);
 				}
 			}

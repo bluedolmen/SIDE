@@ -65,10 +65,8 @@ public class CdEditPartFactory extends ModelerEditPartFactory {
 			final GraphNode node = (GraphNode) model;
 			EObject element = Utils.getElement(node);
 			if (element != null) {
-				if ("http://www.kerblue.org/class/1.0".equals(element.eClass()
-						.getEPackage().getNsURI())) {
-					return (EditPart) new NodeClazzSwitch(node)
-							.doSwitch(element);
+				if ("http://www.kerblue.org/class/1.0".equals(element.eClass().getEPackage().getNsURI())) {
+					return (EditPart) new NodeClazzSwitch(node).doSwitch(element);
 				}
 			}
 
@@ -79,53 +77,35 @@ public class CdEditPartFactory extends ModelerEditPartFactory {
 			final GraphEdge edge = (GraphEdge) model;
 			EObject element = Utils.getElement(edge);
 			if (element != null) {
-				if ("http://www.kerblue.org/class/1.0".equals(element.eClass()
-						.getEPackage().getNsURI())) {
-					return (EditPart) new EdgeClazzSwitch(edge)
-							.doSwitch(element);
+				if ("http://www.kerblue.org/class/1.0".equals(element.eClass().getEPackage().getNsURI())) {
+					return (EditPart) new EdgeClazzSwitch(edge).doSwitch(element);
 				}
 			}
 
 			if (edge.getSemanticModel() instanceof SimpleSemanticModelElement) {
 				// Manage the Element that are not associated with a model object
-				if (CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED
-						.equals(((SimpleSemanticModelElement) edge
-								.getSemanticModel()).getTypeInfo())) {
+				if (CdSimpleObjectConstants.SIMPLE_OBJECT_ISCOMMENTED.equals(((SimpleSemanticModelElement) edge.getSemanticModel()).getTypeInfo())) {
 					return new isCommentedEditPart(edge);
 				}
-				if (CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED
-						.equals(((SimpleSemanticModelElement) edge
-								.getSemanticModel()).getTypeInfo())) {
+				if (CdSimpleObjectConstants.SIMPLE_OBJECT_ISSTEREOTYPED.equals(((SimpleSemanticModelElement) edge.getSemanticModel()).getTypeInfo())) {
 					return new isStereotypedEditPart(edge);
 				}
-				if (CdSimpleObjectConstants.SIMPLE_OBJECT_ISASSOCIATIONCLASS
-						.equals(((SimpleSemanticModelElement) edge
-								.getSemanticModel()).getTypeInfo())) {
+				if (CdSimpleObjectConstants.SIMPLE_OBJECT_ISASSOCIATIONCLASS.equals(((SimpleSemanticModelElement) edge.getSemanticModel()).getTypeInfo())) {
 					return new isAssociationClassEditPart(edge);
 				}
-				if (CdSimpleObjectConstants.SIMPLE_OBJECT_INCLUDE
-						.equals(((SimpleSemanticModelElement) edge
-								.getSemanticModel()).getTypeInfo())) {
+				if (CdSimpleObjectConstants.SIMPLE_OBJECT_INCLUDE.equals(((SimpleSemanticModelElement) edge.getSemanticModel()).getTypeInfo())) {
 					return new includeEditPart(edge);
 				}
-				if (CdSimpleObjectConstants.SIMPLE_OBJECT_HASVIEW
-						.equals(((SimpleSemanticModelElement) edge
-								.getSemanticModel()).getTypeInfo())) {
+				if (CdSimpleObjectConstants.SIMPLE_OBJECT_HASVIEW.equals(((SimpleSemanticModelElement) edge.getSemanticModel()).getTypeInfo())) {
 					return new hasViewEditPart(edge);
 				}
-				if (CdSimpleObjectConstants.SIMPLE_OBJECT_GENERALIZATION
-						.equals(((SimpleSemanticModelElement) edge
-								.getSemanticModel()).getTypeInfo())) {
+				if (CdSimpleObjectConstants.SIMPLE_OBJECT_GENERALIZATION.equals(((SimpleSemanticModelElement) edge.getSemanticModel()).getTypeInfo())) {
 					return new GeneralizationEditPart(edge);
 				}
-				if (CdSimpleObjectConstants.SIMPLE_OBJECT_HASASPECT
-						.equals(((SimpleSemanticModelElement) edge
-								.getSemanticModel()).getTypeInfo())) {
+				if (CdSimpleObjectConstants.SIMPLE_OBJECT_HASASPECT.equals(((SimpleSemanticModelElement) edge.getSemanticModel()).getTypeInfo())) {
 					return new hasAspectEditPart(edge);
 				}
-				if (CdSimpleObjectConstants.SIMPLE_OBJECT_DEPENDS
-						.equals(((SimpleSemanticModelElement) edge
-								.getSemanticModel()).getTypeInfo())) {
+				if (CdSimpleObjectConstants.SIMPLE_OBJECT_DEPENDS.equals(((SimpleSemanticModelElement) edge.getSemanticModel()).getTypeInfo())) {
 					return new dependsEditPart(edge);
 				}
 			}
@@ -158,12 +138,10 @@ public class CdEditPartFactory extends ModelerEditPartFactory {
 		 * @generated
 		 */
 		public Object caseClazz(com.bluexml.side.clazz.Clazz object) {
-			String feature = DIUtils.getPropertyValue(node,
-					ModelerPropertyConstants.ESTRUCTURAL_FEATURE_ID);
+			String feature = DIUtils.getPropertyValue(node, ModelerPropertyConstants.ESTRUCTURAL_FEATURE_ID);
 			if (!"".equals(feature)) {
 				int featureID = Integer.parseInt(feature);
-				return new EListEditPart(node, object.eClass()
-						.getEStructuralFeature(featureID));
+				return new EListEditPart(node, object.eClass().getEStructuralFeature(featureID));
 			} else {
 				return new ClazzEditPart(node);
 			}
@@ -174,12 +152,10 @@ public class CdEditPartFactory extends ModelerEditPartFactory {
 		 * @generated
 		 */
 		public Object caseAspect(com.bluexml.side.clazz.Aspect object) {
-			String feature = DIUtils.getPropertyValue(node,
-					ModelerPropertyConstants.ESTRUCTURAL_FEATURE_ID);
+			String feature = DIUtils.getPropertyValue(node, ModelerPropertyConstants.ESTRUCTURAL_FEATURE_ID);
 			if (!"".equals(feature)) {
 				int featureID = Integer.parseInt(feature);
-				return new EListEditPart(node, object.eClass()
-						.getEStructuralFeature(featureID));
+				return new EListEditPart(node, object.eClass().getEStructuralFeature(featureID));
 			} else {
 				return new AspectEditPart(node);
 			}
@@ -205,8 +181,7 @@ public class CdEditPartFactory extends ModelerEditPartFactory {
 		 * @see com.bluexml.side.clazz.util.ClazzSwitch#caseClassComment(com.bluexml.side.clazz.ClassComment)
 		 * @generated
 		 */
-		public Object caseClassComment(
-				com.bluexml.side.clazz.ClassComment object) {
+		public Object caseClassComment(com.bluexml.side.clazz.ClassComment object) {
 			return new ClassCommentEditPart(node);
 		}
 
@@ -215,12 +190,10 @@ public class CdEditPartFactory extends ModelerEditPartFactory {
 		 * @generated
 		 */
 		public Object caseEnumeration(com.bluexml.side.clazz.Enumeration object) {
-			String feature = DIUtils.getPropertyValue(node,
-					ModelerPropertyConstants.ESTRUCTURAL_FEATURE_ID);
+			String feature = DIUtils.getPropertyValue(node, ModelerPropertyConstants.ESTRUCTURAL_FEATURE_ID);
 			if (!"".equals(feature)) {
 				int featureID = Integer.parseInt(feature);
-				return new EListEditPart(node, object.eClass()
-						.getEStructuralFeature(featureID));
+				return new EListEditPart(node, object.eClass().getEStructuralFeature(featureID));
 			} else {
 				return new EnumerationEditPart(node);
 			}
@@ -230,8 +203,7 @@ public class CdEditPartFactory extends ModelerEditPartFactory {
 		 * @see com.bluexml.side.clazz.util.ClazzSwitch#caseEnumerationLiteral(com.bluexml.side.clazz.EnumerationLiteral)
 		 * @generated
 		 */
-		public Object caseEnumerationLiteral(
-				com.bluexml.side.clazz.EnumerationLiteral object) {
+		public Object caseEnumerationLiteral(com.bluexml.side.clazz.EnumerationLiteral object) {
 			return new EnumerationLiteralEditPart(node);
 		}
 

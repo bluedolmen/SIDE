@@ -126,14 +126,14 @@
     </eOperations>
     <eOperations name="isSource" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="(asso.source = self and asso.isNavigableTARGET) or (asso.destination = self and asso.isNavigableSRC)"/>
+        <details key="body" value="(asso.firstEnd.linkedClass = self and asso.firstEnd.isNavigable) or (asso.secondEnd.linkedClass = self and asso.secondEnd.isNavigable)"/>
         <details key="description" value="search for class attributes, inherited one and finaly added to the class by aspect"/>
       </eAnnotations>
       <eParameters name="asso" lowerBound="1" eType="#//Association"/>
     </eOperations>
     <eOperations name="isTarget" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="(asso.source = self and asso.isNavigableSRC) or (asso.destination = self and asso.isNavigableTARGET)"/>
+        <details key="body" value="(asso.firstEnd.linkedClass = self and asso.isNavigable) or (asso.secondEnd.linkedClass = self and asso.isNavigable)"/>
         <details key="description" value="search for class attributes, inherited one and finaly added to the class by aspect"/>
       </eAnnotations>
       <eParameters name="asso" lowerBound="1" eType="#//Association"/>
@@ -195,27 +195,13 @@
       </eAnnotations>
       <eParameters name="other" eType="#//Association"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//AbstractClass"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="destination" eType="#//AbstractClass"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isNavigableSRC" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isNavigableTARGET" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minSRC" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="1"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxSRC" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="1"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minTARGET" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="1"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxTARGET" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="1"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="associationType" eType="#//AssociationType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="associationsClass" upperBound="-1"
         eType="#//Clazz"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="roleSrc" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="roleTarget" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral=""/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="roleSrcTitle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="roleTargetTitle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="firstEnd" eType="#//FirstEnd"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="secondEnd" eType="#//SecondEnd"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="#//TitledNamedClassModelElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="typ" eType="#//AttributeType"
@@ -387,4 +373,14 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassComment" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Comment"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AssociationEnd" abstract="true" eSuperTypes="#//TitledNamedClassModelElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardMin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardMax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isNavigable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="linkedClass" eType="#//AbstractClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FirstEnd" eSuperTypes="#//AssociationEnd"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SecondEnd" eSuperTypes="#//AssociationEnd"/>
 </ecore:EPackage>

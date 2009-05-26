@@ -76,23 +76,16 @@ public class AttributeEditPart extends EMFGraphNodeEditPart {
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
-				new RestoreEditPolicy() {
-					protected Command getRestoreConnectionsCommand(
-							RestoreConnectionsRequest request) {
-						return new AttributeRestoreConnectionCommand(getHost());
-					}
-				});
+		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY, new RestoreEditPolicy() {
+			protected Command getRestoreConnectionsCommand(RestoreConnectionsRequest request) {
+				return new AttributeRestoreConnectionCommand(getHost());
+			}
+		});
 
-		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY,
-				new ResizableEditPolicy());
+		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY, new ResizableEditPolicy());
 
-		installEditPolicy(
-				ModelerEditPolicyConstants.CHANGE_BACKGROUND_COLOR_EDITPOLICY,
-				null);
-		installEditPolicy(
-				ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY,
-				null);
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_BACKGROUND_COLOR_EDITPOLICY, null);
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY, null);
 	}
 
 	/**
@@ -109,9 +102,7 @@ public class AttributeEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultBackgroundColor() {
-		String backgroundColor = getPreferenceStore()
-				.getString(
-						CdDiagramPreferenceConstants.ATTRIBUTE_DEFAULT_BACKGROUND_COLOR);
+		String backgroundColor = getPreferenceStore().getString(CdDiagramPreferenceConstants.ATTRIBUTE_DEFAULT_BACKGROUND_COLOR);
 		if (backgroundColor.length() != 0) {
 			return Utils.getColor(backgroundColor);
 		}
@@ -123,9 +114,7 @@ public class AttributeEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultForegroundColor() {
-		String foregroundColor = getPreferenceStore()
-				.getString(
-						CdDiagramPreferenceConstants.ATTRIBUTE_DEFAULT_FOREGROUND_COLOR);
+		String foregroundColor = getPreferenceStore().getString(CdDiagramPreferenceConstants.ATTRIBUTE_DEFAULT_FOREGROUND_COLOR);
 		if (foregroundColor.length() != 0) {
 			return Utils.getColor(foregroundColor);
 		}
@@ -137,8 +126,7 @@ public class AttributeEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Font getPreferenceDefaultFont() {
-		String preferenceFont = getPreferenceStore().getString(
-				CdDiagramPreferenceConstants.ATTRIBUTE_DEFAULT_FONT);
+		String preferenceFont = getPreferenceStore().getString(CdDiagramPreferenceConstants.ATTRIBUTE_DEFAULT_FONT);
 		if (preferenceFont.length() != 0) {
 			return Utils.getFont(new FontData(preferenceFont));
 		}
@@ -169,9 +157,7 @@ public class AttributeEditPart extends EMFGraphNodeEditPart {
 		else if (attribute.getVisibility().equals(Visibility.PROTECTED))
 			visibility = "#";
 
-		fig.getLabel().setText(
-				visibility + attribute.getName() + " : " + attribute.getTyp()
-						+ enumeration);
+		fig.getLabel().setText(visibility + attribute.getName() + " : " + attribute.getTyp() + enumeration);
 		fig.getLabel().setOpaque(false);
 	}
 
@@ -197,11 +183,9 @@ public class AttributeEditPart extends EMFGraphNodeEditPart {
 		if (request.getType() == RequestConstants.REQ_OPEN) {
 			Attribute property = (Attribute) Utils.getElement(getGraphNode());
 
-			AttributeEditDialog propertyDlg = new AttributeEditDialog(property,
-					ModelerPlugin.getActiveWorkbenchShell());
+			AttributeEditDialog propertyDlg = new AttributeEditDialog(property, ModelerPlugin.getActiveWorkbenchShell());
 			if (propertyDlg.open() == Window.OK) {
-				AttributeUpdateCommand command = new AttributeUpdateCommand(
-						property, propertyDlg.getData());
+				AttributeUpdateCommand command = new AttributeUpdateCommand(property, propertyDlg.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
 			}
 		} else {

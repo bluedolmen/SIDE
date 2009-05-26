@@ -145,17 +145,17 @@ public class ClassDiagramUtils {
 			f.setLabel(ass.getName());
 		}
 		if (useSource) {
-			f.setReal_class((Clazz)ass.getSource());
+			f.setReal_class((Clazz)ass.getFirstEnd().getLinkedClass());
 		} else {
-			f.setReal_class((Clazz)ass.getDestination());
+			f.setReal_class((Clazz)ass.getSecondEnd().getLinkedClass());
 		}
 		
 		if (useSource) {
-			f.setMin_bound(Integer.parseInt(ass.getMinSRC()));
-			f.setMax_bound(Integer.parseInt(ass.getMaxSRC()));
+			f.setMin_bound(Integer.parseInt(ass.getFirstEnd().getCardMin()));
+			f.setMax_bound(Integer.parseInt(ass.getFirstEnd().getCardMax()));
 		} else {
-			f.setMin_bound(Integer.parseInt(ass.getMinTARGET()));
-			f.setMax_bound(Integer.parseInt(ass.getMaxTARGET()));
+			f.setMin_bound(Integer.parseInt(ass.getSecondEnd().getCardMin()));
+			f.setMax_bound(Integer.parseInt(ass.getSecondEnd().getCardMax()));
 		}
 		
 		// Association class
@@ -174,10 +174,10 @@ public class ClassDiagramUtils {
 	 */
 	public static String getAssociationName(Association ass, boolean useSource) {
 		String id = ass.getName();
-		if (useSource && ass.getRoleSrc().length() > 0) {
-			id += "." + ass.getRoleSrc();
-		} else if(ass.getRoleTarget().length() > 0) {
-			id += "." + ass.getRoleTarget();
+		if (useSource && ass.getFirstEnd().getName().length() > 0) {
+			id += "." + ass.getFirstEnd().getName();
+		} else if(ass.getSecondEnd().getName().length() > 0) {
+			id += "." + ass.getSecondEnd().getName();
 		}
 		return id;
 	}
@@ -376,10 +376,10 @@ public class ClassDiagramUtils {
 				}
 			}
 			for (Association ass : cl.getAssociations()) {
-				if (ass.getSource().equals(cl) && ass.isIsNavigableTARGET()) {
+				if (ass.getFirstEnd().getLinkedClass().equals(cl) && ass.getSecondEnd().isIsNavigable()) {
 					listChild.put(ClassDiagramUtils.getAssociationName(ass, false), ass);
 				}
-				if (ass.getDestination().equals(cl) && ass.isIsNavigableSRC()) {
+				if (ass.getSecondEnd().getLinkedClass().equals(cl) && ass.getFirstEnd().isIsNavigable()) {
 					listChild.put(ClassDiagramUtils.getAssociationName(ass, true), ass);
 				}
 			}

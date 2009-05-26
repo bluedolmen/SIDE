@@ -20,8 +20,7 @@ import org.eclipse.draw2d.RoundedRectangle;
 /**
  * @generated
  */
-public class StereotypeFigure extends
-		org.topcased.draw2d.figures.ContainerWithInnerLabel {
+public class StereotypeFigure extends org.topcased.draw2d.figures.ContainerWithInnerLabel {
 	/**
 	 * Constructor
 	 *

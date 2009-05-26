@@ -78,26 +78,18 @@ public class ViewEditPart extends EMFGraphNodeEditPart {
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(CdEditPolicyConstants.HASVIEW_EDITPOLICY,
-				new hasViewEdgeCreationEditPolicy());
+		installEditPolicy(CdEditPolicyConstants.HASVIEW_EDITPOLICY, new hasViewEdgeCreationEditPolicy());
 
-		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
-				new RestoreEditPolicy() {
-					protected Command getRestoreConnectionsCommand(
-							RestoreConnectionsRequest request) {
-						return new ViewRestoreConnectionCommand(getHost());
-					}
-				});
+		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY, new RestoreEditPolicy() {
+			protected Command getRestoreConnectionsCommand(RestoreConnectionsRequest request) {
+				return new ViewRestoreConnectionCommand(getHost());
+			}
+		});
 
-		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY,
-				new ResizableEditPolicy());
+		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY, new ResizableEditPolicy());
 
-		installEditPolicy(
-				ModelerEditPolicyConstants.CHANGE_BACKGROUND_COLOR_EDITPOLICY,
-				null);
-		installEditPolicy(
-				ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY,
-				null);
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_BACKGROUND_COLOR_EDITPOLICY, null);
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY, null);
 	}
 
 	/**
@@ -115,8 +107,7 @@ public class ViewEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultBackgroundColor() {
-		String backgroundColor = getPreferenceStore().getString(
-				CdDiagramPreferenceConstants.VIEW_DEFAULT_BACKGROUND_COLOR);
+		String backgroundColor = getPreferenceStore().getString(CdDiagramPreferenceConstants.VIEW_DEFAULT_BACKGROUND_COLOR);
 		if (backgroundColor.length() != 0) {
 			return Utils.getColor(backgroundColor);
 		}
@@ -128,8 +119,7 @@ public class ViewEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultForegroundColor() {
-		String foregroundColor = getPreferenceStore().getString(
-				CdDiagramPreferenceConstants.VIEW_DEFAULT_FOREGROUND_COLOR);
+		String foregroundColor = getPreferenceStore().getString(CdDiagramPreferenceConstants.VIEW_DEFAULT_FOREGROUND_COLOR);
 		if (foregroundColor.length() != 0) {
 			return Utils.getColor(foregroundColor);
 		}
@@ -141,8 +131,7 @@ public class ViewEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Font getPreferenceDefaultFont() {
-		String preferenceFont = getPreferenceStore().getString(
-				CdDiagramPreferenceConstants.VIEW_DEFAULT_FONT);
+		String preferenceFont = getPreferenceStore().getString(CdDiagramPreferenceConstants.VIEW_DEFAULT_FONT);
 		if (preferenceFont.length() != 0) {
 			return Utils.getFont(new FontData(preferenceFont));
 		}
@@ -190,24 +179,18 @@ public class ViewEditPart extends EMFGraphNodeEditPart {
 				if (association != null) {
 					ViewContainerType containertype = ViewContainerType.ASSOCIATION_TARGET;
 					ViewContainerType asso_classCT = ViewContainerType.ASSOCIATION_CLASS;
-					if (association != null
-							&& association.getSource().equals(
-									association.getDestination())) {
+					if (association != null && association.getFirstEnd().getLinkedClass().equals(association.getSecondEnd().getLinkedClass())) {
 						containertype = ViewContainerType.ASSOCIATION_RECUR;
 						asso_classCT = ViewContainerType.ASSOCIATION_CLASS_RECUR;
 					}
 					ViewContainerType viewContainerType;
-					if (association != null
-							&& association.getAssociationsClass().indexOf(
-									vi.getClasse()) != -1) {
+					if (association != null && association.getAssociationsClass().indexOf(vi.getClasse()) != -1) {
 						// attribute from associated classe
 						viewContainerType = asso_classCT;
 					} else {
 						viewContainerType = containertype;
 					}
-					viewItemName = AssociationHelper.getViewItemContainerName(
-							vi.getClasse(), vi.getAssociation(),
-							viewContainerType, vi.getRole());
+					viewItemName = AssociationHelper.getViewItemContainerName(vi.getClasse(), vi.getAssociation(), viewContainerType, vi.getRole());
 				} else {
 					if (containerName != null) {
 						viewItemName += containerName;
@@ -230,11 +213,9 @@ public class ViewEditPart extends EMFGraphNodeEditPart {
 		if (request.getType() == RequestConstants.REQ_OPEN) {
 			View view = (View) Utils.getElement(getGraphNode());
 
-			ViewEditDialog dlg = new ViewEditDialog(view, ModelerPlugin
-					.getActiveWorkbenchShell());
+			ViewEditDialog dlg = new ViewEditDialog(view, ModelerPlugin.getActiveWorkbenchShell());
 			if (dlg.open() == Window.OK) {
-				ViewUpdateCommand command = new ViewUpdateCommand(view, dlg
-						.getData());
+				ViewUpdateCommand command = new ViewUpdateCommand(view, dlg.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
 
 				refresh();

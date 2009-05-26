@@ -29,8 +29,7 @@ import com.bluexml.side.Class.modeler.ClazzPlugin;
  *
  * @generated
  */
-public class isAssociationClassPreferencePage extends
-		AbstractEdgePreferencePage {
+public class isAssociationClassPreferencePage extends AbstractEdgePreferencePage {
 	/**
 	 * @see org.topcased.modeler.preferences.AbstractEdgePreferencePage#getEdgeFont()
 	 * @generated

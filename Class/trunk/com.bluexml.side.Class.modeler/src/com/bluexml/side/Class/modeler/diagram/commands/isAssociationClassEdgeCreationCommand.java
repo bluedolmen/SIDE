@@ -24,8 +24,7 @@ import org.topcased.modeler.di.model.GraphElement;
  *
  * @generated
  */
-public class isAssociationClassEdgeCreationCommand extends
-		CreateTypedEdgeCommand {
+public class isAssociationClassEdgeCreationCommand extends CreateTypedEdgeCommand {
 
 	/**
 	 * @param domain the edit domain
@@ -33,8 +32,7 @@ public class isAssociationClassEdgeCreationCommand extends
 	 * @param src the graph element of the source
 	 * @generated
 	 */
-	public isAssociationClassEdgeCreationCommand(EditDomain domain,
-			GraphEdge newObj, GraphElement src) {
+	public isAssociationClassEdgeCreationCommand(EditDomain domain, GraphEdge newObj, GraphElement src) {
 		this(domain, newObj, src, true);
 	}
 
@@ -45,8 +43,7 @@ public class isAssociationClassEdgeCreationCommand extends
 	 * @param needModelUpdate set it to true if the model need to be updated
 	 * @generated
 	 */
-	public isAssociationClassEdgeCreationCommand(EditDomain domain,
-			GraphEdge newObj, GraphElement src, boolean needModelUpdate) {
+	public isAssociationClassEdgeCreationCommand(EditDomain domain, GraphEdge newObj, GraphElement src, boolean needModelUpdate) {
 		super(domain, newObj, src, needModelUpdate);
 	}
 

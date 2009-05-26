@@ -15,7 +15,6 @@ import com.bluexml.side.clazz.Operation;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormAspect;
 import com.bluexml.side.form.FormClass;
-import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormPackage;
@@ -90,14 +89,9 @@ public class ClassInitialization {
 				}
 				
 				// Associations :
-				for (Association ass : Clazz.getAssociations()) {
+				for (Association ass : Clazz.getAllSourceAssociations()) {
+					c.add(ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass,true));
 					
-					if (ass.getSource().equals(Clazz) && ass.isIsNavigableTARGET()) {
-						c.add(ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass,false));
-					}
-					if (ass.getDestination().equals(Clazz) && ass.isIsNavigableSRC()) {
-						c.add(ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass,true));
-					}
 				}
 				
 				// Operations :

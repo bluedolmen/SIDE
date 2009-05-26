@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -23,6 +24,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.clazz.Association;
+import com.bluexml.side.clazz.ClazzFactory;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.common.CommonPackage;
 
@@ -61,198 +63,10 @@ public class AssociationItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSourcePropertyDescriptor(object);
-			addDestinationPropertyDescriptor(object);
-			addIsNavigableSRCPropertyDescriptor(object);
-			addIsNavigableTARGETPropertyDescriptor(object);
-			addMinSRCPropertyDescriptor(object);
-			addMaxSRCPropertyDescriptor(object);
-			addMinTARGETPropertyDescriptor(object);
-			addMaxTARGETPropertyDescriptor(object);
 			addAssociationTypePropertyDescriptor(object);
 			addAssociationsClassPropertyDescriptor(object);
-			addRoleSrcPropertyDescriptor(object);
-			addRoleTargetPropertyDescriptor(object);
-			addRoleSrcTitlePropertyDescriptor(object);
-			addRoleTargetTitlePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Source feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSourcePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Association_source_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Association_source_feature", "_UI_Association_type"),
-				 ClazzPackage.Literals.ASSOCIATION__SOURCE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Destination feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDestinationPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Association_destination_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Association_destination_feature", "_UI_Association_type"),
-				 ClazzPackage.Literals.ASSOCIATION__DESTINATION,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Is Navigable SRC feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addIsNavigableSRCPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Association_isNavigableSRC_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Association_isNavigableSRC_feature", "_UI_Association_type"),
-				 ClazzPackage.Literals.ASSOCIATION__IS_NAVIGABLE_SRC,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Is Navigable TARGET feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addIsNavigableTARGETPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Association_isNavigableTARGET_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Association_isNavigableTARGET_feature", "_UI_Association_type"),
-				 ClazzPackage.Literals.ASSOCIATION__IS_NAVIGABLE_TARGET,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Min SRC feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addMinSRCPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Association_minSRC_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Association_minSRC_feature", "_UI_Association_type"),
-				 ClazzPackage.Literals.ASSOCIATION__MIN_SRC,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Max SRC feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addMaxSRCPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Association_maxSRC_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Association_maxSRC_feature", "_UI_Association_type"),
-				 ClazzPackage.Literals.ASSOCIATION__MAX_SRC,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Min TARGET feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addMinTARGETPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Association_minTARGET_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Association_minTARGET_feature", "_UI_Association_type"),
-				 ClazzPackage.Literals.ASSOCIATION__MIN_TARGET,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Max TARGET feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addMaxTARGETPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Association_maxTARGET_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Association_maxTARGET_feature", "_UI_Association_type"),
-				 ClazzPackage.Literals.ASSOCIATION__MAX_TARGET,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -300,91 +114,34 @@ public class AssociationItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Role Src feature.
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addRoleSrcPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Association_roleSrc_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Association_roleSrc_feature", "_UI_Association_type"),
-				 ClazzPackage.Literals.ASSOCIATION__ROLE_SRC,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(ClazzPackage.Literals.ASSOCIATION__FIRST_END);
+			childrenFeatures.add(ClazzPackage.Literals.ASSOCIATION__SECOND_END);
+		}
+		return childrenFeatures;
 	}
 
 	/**
-	 * This adds a property descriptor for the Role Target feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addRoleTargetPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Association_roleTarget_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Association_roleTarget_feature", "_UI_Association_type"),
-				 ClazzPackage.Literals.ASSOCIATION__ROLE_TARGET,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
 
-	/**
-	 * This adds a property descriptor for the Role Src Title feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addRoleSrcTitlePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Association_roleSrcTitle_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Association_roleSrcTitle_feature", "_UI_Association_type"),
-				 ClazzPackage.Literals.ASSOCIATION__ROLE_SRC_TITLE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Role Target Title feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addRoleTargetTitlePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Association_roleTargetTitle_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Association_roleTargetTitle_feature", "_UI_Association_type"),
-				 ClazzPackage.Literals.ASSOCIATION__ROLE_TARGET_TITLE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+		return super.getChildFeature(object, child);
 	}
 
 	/**
@@ -424,18 +181,12 @@ public class AssociationItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Association.class)) {
-			case ClazzPackage.ASSOCIATION__IS_NAVIGABLE_SRC:
-			case ClazzPackage.ASSOCIATION__IS_NAVIGABLE_TARGET:
-			case ClazzPackage.ASSOCIATION__MIN_SRC:
-			case ClazzPackage.ASSOCIATION__MAX_SRC:
-			case ClazzPackage.ASSOCIATION__MIN_TARGET:
-			case ClazzPackage.ASSOCIATION__MAX_TARGET:
 			case ClazzPackage.ASSOCIATION__ASSOCIATION_TYPE:
-			case ClazzPackage.ASSOCIATION__ROLE_SRC:
-			case ClazzPackage.ASSOCIATION__ROLE_TARGET:
-			case ClazzPackage.ASSOCIATION__ROLE_SRC_TITLE:
-			case ClazzPackage.ASSOCIATION__ROLE_TARGET_TITLE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case ClazzPackage.ASSOCIATION__FIRST_END:
+			case ClazzPackage.ASSOCIATION__SECOND_END:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -451,6 +202,16 @@ public class AssociationItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ClazzPackage.Literals.ASSOCIATION__FIRST_END,
+				 ClazzFactory.eINSTANCE.createFirstEnd()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ClazzPackage.Literals.ASSOCIATION__SECOND_END,
+				 ClazzFactory.eINSTANCE.createSecondEnd()));
 	}
 
 	/**

@@ -24,8 +24,7 @@ import org.topcased.draw2d.figures.Label;
 /**
  * @generated
  */
-public class ClassCommentFigure extends
-		org.topcased.draw2d.figures.ContainerWithInnerLabel {
+public class ClassCommentFigure extends org.topcased.draw2d.figures.ContainerWithInnerLabel {
 	/**
 	 * Constructor
 	 *
@@ -37,8 +36,7 @@ public class ClassCommentFigure extends
 
 	@Override
 	protected ILabel createLabel() {
-		return new ComposedLabel(new Label(), new EditableLabel(), new Label(),
-				false);
+		return new ComposedLabel(new Label(), new EditableLabel(), new Label(), false);
 	}
 
 	@Override

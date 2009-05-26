@@ -87,20 +87,10 @@
       <genOperations ecoreOperation="Class.ecore#//Clazz/isClassAssociationsIn"/>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//Association">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//Association/source"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//Association/destination"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/isNavigableSRC"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/isNavigableTARGET"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/minSRC"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/maxSRC"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/minTARGET"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/maxTARGET"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/associationType"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//Association/associationsClass"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/roleSrc"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/roleTarget"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/roleSrcTitle"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/roleTargetTitle"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//Association/firstEnd"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//Association/secondEnd"/>
       <genOperations ecoreOperation="Class.ecore#//Association/equalsForMerge">
         <genParameters ecoreParameter="Class.ecore#//Association/equalsForMerge/other"/>
       </genOperations>
@@ -187,5 +177,13 @@
       <genOperations ecoreOperation="Class.ecore#//TitledNamedClassModelElement/getLabel"/>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//ClassComment"/>
+    <genClasses image="false" ecoreClass="Class.ecore#//AssociationEnd">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//AssociationEnd/cardMin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//AssociationEnd/cardMax"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//AssociationEnd/isNavigable"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Class.ecore#//AssociationEnd/linkedClass"/>
+    </genClasses>
+    <genClasses ecoreClass="Class.ecore#//FirstEnd"/>
+    <genClasses ecoreClass="Class.ecore#//SecondEnd"/>
   </genPackages>
 </genmodel:GenModel>

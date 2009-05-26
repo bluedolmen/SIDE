@@ -20,6 +20,7 @@ import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.draw2d.PolylineDecoration;
 import org.eclipse.draw2d.RotatableDecoration;
 import org.eclipse.draw2d.geometry.PointList;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.RequestConstants;
 import org.eclipse.jface.window.Window;
@@ -29,7 +30,9 @@ import org.eclipse.swt.graphics.FontData;
 import org.topcased.draw2d.figures.Label;
 import org.topcased.modeler.ModelerColorConstants;
 import org.topcased.modeler.ModelerEditPolicyConstants;
+import org.topcased.modeler.di.model.GraphConnector;
 import org.topcased.modeler.di.model.GraphEdge;
+import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.edit.EMFGraphEdgeEditPart;
 import org.topcased.modeler.figures.EdgeObjectOffsetEditableLabel;
 import org.topcased.modeler.internal.ModelerPlugin;
@@ -43,8 +46,13 @@ import com.bluexml.side.Class.modeler.diagram.policies.isAssociationClassEdgeCre
 import com.bluexml.side.Class.modeler.diagram.policies.isCommentedEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.isStereotypedEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.preferences.CdDiagramPreferenceConstants;
+import com.bluexml.side.Class.modeler.diagram.utils.AssociationHelper;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.AssociationType;
+import com.bluexml.side.clazz.ClassPackage;
+import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.clazz.ClazzFactory;
+import com.bluexml.side.clazz.FirstEnd;
 
 /**
  * Association controller <br>
@@ -124,19 +132,13 @@ public class AssociationEditPart extends EMFGraphEdgeEditPart {
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(CdEditPolicyConstants.ISCOMMENTED_EDITPOLICY,
-				new isCommentedEdgeCreationEditPolicy());
-		installEditPolicy(CdEditPolicyConstants.ISSTEREOTYPED_EDITPOLICY,
-				new isStereotypedEdgeCreationEditPolicy());
-		installEditPolicy(CdEditPolicyConstants.ISASSOCIATIONCLASS_EDITPOLICY,
-				new isAssociationClassEdgeCreationEditPolicy());
+		installEditPolicy(CdEditPolicyConstants.ISCOMMENTED_EDITPOLICY, new isCommentedEdgeCreationEditPolicy());
+		installEditPolicy(CdEditPolicyConstants.ISSTEREOTYPED_EDITPOLICY, new isStereotypedEdgeCreationEditPolicy());
+		installEditPolicy(CdEditPolicyConstants.ISASSOCIATIONCLASS_EDITPOLICY, new isAssociationClassEdgeCreationEditPolicy());
 
-		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FONT_EDITPOLICY,
-				null);
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FONT_EDITPOLICY, null);
 
-		installEditPolicy(
-				ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY,
-				null);
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY, null);
 	}
 
 	/**
@@ -155,8 +157,7 @@ public class AssociationEditPart extends EMFGraphEdgeEditPart {
 	 * @generated
 	 */
 	protected String getPreferenceDefaultRouter() {
-		return getPreferenceStore().getString(
-				CdDiagramPreferenceConstants.ASSOCIATION_EDGE_DEFAULT_ROUTER);
+		return getPreferenceStore().getString(CdDiagramPreferenceConstants.ASSOCIATION_EDGE_DEFAULT_ROUTER);
 	}
 
 	/**
@@ -165,9 +166,7 @@ public class AssociationEditPart extends EMFGraphEdgeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultForegroundColor() {
-		String preferenceForeground = getPreferenceStore()
-				.getString(
-						CdDiagramPreferenceConstants.ASSOCIATION_EDGE_DEFAULT_FOREGROUND_COLOR);
+		String preferenceForeground = getPreferenceStore().getString(CdDiagramPreferenceConstants.ASSOCIATION_EDGE_DEFAULT_FOREGROUND_COLOR);
 		if (preferenceForeground.length() != 0) {
 			return Utils.getColor(preferenceForeground);
 		}
@@ -181,8 +180,7 @@ public class AssociationEditPart extends EMFGraphEdgeEditPart {
 	 * @generated
 	 */
 	protected Font getPreferenceDefaultFont() {
-		String preferenceFont = getPreferenceStore().getString(
-				CdDiagramPreferenceConstants.ASSOCIATION_EDGE_DEFAULT_FONT);
+		String preferenceFont = getPreferenceStore().getString(CdDiagramPreferenceConstants.ASSOCIATION_EDGE_DEFAULT_FONT);
 		if (preferenceFont.length() != 0) {
 			return Utils.getFont(new FontData(preferenceFont));
 		}
@@ -195,16 +193,13 @@ public class AssociationEditPart extends EMFGraphEdgeEditPart {
 	 * @see org.eclipse.gef.EditPart#performRequest(org.eclipse.gef.Request)
 	 */
 	public void performRequest(Request request) {
-		Association association = (Association) Utils
-				.getElement(getGraphEdge());
+		Association association = (Association) Utils.getElement(getGraphEdge());
 
 		if (request.getType() == RequestConstants.REQ_OPEN) {
 
-			AssociationEditDialog associationDlg = new AssociationEditDialog(
-					association, ModelerPlugin.getActiveWorkbenchShell());
+			AssociationEditDialog associationDlg = new AssociationEditDialog(association, ModelerPlugin.getActiveWorkbenchShell());
 			if (associationDlg.open() == Window.OK) {
-				AssociationUpdateCommand command = new AssociationUpdateCommand(
-						association, associationDlg.getAssociationData());
+				AssociationUpdateCommand command = new AssociationUpdateCommand(association, associationDlg.getAssociationData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
 				refreshEdgeObjects();
 			}
@@ -223,6 +218,12 @@ public class AssociationEditPart extends EMFGraphEdgeEditPart {
 
 		// Check whether the association has its two Properties set
 		if (((GraphEdge) getModel()).getAnchor().size() != 0) {
+			Association association = (Association) Utils.getElement(getGraphEdge());
+			if (association.getName() == null) {
+				association.setName("Association");
+			}
+			// create associationEnd objects
+			AssociationHelper.createAssociationsEnds(this, association);
 			updateSourceDecoration();
 			updateTargetDecoration();
 			updateSrcCountLabel();
@@ -240,12 +241,10 @@ public class AssociationEditPart extends EMFGraphEdgeEditPart {
 	 * @generated NOT
 	 */
 	private void updateSrcNameLabel() {
-		Label srcName = (Label) ((AssociationFigure) getFigure())
-				.getsrcNameEdgeObjectFigure();
+		Label srcName = (Label) ((AssociationFigure) getFigure()).getsrcNameEdgeObjectFigure();
 
-		Association association = (Association) Utils
-				.getElement(getGraphEdge());
-		srcName.setText(association.getRoleSrc());
+		Association association = (Association) Utils.getElement(getGraphEdge());
+		srcName.setText(association.getFirstEnd().getName());
 	}
 
 	/**
@@ -254,14 +253,16 @@ public class AssociationEditPart extends EMFGraphEdgeEditPart {
 	 * @generated NOT
 	 */
 	private void updateSrcCountLabel() {
-		Label srcCount = (Label) ((AssociationFigure) getFigure())
-				.getsrcCountEdgeObjectFigure();
+		Label srcCount = (Label) ((AssociationFigure) getFigure()).getsrcCountEdgeObjectFigure();
 
-		Association association = (Association) Utils
-				.getElement(getGraphEdge());
+		Association association = (Association) Utils.getElement(getGraphEdge());
 		if (association != null) {
-			String lowerBound = association.getMinSRC();
-			String upperBound = association.getMaxSRC();
+			String lowerBound = null;
+			String upperBound = null;
+			if (association.getFirstEnd() != null) {
+				lowerBound = association.getFirstEnd().getCardMin();
+				upperBound = association.getFirstEnd().getCardMax();
+			}
 
 			if (upperBound == null) {
 				upperBound = new String("0");
@@ -292,13 +293,11 @@ public class AssociationEditPart extends EMFGraphEdgeEditPart {
 	 * @generated NOT
 	 */
 	private void updateTargetNameLabel() {
-		Label targetName = (Label) ((AssociationFigure) getFigure())
-				.gettargetNameEdgeObjectFigure();
+		Label targetName = (Label) ((AssociationFigure) getFigure()).gettargetNameEdgeObjectFigure();
 
-		Association association = (Association) Utils
-				.getElement(getGraphEdge());
+		Association association = (Association) Utils.getElement(getGraphEdge());
 
-		targetName.setText(association.getRoleTarget());
+		targetName.setText(association.getSecondEnd().getName());
 	}
 
 	/**
@@ -308,15 +307,13 @@ public class AssociationEditPart extends EMFGraphEdgeEditPart {
 	 * @generated NOT
 	 */
 	private void updateTargetCountLabel() {
-		Label targetCount = (Label) ((AssociationFigure) getFigure())
-				.gettargetCountEdgeObjectFigure();
+		Label targetCount = (Label) ((AssociationFigure) getFigure()).gettargetCountEdgeObjectFigure();
 
-		Association association = (Association) Utils
-				.getElement(getGraphEdge());
+		Association association = (Association) Utils.getElement(getGraphEdge());
 		if (association != null) {
 
-			String lowerBound = association.getMinTARGET();
-			String upperBound = association.getMaxTARGET();
+			String lowerBound = association.getSecondEnd().getCardMin();
+			String upperBound = association.getSecondEnd().getCardMax();
 
 			if (upperBound == null) {
 				upperBound = new String("0");
@@ -348,12 +345,10 @@ public class AssociationEditPart extends EMFGraphEdgeEditPart {
 	 * @generated NOT
 	 */
 	private void updateMiddleNameLabel() {
-		Association association = (Association) Utils
-				.getElement(getGraphEdge());
+		Association association = (Association) Utils.getElement(getGraphEdge());
 
 		AssociationFigure fig = ((AssociationFigure) getFigure());
-		EdgeObjectOffsetEditableLabel label = (EdgeObjectOffsetEditableLabel) fig
-				.getmiddleNameEdgeObjectFigure();
+		EdgeObjectOffsetEditableLabel label = (EdgeObjectOffsetEditableLabel) fig.getmiddleNameEdgeObjectFigure();
 		label.setText(association.getName());
 	}
 
@@ -361,10 +356,12 @@ public class AssociationEditPart extends EMFGraphEdgeEditPart {
 	 * Update the source decoration
 	 */
 	private void updateSourceDecoration() {
-		Association association = (Association) Utils
-				.getElement(getGraphEdge());
+		Association association = (Association) Utils.getElement(getGraphEdge());
 
-		boolean isNavigable = association.isIsNavigableSRC();
+		boolean isNavigable = false;
+		if (association.getFirstEnd() != null) {
+			isNavigable = association.getFirstEnd().isIsNavigable();
+		}
 
 		if (!(isNavigable)) {
 			if (association.getAssociationType() == AssociationType.COMPOSITION) {
@@ -384,10 +381,12 @@ public class AssociationEditPart extends EMFGraphEdgeEditPart {
 	 * Update the target decoration
 	 */
 	private void updateTargetDecoration() {
-		Association association = (Association) Utils
-				.getElement(getGraphEdge());
+		Association association = (Association) Utils.getElement(getGraphEdge());
 
-		boolean isNavigable = association.isIsNavigableTARGET();
+		boolean isNavigable = false;
+		if (association.getSecondEnd() != null) {
+			isNavigable = association.getSecondEnd().isIsNavigable();
+		}
 
 		if (!isNavigable) {
 			if (association.getAssociationType() == AssociationType.COMPOSITION) {

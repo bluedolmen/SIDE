@@ -265,7 +265,7 @@ li.tabs, ul.tabs {
 			<%}%>
 			<%if (cast("TimeField")) {%>
 					<input type="text" name="<%id%>" id="<%id%>" value=":">
-				<%}%>
+			<%}%>
 			<%if (cast("IntegerField") || cast("DecimalField") || cast("FloatField")) {%>
 				<input type="text" name="<%id%>" id="<%id%>" value="">
 			<%}%>
@@ -319,6 +319,5 @@ li.tabs, ul.tabs {
 			<em>*</em>
 		<%}%>
 		</li>
-	<%}%>
 	<%}%>
 <%}%>

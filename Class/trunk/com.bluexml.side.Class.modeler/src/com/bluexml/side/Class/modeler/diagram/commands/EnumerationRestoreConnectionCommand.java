@@ -29,8 +29,7 @@ import com.bluexml.side.clazz.Enumeration;
  *
  * @generated
  */
-public class EnumerationRestoreConnectionCommand extends
-		AbstractRestoreConnectionCommand {
+public class EnumerationRestoreConnectionCommand extends AbstractRestoreConnectionCommand {
 	/**
 	 * @param part the EditPart that is restored
 	 * @generated
@@ -58,11 +57,9 @@ public class EnumerationRestoreConnectionCommand extends
 						// autoRef not allowed
 					} else {
 						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-						createdependsFromEnumerationToEnumeration(
-								graphElementSrc, graphElementTgt);
+						createdependsFromEnumerationToEnumeration(graphElementSrc, graphElementTgt);
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createdependsFromEnumerationToEnumeration(
-								graphElementTgt, graphElementSrc);
+						createdependsFromEnumerationToEnumeration(graphElementTgt, graphElementSrc);
 					}
 				}
 
@@ -75,19 +72,15 @@ public class EnumerationRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createdependsFromEnumerationToEnumeration(GraphElement srcElt,
-			GraphElement targetElt) {
+	private void createdependsFromEnumerationToEnumeration(GraphElement srcElt, GraphElement targetElt) {
 		Enumeration sourceObject = (Enumeration) Utils.getElement(srcElt);
 		Enumeration targetObject = (Enumeration) Utils.getElement(targetElt);
 
 		if (targetObject.equals(sourceObject.getDepends())) {
 			// check if the relation does not exists yet
-			if (getExistingEdges(srcElt, targetElt,
-					CdSimpleObjectConstants.SIMPLE_OBJECT_DEPENDS).size() == 0) {
-				GraphEdge edge = Utils
-						.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_DEPENDS);
-				dependsEdgeCreationCommand cmd = new dependsEdgeCreationCommand(
-						null, edge, srcElt, false);
+			if (getExistingEdges(srcElt, targetElt, CdSimpleObjectConstants.SIMPLE_OBJECT_DEPENDS).size() == 0) {
+				GraphEdge edge = Utils.createGraphEdge(CdSimpleObjectConstants.SIMPLE_OBJECT_DEPENDS);
+				dependsEdgeCreationCommand cmd = new dependsEdgeCreationCommand(null, edge, srcElt, false);
 				cmd.setTarget(targetElt);
 				add(cmd);
 			}

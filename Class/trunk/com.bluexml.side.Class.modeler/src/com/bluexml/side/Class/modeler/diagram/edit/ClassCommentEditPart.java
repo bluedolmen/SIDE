@@ -80,32 +80,21 @@ public class ClassCommentEditPart extends EMFGraphNodeEditPart {
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(CdEditPolicyConstants.ISCOMMENTED_EDITPOLICY,
-				new isCommentedEdgeCreationEditPolicy());
+		installEditPolicy(CdEditPolicyConstants.ISCOMMENTED_EDITPOLICY, new isCommentedEdgeCreationEditPolicy());
 
-		installEditPolicy(CdEditPolicyConstants.ISSTEREOTYPED_EDITPOLICY,
-				new isStereotypedEdgeCreationEditPolicy());
+		installEditPolicy(CdEditPolicyConstants.ISSTEREOTYPED_EDITPOLICY, new isStereotypedEdgeCreationEditPolicy());
 
-		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
-				new RestoreEditPolicy() {
-					protected Command getRestoreConnectionsCommand(
-							RestoreConnectionsRequest request) {
-						return new ClassCommentRestoreConnectionCommand(
-								getHost());
-					}
-				});
+		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY, new RestoreEditPolicy() {
+			protected Command getRestoreConnectionsCommand(RestoreConnectionsRequest request) {
+				return new ClassCommentRestoreConnectionCommand(getHost());
+			}
+		});
 
-		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY,
-				new ResizableEditPolicy());
+		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY, new ResizableEditPolicy());
 
-		installEditPolicy(
-				ModelerEditPolicyConstants.CHANGE_BACKGROUND_COLOR_EDITPOLICY,
-				null);
-		installEditPolicy(
-				ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY,
-				null);
-		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
-				new LabelDirectEditPolicy());
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_BACKGROUND_COLOR_EDITPOLICY, null);
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY, null);
+		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new LabelDirectEditPolicy());
 	}
 
 	/**
@@ -122,9 +111,7 @@ public class ClassCommentEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultBackgroundColor() {
-		String backgroundColor = getPreferenceStore()
-				.getString(
-						CdDiagramPreferenceConstants.CLASSCOMMENT_DEFAULT_BACKGROUND_COLOR);
+		String backgroundColor = getPreferenceStore().getString(CdDiagramPreferenceConstants.CLASSCOMMENT_DEFAULT_BACKGROUND_COLOR);
 		if (backgroundColor.length() != 0) {
 			return Utils.getColor(backgroundColor);
 		}
@@ -136,9 +123,7 @@ public class ClassCommentEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultForegroundColor() {
-		String foregroundColor = getPreferenceStore()
-				.getString(
-						CdDiagramPreferenceConstants.CLASSCOMMENT_DEFAULT_FOREGROUND_COLOR);
+		String foregroundColor = getPreferenceStore().getString(CdDiagramPreferenceConstants.CLASSCOMMENT_DEFAULT_FOREGROUND_COLOR);
 		if (foregroundColor.length() != 0) {
 			return Utils.getColor(foregroundColor);
 		}
@@ -150,8 +135,7 @@ public class ClassCommentEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Font getPreferenceDefaultFont() {
-		String preferenceFont = getPreferenceStore().getString(
-				CdDiagramPreferenceConstants.CLASSCOMMENT_DEFAULT_FONT);
+		String preferenceFont = getPreferenceStore().getString(CdDiagramPreferenceConstants.CLASSCOMMENT_DEFAULT_FONT);
 		if (preferenceFont.length() != 0) {
 			return Utils.getFont(new FontData(preferenceFont));
 		}
@@ -163,9 +147,7 @@ public class ClassCommentEditPart extends EMFGraphNodeEditPart {
 		DirectEditManager manager = getDirectEditManager();
 		if (manager == null) {
 			ILabel label = ((ClassCommentFigure) getFigure()).getLabel();
-			manager = new ModelerLabelDirectEditManager(this,
-					TextCellEditor.class, new LabelCellEditorLocator(
-							getFigure()), label) {
+			manager = new ModelerLabelDirectEditManager(this, TextCellEditor.class, new LabelCellEditorLocator(getFigure()), label) {
 				protected CellEditor createCellEditorOn(Composite composite) {
 					return new TextCellEditor(composite, SWT.MULTI | SWT.WRAP);
 				}
@@ -204,22 +186,18 @@ public class ClassCommentEditPart extends EMFGraphNodeEditPart {
 	protected void refreshHeaderLabel() {
 		ClassCommentFigure fig = (ClassCommentFigure) getFigure();
 		ClassComment com = (ClassComment) Utils.getElement(getGraphNode());
-		((ComposedLabel) fig.getLabel()).setPrefix(ClazzNotation
-				.getStereotypesNotation(com));
+		((ComposedLabel) fig.getLabel()).setPrefix(ClazzNotation.getStereotypesNotation(com));
 		((ComposedLabel) fig.getLabel()).setMain(com.getValue());
 	}
 
 	@Override
 	public void performRequest(Request request) {
 		if (request.getType() == RequestConstants.REQ_OPEN) {
-			ClassComment comment = (ClassComment) Utils
-					.getElement(getGraphNode());
+			ClassComment comment = (ClassComment) Utils.getElement(getGraphNode());
 
-			CommentEditDialog dlg = new CommentEditDialog(comment,
-					ModelerPlugin.getActiveWorkbenchShell());
+			CommentEditDialog dlg = new CommentEditDialog(comment, ModelerPlugin.getActiveWorkbenchShell());
 			if (dlg.open() == Window.OK) {
-				CommentUpdateCommand command = new CommentUpdateCommand(
-						comment, dlg.getData());
+				CommentUpdateCommand command = new CommentUpdateCommand(comment, dlg.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
 
 				refresh();

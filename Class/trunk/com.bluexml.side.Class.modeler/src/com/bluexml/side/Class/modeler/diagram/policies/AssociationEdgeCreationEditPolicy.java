@@ -32,14 +32,12 @@ import com.bluexml.side.clazz.Association;
  *
  * @generated
  */
-public class AssociationEdgeCreationEditPolicy extends
-		AbstractEdgeCreationEditPolicy {
+public class AssociationEdgeCreationEditPolicy extends AbstractEdgeCreationEditPolicy {
 	/**
 	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#createCommand(org.eclipse.gef.EditDomain, org.topcased.modeler.di.model.GraphEdge, org.topcased.modeler.di.model.GraphElement)
 	 * @generated
 	 */
-	protected CreateTypedEdgeCommand createCommand(EditDomain domain,
-			GraphEdge edge, GraphElement source) {
+	protected CreateTypedEdgeCommand createCommand(EditDomain domain, GraphEdge edge, GraphElement source) {
 		return new AssociationEdgeCreationCommand(domain, edge, source);
 	}
 
@@ -57,9 +55,6 @@ public class AssociationEdgeCreationEditPolicy extends
 	 */
 	protected boolean checkSource(GraphElement source) {
 		EObject object = Utils.getElement(source);
-		if (object instanceof com.bluexml.side.clazz.Aspect) {
-			return true;
-		}
 		if (object instanceof com.bluexml.side.clazz.Clazz) {
 			return true;
 		}
@@ -70,20 +65,11 @@ public class AssociationEdgeCreationEditPolicy extends
 	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#checkTargetForSource(org.topcased.modeler.di.model.GraphElement, org.topcased.modeler.di.model.GraphElement)
 	 * @generated
 	 */
-	protected boolean checkTargetForSource(GraphElement source,
-			GraphElement target) {
+	protected boolean checkTargetForSource(GraphElement source, GraphElement target) {
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 
-		if (sourceObject instanceof com.bluexml.side.clazz.Aspect
-				&& targetObject instanceof com.bluexml.side.clazz.Clazz) {
-			if (!sourceObject.equals(targetObject)) {
-				return true;
-			}
-		}
-
-		if (sourceObject instanceof com.bluexml.side.clazz.Clazz
-				&& targetObject instanceof com.bluexml.side.clazz.Clazz) {
+		if (sourceObject instanceof com.bluexml.side.clazz.Clazz && targetObject instanceof com.bluexml.side.clazz.Clazz) {
 			return true;
 		}
 		return false;
@@ -101,23 +87,12 @@ public class AssociationEdgeCreationEditPolicy extends
 	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#getSourceTargetData(org.topcased.modeler.di.model.GraphElement, org.topcased.modeler.di.model.GraphElement)
 	 * @generated
 	 */
-	protected SourceTargetData getSourceTargetData(GraphElement source,
-			GraphElement target) {
+	protected SourceTargetData getSourceTargetData(GraphElement source, GraphElement target) {
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 
-		if (sourceObject instanceof com.bluexml.side.clazz.Aspect
-				&& targetObject instanceof com.bluexml.side.clazz.Clazz) {
-			return new SourceTargetData(false, false, SourceTargetData.DIAGRAM,
-					"com.bluexml.side.clazz.ClassPackage", "associationSet",
-					"source", "destination", "associations", null, null, null);
-		}
-		if (sourceObject instanceof com.bluexml.side.clazz.Clazz
-				&& targetObject instanceof com.bluexml.side.clazz.Clazz) {
-			return new SourceTargetData(false, true, SourceTargetData.DIAGRAM,
-					"com.bluexml.side.clazz.ClassPackage", "associationSet",
-					"source", "destination", "associations", null,
-					"associations", null);
+		if (sourceObject instanceof com.bluexml.side.clazz.Clazz && targetObject instanceof com.bluexml.side.clazz.Clazz) {
+			return new SourceTargetData(false, true, SourceTargetData.DIAGRAM, "com.bluexml.side.clazz.ClassPackage", "associationSet", "firstEndClazz", "secondEndClazz", "associations", null, "associations", null);
 		}
 		return null;
 	}

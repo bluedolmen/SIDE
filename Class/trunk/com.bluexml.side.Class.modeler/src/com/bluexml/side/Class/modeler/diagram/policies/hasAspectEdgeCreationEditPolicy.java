@@ -33,14 +33,12 @@ import com.bluexml.side.Class.modeler.diagram.commands.hasAspectEdgeCreationComm
  *
  * @generated
  */
-public class hasAspectEdgeCreationEditPolicy extends
-		AbstractEdgeCreationEditPolicy {
+public class hasAspectEdgeCreationEditPolicy extends AbstractEdgeCreationEditPolicy {
 	/**
 	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#createCommand(org.eclipse.gef.EditDomain, org.topcased.modeler.di.model.GraphEdge, org.topcased.modeler.di.model.GraphElement)
 	 * @generated
 	 */
-	protected CreateTypedEdgeCommand createCommand(EditDomain domain,
-			GraphEdge edge, GraphElement source) {
+	protected CreateTypedEdgeCommand createCommand(EditDomain domain, GraphEdge edge, GraphElement source) {
 		return new hasAspectEdgeCreationCommand(domain, edge, source);
 	}
 
@@ -50,9 +48,7 @@ public class hasAspectEdgeCreationEditPolicy extends
 	 */
 	protected boolean checkEdge(GraphEdge edge) {
 		if (edge.getSemanticModel() instanceof SimpleSemanticModelElement) {
-			return CdSimpleObjectConstants.SIMPLE_OBJECT_HASASPECT
-					.equals(((SimpleSemanticModelElement) edge
-							.getSemanticModel()).getTypeInfo());
+			return CdSimpleObjectConstants.SIMPLE_OBJECT_HASASPECT.equals(((SimpleSemanticModelElement) edge.getSemanticModel()).getTypeInfo());
 		}
 		return false;
 	}
@@ -73,13 +69,11 @@ public class hasAspectEdgeCreationEditPolicy extends
 	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#checkTargetForSource(org.topcased.modeler.di.model.GraphElement, org.topcased.modeler.di.model.GraphElement)
 	 * @generated
 	 */
-	protected boolean checkTargetForSource(GraphElement source,
-			GraphElement target) {
+	protected boolean checkTargetForSource(GraphElement source, GraphElement target) {
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 
-		if (sourceObject instanceof com.bluexml.side.clazz.Clazz
-				&& targetObject instanceof com.bluexml.side.clazz.Aspect) {
+		if (sourceObject instanceof com.bluexml.side.clazz.Clazz && targetObject instanceof com.bluexml.side.clazz.Aspect) {
 			if (!sourceObject.equals(targetObject)) {
 				return true;
 			}
@@ -99,15 +93,12 @@ public class hasAspectEdgeCreationEditPolicy extends
 	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#getSourceTargetData(org.topcased.modeler.di.model.GraphElement, org.topcased.modeler.di.model.GraphElement)
 	 * @generated
 	 */
-	protected SourceTargetData getSourceTargetData(GraphElement source,
-			GraphElement target) {
+	protected SourceTargetData getSourceTargetData(GraphElement source, GraphElement target) {
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 
-		if (sourceObject instanceof com.bluexml.side.clazz.Clazz
-				&& targetObject instanceof com.bluexml.side.clazz.Aspect) {
-			return new SourceTargetData(false, false, SourceTargetData.NONE,
-					null, null, null, null, null, "aspects", null, null);
+		if (sourceObject instanceof com.bluexml.side.clazz.Clazz && targetObject instanceof com.bluexml.side.clazz.Aspect) {
+			return new SourceTargetData(false, false, SourceTargetData.NONE, null, null, null, null, null, "aspects", null, null);
 		}
 		return null;
 	}

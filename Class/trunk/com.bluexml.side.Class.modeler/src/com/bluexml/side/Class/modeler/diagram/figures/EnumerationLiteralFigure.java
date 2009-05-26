@@ -17,8 +17,7 @@ package com.bluexml.side.Class.modeler.diagram.figures;
 /**
  * @generated
  */
-public class EnumerationLiteralFigure extends
-		org.topcased.draw2d.figures.EditableLabelFigure {
+public class EnumerationLiteralFigure extends org.topcased.draw2d.figures.EditableLabelFigure {
 	/**
 	 * Constructor
 	 *

@@ -46,7 +46,7 @@ public class ViewContainer {
 			target = a.getClasse();
 			role = a.getRole();
 			if (a.getAssociation().getAssociationsClass().contains(a.getClasse())) {
-				if (a.getAssociation().getSource().equals(a.getAssociation().getDestination())) {
+				if (a.getAssociation().getFirstEnd().getLinkedClass().equals(a.getAssociation().getSecondEnd().getLinkedClass())) {
 					viewContainerType = ViewContainerType.ASSOCIATION_CLASS_RECUR;
 				} else {
 					viewContainerType = ViewContainerType.ASSOCIATION_CLASS;

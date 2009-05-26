@@ -223,7 +223,7 @@ public interface Clazz extends AbstractClass {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model required="true" assoRequired="true"
-	 *        annotation="http://www.bluexml.com/OCL body='(asso.source = self and asso.isNavigableTARGET) or (asso.destination = self and asso.isNavigableSRC)' description='search for class attributes, inherited one and finaly added to the class by aspect'"
+	 *        annotation="http://www.bluexml.com/OCL body='(asso.firstEnd.linkedClass = self and asso.firstEnd.isNavigable) or (asso.secondEnd.linkedClass = self and asso.secondEnd.isNavigable)' description='search for class attributes, inherited one and finaly added to the class by aspect'"
 	 * @generated
 	 */
 	boolean isSource(Association asso);
@@ -232,7 +232,7 @@ public interface Clazz extends AbstractClass {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model required="true" assoRequired="true"
-	 *        annotation="http://www.bluexml.com/OCL body='(asso.source = self and asso.isNavigableSRC) or (asso.destination = self and asso.isNavigableTARGET)' description='search for class attributes, inherited one and finaly added to the class by aspect'"
+	 *        annotation="http://www.bluexml.com/OCL body='(asso.firstEnd.linkedClass = self and asso.isNavigable) or (asso.secondEnd.linkedClass = self and asso.isNavigable)' description='search for class attributes, inherited one and finaly added to the class by aspect'"
 	 * @generated
 	 */
 	boolean isTarget(Association asso);

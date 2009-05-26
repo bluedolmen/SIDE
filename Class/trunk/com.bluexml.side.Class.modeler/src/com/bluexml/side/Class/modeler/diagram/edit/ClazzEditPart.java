@@ -102,50 +102,34 @@ public class ClazzEditPart extends EMFGraphNodeEditPart {
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(CdEditPolicyConstants.ASSOCIATION_EDITPOLICY,
-				new AssociationEdgeCreationEditPolicy());
+		installEditPolicy(CdEditPolicyConstants.ASSOCIATION_EDITPOLICY, new AssociationEdgeCreationEditPolicy());
 
-		installEditPolicy(CdEditPolicyConstants.ISCOMMENTED_EDITPOLICY,
-				new isCommentedEdgeCreationEditPolicy());
+		installEditPolicy(CdEditPolicyConstants.ISCOMMENTED_EDITPOLICY, new isCommentedEdgeCreationEditPolicy());
 
-		installEditPolicy(CdEditPolicyConstants.ISSTEREOTYPED_EDITPOLICY,
-				new isStereotypedEdgeCreationEditPolicy());
+		installEditPolicy(CdEditPolicyConstants.ISSTEREOTYPED_EDITPOLICY, new isStereotypedEdgeCreationEditPolicy());
 
-		installEditPolicy(CdEditPolicyConstants.ISASSOCIATIONCLASS_EDITPOLICY,
-				new isAssociationClassEdgeCreationEditPolicy());
+		installEditPolicy(CdEditPolicyConstants.ISASSOCIATIONCLASS_EDITPOLICY, new isAssociationClassEdgeCreationEditPolicy());
 
-		installEditPolicy(CdEditPolicyConstants.INCLUDE_EDITPOLICY,
-				new includeEdgeCreationEditPolicy());
+		installEditPolicy(CdEditPolicyConstants.INCLUDE_EDITPOLICY, new includeEdgeCreationEditPolicy());
 
-		installEditPolicy(CdEditPolicyConstants.HASVIEW_EDITPOLICY,
-				new hasViewEdgeCreationEditPolicy());
+		installEditPolicy(CdEditPolicyConstants.HASVIEW_EDITPOLICY, new hasViewEdgeCreationEditPolicy());
 
-		installEditPolicy(CdEditPolicyConstants.GENERALIZATION_EDITPOLICY,
-				new GeneralizationEdgeCreationEditPolicy());
+		installEditPolicy(CdEditPolicyConstants.GENERALIZATION_EDITPOLICY, new GeneralizationEdgeCreationEditPolicy());
 
-		installEditPolicy(CdEditPolicyConstants.HASASPECT_EDITPOLICY,
-				new hasAspectEdgeCreationEditPolicy());
+		installEditPolicy(CdEditPolicyConstants.HASASPECT_EDITPOLICY, new hasAspectEdgeCreationEditPolicy());
 
-		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
-				new RestoreEditPolicy() {
-					protected Command getRestoreConnectionsCommand(
-							RestoreConnectionsRequest request) {
-						return new ClazzRestoreConnectionCommand(getHost());
-					}
-				});
+		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY, new RestoreEditPolicy() {
+			protected Command getRestoreConnectionsCommand(RestoreConnectionsRequest request) {
+				return new ClazzRestoreConnectionCommand(getHost());
+			}
+		});
 
-		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY,
-				new ResizableEditPolicy());
+		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY, new ResizableEditPolicy());
 
-		installEditPolicy(
-				ModelerEditPolicyConstants.CHANGE_BACKGROUND_COLOR_EDITPOLICY,
-				null);
-		installEditPolicy(
-				ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY,
-				null);
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_BACKGROUND_COLOR_EDITPOLICY, null);
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY, null);
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, new ClazzLayoutEditPolicy());
-		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
-				new LabelDirectEditPolicy());
+		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new LabelDirectEditPolicy());
 	}
 
 	/**
@@ -157,25 +141,21 @@ public class ClazzEditPart extends EMFGraphNodeEditPart {
 
 		CdConfiguration config = new CdConfiguration();
 
-		GraphNode attributesListNode = (GraphNode) getGraphNode()
-				.getContained().get(0);
+		GraphNode attributesListNode = (GraphNode) getGraphNode().getContained().get(0);
 		EList attributesList = attributesListNode.getContained();
 		while (attributesList.size() > 0)
 			attributesList.remove(0);
 		for (Object o : clazz.getAttributes()) {
-			GraphElement elt = config.getCreationUtils().createGraphElement(
-					(EObject) o);
+			GraphElement elt = config.getCreationUtils().createGraphElement((EObject) o);
 			attributesList.add(elt);
 		}
 
-		GraphNode operationsListNode = (GraphNode) getGraphNode()
-				.getContained().get(1);
+		GraphNode operationsListNode = (GraphNode) getGraphNode().getContained().get(1);
 		EList operationsList = operationsListNode.getContained();
 		while (operationsList.size() > 0)
 			operationsList.remove(0);
 		for (Object o : clazz.getOperations()) {
-			GraphElement elt = config.getCreationUtils().createGraphElement(
-					(EObject) o);
+			GraphElement elt = config.getCreationUtils().createGraphElement((EObject) o);
 			operationsList.add(elt);
 		}
 
@@ -185,8 +165,7 @@ public class ClazzEditPart extends EMFGraphNodeEditPart {
 			boolean findedNomenclature = false;
 			for (Object o : clazz.getStereotypes()) {
 				Stereotype s = (Stereotype) o;
-				findedNomenclature = s.getName().equalsIgnoreCase(
-						"Nomenclature");
+				findedNomenclature = s.getName().equalsIgnoreCase("Nomenclature");
 				if (findedNomenclature)
 					break;
 			}
@@ -204,8 +183,7 @@ public class ClazzEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultBackgroundColor() {
-		String backgroundColor = getPreferenceStore().getString(
-				CdDiagramPreferenceConstants.CLAZZ_DEFAULT_BACKGROUND_COLOR);
+		String backgroundColor = getPreferenceStore().getString(CdDiagramPreferenceConstants.CLAZZ_DEFAULT_BACKGROUND_COLOR);
 		if (backgroundColor.length() != 0) {
 			return Utils.getColor(backgroundColor);
 		}
@@ -217,8 +195,7 @@ public class ClazzEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultForegroundColor() {
-		String foregroundColor = getPreferenceStore().getString(
-				CdDiagramPreferenceConstants.CLAZZ_DEFAULT_FOREGROUND_COLOR);
+		String foregroundColor = getPreferenceStore().getString(CdDiagramPreferenceConstants.CLAZZ_DEFAULT_FOREGROUND_COLOR);
 		if (foregroundColor.length() != 0) {
 			return Utils.getColor(foregroundColor);
 		}
@@ -230,8 +207,7 @@ public class ClazzEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Font getPreferenceDefaultFont() {
-		String preferenceFont = getPreferenceStore().getString(
-				CdDiagramPreferenceConstants.CLAZZ_DEFAULT_FONT);
+		String preferenceFont = getPreferenceStore().getString(CdDiagramPreferenceConstants.CLAZZ_DEFAULT_FONT);
 		if (preferenceFont.length() != 0) {
 			return Utils.getFont(new FontData(preferenceFont));
 		}
@@ -310,8 +286,7 @@ public class ClazzEditPart extends EMFGraphNodeEditPart {
 			boolean findedNomenclature = false;
 			for (Object o : clazz.getStereotypes()) {
 				Stereotype s = (Stereotype) o;
-				findedNomenclature = s.getName().equalsIgnoreCase(
-						"Nomenclature");
+				findedNomenclature = s.getName().equalsIgnoreCase("Nomenclature");
 				if (findedNomenclature)
 					break;
 			}
@@ -319,8 +294,7 @@ public class ClazzEditPart extends EMFGraphNodeEditPart {
 		} else if (ifig instanceof NomenclatureFigure) {
 			NomenclatureFigure fig = (NomenclatureFigure) ifig;
 			Clazz clazz = (Clazz) Utils.getElement(getGraphNode());
-			((ComposedLabel) fig.getLabel()).setPrefix(ClazzNotation
-					.getStereotypesNotation(clazz));
+			((ComposedLabel) fig.getLabel()).setPrefix(ClazzNotation.getStereotypesNotation(clazz));
 			((ComposedLabel) fig.getLabel()).setMain(clazz.getName());
 		}
 	}
@@ -335,11 +309,9 @@ public class ClazzEditPart extends EMFGraphNodeEditPart {
 		if (request.getType() == RequestConstants.REQ_OPEN) {
 			Clazz classe = (Clazz) Utils.getElement(getGraphNode());
 
-			ClazzEditDialog dlg = new ClazzEditDialog(classe, ModelerPlugin
-					.getActiveWorkbenchShell());
+			ClazzEditDialog dlg = new ClazzEditDialog(classe, ModelerPlugin.getActiveWorkbenchShell());
 			if (dlg.open() == Window.OK) {
-				ClazzUpdateCommand command = new ClazzUpdateCommand(classe, dlg
-						.getData());
+				ClazzUpdateCommand command = new ClazzUpdateCommand(classe, dlg.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
 
 				refresh();
@@ -360,8 +332,7 @@ public class ClazzEditPart extends EMFGraphNodeEditPart {
 			boolean findedNomenclature = false;
 			for (Object o : clazz.getStereotypes()) {
 				Stereotype s = (Stereotype) o;
-				findedNomenclature = s.getName().equalsIgnoreCase(
-						"Nomenclature");
+				findedNomenclature = s.getName().equalsIgnoreCase("Nomenclature");
 				if (findedNomenclature)
 					break;
 			}

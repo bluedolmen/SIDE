@@ -86,31 +86,31 @@ public class AssociationUpdateCommand extends Command {
 				.get(AssociationHelper.ASSOCIATION_NAME));
 		association.setAssociationType((AssociationType) newAssociationData
 				.get(AssociationHelper.ASSOCIATION_TYPE));
-		association.setRoleSrc((String) newAssociationData
+		association.getFirstEnd().setName((String) newAssociationData
 				.get(AssociationHelper.ASSOCIATION_ROLE_SRC));
-		association.setRoleTarget((String) newAssociationData
+		association.getSecondEnd().setName((String) newAssociationData
 				.get(AssociationHelper.ASSOCIATION_ROLE_TARGET));
 		
-		association.setRoleSrcTitle((String) newAssociationData
+		association.getFirstEnd().setTitle((String) newAssociationData
 				.get(AssociationHelper.ASSOCIATION_ROLE_SRC_TITLE));
-		association.setRoleTargetTitle((String) newAssociationData
+		association.getSecondEnd().setTitle((String) newAssociationData
 				.get(AssociationHelper.ASSOCIATION_ROLE_TARGET_TITLE));
 		
 
-		association.setIsNavigableSRC(((Boolean) newAssociationData
+		association.getFirstEnd().setIsNavigable(((Boolean) newAssociationData
 				.get(AssociationHelper.FIRST_END_IS_NAVIGABLE)).booleanValue());
-		association.setMinSRC((String) newAssociationData
+		association.getFirstEnd().setCardMin((String) newAssociationData
 				.get(AssociationHelper.FIRST_END_LOWER_BOUND));
-		association.setMaxSRC((String) newAssociationData
+		association.getFirstEnd().setCardMax((String) newAssociationData
 				.get(AssociationHelper.FIRST_END_UPPER_BOUND));
 
 		association
-				.setIsNavigableTARGET(((Boolean) newAssociationData
+				.getSecondEnd().setIsNavigable(((Boolean) newAssociationData
 						.get(AssociationHelper.SECOND_END_IS_NAVIGABLE))
 						.booleanValue());
-		association.setMinTARGET((String) newAssociationData
+		association.getSecondEnd().setCardMin((String) newAssociationData
 				.get(AssociationHelper.SECOND_END_LOWER_BOUND));
-		association.setMaxTARGET((String) newAssociationData
+		association.getSecondEnd().setCardMax((String) newAssociationData
 				.get(AssociationHelper.SECOND_END_UPPER_BOUND));
 		association.getMetainfo().clear();
 		
@@ -140,25 +140,25 @@ public class AssociationUpdateCommand extends Command {
 				.get(AssociationHelper.ASSOCIATION_DESCRIPTION));
 		association.setAssociationType((AssociationType) oldAssociationData
 				.get(AssociationHelper.ASSOCIATION_TYPE));
-		association.setRoleSrc((String) oldAssociationData
+		association.getFirstEnd().setName((String) oldAssociationData
 				.get(AssociationHelper.ASSOCIATION_ROLE_SRC));
-		association.setRoleTarget((String) oldAssociationData
+		association.getSecondEnd().setName((String) oldAssociationData
 				.get(AssociationHelper.ASSOCIATION_ROLE_TARGET));
 
-		association.setIsNavigableSRC(((Boolean) oldAssociationData
+		association.getFirstEnd().setIsNavigable(((Boolean) oldAssociationData
 				.get(AssociationHelper.FIRST_END_IS_NAVIGABLE)).booleanValue());
-		association.setMinSRC((String) oldAssociationData
+		association.getFirstEnd().setCardMin((String) oldAssociationData
 				.get(AssociationHelper.FIRST_END_LOWER_BOUND));
-		association.setMaxSRC((String) oldAssociationData
+		association.getFirstEnd().setCardMax((String) oldAssociationData
 				.get(AssociationHelper.FIRST_END_UPPER_BOUND));
 
 		association
-				.setIsNavigableTARGET(((Boolean) oldAssociationData
+				.getSecondEnd().setIsNavigable(((Boolean) oldAssociationData
 						.get(AssociationHelper.SECOND_END_IS_NAVIGABLE))
 						.booleanValue());
-		association.setMinTARGET((String) oldAssociationData
+		association.getSecondEnd().setCardMin((String) oldAssociationData
 				.get(AssociationHelper.SECOND_END_LOWER_BOUND));
-		association.setMaxTARGET((String) oldAssociationData
+		association.getSecondEnd().setCardMax((String) oldAssociationData
 				.get(AssociationHelper.SECOND_END_UPPER_BOUND));
 	}
 }

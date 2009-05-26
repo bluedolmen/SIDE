@@ -30,8 +30,7 @@ import com.bluexml.side.Class.modeler.diagram.figure.ConveyorLineFigure;
  * 
  * @_generated
  */
-public class AssociationFigure extends ConveyorLineFigure implements
-		IGraphEdgeFigure {
+public class AssociationFigure extends ConveyorLineFigure implements IGraphEdgeFigure {
 
 	private IEdgeObjectFigure srcNameEdgeObject;
 
@@ -74,8 +73,7 @@ public class AssociationFigure extends ConveyorLineFigure implements
 		targetCountLocator = new ConnectionEndpointLocator(this, true);
 		add(targetCountEdgeObject, targetCountLocator);
 		middleNameEdgeObject = new EdgeObjectOffsetEditableLabel(this);
-		middleNameLocator = new EdgeObjectOffsetLocator(
-				(IEdgeObjectOffsetFigure) middleNameEdgeObject);
+		middleNameLocator = new EdgeObjectOffsetLocator((IEdgeObjectOffsetFigure) middleNameEdgeObject);
 		add(middleNameEdgeObject, middleNameLocator);
 	}
 

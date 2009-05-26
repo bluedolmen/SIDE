@@ -53,8 +53,7 @@ public class GeneralizationEditPart extends GraphEdgeEditPart {
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FONT_EDITPOLICY,
-				null);
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FONT_EDITPOLICY, null);
 
 	}
 
@@ -89,9 +88,7 @@ public class GeneralizationEditPart extends GraphEdgeEditPart {
 	 * @generated
 	 */
 	protected String getPreferenceDefaultRouter() {
-		return getPreferenceStore()
-				.getString(
-						CdDiagramPreferenceConstants.GENERALIZATION_EDGE_DEFAULT_ROUTER);
+		return getPreferenceStore().getString(CdDiagramPreferenceConstants.GENERALIZATION_EDGE_DEFAULT_ROUTER);
 	}
 
 	/**
@@ -100,9 +97,7 @@ public class GeneralizationEditPart extends GraphEdgeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultForegroundColor() {
-		String preferenceForeground = getPreferenceStore()
-				.getString(
-						CdDiagramPreferenceConstants.GENERALIZATION_EDGE_DEFAULT_FOREGROUND_COLOR);
+		String preferenceForeground = getPreferenceStore().getString(CdDiagramPreferenceConstants.GENERALIZATION_EDGE_DEFAULT_FOREGROUND_COLOR);
 		if (preferenceForeground.length() != 0) {
 			return Utils.getColor(preferenceForeground);
 		}
@@ -116,8 +111,7 @@ public class GeneralizationEditPart extends GraphEdgeEditPart {
 	 * @generated
 	 */
 	protected Font getPreferenceDefaultFont() {
-		String preferenceFont = getPreferenceStore().getString(
-				CdDiagramPreferenceConstants.GENERALIZATION_EDGE_DEFAULT_FONT);
+		String preferenceFont = getPreferenceStore().getString(CdDiagramPreferenceConstants.GENERALIZATION_EDGE_DEFAULT_FONT);
 		if (preferenceFont.length() != 0) {
 			return Utils.getFont(new FontData(preferenceFont));
 		}

@@ -152,6 +152,18 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 				return createClassCommentAdapter();
 			}
 			@Override
+			public Adapter caseAssociationEnd(AssociationEnd object) {
+				return createAssociationEndAdapter();
+			}
+			@Override
+			public Adapter caseFirstEnd(FirstEnd object) {
+				return createFirstEndAdapter();
+			}
+			@Override
+			public Adapter caseSecondEnd(SecondEnd object) {
+				return createSecondEndAdapter();
+			}
+			@Override
 			public Adapter caseModelElement(ModelElement object) {
 				return createModelElementAdapter();
 			}
@@ -450,6 +462,48 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createClassCommentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.clazz.AssociationEnd <em>Association End</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.clazz.AssociationEnd
+	 * @generated
+	 */
+	public Adapter createAssociationEndAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.clazz.FirstEnd <em>First End</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.clazz.FirstEnd
+	 * @generated
+	 */
+	public Adapter createFirstEndAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.clazz.SecondEnd <em>Second End</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.clazz.SecondEnd
+	 * @generated
+	 */
+	public Adapter createSecondEndAdapter() {
 		return null;
 	}
 

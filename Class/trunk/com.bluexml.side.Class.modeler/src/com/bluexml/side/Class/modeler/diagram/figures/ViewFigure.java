@@ -25,8 +25,7 @@ import com.bluexml.side.Class.modeler.diagram.figures.common.RectangleFigure;
 /**
  * @_generated
  */
-public class ViewFigure extends
-		org.topcased.draw2d.figures.ContainerWithInnerLabel {
+public class ViewFigure extends org.topcased.draw2d.figures.ContainerWithInnerLabel {
 
 	/**
 	 * Constructor

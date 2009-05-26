@@ -32,8 +32,7 @@ public class hasViewEdgeCreationCommand extends CreateTypedEdgeCommand {
 	 * @param src the graph element of the source
 	 * @generated
 	 */
-	public hasViewEdgeCreationCommand(EditDomain domain, GraphEdge newObj,
-			GraphElement src) {
+	public hasViewEdgeCreationCommand(EditDomain domain, GraphEdge newObj, GraphElement src) {
 		this(domain, newObj, src, true);
 	}
 
@@ -44,8 +43,7 @@ public class hasViewEdgeCreationCommand extends CreateTypedEdgeCommand {
 	 * @param needModelUpdate set it to true if the model need to be updated
 	 * @generated
 	 */
-	public hasViewEdgeCreationCommand(EditDomain domain, GraphEdge newObj,
-			GraphElement src, boolean needModelUpdate) {
+	public hasViewEdgeCreationCommand(EditDomain domain, GraphEdge newObj, GraphElement src, boolean needModelUpdate) {
 		super(domain, newObj, src, needModelUpdate);
 	}
 

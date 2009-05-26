@@ -52,12 +52,9 @@ public class isAssociationClassEditPart extends GraphEdgeEditPart {
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FONT_EDITPOLICY,
-				null);
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FONT_EDITPOLICY, null);
 
-		installEditPolicy(
-				ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY,
-				null);
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY, null);
 	}
 
 	/**
@@ -90,9 +87,7 @@ public class isAssociationClassEditPart extends GraphEdgeEditPart {
 	 * @generated
 	 */
 	protected String getPreferenceDefaultRouter() {
-		return getPreferenceStore()
-				.getString(
-						CdDiagramPreferenceConstants.ISASSOCIATIONCLASS_EDGE_DEFAULT_ROUTER);
+		return getPreferenceStore().getString(CdDiagramPreferenceConstants.ISASSOCIATIONCLASS_EDGE_DEFAULT_ROUTER);
 	}
 
 	/**
@@ -101,9 +96,7 @@ public class isAssociationClassEditPart extends GraphEdgeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultForegroundColor() {
-		String preferenceForeground = getPreferenceStore()
-				.getString(
-						CdDiagramPreferenceConstants.ISASSOCIATIONCLASS_EDGE_DEFAULT_FOREGROUND_COLOR);
+		String preferenceForeground = getPreferenceStore().getString(CdDiagramPreferenceConstants.ISASSOCIATIONCLASS_EDGE_DEFAULT_FOREGROUND_COLOR);
 		if (preferenceForeground.length() != 0) {
 			return Utils.getColor(preferenceForeground);
 		}
@@ -117,9 +110,7 @@ public class isAssociationClassEditPart extends GraphEdgeEditPart {
 	 * @generated
 	 */
 	protected Font getPreferenceDefaultFont() {
-		String preferenceFont = getPreferenceStore()
-				.getString(
-						CdDiagramPreferenceConstants.ISASSOCIATIONCLASS_EDGE_DEFAULT_FONT);
+		String preferenceFont = getPreferenceStore().getString(CdDiagramPreferenceConstants.ISASSOCIATIONCLASS_EDGE_DEFAULT_FONT);
 		if (preferenceFont.length() != 0) {
 			return Utils.getFont(new FontData(preferenceFont));
 		}

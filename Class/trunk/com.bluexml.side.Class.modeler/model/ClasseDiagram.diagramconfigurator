@@ -27,20 +27,13 @@
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_5KhE4HsIEdy7uoUms_Eq3g" object="_2xfYAHsIEdy7uoUms_Eq3g" foregroundColorChangeable="false" fontChangeable="false" type="Label" backgroundColorChangeable="false"/>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_duiSAKy6EdyIeNPv3dqFqw" object="_UWUlcKy6EdyIeNPv3dqFqw" foregroundColorChangeable="false" fontChangeable="false" type="Container With Inner Label" defaultBackgroundColor="218,248,239" backgroundColorChangeable="false" directEditable="false" defaultHeight="20" minimumWidth="50" maximumWidth="-1" maximumHeight="-1"/>
   <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_yP_EMHcBEdyUwq_XzqQQrw" object="_yP_ERHcBEdyUwq_XzqQQrw" foregroundColorChangeable="false" fontChangeable="false">
-    <sourceTargetCouple xmi:id="_4q0i8IFwEdy9V90TVFnLHQ" containerType="DIAGRAM" sourceNode="_2n-_MHcBEdyUwq_XzqQQrw" targetNode="_yP16T3cBEdyUwq_XzqQQrw">
+    <sourceTargetCouple xmi:id="_ZFCsQEkwEd6Z9Nja0s-4xQ" containerType="DIAGRAM" autoRef="true" sourceNode="_yP16T3cBEdyUwq_XzqQQrw" targetNode="_yP16T3cBEdyUwq_XzqQQrw">
       <containerObject href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/ClassPackage"/>
       <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//ClassPackage/associationSet"/>
       <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//AbstractContainer/associations"/>
-      <refEdgeToSource xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//Association/source"/>
-      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//Association/destination"/>
-    </sourceTargetCouple>
-    <sourceTargetCouple xmi:id="_6dh9IDB8Ed2MqdPu-QDRog" containerType="DIAGRAM" autoRef="true" sourceNode="_yP16T3cBEdyUwq_XzqQQrw" targetNode="_yP16T3cBEdyUwq_XzqQQrw">
-      <containerObject href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/ClassPackage"/>
-      <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//ClassPackage/associationSet"/>
-      <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//AbstractContainer/associations"/>
-      <refEdgeToSource xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//Association/source"/>
+      <refEdgeToSource xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//Association/firstEndClazz"/>
       <refTargetToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//AbstractContainer/associations"/>
-      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//Association/destination"/>
+      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//Association/secondEndClazz"/>
     </sourceTargetCouple>
   </parts>
   <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_yP_ENHcBEdyUwq_XzqQQrw" object="_yP_ESncBEdyUwq_XzqQQrw" defaultForegroundColor="128,128,192" foregroundColorChangeable="false" fontChangeable="false">
@@ -134,6 +127,12 @@
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_uDaOsKy6EdyIeNPv3dqFqw" name="hasView"/>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_h7wlEA_nEd6WE5atyWwk_g" name="hasAspect"/>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_FWBNABOzEd6rfbeEUErmOQ" name="depends"/>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_c4jMYUkrEd6Z9Nja0s-4xQ">
+    <genClass href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/FirstEnd"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_l6TgwEkrEd6Z9Nja0s-4xQ">
+    <genClass href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/SecondEnd"/>
+  </objects>
   <genModel href="../../com.bluexml.side.Class/model/Class.genmodel#/"/>
   <templateRootObject href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/ClassPackage"/>
   <editorConfigurator href="Class.editorconfigurator#_zVIHUHcBEdyUwq_XzqQQrw"/>

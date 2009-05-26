@@ -953,85 +953,13 @@ public interface ClazzPackage extends EPackage {
 	int ASSOCIATION__TITLE = TITLED_NAMED_CLASS_MODEL_ELEMENT__TITLE;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION__SOURCE = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Destination</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION__DESTINATION = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Is Navigable SRC</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION__IS_NAVIGABLE_SRC = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Is Navigable TARGET</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION__IS_NAVIGABLE_TARGET = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Min SRC</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION__MIN_SRC = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Max SRC</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION__MAX_SRC = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Min TARGET</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION__MIN_TARGET = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Max TARGET</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION__MAX_TARGET = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 7;
-
-	/**
 	 * The feature id for the '<em><b>Association Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__ASSOCIATION_TYPE = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 8;
+	int ASSOCIATION__ASSOCIATION_TYPE = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Associations Class</b></em>' reference list.
@@ -1040,43 +968,25 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__ASSOCIATIONS_CLASS = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 9;
+	int ASSOCIATION__ASSOCIATIONS_CLASS = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Role Src</b></em>' attribute.
+	 * The feature id for the '<em><b>First End</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__ROLE_SRC = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 10;
+	int ASSOCIATION__FIRST_END = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Role Target</b></em>' attribute.
+	 * The feature id for the '<em><b>Second End</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__ROLE_TARGET = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 11;
-
-	/**
-	 * The feature id for the '<em><b>Role Src Title</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION__ROLE_SRC_TITLE = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 12;
-
-	/**
-	 * The feature id for the '<em><b>Role Target Title</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION__ROLE_TARGET_TITLE = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 13;
+	int ASSOCIATION__SECOND_END = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Association</em>' class.
@@ -1085,7 +995,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_FEATURE_COUNT = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 14;
+	int ASSOCIATION_FEATURE_COUNT = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.AttributeImpl <em>Attribute</em>}' class.
@@ -2071,6 +1981,414 @@ public interface ClazzPackage extends EPackage {
 	int CLASS_COMMENT_FEATURE_COUNT = CommonPackage.COMMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.AssociationEndImpl <em>Association End</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.clazz.impl.AssociationEndImpl
+	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getAssociationEnd()
+	 * @generated
+	 */
+	int ASSOCIATION_END = 19;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_END__STEREOTYPES = TITLED_NAMED_CLASS_MODEL_ELEMENT__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_END__TAGS = TITLED_NAMED_CLASS_MODEL_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_END__COMMENTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_END__METAINFO = TITLED_NAMED_CLASS_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_END__DOCUMENTATION = TITLED_NAMED_CLASS_MODEL_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_END__HAS_COMMENTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_END__NAME = TITLED_NAMED_CLASS_MODEL_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_END__DESCRIPTION = TITLED_NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_END__TITLE = TITLED_NAMED_CLASS_MODEL_ELEMENT__TITLE;
+
+	/**
+	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_END__CARD_MIN = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_END__CARD_MAX = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Is Navigable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_END__IS_NAVIGABLE = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Linked Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_END__LINKED_CLASS = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Association End</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_END_FEATURE_COUNT = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.FirstEndImpl <em>First End</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.clazz.impl.FirstEndImpl
+	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getFirstEnd()
+	 * @generated
+	 */
+	int FIRST_END = 20;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIRST_END__STEREOTYPES = ASSOCIATION_END__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIRST_END__TAGS = ASSOCIATION_END__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIRST_END__COMMENTS = ASSOCIATION_END__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIRST_END__METAINFO = ASSOCIATION_END__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIRST_END__DOCUMENTATION = ASSOCIATION_END__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIRST_END__HAS_COMMENTS = ASSOCIATION_END__HAS_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIRST_END__NAME = ASSOCIATION_END__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIRST_END__DESCRIPTION = ASSOCIATION_END__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIRST_END__TITLE = ASSOCIATION_END__TITLE;
+
+	/**
+	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIRST_END__CARD_MIN = ASSOCIATION_END__CARD_MIN;
+
+	/**
+	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIRST_END__CARD_MAX = ASSOCIATION_END__CARD_MAX;
+
+	/**
+	 * The feature id for the '<em><b>Is Navigable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIRST_END__IS_NAVIGABLE = ASSOCIATION_END__IS_NAVIGABLE;
+
+	/**
+	 * The feature id for the '<em><b>Linked Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIRST_END__LINKED_CLASS = ASSOCIATION_END__LINKED_CLASS;
+
+	/**
+	 * The number of structural features of the '<em>First End</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIRST_END_FEATURE_COUNT = ASSOCIATION_END_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.SecondEndImpl <em>Second End</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.clazz.impl.SecondEndImpl
+	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getSecondEnd()
+	 * @generated
+	 */
+	int SECOND_END = 21;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECOND_END__STEREOTYPES = ASSOCIATION_END__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECOND_END__TAGS = ASSOCIATION_END__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECOND_END__COMMENTS = ASSOCIATION_END__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECOND_END__METAINFO = ASSOCIATION_END__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECOND_END__DOCUMENTATION = ASSOCIATION_END__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECOND_END__HAS_COMMENTS = ASSOCIATION_END__HAS_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECOND_END__NAME = ASSOCIATION_END__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECOND_END__DESCRIPTION = ASSOCIATION_END__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECOND_END__TITLE = ASSOCIATION_END__TITLE;
+
+	/**
+	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECOND_END__CARD_MIN = ASSOCIATION_END__CARD_MIN;
+
+	/**
+	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECOND_END__CARD_MAX = ASSOCIATION_END__CARD_MAX;
+
+	/**
+	 * The feature id for the '<em><b>Is Navigable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECOND_END__IS_NAVIGABLE = ASSOCIATION_END__IS_NAVIGABLE;
+
+	/**
+	 * The feature id for the '<em><b>Linked Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECOND_END__LINKED_CLASS = ASSOCIATION_END__LINKED_CLASS;
+
+	/**
+	 * The number of structural features of the '<em>Second End</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECOND_END_FEATURE_COUNT = ASSOCIATION_END_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.AssociationType <em>Association Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2078,7 +2396,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getAssociationType()
 	 * @generated
 	 */
-	int ASSOCIATION_TYPE = 19;
+	int ASSOCIATION_TYPE = 22;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.AttributeType <em>Attribute Type</em>}' enum.
@@ -2088,7 +2406,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getAttributeType()
 	 * @generated
 	 */
-	int ATTRIBUTE_TYPE = 20;
+	int ATTRIBUTE_TYPE = 23;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.Visibility <em>Visibility</em>}' enum.
@@ -2098,7 +2416,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getVisibility()
 	 * @generated
 	 */
-	int VISIBILITY = 21;
+	int VISIBILITY = 24;
 
 
 	/**
@@ -2328,94 +2646,6 @@ public interface ClazzPackage extends EPackage {
 	EClass getAssociation();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.bluexml.side.clazz.Association#getSource <em>Source</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Source</em>'.
-	 * @see com.bluexml.side.clazz.Association#getSource()
-	 * @see #getAssociation()
-	 * @generated
-	 */
-	EReference getAssociation_Source();
-
-	/**
-	 * Returns the meta object for the reference '{@link com.bluexml.side.clazz.Association#getDestination <em>Destination</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Destination</em>'.
-	 * @see com.bluexml.side.clazz.Association#getDestination()
-	 * @see #getAssociation()
-	 * @generated
-	 */
-	EReference getAssociation_Destination();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Association#isIsNavigableSRC <em>Is Navigable SRC</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Navigable SRC</em>'.
-	 * @see com.bluexml.side.clazz.Association#isIsNavigableSRC()
-	 * @see #getAssociation()
-	 * @generated
-	 */
-	EAttribute getAssociation_IsNavigableSRC();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Association#isIsNavigableTARGET <em>Is Navigable TARGET</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Navigable TARGET</em>'.
-	 * @see com.bluexml.side.clazz.Association#isIsNavigableTARGET()
-	 * @see #getAssociation()
-	 * @generated
-	 */
-	EAttribute getAssociation_IsNavigableTARGET();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Association#getMinSRC <em>Min SRC</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Min SRC</em>'.
-	 * @see com.bluexml.side.clazz.Association#getMinSRC()
-	 * @see #getAssociation()
-	 * @generated
-	 */
-	EAttribute getAssociation_MinSRC();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Association#getMaxSRC <em>Max SRC</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Max SRC</em>'.
-	 * @see com.bluexml.side.clazz.Association#getMaxSRC()
-	 * @see #getAssociation()
-	 * @generated
-	 */
-	EAttribute getAssociation_MaxSRC();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Association#getMinTARGET <em>Min TARGET</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Min TARGET</em>'.
-	 * @see com.bluexml.side.clazz.Association#getMinTARGET()
-	 * @see #getAssociation()
-	 * @generated
-	 */
-	EAttribute getAssociation_MinTARGET();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Association#getMaxTARGET <em>Max TARGET</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Max TARGET</em>'.
-	 * @see com.bluexml.side.clazz.Association#getMaxTARGET()
-	 * @see #getAssociation()
-	 * @generated
-	 */
-	EAttribute getAssociation_MaxTARGET();
-
-	/**
 	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Association#getAssociationType <em>Association Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2438,48 +2668,26 @@ public interface ClazzPackage extends EPackage {
 	EReference getAssociation_AssociationsClass();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Association#getRoleSrc <em>Role Src</em>}'.
+	 * Returns the meta object for the containment reference '{@link com.bluexml.side.clazz.Association#getFirstEnd <em>First End</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Role Src</em>'.
-	 * @see com.bluexml.side.clazz.Association#getRoleSrc()
+	 * @return the meta object for the containment reference '<em>First End</em>'.
+	 * @see com.bluexml.side.clazz.Association#getFirstEnd()
 	 * @see #getAssociation()
 	 * @generated
 	 */
-	EAttribute getAssociation_RoleSrc();
+	EReference getAssociation_FirstEnd();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Association#getRoleTarget <em>Role Target</em>}'.
+	 * Returns the meta object for the containment reference '{@link com.bluexml.side.clazz.Association#getSecondEnd <em>Second End</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Role Target</em>'.
-	 * @see com.bluexml.side.clazz.Association#getRoleTarget()
+	 * @return the meta object for the containment reference '<em>Second End</em>'.
+	 * @see com.bluexml.side.clazz.Association#getSecondEnd()
 	 * @see #getAssociation()
 	 * @generated
 	 */
-	EAttribute getAssociation_RoleTarget();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Association#getRoleSrcTitle <em>Role Src Title</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Role Src Title</em>'.
-	 * @see com.bluexml.side.clazz.Association#getRoleSrcTitle()
-	 * @see #getAssociation()
-	 * @generated
-	 */
-	EAttribute getAssociation_RoleSrcTitle();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Association#getRoleTargetTitle <em>Role Target Title</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Role Target Title</em>'.
-	 * @see com.bluexml.side.clazz.Association#getRoleTargetTitle()
-	 * @see #getAssociation()
-	 * @generated
-	 */
-	EAttribute getAssociation_RoleTargetTitle();
+	EReference getAssociation_SecondEnd();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.clazz.Attribute <em>Attribute</em>}'.
@@ -2985,6 +3193,80 @@ public interface ClazzPackage extends EPackage {
 	EClass getClassComment();
 
 	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.clazz.AssociationEnd <em>Association End</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Association End</em>'.
+	 * @see com.bluexml.side.clazz.AssociationEnd
+	 * @generated
+	 */
+	EClass getAssociationEnd();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.AssociationEnd#getCardMin <em>Card Min</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Card Min</em>'.
+	 * @see com.bluexml.side.clazz.AssociationEnd#getCardMin()
+	 * @see #getAssociationEnd()
+	 * @generated
+	 */
+	EAttribute getAssociationEnd_CardMin();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.AssociationEnd#getCardMax <em>Card Max</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Card Max</em>'.
+	 * @see com.bluexml.side.clazz.AssociationEnd#getCardMax()
+	 * @see #getAssociationEnd()
+	 * @generated
+	 */
+	EAttribute getAssociationEnd_CardMax();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.AssociationEnd#isIsNavigable <em>Is Navigable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Navigable</em>'.
+	 * @see com.bluexml.side.clazz.AssociationEnd#isIsNavigable()
+	 * @see #getAssociationEnd()
+	 * @generated
+	 */
+	EAttribute getAssociationEnd_IsNavigable();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.bluexml.side.clazz.AssociationEnd#getLinkedClass <em>Linked Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Linked Class</em>'.
+	 * @see com.bluexml.side.clazz.AssociationEnd#getLinkedClass()
+	 * @see #getAssociationEnd()
+	 * @generated
+	 */
+	EReference getAssociationEnd_LinkedClass();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.clazz.FirstEnd <em>First End</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>First End</em>'.
+	 * @see com.bluexml.side.clazz.FirstEnd
+	 * @generated
+	 */
+	EClass getFirstEnd();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.clazz.SecondEnd <em>Second End</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Second End</em>'.
+	 * @see com.bluexml.side.clazz.SecondEnd
+	 * @generated
+	 */
+	EClass getSecondEnd();
+
+	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.clazz.AssociationType <em>Association Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3215,70 +3497,6 @@ public interface ClazzPackage extends EPackage {
 		EClass ASSOCIATION = eINSTANCE.getAssociation();
 
 		/**
-		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ASSOCIATION__SOURCE = eINSTANCE.getAssociation_Source();
-
-		/**
-		 * The meta object literal for the '<em><b>Destination</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ASSOCIATION__DESTINATION = eINSTANCE.getAssociation_Destination();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Navigable SRC</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSOCIATION__IS_NAVIGABLE_SRC = eINSTANCE.getAssociation_IsNavigableSRC();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Navigable TARGET</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSOCIATION__IS_NAVIGABLE_TARGET = eINSTANCE.getAssociation_IsNavigableTARGET();
-
-		/**
-		 * The meta object literal for the '<em><b>Min SRC</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSOCIATION__MIN_SRC = eINSTANCE.getAssociation_MinSRC();
-
-		/**
-		 * The meta object literal for the '<em><b>Max SRC</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSOCIATION__MAX_SRC = eINSTANCE.getAssociation_MaxSRC();
-
-		/**
-		 * The meta object literal for the '<em><b>Min TARGET</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSOCIATION__MIN_TARGET = eINSTANCE.getAssociation_MinTARGET();
-
-		/**
-		 * The meta object literal for the '<em><b>Max TARGET</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSOCIATION__MAX_TARGET = eINSTANCE.getAssociation_MaxTARGET();
-
-		/**
 		 * The meta object literal for the '<em><b>Association Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3295,36 +3513,20 @@ public interface ClazzPackage extends EPackage {
 		EReference ASSOCIATION__ASSOCIATIONS_CLASS = eINSTANCE.getAssociation_AssociationsClass();
 
 		/**
-		 * The meta object literal for the '<em><b>Role Src</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>First End</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ASSOCIATION__ROLE_SRC = eINSTANCE.getAssociation_RoleSrc();
+		EReference ASSOCIATION__FIRST_END = eINSTANCE.getAssociation_FirstEnd();
 
 		/**
-		 * The meta object literal for the '<em><b>Role Target</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Second End</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ASSOCIATION__ROLE_TARGET = eINSTANCE.getAssociation_RoleTarget();
-
-		/**
-		 * The meta object literal for the '<em><b>Role Src Title</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSOCIATION__ROLE_SRC_TITLE = eINSTANCE.getAssociation_RoleSrcTitle();
-
-		/**
-		 * The meta object literal for the '<em><b>Role Target Title</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSOCIATION__ROLE_TARGET_TITLE = eINSTANCE.getAssociation_RoleTargetTitle();
+		EReference ASSOCIATION__SECOND_END = eINSTANCE.getAssociation_SecondEnd();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.AttributeImpl <em>Attribute</em>}' class.
@@ -3729,6 +3931,68 @@ public interface ClazzPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CLASS_COMMENT = eINSTANCE.getClassComment();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.AssociationEndImpl <em>Association End</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.clazz.impl.AssociationEndImpl
+		 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getAssociationEnd()
+		 * @generated
+		 */
+		EClass ASSOCIATION_END = eINSTANCE.getAssociationEnd();
+
+		/**
+		 * The meta object literal for the '<em><b>Card Min</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ASSOCIATION_END__CARD_MIN = eINSTANCE.getAssociationEnd_CardMin();
+
+		/**
+		 * The meta object literal for the '<em><b>Card Max</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ASSOCIATION_END__CARD_MAX = eINSTANCE.getAssociationEnd_CardMax();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Navigable</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ASSOCIATION_END__IS_NAVIGABLE = eINSTANCE.getAssociationEnd_IsNavigable();
+
+		/**
+		 * The meta object literal for the '<em><b>Linked Class</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ASSOCIATION_END__LINKED_CLASS = eINSTANCE.getAssociationEnd_LinkedClass();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.FirstEndImpl <em>First End</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.clazz.impl.FirstEndImpl
+		 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getFirstEnd()
+		 * @generated
+		 */
+		EClass FIRST_END = eINSTANCE.getFirstEnd();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.SecondEndImpl <em>Second End</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.clazz.impl.SecondEndImpl
+		 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getSecondEnd()
+		 * @generated
+		 */
+		EClass SECOND_END = eINSTANCE.getSecondEnd();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.clazz.AssociationType <em>Association Type</em>}' enum.

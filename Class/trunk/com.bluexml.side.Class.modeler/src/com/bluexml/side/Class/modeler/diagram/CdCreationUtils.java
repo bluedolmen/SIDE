@@ -109,8 +109,7 @@ public class CdCreationUtils extends AbstractCreationUtils {
 		 * @see com.bluexml.side.clazz.util.ClazzSwitch#caseClassComment(com.bluexml.side.clazz.ClassComment)
 		 * @generated
 		 */
-		public Object caseClassComment(
-				com.bluexml.side.clazz.ClassComment object) {
+		public Object caseClassComment(com.bluexml.side.clazz.ClassComment object) {
 			if ("default".equals(presentation)) {
 				return createGraphElementClassComment(object, presentation);
 			}
@@ -132,11 +131,9 @@ public class CdCreationUtils extends AbstractCreationUtils {
 		 * @see com.bluexml.side.clazz.util.ClazzSwitch#caseEnumerationLiteral(com.bluexml.side.clazz.EnumerationLiteral)
 		 * @generated
 		 */
-		public Object caseEnumerationLiteral(
-				com.bluexml.side.clazz.EnumerationLiteral object) {
+		public Object caseEnumerationLiteral(com.bluexml.side.clazz.EnumerationLiteral object) {
 			if ("default".equals(presentation)) {
-				return createGraphElementEnumerationLiteral(object,
-						presentation);
+				return createGraphElementEnumerationLiteral(object, presentation);
 			}
 			return null;
 		}
@@ -168,8 +165,7 @@ public class CdCreationUtils extends AbstractCreationUtils {
 	public GraphElement createGraphElement(EObject obj, String presentation) {
 		Object graphElt = null;
 
-		if ("http://www.kerblue.org/class/1.0".equals(obj.eClass()
-				.getEPackage().getNsURI())) {
+		if ("http://www.kerblue.org/class/1.0".equals(obj.eClass().getEPackage().getNsURI())) {
 			graphElt = new GraphicClazzSwitch(presentation).doSwitch(obj);
 		}
 
@@ -182,21 +178,17 @@ public class CdCreationUtils extends AbstractCreationUtils {
 	 * @return the complete GraphElement
 	 * @generated
 	 */
-	protected GraphElement createGraphElementClazz(
-			com.bluexml.side.clazz.Clazz element, String presentation) {
+	protected GraphElement createGraphElementClazz(com.bluexml.side.clazz.Clazz element, String presentation) {
 		// TODO this snippet of code should be customized if it is not well generated
 		GraphNode nodeParent = createGraphNode(element, presentation);
 
-		GraphNode attribute = createGraphNode(element,
-				ClazzPackage.CLAZZ__ATTRIBUTES, presentation);
+		GraphNode attribute = createGraphNode(element, ClazzPackage.CLAZZ__ATTRIBUTES, presentation);
 		attribute.setContainer(nodeParent);
 
-		GraphNode operation = createGraphNode(element,
-				ClazzPackage.CLAZZ__OPERATIONS, presentation);
+		GraphNode operation = createGraphNode(element, ClazzPackage.CLAZZ__OPERATIONS, presentation);
 		operation.setContainer(nodeParent);
 
-		GraphNode aspect = createGraphNode(element,
-				ClazzPackage.CLAZZ__ASPECTS, presentation);
+		GraphNode aspect = createGraphNode(element, ClazzPackage.CLAZZ__ASPECTS, presentation);
 		aspect.setContainer(nodeParent);
 
 		return nodeParent;
@@ -208,13 +200,11 @@ public class CdCreationUtils extends AbstractCreationUtils {
 	 * @return the complete GraphElement
 	 * @generated
 	 */
-	protected GraphElement createGraphElementAspect(
-			com.bluexml.side.clazz.Aspect element, String presentation) {
+	protected GraphElement createGraphElementAspect(com.bluexml.side.clazz.Aspect element, String presentation) {
 		// TODO this snippet of code should be customized if it is not well generated
 		GraphNode nodeParent = createGraphNode(element, presentation);
 
-		GraphNode attribute = createGraphNode(element,
-				ClazzPackage.ASPECT__ATTRIBUTES, presentation);
+		GraphNode attribute = createGraphNode(element, ClazzPackage.ASPECT__ATTRIBUTES, presentation);
 		attribute.setContainer(nodeParent);
 
 		return nodeParent;
@@ -226,8 +216,7 @@ public class CdCreationUtils extends AbstractCreationUtils {
 	 * @return the complete GraphElement
 	 * @generated
 	 */
-	protected GraphElement createGraphElementAttribute(
-			com.bluexml.side.clazz.Attribute element, String presentation) {
+	protected GraphElement createGraphElementAttribute(com.bluexml.side.clazz.Attribute element, String presentation) {
 		return createGraphNode(element, presentation);
 	}
 
@@ -237,8 +226,7 @@ public class CdCreationUtils extends AbstractCreationUtils {
 	 * @return the complete GraphElement
 	 * @generated
 	 */
-	protected GraphElement createGraphElementClassComment(
-			com.bluexml.side.clazz.ClassComment element, String presentation) {
+	protected GraphElement createGraphElementClassComment(com.bluexml.side.clazz.ClassComment element, String presentation) {
 		return createGraphNode(element, presentation);
 	}
 
@@ -248,13 +236,11 @@ public class CdCreationUtils extends AbstractCreationUtils {
 	 * @return the complete GraphElement
 	 * @generated
 	 */
-	protected GraphElement createGraphElementEnumeration(
-			com.bluexml.side.clazz.Enumeration element, String presentation) {
+	protected GraphElement createGraphElementEnumeration(com.bluexml.side.clazz.Enumeration element, String presentation) {
 		// TODO this snippet of code should be customized if it is not well generated
 		GraphNode nodeParent = createGraphNode(element, presentation);
 
-		GraphNode enumerationliteral = createGraphNode(element,
-				ClazzPackage.ENUMERATION__LITERALS, presentation);
+		GraphNode enumerationliteral = createGraphNode(element, ClazzPackage.ENUMERATION__LITERALS, presentation);
 		enumerationliteral.setContainer(nodeParent);
 
 		return nodeParent;
@@ -266,9 +252,7 @@ public class CdCreationUtils extends AbstractCreationUtils {
 	 * @return the complete GraphElement
 	 * @generated
 	 */
-	protected GraphElement createGraphElementEnumerationLiteral(
-			com.bluexml.side.clazz.EnumerationLiteral element,
-			String presentation) {
+	protected GraphElement createGraphElementEnumerationLiteral(com.bluexml.side.clazz.EnumerationLiteral element, String presentation) {
 		return createGraphNode(element, presentation);
 	}
 
@@ -278,8 +262,7 @@ public class CdCreationUtils extends AbstractCreationUtils {
 	 * @return the complete GraphElement
 	 * @generated
 	 */
-	protected GraphElement createGraphElementAssociation(
-			com.bluexml.side.clazz.Association element, String presentation) {
+	protected GraphElement createGraphElementAssociation(com.bluexml.side.clazz.Association element, String presentation) {
 		GraphEdge graphEdge = createGraphEdge(element, presentation);
 		return graphEdge;
 	}
@@ -302,17 +285,13 @@ public class CdCreationUtils extends AbstractCreationUtils {
 	 * @generated
 	 */
 	private IPreferenceStore getPreferenceStore() {
-		IEditorInput editorInput = ClazzPlugin.getActivePage()
-				.getActiveEditor().getEditorInput();
+		IEditorInput editorInput = ClazzPlugin.getActivePage().getActiveEditor().getEditorInput();
 		if (editorInput instanceof IFileEditorInput) {
-			IProject project = ((IFileEditorInput) editorInput).getFile()
-					.getProject();
+			IProject project = ((IFileEditorInput) editorInput).getFile().getProject();
 			Preferences root = Platform.getPreferencesService().getRootNode();
 			try {
-				if (root.node(ProjectScope.SCOPE).node(project.getName())
-						.nodeExists(ClazzPlugin.getId())) {
-					return new ScopedPreferenceStore(new ProjectScope(project),
-							ClazzPlugin.getId());
+				if (root.node(ProjectScope.SCOPE).node(project.getName()).nodeExists(ClazzPlugin.getId())) {
+					return new ScopedPreferenceStore(new ProjectScope(project), ClazzPlugin.getId());
 				}
 			} catch (BackingStoreException e) {
 				e.printStackTrace();
