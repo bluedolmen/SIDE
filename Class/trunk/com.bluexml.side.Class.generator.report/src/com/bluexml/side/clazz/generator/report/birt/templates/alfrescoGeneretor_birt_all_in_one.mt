@@ -30,6 +30,19 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
     <data-sets> 
 <%for (getAllClasses()){%>
         <oda-data-set extensionID="org.eclipse.datatools.enablement.oda.xml.dataSet" name="Data Set <%name%>" id="6<%i()%>">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">TotalSize</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["Size"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                 <%for (getAllAttributes()){%>
@@ -38,7 +51,14 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
                         <property name="name"><%getLabel()%></property>
                         <property name="dataType">string</property>
                     </structure>
+                    <%pop()%>
+	                <%i().push()%>
                 <%}%>
+                	<structure>
+                        <property name="position"><%peek()+2%></property>
+                        <property name="name">Size</property>
+                        <property name="dataType">string</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">Data Source</property>
@@ -52,9 +72,23 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
                         <property name="nativeDataType">12</property>
                     </structure>
                 <%}%>
+                	<structure>
+                        <property name="position"><%peek()+2%></property>
+                        <property name="name">Size</property>
+                        <property name="nativeName">Size</property>
+                        <property name="dataType">string</property>
+                        <property name="nativeDataType">12</property>
+                    </structure>
+                    <structure>
+                        <property name="position"><%peek()+3%></property>
+                        <property name="name">TotalSize</property>
+                        <property name="nativeName">TotalSize</property>
+                        <property name="dataType">float</property>
+                        <property name="nativeDataType">8</property>
+                    </structure>
             </list-property>
             <%getAllAttributes().nLast().put("last")%>
-            <property name="queryText">table0#-TNAME-#table0#:#[/records/items/item]#:#<%for (getAllAttributes()){%>{<%getLabel()%>;STRING;/<%current().getQualifiedName%>}<%if (current() != get("last")) {%>,<%}%><%}%></property>
+            <property name="queryText">table0#-TNAME-#table0#:#[/records/items/item]#:#<%for (getAllAttributes()){%>{<%getLabel()%>;STRING;/<%current().getQualifiedName%>}<%}%>,{Size:STRING;/size}</property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="ISO-8859-1"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -244,9 +278,39 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
                 </row>
             </detail>
         </table>
+        <grid id="24">
+            <property name="width">100%</property>
+            <column id="25"/>
+            <column id="26"/>
+            <row id="27">
+                <cell id="28">
+                    <label id="29">
+                        <text-property name="text">Disk Size</text-property>
+                    </label>
+                </cell>
+                <cell id="30">
+                    <data id="31">
+                    	<structure name="numberFormat">
+                            <property name="category">Custom</property>
+                            <property name="pattern">###,##0.00 Bytes</property>
+                        </structure>
+                        <property name="dataSet">Data Set <%name%></property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">TotalSize</property>
+                                <property name="displayName">TotalSize</property>
+                                <expression name="expression">dataSetRow["TotalSize"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">TotalSize</property>
+                    </data>
+                </cell>
+            </row>
+        </grid>
         <table id="24<%i()%>">
             <property name="width">100%</property>
-            <property name="dataSet">Data Set</property>
+            <property name="dataSet">Data Set <%name%></property>
             <list-property name="boundDataColumns">
             	<%pop()%>
             	<%i().push()%>
