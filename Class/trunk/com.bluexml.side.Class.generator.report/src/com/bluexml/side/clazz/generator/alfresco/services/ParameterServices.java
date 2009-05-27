@@ -38,10 +38,5 @@ public class ParameterServices {
 	public String getSimpleDate(EObject e) {
 		return new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 	}
-	
-	
-	public void test(EObject e){
-		
-	}
 
 }
