@@ -37,6 +37,8 @@ webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/<%getQualifiedNam
 	<nodeRef>${child.nodeRef}</nodeRef>
 	<parent>${child.parent.nodeRef}</parent>
 	<size>${child.size}</size>
+	<createdDate>${child.properties["cm:created"]?datetime}</createdDate>
+	<modifyDate>${child.properties["cm:modified"]?datetime}</modifyDate>
 	<%for (getAllAttributes()){%>
 	<#if (child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?exists)>
 		<#if child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?is_sequence>
