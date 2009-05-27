@@ -2,7 +2,7 @@
 <feature
       id="com.bluexml.side.Application.feature"
       label="S-IDE Application"
-      version="1.0.11"
+      version="1.0.12"
       provider-name="BLUEXML">
 
    <description url="http://www.example.com/description">
@@ -44,7 +44,7 @@
          id="com.bluexml.side.Application"
          download-size="0"
          install-size="0"
-         version="1.0.11"
+         version="1.0.12"
          unpack="false"/>
 
    <plugin
@@ -65,21 +65,21 @@
          id="com.bluexml.side.Application.generator"
          download-size="0"
          install-size="0"
-         version="1.0.11"
+         version="1.0.12"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.generator.acceleo"
          download-size="0"
          install-size="0"
-         version="1.0.11"
+         version="1.0.12"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.ui"
          download-size="0"
          install-size="0"
-         version="1.0.11"
+         version="1.0.12"
          unpack="false"/>
 
    <plugin
@@ -93,14 +93,14 @@
          id="com.bluexml.side.Application.deployer.alfresco"
          download-size="0"
          install-size="0"
-         version="1.0.11"
+         version="1.0.12"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.settings"
          download-size="0"
          install-size="0"
-         version="1.0.11"
+         version="1.0.12"
          unpack="false"/>
 
    <plugin
@@ -114,7 +114,7 @@
          id="com.bluexml.side.Application.deployer"
          download-size="0"
          install-size="0"
-         version="1.0.11"
+         version="1.0.12"
          unpack="false"/>
 
 </feature>

@@ -2,7 +2,7 @@
 <feature
       id="com.bluexml.side.Class.modeler.feature"
       label="S-IDE Class Modeler"
-      version="1.0.11"
+      version="1.0.12"
       provider-name="BLUEXML">
 
    <description url="http://www.example.com/description">
@@ -41,14 +41,14 @@
          id="com.bluexml.side.Class"
          download-size="0"
          install-size="0"
-         version="1.0.11"
+         version="1.0.12"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Class.edit"
          download-size="0"
          install-size="0"
-         version="1.0.11"
+         version="1.0.12"
          unpack="false"/>
 
    <plugin
@@ -62,7 +62,7 @@
          id="com.bluexml.side.Class.modeler"
          download-size="0"
          install-size="0"
-         version="1.0.11"
+         version="1.0.12"
          unpack="false"/>
 
 </feature>
