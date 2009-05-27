@@ -12,7 +12,7 @@
                name="Facetmap"
                url="http://facetmap.com/spec/facetmap2_0.dtd">
             <technologyVersion
-                  id="facetmap2"
+                  id="facetmap"
                   version="Facetmap 2.0">
                <generatorVersion
                      class="com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator"
