@@ -10,7 +10,7 @@
             url="http://www.kerblue.org/class/1.0">
          <technology
                description="Check this to generate Facet navigation features associated to the designed objects of your class models.&lt;br&gt;Facetmap is a library allowing to produce facet navigation through object categories.&lt;br&gt;S-IDE allows to optimize the generation of the Facetmap components based on the newly designed objects of your class models."
-               id="facetmap"
+               id="Facetmap 2.x"
                name="Facetmap"
                url="http://facetmap.com/spec/facetmap2_0.dtd">
             <technologyVersion

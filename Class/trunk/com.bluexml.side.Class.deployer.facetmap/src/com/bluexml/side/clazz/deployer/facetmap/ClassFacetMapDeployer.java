@@ -17,8 +17,6 @@
 package com.bluexml.side.clazz.deployer.facetmap;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.bluexml.side.application.deployer.Deployer;
 import com.bluexml.side.util.libs.FileHelper;
@@ -35,42 +33,58 @@ public class ClassFacetMapDeployer extends Deployer {
 	static final String webapps = "webapps";
 	static final String webappName = "facetmap";
 	static final String cmis2xfml_filename = "cmis2xfml.xsl";
+	static final String cmisjs_filename = "cmis2xfml.xsl";
 	
 	public String getFacetmapHome() {
 		return getGenerationParameters().get(CONFIGURATION_PARAMETER_FACETMAP_HOME);
 	}
 	
-
-	public String getXslLocation() {
-			return getFacetmapHome() + File.separator + "WEB-INF" + File.separator + "xsl" + File.separator;
+	// Emplacements de la xsl générée
+	public String getXslLocationInWebApp() {
+			return getFacetmapHome() + File.separator + "WEB-INF" + File.separator + "xsl" + File.separator + cmis2xfml_filename;
+	}
+	
+	public String getXslLocationInGeneration() {
+		return File.separator+ "xsl" + File.separator + cmis2xfml_filename;
+	}
+	
+	//Emplacements du fichier javascript CMIS
+	public String getCMISLocationInWebApp() {
+		return getFacetmapHome() + File.separator + "WEB-INF" + File.separator + "xsl" + File.separator + cmis2xfml_filename;
+	}
+	
+	public String getCMISLocationInGeneration() {
+		return File.separator + cmisjs_filename;
 	}
 
 	
 	@Override
 	protected void clean(File fileToDeploy) throws Exception {
 		// remove existing deployed alfresco webapp.
-		FileHelper.deleteFile(new File(getXslLocation()+cmis2xfml_filename));
+		FileHelper.deleteFile(new File(getXslLocationInWebApp()));
 	}
 	
 	@Override
 	protected void deployProcess(File fileToDeploy) throws Exception {
+		System.out.println(fileToDeploy.getPath());
 		if (!fileToDeploy.exists()) {
 			throw new Exception("No files to deploy !");
 		}
 		// build command line
-		String fileToDeployString = fileToDeploy.getAbsolutePath();
-		List<String> argss = new ArrayList<String>();
-		argss.add("install");
-		argss.add(fileToDeployString);
-		argss.add(getFacetmapHome());
-		
-		String[] args = new String[argss.size()];
-		args = argss.toArray(args);
+//		String fileToDeployString = fileToDeploy.getAbsolutePath();
+//		List<String> argss = new ArrayList<String>();
+//		argss.add("install");
+//		argss.add(fileToDeployString);
+//		argss.add(getFacetmapHome());
+//		
+//		String[] args = new String[argss.size()];
+//		args = argss.toArray(args);
 
 	}
 
 	@Override
-	protected void postProcess(File fileToDeploy) throws Exception {}
+	protected void postProcess(File fileToDeploy) throws Exception {
+	}
 
 	@Override
 	protected void preProcess(File fileToDeploy) throws Exception {}
