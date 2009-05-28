@@ -30,11 +30,10 @@ public class Deployer extends ImplNode {
 			Configuration config = ApplicationDialog.getCurrentConfiguration();
 			if (config != null) {
 				// Remove element
-				ApplicationUtil.deleteImplNodeFromConf(config,this);
+				ApplicationUtil.deleteDeployerFromConf(config, this);
 
 				// Add the new element
 				if (isChecked() && isEnabled()) {
-					
 					DeployerConfiguration elt = ApplicationFactory.eINSTANCE.createDeployerConfiguration();
 					elt.setId(getId());
 					elt.setId_techno_version(parent.getId());

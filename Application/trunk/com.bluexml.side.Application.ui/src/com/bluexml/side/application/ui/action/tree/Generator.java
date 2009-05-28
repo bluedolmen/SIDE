@@ -30,7 +30,7 @@ public class Generator extends ImplNode {
 			Configuration config = ApplicationDialog.getCurrentConfiguration();
 			if (config != null) {
 				// Remove element
-				ApplicationUtil.deleteImplNodeFromConf(config,this);
+				ApplicationUtil.deleteGeneratorFromConf(config,this);
 				
 				// Add the new element
 				if (isChecked() && isEnabled()) {

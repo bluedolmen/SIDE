@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -92,12 +93,36 @@ public class Generate extends Thread {
 		}
 
 		try {
-			modelsInfo = (HashMap<String, List<IFile>>) getAssociatedMetaModel(models, skipValidation);
+			modelsInfo = (HashMap<String, List<IFile>>) ApplicationUtil.getAssociatedMetaModel(models);
 		} catch (IOException e) {
 			addErrorText("Error with model : " + e.getMessage());
 			e.printStackTrace();
 		}
-
+		
+		
+		// Validation :
+		label.setText("Validating models");
+		if (!skipValidation) {
+			Iterator<List<IFile>> it = modelsInfo.values().iterator();
+			List<IFile> listModel;
+			while (it.hasNext()) {
+				listModel = it.next();
+				for (IFile m : listModel) {
+					try {
+						if (ApplicationUtil.validate(m)) {
+							addText(System.getProperty("line.separator") + m.getName() + " validated");
+						} else {
+							addErrorText("Model " + m.getName() + " isn't validated. Please launch 'Validate' on top model element of " + m.getName() + ".");
+						}
+						
+					} catch (IOException e) {
+						addErrorText("Error with model " + m.getName() + " : " +e.getMessage());
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		addOneStep(progressBar);
 		generate(configuration, modelsInfo, configurationParameters, generationParameters);
 	}
 
@@ -285,131 +310,5 @@ public class Generate extends Thread {
 			}
 		}
 		return error;
-	}
-
-	/**
-	 * Return a map with association model <> metaModel name
-	 * 
-	 * @param models
-	 * @param doValidation
-	 * @return
-	 * @throws IOException
-	 * @throws IOException
-	 */
-	private Map<String, List<IFile>> getAssociatedMetaModel(List<Model> models, boolean skipValidation) throws IOException {
-		Map<String, List<IFile>> result = new HashMap<String, List<IFile>>();
-		for (Model model : models) {
-			Resource modelResource = null;
-			try {
-				modelResource = EResourceUtils.createResource(model.getFile());
-			} catch (IOException e) {
-				throw new IOException(System.getProperty("line.separator") + "Error for file/model " + model.getName());
-			}
-			ResourceSet rs = modelResource.getResourceSet();
-
-			IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(model.getFile()));
-			if (!file.exists()) {
-				throw new IOException(System.getProperty("line.separator") + "File " + file.getName() + " doesn't exist.");
-			}
-			String fullPath = file.getRawLocation().toOSString();
-			Resource loadedModel;
-			try {
-				loadedModel = EResourceUtils.openModel(fullPath, null, rs);
-			} catch (IOException e) {
-				IOException ioe = new IOException(System.getProperty("line.separator") + "Error with file " + file.getName() + " (check that it's a correct model file)");
-				ioe.setStackTrace(e.getStackTrace());
-				throw ioe;
-			}
-
-			EPackage metaModel = getMetaModelEpackage(loadedModel);
-
-			if (metaModel != null) {
-				if (!result.containsKey(metaModel.getNsURI())) {
-					result.put(metaModel.getNsURI(), new ArrayList<IFile>());
-				}
-
-				if (file.exists()) {
-					result.get(metaModel.getNsURI()).add(file);
-				} else {
-					throw new IOException(System.getProperty("line.separator") + "No model found at " + file.getFullPath());
-				}
-			}
-			if (!skipValidation) {
-				EObject te = getRootElement(loadedModel);
-				if (te != null) {
-					label.setText(System.getProperty("line.separator") + "Validating model " + loadedModel.getURI());
-					if (!validate(te)) {
-						throw new IOException(System.getProperty("line.separator") + "You have error in your model (" + file.getFullPath() + "), please run validate on first element of your model and correct error(s).");
-					} else {
-						addText(System.getProperty("line.separator") + "Model validated : " + file.getFullPath() + " with success.");
-					}
-					addOneStep(progressBar);
-				} else {
-					throw new IOException(System.getProperty("line.separator") + "No root element found in " + file.getFullPath() + ". Model empty?");
-				}
-			} else {
-				label.setText(System.getProperty("line.separator") + "Validatiion skipped.");
-				addOneStep(progressBar);
-			}
-		}
-		return result;
-	}
-
-	/**
-	 * Launch validation on given EObject
-	 * 
-	 * @param eo
-	 * @return
-	 */
-	private boolean validate(EObject eo) {
-		Diagnostician diag = new Diagnostician();
-		BasicDiagnostic diagnostics = diag.createDefaultDiagnostic(eo);
-		return diag.validate(eo, diagnostics);
-	}
-
-	/**
-	 * Return the root element of a model
-	 * 
-	 * @param model
-	 * @return
-	 */
-	private EObject getRootElement(Resource model) {
-		EObject te = null;
-		if (model.getContents() != null && model.getContents().size() > 0) {
-			EObject eo = model.getContents().get(0);
-			te = getTopElement(eo);
-
-		}
-		return te;
-	}
-
-	/**
-	 * Take a EObject and will return the top container
-	 * 
-	 * @param eo
-	 * @return
-	 */
-	private EObject getTopElement(EObject eo) {
-		if (eo.eContainer() != null) {
-			return getTopElement(eo.eContainer());
-		} else {
-			return eo;
-		}
-	}
-
-	/**
-	 * Return the meta model EPackage
-	 * 
-	 * @param r
-	 * @return
-	 */
-	public EPackage getMetaModelEpackage(Resource r) {
-		EPackage result = null;
-		if (r != null) {
-			if (r.getContents() != null && r.getContents().size() > 0) {
-				result = (EPackage) r.getContents().get(0).eClass().getEPackage();
-			}
-		}
-		return result;
 	}
 }
