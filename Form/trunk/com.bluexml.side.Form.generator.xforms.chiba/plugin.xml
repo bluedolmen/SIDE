@@ -4,26 +4,31 @@
 <extension
          point="com.bluexml.side.Application.com_bluexml_application_configuration">
    <metamodel
+         description="Check this to generate form models on leading frameworks.&lt;br&gt; This Form Metamodel allows to model Web Forms to integrate in your web application or web framework customizations.&lt;br&gt;S-IDE provides the modeler to graphically produce form models and various generators to instantiate these models on leading frameworks."
          id="http://www.kerblue.org/form/1.0"
          name="KSR400 Form"
          url="http://www.kerblue.org/v2/ksr500-form/">
       <technology
-            id="alfresco"
+            description="Check this to generate your form models on a XForms engine.&lt;br&gt;XForms is a standard to describe the structure of web forms using precise semantics and separation of concern.&lt;br&gt;S-IDE allows to optimize the production of XForms-based web forms through graphical design, automatic generation, data integration and Xforms-based engine deployment."
+            id="xforms"
             idMetamodel="http://www.kerblue.org/form/1.0"
-            name="Alfresco"
+            name="Xforms"
             url="http://www.alfresco.com">
          <technologyVersion
-               id="alfresco_3.x"
+               description="Check this to generate your form models on the major release 1.5 of the XForms-based Chiba engine.&lt;br&gt;Chiba 1.5.x is the leading open source Xforms engine solution.&lt;br&gt;S-IDE allows to generate the XForms templates and this generation has been heavily qualified on Chiba."
+               id="chiba_1_5.x"
                idTechnology="alfresco"
-               version="Alfresco3.x Labs and Entreprise">
+               version="Chiba 1.5.x">
             <generatorVersion
                   class="com.bluexml.side.forms.generator.alfresco.chiba.FormGenerator"
+                  description="Check this to generate a full deployable Chiba package containing the newly designed web forms.&lt;br&gt;The generated packages are standard WAR files which may be deployed in any Chiba 1.5.x instance under the &apos;webapp&apos; web application server directory.&lt;br&gt;S-IDE provides the necessary components to deploy these packages through the &apos;deployer&apos; tab, including the data controller to access data through generated web forms."
                   id="com.bluexml.side.Form.generator.xforms.chiba"
                   idTechnologyVersion="alfresco_3.0_labs"
-                  version="S-IDE Alfresco Form Generator 1.0.0">
+                  version="S-IDE Chiba Form Generator 1.0.0">
                <configurationParameter
+                     documentation="Set this value to the directory where you want to store the generated Chiba WAR deployment file; default value is under the generation path."
                      key="war.folder"
-                     label="Folder output for war">
+                     label="Folder output for Chiba WAR deployment file">
                </configurationParameter>
             </generatorVersion>
          </technologyVersion>
