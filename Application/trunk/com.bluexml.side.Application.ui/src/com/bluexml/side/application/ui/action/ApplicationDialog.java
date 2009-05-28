@@ -1,13 +1,19 @@
 package com.bluexml.side.application.ui.action;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,9 +22,12 @@ import org.eclipse.core.internal.resources.Folder;
 import org.eclipse.core.internal.resources.Project;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
@@ -230,11 +239,57 @@ public class ApplicationDialog extends Dialog {
 					String modelPath = list.getItem(selections[0]);
 					Model m = getModelByFilePath(modelPath);
 					modelPropertiesTable.removeAll();
+					EPackage metaModel = null;
+					try {
+						metaModel = ApplicationUtil.getMetaModelForModel(m);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					IFile file = null;
+					try {
+						file = ApplicationUtil.getIFileForModel(m);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 					if (m != null) {
 						TableItem item = new TableItem (modelPropertiesTable, SWT.NONE);
 						// Name
 						item.setText (0, "Name");
 						item.setText (1, m.getName());
+					}
+					if (metaModel != null) {
+						TableItem item = new TableItem (modelPropertiesTable, SWT.NONE);
+						// Metamodel
+						item.setText (0, "Metamodel");
+						item.setText (1, metaModel.getNsURI());
+					}
+					if (file != null) {
+						TableItem item = new TableItem (modelPropertiesTable, SWT.NONE);
+						// Charset
+						
+						try {
+							item.setText (1, file.getCharset());
+							item.setText (0, "Charset");
+						} catch (CoreException e) {
+							e.printStackTrace();
+						}
+						
+						TableItem item2 = new TableItem (modelPropertiesTable, SWT.NONE);
+						// Modification date
+						IPath path = file.getLocation();
+						if (path != null) {
+							File ioFile = path.toFile();
+							if (ioFile != null) {
+								Date date = new Timestamp(ioFile.lastModified());
+								Locale locale = Locale.getDefault();
+								DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.FULL, locale);
+								item2.setText (0, "Last Modification");
+								item2.setText (1, dateFormat.format(date));
+							}
+						}
+						
 					}
 			}
 		} else {
@@ -713,6 +768,7 @@ public class ApplicationDialog extends Dialog {
 					removeModel(list.getSelection());
 					list.remove(select);
 				}
+				modelPropertiesTable.setVisible(false);
 			}
 
 		});

@@ -12,7 +12,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -31,7 +30,6 @@ import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.application.ui.action.tree.Deployer;
 import com.bluexml.side.application.ui.action.tree.Generator;
-import com.bluexml.side.application.ui.action.tree.ImplNode;
 
 public class ApplicationUtil {
 	/**
@@ -88,8 +86,6 @@ public class ApplicationUtil {
 			}
 		}
 		config.getGeneratorConfigurations().removeAll(eltsGc);
-		
-		
 	}
 	
 	/**
@@ -151,29 +147,10 @@ public class ApplicationUtil {
 	public static Map<String, List<IFile>> getAssociatedMetaModel(List<Model> models) throws IOException {
 		Map<String, List<IFile>> result = new HashMap<String, List<IFile>>();
 		for (Model model : models) {
-			Resource modelResource = null;
-			try {
-				modelResource = EResourceUtils.createResource(model.getFile());
-			} catch (IOException e) {
-				throw new IOException(System.getProperty("line.separator") + "Error for file/model " + model.getName());
-			}
-			ResourceSet rs = modelResource.getResourceSet();
-
-			IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(model.getFile()));
-			if (!file.exists()) {
-				throw new IOException(System.getProperty("line.separator") + "File " + file.getName() + " doesn't exist.");
-			}
-			String fullPath = file.getRawLocation().toOSString();
-			Resource loadedModel;
-			try {
-				loadedModel = EResourceUtils.openModel(fullPath, null, rs);
-			} catch (IOException e) {
-				IOException ioe = new IOException(System.getProperty("line.separator") + "Error with file " + file.getName() + " (check that it's a correct model file)");
-				ioe.setStackTrace(e.getStackTrace());
-				throw ioe;
-			}
-
-			EPackage metaModel = getMetaModelEpackage(loadedModel);
+			
+			IFile file = getIFileForModel(model);
+			
+			EPackage metaModel = getMetaModelForModel(model);
 
 			if (metaModel != null) {
 				if (!result.containsKey(metaModel.getNsURI())) {
@@ -188,6 +165,74 @@ public class ApplicationUtil {
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * Return the metamodel of a given model
+	 * @param model
+	 * @param file
+	 * @return
+	 * @throws IOException
+	 */
+	public static EPackage getMetaModelForModel(Model model)
+			throws IOException {
+		Resource loadedModel = getResourceForModel(model);
+		EPackage metaModel = getMetaModelEpackage(loadedModel);
+		return metaModel;
+	}
+
+	/**
+	 * Return the resource for the given model and resource set
+	 * @param rs
+	 * @param file
+	 * @return
+	 * @throws IOException
+	 */
+	public static Resource getResourceForModel(Model model)
+			throws IOException {
+		ResourceSet rs = getRessourceSetForModel(model);
+		IFile file = getIFileForModel(model);
+		String fullPath = file.getRawLocation().toOSString();
+		Resource loadedModel;
+		try {
+			loadedModel = EResourceUtils.openModel(fullPath, null, rs);
+		} catch (IOException e) {
+			IOException ioe = new IOException(System.getProperty("line.separator") + "Error with file " + file.getName() + " (check that it's a correct model file)");
+			ioe.setStackTrace(e.getStackTrace());
+			throw ioe;
+		}
+		return loadedModel;
+	}
+
+	/**
+	 * Return the IFiel for the given Model
+	 * @param model
+	 * @return
+	 * @throws IOException
+	 */
+	public static IFile getIFileForModel(Model model) throws IOException {
+		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(model.getFile()));
+		if (!file.exists()) {
+			throw new IOException(System.getProperty("line.separator") + "File " + file.getName() + " doesn't exist.");
+		}
+		return file;
+	}
+
+	/**
+	 * Return the ressourceSet for a model
+	 * @param model
+	 * @return
+	 * @throws IOException
+	 */
+	public static ResourceSet getRessourceSetForModel(Model model) throws IOException {
+		Resource modelResource = null;
+		try {
+			modelResource = EResourceUtils.createResource(model.getFile());
+		} catch (IOException e) {
+			throw new IOException(System.getProperty("line.separator") + "Error for file/model " + model.getName());
+		}
+		ResourceSet rs = modelResource.getResourceSet();
+		return rs;
 	}
 	
 	/**
