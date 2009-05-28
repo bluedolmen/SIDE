@@ -16,7 +16,7 @@ Foundation, Inc., 59 Temple Place, Boston, MA 02111.
  --%>
  <%
 metamodel http://www.kerblue.org/class/1.0
-import com.bluexml.side.application.generator.report.ReportGenerator
+import com.bluexml.side.clazz.generator.report.ReportGenerator
 import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 %>
 <%script type="clazz.ClassModelElement" name="getFolder" description="Get the folder to export" %>
