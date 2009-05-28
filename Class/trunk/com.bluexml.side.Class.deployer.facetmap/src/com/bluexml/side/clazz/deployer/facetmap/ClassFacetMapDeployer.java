@@ -33,7 +33,7 @@ public class ClassFacetMapDeployer extends Deployer {
 	static final String webapps = "webapps";
 	static final String webappName = "facetmap";
 	static final String cmis2xfml_filename = "cmis2xfml.xsl";
-	static final String cmisjs_filename = "cmis2xfml.xsl";
+	static final String cmisjs_filename = "index.get.js";
 	
 	public String getFacetmapHome() {
 		return getGenerationParameters().get(CONFIGURATION_PARAMETER_FACETMAP_HOME);
@@ -66,10 +66,13 @@ public class ClassFacetMapDeployer extends Deployer {
 	
 	@Override
 	protected void deployProcess(File fileToDeploy) throws Exception {
-		System.out.println(fileToDeploy.getPath());
-		if (!fileToDeploy.exists()) {
+		File cmisjs =  new File (fileToDeploy.getPath()+getCMISLocationInGeneration());
+		File cmis2xfml = new File(fileToDeploy.getPath()+getXslLocationInGeneration());
+		System.out.println(cmis2xfml.getPath()+"\n"+cmisjs.getPath());
+		if (!cmisjs.exists()||!cmis2xfml.exists()) {
 			throw new Exception("No files to deploy !");
 		}
+		System.out.println("Files found");
 		// build command line
 //		String fileToDeployString = fileToDeploy.getAbsolutePath();
 //		List<String> argss = new ArrayList<String>();

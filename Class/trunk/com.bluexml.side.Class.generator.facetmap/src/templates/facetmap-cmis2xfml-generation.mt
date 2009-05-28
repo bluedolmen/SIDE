@@ -5,7 +5,7 @@ import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
 %>
 
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
-	./facetmap/xsl/cmis2xfml.xsl
+	./xsl/cmis2xfml.xsl
 
 <%script type="clazz.Clazz" name="taxonomy"%>
 	<%if getLabel()=="Personne"{%>

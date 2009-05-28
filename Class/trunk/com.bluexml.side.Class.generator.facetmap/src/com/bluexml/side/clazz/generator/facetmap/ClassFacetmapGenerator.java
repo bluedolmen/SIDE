@@ -31,9 +31,13 @@ import com.bluexml.side.settings.SidePreferences;
  *
  */
 public class ClassFacetmapGenerator extends AbstractAcceleoGenerator {
-
 	public static String GENERATOR_CODE = "CODE_GED_G_C_FACETMAP_2";
 	public static String MMUri = "http://www.kerblue.org/class/1.0";
+	
+	public ClassFacetmapGenerator(){
+		techVersion = "facetmap";
+		this.setTEMP_FOLDER(getTechVersion());
+	}
 	
 	/* (non-Javadoc)
 	 * @see com.bluexml.side.application.generator.acceleo.AbstractAcceleoGenerator#getMetamodelURI()
@@ -63,7 +67,7 @@ public class ClassFacetmapGenerator extends AbstractAcceleoGenerator {
 	}
 
 	public Collection<IFile> complete() throws Exception {
-		return null;
+		return new ArrayList<IFile>();
 	}
 
 }
