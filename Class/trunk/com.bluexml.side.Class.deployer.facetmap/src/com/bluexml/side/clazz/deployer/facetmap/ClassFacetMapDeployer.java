@@ -19,7 +19,6 @@ package com.bluexml.side.clazz.deployer.facetmap;
 import java.io.File;
 
 import com.bluexml.side.application.deployer.Deployer;
-import com.bluexml.side.util.libs.FileHelper;
 
 
 
@@ -29,28 +28,40 @@ import com.bluexml.side.util.libs.FileHelper;
  * 
  */
 public class ClassFacetMapDeployer extends Deployer {
-	public static String CONFIGURATION_PARAMETER_FACETMAP_HOME = "FACETMAP_FOLDER";
+	public static String CONFIGURATION_FACETMAP_FACET_HOME = "FACETMAP_FACET_NAME";
+	public static String CONFIGURATION_FACETMAP_CONTENT_HOME = "FACETMAP_CONTENT_NAME";
+	public static String CONFIGURATION_TOMCAT_INSTALLATION = "CATALINA_HOME";
 	static final String webapps = "webapps";
 	static final String webappName = "facetmap";
 	static final String cmis2xfml_filename = "cmis2xfml.xsl";
-	static final String cmisjs_filename = "index.get.js";
+	static final String cmisjs_properties_filename = "index.get.js";
+	static final String cmisjs_filename = "cmisTransformProperties.xml";
 	
-	public String getFacetmapHome() {
-		return getGenerationParameters().get(CONFIGURATION_PARAMETER_FACETMAP_HOME);
+	//
+	public String getParam(String ParamName) {
+		return getGenerationParameters().get(ParamName);
 	}
 	
 	// Emplacements de la xsl générée
-	public String getXslLocationInWebApp() {
-			return getFacetmapHome() + File.separator + "WEB-INF" + File.separator + "xsl" + File.separator + cmis2xfml_filename;
+	public String getXslLocationInTomcat(String FacetmapParam) {
+			return getParam(CONFIGURATION_TOMCAT_INSTALLATION) + File.separator + webapps + File.separator + getParam(FacetmapParam) + File.separator + "WEB-INF" + File.separator + "xsl" + File.separator;
 	}
 	
 	public String getXslLocationInGeneration() {
 		return File.separator+ "xsl" + File.separator + cmis2xfml_filename;
 	}
 	
+	//Emplacements des paramètres de la XSL
+	public String getXslPropertiesLocationInTomcat(String FacetmapParam) {
+			return getParam(CONFIGURATION_TOMCAT_INSTALLATION) + File.separator + webapps + File.separator + getParam(FacetmapParam) + File.separator + "WEB-INF" + File.separator;
+	}
+	
+	public String getXslPropertiesLocationInGeneration() {
+		return File.separator + cmisjs_properties_filename;
+	}
 	//Emplacements du fichier javascript CMIS
-	public String getCMISLocationInWebApp() {
-		return getFacetmapHome() + File.separator + "WEB-INF" + File.separator + "xsl" + File.separator + cmis2xfml_filename;
+	public String getCMISLocationInTomcat() {
+		return getParam(CONFIGURATION_TOMCAT_INSTALLATION) + File.separator + webapps + File.separator + "alfresco" + File.separator + "WEB-INF";
 	}
 	
 	public String getCMISLocationInGeneration() {
@@ -61,7 +72,11 @@ public class ClassFacetMapDeployer extends Deployer {
 	@Override
 	protected void clean(File fileToDeploy) throws Exception {
 		// remove existing deployed alfresco webapp.
-		FileHelper.deleteFile(new File(getXslLocationInWebApp()));
+//		FileHelper.deleteFile(new File(getCMISLocationInTomcat()));
+//		FileHelper.deleteFile(new File(getXslLocationInTomcat(CONFIGURATION_FACETMAP_CONTENT_HOME)));
+//		FileHelper.deleteFile(new File(getXslPropertiesLocationInTomcat(CONFIGURATION_FACETMAP_FACET_HOME)));
+//		FileHelper.deleteFile(new File(getXslLocationInTomcat(CONFIGURATION_FACETMAP_CONTENT_HOME)));
+//		FileHelper.deleteFile(new File(getXslPropertiesLocationInTomcat(CONFIGURATION_FACETMAP_FACET_HOME)));
 	}
 	
 	@Override
@@ -72,16 +87,13 @@ public class ClassFacetMapDeployer extends Deployer {
 		if (!cmisjs.exists()||!cmis2xfml.exists()) {
 			throw new Exception("No files to deploy !");
 		}
-		System.out.println("Files found");
-		// build command line
-//		String fileToDeployString = fileToDeploy.getAbsolutePath();
-//		List<String> argss = new ArrayList<String>();
-//		argss.add("install");
-//		argss.add(fileToDeployString);
-//		argss.add(getFacetmapHome());
-//		
-//		String[] args = new String[argss.size()];
-//		args = argss.toArray(args);
+		System.out.println("Files found need to copy to :");
+		System.out.println(getCMISLocationInTomcat()+cmisjs_filename);
+		System.out.println(getXslLocationInTomcat(CONFIGURATION_FACETMAP_CONTENT_HOME));
+		System.out.println(getXslLocationInTomcat(CONFIGURATION_FACETMAP_FACET_HOME));
+		System.out.println(getXslPropertiesLocationInTomcat(CONFIGURATION_FACETMAP_CONTENT_HOME));
+		System.out.println(getXslPropertiesLocationInTomcat(CONFIGURATION_FACETMAP_FACET_HOME));
+		
 
 	}
 
