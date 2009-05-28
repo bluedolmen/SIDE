@@ -14,7 +14,7 @@
                name="Facetmap"
                url="http://facetmap.com/spec/facetmap2_0.dtd">
             <technologyVersion
-                  description="Check this to generate Facet navigation components on the major release 2 of the Facetmap library.&lt;br&gt;Facetmap 2.x is one of the more efficient and robust Facet bavigation component which may be easily embedded in web application.&lt;br&gt;Additionally to content generation, S-IDE provides the generated components to integrate Facet navigation features according to the designed application objects."
+                  description="Check this to generate Facet navigation components on the major release 2 of the Facetmap library.&lt;br&gt;Facetmap 2.x is one of the more efficient and robust Facet navigation component which may be easily embedded in web application.&lt;br&gt;Additionally to content generation, S-IDE provides the generated components to integrate Facet navigation features according to the designed application objects."
                   id="Facetmap 2.x"
                   version="Facetmap 2.x">
                <generatorVersion
@@ -23,7 +23,7 @@
                      id="com.bluexml.side.Class.generator.facetmap"
                      version="S-IDE Facetmap Generator 1.0.0">
                   <configurationParameter
-                        documentation="Set this value to hostname of the server where alfresco is installed if you want to deploy the generated facetmap xsl templates on an Alfresco instance."
+                        documentation="Set this value to the hostname of the application server where you want to deploy the generated facetmap xsl templates."
                         key="FACETMAP_HOST"
                         label="FacetMap Host">
                   </configurationParameter>
