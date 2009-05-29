@@ -45,9 +45,18 @@ public class ReportGenerator extends AbstractAcceleoGenerator {
 		birtTemplates.add("/com.bluexml.side.Class.generator.report/src/com/bluexml/side/clazz/generator/report/templates/Webscript/xml/alfrescoGenerator_template_result_post.mt");
 		birtTemplates.add("/com.bluexml.side.Class.generator.report/src/com/bluexml/side/clazz/generator/report/templates/Webscript/xml/alfrescoGenerator_template_result_get.mt");
 		
-		if (getGeneratorOptionValue(GENERATOR_OPTIONS_BIRT)) {
-			birtTemplates.add("/com.bluexml.side.Class.generator.report/src/com/bluexml/side/clazz/generator/report/birt/templates/alfrescoGenerator_birt.mt");
+		
+		birtTemplates.add("/com.bluexml.side.Class.generator.report/src/com/bluexml/side/clazz/generator/report/templates/Webscript/all/alfrescoGenerator_template_def_get.mt");
+		birtTemplates.add("/com.bluexml.side.Class.generator.report/src/com/bluexml/side/clazz/generator/report/templates/Webscript/all/alfrescoGenerator_template_def_post.mt");
+		birtTemplates.add("/com.bluexml.side.Class.generator.report/src/com/bluexml/side/clazz/generator/report/templates/Webscript/all/alfrescoGenerator_template_js_get.mt");
+		birtTemplates.add("/com.bluexml.side.Class.generator.report/src/com/bluexml/side/clazz/generator/report/templates/Webscript/all/alfrescoGenerator_template_js_post.mt");
 			
+		birtTemplates.add("/com.bluexml.side.Class.generator.report/src/com/bluexml/side/clazz/generator/report/templates/Webscript/all/xml/alfrescoGenerator_template_xml.mt");
+		birtTemplates.add("/com.bluexml.side.Class.generator.report/src/com/bluexml/side/clazz/generator/report/templates/Webscript/all/xml/alfrescoGenerator_template_result_post.mt");
+		birtTemplates.add("/com.bluexml.side.Class.generator.report/src/com/bluexml/side/clazz/generator/report/templates/Webscript/all/xml/alfrescoGenerator_template_result_get.mt");
+		
+		if (getGeneratorOptionValue(GENERATOR_OPTIONS_BIRT)) {
+			//birtTemplates.add("/com.bluexml.side.Class.generator.report/src/com/bluexml/side/clazz/generator/report/birt/templates/alfrescoGenerator_birt.mt");
 			birtTemplates.add("/com.bluexml.side.Class.generator.report/src/com/bluexml/side/clazz/generator/report/birt/templates/alfrescoGeneretor_birt_all_in_one.mt");
 		}
 			

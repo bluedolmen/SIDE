@@ -11,25 +11,299 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
 
 <%script type="clazz.ClassPackage" name="alfrescoGeneretor_birt_allInOne" file="shared/classes/alfresco/extension/report/BIRTReport/All_in_one.rptdesign"%>
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.15" id="1">
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.17" id="1">
     <property name="createdBy">BlueXML Developer Studio - Alfresco Generator</property>
     <property name="units">in</property>
     <property name="comments">BlueXML</property>
     <html-property name="description">List of All.</html-property>
     <text-property name="displayName">List of All.</text-property>
     <property name="iconFile">/templates/blank_report.gif</property>
+    <parameters>
+        <scalar-parameter name="Type" id="2">
+            <property name="valueType">dynamic</property>
+            <property name="dataType">string</property>
+            <property name="paramType">multi-value</property>
+			<property name="isRequired">false</property>
+            <property name="controlType">list-box</property>
+            <property name="dataSetName">Data Set count</property>
+            <expression name="valueExpr">dataSetRow["type"]</expression>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">true</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Header" id="3">
+            <property name="valueType">static</property>
+            <property name="dataType">boolean</property>
+            <property name="paramType">simple</property>
+			<text-property name="promptText">Display informations per type</text-property>
+            <property name="controlType">check-box</property>
+            <property name="defaultValue">true</property>
+            <property name="distinct">true</property>
+            <structure name="format"/>
+        </scalar-parameter>
+        <scalar-parameter name="Footer" id="4">
+            <property name="valueType">static</property>
+            <property name="dataType">boolean</property>
+            <property name="paramType">simple</property>
+			<text-property name="promptText">Display details per type</text-property>
+            <property name="controlType">check-box</property>
+            <property name="defaultValue">true</property>
+            <property name="distinct">true</property>
+            <structure name="format"/>
+        </scalar-parameter>
+    </parameters>
     <data-sources>
+    	<oda-data-source extensionID="org.eclipse.datatools.enablement.oda.xml" name="Data Source all" id="100">
+            <property name="FILELIST">http://localhost:8080/alfresco/service/all.xml</property>
+        </oda-data-source>
     <%for (getAllClasses()){%>
-        <oda-data-source extensionID="org.eclipse.datatools.enablement.oda.xml" name="Data Source <%name%>" id="10<%i()%>">
+        <oda-data-source extensionID="org.eclipse.datatools.enablement.oda.xml" name="Data Source <%name%>" id="10<%i()+1%>">
             <text-property name="displayName"></text-property>
-            <property name="FILELIST">${url.context}/service/<%service::getQualifiedName()%>.xml</property>
+            <property name="FILELIST">http://localhost:8080/alfresco/service/<%service::getQualifiedName()%>.xml</property>
         </oda-data-source>
     <%}%>
     </data-sources>
     
     <data-sets> 
+    
+            <oda-data-set extensionID="org.eclipse.datatools.enablement.oda.xml.dataSet" name="Data Set" id="5">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">totalsize</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["size"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">totalcount</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">size</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">createdDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">modifyDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">totalsize</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source all</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">totalcount</property>
+                    <property name="nativeName">totalcount</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">size</property>
+                    <property name="nativeName">size</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">createdDate</property>
+                    <property name="nativeName">createdDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">modifyDate</property>
+                    <property name="nativeName">modifyDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="queryText">table0#-TNAME-#table0#:#[/items/item/instance]#:#{totalcount;STRING;../totalcount},{size;STRING;/size},{createdDate;STRING;/createdDate},{modifyDate;STRING;/modifyDate}</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>size</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>size</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>createdDate</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>createdDate</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>modifyDate</design:name>
+            <design:position>3</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>modifyDate</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>MAX_ROW</name>
+                    <value>-1</value>
+                </ex-property>
+                <ex-property>
+                    <name>XML_FILE</name>
+                </ex-property>
+            </list-property>
+        </oda-data-set>
+    
+    <oda-data-set extensionID="org.eclipse.datatools.enablement.oda.xml.dataSet" name="Data Set count" id="6">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">total</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["totalcount"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">type</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">totalcount</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">total</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source all</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">type</property>
+                    <property name="nativeName">type</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">totalcount</property>
+                    <property name="nativeName">totalcount</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <property name="queryText">table0#-TNAME-#table0#:#[/items/item]#:#{type;STRING;/type},{totalcount;STRING;/totalcount}</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>type</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>type</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>totalcount</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>totalcount</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>MAX_ROW</name>
+                    <value>-1</value>
+                </ex-property>
+                <ex-property>
+                    <name>XML_FILE</name>
+                </ex-property>
+            </list-property>
+        </oda-data-set>
 <%for (getAllClasses()){%>
-        <oda-data-set extensionID="org.eclipse.datatools.enablement.oda.xml.dataSet" name="Data Set <%name%>" id="6<%i()%>">
+        <oda-data-set extensionID="org.eclipse.datatools.enablement.oda.xml.dataSet" name="Data Set <%name%>" id="7<%i()%>">
             <list-property name="computedColumns">
                 <structure>
                     <property name="name">TotalSize</property>
@@ -38,57 +312,92 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value">row["Size"]</expression>
+                            <expression name="value">row["size"]</expression>
                         </structure>
                     </list-property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
-                <%for (getAllAttributes()){%>
+					<structure>
+                        <property name="position">1</property>
+                        <property name="name">size</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">createdDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">modifyDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+					<%for (getAllAttributes()){%>
                 	<structure>
                         <property name="position"><%i()+1%></property>
-                        <property name="name"><%getLabel()%></property>
+                        <property name="name"><%getQualifiedName()%></property>
                         <property name="dataType">string</property>
                     </structure>
                     <%pop()%>
 	                <%i().push()%>
-                <%}%>
-                	<structure>
-                        <property name="position"><%peek()+2%></property>
-                        <property name="name">Size</property>
+					<%}%>
+					<structure>
+                        <property name="position"><%peek()+1%></property>
+                        <property name="name">totalCount</property>
                         <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position"><%peek()+2%></property>
+                        <property name="name">TotalSize</property>
+                        <property name="dataType">float</property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">Data Source</property>
+            <property name="dataSource">Data Source <%name%></property>
             <list-property name="resultSet">
-                <%for (getAllAttributes()){%>
+					<structure>
+						<property name="position">1</property>
+						<property name="name">size</property>
+						<property name="nativeName">size</property>
+						<property name="dataType">string</property>
+						<property name="nativeDataType">12</property>
+					</structure>
+					<structure>
+						<property name="position">2</property>
+						<property name="name">createdDate</property>
+						<property name="nativeName">createdDate</property>
+						<property name="dataType">string</property>
+						<property name="nativeDataType">12</property>
+					</structure>
+					<structure>
+						<property name="position">3</property>
+						<property name="name">modifyDate</property>
+						<property name="nativeName">modifyDate</property>
+						<property name="dataType">string</property>
+						<property name="nativeDataType">12</property>
+					</structure>
+					<%for (getAllAttributes()){%>
                 	<structure>
                         <property name="position"><%i()+1%></property>
-                        <property name="name"><%getLabel()%></property>
-                        <property name="nativeName"><%getLabel()%></property>
+                        <property name="name"><%getQualifiedName()%></property>
+                        <property name="nativeName"><%getQualifiedName()%></property>
                         <property name="dataType">string</property>
                         <property name="nativeDataType">12</property>
                     </structure>
-                <%}%>
-                	<structure>
-                        <property name="position"><%peek()+2%></property>
-                        <property name="name">Size</property>
-                        <property name="nativeName">Size</property>
-                        <property name="dataType">string</property>
-                        <property name="nativeDataType">12</property>
-                    </structure>
-                    <structure>
-                        <property name="position"><%peek()+3%></property>
-                        <property name="name">TotalSize</property>
-                        <property name="nativeName">TotalSize</property>
-                        <property name="dataType">float</property>
-                        <property name="nativeDataType">8</property>
-                    </structure>
+					<%}%>
+					<structure>
+						<property name="position"><%peek()+1%></property>
+						<property name="name">totalCount</property>
+						<property name="nativeName">totalCount</property>
+						<property name="dataType">string</property>
+						<property name="nativeDataType">12</property>
+					</structure>
             </list-property>
             <%getAllAttributes().nLast().put("last")%>
-            <property name="queryText">table0#-TNAME-#table0#:#[/records/items/item]#:#<%for (getAllAttributes()){%>{<%getLabel()%>;STRING;/<%current().getQualifiedName%>}<%}%>,{Size:STRING;/size}</property>
+            <property name="queryText">
+table0#-TNAME-#table0#:#[/records/items/item]#:#{size;STRING;/size},{createdDate;STRING;/createdDate},{modifyDate;STRING;/modifyDate},<%for (getAllAttributes()){%>{<%getQualifiedName()%>;STRING;/<%getQualifiedName%>},<%}%>{totalCount;STRING;../../totalCount}</property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="ISO-8859-1"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -130,7 +439,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
     </data-sets>
 
 	<styles>
-        <style name="crosstab" id="2">
+        <style name="crosstab" id="8">
             <property name="borderBottomColor">#CCCCCC</property>
             <property name="borderBottomStyle">solid</property>
             <property name="borderBottomWidth">1pt</property>
@@ -144,7 +453,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
             <property name="borderTopStyle">solid</property>
             <property name="borderTopWidth">1pt</property>
         </style>
-        <style name="crosstab-cell" id="3">
+        <style name="crosstab-cell" id="9">
             <property name="borderBottomColor">#CCCCCC</property>
             <property name="borderBottomStyle">solid</property>
             <property name="borderBottomWidth">1pt</property>
@@ -160,7 +469,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
         </style>
     </styles>
     <page-setup>
-        <simple-master-page name="Simple MasterPage" id="4">
+        <simple-master-page name="Simple MasterPage" id="10">
             <property name="type">a4</property>
             <property name="topMargin">10mm</property>
             <property name="leftMargin">10mm</property>
@@ -169,7 +478,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
             <property name="headerHeight">0in</property>
             <property name="footerHeight">0in</property>
             <page-footer>
-                <text id="5">
+                <text id="11">
                     <property name="fontStyle">italic</property>
                     <property name="marginTop">10pt</property>
                     <property name="textAlign">right</property>
@@ -181,68 +490,133 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
     </page-setup>
     
     <body>
-   		 <label id="6">
+   		 <label id="12">
             <property name="fontFamily">"Tahoma"</property>
             <property name="fontSize">x-large</property>
             <property name="fontWeight">bold</property>
             <property name="textAlign">center</property>
             <text-property name="text">Report</text-property>
         </label>
-        <table id="7">
+        <grid id="13">
+			<property name="width">100%</property>
+            <property name="dataSet">Data Set count</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">total</property>
+                    <property name="displayName">total</property>
+                    <expression name="expression">dataSetRow["total"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
             <property name="width">100%</property>
-            <column id="8"/>
-            <column id="9"/>
-            <detail>
-                <row id="10">
-                    <cell id="11">
-                        <label id="12">
-                            <property name="fontFamily">"Tahoma"</property>
-                            <property name="fontWeight">bold</property>
-                            <text-property name="text">Number of classes: </text-property>
-                        </label>
-                    </cell>
-                    <cell id="13">
-                        <label id="14">
-	                        <%for (getAllClasses()){%>
-	                        	<%pop()%>
-	                        	<%i().push()%>
-	                        <%}%>
-                            <text-property name="text"><%peek()+1%></text-property>
-                        </label>
-                    </cell>
-                </row>
-                <row id="32">
-                    <cell id="33">
-                        <label id="34">
-                            <property name="fontFamily">"Tahoma"</property>
-                            <property name="fontWeight">bold</property>
-                            <text-property name="text">Last modification: </text-property>
-                        </label>
-                    </cell>
-                    <cell id="35">
-                        <label id="36">
-                            <text-property name="text"><%getDate()%></text-property>
-                        </label>
-                    </cell>
-                </row>
-                <row id="37">
-                    <cell id="38">
-                        <label id="39">
+            <column id="14"/>
+            <column id="15"/>
+            	 <row id="16">
+                    <cell id="17">
+                        <label id="18">
                             <property name="fontFamily">"Tahoma"</property>
                             <property name="fontWeight">bold</property>
                             <text-property name="text">Last modification by: </text-property>
                         </label>
                     </cell>
-                    <cell id="40">
-                        <label id="41">
+                    <cell id="19">
+                        <label id="20">
+							<property name="fontFamily">"Tahoma"</property>
+							<property name="fontStyle">italic</property>
                             <text-property name="text"><%getAuthor()%></text-property>
                         </label>
                     </cell>
                 </row>
-            </detail>
-        </table>
+                <row id="21">
+                    <cell id="22">
+                        <label id="23">
+                            <property name="fontFamily">"Tahoma"</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Last modification: </text-property>
+                        </label>
+                    </cell>
+                    <cell id="24">
+                        <label id="25">
+							<property name="fontFamily">"Tahoma"</property>
+							<property name="fontStyle">italic</property>
+                            <text-property name="text"><%getDate()%></text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="26">
+                    <cell id="27">
+                        <label id="28">
+                            <property name="fontFamily">"Tahoma"</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Number of classes: </text-property>
+                        </label>
+                    </cell>
+                    <cell id="29">
+                        <label id="30">
+	                        <%for (getAllClasses()){%>
+	                        	<%pop()%>
+	                        	<%i().push()%>
+	                        <%}%>
+							<property name="fontFamily">"Tahoma"</property>
+							<property name="fontStyle">italic</property>
+                            <text-property name="text"><%peek()+1%></text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="31">
+                    <cell id="32">
+                        <label id="33">
+                            <property name="fontFamily">"Tahoma"</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Number of files: </text-property>
+                        </label>
+                    </cell>
+                    <cell id="34">
+                        <data id="35">
+							<property name="fontFamily">"Tahoma"</property>
+							<property name="fontStyle">italic</property>
+							<property name="resultSetColumn">total</property>
+						</data>
+                    </cell>
+                </row>
+                <row id="36">
+                    <cell id="37">
+                        <label id="38">
+                            <property name="fontFamily">"Tahoma"</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Total Size of files: </text-property>
+                        </label>
+                    </cell>
+                    <cell id="39">
+                        <data id="40">
+						<property name="fontFamily">"Tahoma"</property>
+						<property name="fontStyle">italic</property>
+						<structure name="numberFormat">
+                            <property name="category">Custom</property>
+                            <property name="pattern">###,##0.00 Bytes</property>
+                        </structure>
+                        <property name="dataSet">Data Set</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">TotalSize</property>
+                                <property name="displayName">TotalSize</property>
+                                <expression name="expression">dataSetRow["totalsize"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">TotalSize</property>
+                    </data>
+                    </cell>
+                </row>
+        </grid>
     	<%for (getAllClasses()){%>
-        <text id="15<%i()%>">
+        <text id="41<%i()%>">
+			<list-property name="visibility">
+                <structure>
+                    <property name="format">all</property>
+                    <expression name="valueExpr">!params["Header"].value</expression>
+                </structure>
+            </list-property>
             <property name="backgroundColor">#BFE3F7</property>
             <property name="fontFamily">"Tahoma"</property>
             <property name="fontSize">larger</property>
@@ -251,45 +625,50 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
             <property name="marginBottom">10pt</property>
             <property name="paddingTop">1pt</property>
             <property name="contentType">auto</property>
-            <text-property name="content"><![CDATA[List of <%name%>]]></text-property>
+            <text-property name="content"><![CDATA[<%name%>]]></text-property>
         </text>
-        <table id="16<%i()%>">
+        <grid id="42<%i()%>">
             <property name="width">100%</property>
-            <column id="17<%i()%>"/>
-            <column id="18<%i()%>"/>
-            <detail>
-                <row id="19<%i()%>">
-                    <cell id="20<%i()%>">
-                        <label id="21<%i()%>">
+			<list-property name="visibility">
+                <structure>
+                    <property name="format">all</property>
+                    <expression name="valueExpr">!params["Header"].value</expression>
+                </structure>
+            </list-property>
+            <column id="43<%i()%>"/>
+            <column id="44<%i()%>"/>
+                <row id="45<%i()%>">
+                    <cell id="46<%i()%>">
+                        <label id="47<%i()%>">
                             <property name="fontFamily">"Tahoma"</property>
                             <property name="fontWeight">bold</property>
                             <text-property name="text">Number of attributes</text-property>
                         </label>
                     </cell>
-                    <cell id="22<%i()%>">
-                        <label id="23<%i()%>">
+                    <cell id="48<%i()%>">
+                        <label id="49<%i()%>">
 	                        <%for (getAllAttributes()){%>
 	                        	<%pop()%>
 	                        	<%i().push()%>
 	                        <%}%>
+							<property name="fontFamily">"Tahoma"</property>
+							<property name="fontStyle">italic</property>
                             <text-property name="text"><%peek()+1%></text-property>
                         </label>
                     </cell>
                 </row>
-            </detail>
-        </table>
-        <grid id="24">
-            <property name="width">100%</property>
-            <column id="25"/>
-            <column id="26"/>
-            <row id="27">
-                <cell id="28">
-                    <label id="29">
+            <row id="53<%i()%>">
+                <cell id="54<%i()%>">
+                    <label id="55<%i()%>">
+						<property name="fontFamily">"Tahoma"</property>
+                        <property name="fontWeight">bold</property>
                         <text-property name="text">Disk Size</text-property>
                     </label>
                 </cell>
-                <cell id="30">
-                    <data id="31">
+                <cell id="56<%i()%>">
+                    <data id="57<%i()%>">
+						<property name="fontFamily">"Tahoma"</property>
+                        <property name="fontStyle">italic</property>
                     	<structure name="numberFormat">
                             <property name="category">Custom</property>
                             <property name="pattern">###,##0.00 Bytes</property>
@@ -307,28 +686,149 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
                     </data>
                 </cell>
             </row>
+            <row id="61<%i()%>">
+                <cell id="62<%i()%>">
+                    <label id="63<%i()%>">
+						<property name="fontFamily">"Tahoma"</property>
+						<property name="fontWeight">bold</property>
+                        <text-property name="text">Number of Files</text-property>
+                    </label>
+                </cell>
+                <cell id="64<%i()%>">
+                    <data id="65<%i()%>">
+						<property name="fontFamily">"Tahoma"</property>
+						<property name="fontStyle">italic</property>
+                        <property name="dataSet">Data Set <%name%></property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">totalCount</property>
+                                <property name="displayName">totalCount</property>
+                                <expression name="expression">dataSetRow["totalCount"]</expression>
+                                <property name="dataType">Integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">totalCount</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="69<%i()%>">
+                <cell id="70<%i()%>">
+                    <label id="71<%i()%>">
+						<property name="fontFamily">"Tahoma"</property>
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">First created file</text-property>
+                    </label>
+                </cell>
+                <cell id="72<%i()%>">
+                    <data id="73<%i()%>">
+						<property name="fontFamily">"Tahoma"</property>
+						<property name="fontStyle">italic</property>
+                        <property name="dataSet">Data Set <%name%></property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">FirstCreatedDate</property>
+                                <property name="displayName">FirstCreatedDate</property>
+                                <expression name="expression">dataSetRow["FirstCreatedDate"]</expression>
+                                <property name="dataType">Integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">FirstCreatedDate</property>
+                    </data>
+                </cell>
+			</row>
+            <row id="77<%i()%>">
+                <cell id="78<%i()%>">
+                    <label id="79<%i()%>">
+						<property name="fontFamily">"Tahoma"</property>
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">Last modified file</text-property>
+                    </label>
+                </cell>
+                <cell id="80<%i()%>">
+                    <data id="81<%i()%>">
+						<property name="fontFamily">"Tahoma"</property>
+						<property name="fontStyle">italic</property>
+                        <property name="dataSet">Data Set <%name%></property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">LastCreatedDate</property>
+                                <property name="displayName">LastCreatedDate</property>
+                                <expression name="expression">dataSetRow["LastCreatedDate"]</expression>
+                                <property name="dataType">Integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">LastCreatedDate</property>
+                    </data>
+                </cell>
+            </row>
         </grid>
-        <table id="24<%i()%>">
+        <%}%>
+       <%for (getAllClasses()){%>
+        <text id="82<%i()%>">
+			<list-property name="visibility">
+                <structure>
+                    <property name="format">all</property>
+                    <expression name="valueExpr">!params["Footer"].value</expression>
+                </structure>
+            </list-property>
+            <property name="backgroundColor">#BFE3F7</property>
+            <property name="fontFamily">"Tahoma"</property>
+            <property name="fontSize">larger</property>
+            <property name="fontWeight">bold</property>
+            <property name="marginTop">0pt</property>
+            <property name="marginBottom">10pt</property>
+            <property name="paddingTop">1pt</property>
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[List of <%name%>]]></text-property>
+        </text>
+        <table id="83<%i()%>">
             <property name="width">100%</property>
+			<list-property name="visibility">
+                <structure>
+                    <property name="format">all</property>
+                    <expression name="valueExpr">!params["Footer"].value</expression>
+                </structure>
+            </list-property>
             <property name="dataSet">Data Set <%name%></property>
             <list-property name="boundDataColumns">
+            	<structure>
+                    <property name="name">size</property>
+                    <property name="displayName">size</property>
+                    <expression name="expression">dataSetRow["size"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">createdDate</property>
+                    <property name="displayName">createdDate</property>
+                    <expression name="expression">dataSetRow["createdDate"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">modifyDate</property>
+                    <property name="displayName">modifyDate</property>
+                    <expression name="expression">dataSetRow["modifyDate"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
             	<%pop()%>
             	<%i().push()%>
             	<%for (getAllAttributes()){%>
             	<structure>
-                    <property name="name"><%getLabel()%></property>
-                    <expression name="expression">dataSetRow["<%getLabel()%>"]</expression>
+                    <property name="name"><%getQualifiedName%></property>
+                    <expression name="expression">dataSetRow["<%getQualifiedName%>"]</expression>
                     <property name="dataType">string</property>
                 </structure>
             	<%}%>
+				<structure>
+                    <property name="name">TotalSize</property>
+                    <expression name="expression">dataSetRow["TotalSize"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
             </list-property>
-            <column id="25<%i()%>"/>
-            <column id="26<%i()%>"/>
+            <column id="84<%i()%>"/>
+            <column id="85<%i()%>"/>
             <detail>
-            	<%for (getAllAttributes()){%>
-                <row id="27<%peek()%><%i()%>">
-                    <cell id="28<%peek()%><%i()%>">
-                    	<%if (i() == 0 && current() == get("last")){%>
+            	<row id="86<%peek()%><%i()%>">
+                    <cell id="87<%peek()%><%i()%>">
                     	<property name="fontFamily">"Tahoma"</property>
                         <property name="borderLeftColor">#000000</property>
                         <property name="borderLeftStyle">solid</property>
@@ -339,11 +839,104 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
                         <property name="borderTopColor">#000000</property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">medium</property>
+                        <property name="paddingTop">1pt</property>
+                        <label id="88<%peek()%><%i()%>">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Size</text-property>
+                        </label>
+                    </cell>
+                    <cell id="89<%peek()%><%i()%>">
+                        <property name="fontFamily">"Tahoma"</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">dotted</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="paddingTop">1pt</property>
+                        <data id="90<%peek()%><%i()%>">
+                            <property name="fontStyle">italic</property>
+							<structure name="numberFormat">
+                            <property name="category">Custom</property>
+                            <property name="pattern">###,##0.00 Bytes</property>
+                        </structure>
+                            <property name="resultSetColumn">size</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="91<%peek()%><%i()%>">
+                    <cell id="92<%peek()%><%i()%>">
+                    	<property name="fontFamily">"Tahoma"</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">dotted</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="paddingTop">1pt</property>
+                        <label id="93<%peek()%><%i()%>">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Created Date</text-property>
+                        </label>
+                    </cell>
+                    <cell id="94<%peek()%><%i()%>">
+                        <property name="fontFamily">"Tahoma"</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">dotted</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">dotted</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="paddingTop">1pt</property>
+                        <data id="95<%peek()%><%i()%>">
+                            <property name="fontStyle">italic</property>
+                            <property name="resultSetColumn">createdDate</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="96<%peek()%><%i()%>">
+                    <cell id="98<%peek()%><%i()%>">
+                    	<property name="fontFamily">"Tahoma"</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">dotted</property>
+                        <property name="borderRightWidth">thin</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">medium</property>
                         <property name="paddingTop">1pt</property>
-                        <%}else if (i() == 0){%>
+                        <label id="99<%peek()%><%i()%>">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Modified Date</text-property>
+                        </label>
+                    </cell>
+                    <cell id="100<%peek()%><%i()%>">
+                        <property name="fontFamily">"Tahoma"</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="paddingTop">1pt</property>
+                        <data id="101<%peek()%><%i()%>">
+                            <property name="fontStyle">italic</property>
+                            <property name="resultSetColumn">modifyDate</property>
+                        </data>
+                    </cell>
+                </row>
+            	<%for (getAllAttributes()){%>
+                <row id="102<%peek()%><%i()%>">
+                    <cell id="103<%peek()%><%i()%>">
+                        <%if (i() == 0){%>
                     	<property name="fontFamily">"Tahoma"</property>
                         <property name="borderLeftColor">#000000</property>
                         <property name="borderLeftStyle">solid</property>
@@ -377,12 +970,12 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
                         <property name="borderRightWidth">thin</property>
                         <property name="paddingTop">1pt</property>
                     	<%}%>
-                        <label id="29<%peek()%><%i()%>">
+                        <label id="104<%peek()%><%i()%>">
                             <property name="fontWeight">bold</property>
                             <text-property name="text"><%getLabel()%></text-property>
                         </label>
                     </cell>
-                    <cell id="30<%peek()%><%i()%>">
+                    <cell id="105<%peek()%><%i()%>">
                     	<%if (i() == 0){%>
                         <property name="fontFamily">"Tahoma"</property>
                         <property name="borderRightColor">#000000</property>
@@ -414,9 +1007,9 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
                         <property name="borderBottomWidth">thin</property>
                         <property name="paddingTop">1pt</property>
                         <%}%>
-                        <data id="31<%peek()%><%i()%>">
+                        <data id="106<%peek()%><%i()%>">
                             <property name="fontStyle">italic</property>
-                            <property name="resultSetColumn"><%getLabel()%></property>
+                            <property name="resultSetColumn"><%getQualifiedName%></property>
                         </data>
                     </cell>
                 </row>
