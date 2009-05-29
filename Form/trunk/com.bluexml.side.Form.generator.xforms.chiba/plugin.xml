@@ -25,11 +25,6 @@
                   id="com.bluexml.side.Form.generator.xforms.chiba"
                   idTechnologyVersion="alfresco_3.0_labs"
                   version="S-IDE Chiba Form Generator 1.0.0">
-               <configurationParameter
-                     documentation="Set this value to the directory where you want to store the generated Chiba WAR deployment file; default value is under the generation path."
-                     key="war.folder"
-                     label="Folder output for Chiba WAR deployment file">
-               </configurationParameter>
             </generatorVersion>
          </technologyVersion>
       </technology>

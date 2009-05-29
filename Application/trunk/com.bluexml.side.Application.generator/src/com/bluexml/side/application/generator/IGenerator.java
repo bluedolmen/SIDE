@@ -19,10 +19,11 @@ public interface IGenerator {
 	 *            the list of selected options for the generator.
 	 * @param configurationParamers
 	 *            the list of technical parameters, shared by all generators.
+	 * @throws Exception 
 	 */
 	public void initialize(Map<String, String> generationParameters,
 			Map<String, Boolean> generatorOptions,
-			Map<String, String> configurationParameters, String techVersion_);
+			Map<String, String> configurationParameters, String techVersion_) throws Exception;
 	
 	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo,
 			String id_metamodel);

@@ -210,7 +210,14 @@ public class Generate extends Thread {
 					String name = elem.getId().substring(elem.getId().lastIndexOf(".") + 1);
 					label.setText("Initialize " + name);
 					addText(System.getProperty("line.separator") + "Generation for " + name);
-					generator.initialize(generationParameters, generatorOptions, configurationParameters, id_techno_version);
+					
+					try {
+						generator.initialize(generationParameters, generatorOptions, configurationParameters, id_techno_version);
+					} catch (Exception e) {
+						error = true;
+						addErrorText(System.getProperty("line.separator") + "ERROR : " + (e.getMessage() != null ? e.getMessage() : ""));
+						e.printStackTrace();
+					}
 
 					addOneStep(progressBar);
 					if (generator.check()) {

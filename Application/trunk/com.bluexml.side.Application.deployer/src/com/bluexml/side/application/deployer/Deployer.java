@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.security.Checkable;
 import com.bluexml.side.util.libs.IFileHelper;
 
@@ -33,7 +34,7 @@ public abstract class Deployer implements Checkable {
 	}
 	
 	public void deploy(String id_techno) throws Exception {
-		String IfilewkDirPath = configurationParameters.get(workingDirKey);
+		String IfilewkDirPath = getTargetPath();
 		String absoluteWKDirePath = IFileHelper.getSystemFolderPath(IfilewkDirPath);
 		File fileToDeploy = new File(absoluteWKDirePath + File.separator + id_techno);
 		preProcess(fileToDeploy);
@@ -52,7 +53,9 @@ public abstract class Deployer implements Checkable {
 
 	protected abstract void preProcess(File fileToDeploy) throws Exception;
 
-	
+	public final String getTargetPath() {
+		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral());
+	}
 
 	public Map<String, String> getConfigurationParameters() {
 		return configurationParameters;

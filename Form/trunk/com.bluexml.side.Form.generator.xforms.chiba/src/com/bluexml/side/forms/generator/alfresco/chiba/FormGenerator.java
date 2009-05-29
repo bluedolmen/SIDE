@@ -3,6 +3,7 @@ package com.bluexml.side.forms.generator.alfresco.chiba;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,9 +20,6 @@ import org.apache.maven.embedder.MavenEmbedderException;
 import org.apache.maven.execution.DefaultMavenExecutionRequest;
 import org.apache.maven.execution.MavenExecutionResult;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.Path;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.Namespace;
@@ -61,6 +59,15 @@ public class FormGenerator extends AbstractGenerator {
 	private File alfrescoProperties;
 	private File warFile;
 
+	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, String techVersion_) throws Exception{
+		super.initialize(generationParameters_, generatorOptions_, configurationParameters_, techVersion_);
+		try {
+			initWorkFolder();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * This method check if the user have the license to use this generator.
 	 * 
@@ -81,16 +88,10 @@ public class FormGenerator extends AbstractGenerator {
 		return new ArrayList<IFile>();
 	}
 
-	public void deploy() throws Exception {
-		// FIXME should copy WAR IFile
-	}
-
 	public Collection<IFile> generate(Map<String, List<IFile>> modelsInfo,
 			String id_mm) {
-		String path = getTargetPath();
-		if (path == null || path.length() == 0)
-			throw new RuntimeException("Target path must be set !");
-
+		
+		
 		getModels(modelsInfo);
 		try {
 			initMaven();
@@ -105,32 +106,14 @@ public class FormGenerator extends AbstractGenerator {
 				throw new RuntimeException(((Exception) cleanPackageResult
 						.getExceptions().get(0)));
 			}
-			copyResult();
-			deleteProject();
+			
 		} catch (Exception e) {
-			try {
-				deleteProject();
-			} catch (Exception ioe) {
-				ioe.printStackTrace();
-			}
 			throw new RuntimeException(e);
 		}
 		return null;
 	}
-
-	private void deleteProject() throws Exception {
-		FileUtils.deleteDirectory(workFolder);
-	}
-
-	private void copyResult() throws Exception {
-		String destFilename = getTargetPath() + "/" + TARGET_ARTIFACT + ".war";
-		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		IFile destIFile = root.getFile(new Path(destFilename));
-		File destFile = destIFile.getLocation().toFile();
-		FileUtils.copyFile(warFile, destFile);
-	}
-
-	private MavenExecutionResult buildProject() {
+	
+	private MavenExecutionResult buildProject() throws IOException {
 		DefaultMavenExecutionRequest cleanPackageRequest = new DefaultMavenExecutionRequest();
 		cleanPackageRequest.setBaseDirectory(projectFolder);
 		cleanPackageRequest.setGoals(Arrays.asList(new String[] { "clean",
@@ -143,6 +126,19 @@ public class FormGenerator extends AbstractGenerator {
 		return cleanPackageResult;
 	}
 
+	/**
+	 * Create the work folder
+	 * @throws IOException
+	 */
+	private void initWorkFolder() throws IOException {
+		String path = getTargetSystemPath();
+		if (path == null || path.length() == 0)
+			throw new RuntimeException("Target path must be set !");
+		path += File.separatorChar + getTechVersion();
+		workFolder = new File(path);
+		FileUtils.forceMkdir(workFolder);
+	}
+
 	private void initMaven() throws MavenEmbedderException {
 		configuration = new DefaultConfiguration();
 		configuration.setClassLoader(Thread.currentThread()
@@ -151,9 +147,7 @@ public class FormGenerator extends AbstractGenerator {
 	}
 
 	private MavenExecutionResult createProject() throws Exception {
-		workFolder = File.createTempFile("generation", "forms");
-		workFolder.delete();
-		FileUtils.forceMkdir(workFolder);
+		
 		DefaultMavenExecutionRequest archetypeCreateRequest = new DefaultMavenExecutionRequest();
 		archetypeCreateRequest.setBaseDirectory(workFolder);
 		archetypeCreateRequest.setGoals(Arrays
@@ -171,8 +165,7 @@ public class FormGenerator extends AbstractGenerator {
 			archetypeCreateRequest.setProperty("archetypeRepository",
 					REPOSITORY);
 		}
-		archetypeCreateRequest.setProperty("basedir", workFolder
-				.getAbsolutePath());
+		archetypeCreateRequest.setProperty("basedir", workFolder.getAbsolutePath());
 		archetypeCreateRequest.setProperty("groupId", TARGET_GROUP);
 		archetypeCreateRequest.setProperty("artifactId", TARGET_ARTIFACT);
 		archetypeCreateRequest.setProperty("version", TARGET_VERSION);

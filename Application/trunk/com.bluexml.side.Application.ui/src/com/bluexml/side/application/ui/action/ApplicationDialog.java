@@ -668,14 +668,20 @@ public class ApplicationDialog extends Dialog {
 		try {
 			ImplNode iN = ((ImplNode) el);
 			Class<Checkable> gen;
-			gen = Platform.getBundle(iN.getId()).loadClass(iN.getLaunchClass());
-			Checkable gener = gen.newInstance();
-			return gener.check();
+			if (Platform.getBundle(iN.getId()) != null) {
+				gen = Platform.getBundle(iN.getId()).loadClass(iN.getLaunchClass());
+				Checkable gener = gen.newInstance();
+				return gener.check();
+			} else {
+				throw new Exception("Error : " + iN.getId() + " isn't found as a plugin. Check your extension file.");
+			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
