@@ -35,7 +35,7 @@ public class ClassFacetmapGenerator extends AbstractAcceleoGenerator {
 	public static String MMUri = "http://www.kerblue.org/class/1.0";
 	
 	public ClassFacetmapGenerator(){
-		techVersion = "facetmap";
+		techVersion = "Facetmap 2.x";
 		this.setTEMP_FOLDER(getTechVersion());
 	}
 	
@@ -67,7 +67,7 @@ public class ClassFacetmapGenerator extends AbstractAcceleoGenerator {
 	}
 
 	public Collection<IFile> complete() throws Exception {
-		return new ArrayList<IFile>();
+		return generatedFiles;
 	}
 
 }

@@ -61,7 +61,7 @@ public class ClassFacetMapDeployer extends Deployer {
 	}
 	//Emplacements du fichier javascript CMIS
 	public String getCMISLocationInTomcat() {
-		return getParam(CONFIGURATION_TOMCAT_INSTALLATION) + File.separator + webapps + File.separator + "alfresco" + File.separator + "WEB-INF";
+		return getParam(CONFIGURATION_TOMCAT_INSTALLATION) + File.separator + webapps + File.separator + "alfresco" + File.separator + "WEB-INF" + File.separator;
 	}
 	
 	public String getCMISLocationInGeneration() {
@@ -81,18 +81,37 @@ public class ClassFacetMapDeployer extends Deployer {
 	
 	@Override
 	protected void deployProcess(File fileToDeploy) throws Exception {
+		// Getting Files
 		File cmisjs =  new File (fileToDeploy.getPath()+getCMISLocationInGeneration());
 		File cmis2xfml = new File(fileToDeploy.getPath()+getXslLocationInGeneration());
-		System.out.println(cmis2xfml.getPath()+"\n"+cmisjs.getPath());
-		if (!cmisjs.exists()||!cmis2xfml.exists()) {
-			throw new Exception("No files to deploy !");
+		File xslproperties = new File(fileToDeploy.getPath()+getXslPropertiesLocationInGeneration());
+		//Test if missing file
+		Boolean filemissing = Boolean.FALSE;
+		String list_of_missing_files = "";
+		if (!cmisjs.exists()){
+			filemissing = Boolean.TRUE;
+			list_of_missing_files += "\n"+cmisjs.getAbsolutePath();
+		}if (!cmis2xfml.exists()){
+			filemissing = Boolean.TRUE;
+			list_of_missing_files += "\n"+cmis2xfml.getAbsolutePath();
+		}if (!xslproperties.exists()) {
+			filemissing = Boolean.TRUE;
+			list_of_missing_files += "\n"+xslproperties.getAbsolutePath();
 		}
+		if (filemissing)
+			throw new Exception("Missing files :"+list_of_missing_files);
 		System.out.println("Files found need to copy to :");
-		System.out.println(getCMISLocationInTomcat()+cmisjs_filename);
-		System.out.println(getXslLocationInTomcat(CONFIGURATION_FACETMAP_CONTENT_HOME));
-		System.out.println(getXslLocationInTomcat(CONFIGURATION_FACETMAP_FACET_HOME));
-		System.out.println(getXslPropertiesLocationInTomcat(CONFIGURATION_FACETMAP_CONTENT_HOME));
-		System.out.println(getXslPropertiesLocationInTomcat(CONFIGURATION_FACETMAP_FACET_HOME));
+		// Path where the files need to be copied
+		String path_cmisjs = getCMISLocationInTomcat()+cmisjs_filename;
+		String path_cmis2xfml1 = getXslLocationInTomcat(CONFIGURATION_FACETMAP_CONTENT_HOME)+cmis2xfml_filename;
+		String path_cmis2xfml2 = getXslLocationInTomcat(CONFIGURATION_FACETMAP_FACET_HOME)+cmis2xfml_filename;
+		String path_xslproperties1 = getXslPropertiesLocationInTomcat(CONFIGURATION_FACETMAP_CONTENT_HOME)+cmisjs_properties_filename;
+		String path_xslproperties2 = getXslPropertiesLocationInTomcat(CONFIGURATION_FACETMAP_FACET_HOME)+cmisjs_properties_filename;
+		System.out.println(path_cmisjs);
+		System.out.println(path_cmis2xfml1);
+		System.out.println(path_cmis2xfml2);
+		System.out.println(path_xslproperties1);
+		System.out.println(path_xslproperties2);
 		
 
 	}
