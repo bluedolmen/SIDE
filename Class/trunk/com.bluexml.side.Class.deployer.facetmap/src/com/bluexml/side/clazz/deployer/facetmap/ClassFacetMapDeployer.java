@@ -19,6 +19,8 @@ package com.bluexml.side.clazz.deployer.facetmap;
 import java.io.File;
 
 import com.bluexml.side.application.deployer.Deployer;
+import com.bluexml.side.clazz.generator.facetmap.FacetmapConstants;
+import com.bluexml.side.util.libs.FileHelper;
 
 
 
@@ -27,16 +29,12 @@ import com.bluexml.side.application.deployer.Deployer;
  * @author <a href="mailto:pbertrand@bluexml.com"> Pierre BERTRAND </a>
  * 
  */
-public class ClassFacetMapDeployer extends Deployer {
+public class ClassFacetMapDeployer extends Deployer implements FacetmapConstants {
 	public static String CONFIGURATION_FACETMAP_FACET_HOME = "FACETMAP_FACET_NAME";
 	public static String CONFIGURATION_FACETMAP_CONTENT_HOME = "FACETMAP_CONTENT_NAME";
 	public static String CONFIGURATION_TOMCAT_INSTALLATION = "CATALINA_HOME";
 	static final String webapps = "webapps";
-	static final String webappName = "facetmap";
-	static final String cmis2xfml_filename = "cmis2xfml.xsl";
-	static final String cmisjs_properties_filename = "index.get.js";
-	static final String cmisjs_filename = "cmisTransformProperties.xml";
-	
+
 	//
 	public String getParam(String ParamName) {
 		return getGenerationParameters().get(ParamName);
@@ -61,7 +59,7 @@ public class ClassFacetMapDeployer extends Deployer {
 	}
 	//Emplacements du fichier javascript CMIS
 	public String getCMISLocationInTomcat() {
-		return getParam(CONFIGURATION_TOMCAT_INSTALLATION) + File.separator + webapps + File.separator + "alfresco" + File.separator + "WEB-INF" + File.separator;
+		return getParam(CONFIGURATION_TOMCAT_INSTALLATION)+ File.separator + webapps + File.separator + "alfresco" +File.separator + "WEB-INF" + File.separator + "classes" + File.separator + "alfresco" + File.separator + "webscripts" + File.separator + "com" + File.separator + "bluexml" + File.separator;
 	}
 	
 	public String getCMISLocationInGeneration() {
@@ -70,14 +68,7 @@ public class ClassFacetMapDeployer extends Deployer {
 
 	
 	@Override
-	protected void clean(File fileToDeploy) throws Exception {
-		// remove existing deployed alfresco webapp.
-//		FileHelper.deleteFile(new File(getCMISLocationInTomcat()));
-//		FileHelper.deleteFile(new File(getXslLocationInTomcat(CONFIGURATION_FACETMAP_CONTENT_HOME)));
-//		FileHelper.deleteFile(new File(getXslPropertiesLocationInTomcat(CONFIGURATION_FACETMAP_FACET_HOME)));
-//		FileHelper.deleteFile(new File(getXslLocationInTomcat(CONFIGURATION_FACETMAP_CONTENT_HOME)));
-//		FileHelper.deleteFile(new File(getXslPropertiesLocationInTomcat(CONFIGURATION_FACETMAP_FACET_HOME)));
-	}
+	protected void clean(File fileToDeploy) throws Exception {}
 	
 	@Override
 	protected void deployProcess(File fileToDeploy) throws Exception {
@@ -99,26 +90,23 @@ public class ClassFacetMapDeployer extends Deployer {
 			list_of_missing_files += "\n"+xslproperties.getAbsolutePath();
 		}
 		if (filemissing)
-			throw new Exception("Missing files :"+list_of_missing_files);
-		System.out.println("Files found need to copy to :");
+			throw new Exception("Missing the following generated files:"+list_of_missing_files+"\n deployment aborted.");
 		// Path where the files need to be copied
 		String path_cmisjs = getCMISLocationInTomcat()+cmisjs_filename;
 		String path_cmis2xfml1 = getXslLocationInTomcat(CONFIGURATION_FACETMAP_CONTENT_HOME)+cmis2xfml_filename;
 		String path_cmis2xfml2 = getXslLocationInTomcat(CONFIGURATION_FACETMAP_FACET_HOME)+cmis2xfml_filename;
 		String path_xslproperties1 = getXslPropertiesLocationInTomcat(CONFIGURATION_FACETMAP_CONTENT_HOME)+cmisjs_properties_filename;
 		String path_xslproperties2 = getXslPropertiesLocationInTomcat(CONFIGURATION_FACETMAP_FACET_HOME)+cmisjs_properties_filename;
-		System.out.println(path_cmisjs);
-		System.out.println(path_cmis2xfml1);
-		System.out.println(path_cmis2xfml2);
-		System.out.println(path_xslproperties1);
-		System.out.println(path_xslproperties2);
-		
-
+		// Copying
+		FileHelper.copyFiles(cmisjs, new File(path_cmisjs), true);
+		FileHelper.copyFiles(cmis2xfml, new File(path_cmis2xfml1), true);
+		FileHelper.copyFiles(cmis2xfml, new File(path_cmis2xfml2), true);
+		FileHelper.copyFiles(xslproperties, new File(path_xslproperties1), true);
+		FileHelper.copyFiles(xslproperties, new File(path_xslproperties2), true);
 	}
 
 	@Override
-	protected void postProcess(File fileToDeploy) throws Exception {
-	}
+	protected void postProcess(File fileToDeploy) throws Exception {}
 
 	@Override
 	protected void preProcess(File fileToDeploy) throws Exception {}

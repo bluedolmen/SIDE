@@ -5,7 +5,7 @@ import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
 %>
 
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
-	./index.get.js
+	./doclist_user.get.js
 	
 <%script type="clazz.ClassPackage" name="typeDocument"%>
 Personnes

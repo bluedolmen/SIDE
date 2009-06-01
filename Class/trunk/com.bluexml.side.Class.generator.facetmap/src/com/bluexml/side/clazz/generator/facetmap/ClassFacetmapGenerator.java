@@ -30,7 +30,7 @@ import com.bluexml.side.settings.SidePreferences;
  * @author <a href="mailto:pbertrand@bluexml.com"> Pierre BERTRAND </a>
  *
  */
-public class ClassFacetmapGenerator extends AbstractAcceleoGenerator {
+public class ClassFacetmapGenerator extends AbstractAcceleoGenerator implements FacetmapConstants {
 	public static String GENERATOR_CODE = "CODE_GED_G_C_FACETMAP_2";
 	public static String MMUri = "http://www.kerblue.org/class/1.0";
 	
