@@ -4,10 +4,6 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="clazz"
     nsURI="http://www.kerblue.org/class/1.0" nsPrefix="clazz">
   <eClassifiers xsi:type="ecore:EClass" name="ClassModelElement" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="metainfo" upperBound="-1"
-        eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//MetaInfo"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="documentation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="hasComments" upperBound="-1"
         eType="#//ClassComment" containment="true"/>
   </eClassifiers>
@@ -188,7 +184,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Enumeration">
+  <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="literals" upperBound="-1"
         eType="#//EnumerationLiteral" containment="true" eOpposite="#//EnumerationLiteral/enum"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDynamic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
@@ -239,7 +235,7 @@
         eType="#//Attribute" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TitledNamedClassModelElement" abstract="true"
-      eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement">
+      eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement #//ClassModelElement">
     <eOperations name="getLabel" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="if self.title.oclIsUndefined() or self.title.size() &lt;0 then&#xD;&#x9;self.name&#xD;else&#xD;&#x9;self.title&#xD;endif"/>

@@ -4,14 +4,18 @@
  *
  * $Id$
  */
-package com.bluexml.side.clazz.provider;
+package com.bluexml.side.common.provider;
 
+
+import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.Parameter;
 
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -22,23 +26,19 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import com.bluexml.side.clazz.ClazzPackage;
-import com.bluexml.side.clazz.Parameter;
-import com.bluexml.side.common.CommonPackage;
-
 /**
- * This is the item provider adapter for a {@link com.bluexml.side.clazz.Parameter} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.common.Parameter} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
 public class ParameterItemProvider
-	extends NamedClassModelElementItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
+	extends NamedModelElementItemProvider
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
 		IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -79,7 +79,7 @@ public class ParameterItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Parameter_valueType_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Parameter_valueType_feature", "_UI_Parameter_type"),
-				 ClazzPackage.Literals.PARAMETER__VALUE_TYPE,
+				 CommonPackage.Literals.PARAMETER__VALUE_TYPE,
 				 true,
 				 false,
 				 false,
@@ -125,7 +125,7 @@ public class ParameterItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Parameter.class)) {
-			case ClazzPackage.PARAMETER__VALUE_TYPE:
+			case CommonPackage.PARAMETER__VALUE_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -142,29 +142,6 @@ public class ParameterItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == CommonPackage.Literals.MODEL_ELEMENT__COMMENTS ||
-			childFeature == ClazzPackage.Literals.CLASS_MODEL_ELEMENT__HAS_COMMENTS;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

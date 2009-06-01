@@ -25,10 +25,10 @@ import com.bluexml.side.Class.modeler.diagram.dialogs.ConstraintsDataStructure;
 import com.bluexml.side.Class.modeler.diagram.dialogs.ConstraintsDataStructure.ConstraintObject;
 import com.bluexml.side.Class.modeler.diagram.utils.metainfo.OblAttributeMetaInfo;
 import com.bluexml.side.clazz.Attribute;
-import com.bluexml.side.clazz.AttributeType;
+import com.bluexml.side.common.DataType;
 import com.bluexml.side.clazz.Enumeration;
-import com.bluexml.side.clazz.MetaInfo;
-import com.bluexml.side.clazz.Visibility;
+import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.Visibility;
 
 public class AttributeUpdateCommand extends Command {
 	/** Current property */
@@ -81,7 +81,7 @@ public class AttributeUpdateCommand extends Command {
 	public AttributeUpdateCommand(Attribute prop, Map data) {
 		Attribute = prop;
 		name = (String) data.get(AttributeEditDialog.PROPERTY_NAME);
-		typ = ((AttributeType) data.get(AttributeEditDialog.PROPERTY_TYPE))
+		typ = ((DataType) data.get(AttributeEditDialog.PROPERTY_TYPE))
 				.toString();
 		visibility = Visibility.getByName(data.get(
 				AttributeEditDialog.PROPERTY_VISIBILITY).toString());
@@ -114,7 +114,7 @@ public class AttributeUpdateCommand extends Command {
 	protected void setValues() {
 		// Perform update
 		Attribute.setName(name);
-		Attribute.setTyp(AttributeType.getByName(typ));
+		Attribute.setTyp(DataType.getByName(typ));
 		Attribute.setVisibility(visibility);
 		Attribute.setDocumentation(doc);
 		Attribute.setDescription(description);

@@ -172,7 +172,7 @@ public class CdEditPartFactory extends ModelerEditPartFactory {
 		 * @see org.topcased.MMUseCase.util.OblSwitch#caseOperation(org.topcased.MMUseCase.Operation)
 		 * @_generated
 		 */
-		public Object caseOperation(com.bluexml.side.clazz.Operation object) {
+		public Object caseOperation(com.bluexml.side.common.Operation object) {
 			return new OperationEditPart(node, object);
 		}
 

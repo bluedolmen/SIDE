@@ -4,18 +4,20 @@
  *
  * $Id$
  */
-package com.bluexml.side.clazz.impl;
+package com.bluexml.side.common.impl;
 
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
-import com.bluexml.side.clazz.AttributeType;
-import com.bluexml.side.clazz.ClazzPackage;
-import com.bluexml.side.clazz.Parameter;
+
+import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.DataType;
+import com.bluexml.side.common.Parameter;
 
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.ocl.ecore.OCL;
 
 /**
@@ -25,13 +27,13 @@ import org.eclipse.ocl.ecore.OCL;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.clazz.impl.ParameterImpl#getValueType <em>Value Type</em>}</li>
+ *   <li>{@link com.bluexml.side.common.impl.ParameterImpl#getValueType <em>Value Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ParameterImpl extends NamedClassModelElementImpl implements Parameter {
+public class ParameterImpl extends NamedModelElementImpl implements Parameter {
 	/**
 	 * The default value of the '{@link #getValueType() <em>Value Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -40,7 +42,7 @@ public class ParameterImpl extends NamedClassModelElementImpl implements Paramet
 	 * @generated
 	 * @ordered
 	 */
-	protected static final AttributeType VALUE_TYPE_EDEFAULT = AttributeType.BOOLEAN;
+	protected static final DataType VALUE_TYPE_EDEFAULT = DataType.BOOLEAN;
 
 	/**
 	 * The cached value of the '{@link #getValueType() <em>Value Type</em>}' attribute.
@@ -50,7 +52,7 @@ public class ParameterImpl extends NamedClassModelElementImpl implements Paramet
 	 * @generated
 	 * @ordered
 	 */
-	protected AttributeType valueType = VALUE_TYPE_EDEFAULT;
+	protected DataType valueType = VALUE_TYPE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -68,7 +70,7 @@ public class ParameterImpl extends NamedClassModelElementImpl implements Paramet
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ClazzPackage.Literals.PARAMETER;
+		return CommonPackage.Literals.PARAMETER;
 	}
 
 	/**
@@ -76,7 +78,7 @@ public class ParameterImpl extends NamedClassModelElementImpl implements Paramet
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AttributeType getValueType() {
+	public DataType getValueType() {
 		return valueType;
 	}
 
@@ -85,11 +87,11 @@ public class ParameterImpl extends NamedClassModelElementImpl implements Paramet
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValueType(AttributeType newValueType) {
-		AttributeType oldValueType = valueType;
+	public void setValueType(DataType newValueType) {
+		DataType oldValueType = valueType;
 		valueType = newValueType == null ? VALUE_TYPE_EDEFAULT : newValueType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.PARAMETER__VALUE_TYPE, oldValueType, valueType));
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonPackage.PARAMETER__VALUE_TYPE, oldValueType, valueType));
 	}
 
 	/**
@@ -100,7 +102,7 @@ public class ParameterImpl extends NamedClassModelElementImpl implements Paramet
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClazzPackage.PARAMETER__VALUE_TYPE:
+			case CommonPackage.PARAMETER__VALUE_TYPE:
 				return getValueType();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -114,8 +116,8 @@ public class ParameterImpl extends NamedClassModelElementImpl implements Paramet
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClazzPackage.PARAMETER__VALUE_TYPE:
-				setValueType((AttributeType)newValue);
+			case CommonPackage.PARAMETER__VALUE_TYPE:
+				setValueType((DataType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -129,7 +131,7 @@ public class ParameterImpl extends NamedClassModelElementImpl implements Paramet
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClazzPackage.PARAMETER__VALUE_TYPE:
+			case CommonPackage.PARAMETER__VALUE_TYPE:
 				setValueType(VALUE_TYPE_EDEFAULT);
 				return;
 		}
@@ -144,7 +146,7 @@ public class ParameterImpl extends NamedClassModelElementImpl implements Paramet
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClazzPackage.PARAMETER__VALUE_TYPE:
+			case CommonPackage.PARAMETER__VALUE_TYPE:
 				return valueType != VALUE_TYPE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -166,20 +168,6 @@ public class ParameterImpl extends NamedClassModelElementImpl implements Paramet
 		return result.toString();
 	}
 
-	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
-
-	private static final OCL OCL_ENV = KerblueOCL.newInstance();
-
-	/**
-	 * Sets the value of the '{@link org.topcased.MMUseCase.Parameter#getValueType <em>Value Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value Type</em>' attribute.
-	 * @see org.topcased.MMUseCase.AttributeType
-	 * @see #getValueType()
-	 * @_generated
-	 */
-	public void setValueType(String string) {
-		setValueType(AttributeType.getByName(string));
-	}
+		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+		private static final OCL OCL_ENV = KerblueOCL.newInstance();		
 } //ParameterImpl

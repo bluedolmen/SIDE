@@ -12,10 +12,16 @@ import com.bluexml.side.common.NamedModelElement;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
+import org.eclipse.ocl.expressions.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +31,6 @@ import org.eclipse.ocl.ecore.OCL;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.common.impl.NamedModelElementImpl#getName <em>Name</em>}</li>
- *   <li>{@link com.bluexml.side.common.impl.NamedModelElementImpl#getDocumentation <em>Documentation</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,26 +56,6 @@ public class NamedModelElementImpl extends ModelElementImpl implements NamedMode
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getDocumentation() <em>Documentation</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDocumentation()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String DOCUMENTATION_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getDocumentation() <em>Documentation</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDocumentation()
-	 * @generated
-	 * @ordered
-	 */
-	protected String documentation = DOCUMENTATION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -117,21 +102,35 @@ public class NamedModelElementImpl extends ModelElementImpl implements NamedMode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getDocumentation() {
-		return documentation;
+	public String getFullName() {
+		if (getFullNameBodyOCL == null) {
+			EOperation eOperation = CommonPackage.Literals.NAMED_MODEL_ELEMENT.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(CommonPackage.Literals.NAMED_MODEL_ELEMENT, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getFullNameBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getFullNameBodyOCL);
+	
+		return (String) query.evaluate(this);
+	
 	}
 
 	/**
+	 * The parsed OCL expression for the body of the '{@link #getFullName <em>Get Full Name</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see #getFullName
 	 * @generated
 	 */
-	public void setDocumentation(String newDocumentation) {
-		String oldDocumentation = documentation;
-		documentation = newDocumentation;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CommonPackage.NAMED_MODEL_ELEMENT__DOCUMENTATION, oldDocumentation, documentation));
-	}
+	private static OCLExpression<EClassifier> getFullNameBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -143,8 +142,6 @@ public class NamedModelElementImpl extends ModelElementImpl implements NamedMode
 		switch (featureID) {
 			case CommonPackage.NAMED_MODEL_ELEMENT__NAME:
 				return getName();
-			case CommonPackage.NAMED_MODEL_ELEMENT__DOCUMENTATION:
-				return getDocumentation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -159,9 +156,6 @@ public class NamedModelElementImpl extends ModelElementImpl implements NamedMode
 		switch (featureID) {
 			case CommonPackage.NAMED_MODEL_ELEMENT__NAME:
 				setName((String)newValue);
-				return;
-			case CommonPackage.NAMED_MODEL_ELEMENT__DOCUMENTATION:
-				setDocumentation((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -178,9 +172,6 @@ public class NamedModelElementImpl extends ModelElementImpl implements NamedMode
 			case CommonPackage.NAMED_MODEL_ELEMENT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case CommonPackage.NAMED_MODEL_ELEMENT__DOCUMENTATION:
-				setDocumentation(DOCUMENTATION_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -195,8 +186,6 @@ public class NamedModelElementImpl extends ModelElementImpl implements NamedMode
 		switch (featureID) {
 			case CommonPackage.NAMED_MODEL_ELEMENT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case CommonPackage.NAMED_MODEL_ELEMENT__DOCUMENTATION:
-				return DOCUMENTATION_EDEFAULT == null ? documentation != null : !DOCUMENTATION_EDEFAULT.equals(documentation);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -213,8 +202,6 @@ public class NamedModelElementImpl extends ModelElementImpl implements NamedMode
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
-		result.append(", documentation: ");
-		result.append(documentation);
 		result.append(')');
 		return result.toString();
 	}

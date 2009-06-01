@@ -17,13 +17,14 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
-import com.bluexml.side.clazz.AttributeType;
+import com.bluexml.side.common.DataType;
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.EnumerationLiteral;
-import com.bluexml.side.clazz.MetaInfo;
-import com.bluexml.side.clazz.Operation;
+import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.Operation;
 import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.OperationComponent;
 import com.bluexml.side.form.CharField;
 import com.bluexml.side.form.ChoiceField;
 import com.bluexml.side.form.Field;
@@ -48,7 +49,7 @@ public class ClassDiagramUtils {
 				if (metaInfoMap.containsKey("multiple") && metaInfoMap.get("multiple") != null && metaInfoMap.get("multiple").equals("True")) {
 					((ChoiceField) field).setMultiple(true);
 				}
-			} else if (att.getTyp().equals(AttributeType.STRING)) { 
+			} else if (att.getTyp().equals(DataType.STRING)) { 
 				// Email Field
 				if (Boolean.parseBoolean(metaInfoMap.get("email"))) {
 					field = FormFactory.eINSTANCE.createEmailField();
@@ -63,30 +64,30 @@ public class ClassDiagramUtils {
 					}
 				}
 			// Date Time Field
-			} else if (att.getTyp().equals(AttributeType.DATE_TIME)) {
+			} else if (att.getTyp().equals(DataType.DATE_TIME)) {
 				field = FormFactory.eINSTANCE.createDateTimeField();
 			// Date Field
-			} else if (att.getTyp().equals(AttributeType.DATE)) {
+			} else if (att.getTyp().equals(DataType.DATE)) {
 				field = FormFactory.eINSTANCE.createDateField();
 			// Time Field
-			} else if (att.getTyp().equals(AttributeType.TIME)) {
+			} else if (att.getTyp().equals(DataType.TIME)) {
 				field = FormFactory.eINSTANCE.createTimeField();
-			} else if(att.getTyp().equals(AttributeType.BOOLEAN)) {
+			} else if(att.getTyp().equals(DataType.BOOLEAN)) {
 			// Boolean Field
 				field = FormFactory.eINSTANCE.createBooleanField();
-			} else if(att.getTyp().equals(AttributeType.INT)) {
+			} else if(att.getTyp().equals(DataType.INT)) {
 			// Integer Field
 				field = FormFactory.eINSTANCE.createIntegerField();
-			} else if(att.getTyp().equals(AttributeType.LONG)) {
+			} else if(att.getTyp().equals(DataType.LONG)) {
 			// Long Field
 				field = FormFactory.eINSTANCE.createIntegerField();
-			} else if(att.getTyp().equals(AttributeType.FLOAT)) {
+			} else if(att.getTyp().equals(DataType.FLOAT)) {
 			// Float Field
 				field = FormFactory.eINSTANCE.createFloatField();
-			} else if(att.getTyp().equals(AttributeType.DOUBLE)) {
+			} else if(att.getTyp().equals(DataType.DOUBLE)) {
 			// Decimal Field
 				field = FormFactory.eINSTANCE.createDecimalField();
-			} else if(att.getTyp().equals(AttributeType.SHORT)) {
+			} else if(att.getTyp().equals(DataType.SHORT)) {
 			// Short Field
 				field = FormFactory.eINSTANCE.createIntegerField();
 			} else {
@@ -113,7 +114,7 @@ public class ClassDiagramUtils {
 		return field;
 	}
 	
-	public static Field getFieldForOperation(Operation op) {
+	public static Field getFieldForOperation(OperationComponent op) {
 		Field f = null;
 		if (op != null) {
 			f = FormFactory.eINSTANCE.createActionField();
@@ -372,7 +373,7 @@ public class ClassDiagramUtils {
 			for (Attribute att : cl.getAllInheritedAttributes()) {
 				listChild.put(att.getName(), att);
 			}
-			for (Operation op : cl.getOperations()) {
+			for (OperationComponent op : cl.getOperations()) {
 				listChild.put(op.getName(), op);
 			}
 		}

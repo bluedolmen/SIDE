@@ -40,11 +40,11 @@ import org.topcased.facilities.widgets.SingleObjectChooser;
 
 import com.bluexml.side.Class.modeler.diagram.helper.MetaInfoHelper;
 import com.bluexml.side.Class.modeler.diagram.utils.metainfo.OblOperationMetaInfo;
-import com.bluexml.side.clazz.AttributeType;
-import com.bluexml.side.clazz.MetaInfo;
-import com.bluexml.side.clazz.MetaInfoGroup;
-import com.bluexml.side.clazz.Operation;
-import com.bluexml.side.clazz.Visibility;
+import com.bluexml.side.common.DataType;
+import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.MetaInfoGroup;
+import com.bluexml.side.common.Operation;
+import com.bluexml.side.common.Visibility;
 
 
 /**
@@ -150,9 +150,9 @@ public class OperationEditDialog extends Dialog implements IDialogConstants {
 	 * 
 	 */
 	private void initializeTypes() {
-		types = new String[AttributeType.VALUES.size()];
+		types = new String[DataType.VALUES.size()];
 		int i = 0;
-		for (Object o : AttributeType.VALUES) {
+		for (Object o : DataType.VALUES) {
 			types[i] = o.toString();
 			i++;
 		}

@@ -18,17 +18,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import com.bluexml.side.Class.modeler.diagram.utils.metainfo.value.booleanWithParameter;
-import com.bluexml.side.clazz.AttributeType;
-import com.bluexml.side.clazz.ClazzFactory;
-import com.bluexml.side.clazz.MetaInfo;
-import com.bluexml.side.clazz.MetaInfoGroup;
-import com.bluexml.side.clazz.impl.ClazzFactoryImpl;
+import com.bluexml.side.common.CommonFactory;
+import com.bluexml.side.common.DataType;
+import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.MetaInfoGroup;
+import com.bluexml.side.common.impl.CommonFactoryImpl;
 
 
 
 public class OblAttributeMetaInfo extends OblTypeMetaInfo {
 
-	public Collection<Object> getMetaInfo(AttributeType typ) {
+	public Collection<Object> getMetaInfo(DataType typ) {
 		initAllMetaInfo();
 
 		Collection<Object> result = new ArrayList<Object>();
@@ -36,7 +36,7 @@ public class OblAttributeMetaInfo extends OblTypeMetaInfo {
 		for (Object o : allMetaInfos) {
 			if (o instanceof MetaInfo) {
 				MetaInfo c = (MetaInfo) o;
-				if (c.getConstraintType().equals(AttributeType.VOID)) {
+				if (c.getConstraintType().equals(DataType.VOID)) {
 					result.add(c);
 				} else if (c.getConstraintType().equals(typ)) {
 					result.add(c);
@@ -44,11 +44,11 @@ public class OblAttributeMetaInfo extends OblTypeMetaInfo {
 			} else if (o instanceof MetaInfoGroup) {
 				MetaInfoGroup cg = (MetaInfoGroup) o;
 				boolean find = false;
-				for (Object obj : cg.getContraints()) {
+				for (Object obj : cg.getChildren()) {
 					if (obj instanceof MetaInfo) {
 						MetaInfo c = (MetaInfo) obj;
 						if (c.getConstraintType().equals(
-								AttributeType.VOID)) {
+								DataType.VOID)) {
 							find = true;
 							break;
 						} else if (c.getConstraintType().equals(typ)) {
@@ -70,7 +70,7 @@ public class OblAttributeMetaInfo extends OblTypeMetaInfo {
 	public void initAllMetaInfo() {
 		allMetaInfos = new ArrayList<Object>();
 
-		ClazzFactory fact = ClazzFactoryImpl.init();
+		CommonFactory fact = CommonFactoryImpl.init();
 		MetaInfo c;
 		MetaInfoGroup cg;
 
@@ -79,7 +79,7 @@ public class OblAttributeMetaInfo extends OblTypeMetaInfo {
 		 */
 
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.STRING);
+		c.setConstraintType(DataType.STRING);
 		c.setKey("email");
 		c.setValueType(boolean.class);
 		allMetaInfos.add(c);
@@ -89,70 +89,70 @@ public class OblAttributeMetaInfo extends OblTypeMetaInfo {
 		allMetaInfos.add(cg);
 
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.STRING);
+		c.setConstraintType(DataType.STRING);
 		c.setKey("rte-rows");
 		c.setValueType(int.class);
-		cg.getContraints().add(c);
+		cg.getChildren().add(c);
 
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.STRING);
+		c.setConstraintType(DataType.STRING);
 		c.setKey("rte-cols");
 		c.setValueType(int.class);
-		cg.getContraints().add(c);
+		cg.getChildren().add(c);
 
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.STRING);
+		c.setConstraintType(DataType.STRING);
 		c.setKey("rte-width");
 		c.setValueType(int.class);
-		cg.getContraints().add(c);
+		cg.getChildren().add(c);
 
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.STRING);
+		c.setConstraintType(DataType.STRING);
 		c.setKey("rte-height");
 		c.setValueType(int.class);
-		cg.getContraints().add(c);
+		cg.getChildren().add(c);
 
 		cg = fact.createMetaInfoGroup();
 		cg.setName("textarea");
 		allMetaInfos.add(cg);
 
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.STRING);
+		c.setConstraintType(DataType.STRING);
 		c.setKey("textarea-rows");
 		c.setValueType(int.class);
-		cg.getContraints().add(c);
+		cg.getChildren().add(c);
 
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.STRING);
+		c.setConstraintType(DataType.STRING);
 		c.setKey("textarea-cols");
 		c.setValueType(int.class);
-		cg.getContraints().add(c);
+		cg.getChildren().add(c);
 
 		cg = fact.createMetaInfoGroup();
 		cg.setName("length");
 		allMetaInfos.add(cg);
 
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.STRING);
+		c.setConstraintType(DataType.STRING);
 		c.setKey("min-length");
 		c.setValueType(int.class);
-		cg.getContraints().add(c);
+		cg.getChildren().add(c);
 
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.STRING);
+		c.setConstraintType(DataType.STRING);
 		c.setKey("max-length");
 		c.setValueType(int.class);
-		cg.getContraints().add(c);
+		cg.getChildren().add(c);
 		
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.STRING);
+		c.setConstraintType(DataType.STRING);
 		c.setKey("regular-expression");
 		c.setValueType(String.class);
 		allMetaInfos.add(c);
 		
 		// field to describe the regular-expression
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.STRING);
+		c.setConstraintType(DataType.STRING);
 		c.setKey("regular-expression-desc");
 		c.setValueType(String.class);
 		allMetaInfos.add(c);
@@ -166,65 +166,65 @@ public class OblAttributeMetaInfo extends OblTypeMetaInfo {
 		allMetaInfos.add(cg);
 		
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.INT);
+		c.setConstraintType(DataType.INT);
 		c.setKey("minBound");
 		c.setValueType(int.class);
-		cg.getContraints().add(c);
+		cg.getChildren().add(c);
 		
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.INT);
+		c.setConstraintType(DataType.INT);
 		c.setKey("maxBound");
 		c.setValueType(String.class);
-		cg.getContraints().add(c);
+		cg.getChildren().add(c);
 
 		/**
 		 * Common
 		 */
 
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.VOID);
+		c.setConstraintType(DataType.VOID);
 		c.setKey("size");
 		c.setValueType(int.class);
 		allMetaInfos.add(c);
 
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.VOID);
+		c.setConstraintType(DataType.VOID);
 		c.setKey("required");
 		c.setValueType(boolean.class);
 		allMetaInfos.add(c);
 
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.VOID);
+		c.setConstraintType(DataType.VOID);
 		c.setKey("hidden");
 		c.setValueType(boolean.class);
 		allMetaInfos.add(c);
 		
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.VOID);
+		c.setConstraintType(DataType.VOID);
 		c.setKey("read-only");
 		c.setValueType(boolean.class);
 		allMetaInfos.add(c);
 
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.VOID);
+		c.setConstraintType(DataType.VOID);
 		c.setKey("treeNodeName");
 		c.setValueType(boolean.class);
 		allMetaInfos.add(c);
 
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.VOID);
+		c.setConstraintType(DataType.VOID);
 		c.setKey("tree");
 		c.setValueType(booleanWithParameter.class);
 		allMetaInfos.add(c);
 
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.VOID);
+		c.setConstraintType(DataType.VOID);
 		c.setKey("propertySearched");
 		c.setValueType(boolean.class);
 		allMetaInfos.add(c);
 		
 		c = fact.createMetaInfo();
-		c.setConstraintType(AttributeType.VOID);
+		c.setConstraintType(DataType.VOID);
 		c.setKey("multiple");
 		c.setValueType(boolean.class);
 		allMetaInfos.add(c);

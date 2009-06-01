@@ -100,113 +100,13 @@ public interface ClazzPackage extends EPackage {
 	int CLASS_MODEL_ELEMENT__COMMENTS = CommonPackage.MODEL_ELEMENT__COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_MODEL_ELEMENT__METAINFO = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_MODEL_ELEMENT__DOCUMENTATION = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_MODEL_ELEMENT__HAS_COMMENTS = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Class Model Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_MODEL_ELEMENT_FEATURE_COUNT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.NamedClassModelElementImpl <em>Named Class Model Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.clazz.impl.NamedClassModelElementImpl
-	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getNamedClassModelElement()
-	 * @generated
-	 */
-	int NAMED_CLASS_MODEL_ELEMENT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_CLASS_MODEL_ELEMENT__STEREOTYPES = CLASS_MODEL_ELEMENT__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_CLASS_MODEL_ELEMENT__TAGS = CLASS_MODEL_ELEMENT__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_CLASS_MODEL_ELEMENT__COMMENTS = CLASS_MODEL_ELEMENT__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_CLASS_MODEL_ELEMENT__METAINFO = CLASS_MODEL_ELEMENT__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_CLASS_MODEL_ELEMENT__DOCUMENTATION = CLASS_MODEL_ELEMENT__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS = CLASS_MODEL_ELEMENT__HAS_COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_CLASS_MODEL_ELEMENT__NAME = CLASS_MODEL_ELEMENT_FEATURE_COUNT + 0;
+	int CLASS_MODEL_ELEMENT__DOCUMENTATION = CommonPackage.MODEL_ELEMENT__DOCUMENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -215,16 +115,34 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION = CLASS_MODEL_ELEMENT_FEATURE_COUNT + 1;
+	int CLASS_MODEL_ELEMENT__DESCRIPTION = CommonPackage.MODEL_ELEMENT__DESCRIPTION;
 
 	/**
-	 * The number of structural features of the '<em>Named Class Model Element</em>' class.
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT = CLASS_MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int CLASS_MODEL_ELEMENT__METAINFO = CommonPackage.MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_MODEL_ELEMENT__HAS_COMMENTS = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Class Model Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_MODEL_ELEMENT_FEATURE_COUNT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.ClassPackageImpl <em>Class Package</em>}' class.
@@ -234,7 +152,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getClassPackage()
 	 * @generated
 	 */
-	int CLASS_PACKAGE = 2;
+	int CLASS_PACKAGE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -264,15 +182,6 @@ public interface ClazzPackage extends EPackage {
 	int CLASS_PACKAGE__COMMENTS = CommonPackage.PACKAGE__COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_PACKAGE__NAME = CommonPackage.PACKAGE__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -280,6 +189,33 @@ public interface ClazzPackage extends EPackage {
 	 * @ordered
 	 */
 	int CLASS_PACKAGE__DOCUMENTATION = CommonPackage.PACKAGE__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_PACKAGE__DESCRIPTION = CommonPackage.PACKAGE__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_PACKAGE__METAINFO = CommonPackage.PACKAGE__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_PACKAGE__NAME = CommonPackage.PACKAGE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Stereotype Set</b></em>' containment reference list.
@@ -352,7 +288,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getTitledNamedClassModelElement()
 	 * @generated
 	 */
-	int TITLED_NAMED_CLASS_MODEL_ELEMENT = 14;
+	int TITLED_NAMED_CLASS_MODEL_ELEMENT = 9;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -361,7 +297,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TITLED_NAMED_CLASS_MODEL_ELEMENT__STEREOTYPES = NAMED_CLASS_MODEL_ELEMENT__STEREOTYPES;
+	int TITLED_NAMED_CLASS_MODEL_ELEMENT__STEREOTYPES = CommonPackage.NAMED_MODEL_ELEMENT__STEREOTYPES;
 
 	/**
 	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
@@ -370,7 +306,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TITLED_NAMED_CLASS_MODEL_ELEMENT__TAGS = NAMED_CLASS_MODEL_ELEMENT__TAGS;
+	int TITLED_NAMED_CLASS_MODEL_ELEMENT__TAGS = CommonPackage.NAMED_MODEL_ELEMENT__TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
@@ -379,16 +315,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TITLED_NAMED_CLASS_MODEL_ELEMENT__COMMENTS = NAMED_CLASS_MODEL_ELEMENT__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TITLED_NAMED_CLASS_MODEL_ELEMENT__METAINFO = NAMED_CLASS_MODEL_ELEMENT__METAINFO;
+	int TITLED_NAMED_CLASS_MODEL_ELEMENT__COMMENTS = CommonPackage.NAMED_MODEL_ELEMENT__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
@@ -397,25 +324,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TITLED_NAMED_CLASS_MODEL_ELEMENT__DOCUMENTATION = NAMED_CLASS_MODEL_ELEMENT__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TITLED_NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS = NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TITLED_NAMED_CLASS_MODEL_ELEMENT__NAME = NAMED_CLASS_MODEL_ELEMENT__NAME;
+	int TITLED_NAMED_CLASS_MODEL_ELEMENT__DOCUMENTATION = CommonPackage.NAMED_MODEL_ELEMENT__DOCUMENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -424,7 +333,34 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TITLED_NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION = NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION;
+	int TITLED_NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION = CommonPackage.NAMED_MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TITLED_NAMED_CLASS_MODEL_ELEMENT__METAINFO = CommonPackage.NAMED_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TITLED_NAMED_CLASS_MODEL_ELEMENT__NAME = CommonPackage.NAMED_MODEL_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TITLED_NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Title</b></em>' attribute.
@@ -433,7 +369,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TITLED_NAMED_CLASS_MODEL_ELEMENT__TITLE = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 0;
+	int TITLED_NAMED_CLASS_MODEL_ELEMENT__TITLE = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Titled Named Class Model Element</em>' class.
@@ -442,7 +378,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 1;
+	int TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.AbstractClassImpl <em>Abstract Class</em>}' class.
@@ -452,7 +388,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getAbstractClass()
 	 * @generated
 	 */
-	int ABSTRACT_CLASS = 11;
+	int ABSTRACT_CLASS = 8;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -482,15 +418,6 @@ public interface ClazzPackage extends EPackage {
 	int ABSTRACT_CLASS__COMMENTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_CLASS__METAINFO = TITLED_NAMED_CLASS_MODEL_ELEMENT__METAINFO;
-
-	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -500,13 +427,22 @@ public interface ClazzPackage extends EPackage {
 	int ABSTRACT_CLASS__DOCUMENTATION = TITLED_NAMED_CLASS_MODEL_ELEMENT__DOCUMENTATION;
 
 	/**
-	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CLASS__HAS_COMMENTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS;
+	int ABSTRACT_CLASS__DESCRIPTION = TITLED_NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CLASS__METAINFO = TITLED_NAMED_CLASS_MODEL_ELEMENT__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -518,13 +454,13 @@ public interface ClazzPackage extends EPackage {
 	int ABSTRACT_CLASS__NAME = TITLED_NAMED_CLASS_MODEL_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CLASS__DESCRIPTION = TITLED_NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION;
+	int ABSTRACT_CLASS__HAS_COMMENTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Title</b></em>' attribute.
@@ -561,7 +497,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getClazz()
 	 * @generated
 	 */
-	int CLAZZ = 3;
+	int CLAZZ = 2;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -591,15 +527,6 @@ public interface ClazzPackage extends EPackage {
 	int CLAZZ__COMMENTS = ABSTRACT_CLASS__COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLAZZ__METAINFO = ABSTRACT_CLASS__METAINFO;
-
-	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -609,13 +536,22 @@ public interface ClazzPackage extends EPackage {
 	int CLAZZ__DOCUMENTATION = ABSTRACT_CLASS__DOCUMENTATION;
 
 	/**
-	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLAZZ__HAS_COMMENTS = ABSTRACT_CLASS__HAS_COMMENTS;
+	int CLAZZ__DESCRIPTION = ABSTRACT_CLASS__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLAZZ__METAINFO = ABSTRACT_CLASS__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -627,13 +563,13 @@ public interface ClazzPackage extends EPackage {
 	int CLAZZ__NAME = ABSTRACT_CLASS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLAZZ__DESCRIPTION = ABSTRACT_CLASS__DESCRIPTION;
+	int CLAZZ__HAS_COMMENTS = ABSTRACT_CLASS__HAS_COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Title</b></em>' attribute.
@@ -715,7 +651,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getAssociation()
 	 * @generated
 	 */
-	int ASSOCIATION = 4;
+	int ASSOCIATION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -745,15 +681,6 @@ public interface ClazzPackage extends EPackage {
 	int ASSOCIATION__COMMENTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION__METAINFO = TITLED_NAMED_CLASS_MODEL_ELEMENT__METAINFO;
-
-	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -763,13 +690,22 @@ public interface ClazzPackage extends EPackage {
 	int ASSOCIATION__DOCUMENTATION = TITLED_NAMED_CLASS_MODEL_ELEMENT__DOCUMENTATION;
 
 	/**
-	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__HAS_COMMENTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS;
+	int ASSOCIATION__DESCRIPTION = TITLED_NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION__METAINFO = TITLED_NAMED_CLASS_MODEL_ELEMENT__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -781,13 +717,13 @@ public interface ClazzPackage extends EPackage {
 	int ASSOCIATION__NAME = TITLED_NAMED_CLASS_MODEL_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__DESCRIPTION = TITLED_NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION;
+	int ASSOCIATION__HAS_COMMENTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Title</b></em>' attribute.
@@ -842,7 +778,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getAttribute()
 	 * @generated
 	 */
-	int ATTRIBUTE = 5;
+	int ATTRIBUTE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -872,15 +808,6 @@ public interface ClazzPackage extends EPackage {
 	int ATTRIBUTE__COMMENTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE__METAINFO = TITLED_NAMED_CLASS_MODEL_ELEMENT__METAINFO;
-
-	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -890,13 +817,22 @@ public interface ClazzPackage extends EPackage {
 	int ATTRIBUTE__DOCUMENTATION = TITLED_NAMED_CLASS_MODEL_ELEMENT__DOCUMENTATION;
 
 	/**
-	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__HAS_COMMENTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS;
+	int ATTRIBUTE__DESCRIPTION = TITLED_NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__METAINFO = TITLED_NAMED_CLASS_MODEL_ELEMENT__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -908,13 +844,13 @@ public interface ClazzPackage extends EPackage {
 	int ATTRIBUTE__NAME = TITLED_NAMED_CLASS_MODEL_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__DESCRIPTION = TITLED_NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION;
+	int ATTRIBUTE__HAS_COMMENTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Title</b></em>' attribute.
@@ -987,7 +923,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getEnumeration()
 	 * @generated
 	 */
-	int ENUMERATION = 6;
+	int ENUMERATION = 5;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -996,7 +932,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION__STEREOTYPES = NAMED_CLASS_MODEL_ELEMENT__STEREOTYPES;
+	int ENUMERATION__STEREOTYPES = CommonPackage.NAMED_MODEL_ELEMENT__STEREOTYPES;
 
 	/**
 	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
@@ -1005,7 +941,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION__TAGS = NAMED_CLASS_MODEL_ELEMENT__TAGS;
+	int ENUMERATION__TAGS = CommonPackage.NAMED_MODEL_ELEMENT__TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
@@ -1014,16 +950,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION__COMMENTS = NAMED_CLASS_MODEL_ELEMENT__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION__METAINFO = NAMED_CLASS_MODEL_ELEMENT__METAINFO;
+	int ENUMERATION__COMMENTS = CommonPackage.NAMED_MODEL_ELEMENT__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
@@ -1032,25 +959,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION__DOCUMENTATION = NAMED_CLASS_MODEL_ELEMENT__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION__HAS_COMMENTS = NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION__NAME = NAMED_CLASS_MODEL_ELEMENT__NAME;
+	int ENUMERATION__DOCUMENTATION = CommonPackage.NAMED_MODEL_ELEMENT__DOCUMENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -1059,7 +968,25 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION__DESCRIPTION = NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION;
+	int ENUMERATION__DESCRIPTION = CommonPackage.NAMED_MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION__METAINFO = CommonPackage.NAMED_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION__NAME = CommonPackage.NAMED_MODEL_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Literals</b></em>' containment reference list.
@@ -1068,7 +995,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION__LITERALS = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 0;
+	int ENUMERATION__LITERALS = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Is Dynamic</b></em>' attribute.
@@ -1077,7 +1004,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION__IS_DYNAMIC = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 1;
+	int ENUMERATION__IS_DYNAMIC = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Depends</b></em>' reference.
@@ -1086,7 +1013,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION__DEPENDS = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int ENUMERATION__DEPENDS = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Enumeration</em>' class.
@@ -1095,7 +1022,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION_FEATURE_COUNT = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 3;
+	int ENUMERATION_FEATURE_COUNT = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.EnumerationLiteralImpl <em>Enumeration Literal</em>}' class.
@@ -1105,7 +1032,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getEnumerationLiteral()
 	 * @generated
 	 */
-	int ENUMERATION_LITERAL = 7;
+	int ENUMERATION_LITERAL = 6;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1144,242 +1071,6 @@ public interface ClazzPackage extends EPackage {
 	int ENUMERATION_LITERAL_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.OperationImpl <em>Operation</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.clazz.impl.OperationImpl
-	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getOperation()
-	 * @generated
-	 */
-	int OPERATION = 8;
-
-	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__STEREOTYPES = NAMED_CLASS_MODEL_ELEMENT__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__TAGS = NAMED_CLASS_MODEL_ELEMENT__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__COMMENTS = NAMED_CLASS_MODEL_ELEMENT__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__METAINFO = NAMED_CLASS_MODEL_ELEMENT__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__DOCUMENTATION = NAMED_CLASS_MODEL_ELEMENT__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__HAS_COMMENTS = NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__NAME = NAMED_CLASS_MODEL_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__DESCRIPTION = NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Return Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__RETURN_TYPE = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__PARAMETERS = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__VISIBILITY = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__STATIC = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Body</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__BODY = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The number of structural features of the '<em>Operation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_FEATURE_COUNT = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 5;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.ParameterImpl <em>Parameter</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.clazz.impl.ParameterImpl
-	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getParameter()
-	 * @generated
-	 */
-	int PARAMETER = 9;
-
-	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__STEREOTYPES = NAMED_CLASS_MODEL_ELEMENT__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__TAGS = NAMED_CLASS_MODEL_ELEMENT__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__COMMENTS = NAMED_CLASS_MODEL_ELEMENT__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__METAINFO = NAMED_CLASS_MODEL_ELEMENT__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__DOCUMENTATION = NAMED_CLASS_MODEL_ELEMENT__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__HAS_COMMENTS = NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__NAME = NAMED_CLASS_MODEL_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__DESCRIPTION = NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Value Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__VALUE_TYPE = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Parameter</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER_FEATURE_COUNT = NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.AspectImpl <em>Aspect</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1387,7 +1078,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getAspect()
 	 * @generated
 	 */
-	int ASPECT = 10;
+	int ASPECT = 7;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -1417,15 +1108,6 @@ public interface ClazzPackage extends EPackage {
 	int ASPECT__COMMENTS = ABSTRACT_CLASS__COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASPECT__METAINFO = ABSTRACT_CLASS__METAINFO;
-
-	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1435,13 +1117,22 @@ public interface ClazzPackage extends EPackage {
 	int ASPECT__DOCUMENTATION = ABSTRACT_CLASS__DOCUMENTATION;
 
 	/**
-	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASPECT__HAS_COMMENTS = ABSTRACT_CLASS__HAS_COMMENTS;
+	int ASPECT__DESCRIPTION = ABSTRACT_CLASS__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT__METAINFO = ABSTRACT_CLASS__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1453,13 +1144,13 @@ public interface ClazzPackage extends EPackage {
 	int ASPECT__NAME = ABSTRACT_CLASS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASPECT__DESCRIPTION = ABSTRACT_CLASS__DESCRIPTION;
+	int ASPECT__HAS_COMMENTS = ABSTRACT_CLASS__HAS_COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Title</b></em>' attribute.
@@ -1489,107 +1180,6 @@ public interface ClazzPackage extends EPackage {
 	int ASPECT_FEATURE_COUNT = ABSTRACT_CLASS_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.MetaInfoImpl <em>Meta Info</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.clazz.impl.MetaInfoImpl
-	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getMetaInfo()
-	 * @generated
-	 */
-	int META_INFO = 12;
-
-	/**
-	 * The feature id for the '<em><b>Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int META_INFO__KEY = 0;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int META_INFO__VALUE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Value Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int META_INFO__VALUE_TYPE = 2;
-
-	/**
-	 * The feature id for the '<em><b>Constraint Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int META_INFO__CONSTRAINT_TYPE = 3;
-
-	/**
-	 * The feature id for the '<em><b>Value Set</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int META_INFO__VALUE_SET = 4;
-
-	/**
-	 * The number of structural features of the '<em>Meta Info</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int META_INFO_FEATURE_COUNT = 5;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.MetaInfoGroupImpl <em>Meta Info Group</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.clazz.impl.MetaInfoGroupImpl
-	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getMetaInfoGroup()
-	 * @generated
-	 */
-	int META_INFO_GROUP = 13;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int META_INFO_GROUP__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Contraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int META_INFO_GROUP__CONTRAINTS = 1;
-
-	/**
-	 * The number of structural features of the '<em>Meta Info Group</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int META_INFO_GROUP_FEATURE_COUNT = 2;
-
-	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.ClassCommentImpl <em>Class Comment</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1597,7 +1187,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getClassComment()
 	 * @generated
 	 */
-	int CLASS_COMMENT = 15;
+	int CLASS_COMMENT = 10;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -1627,6 +1217,33 @@ public interface ClazzPackage extends EPackage {
 	int CLASS_COMMENT__COMMENTS = CommonPackage.COMMENT__COMMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_COMMENT__DOCUMENTATION = CommonPackage.COMMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_COMMENT__DESCRIPTION = CommonPackage.COMMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_COMMENT__METAINFO = CommonPackage.COMMENT__METAINFO;
+
+	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1652,7 +1269,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getAssociationEnd()
 	 * @generated
 	 */
-	int ASSOCIATION_END = 16;
+	int ASSOCIATION_END = 11;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -1682,15 +1299,6 @@ public interface ClazzPackage extends EPackage {
 	int ASSOCIATION_END__COMMENTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION_END__METAINFO = TITLED_NAMED_CLASS_MODEL_ELEMENT__METAINFO;
-
-	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1700,13 +1308,22 @@ public interface ClazzPackage extends EPackage {
 	int ASSOCIATION_END__DOCUMENTATION = TITLED_NAMED_CLASS_MODEL_ELEMENT__DOCUMENTATION;
 
 	/**
-	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_END__HAS_COMMENTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS;
+	int ASSOCIATION_END__DESCRIPTION = TITLED_NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_END__METAINFO = TITLED_NAMED_CLASS_MODEL_ELEMENT__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1718,13 +1335,13 @@ public interface ClazzPackage extends EPackage {
 	int ASSOCIATION_END__NAME = TITLED_NAMED_CLASS_MODEL_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_END__DESCRIPTION = TITLED_NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION;
+	int ASSOCIATION_END__HAS_COMMENTS = TITLED_NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Title</b></em>' attribute.
@@ -1788,7 +1405,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getFirstEnd()
 	 * @generated
 	 */
-	int FIRST_END = 17;
+	int FIRST_END = 12;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -1818,15 +1435,6 @@ public interface ClazzPackage extends EPackage {
 	int FIRST_END__COMMENTS = ASSOCIATION_END__COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIRST_END__METAINFO = ASSOCIATION_END__METAINFO;
-
-	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1836,13 +1444,22 @@ public interface ClazzPackage extends EPackage {
 	int FIRST_END__DOCUMENTATION = ASSOCIATION_END__DOCUMENTATION;
 
 	/**
-	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIRST_END__HAS_COMMENTS = ASSOCIATION_END__HAS_COMMENTS;
+	int FIRST_END__DESCRIPTION = ASSOCIATION_END__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIRST_END__METAINFO = ASSOCIATION_END__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1854,13 +1471,13 @@ public interface ClazzPackage extends EPackage {
 	int FIRST_END__NAME = ASSOCIATION_END__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIRST_END__DESCRIPTION = ASSOCIATION_END__DESCRIPTION;
+	int FIRST_END__HAS_COMMENTS = ASSOCIATION_END__HAS_COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Title</b></em>' attribute.
@@ -1924,7 +1541,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getSecondEnd()
 	 * @generated
 	 */
-	int SECOND_END = 18;
+	int SECOND_END = 13;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -1954,15 +1571,6 @@ public interface ClazzPackage extends EPackage {
 	int SECOND_END__COMMENTS = ASSOCIATION_END__COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SECOND_END__METAINFO = ASSOCIATION_END__METAINFO;
-
-	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1972,13 +1580,22 @@ public interface ClazzPackage extends EPackage {
 	int SECOND_END__DOCUMENTATION = ASSOCIATION_END__DOCUMENTATION;
 
 	/**
-	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SECOND_END__HAS_COMMENTS = ASSOCIATION_END__HAS_COMMENTS;
+	int SECOND_END__DESCRIPTION = ASSOCIATION_END__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECOND_END__METAINFO = ASSOCIATION_END__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1990,13 +1607,13 @@ public interface ClazzPackage extends EPackage {
 	int SECOND_END__NAME = ASSOCIATION_END__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * The feature id for the '<em><b>Has Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SECOND_END__DESCRIPTION = ASSOCIATION_END__DESCRIPTION;
+	int SECOND_END__HAS_COMMENTS = ASSOCIATION_END__HAS_COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Title</b></em>' attribute.
@@ -2060,28 +1677,7 @@ public interface ClazzPackage extends EPackage {
 	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getAssociationType()
 	 * @generated
 	 */
-	int ASSOCIATION_TYPE = 19;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.clazz.AttributeType <em>Attribute Type</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.clazz.AttributeType
-	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getAttributeType()
-	 * @generated
-	 */
-	int ATTRIBUTE_TYPE = 20;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.clazz.Visibility <em>Visibility</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.clazz.Visibility
-	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getVisibility()
-	 * @generated
-	 */
-	int VISIBILITY = 21;
-
+	int ASSOCIATION_TYPE = 14;
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.clazz.ClassModelElement <em>Class Model Element</em>}'.
@@ -2094,28 +1690,6 @@ public interface ClazzPackage extends EPackage {
 	EClass getClassModelElement();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.clazz.ClassModelElement#getMetainfo <em>Metainfo</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Metainfo</em>'.
-	 * @see com.bluexml.side.clazz.ClassModelElement#getMetainfo()
-	 * @see #getClassModelElement()
-	 * @generated
-	 */
-	EReference getClassModelElement_Metainfo();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.ClassModelElement#getDocumentation <em>Documentation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Documentation</em>'.
-	 * @see com.bluexml.side.clazz.ClassModelElement#getDocumentation()
-	 * @see #getClassModelElement()
-	 * @generated
-	 */
-	EAttribute getClassModelElement_Documentation();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.clazz.ClassModelElement#getHasComments <em>Has Comments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2125,38 +1699,6 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getClassModelElement_HasComments();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.clazz.NamedClassModelElement <em>Named Class Model Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Named Class Model Element</em>'.
-	 * @see com.bluexml.side.clazz.NamedClassModelElement
-	 * @generated
-	 */
-	EClass getNamedClassModelElement();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.NamedClassModelElement#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see com.bluexml.side.clazz.NamedClassModelElement#getName()
-	 * @see #getNamedClassModelElement()
-	 * @generated
-	 */
-	EAttribute getNamedClassModelElement_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.NamedClassModelElement#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see com.bluexml.side.clazz.NamedClassModelElement#getDescription()
-	 * @see #getNamedClassModelElement()
-	 * @generated
-	 */
-	EAttribute getNamedClassModelElement_Description();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.clazz.ClassPackage <em>Class Package</em>}'.
@@ -2472,92 +2014,6 @@ public interface ClazzPackage extends EPackage {
 	EReference getEnumerationLiteral_Enum();
 
 	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.clazz.Operation <em>Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Operation</em>'.
-	 * @see com.bluexml.side.clazz.Operation
-	 * @generated
-	 */
-	EClass getOperation();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Operation#getReturnType <em>Return Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Return Type</em>'.
-	 * @see com.bluexml.side.clazz.Operation#getReturnType()
-	 * @see #getOperation()
-	 * @generated
-	 */
-	EAttribute getOperation_ReturnType();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.clazz.Operation#getParameters <em>Parameters</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
-	 * @see com.bluexml.side.clazz.Operation#getParameters()
-	 * @see #getOperation()
-	 * @generated
-	 */
-	EReference getOperation_Parameters();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Operation#getVisibility <em>Visibility</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Visibility</em>'.
-	 * @see com.bluexml.side.clazz.Operation#getVisibility()
-	 * @see #getOperation()
-	 * @generated
-	 */
-	EAttribute getOperation_Visibility();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Operation#isStatic <em>Static</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Static</em>'.
-	 * @see com.bluexml.side.clazz.Operation#isStatic()
-	 * @see #getOperation()
-	 * @generated
-	 */
-	EAttribute getOperation_Static();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Operation#getBody <em>Body</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Body</em>'.
-	 * @see com.bluexml.side.clazz.Operation#getBody()
-	 * @see #getOperation()
-	 * @generated
-	 */
-	EAttribute getOperation_Body();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.clazz.Parameter <em>Parameter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Parameter</em>'.
-	 * @see com.bluexml.side.clazz.Parameter
-	 * @generated
-	 */
-	EClass getParameter();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.Parameter#getValueType <em>Value Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value Type</em>'.
-	 * @see com.bluexml.side.clazz.Parameter#getValueType()
-	 * @see #getParameter()
-	 * @generated
-	 */
-	EAttribute getParameter_ValueType();
-
-	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.clazz.Aspect <em>Aspect</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2587,103 +2043,6 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAbstractClass_Attributes();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.clazz.MetaInfo <em>Meta Info</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Meta Info</em>'.
-	 * @see com.bluexml.side.clazz.MetaInfo
-	 * @generated
-	 */
-	EClass getMetaInfo();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.MetaInfo#getKey <em>Key</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Key</em>'.
-	 * @see com.bluexml.side.clazz.MetaInfo#getKey()
-	 * @see #getMetaInfo()
-	 * @generated
-	 */
-	EAttribute getMetaInfo_Key();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.MetaInfo#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see com.bluexml.side.clazz.MetaInfo#getValue()
-	 * @see #getMetaInfo()
-	 * @generated
-	 */
-	EAttribute getMetaInfo_Value();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.MetaInfo#getValueType <em>Value Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value Type</em>'.
-	 * @see com.bluexml.side.clazz.MetaInfo#getValueType()
-	 * @see #getMetaInfo()
-	 * @generated
-	 */
-	EAttribute getMetaInfo_ValueType();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.MetaInfo#getConstraintType <em>Constraint Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Constraint Type</em>'.
-	 * @see com.bluexml.side.clazz.MetaInfo#getConstraintType()
-	 * @see #getMetaInfo()
-	 * @generated
-	 */
-	EAttribute getMetaInfo_ConstraintType();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.MetaInfo#getValueSet <em>Value Set</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value Set</em>'.
-	 * @see com.bluexml.side.clazz.MetaInfo#getValueSet()
-	 * @see #getMetaInfo()
-	 * @generated
-	 */
-	EAttribute getMetaInfo_ValueSet();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.clazz.MetaInfoGroup <em>Meta Info Group</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Meta Info Group</em>'.
-	 * @see com.bluexml.side.clazz.MetaInfoGroup
-	 * @generated
-	 */
-	EClass getMetaInfoGroup();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.clazz.MetaInfoGroup#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see com.bluexml.side.clazz.MetaInfoGroup#getName()
-	 * @see #getMetaInfoGroup()
-	 * @generated
-	 */
-	EAttribute getMetaInfoGroup_Name();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.clazz.MetaInfoGroup#getContraints <em>Contraints</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Contraints</em>'.
-	 * @see com.bluexml.side.clazz.MetaInfoGroup#getContraints()
-	 * @see #getMetaInfoGroup()
-	 * @generated
-	 */
-	EReference getMetaInfoGroup_Contraints();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.clazz.TitledNamedClassModelElement <em>Titled Named Class Model Element</em>}'.
@@ -2801,26 +2160,6 @@ public interface ClazzPackage extends EPackage {
 	EEnum getAssociationType();
 
 	/**
-	 * Returns the meta object for enum '{@link com.bluexml.side.clazz.AttributeType <em>Attribute Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Attribute Type</em>'.
-	 * @see com.bluexml.side.clazz.AttributeType
-	 * @generated
-	 */
-	EEnum getAttributeType();
-
-	/**
-	 * Returns the meta object for enum '{@link com.bluexml.side.clazz.Visibility <em>Visibility</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Visibility</em>'.
-	 * @see com.bluexml.side.clazz.Visibility
-	 * @generated
-	 */
-	EEnum getVisibility();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2853,54 +2192,12 @@ public interface ClazzPackage extends EPackage {
 		EClass CLASS_MODEL_ELEMENT = eINSTANCE.getClassModelElement();
 
 		/**
-		 * The meta object literal for the '<em><b>Metainfo</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CLASS_MODEL_ELEMENT__METAINFO = eINSTANCE.getClassModelElement_Metainfo();
-
-		/**
-		 * The meta object literal for the '<em><b>Documentation</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CLASS_MODEL_ELEMENT__DOCUMENTATION = eINSTANCE.getClassModelElement_Documentation();
-
-		/**
 		 * The meta object literal for the '<em><b>Has Comments</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference CLASS_MODEL_ELEMENT__HAS_COMMENTS = eINSTANCE.getClassModelElement_HasComments();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.NamedClassModelElementImpl <em>Named Class Model Element</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.clazz.impl.NamedClassModelElementImpl
-		 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getNamedClassModelElement()
-		 * @generated
-		 */
-		EClass NAMED_CLASS_MODEL_ELEMENT = eINSTANCE.getNamedClassModelElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NAMED_CLASS_MODEL_ELEMENT__NAME = eINSTANCE.getNamedClassModelElement_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NAMED_CLASS_MODEL_ELEMENT__DESCRIPTION = eINSTANCE.getNamedClassModelElement_Description();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.ClassPackageImpl <em>Class Package</em>}' class.
@@ -3147,74 +2444,6 @@ public interface ClazzPackage extends EPackage {
 		EReference ENUMERATION_LITERAL__ENUM = eINSTANCE.getEnumerationLiteral_Enum();
 
 		/**
-		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.OperationImpl <em>Operation</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.clazz.impl.OperationImpl
-		 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getOperation()
-		 * @generated
-		 */
-		EClass OPERATION = eINSTANCE.getOperation();
-
-		/**
-		 * The meta object literal for the '<em><b>Return Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute OPERATION__RETURN_TYPE = eINSTANCE.getOperation_ReturnType();
-
-		/**
-		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference OPERATION__PARAMETERS = eINSTANCE.getOperation_Parameters();
-
-		/**
-		 * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute OPERATION__VISIBILITY = eINSTANCE.getOperation_Visibility();
-
-		/**
-		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute OPERATION__STATIC = eINSTANCE.getOperation_Static();
-
-		/**
-		 * The meta object literal for the '<em><b>Body</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute OPERATION__BODY = eINSTANCE.getOperation_Body();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.ParameterImpl <em>Parameter</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.clazz.impl.ParameterImpl
-		 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getParameter()
-		 * @generated
-		 */
-		EClass PARAMETER = eINSTANCE.getParameter();
-
-		/**
-		 * The meta object literal for the '<em><b>Value Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PARAMETER__VALUE_TYPE = eINSTANCE.getParameter_ValueType();
-
-		/**
 		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.AspectImpl <em>Aspect</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3241,82 +2470,6 @@ public interface ClazzPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ABSTRACT_CLASS__ATTRIBUTES = eINSTANCE.getAbstractClass_Attributes();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.MetaInfoImpl <em>Meta Info</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.clazz.impl.MetaInfoImpl
-		 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getMetaInfo()
-		 * @generated
-		 */
-		EClass META_INFO = eINSTANCE.getMetaInfo();
-
-		/**
-		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute META_INFO__KEY = eINSTANCE.getMetaInfo_Key();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute META_INFO__VALUE = eINSTANCE.getMetaInfo_Value();
-
-		/**
-		 * The meta object literal for the '<em><b>Value Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute META_INFO__VALUE_TYPE = eINSTANCE.getMetaInfo_ValueType();
-
-		/**
-		 * The meta object literal for the '<em><b>Constraint Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute META_INFO__CONSTRAINT_TYPE = eINSTANCE.getMetaInfo_ConstraintType();
-
-		/**
-		 * The meta object literal for the '<em><b>Value Set</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute META_INFO__VALUE_SET = eINSTANCE.getMetaInfo_ValueSet();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.MetaInfoGroupImpl <em>Meta Info Group</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.clazz.impl.MetaInfoGroupImpl
-		 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getMetaInfoGroup()
-		 * @generated
-		 */
-		EClass META_INFO_GROUP = eINSTANCE.getMetaInfoGroup();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute META_INFO_GROUP__NAME = eINSTANCE.getMetaInfoGroup_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Contraints</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference META_INFO_GROUP__CONTRAINTS = eINSTANCE.getMetaInfoGroup_Contraints();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.TitledNamedClassModelElementImpl <em>Titled Named Class Model Element</em>}' class.
@@ -3417,26 +2570,6 @@ public interface ClazzPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum ASSOCIATION_TYPE = eINSTANCE.getAssociationType();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.clazz.AttributeType <em>Attribute Type</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.clazz.AttributeType
-		 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getAttributeType()
-		 * @generated
-		 */
-		EEnum ATTRIBUTE_TYPE = eINSTANCE.getAttributeType();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.clazz.Visibility <em>Visibility</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.clazz.Visibility
-		 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getVisibility()
-		 * @generated
-		 */
-		EEnum VISIBILITY = eINSTANCE.getVisibility();
 
 	}
 

@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import com.bluexml.side.clazz.Operation;
-import com.bluexml.side.clazz.Parameter;
+import com.bluexml.side.common.Operation;
+import com.bluexml.side.common.Parameter;
 
 
 

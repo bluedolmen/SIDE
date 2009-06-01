@@ -6,34 +6,37 @@
  */
 package com.bluexml.side.common.util;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
-
-import com.bluexml.side.common.Comment;
-import com.bluexml.side.common.CommonPackage;
-import com.bluexml.side.common.ModelElement;
-import com.bluexml.side.common.NamedModelElement;
-import com.bluexml.side.common.Stereotype;
-import com.bluexml.side.common.Tag;
-
 import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
-
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
 import org.eclipse.emf.ecore.util.EObjectValidator;
-
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
-
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.OCL;
+
+import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
+import com.bluexml.side.common.Comment;
+import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.DataType;
+import com.bluexml.side.common.MetaData;
+import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.MetaInfoGroup;
+import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.NamedModelElement;
+import com.bluexml.side.common.Operation;
+import com.bluexml.side.common.OperationComponent;
+import com.bluexml.side.common.OperationGroup;
+import com.bluexml.side.common.Parameter;
+import com.bluexml.side.common.Stereotype;
+import com.bluexml.side.common.Tag;
+import com.bluexml.side.common.Visibility;
 
 /**
  * <!-- begin-user-doc -->
@@ -129,6 +132,24 @@ public class CommonValidator extends EObjectValidator {
 				return validateStereotype((Stereotype)value, diagnostics, context);
 			case CommonPackage.PACKAGE:
 				return validatePackage((com.bluexml.side.common.Package)value, diagnostics, context);
+			case CommonPackage.OPERATION:
+				return validateOperation((Operation)value, diagnostics, context);
+			case CommonPackage.PARAMETER:
+				return validateParameter((Parameter)value, diagnostics, context);
+			case CommonPackage.OPERATION_GROUP:
+				return validateOperationGroup((OperationGroup)value, diagnostics, context);
+			case CommonPackage.OPERATION_COMPONENT:
+				return validateOperationComponent((OperationComponent)value, diagnostics, context);
+			case CommonPackage.META_INFO:
+				return validateMetaInfo((MetaInfo)value, diagnostics, context);
+			case CommonPackage.META_INFO_GROUP:
+				return validateMetaInfoGroup((MetaInfoGroup)value, diagnostics, context);
+			case CommonPackage.META_DATA:
+				return validateMetaData((MetaData)value, diagnostics, context);
+			case CommonPackage.DATA_TYPE:
+				return validateDataType((DataType)value, diagnostics, context);
+			case CommonPackage.VISIBILITY:
+				return validateVisibility((Visibility)value, diagnostics, context);
 			default: 
 				return true;
 		}
@@ -232,6 +253,87 @@ public class CommonValidator extends EObjectValidator {
 			}
 			return false;
 		}
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOperation(Operation operation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(operation, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateParameter(Parameter parameter, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(parameter, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOperationGroup(OperationGroup operationGroup, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(operationGroup, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOperationComponent(OperationComponent operationComponent, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(operationComponent, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateMetaInfo(MetaInfo metaInfo, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(metaInfo, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateMetaInfoGroup(MetaInfoGroup metaInfoGroup, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(metaInfoGroup, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateMetaData(MetaData metaData, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(metaData, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateDataType(DataType dataType, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateVisibility(Visibility visibility, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

@@ -6,17 +6,24 @@
  */
 package com.bluexml.side.common.util;
 
-import com.bluexml.side.common.Comment;
-import com.bluexml.side.common.CommonPackage;
-import com.bluexml.side.common.ModelElement;
-import com.bluexml.side.common.NamedModelElement;
-import com.bluexml.side.common.Stereotype;
-import com.bluexml.side.common.Tag;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import com.bluexml.side.common.Comment;
+import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.MetaData;
+import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.MetaInfoGroup;
+import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.NamedModelElement;
+import com.bluexml.side.common.Operation;
+import com.bluexml.side.common.OperationComponent;
+import com.bluexml.side.common.OperationGroup;
+import com.bluexml.side.common.Parameter;
+import com.bluexml.side.common.Stereotype;
+import com.bluexml.side.common.Tag;
 
 /**
  * <!-- begin-user-doc -->
@@ -134,6 +141,62 @@ public class CommonSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CommonPackage.OPERATION: {
+				Operation operation = (Operation)theEObject;
+				T result = caseOperation(operation);
+				if (result == null) result = caseOperationComponent(operation);
+				if (result == null) result = caseNamedModelElement(operation);
+				if (result == null) result = caseModelElement(operation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonPackage.PARAMETER: {
+				Parameter parameter = (Parameter)theEObject;
+				T result = caseParameter(parameter);
+				if (result == null) result = caseNamedModelElement(parameter);
+				if (result == null) result = caseModelElement(parameter);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonPackage.OPERATION_GROUP: {
+				OperationGroup operationGroup = (OperationGroup)theEObject;
+				T result = caseOperationGroup(operationGroup);
+				if (result == null) result = caseOperationComponent(operationGroup);
+				if (result == null) result = caseNamedModelElement(operationGroup);
+				if (result == null) result = caseModelElement(operationGroup);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonPackage.OPERATION_COMPONENT: {
+				OperationComponent operationComponent = (OperationComponent)theEObject;
+				T result = caseOperationComponent(operationComponent);
+				if (result == null) result = caseNamedModelElement(operationComponent);
+				if (result == null) result = caseModelElement(operationComponent);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonPackage.META_INFO: {
+				MetaInfo metaInfo = (MetaInfo)theEObject;
+				T result = caseMetaInfo(metaInfo);
+				if (result == null) result = caseMetaData(metaInfo);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonPackage.META_INFO_GROUP: {
+				MetaInfoGroup metaInfoGroup = (MetaInfoGroup)theEObject;
+				T result = caseMetaInfoGroup(metaInfoGroup);
+				if (result == null) result = caseMetaData(metaInfoGroup);
+				if (result == null) result = caseNamedModelElement(metaInfoGroup);
+				if (result == null) result = caseModelElement(metaInfoGroup);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonPackage.META_DATA: {
+				MetaData metaData = (MetaData)theEObject;
+				T result = caseMetaData(metaData);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -225,6 +288,111 @@ public class CommonSwitch<T> {
 	 * @generated
 	 */
 	public T casePackage(com.bluexml.side.common.Package object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Operation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOperation(Operation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameter(Parameter object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Operation Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Operation Group</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOperationGroup(OperationGroup object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Operation Component</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Operation Component</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOperationComponent(OperationComponent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Meta Info</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Meta Info</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMetaInfo(MetaInfo object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Meta Info Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Meta Info Group</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMetaInfoGroup(MetaInfoGroup object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Meta Data</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Meta Data</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMetaData(MetaData object) {
 		return null;
 	}
 

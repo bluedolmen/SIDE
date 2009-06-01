@@ -6,7 +6,9 @@
  */
 package com.bluexml.side.clazz;
 
+import com.bluexml.side.common.NamedModelElement;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Enumeration extends NamedClassModelElement {
+public interface Enumeration extends NamedModelElement {
 	/**
 	 * Returns the value of the '<em><b>Literals</b></em>' containment reference list.
 	 * The list contents are of type {@link com.bluexml.side.clazz.EnumerationLiteral}.

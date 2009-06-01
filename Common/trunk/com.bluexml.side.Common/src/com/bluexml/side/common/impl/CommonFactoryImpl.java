@@ -6,21 +6,27 @@
  */
 package com.bluexml.side.common.impl;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.impl.EFactoryImpl;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonFactory;
 import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.DataType;
+import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.MetaInfoGroup;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
+import com.bluexml.side.common.Operation;
+import com.bluexml.side.common.OperationGroup;
+import com.bluexml.side.common.Parameter;
 import com.bluexml.side.common.Stereotype;
 import com.bluexml.side.common.Tag;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-
-import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import com.bluexml.side.common.Visibility;
 
 /**
  * <!-- begin-user-doc -->
@@ -72,8 +78,47 @@ public class CommonFactoryImpl extends EFactoryImpl implements CommonFactory {
 			case CommonPackage.TAG: return createTag();
 			case CommonPackage.STEREOTYPE: return createStereotype();
 			case CommonPackage.PACKAGE: return createPackage();
+			case CommonPackage.OPERATION: return createOperation();
+			case CommonPackage.PARAMETER: return createParameter();
+			case CommonPackage.OPERATION_GROUP: return createOperationGroup();
+			case CommonPackage.META_INFO: return createMetaInfo();
+			case CommonPackage.META_INFO_GROUP: return createMetaInfoGroup();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+			case CommonPackage.DATA_TYPE:
+				return createDataTypeFromString(eDataType, initialValue);
+			case CommonPackage.VISIBILITY:
+				return createVisibilityFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+			case CommonPackage.DATA_TYPE:
+				return convertDataTypeToString(eDataType, instanceValue);
+			case CommonPackage.VISIBILITY:
+				return convertVisibilityToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -135,6 +180,96 @@ public class CommonFactoryImpl extends EFactoryImpl implements CommonFactory {
 	public com.bluexml.side.common.Package createPackage() {
 		PackageImpl package_ = new PackageImpl();
 		return package_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Operation createOperation() {
+		OperationImpl operation = new OperationImpl();
+		return operation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Parameter createParameter() {
+		ParameterImpl parameter = new ParameterImpl();
+		return parameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OperationGroup createOperationGroup() {
+		OperationGroupImpl operationGroup = new OperationGroupImpl();
+		return operationGroup;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MetaInfo createMetaInfo() {
+		MetaInfoImpl metaInfo = new MetaInfoImpl();
+		return metaInfo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MetaInfoGroup createMetaInfoGroup() {
+		MetaInfoGroupImpl metaInfoGroup = new MetaInfoGroupImpl();
+		return metaInfoGroup;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DataType createDataTypeFromString(EDataType eDataType, String initialValue) {
+		DataType result = DataType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertDataTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Visibility createVisibilityFromString(EDataType eDataType, String initialValue) {
+		Visibility result = Visibility.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertVisibilityToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

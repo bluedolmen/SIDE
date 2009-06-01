@@ -52,7 +52,6 @@ import com.bluexml.side.Class.modeler.diagram.policies.AssociationEdgeCreationEd
 import com.bluexml.side.Class.modeler.diagram.policies.ClazzLayoutEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.GeneralizationEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.hasAspectEdgeCreationEditPolicy;
-import com.bluexml.side.Class.modeler.diagram.policies.hasViewEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.includeEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.isAssociationClassEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.isCommentedEdgeCreationEditPolicy;
@@ -111,8 +110,6 @@ public class ClazzEditPart extends EMFGraphNodeEditPart {
 		installEditPolicy(CdEditPolicyConstants.ISASSOCIATIONCLASS_EDITPOLICY, new isAssociationClassEdgeCreationEditPolicy());
 
 		installEditPolicy(CdEditPolicyConstants.INCLUDE_EDITPOLICY, new includeEdgeCreationEditPolicy());
-
-		installEditPolicy(CdEditPolicyConstants.HASVIEW_EDITPOLICY, new hasViewEdgeCreationEditPolicy());
 
 		installEditPolicy(CdEditPolicyConstants.GENERALIZATION_EDITPOLICY, new GeneralizationEdgeCreationEditPolicy());
 

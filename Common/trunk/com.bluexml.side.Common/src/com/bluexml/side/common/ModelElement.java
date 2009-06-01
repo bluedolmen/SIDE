@@ -21,6 +21,9 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.bluexml.side.common.ModelElement#getStereotypes <em>Stereotypes</em>}</li>
  *   <li>{@link com.bluexml.side.common.ModelElement#getTags <em>Tags</em>}</li>
  *   <li>{@link com.bluexml.side.common.ModelElement#getComments <em>Comments</em>}</li>
+ *   <li>{@link com.bluexml.side.common.ModelElement#getDocumentation <em>Documentation</em>}</li>
+ *   <li>{@link com.bluexml.side.common.ModelElement#getDescription <em>Description</em>}</li>
+ *   <li>{@link com.bluexml.side.common.ModelElement#getMetainfo <em>Metainfo</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,5 +79,91 @@ public interface ModelElement extends EObject {
 	 * @generated
 	 */
 	EList<Comment> getComments();
+
+	/**
+	 * Returns the value of the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Documentation</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Documentation</em>' attribute.
+	 * @see #setDocumentation(String)
+	 * @see com.bluexml.side.common.CommonPackage#getModelElement_Documentation()
+	 * @model
+	 * @generated
+	 */
+	String getDocumentation();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.common.ModelElement#getDocumentation <em>Documentation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Documentation</em>' attribute.
+	 * @see #getDocumentation()
+	 * @generated
+	 */
+	void setDocumentation(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Description</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Description</em>' attribute.
+	 * @see #setDescription(String)
+	 * @see com.bluexml.side.common.CommonPackage#getModelElement_Description()
+	 * @model
+	 * @generated
+	 */
+	String getDescription();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.common.ModelElement#getDescription <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Description</em>' attribute.
+	 * @see #getDescription()
+	 * @generated
+	 */
+	void setDescription(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Metainfo</b></em>' containment reference list.
+	 * The list contents are of type {@link com.bluexml.side.common.MetaInfo}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Metainfo</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Metainfo</em>' containment reference list.
+	 * @see com.bluexml.side.common.CommonPackage#getModelElement_Metainfo()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<MetaInfo> getMetainfo();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 *        annotation="http://www.bluexml.com/OCL body='if self.documentation.oclIsUndefined() or self.documentation.size() <0 then\r\tself.name\relse\r\tself.documentation\rendif'"
+	 * @generated
+	 */
+	String getDocumentationOrName();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 *        annotation="http://www.bluexml.com/OCL body='if self.description.oclIsUndefined() or self.description.size() <0 then\r\tself.name\relse\r\tself.description\rendif'"
+	 * @generated
+	 */
+	String getDescriptionOrName();
 
 } // ModelElement

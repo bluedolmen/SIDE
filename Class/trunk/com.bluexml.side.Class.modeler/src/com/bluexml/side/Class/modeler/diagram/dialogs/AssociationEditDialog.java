@@ -46,8 +46,8 @@ import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.AssociationType;
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.clazz.MetaInfo;
-import com.bluexml.side.clazz.MetaInfoGroup;
+import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.MetaInfoGroup;
 
 /**
  * Updating association parameters

@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.ocl.ecore.OCL;
 
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
-import com.bluexml.side.clazz.AttributeType;
+import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.impl.ModelElementImpl;
 import com.bluexml.side.workflow.Attribute;
 import com.bluexml.side.workflow.WorkflowPackage;
@@ -42,7 +42,7 @@ public class AttributeImpl extends ModelElementImpl implements Attribute {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final AttributeType TYP_EDEFAULT = AttributeType.VOID;
+	protected static final DataType TYP_EDEFAULT = DataType.VOID;
 
 	/**
 	 * The cached value of the '{@link #getTyp() <em>Typ</em>}' attribute.
@@ -52,7 +52,7 @@ public class AttributeImpl extends ModelElementImpl implements Attribute {
 	 * @generated
 	 * @ordered
 	 */
-	protected AttributeType typ = TYP_EDEFAULT;
+	protected DataType typ = TYP_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
@@ -118,7 +118,7 @@ public class AttributeImpl extends ModelElementImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AttributeType getTyp() {
+	public DataType getTyp() {
 		return typ;
 	}
 
@@ -127,8 +127,8 @@ public class AttributeImpl extends ModelElementImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTyp(AttributeType newTyp) {
-		AttributeType oldTyp = typ;
+	public void setTyp(DataType newTyp) {
+		DataType oldTyp = typ;
 		typ = newTyp == null ? TYP_EDEFAULT : newTyp;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.ATTRIBUTE__TYP, oldTyp, typ));
@@ -203,7 +203,7 @@ public class AttributeImpl extends ModelElementImpl implements Attribute {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case WorkflowPackage.ATTRIBUTE__TYP:
-				setTyp((AttributeType)newValue);
+				setTyp((DataType)newValue);
 				return;
 			case WorkflowPackage.ATTRIBUTE__TITLE:
 				setTitle((String)newValue);

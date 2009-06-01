@@ -80,6 +80,51 @@ public interface CommonFactory extends EFactory {
 	com.bluexml.side.common.Package createPackage();
 
 	/**
+	 * Returns a new object of class '<em>Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Operation</em>'.
+	 * @generated
+	 */
+	Operation createOperation();
+
+	/**
+	 * Returns a new object of class '<em>Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Parameter</em>'.
+	 * @generated
+	 */
+	Parameter createParameter();
+
+	/**
+	 * Returns a new object of class '<em>Operation Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Operation Group</em>'.
+	 * @generated
+	 */
+	OperationGroup createOperationGroup();
+
+	/**
+	 * Returns a new object of class '<em>Meta Info</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Meta Info</em>'.
+	 * @generated
+	 */
+	MetaInfo createMetaInfo();
+
+	/**
+	 * Returns a new object of class '<em>Meta Info Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Meta Info Group</em>'.
+	 * @generated
+	 */
+	MetaInfoGroup createMetaInfoGroup();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

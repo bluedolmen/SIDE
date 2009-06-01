@@ -17,8 +17,9 @@ package com.bluexml.side.Class.modeler.diagram.utils.metainfo;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.bluexml.side.clazz.MetaInfo;
-import com.bluexml.side.clazz.MetaInfoGroup;
+import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.MetaInfoGroup;
+import com.bluexml.side.common.impl.CommonFactoryImpl;
 import com.bluexml.side.clazz.impl.ClazzFactoryImpl;
 
 
@@ -46,7 +47,7 @@ public abstract class OblTypeMetaInfo {
 				}
 			} else if (o instanceof MetaInfoGroup) {
 				MetaInfoGroup cg = (MetaInfoGroup) o;
-				for (Object obj : cg.getContraints()) {
+				for (Object obj : cg.getChildren()) {
 					if (obj instanceof MetaInfo) {
 						MetaInfo c = (MetaInfo) obj;
 						if (c.getKey().equals(key)) {
@@ -58,7 +59,7 @@ public abstract class OblTypeMetaInfo {
 		}
 
 		if (result.size() > 0) {
-			MetaInfo mi = ClazzFactoryImpl.init().createMetaInfo();
+			MetaInfo mi = CommonFactoryImpl.init().createMetaInfo();
 			mi.clone((MetaInfo) result.toArray()[0]);
 			return mi;
 		} else

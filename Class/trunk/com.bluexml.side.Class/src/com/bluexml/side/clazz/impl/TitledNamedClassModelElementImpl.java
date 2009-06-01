@@ -8,18 +8,28 @@ package com.bluexml.side.clazz.impl;
 
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 
+import com.bluexml.side.clazz.ClassComment;
+import com.bluexml.side.clazz.ClassModelElement;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.TitledNamedClassModelElement;
 
+import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.impl.NamedModelElementImpl;
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
 
@@ -34,13 +44,24 @@ import org.eclipse.ocl.expressions.OCLExpression;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link com.bluexml.side.clazz.impl.TitledNamedClassModelElementImpl#getHasComments <em>Has Comments</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.TitledNamedClassModelElementImpl#getTitle <em>Title</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class TitledNamedClassModelElementImpl extends NamedClassModelElementImpl implements TitledNamedClassModelElement {
+public abstract class TitledNamedClassModelElementImpl extends NamedModelElementImpl implements TitledNamedClassModelElement {
+	/**
+	 * The cached value of the '{@link #getHasComments() <em>Has Comments</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHasComments()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ClassComment> hasComments;
+
 	/**
 	 * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -78,6 +99,18 @@ public abstract class TitledNamedClassModelElementImpl extends NamedClassModelEl
 	@Override
 	protected EClass eStaticClass() {
 		return ClazzPackage.Literals.TITLED_NAMED_CLASS_MODEL_ELEMENT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ClassComment> getHasComments() {
+		if (hasComments == null) {
+			hasComments = new EObjectContainmentEList<ClassComment>(ClassComment.class, this, ClazzPackage.TITLED_NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS);
+		}
+		return hasComments;
 	}
 
 	/**
@@ -141,8 +174,24 @@ public abstract class TitledNamedClassModelElementImpl extends NamedClassModelEl
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ClazzPackage.TITLED_NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS:
+				return ((InternalEList<?>)getHasComments()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case ClazzPackage.TITLED_NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS:
+				return getHasComments();
 			case ClazzPackage.TITLED_NAMED_CLASS_MODEL_ELEMENT__TITLE:
 				return getTitle();
 		}
@@ -154,9 +203,14 @@ public abstract class TitledNamedClassModelElementImpl extends NamedClassModelEl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case ClazzPackage.TITLED_NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS:
+				getHasComments().clear();
+				getHasComments().addAll((Collection<? extends ClassComment>)newValue);
+				return;
 			case ClazzPackage.TITLED_NAMED_CLASS_MODEL_ELEMENT__TITLE:
 				setTitle((String)newValue);
 				return;
@@ -172,6 +226,9 @@ public abstract class TitledNamedClassModelElementImpl extends NamedClassModelEl
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case ClazzPackage.TITLED_NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS:
+				getHasComments().clear();
+				return;
 			case ClazzPackage.TITLED_NAMED_CLASS_MODEL_ELEMENT__TITLE:
 				setTitle(TITLE_EDEFAULT);
 				return;
@@ -187,10 +244,44 @@ public abstract class TitledNamedClassModelElementImpl extends NamedClassModelEl
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case ClazzPackage.TITLED_NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS:
+				return hasComments != null && !hasComments.isEmpty();
 			case ClazzPackage.TITLED_NAMED_CLASS_MODEL_ELEMENT__TITLE:
 				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == ClassModelElement.class) {
+			switch (derivedFeatureID) {
+				case ClazzPackage.TITLED_NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS: return ClazzPackage.CLASS_MODEL_ELEMENT__HAS_COMMENTS;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == ClassModelElement.class) {
+			switch (baseFeatureID) {
+				case ClazzPackage.CLASS_MODEL_ELEMENT__HAS_COMMENTS: return ClazzPackage.TITLED_NAMED_CLASS_MODEL_ELEMENT__HAS_COMMENTS;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

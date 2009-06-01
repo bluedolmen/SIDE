@@ -98,14 +98,6 @@ public class ClazzSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT: {
-				NamedClassModelElement namedClassModelElement = (NamedClassModelElement)theEObject;
-				T result = caseNamedClassModelElement(namedClassModelElement);
-				if (result == null) result = caseClassModelElement(namedClassModelElement);
-				if (result == null) result = caseModelElement(namedClassModelElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ClazzPackage.CLASS_PACKAGE: {
 				ClassPackage classPackage = (ClassPackage)theEObject;
 				T result = caseClassPackage(classPackage);
@@ -120,7 +112,7 @@ public class ClazzSwitch<T> {
 				T result = caseClazz(clazz);
 				if (result == null) result = caseAbstractClass(clazz);
 				if (result == null) result = caseTitledNamedClassModelElement(clazz);
-				if (result == null) result = caseNamedClassModelElement(clazz);
+				if (result == null) result = caseNamedModelElement(clazz);
 				if (result == null) result = caseClassModelElement(clazz);
 				if (result == null) result = caseModelElement(clazz);
 				if (result == null) result = defaultCase(theEObject);
@@ -130,7 +122,7 @@ public class ClazzSwitch<T> {
 				Association association = (Association)theEObject;
 				T result = caseAssociation(association);
 				if (result == null) result = caseTitledNamedClassModelElement(association);
-				if (result == null) result = caseNamedClassModelElement(association);
+				if (result == null) result = caseNamedModelElement(association);
 				if (result == null) result = caseClassModelElement(association);
 				if (result == null) result = caseModelElement(association);
 				if (result == null) result = defaultCase(theEObject);
@@ -140,7 +132,7 @@ public class ClazzSwitch<T> {
 				Attribute attribute = (Attribute)theEObject;
 				T result = caseAttribute(attribute);
 				if (result == null) result = caseTitledNamedClassModelElement(attribute);
-				if (result == null) result = caseNamedClassModelElement(attribute);
+				if (result == null) result = caseNamedModelElement(attribute);
 				if (result == null) result = caseClassModelElement(attribute);
 				if (result == null) result = caseModelElement(attribute);
 				if (result == null) result = defaultCase(theEObject);
@@ -149,8 +141,7 @@ public class ClazzSwitch<T> {
 			case ClazzPackage.ENUMERATION: {
 				Enumeration enumeration = (Enumeration)theEObject;
 				T result = caseEnumeration(enumeration);
-				if (result == null) result = caseNamedClassModelElement(enumeration);
-				if (result == null) result = caseClassModelElement(enumeration);
+				if (result == null) result = caseNamedModelElement(enumeration);
 				if (result == null) result = caseModelElement(enumeration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -161,30 +152,12 @@ public class ClazzSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClazzPackage.OPERATION: {
-				Operation operation = (Operation)theEObject;
-				T result = caseOperation(operation);
-				if (result == null) result = caseNamedClassModelElement(operation);
-				if (result == null) result = caseClassModelElement(operation);
-				if (result == null) result = caseModelElement(operation);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ClazzPackage.PARAMETER: {
-				Parameter parameter = (Parameter)theEObject;
-				T result = caseParameter(parameter);
-				if (result == null) result = caseNamedClassModelElement(parameter);
-				if (result == null) result = caseClassModelElement(parameter);
-				if (result == null) result = caseModelElement(parameter);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ClazzPackage.ASPECT: {
 				Aspect aspect = (Aspect)theEObject;
 				T result = caseAspect(aspect);
 				if (result == null) result = caseAbstractClass(aspect);
 				if (result == null) result = caseTitledNamedClassModelElement(aspect);
-				if (result == null) result = caseNamedClassModelElement(aspect);
+				if (result == null) result = caseNamedModelElement(aspect);
 				if (result == null) result = caseClassModelElement(aspect);
 				if (result == null) result = caseModelElement(aspect);
 				if (result == null) result = defaultCase(theEObject);
@@ -194,28 +167,16 @@ public class ClazzSwitch<T> {
 				AbstractClass abstractClass = (AbstractClass)theEObject;
 				T result = caseAbstractClass(abstractClass);
 				if (result == null) result = caseTitledNamedClassModelElement(abstractClass);
-				if (result == null) result = caseNamedClassModelElement(abstractClass);
+				if (result == null) result = caseNamedModelElement(abstractClass);
 				if (result == null) result = caseClassModelElement(abstractClass);
 				if (result == null) result = caseModelElement(abstractClass);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ClazzPackage.META_INFO: {
-				MetaInfo metaInfo = (MetaInfo)theEObject;
-				T result = caseMetaInfo(metaInfo);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ClazzPackage.META_INFO_GROUP: {
-				MetaInfoGroup metaInfoGroup = (MetaInfoGroup)theEObject;
-				T result = caseMetaInfoGroup(metaInfoGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ClazzPackage.TITLED_NAMED_CLASS_MODEL_ELEMENT: {
 				TitledNamedClassModelElement titledNamedClassModelElement = (TitledNamedClassModelElement)theEObject;
 				T result = caseTitledNamedClassModelElement(titledNamedClassModelElement);
-				if (result == null) result = caseNamedClassModelElement(titledNamedClassModelElement);
+				if (result == null) result = caseNamedModelElement(titledNamedClassModelElement);
 				if (result == null) result = caseClassModelElement(titledNamedClassModelElement);
 				if (result == null) result = caseModelElement(titledNamedClassModelElement);
 				if (result == null) result = defaultCase(theEObject);
@@ -233,7 +194,7 @@ public class ClazzSwitch<T> {
 				AssociationEnd associationEnd = (AssociationEnd)theEObject;
 				T result = caseAssociationEnd(associationEnd);
 				if (result == null) result = caseTitledNamedClassModelElement(associationEnd);
-				if (result == null) result = caseNamedClassModelElement(associationEnd);
+				if (result == null) result = caseNamedModelElement(associationEnd);
 				if (result == null) result = caseClassModelElement(associationEnd);
 				if (result == null) result = caseModelElement(associationEnd);
 				if (result == null) result = defaultCase(theEObject);
@@ -244,7 +205,7 @@ public class ClazzSwitch<T> {
 				T result = caseFirstEnd(firstEnd);
 				if (result == null) result = caseAssociationEnd(firstEnd);
 				if (result == null) result = caseTitledNamedClassModelElement(firstEnd);
-				if (result == null) result = caseNamedClassModelElement(firstEnd);
+				if (result == null) result = caseNamedModelElement(firstEnd);
 				if (result == null) result = caseClassModelElement(firstEnd);
 				if (result == null) result = caseModelElement(firstEnd);
 				if (result == null) result = defaultCase(theEObject);
@@ -255,7 +216,7 @@ public class ClazzSwitch<T> {
 				T result = caseSecondEnd(secondEnd);
 				if (result == null) result = caseAssociationEnd(secondEnd);
 				if (result == null) result = caseTitledNamedClassModelElement(secondEnd);
-				if (result == null) result = caseNamedClassModelElement(secondEnd);
+				if (result == null) result = caseNamedModelElement(secondEnd);
 				if (result == null) result = caseClassModelElement(secondEnd);
 				if (result == null) result = caseModelElement(secondEnd);
 				if (result == null) result = defaultCase(theEObject);
@@ -277,21 +238,6 @@ public class ClazzSwitch<T> {
 	 * @generated
 	 */
 	public T caseClassModelElement(ClassModelElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Named Class Model Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Named Class Model Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNamedClassModelElement(NamedClassModelElement object) {
 		return null;
 	}
 
@@ -386,36 +332,6 @@ public class ClazzSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Operation</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Operation</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseOperation(Operation object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Parameter</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Parameter</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseParameter(Parameter object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Aspect</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -442,36 +358,6 @@ public class ClazzSwitch<T> {
 	 * @generated
 	 */
 	public T caseAbstractClass(AbstractClass object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Meta Info</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Meta Info</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMetaInfo(MetaInfo object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Meta Info Group</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Meta Info Group</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMetaInfoGroup(MetaInfoGroup object) {
 		return null;
 	}
 

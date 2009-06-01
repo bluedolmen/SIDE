@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import com.bluexml.side.clazz.Attribute;
-import com.bluexml.side.clazz.MetaInfo;
+import com.bluexml.side.common.MetaInfo;
 
 
 

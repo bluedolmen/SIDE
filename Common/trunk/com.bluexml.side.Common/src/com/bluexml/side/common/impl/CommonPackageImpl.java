@@ -6,23 +6,33 @@
  */
 package com.bluexml.side.common.impl;
 
-import com.bluexml.side.common.Comment;
-import com.bluexml.side.common.CommonFactory;
-import com.bluexml.side.common.CommonPackage;
-import com.bluexml.side.common.ModelElement;
-import com.bluexml.side.common.NamedModelElement;
-import com.bluexml.side.common.Stereotype;
-import com.bluexml.side.common.Tag;
-
-import com.bluexml.side.common.util.CommonValidator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
+import com.bluexml.side.common.Comment;
+import com.bluexml.side.common.CommonFactory;
+import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.DataType;
+import com.bluexml.side.common.MetaData;
+import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.MetaInfoGroup;
+import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.NamedModelElement;
+import com.bluexml.side.common.Operation;
+import com.bluexml.side.common.OperationComponent;
+import com.bluexml.side.common.OperationGroup;
+import com.bluexml.side.common.Parameter;
+import com.bluexml.side.common.Stereotype;
+import com.bluexml.side.common.Tag;
+import com.bluexml.side.common.Visibility;
+import com.bluexml.side.common.util.CommonValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -72,6 +82,69 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * @generated
 	 */
 	private EClass packageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass operationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass parameterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass operationGroupEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass operationComponentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass metaInfoEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass metaInfoGroupEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass metaDataEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum dataTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum visibilityEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -191,6 +264,33 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getModelElement_Documentation() {
+		return (EAttribute)modelElementEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getModelElement_Description() {
+		return (EAttribute)modelElementEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelElement_Metainfo() {
+		return (EReference)modelElementEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getNamedModelElement() {
 		return namedModelElementEClass;
 	}
@@ -202,15 +302,6 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 */
 	public EAttribute getNamedModelElement_Name() {
 		return (EAttribute)namedModelElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getNamedModelElement_Documentation() {
-		return (EAttribute)namedModelElementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -299,6 +390,204 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getOperation() {
+		return operationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOperation_ReturnType() {
+		return (EAttribute)operationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOperation_Parameters() {
+		return (EReference)operationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOperation_Visibility() {
+		return (EAttribute)operationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOperation_Static() {
+		return (EAttribute)operationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOperation_Body() {
+		return (EAttribute)operationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getParameter() {
+		return parameterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getParameter_ValueType() {
+		return (EAttribute)parameterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOperationGroup() {
+		return operationGroupEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOperationGroup_Children() {
+		return (EReference)operationGroupEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOperationComponent() {
+		return operationComponentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMetaInfo() {
+		return metaInfoEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMetaInfo_Key() {
+		return (EAttribute)metaInfoEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMetaInfo_Value() {
+		return (EAttribute)metaInfoEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMetaInfo_ValueType() {
+		return (EAttribute)metaInfoEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMetaInfo_ConstraintType() {
+		return (EAttribute)metaInfoEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMetaInfo_ValueSet() {
+		return (EAttribute)metaInfoEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMetaInfoGroup() {
+		return metaInfoGroupEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMetaInfoGroup_Children() {
+		return (EReference)metaInfoGroupEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMetaData() {
+		return metaDataEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getDataType() {
+		return dataTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getVisibility() {
+		return visibilityEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public CommonFactory getCommonFactory() {
 		return (CommonFactory)getEFactoryInstance();
 	}
@@ -326,10 +615,12 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		createEReference(modelElementEClass, MODEL_ELEMENT__STEREOTYPES);
 		createEReference(modelElementEClass, MODEL_ELEMENT__TAGS);
 		createEReference(modelElementEClass, MODEL_ELEMENT__COMMENTS);
+		createEAttribute(modelElementEClass, MODEL_ELEMENT__DOCUMENTATION);
+		createEAttribute(modelElementEClass, MODEL_ELEMENT__DESCRIPTION);
+		createEReference(modelElementEClass, MODEL_ELEMENT__METAINFO);
 
 		namedModelElementEClass = createEClass(NAMED_MODEL_ELEMENT);
 		createEAttribute(namedModelElementEClass, NAMED_MODEL_ELEMENT__NAME);
-		createEAttribute(namedModelElementEClass, NAMED_MODEL_ELEMENT__DOCUMENTATION);
 
 		commentEClass = createEClass(COMMENT);
 		createEAttribute(commentEClass, COMMENT__VALUE);
@@ -343,6 +634,37 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		packageEClass = createEClass(PACKAGE);
 		createEReference(packageEClass, PACKAGE__STEREOTYPE_SET);
 		createEReference(packageEClass, PACKAGE__PACKAGE_SET);
+
+		operationEClass = createEClass(OPERATION);
+		createEAttribute(operationEClass, OPERATION__RETURN_TYPE);
+		createEReference(operationEClass, OPERATION__PARAMETERS);
+		createEAttribute(operationEClass, OPERATION__VISIBILITY);
+		createEAttribute(operationEClass, OPERATION__STATIC);
+		createEAttribute(operationEClass, OPERATION__BODY);
+
+		parameterEClass = createEClass(PARAMETER);
+		createEAttribute(parameterEClass, PARAMETER__VALUE_TYPE);
+
+		operationGroupEClass = createEClass(OPERATION_GROUP);
+		createEReference(operationGroupEClass, OPERATION_GROUP__CHILDREN);
+
+		operationComponentEClass = createEClass(OPERATION_COMPONENT);
+
+		metaInfoEClass = createEClass(META_INFO);
+		createEAttribute(metaInfoEClass, META_INFO__KEY);
+		createEAttribute(metaInfoEClass, META_INFO__VALUE);
+		createEAttribute(metaInfoEClass, META_INFO__VALUE_TYPE);
+		createEAttribute(metaInfoEClass, META_INFO__CONSTRAINT_TYPE);
+		createEAttribute(metaInfoEClass, META_INFO__VALUE_SET);
+
+		metaInfoGroupEClass = createEClass(META_INFO_GROUP);
+		createEReference(metaInfoGroupEClass, META_INFO_GROUP__CHILDREN);
+
+		metaDataEClass = createEClass(META_DATA);
+
+		// Create enums
+		dataTypeEEnum = createEEnum(DATA_TYPE);
+		visibilityEEnum = createEEnum(VISIBILITY);
 	}
 
 	/**
@@ -377,16 +699,31 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		commentEClass.getESuperTypes().add(this.getModelElement());
 		stereotypeEClass.getESuperTypes().add(this.getNamedModelElement());
 		packageEClass.getESuperTypes().add(this.getNamedModelElement());
+		operationEClass.getESuperTypes().add(this.getOperationComponent());
+		parameterEClass.getESuperTypes().add(this.getNamedModelElement());
+		operationGroupEClass.getESuperTypes().add(this.getOperationComponent());
+		operationComponentEClass.getESuperTypes().add(this.getNamedModelElement());
+		metaInfoEClass.getESuperTypes().add(this.getMetaData());
+		metaInfoGroupEClass.getESuperTypes().add(this.getMetaData());
+		metaInfoGroupEClass.getESuperTypes().add(this.getNamedModelElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(modelElementEClass, ModelElement.class, "ModelElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getModelElement_Stereotypes(), this.getStereotype(), null, "stereotypes", null, 0, -1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelElement_Tags(), this.getTag(), null, "tags", null, 0, -1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelElement_Comments(), this.getComment(), null, "comments", null, 0, -1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModelElement_Documentation(), ecorePackage.getEString(), "documentation", null, 0, 1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModelElement_Description(), ecorePackage.getEString(), "description", null, 0, 1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelElement_Metainfo(), this.getMetaInfo(), null, "metainfo", null, 0, -1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(modelElementEClass, ecorePackage.getEString(), "getDocumentationOrName", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(modelElementEClass, ecorePackage.getEString(), "getDescriptionOrName", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(namedModelElementEClass, NamedModelElement.class, "NamedModelElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNamedModelElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getNamedModelElement_Documentation(), ecorePackage.getEString(), "documentation", null, 0, 1, NamedModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(namedModelElementEClass, ecorePackage.getEString(), "getFullName", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(commentEClass, Comment.class, "Comment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getComment_Value(), ecorePackage.getEString(), "value", null, 0, 1, Comment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -410,9 +747,68 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		op = addEOperation(packageEClass, ecorePackage.getEBoolean(), "equalsForMerge", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getPackage(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(packageEClass, ecorePackage.getEString(), "getFullName", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		addEOperation(packageEClass, this.getPackage(), "getRootPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOperation_ReturnType(), this.getDataType(), "returnType", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOperation_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOperation_Visibility(), this.getVisibility(), "visibility", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOperation_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOperation_Body(), ecorePackage.getEString(), "body", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(operationEClass, ecorePackage.getEBoolean(), "equalsForMerge", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getOperation(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(operationEClass, this.getParameter(), "getParameter", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "pname", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getParameter_ValueType(), this.getDataType(), "valueType", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(operationGroupEClass, OperationGroup.class, "OperationGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getOperationGroup_Children(), this.getOperationComponent(), null, "children", null, 0, -1, OperationGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(operationComponentEClass, OperationComponent.class, "OperationComponent", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(metaInfoEClass, MetaInfo.class, "MetaInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMetaInfo_Key(), ecorePackage.getEString(), "key", null, 0, 1, MetaInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetaInfo_Value(), ecorePackage.getEString(), "value", null, 0, 1, MetaInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		EGenericType g1 = createEGenericType(ecorePackage.getEJavaClass());
+		EGenericType g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		initEAttribute(getMetaInfo_ValueType(), g1, "valueType", null, 0, 1, MetaInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetaInfo_ConstraintType(), this.getDataType(), "constraintType", null, 0, 1, MetaInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetaInfo_ValueSet(), ecorePackage.getEJavaObject(), "valueSet", null, 0, 1, MetaInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(metaInfoEClass, ecorePackage.getEBoolean(), "equalsForMerge", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getMetaInfo(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(metaInfoGroupEClass, MetaInfoGroup.class, "MetaInfoGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMetaInfoGroup_Children(), this.getMetaData(), null, "children", null, 0, -1, MetaInfoGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(metaDataEClass, MetaData.class, "MetaData", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		// Initialize enums and add enum literals
+		initEEnum(dataTypeEEnum, DataType.class, "DataType");
+		addEEnumLiteral(dataTypeEEnum, DataType.BOOLEAN);
+		addEEnumLiteral(dataTypeEEnum, DataType.BYTE);
+		addEEnumLiteral(dataTypeEEnum, DataType.CHAR);
+		addEEnumLiteral(dataTypeEEnum, DataType.DOUBLE);
+		addEEnumLiteral(dataTypeEEnum, DataType.FLOAT);
+		addEEnumLiteral(dataTypeEEnum, DataType.INT);
+		addEEnumLiteral(dataTypeEEnum, DataType.LONG);
+		addEEnumLiteral(dataTypeEEnum, DataType.SHORT);
+		addEEnumLiteral(dataTypeEEnum, DataType.STRING);
+		addEEnumLiteral(dataTypeEEnum, DataType.VOID);
+		addEEnumLiteral(dataTypeEEnum, DataType.DATE);
+		addEEnumLiteral(dataTypeEEnum, DataType.OBJECT);
+		addEEnumLiteral(dataTypeEEnum, DataType.DATE_TIME);
+		addEEnumLiteral(dataTypeEEnum, DataType.TIME);
+
+		initEEnum(visibilityEEnum, Visibility.class, "Visibility");
+		addEEnumLiteral(visibilityEEnum, Visibility.PUBLIC);
+		addEEnumLiteral(visibilityEEnum, Visibility.PRIVATE);
+		addEEnumLiteral(visibilityEEnum, Visibility.PROTECTED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -432,6 +828,24 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 */
 	protected void createOCLAnnotations() {
 		String source = "http://www.bluexml.com/OCL";		
+		addAnnotation
+		  (modelElementEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "if self.documentation.oclIsUndefined() or self.documentation.size() <0 then\r\tself.name\relse\r\tself.documentation\rendif"
+		   });		
+		addAnnotation
+		  (modelElementEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+			 "body", "if self.description.oclIsUndefined() or self.description.size() <0 then\r\tself.name\relse\r\tself.description\rendif"
+		   });		
+		addAnnotation
+		  (namedModelElementEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "if self.getContainer().oclIsUndefined() then\r\tself.name\relse\r\tif self.getContainer().oclIsKindOf(NamedModelElement) then\r\t\tself.getContainer().oclAsType(NamedModelElement).getFullName().concat(\'.\').concat(self.name)\r\telse\r\t\t\"\"\r\tendif\t\rendif"
+		   });		
 		addAnnotation
 		  (tagEClass.getEOperations().get(0), 
 		   source, 
@@ -460,13 +874,25 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		  (packageEClass.getEOperations().get(1), 
 		   source, 
 		   new String[] {
-			 "body", "if self.getContainer().oclIsUndefined() then\r\tself.name\relse\r\tself.getContainer().oclAsType(Package).getFullName().concat(\'.\').concat(self.name)\rendif"
+			 "body", "if self.getContainer().oclIsUndefined() then\r\tself\relse\r\tself.getContainer().oclAsType(Package).getRootPackage()\rendif"
 		   });		
 		addAnnotation
-		  (packageEClass.getEOperations().get(2), 
+		  (operationEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
-			 "body", "if self.getContainer().oclIsUndefined() then\r\tself\relse\r\tself.getContainer().oclAsType(Package).getRootPackage()\rendif"
+			 "body", "\r\nself.name = other.name and \r\n\r\nself.parameters->forAll(p:Parameter |   \r\n   other.parameters->exists(z : Parameter | z.name = p.name and z.valueType = p.valueType ))"
+		   });		
+		addAnnotation
+		  (operationEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+			 "body", "self.getParameters()->select(e:Parameter|e.name =pname)->first()"
+		   });		
+		addAnnotation
+		  (metaInfoEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "self.key = other.key"
 		   });
 	}
 
@@ -477,13 +903,13 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";				
+		String source = "http://www.eclipse.org/emf/2002/Ecore";							
 		addAnnotation
 		  (packageEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "PackageNameNull"
-		   });				
+		   });						
 	}
 
 } //CommonPackageImpl

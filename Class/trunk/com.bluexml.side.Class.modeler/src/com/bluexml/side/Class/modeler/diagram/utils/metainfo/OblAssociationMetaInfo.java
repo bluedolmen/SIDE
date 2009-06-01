@@ -16,9 +16,9 @@ package com.bluexml.side.Class.modeler.diagram.utils.metainfo;
 
 import java.util.ArrayList;
 
-import com.bluexml.side.clazz.ClazzFactory;
-import com.bluexml.side.clazz.MetaInfo;
-import com.bluexml.side.clazz.impl.ClazzFactoryImpl;
+import com.bluexml.side.common.CommonFactory;
+import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.impl.CommonFactoryImpl;
 
 
 public class OblAssociationMetaInfo extends OblTypeMetaInfo {
@@ -26,7 +26,7 @@ public class OblAssociationMetaInfo extends OblTypeMetaInfo {
 	public void initAllMetaInfo() {
 		allMetaInfos = new ArrayList<Object>();
 
-		ClazzFactory fact = ClazzFactoryImpl.init();
+		CommonFactory fact = CommonFactoryImpl.init();
 		MetaInfo c;
 
 		c = fact.createMetaInfo();

@@ -11,7 +11,8 @@ import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.clazz.Operation;
+import com.bluexml.side.common.Operation;
+import com.bluexml.side.common.OperationComponent;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormAspect;
 import com.bluexml.side.form.FormClass;
@@ -95,7 +96,7 @@ public class ClassInitialization {
 				}
 				
 				// Operations :
-				for (Operation op : Clazz.getOperations()) {
+				for (OperationComponent op : Clazz.getOperations()) {
 					Field field = ClassDiagramUtils.getFieldForOperation(op);
 					c.add(field);
 				}

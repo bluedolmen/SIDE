@@ -11,6 +11,7 @@ import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.clazz.EnumerationLiteral;
 
+import com.bluexml.side.common.impl.NamedModelElementImpl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -23,6 +24,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.ecore.OCL;
@@ -42,7 +44,7 @@ import org.eclipse.ocl.ecore.OCL;
  *
  * @generated
  */
-public class EnumerationImpl extends NamedClassModelElementImpl implements Enumeration {
+public class EnumerationImpl extends NamedModelElementImpl implements Enumeration {
 	/**
 	 * The cached value of the '{@link #getLiterals() <em>Literals</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

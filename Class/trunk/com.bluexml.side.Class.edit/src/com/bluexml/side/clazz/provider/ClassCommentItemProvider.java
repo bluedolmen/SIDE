@@ -87,7 +87,7 @@ public class ClassCommentItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ClassComment)object).getValue();
+		String label = ((ClassComment)object).getDocumentation();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ClassComment_type") :
 			getString("_UI_ClassComment_type") + " " + label;

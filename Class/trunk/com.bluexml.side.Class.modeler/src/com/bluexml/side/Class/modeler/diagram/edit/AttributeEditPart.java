@@ -41,7 +41,7 @@ import com.bluexml.side.Class.modeler.diagram.dialogs.AttributeEditDialog;
 import com.bluexml.side.Class.modeler.diagram.figures.AttributeFigure;
 import com.bluexml.side.Class.modeler.diagram.preferences.CdDiagramPreferenceConstants;
 import com.bluexml.side.clazz.Attribute;
-import com.bluexml.side.clazz.Visibility;
+import com.bluexml.side.common.Visibility;
 
 /**
  * The Attribute object controller

@@ -104,14 +104,14 @@ public class ClazzModelerProviderAdapterFactory extends ClazzAdapterFactory
 	private EnumerationLiteralModelerProvider enumerationliteralModelerProvider;
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.Operation} instances.
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.common.Operation} instances.
 	 * 
 	 * @generated
 	 */
 	private OperationModelerProvider operationModelerProvider;
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.Parameter} instances.
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.common.Parameter} instances.
 	 * 
 	 * @generated
 	 */
@@ -139,14 +139,14 @@ public class ClazzModelerProviderAdapterFactory extends ClazzAdapterFactory
 	private AbstractContainerModelerProvider abstractcontainerModelerProvider;
 	
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.MetaInfo} instances.
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.common.MetaInfo} instances.
 	 * 
 	 * @generated
 	 */
 	private MetaInfoModelerProvider metainfoModelerProvider;
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.MetaInfoGroup} instances.
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.common.MetaInfoGroup} instances.
 	 * 
 	 * @generated
 	 */
@@ -374,7 +374,7 @@ public class ClazzModelerProviderAdapterFactory extends ClazzAdapterFactory
 	}
 
 	/**
-	 * This creates an adapter for a {@link com.bluexml.side.clazz.Operation}.
+	 * This creates an adapter for a {@link com.bluexml.side.common.Operation}.
 	 *
 	 * @return the Adapter
 	 * @generated
@@ -388,7 +388,7 @@ public class ClazzModelerProviderAdapterFactory extends ClazzAdapterFactory
 	}
 
 	/**
-	 * This creates an adapter for a {@link com.bluexml.side.clazz.Parameter}.
+	 * This creates an adapter for a {@link com.bluexml.side.common.Parameter}.
 	 *
 	 * @return the Adapter
 	 * @generated
@@ -446,7 +446,7 @@ public class ClazzModelerProviderAdapterFactory extends ClazzAdapterFactory
 	}
 	
 	/**
-	 * This creates an adapter for a {@link com.bluexml.side.clazz.MetaInfo}.
+	 * This creates an adapter for a {@link com.bluexml.side.common.MetaInfo}.
 	 *
 	 * @return the Adapter
 	 * @generated
@@ -460,7 +460,7 @@ public class ClazzModelerProviderAdapterFactory extends ClazzAdapterFactory
 	}
 
 	/**
-	 * This creates an adapter for a {@link com.bluexml.side.clazz.MetaInfoGroup}.
+	 * This creates an adapter for a {@link com.bluexml.side.common.MetaInfoGroup}.
 	 *
 	 * @return the Adapter
 	 * @generated

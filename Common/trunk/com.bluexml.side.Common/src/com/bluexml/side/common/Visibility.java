@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package com.bluexml.side.clazz;
+package com.bluexml.side.common;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Visibility</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see com.bluexml.side.clazz.ClazzPackage#getVisibility()
+ * @see com.bluexml.side.common.CommonPackage#getVisibility()
  * @model
  * @generated
  */

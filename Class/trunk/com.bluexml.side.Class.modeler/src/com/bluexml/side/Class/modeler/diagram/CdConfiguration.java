@@ -86,7 +86,7 @@ public class CdConfiguration implements IConfiguration {
 		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(ClazzEditPart.class, com.bluexml.side.clazz.Clazz.class), ClazzEditPart.class);
 		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(AspectEditPart.class, com.bluexml.side.clazz.Aspect.class), AspectEditPart.class);
 		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(AttributeEditPart.class, com.bluexml.side.clazz.Attribute.class), AttributeEditPart.class);
-		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(OperationEditPart.class, com.bluexml.side.clazz.Operation.class), OperationEditPart.class);
+		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(OperationEditPart.class, com.bluexml.side.common.Operation.class), OperationEditPart.class);
 		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(ClassCommentEditPart.class, com.bluexml.side.clazz.ClassComment.class), ClassCommentEditPart.class);
 		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(EnumerationEditPart.class, com.bluexml.side.clazz.Enumeration.class), EnumerationEditPart.class);
 		Platform.getAdapterManager().registerAdapters(new EditPart2ModelAdapterFactory(EnumerationLiteralEditPart.class, com.bluexml.side.clazz.EnumerationLiteral.class), EnumerationLiteralEditPart.class);		

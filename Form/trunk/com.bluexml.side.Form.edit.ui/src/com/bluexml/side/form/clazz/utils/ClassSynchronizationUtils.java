@@ -16,17 +16,18 @@ import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.clazz.Operation;
 import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.Operation;
+import com.bluexml.side.common.OperationComponent;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormAspect;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormElement;
+import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormGroup;
+import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.VirtualField;
-import com.bluexml.side.form.FormFactory;
-import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.common.utils.FieldTransformation;
 import com.bluexml.side.form.common.utils.FormDiagramUtils;
 import com.bluexml.side.form.common.utils.InternalModification;
@@ -111,7 +112,7 @@ public class ClassSynchronizationUtils {
 			}
 			
 			// Operations :
-			for (Operation op : Clazz.getOperations()) {
+			for (OperationComponent op : Clazz.getOperations()) {
 				if (!formChild.containsKey(op.getName())) {
 					Field field = ClassDiagramUtils.getFieldForOperation(op);
 					cToAdd.add(field);

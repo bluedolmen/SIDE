@@ -4,15 +4,21 @@
  *
  * $Id$
  */
-package com.bluexml.side.clazz.provider;
+package com.bluexml.side.common.provider;
 
+
+import com.bluexml.side.common.CommonFactory;
+import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.Operation;
 
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -23,24 +29,19 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import com.bluexml.side.clazz.ClazzFactory;
-import com.bluexml.side.clazz.ClazzPackage;
-import com.bluexml.side.clazz.Operation;
-import com.bluexml.side.common.CommonPackage;
-
 /**
- * This is the item provider adapter for a {@link com.bluexml.side.clazz.Operation} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.common.Operation} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
 public class OperationItemProvider
-	extends NamedClassModelElementItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
+	extends OperationComponentItemProvider
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
 		IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -84,7 +85,7 @@ public class OperationItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Operation_returnType_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Operation_returnType_feature", "_UI_Operation_type"),
-				 ClazzPackage.Literals.OPERATION__RETURN_TYPE,
+				 CommonPackage.Literals.OPERATION__RETURN_TYPE,
 				 true,
 				 false,
 				 false,
@@ -106,7 +107,7 @@ public class OperationItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Operation_visibility_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Operation_visibility_feature", "_UI_Operation_type"),
-				 ClazzPackage.Literals.OPERATION__VISIBILITY,
+				 CommonPackage.Literals.OPERATION__VISIBILITY,
 				 true,
 				 false,
 				 false,
@@ -128,7 +129,7 @@ public class OperationItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Operation_static_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Operation_static_feature", "_UI_Operation_type"),
-				 ClazzPackage.Literals.OPERATION__STATIC,
+				 CommonPackage.Literals.OPERATION__STATIC,
 				 true,
 				 false,
 				 false,
@@ -150,7 +151,7 @@ public class OperationItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Operation_body_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Operation_body_feature", "_UI_Operation_type"),
-				 ClazzPackage.Literals.OPERATION__BODY,
+				 CommonPackage.Literals.OPERATION__BODY,
 				 true,
 				 false,
 				 false,
@@ -171,7 +172,7 @@ public class OperationItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ClazzPackage.Literals.OPERATION__PARAMETERS);
+			childrenFeatures.add(CommonPackage.Literals.OPERATION__PARAMETERS);
 		}
 		return childrenFeatures;
 	}
@@ -226,13 +227,13 @@ public class OperationItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Operation.class)) {
-			case ClazzPackage.OPERATION__RETURN_TYPE:
-			case ClazzPackage.OPERATION__VISIBILITY:
-			case ClazzPackage.OPERATION__STATIC:
-			case ClazzPackage.OPERATION__BODY:
+			case CommonPackage.OPERATION__RETURN_TYPE:
+			case CommonPackage.OPERATION__VISIBILITY:
+			case CommonPackage.OPERATION__STATIC:
+			case CommonPackage.OPERATION__BODY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case ClazzPackage.OPERATION__PARAMETERS:
+			case CommonPackage.OPERATION__PARAMETERS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -252,31 +253,8 @@ public class OperationItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ClazzPackage.Literals.OPERATION__PARAMETERS,
-				 ClazzFactory.eINSTANCE.createParameter()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == CommonPackage.Literals.MODEL_ELEMENT__COMMENTS ||
-			childFeature == ClazzPackage.Literals.CLASS_MODEL_ELEMENT__HAS_COMMENTS;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
+				(CommonPackage.Literals.OPERATION__PARAMETERS,
+				 CommonFactory.eINSTANCE.createParameter()));
 	}
 
 }

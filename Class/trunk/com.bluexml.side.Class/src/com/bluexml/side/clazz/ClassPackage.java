@@ -24,8 +24,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getClassPackage()
- * @model annotation="http://www.bluexml.com/OCL PackageNameNull='not self.name.oclIsUndefined() and self.name <> \'\''"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='PackageNameNull'"
+ * @model
  * @generated
  */
 public interface ClassPackage extends com.bluexml.side.common.Package {

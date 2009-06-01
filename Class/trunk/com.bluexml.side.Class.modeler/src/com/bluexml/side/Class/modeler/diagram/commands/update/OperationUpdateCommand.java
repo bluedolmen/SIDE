@@ -29,10 +29,12 @@ import com.bluexml.side.Class.modeler.diagram.dialogs.OperationEditDialog;
 import com.bluexml.side.Class.modeler.diagram.dialogs.ConstraintsDataStructure.ConstraintObject;
 import com.bluexml.side.Class.modeler.diagram.utils.metainfo.OblOperationMetaInfo;
 import com.bluexml.side.clazz.ClazzFactory;
-import com.bluexml.side.clazz.MetaInfo;
-import com.bluexml.side.clazz.Operation;
-import com.bluexml.side.clazz.Parameter;
-import com.bluexml.side.clazz.Visibility;
+import com.bluexml.side.common.CommonFactory;
+import com.bluexml.side.common.DataType;
+import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.Operation;
+import com.bluexml.side.common.Parameter;
+import com.bluexml.side.common.Visibility;
 
 /**
  * Class that create a command in order to update operation parameters <br>
@@ -124,7 +126,7 @@ public class OperationUpdateCommand extends Command {
 		operation.setVisibility(visibility);
 
 		// Perform update for return String data
-		operation.setReturnType(returnType);
+		operation.setReturnType(DataType.getByName(returnType));
 
 		// Perform update for input parameters
 		List newParameters = new ArrayList();
@@ -132,13 +134,13 @@ public class OperationUpdateCommand extends Command {
 		while (iterator.hasNext()) {
 			Object object = iterator.next();
 			String displayName = inputTypes.getDisplayName(object);
-			String String = inputTypes.getType(object);
+			String string = inputTypes.getType(object);
 			Parameter parameter = operation.getParameter(displayName);
 			if (parameter == null) {
-				parameter = ClazzFactory.eINSTANCE.createParameter();
+				parameter = CommonFactory.eINSTANCE.createParameter();
 				parameter.setName(displayName);
 			}
-			parameter.setValueType(String);
+			parameter.setValueType(DataType.getByName(string));
 			newParameters.add(parameter);
 		}
 		operation.getParameters().clear();

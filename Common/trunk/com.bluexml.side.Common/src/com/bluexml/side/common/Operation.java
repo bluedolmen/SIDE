@@ -4,10 +4,9 @@
  *
  * $Id$
  */
-package com.bluexml.side.clazz;
+package com.bluexml.side.common;
 
 import org.eclipse.emf.common.util.EList;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -17,22 +16,22 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.bluexml.side.clazz.Operation#getReturnType <em>Return Type</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.Operation#getParameters <em>Parameters</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.Operation#getVisibility <em>Visibility</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.Operation#isStatic <em>Static</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.Operation#getBody <em>Body</em>}</li>
+ *   <li>{@link com.bluexml.side.common.Operation#getReturnType <em>Return Type</em>}</li>
+ *   <li>{@link com.bluexml.side.common.Operation#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link com.bluexml.side.common.Operation#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link com.bluexml.side.common.Operation#isStatic <em>Static</em>}</li>
+ *   <li>{@link com.bluexml.side.common.Operation#getBody <em>Body</em>}</li>
  * </ul>
  * </p>
  *
- * @see com.bluexml.side.clazz.ClazzPackage#getOperation()
+ * @see com.bluexml.side.common.CommonPackage#getOperation()
  * @model
  * @generated
  */
-public interface Operation extends NamedClassModelElement {
+public interface Operation extends OperationComponent {
 	/**
 	 * Returns the value of the '<em><b>Return Type</b></em>' attribute.
-	 * The literals are from the enumeration {@link com.bluexml.side.clazz.AttributeType}.
+	 * The literals are from the enumeration {@link com.bluexml.side.common.DataType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Return Type</em>' attribute isn't clear,
@@ -40,28 +39,28 @@ public interface Operation extends NamedClassModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Return Type</em>' attribute.
-	 * @see com.bluexml.side.clazz.AttributeType
-	 * @see #setReturnType(AttributeType)
-	 * @see com.bluexml.side.clazz.ClazzPackage#getOperation_ReturnType()
+	 * @see com.bluexml.side.common.DataType
+	 * @see #setReturnType(DataType)
+	 * @see com.bluexml.side.common.CommonPackage#getOperation_ReturnType()
 	 * @model
 	 * @generated
 	 */
-	AttributeType getReturnType();
+	DataType getReturnType();
 
 	/**
-	 * Sets the value of the '{@link com.bluexml.side.clazz.Operation#getReturnType <em>Return Type</em>}' attribute.
+	 * Sets the value of the '{@link com.bluexml.side.common.Operation#getReturnType <em>Return Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Return Type</em>' attribute.
-	 * @see com.bluexml.side.clazz.AttributeType
+	 * @see com.bluexml.side.common.DataType
 	 * @see #getReturnType()
 	 * @generated
 	 */
-	void setReturnType(AttributeType value);
+	void setReturnType(DataType value);
 
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
-	 * The list contents are of type {@link com.bluexml.side.clazz.Parameter}.
+	 * The list contents are of type {@link com.bluexml.side.common.Parameter}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
@@ -69,7 +68,7 @@ public interface Operation extends NamedClassModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
-	 * @see com.bluexml.side.clazz.ClazzPackage#getOperation_Parameters()
+	 * @see com.bluexml.side.common.CommonPackage#getOperation_Parameters()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -77,7 +76,7 @@ public interface Operation extends NamedClassModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Visibility</b></em>' attribute.
-	 * The literals are from the enumeration {@link com.bluexml.side.clazz.Visibility}.
+	 * The literals are from the enumeration {@link com.bluexml.side.common.Visibility}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Visibility</em>' attribute isn't clear,
@@ -85,20 +84,20 @@ public interface Operation extends NamedClassModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Visibility</em>' attribute.
-	 * @see com.bluexml.side.clazz.Visibility
+	 * @see com.bluexml.side.common.Visibility
 	 * @see #setVisibility(Visibility)
-	 * @see com.bluexml.side.clazz.ClazzPackage#getOperation_Visibility()
+	 * @see com.bluexml.side.common.CommonPackage#getOperation_Visibility()
 	 * @model
 	 * @generated
 	 */
 	Visibility getVisibility();
 
 	/**
-	 * Sets the value of the '{@link com.bluexml.side.clazz.Operation#getVisibility <em>Visibility</em>}' attribute.
+	 * Sets the value of the '{@link com.bluexml.side.common.Operation#getVisibility <em>Visibility</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Visibility</em>' attribute.
-	 * @see com.bluexml.side.clazz.Visibility
+	 * @see com.bluexml.side.common.Visibility
 	 * @see #getVisibility()
 	 * @generated
 	 */
@@ -114,14 +113,14 @@ public interface Operation extends NamedClassModelElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Static</em>' attribute.
 	 * @see #setStatic(boolean)
-	 * @see com.bluexml.side.clazz.ClazzPackage#getOperation_Static()
+	 * @see com.bluexml.side.common.CommonPackage#getOperation_Static()
 	 * @model
 	 * @generated
 	 */
 	boolean isStatic();
 
 	/**
-	 * Sets the value of the '{@link com.bluexml.side.clazz.Operation#isStatic <em>Static</em>}' attribute.
+	 * Sets the value of the '{@link com.bluexml.side.common.Operation#isStatic <em>Static</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Static</em>' attribute.
@@ -140,14 +139,14 @@ public interface Operation extends NamedClassModelElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Body</em>' attribute.
 	 * @see #setBody(String)
-	 * @see com.bluexml.side.clazz.ClazzPackage#getOperation_Body()
+	 * @see com.bluexml.side.common.CommonPackage#getOperation_Body()
 	 * @model
 	 * @generated
 	 */
 	String getBody();
 
 	/**
-	 * Sets the value of the '{@link com.bluexml.side.clazz.Operation#getBody <em>Body</em>}' attribute.
+	 * Sets the value of the '{@link com.bluexml.side.common.Operation#getBody <em>Body</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Body</em>' attribute.
@@ -155,7 +154,7 @@ public interface Operation extends NamedClassModelElement {
 	 * @generated
 	 */
 	void setBody(String value);
-	
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -165,36 +164,12 @@ public interface Operation extends NamedClassModelElement {
 	boolean equalsForMerge(Operation other);
 
 	/**
-	 * Sets the value of the '{@link org.topcased.MMUseCase.Operation#getReturnType <em>Return Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Return Type</em>' attribute.
-	 * @see org.topcased.MMUseCase.AttributeType
-	 * @see #getReturnType()
-	 * @_generated
+	 * @model required="true" pnameRequired="true"
+	 *        annotation="http://www.bluexml.com/OCL body='self.getParameters()->select(e:Parameter|e.name =pname)->first()'"
+	 * @generated
 	 */
-	void setReturnType(String returnType);
-	
-	/**
-	 * Normalize the name of the paramerer
-	 *
-	 *@_generated
-	 */
-	void normalizeName();
-	
-	/**
-	 * Returns the value of a '<em><b>Parameter</b></em>' with a name equals to the parameter.
-	 * @param the name of the parameter
-	 * @return the value of the '<em>Parameter</em>'.
-	 * @_generated
-	 */
-	Parameter getParameter(String displayName);
-	
-	/**
-	 * Get the defintion in a String
-	 * 
-	 * @return the definition
-	 * @_generated
-	 */
-	String getDefinition();
+	Parameter getParameter(String pname);
+		
 } // Operation

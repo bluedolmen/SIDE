@@ -214,6 +214,121 @@ public class CommonItemProviderAdapterFactory extends CommonAdapterFactory imple
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.common.Operation} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OperationItemProvider operationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.common.Operation}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createOperationAdapter() {
+		if (operationItemProvider == null) {
+			operationItemProvider = new OperationItemProvider(this);
+		}
+
+		return operationItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.common.Parameter} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ParameterItemProvider parameterItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.common.Parameter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createParameterAdapter() {
+		if (parameterItemProvider == null) {
+			parameterItemProvider = new ParameterItemProvider(this);
+		}
+
+		return parameterItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.common.OperationGroup} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OperationGroupItemProvider operationGroupItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.common.OperationGroup}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createOperationGroupAdapter() {
+		if (operationGroupItemProvider == null) {
+			operationGroupItemProvider = new OperationGroupItemProvider(this);
+		}
+
+		return operationGroupItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.common.MetaInfo} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MetaInfoItemProvider metaInfoItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.common.MetaInfo}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMetaInfoAdapter() {
+		if (metaInfoItemProvider == null) {
+			metaInfoItemProvider = new MetaInfoItemProvider(this);
+		}
+
+		return metaInfoItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.common.MetaInfoGroup} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MetaInfoGroupItemProvider metaInfoGroupItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.common.MetaInfoGroup}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMetaInfoGroupAdapter() {
+		if (metaInfoGroupItemProvider == null) {
+			metaInfoGroupItemProvider = new MetaInfoGroupItemProvider(this);
+		}
+
+		return metaInfoGroupItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -318,6 +433,11 @@ public class CommonItemProviderAdapterFactory extends CommonAdapterFactory imple
 		if (tagItemProvider != null) tagItemProvider.dispose();
 		if (stereotypeItemProvider != null) stereotypeItemProvider.dispose();
 		if (packageItemProvider != null) packageItemProvider.dispose();
+		if (operationItemProvider != null) operationItemProvider.dispose();
+		if (parameterItemProvider != null) parameterItemProvider.dispose();
+		if (operationGroupItemProvider != null) operationGroupItemProvider.dispose();
+		if (metaInfoItemProvider != null) metaInfoItemProvider.dispose();
+		if (metaInfoGroupItemProvider != null) metaInfoGroupItemProvider.dispose();
 	}
 
 }

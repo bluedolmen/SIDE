@@ -202,7 +202,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="UniqueNameForTaskAttribute"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typ" eType="ecore:EEnum ../../com.bluexml.side.Class/model/Class.ecore#//AttributeType"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typ" eType="ecore:EEnum ../../com.bluexml.side.Common/model/Common.ecore#//DataType"
         defaultValueLiteral="void"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

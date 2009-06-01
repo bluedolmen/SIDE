@@ -26,7 +26,7 @@ import com.bluexml.side.Class.modeler.diagram.utils.AssociationHelper;
 import com.bluexml.side.Class.modeler.diagram.utils.metainfo.OblAssociationMetaInfo;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.AssociationType;
-import com.bluexml.side.clazz.MetaInfo;
+import com.bluexml.side.common.MetaInfo;
 
 public class AssociationUpdateCommand extends Command {
 

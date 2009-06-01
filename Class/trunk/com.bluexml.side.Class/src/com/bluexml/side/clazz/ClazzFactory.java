@@ -35,15 +35,6 @@ public interface ClazzFactory extends EFactory {
 	ClassModelElement createClassModelElement();
 
 	/**
-	 * Returns a new object of class '<em>Named Class Model Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Named Class Model Element</em>'.
-	 * @generated
-	 */
-	NamedClassModelElement createNamedClassModelElement();
-
-	/**
 	 * Returns a new object of class '<em>Class Package</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -98,24 +89,6 @@ public interface ClazzFactory extends EFactory {
 	EnumerationLiteral createEnumerationLiteral();
 
 	/**
-	 * Returns a new object of class '<em>Operation</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Operation</em>'.
-	 * @generated
-	 */
-	Operation createOperation();
-
-	/**
-	 * Returns a new object of class '<em>Parameter</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Parameter</em>'.
-	 * @generated
-	 */
-	Parameter createParameter();
-
-	/**
 	 * Returns a new object of class '<em>Aspect</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -123,24 +96,6 @@ public interface ClazzFactory extends EFactory {
 	 * @generated
 	 */
 	Aspect createAspect();
-
-	/**
-	 * Returns a new object of class '<em>Meta Info</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Meta Info</em>'.
-	 * @generated
-	 */
-	MetaInfo createMetaInfo();
-
-	/**
-	 * Returns a new object of class '<em>Meta Info Group</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Meta Info Group</em>'.
-	 * @generated
-	 */
-	MetaInfoGroup createMetaInfoGroup();
 
 	/**
 	 * Returns a new object of class '<em>Class Comment</em>'.

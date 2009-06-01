@@ -10,6 +10,7 @@ package com.bluexml.side.workflow.provider;
 import com.bluexml.side.clazz.ClazzFactory;
 import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.common.provider.ModelElementItemProvider;
+import com.bluexml.side.workflow.WorkflowModelElement;
 import java.util.Collection;
 import java.util.List;
 
@@ -71,7 +72,10 @@ public class WorkflowModelElementItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_WorkflowModelElement_type");
+		String label = ((WorkflowModelElement)object).getDocumentation();
+		return label == null || label.length() == 0 ?
+			getString("_UI_WorkflowModelElement_type") :
+			getString("_UI_WorkflowModelElement_type") + " " + label;
 	}
 
 	/**

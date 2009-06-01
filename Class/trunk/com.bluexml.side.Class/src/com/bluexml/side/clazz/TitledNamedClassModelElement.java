@@ -6,6 +6,8 @@
  */
 package com.bluexml.side.clazz;
 
+import com.bluexml.side.common.NamedModelElement;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +25,7 @@ package com.bluexml.side.clazz;
  * @model abstract="true"
  * @generated
  */
-public interface TitledNamedClassModelElement extends NamedClassModelElement {
+public interface TitledNamedClassModelElement extends NamedModelElement, ClassModelElement {
 	/**
 	 * Returns the value of the '<em><b>Title</b></em>' attribute.
 	 * <!-- begin-user-doc -->

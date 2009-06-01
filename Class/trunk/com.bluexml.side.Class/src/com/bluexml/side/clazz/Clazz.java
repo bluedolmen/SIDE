@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.clazz;
 
+import com.bluexml.side.common.OperationComponent;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -32,7 +33,7 @@ import org.eclipse.emf.common.util.EList;
 public interface Clazz extends AbstractClass {
 	/**
 	 * Returns the value of the '<em><b>Operations</b></em>' containment reference list.
-	 * The list contents are of type {@link com.bluexml.side.clazz.Operation}.
+	 * The list contents are of type {@link com.bluexml.side.common.OperationComponent}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Operations</em>' containment reference list isn't clear,
@@ -44,7 +45,7 @@ public interface Clazz extends AbstractClass {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Operation> getOperations();
+	EList<OperationComponent> getOperations();
 
 	/**
 	 * Returns the value of the '<em><b>Generalizations</b></em>' reference list.

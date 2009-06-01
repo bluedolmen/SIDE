@@ -6,19 +6,24 @@
  */
 package com.bluexml.side.common.util;
 
-import com.bluexml.side.common.Comment;
-import com.bluexml.side.common.CommonPackage;
-import com.bluexml.side.common.ModelElement;
-import com.bluexml.side.common.NamedModelElement;
-import com.bluexml.side.common.Stereotype;
-import com.bluexml.side.common.Tag;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import com.bluexml.side.common.Comment;
+import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.MetaData;
+import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.MetaInfoGroup;
+import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.NamedModelElement;
+import com.bluexml.side.common.Operation;
+import com.bluexml.side.common.OperationComponent;
+import com.bluexml.side.common.OperationGroup;
+import com.bluexml.side.common.Parameter;
+import com.bluexml.side.common.Stereotype;
+import com.bluexml.side.common.Tag;
 
 /**
  * <!-- begin-user-doc -->
@@ -99,6 +104,34 @@ public class CommonAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter casePackage(com.bluexml.side.common.Package object) {
 				return createPackageAdapter();
+			}
+			@Override
+			public Adapter caseOperation(Operation object) {
+				return createOperationAdapter();
+			}
+			@Override
+			public Adapter caseParameter(Parameter object) {
+				return createParameterAdapter();
+			}
+			@Override
+			public Adapter caseOperationGroup(OperationGroup object) {
+				return createOperationGroupAdapter();
+			}
+			@Override
+			public Adapter caseOperationComponent(OperationComponent object) {
+				return createOperationComponentAdapter();
+			}
+			@Override
+			public Adapter caseMetaInfo(MetaInfo object) {
+				return createMetaInfoAdapter();
+			}
+			@Override
+			public Adapter caseMetaInfoGroup(MetaInfoGroup object) {
+				return createMetaInfoGroupAdapter();
+			}
+			@Override
+			public Adapter caseMetaData(MetaData object) {
+				return createMetaDataAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -201,6 +234,104 @@ public class CommonAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPackageAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.Operation <em>Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.common.Operation
+	 * @generated
+	 */
+	public Adapter createOperationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.Parameter <em>Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.common.Parameter
+	 * @generated
+	 */
+	public Adapter createParameterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.OperationGroup <em>Operation Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.common.OperationGroup
+	 * @generated
+	 */
+	public Adapter createOperationGroupAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.OperationComponent <em>Operation Component</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.common.OperationComponent
+	 * @generated
+	 */
+	public Adapter createOperationComponentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.MetaInfo <em>Meta Info</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.common.MetaInfo
+	 * @generated
+	 */
+	public Adapter createMetaInfoAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.MetaInfoGroup <em>Meta Info Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.common.MetaInfoGroup
+	 * @generated
+	 */
+	public Adapter createMetaInfoGroupAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.MetaData <em>Meta Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.common.MetaData
+	 * @generated
+	 */
+	public Adapter createMetaDataAdapter() {
 		return null;
 	}
 

@@ -99,29 +99,6 @@ public class ClazzItemProviderAdapterFactory extends ClazzAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.NamedClassModelElement} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected NamedClassModelElementItemProvider namedClassModelElementItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.bluexml.side.clazz.NamedClassModelElement}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createNamedClassModelElementAdapter() {
-		if (namedClassModelElementItemProvider == null) {
-			namedClassModelElementItemProvider = new NamedClassModelElementItemProvider(this);
-		}
-
-		return namedClassModelElementItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.ClassPackage} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -260,52 +237,6 @@ public class ClazzItemProviderAdapterFactory extends ClazzAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.Operation} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected OperationItemProvider operationItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.bluexml.side.clazz.Operation}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createOperationAdapter() {
-		if (operationItemProvider == null) {
-			operationItemProvider = new OperationItemProvider(this);
-		}
-
-		return operationItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.Parameter} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ParameterItemProvider parameterItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.bluexml.side.clazz.Parameter}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createParameterAdapter() {
-		if (parameterItemProvider == null) {
-			parameterItemProvider = new ParameterItemProvider(this);
-		}
-
-		return parameterItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.Aspect} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -326,52 +257,6 @@ public class ClazzItemProviderAdapterFactory extends ClazzAdapterFactory impleme
 		}
 
 		return aspectItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.MetaInfo} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected MetaInfoItemProvider metaInfoItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.bluexml.side.clazz.MetaInfo}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createMetaInfoAdapter() {
-		if (metaInfoItemProvider == null) {
-			metaInfoItemProvider = new MetaInfoItemProvider(this);
-		}
-
-		return metaInfoItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.MetaInfoGroup} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected MetaInfoGroupItemProvider metaInfoGroupItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.bluexml.side.clazz.MetaInfoGroup}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createMetaInfoGroupAdapter() {
-		if (metaInfoGroupItemProvider == null) {
-			metaInfoGroupItemProvider = new MetaInfoGroupItemProvider(this);
-		}
-
-		return metaInfoGroupItemProvider;
 	}
 
 	/**
@@ -543,18 +428,13 @@ public class ClazzItemProviderAdapterFactory extends ClazzAdapterFactory impleme
 	 */
 	public void dispose() {
 		if (classModelElementItemProvider != null) classModelElementItemProvider.dispose();
-		if (namedClassModelElementItemProvider != null) namedClassModelElementItemProvider.dispose();
 		if (classPackageItemProvider != null) classPackageItemProvider.dispose();
 		if (clazzItemProvider != null) clazzItemProvider.dispose();
 		if (associationItemProvider != null) associationItemProvider.dispose();
 		if (attributeItemProvider != null) attributeItemProvider.dispose();
 		if (enumerationItemProvider != null) enumerationItemProvider.dispose();
 		if (enumerationLiteralItemProvider != null) enumerationLiteralItemProvider.dispose();
-		if (operationItemProvider != null) operationItemProvider.dispose();
-		if (parameterItemProvider != null) parameterItemProvider.dispose();
 		if (aspectItemProvider != null) aspectItemProvider.dispose();
-		if (metaInfoItemProvider != null) metaInfoItemProvider.dispose();
-		if (metaInfoGroupItemProvider != null) metaInfoGroupItemProvider.dispose();
 		if (classCommentItemProvider != null) classCommentItemProvider.dispose();
 		if (firstEndItemProvider != null) firstEndItemProvider.dispose();
 		if (secondEndItemProvider != null) secondEndItemProvider.dispose();

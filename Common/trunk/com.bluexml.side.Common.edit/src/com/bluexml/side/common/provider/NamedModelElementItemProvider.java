@@ -64,7 +64,6 @@ public class NamedModelElementItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
-			addDocumentationPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -83,28 +82,6 @@ public class NamedModelElementItemProvider
 				 getString("_UI_NamedModelElement_name_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_NamedModelElement_name_feature", "_UI_NamedModelElement_type"),
 				 CommonPackage.Literals.NAMED_MODEL_ELEMENT__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Documentation feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDocumentationPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_NamedModelElement_documentation_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_NamedModelElement_documentation_feature", "_UI_NamedModelElement_type"),
-				 CommonPackage.Literals.NAMED_MODEL_ELEMENT__DOCUMENTATION,
 				 true,
 				 false,
 				 false,
@@ -151,7 +128,6 @@ public class NamedModelElementItemProvider
 
 		switch (notification.getFeatureID(NamedModelElement.class)) {
 			case CommonPackage.NAMED_MODEL_ELEMENT__NAME:
-			case CommonPackage.NAMED_MODEL_ELEMENT__DOCUMENTATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

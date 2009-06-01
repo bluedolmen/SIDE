@@ -2,7 +2,7 @@ package com.bluexml.side.form.workflow.utils;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import com.bluexml.side.clazz.AttributeType;
+import com.bluexml.side.common.DataType;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.form.ActionField;
@@ -22,30 +22,30 @@ public class WorkflowDiagramUtils {
 	public static Field getFieldForAttribute(Attribute att) {
 		Field field = null;
 		if (att != null) {
-			if (att.getTyp().equals(AttributeType.STRING)) { 
+			if (att.getTyp().equals(DataType.STRING)) { 
 				field = FormFactory.eINSTANCE.createCharField();
 			// Date Time Field
-			} else if (att.getTyp().equals(AttributeType.DATE_TIME)) {
+			} else if (att.getTyp().equals(DataType.DATE_TIME)) {
 				field = FormFactory.eINSTANCE.createDateTimeField();
 			// Date Field
-			} else if (att.getTyp().equals(AttributeType.DATE)) {
+			} else if (att.getTyp().equals(DataType.DATE)) {
 				field = FormFactory.eINSTANCE.createDateField();
 			// Time Field
-			} else if (att.getTyp().equals(AttributeType.TIME)) {
+			} else if (att.getTyp().equals(DataType.TIME)) {
 				field = FormFactory.eINSTANCE.createTimeField();
-			} else if(att.getTyp().equals(AttributeType.BOOLEAN)) {
+			} else if(att.getTyp().equals(DataType.BOOLEAN)) {
 			// Boolean Field
 				field = FormFactory.eINSTANCE.createBooleanField();
-			} else if(att.getTyp().equals(AttributeType.INT)) {
+			} else if(att.getTyp().equals(DataType.INT)) {
 			// Integer Field
 				field = FormFactory.eINSTANCE.createIntegerField();
-			} else if(att.getTyp().equals(AttributeType.FLOAT)) {
+			} else if(att.getTyp().equals(DataType.FLOAT)) {
 			// Float Field
 				field = FormFactory.eINSTANCE.createFloatField();
-			} else if(att.getTyp().equals(AttributeType.DOUBLE)) {
+			} else if(att.getTyp().equals(DataType.DOUBLE)) {
 			// Decimal Field
 				field = FormFactory.eINSTANCE.createDecimalField();
-			} else if(att.getTyp().equals(AttributeType.SHORT)) {
+			} else if(att.getTyp().equals(DataType.SHORT)) {
 			// Short Field
 				field = FormFactory.eINSTANCE.createIntegerField();
 			} else {

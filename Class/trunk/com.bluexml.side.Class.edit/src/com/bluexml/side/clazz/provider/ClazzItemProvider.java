@@ -26,6 +26,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.ClazzFactory;
 import com.bluexml.side.clazz.ClazzPackage;
+import com.bluexml.side.common.CommonFactory;
 import com.bluexml.side.common.CommonPackage;
 
 /**
@@ -251,7 +252,12 @@ public class ClazzItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ClazzPackage.Literals.CLAZZ__OPERATIONS,
-				 ClazzFactory.eINSTANCE.createOperation()));
+				 CommonFactory.eINSTANCE.createOperation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ClazzPackage.Literals.CLAZZ__OPERATIONS,
+				 CommonFactory.eINSTANCE.createOperationGroup()));
 	}
 
 	/**

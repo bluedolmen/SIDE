@@ -42,9 +42,9 @@ import com.bluexml.side.Class.modeler.diagram.dialogs.OperationEditDialog;
 import com.bluexml.side.Class.modeler.diagram.figures.OperationFigure;
 import com.bluexml.side.Class.modeler.diagram.preferences.CdDiagramPreferenceConstants;
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.clazz.Operation;
-import com.bluexml.side.clazz.Parameter;
-import com.bluexml.side.clazz.Visibility;
+import com.bluexml.side.common.Operation;
+import com.bluexml.side.common.Parameter;
+import com.bluexml.side.common.Visibility;
 import com.bluexml.side.common.Stereotype;
 
 /**

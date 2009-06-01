@@ -37,12 +37,12 @@ import com.bluexml.side.Class.modeler.diagram.dialogs.ConstraintsDataStructure;
 import com.bluexml.side.Class.modeler.diagram.utils.metainfo.OblAssociationMetaInfo;
 import com.bluexml.side.Class.modeler.diagram.utils.metainfo.OblAttributeMetaInfo;
 import com.bluexml.side.Class.modeler.diagram.utils.metainfo.value.booleanWithParameter;
-import com.bluexml.side.clazz.ClassModelElement;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Enumeration;
-import com.bluexml.side.clazz.MetaInfo;
-import com.bluexml.side.clazz.MetaInfoGroup;
 import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.MetaInfoGroup;
+import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.Stereotype;
 
 public class MetaInfoHelper {
@@ -50,11 +50,11 @@ public class MetaInfoHelper {
 	public static void drawConstraintGroup(Composite composite,
 			MetaInfoGroup group, Map drawConstraint, EObject object) {
 		if (group != null) {
-			if (group.getContraints().size() > 0) {
+			if (group.getChildren().size() > 0) {
 				Group constraintGroup = createConstraintsGroup(composite, group
 						.getName());
 
-				for (Object o : group.getContraints()) {
+				for (Object o : group.getChildren()) {
 					if (o instanceof MetaInfo) {
 						MetaInfo c = (MetaInfo) o;
 						drawConstraint(constraintGroup, c, drawConstraint,
@@ -251,7 +251,7 @@ public class MetaInfoHelper {
 		return dataConstraints;
 	}
 
-	public static void loadData(ClassModelElement elt, Map drawConstraints) {
+	public static void loadData(ModelElement elt, Map drawConstraints) {
 		for (Object o : elt.getMetainfo()) {
 			MetaInfo c = (MetaInfo) o;
 			for (Object k : drawConstraints.keySet()) {

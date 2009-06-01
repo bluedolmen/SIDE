@@ -6,6 +6,9 @@
  */
 package com.bluexml.side.clazz;
 
+import com.bluexml.side.common.DataType;
+import com.bluexml.side.common.Visibility;
+
 
 
 /**
@@ -32,7 +35,7 @@ public interface Attribute extends TitledNamedClassModelElement {
 	/**
 	 * Returns the value of the '<em><b>Typ</b></em>' attribute.
 	 * The default value is <code>"void"</code>.
-	 * The literals are from the enumeration {@link com.bluexml.side.clazz.AttributeType}.
+	 * The literals are from the enumeration {@link com.bluexml.side.common.DataType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Typ</em>' attribute isn't clear,
@@ -40,24 +43,24 @@ public interface Attribute extends TitledNamedClassModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Typ</em>' attribute.
-	 * @see com.bluexml.side.clazz.AttributeType
-	 * @see #setTyp(AttributeType)
+	 * @see com.bluexml.side.common.DataType
+	 * @see #setTyp(DataType)
 	 * @see com.bluexml.side.clazz.ClazzPackage#getAttribute_Typ()
 	 * @model default="void"
 	 * @generated
 	 */
-	AttributeType getTyp();
+	DataType getTyp();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.clazz.Attribute#getTyp <em>Typ</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Typ</em>' attribute.
-	 * @see com.bluexml.side.clazz.AttributeType
+	 * @see com.bluexml.side.common.DataType
 	 * @see #getTyp()
 	 * @generated
 	 */
-	void setTyp(AttributeType value);
+	void setTyp(DataType value);
 
 	/**
 	 * Returns the value of the '<em><b>Initial Value</b></em>' attribute.
@@ -88,7 +91,7 @@ public interface Attribute extends TitledNamedClassModelElement {
 	/**
 	 * Returns the value of the '<em><b>Visibility</b></em>' attribute.
 	 * The default value is <code>"Private"</code>.
-	 * The literals are from the enumeration {@link com.bluexml.side.clazz.Visibility}.
+	 * The literals are from the enumeration {@link com.bluexml.side.common.Visibility}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Visibility</em>' attribute isn't clear,
@@ -96,7 +99,7 @@ public interface Attribute extends TitledNamedClassModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Visibility</em>' attribute.
-	 * @see com.bluexml.side.clazz.Visibility
+	 * @see com.bluexml.side.common.Visibility
 	 * @see #setVisibility(Visibility)
 	 * @see com.bluexml.side.clazz.ClazzPackage#getAttribute_Visibility()
 	 * @model default="Private"
@@ -109,7 +112,7 @@ public interface Attribute extends TitledNamedClassModelElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Visibility</em>' attribute.
-	 * @see com.bluexml.side.clazz.Visibility
+	 * @see com.bluexml.side.common.Visibility
 	 * @see #getVisibility()
 	 * @generated
 	 */

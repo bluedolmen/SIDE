@@ -14,10 +14,10 @@ import org.eclipse.ocl.ecore.OCL;
 
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.clazz.Attribute;
-import com.bluexml.side.clazz.AttributeType;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Enumeration;
-import com.bluexml.side.clazz.Visibility;
+import com.bluexml.side.common.DataType;
+import com.bluexml.side.common.Visibility;
 
 /**
  * <!-- begin-user-doc -->
@@ -45,7 +45,7 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 	 * @generated
 	 * @ordered
 	 */
-	protected static final AttributeType TYP_EDEFAULT = AttributeType.VOID;
+	protected static final DataType TYP_EDEFAULT = DataType.VOID;
 
 	/**
 	 * The cached value of the '{@link #getTyp() <em>Typ</em>}' attribute.
@@ -55,7 +55,7 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 	 * @generated
 	 * @ordered
 	 */
-	protected AttributeType typ = TYP_EDEFAULT;
+	protected DataType typ = TYP_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getInitialValue() <em>Initial Value</em>}' attribute.
@@ -151,7 +151,7 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AttributeType getTyp() {
+	public DataType getTyp() {
 		return typ;
 	}
 
@@ -160,8 +160,8 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTyp(AttributeType newTyp) {
-		AttributeType oldTyp = typ;
+	public void setTyp(DataType newTyp) {
+		DataType oldTyp = typ;
 		typ = newTyp == null ? TYP_EDEFAULT : newTyp;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.ATTRIBUTE__TYP, oldTyp, typ));
@@ -300,7 +300,7 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ClazzPackage.ATTRIBUTE__TYP:
-				setTyp((AttributeType)newValue);
+				setTyp((DataType)newValue);
 				return;
 			case ClazzPackage.ATTRIBUTE__INITIAL_VALUE:
 				setInitialValue((String)newValue);

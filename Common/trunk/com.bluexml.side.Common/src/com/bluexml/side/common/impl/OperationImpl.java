@@ -4,14 +4,16 @@
  *
  * $Id$
  */
-package com.bluexml.side.clazz.impl;
+package com.bluexml.side.common.impl;
 
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
-import com.bluexml.side.clazz.AttributeType;
-import com.bluexml.side.clazz.ClazzPackage;
-import com.bluexml.side.clazz.Operation;
-import com.bluexml.side.clazz.Parameter;
-import com.bluexml.side.clazz.Visibility;
+
+import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.DataType;
+import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.Operation;
+import com.bluexml.side.common.Parameter;
+import com.bluexml.side.common.Visibility;
 
 import java.util.Collection;
 
@@ -30,10 +32,13 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.eclipse.ocl.EvaluationEnvironment;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
+
 import org.eclipse.ocl.ecore.OCL;
+
 import org.eclipse.ocl.expressions.OCLExpression;
 
 /**
@@ -43,17 +48,17 @@ import org.eclipse.ocl.expressions.OCLExpression;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.clazz.impl.OperationImpl#getReturnType <em>Return Type</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.impl.OperationImpl#getParameters <em>Parameters</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.impl.OperationImpl#getVisibility <em>Visibility</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.impl.OperationImpl#isStatic <em>Static</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.impl.OperationImpl#getBody <em>Body</em>}</li>
+ *   <li>{@link com.bluexml.side.common.impl.OperationImpl#getReturnType <em>Return Type</em>}</li>
+ *   <li>{@link com.bluexml.side.common.impl.OperationImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link com.bluexml.side.common.impl.OperationImpl#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link com.bluexml.side.common.impl.OperationImpl#isStatic <em>Static</em>}</li>
+ *   <li>{@link com.bluexml.side.common.impl.OperationImpl#getBody <em>Body</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class OperationImpl extends NamedClassModelElementImpl implements Operation {
+public class OperationImpl extends OperationComponentImpl implements Operation {
 	/**
 	 * The default value of the '{@link #getReturnType() <em>Return Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -62,7 +67,7 @@ public class OperationImpl extends NamedClassModelElementImpl implements Operati
 	 * @generated
 	 * @ordered
 	 */
-	protected static final AttributeType RETURN_TYPE_EDEFAULT = AttributeType.BOOLEAN;
+	protected static final DataType RETURN_TYPE_EDEFAULT = DataType.BOOLEAN;
 
 	/**
 	 * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' attribute.
@@ -72,7 +77,7 @@ public class OperationImpl extends NamedClassModelElementImpl implements Operati
 	 * @generated
 	 * @ordered
 	 */
-	protected AttributeType returnType = RETURN_TYPE_EDEFAULT;
+	protected DataType returnType = RETURN_TYPE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
@@ -160,7 +165,7 @@ public class OperationImpl extends NamedClassModelElementImpl implements Operati
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ClazzPackage.Literals.OPERATION;
+		return CommonPackage.Literals.OPERATION;
 	}
 
 	/**
@@ -168,7 +173,7 @@ public class OperationImpl extends NamedClassModelElementImpl implements Operati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AttributeType getReturnType() {
+	public DataType getReturnType() {
 		return returnType;
 	}
 
@@ -177,11 +182,11 @@ public class OperationImpl extends NamedClassModelElementImpl implements Operati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setReturnType(AttributeType newReturnType) {
-		AttributeType oldReturnType = returnType;
+	public void setReturnType(DataType newReturnType) {
+		DataType oldReturnType = returnType;
 		returnType = newReturnType == null ? RETURN_TYPE_EDEFAULT : newReturnType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.OPERATION__RETURN_TYPE, oldReturnType, returnType));
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonPackage.OPERATION__RETURN_TYPE, oldReturnType, returnType));
 	}
 
 	/**
@@ -191,7 +196,7 @@ public class OperationImpl extends NamedClassModelElementImpl implements Operati
 	 */
 	public EList<Parameter> getParameters() {
 		if (parameters == null) {
-			parameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, ClazzPackage.OPERATION__PARAMETERS);
+			parameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, CommonPackage.OPERATION__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -214,7 +219,7 @@ public class OperationImpl extends NamedClassModelElementImpl implements Operati
 		Visibility oldVisibility = visibility;
 		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.OPERATION__VISIBILITY, oldVisibility, visibility));
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonPackage.OPERATION__VISIBILITY, oldVisibility, visibility));
 	}
 
 	/**
@@ -235,7 +240,7 @@ public class OperationImpl extends NamedClassModelElementImpl implements Operati
 		boolean oldStatic = static_;
 		static_ = newStatic;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.OPERATION__STATIC, oldStatic, static_));
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonPackage.OPERATION__STATIC, oldStatic, static_));
 	}
 
 	/**
@@ -256,7 +261,7 @@ public class OperationImpl extends NamedClassModelElementImpl implements Operati
 		String oldBody = body;
 		body = newBody;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.OPERATION__BODY, oldBody, body));
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonPackage.OPERATION__BODY, oldBody, body));
 	}
 
 	/**
@@ -266,9 +271,9 @@ public class OperationImpl extends NamedClassModelElementImpl implements Operati
 	 */
 	public boolean equalsForMerge(Operation other) {
 		if (equalsForMergeBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.OPERATION.getEOperations().get(0);
+			EOperation eOperation = CommonPackage.Literals.OPERATION.getEOperations().get(0);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.OPERATION, eOperation);
+			helper.setOperationContext(CommonPackage.Literals.OPERATION, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String body = ocl.getDetails().get("body");
 			
@@ -297,6 +302,44 @@ public class OperationImpl extends NamedClassModelElementImpl implements Operati
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> equalsForMergeBodyOCL;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Parameter getParameter(String pname) {
+		if (getParameterBodyOCL == null) {
+			EOperation eOperation = CommonPackage.Literals.OPERATION.getEOperations().get(1);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(CommonPackage.Literals.OPERATION, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getParameterBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getParameterBodyOCL);
+	 
+		EvaluationEnvironment<?, ?, ?, ?, ?> evalEnv = query.getEvaluationEnvironment();
+		
+		evalEnv.add("pname", pname);
+	  
+		return (Parameter) query.evaluate(this);
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getParameter <em>Get Parameter</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameter
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getParameterBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -306,7 +349,7 @@ public class OperationImpl extends NamedClassModelElementImpl implements Operati
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClazzPackage.OPERATION__PARAMETERS:
+			case CommonPackage.OPERATION__PARAMETERS:
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -320,15 +363,15 @@ public class OperationImpl extends NamedClassModelElementImpl implements Operati
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClazzPackage.OPERATION__RETURN_TYPE:
+			case CommonPackage.OPERATION__RETURN_TYPE:
 				return getReturnType();
-			case ClazzPackage.OPERATION__PARAMETERS:
+			case CommonPackage.OPERATION__PARAMETERS:
 				return getParameters();
-			case ClazzPackage.OPERATION__VISIBILITY:
+			case CommonPackage.OPERATION__VISIBILITY:
 				return getVisibility();
-			case ClazzPackage.OPERATION__STATIC:
+			case CommonPackage.OPERATION__STATIC:
 				return isStatic() ? Boolean.TRUE : Boolean.FALSE;
-			case ClazzPackage.OPERATION__BODY:
+			case CommonPackage.OPERATION__BODY:
 				return getBody();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -343,20 +386,20 @@ public class OperationImpl extends NamedClassModelElementImpl implements Operati
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClazzPackage.OPERATION__RETURN_TYPE:
-				setReturnType((AttributeType)newValue);
+			case CommonPackage.OPERATION__RETURN_TYPE:
+				setReturnType((DataType)newValue);
 				return;
-			case ClazzPackage.OPERATION__PARAMETERS:
+			case CommonPackage.OPERATION__PARAMETERS:
 				getParameters().clear();
 				getParameters().addAll((Collection<? extends Parameter>)newValue);
 				return;
-			case ClazzPackage.OPERATION__VISIBILITY:
+			case CommonPackage.OPERATION__VISIBILITY:
 				setVisibility((Visibility)newValue);
 				return;
-			case ClazzPackage.OPERATION__STATIC:
+			case CommonPackage.OPERATION__STATIC:
 				setStatic(((Boolean)newValue).booleanValue());
 				return;
-			case ClazzPackage.OPERATION__BODY:
+			case CommonPackage.OPERATION__BODY:
 				setBody((String)newValue);
 				return;
 		}
@@ -371,19 +414,19 @@ public class OperationImpl extends NamedClassModelElementImpl implements Operati
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClazzPackage.OPERATION__RETURN_TYPE:
+			case CommonPackage.OPERATION__RETURN_TYPE:
 				setReturnType(RETURN_TYPE_EDEFAULT);
 				return;
-			case ClazzPackage.OPERATION__PARAMETERS:
+			case CommonPackage.OPERATION__PARAMETERS:
 				getParameters().clear();
 				return;
-			case ClazzPackage.OPERATION__VISIBILITY:
+			case CommonPackage.OPERATION__VISIBILITY:
 				setVisibility(VISIBILITY_EDEFAULT);
 				return;
-			case ClazzPackage.OPERATION__STATIC:
+			case CommonPackage.OPERATION__STATIC:
 				setStatic(STATIC_EDEFAULT);
 				return;
-			case ClazzPackage.OPERATION__BODY:
+			case CommonPackage.OPERATION__BODY:
 				setBody(BODY_EDEFAULT);
 				return;
 		}
@@ -398,15 +441,15 @@ public class OperationImpl extends NamedClassModelElementImpl implements Operati
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClazzPackage.OPERATION__RETURN_TYPE:
+			case CommonPackage.OPERATION__RETURN_TYPE:
 				return returnType != RETURN_TYPE_EDEFAULT;
-			case ClazzPackage.OPERATION__PARAMETERS:
+			case CommonPackage.OPERATION__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
-			case ClazzPackage.OPERATION__VISIBILITY:
+			case CommonPackage.OPERATION__VISIBILITY:
 				return visibility != VISIBILITY_EDEFAULT;
-			case ClazzPackage.OPERATION__STATIC:
+			case CommonPackage.OPERATION__STATIC:
 				return static_ != STATIC_EDEFAULT;
-			case ClazzPackage.OPERATION__BODY:
+			case CommonPackage.OPERATION__BODY:
 				return BODY_EDEFAULT == null ? body != null : !BODY_EDEFAULT.equals(body);
 		}
 		return super.eIsSet(featureID);
@@ -433,76 +476,7 @@ public class OperationImpl extends NamedClassModelElementImpl implements Operati
 		result.append(')');
 		return result.toString();
 	}
-	
-	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
 
-	private static final OCL OCL_ENV = KerblueOCL.newInstance();
-
-	/**
-	 * Get the defintion in a String
-	 * 
-	 * @return the definition
-	 * @_generated
-	 */
-	public String getDefinition() {
-		String result = new String(getName());
-		result += "(";
-		
-		for (int i = 0; i < getParameters().size() ; ++i) {
-			Parameter p = (Parameter) getParameters().get(i);
-			result += p.getValueType().toString();
-			
-			if (i < getParameters().size()-1)
-				result += ";";
-		}
-		
-		result += "):" + getReturnType().toString();
-		return result;
-	}
-	
-	/**
-	 * Returns the value of a '<em><b>Parameter</b></em>' with a name
-	 * equals to the parameter.
-	 * 
-	 * @param the
-	 *            name of the parameter
-	 * @return the value of the '<em>Parameter</em>'.
-	 * @_generated
-	 */
-	public Parameter getParameter(String displayName) {
-		Parameter result = null;
-		for (Object o : getParameters()) {
-			if (o instanceof Parameter) {
-				Parameter p = (Parameter) o;
-				if (p.getName().equals(displayName))
-					result = p;
-			}
-		}
-		return result;
-	}
-	
-	/**
-	 * Sets the value of the '{@link org.topcased.MMUseCase.Operation#getReturnType <em>Return Type</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Return Type</em>' attribute.
-	 * @see org.topcased.MMUseCase.AttributeType
-	 * @see #getReturnType()
-	 * @_generated
-	 */
-	public void setReturnType(String returnType) {
-		setReturnType(AttributeType.getByName(returnType));
-	}
-	
-	/**
-	 * Normalize the name of the paramerer
-	 * 
-	 * @_generated
-	 */
-	public void normalizeName() {
-		name = name.substring(0, 1).toLowerCase() + name.substring(1);
-		name.replaceAll(" ", "");
-	}
-
+		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+		private static final OCL OCL_ENV = KerblueOCL.newInstance();		
 } //OperationImpl

@@ -14,10 +14,8 @@
  ******************************************************************************/
 package com.bluexml.side.Class.modeler.diagram.commands;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -33,7 +31,6 @@ import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.ClassComment;
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.clazz.View;
 import com.bluexml.side.common.Stereotype;
 
 /**

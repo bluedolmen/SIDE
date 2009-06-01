@@ -83,14 +83,6 @@ public class ClazzValidator extends EObjectValidator {
 	protected CommonValidator commonValidator;
 
 	/**
-	 * The parsed OCL expression for the definition of the '<em>PackageNameNull</em>' invariant constraint.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private static Constraint classPackage_PackageNameNullInvOCL;
-
-	/**
 	 * The parsed OCL expression for the definition of the '<em>ClassWithTwoAttributesSameName</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -179,6 +171,30 @@ public class ClazzValidator extends EObjectValidator {
 	 */
 	private static Constraint aspect_AspectWithTwoAttributesSameNameInvOCL;
 
+	/**
+	 * The parsed OCL expression for the definition of the '<em>TwoModelElementWithSameName</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint abstractClass_TwoModelElementWithSameNameInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>NameNull</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint abstractClass_NameNullInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>noSpecialCharacters</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint abstractClass_noSpecialCharactersInvOCL;
+
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
 	
 	private static final OCL OCL_ENV = KerblueOCL.newInstance();
@@ -215,8 +231,6 @@ public class ClazzValidator extends EObjectValidator {
 		switch (classifierID) {
 			case ClazzPackage.CLASS_MODEL_ELEMENT:
 				return validateClassModelElement((ClassModelElement)value, diagnostics, context);
-			case ClazzPackage.NAMED_CLASS_MODEL_ELEMENT:
-				return validateNamedClassModelElement((NamedClassModelElement)value, diagnostics, context);
 			case ClazzPackage.CLASS_PACKAGE:
 				return validateClassPackage((ClassPackage)value, diagnostics, context);
 			case ClazzPackage.CLAZZ:
@@ -229,18 +243,10 @@ public class ClazzValidator extends EObjectValidator {
 				return validateEnumeration((Enumeration)value, diagnostics, context);
 			case ClazzPackage.ENUMERATION_LITERAL:
 				return validateEnumerationLiteral((EnumerationLiteral)value, diagnostics, context);
-			case ClazzPackage.OPERATION:
-				return validateOperation((Operation)value, diagnostics, context);
-			case ClazzPackage.PARAMETER:
-				return validateParameter((Parameter)value, diagnostics, context);
 			case ClazzPackage.ASPECT:
 				return validateAspect((Aspect)value, diagnostics, context);
 			case ClazzPackage.ABSTRACT_CLASS:
 				return validateAbstractClass((AbstractClass)value, diagnostics, context);
-			case ClazzPackage.META_INFO:
-				return validateMetaInfo((MetaInfo)value, diagnostics, context);
-			case ClazzPackage.META_INFO_GROUP:
-				return validateMetaInfoGroup((MetaInfoGroup)value, diagnostics, context);
 			case ClazzPackage.TITLED_NAMED_CLASS_MODEL_ELEMENT:
 				return validateTitledNamedClassModelElement((TitledNamedClassModelElement)value, diagnostics, context);
 			case ClazzPackage.CLASS_COMMENT:
@@ -253,10 +259,6 @@ public class ClazzValidator extends EObjectValidator {
 				return validateSecondEnd((SecondEnd)value, diagnostics, context);
 			case ClazzPackage.ASSOCIATION_TYPE:
 				return validateAssociationType((AssociationType)value, diagnostics, context);
-			case ClazzPackage.ATTRIBUTE_TYPE:
-				return validateAttributeType((AttributeType)value, diagnostics, context);
-			case ClazzPackage.VISIBILITY:
-				return validateVisibility((Visibility)value, diagnostics, context);
 			default: 
 				return true;
 		}
@@ -276,15 +278,6 @@ public class ClazzValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateNamedClassModelElement(NamedClassModelElement namedClassModelElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(namedClassModelElement, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean validateClassPackage(ClassPackage classPackage, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = validate_EveryMultiplicityConforms(classPackage, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(classPackage, diagnostics, context);
@@ -293,35 +286,8 @@ public class ClazzValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(classPackage, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(classPackage, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(classPackage, diagnostics, context);
-		if (result || diagnostics != null) result &= validateClassPackage_PackageNameNull(classPackage, diagnostics, context);
+		if (result || diagnostics != null) result &= commonValidator.validatePackage_PackageNameNull(classPackage, diagnostics, context);
 		return result;
-	}
-
-	/**
-	 * Validates the PackageNameNull constraint of '<em>Class Package</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateClassPackage_PackageNameNull(ClassPackage classPackage, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO override the constraint, if desired
-		// -> uncomment the scaffolding
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(new BasicDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "PackageNameNull", getObjectLabel(classPackage, context) }),
-						 new Object[] { classPackage }));
-			}
-			return false;
-		}
-		return commonValidator.validatePackage_PackageNameNull(classPackage, diagnostics, context);
 	}
 
 	/**
@@ -337,6 +303,9 @@ public class ClazzValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(clazz, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(clazz, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(clazz, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractClass_TwoModelElementWithSameName(clazz, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractClass_NameNull(clazz, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractClass_noSpecialCharacters(clazz, diagnostics, context);
 		if (result || diagnostics != null) result &= validateClazz_ClassWithTwoAttributesSameName(clazz, diagnostics, context);
 		if (result || diagnostics != null) result &= validateClazz_InheritanceCycle(clazz, diagnostics, context);
 		return result;
@@ -828,24 +797,6 @@ public class ClazzValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateOperation(Operation operation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(operation, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateParameter(Parameter parameter, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(parameter, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean validateAspect(Aspect aspect, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = validate_EveryMultiplicityConforms(aspect, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(aspect, diagnostics, context);
@@ -854,6 +805,9 @@ public class ClazzValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(aspect, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(aspect, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(aspect, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractClass_TwoModelElementWithSameName(aspect, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractClass_NameNull(aspect, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractClass_noSpecialCharacters(aspect, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAspect_AspectWithTwoAttributesSameName(aspect, diagnostics, context);
 		return result;
 	}
@@ -903,25 +857,134 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAbstractClass(AbstractClass abstractClass, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(abstractClass, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(abstractClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(abstractClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(abstractClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(abstractClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(abstractClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(abstractClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(abstractClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractClass_TwoModelElementWithSameName(abstractClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractClass_NameNull(abstractClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractClass_noSpecialCharacters(abstractClass, diagnostics, context);
+		return result;
 	}
 
 	/**
+	 * Validates the TwoModelElementWithSameName constraint of '<em>Abstract Class</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateMetaInfo(MetaInfo metaInfo, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(metaInfo, diagnostics, context);
+	public boolean validateAbstractClass_TwoModelElementWithSameName(AbstractClass abstractClass, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (abstractClass_TwoModelElementWithSameNameInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(ClazzPackage.Literals.ABSTRACT_CLASS);
+			
+			EAnnotation ocl = ClazzPackage.Literals.ABSTRACT_CLASS.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("TwoModelElementWithSameName");
+			
+			try {
+				abstractClass_TwoModelElementWithSameNameInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(abstractClass_TwoModelElementWithSameNameInvOCL);
+		
+		if (!query.check(abstractClass)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "TwoModelElementWithSameName", getObjectLabel(abstractClass, context) }),
+						 new Object[] { abstractClass }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
+	 * Validates the NameNull constraint of '<em>Abstract Class</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateMetaInfoGroup(MetaInfoGroup metaInfoGroup, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(metaInfoGroup, diagnostics, context);
+	public boolean validateAbstractClass_NameNull(AbstractClass abstractClass, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (abstractClass_NameNullInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(ClazzPackage.Literals.ABSTRACT_CLASS);
+			
+			EAnnotation ocl = ClazzPackage.Literals.ABSTRACT_CLASS.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("NameNull");
+			
+			try {
+				abstractClass_NameNullInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(abstractClass_NameNullInvOCL);
+		
+		if (!query.check(abstractClass)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "NameNull", getObjectLabel(abstractClass, context) }),
+						 new Object[] { abstractClass }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the noSpecialCharacters constraint of '<em>Abstract Class</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAbstractClass_noSpecialCharacters(AbstractClass abstractClass, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (abstractClass_noSpecialCharactersInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(ClazzPackage.Literals.ABSTRACT_CLASS);
+			
+			EAnnotation ocl = ClazzPackage.Literals.ABSTRACT_CLASS.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("noSpecialCharacters");
+			
+			try {
+				abstractClass_noSpecialCharactersInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(abstractClass_noSpecialCharactersInvOCL);
+		
+		if (!query.check(abstractClass)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noSpecialCharacters", getObjectLabel(abstractClass, context) }),
+						 new Object[] { abstractClass }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -975,24 +1038,6 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAssociationType(AssociationType associationType, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return true;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateAttributeType(AttributeType attributeType, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return true;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateVisibility(Visibility visibility, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

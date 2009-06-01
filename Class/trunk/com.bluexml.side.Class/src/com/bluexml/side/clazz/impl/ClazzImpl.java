@@ -6,31 +6,18 @@
  */
 package com.bluexml.side.clazz.impl;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
-import com.bluexml.side.clazz.Aspect;
-import com.bluexml.side.clazz.Association;
-import com.bluexml.side.clazz.Attribute;
-import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.clazz.ClazzPackage;
-import com.bluexml.side.clazz.Operation;
-
-import com.bluexml.side.clazz.View;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -39,6 +26,14 @@ import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.expressions.OCLExpression;
+
+import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
+import com.bluexml.side.clazz.Aspect;
+import com.bluexml.side.clazz.Association;
+import com.bluexml.side.clazz.Attribute;
+import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.clazz.ClazzPackage;
+import com.bluexml.side.common.OperationComponent;
 
 /**
  * <!-- begin-user-doc -->
@@ -66,7 +61,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Operation> operations;
+	protected EList<OperationComponent> operations;
 
 	/**
 	 * The cached value of the '{@link #getGeneralizations() <em>Generalizations</em>}' reference list.
@@ -152,9 +147,9 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Operation> getOperations() {
+	public EList<OperationComponent> getOperations() {
 		if (operations == null) {
-			operations = new EObjectContainmentEList<Operation>(Operation.class, this, ClazzPackage.CLAZZ__OPERATIONS);
+			operations = new EObjectContainmentEList<OperationComponent>(OperationComponent.class, this, ClazzPackage.CLAZZ__OPERATIONS);
 		}
 		return operations;
 	}
@@ -794,7 +789,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 		switch (featureID) {
 			case ClazzPackage.CLAZZ__OPERATIONS:
 				getOperations().clear();
-				getOperations().addAll((Collection<? extends Operation>)newValue);
+				getOperations().addAll((Collection<? extends OperationComponent>)newValue);
 				return;
 			case ClazzPackage.CLAZZ__GENERALIZATIONS:
 				getGeneralizations().clear();

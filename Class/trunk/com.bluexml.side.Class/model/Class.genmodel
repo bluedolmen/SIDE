@@ -14,37 +14,8 @@
       <genEnumLiterals ecoreEnumLiteral="Class.ecore#//AssociationType/Aggregation"/>
       <genEnumLiterals ecoreEnumLiteral="Class.ecore#//AssociationType/Composition"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Class.ecore#//AttributeType">
-      <genEnumLiterals ecoreEnumLiteral="Class.ecore#//AttributeType/boolean"/>
-      <genEnumLiterals ecoreEnumLiteral="Class.ecore#//AttributeType/byte"/>
-      <genEnumLiterals ecoreEnumLiteral="Class.ecore#//AttributeType/char"/>
-      <genEnumLiterals ecoreEnumLiteral="Class.ecore#//AttributeType/double"/>
-      <genEnumLiterals ecoreEnumLiteral="Class.ecore#//AttributeType/float"/>
-      <genEnumLiterals ecoreEnumLiteral="Class.ecore#//AttributeType/int"/>
-      <genEnumLiterals ecoreEnumLiteral="Class.ecore#//AttributeType/long"/>
-      <genEnumLiterals ecoreEnumLiteral="Class.ecore#//AttributeType/short"/>
-      <genEnumLiterals ecoreEnumLiteral="Class.ecore#//AttributeType/String"/>
-      <genEnumLiterals ecoreEnumLiteral="Class.ecore#//AttributeType/void"/>
-      <genEnumLiterals ecoreEnumLiteral="Class.ecore#//AttributeType/Date"/>
-      <genEnumLiterals ecoreEnumLiteral="Class.ecore#//AttributeType/Object"/>
-      <genEnumLiterals ecoreEnumLiteral="Class.ecore#//AttributeType/DateTime"/>
-      <genEnumLiterals ecoreEnumLiteral="Class.ecore#//AttributeType/Time"/>
-    </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Class.ecore#//Visibility">
-      <genEnumLiterals ecoreEnumLiteral="Class.ecore#//Visibility/Public"/>
-      <genEnumLiterals ecoreEnumLiteral="Class.ecore#//Visibility/Private"/>
-      <genEnumLiterals ecoreEnumLiteral="Class.ecore#//Visibility/Protected"/>
-    </genEnums>
     <genClasses ecoreClass="Class.ecore#//ClassModelElement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//ClassModelElement/metainfo"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//ClassModelElement/documentation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//ClassModelElement/hasComments"/>
-    </genClasses>
-    <genClasses ecoreClass="Class.ecore#//NamedClassModelElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//NamedClassModelElement/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//NamedClassModelElement/description"/>
-      <genOperations ecoreOperation="Class.ecore#//NamedClassModelElement/getFullName"/>
-      <genOperations ecoreOperation="Class.ecore#//NamedClassModelElement/getDescriptionOrName"/>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//ClassPackage">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//ClassPackage/classSet"/>
@@ -108,19 +79,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//EnumerationLiteral/name"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Class.ecore#//EnumerationLiteral/enum"/>
     </genClasses>
-    <genClasses ecoreClass="Class.ecore#//Operation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Operation/returnType"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//Operation/parameters"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Operation/visibility"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Operation/static"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Operation/body"/>
-      <genOperations ecoreOperation="Class.ecore#//Operation/equalsForMerge">
-        <genParameters ecoreParameter="Class.ecore#//Operation/equalsForMerge/other"/>
-      </genOperations>
-    </genClasses>
-    <genClasses ecoreClass="Class.ecore#//Parameter">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Parameter/valueType"/>
-    </genClasses>
     <genClasses ecoreClass="Class.ecore#//Aspect">
       <genOperations ecoreOperation="Class.ecore#//Aspect/equalsForMerge">
         <genParameters ecoreParameter="Class.ecore#//Aspect/equalsForMerge/other"/>
@@ -131,20 +89,6 @@
       <genOperations ecoreOperation="Class.ecore#//AbstractClass/equalsForMerge">
         <genParameters ecoreParameter="Class.ecore#//AbstractClass/equalsForMerge/other"/>
       </genOperations>
-    </genClasses>
-    <genClasses ecoreClass="Class.ecore#//MetaInfo">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//MetaInfo/key"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//MetaInfo/value"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//MetaInfo/valueType"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//MetaInfo/constraintType"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//MetaInfo/valueSet"/>
-      <genOperations ecoreOperation="Class.ecore#//MetaInfo/equalsForMerge">
-        <genParameters ecoreParameter="Class.ecore#//MetaInfo/equalsForMerge/other"/>
-      </genOperations>
-    </genClasses>
-    <genClasses ecoreClass="Class.ecore#//MetaInfoGroup">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//MetaInfoGroup/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Class.ecore#//MetaInfoGroup/contraints"/>
     </genClasses>
     <genClasses image="false" ecoreClass="Class.ecore#//TitledNamedClassModelElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//TitledNamedClassModelElement/title"/>

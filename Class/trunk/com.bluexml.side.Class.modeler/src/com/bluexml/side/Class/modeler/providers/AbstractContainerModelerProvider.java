@@ -7,7 +7,7 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EAttribute;
 import org.topcased.modeler.providers.ILabelFeatureProvider;
 
-import com.bluexml.side.clazz.ClazzPackage;
+import com.bluexml.side.common.CommonPackage;
 
 /**
  * This is the item provider adpater for a {@link com.bluexml.side.clazz.AbstractContainer} object.
@@ -31,6 +31,6 @@ public class AbstractContainerModelerProvider extends
 	 * @generated
 	 */
 	public EAttribute getLabelFeature(Object object) {
-		return ClazzPackage.eINSTANCE.getNamedClassModelElement_Name();
+		return CommonPackage.eINSTANCE.getNamedModelElement_Name();
 	}
 }

@@ -8,10 +8,10 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.topcased.modeler.providers.ILabelFeatureProvider;
 
-import com.bluexml.side.clazz.ClazzPackage;
+import com.bluexml.side.common.CommonPackage;
 
 /**
- * This is the item provider adpater for a {@link com.bluexml.side.clazz.MetaInfo} object.
+ * This is the item provider adpater for a {@link com.bluexml.side.common.MetaInfo} object.
  *
  * @generated
  */
@@ -32,6 +32,6 @@ public class MetaInfoModelerProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	public EAttribute getLabelFeature(Object object) {
-		return ClazzPackage.eINSTANCE.getMetaInfo_Key();
+		return CommonPackage.eINSTANCE.getMetaInfo_Key();
 	}
 }

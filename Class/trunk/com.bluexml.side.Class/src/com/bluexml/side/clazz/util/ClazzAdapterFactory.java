@@ -80,10 +80,6 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 				return createClassModelElementAdapter();
 			}
 			@Override
-			public Adapter caseNamedClassModelElement(NamedClassModelElement object) {
-				return createNamedClassModelElementAdapter();
-			}
-			@Override
 			public Adapter caseClassPackage(ClassPackage object) {
 				return createClassPackageAdapter();
 			}
@@ -108,28 +104,12 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 				return createEnumerationLiteralAdapter();
 			}
 			@Override
-			public Adapter caseOperation(Operation object) {
-				return createOperationAdapter();
-			}
-			@Override
-			public Adapter caseParameter(Parameter object) {
-				return createParameterAdapter();
-			}
-			@Override
 			public Adapter caseAspect(Aspect object) {
 				return createAspectAdapter();
 			}
 			@Override
 			public Adapter caseAbstractClass(AbstractClass object) {
 				return createAbstractClassAdapter();
-			}
-			@Override
-			public Adapter caseMetaInfo(MetaInfo object) {
-				return createMetaInfoAdapter();
-			}
-			@Override
-			public Adapter caseMetaInfoGroup(MetaInfoGroup object) {
-				return createMetaInfoGroupAdapter();
 			}
 			@Override
 			public Adapter caseTitledNamedClassModelElement(TitledNamedClassModelElement object) {
@@ -198,20 +178,6 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createClassModelElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.clazz.NamedClassModelElement <em>Named Class Model Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.clazz.NamedClassModelElement
-	 * @generated
-	 */
-	public Adapter createNamedClassModelElementAdapter() {
 		return null;
 	}
 
@@ -300,34 +266,6 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.clazz.Operation <em>Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.clazz.Operation
-	 * @generated
-	 */
-	public Adapter createOperationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.clazz.Parameter <em>Parameter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.clazz.Parameter
-	 * @generated
-	 */
-	public Adapter createParameterAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link com.bluexml.side.clazz.Aspect <em>Aspect</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -352,34 +290,6 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAbstractClassAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.clazz.MetaInfo <em>Meta Info</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.clazz.MetaInfo
-	 * @generated
-	 */
-	public Adapter createMetaInfoAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.clazz.MetaInfoGroup <em>Meta Info Group</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.clazz.MetaInfoGroup
-	 * @generated
-	 */
-	public Adapter createMetaInfoGroupAdapter() {
 		return null;
 	}
 

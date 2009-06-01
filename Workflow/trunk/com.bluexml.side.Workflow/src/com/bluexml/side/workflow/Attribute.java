@@ -6,9 +6,7 @@
  */
 package com.bluexml.side.workflow;
 
-import org.eclipse.emf.ecore.EObject;
-
-import com.bluexml.side.clazz.AttributeType;
+import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.ModelElement;
 
 /**
@@ -34,7 +32,7 @@ public interface Attribute extends ModelElement {
 	/**
 	 * Returns the value of the '<em><b>Typ</b></em>' attribute.
 	 * The default value is <code>"void"</code>.
-	 * The literals are from the enumeration {@link com.bluexml.side.clazz.AttributeType}.
+	 * The literals are from the enumeration {@link com.bluexml.side.common.DataType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Typ</em>' attribute isn't clear,
@@ -42,24 +40,24 @@ public interface Attribute extends ModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Typ</em>' attribute.
-	 * @see com.bluexml.side.clazz.AttributeType
-	 * @see #setTyp(AttributeType)
+	 * @see com.bluexml.side.common.DataType
+	 * @see #setTyp(DataType)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getAttribute_Typ()
 	 * @model default="void"
 	 * @generated
 	 */
-	AttributeType getTyp();
+	DataType getTyp();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.workflow.Attribute#getTyp <em>Typ</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Typ</em>' attribute.
-	 * @see com.bluexml.side.clazz.AttributeType
+	 * @see com.bluexml.side.common.DataType
 	 * @see #getTyp()
 	 * @generated
 	 */
-	void setTyp(AttributeType value);
+	void setTyp(DataType value);
 
 	/**
 	 * Returns the value of the '<em><b>Title</b></em>' attribute.
