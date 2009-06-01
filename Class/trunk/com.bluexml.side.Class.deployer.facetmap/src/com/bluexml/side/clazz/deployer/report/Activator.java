@@ -1,4 +1,4 @@
-package com.bluexml.side.clazz.deployer.facetmap;
+package com.bluexml.side.clazz.deployer.report;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
