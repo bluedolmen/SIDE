@@ -38,5 +38,15 @@ public class ParameterServices {
 	public String getSimpleDate(EObject e) {
 		return new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 	}
+	
+	/**
+	 * Return the current Date
+	 * 
+	 * @param e
+	 * @return the current Date
+	 */
+	public String getDatePath(EObject e) {
+		return new SimpleDateFormat("ddMMyyyyHHmm").format(new Date());
+	}
 
 }

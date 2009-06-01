@@ -94,6 +94,11 @@
                         key="alfresco.share.extention"
                         label="Alfreco Share Extension">
                   </option>
+                  <option
+                        documentation="Check this option to include the production of the Alfresco&apos;s report webscripts in the generation.&lt;br&gt;If not checked, the webscripts report are not included in the generated AMPs.&lt;br&gt;S-IDE allows to configure the Alfresco&apos;s report webscripts with the newly designed content types of the class model."
+                        key="alfresco.webscript.report"
+                        label="Alfresco Report Webscripts">
+                  </option>
                </generatorVersion>
             </technologyVersion>
          </technology>

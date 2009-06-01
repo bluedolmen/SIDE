@@ -15,12 +15,14 @@ import com.bluexml.side.settings.SidePreferences;
 
 public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
+
 	/*
 	 * final fields used in generation too
 	 */
 
 	public static String GENERATOR_OPTIONS_DATAMODEL = "alfresco.dataModel";
 	public static String GENERATOR_OPTIONS_SHARE_EXTENSION = "alfresco.share.extension";
+	public static String GENERATOR_OPTIONS_WEBSCRIPT_REPORT = "alfresco.webscript.report";
 	public static String GENERATOR_CODE = "CODE_GED_G_C_ALFRESCO_3";
 
 	XMLConflictResolver xmlresolver = null;
@@ -61,6 +63,42 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/Webscripts/bluexml-upload-response-json-post.mt");
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/Webscripts/bluexml-upload-response-status-get.mt");
 			}
+			
+			if (getGeneratorOptionValue(GENERATOR_OPTIONS_WEBSCRIPT_REPORT)) {
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/alfrescoGenerator_template_def_get.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/alfrescoGenerator_template_def_post.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/alfrescoGenerator_template_js_get.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/alfrescoGenerator_template_js_post.mt");
+					
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/html/alfrescoGenerator_template_html.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/html/alfrescoGenerator_template_result_post.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/html/alfrescoGenerator_template_result_get.mt");
+					
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/json/alfrescoGenerator_template_json.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/json/alfrescoGenerator_template_result_post.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/json/alfrescoGenerator_template_result_get.mt");
+					
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/rss/alfrescoGenerator_template_rss.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/rss/alfrescoGenerator_template_result_post.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/rss/alfrescoGenerator_template_result_get.mt");
+					
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/xml/alfrescoGenerator_template_xml.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/xml/alfrescoGenerator_template_result_post.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/xml/alfrescoGenerator_template_result_get.mt");
+				
+				
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/alfrescoGenerator_template_def_get.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/alfrescoGenerator_template_def_post.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/alfrescoGenerator_template_js_get.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/alfrescoGenerator_template_js_post.mt");
+					
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/xml/alfrescoGenerator_template_xml.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/xml/alfrescoGenerator_template_result_post.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/xml/alfrescoGenerator_template_result_get.mt");
+				
+			}
+			
+			
 			classTemplates = result;
 		}
 		return classTemplates;

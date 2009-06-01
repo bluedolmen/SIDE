@@ -32,6 +32,11 @@
                         key="report.author"
                         label="Author">
                   </configurationParameter>
+                  <configurationParameter
+                        documentation="Set this value to the version of the generated AMPs, default value is &apos;1.0&apos;.&lt;br&gt;At Alfresco start, the version is displayed in the console and may easily be checked to ensure good production deployment."
+                        key="module.version"
+                        label="Module version">
+                  </configurationParameter>
                </generatorVersion>
             </technologyVersion>
          </technology>
