@@ -553,7 +553,7 @@ table0#-TNAME-#table0#:#[/records/items/item]#:#{size;STRING;/size},{createdDate
                         <label id="28">
                             <property name="fontFamily">"Tahoma"</property>
                             <property name="fontWeight">bold</property>
-                            <text-property name="text">Number of classes: </text-property>
+                            <text-property name="text">Number of types: </text-property>
                         </label>
                     </cell>
                     <cell id="29">
