@@ -521,7 +521,7 @@ table0#-TNAME-#table0#:#[/records/items/item]#:#{size;STRING;/size},{createdDate
                         <label id="18">
                             <property name="fontFamily">"Tahoma"</property>
                             <property name="fontWeight">bold</property>
-                            <text-property name="text">Last modification by: </text-property>
+                            <text-property name="text">Report created by: </text-property>
                         </label>
                     </cell>
                     <cell id="19">
@@ -537,7 +537,7 @@ table0#-TNAME-#table0#:#[/records/items/item]#:#{size;STRING;/size},{createdDate
                         <label id="23">
                             <property name="fontFamily">"Tahoma"</property>
                             <property name="fontWeight">bold</property>
-                            <text-property name="text">Report creation date: </text-property>
+                            <text-property name="text">Report created on: </text-property>
                         </label>
                     </cell>
                     <cell id="24">
