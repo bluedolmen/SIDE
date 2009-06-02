@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SIDELog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="file:/C:/Projects/Alfresco/com.bluexml.side.Application.documentation/schema/generationDocumentation.xsd" date="2006-05-04T18:13:51.0Z">
+    <description>description0</description>
+    <logEntry>
+        <date>2006-05-04T18:13:51.0Z</date>
+        <name>name0</name>
+        <description>description1</description>
+        <url>url0</url>
+    </logEntry>
+</SIDELog>

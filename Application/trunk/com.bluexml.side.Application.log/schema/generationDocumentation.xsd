@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="SIDELog">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="description" type="xsd:string" maxOccurs="1"/>
+                <xsd:element name="logEntry" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="date" type="xsd:dateTime"/>
+                            <xsd:element name="title" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="description" type="xsd:string"/>
+                            <xsd:element name="url" type="xsd:anyURI" fixed="" minOccurs="0"/>
+                        </xsd:sequence>
+                        <xsd:attribute name="type" use="required" type="logEntryType"/>
+                    </xsd:complexType>
+                </xsd:element>
+
+            </xsd:sequence>
+            <xsd:attribute name="date" type="xsd:dateTime" use="required"/>
+            <xsd:attribute name="path" type="xsd:string"/>
+            <xsd:attribute name="name" type="xsd:string" use="required"/>
+            <xsd:attribute name="type" type="logType" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:simpleType name="logEntryType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="GenerationInformation"/>
+            <xsd:enumeration value="Error"/>
+            <xsd:enumeration value="Warning"/>
+            <xsd:enumeration value="DeployementInformation"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="logType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Generation"/>
+            <xsd:enumeration value="Deployement"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>
