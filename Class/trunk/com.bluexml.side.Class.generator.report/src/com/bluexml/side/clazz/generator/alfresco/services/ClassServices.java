@@ -24,9 +24,8 @@ import com.bluexml.side.Class.modeler.diagram.utils.metainfo.value.VisualTypeCom
 import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.clazz.MetaInfo;
-import com.bluexml.side.clazz.View;
 import com.bluexml.side.common.Comment;
+import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.Stereotype;
 
 public class ClassServices {
