@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="view"
     nsURI="http://www.kerblue.org/view/1.0" nsPrefix="view">
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractDataTable" abstract="true" eSuperTypes="#//DataTableElement #//AbstractView">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractDataTable" abstract="true" eSuperTypes="#//DataTableElement #//AbstractView #//Paginable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="haveRowActions" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//OperationComponent"
         containment="true">
       <eAnnotations source="http://www.topcased.org/documentation">
@@ -24,13 +24,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Col" eSuperTypes="#//DefaultCol #//ColComponent">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="displays" lowerBound="1"
-        eType="#//FieldElement" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="this is the link with data source, what is displayed ?"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+  <eClassifiers xsi:type="ecore:EClass" name="Col" eSuperTypes="#//DefaultCol #//FieldElement #//Movable #//Editable #//Filterable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//OperationComponent"
         containment="true"/>
   </eClassifiers>
@@ -116,9 +110,9 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="suffix" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stylesheetId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hidden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FacetMap" eSuperTypes="#//AbstractView">
+  <eClassifiers xsi:type="ecore:EClass" name="FacetMap" eSuperTypes="#//AbstractView #//Paginable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="criterias" lowerBound="1"
         eType="#//FieldElement" containment="true"/>
   </eClassifiers>
@@ -126,7 +120,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="col" lowerBound="1" eType="#//Col"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Tree" eSuperTypes="#//AbstractView">
+  <eClassifiers xsi:type="ecore:EClass" name="Tree" eSuperTypes="#//AbstractView #//Sortable #//Editable #//Movable #//Filterable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Display data as Tree, the model Element &quot;dataType&quot; can be an clazz.AssociationEnd, so the tree can be buid following the Association"/>
     </eAnnotations>
@@ -134,11 +128,14 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodeValue" lowerBound="1"
         eType="#//FieldElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultDepth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxDepth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataTable" eSuperTypes="#//AbstractDataTable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="haveCols" lowerBound="1"
-        eType="#//ColComponent" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="defaultColSetUp" eType="#//DefaultCol"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cols" upperBound="-1" eType="#//Col"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Styling" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//MetaInfoGroup ../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -157,12 +154,8 @@
     <eLiterals name="dynamic" value="1" literal="Dynamic"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractView" abstract="true" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement #//Stylable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dataType" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//ModelElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="viewOf" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//ModelElement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//OperationComponent"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="paging" upperBound="-1"
-        eType="#//Paging" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sorting" eType="#//Sorting"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SelectField" eSuperTypes="#//Field">
@@ -177,27 +170,38 @@
     <eLiterals name="autocomplete" value="1"/>
     <eLiterals name="multiline" value="2"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DefaultCol" eSuperTypes="#//DataTableElement #//Stylable">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="editable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DefaultCol" eSuperTypes="#//DataTableElement #//Sortable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="canBeHidden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="movable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filterable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sorting" eType="#//Sorting"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ViewCollection" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
         eType="#//AbstractView" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ColComponent" abstract="true" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement #//DataTableElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="colGroup" eSuperTypes="#//ColComponent">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
-        eType="#//ColComponent" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="HtmlField" eSuperTypes="#//Field"/>
   <eClassifiers xsi:type="ecore:EClass" name="Stylable" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="styling" eType="#//Styling"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Paginable" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="paging" eType="#//Paging"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sortable" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sorting" eType="#//Sorting"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Editable" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="editable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Movable" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="movable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Filterable" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filtering" eType="#//Filtering"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Filtering">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultFilterValue"/>
   </eClassifiers>
 </ecore:EPackage>
