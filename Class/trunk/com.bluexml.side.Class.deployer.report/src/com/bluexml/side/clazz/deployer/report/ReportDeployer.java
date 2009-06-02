@@ -33,11 +33,11 @@ public class ReportDeployer extends Deployer {
 	
 	// Emplacements des fichiers
 	public String getLocationInTomcat() {
-			return getParam(CONFIGURATION_TOMCAT_INSTALLATION) + File.separator + webapps + File.separator + "alfresco" + File.separator + "report" + File.separator + "BirtReport" + File.separator + "S-IDE" + File.separator;		
+			return getParam(CONFIGURATION_TOMCAT_INSTALLATION) + File.separator + webapps + File.separator + "alfresco" + File.separator + "report" + File.separator + "BIRTReport" + File.separator + "S-IDE" + File.separator;		
 	}
 	
 	public String getLocationInGeneration() {
-		return File.separator+ "report" + File.separator + "BIRTReport" + "S-IDE" + File.separator + "Content_type_report.rptdesign";
+		return File.separator+ "report" + File.separator + "BIRTReport" + File.separator + "S-IDE" + File.separator + "Content_type_report.rptdesign";
 	}
 	
 	@Override
@@ -65,8 +65,8 @@ public class ReportDeployer extends Deployer {
 			FileHelper.deleteFile(new File(getLocationInTomcat() + "Content_type_report.rptdesign.bak"));
 		
 		//Renaming
-		if(birtReport.exists())
-			birtReport.renameTo(new File(getLocationInTomcat() + "Content_type_report.rptdesign.bak"));
+		if(new File(getLocationInTomcat() + "Content_type_report.rptdesign").exists())
+			new File(getLocationInTomcat() + "Content_type_report.rptdesign").renameTo(new File(getLocationInTomcat() + "Content_type_report.rptdesign.bak"));
 		
 		// Copying
 		FileHelper.copyFiles(birtReport, new File(path), true);
