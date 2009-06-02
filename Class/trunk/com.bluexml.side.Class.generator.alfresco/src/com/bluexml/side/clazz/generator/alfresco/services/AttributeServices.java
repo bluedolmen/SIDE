@@ -16,7 +16,7 @@
  ******************************************************************************/
 package com.bluexml.side.clazz.generator.alfresco.services;
 import com.bluexml.side.clazz.Attribute;
-import com.bluexml.side.clazz.AttributeType;
+import com.bluexml.side.common.DataType;
 
 import fr.obeo.acceleo.gen.template.eval.ENode;
 import fr.obeo.acceleo.gen.template.eval.ENodeCastException;
@@ -26,33 +26,33 @@ public class AttributeServices {
 	public String getPropertyType(ENode node) throws ENodeCastException {
 		if (node.getEObject() instanceof Attribute) {
 			Attribute object = (Attribute) node.getEObject();
-			if (object.getTyp() == AttributeType.BOOLEAN) {
+			if (object.getTyp() == DataType.BOOLEAN) {
 				return "d:boolean";
-			} else if (object.getTyp() == AttributeType.BYTE) {
+			} else if (object.getTyp() == DataType.BYTE) {
 				return "d:int";
-			} else if (object.getTyp() == AttributeType.CHAR) {
+			} else if (object.getTyp() == DataType.CHAR) {
 				return "d:text";
-			} else if (object.getTyp() == AttributeType.DATE) {
+			} else if (object.getTyp() == DataType.DATE) {
 				return "d:date";
-			} else if (object.getTyp() == AttributeType.DATE_TIME) {
+			} else if (object.getTyp() == DataType.DATE_TIME) {
 				return "d:datetime";
-			} else if (object.getTyp() == AttributeType.DOUBLE) {
+			} else if (object.getTyp() == DataType.DOUBLE) {
 				return "d:double";
-			} else if (object.getTyp() == AttributeType.FLOAT) {
+			} else if (object.getTyp() == DataType.FLOAT) {
 				return "d:float";
-			} else if (object.getTyp() == AttributeType.INT) {
+			} else if (object.getTyp() == DataType.INT) {
 				return "d:int";
-			} else if (object.getTyp() == AttributeType.LONG) {
+			} else if (object.getTyp() == DataType.LONG) {
 				return "d:long";
-			} else if (object.getTyp() == AttributeType.OBJECT) {
+			} else if (object.getTyp() == DataType.OBJECT) {
 				return "d:content";
-			} else if (object.getTyp() == AttributeType.SHORT) {
+			} else if (object.getTyp() == DataType.SHORT) {
 				return "d:int";
-			} else if (object.getTyp() == AttributeType.STRING) {
+			} else if (object.getTyp() == DataType.STRING) {
 				return "d:text";
-			} else if (object.getTyp() == AttributeType.VOID) {
+			} else if (object.getTyp() == DataType.VOID) {
 				return "d:any";
-			} else if (object.getTyp() == AttributeType.TIME) {
+			} else if (object.getTyp() == DataType.TIME) {
 				return "d:datetime";
 			}
 		}

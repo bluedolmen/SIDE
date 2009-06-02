@@ -24,7 +24,7 @@
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="modelTest.clazz#//@classSet.0"/>
         </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+        <contained xsi:type="di:GraphNode">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
             <element href="modelTest.clazz#//@classSet.0/@attributes.0"/>
           </semanticModel>
@@ -53,7 +53,7 @@
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="modelTest.clazz#//@classSet.1"/>
         </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+        <contained xsi:type="di:GraphNode">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
             <element href="modelTest.clazz#//@classSet.1/@attributes.0"/>
           </semanticModel>
@@ -82,7 +82,7 @@
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="modelTest.clazz#//@classSet.2"/>
         </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+        <contained xsi:type="di:GraphNode">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
             <element href="modelTest.clazz#//@classSet.2/@attributes.0"/>
           </semanticModel>
@@ -111,7 +111,7 @@
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="modelTest.clazz#//@classSet.3"/>
         </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+        <contained xsi:type="di:GraphNode">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
             <element href="modelTest.clazz#//@classSet.3/@attributes.0"/>
           </semanticModel>
@@ -130,7 +130,7 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" position="466,377" size="131,90">
+    <contained xsi:type="di:GraphNode" position="288,517" size="131,90">
       <anchorage graphEdge="//@diagrams.0/@contained.12"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="modelTest.clazz#//@classSet.4"/>
@@ -140,7 +140,7 @@
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="modelTest.clazz#//@classSet.4"/>
         </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+        <contained xsi:type="di:GraphNode">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
             <element href="modelTest.clazz#//@classSet.4/@attributes.0"/>
           </semanticModel>
@@ -172,7 +172,7 @@
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="modelTest.clazz#//@aspectSet.0"/>
         </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+        <contained xsi:type="di:GraphNode">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
             <element href="modelTest.clazz#//@aspectSet.0/@attributes.0"/>
           </semanticModel>
@@ -192,7 +192,7 @@
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="modelTest.clazz#//@aspectSet.1"/>
         </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+        <contained xsi:type="di:GraphNode">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
             <element href="modelTest.clazz#//@aspectSet.1/@attributes.0"/>
           </semanticModel>
