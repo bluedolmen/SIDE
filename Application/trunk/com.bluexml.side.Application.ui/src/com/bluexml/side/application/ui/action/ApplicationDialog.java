@@ -123,7 +123,7 @@ public class ApplicationDialog extends Dialog {
 	private static final int APPLY_ID = IDialogConstants.CLIENT_ID + 2;
 	private static final int GEN_ID = IDialogConstants.CLIENT_ID + 1;
 	private Text config_description;
-	private Label component_validity;
+	private Label errorMsg;
 	private TreeViewer genOptionsTree;
 	private Tree tree_1;
 	private static Combo configurationList;
@@ -1006,21 +1006,20 @@ public class ApplicationDialog extends Dialog {
 				list.add(model.getFile());
 			}
 		}
-
 		// Component thaht shows the description in the top right of the scree
 		config_description = new Text(container, SWT.READ_ONLY | SWT.BORDER
 				| SWT.WRAP);
 		config_description.setBounds(493, 10, 297, 51);
 
 		// Show a warning if the component is not valid
-		component_validity = new Label(container, SWT.BOLD);
-		component_validity.setBounds(493, 67, 297, 15);
-		component_validity.setForeground(new Color(container.getDisplay(), 255,
+		errorMsg = new Label(container, SWT.BOLD);
+		errorMsg.setBounds(493, 67, 297, 15);
+		errorMsg.setForeground(new Color(container.getDisplay(), 255,
 				0, 0));
 
 		// Browser that shows informations on the selected component (right)
 		documentationText = new Browser(container, SWT.BORDER);
-		documentationText.setBounds(493, 88, 297, 104);
+		documentationText.setBounds(493, 88, 297, 197);
 		documentationText.setText(buildHelpDocumentationText(""));
 
 		configurationList = new Combo(container, SWT.READ_ONLY);
@@ -1043,6 +1042,7 @@ public class ApplicationDialog extends Dialog {
 			configurationList.select(0);
 		} else {
 			tabFolder.setEnabled(false);
+			errorMsg.setText("You must create and select a configuration to Edit.");
 		}
 
 		final Label listOfConfigurayionsLabel = new Label(container, SWT.NONE);
@@ -1102,6 +1102,7 @@ public class ApplicationDialog extends Dialog {
 				application.getElements().add(config);
 				modificationMade();
 				tabFolder.setEnabled(true);
+				errorMsg.setText("");
 				refreshConfiguration();
 			}
 
@@ -1155,6 +1156,7 @@ public class ApplicationDialog extends Dialog {
 				modificationMade();
 				if (configurationList.getItemCount() == 0) {
 					tabFolder.setEnabled(false);
+					errorMsg.setText("You must create and select a configuration to Edit.");
 				}
 				refreshConfiguration();
 			}
@@ -1164,7 +1166,7 @@ public class ApplicationDialog extends Dialog {
 
 		optionsGroup = new Group(container, SWT.NONE);
 		optionsGroup.setText("Options");
-		optionsGroup.setBounds(490, 198, 300, 315);
+		optionsGroup.setBounds(490, 291, 300, 222);
 		optionsGroup.setVisible(false);
 
 		generatorParameters = new Table(optionsGroup, SWT.BORDER);
@@ -1218,9 +1220,9 @@ public class ApplicationDialog extends Dialog {
 				.getDefault().getActiveShell(), new WorkbenchLabelProvider(),
 				new BaseWorkbenchContentProvider());
 		ets.setBlockOnOpen(true);
-		ets
-				.setValidator((ISelectionStatusValidator) new FolderSelectionValidator());
+		ets.setValidator((ISelectionStatusValidator) new FolderSelectionValidator());
 		ets.setAllowMultiple(true);
+		
 		ets.setTitle("Select Folder");
 		ets.setMessage(message);
 		ets.setInput(ResourcesPlugin.getWorkspace().getRoot());
@@ -1444,13 +1446,6 @@ public class ApplicationDialog extends Dialog {
 		newShell.setText("Configuration");
 	}
 
-	/**
-	 * Return the initialize size
-	 */
-	@Override
-	protected Point getInitialSize() {
-		return new Point(800, 600);
-	}
 
 	/**
 	 * Return the configuration equals to the given name.
@@ -1983,13 +1978,13 @@ public class ApplicationDialog extends Dialog {
 			if (el instanceof ImplNode) {
 				canCheck = checkElementValidity(el);
 				if (!canCheck) {
-					component_validity
+					errorMsg
 							.setText("This element is not active in your key");
 				} else {
-					component_validity.setText("");
+					errorMsg.setText("");
 				}
 			} else {
-				component_validity.setText("");
+				errorMsg.setText("");
 			}
 			// If click on image : check it, else : just show informations
 			if (canCheck
