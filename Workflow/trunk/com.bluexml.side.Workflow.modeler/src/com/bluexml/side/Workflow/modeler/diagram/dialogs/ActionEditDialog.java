@@ -141,8 +141,12 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 		if (action.getScript().size() > 0)
 			s = action.getScript().get(0);
 		
-		inputParameters = new VariableViewer(composite,
+		if (s != null)
+			inputParameters = new VariableViewer(composite,
 				new VariableDataStructure(s.getVariable()), false);
+		else
+			inputParameters = new VariableViewer(composite,
+					new VariableDataStructure(), false);
 
 		Button add = new Button(composite, SWT.PUSH | SWT.CENTER);
 		add.setText("Add");

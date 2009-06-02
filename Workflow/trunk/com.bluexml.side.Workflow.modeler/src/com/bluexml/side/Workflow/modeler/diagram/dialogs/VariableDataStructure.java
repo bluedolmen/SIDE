@@ -127,6 +127,11 @@ public class VariableDataStructure
             addAll(list);
         }
     }
+    
+    public VariableDataStructure()
+    {
+        data = new ArrayList<Object>();
+    }
 
     /**
      * Add a parameter to the structure
