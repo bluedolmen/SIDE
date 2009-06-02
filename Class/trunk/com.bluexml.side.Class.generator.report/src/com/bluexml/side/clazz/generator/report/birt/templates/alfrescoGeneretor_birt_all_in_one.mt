@@ -67,7 +67,7 @@ report/BIRTReport/S-IDE/All_in_one_<%getDatePath%>.rptdesign
     <%for (getAllClasses()){%>
         <oda-data-source extensionID="org.eclipse.datatools.enablement.oda.xml" name="Data Source <%name%>" id="10<%i()+1%>">
             <text-property name="displayName"></text-property>
-            <property name="FILELIST">http://localhost:8080/alfresco/service/<%service::getQualifiedName()%>.xml</property>
+            <property name="FILELIST">http://localhost:8080/alfresco/service/<%getQualifiedName()%>.xml</property>
         </oda-data-source>
     <%}%>
     </data-sources>

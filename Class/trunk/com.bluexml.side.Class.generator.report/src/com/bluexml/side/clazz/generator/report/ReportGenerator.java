@@ -15,6 +15,11 @@ public class ReportGenerator extends AbstractAcceleoGenerator {
 	public static String MMUri = "http://www.kerblue.org/class/1.0";
 
 
+	public ReportGenerator(){
+		techVersion = "Birt_2.3.x";
+		this.setTEMP_FOLDER(getTechVersion());
+	}
+	
 	@Override
 	protected String getMetamodelURI() {
 		return MMUri;
