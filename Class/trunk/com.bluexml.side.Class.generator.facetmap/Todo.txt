@@ -1,0 +1,7 @@
+Todo :
+- Passer facetmap sur le modèle de vue
+- Penser à la customisation :
+	* Pagination
+	* Présentation des facettes
+	* Présentation des résultats
+- Gérer les associations
