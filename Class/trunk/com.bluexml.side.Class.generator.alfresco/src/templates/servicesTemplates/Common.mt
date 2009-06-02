@@ -16,6 +16,7 @@ Foundation, Inc., 59 Temple Place, Boston, MA 02111.
  --%>
  <%
 metamodel http://www.kerblue.org/class/1.0
+
 import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 %>
@@ -27,15 +28,17 @@ tmp<%}%>
 <%if (getRootContainer().name != null && getRootContainer().name.length() > 0){%>
 <%getRootContainer().name%><%}else{%>
 tmp<%}%>
-<%script type="clazz.NamedClassModelElement" name="getDocumentation" description="Get the folder documentation" %>
-<%if (documentation != null && documentation.length() > 0){%>
-<%documentation%><%}else{%>
-name: <%name%>
-descrition: <%description%>
-<%}%>
+<%script type="clazz.Enumeration" name="getFolder" description="Get the folder to export" %>
+<%if (getRootContainer().name != null && getRootContainer().name.length() > 0){%>
+<%getRootContainer().name%><%}else{%>
+tmp<%}%>
 <%script type="clazz.Association" name="getQualifiedName"%>
 <%getAssociationName(args(0))%>
-<%script type="clazz.NamedClassModelElement" name="getQualifiedName"%>
+<%script type="clazz.AbstractClass" name="getQualifiedName"%>
+<%getFullName().replaceAll("\.","_")%>
+<%script type="clazz.Attribute" name="getQualifiedName"%>
+<%getFullName().replaceAll("\.","_")%>
+<%script type="clazz.Enumeration" name="getQualifiedName"%>
 <%getFullName().replaceAll("\.","_")%>
 <%script type="clazz.ClassModelElement" name="getNameSpace"%>
 http://www.bluexml.com/model/content/<%getFolder()%>/1.0
@@ -43,3 +46,8 @@ http://www.bluexml.com/model/content/<%getFolder()%>/1.0
 alfresco/module/<%getModuleIdService(name)%>
 <%script type="clazz.ClassPackage" name="getConfModulePath"%>
 config/<%getModulePath()%>
+<%script type="clazz.ClassModelElement" name="getDescription"%>
+<%if (description != null && description.length() >0){%>
+<%description%>  
+<%}else{%>
+<%}%>

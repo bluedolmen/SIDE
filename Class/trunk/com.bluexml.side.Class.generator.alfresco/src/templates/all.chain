@@ -41,6 +41,7 @@
     <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco/src/templates/webClient/alfrescoGenerator_web_client_config_dynamic.mt"/>
     <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco/src/templates/webClient/alfrescoGenerator_web_client_config_simpleSearchAA.mt"/>
     <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco/src/templates/webClient/alfrescoGenerator_web_client_config_spaceWizards.mt"/>
+    <files xsi:type="chain:EmfMetamodel" path="/com.bluexml.side.Common/model/Common.ecore"/>
   </repository>
   <actions>
     <actions xsi:type="chain:Generate" documentation="web-framework-config-custom" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>
