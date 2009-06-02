@@ -19,7 +19,6 @@ package com.bluexml.side.clazz.deployer.report;
 import java.io.File;
 
 import com.bluexml.side.application.deployer.Deployer;
-import com.bluexml.side.clazz.generator.facetmap.FacetmapConstants;
 import com.bluexml.side.util.libs.FileHelper;
 
 public class ReportDeployer extends Deployer {
@@ -57,11 +56,17 @@ public class ReportDeployer extends Deployer {
 		}
 		if (filemissing)
 			throw new Exception("Missing the following generated files:"+list_of_missing_files+"\n deployment aborted.");
+		
 		// Path where the files need to be copied
 		String path = getLocationInTomcat()+ "Content_type_report.rptdesign";
 		
+		//Deleting
+		if(new File(getLocationInTomcat() + "Content_type_report.rptdesign.bak").exists())
+			FileHelper.deleteFile(new File(getLocationInTomcat() + "Content_type_report.rptdesign.bak"));
+		
 		//Renaming
-		birtReport.renameTo(new File(getLocationInTomcat() + "Content_type_report.rptdesign.bak"));
+		if(birtReport.exists())
+			birtReport.renameTo(new File(getLocationInTomcat() + "Content_type_report.rptdesign.bak"));
 		
 		// Copying
 		FileHelper.copyFiles(birtReport, new File(path), true);
