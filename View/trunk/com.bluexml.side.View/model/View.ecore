@@ -24,7 +24,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Col" eSuperTypes="#//DefaultCol #//FieldElement #//Movable #//Editable #//Filterable">
+  <eClassifiers xsi:type="ecore:EClass" name="Col" eSuperTypes="#//DefaultCol #//Movable #//Editable #//Filterable #//FieldGroup">
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//OperationComponent"
         containment="true"/>
   </eClassifiers>
@@ -102,7 +102,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="PhoneNumberField" eSuperTypes="#//Field"/>
   <eClassifiers xsi:type="ecore:EClass" name="EmailField" eSuperTypes="#//Field"/>
   <eClassifiers xsi:type="ecore:EClass" name="FileField" eSuperTypes="#//Field"/>
-  <eClassifiers xsi:type="ecore:EClass" name="FieldElement" abstract="true" eSuperTypes="#//Stylable">
+  <eClassifiers xsi:type="ecore:EClass" name="FieldElement" abstract="true" eSuperTypes="#//Stylable ../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="mapTo" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="this may be use to show of the path use to reach the data to display exemple for attribute Object : ClassA ->association1 ->ClassB ->AspectA ->Attribute1"/>
@@ -137,7 +137,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="cols" upperBound="-1" eType="#//Col"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Styling" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//MetaInfoGroup ../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Styling" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//MetaInfoGroup">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="use to setup presentation options wath can not be lised because of technical dependencies (visualizer specification)"/>
     </eAnnotations>
@@ -202,6 +202,6 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Filtering">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultFilterValue"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultFilterValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>
