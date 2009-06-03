@@ -34,11 +34,7 @@ tmp<%}%>
 tmp<%}%>
 <%script type="clazz.Association" name="getQualifiedName"%>
 <%getAssociationName(args(0))%>
-<%script type="clazz.AbstractClass" name="getQualifiedName"%>
-<%getFullName().replaceAll("\.","_")%>
-<%script type="clazz.Attribute" name="getQualifiedName"%>
-<%getFullName().replaceAll("\.","_")%>
-<%script type="clazz.Enumeration" name="getQualifiedName"%>
+<%script type="common.NamedModelElement" name="getQualifiedName"%>
 <%getFullName().replaceAll("\.","_")%>
 <%script type="clazz.ClassModelElement" name="getNameSpace"%>
 http://www.bluexml.com/model/content/<%getFolder()%>/1.0
@@ -46,8 +42,3 @@ http://www.bluexml.com/model/content/<%getFolder()%>/1.0
 alfresco/module/<%getModuleIdService(name)%>
 <%script type="clazz.ClassPackage" name="getConfModulePath"%>
 config/<%getModulePath()%>
-<%script type="clazz.ClassModelElement" name="getDescription"%>
-<%if (description != null && description.length() >0){%>
-<%description%>  
-<%}else{%>
-<%}%>
