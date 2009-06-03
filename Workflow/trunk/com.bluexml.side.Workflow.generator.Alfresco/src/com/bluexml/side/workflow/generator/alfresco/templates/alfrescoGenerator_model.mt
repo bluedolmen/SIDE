@@ -122,5 +122,3 @@ tmp<%}%>
 <%if (getRootContainer().name != null && getRootContainer().name.length() > 0){%>
 <%getRootContainer().name%><%}else{%>
 tmp<%}%>
-<%script type="clazz.NamedClassModelElement" name="getQualifiedName"%>
-<%getFullName().replaceAll("\.","_")%>

@@ -22,3 +22,5 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 alfresco/module/<%getModuleIdService(name)%>
 <%script type="workflow.Process" name="getConfModulePath"%>
 config/<%getModulePath()%>
+<%script type="common.NamedModelElement" name="getQualifiedName"%>
+<%getFullName().replaceAll("\.","_")%>
