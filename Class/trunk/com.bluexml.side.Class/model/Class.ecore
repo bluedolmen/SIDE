@@ -50,7 +50,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="Clazz" eSuperTypes="#//AbstractClass">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="InheritanceCycle" value="not self.generalizations.generalizations -> includes(self)"/>
-      <details key="ClassWithTwoAttributesSameName" value="self.attributes -> forAll( a1, a2 | a1 &lt;> a2 implies a1.name &lt;>a2.name)"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="ClassWithTwoAttributesSameName InheritanceCycle"/>
@@ -63,8 +62,8 @@
     </eOperations>
     <eOperations name="getAllInheritedAttributes" upperBound="-1" eType="#//Attribute">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="self.getInheritedClasses() ->asSet() ->iterate(cl:Clazz;result:Set(Attribute)=Set{}|result->union(cl.attributes) ->asSet()))"/>
-        <details key="description" value="search attributes than is describe in inherited classes (without Aspects)"/>
+        <details key="body" value="Clazz.allInstances() ->select(e:Clazz|e.getInheritedClasses() ->includes(self) )"/>
+        <details key="description" value="get all Clazz that inherite from this Clazz"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getClassAndAspectAttributes" upperBound="-1" eType="#//Attribute">
@@ -82,7 +81,7 @@
         <details key="body" value="self.aspects ->  asSet()  -> iterate(e:Aspect;result :Set(Attribute)= Set{}| result -> union(e.attributes ->asSet()))"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="getSubTypes" upperBound="-1" eType="#//Attribute">
+    <eOperations name="getAllSubTypes" upperBound="-1" eType="#//Attribute">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="self.getAllInheritedAttributes() -> union(self.getClassAndAspectAttributes())"/>
       </eAnnotations>
@@ -101,14 +100,14 @@
     </eOperations>
     <eOperations name="isSource" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="(asso.firstEnd.linkedClass = self and asso.firstEnd.isNavigable) or (asso.secondEnd.linkedClass = self and asso.secondEnd.isNavigable)"/>
+        <details key="body" value="(asso.firstEnd.linkedClass = self and asso.secondEnd.isNavigable) or (asso.secondEnd.linkedClass = self and asso.firstEnd.isNavigable)"/>
         <details key="description" value="search for class attributes, inherited one and finaly added to the class by aspect"/>
       </eAnnotations>
       <eParameters name="asso" lowerBound="1" eType="#//Association"/>
     </eOperations>
     <eOperations name="isTarget" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="(asso.firstEnd.linkedClass = self and asso.isNavigable) or (asso.secondEnd.linkedClass = self and asso.isNavigable)"/>
+        <details key="body" value="(asso.firstEnd.linkedClass = self and asso.firstEnd.isNavigable) or (asso.secondEnd.linkedClass = self and asso.secondEnd.isNavigable)"/>
         <details key="description" value="search for class attributes, inherited one and finaly added to the class by aspect"/>
       </eAnnotations>
       <eParameters name="asso" lowerBound="1" eType="#//Association"/>
@@ -131,12 +130,6 @@
         <details key="description" value="search associations where this clazz is source or one of inheritedClass"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="isClassAssociationsIn" upperBound="-1" eType="#//Association">
-      <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="Association.allInstances() ->select(e:Association| self.getInheritedClasses() ->including(self) -> includesAll(e.associationsClass))"/>
-        <details key="description" value="give the list of associations where this clazz is the associatedClazz"/>
-      </eAnnotations>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
         eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//OperationComponent"
         containment="true"/>
@@ -149,14 +142,14 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="#//TitledNamedClassModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="recursiveAssociationMustHaveRole" value="( self.firstEnd.linkedClass = self.secondEnd.linkedClass and self.firstEnd.isNavigable and self.secondEnd.isNavigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name &lt;> '' ) or ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name &lt;> '' ))"/>
+      <details key="recursiveAssociationMustHaveRole" value="( self.isRecursive() and self.firstEnd.isNavigable and self.secondEnd.isNavigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name &lt;> '' ) and ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name &lt;> '' ))"/>
       <details key="MinAndMaxTarget" value="( self.secondEnd.cardMax &lt;> '-1' ) implies ( self.secondEnd.cardMin &lt;= self.secondEnd.cardMax )"/>
       <details key="MinAndMaxSource" value="( self.firstEnd.cardMax &lt;> '-1' ) implies ( self.firstEnd.cardMin &lt;= self.firstEnd.cardMax )"/>
       <details key="NameNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
       <details key="SourceNull" value="self.firstEnd.linkedClass->notEmpty()"/>
       <details key="TargetNull" value="self.secondEnd.linkedClass->notEmpty()"/>
       <details key="AtLeastOneNavigableEdge" value="(firstEnd.isNavigable or secondEnd.isNavigable)"/>
-      <details key="ClassCantBeReferencedbyTwoSameNameAssociation" value="Association.allInstances()->select(a | a.name = self.name and  a.firstEnd.linkedClass = self.firstEnd.linkedClass  and a.secondEnd.linkedClass = self.secondEnd.linkedClass and a &lt;> self and self.firstEnd.isNavigable=a.firstEnd.isNavigable and self.firstEnd.isNavigable=true)->size() = 0&#xA;and  &#xA;Association.allInstances()->select(a | a.name = self.name and  a.firstEnd.linkedClass = self.firstEnd.linkedClass  and a.secondEnd.linkedClass = self.secondEnd.linkedClass and a &lt;> self and self.secondEnd.isNavigable=a.secondEnd.isNavigable and self.secondEnd.isNavigable=true)->size() = 0&#xA;and &#xA;Association.allInstances()->select(a | a.name = self.name and  a.firstEnd.linkedClass = self.secondEnd.linkedClass  and a.secondEnd.linkedClass = self.firstEnd.linkedClass and a &lt;> self and self.firstEnd.isNavigable=a.secondEnd.isNavigable and self.firstEnd.isNavigable=true)->size() = 0&#xA;and &#xA;Association.allInstances()->select(a | a.name = self.name and  a.firstEnd.linkedClass = self.secondEnd.linkedClass  and a.secondEnd.linkedClass = self.firstEnd.linkedClass and a &lt;> self and self.secondEnd.isNavigable=a.firstEnd.isNavigable and self.secondEnd.isNavigable=true)->size() = 0&#xA;"/>
+      <details key="ClassCantBeReferencedbyTwoSameNameAssociation" value="self.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1"/>
       <details key="IfAggregationOrCompositionThenUnidirectionalAssociation" value="(self.associationType &lt;> AssociationType::Direct) implies (self.firstEnd.isNavigable xor self.secondEnd.isNavigable )"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
@@ -167,6 +160,23 @@
         <details key="body" value="if( self.secondEnd.linkedClass.oclIsKindOf(Classe))&#xD;&#xA;then&#xD;&#xA;self.secondEnd.linkedClass.oclAsType(Classe).equalsForMerge(other.secondEnd.linkedClass.oclAsType(Classe)) and self.firstEnd.linkedClass.oclAsType(Classe).equalsForMerge(other.firstEnd.linkedClass.oclAsType(Classe))&#xD;&#xA;and self.name = other.name&#xD;&#xA;else&#xD;&#xA;true&#xD;&#xA;endif&#xD;&#xA;"/>
       </eAnnotations>
       <eParameters name="other" eType="#//Association"/>
+    </eOperations>
+    <eOperations name="isRecursive" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="(self.firstEnd.linkedClass.getInheritedClasses() ->including(self.firstEnd.linkedClass) ->includes(self.secondEnd.linkedClass) and self.secondEnd.isNavigable)&#xD;or &#xD;(self.secondEnd.linkedClass.getInheritedClasses() ->including(self.secondEnd.linkedClass) ->includes(self.firstEnd.linkedClass) and self.firstEnd.isNavigable)&#xD;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getSource" lowerBound="1" upperBound="2" eType="#//Clazz">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="if (self.firstEnd.isNavigable and self.secondEnd.isNavigable) then &#xD;&#x9;Set{} ->including(self.firstEnd.linkedClass) ->including(self.secondEnd.linkedClass)&#xD;else if (self.firstEnd.isNavigable) then&#xD;&#x9;&#x9;Set{}->including(self.secondEnd.linkedClass)&#xD;&#x9;else if (self.secondEnd.isNavigable) then &#xD;&#x9;&#x9;&#x9;Set{}->including(self.firstEnd.linkedClass)&#xD;&#x9;&#x9;else&#xD;&#x9;&#x9;&#x9;Set{}&#xD;&#x9;&#x9;endif&#xD;&#x9;endif&#xD;endif"/>
+        <details key="description" value="get source Clazz"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getTarget" lowerBound="1" upperBound="2" eType="#//Clazz">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="if (self.firstEnd.isNavigable and self.secondEnd.isNavigable) then &#xD;&#x9;Set{} ->including(self.firstEnd.linkedClass) ->including(self.secondEnd.linkedClass)&#xD;else if (self.secondEnd.isNavigable) then&#xD;&#x9;&#x9;Set{}->including(self.secondEnd.linkedClass)&#xD;&#x9;else if (self.firstEnd.isNavigable) then &#xD;&#x9;&#x9;&#x9;Set{}->including(self.firstEnd.linkedClass)&#xD;&#x9;&#x9;else&#xD;&#x9;&#x9;&#x9;Set{}&#xD;&#x9;&#x9;endif&#xD;&#x9;endif&#xD;endif"/>
+        <details key="description" value="get source Clazz"/>
+      </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="associationType" eType="#//AssociationType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="firstEnd" eType="#//FirstEnd"
@@ -203,12 +213,6 @@
     <eLiterals name="Composition" value="2" literal="Composition"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Aspect" eSuperTypes="#//AbstractClass">
-    <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="AspectWithTwoAttributesSameName" value="self.attributes -> forAll( a1, a2 | a1 &lt;> a2 implies a1.name &lt;>a2.name)"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="AspectWithTwoAttributesSameName"/>
-    </eAnnotations>
     <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="self.name = other.name and self.title = other.title"/>
@@ -221,9 +225,10 @@
       <details key="TwoModelElementWithSameName" value="AbstractClass.allInstances()->select(a | a.name = self.name and a.getContainer() = self.getContainer() and a &lt;> self)->size() = 0"/>
       <details key="NameNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
       <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') = true"/>
+      <details key="TwoAttributesSameName" value="self.attributes -> forAll( a1, a2 | a1 &lt;> a2 implies a1.name &lt;>a2.name)"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="TwoModelElementWithSameName NameNull noSpecialCharacters"/>
+      <details key="constraints" value="TwoModelElementWithSameName NameNull noSpecialCharacters TwoAttributesSameName"/>
     </eAnnotations>
     <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">

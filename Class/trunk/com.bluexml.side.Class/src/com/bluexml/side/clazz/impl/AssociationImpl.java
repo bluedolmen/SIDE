@@ -10,6 +10,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
@@ -253,6 +254,115 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> equalsForMergeBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isRecursive() {
+		if (isRecursiveBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.ASSOCIATION.getEOperations().get(1);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.ASSOCIATION, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				isRecursiveBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(isRecursiveBodyOCL);
+	
+		return ((Boolean) query.evaluate(this)).booleanValue();
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #isRecursive <em>Is Recursive</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isRecursive
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> isRecursiveBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Clazz> getSource() {
+		if (getSourceBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.ASSOCIATION.getEOperations().get(2);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.ASSOCIATION, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getSourceBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getSourceBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Clazz> result = (Collection<Clazz>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Clazz>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getSource <em>Get Source</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSource
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getSourceBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Clazz> getTarget() {
+		if (getTargetBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.ASSOCIATION.getEOperations().get(3);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.ASSOCIATION, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getTargetBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getTargetBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Clazz> result = (Collection<Clazz>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Clazz>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getTarget <em>Get Target</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTarget
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getTargetBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->

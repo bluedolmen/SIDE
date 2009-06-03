@@ -24,8 +24,8 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getAbstractClass()
  * @model abstract="true"
- *        annotation="http://www.bluexml.com/OCL TwoModelElementWithSameName='AbstractClass.allInstances()->select(a | a.name = self.name and a.getContainer() = self.getContainer() and a <> self)->size() = 0' NameNull='not self.name.oclIsUndefined() and self.name <> \'\'' noSpecialCharacters='self.name.regexMatch(\'[\\w]*\') = true'"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='TwoModelElementWithSameName NameNull noSpecialCharacters'"
+ *        annotation="http://www.bluexml.com/OCL TwoModelElementWithSameName='AbstractClass.allInstances()->select(a | a.name = self.name and a.getContainer() = self.getContainer() and a <> self)->size() = 0' NameNull='not self.name.oclIsUndefined() and self.name <> \'\'' noSpecialCharacters='self.name.regexMatch(\'[\\w]*\') = true' TwoAttributesSameName='self.attributes -> forAll( a1, a2 | a1 <> a2 implies a1.name <>a2.name)'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='TwoModelElementWithSameName NameNull noSpecialCharacters TwoAttributesSameName'"
  * @generated
  */
 public interface AbstractClass extends TitledNamedClassModelElement {

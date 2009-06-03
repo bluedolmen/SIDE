@@ -83,14 +83,6 @@ public class ClazzValidator extends EObjectValidator {
 	protected CommonValidator commonValidator;
 
 	/**
-	 * The parsed OCL expression for the definition of the '<em>ClassWithTwoAttributesSameName</em>' invariant constraint.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private static Constraint clazz_ClassWithTwoAttributesSameNameInvOCL;
-
-	/**
 	 * The parsed OCL expression for the definition of the '<em>InheritanceCycle</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -164,14 +156,6 @@ public class ClazzValidator extends EObjectValidator {
 	private static Constraint association_IfAggregationOrCompositionThenUnidirectionalAssociationInvOCL;
 
 	/**
-	 * The parsed OCL expression for the definition of the '<em>AspectWithTwoAttributesSameName</em>' invariant constraint.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private static Constraint aspect_AspectWithTwoAttributesSameNameInvOCL;
-
-	/**
 	 * The parsed OCL expression for the definition of the '<em>TwoModelElementWithSameName</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -194,6 +178,14 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	private static Constraint abstractClass_noSpecialCharactersInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>TwoAttributesSameName</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint abstractClass_TwoAttributesSameNameInvOCL;
 
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
 	
@@ -306,6 +298,7 @@ public class ClazzValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateAbstractClass_TwoModelElementWithSameName(clazz, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractClass_NameNull(clazz, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractClass_noSpecialCharacters(clazz, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractClass_TwoAttributesSameName(clazz, diagnostics, context);
 		if (result || diagnostics != null) result &= validateClazz_ClassWithTwoAttributesSameName(clazz, diagnostics, context);
 		if (result || diagnostics != null) result &= validateClazz_InheritanceCycle(clazz, diagnostics, context);
 		return result;
@@ -318,24 +311,11 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateClazz_ClassWithTwoAttributesSameName(Clazz clazz, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (clazz_ClassWithTwoAttributesSameNameInvOCL == null) {
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(ClazzPackage.Literals.CLAZZ);
-			
-			EAnnotation ocl = ClazzPackage.Literals.CLAZZ.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String expr = ocl.getDetails().get("ClassWithTwoAttributesSameName");
-			
-			try {
-				clazz_ClassWithTwoAttributesSameNameInvOCL = helper.createInvariant(expr);
-			}
-			catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(clazz_ClassWithTwoAttributesSameNameInvOCL);
-		
-		if (!query.check(clazz)) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
@@ -808,47 +788,8 @@ public class ClazzValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateAbstractClass_TwoModelElementWithSameName(aspect, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractClass_NameNull(aspect, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractClass_noSpecialCharacters(aspect, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAspect_AspectWithTwoAttributesSameName(aspect, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractClass_TwoAttributesSameName(aspect, diagnostics, context);
 		return result;
-	}
-
-	/**
-	 * Validates the AspectWithTwoAttributesSameName constraint of '<em>Aspect</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateAspect_AspectWithTwoAttributesSameName(Aspect aspect, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (aspect_AspectWithTwoAttributesSameNameInvOCL == null) {
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(ClazzPackage.Literals.ASPECT);
-			
-			EAnnotation ocl = ClazzPackage.Literals.ASPECT.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String expr = ocl.getDetails().get("AspectWithTwoAttributesSameName");
-			
-			try {
-				aspect_AspectWithTwoAttributesSameNameInvOCL = helper.createInvariant(expr);
-			}
-			catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(aspect_AspectWithTwoAttributesSameNameInvOCL);
-		
-		if (!query.check(aspect)) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(new BasicDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "AspectWithTwoAttributesSameName", getObjectLabel(aspect, context) }),
-						 new Object[] { aspect }));
-			}
-			return false;
-		}
-		return true;
 	}
 
 	/**
@@ -867,6 +808,7 @@ public class ClazzValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateAbstractClass_TwoModelElementWithSameName(abstractClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractClass_NameNull(abstractClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractClass_noSpecialCharacters(abstractClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractClass_TwoAttributesSameName(abstractClass, diagnostics, context);
 		return result;
 	}
 
@@ -980,6 +922,45 @@ public class ClazzValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noSpecialCharacters", getObjectLabel(abstractClass, context) }),
+						 new Object[] { abstractClass }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the TwoAttributesSameName constraint of '<em>Abstract Class</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAbstractClass_TwoAttributesSameName(AbstractClass abstractClass, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (abstractClass_TwoAttributesSameNameInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(ClazzPackage.Literals.ABSTRACT_CLASS);
+			
+			EAnnotation ocl = ClazzPackage.Literals.ABSTRACT_CLASS.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("TwoAttributesSameName");
+			
+			try {
+				abstractClass_TwoAttributesSameNameInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(abstractClass_TwoAttributesSameNameInvOCL);
+		
+		if (!query.check(abstractClass)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "TwoAttributesSameName", getObjectLabel(abstractClass, context) }),
 						 new Object[] { abstractClass }));
 			}
 			return false;

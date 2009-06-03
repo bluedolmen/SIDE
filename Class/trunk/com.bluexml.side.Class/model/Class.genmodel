@@ -40,7 +40,7 @@
       <genOperations ecoreOperation="Class.ecore#//Clazz/getClassAndAspectAttributes"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getInheritedClasses"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getAspectAttributes"/>
-      <genOperations ecoreOperation="Class.ecore#//Clazz/getSubTypes"/>
+      <genOperations ecoreOperation="Class.ecore#//Clazz/getAllSubTypes"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getAllInheritedClassAndAspectAttributes"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getSourceAssociations"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/isSource">
@@ -61,6 +61,7 @@
       <genOperations ecoreOperation="Class.ecore#//Association/equalsForMerge">
         <genParameters ecoreParameter="Class.ecore#//Association/equalsForMerge/other"/>
       </genOperations>
+      <genOperations ecoreOperation="Class.ecore#//Association/isRecursive"/>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//Attribute">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Attribute/typ"/>

@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getAssociation()
- * @model annotation="http://www.bluexml.com/OCL recursiveAssociationMustHaveRole='( self.firstEnd.linkedClass = self.secondEnd.linkedClass and self.firstEnd.isNavigable and self.secondEnd.isNavigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name <> \'\' ) or ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name <> \'\' ))' MinAndMaxTarget='( self.secondEnd.cardMax <> \'-1\' ) implies ( self.secondEnd.cardMin <= self.secondEnd.cardMax )' MinAndMaxSource='( self.firstEnd.cardMax <> \'-1\' ) implies ( self.firstEnd.cardMin <= self.firstEnd.cardMax )' NameNull='not self.name.oclIsUndefined() and self.name <> \'\'' SourceNull='self.firstEnd.linkedClass->notEmpty()' TargetNull='self.secondEnd.linkedClass->notEmpty()' AtLeastOneNavigableEdge='(firstEnd.isNavigable or secondEnd.isNavigable)' ClassCantBeReferencedbyTwoSameNameAssociation='Association.allInstances()->select(a | a.name = self.name and  a.firstEnd.linkedClass = self.firstEnd.linkedClass  and a.secondEnd.linkedClass = self.secondEnd.linkedClass and a <> self and self.firstEnd.isNavigable=a.firstEnd.isNavigable and self.firstEnd.isNavigable=true)->size() = 0\nand  \nAssociation.allInstances()->select(a | a.name = self.name and  a.firstEnd.linkedClass = self.firstEnd.linkedClass  and a.secondEnd.linkedClass = self.secondEnd.linkedClass and a <> self and self.secondEnd.isNavigable=a.secondEnd.isNavigable and self.secondEnd.isNavigable=true)->size() = 0\nand \nAssociation.allInstances()->select(a | a.name = self.name and  a.firstEnd.linkedClass = self.secondEnd.linkedClass  and a.secondEnd.linkedClass = self.firstEnd.linkedClass and a <> self and self.firstEnd.isNavigable=a.secondEnd.isNavigable and self.firstEnd.isNavigable=true)->size() = 0\nand \nAssociation.allInstances()->select(a | a.name = self.name and  a.firstEnd.linkedClass = self.secondEnd.linkedClass  and a.secondEnd.linkedClass = self.firstEnd.linkedClass and a <> self and self.secondEnd.isNavigable=a.firstEnd.isNavigable and self.secondEnd.isNavigable=true)->size() = 0\n' IfAggregationOrCompositionThenUnidirectionalAssociation='(self.associationType <> AssociationType::Direct) implies (self.firstEnd.isNavigable xor self.secondEnd.isNavigable )'"
+ * @model annotation="http://www.bluexml.com/OCL recursiveAssociationMustHaveRole='( self.isRecursive() and self.firstEnd.isNavigable and self.secondEnd.isNavigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name <> \'\' ) and ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name <> \'\' ))' MinAndMaxTarget='( self.secondEnd.cardMax <> \'-1\' ) implies ( self.secondEnd.cardMin <= self.secondEnd.cardMax )' MinAndMaxSource='( self.firstEnd.cardMax <> \'-1\' ) implies ( self.firstEnd.cardMin <= self.firstEnd.cardMax )' NameNull='not self.name.oclIsUndefined() and self.name <> \'\'' SourceNull='self.firstEnd.linkedClass->notEmpty()' TargetNull='self.secondEnd.linkedClass->notEmpty()' AtLeastOneNavigableEdge='(firstEnd.isNavigable or secondEnd.isNavigable)' ClassCantBeReferencedbyTwoSameNameAssociation='self.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1' IfAggregationOrCompositionThenUnidirectionalAssociation='(self.associationType <> AssociationType::Direct) implies (self.firstEnd.isNavigable xor self.secondEnd.isNavigable )'"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation'"
  * @generated
  */
@@ -116,5 +116,32 @@ public interface Association extends TitledNamedClassModelElement {
 	 * @generated
 	 */
 	boolean equalsForMerge(Association other);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='(self.firstEnd.linkedClass.getInheritedClasses() ->including(self.firstEnd.linkedClass) ->includes(self.secondEnd.linkedClass) and self.secondEnd.isNavigable)\ror \r(self.secondEnd.linkedClass.getInheritedClasses() ->including(self.secondEnd.linkedClass) ->includes(self.firstEnd.linkedClass) and self.firstEnd.isNavigable)\r'"
+	 * @generated
+	 */
+	boolean isRecursive();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true" upper="2"
+	 *        annotation="http://www.bluexml.com/OCL body='if (self.firstEnd.isNavigable and self.secondEnd.isNavigable) then \r\tSet{} ->including(self.firstEnd.linkedClass) ->including(self.secondEnd.linkedClass)\relse if (self.firstEnd.isNavigable) then\r\t\tSet{}->including(self.secondEnd.linkedClass)\r\telse if (self.secondEnd.isNavigable) then \r\t\t\tSet{}->including(self.firstEnd.linkedClass)\r\t\telse\r\t\t\tSet{}\r\t\tendif\r\tendif\rendif' description='get source Clazz'"
+	 * @generated
+	 */
+	EList<Clazz> getSource();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true" upper="2"
+	 *        annotation="http://www.bluexml.com/OCL body='if (self.firstEnd.isNavigable and self.secondEnd.isNavigable) then \r\tSet{} ->including(self.firstEnd.linkedClass) ->including(self.secondEnd.linkedClass)\relse if (self.secondEnd.isNavigable) then\r\t\tSet{}->including(self.secondEnd.linkedClass)\r\telse if (self.firstEnd.isNavigable) then \r\t\t\tSet{}->including(self.firstEnd.linkedClass)\r\t\telse\r\t\t\tSet{}\r\t\tendif\r\tendif\rendif' description='get source Clazz'"
+	 * @generated
+	 */
+	EList<Clazz> getTarget();
 
 } // Association

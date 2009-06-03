@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getClazz()
- * @model annotation="http://www.bluexml.com/OCL InheritanceCycle='not self.generalizations.generalizations -> includes(self)' ClassWithTwoAttributesSameName='self.attributes -> forAll( a1, a2 | a1 <> a2 implies a1.name <>a2.name)'"
+ * @model annotation="http://www.bluexml.com/OCL InheritanceCycle='not self.generalizations.generalizations -> includes(self)'"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='ClassWithTwoAttributesSameName InheritanceCycle'"
  * @generated
  */
@@ -144,7 +144,7 @@ public interface Clazz extends AbstractClass {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='self.getInheritedClasses() ->asSet() ->iterate(cl:Clazz;result:Set(Attribute)=Set{}|result->union(cl.attributes) ->asSet()))' description='search attributes than is describe in inherited classes (without Aspects)'"
+	 *        annotation="http://www.bluexml.com/OCL body='Clazz.allInstances() ->select(e:Clazz|e.getInheritedClasses() ->includes(self) )' description='get all Clazz that inherite from this Clazz'"
 	 * @generated
 	 */
 	EList<Attribute> getAllInheritedAttributes();
@@ -183,7 +183,7 @@ public interface Clazz extends AbstractClass {
 	 *        annotation="http://www.bluexml.com/OCL body='self.getAllInheritedAttributes() -> union(self.getClassAndAspectAttributes())'"
 	 * @generated
 	 */
-	EList<Attribute> getSubTypes();
+	EList<Attribute> getAllSubTypes();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -207,7 +207,7 @@ public interface Clazz extends AbstractClass {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model required="true" assoRequired="true"
-	 *        annotation="http://www.bluexml.com/OCL body='(asso.firstEnd.linkedClass = self and asso.firstEnd.isNavigable) or (asso.secondEnd.linkedClass = self and asso.secondEnd.isNavigable)' description='search for class attributes, inherited one and finaly added to the class by aspect'"
+	 *        annotation="http://www.bluexml.com/OCL body='(asso.firstEnd.linkedClass = self and asso.secondEnd.isNavigable) or (asso.secondEnd.linkedClass = self and asso.firstEnd.isNavigable)' description='search for class attributes, inherited one and finaly added to the class by aspect'"
 	 * @generated
 	 */
 	boolean isSource(Association asso);
@@ -216,7 +216,7 @@ public interface Clazz extends AbstractClass {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model required="true" assoRequired="true"
-	 *        annotation="http://www.bluexml.com/OCL body='(asso.firstEnd.linkedClass = self and asso.isNavigable) or (asso.secondEnd.linkedClass = self and asso.isNavigable)' description='search for class attributes, inherited one and finaly added to the class by aspect'"
+	 *        annotation="http://www.bluexml.com/OCL body='(asso.firstEnd.linkedClass = self and asso.firstEnd.isNavigable) or (asso.secondEnd.linkedClass = self and asso.secondEnd.isNavigable)' description='search for class attributes, inherited one and finaly added to the class by aspect'"
 	 * @generated
 	 */
 	boolean isTarget(Association asso);
@@ -247,14 +247,5 @@ public interface Clazz extends AbstractClass {
 	 * @generated
 	 */
 	EList<Association> getAllTargetAssociations();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='Association.allInstances() ->select(e:Association| self.getInheritedClasses() ->including(self) -> includesAll(e.associationsClass))' description='give the list of associations where this clazz is the associatedClazz'"
-	 * @generated
-	 */
-	EList<Association> isClassAssociationsIn();
 
 } // Clazz

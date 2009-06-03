@@ -808,7 +808,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 
 		addEOperation(clazzEClass, this.getAttribute(), "getAspectAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(clazzEClass, this.getAttribute(), "getSubTypes", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(clazzEClass, this.getAttribute(), "getAllSubTypes", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(clazzEClass, this.getAttribute(), "getAllInheritedClassAndAspectAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
 
@@ -826,8 +826,6 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 
 		addEOperation(clazzEClass, this.getAssociation(), "getAllTargetAssociations", 0, -1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(clazzEClass, this.getAssociation(), "isClassAssociationsIn", 0, -1, IS_UNIQUE, IS_ORDERED);
-
 		initEClass(associationEClass, Association.class, "Association", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAssociation_AssociationType(), this.getAssociationType(), "associationType", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssociation_FirstEnd(), this.getFirstEnd(), null, "firstEnd", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -835,6 +833,12 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 
 		op = addEOperation(associationEClass, ecorePackage.getEBoolean(), "equalsForMerge", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getAssociation(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(associationEClass, ecorePackage.getEBoolean(), "isRecursive", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(associationEClass, this.getClazz(), "getSource", 1, 2, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(associationEClass, this.getClazz(), "getTarget", 1, 2, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAttribute_Typ(), theCommonPackage.getDataType(), "typ", "void", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -945,8 +949,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		  (clazzEClass, 
 		   source, 
 		   new String[] {
-			 "InheritanceCycle", "not self.generalizations.generalizations -> includes(self)",
-			 "ClassWithTwoAttributesSameName", "self.attributes -> forAll( a1, a2 | a1 <> a2 implies a1.name <>a2.name)"
+			 "InheritanceCycle", "not self.generalizations.generalizations -> includes(self)"
 		   });			
 		addAnnotation
 		  (clazzEClass.getEOperations().get(0), 
@@ -959,8 +962,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		  (clazzEClass.getEOperations().get(1), 
 		   source, 
 		   new String[] {
-			 "body", "self.getInheritedClasses() ->asSet() ->iterate(cl:Clazz;result:Set(Attribute)=Set{}|result->union(cl.attributes) ->asSet()))",
-			 "description", "search attributes than is describe in inherited classes (without Aspects)"
+			 "body", "Clazz.allInstances() ->select(e:Clazz|e.getInheritedClasses() ->includes(self) )",
+			 "description", "get all Clazz that inherite from this Clazz"
 		   });		
 		addAnnotation
 		  (clazzEClass.getEOperations().get(2), 
@@ -1004,14 +1007,14 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		  (clazzEClass.getEOperations().get(8), 
 		   source, 
 		   new String[] {
-			 "body", "(asso.firstEnd.linkedClass = self and asso.firstEnd.isNavigable) or (asso.secondEnd.linkedClass = self and asso.secondEnd.isNavigable)",
+			 "body", "(asso.firstEnd.linkedClass = self and asso.secondEnd.isNavigable) or (asso.secondEnd.linkedClass = self and asso.firstEnd.isNavigable)",
 			 "description", "search for class attributes, inherited one and finaly added to the class by aspect"
 		   });		
 		addAnnotation
 		  (clazzEClass.getEOperations().get(9), 
 		   source, 
 		   new String[] {
-			 "body", "(asso.firstEnd.linkedClass = self and asso.isNavigable) or (asso.secondEnd.linkedClass = self and asso.isNavigable)",
+			 "body", "(asso.firstEnd.linkedClass = self and asso.firstEnd.isNavigable) or (asso.secondEnd.linkedClass = self and asso.secondEnd.isNavigable)",
 			 "description", "search for class attributes, inherited one and finaly added to the class by aspect"
 		   });		
 		addAnnotation
@@ -1036,24 +1039,17 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 			 "description", "search associations where this clazz is source or one of inheritedClass"
 		   });		
 		addAnnotation
-		  (clazzEClass.getEOperations().get(13), 
-		   source, 
-		   new String[] {
-			 "body", "Association.allInstances() ->select(e:Association| self.getInheritedClasses() ->including(self) -> includesAll(e.associationsClass))",
-			 "description", "give the list of associations where this clazz is the associatedClazz"
-		   });		
-		addAnnotation
 		  (associationEClass, 
 		   source, 
 		   new String[] {
-			 "recursiveAssociationMustHaveRole", "( self.firstEnd.linkedClass = self.secondEnd.linkedClass and self.firstEnd.isNavigable and self.secondEnd.isNavigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name <> \'\' ) or ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name <> \'\' ))",
+			 "recursiveAssociationMustHaveRole", "( self.isRecursive() and self.firstEnd.isNavigable and self.secondEnd.isNavigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name <> \'\' ) and ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name <> \'\' ))",
 			 "MinAndMaxTarget", "( self.secondEnd.cardMax <> \'-1\' ) implies ( self.secondEnd.cardMin <= self.secondEnd.cardMax )",
 			 "MinAndMaxSource", "( self.firstEnd.cardMax <> \'-1\' ) implies ( self.firstEnd.cardMin <= self.firstEnd.cardMax )",
 			 "NameNull", "not self.name.oclIsUndefined() and self.name <> \'\'",
 			 "SourceNull", "self.firstEnd.linkedClass->notEmpty()",
 			 "TargetNull", "self.secondEnd.linkedClass->notEmpty()",
 			 "AtLeastOneNavigableEdge", "(firstEnd.isNavigable or secondEnd.isNavigable)",
-			 "ClassCantBeReferencedbyTwoSameNameAssociation", "Association.allInstances()->select(a | a.name = self.name and  a.firstEnd.linkedClass = self.firstEnd.linkedClass  and a.secondEnd.linkedClass = self.secondEnd.linkedClass and a <> self and self.firstEnd.isNavigable=a.firstEnd.isNavigable and self.firstEnd.isNavigable=true)->size() = 0\nand  \nAssociation.allInstances()->select(a | a.name = self.name and  a.firstEnd.linkedClass = self.firstEnd.linkedClass  and a.secondEnd.linkedClass = self.secondEnd.linkedClass and a <> self and self.secondEnd.isNavigable=a.secondEnd.isNavigable and self.secondEnd.isNavigable=true)->size() = 0\nand \nAssociation.allInstances()->select(a | a.name = self.name and  a.firstEnd.linkedClass = self.secondEnd.linkedClass  and a.secondEnd.linkedClass = self.firstEnd.linkedClass and a <> self and self.firstEnd.isNavigable=a.secondEnd.isNavigable and self.firstEnd.isNavigable=true)->size() = 0\nand \nAssociation.allInstances()->select(a | a.name = self.name and  a.firstEnd.linkedClass = self.secondEnd.linkedClass  and a.secondEnd.linkedClass = self.firstEnd.linkedClass and a <> self and self.secondEnd.isNavigable=a.firstEnd.isNavigable and self.secondEnd.isNavigable=true)->size() = 0\n",
+			 "ClassCantBeReferencedbyTwoSameNameAssociation", "self.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1",
 			 "IfAggregationOrCompositionThenUnidirectionalAssociation", "(self.associationType <> AssociationType::Direct) implies (self.firstEnd.isNavigable xor self.secondEnd.isNavigable )"
 		   });			
 		addAnnotation
@@ -1063,11 +1059,25 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 			 "body", "if( self.secondEnd.linkedClass.oclIsKindOf(Classe))\r\nthen\r\nself.secondEnd.linkedClass.oclAsType(Classe).equalsForMerge(other.secondEnd.linkedClass.oclAsType(Classe)) and self.firstEnd.linkedClass.oclAsType(Classe).equalsForMerge(other.firstEnd.linkedClass.oclAsType(Classe))\r\nand self.name = other.name\r\nelse\r\ntrue\r\nendif\r\n"
 		   });		
 		addAnnotation
-		  (aspectEClass, 
+		  (associationEClass.getEOperations().get(1), 
 		   source, 
 		   new String[] {
-			 "AspectWithTwoAttributesSameName", "self.attributes -> forAll( a1, a2 | a1 <> a2 implies a1.name <>a2.name)"
-		   });			
+			 "body", "(self.firstEnd.linkedClass.getInheritedClasses() ->including(self.firstEnd.linkedClass) ->includes(self.secondEnd.linkedClass) and self.secondEnd.isNavigable)\ror \r(self.secondEnd.linkedClass.getInheritedClasses() ->including(self.secondEnd.linkedClass) ->includes(self.firstEnd.linkedClass) and self.firstEnd.isNavigable)\r"
+		   });		
+		addAnnotation
+		  (associationEClass.getEOperations().get(2), 
+		   source, 
+		   new String[] {
+			 "body", "if (self.firstEnd.isNavigable and self.secondEnd.isNavigable) then \r\tSet{} ->including(self.firstEnd.linkedClass) ->including(self.secondEnd.linkedClass)\relse if (self.firstEnd.isNavigable) then\r\t\tSet{}->including(self.secondEnd.linkedClass)\r\telse if (self.secondEnd.isNavigable) then \r\t\t\tSet{}->including(self.firstEnd.linkedClass)\r\t\telse\r\t\t\tSet{}\r\t\tendif\r\tendif\rendif",
+			 "description", "get source Clazz"
+		   });		
+		addAnnotation
+		  (associationEClass.getEOperations().get(3), 
+		   source, 
+		   new String[] {
+			 "body", "if (self.firstEnd.isNavigable and self.secondEnd.isNavigable) then \r\tSet{} ->including(self.firstEnd.linkedClass) ->including(self.secondEnd.linkedClass)\relse if (self.secondEnd.isNavigable) then\r\t\tSet{}->including(self.secondEnd.linkedClass)\r\telse if (self.firstEnd.isNavigable) then \r\t\t\tSet{}->including(self.firstEnd.linkedClass)\r\t\telse\r\t\t\tSet{}\r\t\tendif\r\tendif\rendif",
+			 "description", "get source Clazz"
+		   });		
 		addAnnotation
 		  (aspectEClass.getEOperations().get(0), 
 		   source, 
@@ -1080,7 +1090,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   new String[] {
 			 "TwoModelElementWithSameName", "AbstractClass.allInstances()->select(a | a.name = self.name and a.getContainer() = self.getContainer() and a <> self)->size() = 0",
 			 "NameNull", "not self.name.oclIsUndefined() and self.name <> \'\'",
-			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true"
+			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true",
+			 "TwoAttributesSameName", "self.attributes -> forAll( a1, a2 | a1 <> a2 implies a1.name <>a2.name)"
 		   });			
 		addAnnotation
 		  (abstractClassEClass.getEOperations().get(0), 
@@ -1109,24 +1120,18 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "ClassWithTwoAttributesSameName InheritanceCycle"
-		   });																	
+		   });																
 		addAnnotation
 		  (associationEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation"
-		   });				
-		addAnnotation
-		  (aspectEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "AspectWithTwoAttributesSameName"
-		   });				
+		   });								
 		addAnnotation
 		  (abstractClassEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "TwoModelElementWithSameName NameNull noSpecialCharacters"
+			 "constraints", "TwoModelElementWithSameName NameNull noSpecialCharacters TwoAttributesSameName"
 		   });		
 	}
 

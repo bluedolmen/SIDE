@@ -410,8 +410,8 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Attribute> getSubTypes() {
-		if (getSubTypesBodyOCL == null) {
+	public EList<Attribute> getAllSubTypes() {
+		if (getAllSubTypesBodyOCL == null) {
 			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(5);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
@@ -419,13 +419,13 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 			String body = ocl.getDetails().get("body");
 			
 			try {
-				getSubTypesBodyOCL = helper.createQuery(body);
+				getAllSubTypesBodyOCL = helper.createQuery(body);
 			} catch (ParserException e) {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
 		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getSubTypesBodyOCL);
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllSubTypesBodyOCL);
 	
 		@SuppressWarnings("unchecked")
 		Collection<Attribute> result = (Collection<Attribute>) query.evaluate(this);
@@ -434,13 +434,13 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	}
 
 	/**
-	 * The parsed OCL expression for the body of the '{@link #getSubTypes <em>Get Sub Types</em>}' operation.
+	 * The parsed OCL expression for the body of the '{@link #getAllSubTypes <em>Get All Sub Types</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSubTypes
+	 * @see #getAllSubTypes
 	 * @generated
 	 */
-	private static OCLExpression<EClassifier> getSubTypesBodyOCL;
+	private static OCLExpression<EClassifier> getAllSubTypesBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -704,43 +704,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllTargetAssociationsBodyOCL;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Association> isClassAssociationsIn() {
-		if (isClassAssociationsInBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(13);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				isClassAssociationsInBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(isClassAssociationsInBodyOCL);
-	
-		@SuppressWarnings("unchecked")
-		Collection<Association> result = (Collection<Association>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Association>(result.size(), result.toArray());
-	
-	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #isClassAssociationsIn <em>Is Class Associations In</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isClassAssociationsIn
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> isClassAssociationsInBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->

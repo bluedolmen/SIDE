@@ -14,8 +14,7 @@ package com.bluexml.side.clazz;
  *
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getAspect()
- * @model annotation="http://www.bluexml.com/OCL AspectWithTwoAttributesSameName='self.attributes -> forAll( a1, a2 | a1 <> a2 implies a1.name <>a2.name)'"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='AspectWithTwoAttributesSameName'"
+ * @model
  * @generated
  */
 public interface Aspect extends AbstractClass {
