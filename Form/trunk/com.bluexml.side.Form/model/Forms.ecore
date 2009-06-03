@@ -81,7 +81,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EmailField" eSuperTypes="#//CharField"/>
   <eClassifiers xsi:type="ecore:EClass" name="FileField" eSuperTypes="#//Field">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inRepository" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inRepository" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImageField" eSuperTypes="#//FileField"/>

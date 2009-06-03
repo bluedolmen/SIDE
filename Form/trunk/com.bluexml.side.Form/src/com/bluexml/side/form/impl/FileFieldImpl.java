@@ -22,7 +22,7 @@ import org.eclipse.emf.common.notify.Notification;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.form.impl.FileFieldImpl#getInRepository <em>In Repository</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.FileFieldImpl#isInRepository <em>In Repository</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,23 +30,23 @@ import org.eclipse.emf.common.notify.Notification;
  */
 public class FileFieldImpl extends FieldImpl implements FileField {
 	/**
-	 * The default value of the '{@link #getInRepository() <em>In Repository</em>}' attribute.
+	 * The default value of the '{@link #isInRepository() <em>In Repository</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInRepository()
+	 * @see #isInRepository()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean IN_REPOSITORY_EDEFAULT = Boolean.FALSE;
+	protected static final boolean IN_REPOSITORY_EDEFAULT = false;
 	/**
-	 * The cached value of the '{@link #getInRepository() <em>In Repository</em>}' attribute.
+	 * The cached value of the '{@link #isInRepository() <em>In Repository</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInRepository()
+	 * @see #isInRepository()
 	 * @generated
 	 * @ordered
 	 */
-	protected Boolean inRepository = IN_REPOSITORY_EDEFAULT;
+	protected boolean inRepository = IN_REPOSITORY_EDEFAULT;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -71,7 +71,7 @@ public class FileFieldImpl extends FieldImpl implements FileField {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean getInRepository() {
+	public boolean isInRepository() {
 		return inRepository;
 	}
 
@@ -80,8 +80,8 @@ public class FileFieldImpl extends FieldImpl implements FileField {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInRepository(Boolean newInRepository) {
-		Boolean oldInRepository = inRepository;
+	public void setInRepository(boolean newInRepository) {
+		boolean oldInRepository = inRepository;
 		inRepository = newInRepository;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FILE_FIELD__IN_REPOSITORY, oldInRepository, inRepository));
@@ -96,7 +96,7 @@ public class FileFieldImpl extends FieldImpl implements FileField {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FormPackage.FILE_FIELD__IN_REPOSITORY:
-				return getInRepository();
+				return isInRepository() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -110,7 +110,7 @@ public class FileFieldImpl extends FieldImpl implements FileField {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FormPackage.FILE_FIELD__IN_REPOSITORY:
-				setInRepository((Boolean)newValue);
+				setInRepository(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -140,7 +140,7 @@ public class FileFieldImpl extends FieldImpl implements FileField {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case FormPackage.FILE_FIELD__IN_REPOSITORY:
-				return IN_REPOSITORY_EDEFAULT == null ? inRepository != null : !IN_REPOSITORY_EDEFAULT.equals(inRepository);
+				return inRepository != IN_REPOSITORY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

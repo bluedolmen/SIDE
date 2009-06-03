@@ -14,7 +14,7 @@ package com.bluexml.side.form;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.bluexml.side.form.FileField#getInRepository <em>In Repository</em>}</li>
+ *   <li>{@link com.bluexml.side.form.FileField#isInRepository <em>In Repository</em>}</li>
  * </ul>
  * </p>
  *
@@ -34,20 +34,20 @@ public interface FileField extends Field {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>In Repository</em>' attribute.
-	 * @see #setInRepository(Boolean)
+	 * @see #setInRepository(boolean)
 	 * @see com.bluexml.side.form.FormPackage#getFileField_InRepository()
 	 * @model default="false"
 	 * @generated
 	 */
-	Boolean getInRepository();
+	boolean isInRepository();
 
 	/**
-	 * Sets the value of the '{@link com.bluexml.side.form.FileField#getInRepository <em>In Repository</em>}' attribute.
+	 * Sets the value of the '{@link com.bluexml.side.form.FileField#isInRepository <em>In Repository</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>In Repository</em>' attribute.
-	 * @see #getInRepository()
+	 * @see #isInRepository()
 	 * @generated
 	 */
-	void setInRepository(Boolean value);
+	void setInRepository(boolean value);
 } // FileField

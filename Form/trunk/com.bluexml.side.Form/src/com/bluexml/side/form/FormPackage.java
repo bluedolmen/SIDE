@@ -4401,11 +4401,11 @@ public interface FormPackage extends EPackage {
 	EClass getFileField();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.FileField#getInRepository <em>In Repository</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.FileField#isInRepository <em>In Repository</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>In Repository</em>'.
-	 * @see com.bluexml.side.form.FileField#getInRepository()
+	 * @see com.bluexml.side.form.FileField#isInRepository()
 	 * @see #getFileField()
 	 * @generated
 	 */
