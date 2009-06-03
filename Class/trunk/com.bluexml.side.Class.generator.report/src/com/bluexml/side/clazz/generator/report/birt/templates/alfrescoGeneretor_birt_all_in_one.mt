@@ -341,20 +341,19 @@ report/BIRTReport/S-IDE/All_in_one_<%getDatePath%>.rptdesign
                     </structure>
 					<%for (getAllAttributes()){%>
                 	<structure>
-                        <property name="position"><%i()+1%></property>
+                        <property name="position"><%i()+4%></property>
                         <property name="name"><%getQualifiedName()%></property>
                         <property name="dataType">string</property>
                     </structure>
-                    <%pop()%>
 	                <%i().push()%>
 					<%}%>
 					<structure>
-                        <property name="position"><%peek()+1%></property>
+                        <property name="position"><%peek()+2%></property>
                         <property name="name">totalCount</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position"><%peek()+2%></property>
+                        <property name="position"><%peek()+3%></property>
                         <property name="name">TotalSize</property>
                         <property name="dataType">float</property>
                     </structure>
@@ -385,7 +384,7 @@ report/BIRTReport/S-IDE/All_in_one_<%getDatePath%>.rptdesign
 					</structure>
 					<%for (getAllAttributes()){%>
                 	<structure>
-                        <property name="position"><%i()+1%></property>
+                        <property name="position"><%i()+4%></property>
                         <property name="name"><%getQualifiedName()%></property>
                         <property name="nativeName"><%getQualifiedName()%></property>
                         <property name="dataType">string</property>
@@ -393,7 +392,7 @@ report/BIRTReport/S-IDE/All_in_one_<%getDatePath%>.rptdesign
                     </structure>
 					<%}%>
 					<structure>
-						<property name="position"><%peek()+1%></property>
+						<property name="position"><%peek()+2%></property>
 						<property name="name">totalCount</property>
 						<property name="nativeName">totalCount</property>
 						<property name="dataType">string</property>
@@ -559,7 +558,6 @@ table0#-TNAME-#table0#:#[/records/items/item]#:#{size;STRING;/size},{createdDate
                     <cell id="29">
                         <label id="30">
 	                        <%for (getAllClasses()){%>
-	                        	<%pop()%>
 	                        	<%i().push()%>
 	                        <%}%>
 							<property name="fontFamily">"Tahoma"</property>
@@ -670,7 +668,6 @@ retour;</expression>
                     <cell id="48<%i()%>">
                         <label id="49<%i()%>">
 	                        <%for (getAllAttributes()){%>
-	                        	<%pop()%>
 	                        	<%i().push()%>
 	                        <%}%>
 							<property name="fontFamily">"Tahoma"</property>
@@ -850,7 +847,6 @@ retour;</expression>
                     <expression name="expression">dataSetRow["modifyDate"]</expression>
                     <property name="dataType">string</property>
                 </structure>
-            	<%pop()%>
             	<%i().push()%>
             	<%for (getAllAttributes()){%>
             	<structure>
