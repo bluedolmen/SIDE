@@ -166,7 +166,7 @@ public interface Operation extends OperationComponent {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model required="true" pnameRequired="true"
+	 * @model pnameRequired="true"
 	 *        annotation="http://www.bluexml.com/OCL body='self.getParameters()->select(e:Parameter|e.name =pname)->first()'"
 	 * @generated
 	 */

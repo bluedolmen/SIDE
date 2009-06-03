@@ -37,12 +37,12 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Common.ecore#//ModelElement/documentation"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Common.ecore#//ModelElement/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Common.ecore#//ModelElement/metainfo"/>
-      <genOperations ecoreOperation="Common.ecore#//ModelElement/getDocumentationOrName"/>
-      <genOperations ecoreOperation="Common.ecore#//ModelElement/getDescriptionOrName"/>
     </genClasses>
     <genClasses ecoreClass="Common.ecore#//NamedModelElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Common.ecore#//NamedModelElement/name"/>
       <genOperations ecoreOperation="Common.ecore#//NamedModelElement/getFullName"/>
+      <genOperations ecoreOperation="Common.ecore#//NamedModelElement/getDocumentationOrName"/>
+      <genOperations ecoreOperation="Common.ecore#//NamedModelElement/getDescriptionOrName"/>
     </genClasses>
     <genClasses ecoreClass="Common.ecore#//Comment">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Common.ecore#//Comment/value"/>

@@ -148,22 +148,4 @@ public interface ModelElement extends EObject {
 	 */
 	EList<MetaInfo> getMetainfo();
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation" required="true"
-	 *        annotation="http://www.bluexml.com/OCL body='if self.documentation.oclIsUndefined() or self.documentation.size() <0 then\r\tself.name\relse\r\tself.documentation\rendif'"
-	 * @generated
-	 */
-	String getDocumentationOrName();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation" required="true"
-	 *        annotation="http://www.bluexml.com/OCL body='if self.description.oclIsUndefined() or self.description.size() <0 then\r\tself.name\relse\r\tself.description\rendif'"
-	 * @generated
-	 */
-	String getDescriptionOrName();
-
 } // ModelElement

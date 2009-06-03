@@ -716,14 +716,14 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		initEAttribute(getModelElement_Description(), ecorePackage.getEString(), "description", null, 0, 1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelElement_Metainfo(), this.getMetaInfo(), null, "metainfo", null, 0, -1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(modelElementEClass, ecorePackage.getEString(), "getDocumentationOrName", 1, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(modelElementEClass, ecorePackage.getEString(), "getDescriptionOrName", 1, 1, IS_UNIQUE, IS_ORDERED);
-
 		initEClass(namedModelElementEClass, NamedModelElement.class, "NamedModelElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNamedModelElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(namedModelElementEClass, ecorePackage.getEString(), "getFullName", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(namedModelElementEClass, ecorePackage.getEString(), "getDocumentationOrName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(namedModelElementEClass, ecorePackage.getEString(), "getDescriptionOrName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(commentEClass, Comment.class, "Comment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getComment_Value(), ecorePackage.getEString(), "value", null, 0, 1, Comment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -759,7 +759,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		op = addEOperation(operationEClass, ecorePackage.getEBoolean(), "equalsForMerge", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getOperation(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(operationEClass, this.getParameter(), "getParameter", 1, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(operationEClass, this.getParameter(), "getParameter", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "pname", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -829,22 +829,22 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	protected void createOCLAnnotations() {
 		String source = "http://www.bluexml.com/OCL";		
 		addAnnotation
-		  (modelElementEClass.getEOperations().get(0), 
+		  (namedModelElementEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "if self.getContainer().oclIsUndefined() then\r\tself.name\relse\r\tif self.getContainer().oclIsKindOf(NamedModelElement) then\r\t\tself.getContainer().oclAsType(NamedModelElement).getFullName().concat(\'.\').concat(self.name)\r\telse\r\t\t\'\'\r\tendif\t\rendif"
+		   });		
+		addAnnotation
+		  (namedModelElementEClass.getEOperations().get(1), 
 		   source, 
 		   new String[] {
 			 "body", "if self.documentation.oclIsUndefined() or self.documentation.size() <0 then\r\tself.name\relse\r\tself.documentation\rendif"
 		   });		
 		addAnnotation
-		  (modelElementEClass.getEOperations().get(1), 
+		  (namedModelElementEClass.getEOperations().get(2), 
 		   source, 
 		   new String[] {
 			 "body", "if self.description.oclIsUndefined() or self.description.size() <0 then\r\tself.name\relse\r\tself.description\rendif"
-		   });		
-		addAnnotation
-		  (namedModelElementEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] {
-			 "body", "if self.getContainer().oclIsUndefined() then\r\tself.name\relse\r\tif self.getContainer().oclIsKindOf(NamedModelElement) then\r\t\tself.getContainer().oclAsType(NamedModelElement).getFullName().concat(\'.\').concat(self.name)\r\telse\r\t\t\'\'\r\tendif\t\rendif"
 		   });		
 		addAnnotation
 		  (tagEClass.getEOperations().get(0), 

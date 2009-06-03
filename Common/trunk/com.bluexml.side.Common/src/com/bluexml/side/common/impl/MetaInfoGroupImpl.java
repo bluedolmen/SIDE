@@ -346,9 +346,9 @@ public class MetaInfoGroupImpl extends MetaDataImpl implements MetaInfoGroup {
 	 */
 	public String getDocumentationOrName() {
 		if (getDocumentationOrNameBodyOCL == null) {
-			EOperation eOperation = CommonPackage.Literals.MODEL_ELEMENT.getEOperations().get(0);
+			EOperation eOperation = CommonPackage.Literals.NAMED_MODEL_ELEMENT.getEOperations().get(1);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(CommonPackage.Literals.MODEL_ELEMENT, eOperation);
+			helper.setOperationContext(CommonPackage.Literals.NAMED_MODEL_ELEMENT, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String body = ocl.getDetails().get("body");
 			
@@ -381,9 +381,9 @@ public class MetaInfoGroupImpl extends MetaDataImpl implements MetaInfoGroup {
 	 */
 	public String getDescriptionOrName() {
 		if (getDescriptionOrNameBodyOCL == null) {
-			EOperation eOperation = CommonPackage.Literals.MODEL_ELEMENT.getEOperations().get(1);
+			EOperation eOperation = CommonPackage.Literals.NAMED_MODEL_ELEMENT.getEOperations().get(2);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(CommonPackage.Literals.MODEL_ELEMENT, eOperation);
+			helper.setOperationContext(CommonPackage.Literals.NAMED_MODEL_ELEMENT, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String body = ocl.getDetails().get("body");
 			

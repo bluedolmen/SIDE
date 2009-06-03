@@ -4,16 +4,6 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="common"
     nsURI="http://www.kerblue.org/common/1.0/" nsPrefix="common">
   <eClassifiers xsi:type="ecore:EClass" name="ModelElement">
-    <eOperations name="getDocumentationOrName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="if self.documentation.oclIsUndefined() or self.documentation.size() &lt;0 then&#xD;&#x9;self.name&#xD;else&#xD;&#x9;self.documentation&#xD;endif"/>
-      </eAnnotations>
-    </eOperations>
-    <eOperations name="getDescriptionOrName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="if self.description.oclIsUndefined() or self.description.size() &lt;0 then&#xD;&#x9;self.name&#xD;else&#xD;&#x9;self.description&#xD;endif"/>
-      </eAnnotations>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="stereotypes" upperBound="-1"
         eType="#//Stereotype"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tags" upperBound="-1" eType="#//Tag"
@@ -29,6 +19,16 @@
     <eOperations name="getFullName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="if self.getContainer().oclIsUndefined() then&#xD;&#x9;self.name&#xD;else&#xD;&#x9;if self.getContainer().oclIsKindOf(NamedModelElement) then&#xD;&#x9;&#x9;self.getContainer().oclAsType(NamedModelElement).getFullName().concat('.').concat(self.name)&#xD;&#x9;else&#xD;&#x9;&#x9;''&#xD;&#x9;endif&#x9;&#xD;endif"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getDocumentationOrName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="if self.documentation.oclIsUndefined() or self.documentation.size() &lt;0 then&#xD;&#x9;self.name&#xD;else&#xD;&#x9;self.documentation&#xD;endif"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getDescriptionOrName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="if self.description.oclIsUndefined() or self.description.size() &lt;0 then&#xD;&#x9;self.name&#xD;else&#xD;&#x9;self.description&#xD;endif"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -84,7 +84,7 @@
       </eAnnotations>
       <eParameters name="other" eType="#//Operation"/>
     </eOperations>
-    <eOperations name="getParameter" lowerBound="1" eType="#//Parameter">
+    <eOperations name="getParameter" eType="#//Parameter">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="self.getParameters()->select(e:Parameter|e.name =pname)->first()"/>
       </eAnnotations>
