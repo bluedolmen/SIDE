@@ -73,8 +73,10 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 	 */
 	public Collection<IFile> generate(Map<String, List<IFile>> modelsInfo, String id_metamodel) throws Exception {
 		if (modelsInfo.get(id_metamodel) != null && modelsInfo.get(id_metamodel).size() > 0) {
-			List<IFile> models = modelsInfo.get(id_metamodel);
+			//List<IFile> models = modelsInfo.get(id_metamodel);
 			return generate(modelsInfo.get(id_metamodel).get(0));
+		} else {
+			addWarningLog("No MetaModel available.", "There is no metamodel " + id_metamodel + " given to the Generator.", null);
 		}
 		return null;
 	}
@@ -115,8 +117,10 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 
 		EFactory.eAdd(repository, "files", folder);
 		String path = getTemporaryFolder();
-		if (path == null || path.length() == 0)
+		if (path == null || path.length() == 0) {
+			addErrorLog("No Target path setted.", "There is no target path setted for generation.", null);
 			throw new Exception("Target path must be setted !");
+		}
 
 		new File(IFileHelper.getSystemFolderPath(path)).mkdirs();
 		EFactory.eSet(folder, "path", path);

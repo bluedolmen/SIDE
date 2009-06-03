@@ -1,12 +1,17 @@
 package com.bluexml.side.application.generator;
 
 import java.io.File;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFolder;
 
 import com.bluexml.side.application.StaticConfigurationParameters;
+import com.bluexml.side.application.documentation.structure.LogEntry;
+import com.bluexml.side.application.documentation.structure.LogEntryType;
+import com.bluexml.side.application.documentation.structure.LogType;
+import com.bluexml.side.application.documentation.structure.SIDELog;
 import com.bluexml.side.application.security.Checkable;
 import com.bluexml.side.util.libs.IFileHelper;
 
@@ -22,6 +27,7 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 	protected static Map<String, String> generationParameters = new HashMap<String, String>();
 	protected static Map<String, Boolean> generatorOptions = new HashMap<String, Boolean>();
 	protected static Map<String, String> configurationParameters = new HashMap<String, String>();
+	protected SIDELog log;
 	public String TEMP_FOLDER = "tmp";
 	public static String GENERATOR_CODE = null;
 	protected static String techVersion = null;
@@ -46,6 +52,7 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 		generatorOptions = generatorOptions_;
 		configurationParameters = configurationParameters_;
 		techVersion = techVersion_;
+		log = new SIDELog(techVersion, new Date(),LogType.GENERATION);
 	}
 
 	/**
@@ -56,6 +63,66 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 		if (configurationParameters != null)
 			return configurationParameters.containsKey(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral());
 		return false;
+	}
+	
+	/**
+	 * Add a Log
+	 * @param title
+	 * @param description
+	 * @param uri
+	 * @param logEntryType
+	 */
+	protected void addLog(String title, String description, String uri, LogEntryType logEntryType) {
+		log.addLogEntry(new LogEntry(title, description, uri, logEntryType));
+	}
+	
+	/**
+	 * Add an Error Log
+	 * @param title
+	 * @param description
+	 * @param uri
+	 */
+	public void addErrorLog(String title, String description, String uri) {
+		addLog(title, description, uri, LogEntryType.ERROR);
+	}
+	
+	/**
+	 * Add a warning log
+	 * @param title
+	 * @param description
+	 * @param uri : null if no uri
+	 */
+	public void addWarningLog(String title, String description, String uri) {
+		addLog(title, description, uri, LogEntryType.WARNING);
+	}
+	
+	/**
+	 * Add information log
+	 * @param title
+	 * @param description
+	 * @param uri
+	 */
+	public void addInfoLog(String title, String description, String uri) {
+		addLog(title, description, uri, LogEntryType.GENERATION_INFORMATION);
+	}
+	
+	/**
+	 * Use to log generated file
+	 * @param path
+	 * @param description
+	 * @param uri
+	 */
+	public void addFileGeneratedLog(String path, String description, String uri) {
+		addLog(path, description, null, LogEntryType.GENERATED_FILE);
+	}
+	
+
+	public SIDELog getLog() {
+		return log;
+	}
+
+	public void setLog(SIDELog log) {
+		this.log = log;
 	}
 
 	/**

@@ -2,7 +2,7 @@ package com.bluexml.side.application.documentation.structure;
 
 public enum LogEntryType {
 	GENERATION_INFORMATION("GenerationInformation"), ERROR("Error"), WARNING(
-			"Warning"), DEPLOYEMENT_INFORMATION("DeployementInformation");
+			"Warning"), DEPLOYEMENT_INFORMATION("DeployementInformation"), GENERATED_FILE("GeneratedFile");
 
 	private final String name;
 

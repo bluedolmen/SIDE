@@ -10,13 +10,13 @@ public class SIDELog {
 	private Date date;
 	private String path;
 	private List<LogEntry> logEntries;
-	private LogType logType;
+	private LogType type;
 	
 	public SIDELog(String p_name, Date p_date, LogType p_logType) {
 		logEntries = new ArrayList<LogEntry>();
 		name = p_name;
 		date = p_date;
-		logType = p_logType;
+		type = p_logType;
 	}
 	
 	public String getName() {
@@ -27,12 +27,12 @@ public class SIDELog {
 		this.name = name;
 	}
 
-	public LogType getLogType() {
-		return logType;
+	public LogType getType() {
+		return type;
 	}
 
-	public void setLogType(LogType logType) {
-		this.logType = logType;
+	public void setType(LogType logType) {
+		this.type = logType;
 	}
 
 	public List<LogEntry> getLogEntries() {

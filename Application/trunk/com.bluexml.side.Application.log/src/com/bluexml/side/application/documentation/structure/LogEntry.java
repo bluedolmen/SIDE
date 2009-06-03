@@ -1,18 +1,27 @@
 package com.bluexml.side.application.documentation.structure;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Date;
 
 public class LogEntry {
 	private Date date;
-	private String title;
+	private String name;
 	private String description;
 	private URI uri;
-	private LogEntryType logEntryType;
+	private LogEntryType type;
 	
-	public LogEntry(String title, LogEntryType logEntryType) {
-		this.title = title;
-		this.logEntryType = logEntryType;
+	public LogEntry(String name, String description, String uri, LogEntryType logEntryType) {
+		this.name = name;
+		this.date = new Date();
+		this.type = logEntryType;
+		if (uri != null && uri.length() > 0) {
+			try {
+				this.uri = new URI(uri);
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	public Date getDate() {
 		return date;
@@ -20,11 +29,11 @@ public class LogEntry {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return name;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getDescription() {
 		return description;
@@ -38,11 +47,11 @@ public class LogEntry {
 	public void setUri(URI uri) {
 		this.uri = uri;
 	}
-	public LogEntryType getLogEntryType() {
-		return logEntryType;
+	public LogEntryType getType() {
+		return type;
 	}
-	public void setLogEntryType(LogEntryType logEntryType) {
-		this.logEntryType = logEntryType;
+	public void setType(LogEntryType logEntryType) {
+		this.type = logEntryType;
 	}
 	
 	
