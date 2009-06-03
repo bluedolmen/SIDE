@@ -57,6 +57,20 @@ public class IFileHelper {
 		folder.delete(true, null);
 	}
 	
+	/**
+	 * Create a folder in the active workspace or return an already created folder.
+	 * @param ressource
+	 * @return
+	 * @throws CoreException
+	 */
+	public static IFolder createFolder(String ressource) throws CoreException {
+		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+		IFolder folder = myWorkspaceRoot.getFolder(new Path(ressource));
+		if (!folder.exists()) {
+			folder.create(false, true, null);
+		}
+		return folder;
+	}
 	
 	
 	public static String getSystemFolderPath(String iFilePath) {
@@ -69,10 +83,21 @@ public class IFileHelper {
 		return ff.getRawLocation().makeAbsolute().toOSString();
 	}
 	
-	public static File getFile(IFile ifile) {
-		return ifile.getLocation().makeAbsolute().toFile();
+	/**
+	 * Return the file for resource given.
+	 * @param iresource
+	 * @return
+	 */
+	public static File getFile(IResource iresource) {
+		return iresource.getLocation().makeAbsolute().toFile();
 	}
 	
+	/**
+	 * Return all files for a given folder. Iterate over sub folder too (folder aren't added)
+	 * @param folder
+	 * @return
+	 * @throws Exception
+	 */
 	public static List<IFile> getAllFiles(IFolder folder) throws Exception {
 		List<IFile> results = new ArrayList<IFile>();
 		for (IResource r : folder.members()) {

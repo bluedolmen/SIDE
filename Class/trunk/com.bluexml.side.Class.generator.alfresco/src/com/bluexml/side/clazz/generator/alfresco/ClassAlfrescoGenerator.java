@@ -42,6 +42,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		if (classTemplates == null) {
 			List<String> result = new ArrayList<String>();
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_DATAMODEL)) {
+				
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/Model/alfrescoGenerator_model.mt");
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/Model/alfrescoGenerator_model_properties.mt");
 

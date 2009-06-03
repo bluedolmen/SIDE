@@ -14,7 +14,8 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.Util.ecore;bundle-version="1.0.1",
  org.eclipse.core.databinding,
  org.eclipse.core.databinding.beans,
- org.eclipse.jface.databinding
+ org.eclipse.jface.databinding,
+ com.bluexml.side.Application.log
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Import-Package: com.bluexml.side.application.deployer,
  com.bluexml.side.application.deployer.alfresco,
