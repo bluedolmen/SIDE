@@ -26,7 +26,7 @@ report/BIRTReport/S-IDE/All_in_one_<%getDatePath%>.rptdesign
             <property name="paramType">multi-value</property>
             <property name="isRequired">true</property>
             <property name="controlType">list-box</property>
-            <property name="dataSetName">Data Set count</property>
+            <property name="dataSetName">Data Set type</property>
             <expression name="valueExpr">dataSetRow["type"]</expression>
             <expression name="labelExpr">dataSetRow["type"]</expression>
             <property name="mustMatch">true</property>
@@ -72,9 +72,330 @@ report/BIRTReport/S-IDE/All_in_one_<%getDatePath%>.rptdesign
     <%}%>
     </data-sources>
     
-    <data-sets> 
-    
-            <oda-data-set extensionID="org.eclipse.datatools.enablement.oda.xml.dataSet" name="Data Set" id="5">
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.datatools.enablement.oda.xml.dataSet" name="Data Set" id="5">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">totalsize</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["size"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">in</property>
+                    <expression name="expr">row["type"]</expression>
+                    <simple-property-list name="value1">
+                        <value>params["Type"].value</value>
+                    </simple-property-list>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">type</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">totalcount</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">size</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">createdDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">modifyDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">totalsize</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source all</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">type</property>
+                    <property name="nativeName">type</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">totalcount</property>
+                    <property name="nativeName">totalcount</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">size</property>
+                    <property name="nativeName">size</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">createdDate</property>
+                    <property name="nativeName">createdDate</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">modifyDate</property>
+                    <property name="nativeName">modifyDate</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <property name="queryText">table0#-TNAME-#table0#:#[/items/item/instance]#:#{type;STRING;../type},{totalcount;STRING;../totalcount},{size;STRING;/size},{createdDate;STRING;/createdDate},{modifyDate;STRING;/modifyDate}</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>size</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>size</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>createdDate</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>createdDate</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>modifyDate</design:name>
+            <design:position>3</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>modifyDate</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>MAX_ROW</name>
+                    <value>-1</value>
+                </ex-property>
+                <ex-property>
+                    <name>XML_FILE</name>
+                </ex-property>
+            </list-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.datatools.enablement.oda.xml.dataSet" name="Data Set count" id="60">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">total</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["totalcount"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">in</property>
+                    <expression name="expr">row["type"]</expression>
+                    <simple-property-list name="value1">
+                        <value>params["Type"].value</value>
+                    </simple-property-list>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">type</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">totalcount</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">total</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source all</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">type</property>
+                    <property name="nativeName">type</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">totalcount</property>
+                    <property name="nativeName">totalcount</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <property name="queryText">table0#-TNAME-#table0#:#[/items/item]#:#{type;STRING;/type},{totalcount;STRING;/totalcount}</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>type</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>type</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>totalcount</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>totalcount</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>MAX_ROW</name>
+                    <value>-1</value>
+                </ex-property>
+                <ex-property>
+                    <name>XML_FILE</name>
+                </ex-property>
+            </list-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.datatools.enablement.oda.xml.dataSet" name="Data Set type" id="59">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">type</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source all</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">type</property>
+                    <property name="nativeName">type</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <property name="queryText">table0#-TNAME-#table0#:#[/items/item]#:#{type;STRING;/type}</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>type</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>type</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>
+]]></xml-property>
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>MAX_ROW</name>
+                    <value>-1</value>
+                </ex-property>
+                <ex-property>
+                    <name>XML_FILE</name>
+                </ex-property>
+            </list-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.datatools.enablement.oda.xml.dataSet" name="Data Set All" id="58">
             <list-property name="computedColumns">
                 <structure>
                     <property name="name">totalsize</property>
@@ -124,24 +445,28 @@ report/BIRTReport/S-IDE/All_in_one_<%getDatePath%>.rptdesign
                     <property name="name">totalcount</property>
                     <property name="nativeName">totalcount</property>
                     <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
                     <property name="name">size</property>
                     <property name="nativeName">size</property>
                     <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
                     <property name="name">createdDate</property>
                     <property name="nativeName">createdDate</property>
                     <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
                     <property name="position">4</property>
                     <property name="name">modifyDate</property>
                     <property name="nativeName">modifyDate</property>
                     <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
                 </structure>
             </list-property>
             <property name="queryText">table0#-TNAME-#table0#:#[/items/item/instance]#:#{totalcount;STRING;../totalcount},{size;STRING;/size},{createdDate;STRING;/createdDate},{modifyDate;STRING;/modifyDate}</property>
@@ -207,8 +532,7 @@ report/BIRTReport/S-IDE/All_in_one_<%getDatePath%>.rptdesign
                 </ex-property>
             </list-property>
         </oda-data-set>
-    
-    <oda-data-set extensionID="org.eclipse.datatools.enablement.oda.xml.dataSet" name="Data Set count" id="6">
+        <oda-data-set extensionID="org.eclipse.datatools.enablement.oda.xml.dataSet" name="Data Set count All" id="57">
             <list-property name="computedColumns">
                 <structure>
                     <property name="name">total</property>
@@ -339,24 +663,23 @@ report/BIRTReport/S-IDE/All_in_one_<%getDatePath%>.rptdesign
                         <property name="name">modifyDate</property>
                         <property name="dataType">string</property>
                     </structure>
-					<%for (getAllAttributes()){%>
-                	<structure>
-                        <property name="position"><%i()+4%></property>
-                        <property name="name"><%getQualifiedName()%></property>
-                        <property name="dataType">string</property>
-                    </structure>
-	                <%i().push()%>
-					<%}%>
 					<structure>
-                        <property name="position"><%peek()+2%></property>
+                        <property name="position">4</property>
                         <property name="name">totalCount</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position"><%peek()+3%></property>
+                        <property name="position">5</property>
                         <property name="name">TotalSize</property>
                         <property name="dataType">float</property>
                     </structure>
+                    <%for (getAllAttributes()){%>
+                	<structure>
+                        <property name="position"><%i()+6%></property>
+                        <property name="name"><%getQualifiedName()%></property>
+                        <property name="dataType">string</property>
+                    </structure>
+					<%}%>
                 </list-property>
             </structure>
             <property name="dataSource">Data Source <%name%></property>
@@ -382,22 +705,22 @@ report/BIRTReport/S-IDE/All_in_one_<%getDatePath%>.rptdesign
 						<property name="dataType">string</property>
 						<property name="nativeDataType">12</property>
 					</structure>
+					<structure>
+						<property name="position">4</property>
+						<property name="name">totalCount</property>
+						<property name="nativeName">totalCount</property>
+						<property name="dataType">string</property>
+						<property name="nativeDataType">12</property>
+					</structure>
 					<%for (getAllAttributes()){%>
                 	<structure>
-                        <property name="position"><%i()+4%></property>
+                        <property name="position"><%i()+5%></property>
                         <property name="name"><%getQualifiedName()%></property>
                         <property name="nativeName"><%getQualifiedName()%></property>
                         <property name="dataType">string</property>
                         <property name="nativeDataType">12</property>
                     </structure>
 					<%}%>
-					<structure>
-						<property name="position"><%peek()+2%></property>
-						<property name="name">totalCount</property>
-						<property name="nativeName">totalCount</property>
-						<property name="dataType">string</property>
-						<property name="nativeDataType">12</property>
-					</structure>
             </list-property>
             <%getAllAttributes().nLast().put("last")%>
             <property name="queryText">
@@ -566,35 +889,63 @@ table0#-TNAME-#table0#:#[/records/items/item]#:#{size;STRING;/size},{createdDate
                         </label>
                     </cell>
                 </row>
-                <row id="31">
-                    <cell id="32">
-                        <label id="33">
-                            <property name="fontFamily">"Tahoma"</property>
-                            <property name="fontWeight">bold</property>
-                            <text-property name="text">Number of files: </text-property>
-                        </label>
-                    </cell>
-                    <cell id="34">
-                        <data id="35">
-							<property name="fontFamily">"Tahoma"</property>
-							<property name="fontStyle">italic</property>
-							<property name="resultSetColumn">total</property>
-						</data>
-                    </cell>
-                </row>
-                <row id="36">
-                    <cell id="37">
-                        <label id="38">
-                            <property name="fontFamily">"Tahoma"</property>
-                            <property name="fontWeight">bold</property>
-                            <text-property name="text">Total Size of files: </text-property>
-                        </label>
-                    </cell>
-                    <cell id="39">
-                        <data id="40">
-						<property name="fontFamily">"Tahoma"</property>
-						<property name="fontStyle">italic</property>
-						<structure name="numberFormat">
+        </grid>
+		<grid id="31">
+            <property name="width">100%</property>
+            <list-property name="visibility">
+                <structure>
+                    <property name="format">all</property>
+                    <expression name="valueExpr">var retour = false;
+if(params["Header"].value){
+	for(i = 0; i&lt;params["Type"].value.length ; i++){
+		if(params["Type"].value[i] == "All"){
+			retour = true;
+		}
+	}
+}
+retour;</expression>
+                </structure>
+            </list-property>
+            <column id="32"/>
+            <column id="33"/>
+            <row id="34">
+                <cell id="35">
+                    <label id="36">
+                        <property name="fontFamily">"Tahoma"</property>
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">Number of files: </text-property>
+                    </label>
+                </cell>
+                <cell id="37">
+                    <data id="38">
+                        <property name="fontFamily">"Tahoma"</property>
+                        <property name="fontStyle">italic</property>
+                        <property name="dataSet">Data Set count</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">total</property>
+                                <property name="displayName">total</property>
+                                <expression name="expression">dataSetRow["total"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">total</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="39">
+                <cell id="40">
+                    <label id="41">
+                        <property name="fontFamily">"Tahoma"</property>
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">Total Size of files: </text-property>
+                    </label>
+                </cell>
+                <cell id="42">
+                    <data id="43">
+                        <property name="fontFamily">"Tahoma"</property>
+                        <property name="fontStyle">italic</property>
+                        <structure name="numberFormat">
                             <property name="category">Custom</property>
                             <property name="pattern">###,##0.00 Bytes</property>
                         </structure>
@@ -609,8 +960,77 @@ table0#-TNAME-#table0#:#[/records/items/item]#:#{size;STRING;/size},{createdDate
                         </list-property>
                         <property name="resultSetColumn">TotalSize</property>
                     </data>
-                    </cell>
-                </row>
+                </cell>
+            </row>
+        </grid>
+        <grid id="44">
+            <property name="width">100%</property>
+            <list-property name="visibility">
+                <structure>
+                    <property name="format">all</property>
+                    <expression name="valueExpr">var retour = true;
+if(params["Header"].value){
+	for(i = 0; i&lt;params["Type"].value.length ; i++){
+		if(params["Type"].value[i] == "All"){
+			retour = false;
+		}
+	}
+}
+retour;</expression>
+                </structure>
+            </list-property>
+            <column id="45"/>
+            <column id="46"/>
+            <row id="47">
+                <cell id="48">
+                    <label id="49">
+                        <property name="fontFamily">"Tahoma"</property>
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">Number of files: </text-property>
+                    </label>
+                </cell>
+                <cell id="50">
+                    <data id="51">
+                        <property name="fontFamily">"Tahoma"</property>
+                        <property name="fontStyle">italic</property>
+                        <property name="dataSet">Data Set count All</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">total</property>
+                                <property name="displayName">total</property>
+                                <expression name="expression">dataSetRow["total"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">total</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="52">
+                <cell id="53">
+                    <label id="54">
+                        <property name="fontFamily">"Tahoma"</property>
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">Total Size of files: </text-property>
+                    </label>
+                </cell>
+                <cell id="55">
+                    <data id="56">
+                        <property name="fontFamily">"Tahoma"</property>
+                        <property name="fontStyle">italic</property>
+                        <property name="dataSet">Data Set All</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">totalsize</property>
+                                <property name="displayName">TotalSize</property>
+                                <expression name="expression">dataSetRow["totalsize"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">totalsize</property>
+                    </data>
+                </cell>
+            </row>
         </grid>
     	<%for (getAllClasses()){%>
         <text id="41<%i()%>">
@@ -621,7 +1041,7 @@ table0#-TNAME-#table0#:#[/records/items/item]#:#{size;STRING;/size},{createdDate
 var retour = true;
 if(params["Header"].value){
 	for(i = 0; i&lt;params["Type"].value.length ; i++){
-		if(params["Type"].value[i] == "<%name%>" || params["Type"].value[0] == "All"){
+		if(params["Type"].value[i] == "<%getLabel()%>" || params["Type"].value[i] == "All"){
 			retour = false;
 		}
 	}
@@ -647,7 +1067,7 @@ retour;</expression>
                     <expression name="valueExpr">var retour = true;
 if(params["Header"].value){
 	for(i = 0; i&lt;params["Type"].value.length ; i++){
-		if(params["Type"].value[i] == "<%name%>" || params["Type"].value[0] == "All"){
+		if(params["Type"].value[i] == "<%getLabel()%>" || params["Type"].value[i] == "All"){
 			retour = false;
 		}
 	}
@@ -793,7 +1213,7 @@ retour;</expression>
 var retour = true;
 if(params["Footer"].value){
 	for(i = 0; i&lt;params["Type"].value.length ; i++){
-		if(params["Type"].value[i] == "<%name%>" || params["Type"].value[0] == "All"){
+		if(params["Type"].value[i] == "<%getLabel()%>" || params["Type"].value[i] == "All"){
 			retour = false;
 		}
 	}
@@ -819,7 +1239,7 @@ retour;</expression>
                     <expression name="valueExpr">var retour = true;
 if(params["Footer"].value){
 	for(i = 0; i&lt;params["Type"].value.length ; i++){
-		if(params["Type"].value[i] == "<%name%>" || params["Type"].value[0] == "All"){
+		if(params["Type"].value[i] == "<%getLabel()%>" || params["Type"].value[i] == "All"){
 			retour = false;
 		}
 	}
