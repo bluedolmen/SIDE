@@ -218,7 +218,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractClass" abstract="true" eSuperTypes="#//TitledNamedClassModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="TwoModelElementWithSameName" value="AbstractContainer.allInstances()->select(a | a.name = self.name and a.getContainer() = self.getContainer() and a &lt;> self)->size() = 0"/>
+      <details key="TwoModelElementWithSameName" value="AbstractClass.allInstances()->select(a | a.name = self.name and a.getContainer() = self.getContainer() and a &lt;> self)->size() = 0"/>
       <details key="NameNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
       <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') = true"/>
     </eAnnotations>
@@ -244,7 +244,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassComment" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Comment"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AssociationEnd" abstract="true" eSuperTypes="#//TitledNamedClassModelElement">
+  <eClassifiers xsi:type="ecore:EClass" name="AssociationEnd" abstract="true" eSuperTypes="#//TitledNamedClassModelElement ../../com.bluexml.side.Common/model/Common.ecore#//Comment">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardMin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardMax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"

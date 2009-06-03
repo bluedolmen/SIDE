@@ -28,6 +28,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.clazz.ClassComment} object.
@@ -121,6 +122,16 @@ public class ClassCommentItemProvider
 			(createChildParameter
 				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
 				 ClazzFactory.eINSTANCE.createClassComment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+				 ClazzFactory.eINSTANCE.createFirstEnd()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+				 ClazzFactory.eINSTANCE.createSecondEnd()));
 	}
 
 	/**

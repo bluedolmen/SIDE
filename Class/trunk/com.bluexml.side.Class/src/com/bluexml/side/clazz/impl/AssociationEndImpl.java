@@ -13,6 +13,8 @@ import com.bluexml.side.clazz.AssociationEnd;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.ClazzPackage;
 
+import com.bluexml.side.common.Comment;
+import com.bluexml.side.common.CommonPackage;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -30,6 +32,7 @@ import org.eclipse.ocl.ecore.OCL;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link com.bluexml.side.clazz.impl.AssociationEndImpl#getValue <em>Value</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationEndImpl#getCardMin <em>Card Min</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationEndImpl#getCardMax <em>Card Max</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationEndImpl#isIsNavigable <em>Is Navigable</em>}</li>
@@ -40,6 +43,26 @@ import org.eclipse.ocl.ecore.OCL;
  * @generated
  */
 public abstract class AssociationEndImpl extends TitledNamedClassModelElementImpl implements AssociationEnd {
+	/**
+	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String VALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String value = VALUE_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getCardMin() <em>Card Min</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -127,6 +150,27 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 	@Override
 	protected EClass eStaticClass() {
 		return ClazzPackage.Literals.ASSOCIATION_END;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getValue() {
+		return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setValue(String newValue) {
+		String oldValue = value;
+		value = newValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.ASSOCIATION_END__VALUE, oldValue, value));
 	}
 
 	/**
@@ -238,6 +282,8 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case ClazzPackage.ASSOCIATION_END__VALUE:
+				return getValue();
 			case ClazzPackage.ASSOCIATION_END__CARD_MIN:
 				return getCardMin();
 			case ClazzPackage.ASSOCIATION_END__CARD_MAX:
@@ -259,6 +305,9 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case ClazzPackage.ASSOCIATION_END__VALUE:
+				setValue((String)newValue);
+				return;
 			case ClazzPackage.ASSOCIATION_END__CARD_MIN:
 				setCardMin((String)newValue);
 				return;
@@ -283,6 +332,9 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case ClazzPackage.ASSOCIATION_END__VALUE:
+				setValue(VALUE_EDEFAULT);
+				return;
 			case ClazzPackage.ASSOCIATION_END__CARD_MIN:
 				setCardMin(CARD_MIN_EDEFAULT);
 				return;
@@ -307,6 +359,8 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case ClazzPackage.ASSOCIATION_END__VALUE:
+				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 			case ClazzPackage.ASSOCIATION_END__CARD_MIN:
 				return CARD_MIN_EDEFAULT == null ? cardMin != null : !CARD_MIN_EDEFAULT.equals(cardMin);
 			case ClazzPackage.ASSOCIATION_END__CARD_MAX:
@@ -325,11 +379,45 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 	 * @generated
 	 */
 	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == Comment.class) {
+			switch (derivedFeatureID) {
+				case ClazzPackage.ASSOCIATION_END__VALUE: return CommonPackage.COMMENT__VALUE;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == Comment.class) {
+			switch (baseFeatureID) {
+				case CommonPackage.COMMENT__VALUE: return ClazzPackage.ASSOCIATION_END__VALUE;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (cardMin: ");
+		result.append(" (value: ");
+		result.append(value);
+		result.append(", cardMin: ");
 		result.append(cardMin);
 		result.append(", cardMax: ");
 		result.append(cardMax);

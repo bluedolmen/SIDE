@@ -15,6 +15,7 @@ import com.bluexml.side.common.impl.CommentImpl;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.ocl.ecore.OCL;
 
 /**

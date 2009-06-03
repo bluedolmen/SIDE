@@ -844,7 +844,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		  (namedModelElementEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
-			 "body", "if self.getContainer().oclIsUndefined() then\r\tself.name\relse\r\tif self.getContainer().oclIsKindOf(NamedModelElement) then\r\t\tself.getContainer().oclAsType(NamedModelElement).getFullName().concat(\'.\').concat(self.name)\r\telse\r\t\t\"\"\r\tendif\t\rendif"
+			 "body", "if self.getContainer().oclIsUndefined() then\r\tself.name\relse\r\tif self.getContainer().oclIsKindOf(NamedModelElement) then\r\t\tself.getContainer().oclAsType(NamedModelElement).getFullName().concat(\'.\').concat(self.name)\r\telse\r\t\t\'\'\r\tendif\t\rendif"
 		   });		
 		addAnnotation
 		  (tagEClass.getEOperations().get(0), 

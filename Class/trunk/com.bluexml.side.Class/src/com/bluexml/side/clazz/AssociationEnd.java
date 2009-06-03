@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.clazz;
 
+import com.bluexml.side.common.Comment;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -27,7 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface AssociationEnd extends TitledNamedClassModelElement {
+public interface AssociationEnd extends TitledNamedClassModelElement, Comment {
 	/**
 	 * Returns the value of the '<em><b>Card Min</b></em>' attribute.
 	 * The default value is <code>"0"</code>.

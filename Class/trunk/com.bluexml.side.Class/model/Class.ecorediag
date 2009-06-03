@@ -526,17 +526,4 @@
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_X6pywE6AEd602IXkjCLPVw" id="(0.5,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_X6qZ0E6AEd602IXkjCLPVw" id="(0.42735043,1.0)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_TbvskE6CEd602IXkjCLPVw" type="3002" source="_U2FOgE6AEd602IXkjCLPVw" target="_I9b6oE6CEd602IXkjCLPVw">
-    <children xmi:type="notation:Node" xmi:id="_TbwToE6CEd602IXkjCLPVw" type="4011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_TbwToU6CEd602IXkjCLPVw" x="-10" y="-10"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_TbwTok6CEd602IXkjCLPVw" type="4012">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_TbwTo06CEd602IXkjCLPVw" x="10" y="10"/>
-    </children>
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="_TbvskU6CEd602IXkjCLPVw" lineColor="0"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_Tbvskk6CEd602IXkjCLPVw" fontName="Lucida Grande" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="Class.ecore#//ClassModelElement/metainfo.1"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Tbvsk06CEd602IXkjCLPVw" points="[-3, 8, 9, -218]$[-117, 168, -105, -58]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_TbyI0E6CEd602IXkjCLPVw" id="(0.39583334,0.82978725)"/>
-  </edges>
 </notation:Diagram>

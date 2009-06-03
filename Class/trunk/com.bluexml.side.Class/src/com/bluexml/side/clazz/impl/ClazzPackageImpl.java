@@ -765,6 +765,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		titledNamedClassModelElementEClass.getESuperTypes().add(this.getClassModelElement());
 		classCommentEClass.getESuperTypes().add(theCommonPackage.getComment());
 		associationEndEClass.getESuperTypes().add(this.getTitledNamedClassModelElement());
+		associationEndEClass.getESuperTypes().add(theCommonPackage.getComment());
 		firstEndEClass.getESuperTypes().add(this.getAssociationEnd());
 		secondEndEClass.getESuperTypes().add(this.getAssociationEnd());
 
@@ -1077,7 +1078,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		  (abstractClassEClass, 
 		   source, 
 		   new String[] {
-			 "TwoModelElementWithSameName", "AbstractContainer.allInstances()->select(a | a.name = self.name and a.getContainer() = self.getContainer() and a <> self)->size() = 0",
+			 "TwoModelElementWithSameName", "AbstractClass.allInstances()->select(a | a.name = self.name and a.getContainer() = self.getContainer() and a <> self)->size() = 0",
 			 "NameNull", "not self.name.oclIsUndefined() and self.name <> \'\'",
 			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true"
 		   });			

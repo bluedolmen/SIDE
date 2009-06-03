@@ -204,7 +204,9 @@ public class AssociationItemProvider
 
 		boolean qualify =
 			childFeature == CommonPackage.Literals.MODEL_ELEMENT__COMMENTS ||
-			childFeature == ClazzPackage.Literals.CLASS_MODEL_ELEMENT__HAS_COMMENTS;
+			childFeature == ClazzPackage.Literals.CLASS_MODEL_ELEMENT__HAS_COMMENTS ||
+			childFeature == ClazzPackage.Literals.ASSOCIATION__FIRST_END ||
+			childFeature == ClazzPackage.Literals.ASSOCIATION__SECOND_END;
 
 		if (qualify) {
 			return getString

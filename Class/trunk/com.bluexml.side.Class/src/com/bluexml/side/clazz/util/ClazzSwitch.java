@@ -194,6 +194,7 @@ public class ClazzSwitch<T> {
 				AssociationEnd associationEnd = (AssociationEnd)theEObject;
 				T result = caseAssociationEnd(associationEnd);
 				if (result == null) result = caseTitledNamedClassModelElement(associationEnd);
+				if (result == null) result = caseComment(associationEnd);
 				if (result == null) result = caseNamedModelElement(associationEnd);
 				if (result == null) result = caseClassModelElement(associationEnd);
 				if (result == null) result = caseModelElement(associationEnd);
@@ -205,6 +206,7 @@ public class ClazzSwitch<T> {
 				T result = caseFirstEnd(firstEnd);
 				if (result == null) result = caseAssociationEnd(firstEnd);
 				if (result == null) result = caseTitledNamedClassModelElement(firstEnd);
+				if (result == null) result = caseComment(firstEnd);
 				if (result == null) result = caseNamedModelElement(firstEnd);
 				if (result == null) result = caseClassModelElement(firstEnd);
 				if (result == null) result = caseModelElement(firstEnd);
@@ -216,6 +218,7 @@ public class ClazzSwitch<T> {
 				T result = caseSecondEnd(secondEnd);
 				if (result == null) result = caseAssociationEnd(secondEnd);
 				if (result == null) result = caseTitledNamedClassModelElement(secondEnd);
+				if (result == null) result = caseComment(secondEnd);
 				if (result == null) result = caseNamedModelElement(secondEnd);
 				if (result == null) result = caseClassModelElement(secondEnd);
 				if (result == null) result = caseModelElement(secondEnd);

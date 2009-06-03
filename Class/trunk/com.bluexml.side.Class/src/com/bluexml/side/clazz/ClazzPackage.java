@@ -1353,13 +1353,22 @@ public interface ClazzPackage extends EPackage {
 	int ASSOCIATION_END__TITLE = TITLED_NAMED_CLASS_MODEL_ELEMENT__TITLE;
 
 	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_END__VALUE = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_END__CARD_MIN = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 0;
+	int ASSOCIATION_END__CARD_MIN = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Card Max</b></em>' attribute.
@@ -1368,7 +1377,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_END__CARD_MAX = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 1;
+	int ASSOCIATION_END__CARD_MAX = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Is Navigable</b></em>' attribute.
@@ -1377,7 +1386,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_END__IS_NAVIGABLE = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int ASSOCIATION_END__IS_NAVIGABLE = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Linked Class</b></em>' reference.
@@ -1386,7 +1395,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_END__LINKED_CLASS = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 3;
+	int ASSOCIATION_END__LINKED_CLASS = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Association End</em>' class.
@@ -1395,7 +1404,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_END_FEATURE_COUNT = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 4;
+	int ASSOCIATION_END_FEATURE_COUNT = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.FirstEndImpl <em>First End</em>}' class.
@@ -1487,6 +1496,15 @@ public interface ClazzPackage extends EPackage {
 	 * @ordered
 	 */
 	int FIRST_END__TITLE = ASSOCIATION_END__TITLE;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIRST_END__VALUE = ASSOCIATION_END__VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.
@@ -1623,6 +1641,15 @@ public interface ClazzPackage extends EPackage {
 	 * @ordered
 	 */
 	int SECOND_END__TITLE = ASSOCIATION_END__TITLE;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECOND_END__VALUE = ASSOCIATION_END__VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Card Min</b></em>' attribute.

@@ -211,6 +211,16 @@ public class EnumerationItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+				 ClazzFactory.eINSTANCE.createFirstEnd()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+				 ClazzFactory.eINSTANCE.createSecondEnd()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(ClazzPackage.Literals.ENUMERATION__LITERALS,
 				 ClazzFactory.eINSTANCE.createEnumerationLiteral()));
 	}

@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.clazz;
 
+import org.eclipse.emf.ecore.EObject;
 import com.bluexml.side.common.Comment;
 
 /**
