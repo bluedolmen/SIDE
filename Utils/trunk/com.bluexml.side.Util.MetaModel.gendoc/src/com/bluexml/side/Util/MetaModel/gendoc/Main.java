@@ -2,6 +2,7 @@ package com.bluexml.side.Util.MetaModel.gendoc;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
@@ -11,6 +12,7 @@ import java.util.logging.Logger;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
@@ -47,18 +49,35 @@ public class Main {
 		 Set<Object> keys = properties.keySet();
 		 for (Object key : keys) {
 			String palettePath = properties.getProperty((String) key);
-			HashMap<String, List<String>> palette = ParsePalette.extractNames(ParsePalette.extractGenClass("../"+palettePath));
-			Set<String> metamodels = palette.keySet();
-			for (String metamodel : metamodels) {
-				List<String> objects = palette.get(metamodel);
+			if (palettePath.indexOf(".ecore")>0) {
+				// case of a file with the extension .ecore in the file modelspath.properties
+				EPackage ePackage = Main.getEPackage("../"+palettePath);
+				List<String> objects = new ArrayList<String>();
+				List<EClassifier> classifiers = ePackage.getEClassifiers();
+				for (EClassifier classifier : classifiers) {
+					objects.add(classifier.getName());
+				}
+				
 				DocMetaModel processDoc = new DocMetaModel();
-				EPackage ePackage = getEPackage("../"+metamodel);
 				processDoc.head(ePackage);
 				processDoc.processPackage(ePackage, objects);
 				processDoc.foot(ePackage);
 			}
+			else {
+				HashMap<String, List<String>> palette = ParsePalette.extractNames(ParsePalette.extractGenClass("../"+palettePath));
+				Set<String> metamodels = palette.keySet();
+				for (String metamodel : metamodels) {
+					List<String> objects = palette.get(metamodel);
+					DocMetaModel processDoc = new DocMetaModel();
+					EPackage ePackage = getEPackage("../"+metamodel);
+					processDoc.head(ePackage);
+					processDoc.processPackage(ePackage, objects);
+					processDoc.foot(ePackage);
+				}
+			}
 		 }	
 	}
+
 	
 	/**
 	 * Récupère le package père dans un fichier .ecore
