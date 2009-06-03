@@ -357,7 +357,7 @@ public class DocMetaModel {
 				}
 			}
 			else{
-				file.write("<row><entry><para></entry>");
+				file.write("<row><entry><para /></entry>");
 				file.write("<entry><para>"+key+"</para></entry>");
 				file.write("<entry><para>"+value[0]+"</para></entry>");
 				file.write("</row>");
