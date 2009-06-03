@@ -180,7 +180,7 @@ public class FormModelWizard extends Wizard implements INewWizard {
 		this.workbench = workbench;
 		this.selection = selection;
 		setWindowTitle(FormsEditorPlugin.INSTANCE.getString("_UI_Wizard_label"));
-		setDefaultPageImageDescriptor(ExtendedImageRegistry.INSTANCE.getImageDescriptor(FormsEditorPlugin.INSTANCE.getImage("full/wizban/Newform")));
+		setDefaultPageImageDescriptor(ExtendedImageRegistry.INSTANCE.getImageDescriptor(FormsEditorPlugin.INSTANCE.getImage("full/wizban/NewForm")));
 	}
 
 	/**

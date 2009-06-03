@@ -29,6 +29,7 @@ import com.bluexml.side.form.FormPackage;
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getInitial <em>Initial</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#isDisabled <em>Disabled</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getFieldSize <em>Field Size</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getStyle <em>Style</em>}</li>
  * </ul>
  * </p>
  *
@@ -124,6 +125,26 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	 * @ordered
 	 */
 	protected Integer fieldSize = FIELD_SIZE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getStyle() <em>Style</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStyle()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String STYLE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getStyle() <em>Style</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStyle()
+	 * @generated
+	 * @ordered
+	 */
+	protected String style = STYLE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -254,6 +275,27 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getStyle() {
+		return style;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStyle(String newStyle) {
+		String oldStyle = style;
+		style = newStyle;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FIELD__STYLE, oldStyle, style));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -267,6 +309,8 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 				return isDisabled() ? Boolean.TRUE : Boolean.FALSE;
 			case FormPackage.FIELD__FIELD_SIZE:
 				return getFieldSize();
+			case FormPackage.FIELD__STYLE:
+				return getStyle();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -295,6 +339,9 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 			case FormPackage.FIELD__FIELD_SIZE:
 				setFieldSize((Integer)newValue);
 				return;
+			case FormPackage.FIELD__STYLE:
+				setStyle((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -322,6 +369,9 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 			case FormPackage.FIELD__FIELD_SIZE:
 				setFieldSize(FIELD_SIZE_EDEFAULT);
 				return;
+			case FormPackage.FIELD__STYLE:
+				setStyle(STYLE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -344,6 +394,8 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 				return disabled != DISABLED_EDEFAULT;
 			case FormPackage.FIELD__FIELD_SIZE:
 				return FIELD_SIZE_EDEFAULT == null ? fieldSize != null : !FIELD_SIZE_EDEFAULT.equals(fieldSize);
+			case FormPackage.FIELD__STYLE:
+				return STYLE_EDEFAULT == null ? style != null : !STYLE_EDEFAULT.equals(style);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -368,6 +420,8 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 		result.append(disabled);
 		result.append(", fieldSize: ");
 		result.append(fieldSize);
+		result.append(", style: ");
+		result.append(style);
 		result.append(')');
 		return result.toString();
 	}

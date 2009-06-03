@@ -538,6 +538,15 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getField_Style() {
+		return (EAttribute)fieldEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBooleanField() {
 		return booleanFieldEClass;
 	}
@@ -792,6 +801,15 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 */
 	public EClass getFileField() {
 		return fileFieldEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFileField_InRepository() {
+		return (EAttribute)fileFieldEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1182,6 +1200,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		createEAttribute(fieldEClass, FIELD__INITIAL);
 		createEAttribute(fieldEClass, FIELD__DISABLED);
 		createEAttribute(fieldEClass, FIELD__FIELD_SIZE);
+		createEAttribute(fieldEClass, FIELD__STYLE);
 
 		booleanFieldEClass = createEClass(BOOLEAN_FIELD);
 
@@ -1221,6 +1240,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		emailFieldEClass = createEClass(EMAIL_FIELD);
 
 		fileFieldEClass = createEClass(FILE_FIELD);
+		createEAttribute(fileFieldEClass, FILE_FIELD__IN_REPOSITORY);
 
 		imageFieldEClass = createEClass(IMAGE_FIELD);
 
@@ -1369,6 +1389,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEAttribute(getField_Initial(), ecorePackage.getEString(), "initial", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_Disabled(), ecorePackage.getEBoolean(), "disabled", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_FieldSize(), ecorePackage.getEIntegerObject(), "fieldSize", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getField_Style(), ecorePackage.getEString(), "style", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(booleanFieldEClass, BooleanField.class, "BooleanField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1408,6 +1429,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEClass(emailFieldEClass, EmailField.class, "EmailField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(fileFieldEClass, FileField.class, "FileField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFileField_InRepository(), ecorePackage.getEBooleanObject(), "inRepository", "false", 0, 1, FileField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(imageFieldEClass, ImageField.class, "ImageField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

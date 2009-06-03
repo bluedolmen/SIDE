@@ -21,6 +21,7 @@ import java.util.Map;
  *   <li>{@link com.bluexml.side.form.Field#getInitial <em>Initial</em>}</li>
  *   <li>{@link com.bluexml.side.form.Field#isDisabled <em>Disabled</em>}</li>
  *   <li>{@link com.bluexml.side.form.Field#getFieldSize <em>Field Size</em>}</li>
+ *   <li>{@link com.bluexml.side.form.Field#getStyle <em>Style</em>}</li>
  * </ul>
  * </p>
  *
@@ -158,5 +159,31 @@ public interface Field extends FormElement {
 	 * @generated
 	 */
 	void setFieldSize(Integer value);
+
+	/**
+	 * Returns the value of the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Style</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Style</em>' attribute.
+	 * @see #setStyle(String)
+	 * @see com.bluexml.side.form.FormPackage#getField_Style()
+	 * @model
+	 * @generated
+	 */
+	String getStyle();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.form.Field#getStyle <em>Style</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Style</em>' attribute.
+	 * @see #getStyle()
+	 * @generated
+	 */
+	void setStyle(String value);
 
 } // Field

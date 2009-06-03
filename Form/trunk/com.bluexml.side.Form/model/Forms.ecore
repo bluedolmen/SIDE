@@ -34,6 +34,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="initial" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="disabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fieldSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanField" eSuperTypes="#//Field"/>
   <eClassifiers xsi:type="ecore:EClass" name="CharField" eSuperTypes="#//Field">
@@ -79,7 +80,10 @@
         defaultValueLiteral="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EmailField" eSuperTypes="#//CharField"/>
-  <eClassifiers xsi:type="ecore:EClass" name="FileField" eSuperTypes="#//Field"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FileField" eSuperTypes="#//Field">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inRepository" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
+        defaultValueLiteral="false"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImageField" eSuperTypes="#//FileField"/>
   <eClassifiers xsi:type="ecore:EClass" name="TimeField" eSuperTypes="#//DateField"/>
   <eClassifiers xsi:type="ecore:EClass" name="URLField" eSuperTypes="#//CharField">

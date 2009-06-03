@@ -66,6 +66,7 @@ public class FieldItemProvider
 			addInitialPropertyDescriptor(object);
 			addDisabledPropertyDescriptor(object);
 			addFieldSizePropertyDescriptor(object);
+			addStylePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -181,6 +182,28 @@ public class FieldItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Style feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStylePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Field_style_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Field_style_feature", "_UI_Field_type"),
+				 FormPackage.Literals.FIELD__STYLE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -210,6 +233,7 @@ public class FieldItemProvider
 			case FormPackage.FIELD__INITIAL:
 			case FormPackage.FIELD__DISABLED:
 			case FormPackage.FIELD__FIELD_SIZE:
+			case FormPackage.FIELD__STYLE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

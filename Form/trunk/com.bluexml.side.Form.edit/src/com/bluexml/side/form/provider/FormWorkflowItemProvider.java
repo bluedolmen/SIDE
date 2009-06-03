@@ -84,7 +84,7 @@ public class FormWorkflowItemProvider
 		String label = ((FormWorkflow)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_FormWorkflow_type") :
-			label;
+			getString("_UI_FormWorkflow_type") + " " + label;
 	}
 
 	/**

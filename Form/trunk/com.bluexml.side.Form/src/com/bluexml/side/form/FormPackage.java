@@ -318,13 +318,22 @@ public interface FormPackage extends EPackage {
 	int FIELD__FIELD_SIZE = FORM_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__STYLE = FORM_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_FEATURE_COUNT = FORM_ELEMENT_FEATURE_COUNT + 5;
+	int FIELD_FEATURE_COUNT = FORM_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.BooleanFieldImpl <em>Boolean Field</em>}' class.
@@ -425,6 +434,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOLEAN_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__STYLE = FIELD__STYLE;
 
 	/**
 	 * The number of structural features of the '<em>Boolean Field</em>' class.
@@ -534,6 +552,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int CHAR_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_FIELD__STYLE = FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
@@ -661,6 +688,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATE_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__STYLE = FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Input formats</b></em>' attribute list.
@@ -799,6 +835,15 @@ public interface FormPackage extends EPackage {
 	int DATE_TIME_FIELD__FIELD_SIZE = DATE_FIELD__FIELD_SIZE;
 
 	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__STYLE = DATE_FIELD__STYLE;
+
+	/**
 	 * The feature id for the '<em><b>Input formats</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -933,6 +978,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int DECIMAL_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__STYLE = FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Min value</b></em>' attribute.
@@ -1080,6 +1134,15 @@ public interface FormPackage extends EPackage {
 	int FLOAT_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
 
 	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__STYLE = FIELD__STYLE;
+
+	/**
 	 * The feature id for the '<em><b>Min value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1207,6 +1270,15 @@ public interface FormPackage extends EPackage {
 	int INTEGER_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
 
 	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__STYLE = FIELD__STYLE;
+
+	/**
 	 * The feature id for the '<em><b>Min value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1332,6 +1404,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int MODEL_CHOICE_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_FIELD__STYLE = FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Real class</b></em>' reference.
@@ -1515,6 +1596,15 @@ public interface FormPackage extends EPackage {
 	int EMAIL_FIELD__FIELD_SIZE = CHAR_FIELD__FIELD_SIZE;
 
 	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__STYLE = CHAR_FIELD__STYLE;
+
+	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1642,13 +1732,31 @@ public interface FormPackage extends EPackage {
 	int FILE_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
 
 	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__STYLE = FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>In Repository</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__IN_REPOSITORY = FIELD_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>File Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FILE_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
+	int FILE_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.ImageFieldImpl <em>Image Field</em>}' class.
@@ -1749,6 +1857,24 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMAGE_FIELD__FIELD_SIZE = FILE_FIELD__FIELD_SIZE;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__STYLE = FILE_FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>In Repository</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__IN_REPOSITORY = FILE_FIELD__IN_REPOSITORY;
 
 	/**
 	 * The number of structural features of the '<em>Image Field</em>' class.
@@ -1858,6 +1984,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int TIME_FIELD__FIELD_SIZE = DATE_FIELD__FIELD_SIZE;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__STYLE = DATE_FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Input formats</b></em>' attribute list.
@@ -1996,6 +2131,15 @@ public interface FormPackage extends EPackage {
 	int URL_FIELD__FIELD_SIZE = CHAR_FIELD__FIELD_SIZE;
 
 	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__STYLE = CHAR_FIELD__STYLE;
+
+	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2130,6 +2274,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int PHONE_NUMBER_FIELD__FIELD_SIZE = CHAR_FIELD__FIELD_SIZE;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__STYLE = CHAR_FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
@@ -2577,6 +2730,15 @@ public interface FormPackage extends EPackage {
 	int REFERENCE__FIELD_SIZE = MODEL_CHOICE_FIELD__FIELD_SIZE;
 
 	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__STYLE = MODEL_CHOICE_FIELD__STYLE;
+
+	/**
 	 * The feature id for the '<em><b>Real class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2787,6 +2949,15 @@ public interface FormPackage extends EPackage {
 	int CHOICE_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
 
 	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_FIELD__STYLE = FIELD__STYLE;
+
+	/**
 	 * The feature id for the '<em><b>Min bound</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2948,6 +3119,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int REGEX_FIELD__FIELD_SIZE = CHAR_FIELD__FIELD_SIZE;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGEX_FIELD__STYLE = CHAR_FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
@@ -3123,6 +3303,15 @@ public interface FormPackage extends EPackage {
 	int PASSWORD_FIELD__FIELD_SIZE = CHAR_FIELD__FIELD_SIZE;
 
 	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__STYLE = CHAR_FIELD__STYLE;
+
+	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3250,6 +3439,15 @@ public interface FormPackage extends EPackage {
 	int VIRTUAL_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
 
 	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_FIELD__STYLE = FIELD__STYLE;
+
+	/**
 	 * The feature id for the '<em><b>Link</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3368,6 +3566,15 @@ public interface FormPackage extends EPackage {
 	int ACTION_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
 
 	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__STYLE = FIELD__STYLE;
+
+	/**
 	 * The number of structural features of the '<em>Action Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3475,6 +3682,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEXT_FIELD__FIELD_SIZE = CHAR_FIELD__FIELD_SIZE;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__STYLE = CHAR_FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
@@ -3865,6 +4081,17 @@ public interface FormPackage extends EPackage {
 	EAttribute getField_FieldSize();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.Field#getStyle <em>Style</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Style</em>'.
+	 * @see com.bluexml.side.form.Field#getStyle()
+	 * @see #getField()
+	 * @generated
+	 */
+	EAttribute getField_Style();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.BooleanField <em>Boolean Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4172,6 +4399,17 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getFileField();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.FileField#getInRepository <em>In Repository</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>In Repository</em>'.
+	 * @see com.bluexml.side.form.FileField#getInRepository()
+	 * @see #getFileField()
+	 * @generated
+	 */
+	EAttribute getFileField_InRepository();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.ImageField <em>Image Field</em>}'.
@@ -4726,6 +4964,14 @@ public interface FormPackage extends EPackage {
 		EAttribute FIELD__FIELD_SIZE = eINSTANCE.getField_FieldSize();
 
 		/**
+		 * The meta object literal for the '<em><b>Style</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FIELD__STYLE = eINSTANCE.getField_Style();
+
+		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.BooleanFieldImpl <em>Boolean Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4976,6 +5222,14 @@ public interface FormPackage extends EPackage {
 		 * @generated
 		 */
 		EClass FILE_FIELD = eINSTANCE.getFileField();
+
+		/**
+		 * The meta object literal for the '<em><b>In Repository</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FILE_FIELD__IN_REPOSITORY = eINSTANCE.getFileField_InRepository();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.ImageFieldImpl <em>Image Field</em>}' class.

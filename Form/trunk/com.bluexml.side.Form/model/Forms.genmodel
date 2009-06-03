@@ -47,6 +47,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/initial"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/disabled"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/fieldSize"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/style"/>
     </genClasses>
     <genClasses ecoreClass="Forms.ecore#//BooleanField"/>
     <genClasses ecoreClass="Forms.ecore#//CharField">
@@ -82,7 +83,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//ModelChoiceField/show_actions"/>
     </genClasses>
     <genClasses ecoreClass="Forms.ecore#//EmailField"/>
-    <genClasses ecoreClass="Forms.ecore#//FileField"/>
+    <genClasses ecoreClass="Forms.ecore#//FileField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FileField/inRepository"/>
+    </genClasses>
     <genClasses ecoreClass="Forms.ecore#//ImageField"/>
     <genClasses ecoreClass="Forms.ecore#//TimeField"/>
     <genClasses ecoreClass="Forms.ecore#//URLField">

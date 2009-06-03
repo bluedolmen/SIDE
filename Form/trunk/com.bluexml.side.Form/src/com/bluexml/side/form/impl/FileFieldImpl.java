@@ -9,20 +9,44 @@ package com.bluexml.side.form.impl;
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.form.FileField;
 import com.bluexml.side.form.FormPackage;
+import org.eclipse.emf.common.notify.Notification;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>File Field</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link com.bluexml.side.form.impl.FileFieldImpl#getInRepository <em>In Repository</em>}</li>
+ * </ul>
  * </p>
  *
  * @generated
  */
 public class FileFieldImpl extends FieldImpl implements FileField {
+	/**
+	 * The default value of the '{@link #getInRepository() <em>In Repository</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInRepository()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IN_REPOSITORY_EDEFAULT = Boolean.FALSE;
+	/**
+	 * The cached value of the '{@link #getInRepository() <em>In Repository</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInRepository()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean inRepository = IN_REPOSITORY_EDEFAULT;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -40,6 +64,101 @@ public class FileFieldImpl extends FieldImpl implements FileField {
 	@Override
 	protected EClass eStaticClass() {
 		return FormPackage.Literals.FILE_FIELD;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean getInRepository() {
+		return inRepository;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInRepository(Boolean newInRepository) {
+		Boolean oldInRepository = inRepository;
+		inRepository = newInRepository;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FILE_FIELD__IN_REPOSITORY, oldInRepository, inRepository));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case FormPackage.FILE_FIELD__IN_REPOSITORY:
+				return getInRepository();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case FormPackage.FILE_FIELD__IN_REPOSITORY:
+				setInRepository((Boolean)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case FormPackage.FILE_FIELD__IN_REPOSITORY:
+				setInRepository(IN_REPOSITORY_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case FormPackage.FILE_FIELD__IN_REPOSITORY:
+				return IN_REPOSITORY_EDEFAULT == null ? inRepository != null : !IN_REPOSITORY_EDEFAULT.equals(inRepository);
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (inRepository: ");
+		result.append(inRepository);
+		result.append(')');
+		return result.toString();
 	}
 
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
