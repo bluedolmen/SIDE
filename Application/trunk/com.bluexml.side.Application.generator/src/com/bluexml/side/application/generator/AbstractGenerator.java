@@ -15,7 +15,7 @@ import com.bluexml.side.application.documentation.structure.enumeration.LogType;
 import com.bluexml.side.application.security.Checkable;
 import com.bluexml.side.util.libs.IFileHelper;
 
-public abstract class AbstractGenerator implements IGenerator,Checkable {
+public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * generationParameters : the list of selected options for the generation
@@ -43,6 +43,7 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 	public void setTEMP_FOLDER(String s) {
 		TEMP_FOLDER = s;
 	}
+
 	public String getTEMP_FOLDER() {
 		return TEMP_FOLDER;
 	}
@@ -52,21 +53,12 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 		generatorOptions = generatorOptions_;
 		configurationParameters = configurationParameters_;
 		techVersion = techVersion_;
-		log = new SIDELog(techVersion, new Date(),LogType.GENERATION);
-	}
-
-	/**
-	 * Return if log might be done or not.
-	 * @return
-	 */
-	protected boolean doLog() {
-		if (configurationParameters != null)
-			return configurationParameters.containsKey(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral());
-		return false;
+		log = new SIDELog(techVersion, new Date(), LogType.GENERATION);
 	}
 	
 	/**
 	 * Add a Log
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -75,9 +67,10 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 	protected void addLog(String title, String description, String uri, LogEntryType logEntryType) {
 		log.addLogEntry(new LogEntry(title, description, uri, logEntryType));
 	}
-	
+
 	/**
 	 * Add an Error Log
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -85,36 +78,39 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 	public void addErrorLog(String title, String description, String uri) {
 		addLog(title, description, uri, LogEntryType.ERROR);
 	}
-	
+
 	/**
 	 * Add an error log using a stracktrace instead of a string description
+	 * 
 	 * @param title
 	 * @param stackTrace
 	 * @param uri
 	 */
-	public void addErrorLog(String title, StackTraceElement[] stackTrace,
-			String uri) {
+	public void addErrorLog(String title, StackTraceElement[] stackTrace, String uri) {
 		String description = "";
 		if (stackTrace != null && stackTrace.length > 0) {
-			for (StackTraceElement se : stackTrace){
+			for (StackTraceElement se : stackTrace) {
 				description += System.getProperty("line.separator") + se.toString();
 			}
 		}
-		addErrorLog(title,description,uri);
+		addErrorLog(title, description, uri);
 	}
-	
+
 	/**
 	 * Add a warning log
+	 * 
 	 * @param title
 	 * @param description
-	 * @param uri : null if no uri
+	 * @param uri
+	 *            : null if no uri
 	 */
 	public void addWarningLog(String title, String description, String uri) {
 		addLog(title, description, uri, LogEntryType.WARNING);
 	}
-	
+
 	/**
 	 * Add information log
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -122,9 +118,10 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 	public void addInfoLog(String title, String description, String uri) {
 		addLog(title, description, uri, LogEntryType.GENERATION_INFORMATION);
 	}
-	
+
 	/**
 	 * Use to log generated file
+	 * 
 	 * @param path
 	 * @param description
 	 * @param uri
@@ -132,7 +129,6 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 	public void addFileGeneratedLog(String path, String description, String uri) {
 		addLog(path, description, null, LogEntryType.GENERATED_FILE);
 	}
-	
 
 	public SIDELog getLog() {
 		return log;
@@ -143,17 +139,18 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 	}
 
 	/**
-	 * Return the log target folder
+	 * Return the log target file (only generator)
+	 * 
 	 * @return
 	 */
 	protected String getLogFile() {
-		if (doLog())
-			return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral());
-		return null;
+		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()+getClass().getName());
+
 	}
 
 	/**
 	 * Return the absolute path to the generation target path
+	 * 
 	 * @return
 	 */
 	protected final String getTargetSystemPath() {
@@ -163,6 +160,7 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 
 	/**
 	 * Return the generation target folder (as File).
+	 * 
 	 * @return
 	 */
 	protected final File getTargetSystemFile() {
@@ -172,6 +170,7 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 
 	/**
 	 * Return the target path (workspace path)
+	 * 
 	 * @return
 	 */
 	public final String getTargetPath() {
@@ -180,6 +179,7 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 
 	/**
 	 * Return if generation might be verbose or not
+	 * 
 	 * @return
 	 */
 	protected static boolean doVerbose() {
@@ -191,6 +191,7 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 
 	/**
 	 * Return if cleaning might be done or not.
+	 * 
 	 * @return
 	 */
 	protected static boolean doClean() {
@@ -222,7 +223,8 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 	}
 
 	/**
-	 * Return the absolute path for temp folder of generation 
+	 * Return the absolute path for temp folder of generation
+	 * 
 	 * @return
 	 */
 	protected final String getTemporarySystemFolder() {
@@ -231,6 +233,7 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 
 	/**
 	 * Return the tempory path to temp folder of generation (wokspace path)
+	 * 
 	 * @return
 	 */
 	protected final String getTemporaryFolder() {
@@ -245,6 +248,6 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 		System.out.println("GenerationParameters :" + generationParameters);
 		System.out.println("ConfigurationParameters :" + configurationParameters);
 		System.out.println("TechVersion :" + techVersion);
-		
+
 	}
 }
