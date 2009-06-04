@@ -663,6 +663,7 @@ public class ApplicationDialog extends Dialog {
 	 *            : the element
 	 * @return true if valid, false if not
 	 */
+	@SuppressWarnings("unchecked")
 	private Boolean checkElementValidity(TreeElement el) {
 		// If the element is a component and not valid we don't enable it
 		try {

@@ -9,16 +9,10 @@ import java.io.IOException;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
 
-import com.bluexml.side.application.documentation.converter.LogEntryConverter;
 import com.bluexml.side.application.documentation.structure.LogEntry;
 import com.bluexml.side.application.documentation.structure.SIDELog;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.converters.Converter;
-import com.thoughtworks.xstream.converters.MarshallingContext;
-import com.thoughtworks.xstream.converters.UnmarshallingContext;
-import com.thoughtworks.xstream.io.HierarchicalStreamReader;
-import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class LogSave {
@@ -50,13 +44,13 @@ public class LogSave {
 		xstream.alias("SIDELog", SIDELog.class);
 		xstream.alias("logEntry", LogEntry.class);
 		
-		xstream.useAttributeFor("date", SIDELog.class);
-		xstream.useAttributeFor("name", SIDELog.class);
-		xstream.useAttributeFor("type", SIDELog.class);
-		LogEntryConverter lec = new LogEntryConverter();
-		xstream.registerConverter(lec);
+		xstream.addImplicitCollection(SIDELog.class, "logEntries");
 		
-		xstream.useAttributeFor("type", LogEntry.class);
+		xstream.useAttributeFor(SIDELog.class, "date");
+		xstream.useAttributeFor(SIDELog.class, "name");
+		xstream.useAttributeFor(SIDELog.class, "type");
+		
+		xstream.useAttributeFor(LogEntry.class, "type");
 		
 		xstream.toXML(log,fos);
 	}

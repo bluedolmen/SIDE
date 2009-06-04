@@ -1,4 +1,4 @@
-package com.bluexml.side.application.documentation.structure;
+package com.bluexml.side.application.documentation.structure.enumeration;
 
 public enum LogEntryType {
 	GENERATION_INFORMATION("GenerationInformation"), ERROR("Error"), WARNING(

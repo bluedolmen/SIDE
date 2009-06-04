@@ -1,4 +1,4 @@
-package com.bluexml.side.application.documentation.structure;
+package com.bluexml.side.application.documentation.structure.enumeration;
 
 public enum LogType {
 	GENERATION("Generation"), DEPLOYEMENT("Deployement");

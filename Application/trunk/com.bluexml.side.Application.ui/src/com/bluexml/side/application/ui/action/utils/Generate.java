@@ -218,6 +218,7 @@ public class Generate extends Thread {
 					} catch (Exception e) {
 						error = true;
 						addErrorText(System.getProperty("line.separator") + "ERROR : " + (e.getMessage() != null ? e.getMessage() : ""));
+						generator.addErrorLog("Initialization error : " + e.getMessage(), e.getStackTrace(), null);
 						e.printStackTrace();
 					}
 
@@ -244,15 +245,16 @@ public class Generate extends Thread {
 							} catch (Exception e) {
 								error = true;
 								addErrorText(System.getProperty("line.separator") + "ERROR : " + (e.getMessage() != null ? e.getMessage() : ""));
+								generator.addErrorLog("Generation error : " + e.getMessage(), e.getStackTrace(), null);
 								e.printStackTrace();
 							}
 							addOneStep(progressBar);
 						}
 					} else {
 						addErrorText(System.getProperty("line.separator") + "ERROR : " + "this feature is not activited, please check your plugin licence");
+						generator.addErrorLog("Feature not available", "Feature is not activited, please check your plugin licence", null);
 					}
 				}
-				generator.addInfoLog("Test", "Description de test", null);
 				String fileName = generator.getTechVersion() + ".xml";
 				String confName = configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + System.getProperty ("file.separator") + configuration.getName();
 				LogSave.toXml(generator.getLog(),fileName, confName);

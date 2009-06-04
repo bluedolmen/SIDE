@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.bluexml.side.application.documentation.structure.enumeration.LogType;
+
 public class SIDELog {
 	private String name;
 	private String description;
@@ -14,6 +16,14 @@ public class SIDELog {
 	
 	public SIDELog(String p_name, Date p_date, LogType p_logType) {
 		logEntries = new ArrayList<LogEntry>();
+		name = p_name;
+		date = p_date;
+		type = p_logType;
+	}
+	
+	public SIDELog(String p_name, String p_description, Date p_date, LogType p_logType) {
+		logEntries = new ArrayList<LogEntry>();
+		description = p_description;
 		name = p_name;
 		date = p_date;
 		type = p_logType;

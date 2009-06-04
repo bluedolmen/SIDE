@@ -4,6 +4,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Date;
 
+import com.bluexml.side.application.documentation.structure.enumeration.LogEntryType;
+
 public class LogEntry {
 	private Date date;
 	private String name;
@@ -13,6 +15,7 @@ public class LogEntry {
 	
 	public LogEntry(String name, String description, String uri, LogEntryType logEntryType) {
 		this.name = name;
+		this.description = description;
 		this.date = new Date();
 		this.type = logEntryType;
 		if (uri != null && uri.length() > 0) {

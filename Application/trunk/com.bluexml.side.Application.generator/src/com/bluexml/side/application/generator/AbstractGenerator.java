@@ -9,9 +9,9 @@ import org.eclipse.core.resources.IFolder;
 
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.documentation.structure.LogEntry;
-import com.bluexml.side.application.documentation.structure.LogEntryType;
-import com.bluexml.side.application.documentation.structure.LogType;
 import com.bluexml.side.application.documentation.structure.SIDELog;
+import com.bluexml.side.application.documentation.structure.enumeration.LogEntryType;
+import com.bluexml.side.application.documentation.structure.enumeration.LogType;
 import com.bluexml.side.application.security.Checkable;
 import com.bluexml.side.util.libs.IFileHelper;
 
@@ -84,6 +84,23 @@ public abstract class AbstractGenerator implements IGenerator,Checkable {
 	 */
 	public void addErrorLog(String title, String description, String uri) {
 		addLog(title, description, uri, LogEntryType.ERROR);
+	}
+	
+	/**
+	 * Add an error log using a stracktrace instead of a string description
+	 * @param title
+	 * @param stackTrace
+	 * @param uri
+	 */
+	public void addErrorLog(String title, StackTraceElement[] stackTrace,
+			String uri) {
+		String description = "";
+		if (stackTrace != null && stackTrace.length > 0) {
+			for (StackTraceElement se : stackTrace){
+				description += System.getProperty("line.separator") + se.toString();
+			}
+		}
+		addErrorLog(title,description,uri);
 	}
 	
 	/**
