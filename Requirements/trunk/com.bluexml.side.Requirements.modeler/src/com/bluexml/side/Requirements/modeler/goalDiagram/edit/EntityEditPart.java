@@ -35,8 +35,8 @@ import com.bluexml.side.Requirements.modeler.goalDiagram.commands.update.EntityU
 import com.bluexml.side.Requirements.modeler.goalDiagram.dialogs.EntityDialog;
 import com.bluexml.side.Requirements.modeler.goalDiagram.figures.EntityFigure;
 import com.bluexml.side.Requirements.modeler.goalDiagram.policies.EntityLayoutEditPolicy;
-import com.bluexml.side.Requirements.modeler.goalDiagram.policies.PrivilegeGroupEdgeCreationEditPolicy;
 import com.bluexml.side.Requirements.modeler.goalDiagram.policies.RelationShipEdgeCreationEditPolicy;
+import com.bluexml.side.Requirements.modeler.goalDiagram.policies.isLinkedToEntityEdgeCreationEditPolicy;
 import com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferenceConstants;
 import com.bluexml.side.requirements.Entity;
 
@@ -67,8 +67,8 @@ public class EntityEditPart extends EMFGraphNodeEditPart {
 		installEditPolicy(ReqEditPolicyConstants.RELATIONSHIP_EDITPOLICY,
 				new RelationShipEdgeCreationEditPolicy());
 
-		installEditPolicy(ReqEditPolicyConstants.PRIVILEGEGROUP_EDITPOLICY,
-				new PrivilegeGroupEdgeCreationEditPolicy());
+		installEditPolicy(ReqEditPolicyConstants.ISLINKEDTOENTITY_EDITPOLICY,
+				new isLinkedToEntityEdgeCreationEditPolicy());
 
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {
@@ -101,12 +101,14 @@ public class EntityEditPart extends EMFGraphNodeEditPart {
 
 		ReqConfiguration config = new ReqConfiguration();
 		if (getGraphNode().getContained().size() > 0) {
-			GraphNode attributesListNode = (GraphNode) getGraphNode().getContained().get(0);
+			GraphNode attributesListNode = (GraphNode) getGraphNode()
+					.getContained().get(0);
 			EList attributesList = attributesListNode.getContained();
 			while (attributesList.size() > 0)
 				attributesList.remove(0);
 			for (Object o : entity.getAttributes()) {
-				GraphElement elt = config.getCreationUtils().createGraphElement((EObject) o);
+				GraphElement elt = config.getCreationUtils()
+						.createGraphElement((EObject) o);
 				if (elt != null)
 					attributesList.add(elt);
 			}
@@ -115,7 +117,7 @@ public class EntityEditPart extends EMFGraphNodeEditPart {
 		IFigure result = new EntityFigure();
 		return result;
 	}
-	
+
 	/**
 	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getPreferenceDefaultBackgroundColor()
 	 * @generated
@@ -155,7 +157,7 @@ public class EntityEditPart extends EMFGraphNodeEditPart {
 		return null;
 
 	}
-	
+
 	@Override
 	protected Font getDefaultFont() {
 		FontData[] fData = Display.getDefault().getSystemFont().getFontData();
@@ -170,9 +172,11 @@ public class EntityEditPart extends EMFGraphNodeEditPart {
 		Entity e = (Entity) Utils.getElement(getGraphNode());
 
 		if (request.getType() == RequestConstants.REQ_OPEN) {
-			EntityDialog dialog = new EntityDialog(ModelerPlugin.getActiveWorkbenchShell(), e);
+			EntityDialog dialog = new EntityDialog(ModelerPlugin
+					.getActiveWorkbenchShell(), e);
 			if (dialog.open() == Window.OK) {
-				EntityUpdateCommand command = new EntityUpdateCommand(e, dialog.getData());
+				EntityUpdateCommand command = new EntityUpdateCommand(e, dialog
+						.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
 				refresh();
 			}

@@ -36,6 +36,11 @@ public class ReqPaletteManager extends ModelerPaletteManager {
 	/**
 	 * @generated
 	 */
+	private PaletteDrawer privilegegroupDrawer;
+
+	/**
+	 * @generated
+	 */
 	private ICreationUtils creationUtils;
 
 	/**
@@ -57,6 +62,7 @@ public class ReqPaletteManager extends ModelerPaletteManager {
 	protected void createCategories() {
 		createNodeDrawer();
 		createEdgeDrawer();
+		createPrivilegeGroupDrawer();
 	}
 
 	/**
@@ -72,6 +78,9 @@ public class ReqPaletteManager extends ModelerPaletteManager {
 
 		getRoot().remove(edgeDrawer);
 		createEdgeDrawer();
+
+		getRoot().remove(privilegegroupDrawer);
+		createPrivilegeGroupDrawer();
 	}
 
 	/**
@@ -108,6 +117,19 @@ public class ReqPaletteManager extends ModelerPaletteManager {
 		entries.add(new ModelerCreationToolEntry("Attribute", "Attribute",
 				factory, ReqImageRegistry.getImageDescriptor("ATTRIBUTE"),
 				ReqImageRegistry.getImageDescriptor("ATTRIBUTE_LARGE")));
+
+		factory = new GraphElementCreationFactory(creationUtils,
+				RequirementsPackage.eINSTANCE.getPrivilegeGroup(), "default");
+		entries.add(new ModelerCreationToolEntry("Privilege Group",
+				"Privilege Group", factory, ReqImageRegistry
+						.getImageDescriptor("PRIVILEGEGROUP"), ReqImageRegistry
+						.getImageDescriptor("PRIVILEGEGROUP_LARGE")));
+
+		factory = new GraphElementCreationFactory(creationUtils,
+				RequirementsPackage.eINSTANCE.getPrivilege(), "default");
+		entries.add(new ModelerCreationToolEntry("Privilege", "Privilege",
+				factory, ReqImageRegistry.getImageDescriptor("PRIVILEGE"),
+				ReqImageRegistry.getImageDescriptor("PRIVILEGE_LARGE")));
 
 		nodeDrawer.addAll(entries);
 		getRoot().add(nodeDrawer);
@@ -147,15 +169,41 @@ public class ReqPaletteManager extends ModelerPaletteManager {
 						.getImageDescriptor("RELATIONSHIP"), ReqImageRegistry
 						.getImageDescriptor("RELATIONSHIP_LARGE")));
 
-		factory = new GraphElementCreationFactory(creationUtils,
-				RequirementsPackage.eINSTANCE.getPrivilegeGroup(), "default");
-		entries.add(new ModelerConnectionCreationToolEntry("Privilege",
-				"Privilege", factory, ReqImageRegistry
-						.getImageDescriptor("PRIVILEGEGROUP"), ReqImageRegistry
-						.getImageDescriptor("PRIVILEGEGROUP_LARGE")));
-
 		edgeDrawer.addAll(entries);
 		getRoot().add(edgeDrawer);
+	}
+
+	/**
+	 * Creates the Palette container containing all the Palette entries for each figure.
+	 *
+	 * @generated
+	 */
+	private void createPrivilegeGroupDrawer() {
+		privilegegroupDrawer = new PaletteDrawer("PrivilegeGroup", null);
+		List<PaletteEntry> entries = new ArrayList<PaletteEntry>();
+
+		CreationFactory factory;
+
+		factory = new GraphElementCreationFactory(creationUtils,
+				ReqSimpleObjectConstants.SIMPLE_OBJECT_HASPRIVILEGEGROUP,
+				"default", false);
+		entries
+				.add(new ModelerConnectionCreationToolEntry("Goal to Group",
+						"Goal to Group", factory, ReqImageRegistry
+								.getImageDescriptor("HASPRIVILEGEGROUP"),
+						ReqImageRegistry
+								.getImageDescriptor("HASPRIVILEGEGROUP_LARGE")));
+
+		factory = new GraphElementCreationFactory(creationUtils,
+				ReqSimpleObjectConstants.SIMPLE_OBJECT_ISLINKEDTOENTITY,
+				"default", false);
+		entries.add(new ModelerConnectionCreationToolEntry("Group to Entity",
+				"Group to Entity", factory, ReqImageRegistry
+						.getImageDescriptor("ISLINKEDTOENTITY"),
+				ReqImageRegistry.getImageDescriptor("ISLINKEDTOENTITY_LARGE")));
+
+		privilegegroupDrawer.addAll(entries);
+		getRoot().add(privilegegroupDrawer);
 	}
 
 }

@@ -3,13 +3,19 @@
  ******************************************************************************/
 package com.bluexml.side.Requirements.modeler.goalDiagram.figures;
 
-import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
-import org.eclipse.swt.SWT;
+import org.eclipse.draw2d.CompoundBorder;
+import org.eclipse.draw2d.Figure;
+import org.eclipse.draw2d.LineBorder;
+import org.eclipse.draw2d.MarginBorder;
+import org.eclipse.draw2d.ToolbarLayout;
+import org.topcased.draw2d.figures.Label;
+
 
 /**
  * @generated
  */
-public class PrivilegeGroupFigure extends PolylineConnectionEx {
+public class PrivilegeGroupFigure extends
+		org.topcased.draw2d.figures.ClassFigure {
 
 	/**
 	 * The constructor
@@ -18,7 +24,23 @@ public class PrivilegeGroupFigure extends PolylineConnectionEx {
 	 */
 	public PrivilegeGroupFigure() {
 		super();
-		setLineStyle(SWT.LINE_SOLID);
+	}
+	
+	@Override
+	protected void drawFigure() {
+
+		ToolbarLayout layout = new ToolbarLayout();
+		setLayoutManager(layout);
+
+		setBorder(new CompoundBorder(new LineBorder(), new MarginBorder(1)));
+		setOpaque(true);
+		
+		setLabel(new Label());
+		add(getLabel());
+
+		setContentPane(new Figure());
+		getContentPane().setLayoutManager(new ToolbarLayout());
+		add(getContentPane());
 	}
 
 }

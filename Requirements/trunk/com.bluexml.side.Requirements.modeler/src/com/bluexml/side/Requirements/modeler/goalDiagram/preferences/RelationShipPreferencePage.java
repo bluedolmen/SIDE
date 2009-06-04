@@ -87,7 +87,7 @@ public class RelationShipPreferencePage extends AbstractEdgePreferencePage {
 	 * @see org.topcased.modeler.preferences.AbstractEdgePreferencePage#storeEdgeObjectVisibility(java.util.List)
 	 * @generated
 	 */
-	protected void storeEdgeObjectVisibility(List<String> visibleElement) {
+	protected void storeEdgeObjectVisibility(List visibleElement) {
 		IPreferenceStore ps = getPreferenceStore();
 	}
 

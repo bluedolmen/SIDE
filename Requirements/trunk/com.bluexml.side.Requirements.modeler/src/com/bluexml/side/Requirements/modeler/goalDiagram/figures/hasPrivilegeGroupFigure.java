@@ -3,13 +3,22 @@
  ******************************************************************************/
 package com.bluexml.side.Requirements.modeler.goalDiagram.figures;
 
-/**
- * @_generated
- */
-public class AttributeFigure extends ImageWithLabelFigure {
+import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
+import org.eclipse.swt.SWT;
 
-	public AttributeFigure() {
+/**
+ * @generated
+ */
+public class hasPrivilegeGroupFigure extends PolylineConnectionEx {
+
+	/**
+	 * The constructor
+	 *
+	 * @generated
+	 */
+	public hasPrivilegeGroupFigure() {
 		super();
+		setLineStyle(SWT.LINE_SOLID);
 	}
 
 }

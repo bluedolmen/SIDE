@@ -131,6 +131,18 @@ public class ReqCreationUtils extends AbstractCreationUtils {
 		}
 
 		/**
+		 * @see com.bluexml.side.requirements.util.RequirementsSwitch#casePrivilege(com.bluexml.side.requirements.Privilege)
+		 * @generated
+		 */
+		public Object casePrivilege(
+				com.bluexml.side.requirements.Privilege object) {
+			if ("default".equals(presentation)) {
+				return createGraphElementPrivilege(object, presentation);
+			}
+			return null;
+		}
+
+		/**
 		 * @see com.bluexml.side.requirements.util.RequirementsSwitch#defaultCase(org.eclipse.emf.ecore.EObject)
 		 * @generated
 		 */
@@ -183,9 +195,11 @@ public class ReqCreationUtils extends AbstractCreationUtils {
 	 * @return the complete GraphElement
 	 * @_generated
 	 */
-	protected GraphElement createGraphElementEntity(com.bluexml.side.requirements.Entity element, String presentation) {
+	protected GraphElement createGraphElementEntity(
+			com.bluexml.side.requirements.Entity element, String presentation) {
 		GraphNode nodeParent = createGraphNode(element, presentation);
-		GraphNode attributes = createGraphNode(element, RequirementsPackage.ENTITY__ATTRIBUTES, presentation);
+		GraphNode attributes = createGraphNode(element,
+				RequirementsPackage.ENTITY__ATTRIBUTES, presentation);
 		attributes.setContainer(nodeParent);
 		return nodeParent;
 	}
@@ -218,13 +232,27 @@ public class ReqCreationUtils extends AbstractCreationUtils {
 	 * @param element the model element
 	 * @param presentation the presentation of the graphical element
 	 * @return the complete GraphElement
-	 * @generated
+	 * @_generated
 	 */
 	protected GraphElement createGraphElementPrivilegeGroup(
 			com.bluexml.side.requirements.PrivilegeGroup element,
 			String presentation) {
-		GraphEdge graphEdge = createGraphEdge(element, presentation);
-		return graphEdge;
+		GraphNode nodeParent = createGraphNode(element, presentation);
+		GraphNode privileges = createGraphNode(element,
+				RequirementsPackage.PRIVILEGE_GROUP__PRIVILEGES, presentation);
+		privileges.setContainer(nodeParent);
+		return nodeParent;
+	}
+
+	/**
+	 * @param element the model element
+	 * @param presentation the presentation of the graphical element
+	 * @return the complete GraphElement
+	 * @generated
+	 */
+	protected GraphElement createGraphElementPrivilege(
+			com.bluexml.side.requirements.Privilege element, String presentation) {
+		return createGraphNode(element, presentation);
 	}
 
 	/**

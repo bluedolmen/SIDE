@@ -117,7 +117,7 @@ public class AttributeEditPart extends EMFGraphNodeEditPart {
 		return null;
 
 	}
-	
+
 	@Override
 	protected void refreshHeaderLabel() {
 		super.refreshHeaderLabel();
@@ -125,13 +125,21 @@ public class AttributeEditPart extends EMFGraphNodeEditPart {
 		AttributeFigure fig = (AttributeFigure) getFigure();
 		Attribute a = (Attribute) Utils.getElement(getGraphNode());
 		if (a.getType().equals(AttributeType.TEXTUAL_VALUE))
-			fig.setImageFigure(new Image(null, AttributeFigure.class.getResourceAsStream("img/text.png")), PositionConstants.RIGHT);
+			fig.setImageFigure(new Image(null, AttributeFigure.class
+					.getResourceAsStream("img/text.png")),
+					PositionConstants.RIGHT);
 		else if (a.getType().equals(AttributeType.NUMERICAL_VALUE))
-			fig.setImageFigure(new Image(null, AttributeFigure.class.getResourceAsStream("img/number.png")), PositionConstants.RIGHT);
+			fig.setImageFigure(new Image(null, AttributeFigure.class
+					.getResourceAsStream("img/number.png")),
+					PositionConstants.RIGHT);
 		else if (a.getType().equals(AttributeType.TEMPORAL_VALUE))
-			fig.setImageFigure(new Image(null, AttributeFigure.class.getResourceAsStream("img/date.png")), PositionConstants.RIGHT);
+			fig.setImageFigure(new Image(null, AttributeFigure.class
+					.getResourceAsStream("img/date.png")),
+					PositionConstants.RIGHT);
 		else
-			fig.setImageFigure(new Image(null, AttributeFigure.class.getResourceAsStream("img/other.png")), PositionConstants.RIGHT);
+			fig.setImageFigure(new Image(null, AttributeFigure.class
+					.getResourceAsStream("img/other.png")),
+					PositionConstants.RIGHT);
 		fig.repaint();
 	}
 

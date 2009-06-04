@@ -19,7 +19,8 @@ public class AgentFigure extends ImageWithLabelFigure implements ILabelFigure {
 	 * @_generated
 	 */
 	public AgentFigure() {
-		super(new Image(null, AgentFigure.class.getResourceAsStream("img/agent.png")), PositionConstants.TOP);
+		super(new Image(null, AgentFigure.class
+				.getResourceAsStream("img/agent.png")), PositionConstants.TOP);
 	}
 
 	/**

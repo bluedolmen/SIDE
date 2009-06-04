@@ -4,11 +4,16 @@
 package com.bluexml.side.Requirements.modeler.goalDiagram.figures;
 
 /**
- * @_generated
+ * @generated
  */
-public class AttributeFigure extends ImageWithLabelFigure {
-
-	public AttributeFigure() {
+public class PrivilegeFigure extends
+		org.topcased.draw2d.figures.EditableLabelFigure {
+	/**
+	 * Constructor
+	 *
+	 * @generated
+	 */
+	public PrivilegeFigure() {
 		super();
 	}
 

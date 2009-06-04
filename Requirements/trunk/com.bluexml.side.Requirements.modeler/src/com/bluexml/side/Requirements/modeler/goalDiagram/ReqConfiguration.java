@@ -22,6 +22,7 @@ import com.bluexml.side.Requirements.modeler.goalDiagram.edit.AgentEditPart;
 import com.bluexml.side.Requirements.modeler.goalDiagram.edit.AttributeEditPart;
 import com.bluexml.side.Requirements.modeler.goalDiagram.edit.EntityEditPart;
 import com.bluexml.side.Requirements.modeler.goalDiagram.edit.GoalEditPart;
+import com.bluexml.side.Requirements.modeler.goalDiagram.edit.PrivilegeEditPart;
 import com.bluexml.side.Requirements.modeler.goalDiagram.edit.PrivilegeGroupEditPart;
 import com.bluexml.side.Requirements.modeler.goalDiagram.edit.RelationShipEditPart;
 
@@ -72,10 +73,6 @@ public class ReqConfiguration implements IConfiguration {
 						com.bluexml.side.requirements.RelationShip.class),
 				RelationShipEditPart.class);
 		Platform.getAdapterManager().registerAdapters(
-				new EditPart2ModelAdapterFactory(PrivilegeGroupEditPart.class,
-						com.bluexml.side.requirements.PrivilegeGroup.class),
-				PrivilegeGroupEditPart.class);
-		Platform.getAdapterManager().registerAdapters(
 				new EditPart2ModelAdapterFactory(GoalEditPart.class,
 						com.bluexml.side.requirements.Goal.class),
 				GoalEditPart.class);
@@ -91,6 +88,14 @@ public class ReqConfiguration implements IConfiguration {
 				new EditPart2ModelAdapterFactory(AttributeEditPart.class,
 						com.bluexml.side.requirements.Attribute.class),
 				AttributeEditPart.class);
+		Platform.getAdapterManager().registerAdapters(
+				new EditPart2ModelAdapterFactory(PrivilegeGroupEditPart.class,
+						com.bluexml.side.requirements.PrivilegeGroup.class),
+				PrivilegeGroupEditPart.class);
+		Platform.getAdapterManager().registerAdapters(
+				new EditPart2ModelAdapterFactory(PrivilegeEditPart.class,
+						com.bluexml.side.requirements.Privilege.class),
+				PrivilegeEditPart.class);
 	}
 
 	/**

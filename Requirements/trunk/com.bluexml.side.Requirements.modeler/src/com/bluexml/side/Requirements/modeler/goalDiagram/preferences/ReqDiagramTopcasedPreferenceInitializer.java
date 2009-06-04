@@ -74,24 +74,6 @@ public class ReqDiagramTopcasedPreferenceInitializer implements
 				ReqDiagramPreferenceConstants.RELATIONSHIP_EDGE_DEFAULT_ROUTER,
 				"ObliqueRouter");
 
-		// Initialize the default value of the PRIVILEGEGROUP_EDGE_DEFAULT_FONT property
-		defaultReqPreference.put(
-				ReqDiagramPreferenceConstants.PRIVILEGEGROUP_EDGE_DEFAULT_FONT,
-				StringConverter.asFontData("Lucida Grande-regular-11")
-						.toString());
-
-		// Initialize the default value of the PRIVILEGEGROUP_EDGE_DEFAULT_FOREGROUND_COLOR property
-		defaultReqPreference
-				.put(
-						ReqDiagramPreferenceConstants.PRIVILEGEGROUP_EDGE_DEFAULT_FOREGROUND_COLOR,
-						"0,91,173");
-
-		// Initialize the default value of the PRIVILEGEGROUP_EDGE_DEFAULT_ROUTER property
-		defaultReqPreference
-				.put(
-						ReqDiagramPreferenceConstants.PRIVILEGEGROUP_EDGE_DEFAULT_ROUTER,
-						"ObliqueRouter");
-
 		// Initialize the default value of the GOAL_DEFAULT_BACKGROUND_COLOR property 
 		defaultReqPreference.put(
 				ReqDiagramPreferenceConstants.GOAL_DEFAULT_BACKGROUND_COLOR,
@@ -155,6 +137,80 @@ public class ReqDiagramTopcasedPreferenceInitializer implements
 		// Initialize the default value of the ATTRIBUTE_DEFAULT_FONT property
 		defaultReqPreference.put(
 				ReqDiagramPreferenceConstants.ATTRIBUTE_DEFAULT_FONT,
+				StringConverter.asFontData("Lucida Grande-regular-11")
+						.toString());
+
+		// Initialize the default value of the PRIVILEGEGROUP_DEFAULT_BACKGROUND_COLOR property 
+		defaultReqPreference
+				.put(
+						ReqDiagramPreferenceConstants.PRIVILEGEGROUP_DEFAULT_BACKGROUND_COLOR,
+						"255,255,255");
+
+		// Initialize the default value of the PRIVILEGEGROUP_DEFAULT_FOREGROUND_COLOR property
+		defaultReqPreference
+				.put(
+						ReqDiagramPreferenceConstants.PRIVILEGEGROUP_DEFAULT_FOREGROUND_COLOR,
+						"0,0,0");
+
+		// Initialize the default value of the PRIVILEGEGROUP_DEFAULT_FONT property
+		defaultReqPreference.put(
+				ReqDiagramPreferenceConstants.PRIVILEGEGROUP_DEFAULT_FONT,
+				StringConverter.asFontData("Lucida Grande-regular-11")
+						.toString());
+
+		// Initialize the default value of the HASPRIVILEGEGROUP_EDGE_DEFAULT_FONT property
+		defaultReqPreference
+				.put(
+						ReqDiagramPreferenceConstants.HASPRIVILEGEGROUP_EDGE_DEFAULT_FONT,
+						StringConverter.asFontData("Lucida Grande-regular-11")
+								.toString());
+
+		// Initialize the default value of the HASPRIVILEGEGROUP_EDGE_DEFAULT_FOREGROUND_COLOR property
+		defaultReqPreference
+				.put(
+						ReqDiagramPreferenceConstants.HASPRIVILEGEGROUP_EDGE_DEFAULT_FOREGROUND_COLOR,
+						"0,0,0");
+
+		// Initialize the default value of the HASPRIVILEGEGROUP_EDGE_DEFAULT_ROUTER property
+		defaultReqPreference
+				.put(
+						ReqDiagramPreferenceConstants.HASPRIVILEGEGROUP_EDGE_DEFAULT_ROUTER,
+						"ObliqueRouter");
+
+		// Initialize the default value of the ISLINKEDTOENTITY_EDGE_DEFAULT_FONT property
+		defaultReqPreference
+				.put(
+						ReqDiagramPreferenceConstants.ISLINKEDTOENTITY_EDGE_DEFAULT_FONT,
+						StringConverter.asFontData("Lucida Grande-regular-11")
+								.toString());
+
+		// Initialize the default value of the ISLINKEDTOENTITY_EDGE_DEFAULT_FOREGROUND_COLOR property
+		defaultReqPreference
+				.put(
+						ReqDiagramPreferenceConstants.ISLINKEDTOENTITY_EDGE_DEFAULT_FOREGROUND_COLOR,
+						"0,0,0");
+
+		// Initialize the default value of the ISLINKEDTOENTITY_EDGE_DEFAULT_ROUTER property
+		defaultReqPreference
+				.put(
+						ReqDiagramPreferenceConstants.ISLINKEDTOENTITY_EDGE_DEFAULT_ROUTER,
+						"ObliqueRouter");
+
+		// Initialize the default value of the PRIVILEGE_DEFAULT_BACKGROUND_COLOR property 
+		defaultReqPreference
+				.put(
+						ReqDiagramPreferenceConstants.PRIVILEGE_DEFAULT_BACKGROUND_COLOR,
+						"255,255,255");
+
+		// Initialize the default value of the PRIVILEGE_DEFAULT_FOREGROUND_COLOR property
+		defaultReqPreference
+				.put(
+						ReqDiagramPreferenceConstants.PRIVILEGE_DEFAULT_FOREGROUND_COLOR,
+						"0,0,0");
+
+		// Initialize the default value of the PRIVILEGE_DEFAULT_FONT property
+		defaultReqPreference.put(
+				ReqDiagramPreferenceConstants.PRIVILEGE_DEFAULT_FONT,
 				StringConverter.asFontData("Lucida Grande-regular-11")
 						.toString());
 

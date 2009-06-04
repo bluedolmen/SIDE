@@ -24,7 +24,7 @@ public class GoalFigure extends
 	public GoalFigure() {
 		super();
 	}
-	
+
 	@Override
 	protected IFigure createBackgroundFigure() {
 		RectangleFigure fig = new RectangleFigure();

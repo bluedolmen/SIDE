@@ -35,6 +35,24 @@ public interface ReqEditPolicyConstants {
 	String PRIVILEGEGROUP_EDITPOLICY = "PrivilegeGroup EditPolicy";
 
 	/**
+	 * The key used to install an <i>hasPrivilegeGroup</i> EditPolicy.
+	 * @generated
+	 */
+	String HASPRIVILEGEGROUP_EDITPOLICY = "hasPrivilegeGroup EditPolicy";
+
+	/**
+	 * The key used to install an <i>isLinkedToEntity</i> EditPolicy.
+	 * @generated
+	 */
+	String ISLINKEDTOENTITY_EDITPOLICY = "isLinkedToEntity EditPolicy";
+
+	/**
+	 * The key used to install an <i>Privilege</i> EditPolicy.
+	 * @generated
+	 */
+	String PRIVILEGE_EDITPOLICY = "Privilege EditPolicy";
+
+	/**
 	 * The key used to install an <i>Goal</i> EditPolicy.
 	 * @generated
 	 */

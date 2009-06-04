@@ -5,10 +5,7 @@ package com.bluexml.side.Requirements.modeler.goalDiagram.edit;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditPolicy;
-import org.eclipse.gef.Request;
-import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.commands.Command;
-import org.eclipse.jface.window.Window;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
@@ -18,34 +15,31 @@ import org.topcased.modeler.edit.EMFGraphNodeEditPart;
 import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
 import org.topcased.modeler.edit.policies.ResizableEditPolicy;
 import org.topcased.modeler.edit.policies.RestoreEditPolicy;
-import org.topcased.modeler.internal.ModelerPlugin;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
-import com.bluexml.side.Requirements.modeler.goalDiagram.ReqEditPolicyConstants;
-import com.bluexml.side.Requirements.modeler.goalDiagram.commands.GoalRestoreConnectionCommand;
-import com.bluexml.side.Requirements.modeler.goalDiagram.commands.update.GoalUpdateCommand;
-import com.bluexml.side.Requirements.modeler.goalDiagram.dialogs.GoalDialog;
-import com.bluexml.side.Requirements.modeler.goalDiagram.figures.GoalFigure;
-import com.bluexml.side.Requirements.modeler.goalDiagram.policies.hasPrivilegeGroupEdgeCreationEditPolicy;
-import com.bluexml.side.Requirements.modeler.goalDiagram.policies.is_responsibleEdgeCreationEditPolicy;
-import com.bluexml.side.Requirements.modeler.goalDiagram.policies.is_sub_goalEdgeCreationEditPolicy;
+import com.bluexml.side.Requirements.modeler.goalDiagram.commands.PrivilegeRestoreConnectionCommand;
+import com.bluexml.side.Requirements.modeler.goalDiagram.figures.PrivilegeFigure;
 import com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferenceConstants;
-import com.bluexml.side.requirements.Goal;
+import com.bluexml.side.requirements.Attribute;
+import com.bluexml.side.requirements.Entity;
+import com.bluexml.side.requirements.Privilege;
+import com.bluexml.side.requirements.PrivilegeGroup;
+import com.bluexml.side.requirements.RelationShip;
 
 /**
- * The Goal object controller
+ * The Privilege object controller
  *
  * @generated
  */
-public class GoalEditPart extends EMFGraphNodeEditPart {
+public class PrivilegeEditPart extends EMFGraphNodeEditPart {
 	/**
 	 * Constructor
 	 *
 	 * @param obj the graph node
 	 * @generated
 	 */
-	public GoalEditPart(GraphNode obj) {
+	public PrivilegeEditPart(GraphNode obj) {
 		super(obj);
 	}
 
@@ -57,32 +51,17 @@ public class GoalEditPart extends EMFGraphNodeEditPart {
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(ReqEditPolicyConstants.IS_RESPONSIBLE_EDITPOLICY,
-				new is_responsibleEdgeCreationEditPolicy());
-
-		installEditPolicy(ReqEditPolicyConstants.IS_SUB_GOAL_EDITPOLICY,
-				new is_sub_goalEdgeCreationEditPolicy());
-
-		installEditPolicy(ReqEditPolicyConstants.HASPRIVILEGEGROUP_EDITPOLICY,
-				new hasPrivilegeGroupEdgeCreationEditPolicy());
-
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {
 					protected Command getRestoreConnectionsCommand(
 							RestoreConnectionsRequest request) {
-						return new GoalRestoreConnectionCommand(getHost());
+						return new PrivilegeRestoreConnectionCommand(getHost());
 					}
 				});
 
 		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY,
 				new ResizableEditPolicy());
 
-		installEditPolicy(
-				ModelerEditPolicyConstants.CHANGE_BACKGROUND_COLOR_EDITPOLICY,
-				null);
-		installEditPolicy(
-				ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY,
-				null);
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
 				new LabelDirectEditPolicy());
 	}
@@ -93,7 +72,7 @@ public class GoalEditPart extends EMFGraphNodeEditPart {
 	 */
 	protected IFigure createFigure() {
 
-		return new GoalFigure();
+		return new PrivilegeFigure();
 	}
 
 	/**
@@ -101,8 +80,9 @@ public class GoalEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultBackgroundColor() {
-		String backgroundColor = getPreferenceStore().getString(
-				ReqDiagramPreferenceConstants.GOAL_DEFAULT_BACKGROUND_COLOR);
+		String backgroundColor = getPreferenceStore()
+				.getString(
+						ReqDiagramPreferenceConstants.PRIVILEGE_DEFAULT_BACKGROUND_COLOR);
 		if (backgroundColor.length() != 0) {
 			return Utils.getColor(backgroundColor);
 		}
@@ -114,8 +94,9 @@ public class GoalEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultForegroundColor() {
-		String foregroundColor = getPreferenceStore().getString(
-				ReqDiagramPreferenceConstants.GOAL_DEFAULT_FOREGROUND_COLOR);
+		String foregroundColor = getPreferenceStore()
+				.getString(
+						ReqDiagramPreferenceConstants.PRIVILEGE_DEFAULT_FOREGROUND_COLOR);
 		if (foregroundColor.length() != 0) {
 			return Utils.getColor(foregroundColor);
 		}
@@ -128,7 +109,7 @@ public class GoalEditPart extends EMFGraphNodeEditPart {
 	 */
 	protected Font getPreferenceDefaultFont() {
 		String preferenceFont = getPreferenceStore().getString(
-				ReqDiagramPreferenceConstants.GOAL_DEFAULT_FONT);
+				ReqDiagramPreferenceConstants.PRIVILEGE_DEFAULT_FONT);
 		if (preferenceFont.length() != 0) {
 			return Utils.getFont(new FontData(preferenceFont));
 		}
@@ -137,28 +118,41 @@ public class GoalEditPart extends EMFGraphNodeEditPart {
 	}
 
 	@Override
-	public void refresh() {
-		super.refresh();
-		Goal g = (Goal) Utils.getElement(getGraphNode());
-		((GoalFigure) getFigure()).getLabel().setText(g.getName());
+	protected void refreshTextAndFont() {
+		super.refreshTextAndFont();
+
+		Privilege p = (Privilege) Utils.getElement(getGraphNode());
+		getLabel().setText(createLabel(p));
 	}
 
-	@Override
-	public void performRequest(Request request) {
-		Goal g = (Goal) Utils.getElement(getGraphNode());
-
-		if (request.getType() == RequestConstants.REQ_OPEN) {
-			GoalDialog dialog = new GoalDialog(ModelerPlugin
-					.getActiveWorkbenchShell(), g);
-			if (dialog.open() == Window.OK) {
-				GoalUpdateCommand command = new GoalUpdateCommand(g, dialog
-						.getData());
-				getViewer().getEditDomain().getCommandStack().execute(command);
-				refresh();
-			}
-		} else {
-			super.performRequest(request);
+	private String createLabel(Privilege p) {
+		String value = "";
+		if (p.getElement() instanceof Entity) {
+			Entity e = (Entity) p.getElement();
+			value = e.getName();
+		} else if (p.getElement() instanceof Attribute) {
+			Attribute a = (Attribute) p.getElement();
+			value = ((Entity) a.eContainer()).getName()+"."+a.getName();
+		} else if (p.getElement() instanceof RelationShip) {
+			RelationShip r = (RelationShip) p.getElement();
+			value = r.getSource().getName()+"<-->"+r.getTarget().getName();
 		}
+		
+		value += " (";
+		
+		int nbOfPrivileges = 0;
+		for (Privilege p2 : ((PrivilegeGroup) p.eContainer()).getPrivileges()) {
+			if (p2.getElement().equals(p.getElement())) {
+				if (nbOfPrivileges > 0)
+					value += ",";
+				value += p2.getCategory();
+				nbOfPrivileges++;
+			}
+		}
+		
+		value += ")";
+		
+		return value;
 	}
 
 }

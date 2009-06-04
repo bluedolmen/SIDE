@@ -131,7 +131,7 @@ public class AgentEditPart extends EMFGraphNodeEditPart {
 		return null;
 
 	}
-	
+
 	@Override
 	public void refresh() {
 		super.refresh();
@@ -144,9 +144,11 @@ public class AgentEditPart extends EMFGraphNodeEditPart {
 		Agent a = (Agent) Utils.getElement(getGraphNode());
 
 		if (request.getType() == RequestConstants.REQ_OPEN) {
-			AgentDialog dialog = new AgentDialog(ModelerPlugin.getActiveWorkbenchShell(), a);
+			AgentDialog dialog = new AgentDialog(ModelerPlugin
+					.getActiveWorkbenchShell(), a);
 			if (dialog.open() == Window.OK) {
-				AgentUpdateCommand command = new AgentUpdateCommand(a, dialog.getData());
+				AgentUpdateCommand command = new AgentUpdateCommand(a, dialog
+						.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
 				refresh();
 			}
@@ -154,7 +156,7 @@ public class AgentEditPart extends EMFGraphNodeEditPart {
 			super.performRequest(request);
 		}
 	}
-	
+
 	@Override
 	protected void refreshHeaderLabel() {
 		super.refreshHeaderLabel();
@@ -162,9 +164,13 @@ public class AgentEditPart extends EMFGraphNodeEditPart {
 		AgentFigure fig = (AgentFigure) getFigure();
 		Agent a = (Agent) Utils.getElement(getGraphNode());
 		if (a.isIsHuman())
-			fig.setImageFigure(new Image(null, AgentFigure.class.getResourceAsStream("img/agent.png")), PositionConstants.TOP);
+			fig.setImageFigure(new Image(null, AgentFigure.class
+					.getResourceAsStream("img/agent.png")),
+					PositionConstants.TOP);
 		else
-			fig.setImageFigure(new Image(null, AgentFigure.class.getResourceAsStream("img/computer.png")), PositionConstants.TOP);
+			fig.setImageFigure(new Image(null, AgentFigure.class
+					.getResourceAsStream("img/computer.png")),
+					PositionConstants.TOP);
 		fig.repaint();
 	}
 

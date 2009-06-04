@@ -8,19 +8,19 @@ import org.topcased.modeler.preferences.AbstractNodePreferencePage;
 import com.bluexml.side.Requirements.modeler.RequirementsPlugin;
 
 /**
- * This class represents a preference page that is contributed to the Preferences dialog. This page is used to modify
+ * This class represents a preference page that is contributed to the Preferences or Property dialog. This page is used to modify
  * preferences only. They are stored in the preference store that belongs to the main plug-in class. That way,
  * preferences can be accessed directly via the preference store.
  *
  * @generated
  */
-public class PrivilegeGroupPreferencePage extends AbstractNodePreferencePage {
+public class PrivilegePreferencePage extends AbstractNodePreferencePage {
 	/**
 	 * @see org.topcased.modeler.preferences.AbstractNodePreferencePage#getNodeBackgroundColor()
 	 * @generated
 	 */
 	protected String getNodeBackgroundColor() {
-		return ReqDiagramPreferenceConstants.PRIVILEGEGROUP_DEFAULT_BACKGROUND_COLOR;
+		return ReqDiagramPreferenceConstants.PRIVILEGE_DEFAULT_BACKGROUND_COLOR;
 	}
 
 	/**
@@ -28,7 +28,7 @@ public class PrivilegeGroupPreferencePage extends AbstractNodePreferencePage {
 	 * @generated
 	 */
 	protected String getNodeFont() {
-		return ReqDiagramPreferenceConstants.PRIVILEGEGROUP_DEFAULT_FONT;
+		return ReqDiagramPreferenceConstants.PRIVILEGE_DEFAULT_FONT;
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class PrivilegeGroupPreferencePage extends AbstractNodePreferencePage {
 	 * @generated
 	 */
 	protected String getNodeForegroundColor() {
-		return ReqDiagramPreferenceConstants.PRIVILEGEGROUP_DEFAULT_FOREGROUND_COLOR;
+		return ReqDiagramPreferenceConstants.PRIVILEGE_DEFAULT_FOREGROUND_COLOR;
 	}
 
 	/**

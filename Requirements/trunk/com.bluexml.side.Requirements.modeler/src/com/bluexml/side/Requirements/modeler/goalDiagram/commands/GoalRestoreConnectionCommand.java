@@ -3,21 +3,15 @@
  ******************************************************************************/
 package com.bluexml.side.Requirements.modeler.goalDiagram.commands;
 
-import java.util.Iterator;
-import java.util.List;
-
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.topcased.modeler.commands.AbstractRestoreConnectionCommand;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.di.model.GraphElement;
-import org.topcased.modeler.editor.ICreationUtils;
 import org.topcased.modeler.utils.Utils;
 
 import com.bluexml.side.Requirements.modeler.goalDiagram.ReqSimpleObjectConstants;
 import com.bluexml.side.requirements.Agent;
-import com.bluexml.side.requirements.Entity;
 import com.bluexml.side.requirements.Goal;
 import com.bluexml.side.requirements.PrivilegeGroup;
 
@@ -71,13 +65,12 @@ public class GoalRestoreConnectionCommand extends
 								graphElementSrc);
 					}
 				}
-
-				if (eObjectTgt instanceof Entity) {
+				if (eObjectTgt instanceof PrivilegeGroup) {
 					if (autoRef) {
 						// autoRef not allowed
 					} else {
 						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-						createPrivilegeGroupFromGoalToEntity_EntryPoint(
+						createhasPrivilegeGroupFromGoalToPrivilegeGroup(
 								graphElementSrc, graphElementTgt);
 					}
 				}
@@ -141,37 +134,23 @@ public class GoalRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createPrivilegeGroupFromGoalToEntity_EntryPoint(
+	private void createhasPrivilegeGroupFromGoalToPrivilegeGroup(
 			GraphElement srcElt, GraphElement targetElt) {
 		Goal sourceObject = (Goal) Utils.getElement(srcElt);
-		Entity targetObject = (Entity) Utils.getElement(targetElt);
+		PrivilegeGroup targetObject = (PrivilegeGroup) Utils
+				.getElement(targetElt);
 
-		EList edgeObjectList = sourceObject.getPrivilegeGroup();
-		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
-			Object obj = it.next();
-			if (obj instanceof PrivilegeGroup) {
-				PrivilegeGroup edgeObject = (PrivilegeGroup) obj;
-				if (targetObject.equals(edgeObject.getEntryPoint())
-						&& sourceObject.getPrivilegeGroup()
-								.contains(edgeObject)) {
-					// check if the relation does not exists yet
-					List<GraphEdge> existing = getExistingEdges(srcElt,
-							targetElt, PrivilegeGroup.class);
-					if (!isAlreadyPresent(existing, edgeObject)) {
-						ICreationUtils factory = getModeler()
-								.getActiveConfiguration().getCreationUtils();
-						// restore the link with its default presentation
-						GraphElement edge = factory
-								.createGraphElement(edgeObject);
-						if (edge instanceof GraphEdge) {
-							PrivilegeGroupEdgeCreationCommand cmd = new PrivilegeGroupEdgeCreationCommand(
-									getEditDomain(), (GraphEdge) edge, srcElt,
-									false);
-							cmd.setTarget(targetElt);
-							add(cmd);
-						}
-					}
-				}
+		if (sourceObject.getPrivilegeGroup().contains(targetObject)) {
+			// check if the relation does not exists yet
+			if (getExistingEdges(srcElt, targetElt,
+					ReqSimpleObjectConstants.SIMPLE_OBJECT_HASPRIVILEGEGROUP)
+					.size() == 0) {
+				GraphEdge edge = Utils
+						.createGraphEdge(ReqSimpleObjectConstants.SIMPLE_OBJECT_HASPRIVILEGEGROUP);
+				hasPrivilegeGroupEdgeCreationCommand cmd = new hasPrivilegeGroupEdgeCreationCommand(
+						null, edge, srcElt, false);
+				cmd.setTarget(targetElt);
+				add(cmd);
 			}
 		}
 	}

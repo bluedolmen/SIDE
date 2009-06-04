@@ -18,13 +18,13 @@ import com.bluexml.side.Requirements.modeler.RequirementsPlugin;
  *
  * @generated
  */
-public class is_sub_goalPreferencePage extends AbstractEdgePreferencePage {
+public class hasPrivilegeGroupPreferencePage extends AbstractEdgePreferencePage {
 	/**
 	 * @see org.topcased.modeler.preferences.AbstractEdgePreferencePage#getEdgeFont()
 	 * @generated
 	 */
 	protected String getEdgeFont() {
-		return ReqDiagramPreferenceConstants.IS_SUB_GOAL_EDGE_DEFAULT_FONT;
+		return ReqDiagramPreferenceConstants.HASPRIVILEGEGROUP_EDGE_DEFAULT_FONT;
 	}
 
 	/**
@@ -32,7 +32,7 @@ public class is_sub_goalPreferencePage extends AbstractEdgePreferencePage {
 	 * @generated
 	 */
 	protected String getEdgeForegroundColor() {
-		return ReqDiagramPreferenceConstants.IS_SUB_GOAL_EDGE_DEFAULT_FOREGROUND_COLOR;
+		return ReqDiagramPreferenceConstants.HASPRIVILEGEGROUP_EDGE_DEFAULT_FOREGROUND_COLOR;
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class is_sub_goalPreferencePage extends AbstractEdgePreferencePage {
 	 * @generated
 	 */
 	protected String getEdgeRouter() {
-		return ReqDiagramPreferenceConstants.IS_SUB_GOAL_EDGE_DEFAULT_ROUTER;
+		return ReqDiagramPreferenceConstants.HASPRIVILEGEGROUP_EDGE_DEFAULT_ROUTER;
 	}
 
 	/**
