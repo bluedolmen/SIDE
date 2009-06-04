@@ -19,12 +19,14 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
@@ -62,8 +64,54 @@ public class FacetMapItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addDisplayEmptyFacetPropertyDescriptor(object);
+			addFacetDisplayTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Display Empty Facet feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDisplayEmptyFacetPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FacetMap_displayEmptyFacet_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FacetMap_displayEmptyFacet_feature", "_UI_FacetMap_type"),
+				 ViewPackage.Literals.FACET_MAP__DISPLAY_EMPTY_FACET,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Facet Display Type feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addFacetDisplayTypePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FacetMap_facetDisplayType_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FacetMap_facetDisplayType_feature", "_UI_FacetMap_type"),
+				 ViewPackage.Literals.FACET_MAP__FACET_DISPLAY_TYPE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -80,6 +128,7 @@ public class FacetMapItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ViewPackage.Literals.PAGINABLE__PAGING);
 			childrenFeatures.add(ViewPackage.Literals.FACET_MAP__CRITERIAS);
+			childrenFeatures.add(ViewPackage.Literals.FACET_MAP__RESULTS_VIEWER);
 		}
 		return childrenFeatures;
 	}
@@ -134,8 +183,13 @@ public class FacetMapItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(FacetMap.class)) {
+			case ViewPackage.FACET_MAP__DISPLAY_EMPTY_FACET:
+			case ViewPackage.FACET_MAP__FACET_DISPLAY_TYPE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case ViewPackage.FACET_MAP__PAGING:
 			case ViewPackage.FACET_MAP__CRITERIAS:
+			case ViewPackage.FACET_MAP__RESULTS_VIEWER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -170,73 +224,8 @@ public class FacetMapItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ViewPackage.Literals.FACET_MAP__CRITERIAS,
-				 ViewFactory.eINSTANCE.createField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FACET_MAP__CRITERIAS,
-				 ViewFactory.eINSTANCE.createTextField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FACET_MAP__CRITERIAS,
-				 ViewFactory.eINSTANCE.createPasswordField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FACET_MAP__CRITERIAS,
-				 ViewFactory.eINSTANCE.createBooleanField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FACET_MAP__CRITERIAS,
-				 ViewFactory.eINSTANCE.createFloatField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FACET_MAP__CRITERIAS,
-				 ViewFactory.eINSTANCE.createActionField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FACET_MAP__CRITERIAS,
-				 ViewFactory.eINSTANCE.createDateField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FACET_MAP__CRITERIAS,
-				 ViewFactory.eINSTANCE.createTimeField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FACET_MAP__CRITERIAS,
-				 ViewFactory.eINSTANCE.createDateTimeField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FACET_MAP__CRITERIAS,
-				 ViewFactory.eINSTANCE.createPhoneNumberField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FACET_MAP__CRITERIAS,
-				 ViewFactory.eINSTANCE.createEmailField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FACET_MAP__CRITERIAS,
-				 ViewFactory.eINSTANCE.createFileField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FACET_MAP__CRITERIAS,
-				 ViewFactory.eINSTANCE.createSelectField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FACET_MAP__CRITERIAS,
-				 ViewFactory.eINSTANCE.createHtmlField()));
+				(ViewPackage.Literals.FACET_MAP__RESULTS_VIEWER,
+				 ViewFactory.eINSTANCE.createFacetMapResultsView()));
 	}
 
 }

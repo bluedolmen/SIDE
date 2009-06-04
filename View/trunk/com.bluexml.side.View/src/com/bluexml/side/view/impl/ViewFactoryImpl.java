@@ -83,10 +83,10 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 			case ViewPackage.DATA_TABLE: return createDataTable();
 			case ViewPackage.STYLING: return createStyling();
 			case ViewPackage.SELECT_FIELD: return createSelectField();
-			case ViewPackage.DEFAULT_COL: return createDefaultCol();
 			case ViewPackage.VIEW_COLLECTION: return createViewCollection();
 			case ViewPackage.HTML_FIELD: return createHtmlField();
 			case ViewPackage.FILTERING: return createFiltering();
+			case ViewPackage.FACET_MAP_RESULTS_VIEW: return createFacetMapResultsView();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -112,6 +112,8 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 				return createWidgetTextTypeFromString(eDataType, initialValue);
 			case ViewPackage.SELECT_WIDGET_TYPE:
 				return createSelectWidgetTypeFromString(eDataType, initialValue);
+			case ViewPackage.FACET_DISPLAY_TYPE:
+				return createFacetDisplayTypeFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -137,6 +139,8 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 				return convertWidgetTextTypeToString(eDataType, instanceValue);
 			case ViewPackage.SELECT_WIDGET_TYPE:
 				return convertSelectWidgetTypeToString(eDataType, instanceValue);
+			case ViewPackage.FACET_DISPLAY_TYPE:
+				return convertFacetDisplayTypeToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -367,16 +371,6 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DefaultCol createDefaultCol() {
-		DefaultColImpl defaultCol = new DefaultColImpl();
-		return defaultCol;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ViewCollection createViewCollection() {
 		ViewCollectionImpl viewCollection = new ViewCollectionImpl();
 		return viewCollection;
@@ -400,6 +394,16 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 	public Filtering createFiltering() {
 		FilteringImpl filtering = new FilteringImpl();
 		return filtering;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FacetMapResultsView createFacetMapResultsView() {
+		FacetMapResultsViewImpl facetMapResultsView = new FacetMapResultsViewImpl();
+		return facetMapResultsView;
 	}
 
 	/**
@@ -519,6 +523,26 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 	 * @generated
 	 */
 	public String convertSelectWidgetTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FacetDisplayType createFacetDisplayTypeFromString(EDataType eDataType, String initialValue) {
+		FacetDisplayType result = FacetDisplayType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertFacetDisplayTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

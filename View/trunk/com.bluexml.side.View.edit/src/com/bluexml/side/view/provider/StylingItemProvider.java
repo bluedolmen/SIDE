@@ -68,7 +68,7 @@ public class StylingItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addStylesheetIdPropertyDescriptor(object);
+			addStylePropertyDescriptor(object);
 			addHeightPropertyDescriptor(object);
 			addWidthPropertyDescriptor(object);
 		}
@@ -76,19 +76,19 @@ public class StylingItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Stylesheet Id feature.
+	 * This adds a property descriptor for the Style feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addStylesheetIdPropertyDescriptor(Object object) {
+	protected void addStylePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Styling_stylesheetId_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Styling_stylesheetId_feature", "_UI_Styling_type"),
-				 ViewPackage.Literals.STYLING__STYLESHEET_ID,
+				 getString("_UI_Styling_style_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Styling_style_feature", "_UI_Styling_type"),
+				 ViewPackage.Literals.STYLING__STYLE,
 				 true,
 				 false,
 				 false,
@@ -178,7 +178,7 @@ public class StylingItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Styling.class)) {
-			case ViewPackage.STYLING__STYLESHEET_ID:
+			case ViewPackage.STYLING__STYLE:
 			case ViewPackage.STYLING__HEIGHT:
 			case ViewPackage.STYLING__WIDTH:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

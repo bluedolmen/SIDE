@@ -174,6 +174,11 @@ public class ViewCollectionItemProvider
 			(createChildParameter
 				(ViewPackage.Literals.VIEW_COLLECTION__VIEWS,
 				 ViewFactory.eINSTANCE.createDataTable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.VIEW_COLLECTION__VIEWS,
+				 ViewFactory.eINSTANCE.createFacetMapResultsView()));
 	}
 
 	/**

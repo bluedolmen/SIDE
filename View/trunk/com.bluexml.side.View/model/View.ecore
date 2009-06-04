@@ -24,7 +24,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Col" eSuperTypes="#//DefaultCol #//Movable #//Editable #//Filterable #//FieldGroup">
+  <eClassifiers xsi:type="ecore:EClass" name="Col" eSuperTypes="#//Movable #//Editable #//Filterable #//FieldGroup #//Sortable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//OperationComponent"
         containment="true"/>
   </eClassifiers>
@@ -114,7 +114,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FacetMap" eSuperTypes="#//AbstractView #//Paginable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="criterias" lowerBound="1"
-        eType="#//FieldElement" containment="true"/>
+        eType="#//FieldGroup" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayEmptyFacet" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="facetDisplayType" eType="#//FacetDisplayType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resultsViewer" eType="#//FacetMapResultsView"
+        containment="true" eOpposite="#//FacetMapResultsView/facetMapDef"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataList" eSuperTypes="#//AbstractDataTable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="col" lowerBound="1" eType="#//Col"
@@ -133,7 +137,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxDepth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataTable" eSuperTypes="#//AbstractDataTable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="defaultColSetUp" eType="#//DefaultCol"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defaultColSetUp" eType="#//Col"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="cols" upperBound="-1" eType="#//Col"
         containment="true"/>
   </eClassifiers>
@@ -141,7 +146,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="use to setup presentation options wath can not be lised because of technical dependencies (visualizer specification)"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stylesheetId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="this can be an identifier for CSS, xsl file or anything else that can manage style maybe a theme id,&#xD;nb : styles information are not available for generation purpose in this case&#xD;if you need to store style information in the model use instead metaData or available Style properties"/>
       </eAnnotations>
@@ -169,9 +174,6 @@
     <eLiterals name="monoline"/>
     <eLiterals name="autocomplete" value="1"/>
     <eLiterals name="multiline" value="2"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DefaultCol" eSuperTypes="#//DataTableElement #//Sortable">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="canBeHidden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ViewCollection" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
@@ -203,5 +205,17 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Filtering">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultFilterValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FacetDisplayType">
+    <eLiterals name="list"/>
+    <eLiterals name="clood" value="1"/>
+    <eLiterals name="improvedClood" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FacetMapResultsView" eSuperTypes="#//DataList">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="this view is used to displays FacetResults,&#xD;nb : "/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="facetMapDef" lowerBound="1"
+        eType="#//FacetMap" eOpposite="#//FacetMap/resultsViewer"/>
   </eClassifiers>
 </ecore:EPackage>

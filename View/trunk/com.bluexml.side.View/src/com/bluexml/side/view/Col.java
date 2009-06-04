@@ -24,7 +24,7 @@ import com.bluexml.side.common.OperationComponent;
  * @model
  * @generated
  */
-public interface Col extends DefaultCol, Movable, Editable, Filterable, FieldGroup {
+public interface Col extends Movable, Editable, Filterable, FieldGroup, Sortable {
 	/**
 	 * Returns the value of the '<em><b>Actions</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

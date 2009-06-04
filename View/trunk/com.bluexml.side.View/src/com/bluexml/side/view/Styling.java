@@ -21,7 +21,7 @@ import com.bluexml.side.common.NamedModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.bluexml.side.view.Styling#getStylesheetId <em>Stylesheet Id</em>}</li>
+ *   <li>{@link com.bluexml.side.view.Styling#getStyle <em>Style</em>}</li>
  *   <li>{@link com.bluexml.side.view.Styling#getHeight <em>Height</em>}</li>
  *   <li>{@link com.bluexml.side.view.Styling#getWidth <em>Width</em>}</li>
  * </ul>
@@ -33,7 +33,7 @@ import com.bluexml.side.common.NamedModelElement;
  */
 public interface Styling extends MetaInfoGroup {
 	/**
-	 * Returns the value of the '<em><b>Stylesheet Id</b></em>' attribute.
+	 * Returns the value of the '<em><b>Style</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -41,23 +41,23 @@ public interface Styling extends MetaInfoGroup {
 	 * nb : styles information are not available for generation purpose in this case
 	 * if you need to store style information in the model use instead metaData or available Style properties
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Stylesheet Id</em>' attribute.
-	 * @see #setStylesheetId(String)
-	 * @see com.bluexml.side.view.ViewPackage#getStyling_StylesheetId()
+	 * @return the value of the '<em>Style</em>' attribute.
+	 * @see #setStyle(String)
+	 * @see com.bluexml.side.view.ViewPackage#getStyling_Style()
 	 * @model
 	 * @generated
 	 */
-	String getStylesheetId();
+	String getStyle();
 
 	/**
-	 * Sets the value of the '{@link com.bluexml.side.view.Styling#getStylesheetId <em>Stylesheet Id</em>}' attribute.
+	 * Sets the value of the '{@link com.bluexml.side.view.Styling#getStyle <em>Style</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Stylesheet Id</em>' attribute.
-	 * @see #getStylesheetId()
+	 * @param value the new value of the '<em>Style</em>' attribute.
+	 * @see #getStyle()
 	 * @generated
 	 */
-	void setStylesheetId(String value);
+	void setStyle(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Height</b></em>' attribute.

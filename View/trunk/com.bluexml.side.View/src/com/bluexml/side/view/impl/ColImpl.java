@@ -23,6 +23,8 @@ import com.bluexml.side.view.FieldElement;
 import com.bluexml.side.view.FieldGroup;
 import com.bluexml.side.view.Filterable;
 import com.bluexml.side.view.Filtering;
+import com.bluexml.side.view.Sortable;
+import com.bluexml.side.view.Sorting;
 import com.bluexml.side.view.Movable;
 import com.bluexml.side.view.Stylable;
 import com.bluexml.side.view.Styling;
@@ -56,7 +58,6 @@ import org.eclipse.ocl.expressions.OCLExpression;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.view.impl.ColImpl#isMovable <em>Movable</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.ColImpl#isEditable <em>Editable</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.ColImpl#getFiltering <em>Filtering</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.ColImpl#getStyling <em>Styling</em>}</li>
@@ -73,33 +74,14 @@ import org.eclipse.ocl.expressions.OCLExpression;
  *   <li>{@link com.bluexml.side.view.impl.ColImpl#isHidden <em>Hidden</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.ColImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.ColImpl#getDisabled <em>Disabled</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.ColImpl#getSorting <em>Sorting</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.ColImpl#getActions <em>Actions</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ColImpl extends DefaultColImpl implements Col {
-	/**
-	 * The default value of the '{@link #isMovable() <em>Movable</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isMovable()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean MOVABLE_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isMovable() <em>Movable</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isMovable()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean movable = MOVABLE_EDEFAULT;
-
+public class ColImpl extends MovableImpl implements Col {
 	/**
 	 * The default value of the '{@link #isEditable() <em>Editable</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -329,6 +311,16 @@ public class ColImpl extends DefaultColImpl implements Col {
 	 * @ordered
 	 */
 	protected EList<FieldElement> disabled;
+
+	/**
+	 * The cached value of the '{@link #getSorting() <em>Sorting</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSorting()
+	 * @generated
+	 * @ordered
+	 */
+	protected Sorting sorting;
 
 	/**
 	 * The cached value of the '{@link #getActions() <em>Actions</em>}' containment reference.
@@ -643,8 +635,8 @@ public class ColImpl extends DefaultColImpl implements Col {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isMovable() {
-		return movable;
+	public Sorting getSorting() {
+		return sorting;
 	}
 
 	/**
@@ -652,11 +644,33 @@ public class ColImpl extends DefaultColImpl implements Col {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMovable(boolean newMovable) {
-		boolean oldMovable = movable;
-		movable = newMovable;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.COL__MOVABLE, oldMovable, movable));
+	public NotificationChain basicSetSorting(Sorting newSorting, NotificationChain msgs) {
+		Sorting oldSorting = sorting;
+		sorting = newSorting;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ViewPackage.COL__SORTING, oldSorting, newSorting);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSorting(Sorting newSorting) {
+		if (newSorting != sorting) {
+			NotificationChain msgs = null;
+			if (sorting != null)
+				msgs = ((InternalEObject)sorting).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ViewPackage.COL__SORTING, null, msgs);
+			if (newSorting != null)
+				msgs = ((InternalEObject)newSorting).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ViewPackage.COL__SORTING, null, msgs);
+			msgs = basicSetSorting(newSorting, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.COL__SORTING, newSorting, newSorting));
 	}
 
 	/**
@@ -808,9 +822,9 @@ public class ColImpl extends DefaultColImpl implements Col {
 	 */
 	public String getDocumentationOrName() {
 		if (getDocumentationOrNameBodyOCL == null) {
-			EOperation eOperation = CommonPackage.Literals.MODEL_ELEMENT.getEOperations().get(0);
+			EOperation eOperation = CommonPackage.Literals.NAMED_MODEL_ELEMENT.getEOperations().get(1);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(CommonPackage.Literals.MODEL_ELEMENT, eOperation);
+			helper.setOperationContext(CommonPackage.Literals.NAMED_MODEL_ELEMENT, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String body = ocl.getDetails().get("body");
 			
@@ -843,9 +857,9 @@ public class ColImpl extends DefaultColImpl implements Col {
 	 */
 	public String getDescriptionOrName() {
 		if (getDescriptionOrNameBodyOCL == null) {
-			EOperation eOperation = CommonPackage.Literals.MODEL_ELEMENT.getEOperations().get(1);
+			EOperation eOperation = CommonPackage.Literals.NAMED_MODEL_ELEMENT.getEOperations().get(2);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(CommonPackage.Literals.MODEL_ELEMENT, eOperation);
+			helper.setOperationContext(CommonPackage.Literals.NAMED_MODEL_ELEMENT, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String body = ocl.getDetails().get("body");
 			
@@ -893,6 +907,8 @@ public class ColImpl extends DefaultColImpl implements Col {
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case ViewPackage.COL__DISABLED:
 				return ((InternalEList<?>)getDisabled()).basicRemove(otherEnd, msgs);
+			case ViewPackage.COL__SORTING:
+				return basicSetSorting(null, msgs);
 			case ViewPackage.COL__ACTIONS:
 				return basicSetActions(null, msgs);
 		}
@@ -907,8 +923,6 @@ public class ColImpl extends DefaultColImpl implements Col {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ViewPackage.COL__MOVABLE:
-				return isMovable() ? Boolean.TRUE : Boolean.FALSE;
 			case ViewPackage.COL__EDITABLE:
 				return isEditable() ? Boolean.TRUE : Boolean.FALSE;
 			case ViewPackage.COL__FILTERING:
@@ -942,6 +956,8 @@ public class ColImpl extends DefaultColImpl implements Col {
 				return getChildren();
 			case ViewPackage.COL__DISABLED:
 				return getDisabled();
+			case ViewPackage.COL__SORTING:
+				return getSorting();
 			case ViewPackage.COL__ACTIONS:
 				return getActions();
 		}
@@ -957,9 +973,6 @@ public class ColImpl extends DefaultColImpl implements Col {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ViewPackage.COL__MOVABLE:
-				setMovable(((Boolean)newValue).booleanValue());
-				return;
 			case ViewPackage.COL__EDITABLE:
 				setEditable(((Boolean)newValue).booleanValue());
 				return;
@@ -1014,6 +1027,9 @@ public class ColImpl extends DefaultColImpl implements Col {
 				getDisabled().clear();
 				getDisabled().addAll((Collection<? extends FieldElement>)newValue);
 				return;
+			case ViewPackage.COL__SORTING:
+				setSorting((Sorting)newValue);
+				return;
 			case ViewPackage.COL__ACTIONS:
 				setActions((OperationComponent)newValue);
 				return;
@@ -1029,9 +1045,6 @@ public class ColImpl extends DefaultColImpl implements Col {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ViewPackage.COL__MOVABLE:
-				setMovable(MOVABLE_EDEFAULT);
-				return;
 			case ViewPackage.COL__EDITABLE:
 				setEditable(EDITABLE_EDEFAULT);
 				return;
@@ -1080,6 +1093,9 @@ public class ColImpl extends DefaultColImpl implements Col {
 			case ViewPackage.COL__DISABLED:
 				getDisabled().clear();
 				return;
+			case ViewPackage.COL__SORTING:
+				setSorting((Sorting)null);
+				return;
 			case ViewPackage.COL__ACTIONS:
 				setActions((OperationComponent)null);
 				return;
@@ -1095,8 +1111,6 @@ public class ColImpl extends DefaultColImpl implements Col {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ViewPackage.COL__MOVABLE:
-				return movable != MOVABLE_EDEFAULT;
 			case ViewPackage.COL__EDITABLE:
 				return editable != EDITABLE_EDEFAULT;
 			case ViewPackage.COL__FILTERING:
@@ -1129,6 +1143,8 @@ public class ColImpl extends DefaultColImpl implements Col {
 				return children != null && !children.isEmpty();
 			case ViewPackage.COL__DISABLED:
 				return disabled != null && !disabled.isEmpty();
+			case ViewPackage.COL__SORTING:
+				return sorting != null;
 			case ViewPackage.COL__ACTIONS:
 				return actions != null;
 		}
@@ -1142,12 +1158,6 @@ public class ColImpl extends DefaultColImpl implements Col {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == Movable.class) {
-			switch (derivedFeatureID) {
-				case ViewPackage.COL__MOVABLE: return ViewPackage.MOVABLE__MOVABLE;
-				default: return -1;
-			}
-		}
 		if (baseClass == Editable.class) {
 			switch (derivedFeatureID) {
 				case ViewPackage.COL__EDITABLE: return ViewPackage.EDITABLE__EDITABLE;
@@ -1199,6 +1209,12 @@ public class ColImpl extends DefaultColImpl implements Col {
 				default: return -1;
 			}
 		}
+		if (baseClass == Sortable.class) {
+			switch (derivedFeatureID) {
+				case ViewPackage.COL__SORTING: return ViewPackage.SORTABLE__SORTING;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -1209,12 +1225,6 @@ public class ColImpl extends DefaultColImpl implements Col {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == Movable.class) {
-			switch (baseFeatureID) {
-				case ViewPackage.MOVABLE__MOVABLE: return ViewPackage.COL__MOVABLE;
-				default: return -1;
-			}
-		}
 		if (baseClass == Editable.class) {
 			switch (baseFeatureID) {
 				case ViewPackage.EDITABLE__EDITABLE: return ViewPackage.COL__EDITABLE;
@@ -1266,6 +1276,12 @@ public class ColImpl extends DefaultColImpl implements Col {
 				default: return -1;
 			}
 		}
+		if (baseClass == Sortable.class) {
+			switch (baseFeatureID) {
+				case ViewPackage.SORTABLE__SORTING: return ViewPackage.COL__SORTING;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -1279,9 +1295,7 @@ public class ColImpl extends DefaultColImpl implements Col {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (movable: ");
-		result.append(movable);
-		result.append(", editable: ");
+		result.append(" (editable: ");
 		result.append(editable);
 		result.append(", documentation: ");
 		result.append(documentation);

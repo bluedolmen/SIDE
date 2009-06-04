@@ -39,7 +39,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class ColItemProvider
-	extends DefaultColItemProvider
+	extends MovableItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -67,7 +67,6 @@ public class ColItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addMovablePropertyDescriptor(object);
 			addEditablePropertyDescriptor(object);
 			addStereotypesPropertyDescriptor(object);
 			addDocumentationPropertyDescriptor(object);
@@ -79,28 +78,6 @@ public class ColItemProvider
 			addHiddenPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Movable feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addMovablePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Movable_movable_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Movable_movable_feature", "_UI_Movable_type"),
-				 ViewPackage.Literals.MOVABLE__MOVABLE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -320,6 +297,7 @@ public class ColItemProvider
 			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__METAINFO);
 			childrenFeatures.add(ViewPackage.Literals.FIELD_GROUP__CHILDREN);
 			childrenFeatures.add(ViewPackage.Literals.FIELD_GROUP__DISABLED);
+			childrenFeatures.add(ViewPackage.Literals.SORTABLE__SORTING);
 			childrenFeatures.add(ViewPackage.Literals.COL__ACTIONS);
 		}
 		return childrenFeatures;
@@ -375,7 +353,6 @@ public class ColItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Col.class)) {
-			case ViewPackage.COL__MOVABLE:
 			case ViewPackage.COL__EDITABLE:
 			case ViewPackage.COL__DOCUMENTATION:
 			case ViewPackage.COL__DESCRIPTION:
@@ -392,6 +369,7 @@ public class ColItemProvider
 			case ViewPackage.COL__METAINFO:
 			case ViewPackage.COL__CHILDREN:
 			case ViewPackage.COL__DISABLED:
+			case ViewPackage.COL__SORTING:
 			case ViewPackage.COL__ACTIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -594,6 +572,11 @@ public class ColItemProvider
 			(createChildParameter
 				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
 				 ViewFactory.eINSTANCE.createHtmlField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.SORTABLE__SORTING,
+				 ViewFactory.eINSTANCE.createSorting()));
 
 		newChildDescriptors.add
 			(createChildParameter

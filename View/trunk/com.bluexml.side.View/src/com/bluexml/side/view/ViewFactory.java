@@ -224,15 +224,6 @@ public interface ViewFactory extends EFactory {
 	SelectField createSelectField();
 
 	/**
-	 * Returns a new object of class '<em>Default Col</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Default Col</em>'.
-	 * @generated
-	 */
-	DefaultCol createDefaultCol();
-
-	/**
 	 * Returns a new object of class '<em>Collection</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -258,6 +249,15 @@ public interface ViewFactory extends EFactory {
 	 * @generated
 	 */
 	Filtering createFiltering();
+
+	/**
+	 * Returns a new object of class '<em>Facet Map Results View</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Facet Map Results View</em>'.
+	 * @generated
+	 */
+	FacetMapResultsView createFacetMapResultsView();
 
 	/**
 	 * Returns the package supported by this factory.

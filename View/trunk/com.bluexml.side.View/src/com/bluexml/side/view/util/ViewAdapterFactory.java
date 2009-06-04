@@ -181,10 +181,6 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 				return createSelectFieldAdapter();
 			}
 			@Override
-			public Adapter caseDefaultCol(DefaultCol object) {
-				return createDefaultColAdapter();
-			}
-			@Override
 			public Adapter caseViewCollection(ViewCollection object) {
 				return createViewCollectionAdapter();
 			}
@@ -219,6 +215,10 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseFiltering(Filtering object) {
 				return createFilteringAdapter();
+			}
+			@Override
+			public Adapter caseFacetMapResultsView(FacetMapResultsView object) {
+				return createFacetMapResultsViewAdapter();
 			}
 			@Override
 			public Adapter caseModelElement(ModelElement object) {
@@ -621,20 +621,6 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.DefaultCol <em>Default Col</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.view.DefaultCol
-	 * @generated
-	 */
-	public Adapter createDefaultColAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.ViewCollection <em>Collection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -757,6 +743,20 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFilteringAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.FacetMapResultsView <em>Facet Map Results View</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.view.FacetMapResultsView
+	 * @generated
+	 */
+	public Adapter createFacetMapResultsViewAdapter() {
 		return null;
 	}
 

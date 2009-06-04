@@ -28,7 +28,7 @@ import org.eclipse.ocl.ecore.OCL;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.view.impl.StylingImpl#getStylesheetId <em>Stylesheet Id</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.StylingImpl#getStyle <em>Style</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.StylingImpl#getHeight <em>Height</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.StylingImpl#getWidth <em>Width</em>}</li>
  * </ul>
@@ -38,24 +38,24 @@ import org.eclipse.ocl.ecore.OCL;
  */
 public class StylingImpl extends MetaInfoGroupImpl implements Styling {
 	/**
-	 * The default value of the '{@link #getStylesheetId() <em>Stylesheet Id</em>}' attribute.
+	 * The default value of the '{@link #getStyle() <em>Style</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getStylesheetId()
+	 * @see #getStyle()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String STYLESHEET_ID_EDEFAULT = null;
+	protected static final String STYLE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getStylesheetId() <em>Stylesheet Id</em>}' attribute.
+	 * The cached value of the '{@link #getStyle() <em>Style</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getStylesheetId()
+	 * @see #getStyle()
 	 * @generated
 	 * @ordered
 	 */
-	protected String stylesheetId = STYLESHEET_ID_EDEFAULT;
+	protected String style = STYLE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getHeight() <em>Height</em>}' attribute.
@@ -121,8 +121,8 @@ public class StylingImpl extends MetaInfoGroupImpl implements Styling {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getStylesheetId() {
-		return stylesheetId;
+	public String getStyle() {
+		return style;
 	}
 
 	/**
@@ -130,11 +130,11 @@ public class StylingImpl extends MetaInfoGroupImpl implements Styling {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setStylesheetId(String newStylesheetId) {
-		String oldStylesheetId = stylesheetId;
-		stylesheetId = newStylesheetId;
+	public void setStyle(String newStyle) {
+		String oldStyle = style;
+		style = newStyle;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.STYLING__STYLESHEET_ID, oldStylesheetId, stylesheetId));
+			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.STYLING__STYLE, oldStyle, style));
 	}
 
 	/**
@@ -187,8 +187,8 @@ public class StylingImpl extends MetaInfoGroupImpl implements Styling {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ViewPackage.STYLING__STYLESHEET_ID:
-				return getStylesheetId();
+			case ViewPackage.STYLING__STYLE:
+				return getStyle();
 			case ViewPackage.STYLING__HEIGHT:
 				return new Integer(getHeight());
 			case ViewPackage.STYLING__WIDTH:
@@ -205,8 +205,8 @@ public class StylingImpl extends MetaInfoGroupImpl implements Styling {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ViewPackage.STYLING__STYLESHEET_ID:
-				setStylesheetId((String)newValue);
+			case ViewPackage.STYLING__STYLE:
+				setStyle((String)newValue);
 				return;
 			case ViewPackage.STYLING__HEIGHT:
 				setHeight(((Integer)newValue).intValue());
@@ -226,8 +226,8 @@ public class StylingImpl extends MetaInfoGroupImpl implements Styling {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ViewPackage.STYLING__STYLESHEET_ID:
-				setStylesheetId(STYLESHEET_ID_EDEFAULT);
+			case ViewPackage.STYLING__STYLE:
+				setStyle(STYLE_EDEFAULT);
 				return;
 			case ViewPackage.STYLING__HEIGHT:
 				setHeight(HEIGHT_EDEFAULT);
@@ -247,8 +247,8 @@ public class StylingImpl extends MetaInfoGroupImpl implements Styling {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ViewPackage.STYLING__STYLESHEET_ID:
-				return STYLESHEET_ID_EDEFAULT == null ? stylesheetId != null : !STYLESHEET_ID_EDEFAULT.equals(stylesheetId);
+			case ViewPackage.STYLING__STYLE:
+				return STYLE_EDEFAULT == null ? style != null : !STYLE_EDEFAULT.equals(style);
 			case ViewPackage.STYLING__HEIGHT:
 				return height != HEIGHT_EDEFAULT;
 			case ViewPackage.STYLING__WIDTH:
@@ -267,8 +267,8 @@ public class StylingImpl extends MetaInfoGroupImpl implements Styling {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (stylesheetId: ");
-		result.append(stylesheetId);
+		result.append(" (style: ");
+		result.append(style);
 		result.append(", height: ");
 		result.append(height);
 		result.append(", width: ");

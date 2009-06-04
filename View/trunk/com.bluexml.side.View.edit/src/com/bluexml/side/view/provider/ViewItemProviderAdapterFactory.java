@@ -582,29 +582,6 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.view.DefaultCol} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DefaultColItemProvider defaultColItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.bluexml.side.view.DefaultCol}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createDefaultColAdapter() {
-		if (defaultColItemProvider == null) {
-			defaultColItemProvider = new DefaultColItemProvider(this);
-		}
-
-		return defaultColItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.view.ViewCollection} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -671,6 +648,29 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 		}
 
 		return filteringItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.view.FacetMapResultsView} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FacetMapResultsViewItemProvider facetMapResultsViewItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.view.FacetMapResultsView}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createFacetMapResultsViewAdapter() {
+		if (facetMapResultsViewItemProvider == null) {
+			facetMapResultsViewItemProvider = new FacetMapResultsViewItemProvider(this);
+		}
+
+		return facetMapResultsViewItemProvider;
 	}
 
 	/**
@@ -794,10 +794,10 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 		if (dataTableItemProvider != null) dataTableItemProvider.dispose();
 		if (stylingItemProvider != null) stylingItemProvider.dispose();
 		if (selectFieldItemProvider != null) selectFieldItemProvider.dispose();
-		if (defaultColItemProvider != null) defaultColItemProvider.dispose();
 		if (viewCollectionItemProvider != null) viewCollectionItemProvider.dispose();
 		if (htmlFieldItemProvider != null) htmlFieldItemProvider.dispose();
 		if (filteringItemProvider != null) filteringItemProvider.dispose();
+		if (facetMapResultsViewItemProvider != null) facetMapResultsViewItemProvider.dispose();
 	}
 
 }

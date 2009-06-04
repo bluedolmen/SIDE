@@ -46,14 +46,14 @@ import org.eclipse.ocl.ecore.OCL;
  */
 public class DataTableImpl extends AbstractDataTableImpl implements DataTable {
 	/**
-	 * The cached value of the '{@link #getDefaultColSetUp() <em>Default Col Set Up</em>}' reference.
+	 * The cached value of the '{@link #getDefaultColSetUp() <em>Default Col Set Up</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDefaultColSetUp()
 	 * @generated
 	 * @ordered
 	 */
-	protected DefaultCol defaultColSetUp;
+	protected Col defaultColSetUp;
 
 	/**
 	 * The cached value of the '{@link #getCols() <em>Cols</em>}' containment reference list.
@@ -89,15 +89,7 @@ public class DataTableImpl extends AbstractDataTableImpl implements DataTable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DefaultCol getDefaultColSetUp() {
-		if (defaultColSetUp != null && defaultColSetUp.eIsProxy()) {
-			InternalEObject oldDefaultColSetUp = (InternalEObject)defaultColSetUp;
-			defaultColSetUp = (DefaultCol)eResolveProxy(oldDefaultColSetUp);
-			if (defaultColSetUp != oldDefaultColSetUp) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ViewPackage.DATA_TABLE__DEFAULT_COL_SET_UP, oldDefaultColSetUp, defaultColSetUp));
-			}
-		}
+	public Col getDefaultColSetUp() {
 		return defaultColSetUp;
 	}
 
@@ -106,20 +98,33 @@ public class DataTableImpl extends AbstractDataTableImpl implements DataTable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DefaultCol basicGetDefaultColSetUp() {
-		return defaultColSetUp;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDefaultColSetUp(DefaultCol newDefaultColSetUp) {
-		DefaultCol oldDefaultColSetUp = defaultColSetUp;
+	public NotificationChain basicSetDefaultColSetUp(Col newDefaultColSetUp, NotificationChain msgs) {
+		Col oldDefaultColSetUp = defaultColSetUp;
 		defaultColSetUp = newDefaultColSetUp;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.DATA_TABLE__DEFAULT_COL_SET_UP, oldDefaultColSetUp, defaultColSetUp));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ViewPackage.DATA_TABLE__DEFAULT_COL_SET_UP, oldDefaultColSetUp, newDefaultColSetUp);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDefaultColSetUp(Col newDefaultColSetUp) {
+		if (newDefaultColSetUp != defaultColSetUp) {
+			NotificationChain msgs = null;
+			if (defaultColSetUp != null)
+				msgs = ((InternalEObject)defaultColSetUp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ViewPackage.DATA_TABLE__DEFAULT_COL_SET_UP, null, msgs);
+			if (newDefaultColSetUp != null)
+				msgs = ((InternalEObject)newDefaultColSetUp).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ViewPackage.DATA_TABLE__DEFAULT_COL_SET_UP, null, msgs);
+			msgs = basicSetDefaultColSetUp(newDefaultColSetUp, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.DATA_TABLE__DEFAULT_COL_SET_UP, newDefaultColSetUp, newDefaultColSetUp));
 	}
 
 	/**
@@ -142,6 +147,8 @@ public class DataTableImpl extends AbstractDataTableImpl implements DataTable {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case ViewPackage.DATA_TABLE__DEFAULT_COL_SET_UP:
+				return basicSetDefaultColSetUp(null, msgs);
 			case ViewPackage.DATA_TABLE__COLS:
 				return ((InternalEList<?>)getCols()).basicRemove(otherEnd, msgs);
 		}
@@ -157,8 +164,7 @@ public class DataTableImpl extends AbstractDataTableImpl implements DataTable {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ViewPackage.DATA_TABLE__DEFAULT_COL_SET_UP:
-				if (resolve) return getDefaultColSetUp();
-				return basicGetDefaultColSetUp();
+				return getDefaultColSetUp();
 			case ViewPackage.DATA_TABLE__COLS:
 				return getCols();
 		}
@@ -175,7 +181,7 @@ public class DataTableImpl extends AbstractDataTableImpl implements DataTable {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ViewPackage.DATA_TABLE__DEFAULT_COL_SET_UP:
-				setDefaultColSetUp((DefaultCol)newValue);
+				setDefaultColSetUp((Col)newValue);
 				return;
 			case ViewPackage.DATA_TABLE__COLS:
 				getCols().clear();
@@ -194,7 +200,7 @@ public class DataTableImpl extends AbstractDataTableImpl implements DataTable {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ViewPackage.DATA_TABLE__DEFAULT_COL_SET_UP:
-				setDefaultColSetUp((DefaultCol)null);
+				setDefaultColSetUp((Col)null);
 				return;
 			case ViewPackage.DATA_TABLE__COLS:
 				getCols().clear();
