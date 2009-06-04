@@ -185,6 +185,11 @@ public class OrganizationItemProvider
 			(createChildParameter
 				(RequirementsPackage.Literals.ORGANIZATION__CHILD_ELEMENTS,
 				 RequirementsFactory.eINSTANCE.createRequirementsDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(RequirementsPackage.Literals.ORGANIZATION__CHILD_ELEMENTS,
+				 RequirementsFactory.eINSTANCE.createPrivilegeGroup()));
 	}
 
 }

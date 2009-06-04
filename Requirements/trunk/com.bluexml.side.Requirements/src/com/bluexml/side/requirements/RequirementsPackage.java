@@ -600,7 +600,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PRIVILEGE_GROUP__ENTRY_POINT = 0;
+	int PRIVILEGE_GROUP__ENTRY_POINT = MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Privileges</b></em>' containment reference list.
@@ -609,7 +609,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PRIVILEGE_GROUP__PRIVILEGES = 1;
+	int PRIVILEGE_GROUP__PRIVILEGES = MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
@@ -618,7 +618,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PRIVILEGE_GROUP__DOCUMENTATION = 2;
+	int PRIVILEGE_GROUP__DOCUMENTATION = MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Privilege Group</em>' class.
@@ -627,7 +627,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PRIVILEGE_GROUP_FEATURE_COUNT = 3;
+	int PRIVILEGE_GROUP_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.requirements.AttributeType <em>Attribute Type</em>}' enum.

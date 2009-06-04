@@ -39,7 +39,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class PrivilegeGroupItemProvider
-	extends ItemProviderAdapter
+	extends ModelElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -209,17 +209,6 @@ public class PrivilegeGroupItemProvider
 			(createChildParameter
 				(RequirementsPackage.Literals.PRIVILEGE_GROUP__PRIVILEGES,
 				 RequirementsFactory.eINSTANCE.createPrivilege()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return RequirementsEditPlugin.INSTANCE;
 	}
 
 }

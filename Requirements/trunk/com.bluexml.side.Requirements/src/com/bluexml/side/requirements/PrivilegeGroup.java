@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface PrivilegeGroup extends EObject {
+public interface PrivilegeGroup extends ModelElement {
 	/**
 	 * Returns the value of the '<em><b>Entry Point</b></em>' reference.
 	 * <!-- begin-user-doc -->

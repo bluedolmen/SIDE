@@ -42,7 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class PrivilegeGroupImpl extends EObjectImpl implements PrivilegeGroup {
+public class PrivilegeGroupImpl extends ModelElementImpl implements PrivilegeGroup {
 	/**
 	 * The cached value of the '{@link #getEntryPoint() <em>Entry Point</em>}' reference.
 	 * <!-- begin-user-doc -->

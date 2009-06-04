@@ -672,6 +672,7 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 		agentEClass.getESuperTypes().add(this.getBasicElement());
 		goalEClass.getESuperTypes().add(this.getBasicElement());
 		requirementsDefinitionEClass.getESuperTypes().add(this.getOrganization());
+		privilegeGroupEClass.getESuperTypes().add(this.getModelElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(modelElementEClass, ModelElement.class, "ModelElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

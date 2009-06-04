@@ -166,6 +166,7 @@ public class RequirementsSwitch<T> {
 			case RequirementsPackage.PRIVILEGE_GROUP: {
 				PrivilegeGroup privilegeGroup = (PrivilegeGroup)theEObject;
 				T result = casePrivilegeGroup(privilegeGroup);
+				if (result == null) result = caseModelElement(privilegeGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

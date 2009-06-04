@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launchConfiguration type="org.eclipse.m2m.atl.adt.launching.atlTransformation">
-<stringAttribute key="ATL File Name" value="/com.bluexml.requirements.interpretation/metamodel/mindmap/transformation/agentList/RWM2AgentList.atl"/>
+<stringAttribute key="ATL File Name" value=""/>
 <stringAttribute key="ATL VM" value="Regular VM (with debugger)"/>
 <booleanAttribute key="AllowInterModelReferences" value="false"/>
 <mapAttribute key="Input">
@@ -27,7 +27,7 @@
 <mapEntry key="IN" value="/com.bluexml.requirements.interpretation/examples/example.rwm"/>
 <mapEntry key="RWM" value="uri:http://www.bluexml.com/requirements/"/>
 </mapAttribute>
-<stringAttribute key="Project Name" value="com.bluexml.requirements.interpretation"/>
+<stringAttribute key="Project Name" value=""/>
 <listAttribute key="Superimpose"/>
 <booleanAttribute key="continueAfterError" value="false"/>
 <booleanAttribute key="disableAttributeHelperCache" value="false"/>
