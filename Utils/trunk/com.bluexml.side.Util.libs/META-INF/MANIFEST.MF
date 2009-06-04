@@ -21,6 +21,7 @@ Export-Package: com.bluexml.side.util.libs;uses:="org.eclipse.core.runtime,org.e
    com.thoughtworks.xstream.core.util,
    com.thoughtworks.xstream.alias",
  com.thoughtworks.xstream.alias;uses:="com.thoughtworks.xstream.mapper,com.thoughtworks.xstream",
+ com.thoughtworks.xstream.converters,
  com.thoughtworks.xstream.io;uses:="com.thoughtworks.xstream.converters,com.thoughtworks.xstream",
  com.thoughtworks.xstream.io.xml;
   uses:="org.dom4j,
