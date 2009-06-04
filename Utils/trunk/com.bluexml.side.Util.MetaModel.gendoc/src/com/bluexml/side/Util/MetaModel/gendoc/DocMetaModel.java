@@ -289,13 +289,13 @@ public class DocMetaModel {
 		for (String doc : docs) {
 			if (nbRow == 0){
 				file.write("<entry namest='c2' nameend='c3'><para>");
-				file.write(doc);
+				file.write(replacenpara(doc));
 				file.write("</para></entry></row>");
 				nbRow++;
 			}
 			else{
 				file.write("<row><entry><para></para></entry>");
-				file.write("<entry namest='c2' nameend='c3'><para>"+doc+"</para></entry>");
+				file.write("<entry namest='c2' nameend='c3'><para>"+replacenpara(doc)+"</para></entry>");
 				file.write("</row>");
 			}	
 		}
@@ -330,6 +330,32 @@ public class DocMetaModel {
 		
 	}
 	
+	
+	/**
+	 * remplacer les retour chariot par <para></para>
+	 * @param docs
+	 * @param file
+	 * @throws IOException
+	 */
+	public String replacenpara(String valueAttributs) throws IOException{
+		
+		if (valueAttributs.indexOf("\r\r")>0)
+		{
+			valueAttributs=valueAttributs.replaceFirst("\r\r", "<para></para>");
+			while(valueAttributs.indexOf("\r\r")>0){
+				valueAttributs=valueAttributs.replaceFirst("\r\r", "<para></para>");
+			}
+		}
+		if (valueAttributs.indexOf("\r")>0)
+		{
+			valueAttributs=valueAttributs.replaceFirst("\r", "<para></para>");
+			while(valueAttributs.indexOf("\r")>0){
+				valueAttributs=valueAttributs.replaceFirst("\r", "<para></para>");
+			}
+		}
+		return valueAttributs;
+	}
+	
 	/**
 	 * traite la présentation de la doc relative aux attributs
 	 * @param docs
@@ -344,13 +370,13 @@ public class DocMetaModel {
 			Object[] value = docs.get(key).toArray();
 			if (nbRow == 0){
 				file.write("<entry><para>"+key+"</para></entry>");
-				file.write("<entry><para>"+value[nbRow].toString()+"</para></entry>");
+				file.write("<entry><para>"+replacenpara(value[nbRow].toString())+"</para></entry>");
 				file.write("</row>");
 				nbRow++;
 				if (value.length > 1){
 					file.write("<row><entry><para></para></entry><entry><para></para></entry>");
 					for (int i = 1 ;i < value.length; i++){
-						file.write("<entry><para>"+value[i].toString()+"</para></entry>");
+						file.write("<entry><para>"+replacenpara(value[i].toString())+"</para></entry>");
 						nbRow = i;
 					}
 					file.write("</row>");
@@ -359,12 +385,12 @@ public class DocMetaModel {
 			else{
 				file.write("<row><entry><para /></entry>");
 				file.write("<entry><para>"+key+"</para></entry>");
-				file.write("<entry><para>"+value[0]+"</para></entry>");
+				file.write("<entry><para>"+replacenpara(value[0].toString())+"</para></entry>");
 				file.write("</row>");
 				if (value.length > 1){
 					file.write("<row><entry><para></para></entry><entry><para></para></entry>");
 					for (int i = 1 ;i < value.length; i++){
-						file.write("<entry><para>"+value[i].toString()+"</para></entry>");
+						file.write("<entry><para>"+replacenpara(value[i].toString())+"</para></entry>");
 					}
 					file.write("</row>");
 				}
