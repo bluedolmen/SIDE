@@ -10,30 +10,78 @@
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="noSpecialCharacters" value="self.id.regexMatch('\w*') = true"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="help_text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The FormElement is an element of the form."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The 'label' attribute specifies the text associated to a form element.&#xD;&#xD;Example: label=Description"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The 'id' attribute specifies a unique identifier to a form element.&#xD;&#xD;Constraints/limit: The 'id' value must not contain space.&#xD;&#xD;Example: id=Description"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="help_text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The 'help_text' attribute specifies a text that will appear when the cursor moves over the form element.&#xD;&#xD;Example: help_text=This is a help message"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//ModelElement"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hidden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hidden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The 'hidden' attribute specifies if a form element will be hidden or not in the form.&#xD;&#xD;Example:&#xD;- 'false': the form element will not be hidden.&#xD;- 'true': the form element will be hidden."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormGroup" eSuperTypes="#//FormElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The FormGroup defines a group of element form.&#xD;&#xD;Inherits: &#xD;- FormElement."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//FormElement" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="presentation" eType="#//FormGroupPresentationType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="presentation" eType="#//FormGroupPresentationType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The 'presentation' attribute specifies the layout of a form group.&#xD;&#xD;Example:&#xD;- 'auto': displays elements in an horizontal way with a border.&#xD;- 'horizontal': displays elements in an horizontal way. The label of the form group will not appear.&#xD;- 'vertical': displays elements in a vertical way. The label of the form group will not appear.&#xD;- 'Tabbed': displays elements in a tab.&#xD;- 'bordeless': displays elements border. The label of the form group will not appear."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="disabled" upperBound="-1"
         eType="#//FormElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Field" abstract="true" eSuperTypes="#//FormElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mandatory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition : Field of a form.&#xD;&#xD;Inherits:&#xD;- FormElement."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mandatory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The 'mandatory' attribute specifies if a field is required or not.&#xD;&#xD;Constraints/limits: The field must be filled in order to validate the form. The message 'Please provide values for all required fields' will appear if the field is not filled.&#xD;&#xD;Example:&#xD;- 'false': the field is not mandatory.&#xD;- 'true': the field is mandatory. The label of the field will be followed by a star."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="error_messages" transient="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The 'error_messages' attribute is used to specify a text message in the case where the input is not valid."/>
+      </eAnnotations>
       <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
         <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
         <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </eGenericType>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initial" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="disabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fieldSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initial" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The 'initial' attribute specifies a defauld value for a field.&#xD;&#xD;Example: initial=Book"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="disabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The 'disable' attribute protects the field from being modified.&#xD;&#xD;Constraints/limits: The value of the field can not be changed.&#xD;&#xD;Example:&#xD;- 'false': the field can be modified.&#xD;- 'true': the field can not be modified."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fieldSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The 'fieldSize' attribute specifies the number of element to show for a selection list.&#xD;&#xD;Constraints/limit: When there are two relations R1 and R2 between two classes A and B, the value of Field Size set for R1 will be set for R2 too, even there is no value for Field Size of R2.&#xD;&#xD;Example: Field Size = 10"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanField" eSuperTypes="#//Field"/>
@@ -44,8 +92,19 @@
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="MinSuperiorToMax" value="self.min_length &lt;= self.max_length"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min_length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max_length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The 'Charfield' allows to enter char in input.&#xD;&#xD;Operations:&#xD;- 'Transform/to URLField': Transform Charfield into URLField.&#xD;- 'Transform/to EmailField': Transform Charfield into EmailField.&#xD;- 'Transform/to PasswordField': Transform Charfield into PasswordField.&#xD;- 'Transform/to RegexField': Transform Charfield into RegexField.&#xD;- 'Transform/to PhoneNumberField': Transform Charfield into PhoneNumberField.&#xD;- 'Transform/to FileField': Transform Charfield into FileField.&#xD;- 'Transform/to TextField': Transform Charfield into TextField.&#xD;&#xD;Inherits: &#xD;- Field."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min_length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The 'min_length' attribute specifies the minimum length of a char field input&#xD;&#xD;Constraints/limits: If the 'min_length' attribute is superior than 0, the char field will become mandatory.&#xD;&#xD;Example: min_length=0"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max_length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The 'max_length' attribute specifies the maximum length of a char field input&#xD;&#xD;Example: min_length=9"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DateField" eSuperTypes="#//Field">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="input_formats" upperBound="-1"
@@ -79,21 +138,35 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="show_actions" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EmailField" eSuperTypes="#//CharField"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EmailField" eSuperTypes="#//CharField">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The 'EmailField' specifies an email address.&#xD;&#xD;Constraints/limit: If the input is not an email, the URLField background color will change.&#xD;&#xD;Operations:&#xD;- 'Transform/to CharField': Transform EmailField into CharField.&#xD;- 'Transform/to URLField': Transform EmailField into URLField.&#xD;- 'Transform/to PasswordField': Transform EmailField into PasswordField.&#xD;- 'Transform/to RegexField': Transform EmailField into RegexField.&#xD;- 'Transform/to PhoneNumberField': Transform EmailField into PhoneNumberField.&#xD;- 'Transform/to TextField': Transform EmailField into TextField.&#xD;&#xD;Example: contact@bluexml.com&#xD;&#xD;Inherits: &#xD;- CharField"/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FileField" eSuperTypes="#//Field">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The 'FileField' is use to upload file.&#xD;&#xD;Operations:&#xD;- 'Transform/to ImageField': Transform FileField into ImageField.&#xD;- 'Transform/to CharField': Transform FileField into CharField.&#xD;&#xD;Inherits: &#xD;- Field"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="inRepository" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImageField" eSuperTypes="#//FileField"/>
   <eClassifiers xsi:type="ecore:EClass" name="TimeField" eSuperTypes="#//DateField"/>
   <eClassifiers xsi:type="ecore:EClass" name="URLField" eSuperTypes="#//CharField">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The 'URLField' specifies a url address.&#xD;&#xD;Constraints/limit: If the input is not a url, the URLField background color will change.&#xD;&#xD;Operations:&#xD;- 'Transform/to CharField': Transform URLField into CharField.&#xD;- 'Transform/to EmailField': Transform URLField into EmailField.&#xD;- 'Transform/to PasswordField': Transform URLField into PasswordField.&#xD;- 'Transform/to RegexField': Transform URLField into RegexField.&#xD;- 'Transform/to PhoneNumberField': Transform URLField into PhoneNumberField.&#xD;- 'Transform/to TextField': Transform URLField into TextField.&#xD;&#xD;Example: http://bluexml.com&#xD;&#xD;Inherits: &#xD;- CharField"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="verify_exists" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PhoneNumberField" eSuperTypes="#//CharField">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="input_formats" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormAspect" eSuperTypes="#//FormGroup"/>
-  <eClassifiers xsi:type="ecore:EClass" name="FormClass" eSuperTypes="#//FormContainer #//ClassReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FormClass" eSuperTypes="#//FormContainer #//ClassReference">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The Form Class is a form associated to a Class.&#xD;&#xD;Operations: &#xD;- The operation 'Load Ressources...' enables to select and import Class Diagrams in the Form Model.&#xD;- The operation 'Initialize form class' creates the form from a selected Class. The selected Class can be set with the attribute 'Real class'.&#xD;&#xD;Inherits: &#xD;- ClassReference.&#xD;- FormContainer."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Reference" eSuperTypes="#//ModelChoiceField"/>
   <eClassifiers xsi:type="ecore:EClass" name="FormCollection">
     <eStructuralFeatures xsi:type="ecore:EReference" name="forms" upperBound="-1"
@@ -114,7 +187,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="real_class" eType="ecore:EClass ../../com.bluexml.side.Class/model/Class.ecore#//Clazz"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="association_class" eType="ecore:EClass ../../com.bluexml.side.Class/model/Class.ecore#//Clazz"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PasswordField" eSuperTypes="#//CharField"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PasswordField" eSuperTypes="#//CharField">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The 'PasswordField' is used to input hidden information&#xD;&#xD;Operations:&#xD;- 'Transform/to CharField': Transform PasswordField into CharField.&#xD;- 'Transform/to URLField': Transform PasswordField into URLField.&#xD;- 'Transform/to EmailField': Transform PasswordField into EmailField.&#xD;- 'Transform/to RegexField': Transform PasswordField into RegexField.&#xD;- 'Transform/to PhoneNumberField': Transform PasswordField into PhoneNumberField.&#xD;- 'Transform/to TextField': Transform PasswordField into TextField.&#xD;&#xD;Inherits: &#xD;- CharField"/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VirtualField" eSuperTypes="#//Field">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="NoLinkForVirtualField"/>
@@ -133,6 +210,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActionField" eSuperTypes="#//Field"/>
   <eClassifiers xsi:type="ecore:EClass" name="TextField" eSuperTypes="#//CharField">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The 'TextField' is designed for multi-line input.&#xD;&#xD;Operations:&#xD;- 'Transform/to CharField': Transform TextField into CharField.&#xD;- 'Transform/to URLField': Transform TextField into URLField.&#xD;- 'Transform/to EmailField': Transform TextField into EmailField.&#xD;- 'Transform/to PasswordField': Transform TextField into TextField.&#xD;- 'Transform/to RegexField': Transform TextField into RegexField.&#xD;- 'Transform/to PhoneNumberField': Transform TextField into PhoneNumberField.&#xD;&#xD;Inherits: &#xD;- CharField"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="widget" eType="#//TextWidgetType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TextWidgetType">
@@ -151,7 +231,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="WorkflowFormCollection" eSuperTypes="#//FormCollection">
     <eStructuralFeatures xsi:type="ecore:EReference" name="linked_process" eType="ecore:EClass ../../com.bluexml.side.Workflow/model/Workflow.ecore#//Process"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FormWorkflow" eSuperTypes="#//FormContainer"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FormWorkflow" eSuperTypes="#//FormContainer">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The Form Workflow is a form associated to a Workflow.&#xD;&#xD;Operations: &#xD;- The operation 'Load Ressources...' enables to select and import Workflow Diagrams in the Form Model.&#xD;&#xD;Inherits: &#xD;- FormContainer."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormContainer" abstract="true" eSuperTypes="#//FormGroup">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="validName noSpecialCharacters"/>
