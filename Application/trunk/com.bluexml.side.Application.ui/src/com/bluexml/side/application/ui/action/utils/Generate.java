@@ -29,6 +29,7 @@ import com.bluexml.side.application.deployer.Deployer;
 import com.bluexml.side.application.documentation.LogSave;
 import com.bluexml.side.application.generator.AbstractGenerator;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
+import com.bluexml.side.util.libs.IFileHelper;
 
 public class Generate extends Thread {
 
@@ -37,6 +38,7 @@ public class Generate extends Thread {
 	private ProgressBar progressBar;
 	private Label label;
 	private StyledText styletext;
+	private String logPath;
 
 	/**
 	 * Launch generation on all generator version selected
@@ -116,7 +118,19 @@ public class Generate extends Thread {
 			}
 		}
 		addOneStep(progressBar);
+		logPath = getLogPath(configuration, configurationParameters);
 		generate(configuration, modelsInfo, configurationParameters, generationParameters);
+	}
+
+	/**
+	 * Return the log path (folder path + configuration name)
+	 * @param configuration
+	 * @param configurationParameters
+	 * @return
+	 */
+	private String getLogPath(Configuration configuration,
+			Map<String, String> configurationParameters) {
+		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + System.getProperty ("file.separator") + configuration.getName();
 	}
 
 	private void addText(String text) {
@@ -156,8 +170,16 @@ public class Generate extends Thread {
 				} else {
 					label.setText("Generation completed with errors.");
 				}
+				try {
+					LogSave.buildGeneraLogFile(logPath);
+					IFileHelper.refreshFolder(logPath);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				
 			}
-
+			
 		});
 
 	}
@@ -256,8 +278,7 @@ public class Generate extends Thread {
 					}
 				}
 				String fileName = "gen_" + generator.getTechVersion() + ".xml";
-				String confName = configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + System.getProperty ("file.separator") + configuration.getName();
-				LogSave.toXml(generator.getLog(),fileName, confName);
+				LogSave.toXml(generator.getLog(),fileName, logPath);
 			} else { 
 				error = true;
 			}
@@ -314,8 +335,7 @@ public class Generate extends Thread {
 					error = true;
 				}
 				String fileName = "dep_" + deployer.getTechVersion() + ".xml";
-				String confName = configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + System.getProperty ("file.separator") + configuration.getName();
-				LogSave.toXml(deployer.getLog(),fileName, confName);
+				LogSave.toXml(deployer.getLog(),fileName, logPath);
 			}
 		}
 		return error;

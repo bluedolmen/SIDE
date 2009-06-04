@@ -54,7 +54,17 @@ public class IFileHelper {
 	public static void deleteFolder(String ressource) throws CoreException {
 		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		IFolder folder = myWorkspaceRoot.getFolder(new Path(ressource));
-		folder.delete(true, null);
+		if (folder.exists()) {
+			folder.delete(true, null);
+		}
+	}
+	
+	public static void deleteFile(String ressource) throws CoreException {
+		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+		IResource res = myWorkspaceRoot.getFile(new Path(ressource));
+		if (res.exists()) {
+			res.delete(true, null);
+		}
 	}
 	
 	/**
@@ -70,6 +80,24 @@ public class IFileHelper {
 			folder.create(false, true, null);
 		}
 		return folder;
+	}
+	
+	/**
+	 * Create a file in the given folder
+	 * @param folder
+	 * @param fileName
+	 * @throws CoreException 
+	 */
+	public static IFile createFile(IFolder folder, String fileName) throws CoreException {
+		IFile file = null;
+		if (folder.exists()) {
+			IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+			file = myWorkspaceRoot.getFile(new Path(folder.getFullPath() + System.getProperty ("file.separator") + fileName));
+			if (!file.exists()) {
+				file.create(null, false, null);
+			}
+		}
+		return file;
 	}
 	
 	
@@ -108,5 +136,24 @@ public class IFileHelper {
 			}
 		}
 		return results;
+	}
+	
+	/**
+	 * Refresh the given folder
+	 * @param folder
+	 * @throws CoreException 
+	 */
+	public static void refreshFolder(IFolder folder) throws CoreException {
+		if (folder.exists()) {
+			folder.refreshLocal(IResource.DEPTH_INFINITE, null);
+		}
+	}
+	/**
+	 * Refresh the given folder using his path
+	 * @param folderPath
+	 * @throws CoreException
+	 */
+	public static void refreshFolder(String folderPath) throws CoreException {
+		refreshFolder(getIFolder(folderPath));
 	}
 }
