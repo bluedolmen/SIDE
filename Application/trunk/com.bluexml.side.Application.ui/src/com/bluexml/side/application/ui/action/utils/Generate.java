@@ -255,7 +255,7 @@ public class Generate extends Thread {
 						generator.addErrorLog("Feature not available", "Feature is not activited, please check your plugin licence", null);
 					}
 				}
-				String fileName = generator.getTechVersion() + ".xml";
+				String fileName = "gen_" + generator.getTechVersion() + ".xml";
 				String confName = configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + System.getProperty ("file.separator") + configuration.getName();
 				LogSave.toXml(generator.getLog(),fileName, confName);
 			} else { 
@@ -305,14 +305,17 @@ public class Generate extends Thread {
 
 			if (genObj instanceof Deployer) {
 				Deployer deployer = (Deployer) genObj;				
-				deployer.initialize(configurationParameters, generationParameters, deployerOptions);
+				deployer.initialize(configurationParameters, generationParameters, deployerOptions, id_techno);
 				
 				try {
-					deployer.deploy(id_techno);
+					deployer.deploy();
 				} catch (Exception e) {
 					e.printStackTrace();
 					error = true;
 				}
+				String fileName = "dep_" + deployer.getTechVersion() + ".xml";
+				String confName = configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + System.getProperty ("file.separator") + configuration.getName();
+				LogSave.toXml(deployer.getLog(),fileName, confName);
 			}
 		}
 		return error;

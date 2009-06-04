@@ -4,10 +4,15 @@
 package com.bluexml.side.application.deployer;
 
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import com.bluexml.side.application.StaticConfigurationParameters;
+import com.bluexml.side.application.documentation.structure.LogEntry;
+import com.bluexml.side.application.documentation.structure.SIDELog;
+import com.bluexml.side.application.documentation.structure.enumeration.LogEntryType;
+import com.bluexml.side.application.documentation.structure.enumeration.LogType;
 import com.bluexml.side.application.security.Checkable;
 import com.bluexml.side.util.libs.IFileHelper;
 
@@ -19,24 +24,36 @@ public abstract class Deployer implements Checkable {
 	String workingDirKey = "generation.options.destinationPath";
 	private Map<String, String> configurationParameters;
 	private Map<String, String> generationParameters;
+	protected SIDELog log;
+	protected String techVersion = null;
+	public SIDELog getLog() {
+		return log;
+	}
+
 	public static String DEPLOYER_CODE = null;
 	protected String cleanKey = null;
 	protected List<String> options = null;
 
-	public void initialize(Map<String, String> configurationParameters,Map<String, String> generationParameters,List<String> options) {
+	public void initialize(Map<String, String> configurationParameters,Map<String, String> generationParameters,List<String> options, String techVersion) {
 		this.configurationParameters = configurationParameters;
 		this.options = options;
 		this.generationParameters = generationParameters;
+		this.techVersion = techVersion;
+		log = new SIDELog(techVersion, new Date(),LogType.DEPLOYEMENT);
 	}
 	
 	public Map<String, String> getGenerationParameters() {
 		return generationParameters;
 	}
 	
-	public void deploy(String id_techno) throws Exception {
+	public String getTechVersion() {
+		return techVersion;
+	}
+
+	public void deploy() throws Exception {
 		String IfilewkDirPath = getTargetPath();
 		String absoluteWKDirePath = IFileHelper.getSystemFolderPath(IfilewkDirPath);
-		File fileToDeploy = new File(absoluteWKDirePath + File.separator + id_techno);
+		File fileToDeploy = new File(absoluteWKDirePath + File.separator + techVersion);
 		preProcess(fileToDeploy);
 		if (doClean()) {
 			clean(fileToDeploy);
@@ -63,5 +80,63 @@ public abstract class Deployer implements Checkable {
 
 	protected boolean doClean() {
 		return options != null && options.contains(cleanKey);		
+	}
+	
+	/**
+	 * Add a Log
+	 * @param title
+	 * @param description
+	 * @param uri
+	 * @param logEntryType
+	 */
+	protected void addLog(String title, String description, String uri, LogEntryType logEntryType) {
+		log.addLogEntry(new LogEntry(title, description, uri, logEntryType));
+	}
+	
+	/**
+	 * Add an Error Log
+	 * @param title
+	 * @param description
+	 * @param uri
+	 */
+	public void addErrorLog(String title, String description, String uri) {
+		addLog(title, description, uri, LogEntryType.ERROR);
+	}
+	
+	/**
+	 * Add an error log using a stracktrace instead of a string description
+	 * @param title
+	 * @param stackTrace
+	 * @param uri
+	 */
+	public void addErrorLog(String title, StackTraceElement[] stackTrace,
+			String uri) {
+		String description = "";
+		if (stackTrace != null && stackTrace.length > 0) {
+			for (StackTraceElement se : stackTrace){
+				description += System.getProperty("line.separator") + se.toString();
+			}
+		}
+		addErrorLog(title,description,uri);
+	}
+	
+	/**
+	 * Add a warning log
+	 * @param title
+	 * @param description
+	 * @param uri : null if no uri
+	 */
+	public void addWarningLog(String title, String description, String uri) {
+		addLog(title, description, uri, LogEntryType.WARNING);
+	}
+	
+	/**
+	 * Add information log
+	 * @param title
+	 * @param description
+	 * @param uri
+	 */
+	public void addInfoLog(String title, String description, String uri) {
+		addLog(title, description, uri, LogEntryType.DEPLOYEMENT_INFORMATION);
 	}
 }
