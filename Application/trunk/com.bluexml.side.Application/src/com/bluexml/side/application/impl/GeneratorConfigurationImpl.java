@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.application.impl.GeneratorConfigurationImpl#getId_metamodel <em>Id metamodel</em>}</li>
+ *   <li>{@link com.bluexml.side.application.impl.GeneratorConfigurationImpl#getGeneratorName <em>Generator Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,6 +49,26 @@ public class GeneratorConfigurationImpl extends ComponantConfigurationImpl imple
 	 * @ordered
 	 */
 	protected String id_metamodel = ID_METAMODEL_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getGeneratorName() <em>Generator Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneratorName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String GENERATOR_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getGeneratorName() <em>Generator Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneratorName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String generatorName = GENERATOR_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -94,11 +115,34 @@ public class GeneratorConfigurationImpl extends ComponantConfigurationImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getGeneratorName() {
+		return generatorName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGeneratorName(String newGeneratorName) {
+		String oldGeneratorName = generatorName;
+		generatorName = newGeneratorName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ApplicationPackage.GENERATOR_CONFIGURATION__GENERATOR_NAME, oldGeneratorName, generatorName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ApplicationPackage.GENERATOR_CONFIGURATION__ID_METAMODEL:
 				return getId_metamodel();
+			case ApplicationPackage.GENERATOR_CONFIGURATION__GENERATOR_NAME:
+				return getGeneratorName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -113,6 +157,9 @@ public class GeneratorConfigurationImpl extends ComponantConfigurationImpl imple
 		switch (featureID) {
 			case ApplicationPackage.GENERATOR_CONFIGURATION__ID_METAMODEL:
 				setId_metamodel((String)newValue);
+				return;
+			case ApplicationPackage.GENERATOR_CONFIGURATION__GENERATOR_NAME:
+				setGeneratorName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -129,6 +176,9 @@ public class GeneratorConfigurationImpl extends ComponantConfigurationImpl imple
 			case ApplicationPackage.GENERATOR_CONFIGURATION__ID_METAMODEL:
 				setId_metamodel(ID_METAMODEL_EDEFAULT);
 				return;
+			case ApplicationPackage.GENERATOR_CONFIGURATION__GENERATOR_NAME:
+				setGeneratorName(GENERATOR_NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -143,6 +193,8 @@ public class GeneratorConfigurationImpl extends ComponantConfigurationImpl imple
 		switch (featureID) {
 			case ApplicationPackage.GENERATOR_CONFIGURATION__ID_METAMODEL:
 				return ID_METAMODEL_EDEFAULT == null ? id_metamodel != null : !ID_METAMODEL_EDEFAULT.equals(id_metamodel);
+			case ApplicationPackage.GENERATOR_CONFIGURATION__GENERATOR_NAME:
+				return GENERATOR_NAME_EDEFAULT == null ? generatorName != null : !GENERATOR_NAME_EDEFAULT.equals(generatorName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -159,6 +211,8 @@ public class GeneratorConfigurationImpl extends ComponantConfigurationImpl imple
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (id_metamodel: ");
 		result.append(id_metamodel);
+		result.append(", generatorName: ");
+		result.append(generatorName);
 		result.append(')');
 		return result.toString();
 	}

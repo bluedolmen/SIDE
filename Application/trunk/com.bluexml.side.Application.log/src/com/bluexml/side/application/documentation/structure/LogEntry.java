@@ -13,8 +13,8 @@ public class LogEntry {
 	private URI uri;
 	private LogEntryType type;
 	
+	
 	public LogEntry(String name, String description, String uri, LogEntryType logEntryType) {
-		this.name = name;
 		this.description = description;
 		this.date = new Date();
 		this.type = logEntryType;

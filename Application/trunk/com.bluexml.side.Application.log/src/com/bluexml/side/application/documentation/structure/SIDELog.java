@@ -13,21 +13,28 @@ public class SIDELog {
 	private String path;
 	private List<LogEntry> logEntries;
 	private LogType type;
+	private String metaModel;
+	private String techno;
+	private String technoVersion;
+	private String creator;
 	
-	public SIDELog(String p_name, Date p_date, LogType p_logType) {
+	public SIDELog(String creator, String technoVersion, String techno, String metaModel, Date p_date, LogType p_logType) {
+		this.name = this.technoVersion = technoVersion;
+		this.creator = creator;
+		this.techno = techno;
+		this.metaModel = metaModel;
 		logEntries = new ArrayList<LogEntry>();
-		name = p_name;
 		date = p_date;
 		type = p_logType;
 	}
-	
+	/*
 	public SIDELog(String p_name, String p_description, Date p_date, LogType p_logType) {
 		logEntries = new ArrayList<LogEntry>();
 		description = p_description;
 		name = p_name;
 		date = p_date;
 		type = p_logType;
-	}
+	}*/
 	
 	public String getName() {
 		return name;

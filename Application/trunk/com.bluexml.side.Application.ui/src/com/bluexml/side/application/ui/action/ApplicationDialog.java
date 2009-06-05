@@ -1171,7 +1171,7 @@ public class ApplicationDialog extends Dialog {
 		optionsGroup.setVisible(false);
 
 		generatorParameters = new Table(optionsGroup, SWT.BORDER);
-		generatorParameters.setBounds(0, 23, 295, 292);
+		generatorParameters.setBounds(0, 23, 295, 210);
 		generatorParameters.setTopIndex(3);
 		generatorParameters.getHorizontalBar().setVisible(false);
 		generatorParameters.getHorizontalBar().setEnabled(false);
@@ -1191,12 +1191,12 @@ public class ApplicationDialog extends Dialog {
 		generatorParameters.setSortColumn(newColumnTableColumn);
 		newColumnTableColumn.setWidth(109);
 		newColumnTableColumn.setText(columnNames[0]);
-
+		
 		final TableColumn newColumnTableColumn_1 = new TableColumn(
 				generatorParameters, SWT.LEFT);
 		newColumnTableColumn_1.setWidth(315);
 		newColumnTableColumn_1.setText(columnNames[1]);
-
+		
 		final Label generationsOptionsLabel_1 = new Label(optionsGroup,
 				SWT.NONE);
 		generationsOptionsLabel_1.setFont(SWTResourceManager.getFont("", 11,

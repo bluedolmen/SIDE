@@ -22,6 +22,9 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.bluexml.side.application.ComponantConfiguration#getOptions <em>Options</em>}</li>
  *   <li>{@link com.bluexml.side.application.ComponantConfiguration#getImpl_class <em>Impl class</em>}</li>
  *   <li>{@link com.bluexml.side.application.ComponantConfiguration#getId <em>Id</em>}</li>
+ *   <li>{@link com.bluexml.side.application.ComponantConfiguration#getMetaModelName <em>Meta Model Name</em>}</li>
+ *   <li>{@link com.bluexml.side.application.ComponantConfiguration#getTechnologyVersionName <em>Technology Version Name</em>}</li>
+ *   <li>{@link com.bluexml.side.application.ComponantConfiguration#getTechnologyName <em>Technology Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -126,5 +129,83 @@ public interface ComponantConfiguration extends EObject {
 	 * @generated
 	 */
 	void setId(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Meta Model Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Meta Model Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Meta Model Name</em>' attribute.
+	 * @see #setMetaModelName(String)
+	 * @see com.bluexml.side.application.ApplicationPackage#getComponantConfiguration_MetaModelName()
+	 * @model
+	 * @generated
+	 */
+	String getMetaModelName();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.application.ComponantConfiguration#getMetaModelName <em>Meta Model Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Meta Model Name</em>' attribute.
+	 * @see #getMetaModelName()
+	 * @generated
+	 */
+	void setMetaModelName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Technology Version Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Technology Version Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Technology Version Name</em>' attribute.
+	 * @see #setTechnologyVersionName(String)
+	 * @see com.bluexml.side.application.ApplicationPackage#getComponantConfiguration_TechnologyVersionName()
+	 * @model
+	 * @generated
+	 */
+	String getTechnologyVersionName();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.application.ComponantConfiguration#getTechnologyVersionName <em>Technology Version Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Technology Version Name</em>' attribute.
+	 * @see #getTechnologyVersionName()
+	 * @generated
+	 */
+	void setTechnologyVersionName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Technology Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Technology Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Technology Name</em>' attribute.
+	 * @see #setTechnologyName(String)
+	 * @see com.bluexml.side.application.ApplicationPackage#getComponantConfiguration_TechnologyName()
+	 * @model
+	 * @generated
+	 */
+	String getTechnologyName();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.application.ComponantConfiguration#getTechnologyName <em>Technology Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Technology Name</em>' attribute.
+	 * @see #getTechnologyName()
+	 * @generated
+	 */
+	void setTechnologyName(String value);
 
 } // ComponantConfiguration

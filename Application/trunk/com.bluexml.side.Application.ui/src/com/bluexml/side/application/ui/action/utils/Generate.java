@@ -216,6 +216,10 @@ public class Generate extends Thread {
 		for (GeneratorConfiguration elem : configuration.getGeneratorConfigurations()) {
 			String id_techno_version = elem.getId_techno_version();
 			configurationParameters.put("technologyVersion", id_techno_version);
+			configurationParameters.put("generatorName", elem.getGeneratorName());
+			configurationParameters.put("metaModelName", elem.getMetaModelName());
+			configurationParameters.put("technologyName", elem.getTechnologyName());
+			configurationParameters.put("technologyVersionName", elem.getTechnologyVersionName());
 
 			// We get the option for this generator
 			Map<String, Boolean> generatorOptions = new HashMap<String, Boolean>();
@@ -236,7 +240,7 @@ public class Generate extends Thread {
 					addText(System.getProperty("line.separator") + "Generation for " + name);
 					
 					try {
-						generator.initialize(generationParameters, generatorOptions, configurationParameters, id_techno_version);
+						generator.initialize(generationParameters, generatorOptions, configurationParameters);
 					} catch (Exception e) {
 						error = true;
 						addErrorText(System.getProperty("line.separator") + "ERROR : " + (e.getMessage() != null ? e.getMessage() : ""));
@@ -300,6 +304,12 @@ public class Generate extends Thread {
 			String deployerClassName = depConf.getImpl_class();
 			String id_deployer = depConf.getId();
 			String id_techno = depConf.getId_techno_version();
+			configurationParameters.put("technologyVersion", id_techno);
+			configurationParameters.put("deployerName", depConf.getDeployerName());
+			configurationParameters.put("metaModelName", depConf.getMetaModelName());
+			configurationParameters.put("technologyName", depConf.getTechnologyName());
+			configurationParameters.put("technologyVersionName", depConf.getTechnologyVersionName());
+			
 			List<Option> options = depConf.getOptions();
 			// We get the option for this generator
 			List<String> deployerOptions = new ArrayList<String>();
@@ -307,7 +317,7 @@ public class Generate extends Thread {
 				deployerOptions.add(option.getKey());
 			}
 			Bundle plugin = Platform.getBundle(id_deployer);
-
+			
 			Class<?> gen;
 			Object genObj = null;
 			try {
@@ -326,7 +336,7 @@ public class Generate extends Thread {
 
 			if (genObj instanceof Deployer) {
 				Deployer deployer = (Deployer) genObj;				
-				deployer.initialize(configurationParameters, generationParameters, deployerOptions, id_techno);
+				deployer.initialize(configurationParameters, generationParameters, deployerOptions);
 				
 				try {
 					deployer.deploy();

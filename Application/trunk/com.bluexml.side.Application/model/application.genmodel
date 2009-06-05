@@ -31,6 +31,7 @@
     </genClasses>
     <genClasses ecoreClass="application.ecore#//GeneratorConfiguration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//GeneratorConfiguration/id_metamodel"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//GeneratorConfiguration/generatorName"/>
     </genClasses>
     <genClasses ecoreClass="application.ecore#//Option">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//Option/key"/>
@@ -39,12 +40,17 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ConfigurationParameters/key"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ConfigurationParameters/value"/>
     </genClasses>
-    <genClasses ecoreClass="application.ecore#//DeployerConfiguration"/>
+    <genClasses ecoreClass="application.ecore#//DeployerConfiguration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//DeployerConfiguration/deployerName"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="application.ecore#//ComponantConfiguration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ComponantConfiguration/id_techno_version"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference application.ecore#//ComponantConfiguration/options"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ComponantConfiguration/impl_class"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ComponantConfiguration/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ComponantConfiguration/metaModelName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ComponantConfiguration/technologyVersionName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ComponantConfiguration/technologyName"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

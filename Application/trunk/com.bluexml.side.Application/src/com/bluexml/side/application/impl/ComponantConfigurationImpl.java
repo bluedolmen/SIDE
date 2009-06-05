@@ -37,6 +37,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.bluexml.side.application.impl.ComponantConfigurationImpl#getOptions <em>Options</em>}</li>
  *   <li>{@link com.bluexml.side.application.impl.ComponantConfigurationImpl#getImpl_class <em>Impl class</em>}</li>
  *   <li>{@link com.bluexml.side.application.impl.ComponantConfigurationImpl#getId <em>Id</em>}</li>
+ *   <li>{@link com.bluexml.side.application.impl.ComponantConfigurationImpl#getMetaModelName <em>Meta Model Name</em>}</li>
+ *   <li>{@link com.bluexml.side.application.impl.ComponantConfigurationImpl#getTechnologyVersionName <em>Technology Version Name</em>}</li>
+ *   <li>{@link com.bluexml.side.application.impl.ComponantConfigurationImpl#getTechnologyName <em>Technology Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -112,6 +115,66 @@ public abstract class ComponantConfigurationImpl extends EObjectImpl implements 
 	 * @ordered
 	 */
 	protected String id = ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMetaModelName() <em>Meta Model Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMetaModelName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String META_MODEL_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getMetaModelName() <em>Meta Model Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMetaModelName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String metaModelName = META_MODEL_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTechnologyVersionName() <em>Technology Version Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTechnologyVersionName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TECHNOLOGY_VERSION_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTechnologyVersionName() <em>Technology Version Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTechnologyVersionName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String technologyVersionName = TECHNOLOGY_VERSION_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTechnologyName() <em>Technology Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTechnologyName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TECHNOLOGY_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTechnologyName() <em>Technology Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTechnologyName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String technologyName = TECHNOLOGY_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -212,6 +275,69 @@ public abstract class ComponantConfigurationImpl extends EObjectImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getMetaModelName() {
+		return metaModelName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMetaModelName(String newMetaModelName) {
+		String oldMetaModelName = metaModelName;
+		metaModelName = newMetaModelName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ApplicationPackage.COMPONANT_CONFIGURATION__META_MODEL_NAME, oldMetaModelName, metaModelName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getTechnologyVersionName() {
+		return technologyVersionName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTechnologyVersionName(String newTechnologyVersionName) {
+		String oldTechnologyVersionName = technologyVersionName;
+		technologyVersionName = newTechnologyVersionName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ApplicationPackage.COMPONANT_CONFIGURATION__TECHNOLOGY_VERSION_NAME, oldTechnologyVersionName, technologyVersionName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getTechnologyName() {
+		return technologyName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTechnologyName(String newTechnologyName) {
+		String oldTechnologyName = technologyName;
+		technologyName = newTechnologyName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ApplicationPackage.COMPONANT_CONFIGURATION__TECHNOLOGY_NAME, oldTechnologyName, technologyName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -237,6 +363,12 @@ public abstract class ComponantConfigurationImpl extends EObjectImpl implements 
 				return getImpl_class();
 			case ApplicationPackage.COMPONANT_CONFIGURATION__ID:
 				return getId();
+			case ApplicationPackage.COMPONANT_CONFIGURATION__META_MODEL_NAME:
+				return getMetaModelName();
+			case ApplicationPackage.COMPONANT_CONFIGURATION__TECHNOLOGY_VERSION_NAME:
+				return getTechnologyVersionName();
+			case ApplicationPackage.COMPONANT_CONFIGURATION__TECHNOLOGY_NAME:
+				return getTechnologyName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -263,6 +395,15 @@ public abstract class ComponantConfigurationImpl extends EObjectImpl implements 
 			case ApplicationPackage.COMPONANT_CONFIGURATION__ID:
 				setId((String)newValue);
 				return;
+			case ApplicationPackage.COMPONANT_CONFIGURATION__META_MODEL_NAME:
+				setMetaModelName((String)newValue);
+				return;
+			case ApplicationPackage.COMPONANT_CONFIGURATION__TECHNOLOGY_VERSION_NAME:
+				setTechnologyVersionName((String)newValue);
+				return;
+			case ApplicationPackage.COMPONANT_CONFIGURATION__TECHNOLOGY_NAME:
+				setTechnologyName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -287,6 +428,15 @@ public abstract class ComponantConfigurationImpl extends EObjectImpl implements 
 			case ApplicationPackage.COMPONANT_CONFIGURATION__ID:
 				setId(ID_EDEFAULT);
 				return;
+			case ApplicationPackage.COMPONANT_CONFIGURATION__META_MODEL_NAME:
+				setMetaModelName(META_MODEL_NAME_EDEFAULT);
+				return;
+			case ApplicationPackage.COMPONANT_CONFIGURATION__TECHNOLOGY_VERSION_NAME:
+				setTechnologyVersionName(TECHNOLOGY_VERSION_NAME_EDEFAULT);
+				return;
+			case ApplicationPackage.COMPONANT_CONFIGURATION__TECHNOLOGY_NAME:
+				setTechnologyName(TECHNOLOGY_NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -307,6 +457,12 @@ public abstract class ComponantConfigurationImpl extends EObjectImpl implements 
 				return IMPL_CLASS_EDEFAULT == null ? impl_class != null : !IMPL_CLASS_EDEFAULT.equals(impl_class);
 			case ApplicationPackage.COMPONANT_CONFIGURATION__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+			case ApplicationPackage.COMPONANT_CONFIGURATION__META_MODEL_NAME:
+				return META_MODEL_NAME_EDEFAULT == null ? metaModelName != null : !META_MODEL_NAME_EDEFAULT.equals(metaModelName);
+			case ApplicationPackage.COMPONANT_CONFIGURATION__TECHNOLOGY_VERSION_NAME:
+				return TECHNOLOGY_VERSION_NAME_EDEFAULT == null ? technologyVersionName != null : !TECHNOLOGY_VERSION_NAME_EDEFAULT.equals(technologyVersionName);
+			case ApplicationPackage.COMPONANT_CONFIGURATION__TECHNOLOGY_NAME:
+				return TECHNOLOGY_NAME_EDEFAULT == null ? technologyName != null : !TECHNOLOGY_NAME_EDEFAULT.equals(technologyName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -327,6 +483,12 @@ public abstract class ComponantConfigurationImpl extends EObjectImpl implements 
 		result.append(impl_class);
 		result.append(", id: ");
 		result.append(id);
+		result.append(", metaModelName: ");
+		result.append(metaModelName);
+		result.append(", technologyVersionName: ");
+		result.append(technologyVersionName);
+		result.append(", technologyName: ");
+		result.append(technologyName);
 		result.append(')');
 		return result.toString();
 	}

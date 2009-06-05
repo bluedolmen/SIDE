@@ -293,6 +293,15 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getGeneratorConfiguration_GeneratorName() {
+		return (EAttribute)generatorConfigurationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getOption() {
 		return optionEClass;
 	}
@@ -347,6 +356,15 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDeployerConfiguration_DeployerName() {
+		return (EAttribute)deployerConfigurationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getComponantConfiguration() {
 		return componantConfigurationEClass;
 	}
@@ -385,6 +403,33 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 	 */
 	public EAttribute getComponantConfiguration_Id() {
 		return (EAttribute)componantConfigurationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getComponantConfiguration_MetaModelName() {
+		return (EAttribute)componantConfigurationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getComponantConfiguration_TechnologyVersionName() {
+		return (EAttribute)componantConfigurationEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getComponantConfiguration_TechnologyName() {
+		return (EAttribute)componantConfigurationEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -441,6 +486,7 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 
 		generatorConfigurationEClass = createEClass(GENERATOR_CONFIGURATION);
 		createEAttribute(generatorConfigurationEClass, GENERATOR_CONFIGURATION__ID_METAMODEL);
+		createEAttribute(generatorConfigurationEClass, GENERATOR_CONFIGURATION__GENERATOR_NAME);
 
 		optionEClass = createEClass(OPTION);
 		createEAttribute(optionEClass, OPTION__KEY);
@@ -450,12 +496,16 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 		createEAttribute(configurationParametersEClass, CONFIGURATION_PARAMETERS__VALUE);
 
 		deployerConfigurationEClass = createEClass(DEPLOYER_CONFIGURATION);
+		createEAttribute(deployerConfigurationEClass, DEPLOYER_CONFIGURATION__DEPLOYER_NAME);
 
 		componantConfigurationEClass = createEClass(COMPONANT_CONFIGURATION);
 		createEAttribute(componantConfigurationEClass, COMPONANT_CONFIGURATION__ID_TECHNO_VERSION);
 		createEReference(componantConfigurationEClass, COMPONANT_CONFIGURATION__OPTIONS);
 		createEAttribute(componantConfigurationEClass, COMPONANT_CONFIGURATION__IMPL_CLASS);
 		createEAttribute(componantConfigurationEClass, COMPONANT_CONFIGURATION__ID);
+		createEAttribute(componantConfigurationEClass, COMPONANT_CONFIGURATION__META_MODEL_NAME);
+		createEAttribute(componantConfigurationEClass, COMPONANT_CONFIGURATION__TECHNOLOGY_VERSION_NAME);
+		createEAttribute(componantConfigurationEClass, COMPONANT_CONFIGURATION__TECHNOLOGY_NAME);
 
 		// Create enums
 		staticConfigurationParametersEEnum = createEEnum(STATIC_CONFIGURATION_PARAMETERS);
@@ -513,6 +563,7 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 
 		initEClass(generatorConfigurationEClass, GeneratorConfiguration.class, "GeneratorConfiguration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGeneratorConfiguration_Id_metamodel(), ecorePackage.getEString(), "id_metamodel", null, 0, 1, GeneratorConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGeneratorConfiguration_GeneratorName(), ecorePackage.getEString(), "generatorName", null, 0, 1, GeneratorConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(optionEClass, Option.class, "Option", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOption_Key(), ecorePackage.getEString(), "key", null, 0, 1, Option.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -522,12 +573,16 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 		initEAttribute(getConfigurationParameters_Value(), ecorePackage.getEString(), "value", null, 0, 1, ConfigurationParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(deployerConfigurationEClass, DeployerConfiguration.class, "DeployerConfiguration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDeployerConfiguration_DeployerName(), ecorePackage.getEString(), "deployerName", null, 0, 1, DeployerConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(componantConfigurationEClass, ComponantConfiguration.class, "ComponantConfiguration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getComponantConfiguration_Id_techno_version(), ecorePackage.getEString(), "id_techno_version", null, 0, 1, ComponantConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponantConfiguration_Options(), this.getOption(), null, "options", null, 0, -1, ComponantConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getComponantConfiguration_Impl_class(), ecorePackage.getEString(), "impl_class", null, 0, 1, ComponantConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getComponantConfiguration_Id(), ecorePackage.getEString(), "id", null, 0, 1, ComponantConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getComponantConfiguration_MetaModelName(), ecorePackage.getEString(), "metaModelName", null, 0, 1, ComponantConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getComponantConfiguration_TechnologyVersionName(), ecorePackage.getEString(), "technologyVersionName", null, 0, 1, ComponantConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getComponantConfiguration_TechnologyName(), ecorePackage.getEString(), "technologyName", null, 0, 1, ComponantConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(staticConfigurationParametersEEnum, StaticConfigurationParameters.class, "StaticConfigurationParameters");

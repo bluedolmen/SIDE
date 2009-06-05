@@ -62,6 +62,7 @@ public class GeneratorConfigurationItemProvider
 			super.getPropertyDescriptors(object);
 
 			addId_metamodelPropertyDescriptor(object);
+			addGeneratorNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -80,6 +81,28 @@ public class GeneratorConfigurationItemProvider
 				 getString("_UI_GeneratorConfiguration_id_metamodel_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_GeneratorConfiguration_id_metamodel_feature", "_UI_GeneratorConfiguration_type"),
 				 ApplicationPackage.Literals.GENERATOR_CONFIGURATION__ID_METAMODEL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Generator Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addGeneratorNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_GeneratorConfiguration_generatorName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_GeneratorConfiguration_generatorName_feature", "_UI_GeneratorConfiguration_type"),
+				 ApplicationPackage.Literals.GENERATOR_CONFIGURATION__GENERATOR_NAME,
 				 true,
 				 false,
 				 false,
@@ -126,6 +149,7 @@ public class GeneratorConfigurationItemProvider
 
 		switch (notification.getFeatureID(GeneratorConfiguration.class)) {
 			case ApplicationPackage.GENERATOR_CONFIGURATION__ID_METAMODEL:
+			case ApplicationPackage.GENERATOR_CONFIGURATION__GENERATOR_NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

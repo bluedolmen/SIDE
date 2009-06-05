@@ -34,12 +34,15 @@ public abstract class Deployer implements Checkable {
 	protected String cleanKey = null;
 	protected List<String> options = null;
 
-	public void initialize(Map<String, String> configurationParameters,Map<String, String> generationParameters,List<String> options, String techVersion) {
+	public void initialize(Map<String, String> configurationParameters,Map<String, String> generationParameters,List<String> options) {
 		this.configurationParameters = configurationParameters;
 		this.options = options;
 		this.generationParameters = generationParameters;
-		this.techVersion = techVersion;
-		log = new SIDELog(techVersion, new Date(),LogType.DEPLOYEMENT);
+		this.techVersion = configurationParameters.get("technologyVersion");
+		log = new SIDELog(configurationParameters.get("generatorName"), 
+				configurationParameters.get("technologyVersionName"),
+				configurationParameters.get("technologyName"),
+				configurationParameters.get("metaModelName"), new Date(),LogType.DEPLOYEMENT);
 	}
 	
 	public Map<String, String> getGenerationParameters() {

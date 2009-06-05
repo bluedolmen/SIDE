@@ -127,15 +127,35 @@ public class LogSave {
 			outputter.output(doc, writer);
 			writer.close();
 		}
-		InputStream in = LogSave.class
-				.getResourceAsStream("staticResources/log2html.xsl");
-		File xsl = new File(folder.getFullPath()
-				+ System.getProperty("file.separator") + "log2html.xsl");
-		FileOutputStream fos = new FileOutputStream(xsl);
+
+		moveStaticRessources(folder);
+
+	}
+
+	private static void moveStaticRessources(IFolder folderDest)
+			throws IOException {
+		String folderPath = folderDest.getLocation().toOSString() + System.getProperty("file.separator");
+		String folderSource = "staticResources" + System.getProperty("file.separator");
+		moveFile(folderPath, "log2html.xsl",  folderSource);
+		moveFile(folderPath + "css" + System.getProperty("file.separator"), "style.css",  folderSource + "css" + System.getProperty("file.separator"));
+		moveFile(folderPath + "img" + System.getProperty("file.separator"), "header.jpg",  folderSource + "img" + System.getProperty("file.separator"));
+	}
+
+	private static void moveFile(String folderDest, String fileName, String folderSource) throws IOException {
+		InputStream in = LogSave.class.getResourceAsStream(folderSource + fileName);
+		
+		File dest = new File(folderDest);
+		if (!dest.exists()) {
+			dest.mkdirs();
+		}
+		
+		File file = new File(folderDest + fileName);
+		FileOutputStream fos = new FileOutputStream(file);
 		int data = in.read();
 		while (data != -1) {
 			fos.write(data);
 			data = in.read();
 		}
+		fos.close();
 	}
 }

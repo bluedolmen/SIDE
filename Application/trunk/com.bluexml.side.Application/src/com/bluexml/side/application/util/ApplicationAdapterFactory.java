@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.application.util;
 
+import com.bluexml.side.application.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;

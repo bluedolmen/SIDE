@@ -23,7 +23,7 @@ public interface IGenerator {
 	 */
 	public void initialize(Map<String, String> generationParameters,
 			Map<String, Boolean> generatorOptions,
-			Map<String, String> configurationParameters, String techVersion_) throws Exception;
+			Map<String, String> configurationParameters) throws Exception;
 	
 	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo,
 			String id_metamodel);

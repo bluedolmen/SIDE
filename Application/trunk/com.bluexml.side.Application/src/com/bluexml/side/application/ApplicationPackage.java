@@ -303,13 +303,40 @@ public interface ApplicationPackage extends EPackage {
 	int COMPONANT_CONFIGURATION__ID = 3;
 
 	/**
+	 * The feature id for the '<em><b>Meta Model Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONANT_CONFIGURATION__META_MODEL_NAME = 4;
+
+	/**
+	 * The feature id for the '<em><b>Technology Version Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONANT_CONFIGURATION__TECHNOLOGY_VERSION_NAME = 5;
+
+	/**
+	 * The feature id for the '<em><b>Technology Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONANT_CONFIGURATION__TECHNOLOGY_NAME = 6;
+
+	/**
 	 * The number of structural features of the '<em>Componant Configuration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONANT_CONFIGURATION_FEATURE_COUNT = 4;
+	int COMPONANT_CONFIGURATION_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.application.impl.GeneratorConfigurationImpl <em>Generator Configuration</em>}' class.
@@ -358,6 +385,33 @@ public interface ApplicationPackage extends EPackage {
 	int GENERATOR_CONFIGURATION__ID = COMPONANT_CONFIGURATION__ID;
 
 	/**
+	 * The feature id for the '<em><b>Meta Model Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_CONFIGURATION__META_MODEL_NAME = COMPONANT_CONFIGURATION__META_MODEL_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Technology Version Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_CONFIGURATION__TECHNOLOGY_VERSION_NAME = COMPONANT_CONFIGURATION__TECHNOLOGY_VERSION_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Technology Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_CONFIGURATION__TECHNOLOGY_NAME = COMPONANT_CONFIGURATION__TECHNOLOGY_NAME;
+
+	/**
 	 * The feature id for the '<em><b>Id metamodel</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -367,13 +421,22 @@ public interface ApplicationPackage extends EPackage {
 	int GENERATOR_CONFIGURATION__ID_METAMODEL = COMPONANT_CONFIGURATION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Generator Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_CONFIGURATION__GENERATOR_NAME = COMPONANT_CONFIGURATION_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Generator Configuration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_CONFIGURATION_FEATURE_COUNT = COMPONANT_CONFIGURATION_FEATURE_COUNT + 1;
+	int GENERATOR_CONFIGURATION_FEATURE_COUNT = COMPONANT_CONFIGURATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.application.impl.OptionImpl <em>Option</em>}' class.
@@ -489,13 +552,49 @@ public interface ApplicationPackage extends EPackage {
 	int DEPLOYER_CONFIGURATION__ID = COMPONANT_CONFIGURATION__ID;
 
 	/**
+	 * The feature id for the '<em><b>Meta Model Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYER_CONFIGURATION__META_MODEL_NAME = COMPONANT_CONFIGURATION__META_MODEL_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Technology Version Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYER_CONFIGURATION__TECHNOLOGY_VERSION_NAME = COMPONANT_CONFIGURATION__TECHNOLOGY_VERSION_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Technology Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYER_CONFIGURATION__TECHNOLOGY_NAME = COMPONANT_CONFIGURATION__TECHNOLOGY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Deployer Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYER_CONFIGURATION__DEPLOYER_NAME = COMPONANT_CONFIGURATION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Deployer Configuration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPLOYER_CONFIGURATION_FEATURE_COUNT = COMPONANT_CONFIGURATION_FEATURE_COUNT + 0;
+	int DEPLOYER_CONFIGURATION_FEATURE_COUNT = COMPONANT_CONFIGURATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.application.StaticConfigurationParameters <em>Static Configuration Parameters</em>}' enum.
@@ -647,6 +746,17 @@ public interface ApplicationPackage extends EPackage {
 	EAttribute getGeneratorConfiguration_Id_metamodel();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.GeneratorConfiguration#getGeneratorName <em>Generator Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Generator Name</em>'.
+	 * @see com.bluexml.side.application.GeneratorConfiguration#getGeneratorName()
+	 * @see #getGeneratorConfiguration()
+	 * @generated
+	 */
+	EAttribute getGeneratorConfiguration_GeneratorName();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.application.Option <em>Option</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -710,6 +820,17 @@ public interface ApplicationPackage extends EPackage {
 	EClass getDeployerConfiguration();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.DeployerConfiguration#getDeployerName <em>Deployer Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Deployer Name</em>'.
+	 * @see com.bluexml.side.application.DeployerConfiguration#getDeployerName()
+	 * @see #getDeployerConfiguration()
+	 * @generated
+	 */
+	EAttribute getDeployerConfiguration_DeployerName();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.application.ComponantConfiguration <em>Componant Configuration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -762,6 +883,39 @@ public interface ApplicationPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getComponantConfiguration_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.ComponantConfiguration#getMetaModelName <em>Meta Model Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Meta Model Name</em>'.
+	 * @see com.bluexml.side.application.ComponantConfiguration#getMetaModelName()
+	 * @see #getComponantConfiguration()
+	 * @generated
+	 */
+	EAttribute getComponantConfiguration_MetaModelName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.ComponantConfiguration#getTechnologyVersionName <em>Technology Version Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Technology Version Name</em>'.
+	 * @see com.bluexml.side.application.ComponantConfiguration#getTechnologyVersionName()
+	 * @see #getComponantConfiguration()
+	 * @generated
+	 */
+	EAttribute getComponantConfiguration_TechnologyVersionName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.ComponantConfiguration#getTechnologyName <em>Technology Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Technology Name</em>'.
+	 * @see com.bluexml.side.application.ComponantConfiguration#getTechnologyName()
+	 * @see #getComponantConfiguration()
+	 * @generated
+	 */
+	EAttribute getComponantConfiguration_TechnologyName();
 
 	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.application.StaticConfigurationParameters <em>Static Configuration Parameters</em>}'.
@@ -910,6 +1064,14 @@ public interface ApplicationPackage extends EPackage {
 		EAttribute GENERATOR_CONFIGURATION__ID_METAMODEL = eINSTANCE.getGeneratorConfiguration_Id_metamodel();
 
 		/**
+		 * The meta object literal for the '<em><b>Generator Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GENERATOR_CONFIGURATION__GENERATOR_NAME = eINSTANCE.getGeneratorConfiguration_GeneratorName();
+
+		/**
 		 * The meta object literal for the '{@link com.bluexml.side.application.impl.OptionImpl <em>Option</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -964,6 +1126,14 @@ public interface ApplicationPackage extends EPackage {
 		EClass DEPLOYER_CONFIGURATION = eINSTANCE.getDeployerConfiguration();
 
 		/**
+		 * The meta object literal for the '<em><b>Deployer Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEPLOYER_CONFIGURATION__DEPLOYER_NAME = eINSTANCE.getDeployerConfiguration_DeployerName();
+
+		/**
 		 * The meta object literal for the '{@link com.bluexml.side.application.impl.ComponantConfigurationImpl <em>Componant Configuration</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1004,6 +1174,30 @@ public interface ApplicationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute COMPONANT_CONFIGURATION__ID = eINSTANCE.getComponantConfiguration_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Meta Model Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPONANT_CONFIGURATION__META_MODEL_NAME = eINSTANCE.getComponantConfiguration_MetaModelName();
+
+		/**
+		 * The meta object literal for the '<em><b>Technology Version Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPONANT_CONFIGURATION__TECHNOLOGY_VERSION_NAME = eINSTANCE.getComponantConfiguration_TechnologyVersionName();
+
+		/**
+		 * The meta object literal for the '<em><b>Technology Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPONANT_CONFIGURATION__TECHNOLOGY_NAME = eINSTANCE.getComponantConfiguration_TechnologyName();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.application.StaticConfigurationParameters <em>Static Configuration Parameters</em>}' enum.

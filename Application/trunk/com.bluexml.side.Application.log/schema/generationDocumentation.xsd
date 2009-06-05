@@ -4,6 +4,11 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="description" type="xsd:string" maxOccurs="1"/>
+                
+                <xsd:element name="metaModel" type="xsd:string" maxOccurs="1"/>
+                <xsd:element name="techno" type="xsd:string" maxOccurs="1"/>
+                <xsd:element name="creator" type="xsd:string" maxOccurs="1"/>
+                
                 <xsd:element name="logEntry" maxOccurs="unbounded">
                     <xsd:complexType>
                         <xsd:sequence>

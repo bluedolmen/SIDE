@@ -60,7 +60,7 @@ public class FormGenerator extends AbstractGenerator {
 	private File warFile;
 
 	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, String techVersion_) throws Exception{
-		super.initialize(generationParameters_, generatorOptions_, configurationParameters_, techVersion_);
+		super.initialize(generationParameters_, generatorOptions_, configurationParameters_);
 		try {
 			initWorkFolder();
 		} catch (IOException e) {

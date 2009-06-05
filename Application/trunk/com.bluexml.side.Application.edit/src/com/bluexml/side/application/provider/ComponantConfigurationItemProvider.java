@@ -70,6 +70,9 @@ public class ComponantConfigurationItemProvider
 			addId_techno_versionPropertyDescriptor(object);
 			addImpl_classPropertyDescriptor(object);
 			addIdPropertyDescriptor(object);
+			addMetaModelNamePropertyDescriptor(object);
+			addTechnologyVersionNamePropertyDescriptor(object);
+			addTechnologyNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -141,6 +144,72 @@ public class ComponantConfigurationItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Meta Model Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addMetaModelNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ComponantConfiguration_metaModelName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ComponantConfiguration_metaModelName_feature", "_UI_ComponantConfiguration_type"),
+				 ApplicationPackage.Literals.COMPONANT_CONFIGURATION__META_MODEL_NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Technology Version Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTechnologyVersionNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ComponantConfiguration_technologyVersionName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ComponantConfiguration_technologyVersionName_feature", "_UI_ComponantConfiguration_type"),
+				 ApplicationPackage.Literals.COMPONANT_CONFIGURATION__TECHNOLOGY_VERSION_NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Technology Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTechnologyNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ComponantConfiguration_technologyName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ComponantConfiguration_technologyName_feature", "_UI_ComponantConfiguration_type"),
+				 ApplicationPackage.Literals.COMPONANT_CONFIGURATION__TECHNOLOGY_NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -199,6 +268,9 @@ public class ComponantConfigurationItemProvider
 			case ApplicationPackage.COMPONANT_CONFIGURATION__ID_TECHNO_VERSION:
 			case ApplicationPackage.COMPONANT_CONFIGURATION__IMPL_CLASS:
 			case ApplicationPackage.COMPONANT_CONFIGURATION__ID:
+			case ApplicationPackage.COMPONANT_CONFIGURATION__META_MODEL_NAME:
+			case ApplicationPackage.COMPONANT_CONFIGURATION__TECHNOLOGY_VERSION_NAME:
+			case ApplicationPackage.COMPONANT_CONFIGURATION__TECHNOLOGY_NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case ApplicationPackage.COMPONANT_CONFIGURATION__OPTIONS:

@@ -1,12 +1,10 @@
 package com.bluexml.side.application.ui.action.tree;
 
 import java.util.HashSet;
-import java.util.Set;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 
 import com.bluexml.side.application.ApplicationFactory;
-import com.bluexml.side.application.ComponantConfiguration;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Option;
@@ -39,6 +37,10 @@ public class Generator extends ImplNode {
 					elt.setId_techno_version(parent.getId());
 					elt.setImpl_class(getLaunchClass());
 					elt.setId_metamodel(parent.getParent().getParent().getId());
+					elt.setMetaModelName(((Metamodel)parent.getParent().getParent()).getLabel());
+					elt.setTechnologyName(((Technology)parent.getParent()).getLabel());
+					elt.setTechnologyVersionName(((TechnologyVersion)parent).getVersion());
+					elt.setGeneratorName(this.getVersion());
 					// Launch options
 					for (TreeNode tn : options) {
 						OptionComponant o = (OptionComponant) tn;

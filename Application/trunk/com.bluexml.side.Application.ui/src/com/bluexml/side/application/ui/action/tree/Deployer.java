@@ -1,12 +1,10 @@
 package com.bluexml.side.application.ui.action.tree;
 
 import java.util.HashSet;
-import java.util.Set;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 
 import com.bluexml.side.application.ApplicationFactory;
-import com.bluexml.side.application.ComponantConfiguration;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.DeployerConfiguration;
 import com.bluexml.side.application.Option;
@@ -38,7 +36,9 @@ public class Deployer extends ImplNode {
 					elt.setId(getId());
 					elt.setId_techno_version(parent.getId());
 					elt.setImpl_class(getLaunchClass());
-
+					elt.setTechnologyName(((Technology)parent.getParent()).getLabel());
+					elt.setTechnologyVersionName(((TechnologyVersion)parent).getVersion());
+					elt.setDeployerName(this.getVersion());
 					// Launch options
 					for (TreeNode tn : options) {
 						OptionComponant o = (OptionComponant)tn;

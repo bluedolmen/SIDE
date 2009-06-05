@@ -1,0 +1,62 @@
+body{
+    font-family:Tahoma,Verdana,Arial,Helvetica,"Bitstream Vera Sans",sans-serif;
+    font-size:0.8em;
+    width:100%;
+    margin:0;
+    padding:0;
+}
+
+#header{
+    height:100px;
+    width:100%;
+    margin:0;
+    position:relative;
+    color:white;
+    background-color:#5992eb;
+}
+
+#menu{
+    width:100%;
+    text-align:center;
+    border-top:solid 1px #AAA;
+    border-bottom:solid 1px #AAA;
+    padding-top:3px;
+    padding-bottom:3px;
+}
+
+#content{
+    min-height:300px;
+    padding:10px;
+}
+
+#footer{
+    text-align:center;
+    width:100%;
+    border-top:solid 1px #AAA;
+    margin-top:20px;
+}
+
+.box{
+    width:48%;
+    border:solid 1px #AAA;
+    border-top:0px #AAA;
+}
+
+.box-header{
+    background-color:#5992eb;
+    color:#FFF;
+    height:20px;
+    font-weight:600;
+}
+
+.box-body{
+    padding:2px;
+}
+
+a,a:visited{
+    color:#5992eb;
+}
+
+a:hover{
+    color:#094adc;
+}

@@ -48,12 +48,15 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		return TEMP_FOLDER;
 	}
 
-	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, String techVersion_) throws Exception {
+	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_) throws Exception {
 		generationParameters = generationParameters_;
 		generatorOptions = generatorOptions_;
 		configurationParameters = configurationParameters_;
-		techVersion = techVersion_;
-		log = new SIDELog(techVersion, new Date(), LogType.GENERATION);
+		techVersion = configurationParameters_.get("technologyVersion");
+		log = new SIDELog(configurationParameters_.get("generatorName"), 
+				configurationParameters_.get("technologyVersionName"),
+				configurationParameters_.get("technologyName"),
+				configurationParameters_.get("metaModelName"),new Date(), LogType.GENERATION);
 	}
 	
 	/**
