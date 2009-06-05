@@ -214,30 +214,30 @@ public class DocMetaModel {
 				for (EClassifier classifier : classifiers) {
 					if (ObjectsFromPalette.contains(classifier.getName())){
 						file.write("<row><entry spanname='hspan3' align='center'>");
-						file.write("<title>"+classifier.getName()+"</title>");
+						file.write("<sect1><title>"+classifier.getName()+"</title></sect1>");
 						file.write("</entry></row>");
 						if (docOk.get(classifier)) {
 							file.write("<row><entry align='center'>");
-							file.write("<para>Description</para>");
+							file.write("<para><sect3><title>Description</title></sect3></para>");
 							file.write("</entry>");
 							writeDoc(getDoc(classifier),file);
 						}
 						writeType(types, classifier, file);
 						if (docAttOk.get(classifier)) {
 							file.write("<row><entry align='center'>");
-							file.write("<para>Attributes</para>");
+							file.write("<para><sect3><title>Attributes</title></sect3></para>");
 							file.write("</entry>");
 							writeDocAtt(getDocAtt(classifier),file);
 						}
 						if (docOclOk.get(classifier)) {
 							file.write("<row><entry align='center'>");
-							file.write("<para>Validation rules</para>");
+							file.write("<para><sect3><title>Validation rules</title></sect3></para>");
 							file.write("</entry>");
 							writeDocGen(getDocOcl(classifier), file);
 						}
 						if (docOpOk.get(classifier)) {
 							file.write("<row><entry align='center'>");
-							file.write("<para>Operations</para>");
+							file.write("<para><sect3><title>Operations</title></sect3></para>");
 							file.write("</entry>");
 							writeDocGen(getDocOp(classifier), file);
 						}
@@ -369,7 +369,7 @@ public class DocMetaModel {
 		for (String key : keys) {
 			Object[] value = docs.get(key).toArray();
 			if (nbRow == 0){
-				file.write("<entry><para>"+key+"</para></entry>");
+				file.write("<entry><para><sect3><title>"+key+"</title></sect3></para></entry>");
 				file.write("<entry><para>"+replacenpara(value[nbRow].toString())+"</para></entry>");
 				file.write("</row>");
 				nbRow++;
@@ -384,7 +384,7 @@ public class DocMetaModel {
 			}
 			else{
 				file.write("<row><entry><para /></entry>");
-				file.write("<entry><para>"+key+"</para></entry>");
+				file.write("<entry><para><sect3><title>"+key+"</title></sect3></para></entry>");
 				file.write("<entry><para>"+replacenpara(value[0].toString())+"</para></entry>");
 				file.write("</row>");
 				if (value.length > 1){
