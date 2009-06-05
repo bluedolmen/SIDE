@@ -286,7 +286,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_GJe7mVEPEd6MM4Zo3mXO3Q" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="0"/>
     <element xmi:type="ecore:EClass" href="Forms.ecore#//ModelChoiceField"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_GJe7mlEPEd6MM4Zo3mXO3Q" x="499" y="545"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_GJe7mlEPEd6MM4Zo3mXO3Q" x="504" y="547"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_GJgJslEPEd6MM4Zo3mXO3Q" type="1001">
     <children xmi:type="notation:Node" xmi:id="_GJgJtVEPEd6MM4Zo3mXO3Q" type="4001"/>
@@ -866,7 +866,7 @@
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_GJ6ZaFEPEd6MM4Zo3mXO3Q" type="3002" source="_GJe7mFEPEd6MM4Zo3mXO3Q" target="_GJ39IFEPEd6MM4Zo3mXO3Q">
     <children xmi:type="notation:Node" xmi:id="_GJ6ZbFEPEd6MM4Zo3mXO3Q" type="4011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_GJ6ZbVEPEd6MM4Zo3mXO3Q" x="-10" y="-10"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_GJ6ZbVEPEd6MM4Zo3mXO3Q" x="-60" y="6"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_GJ6ZblEPEd6MM4Zo3mXO3Q" type="4012">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_GJ6Zb1EPEd6MM4Zo3mXO3Q" x="10" y="10"/>
@@ -874,7 +874,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_GJ6ZaVEPEd6MM4Zo3mXO3Q" lineColor="0"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_GJ6ZalEPEd6MM4Zo3mXO3Q" fontName="Lucida Grande" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="Forms.ecore#//ModelChoiceField/association_formClass"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_GJ6Za1EPEd6MM4Zo3mXO3Q" points="[1, 0, 280, 140]$[-244, -61, 35, 79]$[-279, -140, 0, 0]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_GJ6Za1EPEd6MM4Zo3mXO3Q" points="[1, 0, 280, 140]$[-279, -140, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_GMuc0VEPEd6MM4Zo3mXO3Q" id="(0.19774011,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_GMuc0lEPEd6MM4Zo3mXO3Q" id="(0.75,1.0)"/>
   </edges>
