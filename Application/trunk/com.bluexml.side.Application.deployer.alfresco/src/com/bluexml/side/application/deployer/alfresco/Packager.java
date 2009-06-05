@@ -93,20 +93,24 @@ public class Packager {
 	private File getWorkingFolder() {
 		return new File(getWorkingdir());
 	}
-
+	/**
+	 * Use to map generated filePath to corresponding AMP directory
+	 * 
+	 * @return
+	 */
 	private Map<String, File> createAMPSkelleton() {
 		File ampRoot = getWorkingFolder();
 
 		Map<String, File> mapper = new HashMap<String, File>();
-		mapper.put("config", createAndRegisterDir(ampRoot, "/config"));
-		mapper.put("lib", createAndRegisterDir(ampRoot, "/lib"));
-		mapper.put("licences", createAndRegisterDir(ampRoot, "/licenses"));
-		mapper.put("jsp", createAndRegisterDir(ampRoot, "/web/jsp"));
-		mapper.put("css", createAndRegisterDir(ampRoot, "/web/css"));
-		mapper.put("images", createAndRegisterDir(ampRoot, "/web/images"));
-		mapper.put("scripts", createAndRegisterDir(ampRoot, "/web/scripts"));
+		mapper.put("/WEB-INF/classes/", createAndRegisterDir(ampRoot, "/config"));
+		mapper.put("/config/", createAndRegisterDir(ampRoot, "/config"));
+		mapper.put("/lib/", createAndRegisterDir(ampRoot, "/lib"));
+		mapper.put("/licences/", createAndRegisterDir(ampRoot, "/licenses"));
+		mapper.put("/jsp/", createAndRegisterDir(ampRoot, "/web/jsp"));
+		mapper.put("/css/", createAndRegisterDir(ampRoot, "/web/css"));
+		mapper.put("/images/", createAndRegisterDir(ampRoot, "/web/images"));
+		mapper.put("/scripts/", createAndRegisterDir(ampRoot, "/web/scripts"));
 		return mapper;
-
 	}
 
 	private File createAndRegisterDir(File ampRoot, String p) {

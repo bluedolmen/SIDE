@@ -91,7 +91,7 @@
                   </option>
                   <option
                         documentation="Check this option to include the production of the Alfresco Share&apos;s module extension in the generation.&lt;br&gt;If not checked, the extension modules are not included in the generated AMPs.&lt;br&gt;S-IDE provides extension modules to Alfresco Share in order to view and edit all the metadata of the newly generated content model."
-                        key="alfresco.share.extention"
+                        key="alfresco.share.extension"
                         label="Alfreco Share Extension">
                   </option>
                   <option
