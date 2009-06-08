@@ -39,7 +39,7 @@ public abstract class Deployer implements Checkable {
 		this.options = options;
 		this.generationParameters = generationParameters;
 		this.techVersion = configurationParameters.get("technologyVersion");
-		log = new SIDELog(configurationParameters.get("generatorName"), 
+		log = new SIDELog(configurationParameters.get("deployerName"), 
 				configurationParameters.get("technologyVersionName"),
 				configurationParameters.get("technologyName"),
 				configurationParameters.get("metaModelName"), new Date(),LogType.DEPLOYEMENT);
