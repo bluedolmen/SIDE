@@ -9,6 +9,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamSource;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
@@ -16,7 +21,9 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.ProcessingInstruction;
 import org.jdom.input.SAXBuilder;
+import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
+import org.jdom.transform.JDOMResult;
 
 import com.bluexml.side.application.documentation.structure.LogEntry;
 import com.bluexml.side.application.documentation.structure.SIDELog;
@@ -128,27 +135,76 @@ public class LogSave {
 			writer.close();
 		}
 
-		moveStaticRessources(folder);
+		moveStaticRessources(folder,doc);
 
 	}
 
-	private static void moveStaticRessources(IFolder folderDest)
-			throws IOException {
-		String folderPath = folderDest.getLocation().toOSString() + System.getProperty("file.separator");
-		String folderSource = "staticResources" + System.getProperty("file.separator");
-		moveFile(folderPath, "log2html.xsl",  folderSource);
-		moveFile(folderPath + "css" + System.getProperty("file.separator"), "style.css",  folderSource + "css" + System.getProperty("file.separator"));
-		moveFile(folderPath + "img" + System.getProperty("file.separator"), "header.jpg",  folderSource + "img" + System.getProperty("file.separator"));
+	private static void moveStaticRessources(IFolder folderDest, Document doc)
+			throws IOException, TransformerException {
+		String folderPath = folderDest.getLocation().toOSString()
+				+ System.getProperty("file.separator");
+		String folderSource = "staticResources"
+				+ System.getProperty("file.separator");
+		// We use xsl transformation and ouput html file into log directory
+		// We move all files to the log directory
+		moveFile(folderPath, "log2html.xsl", folderSource);
+		moveFile(folderPath + "css" + System.getProperty("file.separator"),
+				"style.css", folderSource + "css"
+						+ System.getProperty("file.separator"));
+		moveFile(folderPath + "img" + System.getProperty("file.separator"),
+				"background.png", folderSource + "img"
+						+ System.getProperty("file.separator"));
+		moveFile(folderPath + "img" + System.getProperty("file.separator"),
+				"link.png", folderSource + "img"
+						+ System.getProperty("file.separator"));
+		moveFile(folderPath + "js" + System.getProperty("file.separator"),
+				"jquery.js", folderSource + "js"
+						+ System.getProperty("file.separator"));
+		moveFile(folderPath + "js" + System.getProperty("file.separator"),
+				"log.js", folderSource + "js"
+						+ System.getProperty("file.separator"));
+		makeHtml(doc, folderPath, "log2html.xsl", "log.html");
 	}
 
-	private static void moveFile(String folderDest, String fileName, String folderSource) throws IOException {
-		InputStream in = LogSave.class.getResourceAsStream(folderSource + fileName);
+	/**
+	 * Will ouput html using xml with an xsl transfo
+	 * @param doc
+	 * @param folderDest
+	 * @param xslName
+	 * @throws TransformerException
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	private static void makeHtml(Document doc, String folderDest, String xslName, String htmlName) throws TransformerException, FileNotFoundException, IOException {
+		JDOMResult docResult = new JDOMResult();
+		org.jdom.Document resultat = null;
+		TransformerFactory factory = TransformerFactory.newInstance();
 		
+		Transformer transformer = factory.newTransformer(new StreamSource(new File(folderDest + xslName)));
+		
+		transformer.transform(new org.jdom.transform.JDOMSource(doc), docResult);
+		resultat = docResult.getDocument();
+		XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
+		outputter.output(resultat, new FileOutputStream(folderDest + htmlName));
+	}
+
+	/**
+	 * Move file from this jar to the specified folder
+	 * @param folderDest
+	 * @param fileName
+	 * @param folderSource
+	 * @throws IOException
+	 */
+	private static void moveFile(String folderDest, String fileName,
+			String folderSource) throws IOException {
+		InputStream in = LogSave.class.getResourceAsStream(folderSource
+				+ fileName);
+
 		File dest = new File(folderDest);
 		if (!dest.exists()) {
 			dest.mkdirs();
 		}
-		
+
 		File file = new File(folderDest + fileName);
 		FileOutputStream fos = new FileOutputStream(file);
 		int data = in.read();

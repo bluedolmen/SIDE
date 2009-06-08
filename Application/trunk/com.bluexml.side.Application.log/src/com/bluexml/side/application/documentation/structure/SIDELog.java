@@ -19,7 +19,8 @@ public class SIDELog {
 	private String creator;
 	
 	public SIDELog(String creator, String technoVersion, String techno, String metaModel, Date p_date, LogType p_logType) {
-		this.name = this.technoVersion = technoVersion;
+		this.name = creator;
+		this.technoVersion = technoVersion;
 		this.creator = creator;
 		this.techno = techno;
 		this.metaModel = metaModel;

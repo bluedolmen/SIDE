@@ -4,6 +4,14 @@ body{
     width:100%;
     margin:0;
     padding:0;
+    background-image:url('../img/background.png');
+}
+
+#container{
+    width:780px;
+    margin:auto;
+    background-color:#FFF;
+    border:solid 1px #AAA;
 }
 
 #header{
@@ -13,6 +21,7 @@ body{
     position:relative;
     color:white;
     background-color:#5992eb;
+    border:solid 1px #5992eb;
 }
 
 #menu{
@@ -25,21 +34,34 @@ body{
 }
 
 #content{
-    min-height:300px;
-    padding:10px;
+    min-height:400px;
+    padding:5px;
+    padding-top:10px;
+    background-color:#EEE;
 }
 
 #footer{
     text-align:center;
     width:100%;
     border-top:solid 1px #AAA;
-    margin-top:20px;
+}
+
+#leftColumn{
+    float:left;
+    width:50%;
+}
+
+#rightColumn{
+    float:right;
+    width:50%;
 }
 
 .box{
-    width:48%;
+    width:98%;
     border:solid 1px #AAA;
     border-top:0px #AAA;
+    background-color:#FFF;
+    margin-top:5px;
 }
 
 .box-header{
@@ -59,4 +81,15 @@ a,a:visited{
 
 a:hover{
     color:#094adc;
+}
+
+img{
+    border:0;
+}
+
+.error{
+    color:red;
+}
+.warning{
+    color:orange;
 }
