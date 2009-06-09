@@ -113,10 +113,10 @@
                                 </xsl:if>
                                 <xsl:choose>
                                     <xsl:when test="string-length(description) > 250">
-                                        <div>
+                                        <div class="clickable">
                                             <xsl:attribute name="onclick">javascript:switchLog(this);</xsl:attribute>
                                             <xsl:value-of select="substring(description,1,250)"/>...</div>
-                                        <div style="display:none;" onclick="javascript:switchLog(this);">
+                                        <div class="clickable" style="display:none;" onclick="javascript:switchLog(this);">
                                             <xsl:value-of select="description"/>
                                         </div>
                                     </xsl:when>
