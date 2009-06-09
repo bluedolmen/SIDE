@@ -1354,7 +1354,7 @@ public class ApplicationDialog extends Dialog {
 				if (treeElem instanceof Metamodel) {
 					Metamodel m = (Metamodel) treeElem;
 					result += "<br/>";
-					result += "Lien : ";
+					result += "Link :";
 					result += "<a href=\"" + m.getURL() + "\">" + m.getURL()
 							+ "</a>";
 				}
@@ -1644,7 +1644,7 @@ public class ApplicationDialog extends Dialog {
 				TreeNode parent) {
 			TreeNode futurParent = null;
 			// Scan for metamodels
-			if (config.getName().equalsIgnoreCase("metamodel")) {
+			if (config.getName().equalsIgnoreCase("metamodel")) { 
 				// We create the metal for this config element
 				Metamodel m = new Metamodel(config);
 				// We check if we already have this metamodel in your set
