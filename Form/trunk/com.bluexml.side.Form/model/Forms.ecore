@@ -34,16 +34,17 @@
         <details key="documentation" value="Definition: The 'hidden' attribute specifies if a form element will be hidden or not in the form.&#xD;&#xD;Example:&#xD;- 'false': the form element will not be hidden.&#xD;- 'true': the form element will be hidden."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="EAttribute0"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormGroup" eSuperTypes="#//FormElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The FormGroup defines a group of element form.&#xD;&#xD;Inherits: &#xD;- FormElement."/>
+      <details key="documentation" value="Definition: The FormGroup defines a logical group of fields. This logical grouping is used to generate grouping in the generated form through tabs, rows group, …. The creation of FormGroup is achieved by using the ‘Group in a new group’ operation of Field. &#xD;&#xD;Inherits: &#xD;- FormElement."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//FormElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="presentation" eType="#//FormGroupPresentationType">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'presentation' attribute specifies the layout of a form group. &#xD;&#xD;Example: The layout list is the following: auto, horizontal, vertical, Tabbed or borderless."/>
+        <details key="documentation" value="Definition: The type of presentation to propose for the group:&#xA;- auto: the generator decides the way to present the group.&#xA;- horizontal: the group is available under an horizontal separation.&#xA;- vertical: the group is available under a vertical separation.&#xA;- tabbed: the group is available under a tab.&#xA;- borderless: the group is available under a separation without borders.&#xA;"/>
       </eAnnotations>
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="name" value="presentation"/>
@@ -54,11 +55,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Field" abstract="true" eSuperTypes="#//FormElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition : Field of a form.&#xD;&#xD;Inherits:&#xD;- FormElement."/>
+      <details key="documentation" value="Definition : The form has a list of fields which inherits of the Field element. A Field is usually bound to an attribute of the class diagram (except for FreeText) and have some special features (by e.g. a Date Field can have min and max date). Each kind of field will have different generated input field or/and different kind of rules validation.&#xD;&#xA;Operations:&#xA;- The Operation ‘Group in a new group’ allows to group fields in a FormGroup (logical group). This group can be specialized to change his display (in tab, row or column by e.g.).&#xD;&#xA;Inherits: &#xD;- FormElement.&#xD;&#xA;Rules Validation :&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mandatory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'mandatory' attribute specifies if a field is required or not.&#xD;&#xD;Constraint/limit: The field must be filled in order to validate the form. The message 'Please provide values for all required fields' will appear if the field is not filled.&#xD;&#xD;Example:&#xD;- 'false': the field is not mandatory.&#xD;- 'true': the field is mandatory. The label of the field will be followed by a star."/>
+        <details key="documentation" value="Definition: The 'mandatory' attribute specifies if a field is required or not.&#xD;&#xD;Constraint/limit: The field must be filled in order to validate the form. The message for all required fields will appear if the field is not filled.&#xD;&#xD;Example:&#xD;- 'false': the field is not mandatory.&#xD;- 'true': the field is mandatory. The label of the field will be followed by a star."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="error_messages" transient="true">
@@ -72,24 +73,24 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="initial" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'initial' attribute specifies a defauld value for a field.&#xD;&#xD;Example: initial=Book"/>
+        <details key="documentation" value="Definition: The 'initial' attribute specifies a defauld value for a field.&#xD;&#xD;Constraint/limit: &#xD;- If the field is linked to an enumeration, the initial value must be the exact value of an item of the enumeration but there is not validation performed either at modeling or generation: if a wrong value has been provided, no default value will be set up in the enumeration widget.&#xD;- To specify an initial value for a field, same for a form of class diagram: add to the url the parameter &amp;XX=YY. YY is an initial value; it follows the same rules as the value of the attribute 'initial' in the form modeler. XX is an id name of the field to initialize. For more flexibility, there are two different ways to initialize a field. The first way is to used the name that appears in the element 'uniqueName' which can be found in the file mapping.xml under the tag 'field' of the target field (for example: field_11). The second way is to used id name of the element 'alfrescoName' of the file mappin.xml (for example: modelcyvel_Fiche_titre).&#xA;- In the case where different fields have the same alfresco attribute, all these fields can have a same initial by setting '&lt;alfrescoName>=&lt;value>'. A particular field can have a different value to the other by setting '&lt;uniqueName>=&lt;value>'.&#xD;&#xD;Example: initial=Book"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="disabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'disable' attribute protects the field from being modified.&#xD;&#xD;Constraint/limit: The value of the field can not be changed.&#xD;&#xD;Example:&#xD;- 'false': the field can be modified.&#xD;- 'true': the field can not be modified."/>
+        <details key="documentation" value="Definition: The 'disabled' attribute protects the field from being modified.&#xD;&#xD;Constraint/limit: The value of the field can not be changed.&#xD;&#xD;Example:&#xD;- 'false': the field can be modified.&#xD;- 'true': the field can not be modified."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fieldSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'fieldSize' attribute specifies the number of element to show for a selection list.&#xD;&#xD;Constraint/limit: When there are two relations R1 and R2 between two classes A and B, the value of field size set for R1 will be set for R2 too, even there is no value for field size of R2.&#xD;&#xD;Example: Field Size = 10"/>
+        <details key="documentation" value="Definition: The 'fieldSize' attribute specifies the number of element to show for a selection list.&#xD;&#xD;Constraint/limit: When there are two relations R1 and R2 between two classes A and B, the value of field size set for R1 will be set for R2 too, even there is no value for field size of R2.&#xD;&#xD;Example: Field Size = 10 will limit to 10 the number of elements in a generated selection list."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanField" eSuperTypes="#//Field">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'BooleanField' defines a check box with 'yes/no' choice. The default value is 'no'.&#xD;&#xD;Inherit:&#xD;- Field."/>
+      <details key="documentation" value="Definition: The 'BooleanField' defines a check box with 'yes/no' choice. The default value is 'no'.&#xD;&#xD;Inherits:&#xD;- Field."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CharField" eSuperTypes="#//Field">
@@ -104,23 +105,23 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="min_length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'min_length' attribute specifies the minimum length of a char field input&#xD;&#xD;Constraint/limit: If the 'min_length' attribute is superior than 0, the char field will become mandatory.&#xD;&#xD;Example: min_length=0"/>
+        <details key="documentation" value="Definition: The 'min_length' attribute specifies the minimum length of a char field input.&#xD;&#xD;Constraint/limit: If the 'min_length' attribute is superior than 0, the char field will become mandatory.&#xD;&#xD;Example: min_length=0"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="max_length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'max_length' attribute specifies the maximum length of a char field input&#xD;&#xD;Example: min_length=9"/>
+        <details key="documentation" value="Definition: The 'max_length' attribute specifies the maximum length of a char field input.&#xD;&#xD;Example: min_length=9"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DateField" eSuperTypes="#//Field">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'DateField' provides a field for date input.&#xD;&#xD;Inherit:&#xD;- Field."/>
+      <details key="documentation" value="Definition: The 'DateField' provides a field for date input.&#xD;&#xD;Inherits:&#xD;- Field."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="input_formats" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'input_formats' attribute specifies a format for date.&#xD;&#xD;Example: MM/DD/YYYY"/>
+        <details key="documentation" value="Definition: The 'input_formats' attribute specifies a format for date which is conform to a Java Regular Expression (java.util.regex).&#xA;&#xD;Example:&#xD;- MM/DD/YYYY to match a mm/dd/yyyy date format.&#xA;- (19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01]) to match a data yyyy-mm-dd format from between 1900-01-01 and 2099-12-31, with a choice of four separators.&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="min_date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate">
@@ -136,12 +137,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DateTimeField" eSuperTypes="#//DateField">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'DateTimeField' specifies a date with time input.&#xD;&#xD;Inherit:&#xD;- DateField."/>
+      <details key="documentation" value="Definition: The 'DateTimeField' specifies a date with time input.&#xD;&#xD;Inherits:&#xD;- DateField."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DecimalField" eSuperTypes="#//Field">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'DecimalField' specifies a field for decimal input.&#xD;&#xD;Inherit:&#xD;- Field."/>
+      <details key="documentation" value="Definition: The 'DecimalField' specifies a field for decimal input.&#xD;&#xD;Inherits:&#xD;- Field."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="min_value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -166,7 +167,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FloatField" eSuperTypes="#//Field">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'FloatField' specifies a field for float input.&#xD;&#xD;Inherit:&#xD;- Field."/>
+      <details key="documentation" value="Definition: The 'FloatField' specifies a field for float input.&#xD;&#xD;Inherits:&#xD;- Field."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="min_value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -181,7 +182,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerField" eSuperTypes="#//Field">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'IntegerField' specifies a field for integer input.&#xD;&#xD;Inherit:&#xD;- Field."/>
+      <details key="documentation" value="Definition: The 'IntegerField' specifies a field for integer input.&#xD;&#xD;Inherits:&#xD;- Field."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="min_value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -218,7 +219,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EmailField" eSuperTypes="#//CharField">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'EmailField' specifies an email address.&#xD;&#xD;Constraint/limit: If the input is not an email, the URLField background color will change.&#xD;&#xD;Operations:&#xD;- 'Transform/to CharField': Transform EmailField into CharField.&#xD;- 'Transform/to URLField': Transform EmailField into URLField.&#xD;- 'Transform/to PasswordField': Transform EmailField into PasswordField.&#xD;- 'Transform/to RegexField': Transform EmailField into RegexField.&#xD;- 'Transform/to PhoneNumberField': Transform EmailField into PhoneNumberField.&#xD;- 'Transform/to TextField': Transform EmailField into TextField.&#xD;&#xD;Example: contact@bluexml.com&#xD;&#xD;Inherits: &#xD;- CharField"/>
+      <details key="documentation" value="Definition: The 'EmailField' specifies an email address.&#xD;&#xD;Constraint/limit: If the input is not an email, the EmailField background color will change.&#xD;&#xD;Operations:&#xD;- 'Transform/to CharField': Transform EmailField into CharField.&#xD;- 'Transform/to URLField': Transform EmailField into URLField.&#xD;- 'Transform/to PasswordField': Transform EmailField into PasswordField.&#xD;- 'Transform/to RegexField': Transform EmailField into RegexField.&#xD;- 'Transform/to PhoneNumberField': Transform EmailField into PhoneNumberField.&#xD;- 'Transform/to TextField': Transform EmailField into TextField.&#xD;&#xD;Example: contact@bluexml.com&#xD;&#xD;Inherits: &#xD;- CharField"/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FileField" eSuperTypes="#//Field">
@@ -228,18 +229,18 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="inRepository" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'inRepository' attributes specifies if the file will be import in the target repository or not.&#xD;&#xD;Example:&#xD;- 'false': The file will not be import in the target repository.&#xD;- 'true': The file will be import in the target repository."/>
+        <details key="documentation" value="Definition: The 'inRepository' attributes specifies if the file will be import in the target repository (for instance Alfresco) or on the disk. &#xA;The target path to store the file is given through:&#xA;- If upload on disk (inRepository=false), the target directory must be set up either in the Alfresco.properties file using the ‘upload.directory’  parameter or through the url parameter ‘uploadDirectory’.&#xA;- if upload on Alfresco repository (inRepository=true), the target space must be set up either in the Alfresco.properties file using the ‘upload.repository’  parameter or through the url parameter ‘uploadRepository’.&#xD;&#xA;Example:&#xA;- 'false': The file will be uploaded to a directory of the file system. For instance, ‘upload.directory=c:\myWorkspace\files’ or ‘uploadDirectory=c:\myWorkspace\files’; if not set up through upload.directory or uploadDirectory, default value is the current directory. &#xA;- 'true': The file will be uploaded to the target repository. For instance, ‘upload.repository=app:company_home/cm:dictionary’ or ‘uploadRepository’= app:company_home/cm:dictionary’; if not set up through upload.repository or uploadRepository’, default value is ‘app:company_home’ for Alfresco.&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImageField" eSuperTypes="#//FileField">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'ImageField' is use to upload image.&#xD;&#xD;Inherit:&#xD;- FileField."/>
+      <details key="documentation" value="Definition: The 'ImageField' is use to upload image.&#xD;&#xD;Inherits:&#xD;- FileField."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TimeField" eSuperTypes="#//DateField">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'TimeField' specifies a time input.&#xD;&#xD;Inherit:&#xD;- DateField."/>
+      <details key="documentation" value="Definition: The 'TimeField' specifies a time input.&#xD;&#xD;Inherits:&#xD;- DateField."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="URLField" eSuperTypes="#//CharField">
@@ -254,24 +255,24 @@
   <eClassifiers xsi:type="ecore:EClass" name="FormAspect" eSuperTypes="#//FormGroup"/>
   <eClassifiers xsi:type="ecore:EClass" name="FormClass" eSuperTypes="#//FormContainer #//ClassReference">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The Form Class is the container for the form itself. If not empty, this element generates a form. Moreover, The Form Class is the link between a single class of the loaded Class Diagram and the customized form.&#xD;&#xD;Operations: &#xD;- The operation 'Load Ressources...' enables to select and import Class Diagrams in the Form Model.&#xD;- The operation 'Initialize form class' creates the form from a selected Class. The selected Class can be set with the attribute 'Real class'.&#xD;&#xD;Inherits: &#xD;- ClassReference.&#xD;- FormContainer."/>
+      <details key="documentation" value="Definition: The Form Class is the container for the form itself. If not empty, this element generates a form. Moreover, the Form Class is the link between a single class of the loaded Class Diagram and the customized form.&#xD;&#xA;Operations: &#xA;- The operation 'Load Ressources...' enables to select and import Class Diagrams in the Form Model. One of the first steps to modelize form is to connect this diagram with the class diagram through this operation: Right click on the editor and select Load Resource to choose a class model (and not a diagram). The Real Class attribute of Form Class may then be set up by selecting the name of class of the loaded class model. &#xA;- The operation 'Initialize form class' creates the default form from a selected Class. The selected Class is set up with the attribute 'Real class'. This action creates all fields corresponding to the Attributes and Associations defined in the class model: this default may then be refined according to the needs.&#xA;- The operation ‘Refresh Outline’ refreshes an outline html view of the form. This view is useful to see the transformations made on the form before generating it and to have a general view of what will be generated. It is important to note that this outline view does not give the final generated form and the shape may be different according to the targeted technology.&#xA;- The operation ‘Restore’ allows restoring a field which has been previously deleted.&#xD;&#xA;Inherits: &#xD;- ClassReference.&#xD;- FormContainer.&#xA;"/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Reference" eSuperTypes="#//ModelChoiceField">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'Reference' provides a inline reference to another form.&#xD;&#xD;Inherit:&#xD;- ModelChoiceField."/>
+      <details key="documentation" value="Definition: The 'Reference' provides an inline reference to another form. It is a ModelChoiceField but which references a form, ie after an expand has been performed.&#xD;&#xD;Inherits:&#xD;- ModelChoiceField."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormCollection">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: This is the root element. All form will be child of this element. it has no corresponding elements in the Class diagram and it is usually not generated."/>
+      <details key="documentation" value="Definition: This is the root element which is the first create element. All forms will be child of this element.  It has no corresponding elements in the Class diagram and is usually not generated.&#xD;&#xA;Operations:&#xA;- The operations ‘’ might be called when your Class diagram have been changed (attribute addition, change of type …) to propagate this changes in your forms. The changes which will be propagated are: attribute addition, attribute removal. The changes which are not propagated implies a manual update in the concerned forms.&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="forms" upperBound="-1"
         eType="#//FormContainer" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ChoiceField" eSuperTypes="#//Field">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'ChoiceField' provides a list of choices.&#xD;&#xD;Inherit:&#xD;- Field."/>
+      <details key="documentation" value="Definition: The 'ModelChoiceField' make reference to the associations of classes. An association is, by default see as a choices list with all element of the targeted class. This association can be expanded in order to have a form of the targeted elements in the form itself.&#xD;&#xA;Operations:&#xA;- 'Relation / Expand to reference': Available on association this action allows having the form of the linked class inside the actual form. It creates another form under the same form collection that can be personalized too: this form is directly inserted in the uniting form; we say the form is ‘inline’ instead of ‘Select’.&#xA;- 'Relation / Collapse to Model Choice Field’: when an association has been expanded, this operation allows to come back to the Select mode.&#xA;- 'Relation -> Add Reference: Available after an expand and it works the same way. It will add a form to the original form. Only available on associations with max cardinality set to more than one.&#xD;&#xA;Inherits: &#xD;- ClassReference.&#xD;- Field.&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="min_bound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -280,17 +281,17 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="max_bound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'max_bound' attribute defines the number maximum of choice."/>
+        <details key="documentation" value="Definition: The 'max_bound' attribute defines the number maximum of choice in the list."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="widget" eType="#//ChoiceWidgetType">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'widget' attribute specifies the layout of the choice field.&#xD;&#xD;Exemple:&#xD;- select.&#xD;- Inline."/>
+        <details key="documentation" value="Definition: The 'widget' attributes provides a layout for model choice field. &#xD;&#xD;The possible values are:&#xA;- Association Class Inline: in the case of an association class, to integrate the targeted class as a form inside the current form.&#xA;- Association Class Select: in the case of an association class, to integrate the targeted class as a widget of selection&#xA;- Inline: to integrate the targeted class as a  form inside the current form&#xA;- Select: to integrate the targeted  class as a widget of selection&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiple" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'multiple' attribute allows to select multiple choice.&#xD;&#xD;Example:&#xD;- 'false': allow no multiple selection.&#xD;- 'true': allows multiple selection."/>
+        <details key="documentation" value="Definition: The 'multiple' attribute allows to select multiple choice.&#xD;&#xD;Example:&#xD;- 'false': allows no multiple selection.&#xD;- 'true': allows multiple selection."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="filterParent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
@@ -300,13 +301,13 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="filterData" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'filterParent&quot; attribute filter choice by data."/>
+        <details key="documentation" value="Definition: The 'filterData&quot; attribute filter choice by data."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RegexField" eSuperTypes="#//CharField">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="expression reguliere; exprimer une contrainte sur le contenu du champ"/>
+      <details key="documentation" value="Definition: The ‘RegexField’ allows setting a constraint on the value of an input field. The langage used to express this constraint is standard Java Regular expression (java.util.regex). To create a RegexField (not available in the Class model), you must use a ‘Transform to RegexField’ operation on the field where you want to make a control of the user input.&#xD;&#xA;Example: “.+@.+\\.[a-z]+” to validate the structure of an email"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="regex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -330,7 +331,7 @@
       <details key="NoLinkForVirtualField" value="not self.link.oclIsUndefined()"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'VirtualField' link a class to another one. So it allows to include a form in another form.&#xD;&#xD;Inherit:&#xD;- Field."/>
+      <details key="documentation" value="Definition: When you have a form inside another (see ModelChoiceField) you can drag &amp; drop fields to an upper form. This field won’t be moved from his original form but will be virtualized on the targeted form. Virtual Fields are just link to the original field.&#xA;&#xA;Example: considering a Person class and a ContactInformation class with a Fax attribute with an association from Person to ContactInformation. If you want to insert in the Person form, three Fax input field, you will use the Virtual field mechanism to move up directly inside Person form.&#xA;&#xD;Inherits:&#xD;- Field."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="link" eType="#//Field"/>
   </eClassifiers>
@@ -366,7 +367,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActionField" eSuperTypes="#//Field">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'ActionField' represents a button.&#xD;&#xD;Inherit:&#xD;- Field."/>
+      <details key="documentation" value="Definition: The 'ActionField' represents a button.&#xD;&#xD;Inherits:&#xD;- Field."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TextField" eSuperTypes="#//CharField">
@@ -433,7 +434,7 @@
       <details key="validName" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'FormContainer' represent a form and is used as a container for elements.&#xD;&#xD;Inherits:&#xD;-FormGroup."/>
+      <details key="documentation" value="Definition: The 'FormContainer' represents a form and is used as a container for elements.&#xD;&#xD;Inherits:&#xD;-FormGroup."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

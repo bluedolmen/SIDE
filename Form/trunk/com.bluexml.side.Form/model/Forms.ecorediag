@@ -19,6 +19,10 @@
         <element xmi:type="ecore:EAttribute" href="Forms.ecore#//FormElement/hidden"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_GJXm0VEPEd6MM4Zo3mXO3Q"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_pkKygVWkEd6MvoUxbcBZww" type="2001">
+        <element xmi:type="ecore:EAttribute" href="Forms.ecore#//FormElement/EAttribute0"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_pkKyglWkEd6MvoUxbcBZww"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_GJTVZVEPEd6MM4Zo3mXO3Q"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_GJTVZlEPEd6MM4Zo3mXO3Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_GJTVZ1EPEd6MM4Zo3mXO3Q"/>
