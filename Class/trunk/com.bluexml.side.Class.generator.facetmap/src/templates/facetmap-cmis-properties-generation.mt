@@ -5,7 +5,7 @@ import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
 %>
 
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
-	./cmisTransformProperties.xml
+	./common/facetmap/WEB-INF/cmisTransformProperties.xml
 	
 <%script type="clazz.ClassPackage" name="hostName"%>
 Stage2
