@@ -32,6 +32,8 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class LogSave {
+	
+	public static String LOG_FILE_NAME = "log.xml";
 
 	/**
 	 * Render a SIDELog to a xml file using the given fileName in the given
@@ -111,7 +113,7 @@ public class LogSave {
 		// file
 		for (IFile xmlFile : toMerge) {
 			if (xmlFile.getName().endsWith(".xml")
-					&& !xmlFile.getName().equals("log.xml")) {
+					&& !xmlFile.getName().equals(LOG_FILE_NAME)) {
 				SAXBuilder builder = new SAXBuilder();
 				try {
 					Document xml = builder.build(IFileHelper.getFile(xmlFile));
@@ -124,8 +126,8 @@ public class LogSave {
 
 		// We create the general log file
 		IFileHelper.deleteFile(folder.getFullPath()
-				+ System.getProperty("file.separator") + "log.xml");
-		IFile genLog = IFileHelper.createFile(folder, "log.xml");
+				+ System.getProperty("file.separator") + LOG_FILE_NAME);
+		IFile genLog = IFileHelper.createFile(folder, LOG_FILE_NAME);
 		if (genLog != null) {
 			File genLogFile = IFileHelper.getFile(genLog);
 
@@ -156,6 +158,12 @@ public class LogSave {
 						+ System.getProperty("file.separator"));
 		moveFile(folderPath + "img" + System.getProperty("file.separator"),
 				"link.png", folderSource + "img"
+						+ System.getProperty("file.separator"));
+		moveFile(folderPath + "img" + System.getProperty("file.separator"),
+				"collapse.png", folderSource + "img"
+						+ System.getProperty("file.separator"));
+		moveFile(folderPath + "img" + System.getProperty("file.separator"),
+				"expand.png", folderSource + "img"
 						+ System.getProperty("file.separator"));
 		moveFile(folderPath + "js" + System.getProperty("file.separator"),
 				"jquery.js", folderSource + "js"

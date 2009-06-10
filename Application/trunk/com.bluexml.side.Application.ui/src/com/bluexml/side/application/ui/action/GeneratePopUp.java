@@ -14,12 +14,14 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 
@@ -100,9 +102,14 @@ public class GeneratePopUp extends Dialog {
 		final StyledText styletext = new StyledText(container, SWT.BORDER |SWT.H_SCROLL |SWT.V_SCROLL);
 		styletext.setBounds(10, 135, 464, 128);
 		
+		final Browser logLink = new Browser(container, SWT.NONE);
+		logLink.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
+		logLink.setBounds(95, 262, 290, 51);
+		logLink.setVisible(false);
+
 		try {
 			Generate gen = new Generate();
-			gen.run(configuration, staticParameters, models, progressBar, label, styletext);
+			gen.run(configuration, staticParameters, models, progressBar, label, styletext, logLink);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -117,6 +124,7 @@ public class GeneratePopUp extends Dialog {
 			e.printStackTrace();
 		}
 
+		
 		
 		return container;
 	}
@@ -139,7 +147,7 @@ public class GeneratePopUp extends Dialog {
 	 */
 	@Override
 	protected Point getInitialSize() {
-		return new Point(500, 375);
+		return new Point(500, 400);
 	}
 
 }

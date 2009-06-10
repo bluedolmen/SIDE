@@ -1,6 +1,7 @@
 package com.bluexml.side.application.generator;
 
 import java.io.File;
+import java.net.URI;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -67,6 +68,10 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	 * @param uri
 	 * @param logEntryType
 	 */
+	protected void addLog(String title, String description, URI uri, LogEntryType logEntryType) {
+		log.addLogEntry(new LogEntry(title, description, uri, logEntryType));
+	}
+	
 	protected void addLog(String title, String description, String uri, LogEntryType logEntryType) {
 		log.addLogEntry(new LogEntry(title, description, uri, logEntryType));
 	}
@@ -110,6 +115,9 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	public void addWarningLog(String title, String description, String uri) {
 		addLog(title, description, uri, LogEntryType.WARNING);
 	}
+	public void addWarningLog(String title, String description, URI uri) {
+		addLog(title, description, uri, LogEntryType.WARNING);
+	}
 
 	/**
 	 * Add information log
@@ -118,6 +126,9 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	 * @param description
 	 * @param uri
 	 */
+	public void addInfoLog(String title, String description, URI uri) {
+		addLog(title, description, uri, LogEntryType.GENERATION_INFORMATION);
+	}
 	public void addInfoLog(String title, String description, String uri) {
 		addLog(title, description, uri, LogEntryType.GENERATION_INFORMATION);
 	}
@@ -130,7 +141,11 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	 * @param uri
 	 */
 	public void addFileGeneratedLog(String path, String description, String uri) {
-		addLog(path, description, null, LogEntryType.GENERATED_FILE);
+		addLog(path, description, uri, LogEntryType.GENERATED_FILE);
+	}
+	
+	public void addFileGeneratedLog(String path, String description, URI uri) {
+		addLog(path, description, uri, LogEntryType.GENERATED_FILE);
 	}
 
 	public SIDELog getLog() {

@@ -1355,7 +1355,7 @@ public class ApplicationDialog extends Dialog {
 					Metamodel m = (Metamodel) treeElem;
 					result += "<br/>";
 					result += "Link :";
-					result += "<a href=\"" + m.getURL() + "\">" + m.getURL()
+					result += "<a href=\"" + m.getURL() + "\" target=\"_blank\">" + m.getURL()
 							+ "</a>";
 				}
 			}

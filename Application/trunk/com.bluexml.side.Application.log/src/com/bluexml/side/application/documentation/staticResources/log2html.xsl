@@ -59,6 +59,8 @@
                         generation informations. <br/>
                         <xsl:value-of select="count(//logEntry[@type='DEPLOYEMENT_INFORMATION'])"/>
                         deployement informations. <br/>
+                        <xsl:value-of select="count(//logEntry[@type='GENERATED_FILE'])"/>
+                        logs on generated files. <br/>
                     </div>
                 </div>
             </div>
@@ -95,11 +97,24 @@
         <xsl:for-each select="//SIDELog[@type=$type]">
             <xsl:sort select="@name"/>
             <div class="box">
+                <xsl:variable name="name">
+                    <xsl:call-template name="removeSpecialChars"><xsl:with-param name="string"><xsl:value-of select="@name"/></xsl:with-param></xsl:call-template>
+                </xsl:variable>
+                <xsl:attribute name="id"><xsl:value-of select="$name"/></xsl:attribute>
                 <div class="box-header">
-                    <xsl:attribute name="id"><xsl:value-of select="@name"/></xsl:attribute>
+                    <xsl:attribute name="id"><xsl:value-of select="$name"/>-header</xsl:attribute>
+                    <img src="img/expand.png" align="right" class="clickable" style="display:none;">
+                        <xsl:attribute name="id"><xsl:value-of select="$name"/>-ico-expand</xsl:attribute>
+                        <xsl:attribute name="onclick">javascript:expandBox('<xsl:value-of select="$name"/>-body',this,'<xsl:value-of select="$name"/>-ico-collapse')</xsl:attribute>
+                    </img>
+                    <img src="img/collapse.png" align="right" class="clickable">
+                        <xsl:attribute name="id"><xsl:value-of select="$name"/>-ico-collapse</xsl:attribute>
+                        <xsl:attribute name="onclick">javascript:collapseBox('<xsl:value-of select="$name"/>-body',this,'<xsl:value-of select="$name"/>-ico-expand')</xsl:attribute>
+                    </img>
                     <xsl:value-of select="@name"/> (<xsl:call-template name="displayDate"><xsl:with-param name="date"><xsl:value-of select="@date"/></xsl:with-param></xsl:call-template>)
                 </div>
                 <div class="box-body">
+                    <xsl:attribute name="id"><xsl:value-of select="$name"/>-body</xsl:attribute>
                     <xsl:if test="count(logEntry) = 0">No Log registered</xsl:if>
                     <ul>
                         <xsl:for-each select="logEntry">
@@ -111,6 +126,8 @@
                                 <xsl:if test="@type='WARNING'">
                                     <xsl:attribute name="class">warning</xsl:attribute>
                                 </xsl:if>
+                                <strong><xsl:value-of select="name"/></strong>
+                                <br/>
                                 <xsl:choose>
                                     <xsl:when test="string-length(description) > 250">
                                         <div class="clickable">
@@ -146,5 +163,10 @@
         <xsl:param name="date"/>
         <xsl:value-of select="concat(substring($date, 9, 2), '/', substring($date, 6, 2), '/', substring($date,1,4))"/>
         - <xsl:value-of select="substring($date, 12, 8)"/>
+    </xsl:template>
+    
+    <xsl:template name="removeSpecialChars">
+        <xsl:param name="string"/>
+        <xsl:value-of select="translate($string,' ','')"/>
     </xsl:template>
 </xsl:stylesheet>

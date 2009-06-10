@@ -79,9 +79,11 @@ public abstract class AbstractAlfrescoGenerator extends AbstractAcceleoGenerator
 			setTEMP_FOLDER("generator_" + getClass().getName() + File.separator + rootName);
 			IFile ampIFile = buildAMPPackage(rootName);
 			generatedFiles.add(ampIFile);
-			addInfoLog(ampIFile.getName() + " created.", ampIFile.getName() + " created in " + ampIFile.getFullPath(), null);
-		}	
-		addInfoLog("Files Generated", generatedFiles.size() + " files generated.", null);
+			addFileGeneratedLog(ampIFile.getName() + " created.", ampIFile.getName() + " created in " + ampIFile.getFullPath(), IFileHelper.getFile(ampIFile).toURI());
+		}
+		for (IFile f : generatedFiles) {
+			addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());
+		}
 		return generatedFiles;
 	}
 

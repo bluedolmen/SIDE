@@ -1,5 +1,6 @@
 package com.bluexml.side.application.ui.action.utils;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,6 +12,7 @@ import java.util.Map;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Display;
@@ -39,6 +41,7 @@ public class Generate extends Thread {
 	private Label label;
 	private StyledText styletext;
 	private String logPath;
+	private Browser logLink;
 
 	/**
 	 * Launch generation on all generator version selected
@@ -46,6 +49,7 @@ public class Generate extends Thread {
 	 * @param configuration
 	 * @param staticParameters
 	 * @param models
+	 * @param logLink2 
 	 * @param progressBar
 	 * @param label
 	 * @param styletext
@@ -54,11 +58,12 @@ public class Generate extends Thread {
 	 * @throws IllegalAccessException
 	 * @throws IOException
 	 */
-	public void run(Configuration configuration, List<String> staticParameters, List<Model> models, ProgressBar p_progressBar, Label p_label, StyledText p_styletext) throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
+	public void run(Configuration configuration, List<String> staticParameters, List<Model> models, ProgressBar p_progressBar, Label p_label, StyledText p_styletext, Browser p_logLink) throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
 
 		progressBar = p_progressBar;
 		label = p_label;
 		styletext = p_styletext;
+		logLink = p_logLink;
 
 		// First we seek the generator parameters, and separate fields
 		// of dynamic fields
@@ -173,13 +178,16 @@ public class Generate extends Thread {
 				try {
 					LogSave.buildGeneraLogFile(logPath);
 					IFileHelper.refreshFolder(logPath);
+					logLink.setText("<html><body style=\"overflow:auto; background-color:#f0f0f0;\"><div style=\"font-family: Verdana; "
+				+ "color: #444;" + "text-decoration: none;"
+				+ "word-spacing: normal;" + "text-align: justify;"
+				+ "letter-spacing: 0;" + "line-height: 1.2em;"
+				+ "font-size: 11px; width:100%; text-align:center;\">Log File can be found <a href=\"file:///" + IFileHelper.createFolder(logPath).getLocation().toOSString() + System.getProperty("file.separator") + LogSave.LOG_FILE_NAME + "\" target=\"_blank\">here</a></div></body></html>");
+					logLink.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
-				
 			}
-			
 		});
 
 	}

@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='log2html.xsl'?><logRoot><SIDELog name="S-IDE Alfresco Class Generator 1.0.0" date="2009-06-10 10:22:42.300 CEST" type="GENERATION">
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.32 CEST</date>
+    <name>module.SIDE_ModelExtension_com.amp created.</name>
+    <description>module.SIDE_ModelExtension_com.amp created in /test/gen/alfresco_3.x/module.SIDE_ModelExtension_com.amp</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/alfresco_3.x/module.SIDE_ModelExtension_com.amp</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.32 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\config\alfresco\module\SIDE_ModelExtension_com\model\model.xml</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/config/alfresco/module/SIDE_ModelExtension_com/model/model.xml</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.33 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\config\alfresco\module\SIDE_ModelExtension_com\model\messages.properties</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/config/alfresco/module/SIDE_ModelExtension_com/model/messages.properties</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.33 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\config\alfresco\module\SIDE_ModelExtension_com\web-client-config-custom.xml</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/config/alfresco/module/SIDE_ModelExtension_com/web-client-config-custom.xml</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.34 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\config\alfresco\module\SIDE_ModelExtension_com\module-context.xml</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/config/alfresco/module/SIDE_ModelExtension_com/module-context.xml</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.34 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\share\WEB-INF\classes\alfresco\web-extension\web-framework-config-custom.xml</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/share/WEB-INF/classes/alfresco/web-extension/web-framework-config-custom.xml</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.34 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\share\WEB-INF\classes\alfresco\site-webscripts\org\alfresco\components\upload\file-upload.get.html.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/upload/file-upload.get.html.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.34 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\share\WEB-INF\classes\alfresco\site-webscripts\org\alfresco\components\upload\flash-upload.get.js</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/upload/flash-upload.get.js</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.34 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\share\WEB-INF\classes\alfresco\site-webscripts\org\alfresco\components\upload\html-upload.get.js</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/upload/html-upload.get.js</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.34 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\org\alfresco\repository\upload\upload.post.js</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/org/alfresco/repository/upload/upload.post.js</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.34 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\org\alfresco\repository\upload\upload.post.desc.xml</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/org/alfresco/repository/upload/upload.post.desc.xml</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.34 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\org\alfresco\repository\upload\upload.post.html.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/org/alfresco/repository/upload/upload.post.html.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.34 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\org\alfresco\repository\upload\upload.post.json.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/org/alfresco/repository/upload/upload.post.json.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.35 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\org\alfresco\repository\upload\upload.get.html.status.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/org/alfresco/repository/upload/upload.get.html.status.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.35 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\bluexml\test\com_bluexml_test.get.desc.xml</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/test/com_bluexml_test.get.desc.xml</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.35 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\bluexml\test\com_bluexml_test.post.desc.xml</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/test/com_bluexml_test.post.desc.xml</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.35 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\bluexml\test\com_bluexml_test.get.js</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/test/com_bluexml_test.get.js</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.35 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\bluexml\test\com_bluexml_test.post.js</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/test/com_bluexml_test.post.js</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.35 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\bluexml\test\html\com_bluexml_test.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/test/html/com_bluexml_test.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.35 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\bluexml\test\com_bluexml_test.post.html.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/test/com_bluexml_test.post.html.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.35 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\bluexml\test\com_bluexml_test.get.html.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/test/com_bluexml_test.get.html.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.35 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\bluexml\test\json\com_bluexml_test.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/test/json/com_bluexml_test.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.35 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\bluexml\test\com_bluexml_test.post.json.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/test/com_bluexml_test.post.json.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.36 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\bluexml\test\com_bluexml_test.get.json.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/test/com_bluexml_test.get.json.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.36 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\bluexml\test\rss\com_bluexml_test.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/test/rss/com_bluexml_test.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.36 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\bluexml\test\com_bluexml_test.post.rss.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/test/com_bluexml_test.post.rss.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.36 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\bluexml\test\com_bluexml_test.get.rss.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/test/com_bluexml_test.get.rss.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.36 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\bluexml\test\xml\com_bluexml_test.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/test/xml/com_bluexml_test.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.36 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\bluexml\test\com_bluexml_test.post.xml.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/test/com_bluexml_test.post.xml.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.36 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\bluexml\test\com_bluexml_test.get.xml.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/test/com_bluexml_test.get.xml.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.36 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.get.desc.xml</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.get.desc.xml</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.36 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.get.desc.xml</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.get.desc.xml</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.37 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.post.desc.xml</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.post.desc.xml</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.37 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.post.desc.xml</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.post.desc.xml</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.37 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.get.js</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.get.js</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.37 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.get.js</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.get.js</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.37 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.post.js</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.post.js</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.37 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.post.js</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.post.js</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.37 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\xml\all.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/xml/all.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.37 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\xml\all.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/xml/all.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.37 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.post.xml.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.post.xml.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.38 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.post.xml.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.post.xml.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.38 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.get.xml.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.get.xml.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.38 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.get.xml.ftl</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.get.xml.ftl</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <logEntry type="GENERATED_FILE">
+    <date>2009-06-10 10:22:49.38 CEST</date>
+    <name>Files Generated</name>
+    <description>C:\Projects\runtime-New_configuration\test\gen\alfresco_3.x\module.SIDE_ModelExtension_com.amp</description>
+    <uri serialization="custom">
+      <java.net.URI>
+        <default>
+          <string>file:/C:/Projects/runtime-New_configuration/test/gen/alfresco_3.x/module.SIDE_ModelExtension_com.amp</string>
+        </default>
+      </java.net.URI>
+    </uri>
+  </logEntry>
+  <metaModel>KSR500 Class</metaModel>
+  <techno>Alfresco</techno>
+  <technoVersion>Alfresco3.x Labs and Entreprise</technoVersion>
+  <creator>S-IDE Alfresco Class Generator 1.0.0</creator>
+</SIDELog></logRoot>

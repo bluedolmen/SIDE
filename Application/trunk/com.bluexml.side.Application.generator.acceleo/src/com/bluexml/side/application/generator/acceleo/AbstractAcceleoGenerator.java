@@ -76,7 +76,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 			//List<IFile> models = modelsInfo.get(id_metamodel);
 			return generate(modelsInfo.get(id_metamodel).get(0));
 		} else {
-			addWarningLog("No MetaModel available.", "There is no metamodel " + id_metamodel + " given to the Generator.", null);
+			addWarningLog("No MetaModel available.", "There is no metamodel " + id_metamodel + " given to the Generator.", (String)null);
 		}
 		return null;
 	}

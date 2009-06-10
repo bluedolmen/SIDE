@@ -15,6 +15,7 @@ public class LogEntry {
 	
 	
 	public LogEntry(String name, String description, String uri, LogEntryType logEntryType) {
+		this.name = name;
 		this.description = description;
 		this.date = new Date();
 		this.type = logEntryType;
@@ -26,6 +27,15 @@ public class LogEntry {
 			}
 		}
 	}
+	
+	public LogEntry(String name, String description, URI uri, LogEntryType logEntryType) {
+		this.name = name;
+		this.description = description;
+		this.date = new Date();
+		this.type = logEntryType;
+		this.uri = uri;
+	}
+	
 	public Date getDate() {
 		return date;
 	}
