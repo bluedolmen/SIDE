@@ -22,8 +22,10 @@ import com.bluexml.side.util.libs.SystemInfoGetter;
 public class SideSettingsPreferencesPage 
 	extends PreferencePage
 	implements IWorkbenchPreferencePage {
-
-	private static final String linkText ="To register go to the <a href=\"http://www.bluexml.com/v2/membership/\" target=\"blank\">Membership page</A> on our website.";
+	private static final String linkMembership = "http://www.bluexml.com/v3/membership/";
+	private static final String linkText =
+		"To register go to the <a href='"+linkMembership+"' target='blank'>Membership page</A> on our website.<br />"+
+		"  <a href='"+linkMembership+"' target='blank'>"+linkMembership+"</A>";
 	private static final String iDText ="Unique ID for Registering : (Copy/paste enable)";
 	/*
 	 * @see PreferencePage#createContents(Composite)
