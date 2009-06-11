@@ -182,13 +182,22 @@ public interface ViewPackage extends EPackage {
 	int ABSTRACT_DATA_TABLE__OPERATIONS = DATA_TABLE_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
+	 * The feature id for the '<em><b>Inner View</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATA_TABLE__INNER_VIEW = DATA_TABLE_ELEMENT_FEATURE_COUNT + 10;
+
+	/**
 	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE__PAGING = DATA_TABLE_ELEMENT_FEATURE_COUNT + 10;
+	int ABSTRACT_DATA_TABLE__PAGING = DATA_TABLE_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Have Row Actions</b></em>' containment reference.
@@ -197,7 +206,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS = DATA_TABLE_ELEMENT_FEATURE_COUNT + 11;
+	int ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS = DATA_TABLE_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Have Select Actions</b></em>' containment reference.
@@ -206,7 +215,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS = DATA_TABLE_ELEMENT_FEATURE_COUNT + 12;
+	int ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS = DATA_TABLE_ELEMENT_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Have Default Col Actions</b></em>' containment reference.
@@ -215,7 +224,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE__HAVE_DEFAULT_COL_ACTIONS = DATA_TABLE_ELEMENT_FEATURE_COUNT + 13;
+	int ABSTRACT_DATA_TABLE__HAVE_DEFAULT_COL_ACTIONS = DATA_TABLE_ELEMENT_FEATURE_COUNT + 14;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Data Table</em>' class.
@@ -224,7 +233,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE_FEATURE_COUNT = DATA_TABLE_ELEMENT_FEATURE_COUNT + 14;
+	int ABSTRACT_DATA_TABLE_FEATURE_COUNT = DATA_TABLE_ELEMENT_FEATURE_COUNT + 15;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.impl.ColImpl <em>Col</em>}' class.
@@ -2805,13 +2814,22 @@ public interface ViewPackage extends EPackage {
 	int ABSTRACT_VIEW__OPERATIONS = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Inner View</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_VIEW__INNER_VIEW = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Abstract View</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_VIEW_FEATURE_COUNT = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 3;
+	int ABSTRACT_VIEW_FEATURE_COUNT = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -2904,6 +2922,15 @@ public interface ViewPackage extends EPackage {
 	int FACET_MAP__OPERATIONS = ABSTRACT_VIEW__OPERATIONS;
 
 	/**
+	 * The feature id for the '<em><b>Inner View</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__INNER_VIEW = ABSTRACT_VIEW__INNER_VIEW;
+
+	/**
 	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2940,22 +2967,13 @@ public interface ViewPackage extends EPackage {
 	int FACET_MAP__FACET_DISPLAY_TYPE = ABSTRACT_VIEW_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Results Viewer</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP__RESULTS_VIEWER = ABSTRACT_VIEW_FEATURE_COUNT + 4;
-
-	/**
 	 * The number of structural features of the '<em>Facet Map</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FACET_MAP_FEATURE_COUNT = ABSTRACT_VIEW_FEATURE_COUNT + 5;
+	int FACET_MAP_FEATURE_COUNT = ABSTRACT_VIEW_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -3046,6 +3064,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATA_LIST__OPERATIONS = ABSTRACT_DATA_TABLE__OPERATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Inner View</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_LIST__INNER_VIEW = ABSTRACT_DATA_TABLE__INNER_VIEW;
 
 	/**
 	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
@@ -3190,6 +3217,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int TREE__OPERATIONS = ABSTRACT_VIEW__OPERATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Inner View</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TREE__INNER_VIEW = ABSTRACT_VIEW__INNER_VIEW;
 
 	/**
 	 * The feature id for the '<em><b>Sorting</b></em>' containment reference.
@@ -3361,6 +3397,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATA_TABLE__OPERATIONS = ABSTRACT_DATA_TABLE__OPERATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Inner View</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__INNER_VIEW = ABSTRACT_DATA_TABLE__INNER_VIEW;
 
 	/**
 	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
@@ -4004,169 +4049,6 @@ public interface ViewPackage extends EPackage {
 	int FILTERING_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.FacetMapResultsViewImpl <em>Facet Map Results View</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.FacetMapResultsViewImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFacetMapResultsView()
-	 * @generated
-	 */
-	int FACET_MAP_RESULTS_VIEW = 35;
-
-	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP_RESULTS_VIEW__STEREOTYPES = DATA_LIST__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP_RESULTS_VIEW__TAGS = DATA_LIST__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP_RESULTS_VIEW__COMMENTS = DATA_LIST__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP_RESULTS_VIEW__DOCUMENTATION = DATA_LIST__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP_RESULTS_VIEW__DESCRIPTION = DATA_LIST__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP_RESULTS_VIEW__METAINFO = DATA_LIST__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP_RESULTS_VIEW__NAME = DATA_LIST__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP_RESULTS_VIEW__STYLING = DATA_LIST__STYLING;
-
-	/**
-	 * The feature id for the '<em><b>View Of</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP_RESULTS_VIEW__VIEW_OF = DATA_LIST__VIEW_OF;
-
-	/**
-	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP_RESULTS_VIEW__OPERATIONS = DATA_LIST__OPERATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP_RESULTS_VIEW__PAGING = DATA_LIST__PAGING;
-
-	/**
-	 * The feature id for the '<em><b>Have Row Actions</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP_RESULTS_VIEW__HAVE_ROW_ACTIONS = DATA_LIST__HAVE_ROW_ACTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Have Select Actions</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP_RESULTS_VIEW__HAVE_SELECT_ACTIONS = DATA_LIST__HAVE_SELECT_ACTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Have Default Col Actions</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP_RESULTS_VIEW__HAVE_DEFAULT_COL_ACTIONS = DATA_LIST__HAVE_DEFAULT_COL_ACTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Col</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP_RESULTS_VIEW__COL = DATA_LIST__COL;
-
-	/**
-	 * The feature id for the '<em><b>Facet Map Def</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP_RESULTS_VIEW__FACET_MAP_DEF = DATA_LIST_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Facet Map Results View</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP_RESULTS_VIEW_FEATURE_COUNT = DATA_LIST_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.SortOrder <em>Sort Order</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4174,7 +4056,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getSortOrder()
 	 * @generated
 	 */
-	int SORT_ORDER = 36;
+	int SORT_ORDER = 35;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.PaginationStyle <em>Pagination Style</em>}' enum.
@@ -4184,7 +4066,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getPaginationStyle()
 	 * @generated
 	 */
-	int PAGINATION_STYLE = 37;
+	int PAGINATION_STYLE = 36;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.Halign <em>Halign</em>}' enum.
@@ -4194,7 +4076,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getHalign()
 	 * @generated
 	 */
-	int HALIGN = 38;
+	int HALIGN = 37;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.LoadingType <em>Loading Type</em>}' enum.
@@ -4204,7 +4086,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getLoadingType()
 	 * @generated
 	 */
-	int LOADING_TYPE = 39;
+	int LOADING_TYPE = 38;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.WidgetTextType <em>Widget Text Type</em>}' enum.
@@ -4214,7 +4096,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getWidgetTextType()
 	 * @generated
 	 */
-	int WIDGET_TEXT_TYPE = 40;
+	int WIDGET_TEXT_TYPE = 39;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.SelectWidgetType <em>Select Widget Type</em>}' enum.
@@ -4224,7 +4106,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getSelectWidgetType()
 	 * @generated
 	 */
-	int SELECT_WIDGET_TYPE = 41;
+	int SELECT_WIDGET_TYPE = 40;
 
 
 	/**
@@ -4235,7 +4117,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFacetDisplayType()
 	 * @generated
 	 */
-	int FACET_DISPLAY_TYPE = 42;
+	int FACET_DISPLAY_TYPE = 41;
 
 
 	/**
@@ -4692,17 +4574,6 @@ public interface ViewPackage extends EPackage {
 	EAttribute getFacetMap_FacetDisplayType();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.bluexml.side.view.FacetMap#getResultsViewer <em>Results Viewer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Results Viewer</em>'.
-	 * @see com.bluexml.side.view.FacetMap#getResultsViewer()
-	 * @see #getFacetMap()
-	 * @generated
-	 */
-	EReference getFacetMap_ResultsViewer();
-
-	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.view.DataList <em>Data List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4883,6 +4754,17 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAbstractView_Operations();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link com.bluexml.side.view.AbstractView#getInnerView <em>Inner View</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Inner View</em>'.
+	 * @see com.bluexml.side.view.AbstractView#getInnerView()
+	 * @see #getAbstractView()
+	 * @generated
+	 */
+	EReference getAbstractView_InnerView();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.view.SelectField <em>Select Field</em>}'.
@@ -5082,27 +4964,6 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getFiltering_DefaultFilterValue();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.view.FacetMapResultsView <em>Facet Map Results View</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Facet Map Results View</em>'.
-	 * @see com.bluexml.side.view.FacetMapResultsView
-	 * @generated
-	 */
-	EClass getFacetMapResultsView();
-
-	/**
-	 * Returns the meta object for the container reference '{@link com.bluexml.side.view.FacetMapResultsView#getFacetMapDef <em>Facet Map Def</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Facet Map Def</em>'.
-	 * @see com.bluexml.side.view.FacetMapResultsView#getFacetMapDef()
-	 * @see #getFacetMapResultsView()
-	 * @generated
-	 */
-	EReference getFacetMapResultsView_FacetMapDef();
 
 	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.view.SortOrder <em>Sort Order</em>}'.
@@ -5581,14 +5442,6 @@ public interface ViewPackage extends EPackage {
 		EAttribute FACET_MAP__FACET_DISPLAY_TYPE = eINSTANCE.getFacetMap_FacetDisplayType();
 
 		/**
-		 * The meta object literal for the '<em><b>Results Viewer</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FACET_MAP__RESULTS_VIEWER = eINSTANCE.getFacetMap_ResultsViewer();
-
-		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.impl.DataListImpl <em>Data List</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5733,6 +5586,14 @@ public interface ViewPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ABSTRACT_VIEW__OPERATIONS = eINSTANCE.getAbstractView_Operations();
+
+		/**
+		 * The meta object literal for the '<em><b>Inner View</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_VIEW__INNER_VIEW = eINSTANCE.getAbstractView_InnerView();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.impl.SelectFieldImpl <em>Select Field</em>}' class.
@@ -5905,24 +5766,6 @@ public interface ViewPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute FILTERING__DEFAULT_FILTER_VALUE = eINSTANCE.getFiltering_DefaultFilterValue();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.view.impl.FacetMapResultsViewImpl <em>Facet Map Results View</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.view.impl.FacetMapResultsViewImpl
-		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFacetMapResultsView()
-		 * @generated
-		 */
-		EClass FACET_MAP_RESULTS_VIEW = eINSTANCE.getFacetMapResultsView();
-
-		/**
-		 * The meta object literal for the '<em><b>Facet Map Def</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FACET_MAP_RESULTS_VIEW__FACET_MAP_DEF = eINSTANCE.getFacetMapResultsView_FacetMapDef();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.SortOrder <em>Sort Order</em>}' enum.

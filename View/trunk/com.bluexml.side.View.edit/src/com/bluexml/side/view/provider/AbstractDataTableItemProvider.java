@@ -203,6 +203,7 @@ public class AbstractDataTableItemProvider
 			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__METAINFO);
 			childrenFeatures.add(ViewPackage.Literals.STYLABLE__STYLING);
 			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS);
+			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW);
 			childrenFeatures.add(ViewPackage.Literals.PAGINABLE__PAGING);
 			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS);
 			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS);
@@ -260,6 +261,7 @@ public class AbstractDataTableItemProvider
 			case ViewPackage.ABSTRACT_DATA_TABLE__METAINFO:
 			case ViewPackage.ABSTRACT_DATA_TABLE__STYLING:
 			case ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS:
+			case ViewPackage.ABSTRACT_DATA_TABLE__INNER_VIEW:
 			case ViewPackage.ABSTRACT_DATA_TABLE__PAGING:
 			case ViewPackage.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS:
 			case ViewPackage.ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS:
@@ -310,6 +312,26 @@ public class AbstractDataTableItemProvider
 			(createChildParameter
 				(ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS,
 				 CommonFactory.eINSTANCE.createOperationGroup()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW,
+				 ViewFactory.eINSTANCE.createFacetMap()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW,
+				 ViewFactory.eINSTANCE.createDataList()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW,
+				 ViewFactory.eINSTANCE.createTree()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW,
+				 ViewFactory.eINSTANCE.createDataTable()));
 
 		newChildDescriptors.add
 			(createChildParameter

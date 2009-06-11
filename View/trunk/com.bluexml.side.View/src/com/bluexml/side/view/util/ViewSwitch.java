@@ -429,20 +429,6 @@ public class ViewSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ViewPackage.FACET_MAP_RESULTS_VIEW: {
-				FacetMapResultsView facetMapResultsView = (FacetMapResultsView)theEObject;
-				T result = caseFacetMapResultsView(facetMapResultsView);
-				if (result == null) result = caseDataList(facetMapResultsView);
-				if (result == null) result = caseAbstractDataTable(facetMapResultsView);
-				if (result == null) result = caseDataTableElement(facetMapResultsView);
-				if (result == null) result = caseAbstractView(facetMapResultsView);
-				if (result == null) result = casePaginable(facetMapResultsView);
-				if (result == null) result = caseNamedModelElement(facetMapResultsView);
-				if (result == null) result = caseStylable(facetMapResultsView);
-				if (result == null) result = caseModelElement(facetMapResultsView);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -969,21 +955,6 @@ public class ViewSwitch<T> {
 	 * @generated
 	 */
 	public T caseFiltering(Filtering object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Facet Map Results View</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Facet Map Results View</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFacetMapResultsView(FacetMapResultsView object) {
 		return null;
 	}
 

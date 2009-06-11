@@ -33,24 +33,22 @@ public enum FacetDisplayType implements Enumerator {
 	LIST(0, "list", "list"),
 
 	/**
-	 * The '<em><b>Clood</b></em>' literal object.
+	 * The '<em><b>Cloud</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #CLOOD_VALUE
+	 * @see #CLOUD_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	CLOOD(1, "clood", "clood"),
-
-	/**
-	 * The '<em><b>Improved Clood</b></em>' literal object.
+	CLOUD(1, "cloud", "cloud"), /**
+	 * The '<em><b>Improved Cloud</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #IMPROVED_CLOOD_VALUE
+	 * @see #IMPROVED_CLOUD_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	IMPROVED_CLOOD(2, "improvedClood", "improvedClood");
+	IMPROVED_CLOUD(2, "improvedCloud", "improvedCloud");
 
 	/**
 	 * The '<em><b>List</b></em>' literal value.
@@ -68,34 +66,34 @@ public enum FacetDisplayType implements Enumerator {
 	public static final int LIST_VALUE = 0;
 
 	/**
-	 * The '<em><b>Clood</b></em>' literal value.
+	 * The '<em><b>Cloud</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Clood</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Cloud</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #CLOOD
-	 * @model name="clood"
+	 * @see #CLOUD
+	 * @model name="cloud"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int CLOOD_VALUE = 1;
+	public static final int CLOUD_VALUE = 1;
 
 	/**
-	 * The '<em><b>Improved Clood</b></em>' literal value.
+	 * The '<em><b>Improved Cloud</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Improved Clood</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Improved Cloud</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #IMPROVED_CLOOD
-	 * @model name="improvedClood"
+	 * @see #IMPROVED_CLOUD
+	 * @model name="improvedCloud"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int IMPROVED_CLOOD_VALUE = 2;
+	public static final int IMPROVED_CLOUD_VALUE = 2;
 
 	/**
 	 * An array of all the '<em><b>Facet Display Type</b></em>' enumerators.
@@ -106,8 +104,8 @@ public enum FacetDisplayType implements Enumerator {
 	private static final FacetDisplayType[] VALUES_ARRAY =
 		new FacetDisplayType[] {
 			LIST,
-			CLOOD,
-			IMPROVED_CLOOD,
+			CLOUD,
+			IMPROVED_CLOUD,
 		};
 
 	/**
@@ -159,8 +157,8 @@ public enum FacetDisplayType implements Enumerator {
 	public static FacetDisplayType get(int value) {
 		switch (value) {
 			case LIST_VALUE: return LIST;
-			case CLOOD_VALUE: return CLOOD;
-			case IMPROVED_CLOOD_VALUE: return IMPROVED_CLOOD;
+			case CLOUD_VALUE: return CLOUD;
+			case IMPROVED_CLOUD_VALUE: return IMPROVED_CLOUD;
 		}
 		return null;
 	}

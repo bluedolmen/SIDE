@@ -17,6 +17,7 @@
       <genEnumLiterals ecoreEnumLiteral="View.ecore#//PaginationStyle/page"/>
       <genEnumLiterals ecoreEnumLiteral="View.ecore#//PaginationStyle/scroll"/>
       <genEnumLiterals ecoreEnumLiteral="View.ecore#//PaginationStyle/none"/>
+      <genEnumLiterals ecoreEnumLiteral="View.ecore#//PaginationStyle/more"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="View.ecore#//Halign">
       <genEnumLiterals ecoreEnumLiteral="View.ecore#//Halign/center"/>
@@ -35,6 +36,11 @@
       <genEnumLiterals ecoreEnumLiteral="View.ecore#//SelectWidgetType/monoline"/>
       <genEnumLiterals ecoreEnumLiteral="View.ecore#//SelectWidgetType/autocomplete"/>
       <genEnumLiterals ecoreEnumLiteral="View.ecore#//SelectWidgetType/multiline"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="View.ecore#//FacetDisplayType">
+      <genEnumLiterals ecoreEnumLiteral="View.ecore#//FacetDisplayType/list"/>
+      <genEnumLiterals ecoreEnumLiteral="View.ecore#//FacetDisplayType/cloud"/>
+      <genEnumLiterals ecoreEnumLiteral="View.ecore#//FacetDisplayType/improvedCloud"/>
     </genEnums>
     <genClasses image="false" ecoreClass="View.ecore#//AbstractDataTable">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//AbstractDataTable/haveRowActions"/>
@@ -87,6 +93,8 @@
     </genClasses>
     <genClasses ecoreClass="View.ecore#//FacetMap">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//FacetMap/criterias"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//FacetMap/displayEmptyFacet"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//FacetMap/facetDisplayType"/>
     </genClasses>
     <genClasses ecoreClass="View.ecore#//DataList">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//DataList/col"/>
@@ -102,19 +110,17 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//DataTable/cols"/>
     </genClasses>
     <genClasses ecoreClass="View.ecore#//Styling">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//Styling/stylesheetId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//Styling/style"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//Styling/height"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//Styling/width"/>
     </genClasses>
     <genClasses ecoreClass="View.ecore#//AbstractView">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference View.ecore#//AbstractView/viewOf"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//AbstractView/operations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//AbstractView/innerView"/>
     </genClasses>
     <genClasses ecoreClass="View.ecore#//SelectField">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//SelectField/selectWidget"/>
-    </genClasses>
-    <genClasses ecoreClass="View.ecore#//DefaultCol">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//DefaultCol/canBeHidden"/>
     </genClasses>
     <genClasses ecoreClass="View.ecore#//ViewCollection">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//ViewCollection/views"/>

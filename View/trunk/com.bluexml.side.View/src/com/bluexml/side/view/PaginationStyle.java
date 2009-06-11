@@ -50,7 +50,15 @@ public enum PaginationStyle implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	NONE(-1, "none", "none");
+	NONE(-1, "none", "none"), /**
+	 * The '<em><b>More</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MORE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	MORE(2, "more", "more");
 
 	/**
 	 * The '<em><b>Page</b></em>' literal value.
@@ -98,6 +106,21 @@ public enum PaginationStyle implements Enumerator {
 	public static final int NONE_VALUE = -1;
 
 	/**
+	 * The '<em><b>More</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>More</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #MORE
+	 * @model name="more"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MORE_VALUE = 2;
+
+	/**
 	 * An array of all the '<em><b>Pagination Style</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -108,6 +131,7 @@ public enum PaginationStyle implements Enumerator {
 			PAGE,
 			SCROLL,
 			NONE,
+			MORE,
 		};
 
 	/**
@@ -161,6 +185,7 @@ public enum PaginationStyle implements Enumerator {
 			case PAGE_VALUE: return PAGE;
 			case SCROLL_VALUE: return SCROLL;
 			case NONE_VALUE: return NONE;
+			case MORE_VALUE: return MORE;
 		}
 		return null;
 	}

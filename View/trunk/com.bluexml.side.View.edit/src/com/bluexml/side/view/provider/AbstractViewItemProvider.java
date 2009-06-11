@@ -110,6 +110,7 @@ public class AbstractViewItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ViewPackage.Literals.STYLABLE__STYLING);
 			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS);
+			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW);
 		}
 		return childrenFeatures;
 	}
@@ -166,6 +167,7 @@ public class AbstractViewItemProvider
 		switch (notification.getFeatureID(AbstractView.class)) {
 			case ViewPackage.ABSTRACT_VIEW__STYLING:
 			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
+			case ViewPackage.ABSTRACT_VIEW__INNER_VIEW:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -197,6 +199,26 @@ public class AbstractViewItemProvider
 			(createChildParameter
 				(ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS,
 				 CommonFactory.eINSTANCE.createOperationGroup()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW,
+				 ViewFactory.eINSTANCE.createFacetMap()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW,
+				 ViewFactory.eINSTANCE.createDataList()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW,
+				 ViewFactory.eINSTANCE.createTree()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW,
+				 ViewFactory.eINSTANCE.createDataTable()));
 	}
 
 	/**

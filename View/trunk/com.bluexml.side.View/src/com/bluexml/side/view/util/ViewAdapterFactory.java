@@ -217,10 +217,6 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 				return createFilteringAdapter();
 			}
 			@Override
-			public Adapter caseFacetMapResultsView(FacetMapResultsView object) {
-				return createFacetMapResultsViewAdapter();
-			}
-			@Override
 			public Adapter caseModelElement(ModelElement object) {
 				return createModelElementAdapter();
 			}
@@ -743,20 +739,6 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFilteringAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.FacetMapResultsView <em>Facet Map Results View</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.view.FacetMapResultsView
-	 * @generated
-	 */
-	public Adapter createFacetMapResultsViewAdapter() {
 		return null;
 	}
 

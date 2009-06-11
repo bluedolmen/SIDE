@@ -6,8 +6,14 @@
  */
 package com.bluexml.side.view.impl;
 
-import com.bluexml.side.common.CommonPackage;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.view.AbstractDataTable;
 import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.ActionField;
@@ -18,12 +24,10 @@ import com.bluexml.side.view.DataTable;
 import com.bluexml.side.view.DataTableElement;
 import com.bluexml.side.view.DateField;
 import com.bluexml.side.view.DateTimeField;
-import com.bluexml.side.view.DefaultCol;
 import com.bluexml.side.view.Editable;
 import com.bluexml.side.view.EmailField;
 import com.bluexml.side.view.FacetDisplayType;
 import com.bluexml.side.view.FacetMap;
-import com.bluexml.side.view.FacetMapResultsView;
 import com.bluexml.side.view.Field;
 import com.bluexml.side.view.FieldElement;
 import com.bluexml.side.view.FieldGroup;
@@ -54,14 +58,6 @@ import com.bluexml.side.view.ViewCollection;
 import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
 import com.bluexml.side.view.WidgetTextType;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -314,13 +310,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * @generated
 	 */
 	private EClass filteringEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass facetMapResultsViewEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -834,15 +823,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFacetMap_ResultsViewer() {
-		return (EReference)facetMapEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getDataList() {
 		return dataListEClass;
 	}
@@ -989,6 +969,15 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 */
 	public EReference getAbstractView_Operations() {
 		return (EReference)abstractViewEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractView_InnerView() {
+		return (EReference)abstractViewEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1167,24 +1156,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFacetMapResultsView() {
-		return facetMapResultsViewEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getFacetMapResultsView_FacetMapDef() {
-		return (EReference)facetMapResultsViewEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getSortOrder() {
 		return sortOrderEEnum;
 	}
@@ -1333,7 +1304,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		createEReference(facetMapEClass, FACET_MAP__CRITERIAS);
 		createEAttribute(facetMapEClass, FACET_MAP__DISPLAY_EMPTY_FACET);
 		createEAttribute(facetMapEClass, FACET_MAP__FACET_DISPLAY_TYPE);
-		createEReference(facetMapEClass, FACET_MAP__RESULTS_VIEWER);
 
 		dataListEClass = createEClass(DATA_LIST);
 		createEReference(dataListEClass, DATA_LIST__COL);
@@ -1356,6 +1326,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		abstractViewEClass = createEClass(ABSTRACT_VIEW);
 		createEReference(abstractViewEClass, ABSTRACT_VIEW__VIEW_OF);
 		createEReference(abstractViewEClass, ABSTRACT_VIEW__OPERATIONS);
+		createEReference(abstractViewEClass, ABSTRACT_VIEW__INNER_VIEW);
 
 		selectFieldEClass = createEClass(SELECT_FIELD);
 		createEAttribute(selectFieldEClass, SELECT_FIELD__SELECT_WIDGET);
@@ -1385,9 +1356,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		filteringEClass = createEClass(FILTERING);
 		createEAttribute(filteringEClass, FILTERING__DEFAULT_FILTER_VALUE);
-
-		facetMapResultsViewEClass = createEClass(FACET_MAP_RESULTS_VIEW);
-		createEReference(facetMapResultsViewEClass, FACET_MAP_RESULTS_VIEW__FACET_MAP_DEF);
 
 		// Create enums
 		sortOrderEEnum = createEEnum(SORT_ORDER);
@@ -1468,7 +1436,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		selectFieldEClass.getESuperTypes().add(this.getField());
 		viewCollectionEClass.getESuperTypes().add(theCommonPackage.getNamedModelElement());
 		htmlFieldEClass.getESuperTypes().add(this.getField());
-		facetMapResultsViewEClass.getESuperTypes().add(this.getDataList());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(abstractDataTableEClass, AbstractDataTable.class, "AbstractDataTable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1533,7 +1500,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		initEReference(getFacetMap_Criterias(), this.getFieldGroup(), null, "criterias", null, 1, 1, FacetMap.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFacetMap_DisplayEmptyFacet(), ecorePackage.getEBoolean(), "displayEmptyFacet", null, 0, 1, FacetMap.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFacetMap_FacetDisplayType(), this.getFacetDisplayType(), "facetDisplayType", null, 0, 1, FacetMap.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFacetMap_ResultsViewer(), this.getFacetMapResultsView(), this.getFacetMapResultsView_FacetMapDef(), "resultsViewer", null, 0, 1, FacetMap.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dataListEClass, DataList.class, "DataList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDataList_Col(), this.getCol(), null, "col", null, 1, 1, DataList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1556,6 +1522,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		initEClass(abstractViewEClass, AbstractView.class, "AbstractView", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractView_ViewOf(), theCommonPackage.getModelElement(), null, "viewOf", null, 0, 1, AbstractView.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractView_Operations(), theCommonPackage.getOperationComponent(), null, "operations", null, 0, 1, AbstractView.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractView_InnerView(), this.getAbstractView(), null, "innerView", null, 0, 1, AbstractView.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(selectFieldEClass, SelectField.class, "SelectField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSelectField_SelectWidget(), this.getSelectWidgetType(), "selectWidget", null, 0, 1, SelectField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1586,9 +1553,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		initEClass(filteringEClass, Filtering.class, "Filtering", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFiltering_DefaultFilterValue(), ecorePackage.getEString(), "defaultFilterValue", null, 0, 1, Filtering.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(facetMapResultsViewEClass, FacetMapResultsView.class, "FacetMapResultsView", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFacetMapResultsView_FacetMapDef(), this.getFacetMap(), this.getFacetMap_ResultsViewer(), "facetMapDef", null, 1, 1, FacetMapResultsView.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		// Initialize enums and add enum literals
 		initEEnum(sortOrderEEnum, SortOrder.class, "SortOrder");
 		addEEnumLiteral(sortOrderEEnum, SortOrder.ASC);
@@ -1598,6 +1562,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		addEEnumLiteral(paginationStyleEEnum, PaginationStyle.PAGE);
 		addEEnumLiteral(paginationStyleEEnum, PaginationStyle.SCROLL);
 		addEEnumLiteral(paginationStyleEEnum, PaginationStyle.NONE);
+		addEEnumLiteral(paginationStyleEEnum, PaginationStyle.MORE);
 
 		initEEnum(halignEEnum, Halign.class, "Halign");
 		addEEnumLiteral(halignEEnum, Halign.CENTER);
@@ -1619,8 +1584,8 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		initEEnum(facetDisplayTypeEEnum, FacetDisplayType.class, "FacetDisplayType");
 		addEEnumLiteral(facetDisplayTypeEEnum, FacetDisplayType.LIST);
-		addEEnumLiteral(facetDisplayTypeEEnum, FacetDisplayType.CLOOD);
-		addEEnumLiteral(facetDisplayTypeEEnum, FacetDisplayType.IMPROVED_CLOOD);
+		addEEnumLiteral(facetDisplayTypeEEnum, FacetDisplayType.CLOUD);
+		addEEnumLiteral(facetDisplayTypeEEnum, FacetDisplayType.IMPROVED_CLOUD);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1655,7 +1620,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "use this to setup default actions available on each colomn"
-		   });										
+		   });									
 	}
 
 } //ViewPackageImpl

@@ -36,6 +36,7 @@
     <eLiterals name="page"/>
     <eLiterals name="scroll" value="1"/>
     <eLiterals name="none" value="-1"/>
+    <eLiterals name="more" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Paging">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="paginationStyle" lowerBound="1"
@@ -117,8 +118,6 @@
         eType="#//FieldGroup" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayEmptyFacet" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="facetDisplayType" eType="#//FacetDisplayType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="resultsViewer" eType="#//FacetMapResultsView"
-        containment="true" eOpposite="#//FacetMapResultsView/facetMapDef"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataList" eSuperTypes="#//AbstractDataTable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="col" lowerBound="1" eType="#//Col"
@@ -161,6 +160,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="AbstractView" abstract="true" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement #//Stylable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="viewOf" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//ModelElement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//OperationComponent"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="innerView" eType="#//AbstractView"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SelectField" eSuperTypes="#//Field">
@@ -208,14 +209,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="FacetDisplayType">
     <eLiterals name="list"/>
-    <eLiterals name="clood" value="1"/>
-    <eLiterals name="improvedClood" value="2"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FacetMapResultsView" eSuperTypes="#//DataList">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="this view is used to displays FacetResults,&#xD;nb : "/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="facetMapDef" lowerBound="1"
-        eType="#//FacetMap" eOpposite="#//FacetMap/resultsViewer"/>
+    <eLiterals name="cloud" value="1"/>
+    <eLiterals name="improvedCloud" value="2" literal="improvedCloud"/>
   </eClassifiers>
 </ecore:EPackage>

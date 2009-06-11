@@ -128,7 +128,6 @@ public class FacetMapItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ViewPackage.Literals.PAGINABLE__PAGING);
 			childrenFeatures.add(ViewPackage.Literals.FACET_MAP__CRITERIAS);
-			childrenFeatures.add(ViewPackage.Literals.FACET_MAP__RESULTS_VIEWER);
 		}
 		return childrenFeatures;
 	}
@@ -189,7 +188,6 @@ public class FacetMapItemProvider
 				return;
 			case ViewPackage.FACET_MAP__PAGING:
 			case ViewPackage.FACET_MAP__CRITERIAS:
-			case ViewPackage.FACET_MAP__RESULTS_VIEWER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -221,11 +219,6 @@ public class FacetMapItemProvider
 			(createChildParameter
 				(ViewPackage.Literals.FACET_MAP__CRITERIAS,
 				 ViewFactory.eINSTANCE.createFieldGroup()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FACET_MAP__RESULTS_VIEWER,
-				 ViewFactory.eINSTANCE.createFacetMapResultsView()));
 	}
 
 }

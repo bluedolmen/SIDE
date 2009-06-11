@@ -651,29 +651,6 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.view.FacetMapResultsView} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected FacetMapResultsViewItemProvider facetMapResultsViewItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.bluexml.side.view.FacetMapResultsView}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createFacetMapResultsViewAdapter() {
-		if (facetMapResultsViewItemProvider == null) {
-			facetMapResultsViewItemProvider = new FacetMapResultsViewItemProvider(this);
-		}
-
-		return facetMapResultsViewItemProvider;
-	}
-
-	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -797,7 +774,6 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 		if (viewCollectionItemProvider != null) viewCollectionItemProvider.dispose();
 		if (htmlFieldItemProvider != null) htmlFieldItemProvider.dispose();
 		if (filteringItemProvider != null) filteringItemProvider.dispose();
-		if (facetMapResultsViewItemProvider != null) facetMapResultsViewItemProvider.dispose();
 	}
 
 }

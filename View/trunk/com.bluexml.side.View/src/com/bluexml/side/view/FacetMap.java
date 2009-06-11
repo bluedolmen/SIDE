@@ -18,7 +18,6 @@ package com.bluexml.side.view;
  *   <li>{@link com.bluexml.side.view.FacetMap#getCriterias <em>Criterias</em>}</li>
  *   <li>{@link com.bluexml.side.view.FacetMap#isDisplayEmptyFacet <em>Display Empty Facet</em>}</li>
  *   <li>{@link com.bluexml.side.view.FacetMap#getFacetDisplayType <em>Facet Display Type</em>}</li>
- *   <li>{@link com.bluexml.side.view.FacetMap#getResultsViewer <em>Results Viewer</em>}</li>
  * </ul>
  * </p>
  *
@@ -107,33 +106,5 @@ public interface FacetMap extends AbstractView, Paginable {
 	 * @generated
 	 */
 	void setFacetDisplayType(FacetDisplayType value);
-
-	/**
-	 * Returns the value of the '<em><b>Results Viewer</b></em>' containment reference.
-	 * It is bidirectional and its opposite is '{@link com.bluexml.side.view.FacetMapResultsView#getFacetMapDef <em>Facet Map Def</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Results Viewer</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Results Viewer</em>' containment reference.
-	 * @see #setResultsViewer(FacetMapResultsView)
-	 * @see com.bluexml.side.view.ViewPackage#getFacetMap_ResultsViewer()
-	 * @see com.bluexml.side.view.FacetMapResultsView#getFacetMapDef
-	 * @model opposite="facetMapDef" containment="true"
-	 * @generated
-	 */
-	FacetMapResultsView getResultsViewer();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.view.FacetMap#getResultsViewer <em>Results Viewer</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Results Viewer</em>' containment reference.
-	 * @see #getResultsViewer()
-	 * @generated
-	 */
-	void setResultsViewer(FacetMapResultsView value);
 		
 } // FacetMap

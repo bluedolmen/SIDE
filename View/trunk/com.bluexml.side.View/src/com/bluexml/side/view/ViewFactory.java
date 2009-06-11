@@ -251,15 +251,6 @@ public interface ViewFactory extends EFactory {
 	Filtering createFiltering();
 
 	/**
-	 * Returns a new object of class '<em>Facet Map Results View</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Facet Map Results View</em>'.
-	 * @generated
-	 */
-	FacetMapResultsView createFacetMapResultsView();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -1,0 +1,16 @@
+Modèle facetmap:
+- Facetmap
+	- Source de donnée (nom de fichier xml) ** non paramétrable peut être un par Class ? **
+	- Affichage des facettes vides (Booléen) ** FacetMap.displayEmptyFacet **
+	- Foctionnement un ou deux collonnes (Booléen)
+	- Style Css général (disponible : utiliser FacetMap.styling.style)
+- Résultats (FacetMap.resultsViewer)
+	- affichages des liens
+		- lien de téléchargement (String) ** ajouter opération "downloadItem" sur FacetMapResultsView **
+		- Lien de visionnage (String) ** ajouter opération "openInViwer" sur FacetMapResultsView **
+	- Pattern d'affichage ** pattern sur les fieldElement **
+	- Pagination ** FacetMapResultsView.paging **
+- Facettes
+	- Pagination ** FacetMap.paging**
+	- Type d'affichage (nuage de mot, liste classique, nusage de mot amélioré) **  Facet.facetDisplayType:FacetDisplayType::{list,clood,improvedClood}**
+	

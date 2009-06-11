@@ -86,7 +86,6 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 			case ViewPackage.VIEW_COLLECTION: return createViewCollection();
 			case ViewPackage.HTML_FIELD: return createHtmlField();
 			case ViewPackage.FILTERING: return createFiltering();
-			case ViewPackage.FACET_MAP_RESULTS_VIEW: return createFacetMapResultsView();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -394,16 +393,6 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 	public Filtering createFiltering() {
 		FilteringImpl filtering = new FilteringImpl();
 		return filtering;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public FacetMapResultsView createFacetMapResultsView() {
-		FacetMapResultsViewImpl facetMapResultsView = new FacetMapResultsViewImpl();
-		return facetMapResultsView;
 	}
 
 	/**
