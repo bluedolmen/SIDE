@@ -19,7 +19,7 @@ package com.bluexml.side.clazz.deployer.facetmap;
 import java.io.File;
 
 import com.bluexml.side.application.deployer.Deployer;
-import com.bluexml.side.clazz.generator.facetmap.FacetmapConstants;
+import com.bluexml.side.clazz.generator.facetmap.utils.FacetmapConstants;
 import com.bluexml.side.util.libs.FileHelper;
 
 

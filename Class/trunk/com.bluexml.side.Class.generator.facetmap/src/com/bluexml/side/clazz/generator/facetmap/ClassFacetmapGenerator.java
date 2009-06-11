@@ -21,9 +21,11 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.application.generator.acceleo.AbstractAcceleoGenerator;
 import com.bluexml.side.application.security.SecurityHelper;
+import com.bluexml.side.clazz.generator.facetmap.utils.FacetmapConstants;
 import com.bluexml.side.settings.SidePreferences;
 
 /**
@@ -53,9 +55,15 @@ public class ClassFacetmapGenerator extends AbstractAcceleoGenerator implements 
 	@Override
 	protected List<String> getTemplates() {
 			List<String> result = new ArrayList<String>();
+				//common
 				result.add("/com.bluexml.side.Class.generator.facetmap/templates/facetmap-cmis2xfml-generation.mt");
 				result.add("/com.bluexml.side.Class.generator.facetmap/templates/facetmap-cmis-generation.mt");
 				result.add("/com.bluexml.side.Class.generator.facetmap/templates/facetmap-cmis-properties-generation.mt");
+				result.add("/com.bluexml.side.Class.generator.facetmap/templates/facetmap-propertyfile-generation.mt");
+				//facets
+				result.add("/com.bluexml.side.Class.generator.facetmap/templates/facetmap-facets-buildproperties-generation.mt");
+				result.add("/com.bluexml.side.Class.generator.facetmap/templates/facetmap-facets-xslbasicfacets-generation.mt");
+				result.add("/com.bluexml.side.Class.generator.facetmap/templates/facetmap-facets-xslrightnav-generation.mt");
 			return result;
 	}
 
@@ -64,6 +72,10 @@ public class ClassFacetmapGenerator extends AbstractAcceleoGenerator implements 
 	 */
 	public boolean check() {
 		return SecurityHelper.check(GENERATOR_CODE,SidePreferences.getKey());
+	}
+	
+	public String getGeneratorParameter(EObject ob,String paramName) throws Exception {
+		return configurationParameters.get(paramName);
 	}
 
 	public Collection<IFile> complete() throws Exception {

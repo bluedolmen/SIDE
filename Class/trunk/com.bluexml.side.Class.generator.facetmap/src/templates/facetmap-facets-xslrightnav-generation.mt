@@ -7,7 +7,7 @@ import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
 	./facets/facetmap/xsl/display/Rightnav.xsl
 	
-<%script type="clazz.ClassPackage" name="facetmapGenerator"  file="<%validatedFilename%>" %>
+<%script type="clazz.ClassPackage" name="rightnavGenerator"  file="<%validatedFilename%>" %>
 <?xml version="1.0" encoding="iso-8859-1"?>
 <xsl:transform version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>

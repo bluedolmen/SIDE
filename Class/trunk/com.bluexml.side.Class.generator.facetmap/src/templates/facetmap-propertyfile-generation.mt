@@ -5,13 +5,16 @@ import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
 %>
 
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
-	.common/facetmap/WEB-INF/configuration.properties
-
-<%script type="clazz.ClassPackage" name="facetmapGenerator"  file="<%validatedFilename%>" %>
-view=Righnav-paging.xsl
-showEmptySelections=false
+	./common/facetmap/WEB-INF/configuration.properties
+<%script type="clazz.ClassPackage" name="emptySelection"%>
+false
+<%script type="clazz.ClassPackage" name="numberResultsShown"%>
+20
+<%script type="clazz.ClassPackage" name="propertyfileGenerator"  file="<%validatedFilename%>" %>
+view=Righnav.xsl
+showEmptySelections=<%emptySelection()%>
 rebuildMap=true
 map=test.xml
-resultLimit=20
+resultLimit=<%numberResultsShown()%>
 workDirectory=.
 log4jConfigFile=logProperties.txt

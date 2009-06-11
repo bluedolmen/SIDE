@@ -16,4 +16,5 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.Util.libs
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Export-Package: com.bluexml.side.clazz.generator.facetmap
+Export-Package: com.bluexml.side.clazz.generator.facetmap,
+ com.bluexml.side.clazz.generator.facetmap.utils

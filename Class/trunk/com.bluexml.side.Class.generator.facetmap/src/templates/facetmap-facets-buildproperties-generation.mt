@@ -7,9 +7,12 @@ import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
 	./facets/facetmap/WEB-INF/buildProperties.xml
 	
-<%script type="clazz.ClassPackage" name="facetmapGenerator"  file="<%validatedFilename%>" %>
+<%script type="clazz.ClassPackage" name="hostname"%>
+	localhost
+
+<%script type="clazz.ClassPackage" name="buildPropertiesGenerator"  file="<%validatedFilename%>" %>
 <ant>
-	<CMISurl>http://localhost:8080/alfresco/service/bluexml/doclist_user.xml</CMISurl>
+	<CMISurl>http://<%hostName()%>:8080/alfresco/service/bluexml/doclist_user.xml</CMISurl>
 	<CMISresult>CMIS_result.xml</CMISresult>
 	<usernameAlfresco>admin</usernameAlfresco>
 	<passwordAlfresco>admin</passwordAlfresco>
