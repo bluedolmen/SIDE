@@ -127,7 +127,6 @@ public class FacetMapItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ViewPackage.Literals.PAGINABLE__PAGING);
-			childrenFeatures.add(ViewPackage.Literals.FACET_MAP__CRITERIAS);
 		}
 		return childrenFeatures;
 	}
@@ -160,14 +159,14 @@ public class FacetMapItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((FacetMap)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_FacetMap_type") :
-			getString("_UI_FacetMap_type") + " " + label;
+			label;
 	}
 
 	/**
@@ -187,7 +186,6 @@ public class FacetMapItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case ViewPackage.FACET_MAP__PAGING:
-			case ViewPackage.FACET_MAP__CRITERIAS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -199,26 +197,44 @@ public class FacetMapItemProvider
 	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-		super.collectNewChildDescriptors(newChildDescriptors, object);
-
+		//super.collectNewChildDescriptors(newChildDescriptors, object);
+		newChildDescriptors.add
+		(createChildParameter
+			(ViewPackage.Literals.STYLABLE__STYLING,
+			 ViewFactory.eINSTANCE.createStyling()));
+		
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.PAGINABLE__PAGING,
 				 ViewFactory.eINSTANCE.createPaging()));
+	}
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FACET_MAP__CRITERIAS,
-				 ViewFactory.eINSTANCE.createCol()));
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FACET_MAP__CRITERIAS,
-				 ViewFactory.eINSTANCE.createFieldGroup()));
+		boolean qualify =
+			childFeature == ViewPackage.Literals.FIELD_GROUP__CHILDREN ||
+			childFeature == ViewPackage.Literals.FIELD_GROUP__DISABLED ||
+			childFeature == ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

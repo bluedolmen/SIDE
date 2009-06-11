@@ -112,14 +112,14 @@ public class FieldGroupItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((FieldGroup)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_FieldGroup_type") :
-			getString("_UI_FieldGroup_type") + " " + label;
+			label;
 	}
 
 	/**
@@ -166,11 +166,6 @@ public class FieldGroupItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
 				 ViewFactory.eINSTANCE.createTextField()));
 
 		newChildDescriptors.add
@@ -226,12 +221,37 @@ public class FieldGroupItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createFacetMap()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createDataList()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createTree()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createDataTable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
 				 ViewFactory.eINSTANCE.createSelectField()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
 				 ViewFactory.eINSTANCE.createHtmlField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createIntegerField()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -246,11 +266,6 @@ public class FieldGroupItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
 				 ViewFactory.eINSTANCE.createTextField()));
 
 		newChildDescriptors.add
@@ -306,12 +321,37 @@ public class FieldGroupItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createFacetMap()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createDataList()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createTree()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createDataTable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
 				 ViewFactory.eINSTANCE.createSelectField()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
 				 ViewFactory.eINSTANCE.createHtmlField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createIntegerField()));
 	}
 
 	/**

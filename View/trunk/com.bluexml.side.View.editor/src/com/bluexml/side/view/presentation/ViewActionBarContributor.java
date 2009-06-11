@@ -10,17 +10,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
-
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
-
 import org.eclipse.emf.edit.ui.action.ControlAction;
 import org.eclipse.emf.edit.ui.action.CreateChildAction;
 import org.eclipse.emf.edit.ui.action.CreateSiblingAction;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction;
 import org.eclipse.emf.edit.ui.action.ValidateAction;
-
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IAction;
@@ -32,16 +29,19 @@ import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.action.SubContributionItem;
-
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.Viewer;
-
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
+
+import com.bluexml.side.side.view.edit.ui.actions.InitializeView;
+import com.bluexml.side.view.AbstractView;
 
 /**
  * This is the action bar contributor for the View model editor.
@@ -52,6 +52,9 @@ import org.eclipse.ui.PartInitException;
 public class ViewActionBarContributor
 	extends EditingDomainActionBarContributor
 	implements ISelectionChangedListener {
+	
+	protected InitializeView initializeView = new InitializeView();
+	
 	/**
 	 * This keeps track of the active editor.
 	 * <!-- begin-user-doc -->
@@ -395,24 +398,7 @@ public class ViewActionBarContributor
 		populateManager(submenuManager, createSiblingActions, null);
 		menuManager.insertBefore("edit", submenuManager);
 	}
-
-	/**
-	 * This inserts global actions before the "additions-end" separator.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected void addGlobalActions(IMenuManager menuManager) {
-		menuManager.insertAfter("additions-end", new Separator("ui-actions"));
-		menuManager.insertAfter("ui-actions", showPropertiesViewAction);
-
-		refreshViewerAction.setEnabled(refreshViewerAction.isEnabled());		
-		menuManager.insertAfter("ui-actions", refreshViewerAction);
-
-		super.addGlobalActions(menuManager);
-	}
-
+	
 	/**
 	 * This ensures that a delete action will clean up all references to deleted objects.
 	 * <!-- begin-user-doc -->
@@ -424,4 +410,40 @@ public class ViewActionBarContributor
 		return true;
 	}
 
+	/**
+	 * This inserts global actions before the "additions-end" separator.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @_generated
+	 */
+	@Override
+	protected void addGlobalActions(IMenuManager menuManager) {
+		Object o =  ((this.selectionProvider != null && this.selectionProvider.getSelection() != null )? ((TreeSelection) this.selectionProvider.getSelection()).getFirstElement() : null);
+		
+		menuManager.insertAfter("additions-end", new Separator("ui-actions"));
+		menuManager.insertAfter("ui-actions", showPropertiesViewAction);
+
+		refreshViewerAction.setEnabled(refreshViewerAction.isEnabled());		
+		menuManager.insertAfter("ui-actions", refreshViewerAction);
+
+		menuManager.insertAfter("ui-actions", new Separator("ui-commonActions"));
+		if (o instanceof AbstractView) {
+			initializeView.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/initialize.png"));
+			menuManager.insertAfter("ui-actions", initializeView);
+		}
+		
+		super.addGlobalActions(menuManager);
+	}
+	
+	@Override
+	public void activate() {
+		super.activate();
+		initializeView.setActiveWorkbenchPart(activeEditor);
+		
+		ISelectionProvider selectionProvider =
+		       activeEditor instanceof ISelectionProvider ?
+		         (ISelectionProvider)activeEditor :
+		         activeEditor.getEditorSite().getSelectionProvider();
+		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) initializeView);
+	}
 }

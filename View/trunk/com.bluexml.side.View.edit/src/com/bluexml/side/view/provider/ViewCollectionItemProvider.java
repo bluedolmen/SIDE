@@ -7,6 +7,8 @@
 package com.bluexml.side.view.provider;
 
 
+import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.provider.PackageItemProvider;
 import com.bluexml.side.common.provider.NamedModelElementItemProvider;
 
 import com.bluexml.side.view.ViewCollection;
@@ -38,7 +40,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class ViewCollectionItemProvider
-	extends NamedModelElementItemProvider
+	extends PackageItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -115,14 +117,14 @@ public class ViewCollectionItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((ViewCollection)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ViewCollection_type") :
-			getString("_UI_ViewCollection_type") + " " + label;
+			label;
 	}
 
 	/**
@@ -154,6 +156,11 @@ public class ViewCollectionItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
+				 ViewFactory.eINSTANCE.createViewCollection()));
 
 		newChildDescriptors.add
 			(createChildParameter

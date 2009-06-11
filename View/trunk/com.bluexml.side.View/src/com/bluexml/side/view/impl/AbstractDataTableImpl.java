@@ -10,6 +10,7 @@ import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.Container;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
@@ -19,6 +20,8 @@ import com.bluexml.side.common.Tag;
 
 import com.bluexml.side.view.AbstractDataTable;
 import com.bluexml.side.view.AbstractView;
+import com.bluexml.side.view.FieldElement;
+import com.bluexml.side.view.FieldGroup;
 import com.bluexml.side.view.Paginable;
 import com.bluexml.side.view.Paging;
 import com.bluexml.side.view.Stylable;
@@ -66,6 +69,12 @@ import org.eclipse.ocl.expressions.OCLExpression;
  *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getMetainfo <em>Metainfo</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getStyling <em>Styling</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getMapTo <em>Map To</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getPrefix <em>Prefix</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getSuffix <em>Suffix</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#isHidden <em>Hidden</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getChildren <em>Children</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getDisabled <em>Disabled</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getViewOf <em>View Of</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getInnerView <em>Inner View</em>}</li>
@@ -190,6 +199,96 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 	protected Styling styling;
 
 	/**
+	 * The cached value of the '{@link #getMapTo() <em>Map To</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMapTo()
+	 * @generated
+	 * @ordered
+	 */
+	protected ModelElement mapTo;
+
+	/**
+	 * The default value of the '{@link #getPrefix() <em>Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PREFIX_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPrefix() <em>Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected String prefix = PREFIX_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSuffix() <em>Suffix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSuffix()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SUFFIX_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSuffix() <em>Suffix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSuffix()
+	 * @generated
+	 * @ordered
+	 */
+	protected String suffix = SUFFIX_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHidden()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean HIDDEN_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHidden()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean hidden = HIDDEN_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getChildren()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<FieldElement> children;
+
+	/**
+	 * The cached value of the '{@link #getDisabled() <em>Disabled</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDisabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<FieldElement> disabled;
+
+	/**
 	 * The cached value of the '{@link #getViewOf() <em>View Of</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -197,7 +296,7 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 	 * @generated
 	 * @ordered
 	 */
-	protected ModelElement viewOf;
+	protected Container viewOf;
 
 	/**
 	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference.
@@ -437,10 +536,135 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelElement getViewOf() {
+	public ModelElement getMapTo() {
+		if (mapTo != null && mapTo.eIsProxy()) {
+			InternalEObject oldMapTo = (InternalEObject)mapTo;
+			mapTo = (ModelElement)eResolveProxy(oldMapTo);
+			if (mapTo != oldMapTo) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ViewPackage.ABSTRACT_DATA_TABLE__MAP_TO, oldMapTo, mapTo));
+			}
+		}
+		return mapTo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ModelElement basicGetMapTo() {
+		return mapTo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMapTo(ModelElement newMapTo) {
+		ModelElement oldMapTo = mapTo;
+		mapTo = newMapTo;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_DATA_TABLE__MAP_TO, oldMapTo, mapTo));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getPrefix() {
+		return prefix;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPrefix(String newPrefix) {
+		String oldPrefix = prefix;
+		prefix = newPrefix;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_DATA_TABLE__PREFIX, oldPrefix, prefix));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getSuffix() {
+		return suffix;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSuffix(String newSuffix) {
+		String oldSuffix = suffix;
+		suffix = newSuffix;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_DATA_TABLE__SUFFIX, oldSuffix, suffix));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isHidden() {
+		return hidden;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHidden(boolean newHidden) {
+		boolean oldHidden = hidden;
+		hidden = newHidden;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_DATA_TABLE__HIDDEN, oldHidden, hidden));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<FieldElement> getChildren() {
+		if (children == null) {
+			children = new EObjectContainmentEList<FieldElement>(FieldElement.class, this, ViewPackage.ABSTRACT_DATA_TABLE__CHILDREN);
+		}
+		return children;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<FieldElement> getDisabled() {
+		if (disabled == null) {
+			disabled = new EObjectContainmentEList<FieldElement>(FieldElement.class, this, ViewPackage.ABSTRACT_DATA_TABLE__DISABLED);
+		}
+		return disabled;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Container getViewOf() {
 		if (viewOf != null && viewOf.eIsProxy()) {
 			InternalEObject oldViewOf = (InternalEObject)viewOf;
-			viewOf = (ModelElement)eResolveProxy(oldViewOf);
+			viewOf = (Container)eResolveProxy(oldViewOf);
 			if (viewOf != oldViewOf) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ViewPackage.ABSTRACT_DATA_TABLE__VIEW_OF, oldViewOf, viewOf));
@@ -454,7 +678,7 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelElement basicGetViewOf() {
+	public Container basicGetViewOf() {
 		return viewOf;
 	}
 
@@ -463,8 +687,8 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setViewOf(ModelElement newViewOf) {
-		ModelElement oldViewOf = viewOf;
+	public void setViewOf(Container newViewOf) {
+		Container oldViewOf = viewOf;
 		viewOf = newViewOf;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_DATA_TABLE__VIEW_OF, oldViewOf, viewOf));
@@ -846,6 +1070,10 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 				return ((InternalEList<?>)getMetainfo()).basicRemove(otherEnd, msgs);
 			case ViewPackage.ABSTRACT_DATA_TABLE__STYLING:
 				return basicSetStyling(null, msgs);
+			case ViewPackage.ABSTRACT_DATA_TABLE__CHILDREN:
+				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
+			case ViewPackage.ABSTRACT_DATA_TABLE__DISABLED:
+				return ((InternalEList<?>)getDisabled()).basicRemove(otherEnd, msgs);
 			case ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS:
 				return basicSetOperations(null, msgs);
 			case ViewPackage.ABSTRACT_DATA_TABLE__INNER_VIEW:
@@ -886,6 +1114,19 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 				return getName();
 			case ViewPackage.ABSTRACT_DATA_TABLE__STYLING:
 				return getStyling();
+			case ViewPackage.ABSTRACT_DATA_TABLE__MAP_TO:
+				if (resolve) return getMapTo();
+				return basicGetMapTo();
+			case ViewPackage.ABSTRACT_DATA_TABLE__PREFIX:
+				return getPrefix();
+			case ViewPackage.ABSTRACT_DATA_TABLE__SUFFIX:
+				return getSuffix();
+			case ViewPackage.ABSTRACT_DATA_TABLE__HIDDEN:
+				return isHidden() ? Boolean.TRUE : Boolean.FALSE;
+			case ViewPackage.ABSTRACT_DATA_TABLE__CHILDREN:
+				return getChildren();
+			case ViewPackage.ABSTRACT_DATA_TABLE__DISABLED:
+				return getDisabled();
 			case ViewPackage.ABSTRACT_DATA_TABLE__VIEW_OF:
 				if (resolve) return getViewOf();
 				return basicGetViewOf();
@@ -942,8 +1183,28 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 			case ViewPackage.ABSTRACT_DATA_TABLE__STYLING:
 				setStyling((Styling)newValue);
 				return;
+			case ViewPackage.ABSTRACT_DATA_TABLE__MAP_TO:
+				setMapTo((ModelElement)newValue);
+				return;
+			case ViewPackage.ABSTRACT_DATA_TABLE__PREFIX:
+				setPrefix((String)newValue);
+				return;
+			case ViewPackage.ABSTRACT_DATA_TABLE__SUFFIX:
+				setSuffix((String)newValue);
+				return;
+			case ViewPackage.ABSTRACT_DATA_TABLE__HIDDEN:
+				setHidden(((Boolean)newValue).booleanValue());
+				return;
+			case ViewPackage.ABSTRACT_DATA_TABLE__CHILDREN:
+				getChildren().clear();
+				getChildren().addAll((Collection<? extends FieldElement>)newValue);
+				return;
+			case ViewPackage.ABSTRACT_DATA_TABLE__DISABLED:
+				getDisabled().clear();
+				getDisabled().addAll((Collection<? extends FieldElement>)newValue);
+				return;
 			case ViewPackage.ABSTRACT_DATA_TABLE__VIEW_OF:
-				setViewOf((ModelElement)newValue);
+				setViewOf((Container)newValue);
 				return;
 			case ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS:
 				setOperations((OperationComponent)newValue);
@@ -999,8 +1260,26 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 			case ViewPackage.ABSTRACT_DATA_TABLE__STYLING:
 				setStyling((Styling)null);
 				return;
+			case ViewPackage.ABSTRACT_DATA_TABLE__MAP_TO:
+				setMapTo((ModelElement)null);
+				return;
+			case ViewPackage.ABSTRACT_DATA_TABLE__PREFIX:
+				setPrefix(PREFIX_EDEFAULT);
+				return;
+			case ViewPackage.ABSTRACT_DATA_TABLE__SUFFIX:
+				setSuffix(SUFFIX_EDEFAULT);
+				return;
+			case ViewPackage.ABSTRACT_DATA_TABLE__HIDDEN:
+				setHidden(HIDDEN_EDEFAULT);
+				return;
+			case ViewPackage.ABSTRACT_DATA_TABLE__CHILDREN:
+				getChildren().clear();
+				return;
+			case ViewPackage.ABSTRACT_DATA_TABLE__DISABLED:
+				getDisabled().clear();
+				return;
 			case ViewPackage.ABSTRACT_DATA_TABLE__VIEW_OF:
-				setViewOf((ModelElement)null);
+				setViewOf((Container)null);
 				return;
 			case ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS:
 				setOperations((OperationComponent)null);
@@ -1048,6 +1327,18 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ViewPackage.ABSTRACT_DATA_TABLE__STYLING:
 				return styling != null;
+			case ViewPackage.ABSTRACT_DATA_TABLE__MAP_TO:
+				return mapTo != null;
+			case ViewPackage.ABSTRACT_DATA_TABLE__PREFIX:
+				return PREFIX_EDEFAULT == null ? prefix != null : !PREFIX_EDEFAULT.equals(prefix);
+			case ViewPackage.ABSTRACT_DATA_TABLE__SUFFIX:
+				return SUFFIX_EDEFAULT == null ? suffix != null : !SUFFIX_EDEFAULT.equals(suffix);
+			case ViewPackage.ABSTRACT_DATA_TABLE__HIDDEN:
+				return hidden != HIDDEN_EDEFAULT;
+			case ViewPackage.ABSTRACT_DATA_TABLE__CHILDREN:
+				return children != null && !children.isEmpty();
+			case ViewPackage.ABSTRACT_DATA_TABLE__DISABLED:
+				return disabled != null && !disabled.isEmpty();
 			case ViewPackage.ABSTRACT_DATA_TABLE__VIEW_OF:
 				return viewOf != null;
 			case ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS:
@@ -1093,6 +1384,22 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 		if (baseClass == Stylable.class) {
 			switch (derivedFeatureID) {
 				case ViewPackage.ABSTRACT_DATA_TABLE__STYLING: return ViewPackage.STYLABLE__STYLING;
+				default: return -1;
+			}
+		}
+		if (baseClass == FieldElement.class) {
+			switch (derivedFeatureID) {
+				case ViewPackage.ABSTRACT_DATA_TABLE__MAP_TO: return ViewPackage.FIELD_ELEMENT__MAP_TO;
+				case ViewPackage.ABSTRACT_DATA_TABLE__PREFIX: return ViewPackage.FIELD_ELEMENT__PREFIX;
+				case ViewPackage.ABSTRACT_DATA_TABLE__SUFFIX: return ViewPackage.FIELD_ELEMENT__SUFFIX;
+				case ViewPackage.ABSTRACT_DATA_TABLE__HIDDEN: return ViewPackage.FIELD_ELEMENT__HIDDEN;
+				default: return -1;
+			}
+		}
+		if (baseClass == FieldGroup.class) {
+			switch (derivedFeatureID) {
+				case ViewPackage.ABSTRACT_DATA_TABLE__CHILDREN: return ViewPackage.FIELD_GROUP__CHILDREN;
+				case ViewPackage.ABSTRACT_DATA_TABLE__DISABLED: return ViewPackage.FIELD_GROUP__DISABLED;
 				default: return -1;
 			}
 		}
@@ -1143,6 +1450,22 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 				default: return -1;
 			}
 		}
+		if (baseClass == FieldElement.class) {
+			switch (baseFeatureID) {
+				case ViewPackage.FIELD_ELEMENT__MAP_TO: return ViewPackage.ABSTRACT_DATA_TABLE__MAP_TO;
+				case ViewPackage.FIELD_ELEMENT__PREFIX: return ViewPackage.ABSTRACT_DATA_TABLE__PREFIX;
+				case ViewPackage.FIELD_ELEMENT__SUFFIX: return ViewPackage.ABSTRACT_DATA_TABLE__SUFFIX;
+				case ViewPackage.FIELD_ELEMENT__HIDDEN: return ViewPackage.ABSTRACT_DATA_TABLE__HIDDEN;
+				default: return -1;
+			}
+		}
+		if (baseClass == FieldGroup.class) {
+			switch (baseFeatureID) {
+				case ViewPackage.FIELD_GROUP__CHILDREN: return ViewPackage.ABSTRACT_DATA_TABLE__CHILDREN;
+				case ViewPackage.FIELD_GROUP__DISABLED: return ViewPackage.ABSTRACT_DATA_TABLE__DISABLED;
+				default: return -1;
+			}
+		}
 		if (baseClass == AbstractView.class) {
 			switch (baseFeatureID) {
 				case ViewPackage.ABSTRACT_VIEW__VIEW_OF: return ViewPackage.ABSTRACT_DATA_TABLE__VIEW_OF;
@@ -1176,6 +1499,12 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 		result.append(description);
 		result.append(", name: ");
 		result.append(name);
+		result.append(", prefix: ");
+		result.append(prefix);
+		result.append(", suffix: ");
+		result.append(suffix);
+		result.append(", hidden: ");
+		result.append(hidden);
 		result.append(')');
 		return result.toString();
 	}

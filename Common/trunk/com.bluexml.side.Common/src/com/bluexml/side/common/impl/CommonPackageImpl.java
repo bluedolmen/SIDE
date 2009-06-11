@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonFactory;
 import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.Container;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaData;
 import com.bluexml.side.common.MetaInfo;
@@ -131,6 +132,13 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * @generated
 	 */
 	private EClass metaDataEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass containerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -570,6 +578,15 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getContainer() {
+		return containerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getDataType() {
 		return dataTypeEEnum;
 	}
@@ -661,6 +678,8 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		createEReference(metaInfoGroupEClass, META_INFO_GROUP__CHILDREN);
 
 		metaDataEClass = createEClass(META_DATA);
+
+		containerEClass = createEClass(CONTAINER);
 
 		// Create enums
 		dataTypeEEnum = createEEnum(DATA_TYPE);
@@ -787,6 +806,8 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		initEReference(getMetaInfoGroup_Children(), this.getMetaData(), null, "children", null, 0, -1, MetaInfoGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(metaDataEClass, MetaData.class, "MetaData", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(containerEClass, Container.class, "Container", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(dataTypeEEnum, DataType.class, "DataType");

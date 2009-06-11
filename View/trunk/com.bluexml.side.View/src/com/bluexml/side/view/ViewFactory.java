@@ -62,15 +62,6 @@ public interface ViewFactory extends EFactory {
 	FieldGroup createFieldGroup();
 
 	/**
-	 * Returns a new object of class '<em>Field</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Field</em>'.
-	 * @generated
-	 */
-	Field createField();
-
-	/**
 	 * Returns a new object of class '<em>Text Field</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -249,6 +240,15 @@ public interface ViewFactory extends EFactory {
 	 * @generated
 	 */
 	Filtering createFiltering();
+
+	/**
+	 * Returns a new object of class '<em>Integer Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Integer Field</em>'.
+	 * @generated
+	 */
+	IntegerField createIntegerField();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -65,7 +65,6 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 			case ViewPackage.PAGING: return createPaging();
 			case ViewPackage.SORTING: return createSorting();
 			case ViewPackage.FIELD_GROUP: return createFieldGroup();
-			case ViewPackage.FIELD: return createField();
 			case ViewPackage.TEXT_FIELD: return createTextField();
 			case ViewPackage.PASSWORD_FIELD: return createPasswordField();
 			case ViewPackage.BOOLEAN_FIELD: return createBooleanField();
@@ -86,6 +85,7 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 			case ViewPackage.VIEW_COLLECTION: return createViewCollection();
 			case ViewPackage.HTML_FIELD: return createHtmlField();
 			case ViewPackage.FILTERING: return createFiltering();
+			case ViewPackage.INTEGER_FIELD: return createIntegerField();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -183,16 +183,6 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 	public FieldGroup createFieldGroup() {
 		FieldGroupImpl fieldGroup = new FieldGroupImpl();
 		return fieldGroup;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Field createField() {
-		FieldImpl field = new FieldImpl();
-		return field;
 	}
 
 	/**
@@ -393,6 +383,16 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 	public Filtering createFiltering() {
 		FilteringImpl filtering = new FilteringImpl();
 		return filtering;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IntegerField createIntegerField() {
+		IntegerFieldImpl integerField = new IntegerFieldImpl();
+		return integerField;
 	}
 
 	/**

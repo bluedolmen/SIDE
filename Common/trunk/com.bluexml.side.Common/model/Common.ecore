@@ -149,4 +149,5 @@
         eType="#//MetaData" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MetaData" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Container" abstract="true"/>
 </ecore:EPackage>

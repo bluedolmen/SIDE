@@ -39,7 +39,6 @@ public class InitializeFormClassAction extends Action implements
 				return false;
 			}
 		}
-
 		return selectedObject != null;
 	}
 
@@ -49,7 +48,6 @@ public class InitializeFormClassAction extends Action implements
 		doAction((FormClass) selectedObject);
 	}
 
-	@SuppressWarnings("unchecked")
 	private void doAction(FormClass fc) {
 		domain.getCommandStack().execute(ClassInitialization.initializeClass(fc, domain));
 	}

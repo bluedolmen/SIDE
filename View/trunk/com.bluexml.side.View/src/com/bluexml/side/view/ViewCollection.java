@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ViewCollection extends NamedModelElement {
+public interface ViewCollection extends com.bluexml.side.common.Package {
 	/**
 	 * Returns the value of the '<em><b>Views</b></em>' containment reference list.
 	 * The list contents are of type {@link com.bluexml.side.view.AbstractView}.

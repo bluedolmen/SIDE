@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.clazz;
 
+import com.bluexml.side.common.Container;
 import org.eclipse.emf.common.util.EList;
 
 
@@ -28,7 +29,7 @@ import org.eclipse.emf.common.util.EList;
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='TwoModelElementWithSameName NameNull noSpecialCharacters TwoAttributesSameName'"
  * @generated
  */
-public interface AbstractClass extends TitledNamedClassModelElement {
+public interface AbstractClass extends TitledNamedClassModelElement, Container {
 
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.

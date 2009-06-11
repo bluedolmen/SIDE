@@ -8,24 +8,31 @@ package com.bluexml.side.view.impl;
 
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 
+import com.bluexml.side.common.Container;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.OperationComponent;
 
 import com.bluexml.side.common.impl.NamedModelElementImpl;
 
 import com.bluexml.side.view.AbstractView;
+import com.bluexml.side.view.FieldElement;
+import com.bluexml.side.view.FieldGroup;
 import com.bluexml.side.view.Stylable;
 import com.bluexml.side.view.Styling;
 import com.bluexml.side.view.ViewPackage;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.ecore.OCL;
 
 /**
@@ -36,6 +43,12 @@ import org.eclipse.ocl.ecore.OCL;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.view.impl.AbstractViewImpl#getStyling <em>Styling</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.AbstractViewImpl#getMapTo <em>Map To</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.AbstractViewImpl#getPrefix <em>Prefix</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.AbstractViewImpl#getSuffix <em>Suffix</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.AbstractViewImpl#isHidden <em>Hidden</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.AbstractViewImpl#getChildren <em>Children</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.AbstractViewImpl#getDisabled <em>Disabled</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractViewImpl#getViewOf <em>View Of</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractViewImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractViewImpl#getInnerView <em>Inner View</em>}</li>
@@ -56,6 +69,96 @@ public abstract class AbstractViewImpl extends NamedModelElementImpl implements 
 	protected Styling styling;
 
 	/**
+	 * The cached value of the '{@link #getMapTo() <em>Map To</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMapTo()
+	 * @generated
+	 * @ordered
+	 */
+	protected ModelElement mapTo;
+
+	/**
+	 * The default value of the '{@link #getPrefix() <em>Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PREFIX_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPrefix() <em>Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected String prefix = PREFIX_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSuffix() <em>Suffix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSuffix()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SUFFIX_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSuffix() <em>Suffix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSuffix()
+	 * @generated
+	 * @ordered
+	 */
+	protected String suffix = SUFFIX_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHidden()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean HIDDEN_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHidden()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean hidden = HIDDEN_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getChildren()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<FieldElement> children;
+
+	/**
+	 * The cached value of the '{@link #getDisabled() <em>Disabled</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDisabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<FieldElement> disabled;
+
+	/**
 	 * The cached value of the '{@link #getViewOf() <em>View Of</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -63,7 +166,7 @@ public abstract class AbstractViewImpl extends NamedModelElementImpl implements 
 	 * @generated
 	 * @ordered
 	 */
-	protected ModelElement viewOf;
+	protected Container viewOf;
 
 	/**
 	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference.
@@ -152,10 +255,135 @@ public abstract class AbstractViewImpl extends NamedModelElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelElement getViewOf() {
+	public ModelElement getMapTo() {
+		if (mapTo != null && mapTo.eIsProxy()) {
+			InternalEObject oldMapTo = (InternalEObject)mapTo;
+			mapTo = (ModelElement)eResolveProxy(oldMapTo);
+			if (mapTo != oldMapTo) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ViewPackage.ABSTRACT_VIEW__MAP_TO, oldMapTo, mapTo));
+			}
+		}
+		return mapTo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ModelElement basicGetMapTo() {
+		return mapTo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMapTo(ModelElement newMapTo) {
+		ModelElement oldMapTo = mapTo;
+		mapTo = newMapTo;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_VIEW__MAP_TO, oldMapTo, mapTo));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getPrefix() {
+		return prefix;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPrefix(String newPrefix) {
+		String oldPrefix = prefix;
+		prefix = newPrefix;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_VIEW__PREFIX, oldPrefix, prefix));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getSuffix() {
+		return suffix;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSuffix(String newSuffix) {
+		String oldSuffix = suffix;
+		suffix = newSuffix;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_VIEW__SUFFIX, oldSuffix, suffix));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isHidden() {
+		return hidden;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHidden(boolean newHidden) {
+		boolean oldHidden = hidden;
+		hidden = newHidden;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_VIEW__HIDDEN, oldHidden, hidden));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<FieldElement> getChildren() {
+		if (children == null) {
+			children = new EObjectContainmentEList<FieldElement>(FieldElement.class, this, ViewPackage.ABSTRACT_VIEW__CHILDREN);
+		}
+		return children;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<FieldElement> getDisabled() {
+		if (disabled == null) {
+			disabled = new EObjectContainmentEList<FieldElement>(FieldElement.class, this, ViewPackage.ABSTRACT_VIEW__DISABLED);
+		}
+		return disabled;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Container getViewOf() {
 		if (viewOf != null && viewOf.eIsProxy()) {
 			InternalEObject oldViewOf = (InternalEObject)viewOf;
-			viewOf = (ModelElement)eResolveProxy(oldViewOf);
+			viewOf = (Container)eResolveProxy(oldViewOf);
 			if (viewOf != oldViewOf) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ViewPackage.ABSTRACT_VIEW__VIEW_OF, oldViewOf, viewOf));
@@ -169,7 +397,7 @@ public abstract class AbstractViewImpl extends NamedModelElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelElement basicGetViewOf() {
+	public Container basicGetViewOf() {
 		return viewOf;
 	}
 
@@ -178,8 +406,8 @@ public abstract class AbstractViewImpl extends NamedModelElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setViewOf(ModelElement newViewOf) {
-		ModelElement oldViewOf = viewOf;
+	public void setViewOf(Container newViewOf) {
+		Container oldViewOf = viewOf;
 		viewOf = newViewOf;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_VIEW__VIEW_OF, oldViewOf, viewOf));
@@ -281,6 +509,10 @@ public abstract class AbstractViewImpl extends NamedModelElementImpl implements 
 		switch (featureID) {
 			case ViewPackage.ABSTRACT_VIEW__STYLING:
 				return basicSetStyling(null, msgs);
+			case ViewPackage.ABSTRACT_VIEW__CHILDREN:
+				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
+			case ViewPackage.ABSTRACT_VIEW__DISABLED:
+				return ((InternalEList<?>)getDisabled()).basicRemove(otherEnd, msgs);
 			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
 				return basicSetOperations(null, msgs);
 			case ViewPackage.ABSTRACT_VIEW__INNER_VIEW:
@@ -299,6 +531,19 @@ public abstract class AbstractViewImpl extends NamedModelElementImpl implements 
 		switch (featureID) {
 			case ViewPackage.ABSTRACT_VIEW__STYLING:
 				return getStyling();
+			case ViewPackage.ABSTRACT_VIEW__MAP_TO:
+				if (resolve) return getMapTo();
+				return basicGetMapTo();
+			case ViewPackage.ABSTRACT_VIEW__PREFIX:
+				return getPrefix();
+			case ViewPackage.ABSTRACT_VIEW__SUFFIX:
+				return getSuffix();
+			case ViewPackage.ABSTRACT_VIEW__HIDDEN:
+				return isHidden() ? Boolean.TRUE : Boolean.FALSE;
+			case ViewPackage.ABSTRACT_VIEW__CHILDREN:
+				return getChildren();
+			case ViewPackage.ABSTRACT_VIEW__DISABLED:
+				return getDisabled();
 			case ViewPackage.ABSTRACT_VIEW__VIEW_OF:
 				if (resolve) return getViewOf();
 				return basicGetViewOf();
@@ -315,14 +560,35 @@ public abstract class AbstractViewImpl extends NamedModelElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ViewPackage.ABSTRACT_VIEW__STYLING:
 				setStyling((Styling)newValue);
 				return;
+			case ViewPackage.ABSTRACT_VIEW__MAP_TO:
+				setMapTo((ModelElement)newValue);
+				return;
+			case ViewPackage.ABSTRACT_VIEW__PREFIX:
+				setPrefix((String)newValue);
+				return;
+			case ViewPackage.ABSTRACT_VIEW__SUFFIX:
+				setSuffix((String)newValue);
+				return;
+			case ViewPackage.ABSTRACT_VIEW__HIDDEN:
+				setHidden(((Boolean)newValue).booleanValue());
+				return;
+			case ViewPackage.ABSTRACT_VIEW__CHILDREN:
+				getChildren().clear();
+				getChildren().addAll((Collection<? extends FieldElement>)newValue);
+				return;
+			case ViewPackage.ABSTRACT_VIEW__DISABLED:
+				getDisabled().clear();
+				getDisabled().addAll((Collection<? extends FieldElement>)newValue);
+				return;
 			case ViewPackage.ABSTRACT_VIEW__VIEW_OF:
-				setViewOf((ModelElement)newValue);
+				setViewOf((Container)newValue);
 				return;
 			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
 				setOperations((OperationComponent)newValue);
@@ -345,8 +611,26 @@ public abstract class AbstractViewImpl extends NamedModelElementImpl implements 
 			case ViewPackage.ABSTRACT_VIEW__STYLING:
 				setStyling((Styling)null);
 				return;
+			case ViewPackage.ABSTRACT_VIEW__MAP_TO:
+				setMapTo((ModelElement)null);
+				return;
+			case ViewPackage.ABSTRACT_VIEW__PREFIX:
+				setPrefix(PREFIX_EDEFAULT);
+				return;
+			case ViewPackage.ABSTRACT_VIEW__SUFFIX:
+				setSuffix(SUFFIX_EDEFAULT);
+				return;
+			case ViewPackage.ABSTRACT_VIEW__HIDDEN:
+				setHidden(HIDDEN_EDEFAULT);
+				return;
+			case ViewPackage.ABSTRACT_VIEW__CHILDREN:
+				getChildren().clear();
+				return;
+			case ViewPackage.ABSTRACT_VIEW__DISABLED:
+				getDisabled().clear();
+				return;
 			case ViewPackage.ABSTRACT_VIEW__VIEW_OF:
-				setViewOf((ModelElement)null);
+				setViewOf((Container)null);
 				return;
 			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
 				setOperations((OperationComponent)null);
@@ -368,6 +652,18 @@ public abstract class AbstractViewImpl extends NamedModelElementImpl implements 
 		switch (featureID) {
 			case ViewPackage.ABSTRACT_VIEW__STYLING:
 				return styling != null;
+			case ViewPackage.ABSTRACT_VIEW__MAP_TO:
+				return mapTo != null;
+			case ViewPackage.ABSTRACT_VIEW__PREFIX:
+				return PREFIX_EDEFAULT == null ? prefix != null : !PREFIX_EDEFAULT.equals(prefix);
+			case ViewPackage.ABSTRACT_VIEW__SUFFIX:
+				return SUFFIX_EDEFAULT == null ? suffix != null : !SUFFIX_EDEFAULT.equals(suffix);
+			case ViewPackage.ABSTRACT_VIEW__HIDDEN:
+				return hidden != HIDDEN_EDEFAULT;
+			case ViewPackage.ABSTRACT_VIEW__CHILDREN:
+				return children != null && !children.isEmpty();
+			case ViewPackage.ABSTRACT_VIEW__DISABLED:
+				return disabled != null && !disabled.isEmpty();
 			case ViewPackage.ABSTRACT_VIEW__VIEW_OF:
 				return viewOf != null;
 			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
@@ -391,6 +687,22 @@ public abstract class AbstractViewImpl extends NamedModelElementImpl implements 
 				default: return -1;
 			}
 		}
+		if (baseClass == FieldElement.class) {
+			switch (derivedFeatureID) {
+				case ViewPackage.ABSTRACT_VIEW__MAP_TO: return ViewPackage.FIELD_ELEMENT__MAP_TO;
+				case ViewPackage.ABSTRACT_VIEW__PREFIX: return ViewPackage.FIELD_ELEMENT__PREFIX;
+				case ViewPackage.ABSTRACT_VIEW__SUFFIX: return ViewPackage.FIELD_ELEMENT__SUFFIX;
+				case ViewPackage.ABSTRACT_VIEW__HIDDEN: return ViewPackage.FIELD_ELEMENT__HIDDEN;
+				default: return -1;
+			}
+		}
+		if (baseClass == FieldGroup.class) {
+			switch (derivedFeatureID) {
+				case ViewPackage.ABSTRACT_VIEW__CHILDREN: return ViewPackage.FIELD_GROUP__CHILDREN;
+				case ViewPackage.ABSTRACT_VIEW__DISABLED: return ViewPackage.FIELD_GROUP__DISABLED;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -407,7 +719,43 @@ public abstract class AbstractViewImpl extends NamedModelElementImpl implements 
 				default: return -1;
 			}
 		}
+		if (baseClass == FieldElement.class) {
+			switch (baseFeatureID) {
+				case ViewPackage.FIELD_ELEMENT__MAP_TO: return ViewPackage.ABSTRACT_VIEW__MAP_TO;
+				case ViewPackage.FIELD_ELEMENT__PREFIX: return ViewPackage.ABSTRACT_VIEW__PREFIX;
+				case ViewPackage.FIELD_ELEMENT__SUFFIX: return ViewPackage.ABSTRACT_VIEW__SUFFIX;
+				case ViewPackage.FIELD_ELEMENT__HIDDEN: return ViewPackage.ABSTRACT_VIEW__HIDDEN;
+				default: return -1;
+			}
+		}
+		if (baseClass == FieldGroup.class) {
+			switch (baseFeatureID) {
+				case ViewPackage.FIELD_GROUP__CHILDREN: return ViewPackage.ABSTRACT_VIEW__CHILDREN;
+				case ViewPackage.FIELD_GROUP__DISABLED: return ViewPackage.ABSTRACT_VIEW__DISABLED;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (prefix: ");
+		result.append(prefix);
+		result.append(", suffix: ");
+		result.append(suffix);
+		result.append(", hidden: ");
+		result.append(hidden);
+		result.append(')');
+		return result.toString();
 	}
 
 		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";

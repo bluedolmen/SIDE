@@ -1,4 +1,4 @@
-package com.bluexml.side.form.common.utils;
+package com.bluexml.side.util.libs.ui;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;

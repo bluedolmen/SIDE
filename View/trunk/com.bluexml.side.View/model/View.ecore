@@ -77,7 +77,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Field" eSuperTypes="#//FieldElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Field" abstract="true" eSuperTypes="#//FieldElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="patern" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="patrenLanguage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -114,15 +114,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="hidden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FacetMap" eSuperTypes="#//AbstractView #//Paginable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="criterias" lowerBound="1"
-        eType="#//FieldGroup" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayEmptyFacet" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="facetDisplayType" eType="#//FacetDisplayType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DataList" eSuperTypes="#//AbstractDataTable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="col" lowerBound="1" eType="#//Col"
-        containment="true"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataList" eSuperTypes="#//AbstractDataTable #//Col"/>
   <eClassifiers xsi:type="ecore:EClass" name="Tree" eSuperTypes="#//AbstractView #//Sortable #//Editable #//Movable #//Filterable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Display data as Tree, the model Element &quot;dataType&quot; can be an clazz.AssociationEnd, so the tree can be buid following the Association"/>
@@ -137,8 +132,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataTable" eSuperTypes="#//AbstractDataTable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="defaultColSetUp" eType="#//Col"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="cols" upperBound="-1" eType="#//Col"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Styling" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//MetaInfoGroup">
@@ -157,8 +150,8 @@
     <eLiterals name="static" literal="Static"/>
     <eLiterals name="dynamic" value="1" literal="Dynamic"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractView" abstract="true" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement #//Stylable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="viewOf" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//ModelElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractView" abstract="true" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement #//Stylable #//FieldGroup">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="viewOf" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//Container"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//OperationComponent"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="innerView" eType="#//AbstractView"
@@ -176,7 +169,7 @@
     <eLiterals name="autocomplete" value="1"/>
     <eLiterals name="multiline" value="2"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ViewCollection" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement">
+  <eClassifiers xsi:type="ecore:EClass" name="ViewCollection" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Package">
     <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
         eType="#//AbstractView" containment="true"/>
   </eClassifiers>
@@ -212,4 +205,5 @@
     <eLiterals name="cloud" value="1"/>
     <eLiterals name="improvedCloud" value="2" literal="improvedCloud"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerField" eSuperTypes="#//Field"/>
 </ecore:EPackage>

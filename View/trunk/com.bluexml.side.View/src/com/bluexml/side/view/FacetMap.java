@@ -15,7 +15,6 @@ package com.bluexml.side.view;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.bluexml.side.view.FacetMap#getCriterias <em>Criterias</em>}</li>
  *   <li>{@link com.bluexml.side.view.FacetMap#isDisplayEmptyFacet <em>Display Empty Facet</em>}</li>
  *   <li>{@link com.bluexml.side.view.FacetMap#getFacetDisplayType <em>Facet Display Type</em>}</li>
  * </ul>
@@ -26,32 +25,6 @@ package com.bluexml.side.view;
  * @generated
  */
 public interface FacetMap extends AbstractView, Paginable {
-	/**
-	 * Returns the value of the '<em><b>Criterias</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Criterias</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Criterias</em>' containment reference.
-	 * @see #setCriterias(FieldGroup)
-	 * @see com.bluexml.side.view.ViewPackage#getFacetMap_Criterias()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
-	FieldGroup getCriterias();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.view.FacetMap#getCriterias <em>Criterias</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Criterias</em>' containment reference.
-	 * @see #getCriterias()
-	 * @generated
-	 */
-	void setCriterias(FieldGroup value);
-
 	/**
 	 * Returns the value of the '<em><b>Display Empty Facet</b></em>' attribute.
 	 * <!-- begin-user-doc -->

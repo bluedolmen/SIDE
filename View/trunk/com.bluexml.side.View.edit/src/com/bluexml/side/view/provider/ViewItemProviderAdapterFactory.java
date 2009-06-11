@@ -168,29 +168,6 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.view.Field} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected FieldItemProvider fieldItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.bluexml.side.view.Field}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createFieldAdapter() {
-		if (fieldItemProvider == null) {
-			fieldItemProvider = new FieldItemProvider(this);
-		}
-
-		return fieldItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.view.TextField} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -651,6 +628,29 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.view.IntegerField} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IntegerFieldItemProvider integerFieldItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.view.IntegerField}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createIntegerFieldAdapter() {
+		if (integerFieldItemProvider == null) {
+			integerFieldItemProvider = new IntegerFieldItemProvider(this);
+		}
+
+		return integerFieldItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -753,7 +753,6 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 		if (pagingItemProvider != null) pagingItemProvider.dispose();
 		if (sortingItemProvider != null) sortingItemProvider.dispose();
 		if (fieldGroupItemProvider != null) fieldGroupItemProvider.dispose();
-		if (fieldItemProvider != null) fieldItemProvider.dispose();
 		if (textFieldItemProvider != null) textFieldItemProvider.dispose();
 		if (passwordFieldItemProvider != null) passwordFieldItemProvider.dispose();
 		if (booleanFieldItemProvider != null) booleanFieldItemProvider.dispose();
@@ -774,6 +773,7 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 		if (viewCollectionItemProvider != null) viewCollectionItemProvider.dispose();
 		if (htmlFieldItemProvider != null) htmlFieldItemProvider.dispose();
 		if (filteringItemProvider != null) filteringItemProvider.dispose();
+		if (integerFieldItemProvider != null) integerFieldItemProvider.dispose();
 	}
 
 }

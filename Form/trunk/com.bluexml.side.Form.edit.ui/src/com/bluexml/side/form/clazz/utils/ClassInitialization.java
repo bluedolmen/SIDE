@@ -11,7 +11,6 @@ import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.common.Operation;
 import com.bluexml.side.common.OperationComponent;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormAspect;
@@ -19,7 +18,7 @@ import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormPackage;
-import com.bluexml.side.form.common.utils.UIUtils;
+import com.bluexml.side.util.libs.ui.UIUtils;
 
 public class ClassInitialization {
 	

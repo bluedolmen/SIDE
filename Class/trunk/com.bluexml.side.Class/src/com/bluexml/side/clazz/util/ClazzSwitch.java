@@ -9,6 +9,7 @@ package com.bluexml.side.clazz.util;
 import com.bluexml.side.clazz.*;
 
 import com.bluexml.side.common.Comment;
+import com.bluexml.side.common.Container;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
 
@@ -112,6 +113,7 @@ public class ClazzSwitch<T> {
 				T result = caseClazz(clazz);
 				if (result == null) result = caseAbstractClass(clazz);
 				if (result == null) result = caseTitledNamedClassModelElement(clazz);
+				if (result == null) result = caseContainer(clazz);
 				if (result == null) result = caseNamedModelElement(clazz);
 				if (result == null) result = caseClassModelElement(clazz);
 				if (result == null) result = caseModelElement(clazz);
@@ -157,6 +159,7 @@ public class ClazzSwitch<T> {
 				T result = caseAspect(aspect);
 				if (result == null) result = caseAbstractClass(aspect);
 				if (result == null) result = caseTitledNamedClassModelElement(aspect);
+				if (result == null) result = caseContainer(aspect);
 				if (result == null) result = caseNamedModelElement(aspect);
 				if (result == null) result = caseClassModelElement(aspect);
 				if (result == null) result = caseModelElement(aspect);
@@ -167,6 +170,7 @@ public class ClazzSwitch<T> {
 				AbstractClass abstractClass = (AbstractClass)theEObject;
 				T result = caseAbstractClass(abstractClass);
 				if (result == null) result = caseTitledNamedClassModelElement(abstractClass);
+				if (result == null) result = caseContainer(abstractClass);
 				if (result == null) result = caseNamedModelElement(abstractClass);
 				if (result == null) result = caseClassModelElement(abstractClass);
 				if (result == null) result = caseModelElement(abstractClass);
@@ -481,6 +485,21 @@ public class ClazzSwitch<T> {
 	 * @generated
 	 */
 	public T casePackage(com.bluexml.side.common.Package object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Container</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Container</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContainer(Container object) {
 		return null;
 	}
 

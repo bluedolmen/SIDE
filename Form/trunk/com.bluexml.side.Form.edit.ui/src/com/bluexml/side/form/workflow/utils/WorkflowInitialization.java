@@ -18,7 +18,7 @@ import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.WorkflowFormCollection;
 import com.bluexml.side.form.clazz.utils.ClassInitialization;
-import com.bluexml.side.form.common.utils.UIUtils;
+import com.bluexml.side.util.libs.ui.UIUtils;
 import com.bluexml.side.workflow.Attribute;
 import com.bluexml.side.workflow.Process;
 import com.bluexml.side.workflow.State;

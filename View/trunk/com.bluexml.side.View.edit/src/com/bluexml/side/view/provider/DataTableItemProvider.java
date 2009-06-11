@@ -91,36 +91,6 @@ public class DataTableItemProvider
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(ViewPackage.Literals.DATA_TABLE__COLS);
-		}
-		return childrenFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
-	}
-
-	/**
 	 * This returns DataTable.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -135,14 +105,14 @@ public class DataTableItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((DataTable)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_DataTable_type") :
-			getString("_UI_DataTable_type") + " " + label;
+			label;
 	}
 
 	/**
@@ -155,12 +125,6 @@ public class DataTableItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(DataTable.class)) {
-			case ViewPackage.DATA_TABLE__COLS:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 
@@ -169,16 +133,23 @@ public class DataTableItemProvider
 	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-		super.collectNewChildDescriptors(newChildDescriptors, object);
-
+		//super.collectNewChildDescriptors(newChildDescriptors, object);
 		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.DATA_TABLE__COLS,
-				 ViewFactory.eINSTANCE.createCol()));
+		(createChildParameter
+			(ViewPackage.Literals.STYLABLE__STYLING,
+			 ViewFactory.eINSTANCE.createStyling()));
+		newChildDescriptors.add
+		(createChildParameter
+			(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+			 ViewFactory.eINSTANCE.createCol()));
+		newChildDescriptors.add
+		(createChildParameter
+			(ViewPackage.Literals.PAGINABLE__PAGING,
+			 ViewFactory.eINSTANCE.createPaging()));
 	}
 
 	/**
@@ -193,6 +164,9 @@ public class DataTableItemProvider
 		Object childObject = child;
 
 		boolean qualify =
+			childFeature == ViewPackage.Literals.FIELD_GROUP__CHILDREN ||
+			childFeature == ViewPackage.Literals.FIELD_GROUP__DISABLED ||
+			childFeature == ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW ||
 			childFeature == ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS ||
 			childFeature == ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS ||
 			childFeature == ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS ||

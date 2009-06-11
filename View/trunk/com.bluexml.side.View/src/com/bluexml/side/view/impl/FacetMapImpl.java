@@ -29,7 +29,6 @@ import com.bluexml.side.view.ViewPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.view.impl.FacetMapImpl#getPaging <em>Paging</em>}</li>
- *   <li>{@link com.bluexml.side.view.impl.FacetMapImpl#getCriterias <em>Criterias</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FacetMapImpl#isDisplayEmptyFacet <em>Display Empty Facet</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FacetMapImpl#getFacetDisplayType <em>Facet Display Type</em>}</li>
  * </ul>
@@ -47,16 +46,6 @@ public class FacetMapImpl extends AbstractViewImpl implements FacetMap {
 	 * @ordered
 	 */
 	protected Paging paging;
-
-	/**
-	 * The cached value of the '{@link #getCriterias() <em>Criterias</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCriterias()
-	 * @generated
-	 * @ordered
-	 */
-	protected FieldGroup criterias;
 
 	/**
 	 * The default value of the '{@link #isDisplayEmptyFacet() <em>Display Empty Facet</em>}' attribute.
@@ -165,49 +154,6 @@ public class FacetMapImpl extends AbstractViewImpl implements FacetMap {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FieldGroup getCriterias() {
-		return criterias;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetCriterias(FieldGroup newCriterias, NotificationChain msgs) {
-		FieldGroup oldCriterias = criterias;
-		criterias = newCriterias;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ViewPackage.FACET_MAP__CRITERIAS, oldCriterias, newCriterias);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCriterias(FieldGroup newCriterias) {
-		if (newCriterias != criterias) {
-			NotificationChain msgs = null;
-			if (criterias != null)
-				msgs = ((InternalEObject)criterias).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ViewPackage.FACET_MAP__CRITERIAS, null, msgs);
-			if (newCriterias != null)
-				msgs = ((InternalEObject)newCriterias).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ViewPackage.FACET_MAP__CRITERIAS, null, msgs);
-			msgs = basicSetCriterias(newCriterias, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.FACET_MAP__CRITERIAS, newCriterias, newCriterias));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean isDisplayEmptyFacet() {
 		return displayEmptyFacet;
 	}
@@ -255,8 +201,6 @@ public class FacetMapImpl extends AbstractViewImpl implements FacetMap {
 		switch (featureID) {
 			case ViewPackage.FACET_MAP__PAGING:
 				return basicSetPaging(null, msgs);
-			case ViewPackage.FACET_MAP__CRITERIAS:
-				return basicSetCriterias(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -271,8 +215,6 @@ public class FacetMapImpl extends AbstractViewImpl implements FacetMap {
 		switch (featureID) {
 			case ViewPackage.FACET_MAP__PAGING:
 				return getPaging();
-			case ViewPackage.FACET_MAP__CRITERIAS:
-				return getCriterias();
 			case ViewPackage.FACET_MAP__DISPLAY_EMPTY_FACET:
 				return isDisplayEmptyFacet() ? Boolean.TRUE : Boolean.FALSE;
 			case ViewPackage.FACET_MAP__FACET_DISPLAY_TYPE:
@@ -291,9 +233,6 @@ public class FacetMapImpl extends AbstractViewImpl implements FacetMap {
 		switch (featureID) {
 			case ViewPackage.FACET_MAP__PAGING:
 				setPaging((Paging)newValue);
-				return;
-			case ViewPackage.FACET_MAP__CRITERIAS:
-				setCriterias((FieldGroup)newValue);
 				return;
 			case ViewPackage.FACET_MAP__DISPLAY_EMPTY_FACET:
 				setDisplayEmptyFacet(((Boolean)newValue).booleanValue());
@@ -316,9 +255,6 @@ public class FacetMapImpl extends AbstractViewImpl implements FacetMap {
 			case ViewPackage.FACET_MAP__PAGING:
 				setPaging((Paging)null);
 				return;
-			case ViewPackage.FACET_MAP__CRITERIAS:
-				setCriterias((FieldGroup)null);
-				return;
 			case ViewPackage.FACET_MAP__DISPLAY_EMPTY_FACET:
 				setDisplayEmptyFacet(DISPLAY_EMPTY_FACET_EDEFAULT);
 				return;
@@ -339,8 +275,6 @@ public class FacetMapImpl extends AbstractViewImpl implements FacetMap {
 		switch (featureID) {
 			case ViewPackage.FACET_MAP__PAGING:
 				return paging != null;
-			case ViewPackage.FACET_MAP__CRITERIAS:
-				return criterias != null;
 			case ViewPackage.FACET_MAP__DISPLAY_EMPTY_FACET:
 				return displayEmptyFacet != DISPLAY_EMPTY_FACET_EDEFAULT;
 			case ViewPackage.FACET_MAP__FACET_DISPLAY_TYPE:

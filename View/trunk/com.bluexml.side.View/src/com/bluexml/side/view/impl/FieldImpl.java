@@ -33,7 +33,7 @@ import org.eclipse.ocl.ecore.OCL;
  *
  * @generated
  */
-public class FieldImpl extends FieldElementImpl implements Field {
+public abstract class FieldImpl extends FieldElementImpl implements Field {
 	/**
 	 * The default value of the '{@link #getPatern() <em>Patern</em>}' attribute.
 	 * <!-- begin-user-doc -->

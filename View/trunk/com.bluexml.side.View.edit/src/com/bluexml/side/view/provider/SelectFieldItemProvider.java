@@ -103,14 +103,14 @@ public class SelectFieldItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((SelectField)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_SelectField_type") :
-			getString("_UI_SelectField_type") + " " + label;
+			label;
 	}
 
 	/**

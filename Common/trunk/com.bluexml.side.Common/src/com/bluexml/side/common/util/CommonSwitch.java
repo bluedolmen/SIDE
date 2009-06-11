@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.Container;
 import com.bluexml.side.common.MetaData;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.MetaInfoGroup;
@@ -194,6 +195,12 @@ public class CommonSwitch<T> {
 			case CommonPackage.META_DATA: {
 				MetaData metaData = (MetaData)theEObject;
 				T result = caseMetaData(metaData);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonPackage.CONTAINER: {
+				Container container = (Container)theEObject;
+				T result = caseContainer(container);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -393,6 +400,21 @@ public class CommonSwitch<T> {
 	 * @generated
 	 */
 	public T caseMetaData(MetaData object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Container</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Container</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContainer(Container object) {
 		return null;
 	}
 

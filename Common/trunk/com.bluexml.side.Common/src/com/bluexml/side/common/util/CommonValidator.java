@@ -24,6 +24,7 @@ import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.Container;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaData;
 import com.bluexml.side.common.MetaInfo;
@@ -146,6 +147,8 @@ public class CommonValidator extends EObjectValidator {
 				return validateMetaInfoGroup((MetaInfoGroup)value, diagnostics, context);
 			case CommonPackage.META_DATA:
 				return validateMetaData((MetaData)value, diagnostics, context);
+			case CommonPackage.CONTAINER:
+				return validateContainer((Container)value, diagnostics, context);
 			case CommonPackage.DATA_TYPE:
 				return validateDataType((DataType)value, diagnostics, context);
 			case CommonPackage.VISIBILITY:
@@ -317,6 +320,15 @@ public class CommonValidator extends EObjectValidator {
 	 */
 	public boolean validateMetaData(MetaData metaData, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(metaData, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateContainer(Container container, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(container, diagnostics, context);
 	}
 
 	/**

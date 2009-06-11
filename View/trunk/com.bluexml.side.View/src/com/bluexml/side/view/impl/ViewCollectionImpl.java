@@ -8,6 +8,7 @@ package com.bluexml.side.view.impl;
 
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 
+import com.bluexml.side.common.impl.PackageImpl;
 import com.bluexml.side.common.impl.NamedModelElementImpl;
 
 import com.bluexml.side.view.AbstractView;
@@ -41,7 +42,7 @@ import org.eclipse.ocl.ecore.OCL;
  *
  * @generated
  */
-public class ViewCollectionImpl extends NamedModelElementImpl implements ViewCollection {
+public class ViewCollectionImpl extends PackageImpl implements ViewCollection {
 	/**
 	 * The cached value of the '{@link #getViews() <em>Views</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

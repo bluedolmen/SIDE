@@ -71,6 +71,10 @@ public class AbstractDataTableItemProvider
 			addDocumentationPropertyDescriptor(object);
 			addDescriptionPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
+			addMapToPropertyDescriptor(object);
+			addPrefixPropertyDescriptor(object);
+			addSuffixPropertyDescriptor(object);
+			addHiddenPropertyDescriptor(object);
 			addViewOfPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -165,6 +169,94 @@ public class AbstractDataTableItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Map To feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addMapToPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FieldElement_mapTo_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FieldElement_mapTo_feature", "_UI_FieldElement_type"),
+				 ViewPackage.Literals.FIELD_ELEMENT__MAP_TO,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Prefix feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPrefixPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FieldElement_prefix_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FieldElement_prefix_feature", "_UI_FieldElement_type"),
+				 ViewPackage.Literals.FIELD_ELEMENT__PREFIX,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Suffix feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSuffixPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FieldElement_suffix_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FieldElement_suffix_feature", "_UI_FieldElement_type"),
+				 ViewPackage.Literals.FIELD_ELEMENT__SUFFIX,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Hidden feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addHiddenPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FieldElement_hidden_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FieldElement_hidden_feature", "_UI_FieldElement_type"),
+				 ViewPackage.Literals.FIELD_ELEMENT__HIDDEN,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the View Of feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -202,6 +294,8 @@ public class AbstractDataTableItemProvider
 			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS);
 			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__METAINFO);
 			childrenFeatures.add(ViewPackage.Literals.STYLABLE__STYLING);
+			childrenFeatures.add(ViewPackage.Literals.FIELD_GROUP__CHILDREN);
+			childrenFeatures.add(ViewPackage.Literals.FIELD_GROUP__DISABLED);
 			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS);
 			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW);
 			childrenFeatures.add(ViewPackage.Literals.PAGINABLE__PAGING);
@@ -254,12 +348,17 @@ public class AbstractDataTableItemProvider
 			case ViewPackage.ABSTRACT_DATA_TABLE__DOCUMENTATION:
 			case ViewPackage.ABSTRACT_DATA_TABLE__DESCRIPTION:
 			case ViewPackage.ABSTRACT_DATA_TABLE__NAME:
+			case ViewPackage.ABSTRACT_DATA_TABLE__PREFIX:
+			case ViewPackage.ABSTRACT_DATA_TABLE__SUFFIX:
+			case ViewPackage.ABSTRACT_DATA_TABLE__HIDDEN:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case ViewPackage.ABSTRACT_DATA_TABLE__TAGS:
 			case ViewPackage.ABSTRACT_DATA_TABLE__COMMENTS:
 			case ViewPackage.ABSTRACT_DATA_TABLE__METAINFO:
 			case ViewPackage.ABSTRACT_DATA_TABLE__STYLING:
+			case ViewPackage.ABSTRACT_DATA_TABLE__CHILDREN:
+			case ViewPackage.ABSTRACT_DATA_TABLE__DISABLED:
 			case ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS:
 			case ViewPackage.ABSTRACT_DATA_TABLE__INNER_VIEW:
 			case ViewPackage.ABSTRACT_DATA_TABLE__PAGING:
@@ -302,6 +401,206 @@ public class AbstractDataTableItemProvider
 			(createChildParameter
 				(ViewPackage.Literals.STYLABLE__STYLING,
 				 ViewFactory.eINSTANCE.createStyling()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createCol()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createFieldGroup()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createTextField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createPasswordField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createBooleanField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createFloatField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createActionField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createDateField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createTimeField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createDateTimeField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createPhoneNumberField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createEmailField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createFileField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createFacetMap()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createDataList()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createTree()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createDataTable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createSelectField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createHtmlField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
+				 ViewFactory.eINSTANCE.createIntegerField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createCol()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createFieldGroup()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createTextField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createPasswordField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createBooleanField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createFloatField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createActionField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createDateField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createTimeField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createDateTimeField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createPhoneNumberField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createEmailField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createFileField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createFacetMap()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createDataList()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createTree()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createDataTable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createSelectField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createHtmlField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
+				 ViewFactory.eINSTANCE.createIntegerField()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -381,6 +680,9 @@ public class AbstractDataTableItemProvider
 		Object childObject = child;
 
 		boolean qualify =
+			childFeature == ViewPackage.Literals.FIELD_GROUP__CHILDREN ||
+			childFeature == ViewPackage.Literals.FIELD_GROUP__DISABLED ||
+			childFeature == ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW ||
 			childFeature == ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS ||
 			childFeature == ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS ||
 			childFeature == ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS ||

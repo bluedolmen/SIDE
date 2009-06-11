@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.Container;
 import com.bluexml.side.common.MetaData;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.MetaInfoGroup;
@@ -132,6 +133,10 @@ public class CommonAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseMetaData(MetaData object) {
 				return createMetaDataAdapter();
+			}
+			@Override
+			public Adapter caseContainer(Container object) {
+				return createContainerAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -332,6 +337,20 @@ public class CommonAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMetaDataAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.Container <em>Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.common.Container
+	 * @generated
+	 */
+	public Adapter createContainerAdapter() {
 		return null;
 	}
 

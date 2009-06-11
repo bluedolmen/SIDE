@@ -21,7 +21,7 @@ package com.bluexml.side.view;
  * </p>
  *
  * @see com.bluexml.side.view.ViewPackage#getField()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Field extends FieldElement {

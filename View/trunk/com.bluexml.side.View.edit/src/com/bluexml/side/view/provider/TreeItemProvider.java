@@ -230,14 +230,14 @@ public class TreeItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((Tree)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Tree_type") :
-			getString("_UI_Tree_type") + " " + label;
+			label;
 	}
 
 	/**
@@ -272,12 +272,16 @@ public class TreeItemProvider
 	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-		super.collectNewChildDescriptors(newChildDescriptors, object);
-
+		//super.collectNewChildDescriptors(newChildDescriptors, object);
+		newChildDescriptors.add
+		(createChildParameter
+			(ViewPackage.Literals.STYLABLE__STYLING,
+			 ViewFactory.eINSTANCE.createStyling()));
+		
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.SORTABLE__SORTING,
@@ -291,82 +295,32 @@ public class TreeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.TREE__NODE_VALUE,
-				 ViewFactory.eINSTANCE.createCol()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.TREE__NODE_VALUE,
 				 ViewFactory.eINSTANCE.createFieldGroup()));
+	}
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.TREE__NODE_VALUE,
-				 ViewFactory.eINSTANCE.createField()));
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.TREE__NODE_VALUE,
-				 ViewFactory.eINSTANCE.createTextField()));
+		boolean qualify =
+			childFeature == ViewPackage.Literals.FIELD_GROUP__CHILDREN ||
+			childFeature == ViewPackage.Literals.FIELD_GROUP__DISABLED ||
+			childFeature == ViewPackage.Literals.TREE__NODE_VALUE ||
+			childFeature == ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW;
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.TREE__NODE_VALUE,
-				 ViewFactory.eINSTANCE.createPasswordField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.TREE__NODE_VALUE,
-				 ViewFactory.eINSTANCE.createBooleanField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.TREE__NODE_VALUE,
-				 ViewFactory.eINSTANCE.createFloatField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.TREE__NODE_VALUE,
-				 ViewFactory.eINSTANCE.createActionField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.TREE__NODE_VALUE,
-				 ViewFactory.eINSTANCE.createDateField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.TREE__NODE_VALUE,
-				 ViewFactory.eINSTANCE.createTimeField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.TREE__NODE_VALUE,
-				 ViewFactory.eINSTANCE.createDateTimeField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.TREE__NODE_VALUE,
-				 ViewFactory.eINSTANCE.createPhoneNumberField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.TREE__NODE_VALUE,
-				 ViewFactory.eINSTANCE.createEmailField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.TREE__NODE_VALUE,
-				 ViewFactory.eINSTANCE.createFileField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.TREE__NODE_VALUE,
-				 ViewFactory.eINSTANCE.createSelectField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.TREE__NODE_VALUE,
-				 ViewFactory.eINSTANCE.createHtmlField()));
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

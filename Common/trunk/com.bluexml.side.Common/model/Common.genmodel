@@ -101,5 +101,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Common.ecore#//MetaInfoGroup/children"/>
     </genClasses>
     <genClasses image="false" ecoreClass="Common.ecore#//MetaData"/>
+    <genClasses image="false" ecoreClass="Common.ecore#//Container"/>
   </genPackages>
 </genmodel:GenModel>

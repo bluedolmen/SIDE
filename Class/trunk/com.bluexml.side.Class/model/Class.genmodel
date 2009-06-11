@@ -52,7 +52,6 @@
       <genOperations ecoreOperation="Class.ecore#//Clazz/getTargetAssociations"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getAllSourceAssociations"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getAllTargetAssociations"/>
-      <genOperations ecoreOperation="Class.ecore#//Clazz/isClassAssociationsIn"/>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//Association">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/associationType"/>
@@ -62,6 +61,8 @@
         <genParameters ecoreParameter="Class.ecore#//Association/equalsForMerge/other"/>
       </genOperations>
       <genOperations ecoreOperation="Class.ecore#//Association/isRecursive"/>
+      <genOperations ecoreOperation="Class.ecore#//Association/getSource"/>
+      <genOperations ecoreOperation="Class.ecore#//Association/getTarget"/>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//Attribute">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Attribute/typ"/>

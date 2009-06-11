@@ -217,6 +217,10 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 				return createFilteringAdapter();
 			}
 			@Override
+			public Adapter caseIntegerField(IntegerField object) {
+				return createIntegerFieldAdapter();
+			}
+			@Override
 			public Adapter caseModelElement(ModelElement object) {
 				return createModelElementAdapter();
 			}
@@ -231,6 +235,10 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseMetaInfoGroup(MetaInfoGroup object) {
 				return createMetaInfoGroupAdapter();
+			}
+			@Override
+			public Adapter casePackage(com.bluexml.side.common.Package object) {
+				return createPackageAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -743,6 +751,20 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.IntegerField <em>Integer Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.view.IntegerField
+	 * @generated
+	 */
+	public Adapter createIntegerFieldAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.ModelElement <em>Model Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -795,6 +817,20 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMetaInfoGroupAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.Package <em>Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.common.Package
+	 * @generated
+	 */
+	public Adapter createPackageAdapter() {
 		return null;
 	}
 

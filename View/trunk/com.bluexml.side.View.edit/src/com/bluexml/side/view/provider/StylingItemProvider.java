@@ -156,14 +156,14 @@ public class StylingItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((Styling)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Styling_type") :
-			getString("_UI_Styling_type") + " " + label;
+			label;
 	}
 
 	/**

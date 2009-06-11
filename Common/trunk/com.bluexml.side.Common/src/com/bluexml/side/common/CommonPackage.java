@@ -1083,6 +1083,25 @@ public interface CommonPackage extends EPackage {
 	int META_INFO_GROUP_FEATURE_COUNT = META_DATA_FEATURE_COUNT + 8;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.common.impl.ContainerImpl <em>Container</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.common.impl.ContainerImpl
+	 * @see com.bluexml.side.common.impl.CommonPackageImpl#getContainer()
+	 * @generated
+	 */
+	int CONTAINER = 13;
+
+	/**
+	 * The number of structural features of the '<em>Container</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTAINER_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.common.DataType <em>Data Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1090,7 +1109,7 @@ public interface CommonPackage extends EPackage {
 	 * @see com.bluexml.side.common.impl.CommonPackageImpl#getDataType()
 	 * @generated
 	 */
-	int DATA_TYPE = 13;
+	int DATA_TYPE = 14;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.common.Visibility <em>Visibility</em>}' enum.
@@ -1100,7 +1119,7 @@ public interface CommonPackage extends EPackage {
 	 * @see com.bluexml.side.common.impl.CommonPackageImpl#getVisibility()
 	 * @generated
 	 */
-	int VISIBILITY = 14;
+	int VISIBILITY = 15;
 
 
 	/**
@@ -1509,6 +1528,16 @@ public interface CommonPackage extends EPackage {
 	EClass getMetaData();
 
 	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.common.Container <em>Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Container</em>'.
+	 * @see com.bluexml.side.common.Container
+	 * @generated
+	 */
+	EClass getContainer();
+
+	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.common.DataType <em>Data Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1879,6 +1908,16 @@ public interface CommonPackage extends EPackage {
 		 * @generated
 		 */
 		EClass META_DATA = eINSTANCE.getMetaData();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.common.impl.ContainerImpl <em>Container</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.common.impl.ContainerImpl
+		 * @see com.bluexml.side.common.impl.CommonPackageImpl#getContainer()
+		 * @generated
+		 */
+		EClass CONTAINER = eINSTANCE.getContainer();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.common.DataType <em>Data Type</em>}' enum.

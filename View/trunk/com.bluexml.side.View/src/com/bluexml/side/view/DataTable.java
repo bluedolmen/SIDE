@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.bluexml.side.view.DataTable#getDefaultColSetUp <em>Default Col Set Up</em>}</li>
- *   <li>{@link com.bluexml.side.view.DataTable#getCols <em>Cols</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,21 +50,5 @@ public interface DataTable extends AbstractDataTable {
 	 * @generated
 	 */
 	void setDefaultColSetUp(Col value);
-
-	/**
-	 * Returns the value of the '<em><b>Cols</b></em>' containment reference list.
-	 * The list contents are of type {@link com.bluexml.side.view.Col}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Cols</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Cols</em>' containment reference list.
-	 * @see com.bluexml.side.view.ViewPackage#getDataTable_Cols()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Col> getCols();
 		
 } // DataTable

@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.view;
 
+import com.bluexml.side.common.Container;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.common.OperationComponent;
@@ -28,7 +29,7 @@ import com.bluexml.side.common.OperationComponent;
  * @model abstract="true"
  * @generated
  */
-public interface AbstractView extends NamedModelElement, Stylable {
+public interface AbstractView extends NamedModelElement, Stylable, FieldGroup {
 	/**
 	 * Returns the value of the '<em><b>View Of</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -38,12 +39,12 @@ public interface AbstractView extends NamedModelElement, Stylable {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>View Of</em>' reference.
-	 * @see #setViewOf(ModelElement)
+	 * @see #setViewOf(Container)
 	 * @see com.bluexml.side.view.ViewPackage#getAbstractView_ViewOf()
 	 * @model
 	 * @generated
 	 */
-	ModelElement getViewOf();
+	Container getViewOf();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.view.AbstractView#getViewOf <em>View Of</em>}' reference.
@@ -53,7 +54,7 @@ public interface AbstractView extends NamedModelElement, Stylable {
 	 * @see #getViewOf()
 	 * @generated
 	 */
-	void setViewOf(ModelElement value);
+	void setViewOf(Container value);
 
 	/**
 	 * Returns the value of the '<em><b>Operations</b></em>' containment reference.

@@ -38,7 +38,6 @@ import org.eclipse.ocl.ecore.OCL;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.view.impl.DataTableImpl#getDefaultColSetUp <em>Default Col Set Up</em>}</li>
- *   <li>{@link com.bluexml.side.view.impl.DataTableImpl#getCols <em>Cols</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,16 +53,6 @@ public class DataTableImpl extends AbstractDataTableImpl implements DataTable {
 	 * @ordered
 	 */
 	protected Col defaultColSetUp;
-
-	/**
-	 * The cached value of the '{@link #getCols() <em>Cols</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCols()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Col> cols;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -132,25 +121,11 @@ public class DataTableImpl extends AbstractDataTableImpl implements DataTable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Col> getCols() {
-		if (cols == null) {
-			cols = new EObjectContainmentEList<Col>(Col.class, this, ViewPackage.DATA_TABLE__COLS);
-		}
-		return cols;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ViewPackage.DATA_TABLE__DEFAULT_COL_SET_UP:
 				return basicSetDefaultColSetUp(null, msgs);
-			case ViewPackage.DATA_TABLE__COLS:
-				return ((InternalEList<?>)getCols()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -165,8 +140,6 @@ public class DataTableImpl extends AbstractDataTableImpl implements DataTable {
 		switch (featureID) {
 			case ViewPackage.DATA_TABLE__DEFAULT_COL_SET_UP:
 				return getDefaultColSetUp();
-			case ViewPackage.DATA_TABLE__COLS:
-				return getCols();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -183,10 +156,6 @@ public class DataTableImpl extends AbstractDataTableImpl implements DataTable {
 			case ViewPackage.DATA_TABLE__DEFAULT_COL_SET_UP:
 				setDefaultColSetUp((Col)newValue);
 				return;
-			case ViewPackage.DATA_TABLE__COLS:
-				getCols().clear();
-				getCols().addAll((Collection<? extends Col>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -202,9 +171,6 @@ public class DataTableImpl extends AbstractDataTableImpl implements DataTable {
 			case ViewPackage.DATA_TABLE__DEFAULT_COL_SET_UP:
 				setDefaultColSetUp((Col)null);
 				return;
-			case ViewPackage.DATA_TABLE__COLS:
-				getCols().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -219,8 +185,6 @@ public class DataTableImpl extends AbstractDataTableImpl implements DataTable {
 		switch (featureID) {
 			case ViewPackage.DATA_TABLE__DEFAULT_COL_SET_UP:
 				return defaultColSetUp != null;
-			case ViewPackage.DATA_TABLE__COLS:
-				return cols != null && !cols.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

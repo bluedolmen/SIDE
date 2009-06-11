@@ -220,7 +220,7 @@
       <eParameters name="other" eType="#//Aspect"/>
     </eOperations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractClass" abstract="true" eSuperTypes="#//TitledNamedClassModelElement">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractClass" abstract="true" eSuperTypes="#//TitledNamedClassModelElement ../../com.bluexml.side.Common/model/Common.ecore#//Container">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="TwoModelElementWithSameName" value="AbstractClass.allInstances()->select(a | a.name = self.name and a.getContainer() = self.getContainer() and a &lt;> self)->size() = 0"/>
       <details key="NameNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>

@@ -29,7 +29,7 @@ import com.bluexml.side.form.VirtualField;
 import com.bluexml.side.form.common.utils.FieldTransformation;
 import com.bluexml.side.form.common.utils.FormDiagramUtils;
 import com.bluexml.side.form.common.utils.InternalModification;
-import com.bluexml.side.form.common.utils.UIUtils;
+import com.bluexml.side.util.libs.ui.UIUtils;
 
 public class CollapseReferenceAction  extends Action implements
 ISelectionChangedListener {

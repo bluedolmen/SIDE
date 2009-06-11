@@ -761,6 +761,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		enumerationEClass.getESuperTypes().add(theCommonPackage.getNamedModelElement());
 		aspectEClass.getESuperTypes().add(this.getAbstractClass());
 		abstractClassEClass.getESuperTypes().add(this.getTitledNamedClassModelElement());
+		abstractClassEClass.getESuperTypes().add(theCommonPackage.getContainer());
 		titledNamedClassModelElementEClass.getESuperTypes().add(theCommonPackage.getNamedModelElement());
 		titledNamedClassModelElementEClass.getESuperTypes().add(this.getClassModelElement());
 		classCommentEClass.getESuperTypes().add(theCommonPackage.getComment());
