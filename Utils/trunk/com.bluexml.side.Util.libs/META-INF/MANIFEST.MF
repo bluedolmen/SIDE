@@ -11,6 +11,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.util.libs;uses:="org.eclipse.core.runtime,org.eclipse.core.resources,org.osgi.framework",
  com.bluexml.side.util.libs.md5,
+ com.bluexml.side.util.libs.ui,
  com.bluexml.side.util.libs.xml;uses:="javax.xml.transform,org.jdom",
  com.bluexml.side.util.libs.zip,
  com.thoughtworks.xstream;
