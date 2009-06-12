@@ -56,7 +56,7 @@ import com.bluexml.side.Util.ecore.EStructuralFeatureUtils;
  * TODO some information need to be stored through the merging process
  * 
  * @author Constantin Madola <a href="mailto:gmadola@bluexml.com">G�rard
- *         Constantin Madola</a> TODO those info shoulb be reported in a
+ *         Constantin Madola</a> TODO those info should be reported in a
  *         changes.xml file
  *         <p>
  *         <b>META</b>
@@ -77,7 +77,7 @@ public abstract class MergeUtils {
 	// ---------------------------------------------------------------------------------------------------------
 	// //
 	public static String DEFAULT_MERGED_MODEL_NAME = "bx_side_merged_model.obl";
-	// renaming BX_S_IDE to BXSIDE ( problem with caracter '_')
+	// renaming BX_S_IDE to BXSIDE ( problem with character '_')
 	public static final String DEFAULT_MERGED_ROOT_PACKAGE_NAME = "BXSIDE";
 	public static final String DEFAULT_MERGED_ROOT_PACKAGE_DOCUMENTATION = "This is the root package resulted from merging";
 	public static final String DEFAULT_MERGED_ROOT_PACKAGE_ATTRIBUTE_NAME = "name";
@@ -123,7 +123,19 @@ public abstract class MergeUtils {
 		// EResourceUtils.toIFile(chain.eResource().getURI().toPlatformString(true));
 		pathToMergedFile = chain.getParent().getLocation().append(DEFAULT_MERGED_MODEL_NAME).toFile().getAbsolutePath();
 		File mergedFile = new File(pathToMergedFile);
-		return merge(mergedFile, models, cl);
+		
+		/*
+		 * Brice 09-06-2009
+		 * Calls the new simplified version of merging 
+		 * (only works for package merging of MMUseCase meta-model)
+		 * Old merging procedure is kept but not called
+		 */
+		MergeNew mergeProcedure = new MergeNew(mergedFile);
+		mergeProcedure.merge(models);
+		return DEFAULT_MERGED_MODEL_NAME;
+		
+		
+		//return merge(mergedFile, models, cl);
 	}
 
 	/**
@@ -381,11 +393,11 @@ public abstract class MergeUtils {
 	 * <li>find if a similar eObject is not already present in the
 	 * elMergeResource by the same Ereference</li>
 	 * <ul>
-	 * if similar EObject is founded
+	 * if similar EObject is found
 	 * </ul>
 	 * <li>launch recursive call on the two similar EObject</li>
 	 * <ul>
-	 * else add the Eobject From the Model in the Eobejct from the mergeResource
+	 * else add the EObject From the Model in the EObject from the mergeResource
 	 * using ERef
 	 * </ul>
 	 * 
@@ -413,16 +425,16 @@ public abstract class MergeUtils {
 					int compteur = 0;
 					// >NOTE<ListIterator<EObject> IteralistResolvedModel =
 					// listResolvedModel.listIterator();
-					// Using ListIterator leads to mysterious concurent
+					// Using ListIterator leads to mysterious concurrent
 					// modification exception
 					// in fact adding an EObject in a EcontainmentElistEobject
 					// leads
-					// to the removal of the same eObject in the initila list
+					// to the removal of the same eObject in the initial list
 					int limit = listResolvedModel.size();
 					while (compteur < limit) {
 						// >!<EObject eo = IteralistResolvedModel.next();
 						EObject eo = listResolvedModel.get(compteur);
-						System.out.println(padding + "TREAT-  " + eo.eClass().getName() + ": " + EObjectUtils.eGetFromString(eo, "name"));
+						System.out.println(padding + "PROCESSING-  " + eo.eClass().getName() + ": " + EObjectUtils.eGetFromString(eo, "name"));
 						// if the current eObejct is already present in
 						// elMergeResource using the same eRef
 						if (EObjectUtils.isTargetPresentHasChildInSourceUsingERefLInk(elMergeResource, eo, eRef, cl)) {
@@ -609,7 +621,7 @@ public abstract class MergeUtils {
 	 * Method called after the merge process to resolve external links We browse
 	 * all EObject and wath if they are proxies if it is the case we attempt to
 	 * resolve them using the resourceSet used during the merging if object is
-	 * resolvable we find the similar object in the merge result and repalce it
+	 * resolvable we find the similar object in the merge result and replace it
 	 * with it otherwise the object remains an external reference
 	 * 
 	 * @throws NoSuchMethodException
@@ -631,6 +643,13 @@ public abstract class MergeUtils {
 				int walker = 0;
 				while (walker < listeEObject.size()) {
 					EObject cur = listeEObject.basicGet(walker);
+					EStructuralFeature nameFeature = cur.eClass().getEStructuralFeature("name");
+					if (nameFeature != null) {
+						Object nameObject = cur.eGet(nameFeature);
+						if (nameObject != null && nameObject.equals("offreoi")) {
+							System.out.println("trouvé !...");
+						}
+					}
 					if (cur.eIsProxy()) {
 						resolveProxyFromElist(cur, rs, mergeRoot, cl, listeEObject);
 					}
@@ -746,6 +765,9 @@ public abstract class MergeUtils {
 					if (EResourceUtils.resourceSetDoContainsUri(rs, ieo.eProxyURI())) {
 						proxy_resolved = " - Resolved -";
 						EObject resolved = EcoreUtil.resolve(eo, rs);
+						if (eo == resolved) {
+							System.err.println("Unable to resolve proxy " + eo.toString());
+						}
 						EObject copy = find(resolved, mergeRoot, cl);
 						parent.eSet(esf, copy);
 
@@ -774,25 +796,25 @@ public abstract class MergeUtils {
 	 * @throws ClassNotFoundException
 	 */
 	public static EObject find(EObject toFind, EObject root, ClassLoader cl) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
-		boolean founded = false;
+		boolean found = false;
 		EObject result = null;
 		TreeIterator<EObject> it = root.eAllContents();
-		while (it.hasNext() && !founded) {
+		while (it.hasNext() && !found) {
 			EObject current = it.next();
 			if (EObjectUtils.equalsForMerge(current, toFind, cl) && current != toFind) {
-				founded = true;
+				found = true;
 				EObject browser = toFind.eContainer();
 				EObject browser2 = current.eContainer();
-				while (browser != null && browser2 != null && founded) {
-					founded = EObjectUtils.equalsForMerge(browser, browser2, cl);
+				while (browser != null && browser2 != null && found) {
+					found = EObjectUtils.equalsForMerge(browser, browser2, cl);
 					browser = browser.eContainer();
 					browser2 = browser2.eContainer();
 				}
 				if (browser != null && browser2 == null) {
-					founded = false;
+					found = false;
 				}
 			}
-			if (founded) {
+			if (found) {
 				result = current;
 			}
 		}
