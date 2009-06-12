@@ -11,7 +11,7 @@ import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
 5
 
 <%script type="clazz.ClassPackage" name="hostname"%>
-	localhost
+localhost
 
 <%script type="clazz.ClassPackage" name="basicGenerator"  file="<%validatedFilename%>" %>
 <?xml version="1.0" encoding="iso-8859-1"?>
@@ -22,7 +22,7 @@ version="1.0">
   <xsl:param name="server">http://<%hostName()%>:8080</xsl:param>
   <xsl:param name="app">facetmap-content</xsl:param>
   <xsl:param name="app2">facetmap-facets</xsl:param>
-  <xsl:param name="nb_paging_facets"><%hostName()%></xsl:param>
+  <xsl:param name="nb_paging_facets"><%nbPagingFacets()%></xsl:param>
   
   <xsl:template match="superset">
   <div class="chosen-facets">
