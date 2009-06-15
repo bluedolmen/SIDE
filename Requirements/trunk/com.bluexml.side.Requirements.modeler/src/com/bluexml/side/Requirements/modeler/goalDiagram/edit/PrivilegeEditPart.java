@@ -3,12 +3,21 @@
  ******************************************************************************/
 package com.bluexml.side.Requirements.modeler.goalDiagram.edit;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Display;
+import org.topcased.draw2d.figures.Label;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.EMFGraphNodeEditPart;
@@ -18,6 +27,7 @@ import org.topcased.modeler.edit.policies.RestoreEditPolicy;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
+import com.bluexml.side.Requirements.modeler.RequirementsPlugin;
 import com.bluexml.side.Requirements.modeler.goalDiagram.commands.PrivilegeRestoreConnectionCommand;
 import com.bluexml.side.Requirements.modeler.goalDiagram.figures.PrivilegeFigure;
 import com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferenceConstants;
@@ -25,18 +35,20 @@ import com.bluexml.side.requirements.Attribute;
 import com.bluexml.side.requirements.Entity;
 import com.bluexml.side.requirements.Privilege;
 import com.bluexml.side.requirements.PrivilegeGroup;
+import com.bluexml.side.requirements.PrivilegeNature;
 import com.bluexml.side.requirements.RelationShip;
 
 /**
  * The Privilege object controller
- *
+ * 
  * @generated
  */
 public class PrivilegeEditPart extends EMFGraphNodeEditPart {
 	/**
 	 * Constructor
-	 *
-	 * @param obj the graph node
+	 * 
+	 * @param obj
+	 *            the graph node
 	 * @generated
 	 */
 	public PrivilegeEditPart(GraphNode obj) {
@@ -45,7 +57,7 @@ public class PrivilegeEditPart extends EMFGraphNodeEditPart {
 
 	/**
 	 * Creates edit policies and associates these with roles
-	 *
+	 * 
 	 * @generated
 	 */
 	protected void createEditPolicies() {
@@ -120,9 +132,44 @@ public class PrivilegeEditPart extends EMFGraphNodeEditPart {
 	@Override
 	protected void refreshTextAndFont() {
 		super.refreshTextAndFont();
-
 		Privilege p = (Privilege) Utils.getElement(getGraphNode());
 		getLabel().setText(createLabel(p));
+
+		if (p.getElement() instanceof Entity) {
+			FontData[] fData = Display.getDefault().getSystemFont()
+					.getFontData();
+			fData[0].setStyle(SWT.BOLD);
+			JFaceResources.getFontRegistry().put("font", fData);
+			getLabel().setFont(JFaceResources.getFontRegistry().get("font"));
+			((Label) getLabel()).setAlignment(Label.LEFT);
+
+			URL url = null;
+			Image image;
+			try {
+				url = new URL(RequirementsPlugin.getDefault().getDescriptor()
+						.getInstallURL(), "icons/EntityLittle.png");
+				image = ImageDescriptor.createFromURL(url).createImage();
+				((Label) getLabel()).setIcon(image);
+			} catch (MalformedURLException e) {
+			}
+		} else {
+			FontData[] fData = Display.getDefault().getSystemFont()
+					.getFontData();
+			fData[0].setStyle(SWT.ITALIC);
+			JFaceResources.getFontRegistry().put("font", fData);
+			getLabel().setFont(JFaceResources.getFontRegistry().get("font"));
+			((Label) getLabel()).setAlignment(Label.LEFT);
+
+			URL url = null;
+			Image image;
+			try {
+				url = new URL(RequirementsPlugin.getDefault().getDescriptor()
+						.getInstallURL(), "icons/AttributeLittle.png");
+				image = ImageDescriptor.createFromURL(url).createImage();
+				((Label) getLabel()).setIcon(image);
+			} catch (MalformedURLException e) {
+			}
+		}
 	}
 
 	private String createLabel(Privilege p) {
@@ -132,26 +179,66 @@ public class PrivilegeEditPart extends EMFGraphNodeEditPart {
 			value = e.getName();
 		} else if (p.getElement() instanceof Attribute) {
 			Attribute a = (Attribute) p.getElement();
-			value = ((Entity) a.eContainer()).getName()+"."+a.getName();
+			value = a.getName();
 		} else if (p.getElement() instanceof RelationShip) {
 			RelationShip r = (RelationShip) p.getElement();
-			value = r.getSource().getName()+"<-->"+r.getTarget().getName();
+			value = r.getSource().getName() + "<-->" + r.getTarget().getName();
 		}
-		
-		value += " (";
-		
-		int nbOfPrivileges = 0;
-		for (Privilege p2 : ((PrivilegeGroup) p.eContainer()).getPrivileges()) {
-			if (p2.getElement().equals(p.getElement())) {
-				if (nbOfPrivileges > 0)
-					value += ",";
-				value += p2.getCategory();
-				nbOfPrivileges++;
+
+		boolean findC = false, findR = false, findU = false, findD = false;
+		if (p.eContainer() != null) {
+			for (Privilege p2 : ((PrivilegeGroup) p.eContainer())
+					.getPrivileges()) {
+				if (p2.getElement() != null
+						&& p2.getElement().equals(p.getElement())) {
+					if (p2.getCategory() == PrivilegeNature.CREATE)
+						findC = true;
+					if (p2.getCategory() == PrivilegeNature.READ)
+						findR = true;
+					if (p2.getCategory() == PrivilegeNature.UPDATE)
+						findU = true;
+					if (p2.getCategory() == PrivilegeNature.DELETE)
+						findD = true;
+				}
 			}
 		}
-		
+
+		// Update the value
+		value += " (";
+		int nbOfPrivileges = 0;
+
+		// Create
+		if (findC) {
+			value += "C";
+			nbOfPrivileges++;
+		}
+
+		// Read
+		if (findR) {
+			if (nbOfPrivileges > 0)
+				value += ",";
+			value += "R";
+			nbOfPrivileges++;
+		}
+
+		// Update
+		if (findU) {
+			if (nbOfPrivileges > 0)
+				value += ",";
+			value += "U";
+			nbOfPrivileges++;
+		}
+
+		// Delete
+		if (findD) {
+			if (nbOfPrivileges > 0)
+				value += ",";
+			value += "D";
+			nbOfPrivileges++;
+		}
+
 		value += ")";
-		
+
 		return value;
 	}
 

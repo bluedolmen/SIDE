@@ -136,60 +136,6 @@ public interface ReqDiagramPreferenceConstants {
 	String ATTRIBUTE_DEFAULT_FONT = "Attribute Default Font";
 
 	/**
-	 * The key used to install a <i>PrivilegeGroup Default Background Color</i> Preference.
-	 * @generated
-	 */
-	String PRIVILEGEGROUP_DEFAULT_BACKGROUND_COLOR = "PrivilegeGroup Default Background Color";
-
-	/**
-	 * The key used to install a <i>PrivilegeGroup Default Foreground Color</i> Preference.
-	 * @generated
-	 */
-	String PRIVILEGEGROUP_DEFAULT_FOREGROUND_COLOR = "PrivilegeGroup Default Foreground Color";
-
-	/**
-	 * The key used to install a <i>PrivilegeGroup Default Font</i> Preference.
-	 * @generated
-	 */
-	String PRIVILEGEGROUP_DEFAULT_FONT = "PrivilegeGroup Default Font";
-
-	/**
-	 * The key used to install a <i>hasPrivilegeGroup Edge Default Font</i> Preference.
-	 * @generated
-	 */
-	String HASPRIVILEGEGROUP_EDGE_DEFAULT_FONT = "hasPrivilegeGroup Edge Default Font";
-
-	/**
-	 * The key used to install a <i>hasPrivilegeGroup Edge Default Foreground Color</i> Preference.
-	 * @generated
-	 */
-	String HASPRIVILEGEGROUP_EDGE_DEFAULT_FOREGROUND_COLOR = "hasPrivilegeGroup Edge Default Foreground Color";
-
-	/**
-	 * The key used to install a <i>hasPrivilegeGroup Edge Default Router</i> Preference.
-	 * @generated
-	 */
-	String HASPRIVILEGEGROUP_EDGE_DEFAULT_ROUTER = "hasPrivilegeGroup Edge Default Router";
-
-	/**
-	 * The key used to install a <i>isLinkedToEntity Edge Default Font</i> Preference.
-	 * @generated
-	 */
-	String ISLINKEDTOENTITY_EDGE_DEFAULT_FONT = "isLinkedToEntity Edge Default Font";
-
-	/**
-	 * The key used to install a <i>isLinkedToEntity Edge Default Foreground Color</i> Preference.
-	 * @generated
-	 */
-	String ISLINKEDTOENTITY_EDGE_DEFAULT_FOREGROUND_COLOR = "isLinkedToEntity Edge Default Foreground Color";
-
-	/**
-	 * The key used to install a <i>isLinkedToEntity Edge Default Router</i> Preference.
-	 * @generated
-	 */
-	String ISLINKEDTOENTITY_EDGE_DEFAULT_ROUTER = "isLinkedToEntity Edge Default Router";
-
-	/**
 	 * The key used to install a <i>Privilege Default Background Color</i> Preference.
 	 * @generated
 	 */
@@ -206,5 +152,23 @@ public interface ReqDiagramPreferenceConstants {
 	 * @generated
 	 */
 	String PRIVILEGE_DEFAULT_FONT = "Privilege Default Font";
+
+	/**
+	 * The key used to install a <i>PrivilegeGroup Edge Default Font</i> Preference.
+	 * @generated
+	 */
+	String PRIVILEGEGROUP_EDGE_DEFAULT_FONT = "PrivilegeGroup Edge Default Font";
+
+	/**
+	 * The key used to install a <i>PrivilegeGroup Edge Default Foreground Color</i> Preference.
+	 * @generated
+	 */
+	String PRIVILEGEGROUP_EDGE_DEFAULT_FOREGROUND_COLOR = "PrivilegeGroup Edge Default Foreground Color";
+
+	/**
+	 * The key used to install a <i>PrivilegeGroup Edge Default Router</i> Preference.
+	 * @generated
+	 */
+	String PRIVILEGEGROUP_EDGE_DEFAULT_ROUTER = "PrivilegeGroup Edge Default Router";
 
 }

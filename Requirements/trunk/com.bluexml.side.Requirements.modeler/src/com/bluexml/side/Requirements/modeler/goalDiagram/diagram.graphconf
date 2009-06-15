@@ -15,7 +15,7 @@
     </edge>
     <edge
         presentation="default"
-        defaultForegroundColor="0,178,10"
+        defaultForegroundColor="0,78,155"
         defaultFont="Lucida Grande-regular-11"
         defaultRouter="ObliqueRouter"
         lineWidth="10"
@@ -41,11 +41,11 @@
         minimumWidth="20"
         maximumHeight="100"
         maximumWidth="400"
-        defaultBackgroundColor="255,255,255"
+        defaultBackgroundColor="184,231,255"
         defaultForegroundColor="0,0,0"
         defaultFont="Lucida Grande-regular-11"
         lineWidth="1"
-        lineStyle="SOLID"
+        lineStyle="DASH"
         isWidthResizable="true"
         isHeightResizable="true">
         <bridge xsi:type="graphconf:EMFBridge">
@@ -125,45 +125,19 @@
         isWidthResizable="true"
         isHeightResizable="true">
         <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kerblue.org/requirements/1.0#//PrivilegeGroup"/>
-        </bridge>
-    </node>
-    <edge
-        presentation="default"
-        defaultForegroundColor="0,0,0"
-        defaultFont="Lucida Grande-regular-11"
-        defaultRouter="ObliqueRouter"
-        lineWidth="1"
-        lineStyle="SOLID">
-        <bridge xsi:type="graphconf:StringBridge" type="hasPrivilegeGroup"/>
-    </edge>
-    <edge
-        presentation="default"
-        defaultForegroundColor="0,0,0"
-        defaultFont="Lucida Grande-regular-11"
-        defaultRouter="ObliqueRouter"
-        lineWidth="1"
-        lineStyle="SOLID">
-        <bridge xsi:type="graphconf:StringBridge" type="isLinkedToEntity"/>
-    </edge>
-    <node
-        presentation="default"
-        defaultHeight="50"
-        defaultWidth="50"
-        minimumHeight="20"
-        minimumWidth="20"
-        maximumHeight="200"
-        maximumWidth="200"
-        defaultBackgroundColor="255,255,255"
-        defaultForegroundColor="0,0,0"
-        defaultFont="Lucida Grande-regular-11"
-        lineWidth="1"
-        lineStyle="SOLID"
-        isWidthResizable="true"
-        isHeightResizable="true">
-        <bridge xsi:type="graphconf:EMFBridge">
             <type href="http://www.kerblue.org/requirements/1.0#//Privilege"/>
         </bridge>
     </node>
+    <edge
+        presentation="default"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Lucida Grande-regular-11"
+        defaultRouter="ObliqueRouter"
+        lineWidth="1"
+        lineStyle="SOLID">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://www.kerblue.org/requirements/1.0#//PrivilegeGroup"/>
+        </bridge>
+    </edge>
 </graphconf:DiagramGraphConf>
 

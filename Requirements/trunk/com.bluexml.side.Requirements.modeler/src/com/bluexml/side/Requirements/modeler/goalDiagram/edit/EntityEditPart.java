@@ -35,8 +35,8 @@ import com.bluexml.side.Requirements.modeler.goalDiagram.commands.update.EntityU
 import com.bluexml.side.Requirements.modeler.goalDiagram.dialogs.EntityDialog;
 import com.bluexml.side.Requirements.modeler.goalDiagram.figures.EntityFigure;
 import com.bluexml.side.Requirements.modeler.goalDiagram.policies.EntityLayoutEditPolicy;
+import com.bluexml.side.Requirements.modeler.goalDiagram.policies.PrivilegeGroupEdgeCreationEditPolicy;
 import com.bluexml.side.Requirements.modeler.goalDiagram.policies.RelationShipEdgeCreationEditPolicy;
-import com.bluexml.side.Requirements.modeler.goalDiagram.policies.isLinkedToEntityEdgeCreationEditPolicy;
 import com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferenceConstants;
 import com.bluexml.side.requirements.Entity;
 
@@ -67,8 +67,8 @@ public class EntityEditPart extends EMFGraphNodeEditPart {
 		installEditPolicy(ReqEditPolicyConstants.RELATIONSHIP_EDITPOLICY,
 				new RelationShipEdgeCreationEditPolicy());
 
-		installEditPolicy(ReqEditPolicyConstants.ISLINKEDTOENTITY_EDITPOLICY,
-				new isLinkedToEntityEdgeCreationEditPolicy());
+		installEditPolicy(ReqEditPolicyConstants.PRIVILEGEGROUP_EDITPOLICY,
+				new PrivilegeGroupEdgeCreationEditPolicy());
 
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {

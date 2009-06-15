@@ -3,22 +3,21 @@
  ******************************************************************************/
 package com.bluexml.side.Requirements.modeler.goalDiagram.figures;
 
+import org.eclipse.draw2d.Ellipse;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.RectangleFigure;
 import org.topcased.draw2d.figures.EditableLabel;
 import org.topcased.draw2d.figures.ILabel;
-
-import com.bluexml.side.Requirements.modeler.goalDiagram.figures.ColorScaler.GreenScale;
 
 /**
  * @generated
  */
 public class GoalFigure extends
 		org.topcased.draw2d.figures.ContainerWithInnerLabel {
+	
 	/**
 	 * Constructor
-	 *
+	 * 
 	 * @generated
 	 */
 	public GoalFigure() {
@@ -27,21 +26,18 @@ public class GoalFigure extends
 
 	@Override
 	protected IFigure createBackgroundFigure() {
-		RectangleFigure fig = new RectangleFigure();
-		fig.setOpaque(false);
-		fig.setFill(false);
+		Ellipse fig = new Ellipse();
+		fig.setOpaque(true);
+		fig.setFill(true);
+		fig.setLineStyle(Graphics.LINE_DOT);
+		fig.setForegroundColor(new org.eclipse.swt.graphics.Color(null, 0, 102,
+				104));
 		return fig;
 	}
 
 	@Override
 	protected ILabel createLabel() {
 		return new EditableLabel();
-	}
-
-	@Override
-	protected void paintFigure(Graphics graphics) {
-		super.paintFigure(graphics);
-		ColorScaleUtil.paintFigure(graphics, this, new GreenScale());
 	}
 
 }

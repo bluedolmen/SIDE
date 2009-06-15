@@ -25,8 +25,6 @@ import com.bluexml.side.Requirements.modeler.goalDiagram.edit.PrivilegeEditPart;
 import com.bluexml.side.Requirements.modeler.goalDiagram.edit.PrivilegeGroupEditPart;
 import com.bluexml.side.Requirements.modeler.goalDiagram.edit.RelationShipEditPart;
 import com.bluexml.side.Requirements.modeler.goalDiagram.edit.ReqDiagramEditPart;
-import com.bluexml.side.Requirements.modeler.goalDiagram.edit.hasPrivilegeGroupEditPart;
-import com.bluexml.side.Requirements.modeler.goalDiagram.edit.isLinkedToEntityEditPart;
 import com.bluexml.side.Requirements.modeler.goalDiagram.edit.is_responsibleEditPart;
 import com.bluexml.side.Requirements.modeler.goalDiagram.edit.is_sub_goalEditPart;
 import com.bluexml.side.requirements.util.RequirementsSwitch;
@@ -80,16 +78,6 @@ public class ReqEditPartFactory extends ModelerEditPartFactory {
 						.equals(((SimpleSemanticModelElement) edge
 								.getSemanticModel()).getTypeInfo())) {
 					return new is_sub_goalEditPart(edge);
-				}
-				if (ReqSimpleObjectConstants.SIMPLE_OBJECT_HASPRIVILEGEGROUP
-						.equals(((SimpleSemanticModelElement) edge
-								.getSemanticModel()).getTypeInfo())) {
-					return new hasPrivilegeGroupEditPart(edge);
-				}
-				if (ReqSimpleObjectConstants.SIMPLE_OBJECT_ISLINKEDTOENTITY
-						.equals(((SimpleSemanticModelElement) edge
-								.getSemanticModel()).getTypeInfo())) {
-					return new isLinkedToEntityEditPart(edge);
 				}
 			}
 		}
@@ -158,23 +146,6 @@ public class ReqEditPartFactory extends ModelerEditPartFactory {
 		}
 
 		/**
-		 * @see com.bluexml.side.requirements.util.RequirementsSwitch#casePrivilegeGroup(com.bluexml.side.requirements.PrivilegeGroup)
-		 * @generated
-		 */
-		public Object casePrivilegeGroup(
-				com.bluexml.side.requirements.PrivilegeGroup object) {
-			String feature = DIUtils.getPropertyValue(node,
-					ModelerPropertyConstants.ESTRUCTURAL_FEATURE_ID);
-			if (!"".equals(feature)) {
-				int featureID = Integer.parseInt(feature);
-				return new EListEditPart(node, object.eClass()
-						.getEStructuralFeature(featureID));
-			} else {
-				return new PrivilegeGroupEditPart(node);
-			}
-		}
-
-		/**
 		 * @see com.bluexml.side.requirements.util.RequirementsSwitch#casePrivilege(com.bluexml.side.requirements.Privilege)
 		 * @generated
 		 */
@@ -219,6 +190,15 @@ public class ReqEditPartFactory extends ModelerEditPartFactory {
 		public Object caseRelationShip(
 				com.bluexml.side.requirements.RelationShip object) {
 			return new RelationShipEditPart(edge);
+		}
+
+		/**
+		 * @see com.bluexml.side.requirements.util.RequirementsSwitch#casePrivilegeGroup(com.bluexml.side.requirements.PrivilegeGroup)
+		 * @generated
+		 */
+		public Object casePrivilegeGroup(
+				com.bluexml.side.requirements.PrivilegeGroup object) {
+			return new PrivilegeGroupEditPart(edge);
 		}
 
 		/**

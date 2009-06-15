@@ -4,12 +4,11 @@
 package com.bluexml.side.Requirements.modeler.goalDiagram.edit;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.PolylineConnection;
+import org.eclipse.draw2d.PolylineDecoration;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
-import org.topcased.modeler.ModelerColorConstants;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.edit.GraphEdgeEditPart;
@@ -20,15 +19,16 @@ import com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramP
 
 /**
  * is_sub_goal controller
- *
+ * 
  * @generated
  */
 public class is_sub_goalEditPart extends GraphEdgeEditPart {
 
 	/**
 	 * Constructor
-	 *
-	 * @param model the graph object
+	 * 
+	 * @param model
+	 *            the graph object
 	 * @generated
 	 */
 	public is_sub_goalEditPart(GraphEdge model) {
@@ -63,14 +63,14 @@ public class is_sub_goalEditPart extends GraphEdgeEditPart {
 	}
 
 	/**
-	 * @param connection the PolylineConnection
+	 * @param connection
+	 *            the PolylineConnection
 	 * @generated
 	 */
 	private void createTargetDecoration(PolylineConnection connection) {
 
-		PolygonDecoration decoration = new PolygonDecoration();
-		decoration.setScale(14, 6);
-		decoration.setBackgroundColor(ModelerColorConstants.white);
+		PolylineDecoration decoration = new PolylineDecoration();
+		decoration.setScale(10, 5);
 		connection.setTargetDecoration(decoration);
 
 	}

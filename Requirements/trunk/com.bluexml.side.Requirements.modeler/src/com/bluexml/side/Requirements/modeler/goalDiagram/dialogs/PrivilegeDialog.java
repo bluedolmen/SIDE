@@ -144,7 +144,7 @@ public class PrivilegeDialog extends Dialog implements IDialogConstants {
 					deleteAccess.setEnabled(false);
 				}
 				for (Privilege p : group.getPrivileges()) {
-					if (p.getElement().equals(ti.getData())) {
+					if (p.getElement() != null && p.getElement().equals(ti.getData())) {
 						if (p.getCategory().equals(PrivilegeNature.CREATE))
 							createAccess.setSelection(true);
 						if (p.getCategory().equals(PrivilegeNature.READ))
@@ -235,7 +235,7 @@ public class PrivilegeDialog extends Dialog implements IDialogConstants {
 		boolean modified = false;
 		HashSet<Privilege> toDelete = new HashSet<Privilege>();
 		for (Privilege p : group.getPrivileges()) {
-			if (p.getCategory().equals(nature) && p.getElement().equals(elt)) {
+			if (p.getCategory().equals(nature) && p.getElement()!=null && p.getElement().equals(elt)) {
 				toDelete.add(p);
 				modified = true;
 			}
@@ -244,7 +244,7 @@ public class PrivilegeDialog extends Dialog implements IDialogConstants {
 		
 		//Refresh
 		Set<RelationShip> rs = new HashSet<RelationShip>();
-		if (modified && nature.equals(PrivilegeNature.READ)) {
+		if (modified) {
 			for (Privilege p : group.getPrivileges())
 				if (p.getCategory().equals(PrivilegeNature.READ) && p.getElement() instanceof RelationShip) {
 					RelationShip r = (RelationShip) p.getElement();

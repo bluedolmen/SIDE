@@ -3,31 +3,39 @@
  ******************************************************************************/
 package com.bluexml.side.Requirements.modeler.goalDiagram.edit;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.draw2d.PolylineDecoration;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.Image;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.edit.GraphEdgeEditPart;
 import org.topcased.modeler.utils.Utils;
 
+import com.bluexml.side.Requirements.modeler.RequirementsPlugin;
+import com.bluexml.side.Requirements.modeler.goalDiagram.edit.decoration.ImageDecoration;
 import com.bluexml.side.Requirements.modeler.goalDiagram.figures.is_responsibleFigure;
 import com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferenceConstants;
 
 /**
  * is_responsible controller
- *
+ * 
  * @generated
  */
 public class is_responsibleEditPart extends GraphEdgeEditPart {
 
 	/**
 	 * Constructor
-	 *
-	 * @param model the graph object
+	 * 
+	 * @param model
+	 *            the graph object
 	 * @generated
 	 */
 	public is_responsibleEditPart(GraphEdge model) {
@@ -62,7 +70,8 @@ public class is_responsibleEditPart extends GraphEdgeEditPart {
 	}
 
 	/**
-	 * @param connection the PolylineConnection
+	 * @param connection
+	 *            the PolylineConnection
 	 * @generated
 	 */
 	private void createTargetDecoration(PolylineConnection connection) {
@@ -112,5 +121,22 @@ public class is_responsibleEditPart extends GraphEdgeEditPart {
 			return Utils.getFont(new FontData(preferenceFont));
 		}
 		return null;
+	}
+
+	@Override
+	protected void refreshEdgeObjects() {
+		super.refreshEdgeObjects();
+
+		URL url = null;
+		Image image;
+		try {
+			url = new URL(RequirementsPlugin.getDefault().getDescriptor()
+					.getInstallURL(), "icons/ResponsibilityDecoration.png");
+			image = ImageDescriptor.createFromURL(url).createImage();
+			((PolylineConnection) figure)
+					.setTargetDecoration(new ImageDecoration(image));
+		} catch (MalformedURLException e) {
+		}
+
 	}
 }

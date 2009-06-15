@@ -13,7 +13,7 @@ public class is_sub_goalFigure extends PolylineConnectionEx {
 
 	/**
 	 * The constructor
-	 *
+	 * 
 	 * @generated
 	 */
 	public is_sub_goalFigure() {

@@ -3,44 +3,64 @@
  ******************************************************************************/
 package com.bluexml.side.Requirements.modeler.goalDiagram.figures;
 
-import org.eclipse.draw2d.CompoundBorder;
-import org.eclipse.draw2d.Figure;
-import org.eclipse.draw2d.LineBorder;
-import org.eclipse.draw2d.MarginBorder;
-import org.eclipse.draw2d.ToolbarLayout;
-import org.topcased.draw2d.figures.Label;
-
+import org.eclipse.draw2d.Locator;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
+import org.topcased.modeler.edit.locators.EdgeObjectOffsetLocator;
+import org.topcased.modeler.figures.IEdgeObjectFigure;
+import org.topcased.modeler.figures.IEdgeObjectOffsetFigure;
 
 /**
  * @generated
  */
-public class PrivilegeGroupFigure extends
-		org.topcased.draw2d.figures.ClassFigure {
+public class PrivilegeGroupFigure extends PolylineConnectionEx {
+
+	private IEdgeObjectFigure middleNameEdgeObject;
+	private Locator middleNameLocator;
+	
 
 	/**
 	 * The constructor
-	 *
+	 * 
 	 * @generated
 	 */
 	public PrivilegeGroupFigure() {
 		super();
+		setLineStyle(SWT.LINE_DASHDOTDOT);
+
+		middleNameEdgeObject = new CommentFigure(this);
+		middleNameLocator = new EdgeObjectOffsetLocator(
+				(IEdgeObjectOffsetFigure) middleNameEdgeObject);
+		add(middleNameEdgeObject, middleNameLocator);
 	}
 	
 	@Override
-	protected void drawFigure() {
+	public Color getForegroundColor() {
+		return new Color(null,72,230,89);
+	}
 
-		ToolbarLayout layout = new ToolbarLayout();
-		setLayoutManager(layout);
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the object figure
+	 * @_generated
+	 */
+	public IEdgeObjectFigure getmiddleNameEdgeObjectFigure() {
+		return middleNameEdgeObject;
+	}
 
-		setBorder(new CompoundBorder(new LineBorder(), new MarginBorder(1)));
-		setOpaque(true);
-		
-		setLabel(new Label());
-		add(getLabel());
-
-		setContentPane(new Figure());
-		getContentPane().setLayoutManager(new ToolbarLayout());
-		add(getContentPane());
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see org.topcased.modeler.figures.IGraphEdgeFigure#getLocator(org.topcased.modeler.figures.IEdgeObjectFigure)
+	 * @_generated
+	 */
+	public Locator getLocator(IEdgeObjectFigure edgeObjectfigure) {
+		if (edgeObjectfigure == middleNameEdgeObject) {
+			return middleNameLocator;
+		}
+		return null;
 	}
 
 }

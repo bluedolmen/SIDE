@@ -89,13 +89,13 @@ public class ReqConfiguration implements IConfiguration {
 						com.bluexml.side.requirements.Attribute.class),
 				AttributeEditPart.class);
 		Platform.getAdapterManager().registerAdapters(
-				new EditPart2ModelAdapterFactory(PrivilegeGroupEditPart.class,
-						com.bluexml.side.requirements.PrivilegeGroup.class),
-				PrivilegeGroupEditPart.class);
-		Platform.getAdapterManager().registerAdapters(
 				new EditPart2ModelAdapterFactory(PrivilegeEditPart.class,
 						com.bluexml.side.requirements.Privilege.class),
 				PrivilegeEditPart.class);
+		Platform.getAdapterManager().registerAdapters(
+				new EditPart2ModelAdapterFactory(PrivilegeGroupEditPart.class,
+						com.bluexml.side.requirements.PrivilegeGroup.class),
+				PrivilegeGroupEditPart.class);
 	}
 
 	/**

@@ -27,7 +27,7 @@ import com.bluexml.side.Requirements.modeler.goalDiagram.commands.GoalRestoreCon
 import com.bluexml.side.Requirements.modeler.goalDiagram.commands.update.GoalUpdateCommand;
 import com.bluexml.side.Requirements.modeler.goalDiagram.dialogs.GoalDialog;
 import com.bluexml.side.Requirements.modeler.goalDiagram.figures.GoalFigure;
-import com.bluexml.side.Requirements.modeler.goalDiagram.policies.hasPrivilegeGroupEdgeCreationEditPolicy;
+import com.bluexml.side.Requirements.modeler.goalDiagram.policies.PrivilegeGroupEdgeCreationEditPolicy;
 import com.bluexml.side.Requirements.modeler.goalDiagram.policies.is_responsibleEdgeCreationEditPolicy;
 import com.bluexml.side.Requirements.modeler.goalDiagram.policies.is_sub_goalEdgeCreationEditPolicy;
 import com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferenceConstants;
@@ -63,8 +63,8 @@ public class GoalEditPart extends EMFGraphNodeEditPart {
 		installEditPolicy(ReqEditPolicyConstants.IS_SUB_GOAL_EDITPOLICY,
 				new is_sub_goalEdgeCreationEditPolicy());
 
-		installEditPolicy(ReqEditPolicyConstants.HASPRIVILEGEGROUP_EDITPOLICY,
-				new hasPrivilegeGroupEdgeCreationEditPolicy());
+		installEditPolicy(ReqEditPolicyConstants.PRIVILEGEGROUP_EDITPOLICY,
+				new PrivilegeGroupEdgeCreationEditPolicy());
 
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {

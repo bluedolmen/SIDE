@@ -221,8 +221,8 @@ public class ReqCreationUtils extends AbstractCreationUtils {
 	 * @return the complete GraphElement
 	 * @generated
 	 */
-	protected GraphElement createGraphElementRelationShip(
-			com.bluexml.side.requirements.RelationShip element,
+	protected GraphElement createGraphElementPrivilegeGroup(
+			com.bluexml.side.requirements.PrivilegeGroup element,
 			String presentation) {
 		GraphEdge graphEdge = createGraphEdge(element, presentation);
 		return graphEdge;
@@ -232,16 +232,13 @@ public class ReqCreationUtils extends AbstractCreationUtils {
 	 * @param element the model element
 	 * @param presentation the presentation of the graphical element
 	 * @return the complete GraphElement
-	 * @_generated
+	 * @generated
 	 */
-	protected GraphElement createGraphElementPrivilegeGroup(
-			com.bluexml.side.requirements.PrivilegeGroup element,
+	protected GraphElement createGraphElementRelationShip(
+			com.bluexml.side.requirements.RelationShip element,
 			String presentation) {
-		GraphNode nodeParent = createGraphNode(element, presentation);
-		GraphNode privileges = createGraphNode(element,
-				RequirementsPackage.PRIVILEGE_GROUP__PRIVILEGES, presentation);
-		privileges.setContainer(nodeParent);
-		return nodeParent;
+		GraphEdge graphEdge = createGraphEdge(element, presentation);
+		return graphEdge;
 	}
 
 	/**

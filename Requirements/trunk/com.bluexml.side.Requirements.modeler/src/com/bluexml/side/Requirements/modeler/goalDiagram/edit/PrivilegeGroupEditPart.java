@@ -3,46 +3,39 @@
  ******************************************************************************/
 package com.bluexml.side.Requirements.modeler.goalDiagram.edit;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.RequestConstants;
-import org.eclipse.gef.commands.Command;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DecorationEditPolicy;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
-import org.eclipse.ui.IDecoratorManager;
-import org.topcased.draw2d.figures.ILabel;
+import org.eclipse.swt.graphics.Image;
 import org.topcased.modeler.ModelerEditPolicyConstants;
-import org.topcased.modeler.di.model.DiagramElement;
-import org.topcased.modeler.di.model.GraphElement;
-import org.topcased.modeler.di.model.GraphNode;
-import org.topcased.modeler.edit.EMFGraphNodeEditPart;
-import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
-import org.topcased.modeler.edit.policies.ResizableEditPolicy;
-import org.topcased.modeler.edit.policies.RestoreEditPolicy;
+import org.topcased.modeler.di.model.GraphEdge;
+import org.topcased.modeler.edit.EMFGraphEdgeEditPart;
 import org.topcased.modeler.internal.ModelerPlugin;
-import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
-import com.bluexml.side.Requirements.modeler.goalDiagram.ReqConfiguration;
-import com.bluexml.side.Requirements.modeler.goalDiagram.ReqEditPolicyConstants;
-import com.bluexml.side.Requirements.modeler.goalDiagram.commands.PrivilegeGroupRestoreConnectionCommand;
+import com.bluexml.side.Requirements.modeler.RequirementsPlugin;
 import com.bluexml.side.Requirements.modeler.goalDiagram.commands.update.PrivilegeNullUpdateCommand;
 import com.bluexml.side.Requirements.modeler.goalDiagram.dialogs.PrivilegeDialog;
+import com.bluexml.side.Requirements.modeler.goalDiagram.edit.decoration.ImageDecoration;
+import com.bluexml.side.Requirements.modeler.goalDiagram.figures.CommentFigure;
 import com.bluexml.side.Requirements.modeler.goalDiagram.figures.PrivilegeGroupFigure;
-import com.bluexml.side.Requirements.modeler.goalDiagram.policies.hasPrivilegeGroupEdgeCreationEditPolicy;
-import com.bluexml.side.Requirements.modeler.goalDiagram.policies.isLinkedToEntityEdgeCreationEditPolicy;
 import com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferenceConstants;
 import com.bluexml.side.requirements.BasicElement;
 import com.bluexml.side.requirements.Entity;
@@ -54,17 +47,17 @@ import com.bluexml.side.requirements.PrivilegeGroup;
  * 
  * @generated
  */
-public class PrivilegeGroupEditPart extends EMFGraphNodeEditPart {
+public class PrivilegeGroupEditPart extends EMFGraphEdgeEditPart {
 
 	/**
 	 * Constructor
 	 * 
-	 * @param obj
-	 *            the graph node
+	 * @param model
+	 *            the graph object
 	 * @generated
 	 */
-	public PrivilegeGroupEditPart(GraphNode obj) {
-		super(obj);
+	public PrivilegeGroupEditPart(GraphEdge model) {
+		super(model);
 	}
 
 	/**
@@ -74,72 +67,29 @@ public class PrivilegeGroupEditPart extends EMFGraphNodeEditPart {
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(ReqEditPolicyConstants.HASPRIVILEGEGROUP_EDITPOLICY,
-				new hasPrivilegeGroupEdgeCreationEditPolicy());
+		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FONT_EDITPOLICY,
+				null);
 
-		installEditPolicy(ReqEditPolicyConstants.ISLINKEDTOENTITY_EDITPOLICY,
-				new isLinkedToEntityEdgeCreationEditPolicy());
-
-		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
-				new RestoreEditPolicy() {
-					protected Command getRestoreConnectionsCommand(
-							RestoreConnectionsRequest request) {
-						return new PrivilegeGroupRestoreConnectionCommand(
-								getHost());
-					}
-				});
-
-		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY,
-				new ResizableEditPolicy());
-
-		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
-				new LabelDirectEditPolicy());
-		
 	}
 
 	/**
-	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
-	 * @_generated
-	 */
-	protected IFigure createFigure() {
-		PrivilegeGroup pGroup = (PrivilegeGroup) Utils
-				.getElement(getGraphNode());
-
-		Map<BasicElement, Set<Privilege>> s = filterPrivileges(pGroup.getPrivileges());
-		
-		ReqConfiguration config = new ReqConfiguration();
-		if (getGraphNode().getContained().size() > 0) {
-			GraphNode privilegesListNode = (GraphNode) getGraphNode().getContained().get(0);
-			EList<DiagramElement> privilegesList = privilegesListNode
-					.getContained();
-			while (privilegesList.size() > 0)
-				privilegesList.remove(0);
-			for (BasicElement elt : s.keySet()) {
-				Set<Privilege> privileges = s.get(elt);
-				
-				GraphElement graphElt = config.getCreationUtils()
-						.createGraphElement((EObject) privileges.toArray()[0]);
-				if (elt != null)
-					privilegesList.add(graphElt);
-			}
-		}
-
-		IFigure result = new PrivilegeGroupFigure();
-		return result;
-	}
-
-	/**
-	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getPreferenceDefaultBackgroundColor()
+	 * @return the Figure
 	 * @generated
 	 */
-	protected Color getPreferenceDefaultBackgroundColor() {
-		String backgroundColor = getPreferenceStore()
+	protected IFigure createFigure() {
+		PrivilegeGroupFigure connection = new PrivilegeGroupFigure();
+		return connection;
+	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#getPreferenceDefaultRouter()
+	 * 
+	 * @generated
+	 */
+	protected String getPreferenceDefaultRouter() {
+		return getPreferenceStore()
 				.getString(
-						ReqDiagramPreferenceConstants.PRIVILEGEGROUP_DEFAULT_BACKGROUND_COLOR);
-		if (backgroundColor.length() != 0) {
-			return Utils.getColor(backgroundColor);
-		}
-		return null;
+						ReqDiagramPreferenceConstants.PRIVILEGEGROUP_EDGE_DEFAULT_ROUTER);
 	}
 
 	/**
@@ -148,13 +98,14 @@ public class PrivilegeGroupEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected Color getPreferenceDefaultForegroundColor() {
-		String foregroundColor = getPreferenceStore()
+		String preferenceForeground = getPreferenceStore()
 				.getString(
-						ReqDiagramPreferenceConstants.PRIVILEGEGROUP_DEFAULT_FOREGROUND_COLOR);
-		if (foregroundColor.length() != 0) {
-			return Utils.getColor(foregroundColor);
+						ReqDiagramPreferenceConstants.PRIVILEGEGROUP_EDGE_DEFAULT_FOREGROUND_COLOR);
+		if (preferenceForeground.length() != 0) {
+			return Utils.getColor(preferenceForeground);
 		}
 		return null;
+
 	}
 
 	/**
@@ -164,17 +115,16 @@ public class PrivilegeGroupEditPart extends EMFGraphNodeEditPart {
 	 */
 	protected Font getPreferenceDefaultFont() {
 		String preferenceFont = getPreferenceStore().getString(
-				ReqDiagramPreferenceConstants.PRIVILEGEGROUP_DEFAULT_FONT);
+				ReqDiagramPreferenceConstants.PRIVILEGEGROUP_EDGE_DEFAULT_FONT);
 		if (preferenceFont.length() != 0) {
 			return Utils.getFont(new FontData(preferenceFont));
 		}
 		return null;
-
 	}
 
 	@Override
 	public void performRequest(Request request) {
-		PrivilegeGroup g = (PrivilegeGroup) Utils.getElement(getGraphNode());
+		PrivilegeGroup g = (PrivilegeGroup) Utils.getElement(getGraphEdge());
 
 		if (request.getType() == RequestConstants.REQ_OPEN) {
 			if (g.getEntryPoint() != null) {
@@ -195,55 +145,89 @@ public class PrivilegeGroupEditPart extends EMFGraphNodeEditPart {
 	}
 
 	@Override
-	protected void refreshChildren() {
-		super.refreshChildren();
+	protected void refreshEdgeObjects() {
+		super.refreshEdgeObjects();
 
 		PrivilegeGroup pGroup = (PrivilegeGroup) Utils
-				.getElement(getGraphNode());
+				.getElement(getGraphEdge());
 
-		Map<BasicElement, Set<Privilege>> s = filterPrivileges(pGroup.getPrivileges());
-		s = sortPrivileges(s);
-		
-		ReqConfiguration config = new ReqConfiguration();
-		if (getGraphNode().getContained().size() > 0) {
-			GraphNode privilegesListNode = (GraphNode) getGraphNode().getContained().get(0);
-			EList<DiagramElement> privilegesList = privilegesListNode
-					.getContained();
-			while (privilegesList.size() > 0)
-				privilegesList.remove(0);
-			for (BasicElement elt : s.keySet()) {
-				Set<Privilege> privileges = s.get(elt);
-				
-				GraphElement graphElt = config.getCreationUtils()
-						.createGraphElement((EObject) privileges.toArray()[0]);
-				if (elt != null)
-					privilegesList.add(graphElt);
+		Map<BasicElement, Set<Privilege>> s = filterPrivileges(pGroup
+				.getPrivileges());
+		List<BasicElement> keys = sortPrivileges(s.keySet());
+
+		String value = "";
+		char c = '\r';
+		for (BasicElement elt : keys) {
+			if (elt != null) {
+				value += c + elt.getName();
 			}
+		}
+		
+		String val = value;
+        for (int i = 0; i < val.length(); ++i) {
+        	System.out.println(i+" : "+val.charAt(i)+ " : "+val.codePointAt(i));
+        }
+		
+		PrivilegeGroupFigure fig = (PrivilegeGroupFigure) getFigure();
+		CommentFigure lbl = (CommentFigure) fig.getmiddleNameEdgeObjectFigure();
+		lbl.setText(value);
+		
+		//Set decoration
+		
+		URL url = null;
+		Image image;
+		try {
+			url = new URL(RequirementsPlugin.getDefault().getDescriptor()
+					.getInstallURL(), "icons/StrategyDecoration_Entity.png");
+			image = ImageDescriptor.createFromURL(url).createImage();
+			((PolylineConnection) figure)
+					.setTargetDecoration(new ImageDecoration(image));
+			
+			url = new URL(RequirementsPlugin.getDefault().getDescriptor()
+					.getInstallURL(), "icons/StrategyDecoration_Goal.png");
+			image = ImageDescriptor.createFromURL(url).createImage();
+			((PolylineConnection) figure)
+					.setSourceDecoration(new ImageDecoration(image));
+		} catch (MalformedURLException e) {
 		}
 	}
 
-	private Map<BasicElement, Set<Privilege>> sortPrivileges(
-			Map<BasicElement, Set<Privilege>> s) {
-		Map<BasicElement, Set<Privilege>> result = new HashMap<BasicElement, Set<Privilege>>();
-		for (BasicElement elt : s.keySet()) {
-			if (elt instanceof Entity) {
-				result.put(elt, s.get(elt));
+	private List<BasicElement> sortPrivileges(Set<BasicElement> set) {
+		List<BasicElement> result = new ArrayList<BasicElement>();
 
-				for (BasicElement elt2 : s.keySet()) {
-					if (elt2.eContainer().equals(elt))
-						result.put(elt2, s.get(elt2));
+		// List all entities
+		for (BasicElement elt : set) {
+			if (elt instanceof Entity) {
+				result.add(elt);
+				System.out.println(elt);
+			}
+		}
+
+		//List all attributes
+		int i = 0;
+		List<BasicElement> tmpList = new ArrayList<BasicElement>(result); 
+		for (BasicElement entity : tmpList) {
+			i++;
+			for (BasicElement elt : set) {
+				System.out.println("$$"+elt);
+				if (elt != null && elt.eContainer() != null && elt.eContainer().equals(entity)) {
+					result.add(i,elt);
+					System.out.println(elt);
+					i++;
 				}
 			}
-			
 		}
 
-		for (BasicElement elt : s.keySet()) {
-			if (!result.containsKey(elt))
-				result.put(elt, s.get(elt));
+		for (BasicElement elt : set) {
+			if (!result.contains(elt)) {
+				result.add(elt);
+			}
 		}
+
 		return result;
 	}
 
+	// Classify all privileges by model elements
 	private Map<BasicElement, Set<Privilege>> filterPrivileges(
 			EList<Privilege> privileges) {
 		Map<BasicElement, Set<Privilege>> result = new HashMap<BasicElement, Set<Privilege>>();
@@ -257,14 +241,8 @@ public class PrivilegeGroupEditPart extends EMFGraphNodeEditPart {
 				result.put(p.getElement(), s);
 			}
 		}
-		
+
 		return result;
 	}
-
-	@Override
-	protected void refreshTextAndFont() {
-		ILabel lab = getLabel();
-		if (lab != null)
-			lab.setText("Strategy");
-	}
+	
 }

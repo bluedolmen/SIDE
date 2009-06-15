@@ -21,14 +21,4 @@ public interface ReqSimpleObjectConstants {
 	 * @generated
 	 */
 	String SIMPLE_OBJECT_IS_RESPONSIBLE = "is_responsible";
-	/**
-	 * The name that identify the <i>hasPrivilegeGroup</i> SimpleObject.
-	 * @generated
-	 */
-	String SIMPLE_OBJECT_HASPRIVILEGEGROUP = "hasPrivilegeGroup";
-	/**
-	 * The name that identify the <i>isLinkedToEntity</i> SimpleObject.
-	 * @generated
-	 */
-	String SIMPLE_OBJECT_ISLINKEDTOENTITY = "isLinkedToEntity";
 }
