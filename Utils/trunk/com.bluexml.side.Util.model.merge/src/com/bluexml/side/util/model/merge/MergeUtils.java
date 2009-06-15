@@ -58,7 +58,8 @@ import com.bluexml.side.Util.ecore.EStructuralFeatureUtils;
  * @author Constantin Madola <a href="mailto:gmadola@bluexml.com">G�rard
  *         Constantin Madola</a> TODO those info should be reported in a
  *         changes.xml file
- *         <p>
+ *         <p>				}
+
  *         <b>META</b>
  *         </p>
  *         <li>Last modification date :</li> <li>Last modification user :</li>
@@ -130,7 +131,7 @@ public abstract class MergeUtils {
 		 * (only works for package merging of MMUseCase meta-model)
 		 * Old merging procedure is kept but not called
 		 */
-		MergeNew mergeProcedure = new MergeNew(mergedFile);
+		MergeMMUseCase mergeProcedure = new MergeMMUseCase(mergedFile);
 		mergeProcedure.merge(models);
 		return DEFAULT_MERGED_MODEL_NAME;
 		
