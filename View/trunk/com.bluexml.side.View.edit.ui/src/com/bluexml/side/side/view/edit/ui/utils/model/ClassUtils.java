@@ -1,4 +1,4 @@
-package com.bluexml.side.side.view.edit.ui.utils;
+package com.bluexml.side.side.view.edit.ui.utils.model;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,12 +30,6 @@ public class ClassUtils {
 				} else {
 				// Char Field
 					field = ViewFactory.eINSTANCE.createTextField();
-					if (metaInfoMap.containsKey("max-length") && metaInfoMap.get("max-length") != null) {
-						
-					}
-					if (metaInfoMap.containsKey("min-length") && metaInfoMap.get("min-length") != null) {
-						
-					}
 				}
 			// Date Time Field
 			} else if (att.getTyp().equals(DataType.DATE_TIME)) {
@@ -67,6 +61,10 @@ public class ClassUtils {
 			} else {
 				EcorePlugin.INSTANCE.log("No field available for " + att.getTyp());
 			}
+			
+			field.setName(att.getLabel());
+			field.setMapTo(att);
+			
 		}
 		return field;
 	}

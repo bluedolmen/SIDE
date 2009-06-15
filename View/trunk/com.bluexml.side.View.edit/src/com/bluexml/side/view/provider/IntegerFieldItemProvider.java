@@ -76,14 +76,14 @@ public class IntegerFieldItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((IntegerField)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_IntegerField_type") :
-			getString("_UI_IntegerField_type") + " " + label;
+			label;
 	}
 
 	/**

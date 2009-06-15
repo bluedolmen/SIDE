@@ -284,18 +284,15 @@ public class AbstractDataTableItemProvider
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__TAGS);
-			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS);
-			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__METAINFO);
-			childrenFeatures.add(ViewPackage.Literals.STYLABLE__STYLING);
 			childrenFeatures.add(ViewPackage.Literals.FIELD_GROUP__CHILDREN);
 			childrenFeatures.add(ViewPackage.Literals.FIELD_GROUP__DISABLED);
+			childrenFeatures.add(ViewPackage.Literals.STYLABLE__STYLING);
 			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS);
 			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW);
 			childrenFeatures.add(ViewPackage.Literals.PAGINABLE__PAGING);

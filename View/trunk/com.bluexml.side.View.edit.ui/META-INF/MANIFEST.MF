@@ -17,4 +17,5 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.side.view.edit.ui,
  com.bluexml.side.side.view.edit.ui.actions,
- com.bluexml.side.side.view.edit.ui.utils
+ com.bluexml.side.side.view.edit.ui.utils,
+ com.bluexml.side.side.view.edit.ui.utils.model

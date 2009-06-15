@@ -7,24 +7,20 @@
 package com.bluexml.side.view.provider;
 
 
-import com.bluexml.side.common.CommonFactory;
-
-import com.bluexml.side.common.provider.NamedModelElementItemProvider;
-
-import com.bluexml.side.view.AbstractView;
-import com.bluexml.side.view.ViewFactory;
-import com.bluexml.side.view.ViewPackage;
-
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.edit.command.AddCommand;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -34,6 +30,16 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
+import com.bluexml.side.common.CommonFactory;
+import com.bluexml.side.common.provider.NamedModelElementItemProvider;
+import com.bluexml.side.side.view.edit.ui.utils.InternalModification;
+import com.bluexml.side.side.view.edit.ui.utils.model.ViewUtils;
+import com.bluexml.side.view.AbstractView;
+import com.bluexml.side.view.Field;
+import com.bluexml.side.view.FieldGroup;
+import com.bluexml.side.view.ViewFactory;
+import com.bluexml.side.view.ViewPackage;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.view.AbstractView} object.
@@ -195,15 +201,14 @@ public class AbstractViewItemProvider
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ViewPackage.Literals.STYLABLE__STYLING);
 			childrenFeatures.add(ViewPackage.Literals.FIELD_GROUP__CHILDREN);
-			childrenFeatures.add(ViewPackage.Literals.FIELD_GROUP__DISABLED);
+			childrenFeatures.add(ViewPackage.Literals.STYLABLE__STYLING);
 			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS);
 			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW);
 		}
@@ -556,6 +561,32 @@ public class AbstractViewItemProvider
 	@Override
 	public ResourceLocator getResourceLocator() {
 		return ViewEditPlugin.INSTANCE;
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public Command createRemoveCommand(EditingDomain domain, EObject owner, EReference feature, Collection<?> collection) {
+		CompoundCommand cmd = new CompoundCommand();
+		// First we check if we synchronize
+		if (InternalModification.getMoveToDisabled()) {
+			for (Object o : collection) {
+				if (o instanceof FieldGroup) {
+						FieldGroup fg = (FieldGroup) EcoreUtil.copy((FieldGroup)o);
+						Command createCmd = AddCommand.create(domain, ViewUtils.getViewForElement(owner), ViewPackage.eINSTANCE.getFieldGroup_Disabled(), fg);
+						cmd.append(createCmd);
+					
+				} else if (o instanceof Field) {
+					Field f = (Field) o;
+					Field fcpy = (Field) EcoreUtil.copy(f);
+					Command createCmd = AddCommand.create(domain, ViewUtils.getViewForElement(owner), ViewPackage.eINSTANCE.getFieldGroup_Disabled(), fcpy);
+					cmd.append(createCmd);
+				} else {
+					
+				}
+			}
+		}
+		cmd.append(super.createRemoveCommand(domain, owner, feature, collection));
+		return cmd;
 	}
 
 }
