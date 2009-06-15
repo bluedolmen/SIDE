@@ -5,7 +5,7 @@ import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
 %>
 
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
-	./facets/facetmap/xsl/display/Rightnav.xsl
+	./facets/facetmap/WEB-INF/xsl/display/Rightnav.xsl
 	
 <%script type="clazz.ClassPackage" name="hideFacets"%>
 <a>

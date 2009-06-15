@@ -18,8 +18,6 @@ package com.bluexml.side.clazz.generator.facetmap.utils;
 
 import java.io.File;
 
-
-
 /**
  * @author pbertrand
  *

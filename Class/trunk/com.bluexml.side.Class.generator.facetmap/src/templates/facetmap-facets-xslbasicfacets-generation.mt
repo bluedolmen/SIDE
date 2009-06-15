@@ -5,7 +5,7 @@ import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
 %>
 
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
-	./facets/facetmap/xsl/display/includes/basic-Facets.xsl
+	./facets/facetmap/WEB-INF/xsl/display/includes/basic-Facets.xsl
 
 <%script type="clazz.ClassPackage" name="nbPagingFacets"%>
 5
