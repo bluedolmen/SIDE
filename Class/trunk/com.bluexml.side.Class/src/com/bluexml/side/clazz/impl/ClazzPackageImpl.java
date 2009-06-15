@@ -1104,7 +1104,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		  (titledNamedClassModelElementEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
-			 "body", "if self.title.oclIsUndefined() or self.title.size() <0 then\r\tself.name\relse\r\tself.title\rendif"
+			 "body", "if self.title.oclIsUndefined() or self.title.size() = 0 then\r self.name \relse\r self.title \rendif"
 		   });
 	}
 
