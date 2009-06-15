@@ -168,7 +168,7 @@ public class ReqDiagramTopcasedPreferenceInitializer implements
 		defaultReqPreference
 				.put(
 						ReqDiagramPreferenceConstants.PRIVILEGEGROUP_EDGE_DEFAULT_FOREGROUND_COLOR,
-						"0,0,0");
+						"72,230,89");
 
 		// Initialize the default value of the PRIVILEGEGROUP_EDGE_DEFAULT_ROUTER property
 		defaultReqPreference

@@ -41,6 +41,7 @@ import com.bluexml.side.requirements.BasicElement;
 import com.bluexml.side.requirements.Entity;
 import com.bluexml.side.requirements.Privilege;
 import com.bluexml.side.requirements.PrivilegeGroup;
+import com.bluexml.side.requirements.PrivilegeNature;
 
 /**
  * PrivilegeGroup controller
@@ -78,6 +79,7 @@ public class PrivilegeGroupEditPart extends EMFGraphEdgeEditPart {
 	 */
 	protected IFigure createFigure() {
 		PrivilegeGroupFigure connection = new PrivilegeGroupFigure();
+
 		return connection;
 	}
 
@@ -156,24 +158,65 @@ public class PrivilegeGroupEditPart extends EMFGraphEdgeEditPart {
 		List<BasicElement> keys = sortPrivileges(s.keySet());
 
 		String value = "";
-		char c = '\r';
+		char nl = '\r';
 		for (BasicElement elt : keys) {
 			if (elt != null) {
-				value += c + elt.getName();
+				value += nl;
+				String label = elt.getName();
+				if (!(elt instanceof Entity))
+					value += "   ";
+				value += label + " (";
+
+				Set<Privilege> ps = s.get(elt);
+				boolean[] rules = {false, false, false, false};
+				for (Privilege p : ps) {
+					if (p.getCategory().equals(PrivilegeNature.CREATE))
+						rules[0] = true;
+					if (p.getCategory().equals(PrivilegeNature.READ))
+						rules[1] = true;
+					if (p.getCategory().equals(PrivilegeNature.UPDATE))
+						rules[2] = true;
+					if (p.getCategory().equals(PrivilegeNature.DELETE))
+						rules[3] = true;
+				}
+				
+				int begin,end;
+				if (elt instanceof Entity) {
+					begin = 0;
+					end = 3;
+				} else {
+					begin = 1;
+					end = 2;
+				}
+				
+				for (int i=begin;i<=end;++i) {
+					switch (i) {
+					case 0:
+						value += "C";
+						break;
+					case 1:
+						value += "R";
+						break;
+					case 2:
+						value += "U";
+						break;
+					case 3:
+						value += "D";
+						break;
+					default:
+						break;
+					}
+				}
+				value+=")";
 			}
 		}
-		
-		String val = value;
-        for (int i = 0; i < val.length(); ++i) {
-        	System.out.println(i+" : "+val.charAt(i)+ " : "+val.codePointAt(i));
-        }
-		
+
 		PrivilegeGroupFigure fig = (PrivilegeGroupFigure) getFigure();
 		CommentFigure lbl = (CommentFigure) fig.getmiddleNameEdgeObjectFigure();
 		lbl.setText(value);
-		
+
 		//Set decoration
-		
+
 		URL url = null;
 		Image image;
 		try {
@@ -182,7 +225,7 @@ public class PrivilegeGroupEditPart extends EMFGraphEdgeEditPart {
 			image = ImageDescriptor.createFromURL(url).createImage();
 			((PolylineConnection) figure)
 					.setTargetDecoration(new ImageDecoration(image));
-			
+
 			url = new URL(RequirementsPlugin.getDefault().getDescriptor()
 					.getInstallURL(), "icons/StrategyDecoration_Goal.png");
 			image = ImageDescriptor.createFromURL(url).createImage();
@@ -199,20 +242,18 @@ public class PrivilegeGroupEditPart extends EMFGraphEdgeEditPart {
 		for (BasicElement elt : set) {
 			if (elt instanceof Entity) {
 				result.add(elt);
-				System.out.println(elt);
 			}
 		}
 
 		//List all attributes
 		int i = 0;
-		List<BasicElement> tmpList = new ArrayList<BasicElement>(result); 
+		List<BasicElement> tmpList = new ArrayList<BasicElement>(result);
 		for (BasicElement entity : tmpList) {
 			i++;
 			for (BasicElement elt : set) {
-				System.out.println("$$"+elt);
-				if (elt != null && elt.eContainer() != null && elt.eContainer().equals(entity)) {
-					result.add(i,elt);
-					System.out.println(elt);
+				if (elt != null && elt.eContainer() != null
+						&& elt.eContainer().equals(entity)) {
+					result.add(i, elt);
 					i++;
 				}
 			}
@@ -244,5 +285,5 @@ public class PrivilegeGroupEditPart extends EMFGraphEdgeEditPart {
 
 		return result;
 	}
-	
+
 }

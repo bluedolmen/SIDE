@@ -14,7 +14,7 @@ import org.topcased.draw2d.figures.ILabel;
  */
 public class GoalFigure extends
 		org.topcased.draw2d.figures.ContainerWithInnerLabel {
-	
+
 	/**
 	 * Constructor
 	 * 

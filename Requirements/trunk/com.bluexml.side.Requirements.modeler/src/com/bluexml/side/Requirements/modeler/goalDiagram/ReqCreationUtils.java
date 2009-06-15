@@ -127,6 +127,9 @@ public class ReqCreationUtils extends AbstractCreationUtils {
 			if ("default".equals(presentation)) {
 				return createGraphElementPrivilegeGroup(object, presentation);
 			}
+			if ("default".equals(presentation)) {
+				return createGraphElementPrivilegeGroup(object, presentation);
+			}
 			return null;
 		}
 

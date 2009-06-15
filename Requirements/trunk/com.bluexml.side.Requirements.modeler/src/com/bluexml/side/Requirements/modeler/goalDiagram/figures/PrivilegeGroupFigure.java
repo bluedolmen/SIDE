@@ -18,16 +18,15 @@ public class PrivilegeGroupFigure extends PolylineConnectionEx {
 
 	private IEdgeObjectFigure middleNameEdgeObject;
 	private Locator middleNameLocator;
-	
 
 	/**
 	 * The constructor
 	 * 
-	 * @generated
+	 * @_generated
 	 */
 	public PrivilegeGroupFigure() {
 		super();
-		setLineStyle(SWT.LINE_DASHDOTDOT);
+		setLineStyle(SWT.LINE_DASHDOT);
 
 		middleNameEdgeObject = new CommentFigure(this);
 		middleNameLocator = new EdgeObjectOffsetLocator(

@@ -72,19 +72,27 @@ public class CommentFigure extends org.topcased.draw2d.figures.CommentFigure
 
         // fill the note
         PointList outline = new PointList();
-        outline.addPoint(0, 8);
-        outline.addPoint(rect.width - 21, 9);
-        outline.addPoint(rect.width - 21, 0);
-        outline.addPoint(rect.width - 1, 0);
-        outline.addPoint(rect.width - 1, 20);
-        outline.addPoint(rect.width - 10, 20);
-        outline.addPoint(rect.width - 10, rect.height - 1);
-        outline.addPoint(0, rect.height - 1);
+        if (rect.width <= 30 || rect.height <= 30) {
+        	outline.addPoint(0, 0);
+        	outline.addPoint(rect.width-1, 0);
+        	outline.addPoint(rect.width-1, rect.height-1);
+        	outline.addPoint(0, rect.height-1);
+        } else {
+        	outline.addPoint(0, 8);
+        	outline.addPoint(rect.width - 21, 9);
+        	outline.addPoint(rect.width - 21, 0);
+        	outline.addPoint(rect.width - 1, 0);
+        	outline.addPoint(rect.width - 1, 20);
+        	outline.addPoint(rect.width - 10, 20);
+        	outline.addPoint(rect.width - 10, rect.height - 1);
+        	outline.addPoint(0, rect.height - 1);
+        }
         graphics.fillPolygon(outline);
         
         Point p = new Point(rect.width-18,2);
         
-        graphics.drawImage(new Image(null, CommentFigure.class
+        if (rect.width > 16 && rect.height > 16)
+        	graphics.drawImage(new Image(null, CommentFigure.class
 				.getResourceAsStream("img/strategy.png")), p);
 
         graphics.drawPolygon(outline);

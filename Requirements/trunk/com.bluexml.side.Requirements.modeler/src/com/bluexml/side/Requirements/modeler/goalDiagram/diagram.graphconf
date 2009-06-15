@@ -130,11 +130,11 @@
     </node>
     <edge
         presentation="default"
-        defaultForegroundColor="0,0,0"
+        defaultForegroundColor="72,230,89"
         defaultFont="Lucida Grande-regular-11"
         defaultRouter="ObliqueRouter"
         lineWidth="1"
-        lineStyle="SOLID">
+        lineStyle="DASHDOT">
         <bridge xsi:type="graphconf:EMFBridge">
             <type href="http://www.kerblue.org/requirements/1.0#//PrivilegeGroup"/>
         </bridge>
