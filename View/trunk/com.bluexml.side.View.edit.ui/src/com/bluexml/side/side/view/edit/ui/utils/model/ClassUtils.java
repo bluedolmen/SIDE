@@ -61,9 +61,10 @@ public class ClassUtils {
 			} else {
 				EcorePlugin.INSTANCE.log("No field available for " + att.getTyp());
 			}
-			
-			field.setName(att.getLabel());
-			field.setMapTo(att);
+			if (field != null) {
+				field.setName(att.getLabel());
+				field.setMapTo(att);
+			}
 			
 		}
 		return field;
