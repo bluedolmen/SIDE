@@ -2,7 +2,7 @@
 <feature
       id="com.bluexml.side.Util"
       label="S-IDE Utils"
-      version="1.0.11"
+      version="1.0.12"
       provider-name="BLUEXML">
 
    <description url="CRM.obl CRM.obldi">
@@ -23,6 +23,9 @@
       <import plugin="org.eclipse.ocl"/>
       <import plugin="org.eclipse.ocl.ecore"/>
       <import plugin="org.eclipse.emf.common"/>
+      <import plugin="com.bluexml.side.Util.ecore" version="1.0.1" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.model.merge" version="1.0.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.swt"/>
    </requires>
 
    <plugin
@@ -43,13 +46,13 @@
          id="com.bluexml.side.Util.model.merge"
          download-size="0"
          install-size="0"
-         version="1.0.11"
+         version="1.0.12"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Util.libs"
          download-size="0"
          install-size="0"
-         version="1.0.11"/>
+         version="1.0.12"/>
 
 </feature>
