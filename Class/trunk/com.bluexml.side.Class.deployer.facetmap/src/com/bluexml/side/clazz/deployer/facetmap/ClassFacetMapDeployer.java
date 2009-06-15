@@ -100,8 +100,8 @@ public class ClassFacetMapDeployer extends Deployer implements FacetmapConstants
 		//FacetsFiles
 		String genpathfacets = fileToDeploy.getPath() + FILESEP + facets;
 		File buildProperties = new File(genpathfacets + facetmap + webinf + buildProperties_filename);
-		File basicFacets = new File(genpathfacets + facetmap + webinf + xsl + display + includes + basicFacets_filename);
-		File rightnav = new File(genpathfacets + facetmap + webinf + xsl + display + rightnav_properties_filename);
+		File basicFacets = new File(genpathfacets + facetmap + xsl + display + includes + basicFacets_filename);
+		File rightnav = new File(genpathfacets + facetmap + xsl + display + rightnav_properties_filename);
 		facetsDeployedFiles.add(buildProperties);
 		facetsDeployedFiles.add(basicFacets);
 		facetsDeployedFiles.add(rightnav);
