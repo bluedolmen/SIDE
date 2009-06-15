@@ -7,7 +7,6 @@
 package com.bluexml.side.requirements.provider;
 
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
 
 /**

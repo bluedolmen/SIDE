@@ -7,15 +7,11 @@
 package com.bluexml.side.requirements.provider;
 
 
-import com.bluexml.side.requirements.BasicElement;
-import com.bluexml.side.requirements.RequirementsPackage;
-
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -25,6 +21,9 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
+import com.bluexml.side.requirements.BasicElement;
+import com.bluexml.side.requirements.RequirementsPackage;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.requirements.BasicElement} object.
@@ -82,7 +81,7 @@ public class BasicElementItemProvider
 				 getString("_UI_PropertyDescriptor_description", "_UI_BasicElement_name_feature", "_UI_BasicElement_type"),
 				 RequirementsPackage.Literals.BASIC_ELEMENT__NAME,
 				 true,
-				 false,
+				 true,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
@@ -104,7 +103,7 @@ public class BasicElementItemProvider
 				 getString("_UI_PropertyDescriptor_description", "_UI_BasicElement_documentation_feature", "_UI_BasicElement_type"),
 				 RequirementsPackage.Literals.BASIC_ELEMENT__DOCUMENTATION,
 				 true,
-				 false,
+				 true,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
@@ -119,7 +118,7 @@ public class BasicElementItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((BasicElement)object).getName();
+		String label = crop(((BasicElement)object).getName());
 		return label == null || label.length() == 0 ?
 			getString("_UI_BasicElement_type") :
 			getString("_UI_BasicElement_type") + " " + label;

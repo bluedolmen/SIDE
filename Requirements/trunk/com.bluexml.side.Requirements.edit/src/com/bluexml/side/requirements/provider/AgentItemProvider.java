@@ -7,15 +7,11 @@
 package com.bluexml.side.requirements.provider;
 
 
-import com.bluexml.side.requirements.Agent;
-import com.bluexml.side.requirements.RequirementsPackage;
-
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -25,6 +21,9 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
+import com.bluexml.side.requirements.Agent;
+import com.bluexml.side.requirements.RequirementsPackage;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.requirements.Agent} object.
@@ -130,7 +129,7 @@ public class AgentItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Agent)object).getName();
+		String label = crop(((Agent)object).getName());
 		return label == null || label.length() == 0 ?
 			getString("_UI_Agent_type") :
 			getString("_UI_Agent_type") + " " + label;
