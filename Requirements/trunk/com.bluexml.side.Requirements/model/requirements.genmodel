@@ -28,8 +28,8 @@
     </genEnums>
     <genClasses image="false" ecoreClass="requirements.ecore#//ModelElement"/>
     <genClasses image="false" ecoreClass="requirements.ecore#//BasicElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//BasicElement/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//BasicElement/documentation"/>
+      <genFeatures createChild="false" propertyMultiLine="true" ecoreFeature="ecore:EAttribute requirements.ecore#//BasicElement/name"/>
+      <genFeatures createChild="false" propertyMultiLine="true" ecoreFeature="ecore:EAttribute requirements.ecore#//BasicElement/documentation"/>
     </genClasses>
     <genClasses ecoreClass="requirements.ecore#//Entity">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requirements.ecore#//Entity/parent"/>

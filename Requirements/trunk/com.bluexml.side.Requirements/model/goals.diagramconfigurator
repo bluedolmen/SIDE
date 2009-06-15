@@ -6,17 +6,14 @@
       <items xmi:id="_iiuvYN8cEd2nIODNIkD2Og" name="Agent" part="_kK61MN8cEd2nIODNIkD2Og"/>
       <items xmi:id="_xQ7FUN8gEd2nIODNIkD2Og" name="Entity" part="_pS43wN8gEd2nIODNIkD2Og"/>
       <items xmi:id="_1XSdwN8gEd2nIODNIkD2Og" name="Attribute" part="_zAxSUN8gEd2nIODNIkD2Og"/>
-      <items xmi:id="_z-Dx8OCJEd26lsA5Uq2mHA" name="Privilege Group" part="_nWVAYTMSEd68Hrxo4DXN9w"/>
+      <items xmi:id="_z-Dx8OCJEd26lsA5Uq2mHA" name="Privilege Group" part="_J2OUAVQ5Ed6I5M_Ix89TdA"/>
       <items xmi:id="_2kQJ0DMXEd6UdM7UHrER7w" name="Privilege" part="_h_NqYDMVEd68Hrxo4DXN9w"/>
     </paletteCategories>
     <paletteCategories xmi:id="_nNtrUN5tEd2CPJ1aix4Kqw" name="Edge">
       <items xmi:id="_oErvkN5tEd2CPJ1aix4Kqw" name="Sub goal" part="_tjy5EN5sEd2CPJ1aix4Kqw"/>
       <items xmi:id="_5R3ZwN8cEd2nIODNIkD2Og" name="Is responsible" part="_xQF7sN8cEd2nIODNIkD2Og"/>
       <items xmi:id="_ROMvYOCDEd26lsA5Uq2mHA" name="Relationship" part="_QqRmIOCHEd26lsA5Uq2mHA"/>
-    </paletteCategories>
-    <paletteCategories xmi:id="__Pw6sDMSEd68Hrxo4DXN9w" name="PrivilegeGroup">
-      <items xmi:id="__Pw6sjMSEd68Hrxo4DXN9w" name="Goal to Group" part="_yvFBUDMSEd68Hrxo4DXN9w"/>
-      <items xmi:id="__Pw6sTMSEd68Hrxo4DXN9w" name="Group to Entity" part="_3y45cDMSEd68Hrxo4DXN9w"/>
+      <items xmi:id="_QhVhIFQ5Ed6I5M_Ix89TdA" name="Strategy" part="_J2OUAVQ5Ed6I5M_Ix89TdA"/>
     </paletteCategories>
   </palette>
   <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_xQF7sN8cEd2nIODNIkD2Og" object="_vAsr8N8cEd2nIODNIkD2Og" defaultForegroundColor="247,165,0" foregroundColorChangeable="false" fontChangeable="false" lineWidth="3" targetDecoration="ARROW">
@@ -25,7 +22,7 @@
       <refTargetToSource xsi:type="ecore:EReference" href="requirements.ecore#//Goal/responsible"/>
     </sourceTargetCouple>
   </parts>
-  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_tjy5EN5sEd2CPJ1aix4Kqw" object="_rdn2wd5sEd2CPJ1aix4Kqw" defaultForegroundColor="0,178,10" foregroundColorChangeable="false" fontChangeable="false" lineWidth="10" targetDecoration="TRIANGLE">
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_tjy5EN5sEd2CPJ1aix4Kqw" object="_rdn2wd5sEd2CPJ1aix4Kqw" defaultForegroundColor="0,78,155" foregroundColorChangeable="false" fontChangeable="false" lineWidth="10" targetDecoration="ARROW">
     <sourceTargetCouple xmi:id="_e3b84N5tEd2CPJ1aix4Kqw" sourceNode="_3bu9oN5jEd2gI7TdoTmi-g" targetNode="_3bu9oN5jEd2gI7TdoTmi-g">
       <refSourceToTarget xsi:type="ecore:EReference" href="requirements.ecore#//Goal/subgoals"/>
     </sourceTargetCouple>
@@ -38,22 +35,19 @@
       <refEdgeToTarget xsi:type="ecore:EReference" href="requirements.ecore#//RelationShip/target"/>
     </sourceTargetCouple>
   </parts>
-  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_3bu9oN5jEd2gI7TdoTmi-g" object="_1N5NEN5jEd2gI7TdoTmi-g" foregroundColorChangeable="false" fontChangeable="false" type="Container With Inner Label" backgroundColorChangeable="false" defaultHeight="20" maximumWidth="400" maximumHeight="100"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_3bu9oN5jEd2gI7TdoTmi-g" object="_1N5NEN5jEd2gI7TdoTmi-g" foregroundColorChangeable="false" fontChangeable="false" lineStyle="DASH" type="Container With Inner Label" defaultBackgroundColor="184,231,255" backgroundColorChangeable="false" defaultHeight="20" maximumWidth="400" maximumHeight="100"/>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_kK61MN8cEd2nIODNIkD2Og" object="_ge6dgN8cEd2nIODNIkD2Og" foregroundColorChangeable="false" fontChangeable="false" backgroundColorChangeable="false" resizing="WIDTH" defaultHeight="75" minimumHeight="75" maximumHeight="75"/>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_pS43wN8gEd2nIODNIkD2Og" object="_mM-2wN8gEd2nIODNIkD2Og" foregroundColorChangeable="false" fontChangeable="false" type="Class" childElements="_zAxSUN8gEd2nIODNIkD2Og" backgroundColorChangeable="false" container="true" layout="ToolbarLayout"/>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_zAxSUN8gEd2nIODNIkD2Og" object="_zi-AcN8gEd2nIODNIkD2Og" foregroundColorChangeable="false" fontChangeable="false" lineWidth="0" type="Class" backgroundColorChangeable="false" resizing="NONE" defaultWidth="-1" defaultHeight="-1" minimumWidth="-1" minimumHeight="-1" maximumWidth="-1" maximumHeight="-1"/>
-  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_nWVAYTMSEd68Hrxo4DXN9w" object="_qbyKcOCJEd26lsA5Uq2mHA" type="Class" layout="ClassLayout"/>
-  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_yvFBUDMSEd68Hrxo4DXN9w" object="_smyNYDMSEd68Hrxo4DXN9w">
-    <sourceTargetCouple xmi:id="_2_8ZkDMSEd68Hrxo4DXN9w" sourceNode="_3bu9oN5jEd2gI7TdoTmi-g" targetNode="_nWVAYTMSEd68Hrxo4DXN9w">
-      <refSourceToTarget xsi:type="ecore:EReference" href="requirements.ecore#//Goal/privilegeGroup"/>
-    </sourceTargetCouple>
-  </parts>
-  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_3y45cDMSEd68Hrxo4DXN9w" object="_va23gDMSEd68Hrxo4DXN9w">
-    <sourceTargetCouple xmi:id="_6tTcIDMSEd68Hrxo4DXN9w" sourceNode="_nWVAYTMSEd68Hrxo4DXN9w" targetNode="_pS43wN8gEd2nIODNIkD2Og">
-      <refSourceToTarget xsi:type="ecore:EReference" href="requirements.ecore#//PrivilegeGroup/entryPoint"/>
-    </sourceTargetCouple>
-  </parts>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_h_NqYDMVEd68Hrxo4DXN9w" object="_gW9TIDMVEd68Hrxo4DXN9w" type="Label"/>
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_J2OUAVQ5Ed6I5M_Ix89TdA" object="_qbyKcOCJEd26lsA5Uq2mHA">
+    <sourceTargetCouple xmi:id="_OgRoUFQ5Ed6I5M_Ix89TdA" containerType="SOURCE" sourceNode="_3bu9oN5jEd2gI7TdoTmi-g" targetNode="_pS43wN8gEd2nIODNIkD2Og">
+      <containerObject href="requirements.genmodel#//requirements/Goal"/>
+      <containerRef xsi:type="ecore:EReference" href="requirements.ecore#//Goal/privilegeGroup"/>
+      <refSourceToEdge xsi:type="ecore:EReference" href="requirements.ecore#//Goal/privilegeGroup"/>
+      <refEdgeToTarget xsi:type="ecore:EReference" href="requirements.ecore#//PrivilegeGroup/entryPoint"/>
+    </sourceTargetCouple>
+  </parts>
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_1N5NEN5jEd2gI7TdoTmi-g">
     <genClass href="requirements.genmodel#//requirements/Goal"/>
   </objects>
@@ -77,8 +71,6 @@
   </objects>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_rdn2wd5sEd2CPJ1aix4Kqw" name="is_sub_goal"/>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_vAsr8N8cEd2nIODNIkD2Og" name="is_responsible"/>
-  <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_smyNYDMSEd68Hrxo4DXN9w" name="hasPrivilegeGroup"/>
-  <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_va23gDMSEd68Hrxo4DXN9w" name="isLinkedToEntity"/>
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_gW9TIDMVEd68Hrxo4DXN9w">
     <genClass href="requirements.genmodel#//requirements/Privilege"/>
   </objects>

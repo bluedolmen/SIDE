@@ -6,12 +6,11 @@
  */
 package com.bluexml.side.requirements.impl;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 import com.bluexml.side.requirements.ModelElement;
 import com.bluexml.side.requirements.RequirementsPackage;
-
-import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->

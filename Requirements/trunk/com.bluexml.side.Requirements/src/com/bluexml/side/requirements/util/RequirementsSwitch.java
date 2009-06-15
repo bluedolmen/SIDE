@@ -6,12 +6,23 @@
  */
 package com.bluexml.side.requirements.util;
 
-import com.bluexml.side.requirements.*;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import com.bluexml.side.requirements.Agent;
+import com.bluexml.side.requirements.Attribute;
+import com.bluexml.side.requirements.BasicElement;
+import com.bluexml.side.requirements.Entity;
+import com.bluexml.side.requirements.Goal;
+import com.bluexml.side.requirements.ModelElement;
+import com.bluexml.side.requirements.Organization;
+import com.bluexml.side.requirements.Privilege;
+import com.bluexml.side.requirements.PrivilegeGroup;
+import com.bluexml.side.requirements.RelationShip;
+import com.bluexml.side.requirements.RequirementsDefinition;
+import com.bluexml.side.requirements.RequirementsPackage;
 
 /**
  * <!-- begin-user-doc -->

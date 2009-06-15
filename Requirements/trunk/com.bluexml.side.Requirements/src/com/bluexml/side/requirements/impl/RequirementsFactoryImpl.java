@@ -6,16 +6,27 @@
  */
 package com.bluexml.side.requirements.impl;
 
-import com.bluexml.side.requirements.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import com.bluexml.side.requirements.Agent;
+import com.bluexml.side.requirements.Attribute;
+import com.bluexml.side.requirements.AttributeType;
+import com.bluexml.side.requirements.Entity;
+import com.bluexml.side.requirements.Goal;
+import com.bluexml.side.requirements.Organization;
+import com.bluexml.side.requirements.PriorityLevel;
+import com.bluexml.side.requirements.Privilege;
+import com.bluexml.side.requirements.PrivilegeGroup;
+import com.bluexml.side.requirements.PrivilegeNature;
+import com.bluexml.side.requirements.RelationShip;
+import com.bluexml.side.requirements.RequirementsDefinition;
+import com.bluexml.side.requirements.RequirementsFactory;
+import com.bluexml.side.requirements.RequirementsPackage;
 
 /**
  * <!-- begin-user-doc -->
