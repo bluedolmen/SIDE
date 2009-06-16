@@ -8,6 +8,7 @@ import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -26,6 +27,13 @@ ISelectionChangedListener {
 	public RestoreFieldAction(FieldElement f, AbstractView av) {
 		super();
 		toRestore = f;
+		selectedObject = av;
+	}
+	
+	public RestoreFieldAction(FieldElement f, ImageDescriptor imgDes, AbstractView av) {
+		super(f.getName(),imgDes);
+		toRestore = f;
+		
 		selectedObject = av;
 	}
 	

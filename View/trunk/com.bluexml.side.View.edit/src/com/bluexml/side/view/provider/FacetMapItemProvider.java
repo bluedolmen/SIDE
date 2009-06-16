@@ -226,8 +226,7 @@ public class FacetMapItemProvider
 
 		boolean qualify =
 			childFeature == ViewPackage.Literals.FIELD_GROUP__CHILDREN ||
-			childFeature == ViewPackage.Literals.FIELD_GROUP__DISABLED ||
-			childFeature == ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW;
+			childFeature == ViewPackage.Literals.FIELD_GROUP__DISABLED;
 
 		if (qualify) {
 			return getString

@@ -5,7 +5,6 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.DeleteCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -76,7 +75,6 @@ public class InitView {
 				} else {
 					list.add(fg);
 				}
-				
 			}
 		}
 		return list;

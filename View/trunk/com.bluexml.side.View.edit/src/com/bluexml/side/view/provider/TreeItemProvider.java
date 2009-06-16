@@ -312,8 +312,7 @@ public class TreeItemProvider
 		boolean qualify =
 			childFeature == ViewPackage.Literals.FIELD_GROUP__CHILDREN ||
 			childFeature == ViewPackage.Literals.FIELD_GROUP__DISABLED ||
-			childFeature == ViewPackage.Literals.TREE__NODE_VALUE ||
-			childFeature == ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW;
+			childFeature == ViewPackage.Literals.TREE__NODE_VALUE;
 
 		if (qualify) {
 			return getString

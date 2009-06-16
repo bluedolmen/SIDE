@@ -210,7 +210,6 @@ public class AbstractViewItemProvider
 			childrenFeatures.add(ViewPackage.Literals.FIELD_GROUP__CHILDREN);
 			childrenFeatures.add(ViewPackage.Literals.STYLABLE__STYLING);
 			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS);
-			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW);
 		}
 		return childrenFeatures;
 	}
@@ -274,7 +273,6 @@ public class AbstractViewItemProvider
 			case ViewPackage.ABSTRACT_VIEW__CHILDREN:
 			case ViewPackage.ABSTRACT_VIEW__DISABLED:
 			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
-			case ViewPackage.ABSTRACT_VIEW__INNER_VIEW:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -286,7 +284,7 @@ public class AbstractViewItemProvider
 	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
@@ -302,200 +300,7 @@ public class AbstractViewItemProvider
 				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
 				 ViewFactory.eINSTANCE.createCol()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createFieldGroup()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createTextField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createPasswordField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createBooleanField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createFloatField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createActionField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createDateField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createTimeField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createDateTimeField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createPhoneNumberField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createEmailField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createFileField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createFacetMap()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createDataList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createTree()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createDataTable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createSelectField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createHtmlField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createIntegerField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createCol()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createFieldGroup()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createTextField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createPasswordField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createBooleanField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createFloatField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createActionField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createDateField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createTimeField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createDateTimeField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createPhoneNumberField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createEmailField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createFileField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createFacetMap()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createDataList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createTree()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createDataTable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createSelectField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createHtmlField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__DISABLED,
-				 ViewFactory.eINSTANCE.createIntegerField()));
+		
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -506,26 +311,6 @@ public class AbstractViewItemProvider
 			(createChildParameter
 				(ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS,
 				 CommonFactory.eINSTANCE.createOperationGroup()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW,
-				 ViewFactory.eINSTANCE.createFacetMap()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW,
-				 ViewFactory.eINSTANCE.createDataList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW,
-				 ViewFactory.eINSTANCE.createTree()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW,
-				 ViewFactory.eINSTANCE.createDataTable()));
 	}
 
 	/**
@@ -541,8 +326,7 @@ public class AbstractViewItemProvider
 
 		boolean qualify =
 			childFeature == ViewPackage.Literals.FIELD_GROUP__CHILDREN ||
-			childFeature == ViewPackage.Literals.FIELD_GROUP__DISABLED ||
-			childFeature == ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW;
+			childFeature == ViewPackage.Literals.FIELD_GROUP__DISABLED;
 
 		if (qualify) {
 			return getString

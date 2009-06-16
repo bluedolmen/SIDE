@@ -21,7 +21,6 @@ import com.bluexml.side.common.OperationComponent;
  * <ul>
  *   <li>{@link com.bluexml.side.view.AbstractView#getViewOf <em>View Of</em>}</li>
  *   <li>{@link com.bluexml.side.view.AbstractView#getOperations <em>Operations</em>}</li>
- *   <li>{@link com.bluexml.side.view.AbstractView#getInnerView <em>Inner View</em>}</li>
  * </ul>
  * </p>
  *
@@ -81,31 +80,5 @@ public interface AbstractView extends NamedModelElement, Stylable, FieldGroup {
 	 * @generated
 	 */
 	void setOperations(OperationComponent value);
-
-	/**
-	 * Returns the value of the '<em><b>Inner View</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Inner View</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Inner View</em>' containment reference.
-	 * @see #setInnerView(AbstractView)
-	 * @see com.bluexml.side.view.ViewPackage#getAbstractView_InnerView()
-	 * @model containment="true"
-	 * @generated
-	 */
-	AbstractView getInnerView();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.view.AbstractView#getInnerView <em>Inner View</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Inner View</em>' containment reference.
-	 * @see #getInnerView()
-	 * @generated
-	 */
-	void setInnerView(AbstractView value);
 		
 } // AbstractView

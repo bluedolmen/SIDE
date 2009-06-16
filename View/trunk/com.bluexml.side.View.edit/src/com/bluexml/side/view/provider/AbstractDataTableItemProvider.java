@@ -294,7 +294,6 @@ public class AbstractDataTableItemProvider
 			childrenFeatures.add(ViewPackage.Literals.FIELD_GROUP__DISABLED);
 			childrenFeatures.add(ViewPackage.Literals.STYLABLE__STYLING);
 			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS);
-			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW);
 			childrenFeatures.add(ViewPackage.Literals.PAGINABLE__PAGING);
 			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS);
 			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS);
@@ -357,7 +356,6 @@ public class AbstractDataTableItemProvider
 			case ViewPackage.ABSTRACT_DATA_TABLE__CHILDREN:
 			case ViewPackage.ABSTRACT_DATA_TABLE__DISABLED:
 			case ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS:
-			case ViewPackage.ABSTRACT_DATA_TABLE__INNER_VIEW:
 			case ViewPackage.ABSTRACT_DATA_TABLE__PAGING:
 			case ViewPackage.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS:
 			case ViewPackage.ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS:
@@ -611,26 +609,6 @@ public class AbstractDataTableItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW,
-				 ViewFactory.eINSTANCE.createFacetMap()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW,
-				 ViewFactory.eINSTANCE.createDataList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW,
-				 ViewFactory.eINSTANCE.createTree()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW,
-				 ViewFactory.eINSTANCE.createDataTable()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(ViewPackage.Literals.PAGINABLE__PAGING,
 				 ViewFactory.eINSTANCE.createPaging()));
 
@@ -679,7 +657,6 @@ public class AbstractDataTableItemProvider
 		boolean qualify =
 			childFeature == ViewPackage.Literals.FIELD_GROUP__CHILDREN ||
 			childFeature == ViewPackage.Literals.FIELD_GROUP__DISABLED ||
-			childFeature == ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW ||
 			childFeature == ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS ||
 			childFeature == ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS ||
 			childFeature == ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS ||

@@ -89,7 +89,6 @@ public class FieldGroupItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ViewPackage.Literals.FIELD_GROUP__CHILDREN);
 			childrenFeatures.add(ViewPackage.Literals.FIELD_GROUP__DISABLED);
-			
 		}
 		return childrenFeatures;
 	}

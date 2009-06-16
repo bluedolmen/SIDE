@@ -957,15 +957,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractView_InnerView() {
-		return (EReference)abstractViewEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getSelectField() {
 		return selectFieldEClass;
 	}
@@ -1313,7 +1304,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		abstractViewEClass = createEClass(ABSTRACT_VIEW);
 		createEReference(abstractViewEClass, ABSTRACT_VIEW__VIEW_OF);
 		createEReference(abstractViewEClass, ABSTRACT_VIEW__OPERATIONS);
-		createEReference(abstractViewEClass, ABSTRACT_VIEW__INNER_VIEW);
 
 		selectFieldEClass = createEClass(SELECT_FIELD);
 		createEAttribute(selectFieldEClass, SELECT_FIELD__SELECT_WIDGET);
@@ -1511,7 +1501,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		initEClass(abstractViewEClass, AbstractView.class, "AbstractView", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractView_ViewOf(), theCommonPackage.getContainer(), null, "viewOf", null, 0, 1, AbstractView.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractView_Operations(), theCommonPackage.getOperationComponent(), null, "operations", null, 0, 1, AbstractView.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractView_InnerView(), this.getAbstractView(), null, "innerView", null, 0, 1, AbstractView.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(selectFieldEClass, SelectField.class, "SelectField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSelectField_SelectWidget(), this.getSelectWidgetType(), "selectWidget", null, 0, 1, SelectField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

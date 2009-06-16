@@ -77,7 +77,6 @@ import org.eclipse.ocl.expressions.OCLExpression;
  *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getDisabled <em>Disabled</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getViewOf <em>View Of</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getOperations <em>Operations</em>}</li>
- *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getInnerView <em>Inner View</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getPaging <em>Paging</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getHaveRowActions <em>Have Row Actions</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getHaveSelectActions <em>Have Select Actions</em>}</li>
@@ -307,16 +306,6 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 	 * @ordered
 	 */
 	protected OperationComponent operations;
-
-	/**
-	 * The cached value of the '{@link #getInnerView() <em>Inner View</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInnerView()
-	 * @generated
-	 * @ordered
-	 */
-	protected AbstractView innerView;
 
 	/**
 	 * The cached value of the '{@link #getPaging() <em>Paging</em>}' containment reference.
@@ -742,49 +731,6 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbstractView getInnerView() {
-		return innerView;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetInnerView(AbstractView newInnerView, NotificationChain msgs) {
-		AbstractView oldInnerView = innerView;
-		innerView = newInnerView;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_DATA_TABLE__INNER_VIEW, oldInnerView, newInnerView);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setInnerView(AbstractView newInnerView) {
-		if (newInnerView != innerView) {
-			NotificationChain msgs = null;
-			if (innerView != null)
-				msgs = ((InternalEObject)innerView).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ViewPackage.ABSTRACT_DATA_TABLE__INNER_VIEW, null, msgs);
-			if (newInnerView != null)
-				msgs = ((InternalEObject)newInnerView).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ViewPackage.ABSTRACT_DATA_TABLE__INNER_VIEW, null, msgs);
-			msgs = basicSetInnerView(newInnerView, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_DATA_TABLE__INNER_VIEW, newInnerView, newInnerView));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Paging getPaging() {
 		return paging;
 	}
@@ -1076,8 +1022,6 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 				return ((InternalEList<?>)getDisabled()).basicRemove(otherEnd, msgs);
 			case ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS:
 				return basicSetOperations(null, msgs);
-			case ViewPackage.ABSTRACT_DATA_TABLE__INNER_VIEW:
-				return basicSetInnerView(null, msgs);
 			case ViewPackage.ABSTRACT_DATA_TABLE__PAGING:
 				return basicSetPaging(null, msgs);
 			case ViewPackage.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS:
@@ -1132,8 +1076,6 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 				return basicGetViewOf();
 			case ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS:
 				return getOperations();
-			case ViewPackage.ABSTRACT_DATA_TABLE__INNER_VIEW:
-				return getInnerView();
 			case ViewPackage.ABSTRACT_DATA_TABLE__PAGING:
 				return getPaging();
 			case ViewPackage.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS:
@@ -1209,9 +1151,6 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 			case ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS:
 				setOperations((OperationComponent)newValue);
 				return;
-			case ViewPackage.ABSTRACT_DATA_TABLE__INNER_VIEW:
-				setInnerView((AbstractView)newValue);
-				return;
 			case ViewPackage.ABSTRACT_DATA_TABLE__PAGING:
 				setPaging((Paging)newValue);
 				return;
@@ -1284,9 +1223,6 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 			case ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS:
 				setOperations((OperationComponent)null);
 				return;
-			case ViewPackage.ABSTRACT_DATA_TABLE__INNER_VIEW:
-				setInnerView((AbstractView)null);
-				return;
 			case ViewPackage.ABSTRACT_DATA_TABLE__PAGING:
 				setPaging((Paging)null);
 				return;
@@ -1343,8 +1279,6 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 				return viewOf != null;
 			case ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS:
 				return operations != null;
-			case ViewPackage.ABSTRACT_DATA_TABLE__INNER_VIEW:
-				return innerView != null;
 			case ViewPackage.ABSTRACT_DATA_TABLE__PAGING:
 				return paging != null;
 			case ViewPackage.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS:
@@ -1407,7 +1341,6 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 			switch (derivedFeatureID) {
 				case ViewPackage.ABSTRACT_DATA_TABLE__VIEW_OF: return ViewPackage.ABSTRACT_VIEW__VIEW_OF;
 				case ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS: return ViewPackage.ABSTRACT_VIEW__OPERATIONS;
-				case ViewPackage.ABSTRACT_DATA_TABLE__INNER_VIEW: return ViewPackage.ABSTRACT_VIEW__INNER_VIEW;
 				default: return -1;
 			}
 		}
@@ -1470,7 +1403,6 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 			switch (baseFeatureID) {
 				case ViewPackage.ABSTRACT_VIEW__VIEW_OF: return ViewPackage.ABSTRACT_DATA_TABLE__VIEW_OF;
 				case ViewPackage.ABSTRACT_VIEW__OPERATIONS: return ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS;
-				case ViewPackage.ABSTRACT_VIEW__INNER_VIEW: return ViewPackage.ABSTRACT_DATA_TABLE__INNER_VIEW;
 				default: return -1;
 			}
 		}

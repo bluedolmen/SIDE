@@ -899,8 +899,6 @@ public class ViewEditor
 		Transfer[] transfers = new Transfer[] { LocalTransfer.getInstance() };
 		viewer.addDragSupport(dndOperations, transfers, new ViewerDragAdapter(viewer));
 		viewer.addDropSupport(dndOperations, transfers, new EditingDomainViewerDropAdapter(editingDomain, viewer));
-		// Add a double click event
-		addDoubleClickEventListener(viewer);
 	}
 
 	/**

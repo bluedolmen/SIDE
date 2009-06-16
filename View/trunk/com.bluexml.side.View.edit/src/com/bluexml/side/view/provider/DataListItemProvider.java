@@ -259,7 +259,6 @@ public class DataListItemProvider
 		boolean qualify =
 			childFeature == ViewPackage.Literals.FIELD_GROUP__CHILDREN ||
 			childFeature == ViewPackage.Literals.FIELD_GROUP__DISABLED ||
-			childFeature == ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW ||
 			childFeature == ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS ||
 			childFeature == ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS ||
 			childFeature == ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS ||

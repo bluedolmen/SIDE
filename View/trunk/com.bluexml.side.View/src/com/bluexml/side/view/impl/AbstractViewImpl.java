@@ -51,7 +51,6 @@ import org.eclipse.ocl.ecore.OCL;
  *   <li>{@link com.bluexml.side.view.impl.AbstractViewImpl#getDisabled <em>Disabled</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractViewImpl#getViewOf <em>View Of</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractViewImpl#getOperations <em>Operations</em>}</li>
- *   <li>{@link com.bluexml.side.view.impl.AbstractViewImpl#getInnerView <em>Inner View</em>}</li>
  * </ul>
  * </p>
  *
@@ -177,16 +176,6 @@ public abstract class AbstractViewImpl extends NamedModelElementImpl implements 
 	 * @ordered
 	 */
 	protected OperationComponent operations;
-
-	/**
-	 * The cached value of the '{@link #getInnerView() <em>Inner View</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInnerView()
-	 * @generated
-	 * @ordered
-	 */
-	protected AbstractView innerView;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -461,49 +450,6 @@ public abstract class AbstractViewImpl extends NamedModelElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbstractView getInnerView() {
-		return innerView;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetInnerView(AbstractView newInnerView, NotificationChain msgs) {
-		AbstractView oldInnerView = innerView;
-		innerView = newInnerView;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_VIEW__INNER_VIEW, oldInnerView, newInnerView);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setInnerView(AbstractView newInnerView) {
-		if (newInnerView != innerView) {
-			NotificationChain msgs = null;
-			if (innerView != null)
-				msgs = ((InternalEObject)innerView).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ViewPackage.ABSTRACT_VIEW__INNER_VIEW, null, msgs);
-			if (newInnerView != null)
-				msgs = ((InternalEObject)newInnerView).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ViewPackage.ABSTRACT_VIEW__INNER_VIEW, null, msgs);
-			msgs = basicSetInnerView(newInnerView, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_VIEW__INNER_VIEW, newInnerView, newInnerView));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -515,8 +461,6 @@ public abstract class AbstractViewImpl extends NamedModelElementImpl implements 
 				return ((InternalEList<?>)getDisabled()).basicRemove(otherEnd, msgs);
 			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
 				return basicSetOperations(null, msgs);
-			case ViewPackage.ABSTRACT_VIEW__INNER_VIEW:
-				return basicSetInnerView(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -549,8 +493,6 @@ public abstract class AbstractViewImpl extends NamedModelElementImpl implements 
 				return basicGetViewOf();
 			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
 				return getOperations();
-			case ViewPackage.ABSTRACT_VIEW__INNER_VIEW:
-				return getInnerView();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -593,9 +535,6 @@ public abstract class AbstractViewImpl extends NamedModelElementImpl implements 
 			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
 				setOperations((OperationComponent)newValue);
 				return;
-			case ViewPackage.ABSTRACT_VIEW__INNER_VIEW:
-				setInnerView((AbstractView)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -635,9 +574,6 @@ public abstract class AbstractViewImpl extends NamedModelElementImpl implements 
 			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
 				setOperations((OperationComponent)null);
 				return;
-			case ViewPackage.ABSTRACT_VIEW__INNER_VIEW:
-				setInnerView((AbstractView)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -668,8 +604,6 @@ public abstract class AbstractViewImpl extends NamedModelElementImpl implements 
 				return viewOf != null;
 			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
 				return operations != null;
-			case ViewPackage.ABSTRACT_VIEW__INNER_VIEW:
-				return innerView != null;
 		}
 		return super.eIsSet(featureID);
 	}
