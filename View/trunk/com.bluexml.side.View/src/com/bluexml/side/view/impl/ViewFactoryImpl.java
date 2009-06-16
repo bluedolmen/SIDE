@@ -61,10 +61,16 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case ViewPackage.VIEW_COLLECTION: return createViewCollection();
 			case ViewPackage.COL: return createCol();
 			case ViewPackage.PAGING: return createPaging();
 			case ViewPackage.SORTING: return createSorting();
-			case ViewPackage.FIELD_GROUP: return createFieldGroup();
+			case ViewPackage.FILTERING: return createFiltering();
+			case ViewPackage.STYLING: return createStyling();
+			case ViewPackage.DATA_LIST: return createDataList();
+			case ViewPackage.DATA_TABLE: return createDataTable();
+			case ViewPackage.FACET_MAP: return createFacetMap();
+			case ViewPackage.TREE: return createTree();
 			case ViewPackage.TEXT_FIELD: return createTextField();
 			case ViewPackage.PASSWORD_FIELD: return createPasswordField();
 			case ViewPackage.BOOLEAN_FIELD: return createBooleanField();
@@ -75,17 +81,10 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 			case ViewPackage.DATE_TIME_FIELD: return createDateTimeField();
 			case ViewPackage.PHONE_NUMBER_FIELD: return createPhoneNumberField();
 			case ViewPackage.EMAIL_FIELD: return createEmailField();
-			case ViewPackage.FILE_FIELD: return createFileField();
-			case ViewPackage.FACET_MAP: return createFacetMap();
-			case ViewPackage.DATA_LIST: return createDataList();
-			case ViewPackage.TREE: return createTree();
-			case ViewPackage.DATA_TABLE: return createDataTable();
-			case ViewPackage.STYLING: return createStyling();
-			case ViewPackage.SELECT_FIELD: return createSelectField();
-			case ViewPackage.VIEW_COLLECTION: return createViewCollection();
-			case ViewPackage.HTML_FIELD: return createHtmlField();
-			case ViewPackage.FILTERING: return createFiltering();
 			case ViewPackage.INTEGER_FIELD: return createIntegerField();
+			case ViewPackage.FILE_FIELD: return createFileField();
+			case ViewPackage.SELECT_FIELD: return createSelectField();
+			case ViewPackage.HTML_FIELD: return createHtmlField();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -150,6 +149,16 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ViewCollection createViewCollection() {
+		ViewCollectionImpl viewCollection = new ViewCollectionImpl();
+		return viewCollection;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Col createCol() {
 		ColImpl col = new ColImpl();
 		return col;
@@ -180,9 +189,59 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FieldGroup createFieldGroup() {
-		FieldGroupImpl fieldGroup = new FieldGroupImpl();
-		return fieldGroup;
+	public Filtering createFiltering() {
+		FilteringImpl filtering = new FilteringImpl();
+		return filtering;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Styling createStyling() {
+		StylingImpl styling = new StylingImpl();
+		return styling;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DataList createDataList() {
+		DataListImpl dataList = new DataListImpl();
+		return dataList;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DataTable createDataTable() {
+		DataTableImpl dataTable = new DataTableImpl();
+		return dataTable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FacetMap createFacetMap() {
+		FacetMapImpl facetMap = new FacetMapImpl();
+		return facetMap;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Tree createTree() {
+		TreeImpl tree = new TreeImpl();
+		return tree;
 	}
 
 	/**
@@ -290,59 +349,19 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public IntegerField createIntegerField() {
+		IntegerFieldImpl integerField = new IntegerFieldImpl();
+		return integerField;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public FileField createFileField() {
 		FileFieldImpl fileField = new FileFieldImpl();
 		return fileField;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public FacetMap createFacetMap() {
-		FacetMapImpl facetMap = new FacetMapImpl();
-		return facetMap;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DataList createDataList() {
-		DataListImpl dataList = new DataListImpl();
-		return dataList;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Tree createTree() {
-		TreeImpl tree = new TreeImpl();
-		return tree;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DataTable createDataTable() {
-		DataTableImpl dataTable = new DataTableImpl();
-		return dataTable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Styling createStyling() {
-		StylingImpl styling = new StylingImpl();
-		return styling;
 	}
 
 	/**
@@ -360,39 +379,9 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ViewCollection createViewCollection() {
-		ViewCollectionImpl viewCollection = new ViewCollectionImpl();
-		return viewCollection;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public HtmlField createHtmlField() {
 		HtmlFieldImpl htmlField = new HtmlFieldImpl();
 		return htmlField;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Filtering createFiltering() {
-		FilteringImpl filtering = new FilteringImpl();
-		return filtering;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public IntegerField createIntegerField() {
-		IntegerFieldImpl integerField = new IntegerFieldImpl();
-		return integerField;
 	}
 
 	/**

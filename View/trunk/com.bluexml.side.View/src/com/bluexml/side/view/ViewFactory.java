@@ -26,6 +26,15 @@ public interface ViewFactory extends EFactory {
 	ViewFactory eINSTANCE = com.bluexml.side.view.impl.ViewFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Collection</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Collection</em>'.
+	 * @generated
+	 */
+	ViewCollection createViewCollection();
+
+	/**
 	 * Returns a new object of class '<em>Col</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -53,13 +62,58 @@ public interface ViewFactory extends EFactory {
 	Sorting createSorting();
 
 	/**
-	 * Returns a new object of class '<em>Field Group</em>'.
+	 * Returns a new object of class '<em>Filtering</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Field Group</em>'.
+	 * @return a new object of class '<em>Filtering</em>'.
 	 * @generated
 	 */
-	FieldGroup createFieldGroup();
+	Filtering createFiltering();
+
+	/**
+	 * Returns a new object of class '<em>Styling</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Styling</em>'.
+	 * @generated
+	 */
+	Styling createStyling();
+
+	/**
+	 * Returns a new object of class '<em>Data List</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Data List</em>'.
+	 * @generated
+	 */
+	DataList createDataList();
+
+	/**
+	 * Returns a new object of class '<em>Data Table</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Data Table</em>'.
+	 * @generated
+	 */
+	DataTable createDataTable();
+
+	/**
+	 * Returns a new object of class '<em>Facet Map</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Facet Map</em>'.
+	 * @generated
+	 */
+	FacetMap createFacetMap();
+
+	/**
+	 * Returns a new object of class '<em>Tree</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Tree</em>'.
+	 * @generated
+	 */
+	Tree createTree();
 
 	/**
 	 * Returns a new object of class '<em>Text Field</em>'.
@@ -152,6 +206,15 @@ public interface ViewFactory extends EFactory {
 	EmailField createEmailField();
 
 	/**
+	 * Returns a new object of class '<em>Integer Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Integer Field</em>'.
+	 * @generated
+	 */
+	IntegerField createIntegerField();
+
+	/**
 	 * Returns a new object of class '<em>File Field</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -159,51 +222,6 @@ public interface ViewFactory extends EFactory {
 	 * @generated
 	 */
 	FileField createFileField();
-
-	/**
-	 * Returns a new object of class '<em>Facet Map</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Facet Map</em>'.
-	 * @generated
-	 */
-	FacetMap createFacetMap();
-
-	/**
-	 * Returns a new object of class '<em>Data List</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data List</em>'.
-	 * @generated
-	 */
-	DataList createDataList();
-
-	/**
-	 * Returns a new object of class '<em>Tree</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Tree</em>'.
-	 * @generated
-	 */
-	Tree createTree();
-
-	/**
-	 * Returns a new object of class '<em>Data Table</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data Table</em>'.
-	 * @generated
-	 */
-	DataTable createDataTable();
-
-	/**
-	 * Returns a new object of class '<em>Styling</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Styling</em>'.
-	 * @generated
-	 */
-	Styling createStyling();
 
 	/**
 	 * Returns a new object of class '<em>Select Field</em>'.
@@ -215,15 +233,6 @@ public interface ViewFactory extends EFactory {
 	SelectField createSelectField();
 
 	/**
-	 * Returns a new object of class '<em>Collection</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Collection</em>'.
-	 * @generated
-	 */
-	ViewCollection createViewCollection();
-
-	/**
 	 * Returns a new object of class '<em>Html Field</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -231,24 +240,6 @@ public interface ViewFactory extends EFactory {
 	 * @generated
 	 */
 	HtmlField createHtmlField();
-
-	/**
-	 * Returns a new object of class '<em>Filtering</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Filtering</em>'.
-	 * @generated
-	 */
-	Filtering createFiltering();
-
-	/**
-	 * Returns a new object of class '<em>Integer Field</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Integer Field</em>'.
-	 * @generated
-	 */
-	IntegerField createIntegerField();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -18,8 +18,6 @@ import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -33,11 +31,8 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.common.CommonFactory;
 import com.bluexml.side.common.provider.NamedModelElementItemProvider;
-import com.bluexml.side.side.view.edit.ui.utils.InternalModification;
 import com.bluexml.side.side.view.edit.ui.utils.model.ViewUtils;
 import com.bluexml.side.view.AbstractView;
-import com.bluexml.side.view.Field;
-import com.bluexml.side.view.FieldGroup;
 import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
 
@@ -48,7 +43,7 @@ import com.bluexml.side.view.ViewPackage;
  * @generated
  */
 public class AbstractViewItemProvider
-	extends NamedModelElementItemProvider
+	extends FieldContainerItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -76,101 +71,9 @@ public class AbstractViewItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addMapToPropertyDescriptor(object);
-			addPrefixPropertyDescriptor(object);
-			addSuffixPropertyDescriptor(object);
-			addHiddenPropertyDescriptor(object);
 			addViewOfPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Map To feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addMapToPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_FieldElement_mapTo_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_FieldElement_mapTo_feature", "_UI_FieldElement_type"),
-				 ViewPackage.Literals.FIELD_ELEMENT__MAP_TO,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Prefix feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addPrefixPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_FieldElement_prefix_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_FieldElement_prefix_feature", "_UI_FieldElement_type"),
-				 ViewPackage.Literals.FIELD_ELEMENT__PREFIX,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Suffix feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSuffixPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_FieldElement_suffix_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_FieldElement_suffix_feature", "_UI_FieldElement_type"),
-				 ViewPackage.Literals.FIELD_ELEMENT__SUFFIX,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Hidden feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addHiddenPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_FieldElement_hidden_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_FieldElement_hidden_feature", "_UI_FieldElement_type"),
-				 ViewPackage.Literals.FIELD_ELEMENT__HIDDEN,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -201,14 +104,12 @@ public class AbstractViewItemProvider
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @_generated
+	 * @generated
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ViewPackage.Literals.FIELD_GROUP__CHILDREN);
-			childrenFeatures.add(ViewPackage.Literals.STYLABLE__STYLING);
 			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS);
 		}
 		return childrenFeatures;
@@ -264,14 +165,6 @@ public class AbstractViewItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(AbstractView.class)) {
-			case ViewPackage.ABSTRACT_VIEW__PREFIX:
-			case ViewPackage.ABSTRACT_VIEW__SUFFIX:
-			case ViewPackage.ABSTRACT_VIEW__HIDDEN:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case ViewPackage.ABSTRACT_VIEW__STYLING:
-			case ViewPackage.ABSTRACT_VIEW__CHILDREN:
-			case ViewPackage.ABSTRACT_VIEW__DISABLED:
 			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -284,23 +177,11 @@ public class AbstractViewItemProvider
 	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @_generated
+	 * @generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.STYLABLE__STYLING,
-				 ViewFactory.eINSTANCE.createStyling()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-				 ViewFactory.eINSTANCE.createCol()));
-
-		
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -325,8 +206,8 @@ public class AbstractViewItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == ViewPackage.Literals.FIELD_GROUP__CHILDREN ||
-			childFeature == ViewPackage.Literals.FIELD_GROUP__DISABLED;
+			childFeature == ViewPackage.Literals.FIELD_CONTAINER__CHILDREN ||
+			childFeature == ViewPackage.Literals.FIELD_CONTAINER__DISABLED;
 
 		if (qualify) {
 			return getString
@@ -334,43 +215,6 @@ public class AbstractViewItemProvider
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return ViewEditPlugin.INSTANCE;
-	}
-	
-	@SuppressWarnings("deprecation")
-	@Override
-	public Command createRemoveCommand(EditingDomain domain, EObject owner, EReference feature, Collection<?> collection) {
-		CompoundCommand cmd = new CompoundCommand();
-		// First we check if we synchronize
-		if (InternalModification.getMoveToDisabled()) {
-			for (Object o : collection) {
-				if (o instanceof FieldGroup) {
-						FieldGroup fg = (FieldGroup) EcoreUtil.copy((FieldGroup)o);
-						Command createCmd = AddCommand.create(domain, ViewUtils.getViewForElement(owner), ViewPackage.eINSTANCE.getFieldGroup_Disabled(), fg);
-						cmd.append(createCmd);
-					
-				} else if (o instanceof Field) {
-					Field f = (Field) o;
-					Field fcpy = (Field) EcoreUtil.copy(f);
-					Command createCmd = AddCommand.create(domain, ViewUtils.getViewForElement(owner), ViewPackage.eINSTANCE.getFieldGroup_Disabled(), fcpy);
-					cmd.append(createCmd);
-				} else {
-					
-				}
-			}
-		}
-		cmd.append(super.createRemoveCommand(domain, owner, feature, collection));
-		return cmd;
 	}
 
 }

@@ -77,6 +77,18 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 	protected ViewSwitch<Adapter> modelSwitch =
 		new ViewSwitch<Adapter>() {
 			@Override
+			public Adapter caseViewCollection(ViewCollection object) {
+				return createViewCollectionAdapter();
+			}
+			@Override
+			public Adapter caseFieldElement(FieldElement object) {
+				return createFieldElementAdapter();
+			}
+			@Override
+			public Adapter caseAbstractView(AbstractView object) {
+				return createAbstractViewAdapter();
+			}
+			@Override
 			public Adapter caseAbstractDataTable(AbstractDataTable object) {
 				return createAbstractDataTableAdapter();
 			}
@@ -93,12 +105,36 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 				return createSortingAdapter();
 			}
 			@Override
+			public Adapter caseFiltering(Filtering object) {
+				return createFilteringAdapter();
+			}
+			@Override
+			public Adapter caseStyling(Styling object) {
+				return createStylingAdapter();
+			}
+			@Override
 			public Adapter caseDataTableElement(DataTableElement object) {
 				return createDataTableElementAdapter();
 			}
 			@Override
-			public Adapter caseFieldGroup(FieldGroup object) {
-				return createFieldGroupAdapter();
+			public Adapter caseDataList(DataList object) {
+				return createDataListAdapter();
+			}
+			@Override
+			public Adapter caseDataTable(DataTable object) {
+				return createDataTableAdapter();
+			}
+			@Override
+			public Adapter caseFacetMap(FacetMap object) {
+				return createFacetMapAdapter();
+			}
+			@Override
+			public Adapter caseTree(Tree object) {
+				return createTreeAdapter();
+			}
+			@Override
+			public Adapter caseFieldContainer(FieldContainer object) {
+				return createFieldContainerAdapter();
 			}
 			@Override
 			public Adapter caseField(Field object) {
@@ -145,44 +181,16 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 				return createEmailFieldAdapter();
 			}
 			@Override
+			public Adapter caseIntegerField(IntegerField object) {
+				return createIntegerFieldAdapter();
+			}
+			@Override
 			public Adapter caseFileField(FileField object) {
 				return createFileFieldAdapter();
 			}
 			@Override
-			public Adapter caseFieldElement(FieldElement object) {
-				return createFieldElementAdapter();
-			}
-			@Override
-			public Adapter caseFacetMap(FacetMap object) {
-				return createFacetMapAdapter();
-			}
-			@Override
-			public Adapter caseDataList(DataList object) {
-				return createDataListAdapter();
-			}
-			@Override
-			public Adapter caseTree(Tree object) {
-				return createTreeAdapter();
-			}
-			@Override
-			public Adapter caseDataTable(DataTable object) {
-				return createDataTableAdapter();
-			}
-			@Override
-			public Adapter caseStyling(Styling object) {
-				return createStylingAdapter();
-			}
-			@Override
-			public Adapter caseAbstractView(AbstractView object) {
-				return createAbstractViewAdapter();
-			}
-			@Override
 			public Adapter caseSelectField(SelectField object) {
 				return createSelectFieldAdapter();
-			}
-			@Override
-			public Adapter caseViewCollection(ViewCollection object) {
-				return createViewCollectionAdapter();
 			}
 			@Override
 			public Adapter caseHtmlField(HtmlField object) {
@@ -213,14 +221,6 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 				return createFilterableAdapter();
 			}
 			@Override
-			public Adapter caseFiltering(Filtering object) {
-				return createFilteringAdapter();
-			}
-			@Override
-			public Adapter caseIntegerField(IntegerField object) {
-				return createIntegerFieldAdapter();
-			}
-			@Override
 			public Adapter caseModelElement(ModelElement object) {
 				return createModelElementAdapter();
 			}
@@ -229,16 +229,16 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 				return createNamedModelElementAdapter();
 			}
 			@Override
+			public Adapter casePackage(com.bluexml.side.common.Package object) {
+				return createPackageAdapter();
+			}
+			@Override
 			public Adapter caseMetaData(MetaData object) {
 				return createMetaDataAdapter();
 			}
 			@Override
 			public Adapter caseMetaInfoGroup(MetaInfoGroup object) {
 				return createMetaInfoGroupAdapter();
-			}
-			@Override
-			public Adapter casePackage(com.bluexml.side.common.Package object) {
-				return createPackageAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -259,6 +259,48 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.ViewCollection <em>Collection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.view.ViewCollection
+	 * @generated
+	 */
+	public Adapter createViewCollectionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.FieldElement <em>Field Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.view.FieldElement
+	 * @generated
+	 */
+	public Adapter createFieldElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.AbstractView <em>Abstract View</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.view.AbstractView
+	 * @generated
+	 */
+	public Adapter createAbstractViewAdapter() {
+		return null;
+	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.AbstractDataTable <em>Abstract Data Table</em>}'.
@@ -317,6 +359,34 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.Filtering <em>Filtering</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.view.Filtering
+	 * @generated
+	 */
+	public Adapter createFilteringAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.Styling <em>Styling</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.view.Styling
+	 * @generated
+	 */
+	public Adapter createStylingAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.DataTableElement <em>Data Table Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -331,16 +401,72 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.FieldGroup <em>Field Group</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.DataList <em>Data List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see com.bluexml.side.view.FieldGroup
+	 * @see com.bluexml.side.view.DataList
 	 * @generated
 	 */
-	public Adapter createFieldGroupAdapter() {
+	public Adapter createDataListAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.DataTable <em>Data Table</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.view.DataTable
+	 * @generated
+	 */
+	public Adapter createDataTableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.FacetMap <em>Facet Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.view.FacetMap
+	 * @generated
+	 */
+	public Adapter createFacetMapAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.Tree <em>Tree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.view.Tree
+	 * @generated
+	 */
+	public Adapter createTreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.FieldContainer <em>Field Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.view.FieldContainer
+	 * @generated
+	 */
+	public Adapter createFieldContainerAdapter() {
 		return null;
 	}
 
@@ -499,6 +625,20 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.IntegerField <em>Integer Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.view.IntegerField
+	 * @generated
+	 */
+	public Adapter createIntegerFieldAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.FileField <em>File Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -513,104 +653,6 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.FieldElement <em>Field Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.view.FieldElement
-	 * @generated
-	 */
-	public Adapter createFieldElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.FacetMap <em>Facet Map</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.view.FacetMap
-	 * @generated
-	 */
-	public Adapter createFacetMapAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.DataList <em>Data List</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.view.DataList
-	 * @generated
-	 */
-	public Adapter createDataListAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.Tree <em>Tree</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.view.Tree
-	 * @generated
-	 */
-	public Adapter createTreeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.DataTable <em>Data Table</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.view.DataTable
-	 * @generated
-	 */
-	public Adapter createDataTableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.Styling <em>Styling</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.view.Styling
-	 * @generated
-	 */
-	public Adapter createStylingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.AbstractView <em>Abstract View</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.view.AbstractView
-	 * @generated
-	 */
-	public Adapter createAbstractViewAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.SelectField <em>Select Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -621,20 +663,6 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSelectFieldAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.ViewCollection <em>Collection</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.view.ViewCollection
-	 * @generated
-	 */
-	public Adapter createViewCollectionAdapter() {
 		return null;
 	}
 
@@ -737,34 +765,6 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.Filtering <em>Filtering</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.view.Filtering
-	 * @generated
-	 */
-	public Adapter createFilteringAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.IntegerField <em>Integer Field</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.view.IntegerField
-	 * @generated
-	 */
-	public Adapter createIntegerFieldAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.ModelElement <em>Model Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -793,6 +793,20 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.Package <em>Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.common.Package
+	 * @generated
+	 */
+	public Adapter createPackageAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.MetaData <em>Meta Data</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -817,20 +831,6 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMetaInfoGroupAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.Package <em>Package</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.bluexml.side.common.Package
-	 * @generated
-	 */
-	public Adapter createPackageAdapter() {
 		return null;
 	}
 

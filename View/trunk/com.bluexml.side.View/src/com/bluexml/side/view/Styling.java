@@ -7,7 +7,6 @@
 package com.bluexml.side.view;
 
 import com.bluexml.side.common.MetaInfoGroup;
-import com.bluexml.side.common.NamedModelElement;
 
 /**
  * <!-- begin-user-doc -->

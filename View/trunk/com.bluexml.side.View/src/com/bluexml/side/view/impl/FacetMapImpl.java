@@ -6,20 +6,23 @@
  */
 package com.bluexml.side.view.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.ecore.OCL;
-
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
+
 import com.bluexml.side.view.FacetDisplayType;
 import com.bluexml.side.view.FacetMap;
-import com.bluexml.side.view.FieldGroup;
 import com.bluexml.side.view.Paginable;
 import com.bluexml.side.view.Paging;
 import com.bluexml.side.view.ViewPackage;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->
@@ -315,7 +318,7 @@ public class FacetMapImpl extends AbstractViewImpl implements FacetMap {
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

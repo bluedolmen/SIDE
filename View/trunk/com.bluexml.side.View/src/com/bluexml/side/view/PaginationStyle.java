@@ -50,7 +50,9 @@ public enum PaginationStyle implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	NONE(-1, "none", "none"), /**
+	NONE(-1, "none", "none"),
+
+	/**
 	 * The '<em><b>More</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

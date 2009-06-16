@@ -26,7 +26,7 @@ import com.bluexml.side.common.OperationComponent;
  * @model abstract="true"
  * @generated
  */
-public interface AbstractDataTable extends DataTableElement, AbstractView, Paginable {
+public interface AbstractDataTable extends AbstractView, DataTableElement, Paginable {
 	/**
 	 * Returns the value of the '<em><b>Have Row Actions</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

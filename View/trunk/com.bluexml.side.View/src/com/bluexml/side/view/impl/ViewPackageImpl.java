@@ -6,14 +6,8 @@
  */
 package com.bluexml.side.view.impl;
 
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import com.bluexml.side.common.CommonPackage;
+
 import com.bluexml.side.view.AbstractDataTable;
 import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.ActionField;
@@ -29,6 +23,7 @@ import com.bluexml.side.view.EmailField;
 import com.bluexml.side.view.FacetDisplayType;
 import com.bluexml.side.view.FacetMap;
 import com.bluexml.side.view.Field;
+import com.bluexml.side.view.FieldContainer;
 import com.bluexml.side.view.FieldElement;
 import com.bluexml.side.view.FieldGroup;
 import com.bluexml.side.view.FileField;
@@ -60,6 +55,14 @@ import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
 import com.bluexml.side.view.WidgetTextType;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Package</b>.
@@ -67,6 +70,27 @@ import com.bluexml.side.view.WidgetTextType;
  * @generated
  */
 public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass viewCollectionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass fieldElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass abstractViewEClass = null;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -100,6 +124,20 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass filteringEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass stylingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass dataTableElementEClass = null;
 
 	/**
@@ -107,7 +145,35 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass fieldGroupEClass = null;
+	private EClass dataListEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dataTableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass facetMapEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass treeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass fieldContainerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -191,6 +257,13 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass integerFieldEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass fileFieldEClass = null;
 
 	/**
@@ -198,63 +271,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass fieldElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass facetMapEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass dataListEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass treeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass dataTableEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass stylingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass abstractViewEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass selectFieldEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass viewCollectionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -304,20 +321,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * @generated
 	 */
 	private EClass filterableEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass filteringEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass integerFieldEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -444,6 +447,96 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getViewCollection() {
+		return viewCollectionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getViewCollection_Views() {
+		return (EReference)viewCollectionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFieldElement() {
+		return fieldElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFieldElement_MapTo() {
+		return (EReference)fieldElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFieldElement_Prefix() {
+		return (EAttribute)fieldElementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFieldElement_Suffix() {
+		return (EAttribute)fieldElementEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFieldElement_Hidden() {
+		return (EAttribute)fieldElementEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAbstractView() {
+		return abstractViewEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractView_ViewOf() {
+		return (EReference)abstractViewEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractView_Operations() {
+		return (EReference)abstractViewEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getAbstractDataTable() {
 		return abstractDataTableEClass;
 	}
@@ -561,6 +654,60 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getFiltering() {
+		return filteringEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFiltering_DefaultFilterValue() {
+		return (EAttribute)filteringEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStyling() {
+		return stylingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStyling_Style() {
+		return (EAttribute)stylingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStyling_Height() {
+		return (EAttribute)stylingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStyling_Width() {
+		return (EAttribute)stylingEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDataTableElement() {
 		return dataTableElementEClass;
 	}
@@ -570,8 +717,8 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFieldGroup() {
-		return fieldGroupEClass;
+	public EClass getDataList() {
+		return dataListEClass;
 	}
 
 	/**
@@ -579,8 +726,8 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFieldGroup_Children() {
-		return (EReference)fieldGroupEClass.getEStructuralFeatures().get(0);
+	public EClass getDataTable() {
+		return dataTableEClass;
 	}
 
 	/**
@@ -588,8 +735,107 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFieldGroup_Disabled() {
-		return (EReference)fieldGroupEClass.getEStructuralFeatures().get(1);
+	public EReference getDataTable_DefaultColSetUp() {
+		return (EReference)dataTableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFacetMap() {
+		return facetMapEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFacetMap_DisplayEmptyFacet() {
+		return (EAttribute)facetMapEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFacetMap_FacetDisplayType() {
+		return (EAttribute)facetMapEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTree() {
+		return treeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTree_NodeOperations() {
+		return (EReference)treeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTree_NodeValue() {
+		return (EReference)treeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTree_DefaultDepth() {
+		return (EAttribute)treeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTree_MaxDepth() {
+		return (EAttribute)treeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFieldContainer() {
+		return fieldContainerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFieldContainer_Children() {
+		return (EReference)fieldContainerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFieldContainer_Disabled() {
+		return (EReference)fieldContainerEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -741,215 +987,17 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getIntegerField() {
+		return integerFieldEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFileField() {
 		return fileFieldEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getFieldElement() {
-		return fieldElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getFieldElement_MapTo() {
-		return (EReference)fieldElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFieldElement_Prefix() {
-		return (EAttribute)fieldElementEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFieldElement_Suffix() {
-		return (EAttribute)fieldElementEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFieldElement_Hidden() {
-		return (EAttribute)fieldElementEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getFacetMap() {
-		return facetMapEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFacetMap_DisplayEmptyFacet() {
-		return (EAttribute)facetMapEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFacetMap_FacetDisplayType() {
-		return (EAttribute)facetMapEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getDataList() {
-		return dataListEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getTree() {
-		return treeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTree_NodeOperations() {
-		return (EReference)treeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTree_NodeValue() {
-		return (EReference)treeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getTree_DefaultDepth() {
-		return (EAttribute)treeEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getTree_MaxDepth() {
-		return (EAttribute)treeEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getDataTable() {
-		return dataTableEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDataTable_DefaultColSetUp() {
-		return (EReference)dataTableEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getStyling() {
-		return stylingEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getStyling_Style() {
-		return (EAttribute)stylingEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getStyling_Height() {
-		return (EAttribute)stylingEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getStyling_Width() {
-		return (EAttribute)stylingEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getAbstractView() {
-		return abstractViewEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAbstractView_ViewOf() {
-		return (EReference)abstractViewEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAbstractView_Operations() {
-		return (EReference)abstractViewEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -968,24 +1016,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 */
 	public EAttribute getSelectField_SelectWidget() {
 		return (EAttribute)selectFieldEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getViewCollection() {
-		return viewCollectionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getViewCollection_Views() {
-		return (EReference)viewCollectionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1110,33 +1140,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFiltering() {
-		return filteringEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFiltering_DefaultFilterValue() {
-		return (EAttribute)filteringEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getIntegerField() {
-		return integerFieldEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getSortOrder() {
 		return sortOrderEEnum;
 	}
@@ -1223,6 +1226,19 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		isCreated = true;
 
 		// Create classes and their features
+		viewCollectionEClass = createEClass(VIEW_COLLECTION);
+		createEReference(viewCollectionEClass, VIEW_COLLECTION__VIEWS);
+
+		fieldElementEClass = createEClass(FIELD_ELEMENT);
+		createEReference(fieldElementEClass, FIELD_ELEMENT__MAP_TO);
+		createEAttribute(fieldElementEClass, FIELD_ELEMENT__PREFIX);
+		createEAttribute(fieldElementEClass, FIELD_ELEMENT__SUFFIX);
+		createEAttribute(fieldElementEClass, FIELD_ELEMENT__HIDDEN);
+
+		abstractViewEClass = createEClass(ABSTRACT_VIEW);
+		createEReference(abstractViewEClass, ABSTRACT_VIEW__VIEW_OF);
+		createEReference(abstractViewEClass, ABSTRACT_VIEW__OPERATIONS);
+
 		abstractDataTableEClass = createEClass(ABSTRACT_DATA_TABLE);
 		createEReference(abstractDataTableEClass, ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS);
 		createEReference(abstractDataTableEClass, ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS);
@@ -1240,11 +1256,34 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		createEAttribute(sortingEClass, SORTING__SORT_ORDER);
 		createEAttribute(sortingEClass, SORTING__SORTED);
 
+		filteringEClass = createEClass(FILTERING);
+		createEAttribute(filteringEClass, FILTERING__DEFAULT_FILTER_VALUE);
+
+		stylingEClass = createEClass(STYLING);
+		createEAttribute(stylingEClass, STYLING__STYLE);
+		createEAttribute(stylingEClass, STYLING__HEIGHT);
+		createEAttribute(stylingEClass, STYLING__WIDTH);
+
 		dataTableElementEClass = createEClass(DATA_TABLE_ELEMENT);
 
-		fieldGroupEClass = createEClass(FIELD_GROUP);
-		createEReference(fieldGroupEClass, FIELD_GROUP__CHILDREN);
-		createEReference(fieldGroupEClass, FIELD_GROUP__DISABLED);
+		dataListEClass = createEClass(DATA_LIST);
+
+		dataTableEClass = createEClass(DATA_TABLE);
+		createEReference(dataTableEClass, DATA_TABLE__DEFAULT_COL_SET_UP);
+
+		facetMapEClass = createEClass(FACET_MAP);
+		createEAttribute(facetMapEClass, FACET_MAP__DISPLAY_EMPTY_FACET);
+		createEAttribute(facetMapEClass, FACET_MAP__FACET_DISPLAY_TYPE);
+
+		treeEClass = createEClass(TREE);
+		createEReference(treeEClass, TREE__NODE_OPERATIONS);
+		createEReference(treeEClass, TREE__NODE_VALUE);
+		createEAttribute(treeEClass, TREE__DEFAULT_DEPTH);
+		createEAttribute(treeEClass, TREE__MAX_DEPTH);
+
+		fieldContainerEClass = createEClass(FIELD_CONTAINER);
+		createEReference(fieldContainerEClass, FIELD_CONTAINER__CHILDREN);
+		createEReference(fieldContainerEClass, FIELD_CONTAINER__DISABLED);
 
 		fieldEClass = createEClass(FIELD);
 		createEAttribute(fieldEClass, FIELD__PATERN);
@@ -1273,43 +1312,12 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		emailFieldEClass = createEClass(EMAIL_FIELD);
 
+		integerFieldEClass = createEClass(INTEGER_FIELD);
+
 		fileFieldEClass = createEClass(FILE_FIELD);
-
-		fieldElementEClass = createEClass(FIELD_ELEMENT);
-		createEReference(fieldElementEClass, FIELD_ELEMENT__MAP_TO);
-		createEAttribute(fieldElementEClass, FIELD_ELEMENT__PREFIX);
-		createEAttribute(fieldElementEClass, FIELD_ELEMENT__SUFFIX);
-		createEAttribute(fieldElementEClass, FIELD_ELEMENT__HIDDEN);
-
-		facetMapEClass = createEClass(FACET_MAP);
-		createEAttribute(facetMapEClass, FACET_MAP__DISPLAY_EMPTY_FACET);
-		createEAttribute(facetMapEClass, FACET_MAP__FACET_DISPLAY_TYPE);
-
-		dataListEClass = createEClass(DATA_LIST);
-
-		treeEClass = createEClass(TREE);
-		createEReference(treeEClass, TREE__NODE_OPERATIONS);
-		createEReference(treeEClass, TREE__NODE_VALUE);
-		createEAttribute(treeEClass, TREE__DEFAULT_DEPTH);
-		createEAttribute(treeEClass, TREE__MAX_DEPTH);
-
-		dataTableEClass = createEClass(DATA_TABLE);
-		createEReference(dataTableEClass, DATA_TABLE__DEFAULT_COL_SET_UP);
-
-		stylingEClass = createEClass(STYLING);
-		createEAttribute(stylingEClass, STYLING__STYLE);
-		createEAttribute(stylingEClass, STYLING__HEIGHT);
-		createEAttribute(stylingEClass, STYLING__WIDTH);
-
-		abstractViewEClass = createEClass(ABSTRACT_VIEW);
-		createEReference(abstractViewEClass, ABSTRACT_VIEW__VIEW_OF);
-		createEReference(abstractViewEClass, ABSTRACT_VIEW__OPERATIONS);
 
 		selectFieldEClass = createEClass(SELECT_FIELD);
 		createEAttribute(selectFieldEClass, SELECT_FIELD__SELECT_WIDGET);
-
-		viewCollectionEClass = createEClass(VIEW_COLLECTION);
-		createEReference(viewCollectionEClass, VIEW_COLLECTION__VIEWS);
 
 		htmlFieldEClass = createEClass(HTML_FIELD);
 
@@ -1330,11 +1338,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		filterableEClass = createEClass(FILTERABLE);
 		createEReference(filterableEClass, FILTERABLE__FILTERING);
-
-		filteringEClass = createEClass(FILTERING);
-		createEAttribute(filteringEClass, FILTERING__DEFAULT_FILTER_VALUE);
-
-		integerFieldEClass = createEClass(INTEGER_FIELD);
 
 		// Create enums
 		sortOrderEEnum = createEEnum(SORT_ORDER);
@@ -1377,15 +1380,30 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		abstractDataTableEClass.getESuperTypes().add(this.getDataTableElement());
+		viewCollectionEClass.getESuperTypes().add(theCommonPackage.getPackage());
+		fieldElementEClass.getESuperTypes().add(this.getStylable());
+		fieldElementEClass.getESuperTypes().add(theCommonPackage.getNamedModelElement());
+		abstractViewEClass.getESuperTypes().add(this.getFieldContainer());
 		abstractDataTableEClass.getESuperTypes().add(this.getAbstractView());
+		abstractDataTableEClass.getESuperTypes().add(this.getDataTableElement());
 		abstractDataTableEClass.getESuperTypes().add(this.getPaginable());
+		colEClass.getESuperTypes().add(this.getFieldContainer());
 		colEClass.getESuperTypes().add(this.getMovable());
 		colEClass.getESuperTypes().add(this.getEditable());
 		colEClass.getESuperTypes().add(this.getFilterable());
-		colEClass.getESuperTypes().add(this.getFieldGroup());
 		colEClass.getESuperTypes().add(this.getSortable());
-		fieldGroupEClass.getESuperTypes().add(this.getFieldElement());
+		stylingEClass.getESuperTypes().add(theCommonPackage.getMetaInfoGroup());
+		dataListEClass.getESuperTypes().add(this.getAbstractDataTable());
+		dataListEClass.getESuperTypes().add(this.getCol());
+		dataTableEClass.getESuperTypes().add(this.getAbstractDataTable());
+		facetMapEClass.getESuperTypes().add(this.getAbstractView());
+		facetMapEClass.getESuperTypes().add(this.getPaginable());
+		treeEClass.getESuperTypes().add(this.getAbstractView());
+		treeEClass.getESuperTypes().add(this.getSortable());
+		treeEClass.getESuperTypes().add(this.getEditable());
+		treeEClass.getESuperTypes().add(this.getMovable());
+		treeEClass.getESuperTypes().add(this.getFilterable());
+		fieldContainerEClass.getESuperTypes().add(this.getFieldElement());
 		fieldEClass.getESuperTypes().add(this.getFieldElement());
 		textFieldEClass.getESuperTypes().add(this.getField());
 		passwordFieldEClass.getESuperTypes().add(this.getField());
@@ -1397,29 +1415,25 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		dateTimeFieldEClass.getESuperTypes().add(this.getField());
 		phoneNumberFieldEClass.getESuperTypes().add(this.getField());
 		emailFieldEClass.getESuperTypes().add(this.getField());
-		fileFieldEClass.getESuperTypes().add(this.getField());
-		fieldElementEClass.getESuperTypes().add(this.getStylable());
-		fieldElementEClass.getESuperTypes().add(theCommonPackage.getNamedModelElement());
-		facetMapEClass.getESuperTypes().add(this.getAbstractView());
-		facetMapEClass.getESuperTypes().add(this.getPaginable());
-		dataListEClass.getESuperTypes().add(this.getAbstractDataTable());
-		dataListEClass.getESuperTypes().add(this.getCol());
-		treeEClass.getESuperTypes().add(this.getAbstractView());
-		treeEClass.getESuperTypes().add(this.getSortable());
-		treeEClass.getESuperTypes().add(this.getEditable());
-		treeEClass.getESuperTypes().add(this.getMovable());
-		treeEClass.getESuperTypes().add(this.getFilterable());
-		dataTableEClass.getESuperTypes().add(this.getAbstractDataTable());
-		stylingEClass.getESuperTypes().add(theCommonPackage.getMetaInfoGroup());
-		abstractViewEClass.getESuperTypes().add(theCommonPackage.getNamedModelElement());
-		abstractViewEClass.getESuperTypes().add(this.getStylable());
-		abstractViewEClass.getESuperTypes().add(this.getFieldGroup());
-		selectFieldEClass.getESuperTypes().add(this.getField());
-		viewCollectionEClass.getESuperTypes().add(theCommonPackage.getPackage());
-		htmlFieldEClass.getESuperTypes().add(this.getField());
 		integerFieldEClass.getESuperTypes().add(this.getField());
+		fileFieldEClass.getESuperTypes().add(this.getField());
+		selectFieldEClass.getESuperTypes().add(this.getField());
+		htmlFieldEClass.getESuperTypes().add(this.getField());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(viewCollectionEClass, ViewCollection.class, "ViewCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getViewCollection_Views(), this.getAbstractView(), null, "views", null, 0, -1, ViewCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(fieldElementEClass, FieldElement.class, "FieldElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFieldElement_MapTo(), theCommonPackage.getModelElement(), null, "mapTo", null, 0, 1, FieldElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFieldElement_Prefix(), ecorePackage.getEString(), "prefix", null, 0, 1, FieldElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFieldElement_Suffix(), ecorePackage.getEString(), "suffix", null, 0, 1, FieldElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFieldElement_Hidden(), ecorePackage.getEBoolean(), "hidden", null, 0, 1, FieldElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(abstractViewEClass, AbstractView.class, "AbstractView", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAbstractView_ViewOf(), theCommonPackage.getContainer(), null, "viewOf", null, 0, 1, AbstractView.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractView_Operations(), theCommonPackage.getOperationComponent(), null, "operations", null, 0, 1, AbstractView.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(abstractDataTableEClass, AbstractDataTable.class, "AbstractDataTable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractDataTable_HaveRowActions(), theCommonPackage.getOperationComponent(), null, "haveRowActions", null, 0, 1, AbstractDataTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractDataTable_HaveSelectActions(), theCommonPackage.getOperationComponent(), null, "haveSelectActions", null, 0, 1, AbstractDataTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1437,11 +1451,34 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		initEAttribute(getSorting_SortOrder(), this.getSortOrder(), "sortOrder", null, 0, 1, Sorting.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSorting_Sorted(), ecorePackage.getEBoolean(), "sorted", "false", 0, 1, Sorting.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(filteringEClass, Filtering.class, "Filtering", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFiltering_DefaultFilterValue(), ecorePackage.getEString(), "defaultFilterValue", null, 0, 1, Filtering.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(stylingEClass, Styling.class, "Styling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStyling_Style(), ecorePackage.getEString(), "style", null, 0, 1, Styling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStyling_Height(), ecorePackage.getEInt(), "height", null, 0, 1, Styling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStyling_Width(), ecorePackage.getEInt(), "width", null, 0, 1, Styling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(dataTableElementEClass, DataTableElement.class, "DataTableElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(fieldGroupEClass, FieldGroup.class, "FieldGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFieldGroup_Children(), this.getFieldElement(), null, "children", null, 0, -1, FieldGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFieldGroup_Disabled(), this.getFieldElement(), null, "disabled", null, 0, -1, FieldGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(dataListEClass, DataList.class, "DataList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(dataTableEClass, DataTable.class, "DataTable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDataTable_DefaultColSetUp(), this.getCol(), null, "defaultColSetUp", null, 0, 1, DataTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(facetMapEClass, FacetMap.class, "FacetMap", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFacetMap_DisplayEmptyFacet(), ecorePackage.getEBoolean(), "displayEmptyFacet", null, 0, 1, FacetMap.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFacetMap_FacetDisplayType(), this.getFacetDisplayType(), "facetDisplayType", null, 0, 1, FacetMap.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(treeEClass, Tree.class, "Tree", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTree_NodeOperations(), theCommonPackage.getOperationComponent(), null, "nodeOperations", null, 0, 1, Tree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTree_NodeValue(), this.getFieldElement(), null, "nodeValue", null, 1, 1, Tree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTree_DefaultDepth(), ecorePackage.getEInt(), "defaultDepth", "1", 0, 1, Tree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTree_MaxDepth(), ecorePackage.getEInt(), "maxDepth", null, 0, 1, Tree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(fieldContainerEClass, FieldContainer.class, "FieldContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFieldContainer_Children(), this.getFieldElement(), null, "children", null, 0, -1, FieldContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFieldContainer_Disabled(), this.getFieldElement(), null, "disabled", null, 0, -1, FieldContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(fieldEClass, Field.class, "Field", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getField_Patern(), ecorePackage.getEString(), "patern", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1470,43 +1507,12 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		initEClass(emailFieldEClass, EmailField.class, "EmailField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(integerFieldEClass, IntegerField.class, "IntegerField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(fileFieldEClass, FileField.class, "FileField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(fieldElementEClass, FieldElement.class, "FieldElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFieldElement_MapTo(), theCommonPackage.getModelElement(), null, "mapTo", null, 0, 1, FieldElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFieldElement_Prefix(), ecorePackage.getEString(), "prefix", null, 0, 1, FieldElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFieldElement_Suffix(), ecorePackage.getEString(), "suffix", null, 0, 1, FieldElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFieldElement_Hidden(), ecorePackage.getEBoolean(), "hidden", null, 0, 1, FieldElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(facetMapEClass, FacetMap.class, "FacetMap", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFacetMap_DisplayEmptyFacet(), ecorePackage.getEBoolean(), "displayEmptyFacet", null, 0, 1, FacetMap.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFacetMap_FacetDisplayType(), this.getFacetDisplayType(), "facetDisplayType", null, 0, 1, FacetMap.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(dataListEClass, DataList.class, "DataList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(treeEClass, Tree.class, "Tree", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTree_NodeOperations(), theCommonPackage.getOperationComponent(), null, "nodeOperations", null, 0, 1, Tree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTree_NodeValue(), this.getFieldElement(), null, "nodeValue", null, 1, 1, Tree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTree_DefaultDepth(), ecorePackage.getEInt(), "defaultDepth", "1", 0, 1, Tree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTree_MaxDepth(), ecorePackage.getEInt(), "maxDepth", null, 0, 1, Tree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(dataTableEClass, DataTable.class, "DataTable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDataTable_DefaultColSetUp(), this.getCol(), null, "defaultColSetUp", null, 0, 1, DataTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(stylingEClass, Styling.class, "Styling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getStyling_Style(), ecorePackage.getEString(), "style", null, 0, 1, Styling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getStyling_Height(), ecorePackage.getEInt(), "height", null, 0, 1, Styling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getStyling_Width(), ecorePackage.getEInt(), "width", null, 0, 1, Styling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(abstractViewEClass, AbstractView.class, "AbstractView", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAbstractView_ViewOf(), theCommonPackage.getContainer(), null, "viewOf", null, 0, 1, AbstractView.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractView_Operations(), theCommonPackage.getOperationComponent(), null, "operations", null, 0, 1, AbstractView.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(selectFieldEClass, SelectField.class, "SelectField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSelectField_SelectWidget(), this.getSelectWidgetType(), "selectWidget", null, 0, 1, SelectField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(viewCollectionEClass, ViewCollection.class, "ViewCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getViewCollection_Views(), this.getAbstractView(), null, "views", null, 0, -1, ViewCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(htmlFieldEClass, HtmlField.class, "HtmlField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1527,11 +1533,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		initEClass(filterableEClass, Filterable.class, "Filterable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFilterable_Filtering(), this.getFiltering(), null, "filtering", null, 0, 1, Filterable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(filteringEClass, Filtering.class, "Filtering", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFiltering_DefaultFilterValue(), ecorePackage.getEString(), "defaultFilterValue", null, 0, 1, Filtering.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(integerFieldEClass, IntegerField.class, "IntegerField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(sortOrderEEnum, SortOrder.class, "SortOrder");
@@ -1582,7 +1583,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * @generated
 	 */
 	protected void createDocumentationAnnotations() {
-		String source = "http://www.topcased.org/documentation";		
+		String source = "http://www.topcased.org/documentation";			
 		addAnnotation
 		  (getAbstractDataTable_HaveRowActions(), 
 		   source, 
@@ -1600,7 +1601,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "use this to setup default actions available on each colomn"
-		   });									
+		   });								
 	}
 
 } //ViewPackageImpl

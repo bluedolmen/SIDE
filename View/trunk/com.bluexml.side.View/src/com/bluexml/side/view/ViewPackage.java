@@ -63,33 +63,14 @@ public interface ViewPackage extends EPackage {
 	ViewPackage eINSTANCE = com.bluexml.side.view.impl.ViewPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.DataTableElementImpl <em>Data Table Element</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.ViewCollectionImpl <em>Collection</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.DataTableElementImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getDataTableElement()
+	 * @see com.bluexml.side.view.impl.ViewCollectionImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getViewCollection()
 	 * @generated
 	 */
-	int DATA_TABLE_ELEMENT = 4;
-
-	/**
-	 * The number of structural features of the '<em>Data Table Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE_ELEMENT_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.AbstractDataTableImpl <em>Abstract Data Table</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.AbstractDataTableImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getAbstractDataTable()
-	 * @generated
-	 */
-	int ABSTRACT_DATA_TABLE = 0;
+	int VIEW_COLLECTION = 0;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -98,7 +79,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE__STEREOTYPES = DATA_TABLE_ELEMENT_FEATURE_COUNT + 0;
+	int VIEW_COLLECTION__STEREOTYPES = CommonPackage.PACKAGE__STEREOTYPES;
 
 	/**
 	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
@@ -107,7 +88,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE__TAGS = DATA_TABLE_ELEMENT_FEATURE_COUNT + 1;
+	int VIEW_COLLECTION__TAGS = CommonPackage.PACKAGE__TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
@@ -116,7 +97,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE__COMMENTS = DATA_TABLE_ELEMENT_FEATURE_COUNT + 2;
+	int VIEW_COLLECTION__COMMENTS = CommonPackage.PACKAGE__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
@@ -125,7 +106,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE__DOCUMENTATION = DATA_TABLE_ELEMENT_FEATURE_COUNT + 3;
+	int VIEW_COLLECTION__DOCUMENTATION = CommonPackage.PACKAGE__DOCUMENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -134,7 +115,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE__DESCRIPTION = DATA_TABLE_ELEMENT_FEATURE_COUNT + 4;
+	int VIEW_COLLECTION__DESCRIPTION = CommonPackage.PACKAGE__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
@@ -143,7 +124,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE__METAINFO = DATA_TABLE_ELEMENT_FEATURE_COUNT + 5;
+	int VIEW_COLLECTION__METAINFO = CommonPackage.PACKAGE__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -152,163 +133,43 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE__NAME = DATA_TABLE_ELEMENT_FEATURE_COUNT + 6;
+	int VIEW_COLLECTION__NAME = CommonPackage.PACKAGE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * The feature id for the '<em><b>Stereotype Set</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE__STYLING = DATA_TABLE_ELEMENT_FEATURE_COUNT + 7;
+	int VIEW_COLLECTION__STEREOTYPE_SET = CommonPackage.PACKAGE__STEREOTYPE_SET;
 
 	/**
-	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * The feature id for the '<em><b>Package Set</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE__MAP_TO = DATA_TABLE_ELEMENT_FEATURE_COUNT + 8;
+	int VIEW_COLLECTION__PACKAGE_SET = CommonPackage.PACKAGE__PACKAGE_SET;
 
 	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * The feature id for the '<em><b>Views</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE__PREFIX = DATA_TABLE_ELEMENT_FEATURE_COUNT + 9;
+	int VIEW_COLLECTION__VIEWS = CommonPackage.PACKAGE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * The number of structural features of the '<em>Collection</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE__SUFFIX = DATA_TABLE_ELEMENT_FEATURE_COUNT + 10;
-
-	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_DATA_TABLE__HIDDEN = DATA_TABLE_ELEMENT_FEATURE_COUNT + 11;
-
-	/**
-	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_DATA_TABLE__CHILDREN = DATA_TABLE_ELEMENT_FEATURE_COUNT + 12;
-
-	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_DATA_TABLE__DISABLED = DATA_TABLE_ELEMENT_FEATURE_COUNT + 13;
-
-	/**
-	 * The feature id for the '<em><b>View Of</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_DATA_TABLE__VIEW_OF = DATA_TABLE_ELEMENT_FEATURE_COUNT + 14;
-
-	/**
-	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_DATA_TABLE__OPERATIONS = DATA_TABLE_ELEMENT_FEATURE_COUNT + 15;
-
-	/**
-	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_DATA_TABLE__PAGING = DATA_TABLE_ELEMENT_FEATURE_COUNT + 16;
-
-	/**
-	 * The feature id for the '<em><b>Have Row Actions</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS = DATA_TABLE_ELEMENT_FEATURE_COUNT + 17;
-
-	/**
-	 * The feature id for the '<em><b>Have Select Actions</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS = DATA_TABLE_ELEMENT_FEATURE_COUNT + 18;
-
-	/**
-	 * The feature id for the '<em><b>Have Default Col Actions</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_DATA_TABLE__HAVE_DEFAULT_COL_ACTIONS = DATA_TABLE_ELEMENT_FEATURE_COUNT + 19;
-
-	/**
-	 * The number of structural features of the '<em>Abstract Data Table</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_DATA_TABLE_FEATURE_COUNT = DATA_TABLE_ELEMENT_FEATURE_COUNT + 20;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.ColImpl <em>Col</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.ColImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getCol()
-	 * @generated
-	 */
-	int COL = 1;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.PagingImpl <em>Paging</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.PagingImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getPaging()
-	 * @generated
-	 */
-	int PAGING = 2;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.SortingImpl <em>Sorting</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.SortingImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getSorting()
-	 * @generated
-	 */
-	int SORTING = 3;
+	int VIEW_COLLECTION_FEATURE_COUNT = CommonPackage.PACKAGE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.impl.StylableImpl <em>Stylable</em>}' class.
@@ -318,538 +179,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getStylable()
 	 * @generated
 	 */
-	int STYLABLE = 28;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.FieldElementImpl <em>Field Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.FieldElementImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFieldElement()
-	 * @generated
-	 */
-	int FIELD_ELEMENT = 18;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.FieldGroupImpl <em>Field Group</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.FieldGroupImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFieldGroup()
-	 * @generated
-	 */
-	int FIELD_GROUP = 5;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.FieldImpl <em>Field</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.FieldImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getField()
-	 * @generated
-	 */
-	int FIELD = 6;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.TextFieldImpl <em>Text Field</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.TextFieldImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getTextField()
-	 * @generated
-	 */
-	int TEXT_FIELD = 7;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.PasswordFieldImpl <em>Password Field</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.PasswordFieldImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getPasswordField()
-	 * @generated
-	 */
-	int PASSWORD_FIELD = 8;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.BooleanFieldImpl <em>Boolean Field</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.BooleanFieldImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getBooleanField()
-	 * @generated
-	 */
-	int BOOLEAN_FIELD = 9;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.FloatFieldImpl <em>Float Field</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.FloatFieldImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFloatField()
-	 * @generated
-	 */
-	int FLOAT_FIELD = 10;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.ActionFieldImpl <em>Action Field</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.ActionFieldImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getActionField()
-	 * @generated
-	 */
-	int ACTION_FIELD = 11;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.DateFieldImpl <em>Date Field</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.DateFieldImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getDateField()
-	 * @generated
-	 */
-	int DATE_FIELD = 12;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.TimeFieldImpl <em>Time Field</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.TimeFieldImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getTimeField()
-	 * @generated
-	 */
-	int TIME_FIELD = 13;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.DateTimeFieldImpl <em>Date Time Field</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.DateTimeFieldImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getDateTimeField()
-	 * @generated
-	 */
-	int DATE_TIME_FIELD = 14;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.PhoneNumberFieldImpl <em>Phone Number Field</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.PhoneNumberFieldImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getPhoneNumberField()
-	 * @generated
-	 */
-	int PHONE_NUMBER_FIELD = 15;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.EmailFieldImpl <em>Email Field</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.EmailFieldImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getEmailField()
-	 * @generated
-	 */
-	int EMAIL_FIELD = 16;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.FileFieldImpl <em>File Field</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.FileFieldImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFileField()
-	 * @generated
-	 */
-	int FILE_FIELD = 17;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.AbstractViewImpl <em>Abstract View</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.AbstractViewImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getAbstractView()
-	 * @generated
-	 */
-	int ABSTRACT_VIEW = 24;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.FacetMapImpl <em>Facet Map</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.FacetMapImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFacetMap()
-	 * @generated
-	 */
-	int FACET_MAP = 19;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.DataListImpl <em>Data List</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.DataListImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getDataList()
-	 * @generated
-	 */
-	int DATA_LIST = 20;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.TreeImpl <em>Tree</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.TreeImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getTree()
-	 * @generated
-	 */
-	int TREE = 21;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.DataTableImpl <em>Data Table</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.DataTableImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getDataTable()
-	 * @generated
-	 */
-	int DATA_TABLE = 22;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.StylingImpl <em>Styling</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.StylingImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getStyling()
-	 * @generated
-	 */
-	int STYLING = 23;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.SelectFieldImpl <em>Select Field</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.SelectFieldImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getSelectField()
-	 * @generated
-	 */
-	int SELECT_FIELD = 25;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.ViewCollectionImpl <em>Collection</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.ViewCollectionImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getViewCollection()
-	 * @generated
-	 */
-	int VIEW_COLLECTION = 26;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.HtmlFieldImpl <em>Html Field</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.HtmlFieldImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getHtmlField()
-	 * @generated
-	 */
-	int HTML_FIELD = 27;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.PaginableImpl <em>Paginable</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.PaginableImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getPaginable()
-	 * @generated
-	 */
-	int PAGINABLE = 29;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.SortableImpl <em>Sortable</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.SortableImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getSortable()
-	 * @generated
-	 */
-	int SORTABLE = 30;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.EditableImpl <em>Editable</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.EditableImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getEditable()
-	 * @generated
-	 */
-	int EDITABLE = 31;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.MovableImpl <em>Movable</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.MovableImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getMovable()
-	 * @generated
-	 */
-	int MOVABLE = 32;
-
-	/**
-	 * The feature id for the '<em><b>Movable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MOVABLE__MOVABLE = 0;
-
-	/**
-	 * The number of structural features of the '<em>Movable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MOVABLE_FEATURE_COUNT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Movable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COL__MOVABLE = MOVABLE__MOVABLE;
-
-	/**
-	 * The feature id for the '<em><b>Editable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COL__EDITABLE = MOVABLE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Filtering</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COL__FILTERING = MOVABLE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COL__STYLING = MOVABLE_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COL__STEREOTYPES = MOVABLE_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COL__TAGS = MOVABLE_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COL__COMMENTS = MOVABLE_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COL__DOCUMENTATION = MOVABLE_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COL__DESCRIPTION = MOVABLE_FEATURE_COUNT + 7;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COL__METAINFO = MOVABLE_FEATURE_COUNT + 8;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COL__NAME = MOVABLE_FEATURE_COUNT + 9;
-
-	/**
-	 * The feature id for the '<em><b>Map To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COL__MAP_TO = MOVABLE_FEATURE_COUNT + 10;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COL__PREFIX = MOVABLE_FEATURE_COUNT + 11;
-
-	/**
-	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COL__SUFFIX = MOVABLE_FEATURE_COUNT + 12;
-
-	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COL__HIDDEN = MOVABLE_FEATURE_COUNT + 13;
-
-	/**
-	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COL__CHILDREN = MOVABLE_FEATURE_COUNT + 14;
-
-	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COL__DISABLED = MOVABLE_FEATURE_COUNT + 15;
-
-	/**
-	 * The feature id for the '<em><b>Sorting</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COL__SORTING = MOVABLE_FEATURE_COUNT + 16;
-
-	/**
-	 * The feature id for the '<em><b>Actions</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COL__ACTIONS = MOVABLE_FEATURE_COUNT + 17;
-
-	/**
-	 * The number of structural features of the '<em>Col</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COL_FEATURE_COUNT = MOVABLE_FEATURE_COUNT + 18;
-
-	/**
-	 * The feature id for the '<em><b>Pagination Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PAGING__PAGINATION_STYLE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Max Items</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PAGING__MAX_ITEMS = 1;
-
-	/**
-	 * The feature id for the '<em><b>Max Page</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PAGING__MAX_PAGE = 2;
-
-	/**
-	 * The number of structural features of the '<em>Paging</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PAGING_FEATURE_COUNT = 3;
-
-	/**
-	 * The feature id for the '<em><b>Sort Order</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SORTING__SORT_ORDER = 0;
-
-	/**
-	 * The feature id for the '<em><b>Sorted</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SORTING__SORTED = 1;
-
-	/**
-	 * The number of structural features of the '<em>Sorting</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SORTING_FEATURE_COUNT = 2;
+	int STYLABLE = 30;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -868,6 +198,16 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int STYLABLE_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.FieldElementImpl <em>Field Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.FieldElementImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFieldElement()
+	 * @generated
+	 */
+	int FIELD_ELEMENT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -987,13 +327,23 @@ public interface ViewPackage extends EPackage {
 	int FIELD_ELEMENT_FEATURE_COUNT = STYLABLE_FEATURE_COUNT + 11;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.FieldContainerImpl <em>Field Container</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.FieldContainerImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFieldContainer()
+	 * @generated
+	 */
+	int FIELD_CONTAINER = 14;
+
+	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_GROUP__STYLING = FIELD_ELEMENT__STYLING;
+	int FIELD_CONTAINER__STYLING = FIELD_ELEMENT__STYLING;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -1002,7 +352,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_GROUP__STEREOTYPES = FIELD_ELEMENT__STEREOTYPES;
+	int FIELD_CONTAINER__STEREOTYPES = FIELD_ELEMENT__STEREOTYPES;
 
 	/**
 	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
@@ -1011,7 +361,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_GROUP__TAGS = FIELD_ELEMENT__TAGS;
+	int FIELD_CONTAINER__TAGS = FIELD_ELEMENT__TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
@@ -1020,7 +370,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_GROUP__COMMENTS = FIELD_ELEMENT__COMMENTS;
+	int FIELD_CONTAINER__COMMENTS = FIELD_ELEMENT__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
@@ -1029,7 +379,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_GROUP__DOCUMENTATION = FIELD_ELEMENT__DOCUMENTATION;
+	int FIELD_CONTAINER__DOCUMENTATION = FIELD_ELEMENT__DOCUMENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -1038,7 +388,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_GROUP__DESCRIPTION = FIELD_ELEMENT__DESCRIPTION;
+	int FIELD_CONTAINER__DESCRIPTION = FIELD_ELEMENT__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
@@ -1047,7 +397,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_GROUP__METAINFO = FIELD_ELEMENT__METAINFO;
+	int FIELD_CONTAINER__METAINFO = FIELD_ELEMENT__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1056,7 +406,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_GROUP__NAME = FIELD_ELEMENT__NAME;
+	int FIELD_CONTAINER__NAME = FIELD_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Map To</b></em>' reference.
@@ -1065,7 +415,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_GROUP__MAP_TO = FIELD_ELEMENT__MAP_TO;
+	int FIELD_CONTAINER__MAP_TO = FIELD_ELEMENT__MAP_TO;
 
 	/**
 	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
@@ -1074,7 +424,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_GROUP__PREFIX = FIELD_ELEMENT__PREFIX;
+	int FIELD_CONTAINER__PREFIX = FIELD_ELEMENT__PREFIX;
 
 	/**
 	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
@@ -1083,7 +433,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_GROUP__SUFFIX = FIELD_ELEMENT__SUFFIX;
+	int FIELD_CONTAINER__SUFFIX = FIELD_ELEMENT__SUFFIX;
 
 	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
@@ -1092,7 +442,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_GROUP__HIDDEN = FIELD_ELEMENT__HIDDEN;
+	int FIELD_CONTAINER__HIDDEN = FIELD_ELEMENT__HIDDEN;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -1101,7 +451,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_GROUP__CHILDREN = FIELD_ELEMENT_FEATURE_COUNT + 0;
+	int FIELD_CONTAINER__CHILDREN = FIELD_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Disabled</b></em>' containment reference list.
@@ -1110,151 +460,26 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_GROUP__DISABLED = FIELD_ELEMENT_FEATURE_COUNT + 1;
+	int FIELD_CONTAINER__DISABLED = FIELD_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Field Group</em>' class.
+	 * The number of structural features of the '<em>Field Container</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_GROUP_FEATURE_COUNT = FIELD_ELEMENT_FEATURE_COUNT + 2;
+	int FIELD_CONTAINER_FEATURE_COUNT = FIELD_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.AbstractViewImpl <em>Abstract View</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.AbstractViewImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getAbstractView()
 	 * @generated
-	 * @ordered
 	 */
-	int FIELD__STYLING = FIELD_ELEMENT__STYLING;
-
-	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD__STEREOTYPES = FIELD_ELEMENT__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD__TAGS = FIELD_ELEMENT__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD__COMMENTS = FIELD_ELEMENT__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD__DOCUMENTATION = FIELD_ELEMENT__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD__DESCRIPTION = FIELD_ELEMENT__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD__METAINFO = FIELD_ELEMENT__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD__NAME = FIELD_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Map To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD__MAP_TO = FIELD_ELEMENT__MAP_TO;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD__PREFIX = FIELD_ELEMENT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD__SUFFIX = FIELD_ELEMENT__SUFFIX;
-
-	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD__HIDDEN = FIELD_ELEMENT__HIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Patern</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD__PATERN = FIELD_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD__PATREN_LANGUAGE = FIELD_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Field</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD_FEATURE_COUNT = FIELD_ELEMENT_FEATURE_COUNT + 2;
+	int ABSTRACT_VIEW = 2;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -1263,7 +488,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_FIELD__STYLING = FIELD__STYLING;
+	int ABSTRACT_VIEW__STYLING = FIELD_CONTAINER__STYLING;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -1272,7 +497,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+	int ABSTRACT_VIEW__STEREOTYPES = FIELD_CONTAINER__STEREOTYPES;
 
 	/**
 	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
@@ -1281,7 +506,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_FIELD__TAGS = FIELD__TAGS;
+	int ABSTRACT_VIEW__TAGS = FIELD_CONTAINER__TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
@@ -1290,7 +515,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_FIELD__COMMENTS = FIELD__COMMENTS;
+	int ABSTRACT_VIEW__COMMENTS = FIELD_CONTAINER__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
@@ -1299,7 +524,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+	int ABSTRACT_VIEW__DOCUMENTATION = FIELD_CONTAINER__DOCUMENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -1308,7 +533,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+	int ABSTRACT_VIEW__DESCRIPTION = FIELD_CONTAINER__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
@@ -1317,7 +542,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_FIELD__METAINFO = FIELD__METAINFO;
+	int ABSTRACT_VIEW__METAINFO = FIELD_CONTAINER__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1326,7 +551,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_FIELD__NAME = FIELD__NAME;
+	int ABSTRACT_VIEW__NAME = FIELD_CONTAINER__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Map To</b></em>' reference.
@@ -1335,7 +560,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_FIELD__MAP_TO = FIELD__MAP_TO;
+	int ABSTRACT_VIEW__MAP_TO = FIELD_CONTAINER__MAP_TO;
 
 	/**
 	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
@@ -1344,7 +569,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_FIELD__PREFIX = FIELD__PREFIX;
+	int ABSTRACT_VIEW__PREFIX = FIELD_CONTAINER__PREFIX;
 
 	/**
 	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
@@ -1353,7 +578,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_FIELD__SUFFIX = FIELD__SUFFIX;
+	int ABSTRACT_VIEW__SUFFIX = FIELD_CONTAINER__SUFFIX;
 
 	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
@@ -1362,1519 +587,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_FIELD__HIDDEN = FIELD__HIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Patern</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT_FIELD__PATERN = FIELD__PATERN;
-
-	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
-
-	/**
-	 * The feature id for the '<em><b>Widget Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT_FIELD__WIDGET_TYPE = FIELD_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Text Field</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__STYLING = FIELD__STYLING;
-
-	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__TAGS = FIELD__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__COMMENTS = FIELD__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__METAINFO = FIELD__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__NAME = FIELD__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Map To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__MAP_TO = FIELD__MAP_TO;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__PREFIX = FIELD__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__SUFFIX = FIELD__SUFFIX;
-
-	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__HIDDEN = FIELD__HIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Patern</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__PATERN = FIELD__PATERN;
-
-	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
-
-	/**
-	 * The number of structural features of the '<em>Password Field</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_FIELD__STYLING = FIELD__STYLING;
-
-	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_FIELD__TAGS = FIELD__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_FIELD__COMMENTS = FIELD__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_FIELD__METAINFO = FIELD__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_FIELD__NAME = FIELD__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Map To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_FIELD__MAP_TO = FIELD__MAP_TO;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_FIELD__PREFIX = FIELD__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_FIELD__SUFFIX = FIELD__SUFFIX;
-
-	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_FIELD__HIDDEN = FIELD__HIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Patern</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_FIELD__PATERN = FIELD__PATERN;
-
-	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
-
-	/**
-	 * The feature id for the '<em><b>Split</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_FIELD__SPLIT = FIELD_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Boolean Field</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOAT_FIELD__STYLING = FIELD__STYLING;
-
-	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOAT_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOAT_FIELD__TAGS = FIELD__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOAT_FIELD__COMMENTS = FIELD__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOAT_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOAT_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOAT_FIELD__METAINFO = FIELD__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOAT_FIELD__NAME = FIELD__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Map To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOAT_FIELD__MAP_TO = FIELD__MAP_TO;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOAT_FIELD__PREFIX = FIELD__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOAT_FIELD__SUFFIX = FIELD__SUFFIX;
-
-	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOAT_FIELD__HIDDEN = FIELD__HIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Patern</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOAT_FIELD__PATERN = FIELD__PATERN;
-
-	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOAT_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
-
-	/**
-	 * The number of structural features of the '<em>Float Field</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOAT_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FIELD__STYLING = FIELD__STYLING;
-
-	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FIELD__TAGS = FIELD__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FIELD__COMMENTS = FIELD__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FIELD__METAINFO = FIELD__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FIELD__NAME = FIELD__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Map To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FIELD__MAP_TO = FIELD__MAP_TO;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FIELD__PREFIX = FIELD__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FIELD__SUFFIX = FIELD__SUFFIX;
-
-	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FIELD__HIDDEN = FIELD__HIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Patern</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FIELD__PATERN = FIELD__PATERN;
-
-	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
-
-	/**
-	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FIELD__OPERATIONS = FIELD_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Action Field</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_FIELD__STYLING = FIELD__STYLING;
-
-	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_FIELD__TAGS = FIELD__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_FIELD__COMMENTS = FIELD__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_FIELD__METAINFO = FIELD__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_FIELD__NAME = FIELD__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Map To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_FIELD__MAP_TO = FIELD__MAP_TO;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_FIELD__PREFIX = FIELD__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_FIELD__SUFFIX = FIELD__SUFFIX;
-
-	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_FIELD__HIDDEN = FIELD__HIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Patern</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_FIELD__PATERN = FIELD__PATERN;
-
-	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
-
-	/**
-	 * The number of structural features of the '<em>Date Field</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_FIELD__STYLING = FIELD__STYLING;
-
-	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_FIELD__TAGS = FIELD__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_FIELD__COMMENTS = FIELD__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_FIELD__METAINFO = FIELD__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_FIELD__NAME = FIELD__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Map To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_FIELD__MAP_TO = FIELD__MAP_TO;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_FIELD__PREFIX = FIELD__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_FIELD__SUFFIX = FIELD__SUFFIX;
-
-	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_FIELD__HIDDEN = FIELD__HIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Patern</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_FIELD__PATERN = FIELD__PATERN;
-
-	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
-
-	/**
-	 * The number of structural features of the '<em>Time Field</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_TIME_FIELD__STYLING = FIELD__STYLING;
-
-	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_TIME_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_TIME_FIELD__TAGS = FIELD__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_TIME_FIELD__COMMENTS = FIELD__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_TIME_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_TIME_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_TIME_FIELD__METAINFO = FIELD__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_TIME_FIELD__NAME = FIELD__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Map To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_TIME_FIELD__MAP_TO = FIELD__MAP_TO;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_TIME_FIELD__PREFIX = FIELD__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_TIME_FIELD__SUFFIX = FIELD__SUFFIX;
-
-	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_TIME_FIELD__HIDDEN = FIELD__HIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Patern</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_TIME_FIELD__PATERN = FIELD__PATERN;
-
-	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_TIME_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
-
-	/**
-	 * The number of structural features of the '<em>Date Time Field</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATE_TIME_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHONE_NUMBER_FIELD__STYLING = FIELD__STYLING;
-
-	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHONE_NUMBER_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHONE_NUMBER_FIELD__TAGS = FIELD__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHONE_NUMBER_FIELD__COMMENTS = FIELD__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHONE_NUMBER_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHONE_NUMBER_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHONE_NUMBER_FIELD__METAINFO = FIELD__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHONE_NUMBER_FIELD__NAME = FIELD__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Map To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHONE_NUMBER_FIELD__MAP_TO = FIELD__MAP_TO;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHONE_NUMBER_FIELD__PREFIX = FIELD__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHONE_NUMBER_FIELD__SUFFIX = FIELD__SUFFIX;
-
-	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHONE_NUMBER_FIELD__HIDDEN = FIELD__HIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Patern</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHONE_NUMBER_FIELD__PATERN = FIELD__PATERN;
-
-	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHONE_NUMBER_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
-
-	/**
-	 * The number of structural features of the '<em>Phone Number Field</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHONE_NUMBER_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_FIELD__STYLING = FIELD__STYLING;
-
-	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_FIELD__TAGS = FIELD__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_FIELD__COMMENTS = FIELD__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_FIELD__METAINFO = FIELD__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_FIELD__NAME = FIELD__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Map To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_FIELD__MAP_TO = FIELD__MAP_TO;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_FIELD__PREFIX = FIELD__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_FIELD__SUFFIX = FIELD__SUFFIX;
-
-	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_FIELD__HIDDEN = FIELD__HIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Patern</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_FIELD__PATERN = FIELD__PATERN;
-
-	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
-
-	/**
-	 * The number of structural features of the '<em>Email Field</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FIELD__STYLING = FIELD__STYLING;
-
-	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FIELD__TAGS = FIELD__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FIELD__COMMENTS = FIELD__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FIELD__METAINFO = FIELD__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FIELD__NAME = FIELD__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Map To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FIELD__MAP_TO = FIELD__MAP_TO;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FIELD__PREFIX = FIELD__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FIELD__SUFFIX = FIELD__SUFFIX;
-
-	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FIELD__HIDDEN = FIELD__HIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Patern</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FIELD__PATERN = FIELD__PATERN;
-
-	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
-
-	/**
-	 * The number of structural features of the '<em>File Field</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_VIEW__STEREOTYPES = CommonPackage.NAMED_MODEL_ELEMENT__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_VIEW__TAGS = CommonPackage.NAMED_MODEL_ELEMENT__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_VIEW__COMMENTS = CommonPackage.NAMED_MODEL_ELEMENT__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_VIEW__DOCUMENTATION = CommonPackage.NAMED_MODEL_ELEMENT__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_VIEW__DESCRIPTION = CommonPackage.NAMED_MODEL_ELEMENT__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_VIEW__METAINFO = CommonPackage.NAMED_MODEL_ELEMENT__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_VIEW__NAME = CommonPackage.NAMED_MODEL_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_VIEW__STYLING = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Map To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_VIEW__MAP_TO = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_VIEW__PREFIX = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_VIEW__SUFFIX = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_VIEW__HIDDEN = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 4;
+	int ABSTRACT_VIEW__HIDDEN = FIELD_CONTAINER__HIDDEN;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -2883,7 +596,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_VIEW__CHILDREN = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 5;
+	int ABSTRACT_VIEW__CHILDREN = FIELD_CONTAINER__CHILDREN;
 
 	/**
 	 * The feature id for the '<em><b>Disabled</b></em>' containment reference list.
@@ -2892,7 +605,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_VIEW__DISABLED = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 6;
+	int ABSTRACT_VIEW__DISABLED = FIELD_CONTAINER__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>View Of</b></em>' reference.
@@ -2901,7 +614,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_VIEW__VIEW_OF = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 7;
+	int ABSTRACT_VIEW__VIEW_OF = FIELD_CONTAINER_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
@@ -2910,7 +623,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_VIEW__OPERATIONS = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 8;
+	int ABSTRACT_VIEW__OPERATIONS = FIELD_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Abstract View</em>' class.
@@ -2919,70 +632,17 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_VIEW_FEATURE_COUNT = CommonPackage.NAMED_MODEL_ELEMENT_FEATURE_COUNT + 9;
+	int ABSTRACT_VIEW_FEATURE_COUNT = FIELD_CONTAINER_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.AbstractDataTableImpl <em>Abstract Data Table</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.AbstractDataTableImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getAbstractDataTable()
 	 * @generated
-	 * @ordered
 	 */
-	int FACET_MAP__STEREOTYPES = ABSTRACT_VIEW__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP__TAGS = ABSTRACT_VIEW__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP__COMMENTS = ABSTRACT_VIEW__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP__DOCUMENTATION = ABSTRACT_VIEW__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP__DESCRIPTION = ABSTRACT_VIEW__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP__METAINFO = ABSTRACT_VIEW__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP__NAME = ABSTRACT_VIEW__NAME;
+	int ABSTRACT_DATA_TABLE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -2991,7 +651,70 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FACET_MAP__STYLING = ABSTRACT_VIEW__STYLING;
+	int ABSTRACT_DATA_TABLE__STYLING = ABSTRACT_VIEW__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATA_TABLE__STEREOTYPES = ABSTRACT_VIEW__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATA_TABLE__TAGS = ABSTRACT_VIEW__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATA_TABLE__COMMENTS = ABSTRACT_VIEW__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATA_TABLE__DOCUMENTATION = ABSTRACT_VIEW__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATA_TABLE__DESCRIPTION = ABSTRACT_VIEW__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATA_TABLE__METAINFO = ABSTRACT_VIEW__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATA_TABLE__NAME = ABSTRACT_VIEW__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Map To</b></em>' reference.
@@ -3000,7 +723,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FACET_MAP__MAP_TO = ABSTRACT_VIEW__MAP_TO;
+	int ABSTRACT_DATA_TABLE__MAP_TO = ABSTRACT_VIEW__MAP_TO;
 
 	/**
 	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
@@ -3009,7 +732,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FACET_MAP__PREFIX = ABSTRACT_VIEW__PREFIX;
+	int ABSTRACT_DATA_TABLE__PREFIX = ABSTRACT_VIEW__PREFIX;
 
 	/**
 	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
@@ -3018,7 +741,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FACET_MAP__SUFFIX = ABSTRACT_VIEW__SUFFIX;
+	int ABSTRACT_DATA_TABLE__SUFFIX = ABSTRACT_VIEW__SUFFIX;
 
 	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
@@ -3027,7 +750,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FACET_MAP__HIDDEN = ABSTRACT_VIEW__HIDDEN;
+	int ABSTRACT_DATA_TABLE__HIDDEN = ABSTRACT_VIEW__HIDDEN;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -3036,7 +759,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FACET_MAP__CHILDREN = ABSTRACT_VIEW__CHILDREN;
+	int ABSTRACT_DATA_TABLE__CHILDREN = ABSTRACT_VIEW__CHILDREN;
 
 	/**
 	 * The feature id for the '<em><b>Disabled</b></em>' containment reference list.
@@ -3045,7 +768,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FACET_MAP__DISABLED = ABSTRACT_VIEW__DISABLED;
+	int ABSTRACT_DATA_TABLE__DISABLED = ABSTRACT_VIEW__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>View Of</b></em>' reference.
@@ -3054,7 +777,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FACET_MAP__VIEW_OF = ABSTRACT_VIEW__VIEW_OF;
+	int ABSTRACT_DATA_TABLE__VIEW_OF = ABSTRACT_VIEW__VIEW_OF;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
@@ -3063,7 +786,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FACET_MAP__OPERATIONS = ABSTRACT_VIEW__OPERATIONS;
+	int ABSTRACT_DATA_TABLE__OPERATIONS = ABSTRACT_VIEW__OPERATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
@@ -3072,34 +795,500 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FACET_MAP__PAGING = ABSTRACT_VIEW_FEATURE_COUNT + 0;
+	int ABSTRACT_DATA_TABLE__PAGING = ABSTRACT_VIEW_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Display Empty Facet</b></em>' attribute.
+	 * The feature id for the '<em><b>Have Row Actions</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FACET_MAP__DISPLAY_EMPTY_FACET = ABSTRACT_VIEW_FEATURE_COUNT + 1;
+	int ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS = ABSTRACT_VIEW_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Facet Display Type</b></em>' attribute.
+	 * The feature id for the '<em><b>Have Select Actions</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FACET_MAP__FACET_DISPLAY_TYPE = ABSTRACT_VIEW_FEATURE_COUNT + 2;
+	int ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS = ABSTRACT_VIEW_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>Facet Map</em>' class.
+	 * The feature id for the '<em><b>Have Default Col Actions</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FACET_MAP_FEATURE_COUNT = ABSTRACT_VIEW_FEATURE_COUNT + 3;
+	int ABSTRACT_DATA_TABLE__HAVE_DEFAULT_COL_ACTIONS = ABSTRACT_VIEW_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Abstract Data Table</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATA_TABLE_FEATURE_COUNT = ABSTRACT_VIEW_FEATURE_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.ColImpl <em>Col</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.ColImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getCol()
+	 * @generated
+	 */
+	int COL = 4;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__STYLING = FIELD_CONTAINER__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__STEREOTYPES = FIELD_CONTAINER__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__TAGS = FIELD_CONTAINER__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__COMMENTS = FIELD_CONTAINER__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__DOCUMENTATION = FIELD_CONTAINER__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__DESCRIPTION = FIELD_CONTAINER__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__METAINFO = FIELD_CONTAINER__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__NAME = FIELD_CONTAINER__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__MAP_TO = FIELD_CONTAINER__MAP_TO;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__PREFIX = FIELD_CONTAINER__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__SUFFIX = FIELD_CONTAINER__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__HIDDEN = FIELD_CONTAINER__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__CHILDREN = FIELD_CONTAINER__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__DISABLED = FIELD_CONTAINER__DISABLED;
+
+	/**
+	 * The feature id for the '<em><b>Movable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__MOVABLE = FIELD_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Editable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__EDITABLE = FIELD_CONTAINER_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Filtering</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__FILTERING = FIELD_CONTAINER_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Sorting</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__SORTING = FIELD_CONTAINER_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__ACTIONS = FIELD_CONTAINER_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>Col</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL_FEATURE_COUNT = FIELD_CONTAINER_FEATURE_COUNT + 5;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.PagingImpl <em>Paging</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.PagingImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getPaging()
+	 * @generated
+	 */
+	int PAGING = 5;
+
+	/**
+	 * The feature id for the '<em><b>Pagination Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGING__PAGINATION_STYLE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Max Items</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGING__MAX_ITEMS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Max Page</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGING__MAX_PAGE = 2;
+
+	/**
+	 * The number of structural features of the '<em>Paging</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGING_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.SortingImpl <em>Sorting</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.SortingImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getSorting()
+	 * @generated
+	 */
+	int SORTING = 6;
+
+	/**
+	 * The feature id for the '<em><b>Sort Order</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SORTING__SORT_ORDER = 0;
+
+	/**
+	 * The feature id for the '<em><b>Sorted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SORTING__SORTED = 1;
+
+	/**
+	 * The number of structural features of the '<em>Sorting</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SORTING_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.FilteringImpl <em>Filtering</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.FilteringImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFiltering()
+	 * @generated
+	 */
+	int FILTERING = 7;
+
+	/**
+	 * The feature id for the '<em><b>Default Filter Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILTERING__DEFAULT_FILTER_VALUE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Filtering</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILTERING_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.StylingImpl <em>Styling</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.StylingImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getStyling()
+	 * @generated
+	 */
+	int STYLING = 8;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLING__STEREOTYPES = CommonPackage.META_INFO_GROUP__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLING__TAGS = CommonPackage.META_INFO_GROUP__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLING__COMMENTS = CommonPackage.META_INFO_GROUP__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLING__DOCUMENTATION = CommonPackage.META_INFO_GROUP__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLING__DESCRIPTION = CommonPackage.META_INFO_GROUP__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLING__METAINFO = CommonPackage.META_INFO_GROUP__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLING__NAME = CommonPackage.META_INFO_GROUP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLING__CHILDREN = CommonPackage.META_INFO_GROUP__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLING__STYLE = CommonPackage.META_INFO_GROUP_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Height</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLING__HEIGHT = CommonPackage.META_INFO_GROUP_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLING__WIDTH = CommonPackage.META_INFO_GROUP_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Styling</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLING_FEATURE_COUNT = CommonPackage.META_INFO_GROUP_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.DataTableElementImpl <em>Data Table Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.DataTableElementImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getDataTableElement()
+	 * @generated
+	 */
+	int DATA_TABLE_ELEMENT = 9;
+
+	/**
+	 * The number of structural features of the '<em>Data Table Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE_ELEMENT_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.DataListImpl <em>Data List</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.DataListImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getDataList()
+	 * @generated
+	 */
+	int DATA_LIST = 10;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_LIST__STYLING = ABSTRACT_DATA_TABLE__STYLING;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -3163,15 +1352,6 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATA_LIST__NAME = ABSTRACT_DATA_TABLE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_LIST__STYLING = ABSTRACT_DATA_TABLE__STYLING;
 
 	/**
 	 * The feature id for the '<em><b>Map To</b></em>' reference.
@@ -3336,6 +1516,423 @@ public interface ViewPackage extends EPackage {
 	int DATA_LIST_FEATURE_COUNT = ABSTRACT_DATA_TABLE_FEATURE_COUNT + 5;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.DataTableImpl <em>Data Table</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.DataTableImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getDataTable()
+	 * @generated
+	 */
+	int DATA_TABLE = 11;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__STYLING = ABSTRACT_DATA_TABLE__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__STEREOTYPES = ABSTRACT_DATA_TABLE__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__TAGS = ABSTRACT_DATA_TABLE__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__COMMENTS = ABSTRACT_DATA_TABLE__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__DOCUMENTATION = ABSTRACT_DATA_TABLE__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__DESCRIPTION = ABSTRACT_DATA_TABLE__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__METAINFO = ABSTRACT_DATA_TABLE__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__NAME = ABSTRACT_DATA_TABLE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__MAP_TO = ABSTRACT_DATA_TABLE__MAP_TO;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__PREFIX = ABSTRACT_DATA_TABLE__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__SUFFIX = ABSTRACT_DATA_TABLE__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__HIDDEN = ABSTRACT_DATA_TABLE__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__CHILDREN = ABSTRACT_DATA_TABLE__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__DISABLED = ABSTRACT_DATA_TABLE__DISABLED;
+
+	/**
+	 * The feature id for the '<em><b>View Of</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__VIEW_OF = ABSTRACT_DATA_TABLE__VIEW_OF;
+
+	/**
+	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__OPERATIONS = ABSTRACT_DATA_TABLE__OPERATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__PAGING = ABSTRACT_DATA_TABLE__PAGING;
+
+	/**
+	 * The feature id for the '<em><b>Have Row Actions</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__HAVE_ROW_ACTIONS = ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Have Select Actions</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__HAVE_SELECT_ACTIONS = ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Have Default Col Actions</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__HAVE_DEFAULT_COL_ACTIONS = ABSTRACT_DATA_TABLE__HAVE_DEFAULT_COL_ACTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Default Col Set Up</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__DEFAULT_COL_SET_UP = ABSTRACT_DATA_TABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Data Table</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE_FEATURE_COUNT = ABSTRACT_DATA_TABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.FacetMapImpl <em>Facet Map</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.FacetMapImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFacetMap()
+	 * @generated
+	 */
+	int FACET_MAP = 12;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__STYLING = ABSTRACT_VIEW__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__STEREOTYPES = ABSTRACT_VIEW__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__TAGS = ABSTRACT_VIEW__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__COMMENTS = ABSTRACT_VIEW__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__DOCUMENTATION = ABSTRACT_VIEW__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__DESCRIPTION = ABSTRACT_VIEW__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__METAINFO = ABSTRACT_VIEW__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__NAME = ABSTRACT_VIEW__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__MAP_TO = ABSTRACT_VIEW__MAP_TO;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__PREFIX = ABSTRACT_VIEW__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__SUFFIX = ABSTRACT_VIEW__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__HIDDEN = ABSTRACT_VIEW__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__CHILDREN = ABSTRACT_VIEW__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__DISABLED = ABSTRACT_VIEW__DISABLED;
+
+	/**
+	 * The feature id for the '<em><b>View Of</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__VIEW_OF = ABSTRACT_VIEW__VIEW_OF;
+
+	/**
+	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__OPERATIONS = ABSTRACT_VIEW__OPERATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__PAGING = ABSTRACT_VIEW_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Display Empty Facet</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__DISPLAY_EMPTY_FACET = ABSTRACT_VIEW_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Facet Display Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__FACET_DISPLAY_TYPE = ABSTRACT_VIEW_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Facet Map</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP_FEATURE_COUNT = ABSTRACT_VIEW_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.TreeImpl <em>Tree</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.TreeImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getTree()
+	 * @generated
+	 */
+	int TREE = 13;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TREE__STYLING = ABSTRACT_VIEW__STYLING;
+
+	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3397,15 +1994,6 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int TREE__NAME = ABSTRACT_VIEW__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TREE__STYLING = ABSTRACT_VIEW__STYLING;
 
 	/**
 	 * The feature id for the '<em><b>Map To</b></em>' reference.
@@ -3561,67 +2149,14 @@ public interface ViewPackage extends EPackage {
 	int TREE_FEATURE_COUNT = ABSTRACT_VIEW_FEATURE_COUNT + 8;
 
 	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.FieldImpl <em>Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.FieldImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getField()
 	 * @generated
-	 * @ordered
 	 */
-	int DATA_TABLE__STEREOTYPES = ABSTRACT_DATA_TABLE__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__TAGS = ABSTRACT_DATA_TABLE__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__COMMENTS = ABSTRACT_DATA_TABLE__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__DOCUMENTATION = ABSTRACT_DATA_TABLE__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__DESCRIPTION = ABSTRACT_DATA_TABLE__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__METAINFO = ABSTRACT_DATA_TABLE__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__NAME = ABSTRACT_DATA_TABLE__NAME;
+	int FIELD = 15;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -3630,133 +2165,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TABLE__STYLING = ABSTRACT_DATA_TABLE__STYLING;
-
-	/**
-	 * The feature id for the '<em><b>Map To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__MAP_TO = ABSTRACT_DATA_TABLE__MAP_TO;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__PREFIX = ABSTRACT_DATA_TABLE__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__SUFFIX = ABSTRACT_DATA_TABLE__SUFFIX;
-
-	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__HIDDEN = ABSTRACT_DATA_TABLE__HIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__CHILDREN = ABSTRACT_DATA_TABLE__CHILDREN;
-
-	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__DISABLED = ABSTRACT_DATA_TABLE__DISABLED;
-
-	/**
-	 * The feature id for the '<em><b>View Of</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__VIEW_OF = ABSTRACT_DATA_TABLE__VIEW_OF;
-
-	/**
-	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__OPERATIONS = ABSTRACT_DATA_TABLE__OPERATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__PAGING = ABSTRACT_DATA_TABLE__PAGING;
-
-	/**
-	 * The feature id for the '<em><b>Have Row Actions</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__HAVE_ROW_ACTIONS = ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Have Select Actions</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__HAVE_SELECT_ACTIONS = ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Have Default Col Actions</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__HAVE_DEFAULT_COL_ACTIONS = ABSTRACT_DATA_TABLE__HAVE_DEFAULT_COL_ACTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Default Col Set Up</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__DEFAULT_COL_SET_UP = ABSTRACT_DATA_TABLE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Data Table</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE_FEATURE_COUNT = ABSTRACT_DATA_TABLE_FEATURE_COUNT + 1;
+	int FIELD__STYLING = FIELD_ELEMENT__STYLING;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -3765,7 +2174,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STYLING__STEREOTYPES = CommonPackage.META_INFO_GROUP__STEREOTYPES;
+	int FIELD__STEREOTYPES = FIELD_ELEMENT__STEREOTYPES;
 
 	/**
 	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
@@ -3774,7 +2183,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STYLING__TAGS = CommonPackage.META_INFO_GROUP__TAGS;
+	int FIELD__TAGS = FIELD_ELEMENT__TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
@@ -3783,7 +2192,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STYLING__COMMENTS = CommonPackage.META_INFO_GROUP__COMMENTS;
+	int FIELD__COMMENTS = FIELD_ELEMENT__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
@@ -3792,7 +2201,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STYLING__DOCUMENTATION = CommonPackage.META_INFO_GROUP__DOCUMENTATION;
+	int FIELD__DOCUMENTATION = FIELD_ELEMENT__DOCUMENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -3801,7 +2210,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STYLING__DESCRIPTION = CommonPackage.META_INFO_GROUP__DESCRIPTION;
+	int FIELD__DESCRIPTION = FIELD_ELEMENT__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
@@ -3810,7 +2219,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STYLING__METAINFO = CommonPackage.META_INFO_GROUP__METAINFO;
+	int FIELD__METAINFO = FIELD_ELEMENT__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3819,52 +2228,1847 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STYLING__NAME = CommonPackage.META_INFO_GROUP__NAME;
+	int FIELD__NAME = FIELD_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STYLING__CHILDREN = CommonPackage.META_INFO_GROUP__CHILDREN;
+	int FIELD__MAP_TO = FIELD_ELEMENT__MAP_TO;
 
 	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STYLING__STYLE = CommonPackage.META_INFO_GROUP_FEATURE_COUNT + 0;
+	int FIELD__PREFIX = FIELD_ELEMENT__PREFIX;
 
 	/**
-	 * The feature id for the '<em><b>Height</b></em>' attribute.
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STYLING__HEIGHT = CommonPackage.META_INFO_GROUP_FEATURE_COUNT + 1;
+	int FIELD__SUFFIX = FIELD_ELEMENT__SUFFIX;
 
 	/**
-	 * The feature id for the '<em><b>Width</b></em>' attribute.
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STYLING__WIDTH = CommonPackage.META_INFO_GROUP_FEATURE_COUNT + 2;
+	int FIELD__HIDDEN = FIELD_ELEMENT__HIDDEN;
 
 	/**
-	 * The number of structural features of the '<em>Styling</em>' class.
+	 * The feature id for the '<em><b>Patern</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STYLING_FEATURE_COUNT = CommonPackage.META_INFO_GROUP_FEATURE_COUNT + 3;
+	int FIELD__PATERN = FIELD_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__PATREN_LANGUAGE = FIELD_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_FEATURE_COUNT = FIELD_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.TextFieldImpl <em>Text Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.TextFieldImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getTextField()
+	 * @generated
+	 */
+	int TEXT_FIELD = 16;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__STYLING = FIELD__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__NAME = FIELD__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__MAP_TO = FIELD__MAP_TO;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__PREFIX = FIELD__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__SUFFIX = FIELD__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Patern</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__PATERN = FIELD__PATERN;
+
+	/**
+	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Widget Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__WIDGET_TYPE = FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Text Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.PasswordFieldImpl <em>Password Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.PasswordFieldImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getPasswordField()
+	 * @generated
+	 */
+	int PASSWORD_FIELD = 17;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__STYLING = FIELD__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__NAME = FIELD__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__MAP_TO = FIELD__MAP_TO;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__PREFIX = FIELD__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__SUFFIX = FIELD__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Patern</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__PATERN = FIELD__PATERN;
+
+	/**
+	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+
+	/**
+	 * The number of structural features of the '<em>Password Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.BooleanFieldImpl <em>Boolean Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.BooleanFieldImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getBooleanField()
+	 * @generated
+	 */
+	int BOOLEAN_FIELD = 18;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__STYLING = FIELD__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__NAME = FIELD__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__MAP_TO = FIELD__MAP_TO;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__PREFIX = FIELD__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__SUFFIX = FIELD__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Patern</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__PATERN = FIELD__PATERN;
+
+	/**
+	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Split</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__SPLIT = FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Boolean Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.FloatFieldImpl <em>Float Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.FloatFieldImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFloatField()
+	 * @generated
+	 */
+	int FLOAT_FIELD = 19;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__STYLING = FIELD__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__NAME = FIELD__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__MAP_TO = FIELD__MAP_TO;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__PREFIX = FIELD__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__SUFFIX = FIELD__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Patern</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__PATERN = FIELD__PATERN;
+
+	/**
+	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+
+	/**
+	 * The number of structural features of the '<em>Float Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.ActionFieldImpl <em>Action Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.ActionFieldImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getActionField()
+	 * @generated
+	 */
+	int ACTION_FIELD = 20;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__STYLING = FIELD__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__NAME = FIELD__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__MAP_TO = FIELD__MAP_TO;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__PREFIX = FIELD__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__SUFFIX = FIELD__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Patern</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__PATERN = FIELD__PATERN;
+
+	/**
+	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__OPERATIONS = FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Action Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.DateFieldImpl <em>Date Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.DateFieldImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getDateField()
+	 * @generated
+	 */
+	int DATE_FIELD = 21;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__STYLING = FIELD__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__NAME = FIELD__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__MAP_TO = FIELD__MAP_TO;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__PREFIX = FIELD__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__SUFFIX = FIELD__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Patern</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__PATERN = FIELD__PATERN;
+
+	/**
+	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+
+	/**
+	 * The number of structural features of the '<em>Date Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.TimeFieldImpl <em>Time Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.TimeFieldImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getTimeField()
+	 * @generated
+	 */
+	int TIME_FIELD = 22;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__STYLING = FIELD__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__NAME = FIELD__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__MAP_TO = FIELD__MAP_TO;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__PREFIX = FIELD__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__SUFFIX = FIELD__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Patern</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__PATERN = FIELD__PATERN;
+
+	/**
+	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+
+	/**
+	 * The number of structural features of the '<em>Time Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.DateTimeFieldImpl <em>Date Time Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.DateTimeFieldImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getDateTimeField()
+	 * @generated
+	 */
+	int DATE_TIME_FIELD = 23;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__STYLING = FIELD__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__NAME = FIELD__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__MAP_TO = FIELD__MAP_TO;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__PREFIX = FIELD__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__SUFFIX = FIELD__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Patern</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__PATERN = FIELD__PATERN;
+
+	/**
+	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+
+	/**
+	 * The number of structural features of the '<em>Date Time Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.PhoneNumberFieldImpl <em>Phone Number Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.PhoneNumberFieldImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getPhoneNumberField()
+	 * @generated
+	 */
+	int PHONE_NUMBER_FIELD = 24;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__STYLING = FIELD__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__NAME = FIELD__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__MAP_TO = FIELD__MAP_TO;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__PREFIX = FIELD__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__SUFFIX = FIELD__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Patern</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__PATERN = FIELD__PATERN;
+
+	/**
+	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+
+	/**
+	 * The number of structural features of the '<em>Phone Number Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.EmailFieldImpl <em>Email Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.EmailFieldImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getEmailField()
+	 * @generated
+	 */
+	int EMAIL_FIELD = 25;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__STYLING = FIELD__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__NAME = FIELD__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__MAP_TO = FIELD__MAP_TO;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__PREFIX = FIELD__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__SUFFIX = FIELD__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Patern</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__PATERN = FIELD__PATERN;
+
+	/**
+	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+
+	/**
+	 * The number of structural features of the '<em>Email Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.IntegerFieldImpl <em>Integer Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.IntegerFieldImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getIntegerField()
+	 * @generated
+	 */
+	int INTEGER_FIELD = 26;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__STYLING = FIELD__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__NAME = FIELD__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__MAP_TO = FIELD__MAP_TO;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__PREFIX = FIELD__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__SUFFIX = FIELD__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Patern</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__PATERN = FIELD__PATERN;
+
+	/**
+	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+
+	/**
+	 * The number of structural features of the '<em>Integer Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.FileFieldImpl <em>File Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.FileFieldImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFileField()
+	 * @generated
+	 */
+	int FILE_FIELD = 27;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__STYLING = FIELD__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__NAME = FIELD__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__MAP_TO = FIELD__MAP_TO;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__PREFIX = FIELD__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__SUFFIX = FIELD__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Patern</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__PATERN = FIELD__PATERN;
+
+	/**
+	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+
+	/**
+	 * The number of structural features of the '<em>File Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.SelectFieldImpl <em>Select Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.SelectFieldImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getSelectField()
+	 * @generated
+	 */
+	int SELECT_FIELD = 28;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -4011,103 +4215,14 @@ public interface ViewPackage extends EPackage {
 	int SELECT_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.HtmlFieldImpl <em>Html Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.HtmlFieldImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getHtmlField()
 	 * @generated
-	 * @ordered
 	 */
-	int VIEW_COLLECTION__STEREOTYPES = CommonPackage.PACKAGE__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIEW_COLLECTION__TAGS = CommonPackage.PACKAGE__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIEW_COLLECTION__COMMENTS = CommonPackage.PACKAGE__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIEW_COLLECTION__DOCUMENTATION = CommonPackage.PACKAGE__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIEW_COLLECTION__DESCRIPTION = CommonPackage.PACKAGE__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIEW_COLLECTION__METAINFO = CommonPackage.PACKAGE__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIEW_COLLECTION__NAME = CommonPackage.PACKAGE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Stereotype Set</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIEW_COLLECTION__STEREOTYPE_SET = CommonPackage.PACKAGE__STEREOTYPE_SET;
-
-	/**
-	 * The feature id for the '<em><b>Package Set</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIEW_COLLECTION__PACKAGE_SET = CommonPackage.PACKAGE__PACKAGE_SET;
-
-	/**
-	 * The feature id for the '<em><b>Views</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIEW_COLLECTION__VIEWS = CommonPackage.PACKAGE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Collection</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIEW_COLLECTION_FEATURE_COUNT = CommonPackage.PACKAGE_FEATURE_COUNT + 1;
+	int HTML_FIELD = 29;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -4245,6 +4360,16 @@ public interface ViewPackage extends EPackage {
 	int HTML_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.PaginableImpl <em>Paginable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.PaginableImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getPaginable()
+	 * @generated
+	 */
+	int PAGINABLE = 31;
+
+	/**
 	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4261,6 +4386,16 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int PAGINABLE_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.SortableImpl <em>Sortable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.SortableImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getSortable()
+	 * @generated
+	 */
+	int SORTABLE = 32;
 
 	/**
 	 * The feature id for the '<em><b>Sorting</b></em>' containment reference.
@@ -4281,6 +4416,16 @@ public interface ViewPackage extends EPackage {
 	int SORTABLE_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.EditableImpl <em>Editable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.EditableImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getEditable()
+	 * @generated
+	 */
+	int EDITABLE = 33;
+
+	/**
 	 * The feature id for the '<em><b>Editable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4299,6 +4444,34 @@ public interface ViewPackage extends EPackage {
 	int EDITABLE_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.MovableImpl <em>Movable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.MovableImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getMovable()
+	 * @generated
+	 */
+	int MOVABLE = 34;
+
+	/**
+	 * The feature id for the '<em><b>Movable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MOVABLE__MOVABLE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Movable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MOVABLE_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.impl.FilterableImpl <em>Filterable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4306,7 +4479,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFilterable()
 	 * @generated
 	 */
-	int FILTERABLE = 33;
+	int FILTERABLE = 35;
 
 	/**
 	 * The feature id for the '<em><b>Filtering</b></em>' containment reference.
@@ -4325,179 +4498,6 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int FILTERABLE_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.FilteringImpl <em>Filtering</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.FilteringImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFiltering()
-	 * @generated
-	 */
-	int FILTERING = 34;
-
-	/**
-	 * The feature id for the '<em><b>Default Filter Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILTERING__DEFAULT_FILTER_VALUE = 0;
-
-	/**
-	 * The number of structural features of the '<em>Filtering</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILTERING_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.IntegerFieldImpl <em>Integer Field</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.IntegerFieldImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getIntegerField()
-	 * @generated
-	 */
-	int INTEGER_FIELD = 35;
-
-	/**
-	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_FIELD__STYLING = FIELD__STYLING;
-
-	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_FIELD__TAGS = FIELD__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_FIELD__COMMENTS = FIELD__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_FIELD__METAINFO = FIELD__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_FIELD__NAME = FIELD__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Map To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_FIELD__MAP_TO = FIELD__MAP_TO;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_FIELD__PREFIX = FIELD__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_FIELD__SUFFIX = FIELD__SUFFIX;
-
-	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_FIELD__HIDDEN = FIELD__HIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Patern</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_FIELD__PATERN = FIELD__PATERN;
-
-	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
-
-	/**
-	 * The number of structural features of the '<em>Integer Field</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.SortOrder <em>Sort Order</em>}' enum.
@@ -4559,7 +4559,6 @@ public interface ViewPackage extends EPackage {
 	 */
 	int SELECT_WIDGET_TYPE = 41;
 
-
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.FacetDisplayType <em>Facet Display Type</em>}' enum.
 	 * <!-- begin-user-doc -->
@@ -4570,6 +4569,113 @@ public interface ViewPackage extends EPackage {
 	 */
 	int FACET_DISPLAY_TYPE = 42;
 
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.view.ViewCollection <em>Collection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Collection</em>'.
+	 * @see com.bluexml.side.view.ViewCollection
+	 * @generated
+	 */
+	EClass getViewCollection();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.view.ViewCollection#getViews <em>Views</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Views</em>'.
+	 * @see com.bluexml.side.view.ViewCollection#getViews()
+	 * @see #getViewCollection()
+	 * @generated
+	 */
+	EReference getViewCollection_Views();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.view.FieldElement <em>Field Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Field Element</em>'.
+	 * @see com.bluexml.side.view.FieldElement
+	 * @generated
+	 */
+	EClass getFieldElement();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.bluexml.side.view.FieldElement#getMapTo <em>Map To</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Map To</em>'.
+	 * @see com.bluexml.side.view.FieldElement#getMapTo()
+	 * @see #getFieldElement()
+	 * @generated
+	 */
+	EReference getFieldElement_MapTo();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.FieldElement#getPrefix <em>Prefix</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Prefix</em>'.
+	 * @see com.bluexml.side.view.FieldElement#getPrefix()
+	 * @see #getFieldElement()
+	 * @generated
+	 */
+	EAttribute getFieldElement_Prefix();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.FieldElement#getSuffix <em>Suffix</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Suffix</em>'.
+	 * @see com.bluexml.side.view.FieldElement#getSuffix()
+	 * @see #getFieldElement()
+	 * @generated
+	 */
+	EAttribute getFieldElement_Suffix();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.FieldElement#isHidden <em>Hidden</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Hidden</em>'.
+	 * @see com.bluexml.side.view.FieldElement#isHidden()
+	 * @see #getFieldElement()
+	 * @generated
+	 */
+	EAttribute getFieldElement_Hidden();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.view.AbstractView <em>Abstract View</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Abstract View</em>'.
+	 * @see com.bluexml.side.view.AbstractView
+	 * @generated
+	 */
+	EClass getAbstractView();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.bluexml.side.view.AbstractView#getViewOf <em>View Of</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>View Of</em>'.
+	 * @see com.bluexml.side.view.AbstractView#getViewOf()
+	 * @see #getAbstractView()
+	 * @generated
+	 */
+	EReference getAbstractView_ViewOf();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link com.bluexml.side.view.AbstractView#getOperations <em>Operations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Operations</em>'.
+	 * @see com.bluexml.side.view.AbstractView#getOperations()
+	 * @see #getAbstractView()
+	 * @generated
+	 */
+	EReference getAbstractView_Operations();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.view.AbstractDataTable <em>Abstract Data Table</em>}'.
@@ -4711,6 +4817,70 @@ public interface ViewPackage extends EPackage {
 	EAttribute getSorting_Sorted();
 
 	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.view.Filtering <em>Filtering</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Filtering</em>'.
+	 * @see com.bluexml.side.view.Filtering
+	 * @generated
+	 */
+	EClass getFiltering();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.Filtering#getDefaultFilterValue <em>Default Filter Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Filter Value</em>'.
+	 * @see com.bluexml.side.view.Filtering#getDefaultFilterValue()
+	 * @see #getFiltering()
+	 * @generated
+	 */
+	EAttribute getFiltering_DefaultFilterValue();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.view.Styling <em>Styling</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Styling</em>'.
+	 * @see com.bluexml.side.view.Styling
+	 * @generated
+	 */
+	EClass getStyling();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.Styling#getStyle <em>Style</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Style</em>'.
+	 * @see com.bluexml.side.view.Styling#getStyle()
+	 * @see #getStyling()
+	 * @generated
+	 */
+	EAttribute getStyling_Style();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.Styling#getHeight <em>Height</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Height</em>'.
+	 * @see com.bluexml.side.view.Styling#getHeight()
+	 * @see #getStyling()
+	 * @generated
+	 */
+	EAttribute getStyling_Height();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.Styling#getWidth <em>Width</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Width</em>'.
+	 * @see com.bluexml.side.view.Styling#getWidth()
+	 * @see #getStyling()
+	 * @generated
+	 */
+	EAttribute getStyling_Width();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.view.DataTableElement <em>Data Table Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4721,36 +4891,153 @@ public interface ViewPackage extends EPackage {
 	EClass getDataTableElement();
 
 	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.view.FieldGroup <em>Field Group</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.view.DataList <em>Data List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Field Group</em>'.
-	 * @see com.bluexml.side.view.FieldGroup
+	 * @return the meta object for class '<em>Data List</em>'.
+	 * @see com.bluexml.side.view.DataList
 	 * @generated
 	 */
-	EClass getFieldGroup();
+	EClass getDataList();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.view.FieldGroup#getChildren <em>Children</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.view.DataTable <em>Data Table</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Data Table</em>'.
+	 * @see com.bluexml.side.view.DataTable
+	 * @generated
+	 */
+	EClass getDataTable();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link com.bluexml.side.view.DataTable#getDefaultColSetUp <em>Default Col Set Up</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Default Col Set Up</em>'.
+	 * @see com.bluexml.side.view.DataTable#getDefaultColSetUp()
+	 * @see #getDataTable()
+	 * @generated
+	 */
+	EReference getDataTable_DefaultColSetUp();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.view.FacetMap <em>Facet Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Facet Map</em>'.
+	 * @see com.bluexml.side.view.FacetMap
+	 * @generated
+	 */
+	EClass getFacetMap();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.FacetMap#isDisplayEmptyFacet <em>Display Empty Facet</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Display Empty Facet</em>'.
+	 * @see com.bluexml.side.view.FacetMap#isDisplayEmptyFacet()
+	 * @see #getFacetMap()
+	 * @generated
+	 */
+	EAttribute getFacetMap_DisplayEmptyFacet();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.FacetMap#getFacetDisplayType <em>Facet Display Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Facet Display Type</em>'.
+	 * @see com.bluexml.side.view.FacetMap#getFacetDisplayType()
+	 * @see #getFacetMap()
+	 * @generated
+	 */
+	EAttribute getFacetMap_FacetDisplayType();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.view.Tree <em>Tree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Tree</em>'.
+	 * @see com.bluexml.side.view.Tree
+	 * @generated
+	 */
+	EClass getTree();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link com.bluexml.side.view.Tree#getNodeOperations <em>Node Operations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Node Operations</em>'.
+	 * @see com.bluexml.side.view.Tree#getNodeOperations()
+	 * @see #getTree()
+	 * @generated
+	 */
+	EReference getTree_NodeOperations();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link com.bluexml.side.view.Tree#getNodeValue <em>Node Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Node Value</em>'.
+	 * @see com.bluexml.side.view.Tree#getNodeValue()
+	 * @see #getTree()
+	 * @generated
+	 */
+	EReference getTree_NodeValue();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.Tree#getDefaultDepth <em>Default Depth</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Depth</em>'.
+	 * @see com.bluexml.side.view.Tree#getDefaultDepth()
+	 * @see #getTree()
+	 * @generated
+	 */
+	EAttribute getTree_DefaultDepth();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.Tree#getMaxDepth <em>Max Depth</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Max Depth</em>'.
+	 * @see com.bluexml.side.view.Tree#getMaxDepth()
+	 * @see #getTree()
+	 * @generated
+	 */
+	EAttribute getTree_MaxDepth();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.view.FieldContainer <em>Field Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Field Container</em>'.
+	 * @see com.bluexml.side.view.FieldContainer
+	 * @generated
+	 */
+	EClass getFieldContainer();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.view.FieldContainer#getChildren <em>Children</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Children</em>'.
-	 * @see com.bluexml.side.view.FieldGroup#getChildren()
-	 * @see #getFieldGroup()
+	 * @see com.bluexml.side.view.FieldContainer#getChildren()
+	 * @see #getFieldContainer()
 	 * @generated
 	 */
-	EReference getFieldGroup_Children();
+	EReference getFieldContainer_Children();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.view.FieldGroup#getDisabled <em>Disabled</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.view.FieldContainer#getDisabled <em>Disabled</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Disabled</em>'.
-	 * @see com.bluexml.side.view.FieldGroup#getDisabled()
-	 * @see #getFieldGroup()
+	 * @see com.bluexml.side.view.FieldContainer#getDisabled()
+	 * @see #getFieldContainer()
 	 * @generated
 	 */
-	EReference getFieldGroup_Disabled();
+	EReference getFieldContainer_Disabled();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.view.Field <em>Field</em>}'.
@@ -4918,6 +5205,16 @@ public interface ViewPackage extends EPackage {
 	EClass getEmailField();
 
 	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.view.IntegerField <em>Integer Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Integer Field</em>'.
+	 * @see com.bluexml.side.view.IntegerField
+	 * @generated
+	 */
+	EClass getIntegerField();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.view.FileField <em>File Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4926,252 +5223,6 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getFileField();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.view.FieldElement <em>Field Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Field Element</em>'.
-	 * @see com.bluexml.side.view.FieldElement
-	 * @generated
-	 */
-	EClass getFieldElement();
-
-	/**
-	 * Returns the meta object for the reference '{@link com.bluexml.side.view.FieldElement#getMapTo <em>Map To</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Map To</em>'.
-	 * @see com.bluexml.side.view.FieldElement#getMapTo()
-	 * @see #getFieldElement()
-	 * @generated
-	 */
-	EReference getFieldElement_MapTo();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.FieldElement#getPrefix <em>Prefix</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Prefix</em>'.
-	 * @see com.bluexml.side.view.FieldElement#getPrefix()
-	 * @see #getFieldElement()
-	 * @generated
-	 */
-	EAttribute getFieldElement_Prefix();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.FieldElement#getSuffix <em>Suffix</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Suffix</em>'.
-	 * @see com.bluexml.side.view.FieldElement#getSuffix()
-	 * @see #getFieldElement()
-	 * @generated
-	 */
-	EAttribute getFieldElement_Suffix();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.FieldElement#isHidden <em>Hidden</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Hidden</em>'.
-	 * @see com.bluexml.side.view.FieldElement#isHidden()
-	 * @see #getFieldElement()
-	 * @generated
-	 */
-	EAttribute getFieldElement_Hidden();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.view.FacetMap <em>Facet Map</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Facet Map</em>'.
-	 * @see com.bluexml.side.view.FacetMap
-	 * @generated
-	 */
-	EClass getFacetMap();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.FacetMap#isDisplayEmptyFacet <em>Display Empty Facet</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Display Empty Facet</em>'.
-	 * @see com.bluexml.side.view.FacetMap#isDisplayEmptyFacet()
-	 * @see #getFacetMap()
-	 * @generated
-	 */
-	EAttribute getFacetMap_DisplayEmptyFacet();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.FacetMap#getFacetDisplayType <em>Facet Display Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Facet Display Type</em>'.
-	 * @see com.bluexml.side.view.FacetMap#getFacetDisplayType()
-	 * @see #getFacetMap()
-	 * @generated
-	 */
-	EAttribute getFacetMap_FacetDisplayType();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.view.DataList <em>Data List</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Data List</em>'.
-	 * @see com.bluexml.side.view.DataList
-	 * @generated
-	 */
-	EClass getDataList();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.view.Tree <em>Tree</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Tree</em>'.
-	 * @see com.bluexml.side.view.Tree
-	 * @generated
-	 */
-	EClass getTree();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link com.bluexml.side.view.Tree#getNodeOperations <em>Node Operations</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Node Operations</em>'.
-	 * @see com.bluexml.side.view.Tree#getNodeOperations()
-	 * @see #getTree()
-	 * @generated
-	 */
-	EReference getTree_NodeOperations();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link com.bluexml.side.view.Tree#getNodeValue <em>Node Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Node Value</em>'.
-	 * @see com.bluexml.side.view.Tree#getNodeValue()
-	 * @see #getTree()
-	 * @generated
-	 */
-	EReference getTree_NodeValue();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.Tree#getDefaultDepth <em>Default Depth</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Default Depth</em>'.
-	 * @see com.bluexml.side.view.Tree#getDefaultDepth()
-	 * @see #getTree()
-	 * @generated
-	 */
-	EAttribute getTree_DefaultDepth();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.Tree#getMaxDepth <em>Max Depth</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Max Depth</em>'.
-	 * @see com.bluexml.side.view.Tree#getMaxDepth()
-	 * @see #getTree()
-	 * @generated
-	 */
-	EAttribute getTree_MaxDepth();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.view.DataTable <em>Data Table</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Data Table</em>'.
-	 * @see com.bluexml.side.view.DataTable
-	 * @generated
-	 */
-	EClass getDataTable();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link com.bluexml.side.view.DataTable#getDefaultColSetUp <em>Default Col Set Up</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Default Col Set Up</em>'.
-	 * @see com.bluexml.side.view.DataTable#getDefaultColSetUp()
-	 * @see #getDataTable()
-	 * @generated
-	 */
-	EReference getDataTable_DefaultColSetUp();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.view.Styling <em>Styling</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Styling</em>'.
-	 * @see com.bluexml.side.view.Styling
-	 * @generated
-	 */
-	EClass getStyling();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.Styling#getStyle <em>Style</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Style</em>'.
-	 * @see com.bluexml.side.view.Styling#getStyle()
-	 * @see #getStyling()
-	 * @generated
-	 */
-	EAttribute getStyling_Style();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.Styling#getHeight <em>Height</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Height</em>'.
-	 * @see com.bluexml.side.view.Styling#getHeight()
-	 * @see #getStyling()
-	 * @generated
-	 */
-	EAttribute getStyling_Height();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.Styling#getWidth <em>Width</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Width</em>'.
-	 * @see com.bluexml.side.view.Styling#getWidth()
-	 * @see #getStyling()
-	 * @generated
-	 */
-	EAttribute getStyling_Width();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.view.AbstractView <em>Abstract View</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Abstract View</em>'.
-	 * @see com.bluexml.side.view.AbstractView
-	 * @generated
-	 */
-	EClass getAbstractView();
-
-	/**
-	 * Returns the meta object for the reference '{@link com.bluexml.side.view.AbstractView#getViewOf <em>View Of</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>View Of</em>'.
-	 * @see com.bluexml.side.view.AbstractView#getViewOf()
-	 * @see #getAbstractView()
-	 * @generated
-	 */
-	EReference getAbstractView_ViewOf();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link com.bluexml.side.view.AbstractView#getOperations <em>Operations</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Operations</em>'.
-	 * @see com.bluexml.side.view.AbstractView#getOperations()
-	 * @see #getAbstractView()
-	 * @generated
-	 */
-	EReference getAbstractView_Operations();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.view.SelectField <em>Select Field</em>}'.
@@ -5193,27 +5244,6 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getSelectField_SelectWidget();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.view.ViewCollection <em>Collection</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Collection</em>'.
-	 * @see com.bluexml.side.view.ViewCollection
-	 * @generated
-	 */
-	EClass getViewCollection();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.view.ViewCollection#getViews <em>Views</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Views</em>'.
-	 * @see com.bluexml.side.view.ViewCollection#getViews()
-	 * @see #getViewCollection()
-	 * @generated
-	 */
-	EReference getViewCollection_Views();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.view.HtmlField <em>Html Field</em>}'.
@@ -5352,37 +5382,6 @@ public interface ViewPackage extends EPackage {
 	EReference getFilterable_Filtering();
 
 	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.view.Filtering <em>Filtering</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Filtering</em>'.
-	 * @see com.bluexml.side.view.Filtering
-	 * @generated
-	 */
-	EClass getFiltering();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.Filtering#getDefaultFilterValue <em>Default Filter Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Default Filter Value</em>'.
-	 * @see com.bluexml.side.view.Filtering#getDefaultFilterValue()
-	 * @see #getFiltering()
-	 * @generated
-	 */
-	EAttribute getFiltering_DefaultFilterValue();
-
-	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.view.IntegerField <em>Integer Field</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Integer Field</em>'.
-	 * @see com.bluexml.side.view.IntegerField
-	 * @generated
-	 */
-	EClass getIntegerField();
-
-	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.view.SortOrder <em>Sort Order</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5474,6 +5473,92 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 */
 	interface Literals {
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.view.impl.ViewCollectionImpl <em>Collection</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.view.impl.ViewCollectionImpl
+		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getViewCollection()
+		 * @generated
+		 */
+		EClass VIEW_COLLECTION = eINSTANCE.getViewCollection();
+
+		/**
+		 * The meta object literal for the '<em><b>Views</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VIEW_COLLECTION__VIEWS = eINSTANCE.getViewCollection_Views();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.view.impl.FieldElementImpl <em>Field Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.view.impl.FieldElementImpl
+		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFieldElement()
+		 * @generated
+		 */
+		EClass FIELD_ELEMENT = eINSTANCE.getFieldElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Map To</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FIELD_ELEMENT__MAP_TO = eINSTANCE.getFieldElement_MapTo();
+
+		/**
+		 * The meta object literal for the '<em><b>Prefix</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FIELD_ELEMENT__PREFIX = eINSTANCE.getFieldElement_Prefix();
+
+		/**
+		 * The meta object literal for the '<em><b>Suffix</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FIELD_ELEMENT__SUFFIX = eINSTANCE.getFieldElement_Suffix();
+
+		/**
+		 * The meta object literal for the '<em><b>Hidden</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FIELD_ELEMENT__HIDDEN = eINSTANCE.getFieldElement_Hidden();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.view.impl.AbstractViewImpl <em>Abstract View</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.view.impl.AbstractViewImpl
+		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getAbstractView()
+		 * @generated
+		 */
+		EClass ABSTRACT_VIEW = eINSTANCE.getAbstractView();
+
+		/**
+		 * The meta object literal for the '<em><b>View Of</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_VIEW__VIEW_OF = eINSTANCE.getAbstractView_ViewOf();
+
+		/**
+		 * The meta object literal for the '<em><b>Operations</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_VIEW__OPERATIONS = eINSTANCE.getAbstractView_Operations();
+
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.impl.AbstractDataTableImpl <em>Abstract Data Table</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -5587,6 +5672,58 @@ public interface ViewPackage extends EPackage {
 		EAttribute SORTING__SORTED = eINSTANCE.getSorting_Sorted();
 
 		/**
+		 * The meta object literal for the '{@link com.bluexml.side.view.impl.FilteringImpl <em>Filtering</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.view.impl.FilteringImpl
+		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFiltering()
+		 * @generated
+		 */
+		EClass FILTERING = eINSTANCE.getFiltering();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Filter Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FILTERING__DEFAULT_FILTER_VALUE = eINSTANCE.getFiltering_DefaultFilterValue();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.view.impl.StylingImpl <em>Styling</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.view.impl.StylingImpl
+		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getStyling()
+		 * @generated
+		 */
+		EClass STYLING = eINSTANCE.getStyling();
+
+		/**
+		 * The meta object literal for the '<em><b>Style</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STYLING__STYLE = eINSTANCE.getStyling_Style();
+
+		/**
+		 * The meta object literal for the '<em><b>Height</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STYLING__HEIGHT = eINSTANCE.getStyling_Height();
+
+		/**
+		 * The meta object literal for the '<em><b>Width</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STYLING__WIDTH = eINSTANCE.getStyling_Width();
+
+		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.impl.DataTableElementImpl <em>Data Table Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5597,14 +5734,110 @@ public interface ViewPackage extends EPackage {
 		EClass DATA_TABLE_ELEMENT = eINSTANCE.getDataTableElement();
 
 		/**
-		 * The meta object literal for the '{@link com.bluexml.side.view.impl.FieldGroupImpl <em>Field Group</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.view.impl.DataListImpl <em>Data List</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.view.impl.FieldGroupImpl
-		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFieldGroup()
+		 * @see com.bluexml.side.view.impl.DataListImpl
+		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getDataList()
 		 * @generated
 		 */
-		EClass FIELD_GROUP = eINSTANCE.getFieldGroup();
+		EClass DATA_LIST = eINSTANCE.getDataList();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.view.impl.DataTableImpl <em>Data Table</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.view.impl.DataTableImpl
+		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getDataTable()
+		 * @generated
+		 */
+		EClass DATA_TABLE = eINSTANCE.getDataTable();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Col Set Up</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DATA_TABLE__DEFAULT_COL_SET_UP = eINSTANCE.getDataTable_DefaultColSetUp();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.view.impl.FacetMapImpl <em>Facet Map</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.view.impl.FacetMapImpl
+		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFacetMap()
+		 * @generated
+		 */
+		EClass FACET_MAP = eINSTANCE.getFacetMap();
+
+		/**
+		 * The meta object literal for the '<em><b>Display Empty Facet</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FACET_MAP__DISPLAY_EMPTY_FACET = eINSTANCE.getFacetMap_DisplayEmptyFacet();
+
+		/**
+		 * The meta object literal for the '<em><b>Facet Display Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FACET_MAP__FACET_DISPLAY_TYPE = eINSTANCE.getFacetMap_FacetDisplayType();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.view.impl.TreeImpl <em>Tree</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.view.impl.TreeImpl
+		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getTree()
+		 * @generated
+		 */
+		EClass TREE = eINSTANCE.getTree();
+
+		/**
+		 * The meta object literal for the '<em><b>Node Operations</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TREE__NODE_OPERATIONS = eINSTANCE.getTree_NodeOperations();
+
+		/**
+		 * The meta object literal for the '<em><b>Node Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TREE__NODE_VALUE = eINSTANCE.getTree_NodeValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Depth</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TREE__DEFAULT_DEPTH = eINSTANCE.getTree_DefaultDepth();
+
+		/**
+		 * The meta object literal for the '<em><b>Max Depth</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TREE__MAX_DEPTH = eINSTANCE.getTree_MaxDepth();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.view.impl.FieldContainerImpl <em>Field Container</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.view.impl.FieldContainerImpl
+		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFieldContainer()
+		 * @generated
+		 */
+		EClass FIELD_CONTAINER = eINSTANCE.getFieldContainer();
 
 		/**
 		 * The meta object literal for the '<em><b>Children</b></em>' containment reference list feature.
@@ -5612,7 +5845,7 @@ public interface ViewPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FIELD_GROUP__CHILDREN = eINSTANCE.getFieldGroup_Children();
+		EReference FIELD_CONTAINER__CHILDREN = eINSTANCE.getFieldContainer_Children();
 
 		/**
 		 * The meta object literal for the '<em><b>Disabled</b></em>' containment reference list feature.
@@ -5620,7 +5853,7 @@ public interface ViewPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FIELD_GROUP__DISABLED = eINSTANCE.getFieldGroup_Disabled();
+		EReference FIELD_CONTAINER__DISABLED = eINSTANCE.getFieldContainer_Disabled();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.impl.FieldImpl <em>Field</em>}' class.
@@ -5773,6 +6006,16 @@ public interface ViewPackage extends EPackage {
 		EClass EMAIL_FIELD = eINSTANCE.getEmailField();
 
 		/**
+		 * The meta object literal for the '{@link com.bluexml.side.view.impl.IntegerFieldImpl <em>Integer Field</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.view.impl.IntegerFieldImpl
+		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getIntegerField()
+		 * @generated
+		 */
+		EClass INTEGER_FIELD = eINSTANCE.getIntegerField();
+
+		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.impl.FileFieldImpl <em>File Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5781,204 +6024,6 @@ public interface ViewPackage extends EPackage {
 		 * @generated
 		 */
 		EClass FILE_FIELD = eINSTANCE.getFileField();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.view.impl.FieldElementImpl <em>Field Element</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.view.impl.FieldElementImpl
-		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFieldElement()
-		 * @generated
-		 */
-		EClass FIELD_ELEMENT = eINSTANCE.getFieldElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Map To</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FIELD_ELEMENT__MAP_TO = eINSTANCE.getFieldElement_MapTo();
-
-		/**
-		 * The meta object literal for the '<em><b>Prefix</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FIELD_ELEMENT__PREFIX = eINSTANCE.getFieldElement_Prefix();
-
-		/**
-		 * The meta object literal for the '<em><b>Suffix</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FIELD_ELEMENT__SUFFIX = eINSTANCE.getFieldElement_Suffix();
-
-		/**
-		 * The meta object literal for the '<em><b>Hidden</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FIELD_ELEMENT__HIDDEN = eINSTANCE.getFieldElement_Hidden();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.view.impl.FacetMapImpl <em>Facet Map</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.view.impl.FacetMapImpl
-		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFacetMap()
-		 * @generated
-		 */
-		EClass FACET_MAP = eINSTANCE.getFacetMap();
-
-		/**
-		 * The meta object literal for the '<em><b>Display Empty Facet</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FACET_MAP__DISPLAY_EMPTY_FACET = eINSTANCE.getFacetMap_DisplayEmptyFacet();
-
-		/**
-		 * The meta object literal for the '<em><b>Facet Display Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FACET_MAP__FACET_DISPLAY_TYPE = eINSTANCE.getFacetMap_FacetDisplayType();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.view.impl.DataListImpl <em>Data List</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.view.impl.DataListImpl
-		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getDataList()
-		 * @generated
-		 */
-		EClass DATA_LIST = eINSTANCE.getDataList();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.view.impl.TreeImpl <em>Tree</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.view.impl.TreeImpl
-		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getTree()
-		 * @generated
-		 */
-		EClass TREE = eINSTANCE.getTree();
-
-		/**
-		 * The meta object literal for the '<em><b>Node Operations</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TREE__NODE_OPERATIONS = eINSTANCE.getTree_NodeOperations();
-
-		/**
-		 * The meta object literal for the '<em><b>Node Value</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TREE__NODE_VALUE = eINSTANCE.getTree_NodeValue();
-
-		/**
-		 * The meta object literal for the '<em><b>Default Depth</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TREE__DEFAULT_DEPTH = eINSTANCE.getTree_DefaultDepth();
-
-		/**
-		 * The meta object literal for the '<em><b>Max Depth</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TREE__MAX_DEPTH = eINSTANCE.getTree_MaxDepth();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.view.impl.DataTableImpl <em>Data Table</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.view.impl.DataTableImpl
-		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getDataTable()
-		 * @generated
-		 */
-		EClass DATA_TABLE = eINSTANCE.getDataTable();
-
-		/**
-		 * The meta object literal for the '<em><b>Default Col Set Up</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DATA_TABLE__DEFAULT_COL_SET_UP = eINSTANCE.getDataTable_DefaultColSetUp();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.view.impl.StylingImpl <em>Styling</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.view.impl.StylingImpl
-		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getStyling()
-		 * @generated
-		 */
-		EClass STYLING = eINSTANCE.getStyling();
-
-		/**
-		 * The meta object literal for the '<em><b>Style</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute STYLING__STYLE = eINSTANCE.getStyling_Style();
-
-		/**
-		 * The meta object literal for the '<em><b>Height</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute STYLING__HEIGHT = eINSTANCE.getStyling_Height();
-
-		/**
-		 * The meta object literal for the '<em><b>Width</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute STYLING__WIDTH = eINSTANCE.getStyling_Width();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.view.impl.AbstractViewImpl <em>Abstract View</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.view.impl.AbstractViewImpl
-		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getAbstractView()
-		 * @generated
-		 */
-		EClass ABSTRACT_VIEW = eINSTANCE.getAbstractView();
-
-		/**
-		 * The meta object literal for the '<em><b>View Of</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ABSTRACT_VIEW__VIEW_OF = eINSTANCE.getAbstractView_ViewOf();
-
-		/**
-		 * The meta object literal for the '<em><b>Operations</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ABSTRACT_VIEW__OPERATIONS = eINSTANCE.getAbstractView_Operations();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.impl.SelectFieldImpl <em>Select Field</em>}' class.
@@ -5997,24 +6042,6 @@ public interface ViewPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SELECT_FIELD__SELECT_WIDGET = eINSTANCE.getSelectField_SelectWidget();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.view.impl.ViewCollectionImpl <em>Collection</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.view.impl.ViewCollectionImpl
-		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getViewCollection()
-		 * @generated
-		 */
-		EClass VIEW_COLLECTION = eINSTANCE.getViewCollection();
-
-		/**
-		 * The meta object literal for the '<em><b>Views</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference VIEW_COLLECTION__VIEWS = eINSTANCE.getViewCollection_Views();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.impl.HtmlFieldImpl <em>Html Field</em>}' class.
@@ -6133,34 +6160,6 @@ public interface ViewPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FILTERABLE__FILTERING = eINSTANCE.getFilterable_Filtering();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.view.impl.FilteringImpl <em>Filtering</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.view.impl.FilteringImpl
-		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFiltering()
-		 * @generated
-		 */
-		EClass FILTERING = eINSTANCE.getFiltering();
-
-		/**
-		 * The meta object literal for the '<em><b>Default Filter Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FILTERING__DEFAULT_FILTER_VALUE = eINSTANCE.getFiltering_DefaultFilterValue();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.view.impl.IntegerFieldImpl <em>Integer Field</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.view.impl.IntegerFieldImpl
-		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getIntegerField()
-		 * @generated
-		 */
-		EClass INTEGER_FIELD = eINSTANCE.getIntegerField();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.SortOrder <em>Sort Order</em>}' enum.

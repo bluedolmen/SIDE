@@ -7,7 +7,6 @@
 package com.bluexml.side.view;
 
 import com.bluexml.side.common.Container;
-import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.common.OperationComponent;
 
@@ -28,7 +27,7 @@ import com.bluexml.side.common.OperationComponent;
  * @model abstract="true"
  * @generated
  */
-public interface AbstractView extends NamedModelElement, Stylable, FieldGroup {
+public interface AbstractView extends FieldContainer {
 	/**
 	 * Returns the value of the '<em><b>View Of</b></em>' reference.
 	 * <!-- begin-user-doc -->

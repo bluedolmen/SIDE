@@ -68,7 +68,7 @@ ISelectionChangedListener {
 	
 	private void doAction() {
 		CompoundCommand cc = new CompoundCommand();
-		Command addCmd = AddCommand.create(domain, selectedObject, ViewPackage.eINSTANCE.getFieldGroup_Children(), toRestore);
+		Command addCmd = AddCommand.create(domain, selectedObject, ViewPackage.eINSTANCE.getFieldContainer_Children(), toRestore);
 		cc.append(addCmd);
 		domain.getCommandStack().execute(cc);
 	}

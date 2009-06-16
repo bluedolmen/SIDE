@@ -8,13 +8,11 @@ package com.bluexml.side.view.impl;
 
 import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 
-import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.OperationComponent;
+
 import com.bluexml.side.view.Col;
 import com.bluexml.side.view.DataList;
 import com.bluexml.side.view.Editable;
-import com.bluexml.side.view.FieldElement;
-import com.bluexml.side.view.FieldGroup;
 import com.bluexml.side.view.Filterable;
 import com.bluexml.side.view.Filtering;
 import com.bluexml.side.view.Movable;
@@ -22,18 +20,14 @@ import com.bluexml.side.view.Sortable;
 import com.bluexml.side.view.Sorting;
 import com.bluexml.side.view.ViewPackage;
 
-import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.ecore.OCL;
 
 /**
@@ -63,6 +57,7 @@ public class DataListImpl extends AbstractDataTableImpl implements DataList {
 	 * @ordered
 	 */
 	protected static final boolean MOVABLE_EDEFAULT = false;
+
 	/**
 	 * The cached value of the '{@link #isMovable() <em>Movable</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -72,6 +67,7 @@ public class DataListImpl extends AbstractDataTableImpl implements DataList {
 	 * @ordered
 	 */
 	protected boolean movable = MOVABLE_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #isEditable() <em>Editable</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -81,6 +77,7 @@ public class DataListImpl extends AbstractDataTableImpl implements DataList {
 	 * @ordered
 	 */
 	protected static final boolean EDITABLE_EDEFAULT = false;
+
 	/**
 	 * The cached value of the '{@link #isEditable() <em>Editable</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -90,6 +87,7 @@ public class DataListImpl extends AbstractDataTableImpl implements DataList {
 	 * @ordered
 	 */
 	protected boolean editable = EDITABLE_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getFiltering() <em>Filtering</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -99,6 +97,7 @@ public class DataListImpl extends AbstractDataTableImpl implements DataList {
 	 * @ordered
 	 */
 	protected Filtering filtering;
+
 	/**
 	 * The cached value of the '{@link #getSorting() <em>Sorting</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -108,6 +107,7 @@ public class DataListImpl extends AbstractDataTableImpl implements DataList {
 	 * @ordered
 	 */
 	protected Sorting sorting;
+
 	/**
 	 * The cached value of the '{@link #getActions() <em>Actions</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -117,6 +117,7 @@ public class DataListImpl extends AbstractDataTableImpl implements DataList {
 	 * @ordered
 	 */
 	protected OperationComponent actions;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -352,7 +353,6 @@ public class DataListImpl extends AbstractDataTableImpl implements DataList {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -424,7 +424,7 @@ public class DataListImpl extends AbstractDataTableImpl implements DataList {
 		return super.eIsSet(featureID);
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

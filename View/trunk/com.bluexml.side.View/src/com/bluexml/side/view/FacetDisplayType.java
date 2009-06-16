@@ -40,7 +40,9 @@ public enum FacetDisplayType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	CLOUD(1, "cloud", "cloud"), /**
+	CLOUD(1, "cloud", "cloud"),
+
+	/**
 	 * The '<em><b>Improved Cloud</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

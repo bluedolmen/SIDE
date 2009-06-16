@@ -7,6 +7,7 @@
 package com.bluexml.side.view.provider;
 
 
+import com.bluexml.side.side.view.edit.ui.utils.model.ViewUtils;
 import com.bluexml.side.view.Tree;
 import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
@@ -14,11 +15,16 @@ import com.bluexml.side.view.ViewPackage;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -272,16 +278,12 @@ public class TreeItemProvider
 	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @_generated
+	 * @generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-		//super.collectNewChildDescriptors(newChildDescriptors, object);
-		newChildDescriptors.add
-		(createChildParameter
-			(ViewPackage.Literals.STYLABLE__STYLING,
-			 ViewFactory.eINSTANCE.createStyling()));
-		
+		super.collectNewChildDescriptors(newChildDescriptors, object);
+
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.SORTABLE__SORTING,
@@ -295,7 +297,97 @@ public class TreeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.TREE__NODE_VALUE,
-				 ViewFactory.eINSTANCE.createFieldGroup()));
+				 ViewFactory.eINSTANCE.createCol()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createDataList()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createDataTable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createFacetMap()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createTree()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createTextField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createPasswordField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createBooleanField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createFloatField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createActionField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createDateField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createTimeField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createDateTimeField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createPhoneNumberField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createEmailField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createIntegerField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createFileField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createSelectField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createHtmlField()));
 	}
 
 	/**
@@ -310,8 +402,8 @@ public class TreeItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == ViewPackage.Literals.FIELD_GROUP__CHILDREN ||
-			childFeature == ViewPackage.Literals.FIELD_GROUP__DISABLED ||
+			childFeature == ViewPackage.Literals.FIELD_CONTAINER__CHILDREN ||
+			childFeature == ViewPackage.Literals.FIELD_CONTAINER__DISABLED ||
 			childFeature == ViewPackage.Literals.TREE__NODE_VALUE;
 
 		if (qualify) {

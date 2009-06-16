@@ -92,27 +92,56 @@ public class ViewSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case ViewPackage.VIEW_COLLECTION: {
+				ViewCollection viewCollection = (ViewCollection)theEObject;
+				T result = caseViewCollection(viewCollection);
+				if (result == null) result = casePackage(viewCollection);
+				if (result == null) result = caseNamedModelElement(viewCollection);
+				if (result == null) result = caseModelElement(viewCollection);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ViewPackage.FIELD_ELEMENT: {
+				FieldElement fieldElement = (FieldElement)theEObject;
+				T result = caseFieldElement(fieldElement);
+				if (result == null) result = caseStylable(fieldElement);
+				if (result == null) result = caseNamedModelElement(fieldElement);
+				if (result == null) result = caseModelElement(fieldElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ViewPackage.ABSTRACT_VIEW: {
+				AbstractView abstractView = (AbstractView)theEObject;
+				T result = caseAbstractView(abstractView);
+				if (result == null) result = caseFieldContainer(abstractView);
+				if (result == null) result = caseFieldElement(abstractView);
+				if (result == null) result = caseStylable(abstractView);
+				if (result == null) result = caseNamedModelElement(abstractView);
+				if (result == null) result = caseModelElement(abstractView);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ViewPackage.ABSTRACT_DATA_TABLE: {
 				AbstractDataTable abstractDataTable = (AbstractDataTable)theEObject;
 				T result = caseAbstractDataTable(abstractDataTable);
-				if (result == null) result = caseDataTableElement(abstractDataTable);
 				if (result == null) result = caseAbstractView(abstractDataTable);
+				if (result == null) result = caseDataTableElement(abstractDataTable);
 				if (result == null) result = casePaginable(abstractDataTable);
-				if (result == null) result = caseNamedModelElement(abstractDataTable);
-				if (result == null) result = caseStylable(abstractDataTable);
-				if (result == null) result = caseFieldGroup(abstractDataTable);
-				if (result == null) result = caseModelElement(abstractDataTable);
+				if (result == null) result = caseFieldContainer(abstractDataTable);
 				if (result == null) result = caseFieldElement(abstractDataTable);
+				if (result == null) result = caseStylable(abstractDataTable);
+				if (result == null) result = caseNamedModelElement(abstractDataTable);
+				if (result == null) result = caseModelElement(abstractDataTable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ViewPackage.COL: {
 				Col col = (Col)theEObject;
 				T result = caseCol(col);
+				if (result == null) result = caseFieldContainer(col);
 				if (result == null) result = caseMovable(col);
 				if (result == null) result = caseEditable(col);
 				if (result == null) result = caseFilterable(col);
-				if (result == null) result = caseFieldGroup(col);
 				if (result == null) result = caseSortable(col);
 				if (result == null) result = caseFieldElement(col);
 				if (result == null) result = caseStylable(col);
@@ -133,19 +162,99 @@ public class ViewSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ViewPackage.FILTERING: {
+				Filtering filtering = (Filtering)theEObject;
+				T result = caseFiltering(filtering);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ViewPackage.STYLING: {
+				Styling styling = (Styling)theEObject;
+				T result = caseStyling(styling);
+				if (result == null) result = caseMetaInfoGroup(styling);
+				if (result == null) result = caseMetaData(styling);
+				if (result == null) result = caseNamedModelElement(styling);
+				if (result == null) result = caseModelElement(styling);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ViewPackage.DATA_TABLE_ELEMENT: {
 				DataTableElement dataTableElement = (DataTableElement)theEObject;
 				T result = caseDataTableElement(dataTableElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ViewPackage.FIELD_GROUP: {
-				FieldGroup fieldGroup = (FieldGroup)theEObject;
-				T result = caseFieldGroup(fieldGroup);
-				if (result == null) result = caseFieldElement(fieldGroup);
-				if (result == null) result = caseStylable(fieldGroup);
-				if (result == null) result = caseNamedModelElement(fieldGroup);
-				if (result == null) result = caseModelElement(fieldGroup);
+			case ViewPackage.DATA_LIST: {
+				DataList dataList = (DataList)theEObject;
+				T result = caseDataList(dataList);
+				if (result == null) result = caseAbstractDataTable(dataList);
+				if (result == null) result = caseCol(dataList);
+				if (result == null) result = caseAbstractView(dataList);
+				if (result == null) result = caseDataTableElement(dataList);
+				if (result == null) result = casePaginable(dataList);
+				if (result == null) result = caseFieldContainer(dataList);
+				if (result == null) result = caseMovable(dataList);
+				if (result == null) result = caseEditable(dataList);
+				if (result == null) result = caseFilterable(dataList);
+				if (result == null) result = caseSortable(dataList);
+				if (result == null) result = caseFieldElement(dataList);
+				if (result == null) result = caseStylable(dataList);
+				if (result == null) result = caseNamedModelElement(dataList);
+				if (result == null) result = caseModelElement(dataList);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ViewPackage.DATA_TABLE: {
+				DataTable dataTable = (DataTable)theEObject;
+				T result = caseDataTable(dataTable);
+				if (result == null) result = caseAbstractDataTable(dataTable);
+				if (result == null) result = caseAbstractView(dataTable);
+				if (result == null) result = caseDataTableElement(dataTable);
+				if (result == null) result = casePaginable(dataTable);
+				if (result == null) result = caseFieldContainer(dataTable);
+				if (result == null) result = caseFieldElement(dataTable);
+				if (result == null) result = caseStylable(dataTable);
+				if (result == null) result = caseNamedModelElement(dataTable);
+				if (result == null) result = caseModelElement(dataTable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ViewPackage.FACET_MAP: {
+				FacetMap facetMap = (FacetMap)theEObject;
+				T result = caseFacetMap(facetMap);
+				if (result == null) result = caseAbstractView(facetMap);
+				if (result == null) result = casePaginable(facetMap);
+				if (result == null) result = caseFieldContainer(facetMap);
+				if (result == null) result = caseFieldElement(facetMap);
+				if (result == null) result = caseStylable(facetMap);
+				if (result == null) result = caseNamedModelElement(facetMap);
+				if (result == null) result = caseModelElement(facetMap);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ViewPackage.TREE: {
+				Tree tree = (Tree)theEObject;
+				T result = caseTree(tree);
+				if (result == null) result = caseAbstractView(tree);
+				if (result == null) result = caseSortable(tree);
+				if (result == null) result = caseEditable(tree);
+				if (result == null) result = caseMovable(tree);
+				if (result == null) result = caseFilterable(tree);
+				if (result == null) result = caseFieldContainer(tree);
+				if (result == null) result = caseFieldElement(tree);
+				if (result == null) result = caseStylable(tree);
+				if (result == null) result = caseNamedModelElement(tree);
+				if (result == null) result = caseModelElement(tree);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ViewPackage.FIELD_CONTAINER: {
+				FieldContainer fieldContainer = (FieldContainer)theEObject;
+				T result = caseFieldContainer(fieldContainer);
+				if (result == null) result = caseFieldElement(fieldContainer);
+				if (result == null) result = caseStylable(fieldContainer);
+				if (result == null) result = caseNamedModelElement(fieldContainer);
+				if (result == null) result = caseModelElement(fieldContainer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -269,6 +378,17 @@ public class ViewSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ViewPackage.INTEGER_FIELD: {
+				IntegerField integerField = (IntegerField)theEObject;
+				T result = caseIntegerField(integerField);
+				if (result == null) result = caseField(integerField);
+				if (result == null) result = caseFieldElement(integerField);
+				if (result == null) result = caseStylable(integerField);
+				if (result == null) result = caseNamedModelElement(integerField);
+				if (result == null) result = caseModelElement(integerField);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ViewPackage.FILE_FIELD: {
 				FileField fileField = (FileField)theEObject;
 				T result = caseFileField(fileField);
@@ -280,100 +400,6 @@ public class ViewSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ViewPackage.FIELD_ELEMENT: {
-				FieldElement fieldElement = (FieldElement)theEObject;
-				T result = caseFieldElement(fieldElement);
-				if (result == null) result = caseStylable(fieldElement);
-				if (result == null) result = caseNamedModelElement(fieldElement);
-				if (result == null) result = caseModelElement(fieldElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ViewPackage.FACET_MAP: {
-				FacetMap facetMap = (FacetMap)theEObject;
-				T result = caseFacetMap(facetMap);
-				if (result == null) result = caseAbstractView(facetMap);
-				if (result == null) result = casePaginable(facetMap);
-				if (result == null) result = caseNamedModelElement(facetMap);
-				if (result == null) result = caseStylable(facetMap);
-				if (result == null) result = caseFieldGroup(facetMap);
-				if (result == null) result = caseModelElement(facetMap);
-				if (result == null) result = caseFieldElement(facetMap);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ViewPackage.DATA_LIST: {
-				DataList dataList = (DataList)theEObject;
-				T result = caseDataList(dataList);
-				if (result == null) result = caseAbstractDataTable(dataList);
-				if (result == null) result = caseCol(dataList);
-				if (result == null) result = caseDataTableElement(dataList);
-				if (result == null) result = caseAbstractView(dataList);
-				if (result == null) result = casePaginable(dataList);
-				if (result == null) result = caseMovable(dataList);
-				if (result == null) result = caseEditable(dataList);
-				if (result == null) result = caseFilterable(dataList);
-				if (result == null) result = caseFieldGroup(dataList);
-				if (result == null) result = caseSortable(dataList);
-				if (result == null) result = caseNamedModelElement(dataList);
-				if (result == null) result = caseStylable(dataList);
-				if (result == null) result = caseFieldElement(dataList);
-				if (result == null) result = caseModelElement(dataList);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ViewPackage.TREE: {
-				Tree tree = (Tree)theEObject;
-				T result = caseTree(tree);
-				if (result == null) result = caseAbstractView(tree);
-				if (result == null) result = caseSortable(tree);
-				if (result == null) result = caseEditable(tree);
-				if (result == null) result = caseMovable(tree);
-				if (result == null) result = caseFilterable(tree);
-				if (result == null) result = caseNamedModelElement(tree);
-				if (result == null) result = caseStylable(tree);
-				if (result == null) result = caseFieldGroup(tree);
-				if (result == null) result = caseModelElement(tree);
-				if (result == null) result = caseFieldElement(tree);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ViewPackage.DATA_TABLE: {
-				DataTable dataTable = (DataTable)theEObject;
-				T result = caseDataTable(dataTable);
-				if (result == null) result = caseAbstractDataTable(dataTable);
-				if (result == null) result = caseDataTableElement(dataTable);
-				if (result == null) result = caseAbstractView(dataTable);
-				if (result == null) result = casePaginable(dataTable);
-				if (result == null) result = caseNamedModelElement(dataTable);
-				if (result == null) result = caseStylable(dataTable);
-				if (result == null) result = caseFieldGroup(dataTable);
-				if (result == null) result = caseModelElement(dataTable);
-				if (result == null) result = caseFieldElement(dataTable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ViewPackage.STYLING: {
-				Styling styling = (Styling)theEObject;
-				T result = caseStyling(styling);
-				if (result == null) result = caseMetaInfoGroup(styling);
-				if (result == null) result = caseMetaData(styling);
-				if (result == null) result = caseNamedModelElement(styling);
-				if (result == null) result = caseModelElement(styling);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ViewPackage.ABSTRACT_VIEW: {
-				AbstractView abstractView = (AbstractView)theEObject;
-				T result = caseAbstractView(abstractView);
-				if (result == null) result = caseNamedModelElement(abstractView);
-				if (result == null) result = caseStylable(abstractView);
-				if (result == null) result = caseFieldGroup(abstractView);
-				if (result == null) result = caseModelElement(abstractView);
-				if (result == null) result = caseFieldElement(abstractView);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ViewPackage.SELECT_FIELD: {
 				SelectField selectField = (SelectField)theEObject;
 				T result = caseSelectField(selectField);
@@ -382,15 +408,6 @@ public class ViewSwitch<T> {
 				if (result == null) result = caseStylable(selectField);
 				if (result == null) result = caseNamedModelElement(selectField);
 				if (result == null) result = caseModelElement(selectField);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ViewPackage.VIEW_COLLECTION: {
-				ViewCollection viewCollection = (ViewCollection)theEObject;
-				T result = caseViewCollection(viewCollection);
-				if (result == null) result = casePackage(viewCollection);
-				if (result == null) result = caseNamedModelElement(viewCollection);
-				if (result == null) result = caseModelElement(viewCollection);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -441,25 +458,53 @@ public class ViewSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ViewPackage.FILTERING: {
-				Filtering filtering = (Filtering)theEObject;
-				T result = caseFiltering(filtering);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ViewPackage.INTEGER_FIELD: {
-				IntegerField integerField = (IntegerField)theEObject;
-				T result = caseIntegerField(integerField);
-				if (result == null) result = caseField(integerField);
-				if (result == null) result = caseFieldElement(integerField);
-				if (result == null) result = caseStylable(integerField);
-				if (result == null) result = caseNamedModelElement(integerField);
-				if (result == null) result = caseModelElement(integerField);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			default: return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Collection</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Collection</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseViewCollection(ViewCollection object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Field Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Field Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFieldElement(FieldElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract View</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract View</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractView(AbstractView object) {
+		return null;
 	}
 
 	/**
@@ -523,6 +568,36 @@ public class ViewSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Filtering</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Filtering</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFiltering(Filtering object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Styling</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Styling</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStyling(Styling object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Data Table Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -538,17 +613,77 @@ public class ViewSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Field Group</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Data List</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Field Group</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Data List</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFieldGroup(FieldGroup object) {
+	public T caseDataList(DataList object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Table</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Table</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataTable(DataTable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Facet Map</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Facet Map</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFacetMap(FacetMap object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Tree</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Tree</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTree(Tree object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Field Container</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Field Container</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFieldContainer(FieldContainer object) {
 		return null;
 	}
 
@@ -718,6 +853,21 @@ public class ViewSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Integer Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Integer Field</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIntegerField(IntegerField object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>File Field</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -733,111 +883,6 @@ public class ViewSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Field Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Field Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFieldElement(FieldElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Facet Map</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Facet Map</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFacetMap(FacetMap object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Data List</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Data List</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDataList(DataList object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Tree</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Tree</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTree(Tree object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Data Table</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Data Table</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDataTable(DataTable object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Styling</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Styling</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStyling(Styling object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract View</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract View</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAbstractView(AbstractView object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Select Field</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -849,21 +894,6 @@ public class ViewSwitch<T> {
 	 * @generated
 	 */
 	public T caseSelectField(SelectField object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Collection</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Collection</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseViewCollection(ViewCollection object) {
 		return null;
 	}
 
@@ -973,36 +1003,6 @@ public class ViewSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Filtering</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Filtering</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFiltering(Filtering object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Integer Field</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Integer Field</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseIntegerField(IntegerField object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Model Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1033,6 +1033,21 @@ public class ViewSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Package</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Package</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePackage(com.bluexml.side.common.Package object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Meta Data</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1059,21 +1074,6 @@ public class ViewSwitch<T> {
 	 * @generated
 	 */
 	public T caseMetaInfoGroup(MetaInfoGroup object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Package</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Package</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePackage(com.bluexml.side.common.Package object) {
 		return null;
 	}
 

@@ -18,7 +18,6 @@ import com.bluexml.side.view.Col;
 import com.bluexml.side.view.DataTable;
 import com.bluexml.side.view.Field;
 import com.bluexml.side.view.FieldElement;
-import com.bluexml.side.view.FieldGroup;
 import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
 
@@ -32,19 +31,24 @@ public class InitView {
 				doWork = UIUtils.showConfirmation("View already set","View have already been set. Do you want to overwrite it?");
 			}
 			if (doWork) {
-					if (av.getChildren().size() > 0) {
-						cmd.append(DeleteCommand.create(domain, av.getChildren()));
+				if (av.getChildren().size() > 0) {
+					cmd.append(DeleteCommand.create(domain, av.getChildren()));
+				}
+				if (av.getDisabled().size() > 0) {
+					Command delCmd = DeleteCommand.create(domain, av.getDisabled());
+					//TODO : find a better way, tried with RemoveCommand and DeleteCommand
+					if (delCmd.canExecute()) {
+						cmd.append(delCmd);
+					} else {
+						av.getDisabled().removeAll(av.getDisabled());
 					}
-					if (av.getDisabled().size() > 0) {
-						cmd.append(DeleteCommand.create(domain, av.getDisabled()));
-					}
-					
-					if (av.getViewOf() instanceof Clazz) {
-						Clazz cl = (Clazz) av.getViewOf();
-						Collection<FieldElement> c = getViewElementForClass(cl,av);
-						cmd.append(AddCommand.create(domain, av, ViewPackage.eINSTANCE.getFieldGroup_Children(), c));
-						av.setName(cl.getLabel());
-					}
+				}
+				if (av.getViewOf() instanceof Clazz) {
+					Clazz cl = (Clazz) av.getViewOf();
+					Collection<FieldElement> c = getViewElementForClass(cl,av);
+					cmd.append(AddCommand.create(domain, av, ViewPackage.eINSTANCE.getFieldContainer_Children(), c));
+					av.setName(cl.getLabel());
+				}
 			}
 		} else {
 			UIUtils.showError("No Class defined","No class have been defined. \n"
@@ -60,7 +64,7 @@ public class InitView {
 			for (Attribute a : c.getAllAttributes()) {
 				Field f = ClassUtils.getFieldForAttribute(a);
 				
-				FieldGroup fg = null;
+				FieldElement fg = null;
 				
 				// Special case for Data Table where field are in column.
 				if (av instanceof DataTable) {

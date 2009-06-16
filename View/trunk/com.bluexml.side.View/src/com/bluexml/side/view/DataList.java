@@ -18,5 +18,4 @@ package com.bluexml.side.view;
  * @generated
  */
 public interface DataList extends AbstractDataTable, Col {
-		
 } // DataList

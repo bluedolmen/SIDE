@@ -133,23 +133,11 @@ public class DataTableItemProvider
 	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @_generated
+	 * @generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-		//super.collectNewChildDescriptors(newChildDescriptors, object);
-		newChildDescriptors.add
-		(createChildParameter
-			(ViewPackage.Literals.STYLABLE__STYLING,
-			 ViewFactory.eINSTANCE.createStyling()));
-		newChildDescriptors.add
-		(createChildParameter
-			(ViewPackage.Literals.FIELD_GROUP__CHILDREN,
-			 ViewFactory.eINSTANCE.createCol()));
-		newChildDescriptors.add
-		(createChildParameter
-			(ViewPackage.Literals.PAGINABLE__PAGING,
-			 ViewFactory.eINSTANCE.createPaging()));
+		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
 	/**
@@ -164,8 +152,8 @@ public class DataTableItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == ViewPackage.Literals.FIELD_GROUP__CHILDREN ||
-			childFeature == ViewPackage.Literals.FIELD_GROUP__DISABLED ||
+			childFeature == ViewPackage.Literals.FIELD_CONTAINER__CHILDREN ||
+			childFeature == ViewPackage.Literals.FIELD_CONTAINER__DISABLED ||
 			childFeature == ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS ||
 			childFeature == ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS ||
 			childFeature == ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS ||

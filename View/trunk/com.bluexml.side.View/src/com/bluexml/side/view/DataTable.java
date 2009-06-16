@@ -6,7 +6,6 @@
  */
 package com.bluexml.side.view;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +28,7 @@ public interface DataTable extends AbstractDataTable {
 	 * Returns the value of the '<em><b>Default Col Set Up</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Default Col Set Up</em>' reference isn't clear,
+	 * If the meaning of the '<em>Default Col Set Up</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->

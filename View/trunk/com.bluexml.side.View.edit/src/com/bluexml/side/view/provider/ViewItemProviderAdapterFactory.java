@@ -145,29 +145,6 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.view.FieldGroup} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected FieldGroupItemProvider fieldGroupItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.bluexml.side.view.FieldGroup}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createFieldGroupAdapter() {
-		if (fieldGroupItemProvider == null) {
-			fieldGroupItemProvider = new FieldGroupItemProvider(this);
-		}
-
-		return fieldGroupItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.view.TextField} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -749,10 +726,16 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 	 * @generated
 	 */
 	public void dispose() {
+		if (viewCollectionItemProvider != null) viewCollectionItemProvider.dispose();
 		if (colItemProvider != null) colItemProvider.dispose();
 		if (pagingItemProvider != null) pagingItemProvider.dispose();
 		if (sortingItemProvider != null) sortingItemProvider.dispose();
-		if (fieldGroupItemProvider != null) fieldGroupItemProvider.dispose();
+		if (filteringItemProvider != null) filteringItemProvider.dispose();
+		if (stylingItemProvider != null) stylingItemProvider.dispose();
+		if (dataListItemProvider != null) dataListItemProvider.dispose();
+		if (dataTableItemProvider != null) dataTableItemProvider.dispose();
+		if (facetMapItemProvider != null) facetMapItemProvider.dispose();
+		if (treeItemProvider != null) treeItemProvider.dispose();
 		if (textFieldItemProvider != null) textFieldItemProvider.dispose();
 		if (passwordFieldItemProvider != null) passwordFieldItemProvider.dispose();
 		if (booleanFieldItemProvider != null) booleanFieldItemProvider.dispose();
@@ -763,17 +746,10 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 		if (dateTimeFieldItemProvider != null) dateTimeFieldItemProvider.dispose();
 		if (phoneNumberFieldItemProvider != null) phoneNumberFieldItemProvider.dispose();
 		if (emailFieldItemProvider != null) emailFieldItemProvider.dispose();
-		if (fileFieldItemProvider != null) fileFieldItemProvider.dispose();
-		if (facetMapItemProvider != null) facetMapItemProvider.dispose();
-		if (dataListItemProvider != null) dataListItemProvider.dispose();
-		if (treeItemProvider != null) treeItemProvider.dispose();
-		if (dataTableItemProvider != null) dataTableItemProvider.dispose();
-		if (stylingItemProvider != null) stylingItemProvider.dispose();
-		if (selectFieldItemProvider != null) selectFieldItemProvider.dispose();
-		if (viewCollectionItemProvider != null) viewCollectionItemProvider.dispose();
-		if (htmlFieldItemProvider != null) htmlFieldItemProvider.dispose();
-		if (filteringItemProvider != null) filteringItemProvider.dispose();
 		if (integerFieldItemProvider != null) integerFieldItemProvider.dispose();
+		if (fileFieldItemProvider != null) fileFieldItemProvider.dispose();
+		if (selectFieldItemProvider != null) selectFieldItemProvider.dispose();
+		if (htmlFieldItemProvider != null) htmlFieldItemProvider.dispose();
 	}
 
 }
