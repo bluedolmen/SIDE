@@ -138,6 +138,11 @@ public class DataTableItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+		
+		newChildDescriptors.add
+		(createChildParameter
+			(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
+			 ViewFactory.eINSTANCE.createCol()));
 	}
 
 	/**
