@@ -33,7 +33,7 @@ import com.bluexml.side.util.libs.FileHelper;
  */
 public class ClassFacetMapDeployer extends Deployer implements FacetmapConstants {
 	
-	//
+	// System locations where the file will be deployed
 	String TOMCAT_REPERTORY;
 	String CMIS_REPERTORY;
 	String FACETMAP_FACETS;
@@ -50,8 +50,11 @@ public class ClassFacetMapDeployer extends Deployer implements FacetmapConstants
 	}
 	
 	private void initParams(){
-		TOMCAT_REPERTORY = getParam(CONFIGURATION_TOMCAT_INSTALLATION) + tomcat;
-		CMIS_REPERTORY = getParam(CONFIGURATION_TOMCAT_INSTALLATION)+ tomcat+ alfresco + webinf + "classes"+FILESEP + alfresco + "webscripts"+FILESEP + "com"+FILESEP + "bluexml"+FILESEP;
+		String tomcatInstallation = getParam(CONFIGURATION_TOMCAT_INSTALLATION);
+		if (!tomcatInstallation.endsWith(FILESEP))
+			tomcatInstallation += FILESEP;
+		TOMCAT_REPERTORY = tomcatInstallation + tomcat;
+		CMIS_REPERTORY = tomcatInstallation + tomcat+ alfresco + webinf + "classes"+FILESEP + alfresco + "webscripts"+FILESEP + "com"+FILESEP + "bluexml"+FILESEP;
 		FACETMAP_FACETS = getParam(CONFIGURATION_FACETMAP_FACET_HOME);
 		FACETMAP_CONTENT = getParam(CONFIGURATION_FACETMAP_CONTENT_HOME);
 		FACETMAP_FACETS_REPERTORY = TOMCAT_REPERTORY + webapps + FACETMAP_FACETS + FILESEP;
@@ -86,27 +89,6 @@ public class ClassFacetMapDeployer extends Deployer implements FacetmapConstants
 	
 	@Override
 	protected void deployProcess(File fileToDeploy) throws Exception {
-		this.initParams();
-		//CommonFiles
-		String genpathcomon = fileToDeploy.getPath() + FILESEP + common;
-		File cmisjs =  new File (genpathcomon + scriptcmis + cmisjs_filename);
-		File cmis2xfml = new File(genpathcomon + facetmap + webinf + xsl + cmis2xfml_filename);
-		File cmis2xfml_properties = new File(genpathcomon + facetmap + webinf + cmis2xfml_properties_filename);
-		File facetmap_properties = new File(genpathcomon + facetmap + webinf + facetmap_configurationproperties_filename);
-		commonDeployedFiles.add(cmisjs);
-		commonDeployedFiles.add(cmis2xfml);
-		commonDeployedFiles.add(cmis2xfml_properties);
-		commonDeployedFiles.add(facetmap_properties);
-		//FacetsFiles
-		String genpathfacets = fileToDeploy.getPath() + FILESEP + facets;
-		File buildProperties = new File(genpathfacets + facetmap + webinf + buildProperties_filename);
-		File basicFacets = new File(genpathfacets + facetmap + xsl + display + includes + basicFacets_filename);
-		File rightnav = new File(genpathfacets + facetmap + xsl + display + rightnav_properties_filename);
-		facetsDeployedFiles.add(buildProperties);
-		facetsDeployedFiles.add(basicFacets);
-		facetsDeployedFiles.add(rightnav);
-		//Check
-		checkfiles();
 		//Deploy
 		deployFacetMapCommon();
 		deployFacets();
@@ -144,10 +126,35 @@ public class ClassFacetMapDeployer extends Deployer implements FacetmapConstants
 	}
 	
 	@Override
-	protected void postProcess(File fileToDeploy) throws Exception {}
+	protected void postProcess(File fileToDeploy) throws Exception {	}
 
 	@Override
-	protected void preProcess(File fileToDeploy) throws Exception {}
+	/**
+	 * Initialise the params of the deployer and check if the generation has completed successfully
+	 */
+	protected void preProcess(File fileToDeploy) throws Exception {
+		this.initParams();
+		//CommonFiles
+		String genpathcomon = fileToDeploy.getPath() + FILESEP + common;
+		File cmisjs =  new File (genpathcomon + scriptcmis + cmisjs_filename);
+		File cmis2xfml = new File(genpathcomon + facetmap + webinf + xsl + cmis2xfml_filename);
+		File cmis2xfml_properties = new File(genpathcomon + facetmap + webinf + cmis2xfml_properties_filename);
+		File facetmap_properties = new File(genpathcomon + facetmap + webinf + facetmap_configurationproperties_filename);
+		commonDeployedFiles.add(cmisjs);
+		commonDeployedFiles.add(cmis2xfml);
+		commonDeployedFiles.add(cmis2xfml_properties);
+		commonDeployedFiles.add(facetmap_properties);
+		//FacetsFiles
+		String genpathfacets = fileToDeploy.getPath() + FILESEP + facets;
+		File buildProperties = new File(genpathfacets + facetmap + webinf + buildProperties_filename);
+		File basicFacets = new File(genpathfacets + facetmap + xsl + display + includes + basicFacets_filename);
+		File rightnav = new File(genpathfacets + facetmap + xsl + display + rightnav_properties_filename);
+		facetsDeployedFiles.add(buildProperties);
+		facetsDeployedFiles.add(basicFacets);
+		facetsDeployedFiles.add(rightnav);
+		//Check
+		checkfiles();
+	}
 
 	/**
 	 * This method check if the user have the license to use this deployer.
