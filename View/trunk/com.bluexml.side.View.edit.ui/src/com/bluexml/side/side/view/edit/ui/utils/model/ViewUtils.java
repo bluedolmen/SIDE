@@ -75,14 +75,14 @@ public class ViewUtils {
 			for (Col c : cols) {
 				newName += (newName.length() ==0 ? c.getName() : "+" + c.getName());
 				for (FieldElement fe : c.getChildren()) {
-					childrens.add(fe);
+					childrens.add((FieldElement)EcoreUtil.copy(fe));
 				}
 			}
 			newCol.setName(newName);
 			newCol.getChildren().addAll(childrens);
 			// Create the new col :
 			cmd.append(AddCommand.create(domain, fg, ViewPackage.eINSTANCE.getFieldContainer_Children(), newCol));
-			// Delete all cols :
+			// Delete all old cols :
 			cmd.append(DeleteCommand.create(domain, cols));
 		}
 		return cmd;
