@@ -365,7 +365,6 @@ public class FieldContainerItemProvider
 	@SuppressWarnings("deprecation")
 	@Override
 	public Command createRemoveCommand(EditingDomain domain, EObject owner, EReference feature, Collection<?> collection) {
-		System.err.println("Col Item");
 		CompoundCommand cmd = new CompoundCommand();
 		CompoundCommand cmdMvCmd = ViewUtils.createRemoveCommand(domain, owner, collection);
 		if (!cmdMvCmd.isEmpty()) {

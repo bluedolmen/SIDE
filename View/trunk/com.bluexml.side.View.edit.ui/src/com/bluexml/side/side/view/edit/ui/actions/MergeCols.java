@@ -42,7 +42,6 @@ ISelectionChangedListener {
 		selectedObject = new ArrayList<Col>();
 		for (Iterator<?> objects = selection.iterator(); objects.hasNext();) {
 			Object object = objects.next();
-			System.err.println("" + object.getClass());
 			if (object instanceof Col) {
 				// We add cols having the same parent only
 				Col col = (Col) object;
