@@ -97,13 +97,6 @@
          unpack="false"/>
 
    <plugin
-         id="com.bluexml.side.settings"
-         download-size="0"
-         install-size="0"
-         version="1.0.12"
-         unpack="false"/>
-
-   <plugin
          id="com.bluexml.side.Application.security"
          download-size="0"
          install-size="0"
@@ -112,6 +105,13 @@
 
    <plugin
          id="com.bluexml.side.Application.deployer"
+         download-size="0"
+         install-size="0"
+         version="1.0.12"
+         unpack="false"/>
+
+   <plugin
+         id="com.bluexml.side.Settings"
          download-size="0"
          install-size="0"
          version="1.0.12"
