@@ -242,6 +242,33 @@ public interface ViewFactory extends EFactory {
 	HtmlField createHtmlField();
 
 	/**
+	 * Returns a new object of class '<em>URL Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>URL Field</em>'.
+	 * @generated
+	 */
+	URLField createURLField();
+
+	/**
+	 * Returns a new object of class '<em>Image Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Image Field</em>'.
+	 * @generated
+	 */
+	ImageField createImageField();
+
+	/**
+	 * Returns a new object of class '<em>Field Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Field Group</em>'.
+	 * @generated
+	 */
+	FieldGroup createFieldGroup();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

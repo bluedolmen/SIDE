@@ -62,7 +62,7 @@ public class FieldItemProvider
 			super.getPropertyDescriptors(object);
 
 			addPaternPropertyDescriptor(object);
-			addPatrenLanguagePropertyDescriptor(object);
+			addPaternLanguagePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -90,19 +90,19 @@ public class FieldItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Patren Language feature.
+	 * This adds a property descriptor for the Patern Language feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addPatrenLanguagePropertyDescriptor(Object object) {
+	protected void addPaternLanguagePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Field_patrenLanguage_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Field_patrenLanguage_feature", "_UI_Field_type"),
-				 ViewPackage.Literals.FIELD__PATREN_LANGUAGE,
+				 getString("_UI_Field_paternLanguage_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Field_paternLanguage_feature", "_UI_Field_type"),
+				 ViewPackage.Literals.FIELD__PATERN_LANGUAGE,
 				 true,
 				 false,
 				 false,
@@ -149,7 +149,7 @@ public class FieldItemProvider
 
 		switch (notification.getFeatureID(Field.class)) {
 			case ViewPackage.FIELD__PATERN:
-			case ViewPackage.FIELD__PATREN_LANGUAGE:
+			case ViewPackage.FIELD__PATERN_LANGUAGE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

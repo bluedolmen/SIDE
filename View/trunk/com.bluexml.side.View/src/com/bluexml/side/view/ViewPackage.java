@@ -179,7 +179,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getStylable()
 	 * @generated
 	 */
-	int STYLABLE = 30;
+	int STYLABLE = 32;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -207,7 +207,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFieldElement()
 	 * @generated
 	 */
-	int FIELD_ELEMENT = 1;
+	int FIELD_ELEMENT = 2;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -334,7 +334,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFieldContainer()
 	 * @generated
 	 */
-	int FIELD_CONTAINER = 14;
+	int FIELD_CONTAINER = 1;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -479,7 +479,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getAbstractView()
 	 * @generated
 	 */
-	int ABSTRACT_VIEW = 2;
+	int ABSTRACT_VIEW = 3;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -642,7 +642,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getAbstractDataTable()
 	 * @generated
 	 */
-	int ABSTRACT_DATA_TABLE = 3;
+	int ABSTRACT_DATA_TABLE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -841,7 +841,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getCol()
 	 * @generated
 	 */
-	int COL = 4;
+	int COL = 5;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -1031,7 +1031,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getPaging()
 	 * @generated
 	 */
-	int PAGING = 5;
+	int PAGING = 6;
 
 	/**
 	 * The feature id for the '<em><b>Pagination Style</b></em>' attribute.
@@ -1077,7 +1077,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getSorting()
 	 * @generated
 	 */
-	int SORTING = 6;
+	int SORTING = 7;
 
 	/**
 	 * The feature id for the '<em><b>Sort Order</b></em>' attribute.
@@ -1114,7 +1114,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFiltering()
 	 * @generated
 	 */
-	int FILTERING = 7;
+	int FILTERING = 8;
 
 	/**
 	 * The feature id for the '<em><b>Default Filter Value</b></em>' attribute.
@@ -1142,7 +1142,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getStyling()
 	 * @generated
 	 */
-	int STYLING = 8;
+	int STYLING = 9;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -1260,7 +1260,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getDataTableElement()
 	 * @generated
 	 */
-	int DATA_TABLE_ELEMENT = 9;
+	int DATA_TABLE_ELEMENT = 10;
 
 	/**
 	 * The number of structural features of the '<em>Data Table Element</em>' class.
@@ -1279,7 +1279,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getDataList()
 	 * @generated
 	 */
-	int DATA_LIST = 10;
+	int DATA_LIST = 11;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -1523,7 +1523,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getDataTable()
 	 * @generated
 	 */
-	int DATA_TABLE = 11;
+	int DATA_TABLE = 12;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -1731,7 +1731,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFacetMap()
 	 * @generated
 	 */
-	int FACET_MAP = 12;
+	int FACET_MAP = 13;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -1921,7 +1921,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getTree()
 	 * @generated
 	 */
-	int TREE = 13;
+	int TREE = 14;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -2276,13 +2276,13 @@ public interface ViewPackage extends EPackage {
 	int FIELD__PATERN = FIELD_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * The feature id for the '<em><b>Patern Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD__PATREN_LANGUAGE = FIELD_ELEMENT_FEATURE_COUNT + 1;
+	int FIELD__PATERN_LANGUAGE = FIELD_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Field</em>' class.
@@ -2421,13 +2421,13 @@ public interface ViewPackage extends EPackage {
 	int TEXT_FIELD__PATERN = FIELD__PATERN;
 
 	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * The feature id for the '<em><b>Patern Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+	int TEXT_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
 	 * The feature id for the '<em><b>Widget Type</b></em>' attribute.
@@ -2575,13 +2575,13 @@ public interface ViewPackage extends EPackage {
 	int PASSWORD_FIELD__PATERN = FIELD__PATERN;
 
 	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * The feature id for the '<em><b>Patern Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PASSWORD_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+	int PASSWORD_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
 	 * The number of structural features of the '<em>Password Field</em>' class.
@@ -2720,13 +2720,13 @@ public interface ViewPackage extends EPackage {
 	int BOOLEAN_FIELD__PATERN = FIELD__PATERN;
 
 	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * The feature id for the '<em><b>Patern Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+	int BOOLEAN_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
 	 * The feature id for the '<em><b>Split</b></em>' attribute.
@@ -2874,13 +2874,13 @@ public interface ViewPackage extends EPackage {
 	int FLOAT_FIELD__PATERN = FIELD__PATERN;
 
 	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * The feature id for the '<em><b>Patern Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+	int FLOAT_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
 	 * The number of structural features of the '<em>Float Field</em>' class.
@@ -3019,13 +3019,13 @@ public interface ViewPackage extends EPackage {
 	int ACTION_FIELD__PATERN = FIELD__PATERN;
 
 	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * The feature id for the '<em><b>Patern Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+	int ACTION_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -3173,13 +3173,13 @@ public interface ViewPackage extends EPackage {
 	int DATE_FIELD__PATERN = FIELD__PATERN;
 
 	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * The feature id for the '<em><b>Patern Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATE_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+	int DATE_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
 	 * The number of structural features of the '<em>Date Field</em>' class.
@@ -3318,13 +3318,13 @@ public interface ViewPackage extends EPackage {
 	int TIME_FIELD__PATERN = FIELD__PATERN;
 
 	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * The feature id for the '<em><b>Patern Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TIME_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+	int TIME_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
 	 * The number of structural features of the '<em>Time Field</em>' class.
@@ -3463,13 +3463,13 @@ public interface ViewPackage extends EPackage {
 	int DATE_TIME_FIELD__PATERN = FIELD__PATERN;
 
 	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * The feature id for the '<em><b>Patern Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATE_TIME_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+	int DATE_TIME_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
 	 * The number of structural features of the '<em>Date Time Field</em>' class.
@@ -3608,13 +3608,13 @@ public interface ViewPackage extends EPackage {
 	int PHONE_NUMBER_FIELD__PATERN = FIELD__PATERN;
 
 	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * The feature id for the '<em><b>Patern Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PHONE_NUMBER_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+	int PHONE_NUMBER_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
 	 * The number of structural features of the '<em>Phone Number Field</em>' class.
@@ -3753,13 +3753,13 @@ public interface ViewPackage extends EPackage {
 	int EMAIL_FIELD__PATERN = FIELD__PATERN;
 
 	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * The feature id for the '<em><b>Patern Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMAIL_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+	int EMAIL_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
 	 * The number of structural features of the '<em>Email Field</em>' class.
@@ -3898,13 +3898,13 @@ public interface ViewPackage extends EPackage {
 	int INTEGER_FIELD__PATERN = FIELD__PATERN;
 
 	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * The feature id for the '<em><b>Patern Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+	int INTEGER_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
 	 * The number of structural features of the '<em>Integer Field</em>' class.
@@ -4043,13 +4043,13 @@ public interface ViewPackage extends EPackage {
 	int FILE_FIELD__PATERN = FIELD__PATERN;
 
 	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * The feature id for the '<em><b>Patern Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FILE_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+	int FILE_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
 	 * The number of structural features of the '<em>File Field</em>' class.
@@ -4188,13 +4188,13 @@ public interface ViewPackage extends EPackage {
 	int SELECT_FIELD__PATERN = FIELD__PATERN;
 
 	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * The feature id for the '<em><b>Patern Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SELECT_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+	int SELECT_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
 	 * The feature id for the '<em><b>Select Widget</b></em>' attribute.
@@ -4342,13 +4342,13 @@ public interface ViewPackage extends EPackage {
 	int HTML_FIELD__PATERN = FIELD__PATERN;
 
 	/**
-	 * The feature id for the '<em><b>Patren Language</b></em>' attribute.
+	 * The feature id for the '<em><b>Patern Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HTML_FIELD__PATREN_LANGUAGE = FIELD__PATREN_LANGUAGE;
+	int HTML_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
 	 * The number of structural features of the '<em>Html Field</em>' class.
@@ -4360,6 +4360,296 @@ public interface ViewPackage extends EPackage {
 	int HTML_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.URLFieldImpl <em>URL Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.URLFieldImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getURLField()
+	 * @generated
+	 */
+	int URL_FIELD = 30;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__STYLING = FIELD__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__NAME = FIELD__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__MAP_TO = FIELD__MAP_TO;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__PREFIX = FIELD__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__SUFFIX = FIELD__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Patern</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__PATERN = FIELD__PATERN;
+
+	/**
+	 * The feature id for the '<em><b>Patern Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
+
+	/**
+	 * The number of structural features of the '<em>URL Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.ImageFieldImpl <em>Image Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.ImageFieldImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getImageField()
+	 * @generated
+	 */
+	int IMAGE_FIELD = 31;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__STYLING = FILE_FIELD__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__STEREOTYPES = FILE_FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__TAGS = FILE_FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__COMMENTS = FILE_FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__DOCUMENTATION = FILE_FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__DESCRIPTION = FILE_FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__METAINFO = FILE_FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__NAME = FILE_FIELD__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__MAP_TO = FILE_FIELD__MAP_TO;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__PREFIX = FILE_FIELD__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__SUFFIX = FILE_FIELD__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__HIDDEN = FILE_FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Patern</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__PATERN = FILE_FIELD__PATERN;
+
+	/**
+	 * The feature id for the '<em><b>Patern Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__PATERN_LANGUAGE = FILE_FIELD__PATERN_LANGUAGE;
+
+	/**
+	 * The number of structural features of the '<em>Image Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD_FEATURE_COUNT = FILE_FIELD_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.impl.PaginableImpl <em>Paginable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4367,7 +4657,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getPaginable()
 	 * @generated
 	 */
-	int PAGINABLE = 31;
+	int PAGINABLE = 33;
 
 	/**
 	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
@@ -4395,7 +4685,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getSortable()
 	 * @generated
 	 */
-	int SORTABLE = 32;
+	int SORTABLE = 34;
 
 	/**
 	 * The feature id for the '<em><b>Sorting</b></em>' containment reference.
@@ -4423,7 +4713,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getEditable()
 	 * @generated
 	 */
-	int EDITABLE = 33;
+	int EDITABLE = 35;
 
 	/**
 	 * The feature id for the '<em><b>Editable</b></em>' attribute.
@@ -4451,7 +4741,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getMovable()
 	 * @generated
 	 */
-	int MOVABLE = 34;
+	int MOVABLE = 36;
 
 	/**
 	 * The feature id for the '<em><b>Movable</b></em>' attribute.
@@ -4479,7 +4769,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFilterable()
 	 * @generated
 	 */
-	int FILTERABLE = 35;
+	int FILTERABLE = 37;
 
 	/**
 	 * The feature id for the '<em><b>Filtering</b></em>' containment reference.
@@ -4500,6 +4790,151 @@ public interface ViewPackage extends EPackage {
 	int FILTERABLE_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.FieldGroupImpl <em>Field Group</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.FieldGroupImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFieldGroup()
+	 * @generated
+	 */
+	int FIELD_GROUP = 38;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_GROUP__STYLING = FIELD_CONTAINER__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_GROUP__STEREOTYPES = FIELD_CONTAINER__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_GROUP__TAGS = FIELD_CONTAINER__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_GROUP__COMMENTS = FIELD_CONTAINER__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_GROUP__DOCUMENTATION = FIELD_CONTAINER__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_GROUP__DESCRIPTION = FIELD_CONTAINER__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_GROUP__METAINFO = FIELD_CONTAINER__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_GROUP__NAME = FIELD_CONTAINER__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_GROUP__MAP_TO = FIELD_CONTAINER__MAP_TO;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_GROUP__PREFIX = FIELD_CONTAINER__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_GROUP__SUFFIX = FIELD_CONTAINER__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_GROUP__HIDDEN = FIELD_CONTAINER__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_GROUP__CHILDREN = FIELD_CONTAINER__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_GROUP__DISABLED = FIELD_CONTAINER__DISABLED;
+
+	/**
+	 * The number of structural features of the '<em>Field Group</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_GROUP_FEATURE_COUNT = FIELD_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.SortOrder <em>Sort Order</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4507,7 +4942,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getSortOrder()
 	 * @generated
 	 */
-	int SORT_ORDER = 36;
+	int SORT_ORDER = 39;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.PaginationStyle <em>Pagination Style</em>}' enum.
@@ -4517,7 +4952,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getPaginationStyle()
 	 * @generated
 	 */
-	int PAGINATION_STYLE = 37;
+	int PAGINATION_STYLE = 40;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.Halign <em>Halign</em>}' enum.
@@ -4527,7 +4962,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getHalign()
 	 * @generated
 	 */
-	int HALIGN = 38;
+	int HALIGN = 41;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.LoadingType <em>Loading Type</em>}' enum.
@@ -4537,7 +4972,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getLoadingType()
 	 * @generated
 	 */
-	int LOADING_TYPE = 39;
+	int LOADING_TYPE = 42;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.WidgetTextType <em>Widget Text Type</em>}' enum.
@@ -4547,7 +4982,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getWidgetTextType()
 	 * @generated
 	 */
-	int WIDGET_TEXT_TYPE = 40;
+	int WIDGET_TEXT_TYPE = 43;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.SelectWidgetType <em>Select Widget Type</em>}' enum.
@@ -4557,7 +4992,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getSelectWidgetType()
 	 * @generated
 	 */
-	int SELECT_WIDGET_TYPE = 41;
+	int SELECT_WIDGET_TYPE = 44;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.FacetDisplayType <em>Facet Display Type</em>}' enum.
@@ -4567,7 +5002,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFacetDisplayType()
 	 * @generated
 	 */
-	int FACET_DISPLAY_TYPE = 42;
+	int FACET_DISPLAY_TYPE = 45;
 
 
 	/**
@@ -5061,15 +5496,15 @@ public interface ViewPackage extends EPackage {
 	EAttribute getField_Patern();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.Field#getPatrenLanguage <em>Patren Language</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.view.Field#getPaternLanguage <em>Patern Language</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Patren Language</em>'.
-	 * @see com.bluexml.side.view.Field#getPatrenLanguage()
+	 * @return the meta object for the attribute '<em>Patern Language</em>'.
+	 * @see com.bluexml.side.view.Field#getPaternLanguage()
 	 * @see #getField()
 	 * @generated
 	 */
-	EAttribute getField_PatrenLanguage();
+	EAttribute getField_PaternLanguage();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.view.TextField <em>Text Field</em>}'.
@@ -5256,6 +5691,26 @@ public interface ViewPackage extends EPackage {
 	EClass getHtmlField();
 
 	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.view.URLField <em>URL Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>URL Field</em>'.
+	 * @see com.bluexml.side.view.URLField
+	 * @generated
+	 */
+	EClass getURLField();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.view.ImageField <em>Image Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Image Field</em>'.
+	 * @see com.bluexml.side.view.ImageField
+	 * @generated
+	 */
+	EClass getImageField();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.view.Stylable <em>Stylable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5380,6 +5835,16 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFilterable_Filtering();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.view.FieldGroup <em>Field Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Field Group</em>'.
+	 * @see com.bluexml.side.view.FieldGroup
+	 * @generated
+	 */
+	EClass getFieldGroup();
 
 	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.view.SortOrder <em>Sort Order</em>}'.
@@ -5874,12 +6339,12 @@ public interface ViewPackage extends EPackage {
 		EAttribute FIELD__PATERN = eINSTANCE.getField_Patern();
 
 		/**
-		 * The meta object literal for the '<em><b>Patren Language</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Patern Language</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute FIELD__PATREN_LANGUAGE = eINSTANCE.getField_PatrenLanguage();
+		EAttribute FIELD__PATERN_LANGUAGE = eINSTANCE.getField_PaternLanguage();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.impl.TextFieldImpl <em>Text Field</em>}' class.
@@ -6054,6 +6519,26 @@ public interface ViewPackage extends EPackage {
 		EClass HTML_FIELD = eINSTANCE.getHtmlField();
 
 		/**
+		 * The meta object literal for the '{@link com.bluexml.side.view.impl.URLFieldImpl <em>URL Field</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.view.impl.URLFieldImpl
+		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getURLField()
+		 * @generated
+		 */
+		EClass URL_FIELD = eINSTANCE.getURLField();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.view.impl.ImageFieldImpl <em>Image Field</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.view.impl.ImageFieldImpl
+		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getImageField()
+		 * @generated
+		 */
+		EClass IMAGE_FIELD = eINSTANCE.getImageField();
+
+		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.impl.StylableImpl <em>Stylable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6160,6 +6645,16 @@ public interface ViewPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FILTERABLE__FILTERING = eINSTANCE.getFilterable_Filtering();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.view.impl.FieldGroupImpl <em>Field Group</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.view.impl.FieldGroupImpl
+		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFieldGroup()
+		 * @generated
+		 */
+		EClass FIELD_GROUP = eINSTANCE.getFieldGroup();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.SortOrder <em>Sort Order</em>}' enum.

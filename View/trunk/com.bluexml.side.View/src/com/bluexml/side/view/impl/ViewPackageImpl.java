@@ -32,6 +32,7 @@ import com.bluexml.side.view.Filtering;
 import com.bluexml.side.view.FloatField;
 import com.bluexml.side.view.Halign;
 import com.bluexml.side.view.HtmlField;
+import com.bluexml.side.view.ImageField;
 import com.bluexml.side.view.IntegerField;
 import com.bluexml.side.view.LoadingType;
 import com.bluexml.side.view.Movable;
@@ -50,6 +51,7 @@ import com.bluexml.side.view.Styling;
 import com.bluexml.side.view.TextField;
 import com.bluexml.side.view.TimeField;
 import com.bluexml.side.view.Tree;
+import com.bluexml.side.view.URLField;
 import com.bluexml.side.view.ViewCollection;
 import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
@@ -285,6 +287,20 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass urlFieldEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass imageFieldEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass stylableEClass = null;
 
 	/**
@@ -321,6 +337,13 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * @generated
 	 */
 	private EClass filterableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass fieldGroupEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -861,7 +884,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getField_PatrenLanguage() {
+	public EAttribute getField_PaternLanguage() {
 		return (EAttribute)fieldEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1032,6 +1055,24 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getURLField() {
+		return urlFieldEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getImageField() {
+		return imageFieldEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getStylable() {
 		return stylableEClass;
 	}
@@ -1140,6 +1181,15 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getFieldGroup() {
+		return fieldGroupEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getSortOrder() {
 		return sortOrderEEnum;
 	}
@@ -1229,6 +1279,10 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		viewCollectionEClass = createEClass(VIEW_COLLECTION);
 		createEReference(viewCollectionEClass, VIEW_COLLECTION__VIEWS);
 
+		fieldContainerEClass = createEClass(FIELD_CONTAINER);
+		createEReference(fieldContainerEClass, FIELD_CONTAINER__CHILDREN);
+		createEReference(fieldContainerEClass, FIELD_CONTAINER__DISABLED);
+
 		fieldElementEClass = createEClass(FIELD_ELEMENT);
 		createEReference(fieldElementEClass, FIELD_ELEMENT__MAP_TO);
 		createEAttribute(fieldElementEClass, FIELD_ELEMENT__PREFIX);
@@ -1281,13 +1335,9 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		createEAttribute(treeEClass, TREE__DEFAULT_DEPTH);
 		createEAttribute(treeEClass, TREE__MAX_DEPTH);
 
-		fieldContainerEClass = createEClass(FIELD_CONTAINER);
-		createEReference(fieldContainerEClass, FIELD_CONTAINER__CHILDREN);
-		createEReference(fieldContainerEClass, FIELD_CONTAINER__DISABLED);
-
 		fieldEClass = createEClass(FIELD);
 		createEAttribute(fieldEClass, FIELD__PATERN);
-		createEAttribute(fieldEClass, FIELD__PATREN_LANGUAGE);
+		createEAttribute(fieldEClass, FIELD__PATERN_LANGUAGE);
 
 		textFieldEClass = createEClass(TEXT_FIELD);
 		createEAttribute(textFieldEClass, TEXT_FIELD__WIDGET_TYPE);
@@ -1321,6 +1371,10 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		htmlFieldEClass = createEClass(HTML_FIELD);
 
+		urlFieldEClass = createEClass(URL_FIELD);
+
+		imageFieldEClass = createEClass(IMAGE_FIELD);
+
 		stylableEClass = createEClass(STYLABLE);
 		createEReference(stylableEClass, STYLABLE__STYLING);
 
@@ -1338,6 +1392,8 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		filterableEClass = createEClass(FILTERABLE);
 		createEReference(filterableEClass, FILTERABLE__FILTERING);
+
+		fieldGroupEClass = createEClass(FIELD_GROUP);
 
 		// Create enums
 		sortOrderEEnum = createEEnum(SORT_ORDER);
@@ -1381,6 +1437,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		// Add supertypes to classes
 		viewCollectionEClass.getESuperTypes().add(theCommonPackage.getPackage());
+		fieldContainerEClass.getESuperTypes().add(this.getFieldElement());
 		fieldElementEClass.getESuperTypes().add(this.getStylable());
 		fieldElementEClass.getESuperTypes().add(theCommonPackage.getNamedModelElement());
 		abstractViewEClass.getESuperTypes().add(this.getFieldContainer());
@@ -1403,7 +1460,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		treeEClass.getESuperTypes().add(this.getEditable());
 		treeEClass.getESuperTypes().add(this.getMovable());
 		treeEClass.getESuperTypes().add(this.getFilterable());
-		fieldContainerEClass.getESuperTypes().add(this.getFieldElement());
 		fieldEClass.getESuperTypes().add(this.getFieldElement());
 		textFieldEClass.getESuperTypes().add(this.getField());
 		passwordFieldEClass.getESuperTypes().add(this.getField());
@@ -1419,10 +1475,17 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		fileFieldEClass.getESuperTypes().add(this.getField());
 		selectFieldEClass.getESuperTypes().add(this.getField());
 		htmlFieldEClass.getESuperTypes().add(this.getField());
+		urlFieldEClass.getESuperTypes().add(this.getField());
+		imageFieldEClass.getESuperTypes().add(this.getFileField());
+		fieldGroupEClass.getESuperTypes().add(this.getFieldContainer());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(viewCollectionEClass, ViewCollection.class, "ViewCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getViewCollection_Views(), this.getAbstractView(), null, "views", null, 0, -1, ViewCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(fieldContainerEClass, FieldContainer.class, "FieldContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFieldContainer_Children(), this.getFieldElement(), null, "children", null, 0, -1, FieldContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFieldContainer_Disabled(), this.getFieldElement(), null, "disabled", null, 0, -1, FieldContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(fieldElementEClass, FieldElement.class, "FieldElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFieldElement_MapTo(), theCommonPackage.getModelElement(), null, "mapTo", null, 0, 1, FieldElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1476,13 +1539,9 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		initEAttribute(getTree_DefaultDepth(), ecorePackage.getEInt(), "defaultDepth", "1", 0, 1, Tree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTree_MaxDepth(), ecorePackage.getEInt(), "maxDepth", null, 0, 1, Tree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(fieldContainerEClass, FieldContainer.class, "FieldContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFieldContainer_Children(), this.getFieldElement(), null, "children", null, 0, -1, FieldContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFieldContainer_Disabled(), this.getFieldElement(), null, "disabled", null, 0, -1, FieldContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(fieldEClass, Field.class, "Field", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getField_Patern(), ecorePackage.getEString(), "patern", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getField_PatrenLanguage(), ecorePackage.getEString(), "patrenLanguage", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getField_PaternLanguage(), ecorePackage.getEString(), "paternLanguage", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(textFieldEClass, TextField.class, "TextField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTextField_WidgetType(), this.getWidgetTextType(), "widgetType", null, 0, 1, TextField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1516,6 +1575,10 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		initEClass(htmlFieldEClass, HtmlField.class, "HtmlField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(urlFieldEClass, URLField.class, "URLField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(imageFieldEClass, ImageField.class, "ImageField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(stylableEClass, Stylable.class, "Stylable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStylable_Styling(), this.getStyling(), null, "styling", null, 0, 1, Stylable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1533,6 +1596,8 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		initEClass(filterableEClass, Filterable.class, "Filterable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFilterable_Filtering(), this.getFiltering(), null, "filtering", null, 0, 1, Filterable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(fieldGroupEClass, FieldGroup.class, "FieldGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(sortOrderEEnum, SortOrder.class, "SortOrder");
@@ -1583,7 +1648,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * @generated
 	 */
 	protected void createDocumentationAnnotations() {
-		String source = "http://www.topcased.org/documentation";			
+		String source = "http://www.topcased.org/documentation";					
 		addAnnotation
 		  (getAbstractDataTable_HaveRowActions(), 
 		   source, 
@@ -1601,7 +1666,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "use this to setup default actions available on each colomn"
-		   });								
+		   });						
 	}
 
 } //ViewPackageImpl

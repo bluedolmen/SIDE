@@ -81,6 +81,10 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 				return createViewCollectionAdapter();
 			}
 			@Override
+			public Adapter caseFieldContainer(FieldContainer object) {
+				return createFieldContainerAdapter();
+			}
+			@Override
 			public Adapter caseFieldElement(FieldElement object) {
 				return createFieldElementAdapter();
 			}
@@ -131,10 +135,6 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTree(Tree object) {
 				return createTreeAdapter();
-			}
-			@Override
-			public Adapter caseFieldContainer(FieldContainer object) {
-				return createFieldContainerAdapter();
 			}
 			@Override
 			public Adapter caseField(Field object) {
@@ -197,6 +197,14 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 				return createHtmlFieldAdapter();
 			}
 			@Override
+			public Adapter caseURLField(URLField object) {
+				return createURLFieldAdapter();
+			}
+			@Override
+			public Adapter caseImageField(ImageField object) {
+				return createImageFieldAdapter();
+			}
+			@Override
 			public Adapter caseStylable(Stylable object) {
 				return createStylableAdapter();
 			}
@@ -219,6 +227,10 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseFilterable(Filterable object) {
 				return createFilterableAdapter();
+			}
+			@Override
+			public Adapter caseFieldGroup(FieldGroup object) {
+				return createFieldGroupAdapter();
 			}
 			@Override
 			public Adapter caseModelElement(ModelElement object) {
@@ -681,6 +693,34 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.URLField <em>URL Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.view.URLField
+	 * @generated
+	 */
+	public Adapter createURLFieldAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.ImageField <em>Image Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.view.ImageField
+	 * @generated
+	 */
+	public Adapter createImageFieldAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.Stylable <em>Stylable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -761,6 +801,20 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFilterableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.FieldGroup <em>Field Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.view.FieldGroup
+	 * @generated
+	 */
+	public Adapter createFieldGroupAdapter() {
 		return null;
 	}
 

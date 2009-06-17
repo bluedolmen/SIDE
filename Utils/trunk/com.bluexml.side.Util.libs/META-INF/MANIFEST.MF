@@ -1,17 +1,19 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Libs Plug-in
-Bundle-SymbolicName: com.bluexml.side.Util.libs
+Bundle-SymbolicName: com.bluexml.side.Util.libs;singleton:=true
 Bundle-Version: 1.0.12
 Bundle-Activator: com.bluexml.side.util.libs.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.swt
+ org.eclipse.swt,
+ org.eclipse.ui
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.util.libs;uses:="org.eclipse.core.runtime,org.eclipse.core.resources,org.osgi.framework",
  com.bluexml.side.util.libs.md5,
  com.bluexml.side.util.libs.ui,
+ com.bluexml.side.util.libs.view,
  com.bluexml.side.util.libs.xml;uses:="javax.xml.transform,org.jdom",
  com.bluexml.side.util.libs.zip,
  com.thoughtworks.xstream;

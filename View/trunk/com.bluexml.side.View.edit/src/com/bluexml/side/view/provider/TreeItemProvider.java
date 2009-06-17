@@ -388,6 +388,21 @@ public class TreeItemProvider
 			(createChildParameter
 				(ViewPackage.Literals.TREE__NODE_VALUE,
 				 ViewFactory.eINSTANCE.createHtmlField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createURLField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createImageField()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createFieldGroup()));
 	}
 
 	/**

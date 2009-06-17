@@ -582,6 +582,75 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.view.URLField} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected URLFieldItemProvider urlFieldItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.view.URLField}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createURLFieldAdapter() {
+		if (urlFieldItemProvider == null) {
+			urlFieldItemProvider = new URLFieldItemProvider(this);
+		}
+
+		return urlFieldItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.view.ImageField} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ImageFieldItemProvider imageFieldItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.view.ImageField}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createImageFieldAdapter() {
+		if (imageFieldItemProvider == null) {
+			imageFieldItemProvider = new ImageFieldItemProvider(this);
+		}
+
+		return imageFieldItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.view.FieldGroup} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FieldGroupItemProvider fieldGroupItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.view.FieldGroup}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createFieldGroupAdapter() {
+		if (fieldGroupItemProvider == null) {
+			fieldGroupItemProvider = new FieldGroupItemProvider(this);
+		}
+
+		return fieldGroupItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.view.Filtering} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -750,6 +819,9 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 		if (fileFieldItemProvider != null) fileFieldItemProvider.dispose();
 		if (selectFieldItemProvider != null) selectFieldItemProvider.dispose();
 		if (htmlFieldItemProvider != null) htmlFieldItemProvider.dispose();
+		if (urlFieldItemProvider != null) urlFieldItemProvider.dispose();
+		if (imageFieldItemProvider != null) imageFieldItemProvider.dispose();
+		if (fieldGroupItemProvider != null) fieldGroupItemProvider.dispose();
 	}
 
 }

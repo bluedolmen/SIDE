@@ -7,6 +7,20 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
         eType="#//AbstractView" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FieldContainer" abstract="true" eSuperTypes="#//FieldElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//FieldElement" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="use to list undesirable item"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="disabled" upperBound="-1"
+        eType="#//FieldElement" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="list fieldElement that must be displayed"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FieldElement" abstract="true" eSuperTypes="#//Stylable ../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="mapTo" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -118,23 +132,9 @@
         defaultValueLiteral="1"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxDepth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FieldContainer" abstract="true" eSuperTypes="#//FieldElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
-        eType="#//FieldElement" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="use to list undesirable item"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="disabled" upperBound="-1"
-        eType="#//FieldElement" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="list fieldElement that must be displayed"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Field" abstract="true" eSuperTypes="#//FieldElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="patern" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="patrenLanguage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="paternLanguage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TextField" eSuperTypes="#//Field">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="widgetType" eType="#//WidgetTextType"/>
@@ -163,6 +163,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="selectWidget" eType="#//SelectWidgetType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="HtmlField" eSuperTypes="#//Field"/>
+  <eClassifiers xsi:type="ecore:EClass" name="URLField" eSuperTypes="#//Field"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ImageField" eSuperTypes="#//FileField"/>
   <eClassifiers xsi:type="ecore:EEnum" name="LoadingType">
     <eLiterals name="static" literal="Static"/>
     <eLiterals name="dynamic" value="1" literal="Dynamic"/>

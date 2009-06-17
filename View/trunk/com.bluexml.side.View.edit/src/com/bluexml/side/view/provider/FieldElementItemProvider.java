@@ -11,6 +11,7 @@ import com.bluexml.side.common.CommonFactory;
 import com.bluexml.side.common.CommonPackage;
 
 import com.bluexml.side.view.FieldElement;
+import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
 
 import java.util.Collection;
@@ -180,7 +181,7 @@ public class FieldElementItemProvider
 				 getString("_UI_FieldElement_mapTo_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_FieldElement_mapTo_feature", "_UI_FieldElement_type"),
 				 ViewPackage.Literals.FIELD_ELEMENT__MAP_TO,
-				 true,
+				 false,
 				 false,
 				 true,
 				 null,
@@ -340,7 +341,10 @@ public class FieldElementItemProvider
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		
+		newChildDescriptors.add
+		(createChildParameter
+			(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+			 CommonFactory.eINSTANCE.createComment()));
 	}
 
 }

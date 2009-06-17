@@ -27,7 +27,7 @@ import org.eclipse.ocl.ecore.OCL;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.view.impl.FieldImpl#getPatern <em>Patern</em>}</li>
- *   <li>{@link com.bluexml.side.view.impl.FieldImpl#getPatrenLanguage <em>Patren Language</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.FieldImpl#getPaternLanguage <em>Patern Language</em>}</li>
  * </ul>
  * </p>
  *
@@ -55,24 +55,24 @@ public abstract class FieldImpl extends FieldElementImpl implements Field {
 	protected String patern = PATERN_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getPatrenLanguage() <em>Patren Language</em>}' attribute.
+	 * The default value of the '{@link #getPaternLanguage() <em>Patern Language</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPatrenLanguage()
+	 * @see #getPaternLanguage()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String PATREN_LANGUAGE_EDEFAULT = null;
+	protected static final String PATERN_LANGUAGE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getPatrenLanguage() <em>Patren Language</em>}' attribute.
+	 * The cached value of the '{@link #getPaternLanguage() <em>Patern Language</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPatrenLanguage()
+	 * @see #getPaternLanguage()
 	 * @generated
 	 * @ordered
 	 */
-	protected String patrenLanguage = PATREN_LANGUAGE_EDEFAULT;
+	protected String paternLanguage = PATERN_LANGUAGE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -119,8 +119,8 @@ public abstract class FieldImpl extends FieldElementImpl implements Field {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getPatrenLanguage() {
-		return patrenLanguage;
+	public String getPaternLanguage() {
+		return paternLanguage;
 	}
 
 	/**
@@ -128,11 +128,11 @@ public abstract class FieldImpl extends FieldElementImpl implements Field {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPatrenLanguage(String newPatrenLanguage) {
-		String oldPatrenLanguage = patrenLanguage;
-		patrenLanguage = newPatrenLanguage;
+	public void setPaternLanguage(String newPaternLanguage) {
+		String oldPaternLanguage = paternLanguage;
+		paternLanguage = newPaternLanguage;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.FIELD__PATREN_LANGUAGE, oldPatrenLanguage, patrenLanguage));
+			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.FIELD__PATERN_LANGUAGE, oldPaternLanguage, paternLanguage));
 	}
 
 	/**
@@ -145,8 +145,8 @@ public abstract class FieldImpl extends FieldElementImpl implements Field {
 		switch (featureID) {
 			case ViewPackage.FIELD__PATERN:
 				return getPatern();
-			case ViewPackage.FIELD__PATREN_LANGUAGE:
-				return getPatrenLanguage();
+			case ViewPackage.FIELD__PATERN_LANGUAGE:
+				return getPaternLanguage();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -162,8 +162,8 @@ public abstract class FieldImpl extends FieldElementImpl implements Field {
 			case ViewPackage.FIELD__PATERN:
 				setPatern((String)newValue);
 				return;
-			case ViewPackage.FIELD__PATREN_LANGUAGE:
-				setPatrenLanguage((String)newValue);
+			case ViewPackage.FIELD__PATERN_LANGUAGE:
+				setPaternLanguage((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -180,8 +180,8 @@ public abstract class FieldImpl extends FieldElementImpl implements Field {
 			case ViewPackage.FIELD__PATERN:
 				setPatern(PATERN_EDEFAULT);
 				return;
-			case ViewPackage.FIELD__PATREN_LANGUAGE:
-				setPatrenLanguage(PATREN_LANGUAGE_EDEFAULT);
+			case ViewPackage.FIELD__PATERN_LANGUAGE:
+				setPaternLanguage(PATERN_LANGUAGE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -197,8 +197,8 @@ public abstract class FieldImpl extends FieldElementImpl implements Field {
 		switch (featureID) {
 			case ViewPackage.FIELD__PATERN:
 				return PATERN_EDEFAULT == null ? patern != null : !PATERN_EDEFAULT.equals(patern);
-			case ViewPackage.FIELD__PATREN_LANGUAGE:
-				return PATREN_LANGUAGE_EDEFAULT == null ? patrenLanguage != null : !PATREN_LANGUAGE_EDEFAULT.equals(patrenLanguage);
+			case ViewPackage.FIELD__PATERN_LANGUAGE:
+				return PATERN_LANGUAGE_EDEFAULT == null ? paternLanguage != null : !PATERN_LANGUAGE_EDEFAULT.equals(paternLanguage);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -215,8 +215,8 @@ public abstract class FieldImpl extends FieldElementImpl implements Field {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (patern: ");
 		result.append(patern);
-		result.append(", patrenLanguage: ");
-		result.append(patrenLanguage);
+		result.append(", paternLanguage: ");
+		result.append(paternLanguage);
 		result.append(')');
 		return result.toString();
 	}

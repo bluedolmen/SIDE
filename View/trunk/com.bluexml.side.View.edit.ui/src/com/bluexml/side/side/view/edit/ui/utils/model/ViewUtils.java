@@ -15,10 +15,14 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import com.bluexml.side.side.view.edit.ui.utils.InternalModification;
 import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.Col;
+import com.bluexml.side.view.DataList;
+import com.bluexml.side.view.DataTable;
+import com.bluexml.side.view.FacetMap;
 import com.bluexml.side.view.Field;
 import com.bluexml.side.view.FieldContainer;
 import com.bluexml.side.view.FieldElement;
 import com.bluexml.side.view.FieldGroup;
+import com.bluexml.side.view.Tree;
 import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
 
@@ -45,11 +49,10 @@ public class ViewUtils {
 		// First we check if we synchronize
 		if (InternalModification.getMoveToDisabled()) {
 			for (Object o : collection) {
-				if (o instanceof FieldGroup) {
-						FieldGroup fg = (FieldGroup) EcoreUtil.copy((FieldGroup)o);
-						Command createCmd = AddCommand.create(domain, ViewUtils.getViewForElement(owner), ViewPackage.eINSTANCE.getFieldContainer_Disabled(), fg);
-						cmd.append(createCmd);
-					
+				if (o instanceof FieldContainer) {
+					FieldContainer fg = (FieldContainer) EcoreUtil.copy((FieldContainer)o);
+					Command createCmd = AddCommand.create(domain, ViewUtils.getViewForElement(owner), ViewPackage.eINSTANCE.getFieldContainer_Disabled(), fg);
+					cmd.append(createCmd);
 				} else if (o instanceof Field) {
 					Field f = (Field) o;
 					Field fcpy = (Field) EcoreUtil.copy(f);
@@ -86,5 +89,19 @@ public class ViewUtils {
 			cmd.append(DeleteCommand.create(domain, cols));
 		}
 		return cmd;
+	}
+
+	public static String getTypeAsString(AbstractView av) {
+		String name = "";
+		if (av instanceof DataList) {
+			name = "Data List";
+		} else if (av instanceof Tree) {
+			name = "Tree";
+		} else if (av instanceof FacetMap) {
+			name = "FacetMap";
+		} else if (av instanceof DataTable) {
+			name = "Data Table";
+		} 
+		return name;
 	}
 }

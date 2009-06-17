@@ -85,6 +85,9 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 			case ViewPackage.FILE_FIELD: return createFileField();
 			case ViewPackage.SELECT_FIELD: return createSelectField();
 			case ViewPackage.HTML_FIELD: return createHtmlField();
+			case ViewPackage.URL_FIELD: return createURLField();
+			case ViewPackage.IMAGE_FIELD: return createImageField();
+			case ViewPackage.FIELD_GROUP: return createFieldGroup();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -382,6 +385,36 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 	public HtmlField createHtmlField() {
 		HtmlFieldImpl htmlField = new HtmlFieldImpl();
 		return htmlField;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public URLField createURLField() {
+		URLFieldImpl urlField = new URLFieldImpl();
+		return urlField;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImageField createImageField() {
+		ImageFieldImpl imageField = new ImageFieldImpl();
+		return imageField;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FieldGroup createFieldGroup() {
+		FieldGroupImpl fieldGroup = new FieldGroupImpl();
+		return fieldGroup;
 	}
 
 	/**

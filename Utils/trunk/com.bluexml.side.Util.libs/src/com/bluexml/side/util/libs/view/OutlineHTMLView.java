@@ -1,4 +1,4 @@
-package com.bluexml.side.form.editor.views;
+package com.bluexml.side.util.libs.view;
 
 
 import org.eclipse.swt.SWT;
@@ -40,7 +40,25 @@ public class OutlineHTMLView extends ViewPart {
 	 */
 	public void createPartControl(Composite parent) {
 		browser = new Browser(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
-		browser.setText("<html><body>Outline view</body></html>");
+		browser.setText("<html>" +
+				"<head>" +
+				"<style type=\"text/css\">" +
+				"body {" +
+				"font-family:\"Lucida Grande\",\"Trebuchet MS\",Verdana,Helvetica,sans-serif;" +
+				"font-size:90%;" +
+				"font-size-adjust:none;" +
+				"font-style:normal;" +
+				"font-variant:normal;" +
+				"font-weight:normal;" +
+				"line-height:normal;" +
+				"}" +
+				"</style>" +
+				"</head>" +
+				"<body>Outline view" +
+				"<br>" +
+				"<br>" +
+				"<a href=\"http://www.bluexml.com\">BlueXML.com</a>" +
+				"</body></html>");
 	}
 
 

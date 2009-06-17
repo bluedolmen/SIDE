@@ -101,6 +101,16 @@ public class ViewSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ViewPackage.FIELD_CONTAINER: {
+				FieldContainer fieldContainer = (FieldContainer)theEObject;
+				T result = caseFieldContainer(fieldContainer);
+				if (result == null) result = caseFieldElement(fieldContainer);
+				if (result == null) result = caseStylable(fieldContainer);
+				if (result == null) result = caseNamedModelElement(fieldContainer);
+				if (result == null) result = caseModelElement(fieldContainer);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ViewPackage.FIELD_ELEMENT: {
 				FieldElement fieldElement = (FieldElement)theEObject;
 				T result = caseFieldElement(fieldElement);
@@ -245,16 +255,6 @@ public class ViewSwitch<T> {
 				if (result == null) result = caseStylable(tree);
 				if (result == null) result = caseNamedModelElement(tree);
 				if (result == null) result = caseModelElement(tree);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ViewPackage.FIELD_CONTAINER: {
-				FieldContainer fieldContainer = (FieldContainer)theEObject;
-				T result = caseFieldContainer(fieldContainer);
-				if (result == null) result = caseFieldElement(fieldContainer);
-				if (result == null) result = caseStylable(fieldContainer);
-				if (result == null) result = caseNamedModelElement(fieldContainer);
-				if (result == null) result = caseModelElement(fieldContainer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -422,6 +422,29 @@ public class ViewSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ViewPackage.URL_FIELD: {
+				URLField urlField = (URLField)theEObject;
+				T result = caseURLField(urlField);
+				if (result == null) result = caseField(urlField);
+				if (result == null) result = caseFieldElement(urlField);
+				if (result == null) result = caseStylable(urlField);
+				if (result == null) result = caseNamedModelElement(urlField);
+				if (result == null) result = caseModelElement(urlField);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ViewPackage.IMAGE_FIELD: {
+				ImageField imageField = (ImageField)theEObject;
+				T result = caseImageField(imageField);
+				if (result == null) result = caseFileField(imageField);
+				if (result == null) result = caseField(imageField);
+				if (result == null) result = caseFieldElement(imageField);
+				if (result == null) result = caseStylable(imageField);
+				if (result == null) result = caseNamedModelElement(imageField);
+				if (result == null) result = caseModelElement(imageField);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ViewPackage.STYLABLE: {
 				Stylable stylable = (Stylable)theEObject;
 				T result = caseStylable(stylable);
@@ -455,6 +478,17 @@ public class ViewSwitch<T> {
 			case ViewPackage.FILTERABLE: {
 				Filterable filterable = (Filterable)theEObject;
 				T result = caseFilterable(filterable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ViewPackage.FIELD_GROUP: {
+				FieldGroup fieldGroup = (FieldGroup)theEObject;
+				T result = caseFieldGroup(fieldGroup);
+				if (result == null) result = caseFieldContainer(fieldGroup);
+				if (result == null) result = caseFieldElement(fieldGroup);
+				if (result == null) result = caseStylable(fieldGroup);
+				if (result == null) result = caseNamedModelElement(fieldGroup);
+				if (result == null) result = caseModelElement(fieldGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -913,6 +947,36 @@ public class ViewSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>URL Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>URL Field</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseURLField(URLField object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Image Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Image Field</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseImageField(ImageField object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Stylable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -999,6 +1063,21 @@ public class ViewSwitch<T> {
 	 * @generated
 	 */
 	public T caseFilterable(Filterable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Field Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Field Group</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFieldGroup(FieldGroup object) {
 		return null;
 	}
 

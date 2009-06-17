@@ -12,6 +12,7 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.side.view.edit.ui.utils.model.ClassUtils;
+import com.bluexml.side.side.view.edit.ui.utils.model.ViewUtils;
 import com.bluexml.side.util.libs.ui.UIUtils;
 import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.Col;
@@ -47,7 +48,7 @@ public class InitView {
 					Clazz cl = (Clazz) av.getViewOf();
 					Collection<FieldElement> c = getViewElementForClass(cl,av);
 					cmd.append(AddCommand.create(domain, av, ViewPackage.eINSTANCE.getFieldContainer_Children(), c));
-					av.setName(cl.getLabel());
+					av.setName(cl.getLabel() + " (" + ViewUtils.getTypeAsString(av) + ")");
 				}
 			}
 		} else {

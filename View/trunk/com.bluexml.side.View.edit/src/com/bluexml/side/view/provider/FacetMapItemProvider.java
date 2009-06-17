@@ -201,11 +201,7 @@ public class FacetMapItemProvider
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-		//super.collectNewChildDescriptors(newChildDescriptors, object);
-		newChildDescriptors.add
-		(createChildParameter
-			(ViewPackage.Literals.STYLABLE__STYLING,
-			 ViewFactory.eINSTANCE.createStyling()));
+		super.collectNewChildDescriptors(newChildDescriptors, object);
 		
 		newChildDescriptors.add
 			(createChildParameter

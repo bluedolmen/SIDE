@@ -1,4 +1,4 @@
-package com.bluexml.side.form.common;
+package com.bluexml.side.side.view.edit.ui.actions;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
@@ -31,9 +31,9 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.PlatformUI;
 
-import com.bluexml.side.form.FormContainer;
-import com.bluexml.side.form.editor.views.service.OutlineViewService;
+import com.bluexml.side.side.view.edit.ui.utils.outline.service.OutlineViewService;
 import com.bluexml.side.util.libs.view.OutlineHTMLView;
+import com.bluexml.side.view.FieldContainer;
 
 import fr.obeo.acceleo.chain.ActionSet;
 import fr.obeo.acceleo.chain.ChainFactory;
@@ -51,7 +51,7 @@ import fr.obeo.acceleo.gen.IGenFilter;
 import fr.obeo.acceleo.gen.template.eval.LaunchManager;
 import fr.obeo.acceleo.tools.resources.Resources;
 
-public class RefreshOutlineAction extends Action implements
+public class RefreshOutline extends Action implements
 		ISelectionChangedListener {
 
 	protected URI fileURI;
@@ -70,8 +70,8 @@ public class RefreshOutlineAction extends Action implements
 		selectedObject = null;
 		for (Iterator<?> objects = selection.iterator(); objects.hasNext();) {
 			Object object = objects.next();
-			if (object instanceof FormContainer) {
-				selectedObject = (FormContainer) object;
+			if (object instanceof FieldContainer) {
+				selectedObject = (FieldContainer) object;
 				XMIResource xmiRessource = (XMIResource)((EObject)object).eResource();;
 				fileURI = xmiRessource.getURI();
 			} else {
@@ -81,22 +81,6 @@ public class RefreshOutlineAction extends Action implements
 
 		return selectedObject != null;
 	}
-	
-	/**
-	 * public boolean updateSelection(IStructuredSelection selection) {
-		fileURI = null;
-		for (Iterator<?> objects = selection.iterator(); objects.hasNext();) {
-			Object object = objects.next();
-			if (object instanceof XMIResource) {
-				fileURI = ((XMIResource) object).getURI();
-			} else {
-				return false;
-			}
-		}
-
-		return (fileURI != null);
-	}
-	 */
 
 	@Override
 	public void run() {
@@ -117,14 +101,14 @@ public class RefreshOutlineAction extends Action implements
 
 	@SuppressWarnings("deprecation")
 	private void doAction(URI uri) throws CoreException, FactoryException, IOException {
-		String metamodelURI = "http://www.kerblue.org/form/1.0";
-		OutlineViewService.setNameOfSelectedForm(((FormContainer)selectedObject).getId());
+		String metamodelURI = "http://www.kerblue.org/view/1.0";
+		OutlineViewService.setNameOfSelectedView(((FieldContainer)selectedObject).getName());
 		
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().saveAllEditors(true);
 		// References to files in the project
 		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		// Temporary project
-		IProject tmpProject = myWorkspaceRoot.getProject(".form");
+		IProject tmpProject = myWorkspaceRoot.getProject(".view");
 
 		// create and open if necessary
 		if (!tmpProject.exists()) {
@@ -168,7 +152,7 @@ public class RefreshOutlineAction extends Action implements
 
 		List<String> templates = new ArrayList<String>();
 
-		templates.add("/com.bluexml.side.Form.edit.ui/src/com/bluexml/side/form/editor/views/default.mt");
+		templates.add("/com.bluexml.side.View.edit.ui/src/com/bluexml/side/side/view/edit/ui/utils/outline/default.mt");
 
 		for (String templateFile : templates) {
 			// Generator
@@ -213,7 +197,7 @@ public class RefreshOutlineAction extends Action implements
 		OutlineHTMLView v = (OutlineHTMLView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("com.bluexml.view.OutlineHTMLView");
 		v.setContent(content);
 		
-		IProject myproject = myWorkspaceRoot.getProject(".form");
+		IProject myproject = myWorkspaceRoot.getProject(".view");
 		myproject.delete(true, new NullProgressMonitor());
 	}
 
