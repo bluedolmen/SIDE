@@ -2,7 +2,7 @@
 <feature
       id="com.bluexml.side.Requirements.feature"
       label="S-IDE Requirements Feature"
-      version="1.0.11"
+      version="1.0.12"
       provider-name="blueXML">
 
    <description url="http://www.example.com/description">
@@ -43,41 +43,41 @@
          id="com.bluexml.side.Requirements"
          download-size="0"
          install-size="0"
-         version="1.0.11"
+         version="1.0.12"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Requirements.edit"
          download-size="0"
          install-size="0"
-         version="1.0.11"
+         version="1.0.12"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Requirements.editor"
          download-size="0"
          install-size="0"
-         version="1.0.11"
+         version="1.0.12"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Requirements.interpretation"
          download-size="0"
          install-size="0"
-         version="1.0.11"/>
+         version="1.0.12"/>
 
    <plugin
          id="com.bluexml.side.Requirements.modeler"
          download-size="0"
          install-size="0"
-         version="1.0.11"
+         version="1.0.12"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Requirements.transformation"
          download-size="0"
          install-size="0"
-         version="1.0.11"
+         version="1.0.12"
          unpack="false"/>
 
 </feature>

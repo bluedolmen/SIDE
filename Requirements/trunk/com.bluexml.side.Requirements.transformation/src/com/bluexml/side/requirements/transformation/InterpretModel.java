@@ -118,7 +118,11 @@ public class InterpretModel implements IObjectActionDelegate {
 			outputModelName = model.getName() + ".tmp";
 		else
 			outputModelName = elt.getAttribute("new_name");
-		t.execute(model, modelFolder.getLocation().toFile() + File.separator + outputModelName);
+		//Serialize input model file with xmi:id
+		String newInputModelName = modelFolder.getLocation().toFile() + File.separator + model.getName();
+		IFile newInputModelFile = SIDE_XMIResource.export(model, newInputModelName);
+		
+		t.execute(newInputModelFile, modelFolder.getLocation().toFile() + File.separator + outputModelName);
 		Set<String> outModels = t.getOutputModels();
 
 		if (config.getChildren("templateGeneration").length != 0) {

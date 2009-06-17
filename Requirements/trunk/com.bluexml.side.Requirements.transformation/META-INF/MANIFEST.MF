@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Transformation Plug-in
 Bundle-SymbolicName: com.bluexml.side.Requirements.transformation;singleton:=true
-Bundle-Version: 1.0.11
+Bundle-Version: 1.0.12
 Bundle-Activator: com.bluexml.side.requirements.transformation.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
@@ -17,5 +17,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.ecore.xmi,
  fr.obeo.acceleo.gen,
  org.eclipse.ant.core,
- org.eclipse.m2m.atl.engine
+ org.eclipse.m2m.atl.engine,
+ com.bluexml.side.Util.ecore;bundle-version="1.0.11",
+ com.bluexml.side.Requirements;bundle-version="1.0.11"
 Eclipse-LazyStart: true

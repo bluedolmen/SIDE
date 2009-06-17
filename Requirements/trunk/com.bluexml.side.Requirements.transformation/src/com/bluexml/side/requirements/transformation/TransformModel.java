@@ -130,7 +130,7 @@ public class TransformModel {
 
 		trans = Platform.getBundle(contributor).getEntry(asmPath);
 
-		InputStream in_model_stream = new FileInputStream(inputModel.getRawLocation().toFile());
+		InputStream in_model_stream = new FileInputStream(inputModel.getFullPath().toFile());
 		InputStream in_metamodel_stream = Platform.getBundle("com.bluexml.side.Requirements").getEntry("/model/requirements.ecore").openStream();
 		addInputModel(inputModelName, in_model_stream, inputMetamodelName, in_metamodel_stream);
 
