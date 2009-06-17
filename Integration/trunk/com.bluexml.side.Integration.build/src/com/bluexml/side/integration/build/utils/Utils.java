@@ -322,9 +322,10 @@ public class Utils {
 
 			// on change le numéro de version (s'il le faut)
 			if ("".equals(getForceNumberVersion())) {
-				if (featureAModifier)
+				if (featureAModifier){
 					listeFeatureModif.add(projectName);
 					racine.setAttribute("version", update(number, pattern));
+				}
 			} else
 				racine.setAttribute("version", getForceNumberVersion() + ".v"
 						+ getRevisionNumber() + "-" + getDate());
