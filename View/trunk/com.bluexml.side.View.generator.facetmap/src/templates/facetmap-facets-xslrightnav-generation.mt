@@ -62,12 +62,16 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
         </xsl:if>
         <div class="facet-title">
             <xsl:value-of select="@taxtitle"/>
-            <a>
-		    <xsl:attribute name="name">hideLink<xsl:value-of select="@taxtitle"/></xsl:attribute>
-		    <xsl:attribute name="onclick"> hide_facets("facets<xsl:value-of
-		        select="@taxtitle"/>","hideLink<xsl:value-of select="@taxtitle"/>");</xsl:attribute>
-		    (hide)
-		</a>
+            <%for (operations){%>
+            	<%if (name == "hideFacets"){%>
+            		<a>
+					    <xsl:attribute name="name">hideLink<xsl:value-of select="@taxtitle"/></xsl:attribute>
+					    <xsl:attribute name="onclick"> hide_facets("facets<xsl:value-of
+					        select="@taxtitle"/>","hideLink<xsl:value-of select="@taxtitle"/>");</xsl:attribute>
+					    (hide)
+					</a>
+            	<%}%>
+            <%}%>
         </div>
         <hr Class="hr2"/>
         <ul style="list-style-image: url('{$resource_base_url}/bullet.gif');">
