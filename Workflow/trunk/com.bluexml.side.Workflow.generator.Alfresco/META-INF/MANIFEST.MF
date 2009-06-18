@@ -22,7 +22,7 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.Application.editor;bundle-version="1.0.0",
  com.bluexml.side.Application.ui;bundle-version="1.0.3",
  com.bluexml.side.Application.security,
- com.bluexml.side.settings;bundle-version="1.0.8"
+ com.bluexml.side.Settings;bundle-version="1.0.8"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.workflow.generator.alfresco
