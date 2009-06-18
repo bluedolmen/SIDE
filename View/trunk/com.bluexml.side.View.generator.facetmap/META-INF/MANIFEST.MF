@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Facetmap generator Plug-in
+Bundle-SymbolicName: com.bluexml.side.View.generator.facetmap;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: com.bluexml.side.view.generator.facetmap.Activator
+Bundle-Vendor: BLUEXML
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ com.bluexml.side.Application,
+ com.bluexml.side.Application.security,
+ com.bluexml.side.Application.generator,
+ com.bluexml.side.Application.generator.acceleo,
+ org.eclipse.core.resources,
+ com.bluexml.side.Util.libs,
+ com.bluexml.side.Settings
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Export-Package: com.bluexml.side.view.generator.facetmap,
+ com.bluexml.side.view.generator.facetmap.utils
