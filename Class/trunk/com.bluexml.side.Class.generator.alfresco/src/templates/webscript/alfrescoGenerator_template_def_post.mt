@@ -29,8 +29,8 @@ webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/<%getQualifiedNam
 <%script type="clazz.Clazz" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <webscript>
-  <shortname>All <%getClassLabel()%>s</shortname>
-  <description>Get <%getClassLabel()%>s</description>
+  <shortname>All <%getLabel()%>s</shortname>
+  <description>Get <%getLabel()%>s</description>
   <url>/<%getQualifiedName()%>?nodeRef={nodeRef}&amp;years={years}&amp;months={months}&amp;days={days}&amp;hours={hours}&amp;minutes={minutes}</url>
   <format default="json">any</format>
   <authentication>guest</authentication>

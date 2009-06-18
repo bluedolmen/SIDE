@@ -162,7 +162,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	 * @return
 	 */
 	protected String getLogFile() {
-		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()+getClass().getName());
+		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral())+getClass().getName()+".txt";
 
 	}
 

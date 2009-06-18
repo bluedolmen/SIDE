@@ -827,6 +827,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 
 		addEOperation(clazzEClass, this.getAssociation(), "getAllTargetAssociations", 0, -1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(clazzEClass, this.getClazz(), "getLinkedClasses", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(associationEClass, Association.class, "Association", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAssociation_AssociationType(), this.getAssociationType(), "associationType", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssociation_FirstEnd(), this.getFirstEnd(), null, "firstEnd", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1040,6 +1042,12 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 			 "description", "search associations where this clazz is source or one of inheritedClass"
 		   });		
 		addAnnotation
+		  (clazzEClass.getEOperations().get(13), 
+		   source, 
+		   new String[] {
+			 "body", "self.getAllSourceAssociations().getTarget() ->asOrderedSet()"
+		   });		
+		addAnnotation
 		  (associationEClass, 
 		   source, 
 		   new String[] {
@@ -1121,7 +1129,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "ClassWithTwoAttributesSameName InheritanceCycle"
-		   });																
+		   });																	
 		addAnnotation
 		  (associationEClass, 
 		   source, 

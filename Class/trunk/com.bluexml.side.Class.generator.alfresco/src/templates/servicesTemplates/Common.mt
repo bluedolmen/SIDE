@@ -42,3 +42,5 @@ http://www.bluexml.com/model/content/<%getFolder()%>/1.0
 alfresco/module/<%getModuleIdService(name)%>
 <%script type="clazz.ClassPackage" name="getConfModulePath"%>
 config/<%getModulePath()%>
+<%script type="common.NamedModelElement" name="getPrefixedQualifiedName"%>
+<%getFolder()%>:<%getQualifiedName()%>

@@ -248,4 +248,13 @@ public interface Clazz extends AbstractClass {
 	 */
 	EList<Association> getAllTargetAssociations();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.getAllSourceAssociations().getTarget() ->asOrderedSet()'"
+	 * @generated
+	 */
+	EList<Clazz> getLinkedClasses();
+
 } // Clazz

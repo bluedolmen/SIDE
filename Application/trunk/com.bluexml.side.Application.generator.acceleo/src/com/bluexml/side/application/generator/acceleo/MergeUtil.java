@@ -1,4 +1,4 @@
-package com.bluexml.side.application.generator.alfresco;
+package com.bluexml.side.application.generator.acceleo;
 
 import java.io.IOException;
 import java.util.ArrayList;

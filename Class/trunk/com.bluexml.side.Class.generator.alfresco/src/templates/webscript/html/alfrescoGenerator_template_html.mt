@@ -47,7 +47,7 @@ webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/<%getQualifiedNam
 	<li><%eContainer().getQualifiedName()%>_<%name%>:</li>
 	</#if>
 	<%}%>
-	<%for (getAllAssociationsByClass()){%>
+	<%for (getAllSourceAssociations()){%>
 		<%if (isSource(current(1))){%>
 			<%if (source == current(2)){%>
 	<li><%getQualifiedName(destination)%>:<#if child.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(source)%>"]?exists><#list child.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(source)%>"] as key><%destination.getNameForNode().replaceAll("child","key").replaceAll("\n","" )%> </#list></#if></li>

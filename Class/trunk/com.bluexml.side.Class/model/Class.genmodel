@@ -52,6 +52,7 @@
       <genOperations ecoreOperation="Class.ecore#//Clazz/getTargetAssociations"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getAllSourceAssociations"/>
       <genOperations ecoreOperation="Class.ecore#//Clazz/getAllTargetAssociations"/>
+      <genOperations ecoreOperation="Class.ecore#//Clazz/getLinkedClasses"/>
     </genClasses>
     <genClasses ecoreClass="Class.ecore#//Association">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Class.ecore#//Association/associationType"/>

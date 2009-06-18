@@ -59,4 +59,10 @@ public class ReportGenerator extends AbstractAcceleoGenerator {
 		return null;
 	}
 
+	@Override
+	public IFile buildPackage(String modelId) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
