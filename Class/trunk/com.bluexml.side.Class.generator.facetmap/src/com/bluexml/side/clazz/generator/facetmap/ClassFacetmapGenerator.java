@@ -82,4 +82,10 @@ public class ClassFacetmapGenerator extends AbstractAcceleoGenerator implements 
 		return generatedFiles;
 	}
 
+	@Override
+	public IFile buildPackage(String modelId) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

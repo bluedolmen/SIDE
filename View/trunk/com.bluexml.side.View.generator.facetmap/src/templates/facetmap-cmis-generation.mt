@@ -1,23 +1,20 @@
 <%--encoding=ISO-8859-1--%>
 <%
-metamodel http://www.kerblue.org/class/1.0
-import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
+metamodel http://www.kerblue.org/view/1.0
+import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 %>
 
-<%script type="clazz.ClassPackage" name="validatedFilename"%>
+<%script type="view.FacetMap" name="validatedFilename"%>
 	./common/scriptcmis/doclist_user.get.js
 	
-<%script type="clazz.ClassPackage" name="typeDocument"%>
-Personnes
-
-<%script type="clazz.ClassPackage" name="cmisRequestGenerator"  file="<%validatedFilename%>" %>
+<%script type="view.FacetMap" name="cmisRequestGenerator"  file="<%validatedFilename%>" %>
 script: {
 default xml namespace = 'http://www.cmis.org/2008/05';
 
 var query="
 <cmis:query xmlns:cmis='http://www.cmis.org/2008/05' xmlns:p='http://www.w3.org/1999/xhtml' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.cmis.org/2008/05 CMIS.xsd '>
 	<cmis:statement>
-		SELECT * FROM DOCUMENT  WHERE (NOT((CreatedBy = 'System') OR (Name = 'doclib.png') OR (Name = 'webpreview.swf') ) AND (BaseType = '<%typeDocument()%>'))
+		SELECT * FROM DOCUMENT  WHERE (NOT((CreatedBy = 'System') OR (Name = 'doclib.png') OR (Name = 'webpreview.swf') ) AND (BaseType = '<%viewOf%>'))
 	</cmis:statement>
 	<cmis:searchAllVersions>false</cmis:searchAllVersions>
 	<cmis:pageSize>0</cmis:pageSize>

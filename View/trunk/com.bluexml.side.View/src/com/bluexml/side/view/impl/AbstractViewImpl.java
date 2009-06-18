@@ -14,14 +14,17 @@ import com.bluexml.side.common.OperationComponent;
 import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.ViewPackage;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.ocl.ecore.OCL;
 
 /**
@@ -33,6 +36,7 @@ import org.eclipse.ocl.ecore.OCL;
  * <ul>
  *   <li>{@link com.bluexml.side.view.impl.AbstractViewImpl#getViewOf <em>View Of</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractViewImpl#getOperations <em>Operations</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.AbstractViewImpl#getInnerView <em>Inner View</em>}</li>
  * </ul>
  * </p>
  *
@@ -58,6 +62,16 @@ public abstract class AbstractViewImpl extends FieldContainerImpl implements Abs
 	 * @ordered
 	 */
 	protected OperationComponent operations;
+
+	/**
+	 * The cached value of the '{@link #getInnerView() <em>Inner View</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInnerView()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<AbstractView> innerView;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -164,6 +178,18 @@ public abstract class AbstractViewImpl extends FieldContainerImpl implements Abs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<AbstractView> getInnerView() {
+		if (innerView == null) {
+			innerView = new EObjectResolvingEList<AbstractView>(AbstractView.class, this, ViewPackage.ABSTRACT_VIEW__INNER_VIEW);
+		}
+		return innerView;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -186,6 +212,8 @@ public abstract class AbstractViewImpl extends FieldContainerImpl implements Abs
 				return basicGetViewOf();
 			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
 				return getOperations();
+			case ViewPackage.ABSTRACT_VIEW__INNER_VIEW:
+				return getInnerView();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -195,6 +223,7 @@ public abstract class AbstractViewImpl extends FieldContainerImpl implements Abs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -203,6 +232,10 @@ public abstract class AbstractViewImpl extends FieldContainerImpl implements Abs
 				return;
 			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
 				setOperations((OperationComponent)newValue);
+				return;
+			case ViewPackage.ABSTRACT_VIEW__INNER_VIEW:
+				getInnerView().clear();
+				getInnerView().addAll((Collection<? extends AbstractView>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -222,6 +255,9 @@ public abstract class AbstractViewImpl extends FieldContainerImpl implements Abs
 			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
 				setOperations((OperationComponent)null);
 				return;
+			case ViewPackage.ABSTRACT_VIEW__INNER_VIEW:
+				getInnerView().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -238,6 +274,8 @@ public abstract class AbstractViewImpl extends FieldContainerImpl implements Abs
 				return viewOf != null;
 			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
 				return operations != null;
+			case ViewPackage.ABSTRACT_VIEW__INNER_VIEW:
+				return innerView != null && !innerView.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

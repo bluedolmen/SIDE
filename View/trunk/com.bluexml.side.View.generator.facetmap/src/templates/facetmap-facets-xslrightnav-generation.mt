@@ -1,29 +1,13 @@
 <%--encoding=ISO-8859-1--%>
 <%
-metamodel http://www.kerblue.org/class/1.0
-import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
+metamodel http://www.kerblue.org/view/1.0
+import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 %>
 
-<%script type="clazz.ClassPackage" name="validatedFilename"%>
+<%script type="view.FacetMap" name="validatedFilename"%>
 	./facets/facetmap/xsl/display/Rightnav.xsl
 	
-<%script type="clazz.ClassPackage" name="hideFacets"%>
-<a>
-    <xsl:attribute name="name">hideLink<xsl:value-of select="@taxtitle"/></xsl:attribute>
-    <xsl:attribute name="onclick"> hide_facets("facets<xsl:value-of
-        select="@taxtitle"/>","hideLink<xsl:value-of select="@taxtitle"/>");</xsl:attribute>
-    (hide)
-</a>
-	
-<%script type="clazz.ClassPackage" name="operations"%>
-<div style="display: inline; align: right;">
-    <input type="button" name="config_facet" id="config_facet" value="Configurer"
-        onclick="setup()"/>
-    <input type="button" name="update_facets" id="update_facets" value="Mise à jour"
-    />
-</div>
-	
-<%script type="clazz.ClassPackage" name="morePagingFacet"%>
+<%script type="view.FacetMap" name="morePagingFacet"%>
 <xsl:if test="count(s) &gt; $nb_paging_facets">
     <li class="facet">
         <xsl:attribute name="name">more<xsl:value-of select="@taxtitle"
@@ -38,13 +22,13 @@ import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
         </li>
 </xsl:if>
 	
-<%script type="clazz.ClassPackage" name="morePagingFacetDisplay"%>
+<%script type="view.FacetMap" name="morePagingFacetDisplay"%>
 <xsl:if test="position() &gt; $nb_paging_facets">
     <xsl:attribute name="style">display:none;</xsl:attribute>
     <xsl:attribute name="name">facet<xsl:value-of select="$title"/></xsl:attribute>
 </xsl:if>
 	
-<%script type="clazz.ClassPackage" name="rightnavGenerator"  file="<%validatedFilename%>" %>
+<%script type="view.FacetMap" name="rightnavGenerator"  file="<%validatedFilename%>" %>
 <?xml version="1.0" encoding="iso-8859-1"?>
 <xsl:transform version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
@@ -60,7 +44,12 @@ import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
         <div class="facets">
             <div class="facets-title">
                 <div style="display: inline; align: left;">Critères</div>
-                <%operations()%>
+                <div style="display: inline; align: right;">
+			    <input type="button" name="config_facet" id="config_facet" value="Configurer"
+			        onclick="setup()"/>
+			    <input type="button" name="update_facets" id="update_facets" value="Mise à jour"
+			    />
+			</div>
             </div>
             <hr Class="hr1"/>
             <xsl:apply-templates select="subset[s]"/>
@@ -73,7 +62,12 @@ import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
         </xsl:if>
         <div class="facet-title">
             <xsl:value-of select="@taxtitle"/>
-            <%hideFacets()%>
+            <a>
+		    <xsl:attribute name="name">hideLink<xsl:value-of select="@taxtitle"/></xsl:attribute>
+		    <xsl:attribute name="onclick"> hide_facets("facets<xsl:value-of
+		        select="@taxtitle"/>","hideLink<xsl:value-of select="@taxtitle"/>");</xsl:attribute>
+		    (hide)
+		</a>
         </div>
         <hr Class="hr2"/>
         <ul style="list-style-image: url('{$resource_base_url}/bullet.gif');">
@@ -83,14 +77,18 @@ import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
                     <xsl:value-of select="@taxtitle"/>
                 </xsl:with-param>
             </xsl:apply-templates>
-            <%morePagingFacet()%>
+            <%if (paging.paginationStyle == "more"){%>
+				<%morePagingFacet()%>
+			<%}%>     
         </ul>
     </xsl:template>
 
     <xsl:template match="s" mode="subselection">
         <xsl:param name="title"/>
         <li class="facet">
-        	<%morePagingFacetDisplay()%>
+        	<%if (paging.paginationStyle == "more"){%>
+				<%morePagingFacetDisplay()%>
+			<%}%>
             <a href="{$server}/{$app2}/{$pre_reference_url}{@ref}"
                 onclick="show_selection('{$server}/{$app}/{$pre_reference_url}{@ref}')">
                 <xsl:value-of select="@title"/>(<xsl:value-of select="@resultcount"/>) </a>

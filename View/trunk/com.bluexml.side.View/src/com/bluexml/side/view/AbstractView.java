@@ -9,6 +9,7 @@ package com.bluexml.side.view;
 import com.bluexml.side.common.Container;
 import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.common.OperationComponent;
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,6 +21,7 @@ import com.bluexml.side.common.OperationComponent;
  * <ul>
  *   <li>{@link com.bluexml.side.view.AbstractView#getViewOf <em>View Of</em>}</li>
  *   <li>{@link com.bluexml.side.view.AbstractView#getOperations <em>Operations</em>}</li>
+ *   <li>{@link com.bluexml.side.view.AbstractView#getInnerView <em>Inner View</em>}</li>
  * </ul>
  * </p>
  *
@@ -79,5 +81,21 @@ public interface AbstractView extends FieldContainer {
 	 * @generated
 	 */
 	void setOperations(OperationComponent value);
+
+	/**
+	 * Returns the value of the '<em><b>Inner View</b></em>' reference list.
+	 * The list contents are of type {@link com.bluexml.side.view.AbstractView}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Inner View</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Inner View</em>' reference list.
+	 * @see com.bluexml.side.view.ViewPackage#getAbstractView_InnerView()
+	 * @model
+	 * @generated
+	 */
+	EList<AbstractView> getInnerView();
 		
 } // AbstractView

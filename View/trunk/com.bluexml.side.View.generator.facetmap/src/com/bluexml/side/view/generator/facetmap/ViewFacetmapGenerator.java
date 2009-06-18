@@ -32,11 +32,11 @@ import com.bluexml.side.view.generator.facetmap.utils.FacetmapConstants;
  * @author <a href="mailto:pbertrand@bluexml.com"> Pierre BERTRAND </a>
  *
  */
-public class ClassFacetmapGenerator extends AbstractAcceleoGenerator implements FacetmapConstants {
+public class ViewFacetmapGenerator extends AbstractAcceleoGenerator implements FacetmapConstants {
 	public static String GENERATOR_CODE = "CODE_GED_G_C_FACETMAP_2";
-	public static String MMUri = "http://www.kerblue.org/class/1.0";
+	public static String MMUri = "http://www.kerblue.org/view/1.0";
 	
-	public ClassFacetmapGenerator(){
+	public ViewFacetmapGenerator(){
 		techVersion = "Facetmap 2.x";
 		this.setTEMP_FOLDER(getTechVersion());
 	}
@@ -56,14 +56,14 @@ public class ClassFacetmapGenerator extends AbstractAcceleoGenerator implements 
 	protected List<String> getTemplates() {
 			List<String> result = new ArrayList<String>();
 				//common
-				result.add("/com.bluexml.side.Class.generator.facetmap/templates/facetmap-cmis2xfml-generation.mt");
-				result.add("/com.bluexml.side.Class.generator.facetmap/templates/facetmap-cmis-generation.mt");
-				result.add("/com.bluexml.side.Class.generator.facetmap/templates/facetmap-cmis-properties-generation.mt");
-				result.add("/com.bluexml.side.Class.generator.facetmap/templates/facetmap-propertyfile-generation.mt");
+				result.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-cmis2xfml-generation.mt");
+				result.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-cmis-generation.mt");
+				result.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-cmis-properties-generation.mt");
+				result.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-propertyfile-generation.mt");
 				//facets
-				result.add("/com.bluexml.side.Class.generator.facetmap/templates/facetmap-facets-buildproperties-generation.mt");
-				result.add("/com.bluexml.side.Class.generator.facetmap/templates/facetmap-facets-xslbasicfacets-generation.mt");
-				result.add("/com.bluexml.side.Class.generator.facetmap/templates/facetmap-facets-xslrightnav-generation.mt");
+				result.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-buildproperties-generation.mt");
+				result.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslbasicfacets-generation.mt");
+				result.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslrightnav-generation.mt");
 			return result;
 	}
 
@@ -80,6 +80,12 @@ public class ClassFacetmapGenerator extends AbstractAcceleoGenerator implements 
 
 	public Collection<IFile> complete() throws Exception {
 		return generatedFiles;
+	}
+
+	@Override
+	public IFile buildPackage(String modelId) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

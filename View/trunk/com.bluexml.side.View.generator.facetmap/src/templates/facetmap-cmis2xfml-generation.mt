@@ -1,33 +1,29 @@
 <%--encoding=ISO-8859-1--%>
 <%
-metamodel http://www.kerblue.org/class/1.0
-import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
+metamodel http://www.kerblue.org/view/1.0
+import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 %>
 
-<%script type="clazz.ClassPackage" name="validatedFilename"%>
+<%script type="view.FacetMap" name="validatedFilename"%>
 	./common/facetmap/WEB-INF/xsl/cmis2xfml.xsl
 
-<%script type="clazz.Clazz" name="taxonomy"%>
-	<%if getLabel()=="Personne"{%>
-		<%for (getAllAttributes()){%>
-				<taxonomy title="<%args(0)%>.<%name%>" root-heading-title="<%args(0)%>.<%name%>" facetid="<%getFullName()%>">
+<%script type="view.FacetMap" name="taxonomy"%>
+		<%for (children){%>
+				<taxonomy title="<%current("FacetMap").viewOf%>.<%mapTo.filter("Attribute").name%>" root-heading-title="<%current("FacetMap").viewOf%>.<%mapTo.filter("Attribute").name%>" facetid="<%mapTo.filter("Attribute").getFullName()%>">
 					<!-- criteria -->
-				    <!-- On ne prend pas en compte les différentes occurences d'un même critère car facetmap les réunit. -->
-				    <xsl:for-each select="child::entry/cmis:object/cmis:properties/cmis:property<%if typ!="int"{%><%typ%><%}else{%>Integer<%}%>[@cmis:name='<%getFullName()%>']/cmis:value">          
+				    <!-- On ne prend pas en compte les diffï¿½rentes occurences d'un mï¿½me critï¿½re car facetmap les rï¿½unit. -->
+				    <xsl:for-each select="child::entry/cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribute").typ!="int"{%><%mapTo.filter("Attribute").typ%><%}else{%>Integer<%}%>[@cmis:name='<%mapTo.filter("Attribute").getFullName()%>']/cmis:value">          
 				        <heading id="{current()}" title="{current()}"/>             
 				    </xsl:for-each> 
 				</taxonomy>
 		<%}%>
-	<%}%>
 	
-<%script type="clazz.Clazz" name="ressource"%>
-	<%if getLabel()=="Personne"{%>
-		<%for (getAllAttributes()){%>
-	           <map heading="{child::cmis:object/cmis:properties/cmis:property<%if typ!="int"{%><%typ%><%}else{%>Integer<%}%>[@cmis:name='<%getFullName()%>']/cmis:value}"/>
-		<%}%>
+<%script type="view.FacetMap" name="ressource"%>
+	<%for (children){%>
+           <map heading="{child::cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribute").typ!="int"{%><%mapTo.filter("Attribute").typ%><%}else{%>Integer<%}%>[@cmis:name='<%mapTo.filter("Attribute").getFullName()%>']/cmis:value}"/>
 	<%}%>
 
-<%script type="clazz.ClassPackage" name="cmis2xfmlGenerator"  file="<%validatedFilename%>" %>
+<%script type="view.FacetMap" name="cmis2xfmlGenerator"  file="<%validatedFilename%>" %>
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:cmis="http://www.cmis.org/2008/05" xmlns:alf="http://www.alfresco.com" version="2.0">
 	<xsl:include href="../cmisTransformProperties.xml"/>
@@ -37,7 +33,7 @@ import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
 	        <resources>
 	            <xsl:apply-templates/>
 	        </resources>
-<%for (getAllClasses()) {%><%taxonomy(name)%><%}%>
+		<%taxonomy()%>
 	    </facetmap>
 	</xsl:template>
 
@@ -46,7 +42,7 @@ import com.bluexml.side.clazz.generator.facetmap.ClassFacetmapGenerator
 		<xsl:variable name="ref_share" select="concat($host,$DLUrl,substring(child::id[1],10))"/>
 		<xsl:variable name="ref_alfresco" select="concat($host,$ViewURL,substring(child::id[1],10),'/',child::title[1])"/>       
 		<resource title="{child::title[1]}" href="{concat($ref_alfresco,'+',$ref_share)}">
-<%for (getAllClasses()) {%><%ressource()%><%}%>
+		<%ressource()%>
 		</resource>
 	</xsl:template>
 	  
