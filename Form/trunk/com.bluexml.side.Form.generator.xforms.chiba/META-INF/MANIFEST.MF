@@ -13,4 +13,4 @@ Require-Bundle: com.bluexml.side.Form.generator.xforms.maven;bundle-version="1.0
  com.bluexml.side.Class;bundle-version="1.0.0",
  com.bluexml.side.Form;bundle-version="1.0.0",
  com.bluexml.side.Application.security;bundle-version="1.0.8",
- com.bluexml.side.settings;bundle-version="1.0.9"
+ com.bluexml.side.Settings;bundle-version="1.0.9"
