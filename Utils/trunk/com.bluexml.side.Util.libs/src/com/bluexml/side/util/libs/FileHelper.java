@@ -103,4 +103,13 @@ public class FileHelper {
 		}
 		return false;
 	}
+	
+	
+	public static String getFileExt(File f) throws Exception{
+		if (f.isFile()) {
+		int i = f.getName().lastIndexOf(".");
+		return f.getName().substring(i+1);
+		}
+		throw new Exception("no file ext for Folder");
+	}
 }

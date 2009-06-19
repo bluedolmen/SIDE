@@ -26,6 +26,7 @@ public abstract class Deployer implements Checkable {
 	private Map<String, String> generationParameters;
 	protected SIDELog log;
 	protected String techVersion = null;
+
 	public SIDELog getLog() {
 		return log;
 	}
@@ -34,21 +35,18 @@ public abstract class Deployer implements Checkable {
 	protected String cleanKey = null;
 	protected List<String> options = null;
 
-	public void initialize(Map<String, String> configurationParameters,Map<String, String> generationParameters,List<String> options) {
+	public void initialize(Map<String, String> configurationParameters, Map<String, String> generationParameters, List<String> options) {
 		this.configurationParameters = configurationParameters;
 		this.options = options;
 		this.generationParameters = generationParameters;
 		this.techVersion = configurationParameters.get("technologyVersion");
-		log = new SIDELog(configurationParameters.get("deployerName"), 
-				configurationParameters.get("technologyVersionName"),
-				configurationParameters.get("technologyName"),
-				configurationParameters.get("metaModelName"), new Date(),LogType.DEPLOYEMENT);
+		log = new SIDELog(configurationParameters.get("deployerName"), configurationParameters.get("technologyVersionName"), configurationParameters.get("technologyName"), configurationParameters.get("metaModelName"), new Date(), LogType.DEPLOYEMENT);
 	}
-	
+
 	public Map<String, String> getGenerationParameters() {
 		return generationParameters;
 	}
-	
+
 	public String getTechVersion() {
 		return techVersion;
 	}
@@ -82,11 +80,12 @@ public abstract class Deployer implements Checkable {
 	}
 
 	protected boolean doClean() {
-		return options != null && options.contains(cleanKey);		
+		return options != null && options.contains(cleanKey);
 	}
-	
+
 	/**
 	 * Add a Log
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -95,9 +94,10 @@ public abstract class Deployer implements Checkable {
 	protected void addLog(String title, String description, String uri, LogEntryType logEntryType) {
 		log.addLogEntry(new LogEntry(title, description, uri, logEntryType));
 	}
-	
+
 	/**
 	 * Add an Error Log
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -105,36 +105,39 @@ public abstract class Deployer implements Checkable {
 	public void addErrorLog(String title, String description, String uri) {
 		addLog(title, description, uri, LogEntryType.ERROR);
 	}
-	
+
 	/**
 	 * Add an error log using a stracktrace instead of a string description
+	 * 
 	 * @param title
 	 * @param stackTrace
 	 * @param uri
 	 */
-	public void addErrorLog(String title, StackTraceElement[] stackTrace,
-			String uri) {
+	public void addErrorLog(String title, StackTraceElement[] stackTrace, String uri) {
 		String description = "";
 		if (stackTrace != null && stackTrace.length > 0) {
-			for (StackTraceElement se : stackTrace){
+			for (StackTraceElement se : stackTrace) {
 				description += System.getProperty("line.separator") + se.toString();
 			}
 		}
-		addErrorLog(title,description,uri);
+		addErrorLog(title, description, uri);
 	}
-	
+
 	/**
 	 * Add a warning log
+	 * 
 	 * @param title
 	 * @param description
-	 * @param uri : null if no uri
+	 * @param uri
+	 *            : null if no uri
 	 */
 	public void addWarningLog(String title, String description, String uri) {
 		addLog(title, description, uri, LogEntryType.WARNING);
 	}
-	
+
 	/**
 	 * Add information log
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
