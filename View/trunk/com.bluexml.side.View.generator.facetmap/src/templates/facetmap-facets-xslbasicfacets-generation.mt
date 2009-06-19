@@ -5,7 +5,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 %>
 
 <%script type="view.FacetMap" name="validatedFilename"%>
-	./facets/facetmap/xsl/display/includes/basic-Facets.xsl
+	./facets/xsl/display/includes/basic-Facets.xsl
 
 <%script type="view.FacetMap" name="nbPagingFacets"%>
 5

@@ -5,7 +5,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 %>
 
 <%script type="view.FacetMap" name="validatedFilename"%>
-	./common/facetmap/WEB-INF/configuration.properties
+	./common/WEB-INF/configuration.properties
 <%script type="view.FacetMap" name="numberResultsShown"%>
 20
 

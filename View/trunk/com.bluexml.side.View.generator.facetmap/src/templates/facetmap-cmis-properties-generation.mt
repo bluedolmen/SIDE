@@ -5,7 +5,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 %>
 
 <%script type="view.FacetMap" name="validatedFilename"%>
-	./common/facetmap/WEB-INF/cmisTransformProperties.xml
+	./common/WEB-INF/cmisTransformProperties.xml
 	
 <%script type="view.FacetMap" name="hostname"%>
 	localhost:8080

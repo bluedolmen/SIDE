@@ -5,7 +5,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 %>
 
 <%script type="view.FacetMap" name="validatedFilename"%>
-	./common/scriptcmis/doclist_user.get.js
+	./scriptcmis/doclist_user.get.js
 	
 <%script type="view.FacetMap" name="cmisRequestGenerator"  file="<%validatedFilename%>" %>
 script: {

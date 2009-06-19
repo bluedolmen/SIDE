@@ -5,7 +5,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 %>
 
 <%script type="view.FacetMap" name="validatedFilename"%>
-	./facets/facetmap/WEB-INF/buildProperties.xml
+	./facets/WEB-INF/buildProperties.xml
 	
 <%script type="view.FacetMap" name="hostname"%>
 	localhost:8080
@@ -17,6 +17,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 	<usernameAlfresco>admin</usernameAlfresco>
 	<passwordAlfresco>admin</passwordAlfresco>
 	<infFolder>./</infFolder>
+	<contentFolder>facetmap-content</contentFolder>
 	<Mapname>map.xml</Mapname>
 	<xslFolder>xsl/</xslFolder>
 	<encoding>ISO-8859-1</encoding>

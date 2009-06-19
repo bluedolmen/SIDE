@@ -5,11 +5,11 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 %>
 
 <%script type="view.FacetMap" name="validatedFilename"%>
-	./common/facetmap/WEB-INF/xsl/cmis2xfml.xsl
+	./common/WEB-INF/xsl/cmis2xfml.xsl
 
 <%script type="view.FacetMap" name="taxonomy"%>
 		<%for (children){%>
-				<taxonomy title="<%current("FacetMap").viewOf%>.<%mapTo.filter("Attribute").name%>" root-heading-title="<%current("FacetMap").viewOf%>.<%mapTo.filter("Attribute").name%>" facetid="<%mapTo.filter("Attribute").getFullName()%>">
+				<taxonomy title="<%current("FacetMap").viewOf.filter("Clazz").getLabel()%>.<%mapTo.filter("Attribute").name%>" root-heading-title="<%current("FacetMap").viewOf.filter("Clazz").getLabel()%>.<%mapTo.filter("Attribute").name%>" facetid="<%mapTo.filter("Attribute").getFullName()%>">
 					<!-- criteria -->
 				    <!-- On ne prend pas en compte les diff�rentes occurences d'un m�me crit�re car facetmap les r�unit. -->
 				    <xsl:for-each select="child::entry/cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribute").typ!="int"{%><%mapTo.filter("Attribute").typ%><%}else{%>Integer<%}%>[@cmis:name='<%mapTo.filter("Attribute").getFullName()%>']/cmis:value">          

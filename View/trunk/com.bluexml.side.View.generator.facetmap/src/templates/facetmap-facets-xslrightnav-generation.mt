@@ -5,7 +5,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 %>
 
 <%script type="view.FacetMap" name="validatedFilename"%>
-	./facets/facetmap/xsl/display/Rightnav.xsl
+	./facets/xsl/display/Rightnav.xsl
 	
 <%script type="view.FacetMap" name="morePagingFacet"%>
 <xsl:if test="count(s) &gt; $nb_paging_facets">
@@ -47,8 +47,8 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
                 <div style="display: inline; align: right;">
 			    <input type="button" name="config_facet" id="config_facet" value="Configurer"
 			        onclick="setup()"/>
-			    <input type="button" name="update_facets" id="update_facets" value="Mise à jour"
-			    />
+			    <input type="button" name="update_facets" id="update_facets" value="Mise à jour" 
+                        onclick="update_facets()"/>
 			</div>
             </div>
             <hr Class="hr1"/>
@@ -81,7 +81,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
                     <xsl:value-of select="@taxtitle"/>
                 </xsl:with-param>
             </xsl:apply-templates>
-            <%if (paging.paginationStyle == "more"){%>
+            <%if (paging.paginationStyle != "none"){%>
 				<%morePagingFacet()%>
 			<%}%>     
         </ul>
@@ -90,7 +90,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
     <xsl:template match="s" mode="subselection">
         <xsl:param name="title"/>
         <li class="facet">
-        	<%if (paging.paginationStyle == "more"){%>
+        	<%if (paging.paginationStyle == "none"){%>
 				<%morePagingFacetDisplay()%>
 			<%}%>
             <a href="{$server}/{$app2}/{$pre_reference_url}{@ref}"
