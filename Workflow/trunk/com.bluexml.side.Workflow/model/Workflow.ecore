@@ -15,7 +15,7 @@
       <details key="constraints" value="PackageNameNull OneStartTask atLeastOneEndTask"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="package root"/>
+      <details key="documentation" value="Definition: The 'Process' is the root package of the workflow process."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="swimlane" upperBound="-1"
         eType="#//Swimlane" containment="true"/>
@@ -50,7 +50,7 @@
       <details key="constraints" value="ActorNameMustBeUnique MustManageAtLeastOneTask noSpecialCharacters ActoridOrPooledactorMustBeSetForAllExeptOneActor"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The Swimlane represents the actor that manages one or many tasks of the workflow process.&#xD;&#xD;Constraint/limit: A Swimlane must manage at least one task.&#xD;"/>
+      <details key="documentation" value="Definition: The 'Swimlane' represents the actor that manages one or many tasks of the workflow process.&#xD;&#xD;Constraint/limit: A 'Swimlane' must manage at least one task.&#xD;"/>
     </eAnnotations>
     <eOperations name="EqualsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
@@ -79,11 +79,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="clazz" ordered="false"
-        unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="relier les workflow au formulaire, savoir sur quel document on lance le workflow&#xD; a verifier"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+        unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StartState" eSuperTypes="#//UserTask">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -128,6 +124,9 @@
         eType="#//Action" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ProcessState" eSuperTypes="#//TransitionTask">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The 'ProcessState' represents a subprocess. It may have variables."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subprocess" ordered="false"
         lowerBound="1" eType="#//Process"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" upperBound="-1"
@@ -155,8 +154,15 @@
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Event">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The 'Event' associates actions to a TaskNode.&#xD;&#xD; "/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" ordered="false" unique="false"
-        lowerBound="1" eType="#//BPMEventType"/>
+        lowerBound="1" eType="#//BPMEventType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The attribute 'type' specifies the moment that is executed the event."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="action" upperBound="-1"
         eType="#//Action" containment="true"/>
   </eClassifiers>
@@ -190,12 +196,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Timer" eSuperTypes="#//Action">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: 'Timer' are associated to Transition. A Transition will be taken when the 'Timer' expires."/>
+      <details key="documentation" value="Definition: If a 'Timer' is associated to a transition, the transition will be taken when the 'Timer' expires."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="duedate" ordered="false"
         unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The attribute 'duedate' specifies the duration of a 'Timer'.&#xD;&#xD;Constraint/limit: The syntax of the attribute 'Timer' follow the jpdl syntax (http://docs.jboss.org/jbpm/v3/userguide/businesscalendar.html#duration): &lt;quantity> [business] &lt;unit>&#xD;&#xD;Example:&#xD;- 1 year.&#xD;- 1 week.&#xD;- 1 month.&#xD;- 1 hour.&#xD;- 1 min.&#xD;- 1 second."/>
+        <details key="documentation" value="Definition: The attribute 'duedate' specifies the duration of a 'Timer'.&#xD;&#xD;Constraint/limit: The syntax of the attribute 'Timer' follow the jpdl syntax (http://docs.jboss.org/jbpm/v3/userguide/businesscalendar.html#duration): quantity [business] unit.&#xD;&#xD;Example:&#xD;- 1 year.&#xD;- 1 week.&#xD;- 1 month.&#xD;- 1 hour.&#xD;- 1 min.&#xD;- 1 second."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -206,14 +212,25 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="accessMatchesWithReadWriteRequired"/>
     </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The 'Variable' defines variable for subprocess."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
-        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The attribute 'name' specifies the name of the Variable"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="access" ordered="false"
-        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The attribute 'access' specifies is the variable can be read or write."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mappedName" ordered="false"
         unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="sous process. dire cette variable aura tel nom ds sous processus"/>
+        <details key="documentation" value="Definition: The attribute 'mappedName' specifies the name of the variable in the subprocess."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -227,7 +244,7 @@
       <details key="constraints" value="NoTransitionWithSameName SourceAndTargetMustBeSet noSpecialCharacters"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: A transition represents &#xD;&#xD;Constraint/limit: Transitions must have a source node and a destination node."/>
+      <details key="documentation" value="Definition: A 'Transition' represents a link between two nodes. &#xD;&#xD;Constraint/limit: Transitions must have a source node and a destination node."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
@@ -255,16 +272,43 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="BPMEventType">
-    <eLiterals name="task_create" literal="task-create"/>
-    <eLiterals name="task_start" value="1" literal="task-start"/>
-    <eLiterals name="task_assign" value="2" literal="task-assign"/>
-    <eLiterals name="task_end" value="3" literal="task-end"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The enumeration 'BPMEventType' defines all possible value for the type of an event."/>
+    </eAnnotations>
+    <eLiterals name="task_create" literal="task-create">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The event is launched at the creation of a task."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="task_start" value="1" literal="task-start">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The event is launched when the function TaskInstance.start() is called."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="task_assign" value="2" literal="task-assign">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The event is launch when a task is being assigned to a swimlane."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="task_end" value="3" literal="task-end">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The event is launch when the function TaskInstance.end() is called."/>
+      </eAnnotations>
+    </eLiterals>
     <eLiterals name="node_enter" value="4" literal="node-enter"/>
     <eLiterals name="node_leave" value="5" literal="node-leave"/>
     <eLiterals name="before_signal" value="6" literal="before-signal"/>
     <eLiterals name="after_signal" value="7" literal="after-signal"/>
-    <eLiterals name="superstate_enter" value="8" literal="superstate-enter"/>
-    <eLiterals name="superstate_leave" value="9" literal="superstate-leave"/>
+    <eLiterals name="superstate_enter" value="8" literal="superstate-enter">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The event is launched when entering a superstate."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="superstate_leave" value="9" literal="superstate-leave">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The event is launched when leaving a superstate."/>
+      </eAnnotations>
+    </eLiterals>
     <eLiterals name="transition" value="10" literal="transition"/>
     <eLiterals name="timer" value="11"/>
     <eLiterals name="subprocess_created" value="12" literal="subprocess-created"/>
