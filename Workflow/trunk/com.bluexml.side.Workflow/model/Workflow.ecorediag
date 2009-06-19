@@ -66,7 +66,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_8xO4oVwYEd6qpbe8lbkhQA" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="0"/>
     <element xmi:type="ecore:EClass" href="Workflow.ecore#//Swimlane"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_8xO4olwYEd6qpbe8lbkhQA" x="1289" y="930"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_8xO4olwYEd6qpbe8lbkhQA" x="1296" y="948"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_8xTKElwYEd6qpbe8lbkhQA" type="1001">
     <children xmi:type="notation:Node" xmi:id="_8xTxIFwYEd6qpbe8lbkhQA" type="4001"/>

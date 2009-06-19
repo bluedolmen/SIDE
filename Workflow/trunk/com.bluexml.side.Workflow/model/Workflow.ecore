@@ -50,7 +50,7 @@
       <details key="constraints" value="ActorNameMustBeUnique MustManageAtLeastOneTask noSpecialCharacters ActoridOrPooledactorMustBeSetForAllExeptOneActor"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The Swimlane represents the actor that manages one or many tasks of the workflow process.&#xD;"/>
+      <details key="documentation" value="Definition: The Swimlane represents the actor that manages one or many tasks of the workflow process.&#xD;&#xD;Constraint/limit: A Swimlane must manage at least one task.&#xD;"/>
     </eAnnotations>
     <eOperations name="EqualsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
@@ -61,7 +61,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'name' attribute specifies the name of the Swimlane."/>
+        <details key="documentation" value="Definition: The 'name' attribute specifies the name of the Swimlane.&#xD;&#xD;Constraint/limit: The 'name' of the Swimlane must be unique."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="manage" upperBound="-1"
@@ -69,13 +69,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="actorid" ordered="false"
         unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'actorid' attribute specifies the name of an account in the target deploy platform.&#xD;&#xD;Constraint/limit: The actorid value must be the same as the value of the attribute 'name'."/>
+        <details key="documentation" value="Definition: The 'actorid' attribute specifies the name of an account in the target deploy platform.&#xD;&#xD;Constraint/limit: &#xD;- The actorid value must be the same as the value of the attribute 'name'.&#xD;- If there is a value for the attribute 'actorid', no value must be setted for the attribute 'pooledactors'."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="pooledactors" ordered="false"
         unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="nom du groupe&#xD;soit l un soit l autre"/>
+        <details key="documentation" value="Definition: The 'pooledactors' attribute specifies the name of a group in the target platform.&#xD;&#xD;Constraint/limit: If there is a value for the attribute 'pooledactors', no value must be setted for the attribute 'actorid'."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="clazz" ordered="false"
@@ -86,6 +86,9 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StartState" eSuperTypes="#//UserTask">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The 'StartState' represent the first state of the workflow process.&#xD;&#xD;Constraint/limit: &#xD;- A worflow process must have only one 'StartState'.&#xD;- A 'Swimlane' must be associated with the 'StartState'.&#xD;&#xD;Inherits: &#xD;- UserTask.&#xD;&#xD;"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="assignmentType" eType="#//BPMAssignmentType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initiator" lowerBound="1"
         eType="#//Swimlane"/>
@@ -98,6 +101,9 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="TaskMustBePointerByTransition TaskMustHaveOneTransitionOut"/>
     </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: A 'TaskNode' is a task that must be performed by a 'Swimlane'. 'TaskNode' can have one or more 'Attribute'.&#xD;&#xD;Inherits: &#xD;- UserTask."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="timer" upperBound="-1"
         eType="#//Timer" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="swimlane" ordered="false"
@@ -109,8 +115,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="clazz" upperBound="-1"
         eType="ecore:EClass ../../com.bluexml.side.Class/model/Class.ecore#//Clazz"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EndState" eSuperTypes="#//State"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EndState" eSuperTypes="#//State">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The 'EndState' represent the final state of the workflow process.&#xD;&#xD;Constraint/limit: &#xD;- A worflow process must have only one 'EndState'.&#xD;&#xD;Inherits: &#xD;- State."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Node" eSuperTypes="#//TransitionTask">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: A 'Node' is a task that are no performed by 'Swimlane'.&#xD;&#xD;Constraint/limit: 'Attributes' can not be associated to a 'Node'.&#xD;&#xD;Inherits: &#xD;- TransitionTask."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="action" ordered="false"
         eType="#//Action" containment="true"/>
   </eClassifiers>
@@ -120,14 +133,25 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" upperBound="-1"
         eType="#//Variable" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Fork" eSuperTypes="#//TransitionTask"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//TransitionTask"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Fork" eSuperTypes="#//TransitionTask">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The 'Fork' splits one transition into multiple transitions.&#xD;&#xD;Inherits: &#xD;- TransitionTask."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//TransitionTask">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The 'Join' join multiple transitions into one transition.&#xD;&#xD;Inherits: &#xD;- TransitionTask."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Decision" eSuperTypes="#//TransitionTask">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="DecisionMustHaveOnlyOneTransitionWithCondition" value="self.transition -> select (t1| t1.condition -> isEmpty() or t1.condition ='') -> size() = 1"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="DecisionMustHaveOnlyOneTransitionWithCondition"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The 'Decision' evaluates the attribute 'condition' of the leaving transitions. The leaving transision with a true condition will be taken. If all conditions are false, the taken leaving transition will be the one without condition.&#xD;&#xD;Constraint/limit:&#xD;- 'Decision' can have n leaving 'Transition'.&#xD;- 'Decision' must have only one leaving 'Transition' witout a condition.&#xD;&#xD;Inherits: &#xD;- TransitionTask."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Event">
@@ -137,24 +161,41 @@
         eType="#//Action" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Action" eSuperTypes="#//WorkflowModelElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: 'Action' are Java code that are associated to a 'Transition'. An 'Action' includes a 'Script'."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="javaClass" ordered="false"
-        unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The attribute 'javaClass' specifies the java class that is associated to the Action.&#xD;&#xD;Exemple: javaClass=org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" ordered="false"
         unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="script" ordered="false"
         upperBound="-1" eType="#//Script" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Script">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: A 'Sript' are written with Java language."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" upperBound="-1"
         eType="#//Variable" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The attribute 'expression' specifies the script to be executed.&#xD;&#xD;Example: expression=logger.log(&quot;Going to requested state&quot;);"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Timer" eSuperTypes="#//Action">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: 'Timer' are associated to Transition. A Transition will be taken when the 'Timer' expires."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="duedate" ordered="false"
         unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="comme contrainte jpdl&#xD;double espace unite (min, hour, month"/>
+        <details key="documentation" value="Definition: The attribute 'duedate' specifies the duration of a 'Timer'.&#xD;&#xD;Constraint/limit: The syntax of the attribute 'Timer' follow the jpdl syntax (http://docs.jboss.org/jbpm/v3/userguide/businesscalendar.html#duration): &lt;quantity> [business] &lt;unit>&#xD;&#xD;Example:&#xD;- 1 year.&#xD;- 1 week.&#xD;- 1 month.&#xD;- 1 hour.&#xD;- 1 min.&#xD;- 1 second."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -191,13 +232,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'name' attribute specifies the name of the Transition."/>
+        <details key="documentation" value="Definition: The 'name' attribute specifies the name of the Transition.&#xD;&#xD;Constraint/limit: The 'name' of the Transition must be unique."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" ordered="false"
         unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'condition' attribute specifies an expression that should be evaluate. The result is a boolean. If it returns the value true, the transition will be take.&#xD;&#xD;Example: Condition=#{choix == 1}"/>
+        <details key="documentation" value="Definition: The 'condition' attribute specifies an expression that must be evaluate. The result is a boolean. If it returns the value true, the transition will be take.&#xD;&#xD;Example: Condition=#{choix == 1}"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="action" upperBound="-1"
@@ -209,7 +250,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//State"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'title' attribute specifies the text that will appear in the target deploy platform for a transition."/>
+        <details key="documentation" value="Definition: The 'title' attribute specifies the text that will appear in the target platform."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -256,10 +297,25 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="UniqueNameForTaskAttribute"/>
     </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: 'Attribute' specifies properties for TaskNode or StartState."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="typ" eType="ecore:EEnum ../../com.bluexml.side.Common/model/Common.ecore#//DataType"
-        defaultValueLiteral="void"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        defaultValueLiteral="void">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The attribute 'typ' specifies the type of an 'Attribute'.&#xD;&#xD;Example: This is the list of the different type of an attribute: boolean, byte, char, double, float, int, long, short, String, void, Date, Object, DateTime and Time."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The 'title' attribute specifies the text that will appear in the target platform."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The 'name' attribute specifies the name of the 'Attribute'.&#xD;&#xD;Constraint/limit: The 'name' of the 'Attribute' must be unique."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TransitionTask" eSuperTypes="#//State">
     <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
