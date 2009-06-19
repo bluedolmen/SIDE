@@ -5,7 +5,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 %>
 
 <%script type="view.FacetMap" name="validatedFilename"%>
-	./common/WEB-INF/xsl/cmis2xfml.xsl
+	./facets/WEB-INF/xsl/cmis2xfml.xsl
 
 <%script type="view.FacetMap" name="taxonomy"%>
 		<%for (children){%>

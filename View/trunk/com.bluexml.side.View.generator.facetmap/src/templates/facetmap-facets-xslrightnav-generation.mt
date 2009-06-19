@@ -90,7 +90,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
     <xsl:template match="s" mode="subselection">
         <xsl:param name="title"/>
         <li class="facet">
-        	<%if (paging.paginationStyle == "none"){%>
+        	<%if (paging.paginationStyle != "none"){%>
 				<%morePagingFacetDisplay()%>
 			<%}%>
             <a href="{$server}/{$app2}/{$pre_reference_url}{@ref}"
