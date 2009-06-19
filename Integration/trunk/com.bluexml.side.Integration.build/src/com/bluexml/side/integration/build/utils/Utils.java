@@ -134,14 +134,6 @@ public class Utils {
 	public static String getPublicUpdateSiteDirectory() {
 		return ouvrirFichier("build.properties").getProperty("publicUpdateSiteDirectory");
 	}
-	
-	public static String getSvnPassword() {
-		return ouvrirFichier("build.properties").getProperty("svn-username");
-	}
-
-	public static String getSvnUserName() {
-		return ouvrirFichier("build.properties").getProperty("svn-password");
-	}
 
 	/**
 	 * Retourne le numéro de version pour un projet donné

@@ -85,7 +85,7 @@ public class Application {
 
 			// Déplacement et suppression des répertoires
 			System.out.println("\nDéplacement et suppression des répertoires");
-			Utils.finalTraitement();
+			//Utils.finalTraitement();
 
 			System.out.println("\nFINISH !");
 		}
@@ -237,19 +237,18 @@ public class Application {
 		String out = "<?xml version=\"1.0\"?>\n";
 		out += "<project name=\"build\" default=\"build\">\n";
 		out += "\t<property file=\"build.properties\" />\n";
-		out += "\t<property name=\"antLib\" value=\"./lib\" />\n\n";
+		out += "\t<property name=\"antLib\" value=\"."+File.separator+"lib\" />\n\n";
 		out += "\t<!-- load the svn task -->\n";
 		out += "\t<path id=\"project.classpath.ant\">\n";
-		out += "\t\t<pathelement location=\"${antLib}/svnant.jar\" />\n";
-		out += "\t\t<pathelement location=\"${antLib}/svnClientAdapter.jar\" />\n";
-		out += "\t\t<pathelement location=\"${antLib}/svnjavahl.jar\" />\n";
+		out += "\t\t<pathelement location=\"${antLib}"+File.separator+"svnant.jar\" />\n";
+		out += "\t\t<pathelement location=\"${antLib}"+File.separator+"svnClientAdapter.jar\" />\n";
+		out += "\t\t<pathelement location=\"${antLib}"+File.separator+"svnjavahl.jar\" />\n";
 		out += "\t</path>\n";
 		out += "\t<taskdef resource=\"svntask.properties\" classpathref=\"project.classpath.ant\" />\n";
 
 		out += "\n\t<target name=\"build\" depends=\"clean, svnCO, svnUD\" />\n";
 
 		out += "\n\t<target name=\"clean\">\n";
-		out += "\t\t<svn username=\""+Utils.getSvnUserName()+"\" password=\""+Utils.getSvnPassword()+"\" />\n";
 		out += "\t\t<delete dir=\"${buildDirectory}\" />\n";
 		out += "\t</target>\n";
 
