@@ -54,7 +54,7 @@ public abstract class Deployer implements Checkable {
 	public void deploy() throws Exception {
 		String IfilewkDirPath = getTargetPath();
 		String absoluteWKDirePath = IFileHelper.getSystemFolderPath(IfilewkDirPath);
-		File fileToDeploy = new File(absoluteWKDirePath + File.separator + techVersion);
+		File fileToDeploy = getFileToDeploy(absoluteWKDirePath);
 		preProcess(fileToDeploy);
 		if (doClean()) {
 			clean(fileToDeploy);
@@ -63,6 +63,10 @@ public abstract class Deployer implements Checkable {
 		postProcess(fileToDeploy);
 	}
 
+	public File getFileToDeploy(String absoluteWKDirePath) {
+		return new File(absoluteWKDirePath + File.separator + techVersion);
+	}
+	
 	protected abstract void deployProcess(File fileToDeploy) throws Exception;
 
 	protected abstract void clean(File fileToDeploy) throws Exception;
