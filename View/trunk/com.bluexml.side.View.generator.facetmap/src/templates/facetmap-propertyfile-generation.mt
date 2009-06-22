@@ -10,7 +10,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 20
 
 <%script type="view.FacetMap" name="propertyfileGenerator"  file="<%validatedFilename%>" %>
-view=Righnav.xsl
+view=Rightnav.xsl
 showEmptySelections=<%displayEmptyFacet%>
 rebuildMap=true
 map=test.xml

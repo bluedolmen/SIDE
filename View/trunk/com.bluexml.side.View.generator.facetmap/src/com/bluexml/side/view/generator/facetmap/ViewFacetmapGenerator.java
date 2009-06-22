@@ -16,6 +16,7 @@
  ******************************************************************************/
 package com.bluexml.side.view.generator.facetmap;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -26,6 +27,9 @@ import org.eclipse.emf.ecore.EObject;
 import com.bluexml.side.application.generator.acceleo.AbstractAcceleoGenerator;
 import com.bluexml.side.application.security.SecurityHelper;
 import com.bluexml.side.settings.SidePreferences;
+import com.bluexml.side.util.libs.FileHelper;
+import com.bluexml.side.util.libs.IFileHelper;
+import com.bluexml.side.util.libs.zip.ZipManager;
 import com.bluexml.side.view.generator.facetmap.utils.FacetmapConstants;
 
 /**
@@ -35,7 +39,7 @@ import com.bluexml.side.view.generator.facetmap.utils.FacetmapConstants;
 public class ViewFacetmapGenerator extends AbstractAcceleoGenerator implements FacetmapConstants {
 	public static String GENERATOR_CODE = "CODE_GED_G_C_FACETMAP_2";
 	public static String MMUri = "http://www.kerblue.org/view/1.0";
-	
+
 	public ViewFacetmapGenerator(){
 		techVersion = "Facetmap 2.x";
 		this.setTEMP_FOLDER(getTechVersion());
@@ -79,12 +83,29 @@ public class ViewFacetmapGenerator extends AbstractAcceleoGenerator implements F
 	}
 
 	public Collection<IFile> complete() throws Exception {
+		// Don't support 
+		if (groupedModels.entrySet().size()>1)
+			throw new Exception("Error too many root packages for facetmap.");
+		setTEMP_FOLDER("generator_" + getClass().getName());
+		buildPackage(groupedModels.keySet().toArray()[0].toString());
 		return generatedFiles;
 	}
 
 	@Override
 	public IFile buildPackage(String modelId) throws Exception {
-		// TODO Auto-generated method stub
+		String folder = IFileHelper.getSystemFolderPath(getTemporaryFolder()+FILESEP+modelId)+FILESEP;
+		//Destinations
+		String destFacets = folder + "zip" + FILESEP + WEBAPP_FACETS;
+		String destContent = folder + "zip" + FILESEP + WEBAPP_CONTENT;
+		//Copy
+		FileHelper.copyFiles(new File(folder + "common"), new File(destFacets), true);
+		FileHelper.copyFiles(new File(folder + "common"), new File(destContent), true);
+		FileHelper.copyFiles(new File(folder + "facets"), new File(destFacets), true);
+		//Zip
+		File zipFacets = new File(destFacets + ".zip");
+		File zipContent = new File(destContent + ".zip");
+		ZipManager.zip(new File(destFacets), zipFacets, false);
+		ZipManager.zip(new File(destContent), zipContent, false);
 		return null;
 	}
 

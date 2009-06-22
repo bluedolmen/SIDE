@@ -47,7 +47,7 @@ public interface FacetmapConstants {
 	public static final String basicFacets_filename = "basic-Facets.xsl";
 	public static final String rightnav_properties_filename = "Rightnav.xsl";
 	//Params
-	public static final String CONFIGURATION_FACETMAP_FACET_HOME = "FACETMAP_FACET_NAME";
-	public static final String CONFIGURATION_FACETMAP_CONTENT_HOME = "FACETMAP_CONTENT_NAME";
+	public static final String WEBAPP_FACETS = "facetmap-facets";
+	public static final String WEBAPP_CONTENT = "facetmap-content";
 	public static final String CONFIGURATION_TOMCAT_INSTALLATION = "CATALINA_HOME";
 }
