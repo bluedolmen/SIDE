@@ -2,7 +2,7 @@
 <feature
       id="com.bluexml.side.Application.feature"
       label="S-IDE Application"
-      version="1.0.12"
+      version="1.0.13"
       provider-name="BLUEXML">
 
    <description url="http://www.example.com/description">
@@ -19,7 +19,6 @@
 
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="com.bluexml.side.Application" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.edit"/>
       <import plugin="org.eclipse.core.resources" version="3.4.0" match="greaterOrEqual"/>
@@ -29,7 +28,6 @@
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="com.bluexml.side.Util.libs" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.settings"/>
       <import plugin="com.bluexml.side.Application.security"/>
       <import plugin="fr.obeo.acceleo.chain"/>
       <import plugin="fr.obeo.acceleo.gen"/>
@@ -37,63 +35,75 @@
       <import plugin="com.bluexml.side.Util.ecore" version="1.0.1" match="greaterOrEqual"/>
       <import plugin="com.bluexml.side.Application.deployer"/>
       <import plugin="com.bluexml.side.Application.deployer.alfresco"/>
-      <import plugin="com.bluexml.side.Util.libs" version="1.0.6" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="com.bluexml.side.Application.log" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Settings"/>
+      <import plugin="com.bluexml.side.Util.libs" version="1.0.10" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Common"/>
+      <import plugin="com.bluexml.side.Util.model.merge"/>
+      <import plugin="org.eclipse.core.databinding"/>
+      <import plugin="org.eclipse.core.databinding.beans"/>
+      <import plugin="org.eclipse.jface.databinding"/>
+      <import plugin="com.bluexml.side.Util.libs" version="1.0.11" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Application.generator.acceleo"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="com.bluexml.side.Application.deployer.war" version="1.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
          id="com.bluexml.side.Application"
          download-size="0"
          install-size="0"
-         version="1.0.12"
+         version="1.0.13"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.edit"
          download-size="0"
          install-size="0"
-         version="1.0.11"
+         version="1.0.12"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.editor"
          download-size="0"
          install-size="0"
-         version="1.0.11"
+         version="1.0.12"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.generator"
          download-size="0"
          install-size="0"
-         version="1.0.12"
+         version="1.0.13"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.generator.acceleo"
          download-size="0"
          install-size="0"
-         version="1.0.12"
+         version="1.0.13"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.ui"
          download-size="0"
          install-size="0"
-         version="1.0.12"
+         version="1.0.13"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.generator.alfresco"
          download-size="0"
          install-size="0"
-         version="1.0.11"
+         version="1.0.12"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Application.deployer.alfresco"
          download-size="0"
          install-size="0"
-         version="1.0.12"
+         version="1.0.13"
          unpack="false"/>
 
    <plugin
@@ -107,14 +117,28 @@
          id="com.bluexml.side.Application.deployer"
          download-size="0"
          install-size="0"
-         version="1.0.12"
+         version="1.0.13"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Settings"
          download-size="0"
          install-size="0"
-         version="1.0.12"
+         version="1.0.13"
+         unpack="false"/>
+
+   <plugin
+         id="com.bluexml.side.Application.deployer.war"
+         download-size="0"
+         install-size="0"
+         version="1.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.bluexml.side.Application.log"
+         download-size="0"
+         install-size="0"
+         version="1.0.0"
          unpack="false"/>
 
 </feature>
