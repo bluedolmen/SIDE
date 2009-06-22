@@ -17,7 +17,8 @@ import com.bluexml.side.application.deployer.war.WarDeployer;
 public class AMPDeployer extends WarDeployer {
 
 	public AMPDeployer() {
-		cleanKey = "com.bluexml.side.Application.deployer.alfresco.clean";
+		this.webappName = "alfresco";
+		this.cleanKey = "com.bluexml.side.Application.deployer.alfresco.clean";
 	}
 
 	protected void deployProcess(File fileToDeploy) {
