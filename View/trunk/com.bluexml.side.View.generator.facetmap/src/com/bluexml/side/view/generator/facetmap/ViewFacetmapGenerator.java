@@ -102,8 +102,10 @@ public class ViewFacetmapGenerator extends AbstractAcceleoGenerator implements F
 		FileHelper.copyFiles(new File(folder + "common"), new File(destContent), true);
 		FileHelper.copyFiles(new File(folder + "facets"), new File(destFacets), true);
 		//Zip
-		File zipFacets = new File(destFacets + ".zip");
-		File zipContent = new File(destContent + ".zip");
+		String zipFolder = IFileHelper.getSystemFolderPath(getTargetPath()+FILESEP+getTechVersion())+FILESEP;
+		new File(zipFolder).mkdirs();
+		File zipFacets = new File(zipFolder + WEBAPP_FACETS + ".zip");
+		File zipContent = new File(zipFolder + WEBAPP_CONTENT + ".zip");
 		ZipManager.zip(new File(destFacets), zipFacets, false);
 		ZipManager.zip(new File(destContent), zipContent, false);
 		return null;
