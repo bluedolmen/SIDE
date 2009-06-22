@@ -3,6 +3,8 @@ package com.bluexml.side.application.deployer.war;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import com.bluexml.side.application.deployer.Deployer;
 import com.bluexml.side.util.libs.FileHelper;
@@ -19,7 +21,8 @@ public abstract class WarDeployer extends Deployer {
 	File deployedWebbAppFolder = null;
 
 	
-	public void initialize(String webappName, String cleanKey) {
+	public void initialize(String webappName, String cleanKey,Map<String, String> configurationParameters, Map<String, String> generationParameters, List<String> options) {
+		this.initialize(configurationParameters, generationParameters, options);
 		this.webappName = webappName;
 		this.cleanKey = cleanKey;
 	}

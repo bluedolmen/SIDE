@@ -1,6 +1,8 @@
 package com.bluexml.side.application.deployer.war;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.bluexml.side.application.deployer.Deployer;
@@ -11,7 +13,7 @@ public abstract class MultiWarDeployer extends Deployer {
 	 * this map records deployer to use : String : webapp name WarDeployer :
 	 * instance of the WarDeployer to use
 	 */
-	protected Map<String, WarDeployer> warDeployers = null;
+	protected Map<String, WarDeployer> warDeployers = new HashMap<String, WarDeployer>();
 
 	@Override
 	protected void clean(File fileToDeploy) throws Exception {
@@ -38,5 +40,16 @@ public abstract class MultiWarDeployer extends Deployer {
 			throw new Exception("check WarDeployer initialization");
 		}
 	}
-
+	
+	public void addWarDeployer(String webappName,WarDeployer dep) {	
+		warDeployers.put(webappName, dep);
+	}
+	
+	public void initialize(Map<String, String> configurationParameters, Map<String, String> generationParameters, List<String> options) {
+		super.initialize(configurationParameters, generationParameters, options);
+		
+		for (Map.Entry<String, WarDeployer> wd : warDeployers.entrySet()) {	
+			wd.getValue().initialize(wd.getKey(), cleanKey, configurationParameters, generationParameters, options);
+		}
+	}
 }
