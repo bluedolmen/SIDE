@@ -50,7 +50,7 @@
       <details key="constraints" value="ActorNameMustBeUnique MustManageAtLeastOneTask noSpecialCharacters ActoridOrPooledactorMustBeSetForAllExeptOneActor"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'Swimlane' represents the actor that manages one or many tasks of the workflow process.&#xD;&#xD;Constraint/limit: A 'Swimlane' must manage at least one task.&#xD;"/>
+      <details key="documentation" value="Definition: The 'Swimlane' represents the actor that manages one or many tasks of the workflow process. It is a mechanism to specify that multiple tasks in the process should be done by the same actor. So after the first task instance is created for a given swimlane, the actor should be remembered in the process for all subsequent tasks that are in the same swimlane.&#xD;&#xD;Constraint/limit: A 'Swimlane' must manage at least one task.&#xD;"/>
     </eAnnotations>
     <eOperations name="EqualsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
@@ -83,7 +83,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StartState" eSuperTypes="#//UserTask">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'StartState' represent the first state of the workflow process.&#xD;&#xD;Constraint/limit: &#xD;- A worflow process must have only one 'StartState'.&#xD;- A 'Swimlane' must be associated with the 'StartState'.&#xD;&#xD;Inherits: &#xD;- UserTask.&#xD;&#xD;"/>
+      <details key="documentation" value="Definition: The 'StartState' represent the first state of the workflow process. Note that a process without a start-state is valid, but cannot be executed.&#xD;&#xD;Constraint/limit: &#xD;- A worflow process must have only one 'StartState'.&#xD;- A 'Swimlane' must be associated with the 'StartState'.&#xD;&#xD;Inherits: &#xD;- UserTask.&#xD;&#xD;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="assignmentType" eType="#//BPMAssignmentType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initiator" lowerBound="1"
@@ -98,7 +98,7 @@
       <details key="constraints" value="TaskMustBePointerByTransition TaskMustHaveOneTransitionOut"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: A 'TaskNode' is a task that must be performed by a 'Swimlane'. 'TaskNode' can have one or more 'Attribute'.&#xD;&#xD;Inherits: &#xD;- UserTask."/>
+      <details key="documentation" value="Definition: A 'TaskNode' is a task that must be performed by a 'Swimlane'. 'TaskNode' can have one or more 'Attribute'. A task node represents one task that is to be performed by humans. So when execution arrives in a task node, task instances will be created in the task lists of the workflow participants. After that, the node will behave as a wait state. So when the users perform their task, the task completion will trigger the resuming of the execution. In other words, that leads to a new signal being called on the token.&#xD;&#xD;Inherits: &#xD;- UserTask."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="timer" upperBound="-1"
         eType="#//Timer" containment="true"/>
@@ -118,14 +118,14 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Node" eSuperTypes="#//TransitionTask">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: A 'Node' is a task that are no performed by 'Swimlane'.&#xD;&#xD;Constraint/limit: 'Attributes' can not be associated to a 'Node'.&#xD;&#xD;Inherits: &#xD;- TransitionTask."/>
+      <details key="documentation" value="Definition: A 'Node' is a task that are no performed by 'Swimlane'. The type node serves the situation where you want to write your own code in a node.&#xD;&#xD;Constraint/limit: 'Attributes' can not be associated to a 'Node'.&#xD;&#xD;Inherits: &#xD;- TransitionTask."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="action" ordered="false"
         eType="#//Action" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ProcessState" eSuperTypes="#//TransitionTask">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'ProcessState' represents a subprocess. It may have variables."/>
+      <details key="documentation" value="Definition: The 'ProcessState' represents a subprocess. It may have variables. The process state is a state that is associated with another process definition. When graph execution arrives in the process state, a new process instance of the sub-process is created and it is associated with the path of execution that arrived in the process state. The path of execution of the super process will wait till the sub process instance has ended. When the sub process instance ends, the path of execution of the super process will leave the process state and continue graph execution in the super process."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subprocess" ordered="false"
         lowerBound="1" eType="#//Process"/>
@@ -134,12 +134,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Fork" eSuperTypes="#//TransitionTask">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'Fork' splits one transition into multiple transitions.&#xD;&#xD;Inherits: &#xD;- TransitionTask."/>
+      <details key="documentation" value="Definition: The 'Fork' splits one path of execution into multiple concurrent paths of execution.&#xD;&#xD;Inherits: &#xD;- TransitionTask."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//TransitionTask">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'Join' join multiple transitions into one transition.&#xD;&#xD;Inherits: &#xD;- TransitionTask."/>
+      <details key="documentation" value="Definition: The default join assumes that all tokens that arrive in the join are children of the same parent. This situation is created when using the fork as mentioned above and when all tokens created by a fork arrive in the same join. A join will end every token that enters the join. When all sibling tokens have arrived in the join, the parent token will be propagated over the (unique!) leaving transition. When there are still sibling tokens active, the join will behave as a wait state.&#xD;&#xD;Inherits: &#xD;- TransitionTask."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Decision" eSuperTypes="#//TransitionTask">
@@ -155,7 +155,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Event">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'Event' associates actions to a TaskNode.&#xD;&#xD; "/>
+      <details key="documentation" value="Definition: Events specify moments in the execution of the process. The jBPM engine will fire events during graph execution. An event is always relative to an element in the process definition like e.g. the process definition, a node or a transition. Most process elements can fire different types of events. A node for example can fire a node-enter event and a node-leave event. Each event has a list of actions. When the jBPM engine fires an event, the list of actions is executed. &#xA;&#xD;&#xD; "/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" ordered="false" unique="false"
         lowerBound="1" eType="#//BPMEventType">
@@ -255,7 +255,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" ordered="false"
         unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'condition' attribute specifies an expression that must be evaluate. The result is a boolean. If it returns the value true, the transition will be take.&#xD;&#xD;Example: Condition=#{choix == 1}"/>
+        <details key="documentation" value="Definition: The 'condition' attribute specifies an expression that must be evaluate. The result is a boolean. If it returns the value true, the transition could be taken.&#xD;&#xD;Example: Condition=#{choix == 1}"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="action" upperBound="-1"
@@ -357,7 +357,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'name' attribute specifies the name of the 'Attribute'.&#xD;&#xD;Constraint/limit: The 'name' of the 'Attribute' must be unique."/>
+        <details key="documentation" value="Definition: The 'name' attribute specifies the name of the 'Attribute'.&#xD;&#xD;Constraint/limit: The 'name' of the 'Attribute' must be unique in all the process."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
