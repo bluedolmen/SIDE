@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+  <feature url="feature/com.bluexml.side.Application.feature_1.0.14.v31-20090615.jar" id="com.bluexml.side.Application.feature" version="1.0.14.v31-20090615">
+    <category name="S-IDE Application" />
+  </feature>
+  <feature url="feature/com.bluexml.side.Class.generator.alfresco.feature_1.0.12.jar" id="com.bluexml.side.Class.generator.alfresco.feature" version="1.0.12">
+    <category name="S-IDE Class" />
+  </feature>
+  <feature url="feature/com.bluexml.side.Class.generator.facetmap.feature_1.0.1.v0-20090612.jar" id="com.bluexml.side.Class.generator.facetmap.feature" version="1.0.1.v0-20090612">
+    <category name="S-IDE Class" />
+  </feature>
+  <feature url="feature/com.bluexml.side.Class.generator.report.feature_1.0.1.v0-20090612.jar" id="com.bluexml.side.Class.generator.report.feature" version="1.0.1.v0-20090612">
+    <category name="S-IDE Class" />
+  </feature>
+  <feature url="feature/com.bluexml.side.Class.modeler.feature_1.0.12.jar" id="com.bluexml.side.Class.modeler.feature" version="1.0.12">
+    <category name="S-IDE Class" />
+  </feature>
+  <feature url="feature/com.bluexml.side.Common.feature_1.0.12.v25-20090615.jar" id="com.bluexml.side.Common.feature" version="1.0.12.v25-20090615">
+    <category name="S-IDE Common" />
+  </feature>
+  <feature url="feature/com.bluexml.side.Util_1.0.11.jar" id="com.bluexml.side.Util" version="1.0.11">
+    <category name="S-IDE Util" />
+  </feature>
+  <category-def name="S-IDE Other" label="S-IDE Other" />
+  <category-def name="S-IDE Application" label="S-IDE Application" />
+  <category-def name="S-IDE Class" label="S-IDE Class" />
+  <category-def name="S-IDE Common" label="S-IDE Common" />
+  <category-def name="S-IDE Util" label="S-IDE Util" />
+</site>
+

@@ -1,0 +1,10 @@
+Liste des problèmes:
+
+- Les features portent le nom 'feature' à la fin du nom de projet (com.bluexml.side.Class.report.feature) mais pas com.bluexml.side.Util
+
+- Le nom de la branche (ici com.bluexml.side.Class.report.feature c'est Class) doit etre le meme que sur le répository, ce n'est pas le cas pour 
+com.bluexml.side.Util (sur le svn c'est Utils).
+
+- La feature com.bluexml.side.Util indique que le plugin com.bluexml.side.Util.libs ne doit pas etre zippé (.jar) or, il doit l'être pour pouvoir être installé par la suite. (dans le feature.xml -> plug-ins -> com.bluexml.side.Util.libs -> Unpack the plug-in archive after the installation)
+
+- La feature com.bluexml.side.Application.feature faire référence au plugin 'com.bluexml.side.settings' et non pas a 'com.bluexml.side.Settings'
