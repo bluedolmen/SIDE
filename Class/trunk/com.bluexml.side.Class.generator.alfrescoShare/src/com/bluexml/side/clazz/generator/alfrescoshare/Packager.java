@@ -15,7 +15,6 @@ public class Packager {
 	private String workingdir;
 	private IFolder IworkingDir; // generated folder
 	private Properties moduleProperties;
-	private String rootFolder = "webapps" + File.separator + "share";
 	private String technoV;
 
 	public Packager(IFolder folder, Properties moduleProperties, String technoV) {
@@ -69,7 +68,7 @@ public class Packager {
 	}
 
 	private File getFolderToPackage() {
-		return new File(getWorkingdir() + File.separator + rootFolder);
+		return new File(getWorkingdir());
 	}
 
 }
