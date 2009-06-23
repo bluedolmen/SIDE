@@ -72,7 +72,6 @@ public class AbstractViewItemProvider
 			super.getPropertyDescriptors(object);
 
 			addViewOfPropertyDescriptor(object);
-			addInnerViewPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -91,28 +90,6 @@ public class AbstractViewItemProvider
 				 getString("_UI_AbstractView_viewOf_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractView_viewOf_feature", "_UI_AbstractView_type"),
 				 ViewPackage.Literals.ABSTRACT_VIEW__VIEW_OF,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Inner View feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addInnerViewPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_AbstractView_innerView_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractView_innerView_feature", "_UI_AbstractView_type"),
-				 ViewPackage.Literals.ABSTRACT_VIEW__INNER_VIEW,
 				 true,
 				 false,
 				 true,

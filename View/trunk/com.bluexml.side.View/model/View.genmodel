@@ -59,7 +59,6 @@
     <genClasses ecoreClass="View.ecore#//AbstractView">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference View.ecore#//AbstractView/viewOf"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//AbstractView/operations"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference View.ecore#//AbstractView/innerView"/>
     </genClasses>
     <genClasses image="false" ecoreClass="View.ecore#//AbstractDataTable">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//AbstractDataTable/haveRowActions"/>

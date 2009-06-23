@@ -626,22 +626,13 @@ public interface ViewPackage extends EPackage {
 	int ABSTRACT_VIEW__OPERATIONS = FIELD_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Inner View</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_VIEW__INNER_VIEW = FIELD_CONTAINER_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Abstract View</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_VIEW_FEATURE_COUNT = FIELD_CONTAINER_FEATURE_COUNT + 3;
+	int ABSTRACT_VIEW_FEATURE_COUNT = FIELD_CONTAINER_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.impl.AbstractDataTableImpl <em>Abstract Data Table</em>}' class.
@@ -796,15 +787,6 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int ABSTRACT_DATA_TABLE__OPERATIONS = ABSTRACT_VIEW__OPERATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Inner View</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_DATA_TABLE__INNER_VIEW = ABSTRACT_VIEW__INNER_VIEW;
 
 	/**
 	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
@@ -1444,15 +1426,6 @@ public interface ViewPackage extends EPackage {
 	int DATA_LIST__OPERATIONS = ABSTRACT_DATA_TABLE__OPERATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Inner View</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_LIST__INNER_VIEW = ABSTRACT_DATA_TABLE__INNER_VIEW;
-
-	/**
 	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1697,15 +1670,6 @@ public interface ViewPackage extends EPackage {
 	int DATA_TABLE__OPERATIONS = ABSTRACT_DATA_TABLE__OPERATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Inner View</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__INNER_VIEW = ABSTRACT_DATA_TABLE__INNER_VIEW;
-
-	/**
 	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1914,15 +1878,6 @@ public interface ViewPackage extends EPackage {
 	int FACET_MAP__OPERATIONS = ABSTRACT_VIEW__OPERATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Inner View</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP__INNER_VIEW = ABSTRACT_VIEW__INNER_VIEW;
-
-	/**
 	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2111,15 +2066,6 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int TREE__OPERATIONS = ABSTRACT_VIEW__OPERATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Inner View</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TREE__INNER_VIEW = ABSTRACT_VIEW__INNER_VIEW;
 
 	/**
 	 * The feature id for the '<em><b>Sorting</b></em>' containment reference.
@@ -5167,17 +5113,6 @@ public interface ViewPackage extends EPackage {
 	EReference getAbstractView_Operations();
 
 	/**
-	 * Returns the meta object for the reference list '{@link com.bluexml.side.view.AbstractView#getInnerView <em>Inner View</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Inner View</em>'.
-	 * @see com.bluexml.side.view.AbstractView#getInnerView()
-	 * @see #getAbstractView()
-	 * @generated
-	 */
-	EReference getAbstractView_InnerView();
-
-	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.view.AbstractDataTable <em>Abstract Data Table</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6088,14 +6023,6 @@ public interface ViewPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ABSTRACT_VIEW__OPERATIONS = eINSTANCE.getAbstractView_Operations();
-
-		/**
-		 * The meta object literal for the '<em><b>Inner View</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ABSTRACT_VIEW__INNER_VIEW = eINSTANCE.getAbstractView_InnerView();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.impl.AbstractDataTableImpl <em>Abstract Data Table</em>}' class.
