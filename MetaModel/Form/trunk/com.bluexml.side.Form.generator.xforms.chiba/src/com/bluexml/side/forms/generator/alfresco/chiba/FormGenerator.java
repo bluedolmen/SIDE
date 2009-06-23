@@ -27,11 +27,11 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
-import com.bluexml.side.application.generator.AbstractGenerator;
-import com.bluexml.side.application.security.SecurityHelper;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.form.FormPackage;
-import com.bluexml.side.settings.SidePreferences;
+import com.bluexml.side.util.generator.AbstractGenerator;
+import com.bluexml.side.util.security.SecurityHelper;
+import com.bluexml.side.util.settings.SidePreferences;
 
 public class FormGenerator extends AbstractGenerator {
 	public static final Namespace NAMESPACE_MAVENPOM = Namespace.getNamespace(

@@ -20,8 +20,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.bluexml.side.application.deployer.Deployer;
 import com.bluexml.side.clazz.generator.facetmap.utils.FacetmapConstants;
+import com.bluexml.side.util.deployer.Deployer;
 import com.bluexml.side.util.libs.FileHelper;
 
 

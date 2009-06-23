@@ -26,10 +26,10 @@ import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.Option;
 import com.bluexml.side.application.StaticConfigurationParameters;
-import com.bluexml.side.application.deployer.Deployer;
-import com.bluexml.side.application.documentation.LogSave;
-import com.bluexml.side.application.generator.AbstractGenerator;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
+import com.bluexml.side.util.deployer.Deployer;
+import com.bluexml.side.util.documentation.LogSave;
+import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.libs.IFileHelper;
 
 public class Generate extends Thread {

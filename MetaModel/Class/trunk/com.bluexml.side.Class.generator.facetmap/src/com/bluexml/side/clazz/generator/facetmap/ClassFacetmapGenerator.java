@@ -23,10 +23,10 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 
-import com.bluexml.side.application.generator.acceleo.AbstractAcceleoGenerator;
-import com.bluexml.side.application.security.SecurityHelper;
 import com.bluexml.side.clazz.generator.facetmap.utils.FacetmapConstants;
-import com.bluexml.side.settings.SidePreferences;
+import com.bluexml.side.util.generator.acceleo.AbstractAcceleoGenerator;
+import com.bluexml.side.util.security.SecurityHelper;
+import com.bluexml.side.util.settings.SidePreferences;
 
 /**
  * @author <a href="mailto:pbertrand@bluexml.com"> Pierre BERTRAND </a>

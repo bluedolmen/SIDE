@@ -18,7 +18,7 @@ package com.bluexml.side.clazz.deployer.report;
 
 import java.io.File;
 
-import com.bluexml.side.application.deployer.Deployer;
+import com.bluexml.side.util.deployer.Deployer;
 import com.bluexml.side.util.libs.FileHelper;
 
 public class ReportDeployer extends Deployer {

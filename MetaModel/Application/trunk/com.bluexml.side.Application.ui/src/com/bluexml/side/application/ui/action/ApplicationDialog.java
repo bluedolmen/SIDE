@@ -94,7 +94,6 @@ import com.bluexml.side.application.ConfigurationParameters;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.Option;
-import com.bluexml.side.application.security.Checkable;
 import com.bluexml.side.application.ui.SWTResourceManager;
 import com.bluexml.side.application.ui.action.table.GeneratorParameter;
 import com.bluexml.side.application.ui.action.table.GeneratorParameterCellModifier;
@@ -115,6 +114,7 @@ import com.bluexml.side.application.ui.action.tree.TreeNode;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 import com.bluexml.side.application.ui.action.utils.validator.FolderSelectionValidator;
 import com.bluexml.side.application.ui.action.utils.viewFilter.SideFileFiter;
+import com.bluexml.side.util.security.Checkable;
 
 @SuppressWarnings("restriction")
 public class ApplicationDialog extends Dialog {

@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 
-import com.bluexml.side.application.generator.acceleo.AbstractAcceleoGenerator;
+import com.bluexml.side.util.generator.acceleo.AbstractAcceleoGenerator;
 
 public class ReportGenerator extends AbstractAcceleoGenerator {
 	
