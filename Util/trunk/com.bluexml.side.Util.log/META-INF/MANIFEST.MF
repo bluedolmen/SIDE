@@ -3,13 +3,13 @@ Bundle-ManifestVersion: 2
 Bundle-Name: S-IDE Documentation Plug-in
 Bundle-SymbolicName: com.bluexml.side.Application.log
 Bundle-Version: 1.0.0
-Bundle-Activator: com.bluexml.side.application.documentation.Activator
+Bundle-Activator: com.bluexml.side.util.documentation.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Util.libs;bundle-version="1.0.11",
  org.eclipse.core.resources
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Export-Package: com.bluexml.side.application.documentation,
- com.bluexml.side.application.documentation.structure,
- com.bluexml.side.application.documentation.structure.enumeration
+Export-Package: com.bluexml.side.util.documentation,
+ com.bluexml.side.util.documentation.structure,
+ com.bluexml.side.util.documentation.structure.enumeration

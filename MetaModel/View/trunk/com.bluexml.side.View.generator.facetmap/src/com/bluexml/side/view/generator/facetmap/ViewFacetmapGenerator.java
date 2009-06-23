@@ -24,12 +24,12 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 
-import com.bluexml.side.application.generator.acceleo.AbstractAcceleoGenerator;
-import com.bluexml.side.application.security.SecurityHelper;
-import com.bluexml.side.settings.SidePreferences;
+import com.bluexml.side.util.generator.acceleo.AbstractAcceleoGenerator;
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.libs.zip.ZipManager;
+import com.bluexml.side.util.security.SecurityHelper;
+import com.bluexml.side.util.settings.SidePreferences;
 import com.bluexml.side.view.generator.facetmap.utils.FacetmapConstants;
 
 /**

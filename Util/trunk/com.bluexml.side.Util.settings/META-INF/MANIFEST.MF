@@ -4,12 +4,12 @@ Bundle-ManifestVersion: 2
 Bundle-Name: S-IDE Settings Plug-in
 Bundle-SymbolicName: com.bluexml.side.Util.settings;singleton:=true
 Bundle-Version: 1.0.13
-Bundle-Activator: com.bluexml.side.settings.Activator
+Bundle-Activator: com.bluexml.side.util.settings.Activator
 Bundle-Vendor: blueXML
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  com.bluexml.side.Application.security
 Bundle-ActivationPolicy: lazy
-Export-Package: com.bluexml.side.settings
+Export-Package: com.bluexml.side.util.settings
 Import-Package: com.bluexml.side.util.libs,
  com.bluexml.side.util.libs.md5

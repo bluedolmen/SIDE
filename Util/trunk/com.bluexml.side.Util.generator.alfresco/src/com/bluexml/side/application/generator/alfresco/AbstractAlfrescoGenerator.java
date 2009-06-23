@@ -6,7 +6,7 @@ import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
 
-import com.bluexml.side.application.generator.acceleo.AbstractAcceleoGenerator;
+import com.bluexml.side.util.generator.acceleo.AbstractAcceleoGenerator;
 import com.bluexml.side.util.libs.IFileHelper;
 
 public abstract class AbstractAlfrescoGenerator extends AbstractAcceleoGenerator {
