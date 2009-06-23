@@ -8,8 +8,8 @@ import java.util.Properties;
 
 import org.eclipse.emf.ecore.EObject;
 
-import com.bluexml.side.application.generator.alfresco.AbstractAlfrescoGenerator;
 import com.bluexml.side.util.generator.XMLConflictResolver;
+import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
 import com.bluexml.side.util.security.SecurityHelper;
 import com.bluexml.side.util.settings.SidePreferences;
 
