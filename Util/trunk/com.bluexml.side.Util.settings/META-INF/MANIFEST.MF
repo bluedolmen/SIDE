@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ManifestVersion: 2
 Bundle-Name: S-IDE Settings Plug-in
-Bundle-SymbolicName: com.bluexml.side.Settings;singleton:=true
+Bundle-SymbolicName: com.bluexml.side.Util.settings;singleton:=true
 Bundle-Version: 1.0.13
 Bundle-Activator: com.bluexml.side.settings.Activator
 Bundle-Vendor: blueXML
