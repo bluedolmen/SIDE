@@ -1,0 +1,44 @@
+<project>
+	<property file="build.${user.name}.properties">
+	</property>
+	<property name="docLibPath" value="webapps/share/components/documentlibrary/" />
+
+
+	<property name="jsScriptsOut" value="documentlist-min.js" />
+	<property name="jsScriptsIn" value="documentlist-src.js" />
+	<property name="resources" value="./resources" />
+	<property name="tmpFolder" value="./tmp" />
+	<property name="extensionFolder" value="./extension" />
+	<!-- ================================= 
+          target: buildExtension              
+         ================================= -->
+	<target name="buildExtension" depends="" description="build extension archive for alfresco share">
+		<delete dir="${tmpFolder}" failonerror="false" />
+		<mkdir dir="${tmpFolder}/${docLibPath} " />
+		<mkdir dir="${extensionFolder}" />
+		<java jar="lib/yuicompressor-2.4.2.jar" failonerror="true" fork="true">
+			<arg value="-o" />
+			<arg value="${tmpFolder}/${docLibPath}/${jsScriptsOut}" />
+			<arg value="${resources}/${docLibPath}/${jsScriptsIn}" />
+		</java>
+
+		<zip destfile="${extensionFolder}/AlfrescoShareExtension.zip">
+			<fileset dir="${tmpFolder}" id="id">
+				<include name="**/*.*" />
+			</fileset>
+		</zip>
+	</target>
+
+
+	<!-- ================================= 
+          target: patchWebApp
+         ================================= -->
+	<target name="patchWebApp" depends="buildExtension" description="build and deploy this module in alfresco Share">
+		<unzip dest="${catalina.home}">
+			<fileset dir="${extensionFolder}">
+				<include name="*.zip"/>
+			</fileset>
+		</unzip>
+	</target>
+
+</project>
