@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Alfresco View Generator Plug-in
-Bundle-SymbolicName: com.bluexml.side.View.generator.alfresco
+Bundle-SymbolicName: com.bluexml.side.View.generator.alfresco;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Activator: com.bluexml.side.view.generator.alfresco.Activator
 Bundle-Vendor: www.bluexml.com
