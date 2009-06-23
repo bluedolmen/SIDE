@@ -1,11 +1,11 @@
-package com.bluexml.side.application.deployer.war;
+package com.bluexml.side.util.deployer.war;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.bluexml.side.application.deployer.Deployer;
+import com.bluexml.side.util.deployer.Deployer;
 
 public abstract class MultiWarDeployer extends Deployer {
 

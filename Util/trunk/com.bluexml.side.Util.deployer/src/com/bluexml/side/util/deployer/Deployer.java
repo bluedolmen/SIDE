@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.bluexml.side.application.deployer;
+package com.bluexml.side.util.deployer;
 
 import java.io.File;
 import java.util.Date;
@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.bluexml.side.application.StaticConfigurationParameters;
-import com.bluexml.side.application.documentation.structure.LogEntry;
-import com.bluexml.side.application.documentation.structure.SIDELog;
-import com.bluexml.side.application.documentation.structure.enumeration.LogEntryType;
-import com.bluexml.side.application.documentation.structure.enumeration.LogType;
-import com.bluexml.side.application.security.Checkable;
+import com.bluexml.side.util.documentation.structure.LogEntry;
+import com.bluexml.side.util.documentation.structure.SIDELog;
+import com.bluexml.side.util.documentation.structure.enumeration.LogEntryType;
+import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 import com.bluexml.side.util.libs.IFileHelper;
+import com.bluexml.side.util.security.Checkable;
 
 /**
  * @author davidabad generic Deployer must be implemented to match with target

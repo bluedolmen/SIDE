@@ -1,4 +1,4 @@
-package com.bluexml.side.application.deployer.alfresco;
+package com.bluexml.side.deployer.alfresco;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.alfresco.repo.module.tool.ModuleManagementTool;
 
-import com.bluexml.side.application.deployer.war.WarDeployer;
+import com.bluexml.side.util.deployer.war.WarDeployer;
 
 /**
  * The ModuleManagementTool is part of alfresco-mmt.jar tool

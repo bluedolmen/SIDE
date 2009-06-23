@@ -1,12 +1,12 @@
 /**
  * 
  */
-package com.bluexml.side.application.deployer.facetmap;
+package com.bluexml.side.deployer.facetmap;
 
 import java.io.File;
 
-import com.bluexml.side.application.deployer.war.MultiWarDeployer;
-import com.bluexml.side.application.deployer.war.WarDeployer;
+import com.bluexml.side.util.deployer.war.MultiWarDeployer;
+import com.bluexml.side.util.deployer.war.WarDeployer;
 
 /**
  * @author davidabad

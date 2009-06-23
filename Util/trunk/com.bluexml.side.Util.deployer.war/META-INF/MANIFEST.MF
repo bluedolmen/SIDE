@@ -15,4 +15,4 @@ Bundle-ActivationPolicy: lazy
 Import-Package: com.bluexml.side.util.libs,
  com.bluexml.side.util.libs.zip,
  de.schlichtherle.io
-Export-Package: com.bluexml.side.application.deployer.war
+Export-Package: com.bluexml.side.util.deployer.war

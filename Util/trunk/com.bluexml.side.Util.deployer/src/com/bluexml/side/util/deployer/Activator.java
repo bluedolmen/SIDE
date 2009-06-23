@@ -1,4 +1,4 @@
-package com.bluexml.side.application.deployer.alfresco;
+package com.bluexml.side.util.deployer;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
@@ -9,7 +9,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends Plugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.bluexml.side.Application.Deployer.alfresco";
+	public static final String PLUGIN_ID = "com.bluexml.side.Application.Deployer";
 
 	// The shared instance
 	private static Activator plugin;

@@ -1,6 +1,6 @@
-package com.bluexml.side.application.deployer.alfrescoshare;
+package com.bluexml.side.deployer.alfrescoshare;
 
-import com.bluexml.side.application.deployer.war.WarDeployer;
+import com.bluexml.side.util.deployer.war.WarDeployer;
 
 public class ShareDeployer extends WarDeployer {
 

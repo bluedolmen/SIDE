@@ -1,4 +1,4 @@
-package com.bluexml.side.application.deployer.facetmap;
+package com.bluexml.side.util.deployer.war;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
@@ -9,7 +9,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends Plugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.bluexml.side.Application.deployer.facetMap";
+	public static final String PLUGIN_ID = "com.bluexml.side.Application.deployer.alfrescoShare";
 
 	// The shared instance
 	private static Activator plugin;

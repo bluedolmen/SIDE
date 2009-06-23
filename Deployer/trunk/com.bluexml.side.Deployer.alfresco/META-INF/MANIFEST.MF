@@ -20,4 +20,4 @@ Bundle-ClassPath: lib/,
  lib/jug-lgpl-2.0.0.jar,
  lib/truezip.jar,
  .
-Export-Package: com.bluexml.side.application.deployer.alfresco
+Export-Package: com.bluexml.side.deployer.alfresco

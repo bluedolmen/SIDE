@@ -1,4 +1,4 @@
-package com.bluexml.side.application.deployer.war;
+package com.bluexml.side.deployer.alfrescoshare;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;

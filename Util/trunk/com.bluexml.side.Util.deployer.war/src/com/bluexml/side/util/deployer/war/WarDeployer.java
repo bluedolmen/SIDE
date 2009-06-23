@@ -1,4 +1,4 @@
-package com.bluexml.side.application.deployer.war;
+package com.bluexml.side.util.deployer.war;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import com.bluexml.side.application.deployer.Deployer;
+import com.bluexml.side.util.deployer.Deployer;
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.zip.TrueZipHelper;
 
