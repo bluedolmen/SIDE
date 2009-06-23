@@ -1,0 +1,28 @@
+<project name="S-IDE integration module : Alfresco share upload">
+	<property name="moduleId" value="com.bluexml.side.integration.Alfressco.upload"/>
+	<property name="extensionPath" value="./extension"/>
+
+
+
+	<!-- ================================= 
+          target: buildAMP              
+         ================================= -->
+	<target name="buildAMP" depends="clean" description="description">
+		<mkdir dir="${extensionPath}"/>
+		<zip destfile="${extensionPath}/${moduleId}.amp">
+			<fileset dir="./AMP" id="id">				
+				<exclude name="**/.*"/>
+			</fileset>
+		</zip>
+	</target>
+
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+    <target name="clean" depends="" description="delete tmp and builded package">
+        <delete dir="${extensionPath}"></delete>
+    </target>
+
+	
+	
+</project>
