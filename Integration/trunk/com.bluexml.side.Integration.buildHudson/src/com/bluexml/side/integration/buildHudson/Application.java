@@ -22,14 +22,14 @@ public class Application {
 	public static String build_number = "";
 	public static String svn_revision = "";
 
+	// si au moins un paramètre n'est pas renseigné, alors on suppose que le
+	// build est lancé sans hudson
+	public static boolean parametre = true;
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
-		// si au moins un paramètre n'est pas renseigné, alors on arret
-		// l'application
-		boolean parametre = true;
 
 		String argument1 = "";
 		String argument2 = "";
@@ -68,67 +68,90 @@ public class Application {
 						.println("Vous devez renseigner le chemin vers la copie locale du répository (ex: /root/.hudson/jobs/'project name'/workspace)");
 			}
 
+			// Si des paramètres sont en entrée
 		} else if (parametre) {
 
 			workspace = argument1;
 			build_number = argument2;
 			svn_revision = argument3;
 
-			System.out.println("****************************************");
-			System.out.println("**** Lancement du Build Automatique ****");
-			System.out.println("****************************************");
+		} else {
 
-			System.out.println("\nLancé le " + Utils.getDate2() + " à "
-					+ Utils.getTime());
+			workspace = Utils.getBuildDirectory();
+		}
+		System.out.println("****************************************");
+		System.out.println("**** Lancement du Build Automatique ****");
+		System.out.println("****************************************");
+
+		System.out.println("\nLancé le " + Utils.getDate2() + " à "
+				+ Utils.getTime());
+
+		// création du buildSVN.xml
+		System.out.println("\n- Création de " + Utils.getBuildPath()
+				+ File.separator + "buildSVN.xml");
+		createFile(getCorpsSVN(), Utils.getBuildPath(), "buildSVN.xml");
+		
+		if (parametre) {
+			// Mise à jour des numéros de version en fonction du fichier de log
+			System.out
+					.println("\nMise à jour des numéros de version (si besoin)...");
+
+			Utils.traitementUpdateHudson();
+		} else {
+			// Execution du buildSVN.xml
+			System.out.println("\nRéalisation du checkout et du update...");
+			execBuild("buildSVN", "build");
 
 			// Mise à jour des numéros de version en fonction du fichier de log
 			System.out
 					.println("\nMise à jour des numéros de version (si besoin)...");
+
 			Utils.traitementUpdate();
+		}
+		// création du build.xml
+		System.out.println("\n\n- Création de " + Utils.getBuildPath()
+				+ File.separator + "build.xml");
+		createFile(getCorpsBuild(), Utils.getBuildPath(), "build.xml");
 
-			// création du build.xml
-			System.out.println("\n\n- Création de " + Utils.getBuildPath()
-					+ File.separator + "build.xml");
-			createFile(getCorpsBuild(), Utils.getBuildPath(), "build.xml");
+		// création du buildAuto.product
+		System.out.println("- Création du buildAuto.product");
+		createFile(getCorpsProduct(), Utils.getBuildPath(), "buildAuto.product");
 
-			// création du buildAuto.product
-			System.out.println("- Création du buildAuto.product");
-			createFile(getCorpsProduct(), Utils.getBuildPath(),
-					"buildAuto.product");
-
+		if (parametre) {
 			// copie du répository dans le repertoire de travail (en séparant
 			// les plugins et les features)
 			Utils.preTraitement();
-
-			// Execution du build.xml
-			System.out.println("\nRéalisation du Build...");
-			execBuild("build", "build");
-
-			// création du site.xml
-			System.out.println("\nUpdate du site.xml");
-			// createFile(getCorpsSite(), Utils.getBuildPath(), "site.xml");
-			Utils.updateSiteXml();
-
-			// traitement final
-
-			// Commit
-			System.out
-					.println("\nCommit des modifications sur le répository...");
-			execBuild("build", "svnCommit");
-
-			// Déplacement et suppression des répertoires
-			System.out.println("\nDéplacement et suppression des répertoires");
-			Utils.finalTraitement();
-
-			System.out.println("\nFINISH !");
-		} else {
-			System.out.println("Pas de paramètres...");
-			System.out.println("\nIndiquez soit:");
-			System.out
-					.println("\t. '-copy' -> pour copier l'update site vers le répository final");
-			System.out
-					.println("\t. '-copyright' -> pour remplacer le texte du copyright et de la licence par celui indiqué dans le build.properties");
 		}
+		// Execution du build.xml
+		System.out.println("\nRéalisation du Build...");
+		execBuild("build", "build");
+
+		// création du site.xml
+		System.out.println("\nUpdate du site.xml");
+		// createFile(getCorpsSite(), Utils.getBuildPath(), "site.xml");
+		Utils.updateSiteXml();
+
+		// traitement final
+
+		// Commit
+		System.out.println("\nCommit des modifications sur le répository...");
+		execBuild("buildSVN", "svnCommit");
+
+		// Déplacement et suppression des répertoires
+		System.out.println("\nDéplacement et suppression des répertoires");
+		Utils.finalTraitement();
+
+		System.out.println("\nFINISH !");
+		/*
+		 * }
+		 * 
+		 * else { System.out.println("Pas de paramètres...");
+		 * System.out.println("\nIndiquez soit:"); System.out.println(
+		 * "\t. '-copy' -> pour copier l'update site vers le répository final");
+		 * System.out.println(
+		 * "\t. '-copyright' -> pour remplacer le texte du copyright et de la licence par celui indiqué dans le build.properties"
+		 * ); }
+		 */
 	}
 
 	/**
@@ -196,22 +219,12 @@ public class Application {
 		String out = "<?xml version=\"1.0\"?>\n";
 		out += "<project name=\"build\" default=\"build\">\n";
 		out += "\t<property file=\"build.properties\" />\n";
-		out += "\t<property name=\"antLib\" value=\"" + Utils.getBuildPath()
-				+ File.separator + "lib\" />\n\n";
-		out += "\t<!-- load the svn task -->\n";
-		out += "\t<path id=\"project.classpath.ant\">\n";
-		out += "\t\t<pathelement location=\"${antLib}" + File.separator
-				+ "svnant.jar\" />\n";
-		out += "\t\t<pathelement location=\"${antLib}" + File.separator
-				+ "svnClientAdapter.jar\" />\n";
-		out += "\t\t<pathelement location=\"${antLib}" + File.separator
-				+ "svnjavahl.jar\" />\n";
-		out += "\t</path>\n";
-		out += "\t<taskdef resource=\"svntask.properties\" classpathref=\"project.classpath.ant\" />\n";
 
-		// out +=
-		// "\n\t<target name=\"build\" depends=\"init, pde-build, post-build\" />\n";
-		out += "\n\t<target name=\"build\" depends=\"pde-build, post-build\" />\n";
+		if (parametre) {
+			out += "\n\t<target name=\"build\" depends=\"pde-build, post-build\" />\n";
+		} else {
+			out += "\n\t<target name=\"build\" depends=\"init, pde-build, post-build\" />\n";
+		}
 
 		out += "\n\t<!-- ================================= \n";
 		out += "\t\t\ttarget: init\n";
@@ -272,8 +285,6 @@ public class Application {
 
 		out += "\t</target>\n";
 
-		out += getTargetSvnCommit();
-
 		out += "</project>\n";
 		return out;
 	}
@@ -285,8 +296,8 @@ public class Application {
 		String out = "<?xml version=\"1.0\"?>\n";
 		out += "<project name=\"build\" default=\"build\">\n";
 		out += "\t<property file=\"build.properties\" />\n";
-		out += "\t<property name=\"antLib\" value=\"." + File.separator
-				+ "lib\" />\n\n";
+		out += "\t<property name=\"antLib\" value=\"" + Utils.getBuildPath()
+				+ File.separator + "lib\" />\n\n";
 		out += "\t<!-- load the svn task -->\n";
 		out += "\t<path id=\"project.classpath.ant\">\n";
 		out += "\t\t<pathelement location=\"${antLib}" + File.separator
@@ -522,9 +533,7 @@ public class Application {
 	 */
 	private static String getTargetSvnCommit() {
 		String[] projects = Utils.getProjects();
-		String[] tmp = null;
-		String path = "";
-
+		
 		String out = "\n\t<!-- ================================= \n";
 		out += "\t\t\ttarget: svnCommit\n";
 		out += "\t================================= -->\n\n";
@@ -532,31 +541,20 @@ public class Application {
 		out += "\t<target name=\"svnCommit\" depends=\"\" description=\"description\">\n";
 
 		out += "\t\t<svn>\n";
-		out += "\t\t\t<commit message=\"buildAuto du " + getDate() + "\">\n";
+		out += "\t\t\t<commit message=\"buildAuto du " + Utils.getDate2() + "\">\n";
 		for (int i = 0; i < projects.length; i++) {
-
-			tmp = projects[i].split("\\.");
-
-			if (tmp[3].equals("Util")) {
-				tmp[3] = "Utils";
-			}
-
-			path = Application.workspace + File.separator + "S-IDE"
-					+ File.separator + tmp[3] + File.separator + "trunk";
 
 			// si le mot 'feature' n'est pas présent dans le nom du projet
 			if (projects[i].indexOf("feature") == -1
 					&& !projects[i].equals("com.bluexml.side.Util")) {
-				out += "\t\t\t<fileset dir=\"" + path + File.separator
-						+ projects[i] + File.separator + "META-INF\">\n";
+				out += "\t\t\t<fileset dir=\"" + Utils.getPathToLocalCopy(projects[i]) + File.separator + "META-INF\">\n";
 				out += "\t\t\t\t<include name=\"MANIFEST.MF\" />\n";
 				out += "\t\t\t</fileset>\n";
 
 			} // si 'feature' est présent
 			else if (projects[i].indexOf("feature") != -1
 					|| projects[i].equals("com.bluexml.side.Util")) {
-				out += "\t\t\t<fileset dir=\"" + path + File.separator
-						+ projects[i] + "\">\n";
+				out += "\t\t\t<fileset dir=\"" + Utils.getPathToLocalCopy(projects[i]) + "\">\n";
 				out += "\t\t\t\t<include name=\"feature.xml\" />\n";
 				out += "\t\t\t</fileset>\n";
 			}
@@ -566,10 +564,6 @@ public class Application {
 
 		out += "\t</target>\n";
 		return out;
-	}
-
-	public static String getDate() {
-		return new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 	}
 
 }

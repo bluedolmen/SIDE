@@ -28,6 +28,7 @@ import com.bluexml.side.integration.buildHudson.Application;
 public class Utils {
 
 	private static ArrayList<String> listeFeatureModif = new ArrayList<String>();
+	private static String revisionNumber;
 
 	/**
 	 * Méthode qui ouvre le fichier de proprerties
@@ -139,7 +140,8 @@ public class Utils {
 	}
 
 	/**
-	 * Return the equinox launcher directory version: gtk.linux.x86_1.0.101.R34x_v20080805
+	 * Return the equinox launcher directory version:
+	 * gtk.linux.x86_1.0.101.R34x_v20080805
 	 */
 	public static String getEquinoxLauncherDirectoryVersion() {
 		return ouvrirFichier("build.properties").getProperty(
@@ -162,10 +164,18 @@ public class Utils {
 	}
 
 	/**
-	 * Retourne le numéro de version
+	 * Retourne le numéro de version en fonction de l'utilisation de hudson ou
+	 * non
 	 */
 	public static String getRevisionNumber() {
-		return Application.svn_revision;
+		String number = "";
+		if (Application.parametre) {
+			number = Application.svn_revision;
+		} else {
+			number = revisionNumber;
+		}
+
+		return number;
 	}
 
 	/**
@@ -178,21 +188,12 @@ public class Utils {
 	public static String getVersionNumber(String projectName) {
 		String version = "";
 
-		String[] tmp = projectName.split("\\.");
-
-		if (tmp[3].equals("Util")) {
-			tmp[3] = "Utils";
-		}
-
-		String path = Application.workspace + File.separator + "S-IDE"
-				+ File.separator + tmp[3] + File.separator + "trunk";
-
 		// En fonction du type du projet (feature ou plugin)
 		// on ira regarder soit dans le MANIFEST ou alors dans le feature.xml
 		if (projectName.indexOf("feature") == -1
 				&& !projectName.equals("com.bluexml.side.Util")) {
 			version = ouvrirFichier(
-					path + File.separator + projectName + File.separator
+					getPathToLocalCopy(projectName) + File.separator
 							+ "META-INF" + File.separator + "MANIFEST.MF")
 					.getProperty("Bundle-Version");
 		} else {
@@ -204,8 +205,7 @@ public class Utils {
 			try {
 				// On crée un nouveau document JDOM avec en argument le fichier
 				// XML
-				document = sxb.build(new File(path + File.separator
-						+ projectName + File.separator + "feature.xml"));
+				document = sxb.build(new File(getPathToLocalCopy(projectName) + File.separator + "feature.xml"));
 			} catch (Exception e) {
 			}
 
@@ -224,55 +224,79 @@ public class Utils {
 	 * getBuildDirectory() en séparant les features et les plugins
 	 */
 	public static void preTraitement() {
-	
+
 		String[] projects = getProjects();
-	
+
 		String[] tmp = null;
-	
+
 		String path = "";
-	
+
 		try {
-	
+
 			// suppression du dossier final s'il éxiste
 			if (new File(getBuildDirectory()).exists()) {
 				FileHelper.deleteFile(new File(getBuildDirectory()));
 			}
 			new File(getBuildDirectory()).mkdir();
-	
+
 			for (int i = 0; i < projects.length; i++) {
-	
+
 				tmp = projects[i].split("\\.");
-	
+
 				if (tmp[3].equals("Util")) {
 					tmp[3] = "Utils";
 				}
-	
+
 				path = Application.workspace + File.separator + "S-IDE"
 						+ File.separator + tmp[3] + File.separator + "trunk";
-	
+
 				if (projects[i].indexOf("feature") == -1
 						&& !projects[i].equals("com.bluexml.side.Util")) {
-	
+
 					FileHelper.copyFiles(new File(path + File.separator
 							+ projects[i]), new File(getBuildDirectory()
 							+ File.separator + "plugins" + File.separator
 							+ projects[i]), true);
 				}
-	
+
 				else {
-	
+
 					FileHelper.copyFiles(new File(path + File.separator
 							+ projects[i]), new File(getBuildDirectory()
 							+ File.separator + "features" + File.separator
 							+ projects[i]), true);
-	
 				}
-	
+
 			}
-	
+
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	public static String getPathToLog() {
+		String path = "";
+
+		// Si on utilise Hudson
+		if (Application.parametre) {
+
+			// le chemin 'Application.workspace' est sous la forme
+			// 'chemin/vers/workspace' et on ne veut pas le 'workspace' a la
+			// fin, on va donc le supprimer du chemin et ajouter 'builds' a la
+			// place et le numéro de build
+			path = Application.workspace.substring(0, Application.workspace
+					.length()
+					- "workspace".length());
+			path = path + "builds" + File.separator + Application.build_number;
+
+			path = path + File.separator + "log";
+
+		} else {
+
+			path = getBuildPath() + File.separator + "logbuildSVNbuild.txt";
+		}
+
+		return path;
 	}
 
 	/**
@@ -280,66 +304,57 @@ public class Utils {
 	 * et regarde si des updates ont été fait et ainsi, changer le numéro de
 	 * version du projet concerné
 	 */
-	public static void traitementUpdate() {
-	
+	public static void traitementUpdateHudson() {
+
 		ArrayList<String> listeProjetReels = new ArrayList<String>();
-	
+
 		String[] projects = getProjects();
-	
+
 		for (int i = 0; i < projects.length; i++) {
 			listeProjetReels.add(projects[i]);
 		}
-	
+
 		boolean end = false;
-		String path = "";
-		// le chemin 'Application.workspace' est sous la forme
-		// 'chemin/vers/workspace' et on ne veut pas le 'workspace' a la
-		// fin, on va donc le supprimer du chemin et ajouter 'builds' a la
-		// place et le numéro de build
-		path = Application.workspace.substring(0, Application.workspace
-				.length()
-				- "workspace".length());
-		path = path + "builds" + File.separator + Application.build_number;
-	
+
 		ArrayList<String> listePlugin = new ArrayList<String>();
-	
+
 		// si on ne force pas la mise a jour du numéro de version
 		if ("".equals(getForceNumberVersion())) {
 			String ligne = "";
 			String modif = "";
 			ArrayList<String> listeProjet = new ArrayList<String>();
 			boolean update = false;
-	
+
 			// ouverture d'un flux du fichier
 			try {
 				BufferedReader ficTexte = new BufferedReader(new FileReader(
-						new File(path + File.separator + "log")));
-	
+						new File(getPathToLog())));
+
 				if (ficTexte == null) {
 					throw new FileNotFoundException("Fichier non trouvé");
 				}
-	
+
 				// Analyse et copie de chaque ligne
 				while ((ligne = ficTexte.readLine()) != null && !end) {
-	
+
 					// condition pour ne pas traiter les logs du checkout
 					if (ligne.startsWith("************")) {
 						end = true;
 					}
-	
+
 					// condition pour ne pas traiter les logs du checkout
 					if (ligne.indexOf("Updating " + Utils.getRepository()) != -1) {
 						update = true;
 					}
 					if (!"".equals(ligne) && !end) {
-	
+
 						if (update) {
-	
+
 							if ((ligne.charAt(0) == 'A'
 									|| ligne.charAt(0) == 'U' || ligne
 									.charAt(0) == 'D')
 									&& ligne.charAt(1) == ' ' && update) {
-	
+
 								modif = ligne.substring(1, ligne.length());
 								modif.trim();
 								String[] proj = modif.split(File.separator);
@@ -347,16 +362,16 @@ public class Utils {
 									listeProjet.add(proj[2]);
 							}
 						}
-	
+
 					}
 				}
-	
+
 			} catch (FileNotFoundException e) {
 				e.getMessage();
 			} catch (IOException e1) {
 				e1.getMessage();
 			}
-	
+
 			// on parcours la liste des projets qui ont été modifié
 			for (String element : listeProjet) {
 				if (listeProjetReels.contains(element)) {
@@ -370,33 +385,33 @@ public class Utils {
 				} else {
 					listeProjet.remove(element);
 				}
-	
+
 			}
-	
+
 			// si on force la mise a jour du numéro de version
 		} else {
-	
+
 			for (int i = 0; i < projects.length; i++) {
 				if (projects[i].indexOf("feature") == -1
 						&& !projects[i].equals("com.bluexml.side.Util"))
 					listePlugin.add(projects[i]);
 			}
-	
+
 		}
-	
+
 		// On parcours la liste des plugins et on les met a jour
 		for (String plugin : listePlugin) {
 			updateVersionNumber(plugin);
-	
+
 		}
-	
+
 		// On fait la meme chose mais pour toutes les features
 		for (int i = 0; i < projects.length; i++) {
 			if (projects[i].indexOf("feature") != -1
 					|| projects[i].equals("com.bluexml.side.Util"))
 				updateVersionNumber(projects[i]);
 		}
-	
+
 		// affichage des données
 		if (listePlugin.size() != 0) {
 			System.out.println("\nListe des plugins modifiés: ");
@@ -406,7 +421,7 @@ public class Utils {
 						+ getVersionNumber(plugin));
 			}
 		}
-	
+
 		if (listeFeatureModif.size() != 0) {
 			System.out.println("\nListe des features modifiées: ");
 			for (String feature : listeFeatureModif) {
@@ -415,6 +430,175 @@ public class Utils {
 			}
 		}
 		// fin affichage
+	}
+
+	/**
+	 * Cette méthode analyse le fichier de log (créé via le log de l'update ant)
+	 * et regarde si des updates ont été fait et ainsi, changer le numéro de
+	 * version du projet concerné
+	 */
+	public static void traitementUpdate() {
+
+		ArrayList<String> listeProjetReels = new ArrayList<String>();
+
+		String[] projects = getProjects();
+
+		for (int i = 0; i < projects.length; i++) {
+			listeProjetReels.add(projects[i]);
+		}
+
+		ArrayList<String> listePlugin = new ArrayList<String>();
+
+		// si on ne force pas la mise a jour du numéro de version
+		if ("".equals(getForceNumberVersion())) {
+			String ligne = "";
+			String modif = "";
+			ArrayList<String> listeProjet = new ArrayList<String>();
+			boolean update = false;
+
+			// ouverture d'un flux du fichier
+			try {
+				BufferedReader ficTexte = new BufferedReader(new FileReader(
+						new File(getPathToLog())));
+
+				if (ficTexte == null) {
+					throw new FileNotFoundException("Fichier non trouvé");
+				}
+
+				// Analyse et copie de chaque ligne
+				while ((ligne = ficTexte.readLine()) != null) {
+					// condition pour ne pas traiter les logs du checkout
+					if (ligne.indexOf("svnUD:") != -1) {
+						update = true;
+					}
+					if (!"".equals(ligne)) {
+
+						if (ligne.indexOf("At revision ") != -1 && update) {
+							revisionNumber = ligne.substring("At revision "
+									.length(), ligne.length() - 1);
+						} else if ((ligne.charAt(0) == 'A'
+								|| ligne.charAt(0) == 'U' || ligne.charAt(0) == 'D')
+								&& ligne.charAt(1) == ' ' && update) {
+							modif = ligne.substring(5, ligne.length());
+							modif.trim();
+							modif = modif.substring(
+									(getBuildDirectory() + "_CO").length(),
+									modif.length());
+							if (modif.indexOf("plugins") != -1)
+								modif = modif.substring((File.separator
+										+ "plugins" + File.separator).length(),
+										modif.length());
+							else
+								modif = modif
+										.substring(
+												(File.separator + "features" + File.separator)
+														.length(), modif
+														.length());
+							modif.trim();
+							if (!listeProjet.contains((String) modif
+									.subSequence(0, modif
+											.indexOf(File.separator))))
+								listeProjet.add((String) modif.subSequence(0,
+										modif.indexOf(File.separator)));
+						}
+					}
+				}
+
+			} catch (FileNotFoundException e) {
+				e.getMessage();
+			} catch (IOException e1) {
+				e1.getMessage();
+			}
+
+			// on parcours la liste des projets qui ont été modifié
+			for (String element : listeProjet) {
+				if (listeProjetReels.contains(element)) {
+					// on met tous les plugins modifiés dans un tableau
+					if (element.indexOf("feature") == -1
+							&& !element.equals("com.bluexml.side.Util"))
+						listePlugin.add(element);
+					// et tous les features dans un autre
+					else
+						listeFeatureModif.add(element);
+				} else {
+					listeProjet.remove(element);
+				}
+
+			}
+
+			// si on force la mise a jour du numéro de version
+		} else {
+
+			for (int i = 0; i < projects.length; i++) {
+				if (projects[i].indexOf("feature") == -1
+						&& !projects[i].equals("com.bluexml.side.Util"))
+					listePlugin.add(projects[i]);
+			}
+
+		}
+
+		// On parcours la liste des plugins et on les met a jour
+		for (String plugin : listePlugin) {
+			updateVersionNumber(plugin);
+
+		}
+
+		// On fait la meme chose mais pour toutes les features
+		for (int i = 0; i < projects.length; i++) {
+			if (projects[i].indexOf("feature") != -1
+					|| projects[i].equals("com.bluexml.side.Util"))
+				updateVersionNumber(projects[i]);
+		}
+
+		// affichage des données
+		if (listePlugin.size() != 0) {
+			System.out.println("\nListe des plugins modifiés: ");
+			// On parcours la liste des plugins et on les met a jour
+			for (String plugin : listePlugin) {
+				System.out.println("\t- " + plugin + ": "
+						+ getVersionNumber(plugin));
+			}
+		}
+
+		if (listeFeatureModif.size() != 0) {
+			System.out.println("\nListe des features modifiées: ");
+			for (String feature : listeFeatureModif) {
+				System.out.println("\t- " + feature + ": "
+						+ getVersionNumber(feature));
+			}
+		}
+		// fin affichage
+	}
+
+	/**
+	 * Retourne le chemin vers la copie locale du projet en fonction de
+	 * l'utilisation de hudson ou non
+	 */
+	public static String getPathToLocalCopy(String projectName) {
+		String path = "";
+		if (Application.parametre) {
+
+			String[] tmp = projectName.split("\\.");
+
+			if (tmp[3].equals("Util")) {
+				tmp[3] = "Utils";
+			}
+
+			path = Application.workspace + File.separator + "S-IDE"
+					+ File.separator + tmp[3] + File.separator + "trunk"
+					+ File.separator + projectName;
+		} else {
+			if (projectName.indexOf("feature") == -1
+					&& !projectName.equals("com.bluexml.side.Util")) {
+
+				path = Application.workspace + "_CO" + File.separator
+						+ "plugins" + File.separator + projectName;
+			} else {
+				path = Application.workspace + "_CO" + File.separator
+						+ "features" + File.separator + projectName;
+			}
+		}
+		return path;
 	}
 
 	/**
@@ -427,21 +611,12 @@ public class Utils {
 		String[] pattern = ouvrirFichier("build.properties").getProperty(
 				"number-pattern").split("\\.");
 
-		String[] tmp = projectName.split("\\.");
-
-		if (tmp[3].equals("Util")) {
-			tmp[3] = "Utils";
-		}
-
-		String path = Application.workspace + File.separator + "S-IDE"
-				+ File.separator + tmp[3] + File.separator + "trunk";
-
 		// En fonction du type du projet (feature ou plugin)
 		// on ira regarder soit dans le MANIFEST.MF ou alors dans le feature.xml
 		if (projectName.indexOf("feature") == -1
 				&& !projectName.equals("com.bluexml.side.Util")) {
 			// chemin vers le MANIFEST.MF
-			String filePluginPath = path + File.separator + projectName
+			String filePluginPath = getPathToLocalCopy(projectName)
 					+ File.separator + "META-INF" + File.separator
 					+ "MANIFEST.MF";
 
@@ -496,7 +671,7 @@ public class Utils {
 				featureAModifier = true;
 
 			// chemin vers le feature.xml
-			String fileFeaturePath = path + File.separator + projectName
+			String fileFeaturePath = getPathToLocalCopy(projectName)
 					+ File.separator + "feature.xml";
 
 			org.jdom.Document document = null;
@@ -622,30 +797,30 @@ public class Utils {
 	 * 
 	 */
 	public static void updateSiteXml() {
-	
+
 		// chemin vers le feature.xml
 		String fileSitePath = getBuildPath() + File.separator + "site.xml";
 		// String fileSitePath = getFinalDirectory()+ File.separator +
 		// getArchivePrefix() + File.separator+ "site.xml";
 		String[] projects = getProjects();
-	
+
 		// tableau qui contiendra la liste des features
 		ArrayList<String> listeFeature = new ArrayList<String>();
-	
+
 		// on met tous les features dans le tableau
 		for (int i = 0; i < projects.length; i++) {
-	
+
 			if (projects[i].indexOf("feature") != -1
 					|| projects[i].equals("com.bluexml.side.Util"))
 				listeFeature.add(projects[i]);
 		}
-	
+
 		org.jdom.Document document = null;
 		Element racine;
-	
+
 		// On crée une instance de SAXBuilder
 		SAXBuilder sxb = new SAXBuilder();
-	
+
 		try {
 			// On crée un nouveau document JDOM avec en argument le fichier
 			// XML
@@ -653,18 +828,18 @@ public class Utils {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
+
 		// On initialise un nouvel élément racine avec l'élément racine du
 		// document.
 		racine = document.getRootElement();
-	
+
 		// On crée une List contenant tous les noeuds "feature" de
 		// l'Element racine
 		List<?> listFeatures = racine.getChildren("feature");
-	
+
 		// On crée un Iterator sur notre liste
 		Iterator<?> i = listFeatures.iterator();
-	
+
 		// Boucle qui permet de mettre à jour le numéro de version de chaque
 		// feature
 		while (i.hasNext()) {
@@ -672,43 +847,43 @@ public class Utils {
 			// pouvoir utiliser les méthodes propres aux Element comme :
 			// selectionner un noeud fils, modifier du texte, etc...
 			Element courant = (Element) i.next();
-	
+
 			// on regarde si l'élément parcouru est dans le tableau de features
 			if (listeFeature.contains(courant.getAttributeValue("id"))) {
 				// on supprime le feature de la liste
 				listeFeature.remove(courant.getAttributeValue("id"));
-	
+
 				// On modifie le numéro de version du plugin courant
 				courant.setAttribute("version", getVersionNumber(courant
 						.getAttributeValue("id")));
-	
+
 				courant.setAttribute("url", "features/"
 						+ courant.getAttributeValue("id") + "_"
 						+ getVersionNumber(courant.getAttributeValue("id"))
 						+ ".jar");
 			}
 		}
-	
+
 		// on parcourt le tableau de feature
 		// on va ajouter les features présentes dans le tableau (et donc qui ne
 		// sont pas présentes dans le site.xml) et les ajouter au site.xml
-	
+
 		for (String feature : listeFeature) {
 			Element newElement = new Element("feature");
-	
+
 			newElement.setAttribute("url", "features/" + feature + "_"
 					+ getVersionNumber(feature) + ".jar");
 			newElement.setAttribute("id", feature);
 			newElement.setAttribute("version", getVersionNumber(feature));
-	
+
 			Element newCategory = new Element("category");
-	
+
 			newCategory.setAttribute("name", "S-IDE " + getNewCategory());
-	
+
 			newElement.addContent(newCategory);
 			racine.addContent(newElement);
 		}
-	
+
 		// Enregistrement du fichier
 		try {
 			XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
@@ -764,7 +939,7 @@ public class Utils {
 			// copie des fichiers de log (pour tout le traitment)
 
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
-					+ "logbuildsvnCommit.txt"), new File(getFinalDirectory()
+					+ "logbuildSVNsvnCommit.txt"), new File(getFinalDirectory()
 					+ File.separator + "Logs" + File.separator
 					+ "logCommit.txt"), true);
 
@@ -772,11 +947,14 @@ public class Utils {
 					+ "logbuildbuild.txt"),
 					new File(getFinalDirectory() + File.separator + "Logs"
 							+ File.separator + "logBuild.txt"), true);
-			/*
-			 * FileUtils.copy(new File(getBuildPath() + File.separator +
-			 * "logbuildSVNbuild.txt"), new File( getFinalDirectory() +
-			 * File.separator + "Logs" + File.separator + "logSVN.txt"));
-			 */
+
+			if (!Application.parametre) {
+				FileHelper.copyFiles(new File(getBuildPath() + File.separator
+						+ "logbuildSVNbuild.txt"), new File(getFinalDirectory()
+						+ File.separator + "Logs" + File.separator
+						+ "logSVN.txt"), true);
+			}
+
 			// copie des fichiers compilés
 			new File(getFinalDirectory() + File.separator + "bin").mkdir();
 
@@ -809,9 +987,11 @@ public class Utils {
 
 			// suppression des fichiers de logs
 			FileHelper.deleteFile(new File(getBuildPath() + File.separator
+					+ "logbuildSVNbuild.txt"));
+			FileHelper.deleteFile(new File(getBuildPath() + File.separator
 					+ "logbuildbuild.txt"));
 			FileHelper.deleteFile(new File(getBuildPath() + File.separator
-					+ "logbuildsvnCommit.txt"));
+					+ "logbuildSVNsvnCommit.txt"));
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -826,25 +1006,25 @@ public class Utils {
 	 * @param featureName
 	 */
 	public static void updateCopyrightLicence(String featureName) {
-	
+
 		String[] tmp = featureName.split("\\.");
-	
+
 		if (tmp[3].equals("Util")) {
 			tmp[3] = "Utils";
 		}
-	
+
 		String path = Application.workspace + File.separator + "S-IDE"
 				+ File.separator + tmp[3] + File.separator + "trunk";
-	
+
 		String fileFeaturePath = path + File.separator + featureName
 				+ File.separator + "feature.xml";
-	
+
 		org.jdom.Document document = null;
 		org.jdom.Element racine;
-	
+
 		// On crée une instance de SAXBuilder
 		SAXBuilder sxb = new SAXBuilder();
-	
+
 		try {
 			// On crée un nouveau document JDOM avec en argument le fichier
 			// XML
@@ -852,15 +1032,15 @@ public class Utils {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
+
 		// On initialise un nouvel élément racine avec l'élément racine du
 		// document.
 		racine = document.getRootElement();
-	
+
 		// On crée une List contenant tous les noeuds "copyright" de
 		// l'Element racine
 		List<?> listCopyright = racine.getChildren("copyright");
-	
+
 		// On crée un Iterator sur notre liste
 		Iterator<?> i = listCopyright.iterator();
 		// on va parcourir tous les plugins
@@ -869,18 +1049,18 @@ public class Utils {
 			// pouvoir utiliser les méthodes propres aux Element comme :
 			// selectionner un noeud fils, modifier du texte, etc...
 			Element courant = (Element) i.next();
-	
+
 			// on applique le texte du copyright
 			courant.setText(getCopyrightText());
-	
+
 			// on change l'url du copyright
 			courant.setAttribute("url", getCopyrightURL());
 		}
-	
+
 		// On crée une List contenant tous les noeuds "license" de
 		// l'Element racine
 		List<?> listLicense = racine.getChildren("license");
-	
+
 		// On crée un Iterator sur notre liste
 		Iterator<?> j = listLicense.iterator();
 		// on va parcourir tous les plugins
@@ -889,14 +1069,14 @@ public class Utils {
 			// pouvoir utiliser les méthodes propres aux Element comme :
 			// selectionner un noeud fils, modifier du texte, etc...
 			Element courant = (Element) j.next();
-	
+
 			// on applique le texte du license
 			courant.setText(getLicenceText());
-	
+
 			// on change l'url du license
 			courant.setAttribute("url", getlicenceURL());
 		}
-	
+
 		// Enregistrement du fichier
 		try {
 			XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
@@ -906,7 +1086,7 @@ public class Utils {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	
+
 	}
 
 	private static String getlicenceURL() {
