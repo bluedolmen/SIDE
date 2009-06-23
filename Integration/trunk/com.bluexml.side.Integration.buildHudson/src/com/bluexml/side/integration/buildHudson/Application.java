@@ -90,7 +90,7 @@ public class Application {
 		System.out.println("\n- Création de " + Utils.getBuildPath()
 				+ File.separator + "buildSVN.xml");
 		createFile(getCorpsSVN(), Utils.getBuildPath(), "buildSVN.xml");
-		
+
 		if (parametre) {
 			// Mise à jour des numéros de version en fonction du fichier de log
 			System.out
@@ -221,9 +221,9 @@ public class Application {
 		out += "\t<property file=\"build.properties\" />\n";
 
 		if (parametre) {
-			out += "\n\t<target name=\"build\" depends=\"pde-build, post-build\" />\n";
+			out += "\n\t<target name=\"build\" depends=\"pde-build, post-build, genJavadoc\" />\n";
 		} else {
-			out += "\n\t<target name=\"build\" depends=\"init, pde-build, post-build\" />\n";
+			out += "\n\t<target name=\"build\" depends=\"init, pde-build, post-build, genJavadoc\" />\n";
 		}
 
 		out += "\n\t<!-- ================================= \n";
@@ -284,6 +284,8 @@ public class Application {
 		}
 
 		out += "\t</target>\n";
+
+		out += getGenJavadoc();
 
 		out += "</project>\n";
 		return out;
@@ -533,7 +535,7 @@ public class Application {
 	 */
 	private static String getTargetSvnCommit() {
 		String[] projects = Utils.getProjects();
-		
+
 		String out = "\n\t<!-- ================================= \n";
 		out += "\t\t\ttarget: svnCommit\n";
 		out += "\t================================= -->\n\n";
@@ -541,26 +543,63 @@ public class Application {
 		out += "\t<target name=\"svnCommit\" depends=\"\" description=\"description\">\n";
 
 		out += "\t\t<svn>\n";
-		out += "\t\t\t<commit message=\"buildAuto du " + Utils.getDate2() + "\">\n";
+		out += "\t\t\t<commit message=\"buildAuto du " + Utils.getDate2()
+				+ "\">\n";
 		for (int i = 0; i < projects.length; i++) {
 
 			// si le mot 'feature' n'est pas présent dans le nom du projet
 			if (projects[i].indexOf("feature") == -1
 					&& !projects[i].equals("com.bluexml.side.Util")) {
-				out += "\t\t\t<fileset dir=\"" + Utils.getPathToLocalCopy(projects[i]) + File.separator + "META-INF\">\n";
+				out += "\t\t\t<fileset dir=\""
+						+ Utils.getPathToLocalCopy(projects[i])
+						+ File.separator + "META-INF\">\n";
 				out += "\t\t\t\t<include name=\"MANIFEST.MF\" />\n";
 				out += "\t\t\t</fileset>\n";
 
 			} // si 'feature' est présent
 			else if (projects[i].indexOf("feature") != -1
 					|| projects[i].equals("com.bluexml.side.Util")) {
-				out += "\t\t\t<fileset dir=\"" + Utils.getPathToLocalCopy(projects[i]) + "\">\n";
+				out += "\t\t\t<fileset dir=\""
+						+ Utils.getPathToLocalCopy(projects[i]) + "\">\n";
 				out += "\t\t\t\t<include name=\"feature.xml\" />\n";
 				out += "\t\t\t</fileset>\n";
 			}
 		}
 		out += "\t\t\t</commit>\n";
 		out += "\t\t</svn>\n";
+
+		out += "\t</target>\n";
+		return out;
+	}
+
+	/**
+	 * Retourne le corps de la target genJavadoc
+	 */
+	private static String getGenJavadoc() {
+		String[] projects = Utils.getProjects();
+
+		if (!new File(Utils.getBuildPath() + File.separator + "doc").exists())
+			new File(Utils.getBuildPath() + File.separator + "doc").mkdir();
+
+		String out = "\n\t<!-- ================================= \n";
+		out += "\t\t\ttarget: genJavadoc\n";
+		out += "\t================================= -->\n\n";
+
+		out += "\t<target name=\"genJavadoc\" depends=\"\" description=\"description\">\n";
+		out += "\t\t<javadoc destdir=\"${buildDir}" + File.separator
+				+ "doc\">\n";
+
+		for (int i = 0; i < projects.length; i++) {
+			// si le mot 'feature' n'est pas présent dans le nom du projet
+			if (projects[i].indexOf("feature") == -1
+					&& !projects[i].equals("com.bluexml.side.Util")) {
+				out += "\t\t\t<fileset dir=\""
+						+ Utils.getPathToLocalCopy(projects[i]) + "\">\n";
+				out += "\t\t\t\t<include name=\"**/*.java\" />\n";
+				out += "\t\t\t</fileset>\n";
+			}
+		}
+		out += "\t\t</javadoc>\n";
 
 		out += "\t</target>\n";
 		return out;

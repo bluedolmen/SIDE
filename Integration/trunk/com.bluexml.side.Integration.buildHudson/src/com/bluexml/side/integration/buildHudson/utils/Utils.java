@@ -205,7 +205,8 @@ public class Utils {
 			try {
 				// On crée un nouveau document JDOM avec en argument le fichier
 				// XML
-				document = sxb.build(new File(getPathToLocalCopy(projectName) + File.separator + "feature.xml"));
+				document = sxb.build(new File(getPathToLocalCopy(projectName)
+						+ File.separator + "feature.xml"));
 			} catch (Exception e) {
 			}
 
@@ -927,6 +928,11 @@ public class Utils {
 					+ File.separator + getArchivePrefix() + File.separator
 					+ "site.xml"), true);
 
+			// copie de la doc
+			FileHelper.copyFiles(new File(getBuildPath() + File.separator
+					+ "doc"), new File(getFinalDirectory() + File.separator
+					+ "doc"), true);
+
 			// copie des fichiers compilés
 			new File(getFinalDirectory() + File.separator + "Logs").mkdir();
 
@@ -976,6 +982,9 @@ public class Utils {
 
 			// suppression du repertoire de travail
 			FileHelper.deleteFile(new File(getBuildDirectory()));
+
+			FileHelper.deleteFile(new File(getBuildPath() + File.separator
+					+ "doc"));
 
 			// suppression des fichiers créés
 			FileHelper.deleteFile(new File(Utils.getBuildPath()
