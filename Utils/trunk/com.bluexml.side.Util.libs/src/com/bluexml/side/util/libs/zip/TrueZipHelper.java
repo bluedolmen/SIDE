@@ -10,7 +10,7 @@ public class TrueZipHelper {
 	protected ArchiveDetector archiveDetector;
 
 	public TrueZipHelper() {
-		archiveDetector = new DefaultArchiveDetector("zip");
+		archiveDetector = ArchiveDetector.DEFAULT;
 	}
 
 	public TrueZipHelper(String fileExtentions) {
@@ -31,8 +31,7 @@ public class TrueZipHelper {
 	 * <li>Archive contents into a folder (unzip)</li>
 	 * <li>Archive contents into another Archive</li>
 	 * </ul>
-	 * Note : Archive contains into Archive of same type (zip included into another zip), will be unzipped too<br>
-	 * See TrueZip documentation for more details, and limitation
+	 * Note this method do not unpack archives included in the source, just the source
 	 * <a>https://truezip.dev.java.net/</a>
 	 * @param src
 	 * @param dest
@@ -42,35 +41,22 @@ public class TrueZipHelper {
 	 */
 	public boolean copyFiles(java.io.File src, java.io.File dest, boolean override) throws Exception {
 		boolean result = false;
-		File inputF = new File(src, archiveDetector);
+		File srcF = new File(src, archiveDetector);
 		File destF = new File(dest);
 		
-		if (inputF.isFile() & destF.isFile()) {
-			// copy using a new file name
-			FileHelper.copyFiles(src, dest, override);
-		} else if (inputF.isFile() & destF.isDirectory()) {
-			FileHelper.copyFiles(src, dest, override);
-			//throw new Exception("copyFile : File to Folder Not Supported !");
-		} else if (inputF.isFile() & destF.isArchive()) {
-			inputF.copyTo(destF);
-			//throw new Exception("copyFile : File to Archive Not Supported !");
-		} else if (inputF.isDirectory() & destF.isDirectory()) {
-			FileHelper.copyFiles(src, dest, override);
-			//throw new Exception("copyFile : Folder to Folder Not Supported !");
-		} else if (inputF.isDirectory() & destF.isArchive()) {
-			inputF.copyAllTo(destF);
-			//throw new Exception("copyFile : File to Archive Not Supported !");
-		} else if (inputF.isArchive() & destF.isDirectory()) {
-			inputF.archiveCopyAllTo(destF);
-			throw new Exception("copyFile : File to Archive Not Supported !");
-		} else if (inputF.isArchive() & destF.isArchive()) {
-			String fileExt = FileHelper.getFileExt(dest);
-			result = inputF.archiveCopyAllTo(destF, archiveDetector, new DefaultArchiveDetector(fileExt));
+		if (srcF.isArchive()) {
+			result = srcF.archiveCopyAllTo(destF, ArchiveDetector.NULL, ArchiveDetector.NULL);
+		} else {
+			result = srcF.copyAllTo(destF, ArchiveDetector.NULL, ArchiveDetector.NULL);
 		}
-
+		
 		// mandatory call see TrueZip doc
 		File.update();
 		return result;
 	}
 
+	
+	public boolean isDirectory(File f) {
+		return f.isDirectory() && !f.isArchive();
+	}
 }
