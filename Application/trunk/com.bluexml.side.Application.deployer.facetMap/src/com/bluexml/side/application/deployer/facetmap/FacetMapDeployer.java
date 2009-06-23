@@ -32,7 +32,6 @@ public class FacetMapDeployer extends MultiWarDeployer {
 			}
 
 		};
-		this.getConfigurationParameters();
 
 		addWarDeployer(webappName1, wd1);
 
