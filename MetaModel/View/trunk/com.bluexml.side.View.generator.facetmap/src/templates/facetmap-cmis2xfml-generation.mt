@@ -22,6 +22,9 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 	<%for (children){%>
            <map heading="{child::cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribute").typ!="int"{%><%mapTo.filter("Attribute").typ%><%}else{%>Integer<%}%>[@cmis:name='<%mapTo.filter("Attribute").getFullName()%>']/cmis:value}"/>
 	<%}%>
+	
+<%script type="view.FacetMap" name="getAttribute"%>
+{child::cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribute").typ!="int"{%><%mapTo.filter("Attribute").typ%><%}else{%>Integer<%}%>[@cmis:name='<%mapTo.filter("Attribute").getFullName()%>']/cmis:value}
 
 <%script type="view.FacetMap" name="cmis2xfmlGenerator"  file="<%validatedFilename%>" %>
 <?xml version="1.0" encoding="ISO-8859-1"?>
@@ -41,7 +44,9 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 	<xsl:template match="entry">
 		<xsl:variable name="ref_share" select="concat($host,$DLUrl,substring(child::id[1],10))"/>
 		<xsl:variable name="ref_alfresco" select="concat($host,$ViewURL,substring(child::id[1],10),'/',child::title[1])"/>       
-		<resource title="{child::title[1]}" href="{concat($ref_alfresco,'+',$ref_share)}">
+		<resource
+			title="<%for (children.getInnerView.getAttrivutes){%><%getAttribute(mapTo)%><%}%>"
+			href="{concat($ref_alfresco,'+',$ref_share)}">
 		<%ressource()%>
 		</resource>
 	</xsl:template>

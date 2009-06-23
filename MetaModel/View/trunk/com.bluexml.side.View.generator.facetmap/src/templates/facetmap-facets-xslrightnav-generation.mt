@@ -14,12 +14,12 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
             /></xsl:attribute>
         <xsl:attribute name="style"/>
 	<a>
-	    <xsl:attribute name="onclick"> show_facet("facet<xsl:value-of
-	            select="@taxtitle"/>","more<xsl:value-of select="@taxtitle"
-	        />");</xsl:attribute>
+	    <xsl:attribute name="onclick"> show_facet('facet<xsl:value-of
+	            select="@taxtitle"/>','more<xsl:value-of select="@taxtitle"
+	        />');</xsl:attribute>
 	    <xsl:value-of select="count(s)-$nb_paging_facets"/> more... 
 	</a>
-        </li>
+    </li>
 </xsl:if>
 	
 <%script type="view.FacetMap" name="morePagingFacetDisplay"%>
@@ -66,8 +66,8 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
             	<%if (name == "hideFacets"){%>
             		<a>
 					    <xsl:attribute name="name">hideLink<xsl:value-of select="@taxtitle"/></xsl:attribute>
-					    <xsl:attribute name="onclick"> hide_facets("facets<xsl:value-of
-					        select="@taxtitle"/>","hideLink<xsl:value-of select="@taxtitle"/>");</xsl:attribute>
+					    <xsl:attribute name="onclick"> hide_facets('facets<xsl:value-of
+					        select="@taxtitle"/>','hideLink<xsl:value-of select="@taxtitle"/>');</xsl:attribute>
 					    (hide)
 					</a>
             	<%}%>
@@ -96,6 +96,15 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
             <a href="{$server}/{$app2}/{$pre_reference_url}{@ref}"
                 onclick="show_selection('{$server}/{$app}/{$pre_reference_url}{@ref}')">
                 <xsl:value-of select="@title"/>(<xsl:value-of select="@resultcount"/>) </a>
+        </li>   <xsl:attribute name="name">more<xsl:value-of select="@taxtitle"
+            /></xsl:attribute>
+        <xsl:attribute name="style"/>
+	<a>
+	    <xsl:attribute name="onclick"> show_facet('facet<xsl:value-of
+	            select="@taxtitle"/>','more<xsl:value-of select="@taxtitle"
+	        />');</xsl:attribute>
+	    <xsl:value-of select="count(s)-$nb_paging_facets"/> more... 
+	</a>
         </li>
     </xsl:template>
 </xsl:transform>

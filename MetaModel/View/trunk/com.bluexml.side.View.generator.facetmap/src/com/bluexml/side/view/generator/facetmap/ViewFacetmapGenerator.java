@@ -58,17 +58,19 @@ public class ViewFacetmapGenerator extends AbstractAcceleoGenerator implements F
 	 */
 	@Override
 	protected List<String> getTemplates() {
-			List<String> result = new ArrayList<String>();
+			List<String> templates = new ArrayList<String>();
 				//common
-				result.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-cmis2xfml-generation.mt");
-				result.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-cmis-generation.mt");
-				result.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-cmis-properties-generation.mt");
-				result.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-propertyfile-generation.mt");
+				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-cmis2xfml-generation.mt");
+				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-cmis-generation.mt");
+				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-cmis-properties-generation.mt");
+				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-propertyfile-generation.mt");
 				//facets
-				result.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-buildproperties-generation.mt");
-				result.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslbasicfacets-generation.mt");
-				result.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslrightnav-generation.mt");
-			return result;
+				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-buildproperties-generation.mt");
+				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslbasicfacets-generation.mt");
+				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslrightnav-generation.mt");
+				//results
+				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-content-basicresults-generation.mt");
+			return templates;
 	}
 
 	/* (non-Javadoc)
@@ -101,6 +103,7 @@ public class ViewFacetmapGenerator extends AbstractAcceleoGenerator implements F
 		FileHelper.copyFiles(new File(folder + "common"), new File(destFacets), true);
 		FileHelper.copyFiles(new File(folder + "common"), new File(destContent), true);
 		FileHelper.copyFiles(new File(folder + "facets"), new File(destFacets), true);
+		FileHelper.copyFiles(new File(folder + "content"), new File(destFacets), true);
 		//Zip
 		String zipFolder = IFileHelper.getSystemFolderPath(getTargetPath()+FILESEP+getTechVersion())+FILESEP;
 		new File(zipFolder).mkdirs();
