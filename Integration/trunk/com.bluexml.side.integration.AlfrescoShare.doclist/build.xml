@@ -12,7 +12,7 @@
 	<!-- ================================= 
           target: buildExtension              
          ================================= -->
-	<target name="buildExtension" depends="" description="build extension archive for alfresco share">
+	<target name="buildExtension" depends="clean" description="build extension archive for alfresco share">
 		<delete dir="${tmpFolder}" failonerror="false" />
 		<mkdir dir="${tmpFolder}/${docLibPath} " />
 		<mkdir dir="${extensionFolder}" />
@@ -40,5 +40,14 @@
 			</fileset>
 		</unzip>
 	</target>
+
+	
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+    <target name="clean" depends="" description="delete tmp and builded extension">
+    	<delete dir="${tmpFolder}" failonerror="false" />
+    	<delete dir="${extensionFolder}" failonerror="false" />
+    </target>
 
 </project>
