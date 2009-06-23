@@ -16,13 +16,13 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ocl.ecore,
  org.eclipse.core.resources,
  com.bluexml.side.Util.libs,
- com.bluexml.side.Application.generator.acceleo,
- com.bluexml.side.Application.generator.alfresco,
- com.bluexml.side.Application.generator,
+ com.bluexml.side.Util.generator.acceleo,
+ com.bluexml.side.Util.generator.alfresco,
+ com.bluexml.side.Util.generator,
  com.bluexml.side.Application,
  com.bluexml.side.Application.security,
  com.bluexml.side.Application.log,
- com.bluexml.side.Settings
+ com.bluexml.side.Util.settings
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Import-Package: fr.obeo.acceleo.gen.template.eval

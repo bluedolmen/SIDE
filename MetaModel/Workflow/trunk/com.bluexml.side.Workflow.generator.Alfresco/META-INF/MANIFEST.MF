@@ -9,9 +9,9 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,
  com.bluexml.side.Application,
- com.bluexml.side.Application.generator,
- com.bluexml.side.Application.generator.acceleo,
- com.bluexml.side.Application.generator.alfresco,
+ com.bluexml.side.Util.generator,
+ com.bluexml.side.Util.generator.acceleo,
+ com.bluexml.side.Util.generator.alfresco,
  javax.xml,
  org.eclipse.emf.ecore.xmi,
  com.bluexml.side.Util.ecore;bundle-version="1.0.1",
@@ -22,7 +22,7 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.Application.editor;bundle-version="1.0.0",
  com.bluexml.side.Application.ui;bundle-version="1.0.3",
  com.bluexml.side.Application.security,
- com.bluexml.side.Settings;bundle-version="1.0.8"
+ com.bluexml.side.Util.settings;bundle-version="1.0.8"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.workflow.generator.alfresco

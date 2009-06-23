@@ -8,7 +8,7 @@ Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  com.bluexml.side.Application,
- com.bluexml.side.Application.deployer,
+ com.bluexml.side.Util.deployer,
  com.bluexml.side.Application.security,
  com.bluexml.side.Util.libs,
  com.bluexml.side.Class.generator.report;bundle-version="1.0.0"
