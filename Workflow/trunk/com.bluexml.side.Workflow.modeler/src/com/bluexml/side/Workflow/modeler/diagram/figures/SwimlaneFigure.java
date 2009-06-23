@@ -39,6 +39,7 @@ public class SwimlaneFigure extends
 
 	@Override
 	protected IFigure createBodyFigure() {
+		// TODO : change with imageFigure using binary icon
 		ManFigure man = new ManFigure();
 		man.setSize(30, 30);
 		return man;
