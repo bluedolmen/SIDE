@@ -102,14 +102,14 @@ public class Packager {
 		File ampRoot = getWorkingFolder();
 
 		Map<String, File> mapper = new HashMap<String, File>();
-		mapper.put("/WEB-INF/classes/", createAndRegisterDir(ampRoot, "/config"));
+		mapper.put("alfresco/WEB-INF/classes/", createAndRegisterDir(ampRoot, "/config"));
 		mapper.put("/config/", createAndRegisterDir(ampRoot, "/config"));
-		mapper.put("/lib/", createAndRegisterDir(ampRoot, "/lib"));
+		mapper.put("/alfresco/lib/", createAndRegisterDir(ampRoot, "/lib"));
 		mapper.put("/licences/", createAndRegisterDir(ampRoot, "/licenses"));
-		mapper.put("/jsp/", createAndRegisterDir(ampRoot, "/web/jsp"));
-		mapper.put("/css/", createAndRegisterDir(ampRoot, "/web/css"));
-		mapper.put("/images/", createAndRegisterDir(ampRoot, "/web/images"));
-		mapper.put("/scripts/", createAndRegisterDir(ampRoot, "/web/scripts"));
+		mapper.put("/alfresco/jsp/", createAndRegisterDir(ampRoot, "/web/jsp"));
+		mapper.put("/alfresco/css/", createAndRegisterDir(ampRoot, "/web/css"));
+		mapper.put("/alfresco/images/", createAndRegisterDir(ampRoot, "/web/images"));
+		mapper.put("/alfresco/scripts/", createAndRegisterDir(ampRoot, "/web/scripts"));
 		return mapper;
 	}
 
