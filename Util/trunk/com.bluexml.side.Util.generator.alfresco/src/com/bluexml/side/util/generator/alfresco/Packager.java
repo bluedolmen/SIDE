@@ -1,4 +1,4 @@
-package com.bluexml.side.application.generator.alfresco;
+package com.bluexml.side.util.generator.alfresco;
 
 import java.io.File;
 import java.io.FileNotFoundException;
