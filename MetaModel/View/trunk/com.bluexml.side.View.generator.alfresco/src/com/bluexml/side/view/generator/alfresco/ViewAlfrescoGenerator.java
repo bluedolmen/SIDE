@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
-import com.bluexml.side.application.generator.alfresco.AbstractAlfrescoGenerator;
+import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
 public class ViewAlfrescoGenerator extends AbstractAlfrescoGenerator{
 
 	
