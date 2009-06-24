@@ -32,7 +32,7 @@ version="1.0">
         sélectionnés</div>
         <hr Class="hr1" />
       </xsl:if>
-      <ul style="list-style-image: url('{$resource_base_url}/bullet.gif');">
+      <ul style="list-style-image: url('{$icons_url}/bullet.gif');">
         <li class="chosen-facet">
           <xsl:apply-templates select="s" mode="superselection" />
           <xsl:text> &gt; </xsl:text>

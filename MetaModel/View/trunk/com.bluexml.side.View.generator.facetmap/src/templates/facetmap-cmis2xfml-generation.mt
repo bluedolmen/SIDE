@@ -45,7 +45,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 		<xsl:variable name="ref_share" select="concat($host,$DLUrl,substring(child::id[1],10))"/>
 		<xsl:variable name="ref_alfresco" select="concat($host,$ViewURL,substring(child::id[1],10),'/',child::title[1])"/>       
 		<resource
-			title="<%for (children.getInnerView.getAttrivutes){%><%getAttribute(mapTo)%><%}%>"
+			title="doc<%--<%for (children.getInnerView.getAttrivutes){%><%getAttribute(mapTo)%><%}%>--%>"
 			href="{concat($ref_alfresco,'+',$ref_share)}">
 		<%ressource()%>
 		</resource>

@@ -9,17 +9,12 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 	
 <%script type="view.FacetMap" name="morePagingFacet"%>
 <xsl:if test="count(s) &gt; $nb_paging_facets">
-    <li class="facet">
-        <xsl:attribute name="name">more<xsl:value-of select="@taxtitle"
-            /></xsl:attribute>
-        <xsl:attribute name="style"/>
 	<a>
 	    <xsl:attribute name="onclick"> show_facet('facet<xsl:value-of
 	            select="@taxtitle"/>','more<xsl:value-of select="@taxtitle"
 	        />');</xsl:attribute>
 	    <xsl:value-of select="count(s)-$nb_paging_facets"/> more... 
 	</a>
-    </li>
 </xsl:if>
 	
 <%script type="view.FacetMap" name="morePagingFacetDisplay"%>
@@ -68,13 +63,13 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 					    <xsl:attribute name="name">hideLink<xsl:value-of select="@taxtitle"/></xsl:attribute>
 					    <xsl:attribute name="onclick"> hide_facets('facets<xsl:value-of
 					        select="@taxtitle"/>','hideLink<xsl:value-of select="@taxtitle"/>');</xsl:attribute>
-					    (hide)
+					    	<img src='{$icons_url}/collapse.png' class='collapse' />
 					</a>
             	<%}%>
             <%}%>
         </div>
         <hr Class="hr2"/>
-        <ul style="list-style-image: url('{$resource_base_url}/bullet.gif');">
+        <ul style="list-style-image: url('{$icons_url}/bullet.gif');">
             <xsl:attribute name="name">facets<xsl:value-of select="@taxtitle"/></xsl:attribute>
             <xsl:apply-templates select="s" mode="subselection">
                 <xsl:with-param name="title">
@@ -90,21 +85,17 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
     <xsl:template match="s" mode="subselection">
         <xsl:param name="title"/>
         <li class="facet">
+        <xsl:attribute name="name">more<xsl:value-of select="@taxtitle"
+            /></xsl:attribute>
+        <xsl:attribute name="style"/>
         	<%if (paging.paginationStyle != "none"){%>
 				<%morePagingFacetDisplay()%>
 			<%}%>
-            <a href="{$server}/{$app2}/{$pre_reference_url}{@ref}"
+			<a href="{$server}/{$app2}/{$pre_reference_url}{@ref}"
                 onclick="show_selection('{$server}/{$app}/{$pre_reference_url}{@ref}')">
-                <xsl:value-of select="@title"/>(<xsl:value-of select="@resultcount"/>) </a>
-        </li>   <xsl:attribute name="name">more<xsl:value-of select="@taxtitle"
-            /></xsl:attribute>
-        <xsl:attribute name="style"/>
-	<a>
-	    <xsl:attribute name="onclick"> show_facet('facet<xsl:value-of
-	            select="@taxtitle"/>','more<xsl:value-of select="@taxtitle"
-	        />');</xsl:attribute>
-	    <xsl:value-of select="count(s)-$nb_paging_facets"/> more... 
-	</a>
+                <xsl:value-of select="@title"/>(<xsl:value-of select="@resultcount"/>)
+            </a>
+            <xsl:attribute name="name">more<xsl:value-of select="@taxtitle" /></xsl:attribute>
         </li>
     </xsl:template>
 </xsl:transform>

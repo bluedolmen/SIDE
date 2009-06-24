@@ -69,7 +69,7 @@ public class ViewFacetmapGenerator extends AbstractAcceleoGenerator implements F
 				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslbasicfacets-generation.mt");
 				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslrightnav-generation.mt");
 				//results
-				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-content-basicresults-generation.mt");
+				//templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-content-basicresults-generation.mt");
 			return templates;
 	}
 
@@ -103,7 +103,7 @@ public class ViewFacetmapGenerator extends AbstractAcceleoGenerator implements F
 		FileHelper.copyFiles(new File(folder + "common"), new File(destFacets), true);
 		FileHelper.copyFiles(new File(folder + "common"), new File(destContent), true);
 		FileHelper.copyFiles(new File(folder + "facets"), new File(destFacets), true);
-		FileHelper.copyFiles(new File(folder + "content"), new File(destFacets), true);
+		//FileHelper.copyFiles(new File(folder + "content"), new File(destFacets), true);
 		//Zip
 		String zipFolder = IFileHelper.getSystemFolderPath(getTargetPath()+FILESEP+getTechVersion())+FILESEP;
 		new File(zipFolder).mkdirs();
