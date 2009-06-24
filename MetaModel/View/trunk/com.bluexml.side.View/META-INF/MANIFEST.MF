@@ -12,7 +12,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ocl.ecore;visibility:=reexport,
  com.bluexml.side.Class;visibility:=reexport,
  com.bluexml.side.Common;visibility:=reexport,
- com.bluexml.side.Util.MetaModel.validate
+ com.bluexml.side.Util.metaModel.validate
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.view,
  com.bluexml.side.view.impl,

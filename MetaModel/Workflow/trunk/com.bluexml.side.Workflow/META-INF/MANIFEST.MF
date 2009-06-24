@@ -14,6 +14,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  com.bluexml.side.Common;visibility:=reexport,
  com.bluexml.side.Class,
- com.bluexml.side.Util.MetaModel.validate,
+ com.bluexml.side.Util.metaModel.validate,
  org.eclipse.ocl.ecore
 Eclipse-LazyStart: true
