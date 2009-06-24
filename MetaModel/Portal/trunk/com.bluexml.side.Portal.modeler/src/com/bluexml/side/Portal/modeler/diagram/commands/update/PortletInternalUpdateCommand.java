@@ -6,9 +6,9 @@ import org.eclipse.gef.commands.Command;
 
 import com.bluexml.side.Portal.modeler.diagram.dialogs.PortletInternalEditDialog;
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.clazz.View;
 import com.bluexml.side.portal.InternalPortletType;
 import com.bluexml.side.portal.PortletInternal;
+import com.bluexml.side.view.AbstractView;
 
 public class PortletInternalUpdateCommand extends Command  {
 	
@@ -38,6 +38,6 @@ private Map<String,Object> newData;
 	public void redo() {
 		portletInternal.setClass((Clazz) newData.get(PortletInternalEditDialog.PORTLETINTERNAL_Class));
 		portletInternal.setType((InternalPortletType) newData.get(PortletInternalEditDialog.PORTLETINTERNAL_Type));
-		portletInternal.setView((View) newData.get(PortletInternalEditDialog.PORTLETINTERNAL_View));
+		portletInternal.setView((AbstractView) newData.get(PortletInternalEditDialog.PORTLETINTERNAL_View));
 	}
 }

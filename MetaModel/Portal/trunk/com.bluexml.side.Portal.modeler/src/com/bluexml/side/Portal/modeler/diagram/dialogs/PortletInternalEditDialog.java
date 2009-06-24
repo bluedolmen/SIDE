@@ -1,10 +1,14 @@
 package com.bluexml.side.Portal.modeler.diagram.dialogs;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -29,6 +33,9 @@ import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.provider.ClazzItemProviderAdapterFactory;
 import com.bluexml.side.portal.InternalPortletType;
 import com.bluexml.side.portal.PortletInternal;
+import com.bluexml.side.view.AbstractView;
+import com.bluexml.side.view.ViewFactory;
+import com.bluexml.side.view.ViewPackage;
 
 
 
@@ -99,6 +106,14 @@ public class PortletInternalEditDialog extends Dialog implements IDialogConstant
 		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 		
+		ILabelProvider labelProvider = formChooser(composite);
+		
+		portletTypeChooser(composite, labelProvider);
+		
+		viewChooser(composite, labelProvider);
+	}
+
+	private ILabelProvider formChooser(Composite composite) {
 		Label propertyClassLbl = new Label(composite, SWT.NONE);
 		propertyClassLbl.setText("Class : ");		
 		ILabelProvider labelProvider = new AdapterFactoryLabelProvider(
@@ -115,7 +130,20 @@ public class PortletInternalEditDialog extends Dialog implements IDialogConstant
 			public void widgetDefaultSelected(org.eclipse.swt.events.SelectionEvent e) {
 			}
 		});
+		return labelProvider;
+	}
+
+	private void viewChooser(Composite composite, ILabelProvider labelProvider) {
+		propertyViewLbl = new Label(composite, SWT.NONE);
+		propertyViewLbl.setText("View : ");	
+		propertyViewLbl.setVisible(false);
 		
+		viewChooser = new SingleObjectChooser(composite, SWT.NONE);
+		viewChooser.setLabelProvider(labelProvider);
+		viewChooser.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+	}
+
+	private void portletTypeChooser(Composite composite, ILabelProvider labelProvider) {
 		Label propertyTypeLbl = new Label(composite, SWT.NONE);
 		propertyTypeLbl.setText("Type : ");		
 		
@@ -134,14 +162,6 @@ public class PortletInternalEditDialog extends Dialog implements IDialogConstant
 			public void widgetDefaultSelected(org.eclipse.swt.events.SelectionEvent e) {
 			}
 		});
-		
-		propertyViewLbl = new Label(composite, SWT.NONE);
-		propertyViewLbl.setText("View : ");	
-		propertyViewLbl.setVisible(false);
-		
-		viewChooser = new SingleObjectChooser(composite, SWT.NONE);
-		viewChooser.setLabelProvider(labelProvider);
-		viewChooser.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 	}
 	
 	/**
@@ -152,7 +172,7 @@ public class PortletInternalEditDialog extends Dialog implements IDialogConstant
 		// Types
 		Collection<InternalPortletType> reachableTypes = InternalPortletType.VALUES;
 		typeChooser.setChoices(reachableTypes.toArray());
-		typeChooser.setSelection(portletInternal.getType());						
+		typeChooser.setSelection(portletInternal.getType());
 		
 		// Value list
 		reachableEnumeration = ItemPropertyDescriptor
@@ -178,6 +198,24 @@ public class PortletInternalEditDialog extends Dialog implements IDialogConstant
 		}					
 	}
 	
+	private List<EObject> getAllViewFor(EObject of) {
+		
+		List<EObject> list = new ArrayList<EObject>();
+		EClass m = ViewPackage.eINSTANCE.eClass();
+		List<EObject> list2 =of.eCrossReferences();
+		
+		TreeIterator<EObject> it = of.eResource().getAllContents();
+		while(it.hasNext()) {
+			EObject current = it.next();
+			if (current instanceof com.bluexml.side.common.NamedModelElement) {
+				System.out.println("ObjectFound !"+((com.bluexml.side.common.NamedModelElement)current).getName());
+			}
+			if (current instanceof AbstractView) {
+				System.out.println("ObjectFound !"+current);
+			}
+		}
+		return list;
+	}
 	
 	private void refreshViewList() {		
 		if(((InternalPortletType) typeChooser.getSelection()).getValue() == 1) {
@@ -186,11 +224,12 @@ public class PortletInternalEditDialog extends Dialog implements IDialogConstant
 			if (classChooser.getSelection() != null) {				
 				if (classChooser.getSelection() instanceof Clazz) {
 					Clazz c = (Clazz) classChooser.getSelection();
-					Object[] viewArray = new Object[c.getHasView().size() + 1]; 
-					Object[] classviewArray = c.getHasView().toArray();					
-					for (int i = 0; i < classviewArray.length; ++i) {
-						viewArray[i] = classviewArray[i];
+					List<EObject> views = getAllViewFor(c);
+					Object[] viewArray = new Object[views.size() + 1];
+					for (int i =0;i<views.size();i++) {
+						viewArray[i] = views.get(i);
 					}
+					
 					viewArray[viewArray.length - 1] = new String();
 					viewChooser.setChoices(viewArray);												
 				} 

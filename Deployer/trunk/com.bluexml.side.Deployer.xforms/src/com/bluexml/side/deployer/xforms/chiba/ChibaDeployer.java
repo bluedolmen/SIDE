@@ -1,4 +1,4 @@
-package com.bluexml.side.util.deployer.xforms.chiba;
+package com.bluexml.side.deployer.xforms.chiba;
 
 import java.io.File;
 

@@ -10,7 +10,6 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Util.libs,
  com.bluexml.side.Util.generator.acceleo,
  com.bluexml.side.Util.generator,
- com.bluexml.side.Util.deployer.alfresco,
  com.bluexml.side.Util.security,
  com.bluexml.side.Util.ecore,
  com.bluexml.side.Util.model.merge

@@ -24,7 +24,6 @@ import org.eclipse.swt.widgets.Text;
 import com.bluexml.side.Portal.modeler.PortalPlugin;
 import com.bluexml.side.Portal.modeler.diagram.dialogs.dataStructure.ColumnDataStructure;
 import com.bluexml.side.Portal.modeler.diagram.dialogs.viewer.ColumnViewer;
-import com.bluexml.side.clazz.View;
 import com.bluexml.side.portal.PortalLayout;
 import com.bluexml.side.portal.widthUnit;
 
@@ -41,7 +40,7 @@ public class PortalLayoutEditDialog extends Dialog implements IDialogConstants{
 	
 	protected Map data;
 
-	private View view;
+	
 	
 	private Text portalLayoutName;	
 	
