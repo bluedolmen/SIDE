@@ -10,7 +10,7 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Application;bundle-version="1.0.8",
  com.bluexml.side.Util.generator;bundle-version="1.0.8",
  com.bluexml.side.Util.generator.acceleo;bundle-version="1.0.8",
- com.bluexml.side.Application.security;bundle-version="1.0.8",
+ com.bluexml.side.Util.security;bundle-version="1.0.8",
  com.bluexml.side.Util.generator.alfresco
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

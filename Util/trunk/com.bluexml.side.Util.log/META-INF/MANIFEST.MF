@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: S-IDE Documentation Plug-in
-Bundle-SymbolicName: com.bluexml.side.Application.log
+Bundle-SymbolicName: com.bluexml.side.Util.log
 Bundle-Version: 1.0.0
 Bundle-Activator: com.bluexml.side.util.documentation.Activator
 Bundle-Vendor: BLUEXML

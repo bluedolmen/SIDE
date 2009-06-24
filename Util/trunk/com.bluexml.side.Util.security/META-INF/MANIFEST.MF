@@ -7,7 +7,7 @@ Bundle-Vendor: blueXML
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime
 Bundle-ActivationPolicy: lazy
-Bundle-SymbolicName: com.bluexml.side.Application.security
+Bundle-SymbolicName: com.bluexml.side.Util.security
 Export-Package: com.bluexml.side.util.security
 Import-Package: com.bluexml.side.util.libs
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

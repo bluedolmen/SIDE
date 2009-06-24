@@ -7,7 +7,7 @@ Bundle-Activator: com.bluexml.side.Util.deployer.xforms.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Util.deployer,
- com.bluexml.side.Application.security,
+ com.bluexml.side.Util.security,
  com.bluexml.side.Util.libs,
  org.eclipse.core.resources,
  com.bluexml.side.Application

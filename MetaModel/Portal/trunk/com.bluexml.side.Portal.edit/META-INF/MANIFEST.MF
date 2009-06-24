@@ -17,5 +17,6 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Common;visibility:=reexport,
  com.bluexml.side.Common.edit;visibility:=reexport,
  com.bluexml.side.View;bundle-version="1.0.0",
- com.bluexml.side.View.edit;bundle-version="1.0.0"
+ com.bluexml.side.View.edit;bundle-version="1.0.0",
+ com.bluexml.side.Util.metaModel.validate;bundle-version="1.0.11"
 Eclipse-LazyStart: true

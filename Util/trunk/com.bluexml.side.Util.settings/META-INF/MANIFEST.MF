@@ -8,7 +8,7 @@ Bundle-Activator: com.bluexml.side.util.settings.Activator
 Bundle-Vendor: blueXML
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- com.bluexml.side.Application.security
+ com.bluexml.side.Util.security
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.util.settings
 Import-Package: com.bluexml.side.util.libs,
