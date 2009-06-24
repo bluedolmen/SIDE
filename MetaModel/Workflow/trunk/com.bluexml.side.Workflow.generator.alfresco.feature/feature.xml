@@ -38,10 +38,10 @@
    </requires>
 
    <plugin
-         id="com.bluexml.side.Workflow.generator.Alfresco"
+         id="com.bluexml.side.Workflow.generator.alfresco"
          download-size="0"
          install-size="0"
-         version="1.0.13"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>
