@@ -14,7 +14,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Boston, MA 02111.
  ******************************************************************************/
-package com.bluexml.side.clazz.deployer.report;
+package com.bluexml.side.deployer.report;
 
 import java.io.File;
 
