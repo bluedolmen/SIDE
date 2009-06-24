@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.portal.impl;
 
+import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.portal.HavePortlet;
 import com.bluexml.side.portal.Page;
 import com.bluexml.side.portal.PortalLayout;
@@ -26,6 +27,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +38,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link com.bluexml.side.portal.impl.PageImpl#getID <em>ID</em>}</li>
  *   <li>{@link com.bluexml.side.portal.impl.PageImpl#getTitle <em>Title</em>}</li>
- *   <li>{@link com.bluexml.side.portal.impl.PageImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link com.bluexml.side.portal.impl.PageImpl#getUseLayout <em>Use Layout</em>}</li>
  *   <li>{@link com.bluexml.side.portal.impl.PageImpl#getPortlets <em>Portlets</em>}</li>
  *   <li>{@link com.bluexml.side.portal.impl.PageImpl#getPosition <em>Position</em>}</li>
@@ -86,26 +87,6 @@ public class PageImpl extends PortalModelElementImpl implements Page {
 	 * @ordered
 	 */
 	protected String title = TITLE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDescription()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String DESCRIPTION_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDescription()
-	 * @generated
-	 * @ordered
-	 */
-	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getUseLayout() <em>Use Layout</em>}' reference.
@@ -216,27 +197,6 @@ public class PageImpl extends PortalModelElementImpl implements Page {
 		title = newTitle;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PortalPackage.PAGE__TITLE, oldTitle, title));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDescription(String newDescription) {
-		String oldDescription = description;
-		description = newDescription;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PortalPackage.PAGE__DESCRIPTION, oldDescription, description));
 	}
 
 	/**
@@ -381,8 +341,6 @@ public class PageImpl extends PortalModelElementImpl implements Page {
 				return getID();
 			case PortalPackage.PAGE__TITLE:
 				return getTitle();
-			case PortalPackage.PAGE__DESCRIPTION:
-				return getDescription();
 			case PortalPackage.PAGE__USE_LAYOUT:
 				if (resolve) return getUseLayout();
 				return basicGetUseLayout();
@@ -410,9 +368,6 @@ public class PageImpl extends PortalModelElementImpl implements Page {
 				return;
 			case PortalPackage.PAGE__TITLE:
 				setTitle((String)newValue);
-				return;
-			case PortalPackage.PAGE__DESCRIPTION:
-				setDescription((String)newValue);
 				return;
 			case PortalPackage.PAGE__USE_LAYOUT:
 				setUseLayout((PortalLayout)newValue);
@@ -445,9 +400,6 @@ public class PageImpl extends PortalModelElementImpl implements Page {
 			case PortalPackage.PAGE__TITLE:
 				setTitle(TITLE_EDEFAULT);
 				return;
-			case PortalPackage.PAGE__DESCRIPTION:
-				setDescription(DESCRIPTION_EDEFAULT);
-				return;
 			case PortalPackage.PAGE__USE_LAYOUT:
 				setUseLayout((PortalLayout)null);
 				return;
@@ -476,8 +428,6 @@ public class PageImpl extends PortalModelElementImpl implements Page {
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case PortalPackage.PAGE__TITLE:
 				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
-			case PortalPackage.PAGE__DESCRIPTION:
-				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case PortalPackage.PAGE__USE_LAYOUT:
 				return useLayout != null;
 			case PortalPackage.PAGE__PORTLETS:
@@ -504,12 +454,14 @@ public class PageImpl extends PortalModelElementImpl implements Page {
 		result.append(id);
 		result.append(", title: ");
 		result.append(title);
-		result.append(", description: ");
-		result.append(description);
 		result.append(", position: ");
 		result.append(position);
 		result.append(')');
 		return result.toString();
 	}
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+
+	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 
 } //PageImpl

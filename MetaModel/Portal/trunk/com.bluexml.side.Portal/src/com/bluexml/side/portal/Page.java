@@ -18,7 +18,6 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link com.bluexml.side.portal.Page#getID <em>ID</em>}</li>
  *   <li>{@link com.bluexml.side.portal.Page#getTitle <em>Title</em>}</li>
- *   <li>{@link com.bluexml.side.portal.Page#getDescription <em>Description</em>}</li>
  *   <li>{@link com.bluexml.side.portal.Page#getUseLayout <em>Use Layout</em>}</li>
  *   <li>{@link com.bluexml.side.portal.Page#getPortlets <em>Portlets</em>}</li>
  *   <li>{@link com.bluexml.side.portal.Page#getPosition <em>Position</em>}</li>
@@ -82,32 +81,6 @@ public interface Page extends PortalModelElement {
 	 * @generated
 	 */
 	void setTitle(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Description</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Description</em>' attribute.
-	 * @see #setDescription(String)
-	 * @see com.bluexml.side.portal.PortalPackage#getPage_Description()
-	 * @model
-	 * @generated
-	 */
-	String getDescription();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.portal.Page#getDescription <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Description</em>' attribute.
-	 * @see #getDescription()
-	 * @generated
-	 */
-	void setDescription(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Use Layout</b></em>' reference.

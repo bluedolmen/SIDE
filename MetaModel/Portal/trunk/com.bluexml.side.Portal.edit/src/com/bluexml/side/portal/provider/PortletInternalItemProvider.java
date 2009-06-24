@@ -157,8 +157,7 @@ public class PortletInternalItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		InternalPortletType labelValue = ((PortletInternal)object).getType();
-		String label = labelValue == null ? null : labelValue.toString();
+		String label = ((PortletInternal)object).getDocumentation();
 		return label == null || label.length() == 0 ?
 			getString("_UI_PortletInternal_type") :
 			getString("_UI_PortletInternal_type") + " " + label;

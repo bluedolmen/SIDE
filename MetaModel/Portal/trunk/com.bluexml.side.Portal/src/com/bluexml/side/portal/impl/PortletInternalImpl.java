@@ -6,19 +6,18 @@
  */
 package com.bluexml.side.portal.impl;
 
-import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.clazz.View;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.ocl.ecore.OCL;
 
+import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
+import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.portal.InternalPortletType;
 import com.bluexml.side.portal.PortalPackage;
 import com.bluexml.side.portal.PortletInternal;
-
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import com.bluexml.side.view.AbstractView;
 
 /**
  * <!-- begin-user-doc -->
@@ -74,7 +73,7 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 	 * @generated
 	 * @ordered
 	 */
-	protected View view;
+	protected AbstractView view;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -159,10 +158,10 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public View getView() {
+	public AbstractView getView() {
 		if (view != null && view.eIsProxy()) {
 			InternalEObject oldView = (InternalEObject)view;
-			view = (View)eResolveProxy(oldView);
+			view = (AbstractView)eResolveProxy(oldView);
 			if (view != oldView) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PortalPackage.PORTLET_INTERNAL__VIEW, oldView, view));
@@ -176,7 +175,7 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public View basicGetView() {
+	public AbstractView basicGetView() {
 		return view;
 	}
 
@@ -185,8 +184,8 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setView(View newView) {
-		View oldView = view;
+	public void setView(AbstractView newView) {
+		AbstractView oldView = view;
 		view = newView;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PortalPackage.PORTLET_INTERNAL__VIEW, oldView, view));
@@ -227,7 +226,7 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 				setClass((Clazz)newValue);
 				return;
 			case PortalPackage.PORTLET_INTERNAL__VIEW:
-				setView((View)newValue);
+				setView((AbstractView)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -248,7 +247,7 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 				setClass((Clazz)null);
 				return;
 			case PortalPackage.PORTLET_INTERNAL__VIEW:
-				setView((View)null);
+				setView((AbstractView)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -287,5 +286,9 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 		result.append(')');
 		return result.toString();
 	}
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+
+	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 
 } //PortletInternalImpl

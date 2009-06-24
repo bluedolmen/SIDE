@@ -13,5 +13,9 @@ Export-Package: com.bluexml.side.portal,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  com.bluexml.side.Class;visibility:=reexport,
- com.bluexml.side.Common;visibility:=reexport
+ com.bluexml.side.Common;visibility:=reexport,
+ com.bluexml.side.Util.metaModel.validate;bundle-version="1.0.11",
+ org.eclipse.ocl,
+ org.eclipse.ocl.ecore,
+ com.bluexml.side.View;bundle-version="1.0.0"
 Eclipse-LazyStart: true

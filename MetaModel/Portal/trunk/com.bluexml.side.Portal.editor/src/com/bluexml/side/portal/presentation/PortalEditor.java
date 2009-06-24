@@ -163,6 +163,7 @@ import com.bluexml.side.clazz.provider.ClazzItemProviderAdapterFactory;
 
 import com.bluexml.side.common.provider.CommonItemProviderAdapterFactory;
 
+import com.bluexml.side.view.provider.ViewItemProviderAdapterFactory;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 
@@ -701,6 +702,7 @@ public class PortalEditor
 		adapterFactory.addAdapterFactory(new PortalItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ClazzItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new CommonItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new ViewItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 
 		// Create the command stack that will notify this editor as commands are executed.

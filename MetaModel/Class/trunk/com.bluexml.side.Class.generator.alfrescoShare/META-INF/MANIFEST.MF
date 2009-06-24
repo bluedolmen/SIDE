@@ -12,7 +12,7 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Util.generator.acceleo;bundle-version="1.0.8",
  com.bluexml.side.Application.security;bundle-version="1.0.8",
  com.bluexml.side.Util.ecore,
- com.bluexml.side.Util.MetaModel.validate
+ com.bluexml.side.Util.metaModel.validate
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Import-Package: com.bluexml.side.util.libs,

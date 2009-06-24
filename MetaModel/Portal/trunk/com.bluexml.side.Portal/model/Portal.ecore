@@ -21,7 +21,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="useLayout" eType="#//PortalLayout"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="portlets" upperBound="-1"
         eType="#//HavePortlet" containment="true"/>
@@ -58,7 +57,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="PortletInternal" eSuperTypes="#//PortalModelElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//InternalPortletType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="class" eType="ecore:EClass ../../com.bluexml.side.Class/model/Class.ecore#//Clazz"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="view" eType="ecore:EClass ../../com.bluexml.side.Class/model/Class.ecore#//View"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="view" eType="ecore:EClass ../../com.bluexml.side.View/model/View.ecore#//AbstractView"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractPortletAttributes" abstract="true"/>
   <eClassifiers xsi:type="ecore:EEnum" name="widthUnit">

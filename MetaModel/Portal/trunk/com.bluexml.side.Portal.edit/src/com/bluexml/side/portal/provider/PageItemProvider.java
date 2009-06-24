@@ -70,7 +70,6 @@ public class PageItemProvider
 
 			addIDPropertyDescriptor(object);
 			addTitlePropertyDescriptor(object);
-			addDescriptionPropertyDescriptor(object);
 			addUseLayoutPropertyDescriptor(object);
 			addPositionPropertyDescriptor(object);
 		}
@@ -113,28 +112,6 @@ public class PageItemProvider
 				 getString("_UI_Page_title_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Page_title_feature", "_UI_Page_type"),
 				 PortalPackage.Literals.PAGE__TITLE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Description feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDescriptionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Page_description_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Page_description_feature", "_UI_Page_type"),
-				 PortalPackage.Literals.PAGE__DESCRIPTION,
 				 true,
 				 false,
 				 false,
@@ -257,7 +234,6 @@ public class PageItemProvider
 		switch (notification.getFeatureID(Page.class)) {
 			case PortalPackage.PAGE__ID:
 			case PortalPackage.PAGE__TITLE:
-			case PortalPackage.PAGE__DESCRIPTION:
 			case PortalPackage.PAGE__POSITION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

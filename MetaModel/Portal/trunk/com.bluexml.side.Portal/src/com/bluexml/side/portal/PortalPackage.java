@@ -100,6 +100,33 @@ public interface PortalPackage extends EPackage {
 	int PORTAL_MODEL_ELEMENT__COMMENTS = CommonPackage.MODEL_ELEMENT__COMMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL_MODEL_ELEMENT__DOCUMENTATION = CommonPackage.MODEL_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL_MODEL_ELEMENT__DESCRIPTION = CommonPackage.MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL_MODEL_ELEMENT__METAINFO = CommonPackage.MODEL_ELEMENT__METAINFO;
+
+	/**
 	 * The number of structural features of the '<em>Model Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -146,15 +173,6 @@ public interface PortalPackage extends EPackage {
 	int PORTAL__COMMENTS = CommonPackage.PACKAGE__COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PORTAL__NAME = CommonPackage.PACKAGE__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -162,6 +180,33 @@ public interface PortalPackage extends EPackage {
 	 * @ordered
 	 */
 	int PORTAL__DOCUMENTATION = CommonPackage.PACKAGE__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL__DESCRIPTION = CommonPackage.PACKAGE__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL__METAINFO = CommonPackage.PACKAGE__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL__NAME = CommonPackage.PACKAGE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Stereotype Set</b></em>' containment reference list.
@@ -273,6 +318,33 @@ public interface PortalPackage extends EPackage {
 	int PAGE__COMMENTS = PORTAL_MODEL_ELEMENT__COMMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__DOCUMENTATION = PORTAL_MODEL_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__DESCRIPTION = PORTAL_MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__METAINFO = PORTAL_MODEL_ELEMENT__METAINFO;
+
+	/**
 	 * The feature id for the '<em><b>ID</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -291,22 +363,13 @@ public interface PortalPackage extends EPackage {
 	int PAGE__TITLE = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PAGE__DESCRIPTION = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Use Layout</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE__USE_LAYOUT = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 3;
+	int PAGE__USE_LAYOUT = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Portlets</b></em>' containment reference list.
@@ -315,7 +378,7 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE__PORTLETS = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 4;
+	int PAGE__PORTLETS = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Position</b></em>' attribute.
@@ -324,7 +387,7 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE__POSITION = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 5;
+	int PAGE__POSITION = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Is Child Page Of</b></em>' containment reference.
@@ -333,7 +396,7 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE__IS_CHILD_PAGE_OF = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 6;
+	int PAGE__IS_CHILD_PAGE_OF = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Page</em>' class.
@@ -342,7 +405,7 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE_FEATURE_COUNT = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 7;
+	int PAGE_FEATURE_COUNT = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.portal.impl.PortalLayoutImpl <em>Layout</em>}' class.
@@ -380,6 +443,33 @@ public interface PortalPackage extends EPackage {
 	 * @ordered
 	 */
 	int PORTAL_LAYOUT__COMMENTS = PORTAL_MODEL_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL_LAYOUT__DOCUMENTATION = PORTAL_MODEL_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL_LAYOUT__DESCRIPTION = PORTAL_MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTAL_LAYOUT__METAINFO = PORTAL_MODEL_ELEMENT__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -501,6 +591,33 @@ public interface PortalPackage extends EPackage {
 	int PORTLET__COMMENTS = PORTAL_MODEL_ELEMENT__COMMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET__DOCUMENTATION = PORTAL_MODEL_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET__DESCRIPTION = PORTAL_MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET__METAINFO = PORTAL_MODEL_ELEMENT__METAINFO;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -572,6 +689,33 @@ public interface PortalPackage extends EPackage {
 	 * @ordered
 	 */
 	int PORTLET_TYPE__COMMENTS = PORTAL_MODEL_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_TYPE__DOCUMENTATION = PORTAL_MODEL_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_TYPE__DESCRIPTION = PORTAL_MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_TYPE__METAINFO = PORTAL_MODEL_ELEMENT__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -654,6 +798,33 @@ public interface PortalPackage extends EPackage {
 	 * @ordered
 	 */
 	int PORTLET_INTERNAL__COMMENTS = PORTAL_MODEL_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_INTERNAL__DOCUMENTATION = PORTAL_MODEL_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_INTERNAL__DESCRIPTION = PORTAL_MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_INTERNAL__METAINFO = PORTAL_MODEL_ELEMENT__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1142,17 +1313,6 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getPage_Title();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.portal.Page#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see com.bluexml.side.portal.Page#getDescription()
-	 * @see #getPage()
-	 * @generated
-	 */
-	EAttribute getPage_Description();
 
 	/**
 	 * Returns the meta object for the reference '{@link com.bluexml.side.portal.Page#getUseLayout <em>Use Layout</em>}'.
@@ -1839,14 +1999,6 @@ public interface PortalPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PAGE__TITLE = eINSTANCE.getPage_Title();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PAGE__DESCRIPTION = eINSTANCE.getPage_Description();
 
 		/**
 		 * The meta object literal for the '<em><b>Use Layout</b></em>' reference feature.

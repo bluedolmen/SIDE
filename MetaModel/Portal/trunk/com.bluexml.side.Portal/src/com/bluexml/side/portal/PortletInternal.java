@@ -7,7 +7,7 @@
 package com.bluexml.side.portal;
 
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.clazz.View;
+import com.bluexml.side.view.AbstractView;
 
 /**
  * <!-- begin-user-doc -->
@@ -92,12 +92,12 @@ public interface PortletInternal extends PortalModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>View</em>' reference.
-	 * @see #setView(View)
+	 * @see #setView(AbstractView)
 	 * @see com.bluexml.side.portal.PortalPackage#getPortletInternal_View()
 	 * @model
 	 * @generated
 	 */
-	View getView();
+	AbstractView getView();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.portal.PortletInternal#getView <em>View</em>}' reference.
@@ -107,6 +107,6 @@ public interface PortletInternal extends PortalModelElement {
 	 * @see #getView()
 	 * @generated
 	 */
-	void setView(View value);
+	void setView(AbstractView value);
 
 } // PortletInternal

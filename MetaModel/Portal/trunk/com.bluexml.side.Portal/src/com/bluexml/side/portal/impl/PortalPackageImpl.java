@@ -32,6 +32,7 @@ import com.bluexml.side.portal.PositionGroup;
 import com.bluexml.side.portal.isChildPage;
 import com.bluexml.side.portal.widthUnit;
 
+import com.bluexml.side.view.ViewPackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -238,7 +239,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 
 		// Initialize simple dependencies
 		ClazzPackage.eINSTANCE.eClass();
-		CommonPackage.eINSTANCE.eClass();
+		ViewPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		thePortalPackage.createPackageContents();
@@ -347,17 +348,8 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPage_Description() {
-		return (EAttribute)pageEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getPage_UseLayout() {
-		return (EReference)pageEClass.getEStructuralFeatures().get(3);
+		return (EReference)pageEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -366,7 +358,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 	 * @generated
 	 */
 	public EReference getPage_Portlets() {
-		return (EReference)pageEClass.getEStructuralFeatures().get(4);
+		return (EReference)pageEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -375,7 +367,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 	 * @generated
 	 */
 	public EAttribute getPage_Position() {
-		return (EAttribute)pageEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)pageEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -384,7 +376,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 	 * @generated
 	 */
 	public EReference getPage_IsChildPageOf() {
-		return (EReference)pageEClass.getEStructuralFeatures().get(6);
+		return (EReference)pageEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -877,7 +869,6 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		pageEClass = createEClass(PAGE);
 		createEAttribute(pageEClass, PAGE__ID);
 		createEAttribute(pageEClass, PAGE__TITLE);
-		createEAttribute(pageEClass, PAGE__DESCRIPTION);
 		createEReference(pageEClass, PAGE__USE_LAYOUT);
 		createEReference(pageEClass, PAGE__PORTLETS);
 		createEAttribute(pageEClass, PAGE__POSITION);
@@ -975,6 +966,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		// Obtain other dependent packages
 		CommonPackage theCommonPackage = (CommonPackage)EPackage.Registry.INSTANCE.getEPackage(CommonPackage.eNS_URI);
 		ClazzPackage theClazzPackage = (ClazzPackage)EPackage.Registry.INSTANCE.getEPackage(ClazzPackage.eNS_URI);
+		ViewPackage theViewPackage = (ViewPackage)EPackage.Registry.INSTANCE.getEPackage(ViewPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -1003,7 +995,6 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		initEClass(pageEClass, Page.class, "Page", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPage_ID(), ecorePackage.getEString(), "ID", null, 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPage_Title(), ecorePackage.getEString(), "title", null, 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPage_Description(), ecorePackage.getEString(), "description", null, 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPage_UseLayout(), this.getPortalLayout(), null, "useLayout", null, 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPage_Portlets(), this.getHavePortlet(), null, "portlets", null, 0, -1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPage_Position(), ecorePackage.getEInt(), "position", null, 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1033,7 +1024,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		initEClass(portletInternalEClass, PortletInternal.class, "PortletInternal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPortletInternal_Type(), this.getInternalPortletType(), "type", null, 0, 1, PortletInternal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPortletInternal_Class(), theClazzPackage.getClazz(), null, "class", null, 0, 1, PortletInternal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPortletInternal_View(), theClazzPackage.getView(), null, "view", null, 0, 1, PortletInternal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPortletInternal_View(), theViewPackage.getAbstractView(), null, "view", null, 0, 1, PortletInternal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractPortletAttributesEClass, AbstractPortletAttributes.class, "AbstractPortletAttributes", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
