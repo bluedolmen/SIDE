@@ -17,6 +17,9 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Reference Widget Type</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * Definition: The 'ReferenceWidgetType'  is an enumeration list with the different layout for a model choice field.
+ * <!-- end-model-doc -->
  * @see com.bluexml.side.form.FormPackage#getReferenceWidgetType()
  * @model
  * @generated
@@ -58,6 +61,9 @@ public enum ReferenceWidgetType implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'AssociationClassInline' option provides for association class a form that will be incluse in the parent form.
+	 * <!-- end-model-doc -->
 	 * @see #ASSOCIATION_CLASS_INLINE
 	 * @model name="AssociationClassInline" literal="Association Class Inline"
 	 * @generated
@@ -73,6 +79,9 @@ public enum ReferenceWidgetType implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'AssociationClassSelect' option provides a selection composant that allows to choose existent object of the association class.
+	 * <!-- end-model-doc -->
 	 * @see #ASSOCIATION_CLASS_SELECT
 	 * @model name="AssociationClassSelect" literal="Association Class Select"
 	 * @generated
@@ -88,6 +97,9 @@ public enum ReferenceWidgetType implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'Inline' option creates a form and include it in the parent form.
+	 * <!-- end-model-doc -->
 	 * @see #INLINE
 	 * @model name="Inline"
 	 * @generated

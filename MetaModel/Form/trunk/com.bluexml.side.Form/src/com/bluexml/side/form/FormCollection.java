@@ -15,6 +15,13 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Form Collection</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: This is the root element which is the first create element. All forms will be child of this element.  It has no corresponding elements in the Class diagram and is usually not generated.
+ * Operations:
+ * - The operations ту might be called when your Class diagram have been changed (attribute addition, change of type и) to propagate this changes in your forms. The changes which will be propagated are: attribute addition, attribute removal. The changes which are not propagated implies a manual update in the concerned forms.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

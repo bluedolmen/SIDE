@@ -17,6 +17,10 @@ import com.bluexml.side.clazz.ClassModelElement;
  * A representation of the model object '<em><b>Form Element</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: The FormElement is an element of the form. It can be a form group or a field.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -43,6 +47,11 @@ public interface FormElement extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'label' attribute specifies the text associated to a form element.
+	 * 
+	 * Example: label=Description
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Label</em>' attribute.
 	 * @see #setLabel(String)
 	 * @see com.bluexml.side.form.FormPackage#getFormElement_Label()
@@ -69,6 +78,13 @@ public interface FormElement extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'id' attribute specifies a unique identifier to a form element.
+	 * 
+	 * Constraint/limit: The 'id' value must not contain space.
+	 * 
+	 * Example: id=Description
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
 	 * @see com.bluexml.side.form.FormPackage#getFormElement_Id()
@@ -95,6 +111,11 @@ public interface FormElement extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'help_text' attribute specifies a text that will appear when the cursor moves over the form element.
+	 * 
+	 * Example: help_text=This is a help message
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Help text</em>' attribute.
 	 * @see #setHelp_text(String)
 	 * @see com.bluexml.side.form.FormPackage#getFormElement_Help_text()
@@ -147,6 +168,13 @@ public interface FormElement extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'hidden' attribute specifies if a form element will be hidden or not in the form.
+	 * 
+	 * Example:
+	 * - 'false': the form element will not be hidden.
+	 * - 'true': the form element will be hidden.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Hidden</em>' attribute.
 	 * @see #setHidden(boolean)
 	 * @see com.bluexml.side.form.FormPackage#getFormElement_Hidden()

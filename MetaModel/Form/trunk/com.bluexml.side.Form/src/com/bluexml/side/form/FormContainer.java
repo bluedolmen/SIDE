@@ -12,6 +12,13 @@ package com.bluexml.side.form;
  * A representation of the model object '<em><b>Form Container</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: The 'FormContainer' represents a form and is used as a container for elements.
+ * 
+ * Inherits:
+ * -FormGroup.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -35,6 +42,9 @@ public interface FormContainer extends FormGroup {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'name' attribute specifies the name of the form container.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see com.bluexml.side.form.FormPackage#getFormContainer_Name()

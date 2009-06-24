@@ -11,6 +11,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
@@ -102,38 +103,6 @@ public class FormValidator extends EObjectValidator {
 	 */
 	protected static final int DIAGNOSTIC_CODE_COUNT = GENERATED_DIAGNOSTIC_CODE_COUNT;
 
-	/**
-	 * The parsed OCL expression for the definition of the '<em>noSpecialCharacters</em>' invariant constraint.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private static Constraint formElement_noSpecialCharactersInvOCL;
-
-	/**
-	 * The parsed OCL expression for the definition of the '<em>MinSuperiorToMax</em>' invariant constraint.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private static Constraint charField_MinSuperiorToMaxInvOCL;
-
-	/**
-	 * The parsed OCL expression for the definition of the '<em>NoLinkForVirtualField</em>' invariant constraint.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private static Constraint virtualField_NoLinkForVirtualFieldInvOCL;
-
-	/**
-	 * The parsed OCL expression for the definition of the '<em>validName</em>' invariant constraint.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private static Constraint formContainer_validNameInvOCL;
-
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
 
 	private static final OCL OCL_ENV = KerblueOCL.newInstance();
@@ -160,7 +129,7 @@ public class FormValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Calls <code>validateXXX</code> for the corresonding classifier of the model.
+	 * Calls <code>validateXXX</code> for the corresponding classifier of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -238,7 +207,7 @@ public class FormValidator extends EObjectValidator {
 				return validateChoiceWidgetType((ChoiceWidgetType)value, diagnostics, context);
 			case FormPackage.REFERENCE_WIDGET_TYPE:
 				return validateReferenceWidgetType((ReferenceWidgetType)value, diagnostics, context);
-			default: 
+			default:
 				return true;
 		}
 	}
@@ -267,32 +236,21 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFormElement_noSpecialCharacters(FormElement formElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (formElement_noSpecialCharactersInvOCL == null) {
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(FormPackage.Literals.FORM_ELEMENT);
-			
-			EAnnotation ocl = FormPackage.Literals.FORM_ELEMENT.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String expr = ocl.getDetails().get("noSpecialCharacters");
-			
-			try {
-				formElement_noSpecialCharactersInvOCL = helper.createInvariant(expr);
-			}
-			catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(formElement_noSpecialCharactersInvOCL);
-		
-		if (!query.check(formElement)) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(new BasicDiagnostic
+					(createDiagnostic
 						(Diagnostic.ERROR,
 						 DIAGNOSTIC_SOURCE,
 						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noSpecialCharacters", getObjectLabel(formElement, context) }),
-						 new Object[] { formElement }));
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "noSpecialCharacters", getObjectLabel(formElement, context) },
+						 new Object[] { formElement },
+						 context));
 			}
 			return false;
 		}
@@ -375,32 +333,21 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateCharField_MinSuperiorToMax(CharField charField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (charField_MinSuperiorToMaxInvOCL == null) {
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(FormPackage.Literals.CHAR_FIELD);
-			
-			EAnnotation ocl = FormPackage.Literals.CHAR_FIELD.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String expr = ocl.getDetails().get("MinSuperiorToMax");
-			
-			try {
-				charField_MinSuperiorToMaxInvOCL = helper.createInvariant(expr);
-			}
-			catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(charField_MinSuperiorToMaxInvOCL);
-		
-		if (!query.check(charField)) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(new BasicDiagnostic
+					(createDiagnostic
 						(Diagnostic.ERROR,
 						 DIAGNOSTIC_SOURCE,
 						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "MinSuperiorToMax", getObjectLabel(charField, context) }),
-						 new Object[] { charField }));
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "MinSuperiorToMax", getObjectLabel(charField, context) },
+						 new Object[] { charField },
+						 context));
 			}
 			return false;
 		}
@@ -762,32 +709,21 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateVirtualField_NoLinkForVirtualField(VirtualField virtualField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (virtualField_NoLinkForVirtualFieldInvOCL == null) {
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(FormPackage.Literals.VIRTUAL_FIELD);
-			
-			EAnnotation ocl = FormPackage.Literals.VIRTUAL_FIELD.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String expr = ocl.getDetails().get("NoLinkForVirtualField");
-			
-			try {
-				virtualField_NoLinkForVirtualFieldInvOCL = helper.createInvariant(expr);
-			}
-			catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(virtualField_NoLinkForVirtualFieldInvOCL);
-		
-		if (!query.check(virtualField)) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(new BasicDiagnostic
+					(createDiagnostic
 						(Diagnostic.ERROR,
 						 DIAGNOSTIC_SOURCE,
 						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "NoLinkForVirtualField", getObjectLabel(virtualField, context) }),
-						 new Object[] { virtualField }));
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "NoLinkForVirtualField", getObjectLabel(virtualField, context) },
+						 new Object[] { virtualField },
+						 context));
 			}
 			return false;
 		}
@@ -881,32 +817,21 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFormContainer_validName(FormContainer formContainer, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (formContainer_validNameInvOCL == null) {
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(FormPackage.Literals.FORM_CONTAINER);
-			
-			EAnnotation ocl = FormPackage.Literals.FORM_CONTAINER.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String expr = ocl.getDetails().get("validName");
-			
-			try {
-				formContainer_validNameInvOCL = helper.createInvariant(expr);
-			}
-			catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(formContainer_validNameInvOCL);
-		
-		if (!query.check(formContainer)) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(new BasicDiagnostic
+					(createDiagnostic
 						(Diagnostic.ERROR,
 						 DIAGNOSTIC_SOURCE,
 						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "validName", getObjectLabel(formContainer, context) }),
-						 new Object[] { formContainer }));
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "validName", getObjectLabel(formContainer, context) },
+						 new Object[] { formContainer },
+						 context));
 			}
 			return false;
 		}
@@ -928,12 +853,14 @@ public class FormValidator extends EObjectValidator {
 		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(new BasicDiagnostic
+					(createDiagnostic
 						(Diagnostic.ERROR,
 						 DIAGNOSTIC_SOURCE,
 						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noSpecialCharacters", getObjectLabel(formContainer, context) }),
-						 new Object[] { formContainer }));
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "noSpecialCharacters", getObjectLabel(formContainer, context) },
+						 new Object[] { formContainer },
+						 context));
 			}
 			return false;
 		}
@@ -974,6 +901,20 @@ public class FormValidator extends EObjectValidator {
 	 */
 	public boolean validateReferenceWidgetType(ReferenceWidgetType referenceWidgetType, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
+	}
+
+	/**
+	 * Returns the resource locator that will be used to fetch messages for this validator's diagnostics.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		// TODO
+		// Specialize this to return a resource locator for messages specific to this validator.
+		// Ensure that you remove @generated or mark it @generated NOT
+		return super.getResourceLocator();
 	}
 
 } //formValidator

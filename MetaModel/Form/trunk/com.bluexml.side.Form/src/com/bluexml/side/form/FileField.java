@@ -11,6 +11,17 @@ package com.bluexml.side.form;
  * A representation of the model object '<em><b>File Field</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: The 'FileField' is use to upload file.
+ * 
+ * Operations:
+ * - 'Transform/to ImageField': Transform FileField into ImageField.
+ * - 'Transform/to CharField': Transform FileField into CharField.
+ * 
+ * Inherits: 
+ * - Field
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -33,6 +44,16 @@ public interface FileField extends Field {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'inRepository' attributes specifies if the file will be import in the target repository (for instance Alfresco) or on the disk. 
+	 * The target path to store the file is given through:
+	 * - If upload on disk (inRepository=false), the target directory must be set up either in the Alfresco.properties file using the ‘upload.directory’  parameter or through the url parameter ‘uploadDirectory’.
+	 * - if upload on Alfresco repository (inRepository=true), the target space must be set up either in the Alfresco.properties file using the ‘upload.repository’  parameter or through the url parameter ‘uploadRepository’.
+	 * Example:
+	 * - 'false': The file will be uploaded to a directory of the file system. For instance, ‘upload.directory=c:\myWorkspace\files’ or ‘uploadDirectory=c:\myWorkspace\files’; if not set up through upload.directory or uploadDirectory, default value is the current directory. 
+	 * - 'true': The file will be uploaded to the target repository. For instance, ‘upload.repository=app:company_home/cm:dictionary’ or ‘uploadRepository’= app:company_home/cm:dictionary’; if not set up through upload.repository or uploadRepository’, default value is ‘app:company_home’ for Alfresco.
+	 * 
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>In Repository</em>' attribute.
 	 * @see #setInRepository(boolean)
 	 * @see com.bluexml.side.form.FormPackage#getFileField_InRepository()

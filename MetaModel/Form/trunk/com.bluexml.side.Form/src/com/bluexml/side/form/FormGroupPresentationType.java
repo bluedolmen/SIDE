@@ -17,6 +17,9 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Form Group Presentation Type</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * Definition: The 'FormGroupPresentationType' is an enumeration list with the different layout for a form group.
+ * <!-- end-model-doc -->
  * @see com.bluexml.side.form.FormPackage#getFormGroupPresentationType()
  * @model
  * @generated
@@ -76,6 +79,9 @@ public enum FormGroupPresentationType implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'auto' option displays elements in an horizontal way with a border.
+	 * <!-- end-model-doc -->
 	 * @see #AUTO
 	 * @model name="auto"
 	 * @generated
@@ -91,6 +97,9 @@ public enum FormGroupPresentationType implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'horizontal' option displays elements in an horizontal way. The label of the form group will not appear.
+	 * <!-- end-model-doc -->
 	 * @see #HORIZONTAL
 	 * @model name="horizontal"
 	 * @generated
@@ -106,6 +115,9 @@ public enum FormGroupPresentationType implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'vertical' value displays elements in a vertical way. The label of the form group will not appear.
+	 * <!-- end-model-doc -->
 	 * @see #VERTICAL
 	 * @model name="vertical"
 	 * @generated
@@ -121,6 +133,9 @@ public enum FormGroupPresentationType implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'Tabbed' option displays elements in a tab.
+	 * <!-- end-model-doc -->
 	 * @see #TABBED
 	 * @model name="Tabbed"
 	 * @generated
@@ -136,6 +151,9 @@ public enum FormGroupPresentationType implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'bordeless' option displays elements border. The label of the form group will not appear.
+	 * <!-- end-model-doc -->
 	 * @see #BORDERLESS
 	 * @model name="borderless"
 	 * @generated

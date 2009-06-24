@@ -114,7 +114,7 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Integer FIELD_SIZE_EDEFAULT = null;
+	protected static final int FIELD_SIZE_EDEFAULT = 0;
 
 	/**
 	 * The cached value of the '{@link #getFieldSize() <em>Field Size</em>}' attribute.
@@ -124,7 +124,7 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	 * @generated
 	 * @ordered
 	 */
-	protected Integer fieldSize = FIELD_SIZE_EDEFAULT;
+	protected int fieldSize = FIELD_SIZE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getStyle() <em>Style</em>}' attribute.
@@ -254,7 +254,7 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Integer getFieldSize() {
+	public int getFieldSize() {
 		return fieldSize;
 	}
 
@@ -263,8 +263,8 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFieldSize(Integer newFieldSize) {
-		Integer oldFieldSize = fieldSize;
+	public void setFieldSize(int newFieldSize) {
+		int oldFieldSize = fieldSize;
 		fieldSize = newFieldSize;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FIELD__FIELD_SIZE, oldFieldSize, fieldSize));
@@ -308,7 +308,7 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 			case FormPackage.FIELD__DISABLED:
 				return isDisabled() ? Boolean.TRUE : Boolean.FALSE;
 			case FormPackage.FIELD__FIELD_SIZE:
-				return getFieldSize();
+				return new Integer(getFieldSize());
 			case FormPackage.FIELD__STYLE:
 				return getStyle();
 		}
@@ -337,7 +337,7 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 				setDisabled(((Boolean)newValue).booleanValue());
 				return;
 			case FormPackage.FIELD__FIELD_SIZE:
-				setFieldSize((Integer)newValue);
+				setFieldSize(((Integer)newValue).intValue());
 				return;
 			case FormPackage.FIELD__STYLE:
 				setStyle((String)newValue);
@@ -393,7 +393,7 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 			case FormPackage.FIELD__DISABLED:
 				return disabled != DISABLED_EDEFAULT;
 			case FormPackage.FIELD__FIELD_SIZE:
-				return FIELD_SIZE_EDEFAULT == null ? fieldSize != null : !FIELD_SIZE_EDEFAULT.equals(fieldSize);
+				return fieldSize != FIELD_SIZE_EDEFAULT;
 			case FormPackage.FIELD__STYLE:
 				return STYLE_EDEFAULT == null ? style != null : !STYLE_EDEFAULT.equals(style);
 		}

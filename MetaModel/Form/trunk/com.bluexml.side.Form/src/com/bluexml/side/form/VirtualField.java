@@ -11,6 +11,14 @@ package com.bluexml.side.form;
  * A representation of the model object '<em><b>Virtual Field</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: When you have a form inside another (see ModelChoiceField) you can drag & drop fields to an upper form. This field won’t be moved from his original form but will be virtualized on the targeted form. Virtual Fields are just link to the original field.
+ * 
+ * Example: considering a Person class and a ContactInformation class with a Fax attribute with an association from Person to ContactInformation. If you want to insert in the Person form, three Fax input field, you will use the Virtual field mechanism to move up directly inside Person form.
+ * Inherits:
+ * - Field.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

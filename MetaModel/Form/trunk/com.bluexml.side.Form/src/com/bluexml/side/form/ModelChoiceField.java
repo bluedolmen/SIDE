@@ -13,6 +13,18 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Model Choice Field</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: The 'ModelChoiceField' make reference to the associations of classes.
+ * 
+ * Operations:
+ * - 'Relation / Expand to reference': 
+ * - 'Relation / Expand to Model Choice Field with inline edition': 
+ * 
+ * Inherits:
+ * - ClassReference.
+ * - Field.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -123,6 +135,9 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'widget' attributes provides a layout for model choice field.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Widget</em>' attribute.
 	 * @see com.bluexml.side.form.ReferenceWidgetType
 	 * @see #setWidget(ReferenceWidgetType)
@@ -152,6 +167,9 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'show_actions' attribute specifies if it possible to edit or to create.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Show actions</em>' attribute.
 	 * @see #setShow_actions(boolean)
 	 * @see com.bluexml.side.form.FormPackage#getModelChoiceField_Show_actions()

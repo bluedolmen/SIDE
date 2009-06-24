@@ -13,6 +13,13 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Form Group</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: The FormGroup defines a logical group of fields. This logical grouping is used to generate grouping in the generated form through tabs, rows group, …. The creation of FormGroup is achieved by using the ‘Group in a new group’ operation of Field. 
+ * 
+ * Inherits: 
+ * - FormElement.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -52,11 +59,20 @@ public interface FormGroup extends FormElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The type of presentation to propose for the group:
+	 * - auto: the generator decides the way to present the group.
+	 * - horizontal: the group is available under an horizontal separation.
+	 * - vertical: the group is available under a vertical separation.
+	 * - tabbed: the group is available under a tab.
+	 * - borderless: the group is available under a separation without borders.
+	 * 
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Presentation</em>' attribute.
 	 * @see com.bluexml.side.form.FormGroupPresentationType
 	 * @see #setPresentation(FormGroupPresentationType)
 	 * @see com.bluexml.side.form.FormPackage#getFormGroup_Presentation()
-	 * @model
+	 * @model extendedMetaData="name='presentation'"
 	 * @generated
 	 */
 	FormGroupPresentationType getPresentation();

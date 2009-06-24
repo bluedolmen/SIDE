@@ -17,6 +17,9 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Choice Widget Type</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * Definition: The 'ChoiceWidgetType'  is an enumeration list with the different layout for a choice field.
+ * <!-- end-model-doc -->
  * @see com.bluexml.side.form.FormPackage#getChoiceWidgetType()
  * @model
  * @generated
@@ -50,6 +53,10 @@ public enum ChoiceWidgetType implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'Select' option specifies the representation of the 
+	 * comboxbox
+	 * <!-- end-model-doc -->
 	 * @see #SELECT
 	 * @model name="Select"
 	 * @generated
@@ -65,6 +72,9 @@ public enum ChoiceWidgetType implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * on peut cree ou editeur , un formulaire inclus
+	 * <!-- end-model-doc -->
 	 * @see #INLINE
 	 * @model name="Inline"
 	 * @generated

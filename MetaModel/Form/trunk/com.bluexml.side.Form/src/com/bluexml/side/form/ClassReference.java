@@ -17,6 +17,13 @@ import com.bluexml.side.clazz.Clazz;
  * A representation of the model object '<em><b>Class Reference</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: The 'ClassReference' is used to reference a form class to a class.
+ * 
+ * Example:
+ * - Real class=Class Article.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

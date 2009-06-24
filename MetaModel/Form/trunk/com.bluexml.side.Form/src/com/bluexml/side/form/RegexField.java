@@ -11,6 +11,11 @@ package com.bluexml.side.form;
  * A representation of the model object '<em><b>Regex Field</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: The ‘RegexField’ allows setting a constraint on the value of an input field. The langage used to express this constraint is standard Java Regular expression (java.util.regex). To create a RegexField (not available in the Class model), you must use a ‘Transform to RegexField’ operation on the field where you want to make a control of the user input.
+ * Example: “.+@.+\\.[a-z]+” to validate the structure of an email
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

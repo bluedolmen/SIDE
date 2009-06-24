@@ -11,6 +11,25 @@ package com.bluexml.side.form;
  * A representation of the model object '<em><b>URL Field</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: The 'URLField' specifies a url address.
+ * 
+ * Constraint/limit: If the input is not a url, the URLField background color will change.
+ * 
+ * Operations:
+ * - 'Transform/to CharField': Transform URLField into CharField.
+ * - 'Transform/to EmailField': Transform URLField into EmailField.
+ * - 'Transform/to PasswordField': Transform URLField into PasswordField.
+ * - 'Transform/to RegexField': Transform URLField into RegexField.
+ * - 'Transform/to PhoneNumberField': Transform URLField into PhoneNumberField.
+ * - 'Transform/to TextField': Transform URLField into TextField.
+ * 
+ * Example: http://bluexml.com
+ * 
+ * Inherits: 
+ * - CharField
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

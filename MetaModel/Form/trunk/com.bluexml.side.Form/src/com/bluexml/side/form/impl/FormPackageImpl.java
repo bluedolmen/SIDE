@@ -1388,7 +1388,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEAttribute(getField_Error_messages(), g1, "error_messages", null, 0, 1, Field.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_Initial(), ecorePackage.getEString(), "initial", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_Disabled(), ecorePackage.getEBoolean(), "disabled", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getField_FieldSize(), ecorePackage.getEIntegerObject(), "fieldSize", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getField_FieldSize(), ecorePackage.getEInt(), "fieldSize", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_Style(), ecorePackage.getEString(), "style", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(booleanFieldEClass, BooleanField.class, "BooleanField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1512,6 +1512,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		createEcoreAnnotations();
 		// http://www.bluexml.com/OCL
 		createOCLAnnotations();
+		// http:///org/eclipse/emf/ecore/util/ExtendedMetaData
+		createExtendedMetaDataAnnotations();
 	}
 
 	/**
@@ -1527,25 +1529,25 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "noSpecialCharacters"
-		   });			
+		   });																		
 		addAnnotation
 		  (charFieldEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "MinSuperiorToMax"
-		   });			
+		   });																																												
 		addAnnotation
 		  (virtualFieldEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "NoLinkForVirtualField"
-		   });			
+		   });																					
 		addAnnotation
 		  (formContainerEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "validName noSpecialCharacters"
-		   });	
+		   });			
 	}
 
 	/**
@@ -1561,25 +1563,41 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "noSpecialCharacters", "self.id.regexMatch(\'\\w*\') = true"
-		   });			
+		   });																		
 		addAnnotation
 		  (charFieldEClass, 
 		   source, 
 		   new String[] {
 			 "MinSuperiorToMax", "self.min_length <= self.max_length"
-		   });			
+		   });																																												
 		addAnnotation
 		  (virtualFieldEClass, 
 		   source, 
 		   new String[] {
 			 "NoLinkForVirtualField", "not self.link.oclIsUndefined()"
-		   });			
+		   });																					
 		addAnnotation
 		  (formContainerEClass, 
 		   source, 
 		   new String[] {
 			 "validName", "not self.name.oclIsUndefined() and self.name <> \'\'"
-		   });
+		   });		
+	}
+
+	/**
+	 * Initializes the annotations for <b>http:///org/eclipse/emf/ecore/util/ExtendedMetaData</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createExtendedMetaDataAnnotations() {
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";											
+		addAnnotation
+		  (getFormGroup_Presentation(), 
+		   source, 
+		   new String[] {
+			 "name", "presentation"
+		   });																																																																										
 	}
 
 	public FormFactory getFormsFactory() {

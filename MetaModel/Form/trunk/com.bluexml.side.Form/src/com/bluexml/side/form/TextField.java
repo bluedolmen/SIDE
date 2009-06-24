@@ -11,6 +11,21 @@ package com.bluexml.side.form;
  * A representation of the model object '<em><b>Text Field</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: The 'TextField' is designed for multi-line input.
+ * 
+ * Operations:
+ * - 'Transform/to CharField': Transform TextField into CharField.
+ * - 'Transform/to URLField': Transform TextField into URLField.
+ * - 'Transform/to EmailField': Transform TextField into EmailField.
+ * - 'Transform/to PasswordField': Transform TextField into TextField.
+ * - 'Transform/to RegexField': Transform TextField into RegexField.
+ * - 'Transform/to PhoneNumberField': Transform TextField into PhoneNumberField.
+ * 
+ * Inherits: 
+ * - CharField
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
