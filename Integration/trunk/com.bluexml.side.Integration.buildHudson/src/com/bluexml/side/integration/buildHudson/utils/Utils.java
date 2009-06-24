@@ -190,8 +190,7 @@ public class Utils {
 
 		// En fonction du type du projet (feature ou plugin)
 		// on ira regarder soit dans le MANIFEST ou alors dans le feature.xml
-		if (projectName.indexOf("feature") == -1
-				&& !projectName.equals("com.bluexml.side.Util")) {
+		if (projectName.indexOf("feature") == -1) {
 			version = ouvrirFichier(
 					getPathToLocalCopy(projectName) + File.separator
 							+ "META-INF" + File.separator + "MANIFEST.MF")
@@ -251,8 +250,7 @@ public class Utils {
 				path = Application.workspace + File.separator + "S-IDE"
 						+ File.separator + tmp[3] + File.separator + "trunk";
 
-				if (projects[i].indexOf("feature") == -1
-						&& !projects[i].equals("com.bluexml.side.Util")) {
+				if (projects[i].indexOf("feature") == -1) {
 
 					FileHelper.copyFiles(new File(path + File.separator
 							+ projects[i]), new File(getBuildDirectory()
@@ -377,8 +375,7 @@ public class Utils {
 			for (String element : listeProjet) {
 				if (listeProjetReels.contains(element)) {
 					// on met tous les plugins modifiés dans un tableau
-					if (element.indexOf("feature") == -1
-							&& !element.equals("com.bluexml.side.Util"))
+					if (element.indexOf("feature") == -1)
 						listePlugin.add(element);
 					// et tous les features dans un autre
 					else
@@ -393,8 +390,7 @@ public class Utils {
 		} else {
 
 			for (int i = 0; i < projects.length; i++) {
-				if (projects[i].indexOf("feature") == -1
-						&& !projects[i].equals("com.bluexml.side.Util"))
+				if (projects[i].indexOf("feature") == -1)
 					listePlugin.add(projects[i]);
 			}
 
@@ -408,8 +404,7 @@ public class Utils {
 
 		// On fait la meme chose mais pour toutes les features
 		for (int i = 0; i < projects.length; i++) {
-			if (projects[i].indexOf("feature") != -1
-					|| projects[i].equals("com.bluexml.side.Util"))
+			if (projects[i].indexOf("feature") != -1)
 				updateVersionNumber(projects[i]);
 		}
 
@@ -515,8 +510,7 @@ public class Utils {
 			for (String element : listeProjet) {
 				if (listeProjetReels.contains(element)) {
 					// on met tous les plugins modifiés dans un tableau
-					if (element.indexOf("feature") == -1
-							&& !element.equals("com.bluexml.side.Util"))
+					if (element.indexOf("feature") == -1)
 						listePlugin.add(element);
 					// et tous les features dans un autre
 					else
@@ -531,8 +525,7 @@ public class Utils {
 		} else {
 
 			for (int i = 0; i < projects.length; i++) {
-				if (projects[i].indexOf("feature") == -1
-						&& !projects[i].equals("com.bluexml.side.Util"))
+				if (projects[i].indexOf("feature") == -1)
 					listePlugin.add(projects[i]);
 			}
 
@@ -546,8 +539,7 @@ public class Utils {
 
 		// On fait la meme chose mais pour toutes les features
 		for (int i = 0; i < projects.length; i++) {
-			if (projects[i].indexOf("feature") != -1
-					|| projects[i].equals("com.bluexml.side.Util"))
+			if (projects[i].indexOf("feature") != -1)
 				updateVersionNumber(projects[i]);
 		}
 
@@ -589,8 +581,7 @@ public class Utils {
 					+ File.separator + tmp[3] + File.separator + "trunk"
 					+ File.separator + projectName;
 		} else {
-			if (projectName.indexOf("feature") == -1
-					&& !projectName.equals("com.bluexml.side.Util")) {
+			if (projectName.indexOf("feature") == -1) {
 
 				path = Application.workspace + "_CO" + File.separator
 						+ "plugins" + File.separator + projectName;
@@ -614,8 +605,7 @@ public class Utils {
 
 		// En fonction du type du projet (feature ou plugin)
 		// on ira regarder soit dans le MANIFEST.MF ou alors dans le feature.xml
-		if (projectName.indexOf("feature") == -1
-				&& !projectName.equals("com.bluexml.side.Util")) {
+		if (projectName.indexOf("feature") == -1) {
 			// chemin vers le MANIFEST.MF
 			String filePluginPath = getPathToLocalCopy(projectName)
 					+ File.separator + "META-INF" + File.separator
@@ -811,8 +801,7 @@ public class Utils {
 		// on met tous les features dans le tableau
 		for (int i = 0; i < projects.length; i++) {
 
-			if (projects[i].indexOf("feature") != -1
-					|| projects[i].equals("com.bluexml.side.Util"))
+			if (projects[i].indexOf("feature") != -1)
 				listeFeature.add(projects[i]);
 		}
 
@@ -967,8 +956,7 @@ public class Utils {
 			String[] projects = getProjects();
 
 			for (int i = 0; i < projects.length; i++) {
-				if (projects[i].indexOf("feature") == -1
-						&& !projects[i].equals("com.bluexml.side.Util"))
+				if (projects[i].indexOf("feature") == -1)
 					FileHelper.copyFiles(new File(getBuildDirectory()
 							+ File.separator + "plugins" + File.separator
 							+ projects[i] + File.separator + "bin"), new File(

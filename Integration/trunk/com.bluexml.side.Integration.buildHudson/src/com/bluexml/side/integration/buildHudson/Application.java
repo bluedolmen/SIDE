@@ -351,8 +351,7 @@ public class Application {
 
 		out += "\t<plugins>\n";
 		for (int i = 0; i < projects.length; i++) {
-			if (projects[i].indexOf("feature") == -1
-					&& !projects[i].equals("com.bluexml.side.Util")) {
+			if (projects[i].indexOf("feature") == -1) {
 				out += "\t\t<plugin id=\"" + projects[i] + "\"/>\n";
 			}
 		}
@@ -360,8 +359,7 @@ public class Application {
 
 		out += "\t<features>\n";
 		for (int i = 0; i < projects.length; i++) {
-			if (projects[i].indexOf("feature") != -1
-					|| projects[i].equals("com.bluexml.side.Util")) {
+			if (projects[i].indexOf("feature") != -1) {
 				out += "\t\t<feature id=\"" + projects[i] + "\" version=\""
 						+ Utils.getVersionNumber(projects[i]) + "\"/>\n";
 			}
@@ -386,8 +384,7 @@ public class Application {
 		ArrayList<String> categories = new ArrayList<String>();
 
 		for (int i = 0; i < projects.length; i++) {
-			if (projects[i].indexOf("feature") != -1
-					|| projects[i].equals("com.bluexml.side.Util")) {
+			if (projects[i].indexOf("feature") != -1) {
 				String[] branche = projects[i].split("\\.");
 				if (!categories.contains(branche[3])) {
 					categories.add(branche[3]);
@@ -398,8 +395,7 @@ public class Application {
 		String out = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 		out += "<site>\n\n";
 		for (int i = 0; i < projects.length; i++) {
-			if (projects[i].indexOf("feature") != -1
-					|| projects[i].equals("com.bluexml.side.Util")) {
+			if (projects[i].indexOf("feature") != -1) {
 				out += "\t<feature url=\"features/" + projects[i] + "_"
 						+ Utils.getVersionNumber(projects[i]) + ".jar\" id=\""
 						+ projects[i] + "\" version=\""
@@ -472,18 +468,15 @@ public class Application {
 				// on récupère le nom de la branche (Application, Util, etc ...)
 				String[] branche = projects[i].split("\\.");
 
-				if (branche[3].equals("Util"))
-					branche[3] += "s";
+
 				// si le mot 'feature' n'est pas présent dans le nom du projet
-				if (projects[i].indexOf("feature") == -1
-						&& !projects[i].equals("com.bluexml.side.Util"))
+				if (projects[i].indexOf("feature") == -1)
 					out += "\t\t\t<checkout url=\"" + Utils.getRepository()
 							+ "S-IDE/" + branche[3] + "/trunk/" + projects[i]
 							+ "\" destPath=\"${pluginsPath}" + File.separator
 							+ projects[i] + "\" />\n";
 				// si 'feature' est présent
-				else if (projects[i].indexOf("feature") != -1
-						|| projects[i].equals("com.bluexml.side.Util"))
+				else if (projects[i].indexOf("feature") != -1)
 					out += "\t\t\t<checkout url=\"" + Utils.getRepository()
 							+ "S-IDE/" + branche[3] + "/trunk/" + projects[i]
 							+ "\" destPath=\"${featuresPath}" + File.separator
@@ -512,14 +505,12 @@ public class Application {
 		for (int i = 0; i < projects.length; i++) {
 
 			// si le mot 'feature' n'est pas présent dans le nom du projet
-			if (projects[i].indexOf("feature") == -1
-					&& !projects[i].equals("com.bluexml.side.Util"))
+			if (projects[i].indexOf("feature") == -1)
 				out += "\t\t\t<update dir=\"${buildDirectory}_CO"
 						+ File.separator + "plugins" + File.separator
 						+ projects[i] + "\" recurse=\"yes\"/>\n";
 			// si 'feature' est présent
-			else if (projects[i].indexOf("feature") != -1
-					|| projects[i].equals("com.bluexml.side.Util"))
+			else if (projects[i].indexOf("feature") != -1)
 				out += "\t\t\t<update dir=\"${buildDirectory}_CO"
 						+ File.separator + "features" + File.separator
 						+ projects[i] + "\" recurse=\"yes\"/>\n";
@@ -548,8 +539,7 @@ public class Application {
 		for (int i = 0; i < projects.length; i++) {
 
 			// si le mot 'feature' n'est pas présent dans le nom du projet
-			if (projects[i].indexOf("feature") == -1
-					&& !projects[i].equals("com.bluexml.side.Util")) {
+			if (projects[i].indexOf("feature") == -1) {
 				out += "\t\t\t<fileset dir=\""
 						+ Utils.getPathToLocalCopy(projects[i])
 						+ File.separator + "META-INF\">\n";
@@ -557,8 +547,7 @@ public class Application {
 				out += "\t\t\t</fileset>\n";
 
 			} // si 'feature' est présent
-			else if (projects[i].indexOf("feature") != -1
-					|| projects[i].equals("com.bluexml.side.Util")) {
+			else if (projects[i].indexOf("feature") != -1) {
 				out += "\t\t\t<fileset dir=\""
 						+ Utils.getPathToLocalCopy(projects[i]) + "\">\n";
 				out += "\t\t\t\t<include name=\"feature.xml\" />\n";
@@ -591,8 +580,7 @@ public class Application {
 
 		for (int i = 0; i < projects.length; i++) {
 			// si le mot 'feature' n'est pas présent dans le nom du projet
-			if (projects[i].indexOf("feature") == -1
-					&& !projects[i].equals("com.bluexml.side.Util")) {
+			if (projects[i].indexOf("feature") == -1) {
 				out += "\t\t\t<fileset dir=\""
 						+ Utils.getPathToLocalCopy(projects[i]) + "\">\n";
 				out += "\t\t\t\t<include name=\"**/*.java\" />\n";
