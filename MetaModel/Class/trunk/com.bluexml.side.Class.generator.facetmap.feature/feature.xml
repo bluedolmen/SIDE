@@ -37,14 +37,14 @@
          id="com.bluexml.side.Class"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.13"
          unpack="false"/>
 
    <plugin
          id="com.bluexml.side.Class.generator.facetmap"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.0"
          unpack="false"/>
 
 </feature>
