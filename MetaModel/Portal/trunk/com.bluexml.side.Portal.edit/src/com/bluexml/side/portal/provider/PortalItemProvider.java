@@ -29,6 +29,7 @@ import com.bluexml.side.portal.Portal;
 import com.bluexml.side.portal.PortalFactory;
 import com.bluexml.side.portal.PortalPackage;
 import com.bluexml.side.view.ViewFactory;
+import com.bluexml.side.workflow.WorkflowFactory;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.portal.Portal} object.
@@ -191,6 +192,11 @@ public class PortalItemProvider
 			(createChildParameter
 				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
 				 ViewFactory.eINSTANCE.createViewCollection()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
+				 WorkflowFactory.eINSTANCE.createProcess()));
 
 		newChildDescriptors.add
 			(createChildParameter

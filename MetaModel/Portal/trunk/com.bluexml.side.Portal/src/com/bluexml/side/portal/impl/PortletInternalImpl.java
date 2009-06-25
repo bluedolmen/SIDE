@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.portal.impl;
 
+import com.bluexml.side.form.FormContainer;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -27,8 +28,8 @@ import com.bluexml.side.view.AbstractView;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.portal.impl.PortletInternalImpl#getType <em>Type</em>}</li>
- *   <li>{@link com.bluexml.side.portal.impl.PortletInternalImpl#getClass_ <em>Class</em>}</li>
  *   <li>{@link com.bluexml.side.portal.impl.PortletInternalImpl#getView <em>View</em>}</li>
+ *   <li>{@link com.bluexml.side.portal.impl.PortletInternalImpl#getForm <em>Form</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,7 +44,7 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final InternalPortletType TYPE_EDEFAULT = InternalPortletType.ARRAY;
+	protected static final InternalPortletType TYPE_EDEFAULT = InternalPortletType.VIEW;
 
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -56,16 +57,6 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 	protected InternalPortletType type = TYPE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getClass_() <em>Class</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getClass_()
-	 * @generated
-	 * @ordered
-	 */
-	protected Clazz class_;
-
-	/**
 	 * The cached value of the '{@link #getView() <em>View</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -74,6 +65,16 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 	 * @ordered
 	 */
 	protected AbstractView view;
+
+	/**
+	 * The cached value of the '{@link #getForm() <em>Form</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getForm()
+	 * @generated
+	 * @ordered
+	 */
+	protected FormContainer form;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -120,44 +121,6 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Clazz getClass_() {
-		if (class_ != null && class_.eIsProxy()) {
-			InternalEObject oldClass = (InternalEObject)class_;
-			class_ = (Clazz)eResolveProxy(oldClass);
-			if (class_ != oldClass) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PortalPackage.PORTLET_INTERNAL__CLASS, oldClass, class_));
-			}
-		}
-		return class_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Clazz basicGetClass() {
-		return class_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setClass(Clazz newClass) {
-		Clazz oldClass = class_;
-		class_ = newClass;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PortalPackage.PORTLET_INTERNAL__CLASS, oldClass, class_));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public AbstractView getView() {
 		if (view != null && view.eIsProxy()) {
 			InternalEObject oldView = (InternalEObject)view;
@@ -196,17 +159,55 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public FormContainer getForm() {
+		if (form != null && form.eIsProxy()) {
+			InternalEObject oldForm = (InternalEObject)form;
+			form = (FormContainer)eResolveProxy(oldForm);
+			if (form != oldForm) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PortalPackage.PORTLET_INTERNAL__FORM, oldForm, form));
+			}
+		}
+		return form;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FormContainer basicGetForm() {
+		return form;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setForm(FormContainer newForm) {
+		FormContainer oldForm = form;
+		form = newForm;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PortalPackage.PORTLET_INTERNAL__FORM, oldForm, form));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case PortalPackage.PORTLET_INTERNAL__TYPE:
 				return getType();
-			case PortalPackage.PORTLET_INTERNAL__CLASS:
-				if (resolve) return getClass_();
-				return basicGetClass();
 			case PortalPackage.PORTLET_INTERNAL__VIEW:
 				if (resolve) return getView();
 				return basicGetView();
+			case PortalPackage.PORTLET_INTERNAL__FORM:
+				if (resolve) return getForm();
+				return basicGetForm();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -222,11 +223,11 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 			case PortalPackage.PORTLET_INTERNAL__TYPE:
 				setType((InternalPortletType)newValue);
 				return;
-			case PortalPackage.PORTLET_INTERNAL__CLASS:
-				setClass((Clazz)newValue);
-				return;
 			case PortalPackage.PORTLET_INTERNAL__VIEW:
 				setView((AbstractView)newValue);
+				return;
+			case PortalPackage.PORTLET_INTERNAL__FORM:
+				setForm((FormContainer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -243,11 +244,11 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 			case PortalPackage.PORTLET_INTERNAL__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
-			case PortalPackage.PORTLET_INTERNAL__CLASS:
-				setClass((Clazz)null);
-				return;
 			case PortalPackage.PORTLET_INTERNAL__VIEW:
 				setView((AbstractView)null);
+				return;
+			case PortalPackage.PORTLET_INTERNAL__FORM:
+				setForm((FormContainer)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -263,10 +264,10 @@ public class PortletInternalImpl extends PortalModelElementImpl implements Portl
 		switch (featureID) {
 			case PortalPackage.PORTLET_INTERNAL__TYPE:
 				return type != TYPE_EDEFAULT;
-			case PortalPackage.PORTLET_INTERNAL__CLASS:
-				return class_ != null;
 			case PortalPackage.PORTLET_INTERNAL__VIEW:
 				return view != null;
+			case PortalPackage.PORTLET_INTERNAL__FORM:
+				return form != null;
 		}
 		return super.eIsSet(featureID);
 	}

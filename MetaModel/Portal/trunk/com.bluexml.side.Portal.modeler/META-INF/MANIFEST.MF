@@ -22,5 +22,9 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Common,
  org.topcased.modeler,
  com.bluexml.side.Class.modeler;bundle-version="1.0.0",
- com.bluexml.side.View;bundle-version="1.0.0"
+ com.bluexml.side.View;bundle-version="1.0.0",
+ com.bluexml.side.Form;bundle-version="1.0.12",
+ com.bluexml.side.Form.edit;bundle-version="1.0.12",
+ com.bluexml.side.Workflow.edit;bundle-version="1.0.13",
+ com.bluexml.side.View.edit;bundle-version="1.0.0"
 Eclipse-LazyStart: true

@@ -17,5 +17,7 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Util.metaModel.validate;bundle-version="1.0.11",
  org.eclipse.ocl,
  org.eclipse.ocl.ecore,
- com.bluexml.side.View;bundle-version="1.0.0"
+ com.bluexml.side.View;bundle-version="1.0.0",
+ com.bluexml.side.Form;bundle-version="1.0.12",
+ com.bluexml.side.Workflow;bundle-version="1.0.13"
 Eclipse-LazyStart: true

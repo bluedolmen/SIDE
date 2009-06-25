@@ -10,7 +10,9 @@ import com.bluexml.side.clazz.provider.ClassEditPlugin;
 
 import com.bluexml.side.common.provider.CommonEditPlugin;
 
+import com.bluexml.side.form.provider.FormsEditPlugin;
 import com.bluexml.side.view.provider.ViewEditPlugin;
+import com.bluexml.side.workflow.provider.WorkflowEditPlugin;
 import org.eclipse.emf.common.EMFPlugin;
 
 import org.eclipse.emf.common.ui.EclipseUIPlugin;
@@ -51,7 +53,9 @@ public final class PortalEditorPlugin extends EMFPlugin {
 			(new ResourceLocator [] {
 				ClassEditPlugin.INSTANCE,
 				CommonEditPlugin.INSTANCE,
+				FormsEditPlugin.INSTANCE,
 				ViewEditPlugin.INSTANCE,
+				WorkflowEditPlugin.INSTANCE,
 			});
 	}
 

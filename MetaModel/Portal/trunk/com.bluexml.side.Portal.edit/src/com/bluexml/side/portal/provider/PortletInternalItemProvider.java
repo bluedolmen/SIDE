@@ -66,8 +66,8 @@ public class PortletInternalItemProvider
 			super.getPropertyDescriptors(object);
 
 			addTypePropertyDescriptor(object);
-			addClassPropertyDescriptor(object);
 			addViewPropertyDescriptor(object);
+			addFormPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -95,28 +95,6 @@ public class PortletInternalItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Class feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addClassPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_PortletInternal_class_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_PortletInternal_class_feature", "_UI_PortletInternal_type"),
-				 PortalPackage.Literals.PORTLET_INTERNAL__CLASS,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This adds a property descriptor for the View feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -130,6 +108,28 @@ public class PortletInternalItemProvider
 				 getString("_UI_PortletInternal_view_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_PortletInternal_view_feature", "_UI_PortletInternal_type"),
 				 PortalPackage.Literals.PORTLET_INTERNAL__VIEW,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Form feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addFormPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_PortletInternal_form_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PortletInternal_form_feature", "_UI_PortletInternal_type"),
+				 PortalPackage.Literals.PORTLET_INTERNAL__FORM,
 				 true,
 				 false,
 				 true,

@@ -158,9 +158,7 @@ public class PortletInternalEditPart extends EMFGraphNodeEditPart {
 			if (pi.getType() != null && pi.getType().toString().length() > 0) {
 				textLabel = pi.getType() + " ";
 			}
-			if (pi.getClass_() != null) {
-				textLabel += pi.getClass_().getName();
-			}
+			
 			lbl.setText(textLabel);
 
 			lbl.setFont(JFaceResources.getFontRegistry().get("BoldFont"));

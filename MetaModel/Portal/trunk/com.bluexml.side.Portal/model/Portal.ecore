@@ -56,8 +56,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PortletInternal" eSuperTypes="#//PortalModelElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//InternalPortletType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="class" eType="ecore:EClass ../../com.bluexml.side.Class/model/Class.ecore#//Clazz"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="view" eType="ecore:EClass ../../com.bluexml.side.View/model/View.ecore#//AbstractView"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="form" eType="ecore:EClass ../../com.bluexml.side.Form/model/Forms.ecore#//FormContainer"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractPortletAttributes" abstract="true"/>
   <eClassifiers xsi:type="ecore:EEnum" name="widthUnit">
@@ -65,7 +65,7 @@
     <eLiterals name="Pixel" value="1" literal="Pixel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="InternalPortletType">
-    <eLiterals name="Array" value="1" literal="Array"/>
+    <eLiterals name="View" value="1" literal="View"/>
     <eLiterals name="Form" value="3" literal="Form"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Group">

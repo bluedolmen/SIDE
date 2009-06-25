@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.portal;
 
+import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.view.AbstractView;
 
@@ -18,8 +19,8 @@ import com.bluexml.side.view.AbstractView;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.bluexml.side.portal.PortletInternal#getType <em>Type</em>}</li>
- *   <li>{@link com.bluexml.side.portal.PortletInternal#getClass_ <em>Class</em>}</li>
  *   <li>{@link com.bluexml.side.portal.PortletInternal#getView <em>View</em>}</li>
+ *   <li>{@link com.bluexml.side.portal.PortletInternal#getForm <em>Form</em>}</li>
  * </ul>
  * </p>
  *
@@ -58,32 +59,6 @@ public interface PortletInternal extends PortalModelElement {
 	void setType(InternalPortletType value);
 
 	/**
-	 * Returns the value of the '<em><b>Class</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Class</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Class</em>' reference.
-	 * @see #setClass(Clazz)
-	 * @see com.bluexml.side.portal.PortalPackage#getPortletInternal_Class()
-	 * @model
-	 * @generated
-	 */
-	Clazz getClass_();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.portal.PortletInternal#getClass_ <em>Class</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Class</em>' reference.
-	 * @see #getClass_()
-	 * @generated
-	 */
-	void setClass(Clazz value);
-
-	/**
 	 * Returns the value of the '<em><b>View</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -108,5 +83,31 @@ public interface PortletInternal extends PortalModelElement {
 	 * @generated
 	 */
 	void setView(AbstractView value);
+
+	/**
+	 * Returns the value of the '<em><b>Form</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Form</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Form</em>' reference.
+	 * @see #setForm(FormContainer)
+	 * @see com.bluexml.side.portal.PortalPackage#getPortletInternal_Form()
+	 * @model
+	 * @generated
+	 */
+	FormContainer getForm();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.portal.PortletInternal#getForm <em>Form</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Form</em>' reference.
+	 * @see #getForm()
+	 * @generated
+	 */
+	void setForm(FormContainer value);
 
 } // PortletInternal

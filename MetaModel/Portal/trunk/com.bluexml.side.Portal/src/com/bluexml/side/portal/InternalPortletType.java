@@ -23,16 +23,14 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum InternalPortletType implements Enumerator {
 	/**
-	 * The '<em><b>Array</b></em>' literal object.
+	 * The '<em><b>View</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #ARRAY_VALUE
+	 * @see #VIEW_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	ARRAY(1, "Array", "Array"),
-
-	/**
+	VIEW(1, "View", "View"), /**
 	 * The '<em><b>Form</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -43,19 +41,19 @@ public enum InternalPortletType implements Enumerator {
 	FORM(3, "Form", "Form");
 
 	/**
-	 * The '<em><b>Array</b></em>' literal value.
+	 * The '<em><b>View</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Array</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>View</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #ARRAY
-	 * @model name="Array"
+	 * @see #VIEW
+	 * @model name="View"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ARRAY_VALUE = 1;
+	public static final int VIEW_VALUE = 1;
 
 	/**
 	 * The '<em><b>Form</b></em>' literal value.
@@ -80,7 +78,7 @@ public enum InternalPortletType implements Enumerator {
 	 */
 	private static final InternalPortletType[] VALUES_ARRAY =
 		new InternalPortletType[] {
-			ARRAY,
+			VIEW,
 			FORM,
 		};
 
@@ -132,7 +130,7 @@ public enum InternalPortletType implements Enumerator {
 	 */
 	public static InternalPortletType get(int value) {
 		switch (value) {
-			case ARRAY_VALUE: return ARRAY;
+			case VIEW_VALUE: return VIEW;
 			case FORM_VALUE: return FORM;
 		}
 		return null;

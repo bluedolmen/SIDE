@@ -10,6 +10,7 @@ import com.bluexml.side.clazz.ClazzPackage;
 
 import com.bluexml.side.common.CommonPackage;
 
+import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.portal.AbstractPortletAttributes;
 import com.bluexml.side.portal.Column;
 import com.bluexml.side.portal.Group;
@@ -238,7 +239,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		isInited = true;
 
 		// Initialize simple dependencies
-		ClazzPackage.eINSTANCE.eClass();
+		FormPackage.eINSTANCE.eClass();
 		ViewPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
@@ -555,7 +556,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPortletInternal_Class() {
+	public EReference getPortletInternal_View() {
 		return (EReference)portletInternalEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -564,7 +565,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPortletInternal_View() {
+	public EReference getPortletInternal_Form() {
 		return (EReference)portletInternalEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -897,8 +898,8 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 
 		portletInternalEClass = createEClass(PORTLET_INTERNAL);
 		createEAttribute(portletInternalEClass, PORTLET_INTERNAL__TYPE);
-		createEReference(portletInternalEClass, PORTLET_INTERNAL__CLASS);
 		createEReference(portletInternalEClass, PORTLET_INTERNAL__VIEW);
+		createEReference(portletInternalEClass, PORTLET_INTERNAL__FORM);
 
 		abstractPortletAttributesEClass = createEClass(ABSTRACT_PORTLET_ATTRIBUTES);
 
@@ -965,8 +966,8 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 
 		// Obtain other dependent packages
 		CommonPackage theCommonPackage = (CommonPackage)EPackage.Registry.INSTANCE.getEPackage(CommonPackage.eNS_URI);
-		ClazzPackage theClazzPackage = (ClazzPackage)EPackage.Registry.INSTANCE.getEPackage(ClazzPackage.eNS_URI);
 		ViewPackage theViewPackage = (ViewPackage)EPackage.Registry.INSTANCE.getEPackage(ViewPackage.eNS_URI);
+		FormPackage theFormPackage = (FormPackage)EPackage.Registry.INSTANCE.getEPackage(FormPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -1023,8 +1024,8 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 
 		initEClass(portletInternalEClass, PortletInternal.class, "PortletInternal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPortletInternal_Type(), this.getInternalPortletType(), "type", null, 0, 1, PortletInternal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPortletInternal_Class(), theClazzPackage.getClazz(), null, "class", null, 0, 1, PortletInternal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPortletInternal_View(), theViewPackage.getAbstractView(), null, "view", null, 0, 1, PortletInternal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPortletInternal_Form(), theFormPackage.getFormContainer(), null, "form", null, 0, 1, PortletInternal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractPortletAttributesEClass, AbstractPortletAttributes.class, "AbstractPortletAttributes", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1066,7 +1067,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		addEEnumLiteral(widthUnitEEnum, widthUnit.PIXEL);
 
 		initEEnum(internalPortletTypeEEnum, InternalPortletType.class, "InternalPortletType");
-		addEEnumLiteral(internalPortletTypeEEnum, InternalPortletType.ARRAY);
+		addEEnumLiteral(internalPortletTypeEEnum, InternalPortletType.VIEW);
 		addEEnumLiteral(internalPortletTypeEEnum, InternalPortletType.FORM);
 
 		initEEnum(portletTypeAttributeTypeEEnum, PortletTypeAttributeType.class, "PortletTypeAttributeType");

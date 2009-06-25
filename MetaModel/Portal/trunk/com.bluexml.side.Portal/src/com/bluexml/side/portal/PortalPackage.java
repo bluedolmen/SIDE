@@ -836,22 +836,22 @@ public interface PortalPackage extends EPackage {
 	int PORTLET_INTERNAL__TYPE = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Class</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PORTLET_INTERNAL__CLASS = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>View</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PORTLET_INTERNAL__VIEW = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int PORTLET_INTERNAL__VIEW = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Form</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_INTERNAL__FORM = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Portlet Internal</em>' class.
@@ -1563,17 +1563,6 @@ public interface PortalPackage extends EPackage {
 	EAttribute getPortletInternal_Type();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.bluexml.side.portal.PortletInternal#getClass_ <em>Class</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Class</em>'.
-	 * @see com.bluexml.side.portal.PortletInternal#getClass_()
-	 * @see #getPortletInternal()
-	 * @generated
-	 */
-	EReference getPortletInternal_Class();
-
-	/**
 	 * Returns the meta object for the reference '{@link com.bluexml.side.portal.PortletInternal#getView <em>View</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1583,6 +1572,17 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPortletInternal_View();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.bluexml.side.portal.PortletInternal#getForm <em>Form</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Form</em>'.
+	 * @see com.bluexml.side.portal.PortletInternal#getForm()
+	 * @see #getPortletInternal()
+	 * @generated
+	 */
+	EReference getPortletInternal_Form();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.portal.AbstractPortletAttributes <em>Abstract Portlet Attributes</em>}'.
@@ -2195,20 +2195,20 @@ public interface PortalPackage extends EPackage {
 		EAttribute PORTLET_INTERNAL__TYPE = eINSTANCE.getPortletInternal_Type();
 
 		/**
-		 * The meta object literal for the '<em><b>Class</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PORTLET_INTERNAL__CLASS = eINSTANCE.getPortletInternal_Class();
-
-		/**
 		 * The meta object literal for the '<em><b>View</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference PORTLET_INTERNAL__VIEW = eINSTANCE.getPortletInternal_View();
+
+		/**
+		 * The meta object literal for the '<em><b>Form</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PORTLET_INTERNAL__FORM = eINSTANCE.getPortletInternal_Form();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.portal.impl.AbstractPortletAttributesImpl <em>Abstract Portlet Attributes</em>}' class.
