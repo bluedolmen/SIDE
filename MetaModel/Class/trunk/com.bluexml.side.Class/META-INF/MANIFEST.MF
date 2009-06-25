@@ -13,8 +13,8 @@ Export-Package: com.bluexml.side.clazz,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  com.bluexml.side.Common;visibility:=reexport,
- com.bluexml.side.Util.ecore;bundle-version="1.0.0",
- com.bluexml.side.Util.metaModel.validate;bundle-version="1.0.0",
  org.eclipse.ocl,
- org.eclipse.ocl.ecore
+ org.eclipse.ocl.ecore,
+ com.bluexml.side.Util.ecore;bundle-version="1.0.11",
+ com.bluexml.side.Util.metaModel.validate;bundle-version="1.0.11"
 Bundle-ActivationPolicy: lazy
