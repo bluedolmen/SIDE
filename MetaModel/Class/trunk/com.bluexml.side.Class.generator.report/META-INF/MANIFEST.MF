@@ -15,9 +15,9 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.resources;bundle-version="3.4.1",
  com.bluexml.side.Application,
  com.bluexml.side.Class.generator.alfresco;bundle-version="1.0.8",
- com.bluexml.side.Common;bundle-version="1.0.11"
+ com.bluexml.side.Common;bundle-version="1.0.11",
+ com.bluexml.side.Class;bundle-version="1.0.13",
+ com.bluexml.side.Class.modeler;bundle-version="1.0.13"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Import-Package: com.bluexml.side.Class.modeler.diagram.utils.metainfo.value,
- com.bluexml.side.clazz
 Export-Package: com.bluexml.side.clazz.generator.report

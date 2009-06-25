@@ -14,10 +14,10 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.ecore.xmi,
  com.bluexml.side.Application,
  com.bluexml.side.Util.security;bundle-version="1.0.10",
- com.bluexml.side.Util.libs;bundle-version="1.0.10"
+ com.bluexml.side.Util.libs;bundle-version="1.0.10",
+ com.bluexml.side.Common;bundle-version="1.0.12",
+ com.bluexml.side.Util.ecore;bundle-version="1.0.11",
+ com.bluexml.side.Util.model.merge;bundle-version="1.0.12"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.util.generator.acceleo
-Import-Package: com.bluexml.side.Util.ecore,
- com.bluexml.side.common,
- com.bluexml.side.util.model.merge
