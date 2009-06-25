@@ -19,8 +19,8 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.ecore.OCL;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.workflow.Attribute;
 import com.bluexml.side.workflow.BPMAssignmentType;
 import com.bluexml.side.workflow.Event;

@@ -12,12 +12,12 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.ecore.OCL;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.Visibility;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
  * <!-- begin-user-doc -->

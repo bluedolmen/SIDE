@@ -25,7 +25,6 @@ import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.expressions.OCLExpression;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.AssociationType;
@@ -33,6 +32,7 @@ import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.FirstEnd;
 import com.bluexml.side.clazz.SecondEnd;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
  * <!-- begin-user-doc -->

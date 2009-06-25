@@ -6,10 +6,10 @@
  */
 package com.bluexml.side.workflow.util;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 
 import com.bluexml.side.common.util.CommonValidator;
 
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.workflow.Action;
 import com.bluexml.side.workflow.Attribute;
 import com.bluexml.side.workflow.BPMAssignmentType;

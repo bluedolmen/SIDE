@@ -6,8 +6,8 @@
  */
 package com.bluexml.side.workflow.impl;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.workflow.Transition;
 import com.bluexml.side.workflow.TransitionTask;
 import com.bluexml.side.workflow.WorkflowPackage;

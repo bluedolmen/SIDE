@@ -20,8 +20,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.ecore.OCL;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.common.impl.ModelElementImpl;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.workflow.Action;
 import com.bluexml.side.workflow.State;
 import com.bluexml.side.workflow.TaskNode;

@@ -6,13 +6,13 @@
  */
 package com.bluexml.side.common.impl;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.Stereotype;
 import com.bluexml.side.common.Tag;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 import java.util.Collection;
 

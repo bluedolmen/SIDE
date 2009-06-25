@@ -6,10 +6,10 @@
  */
 package com.bluexml.side.view.impl;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 
 import com.bluexml.side.common.impl.PackageImpl;
 
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.ViewCollection;
 import com.bluexml.side.view.ViewPackage;

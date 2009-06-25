@@ -18,12 +18,12 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.ecore.OCL;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.clazz.ClassComment;
 import com.bluexml.side.clazz.ClassModelElement;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.impl.ModelElementImpl;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
  * <!-- begin-user-doc -->

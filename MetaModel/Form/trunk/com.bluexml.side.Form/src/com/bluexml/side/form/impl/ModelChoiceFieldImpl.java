@@ -6,7 +6,6 @@
  */
 package com.bluexml.side.form.impl;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -25,6 +24,7 @@ import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.ReferenceWidgetType;
 import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
  * <!-- begin-user-doc -->

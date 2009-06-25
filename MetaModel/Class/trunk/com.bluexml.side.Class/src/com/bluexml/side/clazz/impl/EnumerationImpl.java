@@ -6,12 +6,13 @@
  */
 package com.bluexml.side.clazz.impl;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.clazz.EnumerationLiteral;
 
 import com.bluexml.side.common.impl.NamedModelElementImpl;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;

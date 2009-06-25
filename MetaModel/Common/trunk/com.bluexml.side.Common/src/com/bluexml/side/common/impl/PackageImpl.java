@@ -6,9 +6,9 @@
  */
 package com.bluexml.side.common.impl;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.common.Stereotype;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 import java.util.Collection;
 

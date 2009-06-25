@@ -6,11 +6,11 @@
  */
 package com.bluexml.side.portal.impl;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.common.impl.ModelElementImpl;
 
 import com.bluexml.side.portal.PortalModelElement;
 import com.bluexml.side.portal.PortalPackage;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.ocl.ecore.OCL;

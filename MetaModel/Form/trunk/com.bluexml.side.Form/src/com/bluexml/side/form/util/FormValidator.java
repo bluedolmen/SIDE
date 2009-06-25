@@ -22,44 +22,8 @@ import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.OCL;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.form.*;
-import com.bluexml.side.form.ActionField;
-import com.bluexml.side.form.BooleanField;
-import com.bluexml.side.form.CharField;
-import com.bluexml.side.form.ChoiceField;
-import com.bluexml.side.form.ChoiceWidgetType;
-import com.bluexml.side.form.ClassReference;
-import com.bluexml.side.form.DateField;
-import com.bluexml.side.form.DateTimeField;
-import com.bluexml.side.form.DecimalField;
-import com.bluexml.side.form.EmailField;
-import com.bluexml.side.form.Field;
-import com.bluexml.side.form.FileField;
-import com.bluexml.side.form.FloatField;
-import com.bluexml.side.form.FormAspect;
-import com.bluexml.side.form.FormClass;
-import com.bluexml.side.form.FormCollection;
-import com.bluexml.side.form.FormContainer;
-import com.bluexml.side.form.FormElement;
-import com.bluexml.side.form.FormGroup;
-import com.bluexml.side.form.FormGroupPresentationType;
-import com.bluexml.side.form.FormPackage;
-import com.bluexml.side.form.FormWorkflow;
-import com.bluexml.side.form.ImageField;
-import com.bluexml.side.form.IntegerField;
-import com.bluexml.side.form.ModelChoiceField;
-import com.bluexml.side.form.PasswordField;
-import com.bluexml.side.form.PhoneNumberField;
-import com.bluexml.side.form.Reference;
-import com.bluexml.side.form.ReferenceWidgetType;
-import com.bluexml.side.form.RegexField;
-import com.bluexml.side.form.TextField;
-import com.bluexml.side.form.TextWidgetType;
-import com.bluexml.side.form.TimeField;
-import com.bluexml.side.form.URLField;
-import com.bluexml.side.form.VirtualField;
-import com.bluexml.side.form.WorkflowFormCollection;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
  * <!-- begin-user-doc -->

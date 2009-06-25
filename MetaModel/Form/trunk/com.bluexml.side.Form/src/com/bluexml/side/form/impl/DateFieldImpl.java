@@ -6,7 +6,6 @@
  */
 package com.bluexml.side.form.impl;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import java.util.Collection;
 import java.util.Date;
 
@@ -19,6 +18,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.form.DateField;
 import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
  * <!-- begin-user-doc -->

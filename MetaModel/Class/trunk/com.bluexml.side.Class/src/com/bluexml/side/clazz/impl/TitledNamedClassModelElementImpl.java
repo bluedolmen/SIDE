@@ -6,7 +6,6 @@
  */
 package com.bluexml.side.clazz.impl;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 
 import com.bluexml.side.clazz.ClassComment;
 import com.bluexml.side.clazz.ClassModelElement;
@@ -15,6 +14,8 @@ import com.bluexml.side.clazz.TitledNamedClassModelElement;
 
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.impl.NamedModelElementImpl;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+
 import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 

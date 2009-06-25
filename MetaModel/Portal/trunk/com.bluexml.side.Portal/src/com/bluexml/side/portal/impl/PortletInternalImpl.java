@@ -13,11 +13,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.ecore.OCL;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.portal.InternalPortletType;
 import com.bluexml.side.portal.PortalPackage;
 import com.bluexml.side.portal.PortletInternal;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.view.AbstractView;
 
 /**

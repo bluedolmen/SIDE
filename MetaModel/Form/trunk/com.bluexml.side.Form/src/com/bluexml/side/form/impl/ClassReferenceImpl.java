@@ -6,7 +6,6 @@
  */
 package com.bluexml.side.form.impl;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -18,6 +17,7 @@ import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.form.CharField;
 import com.bluexml.side.form.ClassReference;
 import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
  * <!-- begin-user-doc -->

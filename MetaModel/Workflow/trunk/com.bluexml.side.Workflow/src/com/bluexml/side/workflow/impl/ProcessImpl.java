@@ -18,9 +18,9 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.ecore.OCL;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.common.impl.PackageImpl;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.workflow.Decision;
 import com.bluexml.side.workflow.EndState;
 import com.bluexml.side.workflow.Fork;

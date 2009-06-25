@@ -6,10 +6,10 @@
  */
 package com.bluexml.side.workflow.impl;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 
 import com.bluexml.side.clazz.Clazz;
 
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.workflow.Attribute;
 import com.bluexml.side.workflow.UserTask;
 import com.bluexml.side.workflow.WorkflowPackage;

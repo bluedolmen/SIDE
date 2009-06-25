@@ -27,13 +27,13 @@ import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.expressions.OCLExpression;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.common.OperationComponent;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
  * <!-- begin-user-doc -->

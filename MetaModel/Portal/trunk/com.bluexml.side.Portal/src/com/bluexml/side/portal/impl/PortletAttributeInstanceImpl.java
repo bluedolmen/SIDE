@@ -6,10 +6,10 @@
  */
 package com.bluexml.side.portal.impl;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.portal.PortalPackage;
 import com.bluexml.side.portal.PortletAttribute;
 import com.bluexml.side.portal.PortletAttributeInstance;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 import org.eclipse.emf.common.notify.Notification;
 

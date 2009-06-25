@@ -6,10 +6,10 @@
  */
 package com.bluexml.side.form.impl;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 
 import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;

@@ -7,13 +7,13 @@ import java.util.Properties;
 
 import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
 public class ViewAlfrescoGenerator extends AbstractAlfrescoGenerator{
-
+	public static String MMUri = "http://www.kerblue.org/view/1.0";
 	
 	public static String GENERATOR_OPTIONS_DOCLIST = "alfresco.view.doclist";
 	@Override
 	protected String getMetamodelURI() {
 		// TODO Auto-generated method stub
-		return null;
+		return MMUri;
 	}
 
 	@Override

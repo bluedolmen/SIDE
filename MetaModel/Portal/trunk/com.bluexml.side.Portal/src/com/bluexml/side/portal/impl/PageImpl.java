@@ -6,12 +6,12 @@
  */
 package com.bluexml.side.portal.impl;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.portal.HavePortlet;
 import com.bluexml.side.portal.Page;
 import com.bluexml.side.portal.PortalLayout;
 import com.bluexml.side.portal.PortalPackage;
 import com.bluexml.side.portal.isChildPage;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 import java.util.Collection;
 

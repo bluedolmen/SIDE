@@ -11,7 +11,7 @@ import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.expressions.OCLExpression;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 /**
  * WARN : Not tested yet
  * @author davidabad

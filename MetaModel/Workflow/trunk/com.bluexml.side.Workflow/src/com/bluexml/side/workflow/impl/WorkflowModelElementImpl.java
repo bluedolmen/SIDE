@@ -9,8 +9,8 @@ package com.bluexml.side.workflow.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.ocl.ecore.OCL;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.common.impl.ModelElementImpl;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.workflow.WorkflowModelElement;
 import com.bluexml.side.workflow.WorkflowPackage;
 

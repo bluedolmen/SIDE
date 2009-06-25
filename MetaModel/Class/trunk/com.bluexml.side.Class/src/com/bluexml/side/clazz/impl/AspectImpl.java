@@ -6,9 +6,9 @@
  */
 package com.bluexml.side.clazz.impl;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.ClazzPackage;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;

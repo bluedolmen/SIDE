@@ -19,10 +19,11 @@ import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.expressions.OCLExpression;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.ClazzPackage;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+
 import java.util.Collection;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;

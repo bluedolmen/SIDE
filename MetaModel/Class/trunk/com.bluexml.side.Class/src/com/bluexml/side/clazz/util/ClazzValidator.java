@@ -6,11 +6,11 @@
  */
 package com.bluexml.side.clazz.util;
 
-import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 
 import com.bluexml.side.clazz.*;
 
 import com.bluexml.side.common.util.CommonValidator;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 import java.util.Map;
 
