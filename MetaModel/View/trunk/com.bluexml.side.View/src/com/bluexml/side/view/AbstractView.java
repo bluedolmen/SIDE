@@ -80,5 +80,14 @@ public interface AbstractView extends FieldContainer {
 	 * @generated
 	 */
 	void setOperations(OperationComponent value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL description='Get all the fields of the facetmap, excluding the FieldContainers' body='self.children->select(oclIsKindOf(Field))'"
+	 * @generated
+	 */
+	EList<Field> getFields();
 		
 } // AbstractView

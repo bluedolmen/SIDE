@@ -32,6 +32,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="hidden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractView" abstract="true" eSuperTypes="#//FieldContainer">
+    <eOperations name="getFields" upperBound="-1" eType="#//Field">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="description" value="Get all the fields of the facetmap, excluding the FieldContainers"/>
+        <details key="body" value="self.children->select(oclIsKindOf(Field))"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="viewOf" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//Container"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//OperationComponent"
         containment="true"/>

@@ -12,6 +12,7 @@ import com.bluexml.side.common.Container;
 import com.bluexml.side.common.OperationComponent;
 
 import com.bluexml.side.view.AbstractView;
+import com.bluexml.side.view.Field;
 import com.bluexml.side.view.ViewPackage;
 
 import java.util.Collection;
@@ -160,6 +161,17 @@ public abstract class AbstractViewImpl extends FieldContainerImpl implements Abs
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_VIEW__OPERATIONS, newOperations, newOperations));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Field> getFields() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**

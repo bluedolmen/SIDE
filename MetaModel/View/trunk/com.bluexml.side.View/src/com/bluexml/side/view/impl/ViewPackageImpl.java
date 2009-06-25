@@ -1497,6 +1497,8 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		initEReference(getAbstractView_ViewOf(), theCommonPackage.getContainer(), null, "viewOf", null, 0, 1, AbstractView.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractView_Operations(), theCommonPackage.getOperationComponent(), null, "operations", null, 0, 1, AbstractView.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(abstractViewEClass, this.getField(), "getFields", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(abstractDataTableEClass, AbstractDataTable.class, "AbstractDataTable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractDataTable_HaveRowActions(), theCommonPackage.getOperationComponent(), null, "haveRowActions", null, 0, 1, AbstractDataTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractDataTable_HaveSelectActions(), theCommonPackage.getOperationComponent(), null, "haveSelectActions", null, 0, 1, AbstractDataTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1639,10 +1641,10 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		createResource(eNS_URI);
 
 		// Create annotations
-		// http://www.topcased.org/documentation
-		createDocumentationAnnotations();
 		// http://www.bluexml.com/OCL
 		createOCLAnnotations();
+		// http://www.topcased.org/documentation
+		createDocumentationAnnotations();
 	}
 
 	/**
@@ -1652,7 +1654,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * @generated
 	 */
 	protected void createDocumentationAnnotations() {
-		String source = "http://www.topcased.org/documentation";					
+		String source = "http://www.topcased.org/documentation";						
 		addAnnotation
 		  (getAbstractDataTable_HaveRowActions(), 
 		   source, 
@@ -1680,7 +1682,14 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * @generated
 	 */
 	protected void createOCLAnnotations() {
-		String source = "http://www.bluexml.com/OCL";												
+		String source = "http://www.bluexml.com/OCL";					
+		addAnnotation
+		  (abstractViewEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "description", "Get all the fields of the facetmap, excluding the FieldContainers",
+			 "body", "self.children->select(oclIsKindOf(Field))"
+		   });									
 		addAnnotation
 		  (facetMapEClass.getEOperations().get(0), 
 		   source, 
