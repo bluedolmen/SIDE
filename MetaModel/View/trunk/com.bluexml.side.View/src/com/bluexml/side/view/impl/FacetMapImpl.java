@@ -10,6 +10,7 @@ import com.bluexml.side.Utils.MetaModel.validate.OCLextension.KerblueOCL;
 
 import com.bluexml.side.view.FacetDisplayType;
 import com.bluexml.side.view.FacetMap;
+import com.bluexml.side.view.FieldElement;
 import com.bluexml.side.view.Paginable;
 import com.bluexml.side.view.Paging;
 import com.bluexml.side.view.ViewPackage;
@@ -17,6 +18,7 @@ import com.bluexml.side.view.ViewPackage;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -192,6 +194,17 @@ public class FacetMapImpl extends AbstractViewImpl implements FacetMap {
 		facetDisplayType = newFacetDisplayType == null ? FACET_DISPLAY_TYPE_EDEFAULT : newFacetDisplayType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.FACET_MAP__FACET_DISPLAY_TYPE, oldFacetDisplayType, facetDisplayType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<FieldElement> getResultsAttributes() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**

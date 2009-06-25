@@ -6,6 +6,8 @@
  */
 package com.bluexml.side.view;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -79,5 +81,14 @@ public interface FacetMap extends AbstractView, Paginable {
 	 * @generated
 	 */
 	void setFacetDisplayType(FacetDisplayType value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.children->select(oclIsKindOf(AbstractView))->asOrderedSet()->first().oclAsType(AbstractView).children->select(oclIsKindOf(FieldElement))' description='Get the first element of the abstract View in the Facetmap'"
+	 * @generated
+	 */
+	EList<FieldElement> getResultsAttributes();
 		
 } // FacetMap

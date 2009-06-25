@@ -117,6 +117,12 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FacetMap" eSuperTypes="#//AbstractView #//Paginable">
+    <eOperations name="getResultsAttributes" upperBound="-1" eType="#//FieldElement">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.children->select(oclIsKindOf(AbstractView))->asOrderedSet()->first().oclAsType(AbstractView).children->select(oclIsKindOf(FieldElement))"/>
+        <details key="description" value="Get the first element of the abstract View in the Facetmap"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayEmptyFacet" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="facetDisplayType" eType="#//FacetDisplayType"/>
   </eClassifiers>

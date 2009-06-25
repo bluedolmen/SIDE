@@ -1533,6 +1533,8 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		initEAttribute(getFacetMap_DisplayEmptyFacet(), ecorePackage.getEBoolean(), "displayEmptyFacet", null, 0, 1, FacetMap.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFacetMap_FacetDisplayType(), this.getFacetDisplayType(), "facetDisplayType", null, 0, 1, FacetMap.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(facetMapEClass, this.getFieldElement(), "getResultsAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(treeEClass, Tree.class, "Tree", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTree_NodeOperations(), theCommonPackage.getOperationComponent(), null, "nodeOperations", null, 0, 1, Tree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTree_NodeValue(), this.getFieldElement(), null, "nodeValue", null, 1, 1, Tree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1639,6 +1641,8 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		// Create annotations
 		// http://www.topcased.org/documentation
 		createDocumentationAnnotations();
+		// http://www.bluexml.com/OCL
+		createOCLAnnotations();
 	}
 
 	/**
@@ -1666,7 +1670,24 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "use this to setup default actions available on each colomn"
-		   });						
+		   });							
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.bluexml.com/OCL</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createOCLAnnotations() {
+		String source = "http://www.bluexml.com/OCL";												
+		addAnnotation
+		  (facetMapEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "self.children->select(oclIsKindOf(AbstractView))->asOrderedSet()->first().oclAsType(AbstractView).children->select(oclIsKindOf(FieldElement))",
+			 "description", "Get the first element of the abstract View in the Facetmap"
+		   });		
 	}
 
 } //ViewPackageImpl

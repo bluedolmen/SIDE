@@ -93,6 +93,7 @@
     <genClasses ecoreClass="View.ecore#//FacetMap">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//FacetMap/displayEmptyFacet"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//FacetMap/facetDisplayType"/>
+      <genOperations ecoreOperation="View.ecore#//FacetMap/getResultsAttributes"/>
     </genClasses>
     <genClasses ecoreClass="View.ecore#//Tree">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference View.ecore#//Tree/nodeOperations"/>
