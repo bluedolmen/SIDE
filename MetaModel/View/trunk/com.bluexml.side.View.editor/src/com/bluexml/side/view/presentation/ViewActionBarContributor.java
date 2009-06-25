@@ -489,7 +489,7 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 		}
 
 		// Merge cols :
-		if (o instanceof Col) {
+		if (o instanceof Col && !(o instanceof AbstractView)) {
 			TreeSelection selection = ((TreeSelection) this.selectionProvider
 					.getSelection());
 			// Check if there is more than one col selected

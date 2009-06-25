@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.common.DataType;
@@ -67,6 +68,7 @@ public class ClassUtils {
 			}
 			
 		}
+		
 		return field;
 	}
 	

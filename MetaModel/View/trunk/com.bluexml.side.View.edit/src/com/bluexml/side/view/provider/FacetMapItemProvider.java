@@ -199,21 +199,21 @@ public class FacetMapItemProvider extends AbstractViewItemProvider implements
 				ViewPackage.Literals.PAGINABLE__PAGING, ViewFactory.eINSTANCE
 						.createPaging()));
 
-		newChildDescriptors.add(createChildParameter(
-				ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				ViewFactory.eINSTANCE.createDataList()));
-
-		newChildDescriptors.add(createChildParameter(
-				ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				ViewFactory.eINSTANCE.createDataTable()));
-
-		newChildDescriptors.add(createChildParameter(
-				ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				ViewFactory.eINSTANCE.createFacetMap()));
-
-		newChildDescriptors.add(createChildParameter(
-				ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				ViewFactory.eINSTANCE.createTree()));
+//		newChildDescriptors.add(createChildParameter(
+//				ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
+//				ViewFactory.eINSTANCE.createDataList()));
+//
+//		newChildDescriptors.add(createChildParameter(
+//				ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
+//				ViewFactory.eINSTANCE.createDataTable()));
+//
+//		newChildDescriptors.add(createChildParameter(
+//				ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
+//				ViewFactory.eINSTANCE.createFacetMap()));
+//
+//		newChildDescriptors.add(createChildParameter(
+//				ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
+//				ViewFactory.eINSTANCE.createTree()));
 	}
 
 	/**
