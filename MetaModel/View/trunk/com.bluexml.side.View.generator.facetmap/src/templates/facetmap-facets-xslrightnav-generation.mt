@@ -9,12 +9,15 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 	
 <%script type="view.FacetMap" name="morePagingFacet"%>
 <xsl:if test="count(s) &gt; $nb_paging_facets">
+<li class="facet">
+	<xsl:attribute name="name">more<xsl:value-of select="@taxtitle"/></xsl:attribute>
 	<a>
 	    <xsl:attribute name="onclick"> show_facet('facet<xsl:value-of
 	            select="@taxtitle"/>','more<xsl:value-of select="@taxtitle"
 	        />');</xsl:attribute>
 	    <xsl:value-of select="count(s)-$nb_paging_facets"/> more... 
 	</a>
+</li>
 </xsl:if>
 	
 <%script type="view.FacetMap" name="morePagingFacetDisplay"%>
@@ -37,18 +40,18 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
     <xsl:template match="selection">
         <xsl:apply-templates select="superset"/>
         <div class="facets">
-            <div class="facets-title">
-                <div style="display: inline; align: left;">CritÃ¨res</div>
-                <div style="display: inline; align: right;">
-			    <input type="button" name="config_facet" id="config_facet" value="Configurer"
-			        onclick="setup()"/>
-			    <input type="button" name="update_facets" id="update_facets" value="Mise Ã  jour" 
-                        onclick="update_facets()"/>
-			</div>
-            </div>
-            <hr Class="hr1"/>
-            <xsl:apply-templates select="subset[s]"/>
-        </div>
+	        <div class="facets-title">
+	            <div style="display: inline; align: left;">Critères</div>
+		        <div style="display: inline; align: right;">
+				    <input type="button" name="config_facet" id="config_facet" value="Configurer"
+				        onclick="setup()"/>
+				    <input type="button" name="update_facets" id="update_facets" value="Mise à jour" 
+		                    onclick="update_facets()"/>
+				</div>
+	        </div>
+	        <hr Class="hr1"/>
+	        <xsl:apply-templates select="subset[s]"/>
+    	</div>
     </xsl:template>
 
     <xsl:template match="subset">
@@ -59,12 +62,14 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
             <xsl:value-of select="@taxtitle"/>
             <%for (operations){%>
             	<%if (name == "hideFacets"){%>
+            		<span class="collapseExpandContainer">
             		<a>
 					    <xsl:attribute name="name">hideLink<xsl:value-of select="@taxtitle"/></xsl:attribute>
 					    <xsl:attribute name="onclick"> hide_facets('facets<xsl:value-of
 					        select="@taxtitle"/>','hideLink<xsl:value-of select="@taxtitle"/>');</xsl:attribute>
-					    	<img src='{$icons_url}/collapse.png' class='collapse' />
+					    <img src='{$icons_url}/collapse.png' class="imgIcon"/>
 					</a>
+					</span>
             	<%}%>
             <%}%>
         </div>
@@ -85,17 +90,15 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
     <xsl:template match="s" mode="subselection">
         <xsl:param name="title"/>
         <li class="facet">
-        <xsl:attribute name="name">more<xsl:value-of select="@taxtitle"
-            /></xsl:attribute>
-        <xsl:attribute name="style"/>
         	<%if (paging.paginationStyle != "none"){%>
 				<%morePagingFacetDisplay()%>
+			<%}else{%>
+				<xsl:attribute name="style"/>
 			<%}%>
 			<a href="{$server}/{$app2}/{$pre_reference_url}{@ref}"
                 onclick="show_selection('{$server}/{$app}/{$pre_reference_url}{@ref}')">
                 <xsl:value-of select="@title"/>(<xsl:value-of select="@resultcount"/>)
             </a>
-            <xsl:attribute name="name">more<xsl:value-of select="@taxtitle" /></xsl:attribute>
         </li>
     </xsl:template>
 </xsl:transform>

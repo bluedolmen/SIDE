@@ -28,8 +28,7 @@ version="1.0">
   <div class="chosen-facets">
     <xsl:variable name="taxtitle" select="@taxtitle" />
       <xsl:if test="position()=1">
-        <div class="chosen-facets-title">CritÃ¨res
-        sÃ©lectionnÃ©s</div>
+        <div class="chosen-facets-title">Critères sélectionnés</div>
         <hr Class="hr1" />
       </xsl:if>
       <ul style="list-style-image: url('{$icons_url}/bullet.gif');">

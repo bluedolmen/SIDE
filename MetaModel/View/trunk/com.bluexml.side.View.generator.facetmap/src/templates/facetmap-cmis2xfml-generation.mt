@@ -19,8 +19,8 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 		<%}%>
 	
 <%script type="view.FacetMap" name="ressource"%>
-	<%for (children){%>
-           <map heading="{child::cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribute").typ!="int"{%><%mapTo.filter("Attribute").typ%><%}else{%>Integer<%}%>[@cmis:name='<%mapTo.filter("Attribute").getFullName()%>']/cmis:value}"/>
+	<%for (getFields()){%>
+		<map heading="{child::cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribute").typ!="int"{%><%mapTo.filter("Attribute").typ%><%}else{%>Integer<%}%>[@cmis:name='<%mapTo.filter("Attribute").getFullName()%>']/cmis:value}"/>
 	<%}%>
 	
 <%script type="view.FacetMap" name="getAttribute"%>

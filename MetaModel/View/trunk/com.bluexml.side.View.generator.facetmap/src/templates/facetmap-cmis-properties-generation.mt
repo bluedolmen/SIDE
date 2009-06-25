@@ -8,7 +8,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 	./facets/WEB-INF/cmisTransformProperties.xml
 	
 <%script type="view.FacetMap" name="hostname"%>
-	localhost:8080
+localhost:8080
 
 <%script type="view.FacetMap" name="cmisPropertiesGenerator"  file="<%validatedFilename%>" %>
 <?xml version="1.0" encoding="ISO-8859-1"?>
