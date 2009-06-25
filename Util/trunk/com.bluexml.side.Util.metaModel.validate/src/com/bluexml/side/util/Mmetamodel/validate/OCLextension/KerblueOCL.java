@@ -1,4 +1,4 @@
-package com.bluexml.side.Utils.MetaModel.validate.OCLextension;
+package com.bluexml.side.util.metamodel.validate.OCLextension;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;

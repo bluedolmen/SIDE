@@ -12,4 +12,5 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.Util.ecore;bundle-version="1.0.1",
  com.bluexml.side.Util.model.merge;bundle-version="1.0.1"
 Eclipse-LazyStart: true
-Export-Package: com.bluexml.side.Utils.MetaModel.validate.OCLextension
+Export-Package: com.bluexml.side.util.metamodel.validate,
+ com.bluexml.side.util.metamodel.validate.OCLextension
