@@ -41,6 +41,10 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 
+import com.bluexml.side.clazz.Association;
+import com.bluexml.side.clazz.Attribute;
+import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.side.view.edit.ui.actions.AddLinkedFieldAction;
 import com.bluexml.side.side.view.edit.ui.actions.InitializeView;
 import com.bluexml.side.side.view.edit.ui.actions.MergeCols;
 import com.bluexml.side.side.view.edit.ui.actions.RefreshOutline;
@@ -470,12 +474,26 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 				restoreMenu.addMenuListener(restoreListener);
 			}
 			menuManager.insertAfter("ui-actions", restoreMenu);
+			
+			// Add linked field
+			IMenuManager addLinkedFieldMenu = new MenuManager("Add linked Field",ImageDescriptor.createFromFile(this.getClass(),
+			"/icons/menu/addLinkedField.png"), 
+			"transform");
+			addLinkedFieldMenu.add(new Action("never shown entry") {
+			});
+			addLinkedFieldMenu.setRemoveAllWhenShown(true);
+			IMenuListener addLinkedFieldListener = new IMenuListener() {
+				public void menuAboutToShow(IMenuManager m) {
+					fillAddLinkedMenu(m);
+				}
+			};
+			addLinkedFieldMenu.addMenuListener(addLinkedFieldListener);
+			menuManager.insertAfter("ui-actions", addLinkedFieldMenu);
 		}
 
 		// ---- Transform Menu
 		if (o instanceof Field) {
-			IMenuManager transformMenu = new MenuManager("Transform to",
-					"transform");
+			IMenuManager transformMenu = new MenuManager("Transform to","addLinked");
 			transformMenu.add(new Action("never shown entry") {
 			});
 			transformMenu.setRemoveAllWhenShown(true);
@@ -517,6 +535,40 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 		}
 
 		super.addGlobalActions(menuManager);
+	}
+
+	protected void fillAddLinkedMenu(IMenuManager mgr) {
+		Object o = ((TreeSelection) this.selectionProvider.getSelection())
+		.getFirstElement();
+		if (o instanceof AbstractView) {
+			AbstractView av = (AbstractView) o;
+			if (av.getViewOf() != null && av.getViewOf() instanceof Clazz){
+				Clazz c = (Clazz) av.getViewOf();
+				for (final Association a : c.getAllSourceAssociations()) {
+//					AddLinkedFieldAction alfa = new AddLinkedFieldAction(a);
+//					alfa.setActiveWorkbenchPart(activeEditor);
+//					selectionProvider
+//					.addSelectionChangedListener((ISelectionChangedListener) alfa);
+//					mgr.add(alfa);
+					IMenuManager addLinkedFieldMenu = new MenuManager(a.getTitle(),"browse" + a.getName());
+					addLinkedFieldMenu.add(new Action("never shown entry") {
+					});
+					addLinkedFieldMenu.setRemoveAllWhenShown(true);
+					IMenuListener addLinkedFieldListener = new IMenuListener() {
+						public void menuAboutToShow(IMenuManager m) {
+							fillAddLinkedSubMenu(m,a);
+						}
+					};
+					addLinkedFieldMenu.addMenuListener(addLinkedFieldListener);
+				}
+			}
+		}
+	}
+
+	protected void fillAddLinkedSubMenu(IMenuManager m, Association a) {
+		if (a.getTarget() != null && a.getTarget().size() > 0) {
+			
+		}
 	}
 
 	private void fillRestoreContextMenu(IMenuManager mgr) {
