@@ -459,19 +459,16 @@ public class Application {
 			if (!finalListDirectories.contains(projects[i])) {
 				out += "\t\t<svn>\n";
 
-				// on récupère le nom de la branche (Application, Util, etc ...)
-				String[] branche = projects[i].split("\\.");
-
 				// si le mot 'feature' n'est pas présent dans le nom du projet
 				if (projects[i].indexOf("feature") == -1)
 					out += "\t\t\t<checkout url=\"" + Utils.getRepository()
-							+ "S-IDE/" + branche[3] + "/trunk/" + projects[i]
+							+ "S-IDE/" + Utils.getProjectPath(projects[i]) + "/trunk/" + projects[i]
 							+ "\" destPath=\"${pluginsPath}" + File.separator
 							+ projects[i] + "\" />\n";
 				// si 'feature' est présent
 				else if (projects[i].indexOf("feature") != -1)
 					out += "\t\t\t<checkout url=\"" + Utils.getRepository()
-							+ "S-IDE/" + branche[3] + "/trunk/" + projects[i]
+							+ "S-IDE/" + Utils.getProjectPath(projects[i]) + "/trunk/" + projects[i]
 							+ "\" destPath=\"${featuresPath}" + File.separator
 							+ projects[i] + "\" />\n";
 

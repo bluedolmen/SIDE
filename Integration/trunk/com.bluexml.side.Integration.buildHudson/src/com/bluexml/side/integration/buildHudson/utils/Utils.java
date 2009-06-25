@@ -359,7 +359,7 @@ public class Utils {
 						end = true;
 					}
 
-					if(Application.parametre){
+					if (Application.parametre) {
 						// condition pour ne pas traiter les logs du checkout
 						if (ligne.indexOf("Updating " + Utils.getRepository()) != -1) {
 							update = true;
@@ -369,8 +369,14 @@ public class Utils {
 							update = true;
 						}
 					}
-					
+
 					if (!"".equals(ligne) && !end) {
+
+						if (ligne.indexOf("At revision") != -1) {
+							revisionNumber = ligne.substring(
+									"At revision".length(), ligne.length())
+									.trim();
+						}
 
 						if (update) {
 
@@ -435,7 +441,7 @@ public class Utils {
 
 		// On fait la meme chose mais pour toutes les features
 		for (int i = 0; i < projects.length; i++) {
-			if (projects[i].indexOf("feature") != -1){
+			if (projects[i].indexOf("feature") != -1) {
 				updateVersionNumber(projects[i]);
 			}
 		}
@@ -596,7 +602,7 @@ public class Utils {
 				// pouvoir utiliser les méthodes propres aux Element comme :
 				// selectionner un noeud fils, modifier du texte, etc...
 				Element courant = (Element) i.next();
-				
+
 				// sauvegarde du numéro de version
 				oldVersionNumber = courant.getAttributeValue("version");
 
