@@ -22,15 +22,17 @@
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="com.bluexml.side.Common"/>
       <import plugin="com.bluexml.side.Util.ecore" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Util.MetaModel.validate" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ocl"/>
       <import plugin="org.eclipse.ocl.ecore"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="com.bluexml.side.Application"/>
-      <import plugin="com.bluexml.side.Application.security"/>
-      <import plugin="com.bluexml.side.Application.generator"/>
-      <import plugin="com.bluexml.side.Application.generator.acceleo"/>
       <import plugin="org.eclipse.core.resources"/>
+      <import plugin="com.bluexml.side.Util.metaModel.validate" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.security"/>
+      <import plugin="com.bluexml.side.Util.generator"/>
+      <import plugin="com.bluexml.side.Util.generator.acceleo"/>
+      <import plugin="com.bluexml.side.Util.libs"/>
+      <import plugin="com.bluexml.side.Util.settings"/>
    </requires>
 
    <plugin
