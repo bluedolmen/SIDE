@@ -22,26 +22,27 @@
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="com.bluexml.side.Application" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Application.generator"/>
-      <import plugin="com.bluexml.side.Application.generator.acceleo"/>
-      <import plugin="com.bluexml.side.Application.deployer.alfresco" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Application.generator.alfresco"/>
       <import plugin="javax.xml"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="com.bluexml.side.Util.ecore" version="1.0.1" match="greaterOrEqual"/>
       <import plugin="com.bluexml.side.Util.libs" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Util.MetaModel.validate" version="1.0.1" match="greaterOrEqual"/>
       <import plugin="com.bluexml.side.Util.model.merge" version="1.0.1" match="greaterOrEqual"/>
       <import plugin="com.bluexml.side.Application.edit" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.bluexml.side.Application.editor" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.bluexml.side.Application.ui" version="1.0.3" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.generator"/>
+      <import plugin="com.bluexml.side.Util.generator.acceleo"/>
+      <import plugin="com.bluexml.side.Util.generator.alfresco"/>
+      <import plugin="com.bluexml.side.Util.metaModel.validate" version="1.0.1" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.security"/>
+      <import plugin="com.bluexml.side.Util.settings" version="1.0.8" match="greaterOrEqual"/>
    </requires>
 
    <plugin
          id="com.bluexml.side.Workflow.generator.alfresco"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.13"
          unpack="false"/>
 
 </feature>

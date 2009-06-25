@@ -34,6 +34,15 @@
       <import plugin="org.eclipse.emf.ecore.edit"/>
       <import plugin="org.topcased.modeler"/>
       <import plugin="com.bluexml.side.Class.modeler" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.metaModel.validate" version="1.0.11" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ocl"/>
+      <import plugin="org.eclipse.ocl.ecore"/>
+      <import plugin="com.bluexml.side.View" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Form" version="1.0.12" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Workflow" version="1.0.13" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.View.edit" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Form.edit" version="1.0.12" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Workflow.edit" version="1.0.13" match="greaterOrEqual"/>
    </requires>
 
    <plugin

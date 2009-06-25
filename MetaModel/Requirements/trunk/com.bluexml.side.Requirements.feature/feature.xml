@@ -21,11 +21,14 @@
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.ui"/>
+      <import plugin="com.bluexml.side.Requirements"/>
       <import plugin="org.eclipse.emf.edit"/>
       <import plugin="org.eclipse.core.resources"/>
+      <import plugin="com.bluexml.side.Requirements.edit"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="com.bluexml.side.Requirements.transformation"/>
       <import plugin="org.eclipse.emf.ecore.edit"/>
       <import plugin="org.topcased.modeler"/>
       <import plugin="fr.obeo.acceleo.chain"/>
@@ -34,9 +37,7 @@
       <import plugin="fr.obeo.acceleo.gen"/>
       <import plugin="org.eclipse.ant.core"/>
       <import plugin="org.eclipse.m2m.atl.engine"/>
-      <import plugin="com.bluexml.side.Requirements"/>
-      <import plugin="com.bluexml.side.Requirements.edit"/>
-      <import plugin="com.bluexml.side.Requirements.transformation"/>
+      <import plugin="com.bluexml.side.Util.ecore" version="1.0.11" match="greaterOrEqual"/>
    </requires>
 
    <plugin

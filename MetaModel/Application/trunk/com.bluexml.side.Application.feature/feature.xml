@@ -19,6 +19,7 @@
 
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="com.bluexml.side.Application" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.edit"/>
       <import plugin="org.eclipse.core.resources" version="3.4.0" match="greaterOrEqual"/>
@@ -27,27 +28,15 @@
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.ui"/>
-      <import plugin="com.bluexml.side.Util.libs" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Application.security"/>
-      <import plugin="fr.obeo.acceleo.chain"/>
-      <import plugin="fr.obeo.acceleo.gen"/>
-      <import plugin="com.bluexml.side.Application.generator"/>
       <import plugin="com.bluexml.side.Util.ecore" version="1.0.1" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Application.deployer"/>
-      <import plugin="com.bluexml.side.Application.deployer.alfresco"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="com.bluexml.side.Application.log" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Settings"/>
-      <import plugin="com.bluexml.side.Util.libs" version="1.0.10" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Common"/>
-      <import plugin="com.bluexml.side.Util.model.merge"/>
       <import plugin="org.eclipse.core.databinding"/>
       <import plugin="org.eclipse.core.databinding.beans"/>
       <import plugin="org.eclipse.jface.databinding"/>
       <import plugin="com.bluexml.side.Util.libs" version="1.0.11" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Application.generator.acceleo"/>
-      <import plugin="org.eclipse.emf.common"/>
-      <import plugin="com.bluexml.side.Application.deployer.war" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.generator" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.log"/>
+      <import plugin="com.bluexml.side.Util.deployer"/>
+      <import plugin="com.bluexml.side.Util.security"/>
    </requires>
 
    <plugin
