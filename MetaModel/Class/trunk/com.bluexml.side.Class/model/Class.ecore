@@ -166,7 +166,7 @@
       </eAnnotations>
       <eParameters name="other" eType="#//Association"/>
     </eOperations>
-    <eOperations name="isRecursive" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+    <eOperations name="isReflexive" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="(self.firstEnd.linkedClass.getInheritedClasses() ->including(self.firstEnd.linkedClass) ->includes(self.secondEnd.linkedClass) and self.secondEnd.isNavigable)&#xD;or &#xD;(self.secondEnd.linkedClass.getInheritedClasses() ->including(self.secondEnd.linkedClass) ->includes(self.firstEnd.linkedClass) and self.firstEnd.isNavigable)&#xD;"/>
       </eAnnotations>
