@@ -1,4 +1,4 @@
-package com.bluexml.side.util.metamodel.validate.OCLextension;
+package com.bluexml.side.util.metaModel.validate.OCLextension;
 
 import java.lang.reflect.Method;
 import java.util.regex.Matcher;

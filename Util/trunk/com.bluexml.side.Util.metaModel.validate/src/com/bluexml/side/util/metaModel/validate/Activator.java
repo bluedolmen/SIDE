@@ -1,4 +1,4 @@
-package com.bluexml.side.util.metamodel.validate;
+package com.bluexml.side.util.metaModel.validate;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
