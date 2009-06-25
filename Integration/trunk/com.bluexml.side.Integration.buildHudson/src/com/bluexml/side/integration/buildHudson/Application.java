@@ -6,8 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import org.apache.tools.ant.Project;

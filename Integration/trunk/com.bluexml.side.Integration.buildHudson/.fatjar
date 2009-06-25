@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Wed Jun 24 10:19:58 CEST 2009
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=Build.jar
+manifest.mergeall=true
+manifest.mainclass=com.bluexml.side.integration.buildHudson.Application
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=
