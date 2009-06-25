@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: FacetMap Plug-in
-Bundle-SymbolicName: com.bluexml.side.deployer.facetMap;singleton:=true
+Bundle-SymbolicName: com.bluexml.side.Deployer.facetMap;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Activator: com.bluexml.side.deployer.facetmap.Activator
 Bundle-Vendor: BLUEXML

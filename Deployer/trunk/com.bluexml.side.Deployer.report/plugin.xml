@@ -17,7 +17,7 @@
                   id="Birt_2.3.x"
                   version="Birt_2.3.x">
                <deployerVersion
-                     class="com.bluexml.side.clazz.deployer.report.ReportDeployer"
+                     class="com.bluexml.side.deployer.report.ReportDeployer"
                      id="com.bluexml.side.Deployer.report"
                      version="S-IDE Report Deployer">
                   <configurationParameter

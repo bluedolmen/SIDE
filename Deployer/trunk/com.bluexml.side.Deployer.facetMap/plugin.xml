@@ -13,7 +13,7 @@
                id="Facetmap2.x"
                version="Facetmap_2.x">
             <deployerVersion
-                  class="com.bluexml.side.application.deployer.facetmap.FacetMapDeployer"
+                  class="com.bluexml.side.deployer.facetmap.FacetMapDeployer"
                   id="com.bluexml.side.Deployer.facetMap"
                   version="S-IDE facetMap Deployer">
                <configurationParameter

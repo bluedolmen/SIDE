@@ -13,7 +13,7 @@
                id="alfresco_3.x"
                version="Alfresco3.x Labs and Entreprise">
             <deployerVersion
-                  class="com.bluexml.side.application.deployer.alfrescoshare.ShareDeployer"
+                  class="com.bluexml.side.deployer.alfrescoshare.ShareDeployer"
                   id="com.bluexml.side.Deployer.alfrescoShare"
                   version="S-IDE Alfresco Share Deployer">
                <configurationParameter
