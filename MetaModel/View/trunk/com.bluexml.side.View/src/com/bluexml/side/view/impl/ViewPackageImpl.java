@@ -57,12 +57,14 @@ import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
 import com.bluexml.side.view.WidgetTextType;
 
+import com.bluexml.side.view.util.ViewValidator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
@@ -458,6 +460,15 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		// Initialize created meta-data
 		theViewPackage.initializePackageContents();
+
+		// Register package validator
+		EValidator.Registry.INSTANCE.put
+			(theViewPackage, 
+			 new EValidator.Descriptor() {
+				 public EValidator getEValidator() {
+					 return ViewValidator.INSTANCE;
+				 }
+			 });
 
 		// Mark meta-data to indicate it can't be changed
 		theViewPackage.freeze();
@@ -886,6 +897,15 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 */
 	public EAttribute getField_PaternLanguage() {
 		return (EAttribute)fieldEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getField_Path() {
+		return (EAttribute)fieldEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1338,6 +1358,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		fieldEClass = createEClass(FIELD);
 		createEAttribute(fieldEClass, FIELD__PATERN);
 		createEAttribute(fieldEClass, FIELD__PATERN_LANGUAGE);
+		createEAttribute(fieldEClass, FIELD__PATH);
 
 		textFieldEClass = createEClass(TEXT_FIELD);
 		createEAttribute(textFieldEClass, TEXT_FIELD__WIDGET_TYPE);
@@ -1546,6 +1567,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		initEClass(fieldEClass, Field.class, "Field", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getField_Patern(), ecorePackage.getEString(), "patern", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_PaternLanguage(), ecorePackage.getEString(), "paternLanguage", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getField_Path(), ecorePackage.getEJavaObject(), "path", null, 0, -1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(textFieldEClass, TextField.class, "TextField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTextField_WidgetType(), this.getWidgetTextType(), "widgetType", null, 0, 1, TextField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1643,6 +1665,8 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		// Create annotations
 		// http://www.bluexml.com/OCL
 		createOCLAnnotations();
+		// http://www.eclipse.org/emf/2002/Ecore
+		createEcoreAnnotations();
 		// http://www.topcased.org/documentation
 		createDocumentationAnnotations();
 	}
@@ -1654,7 +1678,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * @generated
 	 */
 	protected void createDocumentationAnnotations() {
-		String source = "http://www.topcased.org/documentation";						
+		String source = "http://www.topcased.org/documentation";								
 		addAnnotation
 		  (getAbstractDataTable_HaveRowActions(), 
 		   source, 
@@ -1682,7 +1706,13 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * @generated
 	 */
 	protected void createOCLAnnotations() {
-		String source = "http://www.bluexml.com/OCL";					
+		String source = "http://www.bluexml.com/OCL";				
+		addAnnotation
+		  (fieldElementEClass, 
+		   source, 
+		   new String[] {
+			 "noFieldMapped", "not self.mapTo.oclIsUndefined()"
+		   });				
 		addAnnotation
 		  (abstractViewEClass.getEOperations().get(0), 
 		   source, 
@@ -1697,6 +1727,22 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 			 "body", "self.children->select(oclIsKindOf(AbstractView))->asOrderedSet()->first().oclAsType(AbstractView).children->select(oclIsKindOf(FieldElement))",
 			 "description", "Get the first element of the abstract View in the Facetmap"
 		   });		
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEcoreAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore";					
+		addAnnotation
+		  (fieldElementEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "noFieldMapped"
+		   });												
 	}
 
 } //ViewPackageImpl

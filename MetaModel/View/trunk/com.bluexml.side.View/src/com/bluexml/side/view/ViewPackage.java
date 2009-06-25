@@ -2285,13 +2285,22 @@ public interface ViewPackage extends EPackage {
 	int FIELD__PATERN_LANGUAGE = FIELD_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__PATH = FIELD_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_FEATURE_COUNT = FIELD_ELEMENT_FEATURE_COUNT + 2;
+	int FIELD_FEATURE_COUNT = FIELD_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.impl.TextFieldImpl <em>Text Field</em>}' class.
@@ -2428,6 +2437,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEXT_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__PATH = FIELD__PATH;
 
 	/**
 	 * The feature id for the '<em><b>Widget Type</b></em>' attribute.
@@ -2584,6 +2602,15 @@ public interface ViewPackage extends EPackage {
 	int PASSWORD_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__PATH = FIELD__PATH;
+
+	/**
 	 * The number of structural features of the '<em>Password Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2727,6 +2754,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOLEAN_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__PATH = FIELD__PATH;
 
 	/**
 	 * The feature id for the '<em><b>Split</b></em>' attribute.
@@ -2883,6 +2919,15 @@ public interface ViewPackage extends EPackage {
 	int FLOAT_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__PATH = FIELD__PATH;
+
+	/**
 	 * The number of structural features of the '<em>Float Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3026,6 +3071,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int ACTION_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__PATH = FIELD__PATH;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -3182,6 +3236,15 @@ public interface ViewPackage extends EPackage {
 	int DATE_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__PATH = FIELD__PATH;
+
+	/**
 	 * The number of structural features of the '<em>Date Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3325,6 +3388,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int TIME_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__PATH = FIELD__PATH;
 
 	/**
 	 * The number of structural features of the '<em>Time Field</em>' class.
@@ -3472,6 +3544,15 @@ public interface ViewPackage extends EPackage {
 	int DATE_TIME_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__PATH = FIELD__PATH;
+
+	/**
 	 * The number of structural features of the '<em>Date Time Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3615,6 +3696,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int PHONE_NUMBER_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__PATH = FIELD__PATH;
 
 	/**
 	 * The number of structural features of the '<em>Phone Number Field</em>' class.
@@ -3762,6 +3852,15 @@ public interface ViewPackage extends EPackage {
 	int EMAIL_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__PATH = FIELD__PATH;
+
+	/**
 	 * The number of structural features of the '<em>Email Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3905,6 +4004,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int INTEGER_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__PATH = FIELD__PATH;
 
 	/**
 	 * The number of structural features of the '<em>Integer Field</em>' class.
@@ -4052,6 +4160,15 @@ public interface ViewPackage extends EPackage {
 	int FILE_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__PATH = FIELD__PATH;
+
+	/**
 	 * The number of structural features of the '<em>File Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4195,6 +4312,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int SELECT_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SELECT_FIELD__PATH = FIELD__PATH;
 
 	/**
 	 * The feature id for the '<em><b>Select Widget</b></em>' attribute.
@@ -4351,6 +4477,15 @@ public interface ViewPackage extends EPackage {
 	int HTML_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HTML_FIELD__PATH = FIELD__PATH;
+
+	/**
 	 * The number of structural features of the '<em>Html Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4496,6 +4631,15 @@ public interface ViewPackage extends EPackage {
 	int URL_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__PATH = FIELD__PATH;
+
+	/**
 	 * The number of structural features of the '<em>URL Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4639,6 +4783,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMAGE_FIELD__PATERN_LANGUAGE = FILE_FIELD__PATERN_LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__PATH = FILE_FIELD__PATH;
 
 	/**
 	 * The number of structural features of the '<em>Image Field</em>' class.
@@ -5507,6 +5660,17 @@ public interface ViewPackage extends EPackage {
 	EAttribute getField_PaternLanguage();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link com.bluexml.side.view.Field#getPath <em>Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Path</em>'.
+	 * @see com.bluexml.side.view.Field#getPath()
+	 * @see #getField()
+	 * @generated
+	 */
+	EAttribute getField_Path();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.view.TextField <em>Text Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6345,6 +6509,14 @@ public interface ViewPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute FIELD__PATERN_LANGUAGE = eINSTANCE.getField_PaternLanguage();
+
+		/**
+		 * The meta object literal for the '<em><b>Path</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FIELD__PATH = eINSTANCE.getField_Path();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.impl.TextFieldImpl <em>Text Field</em>}' class.

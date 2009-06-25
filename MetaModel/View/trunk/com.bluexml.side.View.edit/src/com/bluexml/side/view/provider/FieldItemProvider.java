@@ -63,6 +63,7 @@ public class FieldItemProvider
 
 			addPaternPropertyDescriptor(object);
 			addPaternLanguagePropertyDescriptor(object);
+			addPathPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -112,6 +113,28 @@ public class FieldItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Path feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPathPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Field_path_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Field_path_feature", "_UI_Field_type"),
+				 ViewPackage.Literals.FIELD__PATH,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Field.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -150,6 +173,7 @@ public class FieldItemProvider
 		switch (notification.getFeatureID(Field.class)) {
 			case ViewPackage.FIELD__PATERN:
 			case ViewPackage.FIELD__PATERN_LANGUAGE:
+			case ViewPackage.FIELD__PATH:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

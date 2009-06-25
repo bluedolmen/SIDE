@@ -26,6 +26,8 @@ import com.bluexml.side.common.NamedModelElement;
  *
  * @see com.bluexml.side.view.ViewPackage#getFieldElement()
  * @model abstract="true"
+ *        annotation="http://www.bluexml.com/OCL noFieldMapped='not self.mapTo.oclIsUndefined()'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='noFieldMapped'"
  * @generated
  */
 public interface FieldElement extends Stylable, NamedModelElement {

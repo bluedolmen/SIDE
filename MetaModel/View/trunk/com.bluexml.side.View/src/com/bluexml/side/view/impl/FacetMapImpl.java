@@ -15,16 +15,24 @@ import com.bluexml.side.view.Paginable;
 import com.bluexml.side.view.Paging;
 import com.bluexml.side.view.ViewPackage;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
+import org.eclipse.ocl.expressions.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -202,10 +210,36 @@ public class FacetMapImpl extends AbstractViewImpl implements FacetMap {
 	 * @generated
 	 */
 	public EList<FieldElement> getResultsAttributes() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (getResultsAttributesBodyOCL == null) {
+			EOperation eOperation = ViewPackage.Literals.FACET_MAP.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ViewPackage.Literals.FACET_MAP, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getResultsAttributesBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getResultsAttributesBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<FieldElement> result = (Collection<FieldElement>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<FieldElement>(result.size(), result.toArray());
+	
 	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getResultsAttributes <em>Get Results Attributes</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResultsAttributes
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getResultsAttributesBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->

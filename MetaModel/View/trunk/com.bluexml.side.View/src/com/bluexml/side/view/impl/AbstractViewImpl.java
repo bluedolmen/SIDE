@@ -19,14 +19,21 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.ocl.ecore.OCL;
+import org.eclipse.ocl.expressions.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -169,10 +176,36 @@ public abstract class AbstractViewImpl extends FieldContainerImpl implements Abs
 	 * @generated
 	 */
 	public EList<Field> getFields() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (getFieldsBodyOCL == null) {
+			EOperation eOperation = ViewPackage.Literals.ABSTRACT_VIEW.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ViewPackage.Literals.ABSTRACT_VIEW, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getFieldsBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getFieldsBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Field> result = (Collection<Field>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Field>(result.size(), result.toArray());
+	
 	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getFields <em>Get Fields</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFields
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getFieldsBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->

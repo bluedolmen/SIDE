@@ -13,10 +13,12 @@ import com.bluexml.side.view.ViewPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.ocl.ecore.OCL;
 
 /**
@@ -28,6 +30,7 @@ import org.eclipse.ocl.ecore.OCL;
  * <ul>
  *   <li>{@link com.bluexml.side.view.impl.FieldImpl#getPatern <em>Patern</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FieldImpl#getPaternLanguage <em>Patern Language</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.FieldImpl#getPath <em>Path</em>}</li>
  * </ul>
  * </p>
  *
@@ -73,6 +76,16 @@ public abstract class FieldImpl extends FieldElementImpl implements Field {
 	 * @ordered
 	 */
 	protected String paternLanguage = PATERN_LANGUAGE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getPath() <em>Path</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPath()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Object> path;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -140,6 +153,18 @@ public abstract class FieldImpl extends FieldElementImpl implements Field {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Object> getPath() {
+		if (path == null) {
+			path = new EDataTypeUniqueEList<Object>(Object.class, this, ViewPackage.FIELD__PATH);
+		}
+		return path;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -147,6 +172,8 @@ public abstract class FieldImpl extends FieldElementImpl implements Field {
 				return getPatern();
 			case ViewPackage.FIELD__PATERN_LANGUAGE:
 				return getPaternLanguage();
+			case ViewPackage.FIELD__PATH:
+				return getPath();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -199,6 +226,8 @@ public abstract class FieldImpl extends FieldElementImpl implements Field {
 				return PATERN_EDEFAULT == null ? patern != null : !PATERN_EDEFAULT.equals(patern);
 			case ViewPackage.FIELD__PATERN_LANGUAGE:
 				return PATERN_LANGUAGE_EDEFAULT == null ? paternLanguage != null : !PATERN_LANGUAGE_EDEFAULT.equals(paternLanguage);
+			case ViewPackage.FIELD__PATH:
+				return path != null && !path.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -217,6 +246,8 @@ public abstract class FieldImpl extends FieldElementImpl implements Field {
 		result.append(patern);
 		result.append(", paternLanguage: ");
 		result.append(paternLanguage);
+		result.append(", path: ");
+		result.append(path);
 		result.append(')');
 		return result.toString();
 	}
