@@ -19,9 +19,10 @@ public class ViewAlfrescoGenerator extends AbstractAlfrescoGenerator{
 	@Override
 	protected List<String> getTemplates() {
 		List<String> result = new ArrayList<String>();
-		if (getGeneratorOptionValue(GENERATOR_OPTIONS_DOCLIST)) {
+		
+			// doclist
 			result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/doclistView/doclist_ftl.mt");
-		}
+		
 		return result;
 	}
 
@@ -38,7 +39,7 @@ public class ViewAlfrescoGenerator extends AbstractAlfrescoGenerator{
 		props.put("module.version", getVersioNumber());
 		props.put("module.title", "S-IDE view extension");
 		props.put("module.description", "this module contains S-IDE generated extension to extends Alfresco view,\n build at " + sdf.format(now));
-		return null;
+		return props;
 	}
 
 }
