@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/com.bluexml.side.Util.libs/libs/jdom.jar"/>
 	<classpathentry kind="lib" path="lib/svnant.jar"/>
 	<classpathentry kind="lib" path="lib/svnClientAdapter.jar"/>
 	<classpathentry kind="lib" path="lib/svnjavahl.jar"/>

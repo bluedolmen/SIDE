@@ -63,8 +63,33 @@ public class Utils {
 	 */
 	public static String[] getProjects() {
 
-		return ouvrirFichier("build.properties").getProperty("project").split(
-				",");
+		String[] projects = ouvrirFichier("build.properties").getProperty(
+				"project").split(",");
+
+		for (int i = 0; i < projects.length; i++) {
+			projects[i] = projects[i].split("&")[1];
+		}
+		return projects;
+	}
+
+	/**
+	 * Retourne le chemin pour un projet donné (par exemple
+	 * MetaModel/Application pour le projet com.bluexml.side.Application
+	 * 
+	 * @param projectName
+	 * @return
+	 */
+	public static String getProjectPath(String projectName) {
+		String[] projects = ouvrirFichier("build.properties").getProperty(
+				"project").split(",");
+
+		String path = "";
+		for (int i = 0; i < projects.length; i++) {
+			if (projects[i].split("&")[1].equals(projectName)) {
+				path = projects[i].split("&")[0];
+			}
+		}
+		return path;
 	}
 
 	/**
@@ -227,8 +252,6 @@ public class Utils {
 
 		String[] projects = getProjects();
 
-		String[] tmp = null;
-
 		String path = "";
 
 		try {
@@ -241,14 +264,9 @@ public class Utils {
 
 			for (int i = 0; i < projects.length; i++) {
 
-				tmp = projects[i].split("\\.");
-
-				if (tmp[3].equals("Util")) {
-					tmp[3] = "Utils";
-				}
-
 				path = Application.workspace + File.separator + "S-IDE"
-						+ File.separator + tmp[3] + File.separator + "trunk";
+						+ File.separator + getProjectPath(projects[i])
+						+ File.separator + "trunk";
 
 				if (projects[i].indexOf("feature") == -1) {
 
@@ -286,9 +304,8 @@ public class Utils {
 			path = Application.workspace.substring(0, Application.workspace
 					.length()
 					- "workspace".length());
-			path = path + "builds" + File.separator + Application.build_number;
-
-			path = path + File.separator + "log";
+			path = path + "builds" + File.separator + Application.build_number
+					+ File.separator + "log";
 
 		} else {
 
@@ -303,7 +320,7 @@ public class Utils {
 	 * et regarde si des updates ont été fait et ainsi, changer le numéro de
 	 * version du projet concerné
 	 */
-	public static void traitementUpdateHudson() {
+	public static void traitementUpdate() {
 
 		ArrayList<String> listeProjetReels = new ArrayList<String>();
 
@@ -336,15 +353,23 @@ public class Utils {
 				// Analyse et copie de chaque ligne
 				while ((ligne = ficTexte.readLine()) != null && !end) {
 
-					// condition pour ne pas traiter les logs du checkout
+					// condition d'arret de la lecture du log
+					// on arrete la lecture lorsque se lance le build
 					if (ligne.startsWith("************")) {
 						end = true;
 					}
 
-					// condition pour ne pas traiter les logs du checkout
-					if (ligne.indexOf("Updating " + Utils.getRepository()) != -1) {
-						update = true;
+					if(Application.parametre){
+						// condition pour ne pas traiter les logs du checkout
+						if (ligne.indexOf("Updating " + Utils.getRepository()) != -1) {
+							update = true;
+						}
+					} else {
+						if (ligne.indexOf("svnUD:") != -1) {
+							update = true;
+						}
 					}
+					
 					if (!"".equals(ligne) && !end) {
 
 						if (update) {
@@ -352,13 +377,18 @@ public class Utils {
 							if ((ligne.charAt(0) == 'A'
 									|| ligne.charAt(0) == 'U' || ligne
 									.charAt(0) == 'D')
-									&& ligne.charAt(1) == ' ' && update) {
+									&& (ligne.charAt(1) == ' ' || ligne
+											.charAt(1) == 'U') && update) {
 
-								modif = ligne.substring(1, ligne.length());
+								modif = ligne.substring(2, ligne.length());
 								modif.trim();
 								String[] proj = modif.split(File.separator);
-								if (!listeProjet.contains(proj[2]))
-									listeProjet.add(proj[2]);
+
+								for (int i = 0; i < proj.length; i++) {
+									if (!listeProjet.contains(proj[i])) {
+										listeProjet.add(proj[i]);
+									}
+								}
 							}
 						}
 
@@ -375,20 +405,21 @@ public class Utils {
 			for (String element : listeProjet) {
 				if (listeProjetReels.contains(element)) {
 					// on met tous les plugins modifiés dans un tableau
-					if (element.indexOf("feature") == -1)
+					if (element.indexOf("feature") == -1) {
 						listePlugin.add(element);
+					}
 					// et tous les features dans un autre
-					else
+					else {
 						listeFeatureModif.add(element);
-				} else {
-					listeProjet.remove(element);
+					}
 				}
-
 			}
 
 			// si on force la mise a jour du numéro de version
 		} else {
-
+			System.out
+					.println("Les numéros de version de tous les projets sont forcés à: "
+							+ getForceNumberVersion());
 			for (int i = 0; i < projects.length; i++) {
 				if (projects[i].indexOf("feature") == -1)
 					listePlugin.add(projects[i]);
@@ -404,143 +435,9 @@ public class Utils {
 
 		// On fait la meme chose mais pour toutes les features
 		for (int i = 0; i < projects.length; i++) {
-			if (projects[i].indexOf("feature") != -1)
+			if (projects[i].indexOf("feature") != -1){
 				updateVersionNumber(projects[i]);
-		}
-
-		// affichage des données
-		if (listePlugin.size() != 0) {
-			System.out.println("\nListe des plugins modifiés: ");
-			// On parcours la liste des plugins et on les met a jour
-			for (String plugin : listePlugin) {
-				System.out.println("\t- " + plugin + ": "
-						+ getVersionNumber(plugin));
 			}
-		}
-
-		if (listeFeatureModif.size() != 0) {
-			System.out.println("\nListe des features modifiées: ");
-			for (String feature : listeFeatureModif) {
-				System.out.println("\t- " + feature + ": "
-						+ getVersionNumber(feature));
-			}
-		}
-		// fin affichage
-	}
-
-	/**
-	 * Cette méthode analyse le fichier de log (créé via le log de l'update ant)
-	 * et regarde si des updates ont été fait et ainsi, changer le numéro de
-	 * version du projet concerné
-	 */
-	public static void traitementUpdate() {
-
-		ArrayList<String> listeProjetReels = new ArrayList<String>();
-
-		String[] projects = getProjects();
-
-		for (int i = 0; i < projects.length; i++) {
-			listeProjetReels.add(projects[i]);
-		}
-
-		ArrayList<String> listePlugin = new ArrayList<String>();
-
-		// si on ne force pas la mise a jour du numéro de version
-		if ("".equals(getForceNumberVersion())) {
-			String ligne = "";
-			String modif = "";
-			ArrayList<String> listeProjet = new ArrayList<String>();
-			boolean update = false;
-
-			// ouverture d'un flux du fichier
-			try {
-				BufferedReader ficTexte = new BufferedReader(new FileReader(
-						new File(getPathToLog())));
-
-				if (ficTexte == null) {
-					throw new FileNotFoundException("Fichier non trouvé");
-				}
-
-				// Analyse et copie de chaque ligne
-				while ((ligne = ficTexte.readLine()) != null) {
-					// condition pour ne pas traiter les logs du checkout
-					if (ligne.indexOf("svnUD:") != -1) {
-						update = true;
-					}
-					if (!"".equals(ligne)) {
-
-						if (ligne.indexOf("At revision ") != -1 && update) {
-							revisionNumber = ligne.substring("At revision "
-									.length(), ligne.length() - 1);
-						} else if ((ligne.charAt(0) == 'A'
-								|| ligne.charAt(0) == 'U' || ligne.charAt(0) == 'D')
-								&& ligne.charAt(1) == ' ' && update) {
-							modif = ligne.substring(5, ligne.length());
-							modif.trim();
-							modif = modif.substring(
-									(getBuildDirectory() + "_CO").length(),
-									modif.length());
-							if (modif.indexOf("plugins") != -1)
-								modif = modif.substring((File.separator
-										+ "plugins" + File.separator).length(),
-										modif.length());
-							else
-								modif = modif
-										.substring(
-												(File.separator + "features" + File.separator)
-														.length(), modif
-														.length());
-							modif.trim();
-							if (!listeProjet.contains((String) modif
-									.subSequence(0, modif
-											.indexOf(File.separator))))
-								listeProjet.add((String) modif.subSequence(0,
-										modif.indexOf(File.separator)));
-						}
-					}
-				}
-
-			} catch (FileNotFoundException e) {
-				e.getMessage();
-			} catch (IOException e1) {
-				e1.getMessage();
-			}
-
-			// on parcours la liste des projets qui ont été modifié
-			for (String element : listeProjet) {
-				if (listeProjetReels.contains(element)) {
-					// on met tous les plugins modifiés dans un tableau
-					if (element.indexOf("feature") == -1)
-						listePlugin.add(element);
-					// et tous les features dans un autre
-					else
-						listeFeatureModif.add(element);
-				} else {
-					listeProjet.remove(element);
-				}
-
-			}
-
-			// si on force la mise a jour du numéro de version
-		} else {
-
-			for (int i = 0; i < projects.length; i++) {
-				if (projects[i].indexOf("feature") == -1)
-					listePlugin.add(projects[i]);
-			}
-
-		}
-
-		// On parcours la liste des plugins et on les met a jour
-		for (String plugin : listePlugin) {
-			updateVersionNumber(plugin);
-
-		}
-
-		// On fait la meme chose mais pour toutes les features
-		for (int i = 0; i < projects.length; i++) {
-			if (projects[i].indexOf("feature") != -1)
-				updateVersionNumber(projects[i]);
 		}
 
 		// affichage des données
@@ -571,15 +468,9 @@ public class Utils {
 		String path = "";
 		if (Application.parametre) {
 
-			String[] tmp = projectName.split("\\.");
-
-			if (tmp[3].equals("Util")) {
-				tmp[3] = "Utils";
-			}
-
 			path = Application.workspace + File.separator + "S-IDE"
-					+ File.separator + tmp[3] + File.separator + "trunk"
-					+ File.separator + projectName;
+					+ File.separator + getProjectPath(projectName)
+					+ File.separator + "trunk" + File.separator + projectName;
 		} else {
 			if (projectName.indexOf("feature") == -1) {
 
@@ -600,6 +491,7 @@ public class Utils {
 	 * @param projectName
 	 */
 	public static void updateVersionNumber(String projectName) {
+
 		String[] pattern = ouvrirFichier("build.properties").getProperty(
 				"number-pattern").split("\\.");
 
@@ -704,7 +596,7 @@ public class Utils {
 				// pouvoir utiliser les méthodes propres aux Element comme :
 				// selectionner un noeud fils, modifier du texte, etc...
 				Element courant = (Element) i.next();
-
+				
 				// sauvegarde du numéro de version
 				oldVersionNumber = courant.getAttributeValue("version");
 

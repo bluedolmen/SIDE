@@ -91,23 +91,18 @@ public class Application {
 				+ File.separator + "buildSVN.xml");
 		createFile(getCorpsSVN(), Utils.getBuildPath(), "buildSVN.xml");
 
-		if (parametre) {
-			// Mise à jour des numéros de version en fonction du fichier de log
-			System.out
-					.println("\nMise à jour des numéros de version (si besoin)...");
-
-			Utils.traitementUpdateHudson();
-		} else {
+		if (!parametre) {
 			// Execution du buildSVN.xml
 			System.out.println("\nRéalisation du checkout et du update...");
 			execBuild("buildSVN", "build");
-
-			// Mise à jour des numéros de version en fonction du fichier de log
-			System.out
-					.println("\nMise à jour des numéros de version (si besoin)...");
-
-			Utils.traitementUpdate();
 		}
+
+		// Mise à jour des numéros de version en fonction du fichier de log
+		System.out
+				.println("\nMise à jour des numéros de version (si besoin)...");
+
+		Utils.traitementUpdate();
+
 		// création du build.xml
 		System.out.println("\n\n- Création de " + Utils.getBuildPath()
 				+ File.separator + "build.xml");
@@ -437,7 +432,6 @@ public class Application {
 		// ${buildDirectory}_CO et si un projet qui est dans la liste de
 		// build.properties n'est pas dans un des dossiers, alors on va faire un
 		// checkout dessus
-
 		File featureDir = new File(Utils.getBuildDirectory() + "_CO"
 				+ File.separator + "features");
 		File pluginsDir = new File(Utils.getBuildDirectory() + "_CO"
@@ -467,7 +461,6 @@ public class Application {
 
 				// on récupère le nom de la branche (Application, Util, etc ...)
 				String[] branche = projects[i].split("\\.");
-
 
 				// si le mot 'feature' n'est pas présent dans le nom du projet
 				if (projects[i].indexOf("feature") == -1)
