@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Deployer Plug-in
 Bundle-SymbolicName: com.bluexml.side.Util.deployer
 Bundle-Version: 1.0.13
-Bundle-Activator: com.bluexml.side.Util.deployer.Activator
+Bundle-Activator: com.bluexml.side.util.deployer.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Util.libs,
