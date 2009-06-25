@@ -29,10 +29,9 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a
- * {@link com.bluexml.side.view.FacetMap} object. <!-- begin-user-doc --> <!--
+ * This is the item provider adapter for a {@link com.bluexml.side.view.FacetMap} object.
+ * <!-- begin-user-doc --> <!--
  * end-user-doc -->
- * 
  * @generated
  */
 public class FacetMapItemProvider extends AbstractViewItemProvider implements
@@ -72,16 +71,19 @@ public class FacetMapItemProvider extends AbstractViewItemProvider implements
 	 * @generated
 	 */
 	protected void addDisplayEmptyFacetPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_FacetMap_displayEmptyFacet_feature"), getString(
-						"_UI_PropertyDescriptor_description",
-						"_UI_FacetMap_displayEmptyFacet_feature",
-						"_UI_FacetMap_type"),
-				ViewPackage.Literals.FACET_MAP__DISPLAY_EMPTY_FACET, true,
-				false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null,
-				null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FacetMap_displayEmptyFacet_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FacetMap_displayEmptyFacet_feature", "_UI_FacetMap_type"),
+				 ViewPackage.Literals.FACET_MAP__DISPLAY_EMPTY_FACET,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -91,26 +93,26 @@ public class FacetMapItemProvider extends AbstractViewItemProvider implements
 	 * @generated
 	 */
 	protected void addFacetDisplayTypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_FacetMap_facetDisplayType_feature"), getString(
-						"_UI_PropertyDescriptor_description",
-						"_UI_FacetMap_facetDisplayType_feature",
-						"_UI_FacetMap_type"),
-				ViewPackage.Literals.FACET_MAP__FACET_DISPLAY_TYPE, true,
-				false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null,
-				null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FacetMap_facetDisplayType_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FacetMap_facetDisplayType_feature", "_UI_FacetMap_type"),
+				 ViewPackage.Literals.FACET_MAP__FACET_DISPLAY_TYPE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
-	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -125,27 +127,24 @@ public class FacetMapItemProvider extends AbstractViewItemProvider implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper
-		// feature to use for
+		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns FacetMap.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This returns FacetMap.gif.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/FacetMap"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/FacetMap"));
 	}
 
 	/**
@@ -162,11 +161,10 @@ public class FacetMapItemProvider extends AbstractViewItemProvider implements
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -174,15 +172,13 @@ public class FacetMapItemProvider extends AbstractViewItemProvider implements
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(FacetMap.class)) {
-		case ViewPackage.FACET_MAP__DISPLAY_EMPTY_FACET:
-		case ViewPackage.FACET_MAP__FACET_DISPLAY_TYPE:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), false, true));
-			return;
-		case ViewPackage.FACET_MAP__PAGING:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), true, false));
-			return;
+			case ViewPackage.FACET_MAP__DISPLAY_EMPTY_FACET:
+			case ViewPackage.FACET_MAP__FACET_DISPLAY_TYPE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case ViewPackage.FACET_MAP__PAGING:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -233,13 +229,14 @@ public class FacetMapItemProvider extends AbstractViewItemProvider implements
 		Object childFeature = feature;
 		Object childObject = child;
 
-		boolean qualify = childFeature == ViewPackage.Literals.FIELD_CONTAINER__CHILDREN
-				|| childFeature == ViewPackage.Literals.FIELD_CONTAINER__DISABLED;
+		boolean qualify =
+			childFeature == ViewPackage.Literals.FIELD_CONTAINER__CHILDREN ||
+			childFeature == ViewPackage.Literals.FIELD_CONTAINER__DISABLED;
 
 		if (qualify) {
-			return getString("_UI_CreateChild_text2", new Object[] {
-					getTypeText(childObject), getFeatureText(childFeature),
-					getTypeText(owner) });
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}
