@@ -5,17 +5,17 @@
          point="com.bluexml.side.Application.com_bluexml_application_configuration">
       <technology
             description="Check this to generate default configuration for Alfresco Share.&lt;br&gt;Alfresco is the leading open source ECM solution.&lt;br&gt;S-IDE allows to optimize the configuration of the Alfresco content model, views, forms and reports."
-            id="alfresco_share"
-            name="AlfrescoShare"
+            id="alfresco"
+            name="Alfresco"
             url="http://www.alfresco.com">
          <technologyVersion
                description="Check this to generate class models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, S-IDE provides useful server components to enhance some features of this release."
-               id="alfresco_share_3.x"
-               version="AlfrescoShare3.x Labs and Entreprise">
+               id="alfresco_3.x"
+               version="Alfresco3.x Labs and Entreprise">
             <deployerVersion
                   class="com.bluexml.side.application.deployer.alfrescoshare.ShareDeployer"
-                  id="com.bluexml.side.Application.deployer.alfrescoShare"
-                  version="S-IDE Alfresco Share Deployer 1.0.0">
+                  id="com.bluexml.side.Deployer.alfrescoShare"
+                  version="S-IDE Alfresco Share Deployer">
                <configurationParameter
                      documentation="Set this value to the Alfresco Tomcat directory path in order the deployer puts the packaged war file.&lt;br&gt;&lt;b&gt;This option is mandatory.&lt;/b&gt;"
                      key="CATALINA_HOME"

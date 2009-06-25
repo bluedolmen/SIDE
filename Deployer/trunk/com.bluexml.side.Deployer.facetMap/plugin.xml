@@ -14,8 +14,8 @@
                version="Facetmap_2.x">
             <deployerVersion
                   class="com.bluexml.side.application.deployer.facetmap.FacetMapDeployer"
-                  id="com.bluexml.side.Application.deployer.facetMap"
-                  version="S-IDE facetMap Deployer 1.0.0">
+                  id="com.bluexml.side.Deployer.facetMap"
+                  version="S-IDE facetMap Deployer">
                <configurationParameter
                      documentation="Set this value to the Alfresco Tomcat directory path in order the deployer puts the packaged war file.&lt;br&gt;&lt;b&gt;This option is mandatory.&lt;/b&gt;"
                      key="CATALINA_HOME"
