@@ -7,6 +7,7 @@
 package com.bluexml.side.view;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 
 /**
@@ -81,19 +82,19 @@ public interface Field extends FieldElement {
 	void setPaternLanguage(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Path</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.Object}.
+	 * Returns the value of the '<em><b>Path</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Path</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Path</em>' attribute list.
+	 * @return the value of the '<em>Path</em>' reference list.
 	 * @see com.bluexml.side.view.ViewPackage#getField_Path()
-	 * @model changeable="false"
+	 * @model
 	 * @generated
 	 */
-	EList<Object> getPath();
+	EList<EObject> getPath();
 		
 } // Field

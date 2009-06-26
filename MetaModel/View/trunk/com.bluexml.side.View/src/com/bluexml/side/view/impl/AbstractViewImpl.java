@@ -176,36 +176,10 @@ public abstract class AbstractViewImpl extends FieldContainerImpl implements Abs
 	 * @generated
 	 */
 	public EList<Field> getFields() {
-		if (getFieldsBodyOCL == null) {
-			EOperation eOperation = ViewPackage.Literals.ABSTRACT_VIEW.getEOperations().get(0);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(ViewPackage.Literals.ABSTRACT_VIEW, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				getFieldsBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getFieldsBodyOCL);
-	
-		@SuppressWarnings("unchecked")
-		Collection<Field> result = (Collection<Field>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Field>(result.size(), result.toArray());
-	
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #getFields <em>Get Fields</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFields
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> getFieldsBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->

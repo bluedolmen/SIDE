@@ -904,8 +904,8 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getField_Path() {
-		return (EAttribute)fieldEClass.getEStructuralFeatures().get(2);
+	public EReference getField_Path() {
+		return (EReference)fieldEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1358,7 +1358,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		fieldEClass = createEClass(FIELD);
 		createEAttribute(fieldEClass, FIELD__PATERN);
 		createEAttribute(fieldEClass, FIELD__PATERN_LANGUAGE);
-		createEAttribute(fieldEClass, FIELD__PATH);
+		createEReference(fieldEClass, FIELD__PATH);
 
 		textFieldEClass = createEClass(TEXT_FIELD);
 		createEAttribute(textFieldEClass, TEXT_FIELD__WIDGET_TYPE);
@@ -1567,7 +1567,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		initEClass(fieldEClass, Field.class, "Field", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getField_Patern(), ecorePackage.getEString(), "patern", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_PaternLanguage(), ecorePackage.getEString(), "paternLanguage", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getField_Path(), ecorePackage.getEJavaObject(), "path", null, 0, -1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getField_Path(), ecorePackage.getEObject(), null, "path", null, 0, -1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(textFieldEClass, TextField.class, "TextField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTextField_WidgetType(), this.getWidgetTextType(), "widgetType", null, 0, 1, TextField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

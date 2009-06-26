@@ -2285,7 +2285,7 @@ public interface ViewPackage extends EPackage {
 	int FIELD__PATERN_LANGUAGE = FIELD_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * The feature id for the '<em><b>Path</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2439,7 +2439,7 @@ public interface ViewPackage extends EPackage {
 	int TEXT_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * The feature id for the '<em><b>Path</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2602,7 +2602,7 @@ public interface ViewPackage extends EPackage {
 	int PASSWORD_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * The feature id for the '<em><b>Path</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2756,7 +2756,7 @@ public interface ViewPackage extends EPackage {
 	int BOOLEAN_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * The feature id for the '<em><b>Path</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2919,7 +2919,7 @@ public interface ViewPackage extends EPackage {
 	int FLOAT_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * The feature id for the '<em><b>Path</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3073,7 +3073,7 @@ public interface ViewPackage extends EPackage {
 	int ACTION_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * The feature id for the '<em><b>Path</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3236,7 +3236,7 @@ public interface ViewPackage extends EPackage {
 	int DATE_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * The feature id for the '<em><b>Path</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3390,7 +3390,7 @@ public interface ViewPackage extends EPackage {
 	int TIME_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * The feature id for the '<em><b>Path</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3544,7 +3544,7 @@ public interface ViewPackage extends EPackage {
 	int DATE_TIME_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * The feature id for the '<em><b>Path</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3698,7 +3698,7 @@ public interface ViewPackage extends EPackage {
 	int PHONE_NUMBER_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * The feature id for the '<em><b>Path</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3852,7 +3852,7 @@ public interface ViewPackage extends EPackage {
 	int EMAIL_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * The feature id for the '<em><b>Path</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -4006,7 +4006,7 @@ public interface ViewPackage extends EPackage {
 	int INTEGER_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * The feature id for the '<em><b>Path</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -4160,7 +4160,7 @@ public interface ViewPackage extends EPackage {
 	int FILE_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * The feature id for the '<em><b>Path</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -4314,7 +4314,7 @@ public interface ViewPackage extends EPackage {
 	int SELECT_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * The feature id for the '<em><b>Path</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -4477,7 +4477,7 @@ public interface ViewPackage extends EPackage {
 	int HTML_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * The feature id for the '<em><b>Path</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -4631,7 +4631,7 @@ public interface ViewPackage extends EPackage {
 	int URL_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * The feature id for the '<em><b>Path</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -4785,7 +4785,7 @@ public interface ViewPackage extends EPackage {
 	int IMAGE_FIELD__PATERN_LANGUAGE = FILE_FIELD__PATERN_LANGUAGE;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * The feature id for the '<em><b>Path</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -5660,15 +5660,15 @@ public interface ViewPackage extends EPackage {
 	EAttribute getField_PaternLanguage();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link com.bluexml.side.view.Field#getPath <em>Path</em>}'.
+	 * Returns the meta object for the reference list '{@link com.bluexml.side.view.Field#getPath <em>Path</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Path</em>'.
+	 * @return the meta object for the reference list '<em>Path</em>'.
 	 * @see com.bluexml.side.view.Field#getPath()
 	 * @see #getField()
 	 * @generated
 	 */
-	EAttribute getField_Path();
+	EReference getField_Path();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.view.TextField <em>Text Field</em>}'.
@@ -6511,12 +6511,12 @@ public interface ViewPackage extends EPackage {
 		EAttribute FIELD__PATERN_LANGUAGE = eINSTANCE.getField_PaternLanguage();
 
 		/**
-		 * The meta object literal for the '<em><b>Path</b></em>' attribute list feature.
+		 * The meta object literal for the '<em><b>Path</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute FIELD__PATH = eINSTANCE.getField_Path();
+		EReference FIELD__PATH = eINSTANCE.getField_Path();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.impl.TextFieldImpl <em>Text Field</em>}' class.
