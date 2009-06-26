@@ -40,16 +40,16 @@ public abstract class MultiWarDeployer extends Deployer {
 			throw new Exception("check WarDeployer initialization");
 		}
 	}
-	
-	public void addWarDeployer(String webappName,WarDeployer dep) {	
+
+	public void addWarDeployer(String webappName, WarDeployer dep) {
 		warDeployers.put(webappName, dep);
 	}
-	
+
 	public void initialize(Map<String, String> configurationParameters, Map<String, String> generationParameters, List<String> options) {
 		super.initialize(configurationParameters, generationParameters, options);
-		
-		for (Map.Entry<String, WarDeployer> wd : warDeployers.entrySet()) {	
-			wd.getValue().initialize(wd.getKey(), cleanKey, configurationParameters, generationParameters, options);
+
+		for (Map.Entry<String, WarDeployer> wd : warDeployers.entrySet()) {
+			wd.getValue().initialize(wd.getKey(), cleanKey, logChanges, configurationParameters, generationParameters, options);
 		}
 	}
 }

@@ -3,6 +3,8 @@ package com.bluexml.side.util.deployer.war;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +14,7 @@ import com.bluexml.side.util.libs.zip.TrueZipHelper;
 
 public abstract class WarDeployer extends Deployer {
 	public static String CONFIGURATION_PARAMETER_CATALINA_HOME = "CATALINA_HOME";
+
 	static final String webapps = "webapps";
 	protected String webappName = null;
 	protected String warToPatchExt = ".war";
@@ -20,11 +23,11 @@ public abstract class WarDeployer extends Deployer {
 	File warToPatchFile = null;
 	File deployedWebbAppFolder = null;
 
-	
-	public void initialize(String webappName, String cleanKey,Map<String, String> configurationParameters, Map<String, String> generationParameters, List<String> options) {
+	public void initialize(String webappName, String cleanKey, String logChanges, Map<String, String> configurationParameters, Map<String, String> generationParameters, List<String> options) {
 		this.initialize(configurationParameters, generationParameters, options);
 		this.webappName = webappName;
 		this.cleanKey = cleanKey;
+		this.logChanges = logChanges;
 	}
 
 	public File getBackupWarFile() {
@@ -83,33 +86,57 @@ public abstract class WarDeployer extends Deployer {
 			throw new Exception("No files to deploy !");
 		}
 	}
-	
+
 	protected void deployProcess(java.io.File fileToDeploy) throws Exception {
-		boolean succes=true;
+		boolean succes = true;
 		// copy all files in the package into the WAR
 		TrueZipHelper fh = new TrueZipHelper("zip");
 		if (fileToDeploy.isDirectory()) {
-			for (File f: fileToDeploy.listFiles(new FileExtFilter("zip"))) {
+			for (File f : fileToDeploy.listFiles(new FileExtFilter("zip"))) {
 				succes &= fh.copyFiles(f, getWarToPatchFile(), true);
 			}
 		} else {
 			succes = fh.copyFiles(fileToDeploy, getWarToPatchFile(), true);
 		}
-		
+
 		if (!succes) {
 			throw new Exception("Error during Updating War");
 		}
+		if (logChanges()) {
+			File warOrg = TrueZipHelper.getTzFile(getBackupWarFile());
+			File finalwar = TrueZipHelper.getTzFile(getWarToPatchFile());
+			StringWriter sr = new StringWriter();
+			diffFolder(warOrg, finalwar, sr, FileHelper.COMPARE_ADDED + FileHelper.COMPARE_DELETED);
+
+		}
 	}
-	
+
+	public void diffFolder(File folder1, File folder2, Writer log, String filter) {
+		Map<String, List<String>> diff = FileHelper.diffFolder(folder1, folder2, filter);
+
+		String header = "DIFF " + folder1.getAbsolutePath() + " --> " + folder2.getAbsolutePath() + "\n";
+		addInfoLog(this.logChangesMsg, header, null);
+		for (Map.Entry<String, List<String>> ent : diff.entrySet()) {
+			for (String v : ent.getValue()) {
+				String body = ent.getKey() + " file://" + v + "\n";
+				addInfoLog(this.logChangesMsg, body, null);
+			}
+		}
+
+	}
+
 	public boolean check() {
 		// TODO Auto-generated method stub
 		return true;
 	}
+
 	class FileExtFilter implements FileFilter {
 		String exts[];
+
 		FileExtFilter(String exts) {
 			this.exts = exts.split("\\|");
 		}
+
 		public boolean accept(File file) {
 			boolean ok = true;
 			try {

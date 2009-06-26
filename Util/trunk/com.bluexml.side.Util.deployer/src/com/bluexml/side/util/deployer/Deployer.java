@@ -33,6 +33,9 @@ public abstract class Deployer implements Checkable {
 
 	public static String DEPLOYER_CODE = null;
 	protected String cleanKey = null;
+	protected String cleanKeyMsg ="target cleaned";
+	protected String logChanges =  null;
+	protected String logChangesMsg="detail about target changes made by this deployer";
 	protected List<String> options = null;
 
 	public void initialize(Map<String, String> configurationParameters, Map<String, String> generationParameters, List<String> options) {
@@ -83,6 +86,10 @@ public abstract class Deployer implements Checkable {
 		return configurationParameters;
 	}
 
+	protected boolean logChanges() {
+		return options != null && options.contains(logChanges);
+	}
+	
 	protected boolean doClean() {
 		return options != null && options.contains(cleanKey);
 	}

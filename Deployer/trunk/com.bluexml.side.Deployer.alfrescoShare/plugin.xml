@@ -26,6 +26,11 @@
                      key="com.bluexml.side.Application.deployer.alfrescoshare.clean"
                      label="clean">
                </option>
+               <option
+                     documentation="add detail about alfresco share war changes"
+                     key="com.bluexml.side.Application.deployer.alfrescoshare.logChanges"
+                     label="log detail">
+               </option>
             </deployerVersion>
          </technologyVersion>
       </technology>
