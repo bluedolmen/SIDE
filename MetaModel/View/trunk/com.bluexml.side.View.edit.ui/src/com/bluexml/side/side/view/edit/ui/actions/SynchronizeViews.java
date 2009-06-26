@@ -11,8 +11,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
-import com.bluexml.side.side.view.edit.ui.utils.InitView;
 import com.bluexml.side.side.view.edit.ui.utils.InternalModification;
+import com.bluexml.side.side.view.edit.ui.utils.model.ClassUtils;
 import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.ViewCollection;
 
@@ -56,7 +56,9 @@ ISelectionChangedListener {
 	private void doAction(ViewCollection av) {
 		InternalModification.dontMoveToDisabled();
 		try {
-			//domain.getCommandStack().execute();
+			for(AbstractView view : av.getViews()) {
+				domain.getCommandStack().execute(ClassUtils.synchronizeView(view, domain));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			EcorePlugin.INSTANCE.log("Synchronization failed : " + e.getMessage());

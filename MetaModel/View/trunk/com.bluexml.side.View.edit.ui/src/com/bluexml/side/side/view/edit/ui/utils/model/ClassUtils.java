@@ -3,12 +3,15 @@ package com.bluexml.side.side.view.edit.ui.utils.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.edit.domain.EditingDomain;
 
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.Field;
 import com.bluexml.side.view.ViewFactory;
 
@@ -77,5 +80,12 @@ public class ClassUtils {
 			metaInfoMap.put(m.getKey(), m.getValue());
 		}
 		return metaInfoMap;
+	}
+	
+	public static Command synchronizeView(AbstractView view, EditingDomain domain) {
+		// #1 : Search things to add (new in Class)
+		// #2 : Search thing to changes
+		// #3 : Seach things to delete (deleted in Class)
+		return null;
 	}
 }
