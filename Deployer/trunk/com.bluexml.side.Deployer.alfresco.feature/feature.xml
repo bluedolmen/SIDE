@@ -19,17 +19,13 @@
 
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="com.bluexml.side.Util.libs"/>
+      <import plugin="com.bluexml.side.Util.libs" version="1.0.12" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="com.bluexml.side.Util.generator"/>
-      <import plugin="com.bluexml.side.Application"/>
-      <import plugin="com.bluexml.side.Util.deployer"/>
-      <import plugin="com.bluexml.side.Util.security"/>
-      <import plugin="com.bluexml.side.Util.deployer.war" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.bluexml.side.Application" version="1.0.8" match="greaterOrEqual"/>
       <import plugin="com.bluexml.side.Util.deployer" version="1.0.8" match="greaterOrEqual"/>
       <import plugin="com.bluexml.side.Util.security" version="1.0.8" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Util.libs" version="1.0.12" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.deployer.war" version="1.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
