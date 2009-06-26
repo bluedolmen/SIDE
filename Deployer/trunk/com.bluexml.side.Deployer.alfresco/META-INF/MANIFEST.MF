@@ -6,12 +6,12 @@ Bundle-Version: 1.0.13
 Bundle-Activator: com.bluexml.side.deployer.alfresco.Activator
 Bundle-Vendor: blueXML
 Require-Bundle: org.eclipse.core.runtime,
- com.bluexml.side.Util.libs,
+ com.bluexml.side.Util.libs;bundle-version="1.0.13",
  org.eclipse.core.resources,
- com.bluexml.side.Util.generator,
- com.bluexml.side.Application,
- com.bluexml.side.Util.deployer,
- com.bluexml.side.Util.security,
+ com.bluexml.side.Util.generator;bundle-version="1.0.13",
+ com.bluexml.side.Application;bundle-version="1.0.13",
+ com.bluexml.side.Util.deployer;bundle-version="1.0.13",
+ com.bluexml.side.Util.security;bundle-version="1.0.11",
  com.bluexml.side.Util.deployer.war;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
