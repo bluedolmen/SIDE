@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="com.bluexml.side.Class.generator.facetmap.feature"
-      label="Facetmap Feature"
+      id="com.bluexml.side.Deployer.facetMap.feature"
+      label="S-IDE FacetMap Deployer"
       version="1.0.0"
       provider-name="BLUEXML">
 
@@ -18,19 +18,15 @@
    </license>
 
    <requires>
-      <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="com.bluexml.side.Application"/>
-      <import plugin="com.bluexml.side.Util.security"/>
-      <import plugin="com.bluexml.side.Util.generator"/>
-      <import plugin="com.bluexml.side.Util.generator.acceleo"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="com.bluexml.side.Util.libs"/>
-      <import plugin="com.bluexml.side.Util.settings"/>
+      <import plugin="com.bluexml.side.Application" version="1.0.8" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.deployer" version="1.0.8" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.security" version="1.0.8" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.deployer.war" version="1.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
-         id="com.bluexml.side.Class.generator.facetmap"
+         id="com.bluexml.side.Deployer.facetMap"
          download-size="0"
          install-size="0"
          version="1.0.0"

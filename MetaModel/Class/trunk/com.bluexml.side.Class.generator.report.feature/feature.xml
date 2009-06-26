@@ -29,8 +29,8 @@
       <import plugin="com.bluexml.side.Application"/>
       <import plugin="com.bluexml.side.Class.generator.alfresco" version="1.0.8" match="greaterOrEqual"/>
       <import plugin="com.bluexml.side.Common" version="1.0.11" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Class.modeler"/>
-      <import plugin="com.bluexml.side.Class"/>
+      <import plugin="com.bluexml.side.Class" version="1.0.13" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Class.modeler" version="1.0.13" match="greaterOrEqual"/>
    </requires>
 
    <plugin
