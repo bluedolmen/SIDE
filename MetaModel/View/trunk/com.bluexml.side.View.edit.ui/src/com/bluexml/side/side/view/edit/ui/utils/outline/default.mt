@@ -30,7 +30,7 @@ caption {
 	text-align: right;
 }
 
-th {
+th, .header {
 	font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
 	color: #4f6b72;
 	border-right: 1px solid #C1DAD7;
@@ -83,6 +83,17 @@ ul#main-nav {font-family:helvetica,arial,sans-serif;margin:0;padding:0;width:40e
 ul#main-nav li {margin:0;padding:0;list-style:none;margin:0 0 0.3em 0;}
 ul#main-nav li a {text-decoration:none;display:block;padding:0.3em 0.5em;border:1px solid silver;color:#003;background:#fff;}
 ul#main-nav li a:hover {border:1px solid gray;color:#000;background:#efefef}
+
+#facetmap{
+	position:absolute;
+}
+#criteria {
+	width:200px;
+	float: left;
+}
+#result {
+	margin-left:205px;
+}
 </style>
 </head>
 <body>
@@ -105,12 +116,45 @@ ul#main-nav li a:hover {border:1px solid gray;color:#000;background:#efefef}
 		<%}%>
 	<%}%>
 <%}%>
-
-
 </body>
 </html>
 
 <%script type="view.AbstractView" name="getHTMLForFacetMap"%>
+<br>
+<div id="facetmap">
+	<div id="criteria">
+		<%for (children){%>
+			<%if (cast("Field")){%>
+				<div>
+					<div class="header">
+						<%name%>
+					</div>
+					<div id="">
+						E.G. value, E.G. value, E.G. value,
+						E.G. value, ... 
+						<br><br>
+					</div>
+				</div>
+			<%}%>
+		<%}%>
+	</div>
+	<div id="result">
+		<h2>Results :</h2>
+		<%for (children){%>
+			<%if (cast("AbstractView")){%>
+				<%if (cast("FacetMap")){%>
+					<%current().getHTMLForFacetMap()%>
+				<%}else if(cast("Tree")){%>
+					<%current().getHTMLForTree()%>
+				<%}else if(cast("DataList")){%>
+					<%current().getHTMLForDataList()%>
+				<%}else if(cast("DataTable")){%>
+					<%current().getHTMLForDataTable()%>
+				<%}%>
+			<%}%>
+		<%}%>
+	</div>
+</div>
 
 <%script type="view.AbstractView" name="getHTMLForTree"%>
 <ul>
