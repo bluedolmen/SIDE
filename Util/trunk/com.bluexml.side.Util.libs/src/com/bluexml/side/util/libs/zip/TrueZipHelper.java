@@ -5,6 +5,7 @@ import com.bluexml.side.util.libs.FileHelper;
 import de.schlichtherle.io.ArchiveDetector;
 import de.schlichtherle.io.DefaultArchiveDetector;
 import de.schlichtherle.io.File;
+import de.schlichtherle.io.archive.zip.Zip32Driver;
 
 public class TrueZipHelper {
 	protected ArchiveDetector archiveDetector;
@@ -31,8 +32,9 @@ public class TrueZipHelper {
 	 * <li>Archive contents into a folder (unzip)</li>
 	 * <li>Archive contents into another Archive</li>
 	 * </ul>
-	 * Note this method do not unpack archives included in the source, just the source
-	 * <a>https://truezip.dev.java.net/</a>
+	 * Note this method do not unpack archives included in the source, just the
+	 * source <a>https://truezip.dev.java.net/</a>
+	 * 
 	 * @param src
 	 * @param dest
 	 * @param override
@@ -43,20 +45,34 @@ public class TrueZipHelper {
 		boolean result = false;
 		File srcF = new File(src, archiveDetector);
 		File destF = new File(dest);
-		
+
 		if (srcF.isArchive()) {
 			result = srcF.archiveCopyAllTo(destF, ArchiveDetector.NULL, ArchiveDetector.NULL);
 		} else {
 			result = srcF.copyAllTo(destF, ArchiveDetector.NULL, ArchiveDetector.NULL);
 		}
-		
+
 		// mandatory call see TrueZip doc
 		File.update();
 		return result;
 	}
 
-	
 	public boolean isDirectory(File f) {
 		return f.isDirectory() && !f.isArchive();
+	}
+
+	public static File getTzFile(java.io.File f) throws Exception {
+		return new File(f, new DefaultArchiveDetector(FileHelper.getFileExt(f), new Zip32Driver()));
+	}
+
+	/**
+	 * return a TrueZip File managing Zip32 archives with given suffix
+	 * 
+	 * @param f
+	 * @param suffix
+	 * @return
+	 */
+	public static File getTzFile(java.io.File f, String suffix) {
+		return new File(f, new DefaultArchiveDetector(suffix, new Zip32Driver()));
 	}
 }

@@ -3,9 +3,20 @@ package com.bluexml.side.util.libs;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FileHelper {
+
+	public static final String COMPARE_SAME = "=";
+	public static final String COMPARE_ADDED = "+";
+	public static final String COMPARE_DELETED = "-";
+
 	/**
 	 * This function will copy files or directories from one location to
 	 * another. note that the source and the destination must be mutually
@@ -103,13 +114,85 @@ public class FileHelper {
 		}
 		return false;
 	}
-	
-	
-	public static String getFileExt(File f) throws Exception{
+
+	public static String getFileExt(File f) throws Exception {
 		if (f.isFile()) {
-		int i = f.getName().lastIndexOf(".");
-		return f.getName().substring(i+1);
+			int i = f.getName().lastIndexOf(".");
+			return f.getName().substring(i + 1);
 		}
 		throw new Exception("no file ext for Folder");
 	}
+
+	public static List<File> listAll(File folder) {
+		List<File> allFiles = new ArrayList<File>();
+		if (folder.isFile()) {
+			allFiles.add(folder);
+		} else {
+			for (File f : folder.listFiles()) {
+				allFiles.addAll(listAll(f));
+			}
+		}
+		return allFiles;
+	}
+
+	public static List<String> listAllAsFilePath(File folder) {
+		List<String> allFilesPath = new ArrayList<String>();
+		List<File> allFiles = listAll(folder);
+
+		for (File f : allFiles) {
+			allFilesPath.add(f.getAbsolutePath());
+		}
+		return allFilesPath;
+	}
+
+	public static Map<String, List<String>> diffFolder(File folder1, File folder2, String filter) {
+		Map<String, List<String>> diff = new HashMap<String, List<String>>();
+
+		List<String> allFilesPath1 = makeRelativeTo(listAllAsFilePath(folder1), folder1.getAbsolutePath());
+		List<String> allFilesPath2 = makeRelativeTo(listAllAsFilePath(folder2), folder2.getAbsolutePath());
+
+		if (filter.indexOf(COMPARE_SAME) != -1) {
+			List<String> commonFiles = new ArrayList<String>(allFilesPath1);
+			commonFiles.retainAll(allFilesPath2);
+			diff.put(COMPARE_SAME, commonFiles);
+		}
+		if (filter.indexOf(COMPARE_DELETED) != -1) {
+			List<String> onlyIn1 = new ArrayList<String>(allFilesPath1);
+			onlyIn1.removeAll(allFilesPath2);
+			diff.put(COMPARE_DELETED, onlyIn1);
+		}
+		if (filter.indexOf(COMPARE_ADDED) != -1) {
+			List<String> onlyIn2 = new ArrayList<String>(allFilesPath2);
+			onlyIn2.removeAll(allFilesPath1);
+			diff.put(COMPARE_ADDED, onlyIn2);
+		}
+
+		return diff;
+	}
+
+	public static void diffFolder(File folder1, File folder2, Writer log, String filter) {
+		Map<String, List<String>> diff = diffFolder(folder1, folder2, filter);
+		try {
+			log.write("DIFF " + folder1.getAbsolutePath() + " --> " + folder2.getAbsolutePath() + "\n");
+			for (Map.Entry<String, List<String>> ent : diff.entrySet()) {
+				for (String v : ent.getValue()) {
+					log.write(ent.getKey() + " file://" + v + "\n");
+				}
+			}
+			log.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static List<String> makeRelativeTo(List<String> l, String root) {
+		List<String> newList = new ArrayList<String>();
+		for (String s : l) {
+			if (s.startsWith(root)) {
+				newList.add(s.substring(root.length()));
+			}
+		}
+		return newList;
+	}
+
 }
