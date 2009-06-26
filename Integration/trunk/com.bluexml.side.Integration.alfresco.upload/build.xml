@@ -1,6 +1,8 @@
 <project name="S-IDE integration module : Alfresco share upload">
-	<property name="moduleId" value="com.bluexml.side.integration.Alfressco.upload"/>
-	<property name="extensionPath" value="./extension"/>
+	<property name="moduleId" value="com.bluexml.side.integration.Alfressco.upload" />
+	<property file="build.${user.name}.properties">
+	</property>
+	<property name="extensionPath" value="./extension" />
 
 
 
@@ -8,10 +10,10 @@
           target: buildAMP              
          ================================= -->
 	<target name="buildAMP" depends="clean" description="description">
-		<mkdir dir="${extensionPath}"/>
+		<mkdir dir="${extensionPath}" />
 		<zip destfile="${extensionPath}/${moduleId}.amp">
-			<fileset dir="./AMP" id="id">				
-				<exclude name="**/.*"/>
+			<fileset dir="./AMP" id="id">
+				<exclude name="**/.*" />
 			</fileset>
 		</zip>
 	</target>
@@ -19,10 +21,26 @@
 	<!-- ================================= 
           target: clean              
          ================================= -->
-    <target name="clean" depends="" description="delete tmp and builded package">
-        <delete dir="${extensionPath}"></delete>
-    </target>
+	<target name="clean" depends="" description="delete tmp and builded package">
+		<delete dir="${extensionPath}">
+		</delete>
+	</target>
 
-	
-	
+	<!-- ================================= 
+          target: copyTo              
+         ================================= -->
+	<target name="copyTo" depends="buildAMP" description="description">
+		<copy todir="${catalina.home}/../amps">
+			<fileset dir="${extensionPath}">
+				<include name="**/**.amp" />
+			</fileset>
+		</copy>
+		<copy todir="${generated.home}">
+			<fileset dir="${extensionPath}">
+				<include name="**/**.amp" />
+			</fileset>
+		</copy>
+
+	</target>
+
 </project>

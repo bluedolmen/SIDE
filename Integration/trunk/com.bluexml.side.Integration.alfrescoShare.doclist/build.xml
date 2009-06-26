@@ -22,7 +22,7 @@
 			<arg value="${resources}/${docLibPath}/${jsScriptsIn}" />
 		</java>
 
-		<zip destfile="${extensionFolder}/AlfrescoShareExtension.zip">
+		<zip destfile="${extensionFolder}/com.bluexml.side.Integration.alfrescoShare.doclist.zip">
 			<fileset dir="${tmpFolder}" id="id">
 				<include name="**/*.*" />
 			</fileset>
@@ -33,21 +33,21 @@
 	<!-- ================================= 
           target: patchWebApp
          ================================= -->
-	<target name="patchWebApp" depends="buildExtension" description="build and deploy this module in alfresco Share">
-		<unzip dest="${catalina.home}">
+	<target name="copyTo" depends="buildExtension" description="build and deploy this module in alfresco Share">
+		<copy todir="${generated.home}">
 			<fileset dir="${extensionFolder}">
-				<include name="*.zip"/>
+				<include name="*.zip" />
 			</fileset>
-		</unzip>
+		</copy>
 	</target>
 
-	
+
 	<!-- ================================= 
           target: clean              
          ================================= -->
-    <target name="clean" depends="" description="delete tmp and builded extension">
-    	<delete dir="${tmpFolder}" failonerror="false" />
-    	<delete dir="${extensionFolder}" failonerror="false" />
-    </target>
+	<target name="clean" depends="" description="delete tmp and builded extension">
+		<delete dir="${tmpFolder}" failonerror="false" />
+		<delete dir="${extensionFolder}" failonerror="false" />
+	</target>
 
 </project>
