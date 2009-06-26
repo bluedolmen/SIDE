@@ -1,4 +1,5 @@
 package com.bluexml.side.view.generator.alfresco;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -6,23 +7,24 @@ import java.util.List;
 import java.util.Properties;
 
 import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
-public class ViewAlfrescoGenerator extends AbstractAlfrescoGenerator{
+
+public class ViewAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	public static String MMUri = "http://www.kerblue.org/view/1.0";
-	
+
 	public static String GENERATOR_OPTIONS_DOCLIST = "alfresco.view.doclist";
+
 	@Override
 	protected String getMetamodelURI() {
-		// TODO Auto-generated method stub
 		return MMUri;
 	}
 
 	@Override
 	protected List<String> getTemplates() {
 		List<String> result = new ArrayList<String>();
-		
-			// doclist
-			result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/doclistView/doclist_ftl.mt");
-		
+
+		// doclist
+		result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/doclistView/doclist_ftl.mt");
+
 		return result;
 	}
 
