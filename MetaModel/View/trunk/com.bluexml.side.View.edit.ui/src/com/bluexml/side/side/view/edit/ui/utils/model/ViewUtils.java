@@ -55,9 +55,11 @@ public class ViewUtils {
 					cmd.append(createCmd);
 				} else if (o instanceof Field) {
 					Field f = (Field) o;
-					Field fcpy = (Field) EcoreUtil.copy(f);
-					Command createCmd = AddCommand.create(domain, ViewUtils.getViewForElement(owner), ViewPackage.eINSTANCE.getFieldContainer_Disabled(), fcpy);
-					cmd.append(createCmd);
+					if (f.getPath().size() == 0) {
+						Field fcpy = (Field) EcoreUtil.copy(f);
+						Command createCmd = AddCommand.create(domain, ViewUtils.getViewForElement(owner), ViewPackage.eINSTANCE.getFieldContainer_Disabled(), fcpy);
+						cmd.append(createCmd);
+					}
 				}
 			}
 		}

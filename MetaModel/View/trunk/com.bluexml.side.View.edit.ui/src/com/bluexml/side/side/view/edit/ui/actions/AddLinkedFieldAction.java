@@ -1,9 +1,12 @@
 package com.bluexml.side.side.view.edit.ui.actions;
 
 import java.util.Iterator;
+import java.util.List;
 
-import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.jface.action.Action;
@@ -14,16 +17,28 @@ import org.eclipse.ui.IWorkbenchPart;
 
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
+import com.bluexml.side.side.view.edit.ui.utils.InternalModification;
+import com.bluexml.side.side.view.edit.ui.utils.model.ClassUtils;
 import com.bluexml.side.view.AbstractView;
+import com.bluexml.side.view.Col;
+import com.bluexml.side.view.DataTable;
+import com.bluexml.side.view.Field;
+import com.bluexml.side.view.FieldElement;
+import com.bluexml.side.view.ViewFactory;
+import com.bluexml.side.view.ViewPackage;
 
 public class AddLinkedFieldAction  extends Action implements
 ISelectionChangedListener {
 	protected EObject toAdd;
+	protected AbstractView parent;
 	private EditingDomain domain;
+	protected List<Association> path;
 	
-	public AddLinkedFieldAction(EObject a) {
+	public AddLinkedFieldAction(EObject a, List<Association> path, AbstractView parent) {
 		super();
 		toAdd = a;
+		this.path = path;
+		this.parent = parent;
 	}
 	
 	public void selectionChanged(SelectionChangedEvent event) {
@@ -39,7 +54,7 @@ ISelectionChangedListener {
 		
 		for (Iterator<?> objects = selection.iterator(); objects.hasNext();) {
 			Object object = objects.next();
-			if (object instanceof AbstractView) {
+			if (object instanceof Attribute) {
 				toAdd = (Attribute) object;
 			} else {
 				return false;
@@ -56,10 +71,34 @@ ISelectionChangedListener {
 	}
 	
 	private void doAction() {
-		CompoundCommand cc = new CompoundCommand();
-		
-		
-		domain.getCommandStack().execute(cc);
+		try {
+			if (toAdd instanceof Attribute) {
+				FieldElement child = null;
+				Field f = ClassUtils.getFieldForAttribute((Attribute)toAdd);
+//				for (Association a : path) {
+//					f.getPath().add(a);
+//				}
+				f.getPath().addAll(path);
+				
+				if (parent instanceof DataTable) {
+					Col col = ViewFactory.eINSTANCE.createCol();
+					col.getChildren().add(f);
+					col.setName(f.getName());
+					child = col;
+				} else {
+					child = f;
+				}
+				Command cmd = AddCommand.create(domain, parent, ViewPackage.eINSTANCE.getFieldContainer_Children(), child);
+				domain.getCommandStack().execute(cmd);
+			} else {
+				EcorePlugin.INSTANCE.log("Error : Add Linked Field launch on non attribute item.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			EcorePlugin.INSTANCE.log("Get Linked Field : " + e.getMessage());
+			e.printStackTrace();
+			InternalModification.moveToDisabled(); 
+		}
 	}
 
 	@Override

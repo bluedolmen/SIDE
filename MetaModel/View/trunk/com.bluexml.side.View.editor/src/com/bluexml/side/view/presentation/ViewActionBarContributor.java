@@ -476,7 +476,7 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 			menuManager.insertAfter("ui-actions", restoreMenu);
 			
 			// Add linked field
-			IMenuManager addLinkedFieldMenu = new MenuManager("Add linked Field",ImageDescriptor.createFromFile(this.getClass(),
+			final IMenuManager addLinkedFieldMenu = new MenuManager("Add linked Field",ImageDescriptor.createFromFile(this.getClass(),
 			"/icons/menu/addLinkedField.png"), 
 			"transform");
 			addLinkedFieldMenu.add(new Action("never shown entry") {
@@ -484,7 +484,7 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 			addLinkedFieldMenu.setRemoveAllWhenShown(true);
 			IMenuListener addLinkedFieldListener = new IMenuListener() {
 				public void menuAboutToShow(IMenuManager m) {
-					fillAddLinkedMenu(m);
+					fillAddLinkedMenu(m, addLinkedFieldMenu);
 				}
 			};
 			addLinkedFieldMenu.addMenuListener(addLinkedFieldListener);
@@ -537,40 +537,75 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 		super.addGlobalActions(menuManager);
 	}
 
-	protected void fillAddLinkedMenu(IMenuManager mgr) {
+	/**
+	 * Get the selected element of the menu and will show sub element
+	 * @param mgr
+	 * @param topMenu
+	 */
+	protected void fillAddLinkedMenu(IMenuManager mgr, IMenuManager topMenu) {
 		Object o = ((TreeSelection) this.selectionProvider.getSelection())
 		.getFirstElement();
 		if (o instanceof AbstractView) {
 			AbstractView av = (AbstractView) o;
 			if (av.getViewOf() != null && av.getViewOf() instanceof Clazz){
 				Clazz c = (Clazz) av.getViewOf();
-				for (final Association a : c.getAllSourceAssociations()) {
-//					AddLinkedFieldAction alfa = new AddLinkedFieldAction(a);
-//					alfa.setActiveWorkbenchPart(activeEditor);
-//					selectionProvider
-//					.addSelectionChangedListener((ISelectionChangedListener) alfa);
-//					mgr.add(alfa);
-					IMenuManager addLinkedFieldMenu = new MenuManager(a.getTitle(),"browse" + a.getName());
-					addLinkedFieldMenu.add(new Action("never shown entry") {
-					});
-					addLinkedFieldMenu.setRemoveAllWhenShown(true);
-					IMenuListener addLinkedFieldListener = new IMenuListener() {
-						public void menuAboutToShow(IMenuManager m) {
-							fillAddLinkedSubMenu(m,a);
-						}
-					};
-					addLinkedFieldMenu.addMenuListener(addLinkedFieldListener);
-				}
+				List<Association> path = new ArrayList<Association>();
+				addLinkedFieldAssociation(topMenu, c, path, av);
 			}
 		}
 	}
 
-	protected void fillAddLinkedSubMenu(IMenuManager m, Association a) {
-		if (a.getTarget() != null && a.getTarget().size() > 0) {
-			
+	/**
+	 * Add a subMenu for Association
+	 * @param topMenu
+	 * @param c
+	 * @param av 
+	 */
+	private void addLinkedFieldAssociation(IMenuManager topMenu, final Clazz c, final List<Association> path, final AbstractView av) {
+		for (final Association a : c.getAllSourceAssociations()) {
+			IMenuManager addLinkedFieldMenu = new MenuManager(a.getTitle(),"browse" + a.getName());
+			addLinkedFieldMenu.add(new Action("never shown entry") {});
+			addLinkedFieldMenu.setRemoveAllWhenShown(true);
+			IMenuListener addLinkedFieldListener = new IMenuListener() {
+				public void menuAboutToShow(IMenuManager m) {
+					fillAddLinkedSubMenu(m,a,path,av,c);
+				}
+			};
+			addLinkedFieldMenu.addMenuListener(addLinkedFieldListener);
+			topMenu.add(addLinkedFieldMenu);
 		}
 	}
 
+	/**
+	 * Add attributes for sub menu
+	 * @param mgr
+	 * @param a
+	 * @param av 
+	 * @param c 
+	 */
+	protected void fillAddLinkedSubMenu(IMenuManager mgr, Association a, List<Association> p, AbstractView av, Clazz c) {
+		List<Association> path = new ArrayList<Association>(p);
+		path.add(a);
+		//TODO : change when new OCL method are done
+		if (a.getTarget() != null && a.getTarget().size() > 0) {
+			if (av.getViewOf().equals(c)) {
+				c = a.getTarget().get(1);
+			}
+			for (Attribute att : c.getAllAttributes()) {
+				AddLinkedFieldAction alfa = new AddLinkedFieldAction(att,path,av);
+				alfa.setActiveWorkbenchPart(activeEditor);
+				selectionProvider
+				.addSelectionChangedListener((ISelectionChangedListener) alfa);
+				mgr.add(alfa);
+			}
+			addLinkedFieldAssociation(mgr,c,path,av);
+		}
+	}
+
+	/**
+	 * Show deleted field that can be restored
+	 * @param mgr
+	 */
 	private void fillRestoreContextMenu(IMenuManager mgr) {
 		Object o = ((TreeSelection) this.selectionProvider.getSelection())
 				.getFirstElement();
