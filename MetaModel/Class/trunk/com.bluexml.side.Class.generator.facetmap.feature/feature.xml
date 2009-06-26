@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.bluexml.side.Class.generator.facetmap.feature"
-      label="Facetmap Feature"
+      label="S-IDE FacetMap"
       version="1.0.0"
       provider-name="BLUEXML">
 
