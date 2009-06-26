@@ -257,7 +257,8 @@ public class Application {
 		out += "\n\t\t<delete file=\"${buildDirectory}/${buildLabel}/${archivePrefix}/launcher.exe\" />\n";
 		out += "\n\t\t<delete dir=\"${buildDirectory}/${buildLabel}/${archivePrefix}/plugins/org.eclipse.equinox.launcher.${equinoxLauncherDirectoryVersion}\" />\n";
 		out += "\t\t<delete file=\"${buildDirectory}/${buildLabel}/${archivePrefix}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar\" />\n\n";
-
+		out += "\t\t<mkdir dir=\"${buildDirectory}/${buildLabel}/${archivePrefix}/features\"/>\n";
+		
 		for (int i = 0; i < projects.length; i++) {
 			if (projects[i].indexOf("feature") != -1
 					|| projects[i].equals("com.bluexml.side.Util")) {
@@ -265,14 +266,11 @@ public class Application {
 						+ projects[i]
 						+ "_"
 						+ Utils.getVersionNumber(projects[i])
-						+ ".jar\" basedir=\"${buildDirectory}/${buildLabel}/${archivePrefix}/features/"
+						+ ".jar\" basedir=\"${buildDirectory}/features/"
 						+ projects[i]
-						+ "_"
-						+ Utils.getVersionNumber(projects[i]) + "\" />\n";
+						+ "\" />\n";
 				out += "\t\t<delete dir=\"${buildDirectory}/${buildLabel}/${archivePrefix}/features/"
-						+ projects[i]
-						+ "_"
-						+ Utils.getVersionNumber(projects[i]) + "\" />\n\n";
+						+ projects[i] + "\" />\n\n";
 			}
 		}
 
@@ -327,7 +325,7 @@ public class Application {
 		String out = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 		out += "<?pde version=\"3.4\"?>\n";
 
-		out += "<product name=\"buildAuto\" useFeatures=\"true\">\n";
+		out += "<product name=\"buildAuto\" useFeatures=\"false\">\n";
 		out += "\t<configIni use=\"default\">\n";
 		out += "\t</configIni>\n";
 		out += "\t<launcherArgs>\n";

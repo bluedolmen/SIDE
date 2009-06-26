@@ -624,7 +624,9 @@ public class Utils {
 			// on change le numéro de version (s'il le faut)
 			if ("".equals(getForceNumberVersion())) {
 				if (featureAModifier) {
-					listeFeatureModif.add(projectName);
+					if(!listeFeatureModif.contains(projectName)){
+						listeFeatureModif.add(projectName);
+					}
 					racine.setAttribute("version", update(number, pattern));
 				}
 			} else
@@ -854,12 +856,20 @@ public class Utils {
 			String[] projects = getProjects();
 
 			for (int i = 0; i < projects.length; i++) {
-				if (projects[i].indexOf("feature") == -1)
-					FileHelper.copyFiles(new File(getBuildDirectory()
-							+ File.separator + "plugins" + File.separator
-							+ projects[i] + File.separator + "bin"), new File(
-							getFinalDirectory() + File.separator + "bin"
-									+ File.separator + projects[i]), true);
+				if (projects[i].indexOf("feature") == -1) {
+					if (new File(getBuildDirectory() + File.separator
+							+ "plugins" + File.separator + projects[i]
+							+ File.separator + "@dot").exists()) {
+						FileHelper
+								.copyFiles(new File(getBuildDirectory()
+										+ File.separator + "plugins"
+										+ File.separator + projects[i]
+										+ File.separator + "@dot"), new File(
+										getFinalDirectory() + File.separator
+												+ "bin" + File.separator
+												+ projects[i]), true);
+					}
+				}
 			}
 
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
