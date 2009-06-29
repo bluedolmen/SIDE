@@ -9,6 +9,6 @@ import templates.servicesTemplates.Common
 <%script type="clazz.ClassPackage" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <%for (getAllClasses()) {%>
 <#if item.asset.type == "{http://www.bluexml.com/model/content/<%current("ClassPackage").name%>/1.0}<%getQualifiedName()%>">
-	<#include doclist_views/doclist_<%getQualifiedName()%>.ftl>
+	<#include "doclist_views/doclist_<%getQualifiedName()%>.ftl">
 </#if>
 <%}%>

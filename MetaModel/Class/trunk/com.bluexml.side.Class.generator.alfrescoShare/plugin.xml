@@ -47,6 +47,11 @@
                         key="com.bluexml.side.Class.generator.alfrescoShare.module.version"
                         label="Package version">
                   </configurationParameter>
+                  <option
+                        documentation="add custom alfresco share configuration to manage all meta datas in forms"
+                        key="class.alfrescoShare.defaultForms"
+                        label="defaultForms">
+                  </option>
                </generatorVersion>
             </technologyVersion>
          </technology>

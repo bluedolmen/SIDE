@@ -1,10 +1,6 @@
 <%
 metamodel http://www.kerblue.org/class/1.0
-import templates.servicesTemplates.Common
-import templates.servicesTemplates.Attribute
-import templates.servicesTemplates.Association
-import com.bluexml.side.clazz.generator.alfresco.services.AttributeServices
-import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
+import com.bluexml.side.clazz.generator.alfrescoshare.templates.servicesTemplates.Common
 %>
 
 <%-- 
@@ -42,7 +38,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 	            <!-- END BlueXML custom form configuration (<%getContentType()%>) -->
 	         </field-visibility>
 	      </form>
-	<forms>          
+	</forms>          
    </config>    
    <!-- END BlueXML custom form configuration for the <%getContentType()%> content type -->    
    <%--}--%>      

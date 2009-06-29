@@ -1,7 +1,7 @@
 <project>
 	<property file="build.${user.name}.properties">
 	</property>
-	<property name="docLibPath" value="webapps/share/components/documentlibrary/" />
+	<property name="docLibPath" value="components/documentlibrary/" />
 
 
 	<property name="jsScriptsOut" value="documentlist-min.js" />
@@ -34,7 +34,7 @@
           target: patchWebApp
          ================================= -->
 	<target name="copyTo" depends="buildExtension" description="build and deploy this module in alfresco Share">
-		<copy todir="${generated.home}">
+		<copy todir="${generated.home}" overwrite="true">
 			<fileset dir="${extensionFolder}">
 				<include name="*.zip" />
 			</fileset>

@@ -68,7 +68,7 @@ public class Packager {
 	}
 
 	private File getFolderToPackage() {
-		return new File(getWorkingdir());
+		return new File(getWorkingdir() + File.separator + "webapps" + File.separator + "share");
 	}
 
 }
