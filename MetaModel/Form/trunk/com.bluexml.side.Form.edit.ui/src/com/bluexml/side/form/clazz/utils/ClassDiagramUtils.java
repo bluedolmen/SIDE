@@ -363,10 +363,10 @@ public class ClassDiagramUtils {
 				}
 			}
 			for (Association ass : cl.getAllSourceAssociations()) {
-				if (ass.getFirstEnd().getLinkedClass().equals(cl) && ass.getSecondEnd().isIsNavigable()) {
+				if (ass.getFirstEnd().getLinkedClass().equals(cl) && ass.getSecondEnd().isNavigable()) {
 					listChild.put(ClassDiagramUtils.getAssociationName(ass, false), ass);
 				}
-				if (ass.getSecondEnd().getLinkedClass().equals(cl) && ass.getFirstEnd().isIsNavigable()) {
+				if (ass.getSecondEnd().getLinkedClass().equals(cl) && ass.getFirstEnd().isNavigable()) {
 					listChild.put(ClassDiagramUtils.getAssociationName(ass, true), ass);
 				}
 			}

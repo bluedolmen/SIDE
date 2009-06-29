@@ -154,7 +154,7 @@ ISelectionChangedListener {
 	@Override
 	public String getText() {
 		String label = ((c.getTitle() != null && c.getTitle().length() > 0) ? c.getTitle() : c.getName());
-		if (c.isIsAbstract()) {
+		if (c.isAbstract()) {
 			label += " (Abstract Type)";
 		}
 		return label;

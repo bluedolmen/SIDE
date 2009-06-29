@@ -134,7 +134,7 @@ public class ClassSynchronizationUtils {
 			Clazz Clazz, Association ass) {
 		// SOURCE
 		String associationId = "";
-		if (ass.getFirstEnd().getLinkedClass().equals(Clazz) && ass.getSecondEnd().isIsNavigable()) {
+		if (ass.getFirstEnd().getLinkedClass().equals(Clazz) && ass.getSecondEnd().isNavigable()) {
 			associationId = ClassDiagramUtils.getAssociationName(ass, false);
 		}
 		
@@ -144,7 +144,7 @@ public class ClassSynchronizationUtils {
 		} else {
 			// Modification
 			Field mcf = (ModelChoiceField)formChild.get(associationId);
-			if(ass.getSecondEnd().isIsNavigable() && ass.getFirstEnd().getLinkedClass().equals(Clazz) && mcf != null) {
+			if(ass.getSecondEnd().isNavigable() && ass.getFirstEnd().getLinkedClass().equals(Clazz) && mcf != null) {
 				if (((ModelChoiceField)mcf).getMax_bound() > Integer.parseInt(ass.getSecondEnd().getCardMax()) && Integer.parseInt(ass.getSecondEnd().getCardMax()) != -1) {
 					cc.append(SetCommand.create(domain, mcf, FormPackage.eINSTANCE.getModelChoiceField_Max_bound(), Integer.parseInt(ass.getSecondEnd().getCardMax())));
 				}
@@ -153,7 +153,7 @@ public class ClassSynchronizationUtils {
 		
 		// TARGET
 		associationId = "";
-		if (ass.getSecondEnd().getLinkedClass().equals(Clazz) && ass.getFirstEnd().isIsNavigable()) {
+		if (ass.getSecondEnd().getLinkedClass().equals(Clazz) && ass.getFirstEnd().isNavigable()) {
 			associationId = ClassDiagramUtils.getAssociationName(ass, true);
 		}
 		
@@ -163,7 +163,7 @@ public class ClassSynchronizationUtils {
 		} else {
 			// Modification
 			Field mcf = (ModelChoiceField)formChild.get(associationId);
-			if(ass.getFirstEnd().isIsNavigable() && ass.getFirstEnd().getLinkedClass().equals(Clazz) && mcf != null) {
+			if(ass.getFirstEnd().isNavigable() && ass.getFirstEnd().getLinkedClass().equals(Clazz) && mcf != null) {
 				if (((ModelChoiceField)mcf).getMax_bound() > Integer.parseInt(ass.getFirstEnd().getCardMax())  && Integer.parseInt(ass.getFirstEnd().getCardMax()) != -1) {
 					cc.append(SetCommand.create(domain, mcf, FormPackage.eINSTANCE.getModelChoiceField_Max_bound(), Integer.parseInt(ass.getFirstEnd().getCardMax())));
 				}
