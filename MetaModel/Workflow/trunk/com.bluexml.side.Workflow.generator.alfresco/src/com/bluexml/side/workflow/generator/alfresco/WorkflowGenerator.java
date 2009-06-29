@@ -32,11 +32,11 @@ public class WorkflowGenerator extends AbstractAlfrescoGenerator {
 	@Override
 	protected List<String> getTemplates() {
 		List<String> result = new ArrayList<String>();
-		result.add("/com.bluexml.side.Workflow.generator.Alfresco/templates/alfrescoGenerator_context.mt");
-		result.add("/com.bluexml.side.Workflow.generator.Alfresco/templates/alfrescoGenerator_jpdl.mt");
-		result.add("/com.bluexml.side.Workflow.generator.Alfresco/templates/alfrescoGenerator_model.mt");
-		result.add("/com.bluexml.side.Workflow.generator.Alfresco/templates/alfrescoGenerator_properties.mt");
-		result.add("/com.bluexml.side.Workflow.generator.Alfresco/templates/alfrescoGenerator_web_client_config.mt");
+		result.add("/com.bluexml.side.Workflow.generator.alfresco/templates/alfrescoGenerator_context.mt");
+		result.add("/com.bluexml.side.Workflow.generator.alfresco/templates/alfrescoGenerator_jpdl.mt");
+		result.add("/com.bluexml.side.Workflow.generator.alfresco/templates/alfrescoGenerator_model.mt");
+		result.add("/com.bluexml.side.Workflow.generator.alfresco/templates/alfrescoGenerator_properties.mt");
+		result.add("/com.bluexml.side.Workflow.generator.alfresco/templates/alfrescoGenerator_web_client_config.mt");
 		return result;
 	}
 
