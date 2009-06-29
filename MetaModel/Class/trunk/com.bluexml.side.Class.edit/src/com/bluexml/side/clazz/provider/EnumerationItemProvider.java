@@ -66,26 +66,26 @@ public class EnumerationItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addIsDynamicPropertyDescriptor(object);
+			addDynamicPropertyDescriptor(object);
 			addDependsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Is Dynamic feature.
+	 * This adds a property descriptor for the Dynamic feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addIsDynamicPropertyDescriptor(Object object) {
+	protected void addDynamicPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Enumeration_isDynamic_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Enumeration_isDynamic_feature", "_UI_Enumeration_type"),
-				 ClazzPackage.Literals.ENUMERATION__IS_DYNAMIC,
+				 getString("_UI_Enumeration_dynamic_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Enumeration_dynamic_feature", "_UI_Enumeration_type"),
+				 ClazzPackage.Literals.ENUMERATION__DYNAMIC,
 				 true,
 				 false,
 				 false,
@@ -183,7 +183,7 @@ public class EnumerationItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Enumeration.class)) {
-			case ClazzPackage.ENUMERATION__IS_DYNAMIC:
+			case ClazzPackage.ENUMERATION__DYNAMIC:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case ClazzPackage.ENUMERATION__LITERALS:
@@ -212,12 +212,7 @@ public class EnumerationItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
-				 ClazzFactory.eINSTANCE.createFirstEnd()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
-				 ClazzFactory.eINSTANCE.createSecondEnd()));
+				 ClazzFactory.eINSTANCE.createAssociationEnd()));
 
 		newChildDescriptors.add
 			(createChildParameter

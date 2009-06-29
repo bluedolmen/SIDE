@@ -179,12 +179,7 @@ public class TitledNamedClassModelElementItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
-				 ClazzFactory.eINSTANCE.createFirstEnd()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
-				 ClazzFactory.eINSTANCE.createSecondEnd()));
+				 ClazzFactory.eINSTANCE.createAssociationEnd()));
 
 		newChildDescriptors.add
 			(createChildParameter

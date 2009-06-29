@@ -283,49 +283,26 @@ public class ClazzItemProviderAdapterFactory extends ClazzAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.FirstEnd} instances.
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.AssociationEnd} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected FirstEndItemProvider firstEndItemProvider;
+	protected AssociationEndItemProvider associationEndItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link com.bluexml.side.clazz.FirstEnd}.
+	 * This creates an adapter for a {@link com.bluexml.side.clazz.AssociationEnd}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createFirstEndAdapter() {
-		if (firstEndItemProvider == null) {
-			firstEndItemProvider = new FirstEndItemProvider(this);
+	public Adapter createAssociationEndAdapter() {
+		if (associationEndItemProvider == null) {
+			associationEndItemProvider = new AssociationEndItemProvider(this);
 		}
 
-		return firstEndItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.SecondEnd} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SecondEndItemProvider secondEndItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.bluexml.side.clazz.SecondEnd}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createSecondEndAdapter() {
-		if (secondEndItemProvider == null) {
-			secondEndItemProvider = new SecondEndItemProvider(this);
-		}
-
-		return secondEndItemProvider;
+		return associationEndItemProvider;
 	}
 
 	/**
@@ -436,8 +413,7 @@ public class ClazzItemProviderAdapterFactory extends ClazzAdapterFactory impleme
 		if (enumerationLiteralItemProvider != null) enumerationLiteralItemProvider.dispose();
 		if (aspectItemProvider != null) aspectItemProvider.dispose();
 		if (classCommentItemProvider != null) classCommentItemProvider.dispose();
-		if (firstEndItemProvider != null) firstEndItemProvider.dispose();
-		if (secondEndItemProvider != null) secondEndItemProvider.dispose();
+		if (associationEndItemProvider != null) associationEndItemProvider.dispose();
 	}
 
 }

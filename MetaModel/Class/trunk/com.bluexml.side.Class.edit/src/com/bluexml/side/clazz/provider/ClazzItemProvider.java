@@ -66,8 +66,8 @@ public class ClazzItemProvider
 
 			addGeneralizationsPropertyDescriptor(object);
 			addAspectsPropertyDescriptor(object);
-			addIsAbstractPropertyDescriptor(object);
-			addIsDeprecatedPropertyDescriptor(object);
+			addAbstractPropertyDescriptor(object);
+			addDeprecatedPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -117,19 +117,19 @@ public class ClazzItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Is Abstract feature.
+	 * This adds a property descriptor for the Abstract feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addIsAbstractPropertyDescriptor(Object object) {
+	protected void addAbstractPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Clazz_isAbstract_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Clazz_isAbstract_feature", "_UI_Clazz_type"),
-				 ClazzPackage.Literals.CLAZZ__IS_ABSTRACT,
+				 getString("_UI_Clazz_abstract_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Clazz_abstract_feature", "_UI_Clazz_type"),
+				 ClazzPackage.Literals.CLAZZ__ABSTRACT,
 				 true,
 				 false,
 				 false,
@@ -139,19 +139,19 @@ public class ClazzItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Is Deprecated feature.
+	 * This adds a property descriptor for the Deprecated feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addIsDeprecatedPropertyDescriptor(Object object) {
+	protected void addDeprecatedPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Clazz_isDeprecated_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Clazz_isDeprecated_feature", "_UI_Clazz_type"),
-				 ClazzPackage.Literals.CLAZZ__IS_DEPRECATED,
+				 getString("_UI_Clazz_deprecated_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Clazz_deprecated_feature", "_UI_Clazz_type"),
+				 ClazzPackage.Literals.CLAZZ__DEPRECATED,
 				 true,
 				 false,
 				 false,
@@ -227,8 +227,8 @@ public class ClazzItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Clazz.class)) {
-			case ClazzPackage.CLAZZ__IS_ABSTRACT:
-			case ClazzPackage.CLAZZ__IS_DEPRECATED:
+			case ClazzPackage.CLAZZ__ABSTRACT:
+			case ClazzPackage.CLAZZ__DEPRECATED:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case ClazzPackage.CLAZZ__OPERATIONS:

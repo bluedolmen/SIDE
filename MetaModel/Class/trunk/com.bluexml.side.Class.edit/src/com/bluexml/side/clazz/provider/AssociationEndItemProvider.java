@@ -68,7 +68,7 @@ public class AssociationEndItemProvider
 			addValuePropertyDescriptor(object);
 			addCardMinPropertyDescriptor(object);
 			addCardMaxPropertyDescriptor(object);
-			addIsNavigablePropertyDescriptor(object);
+			addNavigablePropertyDescriptor(object);
 			addLinkedClassPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -141,19 +141,19 @@ public class AssociationEndItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Is Navigable feature.
+	 * This adds a property descriptor for the Navigable feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addIsNavigablePropertyDescriptor(Object object) {
+	protected void addNavigablePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_AssociationEnd_isNavigable_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AssociationEnd_isNavigable_feature", "_UI_AssociationEnd_type"),
-				 ClazzPackage.Literals.ASSOCIATION_END__IS_NAVIGABLE,
+				 getString("_UI_AssociationEnd_navigable_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AssociationEnd_navigable_feature", "_UI_AssociationEnd_type"),
+				 ClazzPackage.Literals.ASSOCIATION_END__NAVIGABLE,
 				 true,
 				 false,
 				 false,
@@ -213,7 +213,7 @@ public class AssociationEndItemProvider
 			case ClazzPackage.ASSOCIATION_END__VALUE:
 			case ClazzPackage.ASSOCIATION_END__CARD_MIN:
 			case ClazzPackage.ASSOCIATION_END__CARD_MAX:
-			case ClazzPackage.ASSOCIATION_END__IS_NAVIGABLE:
+			case ClazzPackage.ASSOCIATION_END__NAVIGABLE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

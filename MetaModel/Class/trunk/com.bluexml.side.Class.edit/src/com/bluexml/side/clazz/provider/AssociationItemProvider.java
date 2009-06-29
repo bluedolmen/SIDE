@@ -183,12 +183,12 @@ public class AssociationItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ClazzPackage.Literals.ASSOCIATION__FIRST_END,
-				 ClazzFactory.eINSTANCE.createFirstEnd()));
+				 ClazzFactory.eINSTANCE.createAssociationEnd()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ClazzPackage.Literals.ASSOCIATION__SECOND_END,
-				 ClazzFactory.eINSTANCE.createSecondEnd()));
+				 ClazzFactory.eINSTANCE.createAssociationEnd()));
 	}
 
 	/**
