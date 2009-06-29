@@ -87,27 +87,27 @@ public class AssociationServices {
 	}
 
 	public boolean isMandatorySrc(Association a, ClassModelElement elt) {
-		if (a.getSecondEnd().isIsNavigable() && a.getFirstEnd().getLinkedClass() == elt) {
+		if (a.getSecondEnd().isNavigable() && a.getFirstEnd().getLinkedClass() == elt) {
 			return Integer.valueOf(a.getFirstEnd().getCardMin()) > 0;
-		} else if (a.getFirstEnd().isIsNavigable() && a.getSecondEnd().getLinkedClass() == elt) {
+		} else if (a.getFirstEnd().isNavigable() && a.getSecondEnd().getLinkedClass() == elt) {
 			return Integer.valueOf(a.getSecondEnd().getCardMin()) > 0;
 		}
 		return false;
 	}
 
 	public boolean isManySrc(Association a, ClassModelElement elt) {
-		if (a.getSecondEnd().isIsNavigable() && a.getFirstEnd().getLinkedClass() == elt) {
+		if (a.getSecondEnd().isNavigable() && a.getFirstEnd().getLinkedClass() == elt) {
 			return Integer.valueOf(a.getFirstEnd().getCardMax()) > 1 || Integer.valueOf(a.getFirstEnd().getCardMax()) == -1;
-		} else if (a.getFirstEnd().isIsNavigable() && a.getSecondEnd().getLinkedClass() == elt) {
+		} else if (a.getFirstEnd().isNavigable() && a.getSecondEnd().getLinkedClass() == elt) {
 			return Integer.valueOf(a.getSecondEnd().getCardMax()) > 1 || Integer.valueOf(a.getSecondEnd().getCardMax()) == -1;
 		}
 		return false;
 	}
 
 	public boolean isMandatoryTarget(Association a, ClassModelElement elt) {
-		if (a.getSecondEnd().isIsNavigable() && a.getFirstEnd().getLinkedClass() == elt) {
+		if (a.getSecondEnd().isNavigable() && a.getFirstEnd().getLinkedClass() == elt) {
 			return Integer.valueOf(a.getSecondEnd().getCardMin()) > 0;
-		} else if (a.getFirstEnd().isIsNavigable() && a.getSecondEnd().getLinkedClass() == elt) {
+		} else if (a.getFirstEnd().isNavigable() && a.getSecondEnd().getLinkedClass() == elt) {
 			return Integer.valueOf(a.getFirstEnd().getCardMin()) > 0;
 		}
 		return false;
@@ -176,16 +176,16 @@ public class AssociationServices {
 	 */
 	public static AbstractClass getRealSource(Association a, ClassModelElement elt) throws Exception {
 		if (a.getFirstEnd().getLinkedClass().equals(elt) && a.getSecondEnd().getLinkedClass().equals(elt)) {
-			if (a.getFirstEnd().isIsNavigable() || a.getSecondEnd().isIsNavigable()) {
+			if (a.getFirstEnd().isNavigable() || a.getSecondEnd().isNavigable()) {
 				return (AbstractClass) elt;
 			}
 		} else if (a.getFirstEnd().getLinkedClass().equals(elt)) {
-			if (a.getSecondEnd().isIsNavigable()) {
+			if (a.getSecondEnd().isNavigable()) {
 				// elt is the source
 				return (AbstractClass) elt;
 			}
 		} else if (a.getSecondEnd().getLinkedClass().equals(elt)) {
-			if (a.getFirstEnd().isIsNavigable()) {
+			if (a.getFirstEnd().isNavigable()) {
 				return (AbstractClass) elt;
 			}
 		} else {
