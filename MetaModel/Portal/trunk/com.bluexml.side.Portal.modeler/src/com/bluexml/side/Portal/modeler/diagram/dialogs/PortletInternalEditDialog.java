@@ -185,6 +185,7 @@ public class PortletInternalEditDialog extends Dialog implements IDialogConstant
 			// select types to view
 			ArrayList<EClass> viewsType = new ArrayList<EClass>();
 			viewsType.add(ViewPackage.eINSTANCE.getDataList());
+			viewsType.add(ViewPackage.eINSTANCE.getComposedView());
 			viewsType.add(ViewPackage.eINSTANCE.getDataTable());
 			viewsType.add(ViewPackage.eINSTANCE.getTree());
 			viewsType.add(ViewPackage.eINSTANCE.getFacetMap());
