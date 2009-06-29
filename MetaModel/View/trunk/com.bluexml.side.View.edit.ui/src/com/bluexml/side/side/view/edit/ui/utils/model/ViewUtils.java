@@ -21,7 +21,6 @@ import com.bluexml.side.view.FacetMap;
 import com.bluexml.side.view.Field;
 import com.bluexml.side.view.FieldContainer;
 import com.bluexml.side.view.FieldElement;
-import com.bluexml.side.view.FieldGroup;
 import com.bluexml.side.view.Tree;
 import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
@@ -29,10 +28,12 @@ import com.bluexml.side.view.ViewPackage;
 public class ViewUtils {
 	public static AbstractView getViewForElement(EObject f) {
 		AbstractView v = null;
-		if (f instanceof AbstractView) {
-			v = (AbstractView)f;
-		} else {
-			v = getViewForElement(f.eContainer());
+		if (f != null) {
+			if (f instanceof AbstractView) {
+				v = (AbstractView)f;
+			} else {
+				v = getViewForElement(f.eContainer());
+			}
 		}
 		return v;
 	}
