@@ -112,12 +112,9 @@ public class PortalModelElementItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
-				 ClazzFactory.eINSTANCE.createFirstEnd()));
+				 ClazzFactory.eINSTANCE.createAssociationEnd()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
-				 ClazzFactory.eINSTANCE.createSecondEnd()));
+
 	}
 
 	/**
