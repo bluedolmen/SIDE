@@ -249,7 +249,7 @@ public class EnumerationEditDialog extends Dialog implements IDialogConstants {
 		if (object != null) {
 			// Name
 			EnumerationNameTxt.setText(object.getName());
-			checkIsDynamicBt.setSelection(object.getIsDynamic());
+			checkIsDynamicBt.setSelection(object.getDynamic());
 		}				
 	}
 

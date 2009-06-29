@@ -52,7 +52,6 @@ import com.bluexml.side.clazz.AssociationType;
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.ClazzFactory;
-import com.bluexml.side.clazz.FirstEnd;
 
 /**
  * Association controller <br>
@@ -360,7 +359,7 @@ public class AssociationEditPart extends EMFGraphEdgeEditPart {
 
 		boolean isNavigable = false;
 		if (association.getFirstEnd() != null) {
-			isNavigable = association.getFirstEnd().isIsNavigable();
+			isNavigable = association.getFirstEnd().isNavigable();
 		}
 
 		if (!(isNavigable)) {
@@ -385,7 +384,7 @@ public class AssociationEditPart extends EMFGraphEdgeEditPart {
 
 		boolean isNavigable = false;
 		if (association.getSecondEnd() != null) {
-			isNavigable = association.getSecondEnd().isIsNavigable();
+			isNavigable = association.getSecondEnd().isNavigable();
 		}
 
 		if (!isNavigable) {

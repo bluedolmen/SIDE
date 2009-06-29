@@ -97,7 +97,7 @@ public class AssociationUpdateCommand extends Command {
 				.get(AssociationHelper.ASSOCIATION_ROLE_TARGET_TITLE));
 		
 
-		association.getFirstEnd().setIsNavigable(((Boolean) newAssociationData
+		association.getFirstEnd().setNavigable(((Boolean) newAssociationData
 				.get(AssociationHelper.FIRST_END_IS_NAVIGABLE)).booleanValue());
 		association.getFirstEnd().setCardMin((String) newAssociationData
 				.get(AssociationHelper.FIRST_END_LOWER_BOUND));
@@ -105,7 +105,7 @@ public class AssociationUpdateCommand extends Command {
 				.get(AssociationHelper.FIRST_END_UPPER_BOUND));
 
 		association
-				.getSecondEnd().setIsNavigable(((Boolean) newAssociationData
+				.getSecondEnd().setNavigable(((Boolean) newAssociationData
 						.get(AssociationHelper.SECOND_END_IS_NAVIGABLE))
 						.booleanValue());
 		association.getSecondEnd().setCardMin((String) newAssociationData
@@ -145,7 +145,7 @@ public class AssociationUpdateCommand extends Command {
 		association.getSecondEnd().setName((String) oldAssociationData
 				.get(AssociationHelper.ASSOCIATION_ROLE_TARGET));
 
-		association.getFirstEnd().setIsNavigable(((Boolean) oldAssociationData
+		association.getFirstEnd().setNavigable(((Boolean) oldAssociationData
 				.get(AssociationHelper.FIRST_END_IS_NAVIGABLE)).booleanValue());
 		association.getFirstEnd().setCardMin((String) oldAssociationData
 				.get(AssociationHelper.FIRST_END_LOWER_BOUND));
@@ -153,7 +153,7 @@ public class AssociationUpdateCommand extends Command {
 				.get(AssociationHelper.FIRST_END_UPPER_BOUND));
 
 		association
-				.getSecondEnd().setIsNavigable(((Boolean) oldAssociationData
+				.getSecondEnd().setNavigable(((Boolean) oldAssociationData
 						.get(AssociationHelper.SECOND_END_IS_NAVIGABLE))
 						.booleanValue());
 		association.getSecondEnd().setCardMin((String) oldAssociationData

@@ -87,10 +87,10 @@ public class ClazzUpdateCommand extends Command {
 		classe.setDocumentation((String) newAssociationData
 				.get(ClazzEditDialog.CLASSE_DOCUMENTATION));
 		
-		classe.setIsAbstract((Boolean) newAssociationData
+		classe.setAbstract((Boolean) newAssociationData
 				.get(ClazzEditDialog.CLASSE_ISABSTRACT));
 		
-		classe.setIsDeprecated((Boolean) newAssociationData
+		classe.setDeprecated((Boolean) newAssociationData
 				.get(ClazzEditDialog.CLASSE_ISDEPRECATED));
 		
 		Comment layout = null, view = null;

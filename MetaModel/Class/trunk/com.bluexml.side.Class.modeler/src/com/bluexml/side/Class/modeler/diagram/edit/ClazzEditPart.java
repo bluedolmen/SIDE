@@ -219,7 +219,7 @@ public class ClazzEditPart extends EMFGraphNodeEditPart {
 		FontData[] fData = Display.getDefault().getSystemFont().getFontData();
 
 		if (clazz != null) {
-			if (clazz.isIsAbstract()) {
+			if (clazz.isAbstract()) {
 				fData[0].setStyle(SWT.ITALIC | SWT.BOLD);
 			} else {
 				fData[0].setStyle(SWT.BOLD);
@@ -250,7 +250,7 @@ public class ClazzEditPart extends EMFGraphNodeEditPart {
 				break;
 		}
 
-		if (clazz.isIsDeprecated())
+		if (clazz.isDeprecated())
 			return ModelerColorConstants.classlightRed;
 		else if (findedNomenclature) {
 			return ModelerColorConstants.lightYellow;

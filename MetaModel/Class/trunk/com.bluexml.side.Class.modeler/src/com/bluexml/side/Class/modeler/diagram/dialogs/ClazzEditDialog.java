@@ -365,8 +365,8 @@ public class ClazzEditDialog extends Dialog implements IDialogConstants {
 			classeTitleTxt.setText(classe.getTitle());
 		if (classe.getDescription() != null)
 			classeDescriptionTxt.setText(classe.getDescription());
-		checkIsAbstractBt.setSelection(classe.isIsAbstract());
-		checkIsDeprecatedBt.setSelection(classe.isIsDeprecated());
+		checkIsAbstractBt.setSelection(classe.isAbstract());
+		checkIsDeprecatedBt.setSelection(classe.isDeprecated());
 		
 		//Layout & View
 		for (Object o : classe.getComments()) {

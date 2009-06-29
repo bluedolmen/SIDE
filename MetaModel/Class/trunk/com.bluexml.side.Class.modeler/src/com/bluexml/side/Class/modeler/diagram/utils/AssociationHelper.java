@@ -25,10 +25,9 @@ import org.topcased.modeler.utils.Utils;
 
 import com.bluexml.side.Class.modeler.diagram.edit.AssociationEditPart;
 import com.bluexml.side.clazz.Association;
+import com.bluexml.side.clazz.AssociationEnd;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.ClazzFactory;
-import com.bluexml.side.clazz.FirstEnd;
-import com.bluexml.side.clazz.SecondEnd;
 
 public class AssociationHelper {
 	public static final String ASSOCIATION_NAME = "association name";
@@ -88,11 +87,11 @@ public class AssociationHelper {
 		resultMap.put(AssociationHelper.ASSOCIATION_NAME, asso.getName());
 		resultMap.put(AssociationHelper.ASSOCIATION_TYPE, asso.getAssociationType());
 
-		resultMap.put(AssociationHelper.FIRST_END_IS_NAVIGABLE, new Boolean(asso.getFirstEnd().isIsNavigable()));
+		resultMap.put(AssociationHelper.FIRST_END_IS_NAVIGABLE, new Boolean(asso.getFirstEnd().isNavigable()));
 		resultMap.put(AssociationHelper.FIRST_END_LOWER_BOUND, asso.getFirstEnd().getCardMin());
 		resultMap.put(AssociationHelper.FIRST_END_UPPER_BOUND, asso.getFirstEnd().getCardMax());
 
-		resultMap.put(AssociationHelper.SECOND_END_IS_NAVIGABLE, new Boolean(asso.getSecondEnd().isIsNavigable()));
+		resultMap.put(AssociationHelper.SECOND_END_IS_NAVIGABLE, new Boolean(asso.getSecondEnd().isNavigable()));
 		resultMap.put(AssociationHelper.SECOND_END_LOWER_BOUND, asso.getFirstEnd().getCardMin());
 		resultMap.put(AssociationHelper.SECOND_END_UPPER_BOUND, asso.getFirstEnd().getCardMax());
 
@@ -138,9 +137,9 @@ public class AssociationHelper {
 		Clazz targetObject = (Clazz) Utils.getElement(trg);
 		
 		// set firstEnd
-		FirstEnd fe = asso.getFirstEnd();		
+		AssociationEnd fe = asso.getFirstEnd();		
 		if (fe == null) {
-			fe = ClazzFactory.eINSTANCE.createFirstEnd();
+			fe = ClazzFactory.eINSTANCE.createAssociationEnd();
 			asso.setFirstEnd(fe);
 		}
 		fe.setLinkedClass(sourceObject);
@@ -158,11 +157,11 @@ public class AssociationHelper {
 		}
 
 		// setSecondEnd
-		SecondEnd se = asso.getSecondEnd();
+		AssociationEnd se = asso.getSecondEnd();
 		if (se == null) {
-			se = ClazzFactory.eINSTANCE.createSecondEnd();
+			se = ClazzFactory.eINSTANCE.createAssociationEnd();
 			asso.setSecondEnd(se);
-			se.setIsNavigable(true);
+			se.setNavigable(true);
 		}
 		se.setLinkedClass(targetObject);
 		if (se.getCardMax() == null) {

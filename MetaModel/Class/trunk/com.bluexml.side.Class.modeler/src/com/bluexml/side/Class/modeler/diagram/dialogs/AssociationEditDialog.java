@@ -201,7 +201,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 		associationRoleSrcTitle = association.getFirstEnd().getTitle();
 		associationRoleTargetTitle = association.getSecondEnd().getTitle();
 
-		firstEndIsNavigable = association.getFirstEnd().isIsNavigable();
+		firstEndIsNavigable = association.getFirstEnd().isNavigable();
 		firstEndLowerBound = association.getFirstEnd().getCardMin();
 		firstEndUpperBound = association.getFirstEnd().getCardMax();
 		if (firstEndLowerBound == null)
@@ -215,7 +215,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 		if (association.getFirstEnd().getLinkedClass() instanceof Aspect)
 			firstEndClass = ((Aspect)association.getFirstEnd().getLinkedClass()).getName();
 		
-		secondEndIsNavigable = association.getSecondEnd().isIsNavigable();
+		secondEndIsNavigable = association.getSecondEnd().isNavigable();
 		secondEndLowerBound = association.getSecondEnd().getCardMin();
 		secondEndUpperBound = association.getSecondEnd().getCardMax();
 		if (secondEndLowerBound == null)

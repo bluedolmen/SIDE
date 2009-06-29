@@ -76,7 +76,7 @@ public class EnumerationUpdateCommand extends Command {
 	protected void getOldValues() {
 		// Store old data
 		oldName = enumeration.getName();
-		oldIsDynamic = enumeration.getIsDynamic();
+		oldIsDynamic = enumeration.getDynamic();
 		oldInputTypes = new EnumerationLiteralDataStructure(enumeration);
 	}
 
@@ -86,7 +86,7 @@ public class EnumerationUpdateCommand extends Command {
 	protected void setValues() {
 		// Perform update for main data
 		enumeration.setName(name);
-		enumeration.setIsDynamic(isDynamic);
+		enumeration.setDynamic(isDynamic);
 		// Perform update for input parameters
 		List newParameters = new ArrayList();
 		Iterator iterator = inputTypes.getData().iterator();
