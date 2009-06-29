@@ -27,7 +27,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 
    			<%for (getAllPackages().nSort()){%>	      	
 				<%for (classSet.nSort("title")){%>	
-   			  		<%if (!isAbstract){%>
+   			  		<%if (!abstract){%>
    			  			<%if (metainfo[key.equalsIgnoreCase("simplifyCreation")].nSize()>0 && metainfo[key.equalsIgnoreCase("simplifyCreation")].nFirst().value.equalsIgnoreCase("true")) {%>
 	            			<action idref="create_<%getQualifiedName()%>" />
 	          			<%}%>

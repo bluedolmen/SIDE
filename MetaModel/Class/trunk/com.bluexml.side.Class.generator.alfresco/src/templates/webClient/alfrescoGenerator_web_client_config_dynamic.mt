@@ -27,7 +27,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 
 	<%-- GENERATE THE DECLARATION OF ICON'S SPACES  --%>
 	<%for (getAllClasses()){%>
-		<%if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()>0 && !isAbstract){%>
+		<%if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()>0 && !abstract){%>
 		<config evaluator="string-compare" condition="<%getFolder()%>:<%getQualifiedName()%> icons">
 		   <icons>
 		      <icon name="<%name%>" path="/images/icons/<%getQualifiedName()%>.gif" />
@@ -53,7 +53,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 				<%if (isSource(current(1))) {%>
 					<show-<%getAssociationType()%> name="<%getFolder()%>:<%getAssociationName(current("clazz.Clazz"))%>"/>			
 				<%}%>
-				<%if (firstEnd.linkedClass == secondEnd.linkedClass && current("clazz.Association").firstEnd.isNavigable && current("clazz.Association").secondEnd.isNavigable) {%>
+				<%if (firstEnd.linkedClass == secondEnd.linkedClass && current("clazz.Association").firstEnd.navigable && current("clazz.Association").secondEnd.navigable) {%>
 					<show-<%getAssociationType()%> name="<%getFolder()%>:<%current("clazz.Association").getQualifiedNameReverse(current("clazz.Clazz"))%>"/>	
 				<%}%>
 			<%}%>
@@ -77,7 +77,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 					<%if (isSource(current(1))) {%>
 						<property name="<%getFolder()%>:<%getAssociationName(current(2))%>"/>
 					<%}%>
-					<%if (firstEnd.linkedClass == secondEnd.linkedClass && current("clazz.Association").firstEnd.isNavigable && current("clazz.Association").secondEnd.isNavigable) {%>
+					<%if (firstEnd.linkedClass == secondEnd.linkedClass && current("clazz.Association").firstEnd.navigable && current("clazz.Association").secondEnd.navigable) {%>
 						<property name="<%getFolder()%>:<%current("clazz.Association").getQualifiedNameReverse(current("clazz.Clazz"))%>"/>	
 					<%}%>
 				<%}%>

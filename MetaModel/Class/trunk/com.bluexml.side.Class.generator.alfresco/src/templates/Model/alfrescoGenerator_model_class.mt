@@ -19,7 +19,6 @@ import templates.servicesTemplates.Attribute
 import templates.servicesTemplates.Association
 
 import com.bluexml.side.clazz.generator.alfresco.services.AttributeServices
-
 import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 %>
 
@@ -89,7 +88,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 						<constraint ref="bxds:constraint:mail"/>
 					<%}%>
 					<%if valueList {%>
-						<%if (!valueList.isDynamic){%>
+						<%if (!valueList.dynamic){%>
 							<constraint ref="<%getFolder()%>:nomenclature:<%valueList.getQualifiedName()%>"/>
 						<%}else{%>
 							<!--<constraint ref="<%getFolder()%>:Litteral"/>-->
@@ -134,7 +133,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 						<%}%>
 					</source>
 					<target>
-						<%if (firstEnd.isNavigable && secondEnd.isNavigable){%>
+						<%if (firstEnd.navigable && secondEnd.navigable){%>
 						  <%if (firstEnd.linkedClass == current(2)){%>
 						<class><%secondEnd.linkedClass.getFolder()%>:<%secondEnd.linkedClass.getQualifiedName()%></class>
 						  <%}else{%>
@@ -156,7 +155,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 					</target>
 				</<%getAssociationType()%>>	
 				<!-- For Recursive association, special case -->
-				<%if (firstEnd.linkedClass == secondEnd.linkedClass && current("clazz.Association").firstEnd.isNavigable && current("clazz.Association").secondEnd.isNavigable) {%>
+				<%if (firstEnd.linkedClass == secondEnd.linkedClass && current("clazz.Association").firstEnd.navigable && current("clazz.Association").secondEnd.navigable) {%>
 					<!-- Recursive Association -->	
 					<<%getAssociationType()%> name="<%getFolder()%>:<%current("clazz.Association").getQualifiedNameReverse(current("clazz.Clazz"))%>">													
 
@@ -174,7 +173,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 						<%}%>
 					</source>
 					<target>
-						<%if (firstEnd.isNavigable && secondEnd.isNavigable){%>
+						<%if (firstEnd.navigable && secondEnd.navigable){%>
 						  <%if (firstEnd.linkedClass == current("clazz.Clazz")){%>
 						<class><%secondEnd.linkedClass.getFolder()%>:<%secondEnd.linkedClass.getQualifiedName()%></class>
 						  <%}else{%>

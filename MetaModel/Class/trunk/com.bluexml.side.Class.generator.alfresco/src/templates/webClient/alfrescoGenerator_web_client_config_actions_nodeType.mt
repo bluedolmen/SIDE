@@ -26,7 +26,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 <%script type="clazz.ClassPackage" name="alfrescoGenerator_actions_nodeType"%>
 
   	<%for (getAllClasses()){%>
-  	<%if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()==0 && !isAbstract){%>
+  	<%if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()==0 && !abstract){%>
   	<config evaluator="node-type" condition="<%getFolder()%>:<%getQualifiedName()%>">
       <actions>
          <action-group id="document_browse_menu">

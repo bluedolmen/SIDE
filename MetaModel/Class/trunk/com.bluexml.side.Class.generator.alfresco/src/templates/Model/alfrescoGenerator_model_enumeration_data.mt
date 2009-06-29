@@ -30,7 +30,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 <?xml version='1.0' encoding='iso-8859-1'?>
 <root_node>
 <%for (getAllEnumerations()){%>
-<%if (isDynamic == true){%>
+<%if (dynamic){%>
 <!-- Enumeration <%name%> -->
 <!-- Enumeration for Static tables -->
 
@@ -95,6 +95,6 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 		</associations>
 	</attributes>
 </Class>
-<%}%> <%-- END if (isDynamic) --%>
+<%}%> <%-- END if (dynamic) --%>
 <%}%> <%-- END for (enumerationSet) --%>
 </root_node>

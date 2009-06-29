@@ -26,7 +26,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 <%script type="clazz.ClassPackage" name="alfrescoGenerator_spaceWizards"%>
 
 		<%for (getAllClasses()){%>
-			<%if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()>0 && !isAbstract){%>
+			<%if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()>0 && !abstract){%>
 			<type name="<%getFolder()%>:<%getQualifiedName()%>" icon="/images/icons/<%getQualifiedName()%>.gif"/>
 			<%}%>
 		<%}%>

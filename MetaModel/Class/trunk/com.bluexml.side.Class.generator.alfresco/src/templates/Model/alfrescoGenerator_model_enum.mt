@@ -23,7 +23,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AttributeServices
 import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 %>
 <%script type="clazz.Enumeration" name="alfrescoGeneratorEnums" %>
-	<%if (isDynamic) {%>
+	<%if (dynamic) {%>
 	<type name="<%getFolder()%>:<%getQualifiedName()%>">
 		<title><%name%></title>		
 		<description><%name%></description>		

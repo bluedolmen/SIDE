@@ -62,7 +62,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 					
 					<%if (valueList) {%>
 
-						<%if (!valueList.isDynamic){%>
+						<%if (!valueList.dynamic){%>
 							<constraint ref="<%getFolder()%>:nomenclature:<%valueList.getQualifiedName()%>"/>
 						<%}else{%>
 							<constraint ref="<%getFolder()%>:enum:<%valueList.getQualifiedName()%>"/>

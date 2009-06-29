@@ -25,13 +25,13 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 
 <%script type="clazz.ClassPackage" name="alfrescoGenerator_contentWizards"%>
 		<%for (getAllClasses()){%>
-			<%if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()==0 && !isAbstract){%>
+			<%if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()==0 && !abstract){%>
 			<type name="<%getFolder()%>:<%getQualifiedName()%>" />
 			<%}%>
 			<%--<type name="<%getFolder()%>:<%getQualifiedName()%>_search" />--%>
 		<%}%>
 		<%for (getAllEnumerations()) {%>
-		    <%if current("clazz.Enumeration").isDynamic {%> 
+		    <%if current("clazz.Enumeration").dynamic {%> 
 		    	<type name="<%getFolder()%>:<%getQualifiedName()%>" />
 		    <%}%>
 		<%}%>
