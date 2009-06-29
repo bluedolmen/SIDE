@@ -163,13 +163,22 @@ public interface ViewPackage extends EPackage {
 	int VIEW_COLLECTION__VIEWS = CommonPackage.PACKAGE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Composed Views</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIEW_COLLECTION__COMPOSED_VIEWS = CommonPackage.PACKAGE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Collection</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_COLLECTION_FEATURE_COUNT = CommonPackage.PACKAGE_FEATURE_COUNT + 1;
+	int VIEW_COLLECTION_FEATURE_COUNT = CommonPackage.PACKAGE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.impl.StylableImpl <em>Stylable</em>}' class.
@@ -179,7 +188,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getStylable()
 	 * @generated
 	 */
-	int STYLABLE = 32;
+	int STYLABLE = 33;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -2149,6 +2158,151 @@ public interface ViewPackage extends EPackage {
 	int TREE_FEATURE_COUNT = ABSTRACT_VIEW_FEATURE_COUNT + 8;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.ComposedViewImpl <em>Composed View</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.ComposedViewImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getComposedView()
+	 * @generated
+	 */
+	int COMPOSED_VIEW = 15;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_VIEW__STYLING = FIELD_CONTAINER__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_VIEW__STEREOTYPES = FIELD_CONTAINER__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_VIEW__TAGS = FIELD_CONTAINER__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_VIEW__COMMENTS = FIELD_CONTAINER__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_VIEW__DOCUMENTATION = FIELD_CONTAINER__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_VIEW__DESCRIPTION = FIELD_CONTAINER__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_VIEW__METAINFO = FIELD_CONTAINER__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_VIEW__NAME = FIELD_CONTAINER__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_VIEW__MAP_TO = FIELD_CONTAINER__MAP_TO;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_VIEW__PREFIX = FIELD_CONTAINER__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_VIEW__SUFFIX = FIELD_CONTAINER__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_VIEW__HIDDEN = FIELD_CONTAINER__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_VIEW__CHILDREN = FIELD_CONTAINER__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_VIEW__DISABLED = FIELD_CONTAINER__DISABLED;
+
+	/**
+	 * The number of structural features of the '<em>Composed View</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_VIEW_FEATURE_COUNT = FIELD_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.impl.FieldImpl <em>Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2156,7 +2310,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getField()
 	 * @generated
 	 */
-	int FIELD = 15;
+	int FIELD = 16;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -2310,7 +2464,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getTextField()
 	 * @generated
 	 */
-	int TEXT_FIELD = 16;
+	int TEXT_FIELD = 17;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -2473,7 +2627,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getPasswordField()
 	 * @generated
 	 */
-	int PASSWORD_FIELD = 17;
+	int PASSWORD_FIELD = 18;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -2627,7 +2781,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getBooleanField()
 	 * @generated
 	 */
-	int BOOLEAN_FIELD = 18;
+	int BOOLEAN_FIELD = 19;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -2790,7 +2944,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFloatField()
 	 * @generated
 	 */
-	int FLOAT_FIELD = 19;
+	int FLOAT_FIELD = 20;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -2944,7 +3098,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getActionField()
 	 * @generated
 	 */
-	int ACTION_FIELD = 20;
+	int ACTION_FIELD = 21;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -3107,7 +3261,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getDateField()
 	 * @generated
 	 */
-	int DATE_FIELD = 21;
+	int DATE_FIELD = 22;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -3261,7 +3415,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getTimeField()
 	 * @generated
 	 */
-	int TIME_FIELD = 22;
+	int TIME_FIELD = 23;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -3415,7 +3569,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getDateTimeField()
 	 * @generated
 	 */
-	int DATE_TIME_FIELD = 23;
+	int DATE_TIME_FIELD = 24;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -3569,7 +3723,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getPhoneNumberField()
 	 * @generated
 	 */
-	int PHONE_NUMBER_FIELD = 24;
+	int PHONE_NUMBER_FIELD = 25;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -3723,7 +3877,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getEmailField()
 	 * @generated
 	 */
-	int EMAIL_FIELD = 25;
+	int EMAIL_FIELD = 26;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -3877,7 +4031,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getIntegerField()
 	 * @generated
 	 */
-	int INTEGER_FIELD = 26;
+	int INTEGER_FIELD = 27;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -4031,7 +4185,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFileField()
 	 * @generated
 	 */
-	int FILE_FIELD = 27;
+	int FILE_FIELD = 28;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -4185,7 +4339,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getSelectField()
 	 * @generated
 	 */
-	int SELECT_FIELD = 28;
+	int SELECT_FIELD = 29;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -4348,7 +4502,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getHtmlField()
 	 * @generated
 	 */
-	int HTML_FIELD = 29;
+	int HTML_FIELD = 30;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -4502,7 +4656,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getURLField()
 	 * @generated
 	 */
-	int URL_FIELD = 30;
+	int URL_FIELD = 31;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -4656,7 +4810,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getImageField()
 	 * @generated
 	 */
-	int IMAGE_FIELD = 31;
+	int IMAGE_FIELD = 32;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -4810,7 +4964,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getPaginable()
 	 * @generated
 	 */
-	int PAGINABLE = 33;
+	int PAGINABLE = 34;
 
 	/**
 	 * The feature id for the '<em><b>Paging</b></em>' containment reference.
@@ -4838,7 +4992,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getSortable()
 	 * @generated
 	 */
-	int SORTABLE = 34;
+	int SORTABLE = 35;
 
 	/**
 	 * The feature id for the '<em><b>Sorting</b></em>' containment reference.
@@ -4866,7 +5020,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getEditable()
 	 * @generated
 	 */
-	int EDITABLE = 35;
+	int EDITABLE = 36;
 
 	/**
 	 * The feature id for the '<em><b>Editable</b></em>' attribute.
@@ -4894,7 +5048,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getMovable()
 	 * @generated
 	 */
-	int MOVABLE = 36;
+	int MOVABLE = 37;
 
 	/**
 	 * The feature id for the '<em><b>Movable</b></em>' attribute.
@@ -4922,7 +5076,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFilterable()
 	 * @generated
 	 */
-	int FILTERABLE = 37;
+	int FILTERABLE = 38;
 
 	/**
 	 * The feature id for the '<em><b>Filtering</b></em>' containment reference.
@@ -4950,7 +5104,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFieldGroup()
 	 * @generated
 	 */
-	int FIELD_GROUP = 38;
+	int FIELD_GROUP = 39;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -5095,7 +5249,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getSortOrder()
 	 * @generated
 	 */
-	int SORT_ORDER = 39;
+	int SORT_ORDER = 40;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.PaginationStyle <em>Pagination Style</em>}' enum.
@@ -5105,7 +5259,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getPaginationStyle()
 	 * @generated
 	 */
-	int PAGINATION_STYLE = 40;
+	int PAGINATION_STYLE = 41;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.Halign <em>Halign</em>}' enum.
@@ -5115,7 +5269,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getHalign()
 	 * @generated
 	 */
-	int HALIGN = 41;
+	int HALIGN = 42;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.LoadingType <em>Loading Type</em>}' enum.
@@ -5125,7 +5279,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getLoadingType()
 	 * @generated
 	 */
-	int LOADING_TYPE = 42;
+	int LOADING_TYPE = 43;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.WidgetTextType <em>Widget Text Type</em>}' enum.
@@ -5135,7 +5289,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getWidgetTextType()
 	 * @generated
 	 */
-	int WIDGET_TEXT_TYPE = 43;
+	int WIDGET_TEXT_TYPE = 44;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.SelectWidgetType <em>Select Widget Type</em>}' enum.
@@ -5145,7 +5299,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getSelectWidgetType()
 	 * @generated
 	 */
-	int SELECT_WIDGET_TYPE = 44;
+	int SELECT_WIDGET_TYPE = 45;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.FacetDisplayType <em>Facet Display Type</em>}' enum.
@@ -5155,7 +5309,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFacetDisplayType()
 	 * @generated
 	 */
-	int FACET_DISPLAY_TYPE = 45;
+	int FACET_DISPLAY_TYPE = 46;
 
 
 	/**
@@ -5178,6 +5332,17 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getViewCollection_Views();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.view.ViewCollection#getComposedViews <em>Composed Views</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Composed Views</em>'.
+	 * @see com.bluexml.side.view.ViewCollection#getComposedViews()
+	 * @see #getViewCollection()
+	 * @generated
+	 */
+	EReference getViewCollection_ComposedViews();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.view.FieldElement <em>Field Element</em>}'.
@@ -5594,6 +5759,16 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTree_MaxDepth();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.view.ComposedView <em>Composed View</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Composed View</em>'.
+	 * @see com.bluexml.side.view.ComposedView
+	 * @generated
+	 */
+	EClass getComposedView();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.view.FieldContainer <em>Field Container</em>}'.
@@ -6121,6 +6296,14 @@ public interface ViewPackage extends EPackage {
 		EReference VIEW_COLLECTION__VIEWS = eINSTANCE.getViewCollection_Views();
 
 		/**
+		 * The meta object literal for the '<em><b>Composed Views</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VIEW_COLLECTION__COMPOSED_VIEWS = eINSTANCE.getViewCollection_ComposedViews();
+
+		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.impl.FieldElementImpl <em>Field Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6457,6 +6640,16 @@ public interface ViewPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TREE__MAX_DEPTH = eINSTANCE.getTree_MaxDepth();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.view.impl.ComposedViewImpl <em>Composed View</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.view.impl.ComposedViewImpl
+		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getComposedView()
+		 * @generated
+		 */
+		EClass COMPOSED_VIEW = eINSTANCE.getComposedView();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.impl.FieldContainerImpl <em>Field Container</em>}' class.

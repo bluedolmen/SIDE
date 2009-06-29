@@ -322,6 +322,11 @@ public class TreeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.TREE__NODE_VALUE,
+				 ViewFactory.eINSTANCE.createComposedView()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.TREE__NODE_VALUE,
 				 ViewFactory.eINSTANCE.createTextField()));
 
 		newChildDescriptors.add

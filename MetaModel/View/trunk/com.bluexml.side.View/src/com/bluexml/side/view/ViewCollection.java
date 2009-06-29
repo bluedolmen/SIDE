@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.bluexml.side.view.ViewCollection#getViews <em>Views</em>}</li>
+ *   <li>{@link com.bluexml.side.view.ViewCollection#getComposedViews <em>Composed Views</em>}</li>
  * </ul>
  * </p>
  *
@@ -40,5 +41,21 @@ public interface ViewCollection extends com.bluexml.side.common.Package {
 	 * @generated
 	 */
 	EList<AbstractView> getViews();
+
+	/**
+	 * Returns the value of the '<em><b>Composed Views</b></em>' containment reference list.
+	 * The list contents are of type {@link com.bluexml.side.view.ComposedView}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Composed Views</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Composed Views</em>' containment reference list.
+	 * @see com.bluexml.side.view.ViewPackage#getViewCollection_ComposedViews()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ComposedView> getComposedViews();
 		
 } // ViewCollection

@@ -2,7 +2,7 @@
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.bluexml.side.View/src"
-    creationIcons="false" modelPluginID="com.bluexml.side.View" templateDirectory="/com.bluexml.side.util.metaModel.validate/templates"
+    creationIcons="false" modelPluginID="com.bluexml.side.View" templateDirectory="/com.bluexml.side.Util.MetaModel.validate/templates"
     dynamicTemplates="true" modelName="View" rootImplementsInterface="" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="5.0" copyrightFields="false" usedGenPackages="../../com.bluexml.side.Common/model/Common.genmodel#//common">
   <foreignModel>View.ecore</foreignModel>
@@ -44,6 +44,8 @@
     </genEnums>
     <genClasses ecoreClass="View.ecore#//ViewCollection">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//ViewCollection/views"/>
+      <genFeatures property="None" children="true" createChild="true" propertySortChoices="true"
+          ecoreFeature="ecore:EReference View.ecore#//ViewCollection/composedViews"/>
     </genClasses>
     <genClasses image="false" ecoreClass="View.ecore#//FieldContainer">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//FieldContainer/children"/>
@@ -60,6 +62,11 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference View.ecore#//AbstractView/viewOf"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//AbstractView/operations"/>
       <genOperations ecoreOperation="View.ecore#//AbstractView/getFields"/>
+      <genOperations ecoreOperation="View.ecore#//AbstractView/getCols"/>
+      <genOperations ecoreOperation="View.ecore#//AbstractView/getDirectChildFields"/>
+      <genOperations ecoreOperation="View.ecore#//AbstractView/getInnerView"/>
+      <genOperations ecoreOperation="View.ecore#//AbstractView/getDisabledAndEnabledField"/>
+      <genOperations ecoreOperation="View.ecore#//AbstractView/getDisabledFields"/>
     </genClasses>
     <genClasses image="false" ecoreClass="View.ecore#//AbstractDataTable">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//AbstractDataTable/haveRowActions"/>
@@ -102,6 +109,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//Tree/defaultDepth"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//Tree/maxDepth"/>
     </genClasses>
+    <genClasses ecoreClass="View.ecore#//ComposedView"/>
     <genClasses ecoreClass="View.ecore#//Field">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//Field/patern"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//Field/paternLanguage"/>

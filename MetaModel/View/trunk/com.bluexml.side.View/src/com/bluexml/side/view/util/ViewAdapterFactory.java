@@ -137,6 +137,10 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 				return createTreeAdapter();
 			}
 			@Override
+			public Adapter caseComposedView(ComposedView object) {
+				return createComposedViewAdapter();
+			}
+			@Override
 			public Adapter caseField(Field object) {
 				return createFieldAdapter();
 			}
@@ -465,6 +469,20 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.ComposedView <em>Composed View</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.view.ComposedView
+	 * @generated
+	 */
+	public Adapter createComposedViewAdapter() {
 		return null;
 	}
 

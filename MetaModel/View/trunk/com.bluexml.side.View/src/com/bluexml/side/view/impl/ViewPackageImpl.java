@@ -13,6 +13,7 @@ import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.ActionField;
 import com.bluexml.side.view.BooleanField;
 import com.bluexml.side.view.Col;
+import com.bluexml.side.view.ComposedView;
 import com.bluexml.side.view.DataList;
 import com.bluexml.side.view.DataTable;
 import com.bluexml.side.view.DataTableElement;
@@ -171,6 +172,13 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * @generated
 	 */
 	private EClass treeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass composedViewEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -492,6 +500,15 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 */
 	public EReference getViewCollection_Views() {
 		return (EReference)viewCollectionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getViewCollection_ComposedViews() {
+		return (EReference)viewCollectionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -843,6 +860,15 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 */
 	public EAttribute getTree_MaxDepth() {
 		return (EAttribute)treeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getComposedView() {
+		return composedViewEClass;
 	}
 
 	/**
@@ -1298,6 +1324,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		// Create classes and their features
 		viewCollectionEClass = createEClass(VIEW_COLLECTION);
 		createEReference(viewCollectionEClass, VIEW_COLLECTION__VIEWS);
+		createEReference(viewCollectionEClass, VIEW_COLLECTION__COMPOSED_VIEWS);
 
 		fieldContainerEClass = createEClass(FIELD_CONTAINER);
 		createEReference(fieldContainerEClass, FIELD_CONTAINER__CHILDREN);
@@ -1354,6 +1381,8 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		createEReference(treeEClass, TREE__NODE_VALUE);
 		createEAttribute(treeEClass, TREE__DEFAULT_DEPTH);
 		createEAttribute(treeEClass, TREE__MAX_DEPTH);
+
+		composedViewEClass = createEClass(COMPOSED_VIEW);
 
 		fieldEClass = createEClass(FIELD);
 		createEAttribute(fieldEClass, FIELD__PATERN);
@@ -1481,6 +1510,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		treeEClass.getESuperTypes().add(this.getEditable());
 		treeEClass.getESuperTypes().add(this.getMovable());
 		treeEClass.getESuperTypes().add(this.getFilterable());
+		composedViewEClass.getESuperTypes().add(this.getFieldContainer());
 		fieldEClass.getESuperTypes().add(this.getFieldElement());
 		textFieldEClass.getESuperTypes().add(this.getField());
 		passwordFieldEClass.getESuperTypes().add(this.getField());
@@ -1503,6 +1533,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(viewCollectionEClass, ViewCollection.class, "ViewCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getViewCollection_Views(), this.getAbstractView(), null, "views", null, 0, -1, ViewCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getViewCollection_ComposedViews(), this.getComposedView(), null, "composedViews", null, 0, -1, ViewCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(fieldContainerEClass, FieldContainer.class, "FieldContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFieldContainer_Children(), this.getFieldElement(), null, "children", null, 0, -1, FieldContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1519,6 +1550,16 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		initEReference(getAbstractView_Operations(), theCommonPackage.getOperationComponent(), null, "operations", null, 0, 1, AbstractView.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(abstractViewEClass, this.getField(), "getFields", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(abstractViewEClass, this.getCol(), "getCols", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(abstractViewEClass, this.getField(), "getDirectChildFields", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(abstractViewEClass, this.getAbstractView(), "getInnerView", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(abstractViewEClass, this.getField(), "getDisabledAndEnabledField", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(abstractViewEClass, this.getField(), "getDisabledFields", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(abstractDataTableEClass, AbstractDataTable.class, "AbstractDataTable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractDataTable_HaveRowActions(), theCommonPackage.getOperationComponent(), null, "haveRowActions", null, 0, 1, AbstractDataTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1563,6 +1604,8 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		initEReference(getTree_NodeValue(), this.getFieldElement(), null, "nodeValue", null, 1, 1, Tree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTree_DefaultDepth(), ecorePackage.getEInt(), "defaultDepth", "1", 0, 1, Tree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTree_MaxDepth(), ecorePackage.getEInt(), "maxDepth", null, 0, 1, Tree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(composedViewEClass, ComposedView.class, "ComposedView", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(fieldEClass, Field.class, "Field", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getField_Patern(), ecorePackage.getEString(), "patern", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1678,7 +1721,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * @generated
 	 */
 	protected void createDocumentationAnnotations() {
-		String source = "http://www.topcased.org/documentation";								
+		String source = "http://www.topcased.org/documentation";													
 		addAnnotation
 		  (getAbstractDataTable_HaveRowActions(), 
 		   source, 
@@ -1717,8 +1760,43 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		  (abstractViewEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
-			 "description", "Get all the fields of the facetmap, excluding the FieldContainers",
+			 "description", "Get all the fields of the AbstractView, excluding the FieldContainers",
+			 "body", "self.getCols()->children->select(oclIsKindOf(Field))->asSet()->union(self.getDirectChildFields())"
+		   });		
+		addAnnotation
+		  (abstractViewEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+			 "description", "Get all the Cols of the AbstractView",
+			 "body", "self.children->select(oclIsTypeOf(Col)).oclAsType(Col)"
+		   });		
+		addAnnotation
+		  (abstractViewEClass.getEOperations().get(2), 
+		   source, 
+		   new String[] {
+			 "description", "Get all the fields of the AbstractView, excluding the FieldContainers",
 			 "body", "self.children->select(oclIsKindOf(Field))"
+		   });		
+		addAnnotation
+		  (abstractViewEClass.getEOperations().get(3), 
+		   source, 
+		   new String[] {
+			 "description", "Get inner AbtractView of the AbstractView",
+			 "body", "self.children->select(oclIsKindOf(AbstractView))"
+		   });		
+		addAnnotation
+		  (abstractViewEClass.getEOperations().get(4), 
+		   source, 
+		   new String[] {
+			 "description", "Get all the fields of the AbstractView, including disabled Field, excluding the FieldContainers",
+			 "body", "self.getFields()->union(self.getDisabledFields())"
+		   });		
+		addAnnotation
+		  (abstractViewEClass.getEOperations().get(5), 
+		   source, 
+		   new String[] {
+			 "description", "Get all the disabled Fields",
+			 "body", "self.disabled->select(oclIsKindOf(Col)).oclAsType(Col).children->select(oclIsKindOf(Field))"
 		   });									
 		addAnnotation
 		  (facetMapEClass.getEOperations().get(0), 
@@ -1742,7 +1820,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "noFieldMapped"
-		   });												
+		   });																	
 	}
 
 } //ViewPackageImpl

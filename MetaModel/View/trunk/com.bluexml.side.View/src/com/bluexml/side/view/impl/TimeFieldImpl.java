@@ -7,13 +7,12 @@
 package com.bluexml.side.view.impl;
 
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.ocl.ecore.OCL;
+
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.view.TimeField;
 import com.bluexml.side.view.ViewPackage;
-
-import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->

@@ -7,6 +7,25 @@
 package com.bluexml.side.view.impl;
 
 
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
+import org.eclipse.ocl.ecore.OCL;
+import org.eclipse.ocl.expressions.OCLExpression;
+
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.common.MetaInfo;
@@ -14,36 +33,9 @@ import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.common.Stereotype;
 import com.bluexml.side.common.Tag;
-
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.view.FieldElement;
 import com.bluexml.side.view.ViewPackage;
-
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EAnnotation;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.eclipse.ocl.ParserException;
-import org.eclipse.ocl.Query;
-
-import org.eclipse.ocl.ecore.OCL;
-
-import org.eclipse.ocl.expressions.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -476,10 +468,34 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 	 * @generated
 	 */
 	public String getFullName() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (getFullNameBodyOCL == null) {
+			EOperation eOperation = CommonPackage.Literals.NAMED_MODEL_ELEMENT.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(CommonPackage.Literals.NAMED_MODEL_ELEMENT, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getFullNameBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getFullNameBodyOCL);
+	
+		return (String) query.evaluate(this);
+	
 	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getFullName <em>Get Full Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFullName
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getFullNameBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -487,10 +503,34 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 	 * @generated
 	 */
 	public String getDocumentationOrName() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (getDocumentationOrNameBodyOCL == null) {
+			EOperation eOperation = CommonPackage.Literals.NAMED_MODEL_ELEMENT.getEOperations().get(1);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(CommonPackage.Literals.NAMED_MODEL_ELEMENT, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getDocumentationOrNameBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getDocumentationOrNameBodyOCL);
+	
+		return (String) query.evaluate(this);
+	
 	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getDocumentationOrName <em>Get Documentation Or Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDocumentationOrName
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getDocumentationOrNameBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -498,10 +538,34 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 	 * @generated
 	 */
 	public String getDescriptionOrName() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (getDescriptionOrNameBodyOCL == null) {
+			EOperation eOperation = CommonPackage.Literals.NAMED_MODEL_ELEMENT.getEOperations().get(2);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(CommonPackage.Literals.NAMED_MODEL_ELEMENT, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getDescriptionOrNameBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getDescriptionOrNameBodyOCL);
+	
+		return (String) query.evaluate(this);
+	
 	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getDescriptionOrName <em>Get Description Or Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescriptionOrName
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getDescriptionOrNameBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->

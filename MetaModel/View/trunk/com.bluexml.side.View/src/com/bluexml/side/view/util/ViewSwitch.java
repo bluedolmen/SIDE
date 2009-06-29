@@ -258,6 +258,17 @@ public class ViewSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ViewPackage.COMPOSED_VIEW: {
+				ComposedView composedView = (ComposedView)theEObject;
+				T result = caseComposedView(composedView);
+				if (result == null) result = caseFieldContainer(composedView);
+				if (result == null) result = caseFieldElement(composedView);
+				if (result == null) result = caseStylable(composedView);
+				if (result == null) result = caseNamedModelElement(composedView);
+				if (result == null) result = caseModelElement(composedView);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ViewPackage.FIELD: {
 				Field field = (Field)theEObject;
 				T result = caseField(field);
@@ -703,6 +714,21 @@ public class ViewSwitch<T> {
 	 * @generated
 	 */
 	public T caseTree(Tree object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Composed View</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Composed View</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseComposedView(ComposedView object) {
 		return null;
 	}
 

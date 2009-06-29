@@ -7,26 +7,23 @@
 package com.bluexml.side.view.impl;
 
 
-import com.bluexml.side.common.impl.PackageImpl;
-
-import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
-import com.bluexml.side.view.AbstractView;
-import com.bluexml.side.view.ViewCollection;
-import com.bluexml.side.view.ViewPackage;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.ocl.ecore.OCL;
+
+import com.bluexml.side.common.impl.PackageImpl;
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+import com.bluexml.side.view.AbstractView;
+import com.bluexml.side.view.ComposedView;
+import com.bluexml.side.view.ViewCollection;
+import com.bluexml.side.view.ViewPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,6 +33,7 @@ import org.eclipse.ocl.ecore.OCL;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.view.impl.ViewCollectionImpl#getViews <em>Views</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.ViewCollectionImpl#getComposedViews <em>Composed Views</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,6 +49,16 @@ public class ViewCollectionImpl extends PackageImpl implements ViewCollection {
 	 * @ordered
 	 */
 	protected EList<AbstractView> views;
+
+	/**
+	 * The cached value of the '{@link #getComposedViews() <em>Composed Views</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComposedViews()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ComposedView> composedViews;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -88,11 +96,25 @@ public class ViewCollectionImpl extends PackageImpl implements ViewCollection {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ComposedView> getComposedViews() {
+		if (composedViews == null) {
+			composedViews = new EObjectContainmentEList<ComposedView>(ComposedView.class, this, ViewPackage.VIEW_COLLECTION__COMPOSED_VIEWS);
+		}
+		return composedViews;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ViewPackage.VIEW_COLLECTION__VIEWS:
 				return ((InternalEList<?>)getViews()).basicRemove(otherEnd, msgs);
+			case ViewPackage.VIEW_COLLECTION__COMPOSED_VIEWS:
+				return ((InternalEList<?>)getComposedViews()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -107,6 +129,8 @@ public class ViewCollectionImpl extends PackageImpl implements ViewCollection {
 		switch (featureID) {
 			case ViewPackage.VIEW_COLLECTION__VIEWS:
 				return getViews();
+			case ViewPackage.VIEW_COLLECTION__COMPOSED_VIEWS:
+				return getComposedViews();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -124,6 +148,10 @@ public class ViewCollectionImpl extends PackageImpl implements ViewCollection {
 				getViews().clear();
 				getViews().addAll((Collection<? extends AbstractView>)newValue);
 				return;
+			case ViewPackage.VIEW_COLLECTION__COMPOSED_VIEWS:
+				getComposedViews().clear();
+				getComposedViews().addAll((Collection<? extends ComposedView>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -139,6 +167,9 @@ public class ViewCollectionImpl extends PackageImpl implements ViewCollection {
 			case ViewPackage.VIEW_COLLECTION__VIEWS:
 				getViews().clear();
 				return;
+			case ViewPackage.VIEW_COLLECTION__COMPOSED_VIEWS:
+				getComposedViews().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -153,6 +184,8 @@ public class ViewCollectionImpl extends PackageImpl implements ViewCollection {
 		switch (featureID) {
 			case ViewPackage.VIEW_COLLECTION__VIEWS:
 				return views != null && !views.isEmpty();
+			case ViewPackage.VIEW_COLLECTION__COMPOSED_VIEWS:
+				return composedViews != null && !composedViews.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -85,9 +85,54 @@ public interface AbstractView extends FieldContainer {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL description='Get all the fields of the facetmap, excluding the FieldContainers' body='self.children->select(oclIsKindOf(Field))'"
+	 *        annotation="http://www.bluexml.com/OCL description='Get all the fields of the AbstractView, excluding the FieldContainers' body='self.getCols()->children->select(oclIsKindOf(Field))->asSet()->union(self.getDirectChildFields())'"
 	 * @generated
 	 */
 	EList<Field> getFields();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL description='Get all the Cols of the AbstractView' body='self.children->select(oclIsTypeOf(Col)).oclAsType(Col)'"
+	 * @generated
+	 */
+	EList<Col> getCols();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL description='Get all the fields of the AbstractView, excluding the FieldContainers' body='self.children->select(oclIsKindOf(Field))'"
+	 * @generated
+	 */
+	EList<Field> getDirectChildFields();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL description='Get inner AbtractView of the AbstractView' body='self.children->select(oclIsKindOf(AbstractView))'"
+	 * @generated
+	 */
+	EList<AbstractView> getInnerView();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL description='Get all the fields of the AbstractView, including disabled Field, excluding the FieldContainers' body='self.getFields()->union(self.getDisabledFields())'"
+	 * @generated
+	 */
+	EList<Field> getDisabledAndEnabledField();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL description='Get all the disabled Fields' body='self.disabled->select(oclIsKindOf(Col)).oclAsType(Col).children->select(oclIsKindOf(Field))'"
+	 * @generated
+	 */
+	EList<Field> getDisabledFields();
 		
 } // AbstractView

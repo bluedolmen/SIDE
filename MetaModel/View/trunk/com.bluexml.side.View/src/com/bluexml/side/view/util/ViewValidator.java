@@ -9,15 +9,22 @@ package com.bluexml.side.view.util;
 
 import java.util.Map;
 
+import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.util.EObjectValidator;
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
+import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.OCL;
 
 import com.bluexml.side.common.util.CommonValidator;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+import com.bluexml.side.view.*;
 import com.bluexml.side.view.AbstractDataTable;
 import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.ActionField;
@@ -116,6 +123,14 @@ public class ViewValidator extends EObjectValidator {
 	 */
 	protected CommonValidator commonValidator;
 
+	/**
+	 * The parsed OCL expression for the definition of the '<em>noFieldMapped</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint fieldElement_noFieldMappedInvOCL;
+
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
 	
 	private static final OCL OCL_ENV = KerblueOCL.newInstance();
@@ -142,7 +157,7 @@ public class ViewValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Calls <code>validateXXX</code> for the corresponding classifier of the model.
+	 * Calls <code>validateXXX</code> for the corresonding classifier of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -180,6 +195,8 @@ public class ViewValidator extends EObjectValidator {
 				return validateFacetMap((FacetMap)value, diagnostics, context);
 			case ViewPackage.TREE:
 				return validateTree((Tree)value, diagnostics, context);
+			case ViewPackage.COMPOSED_VIEW:
+				return validateComposedView((ComposedView)value, diagnostics, context);
 			case ViewPackage.FIELD:
 				return validateField((Field)value, diagnostics, context);
 			case ViewPackage.TEXT_FIELD:
@@ -242,7 +259,7 @@ public class ViewValidator extends EObjectValidator {
 				return validateSelectWidgetType((SelectWidgetType)value, diagnostics, context);
 			case ViewPackage.FACET_DISPLAY_TYPE:
 				return validateFacetDisplayType((FacetDisplayType)value, diagnostics, context);
-			default:
+			default: 
 				return true;
 		}
 	}
@@ -305,21 +322,32 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFieldElement_noFieldMapped(FieldElement fieldElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
+        if (fieldElement_noFieldMappedInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(ViewPackage.Literals.FIELD_ELEMENT);
+			
+			EAnnotation ocl = ViewPackage.Literals.FIELD_ELEMENT.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("noFieldMapped");
+			
+			try {
+				fieldElement_noFieldMappedInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(fieldElement_noFieldMappedInvOCL);
+		
+		if (!query.check(fieldElement)) {
 			if (diagnostics != null) {
 				diagnostics.add
-					(createDiagnostic
+					(new BasicDiagnostic
 						(Diagnostic.ERROR,
 						 DIAGNOSTIC_SOURCE,
 						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "noFieldMapped", getObjectLabel(fieldElement, context) },
-						 new Object[] { fieldElement },
-						 context));
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noFieldMapped", getObjectLabel(fieldElement, context) }),
+						 new Object[] { fieldElement }));
 			}
 			return false;
 		}
@@ -487,6 +515,23 @@ public class ViewValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(tree, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(tree, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFieldElement_noFieldMapped(tree, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateComposedView(ComposedView composedView, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_EveryMultiplicityConforms(composedView, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(composedView, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(composedView, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(composedView, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(composedView, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(composedView, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(composedView, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFieldElement_noFieldMapped(composedView, diagnostics, context);
 		return result;
 	}
 
@@ -911,20 +956,6 @@ public class ViewValidator extends EObjectValidator {
 	 */
 	public boolean validateFacetDisplayType(FacetDisplayType facetDisplayType, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
-	}
-
-	/**
-	 * Returns the resource locator that will be used to fetch messages for this validator's diagnostics.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		// TODO
-		// Specialize this to return a resource locator for messages specific to this validator.
-		// Ensure that you remove @generated or mark it @generated NOT
-		return super.getResourceLocator();
 	}
 
 } //ViewValidator

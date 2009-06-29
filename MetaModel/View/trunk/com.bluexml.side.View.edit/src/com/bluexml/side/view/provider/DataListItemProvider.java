@@ -230,27 +230,6 @@ public class DataListItemProvider
 			(createChildParameter
 				(ViewPackage.Literals.COL__ACTIONS,
 				 CommonFactory.eINSTANCE.createOperationGroup()));
-		
-		//TODO : see if we keep AbstractView creation
-		newChildDescriptors.add
-		(createChildParameter
-			(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-					ViewFactory.eINSTANCE.createDataList()));
-		
-		newChildDescriptors.add
-		(createChildParameter
-			(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-					ViewFactory.eINSTANCE.createDataTable()));
-		
-		newChildDescriptors.add
-		(createChildParameter
-			(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-					ViewFactory.eINSTANCE.createFacetMap()));
-		
-		newChildDescriptors.add
-		(createChildParameter
-			(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-					ViewFactory.eINSTANCE.createTree()));
 	}
 
 	/**

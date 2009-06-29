@@ -6,30 +6,31 @@
  */
 package com.bluexml.side.view.impl;
 
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+
+import com.bluexml.side.view.ComposedView;
+import com.bluexml.side.view.ViewPackage;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.ocl.ecore.OCL;
 
-import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
-import com.bluexml.side.view.ImageField;
-import com.bluexml.side.view.ViewPackage;
+import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Image Field</b></em>'.
+ * An implementation of the model object '<em><b>Composed View</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class ImageFieldImpl extends FileFieldImpl implements ImageField {
+public class ComposedViewImpl extends FieldContainerImpl implements ComposedView {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ImageFieldImpl() {
+	protected ComposedViewImpl() {
 		super();
 	}
 
@@ -40,9 +41,9 @@ public class ImageFieldImpl extends FileFieldImpl implements ImageField {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ViewPackage.Literals.IMAGE_FIELD;
+		return ViewPackage.Literals.COMPOSED_VIEW;
 	}
 
 		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
 		private static final OCL OCL_ENV = KerblueOCL.newInstance();		
-} //ImageFieldImpl
+} //ComposedViewImpl

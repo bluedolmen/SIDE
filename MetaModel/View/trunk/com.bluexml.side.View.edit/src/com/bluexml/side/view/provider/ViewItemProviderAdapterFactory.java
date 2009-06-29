@@ -467,6 +467,29 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.view.ComposedView} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ComposedViewItemProvider composedViewItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.view.ComposedView}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createComposedViewAdapter() {
+		if (composedViewItemProvider == null) {
+			composedViewItemProvider = new ComposedViewItemProvider(this);
+		}
+
+		return composedViewItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.view.DataTable} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -805,6 +828,7 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 		if (dataTableItemProvider != null) dataTableItemProvider.dispose();
 		if (facetMapItemProvider != null) facetMapItemProvider.dispose();
 		if (treeItemProvider != null) treeItemProvider.dispose();
+		if (composedViewItemProvider != null) composedViewItemProvider.dispose();
 		if (textFieldItemProvider != null) textFieldItemProvider.dispose();
 		if (passwordFieldItemProvider != null) passwordFieldItemProvider.dispose();
 		if (booleanFieldItemProvider != null) booleanFieldItemProvider.dispose();

@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -89,6 +90,7 @@ public class ViewCollectionItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ViewPackage.Literals.VIEW_COLLECTION__VIEWS);
+			childrenFeatures.add(ViewPackage.Literals.VIEW_COLLECTION__COMPOSED_VIEWS);
 		}
 		return childrenFeatures;
 	}
@@ -144,6 +146,7 @@ public class ViewCollectionItemProvider
 
 		switch (notification.getFeatureID(ViewCollection.class)) {
 			case ViewPackage.VIEW_COLLECTION__VIEWS:
+			case ViewPackage.VIEW_COLLECTION__COMPOSED_VIEWS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -159,12 +162,7 @@ public class ViewCollectionItemProvider
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-		//super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.VIEW_COLLECTION__VIEWS,
-				 ViewFactory.eINSTANCE.createFacetMap()));
+		
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -174,12 +172,22 @@ public class ViewCollectionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.VIEW_COLLECTION__VIEWS,
-				 ViewFactory.eINSTANCE.createTree()));
+				 ViewFactory.eINSTANCE.createDataTable()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.VIEW_COLLECTION__VIEWS,
-				 ViewFactory.eINSTANCE.createDataTable()));
+				 ViewFactory.eINSTANCE.createFacetMap()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.VIEW_COLLECTION__VIEWS,
+				 ViewFactory.eINSTANCE.createTree()));
+		
+		newChildDescriptors.add
+		(createChildParameter
+			(ViewPackage.Literals.VIEW_COLLECTION__COMPOSED_VIEWS,
+			 ViewFactory.eINSTANCE.createComposedView()));
 	}
 
 	/**

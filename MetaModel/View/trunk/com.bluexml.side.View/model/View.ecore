@@ -6,6 +6,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="ViewCollection" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Package">
     <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
         eType="#//AbstractView" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="composedViews" upperBound="-1"
+        eType="#//ComposedView" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FieldContainer" abstract="true" eSuperTypes="#//FieldElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
@@ -40,8 +42,38 @@
   <eClassifiers xsi:type="ecore:EClass" name="AbstractView" abstract="true" eSuperTypes="#//FieldContainer">
     <eOperations name="getFields" upperBound="-1" eType="#//Field">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="description" value="Get all the fields of the facetmap, excluding the FieldContainers"/>
+        <details key="description" value="Get all the fields of the AbstractView, excluding the FieldContainers"/>
+        <details key="body" value="self.getCols()->children->select(oclIsKindOf(Field))->asSet()->union(self.getDirectChildFields())"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getCols" upperBound="-1" eType="#//Col">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="description" value="Get all the Cols of the AbstractView"/>
+        <details key="body" value="self.children->select(oclIsTypeOf(Col)).oclAsType(Col)"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getDirectChildFields" upperBound="-1" eType="#//Field">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="description" value="Get all the fields of the AbstractView, excluding the FieldContainers"/>
         <details key="body" value="self.children->select(oclIsKindOf(Field))"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getInnerView" upperBound="-1" eType="#//AbstractView">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="description" value="Get inner AbtractView of the AbstractView"/>
+        <details key="body" value="self.children->select(oclIsKindOf(AbstractView))"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getDisabledAndEnabledField" upperBound="-1" eType="#//Field">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="description" value="Get all the fields of the AbstractView, including disabled Field, excluding the FieldContainers"/>
+        <details key="body" value="self.getFields()->union(self.getDisabledFields())"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getDisabledFields" upperBound="-1" eType="#//Field">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="description" value="Get all the disabled Fields"/>
+        <details key="body" value="self.disabled->select(oclIsKindOf(Col)).oclAsType(Col).children->select(oclIsKindOf(Field))"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="viewOf" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//Container"/>
@@ -150,6 +182,7 @@
         defaultValueLiteral="1"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxDepth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComposedView" eSuperTypes="#//FieldContainer"/>
   <eClassifiers xsi:type="ecore:EClass" name="Field" abstract="true" eSuperTypes="#//FieldElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="patern" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="paternLanguage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

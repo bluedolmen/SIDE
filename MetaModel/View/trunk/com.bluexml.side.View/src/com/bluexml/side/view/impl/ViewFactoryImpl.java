@@ -71,6 +71,7 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 			case ViewPackage.DATA_TABLE: return createDataTable();
 			case ViewPackage.FACET_MAP: return createFacetMap();
 			case ViewPackage.TREE: return createTree();
+			case ViewPackage.COMPOSED_VIEW: return createComposedView();
 			case ViewPackage.TEXT_FIELD: return createTextField();
 			case ViewPackage.PASSWORD_FIELD: return createPasswordField();
 			case ViewPackage.BOOLEAN_FIELD: return createBooleanField();
@@ -245,6 +246,16 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 	public Tree createTree() {
 		TreeImpl tree = new TreeImpl();
 		return tree;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComposedView createComposedView() {
+		ComposedViewImpl composedView = new ComposedViewImpl();
+		return composedView;
 	}
 
 	/**

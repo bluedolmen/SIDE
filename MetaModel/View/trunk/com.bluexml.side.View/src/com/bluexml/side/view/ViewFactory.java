@@ -116,6 +116,15 @@ public interface ViewFactory extends EFactory {
 	Tree createTree();
 
 	/**
+	 * Returns a new object of class '<em>Composed View</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Composed View</em>'.
+	 * @generated
+	 */
+	ComposedView createComposedView();
+
+	/**
 	 * Returns a new object of class '<em>Text Field</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
