@@ -6,10 +6,10 @@
  */
 package com.bluexml.side.clazz.util;
 
-
 import com.bluexml.side.clazz.*;
 
 import com.bluexml.side.common.util.CommonValidator;
+
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 import java.util.Map;
@@ -89,14 +89,6 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	private static Constraint clazz_InheritanceCycleInvOCL;
-
-	/**
-	 * The parsed OCL expression for the definition of the '<em>recursiveAssociationMustHaveRole</em>' invariant constraint.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private static Constraint association_recursiveAssociationMustHaveRoleInvOCL;
 	/**
 	 * The parsed OCL expression for the definition of the '<em>MinAndMaxTarget</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
@@ -146,7 +138,6 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	private static Constraint association_ClassCantBeReferencedbyTwoSameNameAssociationInvOCL;
-
 	/**
 	 * The parsed OCL expression for the definition of the '<em>IfAggregationOrCompositionThenUnidirectionalAssociation</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
@@ -154,7 +145,6 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	private static Constraint association_IfAggregationOrCompositionThenUnidirectionalAssociationInvOCL;
-
 	/**
 	 * The parsed OCL expression for the definition of the '<em>TwoModelElementWithSameName</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
@@ -162,7 +152,6 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	private static Constraint abstractClass_TwoModelElementWithSameNameInvOCL;
-
 	/**
 	 * The parsed OCL expression for the definition of the '<em>NameNull</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
@@ -170,7 +159,6 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	private static Constraint abstractClass_NameNullInvOCL;
-
 	/**
 	 * The parsed OCL expression for the definition of the '<em>noSpecialCharacters</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
@@ -178,7 +166,6 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	private static Constraint abstractClass_noSpecialCharactersInvOCL;
-
 	/**
 	 * The parsed OCL expression for the definition of the '<em>TwoAttributesSameName</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
@@ -186,7 +173,6 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	private static Constraint abstractClass_TwoAttributesSameNameInvOCL;
-
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
 	
 	private static final OCL OCL_ENV = KerblueOCL.newInstance();
@@ -245,10 +231,6 @@ public class ClazzValidator extends EObjectValidator {
 				return validateClassComment((ClassComment)value, diagnostics, context);
 			case ClazzPackage.ASSOCIATION_END:
 				return validateAssociationEnd((AssociationEnd)value, diagnostics, context);
-			case ClazzPackage.FIRST_END:
-				return validateFirstEnd((FirstEnd)value, diagnostics, context);
-			case ClazzPackage.SECOND_END:
-				return validateSecondEnd((SecondEnd)value, diagnostics, context);
 			case ClazzPackage.ASSOCIATION_TYPE:
 				return validateAssociationType((AssociationType)value, diagnostics, context);
 			default: 
@@ -401,24 +383,11 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAssociation_recursiveAssociationMustHaveRole(Association association, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (association_recursiveAssociationMustHaveRoleInvOCL == null) {
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(ClazzPackage.Literals.ASSOCIATION);
-			
-			EAnnotation ocl = ClazzPackage.Literals.ASSOCIATION.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String expr = ocl.getDetails().get("recursiveAssociationMustHaveRole");
-			
-			try {
-				association_recursiveAssociationMustHaveRoleInvOCL = helper.createInvariant(expr);
-			}
-			catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(association_recursiveAssociationMustHaveRoleInvOCL);
-		
-		if (!query.check(association)) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
@@ -993,24 +962,6 @@ public class ClazzValidator extends EObjectValidator {
 	 */
 	public boolean validateAssociationEnd(AssociationEnd associationEnd, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(associationEnd, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateFirstEnd(FirstEnd firstEnd, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(firstEnd, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateSecondEnd(SecondEnd secondEnd, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(secondEnd, diagnostics, context);
 	}
 
 	/**

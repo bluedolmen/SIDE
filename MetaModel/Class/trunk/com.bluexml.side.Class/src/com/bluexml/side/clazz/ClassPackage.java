@@ -145,5 +145,5 @@ public interface ClassPackage extends com.bluexml.side.common.Package {
 	 * @generated
 	 */
 	EList<AbstractClass> getAllAbstractClasses();
-
+		
 } // ClassPackage

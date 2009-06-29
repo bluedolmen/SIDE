@@ -6,15 +6,6 @@
  */
 package com.bluexml.side.clazz.impl;
 
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EValidator;
-import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
@@ -29,11 +20,21 @@ import com.bluexml.side.clazz.ClazzFactory;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.clazz.EnumerationLiteral;
-import com.bluexml.side.clazz.FirstEnd;
-import com.bluexml.side.clazz.SecondEnd;
 import com.bluexml.side.clazz.TitledNamedClassModelElement;
+
 import com.bluexml.side.clazz.util.ClazzValidator;
+
 import com.bluexml.side.common.CommonPackage;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EValidator;
+
+import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -125,20 +126,6 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * @generated
 	 */
 	private EClass associationEndEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass firstEndEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass secondEndEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -331,7 +318,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getClazz_IsAbstract() {
+	public EAttribute getClazz_Abstract() {
 		return (EAttribute)clazzEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -340,7 +327,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getClazz_IsDeprecated() {
+	public EAttribute getClazz_Deprecated() {
 		return (EAttribute)clazzEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -457,7 +444,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEnumeration_IsDynamic() {
+	public EAttribute getEnumeration_Dynamic() {
 		return (EAttribute)enumerationEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -592,7 +579,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAssociationEnd_IsNavigable() {
+	public EAttribute getAssociationEnd_Navigable() {
 		return (EAttribute)associationEndEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -603,24 +590,6 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 */
 	public EReference getAssociationEnd_LinkedClass() {
 		return (EReference)associationEndEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getFirstEnd() {
-		return firstEndEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getSecondEnd() {
-		return secondEndEClass;
 	}
 
 	/**
@@ -673,8 +642,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		createEReference(clazzEClass, CLAZZ__OPERATIONS);
 		createEReference(clazzEClass, CLAZZ__GENERALIZATIONS);
 		createEReference(clazzEClass, CLAZZ__ASPECTS);
-		createEAttribute(clazzEClass, CLAZZ__IS_ABSTRACT);
-		createEAttribute(clazzEClass, CLAZZ__IS_DEPRECATED);
+		createEAttribute(clazzEClass, CLAZZ__ABSTRACT);
+		createEAttribute(clazzEClass, CLAZZ__DEPRECATED);
 
 		associationEClass = createEClass(ASSOCIATION);
 		createEAttribute(associationEClass, ASSOCIATION__ASSOCIATION_TYPE);
@@ -690,7 +659,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 
 		enumerationEClass = createEClass(ENUMERATION);
 		createEReference(enumerationEClass, ENUMERATION__LITERALS);
-		createEAttribute(enumerationEClass, ENUMERATION__IS_DYNAMIC);
+		createEAttribute(enumerationEClass, ENUMERATION__DYNAMIC);
 		createEReference(enumerationEClass, ENUMERATION__DEPENDS);
 
 		enumerationLiteralEClass = createEClass(ENUMERATION_LITERAL);
@@ -711,12 +680,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		associationEndEClass = createEClass(ASSOCIATION_END);
 		createEAttribute(associationEndEClass, ASSOCIATION_END__CARD_MIN);
 		createEAttribute(associationEndEClass, ASSOCIATION_END__CARD_MAX);
-		createEAttribute(associationEndEClass, ASSOCIATION_END__IS_NAVIGABLE);
+		createEAttribute(associationEndEClass, ASSOCIATION_END__NAVIGABLE);
 		createEReference(associationEndEClass, ASSOCIATION_END__LINKED_CLASS);
-
-		firstEndEClass = createEClass(FIRST_END);
-
-		secondEndEClass = createEClass(SECOND_END);
 
 		// Create enums
 		associationTypeEEnum = createEEnum(ASSOCIATION_TYPE);
@@ -767,8 +732,6 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		classCommentEClass.getESuperTypes().add(theCommonPackage.getComment());
 		associationEndEClass.getESuperTypes().add(this.getTitledNamedClassModelElement());
 		associationEndEClass.getESuperTypes().add(theCommonPackage.getComment());
-		firstEndEClass.getESuperTypes().add(this.getAssociationEnd());
-		secondEndEClass.getESuperTypes().add(this.getAssociationEnd());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(classModelElementEClass, ClassModelElement.class, "ClassModelElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -796,12 +759,12 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		initEReference(getClazz_Operations(), theCommonPackage.getOperationComponent(), null, "operations", null, 0, -1, Clazz.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClazz_Generalizations(), this.getClazz(), null, "generalizations", null, 0, -1, Clazz.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClazz_Aspects(), this.getAspect(), null, "aspects", null, 0, -1, Clazz.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getClazz_IsAbstract(), ecorePackage.getEBoolean(), "isAbstract", null, 0, 1, Clazz.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getClazz_IsDeprecated(), ecorePackage.getEBoolean(), "isDeprecated", null, 0, 1, Clazz.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClazz_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, Clazz.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClazz_Deprecated(), ecorePackage.getEBoolean(), "deprecated", null, 0, 1, Clazz.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(clazzEClass, this.getAttribute(), "getAllAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(clazzEClass, this.getAttribute(), "getAllInheritedAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(clazzEClass, this.getClazz(), "getDescendants", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(clazzEClass, this.getAttribute(), "getClassAndAspectAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
 
@@ -812,6 +775,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		addEOperation(clazzEClass, this.getAttribute(), "getAllSubTypes", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(clazzEClass, this.getAttribute(), "getAllInheritedClassAndAspectAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(clazzEClass, this.getAttribute(), "getAllInheritedAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(clazzEClass, this.getAssociation(), "getSourceAssociations", 0, -1, IS_UNIQUE, IS_ORDERED);
 
@@ -831,17 +796,20 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 
 		initEClass(associationEClass, Association.class, "Association", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAssociation_AssociationType(), this.getAssociationType(), "associationType", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAssociation_FirstEnd(), this.getFirstEnd(), null, "firstEnd", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAssociation_SecondEnd(), this.getSecondEnd(), null, "secondEnd", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAssociation_FirstEnd(), this.getAssociationEnd(), null, "firstEnd", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAssociation_SecondEnd(), this.getAssociationEnd(), null, "secondEnd", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(associationEClass, ecorePackage.getEBoolean(), "equalsForMerge", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getAssociation(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(associationEClass, ecorePackage.getEBoolean(), "isRecursive", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(associationEClass, ecorePackage.getEBoolean(), "isReflexive", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(associationEClass, this.getClazz(), "getSource", 1, 2, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(associationEClass, this.getClazz(), "getTarget", 1, 2, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(associationEClass, this.getAssociationEnd(), "getAssociationEnd", 0, 2, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getClazz(), "clazz", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAttribute_Typ(), theCommonPackage.getDataType(), "typ", "void", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -852,7 +820,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 
 		initEClass(enumerationEClass, Enumeration.class, "Enumeration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEnumeration_Literals(), this.getEnumerationLiteral(), this.getEnumerationLiteral_Enum(), "literals", null, 0, -1, Enumeration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEnumeration_IsDynamic(), ecorePackage.getEBooleanObject(), "isDynamic", "false", 0, 1, Enumeration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEnumeration_Dynamic(), ecorePackage.getEBooleanObject(), "dynamic", "false", 0, 1, Enumeration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEnumeration_Depends(), this.getEnumeration(), null, "depends", null, 0, 1, Enumeration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(enumerationLiteralEClass, EnumerationLiteral.class, "EnumerationLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -878,15 +846,17 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 
 		initEClass(classCommentEClass, ClassComment.class, "ClassComment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(associationEndEClass, AssociationEnd.class, "AssociationEnd", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(associationEndEClass, AssociationEnd.class, "AssociationEnd", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAssociationEnd_CardMin(), ecorePackage.getEString(), "cardMin", "0", 0, 1, AssociationEnd.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAssociationEnd_CardMax(), ecorePackage.getEString(), "cardMax", "1", 0, 1, AssociationEnd.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAssociationEnd_IsNavigable(), ecorePackage.getEBoolean(), "isNavigable", null, 0, 1, AssociationEnd.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAssociationEnd_Navigable(), ecorePackage.getEBoolean(), "navigable", null, 0, 1, AssociationEnd.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssociationEnd_LinkedClass(), this.getClazz(), null, "linkedClass", null, 0, 1, AssociationEnd.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(firstEndEClass, FirstEnd.class, "FirstEnd", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		addEOperation(associationEndEClass, ecorePackage.getEBoolean(), "isMandatory", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(secondEndEClass, SecondEnd.class, "SecondEnd", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		addEOperation(associationEndEClass, ecorePackage.getEBoolean(), "isMany", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(associationEndEClass, this.getAssociationEnd(), "getOpposite", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(associationTypeEEnum, AssociationType.class, "AssociationType");
@@ -966,7 +936,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "body", "Clazz.allInstances() ->select(e:Clazz|e.getInheritedClasses() ->includes(self) )",
-			 "description", "get all Clazz that inherite from this Clazz"
+			 "description", "get all Clazz that inherit from this Clazz"
 		   });		
 		addAnnotation
 		  (clazzEClass.getEOperations().get(2), 
@@ -1003,46 +973,53 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		  (clazzEClass.getEOperations().get(7), 
 		   source, 
 		   new String[] {
-			 "body", "Association.allInstances() ->select(c:Association|self.isSource(c))",
-			 "description", "search association where this clazz is source"
+			 "body", "self.getInheritedClasses() ->collect(c | c.attributes) -> flatten()",
+			 "description", "get all attributes including the inherited ones (excluding aspects)"
 		   });		
 		addAnnotation
 		  (clazzEClass.getEOperations().get(8), 
 		   source, 
 		   new String[] {
-			 "body", "(asso.firstEnd.linkedClass = self and asso.secondEnd.isNavigable) or (asso.secondEnd.linkedClass = self and asso.firstEnd.isNavigable)",
-			 "description", "search for class attributes, inherited one and finaly added to the class by aspect"
+			 "body", "Association.allInstances() ->select(c:Association|self.isSource(c))",
+			 "description", "search association where this clazz is source"
 		   });		
 		addAnnotation
 		  (clazzEClass.getEOperations().get(9), 
 		   source, 
 		   new String[] {
-			 "body", "(asso.firstEnd.linkedClass = self and asso.firstEnd.isNavigable) or (asso.secondEnd.linkedClass = self and asso.secondEnd.isNavigable)",
+			 "body", "(asso.firstEnd.linkedClass = self and asso.secondEnd.navigable) or (asso.secondEnd.linkedClass = self and asso.firstEnd.navigable)",
 			 "description", "search for class attributes, inherited one and finaly added to the class by aspect"
 		   });		
 		addAnnotation
 		  (clazzEClass.getEOperations().get(10), 
 		   source, 
 		   new String[] {
+			 "body", "(asso.firstEnd.linkedClass = self and asso.firstEnd.navigable) or (asso.secondEnd.linkedClass = self and asso.secondEnd.navigable)",
+			 "description", "search for class attributes, inherited one and finaly added to the class by aspect"
+		   });		
+		addAnnotation
+		  (clazzEClass.getEOperations().get(11), 
+		   source, 
+		   new String[] {
 			 "body", "Association.allInstances() ->select(c:Association|self.isTarget(c))",
 			 "description", "search association where this clazz is target"
 		   });		
 		addAnnotation
-		  (clazzEClass.getEOperations().get(11), 
+		  (clazzEClass.getEOperations().get(12), 
 		   source, 
 		   new String[] {
 			 "body", "self.getInheritedClasses() -> including(self) ->iterate(e:Clazz;result:Set(Association)=Set{}|result->union(e.getSourceAssociations()))",
 			 "description", "search association where this clazz is source"
 		   });		
 		addAnnotation
-		  (clazzEClass.getEOperations().get(12), 
+		  (clazzEClass.getEOperations().get(13), 
 		   source, 
 		   new String[] {
 			 "body", "self.getInheritedClasses() -> including(self) ->iterate(e:Clazz;result:Set(Association)=Set{}|result->union(e.getTargetAssociations()))",
 			 "description", "search associations where this clazz is source or one of inheritedClass"
 		   });		
 		addAnnotation
-		  (clazzEClass.getEOperations().get(13), 
+		  (clazzEClass.getEOperations().get(14), 
 		   source, 
 		   new String[] {
 			 "body", "self.getAllSourceAssociations().getTarget() ->asOrderedSet()"
@@ -1051,15 +1028,15 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		  (associationEClass, 
 		   source, 
 		   new String[] {
-			 "recursiveAssociationMustHaveRole", "( self.isRecursive() and self.firstEnd.isNavigable and self.secondEnd.isNavigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name <> \'\' ) and ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name <> \'\' ))",
+			 "reflexiveAssociationMustHaveRole", "( self.isReflexive() and self.firstEnd.navigable and self.secondEnd.navigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name <> \'\' ) and ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name <> \'\' ))",
 			 "MinAndMaxTarget", "( self.secondEnd.cardMax <> \'-1\' ) implies ( self.secondEnd.cardMin <= self.secondEnd.cardMax )",
 			 "MinAndMaxSource", "( self.firstEnd.cardMax <> \'-1\' ) implies ( self.firstEnd.cardMin <= self.firstEnd.cardMax )",
 			 "NameNull", "not self.name.oclIsUndefined() and self.name <> \'\'",
 			 "SourceNull", "self.firstEnd.linkedClass->notEmpty()",
 			 "TargetNull", "self.secondEnd.linkedClass->notEmpty()",
-			 "AtLeastOneNavigableEdge", "(firstEnd.isNavigable or secondEnd.isNavigable)",
+			 "AtLeastOneNavigableEdge", "(firstEnd.navigable or secondEnd.navigable)",
 			 "ClassCantBeReferencedbyTwoSameNameAssociation", "self.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1",
-			 "IfAggregationOrCompositionThenUnidirectionalAssociation", "(self.associationType <> AssociationType::Direct) implies (self.firstEnd.isNavigable xor self.secondEnd.isNavigable )"
+			 "IfAggregationOrCompositionThenUnidirectionalAssociation", "(self.associationType <> AssociationType::Direct) implies (self.firstEnd.navigable xor self.secondEnd.navigable )"
 		   });			
 		addAnnotation
 		  (associationEClass.getEOperations().get(0), 
@@ -1071,21 +1048,28 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		  (associationEClass.getEOperations().get(1), 
 		   source, 
 		   new String[] {
-			 "body", "(self.firstEnd.linkedClass.getInheritedClasses() ->including(self.firstEnd.linkedClass) ->includes(self.secondEnd.linkedClass) and self.secondEnd.isNavigable)\ror \r(self.secondEnd.linkedClass.getInheritedClasses() ->including(self.secondEnd.linkedClass) ->includes(self.firstEnd.linkedClass) and self.firstEnd.isNavigable)\r"
+			 "body", "(self.firstEnd.linkedClass.getInheritedClasses() ->including(self.firstEnd.linkedClass) ->includes(self.secondEnd.linkedClass) and self.secondEnd.navigable)\ror \r(self.secondEnd.linkedClass.getInheritedClasses() ->including(self.secondEnd.linkedClass) ->includes(self.firstEnd.linkedClass) and self.firstEnd.navigable)\r"
 		   });		
 		addAnnotation
 		  (associationEClass.getEOperations().get(2), 
 		   source, 
 		   new String[] {
-			 "body", "if (self.firstEnd.isNavigable and self.secondEnd.isNavigable) then \r\tSet{} ->including(self.firstEnd.linkedClass) ->including(self.secondEnd.linkedClass)\relse if (self.firstEnd.isNavigable) then\r\t\tSet{}->including(self.secondEnd.linkedClass)\r\telse if (self.secondEnd.isNavigable) then \r\t\t\tSet{}->including(self.firstEnd.linkedClass)\r\t\telse\r\t\t\tSet{}\r\t\tendif\r\tendif\rendif",
+			 "body", "if (self.firstEnd.navigable and self.secondEnd.navigable) then \r\tSet{} ->including(self.firstEnd.linkedClass) ->including(self.secondEnd.linkedClass)\relse if (self.firstEnd.navigable) then\r\t\tSet{}->including(self.secondEnd.linkedClass)\r\telse if (self.secondEnd.navigable) then \r\t\t\tSet{}->including(self.firstEnd.linkedClass)\r\t\telse\r\t\t\tSet{}\r\t\tendif\r\tendif\rendif",
 			 "description", "get source Clazz"
 		   });		
 		addAnnotation
 		  (associationEClass.getEOperations().get(3), 
 		   source, 
 		   new String[] {
-			 "body", "if (self.firstEnd.isNavigable and self.secondEnd.isNavigable) then \r\tSet{} ->including(self.firstEnd.linkedClass) ->including(self.secondEnd.linkedClass)\relse if (self.secondEnd.isNavigable) then\r\t\tSet{}->including(self.secondEnd.linkedClass)\r\telse if (self.firstEnd.isNavigable) then \r\t\t\tSet{}->including(self.firstEnd.linkedClass)\r\t\telse\r\t\t\tSet{}\r\t\tendif\r\tendif\rendif",
+			 "body", "if (self.firstEnd.navigable and self.secondEnd.navigable) then \r\tSet{} ->including(self.firstEnd.linkedClass) ->including(self.secondEnd.linkedClass)\relse if (self.secondEnd.navigable) then\r\t\tSet{}->including(self.secondEnd.linkedClass)\r\telse if (self.firstEnd.navigable) then \r\t\t\tSet{}->including(self.firstEnd.linkedClass)\r\t\telse\r\t\t\tSet{}\r\t\tendif\r\tendif\rendif",
 			 "description", "get source Clazz"
+		   });		
+		addAnnotation
+		  (associationEClass.getEOperations().get(4), 
+		   source, 
+		   new String[] {
+			 "body", "Sequence{self.firstEnd,self.secondEnd} -> select(ae | ae.linkedClass = clazz)\n",
+			 "description", "returns the association end for which the parameter class (clazz) is linked to"
 		   });		
 		addAnnotation
 		  (aspectEClass.getEOperations().get(0), 
@@ -1113,6 +1097,27 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "body", "if self.title.oclIsUndefined() or self.title.size() = 0 then\r self.name \relse\r self.title \rendif"
+		   });		
+		addAnnotation
+		  (associationEndEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "cardMin.toInteger() > 0",
+			 "description", "returns true if the association end is mandatory"
+		   });		
+		addAnnotation
+		  (associationEndEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+			 "body", "(cardMax.toInteger() > 1) or (cardMax.toInteger() = -1)",
+			 "description", "returns true if the association end has a multiple cardinality"
+		   });		
+		addAnnotation
+		  (associationEndEClass.getEOperations().get(2), 
+		   source, 
+		   new String[] {
+			 "body", "let parent : Association = Association.allInstances() -> select(a | a.firstEnd = self or a.secondEnd = self) -> asSequence() -> first() in if (parent.firstEnd = self) then parent.secondEnd else parent.firstEnd endif",
+			 "description", "returns the other side of the containing association"
 		   });
 	}
 
@@ -1129,19 +1134,19 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "ClassWithTwoAttributesSameName InheritanceCycle"
-		   });																	
+		   });																		
 		addAnnotation
 		  (associationEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation"
-		   });								
+		   });									
 		addAnnotation
 		  (abstractClassEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "TwoModelElementWithSameName NameNull noSpecialCharacters TwoAttributesSameName"
-		   });		
+		   });					
 	}
 
 } //ClazzPackageImpl

@@ -9,8 +9,6 @@ package com.bluexml.side.clazz;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.Visibility;
 
-
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Attribute</b></em>'.
@@ -170,5 +168,5 @@ public interface Attribute extends TitledNamedClassModelElement {
 	 * @generated
 	 */
 	void setUnique(boolean value);
-
+		
 } // Attribute

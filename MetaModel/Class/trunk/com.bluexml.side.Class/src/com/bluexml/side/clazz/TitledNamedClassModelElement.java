@@ -8,7 +8,6 @@ package com.bluexml.side.clazz;
 
 import com.bluexml.side.common.NamedModelElement;
 
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Titled Named Class Model Element</b></em>'.

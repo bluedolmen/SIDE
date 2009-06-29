@@ -106,5 +106,5 @@ public interface EnumerationLiteral extends EObject {
 	 * @generated
 	 */
 	void setEnum(Enumeration value);
-
+		
 } // EnumerationLiteral

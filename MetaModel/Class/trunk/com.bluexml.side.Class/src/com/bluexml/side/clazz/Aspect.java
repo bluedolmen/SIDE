@@ -18,7 +18,6 @@ package com.bluexml.side.clazz;
  * @generated
  */
 public interface Aspect extends AbstractClass {
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -26,4 +25,5 @@ public interface Aspect extends AbstractClass {
 	 * @generated
 	 */
 	boolean equalsForMerge(Aspect other);
+		
 } // Aspect

@@ -8,16 +8,20 @@ package com.bluexml.side.clazz.impl;
 
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.ClazzPackage;
+
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
+
 import org.eclipse.ocl.EvaluationEnvironment;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
+
 import org.eclipse.ocl.ecore.OCL;
+
 import org.eclipse.ocl.expressions.OCLExpression;
 
 /**
@@ -87,7 +91,6 @@ public class AspectImpl extends AbstractClassImpl implements Aspect {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> equalsForMergeBodyOCL;
-	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
-	private static final OCL OCL_ENV = KerblueOCL.newInstance();
-
+		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+		private static final OCL OCL_ENV = KerblueOCL.newInstance();		
 } //AspectImpl

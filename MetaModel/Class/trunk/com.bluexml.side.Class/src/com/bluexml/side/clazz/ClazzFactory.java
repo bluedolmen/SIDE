@@ -107,22 +107,13 @@ public interface ClazzFactory extends EFactory {
 	ClassComment createClassComment();
 
 	/**
-	 * Returns a new object of class '<em>First End</em>'.
+	 * Returns a new object of class '<em>Association End</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>First End</em>'.
+	 * @return a new object of class '<em>Association End</em>'.
 	 * @generated
 	 */
-	FirstEnd createFirstEnd();
-
-	/**
-	 * Returns a new object of class '<em>Second End</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Second End</em>'.
-	 * @generated
-	 */
-	SecondEnd createSecondEnd();
+	AssociationEnd createAssociationEnd();
 
 	/**
 	 * Returns the package supported by this factory.

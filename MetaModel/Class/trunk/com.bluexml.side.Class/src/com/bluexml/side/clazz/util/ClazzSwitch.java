@@ -205,30 +205,6 @@ public class ClazzSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClazzPackage.FIRST_END: {
-				FirstEnd firstEnd = (FirstEnd)theEObject;
-				T result = caseFirstEnd(firstEnd);
-				if (result == null) result = caseAssociationEnd(firstEnd);
-				if (result == null) result = caseTitledNamedClassModelElement(firstEnd);
-				if (result == null) result = caseComment(firstEnd);
-				if (result == null) result = caseNamedModelElement(firstEnd);
-				if (result == null) result = caseClassModelElement(firstEnd);
-				if (result == null) result = caseModelElement(firstEnd);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ClazzPackage.SECOND_END: {
-				SecondEnd secondEnd = (SecondEnd)theEObject;
-				T result = caseSecondEnd(secondEnd);
-				if (result == null) result = caseAssociationEnd(secondEnd);
-				if (result == null) result = caseTitledNamedClassModelElement(secondEnd);
-				if (result == null) result = caseComment(secondEnd);
-				if (result == null) result = caseNamedModelElement(secondEnd);
-				if (result == null) result = caseClassModelElement(secondEnd);
-				if (result == null) result = caseModelElement(secondEnd);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -410,36 +386,6 @@ public class ClazzSwitch<T> {
 	 * @generated
 	 */
 	public T caseAssociationEnd(AssociationEnd object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>First End</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>First End</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFirstEnd(FirstEnd object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Second End</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Second End</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSecondEnd(SecondEnd object) {
 		return null;
 	}
 

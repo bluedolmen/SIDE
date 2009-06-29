@@ -6,18 +6,23 @@
  */
 package com.bluexml.side.clazz.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.ecore.OCL;
-
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Enumeration;
+
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.Visibility;
+
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->
@@ -389,8 +394,6 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 		return result.toString();
 	}
 
-	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
-
-	private static final OCL OCL_ENV = KerblueOCL.newInstance();
-
+		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+		private static final OCL OCL_ENV = KerblueOCL.newInstance();		
 } //AttributeImpl

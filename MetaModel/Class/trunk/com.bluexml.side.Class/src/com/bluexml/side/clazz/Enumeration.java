@@ -7,8 +7,8 @@
 package com.bluexml.side.clazz;
 
 import com.bluexml.side.common.NamedModelElement;
+
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.bluexml.side.clazz.Enumeration#getLiterals <em>Literals</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.Enumeration#getIsDynamic <em>Is Dynamic</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.Enumeration#getDynamic <em>Dynamic</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Enumeration#getDepends <em>Depends</em>}</li>
  * </ul>
  * </p>
@@ -48,31 +48,31 @@ public interface Enumeration extends NamedModelElement {
 	EList<EnumerationLiteral> getLiterals();
 
 	/**
-	 * Returns the value of the '<em><b>Is Dynamic</b></em>' attribute.
+	 * Returns the value of the '<em><b>Dynamic</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Is Dynamic</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Dynamic</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Dynamic</em>' attribute.
-	 * @see #setIsDynamic(Boolean)
-	 * @see com.bluexml.side.clazz.ClazzPackage#getEnumeration_IsDynamic()
+	 * @return the value of the '<em>Dynamic</em>' attribute.
+	 * @see #setDynamic(Boolean)
+	 * @see com.bluexml.side.clazz.ClazzPackage#getEnumeration_Dynamic()
 	 * @model default="false"
 	 * @generated
 	 */
-	Boolean getIsDynamic();
+	Boolean getDynamic();
 
 	/**
-	 * Sets the value of the '{@link com.bluexml.side.clazz.Enumeration#getIsDynamic <em>Is Dynamic</em>}' attribute.
+	 * Sets the value of the '{@link com.bluexml.side.clazz.Enumeration#getDynamic <em>Dynamic</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Dynamic</em>' attribute.
-	 * @see #getIsDynamic()
+	 * @param value the new value of the '<em>Dynamic</em>' attribute.
+	 * @see #getDynamic()
 	 * @generated
 	 */
-	void setIsDynamic(Boolean value);
+	void setDynamic(Boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Depends</b></em>' reference.
@@ -99,5 +99,5 @@ public interface Enumeration extends NamedModelElement {
 	 * @generated
 	 */
 	void setDepends(Enumeration value);
-
+		
 } // Enumeration

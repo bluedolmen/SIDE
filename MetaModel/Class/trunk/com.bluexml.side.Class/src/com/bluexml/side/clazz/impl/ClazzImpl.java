@@ -6,34 +6,43 @@
  */
 package com.bluexml.side.clazz.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EAnnotation;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.ocl.EvaluationEnvironment;
-import org.eclipse.ocl.ParserException;
-import org.eclipse.ocl.Query;
-import org.eclipse.ocl.ecore.OCL;
-import org.eclipse.ocl.expressions.OCLExpression;
-
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.ClazzPackage;
+
 import com.bluexml.side.common.OperationComponent;
+
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eclipse.ocl.EvaluationEnvironment;
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
+
+import org.eclipse.ocl.ecore.OCL;
+
+import org.eclipse.ocl.expressions.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -45,8 +54,8 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *   <li>{@link com.bluexml.side.clazz.impl.ClazzImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.ClazzImpl#getGeneralizations <em>Generalizations</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.ClazzImpl#getAspects <em>Aspects</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.impl.ClazzImpl#isIsAbstract <em>Is Abstract</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.impl.ClazzImpl#isIsDeprecated <em>Is Deprecated</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.impl.ClazzImpl#isAbstract <em>Abstract</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.impl.ClazzImpl#isDeprecated <em>Deprecated</em>}</li>
  * </ul>
  * </p>
  *
@@ -84,44 +93,44 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	protected EList<Aspect> aspects;
 
 	/**
-	 * The default value of the '{@link #isIsAbstract() <em>Is Abstract</em>}' attribute.
+	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsAbstract()
+	 * @see #isAbstract()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_ABSTRACT_EDEFAULT = false;
+	protected static final boolean ABSTRACT_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isIsAbstract() <em>Is Abstract</em>}' attribute.
+	 * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsAbstract()
+	 * @see #isAbstract()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isAbstract = IS_ABSTRACT_EDEFAULT;
+	protected boolean abstract_ = ABSTRACT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isIsDeprecated() <em>Is Deprecated</em>}' attribute.
+	 * The default value of the '{@link #isDeprecated() <em>Deprecated</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsDeprecated()
+	 * @see #isDeprecated()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_DEPRECATED_EDEFAULT = false;
+	protected static final boolean DEPRECATED_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isIsDeprecated() <em>Is Deprecated</em>}' attribute.
+	 * The cached value of the '{@link #isDeprecated() <em>Deprecated</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsDeprecated()
+	 * @see #isDeprecated()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isDeprecated = IS_DEPRECATED_EDEFAULT;
+	protected boolean deprecated = DEPRECATED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -183,8 +192,8 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isIsAbstract() {
-		return isAbstract;
+	public boolean isAbstract() {
+		return abstract_;
 	}
 
 	/**
@@ -192,11 +201,11 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIsAbstract(boolean newIsAbstract) {
-		boolean oldIsAbstract = isAbstract;
-		isAbstract = newIsAbstract;
+	public void setAbstract(boolean newAbstract) {
+		boolean oldAbstract = abstract_;
+		abstract_ = newAbstract;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.CLAZZ__IS_ABSTRACT, oldIsAbstract, isAbstract));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.CLAZZ__ABSTRACT, oldAbstract, abstract_));
 	}
 
 	/**
@@ -204,8 +213,8 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isIsDeprecated() {
-		return isDeprecated;
+	public boolean isDeprecated() {
+		return deprecated;
 	}
 
 	/**
@@ -213,11 +222,11 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIsDeprecated(boolean newIsDeprecated) {
-		boolean oldIsDeprecated = isDeprecated;
-		isDeprecated = newIsDeprecated;
+	public void setDeprecated(boolean newDeprecated) {
+		boolean oldDeprecated = deprecated;
+		deprecated = newDeprecated;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.CLAZZ__IS_DEPRECATED, oldIsDeprecated, isDeprecated));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.CLAZZ__DEPRECATED, oldDeprecated, deprecated));
 	}
 
 	/**
@@ -256,14 +265,13 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllAttributesBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Attribute> getAllInheritedAttributes() {
-		if (getAllInheritedAttributesBodyOCL == null) {
+	public EList<Clazz> getDescendants() {
+		if (getDescendantsBodyOCL == null) {
 			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(1);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
@@ -271,29 +279,28 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 			String body = ocl.getDetails().get("body");
 			
 			try {
-				getAllInheritedAttributesBodyOCL = helper.createQuery(body);
+				getDescendantsBodyOCL = helper.createQuery(body);
 			} catch (ParserException e) {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
 		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllInheritedAttributesBodyOCL);
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getDescendantsBodyOCL);
 	
 		@SuppressWarnings("unchecked")
-		Collection<Attribute> result = (Collection<Attribute>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Attribute>(result.size(), result.toArray());
+		Collection<Clazz> result = (Collection<Clazz>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Clazz>(result.size(), result.toArray());
 	
 	}
 
 	/**
-	 * The parsed OCL expression for the body of the '{@link #getAllInheritedAttributes <em>Get All Inherited Attributes</em>}' operation.
+	 * The parsed OCL expression for the body of the '{@link #getDescendants <em>Get Descendants</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAllInheritedAttributes
+	 * @see #getDescendants
 	 * @generated
 	 */
-	private static OCLExpression<EClassifier> getAllInheritedAttributesBodyOCL;
-
+	private static OCLExpression<EClassifier> getDescendantsBodyOCL;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -330,7 +337,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getClassAndAspectAttributesBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -367,7 +373,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getInheritedClassesBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -404,7 +409,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAspectAttributesBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -441,7 +445,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllSubTypesBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -478,7 +481,42 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllInheritedClassAndAspectAttributesBodyOCL;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Attribute> getAllInheritedAttributes() {
+		if (getAllInheritedAttributesBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(7);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllInheritedAttributesBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllInheritedAttributesBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Attribute> result = (Collection<Attribute>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Attribute>(result.size(), result.toArray());
+	
+	}
 
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllInheritedAttributes <em>Get All Inherited Attributes</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllInheritedAttributes
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllInheritedAttributesBodyOCL;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -486,7 +524,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<Association> getSourceAssociations() {
 		if (getSourceAssociationsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(7);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(8);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -515,7 +553,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getSourceAssociationsBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -523,7 +560,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public boolean isSource(Association asso) {
 		if (isSourceBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(8);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(9);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -554,7 +591,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> isSourceBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -562,7 +598,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public boolean isTarget(Association asso) {
 		if (isTargetBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(9);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(10);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -593,7 +629,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> isTargetBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -601,7 +636,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<Association> getTargetAssociations() {
 		if (getTargetAssociationsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(10);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(11);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -630,7 +665,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getTargetAssociationsBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -638,7 +672,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<Association> getAllSourceAssociations() {
 		if (getAllSourceAssociationsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(11);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(12);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -667,7 +701,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllSourceAssociationsBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -675,7 +708,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<Association> getAllTargetAssociations() {
 		if (getAllTargetAssociationsBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(12);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(13);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -704,7 +737,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllTargetAssociationsBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -712,7 +744,7 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 */
 	public EList<Clazz> getLinkedClasses() {
 		if (getLinkedClassesBodyOCL == null) {
-			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(13);
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(14);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
 			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
@@ -741,7 +773,6 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getLinkedClassesBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -770,10 +801,10 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 				return getGeneralizations();
 			case ClazzPackage.CLAZZ__ASPECTS:
 				return getAspects();
-			case ClazzPackage.CLAZZ__IS_ABSTRACT:
-				return isIsAbstract() ? Boolean.TRUE : Boolean.FALSE;
-			case ClazzPackage.CLAZZ__IS_DEPRECATED:
-				return isIsDeprecated() ? Boolean.TRUE : Boolean.FALSE;
+			case ClazzPackage.CLAZZ__ABSTRACT:
+				return isAbstract() ? Boolean.TRUE : Boolean.FALSE;
+			case ClazzPackage.CLAZZ__DEPRECATED:
+				return isDeprecated() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -799,11 +830,11 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 				getAspects().clear();
 				getAspects().addAll((Collection<? extends Aspect>)newValue);
 				return;
-			case ClazzPackage.CLAZZ__IS_ABSTRACT:
-				setIsAbstract(((Boolean)newValue).booleanValue());
+			case ClazzPackage.CLAZZ__ABSTRACT:
+				setAbstract(((Boolean)newValue).booleanValue());
 				return;
-			case ClazzPackage.CLAZZ__IS_DEPRECATED:
-				setIsDeprecated(((Boolean)newValue).booleanValue());
+			case ClazzPackage.CLAZZ__DEPRECATED:
+				setDeprecated(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -826,11 +857,11 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 			case ClazzPackage.CLAZZ__ASPECTS:
 				getAspects().clear();
 				return;
-			case ClazzPackage.CLAZZ__IS_ABSTRACT:
-				setIsAbstract(IS_ABSTRACT_EDEFAULT);
+			case ClazzPackage.CLAZZ__ABSTRACT:
+				setAbstract(ABSTRACT_EDEFAULT);
 				return;
-			case ClazzPackage.CLAZZ__IS_DEPRECATED:
-				setIsDeprecated(IS_DEPRECATED_EDEFAULT);
+			case ClazzPackage.CLAZZ__DEPRECATED:
+				setDeprecated(DEPRECATED_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -850,10 +881,10 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 				return generalizations != null && !generalizations.isEmpty();
 			case ClazzPackage.CLAZZ__ASPECTS:
 				return aspects != null && !aspects.isEmpty();
-			case ClazzPackage.CLAZZ__IS_ABSTRACT:
-				return isAbstract != IS_ABSTRACT_EDEFAULT;
-			case ClazzPackage.CLAZZ__IS_DEPRECATED:
-				return isDeprecated != IS_DEPRECATED_EDEFAULT;
+			case ClazzPackage.CLAZZ__ABSTRACT:
+				return abstract_ != ABSTRACT_EDEFAULT;
+			case ClazzPackage.CLAZZ__DEPRECATED:
+				return deprecated != DEPRECATED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -868,16 +899,14 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (isAbstract: ");
-		result.append(isAbstract);
-		result.append(", isDeprecated: ");
-		result.append(isDeprecated);
+		result.append(" (abstract: ");
+		result.append(abstract_);
+		result.append(", deprecated: ");
+		result.append(deprecated);
 		result.append(')');
 		return result.toString();
 	}
 
-	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
-
-	private static final OCL OCL_ENV = KerblueOCL.newInstance();
-
+		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+		private static final OCL OCL_ENV = KerblueOCL.newInstance();		
 } //ClazzImpl

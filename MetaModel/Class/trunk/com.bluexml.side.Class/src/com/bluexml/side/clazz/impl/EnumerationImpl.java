@@ -11,6 +11,7 @@ import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.clazz.EnumerationLiteral;
 
 import com.bluexml.side.common.impl.NamedModelElementImpl;
+
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 import java.util.Collection;
@@ -25,9 +26,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.eclipse.ocl.ecore.OCL;
 
 /**
@@ -38,7 +39,7 @@ import org.eclipse.ocl.ecore.OCL;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.clazz.impl.EnumerationImpl#getLiterals <em>Literals</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.impl.EnumerationImpl#getIsDynamic <em>Is Dynamic</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.impl.EnumerationImpl#getDynamic <em>Dynamic</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.EnumerationImpl#getDepends <em>Depends</em>}</li>
  * </ul>
  * </p>
@@ -57,24 +58,24 @@ public class EnumerationImpl extends NamedModelElementImpl implements Enumeratio
 	protected EList<EnumerationLiteral> literals;
 
 	/**
-	 * The default value of the '{@link #getIsDynamic() <em>Is Dynamic</em>}' attribute.
+	 * The default value of the '{@link #getDynamic() <em>Dynamic</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIsDynamic()
+	 * @see #getDynamic()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean IS_DYNAMIC_EDEFAULT = Boolean.FALSE;
+	protected static final Boolean DYNAMIC_EDEFAULT = Boolean.FALSE;
 
 	/**
-	 * The cached value of the '{@link #getIsDynamic() <em>Is Dynamic</em>}' attribute.
+	 * The cached value of the '{@link #getDynamic() <em>Dynamic</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIsDynamic()
+	 * @see #getDynamic()
 	 * @generated
 	 * @ordered
 	 */
-	protected Boolean isDynamic = IS_DYNAMIC_EDEFAULT;
+	protected Boolean dynamic = DYNAMIC_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getDepends() <em>Depends</em>}' reference.
@@ -122,8 +123,8 @@ public class EnumerationImpl extends NamedModelElementImpl implements Enumeratio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean getIsDynamic() {
-		return isDynamic;
+	public Boolean getDynamic() {
+		return dynamic;
 	}
 
 	/**
@@ -131,11 +132,11 @@ public class EnumerationImpl extends NamedModelElementImpl implements Enumeratio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIsDynamic(Boolean newIsDynamic) {
-		Boolean oldIsDynamic = isDynamic;
-		isDynamic = newIsDynamic;
+	public void setDynamic(Boolean newDynamic) {
+		Boolean oldDynamic = dynamic;
+		dynamic = newDynamic;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.ENUMERATION__IS_DYNAMIC, oldIsDynamic, isDynamic));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.ENUMERATION__DYNAMIC, oldDynamic, dynamic));
 	}
 
 	/**
@@ -215,8 +216,8 @@ public class EnumerationImpl extends NamedModelElementImpl implements Enumeratio
 		switch (featureID) {
 			case ClazzPackage.ENUMERATION__LITERALS:
 				return getLiterals();
-			case ClazzPackage.ENUMERATION__IS_DYNAMIC:
-				return getIsDynamic();
+			case ClazzPackage.ENUMERATION__DYNAMIC:
+				return getDynamic();
 			case ClazzPackage.ENUMERATION__DEPENDS:
 				if (resolve) return getDepends();
 				return basicGetDepends();
@@ -237,8 +238,8 @@ public class EnumerationImpl extends NamedModelElementImpl implements Enumeratio
 				getLiterals().clear();
 				getLiterals().addAll((Collection<? extends EnumerationLiteral>)newValue);
 				return;
-			case ClazzPackage.ENUMERATION__IS_DYNAMIC:
-				setIsDynamic((Boolean)newValue);
+			case ClazzPackage.ENUMERATION__DYNAMIC:
+				setDynamic((Boolean)newValue);
 				return;
 			case ClazzPackage.ENUMERATION__DEPENDS:
 				setDepends((Enumeration)newValue);
@@ -258,8 +259,8 @@ public class EnumerationImpl extends NamedModelElementImpl implements Enumeratio
 			case ClazzPackage.ENUMERATION__LITERALS:
 				getLiterals().clear();
 				return;
-			case ClazzPackage.ENUMERATION__IS_DYNAMIC:
-				setIsDynamic(IS_DYNAMIC_EDEFAULT);
+			case ClazzPackage.ENUMERATION__DYNAMIC:
+				setDynamic(DYNAMIC_EDEFAULT);
 				return;
 			case ClazzPackage.ENUMERATION__DEPENDS:
 				setDepends((Enumeration)null);
@@ -278,8 +279,8 @@ public class EnumerationImpl extends NamedModelElementImpl implements Enumeratio
 		switch (featureID) {
 			case ClazzPackage.ENUMERATION__LITERALS:
 				return literals != null && !literals.isEmpty();
-			case ClazzPackage.ENUMERATION__IS_DYNAMIC:
-				return IS_DYNAMIC_EDEFAULT == null ? isDynamic != null : !IS_DYNAMIC_EDEFAULT.equals(isDynamic);
+			case ClazzPackage.ENUMERATION__DYNAMIC:
+				return DYNAMIC_EDEFAULT == null ? dynamic != null : !DYNAMIC_EDEFAULT.equals(dynamic);
 			case ClazzPackage.ENUMERATION__DEPENDS:
 				return depends != null;
 		}
@@ -296,14 +297,12 @@ public class EnumerationImpl extends NamedModelElementImpl implements Enumeratio
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (isDynamic: ");
-		result.append(isDynamic);
+		result.append(" (dynamic: ");
+		result.append(dynamic);
 		result.append(')');
 		return result.toString();
 	}
 
-	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
-
-	private static final OCL OCL_ENV = KerblueOCL.newInstance();
-
+		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+		private static final OCL OCL_ENV = KerblueOCL.newInstance();		
 } //EnumerationImpl

@@ -6,33 +6,37 @@
  */
 package com.bluexml.side.clazz.impl;
 
+import com.bluexml.side.clazz.Association;
+import com.bluexml.side.clazz.AssociationEnd;
+import com.bluexml.side.clazz.AssociationType;
+import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.clazz.ClazzPackage;
+
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+
 import org.eclipse.ocl.EvaluationEnvironment;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
-import org.eclipse.ocl.ecore.OCL;
-import org.eclipse.ocl.expressions.OCLExpression;
 
-import com.bluexml.side.clazz.AbstractClass;
-import com.bluexml.side.clazz.Association;
-import com.bluexml.side.clazz.AssociationType;
-import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.clazz.ClazzPackage;
-import com.bluexml.side.clazz.FirstEnd;
-import com.bluexml.side.clazz.SecondEnd;
-import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+import org.eclipse.ocl.ecore.OCL;
+
+import org.eclipse.ocl.expressions.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -78,7 +82,7 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 	 * @generated
 	 * @ordered
 	 */
-	protected FirstEnd firstEnd;
+	protected AssociationEnd firstEnd;
 
 	/**
 	 * The cached value of the '{@link #getSecondEnd() <em>Second End</em>}' containment reference.
@@ -88,7 +92,7 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 	 * @generated
 	 * @ordered
 	 */
-	protected SecondEnd secondEnd;
+	protected AssociationEnd secondEnd;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -135,7 +139,7 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FirstEnd getFirstEnd() {
+	public AssociationEnd getFirstEnd() {
 		return firstEnd;
 	}
 
@@ -144,8 +148,8 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetFirstEnd(FirstEnd newFirstEnd, NotificationChain msgs) {
-		FirstEnd oldFirstEnd = firstEnd;
+	public NotificationChain basicSetFirstEnd(AssociationEnd newFirstEnd, NotificationChain msgs) {
+		AssociationEnd oldFirstEnd = firstEnd;
 		firstEnd = newFirstEnd;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClazzPackage.ASSOCIATION__FIRST_END, oldFirstEnd, newFirstEnd);
@@ -159,7 +163,7 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFirstEnd(FirstEnd newFirstEnd) {
+	public void setFirstEnd(AssociationEnd newFirstEnd) {
 		if (newFirstEnd != firstEnd) {
 			NotificationChain msgs = null;
 			if (firstEnd != null)
@@ -178,7 +182,7 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SecondEnd getSecondEnd() {
+	public AssociationEnd getSecondEnd() {
 		return secondEnd;
 	}
 
@@ -187,8 +191,8 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetSecondEnd(SecondEnd newSecondEnd, NotificationChain msgs) {
-		SecondEnd oldSecondEnd = secondEnd;
+	public NotificationChain basicSetSecondEnd(AssociationEnd newSecondEnd, NotificationChain msgs) {
+		AssociationEnd oldSecondEnd = secondEnd;
 		secondEnd = newSecondEnd;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClazzPackage.ASSOCIATION__SECOND_END, oldSecondEnd, newSecondEnd);
@@ -202,7 +206,7 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSecondEnd(SecondEnd newSecondEnd) {
+	public void setSecondEnd(AssociationEnd newSecondEnd) {
 		if (newSecondEnd != secondEnd) {
 			NotificationChain msgs = null;
 			if (secondEnd != null)
@@ -254,14 +258,13 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> equalsForMergeBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isRecursive() {
-		if (isRecursiveBodyOCL == null) {
+	public boolean isReflexive() {
+		if (isReflexiveBodyOCL == null) {
 			EOperation eOperation = ClazzPackage.Literals.ASSOCIATION.getEOperations().get(1);
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setOperationContext(ClazzPackage.Literals.ASSOCIATION, eOperation);
@@ -269,27 +272,26 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 			String body = ocl.getDetails().get("body");
 			
 			try {
-				isRecursiveBodyOCL = helper.createQuery(body);
+				isReflexiveBodyOCL = helper.createQuery(body);
 			} catch (ParserException e) {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
 		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(isRecursiveBodyOCL);
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(isReflexiveBodyOCL);
 	
 		return ((Boolean) query.evaluate(this)).booleanValue();
 	
 	}
 
 	/**
-	 * The parsed OCL expression for the body of the '{@link #isRecursive <em>Is Recursive</em>}' operation.
+	 * The parsed OCL expression for the body of the '{@link #isReflexive <em>Is Reflexive</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isRecursive
+	 * @see #isReflexive
 	 * @generated
 	 */
-	private static OCLExpression<EClassifier> isRecursiveBodyOCL;
-
+	private static OCLExpression<EClassifier> isReflexiveBodyOCL;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -326,7 +328,6 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getSourceBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -363,7 +364,46 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getTargetBodyOCL;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<AssociationEnd> getAssociationEnd(Clazz clazz) {
+		if (getAssociationEndBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.ASSOCIATION.getEOperations().get(4);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.ASSOCIATION, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAssociationEndBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAssociationEndBodyOCL);
+	 
+		EvaluationEnvironment<?, ?, ?, ?, ?> evalEnv = query.getEvaluationEnvironment();
+		
+		evalEnv.add("clazz", clazz);
+	  
+		@SuppressWarnings("unchecked")
+		Collection<AssociationEnd> result = (Collection<AssociationEnd>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<AssociationEnd>(result.size(), result.toArray());
+	
+	}
 
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAssociationEnd <em>Get Association End</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAssociationEnd
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAssociationEndBodyOCL;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -403,7 +443,6 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -411,10 +450,10 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 				setAssociationType((AssociationType)newValue);
 				return;
 			case ClazzPackage.ASSOCIATION__FIRST_END:
-				setFirstEnd((FirstEnd)newValue);
+				setFirstEnd((AssociationEnd)newValue);
 				return;
 			case ClazzPackage.ASSOCIATION__SECOND_END:
-				setSecondEnd((SecondEnd)newValue);
+				setSecondEnd((AssociationEnd)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -432,10 +471,10 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 				setAssociationType(ASSOCIATION_TYPE_EDEFAULT);
 				return;
 			case ClazzPackage.ASSOCIATION__FIRST_END:
-				setFirstEnd((FirstEnd)null);
+				setFirstEnd((AssociationEnd)null);
 				return;
 			case ClazzPackage.ASSOCIATION__SECOND_END:
-				setSecondEnd((SecondEnd)null);
+				setSecondEnd((AssociationEnd)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -475,8 +514,6 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 		return result.toString();
 	}
 
-	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
-
-	private static final OCL OCL_ENV = KerblueOCL.newInstance();
-
+		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+		private static final OCL OCL_ENV = KerblueOCL.newInstance();		
 } //AssociationImpl

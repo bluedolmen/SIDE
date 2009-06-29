@@ -7,6 +7,7 @@
 package com.bluexml.side.clazz;
 
 import com.bluexml.side.common.OperationComponent;
+
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -20,8 +21,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.bluexml.side.clazz.Clazz#getOperations <em>Operations</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Clazz#getGeneralizations <em>Generalizations</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Clazz#getAspects <em>Aspects</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.Clazz#isIsAbstract <em>Is Abstract</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.Clazz#isIsDeprecated <em>Is Deprecated</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.Clazz#isAbstract <em>Abstract</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.Clazz#isDeprecated <em>Deprecated</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,7 +53,7 @@ public interface Clazz extends AbstractClass {
 	 * The list contents are of type {@link com.bluexml.side.clazz.Clazz}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Generalizations</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Generalizations</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
@@ -80,56 +81,56 @@ public interface Clazz extends AbstractClass {
 	EList<Aspect> getAspects();
 
 	/**
-	 * Returns the value of the '<em><b>Is Abstract</b></em>' attribute.
+	 * Returns the value of the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Is Abstract</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Abstract</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Abstract</em>' attribute.
-	 * @see #setIsAbstract(boolean)
-	 * @see com.bluexml.side.clazz.ClazzPackage#getClazz_IsAbstract()
+	 * @return the value of the '<em>Abstract</em>' attribute.
+	 * @see #setAbstract(boolean)
+	 * @see com.bluexml.side.clazz.ClazzPackage#getClazz_Abstract()
 	 * @model
 	 * @generated
 	 */
-	boolean isIsAbstract();
+	boolean isAbstract();
 
 	/**
-	 * Sets the value of the '{@link com.bluexml.side.clazz.Clazz#isIsAbstract <em>Is Abstract</em>}' attribute.
+	 * Sets the value of the '{@link com.bluexml.side.clazz.Clazz#isAbstract <em>Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Abstract</em>' attribute.
-	 * @see #isIsAbstract()
+	 * @param value the new value of the '<em>Abstract</em>' attribute.
+	 * @see #isAbstract()
 	 * @generated
 	 */
-	void setIsAbstract(boolean value);
+	void setAbstract(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Is Deprecated</b></em>' attribute.
+	 * Returns the value of the '<em><b>Deprecated</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Is Deprecated</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Deprecated</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Deprecated</em>' attribute.
-	 * @see #setIsDeprecated(boolean)
-	 * @see com.bluexml.side.clazz.ClazzPackage#getClazz_IsDeprecated()
+	 * @return the value of the '<em>Deprecated</em>' attribute.
+	 * @see #setDeprecated(boolean)
+	 * @see com.bluexml.side.clazz.ClazzPackage#getClazz_Deprecated()
 	 * @model
 	 * @generated
 	 */
-	boolean isIsDeprecated();
+	boolean isDeprecated();
 
 	/**
-	 * Sets the value of the '{@link com.bluexml.side.clazz.Clazz#isIsDeprecated <em>Is Deprecated</em>}' attribute.
+	 * Sets the value of the '{@link com.bluexml.side.clazz.Clazz#isDeprecated <em>Deprecated</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Deprecated</em>' attribute.
-	 * @see #isIsDeprecated()
+	 * @param value the new value of the '<em>Deprecated</em>' attribute.
+	 * @see #isDeprecated()
 	 * @generated
 	 */
-	void setIsDeprecated(boolean value);
+	void setDeprecated(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -144,10 +145,10 @@ public interface Clazz extends AbstractClass {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='Clazz.allInstances() ->select(e:Clazz|e.getInheritedClasses() ->includes(self) )' description='get all Clazz that inherite from this Clazz'"
+	 *        annotation="http://www.bluexml.com/OCL body='Clazz.allInstances() ->select(e:Clazz|e.getInheritedClasses() ->includes(self) )' description='get all Clazz that inherit from this Clazz'"
 	 * @generated
 	 */
-	EList<Attribute> getAllInheritedAttributes();
+	EList<Clazz> getDescendants();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -198,6 +199,15 @@ public interface Clazz extends AbstractClass {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.getInheritedClasses() ->collect(c | c.attributes) -> flatten()' description='get all attributes including the inherited ones (excluding aspects)'"
+	 * @generated
+	 */
+	EList<Attribute> getAllInheritedAttributes();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
 	 *        annotation="http://www.bluexml.com/OCL body='Association.allInstances() ->select(c:Association|self.isSource(c))' description='search association where this clazz is source'"
 	 * @generated
 	 */
@@ -207,7 +217,7 @@ public interface Clazz extends AbstractClass {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model required="true" assoRequired="true"
-	 *        annotation="http://www.bluexml.com/OCL body='(asso.firstEnd.linkedClass = self and asso.secondEnd.isNavigable) or (asso.secondEnd.linkedClass = self and asso.firstEnd.isNavigable)' description='search for class attributes, inherited one and finaly added to the class by aspect'"
+	 *        annotation="http://www.bluexml.com/OCL body='(asso.firstEnd.linkedClass = self and asso.secondEnd.navigable) or (asso.secondEnd.linkedClass = self and asso.firstEnd.navigable)' description='search for class attributes, inherited one and finaly added to the class by aspect'"
 	 * @generated
 	 */
 	boolean isSource(Association asso);
@@ -216,7 +226,7 @@ public interface Clazz extends AbstractClass {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model required="true" assoRequired="true"
-	 *        annotation="http://www.bluexml.com/OCL body='(asso.firstEnd.linkedClass = self and asso.firstEnd.isNavigable) or (asso.secondEnd.linkedClass = self and asso.secondEnd.isNavigable)' description='search for class attributes, inherited one and finaly added to the class by aspect'"
+	 *        annotation="http://www.bluexml.com/OCL body='(asso.firstEnd.linkedClass = self and asso.firstEnd.navigable) or (asso.secondEnd.linkedClass = self and asso.secondEnd.navigable)' description='search for class attributes, inherited one and finaly added to the class by aspect'"
 	 * @generated
 	 */
 	boolean isTarget(Association asso);
@@ -256,5 +266,5 @@ public interface Clazz extends AbstractClass {
 	 * @generated
 	 */
 	EList<Clazz> getLinkedClasses();
-
+		
 } // Clazz

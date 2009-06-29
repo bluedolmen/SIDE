@@ -6,25 +6,31 @@
  */
 package com.bluexml.side.clazz.impl;
 
-
-import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.AssociationEnd;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.ClazzPackage;
 
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonPackage;
+
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
 
 import org.eclipse.ocl.ecore.OCL;
+
+import org.eclipse.ocl.expressions.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,14 +42,14 @@ import org.eclipse.ocl.ecore.OCL;
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationEndImpl#getValue <em>Value</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationEndImpl#getCardMin <em>Card Min</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationEndImpl#getCardMax <em>Card Max</em>}</li>
- *   <li>{@link com.bluexml.side.clazz.impl.AssociationEndImpl#isIsNavigable <em>Is Navigable</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.impl.AssociationEndImpl#isNavigable <em>Navigable</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AssociationEndImpl#getLinkedClass <em>Linked Class</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class AssociationEndImpl extends TitledNamedClassModelElementImpl implements AssociationEnd {
+public class AssociationEndImpl extends TitledNamedClassModelElementImpl implements AssociationEnd {
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -105,24 +111,24 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 	protected String cardMax = CARD_MAX_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isIsNavigable() <em>Is Navigable</em>}' attribute.
+	 * The default value of the '{@link #isNavigable() <em>Navigable</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsNavigable()
+	 * @see #isNavigable()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_NAVIGABLE_EDEFAULT = false;
+	protected static final boolean NAVIGABLE_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isIsNavigable() <em>Is Navigable</em>}' attribute.
+	 * The cached value of the '{@link #isNavigable() <em>Navigable</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsNavigable()
+	 * @see #isNavigable()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isNavigable = IS_NAVIGABLE_EDEFAULT;
+	protected boolean navigable = NAVIGABLE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getLinkedClass() <em>Linked Class</em>}' reference.
@@ -221,8 +227,8 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isIsNavigable() {
-		return isNavigable;
+	public boolean isNavigable() {
+		return navigable;
 	}
 
 	/**
@@ -230,11 +236,11 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIsNavigable(boolean newIsNavigable) {
-		boolean oldIsNavigable = isNavigable;
-		isNavigable = newIsNavigable;
+	public void setNavigable(boolean newNavigable) {
+		boolean oldNavigable = navigable;
+		navigable = newNavigable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.ASSOCIATION_END__IS_NAVIGABLE, oldIsNavigable, isNavigable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.ASSOCIATION_END__NAVIGABLE, oldNavigable, navigable));
 	}
 
 	/**
@@ -280,6 +286,108 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isMandatory() {
+		if (isMandatoryBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.ASSOCIATION_END.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.ASSOCIATION_END, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				isMandatoryBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(isMandatoryBodyOCL);
+	
+		return ((Boolean) query.evaluate(this)).booleanValue();
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #isMandatory <em>Is Mandatory</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isMandatory
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> isMandatoryBodyOCL;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isMany() {
+		if (isManyBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.ASSOCIATION_END.getEOperations().get(1);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.ASSOCIATION_END, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				isManyBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(isManyBodyOCL);
+	
+		return ((Boolean) query.evaluate(this)).booleanValue();
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #isMany <em>Is Many</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isMany
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> isManyBodyOCL;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AssociationEnd getOpposite() {
+		if (getOppositeBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.ASSOCIATION_END.getEOperations().get(2);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.ASSOCIATION_END, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getOppositeBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getOppositeBodyOCL);
+	
+		return (AssociationEnd) query.evaluate(this);
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getOpposite <em>Get Opposite</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOpposite
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getOppositeBodyOCL;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -289,8 +397,8 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 				return getCardMin();
 			case ClazzPackage.ASSOCIATION_END__CARD_MAX:
 				return getCardMax();
-			case ClazzPackage.ASSOCIATION_END__IS_NAVIGABLE:
-				return isIsNavigable() ? Boolean.TRUE : Boolean.FALSE;
+			case ClazzPackage.ASSOCIATION_END__NAVIGABLE:
+				return isNavigable() ? Boolean.TRUE : Boolean.FALSE;
 			case ClazzPackage.ASSOCIATION_END__LINKED_CLASS:
 				if (resolve) return getLinkedClass();
 				return basicGetLinkedClass();
@@ -315,8 +423,8 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 			case ClazzPackage.ASSOCIATION_END__CARD_MAX:
 				setCardMax((String)newValue);
 				return;
-			case ClazzPackage.ASSOCIATION_END__IS_NAVIGABLE:
-				setIsNavigable(((Boolean)newValue).booleanValue());
+			case ClazzPackage.ASSOCIATION_END__NAVIGABLE:
+				setNavigable(((Boolean)newValue).booleanValue());
 				return;
 			case ClazzPackage.ASSOCIATION_END__LINKED_CLASS:
 				setLinkedClass((Clazz)newValue);
@@ -342,8 +450,8 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 			case ClazzPackage.ASSOCIATION_END__CARD_MAX:
 				setCardMax(CARD_MAX_EDEFAULT);
 				return;
-			case ClazzPackage.ASSOCIATION_END__IS_NAVIGABLE:
-				setIsNavigable(IS_NAVIGABLE_EDEFAULT);
+			case ClazzPackage.ASSOCIATION_END__NAVIGABLE:
+				setNavigable(NAVIGABLE_EDEFAULT);
 				return;
 			case ClazzPackage.ASSOCIATION_END__LINKED_CLASS:
 				setLinkedClass((Clazz)null);
@@ -366,8 +474,8 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 				return CARD_MIN_EDEFAULT == null ? cardMin != null : !CARD_MIN_EDEFAULT.equals(cardMin);
 			case ClazzPackage.ASSOCIATION_END__CARD_MAX:
 				return CARD_MAX_EDEFAULT == null ? cardMax != null : !CARD_MAX_EDEFAULT.equals(cardMax);
-			case ClazzPackage.ASSOCIATION_END__IS_NAVIGABLE:
-				return isNavigable != IS_NAVIGABLE_EDEFAULT;
+			case ClazzPackage.ASSOCIATION_END__NAVIGABLE:
+				return navigable != NAVIGABLE_EDEFAULT;
 			case ClazzPackage.ASSOCIATION_END__LINKED_CLASS:
 				return linkedClass != null;
 		}
@@ -422,8 +530,8 @@ public abstract class AssociationEndImpl extends TitledNamedClassModelElementImp
 		result.append(cardMin);
 		result.append(", cardMax: ");
 		result.append(cardMax);
-		result.append(", isNavigable: ");
-		result.append(isNavigable);
+		result.append(", navigable: ");
+		result.append(navigable);
 		result.append(')');
 		return result.toString();
 	}

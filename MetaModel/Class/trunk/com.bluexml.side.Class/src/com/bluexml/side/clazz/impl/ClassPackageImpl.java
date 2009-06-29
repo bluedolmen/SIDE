@@ -6,23 +6,6 @@
  */
 package com.bluexml.side.clazz.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EAnnotation;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.ocl.ParserException;
-import org.eclipse.ocl.Query;
-import org.eclipse.ocl.ecore.OCL;
-import org.eclipse.ocl.expressions.OCLExpression;
-
 import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
@@ -30,8 +13,33 @@ import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Enumeration;
+
 import com.bluexml.side.common.impl.PackageImpl;
+
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
+
+import org.eclipse.ocl.ecore.OCL;
+
+import org.eclipse.ocl.expressions.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -60,7 +68,6 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 */
 	protected EList<Clazz> classSet;
 
-	
 	/**
 	 * The cached value of the '{@link #getAssociationSet() <em>Association Set</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -72,14 +79,6 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	protected EList<Association> associationSet;
 
 	/**
-	 * The parsed OCL expression for the body of the '{@link #getFullName <em>Get Full Name</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFullName
-	 * @generated
-	 */
-	
-	/**
 	 * The cached value of the '{@link #getAspectSet() <em>Aspect Set</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -89,7 +88,6 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 */
 	protected EList<Aspect> aspectSet;
 
-	
 	/**
 	 * The cached value of the '{@link #getEnumerationSet() <em>Enumeration Set</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -100,7 +98,6 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 */
 	protected EList<Enumeration> enumerationSet;
 
-	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -204,7 +201,6 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllPackagesBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -241,7 +237,6 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllClassesBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -278,7 +273,6 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllEnumerationsBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -315,7 +309,6 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllAspectsBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -352,7 +345,6 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllAssociationsBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -389,7 +381,6 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * @generated
 	 */
 	private static OCLExpression<EClassifier> getAllAbstractClassesBodyOCL;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -503,8 +494,6 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 		return super.eIsSet(featureID);
 	}
 
-	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
-
-	private static final OCL OCL_ENV = KerblueOCL.newInstance();
-
+		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+		private static final OCL OCL_ENV = KerblueOCL.newInstance();		
 } //ClassPackageImpl

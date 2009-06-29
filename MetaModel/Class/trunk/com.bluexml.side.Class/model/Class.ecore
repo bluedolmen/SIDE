@@ -60,10 +60,10 @@
         <details key="description" value="search for class attributes, inherited one and finaly added to the class by aspect"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="getAllInheritedAttributes" upperBound="-1" eType="#//Attribute">
+    <eOperations name="getDescendants" upperBound="-1" eType="#//Clazz">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="Clazz.allInstances() ->select(e:Clazz|e.getInheritedClasses() ->includes(self) )"/>
-        <details key="description" value="get all Clazz that inherite from this Clazz"/>
+        <details key="description" value="get all Clazz that inherit from this Clazz"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getClassAndAspectAttributes" upperBound="-1" eType="#//Attribute">
@@ -92,6 +92,12 @@
         <details key="description" value="search attributes than is describe in inherited classes (with Aspects)"/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="getAllInheritedAttributes" upperBound="-1" eType="#//Attribute">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.getInheritedClasses() ->collect(c | c.attributes) -> flatten()"/>
+        <details key="description" value="get all attributes including the inherited ones (excluding aspects)"/>
+      </eAnnotations>
+    </eOperations>
     <eOperations name="getSourceAssociations" upperBound="-1" eType="#//Association">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="Association.allInstances() ->select(c:Association|self.isSource(c))"/>
@@ -100,14 +106,14 @@
     </eOperations>
     <eOperations name="isSource" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="(asso.firstEnd.linkedClass = self and asso.secondEnd.isNavigable) or (asso.secondEnd.linkedClass = self and asso.firstEnd.isNavigable)"/>
+        <details key="body" value="(asso.firstEnd.linkedClass = self and asso.secondEnd.navigable) or (asso.secondEnd.linkedClass = self and asso.firstEnd.navigable)"/>
         <details key="description" value="search for class attributes, inherited one and finaly added to the class by aspect"/>
       </eAnnotations>
       <eParameters name="asso" lowerBound="1" eType="#//Association"/>
     </eOperations>
     <eOperations name="isTarget" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="(asso.firstEnd.linkedClass = self and asso.firstEnd.isNavigable) or (asso.secondEnd.linkedClass = self and asso.secondEnd.isNavigable)"/>
+        <details key="body" value="(asso.firstEnd.linkedClass = self and asso.firstEnd.navigable) or (asso.secondEnd.linkedClass = self and asso.secondEnd.navigable)"/>
         <details key="description" value="search for class attributes, inherited one and finaly added to the class by aspect"/>
       </eAnnotations>
       <eParameters name="asso" lowerBound="1" eType="#//Association"/>
@@ -142,20 +148,20 @@
         eType="#//Clazz"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="aspects" upperBound="-1"
         eType="#//Aspect"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDeprecated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deprecated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="#//TitledNamedClassModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="recursiveAssociationMustHaveRole" value="( self.isRecursive() and self.firstEnd.isNavigable and self.secondEnd.isNavigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name &lt;> '' ) and ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name &lt;> '' ))"/>
+      <details key="reflexiveAssociationMustHaveRole" value="( self.isReflexive() and self.firstEnd.navigable and self.secondEnd.navigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name &lt;> '' ) and ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name &lt;> '' ))"/>
       <details key="MinAndMaxTarget" value="( self.secondEnd.cardMax &lt;> '-1' ) implies ( self.secondEnd.cardMin &lt;= self.secondEnd.cardMax )"/>
       <details key="MinAndMaxSource" value="( self.firstEnd.cardMax &lt;> '-1' ) implies ( self.firstEnd.cardMin &lt;= self.firstEnd.cardMax )"/>
       <details key="NameNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
       <details key="SourceNull" value="self.firstEnd.linkedClass->notEmpty()"/>
       <details key="TargetNull" value="self.secondEnd.linkedClass->notEmpty()"/>
-      <details key="AtLeastOneNavigableEdge" value="(firstEnd.isNavigable or secondEnd.isNavigable)"/>
+      <details key="AtLeastOneNavigableEdge" value="(firstEnd.navigable or secondEnd.navigable)"/>
       <details key="ClassCantBeReferencedbyTwoSameNameAssociation" value="self.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1"/>
-      <details key="IfAggregationOrCompositionThenUnidirectionalAssociation" value="(self.associationType &lt;> AssociationType::Direct) implies (self.firstEnd.isNavigable xor self.secondEnd.isNavigable )"/>
+      <details key="IfAggregationOrCompositionThenUnidirectionalAssociation" value="(self.associationType &lt;> AssociationType::Direct) implies (self.firstEnd.navigable xor self.secondEnd.navigable )"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation"/>
@@ -168,25 +174,32 @@
     </eOperations>
     <eOperations name="isReflexive" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="(self.firstEnd.linkedClass.getInheritedClasses() ->including(self.firstEnd.linkedClass) ->includes(self.secondEnd.linkedClass) and self.secondEnd.isNavigable)&#xD;or &#xD;(self.secondEnd.linkedClass.getInheritedClasses() ->including(self.secondEnd.linkedClass) ->includes(self.firstEnd.linkedClass) and self.firstEnd.isNavigable)&#xD;"/>
+        <details key="body" value="(self.firstEnd.linkedClass.getInheritedClasses() ->including(self.firstEnd.linkedClass) ->includes(self.secondEnd.linkedClass) and self.secondEnd.navigable)&#xD;or &#xD;(self.secondEnd.linkedClass.getInheritedClasses() ->including(self.secondEnd.linkedClass) ->includes(self.firstEnd.linkedClass) and self.firstEnd.navigable)&#xD;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getSource" lowerBound="1" upperBound="2" eType="#//Clazz">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="if (self.firstEnd.isNavigable and self.secondEnd.isNavigable) then &#xD;&#x9;Set{} ->including(self.firstEnd.linkedClass) ->including(self.secondEnd.linkedClass)&#xD;else if (self.firstEnd.isNavigable) then&#xD;&#x9;&#x9;Set{}->including(self.secondEnd.linkedClass)&#xD;&#x9;else if (self.secondEnd.isNavigable) then &#xD;&#x9;&#x9;&#x9;Set{}->including(self.firstEnd.linkedClass)&#xD;&#x9;&#x9;else&#xD;&#x9;&#x9;&#x9;Set{}&#xD;&#x9;&#x9;endif&#xD;&#x9;endif&#xD;endif"/>
+        <details key="body" value="if (self.firstEnd.navigable and self.secondEnd.navigable) then &#xD;&#x9;Set{} ->including(self.firstEnd.linkedClass) ->including(self.secondEnd.linkedClass)&#xD;else if (self.firstEnd.navigable) then&#xD;&#x9;&#x9;Set{}->including(self.secondEnd.linkedClass)&#xD;&#x9;else if (self.secondEnd.navigable) then &#xD;&#x9;&#x9;&#x9;Set{}->including(self.firstEnd.linkedClass)&#xD;&#x9;&#x9;else&#xD;&#x9;&#x9;&#x9;Set{}&#xD;&#x9;&#x9;endif&#xD;&#x9;endif&#xD;endif"/>
         <details key="description" value="get source Clazz"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getTarget" lowerBound="1" upperBound="2" eType="#//Clazz">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="if (self.firstEnd.isNavigable and self.secondEnd.isNavigable) then &#xD;&#x9;Set{} ->including(self.firstEnd.linkedClass) ->including(self.secondEnd.linkedClass)&#xD;else if (self.secondEnd.isNavigable) then&#xD;&#x9;&#x9;Set{}->including(self.secondEnd.linkedClass)&#xD;&#x9;else if (self.firstEnd.isNavigable) then &#xD;&#x9;&#x9;&#x9;Set{}->including(self.firstEnd.linkedClass)&#xD;&#x9;&#x9;else&#xD;&#x9;&#x9;&#x9;Set{}&#xD;&#x9;&#x9;endif&#xD;&#x9;endif&#xD;endif"/>
+        <details key="body" value="if (self.firstEnd.navigable and self.secondEnd.navigable) then &#xD;&#x9;Set{} ->including(self.firstEnd.linkedClass) ->including(self.secondEnd.linkedClass)&#xD;else if (self.secondEnd.navigable) then&#xD;&#x9;&#x9;Set{}->including(self.secondEnd.linkedClass)&#xD;&#x9;else if (self.firstEnd.navigable) then &#xD;&#x9;&#x9;&#x9;Set{}->including(self.firstEnd.linkedClass)&#xD;&#x9;&#x9;else&#xD;&#x9;&#x9;&#x9;Set{}&#xD;&#x9;&#x9;endif&#xD;&#x9;endif&#xD;endif"/>
         <details key="description" value="get source Clazz"/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="getAssociationEnd" upperBound="2" eType="#//AssociationEnd">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="Sequence{self.firstEnd,self.secondEnd} -> select(ae | ae.linkedClass = clazz)&#xA;"/>
+        <details key="description" value="returns the association end for which the parameter class (clazz) is linked to"/>
+      </eAnnotations>
+      <eParameters name="clazz" eType="#//Clazz"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="associationType" eType="#//AssociationType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="firstEnd" eType="#//FirstEnd"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="firstEnd" eType="#//AssociationEnd"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="secondEnd" eType="#//SecondEnd"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="secondEnd" eType="#//AssociationEnd"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="#//TitledNamedClassModelElement">
@@ -202,7 +215,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="literals" upperBound="-1"
         eType="#//EnumerationLiteral" containment="true" eOpposite="#//EnumerationLiteral/enum"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDynamic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dynamic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
         defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="depends" eType="#//Enumeration"/>
   </eClassifiers>
@@ -254,14 +267,30 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassComment" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Comment"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AssociationEnd" abstract="true" eSuperTypes="#//TitledNamedClassModelElement ../../com.bluexml.side.Common/model/Common.ecore#//Comment">
+  <eClassifiers xsi:type="ecore:EClass" name="AssociationEnd" eSuperTypes="#//TitledNamedClassModelElement ../../com.bluexml.side.Common/model/Common.ecore#//Comment">
+    <eOperations name="isMandatory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="cardMin.toInteger() > 0"/>
+        <details key="description" value="returns true if the association end is mandatory"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isMany" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="(cardMax.toInteger() > 1) or (cardMax.toInteger() = -1)"/>
+        <details key="description" value="returns true if the association end has a multiple cardinality"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getOpposite" eType="#//AssociationEnd">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="let parent : Association = Association.allInstances() -> select(a | a.firstEnd = self or a.secondEnd = self) -> asSequence() -> first() in if (parent.firstEnd = self) then parent.secondEnd else parent.firstEnd endif"/>
+        <details key="description" value="returns the other side of the containing association"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardMin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardMax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="1"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isNavigable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="navigable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="linkedClass" eType="#//Clazz"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FirstEnd" eSuperTypes="#//AssociationEnd"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SecondEnd" eSuperTypes="#//AssociationEnd"/>
 </ecore:EPackage>

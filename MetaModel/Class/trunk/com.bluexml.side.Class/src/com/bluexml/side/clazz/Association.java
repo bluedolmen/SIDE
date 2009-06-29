@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getAssociation()
- * @model annotation="http://www.bluexml.com/OCL recursiveAssociationMustHaveRole='( self.isRecursive() and self.firstEnd.isNavigable and self.secondEnd.isNavigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name <> \'\' ) and ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name <> \'\' ))' MinAndMaxTarget='( self.secondEnd.cardMax <> \'-1\' ) implies ( self.secondEnd.cardMin <= self.secondEnd.cardMax )' MinAndMaxSource='( self.firstEnd.cardMax <> \'-1\' ) implies ( self.firstEnd.cardMin <= self.firstEnd.cardMax )' NameNull='not self.name.oclIsUndefined() and self.name <> \'\'' SourceNull='self.firstEnd.linkedClass->notEmpty()' TargetNull='self.secondEnd.linkedClass->notEmpty()' AtLeastOneNavigableEdge='(firstEnd.isNavigable or secondEnd.isNavigable)' ClassCantBeReferencedbyTwoSameNameAssociation='self.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1' IfAggregationOrCompositionThenUnidirectionalAssociation='(self.associationType <> AssociationType::Direct) implies (self.firstEnd.isNavigable xor self.secondEnd.isNavigable )'"
+ * @model annotation="http://www.bluexml.com/OCL reflexiveAssociationMustHaveRole='( self.isReflexive() and self.firstEnd.navigable and self.secondEnd.navigable ) implies ( ( not self.firstEnd.name.oclIsUndefined() and self.firstEnd.name <> \'\' ) and ( not self.secondEnd.name.oclIsUndefined() and self.secondEnd.name <> \'\' ))' MinAndMaxTarget='( self.secondEnd.cardMax <> \'-1\' ) implies ( self.secondEnd.cardMin <= self.secondEnd.cardMax )' MinAndMaxSource='( self.firstEnd.cardMax <> \'-1\' ) implies ( self.firstEnd.cardMin <= self.firstEnd.cardMax )' NameNull='not self.name.oclIsUndefined() and self.name <> \'\'' SourceNull='self.firstEnd.linkedClass->notEmpty()' TargetNull='self.secondEnd.linkedClass->notEmpty()' AtLeastOneNavigableEdge='(firstEnd.navigable or secondEnd.navigable)' ClassCantBeReferencedbyTwoSameNameAssociation='self.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1' IfAggregationOrCompositionThenUnidirectionalAssociation='(self.associationType <> AssociationType::Direct) implies (self.firstEnd.navigable xor self.secondEnd.navigable )'"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation'"
  * @generated
  */
@@ -66,12 +66,12 @@ public interface Association extends TitledNamedClassModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>First End</em>' containment reference.
-	 * @see #setFirstEnd(FirstEnd)
+	 * @see #setFirstEnd(AssociationEnd)
 	 * @see com.bluexml.side.clazz.ClazzPackage#getAssociation_FirstEnd()
 	 * @model containment="true"
 	 * @generated
 	 */
-	FirstEnd getFirstEnd();
+	AssociationEnd getFirstEnd();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.clazz.Association#getFirstEnd <em>First End</em>}' containment reference.
@@ -81,7 +81,7 @@ public interface Association extends TitledNamedClassModelElement {
 	 * @see #getFirstEnd()
 	 * @generated
 	 */
-	void setFirstEnd(FirstEnd value);
+	void setFirstEnd(AssociationEnd value);
 
 	/**
 	 * Returns the value of the '<em><b>Second End</b></em>' containment reference.
@@ -92,12 +92,12 @@ public interface Association extends TitledNamedClassModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Second End</em>' containment reference.
-	 * @see #setSecondEnd(SecondEnd)
+	 * @see #setSecondEnd(AssociationEnd)
 	 * @see com.bluexml.side.clazz.ClazzPackage#getAssociation_SecondEnd()
 	 * @model containment="true"
 	 * @generated
 	 */
-	SecondEnd getSecondEnd();
+	AssociationEnd getSecondEnd();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.clazz.Association#getSecondEnd <em>Second End</em>}' containment reference.
@@ -107,7 +107,7 @@ public interface Association extends TitledNamedClassModelElement {
 	 * @see #getSecondEnd()
 	 * @generated
 	 */
-	void setSecondEnd(SecondEnd value);
+	void setSecondEnd(AssociationEnd value);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -121,16 +121,16 @@ public interface Association extends TitledNamedClassModelElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='(self.firstEnd.linkedClass.getInheritedClasses() ->including(self.firstEnd.linkedClass) ->includes(self.secondEnd.linkedClass) and self.secondEnd.isNavigable)\ror \r(self.secondEnd.linkedClass.getInheritedClasses() ->including(self.secondEnd.linkedClass) ->includes(self.firstEnd.linkedClass) and self.firstEnd.isNavigable)\r'"
+	 *        annotation="http://www.bluexml.com/OCL body='(self.firstEnd.linkedClass.getInheritedClasses() ->including(self.firstEnd.linkedClass) ->includes(self.secondEnd.linkedClass) and self.secondEnd.navigable)\ror \r(self.secondEnd.linkedClass.getInheritedClasses() ->including(self.secondEnd.linkedClass) ->includes(self.firstEnd.linkedClass) and self.firstEnd.navigable)\r'"
 	 * @generated
 	 */
-	boolean isRecursive();
+	boolean isReflexive();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" required="true" upper="2"
-	 *        annotation="http://www.bluexml.com/OCL body='if (self.firstEnd.isNavigable and self.secondEnd.isNavigable) then \r\tSet{} ->including(self.firstEnd.linkedClass) ->including(self.secondEnd.linkedClass)\relse if (self.firstEnd.isNavigable) then\r\t\tSet{}->including(self.secondEnd.linkedClass)\r\telse if (self.secondEnd.isNavigable) then \r\t\t\tSet{}->including(self.firstEnd.linkedClass)\r\t\telse\r\t\t\tSet{}\r\t\tendif\r\tendif\rendif' description='get source Clazz'"
+	 *        annotation="http://www.bluexml.com/OCL body='if (self.firstEnd.navigable and self.secondEnd.navigable) then \r\tSet{} ->including(self.firstEnd.linkedClass) ->including(self.secondEnd.linkedClass)\relse if (self.firstEnd.navigable) then\r\t\tSet{}->including(self.secondEnd.linkedClass)\r\telse if (self.secondEnd.navigable) then \r\t\t\tSet{}->including(self.firstEnd.linkedClass)\r\t\telse\r\t\t\tSet{}\r\t\tendif\r\tendif\rendif' description='get source Clazz'"
 	 * @generated
 	 */
 	EList<Clazz> getSource();
@@ -139,9 +139,18 @@ public interface Association extends TitledNamedClassModelElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" required="true" upper="2"
-	 *        annotation="http://www.bluexml.com/OCL body='if (self.firstEnd.isNavigable and self.secondEnd.isNavigable) then \r\tSet{} ->including(self.firstEnd.linkedClass) ->including(self.secondEnd.linkedClass)\relse if (self.secondEnd.isNavigable) then\r\t\tSet{}->including(self.secondEnd.linkedClass)\r\telse if (self.firstEnd.isNavigable) then \r\t\t\tSet{}->including(self.firstEnd.linkedClass)\r\t\telse\r\t\t\tSet{}\r\t\tendif\r\tendif\rendif' description='get source Clazz'"
+	 *        annotation="http://www.bluexml.com/OCL body='if (self.firstEnd.navigable and self.secondEnd.navigable) then \r\tSet{} ->including(self.firstEnd.linkedClass) ->including(self.secondEnd.linkedClass)\relse if (self.secondEnd.navigable) then\r\t\tSet{}->including(self.secondEnd.linkedClass)\r\telse if (self.firstEnd.navigable) then \r\t\t\tSet{}->including(self.firstEnd.linkedClass)\r\t\telse\r\t\t\tSet{}\r\t\tendif\r\tendif\rendif' description='get source Clazz'"
 	 * @generated
 	 */
 	EList<Clazz> getTarget();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model upper="2"
+	 *        annotation="http://www.bluexml.com/OCL body='Sequence{self.firstEnd,self.secondEnd} -> select(ae | ae.linkedClass = clazz)\n' description='returns the association end for which the parameter class (clazz) is linked to'"
+	 * @generated
+	 */
+	EList<AssociationEnd> getAssociationEnd(Clazz clazz);
+		
 } // Association

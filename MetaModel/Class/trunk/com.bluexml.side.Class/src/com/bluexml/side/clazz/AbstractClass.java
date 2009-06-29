@@ -7,9 +7,8 @@
 package com.bluexml.side.clazz;
 
 import com.bluexml.side.common.Container;
+
 import org.eclipse.emf.common.util.EList;
-
-
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +29,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface AbstractClass extends TitledNamedClassModelElement, Container {
-
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
 	 * The list contents are of type {@link com.bluexml.side.clazz.Attribute}.
@@ -54,4 +52,5 @@ public interface AbstractClass extends TitledNamedClassModelElement, Container {
 	 * @generated
 	 */
 	boolean equalsForMerge(AbstractClass other);
+		
 } // AbstractClass

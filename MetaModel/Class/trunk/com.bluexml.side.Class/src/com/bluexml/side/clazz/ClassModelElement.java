@@ -6,10 +6,9 @@
  */
 package com.bluexml.side.clazz;
 
-import com.bluexml.side.common.MetaInfo;
-import org.eclipse.emf.common.util.EList;
-
 import com.bluexml.side.common.ModelElement;
+
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +27,6 @@ import com.bluexml.side.common.ModelElement;
  * @generated
  */
 public interface ClassModelElement extends ModelElement {
-
 	/**
 	 * Returns the value of the '<em><b>Has Comments</b></em>' containment reference list.
 	 * The list contents are of type {@link com.bluexml.side.clazz.ClassComment}.
@@ -44,4 +42,5 @@ public interface ClassModelElement extends ModelElement {
 	 * @generated
 	 */
 	EList<ClassComment> getHasComments();
+		
 } // ClassModelElement
