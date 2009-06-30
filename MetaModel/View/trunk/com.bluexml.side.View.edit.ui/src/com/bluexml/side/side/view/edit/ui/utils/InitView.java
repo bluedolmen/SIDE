@@ -23,10 +23,7 @@ import com.bluexml.side.side.view.edit.ui.utils.model.ClassUtils;
 import com.bluexml.side.side.view.edit.ui.utils.model.ViewUtils;
 import com.bluexml.side.util.libs.ui.UIUtils;
 import com.bluexml.side.view.AbstractView;
-import com.bluexml.side.view.Col;
-import com.bluexml.side.view.DataTable;
 import com.bluexml.side.view.FacetMap;
-import com.bluexml.side.view.Field;
 import com.bluexml.side.view.FieldElement;
 import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
@@ -80,7 +77,6 @@ public class InitView {
 							cmd.append(InitView.init(subList, domain));
 							c.add(subList);
 						}
-
 					}
 					cmd.append(AddCommand.create(domain, av,
 							ViewPackage.eINSTANCE.getFieldContainer_Children(),
@@ -97,6 +93,9 @@ public class InitView {
 		return cmd;
 	}
 
+	/**
+	 * Show a dialog to ask if we user wants a Data List or a Data Table (for result on Facet Map)
+	 */
 	private static void askTypeOfList() {
 		final Shell dialog = new Shell(Display.getCurrent().getActiveShell(),
 				SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
@@ -135,9 +134,6 @@ public class InitView {
 	      if (!Display.getCurrent().readAndDispatch())
 	    	  Display.getCurrent().sleep();
 	    }
-		
-		
-		
 	}
 
 	private static Collection<FieldElement> getViewElementForClass(Clazz c,
@@ -146,26 +142,10 @@ public class InitView {
 		if (c != null) {
 			// Attributes :
 			for (Attribute a : c.getAllAttributes()) {
-				Field f = ClassUtils.getFieldForAttribute(a);
-
-				FieldElement fg = null;
-
-				// Special case for Data Table where field are in column.
-				if (av instanceof DataTable) {
-					Col col = ViewFactory.eINSTANCE.createCol();
-					col.getChildren().add(f);
-					col.setName(f.getName());
-					fg = col;
-				}
-
-				if (fg == null) {
-					list.add(f);
-				} else {
-					list.add(fg);
-				}
+				FieldElement f = ClassUtils.getField(a, av);
+				list.add(f);
 			}
 		}
-
 		return list;
 	}
 

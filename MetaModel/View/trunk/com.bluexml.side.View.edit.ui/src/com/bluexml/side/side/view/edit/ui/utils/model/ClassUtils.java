@@ -21,11 +21,36 @@ import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.side.view.edit.ui.utils.FieldTransformation;
 import com.bluexml.side.view.AbstractView;
+import com.bluexml.side.view.Col;
+import com.bluexml.side.view.DataTable;
 import com.bluexml.side.view.Field;
+import com.bluexml.side.view.FieldElement;
 import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
 
 public class ClassUtils {
+	
+	/**
+	 * Return a field for a given view. Will add specific informations if needed (like column for DataTable)
+	 * @param a
+	 * @param view
+	 * @return
+	 */
+	public static FieldElement getField(Attribute a, AbstractView view) {
+		FieldElement result = null;
+		Field f = getFieldForAttribute(a);
+		// Special case for DataTable
+		if (view instanceof DataTable) {
+			Col col = ViewFactory.eINSTANCE.createCol();
+			col.getChildren().add(f);
+			col.setName(f.getName());
+			result = col;
+		} else {
+			result = f;
+		}
+		return result;
+	}
+	
 	/**
 	 * Return a field corresponding to the given attribute
 	 * @param att
@@ -78,9 +103,7 @@ public class ClassUtils {
 				field.setName(att.getLabel());
 				field.setMapTo(att);
 			}
-			
 		}
-		
 		return field;
 	}
 	
@@ -114,13 +137,12 @@ public class ClassUtils {
 			// #1 : Search things to add (new in Class)
 			List<Attribute> toAdd = getAddedAttributes(fields,attributes);
 			// #2 : Search things to delete (deleted in Class)
-			List<Field> toDelete = getFieldsToDelete(fields,attributes);
+			List<FieldElement> toDelete = getFieldsToDelete(fields,attributes);
 			// #3 : Search thing to changes
-			fields.removeAll(toDelete);
-			List<Field> toChange = getChangedFields(fields,attributes);
+			List<Attribute> toChange = getChangedAttributes(fields,attributes);
 			
 			// Create needed command
-			CompoundCommand delCmd = getDeleteCommand(domain, toDelete);
+			CompoundCommand delCmd = getDeleteCommand(domain, toDelete, view);
 			if (!delCmd.isEmpty()) {
 				cmd.append(delCmd);
 			}
@@ -128,12 +150,12 @@ public class ClassUtils {
 			if (!addCmd.isEmpty()) {
 				cmd.append(addCmd);
 			}
-			CompoundCommand uptCmd = getModificationCommand(domain,toChange,view);
+			CompoundCommand uptCmd = getModificationCommand(domain,toChange,view,fields);
 			if (!uptCmd.isEmpty()) {
 				cmd.append(uptCmd);
 			}
 		}
-		return null;
+		return cmd;
 	}
 
 	/**
@@ -141,11 +163,23 @@ public class ClassUtils {
 	 * @param domain
 	 * @param toChange
 	 * @param view
+	 * @param fields 
 	 */
 	private static CompoundCommand getModificationCommand(EditingDomain domain,
-			List<Field> toChange, AbstractView view) {
+			List<Attribute> toChange, AbstractView view, EList<Field> fields) {
 		CompoundCommand cmd = new CompoundCommand();
-		//TODO
+		List<FieldElement> toDelete = new ArrayList<FieldElement>();
+		for (Attribute a : toChange) {
+			Iterator<Field> it = fields.iterator();
+			while (it.hasNext()) {
+				Field f = it.next();
+				if (f.getMapTo().equals(a) && f.getPath().size() == 0) {
+					toDelete.add(f);
+				}
+			}
+		}
+		cmd.append(getDeleteCommand(domain, toDelete, view));
+		cmd.append(getAddCommand(domain, toChange, view));
 		return cmd;
 	}
 
@@ -153,12 +187,20 @@ public class ClassUtils {
 	 * Create command to delete given field
 	 * @param domain
 	 * @param toDelete
+	 * @param view 
 	 * @return
 	 */
 	private static CompoundCommand getDeleteCommand(EditingDomain domain,
-			List<Field> toDelete) {
+			List<FieldElement> toDelete, AbstractView view) {
 		CompoundCommand cmd = new CompoundCommand();
 		if (toDelete.size() > 0) {
+			if (view instanceof DataTable) {
+				List<FieldElement> newList = new ArrayList<FieldElement>();
+				for (FieldElement f : toDelete){
+					newList.add((FieldElement)f.eContainer());
+				}
+				toDelete = newList;
+			}
 			cmd.append(RemoveCommand.create(domain, toDelete));
 		}
 		return cmd;
@@ -174,7 +216,7 @@ public class ClassUtils {
 	private static CompoundCommand getAddCommand(EditingDomain domain, List<Attribute> toAdd, AbstractView view) {
 		CompoundCommand cmd = new CompoundCommand();
 		for (Attribute a : toAdd) {
-			Field f = ClassUtils.getFieldForAttribute(a);
+			FieldElement f = ClassUtils.getField(a, view);
 			cmd.append(AddCommand.create(domain, view, ViewPackage.eINSTANCE.getFieldContainer_Children(), f));
 		}
 		return cmd;
@@ -186,18 +228,18 @@ public class ClassUtils {
 	 * @param attributes
 	 * @return
 	 */
-	private static List<Field> getChangedFields(EList<Field> fields,
+	private static List<Attribute> getChangedAttributes(EList<Field> fields,
 			EList<Attribute> attributes) {
-		List<Field> result = new ArrayList<Field>();
+		List<Attribute> result = new ArrayList<Attribute>();
 		for (Attribute a : attributes) {
 			boolean found = false;
 			Iterator<Field> it = fields.iterator();
-			while (!found || it.hasNext()) {
+			while (it.hasNext()) {
 				Field f = it.next();
 				if (f.getMapTo().equals(a)) {
 					Field newField = ClassUtils.getFieldForAttribute(a);
 					if (!FieldTransformation.getAvailableTransformation(newField).contains(f.eClass().getName())) {
-						result.add(newField);
+						result.add(a);
 					}
 				}
 			}
@@ -211,20 +253,24 @@ public class ClassUtils {
 	 * @param attributes
 	 * @return
 	 */
-	private static List<Field> getFieldsToDelete(EList<Field> fields,
+	private static List<FieldElement> getFieldsToDelete(EList<Field> fields,
 			EList<Attribute> attributes) {
-		List<Field> result = new ArrayList<Field>();
+		List<FieldElement> result = new ArrayList<FieldElement>();
 		for (Field f : fields) {
-			boolean found = false;
-			Iterator<Attribute> it = attributes.iterator();
-			while (!found || it.hasNext()) {
-				Attribute a = it.next();
-				if (f.getMapTo().equals(a)) {
-					found = true;
+			if (f.getPath().size() == 0) {
+				boolean found = false;
+				Iterator<Attribute> it = attributes.iterator();
+				while (!found && it.hasNext()) {
+					Attribute a = it.next();
+					if (f.getMapTo().equals(a)) {
+						found = true;
+					}
 				}
-			}
-			if (!found) {
-				result.add(f);
+				if (!found) {
+					result.add(f);
+				}
+			} else {
+				//TODO : synchronization for linked field
 			}
 		}
 		
@@ -242,7 +288,7 @@ public class ClassUtils {
 		for (Attribute a : attributes) {
 			boolean found = false;
 			Iterator<Field> it = fields.iterator();
-			while (!found || it.hasNext()) {
+			while (!found && it.hasNext()) {
 				Field f = it.next();
 				if (f.getMapTo().equals(a)) {
 					found = true;

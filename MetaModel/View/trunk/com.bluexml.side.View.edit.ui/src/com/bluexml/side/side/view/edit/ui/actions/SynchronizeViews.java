@@ -2,6 +2,7 @@ package com.bluexml.side.side.view.edit.ui.actions;
 
 import java.util.Iterator;
 
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
@@ -56,9 +57,11 @@ ISelectionChangedListener {
 	private void doAction(ViewCollection av) {
 		InternalModification.dontMoveToDisabled();
 		try {
+			CompoundCommand cmd = new CompoundCommand();
 			for(AbstractView view : av.getViews()) {
-				domain.getCommandStack().execute(ClassUtils.synchronizeView(view, domain));
+				cmd.append(ClassUtils.synchronizeView(view, domain));
 			}
+			domain.getCommandStack().execute(cmd);
 		} catch (Exception e) {
 			e.printStackTrace();
 			EcorePlugin.INSTANCE.log("Synchronization failed : " + e.getMessage());
