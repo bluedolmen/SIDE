@@ -182,6 +182,9 @@
                <documentation>
                   The id of the generator class
                </documentation>
+               <appinfo>
+                  <meta.attribute kind="java"/>
+               </appinfo>
             </annotation>
          </attribute>
          <attribute name="description" type="string">
@@ -267,6 +270,9 @@
                <documentation>
                   
                </documentation>
+               <appinfo>
+                  <meta.attribute kind="java"/>
+               </appinfo>
             </annotation>
          </attribute>
          <attribute name="id" type="string" use="required">
