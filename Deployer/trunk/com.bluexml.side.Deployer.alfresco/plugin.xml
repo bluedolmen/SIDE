@@ -24,14 +24,19 @@
                </configurationParameter>
                <option
                      documentation="Check this option if you want to completely remove previous deployed packages.&lt;br&gt;May be longer but may avoid some side effects when done from time to time."
-                     key="com.bluexml.side.Application.deployer.alfresco.clean"
+                     key="com.bluexml.side.deployer.alfresco.clean"
                      label="clean">
                </option>
                <option
                      documentation="log changes made in alfresco war"
-                     key="com.bluexml.side.Application.deployer.alfresco.logChanges"
+                     key="com.bluexml.side.deployer.alfresco.logChanges"
                      label="log details">
                </option>
+               <configurationParameter
+                     documentation="location of the alfresco mmt to manage amp files"
+                     key="com.bluexml.side.deployer.alfresco.mmtPath"
+                     label="alfresco-mmt.jar file path">
+               </configurationParameter>
             </deployerVersion>
          </technologyVersion>
       </technology>
