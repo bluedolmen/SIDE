@@ -22,6 +22,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	public static String GENERATOR_OPTIONS_DATAMODEL = "alfresco.dataModel";
 	public static String GENERATOR_OPTIONS_SHARE_EXTENSION = "alfresco.share.extension";
 	public static String GENERATOR_OPTIONS_WEBSCRIPT_REPORT = "alfresco.webscript.report";
+	public static String GENERATOR_OPTIONS_DEFAULTFORMS = "class.alfrescoShare.defaultForms";
 	public static String GENERATOR_CODE = "CODE_GED_G_C_ALFRESCO_3";
 
 	XMLConflictResolver xmlresolver = null;
@@ -61,6 +62,13 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/doclist.get.js.mt");
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/doclist.get.json.ftl.mt");
 
+				// generator for alfresco Share web application
+				
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/file-upload-response-get-patch.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/flash-upload-js-get-patch.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/html-upload-js-get-patch.mt");
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/defaultdocListView/documentlist.get.properties.mt");
+
 			}
 
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_WEBSCRIPT_REPORT)) {
@@ -96,6 +104,12 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
 			}
 
+			
+			if (getGeneratorOptionValue(GENERATOR_OPTIONS_DEFAULTFORMS)) {
+				// default Forms for custom types
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/DefaultEditForms/web-framework-config-custom.mt");
+			}
+			
 			classTemplates = result;
 		}
 		return classTemplates;
@@ -165,4 +179,6 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	public boolean check() {
 		return SecurityHelper.check(GENERATOR_CODE, SidePreferences.getKey());
 	}
+
+	
 }

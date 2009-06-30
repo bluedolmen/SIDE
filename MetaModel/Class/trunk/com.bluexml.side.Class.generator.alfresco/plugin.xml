@@ -43,6 +43,11 @@
                         key="alfresco.webscript.report"
                         label="Alfresco Report Webscripts">
                   </option>
+                  <option
+                        documentation="genereate configuration to display all meta-datas in alfrescoShare forms"
+                        key="class.alfrescoShare.defaultForms"
+                        label="share forms">
+                  </option>
                </generatorVersion>
             </technologyVersion>
          </technology>
