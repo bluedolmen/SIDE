@@ -1,7 +1,7 @@
 package com.bluexml.side.util.generator.alfresco;
 
 import java.io.File;
-import java.util.List;
+import java.util.Collection;
 import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
@@ -13,9 +13,6 @@ public abstract class AbstractAlfrescoGenerator extends AbstractAcceleoGenerator
 
 	public static final String CONFIGURATION_PARAMETER_CATALINA_HOME = "CATALINA_HOME";
 	protected Properties moduleProperties;
-	protected IFile ampIFile = null;
-
-	
 
 	public String getTEMP_FOLDER(String model) {
 		return getTEMP_FOLDER() + File.separator + model;
@@ -23,22 +20,11 @@ public abstract class AbstractAlfrescoGenerator extends AbstractAcceleoGenerator
 
 	abstract public Properties buildModuleProperties(String modelId);
 
-	public IFile buildPackage(String modelId) throws Exception {
-		Packager alfrescoPakager = new Packager(IFileHelper.getIFolder(getTemporaryFolder()), buildModuleProperties(modelId), techVersion);
-		ampIFile = alfrescoPakager.buildAMP(null, doClean());
-		return ampIFile;
-	}
-
 	@Override
-	protected String getMetamodelURI() {
-		// TODO Auto-generated method stub
-		return null;
+	public Collection<IFile> buildPackages(String modelId) throws Exception {
+		AlfrescoPackager alfrescoPackager = new AlfrescoPackager(IFileHelper.getIFolder(getTemporaryFolder()), buildModuleProperties(modelId), techVersion);
+		Collection<IFile> pkgs = alfrescoPackager.buildPackages(doClean()).values();
+		return pkgs;
 	}
-
-	@Override
-	protected List<String> getTemplates() {
-		// TODO Auto-generated method stub
-		return null;
-	}	
 
 }

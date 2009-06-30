@@ -89,12 +89,12 @@ public class ViewFacetmapGenerator extends AbstractAcceleoGenerator implements F
 		if (groupedModels.entrySet().size()>1)
 			throw new Exception("Error too many root packages for facetmap.");
 		setTEMP_FOLDER("generator_" + getClass().getName());
-		buildPackage(groupedModels.keySet().toArray()[0].toString());
+		buildPackages(groupedModels.keySet().toArray()[0].toString());
 		return generatedFiles;
 	}
 
 	@Override
-	public IFile buildPackage(String modelId) throws Exception {
+	public Collection<IFile> buildPackages(String modelId) throws Exception {
 		String folder = IFileHelper.getSystemFolderPath(getTemporaryFolder()+FILESEP+modelId)+FILESEP;
 		//Destinations
 		String destFacets = folder + "zip" + FILESEP + WEBAPP_FACETS;
@@ -111,7 +111,12 @@ public class ViewFacetmapGenerator extends AbstractAcceleoGenerator implements F
 		File zipContent = new File(zipFolder + WEBAPP_CONTENT + ".zip");
 		ZipManager.zip(new File(destFacets), zipFacets, false);
 		ZipManager.zip(new File(destContent), zipContent, false);
-		return null;
+		Collection<IFile> pkgs = new ArrayList<IFile>();
+		//TODO : Add zipContent and zipFacets as IFile to pkgs collection
+		//pkgs.add(zipContent);
+
+		
+		return pkgs;
 	}
 
 }

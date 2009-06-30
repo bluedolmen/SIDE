@@ -257,15 +257,19 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		}
 	}
 
-	abstract public IFile buildPackage(String modelId) throws Exception;
+	
+	abstract public Collection<IFile> buildPackages(String modelId) throws Exception;
 	
 	public Collection<IFile> complete() throws Exception {
 		for (Map.Entry<String, List<IFile>> l : groupedModels.entrySet()) {
 			String rootName = l.getKey();
 			setTEMP_FOLDER("generator_" + getClass().getName() + File.separator + rootName);
-			IFile packageFile = buildPackage(rootName);
-			generatedFiles.add(packageFile);
-			addFileGeneratedLog(packageFile.getName() + " created.", packageFile.getName() + " created in " + packageFile.getFullPath(), IFileHelper.getFile(packageFile).toURI());
+			Collection<IFile> packageFile = buildPackages(rootName);
+			generatedFiles.addAll(packageFile);
+			for (IFile p : packageFile) {
+				addFileGeneratedLog(p.getName() + " created.", p.getName() + " created in " + p.getFullPath(), IFileHelper.getFile(p).toURI());
+			}
+			
 		}
 		for (IFile f : generatedFiles) {
 			addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());
