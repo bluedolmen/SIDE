@@ -17,6 +17,30 @@ public abstract class TreeNode extends TreeElement {
 	public String getId() {
 		return id;
 	}
+	
+	/**
+	 * Return a full qualified ID
+	 * @return
+	 */
+	public String getFullId() {
+		return getFullId(".");
+	}
+	
+	public String getFullId(String separator) {
+		String name = this.getId();
+		name = getFullId(separator, this.parent) + name;
+		return name;
+	}
+	
+	private String getFullId(String separator, TreeNode node) {
+		String name = "";
+		if (node != null) {
+			name = node.getId() + separator;
+			name = getFullId(separator, node.parent) + name;
+		}
+		return name;
+	}
+	
 	public boolean contains(TreeNode tn) {		
 		return contains(tn.getId());		
 	}

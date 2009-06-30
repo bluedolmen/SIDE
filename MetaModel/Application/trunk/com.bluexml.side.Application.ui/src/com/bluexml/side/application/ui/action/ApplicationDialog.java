@@ -1626,12 +1626,15 @@ public class ApplicationDialog extends Dialog {
 			IConfigurationElement[] contributions = Platform
 					.getExtensionRegistry().getConfigurationElementsFor(
 							EXTENSIONPOINT_ID);
-
+			System.err.println("-----------------------------------------------------------------");
 			for (IConfigurationElement config : contributions) {
+				System.err.println("");
+				System.err.println("________________________________________________________");
 				System.err.println("DEBUG : " + config.getName() + " " + config.getNamespaceIdentifier() +
 						 " (" + config.getAttribute("id") + " " + config.getAttribute("name") + ")"
 						);
 				manageConfiguration(config, null);
+				System.err.println("________________________________________________________");
 			}
 			initializeFromKey();
 		}
@@ -1653,8 +1656,10 @@ public class ApplicationDialog extends Dialog {
 				// We check if we already have this metamodel in your set
 				if (!metamodelSet.containsKey(m.getId())) {
 					metamodelSet.put(m.getId(), m);
+					System.err.println("\t + Add metamodel " + m.getId());
 				} else {
 					m = metamodelSet.get(m.getId());
+					System.err.println("\t * Get metamodel " + m.getId());
 				}
 				futurParent = m;
 			}
@@ -1663,12 +1668,15 @@ public class ApplicationDialog extends Dialog {
 			if (!omitedObject.contains(Technology.class)
 					&& config.getName().equalsIgnoreCase("technology")) {
 				Technology t = new Technology(config, (Metamodel) parent);
-				if (!technologySet.containsKey(t.getId())
+				String fullId = t.getFullId();
+				if (!technologySet.containsKey(fullId) 
 						|| (rootSet != technologySet && parent != technologySet
-								.get(t.getId()).getParent())) {
-					technologySet.put(t.getId(), t);
+								.get(fullId).getParent())) {
+					technologySet.put(fullId, t);
+					System.err.println("\t\t + Add techno " + fullId);
 				} else {
-					t = technologySet.get(t.getId());
+					t = technologySet.get(fullId);
+					System.err.println("\t\t * Get techno " + fullId);
 				}
 				futurParent = t;
 			}
@@ -1678,12 +1686,15 @@ public class ApplicationDialog extends Dialog {
 					&& config.getName().equalsIgnoreCase("technologyVersion")) {
 				TechnologyVersion tv = new TechnologyVersion(config,
 						(Technology) parent);
-				if (!technologyVersionSet.containsKey(tv.getId())
+				String fullId = tv.getFullId();
+				if (!technologyVersionSet.containsKey(fullId)
 						|| (rootSet != technologyVersionSet && parent != technologyVersionSet
-								.get(tv.getId()).getParent())) {
-					technologyVersionSet.put(tv.getId(), tv);
+								.get(fullId).getParent())) {
+					technologyVersionSet.put(fullId, tv);
+					System.err.println("\t\t\t + Add technoVersion " + fullId);
 				} else {
-					tv = technologyVersionSet.get(tv.getId());
+					tv = technologyVersionSet.get(fullId);
+					System.err.println("\t\t\t * Get technoVersion " + fullId);
 				}
 				futurParent = tv;
 			}
@@ -1692,12 +1703,15 @@ public class ApplicationDialog extends Dialog {
 			if (!omitedObject.contains(Generator.class)
 					&& config.getName().equalsIgnoreCase("generatorVersion")) {
 				Generator gv = new Generator(config, (TechnologyVersion) parent);
-				if (!generatorSet.containsKey(gv.getId())
+				String fullId = gv.getFullId();
+				if (!generatorSet.containsKey(fullId)
 						|| (rootSet != technologyVersionSet && parent != generatorSet
-								.get(gv.getId()).getParent())) {
-					generatorSet.put(gv.getId(), gv);
+								.get(fullId).getParent())) {
+					generatorSet.put(fullId, gv);
+					System.err.println("\t\t\t\t + Add Generator " + fullId);
 				} else {
-					gv = generatorSet.get(gv.getId());
+					gv = generatorSet.get(fullId);
+					System.err.println("\t\t\t\t * Get Generator " + fullId);
 				}
 				futurParent = gv;
 			}
@@ -1706,12 +1720,13 @@ public class ApplicationDialog extends Dialog {
 			if (!omitedObject.contains(Deployer.class)
 					&& config.getName().equalsIgnoreCase("deployerVersion")) {
 				Deployer dv = new Deployer(config, (TechnologyVersion) parent);
-				if (!deployerSet.containsKey(dv.getId())
+				String fullId = dv.getFullId();
+				if (!deployerSet.containsKey(fullId)
 						|| (rootSet != deployerSet && parent != deployerSet
-								.get(dv.getId()).getParent())) {
-					deployerSet.put(dv.getId(), dv);
+								.get(fullId).getParent())) {
+					deployerSet.put(fullId, dv);
 				} else {
-					dv = deployerSet.get(dv.getId());
+					dv = deployerSet.get(fullId);
 				}
 				futurParent = dv;
 			}
@@ -1722,17 +1737,19 @@ public class ApplicationDialog extends Dialog {
 				OptionComponant opt = null;
 				if (parent instanceof Generator) {
 					opt = new OptionGenerator(config, (Generator) parent);
-					if (!optGeneratorSet.containsKey(opt.getId())) {
-						optGeneratorSet.put(opt.getId(), (OptionGenerator) opt);
+					String fullid = opt.getFullId();
+					if (!optGeneratorSet.containsKey(fullid)) {
+						optGeneratorSet.put(fullid, (OptionGenerator) opt);
 					} else {
-						opt = optGeneratorSet.get(opt.getId());
+						opt = optGeneratorSet.get(fullid);
 					}
 				} else if (parent instanceof Deployer) {
 					opt = new OptionDeployer(config, (Deployer) parent);
-					if (!optDeployerSet.containsKey(opt.getId())) {
-						optDeployerSet.put(opt.getId(), (OptionDeployer) opt);
+					String fullid = opt.getFullId();
+					if (!optDeployerSet.containsKey(fullid)) {
+						optDeployerSet.put(fullid, (OptionDeployer) opt);
 					} else {
-						opt = optDeployerSet.get(opt.getId());
+						opt = optDeployerSet.get(fullid);
 					}
 				}
 				futurParent = opt;
