@@ -1628,6 +1628,9 @@ public class ApplicationDialog extends Dialog {
 							EXTENSIONPOINT_ID);
 
 			for (IConfigurationElement config : contributions) {
+				System.err.println("DEBUG : " + config.getName() + " " + config.getNamespaceIdentifier() +
+						 " (" + config.getAttribute("id") + " " + config.getAttribute("name") + ")"
+						);
 				manageConfiguration(config, null);
 			}
 			initializeFromKey();
