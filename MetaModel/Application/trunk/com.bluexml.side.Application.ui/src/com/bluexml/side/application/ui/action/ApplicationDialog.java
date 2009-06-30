@@ -1290,7 +1290,6 @@ public class ApplicationDialog extends Dialog {
 
 		// Column 2 : Value (Text, editable)
 		TextCellEditor textEditor = new TextCellEditor(generatorParameters);
-		((Text) textEditor.getControl()).setTextLimit(60);
 		editors[1] = (CellEditor) textEditor;
 
 		// Assign the cell editors to the viewer
