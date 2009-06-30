@@ -24,7 +24,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.clazz.generator.facetmap.utils.FacetmapConstants;
-import com.bluexml.side.util.generator.acceleo.AbstractAcceleoGenerator;
+import com.bluexml.side.util.generator.acceleo.AbstractAcceleoPackageGenerator;
 import com.bluexml.side.util.security.SecurityHelper;
 import com.bluexml.side.util.settings.SidePreferences;
 
@@ -32,7 +32,7 @@ import com.bluexml.side.util.settings.SidePreferences;
  * @author <a href="mailto:pbertrand@bluexml.com"> Pierre BERTRAND </a>
  *
  */
-public class ClassFacetmapGenerator extends AbstractAcceleoGenerator implements FacetmapConstants {
+public class ClassFacetmapGenerator extends AbstractAcceleoPackageGenerator implements FacetmapConstants {
 	public static String GENERATOR_CODE = "CODE_GED_G_C_FACETMAP_2";
 	public static String MMUri = "http://www.kerblue.org/class/1.0";
 	

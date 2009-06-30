@@ -57,9 +57,10 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 	private static final String DEFAULT_ENCODING = "ISO-8859-1";
 	private String fileEncoding = System.getProperty("file.encoding");
 	protected static final String versionProperty = null;
-	
+
 	/**
 	 * use to give an version number to this generation package
+	 * 
 	 * @return
 	 */
 	public String getVersioNumber() {
@@ -69,14 +70,12 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		}
 		return vn;
 	}
-	
+
 	private static final IGenFilter genFilter = new IGenFilter() {
 		public boolean filter(java.io.File script, IFile targetFile, EObject object) throws CoreException {
 			return true;
 		}
 	};
-
-	
 
 	abstract protected List<String> getTemplates();
 
@@ -257,26 +256,9 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		}
 	}
 
-	
-	abstract public Collection<IFile> buildPackages(String modelId) throws Exception;
-	
-	public Collection<IFile> complete() throws Exception {
-		for (Map.Entry<String, List<IFile>> l : groupedModels.entrySet()) {
-			String rootName = l.getKey();
-			setTEMP_FOLDER("generator_" + getClass().getName() + File.separator + rootName);
-			Collection<IFile> packageFile = buildPackages(rootName);
-			generatedFiles.addAll(packageFile);
-			for (IFile p : packageFile) {
-				addFileGeneratedLog(p.getName() + " created.", p.getName() + " created in " + p.getFullPath(), IFileHelper.getFile(p).toURI());
-			}
-			
-		}
-		for (IFile f : generatedFiles) {
-			addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());
-		}
-		return generatedFiles;
-	}
-	
+
+	abstract public Collection<IFile> complete() throws Exception;
+
 	public ConflitResolverHelper getCresolver() {
 		if (cresolver == null) {
 			cresolver = new ConflitResolverHelper(getTargetPath(), getTemporaryFolder());

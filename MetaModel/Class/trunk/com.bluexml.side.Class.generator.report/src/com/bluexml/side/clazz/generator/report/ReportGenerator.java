@@ -6,9 +6,9 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 
-import com.bluexml.side.util.generator.acceleo.AbstractAcceleoGenerator;
+import com.bluexml.side.util.generator.acceleo.AbstractAcceleoPackageGenerator;
 
-public class ReportGenerator extends AbstractAcceleoGenerator {
+public class ReportGenerator extends AbstractAcceleoPackageGenerator {
 	
 	public static String GENERATOR_OPTIONS_BIRT = "report.birt";
 	public static String GENERATOR_CONFIGURATION_PARAMETER_AUTHOR = "report.author";

@@ -6,10 +6,10 @@ import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
 
-import com.bluexml.side.util.generator.acceleo.AbstractAcceleoGenerator;
+import com.bluexml.side.util.generator.acceleo.AbstractAcceleoPackageGenerator;
 import com.bluexml.side.util.libs.IFileHelper;
 
-public abstract class AbstractAlfrescoGenerator extends AbstractAcceleoGenerator {
+public abstract class AbstractAlfrescoGenerator extends AbstractAcceleoPackageGenerator {
 
 	public static final String CONFIGURATION_PARAMETER_CATALINA_HOME = "CATALINA_HOME";
 	protected Properties moduleProperties;
