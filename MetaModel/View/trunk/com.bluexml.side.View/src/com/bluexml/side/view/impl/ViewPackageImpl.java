@@ -1797,14 +1797,14 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		   source, 
 		   new String[] {
 			 "description", "Get all the fields of the AbstractView, excluding the FieldContainers",
-			 "body", "if (self.oclIsKindOf(AbstractDataTable)) then self.oclAsType(AbstractDataTable).getCols()->children->select(oclIsKindOf(Field))->asSet()->union(self.getDirectChildFields()) else self.getDirectChildFields() endif"
+			 "body", "if (self.oclIsKindOf(AbstractDataTable)) then self.oclAsType(AbstractDataTable).getCols()->children->select(oclIsKindOf(Field))->asSet()->union(self.getDirectChildFields()).oclAsType(Field)  else self.getDirectChildFields().oclAsType(Field) endif"
 		   });		
 		addAnnotation
 		  (abstractViewEClass.getEOperations().get(1), 
 		   source, 
 		   new String[] {
 			 "description", "Get all the fields of the AbstractView, excluding the FieldContainers",
-			 "body", "self.children->select(oclIsKindOf(Field))"
+			 "body", "self.children->select(oclIsKindOf(Field)).oclAsType(Field) ->asSet()"
 		   });		
 		addAnnotation
 		  (abstractViewEClass.getEOperations().get(2), 
@@ -1825,7 +1825,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		   source, 
 		   new String[] {
 			 "description", "Get all the disabled Fields",
-			 "body", "if (self.oclIsKindOf(AbstractDataTable)) then self.oclAsType(AbstractDataTable).disabled->select(oclIsKindOf(Col)).oclAsType(Col).children->select(oclIsKindOf(Field))->asSet()->union(self.disabled->select(oclIsKindOf(Field))) else self.disabled->select(oclIsKindOf(Field)) endif"
+			 "body", "if (self.oclIsKindOf(AbstractDataTable)) then self.oclAsType(AbstractDataTable).disabled->select(oclIsKindOf(Col)).oclAsType(Col).children->select(oclIsKindOf(Field))->asSet()->union(self.disabled->select(oclIsKindOf(Field))).oclAsType(Field) else self.disabled->select(oclIsKindOf(Field)).oclAsType(Field) endif"
 		   });		
 		addAnnotation
 		  (abstractDataTableEClass.getEOperations().get(0), 

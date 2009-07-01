@@ -43,13 +43,13 @@
     <eOperations name="getFields" upperBound="-1" eType="#//Field">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="description" value="Get all the fields of the AbstractView, excluding the FieldContainers"/>
-        <details key="body" value="if (self.oclIsKindOf(AbstractDataTable)) then self.oclAsType(AbstractDataTable).getCols()->children->select(oclIsKindOf(Field))->asSet()->union(self.getDirectChildFields()) else self.getDirectChildFields() endif"/>
+        <details key="body" value="if (self.oclIsKindOf(AbstractDataTable)) then self.oclAsType(AbstractDataTable).getCols()->children->select(oclIsKindOf(Field))->asSet()->union(self.getDirectChildFields()).oclAsType(Field)  else self.getDirectChildFields().oclAsType(Field) endif"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getDirectChildFields" upperBound="-1" eType="#//Field">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="description" value="Get all the fields of the AbstractView, excluding the FieldContainers"/>
-        <details key="body" value="self.children->select(oclIsKindOf(Field))"/>
+        <details key="body" value="self.children->select(oclIsKindOf(Field)).oclAsType(Field) ->asSet()"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getInnerView" upperBound="-1" eType="#//AbstractView">
@@ -67,7 +67,7 @@
     <eOperations name="getDisabledFields" upperBound="-1" eType="#//Field">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="description" value="Get all the disabled Fields"/>
-        <details key="body" value="if (self.oclIsKindOf(AbstractDataTable)) then self.oclAsType(AbstractDataTable).disabled->select(oclIsKindOf(Col)).oclAsType(Col).children->select(oclIsKindOf(Field))->asSet()->union(self.disabled->select(oclIsKindOf(Field))) else self.disabled->select(oclIsKindOf(Field)) endif"/>
+        <details key="body" value="if (self.oclIsKindOf(AbstractDataTable)) then self.oclAsType(AbstractDataTable).disabled->select(oclIsKindOf(Col)).oclAsType(Col).children->select(oclIsKindOf(Field))->asSet()->union(self.disabled->select(oclIsKindOf(Field))).oclAsType(Field) else self.disabled->select(oclIsKindOf(Field)).oclAsType(Field) endif"/>
       </eAnnotations>
     </eOperations>
   </eClassifiers>

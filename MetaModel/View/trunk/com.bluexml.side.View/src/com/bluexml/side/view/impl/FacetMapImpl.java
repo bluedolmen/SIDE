@@ -281,10 +281,36 @@ public class FacetMapImpl extends AbstractViewOfImpl implements FacetMap {
 	 * @generated
 	 */
 	public EList<FieldElement> getResultsAttributes() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (getResultsAttributesBodyOCL == null) {
+			EOperation eOperation = ViewPackage.Literals.FACET_MAP.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ViewPackage.Literals.FACET_MAP, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getResultsAttributesBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getResultsAttributesBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<FieldElement> result = (Collection<FieldElement>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<FieldElement>(result.size(), result.toArray());
+	
 	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getResultsAttributes <em>Get Results Attributes</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResultsAttributes
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getResultsAttributesBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->

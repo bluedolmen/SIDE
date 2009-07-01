@@ -304,10 +304,36 @@ public abstract class AbstractDataTableImpl extends AbstractViewOfImpl implement
 	 * @generated
 	 */
 	public EList<Col> getCols() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (getColsBodyOCL == null) {
+			EOperation eOperation = ViewPackage.Literals.ABSTRACT_DATA_TABLE.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ViewPackage.Literals.ABSTRACT_DATA_TABLE, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getColsBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getColsBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Col> result = (Collection<Col>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Col>(result.size(), result.toArray());
+	
 	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getCols <em>Get Cols</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCols
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getColsBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->
