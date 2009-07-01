@@ -417,7 +417,7 @@ public class TreeItemProvider
 			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__METAINFO);
 			childrenFeatures.add(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN);
 			childrenFeatures.add(ViewPackage.Literals.FIELD_CONTAINER__DISABLED);
-			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS);
+			childrenFeatures.add(ViewPackage.Literals.ACTIONABLE__OPERATIONS);
 			childrenFeatures.add(ViewPackage.Literals.TREE__NODE_VALUE);
 		}
 		return childrenFeatures;
@@ -574,12 +574,12 @@ public class TreeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createPasswordField()));
+				 ViewFactory.eINSTANCE.createBooleanField()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createBooleanField()));
+				 ViewFactory.eINSTANCE.createPasswordField()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -689,12 +689,12 @@ public class TreeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createPasswordField()));
+				 ViewFactory.eINSTANCE.createBooleanField()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createBooleanField()));
+				 ViewFactory.eINSTANCE.createPasswordField()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -768,12 +768,12 @@ public class TreeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS,
+				(ViewPackage.Literals.ACTIONABLE__OPERATIONS,
 				 CommonFactory.eINSTANCE.createOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS,
+				(ViewPackage.Literals.ACTIONABLE__OPERATIONS,
 				 CommonFactory.eINSTANCE.createOperationGroup()));
 
 		newChildDescriptors.add
@@ -814,12 +814,12 @@ public class TreeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.TREE__NODE_VALUE,
-				 ViewFactory.eINSTANCE.createPasswordField()));
+				 ViewFactory.eINSTANCE.createBooleanField()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.TREE__NODE_VALUE,
-				 ViewFactory.eINSTANCE.createBooleanField()));
+				 ViewFactory.eINSTANCE.createPasswordField()));
 
 		newChildDescriptors.add
 			(createChildParameter

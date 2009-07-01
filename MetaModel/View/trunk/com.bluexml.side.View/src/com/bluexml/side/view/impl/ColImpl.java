@@ -16,6 +16,7 @@ import org.eclipse.ocl.ecore.OCL;
 
 import com.bluexml.side.common.OperationComponent;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+import com.bluexml.side.view.Actionable;
 import com.bluexml.side.view.Col;
 import com.bluexml.side.view.Editable;
 import com.bluexml.side.view.Filterable;
@@ -36,7 +37,7 @@ import com.bluexml.side.view.ViewPackage;
  *   <li>{@link com.bluexml.side.view.impl.ColImpl#isEditable <em>Editable</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.ColImpl#getFiltering <em>Filtering</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.ColImpl#getSorting <em>Sorting</em>}</li>
- *   <li>{@link com.bluexml.side.view.impl.ColImpl#getActions <em>Actions</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.ColImpl#getOperations <em>Operations</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,14 +105,14 @@ public class ColImpl extends FieldContainerImpl implements Col {
 	protected Sorting sorting;
 
 	/**
-	 * The cached value of the '{@link #getActions() <em>Actions</em>}' containment reference.
+	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getActions()
+	 * @see #getOperations()
 	 * @generated
 	 * @ordered
 	 */
-	protected OperationComponent actions;
+	protected OperationComponent operations;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -265,8 +266,8 @@ public class ColImpl extends FieldContainerImpl implements Col {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OperationComponent getActions() {
-		return actions;
+	public OperationComponent getOperations() {
+		return operations;
 	}
 
 	/**
@@ -274,11 +275,11 @@ public class ColImpl extends FieldContainerImpl implements Col {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetActions(OperationComponent newActions, NotificationChain msgs) {
-		OperationComponent oldActions = actions;
-		actions = newActions;
+	public NotificationChain basicSetOperations(OperationComponent newOperations, NotificationChain msgs) {
+		OperationComponent oldOperations = operations;
+		operations = newOperations;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ViewPackage.COL__ACTIONS, oldActions, newActions);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ViewPackage.COL__OPERATIONS, oldOperations, newOperations);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -289,18 +290,18 @@ public class ColImpl extends FieldContainerImpl implements Col {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setActions(OperationComponent newActions) {
-		if (newActions != actions) {
+	public void setOperations(OperationComponent newOperations) {
+		if (newOperations != operations) {
 			NotificationChain msgs = null;
-			if (actions != null)
-				msgs = ((InternalEObject)actions).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ViewPackage.COL__ACTIONS, null, msgs);
-			if (newActions != null)
-				msgs = ((InternalEObject)newActions).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ViewPackage.COL__ACTIONS, null, msgs);
-			msgs = basicSetActions(newActions, msgs);
+			if (operations != null)
+				msgs = ((InternalEObject)operations).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ViewPackage.COL__OPERATIONS, null, msgs);
+			if (newOperations != null)
+				msgs = ((InternalEObject)newOperations).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ViewPackage.COL__OPERATIONS, null, msgs);
+			msgs = basicSetOperations(newOperations, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.COL__ACTIONS, newActions, newActions));
+			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.COL__OPERATIONS, newOperations, newOperations));
 	}
 
 	/**
@@ -315,8 +316,8 @@ public class ColImpl extends FieldContainerImpl implements Col {
 				return basicSetFiltering(null, msgs);
 			case ViewPackage.COL__SORTING:
 				return basicSetSorting(null, msgs);
-			case ViewPackage.COL__ACTIONS:
-				return basicSetActions(null, msgs);
+			case ViewPackage.COL__OPERATIONS:
+				return basicSetOperations(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -337,8 +338,8 @@ public class ColImpl extends FieldContainerImpl implements Col {
 				return getFiltering();
 			case ViewPackage.COL__SORTING:
 				return getSorting();
-			case ViewPackage.COL__ACTIONS:
-				return getActions();
+			case ViewPackage.COL__OPERATIONS:
+				return getOperations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -363,8 +364,8 @@ public class ColImpl extends FieldContainerImpl implements Col {
 			case ViewPackage.COL__SORTING:
 				setSorting((Sorting)newValue);
 				return;
-			case ViewPackage.COL__ACTIONS:
-				setActions((OperationComponent)newValue);
+			case ViewPackage.COL__OPERATIONS:
+				setOperations((OperationComponent)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -390,8 +391,8 @@ public class ColImpl extends FieldContainerImpl implements Col {
 			case ViewPackage.COL__SORTING:
 				setSorting((Sorting)null);
 				return;
-			case ViewPackage.COL__ACTIONS:
-				setActions((OperationComponent)null);
+			case ViewPackage.COL__OPERATIONS:
+				setOperations((OperationComponent)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -413,8 +414,8 @@ public class ColImpl extends FieldContainerImpl implements Col {
 				return filtering != null;
 			case ViewPackage.COL__SORTING:
 				return sorting != null;
-			case ViewPackage.COL__ACTIONS:
-				return actions != null;
+			case ViewPackage.COL__OPERATIONS:
+				return operations != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -450,6 +451,12 @@ public class ColImpl extends FieldContainerImpl implements Col {
 				default: return -1;
 			}
 		}
+		if (baseClass == Actionable.class) {
+			switch (derivedFeatureID) {
+				case ViewPackage.COL__OPERATIONS: return ViewPackage.ACTIONABLE__OPERATIONS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -481,6 +488,12 @@ public class ColImpl extends FieldContainerImpl implements Col {
 		if (baseClass == Sortable.class) {
 			switch (baseFeatureID) {
 				case ViewPackage.SORTABLE__SORTING: return ViewPackage.COL__SORTING;
+				default: return -1;
+			}
+		}
+		if (baseClass == Actionable.class) {
+			switch (baseFeatureID) {
+				case ViewPackage.ACTIONABLE__OPERATIONS: return ViewPackage.COL__OPERATIONS;
 				default: return -1;
 			}
 		}

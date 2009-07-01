@@ -127,7 +127,7 @@ public class DataListItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ViewPackage.Literals.FILTERABLE__FILTERING);
 			childrenFeatures.add(ViewPackage.Literals.SORTABLE__SORTING);
-			childrenFeatures.add(ViewPackage.Literals.COL__ACTIONS);
+			childrenFeatures.add(ViewPackage.Literals.ACTIONABLE__OPERATIONS);
 		}
 		return childrenFeatures;
 	}
@@ -188,7 +188,7 @@ public class DataListItemProvider
 				return;
 			case ViewPackage.DATA_LIST__FILTERING:
 			case ViewPackage.DATA_LIST__SORTING:
-			case ViewPackage.DATA_LIST__ACTIONS:
+			case ViewPackage.DATA_LIST__OPERATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -220,9 +220,9 @@ public class DataListItemProvider
 			(createChildParameter
 				(ViewPackage.Literals.SORTABLE__SORTING,
 				 ViewFactory.eINSTANCE.createSorting()));
-		
+
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 			(ViewPackage.Literals.PAGINABLE__PAGING,
 			 ViewFactory.eINSTANCE.createPaging()));
 
@@ -251,11 +251,10 @@ public class DataListItemProvider
 		boolean qualify =
 			childFeature == ViewPackage.Literals.FIELD_CONTAINER__CHILDREN ||
 			childFeature == ViewPackage.Literals.FIELD_CONTAINER__DISABLED ||
-			childFeature == ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS ||
 			childFeature == ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS ||
 			childFeature == ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS ||
 			childFeature == ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_DEFAULT_COL_ACTIONS ||
-			childFeature == ViewPackage.Literals.COL__ACTIONS;
+			childFeature == ViewPackage.Literals.ACTIONABLE__OPERATIONS;
 
 		if (qualify) {
 			return getString

@@ -73,8 +73,8 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 			case ViewPackage.TREE: return createTree();
 			case ViewPackage.COMPOSED_VIEW: return createComposedView();
 			case ViewPackage.TEXT_FIELD: return createTextField();
-			case ViewPackage.PASSWORD_FIELD: return createPasswordField();
 			case ViewPackage.BOOLEAN_FIELD: return createBooleanField();
+			case ViewPackage.PASSWORD_FIELD: return createPasswordField();
 			case ViewPackage.FLOAT_FIELD: return createFloatField();
 			case ViewPackage.ACTION_FIELD: return createActionField();
 			case ViewPackage.DATE_FIELD: return createDateField();
@@ -89,6 +89,7 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 			case ViewPackage.URL_FIELD: return createURLField();
 			case ViewPackage.IMAGE_FIELD: return createImageField();
 			case ViewPackage.FIELD_GROUP: return createFieldGroup();
+			case ViewPackage.ACTIONABLE: return createActionable();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -426,6 +427,16 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 	public FieldGroup createFieldGroup() {
 		FieldGroupImpl fieldGroup = new FieldGroupImpl();
 		return fieldGroup;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Actionable createActionable() {
+		ActionableImpl actionable = new ActionableImpl();
+		return actionable;
 	}
 
 	/**

@@ -59,7 +59,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//FieldElement/hidden"/>
     </genClasses>
     <genClasses ecoreClass="View.ecore#//AbstractView">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//AbstractView/operations"/>
       <genOperations ecoreOperation="View.ecore#//AbstractView/getFields"/>
       <genOperations ecoreOperation="View.ecore#//AbstractView/getDirectChildFields"/>
       <genOperations ecoreOperation="View.ecore#//AbstractView/getInnerView"/>
@@ -72,9 +71,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//AbstractDataTable/haveDefaultColActions"/>
       <genOperations ecoreOperation="View.ecore#//AbstractDataTable/getCols"/>
     </genClasses>
-    <genClasses ecoreClass="View.ecore#//Col">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//Col/actions"/>
-    </genClasses>
+    <genClasses ecoreClass="View.ecore#//Col"/>
     <genClasses ecoreClass="View.ecore#//Paging">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//Paging/paginationStyle"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//Paging/maxItems"/>
@@ -117,10 +114,10 @@
     <genClasses ecoreClass="View.ecore#//TextField">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//TextField/widgetType"/>
     </genClasses>
-    <genClasses ecoreClass="View.ecore#//PasswordField"/>
     <genClasses ecoreClass="View.ecore#//BooleanField">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//BooleanField/split"/>
     </genClasses>
+    <genClasses ecoreClass="View.ecore#//PasswordField"/>
     <genClasses ecoreClass="View.ecore#//FloatField"/>
     <genClasses ecoreClass="View.ecore#//ActionField">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//ActionField/operations"/>
@@ -159,6 +156,9 @@
     <genClasses ecoreClass="View.ecore#//FieldGroup"/>
     <genClasses ecoreClass="View.ecore#//AbstractViewOf">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference View.ecore#//AbstractViewOf/viewOf"/>
+    </genClasses>
+    <genClasses ecoreClass="View.ecore#//Actionable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//Actionable/operations"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -8,8 +8,8 @@ package com.bluexml.side.view.provider;
 
 
 import com.bluexml.side.common.CommonFactory;
-import com.bluexml.side.view.DataTable;
-import com.bluexml.side.view.ViewFactory;
+
+import com.bluexml.side.view.Actionable;
 import com.bluexml.side.view.ViewPackage;
 
 import java.util.Collection;
@@ -18,25 +18,32 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.ResourceLocator;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.emf.ecore.util.FeatureMapUtil;
+
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link com.bluexml.side.view.DataTable} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.view.Actionable} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class DataTableItemProvider
-	extends AbstractDataTableItemProvider
+public class ActionableItemProvider
+	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -49,7 +56,7 @@ public class DataTableItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DataTableItemProvider(AdapterFactory adapterFactory) {
+	public ActionableItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -64,31 +71,8 @@ public class DataTableItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addDefaultColSetUpPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Default Col Set Up feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDefaultColSetUpPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_DataTable_defaultColSetUp_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_DataTable_defaultColSetUp_feature", "_UI_DataTable_type"),
-				 ViewPackage.Literals.DATA_TABLE__DEFAULT_COL_SET_UP,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -122,28 +106,25 @@ public class DataTableItemProvider
 	}
 
 	/**
-	 * This returns DataTable.gif.
+	 * This returns Actionable.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/DataTable"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Actionable"));
 	}
 
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @_generated
+	 * @generated
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DataTable)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_DataTable_type") :
-			label;
+		return getString("_UI_Actionable_type");
 	}
 
 	/**
@@ -157,8 +138,8 @@ public class DataTableItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(DataTable.class)) {
-			case ViewPackage.DATA_TABLE__OPERATIONS:
+		switch (notification.getFeatureID(Actionable.class)) {
+			case ViewPackage.ACTIONABLE__OPERATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -188,30 +169,42 @@ public class DataTableItemProvider
 	}
 
 	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * This returns the icon image for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == ViewPackage.Literals.FIELD_CONTAINER__CHILDREN ||
-			childFeature == ViewPackage.Literals.FIELD_CONTAINER__DISABLED ||
-			childFeature == ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS ||
-			childFeature == ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS ||
-			childFeature == ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_DEFAULT_COL_ACTIONS ||
-			childFeature == ViewPackage.Literals.ACTIONABLE__OPERATIONS;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+	public Object getCreateChildImage(Object owner, Object feature, Object child, Collection<?> selection) {
+		if (feature instanceof EStructuralFeature && FeatureMapUtil.isFeatureMap((EStructuralFeature)feature)) {
+			FeatureMap.Entry entry = (FeatureMap.Entry)child;
+			feature = entry.getEStructuralFeature();
+			child = entry.getValue();
 		}
-		return super.getCreateChildText(owner, feature, child, selection);
+
+		if (feature instanceof EReference && child instanceof EObject) {
+			String name = "full/obj16/" + ((EObject)child).eClass().getName();
+
+			try {
+				return getResourceLocator().getImage(name);
+			}
+			catch (Exception e) {
+				ViewEditPlugin.INSTANCE.log(e);
+			}
+		}
+
+		return super.getCreateChildImage(owner, feature, child, selection);
+	}
+
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		return ViewEditPlugin.INSTANCE;
 	}
 
 }

@@ -12,6 +12,7 @@ import com.bluexml.side.view.AbstractDataTable;
 import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.AbstractViewOf;
 import com.bluexml.side.view.ActionField;
+import com.bluexml.side.view.Actionable;
 import com.bluexml.side.view.BooleanField;
 import com.bluexml.side.view.Col;
 import com.bluexml.side.view.ComposedView;
@@ -368,6 +369,13 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass actionableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum sortOrderEEnum = null;
 
 	/**
@@ -578,15 +586,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractView_Operations() {
-		return (EReference)abstractViewEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getAbstractDataTable() {
 		return abstractDataTableEClass;
 	}
@@ -625,15 +624,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 */
 	public EClass getCol() {
 		return colEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCol_Actions() {
-		return (EReference)colEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1253,6 +1243,24 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getActionable() {
+		return actionableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getActionable_Operations() {
+		return (EReference)actionableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getSortOrder() {
 		return sortOrderEEnum;
 	}
@@ -1354,7 +1362,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		createEAttribute(fieldElementEClass, FIELD_ELEMENT__HIDDEN);
 
 		abstractViewEClass = createEClass(ABSTRACT_VIEW);
-		createEReference(abstractViewEClass, ABSTRACT_VIEW__OPERATIONS);
 
 		abstractDataTableEClass = createEClass(ABSTRACT_DATA_TABLE);
 		createEReference(abstractDataTableEClass, ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS);
@@ -1362,7 +1369,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		createEReference(abstractDataTableEClass, ABSTRACT_DATA_TABLE__HAVE_DEFAULT_COL_ACTIONS);
 
 		colEClass = createEClass(COL);
-		createEReference(colEClass, COL__ACTIONS);
 
 		pagingEClass = createEClass(PAGING);
 		createEAttribute(pagingEClass, PAGING__PAGINATION_STYLE);
@@ -1408,10 +1414,10 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		textFieldEClass = createEClass(TEXT_FIELD);
 		createEAttribute(textFieldEClass, TEXT_FIELD__WIDGET_TYPE);
 
-		passwordFieldEClass = createEClass(PASSWORD_FIELD);
-
 		booleanFieldEClass = createEClass(BOOLEAN_FIELD);
 		createEAttribute(booleanFieldEClass, BOOLEAN_FIELD__SPLIT);
+
+		passwordFieldEClass = createEClass(PASSWORD_FIELD);
 
 		floatFieldEClass = createEClass(FLOAT_FIELD);
 
@@ -1463,6 +1469,9 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		abstractViewOfEClass = createEClass(ABSTRACT_VIEW_OF);
 		createEReference(abstractViewOfEClass, ABSTRACT_VIEW_OF__VIEW_OF);
+
+		actionableEClass = createEClass(ACTIONABLE);
+		createEReference(actionableEClass, ACTIONABLE__OPERATIONS);
 
 		// Create enums
 		sortOrderEEnum = createEEnum(SORT_ORDER);
@@ -1518,22 +1527,26 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		colEClass.getESuperTypes().add(this.getEditable());
 		colEClass.getESuperTypes().add(this.getFilterable());
 		colEClass.getESuperTypes().add(this.getSortable());
+		colEClass.getESuperTypes().add(this.getActionable());
 		stylingEClass.getESuperTypes().add(theCommonPackage.getMetaInfoGroup());
 		dataListEClass.getESuperTypes().add(this.getAbstractDataTable());
 		dataListEClass.getESuperTypes().add(this.getCol());
 		dataTableEClass.getESuperTypes().add(this.getAbstractDataTable());
+		dataTableEClass.getESuperTypes().add(this.getActionable());
 		facetMapEClass.getESuperTypes().add(this.getPaginable());
 		facetMapEClass.getESuperTypes().add(this.getAbstractViewOf());
+		facetMapEClass.getESuperTypes().add(this.getActionable());
 		treeEClass.getESuperTypes().add(this.getSortable());
 		treeEClass.getESuperTypes().add(this.getEditable());
 		treeEClass.getESuperTypes().add(this.getMovable());
 		treeEClass.getESuperTypes().add(this.getFilterable());
 		treeEClass.getESuperTypes().add(this.getAbstractViewOf());
+		treeEClass.getESuperTypes().add(this.getActionable());
 		composedViewEClass.getESuperTypes().add(this.getAbstractView());
 		fieldEClass.getESuperTypes().add(this.getFieldElement());
 		textFieldEClass.getESuperTypes().add(this.getField());
-		passwordFieldEClass.getESuperTypes().add(this.getField());
 		booleanFieldEClass.getESuperTypes().add(this.getField());
+		passwordFieldEClass.getESuperTypes().add(this.getField());
 		floatFieldEClass.getESuperTypes().add(this.getField());
 		actionFieldEClass.getESuperTypes().add(this.getField());
 		dateFieldEClass.getESuperTypes().add(this.getField());
@@ -1566,7 +1579,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		initEAttribute(getFieldElement_Hidden(), ecorePackage.getEBoolean(), "hidden", null, 0, 1, FieldElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractViewEClass, AbstractView.class, "AbstractView", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAbstractView_Operations(), theCommonPackage.getOperationComponent(), null, "operations", null, 0, 1, AbstractView.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(abstractViewEClass, this.getField(), "getFields", 0, -1, IS_UNIQUE, IS_ORDERED);
 
@@ -1586,7 +1598,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		addEOperation(abstractDataTableEClass, this.getCol(), "getCols", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(colEClass, Col.class, "Col", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCol_Actions(), theCommonPackage.getOperationComponent(), null, "actions", null, 0, 1, Col.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(pagingEClass, Paging.class, "Paging", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPaging_PaginationStyle(), this.getPaginationStyle(), "paginationStyle", null, 1, 1, Paging.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1634,10 +1645,10 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		initEClass(textFieldEClass, TextField.class, "TextField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTextField_WidgetType(), this.getWidgetTextType(), "widgetType", null, 0, 1, TextField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(passwordFieldEClass, PasswordField.class, "PasswordField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(booleanFieldEClass, BooleanField.class, "BooleanField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBooleanField_Split(), ecorePackage.getEBoolean(), "split", null, 0, 1, BooleanField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(passwordFieldEClass, PasswordField.class, "PasswordField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(floatFieldEClass, FloatField.class, "FloatField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1689,6 +1700,9 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		initEClass(abstractViewOfEClass, AbstractViewOf.class, "AbstractViewOf", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractViewOf_ViewOf(), theCommonPackage.getContainer(), null, "viewOf", null, 0, 1, AbstractViewOf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(actionableEClass, Actionable.class, "Actionable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getActionable_Operations(), theCommonPackage.getOperationComponent(), null, "operations", null, 0, 1, Actionable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sortOrderEEnum, SortOrder.class, "SortOrder");

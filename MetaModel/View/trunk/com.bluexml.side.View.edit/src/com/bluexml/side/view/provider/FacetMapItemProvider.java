@@ -335,7 +335,7 @@ public class FacetMapItemProvider extends PaginableItemProvider implements
 			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__METAINFO);
 			childrenFeatures.add(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN);
 			childrenFeatures.add(ViewPackage.Literals.FIELD_CONTAINER__DISABLED);
-			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS);
+			childrenFeatures.add(ViewPackage.Literals.ACTIONABLE__OPERATIONS);
 		}
 		return childrenFeatures;
 	}

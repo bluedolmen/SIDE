@@ -617,22 +617,13 @@ public interface ViewPackage extends EPackage {
 	int ABSTRACT_VIEW__DISABLED = FIELD_CONTAINER__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_VIEW__OPERATIONS = FIELD_CONTAINER_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Abstract View</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_VIEW_FEATURE_COUNT = FIELD_CONTAINER_FEATURE_COUNT + 1;
+	int ABSTRACT_VIEW_FEATURE_COUNT = FIELD_CONTAINER_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.impl.AbstractDataTableImpl <em>Abstract Data Table</em>}' class.
@@ -849,22 +840,13 @@ public interface ViewPackage extends EPackage {
 	int ABSTRACT_DATA_TABLE__DISABLED = DATA_TABLE_ELEMENT_FEATURE_COUNT + 14;
 
 	/**
-	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_DATA_TABLE__OPERATIONS = DATA_TABLE_ELEMENT_FEATURE_COUNT + 15;
-
-	/**
 	 * The feature id for the '<em><b>View Of</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE__VIEW_OF = DATA_TABLE_ELEMENT_FEATURE_COUNT + 16;
+	int ABSTRACT_DATA_TABLE__VIEW_OF = DATA_TABLE_ELEMENT_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Have Row Actions</b></em>' containment reference.
@@ -873,7 +855,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS = DATA_TABLE_ELEMENT_FEATURE_COUNT + 17;
+	int ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS = DATA_TABLE_ELEMENT_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Have Select Actions</b></em>' containment reference.
@@ -882,7 +864,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS = DATA_TABLE_ELEMENT_FEATURE_COUNT + 18;
+	int ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS = DATA_TABLE_ELEMENT_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Have Default Col Actions</b></em>' containment reference.
@@ -891,7 +873,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE__HAVE_DEFAULT_COL_ACTIONS = DATA_TABLE_ELEMENT_FEATURE_COUNT + 19;
+	int ABSTRACT_DATA_TABLE__HAVE_DEFAULT_COL_ACTIONS = DATA_TABLE_ELEMENT_FEATURE_COUNT + 18;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Data Table</em>' class.
@@ -900,7 +882,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATA_TABLE_FEATURE_COUNT = DATA_TABLE_ELEMENT_FEATURE_COUNT + 20;
+	int ABSTRACT_DATA_TABLE_FEATURE_COUNT = DATA_TABLE_ELEMENT_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -1065,13 +1047,13 @@ public interface ViewPackage extends EPackage {
 	int COL__SORTING = FIELD_CONTAINER_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Actions</b></em>' containment reference.
+	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COL__ACTIONS = FIELD_CONTAINER_FEATURE_COUNT + 4;
+	int COL__OPERATIONS = FIELD_CONTAINER_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Col</em>' class.
@@ -1417,15 +1399,6 @@ public interface ViewPackage extends EPackage {
 	int DATA_LIST__DISABLED = ABSTRACT_DATA_TABLE__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_LIST__OPERATIONS = ABSTRACT_DATA_TABLE__OPERATIONS;
-
-	/**
 	 * The feature id for the '<em><b>View Of</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1498,13 +1471,13 @@ public interface ViewPackage extends EPackage {
 	int DATA_LIST__SORTING = ABSTRACT_DATA_TABLE_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Actions</b></em>' containment reference.
+	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_LIST__ACTIONS = ABSTRACT_DATA_TABLE_FEATURE_COUNT + 4;
+	int DATA_LIST__OPERATIONS = ABSTRACT_DATA_TABLE_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Data List</em>' class.
@@ -1661,15 +1634,6 @@ public interface ViewPackage extends EPackage {
 	int DATA_TABLE__DISABLED = ABSTRACT_DATA_TABLE__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TABLE__OPERATIONS = ABSTRACT_DATA_TABLE__OPERATIONS;
-
-	/**
 	 * The feature id for the '<em><b>View Of</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1706,13 +1670,22 @@ public interface ViewPackage extends EPackage {
 	int DATA_TABLE__HAVE_DEFAULT_COL_ACTIONS = ABSTRACT_DATA_TABLE__HAVE_DEFAULT_COL_ACTIONS;
 
 	/**
+	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__OPERATIONS = ABSTRACT_DATA_TABLE_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Default Col Set Up</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TABLE__DEFAULT_COL_SET_UP = ABSTRACT_DATA_TABLE_FEATURE_COUNT + 0;
+	int DATA_TABLE__DEFAULT_COL_SET_UP = ABSTRACT_DATA_TABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Data Table</em>' class.
@@ -1721,7 +1694,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TABLE_FEATURE_COUNT = ABSTRACT_DATA_TABLE_FEATURE_COUNT + 1;
+	int DATA_TABLE_FEATURE_COUNT = ABSTRACT_DATA_TABLE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.impl.FacetMapImpl <em>Facet Map</em>}' class.
@@ -1781,7 +1754,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getPasswordField()
 	 * @generated
 	 */
-	int PASSWORD_FIELD = 18;
+	int PASSWORD_FIELD = 19;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.impl.BooleanFieldImpl <em>Boolean Field</em>}' class.
@@ -1791,7 +1764,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getBooleanField()
 	 * @generated
 	 */
-	int BOOLEAN_FIELD = 19;
+	int BOOLEAN_FIELD = 18;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.impl.FloatFieldImpl <em>Float Field</em>}' class.
@@ -2087,22 +2060,22 @@ public interface ViewPackage extends EPackage {
 	int FACET_MAP__DISABLED = PAGINABLE_FEATURE_COUNT + 13;
 
 	/**
-	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACET_MAP__OPERATIONS = PAGINABLE_FEATURE_COUNT + 14;
-
-	/**
 	 * The feature id for the '<em><b>View Of</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FACET_MAP__VIEW_OF = PAGINABLE_FEATURE_COUNT + 15;
+	int FACET_MAP__VIEW_OF = PAGINABLE_FEATURE_COUNT + 14;
+
+	/**
+	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__OPERATIONS = PAGINABLE_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Display Empty Facet</b></em>' attribute.
@@ -2322,22 +2295,22 @@ public interface ViewPackage extends EPackage {
 	int TREE__DISABLED = SORTABLE_FEATURE_COUNT + 16;
 
 	/**
-	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TREE__OPERATIONS = SORTABLE_FEATURE_COUNT + 17;
-
-	/**
 	 * The feature id for the '<em><b>View Of</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TREE__VIEW_OF = SORTABLE_FEATURE_COUNT + 18;
+	int TREE__VIEW_OF = SORTABLE_FEATURE_COUNT + 17;
+
+	/**
+	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TREE__OPERATIONS = SORTABLE_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Node Operations</b></em>' containment reference.
@@ -2509,15 +2482,6 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPOSED_VIEW__DISABLED = ABSTRACT_VIEW__DISABLED;
-
-	/**
-	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSED_VIEW__OPERATIONS = ABSTRACT_VIEW__OPERATIONS;
 
 	/**
 	 * The number of structural features of the '<em>Composed View</em>' class.
@@ -2832,150 +2796,6 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PASSWORD_FIELD__STYLING = FIELD__STYLING;
-
-	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__TAGS = FIELD__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__COMMENTS = FIELD__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__METAINFO = FIELD__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__NAME = FIELD__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Map To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__MAP_TO = FIELD__MAP_TO;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__PREFIX = FIELD__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__SUFFIX = FIELD__SUFFIX;
-
-	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__HIDDEN = FIELD__HIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Patern</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__PATERN = FIELD__PATERN;
-
-	/**
-	 * The feature id for the '<em><b>Patern Language</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
-
-	/**
-	 * The feature id for the '<em><b>Path</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD__PATH = FIELD__PATH;
-
-	/**
-	 * The number of structural features of the '<em>Password Field</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PASSWORD_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
 	int BOOLEAN_FIELD__STYLING = FIELD__STYLING;
 
 	/**
@@ -3121,6 +2941,150 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOLEAN_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__STYLING = FIELD__STYLING;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__NAME = FIELD__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Map To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__MAP_TO = FIELD__MAP_TO;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__PREFIX = FIELD__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__SUFFIX = FIELD__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__HIDDEN = FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Patern</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__PATERN = FIELD__PATERN;
+
+	/**
+	 * The feature id for the '<em><b>Patern Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__PATERN_LANGUAGE = FIELD__PATERN_LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__PATH = FIELD__PATH;
+
+	/**
+	 * The number of structural features of the '<em>Password Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Styling</b></em>' containment reference.
@@ -5378,15 +5342,6 @@ public interface ViewPackage extends EPackage {
 	int ABSTRACT_VIEW_OF__DISABLED = ABSTRACT_VIEW__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_VIEW_OF__OPERATIONS = ABSTRACT_VIEW__OPERATIONS;
-
-	/**
 	 * The feature id for the '<em><b>View Of</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5405,6 +5360,34 @@ public interface ViewPackage extends EPackage {
 	int ABSTRACT_VIEW_OF_FEATURE_COUNT = ABSTRACT_VIEW_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.ActionableImpl <em>Actionable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.ActionableImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getActionable()
+	 * @generated
+	 */
+	int ACTIONABLE = 41;
+
+	/**
+	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTIONABLE__OPERATIONS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Actionable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTIONABLE_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.SortOrder <em>Sort Order</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5412,7 +5395,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getSortOrder()
 	 * @generated
 	 */
-	int SORT_ORDER = 41;
+	int SORT_ORDER = 42;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.PaginationStyle <em>Pagination Style</em>}' enum.
@@ -5422,7 +5405,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getPaginationStyle()
 	 * @generated
 	 */
-	int PAGINATION_STYLE = 42;
+	int PAGINATION_STYLE = 43;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.Halign <em>Halign</em>}' enum.
@@ -5432,7 +5415,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getHalign()
 	 * @generated
 	 */
-	int HALIGN = 43;
+	int HALIGN = 44;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.LoadingType <em>Loading Type</em>}' enum.
@@ -5442,7 +5425,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getLoadingType()
 	 * @generated
 	 */
-	int LOADING_TYPE = 44;
+	int LOADING_TYPE = 45;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.WidgetTextType <em>Widget Text Type</em>}' enum.
@@ -5452,7 +5435,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getWidgetTextType()
 	 * @generated
 	 */
-	int WIDGET_TEXT_TYPE = 45;
+	int WIDGET_TEXT_TYPE = 46;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.SelectWidgetType <em>Select Widget Type</em>}' enum.
@@ -5462,7 +5445,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getSelectWidgetType()
 	 * @generated
 	 */
-	int SELECT_WIDGET_TYPE = 46;
+	int SELECT_WIDGET_TYPE = 47;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.FacetDisplayType <em>Facet Display Type</em>}' enum.
@@ -5472,7 +5455,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFacetDisplayType()
 	 * @generated
 	 */
-	int FACET_DISPLAY_TYPE = 47;
+	int FACET_DISPLAY_TYPE = 48;
 
 
 	/**
@@ -5572,17 +5555,6 @@ public interface ViewPackage extends EPackage {
 	EClass getAbstractView();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.bluexml.side.view.AbstractView#getOperations <em>Operations</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Operations</em>'.
-	 * @see com.bluexml.side.view.AbstractView#getOperations()
-	 * @see #getAbstractView()
-	 * @generated
-	 */
-	EReference getAbstractView_Operations();
-
-	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.view.AbstractDataTable <em>Abstract Data Table</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5634,17 +5606,6 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCol();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link com.bluexml.side.view.Col#getActions <em>Actions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Actions</em>'.
-	 * @see com.bluexml.side.view.Col#getActions()
-	 * @see #getCol()
-	 * @generated
-	 */
-	EReference getCol_Actions();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.view.Paging <em>Paging</em>}'.
@@ -6359,6 +6320,27 @@ public interface ViewPackage extends EPackage {
 	EReference getAbstractViewOf_ViewOf();
 
 	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.view.Actionable <em>Actionable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Actionable</em>'.
+	 * @see com.bluexml.side.view.Actionable
+	 * @generated
+	 */
+	EClass getActionable();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link com.bluexml.side.view.Actionable#getOperations <em>Operations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Operations</em>'.
+	 * @see com.bluexml.side.view.Actionable#getOperations()
+	 * @see #getActionable()
+	 * @generated
+	 */
+	EReference getActionable_Operations();
+
+	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.view.SortOrder <em>Sort Order</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6529,14 +6511,6 @@ public interface ViewPackage extends EPackage {
 		EClass ABSTRACT_VIEW = eINSTANCE.getAbstractView();
 
 		/**
-		 * The meta object literal for the '<em><b>Operations</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ABSTRACT_VIEW__OPERATIONS = eINSTANCE.getAbstractView_Operations();
-
-		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.impl.AbstractDataTableImpl <em>Abstract Data Table</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6579,14 +6553,6 @@ public interface ViewPackage extends EPackage {
 		 * @generated
 		 */
 		EClass COL = eINSTANCE.getCol();
-
-		/**
-		 * The meta object literal for the '<em><b>Actions</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COL__ACTIONS = eINSTANCE.getCol_Actions();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.impl.PagingImpl <em>Paging</em>}' class.
@@ -7203,6 +7169,24 @@ public interface ViewPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ABSTRACT_VIEW_OF__VIEW_OF = eINSTANCE.getAbstractViewOf_ViewOf();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.view.impl.ActionableImpl <em>Actionable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.view.impl.ActionableImpl
+		 * @see com.bluexml.side.view.impl.ViewPackageImpl#getActionable()
+		 * @generated
+		 */
+		EClass ACTIONABLE = eINSTANCE.getActionable();
+
+		/**
+		 * The meta object literal for the '<em><b>Operations</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACTIONABLE__OPERATIONS = eINSTANCE.getActionable_Operations();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.view.SortOrder <em>Sort Order</em>}' enum.

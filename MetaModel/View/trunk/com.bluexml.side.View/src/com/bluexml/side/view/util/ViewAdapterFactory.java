@@ -149,12 +149,12 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 				return createTextFieldAdapter();
 			}
 			@Override
-			public Adapter casePasswordField(PasswordField object) {
-				return createPasswordFieldAdapter();
-			}
-			@Override
 			public Adapter caseBooleanField(BooleanField object) {
 				return createBooleanFieldAdapter();
+			}
+			@Override
+			public Adapter casePasswordField(PasswordField object) {
+				return createPasswordFieldAdapter();
 			}
 			@Override
 			public Adapter caseFloatField(FloatField object) {
@@ -239,6 +239,10 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseAbstractViewOf(AbstractViewOf object) {
 				return createAbstractViewOfAdapter();
+			}
+			@Override
+			public Adapter caseActionable(Actionable object) {
+				return createActionableAdapter();
 			}
 			@Override
 			public Adapter caseModelElement(ModelElement object) {
@@ -851,6 +855,20 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAbstractViewOfAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.Actionable <em>Actionable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.view.Actionable
+	 * @generated
+	 */
+	public Adapter createActionableAdapter() {
 		return null;
 	}
 

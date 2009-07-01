@@ -134,7 +134,7 @@ public class ColItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ViewPackage.Literals.FILTERABLE__FILTERING);
 			childrenFeatures.add(ViewPackage.Literals.SORTABLE__SORTING);
-			childrenFeatures.add(ViewPackage.Literals.COL__ACTIONS);
+			childrenFeatures.add(ViewPackage.Literals.ACTIONABLE__OPERATIONS);
 		}
 		return childrenFeatures;
 	}
@@ -195,7 +195,7 @@ public class ColItemProvider
 				return;
 			case ViewPackage.COL__FILTERING:
 			case ViewPackage.COL__SORTING:
-			case ViewPackage.COL__ACTIONS:
+			case ViewPackage.COL__OPERATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}

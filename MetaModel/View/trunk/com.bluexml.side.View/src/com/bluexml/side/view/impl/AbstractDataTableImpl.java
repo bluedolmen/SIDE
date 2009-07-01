@@ -72,7 +72,6 @@ import java.util.Collection;
  *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#isHidden <em>Hidden</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getDisabled <em>Disabled</em>}</li>
- *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getViewOf <em>View Of</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getHaveRowActions <em>Have Row Actions</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.AbstractDataTableImpl#getHaveSelectActions <em>Have Select Actions</em>}</li>
@@ -292,16 +291,6 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 	 * @ordered
 	 */
 	protected EList<FieldElement> disabled;
-
-	/**
-	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOperations()
-	 * @generated
-	 * @ordered
-	 */
-	protected OperationComponent operations;
 
 	/**
 	 * The cached value of the '{@link #getViewOf() <em>View Of</em>}' reference.
@@ -682,49 +671,6 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 			disabled = new EObjectContainmentEList<FieldElement>(FieldElement.class, this, ViewPackage.ABSTRACT_DATA_TABLE__DISABLED);
 		}
 		return disabled;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public OperationComponent getOperations() {
-		return operations;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOperations(OperationComponent newOperations, NotificationChain msgs) {
-		OperationComponent oldOperations = operations;
-		operations = newOperations;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS, oldOperations, newOperations);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setOperations(OperationComponent newOperations) {
-		if (newOperations != operations) {
-			NotificationChain msgs = null;
-			if (operations != null)
-				msgs = ((InternalEObject)operations).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS, null, msgs);
-			if (newOperations != null)
-				msgs = ((InternalEObject)newOperations).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS, null, msgs);
-			msgs = basicSetOperations(newOperations, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS, newOperations, newOperations));
 	}
 
 	/**
@@ -1243,8 +1189,6 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case ViewPackage.ABSTRACT_DATA_TABLE__DISABLED:
 				return ((InternalEList<?>)getDisabled()).basicRemove(otherEnd, msgs);
-			case ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS:
-				return basicSetOperations(null, msgs);
 			case ViewPackage.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS:
 				return basicSetHaveRowActions(null, msgs);
 			case ViewPackage.ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS:
@@ -1294,8 +1238,6 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 				return getChildren();
 			case ViewPackage.ABSTRACT_DATA_TABLE__DISABLED:
 				return getDisabled();
-			case ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS:
-				return getOperations();
 			case ViewPackage.ABSTRACT_DATA_TABLE__VIEW_OF:
 				if (resolve) return getViewOf();
 				return basicGetViewOf();
@@ -1369,9 +1311,6 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 				getDisabled().clear();
 				getDisabled().addAll((Collection<? extends FieldElement>)newValue);
 				return;
-			case ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS:
-				setOperations((OperationComponent)newValue);
-				return;
 			case ViewPackage.ABSTRACT_DATA_TABLE__VIEW_OF:
 				setViewOf((Container)newValue);
 				return;
@@ -1441,9 +1380,6 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 			case ViewPackage.ABSTRACT_DATA_TABLE__DISABLED:
 				getDisabled().clear();
 				return;
-			case ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS:
-				setOperations((OperationComponent)null);
-				return;
 			case ViewPackage.ABSTRACT_DATA_TABLE__VIEW_OF:
 				setViewOf((Container)null);
 				return;
@@ -1498,8 +1434,6 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 				return children != null && !children.isEmpty();
 			case ViewPackage.ABSTRACT_DATA_TABLE__DISABLED:
 				return disabled != null && !disabled.isEmpty();
-			case ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS:
-				return operations != null;
 			case ViewPackage.ABSTRACT_DATA_TABLE__VIEW_OF:
 				return viewOf != null;
 			case ViewPackage.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS:
@@ -1566,7 +1500,6 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 		}
 		if (baseClass == AbstractView.class) {
 			switch (derivedFeatureID) {
-				case ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS: return ViewPackage.ABSTRACT_VIEW__OPERATIONS;
 				default: return -1;
 			}
 		}
@@ -1633,7 +1566,6 @@ public abstract class AbstractDataTableImpl extends DataTableElementImpl impleme
 		}
 		if (baseClass == AbstractView.class) {
 			switch (baseFeatureID) {
-				case ViewPackage.ABSTRACT_VIEW__OPERATIONS: return ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS;
 				default: return -1;
 			}
 		}

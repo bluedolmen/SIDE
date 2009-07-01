@@ -37,25 +37,11 @@ import com.bluexml.side.view.ViewPackage;
  * An implementation of the model object '<em><b>Abstract View</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * The following features are implemented:
- * <ul>
- *   <li>{@link com.bluexml.side.view.impl.AbstractViewImpl#getOperations <em>Operations</em>}</li>
- * </ul>
  * </p>
  *
  * @generated
  */
 public abstract class AbstractViewImpl extends FieldContainerImpl implements AbstractView {
-	/**
-	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOperations()
-	 * @generated
-	 * @ordered
-	 */
-	protected OperationComponent operations;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -73,49 +59,6 @@ public abstract class AbstractViewImpl extends FieldContainerImpl implements Abs
 	@Override
 	protected EClass eStaticClass() {
 		return ViewPackage.Literals.ABSTRACT_VIEW;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public OperationComponent getOperations() {
-		return operations;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOperations(OperationComponent newOperations, NotificationChain msgs) {
-		OperationComponent oldOperations = operations;
-		operations = newOperations;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_VIEW__OPERATIONS, oldOperations, newOperations);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setOperations(OperationComponent newOperations) {
-		if (newOperations != operations) {
-			NotificationChain msgs = null;
-			if (operations != null)
-				msgs = ((InternalEObject)operations).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ViewPackage.ABSTRACT_VIEW__OPERATIONS, null, msgs);
-			if (newOperations != null)
-				msgs = ((InternalEObject)newOperations).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ViewPackage.ABSTRACT_VIEW__OPERATIONS, null, msgs);
-			msgs = basicSetOperations(newOperations, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_VIEW__OPERATIONS, newOperations, newOperations));
 	}
 
 	/**
@@ -303,79 +246,6 @@ public abstract class AbstractViewImpl extends FieldContainerImpl implements Abs
 	 */
 	private static OCLExpression<EClassifier> getDisabledFieldsBodyOCL;
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
-				return basicSetOperations(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
-				return getOperations();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
-				setOperations((OperationComponent)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
-				setOperations((OperationComponent)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case ViewPackage.ABSTRACT_VIEW__OPERATIONS:
-				return operations != null;
-		}
-		return super.eIsSet(featureID);
-	}
-
-		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
 		private static final OCL OCL_ENV = KerblueOCL.newInstance();		
 } //AbstractViewImpl

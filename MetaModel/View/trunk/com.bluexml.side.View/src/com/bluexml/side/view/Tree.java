@@ -31,7 +31,7 @@ import com.bluexml.side.common.OperationComponent;
  * @model
  * @generated
  */
-public interface Tree extends Sortable, Editable, Movable, Filterable, AbstractViewOf {
+public interface Tree extends Sortable, Editable, Movable, Filterable, AbstractViewOf, Actionable {
 	/**
 	 * Returns the value of the '<em><b>Node Operations</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

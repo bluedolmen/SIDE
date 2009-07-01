@@ -278,6 +278,15 @@ public interface ViewFactory extends EFactory {
 	FieldGroup createFieldGroup();
 
 	/**
+	 * Returns a new object of class '<em>Actionable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Actionable</em>'.
+	 * @generated
+	 */
+	Actionable createActionable();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

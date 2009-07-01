@@ -36,6 +36,7 @@ import com.bluexml.side.common.Stereotype;
 import com.bluexml.side.common.Tag;
 import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.AbstractViewOf;
+import com.bluexml.side.view.Actionable;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.view.Editable;
 import com.bluexml.side.view.Field;
@@ -76,8 +77,8 @@ import java.util.Collection;
  *   <li>{@link com.bluexml.side.view.impl.TreeImpl#isHidden <em>Hidden</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.TreeImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.TreeImpl#getDisabled <em>Disabled</em>}</li>
- *   <li>{@link com.bluexml.side.view.impl.TreeImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.TreeImpl#getViewOf <em>View Of</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.TreeImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.TreeImpl#getNodeOperations <em>Node Operations</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.TreeImpl#getNodeValue <em>Node Value</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.TreeImpl#getDefaultDepth <em>Default Depth</em>}</li>
@@ -339,16 +340,6 @@ public class TreeImpl extends SortableImpl implements Tree {
 	protected EList<FieldElement> disabled;
 
 	/**
-	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOperations()
-	 * @generated
-	 * @ordered
-	 */
-	protected OperationComponent operations;
-
-	/**
 	 * The cached value of the '{@link #getViewOf() <em>View Of</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -357,6 +348,16 @@ public class TreeImpl extends SortableImpl implements Tree {
 	 * @ordered
 	 */
 	protected Container viewOf;
+
+	/**
+	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOperations()
+	 * @generated
+	 * @ordered
+	 */
+	protected OperationComponent operations;
 
 	/**
 	 * The cached value of the '{@link #getNodeOperations() <em>Node Operations</em>}' containment reference.
@@ -1375,11 +1376,11 @@ public class TreeImpl extends SortableImpl implements Tree {
 				return getChildren();
 			case ViewPackage.TREE__DISABLED:
 				return getDisabled();
-			case ViewPackage.TREE__OPERATIONS:
-				return getOperations();
 			case ViewPackage.TREE__VIEW_OF:
 				if (resolve) return getViewOf();
 				return basicGetViewOf();
+			case ViewPackage.TREE__OPERATIONS:
+				return getOperations();
 			case ViewPackage.TREE__NODE_OPERATIONS:
 				return getNodeOperations();
 			case ViewPackage.TREE__NODE_VALUE:
@@ -1458,11 +1459,11 @@ public class TreeImpl extends SortableImpl implements Tree {
 				getDisabled().clear();
 				getDisabled().addAll((Collection<? extends FieldElement>)newValue);
 				return;
-			case ViewPackage.TREE__OPERATIONS:
-				setOperations((OperationComponent)newValue);
-				return;
 			case ViewPackage.TREE__VIEW_OF:
 				setViewOf((Container)newValue);
+				return;
+			case ViewPackage.TREE__OPERATIONS:
+				setOperations((OperationComponent)newValue);
 				return;
 			case ViewPackage.TREE__NODE_OPERATIONS:
 				setNodeOperations((OperationComponent)newValue);
@@ -1539,11 +1540,11 @@ public class TreeImpl extends SortableImpl implements Tree {
 			case ViewPackage.TREE__DISABLED:
 				getDisabled().clear();
 				return;
-			case ViewPackage.TREE__OPERATIONS:
-				setOperations((OperationComponent)null);
-				return;
 			case ViewPackage.TREE__VIEW_OF:
 				setViewOf((Container)null);
+				return;
+			case ViewPackage.TREE__OPERATIONS:
+				setOperations((OperationComponent)null);
 				return;
 			case ViewPackage.TREE__NODE_OPERATIONS:
 				setNodeOperations((OperationComponent)null);
@@ -1603,10 +1604,10 @@ public class TreeImpl extends SortableImpl implements Tree {
 				return children != null && !children.isEmpty();
 			case ViewPackage.TREE__DISABLED:
 				return disabled != null && !disabled.isEmpty();
-			case ViewPackage.TREE__OPERATIONS:
-				return operations != null;
 			case ViewPackage.TREE__VIEW_OF:
 				return viewOf != null;
+			case ViewPackage.TREE__OPERATIONS:
+				return operations != null;
 			case ViewPackage.TREE__NODE_OPERATIONS:
 				return nodeOperations != null;
 			case ViewPackage.TREE__NODE_VALUE:
@@ -1685,13 +1686,18 @@ public class TreeImpl extends SortableImpl implements Tree {
 		}
 		if (baseClass == AbstractView.class) {
 			switch (derivedFeatureID) {
-				case ViewPackage.TREE__OPERATIONS: return ViewPackage.ABSTRACT_VIEW__OPERATIONS;
 				default: return -1;
 			}
 		}
 		if (baseClass == AbstractViewOf.class) {
 			switch (derivedFeatureID) {
 				case ViewPackage.TREE__VIEW_OF: return ViewPackage.ABSTRACT_VIEW_OF__VIEW_OF;
+				default: return -1;
+			}
+		}
+		if (baseClass == Actionable.class) {
+			switch (derivedFeatureID) {
+				case ViewPackage.TREE__OPERATIONS: return ViewPackage.ACTIONABLE__OPERATIONS;
 				default: return -1;
 			}
 		}
@@ -1764,13 +1770,18 @@ public class TreeImpl extends SortableImpl implements Tree {
 		}
 		if (baseClass == AbstractView.class) {
 			switch (baseFeatureID) {
-				case ViewPackage.ABSTRACT_VIEW__OPERATIONS: return ViewPackage.TREE__OPERATIONS;
 				default: return -1;
 			}
 		}
 		if (baseClass == AbstractViewOf.class) {
 			switch (baseFeatureID) {
 				case ViewPackage.ABSTRACT_VIEW_OF__VIEW_OF: return ViewPackage.TREE__VIEW_OF;
+				default: return -1;
+			}
+		}
+		if (baseClass == Actionable.class) {
+			switch (baseFeatureID) {
+				case ViewPackage.ACTIONABLE__OPERATIONS: return ViewPackage.TREE__OPERATIONS;
 				default: return -1;
 			}
 		}

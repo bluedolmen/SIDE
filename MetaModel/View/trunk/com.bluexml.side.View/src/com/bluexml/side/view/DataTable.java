@@ -23,7 +23,7 @@ package com.bluexml.side.view;
  * @model
  * @generated
  */
-public interface DataTable extends AbstractDataTable {
+public interface DataTable extends AbstractDataTable, Actionable {
 	/**
 	 * Returns the value of the '<em><b>Default Col Set Up</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

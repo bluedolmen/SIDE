@@ -202,10 +202,10 @@ public class ViewValidator extends EObjectValidator {
 				return validateField((Field)value, diagnostics, context);
 			case ViewPackage.TEXT_FIELD:
 				return validateTextField((TextField)value, diagnostics, context);
-			case ViewPackage.PASSWORD_FIELD:
-				return validatePasswordField((PasswordField)value, diagnostics, context);
 			case ViewPackage.BOOLEAN_FIELD:
 				return validateBooleanField((BooleanField)value, diagnostics, context);
+			case ViewPackage.PASSWORD_FIELD:
+				return validatePasswordField((PasswordField)value, diagnostics, context);
 			case ViewPackage.FLOAT_FIELD:
 				return validateFloatField((FloatField)value, diagnostics, context);
 			case ViewPackage.ACTION_FIELD:
@@ -248,6 +248,8 @@ public class ViewValidator extends EObjectValidator {
 				return validateFieldGroup((FieldGroup)value, diagnostics, context);
 			case ViewPackage.ABSTRACT_VIEW_OF:
 				return validateAbstractViewOf((AbstractViewOf)value, diagnostics, context);
+			case ViewPackage.ACTIONABLE:
+				return validateActionable((Actionable)value, diagnostics, context);
 			case ViewPackage.SORT_ORDER:
 				return validateSortOrder((SortOrder)value, diagnostics, context);
 			case ViewPackage.PAGINATION_STYLE:
@@ -913,6 +915,15 @@ public class ViewValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(abstractViewOf, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFieldElement_noFieldMapped(abstractViewOf, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateActionable(Actionable actionable, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(actionable, diagnostics, context);
 	}
 
 	/**

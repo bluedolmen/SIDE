@@ -674,6 +674,29 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.view.Actionable} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ActionableItemProvider actionableItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.view.Actionable}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createActionableAdapter() {
+		if (actionableItemProvider == null) {
+			actionableItemProvider = new ActionableItemProvider(this);
+		}
+
+		return actionableItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.view.Filtering} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -830,8 +853,8 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 		if (treeItemProvider != null) treeItemProvider.dispose();
 		if (composedViewItemProvider != null) composedViewItemProvider.dispose();
 		if (textFieldItemProvider != null) textFieldItemProvider.dispose();
-		if (passwordFieldItemProvider != null) passwordFieldItemProvider.dispose();
 		if (booleanFieldItemProvider != null) booleanFieldItemProvider.dispose();
+		if (passwordFieldItemProvider != null) passwordFieldItemProvider.dispose();
 		if (floatFieldItemProvider != null) floatFieldItemProvider.dispose();
 		if (actionFieldItemProvider != null) actionFieldItemProvider.dispose();
 		if (dateFieldItemProvider != null) dateFieldItemProvider.dispose();
@@ -846,6 +869,7 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 		if (urlFieldItemProvider != null) urlFieldItemProvider.dispose();
 		if (imageFieldItemProvider != null) imageFieldItemProvider.dispose();
 		if (fieldGroupItemProvider != null) fieldGroupItemProvider.dispose();
+		if (actionableItemProvider != null) actionableItemProvider.dispose();
 	}
 
 }

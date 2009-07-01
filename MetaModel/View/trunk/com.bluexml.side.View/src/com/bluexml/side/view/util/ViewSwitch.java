@@ -154,6 +154,7 @@ public class ViewSwitch<T> {
 				if (result == null) result = caseEditable(col);
 				if (result == null) result = caseFilterable(col);
 				if (result == null) result = caseSortable(col);
+				if (result == null) result = caseActionable(col);
 				if (result == null) result = caseFieldElement(col);
 				if (result == null) result = caseStylable(col);
 				if (result == null) result = caseNamedModelElement(col);
@@ -208,6 +209,7 @@ public class ViewSwitch<T> {
 				if (result == null) result = caseEditable(dataList);
 				if (result == null) result = caseFilterable(dataList);
 				if (result == null) result = caseSortable(dataList);
+				if (result == null) result = caseActionable(dataList);
 				if (result == null) result = caseAbstractView(dataList);
 				if (result == null) result = caseFieldElement(dataList);
 				if (result == null) result = caseStylable(dataList);
@@ -220,6 +222,7 @@ public class ViewSwitch<T> {
 				DataTable dataTable = (DataTable)theEObject;
 				T result = caseDataTable(dataTable);
 				if (result == null) result = caseAbstractDataTable(dataTable);
+				if (result == null) result = caseActionable(dataTable);
 				if (result == null) result = caseDataTableElement(dataTable);
 				if (result == null) result = casePaginable(dataTable);
 				if (result == null) result = caseAbstractViewOf(dataTable);
@@ -237,6 +240,7 @@ public class ViewSwitch<T> {
 				T result = caseFacetMap(facetMap);
 				if (result == null) result = casePaginable(facetMap);
 				if (result == null) result = caseAbstractViewOf(facetMap);
+				if (result == null) result = caseActionable(facetMap);
 				if (result == null) result = caseAbstractView(facetMap);
 				if (result == null) result = caseFieldContainer(facetMap);
 				if (result == null) result = caseFieldElement(facetMap);
@@ -254,6 +258,7 @@ public class ViewSwitch<T> {
 				if (result == null) result = caseMovable(tree);
 				if (result == null) result = caseFilterable(tree);
 				if (result == null) result = caseAbstractViewOf(tree);
+				if (result == null) result = caseActionable(tree);
 				if (result == null) result = caseAbstractView(tree);
 				if (result == null) result = caseFieldContainer(tree);
 				if (result == null) result = caseFieldElement(tree);
@@ -296,17 +301,6 @@ public class ViewSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ViewPackage.PASSWORD_FIELD: {
-				PasswordField passwordField = (PasswordField)theEObject;
-				T result = casePasswordField(passwordField);
-				if (result == null) result = caseField(passwordField);
-				if (result == null) result = caseFieldElement(passwordField);
-				if (result == null) result = caseStylable(passwordField);
-				if (result == null) result = caseNamedModelElement(passwordField);
-				if (result == null) result = caseModelElement(passwordField);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ViewPackage.BOOLEAN_FIELD: {
 				BooleanField booleanField = (BooleanField)theEObject;
 				T result = caseBooleanField(booleanField);
@@ -315,6 +309,17 @@ public class ViewSwitch<T> {
 				if (result == null) result = caseStylable(booleanField);
 				if (result == null) result = caseNamedModelElement(booleanField);
 				if (result == null) result = caseModelElement(booleanField);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ViewPackage.PASSWORD_FIELD: {
+				PasswordField passwordField = (PasswordField)theEObject;
+				T result = casePasswordField(passwordField);
+				if (result == null) result = caseField(passwordField);
+				if (result == null) result = caseFieldElement(passwordField);
+				if (result == null) result = caseStylable(passwordField);
+				if (result == null) result = caseNamedModelElement(passwordField);
+				if (result == null) result = caseModelElement(passwordField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -518,6 +523,12 @@ public class ViewSwitch<T> {
 				if (result == null) result = caseStylable(abstractViewOf);
 				if (result == null) result = caseNamedModelElement(abstractViewOf);
 				if (result == null) result = caseModelElement(abstractViewOf);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ViewPackage.ACTIONABLE: {
+				Actionable actionable = (Actionable)theEObject;
+				T result = caseActionable(actionable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1137,6 +1148,21 @@ public class ViewSwitch<T> {
 	 * @generated
 	 */
 	public T caseAbstractViewOf(AbstractViewOf object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Actionable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Actionable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseActionable(Actionable object) {
 		return null;
 	}
 

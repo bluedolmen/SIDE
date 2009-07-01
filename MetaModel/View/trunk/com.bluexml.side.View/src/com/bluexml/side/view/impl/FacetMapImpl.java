@@ -18,6 +18,7 @@ import com.bluexml.side.common.Stereotype;
 import com.bluexml.side.common.Tag;
 import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.AbstractViewOf;
+import com.bluexml.side.view.Actionable;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -71,8 +72,8 @@ import com.bluexml.side.view.ViewPackage;
  *   <li>{@link com.bluexml.side.view.impl.FacetMapImpl#isHidden <em>Hidden</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FacetMapImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FacetMapImpl#getDisabled <em>Disabled</em>}</li>
- *   <li>{@link com.bluexml.side.view.impl.FacetMapImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FacetMapImpl#getViewOf <em>View Of</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.FacetMapImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FacetMapImpl#isDisplayEmptyFacet <em>Display Empty Facet</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FacetMapImpl#getFacetDisplayType <em>Facet Display Type</em>}</li>
  * </ul>
@@ -282,16 +283,6 @@ public class FacetMapImpl extends PaginableImpl implements FacetMap {
 	protected EList<FieldElement> disabled;
 
 	/**
-	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOperations()
-	 * @generated
-	 * @ordered
-	 */
-	protected OperationComponent operations;
-
-	/**
 	 * The cached value of the '{@link #getViewOf() <em>View Of</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -300,6 +291,16 @@ public class FacetMapImpl extends PaginableImpl implements FacetMap {
 	 * @ordered
 	 */
 	protected Container viewOf;
+
+	/**
+	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOperations()
+	 * @generated
+	 * @ordered
+	 */
+	protected OperationComponent operations;
 
 	/**
 	 * The default value of the '{@link #isDisplayEmptyFacet() <em>Display Empty Facet</em>}' attribute.
@@ -1152,11 +1153,11 @@ public class FacetMapImpl extends PaginableImpl implements FacetMap {
 				return getChildren();
 			case ViewPackage.FACET_MAP__DISABLED:
 				return getDisabled();
-			case ViewPackage.FACET_MAP__OPERATIONS:
-				return getOperations();
 			case ViewPackage.FACET_MAP__VIEW_OF:
 				if (resolve) return getViewOf();
 				return basicGetViewOf();
+			case ViewPackage.FACET_MAP__OPERATIONS:
+				return getOperations();
 			case ViewPackage.FACET_MAP__DISPLAY_EMPTY_FACET:
 				return isDisplayEmptyFacet() ? Boolean.TRUE : Boolean.FALSE;
 			case ViewPackage.FACET_MAP__FACET_DISPLAY_TYPE:
@@ -1222,11 +1223,11 @@ public class FacetMapImpl extends PaginableImpl implements FacetMap {
 				getDisabled().clear();
 				getDisabled().addAll((Collection<? extends FieldElement>)newValue);
 				return;
-			case ViewPackage.FACET_MAP__OPERATIONS:
-				setOperations((OperationComponent)newValue);
-				return;
 			case ViewPackage.FACET_MAP__VIEW_OF:
 				setViewOf((Container)newValue);
+				return;
+			case ViewPackage.FACET_MAP__OPERATIONS:
+				setOperations((OperationComponent)newValue);
 				return;
 			case ViewPackage.FACET_MAP__DISPLAY_EMPTY_FACET:
 				setDisplayEmptyFacet(((Boolean)newValue).booleanValue());
@@ -1288,11 +1289,11 @@ public class FacetMapImpl extends PaginableImpl implements FacetMap {
 			case ViewPackage.FACET_MAP__DISABLED:
 				getDisabled().clear();
 				return;
-			case ViewPackage.FACET_MAP__OPERATIONS:
-				setOperations((OperationComponent)null);
-				return;
 			case ViewPackage.FACET_MAP__VIEW_OF:
 				setViewOf((Container)null);
+				return;
+			case ViewPackage.FACET_MAP__OPERATIONS:
+				setOperations((OperationComponent)null);
 				return;
 			case ViewPackage.FACET_MAP__DISPLAY_EMPTY_FACET:
 				setDisplayEmptyFacet(DISPLAY_EMPTY_FACET_EDEFAULT);
@@ -1340,10 +1341,10 @@ public class FacetMapImpl extends PaginableImpl implements FacetMap {
 				return children != null && !children.isEmpty();
 			case ViewPackage.FACET_MAP__DISABLED:
 				return disabled != null && !disabled.isEmpty();
-			case ViewPackage.FACET_MAP__OPERATIONS:
-				return operations != null;
 			case ViewPackage.FACET_MAP__VIEW_OF:
 				return viewOf != null;
+			case ViewPackage.FACET_MAP__OPERATIONS:
+				return operations != null;
 			case ViewPackage.FACET_MAP__DISPLAY_EMPTY_FACET:
 				return displayEmptyFacet != DISPLAY_EMPTY_FACET_EDEFAULT;
 			case ViewPackage.FACET_MAP__FACET_DISPLAY_TYPE:
@@ -1400,13 +1401,18 @@ public class FacetMapImpl extends PaginableImpl implements FacetMap {
 		}
 		if (baseClass == AbstractView.class) {
 			switch (derivedFeatureID) {
-				case ViewPackage.FACET_MAP__OPERATIONS: return ViewPackage.ABSTRACT_VIEW__OPERATIONS;
 				default: return -1;
 			}
 		}
 		if (baseClass == AbstractViewOf.class) {
 			switch (derivedFeatureID) {
 				case ViewPackage.FACET_MAP__VIEW_OF: return ViewPackage.ABSTRACT_VIEW_OF__VIEW_OF;
+				default: return -1;
+			}
+		}
+		if (baseClass == Actionable.class) {
+			switch (derivedFeatureID) {
+				case ViewPackage.FACET_MAP__OPERATIONS: return ViewPackage.ACTIONABLE__OPERATIONS;
 				default: return -1;
 			}
 		}
@@ -1461,13 +1467,18 @@ public class FacetMapImpl extends PaginableImpl implements FacetMap {
 		}
 		if (baseClass == AbstractView.class) {
 			switch (baseFeatureID) {
-				case ViewPackage.ABSTRACT_VIEW__OPERATIONS: return ViewPackage.FACET_MAP__OPERATIONS;
 				default: return -1;
 			}
 		}
 		if (baseClass == AbstractViewOf.class) {
 			switch (baseFeatureID) {
 				case ViewPackage.ABSTRACT_VIEW_OF__VIEW_OF: return ViewPackage.FACET_MAP__VIEW_OF;
+				default: return -1;
+			}
+		}
+		if (baseClass == Actionable.class) {
+			switch (baseFeatureID) {
+				case ViewPackage.ACTIONABLE__OPERATIONS: return ViewPackage.FACET_MAP__OPERATIONS;
 				default: return -1;
 			}
 		}

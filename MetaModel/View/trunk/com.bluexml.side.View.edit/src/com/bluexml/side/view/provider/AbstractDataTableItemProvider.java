@@ -300,7 +300,6 @@ public class AbstractDataTableItemProvider
 			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__METAINFO);
 			childrenFeatures.add(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN);
 			childrenFeatures.add(ViewPackage.Literals.FIELD_CONTAINER__DISABLED);
-			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS);
 			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS);
 			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS);
 			childrenFeatures.add(ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_DEFAULT_COL_ACTIONS);
@@ -362,7 +361,6 @@ public class AbstractDataTableItemProvider
 			case ViewPackage.ABSTRACT_DATA_TABLE__METAINFO:
 			case ViewPackage.ABSTRACT_DATA_TABLE__CHILDREN:
 			case ViewPackage.ABSTRACT_DATA_TABLE__DISABLED:
-			case ViewPackage.ABSTRACT_DATA_TABLE__OPERATIONS:
 			case ViewPackage.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS:
 			case ViewPackage.ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS:
 			case ViewPackage.ABSTRACT_DATA_TABLE__HAVE_DEFAULT_COL_ACTIONS:
@@ -446,12 +444,12 @@ public class AbstractDataTableItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createPasswordField()));
+				 ViewFactory.eINSTANCE.createBooleanField()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createBooleanField()));
+				 ViewFactory.eINSTANCE.createPasswordField()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -561,12 +559,12 @@ public class AbstractDataTableItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createPasswordField()));
+				 ViewFactory.eINSTANCE.createBooleanField()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createBooleanField()));
+				 ViewFactory.eINSTANCE.createPasswordField()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -640,16 +638,6 @@ public class AbstractDataTableItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS,
-				 CommonFactory.eINSTANCE.createOperation()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS,
-				 CommonFactory.eINSTANCE.createOperationGroup()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS,
 				 CommonFactory.eINSTANCE.createOperation()));
 
@@ -693,7 +681,6 @@ public class AbstractDataTableItemProvider
 		boolean qualify =
 			childFeature == ViewPackage.Literals.FIELD_CONTAINER__CHILDREN ||
 			childFeature == ViewPackage.Literals.FIELD_CONTAINER__DISABLED ||
-			childFeature == ViewPackage.Literals.ABSTRACT_VIEW__OPERATIONS ||
 			childFeature == ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS ||
 			childFeature == ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS ||
 			childFeature == ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_DEFAULT_COL_ACTIONS;
