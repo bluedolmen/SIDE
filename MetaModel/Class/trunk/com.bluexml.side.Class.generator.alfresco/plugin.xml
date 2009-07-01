@@ -29,9 +29,9 @@
                         label="Class Module version">
                   </configurationParameter>
                   <option
-                        documentation="Check this option to include the production of the Alfresco&apos;s content model in the generation.&lt;br&gt;If not checked, the content model is not included in the generated AMPs.&lt;br&gt;S-IDE allows to configure the Alfresco&apos;s content model with the newly designed content types of the class model."
-                        key="alfresco.dataModel"
-                        label="Alfresco data model">
+                        documentation="Check this option to generate a default configuration for AlfrescoShare DocList"
+                        key="alfrescoShare.defaultDocList"
+                        label="AlfrescoShare docList">
                   </option>
                   <option
                         documentation="Check this option to include the production of the Alfresco Share&apos;s module extension in the generation.&lt;br&gt;If not checked, the extension modules are not included in the generated AMPs.&lt;br&gt;S-IDE provides extension modules to Alfresco Share in order to view and edit all the metadata of the newly generated content model."
@@ -46,7 +46,7 @@
                   <option
                         documentation="genereate configuration to display all meta-datas in alfrescoShare forms"
                         key="class.alfrescoShare.defaultForms"
-                        label="share forms">
+                        label="Alfresco Share forms">
                   </option>
                </generatorVersion>
             </technologyVersion>

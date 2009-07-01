@@ -27,8 +27,17 @@ public abstract class AbstractMultiPackager {
 	public Map<String, IFile> buildPackages(boolean doClean) throws Exception {
 		Map<String, IFile> packageFiles_ = new HashMap<String, IFile>();
 		for (Map.Entry<String, AbstractPackager> p : packagers.entrySet()) {
-			IFile pp = p.getValue().buildPackage(doClean);
-			packageFiles_.put(p.getKey(), pp);
+			if (p.getValue().getFolderToPackage().exists()) {
+				IFile pp = p.getValue().buildPackage(doClean);
+				packageFiles_.put(p.getKey(), pp);
+			} else {
+				// INFO : packager skipped
+				if (p.getValue().getPackageFile().exists()) {
+					// delete empty package if exist
+					p.getValue().getPackageFile().delete();
+				}
+
+			}
 		}
 		return packageFiles_;
 	}
