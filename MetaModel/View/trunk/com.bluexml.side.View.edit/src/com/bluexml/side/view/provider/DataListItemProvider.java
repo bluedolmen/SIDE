@@ -220,6 +220,11 @@ public class DataListItemProvider
 			(createChildParameter
 				(ViewPackage.Literals.SORTABLE__SORTING,
 				 ViewFactory.eINSTANCE.createSorting()));
+		
+		newChildDescriptors.add
+		(createChildParameter
+			(ViewPackage.Literals.PAGINABLE__PAGING,
+			 ViewFactory.eINSTANCE.createPaging()));
 
 		newChildDescriptors.add
 			(createChildParameter
