@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Portal Alfresco Share Generator
+Bundle-SymbolicName: com.bluexml.side.Portal.generator.alfresco;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: com.bluexml.side.portal.generator.alfresco.Activator
+Bundle-Vendor: www.bluexml.com
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ com.bluexml.side.Application;bundle-version="1.0.8",
+ com.bluexml.side.Util.generator;bundle-version="1.0.8",
+ com.bluexml.side.Util.generator.acceleo;bundle-version="1.0.8",
+ com.bluexml.side.Util.security;bundle-version="1.0.8",
+ com.bluexml.side.Util.generator.alfresco;bundle-version="1.0.12",
+ com.bluexml.side.Portal;bundle-version="1.0.11"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
