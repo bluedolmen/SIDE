@@ -237,6 +237,10 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 				return createFieldGroupAdapter();
 			}
 			@Override
+			public Adapter caseAbstractViewOf(AbstractViewOf object) {
+				return createAbstractViewOfAdapter();
+			}
+			@Override
 			public Adapter caseModelElement(ModelElement object) {
 				return createModelElementAdapter();
 			}
@@ -833,6 +837,20 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFieldGroupAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.view.AbstractViewOf <em>Abstract View Of</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.view.AbstractViewOf
+	 * @generated
+	 */
+	public Adapter createAbstractViewOfAdapter() {
 		return null;
 	}
 

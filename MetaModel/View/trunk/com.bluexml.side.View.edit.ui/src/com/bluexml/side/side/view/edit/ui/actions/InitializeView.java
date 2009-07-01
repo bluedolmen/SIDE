@@ -14,6 +14,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import com.bluexml.side.side.view.edit.ui.utils.InitView;
 import com.bluexml.side.side.view.edit.ui.utils.InternalModification;
 import com.bluexml.side.view.AbstractView;
+import com.bluexml.side.view.AbstractViewOf;
 
 
 
@@ -49,10 +50,10 @@ ISelectionChangedListener {
 	@Override
 	public void run() {
 		super.run();
-		doAction((AbstractView) selectedObject);
+		doAction((AbstractViewOf) selectedObject);
 	}
 
-	private void doAction(AbstractView av) {
+	private void doAction(AbstractViewOf av) {
 		InternalModification.dontMoveToDisabled();
 		try {
 			domain.getCommandStack().execute(InitView.init(av,domain));

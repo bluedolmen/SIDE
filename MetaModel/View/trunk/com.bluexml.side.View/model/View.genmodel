@@ -59,10 +59,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute View.ecore#//FieldElement/hidden"/>
     </genClasses>
     <genClasses ecoreClass="View.ecore#//AbstractView">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference View.ecore#//AbstractView/viewOf"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//AbstractView/operations"/>
       <genOperations ecoreOperation="View.ecore#//AbstractView/getFields"/>
-      <genOperations ecoreOperation="View.ecore#//AbstractView/getCols"/>
       <genOperations ecoreOperation="View.ecore#//AbstractView/getDirectChildFields"/>
       <genOperations ecoreOperation="View.ecore#//AbstractView/getInnerView"/>
       <genOperations ecoreOperation="View.ecore#//AbstractView/getDisabledAndEnabledField"/>
@@ -72,6 +70,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//AbstractDataTable/haveRowActions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//AbstractDataTable/haveSelectActions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//AbstractDataTable/haveDefaultColActions"/>
+      <genOperations ecoreOperation="View.ecore#//AbstractDataTable/getCols"/>
     </genClasses>
     <genClasses ecoreClass="View.ecore#//Col">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//Col/actions"/>
@@ -158,5 +157,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//Filterable/filtering"/>
     </genClasses>
     <genClasses ecoreClass="View.ecore#//FieldGroup"/>
+    <genClasses ecoreClass="View.ecore#//AbstractViewOf">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference View.ecore#//AbstractViewOf/viewOf"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

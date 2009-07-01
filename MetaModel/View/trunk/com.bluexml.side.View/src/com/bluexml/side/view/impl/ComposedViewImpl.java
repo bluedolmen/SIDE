@@ -24,7 +24,7 @@ import org.eclipse.ocl.ecore.OCL;
  *
  * @generated
  */
-public class ComposedViewImpl extends FieldContainerImpl implements ComposedView {
+public class ComposedViewImpl extends AbstractViewImpl implements ComposedView {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

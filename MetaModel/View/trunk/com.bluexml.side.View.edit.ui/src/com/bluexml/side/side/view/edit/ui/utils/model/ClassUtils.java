@@ -21,6 +21,7 @@ import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.side.view.edit.ui.utils.FieldTransformation;
 import com.bluexml.side.view.AbstractView;
+import com.bluexml.side.view.AbstractViewOf;
 import com.bluexml.side.view.Col;
 import com.bluexml.side.view.DataTable;
 import com.bluexml.side.view.Field;

@@ -15,6 +15,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import com.bluexml.side.side.view.edit.ui.utils.InternalModification;
 import com.bluexml.side.side.view.edit.ui.utils.model.ClassUtils;
 import com.bluexml.side.view.AbstractView;
+import com.bluexml.side.view.AbstractViewOf;
 import com.bluexml.side.view.ViewCollection;
 
 

@@ -10,6 +10,7 @@ import com.bluexml.side.common.CommonPackage;
 
 import com.bluexml.side.view.AbstractDataTable;
 import com.bluexml.side.view.AbstractView;
+import com.bluexml.side.view.AbstractViewOf;
 import com.bluexml.side.view.ActionField;
 import com.bluexml.side.view.BooleanField;
 import com.bluexml.side.view.Col;
@@ -360,6 +361,13 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass abstractViewOfEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum sortOrderEEnum = null;
 
 	/**
@@ -570,17 +578,8 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractView_ViewOf() {
-		return (EReference)abstractViewEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getAbstractView_Operations() {
-		return (EReference)abstractViewEClass.getEStructuralFeatures().get(1);
+		return (EReference)abstractViewEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1236,6 +1235,24 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAbstractViewOf() {
+		return abstractViewOfEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractViewOf_ViewOf() {
+		return (EReference)abstractViewOfEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getSortOrder() {
 		return sortOrderEEnum;
 	}
@@ -1337,7 +1354,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		createEAttribute(fieldElementEClass, FIELD_ELEMENT__HIDDEN);
 
 		abstractViewEClass = createEClass(ABSTRACT_VIEW);
-		createEReference(abstractViewEClass, ABSTRACT_VIEW__VIEW_OF);
 		createEReference(abstractViewEClass, ABSTRACT_VIEW__OPERATIONS);
 
 		abstractDataTableEClass = createEClass(ABSTRACT_DATA_TABLE);
@@ -1445,6 +1461,9 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		fieldGroupEClass = createEClass(FIELD_GROUP);
 
+		abstractViewOfEClass = createEClass(ABSTRACT_VIEW_OF);
+		createEReference(abstractViewOfEClass, ABSTRACT_VIEW_OF__VIEW_OF);
+
 		// Create enums
 		sortOrderEEnum = createEEnum(SORT_ORDER);
 		paginationStyleEEnum = createEEnum(PAGINATION_STYLE);
@@ -1491,9 +1510,9 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		fieldElementEClass.getESuperTypes().add(this.getStylable());
 		fieldElementEClass.getESuperTypes().add(theCommonPackage.getNamedModelElement());
 		abstractViewEClass.getESuperTypes().add(this.getFieldContainer());
-		abstractDataTableEClass.getESuperTypes().add(this.getAbstractView());
 		abstractDataTableEClass.getESuperTypes().add(this.getDataTableElement());
 		abstractDataTableEClass.getESuperTypes().add(this.getPaginable());
+		abstractDataTableEClass.getESuperTypes().add(this.getAbstractViewOf());
 		colEClass.getESuperTypes().add(this.getFieldContainer());
 		colEClass.getESuperTypes().add(this.getMovable());
 		colEClass.getESuperTypes().add(this.getEditable());
@@ -1503,14 +1522,14 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		dataListEClass.getESuperTypes().add(this.getAbstractDataTable());
 		dataListEClass.getESuperTypes().add(this.getCol());
 		dataTableEClass.getESuperTypes().add(this.getAbstractDataTable());
-		facetMapEClass.getESuperTypes().add(this.getAbstractView());
 		facetMapEClass.getESuperTypes().add(this.getPaginable());
-		treeEClass.getESuperTypes().add(this.getAbstractView());
+		facetMapEClass.getESuperTypes().add(this.getAbstractViewOf());
 		treeEClass.getESuperTypes().add(this.getSortable());
 		treeEClass.getESuperTypes().add(this.getEditable());
 		treeEClass.getESuperTypes().add(this.getMovable());
 		treeEClass.getESuperTypes().add(this.getFilterable());
-		composedViewEClass.getESuperTypes().add(this.getFieldContainer());
+		treeEClass.getESuperTypes().add(this.getAbstractViewOf());
+		composedViewEClass.getESuperTypes().add(this.getAbstractView());
 		fieldEClass.getESuperTypes().add(this.getFieldElement());
 		textFieldEClass.getESuperTypes().add(this.getField());
 		passwordFieldEClass.getESuperTypes().add(this.getField());
@@ -1529,6 +1548,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		urlFieldEClass.getESuperTypes().add(this.getField());
 		imageFieldEClass.getESuperTypes().add(this.getFileField());
 		fieldGroupEClass.getESuperTypes().add(this.getFieldContainer());
+		abstractViewOfEClass.getESuperTypes().add(this.getAbstractView());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(viewCollectionEClass, ViewCollection.class, "ViewCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1546,12 +1566,9 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		initEAttribute(getFieldElement_Hidden(), ecorePackage.getEBoolean(), "hidden", null, 0, 1, FieldElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractViewEClass, AbstractView.class, "AbstractView", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAbstractView_ViewOf(), theCommonPackage.getContainer(), null, "viewOf", null, 0, 1, AbstractView.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractView_Operations(), theCommonPackage.getOperationComponent(), null, "operations", null, 0, 1, AbstractView.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(abstractViewEClass, this.getField(), "getFields", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(abstractViewEClass, this.getCol(), "getCols", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(abstractViewEClass, this.getField(), "getDirectChildFields", 0, -1, IS_UNIQUE, IS_ORDERED);
 
@@ -1565,6 +1582,8 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		initEReference(getAbstractDataTable_HaveRowActions(), theCommonPackage.getOperationComponent(), null, "haveRowActions", null, 0, 1, AbstractDataTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractDataTable_HaveSelectActions(), theCommonPackage.getOperationComponent(), null, "haveSelectActions", null, 0, 1, AbstractDataTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractDataTable_HaveDefaultColActions(), theCommonPackage.getOperationComponent(), null, "haveDefaultColActions", null, 0, 1, AbstractDataTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(abstractDataTableEClass, this.getCol(), "getCols", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(colEClass, Col.class, "Col", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCol_Actions(), theCommonPackage.getOperationComponent(), null, "actions", null, 0, 1, Col.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1668,6 +1687,9 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		initEClass(fieldGroupEClass, FieldGroup.class, "FieldGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(abstractViewOfEClass, AbstractViewOf.class, "AbstractViewOf", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAbstractViewOf_ViewOf(), theCommonPackage.getContainer(), null, "viewOf", null, 0, 1, AbstractViewOf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(sortOrderEEnum, SortOrder.class, "SortOrder");
 		addEEnumLiteral(sortOrderEEnum, SortOrder.ASC);
@@ -1767,36 +1789,36 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		  (abstractViewEClass.getEOperations().get(1), 
 		   source, 
 		   new String[] {
-			 "description", "Get all the Cols of the AbstractView",
-			 "body", "self.children->select(oclIsTypeOf(Col)).oclAsType(Col)"
-		   });		
-		addAnnotation
-		  (abstractViewEClass.getEOperations().get(2), 
-		   source, 
-		   new String[] {
 			 "description", "Get all the fields of the AbstractView, excluding the FieldContainers",
 			 "body", "self.children->select(oclIsKindOf(Field))"
 		   });		
 		addAnnotation
-		  (abstractViewEClass.getEOperations().get(3), 
+		  (abstractViewEClass.getEOperations().get(2), 
 		   source, 
 		   new String[] {
 			 "description", "Get inner AbtractView of the AbstractView",
 			 "body", "self.children->select(oclIsKindOf(AbstractView))"
 		   });		
 		addAnnotation
-		  (abstractViewEClass.getEOperations().get(4), 
+		  (abstractViewEClass.getEOperations().get(3), 
 		   source, 
 		   new String[] {
 			 "description", "Get all the fields of the AbstractView, including disabled Field, excluding the FieldContainers",
 			 "body", "self.getFields()->union(self.getDisabledFields())"
 		   });		
 		addAnnotation
-		  (abstractViewEClass.getEOperations().get(5), 
+		  (abstractViewEClass.getEOperations().get(4), 
 		   source, 
 		   new String[] {
 			 "description", "Get all the disabled Fields",
 			 "body", "self.disabled->select(oclIsKindOf(Col)).oclAsType(Col).children->select(oclIsKindOf(Field))"
+		   });		
+		addAnnotation
+		  (abstractDataTableEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "description", "Get all the Cols of the AbstractView",
+			 "body", "self.children->select(oclIsTypeOf(Col)).oclAsType(Col)"
 		   });									
 		addAnnotation
 		  (facetMapEClass.getEOperations().get(0), 

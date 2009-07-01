@@ -17,5 +17,5 @@ package com.bluexml.side.view;
  * @model
  * @generated
  */
-public interface ComposedView extends FieldContainer {
+public interface ComposedView extends AbstractView {
 } // ComposedView

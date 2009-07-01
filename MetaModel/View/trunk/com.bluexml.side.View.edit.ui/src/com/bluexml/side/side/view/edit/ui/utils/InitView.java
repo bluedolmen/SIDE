@@ -23,6 +23,7 @@ import com.bluexml.side.side.view.edit.ui.utils.model.ClassUtils;
 import com.bluexml.side.side.view.edit.ui.utils.model.ViewUtils;
 import com.bluexml.side.util.libs.ui.UIUtils;
 import com.bluexml.side.view.AbstractView;
+import com.bluexml.side.view.AbstractViewOf;
 import com.bluexml.side.view.FacetMap;
 import com.bluexml.side.view.FieldElement;
 import com.bluexml.side.view.ViewFactory;
@@ -32,7 +33,7 @@ public class InitView {
 
 	public static int kindOfList = 0;
 
-	public static Command init(AbstractView av, EditingDomain domain) {
+	public static Command init(AbstractViewOf av, EditingDomain domain) {
 		kindOfList = 0;
 		CompoundCommand cmd = new CompoundCommand();
 		;
@@ -64,7 +65,7 @@ public class InitView {
 					if (av instanceof FacetMap) {
 						askTypeOfList();
 						if (kindOfList != 0) {
-							AbstractView subList = null;
+							AbstractViewOf subList = null;
 							if (kindOfList == 1) {
 								subList = ViewFactory.eINSTANCE
 										.createDataTable();
@@ -137,7 +138,7 @@ public class InitView {
 	}
 
 	private static Collection<FieldElement> getViewElementForClass(Clazz c,
-			AbstractView av) {
+			AbstractViewOf av) {
 		Collection<FieldElement> list = new ArrayList<FieldElement>();
 		if (c != null) {
 			// Attributes :

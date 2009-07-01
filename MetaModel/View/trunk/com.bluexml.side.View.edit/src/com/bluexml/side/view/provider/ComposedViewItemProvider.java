@@ -31,7 +31,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * @generated
  */
 public class ComposedViewItemProvider
-	extends FieldContainerItemProvider
+	extends AbstractViewItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -110,26 +110,7 @@ public class ComposedViewItemProvider
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-		//super.collectNewChildDescriptors(newChildDescriptors, object);
-		newChildDescriptors.add
-		(createChildParameter
-			(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-			 ViewFactory.eINSTANCE.createDataList()));
-
-	newChildDescriptors.add
-		(createChildParameter
-			(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-			 ViewFactory.eINSTANCE.createDataTable()));
-
-	newChildDescriptors.add
-		(createChildParameter
-			(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-			 ViewFactory.eINSTANCE.createFacetMap()));
-
-	newChildDescriptors.add
-		(createChildParameter
-			(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-			 ViewFactory.eINSTANCE.createTree()));
+		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
 	/**

@@ -7,6 +7,7 @@
 package com.bluexml.side.view;
 
 import com.bluexml.side.common.OperationComponent;
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,7 +27,7 @@ import com.bluexml.side.common.OperationComponent;
  * @model abstract="true"
  * @generated
  */
-public interface AbstractDataTable extends AbstractView, DataTableElement, Paginable {
+public interface AbstractDataTable extends DataTableElement, Paginable, AbstractViewOf {
 	/**
 	 * Returns the value of the '<em><b>Have Row Actions</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -107,5 +108,14 @@ public interface AbstractDataTable extends AbstractView, DataTableElement, Pagin
 	 * @generated
 	 */
 	void setHaveDefaultColActions(OperationComponent value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL description='Get all the Cols of the AbstractView' body='self.children->select(oclIsTypeOf(Col)).oclAsType(Col)'"
+	 * @generated
+	 */
+	EList<Col> getCols();
 		
 } // AbstractDataTable

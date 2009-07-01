@@ -53,6 +53,7 @@ import com.bluexml.side.side.view.edit.ui.actions.SynchronizeViews;
 import com.bluexml.side.side.view.edit.ui.actions.TransformField;
 import com.bluexml.side.side.view.edit.ui.utils.FieldTransformation;
 import com.bluexml.side.view.AbstractView;
+import com.bluexml.side.view.AbstractViewOf;
 import com.bluexml.side.view.Col;
 import com.bluexml.side.view.Field;
 import com.bluexml.side.view.FieldElement;
@@ -545,8 +546,8 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 	protected void fillAddLinkedMenu(IMenuManager mgr, IMenuManager topMenu) {
 		Object o = ((TreeSelection) this.selectionProvider.getSelection())
 		.getFirstElement();
-		if (o instanceof AbstractView) {
-			AbstractView av = (AbstractView) o;
+		if (o instanceof AbstractViewOf) {
+			AbstractViewOf av = (AbstractViewOf) o;
 			if (av.getViewOf() != null && av.getViewOf() instanceof Clazz){
 				Clazz c = (Clazz) av.getViewOf();
 				List<Association> path = new ArrayList<Association>();
@@ -561,7 +562,7 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 	 * @param c
 	 * @param av 
 	 */
-	private void addLinkedFieldAssociation(IMenuManager topMenu, final Clazz c, final List<Association> path, final AbstractView av) {
+	private void addLinkedFieldAssociation(IMenuManager topMenu, final Clazz c, final List<Association> path, final AbstractViewOf av) {
 		for (final Association a : c.getAllSourceAssociations()) {
 			IMenuManager addLinkedFieldMenu = new MenuManager(a.getTitle(),"browse" + a.getName());
 			addLinkedFieldMenu.add(new Action("never shown entry") {});
@@ -583,7 +584,7 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 	 * @param av 
 	 * @param c 
 	 */
-	protected void fillAddLinkedSubMenu(IMenuManager mgr, Association a, List<Association> p, AbstractView av, Clazz c) {
+	protected void fillAddLinkedSubMenu(IMenuManager mgr, Association a, List<Association> p, AbstractViewOf av, Clazz c) {
 		List<Association> path = new ArrayList<Association>(p);
 		path.add(a);
 		//TODO : change when new OCL method are done
