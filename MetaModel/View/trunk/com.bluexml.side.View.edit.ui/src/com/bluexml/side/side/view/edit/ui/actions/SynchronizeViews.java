@@ -60,7 +60,9 @@ ISelectionChangedListener {
 		try {
 			CompoundCommand cmd = new CompoundCommand();
 			for(AbstractView view : av.getViews()) {
-				cmd.append(ClassUtils.synchronizeView(view, domain));
+				if (view instanceof AbstractViewOf) {
+					cmd.append(ClassUtils.synchronizeView((AbstractViewOf)view, domain));
+				}
 			}
 			domain.getCommandStack().execute(cmd);
 		} catch (Exception e) {

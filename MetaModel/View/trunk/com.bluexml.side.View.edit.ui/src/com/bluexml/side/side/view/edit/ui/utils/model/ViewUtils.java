@@ -15,6 +15,7 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import com.bluexml.side.side.view.edit.ui.utils.InternalModification;
 import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.Col;
+import com.bluexml.side.view.ComposedView;
 import com.bluexml.side.view.DataList;
 import com.bluexml.side.view.DataTable;
 import com.bluexml.side.view.FacetMap;
@@ -26,6 +27,11 @@ import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
 
 public class ViewUtils {
+	/**
+	 * Return the top view element for the given EObject, or null if no view found.
+	 * @param f
+	 * @return
+	 */
 	public static AbstractView getViewForElement(EObject f) {
 		AbstractView v = null;
 		if (f != null) {
@@ -45,6 +51,7 @@ public class ViewUtils {
 	 * @param collection
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public static CompoundCommand createRemoveCommand(EditingDomain domain, EObject owner, Collection collection) {
 		CompoundCommand cmd = new CompoundCommand();
 		// First we check if we synchronize
@@ -94,6 +101,11 @@ public class ViewUtils {
 		return cmd;
 	}
 
+	/**
+	 * Return the name as string for a given View
+	 * @param av
+	 * @return
+	 */
 	public static String getTypeAsString(AbstractView av) {
 		String name = "";
 		if (av instanceof DataList) {
@@ -104,7 +116,9 @@ public class ViewUtils {
 			name = "FacetMap";
 		} else if (av instanceof DataTable) {
 			name = "Data Table";
-		} 
+		} else if (av instanceof ComposedView) {
+			name = "Composed View";
+		}
 		return name;
 	}
 }

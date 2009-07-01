@@ -127,12 +127,13 @@ public class ClassUtils {
 	 * @param domain
 	 * @return
 	 */
-	public static Command synchronizeView(AbstractView view, EditingDomain domain) {
+	public static Command synchronizeView(AbstractViewOf view, EditingDomain domain) {
 		CompoundCommand cmd = new CompoundCommand();
 		Container container = view.getViewOf();
 		if (container instanceof Clazz) {
 			// Collect information on class and view :
 			EList<Field> fields = view.getDisabledAndEnabledField();
+			
 			Clazz c = (Clazz) view.getViewOf();
 			EList<Attribute> attributes = c.getAllAttributes();
 			// #1 : Search things to add (new in Class)
@@ -185,7 +186,7 @@ public class ClassUtils {
 	}
 
 	/**
-	 * Create command to delete given field
+	 * Create command to delete given fields
 	 * @param domain
 	 * @param toDelete
 	 * @param view 
@@ -233,7 +234,6 @@ public class ClassUtils {
 			EList<Attribute> attributes) {
 		List<Attribute> result = new ArrayList<Attribute>();
 		for (Attribute a : attributes) {
-			boolean found = false;
 			Iterator<Field> it = fields.iterator();
 			while (it.hasNext()) {
 				Field f = it.next();
@@ -271,7 +271,9 @@ public class ClassUtils {
 					result.add(f);
 				}
 			} else {
-				//TODO : synchronization for linked field
+				if (f.getMapTo() == null) {
+					result.add(f);
+				}
 			}
 		}
 		

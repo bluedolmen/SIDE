@@ -22,7 +22,6 @@ import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.side.view.edit.ui.utils.model.ClassUtils;
 import com.bluexml.side.side.view.edit.ui.utils.model.ViewUtils;
 import com.bluexml.side.util.libs.ui.UIUtils;
-import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.AbstractViewOf;
 import com.bluexml.side.view.FacetMap;
 import com.bluexml.side.view.FieldElement;

@@ -446,96 +446,114 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 		refreshViewerAction.setEnabled(refreshViewerAction.isEnabled());
 		menuManager.insertAfter("ui-actions", refreshViewerAction);
 
+		//#### VIEW
 		menuManager
 				.insertAfter("ui-actions", new Separator("ui-commonActions"));
 		if (o instanceof AbstractView) {
-			// Initialize
-			initializeView.setImageDescriptor(ImageDescriptor.createFromFile(
-					this.getClass(), "/icons/menu/initialize.png"));
-			menuManager.insertAfter("ui-actions", initializeView);
-
-			// Refresh Outline
-			refreshOutline.setImageDescriptor(ImageDescriptor.createFromFile(
-					this.getClass(), "/icons/menu/refreshOutline.png"));
-			menuManager.insertAfter("ui-actions", refreshOutline);
-
-			// Restore
-			MenuManager restoreMenu = new MenuManager("Restore",
-					ImageDescriptor.createFromFile(this.getClass(),
-							"/icons/menu/restore.png"), "restore");
-			if (((AbstractView) o).getDisabled().size() > 0) {
-				restoreMenu.add(new Action("never shown entry") {
-				});
-				restoreMenu.setRemoveAllWhenShown(true);
-				IMenuListener restoreListener = new IMenuListener() {
-					public void menuAboutToShow(IMenuManager m) {
-						fillRestoreContextMenu(m);
-					}
-				};
-				restoreMenu.addMenuListener(restoreListener);
-			}
-			menuManager.insertAfter("ui-actions", restoreMenu);
-			
-			// Add linked field
-			final IMenuManager addLinkedFieldMenu = new MenuManager("Add linked Field",ImageDescriptor.createFromFile(this.getClass(),
-			"/icons/menu/addLinkedField.png"), 
-			"transform");
-			addLinkedFieldMenu.add(new Action("never shown entry") {
-			});
-			addLinkedFieldMenu.setRemoveAllWhenShown(true);
-			IMenuListener addLinkedFieldListener = new IMenuListener() {
-				public void menuAboutToShow(IMenuManager m) {
-					fillAddLinkedMenu(m, addLinkedFieldMenu);
-				}
-			};
-			addLinkedFieldMenu.addMenuListener(addLinkedFieldListener);
-			menuManager.insertAfter("ui-actions", addLinkedFieldMenu);
+			addActionsForViews(menuManager, o);
 		}
 
+		//#### FIELD
 		// ---- Transform Menu
 		if (o instanceof Field) {
-			IMenuManager transformMenu = new MenuManager("Transform to","addLinked");
-			transformMenu.add(new Action("never shown entry") {
-			});
-			transformMenu.setRemoveAllWhenShown(true);
-			IMenuListener transformListener = new IMenuListener() {
-				public void menuAboutToShow(IMenuManager m) {
-					fillTransformContextMenu(m);
-				}
-			};
-			transformMenu.addMenuListener(transformListener);
-			menuManager.insertAfter("ui-actions", transformMenu);
+			addActionsForFields(menuManager);
 		}
 
 		// Merge cols :
 		if (o instanceof Col && !(o instanceof AbstractView)) {
-			TreeSelection selection = ((TreeSelection) this.selectionProvider
-					.getSelection());
-			// Check if there is more than one col selected
-			if (selection.size() > 0) {
-				// Check if all selected objects are cols
-				boolean allCol = true;
-				for (Object s : selection.toList()) {
-					if (!(s instanceof Col)) {
-						allCol = false;
-					}
-				}
-				if (allCol) {
-					mergeCol.setImageDescriptor(ImageDescriptor.createFromFile(
-							this.getClass(), "/icons/menu/merge.gif"));
-					menuManager.insertAfter("ui-actions", mergeCol);
-				}
-			}
+			addActionsForCols(menuManager);
 		}
 
 		if (o instanceof ViewCollection) {
-			// Synchronize
-			synchronizeView.setImageDescriptor(ImageDescriptor.createFromFile(
-					this.getClass(), "/icons/menu/synchronize.png"));
-			menuManager.insertAfter("ui-actions", synchronizeView);
+			addActionsForCollections(menuManager);
 		}
 
 		super.addGlobalActions(menuManager);
+	}
+
+	private void addActionsForCollections(IMenuManager menuManager) {
+		// Synchronize
+		synchronizeView.setImageDescriptor(ImageDescriptor.createFromFile(
+				this.getClass(), "/icons/menu/synchronize.png"));
+		menuManager.insertAfter("ui-actions", synchronizeView);
+	}
+
+	private void addActionsForCols(IMenuManager menuManager) {
+		TreeSelection selection = ((TreeSelection) this.selectionProvider
+				.getSelection());
+		// Check if there is more than one col selected
+		if (selection.size() > 0) {
+			// Check if all selected objects are cols
+			boolean allCol = true;
+			for (Object s : selection.toList()) {
+				if (!(s instanceof Col)) {
+					allCol = false;
+				}
+			}
+			if (allCol) {
+				mergeCol.setImageDescriptor(ImageDescriptor.createFromFile(
+						this.getClass(), "/icons/menu/merge.gif"));
+				menuManager.insertAfter("ui-actions", mergeCol);
+			}
+		}
+	}
+
+	private void addActionsForFields(IMenuManager menuManager) {
+		IMenuManager transformMenu = new MenuManager("Transform to","addLinked");
+		transformMenu.add(new Action("never shown entry") {
+		});
+		transformMenu.setRemoveAllWhenShown(true);
+		IMenuListener transformListener = new IMenuListener() {
+			public void menuAboutToShow(IMenuManager m) {
+				fillTransformContextMenu(m);
+			}
+		};
+		transformMenu.addMenuListener(transformListener);
+		menuManager.insertAfter("ui-actions", transformMenu);
+	}
+
+	private void addActionsForViews(IMenuManager menuManager, Object o) {
+		// Initialize
+		initializeView.setImageDescriptor(ImageDescriptor.createFromFile(
+				this.getClass(), "/icons/menu/initialize.png"));
+		menuManager.insertAfter("ui-actions", initializeView);
+
+		// Refresh Outline
+		refreshOutline.setImageDescriptor(ImageDescriptor.createFromFile(
+				this.getClass(), "/icons/menu/refreshOutline.png"));
+		menuManager.insertAfter("ui-actions", refreshOutline);
+
+		// Restore
+		MenuManager restoreMenu = new MenuManager("Restore",
+				ImageDescriptor.createFromFile(this.getClass(),
+						"/icons/menu/restore.png"), "restore");
+		if (((AbstractView) o).getDisabled().size() > 0) {
+			restoreMenu.add(new Action("never shown entry") {
+			});
+			restoreMenu.setRemoveAllWhenShown(true);
+			IMenuListener restoreListener = new IMenuListener() {
+				public void menuAboutToShow(IMenuManager m) {
+					fillRestoreContextMenu(m);
+				}
+			};
+			restoreMenu.addMenuListener(restoreListener);
+		}
+		menuManager.insertAfter("ui-actions", restoreMenu);
+		
+		// Add linked field
+		final IMenuManager addLinkedFieldMenu = new MenuManager("Add linked Field",ImageDescriptor.createFromFile(this.getClass(),
+		"/icons/menu/addLinkedField.png"), 
+		"transform");
+		addLinkedFieldMenu.add(new Action("never shown entry") {
+		});
+		addLinkedFieldMenu.setRemoveAllWhenShown(true);
+		IMenuListener addLinkedFieldListener = new IMenuListener() {
+			public void menuAboutToShow(IMenuManager m) {
+				fillAddLinkedMenu(m, addLinkedFieldMenu);
+			}
+		};
+		addLinkedFieldMenu.addMenuListener(addLinkedFieldListener);
+		menuManager.insertAfter("ui-actions", addLinkedFieldMenu);
 	}
 
 	/**
