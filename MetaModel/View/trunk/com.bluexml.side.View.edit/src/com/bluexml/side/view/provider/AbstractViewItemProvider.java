@@ -147,5 +147,4 @@ public class AbstractViewItemProvider
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}
-
 }

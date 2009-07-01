@@ -1363,6 +1363,9 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		abstractViewEClass = createEClass(ABSTRACT_VIEW);
 
+		abstractViewOfEClass = createEClass(ABSTRACT_VIEW_OF);
+		createEReference(abstractViewOfEClass, ABSTRACT_VIEW_OF__VIEW_OF);
+
 		abstractDataTableEClass = createEClass(ABSTRACT_DATA_TABLE);
 		createEReference(abstractDataTableEClass, ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS);
 		createEReference(abstractDataTableEClass, ABSTRACT_DATA_TABLE__HAVE_SELECT_ACTIONS);
@@ -1467,9 +1470,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		fieldGroupEClass = createEClass(FIELD_GROUP);
 
-		abstractViewOfEClass = createEClass(ABSTRACT_VIEW_OF);
-		createEReference(abstractViewOfEClass, ABSTRACT_VIEW_OF__VIEW_OF);
-
 		actionableEClass = createEClass(ACTIONABLE);
 		createEReference(actionableEClass, ACTIONABLE__OPERATIONS);
 
@@ -1519,9 +1519,10 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		fieldElementEClass.getESuperTypes().add(this.getStylable());
 		fieldElementEClass.getESuperTypes().add(theCommonPackage.getNamedModelElement());
 		abstractViewEClass.getESuperTypes().add(this.getFieldContainer());
+		abstractViewOfEClass.getESuperTypes().add(this.getAbstractView());
+		abstractDataTableEClass.getESuperTypes().add(this.getAbstractViewOf());
 		abstractDataTableEClass.getESuperTypes().add(this.getDataTableElement());
 		abstractDataTableEClass.getESuperTypes().add(this.getPaginable());
-		abstractDataTableEClass.getESuperTypes().add(this.getAbstractViewOf());
 		colEClass.getESuperTypes().add(this.getFieldContainer());
 		colEClass.getESuperTypes().add(this.getMovable());
 		colEClass.getESuperTypes().add(this.getEditable());
@@ -1533,14 +1534,14 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		dataListEClass.getESuperTypes().add(this.getCol());
 		dataTableEClass.getESuperTypes().add(this.getAbstractDataTable());
 		dataTableEClass.getESuperTypes().add(this.getActionable());
-		facetMapEClass.getESuperTypes().add(this.getPaginable());
 		facetMapEClass.getESuperTypes().add(this.getAbstractViewOf());
+		facetMapEClass.getESuperTypes().add(this.getPaginable());
 		facetMapEClass.getESuperTypes().add(this.getActionable());
+		treeEClass.getESuperTypes().add(this.getAbstractViewOf());
 		treeEClass.getESuperTypes().add(this.getSortable());
 		treeEClass.getESuperTypes().add(this.getEditable());
 		treeEClass.getESuperTypes().add(this.getMovable());
 		treeEClass.getESuperTypes().add(this.getFilterable());
-		treeEClass.getESuperTypes().add(this.getAbstractViewOf());
 		treeEClass.getESuperTypes().add(this.getActionable());
 		composedViewEClass.getESuperTypes().add(this.getAbstractView());
 		fieldEClass.getESuperTypes().add(this.getFieldElement());
@@ -1561,7 +1562,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		urlFieldEClass.getESuperTypes().add(this.getField());
 		imageFieldEClass.getESuperTypes().add(this.getFileField());
 		fieldGroupEClass.getESuperTypes().add(this.getFieldContainer());
-		abstractViewOfEClass.getESuperTypes().add(this.getAbstractView());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(viewCollectionEClass, ViewCollection.class, "ViewCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1589,6 +1589,9 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		addEOperation(abstractViewEClass, this.getField(), "getDisabledAndEnabledField", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(abstractViewEClass, this.getField(), "getDisabledFields", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(abstractViewOfEClass, AbstractViewOf.class, "AbstractViewOf", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAbstractViewOf_ViewOf(), theCommonPackage.getContainer(), null, "viewOf", null, 0, 1, AbstractViewOf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractDataTableEClass, AbstractDataTable.class, "AbstractDataTable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractDataTable_HaveRowActions(), theCommonPackage.getOperationComponent(), null, "haveRowActions", null, 0, 1, AbstractDataTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1698,9 +1701,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		initEClass(fieldGroupEClass, FieldGroup.class, "FieldGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(abstractViewOfEClass, AbstractViewOf.class, "AbstractViewOf", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAbstractViewOf_ViewOf(), theCommonPackage.getContainer(), null, "viewOf", null, 0, 1, AbstractViewOf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(actionableEClass, Actionable.class, "Actionable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getActionable_Operations(), theCommonPackage.getOperationComponent(), null, "operations", null, 0, 1, Actionable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1797,7 +1797,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		   source, 
 		   new String[] {
 			 "description", "Get all the fields of the AbstractView, excluding the FieldContainers",
-			 "body", "self.getCols()->children->select(oclIsKindOf(Field))->asSet()->union(self.getDirectChildFields())"
+			 "body", "if (self.oclIsKindOf(AbstractDataTable)) then self.oclAsType(AbstractDataTable).getCols()->children->select(oclIsKindOf(Field))->asSet()->union(self.getDirectChildFields()) else self.getDirectChildFields() endif"
 		   });		
 		addAnnotation
 		  (abstractViewEClass.getEOperations().get(1), 
@@ -1825,7 +1825,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		   source, 
 		   new String[] {
 			 "description", "Get all the disabled Fields",
-			 "body", "self.disabled->select(oclIsKindOf(Col)).oclAsType(Col).children->select(oclIsKindOf(Field))"
+			 "body", "if (self.oclIsKindOf(AbstractDataTable)) then self.oclAsType(AbstractDataTable).disabled->select(oclIsKindOf(Col)).oclAsType(Col).children->select(oclIsKindOf(Field))->asSet()->union(self.disabled->select(oclIsKindOf(Field))) else self.disabled->select(oclIsKindOf(Field)) endif"
 		   });		
 		addAnnotation
 		  (abstractDataTableEClass.getEOperations().get(0), 

@@ -93,6 +93,10 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 				return createAbstractViewAdapter();
 			}
 			@Override
+			public Adapter caseAbstractViewOf(AbstractViewOf object) {
+				return createAbstractViewOfAdapter();
+			}
+			@Override
 			public Adapter caseAbstractDataTable(AbstractDataTable object) {
 				return createAbstractDataTableAdapter();
 			}
@@ -235,10 +239,6 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseFieldGroup(FieldGroup object) {
 				return createFieldGroupAdapter();
-			}
-			@Override
-			public Adapter caseAbstractViewOf(AbstractViewOf object) {
-				return createAbstractViewOfAdapter();
 			}
 			@Override
 			public Adapter caseActionable(Actionable object) {

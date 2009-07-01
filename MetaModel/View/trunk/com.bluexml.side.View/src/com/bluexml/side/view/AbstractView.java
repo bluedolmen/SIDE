@@ -26,7 +26,7 @@ public interface AbstractView extends FieldContainer {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL description='Get all the fields of the AbstractView, excluding the FieldContainers' body='self.getCols()->children->select(oclIsKindOf(Field))->asSet()->union(self.getDirectChildFields())'"
+	 *        annotation="http://www.bluexml.com/OCL description='Get all the fields of the AbstractView, excluding the FieldContainers' body='if (self.oclIsKindOf(AbstractDataTable)) then self.oclAsType(AbstractDataTable).getCols()->children->select(oclIsKindOf(Field))->asSet()->union(self.getDirectChildFields()) else self.getDirectChildFields() endif'"
 	 * @generated
 	 */
 	EList<Field> getFields();
@@ -62,7 +62,7 @@ public interface AbstractView extends FieldContainer {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL description='Get all the disabled Fields' body='self.disabled->select(oclIsKindOf(Col)).oclAsType(Col).children->select(oclIsKindOf(Field))'"
+	 *        annotation="http://www.bluexml.com/OCL description='Get all the disabled Fields' body='if (self.oclIsKindOf(AbstractDataTable)) then self.oclAsType(AbstractDataTable).disabled->select(oclIsKindOf(Col)).oclAsType(Col).children->select(oclIsKindOf(Field))->asSet()->union(self.disabled->select(oclIsKindOf(Field))) else self.disabled->select(oclIsKindOf(Field)) endif'"
 	 * @generated
 	 */
 	EList<Field> getDisabledFields();

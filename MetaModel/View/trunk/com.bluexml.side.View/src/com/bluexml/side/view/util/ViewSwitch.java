@@ -131,12 +131,24 @@ public class ViewSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ViewPackage.ABSTRACT_VIEW_OF: {
+				AbstractViewOf abstractViewOf = (AbstractViewOf)theEObject;
+				T result = caseAbstractViewOf(abstractViewOf);
+				if (result == null) result = caseAbstractView(abstractViewOf);
+				if (result == null) result = caseFieldContainer(abstractViewOf);
+				if (result == null) result = caseFieldElement(abstractViewOf);
+				if (result == null) result = caseStylable(abstractViewOf);
+				if (result == null) result = caseNamedModelElement(abstractViewOf);
+				if (result == null) result = caseModelElement(abstractViewOf);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ViewPackage.ABSTRACT_DATA_TABLE: {
 				AbstractDataTable abstractDataTable = (AbstractDataTable)theEObject;
 				T result = caseAbstractDataTable(abstractDataTable);
+				if (result == null) result = caseAbstractViewOf(abstractDataTable);
 				if (result == null) result = caseDataTableElement(abstractDataTable);
 				if (result == null) result = casePaginable(abstractDataTable);
-				if (result == null) result = caseAbstractViewOf(abstractDataTable);
 				if (result == null) result = caseAbstractView(abstractDataTable);
 				if (result == null) result = caseFieldContainer(abstractDataTable);
 				if (result == null) result = caseFieldElement(abstractDataTable);
@@ -201,9 +213,9 @@ public class ViewSwitch<T> {
 				T result = caseDataList(dataList);
 				if (result == null) result = caseAbstractDataTable(dataList);
 				if (result == null) result = caseCol(dataList);
+				if (result == null) result = caseAbstractViewOf(dataList);
 				if (result == null) result = caseDataTableElement(dataList);
 				if (result == null) result = casePaginable(dataList);
-				if (result == null) result = caseAbstractViewOf(dataList);
 				if (result == null) result = caseFieldContainer(dataList);
 				if (result == null) result = caseMovable(dataList);
 				if (result == null) result = caseEditable(dataList);
@@ -223,9 +235,9 @@ public class ViewSwitch<T> {
 				T result = caseDataTable(dataTable);
 				if (result == null) result = caseAbstractDataTable(dataTable);
 				if (result == null) result = caseActionable(dataTable);
+				if (result == null) result = caseAbstractViewOf(dataTable);
 				if (result == null) result = caseDataTableElement(dataTable);
 				if (result == null) result = casePaginable(dataTable);
-				if (result == null) result = caseAbstractViewOf(dataTable);
 				if (result == null) result = caseAbstractView(dataTable);
 				if (result == null) result = caseFieldContainer(dataTable);
 				if (result == null) result = caseFieldElement(dataTable);
@@ -238,8 +250,8 @@ public class ViewSwitch<T> {
 			case ViewPackage.FACET_MAP: {
 				FacetMap facetMap = (FacetMap)theEObject;
 				T result = caseFacetMap(facetMap);
-				if (result == null) result = casePaginable(facetMap);
 				if (result == null) result = caseAbstractViewOf(facetMap);
+				if (result == null) result = casePaginable(facetMap);
 				if (result == null) result = caseActionable(facetMap);
 				if (result == null) result = caseAbstractView(facetMap);
 				if (result == null) result = caseFieldContainer(facetMap);
@@ -253,11 +265,11 @@ public class ViewSwitch<T> {
 			case ViewPackage.TREE: {
 				Tree tree = (Tree)theEObject;
 				T result = caseTree(tree);
+				if (result == null) result = caseAbstractViewOf(tree);
 				if (result == null) result = caseSortable(tree);
 				if (result == null) result = caseEditable(tree);
 				if (result == null) result = caseMovable(tree);
 				if (result == null) result = caseFilterable(tree);
-				if (result == null) result = caseAbstractViewOf(tree);
 				if (result == null) result = caseActionable(tree);
 				if (result == null) result = caseAbstractView(tree);
 				if (result == null) result = caseFieldContainer(tree);
@@ -511,18 +523,6 @@ public class ViewSwitch<T> {
 				if (result == null) result = caseStylable(fieldGroup);
 				if (result == null) result = caseNamedModelElement(fieldGroup);
 				if (result == null) result = caseModelElement(fieldGroup);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ViewPackage.ABSTRACT_VIEW_OF: {
-				AbstractViewOf abstractViewOf = (AbstractViewOf)theEObject;
-				T result = caseAbstractViewOf(abstractViewOf);
-				if (result == null) result = caseAbstractView(abstractViewOf);
-				if (result == null) result = caseFieldContainer(abstractViewOf);
-				if (result == null) result = caseFieldElement(abstractViewOf);
-				if (result == null) result = caseStylable(abstractViewOf);
-				if (result == null) result = caseNamedModelElement(abstractViewOf);
-				if (result == null) result = caseModelElement(abstractViewOf);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

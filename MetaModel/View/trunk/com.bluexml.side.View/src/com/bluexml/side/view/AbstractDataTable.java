@@ -27,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * @model abstract="true"
  * @generated
  */
-public interface AbstractDataTable extends DataTableElement, Paginable, AbstractViewOf {
+public interface AbstractDataTable extends AbstractViewOf, DataTableElement, Paginable {
 	/**
 	 * Returns the value of the '<em><b>Have Row Actions</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

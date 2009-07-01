@@ -44,7 +44,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class TreeItemProvider
-	extends SortableItemProvider
+	extends AbstractViewOfItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -74,15 +74,6 @@ public class TreeItemProvider
 
 			addEditablePropertyDescriptor(object);
 			addMovablePropertyDescriptor(object);
-			addStereotypesPropertyDescriptor(object);
-			addDocumentationPropertyDescriptor(object);
-			addDescriptionPropertyDescriptor(object);
-			addNamePropertyDescriptor(object);
-			addMapToPropertyDescriptor(object);
-			addPrefixPropertyDescriptor(object);
-			addSuffixPropertyDescriptor(object);
-			addHiddenPropertyDescriptor(object);
-			addViewOfPropertyDescriptor(object);
 			addNodeOperationsPropertyDescriptor(object);
 			addDefaultDepthPropertyDescriptor(object);
 			addMaxDepthPropertyDescriptor(object);
@@ -130,204 +121,6 @@ public class TreeItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Stereotypes feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addStereotypesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ModelElement_stereotypes_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ModelElement_stereotypes_feature", "_UI_ModelElement_type"),
-				 CommonPackage.Literals.MODEL_ELEMENT__STEREOTYPES,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Documentation feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDocumentationPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ModelElement_documentation_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ModelElement_documentation_feature", "_UI_ModelElement_type"),
-				 CommonPackage.Literals.MODEL_ELEMENT__DOCUMENTATION,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Description feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDescriptionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ModelElement_description_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ModelElement_description_feature", "_UI_ModelElement_type"),
-				 CommonPackage.Literals.MODEL_ELEMENT__DESCRIPTION,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_NamedModelElement_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_NamedModelElement_name_feature", "_UI_NamedModelElement_type"),
-				 CommonPackage.Literals.NAMED_MODEL_ELEMENT__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Map To feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addMapToPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_FieldElement_mapTo_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_FieldElement_mapTo_feature", "_UI_FieldElement_type"),
-				 ViewPackage.Literals.FIELD_ELEMENT__MAP_TO,
-				 false,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Prefix feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addPrefixPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_FieldElement_prefix_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_FieldElement_prefix_feature", "_UI_FieldElement_type"),
-				 ViewPackage.Literals.FIELD_ELEMENT__PREFIX,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Suffix feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSuffixPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_FieldElement_suffix_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_FieldElement_suffix_feature", "_UI_FieldElement_type"),
-				 ViewPackage.Literals.FIELD_ELEMENT__SUFFIX,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Hidden feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addHiddenPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_FieldElement_hidden_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_FieldElement_hidden_feature", "_UI_FieldElement_type"),
-				 ViewPackage.Literals.FIELD_ELEMENT__HIDDEN,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the View Of feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addViewOfPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_AbstractViewOf_viewOf_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractViewOf_viewOf_feature", "_UI_AbstractViewOf_type"),
-				 ViewPackage.Literals.ABSTRACT_VIEW_OF__VIEW_OF,
-				 true,
-				 false,
-				 true,
-				 null,
 				 null,
 				 null));
 	}
@@ -410,13 +203,8 @@ public class TreeItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(ViewPackage.Literals.SORTABLE__SORTING);
 			childrenFeatures.add(ViewPackage.Literals.FILTERABLE__FILTERING);
-			childrenFeatures.add(ViewPackage.Literals.STYLABLE__STYLING);
-			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__TAGS);
-			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS);
-			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__METAINFO);
-			childrenFeatures.add(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN);
-			childrenFeatures.add(ViewPackage.Literals.FIELD_CONTAINER__DISABLED);
 			childrenFeatures.add(ViewPackage.Literals.ACTIONABLE__OPERATIONS);
 			childrenFeatures.add(ViewPackage.Literals.TREE__NODE_VALUE);
 		}
@@ -475,23 +263,12 @@ public class TreeItemProvider
 		switch (notification.getFeatureID(Tree.class)) {
 			case ViewPackage.TREE__EDITABLE:
 			case ViewPackage.TREE__MOVABLE:
-			case ViewPackage.TREE__DOCUMENTATION:
-			case ViewPackage.TREE__DESCRIPTION:
-			case ViewPackage.TREE__NAME:
-			case ViewPackage.TREE__PREFIX:
-			case ViewPackage.TREE__SUFFIX:
-			case ViewPackage.TREE__HIDDEN:
 			case ViewPackage.TREE__DEFAULT_DEPTH:
 			case ViewPackage.TREE__MAX_DEPTH:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case ViewPackage.TREE__SORTING:
 			case ViewPackage.TREE__FILTERING:
-			case ViewPackage.TREE__STYLING:
-			case ViewPackage.TREE__TAGS:
-			case ViewPackage.TREE__COMMENTS:
-			case ViewPackage.TREE__METAINFO:
-			case ViewPackage.TREE__CHILDREN:
-			case ViewPackage.TREE__DISABLED:
 			case ViewPackage.TREE__OPERATIONS:
 			case ViewPackage.TREE__NODE_VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
@@ -513,258 +290,13 @@ public class TreeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(ViewPackage.Literals.SORTABLE__SORTING,
+				 ViewFactory.eINSTANCE.createSorting()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(ViewPackage.Literals.FILTERABLE__FILTERING,
 				 ViewFactory.eINSTANCE.createFiltering()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.STYLABLE__STYLING,
-				 ViewFactory.eINSTANCE.createStyling()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CommonPackage.Literals.MODEL_ELEMENT__TAGS,
-				 CommonFactory.eINSTANCE.createTag()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
-				 CommonFactory.eINSTANCE.createComment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CommonPackage.Literals.MODEL_ELEMENT__METAINFO,
-				 CommonFactory.eINSTANCE.createMetaInfo()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createCol()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createDataList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createDataTable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createFacetMap()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createTree()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createComposedView()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createTextField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createBooleanField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createPasswordField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createFloatField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createActionField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createDateField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createTimeField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createDateTimeField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createPhoneNumberField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createEmailField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createIntegerField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createFileField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createSelectField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createHtmlField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createURLField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createImageField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createFieldGroup()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createCol()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createDataList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createDataTable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createFacetMap()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createTree()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createComposedView()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createTextField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createBooleanField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createPasswordField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createFloatField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createActionField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createDateField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createTimeField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createDateTimeField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createPhoneNumberField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createEmailField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createIntegerField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createFileField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createSelectField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createHtmlField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createURLField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createImageField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createFieldGroup()));
 
 		newChildDescriptors.add
 			(createChildParameter

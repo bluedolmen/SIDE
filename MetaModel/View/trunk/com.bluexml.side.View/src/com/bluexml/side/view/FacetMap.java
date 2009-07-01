@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface FacetMap extends Paginable, AbstractViewOf, Actionable {
+public interface FacetMap extends AbstractViewOf, Paginable, Actionable {
 	/**
 	 * Returns the value of the '<em><b>Display Empty Facet</b></em>' attribute.
 	 * <!-- begin-user-doc -->
