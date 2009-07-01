@@ -19,7 +19,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	/*
 	 * final fields used in generation too
 	 */
-	public static String GENERATOR_OPTIONS_DATAMODEL = "alfresco.dataModel";
+	public static String GENERATOR_OPTIONS_PORTAL = "alfrescoShare.defaultDocList";
 	public static String GENERATOR_OPTIONS_SHARE_EXTENSION = "alfresco.share.extension";
 	public static String GENERATOR_OPTIONS_WEBSCRIPT_REPORT = "alfresco.webscript.report";
 	public static String GENERATOR_OPTIONS_DEFAULTFORMS = "class.alfrescoShare.defaultForms";
@@ -41,21 +41,21 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	public List<String> getClassTemplates() {
 		if (classTemplates == null) {
 			List<String> result = new ArrayList<String>();
-			if (getGeneratorOptionValue(GENERATOR_OPTIONS_DATAMODEL)) {
 
-				result.add("/com.bluexml.side.Class.generator.alfresco/templates/Model/alfrescoGenerator_model.mt");
-				result.add("/com.bluexml.side.Class.generator.alfresco/templates/Model/alfrescoGenerator_model_properties.mt");
+			result.add("/com.bluexml.side.Class.generator.alfresco/templates/Model/alfrescoGenerator_model.mt");
+			result.add("/com.bluexml.side.Class.generator.alfresco/templates/Model/alfrescoGenerator_model_properties.mt");
 
-				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webClient/alfrescoGenerator_web_client_config.mt");
+			result.add("/com.bluexml.side.Class.generator.alfresco/templates/webClient/alfrescoGenerator_web_client_config.mt");
 
-				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoGenerator_context.mt");
-			}
+			result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoGenerator_context.mt");
 
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_SHARE_EXTENSION)) {
-				
+
 				// DefaultdocListView add custom version of docList webScript
 				// used by AlfrescoShare to render Document list
-				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/customViews.ftl.mt");
+				if (getGeneratorOptionValue(GENERATOR_OPTIONS_PORTAL)) {
+					result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/customViews.ftl.mt");
+				}
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/defaultdoclistView_ftl.mt");
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/doclist.get.desc.xml.mt");
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/doclist.get.html.ftl.mt");
@@ -63,7 +63,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/doclist.get.json.ftl.mt");
 
 				// generator for alfresco Share web application
-				
+
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/file-upload-response-get-patch.mt");
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/flash-upload-js-get-patch.mt");
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/html-upload-js-get-patch.mt");
@@ -104,12 +104,11 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
 			}
 
-			
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_DEFAULTFORMS)) {
 				// default Forms for custom types
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/DefaultEditForms/web-framework-config-custom.mt");
 			}
-			
+
 			classTemplates = result;
 		}
 		return classTemplates;
@@ -180,5 +179,4 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		return SecurityHelper.check(GENERATOR_CODE, SidePreferences.getKey());
 	}
 
-	
 }
