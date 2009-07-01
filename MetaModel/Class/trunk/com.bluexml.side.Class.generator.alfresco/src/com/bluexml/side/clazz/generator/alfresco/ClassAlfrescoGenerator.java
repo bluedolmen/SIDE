@@ -136,35 +136,9 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		props.put("module.version", getVersioNumber());
 		props.put("module.title", "S-IDE model extension");
 		props.put("module.description", "this module contains S-IDE generated extension to extends Alfresco Data Model,\n build at " + sdf.format(now));
-		/*
-		 * props.put("module.id",getGenerationParameter(
-		 * "com.bluexml.side.Class.generator.alfresco.module.id"));
-		 * props.put("module.version",getGenerationParameter(
-		 * "com.bluexml.side.Class.generator.alfresco.module.version"));
-		 * props.put("module.title",getGenerationParameter(
-		 * "com.bluexml.side.Class.generator.alfresco.module.title"));
-		 * props.put("module.description",getGenerationParameter(
-		 * "com.bluexml.side.Class.generator.alfresco.module.description"));
-		 */
 		return props;
 	}
 
-	/*
-	 * private void solveConflict() throws Exception { // manage file that can
-	 * be in conflict List<IFile> conflict = searchForConflict(); List<IFile>
-	 * unresolvedconflict = new ArrayList<IFile>(); boolean allresolved = true;
-	 * for (IFile f : conflict) { if(f.getFullPath().toString().indexOf(
-	 * "/shared/classes/alfresco/extension/web-client-config-custom.xml") != -1)
-	 * { // known conflict, apply specific process
-	 * 
-	 * getXmlresolver().resolveByMerging(f);
-	 * System.out.println("resolved conflict on :" + f.getFullPath()); } else {
-	 * // unknown conflict allresolved = false;
-	 * System.err.println("Unknow conflict detected on :" + f.getFullPath()); }
-	 * } if (!allresolved) { throw new
-	 * UnresolvedConflictException(unresolvedconflict); } // conflicts are
-	 * resolved getCresolver().copyToFinalFolder(); }
-	 */
 
 	public String getModuleIdService(EObject ob, String modelId) throws Exception {
 		return buildModuleProperties(modelId).getProperty("module.id");
