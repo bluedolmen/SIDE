@@ -222,7 +222,7 @@ public class ColItemProvider
 			(createChildParameter
 				(ViewPackage.Literals.STYLABLE__STYLING,
 				 ViewFactory.eINSTANCE.createStyling()));
-		
+
 		newChildDescriptors.add
 			(createChildParameter
 				(ViewPackage.Literals.SORTABLE__SORTING,
@@ -230,12 +230,12 @@ public class ColItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ViewPackage.Literals.COL__ACTIONS,
+				(ViewPackage.Literals.ACTIONABLE__OPERATIONS,
 				 CommonFactory.eINSTANCE.createOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ViewPackage.Literals.COL__ACTIONS,
+				(ViewPackage.Literals.ACTIONABLE__OPERATIONS,
 				 CommonFactory.eINSTANCE.createOperationGroup()));
 	}
 

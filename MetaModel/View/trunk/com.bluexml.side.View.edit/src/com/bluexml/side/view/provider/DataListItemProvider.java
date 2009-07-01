@@ -228,12 +228,12 @@ public class DataListItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ViewPackage.Literals.COL__ACTIONS,
+				(ViewPackage.Literals.ACTIONABLE__OPERATIONS,
 				 CommonFactory.eINSTANCE.createOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ViewPackage.Literals.COL__ACTIONS,
+				(ViewPackage.Literals.ACTIONABLE__OPERATIONS,
 				 CommonFactory.eINSTANCE.createOperationGroup()));
 	}
 
