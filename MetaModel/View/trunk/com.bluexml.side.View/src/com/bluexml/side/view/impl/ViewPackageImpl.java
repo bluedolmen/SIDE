@@ -1687,7 +1687,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		initEClass(fieldGroupEClass, FieldGroup.class, "FieldGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(abstractViewOfEClass, AbstractViewOf.class, "AbstractViewOf", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(abstractViewOfEClass, AbstractViewOf.class, "AbstractViewOf", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractViewOf_ViewOf(), theCommonPackage.getContainer(), null, "viewOf", null, 0, 1, AbstractViewOf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals

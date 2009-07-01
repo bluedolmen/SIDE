@@ -24,8 +24,8 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see com.bluexml.side.workflow.WorkflowPackage#getState()
  * @model abstract="true"
- *        annotation="http://www.bluexml.com/OCL noSpecialCharacters='self.name.regexMatch(\'[\\w]*\') = true' NoStateWithSameName='State.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0'"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NoStateWithSameName noSpecialCharacters'"
+ *        annotation="http://www.bluexml.com/OCL noSpecialCharacters='self.name.regexMatch(\'[\\w]*\') = true' NoStateWithSameName='State.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0' NameNull='not self.name.oclIsUndefined() and self.name <> \'\''"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NoStateWithSameName noSpecialCharacters NameNull'"
  * @generated
  */
 public interface State extends WorkflowModelElement {

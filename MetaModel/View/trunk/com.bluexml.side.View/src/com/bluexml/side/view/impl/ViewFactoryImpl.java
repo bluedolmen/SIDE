@@ -89,7 +89,6 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 			case ViewPackage.URL_FIELD: return createURLField();
 			case ViewPackage.IMAGE_FIELD: return createImageField();
 			case ViewPackage.FIELD_GROUP: return createFieldGroup();
-			case ViewPackage.ABSTRACT_VIEW_OF: return createAbstractViewOf();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -427,16 +426,6 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 	public FieldGroup createFieldGroup() {
 		FieldGroupImpl fieldGroup = new FieldGroupImpl();
 		return fieldGroup;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public AbstractViewOf createAbstractViewOf() {
-		AbstractViewOfImpl abstractViewOf = new AbstractViewOfImpl();
-		return abstractViewOf;
 	}
 
 	/**

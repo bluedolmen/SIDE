@@ -262,6 +262,11 @@ public class TransitionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+				 ClazzFactory.eINSTANCE.createAssociationEnd()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(WorkflowPackage.Literals.TRANSITION__ACTION,
 				 WorkflowFactory.eINSTANCE.createAction()));
 

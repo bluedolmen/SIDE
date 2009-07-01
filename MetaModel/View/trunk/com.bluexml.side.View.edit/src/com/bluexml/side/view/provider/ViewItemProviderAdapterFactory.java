@@ -674,29 +674,6 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.view.AbstractViewOf} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AbstractViewOfItemProvider abstractViewOfItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.bluexml.side.view.AbstractViewOf}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createAbstractViewOfAdapter() {
-		if (abstractViewOfItemProvider == null) {
-			abstractViewOfItemProvider = new AbstractViewOfItemProvider(this);
-		}
-
-		return abstractViewOfItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.view.Filtering} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -869,7 +846,6 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 		if (urlFieldItemProvider != null) urlFieldItemProvider.dispose();
 		if (imageFieldItemProvider != null) imageFieldItemProvider.dispose();
 		if (fieldGroupItemProvider != null) fieldGroupItemProvider.dispose();
-		if (abstractViewOfItemProvider != null) abstractViewOfItemProvider.dispose();
 	}
 
 }

@@ -14,6 +14,10 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Script</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: A 'Sript' are written with Java language.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -51,6 +55,11 @@ public interface Script extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The attribute 'expression' specifies the script to be executed.
+	 * 
+	 * Example: expression=logger.log("Going to requested state");
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Expression</em>' attribute.
 	 * @see #setExpression(String)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getScript_Expression()

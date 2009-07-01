@@ -14,6 +14,13 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Swimlane</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: The 'Swimlane' represents the actor that manages one or many tasks of the workflow process. It is a mechanism to specify that multiple tasks in the process should be done by the same actor. So after the first task instance is created for a given swimlane, the actor should be remembered in the process for all subsequent tasks that are in the same swimlane.
+ * 
+ * Constraint/limit: A 'Swimlane' must manage at least one task.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -39,6 +46,11 @@ public interface Swimlane extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'name' attribute specifies the name of the Swimlane.
+	 * 
+	 * Constraint/limit: The 'name' of the Swimlane must be unique.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getSwimlane_Name()
@@ -83,6 +95,13 @@ public interface Swimlane extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'actorid' attribute specifies the name of an account in the target deploy platform.
+	 * 
+	 * Constraint/limit: 
+	 * - The actorid value must be the same as the value of the attribute 'name'.
+	 * - If there is a value for the attribute 'actorid', no value must be setted for the attribute 'pooledactors'.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Actorid</em>' attribute.
 	 * @see #setActorid(String)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getSwimlane_Actorid()
@@ -109,6 +128,11 @@ public interface Swimlane extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'pooledactors' attribute specifies the name of a group in the target platform.
+	 * 
+	 * Constraint/limit: If there is a value for the attribute 'pooledactors', no value must be setted for the attribute 'actorid'.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Pooledactors</em>' attribute.
 	 * @see #setPooledactors(String)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getSwimlane_Pooledactors()

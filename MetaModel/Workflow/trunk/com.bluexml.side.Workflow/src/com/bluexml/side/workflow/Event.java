@@ -14,6 +14,12 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Event</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: Events specify moments in the execution of the process. The jBPM engine will fire events during graph execution. An event is always relative to an element in the process definition like e.g. the process definition, a node or a transition. Most process elements can fire different types of events. A node for example can fire a node-enter event and a node-leave event. Each event has a list of actions. When the jBPM engine fires an event, the list of actions is executed. 
+ * 
+ *  
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -36,6 +42,9 @@ public interface Event extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The attribute 'type' specifies the moment that is executed the event.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Type</em>' attribute.
 	 * @see com.bluexml.side.workflow.BPMEventType
 	 * @see #setType(BPMEventType)

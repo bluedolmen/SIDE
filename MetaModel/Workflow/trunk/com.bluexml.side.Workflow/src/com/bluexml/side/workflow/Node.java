@@ -13,6 +13,15 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Node</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: A 'Node' is a task that are no performed by 'Swimlane'. The type node serves the situation where you want to write your own code in a node.
+ * 
+ * Constraint/limit: 'Attributes' can not be associated to a 'Node'.
+ * 
+ * Inherits: 
+ * - TransitionTask.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

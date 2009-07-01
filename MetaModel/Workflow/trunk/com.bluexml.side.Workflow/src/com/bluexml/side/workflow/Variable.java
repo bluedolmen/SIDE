@@ -13,6 +13,10 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Variable</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: The 'Variable' defines variable for subprocess.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -36,6 +40,9 @@ public interface Variable extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The attribute 'name' specifies the name of the Variable
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getVariable_Name()
@@ -62,6 +69,9 @@ public interface Variable extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The attribute 'access' specifies is the variable can be read or write.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Access</em>' attribute.
 	 * @see #setAccess(String)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getVariable_Access()
@@ -88,6 +98,9 @@ public interface Variable extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The attribute 'mappedName' specifies the name of the variable in the subprocess.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Mapped Name</em>' attribute.
 	 * @see #setMappedName(String)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getVariable_MappedName()

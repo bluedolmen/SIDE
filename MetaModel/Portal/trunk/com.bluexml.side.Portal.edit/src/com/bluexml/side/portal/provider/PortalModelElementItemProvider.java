@@ -113,8 +113,6 @@ public class PortalModelElementItemProvider
 			(createChildParameter
 				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
 				 ClazzFactory.eINSTANCE.createAssociationEnd()));
-
-
 	}
 
 	/**

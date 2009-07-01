@@ -768,10 +768,36 @@ public class FacetMapImpl extends PaginableImpl implements FacetMap {
 	 * @generated
 	 */
 	public EList<FieldElement> getResultsAttributes() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (getResultsAttributesBodyOCL == null) {
+			EOperation eOperation = ViewPackage.Literals.FACET_MAP.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ViewPackage.Literals.FACET_MAP, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getResultsAttributesBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getResultsAttributesBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<FieldElement> result = (Collection<FieldElement>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<FieldElement>(result.size(), result.toArray());
+	
 	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getResultsAttributes <em>Get Results Attributes</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResultsAttributes
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getResultsAttributesBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -779,10 +805,36 @@ public class FacetMapImpl extends PaginableImpl implements FacetMap {
 	 * @generated
 	 */
 	public EList<Field> getFields() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (getFieldsBodyOCL == null) {
+			EOperation eOperation = ViewPackage.Literals.ABSTRACT_VIEW.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ViewPackage.Literals.ABSTRACT_VIEW, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getFieldsBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getFieldsBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Field> result = (Collection<Field>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Field>(result.size(), result.toArray());
+	
 	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getFields <em>Get Fields</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFields
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getFieldsBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -790,10 +842,36 @@ public class FacetMapImpl extends PaginableImpl implements FacetMap {
 	 * @generated
 	 */
 	public EList<Field> getDirectChildFields() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (getDirectChildFieldsBodyOCL == null) {
+			EOperation eOperation = ViewPackage.Literals.ABSTRACT_VIEW.getEOperations().get(1);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ViewPackage.Literals.ABSTRACT_VIEW, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getDirectChildFieldsBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getDirectChildFieldsBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Field> result = (Collection<Field>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Field>(result.size(), result.toArray());
+	
 	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getDirectChildFields <em>Get Direct Child Fields</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDirectChildFields
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getDirectChildFieldsBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -801,10 +879,36 @@ public class FacetMapImpl extends PaginableImpl implements FacetMap {
 	 * @generated
 	 */
 	public EList<AbstractView> getInnerView() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (getInnerViewBodyOCL == null) {
+			EOperation eOperation = ViewPackage.Literals.ABSTRACT_VIEW.getEOperations().get(2);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ViewPackage.Literals.ABSTRACT_VIEW, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getInnerViewBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getInnerViewBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<AbstractView> result = (Collection<AbstractView>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<AbstractView>(result.size(), result.toArray());
+	
 	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getInnerView <em>Get Inner View</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInnerView
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getInnerViewBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -812,10 +916,36 @@ public class FacetMapImpl extends PaginableImpl implements FacetMap {
 	 * @generated
 	 */
 	public EList<Field> getDisabledAndEnabledField() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (getDisabledAndEnabledFieldBodyOCL == null) {
+			EOperation eOperation = ViewPackage.Literals.ABSTRACT_VIEW.getEOperations().get(3);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ViewPackage.Literals.ABSTRACT_VIEW, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getDisabledAndEnabledFieldBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getDisabledAndEnabledFieldBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Field> result = (Collection<Field>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Field>(result.size(), result.toArray());
+	
 	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getDisabledAndEnabledField <em>Get Disabled And Enabled Field</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDisabledAndEnabledField
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getDisabledAndEnabledFieldBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -823,10 +953,36 @@ public class FacetMapImpl extends PaginableImpl implements FacetMap {
 	 * @generated
 	 */
 	public EList<Field> getDisabledFields() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (getDisabledFieldsBodyOCL == null) {
+			EOperation eOperation = ViewPackage.Literals.ABSTRACT_VIEW.getEOperations().get(4);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ViewPackage.Literals.ABSTRACT_VIEW, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getDisabledFieldsBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getDisabledFieldsBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Field> result = (Collection<Field>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Field>(result.size(), result.toArray());
+	
 	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getDisabledFields <em>Get Disabled Fields</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDisabledFields
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getDisabledFieldsBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -834,10 +990,34 @@ public class FacetMapImpl extends PaginableImpl implements FacetMap {
 	 * @generated
 	 */
 	public String getFullName() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (getFullNameBodyOCL == null) {
+			EOperation eOperation = CommonPackage.Literals.NAMED_MODEL_ELEMENT.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(CommonPackage.Literals.NAMED_MODEL_ELEMENT, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getFullNameBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getFullNameBodyOCL);
+	
+		return (String) query.evaluate(this);
+	
 	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getFullName <em>Get Full Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFullName
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getFullNameBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -845,10 +1025,34 @@ public class FacetMapImpl extends PaginableImpl implements FacetMap {
 	 * @generated
 	 */
 	public String getDocumentationOrName() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (getDocumentationOrNameBodyOCL == null) {
+			EOperation eOperation = CommonPackage.Literals.NAMED_MODEL_ELEMENT.getEOperations().get(1);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(CommonPackage.Literals.NAMED_MODEL_ELEMENT, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getDocumentationOrNameBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getDocumentationOrNameBodyOCL);
+	
+		return (String) query.evaluate(this);
+	
 	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getDocumentationOrName <em>Get Documentation Or Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDocumentationOrName
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getDocumentationOrNameBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -856,10 +1060,34 @@ public class FacetMapImpl extends PaginableImpl implements FacetMap {
 	 * @generated
 	 */
 	public String getDescriptionOrName() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (getDescriptionOrNameBodyOCL == null) {
+			EOperation eOperation = CommonPackage.Literals.NAMED_MODEL_ELEMENT.getEOperations().get(2);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(CommonPackage.Literals.NAMED_MODEL_ELEMENT, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getDescriptionOrNameBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getDescriptionOrNameBodyOCL);
+	
+		return (String) query.evaluate(this);
+	
 	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getDescriptionOrName <em>Get Description Or Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescriptionOrName
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getDescriptionOrNameBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->

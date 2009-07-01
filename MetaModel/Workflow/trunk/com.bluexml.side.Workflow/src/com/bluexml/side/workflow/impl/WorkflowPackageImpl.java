@@ -1256,7 +1256,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 			 "PackageNameNull", "not self.name.oclIsUndefined() and self.name <> \'\'",
 			 "OneStartTask", "self.startstate -> size() = 1",
 			 "atLeastOneEndTask", "self.endstate -> size() >= 1"
-		   });			
+		   });				
 		addAnnotation
 		  (swimlaneEClass, 
 		   source, 
@@ -1265,25 +1265,32 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 			 "MustManageAtLeastOneTask", "(not (self.manage->isEmpty())) or (StartState.allInstances()->collect(ss | ss.initiator)->includes(self))",
 			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true",
 			 "ActoridOrPooledactorMustBeSetForAllExeptOneActor", "Swimlane.allInstances() -> select(s | s.name <>\'initiator\' and (s.actorid -> isEmpty() or s.actorid=\'\')  and (s.pooledactors  -> isEmpty() or s.pooledactors =\'\'))->size() <=1\n"
-		   });			
+		   });				
 		addAnnotation
 		  (swimlaneEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "body", "self.name = other.name"
-		   });		
+		   });						
 		addAnnotation
 		  (taskNodeEClass, 
 		   source, 
 		   new String[] {
-			 "TaskMustBePointerByTransition", "Transition.allInstances()-> select(t| t.to = self)->size()=1 or self.transition -> notEmpty()\n"
-		   });			
+			 "TaskMustBePointerByTransition", "Transition.allInstances()-> select(t| t.to = self)->size()=1 or self.transition -> notEmpty()\n",
+			 "TaskMustHaveOneTransitionOut", "self.transition -> size() >0"
+		   });									
+		addAnnotation
+		  (decisionEClass, 
+		   source, 
+		   new String[] {
+			 "DecisionMustHaveOnlyOneTransitionWithCondition", "self.transition -> select (t1| t1.condition -> isEmpty() or t1.condition =\'\') -> size() = 1"
+		   });												
 		addAnnotation
 		  (variableEClass, 
 		   source, 
 		   new String[] {
 			 "accessMatchesWithReadWriteRequired", "self.access.regexMatch(\'[read,|write,|required,]*[read|write|required]\') = true"
-		   });			
+		   });							
 		addAnnotation
 		  (transitionEClass, 
 		   source, 
@@ -1291,20 +1298,21 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 			 "NoTransitionWithSameName", "Transition.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0",
 			 "SourceAndTargetMustBeSet", "not self.to.oclIsUndefined() and not self.getContainer().oclIsUndefined()",
 			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true"
-		   });			
+		   });														
 		addAnnotation
 		  (stateEClass, 
 		   source, 
 		   new String[] {
 			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true",
-			 "NoStateWithSameName", "State.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0"
+			 "NoStateWithSameName", "State.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0",
+			 "NameNull", "not self.name.oclIsUndefined() and self.name <> \'\'"
 		   });			
 		addAnnotation
 		  (attributeEClass, 
 		   source, 
 		   new String[] {
 			 "UniqueNameForTaskAttribute", "Attribute.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0"
-		   });	
+		   });					
 	}
 
 	/**
@@ -1320,43 +1328,49 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		   source, 
 		   new String[] {
 			 "constraints", "PackageNameNull OneStartTask atLeastOneEndTask"
-		   });			
+		   });				
 		addAnnotation
 		  (swimlaneEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "ActorNameMustBeUnique MustManageAtLeastOneTask noSpecialCharacters ActoridOrPooledactorMustBeSetForAllExeptOneActor"
-		   });				
+		   });									
 		addAnnotation
 		  (taskNodeEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "NoTaskWithSameName TaskMustBePointerByTransition"
-		   });			
+			 "constraints", "TaskMustBePointerByTransition TaskMustHaveOneTransitionOut"
+		   });									
+		addAnnotation
+		  (decisionEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "DecisionMustHaveOnlyOneTransitionWithCondition"
+		   });												
 		addAnnotation
 		  (variableEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "accessMatchesWithReadWriteRequired"
-		   });			
+		   });							
 		addAnnotation
 		  (transitionEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "NoTransitionWithSameName SourceAndTargetMustBeSet noSpecialCharacters"
-		   });			
+		   });														
 		addAnnotation
 		  (stateEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "NoStateWithSameName noSpecialCharacters"
+			 "constraints", "NoStateWithSameName noSpecialCharacters NameNull"
 		   });			
 		addAnnotation
 		  (attributeEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "UniqueNameForTaskAttribute"
-		   });
+		   });				
 	}
 
 } //WorkflowPackageImpl

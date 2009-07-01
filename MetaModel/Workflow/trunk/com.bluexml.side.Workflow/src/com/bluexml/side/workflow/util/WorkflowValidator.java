@@ -163,6 +163,22 @@ public class WorkflowValidator extends EObjectValidator {
 	 */
 	private static Constraint taskNode_TaskMustBePointerByTransitionInvOCL;
 	/**
+	 * The parsed OCL expression for the definition of the '<em>TaskMustHaveOneTransitionOut</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint taskNode_TaskMustHaveOneTransitionOutInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>DecisionMustHaveOnlyOneTransitionWithCondition</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint decision_DecisionMustHaveOnlyOneTransitionWithConditionInvOCL;
+
+	/**
 	 * The parsed OCL expression for the definition of the '<em>accessMatchesWithReadWriteRequired</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -205,6 +221,14 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	private static Constraint state_noSpecialCharactersInvOCL;
+	/**
+	 * The parsed OCL expression for the definition of the '<em>NameNull</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint state_NameNullInvOCL;
+
 	/**
 	 * The parsed OCL expression for the definition of the '<em>UniqueNameForTaskAttribute</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
@@ -621,6 +645,7 @@ public class WorkflowValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(startState, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_NoStateWithSameName(startState, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_noSpecialCharacters(startState, diagnostics, context);
+		if (result || diagnostics != null) result &= validateState_NameNull(startState, diagnostics, context);
 		return result;
 	}
 
@@ -639,6 +664,7 @@ public class WorkflowValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(endState, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_NoStateWithSameName(endState, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_noSpecialCharacters(endState, diagnostics, context);
+		if (result || diagnostics != null) result &= validateState_NameNull(endState, diagnostics, context);
 		return result;
 	}
 
@@ -657,6 +683,7 @@ public class WorkflowValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(node, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_NoStateWithSameName(node, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_noSpecialCharacters(node, diagnostics, context);
+		if (result || diagnostics != null) result &= validateState_NameNull(node, diagnostics, context);
 		return result;
 	}
 
@@ -675,35 +702,10 @@ public class WorkflowValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(taskNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_NoStateWithSameName(taskNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_noSpecialCharacters(taskNode, diagnostics, context);
-		if (result || diagnostics != null) result &= validateTaskNode_NoTaskWithSameName(taskNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validateState_NameNull(taskNode, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTaskNode_TaskMustBePointerByTransition(taskNode, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTaskNode_TaskMustHaveOneTransitionOut(taskNode, diagnostics, context);
 		return result;
-	}
-
-	/**
-	 * Validates the NoTaskWithSameName constraint of '<em>Task Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateTaskNode_NoTaskWithSameName(TaskNode taskNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(new BasicDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "NoTaskWithSameName", getObjectLabel(taskNode, context) }),
-						 new Object[] { taskNode }));
-			}
-			return false;
-		}
-		return true;
 	}
 
 	/**
@@ -746,6 +748,45 @@ public class WorkflowValidator extends EObjectValidator {
 	}
 
 	/**
+	 * Validates the TaskMustHaveOneTransitionOut constraint of '<em>Task Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTaskNode_TaskMustHaveOneTransitionOut(TaskNode taskNode, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (taskNode_TaskMustHaveOneTransitionOutInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(WorkflowPackage.Literals.TASK_NODE);
+			
+			EAnnotation ocl = WorkflowPackage.Literals.TASK_NODE.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("TaskMustHaveOneTransitionOut");
+			
+			try {
+				taskNode_TaskMustHaveOneTransitionOutInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(taskNode_TaskMustHaveOneTransitionOutInvOCL);
+		
+		if (!query.check(taskNode)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "TaskMustHaveOneTransitionOut", getObjectLabel(taskNode, context) }),
+						 new Object[] { taskNode }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -760,6 +801,7 @@ public class WorkflowValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(userTask, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_NoStateWithSameName(userTask, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_noSpecialCharacters(userTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validateState_NameNull(userTask, diagnostics, context);
 		return result;
 	}
 
@@ -778,6 +820,7 @@ public class WorkflowValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(processState, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_NoStateWithSameName(processState, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_noSpecialCharacters(processState, diagnostics, context);
+		if (result || diagnostics != null) result &= validateState_NameNull(processState, diagnostics, context);
 		return result;
 	}
 
@@ -796,6 +839,7 @@ public class WorkflowValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(fork, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_NoStateWithSameName(fork, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_noSpecialCharacters(fork, diagnostics, context);
+		if (result || diagnostics != null) result &= validateState_NameNull(fork, diagnostics, context);
 		return result;
 	}
 
@@ -814,6 +858,7 @@ public class WorkflowValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(join, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_NoStateWithSameName(join, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_noSpecialCharacters(join, diagnostics, context);
+		if (result || diagnostics != null) result &= validateState_NameNull(join, diagnostics, context);
 		return result;
 	}
 
@@ -832,7 +877,48 @@ public class WorkflowValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(decision, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_NoStateWithSameName(decision, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_noSpecialCharacters(decision, diagnostics, context);
+		if (result || diagnostics != null) result &= validateState_NameNull(decision, diagnostics, context);
+		if (result || diagnostics != null) result &= validateDecision_DecisionMustHaveOnlyOneTransitionWithCondition(decision, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the DecisionMustHaveOnlyOneTransitionWithCondition constraint of '<em>Decision</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateDecision_DecisionMustHaveOnlyOneTransitionWithCondition(Decision decision, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (decision_DecisionMustHaveOnlyOneTransitionWithConditionInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(WorkflowPackage.Literals.DECISION);
+			
+			EAnnotation ocl = WorkflowPackage.Literals.DECISION.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("DecisionMustHaveOnlyOneTransitionWithCondition");
+			
+			try {
+				decision_DecisionMustHaveOnlyOneTransitionWithConditionInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(decision_DecisionMustHaveOnlyOneTransitionWithConditionInvOCL);
+		
+		if (!query.check(decision)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "DecisionMustHaveOnlyOneTransitionWithCondition", getObjectLabel(decision, context) }),
+						 new Object[] { decision }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -1078,6 +1164,7 @@ public class WorkflowValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(state, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_NoStateWithSameName(state, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_noSpecialCharacters(state, diagnostics, context);
+		if (result || diagnostics != null) result &= validateState_NameNull(state, diagnostics, context);
 		return result;
 	}
 
@@ -1160,6 +1247,45 @@ public class WorkflowValidator extends EObjectValidator {
 	}
 
 	/**
+	 * Validates the NameNull constraint of '<em>State</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateState_NameNull(State state, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (state_NameNullInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(WorkflowPackage.Literals.STATE);
+			
+			EAnnotation ocl = WorkflowPackage.Literals.STATE.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("NameNull");
+			
+			try {
+				state_NameNullInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(state_NameNullInvOCL);
+		
+		if (!query.check(state)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "NameNull", getObjectLabel(state, context) }),
+						 new Object[] { state }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1230,6 +1356,7 @@ public class WorkflowValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(transitionTask, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_NoStateWithSameName(transitionTask, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_noSpecialCharacters(transitionTask, diagnostics, context);
+		if (result || diagnostics != null) result &= validateState_NameNull(transitionTask, diagnostics, context);
 		return result;
 	}
 

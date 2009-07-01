@@ -258,7 +258,7 @@
     <eLiterals name="improvedCloud" value="2" literal="improvedCloud"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FieldGroup" eSuperTypes="#//FieldContainer"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractViewOf" eSuperTypes="#//AbstractView">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractViewOf" abstract="true" eSuperTypes="#//AbstractView">
     <eStructuralFeatures xsi:type="ecore:EReference" name="viewOf" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//Container"/>
   </eClassifiers>
 </ecore:EPackage>

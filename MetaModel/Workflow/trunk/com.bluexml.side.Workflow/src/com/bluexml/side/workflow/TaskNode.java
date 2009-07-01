@@ -15,6 +15,13 @@ import com.bluexml.side.clazz.Clazz;
  * A representation of the model object '<em><b>Task Node</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: A 'TaskNode' is a task that must be performed by a 'Swimlane'. 'TaskNode' can have one or more 'Attribute'. A task node represents one task that is to be performed by humans. So when execution arrives in a task node, task instances will be created in the task lists of the workflow participants. After that, the node will behave as a wait state. So when the users perform their task, the task completion will trigger the resuming of the execution. In other words, that leads to a new signal being called on the token.
+ * 
+ * Inherits: 
+ * - UserTask.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -24,8 +31,8 @@ import com.bluexml.side.clazz.Clazz;
  * </p>
  *
  * @see com.bluexml.side.workflow.WorkflowPackage#getTaskNode()
- * @model annotation="http://www.bluexml.com/OCL TaskMustBePointerByTransition='Transition.allInstances()-> select(t| t.to = self)->size()=1 or self.transition -> notEmpty()\n'"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NoTaskWithSameName TaskMustBePointerByTransition'"
+ * @model annotation="http://www.bluexml.com/OCL TaskMustBePointerByTransition='Transition.allInstances()-> select(t| t.to = self)->size()=1 or self.transition -> notEmpty()\n' TaskMustHaveOneTransitionOut='self.transition -> size() >0'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='TaskMustBePointerByTransition TaskMustHaveOneTransitionOut'"
  * @generated
  */
 public interface TaskNode extends UserTask {

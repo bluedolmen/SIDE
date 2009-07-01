@@ -201,6 +201,11 @@ public class ProcessItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+				 ClazzFactory.eINSTANCE.createAssociationEnd()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
 				 WorkflowFactory.eINSTANCE.createProcess()));
 

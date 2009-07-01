@@ -14,6 +14,10 @@ import com.bluexml.side.common.ModelElement;
  * A representation of the model object '<em><b>Attribute</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: 'Attribute' specifies properties for TaskNode or StartState.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -39,6 +43,11 @@ public interface Attribute extends ModelElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The attribute 'typ' specifies the type of an 'Attribute'.
+	 * 
+	 * Example: This is the list of the different type of an attribute: boolean, byte, char, double, float, int, long, short, String, void, Date, Object, DateTime and Time.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Typ</em>' attribute.
 	 * @see com.bluexml.side.common.DataType
 	 * @see #setTyp(DataType)
@@ -67,6 +76,9 @@ public interface Attribute extends ModelElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'title' attribute specifies the text that will appear in the target platform.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Title</em>' attribute.
 	 * @see #setTitle(String)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getAttribute_Title()
@@ -93,6 +105,11 @@ public interface Attribute extends ModelElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'name' attribute specifies the name of the 'Attribute'.
+	 * 
+	 * Constraint/limit: The 'name' of the 'Attribute' must be unique in all the process.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getAttribute_Name()

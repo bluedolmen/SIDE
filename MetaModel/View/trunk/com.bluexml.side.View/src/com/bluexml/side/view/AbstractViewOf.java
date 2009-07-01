@@ -21,7 +21,7 @@ import com.bluexml.side.common.Container;
  * </p>
  *
  * @see com.bluexml.side.view.ViewPackage#getAbstractViewOf()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface AbstractViewOf extends AbstractView {

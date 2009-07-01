@@ -525,11 +525,6 @@ public class AbstractDataTableItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createAbstractViewOf()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
 				 ViewFactory.eINSTANCE.createCol()));
 
@@ -642,11 +637,6 @@ public class AbstractDataTableItemProvider
 			(createChildParameter
 				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
 				 ViewFactory.eINSTANCE.createFieldGroup()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createAbstractViewOf()));
 
 		newChildDescriptors.add
 			(createChildParameter

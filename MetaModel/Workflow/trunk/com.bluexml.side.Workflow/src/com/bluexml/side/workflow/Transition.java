@@ -15,6 +15,12 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Transition</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: A 'Transition' represents a link between two nodes. 
+ * 
+ * Constraint/limit: Transitions must have a source node and a destination node.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -42,6 +48,11 @@ public interface Transition extends ModelElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'name' attribute specifies the name of the Transition.
+	 * 
+	 * Constraint/limit: The 'name' of the Transition must be unique.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getTransition_Name()
@@ -68,6 +79,11 @@ public interface Transition extends ModelElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'condition' attribute specifies an expression that must be evaluate. The result is a boolean. If it returns the value true, the transition could be taken.
+	 * 
+	 * Example: Condition=#{choix == 1}
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Condition</em>' attribute.
 	 * @see #setCondition(String)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getTransition_Condition()
@@ -178,6 +194,9 @@ public interface Transition extends ModelElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'title' attribute specifies the text that will appear in the target platform.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Title</em>' attribute.
 	 * @see #setTitle(String)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getTransition_Title()

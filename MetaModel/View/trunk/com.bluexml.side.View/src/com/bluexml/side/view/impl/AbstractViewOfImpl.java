@@ -8,6 +8,7 @@ package com.bluexml.side.view.impl;
 
 import com.bluexml.side.common.Container;
 
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.view.AbstractViewOf;
 import com.bluexml.side.view.ViewPackage;
 
@@ -17,6 +18,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +33,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class AbstractViewOfImpl extends AbstractViewImpl implements AbstractViewOf {
+public abstract class AbstractViewOfImpl extends AbstractViewImpl implements AbstractViewOf {
 	/**
 	 * The cached value of the '{@link #getViewOf() <em>View Of</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -157,5 +159,8 @@ public class AbstractViewOfImpl extends AbstractViewImpl implements AbstractView
 		}
 		return super.eIsSet(featureID);
 	}
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
+	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 
 } //AbstractViewOfImpl

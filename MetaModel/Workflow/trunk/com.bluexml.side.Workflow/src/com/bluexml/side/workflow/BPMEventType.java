@@ -17,6 +17,9 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>BPM Event Type</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * Definition: The enumeration 'BPMEventType' defines all possible value for the type of an event.
+ * <!-- end-model-doc -->
  * @see com.bluexml.side.workflow.WorkflowPackage#getBPMEventType()
  * @model
  * @generated
@@ -190,6 +193,9 @@ public enum BPMEventType implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The event is launched at the creation of a task.
+	 * <!-- end-model-doc -->
 	 * @see #TASK_CREATE
 	 * @model name="task_create" literal="task-create"
 	 * @generated
@@ -205,6 +211,9 @@ public enum BPMEventType implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The event is launched when the function TaskInstance.start() is called.
+	 * <!-- end-model-doc -->
 	 * @see #TASK_START
 	 * @model name="task_start" literal="task-start"
 	 * @generated
@@ -220,6 +229,9 @@ public enum BPMEventType implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The event is launch when a task is being assigned to a swimlane.
+	 * <!-- end-model-doc -->
 	 * @see #TASK_ASSIGN
 	 * @model name="task_assign" literal="task-assign"
 	 * @generated
@@ -235,6 +247,9 @@ public enum BPMEventType implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The event is launch when the function TaskInstance.end() is called.
+	 * <!-- end-model-doc -->
 	 * @see #TASK_END
 	 * @model name="task_end" literal="task-end"
 	 * @generated
@@ -310,6 +325,9 @@ public enum BPMEventType implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The event is launched when entering a superstate.
+	 * <!-- end-model-doc -->
 	 * @see #SUPERSTATE_ENTER
 	 * @model name="superstate_enter" literal="superstate-enter"
 	 * @generated
@@ -325,6 +343,9 @@ public enum BPMEventType implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The event is launched when leaving a superstate.
+	 * <!-- end-model-doc -->
 	 * @see #SUPERSTATE_LEAVE
 	 * @model name="superstate_leave" literal="superstate-leave"
 	 * @generated

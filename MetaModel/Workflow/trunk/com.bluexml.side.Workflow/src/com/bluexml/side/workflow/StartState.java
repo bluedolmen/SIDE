@@ -15,6 +15,19 @@ import com.bluexml.side.clazz.Clazz;
  * A representation of the model object '<em><b>Start State</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: The 'StartState' represent the first state of the workflow process. Note that a process without a start-state is valid, but cannot be executed.
+ * 
+ * Constraint/limit: 
+ * - A worflow process must have only one 'StartState'.
+ * - A 'Swimlane' must be associated with the 'StartState'.
+ * 
+ * Inherits: 
+ * - UserTask.
+ * 
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

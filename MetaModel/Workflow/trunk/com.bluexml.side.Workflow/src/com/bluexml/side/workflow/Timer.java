@@ -12,6 +12,10 @@ package com.bluexml.side.workflow;
  * A representation of the model object '<em><b>Timer</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: If a 'Timer' is associated to a transition, the transition will be taken when the 'Timer' expires.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -32,6 +36,19 @@ public interface Timer extends Action {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The attribute 'duedate' specifies the duration of a 'Timer'.
+	 * 
+	 * Constraint/limit: The syntax of the attribute 'Timer' follow the jpdl syntax (http://docs.jboss.org/jbpm/v3/userguide/businesscalendar.html#duration): quantity [business] unit.
+	 * 
+	 * Example:
+	 * - 1 year.
+	 * - 1 week.
+	 * - 1 month.
+	 * - 1 hour.
+	 * - 1 min.
+	 * - 1 second.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Duedate</em>' attribute.
 	 * @see #setDuedate(String)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getTimer_Duedate()

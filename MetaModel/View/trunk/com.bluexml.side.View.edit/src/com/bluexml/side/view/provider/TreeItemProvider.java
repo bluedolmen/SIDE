@@ -653,11 +653,6 @@ public class TreeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createAbstractViewOf()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
 				 ViewFactory.eINSTANCE.createCol()));
 
@@ -770,11 +765,6 @@ public class TreeItemProvider
 			(createChildParameter
 				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
 				 ViewFactory.eINSTANCE.createFieldGroup()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__DISABLED,
-				 ViewFactory.eINSTANCE.createAbstractViewOf()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -900,11 +890,6 @@ public class TreeItemProvider
 			(createChildParameter
 				(ViewPackage.Literals.TREE__NODE_VALUE,
 				 ViewFactory.eINSTANCE.createFieldGroup()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.TREE__NODE_VALUE,
-				 ViewFactory.eINSTANCE.createAbstractViewOf()));
 	}
 
 	/**

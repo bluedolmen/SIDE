@@ -201,6 +201,11 @@ public class AttributeItemProvider
 			(createChildParameter
 				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
 				 ClazzFactory.eINSTANCE.createClassComment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+				 ClazzFactory.eINSTANCE.createAssociationEnd()));
 	}
 
 	/**
