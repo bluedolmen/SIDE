@@ -1,8 +1,6 @@
 package com.bluexml.side.side.view.edit.ui.actions;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
@@ -14,18 +12,17 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
+import com.bluexml.side.side.view.edit.ui.utils.ColConfManager;
 import com.bluexml.side.side.view.edit.ui.utils.InternalModification;
-import com.bluexml.side.side.view.edit.ui.utils.model.ViewUtils;
 import com.bluexml.side.view.Col;
-import com.bluexml.side.view.FieldContainer;
 
 
 
 
-public class MergeCols  extends Action implements
+public class CopyColConfAction  extends Action implements
 ISelectionChangedListener {
 
-	protected List<Col> selectedObject;
+	protected Col selectedObject = null;
 	protected EObject container;
 	private EditingDomain domain;
 	
@@ -39,23 +36,14 @@ ISelectionChangedListener {
 	}
 	
 	public boolean updateSelection(IStructuredSelection selection) {
-		selectedObject = new ArrayList<Col>();
-		for (Iterator<?> objects = selection.iterator(); objects.hasNext();) {
+		if (selection.size() == 1) {
+			Iterator<?> objects = selection.iterator();
 			Object object = objects.next();
 			if (object instanceof Col) {
-				// We add cols having the same parent only
-				Col col = (Col) object;
-				if (selectedObject.size() > 0 && selectedObject.get(0).eContainer().equals(col.eContainer())) {
-					selectedObject.add(col);
-				} else if(selectedObject.size() == 0) {
-					selectedObject.add((Col) object);
-					container = col.eContainer();
-				}
-			} else {
-				return false;
+				selectedObject = (Col)object;
 			}
 		}
-		return selectedObject.size() > 1;
+		return selectedObject != null;
 	}
 	
 	@Override
@@ -64,13 +52,13 @@ ISelectionChangedListener {
 		doAction(selectedObject);
 	}
 
-	private void doAction(List<Col> lc) {
+	private void doAction(Col c) {
 		InternalModification.dontMoveToDisabled();
 		try {
-			domain.getCommandStack().execute(ViewUtils.getCommandForColMerge(selectedObject,(FieldContainer)container,domain));
+			ColConfManager.copy(c, domain);
 		} catch (Exception e) {
 			e.printStackTrace();
-			EcorePlugin.INSTANCE.log("Merge failed : " + e.getMessage());
+			EcorePlugin.INSTANCE.log("Copy Column : " + e.getMessage());
 			e.printStackTrace();
 			InternalModification.moveToDisabled(); 
 		}
@@ -79,7 +67,7 @@ ISelectionChangedListener {
 
 	@Override
 	public String getText() {
-		return "Merge";
+		return "Copy Column Configuration";
 	}
 
 	public void setActiveWorkbenchPart(IWorkbenchPart workbenchPart) {

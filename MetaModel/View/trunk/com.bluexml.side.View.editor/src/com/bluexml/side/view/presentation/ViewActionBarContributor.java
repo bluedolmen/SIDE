@@ -45,8 +45,10 @@ import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.side.view.edit.ui.actions.AddLinkedFieldAction;
+import com.bluexml.side.side.view.edit.ui.actions.CopyColConfAction;
 import com.bluexml.side.side.view.edit.ui.actions.InitializeView;
 import com.bluexml.side.side.view.edit.ui.actions.MergeCols;
+import com.bluexml.side.side.view.edit.ui.actions.PasteColConfAction;
 import com.bluexml.side.side.view.edit.ui.actions.RefreshOutline;
 import com.bluexml.side.side.view.edit.ui.actions.RestoreFieldAction;
 import com.bluexml.side.side.view.edit.ui.actions.SynchronizeViews;
@@ -72,40 +74,43 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 	protected MergeCols mergeCol = new MergeCols();
 	protected SynchronizeViews synchronizeView = new SynchronizeViews();
 	protected RefreshOutline refreshOutline = new RefreshOutline();
+	protected CopyColConfAction copyColConfAction = new CopyColConfAction();
+	protected PasteColConfAction pasteColConfAction = new PasteColConfAction();
 
 	/**
-	 * This keeps track of the active editor.
-	 * <!-- begin-user-doc --> <!--
+	 * This keeps track of the active editor. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected IEditorPart activeEditorPart;
 
 	/**
-	 * This keeps track of the current selection provider.
-	 * <!-- begin-user-doc
+	 * This keeps track of the current selection provider. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ISelectionProvider selectionProvider;
 
 	/**
-	 * This action opens the Properties view.
-	 * <!-- begin-user-doc --> <!--
+	 * This action opens the Properties view. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	protected IAction showPropertiesViewAction = new Action(ViewEditorPlugin.INSTANCE.getString("_UI_ShowPropertiesView_menu_item")) {
-			@Override
-			public void run() {
-				try {
-					getPage().showView("org.eclipse.ui.views.PropertySheet");
-				}
-				catch (PartInitException exception) {
-					ViewEditorPlugin.INSTANCE.log(exception);
-				}
+	protected IAction showPropertiesViewAction = new Action(
+			ViewEditorPlugin.INSTANCE
+					.getString("_UI_ShowPropertiesView_menu_item")) {
+		@Override
+		public void run() {
+			try {
+				getPage().showView("org.eclipse.ui.views.PropertySheet");
+			} catch (PartInitException exception) {
+				ViewEditorPlugin.INSTANCE.log(exception);
 			}
-		};
+		}
+	};
 
 	/**
 	 * This action refreshes the viewer of the current editor if the editor
@@ -114,27 +119,31 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 	 * 
 	 * @generated
 	 */
-	protected IAction refreshViewerAction = new Action(ViewEditorPlugin.INSTANCE.getString("_UI_RefreshViewer_menu_item")) {
-			@Override
-			public boolean isEnabled() {
-				return activeEditorPart instanceof IViewerProvider;
-			}
+	protected IAction refreshViewerAction = new Action(
+			ViewEditorPlugin.INSTANCE.getString("_UI_RefreshViewer_menu_item")) {
+		@Override
+		public boolean isEnabled() {
+			return activeEditorPart instanceof IViewerProvider;
+		}
 
-			@Override
-			public void run() {
-				if (activeEditorPart instanceof IViewerProvider) {
-					Viewer viewer = ((IViewerProvider)activeEditorPart).getViewer();
-					if (viewer != null) {
-						viewer.refresh();
-					}
+		@Override
+		public void run() {
+			if (activeEditorPart instanceof IViewerProvider) {
+				Viewer viewer = ((IViewerProvider) activeEditorPart)
+						.getViewer();
+				if (viewer != null) {
+					viewer.refresh();
 				}
 			}
-		};
+		}
+	};
 
 	/**
-	 * This will contain one {@link org.eclipse.emf.edit.ui.action.CreateChildAction} corresponding to each descriptor
-	 * generated for the current selection by the item provider.
+	 * This will contain one
+	 * {@link org.eclipse.emf.edit.ui.action.CreateChildAction} corresponding to
+	 * each descriptor generated for the current selection by the item provider.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected Collection<IAction> createChildActions;
@@ -149,25 +158,28 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 	protected IMenuManager createChildMenuManager;
 
 	/**
-	 * This will contain one {@link org.eclipse.emf.edit.ui.action.CreateSiblingAction} corresponding to each descriptor
-	 * generated for the current selection by the item provider.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This will contain one
+	 * {@link org.eclipse.emf.edit.ui.action.CreateSiblingAction} corresponding
+	 * to each descriptor generated for the current selection by the item
+	 * provider. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected Collection<IAction> createSiblingActions;
 
 	/**
-	 * This is the menu manager into which menu contribution items should be added for CreateSibling actions.
-	 * <!-- begin-user-doc --> <!--
+	 * This is the menu manager into which menu contribution items should be
+	 * added for CreateSibling actions. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected IMenuManager createSiblingMenuManager;
 
 	/**
-	 * This creates an instance of the contributor.
-	 * <!-- begin-user-doc --> <!--
+	 * This creates an instance of the contributor. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ViewActionBarContributor() {
@@ -200,7 +212,9 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 	public void contributeToMenu(IMenuManager menuManager) {
 		super.contributeToMenu(menuManager);
 
-		IMenuManager submenuManager = new MenuManager(ViewEditorPlugin.INSTANCE.getString("_UI_ViewEditor_menu"), "com.bluexml.side.viewMenuID");
+		IMenuManager submenuManager = new MenuManager(ViewEditorPlugin.INSTANCE
+				.getString("_UI_ViewEditor_menu"),
+				"com.bluexml.side.viewMenuID");
 		menuManager.insertAfter("additions", submenuManager);
 		submenuManager.add(new Separator("settings"));
 		submenuManager.add(new Separator("actions"));
@@ -209,30 +223,32 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 
 		// Prepare for CreateChild item addition or removal.
 		//
-		createChildMenuManager = new MenuManager(ViewEditorPlugin.INSTANCE.getString("_UI_CreateChild_menu_item"));
+		createChildMenuManager = new MenuManager(ViewEditorPlugin.INSTANCE
+				.getString("_UI_CreateChild_menu_item"));
 		submenuManager.insertBefore("additions", createChildMenuManager);
 
 		// Prepare for CreateSibling item addition or removal.
 		//
-		createSiblingMenuManager = new MenuManager(ViewEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item"));
+		createSiblingMenuManager = new MenuManager(ViewEditorPlugin.INSTANCE
+				.getString("_UI_CreateSibling_menu_item"));
 		submenuManager.insertBefore("additions", createSiblingMenuManager);
 
 		// Force an update because Eclipse hides empty menus now.
 		//
-		submenuManager.addMenuListener
-			(new IMenuListener() {
-				 public void menuAboutToShow(IMenuManager menuManager) {
-					 menuManager.updateAll(true);
-				 }
-			 });
+		submenuManager.addMenuListener(new IMenuListener() {
+			public void menuAboutToShow(IMenuManager menuManager) {
+				menuManager.updateAll(true);
+			}
+		});
 
 		addGlobalActions(submenuManager);
 	}
 
 	/**
-	 * When the active editor changes, this remembers the change and registers with it as a selection provider.
-	 * <!-- begin-user-doc --> <!--
+	 * When the active editor changes, this remembers the change and registers
+	 * with it as a selection provider. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -247,15 +263,15 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 		}
 		if (part == null) {
 			selectionProvider = null;
-		}
-		else {
+		} else {
 			selectionProvider = part.getSite().getSelectionProvider();
 			selectionProvider.addSelectionChangedListener(this);
 
 			// Fake a selection changed event to update the menus.
 			//
 			if (selectionProvider.getSelection() != null) {
-				selectionChanged(new SelectionChangedEvent(selectionProvider, selectionProvider.getSelection()));
+				selectionChanged(new SelectionChangedEvent(selectionProvider,
+						selectionProvider.getSelection()));
 			}
 		}
 	}
@@ -286,10 +302,13 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 		Collection<?> newSiblingDescriptors = null;
 
 		ISelection selection = event.getSelection();
-		if (selection instanceof IStructuredSelection && ((IStructuredSelection)selection).size() == 1) {
-			Object object = ((IStructuredSelection)selection).getFirstElement();
+		if (selection instanceof IStructuredSelection
+				&& ((IStructuredSelection) selection).size() == 1) {
+			Object object = ((IStructuredSelection) selection)
+					.getFirstElement();
 
-			EditingDomain domain = ((IEditingDomainProvider)activeEditorPart).getEditingDomain();
+			EditingDomain domain = ((IEditingDomainProvider) activeEditorPart)
+					.getEditingDomain();
 
 			newChildDescriptors = domain.getNewChildDescriptors(object, null);
 			newSiblingDescriptors = domain.getNewChildDescriptors(null, object);
@@ -297,23 +316,27 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 
 		// Generate actions for selection; populate and redraw the menus.
 		//
-		createChildActions = generateCreateChildActions(newChildDescriptors, selection);
-		createSiblingActions = generateCreateSiblingActions(newSiblingDescriptors, selection);
+		createChildActions = generateCreateChildActions(newChildDescriptors,
+				selection);
+		createSiblingActions = generateCreateSiblingActions(
+				newSiblingDescriptors, selection);
 
 		if (createChildMenuManager != null) {
 			populateManager(createChildMenuManager, createChildActions, null);
 			createChildMenuManager.update(true);
 		}
 		if (createSiblingMenuManager != null) {
-			populateManager(createSiblingMenuManager, createSiblingActions, null);
+			populateManager(createSiblingMenuManager, createSiblingActions,
+					null);
 			createSiblingMenuManager.update(true);
 		}
 	}
 
 	/**
-	 * This generates a {@link org.eclipse.emf.edit.ui.action.CreateChildAction} for each object in <code>descriptors</code>,
-	 * and returns the collection of these actions.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This generates a {@link org.eclipse.emf.edit.ui.action.CreateChildAction}
+	 * for each object in <code>descriptors</code>, and returns the collection
+	 * of these actions. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected Collection<IAction> generateCreateChildActions(
@@ -321,16 +344,19 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 		Collection<IAction> actions = new ArrayList<IAction>();
 		if (descriptors != null) {
 			for (Object descriptor : descriptors) {
-				actions.add(new CreateChildAction(activeEditorPart, selection, descriptor));
+				actions.add(new CreateChildAction(activeEditorPart, selection,
+						descriptor));
 			}
 		}
 		return actions;
 	}
 
 	/**
-	 * This generates a {@link org.eclipse.emf.edit.ui.action.CreateSiblingAction} for each object in <code>descriptors</code>,
-	 * and returns the collection of these actions.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This generates a
+	 * {@link org.eclipse.emf.edit.ui.action.CreateSiblingAction} for each
+	 * object in <code>descriptors</code>, and returns the collection of these
+	 * actions. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected Collection<IAction> generateCreateSiblingActions(
@@ -338,18 +364,22 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 		Collection<IAction> actions = new ArrayList<IAction>();
 		if (descriptors != null) {
 			for (Object descriptor : descriptors) {
-				actions.add(new CreateSiblingAction(activeEditorPart, selection, descriptor));
+				actions.add(new CreateSiblingAction(activeEditorPart,
+						selection, descriptor));
 			}
 		}
 		return actions;
 	}
 
 	/**
-	 * This populates the specified <code>manager</code> with {@link org.eclipse.jface.action.ActionContributionItem}s
-	 * based on the {@link org.eclipse.jface.action.IAction}s contained in the <code>actions</code> collection,
-	 * by inserting them before the specified contribution item <code>contributionID</code>.
-	 * If <code>contributionID</code> is <code>null</code>, they are simply added.
+	 * This populates the specified <code>manager</code> with
+	 * {@link org.eclipse.jface.action.ActionContributionItem}s based on the
+	 * {@link org.eclipse.jface.action.IAction}s contained in the
+	 * <code>actions</code> collection, by inserting them before the specified
+	 * contribution item <code>contributionID</code>. If
+	 * <code>contributionID</code> is <code>null</code>, they are simply added.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void populateManager(IContributionManager manager,
@@ -358,8 +388,7 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 			for (IAction action : actions) {
 				if (contributionID != null) {
 					manager.insertBefore(contributionID, action);
-				}
-				else {
+				} else {
 					manager.add(action);
 				}
 			}
@@ -367,10 +396,12 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 	}
 
 	/**
-	 * This removes from the specified <code>manager</code> all {@link org.eclipse.jface.action.ActionContributionItem}s
-	 * based on the {@link org.eclipse.jface.action.IAction}s contained in the <code>actions</code> collection.
-	 * <!-- begin-user-doc --> <!--
+	 * This removes from the specified <code>manager</code> all
+	 * {@link org.eclipse.jface.action.ActionContributionItem}s based on the
+	 * {@link org.eclipse.jface.action.IAction}s contained in the
+	 * <code>actions</code> collection. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void depopulateManager(IContributionManager manager,
@@ -382,13 +413,15 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 				//
 				IContributionItem contributionItem = items[i];
 				while (contributionItem instanceof SubContributionItem) {
-					contributionItem = ((SubContributionItem)contributionItem).getInnerItem();
+					contributionItem = ((SubContributionItem) contributionItem)
+							.getInnerItem();
 				}
 
 				// Delete the ActionContributionItems with matching action.
 				//
 				if (contributionItem instanceof ActionContributionItem) {
-					IAction action = ((ActionContributionItem)contributionItem).getAction();
+					IAction action = ((ActionContributionItem) contributionItem)
+							.getAction();
 					if (actions.contains(action)) {
 						manager.remove(contributionItem);
 					}
@@ -398,9 +431,9 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 	}
 
 	/**
-	 * This populates the pop-up menu before it appears.
-	 * <!-- begin-user-doc -->
+	 * This populates the pop-up menu before it appears. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -408,18 +441,21 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 		super.menuAboutToShow(menuManager);
 		MenuManager submenuManager = null;
 
-		submenuManager = new MenuManager(ViewEditorPlugin.INSTANCE.getString("_UI_CreateChild_menu_item"));
+		submenuManager = new MenuManager(ViewEditorPlugin.INSTANCE
+				.getString("_UI_CreateChild_menu_item"));
 		populateManager(submenuManager, createChildActions, null);
 		menuManager.insertBefore("edit", submenuManager);
 
-		submenuManager = new MenuManager(ViewEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item"));
+		submenuManager = new MenuManager(ViewEditorPlugin.INSTANCE
+				.getString("_UI_CreateSibling_menu_item"));
 		populateManager(submenuManager, createSiblingActions, null);
 		menuManager.insertBefore("edit", submenuManager);
 	}
 
 	/**
-	 * This ensures that a delete action will clean up all references to deleted objects.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This ensures that a delete action will clean up all references to deleted
+	 * objects. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -446,20 +482,17 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 		refreshViewerAction.setEnabled(refreshViewerAction.isEnabled());
 		menuManager.insertAfter("ui-actions", refreshViewerAction);
 
-		//#### VIEW
 		menuManager
 				.insertAfter("ui-actions", new Separator("ui-commonActions"));
 		if (o instanceof AbstractView) {
 			addActionsForViews(menuManager, o);
 		}
 
-		//#### FIELD
-		// ---- Transform Menu
 		if (o instanceof Field) {
 			addActionsForFields(menuManager);
 		}
 
-		// Merge cols :
+		
 		if (o instanceof Col && !(o instanceof AbstractView)) {
 			addActionsForCols(menuManager);
 		}
@@ -473,12 +506,18 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 
 	private void addActionsForCollections(IMenuManager menuManager) {
 		// Synchronize
-		synchronizeView.setImageDescriptor(ImageDescriptor.createFromFile(
-				this.getClass(), "/icons/menu/synchronize.png"));
+		synchronizeView.setImageDescriptor(ImageDescriptor.createFromFile(this
+				.getClass(), "/icons/menu/synchronize.png"));
 		menuManager.insertAfter("ui-actions", synchronizeView);
 	}
 
+	/**
+	 * Add actions specific to cols
+	 * @param menuManager
+	 * @param o
+	 */
 	private void addActionsForCols(IMenuManager menuManager) {
+		// Merge cols :
 		TreeSelection selection = ((TreeSelection) this.selectionProvider
 				.getSelection());
 		// Check if there is more than one col selected
@@ -491,15 +530,30 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 				}
 			}
 			if (allCol) {
-				mergeCol.setImageDescriptor(ImageDescriptor.createFromFile(
-						this.getClass(), "/icons/menu/merge.gif"));
+				mergeCol.setImageDescriptor(ImageDescriptor.createFromFile(this
+						.getClass(), "/icons/menu/merge.gif"));
 				menuManager.insertAfter("ui-actions", mergeCol);
 			}
 		}
+		// Paste configuration
+		pasteColConfAction.setImageDescriptor(ImageDescriptor.createFromFile(this
+				.getClass(), "/icons/menu/pasteColConf.gif"));
+		menuManager.insertAfter("ui-actions", pasteColConfAction);
+		
+		// Copy configuration
+		copyColConfAction.setImageDescriptor(ImageDescriptor.createFromFile(this
+				.getClass(), "/icons/menu/copyColConf.png"));
+		menuManager.insertAfter("ui-actions", copyColConfAction);
 	}
 
+	/**
+	 * Add actions specific to fields
+	 * @param menuManager
+	 * @param o
+	 */
 	private void addActionsForFields(IMenuManager menuManager) {
-		IMenuManager transformMenu = new MenuManager("Transform to","addLinked");
+		IMenuManager transformMenu = new MenuManager("Transform to",
+				"addLinked");
 		transformMenu.add(new Action("never shown entry") {
 		});
 		transformMenu.setRemoveAllWhenShown(true);
@@ -512,21 +566,26 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 		menuManager.insertAfter("ui-actions", transformMenu);
 	}
 
+	/**
+	 * Add actions specific to views
+	 * @param menuManager
+	 * @param o
+	 */
 	private void addActionsForViews(IMenuManager menuManager, Object o) {
 		// Initialize
-		initializeView.setImageDescriptor(ImageDescriptor.createFromFile(
-				this.getClass(), "/icons/menu/initialize.png"));
+		initializeView.setImageDescriptor(ImageDescriptor.createFromFile(this
+				.getClass(), "/icons/menu/initialize.png"));
 		menuManager.insertAfter("ui-actions", initializeView);
 
 		// Refresh Outline
-		refreshOutline.setImageDescriptor(ImageDescriptor.createFromFile(
-				this.getClass(), "/icons/menu/refreshOutline.png"));
+		refreshOutline.setImageDescriptor(ImageDescriptor.createFromFile(this
+				.getClass(), "/icons/menu/refreshOutline.png"));
 		menuManager.insertAfter("ui-actions", refreshOutline);
 
 		// Restore
-		MenuManager restoreMenu = new MenuManager("Restore",
-				ImageDescriptor.createFromFile(this.getClass(),
-						"/icons/menu/restore.png"), "restore");
+		MenuManager restoreMenu = new MenuManager("Restore", ImageDescriptor
+				.createFromFile(this.getClass(), "/icons/menu/restore.png"),
+				"restore");
 		if (((AbstractView) o).getDisabled().size() > 0) {
 			restoreMenu.add(new Action("never shown entry") {
 			});
@@ -539,11 +598,12 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 			restoreMenu.addMenuListener(restoreListener);
 		}
 		menuManager.insertAfter("ui-actions", restoreMenu);
-		
+
 		// Add linked field
-		final IMenuManager addLinkedFieldMenu = new MenuManager("Add linked Field",ImageDescriptor.createFromFile(this.getClass(),
-		"/icons/menu/addLinkedField.png"), 
-		"transform");
+		final IMenuManager addLinkedFieldMenu = new MenuManager(
+				"Add linked Field", ImageDescriptor.createFromFile(this
+						.getClass(), "/icons/menu/addLinkedField.png"),
+				"transform");
 		addLinkedFieldMenu.add(new Action("never shown entry") {
 		});
 		addLinkedFieldMenu.setRemoveAllWhenShown(true);
@@ -558,15 +618,16 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 
 	/**
 	 * Get the selected element of the menu and will show sub element
+	 * 
 	 * @param mgr
 	 * @param topMenu
 	 */
 	protected void fillAddLinkedMenu(IMenuManager mgr, IMenuManager topMenu) {
 		Object o = ((TreeSelection) this.selectionProvider.getSelection())
-		.getFirstElement();
+				.getFirstElement();
 		if (o instanceof AbstractViewOf) {
 			AbstractViewOf av = (AbstractViewOf) o;
-			if (av.getViewOf() != null && av.getViewOf() instanceof Clazz){
+			if (av.getViewOf() != null && av.getViewOf() instanceof Clazz) {
 				Clazz c = (Clazz) av.getViewOf();
 				List<Association> path = new ArrayList<Association>();
 				addLinkedFieldAssociation(topMenu, c, path, av);
@@ -576,19 +637,23 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 
 	/**
 	 * Add a subMenu for Association
+	 * 
 	 * @param topMenu
 	 * @param c
-	 * @param av 
+	 * @param av
 	 */
-	private void addLinkedFieldAssociation(IMenuManager topMenu, final Clazz c, final List<Association> path, final AbstractViewOf av) {
+	private void addLinkedFieldAssociation(IMenuManager topMenu, final Clazz c,
+			final List<Association> path, final AbstractViewOf av) {
 		for (final Association a : c.getAllSourceAssociations()) {
-			
-			IMenuManager addLinkedFieldMenu = new MenuManager(a.getTitle(),"browse" + a.getName());
-			addLinkedFieldMenu.add(new Action("never shown entry") {});
+
+			IMenuManager addLinkedFieldMenu = new MenuManager(a.getTitle(),
+					"browse" + a.getName());
+			addLinkedFieldMenu.add(new Action("never shown entry") {
+			});
 			addLinkedFieldMenu.setRemoveAllWhenShown(true);
 			IMenuListener addLinkedFieldListener = new IMenuListener() {
 				public void menuAboutToShow(IMenuManager m) {
-					fillAddLinkedSubMenu(m,a,path,av,c);
+					fillAddLinkedSubMenu(m, a, path, av, c);
 				}
 			};
 			addLinkedFieldMenu.addMenuListener(addLinkedFieldListener);
@@ -598,33 +663,38 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 
 	/**
 	 * Add attributes for sub menu
+	 * 
 	 * @param mgr
 	 * @param a
-	 * @param av 
-	 * @param c 
+	 * @param av
+	 * @param c
 	 */
-	protected void fillAddLinkedSubMenu(IMenuManager mgr, Association a, List<Association> p, AbstractViewOf av, Clazz c) {
+	protected void fillAddLinkedSubMenu(IMenuManager mgr, Association a,
+			List<Association> p, AbstractViewOf av, Clazz c) {
 		List<Association> path = new ArrayList<Association>(p);
 		path.add(a);
 		if (av.getViewOf() != null && a.getAssociationEnd(c).size() > 0) {
 			if (a.getAssociationEnd(c).get(0).getLinkedClass().equals(c)) {
-				c = a.getAssociationEnd(c).get(0).getOpposite().getLinkedClass();
+				c = a.getAssociationEnd(c).get(0).getOpposite()
+						.getLinkedClass();
 			} else {
 				c = a.getAssociationEnd(c).get(0).getLinkedClass();
 			}
 			for (Attribute att : c.getAllAttributes()) {
-				AddLinkedFieldAction alfa = new AddLinkedFieldAction(att,path,av);
+				AddLinkedFieldAction alfa = new AddLinkedFieldAction(att, path,
+						av);
 				alfa.setActiveWorkbenchPart(activeEditor);
 				selectionProvider
-				.addSelectionChangedListener((ISelectionChangedListener) alfa);
+						.addSelectionChangedListener((ISelectionChangedListener) alfa);
 				mgr.add(alfa);
 			}
-			addLinkedFieldAssociation(mgr,c,path,av);
+			addLinkedFieldAssociation(mgr, c, path, av);
 		}
 	}
 
 	/**
 	 * Show deleted field that can be restored
+	 * 
 	 * @param mgr
 	 */
 	private void fillRestoreContextMenu(IMenuManager mgr) {
@@ -667,8 +737,9 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 		initializeView.setActiveWorkbenchPart(activeEditor);
 		mergeCol.setActiveWorkbenchPart(activeEditor);
 		synchronizeView.setActiveWorkbenchPart(activeEditor);
-		//refreshOutline.setActiveWorkbenchPart(activeEditor);
-
+		copyColConfAction.setActiveWorkbenchPart(activeEditor);
+		pasteColConfAction.setActiveWorkbenchPart(activeEditor);
+		
 		ISelectionProvider selectionProvider = activeEditor instanceof ISelectionProvider ? (ISelectionProvider) activeEditor
 				: activeEditor.getEditorSite().getSelectionProvider();
 		selectionProvider
@@ -676,9 +747,13 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 		selectionProvider
 				.addSelectionChangedListener((ISelectionChangedListener) mergeCol);
 		selectionProvider
-		.addSelectionChangedListener((ISelectionChangedListener) synchronizeView);
+				.addSelectionChangedListener((ISelectionChangedListener) synchronizeView);
 		selectionProvider
-		.addSelectionChangedListener((ISelectionChangedListener) refreshOutline);
-		
+				.addSelectionChangedListener((ISelectionChangedListener) refreshOutline);
+		selectionProvider
+		.addSelectionChangedListener((ISelectionChangedListener) copyColConfAction);
+		selectionProvider
+		.addSelectionChangedListener((ISelectionChangedListener) pasteColConfAction);
+
 	}
 }

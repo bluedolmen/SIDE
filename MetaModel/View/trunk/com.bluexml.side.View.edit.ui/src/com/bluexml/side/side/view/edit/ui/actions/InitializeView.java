@@ -2,6 +2,7 @@ package com.bluexml.side.side.view.edit.ui.actions;
 
 import java.util.Iterator;
 
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
@@ -15,6 +16,7 @@ import com.bluexml.side.side.view.edit.ui.utils.InitView;
 import com.bluexml.side.side.view.edit.ui.utils.InternalModification;
 import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.AbstractViewOf;
+import com.bluexml.side.view.ComposedView;
 
 
 
@@ -50,13 +52,26 @@ ISelectionChangedListener {
 	@Override
 	public void run() {
 		super.run();
-		doAction((AbstractViewOf) selectedObject);
+		doAction((AbstractView) selectedObject);
 	}
 
-	private void doAction(AbstractViewOf av) {
+	private void doAction(AbstractView av) {
 		InternalModification.dontMoveToDisabled();
 		try {
-			domain.getCommandStack().execute(InitView.init(av,domain));
+			CompoundCommand cmd = new CompoundCommand();
+			if (av instanceof ComposedView) {
+				ComposedView cv = (ComposedView) av;
+				for (AbstractView v : cv.getInnerView()) {
+					if (v instanceof AbstractViewOf) {
+						cmd.append(InitView.init((AbstractViewOf)v,domain));
+					}
+				}
+			} else if (av instanceof AbstractViewOf) {
+				cmd.append(InitView.init((AbstractViewOf)av,domain));
+			}
+			if (!cmd.isEmpty()) {
+				domain.getCommandStack().execute(cmd);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			EcorePlugin.INSTANCE.log("Init failed : " + e.getMessage());
@@ -68,7 +83,7 @@ ISelectionChangedListener {
 
 	@Override
 	public String getText() {
-		return "Initialize View From Class";
+		return "Initiliaze";
 	}
 
 	public void setActiveWorkbenchPart(IWorkbenchPart workbenchPart) {
