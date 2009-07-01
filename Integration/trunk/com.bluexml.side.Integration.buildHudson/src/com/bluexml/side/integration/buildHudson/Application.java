@@ -57,8 +57,7 @@ public class Application {
 
 				// On met a jour le texte de la licence et du copyright
 				for (int i = 0; i < projects.length; i++) {
-					if (projects[i].indexOf("feature") != -1
-							|| projects[i].equals("com.bluexml.side.Util"))
+					if (projects[i].indexOf("feature") != -1)
 						Utils.updateCopyrightLicence(projects[i]);
 				}
 			} else {
@@ -100,6 +99,10 @@ public class Application {
 				.println("\nMise à jour des numéros de version (si besoin)...");
 
 		Utils.traitementUpdate();
+		
+		// Commit
+		System.out.println("\nCommit des modifications sur le répository...");
+		execBuild("buildSVN", "svnCommit");
 
 		// création du build.xml
 		System.out.println("\n\n- Création de " + Utils.getBuildPath()
@@ -125,10 +128,6 @@ public class Application {
 		Utils.updateSiteXml();
 
 		// traitement final
-
-		// Commit
-		System.out.println("\nCommit des modifications sur le répository...");
-		execBuild("buildSVN", "svnCommit");
 
 		// Déplacement et suppression des répertoires
 		System.out.println("\nDéplacement et suppression des répertoires");

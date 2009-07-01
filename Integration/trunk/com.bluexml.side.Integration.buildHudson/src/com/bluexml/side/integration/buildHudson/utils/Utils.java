@@ -322,6 +322,8 @@ public class Utils {
 	 */
 	public static void traitementUpdate() {
 
+		copyFromRepository();
+		
 		ArrayList<String> listeProjetReels = new ArrayList<String>();
 
 		String[] projects = getProjects();
@@ -464,6 +466,8 @@ public class Utils {
 			}
 		}
 		// fin affichage
+		
+		copyToRepository();
 	}
 
 	/**
@@ -472,22 +476,81 @@ public class Utils {
 	 */
 	public static String getPathToLocalCopy(String projectName) {
 		String path = "";
+		if( new File(getBuildPath() + File.separator + "respositoryCopy").exists() ){
+			path = getBuildPath() + File.separator + "respositoryCopy";
+		} else {
+			if(Application.parametre){
+				path = Application.workspace;
+			} else {
+				path = getBuildDirectory() + "_CO";
+			}
+			
+		}
 		if (Application.parametre) {
 
-			path = Application.workspace + File.separator + "S-IDE"
+			path = path + File.separator + "S-IDE"
 					+ File.separator + getProjectPath(projectName)
 					+ File.separator + "trunk" + File.separator + projectName;
 		} else {
 			if (projectName.indexOf("feature") == -1) {
 
-				path = Application.workspace + "_CO" + File.separator
+				path = path + File.separator
 						+ "plugins" + File.separator + projectName;
 			} else {
-				path = Application.workspace + "_CO" + File.separator
+				path = path + File.separator
 						+ "features" + File.separator + projectName;
 			}
 		}
 		return path;
+	}
+	
+	/**
+	 * Copy the repository 
+	 */
+	public static void copyFromRepository(){
+		
+		String from ="";
+		if (Application.parametre) {
+			from = Application.workspace;
+		} else {
+			from = getBuildDirectory() + "_CO";
+		}
+		
+		String to = getBuildPath() + File.separator + "respositoryCopy";
+		
+		try {
+			if (new File(to).exists()){
+				FileHelper.deleteFile(new File(to));
+			}
+			
+			new File(getBuildPath() + File.separator + "respositoryCopy").mkdir();
+			
+			FileHelper.copyFiles(new File(from), new File(to), true);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void copyToRepository(){
+		
+		String to ="";
+		if (Application.parametre) {
+			to = Application.workspace;
+		} else {
+			to = getBuildDirectory() + "_CO";
+		}
+
+		String from = getBuildPath() + File.separator + "respositoryCopy";
+		
+		try {
+			FileHelper.copyFiles(new File(from), new File(to), true);
+			
+			FileHelper.deleteFile(new File(from));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**
@@ -497,7 +560,7 @@ public class Utils {
 	 * @param projectName
 	 */
 	public static void updateVersionNumber(String projectName) {
-
+		
 		String[] pattern = ouvrirFichier("build.properties").getProperty(
 				"number-pattern").split("\\.");
 
@@ -794,28 +857,26 @@ public class Utils {
 	public static void finalTraitement() {
 		try {
 			// suppression du dossier final s'il éxiste
-			if (new File(getFinalDirectory()).exists())
-				FileHelper.deleteFile(new File(getFinalDirectory()));
-
-			new File(getFinalDirectory()).mkdir();
+			if (!new File(getFinalDirectory()).exists())
+				new File(getFinalDirectory()).mkdir();
 
 			// copie de l'update site
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
 					+ getBuildLabel() + File.separator + getArchivePrefix()
 					+ File.separator + "features"), new File(
 					getFinalDirectory() + File.separator + getArchivePrefix()
-							+ File.separator + "features"), true);
+							+ File.separator + getRevisionNumber() + File.separator + "features"), true);
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
 					+ getBuildLabel() + File.separator + getArchivePrefix()
 					+ File.separator + "plugins"), new File(getFinalDirectory()
 					+ File.separator + getArchivePrefix() + File.separator
-					+ "plugins"), true);
+					+ getRevisionNumber() + File.separator + "plugins"), true);
 
 			// copie du site.xml pour l'update site
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "site.xml"), new File(getFinalDirectory()
 					+ File.separator + getArchivePrefix() + File.separator
-					+ "site.xml"), true);
+					+ getRevisionNumber() + File.separator + "site.xml"), true);
 
 			// copie de la doc
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
