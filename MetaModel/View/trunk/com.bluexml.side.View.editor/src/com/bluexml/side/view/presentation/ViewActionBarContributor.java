@@ -564,6 +564,7 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 	 */
 	private void addLinkedFieldAssociation(IMenuManager topMenu, final Clazz c, final List<Association> path, final AbstractViewOf av) {
 		for (final Association a : c.getAllSourceAssociations()) {
+			
 			IMenuManager addLinkedFieldMenu = new MenuManager(a.getTitle(),"browse" + a.getName());
 			addLinkedFieldMenu.add(new Action("never shown entry") {});
 			addLinkedFieldMenu.setRemoveAllWhenShown(true);
@@ -587,10 +588,11 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 	protected void fillAddLinkedSubMenu(IMenuManager mgr, Association a, List<Association> p, AbstractViewOf av, Clazz c) {
 		List<Association> path = new ArrayList<Association>(p);
 		path.add(a);
-		//TODO : change when new OCL method are done
-		if (a.getTarget() != null && a.getTarget().size() > 0) {
-			if (av.getViewOf().equals(c)) {
-				c = a.getTarget().get(1);
+		if (av.getViewOf() != null && a.getAssociationEnd(c).size() > 0) {
+			if (a.getAssociationEnd(c).get(0).getLinkedClass().equals(c)) {
+				c = a.getAssociationEnd(c).get(0).getOpposite().getLinkedClass();
+			} else {
+				c = a.getAssociationEnd(c).get(0).getLinkedClass();
 			}
 			for (Attribute att : c.getAllAttributes()) {
 				AddLinkedFieldAction alfa = new AddLinkedFieldAction(att,path,av);
