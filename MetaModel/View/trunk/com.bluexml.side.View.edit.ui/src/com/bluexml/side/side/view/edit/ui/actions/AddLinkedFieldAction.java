@@ -75,9 +75,6 @@ ISelectionChangedListener {
 			if (toAdd instanceof Attribute) {
 				FieldElement child = null;
 				Field f = ClassUtils.getFieldForAttribute((Attribute)toAdd);
-//				for (Association a : path) {
-//					f.getPath().add(a);
-//				}
 				f.getPath().addAll(path);
 				
 				if (parent instanceof DataTable) {
