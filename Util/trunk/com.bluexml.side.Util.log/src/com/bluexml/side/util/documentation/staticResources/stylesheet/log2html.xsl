@@ -2,7 +2,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="2.0">
     <!--
     <xsl:output omit-xml-declaration="yes"
-        doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+        doctype-public="-//W3C//DTD XHTML 1.0 Transitiona    l//EN"
         doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
         encoding="UTF-8"
         indent="no"
@@ -30,13 +30,16 @@
                     <div id="menu">
                         <a href="#" onclick="javascript:showPannel('stats');">Stats</a> | 
                         <a href="#" onclick="javascript:showPannel('generation');">Generation</a> | 
-                        <a href="#" onclick="javascript:showPannel('deployement');">Deployement</a>
+                        <a href="#" onclick="javascript:showPannel('deployment');">Deployment</a> |
+                        <a href="#" onclick="javascript:showPannel('service');">Services</a> |
+                        <a href="#" onclick="javascript:showPannel('documentation');">Documentation</a> |
                     </div>
     
                     <div id="content">
-                        <xsl:call-template name="deployementDisplay"/>
+                        <xsl:call-template name="deploymentDisplay"/>
                         <xsl:call-template name="generationDisplay"/>
                         <xsl:call-template name="statsDisplay"/>
+                        
                     </div>
     
                     <div id="footer">
@@ -58,7 +61,7 @@
                         <xsl:value-of select="count(//logEntry[@type='GENERATION_INFORMATION'])"/>
                         generation informations. <br/>
                         <xsl:value-of select="count(//logEntry[@type='DEPLOYEMENT_INFORMATION'])"/>
-                        deployement informations. <br/>
+                        deployment informations. <br/>
                         <xsl:value-of select="count(//logEntry[@type='GENERATED_FILE'])"/>
                         logs on generated files. <br/>
                     </div>
@@ -66,7 +69,7 @@
             </div>
             <div id="rightColumn">
                 <div id="statsLogBox" class="box">
-                    <div class="box-header"> Statistiques : generation and deployement</div>
+                    <div class="box-header"> Statistiques : generation and deployment</div>
                     <div class="box-body">
                         <xsl:value-of select="count(//SIDELog[@type='GENERATION'])"/> generator. <br/>
                         <xsl:value-of select="count(//SIDELog[@type='DEPLOYEMENT'])"/> deployer. <br/>
@@ -76,8 +79,8 @@
         </div>
     </xsl:template>
 
-    <xsl:template name="deployementDisplay">
-        <div id="deployement" style="display:none;"> 
+    <xsl:template name="deploymentDisplay">
+        <div id="deployment" style="display:none;"> 
             <xsl:call-template name="logerDisplay">
                 <xsl:with-param name="type">DEPLOYEMENT</xsl:with-param>
             </xsl:call-template>

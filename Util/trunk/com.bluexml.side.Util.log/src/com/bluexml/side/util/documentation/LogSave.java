@@ -32,7 +32,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class LogSave {
-	
+
 	public static String LOG_FILE_NAME = "log.xml";
 
 	/**
@@ -105,7 +105,7 @@ public class LogSave {
 		Element rootNode = new Element("logRoot");
 		Document doc = new Document();
 		ProcessingInstruction pi = new ProcessingInstruction("xml-stylesheet",
-				"type='text/xsl' href='log2html.xsl'");
+				"type='text/xsl' href='stylesheet/log2html.xsl'");
 		doc.addContent(pi);
 		doc.setRootElement(rootNode);
 
@@ -137,7 +137,7 @@ public class LogSave {
 			writer.close();
 		}
 
-		moveStaticRessources(folder,doc);
+		moveStaticRessources(folder, doc);
 
 	}
 
@@ -149,7 +149,10 @@ public class LogSave {
 				+ System.getProperty("file.separator");
 		// We use xsl transformation and ouput html file into log directory
 		// We move all files to the log directory
-		moveFile(folderPath, "log2html.xsl", folderSource);
+		moveFile(folderPath + "stylesheet"
+				+ System.getProperty("file.separator"), "log2html.xsl",
+				folderSource + "stylesheet"
+						+ System.getProperty("file.separator"));
 		moveFile(folderPath + "css" + System.getProperty("file.separator"),
 				"style.css", folderSource + "css"
 						+ System.getProperty("file.separator"));
@@ -171,11 +174,12 @@ public class LogSave {
 		moveFile(folderPath + "js" + System.getProperty("file.separator"),
 				"log.js", folderSource + "js"
 						+ System.getProperty("file.separator"));
-		makeHtml(doc, folderPath, "log2html.xsl", "log.html");
+		// makeHtml(doc, folderPath, "log2html.xsl", "log.html");
 	}
 
 	/**
 	 * Will ouput html using xml with an xsl transfo
+	 * 
 	 * @param doc
 	 * @param folderDest
 	 * @param xslName
@@ -183,14 +187,18 @@ public class LogSave {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	private static void makeHtml(Document doc, String folderDest, String xslName, String htmlName) throws TransformerException, FileNotFoundException, IOException {
+	private static void makeHtml(Document doc, String folderDest,
+			String xslName, String htmlName) throws TransformerException,
+			FileNotFoundException, IOException {
 		JDOMResult docResult = new JDOMResult();
 		org.jdom.Document resultat = null;
 		TransformerFactory factory = TransformerFactory.newInstance();
-		
-		Transformer transformer = factory.newTransformer(new StreamSource(new File(folderDest + xslName)));
-		
-		transformer.transform(new org.jdom.transform.JDOMSource(doc), docResult);
+
+		Transformer transformer = factory.newTransformer(new StreamSource(
+				new File(folderDest + xslName)));
+
+		transformer
+				.transform(new org.jdom.transform.JDOMSource(doc), docResult);
 		resultat = docResult.getDocument();
 		XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
 		outputter.output(resultat, new FileOutputStream(folderDest + htmlName));
@@ -198,6 +206,7 @@ public class LogSave {
 
 	/**
 	 * Move file from this jar to the specified folder
+	 * 
 	 * @param folderDest
 	 * @param fileName
 	 * @param folderSource
