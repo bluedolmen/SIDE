@@ -17,14 +17,14 @@ version="1.0">
   	<xsl:choose>
         <xsl:when test="@count &gt; 1">
 			<xsl:value-of select="@count" />
-			<xsl:text> RÃ©sultats </xsl:text>
+			<xsl:text> Résultats </xsl:text>
 			<xsl:if test="@count != count(resource)">
 			(<xsl:value-of select="count(resource)" />
-			<xsl:text> affichÃ©s)</xsl:text>
+			<xsl:text> affichés)</xsl:text>
 			</xsl:if>
 		</xsl:when>
         <xsl:otherwise>
-			<xsl:value-of select="@count" /><xsl:text> RÃ©sultats</xsl:text>
+			<xsl:value-of select="@count" /><xsl:text> Résultats</xsl:text>
 		</xsl:otherwise>
       </xsl:choose>
     </div>
@@ -39,7 +39,7 @@ version="1.0">
   	<xsl:param name="nbParPages"/>
   	<xsl:param name="NbTotal"/>
     <div class="result">
-    	<%for (operations){%>
+    	<%for (getInnerView().filter("Actionable").operations.getOperations()){%>
         	<%if (name == "download"){%>
 				<span class="linkDownload">
 					<a>

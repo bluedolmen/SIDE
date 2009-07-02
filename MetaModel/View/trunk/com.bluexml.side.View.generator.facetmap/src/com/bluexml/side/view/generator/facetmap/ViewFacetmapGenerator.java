@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.util.generator.acceleo.AbstractAcceleoPackageGenerator;
@@ -69,7 +70,7 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslbasicfacets-generation.mt");
 				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslrightnav-generation.mt");
 				//results
-				//templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-content-basicresults-generation.mt");
+				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-content-basicresults-generation.mt");
 			return templates;
 	}
 
@@ -89,7 +90,9 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 		if (groupedModels.entrySet().size()>1)
 			throw new Exception("Error too many root packages for facetmap.");
 		setTEMP_FOLDER("generator_" + getClass().getName());
-		buildPackages(groupedModels.keySet().toArray()[0].toString());
+		generatedFiles.addAll(buildPackages(groupedModels.keySet().toArray()[0].toString()));
+		for (IFile f : generatedFiles) {
+			addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());		}
 		return generatedFiles;
 	}
 
@@ -103,7 +106,7 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 		FileHelper.copyFiles(new File(folder + "common"), new File(destFacets), true);
 		FileHelper.copyFiles(new File(folder + "common"), new File(destContent), true);
 		FileHelper.copyFiles(new File(folder + "facets"), new File(destFacets), true);
-		//FileHelper.copyFiles(new File(folder + "content"), new File(destFacets), true);
+		FileHelper.copyFiles(new File(folder + "content"), new File(destContent), true);
 		//Zip
 		String zipFolder = IFileHelper.getSystemFolderPath(getTargetPath()+FILESEP+getTechVersion())+FILESEP;
 		new File(zipFolder).mkdirs();
@@ -111,11 +114,11 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 		File zipContent = new File(zipFolder + WEBAPP_CONTENT + ".zip");
 		ZipManager.zip(new File(destFacets), zipFacets, false);
 		ZipManager.zip(new File(destContent), zipContent, false);
+		//Creating file collection
+		IFolder workingDir = IFileHelper.getIFolder(getTemporaryFolder()+ FILESEP + "../");
 		Collection<IFile> pkgs = new ArrayList<IFile>();
-		//TODO : Add zipContent and zipFacets as IFile to pkgs collection
-		//pkgs.add(zipContent);
-
-		
+		pkgs.add(IFileHelper.getIFile(workingDir.toString().replaceFirst("[^/]*/", "/") + FILESEP + getTechVersion()+ FILESEP + WEBAPP_FACETS + ".zip"));
+		pkgs.add(IFileHelper.getIFile(workingDir.toString().replaceFirst("[^/]*/", "/") + FILESEP + getTechVersion()+ FILESEP + WEBAPP_CONTENT + ".zip"));
 		return pkgs;
 	}
 

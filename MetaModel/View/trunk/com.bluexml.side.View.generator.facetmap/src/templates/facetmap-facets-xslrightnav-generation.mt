@@ -39,7 +39,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 
     <xsl:template match="selection">
         <xsl:apply-templates select="superset"/>
-        <div class="facets">
+        <div class="facets" id="facets">
 	        <div class="facets-title">
 	            <div style="display: inline; align: left;">Critères</div>
 		        <div style="display: inline; align: right;">
