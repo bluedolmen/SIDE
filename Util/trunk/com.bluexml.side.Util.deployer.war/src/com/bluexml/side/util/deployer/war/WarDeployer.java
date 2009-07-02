@@ -23,12 +23,16 @@ public abstract class WarDeployer extends Deployer {
 	File warToPatchFile = null;
 	File deployedWebbAppFolder = null;
 
-	public void initialize(String webappName, String cleanKey, String logChanges, Map<String, String> configurationParameters, Map<String, String> generationParameters, List<String> options) {
-		this.initialize(configurationParameters, generationParameters, options);
-		this.webappName = webappName;
-		this.cleanKey = cleanKey;
-		this.logChanges = logChanges;
+	public String getWebappName() {
+		return webappName;
 	}
+
+	public void setWebappName(String webappName) {
+		this.webappName = webappName;
+	}
+
+	
+	
 
 	public File getBackupWarFile() {
 		if (backupWarFile == null) {

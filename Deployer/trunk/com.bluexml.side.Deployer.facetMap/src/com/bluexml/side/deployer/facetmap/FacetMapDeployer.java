@@ -5,14 +5,14 @@ package com.bluexml.side.deployer.facetmap;
 
 import java.io.File;
 
-import com.bluexml.side.util.deployer.war.MultiWarDeployer;
+import com.bluexml.side.util.deployer.AbstractMultiDeployer;
 import com.bluexml.side.util.deployer.war.WarDeployer;
 
 /**
  * @author davidabad
  * 
  */
-public class FacetMapDeployer extends MultiWarDeployer {
+public class FacetMapDeployer extends AbstractMultiDeployer {
 
 	public FacetMapDeployer() {
 		this.cleanKey = "facetMap.deployer.clean";
@@ -32,10 +32,10 @@ public class FacetMapDeployer extends MultiWarDeployer {
 			}
 
 		};
+		wd1.setWebappName(webappName1);
+		addDeployer(wd1);
 
-		addWarDeployer(webappName1, wd1);
-
-		// record decond webapp deployer
+		// record second webapp deployer
 		final String webappName2 = "facetmap-content";
 		WarDeployer wd2 = new WarDeployer() {
 			@Override
@@ -46,7 +46,8 @@ public class FacetMapDeployer extends MultiWarDeployer {
 				return new File(absoluteWKDirePath + File.separator + techVersion + File.separator + webappName2 + ".zip");
 			}
 		};
-		addWarDeployer(webappName2, wd2); 
+		wd2.setWebappName(webappName2);
+		addDeployer(wd2);
 	}
 
 	/*
@@ -66,8 +67,17 @@ public class FacetMapDeployer extends MultiWarDeployer {
 	 * @see com.bluexml.side.application.security.Checkable#check()
 	 */
 	public boolean check() {
-		// TODO Auto-generated method stub
 		return true;
+	}
+
+	@Override
+	protected void clean(File fileToDeploy) throws Exception {
+		// nothing to do		
+	}
+
+	@Override
+	protected void preProcess(File fileToDeploy) throws Exception {
+		// nothing to do		
 	}
 
 }

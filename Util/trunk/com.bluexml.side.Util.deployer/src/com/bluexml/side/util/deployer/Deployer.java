@@ -31,6 +31,22 @@ public abstract class Deployer implements Checkable {
 		return log;
 	}
 
+	public String getCleanKey() {
+		return cleanKey;
+	}
+
+	public void setCleanKey(String cleanKey) {
+		this.cleanKey = cleanKey;
+	}
+
+	public String getLogChanges() {
+		return logChanges;
+	}
+
+	public void setLogChanges(String logChanges) {
+		this.logChanges = logChanges;
+	}
+
 	public static String DEPLOYER_CODE = null;
 	protected String cleanKey = null;
 	protected String cleanKeyMsg ="target cleaned";
@@ -38,6 +54,12 @@ public abstract class Deployer implements Checkable {
 	protected String logChangesMsg="detail about target changes made by this deployer";
 	protected List<String> options = null;
 
+	/**
+	 * Use to setup all properties, ordinary used by deployer luncher 
+	 * @param configurationParameters
+	 * @param generationParameters
+	 * @param options
+	 */
 	public void initialize(Map<String, String> configurationParameters, Map<String, String> generationParameters, List<String> options) {
 		this.configurationParameters = configurationParameters;
 		this.options = options;
@@ -54,6 +76,10 @@ public abstract class Deployer implements Checkable {
 		return techVersion;
 	}
 
+	/**
+	 * do the whole deploy process 
+	 * @throws Exception
+	 */
 	public void deploy() throws Exception {
 		String IfilewkDirPath = getTargetPath();
 		String absoluteWKDirePath = IFileHelper.getSystemFolderPath(IfilewkDirPath);
@@ -66,16 +92,41 @@ public abstract class Deployer implements Checkable {
 		postProcess(fileToDeploy);
 	}
 
-	public File getFileToDeploy(String absoluteWKDirePath) {
-		return new File(absoluteWKDirePath + File.separator + techVersion);
+	/**
+	 * default method to get the File to deploy
+	 * @param absoluteWKDirPath
+	 * @return
+	 */
+	public File getFileToDeploy(String absoluteWKDirPath) {
+		return new File(absoluteWKDirPath + File.separator + techVersion);
 	}
 	
+	/**
+	 * the main deploy process
+	 * @param fileToDeploy
+	 * @throws Exception
+	 */
 	protected abstract void deployProcess(File fileToDeploy) throws Exception;
 
+	/**
+	 * method that clean the target before deploy resources into
+	 * @param fileToDeploy
+	 * @throws Exception
+	 */
 	protected abstract void clean(File fileToDeploy) throws Exception;
 
+	/**
+	 * Job to do after the main process
+	 * @param fileToDeploy
+	 * @throws Exception
+	 */
 	protected abstract void postProcess(File fileToDeploy) throws Exception;
 
+	/**
+	 * Job to do before the main process
+	 * @param fileToDeploy
+	 * @throws Exception
+	 */
 	protected abstract void preProcess(File fileToDeploy) throws Exception;
 
 	public final String getTargetPath() {
@@ -86,10 +137,18 @@ public abstract class Deployer implements Checkable {
 		return configurationParameters;
 	}
 
+	/**
+	 * check if changes made by the deploy process must be logged  
+	 * @return
+	 */
 	protected boolean logChanges() {
 		return options != null && options.contains(logChanges);
 	}
 	
+	/**
+	 * check if clean must be done
+	 * @return
+	 */
 	protected boolean doClean() {
 		return options != null && options.contains(cleanKey);
 	}

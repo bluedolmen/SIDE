@@ -24,4 +24,6 @@ public class AlfrescoPackager extends AbstractMultiPackager {
 		packagers.put("wpackager",wpackager);
 	}
 
+	
+
 }
