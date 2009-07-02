@@ -235,6 +235,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="paging" eType="#//Paging"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Actionable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operations" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//OperationComponent"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Sortable" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sorting" eType="#//Sorting"
         containment="true"/>
@@ -256,8 +260,4 @@
     <eLiterals name="improvedCloud" value="2" literal="improvedCloud"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FieldGroup" eSuperTypes="#//FieldContainer"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Actionable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operations" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//OperationComponent"
-        containment="true"/>
-  </eClassifiers>
 </ecore:EPackage>
