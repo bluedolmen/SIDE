@@ -191,25 +191,21 @@ public class Generate extends Thread {
 
 	}
 
-	private AbstractGenerator getGeneratorInstance(GeneratorConfiguration elem) {
+	private AbstractGenerator getGeneratorInstance(GeneratorConfiguration elem) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		String launchGeneratorClass = elem.getImpl_class();
 		String idGenerator = elem.getId();
 		Bundle plugin = Platform.getBundle(idGenerator);
 		Class<?> gen;
 		Object genObj = null;
-		try {
+		if (plugin != null) {
 			gen = plugin.loadClass(launchGeneratorClass);
 			genObj = gen.newInstance();
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		if (genObj instanceof AbstractGenerator) {
-			AbstractGenerator generator = (AbstractGenerator) genObj;
-			return generator;
+			if (genObj instanceof AbstractGenerator) {
+				AbstractGenerator generator = (AbstractGenerator) genObj;
+				return generator;
+			}
+		} else {
+			addErrorText(System.getProperty("line.separator") + "Plugin " + idGenerator + " haven't been found.");
 		}
 		return null;
 	}
@@ -234,7 +230,19 @@ public class Generate extends Thread {
 				generatorOptions.put(option.getKey(), true);
 			}
 
-			AbstractGenerator generator = getGeneratorInstance(elem);
+			AbstractGenerator generator = null;
+			try {
+				generator = getGeneratorInstance(elem);
+			} catch (ClassNotFoundException e1) {
+				addErrorText(System.getProperty("line.separator") + "Error while getting generator (" + elem.getId() + ").");
+				e1.printStackTrace();
+			} catch (InstantiationException e1) {
+				addErrorText(System.getProperty("line.separator") + "Error while instanciating generator (" + elem.getId() + ").");
+				e1.printStackTrace();
+			} catch (IllegalAccessException e1) {
+				addErrorText(System.getProperty("line.separator") + "Error while accessing generator (" + elem.getId() + ").");
+				e1.printStackTrace();
+			}
 
 			// We initialize the generator with all data collected in
 			// application model
