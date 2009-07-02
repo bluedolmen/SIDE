@@ -561,7 +561,7 @@ public class Application {
 
 		out += "\t<target name=\"genJavadoc\" depends=\"\" description=\"description\">\n";
 		out += "\t\t<javadoc destdir=\"${buildDir}" + File.separator
-				+ "doc" + File.separator +"Javadoc\">\n";
+				+ "doc" + File.separator + Utils.getCodeName() + File.separator +"Javadoc\">\n";
 
 		for (int i = 0; i < projects.length; i++) {
 			// si le mot 'feature' n'est pas présent dans le nom du projet

@@ -915,17 +915,20 @@ public class Utils {
 
 			// copie de la doc
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
-					+ "doc"), new File(getFinalDirectory() + File.separator
-					+ "doc" + File.separator + getCodeName()), true);
+					+ "doc"), new File(getFinalDirectory() + File.separator + "doc" + File.separator
+					+ getCodeName()), true);
 
 			// copie des fichiers compilés
-			new File(getFinalDirectory() + File.separator + "logs").mkdir();
+			if (!new File(getFinalDirectory() + File.separator + "logs")
+					.exists())
+				new File(getFinalDirectory() + File.separator + "logs").mkdir();
 
 			// copie des logs (pour la compilation de chaque projet)
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
 					+ getBuildLabel() + File.separator + "compilelogs"),
 					new File(getFinalDirectory() + File.separator + "logs"
-							+ File.separator + "compilelogs"), true);
+							+ File.separator + getCodeName() + File.separator
+							+ "compilelogs"), true);
 
 			// copie des fichiers de log (pour tout le traitment)
 
@@ -935,9 +938,9 @@ public class Utils {
 					+ File.separator + "logCommit.txt"), true);
 
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
-					+ "logbuildbuild.txt"),
-					new File(getFinalDirectory() + File.separator + "logs"
-							+ File.separator + "logBuild.txt"), true);
+					+ "logbuildbuild.txt"), new File(getFinalDirectory()
+					+ File.separator + "logs" + File.separator + File.separator
+					+ getCodeName() + "logBuild.txt"), true);
 
 			if (!Application.parametre) {
 				FileHelper.copyFiles(new File(getBuildPath() + File.separator
@@ -947,7 +950,9 @@ public class Utils {
 			}
 
 			// copie des fichiers compilés
-			new File(getFinalDirectory() + File.separator + "bin").mkdir();
+			if (!new File(getFinalDirectory() + File.separator + "bin")
+					.exists())
+				new File(getFinalDirectory() + File.separator + "bin").mkdir();
 
 			String[] projects = getProjects();
 

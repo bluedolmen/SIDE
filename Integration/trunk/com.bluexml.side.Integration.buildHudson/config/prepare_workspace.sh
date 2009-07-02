@@ -18,4 +18,14 @@ if [ $DF_HOME -gt $FULL ]; then
 fi
 # prepare workspace: copy build.properties, script, jar into working space
 cp -R $SOURCE_WORKSPACE/* $TARGET_WORKSPACE
+
+# give rights for all execute files
+cd $TARGET_WORKSPACE
+chown -R stager test_generator.sh
+chown -R stager docbook.sh
+chown -R stager Gendoc.jar
+
+chmod +x test_generator.sh
+chmod +x docbook.sh
+chmod +x Gendoc.jar
 exit 0
