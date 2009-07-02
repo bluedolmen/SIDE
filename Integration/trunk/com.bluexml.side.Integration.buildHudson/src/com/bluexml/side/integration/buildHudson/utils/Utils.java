@@ -93,19 +93,19 @@ public class Utils {
 	}
 
 	/**
-	 * Return the Build Path: /home/stager/buildAuto
+	 * Return the Build Path: /home/stager/buildAuto/Ankle
 	 */
 	public static String getBuildPath() {
 
-		return ouvrirFichier("build.properties").getProperty("buildDir");
+		return ouvrirFichier("build.properties").getProperty("buildDir")
+				+ File.separator + getCodeName();
 	}
 
 	/**
-	 * return the buildDirectory: /home/stager/buildAuto/workingCopy
+	 * return the buildDirectory: /home/stager/buildAuto/Ankle/workingCopy
 	 */
 	public static String getBuildDirectory() {
-		return ouvrirFichier("build.properties").getProperty("buildDir")
-				+ File.separator
+		return getBuildPath() + File.separator
 				+ ouvrirFichier("build.properties").getProperty("buildName");
 	}
 
@@ -114,6 +114,13 @@ public class Utils {
 	 */
 	public static String getRepository() {
 		return ouvrirFichier("build.properties").getProperty("repository");
+	}
+
+	/**
+	 * Retourne le nom de code: Ankle
+	 */
+	public static String getCodeName() {
+		return ouvrirFichier("build.properties").getProperty("codeName");
 	}
 
 	/**
@@ -323,7 +330,7 @@ public class Utils {
 	public static void traitementUpdate() {
 
 		copyFromRepository();
-		
+
 		ArrayList<String> listeProjetReels = new ArrayList<String>();
 
 		String[] projects = getProjects();
@@ -466,7 +473,7 @@ public class Utils {
 			}
 		}
 		// fin affichage
-		
+
 		copyToRepository();
 	}
 
@@ -476,65 +483,67 @@ public class Utils {
 	 */
 	public static String getPathToLocalCopy(String projectName) {
 		String path = "";
-		if( new File(getBuildPath() + File.separator + "respositoryCopy").exists() ){
+		if (new File(getBuildPath() + File.separator + "respositoryCopy")
+				.exists()) {
 			path = getBuildPath() + File.separator + "respositoryCopy";
 		} else {
-			if(Application.parametre){
+			if (Application.parametre) {
 				path = Application.workspace;
 			} else {
 				path = getBuildDirectory() + "_CO";
 			}
-			
+
 		}
 		if (Application.parametre) {
 
-			path = path + File.separator + "S-IDE"
-					+ File.separator + getProjectPath(projectName)
-					+ File.separator + "trunk" + File.separator + projectName;
+			path = path + File.separator + "S-IDE" + File.separator
+					+ getProjectPath(projectName) + File.separator + "trunk"
+					+ File.separator + projectName;
 		} else {
 			if (projectName.indexOf("feature") == -1) {
 
-				path = path + File.separator
-						+ "plugins" + File.separator + projectName;
+				path = path + File.separator + "plugins" + File.separator
+						+ projectName;
 			} else {
-				path = path + File.separator
-						+ "features" + File.separator + projectName;
+				path = path + File.separator + "features" + File.separator
+						+ projectName;
 			}
 		}
 		return path;
 	}
-	
+
 	/**
-	 * Copy the repository 
+	 * Copy the repository
 	 */
-	public static void copyFromRepository(){
-		
-		String from ="";
+	public static void copyFromRepository() {
+
+		String from = "";
 		if (Application.parametre) {
 			from = Application.workspace;
 		} else {
 			from = getBuildDirectory() + "_CO";
 		}
-		
+
 		String to = getBuildPath() + File.separator + "respositoryCopy";
-		
+
 		try {
-			if (new File(to).exists()){
+			if (new File(to).exists()) {
 				FileHelper.deleteFile(new File(to));
 			}
-			
-			new File(getBuildPath() + File.separator + "respositoryCopy").mkdir();
-			
+
+			new File(getBuildPath() + File.separator + "respositoryCopy")
+					.mkdir();
+
 			FileHelper.copyFiles(new File(from), new File(to), true);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	public static void copyToRepository(){
-		
-		String to ="";
+
+	public static void copyToRepository() {
+
+		String to = "";
 		if (Application.parametre) {
 			to = Application.workspace;
 		} else {
@@ -542,15 +551,15 @@ public class Utils {
 		}
 
 		String from = getBuildPath() + File.separator + "respositoryCopy";
-		
+
 		try {
 			FileHelper.copyFiles(new File(from), new File(to), true);
-			
+
 			FileHelper.deleteFile(new File(from));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	/**
@@ -560,7 +569,7 @@ public class Utils {
 	 * @param projectName
 	 */
 	public static void updateVersionNumber(String projectName) {
-		
+
 		String[] pattern = ouvrirFichier("build.properties").getProperty(
 				"number-pattern").split("\\.");
 
@@ -687,7 +696,7 @@ public class Utils {
 			// on change le numéro de version (s'il le faut)
 			if ("".equals(getForceNumberVersion())) {
 				if (featureAModifier) {
-					if(!listeFeatureModif.contains(projectName)){
+					if (!listeFeatureModif.contains(projectName)) {
 						listeFeatureModif.add(projectName);
 					}
 					racine.setAttribute("version", update(number, pattern));
@@ -861,54 +870,80 @@ public class Utils {
 				new File(getFinalDirectory()).mkdir();
 
 			// copie de l'update site
-			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
-					+ getBuildLabel() + File.separator + getArchivePrefix()
-					+ File.separator + "features"), new File(
-					getFinalDirectory() + File.separator + getArchivePrefix()
-							+ File.separator + getRevisionNumber() + File.separator + "features"), true);
+			FileHelper
+					.copyFiles(
+							new File(getBuildDirectory() + File.separator
+									+ getBuildLabel() + File.separator
+									+ getArchivePrefix() + File.separator
+									+ "features"), new File(getFinalDirectory()
+									+ File.separator + getArchivePrefix()
+									+ File.separator + getCodeName()
+									+ File.separator + getRevisionNumber()
+									+ File.separator + "features"), true);
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
 					+ getBuildLabel() + File.separator + getArchivePrefix()
 					+ File.separator + "plugins"), new File(getFinalDirectory()
 					+ File.separator + getArchivePrefix() + File.separator
-					+ getRevisionNumber() + File.separator + "plugins"), true);
+					+ getCodeName() + File.separator + getRevisionNumber()
+					+ File.separator + "plugins"), true);
 
 			// copie du site.xml pour l'update site
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "site.xml"), new File(getFinalDirectory()
 					+ File.separator + getArchivePrefix() + File.separator
-					+ getRevisionNumber() + File.separator + "site.xml"), true);
+					+ getCodeName() + File.separator + getRevisionNumber()
+					+ File.separator + "site.xml"), true);
+
+			// copie de l'update site
+			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
+					+ getBuildLabel() + File.separator + getArchivePrefix()
+					+ File.separator + "features"), new File(
+					getFinalDirectory() + File.separator + getArchivePrefix()
+							+ File.separator + getCodeName() + File.separator
+							+ "features"), true);
+			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
+					+ getBuildLabel() + File.separator + getArchivePrefix()
+					+ File.separator + "plugins"), new File(getFinalDirectory()
+					+ File.separator + getArchivePrefix() + File.separator
+					+ getCodeName() + File.separator + "plugins"), true);
+
+			// copie du site.xml pour l'update site
+			FileHelper.copyFiles(new File(getBuildPath() + File.separator
+					+ "site.xml"), new File(getFinalDirectory()
+					+ File.separator + getArchivePrefix() + File.separator
+					+ getCodeName() + File.separator + "site.xml"), true);
 
 			// copie de la doc
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "doc"), new File(getFinalDirectory() + File.separator
-					+ "doc"), true);
+					+ "doc" + File.separator + getCodeName()), true);
 
 			// copie des fichiers compilés
-			new File(getFinalDirectory() + File.separator + "Logs").mkdir();
+			new File(getFinalDirectory() + File.separator + "logs").mkdir();
 
 			// copie des logs (pour la compilation de chaque projet)
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
 					+ getBuildLabel() + File.separator + "compilelogs"),
-					new File(getFinalDirectory() + File.separator + "Logs"
+					new File(getFinalDirectory() + File.separator + "logs"
 							+ File.separator + "compilelogs"), true);
 
 			// copie des fichiers de log (pour tout le traitment)
 
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "logbuildSVNsvnCommit.txt"), new File(getFinalDirectory()
-					+ File.separator + "Logs" + File.separator
-					+ "logCommit.txt"), true);
+					+ File.separator + "logs" + File.separator + getCodeName()
+					+ File.separator + "logCommit.txt"), true);
 
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "logbuildbuild.txt"),
-					new File(getFinalDirectory() + File.separator + "Logs"
+					new File(getFinalDirectory() + File.separator + "logs"
 							+ File.separator + "logBuild.txt"), true);
 
 			if (!Application.parametre) {
 				FileHelper.copyFiles(new File(getBuildPath() + File.separator
 						+ "logbuildSVNbuild.txt"), new File(getFinalDirectory()
-						+ File.separator + "Logs" + File.separator
-						+ "logSVN.txt"), true);
+						+ File.separator + "logs" + File.separator
+						+ getCodeName() + File.separator + "logSVN.txt"), true);
 			}
 
 			// copie des fichiers compilés
@@ -921,21 +956,21 @@ public class Utils {
 					if (new File(getBuildDirectory() + File.separator
 							+ "plugins" + File.separator + projects[i]
 							+ File.separator + "@dot").exists()) {
-						FileHelper
-								.copyFiles(new File(getBuildDirectory()
-										+ File.separator + "plugins"
-										+ File.separator + projects[i]
-										+ File.separator + "@dot"), new File(
-										getFinalDirectory() + File.separator
-												+ "bin" + File.separator
-												+ projects[i]), true);
+						FileHelper.copyFiles(new File(getBuildDirectory()
+								+ File.separator + "plugins" + File.separator
+								+ projects[i] + File.separator + "@dot"),
+								new File(getFinalDirectory() + File.separator
+										+ "bin" + File.separator
+										+ getCodeName() + File.separator
+										+ projects[i]), true);
 					}
 				}
 			}
 
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
 					+ "features"), new File(getFinalDirectory()
-					+ File.separator + "bin"), true);
+					+ File.separator + "bin" + File.separator + getCodeName()),
+					true);
 
 			// suppression du repertoire de travail
 			FileHelper.deleteFile(new File(getBuildDirectory()));

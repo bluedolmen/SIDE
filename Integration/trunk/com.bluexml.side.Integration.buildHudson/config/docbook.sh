@@ -1,16 +1,16 @@
-#/bin/bash
-set echo on
-logfile=$1
-if [ "$logfileZ" = "Z" ]
-then
- logfile=log_docbook.txt
+#! /bin/bash
+# launch the generation of the Metamodel documtentation in docbook and html
+# 1st parameter = target documentation path where the docbook and html must be stored
+# 2nd parameter = gendoc jar pathname
+# 3rd parameter = log file
+if [ $# -eq 3 ]; then
+  DOC_DIR=$1
+  JAR_GENDOC=$2
+  logfile=$3
+else
+  exit -2
 fi
 
-export WORKSPACE=/root/.hudson/jobs/Job_Test/workspace
-export DIR_UPDATE_SITE=/home/stager/share/SIDE
-export JAR_GENDOC=/home/stager/buildAuto/Gendoc.jar
-#cd /home/stager/buildAuto
-#cp $WORKSPACE/S-IDE/Utils/trunk/com.bluexml.side.Util.MetaModel.gendoc/modelspath.properties .
 java -jar $JAR_GENDOC
 return_code=0
 jar_gendoc=$?
@@ -19,9 +19,9 @@ then
   return_code=-1
 else
 
-  mkdir $DIR_UPDATE_SITE/doc/MetaModel
-  mv *.docbook $DIR_UPDATE_SITE/doc/MetaModel
-  cd $DIR_UPDATE_SITE/doc/MetaModel
+  mkdir $DOC_DIR/MetaModel
+  mv *.docbook $DOC_DIR/MetaModel
+  cd $DOC_DIR/MetaModel
   echo "<html><head><title>S-IDE Metamodel Documentation</title></head>" > index.html
   echo "<body><H1>S-IDE Metamodel Documents list</H1><UL>" >> index.html
   for i in *.docbook
@@ -70,4 +70,3 @@ then
   fi 
   fi 
 fi
-

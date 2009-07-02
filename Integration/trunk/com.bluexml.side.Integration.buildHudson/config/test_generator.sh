@@ -1,5 +1,12 @@
-TEST_DIR=/home/stager/share/SIDE/test
-INDEX=/home/stager/share/SIDE/test/index.html
+#! /bin/bash
+# launch the automatic tests of the acceleo template of all the generators
+# 1st parameter = test directory where are store the standalone acceleo projects for all the s-ide generators
+if [ $# -eq 1 ]; then
+  TEST_DIR=$1
+else
+  exit -2
+fi
+INDEX=$TEST_DIR/index.html
 echo "<html><head><title>S-IDE Automatic Generator tests</title></head>" > $INDEX
 echo "<body><H1>S-IDE Automatic Generator tests</H1><UL>" >>  $INDEX
 cd /home/stager/buildAuto/test
