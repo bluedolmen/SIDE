@@ -162,6 +162,7 @@
          <sequence minOccurs="0" maxOccurs="unbounded">
             <element ref="option" minOccurs="0" maxOccurs="unbounded"/>
             <element ref="configurationParameter" minOccurs="0" maxOccurs="unbounded"/>
+            <element ref="moduleDependence" minOccurs="0" maxOccurs="unbounded"/>
          </sequence>
          <attribute name="version" type="string" use="required">
             <annotation>
@@ -204,6 +205,11 @@
          </appinfo>
       </annotation>
       <complexType>
+         <sequence>
+            <element ref="mustBeChecked" minOccurs="0" maxOccurs="unbounded"/>
+            <element ref="mustBeUnchecked" minOccurs="0" maxOccurs="unbounded"/>
+            <element ref="moduleDependence" minOccurs="0" maxOccurs="unbounded"/>
+         </sequence>
          <attribute name="key" type="string" use="required">
             <annotation>
                <documentation>
@@ -293,6 +299,63 @@
             <annotation>
                <documentation>
                   
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="optionRef">
+      <complexType>
+         <attribute name="optionId" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="identifier"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="mustBeChecked">
+      <complexType>
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <element ref="optionRef"/>
+         </sequence>
+         <attribute name="pluginId" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="mustBeUnchecked">
+      <complexType>
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <element ref="optionRef"/>
+         </sequence>
+         <attribute name="pluginId" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="moduleDependence">
+      <complexType>
+         <attribute name="moduleId" type="string" use="required">
+            <annotation>
+               <documentation>
+                  use to select an integration module to add in the generation output
                </documentation>
             </annotation>
          </attribute>
