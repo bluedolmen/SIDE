@@ -2,6 +2,7 @@ package com.bluexml.side.side.view.edit.ui.actions;
 
 import java.util.Iterator;
 
+import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -55,7 +56,8 @@ ISelectionChangedListener {
 	private void doAction(Col c) {
 		InternalModification.dontMoveToDisabled();
 		try {
-			domain.getCommandStack().execute(ColConfManager.paste(c, domain));
+			Command cmd = ColConfManager.paste(c, domain);
+			domain.getCommandStack().execute(cmd);
 		} catch (Exception e) {
 			e.printStackTrace();
 			EcorePlugin.INSTANCE.log("Paste Column : " + e.getMessage());
