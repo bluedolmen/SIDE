@@ -6,6 +6,8 @@
  */
 package com.bluexml.side.common;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -18,4 +20,13 @@ package com.bluexml.side.common;
  * @generated
  */
 public interface OperationComponent extends NamedModelElement {
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='if (self.oclIsKindOf(OperationGroup)) then\n\tself.oclAsType(OperationGroup).children->iterate(e:OperationComponent; result :Set(OperationComponent)=Set{}|result->union(e.getOperations()))->flatten()->asOrderedSet()\nelse\n\tself.oclAsType(OperationComponent)->asOrderedSet()\nendif'"
+	 * @generated
+	 */
+	EList<OperationComponent> getOperations();
 } // OperationComponent

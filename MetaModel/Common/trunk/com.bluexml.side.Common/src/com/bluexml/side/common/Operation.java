@@ -158,7 +158,7 @@ public interface Operation extends OperationComponent {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.bluexml.com/OCL body='\r\nself.name = other.name and \r\n\r\nself.parameters->forAll(p:Parameter |   \r\n   other.parameters->exists(z : Parameter | z.name = p.name and z.valueType = p.valueType ))'"
+	 * @model annotation="http://www.bluexml.com/OCL body='self.name = other.name and \r\n\r\nself.parameters->forAll(p:Parameter |   \r\n   other.parameters->exists(z : Parameter | z.name = p.name and z.valueType = p.valueType ))'"
 	 * @generated
 	 */
 	boolean equalsForMerge(Operation other);

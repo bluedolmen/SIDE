@@ -789,6 +789,8 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 
 		initEClass(operationComponentEClass, OperationComponent.class, "OperationComponent", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		addEOperation(operationComponentEClass, this.getOperationComponent(), "getOperations", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(metaInfoEClass, MetaInfo.class, "MetaInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMetaInfo_Key(), ecorePackage.getEString(), "key", null, 0, 1, MetaInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMetaInfo_Value(), ecorePackage.getEString(), "value", null, 0, 1, MetaInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -901,13 +903,19 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		  (operationEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
-			 "body", "\r\nself.name = other.name and \r\n\r\nself.parameters->forAll(p:Parameter |   \r\n   other.parameters->exists(z : Parameter | z.name = p.name and z.valueType = p.valueType ))"
+			 "body", "self.name = other.name and \r\n\r\nself.parameters->forAll(p:Parameter |   \r\n   other.parameters->exists(z : Parameter | z.name = p.name and z.valueType = p.valueType ))"
 		   });		
 		addAnnotation
 		  (operationEClass.getEOperations().get(1), 
 		   source, 
 		   new String[] {
 			 "body", "self.getParameters()->select(e:Parameter|e.name =pname)->first()"
+		   });		
+		addAnnotation
+		  (operationComponentEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "if (self.oclIsKindOf(OperationGroup)) then\n\tself.oclAsType(OperationGroup).children->iterate(e:OperationComponent; result :Set(OperationComponent)=Set{}|result->union(e.getOperations()))->flatten()->asOrderedSet()\nelse\n\tself.oclAsType(OperationComponent)->asOrderedSet()\nendif"
 		   });		
 		addAnnotation
 		  (metaInfoEClass.getEOperations().get(0), 
@@ -930,7 +938,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "PackageNameNull"
-		   });						
+		   });							
 	}
 
 } //CommonPackageImpl

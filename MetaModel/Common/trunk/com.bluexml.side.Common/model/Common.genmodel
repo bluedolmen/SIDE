@@ -86,7 +86,9 @@
     <genClasses ecoreClass="Common.ecore#//OperationGroup">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Common.ecore#//OperationGroup/children"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="Common.ecore#//OperationComponent"/>
+    <genClasses image="false" ecoreClass="Common.ecore#//OperationComponent">
+      <genOperations ecoreOperation="Common.ecore#//OperationComponent/getOperations"/>
+    </genClasses>
     <genClasses ecoreClass="Common.ecore#//MetaInfo">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Common.ecore#//MetaInfo/key"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Common.ecore#//MetaInfo/value"/>

@@ -80,7 +80,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//OperationComponent">
     <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="&#xD;&#xA;self.name = other.name and &#xD;&#xA;&#xD;&#xA;self.parameters->forAll(p:Parameter |   &#xD;&#xA;   other.parameters->exists(z : Parameter | z.name = p.name and z.valueType = p.valueType ))"/>
+        <details key="body" value="self.name = other.name and &#xD;&#xA;&#xD;&#xA;self.parameters->forAll(p:Parameter |   &#xD;&#xA;   other.parameters->exists(z : Parameter | z.name = p.name and z.valueType = p.valueType ))"/>
       </eAnnotations>
       <eParameters name="other" eType="#//Operation"/>
     </eOperations>
@@ -126,7 +126,13 @@
         eType="#//OperationComponent" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationComponent" abstract="true"
-      eSuperTypes="#//NamedModelElement"/>
+      eSuperTypes="#//NamedModelElement">
+    <eOperations name="getOperations" upperBound="-1" eType="#//OperationComponent">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="if (self.oclIsKindOf(OperationGroup)) then&#xA;&#x9;self.oclAsType(OperationGroup).children->iterate(e:OperationComponent; result :Set(OperationComponent)=Set{}|result->union(e.getOperations()))->flatten()->asOrderedSet()&#xA;else&#xA;&#x9;self.oclAsType(OperationComponent)->asOrderedSet()&#xA;endif"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MetaInfo" eSuperTypes="#//MetaData">
     <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
