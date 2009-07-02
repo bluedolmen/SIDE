@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: S-IDE Documentation Plug-in
 Bundle-SymbolicName: com.bluexml.side.Util.log
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.1.v7245-20090703
 Bundle-Activator: com.bluexml.side.util.documentation.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
