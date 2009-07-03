@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <ul>
  *   <li>{@link com.bluexml.side.application.impl.GeneratorConfigurationImpl#getId_metamodel <em>Id metamodel</em>}</li>
  *   <li>{@link com.bluexml.side.application.impl.GeneratorConfigurationImpl#getGeneratorName <em>Generator Name</em>}</li>
+ *   <li>{@link com.bluexml.side.application.impl.GeneratorConfigurationImpl#getGeneratorId <em>Generator Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -69,6 +70,26 @@ public class GeneratorConfigurationImpl extends ComponantConfigurationImpl imple
 	 * @ordered
 	 */
 	protected String generatorName = GENERATOR_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getGeneratorId() <em>Generator Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneratorId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String GENERATOR_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getGeneratorId() <em>Generator Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneratorId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String generatorId = GENERATOR_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -136,6 +157,27 @@ public class GeneratorConfigurationImpl extends ComponantConfigurationImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getGeneratorId() {
+		return generatorId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGeneratorId(String newGeneratorId) {
+		String oldGeneratorId = generatorId;
+		generatorId = newGeneratorId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ApplicationPackage.GENERATOR_CONFIGURATION__GENERATOR_ID, oldGeneratorId, generatorId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -143,6 +185,8 @@ public class GeneratorConfigurationImpl extends ComponantConfigurationImpl imple
 				return getId_metamodel();
 			case ApplicationPackage.GENERATOR_CONFIGURATION__GENERATOR_NAME:
 				return getGeneratorName();
+			case ApplicationPackage.GENERATOR_CONFIGURATION__GENERATOR_ID:
+				return getGeneratorId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -160,6 +204,9 @@ public class GeneratorConfigurationImpl extends ComponantConfigurationImpl imple
 				return;
 			case ApplicationPackage.GENERATOR_CONFIGURATION__GENERATOR_NAME:
 				setGeneratorName((String)newValue);
+				return;
+			case ApplicationPackage.GENERATOR_CONFIGURATION__GENERATOR_ID:
+				setGeneratorId((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -179,6 +226,9 @@ public class GeneratorConfigurationImpl extends ComponantConfigurationImpl imple
 			case ApplicationPackage.GENERATOR_CONFIGURATION__GENERATOR_NAME:
 				setGeneratorName(GENERATOR_NAME_EDEFAULT);
 				return;
+			case ApplicationPackage.GENERATOR_CONFIGURATION__GENERATOR_ID:
+				setGeneratorId(GENERATOR_ID_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -195,6 +245,8 @@ public class GeneratorConfigurationImpl extends ComponantConfigurationImpl imple
 				return ID_METAMODEL_EDEFAULT == null ? id_metamodel != null : !ID_METAMODEL_EDEFAULT.equals(id_metamodel);
 			case ApplicationPackage.GENERATOR_CONFIGURATION__GENERATOR_NAME:
 				return GENERATOR_NAME_EDEFAULT == null ? generatorName != null : !GENERATOR_NAME_EDEFAULT.equals(generatorName);
+			case ApplicationPackage.GENERATOR_CONFIGURATION__GENERATOR_ID:
+				return GENERATOR_ID_EDEFAULT == null ? generatorId != null : !GENERATOR_ID_EDEFAULT.equals(generatorId);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -213,6 +265,8 @@ public class GeneratorConfigurationImpl extends ComponantConfigurationImpl imple
 		result.append(id_metamodel);
 		result.append(", generatorName: ");
 		result.append(generatorName);
+		result.append(", generatorId: ");
+		result.append(generatorId);
 		result.append(')');
 		return result.toString();
 	}

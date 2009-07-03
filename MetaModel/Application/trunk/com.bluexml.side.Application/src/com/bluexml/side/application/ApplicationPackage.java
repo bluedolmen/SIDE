@@ -430,13 +430,22 @@ public interface ApplicationPackage extends EPackage {
 	int GENERATOR_CONFIGURATION__GENERATOR_NAME = COMPONANT_CONFIGURATION_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Generator Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_CONFIGURATION__GENERATOR_ID = COMPONANT_CONFIGURATION_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Generator Configuration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_CONFIGURATION_FEATURE_COUNT = COMPONANT_CONFIGURATION_FEATURE_COUNT + 2;
+	int GENERATOR_CONFIGURATION_FEATURE_COUNT = COMPONANT_CONFIGURATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.application.impl.OptionImpl <em>Option</em>}' class.
@@ -588,13 +597,22 @@ public interface ApplicationPackage extends EPackage {
 	int DEPLOYER_CONFIGURATION__DEPLOYER_NAME = COMPONANT_CONFIGURATION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Deployer Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYER_CONFIGURATION__DEPLOYER_ID = COMPONANT_CONFIGURATION_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Deployer Configuration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPLOYER_CONFIGURATION_FEATURE_COUNT = COMPONANT_CONFIGURATION_FEATURE_COUNT + 1;
+	int DEPLOYER_CONFIGURATION_FEATURE_COUNT = COMPONANT_CONFIGURATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.application.StaticConfigurationParameters <em>Static Configuration Parameters</em>}' enum.
@@ -757,6 +775,17 @@ public interface ApplicationPackage extends EPackage {
 	EAttribute getGeneratorConfiguration_GeneratorName();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.GeneratorConfiguration#getGeneratorId <em>Generator Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Generator Id</em>'.
+	 * @see com.bluexml.side.application.GeneratorConfiguration#getGeneratorId()
+	 * @see #getGeneratorConfiguration()
+	 * @generated
+	 */
+	EAttribute getGeneratorConfiguration_GeneratorId();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.application.Option <em>Option</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -829,6 +858,17 @@ public interface ApplicationPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDeployerConfiguration_DeployerName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.DeployerConfiguration#getDeployerId <em>Deployer Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Deployer Id</em>'.
+	 * @see com.bluexml.side.application.DeployerConfiguration#getDeployerId()
+	 * @see #getDeployerConfiguration()
+	 * @generated
+	 */
+	EAttribute getDeployerConfiguration_DeployerId();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.application.ComponantConfiguration <em>Componant Configuration</em>}'.
@@ -1072,6 +1112,14 @@ public interface ApplicationPackage extends EPackage {
 		EAttribute GENERATOR_CONFIGURATION__GENERATOR_NAME = eINSTANCE.getGeneratorConfiguration_GeneratorName();
 
 		/**
+		 * The meta object literal for the '<em><b>Generator Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GENERATOR_CONFIGURATION__GENERATOR_ID = eINSTANCE.getGeneratorConfiguration_GeneratorId();
+
+		/**
 		 * The meta object literal for the '{@link com.bluexml.side.application.impl.OptionImpl <em>Option</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1132,6 +1180,14 @@ public interface ApplicationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DEPLOYER_CONFIGURATION__DEPLOYER_NAME = eINSTANCE.getDeployerConfiguration_DeployerName();
+
+		/**
+		 * The meta object literal for the '<em><b>Deployer Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEPLOYER_CONFIGURATION__DEPLOYER_ID = eINSTANCE.getDeployerConfiguration_DeployerId();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.application.impl.ComponantConfigurationImpl <em>Componant Configuration</em>}' class.
