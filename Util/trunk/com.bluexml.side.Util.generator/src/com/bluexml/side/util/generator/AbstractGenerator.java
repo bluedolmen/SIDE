@@ -68,11 +68,11 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	 * @param uri
 	 * @param logEntryType
 	 */
-	protected void addLog(String title, String description, URI uri, LogEntryType logEntryType) {
+	private void addLog(String title, String description, URI uri, LogEntryType logEntryType) {
 		log.addLogEntry(new LogEntry(title, description, uri, logEntryType));
 	}
 	
-	protected void addLog(String title, String description, String uri, LogEntryType logEntryType) {
+	private void addLog(String title, String description, String uri, LogEntryType logEntryType) {
 		log.addLogEntry(new LogEntry(title, description, uri, logEntryType));
 	}
 
@@ -131,6 +131,19 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	}
 	public void addInfoLog(String title, String description, String uri) {
 		addLog(title, description, uri, LogEntryType.GENERATION_INFORMATION);
+	}
+	
+	/**
+	 * Add a service log (service : a webpage or a file that can be acceeded by user to test application).
+	 * @param title
+	 * @param description
+	 * @param uri
+	 */
+	public void addServiceLog(String title, String description, URI uri) {
+		addLog(title, description, uri, LogEntryType.SERVICE);
+	}
+	public void addServiceLog(String title, String description, String uri) {
+		addLog(title, description, uri, LogEntryType.SERVICE);
 	}
 
 	/**
