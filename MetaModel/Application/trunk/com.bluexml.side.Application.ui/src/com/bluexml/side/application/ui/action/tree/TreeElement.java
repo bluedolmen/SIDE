@@ -6,8 +6,9 @@ public class TreeElement {
 	protected boolean checked;
 	protected boolean enabled;
 	protected String description;
-	
-	public TreeElement() {
+	private TreeView root;
+	public TreeElement(TreeView root) {
+		this.root = root;
 		checked = false;
 		enabled = false;
 	}
@@ -33,6 +34,10 @@ public class TreeElement {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public TreeView getRoot() {
+		return root;
 	}
 	
 	

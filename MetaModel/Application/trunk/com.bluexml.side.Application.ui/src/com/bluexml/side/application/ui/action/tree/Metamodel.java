@@ -13,14 +13,15 @@ public class Metamodel extends TreeNode {
 	private List<TreeNode> technology;
 	private String description;
 
-	public Metamodel(IConfigurationElement elt) {
+	public Metamodel(IConfigurationElement elt, TreeView root) {
+		super(root);
 		parent = null;
 		id = elt.getAttribute("id");
 		label = elt.getAttribute("name");
 		url = elt.getAttribute("url");
 		description = elt.getAttribute("description");
 		technology = new ArrayList<TreeNode>();
-		
+
 		setEnabled(true);
 	}
 
@@ -32,13 +33,15 @@ public class Metamodel extends TreeNode {
 		return description;
 	}
 
-	public Metamodel(String id) {
+	public Metamodel(String id, TreeView root) {
+		super(root);
 		this.id = id;
 		label = "";
 		technology = new ArrayList<TreeNode>();
 	}
 
-	public Metamodel(String id, String label) {
+	public Metamodel(String id, String label, TreeView root) {
+		super(root);
 		this.id = id;
 		this.label = label;
 		technology = new ArrayList<TreeNode>();
@@ -64,7 +67,5 @@ public class Metamodel extends TreeNode {
 	public void addChildren(TreeNode child) {
 		technology.add(child);
 	}
-
-	
 
 }

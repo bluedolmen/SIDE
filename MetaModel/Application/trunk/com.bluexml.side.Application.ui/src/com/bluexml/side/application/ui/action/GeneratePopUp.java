@@ -43,35 +43,31 @@ public class GeneratePopUp extends Dialog {
 	 * Create the dialog
 	 * 
 	 * @param parentShell
-	 * @param list 
-	 * @param staticFieldsName 
-	 * @param configuration 
+	 * @param list
+	 * @param staticFieldsName
+	 * @param configuration
 	 */
 	public GeneratePopUp(Shell parentShell, Configuration p_configuration) {
 		super(parentShell);
 		configuration = p_configuration;
 		staticParameters = ApplicationDialog.staticFieldsName;
-		models = ApplicationUtil.getModels((Application)p_configuration.eContainer());
+		models = ApplicationUtil.getModels((Application) p_configuration.eContainer());
 	}
 
 	public GeneratePopUp(Shell parentShell, IFile file, String name) throws IOException {
 		super(parentShell);
-		URI uri = URI.createFileURI(file.getRawLocation().toFile()
-				.getAbsolutePath());
+		URI uri = URI.createFileURI(file.getRawLocation().toFile().getAbsolutePath());
 		XMIResource resource = new XMIResourceImpl(uri);
 
-		FileInputStream fi = new FileInputStream(file.getRawLocation()
-				.toFile());
+		FileInputStream fi = new FileInputStream(file.getRawLocation().toFile());
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put(ApplicationPackage.eINSTANCE.getNsURI(),
-				ApplicationPackage.eINSTANCE);
-		map.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION,
-				Boolean.TRUE);
+		map.put(ApplicationPackage.eINSTANCE.getNsURI(), ApplicationPackage.eINSTANCE);
+		map.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
 		resource.load(fi, map);
 		Application application = (Application) resource.getContents().get(0);
 		configuration = application.getConfiguration(name);
 		staticParameters = ApplicationDialog.staticFieldsName;
-		models = ApplicationUtil.getModels((Application)configuration.eContainer());
+		models = ApplicationUtil.getModels((Application) configuration.eContainer());
 	}
 
 	/**
@@ -83,7 +79,7 @@ public class GeneratePopUp extends Dialog {
 	protected Control createDialogArea(Composite parent) {
 		Composite container = (Composite) super.createDialogArea(parent);
 		container.setLayout(null);
-		
+
 		final ProgressBar progressBar = new ProgressBar(container, SWT.SMOOTH);
 		progressBar.setBounds(10, 69, 464, 17);
 		Display.getDefault().getActiveShell();
@@ -98,10 +94,10 @@ public class GeneratePopUp extends Dialog {
 		generationsOptionsLabel.setBounds(10, 24, 464, 24);
 		generationsOptionsLabel.setFont(SWTResourceManager.getFont("", 12, SWT.BOLD));
 		generationsOptionsLabel.setText("Generation");
-		
-		final StyledText styletext = new StyledText(container, SWT.BORDER |SWT.H_SCROLL |SWT.V_SCROLL);
+
+		final StyledText styletext = new StyledText(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		styletext.setBounds(10, 135, 464, 128);
-		
+
 		final Browser logLink = new Browser(container, SWT.NONE);
 		logLink.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
 		logLink.setBounds(95, 262, 290, 51);
@@ -124,8 +120,6 @@ public class GeneratePopUp extends Dialog {
 			e.printStackTrace();
 		}
 
-		
-		
 		return container;
 	}
 
@@ -136,10 +130,8 @@ public class GeneratePopUp extends Dialog {
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL,
-				true);
-		createButton(parent, IDialogConstants.CANCEL_ID,
-				IDialogConstants.CANCEL_LABEL, false);
+		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
+		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
 	}
 
 	/**

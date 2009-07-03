@@ -163,6 +163,8 @@
             <element ref="option" minOccurs="0" maxOccurs="unbounded"/>
             <element ref="configurationParameter" minOccurs="0" maxOccurs="unbounded"/>
             <element ref="moduleDependence" minOccurs="0" maxOccurs="unbounded"/>
+            <element ref="mustBeChecked" minOccurs="0" maxOccurs="unbounded"/>
+            <element ref="mustBeUnchecked" minOccurs="0" maxOccurs="unbounded"/>
          </sequence>
          <attribute name="version" type="string" use="required">
             <annotation>
@@ -270,6 +272,8 @@
          <sequence>
             <element ref="configurationParameter" minOccurs="0" maxOccurs="unbounded"/>
             <element ref="option" minOccurs="0" maxOccurs="unbounded"/>
+            <element ref="mustBeChecked" minOccurs="0" maxOccurs="unbounded"/>
+            <element ref="mustBeUnchecked" minOccurs="0" maxOccurs="unbounded"/>
          </sequence>
          <attribute name="class" type="string" use="required">
             <annotation>
@@ -312,9 +316,6 @@
                <documentation>
                   
                </documentation>
-               <appinfo>
-                  <meta.attribute kind="identifier"/>
-               </appinfo>
             </annotation>
          </attribute>
       </complexType>

@@ -13,7 +13,8 @@ import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 
 public class Deployer extends ImplNode {
 
-	public Deployer(IConfigurationElement elt, TechnologyVersion tv) {
+	public Deployer(IConfigurationElement elt, TechnologyVersion tv, TreeView root) {
+		super(elt, tv, root);
 		parent = tv;
 		id = elt.getAttribute("id");
 		description = elt.getAttribute("description");
@@ -21,7 +22,7 @@ public class Deployer extends ImplNode {
 		launchClass = elt.getAttribute("class");
 		options = new HashSet<TreeNode>();
 	}
-	
+
 	public void updateApplication() {
 		if (!ApplicationDialog.loadingTree) {
 			ApplicationDialog.modificationMade();
@@ -36,12 +37,12 @@ public class Deployer extends ImplNode {
 					elt.setId(getId());
 					elt.setId_techno_version(parent.getId());
 					elt.setImpl_class(getLaunchClass());
-					elt.setTechnologyName(((Technology)parent.getParent()).getLabel());
-					elt.setTechnologyVersionName(((TechnologyVersion)parent).getVersion());
+					elt.setTechnologyName(((Technology) parent.getParent()).getLabel());
+					elt.setTechnologyVersionName(((TechnologyVersion) parent).getVersion());
 					elt.setDeployerName(this.getVersion());
 					// Launch options
 					for (TreeNode tn : options) {
-						OptionComponant o = (OptionComponant)tn;
+						OptionComponant o = (OptionComponant) tn;
 						if (o.isChecked() && o.isEnabled()) {
 							Option opt = ApplicationFactory.eINSTANCE.createOption();
 							opt.setKey(o.getKey());
@@ -49,7 +50,6 @@ public class Deployer extends ImplNode {
 						}
 					}
 
-					
 					config.getDeployerConfigurations().add(elt);
 				}
 			}
@@ -60,6 +60,5 @@ public class Deployer extends ImplNode {
 	public void addChildren(TreeNode child) {
 		options.add(child);
 	}
-
 
 }

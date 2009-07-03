@@ -1,8 +1,11 @@
 package com.bluexml.side.application.ui.action.tree;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.eclipse.core.runtime.IConfigurationElement;
 
 /**
  * this class match to all Plugins that implements extension for Generator or Deployer and other plugins like thats
@@ -14,6 +17,24 @@ public abstract class ImplNode extends TreeNode {
 	protected String version;
 	protected String launchClass;
 	protected Set<TreeNode> options = new HashSet<TreeNode>();
+	
+	
+	
+	public ImplNode(IConfigurationElement elt, TechnologyVersion tv,TreeView root) {
+		super(root);
+		root.addOption(this);
+		mustbechecked = new ArrayList<MustBechecked>();
+		mustbeUnchecked = new ArrayList<MustBechecked>();
+		for (IConfigurationElement child : elt.getChildren()) {
+			if (child.getName().equalsIgnoreCase("mustBeChecked")) {
+				mustbechecked.add(new MustBechecked(child,this));
+			}
+			if (child.getName().equalsIgnoreCase("mustBeUnChecked")) {
+				mustbeUnchecked.add(new MustBechecked(child,this));
+			}
+		}
+	}
+	
 	
 	@Override
 	public void setChecked(boolean checked) {

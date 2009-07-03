@@ -1,37 +1,42 @@
 package com.bluexml.side.application.ui.action.tree;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public abstract class TreeNode extends TreeElement {
 	protected String id;
 	protected TreeNode parent;
-	
+	protected List<MustBechecked> mustbechecked = new ArrayList<MustBechecked>();
+	protected List<MustBechecked> mustbeUnchecked = new ArrayList<MustBechecked>();
+
 	public abstract Collection<TreeNode> getChildren();
+
 	public abstract void addChildren(TreeNode child);
-	
-	
-	public TreeNode(){
-		
+
+	public TreeNode(TreeView root) {
+		super(root);
 	}
-	
+
 	public String getId() {
 		return id;
 	}
-	
+
 	/**
 	 * Return a full qualified ID
+	 * 
 	 * @return
 	 */
 	public String getFullId() {
 		return getFullId(".");
 	}
-	
+
 	public String getFullId(String separator) {
 		String name = this.getId();
 		name = getFullId(separator, this.parent) + name;
 		return name;
 	}
-	
+
 	private String getFullId(String separator, TreeNode node) {
 		String name = "";
 		if (node != null) {
@@ -40,10 +45,11 @@ public abstract class TreeNode extends TreeElement {
 		}
 		return name;
 	}
-	
-	public boolean contains(TreeNode tn) {		
-		return contains(tn.getId());		
+
+	public boolean contains(TreeNode tn) {
+		return contains(tn.getId());
 	}
+
 	public boolean contains(String tn) {
 		TreeNode child = getChild(tn);
 		if (child == null) {
@@ -51,9 +57,10 @@ public abstract class TreeNode extends TreeElement {
 		}
 		return true;
 	}
+
 	public TreeNode getChild(String tn) {
 		if (tn != null) {
-			for (TreeNode c: getChildren()) {
+			for (TreeNode c : getChildren()) {
 				if (tn.equals(c.getId())) {
 					return c;
 				}
@@ -61,8 +68,16 @@ public abstract class TreeNode extends TreeElement {
 		}
 		return null;
 	}
-	
+
 	public TreeNode getParent() {
 		return parent;
+	}
+
+	public List<MustBechecked> getMustbechecked() {
+		return mustbechecked;
+	}
+
+	public List<MustBechecked> getMustbeUnchecked() {
+		return mustbeUnchecked;
 	}
 }

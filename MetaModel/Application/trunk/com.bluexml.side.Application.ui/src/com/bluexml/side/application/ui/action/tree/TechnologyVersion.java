@@ -11,7 +11,8 @@ public class TechnologyVersion extends TreeNode {
 	private Set<Generator> generator;
 	private Set<Deployer> deployer;
 
-	public TechnologyVersion(IConfigurationElement elt, Technology t) {
+	public TechnologyVersion(IConfigurationElement elt, Technology t,TreeView root) {
+		super(root);
 		parent = t;
 		id = elt.getAttribute("id");
 		version = elt.getAttribute("version");

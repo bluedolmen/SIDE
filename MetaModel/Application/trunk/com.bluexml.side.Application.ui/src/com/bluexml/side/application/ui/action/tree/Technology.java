@@ -12,7 +12,8 @@ public class Technology extends TreeNode {
 	private String url;
 	private Set<TreeNode> versions;
 
-	public Technology(IConfigurationElement elt, Metamodel m) {
+	public Technology(IConfigurationElement elt, Metamodel m,TreeView root) {
+		super(root);
 		parent = m;
 		id = elt.getAttribute("id");
 		label = elt.getAttribute("name");

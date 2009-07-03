@@ -1,22 +1,40 @@
 package com.bluexml.side.application.ui.action.tree;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 
-public abstract class OptionComponant  extends TreeNode {
+public abstract class OptionComponant extends TreeNode {
+
 	
+
 	private String key;
 	private String label;
 	private String description;
 
-	public OptionComponant(IConfigurationElement elt,ImplNode implNode) {
-		parent = (TreeNode)implNode;
+	
+
+	public OptionComponant(IConfigurationElement elt, ImplNode implNode,TreeView root) {
+		super(root);
+		root.addOption(this);
+		parent = (TreeNode) implNode;
 		id = elt.getAttribute("key");
 		key = elt.getAttribute("key");
 		label = elt.getAttribute("label");
 		description = elt.getAttribute("documentation");
+		mustbechecked = new ArrayList<MustBechecked>();
+		mustbeUnchecked = new ArrayList<MustBechecked>();
+		for (IConfigurationElement child : elt.getChildren()) {
+			if (child.getName().equalsIgnoreCase("mustBeChecked")) {
+				mustbechecked.add(new MustBechecked(child,this));
+			}
+			if (child.getName().equalsIgnoreCase("mustBeUnChecked")) {
+				mustbeUnchecked.add(new MustBechecked(child,this));
+			}
+		}
+
 	}
 
 	public String getKey() {
@@ -42,23 +60,24 @@ public abstract class OptionComponant  extends TreeNode {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	@Override
 	public void setChecked(boolean checked) {
 		super.setChecked(checked);
-		((ImplNode)parent).updateApplication();
+		((ImplNode) parent).updateApplication();
 	}
 
 	@Override
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
-		((ImplNode)parent).updateApplication();
+		((ImplNode) parent).updateApplication();
 	}
+
 	public Set<TreeNode> getChildren() {
 		return new HashSet<TreeNode>();
 	}
-	
+
 	public void addChildren() {
-		
+
 	}
 }
