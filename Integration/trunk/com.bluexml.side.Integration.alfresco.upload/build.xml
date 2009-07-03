@@ -12,7 +12,7 @@
 	<target name="buildAMP" depends="clean" description="description">
 		<mkdir dir="${extensionPath}" />
 		<zip destfile="${extensionPath}/${moduleId}.amp">
-			<fileset dir="./AMP" id="id">
+			<fileset dir="./resources" id="id">
 				<exclude name="**/.*" />
 			</fileset>
 		</zip>

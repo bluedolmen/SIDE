@@ -10,7 +10,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.TreeItem;
 
 import com.bluexml.side.application.ui.action.ApplicationDialog;
-import com.bluexml.side.application.ui.action.tree.MustBechecked;
+import com.bluexml.side.application.ui.action.tree.CheckConstraints;
 import com.bluexml.side.application.ui.action.tree.TreeElement;
 import com.bluexml.side.application.ui.action.tree.TreeNode;
 
@@ -71,10 +71,10 @@ public class ConstraintsChecker {
 	private static Map<String, List<TreeItem>> buildConstraintsMap(TreeElement el) {
 		Map<String, List<TreeItem>> map = new HashMap<String, List<TreeItem>>();
 		TreeNode op = (TreeNode) el;
-		List<MustBechecked> tocheck = op.getMustbechecked();
+		List<CheckConstraints> tocheck = op.getMustbechecked();
 		List<TreeItem> mustBeChecked = new ArrayList<TreeItem>();
 		map.put("mustBeChecked", mustBeChecked);
-		for (MustBechecked be : tocheck) {
+		for (CheckConstraints be : tocheck) {
 			List<String> ids = be.getOptionsIds();
 			for (String id : ids) {
 				TreeItem it = el.getRoot().getOptionTreeItemById(id);
@@ -82,16 +82,18 @@ public class ConstraintsChecker {
 			}
 		}
 
-		List<MustBechecked> toUncheck = op.getMustbeUnchecked();
+		List<CheckConstraints> toUncheck = op.getMustbeUnchecked();
 		List<TreeItem> mustBeUnchecked = new ArrayList<TreeItem>();
 		map.put("mustBeUnchecked", mustBeUnchecked);
-		for (MustBechecked be : toUncheck) {
+		for (CheckConstraints be : toUncheck) {
 			List<String> ids = be.getOptionsIds();
 			for (String id : ids) {
 				TreeItem it = el.getRoot().getOptionTreeItemById(id);
 				mustBeUnchecked.add(it);
 			}
 		}
+		
+		
 		return map;
 	}
 

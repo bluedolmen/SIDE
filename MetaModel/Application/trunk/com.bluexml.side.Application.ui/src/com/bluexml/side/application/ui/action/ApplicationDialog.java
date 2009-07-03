@@ -104,7 +104,7 @@ import com.bluexml.side.application.ui.action.tree.Deployer;
 import com.bluexml.side.application.ui.action.tree.Generator;
 import com.bluexml.side.application.ui.action.tree.ImplNode;
 import com.bluexml.side.application.ui.action.tree.Metamodel;
-import com.bluexml.side.application.ui.action.tree.MustBechecked;
+import com.bluexml.side.application.ui.action.tree.CheckConstraints;
 import com.bluexml.side.application.ui.action.tree.OptionComponant;
 import com.bluexml.side.application.ui.action.tree.OptionDeployer;
 import com.bluexml.side.application.ui.action.tree.OptionGenerator;

@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 
-public class MustBechecked {
+public class CheckConstraints {
 	private String pluginsId;
 	private List<String> optionsIds = new ArrayList<String>();
-	private Object parent;
+	private TreeNode parent;
 
 	public String getPluginsId() {
 		return pluginsId;
@@ -30,11 +30,11 @@ public class MustBechecked {
 		return parent;
 	}
 
-	public void setParent(Object parent) {
+	public void setParent(TreeNode parent) {
 		this.parent = parent;
 	}
 
-	public MustBechecked(IConfigurationElement config, Object parent) {
+	public CheckConstraints(IConfigurationElement config, TreeNode parent) {
 		this.parent = parent;
 		this.pluginsId = config.getAttribute("pluginId");
 		for (IConfigurationElement child : config.getChildren()) {

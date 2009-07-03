@@ -1,6 +1,5 @@
 package com.bluexml.side.application.ui.action.tree;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,16 +22,19 @@ public abstract class ImplNode extends TreeNode {
 	public ImplNode(IConfigurationElement elt, TechnologyVersion tv,TreeView root) {
 		super(root);
 		root.addOption(this);
-		mustbechecked = new ArrayList<MustBechecked>();
-		mustbeUnchecked = new ArrayList<MustBechecked>();
 		for (IConfigurationElement child : elt.getChildren()) {
 			if (child.getName().equalsIgnoreCase("mustBeChecked")) {
-				mustbechecked.add(new MustBechecked(child,this));
+				mustbechecked.add(new CheckConstraints(child,this));
 			}
 			if (child.getName().equalsIgnoreCase("mustBeUnChecked")) {
-				mustbeUnchecked.add(new MustBechecked(child,this));
+				mustbeUnchecked.add(new CheckConstraints(child,this));
+			}
+			if (child.getName().equalsIgnoreCase("moduleDependence")) {
+				integrationModules.add(new ModuleConstraints(child,this));
 			}
 		}
+		
+		
 	}
 	
 	

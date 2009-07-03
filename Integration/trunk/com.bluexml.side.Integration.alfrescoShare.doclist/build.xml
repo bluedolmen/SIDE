@@ -1,14 +1,18 @@
-<project>
-	<property file="build.${user.name}.properties">
-	</property>
+<project name="module com.bluexml.side.Integration.alfrescoShare.doclist">
 	<property name="docLibPath" value="components/documentlibrary/" />
-
-
 	<property name="jsScriptsOut" value="documentlist-min.js" />
 	<property name="jsScriptsIn" value="documentlist-src.js" />
 	<property name="resources" value="./resources" />
 	<property name="tmpFolder" value="./tmp" />
 	<property name="extensionFolder" value="./extension" />
+	<property name="module.properties" value="${resources}/module.properties" />
+	
+	<property file="${module.properties}" />
+	<!-- user properties -->
+	<property file="build.${user.name}.properties" />
+
+
+	<property name="packageDescriptionFile" value="moduleDescriptions/module.${module.id}.properties" />
 	<!-- ================================= 
           target: buildExtension              
          ================================= -->
@@ -21,8 +25,8 @@
 			<arg value="${tmpFolder}/${docLibPath}/${jsScriptsOut}" />
 			<arg value="${resources}/${docLibPath}/${jsScriptsIn}" />
 		</java>
-
-		<zip destfile="${extensionFolder}/com.bluexml.side.Integration.alfrescoShare.doclist.zip">
+		<copy file="${module.properties}" tofile="${tmpFolder}/${packageDescriptionFile}" />
+		<zip destfile="${extensionFolder}/${module.id}.zip">
 			<fileset dir="${tmpFolder}" id="id">
 				<include name="**/*.*" />
 			</fileset>

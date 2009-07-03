@@ -24,14 +24,14 @@ public abstract class OptionComponant extends TreeNode {
 		key = elt.getAttribute("key");
 		label = elt.getAttribute("label");
 		description = elt.getAttribute("documentation");
-		mustbechecked = new ArrayList<MustBechecked>();
-		mustbeUnchecked = new ArrayList<MustBechecked>();
+		mustbechecked = new ArrayList<CheckConstraints>();
+		mustbeUnchecked = new ArrayList<CheckConstraints>();
 		for (IConfigurationElement child : elt.getChildren()) {
 			if (child.getName().equalsIgnoreCase("mustBeChecked")) {
-				mustbechecked.add(new MustBechecked(child,this));
+				mustbechecked.add(new CheckConstraints(child,this));
 			}
 			if (child.getName().equalsIgnoreCase("mustBeUnChecked")) {
-				mustbeUnchecked.add(new MustBechecked(child,this));
+				mustbeUnchecked.add(new CheckConstraints(child,this));
 			}
 		}
 

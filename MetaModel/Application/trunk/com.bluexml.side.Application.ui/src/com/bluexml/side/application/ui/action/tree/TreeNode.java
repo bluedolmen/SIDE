@@ -7,8 +7,9 @@ import java.util.List;
 public abstract class TreeNode extends TreeElement {
 	protected String id;
 	protected TreeNode parent;
-	protected List<MustBechecked> mustbechecked = new ArrayList<MustBechecked>();
-	protected List<MustBechecked> mustbeUnchecked = new ArrayList<MustBechecked>();
+	protected List<CheckConstraints> mustbechecked = new ArrayList<CheckConstraints>();
+	protected List<CheckConstraints> mustbeUnchecked = new ArrayList<CheckConstraints>();
+	protected List<ModuleConstraints> integrationModules = new ArrayList<ModuleConstraints>();
 
 	public abstract Collection<TreeNode> getChildren();
 
@@ -73,11 +74,11 @@ public abstract class TreeNode extends TreeElement {
 		return parent;
 	}
 
-	public List<MustBechecked> getMustbechecked() {
+	public List<CheckConstraints> getMustbechecked() {
 		return mustbechecked;
 	}
 
-	public List<MustBechecked> getMustbeUnchecked() {
+	public List<CheckConstraints> getMustbeUnchecked() {
 		return mustbeUnchecked;
 	}
 }
