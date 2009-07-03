@@ -40,27 +40,21 @@ version="1.0">
   	<xsl:param name="NbTotal"/>
     <div class="result">
     	<%for (getInnerView().filter("Actionable").operations.getOperations()){%>
+        	<a>
+        		<xsl:attribute name="target">_blank</xsl:attribute>
         	<%if (name == "download"){%>
-				<a>
-					<xsl:attribute name="href"><xsl:value-of select="@idDoc"/></xsl:attribute>
-					<xsl:attribute name="target">_blank</xsl:attribute>
+					<xsl:attribute name="href">../<xsl:value-of select="@href"/></xsl:attribute>
 					<img src="{$icons_url}/disk.png" class="imgIcon"/>
-				</a>
 			<%}%>
 			<%if (name == "view"){%>
-				<a>
-					<xsl:attribute name="href"><xsl:value-of select="@idDoc"/></xsl:attribute>
-					<xsl:attribute name="target">_blank</xsl:attribute>
+					<xsl:attribute name="href">../<xsl:value-of select="@href"/></xsl:attribute>
 					<img src="{$icons_url}/eye.png" class="imgIcon"/>
-				</a>
 			<%}%>
 			<%if (name == "edit"){%>
-				<a>
-					<xsl:attribute name="href"><xsl:value-of select="@idDoc"/></xsl:attribute>
-					<xsl:attribute name="target">_blank</xsl:attribute>
+					<xsl:attribute name="href">../<xsl:value-of select="@href"/></xsl:attribute>
 					<img src="{$icons_url}/edit.png" class="imgIcon"/>
-				</a>
 			<%}%>
+			</a>
         <%}%>
     	<xsl:value-of select="@name"/>
 	</div>

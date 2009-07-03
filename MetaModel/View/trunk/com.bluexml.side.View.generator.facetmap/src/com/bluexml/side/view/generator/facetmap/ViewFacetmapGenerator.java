@@ -65,7 +65,6 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-cmis-generation.mt");
 				//facets
 				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-cmis2xfml-generation.mt");
-				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-buildproperties-generation.mt");
 				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslbasicfacets-generation.mt");
 				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslrightnav-generation.mt");
 				//results

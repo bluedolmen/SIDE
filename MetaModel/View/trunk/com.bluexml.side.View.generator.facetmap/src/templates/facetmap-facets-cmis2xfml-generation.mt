@@ -42,8 +42,8 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 	<xsl:template match="entry">
 		<xsl:variable name="idDoc" select="substring(child::id[1],10)"/>     
 		<resource
-			title="<%current("FacetMap").viewOf.filter("Clazz").getLabel()%> :<%for (getInnerView().getFields()){%> {child::cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribute").typ!="int"{%><%mapTo.filter("Attribute").typ%><%}else{%>Integer<%}%>[@cmis:name='<%mapTo.filter("Attribute").getFullName()%>']/cmis:value}<%}%>"
-			idDoc="{$idDoc}">
+			title="<%for (getInnerView().getFields()){%><%if (prefix !=null){%><%prefix%><%}%>{child::cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribute").typ!="int"{%><%mapTo.filter("Attribute").typ%><%}else{%>Integer<%}%>[@cmis:name='<%mapTo.filter("Attribute").getFullName()%>']/cmis:value}<%if (suffix !=null){%><%suffix%><%}%><%}%>"
+			href="{$idDoc}">
 		<%ressource()%>
 		</resource>
 	</xsl:template>
