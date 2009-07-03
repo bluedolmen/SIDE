@@ -17,7 +17,6 @@ package com.bluexml.side.application;
  * <ul>
  *   <li>{@link com.bluexml.side.application.GeneratorConfiguration#getId_metamodel <em>Id metamodel</em>}</li>
  *   <li>{@link com.bluexml.side.application.GeneratorConfiguration#getGeneratorName <em>Generator Name</em>}</li>
- *   <li>{@link com.bluexml.side.application.GeneratorConfiguration#getGeneratorId <em>Generator Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,31 +76,5 @@ public interface GeneratorConfiguration extends ComponantConfiguration {
 	 * @generated
 	 */
 	void setGeneratorName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Generator Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Generator Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Generator Id</em>' attribute.
-	 * @see #setGeneratorId(String)
-	 * @see com.bluexml.side.application.ApplicationPackage#getGeneratorConfiguration_GeneratorId()
-	 * @model
-	 * @generated
-	 */
-	String getGeneratorId();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.application.GeneratorConfiguration#getGeneratorId <em>Generator Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Generator Id</em>' attribute.
-	 * @see #getGeneratorId()
-	 * @generated
-	 */
-	void setGeneratorId(String value);
 
 } // GeneratorConfiguration

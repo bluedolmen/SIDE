@@ -16,7 +16,6 @@ package com.bluexml.side.application;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.bluexml.side.application.DeployerConfiguration#getDeployerName <em>Deployer Name</em>}</li>
- *   <li>{@link com.bluexml.side.application.DeployerConfiguration#getDeployerId <em>Deployer Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,31 +50,5 @@ public interface DeployerConfiguration extends ComponantConfiguration {
 	 * @generated
 	 */
 	void setDeployerName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Deployer Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Deployer Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Deployer Id</em>' attribute.
-	 * @see #setDeployerId(String)
-	 * @see com.bluexml.side.application.ApplicationPackage#getDeployerConfiguration_DeployerId()
-	 * @model
-	 * @generated
-	 */
-	String getDeployerId();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.application.DeployerConfiguration#getDeployerId <em>Deployer Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Deployer Id</em>' attribute.
-	 * @see #getDeployerId()
-	 * @generated
-	 */
-	void setDeployerId(String value);
 
 } // DeployerConfiguration

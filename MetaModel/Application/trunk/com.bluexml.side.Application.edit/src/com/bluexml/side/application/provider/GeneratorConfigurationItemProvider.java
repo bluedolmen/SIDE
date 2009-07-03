@@ -63,7 +63,6 @@ public class GeneratorConfigurationItemProvider
 
 			addId_metamodelPropertyDescriptor(object);
 			addGeneratorNamePropertyDescriptor(object);
-			addGeneratorIdPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -113,28 +112,6 @@ public class GeneratorConfigurationItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Generator Id feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addGeneratorIdPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_GeneratorConfiguration_generatorId_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_GeneratorConfiguration_generatorId_feature", "_UI_GeneratorConfiguration_type"),
-				 ApplicationPackage.Literals.GENERATOR_CONFIGURATION__GENERATOR_ID,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This returns GeneratorConfiguration.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -173,7 +150,6 @@ public class GeneratorConfigurationItemProvider
 		switch (notification.getFeatureID(GeneratorConfiguration.class)) {
 			case ApplicationPackage.GENERATOR_CONFIGURATION__ID_METAMODEL:
 			case ApplicationPackage.GENERATOR_CONFIGURATION__GENERATOR_NAME:
-			case ApplicationPackage.GENERATOR_CONFIGURATION__GENERATOR_ID:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

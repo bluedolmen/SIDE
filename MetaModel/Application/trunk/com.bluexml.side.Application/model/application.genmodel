@@ -32,7 +32,6 @@
     <genClasses ecoreClass="application.ecore#//GeneratorConfiguration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//GeneratorConfiguration/id_metamodel"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//GeneratorConfiguration/generatorName"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//GeneratorConfiguration/generatorId"/>
     </genClasses>
     <genClasses ecoreClass="application.ecore#//Option">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//Option/key"/>
@@ -43,7 +42,6 @@
     </genClasses>
     <genClasses ecoreClass="application.ecore#//DeployerConfiguration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//DeployerConfiguration/deployerName"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//DeployerConfiguration/deployerId"/>
     </genClasses>
     <genClasses image="false" ecoreClass="application.ecore#//ComponantConfiguration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ComponantConfiguration/id_techno_version"/>

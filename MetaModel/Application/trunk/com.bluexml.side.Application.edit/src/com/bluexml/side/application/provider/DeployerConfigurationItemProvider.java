@@ -61,7 +61,6 @@ public class DeployerConfigurationItemProvider
 			super.getPropertyDescriptors(object);
 
 			addDeployerNamePropertyDescriptor(object);
-			addDeployerIdPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -80,28 +79,6 @@ public class DeployerConfigurationItemProvider
 				 getString("_UI_DeployerConfiguration_deployerName_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_DeployerConfiguration_deployerName_feature", "_UI_DeployerConfiguration_type"),
 				 ApplicationPackage.Literals.DEPLOYER_CONFIGURATION__DEPLOYER_NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Deployer Id feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDeployerIdPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_DeployerConfiguration_deployerId_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_DeployerConfiguration_deployerId_feature", "_UI_DeployerConfiguration_type"),
-				 ApplicationPackage.Literals.DEPLOYER_CONFIGURATION__DEPLOYER_ID,
 				 true,
 				 false,
 				 false,
@@ -148,7 +125,6 @@ public class DeployerConfigurationItemProvider
 
 		switch (notification.getFeatureID(DeployerConfiguration.class)) {
 			case ApplicationPackage.DEPLOYER_CONFIGURATION__DEPLOYER_NAME:
-			case ApplicationPackage.DEPLOYER_CONFIGURATION__DEPLOYER_ID:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

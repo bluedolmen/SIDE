@@ -31,7 +31,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="GeneratorConfiguration" eSuperTypes="#//ComponantConfiguration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id_metamodel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="generatorName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generatorId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Option">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -55,7 +54,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeployerConfiguration" eSuperTypes="#//ComponantConfiguration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="deployerName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deployerId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ComponantConfiguration" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id_techno_version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

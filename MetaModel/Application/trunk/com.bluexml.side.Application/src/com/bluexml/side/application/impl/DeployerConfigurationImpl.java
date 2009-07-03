@@ -21,7 +21,6 @@ import org.eclipse.emf.common.notify.Notification;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.application.impl.DeployerConfigurationImpl#getDeployerName <em>Deployer Name</em>}</li>
- *   <li>{@link com.bluexml.side.application.impl.DeployerConfigurationImpl#getDeployerId <em>Deployer Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -46,25 +45,6 @@ public class DeployerConfigurationImpl extends ComponantConfigurationImpl implem
 	 * @ordered
 	 */
 	protected String deployerName = DEPLOYER_NAME_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getDeployerId() <em>Deployer Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDeployerId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String DEPLOYER_ID_EDEFAULT = null;
-	/**
-	 * The cached value of the '{@link #getDeployerId() <em>Deployer Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDeployerId()
-	 * @generated
-	 * @ordered
-	 */
-	protected String deployerId = DEPLOYER_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -111,34 +91,11 @@ public class DeployerConfigurationImpl extends ComponantConfigurationImpl implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getDeployerId() {
-		return deployerId;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDeployerId(String newDeployerId) {
-		String oldDeployerId = deployerId;
-		deployerId = newDeployerId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ApplicationPackage.DEPLOYER_CONFIGURATION__DEPLOYER_ID, oldDeployerId, deployerId));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ApplicationPackage.DEPLOYER_CONFIGURATION__DEPLOYER_NAME:
 				return getDeployerName();
-			case ApplicationPackage.DEPLOYER_CONFIGURATION__DEPLOYER_ID:
-				return getDeployerId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -153,9 +110,6 @@ public class DeployerConfigurationImpl extends ComponantConfigurationImpl implem
 		switch (featureID) {
 			case ApplicationPackage.DEPLOYER_CONFIGURATION__DEPLOYER_NAME:
 				setDeployerName((String)newValue);
-				return;
-			case ApplicationPackage.DEPLOYER_CONFIGURATION__DEPLOYER_ID:
-				setDeployerId((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -172,9 +126,6 @@ public class DeployerConfigurationImpl extends ComponantConfigurationImpl implem
 			case ApplicationPackage.DEPLOYER_CONFIGURATION__DEPLOYER_NAME:
 				setDeployerName(DEPLOYER_NAME_EDEFAULT);
 				return;
-			case ApplicationPackage.DEPLOYER_CONFIGURATION__DEPLOYER_ID:
-				setDeployerId(DEPLOYER_ID_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -189,8 +140,6 @@ public class DeployerConfigurationImpl extends ComponantConfigurationImpl implem
 		switch (featureID) {
 			case ApplicationPackage.DEPLOYER_CONFIGURATION__DEPLOYER_NAME:
 				return DEPLOYER_NAME_EDEFAULT == null ? deployerName != null : !DEPLOYER_NAME_EDEFAULT.equals(deployerName);
-			case ApplicationPackage.DEPLOYER_CONFIGURATION__DEPLOYER_ID:
-				return DEPLOYER_ID_EDEFAULT == null ? deployerId != null : !DEPLOYER_ID_EDEFAULT.equals(deployerId);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -207,8 +156,6 @@ public class DeployerConfigurationImpl extends ComponantConfigurationImpl implem
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (deployerName: ");
 		result.append(deployerName);
-		result.append(", deployerId: ");
-		result.append(deployerId);
 		result.append(')');
 		return result.toString();
 	}

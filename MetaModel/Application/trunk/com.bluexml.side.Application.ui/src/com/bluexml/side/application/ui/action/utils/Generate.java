@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
@@ -181,7 +182,7 @@ public class Generate extends Thread {
 				+ "color: #444;" + "text-decoration: none;"
 				+ "word-spacing: normal;" + "text-align: justify;"
 				+ "letter-spacing: 0;" + "line-height: 1.2em;"
-				+ "font-size: 11px; width:100%; text-align:center;\">Log File can be found <a href=\"file:///" + IFileHelper.createFolder(logPath).getLocation().toOSString() + System.getProperty("file.separator") + LogSave.LOG_FILE_NAME + "\" target=\"_blank\">here</a></div></body></html>");
+				+ "font-size: 11px; width:100%; text-align:center;\">Log File can be found <a href=\"file:///" + IFileHelper.createFolder(logPath).getLocation().toOSString() + System.getProperty("file.separator") + LogSave.LOG_FILE_NAME + "\" target=\"_blank\">here</a><br\\>(" + IFileHelper.createFolder(logPath).getLocation().toOSString() + System.getProperty("file.separator") + LogSave.LOG_FILE_NAME + ")</div></body></html>");
 					logLink.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -220,6 +221,7 @@ public class Generate extends Thread {
 			String id_techno_version = elem.getId_techno_version();
 			configurationParameters.put("technologyVersion", id_techno_version);
 			configurationParameters.put("generatorName", elem.getGeneratorName());
+			configurationParameters.put("generatorId", elem.getId());
 			configurationParameters.put("metaModelName", elem.getMetaModelName());
 			configurationParameters.put("technologyName", elem.getTechnologyName());
 			configurationParameters.put("technologyVersionName", elem.getTechnologyVersionName());
@@ -289,6 +291,15 @@ public class Generate extends Thread {
 								generator.addErrorLog("Generation error : " + e.getMessage(), e.getStackTrace(), null);
 								e.printStackTrace();
 							}
+							
+							try {
+								generator.createStampFile();
+							} catch (Exception e) {
+								generator.addErrorLog("Generation error : Stamp file error. " + e.getMessage(), e.getStackTrace(), null);
+								addErrorText(System.getProperty("line.separator") + "ERROR :  Stamp file error.");
+								e.printStackTrace();
+							}
+							
 							addOneStep(progressBar);
 						}
 					} else {
@@ -297,7 +308,7 @@ public class Generate extends Thread {
 					}
 				}
 				String fileName = "gen_" + generator.getTechVersion() + ".xml";
-				LogSave.toXml(generator.getLog(),fileName, logPath);
+				LogSave.toXml(generator.getLog(),fileName, logPath + System.getProperty("file.separator") + "work"  + System.getProperty("file.separator"));
 			} else { 
 				error = true;
 			}
@@ -321,6 +332,7 @@ public class Generate extends Thread {
 			String id_techno = depConf.getId_techno_version();
 			configurationParameters.put("technologyVersion", id_techno);
 			configurationParameters.put("deployerName", depConf.getDeployerName());
+			configurationParameters.put("deployerId", id_deployer);
 			configurationParameters.put("metaModelName", depConf.getMetaModelName());
 			configurationParameters.put("technologyName", depConf.getTechnologyName());
 			configurationParameters.put("technologyVersionName", depConf.getTechnologyVersionName());
@@ -359,8 +371,9 @@ public class Generate extends Thread {
 					e.printStackTrace();
 					error = true;
 				}
+				//deployer.moveStampFile();
 				String fileName = "dep_" + deployer.getTechVersion() + ".xml";
-				LogSave.toXml(deployer.getLog(),fileName, logPath);
+				LogSave.toXml(deployer.getLog(),fileName, logPath + System.getProperty("file.separator") + "work"  + System.getProperty("file.separator"));
 			}
 		}
 		return error;
