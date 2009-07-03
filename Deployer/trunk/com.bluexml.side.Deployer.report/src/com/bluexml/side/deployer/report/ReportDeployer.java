@@ -20,6 +20,7 @@ import java.io.File;
 
 import com.bluexml.side.util.deployer.Deployer;
 import com.bluexml.side.util.libs.FileHelper;
+import com.bluexml.side.util.libs.IFileHelper;
 
 public class ReportDeployer extends Deployer {
 	
@@ -32,12 +33,21 @@ public class ReportDeployer extends Deployer {
 	}
 	
 	// Emplacements des fichiers
-	public String getLocationInTomcat() {
-			return getParam(CONFIGURATION_TOMCAT_INSTALLATION) + File.separator + webapps + File.separator + "alfresco" + File.separator + "report" + File.separator + "BIRTReport" + File.separator + "S-IDE" + File.separator;		
+	public String getLocationInTomcat() throws Exception{
+		String path = getParam(CONFIGURATION_TOMCAT_INSTALLATION) + File.separator + webapps + File.separator + "birt" + File.separator;
+		System.out.println("Tomcat path: "+path);
+		if(!new File(path).exists()){
+			Exception e = new Exception("Birt Webapp not deployed");
+			addErrorLog("Birt Webapp not deployed", e.getStackTrace(), null);
+			throw e;
+		}
+			
+		return path;		
 	}
 	
 	public String getLocationInGeneration() {
-		return File.separator+ "report" + File.separator + "BIRTReport" + File.separator + "S-IDE" + File.separator + "Content_type_report.rptdesign";
+		System.out.println("Path location"+IFileHelper.getSystemFolderPath(getTargetPath()+File.separator+getTechVersion())+File.separator + "Content_type_report.rptdesign");
+		return IFileHelper.getSystemFolderPath(getTargetPath()+File.separator+getTechVersion())+File.separator + "Content_type_report.rptdesign";
 	}
 	
 	@Override
@@ -46,7 +56,7 @@ public class ReportDeployer extends Deployer {
 	@Override
 	protected void deployProcess(File fileToDeploy) throws Exception {
 		// Getting Files
-		File birtReport =  new File (fileToDeploy.getPath()+getLocationInGeneration());
+		File birtReport =  new File (fileToDeploy +File.separator + "Content_type_report.rptdesign" );
 		//Test if missing file
 		Boolean filemissing = Boolean.FALSE;
 		String list_of_missing_files = "";
@@ -54,9 +64,11 @@ public class ReportDeployer extends Deployer {
 			filemissing = Boolean.TRUE;
 			list_of_missing_files += "\n"+birtReport.getAbsolutePath();
 		}
-		if (filemissing)
-			throw new Exception("Missing the following generated files:"+list_of_missing_files+"\n deployment aborted.");
-		
+		if (filemissing){
+			Exception e = new Exception("Missing the following generated files:"+list_of_missing_files+"\n deployment aborted.");
+			addErrorLog("Missing files", e.getStackTrace(), null);
+			throw e;
+		}
 		// Path where the files need to be copied
 		String path = getLocationInTomcat()+ "Content_type_report.rptdesign";
 		
