@@ -281,4 +281,13 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		System.out.println("TechVersion :" + techVersion);
 
 	}
+	
+	/**
+	 * This method check if the user have the license to use this component.
+	 * 
+	 * @return true if the component can be used.
+	 */
+	public boolean check(){
+		return true;
+	}
 }
