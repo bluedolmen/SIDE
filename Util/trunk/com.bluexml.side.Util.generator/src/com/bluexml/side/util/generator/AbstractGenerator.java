@@ -1,12 +1,20 @@
 package com.bluexml.side.util.generator;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.runtime.CoreException;
+import org.jdom.Attribute;
+import org.jdom.Element;
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
 
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.util.documentation.structure.LogEntry;
@@ -29,6 +37,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	protected static Map<String, Boolean> generatorOptions = new HashMap<String, Boolean>();
 	protected static Map<String, String> configurationParameters = new HashMap<String, String>();
 	protected SIDELog log;
+	protected String id;
 	public String TEMP_FOLDER = "tmp";
 	public static String GENERATOR_CODE = null;
 	protected static String techVersion = null;
@@ -54,10 +63,29 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		generatorOptions = generatorOptions_;
 		configurationParameters = configurationParameters_;
 		techVersion = configurationParameters_.get("technologyVersion");
-		log = new SIDELog(configurationParameters_.get("generatorName"), 
+		id = configurationParameters_.get("generatorId");
+		log = new SIDELog(configurationParameters_.get("generatorName"), this.id,
 				configurationParameters_.get("technologyVersionName"),
 				configurationParameters_.get("technologyName"),
 				configurationParameters_.get("metaModelName"),new Date(), LogType.GENERATION);
+	}
+	
+	/**
+	 * This method must be call after a successful generation to put an XML file into the gen path
+	 * that will be used to know what have been deployed. Mainly use for log purpose.
+	 * @throws CoreException 
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
+	 */
+	public final void createStampFile() throws CoreException, FileNotFoundException, IOException {
+		IFolder ff = IFileHelper.createFolder(getTargetPath() + System.getProperty("file.separator") + techVersion);
+		Element racine = new Element("generator");
+		Attribute classe = new Attribute("id",this.id);
+		racine.setAttribute(classe);
+		Attribute date = new Attribute("date",new Date().toString());
+		racine.setAttribute(date);
+		XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+		sortie.output(racine, new FileOutputStream(IFileHelper.getFile(IFileHelper.createFile(ff, this.id + ".xml"))));
 	}
 	
 	/**
@@ -279,7 +307,6 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		System.out.println("GenerationParameters :" + generationParameters);
 		System.out.println("ConfigurationParameters :" + configurationParameters);
 		System.out.println("TechVersion :" + techVersion);
-
 	}
 	
 	/**

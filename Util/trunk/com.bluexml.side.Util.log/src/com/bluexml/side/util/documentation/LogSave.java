@@ -33,7 +33,8 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class LogSave {
 
-	public static String LOG_FILE_NAME = "log.xml";
+	public static String LOG_FILE_NAME = "side-report.xml";
+	public static String LOG_STAMP_FOLDER = "stamp";
 
 	/**
 	 * Render a SIDELog to a xml file using the given fileName in the given
@@ -81,6 +82,7 @@ public class LogSave {
 
 		xstream.useAttributeFor(SIDELog.class, "date");
 		xstream.useAttributeFor(SIDELog.class, "name");
+		xstream.useAttributeFor(SIDELog.class, "id");
 		xstream.useAttributeFor(SIDELog.class, "type");
 
 		xstream.useAttributeFor(LogEntry.class, "type");

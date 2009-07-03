@@ -8,6 +8,7 @@ import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 
 public class SIDELog {
 	private String name;
+	private String id;
 	private String description;
 	private Date date;
 	private String path;
@@ -18,8 +19,9 @@ public class SIDELog {
 	private String technoVersion;
 	private String creator;
 	
-	public SIDELog(String creator, String technoVersion, String techno, String metaModel, Date p_date, LogType p_logType) {
+	public SIDELog(String creator, String id, String technoVersion, String techno, String metaModel, Date p_date, LogType p_logType) {
 		this.name = creator;
+		this.id = id;
 		this.technoVersion = technoVersion;
 		this.creator = creator;
 		this.techno = techno;
@@ -28,15 +30,15 @@ public class SIDELog {
 		date = p_date;
 		type = p_logType;
 	}
-	/*
-	public SIDELog(String p_name, String p_description, Date p_date, LogType p_logType) {
-		logEntries = new ArrayList<LogEntry>();
-		description = p_description;
-		name = p_name;
-		date = p_date;
-		type = p_logType;
-	}*/
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}

@@ -14,7 +14,7 @@
     <xsl:template match="/">
         <html>
             <head>
-                <title>S-IDE Generation</title>
+                <title>Report MDA procedure</title>
                 <link rel="stylesheet" href="css/style.css" media="screen"/>
                 <script type="text/javascript" src="js/jquery.js"> //</script>
                 <script type="text/javascript" src="js/log.js"> //</script>
@@ -39,7 +39,7 @@
                         <xsl:call-template name="deploymentDisplay"/>
                         <xsl:call-template name="generationDisplay"/>
                         <xsl:call-template name="statsDisplay"/>
-                        
+                        <xsl:call-template name="service"/>
                     </div>
     
                     <div id="footer">
@@ -60,19 +60,21 @@
                         <xsl:value-of select="count(//logEntry[@type='WARNING'])"/> warning(s). <br/>
                         <xsl:value-of select="count(//logEntry[@type='GENERATION_INFORMATION'])"/>
                         generation informations. <br/>
-                        <xsl:value-of select="count(//logEntry[@type='DEPLOYEMENT_INFORMATION'])"/>
+                        <xsl:value-of select="count(//logEntry[@type='DEPLOYMENT_INFORMATION'])"/>
                         deployment informations. <br/>
+                        <xsl:value-of select="count(//logEntry[@type='SERVICE'])"/>
+                        service(s). <br/>
                         <xsl:value-of select="count(//logEntry[@type='GENERATED_FILE'])"/>
-                        logs on generated files. <br/>
+                        generated files logged. <br/>
                     </div>
                 </div>
             </div>
             <div id="rightColumn">
                 <div id="statsLogBox" class="box">
-                    <div class="box-header"> Statistiques : generation and deployment</div>
+                    <div class="box-header"> Statistics : generation and deployment</div>
                     <div class="box-body">
-                        <xsl:value-of select="count(//SIDELog[@type='GENERATION'])"/> generator. <br/>
-                        <xsl:value-of select="count(//SIDELog[@type='DEPLOYEMENT'])"/> deployer. <br/>
+                        <xsl:value-of select="count(//SIDELog[@type='GENERATION'])"/> generator(s). <br/>
+                        <xsl:value-of select="count(//SIDELog[@type='DEPLOYMENT'])"/> deployer(s). <br/>
                     </div>
                 </div>
             </div>
@@ -82,7 +84,7 @@
     <xsl:template name="deploymentDisplay">
         <div id="deployment" style="display:none;"> 
             <xsl:call-template name="logerDisplay">
-                <xsl:with-param name="type">DEPLOYEMENT</xsl:with-param>
+                <xsl:with-param name="type">DEPLOYMENT</xsl:with-param>
             </xsl:call-template>
         </div>
     </xsl:template>
@@ -159,6 +161,14 @@
                 </div>
             </div>
         </xsl:for-each>
+    </xsl:template>
+    
+    <xsl:template name="service">
+        <div id="service" style="display:none;">
+            <xsl:call-template name="logerDisplay">
+                <xsl:with-param name="type">GENERATION</xsl:with-param>
+            </xsl:call-template>
+        </div>
     </xsl:template>
 
     <xsl:template match="node()|@*">
