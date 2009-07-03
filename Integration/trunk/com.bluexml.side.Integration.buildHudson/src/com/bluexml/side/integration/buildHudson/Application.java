@@ -118,8 +118,14 @@ public class Application {
 			// les plugins et les features)
 			Utils.preTraitement();
 		}
+		
 		// Execution du build.xml
-		System.out.println("\nRéalisation du Build...");
+		System.out.println("\nRéalisation du Build sur ...");
+		
+		for(String projet: Utils.getProjects()){
+			System.out.println("\t-" + projet);
+		}
+		
 		execBuild("build", "build");
 
 		// création du site.xml
