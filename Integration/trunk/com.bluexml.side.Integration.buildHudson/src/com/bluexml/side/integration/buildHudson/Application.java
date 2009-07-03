@@ -560,7 +560,7 @@ public class Application {
 		out += "\t================================= -->\n\n";
 
 		out += "\t<target name=\"genJavadoc\" depends=\"\" description=\"description\">\n";
-		out += "\t\t<javadoc destdir=\"${buildDir}" + File.separator
+		out += "\t\t<javadoc destdir=\"${buildDir}"+File.separator+"${codeName}" + File.separator
 				+ "doc" + File.separator + Utils.getCodeName() + File.separator +"Javadoc\">\n";
 
 		for (int i = 0; i < projects.length; i++) {

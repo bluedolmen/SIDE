@@ -915,8 +915,7 @@ public class Utils {
 
 			// copie de la doc
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
-					+ "doc"), new File(getFinalDirectory() + File.separator + "doc" + File.separator
-					+ getCodeName()), true);
+					+ "doc"), new File(getFinalDirectory() + File.separator + "doc"), true);
 
 			// copie des fichiers compilés
 			if (!new File(getFinalDirectory() + File.separator + "logs")
@@ -939,8 +938,8 @@ public class Utils {
 
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "logbuildbuild.txt"), new File(getFinalDirectory()
-					+ File.separator + "logs" + File.separator + File.separator
-					+ getCodeName() + "logBuild.txt"), true);
+					+ File.separator + "logs" + File.separator
+					+ getCodeName() + File.separator + "logBuild.txt"), true);
 
 			if (!Application.parametre) {
 				FileHelper.copyFiles(new File(getBuildPath() + File.separator
