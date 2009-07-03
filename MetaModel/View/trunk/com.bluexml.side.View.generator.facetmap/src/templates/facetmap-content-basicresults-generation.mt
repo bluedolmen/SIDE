@@ -41,27 +41,25 @@ version="1.0">
     <div class="result">
     	<%for (getInnerView().filter("Actionable").operations.getOperations()){%>
         	<%if (name == "download"){%>
-				<span class="linkDownload">
-					<a>
-						<xsl:attribute name="href"><xsl:value-of select="substring-before(@href,'+')"/></xsl:attribute>
-						<xsl:attribute name="target">_blank</xsl:attribute>
-						<img src="{$resource_base_url}/disk.png" class="save"/>
-					</a>
-				</span>
+				<a>
+					<xsl:attribute name="href"><xsl:value-of select="@idDoc"/></xsl:attribute>
+					<xsl:attribute name="target">_blank</xsl:attribute>
+					<img src="{$icons_url}/disk.png" class="imgIcon"/>
+				</a>
 			<%}%>
 			<%if (name == "view"){%>
-				<span class="linkView">
-					<a>
-						<xsl:attribute name="href"><xsl:value-of select="substring-after(@href,'+')"/></xsl:attribute>
-						<xsl:attribute name="target">_blank</xsl:attribute>
-						<img src="{$resource_base_url}/eye.png" class="view"/>
-					</a>
-				</span>
+				<a>
+					<xsl:attribute name="href"><xsl:value-of select="@idDoc"/></xsl:attribute>
+					<xsl:attribute name="target">_blank</xsl:attribute>
+					<img src="{$icons_url}/eye.png" class="imgIcon"/>
+				</a>
 			<%}%>
 			<%if (name == "edit"){%>
-				<span class="linkEdit">
-						edit
-				</span>
+				<a>
+					<xsl:attribute name="href"><xsl:value-of select="@idDoc"/></xsl:attribute>
+					<xsl:attribute name="target">_blank</xsl:attribute>
+					<img src="{$icons_url}/edit.png" class="imgIcon"/>
+				</a>
 			<%}%>
         <%}%>
     	<xsl:value-of select="@name"/>

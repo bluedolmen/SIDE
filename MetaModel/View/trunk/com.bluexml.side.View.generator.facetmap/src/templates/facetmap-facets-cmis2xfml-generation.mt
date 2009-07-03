@@ -40,11 +40,10 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 
 	<!-- entry node -->
 	<xsl:template match="entry">
-		<xsl:variable name="ref_share" select="concat($host,$DLUrl,substring(child::id[1],10))"/>
-		<xsl:variable name="ref_alfresco" select="concat($host,$ViewURL,substring(child::id[1],10),'/',child::title[1])"/>       
+		<xsl:variable name="idDoc" select="substring(child::id[1],10)"/>     
 		<resource
 			title="<%current("FacetMap").viewOf.filter("Clazz").getLabel()%> :<%for (getInnerView().getFields()){%> {child::cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribute").typ!="int"{%><%mapTo.filter("Attribute").typ%><%}else{%>Integer<%}%>[@cmis:name='<%mapTo.filter("Attribute").getFullName()%>']/cmis:value}<%}%>"
-			href="{concat($ref_alfresco,'+',$ref_share)}">
+			idDoc="{$idDoc}">
 		<%ressource()%>
 		</resource>
 	</xsl:template>

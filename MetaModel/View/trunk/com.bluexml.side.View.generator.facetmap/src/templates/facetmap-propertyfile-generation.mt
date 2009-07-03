@@ -6,14 +6,12 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 
 <%script type="view.FacetMap" name="validatedFilename"%>
 	./common/WEB-INF/configuration.properties
-<%script type="view.FacetMap" name="numberResultsShown"%>
-20
 
 <%script type="view.FacetMap" name="propertyfileGenerator"  file="<%validatedFilename%>" %>
 view=Rightnav.xsl
 showEmptySelections=<%displayEmptyFacet%>
 rebuildMap=true
-map=test.xml
-resultLimit=<%numberResultsShown()%>
+map=map.xml
+resultLimit=<% getInnerView().filter("AbstractDataTable").paging.maxItems %>
 workDirectory=.
 log4jConfigFile=logProperties.txt

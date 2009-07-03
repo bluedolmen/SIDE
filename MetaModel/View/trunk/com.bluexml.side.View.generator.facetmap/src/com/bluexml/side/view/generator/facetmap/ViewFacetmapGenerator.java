@@ -40,7 +40,7 @@ import com.bluexml.side.view.generator.facetmap.utils.FacetmapConstants;
 public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator implements FacetmapConstants {
 	public static String GENERATOR_CODE = "CODE_GED_G_C_FACETMAP_2";
 	public static String MMUri = "http://www.kerblue.org/view/1.0";
-
+	
 	public ViewFacetmapGenerator(){
 		techVersion = "Facetmap 2.x";
 		this.setTEMP_FOLDER(getTechVersion());
@@ -61,11 +61,10 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 	protected List<String> getTemplates() {
 			List<String> templates = new ArrayList<String>();
 				//common
-				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-cmis2xfml-generation.mt");
-				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-cmis-generation.mt");
-				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-cmis-properties-generation.mt");
 				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-propertyfile-generation.mt");
+				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-cmis-generation.mt");
 				//facets
+				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-cmis2xfml-generation.mt");
 				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-buildproperties-generation.mt");
 				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslbasicfacets-generation.mt");
 				templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-xslrightnav-generation.mt");

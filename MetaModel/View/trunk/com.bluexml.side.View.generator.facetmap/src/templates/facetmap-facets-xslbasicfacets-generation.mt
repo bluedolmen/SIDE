@@ -7,19 +7,13 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 <%script type="view.FacetMap" name="validatedFilename"%>
 	./facets/xsl/display/includes/basic-Facets.xsl
 
-<%script type="view.FacetMap" name="nbPagingFacets"%>
-5
-
-<%script type="view.FacetMap" name="hostname"%>
-localhost
-
 <%script type="view.FacetMap" name="basicGenerator"  file="<%validatedFilename%>" %>
 <?xml version="1.0" encoding="iso-8859-1"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 version="1.0">
  
   <!-- URL -->
-  <xsl:param name="server">http://<%hostname()%>:8080</xsl:param>
+  <xsl:param name="server">../</xsl:param>
   <xsl:param name="app">facetmap-content</xsl:param>
   <xsl:param name="app2">facetmap-facets</xsl:param>
   <xsl:param name="nb_paging_facets"><%paging.maxItems%></xsl:param>
