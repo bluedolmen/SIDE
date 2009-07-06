@@ -370,8 +370,16 @@ public class Generate extends Thread {
 				} catch (Exception e) {
 					e.printStackTrace();
 					error = true;
+					addErrorText(System.getProperty("line.separator") + "Error during deployment. " + e.getMessage());
 				}
-				//deployer.moveStampFile();
+				
+				try {
+					deployer.moveStampFile(logPath);
+				} catch (Exception e) {
+					e.printStackTrace();
+					addWarningText(System.getProperty("line.separator") + "Error during logging. " + e.getMessage());
+				}
+				
 				String fileName = "dep_" + deployer.getTechVersion() + ".xml";
 				LogSave.toXml(deployer.getLog(),fileName, logPath + System.getProperty("file.separator") + "work"  + System.getProperty("file.separator"));
 			}
