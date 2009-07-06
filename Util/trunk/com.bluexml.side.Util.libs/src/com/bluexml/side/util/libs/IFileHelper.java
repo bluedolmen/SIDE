@@ -10,6 +10,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 
 public class IFileHelper {
@@ -139,6 +140,22 @@ public class IFileHelper {
 	}
 	
 	/**
+	 * Return all files for the given folder; won't add file in sub folder.
+	 * @param folder
+	 * @return
+	 * @throws Exception
+	 */
+	public static List<IFile> getAllFilesForFolder(IFolder folder) throws Exception {
+		List<IFile> results = new ArrayList<IFile>();
+		for (IResource r : folder.members()) {
+			if (r instanceof IFile) {
+				results.add((IFile)r);
+			} 
+		}
+		return results;
+	}
+	
+	/**
 	 * Refresh the given folder
 	 * @param folder
 	 * @throws CoreException 
@@ -155,5 +172,28 @@ public class IFileHelper {
 	 */
 	public static void refreshFolder(String folderPath) throws CoreException {
 		refreshFolder(getIFolder(folderPath));
+	}
+	
+	/**
+	 * Move the given file to the given folder
+	 * @param file
+	 * @param dest
+	 * @throws CoreException 
+	 */
+	public static void moveFile(IFile file, IFolder dest, boolean eraseIfExist) throws CoreException {
+		boolean doWork = true;
+		IPath p = dest.getFullPath().append(file.getName());
+		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+		IFile destFile = myWorkspaceRoot.getFile(p);
+		if (destFile.exists()) {
+			if (!eraseIfExist) {
+				doWork = false;
+			} else {
+				IFileHelper.deleteFile(destFile.getFullPath().toOSString());
+			}
+		}
+		if (doWork) {
+			file.move(p, true, null);
+		}
 	}
 }
