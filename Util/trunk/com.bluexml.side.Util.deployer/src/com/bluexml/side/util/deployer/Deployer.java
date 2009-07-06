@@ -251,15 +251,17 @@ public abstract class Deployer implements Checkable {
 	 * to be used for log purpose.
 	 * @throws Exception 
 	 */
-	final public void moveStampFile() throws Exception {
-		// Seek all .xml files into gen directory
-		IFolder f = IFileHelper.getIFolder(getTargetPath() + System.getProperty("file.separator"));
-		List<IFile> toMove = IFileHelper.getAllFiles(f);
+	final public void moveStampFile(String logPath) throws Exception {
+		// Seek all .xml files into gen directory 
+		IFolder source = IFileHelper.getIFolder(getTargetPath() + System.getProperty("file.separator") + getTechVersion());
+		IFileHelper.refreshFolder(source);
+		IFolder dest = IFileHelper.createFolder(logPath + System.getProperty("file.separator") + LogSave.LOG_STAMP_FOLDER + System.getProperty("file.separator"));
+		IFileHelper.refreshFolder(dest);
+		List<IFile> toMove = IFileHelper.getAllFiles(source); 
 		for (IFile xmlFile : toMove) {
 			if (xmlFile.getName().endsWith(".xml")) {
-				//TODO : copy
+				IFileHelper.moveFile(xmlFile, dest, true);
 			}
 		}
-		// Move it into
 	}
 }

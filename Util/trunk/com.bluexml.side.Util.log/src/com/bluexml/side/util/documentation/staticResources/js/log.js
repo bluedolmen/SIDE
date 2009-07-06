@@ -1,5 +1,5 @@
 function showPannel(p_idPannel) {
-	var pannels = new Array("stats", "deployement", "generation", "error");
+	var pannels = new Array("stats", "deployment", "generation", "service", "documentation");
 	$.each(pannels, function(i,n){
 		if (n == p_idPannel) {
 			$("#" + n).show();

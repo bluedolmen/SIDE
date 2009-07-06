@@ -79,7 +79,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	 */
 	public final void createStampFile() throws CoreException, FileNotFoundException, IOException {
 		IFolder ff = IFileHelper.createFolder(getTargetPath() + System.getProperty("file.separator") + techVersion);
-		Element racine = new Element("generator");
+		Element racine = new Element("toDeploy");
 		Attribute classe = new Attribute("id",this.id);
 		racine.setAttribute(classe);
 		Attribute date = new Attribute("date",new Date().toString());
