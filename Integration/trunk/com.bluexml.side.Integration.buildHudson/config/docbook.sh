@@ -47,7 +47,7 @@ echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />"
 cat $1/index.html
 ) > $1/index_tmp
       mv  $1/index_tmp $1/index.html
-      echo "<LI><A href="$1/index.html">$1/index.html</A></LI>" >> index.html
+      echo "<LI><A href="$1/index.html">$1/index.html</A> (<A href="$1.docbook">$1.docbook</A>)</LI>" >> index.html
     fi
    else
     return_code=-3
