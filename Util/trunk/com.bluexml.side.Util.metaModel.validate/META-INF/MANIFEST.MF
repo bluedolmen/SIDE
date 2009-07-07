@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Validate Plug-in
 Bundle-SymbolicName: com.bluexml.side.Util.metaModel.validate;singleton:=true
-Bundle-Version: 1.0.12
+Bundle-Version: 1.0.13.v7357-20090707
 Bundle-Activator: com.bluexml.side.util.metaModel.validate.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
