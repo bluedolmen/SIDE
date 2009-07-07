@@ -934,21 +934,29 @@ public class Utils {
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "site.xml"), finalSite, true);
 
-			// suppression du dossier final s'il éxiste
+			// creation du dossier final s'il n'éxiste pas
 			if (!new File(getFinalDirectory()).exists())
 				new File(getFinalDirectory()).mkdir();
 
 			if (new File(getFinalDirectory() + File.separator
 					+ getArchivePrefix() + File.separator + getCodeName()
 					+ File.separator + "features").exists()) {
-				FileHelper.deleteFile(finalFeatures);
-				finalFeatures.mkdir();
+				FileHelper.deleteFile(new File(getFinalDirectory() + File.separator
+						+ getArchivePrefix() + File.separator + getCodeName()
+						+ File.separator + "features"));
+				new File(getFinalDirectory() + File.separator
+						+ getArchivePrefix() + File.separator + getCodeName()
+						+ File.separator + "features").mkdir();
 			}
 			if (new File(getFinalDirectory() + File.separator
 					+ getArchivePrefix() + File.separator + getCodeName()
 					+ File.separator + "plugins").exists()) {
-				FileHelper.deleteFile(finalPlugins);
-				finalPlugins.mkdir();
+				FileHelper.deleteFile(new File(getFinalDirectory() + File.separator
+						+ getArchivePrefix() + File.separator + getCodeName()
+						+ File.separator + "plugins"));
+				new File(getFinalDirectory() + File.separator
+						+ getArchivePrefix() + File.separator + getCodeName()
+						+ File.separator + "plugins").mkdir();
 			}
 
 			// copie de l'update site
@@ -970,6 +978,8 @@ public class Utils {
 					+ File.separator + getArchivePrefix() + File.separator
 					+ getCodeName() + File.separator + "site.xml"), true);
 
+			
+			
 			// copie de la doc
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "doc"), new File(getFinalDirectory() + File.separator
