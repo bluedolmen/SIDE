@@ -273,8 +273,7 @@ public class Application {
 		out += "\t\t<mkdir dir=\"${buildDirectory}/${buildLabel}/${archivePrefix}/features\"/>\n";
 
 		for (int i = 0; i < projects.length; i++) {
-			if (projects[i].indexOf("feature") != -1
-					|| projects[i].equals("com.bluexml.side.Util")) {
+			if (projects[i].indexOf("feature") != -1) {
 				out += "\t\t<jar destfile=\"${buildDirectory}/${buildLabel}/${archivePrefix}/features/"
 						+ projects[i]
 						+ "_"
@@ -597,7 +596,7 @@ public class Application {
 	}
 
 	/**
-	 * Retourne le corps de la target genJavadoc
+	 * Retourne le corps de la target buildProject
 	 */
 	private static String getBuildProject() {
 		String[] projects = Utils.getProjectsToBuild();

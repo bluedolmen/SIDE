@@ -942,24 +942,31 @@ public class Utils {
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "site.xml"), finalSite, true);
 
+			
+			String buildNumber = "";
+			
+			if(Application.parametre){
+				buildNumber = "-" + Application.build_number;
+			}
+			
 			// copie de l'update site
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
 					+ getBuildLabel() + File.separator + getArchivePrefix()
 					+ File.separator + "features"), new File(
 					getFinalDirectory() + File.separator + getArchivePrefix()
-							+ File.separator + getCodeName() + File.separator
+							+ File.separator + getCodeName() + buildNumber + File.separator
 							+ "features"), true);
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
 					+ getBuildLabel() + File.separator + getArchivePrefix()
 					+ File.separator + "plugins"), new File(getFinalDirectory()
 					+ File.separator + getArchivePrefix() + File.separator
-					+ getCodeName() + File.separator + "plugins"), true);
+					+ getCodeName() + buildNumber  + File.separator + "plugins"), true);
 
 			// copie du site.xml pour l'update site
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "site.xml"), new File(getFinalDirectory()
 					+ File.separator + getArchivePrefix() + File.separator
-					+ getCodeName() + File.separator + "site.xml"), true);
+					+ getCodeName() + buildNumber  + File.separator + "site.xml"), true);
 
 			// copie de la doc
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
