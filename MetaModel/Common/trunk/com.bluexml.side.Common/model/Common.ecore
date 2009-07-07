@@ -4,18 +4,32 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="common"
     nsURI="http://www.kerblue.org/common/1.0/" nsPrefix="common">
   <eClassifiers xsi:type="ecore:EClass" name="ModelElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: main elements of model inherits of ModelElement which allows to declare the description and the documentation attributes."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="stereotypes" upperBound="-1"
         eType="#//Stereotype"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tags" upperBound="-1" eType="#//Tag"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="comments" upperBound="-1"
         eType="#//Comment" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="documentation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="documentation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: the attribute documentation is associated to all the elements of a model to allow associating an explanation of the element; this explanation is used in the generation of the model documentation. &#xD;&#xA;It is highly recommended to fill up this attribute at each creation of an element to provide a good documentation and to avoid having to spend huge time lately. "/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: the attribute description is associated to many elements of a model to allow a description of the element; this description is used in the generation of the model documentation. &#xD;&#xA;It is highly recommended to fill up this attribute at each creation of an element to provide a good documentation and to avoid having to spend huge time lately. "/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="metainfo" upperBound="-1"
         eType="#//MetaInfo" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedModelElement" eSuperTypes="#//ModelElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: main elements of model inherits of NameModelElement which allows to declare the name and which provides multiple OCL operations used by the modelers and the generators."/>
+    </eAnnotations>
     <eOperations name="getFullName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="if self.getContainer().oclIsUndefined() then&#xD;&#x9;self.name&#xD;else&#xD;&#x9;if self.getContainer().oclIsKindOf(NamedModelElement) then&#xD;&#x9;&#x9;self.getContainer().oclAsType(NamedModelElement).getFullName().concat('.').concat(self.name)&#xD;&#x9;else&#xD;&#x9;&#x9;''&#xD;&#x9;endif&#x9;&#xD;endif"/>
@@ -31,7 +45,11 @@
         <details key="body" value="if self.description.oclIsUndefined() or self.description.size() &lt;0 then&#xD;&#x9;self.name&#xD;else&#xD;&#x9;self.description&#xD;endif"/>
       </eAnnotations>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: the name of the concerned element; this name is used as leaf of the fully qualified name of an element: the other part of the fully qualified name are composed by the tree package names."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Comment" eSuperTypes="#//ModelElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -60,6 +78,9 @@
     </eAnnotations>
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="PackageNameNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: used to organize the objects inside a model under a tree similar to Java package organization. It is highly recommended to use the packages to organize the elements and to ensure that they have understandable fully qualified name."/>
     </eAnnotations>
     <eOperations name="equalsForMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.bluexml.com/OCL">
@@ -101,6 +122,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueType" eType="#//DataType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="DataType">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: this enumeration allows to set up a format to a data. The supported data types are:&#xD;&#xA;- boolean: true or false,&#xD;&#xA;- byte: 8-bits integer&#xD;&#xA;- char: Single two-byte Unicode character&#xD;&#xA;- Date: a calendar date &#xD;&#xA;- DateTime: calendar date and day time&#xD;&#xA;- double: 8-bytes floating point number&#xD;&#xA;- float: 4-bytes floating point number&#xD;&#xA;- int: 4-bytes signed integer&#xD;&#xA;- long: 8-bytes signed integer&#xD;&#xA;- Object: other data types; for Alfresco, associated to the 'Any' data type.&#xD;&#xA;- short: 2-bytes signed integer&#xD;&#xA;- String: a sequence of plain-text characters&#xD;&#xA;- Time : an instant of time that recurs every day&#xD;&#xA;- void: pas de generation de l'attribut"/>
+    </eAnnotations>
     <eLiterals name="boolean"/>
     <eLiterals name="byte" value="1"/>
     <eLiterals name="char" value="2"/>

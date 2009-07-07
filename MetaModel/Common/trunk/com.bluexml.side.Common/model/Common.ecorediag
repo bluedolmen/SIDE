@@ -16,14 +16,6 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_DFU-J06KEd602IXkjCLPVw"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_DFU-KE6KEd602IXkjCLPVw" type="5002">
-      <children xmi:type="notation:Node" xmi:id="_DFVlNE6KEd602IXkjCLPVw" type="2002">
-        <element xmi:type="ecore:EOperation" href="Common.ecore#//ModelElement/getDocumentationOrName"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_DFVlNU6KEd602IXkjCLPVw"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_DFVlNk6KEd602IXkjCLPVw" type="2002">
-        <element xmi:type="ecore:EOperation" href="Common.ecore#//ModelElement/getDescriptionOrName"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_DFVlN06KEd602IXkjCLPVw"/>
-      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_DFU-KU6KEd602IXkjCLPVw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_DFU-Kk6KEd602IXkjCLPVw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_DFU-K06KEd602IXkjCLPVw"/>
@@ -74,7 +66,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_DFWMTU6KEd602IXkjCLPVw" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="0"/>
     <element xmi:type="ecore:EClass" href="Common.ecore#//Comment"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DFWMTk6KEd602IXkjCLPVw" x="241"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DFWMTk6KEd602IXkjCLPVw" x="165" y="70"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_DFWzW06KEd602IXkjCLPVw" type="1001">
     <children xmi:type="notation:Node" xmi:id="_DFWzXk6KEd602IXkjCLPVw" type="4001"/>
