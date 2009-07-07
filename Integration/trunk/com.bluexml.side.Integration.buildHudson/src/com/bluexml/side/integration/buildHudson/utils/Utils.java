@@ -901,35 +901,27 @@ public class Utils {
 	 * 
 	 */
 	public static void finalTraitement() {
+		String buildNumber = "";
+
+		if (Application.parametre) {
+			buildNumber = "-" + Application.build_number;
+		}
 
 		File finalFeatures = new File(getFinalDirectory() + File.separator
 				+ getArchivePrefix() + File.separator + getCodeName()
-				+ File.separator + getRevisionNumber() + File.separator
-				+ "features");
+				+ File.separator + getRevisionNumber() + buildNumber
+				+ File.separator + "features");
 		File finalPlugins = new File(getFinalDirectory() + File.separator
 				+ getArchivePrefix() + File.separator + getCodeName()
-				+ File.separator + getRevisionNumber() + File.separator
-				+ "plugins");
+				+ File.separator + getRevisionNumber() + buildNumber
+				+ File.separator + "plugins");
 
 		File finalSite = new File(getFinalDirectory() + File.separator
 				+ getArchivePrefix() + File.separator + getCodeName()
-				+ File.separator + getRevisionNumber() + File.separator
-				+ "site.xml");
+				+ File.separator + getRevisionNumber() + buildNumber
+				+ File.separator + "site.xml");
 
 		try {
-			// suppression du dossier final s'il éxiste
-			if (!new File(getFinalDirectory()).exists())
-				new File(getFinalDirectory()).mkdir();
-
-			if (finalFeatures.exists()) {
-				FileHelper.deleteFile(finalFeatures);
-				finalFeatures.mkdir();
-			}
-			if (finalPlugins.exists()) {
-				FileHelper.deleteFile(finalPlugins);
-				finalPlugins.mkdir();
-			}
-
 			// copie de l'update site
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
 					+ getBuildLabel() + File.separator + getArchivePrefix()
@@ -942,31 +934,41 @@ public class Utils {
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "site.xml"), finalSite, true);
 
-			
-			String buildNumber = "";
-			
-			if(Application.parametre){
-				buildNumber = "-" + Application.build_number;
+			// suppression du dossier final s'il éxiste
+			if (!new File(getFinalDirectory()).exists())
+				new File(getFinalDirectory()).mkdir();
+
+			if (new File(getFinalDirectory() + File.separator
+					+ getArchivePrefix() + File.separator + getCodeName()
+					+ File.separator + "features").exists()) {
+				FileHelper.deleteFile(finalFeatures);
+				finalFeatures.mkdir();
 			}
-			
+			if (new File(getFinalDirectory() + File.separator
+					+ getArchivePrefix() + File.separator + getCodeName()
+					+ File.separator + "plugins").exists()) {
+				FileHelper.deleteFile(finalPlugins);
+				finalPlugins.mkdir();
+			}
+
 			// copie de l'update site
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
 					+ getBuildLabel() + File.separator + getArchivePrefix()
 					+ File.separator + "features"), new File(
 					getFinalDirectory() + File.separator + getArchivePrefix()
-							+ File.separator + getCodeName() + buildNumber + File.separator
+							+ File.separator + getCodeName() + File.separator
 							+ "features"), true);
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
 					+ getBuildLabel() + File.separator + getArchivePrefix()
 					+ File.separator + "plugins"), new File(getFinalDirectory()
 					+ File.separator + getArchivePrefix() + File.separator
-					+ getCodeName() + buildNumber  + File.separator + "plugins"), true);
+					+ getCodeName() + File.separator + "plugins"), true);
 
 			// copie du site.xml pour l'update site
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "site.xml"), new File(getFinalDirectory()
 					+ File.separator + getArchivePrefix() + File.separator
-					+ getCodeName() + buildNumber  + File.separator + "site.xml"), true);
+					+ getCodeName() + File.separator + "site.xml"), true);
 
 			// copie de la doc
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
