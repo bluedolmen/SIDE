@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.bluexml.side.util.deployer;
 
@@ -61,7 +61,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Use to setup all properties, ordinary used by deployer luncher
-	 * 
+	 *
 	 * @param configurationParameters
 	 * @param generationParameters
 	 * @param options
@@ -90,7 +90,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * do the whole deploy process
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void deploy() throws Exception {
@@ -108,7 +108,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * default method to get the File to deploy
-	 * 
+	 *
 	 * @param absoluteWKDirPath
 	 * @return
 	 */
@@ -118,7 +118,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * the main deploy process
-	 * 
+	 *
 	 * @param fileToDeploy
 	 * @throws Exception
 	 */
@@ -126,7 +126,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * method that clean the target before deploy resources into
-	 * 
+	 *
 	 * @param fileToDeploy
 	 * @throws Exception
 	 */
@@ -134,7 +134,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Job to do after the main process
-	 * 
+	 *
 	 * @param fileToDeploy
 	 * @throws Exception
 	 */
@@ -142,7 +142,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Job to do before the main process
-	 * 
+	 *
 	 * @param fileToDeploy
 	 * @throws Exception
 	 */
@@ -164,7 +164,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * check if changes made by the deploy process must be logged
-	 * 
+	 *
 	 * @return
 	 */
 	protected boolean logChanges() {
@@ -173,7 +173,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * check if clean must be done
-	 * 
+	 *
 	 * @return
 	 */
 	protected boolean doClean() {
@@ -182,7 +182,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Add a Log
-	 * 
+	 *
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -195,7 +195,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Add an Error Log
-	 * 
+	 *
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -206,7 +206,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Add an error log using a stracktrace instead of a string description
-	 * 
+	 *
 	 * @param title
 	 * @param stackTrace
 	 * @param uri
@@ -225,7 +225,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Add a warning log
-	 * 
+	 *
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -237,7 +237,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Add information log
-	 * 
+	 *
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -249,18 +249,22 @@ public abstract class Deployer implements Checkable {
 	/**
 	 * Move the stamp file added by the generator to the directory into log path
 	 * to be used for log purpose.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	final public void moveStampFile(String logPath) throws Exception {
-		// Seek all .xml files into gen directory 
+		// Seek all .xml files into gen directory
 		IFolder source = IFileHelper.getIFolder(getTargetPath() + System.getProperty("file.separator") + getTechVersion());
-		IFileHelper.refreshFolder(source);
-		IFolder dest = IFileHelper.createFolder(logPath + System.getProperty("file.separator") + LogSave.LOG_STAMP_FOLDER + System.getProperty("file.separator"));
-		IFileHelper.refreshFolder(dest);
-		List<IFile> toMove = IFileHelper.getAllFiles(source); 
-		for (IFile xmlFile : toMove) {
-			if (xmlFile.getName().endsWith(".xml")) {
-				IFileHelper.moveFile(xmlFile, dest, true);
+		if (source.exists()) {
+			IFileHelper.refreshFolder(source);
+			IFolder dest = IFileHelper.createFolder(logPath + System.getProperty("file.separator") + LogSave.LOG_STAMP_FOLDER + System.getProperty("file.separator"));
+			if (dest.exists()) {
+				IFileHelper.refreshFolder(dest);
+				List<IFile> toMove = IFileHelper.getAllFiles(source);
+				for (IFile xmlFile : toMove) {
+					if (xmlFile.getName().endsWith(".xml")) {
+						IFileHelper.moveFile(xmlFile, dest, true);
+					}
+				}
 			}
 		}
 	}

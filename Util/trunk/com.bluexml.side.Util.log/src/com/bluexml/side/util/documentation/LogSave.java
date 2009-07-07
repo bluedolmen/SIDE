@@ -42,7 +42,7 @@ public class LogSave {
 	/**
 	 * Render a SIDELog to a xml file using the given fileName in the given
 	 * folderName
-	 * 
+	 *
 	 * @param log
 	 * @param fileName
 	 * @param folderName
@@ -70,7 +70,7 @@ public class LogSave {
 
 	/**
 	 * Record the SIDELog into the given outputStream
-	 * 
+	 *
 	 * @param log
 	 * @param fos
 	 */
@@ -97,13 +97,13 @@ public class LogSave {
 	/**
 	 * Will build a unique log file from all the xml files available in the
 	 * given folder
-	 * 
+	 *
 	 * @param folderName
 	 * @throws Exception
 	 */
 	public static void buildGeneraLogFile(String folderName) throws Exception {
 		IFolder logFolder = IFileHelper.createFolder(folderName);
-		
+
 		IFolder tmpFolder = IFileHelper.createFolder(logFolder.getFullPath().append(LOG_TEMP_FOLDER).toOSString());
 		// File f = IFileHelper.getFile(folder);
 		// We get all files
@@ -131,23 +131,26 @@ public class LogSave {
 				}
 			}
 		}
-		
+
 		// We search for xml file in stamp folder to know which generator have been deployed
-		List<IFile> deployedStamps = IFileHelper.getAllFilesForFolder(IFileHelper.getIFolder(logFolder.getFullPath().append(LOG_STAMP_FOLDER).toOSString()));
-		Element rootDeployed = new Element("deployed");
-		for (IFile xmlFile : deployedStamps) {
-			if (xmlFile.getName().endsWith(".xml")
-					&& !xmlFile.getName().equals(LOG_FILE_NAME)) {
-				SAXBuilder builder = new SAXBuilder();
-				try {
-					Document xml = builder.build(IFileHelper.getFile(xmlFile));
-					rootDeployed.addContent((Element) xml.getRootElement().clone());
-				} catch (Exception e) {
-					e.printStackTrace();
+		IFolder stampFolder = IFileHelper.getIFolder(logFolder.getFullPath().append(LOG_STAMP_FOLDER).toOSString());
+		if (stampFolder.exists()) {
+			List<IFile> deployedStamps = IFileHelper.getAllFilesForFolder(stampFolder);
+			Element rootDeployed = new Element("deployed");
+			for (IFile xmlFile : deployedStamps) {
+				if (xmlFile.getName().endsWith(".xml")
+						&& !xmlFile.getName().equals(LOG_FILE_NAME)) {
+					SAXBuilder builder = new SAXBuilder();
+					try {
+						Document xml = builder.build(IFileHelper.getFile(xmlFile));
+						rootDeployed.addContent((Element) xml.getRootElement().clone());
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
+			rootNode.addContent(rootDeployed);
 		}
-		rootNode.addContent(rootDeployed);
 
 		// We create the general log file
 		IFileHelper.deleteFile(logFolder.getFullPath()
@@ -204,7 +207,7 @@ public class LogSave {
 
 	/**
 	 * Will ouput html using xml with an xsl transfo
-	 * 
+	 *
 	 * @param doc
 	 * @param folderDest
 	 * @param xslName
@@ -231,7 +234,7 @@ public class LogSave {
 
 	/**
 	 * Move file from this jar to the specified folder
-	 * 
+	 *
 	 * @param folderDest
 	 * @param fileName
 	 * @param folderSource
