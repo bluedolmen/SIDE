@@ -6,7 +6,7 @@
       <metamodel
             description="Check this to generate class models on leading frameworks.&lt;br&gt; This Class Metamodel allows to model Application Object structure and persistence.&lt;br&gt;S-IDE provides the modeler to graphically produce class models and various generators to instantiate these models on leading frameworks."
             id="http://www.kerblue.org/class/1.0"
-            name="KSR500 Class"
+            name="KSR500 Data"
             url="http://www.kerblue.org/class/1.0">
          <technology
                description="Check this to generate predefined reports associated to the designed objects of your class models.&lt;br&gt;At runtime, these reports may be instantiated using the Birt report execution environment. These reports may also be customized using the Birt report designer.&lt;br&gt;S-IDE allows to optimize the generation of reports useful to follow up the lifecycle of the newly designed objects of your application."
@@ -31,6 +31,11 @@
                         documentation="Set this value to name of the author of the report.&lt;br&gt;The author name will be inserted in the generated report templates."
                         key="report.author"
                         label="Author">
+                  </configurationParameter>
+                  <configurationParameter
+                        documentation="URL to birt webapp."
+                        key="birt.webapp"
+                        label="Birt webapp url">
                   </configurationParameter>
                </generatorVersion>
             </technologyVersion>
