@@ -13,6 +13,10 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Enumeration Literal</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Defintion: the item of an enumeration; it is composed of a name and a value.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -35,6 +39,11 @@ public interface EnumerationLiteral extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: the value of an item of an enumeration.
+	 * Constraints: a single value may be defined for a name.
+	 * Example: consider the enumeration mediaType : {(videoType, Video), (paperType, Paper), (audioType, Audio),(numericType, File), ...}; a Video media has the mediaType of name videoType and of value Video.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(String)
 	 * @see com.bluexml.side.clazz.ClazzPackage#getEnumerationLiteral_Value()
@@ -61,6 +70,10 @@ public interface EnumerationLiteral extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: the identifier of an item of an enumeration.
+	 * Constraint: the name is unique in an enumeration
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see com.bluexml.side.clazz.ClazzPackage#getEnumerationLiteral_Name()

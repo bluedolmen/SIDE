@@ -14,6 +14,14 @@ import com.bluexml.side.common.Visibility;
  * A representation of the model object '<em><b>Attribute</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: a class property descibes a characteristic of the concerned class. For example, the property 'title' of the class 'book' gives the title of the book.
+ * Constraints: 
+ * - the name of a class property must be unique between all the direct and inherited property of a class.
+ * - a property is associated to a single class or abstract class; a class or an abstract class may contain zero, one or several properties.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -40,6 +48,10 @@ public interface Attribute extends TitledNamedClassModelElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: the type of a class property allows to define its format; the supported property types are boolean, byte, char, double, float, int, long, short, String, Date, Object.
+	 * 
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Typ</em>' attribute.
 	 * @see com.bluexml.side.common.DataType
 	 * @see #setTyp(DataType)
@@ -68,6 +80,9 @@ public interface Attribute extends TitledNamedClassModelElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: this attribute allows to set up an initial value to the class property at creation of an object.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Initial Value</em>' attribute.
 	 * @see #setInitialValue(String)
 	 * @see com.bluexml.side.clazz.ClazzPackage#getAttribute_InitialValue()
@@ -96,6 +111,12 @@ public interface Attribute extends TitledNamedClassModelElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: this attribute indicates the scope of the class property the possible values are:
+	 * - public: the class property is visible to other classes through association.
+	 * - private: the class property is not visible to other classes.
+	 * - protected: the class property cannot be updated.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Visibility</em>' attribute.
 	 * @see com.bluexml.side.common.Visibility
 	 * @see #setVisibility(Visibility)
@@ -151,6 +172,9 @@ public interface Attribute extends TitledNamedClassModelElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: if true, this attribute inidcates that the class property is part of the unique constraint of the class. This means that the set of values of all the unique property must be unique through all the instances of the class.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Unique</em>' attribute.
 	 * @see #setUnique(boolean)
 	 * @see com.bluexml.side.clazz.ClazzPackage#getAttribute_Unique()

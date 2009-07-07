@@ -4,13 +4,13 @@
 
    <extension point="org.topcased.modeler.templates">
       <template
-            di="templates/diagram/%name%.clazzdi"
-            model="templates/diagram/%name%.clazz"
+            di="templates/diagram/%name%.dtdi"
+            model="templates/diagram/%name%.dt"
             name="Class Diagram"
             id="com.bluexml.side.Class.modeler.templates.diagram"
             editorId="com.bluexml.side.Class.modeler.editor.ClazzEditor"/>
    </extension>
-   
+
    <extension point="org.topcased.modeler.diagrams">
       <diagram
             configuration="com.bluexml.side.Class.modeler.diagram.CdConfiguration"
@@ -18,6 +18,6 @@
             name="Class Diagram">
       </diagram>
 	</extension>
-	
-   
+
+
 </plugin>

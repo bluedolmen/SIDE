@@ -15,6 +15,11 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Enumeration</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: an enumeration represents a list of values which may be associated to a class property.
+ * Example: the list of languages associated to the property 'language' of a book.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -56,6 +61,9 @@ public interface Enumeration extends NamedModelElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: if false, this attribute indicates that the values of the enumeration are predefined and fixed: they are defined during modeling. If true, this attribute indicates that the set of values of the enumeration may be extended at application runtime.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Dynamic</em>' attribute.
 	 * @see #setDynamic(Boolean)
 	 * @see com.bluexml.side.clazz.ClazzPackage#getEnumeration_Dynamic()

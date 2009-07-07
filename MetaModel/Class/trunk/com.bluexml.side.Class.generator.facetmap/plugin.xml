@@ -6,7 +6,7 @@
       <metamodel
             description="Check this to generate class models on leading frameworks.&lt;br&gt; This Class Metamodel allows to model Application Object structure and persistence.&lt;br&gt;S-IDE provides the modeler to graphically produce class models and various generators to instantiate these models on leading frameworks. "
             id="http://www.kerblue.org/class/1.0"
-            name="KSR500 Class"
+            name="KSR500 Data"
             url="http://www.kerblue.org/class/1.0">
          <technology
                description="Check this to generate Facet navigation features associated to the designed objects of your class models.&lt;br&gt;Facetmap is a library allowing to produce facet navigation through object categories.&lt;br&gt;S-IDE allows to optimize the generation of the Facetmap components based on the newly designed objects of your class models."

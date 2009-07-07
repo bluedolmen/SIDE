@@ -33,6 +33,10 @@ public interface TitledNamedClassModelElement extends NamedModelElement, ClassMo
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: the title of the concerned elements. 
+	 * Constraints: do not forget to set up this value in order to have label associated to generated elements.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Title</em>' attribute.
 	 * @see #setTitle(String)
 	 * @see com.bluexml.side.clazz.ClazzPackage#getTitledNamedClassModelElement_Title()

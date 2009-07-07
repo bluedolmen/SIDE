@@ -923,7 +923,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "InheritanceCycle", "not self.generalizations.generalizations -> includes(self)"
-		   });			
+		   });				
 		addAnnotation
 		  (clazzEClass.getEOperations().get(0), 
 		   source, 
@@ -1023,7 +1023,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "body", "self.getAllSourceAssociations().getTarget() ->asOrderedSet()"
-		   });		
+		   });				
 		addAnnotation
 		  (associationEClass, 
 		   source, 
@@ -1070,7 +1070,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   new String[] {
 			 "body", "Sequence{self.firstEnd,self.secondEnd} -> select(ae | ae.linkedClass = clazz)\n",
 			 "description", "returns the association end for which the parameter class (clazz) is linked to"
-		   });		
+		   });													
 		addAnnotation
 		  (aspectEClass.getEOperations().get(0), 
 		   source, 
@@ -1097,7 +1097,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "body", "if self.title.oclIsUndefined() or self.title.size() = 0 then\r self.name \relse\r self.title \rendif"
-		   });		
+		   });			
 		addAnnotation
 		  (associationEndEClass.getEOperations().get(0), 
 		   source, 
@@ -1134,19 +1134,19 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "ClassWithTwoAttributesSameName InheritanceCycle"
-		   });																		
+		   });																					
 		addAnnotation
 		  (associationEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation"
-		   });									
+		   });																				
 		addAnnotation
 		  (abstractClassEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "TwoModelElementWithSameName NameNull noSpecialCharacters TwoAttributesSameName"
-		   });					
+		   });						
 	}
 
 } //ClazzPackageImpl

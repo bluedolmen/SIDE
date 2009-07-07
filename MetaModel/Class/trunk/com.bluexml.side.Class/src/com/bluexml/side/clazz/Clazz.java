@@ -15,6 +15,13 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Clazz</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: a class defines a category of instance of objects which shares exactly the same set of attributes. In ECM applications, a class relates to a content type.  S-IDE Data model describes data structure for persistence through class and attributes.
+ * Constraints: the fully qualified name of a class is compose of the successive names of the containing package and the attribute name of the class. This fully qualified name must be unique in your application. For instance, 'org.bluexml.library.mediaVideo' identifies the class mediaVideo contains in the 'library' package, itself contains in the 'bluexml' package, itself contains in the 'org' package.
+ * Example: in an Alfresco application the predefined 'cm:content' is modelized as a class.
+ * Inherits: - AbstractClass
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -88,6 +95,10 @@ public interface Clazz extends AbstractClass {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: this attribute indicates if the class is abstract; an abstract class cannot be instanciated but serve to define an object of more general level. For example, in the library, an abstract class 'media' may be defined to group all the kind of medias; the class 'mediaVideo' inherits of media to specialise 'media' as the media on video support.
+	 * Constraint: during modeling, think to class and abstract class as real life objects, class being a specialisation of abstract class like the class 'novel' inherits of the abstracts class 'book'.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Abstract</em>' attribute.
 	 * @see #setAbstract(boolean)
 	 * @see com.bluexml.side.clazz.ClazzPackage#getClazz_Abstract()
@@ -114,6 +125,9 @@ public interface Clazz extends AbstractClass {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: set this attribute to true if the class is no more used in new version of the model but is only kept to ensure compatibility with previous models.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Deprecated</em>' attribute.
 	 * @see #setDeprecated(boolean)
 	 * @see com.bluexml.side.clazz.ClazzPackage#getClazz_Deprecated()
