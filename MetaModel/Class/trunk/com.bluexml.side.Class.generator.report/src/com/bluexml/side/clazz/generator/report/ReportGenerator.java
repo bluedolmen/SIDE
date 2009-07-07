@@ -51,11 +51,11 @@ public class ReportGenerator extends AbstractAcceleoPackageGenerator{
 	 */
 	public static String getAuthor(){
 
-		String auteur = "John Doe";
+		String author = "John Doe";
 		if(!"".equals(getGenerationParameter(GENERATOR_CONFIGURATION_PARAMETER_AUTHOR))){
-			auteur = getGenerationParameter(GENERATOR_CONFIGURATION_PARAMETER_AUTHOR);
+			author = getGenerationParameter(GENERATOR_CONFIGURATION_PARAMETER_AUTHOR);
 		}
-		return auteur;
+		return author;
 	}
 
 	public Collection<IFile> complete() throws Exception {

@@ -8,8 +8,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 import com.bluexml.side.clazz.generator.alfresco.services.ClassServices
 import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
 %>
-<%script type="clazz.ClassPackage" name="path"%>
-report/BIRTReport/S-IDE/All_in_one_<%getDatePath%>.rptdesign
+
 <%script type="clazz.ClassPackage" name="alfrescoGeneretor_birt_allInOne" file="Content_type_report.rptdesign"%>
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.17" id="1">
