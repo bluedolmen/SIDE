@@ -28,7 +28,7 @@ public class Application {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
+		
 		String argument1 = "";
 		String argument2 = "";
 		String argument3 = "";
@@ -99,7 +99,7 @@ public class Application {
 				.println("\nMise à jour des numéros de version (si besoin)...");
 
 		Utils.traitementUpdate();
-		
+
 		// Commit
 		System.out.println("\nCommit des modifications sur le répository...");
 		execBuild("buildSVN", "svnCommit");
@@ -118,14 +118,14 @@ public class Application {
 			// les plugins et les features)
 			Utils.preTraitement();
 		}
-		
+
 		// Execution du build.xml
 		System.out.println("\nRéalisation du Build sur ...");
-		
-		for(String projet: Utils.getProjects()){
+
+		for (String projet : Utils.getProjects()) {
 			System.out.println("\t-" + projet);
 		}
-		
+
 		execBuild("build", "build");
 
 		// création du site.xml
@@ -139,6 +139,14 @@ public class Application {
 		System.out.println("\nDéplacement et suppression des répertoires");
 		Utils.finalTraitement();
 
+		/*
+		// Build des projets seul
+		System.out.println("Build des projets seul ...");
+		for (String projet : Utils.getProjectsToBuild()) {
+			System.out.println("\t-" + projet);
+		}
+		execBuild("build", "buildProject");
+		*/
 		System.out.println("\nFINISH !");
 		/*
 		 * }
@@ -263,7 +271,7 @@ public class Application {
 		out += "\n\t\t<delete dir=\"${buildDirectory}/${buildLabel}/${archivePrefix}/plugins/org.eclipse.equinox.launcher.${equinoxLauncherDirectoryVersion}\" />\n";
 		out += "\t\t<delete file=\"${buildDirectory}/${buildLabel}/${archivePrefix}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar\" />\n\n";
 		out += "\t\t<mkdir dir=\"${buildDirectory}/${buildLabel}/${archivePrefix}/features\"/>\n";
-		
+
 		for (int i = 0; i < projects.length; i++) {
 			if (projects[i].indexOf("feature") != -1
 					|| projects[i].equals("com.bluexml.side.Util")) {
@@ -272,8 +280,7 @@ public class Application {
 						+ "_"
 						+ Utils.getVersionNumber(projects[i])
 						+ ".jar\" basedir=\"${buildDirectory}/features/"
-						+ projects[i]
-						+ "\" />\n";
+						+ projects[i] + "\" />\n";
 				out += "\t\t<delete dir=\"${buildDirectory}/${buildLabel}/${archivePrefix}/features/"
 						+ projects[i] + "\" />\n\n";
 			}
@@ -282,6 +289,8 @@ public class Application {
 		out += "\t</target>\n";
 
 		out += getGenJavadoc();
+
+		out += getBuildProject();
 
 		out += "</project>\n";
 		return out;
@@ -463,13 +472,15 @@ public class Application {
 				// si le mot 'feature' n'est pas présent dans le nom du projet
 				if (projects[i].indexOf("feature") == -1)
 					out += "\t\t\t<checkout url=\"" + Utils.getRepository()
-							+ "S-IDE/" + Utils.getProjectPath(projects[i]) + "/trunk/" + projects[i]
+							+ "S-IDE/" + Utils.getProjectPath(projects[i])
+							+ "/trunk/" + projects[i]
 							+ "\" destPath=\"${pluginsPath}" + File.separator
 							+ projects[i] + "\" />\n";
 				// si 'feature' est présent
 				else if (projects[i].indexOf("feature") != -1)
 					out += "\t\t\t<checkout url=\"" + Utils.getRepository()
-							+ "S-IDE/" + Utils.getProjectPath(projects[i]) + "/trunk/" + projects[i]
+							+ "S-IDE/" + Utils.getProjectPath(projects[i])
+							+ "/trunk/" + projects[i]
 							+ "\" destPath=\"${featuresPath}" + File.separator
 							+ projects[i] + "\" />\n";
 
@@ -566,8 +577,9 @@ public class Application {
 		out += "\t================================= -->\n\n";
 
 		out += "\t<target name=\"genJavadoc\" depends=\"\" description=\"description\">\n";
-		out += "\t\t<javadoc destdir=\"${buildDir}"+File.separator+"${codeName}" + File.separator
-				+ "doc" + File.separator + Utils.getCodeName() + File.separator +"Javadoc\">\n";
+		out += "\t\t<javadoc destdir=\"${buildDir}" + File.separator
+				+ "${codeName}" + File.separator + "doc" + File.separator
+				+ Utils.getCodeName() + File.separator + "Javadoc\">\n";
 
 		for (int i = 0; i < projects.length; i++) {
 			// si le mot 'feature' n'est pas présent dans le nom du projet
@@ -579,6 +591,40 @@ public class Application {
 			}
 		}
 		out += "\t\t</javadoc>\n";
+
+		out += "\t</target>\n";
+		return out;
+	}
+
+	/**
+	 * Retourne le corps de la target genJavadoc
+	 */
+	private static String getBuildProject() {
+		String[] projects = Utils.getProjectsToBuild();
+
+		String out = "\n\t<!-- ================================= \n";
+		out += "\t\t\ttarget: buildProject\n";
+		out += "\t================================= -->\n\n";
+
+		out += "\t<target name=\"buildProject\" depends=\"\" description=\"description\">\n";
+		for (int i = 0; i < projects.length; i++) {
+			out += "\t\t\t<mkdir dir=\"" + Utils.getFinalDirectory() + File.separator + "bin" + File.separator + "Ankle" + File.separator + projects[i] + "\" />\n";
+			out += "\t\t\t<javac destdir=\""
+					+ Utils.getFinalDirectory() + File.separator + "bin"
+					+ File.separator + "Ankle" + File.separator + projects[i]
+					+ "\" srcdir=\"" + workspace + File.separator + "S-IDE"
+					+ File.separator + Utils.getProjectToBuildPath(projects[i])
+					+ File.separator + "trunk" + File.separator + projects[i]
+					+ File.separator + "src" + "\">\n";
+			out += "\t\t\t\t<classpath>\n";
+			out += "\t\t\t\t\t<pathelement location=\"${eclipseLocation}/plugins/*\" />\n";
+			out += "\t\t\t\t\t<pathelement location=\"" + workspace + File.separator
+					+ "S-IDE" + File.separator
+					+ Utils.getProjectToBuildPath(projects[i]) + File.separator
+					+ "trunk" + File.separator + projects[i] + File.separator + "*\" />\n";
+			out += "\t\t\t\t</classpath>\n";
+			out += "</javac>\n";
+		}
 
 		out += "\t</target>\n";
 		return out;

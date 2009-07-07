@@ -93,6 +93,43 @@ public class Utils {
 	}
 
 	/**
+	 * Retourne la liste des projets a compiler seulement
+	 * 
+	 * @return la liste des projets
+	 */
+	public static String[] getProjectsToBuild() {
+		String[] projects = ouvrirFichier("build.properties").getProperty(
+				"projectToBuild").split(",");
+
+		for (int i = 0; i < projects.length; i++) {
+			projects[i] = projects[i].split("&")[1];
+		}
+
+		return projects;
+	}
+
+	/**
+	 * Retourne le chemin pour un projet (de la liste des projets a compiler
+	 * seulement) donné (par exemple MetaModel/Application pour le projet
+	 * com.bluexml.side.Application
+	 * 
+	 * @param projectName
+	 * @return
+	 */
+	public static String getProjectToBuildPath(String projectName) {
+		String[] projects = ouvrirFichier("build.properties").getProperty(
+				"projectToBuild").split(",");
+
+		String path = "";
+		for (int i = 0; i < projects.length; i++) {
+			if (projects[i].split("&")[1].equals(projectName)) {
+				path = projects[i].split("&")[0];
+			}
+		}
+		return path;
+	}
+
+	/**
 	 * Return the Build Path: /home/stager/buildAuto/Ankle
 	 */
 	public static String getBuildPath() {
@@ -864,35 +901,46 @@ public class Utils {
 	 * 
 	 */
 	public static void finalTraitement() {
+
+		File finalFeatures = new File(getFinalDirectory() + File.separator
+				+ getArchivePrefix() + File.separator + getCodeName()
+				+ File.separator + getRevisionNumber() + File.separator
+				+ "features");
+		File finalPlugins = new File(getFinalDirectory() + File.separator
+				+ getArchivePrefix() + File.separator + getCodeName()
+				+ File.separator + getRevisionNumber() + File.separator
+				+ "plugins");
+
+		File finalSite = new File(getFinalDirectory() + File.separator
+				+ getArchivePrefix() + File.separator + getCodeName()
+				+ File.separator + getRevisionNumber() + File.separator
+				+ "site.xml");
+
 		try {
 			// suppression du dossier final s'il éxiste
 			if (!new File(getFinalDirectory()).exists())
 				new File(getFinalDirectory()).mkdir();
 
+			if (finalFeatures.exists()) {
+				FileHelper.deleteFile(finalFeatures);
+				finalFeatures.mkdir();
+			}
+			if (finalPlugins.exists()) {
+				FileHelper.deleteFile(finalPlugins);
+				finalPlugins.mkdir();
+			}
+
 			// copie de l'update site
-			FileHelper
-					.copyFiles(
-							new File(getBuildDirectory() + File.separator
-									+ getBuildLabel() + File.separator
-									+ getArchivePrefix() + File.separator
-									+ "features"), new File(getFinalDirectory()
-									+ File.separator + getArchivePrefix()
-									+ File.separator + getCodeName()
-									+ File.separator + getRevisionNumber()
-									+ File.separator + "features"), true);
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
 					+ getBuildLabel() + File.separator + getArchivePrefix()
-					+ File.separator + "plugins"), new File(getFinalDirectory()
-					+ File.separator + getArchivePrefix() + File.separator
-					+ getCodeName() + File.separator + getRevisionNumber()
-					+ File.separator + "plugins"), true);
+					+ File.separator + "features"), finalFeatures, true);
+			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
+					+ getBuildLabel() + File.separator + getArchivePrefix()
+					+ File.separator + "plugins"), finalPlugins, true);
 
 			// copie du site.xml pour l'update site
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
-					+ "site.xml"), new File(getFinalDirectory()
-					+ File.separator + getArchivePrefix() + File.separator
-					+ getCodeName() + File.separator + getRevisionNumber()
-					+ File.separator + "site.xml"), true);
+					+ "site.xml"), finalSite, true);
 
 			// copie de l'update site
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
@@ -915,7 +963,8 @@ public class Utils {
 
 			// copie de la doc
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
-					+ "doc"), new File(getFinalDirectory() + File.separator + "doc"), true);
+					+ "doc"), new File(getFinalDirectory() + File.separator
+					+ "doc"), true);
 
 			// copie des fichiers compilés
 			if (!new File(getFinalDirectory() + File.separator + "logs")
@@ -938,8 +987,8 @@ public class Utils {
 
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "logbuildbuild.txt"), new File(getFinalDirectory()
-					+ File.separator + "logs" + File.separator
-					+ getCodeName() + File.separator + "logBuild.txt"), true);
+					+ File.separator + "logs" + File.separator + getCodeName()
+					+ File.separator + "logBuild.txt"), true);
 
 			if (!Application.parametre) {
 				FileHelper.copyFiles(new File(getBuildPath() + File.separator
