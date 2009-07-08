@@ -941,9 +941,9 @@ public class Utils {
 			if (new File(getFinalDirectory() + File.separator
 					+ getArchivePrefix() + File.separator + getCodeName()
 					+ File.separator + "features").exists()) {
-				FileHelper.deleteFile(new File(getFinalDirectory() + File.separator
-						+ getArchivePrefix() + File.separator + getCodeName()
-						+ File.separator + "features"));
+				FileHelper.deleteFile(new File(getFinalDirectory()
+						+ File.separator + getArchivePrefix() + File.separator
+						+ getCodeName() + File.separator + "features"));
 				new File(getFinalDirectory() + File.separator
 						+ getArchivePrefix() + File.separator + getCodeName()
 						+ File.separator + "features").mkdir();
@@ -951,9 +951,9 @@ public class Utils {
 			if (new File(getFinalDirectory() + File.separator
 					+ getArchivePrefix() + File.separator + getCodeName()
 					+ File.separator + "plugins").exists()) {
-				FileHelper.deleteFile(new File(getFinalDirectory() + File.separator
-						+ getArchivePrefix() + File.separator + getCodeName()
-						+ File.separator + "plugins"));
+				FileHelper.deleteFile(new File(getFinalDirectory()
+						+ File.separator + getArchivePrefix() + File.separator
+						+ getCodeName() + File.separator + "plugins"));
 				new File(getFinalDirectory() + File.separator
 						+ getArchivePrefix() + File.separator + getCodeName()
 						+ File.separator + "plugins").mkdir();
@@ -978,8 +978,6 @@ public class Utils {
 					+ File.separator + getArchivePrefix() + File.separator
 					+ getCodeName() + File.separator + "site.xml"), true);
 
-			
-			
 			// copie de la doc
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "doc"), new File(getFinalDirectory() + File.separator
@@ -1057,6 +1055,8 @@ public class Utils {
 					+ File.separator + "build.xml"));
 			FileHelper.deleteFile(new File(Utils.getBuildPath()
 					+ File.separator + "buildAuto.product"));
+			FileHelper.deleteFile(new File(Utils.getBuildPath()
+					+ File.separator + "jarBuilder.xml"));
 
 			// suppression des fichiers de logs
 			FileHelper.deleteFile(new File(getBuildPath() + File.separator

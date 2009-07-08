@@ -132,6 +132,10 @@ public class Application {
 		System.out.println("\nUpdate du site.xml");
 		// createFile(getCorpsSite(), Utils.getBuildPath(), "site.xml");
 		Utils.updateSiteXml();
+		
+		//creation de jar pour les plugins qui ne le sont pas
+		createFile(getJarBuilder(), Utils.getBuildPath(), "jarBuilder.xml");
+		execBuild("jarBuilder", "jarBuilder");
 
 		// traitement final
 
@@ -626,6 +630,41 @@ public class Application {
 		}
 
 		out += "\t</target>\n";
+		return out;
+	}
+	
+	private static String getJarBuilder(){
+		
+		String out = "<?xml version=\"1.0\"?>\n";
+		out += "<project name=\"jarBuilder\" default=\"jarBuilder\">\n";
+		out += "\t<property file=\"build.properties\" />\n";
+		
+		out += "\n\t<!-- ================================= \n";
+		out += "\t\t\ttarget: jarBuilder\n";
+		out += "\t================================= -->\n\n";
+		
+		out += "\t<target name=\"jarBuilder\" depends=\"\" description=\"description\">\n";
+		
+		// On va parcourir les plugins, et si des plugins n'ont pas étés mis en
+		// jar on le fait manuelement
+		File pluginRep = new File(Utils.getBuildDirectory() + File.separator
+				+ Utils.getBuildLabel() + File.separator + Utils.getArchivePrefix()
+				+ File.separator + "plugins");
+
+		File[] list = pluginRep.listFiles();
+		for (File file : list) {
+			if (file.isDirectory()) {
+				
+				out += "\t\t<jar destfile=\""+ file.getAbsolutePath()
+					+ ".jar\" basedir=\""
+					+ file.getAbsolutePath() + "\" />\n";
+				
+				out += "\t\t<delete dir=\""+ file.getAbsolutePath() +"\" />";
+			}
+		}
+		
+		out += "\t</target>\n";
+		
 		return out;
 	}
 
