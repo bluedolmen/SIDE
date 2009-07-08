@@ -19,29 +19,55 @@ public class Application {
 
 	public static void main(String[] args) {
 		String eclipsePath = "";
-		try{
+		String projectName = "com.bluexml.side";
+		if(args.length != 0) {
 			eclipsePath = args[0];
-		} catch (Exception e) {
-			System.out.println("Indiquez le chemin de votre Eclipse en paramètre svp...");
+			if(args.length == 2){
+				projectName = args[1];
+			}
+		} else {
+			System.out.println("Parameter 1 -> the eclipse path to clean.");
+			System.out
+					.println("Parameter 2 -> the project name (default 'com.bluexml.side').");
+			System.out
+					.println("\nThis application will clean eclipse of any part of the project given in parameter.");
+			System.out.println("Examples:");
+			System.out
+					.println("\t- If you gives 'com.bluexml.side.Application', -> only this project will be deleted from eclipse.");
+			System.out
+					.println("\t- If you gives 'com.bluexml.side', -> all projects who contains this name will be deleted.");
 			System.exit(0);
 		}
 		
+		
 
-		cleanArtifact(eclipsePath);
+		cleanArtifact(projectName, eclipsePath);
 
-		cleanProjects(eclipsePath, "features");
+		cleanProjects(projectName, eclipsePath, "features");
 
-		cleanProjects(eclipsePath, "plugins");
+		cleanProjects(projectName, eclipsePath, "plugins");
 	}
 
-	private static void cleanProjects(String eclipsePath, String folderName) {
+	/**
+	 * Delete all the file which contain the project name into the folder
+	 * features or plugins
+	 * 
+	 * @param projectName
+	 *            The project name
+	 * @param eclipsePath
+	 *            The path to the eclipse
+	 * @param folderName
+	 *            The name folder to clean ('features' or 'plugins')
+	 */
+	private static void cleanProjects(String projectName, String eclipsePath,
+			String folderName) {
 
 		File folder = new File(eclipsePath + File.separator + folderName);
 
 		String[] files = folder.list();
 
 		for (int i = 0; i < files.length; i++) {
-			if (files[i].indexOf("com.bluexml.side") != -1) {
+			if (files[i].indexOf(projectName) != -1) {
 				FileHelper.deleteFile(new File(eclipsePath + File.separator
 						+ folderName + File.separator + files[i]));
 			}
@@ -49,9 +75,18 @@ public class Application {
 
 	}
 
-	private static void cleanArtifact(String eclipsePath) {
+	/**
+	 * 
+	 * Clean the artifac.xml of all the projects given in parameter
+	 * 
+	 * @param projectName
+	 *            The project to delete
+	 * @param eclipsePath
+	 *            The path to the eclipse
+	 */
+	private static void cleanArtifact(String projectName, String eclipsePath) {
 		List<Element> listeArtifact = new ArrayList<Element>();
-		
+
 		org.jdom.Document document = null;
 		org.jdom.Element racine;
 
@@ -82,7 +117,7 @@ public class Application {
 
 			// On crée une List contenant tous les noeuds "artifact" de
 			// l'Element racine
-			
+
 			Element parent = (Element) i.next();
 			List<?> listArtifact = parent.getChildren("artifact");
 
@@ -92,17 +127,13 @@ public class Application {
 			while (j.hasNext()) {
 
 				Element courant = (Element) j.next();
-				System.out.println(courant.getAttributeValue("id"));
-				if ((courant.getAttributeValue("id"))
-						.indexOf("com.bluexml.side") != -1) {
-					
-					System.out.println(courant.getAttributeValue("id"));
+				if ((courant.getAttributeValue("id")).indexOf(projectName) != -1) {
 					listeArtifact.add(courant);
-					//parent.removeContent(courant);
+					// parent.removeContent(courant);
 				}
 			}
-			
-			for(Element element: listeArtifact){
+
+			for (Element element : listeArtifact) {
 				parent.removeContent(element);
 			}
 		}
