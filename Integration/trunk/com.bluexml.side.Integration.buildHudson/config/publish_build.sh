@@ -24,9 +24,18 @@ echo dest=$dest - $rev_build_src_nb
       ls $src_dir
       exit -1
     else 
-SSH_AUTH_SOCK=/tmp/ssh-uvGWL23781/agent.23781; export SSH_AUTH_SOCK;
-SSH_AGENT_PID=23782; export SSH_AGENT_PID;
-      scp -r $src_dir/$rev_build_src_nb root@www.bluexml.com:/data/www/virtuals/b/l/u/bluexml.com/www/html/static/update-site/SIDE/$dest
+      # set ssh-agent env var to copy on gimly www.bluexml.com
+      ssh_agent_pid=`ps -C ssh-agent -o pid=`
+      ssh_agent_father_pid=`ps -C ssh-agent -o ppid=`
+      if [ $ssh_agent_pid -gt 0 ];then
+        ssh_agent_dir=`ls /tmp|grep ssh-|grep $ssh_agent_ppid`
+        SSH_AUTH_SOCK=/tmp/$ssh_agent_dir/agent.$ssh_agentppid; export SSH_AUTH_SOCK;
+        SSH_AGENT_PID=$ssh_agent_pid; export SSH_AGENT_PID;
+        scp -r $src_dir/$rev_build_src_nb root@www.bluexml.com:/data/www/virtuals/b/l/u/bluexml.com/www/html/static/update-site/SIDE/$dest
+      else
+        echo " ERROR: ssh-agent is not started; unable to publish local update site on www.bluexml.com update site
+        exit -1
+      fi
     fi
   else 
     echo " ERROR: first parameter must be devel or public. enter "publish_build" for usage"
