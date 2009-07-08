@@ -665,6 +665,8 @@ public class Application {
 		
 		out += "\t</target>\n";
 		
+		out += "</project>";
+		
 		return out;
 	}
 
