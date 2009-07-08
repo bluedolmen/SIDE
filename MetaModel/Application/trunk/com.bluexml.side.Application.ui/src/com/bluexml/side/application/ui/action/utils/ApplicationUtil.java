@@ -11,6 +11,7 @@ import java.util.Set;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -30,12 +31,15 @@ import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.application.ui.action.tree.Deployer;
 import com.bluexml.side.application.ui.action.tree.Generator;
+import com.bluexml.side.application.ui.action.tree.ImplNode;
+import com.bluexml.side.application.ui.action.tree.TreeElement;
+import com.bluexml.side.util.security.Checkable;
 
 public class ApplicationUtil {
 	/**
 	 * Return the configuration corresponding to the given key in the current
 	 * configuration. Return null if not found.
-	 * 
+	 *
 	 * @param key
 	 * @return
 	 */
@@ -56,7 +60,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return models of the application
-	 * 
+	 *
 	 * @param application
 	 * @return
 	 */
@@ -77,17 +81,17 @@ public class ApplicationUtil {
 	 */
 	public static void deleteGeneratorFromConf(Configuration config, Generator in) {
 		Set<GeneratorConfiguration> eltsGc = new HashSet<GeneratorConfiguration>();
-		
+
 		for (GeneratorConfiguration gc : config.getGeneratorConfigurations()) {
-			if (gc.getId().equals(in.getId()) 
-					&& gc.getId_techno_version().equals(in.getParent().getId()) 
+			if (gc.getId().equals(in.getId())
+					&& gc.getId_techno_version().equals(in.getParent().getId())
 					&& gc.getId_metamodel().equals(in.getParent().getParent().getParent().getId()) ) {
 				eltsGc.add(gc);
 			}
 		}
 		config.getGeneratorConfigurations().removeAll(eltsGc);
 	}
-	
+
 	/**
 	 * Delete the given deployer from the given configuration
 	 * @param config
@@ -97,15 +101,15 @@ public class ApplicationUtil {
 			Deployer in) {
 		Set<DeployerConfiguration> eltsDc = new HashSet<DeployerConfiguration>();
 		for (DeployerConfiguration dc : config.getDeployerConfigurations()) {
-			if(dc.getId().equals(in.getId()) 
-					&& dc.getId_techno_version().equals(in.getParent().getId()) 
+			if(dc.getId().equals(in.getId())
+					&& dc.getId_techno_version().equals(in.getParent().getId())
 					&& dc.getImpl_class().equals(((Deployer)in).getLaunchClass())) {
 				eltsDc.add(dc);
 			}
 		}
 		config.getDeployerConfigurations().removeAll(eltsDc);
 	}
-	
+
 	/**
 	 * Return the list of componant configuration for a specific config
 	 * @param config
@@ -134,10 +138,10 @@ public class ApplicationUtil {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Return a map with association model <> metaModel name
-	 * 
+	 *
 	 * @param models
 	 * @param doValidation
 	 * @return
@@ -147,9 +151,9 @@ public class ApplicationUtil {
 	public static Map<String, List<IFile>> getAssociatedMetaModel(List<Model> models) throws IOException {
 		Map<String, List<IFile>> result = new HashMap<String, List<IFile>>();
 		for (Model model : models) {
-			
+
 			IFile file = getIFileForModel(model);
-			
+
 			EPackage metaModel = getMetaModelForModel(model);
 
 			if (metaModel != null) {
@@ -234,10 +238,10 @@ public class ApplicationUtil {
 		ResourceSet rs = modelResource.getResourceSet();
 		return rs;
 	}
-	
+
 	/**
 	 * Return the meta model EPackage
-	 * 
+	 *
 	 * @param r
 	 * @return
 	 */
@@ -250,10 +254,10 @@ public class ApplicationUtil {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Return the root element of a model
-	 * 
+	 *
 	 * @param model
 	 * @return
 	 */
@@ -269,7 +273,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Take a EObject and will return the top container
-	 * 
+	 *
 	 * @param eo
 	 * @return
 	 */
@@ -280,10 +284,10 @@ public class ApplicationUtil {
 			return eo;
 		}
 	}
-	
+
 	/**
 	 * Launch validation on given EObject
-	 * 
+	 *
 	 * @param eo
 	 * @return
 	 */
@@ -292,8 +296,8 @@ public class ApplicationUtil {
 		BasicDiagnostic diagnostics = diag.createDefaultDiagnostic(eo);
 		return diag.validate(eo, diagnostics);
 	}
-	
-	
+
+
 	public static boolean validate(IFile modelFile) throws IOException {
 		Resource loadedModel = null;
 		String fullPath = modelFile.getRawLocation().toOSString();
@@ -322,5 +326,35 @@ public class ApplicationUtil {
 		}
 	}
 
-	
+	/**
+	 * Check if the element given is active in the key
+	 *
+	 * @param el
+	 *            : the element
+	 * @return true if valid, false if not
+	 */
+	@SuppressWarnings("unchecked")
+	public static Boolean checkElementValidity(TreeElement el) {
+		// If the element is a component and not valid we don't enable it
+		try {
+			ImplNode iN = ((ImplNode) el);
+			Class<Checkable> gen;
+			if (Platform.getBundle(iN.getId()) != null) {
+				gen = Platform.getBundle(iN.getId()).loadClass(iN.getLaunchClass());
+				Checkable gener = gen.newInstance();
+				return gener.check();
+			} else {
+				throw new Exception("Error : " + iN.getId() + " isn't found as a plugin. Check your extension file.");
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

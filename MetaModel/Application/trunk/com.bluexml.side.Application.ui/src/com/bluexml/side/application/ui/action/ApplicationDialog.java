@@ -23,9 +23,7 @@ import org.eclipse.core.internal.resources.Project;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -37,15 +35,11 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.CellEditor;
-import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.jface.viewers.ILabelProviderListener;
-import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.accessibility.AccessibleAdapter;
@@ -59,7 +53,6 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Cursor;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
@@ -101,22 +94,20 @@ import com.bluexml.side.application.ui.action.table.GeneratorParameterCellModifi
 import com.bluexml.side.application.ui.action.table.GeneratorParameterContentProvider;
 import com.bluexml.side.application.ui.action.table.GeneratorParameterDataStructure;
 import com.bluexml.side.application.ui.action.table.GeneratorParameterLabelProvider;
+import com.bluexml.side.application.ui.action.tree.ConfigurationContentProvider;
+import com.bluexml.side.application.ui.action.tree.ConfigurationLabelProvider;
 import com.bluexml.side.application.ui.action.tree.Deployer;
 import com.bluexml.side.application.ui.action.tree.Generator;
 import com.bluexml.side.application.ui.action.tree.ImplNode;
 import com.bluexml.side.application.ui.action.tree.Metamodel;
 import com.bluexml.side.application.ui.action.tree.OptionComponant;
-import com.bluexml.side.application.ui.action.tree.OptionDeployer;
-import com.bluexml.side.application.ui.action.tree.OptionGenerator;
 import com.bluexml.side.application.ui.action.tree.Technology;
-import com.bluexml.side.application.ui.action.tree.TechnologyVersion;
 import com.bluexml.side.application.ui.action.tree.TreeElement;
 import com.bluexml.side.application.ui.action.tree.TreeNode;
 import com.bluexml.side.application.ui.action.tree.TreeView;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 import com.bluexml.side.application.ui.action.utils.validator.FolderSelectionValidator;
 import com.bluexml.side.application.ui.action.utils.viewFilter.SideFileFiter;
-import com.bluexml.side.util.security.Checkable;
 
 @SuppressWarnings("restriction")
 public class ApplicationDialog extends Dialog {
@@ -136,6 +127,7 @@ public class ApplicationDialog extends Dialog {
 	private Map<String, GeneratorParameter> deployerParameters;
 	private Map<String, List<String>> genParamConfByGenerator;
 	private Map<String, List<String>> deployParamConfByGenerator;
+
 	private Browser documentationText;
 	private static Application application;
 	private IFile model;
@@ -166,11 +158,9 @@ public class ApplicationDialog extends Dialog {
 
 	public static List<String> staticFieldsName = Arrays.asList(KEY_GENPATH, KEY_LOGPATH, KEY_SKIPVALIDATION, KEY_VERBOSE);
 
-	private static String EXTENSIONPOINT_ID = "com.bluexml.side.Application.com_bluexml_application_configuration";
-
 	/**
 	 * Create the dialog
-	 * 
+	 *
 	 * @param parentShell
 	 * @param rwm_model
 	 */
@@ -301,7 +291,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Refresh option for the given configuration
-	 * 
+	 *
 	 * @param configuration
 	 */
 	public void refreshOptions(Configuration configuration) {
@@ -427,7 +417,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return all ImplNode (Generator, Deployer) for the given tree
-	 * 
+	 *
 	 * @param tv
 	 * @return
 	 */
@@ -448,7 +438,7 @@ public class ApplicationDialog extends Dialog {
 	/**
 	 * Will search the dataStructure where is save all generation option and
 	 * will add value from the application model
-	 * 
+	 *
 	 * @param configuration
 	 */
 	private void configureGeneratorOptions(Configuration configuration) {
@@ -481,7 +471,7 @@ public class ApplicationDialog extends Dialog {
 	/**
 	 * Return the selected generator, or null if no generator top to the
 	 * selected element or non selected generator.
-	 * 
+	 *
 	 * @param o
 	 * @return
 	 */
@@ -513,7 +503,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return the model for the given FilePath
-	 * 
+	 *
 	 * @param text
 	 * @return
 	 */
@@ -534,7 +524,7 @@ public class ApplicationDialog extends Dialog {
 	/**
 	 * Return the selected generator, or null if no generator top to the
 	 * selected element or non selected generator.
-	 * 
+	 *
 	 * @param o
 	 * @return
 	 */
@@ -556,7 +546,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Load data in given tree for the given configuration
-	 * 
+	 *
 	 * @param configuration
 	 * @param generators
 	 */
@@ -636,37 +626,7 @@ public class ApplicationDialog extends Dialog {
 		}
 	}
 
-	/**
-	 * Check if the element given is active in the key
-	 * 
-	 * @param el
-	 *            : the element
-	 * @return true if valid, false if not
-	 */
-	@SuppressWarnings("unchecked")
-	private Boolean checkElementValidity(TreeElement el) {
-		// If the element is a component and not valid we don't enable it
-		try {
-			ImplNode iN = ((ImplNode) el);
-			Class<Checkable> gen;
-			if (Platform.getBundle(iN.getId()) != null) {
-				gen = Platform.getBundle(iN.getId()).loadClass(iN.getLaunchClass());
-				Checkable gener = gen.newInstance();
-				return gener.check();
-			} else {
-				throw new Exception("Error : " + iN.getId() + " isn't found as a plugin. Check your extension file.");
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+
 
 	/**
 	 * Open file dialog box to select files (here a model)
@@ -706,7 +666,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Create contents of the dialog
-	 * 
+	 *
 	 * @param parent
 	 */
 	@Override
@@ -797,7 +757,7 @@ public class ApplicationDialog extends Dialog {
 		tree_1.setBounds(0, 142, 459, 304);
 		List<Class<?>> omitedClassForGen = new ArrayList<Class<?>>();
 		omitedClassForGen.add(Deployer.class);
-		genOptionsTree.setContentProvider(new ConfigurationContentProvider(Metamodel.class, omitedClassForGen, genOptionsTree));
+		genOptionsTree.setContentProvider(new ConfigurationContentProvider(Metamodel.class, omitedClassForGen, genOptionsTree, configurationParameters, deployerParameters, genParamConfByGenerator, deployParamConfByGenerator));
 		genOptionsTree.setLabelProvider(new ConfigurationLabelProvider());
 		genOptionsTree.setInput(this);
 		genOptionsTree.expandAll();
@@ -955,7 +915,7 @@ public class ApplicationDialog extends Dialog {
 
 		List<Class<?>> omitedClassForDeploy = new ArrayList<Class<?>>();
 		omitedClassForDeploy.add(Generator.class);
-		deployOptionsTree.setContentProvider(new ConfigurationContentProvider(Technology.class, omitedClassForDeploy, deployOptionsTree));
+		deployOptionsTree.setContentProvider(new ConfigurationContentProvider(Technology.class, omitedClassForDeploy, deployOptionsTree, configurationParameters, deployerParameters, genParamConfByGenerator, deployParamConfByGenerator));
 		deployOptionsTree.setLabelProvider(new ConfigurationLabelProvider());
 		deployOptionsTree.setInput(this);
 		deployOptionsTree.expandAll();
@@ -1151,7 +1111,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Display the select folder box (only in workspace)
-	 * 
+	 *
 	 * @param message
 	 * @return
 	 */
@@ -1182,7 +1142,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Remove the selected model(s)
-	 * 
+	 *
 	 * @param selection
 	 */
 	private void removeModel(String[] selection) {
@@ -1247,7 +1207,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Build a html string for documentation on generator parameter
-	 * 
+	 *
 	 * @return
 	 */
 	private String buildHelpDocumentationText(String documentation) {
@@ -1259,7 +1219,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Build the documentation text
-	 * 
+	 *
 	 * @return
 	 */
 	private String builDocumentationText() {
@@ -1288,7 +1248,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Create contents of the button bar
-	 * 
+	 *
 	 * @param parent
 	 */
 	@Override
@@ -1360,7 +1320,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return the configuration equals to the given name.
-	 * 
+	 *
 	 * @param p_name
 	 * @return
 	 */
@@ -1370,7 +1330,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return the current configuration name
-	 * 
+	 *
 	 * @return
 	 */
 	static public String getCurrentConfiguratioName() {
@@ -1383,7 +1343,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return the configuration being edited
-	 * 
+	 *
 	 * @return
 	 */
 	static public Configuration getCurrentConfiguration() {
@@ -1407,7 +1367,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Show a confirmation message
-	 * 
+	 *
 	 * @param title
 	 * @param message
 	 * @return
@@ -1424,7 +1384,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Show an alert message
-	 * 
+	 *
 	 * @param title
 	 * @param message
 	 */
@@ -1436,424 +1396,11 @@ public class ApplicationDialog extends Dialog {
 		mb.setMessage(message);
 	}
 
-	/**
-	 ******************** INTERNAL CLASS ********************************
-	 */
+	//**** Internal class
 
-	/**
-	 * Content provider for Tree
-	 */
-	class ConfigurationContentProvider implements ITreeContentProvider {
-
-		private Map<?, ?> rootSet;
-		private Map<String, Metamodel> metamodelSet = new HashMap<String, Metamodel>();
-		private Map<String, Technology> technologySet = new HashMap<String, Technology>();
-		private Map<String, TechnologyVersion> technologyVersionSet = new HashMap<String, TechnologyVersion>();
-		private Map<String, Generator> generatorSet = new HashMap<String, Generator>();
-		private Map<String, Deployer> deployerSet = new HashMap<String, Deployer>();
-		private Map<String, OptionGenerator> optGeneratorSet = new HashMap<String, OptionGenerator>();
-		private Map<String, OptionDeployer> optDeployerSet = new HashMap<String, OptionDeployer>();
-		private Map<Class<?>, Map<?, ?>> classByLevel = new HashMap<Class<?>, Map<?, ?>>();
-		private Class<?> neededRootClass;
-		List<?> omitedObject;
-		private TreeView root;
-
-		public ConfigurationContentProvider(Class<?> p_neededRootClass, List<?> p_ommitedObject, TreeView p_tv) {
-			root = p_tv;
-			neededRootClass = p_neededRootClass;
-			if (p_ommitedObject != null) {
-				omitedObject = p_ommitedObject;
-			} else {
-				omitedObject = new ArrayList<Class<?>>();
-			}
-			initializeClassByLevel();
-			if (classByLevel.containsKey(neededRootClass)) {
-				rootSet = classByLevel.get(neededRootClass);
-			} else {
-				rootSet = metamodelSet;
-			}
-		}
-
-		/**
-		 * Initialize the map with Class --> Set corresponding
-		 */
-		private void initializeClassByLevel() {
-			classByLevel.put(Metamodel.class, metamodelSet);
-			classByLevel.put(Technology.class, technologySet);
-			classByLevel.put(TechnologyVersion.class, technologyVersionSet);
-			classByLevel.put(Generator.class, generatorSet);
-			classByLevel.put(Deployer.class, deployerSet);
-			classByLevel.put(OptionGenerator.class, optGeneratorSet);
-			classByLevel.put(OptionDeployer.class, optDeployerSet);
-		}
-
-		public Object[] getChildren(Object object) {
-			if (object instanceof TreeNode) {
-				TreeNode elt = (TreeNode) object;
-				return elt.getChildren().toArray();
-			}
-			return null;
-		}
-
-		public Object getParent(Object object) {
-			if (object instanceof TreeNode) {
-				return ((TreeNode) object).getParent();
-			}
-			return null;
-		}
-
-		public boolean hasChildren(Object arg0) {
-			// Get the children
-			Object[] obj = getChildren(arg0);
-
-			// Return whether the parent has children
-			return obj == null ? false : obj.length > 0;
-		}
-
-		/**
-		 * Return the elements corresponding (root nodes or childrens)
-		 */
-		public Object[] getElements(Object object) {
-			if (object instanceof ApplicationDialog) {
-				initialize();
-				for (Object o : rootSet.values()) {
-					if (o instanceof TreeNode) {
-						((TreeNode) o).setEnabled(true);
-					}
-				}
-				return rootSet.values().toArray();
-			} else
-				return getChildren(object);
-		}
-
-		/**
-		 * Read all extension point and construct the tree
-		 */
-		public void initialize() {
-			IConfigurationElement[] contributions = Platform.getExtensionRegistry().getConfigurationElementsFor(EXTENSIONPOINT_ID);
-			System.err.println("-----------------------------------------------------------------");
-			for (IConfigurationElement config : contributions) {
-				System.err.println("");
-				System.err.println("________________________________________________________");
-				System.err.println("DEBUG : " + config.getName() + " " + config.getNamespaceIdentifier() + " (" + config.getAttribute("id") + " " + config.getAttribute("name") + ")");
-				manageConfiguration(config, null);
-				System.err.println("________________________________________________________");
-			}
-			initializeFromKey();
-		}
-
-		/**
-		 * For each element of the extension will manage it and create the
-		 * corresponding object
-		 * 
-		 * @param config
-		 * @param parent
-		 */
-		private void manageConfiguration(IConfigurationElement config, TreeNode parent) {
-			TreeNode futurParent = null;
-			// Scan for metamodels
-			if (config.getName().equalsIgnoreCase("metamodel")) {
-				// We create the metal for this config element
-				Metamodel m = new Metamodel(config, root);
-				// We check if we already have this metamodel in your set
-				if (!metamodelSet.containsKey(m.getId())) {
-					metamodelSet.put(m.getId(), m);
-					System.err.println("\t + Add metamodel " + m.getId());
-				} else {
-					m = metamodelSet.get(m.getId());
-					System.err.println("\t * Get metamodel " + m.getId());
-				}
-				futurParent = m;
-			}
-
-			// Scan for technology
-			if (!omitedObject.contains(Technology.class) && config.getName().equalsIgnoreCase("technology")) {
-				Technology t = new Technology(config, (Metamodel) parent, root);
-				String fullId = t.getFullId();
-				if (!technologySet.containsKey(fullId) || (rootSet != technologySet && parent != technologySet.get(fullId).getParent())) {
-					technologySet.put(fullId, t);
-					System.err.println("\t\t + Add techno " + fullId);
-				} else {
-					t = technologySet.get(fullId);
-					System.err.println("\t\t * Get techno " + fullId);
-				}
-				futurParent = t;
-			}
-
-			// Scan for technology version
-			if (!omitedObject.contains(TechnologyVersion.class) && config.getName().equalsIgnoreCase("technologyVersion")) {
-				TechnologyVersion tv = new TechnologyVersion(config, (Technology) parent, root);
-				String fullId = tv.getFullId();
-				if (!technologyVersionSet.containsKey(fullId) || (rootSet != technologyVersionSet && parent != technologyVersionSet.get(fullId).getParent())) {
-					technologyVersionSet.put(fullId, tv);
-					System.err.println("\t\t\t + Add technoVersion " + fullId);
-				} else {
-					tv = technologyVersionSet.get(fullId);
-					System.err.println("\t\t\t * Get technoVersion " + fullId);
-				}
-				futurParent = tv;
-			}
-
-			// Scan for Generator Version
-			if (!omitedObject.contains(Generator.class) && config.getName().equalsIgnoreCase("generatorVersion")) {
-				Generator gv = new Generator(config, (TechnologyVersion) parent, root);
-				String fullId = gv.getFullId();
-				if (!generatorSet.containsKey(fullId) || (rootSet != technologyVersionSet && parent != generatorSet.get(fullId).getParent())) {
-					generatorSet.put(fullId, gv);
-					System.err.println("\t\t\t\t + Add Generator " + fullId);
-				} else {
-					gv = generatorSet.get(fullId);
-					System.err.println("\t\t\t\t * Get Generator " + fullId);
-				}
-				futurParent = gv;
-			}
-
-			// Scan for deployer version
-			if (!omitedObject.contains(Deployer.class) && config.getName().equalsIgnoreCase("deployerVersion")) {
-				Deployer dv = new Deployer(config, (TechnologyVersion) parent, root);
-				String fullId = dv.getFullId();
-				if (!deployerSet.containsKey(fullId) || (rootSet != deployerSet && parent != deployerSet.get(fullId).getParent())) {
-					deployerSet.put(fullId, dv);
-				} else {
-					dv = deployerSet.get(fullId);
-				}
-				futurParent = dv;
-			}
-
-			// Scan for generator or deployer option
-			if (!omitedObject.contains(OptionComponant.class) && config.getName().equalsIgnoreCase("option")) {
-				OptionComponant opt = null;
-				if (parent instanceof Generator) {
-					opt = new OptionGenerator(config, (Generator) parent, root);
-					String fullid = opt.getFullId();
-					if (!optGeneratorSet.containsKey(fullid)) {
-						optGeneratorSet.put(fullid, (OptionGenerator) opt);
-					} else {
-						opt = optGeneratorSet.get(fullid);
-					}
-				} else if (parent instanceof Deployer) {
-					opt = new OptionDeployer(config, (Deployer) parent, root);
-					String fullid = opt.getFullId();
-					if (!optDeployerSet.containsKey(fullid)) {
-						optDeployerSet.put(fullid, (OptionDeployer) opt);
-					} else {
-						opt = optDeployerSet.get(fullid);
-					}
-				}
-				futurParent = opt;
-			}
-
-			// Scan for generator or deployer parameter
-			if (config.getName().equalsIgnoreCase("configurationParameter")) {
-				GeneratorParameter param = null;
-				if (parent instanceof Generator) {
-					Generator g = (Generator) parent;
-					param = new GeneratorParameter(config);
-					if (!genParamConfByGenerator.containsKey(g.getId())) {
-						genParamConfByGenerator.put(g.getId(), new ArrayList<String>());
-					}
-					genParamConfByGenerator.get(g.getId()).add(param.getKey());
-					configurationParameters.put(param.getKey(), param);
-				} else if (parent instanceof Deployer) {
-					Deployer d = (Deployer) parent;
-					param = new GeneratorParameter(config);
-					if (!deployParamConfByGenerator.containsKey(d.getId())) {
-						deployParamConfByGenerator.put(d.getId(), new ArrayList<String>());
-					}
-					deployParamConfByGenerator.get(d.getId()).add(param.getKey());
-					deployerParameters.put(param.getKey(), param);
-				}
-				futurParent = null;
-			}
-
-			// Will add children if not already set
-			if (parent != null && futurParent != null) {
-				if (parent.getChild(futurParent.getId()) == null) {
-					parent.addChildren(futurParent);
-				}
-			}
-
-			for (IConfigurationElement child : config.getChildren()) {
-				// System.err.println("Manage conf for child " +
-				// (child.getAttribute("id") != null ? child.getAttribute("id")
-				// : child.getAttribute("key")) + " and parent " + (parent !=
-				// null ? parent.getId() : ""));
-				manageConfiguration(child, futurParent);
-
-			}
-		}
-
-		/**
-		 * Initialise les éléments de l'arbre en les checkant sur la clé. Si
-		 * l'élément est invalide il sera desactivé
-		 */
-		public void initializeFromKey() {
-
-		}
-
-		public void dispose() {
-		}
-
-		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-		}
-	}
-
-	/**
-	 * Internal class for label of the tree element
-	 * 
-	 * @author Eric
-	 * 
-	 */
-	class ConfigurationLabelProvider implements ILabelProvider {
-
-		private List<Object> listeners;
-
-		/**
-		 * Constructs a InterpretationLabelProvider
-		 */
-		public ConfigurationLabelProvider() {
-			listeners = new ArrayList<Object>();
-		}
-
-		public Image getImage(Object object) {
-			String suffix = "";
-			if (object instanceof TreeElement) {
-				TreeElement te = (TreeElement) object;
-				if (te.isEnabled())
-					suffix += "_enabled";
-				else
-					suffix += "_disabled";
-				if (te.isChecked())
-					suffix += "_checked";
-				else
-					suffix += "_unchecked";
-			}
-
-			if (object instanceof Metamodel) {
-				return new Image(null, ApplicationDialog.class.getResourceAsStream("tree/img/metamodel/metamodel" + suffix + ".png"));
-			} else if (object instanceof Technology) {
-				return new Image(null, ApplicationDialog.class.getResourceAsStream("tree/img/technology/technology" + suffix + ".png"));
-			} else if (object instanceof TechnologyVersion) {
-				return new Image(null, ApplicationDialog.class.getResourceAsStream("tree/img/technologyVersion/technologyVersion" + suffix + ".png"));
-			} else if (object instanceof Generator) {
-				return new Image(null, ApplicationDialog.class.getResourceAsStream("tree/img/generator/generator" + suffix + ".png"));
-			} else if (object instanceof OptionGenerator) {
-				return new Image(null, ApplicationDialog.class.getResourceAsStream("tree/img/optionGenerator/options" + suffix + ".png"));
-			} else if (object instanceof Deployer) {
-				return new Image(null, ApplicationDialog.class.getResourceAsStream("tree/img/deployer/deployer" + suffix + ".png"));
-			} else if (object instanceof OptionDeployer) {
-				return new Image(null, ApplicationDialog.class.getResourceAsStream("tree/img/optionDeployer/options" + suffix + ".png"));
-			}
-			return null;
-		}
-
-		public String getText(Object object) {
-			if (object instanceof IConfigurationElement) {
-				IConfigurationElement elt = (IConfigurationElement) object;
-				return elt.getAttribute("label");
-			} else if (object instanceof Metamodel) {
-				Metamodel elt = (Metamodel) object;
-				return elt.getLabel();
-			} else if (object instanceof Technology) {
-				Technology elt = (Technology) object;
-				return elt.getLabel();
-			} else if (object instanceof TechnologyVersion) {
-				TechnologyVersion elt = (TechnologyVersion) object;
-				return elt.getVersion();
-			} else if (object instanceof Generator) {
-				Generator elt = (Generator) object;
-				return elt.getVersion();
-			} else if (object instanceof OptionGenerator) {
-				OptionGenerator elt = (OptionGenerator) object;
-				return elt.getLabel();
-			} else if (object instanceof Deployer) {
-				Deployer elt = (Deployer) object;
-				return elt.getVersion();
-			} else if (object instanceof OptionDeployer) {
-				OptionDeployer elt = (OptionDeployer) object;
-				return elt.getLabel();
-			}
-
-			return "";
-		}
-
-		public void addListener(ILabelProviderListener arg0) {
-			listeners.add(arg0);
-		}
-
-		public boolean isLabelProperty(Object arg0, String arg1) {
-			return false;
-		}
-
-		public void removeListener(ILabelProviderListener arg0) {
-			listeners.remove(arg0);
-		}
-
-		public void dispose() {
-		}
-
-	}
-
-	public class ElementTreeListener {
-
-		TreeViewer tv;
-
-		/**
-		 * Enable sub element of the given item.
-		 * 
-		 * @param item
-		 */
-		protected void enableAllSubElements(TreeItem item) {
-			for (TreeItem ti : item.getItems()) {
-				TreeElement el = (TreeElement) ti.getData();
-				// Check the validity if the component
-				if (el instanceof ImplNode) {
-					if (checkElementValidity(el)) {
-						el.setEnabled(true);
-					}
-					tv.update(el, null);
-				} else if (!el.isEnabled()) {
-					el.setEnabled(true);
-					tv.update(el, null);
-				}
-				if (el.isChecked()) {
-					if (el instanceof ImplNode) {
-						refreshImplNodeOptions();
-					}
-					enableAllSubElements(ti);
-				}
-			}
-		}
-
-		/**
-		 * Disable sub element of the given item.
-		 * 
-		 * @param item
-		 */
-		protected void disableAllSubElements(TreeItem item) {
-			for (TreeItem ti : item.getItems()) {
-				TreeElement el = (TreeElement) ti.getData();
-				if (el.isEnabled()) {
-					el.setEnabled(false);
-					if (el instanceof ImplNode) {
-						refreshImplNodeOptions();
-					}
-					tv.update(el, null);
-				}
-				disableAllSubElements(ti);
-			}
-		}
-	}
-
-	/**
-	 * Internal class : use by generation option tree.
-	 * 
-	 * @author Eric
-	 * 
-	 */
 	public class GenerationOptionTreeListener extends ElementTreeListener implements Listener {
 
-		GenerationOptionTreeListener() {
+		public GenerationOptionTreeListener() {
 			tv = genOptionsTree;
 		}
 
@@ -1866,7 +1413,7 @@ public class ApplicationDialog extends Dialog {
 			// Check if el is active or not in the key if it is a component
 			boolean canCheck = true;
 			if (el instanceof ImplNode) {
-				canCheck = checkElementValidity(el);
+				canCheck = ApplicationUtil.checkElementValidity(el);
 				if (!canCheck) {
 					errorMsg.setText("This element is not active in your key");
 				} else {
@@ -1897,12 +1444,6 @@ public class ApplicationDialog extends Dialog {
 		}
 	}
 
-	/**
-	 * Internal class : use by generation option tree.
-	 * 
-	 * @author Eric
-	 * 
-	 */
 	public class DeployementOptionTreeListener extends ElementTreeListener implements Listener {
 
 		public DeployementOptionTreeListener() {
@@ -1937,6 +1478,54 @@ public class ApplicationDialog extends Dialog {
 		}
 	}
 
-	
+	public class ElementTreeListener {
 
+		protected TreeViewer tv;
+
+		/**
+		 * Enable sub element of the given item.
+		 *
+		 * @param item
+		 */
+		protected void enableAllSubElements(TreeItem item) {
+			for (TreeItem ti : item.getItems()) {
+				TreeElement el = (TreeElement) ti.getData();
+				// Check the validity if the component
+				if (el instanceof ImplNode) {
+					if (ApplicationUtil.checkElementValidity(el)) {
+						el.setEnabled(true);
+					}
+					tv.update(el, null);
+				} else if (!el.isEnabled()) {
+					el.setEnabled(true);
+					tv.update(el, null);
+				}
+				if (el.isChecked()) {
+					if (el instanceof ImplNode) {
+						refreshImplNodeOptions();
+					}
+					enableAllSubElements(ti);
+				}
+			}
+		}
+
+		/**
+		 * Disable sub element of the given item.
+		 *
+		 * @param item
+		 */
+		protected void disableAllSubElements(TreeItem item) {
+			for (TreeItem ti : item.getItems()) {
+				TreeElement el = (TreeElement) ti.getData();
+				if (el.isEnabled()) {
+					el.setEnabled(false);
+					if (el instanceof ImplNode) {
+						refreshImplNodeOptions();
+					}
+					tv.update(el, null);
+				}
+				disableAllSubElements(ti);
+			}
+		}
+	}
 }
