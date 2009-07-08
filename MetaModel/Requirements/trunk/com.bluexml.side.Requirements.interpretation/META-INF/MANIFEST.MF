@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Interpretation
 Bundle-SymbolicName: com.bluexml.side.Requirements.interpretation;singleton:=true
-Bundle-Version: 1.0.16.v7439-20090708
+Bundle-Version: 1.0.17.v7451-20090708
 Bundle-Vendor: blueXML
 Require-Bundle: com.bluexml.side.Requirements.transformation
 Bundle-ClassPath: metamodel/
