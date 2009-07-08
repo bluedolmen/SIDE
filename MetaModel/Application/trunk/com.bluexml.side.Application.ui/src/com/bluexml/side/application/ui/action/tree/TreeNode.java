@@ -7,6 +7,16 @@ import java.util.List;
 public abstract class TreeNode extends TreeElement {
 	protected String id;
 	protected TreeNode parent;
+	protected boolean toHidde;
+
+	public boolean isToHidde() {
+		return toHidde;
+	}
+
+	public void setToHidde(boolean toHidde) {
+		this.toHidde = toHidde;
+	}
+
 	protected List<CheckConstraints> mustbechecked = new ArrayList<CheckConstraints>();
 	protected List<CheckConstraints> mustbeUnchecked = new ArrayList<CheckConstraints>();
 	protected List<ModuleConstraints> integrationModules = new ArrayList<ModuleConstraints>();
@@ -25,7 +35,7 @@ public abstract class TreeNode extends TreeElement {
 
 	/**
 	 * Return a full qualified ID
-	 * 
+	 *
 	 * @return
 	 */
 	public String getFullId() {
