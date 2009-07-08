@@ -28,7 +28,7 @@ public class Application {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+
 		String argument1 = "";
 		String argument2 = "";
 		String argument3 = "";
@@ -132,8 +132,8 @@ public class Application {
 		System.out.println("\nUpdate du site.xml");
 		// createFile(getCorpsSite(), Utils.getBuildPath(), "site.xml");
 		Utils.updateSiteXml();
-		
-		//creation de jar pour les plugins qui ne le sont pas
+
+		// creation de jar pour les plugins qui ne le sont pas
 		createFile(getJarBuilder(), Utils.getBuildPath(), "jarBuilder.xml");
 		execBuild("jarBuilder", "jarBuilder");
 
@@ -144,13 +144,11 @@ public class Application {
 		Utils.finalTraitement();
 
 		/*
-		// Build des projets seul
-		System.out.println("Build des projets seul ...");
-		for (String projet : Utils.getProjectsToBuild()) {
-			System.out.println("\t-" + projet);
-		}
-		execBuild("build", "buildProject");
-		*/
+		 * // Build des projets seul
+		 * System.out.println("Build des projets seul ..."); for (String projet
+		 * : Utils.getProjectsToBuild()) { System.out.println("\t-" + projet); }
+		 * execBuild("build", "buildProject");
+		 */
 		System.out.println("\nFINISH !");
 		/*
 		 * }
@@ -611,20 +609,23 @@ public class Application {
 
 		out += "\t<target name=\"buildProject\" depends=\"\" description=\"description\">\n";
 		for (int i = 0; i < projects.length; i++) {
-			out += "\t\t\t<mkdir dir=\"" + Utils.getFinalDirectory() + File.separator + "bin" + File.separator + "Ankle" + File.separator + projects[i] + "\" />\n";
-			out += "\t\t\t<javac destdir=\""
-					+ Utils.getFinalDirectory() + File.separator + "bin"
-					+ File.separator + "Ankle" + File.separator + projects[i]
-					+ "\" srcdir=\"" + workspace + File.separator + "S-IDE"
-					+ File.separator + Utils.getProjectToBuildPath(projects[i])
-					+ File.separator + "trunk" + File.separator + projects[i]
-					+ File.separator + "src" + "\">\n";
+			out += "\t\t\t<mkdir dir=\"" + Utils.getFinalDirectory()
+					+ File.separator + "bin" + File.separator + "Ankle"
+					+ File.separator + projects[i] + "\" />\n";
+			out += "\t\t\t<javac destdir=\"" + Utils.getFinalDirectory()
+					+ File.separator + "bin" + File.separator + "Ankle"
+					+ File.separator + projects[i] + "\" srcdir=\"" + workspace
+					+ File.separator + "S-IDE" + File.separator
+					+ Utils.getProjectToBuildPath(projects[i]) + File.separator
+					+ "trunk" + File.separator + projects[i] + File.separator
+					+ "src" + "\">\n";
 			out += "\t\t\t\t<classpath>\n";
 			out += "\t\t\t\t\t<pathelement location=\"${eclipseLocation}/plugins/*\" />\n";
-			out += "\t\t\t\t\t<pathelement location=\"" + workspace + File.separator
-					+ "S-IDE" + File.separator
+			out += "\t\t\t\t\t<pathelement location=\"" + workspace
+					+ File.separator + "S-IDE" + File.separator
 					+ Utils.getProjectToBuildPath(projects[i]) + File.separator
-					+ "trunk" + File.separator + projects[i] + File.separator + "*\" />\n";
+					+ "trunk" + File.separator + projects[i] + File.separator
+					+ "*\" />\n";
 			out += "\t\t\t\t</classpath>\n";
 			out += "</javac>\n";
 		}
@@ -632,41 +633,43 @@ public class Application {
 		out += "\t</target>\n";
 		return out;
 	}
-	
-	private static String getJarBuilder(){
-		
+
+	private static String getJarBuilder() {
+
 		String out = "<?xml version=\"1.0\"?>\n";
 		out += "<project name=\"jarBuilder\" default=\"jarBuilder\">\n";
 		out += "\t<property file=\"build.properties\" />\n";
-		
+
 		out += "\n\t<!-- ================================= \n";
 		out += "\t\t\ttarget: jarBuilder\n";
 		out += "\t================================= -->\n\n";
-		
+
 		out += "\t<target name=\"jarBuilder\" depends=\"\" description=\"description\">\n";
-		
+
 		// On va parcourir les plugins, et si des plugins n'ont pas étés mis en
 		// jar on le fait manuelement
 		File pluginRep = new File(Utils.getBuildDirectory() + File.separator
-				+ Utils.getBuildLabel() + File.separator + Utils.getArchivePrefix()
-				+ File.separator + "plugins");
+				+ Utils.getBuildLabel() + File.separator
+				+ Utils.getArchivePrefix() + File.separator + "plugins");
 
 		File[] list = pluginRep.listFiles();
 		for (File file : list) {
 			if (file.isDirectory()) {
-				
-				out += "\t\t<jar destfile=\""+ file.getAbsolutePath()
-					+ ".jar\" basedir=\""
-					+ file.getAbsolutePath() + "\" />\n";
-				
-				out += "\t\t<delete dir=\""+ file.getAbsolutePath() +"\" />";
+
+				out += "\t\t<jar destfile=\"" + file.getAbsolutePath()
+						+ ".jar\" basedir=\"" + file.getAbsolutePath()
+						+ "\" manifest=\"" + file.getAbsolutePath()
+						+ File.separator + "META-INF" + File.separator
+						+ "MANIFEST.MF\"/>\n";
+
+				out += "\t\t<delete dir=\"" + file.getAbsolutePath() + "\" />";
 			}
 		}
-		
+
 		out += "\t</target>\n";
-		
+
 		out += "</project>";
-		
+
 		return out;
 	}
 
