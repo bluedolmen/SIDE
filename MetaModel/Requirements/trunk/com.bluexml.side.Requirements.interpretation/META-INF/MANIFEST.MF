@@ -6,3 +6,4 @@ Bundle-Version: 1.0.16.v7439-20090708
 Bundle-Vendor: blueXML
 Require-Bundle: com.bluexml.side.Requirements.transformation
 Bundle-ClassPath: metamodel/
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
