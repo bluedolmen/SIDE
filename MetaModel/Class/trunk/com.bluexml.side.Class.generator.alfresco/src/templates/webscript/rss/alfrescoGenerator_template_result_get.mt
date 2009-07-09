@@ -78,7 +78,7 @@ webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/<%getQualifiedNam
 <rss version="2.0">
 	<channel>
 		<title><%getLabel()%></title>
-		<description><%getClassDescription()%></description>
+		<description><%getDescriptionOrName()%></description>
 		<link>${absurl(url.serviceContext)}/<%getQualifiedName()%>.rss</link>
 		<generator>Alfresco</generator>
 		<#assign index=0>
