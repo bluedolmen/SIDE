@@ -42,7 +42,7 @@ do
       if [ `ls src-gen | wc -l` -gt 0 ]; then
         echo " - <a href="$DIR/src-gen">Test Results</a>" >>  $INDEX
       fi
-      echo "- $nb_generate targeted generated file(s) but $nb_error on error  on model(s) <a href="$DIR/model>$models</a></li></li>" >>  $INDEX
+      echo "- $nb_generate targeted generated file(s) but $nb_error on error  on model(s) <a href="$DIR/model">$models</a></li></li>" >>  $INDEX
       return=-1
     fi
     cat output.txt
