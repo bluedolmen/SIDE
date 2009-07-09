@@ -24,7 +24,9 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 import com.bluexml.side.clazz.generator.alfresco.services.ClassServices
 %>
 
-<%script type="clazz.ClassPackage" name="alfrescoGenerator" file="webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/xml/all.ftl"%>
+<%script type="clazz.ClassPackage" name="validatedFilename"%>
+<%if (eContainer() == null) {%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/xml/all.ftl<%}%>
+<%script type="clazz.ClassPackage" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 	<id>${child.id}</id>
 	<url>${child.url}</url>
 	<downloadUrl>${child.downloadUrl}</downloadUrl>

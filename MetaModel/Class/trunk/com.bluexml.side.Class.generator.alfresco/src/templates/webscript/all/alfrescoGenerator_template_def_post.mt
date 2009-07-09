@@ -24,7 +24,9 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 import com.bluexml.side.clazz.generator.alfresco.services.ClassServices
 %>
 
-<%script type="clazz.ClassPackage" name="alfrescoGenerator" file="webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.post.desc.xml"%>
+<%script type="clazz.ClassPackage" name="validatedFilename"%>
+<%if (eContainer() == null) {%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.post.desc.xml<%}%>
+<%script type="clazz.ClassPackage" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <webscript>
   <shortname>All s</shortname>
