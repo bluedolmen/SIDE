@@ -53,7 +53,7 @@ cat $1/index.html
     return_code=-3
    fi
    done
-  echo "</UL></body></html>" >> index.html
+  echo "</UL><footer>BlueXML - Copyright 2009</footer></body></html>" >>  index.html
 fi
 if [ $return_code -lt 0 ]
 then
