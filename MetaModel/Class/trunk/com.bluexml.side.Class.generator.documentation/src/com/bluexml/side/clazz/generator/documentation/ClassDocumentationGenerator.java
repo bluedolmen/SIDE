@@ -1,31 +1,20 @@
 package com.bluexml.side.clazz.generator.documentation;
 
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import org.eclipse.core.resources.IFile;
 
 import com.bluexml.side.util.generator.documentation.DocumentationGenerator;
 
-public class ClassDocumentationGenerator extends DocumentationGenerator{
+public class ClassDocumentationGenerator extends DocumentationGenerator {
 
-	public Collection<IFile> complete() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public ClassDocumentationGenerator() {
+		MMUri = "http://www.kerblue.org/class/1.0";
 	}
 
-	public Collection<IFile> generate(Map<String, List<IFile>> models,
-			String id_metamodel) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	@Override
+	protected List<String> getTemplates() {
+		List<String> templates = new ArrayList<String>();
+		templates.add("/com.bluexml.side.Class.generator.documentation/src/templates/model2docBook.mt");
+		return templates;
 	}
-
-	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo,
-			String id_metamodel) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }
