@@ -915,6 +915,7 @@ public class ApplicationDialog extends Dialog {
 
 		List<Class<?>> omitedClassForDeploy = new ArrayList<Class<?>>();
 		omitedClassForDeploy.add(Generator.class);
+		omitedClassForDeploy.add(Metamodel.class);
 		deployOptionsTree.setContentProvider(new ConfigurationContentProvider(Technology.class, omitedClassForDeploy, deployOptionsTree, configurationParameters, deployerParameters, genParamConfByGenerator, deployParamConfByGenerator));
 		deployOptionsTree.setLabelProvider(new ConfigurationLabelProvider());
 		deployOptionsTree.setInput(this);

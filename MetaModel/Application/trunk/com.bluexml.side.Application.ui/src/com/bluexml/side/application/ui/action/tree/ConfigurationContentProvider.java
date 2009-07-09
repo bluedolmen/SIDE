@@ -1,9 +1,11 @@
 package com.bluexml.side.application.ui.action.tree;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
@@ -72,7 +74,17 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 	public Object[] getChildren(Object object) {
 		if (object instanceof TreeNode) {
 			TreeNode elt = (TreeNode) object;
-			return elt.getChildren().toArray();
+			Object[] arr = elt.getChildren().toArray();
+			ArrayList<Object> result = new ArrayList<Object>();
+			for (Object o : arr) {
+				if (o instanceof TreeNode) {
+					TreeNode tn = (TreeNode) o;
+					if (!tn.isToHidde()) {
+						result.add(tn);
+					}
+				}
+			}
+			return result.toArray();
 		}
 		return null;
 	}
@@ -114,11 +126,52 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 	public void initialize() {
 		IConfigurationElement[] contributions = Platform.getExtensionRegistry().getConfigurationElementsFor(EXTENSIONPOINT_ID);
 		System.err.println("-----------------------------------------------------------------");
+		// Tree initialization
 		for (IConfigurationElement config : contributions) {
 			System.err.println("DEBUG : " + config.getName() + " " + config.getNamespaceIdentifier() + " (" + config.getAttribute("id") + " " + config.getAttribute("name") + ")");
 			manageConfiguration(config, null);
 		}
+		// Now we hide branches of the tree without generator or deployer leaf
+		cleanupTree(rootSet);
 		initializeFromKey();
+	}
+
+	/**
+	 * Will seek over the rootSet and will hide all element of a branch with no
+	 * generator or deployer (or with hidden leaf).
+	 */
+	protected void cleanupTree(Map<?,?> rootSet) {
+		Collection<?> rootEntry = rootSet.values();
+		for (Object o : rootEntry) {
+			if (o instanceof TreeNode) {
+				TreeNode tn = (TreeNode) o;
+				cleanupBranch(tn);
+			}
+		}
+	}
+
+	private boolean cleanupBranch(TreeNode tn) {
+		boolean result = false;
+		for (TreeNode child : tn.getChildren()) {
+			if (child instanceof ImplNode) {
+				if (!child.isToHidde()) {
+					result = true;
+				}
+			} else if (child.getChildren().size() > 0) {
+				for (TreeNode c : tn.getChildren()) {
+					result = result | cleanupBranch(c);
+				}
+			}
+		}
+		if (!result) {
+			tn.setToHidde(true);
+			if (rootSet.containsValue(tn)) {
+				if (tn.getParent() != null) {
+					tn.getParent().setToHidde(true);
+				}
+			}
+		}
+		return result;
 	}
 
 	/**
@@ -128,10 +181,10 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 	 * @param config
 	 * @param parent
 	 */
-	private void manageConfiguration(IConfigurationElement config, TreeNode parent) {
+	protected void manageConfiguration(IConfigurationElement config, TreeNode parent) {
 		TreeNode futurParent = null;
 		// Scan for metamodels
-		if (config.getName().equalsIgnoreCase("metamodel")) {
+		if (!omitedObject.contains(Metamodel.class) && config.getName().equalsIgnoreCase("metamodel")) {
 			// We create the metal for this config element
 			Metamodel m = new Metamodel(config, root);
 			// We check if we already have this metamodel in your set
@@ -175,8 +228,11 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 
 		// Scan for Generator Version
 		if (!omitedObject.contains(Generator.class) && config.getName().equalsIgnoreCase("generatorVersion")) {
-			if (config.getAttribute("hidden") == null || config.getAttribute("hidden").equals("visible")) {
+			if (config.getAttribute("hidden") == null || !config.getAttribute("hidden").equals("hidden")) {
 				Generator gv = new Generator(config, (TechnologyVersion) parent, root);
+				if (config.getAttribute("hidden") != null && config.getAttribute("hidden").equals("hidden and used by default")) {
+					gv.setToHidde(true);
+				}
 				String fullId = gv.getFullId();
 				if (!generatorSet.containsKey(fullId) ||
 						(rootSet != technologyVersionSet && parent != generatorSet.get(fullId).getParent())) {
@@ -254,14 +310,15 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 				parent.addChildren(futurParent);
 			}
 		}
+		if (futurParent != null) {
+			for (IConfigurationElement child : config.getChildren()) {
+				// System.err.println("Manage conf for child " +
+				// (child.getAttribute("id") != null ? child.getAttribute("id")
+				// : child.getAttribute("key")) + " and parent " + (parent !=
+				// null ? parent.getId() : ""));
+				manageConfiguration(child, futurParent);
 
-		for (IConfigurationElement child : config.getChildren()) {
-			// System.err.println("Manage conf for child " +
-			// (child.getAttribute("id") != null ? child.getAttribute("id")
-			// : child.getAttribute("key")) + " and parent " + (parent !=
-			// null ? parent.getId() : ""));
-			manageConfiguration(child, futurParent);
-
+			}
 		}
 	}
 

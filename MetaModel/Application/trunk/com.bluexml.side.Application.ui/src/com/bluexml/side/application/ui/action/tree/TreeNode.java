@@ -7,7 +7,7 @@ import java.util.List;
 public abstract class TreeNode extends TreeElement {
 	protected String id;
 	protected TreeNode parent;
-	protected boolean toHidde;
+	protected boolean toHidde = false;
 
 	public boolean isToHidde() {
 		return toHidde;
