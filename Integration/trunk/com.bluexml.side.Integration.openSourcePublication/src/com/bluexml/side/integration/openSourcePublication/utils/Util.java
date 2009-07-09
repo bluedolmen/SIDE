@@ -55,27 +55,19 @@ public class Util {
 	public static void addLicense(File file) {
 		String[] sep = file.getName().split("\\.");
 		String extention = sep[sep.length - 1];
-		
 
 		if (ouvrirFichier("comment.properties").containsKey(extention)) {
 			System.out.println("File: " + file);
-			
-			String type = ouvrirFichier("comment.properties").getProperty(extention).split(
-			",")[0];
-			
+
+			String type = ouvrirFichier("comment.properties").getProperty(
+					extention).split(",")[0];
+
 			try {
 				PrintWriter writer = new PrintWriter(new FileWriter(file
 						+ ".txt"));
 
-				if (type.equals("multi")) {
-					writer.append(getStartComment(extention) + "\n");
-					writer.append(loadFile(new File("LICENSE-notices")));
-					writer.append("\n" + getEndComment(extention) + "\n\n\n");
-					writer.append(loadFile(file));
-				} else {
-					writer.append(getMonoLicense(extention) + "\n\n\n");
-					writer.append(loadFile(file));
-				}
+				writer.append(loadFile(file, extention, type));
+				
 				// fermeture des flux
 				writer.close();
 			} catch (FileNotFoundException e) {
@@ -106,7 +98,7 @@ public class Util {
 			BufferedReader reader = new BufferedReader(new FileReader(
 					licensePath));
 			while ((ligne = reader.readLine()) != null) {
-				out += getStartComment(type) + " " + ligne +"\n";
+				out += getStartComment(type) + " " + ligne + "\n";
 			}
 			// fermeture des flux
 			reader.close();
@@ -147,13 +139,11 @@ public class Util {
 	}
 
 	private static String getStartComment(String type) {
-		return ouvrirFichier("comment.properties").getProperty(type).split(
-				",")[1];
+		return ouvrirFichier("comment.properties").getProperty(type).split(",")[1];
 	}
 
 	private static String getEndComment(String type) {
-		return ouvrirFichier("comment.properties").getProperty(type).split(
-				",")[2];
+		return ouvrirFichier("comment.properties").getProperty(type).split(",")[2];
 	}
 
 	/**
@@ -162,15 +152,52 @@ public class Util {
 	 * @param f
 	 * @return
 	 */
-	public static String loadFile(File f) {
+	public static String loadFile(File f, String extention, String type) {
 		StringWriter out = null;
+		boolean license = false;
 		try {
-			BufferedInputStream in = new BufferedInputStream(
-					new FileInputStream(f));
+			BufferedReader in = new BufferedReader(new FileReader(f));
 			out = new StringWriter();
-			int b;
-			while ((b = in.read()) != -1)
-				out.write(b);
+			String line;
+
+			if ("LICENSE-notices".equals(f.getName())) {
+				while ((line = in.readLine()) != null) {
+					out.append(line+"\n");
+				}
+			} else {
+				while ((line = in.readLine()) != null) {
+					if (line.indexOf("<?xml version=") != -1 && !license) {
+						if (type.equals("multi")) {
+							out.append(line+"\n");
+							out.append(getStartComment(extention) + "\n");
+							out.append(loadFile(new File("LICENSE-notices"),
+									null, null));
+							out.append("\n" + getEndComment(extention)
+									+ "\n\n\n");
+						} else {
+							out.append(line+"\n");
+							out.append(getMonoLicense(extention) + "\n\n\n");
+						}
+
+						license = true;
+					} else if(!license && !line.equals("")){
+						if (type.equals("multi")) {
+							out.append(getStartComment(extention) + "\n");
+							out.append(loadFile(new File("LICENSE-notices"),
+									null, null));
+							out.append("\n" + getEndComment(extention)
+									+ "\n\n\n");
+						} else {
+							out.append(getMonoLicense(extention) + "\n\n\n");
+						}
+						out.append(line+"\n");
+						license = true;
+					} else {
+						out.append(line+"\n");
+					}
+				}
+
+			}
 			out.flush();
 			out.close();
 			in.close();
