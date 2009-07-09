@@ -32,16 +32,17 @@ do
     ./run.sh >output.txt
 #    if [ `ls src-gen | wc -l` -gt 0 ]
     nb_error=`awk '/Erreurs dans le fichier/ || /Exception/ || /existe pas/' output.txt | wc -l`
-   nb_generate=`awk '/generate/' output.txt | wc -l`
+    nb_generate=`awk '/generate/' output.txt | wc -l`
+    models=`ls model`
     if [ $nb_error -eq 0 ]
     then
-      echo "<li>$DIR: Test Ok - <a href="$DIR/src-gen">Test Results</a> - <a href="$DIR/output.txt">Test log</a> - $nb_generate generated file(s)</li>" >>  $INDEX
+      echo "<li>$DIR: Test Ok - <a href="$DIR/src-gen">Test Results</a> - <a href="$DIR/output.txt">Test log</a> - $nb_generate generated file(s) on model(s) <a href="$DIR/model>$models</a></li>" >>  $INDEX
     else
       echo "<li>$DIR: <font color="red">Test on ERROR</font></b> - <A href="$DIR/output.txt">$nb_error raised errors</a>" >>  $INDEX
       if [ `ls src-gen | wc -l` -gt 0 ]; then
-        echo " - <a href="$DIR/src-gen">$DIR Test Results</a>" >>  $INDEX
+        echo " - <a href="$DIR/src-gen">Test Results</a>" >>  $INDEX
       fi
-      echo "- $nb_generate targeted generated file(s) but $nb_error on error</li>" >>  $INDEX
+      echo "- $nb_generate targeted generated file(s) but $nb_error on error  on model(s) <a href="$DIR/model>$models</a></li></li>" >>  $INDEX
       return=-1
     fi
     cat output.txt
@@ -52,6 +53,7 @@ do
       cp -R src-gen $TEST_PUBLISH_DIR/$DIR
     fi
     cp output.txt $TEST_PUBLISH_DIR/$DIR
+    cp -R model $TEST_PUBLISH_DIR/$DIR
     cd ..
   fi
 done
