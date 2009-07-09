@@ -212,6 +212,7 @@ public class DocMetaModel {
 			try{
 				FileWriter file = new FileWriter(fileName + ".docbook",true);
 				for (EClassifier classifier : classifiers) {
+					logger.log(Level.WARNING, classifier.getName());
 					if (ObjectsFromPalette.contains(classifier.getName())){
 						file.write("<row><entry spanname='hspan3' align='center'>");
 						file.write("<sect1><title>"+classifier.getName()+"</title></sect1>");
@@ -241,6 +242,8 @@ public class DocMetaModel {
 							file.write("</entry>");
 							writeDocGen(getDocOp(classifier), file);
 						}
+					} else {
+						logger.log(Level.WARNING, "CHECK: " + classifier.getName() + " is NOT in Palette");
 					}
 				}
 				file.close();
