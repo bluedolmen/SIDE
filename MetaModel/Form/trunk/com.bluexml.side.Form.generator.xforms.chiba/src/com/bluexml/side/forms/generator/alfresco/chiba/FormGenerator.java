@@ -30,12 +30,12 @@ import org.jdom.output.XMLOutputter;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.util.generator.AbstractGenerator;
+import com.bluexml.side.util.generator.dependency.DependencesManager;
 import com.bluexml.side.util.security.SecurityHelper;
 import com.bluexml.side.util.settings.SidePreferences;
 
 public class FormGenerator extends AbstractGenerator {
-	public static final Namespace NAMESPACE_MAVENPOM = Namespace.getNamespace(
-			"pom", "http://maven.apache.org/POM/4.0.0");
+	public static final Namespace NAMESPACE_MAVENPOM = Namespace.getNamespace("pom", "http://maven.apache.org/POM/4.0.0");
 	private static final String TARGET_VERSION = "1.0.0";
 	private static final String TARGET_ARTIFACT = "xforms";
 	private static final String TARGET_GROUP = "com.bluexml";
@@ -46,8 +46,7 @@ public class FormGenerator extends AbstractGenerator {
 	private static final String REPOSITORY = "http://merry.bluexml.com/m2/repository";
 	private static final String GENERATOR_CODE = "CODE_GED_G_F_CHIBA";
 	private static final SAXBuilder sxb = new SAXBuilder();
-	private static final XMLOutputter outputter = new XMLOutputter(Format
-			.getPrettyFormat());
+	private static final XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
 
 	private List<String> clazzModels;
 	private List<String> formModels;
@@ -59,28 +58,27 @@ public class FormGenerator extends AbstractGenerator {
 	private File alfrescoProperties;
 	private File warFile;
 
-	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, String techVersion_) throws Exception{
-		super.initialize(generationParameters_, generatorOptions_, configurationParameters_);
+	@Override
+	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, DependencesManager dm) throws Exception {
+		super.initialize(generationParameters_, generatorOptions_, configurationParameters_, dm);
 		try {
 			initWorkFolder();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * This method check if the user have the license to use this generator.
 	 * 
 	 * @return true if the generator can be used.
 	 */
-	public boolean check(){
-		return SecurityHelper.check(GENERATOR_CODE,SidePreferences.getKey());
+	public boolean check() {
+		return SecurityHelper.check(GENERATOR_CODE, SidePreferences.getKey());
 	}
 
-	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo,
-			String id_metamodel) {
-		return modelsInfo.containsKey(ClazzPackage.eNS_URI)
-				|| modelsInfo.containsKey(FormPackage.eNS_URI);
+	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo, String id_metamodel) {
+		return modelsInfo.containsKey(ClazzPackage.eNS_URI) || modelsInfo.containsKey(FormPackage.eNS_URI);
 	}
 
 	public Collection<IFile> complete() throws Exception {
@@ -88,38 +86,32 @@ public class FormGenerator extends AbstractGenerator {
 		return new ArrayList<IFile>();
 	}
 
-	public Collection<IFile> generate(Map<String, List<IFile>> modelsInfo,
-			String id_mm) {
-		
-		
+	public Collection<IFile> generate(Map<String, List<IFile>> modelsInfo, String id_mm) {
+
 		getModels(modelsInfo);
 		try {
 			initMaven();
 			MavenExecutionResult createProjectResult = createProject();
 			if (createProjectResult.hasExceptions()) {
-				throw new RuntimeException(((Exception) createProjectResult
-						.getExceptions().get(0)));
+				throw new RuntimeException(((Exception) createProjectResult.getExceptions().get(0)));
 			}
 			prepareProject();
 			MavenExecutionResult cleanPackageResult = buildProject();
 			if (cleanPackageResult.hasExceptions()) {
-				throw new RuntimeException(((Exception) cleanPackageResult
-						.getExceptions().get(0)));
+				throw new RuntimeException(((Exception) cleanPackageResult.getExceptions().get(0)));
 			}
-			
+
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 		return null;
 	}
-	
+
 	private MavenExecutionResult buildProject() throws IOException {
 		DefaultMavenExecutionRequest cleanPackageRequest = new DefaultMavenExecutionRequest();
 		cleanPackageRequest.setBaseDirectory(projectFolder);
-		cleanPackageRequest.setGoals(Arrays.asList(new String[] { "clean",
-				"package" }));
-		MavenExecutionResult cleanPackageResult = embedder
-				.execute(cleanPackageRequest);
+		cleanPackageRequest.setGoals(Arrays.asList(new String[] { "clean", "package" }));
+		MavenExecutionResult cleanPackageResult = embedder.execute(cleanPackageRequest);
 
 		warFile = new File(projectFolder, "target/" + TARGET_ARTIFACT + ".war");
 
@@ -128,6 +120,7 @@ public class FormGenerator extends AbstractGenerator {
 
 	/**
 	 * Create the work folder
+	 * 
 	 * @throws IOException
 	 */
 	private void initWorkFolder() throws IOException {
@@ -141,29 +134,23 @@ public class FormGenerator extends AbstractGenerator {
 
 	private void initMaven() throws MavenEmbedderException {
 		configuration = new DefaultConfiguration();
-		configuration.setClassLoader(Thread.currentThread()
-				.getContextClassLoader());
+		configuration.setClassLoader(Thread.currentThread().getContextClassLoader());
 		embedder = new MavenEmbedder(configuration);
 	}
 
 	private MavenExecutionResult createProject() throws Exception {
-		
+
 		DefaultMavenExecutionRequest archetypeCreateRequest = new DefaultMavenExecutionRequest();
 		archetypeCreateRequest.setBaseDirectory(workFolder);
-		archetypeCreateRequest.setGoals(Arrays
-				.asList(new String[] { "archetype:generate" }));
+		archetypeCreateRequest.setGoals(Arrays.asList(new String[] { "archetype:generate" }));
 		archetypeCreateRequest.setProperty("interactiveMode", "false");
-		archetypeCreateRequest.setProperty("archetypeArtifactId",
-				ARCHETYPE_ARTIFACT);
+		archetypeCreateRequest.setProperty("archetypeArtifactId", ARCHETYPE_ARTIFACT);
 		archetypeCreateRequest.setProperty("archetypeGroupId", ARCHETYPE_GROUP);
-		archetypeCreateRequest.setProperty("archetypeVersion",
-				ARCHETYPE_VERSION);
+		archetypeCreateRequest.setProperty("archetypeVersion", ARCHETYPE_VERSION);
 		if (ARCHETYPE_VERSION.endsWith("SNAPSHOT")) {
-			archetypeCreateRequest.setProperty("archetypeRepository",
-					SNAPSHOTREPOSITORY);
+			archetypeCreateRequest.setProperty("archetypeRepository", SNAPSHOTREPOSITORY);
 		} else {
-			archetypeCreateRequest.setProperty("archetypeRepository",
-					REPOSITORY);
+			archetypeCreateRequest.setProperty("archetypeRepository", REPOSITORY);
 		}
 		archetypeCreateRequest.setProperty("basedir", workFolder.getAbsolutePath());
 		archetypeCreateRequest.setProperty("groupId", TARGET_GROUP);
@@ -176,8 +163,7 @@ public class FormGenerator extends AbstractGenerator {
 
 		projectFolder = new File(workFolder, TARGET_ARTIFACT);
 		pomFile = new File(projectFolder, "pom.xml");
-		alfrescoProperties = new File(projectFolder,
-				"src/main/resources/alfresco.properties");
+		alfrescoProperties = new File(projectFolder, "src/main/resources/alfresco.properties");
 
 		return result;
 	}
@@ -188,8 +174,7 @@ public class FormGenerator extends AbstractGenerator {
 		Element build = project.getChild("build", NAMESPACE_MAVENPOM);
 		Element plugins = build.getChild("plugins", NAMESPACE_MAVENPOM);
 		Element plugin = plugins.getChild("plugin", NAMESPACE_MAVENPOM);
-		Element configurationElement = plugin.getChild("configuration",
-				NAMESPACE_MAVENPOM);
+		Element configurationElement = plugin.getChild("configuration", NAMESPACE_MAVENPOM);
 		addFiles("clazzFiles", clazzModels, configurationElement);
 		addFiles("formsFiles", formModels, configurationElement);
 		FileOutputStream os = new FileOutputStream(pomFile);
@@ -207,8 +192,7 @@ public class FormGenerator extends AbstractGenerator {
 		os.close();
 	}
 
-	private void addFiles(String name, List<String> models,
-			Element configurationElement) {
+	private void addFiles(String name, List<String> models, Element configurationElement) {
 		Element files = configurationElement.getChild(name, NAMESPACE_MAVENPOM);
 		for (String model : models) {
 			Element param = new Element("param");
@@ -222,8 +206,7 @@ public class FormGenerator extends AbstractGenerator {
 		formModels = getModels(modelsInfo, FormPackage.eNS_URI);
 	}
 
-	private List<String> getModels(Map<String, List<IFile>> modelsInfo,
-			String nsURI) {
+	private List<String> getModels(Map<String, List<IFile>> modelsInfo, String nsURI) {
 		List<String> models = new ArrayList<String>();
 		List<IFile> modelsIFile = modelsInfo.get(nsURI);
 		if (modelsIFile != null) {

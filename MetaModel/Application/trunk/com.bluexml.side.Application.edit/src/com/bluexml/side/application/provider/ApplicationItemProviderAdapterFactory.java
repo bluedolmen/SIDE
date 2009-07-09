@@ -236,6 +236,29 @@ public class ApplicationItemProviderAdapterFactory extends ApplicationAdapterFac
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.application.ModuleConstraint} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ModuleConstraintItemProvider moduleConstraintItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.application.ModuleConstraint}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createModuleConstraintAdapter() {
+		if (moduleConstraintItemProvider == null) {
+			moduleConstraintItemProvider = new ModuleConstraintItemProvider(this);
+		}
+
+		return moduleConstraintItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -341,6 +364,7 @@ public class ApplicationItemProviderAdapterFactory extends ApplicationAdapterFac
 		if (optionItemProvider != null) optionItemProvider.dispose();
 		if (configurationParametersItemProvider != null) configurationParametersItemProvider.dispose();
 		if (deployerConfigurationItemProvider != null) deployerConfigurationItemProvider.dispose();
+		if (moduleConstraintItemProvider != null) moduleConstraintItemProvider.dispose();
 	}
 
 }

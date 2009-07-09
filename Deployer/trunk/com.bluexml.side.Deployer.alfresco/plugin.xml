@@ -13,7 +13,7 @@
                id="alfresco_3.x"
                version="Alfresco3.x Labs and Entreprise">
             <deployerVersion
-                  class="com.bluexml.side.deployer.alfresco.AMPDeployer"
+                  class="com.bluexml.side.deployer.alfresco.AlfrescoDeployer"
                   description="Check this to generate a full deployable Alfresco package containing the newly generated Alfresco artefacts."
                   id="com.bluexml.side.Deployer.alfresco"
                   version="S-IDE Alfresco Deployer">

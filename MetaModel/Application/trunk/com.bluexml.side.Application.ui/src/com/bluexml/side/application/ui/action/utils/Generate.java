@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.StyleRange;
@@ -31,6 +31,8 @@ import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.util.deployer.Deployer;
 import com.bluexml.side.util.documentation.LogSave;
 import com.bluexml.side.util.generator.AbstractGenerator;
+import com.bluexml.side.util.generator.dependency.DependencesManager;
+import com.bluexml.side.util.generator.dependency.ModuleConstraint;
 import com.bluexml.side.util.libs.IFileHelper;
 
 public class Generate extends Thread {
@@ -49,7 +51,7 @@ public class Generate extends Thread {
 	 * @param configuration
 	 * @param staticParameters
 	 * @param models
-	 * @param logLink2 
+	 * @param logLink2
 	 * @param progressBar
 	 * @param label
 	 * @param styletext
@@ -98,8 +100,7 @@ public class Generate extends Thread {
 			addErrorText("Error with model : " + e.getMessage());
 			e.printStackTrace();
 		}
-		
-		
+
 		// Validation :
 		label.setText("Validating models");
 		if (!skipValidation) {
@@ -114,9 +115,9 @@ public class Generate extends Thread {
 						} else {
 							addErrorText("Model " + m.getName() + " isn't validated. Please launch 'Validate' on top model element of " + m.getName() + ".");
 						}
-						
+
 					} catch (IOException e) {
-						addErrorText("Error with model " + m.getName() + " : " +e.getMessage());
+						addErrorText("Error with model " + m.getName() + " : " + e.getMessage());
 						e.printStackTrace();
 					}
 				}
@@ -129,13 +130,13 @@ public class Generate extends Thread {
 
 	/**
 	 * Return the log path (folder path + configuration name)
+	 * 
 	 * @param configuration
 	 * @param configurationParameters
 	 * @return
 	 */
-	private String getLogPath(Configuration configuration,
-			Map<String, String> configurationParameters) {
-		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + System.getProperty ("file.separator") + configuration.getName();
+	private String getLogPath(Configuration configuration, Map<String, String> configurationParameters) {
+		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + System.getProperty("file.separator") + configuration.getName();
 	}
 
 	private void addText(String text) {
@@ -178,11 +179,9 @@ public class Generate extends Thread {
 				try {
 					LogSave.buildGeneraLogFile(logPath);
 					IFileHelper.refreshFolder(logPath);
-					logLink.setText("<html><body style=\"overflow:auto; background-color:#f0f0f0;\"><div style=\"font-family: Verdana; "
-				+ "color: #444;" + "text-decoration: none;"
-				+ "word-spacing: normal;" + "text-align: justify;"
-				+ "letter-spacing: 0;" + "line-height: 1.2em;"
-				+ "font-size: 11px; width:100%; text-align:center;\">Log File can be found <a href=\"file:///" + IFileHelper.createFolder(logPath).getLocation().toOSString() + System.getProperty("file.separator") + LogSave.LOG_FILE_NAME + "\" target=\"_blank\">here</a><br\\>(" + IFileHelper.createFolder(logPath).getLocation().toOSString() + System.getProperty("file.separator") + LogSave.LOG_FILE_NAME + ")</div></body></html>");
+					logLink.setText("<html><body style=\"overflow:auto; background-color:#f0f0f0;\"><div style=\"font-family: Verdana; " + "color: #444;" + "text-decoration: none;" + "word-spacing: normal;" + "text-align: justify;" + "letter-spacing: 0;" + "line-height: 1.2em;"
+							+ "font-size: 11px; width:100%; text-align:center;\">Log File can be found <a href=\"file:///" + IFileHelper.createFolder(logPath).getLocation().toOSString() + System.getProperty("file.separator") + LogSave.LOG_FILE_NAME
+							+ "\" target=\"_blank\">here</a><br\\>(" + IFileHelper.createFolder(logPath).getLocation().toOSString() + System.getProperty("file.separator") + LogSave.LOG_FILE_NAME + ")</div></body></html>");
 					logLink.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -255,9 +254,17 @@ public class Generate extends Thread {
 					String name = elem.getId().substring(elem.getId().lastIndexOf(".") + 1);
 					label.setText("Initialize " + name);
 					addText(System.getProperty("line.separator") + "Generation for " + name);
-					
+
 					try {
-						generator.initialize(generationParameters, generatorOptions, configurationParameters);
+						List<ModuleConstraint> lmc = new ArrayList<ModuleConstraint>();
+						EList<com.bluexml.side.application.ModuleConstraint> l =elem.getModuleContraints();
+						for (int c=0;c<l.size();c++) {
+							com.bluexml.side.application.ModuleConstraint current = l.get(c);
+							lmc.add(new ModuleConstraint(current.getModuleId(),current.getModuleType(),current.getVersionMin(),current.getVersionMax()));
+						}
+						DependencesManager dm = new DependencesManager(lmc);
+						
+						generator.initialize(generationParameters, generatorOptions, configurationParameters, dm);
 					} catch (Exception e) {
 						error = true;
 						addErrorText(System.getProperty("line.separator") + "ERROR : " + (e.getMessage() != null ? e.getMessage() : ""));
@@ -276,7 +283,7 @@ public class Generate extends Thread {
 								label.setText(System.getProperty("line.separator") + "Completing generation for " + name);
 								Collection<IFile> generatedFiles = new ArrayList<IFile>();
 								generatedFiles = generator.complete();
-								
+
 								addText(System.getProperty("line.separator") + "Files generated by " + name + " :");
 								if (generatedFiles != null) {
 									for (IFile filePath : generatedFiles) {
@@ -284,14 +291,14 @@ public class Generate extends Thread {
 									}
 								}
 								addOneStep(progressBar);
-								
+
 							} catch (Exception e) {
 								error = true;
 								addErrorText(System.getProperty("line.separator") + "ERROR : " + (e.getMessage() != null ? e.getMessage() : ""));
 								generator.addErrorLog("Generation error : " + e.getMessage(), e.getStackTrace(), null);
 								e.printStackTrace();
 							}
-							
+
 							try {
 								generator.createStampFile();
 							} catch (Exception e) {
@@ -299,7 +306,7 @@ public class Generate extends Thread {
 								addErrorText(System.getProperty("line.separator") + "ERROR :  Stamp file error.");
 								e.printStackTrace();
 							}
-							
+
 							addOneStep(progressBar);
 						}
 					} else {
@@ -308,8 +315,8 @@ public class Generate extends Thread {
 					}
 				}
 				String fileName = "gen_" + generator.getTechVersion() + ".xml";
-				LogSave.toXml(generator.getLog(),fileName, logPath + System.getProperty("file.separator") + "work"  + System.getProperty("file.separator"));
-			} else { 
+				LogSave.toXml(generator.getLog(), fileName, logPath + System.getProperty("file.separator") + "work" + System.getProperty("file.separator"));
+			} else {
 				error = true;
 			}
 		}
@@ -336,7 +343,7 @@ public class Generate extends Thread {
 			configurationParameters.put("metaModelName", depConf.getMetaModelName());
 			configurationParameters.put("technologyName", depConf.getTechnologyName());
 			configurationParameters.put("technologyVersionName", depConf.getTechnologyVersionName());
-			
+
 			List<Option> options = depConf.getOptions();
 			// We get the option for this generator
 			List<String> deployerOptions = new ArrayList<String>();
@@ -344,7 +351,7 @@ public class Generate extends Thread {
 				deployerOptions.add(option.getKey());
 			}
 			Bundle plugin = Platform.getBundle(id_deployer);
-			
+
 			Class<?> gen;
 			Object genObj = null;
 			try {
@@ -362,9 +369,9 @@ public class Generate extends Thread {
 			}
 
 			if (genObj instanceof Deployer) {
-				Deployer deployer = (Deployer) genObj;				
+				Deployer deployer = (Deployer) genObj;
 				deployer.initialize(configurationParameters, generationParameters, deployerOptions);
-				
+
 				try {
 					deployer.deploy();
 				} catch (Exception e) {
@@ -372,16 +379,16 @@ public class Generate extends Thread {
 					error = true;
 					addErrorText(System.getProperty("line.separator") + "Error during deployment. " + e.getMessage());
 				}
-				
+
 				try {
 					deployer.moveStampFile(logPath);
 				} catch (Exception e) {
 					e.printStackTrace();
 					addWarningText(System.getProperty("line.separator") + "Error during logging. " + e.getMessage());
 				}
-				
+
 				String fileName = "dep_" + deployer.getTechVersion() + ".xml";
-				LogSave.toXml(deployer.getLog(),fileName, logPath + System.getProperty("file.separator") + "work"  + System.getProperty("file.separator"));
+				LogSave.toXml(deployer.getLog(), fileName, logPath + System.getProperty("file.separator") + "work" + System.getProperty("file.separator"));
 			}
 		}
 		return error;

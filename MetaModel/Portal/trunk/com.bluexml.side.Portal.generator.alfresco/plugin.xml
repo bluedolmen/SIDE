@@ -23,7 +23,10 @@
                      id="com.bluexml.side.Portal.generator.alfresco"
                      version="S-IDE Alfresco Portal Generator">
                   <moduleDependence
-                        moduleId="com.bluexml.side.Integration.alfrescoShare.doclist">
+                        moduleId="com.bluexml.side.Integration.alfrescoShare.doclist"
+                        moduleType="amp"
+                        new_attribute="toto"
+                        versionMin="1.0.0">
                   </moduleDependence>
                   <mustBeUnchecked
                         pluginId="com.bluexml.side.Class.generator.alfresco">

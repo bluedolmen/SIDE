@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.TreeItem;
 
 import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.application.ui.action.tree.CheckConstraints;
+import com.bluexml.side.application.ui.action.tree.ModuleConstraints;
 import com.bluexml.side.application.ui.action.tree.TreeElement;
 import com.bluexml.side.application.ui.action.tree.TreeNode;
 
@@ -92,8 +93,6 @@ public class ConstraintsChecker {
 				mustBeUnchecked.add(it);
 			}
 		}
-		
-		
 		return map;
 	}
 

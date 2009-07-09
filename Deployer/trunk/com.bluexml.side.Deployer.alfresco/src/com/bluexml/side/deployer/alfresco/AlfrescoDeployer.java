@@ -17,7 +17,6 @@ public class AlfrescoDeployer extends AbstractMultiDeployer {
 		ShareDeployer shareDep = new ShareDeployer();
 		shareDep.setWebappName("share");
 		addDeployer(shareDep);
-
 	}
 
 	@Override

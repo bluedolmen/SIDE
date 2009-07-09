@@ -73,6 +73,7 @@ public class ComponantConfigurationItemProvider
 			addMetaModelNamePropertyDescriptor(object);
 			addTechnologyVersionNamePropertyDescriptor(object);
 			addTechnologyNamePropertyDescriptor(object);
+			addModuleContraintsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -210,6 +211,28 @@ public class ComponantConfigurationItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Module Contraints feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addModuleContraintsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ComponantConfiguration_moduleContraints_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ComponantConfiguration_moduleContraints_feature", "_UI_ComponantConfiguration_type"),
+				 ApplicationPackage.Literals.COMPONANT_CONFIGURATION__MODULE_CONTRAINTS,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -222,6 +245,7 @@ public class ComponantConfigurationItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ApplicationPackage.Literals.COMPONANT_CONFIGURATION__OPTIONS);
+			childrenFeatures.add(ApplicationPackage.Literals.COMPONANT_CONFIGURATION__MODULE_CONTRAINTS);
 		}
 		return childrenFeatures;
 	}

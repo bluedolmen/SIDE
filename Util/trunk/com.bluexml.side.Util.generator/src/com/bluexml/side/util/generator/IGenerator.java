@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 
+import com.bluexml.side.util.generator.dependency.DependencesManager;
+
 public interface IGenerator {
 
 	/**
@@ -19,31 +21,28 @@ public interface IGenerator {
 	 *            the list of selected options for the generator.
 	 * @param configurationParamers
 	 *            the list of technical parameters, shared by all generators.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
-	public void initialize(Map<String, String> generationParameters,
-			Map<String, Boolean> generatorOptions,
-			Map<String, String> configurationParameters) throws Exception;
-	
-	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo,
-			String id_metamodel);
-	
+	public void initialize(Map<String, String> generationParameters, Map<String, Boolean> generatorOptions, Map<String, String> configurationParameters, DependencesManager dm) throws Exception;
+
+	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo, String id_metamodel);
+
 	/**
 	 * This method launch the generation.
 	 * 
-	 * @param models the input models
+	 * @param models
+	 *            the input models
 	 * @return the list of generated files
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public Collection<IFile> generate(Map<String, List<IFile>> models, String id_metamodel) throws Exception;
 
 	/**
-	 * This method run the post-action after the generation. 
-	 *  
+	 * This method run the post-action after the generation.
+	 * 
 	 * @return the list of modified files
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public Collection<IFile> complete() throws Exception;
-	
-	
+
 }

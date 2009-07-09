@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFolder;
@@ -21,6 +22,8 @@ import com.bluexml.side.util.documentation.structure.LogEntry;
 import com.bluexml.side.util.documentation.structure.SIDELog;
 import com.bluexml.side.util.documentation.structure.enumeration.LogEntryType;
 import com.bluexml.side.util.documentation.structure.enumeration.LogType;
+import com.bluexml.side.util.generator.dependency.DependencesManager;
+import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.security.Checkable;
 
@@ -41,6 +44,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	public String TEMP_FOLDER = "tmp";
 	public static String GENERATOR_CODE = null;
 	protected static String techVersion = null;
+	protected DependencesManager dm;
 
 	public String getTechVersion() {
 		return techVersion;
@@ -58,36 +62,36 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		return TEMP_FOLDER;
 	}
 
-	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_) throws Exception {
+	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, DependencesManager dm) throws Exception {
 		generationParameters = generationParameters_;
 		generatorOptions = generatorOptions_;
 		configurationParameters = configurationParameters_;
 		techVersion = configurationParameters_.get("technologyVersion");
 		id = configurationParameters_.get("generatorId");
-		log = new SIDELog(configurationParameters_.get("generatorName"), this.id,
-				configurationParameters_.get("technologyVersionName"),
-				configurationParameters_.get("technologyName"),
-				configurationParameters_.get("metaModelName"),new Date(), LogType.GENERATION);
+		log = new SIDELog(configurationParameters_.get("generatorName"), this.id, configurationParameters_.get("technologyVersionName"), configurationParameters_.get("technologyName"), configurationParameters_.get("metaModelName"), new Date(), LogType.GENERATION);
+		this.dm = dm;
 	}
-	
+
 	/**
-	 * This method must be call after a successful generation to put an XML file into the gen path
-	 * that will be used to know what have been deployed. Mainly use for log purpose.
-	 * @throws CoreException 
-	 * @throws IOException 
-	 * @throws FileNotFoundException 
+	 * This method must be call after a successful generation to put an XML file
+	 * into the gen path that will be used to know what have been deployed.
+	 * Mainly use for log purpose.
+	 * 
+	 * @throws CoreException
+	 * @throws IOException
+	 * @throws FileNotFoundException
 	 */
 	public final void createStampFile() throws CoreException, FileNotFoundException, IOException {
 		IFolder ff = IFileHelper.createFolder(getTargetPath() + System.getProperty("file.separator") + techVersion);
 		Element racine = new Element("toDeploy");
-		Attribute classe = new Attribute("id",this.id);
+		Attribute classe = new Attribute("id", this.id);
 		racine.setAttribute(classe);
-		Attribute date = new Attribute("date",new Date().toString());
+		Attribute date = new Attribute("date", new Date().toString());
 		racine.setAttribute(date);
 		XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
 		sortie.output(racine, new FileOutputStream(IFileHelper.getFile(IFileHelper.createFile(ff, this.id + ".xml"))));
 	}
-	
+
 	/**
 	 * Add a Log
 	 * 
@@ -99,7 +103,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	private void addLog(String title, String description, URI uri, LogEntryType logEntryType) {
 		log.addLogEntry(new LogEntry(title, description, uri, logEntryType));
 	}
-	
+
 	private void addLog(String title, String description, String uri, LogEntryType logEntryType) {
 		log.addLogEntry(new LogEntry(title, description, uri, logEntryType));
 	}
@@ -143,6 +147,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	public void addWarningLog(String title, String description, String uri) {
 		addLog(title, description, uri, LogEntryType.WARNING);
 	}
+
 	public void addWarningLog(String title, String description, URI uri) {
 		addLog(title, description, uri, LogEntryType.WARNING);
 	}
@@ -157,12 +162,15 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	public void addInfoLog(String title, String description, URI uri) {
 		addLog(title, description, uri, LogEntryType.GENERATION_INFORMATION);
 	}
+
 	public void addInfoLog(String title, String description, String uri) {
 		addLog(title, description, uri, LogEntryType.GENERATION_INFORMATION);
 	}
-	
+
 	/**
-	 * Add a service log (service : a webpage or a file that can be acceeded by user to test application).
+	 * Add a service log (service : a webpage or a file that can be acceeded by
+	 * user to test application).
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -170,6 +178,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	public void addServiceLog(String title, String description, URI uri) {
 		addLog(title, description, uri, LogEntryType.SERVICE);
 	}
+
 	public void addServiceLog(String title, String description, String uri) {
 		addLog(title, description, uri, LogEntryType.SERVICE);
 	}
@@ -184,7 +193,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	public void addFileGeneratedLog(String path, String description, String uri) {
 		addLog(path, description, uri, LogEntryType.GENERATED_FILE);
 	}
-	
+
 	public void addFileGeneratedLog(String path, String description, URI uri) {
 		addLog(path, description, uri, LogEntryType.GENERATED_FILE);
 	}
@@ -203,7 +212,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	 * @return
 	 */
 	protected String getLogFile() {
-		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral())+getClass().getName()+".txt";
+		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + getClass().getName() + ".txt";
 
 	}
 
@@ -308,13 +317,29 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		System.out.println("ConfigurationParameters :" + configurationParameters);
 		System.out.println("TechVersion :" + techVersion);
 	}
-	
+
 	/**
 	 * This method check if the user have the license to use this component.
 	 * 
 	 * @return true if the component can be used.
 	 */
-	public boolean check(){
+	public boolean check() {
 		return true;
+	}
+
+	/**
+	 * use DependencesManager to get files required by the generated package
+	 * and copy them in the technology version folder
+	 * @throws Exception
+	 */
+	public void addDependences() throws Exception {
+		// get dependences
+		List<File> resources = dm.getDependencesPackages(getTargetSystemFile());
+		// copy them into target (<generated>/<technologieVersion>)
+		for (File file : resources) {
+			FileHelper.copyFiles(file, getTargetSystemFile(), false);
+		}
+		// dependences packages is now with other resources in the target folder
+
 	}
 }

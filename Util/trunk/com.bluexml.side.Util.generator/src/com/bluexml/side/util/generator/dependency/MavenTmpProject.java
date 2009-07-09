@@ -1,0 +1,235 @@
+package com.bluexml.side.util.generator.dependency;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.apache.maven.artifact.repository.ArtifactRepository;
+import org.apache.maven.embedder.Configuration;
+import org.apache.maven.embedder.DefaultConfiguration;
+import org.apache.maven.embedder.MavenEmbedder;
+import org.apache.maven.embedder.MavenEmbedderException;
+import org.apache.maven.execution.DefaultMavenExecutionRequest;
+import org.apache.maven.execution.MavenExecutionResult;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.Namespace;
+import org.jdom.input.SAXBuilder;
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
+
+import com.bluexml.side.util.libs.FileHelper;
+
+public class MavenTmpProject {
+	private File pomFile;
+	private File projectFolder;
+	private File workFolder;
+	private MavenEmbedder embedder;
+	private Configuration configuration;
+	public static final Namespace NAMESPACE_MAVENPOM = Namespace.getNamespace("pom", "http://maven.apache.org/POM/4.0.0");
+	private static final String TARGET_VERSION = "1.0.0";
+	private static final String TARGET_ARTIFACT = "tmpProject";
+	private static final String TARGET_GROUP = "com.bluexml.side.dependencies";
+	private DependencesManager dm;
+	private static final SAXBuilder sxb = new SAXBuilder();
+	private static final XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
+	File tpmProject;
+
+	public MavenTmpProject() throws Exception {
+		this.workFolder = new File(".");
+		initMaven();
+	}
+
+	public MavenTmpProject(File workingFolder) throws Exception {
+		this.workFolder = workingFolder;
+		initMaven();
+	}
+
+	public MavenTmpProject(File workingFolder, DependencesManager dm) throws Exception {
+		this.workFolder = workingFolder;
+		this.dm = dm;
+		initMaven();
+	}
+
+	private void createAndGetDependencies() throws Exception {
+		FileHelper.deleteFile(tpmProject);
+		createProject();
+		prepareProject(dm);
+		MavenExecutionResult result = getDependences();
+		if (result.getExceptions().size() > 0) {
+			List exceps = result.getExceptions();
+			System.err.println("Exception occure during maven process :" + exceps);
+			throw new Exception("Exception occure during maven process :" + exceps);
+		}
+	}
+
+	/**
+	 * @param args
+	 * @throws Exception
+	 */
+	public static void main(String[] args) throws Exception {
+
+		DependencesManager dm = new DependencesManager();
+		ModuleConstraint mc = new ModuleConstraint("com.bluexml.side.Integration.MvAMPTest", "amp", "1.0.1", "1.0.0");
+		dm.addEntry(mc);
+		MavenTmpProject mv = new MavenTmpProject(new File("/Users/davidabad/Workspace2.0/MavenTest/nouveauProjet"), dm);
+
+		FileHelper.deleteFile(mv.tpmProject);
+		List<File> l = mv.getAllDependenciesResources();
+		System.out.println("Dependencies packages :");
+		for (File file : l) {
+			System.out.println(file);
+		}
+		// printDoc(mv.pomFile);
+	}
+
+	private void initMaven() throws MavenEmbedderException {
+		configuration = new DefaultConfiguration();
+		configuration.setClassLoader(Thread.currentThread().getContextClassLoader());
+		embedder = new MavenEmbedder(configuration);
+		tpmProject = new File(workFolder.getAbsolutePath() + File.separator + TARGET_ARTIFACT);
+	}
+
+	/**
+	 * update pom file to add wanted dependencies
+	 * 
+	 * @throws Exception
+	 */
+	private void prepareProject(DependencesManager dm) throws Exception {
+		Document pom = sxb.build(pomFile);
+		Element project = pom.getRootElement();
+		Namespace n = project.getNamespace();
+		Element dependencies = project.getChild("dependencies", n);
+		for (ModuleConstraint mc : dm.getContraints()) {
+			Element depends = buildPomDependency(n, mc);
+			dependencies.addContent(depends);
+		}
+
+		FileOutputStream os = new FileOutputStream(pomFile);
+		outputter.output(pom, os);
+		os.close();
+
+	}
+
+	/**
+	 * build pom dependency fragment from ModuleConstraint
+	 * 
+	 * @param n
+	 * @return
+	 */
+	private Element buildPomDependency(Namespace n, ModuleConstraint mc) {
+		Element depends = new Element("dependency", n.getURI());
+
+		Element groupId = new Element("groupId", n.getURI()).setText(mc.getGroupId());
+		Element artifactId = new Element("artifactId", n.getURI()).setText(mc.getArtifactId());
+		Element version = new Element("version", n.getURI()).setText(mc.getVersionMin().toString());
+		Element type = new Element("type", n.getURI()).setText(mc.getModuleType());
+
+		depends.addContent(groupId);
+		depends.addContent(artifactId);
+		depends.addContent(version);
+		depends.addContent(type);
+		return depends;
+	}
+
+	/**
+	 * call package maven lifeCircle, so maven get all dependencies from
+	 * repositories to local
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	private MavenExecutionResult getDependences() throws Exception {
+		DefaultMavenExecutionRequest archetypeCreateRequest = new DefaultMavenExecutionRequest();
+		archetypeCreateRequest.setBaseDirectory(tpmProject);
+		archetypeCreateRequest.setGoals(Arrays.asList(new String[] { "compile" }));
+		archetypeCreateRequest.setProperty("interactiveMode", "false");
+		archetypeCreateRequest.setProperty("basedir", workFolder.getAbsolutePath() + File.separator + TARGET_ARTIFACT);
+		archetypeCreateRequest.setProperty("groupId", TARGET_GROUP);
+		archetypeCreateRequest.setProperty("artifactId", TARGET_ARTIFACT);
+		archetypeCreateRequest.setProperty("version", TARGET_VERSION);
+
+		archetypeCreateRequest.setUpdateSnapshots(true);
+
+		MavenExecutionResult result = embedder.execute(archetypeCreateRequest);
+		return result;
+	}
+
+	/**
+	 * call maven to build a maven project
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	private MavenExecutionResult createProject() throws Exception {
+
+		DefaultMavenExecutionRequest archetypeCreateRequest = new DefaultMavenExecutionRequest();
+		archetypeCreateRequest.setBaseDirectory(workFolder);
+		archetypeCreateRequest.setGoals(Arrays.asList(new String[] { "archetype:generate" }));
+		archetypeCreateRequest.setProperty("interactiveMode", "false");
+
+		archetypeCreateRequest.setProperty("basedir", workFolder.getAbsolutePath());
+		archetypeCreateRequest.setProperty("groupId", TARGET_GROUP);
+		archetypeCreateRequest.setProperty("artifactId", TARGET_ARTIFACT);
+		archetypeCreateRequest.setProperty("version", TARGET_VERSION);
+
+		archetypeCreateRequest.setUpdateSnapshots(true);
+
+		MavenExecutionResult result = embedder.execute(archetypeCreateRequest);
+
+		projectFolder = new File(workFolder, TARGET_ARTIFACT);
+		pomFile = new File(projectFolder, "pom.xml");
+
+		return result;
+	}
+
+	public static void printDoc(File xml) throws Exception {
+		SAXBuilder sxb = new SAXBuilder();
+		Document doc = sxb.build(xml);
+		printDoc(doc);
+	}
+
+	public static void printDoc(Document doc) throws Exception {
+		try {
+			XMLOutputter output = new XMLOutputter(Format.getPrettyFormat());
+			String element_string = output.outputString(doc);
+			System.out.println(element_string);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static Element createElement(String eleName, Document doc) {
+		return new Element(eleName, doc.getBaseURI());
+	}
+
+	public List<File> getAllDependenciesResources() throws Exception {
+		List<File> dependencies = new ArrayList<File>();
+		createAndGetDependencies();
+		ArtifactRepository artRep = embedder.getLocalRepository();
+		System.out.println(artRep.getBasedir());
+		System.out.println(artRep.getUrl());
+		File f = new File(artRep.getBasedir());
+		if (f.exists()) {
+			List<ModuleConstraint> l = dm.getContraints();
+			for (ModuleConstraint moduleConstraint : l) {
+				String id = moduleConstraint.getModuleId();
+				String path = id.replaceAll("\\.", File.separator);
+				String version = moduleConstraint.getVersionMin().toString();
+				path += File.separator + version;
+				String moduleName = moduleConstraint.getArtifactId() + "-" + version + "." + moduleConstraint.getModuleType();
+				File localmodule = new File(f.getAbsolutePath() + File.separator + path + File.separator + moduleName);
+				if (localmodule.exists()) {
+					dependencies.add(localmodule);
+				} else {
+					System.err.println("local package not found ! " + localmodule);
+				}
+			}
+		} else {
+			System.err.println("local repository not found !");
+		}
+		return dependencies;
+	}
+}

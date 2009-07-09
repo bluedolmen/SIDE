@@ -12,22 +12,24 @@ public abstract class AbstractMultiDeployer extends Deployer {
 	public void addDeployer(Deployer dep) {
 		deployers.add(dep);
 	}
-	
+
 	@Override
 	protected void deployProcess(File fileToDeploy) throws Exception {
+		
 		for (Deployer wd : deployers) {
-			wd.deploy();
+			//wd.deploy();
 		}
+		
 	}
 
 	@Override
 	public void initialize(Map<String, String> configurationParameters, Map<String, String> generationParameters, List<String> options) {
 		super.initialize(configurationParameters, generationParameters, options);
-		for (Deployer wd : deployers) {			
-			wd.initialize( configurationParameters, generationParameters, options);
+		for (Deployer wd : deployers) {
+			wd.initialize(configurationParameters, generationParameters, options);
 			// propagate options key
 			wd.setCleanKey(cleanKey);
-			wd.setLogChanges(logChanges);			
+			wd.setLogChanges(logChanges);
 		}
 	}
 }
