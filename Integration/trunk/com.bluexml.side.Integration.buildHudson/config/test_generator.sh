@@ -36,7 +36,7 @@ do
     models=`ls model`
     if [ $nb_error -eq 0 ]
     then
-      echo "<li>$DIR: Test Ok - <a href="$DIR/src-gen">Test Results</a> - <a href="$DIR/output.txt">Test log</a> - $nb_generate generated file(s) on model(s) <a href="$DIR/model>$models</a></li>" >>  $INDEX
+      echo "<li>$DIR: Test Ok - <a href="$DIR/src-gen">Test Results</a> - <a href="$DIR/output.txt">Test log</a> - $nb_generate generated file(s) on model(s) <a href="$DIR/model">$models</a></li>" >>  $INDEX
     else
       echo "<li>$DIR: <font color="red">Test on ERROR</font></b> - <A href="$DIR/output.txt">$nb_error raised errors</a>" >>  $INDEX
       if [ `ls src-gen | wc -l` -gt 0 ]; then
