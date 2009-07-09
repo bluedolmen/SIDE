@@ -8,15 +8,11 @@ import org.eclipse.core.runtime.IConfigurationElement;
 
 public abstract class OptionComponant extends TreeNode {
 
-	
-
 	private String key;
 	private String label;
 	private String description;
 
-	
-
-	public OptionComponant(IConfigurationElement elt, ImplNode implNode,TreeView root) {
+	public OptionComponant(IConfigurationElement elt, ImplNode implNode, TreeView root) {
 		super(root);
 		root.addOption(this);
 		parent = (TreeNode) implNode;
@@ -28,10 +24,13 @@ public abstract class OptionComponant extends TreeNode {
 		mustbeUnchecked = new ArrayList<CheckConstraints>();
 		for (IConfigurationElement child : elt.getChildren()) {
 			if (child.getName().equalsIgnoreCase("mustBeChecked")) {
-				mustbechecked.add(new CheckConstraints(child,this));
+				mustbechecked.add(new CheckConstraints(child, this));
 			}
 			if (child.getName().equalsIgnoreCase("mustBeUnChecked")) {
-				mustbeUnchecked.add(new CheckConstraints(child,this));
+				mustbeUnchecked.add(new CheckConstraints(child, this));
+			}
+			if (child.getName().equalsIgnoreCase("moduleDependence")) {
+				integrationModules.add(new ModuleConstraints(child, this));
 			}
 		}
 

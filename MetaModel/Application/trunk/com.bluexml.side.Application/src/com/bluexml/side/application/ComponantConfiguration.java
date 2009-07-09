@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.bluexml.side.application.ComponantConfiguration#getMetaModelName <em>Meta Model Name</em>}</li>
  *   <li>{@link com.bluexml.side.application.ComponantConfiguration#getTechnologyVersionName <em>Technology Version Name</em>}</li>
  *   <li>{@link com.bluexml.side.application.ComponantConfiguration#getTechnologyName <em>Technology Name</em>}</li>
+ *   <li>{@link com.bluexml.side.application.ComponantConfiguration#getModuleContraints <em>Module Contraints</em>}</li>
  * </ul>
  * </p>
  *
@@ -207,5 +208,21 @@ public interface ComponantConfiguration extends EObject {
 	 * @generated
 	 */
 	void setTechnologyName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Module Contraints</b></em>' containment reference list.
+	 * The list contents are of type {@link com.bluexml.side.application.ModuleConstraint}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Module Contraints</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Module Contraints</em>' containment reference list.
+	 * @see com.bluexml.side.application.ApplicationPackage#getComponantConfiguration_ModuleContraints()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ModuleConstraint> getModuleContraints();
 
 } // ComponantConfiguration

@@ -21,6 +21,10 @@ public abstract class TreeNode extends TreeElement {
 	protected List<CheckConstraints> mustbeUnchecked = new ArrayList<CheckConstraints>();
 	protected List<ModuleConstraints> integrationModules = new ArrayList<ModuleConstraints>();
 
+	public List<ModuleConstraints> getIntegrationModules() {
+		return integrationModules;
+	}
+
 	public abstract Collection<TreeNode> getChildren();
 
 	public abstract void addChildren(TreeNode child);

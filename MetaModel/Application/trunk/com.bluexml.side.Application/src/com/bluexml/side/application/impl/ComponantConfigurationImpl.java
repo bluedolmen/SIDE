@@ -8,6 +8,7 @@ package com.bluexml.side.application.impl;
 
 import com.bluexml.side.application.ApplicationPackage;
 import com.bluexml.side.application.ComponantConfiguration;
+import com.bluexml.side.application.ModuleConstraint;
 import com.bluexml.side.application.Option;
 
 import java.util.Collection;
@@ -24,6 +25,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -40,6 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.bluexml.side.application.impl.ComponantConfigurationImpl#getMetaModelName <em>Meta Model Name</em>}</li>
  *   <li>{@link com.bluexml.side.application.impl.ComponantConfigurationImpl#getTechnologyVersionName <em>Technology Version Name</em>}</li>
  *   <li>{@link com.bluexml.side.application.impl.ComponantConfigurationImpl#getTechnologyName <em>Technology Name</em>}</li>
+ *   <li>{@link com.bluexml.side.application.impl.ComponantConfigurationImpl#getModuleContraints <em>Module Contraints</em>}</li>
  * </ul>
  * </p>
  *
@@ -175,6 +178,16 @@ public abstract class ComponantConfigurationImpl extends EObjectImpl implements 
 	 * @ordered
 	 */
 	protected String technologyName = TECHNOLOGY_NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getModuleContraints() <em>Module Contraints</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getModuleContraints()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ModuleConstraint> moduleContraints;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -338,11 +351,25 @@ public abstract class ComponantConfigurationImpl extends EObjectImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ModuleConstraint> getModuleContraints() {
+		if (moduleContraints == null) {
+			moduleContraints = new EObjectContainmentEList<ModuleConstraint>(ModuleConstraint.class, this, ApplicationPackage.COMPONANT_CONFIGURATION__MODULE_CONTRAINTS);
+		}
+		return moduleContraints;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ApplicationPackage.COMPONANT_CONFIGURATION__OPTIONS:
 				return ((InternalEList<?>)getOptions()).basicRemove(otherEnd, msgs);
+			case ApplicationPackage.COMPONANT_CONFIGURATION__MODULE_CONTRAINTS:
+				return ((InternalEList<?>)getModuleContraints()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -369,6 +396,8 @@ public abstract class ComponantConfigurationImpl extends EObjectImpl implements 
 				return getTechnologyVersionName();
 			case ApplicationPackage.COMPONANT_CONFIGURATION__TECHNOLOGY_NAME:
 				return getTechnologyName();
+			case ApplicationPackage.COMPONANT_CONFIGURATION__MODULE_CONTRAINTS:
+				return getModuleContraints();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -404,6 +433,10 @@ public abstract class ComponantConfigurationImpl extends EObjectImpl implements 
 			case ApplicationPackage.COMPONANT_CONFIGURATION__TECHNOLOGY_NAME:
 				setTechnologyName((String)newValue);
 				return;
+			case ApplicationPackage.COMPONANT_CONFIGURATION__MODULE_CONTRAINTS:
+				getModuleContraints().clear();
+				getModuleContraints().addAll((Collection<? extends ModuleConstraint>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -437,6 +470,9 @@ public abstract class ComponantConfigurationImpl extends EObjectImpl implements 
 			case ApplicationPackage.COMPONANT_CONFIGURATION__TECHNOLOGY_NAME:
 				setTechnologyName(TECHNOLOGY_NAME_EDEFAULT);
 				return;
+			case ApplicationPackage.COMPONANT_CONFIGURATION__MODULE_CONTRAINTS:
+				getModuleContraints().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -463,6 +499,8 @@ public abstract class ComponantConfigurationImpl extends EObjectImpl implements 
 				return TECHNOLOGY_VERSION_NAME_EDEFAULT == null ? technologyVersionName != null : !TECHNOLOGY_VERSION_NAME_EDEFAULT.equals(technologyVersionName);
 			case ApplicationPackage.COMPONANT_CONFIGURATION__TECHNOLOGY_NAME:
 				return TECHNOLOGY_NAME_EDEFAULT == null ? technologyName != null : !TECHNOLOGY_NAME_EDEFAULT.equals(technologyName);
+			case ApplicationPackage.COMPONANT_CONFIGURATION__MODULE_CONTRAINTS:
+				return moduleContraints != null && !moduleContraints.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

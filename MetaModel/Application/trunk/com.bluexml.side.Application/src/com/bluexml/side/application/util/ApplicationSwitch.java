@@ -156,6 +156,12 @@ public class ApplicationSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ApplicationPackage.MODULE_CONSTRAINT: {
+				ModuleConstraint moduleConstraint = (ModuleConstraint)theEObject;
+				T result = caseModuleConstraint(moduleConstraint);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -292,6 +298,21 @@ public class ApplicationSwitch<T> {
 	 * @generated
 	 */
 	public T caseComponantConfiguration(ComponantConfiguration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Module Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Module Constraint</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModuleConstraint(ModuleConstraint object) {
 		return null;
 	}
 

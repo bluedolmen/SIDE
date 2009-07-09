@@ -8,6 +8,7 @@ import com.bluexml.side.application.ApplicationFactory;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.DeployerConfiguration;
 import com.bluexml.side.application.Option;
+import com.bluexml.side.application.ModuleConstraint;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 
@@ -40,6 +41,15 @@ public class Deployer extends ImplNode {
 					elt.setTechnologyName(((Technology) parent.getParent()).getLabel());
 					elt.setTechnologyVersionName(((TechnologyVersion) parent).getVersion());
 					elt.setDeployerName(this.getVersion());
+					
+					for (ModuleConstraints module : integrationModules) {
+						ModuleConstraint mc = ApplicationFactory.eINSTANCE.createModuleConstraint();
+						mc.setModuleId(module.getId());
+						mc.setVersionMin(module.getVersionNumMin());
+						mc.setVersionMax(module.getVersionNumMax());
+						elt.getModuleContraints().add(mc);
+					}
+					
 					// Launch options
 					for (TreeNode tn : options) {
 						OptionComponant o = (OptionComponant) tn;
@@ -47,6 +57,15 @@ public class Deployer extends ImplNode {
 							Option opt = ApplicationFactory.eINSTANCE.createOption();
 							opt.setKey(o.getKey());
 							elt.getOptions().add(opt);
+							
+							for (ModuleConstraints module : o.getIntegrationModules()) {
+								ModuleConstraint mc = ApplicationFactory.eINSTANCE.createModuleConstraint();
+								mc.setModuleId(module.getId());
+								mc.setVersionMin(module.getVersionNumMin());
+								mc.setVersionMax(module.getVersionNumMax());
+								elt.getModuleContraints().add(mc);
+							}
+							
 						}
 					}
 

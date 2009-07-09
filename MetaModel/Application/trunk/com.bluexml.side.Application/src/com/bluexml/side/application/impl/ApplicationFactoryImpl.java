@@ -76,6 +76,7 @@ public class ApplicationFactoryImpl extends EFactoryImpl implements ApplicationF
 			case ApplicationPackage.OPTION: return createOption();
 			case ApplicationPackage.CONFIGURATION_PARAMETERS: return createConfigurationParameters();
 			case ApplicationPackage.DEPLOYER_CONFIGURATION: return createDeployerConfiguration();
+			case ApplicationPackage.MODULE_CONSTRAINT: return createModuleConstraint();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -179,6 +180,16 @@ public class ApplicationFactoryImpl extends EFactoryImpl implements ApplicationF
 	public DeployerConfiguration createDeployerConfiguration() {
 		DeployerConfigurationImpl deployerConfiguration = new DeployerConfigurationImpl();
 		return deployerConfiguration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ModuleConstraint createModuleConstraint() {
+		ModuleConstraintImpl moduleConstraint = new ModuleConstraintImpl();
+		return moduleConstraint;
 	}
 
 	/**

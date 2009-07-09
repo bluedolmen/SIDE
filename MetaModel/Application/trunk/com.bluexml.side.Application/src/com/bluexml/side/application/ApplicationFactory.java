@@ -89,6 +89,15 @@ public interface ApplicationFactory extends EFactory {
 	DeployerConfiguration createDeployerConfiguration();
 
 	/**
+	 * Returns a new object of class '<em>Module Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Module Constraint</em>'.
+	 * @generated
+	 */
+	ModuleConstraint createModuleConstraint();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

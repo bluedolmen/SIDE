@@ -330,13 +330,22 @@ public interface ApplicationPackage extends EPackage {
 	int COMPONANT_CONFIGURATION__TECHNOLOGY_NAME = 6;
 
 	/**
+	 * The feature id for the '<em><b>Module Contraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONANT_CONFIGURATION__MODULE_CONTRAINTS = 7;
+
+	/**
 	 * The number of structural features of the '<em>Componant Configuration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONANT_CONFIGURATION_FEATURE_COUNT = 7;
+	int COMPONANT_CONFIGURATION_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.application.impl.GeneratorConfigurationImpl <em>Generator Configuration</em>}' class.
@@ -410,6 +419,15 @@ public interface ApplicationPackage extends EPackage {
 	 * @ordered
 	 */
 	int GENERATOR_CONFIGURATION__TECHNOLOGY_NAME = COMPONANT_CONFIGURATION__TECHNOLOGY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Module Contraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_CONFIGURATION__MODULE_CONTRAINTS = COMPONANT_CONFIGURATION__MODULE_CONTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Id metamodel</b></em>' attribute.
@@ -579,6 +597,15 @@ public interface ApplicationPackage extends EPackage {
 	int DEPLOYER_CONFIGURATION__TECHNOLOGY_NAME = COMPONANT_CONFIGURATION__TECHNOLOGY_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Module Contraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYER_CONFIGURATION__MODULE_CONTRAINTS = COMPONANT_CONFIGURATION__MODULE_CONTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Deployer Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -597,6 +624,61 @@ public interface ApplicationPackage extends EPackage {
 	int DEPLOYER_CONFIGURATION_FEATURE_COUNT = COMPONANT_CONFIGURATION_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.application.impl.ModuleConstraintImpl <em>Module Constraint</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.application.impl.ModuleConstraintImpl
+	 * @see com.bluexml.side.application.impl.ApplicationPackageImpl#getModuleConstraint()
+	 * @generated
+	 */
+	int MODULE_CONSTRAINT = 9;
+
+	/**
+	 * The feature id for the '<em><b>Module Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE_CONSTRAINT__MODULE_ID = 0;
+
+	/**
+	 * The feature id for the '<em><b>Version Min</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE_CONSTRAINT__VERSION_MIN = 1;
+
+	/**
+	 * The feature id for the '<em><b>Version Max</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE_CONSTRAINT__VERSION_MAX = 2;
+
+	/**
+	 * The feature id for the '<em><b>Module Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE_CONSTRAINT__MODULE_TYPE = 3;
+
+	/**
+	 * The number of structural features of the '<em>Module Constraint</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE_CONSTRAINT_FEATURE_COUNT = 4;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.application.StaticConfigurationParameters <em>Static Configuration Parameters</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -604,7 +686,7 @@ public interface ApplicationPackage extends EPackage {
 	 * @see com.bluexml.side.application.impl.ApplicationPackageImpl#getStaticConfigurationParameters()
 	 * @generated
 	 */
-	int STATIC_CONFIGURATION_PARAMETERS = 9;
+	int STATIC_CONFIGURATION_PARAMETERS = 10;
 
 
 	/**
@@ -918,6 +1000,71 @@ public interface ApplicationPackage extends EPackage {
 	EAttribute getComponantConfiguration_TechnologyName();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.application.ComponantConfiguration#getModuleContraints <em>Module Contraints</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Module Contraints</em>'.
+	 * @see com.bluexml.side.application.ComponantConfiguration#getModuleContraints()
+	 * @see #getComponantConfiguration()
+	 * @generated
+	 */
+	EReference getComponantConfiguration_ModuleContraints();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.application.ModuleConstraint <em>Module Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Module Constraint</em>'.
+	 * @see com.bluexml.side.application.ModuleConstraint
+	 * @generated
+	 */
+	EClass getModuleConstraint();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.ModuleConstraint#getModuleId <em>Module Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Module Id</em>'.
+	 * @see com.bluexml.side.application.ModuleConstraint#getModuleId()
+	 * @see #getModuleConstraint()
+	 * @generated
+	 */
+	EAttribute getModuleConstraint_ModuleId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.ModuleConstraint#getVersionMin <em>Version Min</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Version Min</em>'.
+	 * @see com.bluexml.side.application.ModuleConstraint#getVersionMin()
+	 * @see #getModuleConstraint()
+	 * @generated
+	 */
+	EAttribute getModuleConstraint_VersionMin();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.ModuleConstraint#getVersionMax <em>Version Max</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Version Max</em>'.
+	 * @see com.bluexml.side.application.ModuleConstraint#getVersionMax()
+	 * @see #getModuleConstraint()
+	 * @generated
+	 */
+	EAttribute getModuleConstraint_VersionMax();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.ModuleConstraint#getModuleType <em>Module Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Module Type</em>'.
+	 * @see com.bluexml.side.application.ModuleConstraint#getModuleType()
+	 * @see #getModuleConstraint()
+	 * @generated
+	 */
+	EAttribute getModuleConstraint_ModuleType();
+
+	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.application.StaticConfigurationParameters <em>Static Configuration Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1198,6 +1345,56 @@ public interface ApplicationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute COMPONANT_CONFIGURATION__TECHNOLOGY_NAME = eINSTANCE.getComponantConfiguration_TechnologyName();
+
+		/**
+		 * The meta object literal for the '<em><b>Module Contraints</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPONANT_CONFIGURATION__MODULE_CONTRAINTS = eINSTANCE.getComponantConfiguration_ModuleContraints();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.application.impl.ModuleConstraintImpl <em>Module Constraint</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.application.impl.ModuleConstraintImpl
+		 * @see com.bluexml.side.application.impl.ApplicationPackageImpl#getModuleConstraint()
+		 * @generated
+		 */
+		EClass MODULE_CONSTRAINT = eINSTANCE.getModuleConstraint();
+
+		/**
+		 * The meta object literal for the '<em><b>Module Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODULE_CONSTRAINT__MODULE_ID = eINSTANCE.getModuleConstraint_ModuleId();
+
+		/**
+		 * The meta object literal for the '<em><b>Version Min</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODULE_CONSTRAINT__VERSION_MIN = eINSTANCE.getModuleConstraint_VersionMin();
+
+		/**
+		 * The meta object literal for the '<em><b>Version Max</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODULE_CONSTRAINT__VERSION_MAX = eINSTANCE.getModuleConstraint_VersionMax();
+
+		/**
+		 * The meta object literal for the '<em><b>Module Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODULE_CONSTRAINT__MODULE_TYPE = eINSTANCE.getModuleConstraint_ModuleType();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.application.StaticConfigurationParameters <em>Static Configuration Parameters</em>}' enum.

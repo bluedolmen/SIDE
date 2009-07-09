@@ -116,6 +116,10 @@ public class ApplicationAdapterFactory extends AdapterFactoryImpl {
 				return createComponantConfigurationAdapter();
 			}
 			@Override
+			public Adapter caseModuleConstraint(ModuleConstraint object) {
+				return createModuleConstraintAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -258,6 +262,20 @@ public class ApplicationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createComponantConfigurationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.application.ModuleConstraint <em>Module Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.application.ModuleConstraint
+	 * @generated
+	 */
+	public Adapter createModuleConstraintAdapter() {
 		return null;
 	}
 

@@ -51,6 +51,14 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ComponantConfiguration/metaModelName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ComponantConfiguration/technologyVersionName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ComponantConfiguration/technologyName"/>
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference application.ecore#//ComponantConfiguration/moduleContraints"/>
+    </genClasses>
+    <genClasses ecoreClass="application.ecore#//ModuleConstraint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ModuleConstraint/moduleId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ModuleConstraint/versionMin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ModuleConstraint/versionMax"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ModuleConstraint/moduleType"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -23,6 +23,7 @@ import com.bluexml.side.application.DeployerConfiguration;
 import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModelElement;
+import com.bluexml.side.application.ModuleConstraint;
 import com.bluexml.side.application.Option;
 import com.bluexml.side.application.StaticConfigurationParameters;
 
@@ -95,6 +96,13 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 	 * @generated
 	 */
 	private EClass componantConfigurationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass moduleConstraintEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -437,6 +445,60 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getComponantConfiguration_ModuleContraints() {
+		return (EReference)componantConfigurationEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getModuleConstraint() {
+		return moduleConstraintEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getModuleConstraint_ModuleId() {
+		return (EAttribute)moduleConstraintEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getModuleConstraint_VersionMin() {
+		return (EAttribute)moduleConstraintEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getModuleConstraint_VersionMax() {
+		return (EAttribute)moduleConstraintEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getModuleConstraint_ModuleType() {
+		return (EAttribute)moduleConstraintEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getStaticConfigurationParameters() {
 		return staticConfigurationParametersEEnum;
 	}
@@ -506,6 +568,13 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 		createEAttribute(componantConfigurationEClass, COMPONANT_CONFIGURATION__META_MODEL_NAME);
 		createEAttribute(componantConfigurationEClass, COMPONANT_CONFIGURATION__TECHNOLOGY_VERSION_NAME);
 		createEAttribute(componantConfigurationEClass, COMPONANT_CONFIGURATION__TECHNOLOGY_NAME);
+		createEReference(componantConfigurationEClass, COMPONANT_CONFIGURATION__MODULE_CONTRAINTS);
+
+		moduleConstraintEClass = createEClass(MODULE_CONSTRAINT);
+		createEAttribute(moduleConstraintEClass, MODULE_CONSTRAINT__MODULE_ID);
+		createEAttribute(moduleConstraintEClass, MODULE_CONSTRAINT__VERSION_MIN);
+		createEAttribute(moduleConstraintEClass, MODULE_CONSTRAINT__VERSION_MAX);
+		createEAttribute(moduleConstraintEClass, MODULE_CONSTRAINT__MODULE_TYPE);
 
 		// Create enums
 		staticConfigurationParametersEEnum = createEEnum(STATIC_CONFIGURATION_PARAMETERS);
@@ -583,6 +652,13 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 		initEAttribute(getComponantConfiguration_MetaModelName(), ecorePackage.getEString(), "metaModelName", null, 0, 1, ComponantConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getComponantConfiguration_TechnologyVersionName(), ecorePackage.getEString(), "technologyVersionName", null, 0, 1, ComponantConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getComponantConfiguration_TechnologyName(), ecorePackage.getEString(), "technologyName", null, 0, 1, ComponantConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponantConfiguration_ModuleContraints(), this.getModuleConstraint(), null, "moduleContraints", null, 0, -1, ComponantConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(moduleConstraintEClass, ModuleConstraint.class, "ModuleConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getModuleConstraint_ModuleId(), ecorePackage.getEString(), "moduleId", null, 1, 1, ModuleConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModuleConstraint_VersionMin(), ecorePackage.getEString(), "versionMin", null, 0, 1, ModuleConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModuleConstraint_VersionMax(), ecorePackage.getEString(), "versionMax", null, 0, 1, ModuleConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModuleConstraint_ModuleType(), ecorePackage.getEString(), "moduleType", null, 1, 1, ModuleConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(staticConfigurationParametersEEnum, StaticConfigurationParameters.class, "StaticConfigurationParameters");
