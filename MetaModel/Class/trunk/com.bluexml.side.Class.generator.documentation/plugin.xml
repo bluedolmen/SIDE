@@ -14,8 +14,8 @@
                name="docBook"
                url="http://www.docbook.org/">
             <technologyVersion
-                  id="docbook_5.x"
-                  version="Docbook 5.x">
+                  id="docbook_4.x"
+                  version="Docbook 4.x">
                <generatorVersion
                      class="com.bluexml.side.clazz.generator.documentation.ClassDocumentationGenerator"
                      hidden="hidden and used by default"

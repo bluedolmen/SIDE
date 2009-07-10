@@ -14,21 +14,24 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Boston, MA 02111.
  --%>
+ <%--metamodel http://www.kerblue.org/class/1.0--%>
 <%
-metamodel http://www.kerblue.org/class/1.0
+
+metamodel /com.bluexml.side.Class/model/Class.ecore
+import com.bluexml.side.util.generator.documentation.services.DocumentationServices
 %>
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
-<%if (eContainer() == null) {%><%getConfModulePath()%>/<%getModelName()%>doc.xml<%}%>
+<%if (eContainer() == null) {%><%getConfModulePath()%>/<%getModelName()%>-data-doc.xml<%}%>
 <%script type="clazz.ClassPackage" name="docGenerator" file="<%validatedFilename%>"%>
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <book xmlns="http://docbook.org/ns/docbook" version="4.5">
 	<title>Documentation for <%getModelName()%></title>
-	<%for (getAllClasses()) {%>
-	<chapter id="<%name%>">
+	<%for (getAllClasses().sort()) {%>
+	<chapter>
 		<title><%getLabel()%></title>
 		<para><%documentation%></para>
 		<sect1>
-			<title>Attributes <%getLabel()%></title>
+			<title>Attributes for <%getLabel()%></title>
 			<para></para>
 			<%for (getAllAttributes()){%>
 				<sect2>
@@ -38,12 +41,13 @@ metamodel http://www.kerblue.org/class/1.0
 			<%}%>
 		</sect1>
 		<sect1>
-			<title>Associations <%getLabel()%></title>
+			<title>Associations for <%getLabel()%></title>
 			<para></para>
 			<%for (getAllSourceAssociations()){%>
 				<sect2>
 					<title><%getLabel()%></title>
-					<para><%documentation%></para>
+					<para><%documentation%>
+					</para>
 				</sect2>
 			<%}%>
 		</sect1>
