@@ -16,9 +16,9 @@ public abstract class ImplNode extends TreeNode {
 	protected String version;
 	protected String launchClass;
 	protected Set<TreeNode> options = new HashSet<TreeNode>();
-	
-	
-	
+
+
+
 	public ImplNode(IConfigurationElement elt, TechnologyVersion tv,TreeView root) {
 		super(root);
 		root.addOption(this);
@@ -33,11 +33,11 @@ public abstract class ImplNode extends TreeNode {
 				integrationModules.add(new ModuleConstraints(child,this));
 			}
 		}
-		
-		
+
+
 	}
-	
-	
+
+
 	@Override
 	public void setChecked(boolean checked) {
 		super.setChecked(checked);
@@ -51,8 +51,8 @@ public abstract class ImplNode extends TreeNode {
 	}
 	public abstract void updateApplication();
 
-	 
-	
+
+
 	public String getId() {
 		return id;
 	}
@@ -76,7 +76,7 @@ public abstract class ImplNode extends TreeNode {
 	public void setLaunchClass(String launchClass) {
 		this.launchClass = launchClass;
 	}
-	
+
 	public void addOption(OptionComponant option) {
 		options.add(option);
 	}

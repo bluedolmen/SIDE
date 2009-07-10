@@ -47,7 +47,7 @@ public class Generate extends Thread {
 
 	/**
 	 * Launch generation on all generator version selected
-	 * 
+	 *
 	 * @param configuration
 	 * @param staticParameters
 	 * @param models
@@ -82,7 +82,7 @@ public class Generate extends Thread {
 				// Check to know if option have been set, no error but warning
 				// message
 				if (param.getValue() == null || param.getValue().length() == 0) {
-					addWarningText("WARNING : Parameter " + param.getKey() + " isn't set.");
+					addWarningText(System.getProperty("line.separator") + "WARNING : Parameter " + param.getKey() + " isn't set.");
 				}
 			}
 		}
@@ -97,7 +97,7 @@ public class Generate extends Thread {
 		try {
 			modelsInfo = (HashMap<String, List<IFile>>) ApplicationUtil.getAssociatedMetaModel(models);
 		} catch (IOException e) {
-			addErrorText("Error with model : " + e.getMessage());
+			addErrorText(System.getProperty("line.separator") + "Error with model : " + e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -113,11 +113,11 @@ public class Generate extends Thread {
 						if (ApplicationUtil.validate(m)) {
 							addText(System.getProperty("line.separator") + m.getName() + " validated");
 						} else {
-							addErrorText("Model " + m.getName() + " isn't validated. Please launch 'Validate' on top model element of " + m.getName() + ".");
+							addErrorText(System.getProperty("line.separator") + "Model " + m.getName() + " isn't validated. Please launch 'Validate' on top model element of " + m.getName() + ".");
 						}
 
 					} catch (IOException e) {
-						addErrorText("Error with model " + m.getName() + " : " + e.getMessage());
+						addErrorText(System.getProperty("line.separator") + "Error with model " + m.getName() + " : " + e.getMessage());
 						e.printStackTrace();
 					}
 				}
@@ -130,7 +130,7 @@ public class Generate extends Thread {
 
 	/**
 	 * Return the log path (folder path + configuration name)
-	 * 
+	 *
 	 * @param configuration
 	 * @param configurationParameters
 	 * @return
@@ -263,7 +263,7 @@ public class Generate extends Thread {
 							lmc.add(new ModuleConstraint(current.getModuleId(),current.getModuleType(),current.getVersionMin(),current.getVersionMax()));
 						}
 						DependencesManager dm = new DependencesManager(lmc);
-						
+
 						generator.initialize(generationParameters, generatorOptions, configurationParameters, dm);
 					} catch (Exception e) {
 						error = true;

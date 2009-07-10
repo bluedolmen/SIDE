@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
@@ -34,6 +33,7 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 	private Map<String, List<String>> genParamConfByGenerator;
 	private Map<String, List<String>> deployParamConfByGenerator;
 	private static String EXTENSIONPOINT_ID = "com.bluexml.side.Application.com_bluexml_application_configuration";
+	private List<TreeNode> toCheck = new ArrayList<TreeNode>();
 
 	public ConfigurationContentProvider(Class<?> p_neededRootClass, List<?> p_ommitedObject,
 			TreeView p_tv, Map<String, GeneratorParameter> p_configurationParameters,
@@ -110,12 +110,18 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 	public Object[] getElements(Object object) {
 		if (object instanceof ApplicationDialog) {
 			initialize();
+			ArrayList<Object> result = new ArrayList<Object>();
 			for (Object o : rootSet.values()) {
 				if (o instanceof TreeNode) {
-					((TreeNode) o).setEnabled(true);
+					TreeNode tn = (TreeNode) o;
+					tn.setEnabled(true);
+					if (!tn.isToHidde()) {
+						result.add(tn);
+					}
 				}
 			}
-			return rootSet.values().toArray();
+
+			return result.toArray();
 		} else
 			return getChildren(object);
 	}
@@ -145,7 +151,9 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 		for (Object o : rootEntry) {
 			if (o instanceof TreeNode) {
 				TreeNode tn = (TreeNode) o;
-				cleanupBranch(tn);
+				if (!cleanupBranch(tn)) {
+					tn.setToHidde(true);
+				}
 			}
 		}
 	}
@@ -165,11 +173,6 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 		}
 		if (!result) {
 			tn.setToHidde(true);
-			if (rootSet.containsValue(tn)) {
-				if (tn.getParent() != null) {
-					tn.getParent().setToHidde(true);
-				}
-			}
 		}
 		return result;
 	}
@@ -232,6 +235,7 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 				Generator gv = new Generator(config, (TechnologyVersion) parent, root);
 				if (config.getAttribute("hidden") != null && config.getAttribute("hidden").equals("hidden and used by default")) {
 					gv.setToHidde(true);
+					toCheck.add(gv);
 				}
 				String fullId = gv.getFullId();
 				if (!generatorSet.containsKey(fullId) ||
@@ -248,14 +252,20 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 
 		// Scan for deployer version
 		if (!omitedObject.contains(Deployer.class) && config.getName().equalsIgnoreCase("deployerVersion")) {
-			Deployer dv = new Deployer(config, (TechnologyVersion) parent, root);
-			String fullId = dv.getFullId();
-			if (!deployerSet.containsKey(fullId) || (rootSet != deployerSet && parent != deployerSet.get(fullId).getParent())) {
-				deployerSet.put(fullId, dv);
-			} else {
-				dv = deployerSet.get(fullId);
+			if (config.getAttribute("hidden") == null || !config.getAttribute("hidden").equals("hidden")) {
+				Deployer dv = new Deployer(config, (TechnologyVersion) parent, root);
+				if (config.getAttribute("hidden") != null && config.getAttribute("hidden").equals("hidden and used by default")) {
+					dv.setToHidde(true);
+					toCheck.add(dv);
+				}
+				String fullId = dv.getFullId();
+				if (!deployerSet.containsKey(fullId) || (rootSet != deployerSet && parent != deployerSet.get(fullId).getParent())) {
+					deployerSet.put(fullId, dv);
+				} else {
+					dv = deployerSet.get(fullId);
+				}
+				futurParent = dv;
 			}
-			futurParent = dv;
 		}
 
 		// Scan for generator or deployer option
@@ -320,6 +330,10 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 
 			}
 		}
+	}
+
+	public List<TreeNode> getToCheck() {
+		return toCheck;
 	}
 
 	/**
