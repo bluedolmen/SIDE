@@ -1,19 +1,38 @@
 #! /bin/bash
 # launch the generation of the Metamodel documtentation in docbook and html
-# 1st parameter = target documentation path where the docbook and html must be stored
-# 2nd parameter = gendoc jar pathname
-# 3rd parameter = log file
+# 1st parameter = execution directory where is put docbook.sh and gendoc 
+# 2nd parameter = target documentation path where the docbook and html must be stored
+# 3rd parameter = source path of the gendoc project
 if [ $# -eq 3 ]; then
-  DOC_DIR=$1
-  JAR_GENDOC=$2
-  logfile=$3
+  EXEC_DIR=$1
+  DOC_DIR=$2
+  GENDOC_SRC=$3
 else
   exit -2
 fi
 
 return_code=0
-java -jar $JAR_GENDOC
+cd $GENDOC_SRC/src/com/bluexml/side/Util/MetaModel/gendoc
+CLASSDIR=".:$GENDOC_SRC/src:$GENDOC_SRC/org.eclipse.emf.common_2.4.0.v200902171115.jar:$GENDOC_SRC/org.eclipse.emf.ecore_2.4.2.v200902171115.jar:$GENDOC_SRC/org.eclipse.emf.ecore.xmi_2.4.1.v200902171115.jar"
+for i in *.java
+do
+  javac -cp $CLASSDIR $i
+done
+for i in *.class
+do
+  mv $i $EXEC_DIR/gendoc/com/bluexml/side/Util/MetaModel/gendoc
+done
+
+cd $EXEC_DIR/gendoc
+
+jar cmf META-INF/MANIFEST.MF ../Gendoc.jar .
+cd ..
+java -jar Gendoc.jar
 jar_gendoc=$?
+if [ -f gendoc.log ]; then
+  cat gendoc.log
+fi
+exit 1
 if [ $jar_gendoc -gt 0 ] 
 then 
   return_code=-1
