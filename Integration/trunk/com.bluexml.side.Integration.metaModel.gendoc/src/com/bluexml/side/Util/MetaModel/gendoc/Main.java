@@ -51,7 +51,7 @@ public class Main {
 			String palettePath = properties.getProperty((String) key);
 			if (palettePath.indexOf(".ecore")>0) {
 				// case of a file with the extension .ecore in the file modelspath.properties
-				EPackage ePackage = Main.getEPackage("../"+palettePath);
+				EPackage ePackage = Main.getEPackage(palettePath);
 				List<String> objects = new ArrayList<String>();
 				List<EClassifier> classifiers = ePackage.getEClassifiers();
 				for (EClassifier classifier : classifiers) {
@@ -64,12 +64,12 @@ public class Main {
 				processDoc.foot(ePackage);
 			}
 			else {
-				HashMap<String, List<String>> palette = ParsePalette.extractNames(ParsePalette.extractGenClass("../"+palettePath));
+				HashMap<String, List<String>> palette = ParsePalette.extractNames(ParsePalette.extractGenClass(palettePath));
 				Set<String> metamodels = palette.keySet();
 				for (String metamodel : metamodels) {
 					List<String> objects = palette.get(metamodel);
 					DocMetaModel processDoc = new DocMetaModel();
-					EPackage ePackage = getEPackage("../"+metamodel);
+					EPackage ePackage = getEPackage(metamodel);
 					processDoc.head(ePackage);
 					processDoc.processPackage(ePackage, objects);
 					processDoc.foot(ePackage);
