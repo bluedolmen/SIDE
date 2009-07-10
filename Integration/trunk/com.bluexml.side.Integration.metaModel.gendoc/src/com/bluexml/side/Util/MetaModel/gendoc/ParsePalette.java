@@ -34,7 +34,8 @@ public class ParsePalette {
 		try {
 			Handler fh = new FileHandler("gendoc.log", false);
 			fh.setFormatter(new SimpleFormatter());
-			logger.addHandler(fh);			
+			logger.addHandler(fh);	
+			logger.setLevel(Level.ALL);
 			
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 			File file = new File(fileName);
