@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.bluexml.side.maven</groupId>
-	<artifactId>com.bluexml.side.maven.zipPackage</artifactId>
+	<groupId>com.bluexml.side.Integration.m2</groupId>
+	<artifactId>com.bluexml.side.Integration.m2.zipPackage</artifactId>
 	<packaging>maven-plugin</packaging>
-	<version>1.0-SNAPSHOT</version>
-	<name>com.bluexml.side.maven.zipPackage Maven Mojo</name>
+	<version>1.0</version>
+	<name>com.bluexml.side.Integration.m2.zipPackage Maven Mojo</name>
 	<url>http://www.bluexml.com</url>
 	<dependencies>
 		<dependency>
@@ -28,6 +28,84 @@
 			<groupId>org.codehaus.plexus</groupId>
 			<artifactId>plexus-archiver</artifactId>
 			<version>1.0-alpha-10</version>
-		</dependency>		
+		</dependency>
 	</dependencies>
+	<repositories>
+		<!-- Public repositories -->
+		<repository>
+			<id>BXKB-repo</id>
+			<url>http://merry.bluexml.com/m2/repository</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>BXKB-repo-snapshots</id>
+			<url>http://merry.bluexml.com/m2/snapshotrepository</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<!-- test repositories (internal)-->
+		<repository>
+			<id>release</id>
+			<url>http://192.168.49.18:8081/nexus/content/repositories/releases</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>snapshots</id>
+			<url>http://192.168.49.18:8081/nexus/content/repositories/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<!-- local repositories (developer) -->
+		<repository>
+			<id>release</id>
+			<url>http://localhost:8081/nexus/content/repositories/releases</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>snapshots</id>
+			<url>http://localhost:8081/nexus/content/repositories/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+
+	</repositories>
+	<distributionManagement>
+		<!-- use the following if you're not using a snapshot version. -->
+		<repository>
+			<id>release</id>
+			<url>http://192.168.49.18:8081/nexus/content/repositories/releases</url>
+		</repository>
+		<!-- use the following if you ARE using a snapshot version. -->
+		<snapshotRepository>
+			<id>snapshots</id>
+			<url>http://192.168.49.18:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>
