@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="com.bluexml.side.Application.com_bluexml_application_configuration">
+      <technology
+            description="Generate documentation (in docbook) for the models of the metamodel."
+            id="docbook"
+            name="docBook"
+            url="http://www.docbook.org/">
+         <technologyVersion
+               id="docbook_4.x"
+               version="Docbook 4.x">
+            <deployerVersion
+                  class="com.bluexml.side.deployer.documentation.DeployerVersion3"
+                  hidden="hidden and used by default"
+                  id="com.bluexml.side.Deployer.documentation.deployerVersion3"
+                  version="S-IDE Documentation Deployer">
+            </deployerVersion>
+         </technologyVersion>
+      </technology>
+   </extension>
+
+</plugin>
