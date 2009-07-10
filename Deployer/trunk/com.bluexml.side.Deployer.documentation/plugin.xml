@@ -12,9 +12,9 @@
                id="docbook_4.x"
                version="Docbook 4.x">
             <deployerVersion
-                  class="com.bluexml.side.deployer.documentation.DeployerVersion3"
+                  class="com.bluexml.side.deployer.documentation.DocumentationDeployer"
                   hidden="hidden and used by default"
-                  id="com.bluexml.side.Deployer.documentation.deployerVersion3"
+                  id="com.bluexml.side.Deployer.documentation"
                   version="S-IDE Documentation Deployer">
             </deployerVersion>
          </technologyVersion>

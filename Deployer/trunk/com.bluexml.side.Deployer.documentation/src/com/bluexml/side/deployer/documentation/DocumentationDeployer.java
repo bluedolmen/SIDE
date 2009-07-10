@@ -3,10 +3,12 @@ package com.bluexml.side.deployer.documentation;
 import java.io.File;
 
 import org.apache.commons.io.FileUtils;
+import org.eclipse.core.resources.IResource;
 
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.util.deployer.Deployer;
 import com.bluexml.side.util.libs.FileHelper;
+import com.bluexml.side.util.libs.IFileHelper;
 
 public class DocumentationDeployer extends Deployer {
 
@@ -18,7 +20,9 @@ public class DocumentationDeployer extends Deployer {
 	@Override
 	protected void deployProcess(File fileToDeploy) throws Exception {
 		File src = fileToDeploy;
-		File dest = new File(getConfigurationParameters().get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()));
+		// TODO : Get configuration name
+		IResource destIFile = IFileHelper.createFolder(getConfigurationParameters().get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + File.separator + getConfigurationParameters().get("configurationName") + File.separator + "doc");
+		File dest = IFileHelper.convertIRessourceToFile(destIFile);
 		FileHelper.copyFiles(src, dest, true);
 	}
 
@@ -37,3 +41,4 @@ public class DocumentationDeployer extends Deployer {
 	}
 
 }
+

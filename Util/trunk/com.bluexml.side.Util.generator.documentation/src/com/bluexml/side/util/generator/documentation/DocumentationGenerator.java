@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.eclipse.core.resources.IFile;
 
 import com.bluexml.side.util.generator.acceleo.AbstractAcceleoGenerator;
+import com.bluexml.side.util.generator.documentation.services.DocumentationServices;
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.IFileHelper;
 
@@ -24,6 +25,11 @@ public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 		}
 
 		return generatedFiles;
+	}
+
+	public Collection<IFile> generate(IFile model) throws Exception {
+		DocumentationServices.setModelName(model.getName());
+		return super.generate(model);
 	}
 
 	protected String getMetamodelURI() {
