@@ -404,9 +404,9 @@ Hidden And Used By Default : To hidde this element and to use this generator by 
                <restriction base="string">
                   <enumeration value="amp">
                   </enumeration>
-                  <enumeration value="warPatch">
-                  </enumeration>
                   <enumeration value="default">
+                  </enumeration>
+                  <enumeration value="zip">
                   </enumeration>
                </restriction>
             </simpleType>

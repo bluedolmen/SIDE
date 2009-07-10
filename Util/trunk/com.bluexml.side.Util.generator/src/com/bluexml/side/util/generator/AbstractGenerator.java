@@ -299,6 +299,10 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		return getTargetSystemPath() + File.separator + getTEMP_FOLDER();
 	}
 
+	protected final File getTemporarySystemFile() {
+		return new File(getTargetSystemPath() + File.separator + getTEMP_FOLDER());
+	}
+
 	/**
 	 * Return the tempory path to temp folder of generation (wokspace path)
 	 * 
@@ -307,9 +311,13 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	protected final String getTemporaryFolder() {
 		return getTargetPath() + File.separator + getTEMP_FOLDER();
 	}
+	
+	protected final File getFinalFolder() {
+		return new File(getTargetSystemPath() + File.separator + techVersion);
+	}
 
 	/**
-	 * Print ou information on generator (using System.out).
+	 * Print out information on generator (using System.out).
 	 */
 	public static void printConfiguration() {
 		System.out.println("GenerationOptions :" + generatorOptions);
@@ -328,16 +336,18 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	}
 
 	/**
-	 * use DependencesManager to get files required by the generated package
-	 * and copy them in the technology version folder
+	 * use DependencesManager to get files required by the generated package and
+	 * copy them in the technology version folder
+	 * 
 	 * @throws Exception
 	 */
 	public void addDependences() throws Exception {
 		// get dependences
-		List<File> resources = dm.getDependencesPackages(getTargetSystemFile());
+		List<File> resources = dm.getDependencesPackages(getTemporarySystemFile());
 		// copy them into target (<generated>/<technologieVersion>)
 		for (File file : resources) {
-			FileHelper.copyFiles(file, getTargetSystemFile(), false);
+			//System.out.println("add dependencies :" + file);
+			FileHelper.copyFiles(file, getFinalFolder(), false);
 		}
 		// dependences packages is now with other resources in the target folder
 

@@ -24,7 +24,7 @@
                      version="S-IDE Alfresco Portal Generator">
                   <moduleDependence
                         moduleId="com.bluexml.side.Integration.alfrescoShare.doclist"
-                        moduleType="amp"
+                        moduleType="zip"
                         new_attribute="toto"
                         versionMin="1.0.0">
                   </moduleDependence>

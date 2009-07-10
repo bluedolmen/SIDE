@@ -4,7 +4,7 @@
 	<property name="jsScriptsIn" value="documentlist-src.js" />
 	<property name="resources" value="./resources" />
 	<property name="tmpFolder" value="./tmp" />
-	<property name="extensionFolder" value="./extension" />
+	<property name="extensionFolder" value="./target" />
 	<property name="module.properties" value="${resources}/module.properties" />
 	
 	<property file="${module.properties}" />
@@ -17,6 +17,7 @@
           target: buildExtension              
          ================================= -->
 	<target name="buildExtension" depends="clean" description="build extension archive for alfresco share">
+		<echo message="${version}"></echo>
 		<delete dir="${tmpFolder}" failonerror="false" />
 		<mkdir dir="${tmpFolder}/${docLibPath} " />
 		<mkdir dir="${extensionFolder}" />
@@ -26,7 +27,7 @@
 			<arg value="${resources}/${docLibPath}/${jsScriptsIn}" />
 		</java>
 		<copy file="${module.properties}" tofile="${tmpFolder}/${packageDescriptionFile}" />
-		<zip destfile="${extensionFolder}/${module.id}.zip">
+		<zip destfile="${extensionFolder}/${module.id}-${version}.zip">
 			<fileset dir="${tmpFolder}" id="id">
 				<include name="**/*.*" />
 			</fileset>

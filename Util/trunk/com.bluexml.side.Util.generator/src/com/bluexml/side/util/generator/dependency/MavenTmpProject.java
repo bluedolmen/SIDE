@@ -13,6 +13,7 @@ import org.apache.maven.embedder.MavenEmbedder;
 import org.apache.maven.embedder.MavenEmbedderException;
 import org.apache.maven.execution.DefaultMavenExecutionRequest;
 import org.apache.maven.execution.MavenExecutionResult;
+
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.Namespace;
@@ -63,26 +64,6 @@ public class MavenTmpProject {
 			System.err.println("Exception occure during maven process :" + exceps);
 			throw new Exception("Exception occure during maven process :" + exceps);
 		}
-	}
-
-	/**
-	 * @param args
-	 * @throws Exception
-	 */
-	public static void main(String[] args) throws Exception {
-
-		DependencesManager dm = new DependencesManager();
-		ModuleConstraint mc = new ModuleConstraint("com.bluexml.side.Integration.MvAMPTest", "amp", "1.0.1", "1.0.0");
-		dm.addEntry(mc);
-		MavenTmpProject mv = new MavenTmpProject(new File("/Users/davidabad/Workspace2.0/MavenTest/nouveauProjet"), dm);
-
-		FileHelper.deleteFile(mv.tpmProject);
-		List<File> l = mv.getAllDependenciesResources();
-		System.out.println("Dependencies packages :");
-		for (File file : l) {
-			System.out.println(file);
-		}
-		// printDoc(mv.pomFile);
 	}
 
 	private void initMaven() throws MavenEmbedderException {
@@ -150,9 +131,8 @@ public class MavenTmpProject {
 		archetypeCreateRequest.setProperty("groupId", TARGET_GROUP);
 		archetypeCreateRequest.setProperty("artifactId", TARGET_ARTIFACT);
 		archetypeCreateRequest.setProperty("version", TARGET_VERSION);
-
+		
 		archetypeCreateRequest.setUpdateSnapshots(true);
-
 		MavenExecutionResult result = embedder.execute(archetypeCreateRequest);
 		return result;
 	}
@@ -214,9 +194,8 @@ public class MavenTmpProject {
 		File f = new File(artRep.getBasedir());
 		if (f.exists()) {
 			List<ModuleConstraint> l = dm.getContraints();
-			for (ModuleConstraint moduleConstraint : l) {
-				String id = moduleConstraint.getModuleId();
-				String path = id.replaceAll("\\.", File.separator);
+			for (ModuleConstraint moduleConstraint : l) {				
+				String path = moduleConstraint.getGroupId().replaceAll("\\.", File.separator)+File.separator+moduleConstraint.getArtifactId();
 				String version = moduleConstraint.getVersionMin().toString();
 				path += File.separator + version;
 				String moduleName = moduleConstraint.getArtifactId() + "-" + version + "." + moduleConstraint.getModuleType();
@@ -232,4 +211,6 @@ public class MavenTmpProject {
 		}
 		return dependencies;
 	}
+	
+	
 }
