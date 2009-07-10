@@ -326,6 +326,25 @@ Hidden And Used By Default : To hidde this element and to use this generator by 
                </documentation>
             </annotation>
          </attribute>
+         <attribute name="hidden" use="default" value="visible">
+            <annotation>
+               <documentation>
+                  Hidden : To hidde in the tree view this element.
+Visible : To set this element visible in the tree view (by default)
+Hidden And Used By Default : To hidde this element and to use this generator by default.
+               </documentation>
+            </annotation>
+            <simpleType>
+               <restriction base="string">
+                  <enumeration value="hidden">
+                  </enumeration>
+                  <enumeration value="visible">
+                  </enumeration>
+                  <enumeration value="hidden and used by default">
+                  </enumeration>
+               </restriction>
+            </simpleType>
+         </attribute>
       </complexType>
    </element>
 
