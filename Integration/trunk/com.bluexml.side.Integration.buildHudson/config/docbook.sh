@@ -11,15 +11,17 @@ else
   exit -2
 fi
 
-java -jar $JAR_GENDOC
 return_code=0
+java -jar $JAR_GENDOC
 jar_gendoc=$?
 if [ $jar_gendoc -gt 0 ] 
 then 
   return_code=-1
 else
 
-  mkdir $DOC_DIR/MetaModel
+  if [ ! -d $DOC_DIR/MetaModel ]; then
+    mkdir $DOC_DIR/MetaModel
+  fi
   mv *.docbook $DOC_DIR/MetaModel
   cd $DOC_DIR/MetaModel
   echo "<html><head><title>S-IDE Metamodel Documentation</title></head>" > index.html
@@ -32,7 +34,9 @@ IFS="
 "
   if [ ! "$1Z" = "Z" ]
   then
-    mkdir $1
+    if [ ! -d $1 ]; then
+      mkdir $1
+    fi
     docbook2html -w no-xml -w no-mixed -w no-should -w no-default -w no-undefined -w no-sgmldecl -w no-unclosed -w no-duplicate -w no-empty -w no-net -w no-min-tag -w no-unused-map -w no-unused-param -w no-notation-sysid $1.docbook -o $1
     docbook2html=$?
     if [ $docbook2html -gt 0 ] 
