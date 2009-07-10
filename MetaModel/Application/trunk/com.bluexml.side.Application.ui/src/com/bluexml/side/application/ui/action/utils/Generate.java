@@ -103,6 +103,7 @@ public class Generate extends Thread {
 
 		// Validation :
 		label.setText("Validating models");
+		boolean modelWithError = false;
 		if (!skipValidation) {
 			Iterator<List<IFile>> it = modelsInfo.values().iterator();
 			List<IFile> listModel;
@@ -114,18 +115,22 @@ public class Generate extends Thread {
 							addText(System.getProperty("line.separator") + m.getName() + " validated");
 						} else {
 							addErrorText(System.getProperty("line.separator") + "Model " + m.getName() + " isn't validated. Please launch 'Validate' on top model element of " + m.getName() + ".");
+							modelWithError = true;
 						}
 
 					} catch (IOException e) {
 						addErrorText(System.getProperty("line.separator") + "Error with model " + m.getName() + " : " + e.getMessage());
+						modelWithError = true;
 						e.printStackTrace();
 					}
 				}
 			}
 		}
-		addOneStep(progressBar);
-		logPath = getLogPath(configuration, configurationParameters);
-		generate(configuration, modelsInfo, configurationParameters, generationParameters);
+		if (!modelWithError) {
+			addOneStep(progressBar);
+			logPath = getLogPath(configuration, configurationParameters);
+			generate(configuration, modelsInfo, configurationParameters, generationParameters);
+		}
 	}
 
 	/**
@@ -343,6 +348,7 @@ public class Generate extends Thread {
 			configurationParameters.put("metaModelName", depConf.getMetaModelName());
 			configurationParameters.put("technologyName", depConf.getTechnologyName());
 			configurationParameters.put("technologyVersionName", depConf.getTechnologyVersionName());
+			configurationParameters.put("configurationName", configuration.getName());
 
 			List<Option> options = depConf.getOptions();
 			// We get the option for this generator
@@ -360,12 +366,19 @@ public class Generate extends Thread {
 			} catch (ClassNotFoundException e1) {
 				error = true;
 				e1.printStackTrace();
+				addErrorText(System.getProperty("line.separator") + "Depolyer " + id_deployer + " haven't been found.");
 			} catch (InstantiationException e) {
 				error = true;
 				e.printStackTrace();
+				addErrorText(System.getProperty("line.separator") + "Depolyer " + id_deployer + " can't be instanciate.");
 			} catch (IllegalAccessException e) {
 				error = true;
 				e.printStackTrace();
+				addErrorText(System.getProperty("line.separator") + "Depolyer " + id_deployer + " access error.");
+			} catch (Exception e) {
+				error = true;
+				e.printStackTrace();
+				addErrorText(System.getProperty("line.separator") + "Error getting depolyer " + id_deployer + ".");
 			}
 
 			if (genObj instanceof Deployer) {
