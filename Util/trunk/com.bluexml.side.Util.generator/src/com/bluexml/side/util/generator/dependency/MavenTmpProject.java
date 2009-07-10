@@ -2,6 +2,8 @@ package com.bluexml.side.util.generator.dependency;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -143,8 +145,9 @@ public class MavenTmpProject {
 	 * @return
 	 * @throws Exception
 	 */
-	private MavenExecutionResult createProject() throws Exception {
-
+	private void createProject() throws Exception {
+		
+		/*
 		DefaultMavenExecutionRequest archetypeCreateRequest = new DefaultMavenExecutionRequest();
 		archetypeCreateRequest.setBaseDirectory(workFolder);
 		archetypeCreateRequest.setGoals(Arrays.asList(new String[] { "archetype:generate" }));
@@ -158,11 +161,16 @@ public class MavenTmpProject {
 		archetypeCreateRequest.setUpdateSnapshots(true);
 
 		MavenExecutionResult result = embedder.execute(archetypeCreateRequest);
-
+*/
 		projectFolder = new File(workFolder, TARGET_ARTIFACT);
+		projectFolder.mkdirs();
+		
 		pomFile = new File(projectFolder, "pom.xml");
+		InputStream in = this.getClass().getResourceAsStream("model.pom.xml");
+		// copy the default pom to the tmpProject
+		FileHelper.writeStreamInFile(pomFile, in);
+		
 
-		return result;
 	}
 
 	public static void printDoc(File xml) throws Exception {

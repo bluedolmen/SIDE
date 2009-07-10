@@ -2,9 +2,11 @@ package com.bluexml.side.util.libs;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -195,4 +197,18 @@ public class FileHelper {
 		return newList;
 	}
 
+
+	public static void writeStreamInFile(File f, InputStream in) throws Exception {
+		FileOutputStream fout = null;
+		byte[] buffer = new byte[4096]; // Buffer 4K at a time (you can
+		// change this).
+		int bytesRead;
+
+		fout = new FileOutputStream(f);
+		while ((bytesRead = in.read(buffer)) >= 0) {
+			fout.write(buffer, 0, bytesRead);
+		}
+		// InputStream is consumed we close it
+		in.close();
+	}
 }

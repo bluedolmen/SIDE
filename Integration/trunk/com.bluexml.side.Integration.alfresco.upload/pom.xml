@@ -36,6 +36,69 @@
 			<id>ss-public</id>
 			<url>http://repository.sourcesense.com/maven2</url>
 		</repository>
+		<!-- Public repositories -->
+		<repository>
+			<id>BXKB-repo</id>
+			<url>http://merry.bluexml.com/m2/repository</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>BXKB-repo-snapshots</id>
+			<url>http://merry.bluexml.com/m2/snapshotrepository</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<!-- test repositories (internal)-->
+		<repository>
+			<id>release</id>
+			<url>http://192.168.49.18:8081/nexus/content/repositories/releases</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>snapshots</id>
+			<url>http://192.168.49.18:8081/nexus/content/repositories/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<!-- local repositories (developer) -->
+		<repository>
+			<id>release</id>
+			<url>http://localhost:8081/nexus/content/repositories/releases</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>snapshots</id>
+			<url>http://localhost:8081/nexus/content/repositories/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
@@ -121,7 +184,7 @@
 		</dependency>
 		<!-- Don't add here amp dependencies as it will break amp packaging -->
 	</dependencies>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<description>this module contains S-IDE extension to extends Alfresco to support custom type on Alfresco Share</description>
 	<!--
 		The scm is required for the buildnumber-maven-plugin which is required
@@ -399,13 +462,13 @@
 	<distributionManagement>
 		<!-- use the following if you're not using a snapshot version. -->
 		<repository>
-			<id>myRepositoryRelease</id>
-			<url>http://localhost:8081/nexus/content/repositories/myRepositoryRelease</url>
+			<id>release</id>
+			<url>http://192.168.49.18:8081/nexus/content/repositories/releases</url>
 		</repository>
 		<!-- use the following if you ARE using a snapshot version. -->
 		<snapshotRepository>
-			<id>myRepositorySnap</id>
-			<url>http://localhost:8081/nexus/content/repositories/myRepositorySnap</url>
+			<id>snapshots</id>
+			<url>http://192.168.49.18:8081/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>
