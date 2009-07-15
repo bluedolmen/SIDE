@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.swt.SWT;
@@ -380,7 +381,11 @@ public class Generate extends Thread {
 				e.printStackTrace();
 				addErrorText(System.getProperty("line.separator") + "Error getting depolyer " + id_deployer + ".");
 			}
-
+			try {
+				IFileHelper.refreshFolder(logPath);
+			} catch (CoreException e1) {
+				e1.printStackTrace();
+			}
 			if (genObj instanceof Deployer) {
 				Deployer deployer = (Deployer) genObj;
 				deployer.initialize(configurationParameters, generationParameters, deployerOptions);
