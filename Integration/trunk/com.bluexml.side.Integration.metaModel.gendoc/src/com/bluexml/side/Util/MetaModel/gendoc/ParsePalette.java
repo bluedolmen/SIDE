@@ -123,7 +123,8 @@ public class ParsePalette {
 			}
 
 			if(palettePath.equals("")){
-				palettePath = "/root/.hudson/jobs/Build_S-IDE/workspace/S-IDE/MetaModel/Common/trunk/com.bluexml.side.Common.modeler/model/CommonDiagram.diagramconfigurator";
+				palettePath = "/root/.hudson/jobs/Build_S-IDE/workspace/S-IDE/MetaModel/Common/trunk/com.bluexml.side.Common/model/CommonDiagram.diagramconfigurator";
+				//palettePath = "C:/Documents and Settings/Pierre/Bureau/Gendoc/com.bluexml.side.Common/model/CommonDiagram.diagramconfigurator";
 			}
 			tmp = palettePath.split("/");
 			String path = "";
