@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.ObjectInputStream.GetField;
 import java.util.List;
 
 import javax.xml.transform.Transformer;
@@ -18,6 +17,7 @@ import javax.xml.transform.stream.StreamSource;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
+import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.ProcessingInstruction;
@@ -38,6 +38,7 @@ public class LogSave {
 	public static String LOG_FILE_NAME = "side-report.xml";
 	public static String LOG_STAMP_FOLDER = "stamp";
 	public static String LOG_TEMP_FOLDER = "work";
+	public static String LOG_DOC_FOLDER = "doc";
 
 	/**
 	 * Render a SIDELog to a xml file using the given fileName in the given
@@ -57,6 +58,7 @@ public class LogSave {
 			file.createNewFile();
 			fos = new FileOutputStream(file);
 			toXml(log, fos);
+			IFileHelper.refreshFolder(folder);
 			fos.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -103,11 +105,9 @@ public class LogSave {
 	 */
 	public static void buildGeneraLogFile(String folderName) throws Exception {
 		IFolder logFolder = IFileHelper.createFolder(folderName);
-
 		IFolder tmpFolder = IFileHelper.createFolder(logFolder.getFullPath().append(LOG_TEMP_FOLDER).toOSString());
-		// File f = IFileHelper.getFile(folder);
-		// We get all files
-		List<IFile> toMerge = IFileHelper.getAllFilesForFolder(tmpFolder);
+		IFolder docFolder = IFileHelper.createFolder(logFolder.getFullPath().append(LOG_DOC_FOLDER).toOSString());
+
 
 		// We create the top root element of the general log file
 		Element rootNode = new Element("logRoot");
@@ -119,6 +119,47 @@ public class LogSave {
 
 		// For all .xml files we get their content and add it to general log
 		// file
+		agregateLogs(rootNode, tmpFolder);
+
+		// We search for xml file in stamp folder to know which generator have been deployed
+		addGeneratorStamp(rootNode, logFolder);
+
+		// We search for all docs
+		addDocLink(rootNode, docFolder);
+
+		// We create the general log file
+		IFileHelper.deleteFile(logFolder.getFullPath()
+				+ System.getProperty("file.separator") + LOG_FILE_NAME);
+		IFile genLog = IFileHelper.createFile(logFolder, LOG_FILE_NAME);
+		if (genLog != null) {
+			File genLogFile = IFileHelper.getFile(genLog);
+
+			XMLOutputter outputter = new XMLOutputter();
+			FileWriter writer = new FileWriter(genLogFile, false);
+			outputter.output(doc, writer);
+			writer.close();
+		}
+
+		moveStaticRessources(logFolder, doc);
+	}
+
+	private static void addDocLink(Element rootNode, IFolder docFolder) throws Exception {
+		List<IFile> toLink = IFileHelper.getAllFilesForFolder(docFolder);
+		Element rootDoc = new Element("documentation");
+		for (IFile xmlFile : toLink) {
+			if (xmlFile.getName().endsWith(".xml")) {
+				Element entry = new Element("entry");
+				entry.setAttribute("path", LOG_DOC_FOLDER + "/" + xmlFile.getName());
+				rootDoc.addContent(entry);
+			}
+		}
+		rootNode.addContent(rootDoc);
+	}
+
+	private static void agregateLogs(Element rootNode, IFolder tmpFolder) throws Exception {
+		// File f = IFileHelper.getFile(folder);
+		// We get all files
+		List<IFile> toMerge = IFileHelper.getAllFilesForFolder(tmpFolder);
 		for (IFile xmlFile : toMerge) {
 			if (xmlFile.getName().endsWith(".xml")
 					&& !xmlFile.getName().equals(LOG_FILE_NAME)) {
@@ -131,8 +172,10 @@ public class LogSave {
 				}
 			}
 		}
+	}
 
-		// We search for xml file in stamp folder to know which generator have been deployed
+	private static void addGeneratorStamp(Element rootNode, IFolder logFolder)
+			throws Exception {
 		IFolder stampFolder = IFileHelper.getIFolder(logFolder.getFullPath().append(LOG_STAMP_FOLDER).toOSString());
 		if (stampFolder.exists()) {
 			List<IFile> deployedStamps = IFileHelper.getAllFilesForFolder(stampFolder);
@@ -151,22 +194,6 @@ public class LogSave {
 			}
 			rootNode.addContent(rootDeployed);
 		}
-
-		// We create the general log file
-		IFileHelper.deleteFile(logFolder.getFullPath()
-				+ System.getProperty("file.separator") + LOG_FILE_NAME);
-		IFile genLog = IFileHelper.createFile(logFolder, LOG_FILE_NAME);
-		if (genLog != null) {
-			File genLogFile = IFileHelper.getFile(genLog);
-
-			XMLOutputter outputter = new XMLOutputter();
-			FileWriter writer = new FileWriter(genLogFile, false);
-			outputter.output(doc, writer);
-			writer.close();
-		}
-
-		moveStaticRessources(logFolder, doc);
-
 	}
 
 	private static void moveStaticRessources(IFolder folderDest, Document doc)
@@ -215,6 +242,7 @@ public class LogSave {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
+	@SuppressWarnings("unused")
 	private static void makeHtml(Document doc, String folderDest,
 			String xslName, String htmlName) throws TransformerException,
 			FileNotFoundException, IOException {

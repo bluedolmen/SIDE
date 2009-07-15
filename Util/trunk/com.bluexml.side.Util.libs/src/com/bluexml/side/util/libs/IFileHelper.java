@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
@@ -15,185 +16,213 @@ import org.eclipse.core.runtime.Path;
 
 public class IFileHelper {
 
-	public static File getFileFromWorkspace(String path) {
-		IResource ir = getIFile(path);
-		if (ir == null) {
-			IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-			return new File(myWorkspaceRoot.getRawLocation().makeAbsolute().toFile().getAbsolutePath() + File.separator + path);
-		}
-		return convertIRessourceToFile(ir);
-	}
+    public static File getFileFromWorkspace(String path) {
+        IResource ir = getIFile(path);
+        if (ir == null) {
+            IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+            return new File(myWorkspaceRoot.getRawLocation().makeAbsolute().toFile().getAbsolutePath() + File.separator + path);
+        }
+        return convertIRessourceToFile(ir);
+    }
 
-	public static IFile getIFile(String path) {
-		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-		IFile file = myWorkspaceRoot.getFile(new Path(path));
-		if (file.exists() || file.getRawLocation().makeAbsolute().toFile().exists()) {
-			return file;
-		}
-		return null;
-	}
+    public static IFile getIFile(String path) {
+        IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+        IFile file = myWorkspaceRoot.getFile(new Path(path));
+        if (file.exists() || file.getRawLocation().makeAbsolute().toFile().exists()) {
+            return file;
+        }
+        return null;
+    }
 
-	public static IFolder getIFolder(String path) {
-		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-		IFolder folder = myWorkspaceRoot.getFolder(new Path(path));
-		/*
-		if (folder.exists() || folder.getRawLocation().makeAbsolute().toFile().exists()) {
-			return folder;
-		}
-		*/
-		return folder;
-	}
+    /**
+     * Try to convert a file to IFile. If not found return null.
+     * @param toConvert
+     * @return
+     */
+    public static IFile getIFile(File toConvert) {
+        IFile result = null;
+        ResourcesPlugin.getWorkspace().getRoot().findContainersForLocationURI(toConvert.toURI());
+        IFile[] results = ResourcesPlugin.getWorkspace().getRoot().findFilesForLocationURI(toConvert.toURI());
+        if (results.length == 1) {
+            result = results[0];
+        }
+        return result;
+    }
 
-	public static File convertIRessourceToFile(IResource ir) {
-		return ir.getRawLocation().makeAbsolute().toFile();
-	}
-	
-	public static String convertIRessourceToSystemString(IResource ir) {
-		return ir.getRawLocation().makeAbsolute().toOSString();
-	}
-	
-	public static void deleteFolder(String ressource) throws CoreException {
-		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-		IFolder folder = myWorkspaceRoot.getFolder(new Path(ressource));
-		if (folder.exists()) {
-			folder.delete(true, null);
-		}
-	}
-	
-	public static void deleteFile(String ressource) throws CoreException {
-		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-		IResource res = myWorkspaceRoot.getFile(new Path(ressource));
-		if (res.exists()) {
-			res.delete(true, null);
-		}
-	}
-	
-	/**
-	 * Create a folder in the active workspace or return an already created folder.
-	 * @param ressource
-	 * @return
-	 * @throws CoreException
-	 */
-	public static IFolder createFolder(String ressource) throws CoreException {
-		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-		IFolder folder = myWorkspaceRoot.getFolder(new Path(ressource));
-		if (!folder.exists()) {
-			folder.create(false, true, null);
-		}
-		return folder;
-	}
-	
-	/**
-	 * Create a file in the given folder
-	 * @param folder
-	 * @param fileName
-	 * @throws CoreException 
-	 */
-	public static IFile createFile(IFolder folder, String fileName) throws CoreException {
-		IFile file = null;
-		if (folder.exists()) {
-			IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-			file = myWorkspaceRoot.getFile(new Path(folder.getFullPath() + System.getProperty ("file.separator") + fileName));
-			if (!file.exists()) {
-				file.create(null, false, null);
-			}
-		}
-		return file;
-	}
-	
-	
-	public static String getSystemFolderPath(String iFilePath) {
-		IFolder ff = IFileHelper.getIFolder(iFilePath);
-		return ff.getRawLocation().makeAbsolute().toOSString();
-	}
-	
-	public static String getSystemFilePath(String iFilePath) {
-		IFile ff = IFileHelper.getIFile(iFilePath);
-		return ff.getRawLocation().makeAbsolute().toOSString();
-	}
-	
-	/**
-	 * Return the file for resource given.
-	 * @param iresource
-	 * @return
-	 */
-	public static File getFile(IResource iresource) {
-		return iresource.getLocation().makeAbsolute().toFile();
-	}
-	
-	/**
-	 * Return all files for a given folder. Iterate over sub folder too (folder aren't added)
-	 * @param folder
-	 * @return
-	 * @throws Exception
-	 */
-	public static List<IFile> getAllFiles(IFolder folder) throws Exception {
-		List<IFile> results = new ArrayList<IFile>();
-		for (IResource r : folder.members()) {
-			if (r instanceof IFile) {
-				results.add((IFile)r);
-			} else {
-				results.addAll(getAllFiles((IFolder)r));
-			}
-		}
-		return results;
-	}
-	
-	/**
-	 * Return all files for the given folder; won't add file in sub folder.
-	 * @param folder
-	 * @return
-	 * @throws Exception
-	 */
-	public static List<IFile> getAllFilesForFolder(IFolder folder) throws Exception {
-		List<IFile> results = new ArrayList<IFile>();
-		for (IResource r : folder.members()) {
-			if (r instanceof IFile) {
-				results.add((IFile)r);
-			} 
-		}
-		return results;
-	}
-	
-	/**
-	 * Refresh the given folder
-	 * @param folder
-	 * @throws CoreException 
-	 */
-	public static void refreshFolder(IFolder folder) throws CoreException {
-		if (folder.exists()) {
-			folder.refreshLocal(IResource.DEPTH_INFINITE, null);
-		}
-	}
-	/**
-	 * Refresh the given folder using his path
-	 * @param folderPath
-	 * @throws CoreException
-	 */
-	public static void refreshFolder(String folderPath) throws CoreException {
-		refreshFolder(getIFolder(folderPath));
-	}
-	
-	/**
-	 * Move the given file to the given folder
-	 * @param file
-	 * @param dest
-	 * @throws CoreException 
-	 */
-	public static void moveFile(IFile file, IFolder dest, boolean eraseIfExist) throws CoreException {
-		boolean doWork = true;
-		IPath p = dest.getFullPath().append(file.getName());
-		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-		IFile destFile = myWorkspaceRoot.getFile(p);
-		if (destFile.exists()) {
-			if (!eraseIfExist) {
-				doWork = false;
-			} else {
-				IFileHelper.deleteFile(destFile.getFullPath().toOSString());
-			}
-		}
-		if (doWork) {
-			file.move(p, true, null);
-		}
-	}
+    public static IContainer getIFolder(File toConvert) {
+    	IContainer result = null;
+        IContainer[] results = ResourcesPlugin.getWorkspace().getRoot().findContainersForLocationURI(toConvert.toURI());
+        if (results.length == 1) {
+            result = results[0];
+        }
+        return result;
+    }
+
+    public static IFolder getIFolder(String path) {
+        IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+        IFolder folder = myWorkspaceRoot.getFolder(new Path(path));
+        /*
+        if (folder.exists() || folder.getRawLocation().makeAbsolute().toFile().exists()) {
+            return folder;
+        }
+        */
+        return folder;
+    }
+
+    public static File convertIRessourceToFile(IResource ir) {
+        return ir.getRawLocation().makeAbsolute().toFile();
+    }
+
+    public static String convertIRessourceToSystemString(IResource ir) {
+        return ir.getRawLocation().makeAbsolute().toOSString();
+    }
+
+    public static void deleteFolder(String ressource) throws CoreException {
+        IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+        IFolder folder = myWorkspaceRoot.getFolder(new Path(ressource));
+        if (folder.exists()) {
+            folder.delete(true, null);
+        }
+    }
+
+    public static void deleteFile(String ressource) throws CoreException {
+        IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+        IResource res = myWorkspaceRoot.getFile(new Path(ressource));
+        if (res.exists()) {
+            res.delete(true, null);
+        }
+    }
+
+    /**
+     * Create a folder in the active workspace or return an already created folder.
+     * @param ressource
+     * @return
+     * @throws CoreException
+     */
+    public static IFolder createFolder(String ressource) throws CoreException {
+        IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+        IFolder folder = myWorkspaceRoot.getFolder(new Path(ressource));
+        if (!folder.exists()) {
+            folder.create(false, true, null);
+        }
+        return folder;
+    }
+
+    /**
+     * Create a file in the given folder
+     * @param folder
+     * @param fileName
+     * @throws CoreException
+     */
+    public static IFile createFile(IFolder folder, String fileName) throws CoreException {
+        IFile file = null;
+        if (folder.exists()) {
+            IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+            file = myWorkspaceRoot.getFile(new Path(folder.getFullPath() + System.getProperty ("file.separator") + fileName));
+            if (!file.exists()) {
+                file.create(null, false, null);
+            }
+        }
+        return file;
+    }
+
+
+    public static String getSystemFolderPath(String iFilePath) {
+        IFolder ff = IFileHelper.getIFolder(iFilePath);
+        return ff.getRawLocation().makeAbsolute().toOSString();
+    }
+
+    public static String getSystemFilePath(String iFilePath) {
+        IFile ff = IFileHelper.getIFile(iFilePath);
+        return ff.getRawLocation().makeAbsolute().toOSString();
+    }
+
+    /**
+     * Return the file for resource given.
+     * @param iresource
+     * @return
+     */
+    public static File getFile(IResource iresource) {
+        return iresource.getLocation().makeAbsolute().toFile();
+    }
+
+    /**
+     * Return all files for a given folder. Iterate over sub folder too (folder aren't added)
+     * @param folder
+     * @return
+     * @throws Exception
+     */
+    public static List<IFile> getAllFiles(IFolder folder) throws Exception {
+        return IFileHelper.getAllFiles((IContainer)folder);
+    }
+
+    public static List<IFile> getAllFiles(IContainer folder) throws Exception {
+        List<IFile> results = new ArrayList<IFile>();
+        for (IResource r : folder.members()) {
+            if (r instanceof IFile) {
+                results.add((IFile)r);
+            } else {
+                results.addAll(getAllFiles((IFolder)r));
+            }
+        }
+        return results;
+    }
+
+    /**
+     * Return all files for the given folder; won't add file in sub folder.
+     * @param folder
+     * @return
+     * @throws Exception
+     */
+    public static List<IFile> getAllFilesForFolder(IFolder folder) throws Exception {
+        List<IFile> results = new ArrayList<IFile>();
+        for (IResource r : folder.members()) {
+            if (r instanceof IFile) {
+                results.add((IFile)r);
+            }
+        }
+        return results;
+    }
+
+    /**
+     * Refresh the given folder
+     * @param folder
+     * @throws CoreException
+     */
+    public static void refreshFolder(IFolder folder) throws CoreException {
+        if (folder.exists()) {
+            folder.refreshLocal(IResource.DEPTH_INFINITE, null);
+        }
+    }
+    /**
+     * Refresh the given folder using his path
+     * @param folderPath
+     * @throws CoreException
+     */
+    public static void refreshFolder(String folderPath) throws CoreException {
+        refreshFolder(getIFolder(folderPath));
+    }
+
+    /**
+     * Move the given file to the given folder
+     * @param file
+     * @param dest
+     * @throws CoreException
+     */
+    public static void moveFile(IFile file, IFolder dest, boolean eraseIfExist) throws CoreException {
+        boolean doWork = true;
+        IPath p = dest.getFullPath().append(file.getName());
+        IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+        IFile destFile = myWorkspaceRoot.getFile(p);
+        if (destFile.exists()) {
+            if (!eraseIfExist) {
+                doWork = false;
+            } else {
+                IFileHelper.deleteFile(destFile.getFullPath().toOSString());
+            }
+        }
+        if (doWork) {
+            file.move(p, true, null);
+        }
+    }
 }

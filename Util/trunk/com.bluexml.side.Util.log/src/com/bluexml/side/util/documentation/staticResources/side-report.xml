@@ -1,412 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type='text/xsl' href='stylesheet/log2html.xsl'?><logRoot><SIDELog name="S-IDE Alfresco Deployer" id="com.bluexml.side.Deployer.alfresco" date="2009-07-06 17:19:20.378 CEST" type="DEPLOYMENT">
-  <techno>Alfresco</techno>
-  <technoVersion>Alfresco3.x Labs and Entreprise</technoVersion>
-  <creator>S-IDE Alfresco Deployer</creator>
-</SIDELog><SIDELog name="S-IDE Alfresco Report 1.0.0" id="com.bluexml.side.Class.generator.report" date="2009-07-06 17:19:19.560 CEST" type="GENERATION">
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:20.331 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.report.ReportGenerator\com\Content_type_report.rptdesign</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.report.ReportGenerator/com/Content_type_report.rptdesign</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:20.331 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.report.ReportGenerator\com\Content_type_report.rptdesign</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.report.ReportGenerator/com/Content_type_report.rptdesign</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:20.331 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.report.ReportGenerator\com\Content_type_report.rptdesign</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.report.ReportGenerator/com/Content_type_report.rptdesign</uri>
-  </logEntry>
-  <metaModel>KSR500 Class</metaModel>
-  <techno>Birt</techno>
-  <technoVersion>Birt_2.3.x</technoVersion>
-  <creator>S-IDE Alfresco Report 1.0.0</creator>
-</SIDELog><SIDELog name="S-IDE Alfresco Class Generator 1.0.0" id="com.bluexml.side.Class.generator.alfresco" date="2009-07-06 17:19:14.448 CEST" type="GENERATION">
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.738 CEST</date>
-    <name>module.SIDE_ModelExtension_com.zip created.</name>
-    <description>module.SIDE_ModelExtension_com.zip created in /test/out/alfresco_3.x/module.SIDE_ModelExtension_com.zip</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/alfresco_3.x/module.SIDE_ModelExtension_com.zip</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.738 CEST</date>
-    <name>module.SIDE_ModelExtension_com.amp created.</name>
-    <description>module.SIDE_ModelExtension_com.amp created in /test/out/alfresco_3.x/module.SIDE_ModelExtension_com.amp</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/alfresco_3.x/module.SIDE_ModelExtension_com.amp</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.738 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\config\alfresco\module\SIDE_ModelExtension_com\model\model.xml</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/config/alfresco/module/SIDE_ModelExtension_com/model/model.xml</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.738 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\config\alfresco\module\SIDE_ModelExtension_com\model\messages.properties</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/config/alfresco/module/SIDE_ModelExtension_com/model/messages.properties</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.738 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\config\alfresco\module\SIDE_ModelExtension_com\web-client-config-custom.xml</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/config/alfresco/module/SIDE_ModelExtension_com/web-client-config-custom.xml</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.738 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\config\alfresco\module\SIDE_ModelExtension_com\module-context.xml</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/config/alfresco/module/SIDE_ModelExtension_com/module-context.xml</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.738 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\extension\templates\webscripts\org\alfresco\slingshot\documentlibrary\customViews.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/extension/templates/webscripts/org/alfresco/slingshot/documentlibrary/customViews.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.739 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\extension\templates\webscripts\org\alfresco\slingshot\documentlibrary\doclist_views\doclist_com_blueXml_test_Personne.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/extension/templates/webscripts/org/alfresco/slingshot/documentlibrary/doclist_views/doclist_com_blueXml_test_Personne.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.739 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\extension\templates\webscripts\org\alfresco\slingshot\documentlibrary\doclist_views\doclist_com_blueXml_Contact.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/extension/templates/webscripts/org/alfresco/slingshot/documentlibrary/doclist_views/doclist_com_blueXml_Contact.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.739 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\extension\templates\webscripts\org\alfresco\slingshot\documentlibrary\doclist_views\doclist_com_blueXml_Entreprise.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/extension/templates/webscripts/org/alfresco/slingshot/documentlibrary/doclist_views/doclist_com_blueXml_Entreprise.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.739 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\extension\templates\webscripts\org\alfresco\slingshot\documentlibrary\doclist.get.desc.xml</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/extension/templates/webscripts/org/alfresco/slingshot/documentlibrary/doclist.get.desc.xml</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.739 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\extension\templates\webscripts\org\alfresco\slingshot\documentlibrary\doclist.get.html.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/extension/templates/webscripts/org/alfresco/slingshot/documentlibrary/doclist.get.html.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.739 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\extension\templates\webscripts\org\alfresco\slingshot\documentlibrary\doclist.get.js</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/extension/templates/webscripts/org/alfresco/slingshot/documentlibrary/doclist.get.js</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.739 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\extension\templates\webscripts\org\alfresco\slingshot\documentlibrary\doclist.get.json.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/extension/templates/webscripts/org/alfresco/slingshot/documentlibrary/doclist.get.json.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.739 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\share\WEB-INF\classes\alfresco\web-extension\site-webscripts\org\alfresco\components\upload\file-upload.get.html.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/upload/file-upload.get.html.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.739 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\share\WEB-INF\classes\alfresco\web-extension\site-webscripts\org\alfresco\components\upload\flash-upload.get.js</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/upload/flash-upload.get.js</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.739 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\share\WEB-INF\classes\alfresco\web-extension\site-webscripts\org\alfresco\components\upload\html-upload.get.js</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/upload/html-upload.get.js</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.739 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\share\WEB-INF\classes\alfresco\web-extension\site-webscripts\org\alfresco\components\documentlibrary\documentlist.get.properties</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/documentlibrary/documentlist.get.properties</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.740 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\test\Personne\com_blueXml_test_Personne.get.desc.xml</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/test/Personne/com_blueXml_test_Personne.get.desc.xml</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.740 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\Contact\com_blueXml_Contact.get.desc.xml</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/Contact/com_blueXml_Contact.get.desc.xml</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.740 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\Entreprise\com_blueXml_Entreprise.get.desc.xml</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/Entreprise/com_blueXml_Entreprise.get.desc.xml</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.740 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\test\Personne\com_blueXml_test_Personne.post.desc.xml</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/test/Personne/com_blueXml_test_Personne.post.desc.xml</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.740 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\Contact\com_blueXml_Contact.post.desc.xml</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/Contact/com_blueXml_Contact.post.desc.xml</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.740 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\Entreprise\com_blueXml_Entreprise.post.desc.xml</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/Entreprise/com_blueXml_Entreprise.post.desc.xml</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.740 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\test\Personne\com_blueXml_test_Personne.get.js</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/test/Personne/com_blueXml_test_Personne.get.js</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.740 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\Contact\com_blueXml_Contact.get.js</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/Contact/com_blueXml_Contact.get.js</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.740 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\Entreprise\com_blueXml_Entreprise.get.js</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/Entreprise/com_blueXml_Entreprise.get.js</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.740 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\test\Personne\com_blueXml_test_Personne.post.js</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/test/Personne/com_blueXml_test_Personne.post.js</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.740 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\Contact\com_blueXml_Contact.post.js</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/Contact/com_blueXml_Contact.post.js</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.741 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\Entreprise\com_blueXml_Entreprise.post.js</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/Entreprise/com_blueXml_Entreprise.post.js</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.741 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\test\Personne\xml\com_blueXml_test_Personne.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/test/Personne/xml/com_blueXml_test_Personne.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.741 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\Contact\xml\com_blueXml_Contact.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/Contact/xml/com_blueXml_Contact.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.741 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\Entreprise\xml\com_blueXml_Entreprise.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/Entreprise/xml/com_blueXml_Entreprise.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.741 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\test\Personne\com_blueXml_test_Personne.post.xml.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/test/Personne/com_blueXml_test_Personne.post.xml.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.741 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\Contact\com_blueXml_Contact.post.xml.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/Contact/com_blueXml_Contact.post.xml.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.741 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\Entreprise\com_blueXml_Entreprise.post.xml.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/Entreprise/com_blueXml_Entreprise.post.xml.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.741 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\test\Personne\com_blueXml_test_Personne.get.xml.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/test/Personne/com_blueXml_test_Personne.get.xml.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.741 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\Contact\com_blueXml_Contact.get.xml.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/Contact/com_blueXml_Contact.get.xml.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.741 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\com\blueXml\Entreprise\com_blueXml_Entreprise.get.xml.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/blueXml/Entreprise/com_blueXml_Entreprise.get.xml.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.741 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.get.desc.xml</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.get.desc.xml</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.742 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.get.desc.xml</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.get.desc.xml</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.742 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.get.desc.xml</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.get.desc.xml</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.742 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.post.desc.xml</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.post.desc.xml</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.742 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.post.desc.xml</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.post.desc.xml</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.742 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.post.desc.xml</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.post.desc.xml</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.742 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.get.js</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.get.js</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.742 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.get.js</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.get.js</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.742 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.get.js</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.get.js</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.742 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.post.js</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.post.js</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.742 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.post.js</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.post.js</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.742 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.post.js</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.post.js</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.743 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\xml\all.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/xml/all.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.743 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\xml\all.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/xml/all.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.743 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\xml\all.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/xml/all.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.743 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.post.xml.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.post.xml.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.743 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.post.xml.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.post.xml.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.743 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.post.xml.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.post.xml.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.743 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.get.xml.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.get.xml.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.743 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.get.xml.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.get.xml.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.743 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\alfresco\WEB-INF\classes\alfresco\webscripts\extension\all\all.get.xml.ftl</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.get.xml.ftl</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.743 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator\com\webapps\share\WEB-INF\classes\alfresco\web-extension\web-framework-config-custom.xml</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator/com/webapps/share/WEB-INF/classes/alfresco/web-extension/web-framework-config-custom.xml</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.743 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\alfresco_3.x\module.SIDE_ModelExtension_com.zip</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/alfresco_3.x/module.SIDE_ModelExtension_com.zip</uri>
-  </logEntry>
-  <logEntry type="GENERATED_FILE">
-    <date>2009-07-06 17:19:18.743 CEST</date>
-    <name>Files Generated</name>
-    <description>C:\Projects\runtime-S-IDE\test\out\alfresco_3.x\module.SIDE_ModelExtension_com.amp</description>
-    <uri>file:/C:/Projects/runtime-S-IDE/test/out/alfresco_3.x/module.SIDE_ModelExtension_com.amp</uri>
-  </logEntry>
-  <metaModel>KSR500 Class</metaModel>
-  <techno>Alfresco</techno>
-  <technoVersion>Alfresco3.x Labs and Entreprise</technoVersion>
-  <creator>S-IDE Alfresco Class Generator 1.0.0</creator>
-</SIDELog><deployed><toDeploy id="com.bluexml.side.Class.generator.alfresco" date="Mon Jul 06 17:19:19 CEST 2009" /></deployed></logRoot>
+<?xml-stylesheet type='text/xsl' href='stylesheet/log2html.xsl'?>
+<logRoot>
+  <SIDELog name="S-IDE Documentation Deployer" id="com.bluexml.side.Deployer.documentation"
+    date="2009-07-15 15:40:00.343 CEST" type="DEPLOYMENT">
+    <techno>docBook</techno>
+    <technoVersion>Docbook 4.x</technoVersion>
+    <creator>S-IDE Documentation Deployer</creator>
+  </SIDELog>
+  <SIDELog name="S-IDE Alfresco Report 1.0.0" id="com.bluexml.side.Class.generator.report"
+    date="2009-07-15 15:39:57.668 CEST" type="GENERATION">
+    <logEntry type="GENERATED_FILE">
+      <date>2009-07-15 15:39:59.849 CEST</date>
+      <name>Files Generated</name>
+      <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.report.ReportGenerator\bluexml\Content_type_report.rptdesign</description>
+      <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.report.ReportGenerator/bluexml/Content_type_report.rptdesign</uri>
+    </logEntry>
+    <logEntry type="GENERATED_FILE">
+      <date>2009-07-15 15:39:59.849 CEST</date>
+      <name>Files Generated</name>
+      <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.report.ReportGenerator\bluexml\Content_type_report.rptdesign</description>
+      <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.report.ReportGenerator/bluexml/Content_type_report.rptdesign</uri>
+    </logEntry>
+    <metaModel>KSR500 Class</metaModel>
+    <techno>Birt</techno>
+    <technoVersion>Birt_2.3.x</technoVersion>
+    <creator>S-IDE Alfresco Report 1.0.0</creator>
+  </SIDELog>
+  <SIDELog name="S-IDE Class Documentation Generator 1.0.0"
+    id="com.bluexml.side.Class.generator.documentation" date="2009-07-15 15:39:59.866 CEST"
+    type="GENERATION">
+    <logEntry type="GENERATED_FILE">
+      <date>2009-07-15 15:40:00.321 CEST</date>
+      <name>Files Generated</name>
+      <description>C:\Projects\runtime-S-IDE\test\out\generator_com.bluexml.side.clazz.generator.documentation.ClassDocumentationGenerator\bluexml\Mediatheque-dt-data-doc.xml</description>
+      <uri>file:/C:/Projects/runtime-S-IDE/test/out/generator_com.bluexml.side.clazz.generator.documentation.ClassDocumentationGenerator/bluexml/Mediatheque-dt-data-doc.xml</uri>
+    </logEntry>
+    <metaModel>KSR500 Class</metaModel>
+    <techno>docBook</techno>
+    <technoVersion>Docbook 4.x</technoVersion>
+    <creator>S-IDE Class Documentation Generator 1.0.0</creator>
+  </SIDELog>
+  <deployed>
+    <toDeploy id="com.bluexml.side.Class.generator.documentation"
+      date="Wed Jul 15 15:40:00 CEST 2009"/>
+  </deployed>
+  <documentation>
+    <entry path="doc/Mediatheque-dt-data-doc.xml"/>
+  </documentation>
+</logRoot>

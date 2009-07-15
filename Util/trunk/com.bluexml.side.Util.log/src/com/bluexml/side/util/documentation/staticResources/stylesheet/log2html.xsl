@@ -28,20 +28,21 @@
                         </div>
                     </div>
                     <div id="menu">
-                        <a href="#" onclick="javascript:showPannel('stats');">Stats</a> | 
-                        <a href="#" onclick="javascript:showPannel('generation');">Generation</a> | 
+                        <a href="#" onclick="javascript:showPannel('stats');">Stats</a> |
+                        <a href="#" onclick="javascript:showPannel('generation');">Generation</a> |
                         <a href="#" onclick="javascript:showPannel('deployment');">Deployment</a> |
                         <a href="#" onclick="javascript:showPannel('service');">Services</a> |
                         <a href="#" onclick="javascript:showPannel('documentation');">Documentation</a> |
                     </div>
-    
+
                     <div id="content">
                         <xsl:call-template name="deploymentDisplay"/>
                         <xsl:call-template name="generationDisplay"/>
                         <xsl:call-template name="statsDisplay"/>
                         <xsl:call-template name="service"/>
+                        <xsl:call-template name="documentation"/>
                     </div>
-    
+
                     <div id="footer">
                         <a href="http://www.bluexml.com">BlueXML</a>
                     </div>
@@ -82,7 +83,7 @@
     </xsl:template>
 
     <xsl:template name="deploymentDisplay">
-        <div id="deployment" style="display:none;"> 
+        <div id="deployment" style="display:none;">
             <xsl:call-template name="logerDisplay">
                 <xsl:with-param name="type">DEPLOYMENT</xsl:with-param>
             </xsl:call-template>
@@ -96,7 +97,7 @@
             </xsl:call-template>
         </div>
     </xsl:template>
-    
+
     <xsl:template name="logerDisplay">
         <xsl:param name="type" required="yes"></xsl:param>
         <xsl:param name="showServices" required="no">false</xsl:param>
@@ -164,7 +165,7 @@
             </xsl:if>
         </xsl:for-each>
     </xsl:template>
-    
+
     <xsl:template name="showEntry">
         <li>
             <xsl:if test="@type='ERROR'">
@@ -199,7 +200,7 @@
             </xsl:if>
         </li>
     </xsl:template>
-    
+
     <xsl:template name="service">
         <div id="service" style="display:none;">
             <xsl:call-template name="logerDisplay">
@@ -210,16 +211,38 @@
         </div>
     </xsl:template>
 
+    <xsl:template name="documentation">
+        <div id="documentation" style="display:none;">
+            <div class="box">
+                <div class="box-header">
+                    Documentation
+                </div>
+                <div class="box-body">
+                    <ul>
+                        <xsl:for-each select="//documentation/entry">
+                            <li>
+                                <a>
+                                    <xsl:attribute name="href"><xsl:value-of select="@path"/></xsl:attribute>
+                                    <xsl:value-of select="@path"/>
+                                </a>
+                            </li>
+                        </xsl:for-each>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </xsl:template>
+
     <xsl:template match="node()|@*">
         <xsl:apply-templates/>
     </xsl:template>
-    
+
     <xsl:template name="displayDate">
         <xsl:param name="date"/>
         <xsl:value-of select="concat(substring($date, 9, 2), '/', substring($date, 6, 2), '/', substring($date,1,4))"/>
         - <xsl:value-of select="substring($date, 12, 8)"/>
     </xsl:template>
-    
+
     <xsl:template name="removeSpecialChars">
         <xsl:param name="string"/>
         <xsl:value-of select="translate($string,' ','')"/>
