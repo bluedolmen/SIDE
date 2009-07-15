@@ -427,10 +427,13 @@ public class Utils {
 						if (update) {
 
 							if ((ligne.charAt(0) == 'A'
-									|| ligne.charAt(0) == 'U' || ligne
-									.charAt(0) == 'D')
-									&& (ligne.charAt(1) == ' ' || ligne
-											.charAt(1) == 'U') && update) {
+									|| ligne.charAt(0) == 'U'
+									|| ligne.charAt(0) == 'D' || ligne
+									.charAt(0) == ' ')
+									&& (ligne.charAt(1) == ' '
+											|| ligne.charAt(1) == 'U'
+											|| ligne.charAt(1) == 'A' || ligne
+											.charAt(1) == 'D') && update) {
 
 								modif = ligne.substring(2, ligne.length());
 								modif.trim();
