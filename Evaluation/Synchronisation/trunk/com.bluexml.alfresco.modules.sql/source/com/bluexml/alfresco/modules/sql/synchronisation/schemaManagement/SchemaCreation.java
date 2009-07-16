@@ -153,6 +153,9 @@ public class SchemaCreation {
 			String dbname = dmd.getDatabaseProductName();
 			String dbversion = dmd.getDatabaseProductVersion();
 			logger.debug("Running sql synchronisation on " + dbname + " " + dbversion);
+			
+//			rs = dmd.getSchemas();
+			
 						
 //			rs = dmd.getTypeInfo();
 //			System.out.println("Supported data types:");

@@ -75,16 +75,23 @@
 		<property name="renamingStrategy" ref="truncateRenamingStrategy" />
 	</bean>
 
- 	<bean id="sqlPolicy" class="com.bluexml.alfresco.modules.sql.synchronisation.SQLSynchronisationPolicy" init-method="init">
+ 	<bean id="synchronisationPolicy" class="com.bluexml.alfresco.modules.sql.synchronisation.SQLSynchronisationPolicy" init-method="init">
  		<property name="nodeService" ref="nodeService" />
 		<property name="policyComponent" ref="policyComponent" />
-		<property name="dictionaryService" ref="dictionaryService" />
 		<property name="dataSource" ref="synchroDataSource" />
+		<property name="nodeDAO" ref="synchronisationNodeDAO" />
 	</bean>
 
-	<bean id="sqlSchemaCreator" class="com.bluexml.alfresco.modules.sql.synchronisation.schemaManagement.SchemaCreation" init-method="init">
+	<bean id="synchronisationSchemaCreator" class="com.bluexml.alfresco.modules.sql.synchronisation.schemaManagement.SchemaCreation" init-method="init">
 		<property name="dictionaryService" ref="dictionaryService" />
 		<property name="dataSource" ref="synchroDataSource" />
+		<property name="databaseDictionary" ref="databaseDictionary" />
+	</bean>
+	
+	<bean id="synchronisationNodeDAO" class="com.bluexml.alfresco.modules.sql.synchronisation.NodeDAO">
+ 		<property name="nodeService" ref="nodeService" />
+		<property name="dataSource" ref="synchroDataSource" />
+		<property name="dictionaryService" ref="dictionaryService" />
 		<property name="databaseDictionary" ref="databaseDictionary" />
 	</bean>
 	

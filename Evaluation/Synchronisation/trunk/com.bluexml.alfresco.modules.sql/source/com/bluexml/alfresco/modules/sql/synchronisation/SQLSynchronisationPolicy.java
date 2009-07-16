@@ -4,13 +4,7 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
@@ -28,10 +22,7 @@ import org.alfresco.repo.policy.PolicyComponent;
 import org.alfresco.repo.policy.Behaviour.NotificationFrequency;
 import org.alfresco.repo.transaction.AlfrescoTransactionSupport;
 import org.alfresco.repo.transaction.TransactionListener;
-import org.alfresco.service.cmr.dictionary.AspectDefinition;
 import org.alfresco.service.cmr.dictionary.DictionaryService;
-import org.alfresco.service.cmr.dictionary.PropertyDefinition;
-import org.alfresco.service.cmr.dictionary.TypeDefinition;
 import org.alfresco.service.cmr.repository.AssociationRef;
 import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.NodeRef;
@@ -244,54 +235,6 @@ public class SQLSynchronisationPolicy implements OnCreateNodePolicy, OnUpdatePro
 		// Only process bluexml nodes
 		if (hasToBeProcessed(nodeRef)) {
 			logger.debug("[onCreateNode] CUSTOM CREATE");
-			QName nodeType = nodeService.getType(nodeRef);
-			String type_name = nodeType.getLocalName();
-
-			List<QName> parentNames = getParentQNames(nodeRef);
-			for (QName type_qname : parentNames) {
-				type_name = type_qname.getLocalName();
-
-				String simplified_type_name = databaseDictionary.resolveClassAsTableName(type_name);
-				String uuid = nodeRef.getId();
-				Serializable dbid = nodeService.getProperty(nodeRef, QName.createQName(NamespaceService.SYSTEM_MODEL_1_0_URI,"node-dbid"));
-
-				Map<String, String> properties = new HashMap<String, String>();
-				// We will only process the properties which are related
-				// to the current type
-				TypeDefinition currentTypeDefinition = dictionaryService.getType(type_qname);
-				Map<QName, PropertyDefinition> currentTypeProperties = new HashMap<QName, PropertyDefinition>();
-				currentTypeProperties.putAll(currentTypeDefinition.getProperties());
-				for (AspectDefinition ad : currentTypeDefinition.getDefaultAspects()) {
-					currentTypeProperties.putAll(ad.getProperties());
-				}
-
-				Collection<QName> iterableProperties = nodeService.getProperties(nodeRef).keySet();
-				iterableProperties.retainAll(currentTypeProperties.keySet());
-
-				for (QName key : iterableProperties) {
-					if (key.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
-						Serializable property = nodeService.getProperty(nodeRef, key);
-						String value = getSQLFormatFromSerializable(property);
-						properties.put(databaseDictionary.resolveAttributeAsColumnName(key.getLocalName(), type_name), value);
-					}
-				}
-
-				List<String> valueList = __escape(properties.keySet());
-				String ids = StringUtils.join(valueList.iterator(), "`,`");
-				String values = StringUtils.join(properties.values().iterator(), ",");
-
-				String sql_query = "";
-				if (!properties.isEmpty()) {
-					sql_query = "INSERT INTO `" + simplified_type_name
-							+ "`(id,uuid,`" + ids + "`) VALUES(" + dbid + ",\""
-							+ uuid + "\"," + values + ")";
-				} else {
-					sql_query = "INSERT INTO `" + simplified_type_name
-							+ "`(id,uuid) VALUES(" + dbid + ",\"" + uuid
-							+ "\")";
-				}
-				executeSQLQuery(sql_query);
-			}
 		}
 	}
 
@@ -303,18 +246,6 @@ public class SQLSynchronisationPolicy implements OnCreateNodePolicy, OnUpdatePro
 		if (hasToBeProcessed(nodeRef)) {
 			String type_name = nodeService.getType(nodeRef).getLocalName();
 			logger.debug("[deleteNode] CUSTOM DELETE");
-
-			List<QName> parentNames = getParentQNames(nodeRef);
-			for (QName type_qname : parentNames) {
-				type_name = type_qname.getLocalName();
-
-				String simplified_type_name = databaseDictionary.resolveClassAsTableName(type_name);
-				Serializable dbid = nodeService.getProperty(nodeRef, QName.createQName(NamespaceService.SYSTEM_MODEL_1_0_URI,"node-dbid"));
-
-				String sql_query = "DELETE FROM `" + simplified_type_name + "`" + " WHERE id = " + dbid.toString();
-				executeSQLQuery(sql_query);
-			}
-
 		}
 	}
 
@@ -341,42 +272,6 @@ public class SQLSynchronisationPolicy implements OnCreateNodePolicy, OnUpdatePro
 			if (changes.size() > 0) {
 				logger.debug("[onUpdateProperties] CUSTOM UPDATE PROPERTIES");
 
-				String type_name = nodeService.getType(nodeRef).getLocalName();
-
-				List<QName> parentNames = getParentQNames(nodeRef);
-
-				for (QName type_qname : parentNames) {
-					type_name = type_qname.getLocalName();
-
-					String simplified_type_name = databaseDictionary.resolveClassAsTableName(type_name);
-					Serializable dbid = nodeService.getProperty(nodeRef, QName.createQName(NamespaceService.SYSTEM_MODEL_1_0_URI, "node-dbid"));
-
-					TypeDefinition currentTypeDefinition = dictionaryService.getType(type_qname);
-					Map<QName, PropertyDefinition> currentTypeProperties = new HashMap<QName, PropertyDefinition>();
-					currentTypeProperties.putAll(currentTypeDefinition.getProperties());
-					for (AspectDefinition ad : currentTypeDefinition.getDefaultAspects()) {
-						currentTypeProperties.putAll(ad.getProperties());
-					}
-					Collection<QName> iterableProperties = changes.keySet();
-					iterableProperties.retainAll(currentTypeProperties.keySet());
-
-					for (QName key : iterableProperties) {
-						if (changes.get(key) != null) {
-							Serializable property = nodeService.getProperty(nodeRef, key);
-							String value = getSQLFormatFromSerializable(property);
-							String sql_query = "UPDATE `"
-									+ simplified_type_name
-									+ "`"
-									+ " SET `"
-									+ databaseDictionary.resolveAttributeAsColumnName(
-											key.getLocalName(), type_name)
-									+ "`=" + value + " WHERE id = "
-									+ dbid.toString();
-							// Update string only if they are non empty...
-							executeSQLQuery(sql_query);
-						}
-					}
-				}
 			} else {
 				logger.debug("[onUpdateProperties] update skiped because one or more invalide properties");
 			}
@@ -389,21 +284,14 @@ public class SQLSynchronisationPolicy implements OnCreateNodePolicy, OnUpdatePro
 	public void onCreateAssociation(AssociationRef associationref) {
 		QName association_type = associationref.getTypeQName();
 		if (association_type.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
-			Serializable source_dbid = nodeService.getProperty(associationref.getSourceRef(), QName.createQName(NamespaceService.SYSTEM_MODEL_1_0_URI, "node-dbid"));
-			Serializable target_dbid = nodeService.getProperty(associationref.getTargetRef(), QName.createQName(NamespaceService.SYSTEM_MODEL_1_0_URI, "node-dbid"));
-
-			String association_name = association_type.getLocalName();
-
 			logger.debug("[onCreateAssociation] CUSTOM CREATE ASSOCIATION");
-			String simplified_association_name = databaseDictionary.resolveAssociationAsTableName(association_name);
-			String source_class_name = databaseDictionary.getSourceClass(association_name);
-			String target_class_name = databaseDictionary.getTargetClass(association_name);
 
-			String sql_query = "INSERT `" + simplified_association_name + "`"
-					+ "(`" + source_class_name + "`,`" + target_class_name
-					+ "`) VALUES (" + source_dbid.toString() + ","
-					+ target_dbid.toString() + ")";
-			executeSQLQuery(sql_query);
+		}
+	}
+	
+	public void onDeleteAssociation(AssociationRef associationref) {
+		QName association_type = associationref.getTypeQName();
+		if (association_type.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
 		}
 	}
 
@@ -411,141 +299,19 @@ public class SQLSynchronisationPolicy implements OnCreateNodePolicy, OnUpdatePro
 			boolean isNewNode) {
 		QName association_type = associationref.getTypeQName();
 		if (association_type.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
-			Serializable parent_dbid = nodeService.getProperty(associationref.getParentRef(), QName.createQName(NamespaceService.SYSTEM_MODEL_1_0_URI, "node-dbid"));
-			Serializable child_dbid = nodeService.getProperty(associationref.getChildRef(), QName.createQName(NamespaceService.SYSTEM_MODEL_1_0_URI, "node-dbid"));
-
-			// Retrieve a simplified association name
-			String association_name = association_type.getLocalName();
-
 			logger.debug("[onCreateChildAssociation] CUSTOM CREATE CHILD ASSOCIATION");
-			String simplified_association_name = databaseDictionary.resolveAssociationAsTableName(association_name);
-			String parent_class_name = databaseDictionary.getSourceClass(association_name);
-			String child_class_name = databaseDictionary.getTargetClass(association_name);
-			String sql_query = "INSERT `" + simplified_association_name + "`"
-					+ "(`" + parent_class_name + "`,`" + child_class_name
-					+ "`) VALUES (" + parent_dbid.toString() + ","
-					+ child_dbid.toString() + ")";
-			executeSQLQuery(sql_query);
 		}
 	}
 
 	public void onDeleteChildAssociation(ChildAssociationRef associationref) {
 		QName association_type = associationref.getTypeQName();
 		if (association_type.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
-			Serializable parent_dbid = nodeService.getProperty(associationref.getParentRef(), QName.createQName(NamespaceService.SYSTEM_MODEL_1_0_URI, "node-dbid"));
-			Serializable child_dbid = nodeService.getProperty(associationref.getChildRef(), QName.createQName(NamespaceService.SYSTEM_MODEL_1_0_URI, "node-dbid"));
-
-			// Retrieve a simplified association name
-			String association_name = association_type.getLocalName();
 
 			logger.debug("[onDeleteChildAssociation] CUSTOM DELETE CHILD ASSOCIATION");
-			String simplified_association_name = databaseDictionary.resolveAssociationAsTableName(association_name);
-			String source_class_name = databaseDictionary.getSourceClass(association_name);
-			String target_class_name = databaseDictionary.getTargetClass(association_name);
 
-			String sql_query = "DELETE FROM `" + simplified_association_name
-					+ "`" + " WHERE `" + source_class_name + "` = "
-					+ parent_dbid.toString() + " AND `" + target_class_name
-					+ "` = " + child_dbid.toString();
-			executeSQLQuery(sql_query);
 		}
 	}
 
-	public void onDeleteAssociation(AssociationRef associationref) {
-		QName association_type = associationref.getTypeQName();
-		if (association_type.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
-			Serializable source_dbid = nodeService.getProperty(associationref.getSourceRef(), QName.createQName(NamespaceService.SYSTEM_MODEL_1_0_URI, "node-dbid"));
-			Serializable target_dbid = nodeService.getProperty(associationref.getTargetRef(), QName.createQName(NamespaceService.SYSTEM_MODEL_1_0_URI, "node-dbid"));
-
-			// Retrieve a simplified association name
-			String association_name = association_type.getLocalName();
-
-			logger.debug("[onDeleteAssociation] CUSTOM DELETE ASSOCIATION");
-			String simplified_association_name = databaseDictionary.resolveAssociationAsTableName(association_name);
-			String source_class_name = databaseDictionary.getSourceClass(association_name);
-			String target_class_name = databaseDictionary.getTargetClass(association_name);
-
-			String sql_query = "DELETE FROM `" + simplified_association_name
-					+ "`" + " WHERE `" + source_class_name + "` = "
-					+ source_dbid.toString() + " AND `" + target_class_name
-					+ "` = " + target_dbid.toString();
-			executeSQLQuery(sql_query);
-		}
-	}
-
-	/*
-	 * Helper methods
-	 */
-	
-	/**
-	 * Return the parent QNames of the nodeRef including self
-	 * 
-	 * @param nodeRef
-	 * @return a list of parent names
-	 */
-	private List<QName> getParentQNames(NodeRef nodeRef) {
-		List<QName> result = new ArrayList<QName>();
-
-		QName currentType = nodeService.getType(nodeRef);
-
-		while (currentType.getNamespaceURI().startsWith(BLUEXML_MODEL_URI)) {
-			result.add(currentType);
-			TypeDefinition nodeRefTypeDefinition = dictionaryService.getType(currentType);
-			QName parentType = nodeRefTypeDefinition.getParentName();
-			currentType = parentType;
-		}
-		return result;
-	}
-
-	private static String __escape(String value) {
-		String result = value.replaceAll("\"", "\"\"");
-		return result;
-	}
-
-	private static List<String> __escape(Collection<String> values) {
-		ArrayList<String> result = new ArrayList<String>();
-		for (String value : values) {
-			result.add(__escape(value));
-		}
-		return result;
-	}
-
-	private String getSQLFormatFromSerializable(Serializable property) {
-		boolean is_string = property instanceof String;
-		boolean is_date = property instanceof Date;
-		boolean is_collection = property instanceof Collection;
-		String value = "";
-		if (property == null) {
-			value = "NULL";
-		} else if (is_date) {
-			DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			value = dateformat.format((Date) property);
-		} else if (is_collection) {
-			value = getSQLFormatFromCollection((Collection) property);
-			is_string = true;
-		} else {
-			value = __escape(property.toString());
-		}
-
-		// value = StringEscapeUtils.escapeSql(value);
-		value = (is_string || is_date ? "\"" : "") + value
-				+ (is_string || is_date ? "\"" : "");
-
-		return value;
-	}
-
-	private String getSQLFormatFromCollection(Collection properties) {
-		StringBuffer sb = new StringBuffer();
-		boolean first = true;
-		for (Object property : properties) {
-			if (!first) {
-				sb.append(" ");
-			}
-			sb.append(__escape(property.toString()));
-			first = false;
-		}
-		return sb.toString();
-	}
 
 	private boolean hasToBeProcessed(NodeRef nodeRef) {
 		boolean result = false;
@@ -573,36 +339,14 @@ public class SQLSynchronisationPolicy implements OnCreateNodePolicy, OnUpdatePro
 	// Dependencies
 	private NodeService nodeService;
 	private PolicyComponent policyComponent;
-	private DictionaryService dictionaryService;
-	private DatabaseDictionary databaseDictionary;
 	private DataSource dataSource;
-
-	public NodeService getNodeService() {
-		return nodeService;
-	}
 
 	public void setNodeService(NodeService nodeService_) {
 		nodeService = nodeService_;
 	}
 
-	public PolicyComponent getPolicyComponent() {
-		return policyComponent;
-	}
-
 	public void setPolicyComponent(PolicyComponent policyComponent_) {
 		policyComponent = policyComponent_;
-	}
-
-	public DictionaryService getDictionaryComponent() {
-		return dictionaryService;
-	}
-
-	public void setDictionaryService(DictionaryService dictionaryService_) {
-		dictionaryService = dictionaryService_;
-	}
-
-	public void setDatabaseDictionary(DatabaseDictionary dbd_) {
-		databaseDictionary = dbd_;
 	}
 
 	public void setDataSource(DataSource dataSource_) {
