@@ -26,10 +26,12 @@ public class MergeUtil {
 				if (gb.containsKey(pname)) {
 					gb.get(pname).add(model);
 				} else {
-					ArrayList<IFile> l = new ArrayList<IFile>();					
+					ArrayList<IFile> l = new ArrayList<IFile>();
 					l.add(model);
 					gb.put(pname, l);
 				}
+			} else {
+				System.err.println("No Package element for this models (" + models.toString() + ")");
 			}
 		}
 		return gb;
