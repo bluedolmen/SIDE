@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<!-- ======================= -->
+    <!-- .utils beans            -->
+    <!-- ======================= -->
+ 
+	<bean id="synchroDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	    <property name="driverClassName" value="org.gjt.mm.mysql.Driver"/>
+	    <property name="url" value="jdbc:mysql://localhost/alf_synchro"/>
+	    <property name="username" value="alfresco"/>
+	    <property name="password" value="alfresco"/>
+	</bean>
+
+	<bean id="sqlDatabaseQuery" class="com.bluexml.alfresco.modules.sql.utils.DatabaseQuery" />
+
+	<!-- ======================= -->
+    <!-- .searcher beans         -->
+    <!-- ======================= -->
+
+
+	<bean id="SQLSearchService" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="proxyInterfaces">
+            <value>com.bluexml.alfresco.modules.sql.searcher.SQLSearchService</value>
+        </property>
+        <property name="target">
+            <ref local="sqlSearch"/>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <idref local="sqlSearchIntegrationService_transaction"/>
+                <idref bean="AuditMethodInterceptor"/>
+                <idref bean="exceptionTranslator"/>            
+                <idref local="sqlSearchService_security"/>
+            </list>
+        </property>
+    </bean>
+
+	<bean id="sqlSearch" class="com.bluexml.alfresco.modules.sql.searcher.SQLSearch">
+		<property name="databaseQuery">
+			<ref local="sqlDatabaseQuery" />
+		</property>
+	</bean>
+
+    <bean id="sqlSearchIntegrationService_transaction" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+        <property name="transactionManager">
+            <ref bean="transactionManager"/>
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="*">${server.transaction.mode.default}</prop>
+            </props>
+        </property>
+    </bean>
+
+
+	<!-- ======================= -->
+    <!-- .synchronisation beans  -->
+    <!-- ======================= -->
+
+	<bean id="abstractRenamingStrategy" class="com.bluexml.alfresco.modules.sql.synchronisation.dictionary.AbstractRenamingStrategy" abstract="true">
+		<property name="dataSource" ref="synchroDataSource" />
+	</bean>
+	
+	<bean id="truncateRenamingStrategy" class="com.bluexml.alfresco.modules.sql.synchronisation.dictionary.TruncateRenamingStrategy" parent="abstractRenamingStrategy" />
+
+	<bean id="databaseDictionary" class="com.bluexml.alfresco.modules.sql.synchronisation.dictionary.DatabaseDictionary" >
+		<property name="resourcePattern" value="classpath*:alfresco/module/*/synchronisation_mapping.properties" />
+		<property name="renamingStrategy" ref="truncateRenamingStrategy" />
+	</bean>
+
+ 	<bean id="sqlPolicy" class="com.bluexml.alfresco.modules.sql.synchronisation.SQLSynchronisationPolicy" init-method="init">
+ 		<property name="nodeService" ref="nodeService" />
+		<property name="policyComponent" ref="policyComponent" />
+		<property name="dictionaryService" ref="dictionaryService" />
+		<property name="dataSource" ref="synchroDataSource" />
+	</bean>
+
+	<bean id="sqlSchemaCreator" class="com.bluexml.alfresco.modules.sql.synchronisation.schemaManagement.SchemaCreation" init-method="init">
+		<property name="dictionaryService" ref="dictionaryService" />
+		<property name="dataSource" ref="synchroDataSource" />
+		<property name="databaseDictionary" ref="databaseDictionary" />
+	</bean>
+	
+	<!-- ======================= -->
+    <!-- Webscript definition    -->
+    <!-- ======================= -->
+	 
+	 <bean id="webscript.extension.com.bluexml.modules.sql-extension.request.get" class="com.bluexml.alfresco.modules.sql.webscript.SQLSearchServiceWebscript" 
+	    init-method="init" parent="webscript">
+	    <property name="serviceRegistry" ref="ServiceRegistry" />
+	    <property name="SQLSearchService" ref="SQLSearchService"></property>
+	</bean>
+	
+	<!-- ======================= -->
+    <!-- Search Service Security -->
+    <!-- ======================= -->
+
+    <!-- All search results are filtered to exclude nodes that the current user can not        -->
+    <!-- read. Other methods restrict queries to those nodes the user can read                 -->
+
+    <bean id="sqlSearchService_security" class="net.sf.acegisecurity.intercept.method.aopalliance.MethodSecurityInterceptor">
+        <property name="authenticationManager"><ref bean="authenticationManager"/></property>
+    	<property name="accessDecisionManager"><ref bean="accessDecisionManager"/></property>
+        <property name="afterInvocationManager"><ref bean="afterInvocationManager"/></property>
+        <property name="objectDefinitionSource">
+            <value>
+            	<!--
+            	com.bluexml.alfresco.modules.sql.searcher.SearchService.query=ACL_METHOD.ROLE_AUTHENTICATED
+              	-->
+                com.bluexml.alfresco.modules.sql.searcher.SQLSearchService.query=AFTER_ACL_NODE.sys:base.Read
+            
+            </value>
+        </property>
+    </bean>
+
+</beans>
