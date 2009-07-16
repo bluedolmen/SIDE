@@ -109,7 +109,7 @@ public class FileHelper {
 				deleteFile(fl[i]);
 			}
 		}
-		if (f.exists() && f.canWrite()) {
+		if (f.exists()) {
 			return f.delete();
 		}
 		return false;

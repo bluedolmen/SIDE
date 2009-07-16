@@ -225,11 +225,41 @@ public class Utils {
 	}
 
 	/**
-	 * Return the path to the Publuic Update site: /home/stager/share/SIDE-Final
+	 * Return the path to the Public Update site: /home/stager/share/SIDE-Final
 	 */
 	public static String getPublicUpdateSiteDirectory() {
 		return ouvrirFichier("build.properties").getProperty(
 				"publicUpdateSiteDirectory");
+	}
+
+	/**
+	 * Return the license URL: http://url.to.license.com
+	 */
+	public static String getlicenseURL() {
+		return ouvrirFichier("build.properties").getProperty("licenseURL");
+	}
+
+	/**
+	 * Return the license text file: /home/stager/buildAuto/license.txt
+	 */
+	public static String getLicenseText() {
+		return loadFile(new File(ouvrirFichier("build.properties").getProperty(
+				"licensePath")));
+	}
+
+	/**
+	 * Return the copyright URL: http://url.to.copyright.com
+	 */
+	public static String getCopyrightURL() {
+		return ouvrirFichier("build.properties").getProperty("copyrightURL");
+	}
+
+	/**
+	 * Return the copyright text file: /home/stager/buildAuto/copyright.txt
+	 */
+	public static String getCopyrightText() {
+		return loadFile(new File(ouvrirFichier("build.properties").getProperty(
+				"copyrightPath")));
 	}
 
 	/**
@@ -251,7 +281,7 @@ public class Utils {
 	 * Retourne le numéro de version pour un projet donné
 	 * 
 	 * @param projectName
-	 *            el nom du projet
+	 *            le nom du projet
 	 * @return le numéro de version pour un projet donné
 	 */
 	public static String getVersionNumber(String projectName) {
@@ -335,6 +365,9 @@ public class Utils {
 		}
 	}
 
+	/**
+	 * Return the path to the svn log (with or without hudson)
+	 */
 	public static String getPathToLog() {
 		String path = "";
 
@@ -360,9 +393,9 @@ public class Utils {
 	}
 
 	/**
-	 * Cette méthode analyse le fichier de log (créé via le log de l'update ant)
-	 * et regarde si des updates ont été fait et ainsi, changer le numéro de
-	 * version du projet concerné
+	 * Cette méthode analyse le fichier de log (il changera en fonction de
+	 * l'utilisation de Hudson ou non) et regarde si des updates ont été fait et
+	 * ainsi, changer le numéro de version du projet concerné
 	 */
 	public static void traitementUpdate() {
 
@@ -796,7 +829,7 @@ public class Utils {
 	/**
 	 * Met a jour le site.xml en fonction des features. Si une feature n'est pas
 	 * présente dans le site.xml, elle est ajoutée et placée dans la catégorie
-	 * 'other'
+	 * 'other' (retourné par la méthode getNewCategory() )
 	 * 
 	 */
 	public static void updateSiteXml() {
@@ -900,7 +933,7 @@ public class Utils {
 	/**
 	 * 
 	 * Traitement final: Copie de l'update site dans le repertoire final Copie
-	 * de log.txt dans le repertoire final Suppression de workingcopy
+	 * des logs dans le repertoire final Suppression de workingcopy
 	 * 
 	 */
 	public static void finalTraitement() {
@@ -998,8 +1031,7 @@ public class Utils {
 							+ File.separator + getCodeName() + File.separator
 							+ "compilelogs"), true);
 
-			// copie des fichiers de log (pour tout le traitment)
-
+			// copie des fichiers de log (pour tout le traitement)
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "logbuildSVNsvnCommit.txt"), new File(getFinalDirectory()
 					+ File.separator + "logs" + File.separator + getCodeName()
@@ -1009,6 +1041,12 @@ public class Utils {
 					+ "logbuildbuild.txt"), new File(getFinalDirectory()
 					+ File.separator + "logs" + File.separator + getCodeName()
 					+ File.separator + "logBuild.txt"), true);
+
+			FileHelper.copyFiles(new File(getBuildPath() + File.separator
+					+ "logjarBuilderjarBuilder.txt"), new File(
+					getFinalDirectory() + File.separator + "logs"
+							+ File.separator + getCodeName() + File.separator
+							+ "logBuildJar.txt"), true);
 
 			if (!Application.parametre) {
 				FileHelper.copyFiles(new File(getBuildPath() + File.separator
@@ -1068,6 +1106,8 @@ public class Utils {
 					+ "logbuildbuild.txt"));
 			FileHelper.deleteFile(new File(getBuildPath() + File.separator
 					+ "logbuildSVNsvnCommit.txt"));
+			FileHelper.deleteFile(new File(getBuildPath() + File.separator
+					+ "logjarBuilderjarBuilder.txt"));
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -1147,10 +1187,10 @@ public class Utils {
 			Element courant = (Element) j.next();
 
 			// on applique le texte du license
-			courant.setText(getLicenceText());
+			courant.setText(getLicenseText());
 
 			// on change l'url du license
-			courant.setAttribute("url", getlicenceURL());
+			courant.setAttribute("url", getlicenseURL());
 		}
 
 		// Enregistrement du fichier
@@ -1165,24 +1205,13 @@ public class Utils {
 
 	}
 
-	private static String getlicenceURL() {
-		return ouvrirFichier("build.properties").getProperty("licenceURL");
-	}
-
-	private static String getLicenceText() {
-		return loadFile(new File(ouvrirFichier("build.properties").getProperty(
-				"licencePath")));
-	}
-
-	private static String getCopyrightURL() {
-		return ouvrirFichier("build.properties").getProperty("copyrightURL");
-	}
-
-	private static String getCopyrightText() {
-		return loadFile(new File(ouvrirFichier("build.properties").getProperty(
-				"copyrightPath")));
-	}
-
+	/**
+	 * Méthode qui retourne le contenu du fichier passé en paramètre
+	 * 
+	 * @param f
+	 *            Le fichier a retourner
+	 * @return Le contenu du fichier
+	 */
 	public static String loadFile(File f) {
 		StringWriter out = null;
 		try {

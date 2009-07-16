@@ -130,7 +130,6 @@ public class Application {
 
 		// création du site.xml
 		System.out.println("\nUpdate du site.xml");
-		// createFile(getCorpsSite(), Utils.getBuildPath(), "site.xml");
 		Utils.updateSiteXml();
 
 		// creation de jar pour les plugins qui ne le sont pas
@@ -150,16 +149,6 @@ public class Application {
 		 * execBuild("build", "buildProject");
 		 */
 		System.out.println("\nFINISH !");
-		/*
-		 * }
-		 * 
-		 * else { System.out.println("Pas de paramètres...");
-		 * System.out.println("\nIndiquez soit:"); System.out.println(
-		 * "\t. '-copy' -> pour copier l'update site vers le répository final");
-		 * System.out.println(
-		 * "\t. '-copyright' -> pour remplacer le texte du copyright et de la licence par celui indiqué dans le build.properties"
-		 * ); }
-		 */
 	}
 
 	/**

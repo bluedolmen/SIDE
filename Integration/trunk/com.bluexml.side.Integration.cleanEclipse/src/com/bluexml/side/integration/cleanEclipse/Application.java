@@ -20,9 +20,9 @@ public class Application {
 	public static void main(String[] args) {
 		String eclipsePath = "";
 		String projectName = "com.bluexml.side";
-		if(args.length != 0) {
+		if (args.length != 0) {
 			eclipsePath = args[0];
-			if(args.length == 2){
+			if (args.length == 2) {
 				projectName = args[1];
 			}
 		} else {
@@ -35,17 +35,66 @@ public class Application {
 			System.out
 					.println("\t- If you gives 'com.bluexml.side.Application', -> only this project will be deleted from eclipse.");
 			System.out
-					.println("\t- If you gives 'com.bluexml.side', -> all projects who contains this name will be deleted.");
+					.println("\t- If you gives 'com.bluexml.side', -> all projects which contains this name will be deleted.");
 			System.exit(0);
 		}
-		
-		
 
-		cleanArtifact(projectName, eclipsePath);
+/*		
+		browse(projectName, new File(eclipsePath + File.separator
+				+ "configuration" + File.separator + "org.eclipse.osgi"
+				+ File.separator + "bundles"), ".xml", "units", "unit",
+				"id");
+		
+		browse(projectName, new File(eclipsePath + File.separator
+				+ "p2" + File.separator + "org.eclipse.equinox.p2.core"
+				+ File.separator + "cache"), "content.xml", "units", "unit",
+				"id");
+
+		browse(projectName, new File(eclipsePath + File.separator
+				+ "configuration" + File.separator + "org.eclipse.update"
+				+ File.separator + "history"), ".xml", "site", "feature", "id");
+*/		 
+		cleanXml(projectName, eclipsePath + File.separator + "artifacts.xml",
+				"artifacts", "artifact", "id");
 
 		cleanProjects(projectName, eclipsePath, "features");
 
 		cleanProjects(projectName, eclipsePath, "plugins");
+	}
+
+	/**
+	 * Browse the file in parameter, and when it find a file which contains the
+	 * xmlFileName, it execute 'cleanXml' with the other arguments
+	 * 
+	 * 
+	 * @param projectName
+	 *            The project name to delete
+	 * @param file
+	 *            The file (folder) to browse
+	 * @param xmlFileName
+	 *            The XML file name to analyze
+	 * @param rootName
+	 *            The root Name if the XML file
+	 * @param childrenName
+	 *            The children name -> The node to delete if the 'attributeName'
+	 *            match with the 'projectName'
+	 * @param attributeName
+	 *            The attribute of the node to analyze
+	 */
+	private static void browse(String projectName, File file,
+			String xmlFileName, String rootName, String childrenName,
+			String attributeName) {
+		if (file.isDirectory()) {
+			File[] fl = file.listFiles();
+			for (int i = 0; i < fl.length; i++) {
+				browse(projectName, fl[i], xmlFileName, rootName, childrenName,
+						attributeName);
+			}
+		}
+		if (file.exists() && file.getName().indexOf(xmlFileName) != -1) {
+			cleanXml(projectName, file.getAbsolutePath(), rootName,
+					childrenName, attributeName);
+		}
 	}
 
 	/**
@@ -57,7 +106,7 @@ public class Application {
 	 * @param eclipsePath
 	 *            The path to the eclipse
 	 * @param folderName
-	 *            The name folder to clean ('features' or 'plugins')
+	 *            The folder name to clean ('features' or 'plugins')
 	 */
 	private static void cleanProjects(String projectName, String eclipsePath,
 			String folderName) {
@@ -67,24 +116,44 @@ public class Application {
 		String[] files = folder.list();
 
 		for (int i = 0; i < files.length; i++) {
-			if (files[i].indexOf(projectName) != -1) {
-				FileHelper.deleteFile(new File(eclipsePath + File.separator
-						+ folderName + File.separator + files[i]));
+			if ((files[i].toLowerCase()).indexOf(projectName.toLowerCase()) != -1) {
+				System.out.print("\t- " + folderName + " : " + files[i]
+						+ " -> ");
+
+				boolean out = FileHelper.deleteFile(new File(eclipsePath
+						+ File.separator + folderName + File.separator
+						+ files[i]));
+
+				if (out) {
+					System.out.print("Supprimé\n");
+				} else {
+					System.out.print("Non Supprimé\n");
+				}
 			}
 		}
 
 	}
 
 	/**
-	 * 
-	 * Clean the artifac.xml of all the projects given in parameter
+	 * Analyze the 'filePath' and delete all occurrence of the 'projectName'
+	 * which match with the 'attributeName' into all nodes 'childrenName' of the 'rootName'
 	 * 
 	 * @param projectName
-	 *            The project to delete
-	 * @param eclipsePath
-	 *            The path to the eclipse
+	 *            The project name to delete
+	 * @param filePath
+	 *            The XML file name to analyze
+	 * @param rootName
+	 *            The root Name if the XML file
+	 * @param childrenName
+	 *            The children name -> The node to delete if the 'attributeName'
+	 *            match with the 'projectName'
+	 * @param attributeName
+	 *            The attribute of the node to analyze
 	 */
-	private static void cleanArtifact(String projectName, String eclipsePath) {
+	private static void cleanXml(String projectName, String filePath,
+			String rootName, String childrenName, String attributeName) {
+		System.out.println("Dans le fichier: " + filePath);
+
 		List<Element> listeArtifact = new ArrayList<Element>();
 
 		org.jdom.Document document = null;
@@ -96,8 +165,7 @@ public class Application {
 		try {
 			// On crée un nouveau document JDOM avec en argument le fichier
 			// XML
-			document = sxb.build(new File(eclipsePath + File.separator
-					+ "artifacts.xml"));
+			document = sxb.build(new File(filePath));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -108,7 +176,7 @@ public class Application {
 
 		// On crée une List contenant tous les noeuds "artifacts" de
 		// l'Element racine
-		List<?> listArtifacts = racine.getChildren("artifacts");
+		List<?> listArtifacts = racine.getChildren(rootName);
 
 		// On crée un Iterator sur notre liste
 		Iterator<?> i = listArtifacts.iterator();
@@ -119,7 +187,7 @@ public class Application {
 			// l'Element racine
 
 			Element parent = (Element) i.next();
-			List<?> listArtifact = parent.getChildren("artifact");
+			List<?> listArtifact = parent.getChildren(childrenName);
 
 			// On crée un Iterator sur notre liste
 			Iterator<?> j = listArtifact.iterator();
@@ -127,13 +195,16 @@ public class Application {
 			while (j.hasNext()) {
 
 				Element courant = (Element) j.next();
-				if ((courant.getAttributeValue("id")).indexOf(projectName) != -1) {
+				if ((courant.getAttributeValue(attributeName).toLowerCase())
+						.indexOf(projectName.toLowerCase()) != -1) {
 					listeArtifact.add(courant);
 					// parent.removeContent(courant);
 				}
 			}
 
 			for (Element element : listeArtifact) {
+				System.out.println("\t- Suppression de : "
+						+ element.getAttributeValue(attributeName));
 				parent.removeContent(element);
 			}
 		}
@@ -141,13 +212,11 @@ public class Application {
 		// Enregistrement du fichier
 		try {
 			XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-			sortie.output(document, new FileOutputStream(eclipsePath
-					+ File.separator + "artifacts.xml"));
+			sortie.output(document, new FileOutputStream(filePath));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
 }
