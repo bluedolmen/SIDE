@@ -12,19 +12,27 @@ package com.bluexml.side.form;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: The 'Charfield' allows to enter char in input.
+ * Definition: The 'Charfield' allows to enter char in input field.
  * 
- * Operations:
- * - 'Transform/to URLField': Transform Charfield into URLField.
- * - 'Transform/to EmailField': Transform Charfield into EmailField.
- * - 'Transform/to PasswordField': Transform Charfield into PasswordField.
- * - 'Transform/to RegexField': Transform Charfield into RegexField.
- * - 'Transform/to PhoneNumberField': Transform Charfield into PhoneNumberField.
- * - 'Transform/to FileField': Transform Charfield into FileField.
- * - 'Transform/to TextField': Transform Charfield into TextField.
  * 
- * Inherits: 
- * - Field.
+ * Operations: transformations to other formats
+ * 
+ * - Transform Charfield into URLField.
+ * 
+ * - Transform Charfield into EmailField.
+ * 
+ * - Transform Charfield into PasswordField.
+ * 
+ * - Transform Charfield into RegexField.
+ * 
+ * - Transform Charfield into PhoneNumberField.
+ * 
+ * - Transform Charfield into FileField.
+ * 
+ * - Transform Charfield into TextField.
+ * 
+ * 
+ * Inherits: Field.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -52,9 +60,11 @@ public interface CharField extends Field {
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'min_length' attribute specifies the minimum length of a char field input.
 	 * 
+	 * 
 	 * Constraint/limit: If the 'min_length' attribute is superior than 0, the char field will become mandatory.
 	 * 
-	 * Example: min_length=0
+	 * 
+	 * Example: min_length=1
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Min length</em>' attribute.
 	 * @see #setMin_length(int)
@@ -85,7 +95,8 @@ public interface CharField extends Field {
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'max_length' attribute specifies the maximum length of a char field input.
 	 * 
-	 * Example: min_length=9
+	 * 
+	 * Example: max_length=9
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Max length</em>' attribute.
 	 * @see #setMax_length(int)

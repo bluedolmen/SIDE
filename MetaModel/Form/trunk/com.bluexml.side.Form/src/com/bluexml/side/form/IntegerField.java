@@ -14,8 +14,9 @@ package com.bluexml.side.form;
  * <!-- begin-model-doc -->
  * Definition: The 'IntegerField' specifies a field for integer input.
  * 
+ * 
  * Inherits:
- * - Field.
+ *  Field.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -40,7 +41,7 @@ public interface IntegerField extends Field {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'min_value' attribute specifies a minimum value for the input.
+	 * Definition: minimum value for the input.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Min value</em>' attribute.
 	 * @see #setMin_value(int)
@@ -69,7 +70,7 @@ public interface IntegerField extends Field {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'max_value' attribute specifies a maximum value for the input.
+	 * Definition: maximum value for the input.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Max value</em>' attribute.
 	 * @see #setMax_value(int)

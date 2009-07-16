@@ -9,6 +9,7 @@ package com.bluexml.side.form.provider;
 
 import com.bluexml.side.form.FormPackage;
 
+import com.bluexml.side.form.WorkflowFormCollection;
 import java.util.Collection;
 import java.util.List;
 
@@ -104,7 +105,10 @@ public class WorkflowFormCollectionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_WorkflowFormCollection_type");
+		String label = ((WorkflowFormCollection)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_WorkflowFormCollection_type") :
+			getString("_UI_WorkflowFormCollection_type") + " " + label;
 	}
 
 	/**

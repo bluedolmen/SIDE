@@ -1334,6 +1334,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		formElementEClass.getESuperTypes().add(theCommonPackage.getModelElement());
 		formGroupEClass.getESuperTypes().add(this.getFormElement());
 		fieldEClass.getESuperTypes().add(this.getFormElement());
 		booleanFieldEClass.getESuperTypes().add(this.getField());
@@ -1355,6 +1356,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		formClassEClass.getESuperTypes().add(this.getFormContainer());
 		formClassEClass.getESuperTypes().add(this.getClassReference());
 		referenceEClass.getESuperTypes().add(this.getModelChoiceField());
+		formCollectionEClass.getESuperTypes().add(theCommonPackage.getPackage());
 		choiceFieldEClass.getESuperTypes().add(this.getField());
 		regexFieldEClass.getESuperTypes().add(this.getCharField());
 		passwordFieldEClass.getESuperTypes().add(this.getCharField());
@@ -1378,6 +1380,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEAttribute(getFormGroup_Presentation(), this.getFormGroupPresentationType(), "presentation", null, 0, 1, FormGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFormGroup_Disabled(), this.getFormElement(), null, "disabled", null, 0, -1, FormGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(formGroupEClass, this.getField(), "getFields", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(fieldEClass, Field.class, "Field", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getField_Mandatory(), ecorePackage.getEBoolean(), "mandatory", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
@@ -1390,6 +1394,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEAttribute(getField_Disabled(), ecorePackage.getEBoolean(), "disabled", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_FieldSize(), ecorePackage.getEInt(), "fieldSize", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_Style(), ecorePackage.getEString(), "style", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(fieldEClass, ecorePackage.getEString(), "getLabel", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(booleanFieldEClass, BooleanField.class, "BooleanField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1483,6 +1489,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEClass(formContainerEClass, FormContainer.class, "FormContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFormContainer_Name(), ecorePackage.getEString(), "name", null, 0, 1, FormContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(formContainerEClass, ecorePackage.getEString(), "getLabel", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(formGroupPresentationTypeEEnum, FormGroupPresentationType.class, "FormGroupPresentationType");
 		addEEnumLiteral(formGroupPresentationTypeEEnum, FormGroupPresentationType.AUTO);
@@ -1529,25 +1537,31 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "noSpecialCharacters"
-		   });																		
+		   });																					
 		addAnnotation
 		  (charFieldEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "MinSuperiorToMax"
-		   });																																												
+		   });																																																
+		addAnnotation
+		  (classReferenceEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "mustReferenceClass"
+		   });			
 		addAnnotation
 		  (virtualFieldEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "NoLinkForVirtualField"
-		   });																					
+		   });																						
 		addAnnotation
 		  (formContainerEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "validName noSpecialCharacters"
-		   });			
+			 "constraints", "validName"
+		   });				
 	}
 
 	/**
@@ -1562,26 +1576,50 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		  (formElementEClass, 
 		   source, 
 		   new String[] {
-			 "noSpecialCharacters", "self.id.regexMatch(\'\\w*\') = true"
-		   });																		
+			 "noSpecialCharacters", "self.id.regexMatch(\'[\\w]*\') = true"
+		   });								
+		addAnnotation
+		  (formGroupEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "self.children->select(oclIsKindOf(Field)).oclAsType(Field)->union(self.children->select(oclIsKindOf(FormGroup)).oclAsType(FormGroup).getFields().oclAsType(Field)).oclAsType(Field)"
+		   });					
+		addAnnotation
+		  (fieldEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "if self.label.oclIsUndefined() or self.label.size() = 0 then\r self.id \relse\r self.label \rendif"
+		   });										
 		addAnnotation
 		  (charFieldEClass, 
 		   source, 
 		   new String[] {
 			 "MinSuperiorToMax", "self.min_length <= self.max_length"
-		   });																																												
+		   });																																														
+		addAnnotation
+		  (classReferenceEClass, 
+		   source, 
+		   new String[] {
+			 "mustReferenceClass", "not self.real_class.oclIsUndefined()"
+		   });					
 		addAnnotation
 		  (virtualFieldEClass, 
 		   source, 
 		   new String[] {
 			 "NoLinkForVirtualField", "not self.link.oclIsUndefined()"
-		   });																					
+		   });																						
 		addAnnotation
 		  (formContainerEClass, 
 		   source, 
 		   new String[] {
 			 "validName", "not self.name.oclIsUndefined() and self.name <> \'\'"
-		   });		
+		   });			
+		addAnnotation
+		  (formContainerEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "if self.label.oclIsUndefined() or self.label.size() = 0 then\r self.name \relse\r self.label \rendif"
+		   });	
 	}
 
 	/**
@@ -1591,13 +1629,13 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";											
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";												
 		addAnnotation
 		  (getFormGroup_Presentation(), 
 		   source, 
 		   new String[] {
 			 "name", "presentation"
-		   });																																																																										
+		   });																																																																																				
 	}
 
 	public FormFactory getFormsFactory() {

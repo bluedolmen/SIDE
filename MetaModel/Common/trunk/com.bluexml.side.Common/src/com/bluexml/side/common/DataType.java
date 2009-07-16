@@ -17,6 +17,23 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Data Type</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * Definition: this enumeration allows to set up a format to a data. The supported data types are:
+ * - boolean: true or false,
+ * - byte: 8-bits integer
+ * - char: Single two-byte Unicode character
+ * - Date: a calendar date 
+ * - DateTime: calendar date and day time
+ * - double: 8-bytes floating point number
+ * - float: 4-bytes floating point number
+ * - int: 4-bytes signed integer
+ * - long: 8-bytes signed integer
+ * - Object: other data types; for Alfresco, associated to the 'Any' data type.
+ * - short: 2-bytes signed integer
+ * - String: a sequence of plain-text characters
+ * - Time : an instant of time that recurs every day
+ * - void: pas de generation de l'attribut
+ * <!-- end-model-doc -->
  * @see com.bluexml.side.common.CommonPackage#getDataType()
  * @model
  * @generated

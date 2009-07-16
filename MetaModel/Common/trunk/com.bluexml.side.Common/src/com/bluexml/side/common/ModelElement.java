@@ -15,6 +15,10 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Model Element</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: main elements of model inherits of ModelElement which allows to declare the description and the documentation attributes.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -88,6 +92,10 @@ public interface ModelElement extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: the attribute documentation is associated to all the elements of a model to allow associating an explanation of the element; this explanation is used in the generation of the model documentation. 
+	 * It is highly recommended to fill up this attribute at each creation of an element to provide a good documentation and to avoid having to spend huge time lately. 
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Documentation</em>' attribute.
 	 * @see #setDocumentation(String)
 	 * @see com.bluexml.side.common.CommonPackage#getModelElement_Documentation()
@@ -114,6 +122,10 @@ public interface ModelElement extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: the attribute description is associated to many elements of a model to allow a description of the element; this description is used in the generation of the model documentation. 
+	 * It is highly recommended to fill up this attribute at each creation of an element to provide a good documentation and to avoid having to spend huge time lately. 
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Description</em>' attribute.
 	 * @see #setDescription(String)
 	 * @see com.bluexml.side.common.CommonPackage#getModelElement_Description()

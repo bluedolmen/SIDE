@@ -13,6 +13,10 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Package</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: used to organize the objects inside a model under a tree similar to Java package organization. It is highly recommended to use the packages to organize the elements and to ensure that they have understandable fully qualified name.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -22,8 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.common.CommonPackage#getPackage()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='PackageNameNull'"
- *        annotation="http://www.bluexml.com/OCL PackageNameNull='not self.name.oclIsUndefined() and self.name <> \'\''"
+ * @model
  * @generated
  */
 public interface Package extends NamedModelElement {

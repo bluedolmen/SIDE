@@ -13,10 +13,8 @@ package com.bluexml.side.form;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: The 'Reference' provides an inline reference to another form. It is a ModelChoiceField but which references a form, ie after an expand has been performed.
- * 
- * Inherits:
- * - ModelChoiceField.
+ * Definition: The 'Reference' provides an inline reference to another form. It is a ModelChoiceField but which references a form, ie after that an expand operation has been performed.
+ * Inherit: ModelChoiceField.
  * <!-- end-model-doc -->
  *
  *

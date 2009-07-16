@@ -88,8 +88,8 @@ public class ViewFactoryImpl extends EFactoryImpl implements ViewFactory {
 			case ViewPackage.HTML_FIELD: return createHtmlField();
 			case ViewPackage.URL_FIELD: return createURLField();
 			case ViewPackage.IMAGE_FIELD: return createImageField();
-			case ViewPackage.FIELD_GROUP: return createFieldGroup();
 			case ViewPackage.ACTIONABLE: return createActionable();
+			case ViewPackage.FIELD_GROUP: return createFieldGroup();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

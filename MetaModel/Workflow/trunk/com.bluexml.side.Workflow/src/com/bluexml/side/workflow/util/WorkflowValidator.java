@@ -97,14 +97,6 @@ public class WorkflowValidator extends EObjectValidator {
 	protected static final int DIAGNOSTIC_CODE_COUNT = GENERATED_DIAGNOSTIC_CODE_COUNT;
 
 	/**
-	 * The cached base package validator.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected CommonValidator commonValidator;
-
-	/**
 	 * The parsed OCL expression for the definition of the '<em>PackageNameNull</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -247,7 +239,6 @@ public class WorkflowValidator extends EObjectValidator {
 	 */
 	public WorkflowValidator() {
 		super();
-		commonValidator = CommonValidator.INSTANCE;
 	}
 
 	/**
@@ -356,12 +347,24 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateProcess_PackageNameNull(com.bluexml.side.workflow.Process process, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO override the constraint, if desired
-		// -> uncomment the scaffolding
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
+        if (process_PackageNameNullInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(WorkflowPackage.Literals.PROCESS);
+			
+			EAnnotation ocl = WorkflowPackage.Literals.PROCESS.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("PackageNameNull");
+			
+			try {
+				process_PackageNameNullInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(process_PackageNameNullInvOCL);
+		
+		if (!query.check(process)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
@@ -373,7 +376,7 @@ public class WorkflowValidator extends EObjectValidator {
 			}
 			return false;
 		}
-		return commonValidator.validatePackage_PackageNameNull(process, diagnostics, context);
+		return true;
 	}
 
 	/**

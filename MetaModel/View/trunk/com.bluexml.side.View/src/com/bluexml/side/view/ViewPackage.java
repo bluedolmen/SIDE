@@ -933,7 +933,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getSortable()
 	 * @generated
 	 */
-	int SORTABLE = 36;
+	int SORTABLE = 37;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.impl.EditableImpl <em>Editable</em>}' class.
@@ -943,7 +943,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getEditable()
 	 * @generated
 	 */
-	int EDITABLE = 37;
+	int EDITABLE = 38;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.impl.MovableImpl <em>Movable</em>}' class.
@@ -953,7 +953,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getMovable()
 	 * @generated
 	 */
-	int MOVABLE = 38;
+	int MOVABLE = 39;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.impl.FilterableImpl <em>Filterable</em>}' class.
@@ -963,7 +963,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFilterable()
 	 * @generated
 	 */
-	int FILTERABLE = 39;
+	int FILTERABLE = 40;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.impl.FieldGroupImpl <em>Field Group</em>}' class.
@@ -973,7 +973,7 @@ public interface ViewPackage extends EPackage {
 	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getFieldGroup()
 	 * @generated
 	 */
-	int FIELD_GROUP = 40;
+	int FIELD_GROUP = 41;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.impl.AbstractViewOfImpl <em>Abstract View Of</em>}' class.
@@ -5153,6 +5153,34 @@ public interface ViewPackage extends EPackage {
 	int PAGINABLE_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.view.impl.ActionableImpl <em>Actionable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.view.impl.ActionableImpl
+	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getActionable()
+	 * @generated
+	 */
+	int ACTIONABLE = 36;
+
+	/**
+	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTIONABLE__OPERATIONS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Actionable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTIONABLE_FEATURE_COUNT = 1;
+
+	/**
 	 * The feature id for the '<em><b>Sorting</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5358,34 +5386,6 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int FIELD_GROUP_FEATURE_COUNT = FIELD_CONTAINER_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link com.bluexml.side.view.impl.ActionableImpl <em>Actionable</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.view.impl.ActionableImpl
-	 * @see com.bluexml.side.view.impl.ViewPackageImpl#getActionable()
-	 * @generated
-	 */
-	int ACTIONABLE = 41;
-
-	/**
-	 * The feature id for the '<em><b>Operations</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTIONABLE__OPERATIONS = 0;
-
-	/**
-	 * The number of structural features of the '<em>Actionable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTIONABLE_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.SortOrder <em>Sort Order</em>}' enum.

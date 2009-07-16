@@ -13,10 +13,9 @@ package com.bluexml.side.form;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: The 'FormContainer' represents a form and is used as a container for elements.
- * 
- * Inherits:
- * -FormGroup.
+ * Definition: The 'FormContainer' represents a form and is used as a container for elements. FormClass and FormWorkflow inherits of FormContainer.
+ * A FormCollection is composed of at least one FormContainer.
+ * Inherits: FormGroup.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -28,7 +27,7 @@ package com.bluexml.side.form;
  *
  * @see com.bluexml.side.form.FormPackage#getFormContainer()
  * @model abstract="true"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='validName noSpecialCharacters'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='validName'"
  *        annotation="http://www.bluexml.com/OCL validName='not self.name.oclIsUndefined() and self.name <> \'\''"
  * @generated
  */
@@ -62,4 +61,13 @@ public interface FormContainer extends FormGroup {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='if self.label.oclIsUndefined() or self.label.size() = 0 then\r self.name \relse\r self.label \rendif'"
+	 * @generated
+	 */
+	String getLabel();
 } // FormContainer

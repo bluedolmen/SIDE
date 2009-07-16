@@ -16,9 +16,12 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: This is the root element which is the first create element. All forms will be child of this element.  It has no corresponding elements in the Class diagram and is usually not generated.
+ * Definition: This is the root element which is the first created element. All forms will be child of this element. 
+ * It has no corresponding elements in the Data model and is usually not generated.
  * Operations:
- * - The operations ÔÕ might be called when your Class diagram have been changed (attribute addition, change of type É) to propagate this changes in your forms. The changes which will be propagated are: attribute addition, attribute removal. The changes which are not propagated implies a manual update in the concerned forms.
+ * - The operation ‘Synchronize with Class Diagram’ might be called when your Data model has been changed (attribute addition, change of type …) to propagate these changes in your forms. 
+ * The changes which will be propagated are: attribute addition, attribute removal.
+ * The changes which are not propagated imply a manual update in the concerned forms.
  * 
  * <!-- end-model-doc -->
  *
@@ -33,7 +36,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface FormCollection extends EObject {
+public interface FormCollection extends com.bluexml.side.common.Package {
 	/**
 	 * Returns the value of the '<em><b>Forms</b></em>' containment reference list.
 	 * The list contents are of type {@link com.bluexml.side.form.FormContainer}.

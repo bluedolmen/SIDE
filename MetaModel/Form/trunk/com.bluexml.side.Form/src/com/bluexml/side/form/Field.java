@@ -14,13 +14,10 @@ import java.util.Map;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition : The form has a list of fields which inherits of the Field element. A Field is usually bound to an attribute of the class diagram (except for FreeText) and have some special features (by e.g. a Date Field can have min and max date). Each kind of field will have different generated input field or/and different kind of rules validation.
+ * Definition: The form has a list of fields which inherits of the Field element. A Field is usually bound to an attribute of the class diagram (except for FreeText) and have some special features (by e.g. a Date Field can have min and max date). Each kind of field will have different generated input field or/and different kind of validation rules. The validation rules are defined to control input in the model. 
  * Operations:
- * - The Operation ‘Group in a new group’ allows to group fields in a FormGroup (logical group). This group can be specialized to change his display (in tab, row or column by e.g.).
- * Inherits: 
- * - FormElement.
- * Rules Validation :
- * 
+ * - The Operation ëGroup in a new groupí allows to group fields in a FormGroup (logical group). This group can be specialized to change its display (in tab, row or column by e.g.).
+ * Inherits: FormElement.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -50,9 +47,7 @@ public interface Field extends FormElement {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'mandatory' attribute specifies if a field is required or not.
-	 * 
-	 * Constraint/limit: The field must be filled in order to validate the form. The message for all required fields will appear if the field is not filled.
-	 * 
+	 * Constraint/limit: The field must be filled up in order to validate the form. A message (validation rule) for all required fields will appear if they are not filled up.
 	 * Example:
 	 * - 'false': the field is not mandatory.
 	 * - 'true': the field is mandatory. The label of the field will be followed by a star.
@@ -113,14 +108,18 @@ public interface Field extends FormElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'initial' attribute specifies a defauld value for a field.
+	 * Definition: The 'initial' attribute specifies a default value for a field.
 	 * 
 	 * Constraint/limit: 
 	 * - If the field is linked to an enumeration, the initial value must be the exact value of an item of the enumeration but there is not validation performed either at modeling or generation: if a wrong value has been provided, no default value will be set up in the enumeration widget.
-	 * - To specify an initial value for a field, same for a form of class diagram: add to the url the parameter &XX=YY. YY is an initial value; it follows the same rules as the value of the attribute 'initial' in the form modeler. XX is an id name of the field to initialize. For more flexibility, there are two different ways to initialize a field. The first way is to used the name that appears in the element 'uniqueName' which can be found in the file mapping.xml under the tag 'field' of the target field (for example: field_11). The second way is to used id name of the element 'alfrescoName' of the file mappin.xml (for example: modelcyvel_Fiche_titre).
-	 * - In the case where different fields have the same alfresco attribute, all these fields can have a same initial by setting '<alfrescoName>=<value>'. A particular field can have a different value to the other by setting '<uniqueName>=<value>'.
+	 * - In the case of XForms generation on Alfresco, to specify an initial value for a field, add to the url the parameter &XX=YY. YY is an initial value; it follows the same rules as the value of the attribute 'initial' in the form modeler. XX is an id name of the field to initialize. For more flexibility, there are two different ways to initialize a field. The first way is to used the name that appears in the element 'uniqueName' which can be found in the file mapping.xml under the tag 'field' of the target field (for example: field_11). The second way is to use id name of the element 'alfrescoName' of the file mappin.xml (for example: modelcyvel_Fiche_titre).
+	 * - In the case of XForms generation on Alfresco and considering different fields having the same alfresco attribute, all these fields can have a same initial value by setting '<alfrescoName>=<value>'. A particular field can have a different value to the other by setting '<uniqueName>=<value>'.
 	 * 
-	 * Example: initial=Book
+	 * Example: 
+	 * ?	initial=Book
+	 * ?	http://vmbx2k3:8080/pforms/xforms?type=modelcyvel.Article&field_11=valeur
+	 * ?	http://vmbx2k3:8080/pforms/xforms?type=modelcyvel.Article&modelcyvel_Fiche_accroche=valeur
+	 * 
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Initial</em>' attribute.
 	 * @see #setInitial(String)
@@ -149,13 +148,7 @@ public interface Field extends FormElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'disabled' attribute protects the field from being modified.
-	 * 
-	 * Constraint/limit: The value of the field can not be changed.
-	 * 
-	 * Example:
-	 * - 'false': the field can be modified.
-	 * - 'true': the field can not be modified.
+	 * Definition: The 'disabled' attribute protects the field from being modified if true. If false (default), it can be modified.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Disabled</em>' attribute.
 	 * @see #setDisabled(boolean)
@@ -186,7 +179,9 @@ public interface Field extends FormElement {
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'fieldSize' attribute specifies the number of element to show for a selection list.
 	 * 
+	 * 
 	 * Constraint/limit: When there are two relations R1 and R2 between two classes A and B, the value of field size set for R1 will be set for R2 too, even there is no value for field size of R2.
+	 * 
 	 * 
 	 * Example: Field Size = 10 will limit to 10 the number of elements in a generated selection list.
 	 * <!-- end-model-doc -->
@@ -216,6 +211,9 @@ public interface Field extends FormElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: a specific style associated to the field which may be defined in style file like css file to be applied on the field input at runtime.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Style</em>' attribute.
 	 * @see #setStyle(String)
 	 * @see com.bluexml.side.form.FormPackage#getField_Style()
@@ -233,5 +231,14 @@ public interface Field extends FormElement {
 	 * @generated
 	 */
 	void setStyle(String value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='if self.label.oclIsUndefined() or self.label.size() = 0 then\r self.id \relse\r self.label \rendif'"
+	 * @generated
+	 */
+	String getLabel();
 
 } // Field

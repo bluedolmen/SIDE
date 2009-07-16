@@ -11,6 +11,11 @@ package com.bluexml.side.form;
  * A representation of the model object '<em><b>Phone Number Field</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: The 'PhoneNumberField' specifies a phone number.
+ * Inherits: CharField
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -31,6 +36,10 @@ public interface PhoneNumberField extends CharField {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: The 'input_formats' attribute specifies a format for phone number which is conform to a Java Regular Expression (java.util.regex).
+	 * 
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Input formats</em>' attribute.
 	 * @see #setInput_formats(String)
 	 * @see com.bluexml.side.form.FormPackage#getPhoneNumberField_Input_formats()

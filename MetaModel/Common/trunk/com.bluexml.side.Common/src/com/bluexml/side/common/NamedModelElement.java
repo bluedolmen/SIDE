@@ -12,6 +12,10 @@ package com.bluexml.side.common;
  * A representation of the model object '<em><b>Named Model Element</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: main elements of model inherits of NameModelElement which allows to declare the name and which provides multiple OCL operations used by the modelers and the generators.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -32,6 +36,9 @@ public interface NamedModelElement extends ModelElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: the name of the concerned element; this name is used as leaf of the fully qualified name of an element: the other part of the fully qualified name are composed by the tree package names.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see com.bluexml.side.common.CommonPackage#getNamedModelElement_Name()

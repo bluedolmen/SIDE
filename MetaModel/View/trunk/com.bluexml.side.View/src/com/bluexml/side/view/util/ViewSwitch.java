@@ -491,6 +491,12 @@ public class ViewSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ViewPackage.ACTIONABLE: {
+				Actionable actionable = (Actionable)theEObject;
+				T result = caseActionable(actionable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ViewPackage.SORTABLE: {
 				Sortable sortable = (Sortable)theEObject;
 				T result = caseSortable(sortable);
@@ -523,12 +529,6 @@ public class ViewSwitch<T> {
 				if (result == null) result = caseStylable(fieldGroup);
 				if (result == null) result = caseNamedModelElement(fieldGroup);
 				if (result == null) result = caseModelElement(fieldGroup);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ViewPackage.ACTIONABLE: {
-				Actionable actionable = (Actionable)theEObject;
-				T result = caseActionable(actionable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

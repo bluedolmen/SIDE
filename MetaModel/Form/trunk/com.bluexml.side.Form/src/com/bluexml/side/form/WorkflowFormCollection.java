@@ -14,9 +14,7 @@ package com.bluexml.side.form;
  *
  * <!-- begin-model-doc -->
  * Definition: The 'WorkflowFormCollection' contains all the workflow forms.
- * 
- * Inherits:
- * - FormCollection.
+ * Inherits: FormCollection.
  * <!-- end-model-doc -->
  *
  * <p>

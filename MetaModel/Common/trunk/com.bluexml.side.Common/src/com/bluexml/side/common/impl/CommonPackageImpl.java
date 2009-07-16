@@ -216,15 +216,6 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		// Initialize created meta-data
 		theCommonPackage.initializePackageContents();
 
-		// Register package validator
-		EValidator.Registry.INSTANCE.put
-			(theCommonPackage, 
-			 new EValidator.Descriptor() {
-				 public EValidator getEValidator() {
-					 return CommonValidator.INSTANCE;
-				 }
-			 });
-
 		// Mark meta-data to indicate it can't be changed
 		theCommonPackage.freeze();
 
@@ -839,8 +830,6 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		// Create annotations
 		// http://www.bluexml.com/OCL
 		createOCLAnnotations();
-		// http://www.eclipse.org/emf/2002/Ecore
-		createEcoreAnnotations();
 	}
 
 	/**
@@ -850,7 +839,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * @generated
 	 */
 	protected void createOCLAnnotations() {
-		String source = "http://www.bluexml.com/OCL";		
+		String source = "http://www.bluexml.com/OCL";						
 		addAnnotation
 		  (namedModelElementEClass.getEOperations().get(0), 
 		   source, 
@@ -868,7 +857,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		   source, 
 		   new String[] {
 			 "body", "if self.description.oclIsUndefined() or self.description.size() <0 then\r\tself.name\relse\r\tself.description\rendif"
-		   });		
+		   });			
 		addAnnotation
 		  (tagEClass.getEOperations().get(0), 
 		   source, 
@@ -881,12 +870,6 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		   new String[] {
 			 "body", "self.name = other.name"
 		   });			
-		addAnnotation
-		  (packageEClass, 
-		   source, 
-		   new String[] {
-			 "PackageNameNull", "not self.name.oclIsUndefined() and self.name <> \'\'"
-		   });		
 		addAnnotation
 		  (packageEClass.getEOperations().get(0), 
 		   source, 
@@ -910,7 +893,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		   source, 
 		   new String[] {
 			 "body", "self.getParameters()->select(e:Parameter|e.name =pname)->first()"
-		   });		
+		   });			
 		addAnnotation
 		  (operationComponentEClass.getEOperations().get(0), 
 		   source, 
@@ -923,22 +906,6 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		   new String[] {
 			 "body", "self.key = other.key"
 		   });
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";							
-		addAnnotation
-		  (packageEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "PackageNameNull"
-		   });							
 	}
 
 } //CommonPackageImpl

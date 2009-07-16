@@ -75,12 +75,12 @@ public class ClazzValidator extends EObjectValidator {
 	protected static final int DIAGNOSTIC_CODE_COUNT = GENERATED_DIAGNOSTIC_CODE_COUNT;
 
 	/**
-	 * The cached base package validator.
+	 * The parsed OCL expression for the definition of the '<em>PackageNameNull</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CommonValidator commonValidator;
+	private static Constraint classPackage_PackageNameNullInvOCL;
 
 	/**
 	 * The parsed OCL expression for the definition of the '<em>InheritanceCycle</em>' invariant constraint.
@@ -174,7 +174,7 @@ public class ClazzValidator extends EObjectValidator {
 	 */
 	private static Constraint abstractClass_TwoAttributesSameNameInvOCL;
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
-	
+
 	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 	/**
 	 * Creates an instance of the switch.
@@ -184,7 +184,6 @@ public class ClazzValidator extends EObjectValidator {
 	 */
 	public ClazzValidator() {
 		super();
-		commonValidator = CommonValidator.INSTANCE;
 	}
 
 	/**
@@ -260,8 +259,47 @@ public class ClazzValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(classPackage, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(classPackage, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(classPackage, diagnostics, context);
-		if (result || diagnostics != null) result &= commonValidator.validatePackage_PackageNameNull(classPackage, diagnostics, context);
+		if (result || diagnostics != null) result &= validateClassPackage_PackageNameNull(classPackage, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the PackageNameNull constraint of '<em>Class Package</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateClassPackage_PackageNameNull(ClassPackage classPackage, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (classPackage_PackageNameNullInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(ClazzPackage.Literals.CLASS_PACKAGE);
+			
+			EAnnotation ocl = ClazzPackage.Literals.CLASS_PACKAGE.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("PackageNameNull");
+			
+			try {
+				classPackage_PackageNameNullInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(classPackage_PackageNameNullInvOCL);
+		
+		if (!query.check(classPackage)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "PackageNameNull", getObjectLabel(classPackage, context) }),
+						 new Object[] { classPackage }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**

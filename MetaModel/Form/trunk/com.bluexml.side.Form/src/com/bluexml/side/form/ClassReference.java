@@ -20,6 +20,7 @@ import com.bluexml.side.clazz.Clazz;
  * <!-- begin-model-doc -->
  * Definition: The 'ClassReference' is used to reference a form class to a class.
  * 
+ * 
  * Example:
  * - Real class=Class Article.
  * <!-- end-model-doc -->
@@ -34,6 +35,8 @@ import com.bluexml.side.clazz.Clazz;
  *
  * @see com.bluexml.side.form.FormPackage#getClassReference()
  * @model abstract="true"
+ *        annotation="http://www.bluexml.com/OCL mustReferenceClass='not self.real_class.oclIsUndefined()'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='mustReferenceClass'"
  * @generated
  */
 public interface ClassReference extends EObject {

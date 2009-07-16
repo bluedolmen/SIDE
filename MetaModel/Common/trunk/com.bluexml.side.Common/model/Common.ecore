@@ -73,12 +73,6 @@
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//NamedModelElement">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="PackageNameNull"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="PackageNameNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
-    </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: used to organize the objects inside a model under a tree similar to Java package organization. It is highly recommended to use the packages to organize the elements and to ensure that they have understandable fully qualified name."/>
     </eAnnotations>

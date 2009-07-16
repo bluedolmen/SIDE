@@ -89,7 +89,7 @@ public class CommonValidator extends EObjectValidator {
 	 */
 	private static Constraint package__PackageNameNullInvOCL;
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
-	
+
 	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 	/**
 	 * Creates an instance of the switch.
@@ -153,7 +153,7 @@ public class CommonValidator extends EObjectValidator {
 				return validateDataType((DataType)value, diagnostics, context);
 			case CommonPackage.VISIBILITY:
 				return validateVisibility((Visibility)value, diagnostics, context);
-			default: 
+			default:
 				return true;
 		}
 	}
@@ -216,48 +216,9 @@ public class CommonValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(package_, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(package_, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(package_, diagnostics, context);
-		if (result || diagnostics != null) result &= validatePackage_PackageNameNull(package_, diagnostics, context);
 		return result;
 	}
 
-	/**
-	 * Validates the PackageNameNull constraint of '<em>Package</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validatePackage_PackageNameNull(com.bluexml.side.common.Package package_, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (package__PackageNameNullInvOCL == null) {
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(CommonPackage.Literals.PACKAGE);
-			
-			EAnnotation ocl = CommonPackage.Literals.PACKAGE.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String expr = ocl.getDetails().get("PackageNameNull");
-			
-			try {
-				package__PackageNameNullInvOCL = helper.createInvariant(expr);
-			}
-			catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(package__PackageNameNullInvOCL);
-		
-		if (!query.check(package_)) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(new BasicDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "PackageNameNull", getObjectLabel(package_, context) }),
-						 new Object[] { package_ }));
-			}
-			return false;
-		}
-		return true;
-	}
 
 	/**
 	 * <!-- begin-user-doc -->

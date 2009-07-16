@@ -13,6 +13,11 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Class Package</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: a package allows to organize class/data; this is similar to Java package structure.
+ * Constraints: the fully qualified name of a class is compose of the successive names of the containing package and the attribute name of the class. This fully qualified name must be unique in your application. For instance, 'org.bluexml.library.mediaVideo' identifies the class mediaVideo contains in the 'library' package, itself contains in the 'bluexml' package, itself contains in the 'org' package.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -24,7 +29,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getClassPackage()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='PackageNameNull'"
+ *        annotation="http://www.bluexml.com/OCL PackageNameNull='not self.name.oclIsUndefined() and self.name <> \'\''"
  * @generated
  */
 public interface ClassPackage extends com.bluexml.side.common.Package {

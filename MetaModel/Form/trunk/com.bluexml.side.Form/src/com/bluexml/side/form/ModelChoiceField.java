@@ -14,15 +14,12 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: The 'ModelChoiceField' make reference to the associations of classes.
- * 
+ * Definition: The 'ModelChoiceField' makes reference to the associations of classes. An association is, by default seen as a choices list with all elements of the targeted class. This association can be expanded in order to have a form of the targeted elements in the form itself.
  * Operations:
- * - 'Relation / Expand to reference': 
- * - 'Relation / Expand to Model Choice Field with inline edition': 
- * 
- * Inherits:
- * - ClassReference.
- * - Field.
+ * - 'Relation / Expand to reference': Available on association, this action allows having the form of the linked class inside the actual form. It creates another form under the same form collection that can be personalized too: this form is directly inserted in the uniting form; we say the form is ‘inline’ instead of ‘Select’.
+ * - 'Relation / Collapse to Model Choice Field’: when an association has been expanded, this operation allows coming back to the Select mode.
+ * - ‘Relation -> Add Reference: Available after an ‘expand’ operation, it works the same way. It will add a form to the original form. Only available on associations with max cardinality set to more than one.
+ * Inherits: ClassReference, Field.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -50,6 +47,9 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: the minimum number of choice items in the list.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Min bound</em>' attribute.
 	 * @see #setMin_bound(int)
 	 * @see com.bluexml.side.form.FormPackage#getModelChoiceField_Min_bound()
@@ -136,7 +136,10 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'widget' attributes provides a layout for model choice field.
+	 * Definition: The 'widget' attributes provides the layout for model choice field. 
+	 * The possible values are:
+	 * - Inline: to integrate the targeted class as a  form inside the current form
+	 * - Select: to integrate the targeted  class as a widget of selection
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Widget</em>' attribute.
 	 * @see com.bluexml.side.form.ReferenceWidgetType
@@ -168,7 +171,7 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'show_actions' attribute specifies if it possible to edit or to create.
+	 * Definition: The 'Show_actions' attribute specifies that the action field ‘edit’, ‘create’, ‘delete’ or others are available if true or are not visible if not.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Show actions</em>' attribute.
 	 * @see #setShow_actions(boolean)

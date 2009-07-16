@@ -40,6 +40,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Forms.ecore#//FormGroup/children"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FormGroup/presentation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Forms.ecore#//FormGroup/disabled"/>
+      <genOperations ecoreOperation="Forms.ecore#//FormGroup/getFields"/>
     </genClasses>
     <genClasses image="false" ecoreClass="Forms.ecore#//Field">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/mandatory"/>
@@ -48,6 +49,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/disabled"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/fieldSize"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/style"/>
+      <genOperations ecoreOperation="Forms.ecore#//Field/getLabel"/>
     </genClasses>
     <genClasses ecoreClass="Forms.ecore#//BooleanField"/>
     <genClasses ecoreClass="Forms.ecore#//CharField">
@@ -129,6 +131,7 @@
     <genClasses ecoreClass="Forms.ecore#//FormWorkflow"/>
     <genClasses image="false" ecoreClass="Forms.ecore#//FormContainer">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FormContainer/name"/>
+      <genOperations ecoreOperation="Forms.ecore#//FormContainer/getLabel"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

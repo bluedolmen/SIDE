@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.form.impl;
 
+import com.bluexml.side.common.impl.PackageImpl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -35,7 +36,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *
  * @generated
  */
-public class FormCollectionImpl extends EObjectImpl implements FormCollection {
+public class FormCollectionImpl extends PackageImpl implements FormCollection {
 	/**
 	 * The cached value of the '{@link #getForms() <em>Forms</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

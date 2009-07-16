@@ -14,8 +14,9 @@ package com.bluexml.side.form;
  * <!-- begin-model-doc -->
  * Definition: The 'DecimalField' specifies a field for decimal input.
  * 
+ * 
  * Inherits:
- * - Field.
+ *  Field.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -42,7 +43,7 @@ public interface DecimalField extends Field {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'min_value' attribute specifies a minimum value for the input.
+	 * Definition: minimum value for the input.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Min value</em>' attribute.
 	 * @see #setMin_value(int)
@@ -71,7 +72,7 @@ public interface DecimalField extends Field {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'max_value' attribute specifies a maximum value for the input.
+	 * Definition: maximum value for the input.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Max value</em>' attribute.
 	 * @see #setMax_value(int)
@@ -100,7 +101,7 @@ public interface DecimalField extends Field {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'max_digits' attribute defines the maximum of digit after decimal.
+	 * Definition: maximum number of digits after decimal.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Max digits</em>' attribute.
 	 * @see #setMax_digits(int)
@@ -130,7 +131,7 @@ public interface DecimalField extends Field {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * 
-	 * 
+	 * Definition: 
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Decimal places</em>' attribute.
 	 * @see #setDecimal_places(int)

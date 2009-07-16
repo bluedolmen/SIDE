@@ -868,10 +868,10 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		createResource(eNS_URI);
 
 		// Create annotations
-		// http://www.bluexml.com/OCL
-		createOCLAnnotations();
 		// http://www.eclipse.org/emf/2002/Ecore
 		createEcoreAnnotations();
+		// http://www.bluexml.com/OCL
+		createOCLAnnotations();
 	}
 
 	/**
@@ -881,7 +881,13 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * @generated
 	 */
 	protected void createOCLAnnotations() {
-		String source = "http://www.bluexml.com/OCL";		
+		String source = "http://www.bluexml.com/OCL";					
+		addAnnotation
+		  (classPackageEClass, 
+		   source, 
+		   new String[] {
+			 "PackageNameNull", "not self.name.oclIsUndefined() and self.name <> \'\'"
+		   });		
 		addAnnotation
 		  (classPackageEClass.getEOperations().get(0), 
 		   source, 
@@ -1037,7 +1043,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 			 "AtLeastOneNavigableEdge", "(firstEnd.navigable or secondEnd.navigable)",
 			 "ClassCantBeReferencedbyTwoSameNameAssociation", "self.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1",
 			 "IfAggregationOrCompositionThenUnidirectionalAssociation", "(self.associationType <> AssociationType::Direct) implies (self.firstEnd.navigable xor self.secondEnd.navigable )"
-		   });			
+		   });				
 		addAnnotation
 		  (associationEClass.getEOperations().get(0), 
 		   source, 
@@ -1070,7 +1076,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   new String[] {
 			 "body", "Sequence{self.firstEnd,self.secondEnd} -> select(ae | ae.linkedClass = clazz)\n",
 			 "description", "returns the association end for which the parameter class (clazz) is linked to"
-		   });													
+		   });														
 		addAnnotation
 		  (aspectEClass.getEOperations().get(0), 
 		   source, 
@@ -1097,7 +1103,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "body", "if self.title.oclIsUndefined() or self.title.size() = 0 then\r self.name \relse\r self.title \rendif"
-		   });			
+		   });					
 		addAnnotation
 		  (associationEndEClass.getEOperations().get(0), 
 		   source, 
@@ -1118,7 +1124,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   new String[] {
 			 "body", "let parent : Association = Association.allInstances() -> select(a | a.firstEnd = self or a.secondEnd = self) -> asSequence() -> first() in if (parent.firstEnd = self) then parent.secondEnd else parent.firstEnd endif",
 			 "description", "returns the other side of the containing association"
-		   });
+		   });			
 	}
 
 	/**
@@ -1128,7 +1134,13 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";									
+		String source = "http://www.eclipse.org/emf/2002/Ecore";				
+		addAnnotation
+		  (classPackageEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "PackageNameNull"
+		   });										
 		addAnnotation
 		  (clazzEClass, 
 		   source, 
@@ -1140,13 +1152,13 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation"
-		   });																				
+		   });																						
 		addAnnotation
 		  (abstractClassEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "TwoModelElementWithSameName NameNull noSpecialCharacters TwoAttributesSameName"
-		   });						
+		   });											
 	}
 
 } //ClazzPackageImpl

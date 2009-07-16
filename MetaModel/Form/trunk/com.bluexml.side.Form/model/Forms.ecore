@@ -3,12 +3,12 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="form"
     nsURI="http://www.kerblue.org/form/1.0" nsPrefix="form">
-  <eClassifiers xsi:type="ecore:EClass" name="FormElement" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="FormElement" abstract="true" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="noSpecialCharacters"/>
     </eAnnotations>
     <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="noSpecialCharacters" value="self.id.regexMatch('\w*') = true"/>
+      <details key="noSpecialCharacters" value="self.id.regexMatch('[\w]*') = true"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The FormElement is an element of the form. It can be a form group or a field."/>
@@ -39,6 +39,11 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The FormGroup defines a logical group of fields. This logical grouping is used to generate grouping in the generated form through tabs, rows group, …. &#xD;&#xA;The creation of FormGroup is achieved by using the ‘Group in a new group’ operation of Field. &#xD;&#xA;Inherits:  FormElement. "/>
     </eAnnotations>
+    <eOperations name="getFields" upperBound="-1" eType="#//Field">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.children->select(oclIsKindOf(Field)).oclAsType(Field)->union(self.children->select(oclIsKindOf(FormGroup)).oclAsType(FormGroup).getFields().oclAsType(Field)).oclAsType(Field)"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//FormElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="presentation" eType="#//FormGroupPresentationType">
@@ -56,6 +61,11 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The form has a list of fields which inherits of the Field element. A Field is usually bound to an attribute of the class diagram (except for FreeText) and have some special features (by e.g. a Date Field can have min and max date). Each kind of field will have different generated input field or/and different kind of validation rules. The validation rules are defined to control input in the model. &#xD;&#xA;Operations:&#xD;&#xA;- The Operation ‘Group in a new group’ allows to group fields in a FormGroup (logical group). This group can be specialized to change its display (in tab, row or column by e.g.).&#xD;&#xA;Inherits: FormElement."/>
     </eAnnotations>
+    <eOperations name="getLabel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="if self.label.oclIsUndefined() or self.label.size() = 0 then&#xD; self.id &#xD;else&#xD; self.label &#xD;endif"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mandatory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'mandatory' attribute specifies if a field is required or not.&#xD;&#xA;Constraint/limit: The field must be filled up in order to validate the form. A message (validation rule) for all required fields will appear if they are not filled up.&#xD;&#xA;Example:&#xD;&#xA;- 'false': the field is not mandatory.&#xD;&#xA;- 'true': the field is mandatory. The label of the field will be followed by a star."/>
@@ -281,7 +291,7 @@
       <details key="documentation" value="Definition: The 'Reference' provides an inline reference to another form. It is a ModelChoiceField but which references a form, ie after that an expand operation has been performed.&#xD;&#xA;Inherit: ModelChoiceField."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FormCollection">
+  <eClassifiers xsi:type="ecore:EClass" name="FormCollection" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Package">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: This is the root element which is the first created element. All forms will be child of this element. &#xD;&#xA;It has no corresponding elements in the Data model and is usually not generated.&#xD;&#xA;Operations:&#xD;&#xA;- The operation ‘Synchronize with Class Diagram’ might be called when your Data model has been changed (attribute addition, change of type …) to propagate these changes in your forms. &#xD;&#xA;The changes which will be propagated are: attribute addition, attribute removal.&#xD;&#xA;The changes which are not propagated imply a manual update in the concerned forms.&#xD;&#xA;"/>
     </eAnnotations>
@@ -332,6 +342,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="ClassReference" abstract="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The 'ClassReference' is used to reference a form class to a class.&#xD;&#xD;&#xD;&#xA;Example:&#xD;- Real class=Class Article."/>
+    </eAnnotations>
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="mustReferenceClass" value="not self.real_class.oclIsUndefined()"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="mustReferenceClass"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="real_class" eType="ecore:EClass ../../com.bluexml.side.Class/model/Class.ecore#//Clazz"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="association_class" eType="ecore:EClass ../../com.bluexml.side.Class/model/Class.ecore#//Clazz"/>
@@ -450,7 +466,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormContainer" abstract="true" eSuperTypes="#//FormGroup">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="validName noSpecialCharacters"/>
+      <details key="constraints" value="validName"/>
     </eAnnotations>
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="validName" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
@@ -458,6 +474,11 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The 'FormContainer' represents a form and is used as a container for elements. FormClass and FormWorkflow inherits of FormContainer.&#xD;&#xA;A FormCollection is composed of at least one FormContainer.&#xD;&#xA;Inherits: FormGroup."/>
     </eAnnotations>
+    <eOperations name="getLabel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="if self.label.oclIsUndefined() or self.label.size() = 0 then&#xD; self.name &#xD;else&#xD; self.label &#xD;endif"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'name' attribute specifies the name of the form container."/>

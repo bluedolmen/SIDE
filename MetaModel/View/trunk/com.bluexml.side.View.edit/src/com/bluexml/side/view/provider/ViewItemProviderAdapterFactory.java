@@ -868,8 +868,8 @@ public class ViewItemProviderAdapterFactory extends ViewAdapterFactory implement
 		if (htmlFieldItemProvider != null) htmlFieldItemProvider.dispose();
 		if (urlFieldItemProvider != null) urlFieldItemProvider.dispose();
 		if (imageFieldItemProvider != null) imageFieldItemProvider.dispose();
-		if (fieldGroupItemProvider != null) fieldGroupItemProvider.dispose();
 		if (actionableItemProvider != null) actionableItemProvider.dispose();
+		if (fieldGroupItemProvider != null) fieldGroupItemProvider.dispose();
 	}
 
 }

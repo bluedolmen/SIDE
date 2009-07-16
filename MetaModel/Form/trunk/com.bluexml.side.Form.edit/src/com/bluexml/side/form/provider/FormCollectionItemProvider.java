@@ -7,6 +7,9 @@
 package com.bluexml.side.form.provider;
 
 
+import com.bluexml.side.clazz.ClazzFactory;
+import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.provider.PackageItemProvider;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,6 +29,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import com.bluexml.side.form.FormCollection;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.workflow.WorkflowFactory;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.form.FormCollection} object.
@@ -34,7 +38,7 @@ import com.bluexml.side.form.FormPackage;
  * @generated
  */
 public class FormCollectionItemProvider
-	extends ItemProviderAdapter
+	extends PackageItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -115,7 +119,10 @@ public class FormCollectionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_FormCollection_type");
+		String label = ((FormCollection)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_FormCollection_type") :
+			getString("_UI_FormCollection_type") + " " + label;
 	}
 
 	/**
@@ -147,6 +154,36 @@ public class FormCollectionItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+				 ClazzFactory.eINSTANCE.createClassComment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+				 ClazzFactory.eINSTANCE.createAssociationEnd()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
+				 FormFactory.eINSTANCE.createFormCollection()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
+				 FormFactory.eINSTANCE.createWorkflowFormCollection()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
+				 ClazzFactory.eINSTANCE.createClassPackage()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
+				 WorkflowFactory.eINSTANCE.createProcess()));
 
 		newChildDescriptors.add
 			(createChildParameter

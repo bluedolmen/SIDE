@@ -116,7 +116,9 @@ public abstract class AbstractViewImpl extends FieldContainerImpl implements Abs
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
+		
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getDirectChildFieldsBodyOCL);
+	
 		@SuppressWarnings("unchecked")
 		Collection<Field> result = (Collection<Field>) query.evaluate(this);
 		return new BasicEList.UnmodifiableEList<Field>(result.size(), result.toArray());

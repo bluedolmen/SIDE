@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.form;
 
+import com.bluexml.side.common.CommonPackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -73,13 +74,67 @@ public interface FormPackage extends EPackage {
 	int FORM_ELEMENT = 0;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_ELEMENT__STEREOTYPES = CommonPackage.MODEL_ELEMENT__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_ELEMENT__TAGS = CommonPackage.MODEL_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_ELEMENT__COMMENTS = CommonPackage.MODEL_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_ELEMENT__DOCUMENTATION = CommonPackage.MODEL_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_ELEMENT__DESCRIPTION = CommonPackage.MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_ELEMENT__METAINFO = CommonPackage.MODEL_ELEMENT__METAINFO;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_ELEMENT__LABEL = 0;
+	int FORM_ELEMENT__LABEL = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -88,7 +143,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_ELEMENT__ID = 1;
+	int FORM_ELEMENT__ID = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
@@ -97,7 +152,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_ELEMENT__HELP_TEXT = 2;
+	int FORM_ELEMENT__HELP_TEXT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -106,7 +161,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_ELEMENT__REF = 3;
+	int FORM_ELEMENT__REF = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
@@ -115,7 +170,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_ELEMENT__HIDDEN = 4;
+	int FORM_ELEMENT__HIDDEN = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Element</em>' class.
@@ -124,7 +179,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_ELEMENT_FEATURE_COUNT = 5;
+	int FORM_ELEMENT_FEATURE_COUNT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormGroupImpl <em>Group</em>}' class.
@@ -135,6 +190,60 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	int FORM_GROUP = 1;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_GROUP__STEREOTYPES = FORM_ELEMENT__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_GROUP__TAGS = FORM_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_GROUP__COMMENTS = FORM_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_GROUP__DOCUMENTATION = FORM_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_GROUP__DESCRIPTION = FORM_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_GROUP__METAINFO = FORM_ELEMENT__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -226,6 +335,60 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	int FIELD = 2;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__STEREOTYPES = FORM_ELEMENT__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__TAGS = FORM_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__COMMENTS = FORM_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__DOCUMENTATION = FORM_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__DESCRIPTION = FORM_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__METAINFO = FORM_ELEMENT__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -346,6 +509,60 @@ public interface FormPackage extends EPackage {
 	int BOOLEAN_FIELD = 3;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -462,6 +679,60 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	int CHAR_FIELD = 4;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_FIELD__METAINFO = FIELD__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -598,6 +869,60 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	int DATE_FIELD = 5;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__METAINFO = FIELD__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -745,6 +1070,60 @@ public interface FormPackage extends EPackage {
 	int DATE_TIME_FIELD = 6;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__STEREOTYPES = DATE_FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__TAGS = DATE_FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__COMMENTS = DATE_FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__DOCUMENTATION = DATE_FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__DESCRIPTION = DATE_FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__METAINFO = DATE_FIELD__METAINFO;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -888,6 +1267,60 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	int DECIMAL_FIELD = 7;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__METAINFO = FIELD__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -1044,6 +1477,60 @@ public interface FormPackage extends EPackage {
 	int FLOAT_FIELD = 8;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1180,6 +1667,60 @@ public interface FormPackage extends EPackage {
 	int INTEGER_FIELD = 9;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1314,6 +1855,60 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	int MODEL_CHOICE_FIELD = 10;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_FIELD__METAINFO = FIELD__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -1506,6 +2101,60 @@ public interface FormPackage extends EPackage {
 	int EMAIL_FIELD = 11;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__STEREOTYPES = CHAR_FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__TAGS = CHAR_FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__COMMENTS = CHAR_FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__DOCUMENTATION = CHAR_FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__DESCRIPTION = CHAR_FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__METAINFO = CHAR_FIELD__METAINFO;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1642,6 +2291,60 @@ public interface FormPackage extends EPackage {
 	int FILE_FIELD = 12;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1769,6 +2472,60 @@ public interface FormPackage extends EPackage {
 	int IMAGE_FIELD = 13;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__STEREOTYPES = FILE_FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__TAGS = FILE_FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__COMMENTS = FILE_FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__DOCUMENTATION = FILE_FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__DESCRIPTION = FILE_FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__METAINFO = FILE_FIELD__METAINFO;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1894,6 +2651,60 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	int TIME_FIELD = 14;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__STEREOTYPES = DATE_FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__TAGS = DATE_FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__COMMENTS = DATE_FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__DOCUMENTATION = DATE_FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__DESCRIPTION = DATE_FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__METAINFO = DATE_FIELD__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -2041,6 +2852,60 @@ public interface FormPackage extends EPackage {
 	int URL_FIELD = 15;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__STEREOTYPES = CHAR_FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__TAGS = CHAR_FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__COMMENTS = CHAR_FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__DOCUMENTATION = CHAR_FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__DESCRIPTION = CHAR_FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__METAINFO = CHAR_FIELD__METAINFO;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2184,6 +3049,60 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	int PHONE_NUMBER_FIELD = 16;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__STEREOTYPES = CHAR_FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__TAGS = CHAR_FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__COMMENTS = CHAR_FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__DOCUMENTATION = CHAR_FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__DESCRIPTION = CHAR_FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__METAINFO = CHAR_FIELD__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -2331,6 +3250,60 @@ public interface FormPackage extends EPackage {
 	int FORM_ASPECT = 17;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_ASPECT__STEREOTYPES = FORM_GROUP__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_ASPECT__TAGS = FORM_GROUP__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_ASPECT__COMMENTS = FORM_GROUP__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_ASPECT__DOCUMENTATION = FORM_GROUP__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_ASPECT__DESCRIPTION = FORM_GROUP__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_ASPECT__METAINFO = FORM_GROUP__METAINFO;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2420,6 +3393,60 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	int FORM_CONTAINER = 30;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CONTAINER__STEREOTYPES = FORM_GROUP__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CONTAINER__TAGS = FORM_GROUP__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CONTAINER__COMMENTS = FORM_GROUP__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CONTAINER__DOCUMENTATION = FORM_GROUP__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CONTAINER__DESCRIPTION = FORM_GROUP__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CONTAINER__METAINFO = FORM_GROUP__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -2520,6 +3547,60 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	int FORM_CLASS = 18;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CLASS__STEREOTYPES = FORM_CONTAINER__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CLASS__TAGS = FORM_CONTAINER__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CLASS__COMMENTS = FORM_CONTAINER__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CLASS__DOCUMENTATION = FORM_CONTAINER__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CLASS__DESCRIPTION = FORM_CONTAINER__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_CLASS__METAINFO = FORM_CONTAINER__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -2638,6 +3719,60 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	int REFERENCE = 19;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__STEREOTYPES = MODEL_CHOICE_FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__TAGS = MODEL_CHOICE_FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__COMMENTS = MODEL_CHOICE_FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__DOCUMENTATION = MODEL_CHOICE_FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__DESCRIPTION = MODEL_CHOICE_FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__METAINFO = MODEL_CHOICE_FIELD__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -2831,13 +3966,94 @@ public interface FormPackage extends EPackage {
 	int FORM_COLLECTION = 20;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_COLLECTION__STEREOTYPES = CommonPackage.PACKAGE__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_COLLECTION__TAGS = CommonPackage.PACKAGE__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_COLLECTION__COMMENTS = CommonPackage.PACKAGE__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_COLLECTION__DOCUMENTATION = CommonPackage.PACKAGE__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_COLLECTION__DESCRIPTION = CommonPackage.PACKAGE__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_COLLECTION__METAINFO = CommonPackage.PACKAGE__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_COLLECTION__NAME = CommonPackage.PACKAGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Stereotype Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_COLLECTION__STEREOTYPE_SET = CommonPackage.PACKAGE__STEREOTYPE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Package Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_COLLECTION__PACKAGE_SET = CommonPackage.PACKAGE__PACKAGE_SET;
+
+	/**
 	 * The feature id for the '<em><b>Forms</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_COLLECTION__FORMS = 0;
+	int FORM_COLLECTION__FORMS = CommonPackage.PACKAGE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Collection</em>' class.
@@ -2846,7 +4062,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_COLLECTION_FEATURE_COUNT = 1;
+	int FORM_COLLECTION_FEATURE_COUNT = CommonPackage.PACKAGE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.ChoiceFieldImpl <em>Choice Field</em>}' class.
@@ -2857,6 +4073,60 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	int CHOICE_FIELD = 21;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_FIELD__METAINFO = FIELD__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -3029,6 +4299,60 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	int REGEX_FIELD = 22;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGEX_FIELD__STEREOTYPES = CHAR_FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGEX_FIELD__TAGS = CHAR_FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGEX_FIELD__COMMENTS = CHAR_FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGEX_FIELD__DOCUMENTATION = CHAR_FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGEX_FIELD__DESCRIPTION = CHAR_FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGEX_FIELD__METAINFO = CHAR_FIELD__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -3213,6 +4537,60 @@ public interface FormPackage extends EPackage {
 	int PASSWORD_FIELD = 24;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__STEREOTYPES = CHAR_FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__TAGS = CHAR_FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__COMMENTS = CHAR_FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__DOCUMENTATION = CHAR_FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__DESCRIPTION = CHAR_FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__METAINFO = CHAR_FIELD__METAINFO;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3349,6 +4727,60 @@ public interface FormPackage extends EPackage {
 	int VIRTUAL_FIELD = 25;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3476,6 +4908,60 @@ public interface FormPackage extends EPackage {
 	int ACTION_FIELD = 26;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__TAGS = FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__COMMENTS = FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__METAINFO = FIELD__METAINFO;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3592,6 +5078,60 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	int TEXT_FIELD = 27;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__STEREOTYPES = CHAR_FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__TAGS = CHAR_FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__COMMENTS = CHAR_FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__DOCUMENTATION = CHAR_FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__DESCRIPTION = CHAR_FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__METAINFO = CHAR_FIELD__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -3739,6 +5279,87 @@ public interface FormPackage extends EPackage {
 	int WORKFLOW_FORM_COLLECTION = 28;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORKFLOW_FORM_COLLECTION__STEREOTYPES = FORM_COLLECTION__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORKFLOW_FORM_COLLECTION__TAGS = FORM_COLLECTION__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORKFLOW_FORM_COLLECTION__COMMENTS = FORM_COLLECTION__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORKFLOW_FORM_COLLECTION__DOCUMENTATION = FORM_COLLECTION__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORKFLOW_FORM_COLLECTION__DESCRIPTION = FORM_COLLECTION__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORKFLOW_FORM_COLLECTION__METAINFO = FORM_COLLECTION__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORKFLOW_FORM_COLLECTION__NAME = FORM_COLLECTION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Stereotype Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORKFLOW_FORM_COLLECTION__STEREOTYPE_SET = FORM_COLLECTION__STEREOTYPE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Package Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORKFLOW_FORM_COLLECTION__PACKAGE_SET = FORM_COLLECTION__PACKAGE_SET;
+
+	/**
 	 * The feature id for the '<em><b>Forms</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3774,6 +5395,60 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	int FORM_WORKFLOW = 29;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_WORKFLOW__STEREOTYPES = FORM_CONTAINER__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_WORKFLOW__TAGS = FORM_CONTAINER__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_WORKFLOW__COMMENTS = FORM_CONTAINER__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_WORKFLOW__DOCUMENTATION = FORM_CONTAINER__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_WORKFLOW__DESCRIPTION = FORM_CONTAINER__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_WORKFLOW__METAINFO = FORM_CONTAINER__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.

@@ -7,6 +7,7 @@
 package com.bluexml.side.form.impl;
 
 import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.impl.ModelElementImpl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -36,7 +37,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *
  * @generated
  */
-public abstract class FormElementImpl extends EObjectImpl implements FormElement {
+public abstract class FormElementImpl extends ModelElementImpl implements FormElement {
 	/**
 	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
 	 * <!-- begin-user-doc -->

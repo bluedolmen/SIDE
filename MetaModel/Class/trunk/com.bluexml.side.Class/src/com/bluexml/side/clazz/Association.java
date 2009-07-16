@@ -13,6 +13,10 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Association</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: Association allows to link data sharing particular relationships; for instance, an association may be created between a resume content and a working contract content.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -37,6 +41,12 @@ public interface Association extends TitledNamedClassModelElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: an association may be of various type according to the relationship which must be established between two types of data:
+	 * - Simple: this indicates that there are links between associated data instanes.
+	 * - Aggregation: this indicates a stronger relation between data types which is usually a relation of inclusion; for instance, an association between a wiki and a page.
+	 * - Composition: this indicates a composite aggregation and that if a container data type instance is suppressed, the associated contained data type instances must also be suppressed; for instance, if a wiki is suppressed, all its pages must be suppressed.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Association Type</em>' attribute.
 	 * @see com.bluexml.side.clazz.AssociationType
 	 * @see #setAssociationType(AssociationType)

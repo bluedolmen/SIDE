@@ -35,10 +35,10 @@ import com.bluexml.side.clazz.ClassModelElement;
  * @see com.bluexml.side.form.FormPackage#getFormElement()
  * @model abstract="true"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='noSpecialCharacters'"
- *        annotation="http://www.bluexml.com/OCL noSpecialCharacters='self.id.regexMatch(\'\\w*\') = true'"
+ *        annotation="http://www.bluexml.com/OCL noSpecialCharacters='self.id.regexMatch(\'[\\w]*\') = true'"
  * @generated
  */
-public interface FormElement extends EObject {
+public interface FormElement extends ModelElement {
 	/**
 	 * Returns the value of the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -48,9 +48,7 @@ public interface FormElement extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'label' attribute specifies the text associated to a form element.
-	 * 
-	 * Example: label=Description
+	 * Definition: The 'label' attribute specifies the text associated to a form element. This text is displayed on or near the form element.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Label</em>' attribute.
 	 * @see #setLabel(String)
@@ -79,11 +77,9 @@ public interface FormElement extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'id' attribute specifies a unique identifier to a form element.
-	 * 
+	 * Definition: The 'id' attribute specifies a unique identifier of the form element in the form.
 	 * Constraint/limit: The 'id' value must not contain space.
 	 * 
-	 * Example: id=Description
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
@@ -113,6 +109,7 @@ public interface FormElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'help_text' attribute specifies a text that will appear when the cursor moves over the form element.
+	 * 
 	 * 
 	 * Example: help_text=This is a help message
 	 * <!-- end-model-doc -->
@@ -169,11 +166,7 @@ public interface FormElement extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'hidden' attribute specifies if a form element will be hidden or not in the form.
-	 * 
-	 * Example:
-	 * - 'false': the form element will not be hidden.
-	 * - 'true': the form element will be hidden.
+	 * Definition: The 'hidden' attribute specifies that a form element will be hidden in the form if true or will be visible if false.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Hidden</em>' attribute.
 	 * @see #setHidden(boolean)

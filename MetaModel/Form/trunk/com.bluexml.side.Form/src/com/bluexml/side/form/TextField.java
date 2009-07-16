@@ -12,18 +12,9 @@ package com.bluexml.side.form;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: The 'TextField' is designed for multi-line input.
- * 
- * Operations:
- * - 'Transform/to CharField': Transform TextField into CharField.
- * - 'Transform/to URLField': Transform TextField into URLField.
- * - 'Transform/to EmailField': Transform TextField into EmailField.
- * - 'Transform/to PasswordField': Transform TextField into TextField.
- * - 'Transform/to RegexField': Transform TextField into RegexField.
- * - 'Transform/to PhoneNumberField': Transform TextField into PhoneNumberField.
- * 
- * Inherits: 
- * - CharField
+ * Definition: The 'TextField' is designed for multi-line text input.
+ * Operations: same as Charfield
+ * Inherits: CharField
  * <!-- end-model-doc -->
  *
  * <p>
@@ -47,6 +38,12 @@ public interface TextField extends CharField {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: the type of widget to use
+	 * The possible values are:
+	 * - TextArea for simple multi-line text input field
+	 * - Rich Text Editor for inline html formatting editor.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Widget</em>' attribute.
 	 * @see com.bluexml.side.form.TextWidgetType
 	 * @see #setWidget(TextWidgetType)

@@ -6,6 +6,8 @@
  */
 package com.bluexml.side.form.util;
 
+import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.form.*;
 
 import java.util.List;
@@ -90,6 +92,7 @@ public class FormSwitch<T> {
 			case FormPackage.FORM_ELEMENT: {
 				FormElement formElement = (FormElement)theEObject;
 				T result = caseFormElement(formElement);
+				if (result == null) result = caseModelElement(formElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -97,6 +100,7 @@ public class FormSwitch<T> {
 				FormGroup formGroup = (FormGroup)theEObject;
 				T result = caseFormGroup(formGroup);
 				if (result == null) result = caseFormElement(formGroup);
+				if (result == null) result = caseModelElement(formGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -104,6 +108,7 @@ public class FormSwitch<T> {
 				Field field = (Field)theEObject;
 				T result = caseField(field);
 				if (result == null) result = caseFormElement(field);
+				if (result == null) result = caseModelElement(field);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -112,6 +117,7 @@ public class FormSwitch<T> {
 				T result = caseBooleanField(booleanField);
 				if (result == null) result = caseField(booleanField);
 				if (result == null) result = caseFormElement(booleanField);
+				if (result == null) result = caseModelElement(booleanField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -120,6 +126,7 @@ public class FormSwitch<T> {
 				T result = caseCharField(charField);
 				if (result == null) result = caseField(charField);
 				if (result == null) result = caseFormElement(charField);
+				if (result == null) result = caseModelElement(charField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -128,6 +135,7 @@ public class FormSwitch<T> {
 				T result = caseDateField(dateField);
 				if (result == null) result = caseField(dateField);
 				if (result == null) result = caseFormElement(dateField);
+				if (result == null) result = caseModelElement(dateField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -137,6 +145,7 @@ public class FormSwitch<T> {
 				if (result == null) result = caseDateField(dateTimeField);
 				if (result == null) result = caseField(dateTimeField);
 				if (result == null) result = caseFormElement(dateTimeField);
+				if (result == null) result = caseModelElement(dateTimeField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -145,6 +154,7 @@ public class FormSwitch<T> {
 				T result = caseDecimalField(decimalField);
 				if (result == null) result = caseField(decimalField);
 				if (result == null) result = caseFormElement(decimalField);
+				if (result == null) result = caseModelElement(decimalField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -153,6 +163,7 @@ public class FormSwitch<T> {
 				T result = caseFloatField(floatField);
 				if (result == null) result = caseField(floatField);
 				if (result == null) result = caseFormElement(floatField);
+				if (result == null) result = caseModelElement(floatField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -161,6 +172,7 @@ public class FormSwitch<T> {
 				T result = caseIntegerField(integerField);
 				if (result == null) result = caseField(integerField);
 				if (result == null) result = caseFormElement(integerField);
+				if (result == null) result = caseModelElement(integerField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -170,6 +182,7 @@ public class FormSwitch<T> {
 				if (result == null) result = caseField(modelChoiceField);
 				if (result == null) result = caseClassReference(modelChoiceField);
 				if (result == null) result = caseFormElement(modelChoiceField);
+				if (result == null) result = caseModelElement(modelChoiceField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -179,6 +192,7 @@ public class FormSwitch<T> {
 				if (result == null) result = caseCharField(emailField);
 				if (result == null) result = caseField(emailField);
 				if (result == null) result = caseFormElement(emailField);
+				if (result == null) result = caseModelElement(emailField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -187,6 +201,7 @@ public class FormSwitch<T> {
 				T result = caseFileField(fileField);
 				if (result == null) result = caseField(fileField);
 				if (result == null) result = caseFormElement(fileField);
+				if (result == null) result = caseModelElement(fileField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -196,6 +211,7 @@ public class FormSwitch<T> {
 				if (result == null) result = caseFileField(imageField);
 				if (result == null) result = caseField(imageField);
 				if (result == null) result = caseFormElement(imageField);
+				if (result == null) result = caseModelElement(imageField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -205,6 +221,7 @@ public class FormSwitch<T> {
 				if (result == null) result = caseDateField(timeField);
 				if (result == null) result = caseField(timeField);
 				if (result == null) result = caseFormElement(timeField);
+				if (result == null) result = caseModelElement(timeField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -214,6 +231,7 @@ public class FormSwitch<T> {
 				if (result == null) result = caseCharField(urlField);
 				if (result == null) result = caseField(urlField);
 				if (result == null) result = caseFormElement(urlField);
+				if (result == null) result = caseModelElement(urlField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -223,6 +241,7 @@ public class FormSwitch<T> {
 				if (result == null) result = caseCharField(phoneNumberField);
 				if (result == null) result = caseField(phoneNumberField);
 				if (result == null) result = caseFormElement(phoneNumberField);
+				if (result == null) result = caseModelElement(phoneNumberField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -231,6 +250,7 @@ public class FormSwitch<T> {
 				T result = caseFormAspect(formAspect);
 				if (result == null) result = caseFormGroup(formAspect);
 				if (result == null) result = caseFormElement(formAspect);
+				if (result == null) result = caseModelElement(formAspect);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -241,6 +261,7 @@ public class FormSwitch<T> {
 				if (result == null) result = caseClassReference(formClass);
 				if (result == null) result = caseFormGroup(formClass);
 				if (result == null) result = caseFormElement(formClass);
+				if (result == null) result = caseModelElement(formClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -251,12 +272,16 @@ public class FormSwitch<T> {
 				if (result == null) result = caseField(reference);
 				if (result == null) result = caseClassReference(reference);
 				if (result == null) result = caseFormElement(reference);
+				if (result == null) result = caseModelElement(reference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case FormPackage.FORM_COLLECTION: {
 				FormCollection formCollection = (FormCollection)theEObject;
 				T result = caseFormCollection(formCollection);
+				if (result == null) result = casePackage(formCollection);
+				if (result == null) result = caseNamedModelElement(formCollection);
+				if (result == null) result = caseModelElement(formCollection);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -265,6 +290,7 @@ public class FormSwitch<T> {
 				T result = caseChoiceField(choiceField);
 				if (result == null) result = caseField(choiceField);
 				if (result == null) result = caseFormElement(choiceField);
+				if (result == null) result = caseModelElement(choiceField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -274,6 +300,7 @@ public class FormSwitch<T> {
 				if (result == null) result = caseCharField(regexField);
 				if (result == null) result = caseField(regexField);
 				if (result == null) result = caseFormElement(regexField);
+				if (result == null) result = caseModelElement(regexField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -289,6 +316,7 @@ public class FormSwitch<T> {
 				if (result == null) result = caseCharField(passwordField);
 				if (result == null) result = caseField(passwordField);
 				if (result == null) result = caseFormElement(passwordField);
+				if (result == null) result = caseModelElement(passwordField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -297,6 +325,7 @@ public class FormSwitch<T> {
 				T result = caseVirtualField(virtualField);
 				if (result == null) result = caseField(virtualField);
 				if (result == null) result = caseFormElement(virtualField);
+				if (result == null) result = caseModelElement(virtualField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -305,6 +334,7 @@ public class FormSwitch<T> {
 				T result = caseActionField(actionField);
 				if (result == null) result = caseField(actionField);
 				if (result == null) result = caseFormElement(actionField);
+				if (result == null) result = caseModelElement(actionField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -314,6 +344,7 @@ public class FormSwitch<T> {
 				if (result == null) result = caseCharField(textField);
 				if (result == null) result = caseField(textField);
 				if (result == null) result = caseFormElement(textField);
+				if (result == null) result = caseModelElement(textField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -321,6 +352,9 @@ public class FormSwitch<T> {
 				WorkflowFormCollection workflowFormCollection = (WorkflowFormCollection)theEObject;
 				T result = caseWorkflowFormCollection(workflowFormCollection);
 				if (result == null) result = caseFormCollection(workflowFormCollection);
+				if (result == null) result = casePackage(workflowFormCollection);
+				if (result == null) result = caseNamedModelElement(workflowFormCollection);
+				if (result == null) result = caseModelElement(workflowFormCollection);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -330,6 +364,7 @@ public class FormSwitch<T> {
 				if (result == null) result = caseFormContainer(formWorkflow);
 				if (result == null) result = caseFormGroup(formWorkflow);
 				if (result == null) result = caseFormElement(formWorkflow);
+				if (result == null) result = caseModelElement(formWorkflow);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -338,6 +373,7 @@ public class FormSwitch<T> {
 				T result = caseFormContainer(formContainer);
 				if (result == null) result = caseFormGroup(formContainer);
 				if (result == null) result = caseFormElement(formContainer);
+				if (result == null) result = caseModelElement(formContainer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -807,6 +843,51 @@ public class FormSwitch<T> {
 	 * @generated
 	 */
 	public T caseFormContainer(FormContainer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Model Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Model Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModelElement(ModelElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Named Model Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Named Model Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNamedModelElement(NamedModelElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Package</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Package</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePackage(com.bluexml.side.common.Package object) {
 		return null;
 	}
 

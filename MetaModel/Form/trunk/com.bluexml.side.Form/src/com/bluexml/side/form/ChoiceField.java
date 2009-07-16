@@ -14,15 +14,8 @@ package com.bluexml.side.form;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: The 'ModelChoiceField' make reference to the associations of classes. An association is, by default see as a choices list with all element of the targeted class. This association can be expanded in order to have a form of the targeted elements in the form itself.
- * Operations:
- * - 'Relation / Expand to reference': Available on association this action allows having the form of the linked class inside the actual form. It creates another form under the same form collection that can be personalized too: this form is directly inserted in the uniting form; we say the form is ÔinlineÕ instead of ÔSelectÕ.
- * - 'Relation / Collapse to Model Choice FieldÕ: when an association has been expanded, this operation allows to come back to the Select mode.
- * - 'Relation -> Add Reference: Available after an expand and it works the same way. It will add a form to the original form. Only available on associations with max cardinality set to more than one.
- * Inherits: 
- * - ClassReference.
- * - Field.
- * 
+ * Definition: The 'ChoiceField' defines a list of values to select.
+ * Inherits: Field.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -51,7 +44,7 @@ public interface ChoiceField extends Field {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'min_bound' attribute defines the number minimum of choice.
+	 * Definition: the minimum number of choice items in the list.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Min bound</em>' attribute.
 	 * @see #setMin_bound(int)
@@ -80,7 +73,7 @@ public interface ChoiceField extends Field {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'max_bound' attribute defines the number maximum of choice in the list.
+	 * Definition: the maximum number of choice items in the list.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Max bound</em>' attribute.
 	 * @see #setMax_bound(int)
@@ -110,11 +103,10 @@ public interface ChoiceField extends Field {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'widget' attributes provides a layout for model choice field. 
+	 * Definition: The 'widget' attributes provides the layout for model choice field. 
+	 * 
 	 * 
 	 * The possible values are:
-	 * - Association Class Inline: in the case of an association class, to integrate the targeted class as a form inside the current form.
-	 * - Association Class Select: in the case of an association class, to integrate the targeted class as a widget of selection
 	 * - Inline: to integrate the targeted class as a  form inside the current form
 	 * - Select: to integrate the targeted  class as a widget of selection
 	 * 
@@ -148,11 +140,8 @@ public interface ChoiceField extends Field {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'multiple' attribute allows to select multiple choice.
+	 * Definition: allows selecting multiple choices if true and only one if false.
 	 * 
-	 * Example:
-	 * - 'false': allows no multiple selection.
-	 * - 'true': allows multiple selection.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Multiple</em>' attribute.
 	 * @see #setMultiple(boolean)
@@ -181,7 +170,7 @@ public interface ChoiceField extends Field {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'filterParent" attribute filter choice by parent.
+	 * Definition: The 'filterParent’ attribute filters choice items in the list according to a parent list value.
 	 * 
 	 * Example: filter a list of department by country.
 	 * <!-- end-model-doc -->
@@ -212,7 +201,7 @@ public interface ChoiceField extends Field {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'filterData" attribute filter choice by data.
+	 * Definition: The 'filterData" attribute filters choice items in the list by data.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Filter Data</em>' attribute.
 	 * @see #setFilterData(String)

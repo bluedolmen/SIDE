@@ -221,6 +221,10 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 				return createPaginableAdapter();
 			}
 			@Override
+			public Adapter caseActionable(Actionable object) {
+				return createActionableAdapter();
+			}
+			@Override
 			public Adapter caseSortable(Sortable object) {
 				return createSortableAdapter();
 			}
@@ -239,10 +243,6 @@ public class ViewAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseFieldGroup(FieldGroup object) {
 				return createFieldGroupAdapter();
-			}
-			@Override
-			public Adapter caseActionable(Actionable object) {
-				return createActionableAdapter();
 			}
 			@Override
 			public Adapter caseModelElement(ModelElement object) {

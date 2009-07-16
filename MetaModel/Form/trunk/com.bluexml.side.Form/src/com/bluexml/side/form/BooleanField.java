@@ -14,8 +14,9 @@ package com.bluexml.side.form;
  * <!-- begin-model-doc -->
  * Definition: The 'BooleanField' defines a check box with 'yes/no' choice. The default value is 'no'.
  * 
+ * 
  * Inherits:
- * - Field.
+ *  Field.
  * <!-- end-model-doc -->
  *
  *

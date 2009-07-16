@@ -1456,6 +1456,9 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		paginableEClass = createEClass(PAGINABLE);
 		createEReference(paginableEClass, PAGINABLE__PAGING);
 
+		actionableEClass = createEClass(ACTIONABLE);
+		createEReference(actionableEClass, ACTIONABLE__OPERATIONS);
+
 		sortableEClass = createEClass(SORTABLE);
 		createEReference(sortableEClass, SORTABLE__SORTING);
 
@@ -1469,9 +1472,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		createEReference(filterableEClass, FILTERABLE__FILTERING);
 
 		fieldGroupEClass = createEClass(FIELD_GROUP);
-
-		actionableEClass = createEClass(ACTIONABLE);
-		createEReference(actionableEClass, ACTIONABLE__OPERATIONS);
 
 		// Create enums
 		sortOrderEEnum = createEEnum(SORT_ORDER);
@@ -1687,6 +1687,9 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		initEClass(paginableEClass, Paginable.class, "Paginable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPaginable_Paging(), this.getPaging(), null, "paging", null, 0, 1, Paginable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(actionableEClass, Actionable.class, "Actionable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getActionable_Operations(), theCommonPackage.getOperationComponent(), null, "operations", null, 0, 1, Actionable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(sortableEClass, Sortable.class, "Sortable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSortable_Sorting(), this.getSorting(), null, "sorting", null, 0, 1, Sortable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1700,9 +1703,6 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		initEReference(getFilterable_Filtering(), this.getFiltering(), null, "filtering", null, 0, 1, Filterable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(fieldGroupEClass, FieldGroup.class, "FieldGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(actionableEClass, Actionable.class, "Actionable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getActionable_Operations(), theCommonPackage.getOperationComponent(), null, "operations", null, 0, 1, Actionable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sortOrderEEnum, SortOrder.class, "SortOrder");

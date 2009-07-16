@@ -13,6 +13,10 @@ import com.bluexml.side.common.Comment;
  * A representation of the model object '<em><b>Association End</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: one of the two sides of an association; it references a class/data.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -37,6 +41,11 @@ public interface AssociationEnd extends TitledNamedClassModelElement, Comment {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: the minimum number (minimum cardinality) of instances of the targeted class which participate to the association.
+	 * Example: let's consider a relation between a resume content and a working contract. The resume end association having a minimum cardinality of 0 means that a working contract may not be related to a resume. A cardinality of 1 indicates that at least one resume must be associated to a working contract.
+	 * Constraints: the number must be equals or superior to 0.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Card Min</em>' attribute.
 	 * @see #setCardMin(String)
 	 * @see com.bluexml.side.clazz.ClazzPackage#getAssociationEnd_CardMin()
@@ -64,6 +73,11 @@ public interface AssociationEnd extends TitledNamedClassModelElement, Comment {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: the maximum number (maximum cardinality) of instances of the targeted class which participate to the association.
+	 * Example: let's consider a relation between a resume content and a working contract. The resume end association having a maximum cardinality of 1 means that a working contract is related to at most one resume. A cardinality of * indicates that as many resume as you want may be associated to a working contract.
+	 * Constraints: the number must be superior to 0.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Card Max</em>' attribute.
 	 * @see #setCardMax(String)
 	 * @see com.bluexml.side.clazz.ClazzPackage#getAssociationEnd_CardMax()
@@ -90,6 +104,10 @@ public interface AssociationEnd extends TitledNamedClassModelElement, Comment {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: if false, this boolean indicates that the association is not navigable ie it is not possible to pass through the association.
+	 * Example: let's consider a relation between a resume content and a working contract which is not navigable on the resume end association and navigable on the working contract. This means that the working contract instances will not store resume instances list (it is not possible from a working contract to list the associated resume) and that the resume instances will store working contract instances list (it is possible from a resume to list the associated working contracts).
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Navigable</em>' attribute.
 	 * @see #setNavigable(boolean)
 	 * @see com.bluexml.side.clazz.ClazzPackage#getAssociationEnd_Navigable()

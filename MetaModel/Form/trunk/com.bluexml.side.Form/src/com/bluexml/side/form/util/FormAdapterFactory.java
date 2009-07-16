@@ -7,6 +7,8 @@
 package com.bluexml.side.form.util;
 
 
+import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.form.*;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -195,6 +197,18 @@ public class FormAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseFormContainer(FormContainer object) {
 				return createFormContainerAdapter();
+			}
+			@Override
+			public Adapter caseModelElement(ModelElement object) {
+				return createModelElementAdapter();
+			}
+			@Override
+			public Adapter caseNamedModelElement(NamedModelElement object) {
+				return createNamedModelElementAdapter();
+			}
+			@Override
+			public Adapter casePackage(com.bluexml.side.common.Package object) {
+				return createPackageAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -647,6 +661,48 @@ public class FormAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFormContainerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.ModelElement <em>Model Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.common.ModelElement
+	 * @generated
+	 */
+	public Adapter createModelElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.NamedModelElement <em>Named Model Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.common.NamedModelElement
+	 * @generated
+	 */
+	public Adapter createNamedModelElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.Package <em>Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.common.Package
+	 * @generated
+	 */
+	public Adapter createPackageAdapter() {
 		return null;
 	}
 

@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.form.util;
 
+import com.bluexml.side.common.util.CommonValidator;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
@@ -82,6 +83,14 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	private static Constraint charField_MinSuperiorToMaxInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>mustReferenceClass</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint classReference_mustReferenceClassInvOCL;
 
 	/**
 	 * The parsed OCL expression for the definition of the '<em>NoLinkForVirtualField</em>' invariant constraint.
@@ -471,6 +480,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(modelChoiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(modelChoiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(modelChoiceField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateClassReference_mustReferenceClass(modelChoiceField, diagnostics, context);
 		return result;
 	}
 
@@ -609,8 +619,9 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(formClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(formClass, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormContainer_noSpecialCharacters(formClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormContainer_validName(formClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validateClassReference_mustReferenceClass(formClass, diagnostics, context);
 		return result;
 	}
 
@@ -628,6 +639,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(reference, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(reference, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(reference, diagnostics, context);
+		if (result || diagnostics != null) result &= validateClassReference_mustReferenceClass(reference, diagnostics, context);
 		return result;
 	}
 
@@ -681,7 +693,54 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateClassReference(ClassReference classReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(classReference, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(classReference, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(classReference, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(classReference, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(classReference, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(classReference, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(classReference, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(classReference, diagnostics, context);
+		if (result || diagnostics != null) result &= validateClassReference_mustReferenceClass(classReference, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the mustReferenceClass constraint of '<em>Class Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateClassReference_mustReferenceClass(ClassReference classReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (classReference_mustReferenceClassInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(FormPackage.Literals.CLASS_REFERENCE);
+			
+			EAnnotation ocl = FormPackage.Literals.CLASS_REFERENCE.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("mustReferenceClass");
+			
+			try {
+				classReference_mustReferenceClassInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(classReference_mustReferenceClassInvOCL);
+		
+		if (!query.check(classReference)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "mustReferenceClass", getObjectLabel(classReference, context) }),
+						 new Object[] { classReference }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -816,7 +875,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(formWorkflow, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formWorkflow, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(formWorkflow, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormContainer_noSpecialCharacters(formWorkflow, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formWorkflow, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormContainer_validName(formWorkflow, diagnostics, context);
 		return result;
 	}
@@ -834,7 +893,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(formContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(formContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(formContainer, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormContainer_noSpecialCharacters(formContainer, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormContainer_validName(formContainer, diagnostics, context);
 		return result;
 	}
@@ -876,33 +935,6 @@ public class FormValidator extends EObjectValidator {
 			return false;
 		}
 		return true;
-	}
-
-	/**
-	 * Validates the noSpecialCharacters constraint of '<em>Container</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateFormContainer_noSpecialCharacters(FormContainer formContainer, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO override the constraint, if desired
-		// -> uncomment the scaffolding
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(new BasicDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noSpecialCharacters", getObjectLabel(formContainer, context) }),
-						 new Object[] { formContainer }));
-			}
-			return false;
-		}
-		return validateFormElement_noSpecialCharacters(formContainer, diagnostics, context);
 	}
 
 	/**

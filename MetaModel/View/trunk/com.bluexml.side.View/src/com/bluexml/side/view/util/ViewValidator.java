@@ -117,14 +117,6 @@ public class ViewValidator extends EObjectValidator {
 	protected static final int DIAGNOSTIC_CODE_COUNT = GENERATED_DIAGNOSTIC_CODE_COUNT;
 
 	/**
-	 * The cached base package validator.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected CommonValidator commonValidator;
-
-	/**
 	 * The parsed OCL expression for the definition of the '<em>noFieldMapped</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -143,7 +135,6 @@ public class ViewValidator extends EObjectValidator {
 	 */
 	public ViewValidator() {
 		super();
-		commonValidator = CommonValidator.INSTANCE;
 	}
 
 	/**
@@ -238,6 +229,8 @@ public class ViewValidator extends EObjectValidator {
 				return validateStylable((Stylable)value, diagnostics, context);
 			case ViewPackage.PAGINABLE:
 				return validatePaginable((Paginable)value, diagnostics, context);
+			case ViewPackage.ACTIONABLE:
+				return validateActionable((Actionable)value, diagnostics, context);
 			case ViewPackage.SORTABLE:
 				return validateSortable((Sortable)value, diagnostics, context);
 			case ViewPackage.EDITABLE:
@@ -248,8 +241,6 @@ public class ViewValidator extends EObjectValidator {
 				return validateFilterable((Filterable)value, diagnostics, context);
 			case ViewPackage.FIELD_GROUP:
 				return validateFieldGroup((FieldGroup)value, diagnostics, context);
-			case ViewPackage.ACTIONABLE:
-				return validateActionable((Actionable)value, diagnostics, context);
 			case ViewPackage.SORT_ORDER:
 				return validateSortOrder((SortOrder)value, diagnostics, context);
 			case ViewPackage.PAGINATION_STYLE:
@@ -275,15 +266,7 @@ public class ViewValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateViewCollection(ViewCollection viewCollection, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(viewCollection, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(viewCollection, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(viewCollection, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(viewCollection, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(viewCollection, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(viewCollection, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(viewCollection, diagnostics, context);
-		if (result || diagnostics != null) result &= commonValidator.validatePackage_PackageNameNull(viewCollection, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint(viewCollection, diagnostics, context);
 	}
 
 	/**

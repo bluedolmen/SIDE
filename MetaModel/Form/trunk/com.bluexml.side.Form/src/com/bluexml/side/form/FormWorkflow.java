@@ -14,12 +14,9 @@ package com.bluexml.side.form;
  *
  * <!-- begin-model-doc -->
  * Definition: The Form Workflow is a form associated to a Workflow.
- * 
  * Operations: 
  * - The operation 'Load Ressources...' enables to select and import Workflow Diagrams in the Form Model.
- * 
- * Inherits: 
- * - FormContainer.
+ * Inherits:  FormContainer.
  * <!-- end-model-doc -->
  *
  *

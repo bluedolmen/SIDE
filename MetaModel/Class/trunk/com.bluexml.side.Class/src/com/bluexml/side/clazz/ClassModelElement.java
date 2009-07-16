@@ -15,6 +15,10 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Class Model Element</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Definition: 'Has comment' allows to link a class to a comment.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
