@@ -2,10 +2,8 @@ package com.bluexml.side.util.generator.dependency;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.maven.artifact.repository.ArtifactRepository;
@@ -13,9 +11,7 @@ import org.apache.maven.embedder.Configuration;
 import org.apache.maven.embedder.DefaultConfiguration;
 import org.apache.maven.embedder.MavenEmbedder;
 import org.apache.maven.embedder.MavenEmbedderException;
-import org.apache.maven.execution.DefaultMavenExecutionRequest;
 import org.apache.maven.execution.MavenExecutionResult;
-
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.Namespace;
@@ -32,9 +28,9 @@ public class MavenTmpProject {
 	private MavenEmbedder embedder;
 	private Configuration configuration;
 	public static final Namespace NAMESPACE_MAVENPOM = Namespace.getNamespace("pom", "http://maven.apache.org/POM/4.0.0");
-	private static final String TARGET_VERSION = "1.0.0";
+
 	private static final String TARGET_ARTIFACT = "tmpProject";
-	private static final String TARGET_GROUP = "com.bluexml.side.dependencies";
+
 	private DependencesManager dm;
 	private static final SAXBuilder sxb = new SAXBuilder();
 	private static final XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
@@ -60,12 +56,7 @@ public class MavenTmpProject {
 		FileHelper.deleteFile(tpmProject);
 		createProject();
 		prepareProject(dm);
-		MavenExecutionResult result = getDependences();
-		if (result.getExceptions().size() > 0) {
-			List exceps = result.getExceptions();
-			System.err.println("Exception occure during maven process :" + exceps);
-			throw new Exception("Exception occure during maven process :" + exceps);
-		}
+		getDependences();
 	}
 
 	private void initMaven() throws MavenEmbedderException {
@@ -107,7 +98,7 @@ public class MavenTmpProject {
 
 		Element groupId = new Element("groupId", n.getURI()).setText(mc.getGroupId());
 		Element artifactId = new Element("artifactId", n.getURI()).setText(mc.getArtifactId());
-		Element version = new Element("version", n.getURI()).setText(mc.getVersionMin().toString());
+		Element version = new Element("version", n.getURI()).setText(mc.getVersionRange());
 		Element type = new Element("type", n.getURI()).setText(mc.getModuleType());
 
 		depends.addContent(groupId);
@@ -124,19 +115,37 @@ public class MavenTmpProject {
 	 * @return
 	 * @throws Exception
 	 */
-	private MavenExecutionResult getDependences() throws Exception {
-		DefaultMavenExecutionRequest archetypeCreateRequest = new DefaultMavenExecutionRequest();
-		archetypeCreateRequest.setBaseDirectory(tpmProject);
-		archetypeCreateRequest.setGoals(Arrays.asList(new String[] { "compile" }));
-		archetypeCreateRequest.setProperty("interactiveMode", "false");
-		archetypeCreateRequest.setProperty("basedir", workFolder.getAbsolutePath() + File.separator + TARGET_ARTIFACT);
-		archetypeCreateRequest.setProperty("groupId", TARGET_GROUP);
-		archetypeCreateRequest.setProperty("artifactId", TARGET_ARTIFACT);
-		archetypeCreateRequest.setProperty("version", TARGET_VERSION);
-		
-		archetypeCreateRequest.setUpdateSnapshots(true);
-		MavenExecutionResult result = embedder.execute(archetypeCreateRequest);
-		return result;
+	private void getDependences() throws Exception {
+		// resolve version ranges for dependencies (replace by used version
+		// number)
+		MavenExecutionResult result = MavenUtil.doMavenGoal(tpmProject, "versions:resolve-ranges");
+		if (result.getExceptions().size() > 0) {
+			List<?> exceps = result.getExceptions();
+			System.err.println("Exception occure during maven process :" + exceps);
+			throw new Exception("Exception occure during maven process :" + exceps);
+		}
+
+		// call compile goal to get dependencies in local repository
+		MavenExecutionResult result2 = MavenUtil.doMavenGoal(tpmProject, "compile");
+		if (result2.getExceptions().size() > 0) {
+			List<?> exceps = result2.getExceptions();
+			System.err.println("Exception occure during maven process :" + exceps);
+			throw new Exception("Exception occure during maven process :" + exceps);
+		}
+
+		/*
+		 * DefaultMavenExecutionRequest archetypeCreateRequest = new
+		 * DefaultMavenExecutionRequest();
+		 * archetypeCreateRequest.setBaseDirectory(tpmProject);
+		 * archetypeCreateRequest.setGoals(Arrays.asList(new String[] {
+		 * "compile" })); archetypeCreateRequest.setProperty("interactiveMode",
+		 * "false"); archetypeCreateRequest.setProperty("basedir",
+		 * workFolder.getAbsolutePath() + File.separator + TARGET_ARTIFACT);
+		 * 
+		 * 
+		 * archetypeCreateRequest.setUpdateSnapshots(true); MavenExecutionResult
+		 * result = embedder.execute(archetypeCreateRequest); return result;
+		 */
 	}
 
 	/**
@@ -146,30 +155,13 @@ public class MavenTmpProject {
 	 * @throws Exception
 	 */
 	private void createProject() throws Exception {
-		
-		/*
-		DefaultMavenExecutionRequest archetypeCreateRequest = new DefaultMavenExecutionRequest();
-		archetypeCreateRequest.setBaseDirectory(workFolder);
-		archetypeCreateRequest.setGoals(Arrays.asList(new String[] { "archetype:generate" }));
-		archetypeCreateRequest.setProperty("interactiveMode", "false");
-
-		archetypeCreateRequest.setProperty("basedir", workFolder.getAbsolutePath());
-		archetypeCreateRequest.setProperty("groupId", TARGET_GROUP);
-		archetypeCreateRequest.setProperty("artifactId", TARGET_ARTIFACT);
-		archetypeCreateRequest.setProperty("version", TARGET_VERSION);
-
-		archetypeCreateRequest.setUpdateSnapshots(true);
-
-		MavenExecutionResult result = embedder.execute(archetypeCreateRequest);
-*/
 		projectFolder = new File(workFolder, TARGET_ARTIFACT);
 		projectFolder.mkdirs();
-		
+
 		pomFile = new File(projectFolder, "pom.xml");
 		InputStream in = this.getClass().getResourceAsStream("model.pom.xml");
 		// copy the default pom to the tmpProject
 		FileHelper.writeStreamInFile(pomFile, in);
-		
 
 	}
 
@@ -196,15 +188,17 @@ public class MavenTmpProject {
 	public List<File> getAllDependenciesResources() throws Exception {
 		List<File> dependencies = new ArrayList<File>();
 		createAndGetDependencies();
+		Document pom = sxb.build(pomFile);
 		ArtifactRepository artRep = embedder.getLocalRepository();
 		System.out.println(artRep.getBasedir());
 		System.out.println(artRep.getUrl());
 		File f = new File(artRep.getBasedir());
 		if (f.exists()) {
 			List<ModuleConstraint> l = dm.getContraints();
-			for (ModuleConstraint moduleConstraint : l) {				
-				String path = moduleConstraint.getGroupId().replaceAll("\\.", File.separator)+File.separator+moduleConstraint.getArtifactId();
-				String version = moduleConstraint.getVersionMin().toString();
+			for (ModuleConstraint moduleConstraint : l) {
+				String path = moduleConstraint.getGroupId().replaceAll("\\.", File.separator) + File.separator + moduleConstraint.getArtifactId();
+				// String version = moduleConstraint.getVersionMin().toString();
+				String version = getVersionOf(pom, moduleConstraint.getGroupId(), moduleConstraint.getArtifactId());
 				path += File.separator + version;
 				String moduleName = moduleConstraint.getArtifactId() + "-" + version + "." + moduleConstraint.getModuleType();
 				File localmodule = new File(f.getAbsolutePath() + File.separator + path + File.separator + moduleName);
@@ -219,6 +213,18 @@ public class MavenTmpProject {
 		}
 		return dependencies;
 	}
-	
-	
+
+	public static String getVersionOf(Document pom, String groupId, String artifactId) throws Exception {
+		Element project = pom.getRootElement();
+		Namespace n = project.getNamespace();
+		// get the dependence version
+		List<Element> l = pom.getRootElement().getChild("dependencies", n).getChildren("dependency", n);
+		for (Element element : l) {
+			if (element.getChild("groupId", n).getText().equals(groupId) && element.getChild("artifactId", n).getText().equals(artifactId)) {
+				return element.getChild("version", n).getText();
+			}
+		}
+		throw new Exception("version number not found please report as bug");
+	}
+
 }
