@@ -13,19 +13,19 @@ fi
 
 return_code=0
 cd $GENDOC_SRC/src/com/bluexml/side/Util/MetaModel/gendoc
-CLASSDIR=".:$GENDOC_SRC/src:$GENDOC_SRC/org.eclipse.emf.common_2.4.0.v200902171115.jar:$GENDOC_SRC/org.eclipse.emf.ecore_2.4.2.v200902171115.jar:$GENDOC_SRC/org.eclipse.emf.ecore.xmi_2.4.1.v200902171115.jar"
-for i in *.java
-do
-  javac -cp $CLASSDIR $i
-done
-for i in *.class
-do
-  mv $i $EXEC_DIR/gendoc/com/bluexml/side/Util/MetaModel/gendoc
-done
+#CLASSDIR=".:$GENDOC_SRC/src:$GENDOC_SRC/org.eclipse.emf.common_2.4.0.v200902171115.jar:$GENDOC_SRC/org.eclipse.emf.ecore_2.4.2.v200902171115.jar:$GENDOC_SRC/org.eclipse.emf.ecore.xmi_2.4.1.v200902171115.jar"
+#for i in *.java
+#do
+#  javac -cp $CLASSDIR $i
+#done
+#for i in *.class
+#do
+#  mv $i $EXEC_DIR/gendoc/com/bluexml/side/Util/MetaModel/gendoc
+#done
 
-cd $EXEC_DIR/gendoc
+#cd $EXEC_DIR/gendoc
 
-jar cmf META-INF/MANIFEST.MF ../Gendoc.jar .
+#jar cmf META-INF/MANIFEST.MF ../Gendoc.jar .
 cd ..
 java -jar Gendoc.jar
 jar_gendoc=$?

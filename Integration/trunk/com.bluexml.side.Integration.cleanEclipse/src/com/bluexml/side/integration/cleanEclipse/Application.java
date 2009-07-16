@@ -39,27 +39,63 @@ public class Application {
 			System.exit(0);
 		}
 
-/*		
-		browse(projectName, new File(eclipsePath + File.separator
-				+ "configuration" + File.separator + "org.eclipse.osgi"
-				+ File.separator + "bundles"), ".xml", "units", "unit",
-				"id");
+		/*
+		 * browse(projectName, new File(eclipsePath + File.separator +
+		 * "configuration" + File.separator + "org.eclipse.osgi" +
+		 * File.separator + "bundles"), ".xml", "units", "unit", "id");
+		 * 
+		 * browse(projectName, new File(eclipsePath + File.separator + "p2" +
+		 * File.separator + "org.eclipse.equinox.p2.core" + File.separator +
+		 * "cache"), "content.xml", "units", "unit", "id");
+		 * 
+		 * browse(projectName, new File(eclipsePath + File.separator +
+		 * "configuration" + File.separator + "org.eclipse.update" +
+		 * File.separator + "history"), ".xml", "site", "feature", "id");
+		 */
 		
-		browse(projectName, new File(eclipsePath + File.separator
-				+ "p2" + File.separator + "org.eclipse.equinox.p2.core"
-				+ File.separator + "cache"), "content.xml", "units", "unit",
-				"id");
+		cleanFolder(projectName, new File(eclipsePath + File.separator
+				+ "dropins"));
 
-		browse(projectName, new File(eclipsePath + File.separator
-				+ "configuration" + File.separator + "org.eclipse.update"
-				+ File.separator + "history"), ".xml", "site", "feature", "id");
-*/		 
+		cleanFolder(projectName, new File(eclipsePath + File.separator
+				+ "features"));
+
+		cleanFolder(projectName, new File(eclipsePath + File.separator
+				+ "plugins"));
+
 		cleanXml(projectName, eclipsePath + File.separator + "artifacts.xml",
 				"artifacts", "artifact", "id");
+	}
 
-		cleanProjects(projectName, eclipsePath, "features");
+	/**
+	 * Delete all the file which contain the project name into the file
+	 * 
+	 * @param projectName
+	 *            The project name
+	 * @param file
+	 *            The file to clean
+	 */
+	private static void cleanFolder(String projectName, File file) {
 
-		cleanProjects(projectName, eclipsePath, "plugins");
+		File[] files = file.listFiles();
+
+		for (int i = 0; i < files.length; i++) {
+
+			if (files[i].getName().toLowerCase().indexOf(projectName.toLowerCase()) != -1) {
+
+				System.out.print("\t- " + files[i].getAbsolutePath() + " -> ");
+
+				boolean out = FileHelper.deleteFile(files[i]);
+
+				if (out) {
+					System.out.print("Supprimé\n");
+				} else {
+					System.out.print("Non Supprimé\n");
+				}
+
+			} else if (files[i].isDirectory()) {
+					cleanFolder(projectName, files[i]);
+			}
+		}
 	}
 
 	/**
@@ -84,6 +120,7 @@ public class Application {
 	private static void browse(String projectName, File file,
 			String xmlFileName, String rootName, String childrenName,
 			String attributeName) {
+
 		if (file.isDirectory()) {
 			File[] fl = file.listFiles();
 			for (int i = 0; i < fl.length; i++) {
@@ -98,45 +135,9 @@ public class Application {
 	}
 
 	/**
-	 * Delete all the file which contain the project name into the folder
-	 * features or plugins
-	 * 
-	 * @param projectName
-	 *            The project name
-	 * @param eclipsePath
-	 *            The path to the eclipse
-	 * @param folderName
-	 *            The folder name to clean ('features' or 'plugins')
-	 */
-	private static void cleanProjects(String projectName, String eclipsePath,
-			String folderName) {
-
-		File folder = new File(eclipsePath + File.separator + folderName);
-
-		String[] files = folder.list();
-
-		for (int i = 0; i < files.length; i++) {
-			if ((files[i].toLowerCase()).indexOf(projectName.toLowerCase()) != -1) {
-				System.out.print("\t- " + folderName + " : " + files[i]
-						+ " -> ");
-
-				boolean out = FileHelper.deleteFile(new File(eclipsePath
-						+ File.separator + folderName + File.separator
-						+ files[i]));
-
-				if (out) {
-					System.out.print("Supprimé\n");
-				} else {
-					System.out.print("Non Supprimé\n");
-				}
-			}
-		}
-
-	}
-
-	/**
 	 * Analyze the 'filePath' and delete all occurrence of the 'projectName'
-	 * which match with the 'attributeName' into all nodes 'childrenName' of the 'rootName'
+	 * which match with the 'attributeName' into all nodes 'childrenName' of the
+	 * 'rootName'
 	 * 
 	 * @param projectName
 	 *            The project name to delete
