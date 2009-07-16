@@ -58,4 +58,50 @@ public class AttributeServices {
 		}
 		return "d:any";
 	}
+	
+	/*
+	 * JPA generation helper functions
+	 * @author : Brice Pajot
+	 * @date   : 2009-06-22
+	 * 
+	 * These types should conform to the alfresco model definition and to the mapping
+	 * of the Alfresco's data dictionary to Java
+	 * see also http://wiki.alfresco.com/wiki/Data_Dictionary_Guide
+	 */
+	public String getJPAJavaType(Attribute a) {
+		String result = null;
+		
+		if (a.getTyp() == DataType.BOOLEAN) {
+			result = "Boolean";
+		} else if (a.getTyp() == DataType.BYTE) {
+			result = "Integer"; 
+		} else if (a.getTyp() == DataType.CHAR) {
+			result = "String";
+		} else if (a.getTyp() == DataType.DATE) {
+			result = "Date";
+		} else if (a.getTyp() == DataType.DATE_TIME) {
+			result = "Date";
+		} else if (a.getTyp() == DataType.TIME) {
+			result = "Date";
+		} else if (a.getTyp() == DataType.DOUBLE) {
+			result = "Double"; 
+		} else if (a.getTyp() == DataType.FLOAT) {
+			result = "Float";
+		} else if (a.getTyp() == DataType.INT) {
+			result = "Integer";
+		} else if (a.getTyp() == DataType.LONG) {
+			result = "Long";
+		} else if (a.getTyp() == DataType.OBJECT) {
+			result = "Serializable";
+		} else if (a.getTyp() == DataType.SHORT) {
+			result = "Integer";
+		} else if (a.getTyp() == DataType.STRING) {
+			result = "String";
+		} else if (a.getTyp() == DataType.VOID) {
+			result = "Serializable";
+		}
+
+		return result;
+	}
+
 }

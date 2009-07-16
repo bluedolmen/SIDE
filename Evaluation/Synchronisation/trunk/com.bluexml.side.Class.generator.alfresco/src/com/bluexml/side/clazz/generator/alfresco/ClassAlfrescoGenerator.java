@@ -47,7 +47,10 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
 			result.add("/com.bluexml.side.Class.generator.alfresco/templates/webClient/alfrescoGenerator_web_client_config.mt");
 
+			result.add("/com.bluexml.side.Class.generator.alfresco/templates/sqlTemplates/database_dictionary.mt");
+
 			result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoGenerator_context.mt");
+			
 
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_SHARE_EXTENSION)) {
 

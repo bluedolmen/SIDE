@@ -116,88 +116,21 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 
 			<!-- Associations -->
 			<associations>
-			<%for (getSourceAssociations()){%>
-				<<%getAssociationType()%> name="<%getFolder()%>:<%getQualifiedName(current("clazz.Clazz"))%>">							
+			<%for (eContainer("ClassPackage").eAllContents("AssociationEnd")[linkedClass == current("Clazz") && getOpposite().navigable]){%>
+				<<%eContainer().getAssociationType()%> name="<%eContainer().getFolder()%>:<%eContainer().getQualifiedName(current("AssociationEnd"))%>">							
 
-					<title><%getRoleOrTitle(current("clazz.Clazz"))%></title>
+					<title><%getRoleOrTitleFromSource()%></title>
 					<source>
-						<%if (isMandatorySrc(current("clazz.Clazz"))){%>
-						<mandatory>true</mandatory>
-						<%}else{%>
-						<mandatory>false</mandatory>
-						<%}%>
-						<%if (isManySrc(current("clazz.Clazz").self())){%>
-						<many>true</many>
-						<%}else{%>
-						<many>false</many>
-						<%}%>
+						<mandatory><%if (isMandatory()){%>true<%}else{%>false<%}%></mandatory>
+						<many><%if (isMany()){%>true<%}else{%>false<%}%></many>
 					</source>
 					<target>
-						<%if (firstEnd.navigable && secondEnd.navigable){%>
-						  <%if (firstEnd.linkedClass == current(2)){%>
-						<class><%secondEnd.linkedClass.getFolder()%>:<%secondEnd.linkedClass.getQualifiedName()%></class>
-						  <%}else{%>
-						<class><%firstEnd.linkedClass.getFolder()%>:<%firstEnd.linkedClass.getQualifiedName()%></class>
-						  <%}%>
-						<%}else{%>
-						<class><%getTarget(current("clazz.Clazz")).getFolder()%>:<%getTarget(current("clazz.Clazz")).getQualifiedName()%></class>
-						<%}%>
-						<%if (isMandatoryTarget(current("clazz.Clazz"))){%>
-						<mandatory>true</mandatory>
-						<%}else{%>
-						<mandatory>false</mandatory>
-						<%}%>
-						<%if (isManyTarget(current("clazz.Clazz").self())){%>
-						<many>true</many>
-						<%}else{%>
-						<many>false</many>
-						<%}%>
+						<class><%getOpposite().getFolder()%>:<%getOpposite().linkedClass.getQualifiedName()%></class>
+						<mandatory><%if (getOpposite().isMandatory()){%>true<%}else{%>false<%}%></mandatory>
+						<many><%if (getOpposite().isMany()){%>true<%}else{%>false<%}%></many>
 					</target>
-				</<%getAssociationType()%>>	
-				<!-- For Recursive association, special case -->
-				<%if (firstEnd.linkedClass == secondEnd.linkedClass && current("clazz.Association").firstEnd.navigable && current("clazz.Association").secondEnd.navigable) {%>
-					<!-- Recursive Association -->	
-					<<%getAssociationType()%> name="<%getFolder()%>:<%current("clazz.Association").getQualifiedNameReverse(current("clazz.Clazz"))%>">													
-
-					<title><%getRoleOrTitleReverse(current("clazz.Clazz"))%></title>
-					<source>
-						<%if (isMandatoryTarget(current("clazz.Clazz"))){%>
-						<mandatory>true</mandatory>
-						<%}else{%>
-						<mandatory>false</mandatory>
-						<%}%>
-						<%if (isManyTarget(current("clazz.Clazz").self())){%>
-						<many>true</many>
-						<%}else{%>
-						<many>false</many>
-						<%}%>
-					</source>
-					<target>
-						<%if (firstEnd.navigable && secondEnd.navigable){%>
-						  <%if (firstEnd.linkedClass == current("clazz.Clazz")){%>
-						<class><%secondEnd.linkedClass.getFolder()%>:<%secondEnd.linkedClass.getQualifiedName()%></class>
-						  <%}else{%>
-						<class><%firstEnd.linkedClass.getFolder()%>:<%firstEnd.linkedClass.getQualifiedName()%></class>
-						  <%}%>
-						<%}else{%>
-						<class><%getTarget(current("clazz.Clazz")).getFolder()%>:<%getTarget(current("clazz.Clazz")).getQualifiedName()%></class>
-						<%}%>
-						<%if (isMandatorySrc(current("clazz.Clazz"))){%>
-						<mandatory>true</mandatory>
-						<%}else{%>
-						<mandatory>false</mandatory>
-						<%}%>
-						<%if (isManySrc(current("clazz.Clazz").self())){%>
-						<many>true</many>
-						<%}else{%>
-						<many>false</many>
-						<%}%>
-					</target>
-				</<%getAssociationType()%>>	
-				 <%}%>
-						
+				</<%eContainer().getAssociationType()%>>							
 			<%}%>
-
 			</associations>
 
 						

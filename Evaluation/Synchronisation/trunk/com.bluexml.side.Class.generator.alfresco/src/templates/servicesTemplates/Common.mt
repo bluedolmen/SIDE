@@ -32,8 +32,20 @@ tmp<%}%>
 <%if (getRootContainer().name != null && getRootContainer().name.length() > 0){%>
 <%getRootContainer().name%><%}else{%>
 tmp<%}%>
-<%script type="clazz.Association" name="getQualifiedName"%>
+<%script type="clazz.Association" name="getQualifiedName" post="trim()"%>
+<%-- args(0) is the SOURCE association end --%>
+<%-- Overrides the definition in the java services by using a simple deterministic mean --%>
+<%args(0).linkedClass.getQualifiedName()%>_<%name%><%if (args(0).getOpposite().name != ""){%>_<%args(0).getOpposite().name%><%}%>_<%args(0).getOpposite().linkedClass.getQualifiedName()%>
+<%-- 
 <%getAssociationName(args(0))%>
+--%>
+<%script type="clazz.AssociationEnd" name="getRoleOrTitleFromSource" post="trim()"%>
+<%if (eContainer().title != ""){%>
+<%eContainer().title%>
+<%}else{%>
+<%eContainer().name%><%if (getOpposite().name != ""){%>_<%getOpposite().name%><%}%>
+<%}%>
+
 <%script type="common.NamedModelElement" name="getQualifiedName"%>
 <%getFullName().replaceAll("\.","_")%>
 <%script type="clazz.ClassModelElement" name="getNameSpace"%>

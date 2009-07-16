@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
 import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
+import com.bluexml.side.clazz.AssociationEnd;
 import com.bluexml.side.clazz.AssociationType;
 import com.bluexml.side.clazz.ClassModelElement;
 import com.bluexml.side.clazz.ClassPackage;
@@ -37,6 +38,19 @@ import com.bluexml.side.clazz.ClazzPackage;
 
 public class AssociationServices {
 
+	/*
+	 * Cannot call EOperation defined with an EParameter inside the Acceleo editor (known limitation)
+	 * thus defined them in Java services (known workaround)
+	 */
+	public static AssociationEnd getAssociationEnd(Association a, Clazz c) {
+		return a.getAssociationEnd(c).get(0); // if empty, generate an exception
+		
+	}
+	
+	public static AssociationEnd getOppositeAssociationEnd(Association a, Clazz c) {
+		return a.getAssociationEnd(c).get(0).getOpposite();
+	}
+	
 	/**
 	 * Private methode returning the top-package of a class
 	 */
@@ -259,13 +273,13 @@ public class AssociationServices {
 
 		associationName = c.getFullName().replace(".", "_") + "_" + a.getName();
 		if (a.getSecondEnd().getLinkedClass() == c && !reverse) {
-			if (a.getSecondEnd().getName() != null && !"".equalsIgnoreCase(a.getSecondEnd().getName())) {
-				associationName += "_" + a.getSecondEnd().getName();
+			if (a.getFirstEnd().getName() != null && !"".equalsIgnoreCase(a.getFirstEnd().getName())) {
+				associationName += "_" + a.getFirstEnd().getName();
 			}
 			associationName += "_" + ((Clazz) a.getFirstEnd().getLinkedClass()).getFullName().replace(".", "_");
 		} else {
-			if (a.getFirstEnd().getName() != null && !"".equalsIgnoreCase(a.getFirstEnd().getName())) {
-				associationName += "_" + a.getFirstEnd().getName();
+			if (a.getSecondEnd().getName() != null && !"".equalsIgnoreCase(a.getSecondEnd().getName())) {
+				associationName += "_" + a.getSecondEnd().getName();
 			}
 			associationName += "_" + ((Clazz) a.getSecondEnd().getLinkedClass()).getFullName().replace(".", "_");
 		}
