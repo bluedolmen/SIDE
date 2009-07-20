@@ -25,6 +25,11 @@ public class IFileHelper {
         return convertIRessourceToFile(ir);
     }
 
+    /**
+     * Return the IFile with the with the given project relative path.
+     * @param path
+     * @return
+     */
     public static IFile getIFile(String path) {
         IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
         IFile file = myWorkspaceRoot.getFile(new Path(path));
@@ -58,14 +63,14 @@ public class IFileHelper {
         return result;
     }
 
+    /**
+     * Return the IFolder with the with the given project relative path.
+     * @param path
+     * @return
+     */
     public static IFolder getIFolder(String path) {
         IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
         IFolder folder = myWorkspaceRoot.getFolder(new Path(path));
-        /*
-        if (folder.exists() || folder.getRawLocation().makeAbsolute().toFile().exists()) {
-            return folder;
-        }
-        */
         return folder;
     }
 
@@ -77,6 +82,11 @@ public class IFileHelper {
         return ir.getRawLocation().makeAbsolute().toOSString();
     }
 
+    /**
+     * Delete the folder pointed with the given project relative path.
+     * @param ressource
+     * @throws CoreException
+     */
     public static void deleteFolder(String ressource) throws CoreException {
         IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
         IFolder folder = myWorkspaceRoot.getFolder(new Path(ressource));
@@ -85,6 +95,11 @@ public class IFileHelper {
         }
     }
 
+    /**
+     * Delete the file pointed with the given project relative path.
+     * @param ressource
+     * @throws CoreException
+     */
     public static void deleteFile(String ressource) throws CoreException {
         IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
         IResource res = myWorkspaceRoot.getFile(new Path(ressource));
@@ -94,7 +109,7 @@ public class IFileHelper {
     }
 
     /**
-     * Create a folder in the active workspace or return an already created folder. Will create sub folder if not found.
+     * Create a folder (with given project relative path) in the active workspace or return an already created folder. Will create sub folder if not found.
      * @param ressource
      * @return
      * @throws CoreException
