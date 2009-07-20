@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="com.bluexml.side.Application.com_bluexml_application_configuration">
+      <metamodel
+            description="Check this to generate workflow models on leading frameworks.&lt;br&gt; This Workflow Metamodel allows to model Business processes.&lt;br&gt;S-IDE provides the modeler to graphically produce workflow models and various generators to instantiate these models on leading frameworks."
+            id="http://www.kerblue.org/workflow/1.0"
+            name="KSR600 Workflow"
+            url="http://www.kerblue.org/v2/ksr600-workflow/">
+         <technology
+               description="Generate documentation (in docbook) for the models of the metamodel."
+               id="docbook"
+               name="docBook"
+               url="http://www.docbook.org/">
+            <technologyVersion
+                  id="docbook_4.x"
+                  version="Docbook 4.x">
+               <generatorVersion
+                     class="com.bluexml.side.workflow.generator.documentation.WorkflowDocumentationGenerator"
+                     hidden="hidden and used by default"
+                     id="com.bluexml.side.Workflow.generator.documentation"
+                     version="S-IDE Workflow Documentation Generator 1.0.0">
+               </generatorVersion>
+            </technologyVersion>
+         </technology>
+      </metamodel>
+   </extension>
+
+</plugin>
