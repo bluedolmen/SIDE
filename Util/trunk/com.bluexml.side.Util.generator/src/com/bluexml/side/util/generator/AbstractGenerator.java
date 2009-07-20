@@ -76,13 +76,14 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	 * This method must be call after a successful generation to put an XML file
 	 * into the gen path that will be used to know what have been deployed.
 	 * Mainly use for log purpose.
-	 * 
+	 *
 	 * @throws CoreException
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
 	public final void createStampFile() throws CoreException, FileNotFoundException, IOException {
-		IFolder ff = IFileHelper.createFolder(getTargetPath() + System.getProperty("file.separator") + techVersion);
+		IFileHelper.refreshFolder(getTargetPath());
+		IFolder	ff = IFileHelper.createFolder(getTargetPath() + System.getProperty("file.separator") + techVersion);
 		Element racine = new Element("toDeploy");
 		Attribute classe = new Attribute("id", this.id);
 		racine.setAttribute(classe);
@@ -94,7 +95,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Add a Log
-	 * 
+	 *
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -110,7 +111,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Add an Error Log
-	 * 
+	 *
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -121,7 +122,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Add an error log using a stracktrace instead of a string description
-	 * 
+	 *
 	 * @param title
 	 * @param stackTrace
 	 * @param uri
@@ -138,7 +139,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Add a warning log
-	 * 
+	 *
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -154,7 +155,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Add information log
-	 * 
+	 *
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -170,7 +171,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	/**
 	 * Add a service log (service : a webpage or a file that can be acceeded by
 	 * user to test application).
-	 * 
+	 *
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -185,7 +186,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Use to log generated file
-	 * 
+	 *
 	 * @param path
 	 * @param description
 	 * @param uri
@@ -208,7 +209,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Return the log target file (only generator)
-	 * 
+	 *
 	 * @return
 	 */
 	protected String getLogFile() {
@@ -218,7 +219,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Return the absolute path to the generation target path
-	 * 
+	 *
 	 * @return
 	 */
 	protected final String getTargetSystemPath() {
@@ -228,7 +229,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Return the generation target folder (as File).
-	 * 
+	 *
 	 * @return
 	 */
 	protected final File getTargetSystemFile() {
@@ -238,7 +239,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Return the target path (workspace path)
-	 * 
+	 *
 	 * @return
 	 */
 	public final String getTargetPath() {
@@ -247,7 +248,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Return if generation might be verbose or not
-	 * 
+	 *
 	 * @return
 	 */
 	protected static boolean doVerbose() {
@@ -259,7 +260,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Return if cleaning might be done or not.
-	 * 
+	 *
 	 * @return
 	 */
 	protected static boolean doClean() {
@@ -292,7 +293,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Return the absolute path for temp folder of generation
-	 * 
+	 *
 	 * @return
 	 */
 	protected final String getTemporarySystemFolder() {
@@ -305,13 +306,13 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Return the tempory path to temp folder of generation (wokspace path)
-	 * 
+	 *
 	 * @return
 	 */
 	protected final String getTemporaryFolder() {
 		return getTargetPath() + File.separator + getTEMP_FOLDER();
 	}
-	
+
 	protected final File getFinalFolder() {
 		return new File(getTargetSystemPath() + File.separator + techVersion);
 	}
@@ -328,7 +329,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * This method check if the user have the license to use this component.
-	 * 
+	 *
 	 * @return true if the component can be used.
 	 */
 	public boolean check() {
@@ -338,7 +339,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	/**
 	 * use DependencesManager to get files required by the generated package and
 	 * copy them in the technology version folder
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void addDependences() throws Exception {
