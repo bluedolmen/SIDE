@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.bluexml.side.Integration.alfrescoShare</groupId>
 	<artifactId>com.bluexml.side.Integration.alfrescoShare.doclist</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<packaging>zip</packaging>
 	<build>
 		<extensions>
@@ -34,6 +34,14 @@
 			</plugin>
 		</plugins>
 	</build>
+	<dependencies>
+		<dependency>
+			<groupId>com.bluexml.side.Integration.alfresco</groupId>
+			<artifactId>com.bluexml.side.Integration.alfresco.upload</artifactId>
+			<version>[0.0.1,)</version>
+			<type>amp</type>
+		</dependency>
+	</dependencies>
 	<distributionManagement>
 		<!-- use the following if you're not using a snapshot version. -->
 		<repository>
