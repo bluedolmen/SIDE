@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="com.bluexml.side.Application.com_bluexml_application_configuration">
+      <metamodel
+            description="Check this to generate form models on leading frameworks.&lt;br&gt; This Form Metamodel allows to model Web Forms to integrate in your web application or web framework customizations.&lt;br&gt;S-IDE provides the modeler to graphically produce form models and various generators to instantiate these models on leading frameworks."
+            id="http://www.kerblue.org/form/1.0"
+            name="KSR400 Form"
+            url="http://www.kerblue.org/v2/ksr500-form/">
+         <technology
+               description="Generate documentation (in docbook) for the models of the metamodel."
+               id="docbook"
+               name="docBook"
+               url="http://www.docbook.org/">
+            <technologyVersion
+                  id="docbook_4.x"
+                  version="Docbook 4.x">
+               <generatorVersion
+                     class="com.bluexml.side.form.generator.documentation.FormDocumentationGenerator"
+                     hidden="hidden and used by default"
+                     id="com.bluexml.side.Form.generator.documentation"
+                     version="S-IDE Class Documentation Generator 1.0.0">
+               </generatorVersion>
+            </technologyVersion>
+         </technology>
+      </metamodel>
+   </extension>
+
+</plugin>
