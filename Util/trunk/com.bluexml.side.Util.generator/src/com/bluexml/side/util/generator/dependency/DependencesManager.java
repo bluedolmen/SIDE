@@ -30,6 +30,7 @@ public class DependencesManager {
 	
 
 //	public List<ModuleConstraint> getContraints() throws Exception {
+	// // made to avoid conflict between generators module dependencies (2 generators than depends of same Integration module but with 2 different versions)
 //		if (tech_v_dep_ == null) {
 //			tech_v_dep_ = new ArrayList<ModuleConstraint>();
 //			Map<String, List<ModuleConstraint>> byId = new HashMap<String, List<ModuleConstraint>>();
@@ -64,10 +65,9 @@ public class DependencesManager {
 //
 //	}
 
-	public List<File> getDependencesPackages(File workFolder) throws Exception {
+	public void copyDependencies(File workFolder,File whereToCopyDependencies) throws Exception {
 		MavenTmpProject mvp = new MavenTmpProject(workFolder, this);
-		List<File> resources = mvp.getAllDependenciesResources();
-		return resources;
+		mvp.copyAllDependencies(whereToCopyDependencies);
 	}
 
 

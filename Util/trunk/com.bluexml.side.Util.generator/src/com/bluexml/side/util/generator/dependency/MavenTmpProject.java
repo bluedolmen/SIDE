@@ -3,10 +3,9 @@ package com.bluexml.side.util.generator.dependency;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.execution.MavenExecutionResult;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -20,55 +19,25 @@ import com.bluexml.side.util.libs.FileHelper;
 public class MavenTmpProject {
 	private File pomFile;
 	private File projectFolder;
-	private File workFolder;
 	private MavenUtil mavenUtil;
 	private static final String TARGET_ARTIFACT = "tmpProject";
 
 	private DependencesManager dm;
 	private static final SAXBuilder sxb = new SAXBuilder();
 	private static final XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
-	File tpmProject;
+	
 
-	public MavenTmpProject() throws Exception {
-		this.workFolder = new File(".");
-	}
-
-	public MavenTmpProject(File workingFolder) throws Exception {
-		this.workFolder = workingFolder;
-	}
 
 	public MavenTmpProject(File workingFolder, DependencesManager dm) throws Exception {
-		this.workFolder = workingFolder;
 		this.dm = dm;
-	}
-
-	private void createAndGetDependencies() throws Exception {
-		FileHelper.deleteFile(tpmProject);
-		createProject();
-		prepareProject(dm);
-		getDependences();
+		projectFolder = new File(workingFolder,TARGET_ARTIFACT);
+		boolean deleted = FileHelper.deleteFile(projectFolder);
+		boolean created = projectFolder.mkdirs();
 	}
 
 
-	/**
-	 * update pom file to add wanted dependencies
-	 * 
-	 * @throws Exception
-	 */
-	private void prepareProject(DependencesManager dm) throws Exception {
-		Document pom = sxb.build(pomFile);
-		Element project = pom.getRootElement();
-		Namespace n = project.getNamespace();
-		Element dependencies = project.getChild("dependencies", n);
-		for (ModuleConstraint mc : dm.getContraints()) {
-			Element depends = buildPomDependency(n, mc);
-			dependencies.addContent(depends);
-		}
-		FileOutputStream os = new FileOutputStream(pomFile);
-		outputter.output(pom, os);
-		os.close();
 
-	}
+	
 
 	/**
 	 * build pom dependency fragment from ModuleConstraint
@@ -90,79 +59,45 @@ public class MavenTmpProject {
 		return depends;
 	}
 
-	/**
-	 * call package maven lifeCircle, so maven get all dependencies from
-	 * repositories to local
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	private void getDependences() throws Exception {
-		// resolve version ranges for dependencies (replace by used version
-		// number)
-		MavenExecutionResult result = getMavenUtil().doMavenGoal(tpmProject, "versions:resolve-ranges");
-		if (result.getExceptions().size() > 0) {
-			List<?> exceps = result.getExceptions();
-			System.err.println("Exception occure during maven process :" + exceps);
-			throw new Exception("Exception occure during maven process :" + exceps);
-		}
-
-		// call compile goal to get dependencies in local repository
-		MavenExecutionResult result2 = getMavenUtil().doMavenGoal(tpmProject, "compile");
-		if (result2.getExceptions().size() > 0) {
-			List<?> exceps = result2.getExceptions();
-			System.err.println("Exception occure during maven process :" + exceps);
-			throw new Exception("Exception occure during maven process :" + exceps);
-		}
-	}
+	
 
 	/**
-	 * call maven to build a maven project
+	 * create a maven project including dependencies from the generated modules
 	 * 
 	 * @return
 	 * @throws Exception
 	 */
 	private void createProject() throws Exception {
-		projectFolder = new File(workFolder, TARGET_ARTIFACT);
-		projectFolder.mkdirs();
-
 		pomFile = new File(projectFolder, "pom.xml");
 		InputStream in = this.getClass().getResourceAsStream("model.pom.xml");
 		// copy the default pom to the tmpProject
 		FileHelper.writeStreamInFile(pomFile, in);
 
-	}
-
-	public List<File> getAllDependenciesResources() throws Exception {
-		List<File> dependencies = new ArrayList<File>();
-		createAndGetDependencies();
+		// add dependencies entries
 		Document pom = sxb.build(pomFile);
-		ArtifactRepository artRep = getMavenUtil().getEmbedder().getLocalRepository();
-		System.out.println(artRep.getBasedir());
-		System.out.println(artRep.getUrl());
-		File f = new File(artRep.getBasedir());
-		if (f.exists()) {
-			List<ModuleConstraint> l = dm.getContraints();
-			for (ModuleConstraint moduleConstraint : l) {
-				String path = moduleConstraint.getGroupId().replaceAll("\\.", File.separator) + File.separator + moduleConstraint.getArtifactId();
-				// String version = moduleConstraint.getVersionMin().toString();
-				String version = MavenUtil.getVersionOf(pom, moduleConstraint.getGroupId(), moduleConstraint.getArtifactId());
-				path += File.separator + version;
-				String moduleName = moduleConstraint.getArtifactId() + "-" + version + "." + moduleConstraint.getModuleType();
-				File localmodule = new File(f.getAbsolutePath() + File.separator + path + File.separator + moduleName);
-				if (localmodule.exists()) {
-					dependencies.add(localmodule);
-				} else {
-					throw new Exception("local package not found ! " + localmodule);
-				}
-			}
-		} else {
-			throw new Exception("local repository not found !");
+		Element project = pom.getRootElement();
+		Namespace n = project.getNamespace();
+		Element dependencies = project.getChild("dependencies", n);
+		for (ModuleConstraint mc : dm.getContraints()) {
+			Element depends = buildPomDependency(n, mc);
+			dependencies.addContent(depends);
 		}
-		return dependencies;
+		FileOutputStream os = new FileOutputStream(pomFile);
+		outputter.output(pom, os);
+		os.close();
 	}
 	
-
+	public void copyAllDependencies(File whereTocopy) throws Exception {
+		createProject();
+		HashMap<String, String> params = new HashMap<String,String>();
+		params.put("outputDirectory", whereTocopy.getAbsolutePath());
+		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:copy-dependencies",params);
+		if (result.getExceptions().size() > 0) {
+			List<?> exceps = result.getExceptions();
+			System.err.println("Exception occure during maven process :" + exceps);
+			throw new Exception("Exception occure during maven process :" + exceps);
+		}
+	}
 	
 	private MavenUtil getMavenUtil() {
 		if (mavenUtil ==null) {

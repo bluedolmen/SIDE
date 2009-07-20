@@ -344,13 +344,9 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	 */
 	public void addDependences() throws Exception {
 		// get dependences
-		List<File> resources = dm.getDependencesPackages(getTemporarySystemFile());
-		// copy them into target (<generated>/<technologieVersion>)
-		for (File file : resources) {
-			//System.out.println("add dependencies :" + file);
-			FileHelper.copyFiles(file, getFinalFolder(), false);
-		}
+		dm.copyDependencies(getTemporarySystemFile(),getFinalFolder());
 		// dependences packages is now with other resources in the target folder
 
+		
 	}
 }
