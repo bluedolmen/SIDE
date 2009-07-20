@@ -26,6 +26,8 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see com.bluexml.side.view.ViewPackage#getField()
  * @model abstract="true"
+ *        annotation="http://www.bluexml.com/OCL noFieldMapped='not self.mapTo.oclIsUndefined()'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='noFieldMapped'"
  * @generated
  */
 public interface Field extends FieldElement {

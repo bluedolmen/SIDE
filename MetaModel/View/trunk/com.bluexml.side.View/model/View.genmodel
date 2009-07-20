@@ -144,6 +144,9 @@
     <genClasses image="false" ecoreClass="View.ecore#//Paginable">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//Paginable/paging"/>
     </genClasses>
+    <genClasses ecoreClass="View.ecore#//Actionable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//Actionable/operations"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="View.ecore#//Sortable">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//Sortable/sorting"/>
     </genClasses>
@@ -157,8 +160,5 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//Filterable/filtering"/>
     </genClasses>
     <genClasses ecoreClass="View.ecore#//FieldGroup"/>
-    <genClasses ecoreClass="View.ecore#//Actionable">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference View.ecore#//Actionable/operations"/>
-    </genClasses>
   </genPackages>
 </genmodel:GenModel>

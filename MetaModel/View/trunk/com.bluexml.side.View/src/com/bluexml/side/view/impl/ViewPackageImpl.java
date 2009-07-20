@@ -1744,10 +1744,10 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		// Create annotations
 		// http://www.bluexml.com/OCL
 		createOCLAnnotations();
-		// http://www.eclipse.org/emf/2002/Ecore
-		createEcoreAnnotations();
 		// http://www.topcased.org/documentation
 		createDocumentationAnnotations();
+		// http://www.eclipse.org/emf/2002/Ecore
+		createEcoreAnnotations();
 	}
 
 	/**
@@ -1757,7 +1757,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * @generated
 	 */
 	protected void createDocumentationAnnotations() {
-		String source = "http://www.topcased.org/documentation";													
+		String source = "http://www.topcased.org/documentation";											
 		addAnnotation
 		  (getAbstractDataTable_HaveRowActions(), 
 		   source, 
@@ -1775,7 +1775,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "use this to setup default actions available on each colomn"
-		   });							
+		   });									
 	}
 
 	/**
@@ -1785,13 +1785,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * @generated
 	 */
 	protected void createOCLAnnotations() {
-		String source = "http://www.bluexml.com/OCL";				
-		addAnnotation
-		  (fieldElementEClass, 
-		   source, 
-		   new String[] {
-			 "noFieldMapped", "not self.mapTo.oclIsUndefined()"
-		   });				
+		String source = "http://www.bluexml.com/OCL";					
 		addAnnotation
 		  (abstractViewEClass.getEOperations().get(0), 
 		   source, 
@@ -1840,6 +1834,12 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		   new String[] {
 			 "body", "self.children->select(oclIsKindOf(AbstractView))->asOrderedSet()->first().oclAsType(AbstractView).children->select(oclIsKindOf(FieldElement))",
 			 "description", "Get the first element of the abstract View in the Facetmap"
+		   });			
+		addAnnotation
+		  (fieldEClass, 
+		   source, 
+		   new String[] {
+			 "noFieldMapped", "not self.mapTo.oclIsUndefined()"
 		   });		
 	}
 
@@ -1850,13 +1850,13 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";					
+		String source = "http://www.eclipse.org/emf/2002/Ecore";																					
 		addAnnotation
-		  (fieldElementEClass, 
+		  (fieldEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "noFieldMapped"
-		   });																	
+		   });	
 	}
 
 } //ViewPackageImpl
