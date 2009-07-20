@@ -28,14 +28,14 @@ import com.bluexml.side.util.generator.documentation.services.DocumentationServi
 	<%for (getAllClasses().sort()) {%>
 	<chapter>
 		<title><%getLabel()%></title>
-		<para><%documentation%></para>
+		<para><%if (documentation != null){%><%documentation%><%}%></para>
 		<sect1>
 			<title>Attributes for <%getLabel()%></title>
 			<para></para>
 			<%for (getAllAttributes()){%>
 				<sect2>
 					<title><%getLabel()%></title>
-					<para><%documentation%></para>
+					<para><%if (documentation != null){%><%documentation%><%}%></para>
 				</sect2>
 			<%}%>
 		</sect1>
@@ -45,8 +45,7 @@ import com.bluexml.side.util.generator.documentation.services.DocumentationServi
 			<%for (getAllSourceAssociations()){%>
 				<sect2>
 					<title><%getLabel()%></title>
-					<para><%documentation%>
-					</para>
+					<para><%if (documentation != null){%><%documentation%><%}%></para>
 				</sect2>
 			<%}%>
 		</sect1>
