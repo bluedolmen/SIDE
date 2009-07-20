@@ -84,6 +84,7 @@ import com.bluexml.side.application.ApplicationPackage;
 import com.bluexml.side.application.ComponantConfiguration;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ConfigurationParameters;
+import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.Option;
@@ -193,7 +194,13 @@ public class ApplicationDialog extends Dialog {
 			loadingTree = true;
 			String name = configurationList.getItem(configurationList.getSelectionIndex());
 			Configuration configuration = application.getConfiguration(name);
-
+			try {
+				ApplicationUtil.updateConfigurationFromExtensionPoint(configuration);
+				// apply updates
+				saveData();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			// Refresh documentation
 			if (configuration != null)
 				if (configuration.getDescription() != null)
@@ -217,6 +224,7 @@ public class ApplicationDialog extends Dialog {
 
 	}
 
+	
 	private void refreshModelPropertiesTable() {
 		if (list.getSelection().length == 1) {
 			modelPropertiesTable.setVisible(true);

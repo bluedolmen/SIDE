@@ -11,7 +11,6 @@ import org.eclipse.core.runtime.IConfigurationElement;
  *
  */
 public abstract class ImplNode extends TreeNode {
-	protected String id;
 	protected String version;
 	protected String launchClass;
 	protected Set<TreeNode> options = new HashSet<TreeNode>();
@@ -49,16 +48,6 @@ public abstract class ImplNode extends TreeNode {
 		updateApplication();
 	}
 	public abstract void updateApplication();
-
-
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getVersion() {
 		return version;

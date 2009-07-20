@@ -10,9 +10,11 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -21,6 +23,7 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 
 import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.application.Application;
+import com.bluexml.side.application.ApplicationFactory;
 import com.bluexml.side.application.ComponantConfiguration;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ConfigurationParameters;
@@ -28,10 +31,16 @@ import com.bluexml.side.application.DeployerConfiguration;
 import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModelElement;
+import com.bluexml.side.application.ModuleConstraint;
+import com.bluexml.side.application.Option;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
+import com.bluexml.side.application.ui.action.tree.ConfigurationContentProvider;
 import com.bluexml.side.application.ui.action.tree.Deployer;
 import com.bluexml.side.application.ui.action.tree.Generator;
 import com.bluexml.side.application.ui.action.tree.ImplNode;
+import com.bluexml.side.application.ui.action.tree.Metamodel;
+import com.bluexml.side.application.ui.action.tree.Technology;
+import com.bluexml.side.application.ui.action.tree.TechnologyVersion;
 import com.bluexml.side.application.ui.action.tree.TreeElement;
 import com.bluexml.side.util.security.Checkable;
 
@@ -39,7 +48,7 @@ public class ApplicationUtil {
 	/**
 	 * Return the configuration corresponding to the given key in the current
 	 * configuration. Return null if not found.
-	 *
+	 * 
 	 * @param key
 	 * @return
 	 */
@@ -60,7 +69,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return models of the application
-	 *
+	 * 
 	 * @param application
 	 * @return
 	 */
@@ -76,6 +85,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Delete the given generator from the given configuration
+	 * 
 	 * @param config
 	 * @param in
 	 */
@@ -83,9 +93,7 @@ public class ApplicationUtil {
 		Set<GeneratorConfiguration> eltsGc = new HashSet<GeneratorConfiguration>();
 
 		for (GeneratorConfiguration gc : config.getGeneratorConfigurations()) {
-			if (gc.getId().equals(in.getId())
-					&& gc.getId_techno_version().equals(in.getParent().getId())
-					&& gc.getId_metamodel().equals(in.getParent().getParent().getParent().getId()) ) {
+			if (gc.getId().equals(in.getId()) && gc.getId_techno_version().equals(in.getParent().getId()) && gc.getId_metamodel().equals(in.getParent().getParent().getParent().getId())) {
 				eltsGc.add(gc);
 			}
 		}
@@ -94,16 +102,14 @@ public class ApplicationUtil {
 
 	/**
 	 * Delete the given deployer from the given configuration
+	 * 
 	 * @param config
 	 * @param in
 	 */
-	public static void deleteDeployerFromConf(Configuration config,
-			Deployer in) {
+	public static void deleteDeployerFromConf(Configuration config, Deployer in) {
 		Set<DeployerConfiguration> eltsDc = new HashSet<DeployerConfiguration>();
 		for (DeployerConfiguration dc : config.getDeployerConfigurations()) {
-			if(dc.getId().equals(in.getId())
-					&& dc.getId_techno_version().equals(in.getParent().getId())
-					&& dc.getImpl_class().equals(((Deployer)in).getLaunchClass())) {
+			if (dc.getId().equals(in.getId()) && dc.getId_techno_version().equals(in.getParent().getId()) && dc.getImpl_class().equals(((Deployer) in).getLaunchClass())) {
 				eltsDc.add(dc);
 			}
 		}
@@ -112,6 +118,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the list of componant configuration for a specific config
+	 * 
 	 * @param config
 	 * @return
 	 */
@@ -141,7 +148,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return a map with association model <> metaModel name
-	 *
+	 * 
 	 * @param models
 	 * @param doValidation
 	 * @return
@@ -173,13 +180,13 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the metamodel of a given model
+	 * 
 	 * @param model
 	 * @param file
 	 * @return
 	 * @throws IOException
 	 */
-	public static EPackage getMetaModelForModel(Model model)
-			throws IOException {
+	public static EPackage getMetaModelForModel(Model model) throws IOException {
 		Resource loadedModel = getResourceForModel(model);
 		EPackage metaModel = getMetaModelEpackage(loadedModel);
 		return metaModel;
@@ -187,13 +194,13 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the resource for the given model and resource set
+	 * 
 	 * @param rs
 	 * @param file
 	 * @return
 	 * @throws IOException
 	 */
-	public static Resource getResourceForModel(Model model)
-			throws IOException {
+	public static Resource getResourceForModel(Model model) throws IOException {
 		ResourceSet rs = getRessourceSetForModel(model);
 		IFile file = getIFileForModel(model);
 		String fullPath = file.getRawLocation().toOSString();
@@ -210,6 +217,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the IFiel for the given Model
+	 * 
 	 * @param model
 	 * @return
 	 * @throws IOException
@@ -224,6 +232,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the ressourceSet for a model
+	 * 
 	 * @param model
 	 * @return
 	 * @throws IOException
@@ -241,7 +250,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the meta model EPackage
-	 *
+	 * 
 	 * @param r
 	 * @return
 	 */
@@ -257,7 +266,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the root element of a model
-	 *
+	 * 
 	 * @param model
 	 * @return
 	 */
@@ -273,7 +282,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Take a EObject and will return the top container
-	 *
+	 * 
 	 * @param eo
 	 * @return
 	 */
@@ -287,7 +296,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Launch validation on given EObject
-	 *
+	 * 
 	 * @param eo
 	 * @return
 	 */
@@ -296,7 +305,6 @@ public class ApplicationUtil {
 		BasicDiagnostic diagnostics = diag.createDefaultDiagnostic(eo);
 		return diag.validate(eo, diagnostics);
 	}
-
 
 	public static boolean validate(IFile modelFile) throws IOException {
 		Resource loadedModel = null;
@@ -328,7 +336,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Check if the element given is active in the key
-	 *
+	 * 
 	 * @param el
 	 *            : the element
 	 * @return true if valid, false if not
@@ -356,5 +364,196 @@ public class ApplicationUtil {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 * take a configuration and update all properties from SIDE extension, this manage :
+	 * <li> deleted elements (options, dependencies)</li> 
+	 * <li> added elements</li>
+	 * <li> updates elements</li>
+	 * @param config
+	 * @throws Exception
+	 */
+	public static void updateConfigurationFromExtensionPoint(Configuration config) throws Exception {
+
+		// scan all generator
+		List<GeneratorConfiguration> lgen = config.getGeneratorConfigurations();
+		for (GeneratorConfiguration generatorConfiguration : lgen) {
+			String id = generatorConfiguration.getId();
+			// get the extension declaration fragment
+			IConfigurationElement extFrag = getIConfigurationElement(generatorConfiguration);
+			IConfigurationElement techVersion = (IConfigurationElement) extFrag.getParent();
+			IConfigurationElement technology = (IConfigurationElement) techVersion.getParent();
+			IConfigurationElement metamodel = (IConfigurationElement) technology.getParent();
+
+			// must update properties
+
+			generatorConfiguration.setId_metamodel(metamodel.getAttribute("id"));
+			generatorConfiguration.setMetaModelName(metamodel.getAttribute("name"));
+
+			generatorConfiguration.setTechnologyName(technology.getAttribute("id"));
+
+			generatorConfiguration.setId_techno_version(techVersion.getAttribute("id"));
+			generatorConfiguration.setTechnologyVersionName(techVersion.getAttribute("version"));
+
+			generatorConfiguration.setGeneratorName(extFrag.getAttribute("version"));
+			generatorConfiguration.setImpl_class(extFrag.getAttribute("class"));
+
+			// check options
+			EList<Option> options = generatorConfiguration.getOptions();
+			List<String> options_ext = new ArrayList<String>();
+			IConfigurationElement[] arrayOfoptions_ext = extFrag.getChildren("option");
+			for (IConfigurationElement configurationElement : arrayOfoptions_ext) {
+				options_ext.add(configurationElement.getAttribute("id"));
+			}
+
+			List<Option> optionsToRemove = new ArrayList<Option>();
+			for (Option option : options) {
+				// check if defined
+				if (!options_ext.contains(option.getKey())) {
+					// remove this
+					optionsToRemove.add(option);
+				} else {
+					// check option constraints
+
+				}
+			}
+			generatorConfiguration.getOptions().removeAll(optionsToRemove);
+
+			// check dependencies
+			Map<String, IConfigurationElement> dependencies_ext = new HashMap<String, IConfigurationElement>();
+			IConfigurationElement[] arrayOfdependencies_ext = extFrag.getChildren("moduleDependence");
+			for (IConfigurationElement configurationElement : arrayOfdependencies_ext) {
+				dependencies_ext.put(configurationElement.getAttribute("moduleId"), configurationElement);
+			}
+
+			EList<ModuleConstraint> mcs = generatorConfiguration.getModuleContraints();
+			List<String> updatedConstraints = new ArrayList<String>();
+			List<ModuleConstraint> mcsToRemove = new ArrayList<ModuleConstraint>();
+			for (ModuleConstraint moduleConstraint : mcs) {
+				if (!dependencies_ext.values().contains(moduleConstraint.getModuleId())) {
+					// to remove
+					mcsToRemove.add(moduleConstraint);
+				} else {
+					// update
+					IConfigurationElement configurationElement = dependencies_ext.get(moduleConstraint.getModuleId());
+					moduleConstraint.setModuleType(configurationElement.getAttribute("moduleType"));
+					moduleConstraint.setVersionMax(configurationElement.getAttribute("versionMax"));
+					moduleConstraint.setVersionMin(configurationElement.getAttribute("versionMin"));
+					updatedConstraints.add(moduleConstraint.getModuleId());
+				}
+			}
+			generatorConfiguration.getModuleContraints().removeAll(mcsToRemove);
+
+			// add new constraints
+			List<String> lnewConstraints = new ArrayList<String>();
+			Set<String> s = dependencies_ext.keySet();
+			s.removeAll(updatedConstraints);
+			lnewConstraints.addAll(s);
+			for (String string : lnewConstraints) {
+				IConfigurationElement newConstraint_ext = dependencies_ext.get(string);
+				ModuleConstraint moduleConstraint = ApplicationFactory.eINSTANCE.createModuleConstraint();
+				moduleConstraint.setModuleId(newConstraint_ext.getAttribute("moduleId"));
+				moduleConstraint.setModuleType(newConstraint_ext.getAttribute("moduleType"));
+				moduleConstraint.setVersionMax(newConstraint_ext.getAttribute("versionMax"));
+				moduleConstraint.setVersionMin(newConstraint_ext.getAttribute("versionMin"));
+				generatorConfiguration.getModuleContraints().add(moduleConstraint);
+			}
+		}
+
+	}
+
+	/**
+	 * search in all SIDE extension, an extension fragment that match with this
+	 * ComponantConfiguration
+	 * 
+	 * @param conf
+	 * @return
+	 * @throws Exception
+	 */
+	public static IConfigurationElement getIConfigurationElement(ComponantConfiguration conf) throws Exception {
+		IConfigurationElement[] contributions = Platform.getExtensionRegistry().getConfigurationElementsFor(ConfigurationContentProvider.EXTENSIONPOINT_ID);
+		for (IConfigurationElement config_exp : contributions) {
+			System.err.println("DEBUG getIConfigurationElement: " + config_exp.getName() + " " + config_exp.getNamespaceIdentifier() + " (" + config_exp.getAttribute("id") + " " + config_exp.getAttribute("name") + ")");
+			Map<String, String> query = new HashMap<String, String>();
+			query.put("id", conf.getId());
+			String nodeName = "";
+			if (conf instanceof GeneratorConfiguration) {
+				nodeName = "generatorVersion";
+			} else {
+				nodeName = "deployerVersion";
+			}
+			List<IConfigurationElement> matchs = getIConfigurationElementBy(config_exp, nodeName, query);
+			if (matchs.size() == 1) {
+				return matchs.get(0);
+			} else if (matchs.size() > 1) {
+				throw new Exception("something wrong in extension entries");
+			}
+		}
+		throw new Exception("Extension fragment not found");
+	}
+
+	/**
+	 * search in extension fragment that match with given name and a set of
+	 * attributes
+	 * 
+	 * @param parent
+	 * @param nodeName
+	 * @param parametersMatchs
+	 * @return
+	 */
+	public static List<IConfigurationElement> getIConfigurationElementBy(IConfigurationElement parent, String nodeName, Map<String, String> parametersMatchs) {
+		List<IConfigurationElement> l = getIConfigurationElementsByName(parent, nodeName);
+		ArrayList<IConfigurationElement> result = new ArrayList<IConfigurationElement>();
+		for (IConfigurationElement configurationElement : l) {
+			if (parametersMatchs(configurationElement, parametersMatchs)) {
+				result.add(configurationElement);
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * return a list of extension fragment that match with the given name
+	 * 
+	 * @param parent
+	 * @param name
+	 * @return
+	 */
+	public static List<IConfigurationElement> getIConfigurationElementsByName(IConfigurationElement parent, String name) {
+		ArrayList<IConfigurationElement> l = new ArrayList<IConfigurationElement>();
+		if (parent.getName().equals(name)) {
+			l.add(parent);
+		}
+		for (IConfigurationElement configurationElement : parent.getChildren()) {
+			List<IConfigurationElement> ll = getIConfigurationElementsByName(configurationElement, name);
+			l.addAll(ll);
+		}
+		return l;
+	}
+
+	/**
+	 * test if the given extension fragment match with all attributes values
+	 * 
+	 * @param node
+	 * @param parametersMatchs
+	 * @return
+	 */
+	public static boolean parametersMatchs(IConfigurationElement node, Map<String, String> parametersMatchs) {
+		Set<String> g = new HashSet<String>();
+		String[] attrs = node.getAttributeNames();
+		for (String string : attrs) {
+			g.add(string);
+		}
+		boolean okSubSet = g.containsAll(parametersMatchs.keySet());
+		if (!okSubSet) {
+			return false;
+		}
+		for (Map.Entry<String, String> match : parametersMatchs.entrySet()) {
+			if (!node.getAttribute(match.getKey()).equals(match.getValue())) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

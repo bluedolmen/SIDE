@@ -32,7 +32,7 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 	private Map<String, GeneratorParameter> deployerParameters;
 	private Map<String, List<String>> genParamConfByGenerator;
 	private Map<String, List<String>> deployParamConfByGenerator;
-	private static String EXTENSIONPOINT_ID = "com.bluexml.side.Application.com_bluexml_application_configuration";
+	public static String EXTENSIONPOINT_ID = "com.bluexml.side.Application.com_bluexml_application_configuration";
 	private List<TreeNode> toCheck = new ArrayList<TreeNode>();
 
 	public ConfigurationContentProvider(Class<?> p_neededRootClass, List<?> p_ommitedObject,

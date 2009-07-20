@@ -25,7 +25,6 @@
                   <moduleDependence
                         moduleId="com.bluexml.side.Integration.alfrescoShare.doclist"
                         moduleType="zip"
-                        new_attribute="toto"
                         versionMin="1.0.0">
                   </moduleDependence>
                   <mustBeUnchecked
