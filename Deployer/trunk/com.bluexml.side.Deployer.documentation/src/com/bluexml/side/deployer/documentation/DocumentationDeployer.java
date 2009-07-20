@@ -24,7 +24,7 @@ public class DocumentationDeployer extends Deployer {
 	protected void deployProcess(File fileToDeploy) throws Exception {
 		IContainer src = IFileHelper.getIFolder(fileToDeploy);
 		if (src != null) {
-			IFolder dest = IFileHelper.createFolder(getConfigurationParameters().get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + File.separator + getConfigurationParameters().get("configurationName") + File.separator + LogSave.LOG_DOC_FOLDER);
+			IFolder dest = IFileHelper.createFolder(getConfigurationParameters().get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + File.separator + getConfigurationParameters().get("configurationName") + File.separator + LogSave.LOG_DOC_FOLDER + File.separator);
 			IFileHelper.refreshFolder((IFolder)src);
 			List<IFile> toDeploy = IFileHelper.getAllFiles(src);
 			for (IFile xmlFile : toDeploy)
