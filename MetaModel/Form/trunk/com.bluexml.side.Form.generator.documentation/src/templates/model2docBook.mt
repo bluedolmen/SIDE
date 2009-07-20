@@ -14,9 +14,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Boston, MA 02111.
  --%>
- <%--/metamodel http://www.kerblue.org/form/1.0--%>
+ <%--/metamodel /com.bluexml.side.Form/model/Forms.ecore--%>
 <%
-metamodel /com.bluexml.side.Form/model/Forms.ecore
+metamodel http://www.kerblue.org/form/1.0
 import com.bluexml.side.util.generator.documentation.services.DocumentationServices
 %>
 <%script type="form.FormCollection" name="validatedFilename"%>
