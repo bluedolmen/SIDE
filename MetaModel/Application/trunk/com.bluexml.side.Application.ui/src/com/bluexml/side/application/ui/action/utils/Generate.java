@@ -45,6 +45,7 @@ public class Generate extends Thread {
 	private StyledText styletext;
 	private String logPath;
 	private Browser logLink;
+	private String genPath;
 
 	/**
 	 * Launch generation on all generator version selected
@@ -130,7 +131,22 @@ public class Generate extends Thread {
 		if (!modelWithError) {
 			addOneStep(progressBar);
 			logPath = getLogPath(configuration, configurationParameters);
+			genPath = getGenerationPath(configuration, configurationParameters);
 			generate(configuration, modelsInfo, configurationParameters, generationParameters);
+			// Refresh log and generation folder
+			refreshFolders();
+		}
+	}
+
+	/**
+	 * Refresh log and generation paths
+	 */
+	private void refreshFolders() {
+		try {
+			IFileHelper.refreshFolder(logPath);
+			IFileHelper.refreshFolder(genPath);
+		} catch (CoreException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -143,6 +159,10 @@ public class Generate extends Thread {
 	 */
 	private String getLogPath(Configuration configuration, Map<String, String> configurationParameters) {
 		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + System.getProperty("file.separator") + configuration.getName();
+	}
+
+	private String getGenerationPath(Configuration configuration, Map<String, String> configurationParameters) {
+		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral()) + System.getProperty("file.separator") + configuration.getName();
 	}
 
 	private void addText(String text) {
