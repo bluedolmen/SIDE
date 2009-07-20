@@ -3,7 +3,7 @@ package com.bluexml.side.application.ui.action.tree;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
+import com.bluexml.side.util.dependencies.ModuleConstraint;
 public abstract class TreeNode extends TreeElement {
 	protected String id;
 	protected TreeNode parent;
@@ -19,9 +19,9 @@ public abstract class TreeNode extends TreeElement {
 
 	protected List<CheckConstraints> mustbechecked = new ArrayList<CheckConstraints>();
 	protected List<CheckConstraints> mustbeUnchecked = new ArrayList<CheckConstraints>();
-	protected List<ModuleConstraints> integrationModules = new ArrayList<ModuleConstraints>();
+	protected List<ModuleConstraint> integrationModules = new ArrayList<ModuleConstraint>();
 
-	public List<ModuleConstraints> getIntegrationModules() {
+	public List<ModuleConstraint> getIntegrationModules() {
 		return integrationModules;
 	}
 

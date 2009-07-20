@@ -32,8 +32,8 @@ import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.util.deployer.Deployer;
 import com.bluexml.side.util.documentation.LogSave;
 import com.bluexml.side.util.generator.AbstractGenerator;
-import com.bluexml.side.util.generator.dependency.DependencesManager;
-import com.bluexml.side.util.generator.dependency.ModuleConstraint;
+import com.bluexml.side.util.dependencies.DependencesManager;
+import com.bluexml.side.util.dependencies.ModuleConstraint;
 import com.bluexml.side.util.libs.IFileHelper;
 
 public class Generate extends Thread {

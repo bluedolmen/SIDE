@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 
-import com.bluexml.side.util.generator.dependency.DependencesManager;
+import com.bluexml.side.util.dependencies.DependencesManager;
 
 public interface IGenerator {
 

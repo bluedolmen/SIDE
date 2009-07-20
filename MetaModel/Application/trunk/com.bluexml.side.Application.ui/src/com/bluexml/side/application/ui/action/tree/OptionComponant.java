@@ -30,7 +30,7 @@ public abstract class OptionComponant extends TreeNode {
 				mustbeUnchecked.add(new CheckConstraints(child, this));
 			}
 			if (child.getName().equalsIgnoreCase("moduleDependence")) {
-				integrationModules.add(new ModuleConstraints(child, this));
+				integrationModules.add(new ModuleConstraint(child, this));
 			}
 		}
 

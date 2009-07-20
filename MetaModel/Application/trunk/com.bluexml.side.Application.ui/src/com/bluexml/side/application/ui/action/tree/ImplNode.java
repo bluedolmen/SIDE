@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IConfigurationElement;
-
 /**
  * this class match to all Plugins that implements extension for Generator or Deployer and other plugins like thats
  * @author davidabad
@@ -30,7 +29,7 @@ public abstract class ImplNode extends TreeNode {
 				mustbeUnchecked.add(new CheckConstraints(child,this));
 			}
 			if (child.getName().equalsIgnoreCase("moduleDependence")) {
-				integrationModules.add(new ModuleConstraints(child,this));
+				integrationModules.add(new ModuleConstraint(child,this));
 			}
 		}
 

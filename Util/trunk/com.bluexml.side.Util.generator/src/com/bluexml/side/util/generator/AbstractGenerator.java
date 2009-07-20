@@ -22,7 +22,7 @@ import com.bluexml.side.util.documentation.structure.LogEntry;
 import com.bluexml.side.util.documentation.structure.SIDELog;
 import com.bluexml.side.util.documentation.structure.enumeration.LogEntryType;
 import com.bluexml.side.util.documentation.structure.enumeration.LogType;
-import com.bluexml.side.util.generator.dependency.DependencesManager;
+import com.bluexml.side.util.dependencies.DependencesManager;
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.security.Checkable;

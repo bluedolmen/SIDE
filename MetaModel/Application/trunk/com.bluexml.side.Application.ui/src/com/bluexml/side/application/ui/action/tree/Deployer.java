@@ -42,11 +42,16 @@ public class Deployer extends ImplNode {
 					elt.setTechnologyVersionName(((TechnologyVersion) parent).getVersion());
 					elt.setDeployerName(this.getVersion());
 					
-					for (ModuleConstraints module : integrationModules) {
+					for (com.bluexml.side.util.dependencies.ModuleConstraint module : integrationModules) {
 						ModuleConstraint mc = ApplicationFactory.eINSTANCE.createModuleConstraint();
-						mc.setModuleId(module.getId());
-						mc.setVersionMin(module.getVersionNumMin());
-						mc.setVersionMax(module.getVersionNumMax());
+						mc.setModuleId(module.getArtifactId());
+						if (module.getVersionMin() != null) {
+							mc.setVersionMin(module.getVersionMin().toString());
+						}
+						if (module.getVersionMax() != null) {
+							mc.setVersionMax(module.getVersionMax().toString());
+						}
+						mc.setModuleType(module.getModuleType());
 						elt.getModuleContraints().add(mc);
 					}
 					
@@ -58,11 +63,16 @@ public class Deployer extends ImplNode {
 							opt.setKey(o.getKey());
 							elt.getOptions().add(opt);
 							
-							for (ModuleConstraints module : o.getIntegrationModules()) {
+							for (com.bluexml.side.util.dependencies.ModuleConstraint module : o.getIntegrationModules()) {
 								ModuleConstraint mc = ApplicationFactory.eINSTANCE.createModuleConstraint();
-								mc.setModuleId(module.getId());
-								mc.setVersionMin(module.getVersionNumMin());
-								mc.setVersionMax(module.getVersionNumMax());
+								mc.setModuleId(module.getArtifactId());
+								if (module.getVersionMin() != null) {
+									mc.setVersionMin(module.getVersionMin().toString());
+								}
+								if (module.getVersionMax() != null) {
+									mc.setVersionMax(module.getVersionMax().toString());
+								}
+								mc.setModuleType(module.getModuleType());
 								elt.getModuleContraints().add(mc);
 							}
 							
