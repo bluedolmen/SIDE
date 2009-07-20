@@ -20,7 +20,7 @@ metamodel http://www.kerblue.org/form/1.0
 import com.bluexml.side.util.generator.documentation.services.DocumentationServices
 %>
 <%script type="form.FormCollection" name="validatedFilename"%>
-<%if (eContainer() == null) {%><%getConfModulePath()%>/<%getModelName()%>-data-doc.xml<%}%>
+<%if (eContainer() == null) {%><%getConfModulePath()%>/<%getModelName()%>-form-doc.xml<%}%>
 <%script type="form.FormCollection" name="docGenerator" file="<%validatedFilename%>"%>
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <book xmlns="http://docbook.org/ns/docbook" version="4.5">
