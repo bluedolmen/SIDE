@@ -94,7 +94,7 @@ public class IFileHelper {
     }
 
     /**
-     * Create a folder in the active workspace or return an already created folder.
+     * Create a folder in the active workspace or return an already created folder. Will create sub folder if not found.
      * @param ressource
      * @return
      * @throws CoreException
@@ -103,7 +103,13 @@ public class IFileHelper {
         IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
         IFolder folder = myWorkspaceRoot.getFolder(new Path(ressource));
         if (!folder.exists()) {
-            folder.create(false, true, null);
+
+        	String parentPath = folder.getFullPath().removeLastSegments(1).toOSString();
+        	IFolder parent = IFileHelper.getIFolder(parentPath);
+        	if (!parent.exists()) {
+        		IFileHelper.createFolder(parentPath);
+        	}
+            folder.create(true, true, null);
         }
         return folder;
     }
