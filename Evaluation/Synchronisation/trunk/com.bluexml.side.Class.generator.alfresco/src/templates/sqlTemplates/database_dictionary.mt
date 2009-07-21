@@ -28,6 +28,8 @@ class.name.<%getQualifiedName%>=<%getClassTableName()%>
 <%for (getAllAttributes()){%>
 class.attribute.name.<%current("Clazz").getQualifiedName%>.<%getQualifiedName()%>=<%if (eContainer() != current("Clazz")){%><%eContainer().getClassTableName()%>_<%}%><%name%>
 <%}%>
+class.attribute.name.<%current("Clazz").getQualifiedName%>.node-dbid=id
+class.attribute.name.<%current("Clazz").getQualifiedName%>.node-uuid=uuid
 <%}%>
 # STATIC
 class.name.Litteral=Litteral
