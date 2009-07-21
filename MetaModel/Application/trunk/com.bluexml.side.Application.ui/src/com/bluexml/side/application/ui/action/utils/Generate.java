@@ -162,7 +162,7 @@ public class Generate extends Thread {
 	}
 
 	private String getGenerationPath(Configuration configuration, Map<String, String> configurationParameters) {
-		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral()) + System.getProperty("file.separator") + configuration.getName();
+		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral()) + System.getProperty("file.separator");
 	}
 
 	private void addText(String text) {
@@ -192,6 +192,21 @@ public class Generate extends Thread {
 
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
+				// Clean if needed :
+				boolean doClean = Boolean.parseBoolean(configurationParameters.get(ApplicationDialog.KEY_DOCLEAN));
+				if (doClean) {
+					try {
+						label.setText("Cleaning");
+						addText("Clean Process");
+						clean();
+						addText(System.getProperty("line.separator") + "Clean Process completed.");
+						label.setText("Cleaning completed.");
+					} catch (CoreException e) {
+						addErrorText(System.getProperty("line.separator") + "Error during clean process.");
+						e.printStackTrace();
+					}
+				}
+
 				boolean error = generate_(configuration, modelsInfo, configurationParameters, generationParameters);
 
 				error &= deploy_(configuration, modelsInfo, configurationParameters, generationParameters);
@@ -213,8 +228,15 @@ public class Generate extends Thread {
 					e.printStackTrace();
 				}
 			}
+
+
 		});
 
+	}
+
+	private void clean() throws CoreException {
+		IFileHelper.deleteFolderContent(IFileHelper.getIFolder(logPath));
+		IFileHelper.deleteFolderContent(IFileHelper.getIFolder(genPath));
 	}
 
 	private AbstractGenerator getGeneratorInstance(GeneratorConfiguration elem) throws ClassNotFoundException, InstantiationException, IllegalAccessException {

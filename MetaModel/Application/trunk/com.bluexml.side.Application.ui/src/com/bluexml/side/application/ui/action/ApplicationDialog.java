@@ -84,7 +84,6 @@ import com.bluexml.side.application.ApplicationPackage;
 import com.bluexml.side.application.ComponantConfiguration;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ConfigurationParameters;
-import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.Option;
@@ -151,17 +150,19 @@ public class ApplicationDialog extends Dialog {
 	private TreeView deployOptionsTree;
 	private TabItem deployementTabItem;
 	private Table modelPropertiesTable;
+	private Button cleanButton;
 
 	public static String KEY_VERBOSE = "generation.options.verbose";
 	public static String KEY_SKIPVALIDATION = "generation.option.Skip.Validation";
+	public static String KEY_DOCLEAN = "generation.options.clean";
 	public static String KEY_LOGPATH = "generation.options.logPath";
 	public static String KEY_GENPATH = "generation.options.destinationPath";
 
-	public static List<String> staticFieldsName = Arrays.asList(KEY_GENPATH, KEY_LOGPATH, KEY_SKIPVALIDATION, KEY_VERBOSE);
+	public static List<String> staticFieldsName = Arrays.asList(KEY_GENPATH, KEY_LOGPATH, KEY_SKIPVALIDATION, KEY_VERBOSE, KEY_DOCLEAN);
 
 	/**
 	 * Create the dialog
-	 * 
+	 *
 	 * @param parentShell
 	 * @param rwm_model
 	 */
@@ -224,7 +225,7 @@ public class ApplicationDialog extends Dialog {
 
 	}
 
-	
+
 	private void refreshModelPropertiesTable() {
 		if (list.getSelection().length == 1) {
 			modelPropertiesTable.setVisible(true);
@@ -300,7 +301,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Refresh option for the given configuration
-	 * 
+	 *
 	 * @param configuration
 	 */
 	public void refreshOptions(Configuration configuration) {
@@ -332,6 +333,11 @@ public class ApplicationDialog extends Dialog {
 		ConfigurationParameters logPathParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_LOGPATH);
 		if (logPathParam != null) {
 			logText.setText(logPathParam.getValue());
+		}
+
+		ConfigurationParameters doClean = ApplicationUtil.getConfigurationParmeterByKey(KEY_DOCLEAN);
+		if (doClean != null) {
+			cleanButton.setSelection(Boolean.parseBoolean(doClean.getValue()));
 		}
 
 		ConfigurationParameters updatePathParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_GENPATH);
@@ -426,7 +432,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return all ImplNode (Generator, Deployer) for the given tree
-	 * 
+	 *
 	 * @param tv
 	 * @return
 	 */
@@ -447,7 +453,7 @@ public class ApplicationDialog extends Dialog {
 	/**
 	 * Will search the dataStructure where is save all generation option and
 	 * will add value from the application model
-	 * 
+	 *
 	 * @param configuration
 	 */
 	private void configureGeneratorOptions(Configuration configuration) {
@@ -480,7 +486,7 @@ public class ApplicationDialog extends Dialog {
 	/**
 	 * Return the selected generator, or null if no generator top to the
 	 * selected element or non selected generator.
-	 * 
+	 *
 	 * @param o
 	 * @return
 	 */
@@ -512,7 +518,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return the model for the given FilePath
-	 * 
+	 *
 	 * @param text
 	 * @return
 	 */
@@ -533,7 +539,7 @@ public class ApplicationDialog extends Dialog {
 	/**
 	 * Return the selected generator, or null if no generator top to the
 	 * selected element or non selected generator.
-	 * 
+	 *
 	 * @param o
 	 * @return
 	 */
@@ -555,7 +561,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Load data in given tree for the given configuration
-	 * 
+	 *
 	 * @param configuration
 	 * @param generators
 	 */
@@ -683,7 +689,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Create contents of the dialog
-	 * 
+	 *
 	 * @param parent
 	 */
 	@Override
@@ -930,6 +936,20 @@ public class ApplicationDialog extends Dialog {
 		skipValidationButton.setText("Skip Validation");
 		skipValidationButton.setBounds(160, 116, 108, 20);
 
+		cleanButton = new Button(composite_1, SWT.CHECK);
+		cleanButton.setText("Clean");
+		cleanButton.setBounds(297, 116, 93, 16);
+		cleanButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(final SelectionEvent e) {
+				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_DOCLEAN);
+				if (param != null) {
+					Button b = (Button) e.getSource();
+					param.setValue(Boolean.toString(b.getSelection()));
+				}
+				ApplicationDialog.modificationMade();
+			}
+		});
+
 		deployementTabItem = new TabItem(tabFolder, SWT.NONE);
 		deployementTabItem.setText("Deployement");
 
@@ -1046,10 +1066,15 @@ public class ApplicationDialog extends Dialog {
 				verboseParam.setValue("false");
 				config.getParameters().add(verboseParam);
 
-				ConfigurationParameters updateParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
-				updateParam.setKey(KEY_SKIPVALIDATION);
-				updateParam.setValue("false");
-				config.getParameters().add(updateParam);
+				ConfigurationParameters skipValid = ApplicationFactory.eINSTANCE.createConfigurationParameters();
+				skipValid.setKey(KEY_SKIPVALIDATION);
+				skipValid.setValue("false");
+				config.getParameters().add(skipValid);
+
+				ConfigurationParameters doClean = ApplicationFactory.eINSTANCE.createConfigurationParameters();
+				doClean.setKey(KEY_DOCLEAN);
+				doClean.setValue("false");
+				config.getParameters().add(doClean);
 
 				ConfigurationParameters logPathParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
 				logPathParam.setKey(KEY_LOGPATH);
@@ -1129,7 +1154,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Display the select folder box (only in workspace)
-	 * 
+	 *
 	 * @param message
 	 * @return
 	 */
@@ -1160,7 +1185,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Remove the selected model(s)
-	 * 
+	 *
 	 * @param selection
 	 */
 	private void removeModel(String[] selection) {
@@ -1225,7 +1250,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Build a html string for documentation on generator parameter
-	 * 
+	 *
 	 * @return
 	 */
 	private String buildHelpDocumentationText(String documentation) {
@@ -1237,7 +1262,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Build the documentation text
-	 * 
+	 *
 	 * @return
 	 */
 	private String builDocumentationText() {
@@ -1266,7 +1291,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Create contents of the button bar
-	 * 
+	 *
 	 * @param parent
 	 */
 	@Override
@@ -1338,7 +1363,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return the configuration equals to the given name.
-	 * 
+	 *
 	 * @param p_name
 	 * @return
 	 */
@@ -1348,7 +1373,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return the current configuration name
-	 * 
+	 *
 	 * @return
 	 */
 	static public String getCurrentConfiguratioName() {
@@ -1361,7 +1386,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return the configuration being edited
-	 * 
+	 *
 	 * @return
 	 */
 	static public Configuration getCurrentConfiguration() {
@@ -1385,7 +1410,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Show a confirmation message
-	 * 
+	 *
 	 * @param title
 	 * @param message
 	 * @return
@@ -1402,7 +1427,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Show an alert message
-	 * 
+	 *
 	 * @param title
 	 * @param message
 	 */
@@ -1502,7 +1527,7 @@ public class ApplicationDialog extends Dialog {
 
 		/**
 		 * Enable sub element of the given item.
-		 * 
+		 *
 		 * @param item
 		 */
 		protected void enableAllSubElements(TreeItem item) {
@@ -1529,7 +1554,7 @@ public class ApplicationDialog extends Dialog {
 
 		/**
 		 * Disable sub element of the given item.
-		 * 
+		 *
 		 * @param item
 		 */
 		protected void disableAllSubElements(TreeItem item) {
