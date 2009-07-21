@@ -31,6 +31,7 @@ import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.util.deployer.Deployer;
 import com.bluexml.side.util.documentation.LogSave;
+import com.bluexml.side.util.feedback.FeedbackManager;
 import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.dependencies.DependencesManager;
 import com.bluexml.side.util.dependencies.ModuleConstraint;
@@ -46,6 +47,7 @@ public class Generate extends Thread {
 	private String logPath;
 	private Browser logLink;
 	private String genPath;
+	private FeedbackManager feedbackManager;
 
 	/**
 	 * Launch generation on all generator version selected
@@ -68,6 +70,7 @@ public class Generate extends Thread {
 		label = p_label;
 		styletext = p_styletext;
 		logLink = p_logLink;
+		feedbackManager = new FeedbackManager();
 
 		// First we seek the generator parameters, and separate fields
 		// of dynamic fields
@@ -133,6 +136,7 @@ public class Generate extends Thread {
 			logPath = getLogPath(configuration, configurationParameters);
 			genPath = getGenerationPath(configuration, configurationParameters);
 			generate(configuration, modelsInfo, configurationParameters, generationParameters);
+			feedbackManager.save();
 			// Refresh log and generation folder
 			refreshFolders();
 		}
@@ -338,8 +342,10 @@ public class Generate extends Thread {
 										addText(System.getProperty("line.separator") + filePath.getRawLocation().makeAbsolute().toOSString());
 									}
 								}
-								addOneStep(progressBar);
 
+								//TODO : add feedback
+
+								addOneStep(progressBar);
 							} catch (Exception e) {
 								error = true;
 								addErrorText(System.getProperty("line.separator") + "ERROR : " + (e.getMessage() != null ? e.getMessage() : ""));
