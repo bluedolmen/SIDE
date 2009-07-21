@@ -11,6 +11,7 @@ import org.alfresco.service.cmr.dictionary.PropertyDefinition;
 import org.alfresco.service.namespace.QName;
 import org.apache.log4j.Logger;
 
+@SuppressWarnings("serial")
 public class DefaultDialect implements SynchronisationDialect {
 	
 	private static final Logger logger = Logger.getLogger(DefaultDialect.class);
@@ -19,20 +20,18 @@ public class DefaultDialect implements SynchronisationDialect {
 
 	private static Map<QName, String> sqlTypeMapping = new HashMap<QName, String>() {
 
-		private static final long serialVersionUID = 1L;
-
 		{
-			put(DataTypeDefinition.ANY, "BLOB"); //java.sql.Types.JAVA_OBJECT);
-			put(DataTypeDefinition.BOOLEAN, "BOOLEAN"); //java.sql.Types.BOOLEAN);
-			put(DataTypeDefinition.CONTENT, "BLOB"); //java.sql.Types.BLOB);
-			put(DataTypeDefinition.DATE, "DATE"); //java.sql.Types.DATE);
-			put(DataTypeDefinition.DATETIME, "TIMESTAMP"); //java.sql.Types.TIMESTAMP);
-			put(DataTypeDefinition.DOUBLE, "DOUBLE"); //java.sql.Types.DOUBLE);
-			put(DataTypeDefinition.FLOAT, "FLOAT"); //java.sql.Types.FLOAT);
-			put(DataTypeDefinition.INT, "INTEGER"); //java.sql.Types.INTEGER);
-			put(DataTypeDefinition.LONG, "INTEGER"); //java.sql.Types.INTEGER);
-			put(DataTypeDefinition.PATH, "VARCHAR"); //java.sql.Types.VARCHAR);
-			put(DataTypeDefinition.TEXT, "VARCHAR"); //java.sql.Types.VARCHAR);			
+			put(DataTypeDefinition.ANY, "BLOB"); 
+			put(DataTypeDefinition.BOOLEAN, "BOOLEAN"); 
+			put(DataTypeDefinition.CONTENT, "BLOB"); 
+			put(DataTypeDefinition.DATE, "DATE"); 
+			put(DataTypeDefinition.DATETIME, "TIMESTAMP"); 
+			put(DataTypeDefinition.DOUBLE, "DOUBLE");
+			put(DataTypeDefinition.FLOAT, "FLOAT");
+			put(DataTypeDefinition.INT, "INTEGER");
+			put(DataTypeDefinition.LONG, "INTEGER");
+			put(DataTypeDefinition.PATH, "VARCHAR");
+			put(DataTypeDefinition.TEXT, "VARCHAR");	
 		}
 	};
 

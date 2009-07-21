@@ -70,31 +70,76 @@
 	
 	<bean id="truncateRenamingStrategy" class="com.bluexml.alfresco.modules.sql.synchronisation.dictionary.TruncateRenamingStrategy" parent="abstractRenamingStrategy" />
 
-	<bean id="databaseDictionary" class="com.bluexml.alfresco.modules.sql.synchronisation.dictionary.DatabaseDictionary" >
+	<bean id="databaseDictionary" class="com.bluexml.alfresco.modules.sql.synchronisation.dictionary.PropertyFileDatabaseDictionary" >
 		<property name="resourcePattern" value="classpath*:alfresco/module/*/synchronisation_mapping.properties" />
 		<property name="renamingStrategy" ref="truncateRenamingStrategy" />
 	</bean>
 
  	<bean id="synchronisationPolicy" class="com.bluexml.alfresco.modules.sql.synchronisation.SQLSynchronisationPolicy" init-method="init">
- 		<property name="nodeService" ref="nodeService" />
 		<property name="policyComponent" ref="policyComponent" />
-		<property name="dataSource" ref="synchroDataSource" />
-		<property name="nodeDAO" ref="synchronisationNodeDAO" />
+		<property name="nodeFilterer" ref="synchronisationNodeFilterer" />		
+		<property name="nodeService" ref="synchronisationNodeService" />
 	</bean>
+
+	<bean id="synchronisationNodeFilterer" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="proxyInterfaces">
+            <value>com.bluexml.alfresco.modules.sql.synchronisation.NodeFilterer</value>
+        </property>
+        <property name="target">
+			<bean id="basicNodeFilterer" class="com.bluexml.alfresco.modules.sql.synchronisation.BasicNodeFilterer">
+			 	<property name="nodeService" ref="nodeService" />
+			</bean>
+        </property>
+        <property name="transactionManager" ref="transactionManager" />
+        <property name="transactionAttributes">
+        	<props>
+        		<prop key="*">PROPAGATION_REQUIRED</prop>
+        	</props>
+        </property>
+    </bean>
 
 	<bean id="synchronisationSchemaCreator" class="com.bluexml.alfresco.modules.sql.synchronisation.schemaManagement.SchemaCreation" init-method="init">
 		<property name="dictionaryService" ref="dictionaryService" />
 		<property name="dataSource" ref="synchroDataSource" />
 		<property name="databaseDictionary" ref="databaseDictionary" />
+		<property name="nodeFilterer" ref="synchronisationNodeFilterer" />	
+		<property name="contentReplication" ref="synchronisationContentReplicator" />	
+		<property name="transactionService" ref="transactionService" />
 	</bean>
-	
-	<bean id="synchronisationNodeDAO" class="com.bluexml.alfresco.modules.sql.synchronisation.NodeDAO">
- 		<property name="nodeService" ref="nodeService" />
-		<property name="dataSource" ref="synchroDataSource" />
+
+	<bean id="synchronisationContentReplicator" class="com.bluexml.alfresco.modules.sql.synchronisation.schemaManagement.BasicContentReplication" >
+		<property name="nodeFilterer" ref="synchronisationNodeFilterer" />		
+		<property name="synchroNodeService" ref="synchronisationNodeService" />
+		<property name="searchService" ref="searchService" />		
+		<property name="nodeService" ref="dbNodeService" />
 		<property name="dictionaryService" ref="dictionaryService" />
-		<property name="databaseDictionary" ref="databaseDictionary" />
 	</bean>
 	
+	<bean id="synchronisationNodeService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="proxyInterfaces">
+            <value>com.bluexml.alfresco.modules.sql.synchronisation.NodeService</value>
+        </property>
+        <property name="target">
+			<bean id="synchronisationNodeServiceImpl" class="com.bluexml.alfresco.modules.sql.synchronisation.NodeServiceImpl">
+		 		<property name="nodeService" ref="nodeService" />
+				<property name="dictionaryService" ref="dictionaryService" />
+				<property name="databaseDictionary" ref="databaseDictionary" />
+				<property name="nodeFilterer" ref="synchronisationNodeFilterer" />		
+				<property name="transactionListener" ref="synchronisationTransactionListener" />		
+			</bean>
+        </property>
+        <property name="transactionManager" ref="transactionManager" />
+        <property name="transactionAttributes">
+        	<props>
+        		<prop key="*">PROPAGATION_REQUIRED</prop>
+        	</props>
+        </property>
+    </bean>
+	
+	<bean id="synchronisationTransactionListener" class="com.bluexml.alfresco.modules.sql.synchronisation.JdbcTransactionListener">
+		<property name="dataSource" ref="synchroDataSource" />		
+	</bean>
+		
 	<!-- ======================= -->
     <!-- Webscript definition    -->
     <!-- ======================= -->

@@ -1,6 +1,7 @@
 package com.bluexml.alfresco.modules.sql.synchronisation.schemaManagement;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -80,6 +81,10 @@ public class CreateStatement {
 		result.append("\n);");
 		
 		return result.toString();
+	}
+	
+	public TableStatus checkStatus(Connection connection) {
+		throw new UnsupportedOperationException();
 	}
 	
 	public String getNativeSQL(Connection connection) {

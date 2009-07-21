@@ -1,0 +1,12 @@
+package com.bluexml.alfresco.modules.sql.synchronisation;
+
+import org.alfresco.service.cmr.repository.NodeRef;
+import org.alfresco.service.namespace.QName;
+
+public interface NodeFilterer {
+
+	public boolean accept(QName qname);
+	
+	public boolean accept(NodeRef nodeRef);
+	
+}

@@ -8,7 +8,7 @@ import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.namespace.QName;
 
-public interface NodeDAO {
+public interface NodeService {
 
 	public void create(NodeRef nodeRef);
 	
