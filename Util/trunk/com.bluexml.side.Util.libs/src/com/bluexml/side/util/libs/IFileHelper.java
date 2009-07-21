@@ -90,8 +90,30 @@ public class IFileHelper {
     public static void deleteFolder(String ressource) throws CoreException {
         IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
         IFolder folder = myWorkspaceRoot.getFolder(new Path(ressource));
+        deleteResource(folder);
+    }
+
+    /**
+     * Delete the given resource if exists.
+     * @param res
+     * @throws CoreException
+     */
+    public static void deleteResource(IResource res) throws CoreException {
+    	if (res.exists()) {
+    		res.delete(true, null);
+    	}
+    }
+
+    /**
+     * Delete the content of the given folder
+     * @param folder
+     * @throws CoreException
+     */
+    public static void deleteFolderContent(IFolder folder) throws CoreException {
         if (folder.exists()) {
-            folder.delete(true, null);
+        	for (IResource res : folder.members()) {
+        		IFileHelper.deleteResource(res);
+        	}
         }
     }
 
@@ -103,9 +125,7 @@ public class IFileHelper {
     public static void deleteFile(String ressource) throws CoreException {
         IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
         IResource res = myWorkspaceRoot.getFile(new Path(ressource));
-        if (res.exists()) {
-            res.delete(true, null);
-        }
+        deleteResource(res);
     }
 
     /**
