@@ -88,6 +88,8 @@ public class Application {
 				+ File.separator + "buildSVN.xml");
 		createFile(getCorpsSVN(), Utils.getBuildPath(), "buildSVN.xml");
 
+		//si on travaille sans Hudson, alors on va réaliser, 
+		//avec ant, le checkout et/ou update
 		if (!parametre) {
 			// Execution du buildSVN.xml
 			System.out.println("\nRéalisation du checkout et du update...");
