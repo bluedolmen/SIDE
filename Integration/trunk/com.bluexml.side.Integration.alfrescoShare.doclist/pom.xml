@@ -5,6 +5,11 @@
 	<artifactId>com.bluexml.side.Integration.alfrescoShare.doclist</artifactId>
 	<version>1.0.1</version>
 	<packaging>zip</packaging>
+	<parent>
+		<groupId>org.bluexml</groupId>
+		<artifactId>superpom</artifactId>
+		<version>1.8</version>
+	</parent>
 	<build>
 		<extensions>
 			<extension>
@@ -42,91 +47,4 @@
 			<type>amp</type>
 		</dependency>
 	</dependencies>
-	<distributionManagement>
-		<!-- use the following if you're not using a snapshot version. -->
-		<repository>
-			<id>release</id>
-			<url>http://192.168.49.18:8081/nexus/content/repositories/releases</url>
-		</repository>
-		<!-- use the following if you ARE using a snapshot version. -->
-		<snapshotRepository>
-			<id>snapshots</id>
-			<url>http://192.168.49.18:8081/nexus/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
-	<repositories>
-		<!-- Public repositories -->
-		<repository>
-			<id>BXKB-repo</id>
-			<url>http://merry.bluexml.com/m2/repository</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>BXKB-repo-snapshots</id>
-			<url>http://merry.bluexml.com/m2/snapshotrepository</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<!-- test repositories (internal)-->
-		<repository>
-			<id>release</id>
-			<url>http://192.168.49.18:8081/nexus/content/repositories/releases</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>snapshots</id>
-			<url>http://192.168.49.18:8081/nexus/content/repositories/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<!-- local repositories (developer) -->
-		<repository>
-			<id>release</id>
-			<url>http://localhost:8081/nexus/content/repositories/releases</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>snapshots</id>
-			<url>http://localhost:8081/nexus/content/repositories/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>snapshots</id>
-			<url>http://192.168.49.18:8081/nexus/content/repositories/snapshots</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>releases</id>
-			<url>http://192.168.49.18:8081/nexus/content/repositories/releases</url>
-		</pluginRepository>
-	</pluginRepositories>
 </project>
