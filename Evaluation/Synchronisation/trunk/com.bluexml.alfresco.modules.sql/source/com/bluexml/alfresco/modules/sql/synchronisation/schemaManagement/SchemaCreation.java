@@ -2,7 +2,6 @@ package com.bluexml.alfresco.modules.sql.synchronisation.schemaManagement;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -22,7 +21,9 @@ import org.alfresco.service.cmr.dictionary.PropertyDefinition;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
 import org.alfresco.service.namespace.QName;
 import org.alfresco.service.transaction.TransactionService;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import com.bluexml.alfresco.modules.sql.synchronisation.NodeFilterer;
 import com.bluexml.alfresco.modules.sql.synchronisation.dialects.DefaultDialect;
@@ -37,8 +38,43 @@ public class SchemaCreation {
 	
 	private Logger logger = Logger.getLogger(getClass());
 	private Connection connection = null;
-	private SynchronisationDialect synchronisationDialect = null;
+	private boolean ready = true;
+	
+	public void init() {
+		logger.debug("Initializing the synchronized database");
+		connection = DataSourceUtils.getConnection(dataSource);
 		
+		synchronisationDialect = new DefaultDialect();
+		
+		checkMetaData();
+		
+		List<CreateStatement> createStatements = doCreateStatement();
+		
+		CheckTableStatus checkTableStatus = doCheckStatus(createStatements);
+		
+		if (checkTableStatus == CheckTableStatus.CREATE_TABLES) {
+			boolean creationSuccess = doExecuteCreateStatements(createStatements);
+			if (! creationSuccess) {
+				logger.error("Creation of tables failed");
+				ready = false;
+			} else {
+				boolean replicationSuccess = doExecuteReplication();
+				if (!replicationSuccess) {
+					logger.error("Replication of existing data failed");
+					ready = false;
+				}
+			}
+		}
+
+		DataSourceUtils.releaseConnection(connection, dataSource);
+		
+	}
+
+	public boolean isReady() {
+		return ready;
+	}
+	
+	
 	private void executeCreateStatement(CreateStatement createStatement) throws SQLException {
 		try {
 			Statement sqlStatement = connection.createStatement();
@@ -51,73 +87,116 @@ public class SchemaCreation {
 		}	
 	}
 	
-	public void init() {
-		logger.debug("Initializing the synchronized database");
-		try {
-			connection = dataSource.getConnection();
-			synchronisationDialect = new DefaultDialect();
-			
-			checkMetaData();
-			
-			List<CreateStatement> createStatements = new ArrayList<CreateStatement>();
-			
-			for (QName type : dictionaryService.getAllTypes()) {
-				if (nodeFilterer.accept(type)) {
-					createStatements.add(createClass(type));
-				}
-			}
-			
-			for (QName associationName : dictionaryService.getAllAssociations()) {
-				if (nodeFilterer.accept(associationName)) {
-					ClassDefinition sourceClassDefinition = dictionaryService.getAssociation(associationName).getSourceClass();
-					ClassDefinition targetClassDefinition = dictionaryService.getAssociation(associationName).getTargetClass();
-					createStatements.add(createAssociation(associationName, sourceClassDefinition.getName(), targetClassDefinition.getName()));
-				}
-			}
-			
-			boolean creationFailed = false;
-			try {
-				for (CreateStatement createStatement : createStatements) {
-					logger.debug(createStatement.getNativeSQL(connection));
-					executeCreateStatement(createStatement);
-				}
-			} catch (SQLException e) {
-				creationFailed = true;
-			}
+	
+	private List<CreateStatement> doCreateStatement() {
+		List<CreateStatement> createStatements = new ArrayList<CreateStatement>();
 		
-			connection.close();
-
-			if (! creationFailed) {
-				UserTransaction userTransaction = transactionService.getUserTransaction();
-				try {
-					userTransaction.begin();
-					contentReplication.addExistingData();
-					userTransaction.commit();
-				} catch (Exception e) {
-					try {
-						userTransaction.rollback();
-					} catch (Exception e1) {
-						logger.error("Cannot rollback transaction !");
-						e1.printStackTrace();
-					}
-					e.printStackTrace();
-				}		
+		for (QName type : dictionaryService.getAllTypes()) {
+			if (nodeFilterer.acceptOnName(type)) {
+				createStatements.add(createClass(type));
 			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+		
+		for (QName associationName : dictionaryService.getAllAssociations()) {
+			if (nodeFilterer.acceptOnName(associationName)) {
+				ClassDefinition sourceClassDefinition = dictionaryService.getAssociation(associationName).getSourceClass();
+				ClassDefinition targetClassDefinition = dictionaryService.getAssociation(associationName).getTargetClass();
+				createStatements.add(createAssociation(associationName, sourceClassDefinition.getName(), targetClassDefinition.getName()));
+			}
+		}
+		
+		return createStatements;
 	}
 	
+	enum CheckTableStatus {
+		CREATE_TABLES,
+		NO_ACTION_CLEAN,
+		NO_ACTION_DIRTY
+	}
+	
+	private CheckTableStatus doCheckStatus (List<CreateStatement> createStatements) {
+		List<String> matchedTables = new ArrayList<String>();
+		List<String> unmatchedTables = new ArrayList<String>();
+		List<String> nonExistingTables = new ArrayList<String>();
+		
+		for (CreateStatement createStatement : createStatements) {
+			TableStatus tableStatus = createStatement.checkStatus(connection);
+			if (tableStatus.equals(TableStatus.EXISTS_MATCHED)) {
+				matchedTables.add(createStatement.getTableName());
+			} else if (tableStatus.equals(TableStatus.NOT_EXISTS)) {
+				nonExistingTables.add(createStatement.getTableName());
+			} else if (tableStatus.equals(TableStatus.EXISTS_UNMATCHED)) {
+			// if a table cannot be matched then list it
+				unmatchedTables.add(createStatement.getTableName());
+			} else if (tableStatus.equals(TableStatus.NOT_CHECKABLE)) {
+				// if at least one table cannot be checked, then stop and warn user
+				logger.warn("Cannot check existing tables (problem during analysis of table '" + createStatement.getTableName() + "'");
+				break;
+			}
+		}
+		
+		CheckTableStatus status = null;
+		if (matchedTables.isEmpty() && unmatchedTables.isEmpty()) {
+			status = CheckTableStatus.CREATE_TABLES;
+		} else if (unmatchedTables.isEmpty() && nonExistingTables.isEmpty()) {
+			status = CheckTableStatus.NO_ACTION_CLEAN;
+		} else {
+			logger.error("The synchronisation database is dirty (manual intervention is needed)...");
+			if (! matchedTables.isEmpty()) {
+				logger.error(" - The following tables match the definition: " + StringUtils.join(matchedTables.iterator(), ","));
+			}
+			if (! unmatchedTables.isEmpty()) {
+				logger.error(" - The following tables do not match the definition: " + StringUtils.join(unmatchedTables.iterator(), ","));
+			}
+			if (! nonExistingTables.isEmpty()) {
+				logger.error(" - The following tables do not exist: " + StringUtils.join(nonExistingTables.iterator(), ","));
+			}
+			status = CheckTableStatus.NO_ACTION_DIRTY;
+			ready = false;
+		}
+		
+		return status;
+	}
+	
+	private boolean doExecuteCreateStatements(List<CreateStatement> createStatements) {
+		boolean creationSuccess = true;
+		try {
+			for (CreateStatement createStatement : createStatements) {
+				logger.debug(createStatement.getNativeSQL(connection));
+				executeCreateStatement(createStatement);
+			}
+		} catch (SQLException e) {
+			creationSuccess = false;
+		}
+		return creationSuccess;
+	}
+	
+	private boolean doExecuteReplication() {
+		boolean success = true;
+		
+		UserTransaction userTransaction = transactionService.getUserTransaction();
+		try {
+			userTransaction.begin();
+			contentReplication.addExistingData();
+			userTransaction.commit();
+		} catch (Exception e) {
+			success = false;
+			try {
+				userTransaction.rollback();
+			} catch (Exception e1) {
+				logger.error("Cannot rollback transaction !");
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}		
+		return success;
+	}
 	
 	private CreateStatement createClass(QName classQName) {
 		String className = classQName.getLocalName();
 		String tableName = databaseDictionary.resolveClassAsTableName(className);
 		
 		Map<String, List<String>> columns = new LinkedHashMap<String, List<String>>();
-//		columns.put(idColumnName, new ArrayList<String>() {{add("INTEGER");}});
-		
 		TypeDefinition typeDefinition = dictionaryService.getType(classQName);
 		
 		Map<QName, PropertyDefinition> allProperties = new HashMap<QName, PropertyDefinition>();
@@ -129,9 +208,10 @@ public class SchemaCreation {
 		
 		for (Map.Entry<QName, PropertyDefinition> entry : allProperties.entrySet()) {
 			PropertyDefinition propertyDefinition = entry.getValue();
-			QName propertyName = propertyDefinition.getName();
+			QName propertyName = propertyDefinition.getName(); 
+			// TODO : perform checking of existing table here (availability of the current Java type)
 			
-			if (nodeFilterer.accept(propertyName)) {
+			if (nodeFilterer.acceptOnName(propertyName)) {
 				List<String> options = new ArrayList<String>();			
 				String sqlType = synchronisationDialect.getSQLMapping(propertyDefinition);
 				options.add(sqlType);
@@ -187,7 +267,7 @@ public class SchemaCreation {
 	private void checkMetaData() {
 		logger.debug("Checking meta-data");
 		DatabaseMetaData dmd = null;
-		ResultSet rs = null;
+//		ResultSet rs = null;
 		
 		try {
 			dmd = connection.getMetaData();
@@ -196,37 +276,6 @@ public class SchemaCreation {
 			String dbversion = dmd.getDatabaseProductVersion();
 			logger.debug("Running sql synchronisation on " + dbname + " " + dbversion);
 			
-			
-			try {
-				DatabaseMetaData databaseMetaData = connection.getMetaData();
-				rs = databaseMetaData.getTables(null, null, "%", null);
-
-				if (! rs.isAfterLast()) {
-					do {
-						rs.next();						
-						String tableName = rs.getString("TABLE_NAME");
-						logger.debug("1) Existing table: " + tableName);
-					} while (! rs.isAfterLast());
-				}
-				rs.close();
-				
-				rs = databaseMetaData.getTables("", "", "%", null);
-
-				if (! rs.isAfterLast()) {
-					do {
-						rs.next();						
-						String tableName = rs.getString("TABLE_NAME");
-						logger.debug("1) Existing table: " + tableName);
-					} while (! rs.isAfterLast());
-				}
-				rs.close();
-
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-//			rs = dmd.getSchemas();
 			
 						
 //			rs = dmd.getTypeInfo();
@@ -255,6 +304,7 @@ public class SchemaCreation {
 	private NodeFilterer nodeFilterer;
 	private ContentReplication contentReplication;
 	private TransactionService transactionService;
+	private SynchronisationDialect synchronisationDialect;
 
 
 	public void setDataSource(DataSource dataSource_) {
@@ -279,6 +329,10 @@ public class SchemaCreation {
 	
 	public void setTransactionService(TransactionService transactionService_) {
 		transactionService = transactionService_;
+	}
+	
+	public void setSynchronisationDialect(SynchronisationDialect synchronisationDialect_) {
+		synchronisationDialect = synchronisationDialect_;
 	}
 
 }

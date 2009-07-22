@@ -40,7 +40,7 @@ public class DefaultDialect implements SynchronisationDialect {
 		DataTypeDefinition dataTypeDefinition = propertyDefinition.getDataType();
 		QName dataTypeName = dataTypeDefinition.getName();
 		String result = "UNSPECIFIED";
-
+		
 		if (!sqlTypeMapping.containsKey(dataTypeName)) {
 			logger.error("Do not know how to map type \"" + dataTypeName + "\" to SQL");
 		} else {

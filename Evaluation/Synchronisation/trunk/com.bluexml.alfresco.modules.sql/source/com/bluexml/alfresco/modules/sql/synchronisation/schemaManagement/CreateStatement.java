@@ -2,6 +2,7 @@ package com.bluexml.alfresco.modules.sql.synchronisation.schemaManagement;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -83,8 +84,46 @@ public class CreateStatement {
 		return result.toString();
 	}
 	
+	/*
+	 * Returns a simple table status based on the table name and on the column names.
+	 * Further checking should be made on the types of the tables
+	 */
 	public TableStatus checkStatus(Connection connection) {
-		throw new UnsupportedOperationException();
+		
+		TableStatus status = TableStatus.EXISTS_MATCHED;
+		ResultSet rs = null;
+
+		try {
+			DatabaseMetaData databaseMetaData = connection.getMetaData();
+			rs = databaseMetaData.getColumns(null, null, tableName, "%");
+
+			if (rs.isAfterLast()) {
+				status = TableStatus.NOT_EXISTS;
+			} else {
+				logger.debug("Checking table '" + tableName + "'");
+				rs.next();						
+				do {
+					String columnName = rs.getString("COLUMN_NAME");
+					if (! columns.containsKey(columnName)) {
+						status = TableStatus.EXISTS_UNMATCHED;
+					}
+					Integer dataType = rs.getInt("DATA_TYPE");
+					String dataTypeDepName = rs.getString("TYPE_NAME");
+					// TODO : Implement type checking to return EXIST_SIMILAR if types are compatible
+					
+					logger.debug("Column '" + columnName + "' with type '" + dataTypeDepName + "'(" + dataType + ")");
+					rs.next();						
+				} while (! rs.isAfterLast());
+			}
+			rs.close();
+		} catch (SQLException e) {
+			logger.error("Cannot get meta-data for checking table status");
+			logger.debug(e);
+			return TableStatus.NOT_CHECKABLE;
+		}
+		
+		return status;
+
 	}
 	
 	public String getNativeSQL(Connection connection) {
@@ -111,6 +150,10 @@ public class CreateStatement {
 			table = table_;
 			column = column_;
 		}
+	}
+	
+	public String getTableName() {
+		return tableName;
 	}
 	
 }

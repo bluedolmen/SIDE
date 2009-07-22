@@ -56,7 +56,7 @@ public class NodeServiceImpl implements com.bluexml.alfresco.modules.sql.synchro
 			iterableProperties.retainAll(currentTypeProperties.keySet());
 
 			for (QName key : iterableProperties) {
-				if (nodeFilterer.accept(key)) {
+				if (nodeFilterer.acceptOnName(key)) {
 					Serializable property = nodeService.getProperty(nodeRef, key);
 					PropertyDefinition propertyDefinition = dictionaryService.getProperty(key);
 					String value = getSQLFormatFromSerializable(property, propertyDefinition);
@@ -115,7 +115,12 @@ public class NodeServiceImpl implements com.bluexml.alfresco.modules.sql.synchro
 			iterableProperties.retainAll(currentTypeProperties.keySet());
 
 			for (QName key : iterableProperties) {
-				if (changes.get(key) != null) {
+				if (
+						changes.get(key) != null &&
+						!ContentModel.PROP_NODE_DBID.equals(key) && // omit dbid (once set, it must not be changed)
+						!ContentModel.PROP_NODE_UUID.equals(key)    // the same comment holds for uuid						
+					) 
+				{
 					Serializable property = nodeService.getProperty(nodeRef, key);
 					PropertyDefinition propertyDefinition = dictionaryService.getProperty(key);
 					String value = getSQLFormatFromSerializable(property, propertyDefinition);
@@ -127,6 +132,7 @@ public class NodeServiceImpl implements com.bluexml.alfresco.modules.sql.synchro
 							simplified_type_name, (resolvedColumnName != null ? resolvedColumnName : originalName), value, dbid);
 					// Update string only if they are non empty...
 					executeSQLQuery(sql_query);
+					// TODO : performing a BATCH UPDATE WOULD BE PREFERABLE
 				}
 			}
 		}
@@ -218,7 +224,7 @@ public class NodeServiceImpl implements com.bluexml.alfresco.modules.sql.synchro
 
 		QName currentType = nodeService.getType(nodeRef);
 
-		while (nodeFilterer.accept(currentType)) {
+		while (nodeFilterer.acceptOnName(currentType)) {
 			result.add(currentType);
 			TypeDefinition nodeRefTypeDefinition = dictionaryService.getType(currentType);
 			if (nodeRefTypeDefinition == null ) {

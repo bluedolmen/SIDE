@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.alfresco.model.ContentModel;
 import org.alfresco.repo.node.NodeServicePolicies.BeforeDeleteNodePolicy;
 import org.alfresco.repo.node.NodeServicePolicies.OnCreateAssociationPolicy;
 import org.alfresco.repo.node.NodeServicePolicies.OnCreateChildAssociationPolicy;
@@ -21,6 +22,8 @@ import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.service.namespace.QName;
 import org.apache.log4j.Logger;
+
+import com.bluexml.alfresco.modules.sql.synchronisation.schemaManagement.SchemaCreation;
 
 public class SQLSynchronisationPolicy implements 
 	OnCreateNodePolicy, 
@@ -51,24 +54,28 @@ public class SQLSynchronisationPolicy implements
 
 		logger.debug("[init] Initializing relational synchronisation");
 
-		// Create behaviours
-		this.onCreateNode = new JavaBehaviour(this, "onCreateNode", NotificationFrequency.TRANSACTION_COMMIT);
-		this.onUpdateProperties = new JavaBehaviour(this, "onUpdateProperties", NotificationFrequency.TRANSACTION_COMMIT);
-		this.onCreateAssociation = new JavaBehaviour(this, "onCreateAssociation", NotificationFrequency.TRANSACTION_COMMIT);
-		this.onCreateChildAssociation = new JavaBehaviour(this, "onCreateChildAssociation", NotificationFrequency.TRANSACTION_COMMIT);
-		
-		this.beforeDeleteNode = new JavaBehaviour(this, "beforeDeleteNode", NotificationFrequency.FIRST_EVENT); 
-		this.onDeleteAssociation = new JavaBehaviour(this, "onDeleteAssociation", NotificationFrequency.TRANSACTION_COMMIT); 
-		this.onDeleteChildAssociation = new JavaBehaviour(this, "onDeleteChildAssociation", NotificationFrequency.EVERY_EVENT);
-
-		// Bind behaviours to node policies
-		policyComponent.bindClassBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onCreateNode"), this,this.onCreateNode);
-		policyComponent.bindClassBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onUpdateProperties"), this,this.onUpdateProperties);
-		policyComponent.bindClassBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "beforeDeleteNode"), this,this.beforeDeleteNode);
-		policyComponent.bindAssociationBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onCreateAssociation"), this,this.onCreateAssociation);
-		policyComponent.bindAssociationBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onCreateChildAssociation"), this,this.onCreateChildAssociation);
-		policyComponent.bindAssociationBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onDeleteChildAssociation"), this,this.onDeleteChildAssociation);
-		policyComponent.bindAssociationBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onDeleteAssociation"), this,this.onDeleteAssociation);
+		if (schemaCreation.isReady()) {
+			// Create behaviours
+			this.onCreateNode = new JavaBehaviour(this, "onCreateNode", NotificationFrequency.TRANSACTION_COMMIT);
+			this.onUpdateProperties = new JavaBehaviour(this, "onUpdateProperties", NotificationFrequency.TRANSACTION_COMMIT);
+			this.onCreateAssociation = new JavaBehaviour(this, "onCreateAssociation", NotificationFrequency.TRANSACTION_COMMIT);
+			this.onCreateChildAssociation = new JavaBehaviour(this, "onCreateChildAssociation", NotificationFrequency.TRANSACTION_COMMIT);
+			
+			this.beforeDeleteNode = new JavaBehaviour(this, "beforeDeleteNode", NotificationFrequency.FIRST_EVENT); 
+			this.onDeleteAssociation = new JavaBehaviour(this, "onDeleteAssociation", NotificationFrequency.TRANSACTION_COMMIT); 
+			this.onDeleteChildAssociation = new JavaBehaviour(this, "onDeleteChildAssociation", NotificationFrequency.EVERY_EVENT);
+	
+			// Bind behaviours to node policies
+			policyComponent.bindClassBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onCreateNode"), this,this.onCreateNode);
+			policyComponent.bindClassBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onUpdateProperties"), this,this.onUpdateProperties);
+			policyComponent.bindClassBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "beforeDeleteNode"), this,this.beforeDeleteNode);
+			policyComponent.bindAssociationBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onCreateAssociation"), this,this.onCreateAssociation);
+			policyComponent.bindAssociationBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onCreateChildAssociation"), this,this.onCreateChildAssociation);
+			policyComponent.bindAssociationBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onDeleteChildAssociation"), this,this.onDeleteChildAssociation);
+			policyComponent.bindAssociationBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onDeleteAssociation"), this,this.onDeleteAssociation);
+		} else {
+			logger.warn("Synchronisation was deactivated since schema is marked as not ready");
+		}
 	}
 
 	public void onCreateNode(ChildAssociationRef childAssociationRef) {
@@ -92,17 +99,16 @@ public class SQLSynchronisationPolicy implements
 		if (nodeFilterer.accept(nodeRef)) {
 			Map<QName, Serializable> changes = new HashMap<QName, Serializable>();
 			for (QName key : after_properties.keySet()) {
-				if (nodeFilterer.accept(key)) {
-					if (!before_properties.containsKey(key)
-							|| before_properties.get(key) == null
-							|| !before_properties.get(key).equals(
-									after_properties.get(key))) {
-						// Hack : if before_properties.get(key) == null, we
-						// accepted the value for a change
-						// to avoid nullpointerexception with the equals
-						// statement
-						if (!(before_properties.get(key) == null && after_properties
-								.get(key) == null))
+				if (nodeFilterer.acceptOnName(key)) {
+					if (
+							!before_properties.containsKey(key) || // new property
+							before_properties.get(key) == null ||  // a property with null value: trick to avoid null pointer exception on the next checking
+							!before_properties.get(key).equals(after_properties.get(key)) // old value is different from new value 
+						) 
+					{
+						// Hack : if before_properties.get(key) == null, we accepted the value for a change
+						// to avoid nullpointerexception with the equals statement
+						if (!(before_properties.get(key) == null && after_properties.get(key) == null))
 							changes.put(key, after_properties.get(key));
 					}
 				}
@@ -119,14 +125,14 @@ public class SQLSynchronisationPolicy implements
 
 
 	public void onCreateAssociation(AssociationRef associationRef) {
-		if (nodeFilterer.accept(associationRef.getTypeQName())) {
+		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {
 			logger.debug("Synchronisation policy, CREATE ASSOCIATION");
 			nodeService.addAssociation(associationRef);
 		}
 	}
 	
 	public void onDeleteAssociation(AssociationRef associationRef) {
-		if (nodeFilterer.accept(associationRef.getTypeQName())) {
+		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {
 			logger.debug("Synchronisation policy, DELETE ASSOCIATION");
 			nodeService.removeAssociation(associationRef);
 		}
@@ -134,14 +140,14 @@ public class SQLSynchronisationPolicy implements
 
 	public void onCreateChildAssociation(ChildAssociationRef associationRef,
 			boolean isNewNode) {
-		if (nodeFilterer.accept(associationRef.getTypeQName())) {
+		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {
 			logger.debug("Synchronisation policy, CREATE CHILD ASSOCIATION");
 			nodeService.addChildAssociation(associationRef);
 		}
 	}
 
 	public void onDeleteChildAssociation(ChildAssociationRef associationRef) {
-		if (nodeFilterer.accept(associationRef.getTypeQName())) {
+		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {
 
 			logger.debug("Synchronisation policy, DELETE CHILD ASSOCIATION");
 			nodeService.removeChildAssociation(associationRef);
@@ -155,7 +161,8 @@ public class SQLSynchronisationPolicy implements
 	private PolicyComponent policyComponent;
 	private NodeFilterer nodeFilterer;
 	private NodeService nodeService;
-
+	private SchemaCreation schemaCreation;
+	
 	public void setPolicyComponent(PolicyComponent policyComponent_) {
 		policyComponent = policyComponent_;
 	}
@@ -168,4 +175,7 @@ public class SQLSynchronisationPolicy implements
 		nodeService = nodeService_;
 	}
 
+	public void setSchemaCreation(SchemaCreation schemaCreation_) {
+		schemaCreation = schemaCreation_;
+	}
 }

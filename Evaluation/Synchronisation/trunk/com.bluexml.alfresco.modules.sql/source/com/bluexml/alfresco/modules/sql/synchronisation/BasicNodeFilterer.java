@@ -29,7 +29,7 @@ public class BasicNodeFilterer implements NodeFilterer {
 		return result;
 	}
 
-	public boolean accept(QName qname) {
+	public boolean acceptOnName(QName qname) {
 		boolean accepted = true;
 		
 		accepted &= qname.getNamespaceURI().startsWith(BLUEXML_MODEL_URI);
