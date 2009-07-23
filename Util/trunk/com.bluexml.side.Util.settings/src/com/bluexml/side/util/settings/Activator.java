@@ -13,9 +13,12 @@ public class Activator extends AbstractUIPlugin {
 	public static final String KEY_PREFERENCE = "Key";
 	public static final String KEY_DEFAULT = "";
 
+	public static final String FEEDBACK_PREFERENCE = "DoFeedback";
+	public static final boolean FEEDBACK_DEFAULT = false;
+
 	// The shared instance
 	private static Activator plugin;
-	
+
 	/**
 	 * The constructor
 	 */
@@ -49,8 +52,8 @@ public class Activator extends AbstractUIPlugin {
 		return plugin;
 	}
 
-	/** 
-	 * Initializes a preference store with default preference values 
+	/**
+	 * Initializes a preference store with default preference values
 	 * for this plug-in.
 	 */
 	public static void initializeDefaultPreferences() {
