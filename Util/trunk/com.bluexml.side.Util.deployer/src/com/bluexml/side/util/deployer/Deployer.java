@@ -61,23 +61,18 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Use to setup all properties, ordinary used by deployer luncher
-	 *
+	 * 
 	 * @param configurationParameters
 	 * @param generationParameters
 	 * @param options
 	 */
-	public void initialize(Map<String, String> configurationParameters,
-			Map<String, String> generationParameters, List<String> options) {
+	public void initialize(Map<String, String> configurationParameters, Map<String, String> generationParameters, List<String> options) {
 		this.configurationParameters = configurationParameters;
 		this.options = options;
 		this.generationParameters = generationParameters;
 		this.techVersion = configurationParameters.get("technologyVersion");
 		this.id = configurationParameters.get("deployerId");
-		log = new SIDELog(configurationParameters.get("deployerName"), id,
-				configurationParameters.get("technologyVersionName"),
-				configurationParameters.get("technologyName"),
-				configurationParameters.get("metaModelName"), new Date(),
-				LogType.DEPLOYMENT);
+		log = new SIDELog(configurationParameters.get("deployerName"), id, configurationParameters.get("technologyVersionName"), configurationParameters.get("technologyName"), configurationParameters.get("metaModelName"), new Date(), LogType.DEPLOYMENT);
 	}
 
 	public Map<String, String> getGenerationParameters() {
@@ -90,13 +85,12 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * do the whole deploy process
-	 *
+	 * 
 	 * @throws Exception
 	 */
 	public void deploy() throws Exception {
 		String IfilewkDirPath = getTargetPath();
-		String absoluteWKDirePath = IFileHelper
-				.getSystemFolderPath(IfilewkDirPath);
+		String absoluteWKDirePath = IFileHelper.getSystemFolderPath(IfilewkDirPath);
 		File fileToDeploy = getFileToDeploy(absoluteWKDirePath);
 		preProcess(fileToDeploy);
 		if (doClean()) {
@@ -108,7 +102,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * default method to get the File to deploy
-	 *
+	 * 
 	 * @param absoluteWKDirPath
 	 * @return
 	 */
@@ -118,7 +112,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * the main deploy process
-	 *
+	 * 
 	 * @param fileToDeploy
 	 * @throws Exception
 	 */
@@ -126,7 +120,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * method that clean the target before deploy resources into
-	 *
+	 * 
 	 * @param fileToDeploy
 	 * @throws Exception
 	 */
@@ -134,7 +128,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Job to do after the main process
-	 *
+	 * 
 	 * @param fileToDeploy
 	 * @throws Exception
 	 */
@@ -142,7 +136,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Job to do before the main process
-	 *
+	 * 
 	 * @param fileToDeploy
 	 * @throws Exception
 	 */
@@ -150,12 +144,11 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Return the path where generator have outputed theirs files.
+	 * 
 	 * @return
 	 */
 	public final String getTargetPath() {
-		return configurationParameters
-				.get(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH
-						.getLiteral());
+		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral());
 	}
 
 	public Map<String, String> getConfigurationParameters() {
@@ -164,7 +157,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * check if changes made by the deploy process must be logged
-	 *
+	 * 
 	 * @return
 	 */
 	protected boolean logChanges() {
@@ -173,7 +166,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * check if clean must be done
-	 *
+	 * 
 	 * @return
 	 */
 	protected boolean doClean() {
@@ -182,20 +175,19 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Add a Log
-	 *
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
 	 * @param logEntryType
 	 */
-	protected void addLog(String title, String description, String uri,
-			LogEntryType logEntryType) {
+	protected void addLog(String title, String description, String uri, LogEntryType logEntryType) {
 		log.addLogEntry(new LogEntry(title, description, uri, logEntryType));
 	}
 
 	/**
 	 * Add an Error Log
-	 *
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -206,18 +198,16 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Add an error log using a stracktrace instead of a string description
-	 *
+	 * 
 	 * @param title
 	 * @param stackTrace
 	 * @param uri
 	 */
-	public void addErrorLog(String title, StackTraceElement[] stackTrace,
-			String uri) {
+	public void addErrorLog(String title, StackTraceElement[] stackTrace, String uri) {
 		String description = "";
 		if (stackTrace != null && stackTrace.length > 0) {
 			for (StackTraceElement se : stackTrace) {
-				description += System.getProperty("line.separator")
-						+ se.toString();
+				description += System.getProperty("line.separator") + se.toString();
 			}
 		}
 		addErrorLog(title, description, uri);
@@ -225,7 +215,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Add a warning log
-	 *
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -237,7 +227,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Add information log
-	 *
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -249,6 +239,7 @@ public abstract class Deployer implements Checkable {
 	/**
 	 * Move the stamp file added by the generator to the directory into log path
 	 * to be used for log purpose.
+	 * 
 	 * @throws Exception
 	 */
 	final public void moveStampFile(String logPath) throws Exception {

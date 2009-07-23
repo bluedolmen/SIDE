@@ -17,7 +17,7 @@ public abstract class AbstractMultiDeployer extends Deployer {
 	protected void deployProcess(File fileToDeploy) throws Exception {
 		
 		for (Deployer wd : deployers) {
-			//wd.deploy();
+			wd.deploy();
 		}
 		
 	}
