@@ -11,9 +11,19 @@ public class Activator extends AbstractUIPlugin {
 	// The plug-in ID
 	public static final String PLUGIN_ID = "com.bluexml.side.Util.feedback";
 
+	// Variable used in plugin :
+
+	public static final String LAST_UPDATE_DATE = "lastUpdateDate";
+
+	public static String SERVICE_URL = "http://www.bluexml.com/ws/upload";
+
+	public static String ZIP_FILE_NAME = "sideLog.zip";
+
+	public static final long MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+
 	// The shared instance
 	private static Activator plugin;
-	
+
 	/**
 	 * The constructor
 	 */

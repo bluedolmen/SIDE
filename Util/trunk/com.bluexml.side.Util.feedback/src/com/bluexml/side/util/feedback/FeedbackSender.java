@@ -15,9 +15,9 @@ import de.schlichtherle.io.File;
 
 public class FeedbackSender {
 
-	public static String ZIP_FILE_NAME = "sideLog.zip";
+
 	//public static String SERVICE_URL = "http://localhost/upload.php";
-	public static String SERVICE_URL = "http://www.bluexml.com/ws/upload";
+
 
 	/**
 	 * Send all *-log.xml files to blueXml server.
@@ -68,7 +68,7 @@ public class FeedbackSender {
 	 */
 	private static void sendFile(File file) throws IOException {
 		if (file != null) {
-			ClientHttpRequest request = new ClientHttpRequest(SERVICE_URL);
+			ClientHttpRequest request = new ClientHttpRequest(Activator.SERVICE_URL);
 			request.setParameter("log", file);
 			request.post();
 		}
@@ -92,10 +92,10 @@ public class FeedbackSender {
 		}
 
 		// Zip creation
-		File zipFile = new File(source, ZIP_FILE_NAME);
+		File zipFile = new File(source, Activator.ZIP_FILE_NAME);
 		if (zipFile.exists()) {
 			zipFile.delete();
-			zipFile = new File(source, ZIP_FILE_NAME);
+			zipFile = new File(source, Activator.ZIP_FILE_NAME);
 		}
 		zipFile.mkdir();
 
