@@ -87,7 +87,7 @@ public abstract class WarDeployer extends Deployer {
 	protected final void preProcess(File fileToDeploy) throws Exception {
 		initWarToPatch(new File(getTomcatHome()));
 		if (!fileToDeploy.exists()) {
-			throw new Exception("No files to deploy !");
+			throw new Exception("No files to deploy !"+fileToDeploy);
 		}
 	}
 
