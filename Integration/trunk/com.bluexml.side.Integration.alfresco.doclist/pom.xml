@@ -20,7 +20,12 @@
 	<groupId>com.bluexml.side.Integration.alfresco</groupId>
 	<artifactId>com.bluexml.side.Integration.alfresco.doclist</artifactId>
 	<packaging>amp</packaging>
-	<name></name>
+	<name>com.bluexml.side.Integration.alfresco.doclist</name>
+	<parent>
+		<groupId>org.bluexml</groupId>
+		<artifactId>superpom</artifactId>
+		<version>1.8</version>
+	</parent>
 	<!--
 		An Alfresco version number must be of the form 1.2.3.4. Using
 		1.0-SNAPSHOT as the AMP version will create an exception. See
@@ -31,13 +36,9 @@
 		below as the AMP module version. Instead we use the
 		buildnumber-maven-plugin. This requires a scm connection.
 	-->
-	<version>1.0.0</version>
-	<description></description>
-	<parent>
-		<groupId>org.bluexml</groupId>
-		<artifactId>superpom</artifactId>
-		<version>1.8</version>
-	</parent>
+	<version>1.0.1</version>
+	<description>amp module to enable custom views in AlfrescoShare Document library</description>
+
 	<repositories>
 		<repository>
 			<id>ss-public</id>
