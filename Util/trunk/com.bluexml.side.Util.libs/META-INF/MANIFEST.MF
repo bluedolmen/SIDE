@@ -12,6 +12,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.Ostermiller.util,
  com.bluexml.side.util.libs;uses:="org.osgi.framework,org.eclipse.core.resources,org.eclipse.core.runtime",
+ com.bluexml.side.util.libs.httpRequest,
  com.bluexml.side.util.libs.md5,
  com.bluexml.side.util.libs.ui,
  com.bluexml.side.util.libs.view;uses:="org.eclipse.ui.part,org.eclipse.swt.widgets",
