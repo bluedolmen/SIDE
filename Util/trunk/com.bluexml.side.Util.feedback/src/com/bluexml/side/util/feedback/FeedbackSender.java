@@ -1,11 +1,13 @@
 package com.bluexml.side.util.feedback;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IPath;
 
 import com.bluexml.side.util.libs.FileHelper;
+import com.bluexml.side.util.libs.httpRequest.ClientHttpRequest;
 
 import de.schlichtherle.io.ArchiveDetector;
 import de.schlichtherle.io.ArchiveException;
@@ -14,7 +16,8 @@ import de.schlichtherle.io.File;
 public class FeedbackSender {
 
 	public static String ZIP_FILE_NAME = "sideLog.zip";
-	public static String SERVICE_URL = "http://www.bluexml.com/feedback.php";
+	//public static String SERVICE_URL = "http://localhost/upload.php";
+	public static String SERVICE_URL = "http://www.bluexml.com/ws/upload";
 
 	/**
 	 * Send all *-log.xml files to blueXml server.
@@ -28,16 +31,46 @@ public class FeedbackSender {
 			e.printStackTrace();
 		}
 		// Send it
-		sendFile(zipFile);
+		try {
+			sendFile(zipFile);
+			// Remove all files send previously
+			removeSendedFiles(zipFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Remove xml files and zipFile.
+	 * @param zipFile
+	 */
+	private static void removeSendedFiles(File zipFile) {
+		IPath pluginSaveFolder = FeedbackUtils.getFeedbackSaveFolder();
+		java.io.File source = pluginSaveFolder.toFile();
+		List<java.io.File> fileList = FileHelper.listAll(source);
+		for (java.io.File f : fileList) {
+			if (f.getName().endsWith(FeedbackUtils.END_FILE_NAME)) {
+				f.delete();
+			}
+		}
+		try {
+			zipFile.umount();
+		} catch (ArchiveException e) {
+			e.printStackTrace();
+		}
+		zipFile.delete();
 	}
 
 	/**
 	 * Send the given file to bluexml server
 	 * @param file
+	 * @throws IOException
 	 */
-	private static void sendFile(File file) {
+	private static void sendFile(File file) throws IOException {
 		if (file != null) {
-
+			ClientHttpRequest request = new ClientHttpRequest(SERVICE_URL);
+			request.setParameter("log", file);
+			request.post();
 		}
 	}
 
