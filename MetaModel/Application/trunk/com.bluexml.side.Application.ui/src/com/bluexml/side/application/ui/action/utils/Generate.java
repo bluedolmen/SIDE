@@ -29,12 +29,13 @@ import com.bluexml.side.application.Model;
 import com.bluexml.side.application.Option;
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
+import com.bluexml.side.util.dependencies.DependencesManager;
+import com.bluexml.side.util.dependencies.ModuleConstraint;
 import com.bluexml.side.util.deployer.Deployer;
 import com.bluexml.side.util.documentation.LogSave;
 import com.bluexml.side.util.feedback.FeedbackManager;
+import com.bluexml.side.util.feedback.FeedbackSender;
 import com.bluexml.side.util.generator.AbstractGenerator;
-import com.bluexml.side.util.dependencies.DependencesManager;
-import com.bluexml.side.util.dependencies.ModuleConstraint;
 import com.bluexml.side.util.libs.IFileHelper;
 
 public class Generate extends Thread {
@@ -136,9 +137,7 @@ public class Generate extends Thread {
 			logPath = getLogPath(configuration, configurationParameters);
 			genPath = getGenerationPath(configuration, configurationParameters);
 			generate(configuration, modelsInfo, configurationParameters, generationParameters);
-			feedbackManager.save();
-			// Refresh log and generation folder
-			refreshFolders();
+			// All behind this line will be execute before the generation (async method).
 		}
 	}
 
@@ -212,7 +211,6 @@ public class Generate extends Thread {
 				}
 
 				boolean error = generate_(configuration, modelsInfo, configurationParameters, generationParameters);
-
 				error &= deploy_(configuration, modelsInfo, configurationParameters, generationParameters);
 
 				progressBar.setSelection(progressBar.getMaximum());
@@ -221,6 +219,9 @@ public class Generate extends Thread {
 				} else {
 					label.setText("Generation completed with errors.");
 				}
+
+
+				// Log
 				try {
 					LogSave.buildGeneraLogFile(logPath);
 					IFileHelper.refreshFolder(logPath);
@@ -231,9 +232,16 @@ public class Generate extends Thread {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				// Feedback
+				try {
+					feedbackManager.save();
+					//FeedbackSender.send();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				// Refresh log and generation folder
+				refreshFolders();
 			}
-
-
 		});
 
 	}
@@ -282,6 +290,7 @@ public class Generate extends Thread {
 			for (Option option : elem.getOptions()) {
 				generatorOptions.put(option.getKey(), true);
 			}
+			feedbackManager.addFeedBackItem(elem.getId(), elem.getMetaModelName(), id_techno_version, generatorOptions);
 
 			AbstractGenerator generator = null;
 			try {
