@@ -138,11 +138,12 @@ public class IFileHelper {
         IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
         IFolder folder = myWorkspaceRoot.getFolder(new Path(ressource));
         if (!folder.exists()) {
-
-        	String parentPath = folder.getFullPath().removeLastSegments(1).toOSString();
-        	IFolder parent = IFileHelper.getIFolder(parentPath);
-        	if (!parent.exists()) {
-        		IFileHelper.createFolder(parentPath);
+        	if (folder.getFullPath().segmentCount() > 1) {
+        		String parentPath = folder.getFullPath().removeLastSegments(1).toOSString();
+        		IFolder parent = IFileHelper.getIFolder(parentPath);
+	        	if (!parent.exists()) {
+	        		IFileHelper.createFolder(parentPath);
+	        	}
         	}
             folder.create(true, true, null);
         }
