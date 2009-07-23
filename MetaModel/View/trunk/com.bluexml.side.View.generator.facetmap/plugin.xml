@@ -21,11 +21,6 @@
                      description="Check this to generate the dynamic files that Facetmap needs in your application.&lt;br&gt;The generated files may be deployed in any Facetmap instance.&lt;br&gt;S-IDE provides the necessary components to deploy these packages through the &apos;deployer&apos; tab."
                      id="com.bluexml.side.View.generator.facetmap"
                      version="S-IDE Facetmap Generator 1.0.0">
-                  <configurationParameter
-                        documentation="Set this value to the hostname of the application server that runs your facetmap."
-                        key="FACETMAP_HOST"
-                        label="FacetMap Host">
-                  </configurationParameter>
                </generatorVersion>
             </technologyVersion>
          </technology>

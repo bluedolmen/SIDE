@@ -17,14 +17,14 @@ version="1.0">
   	<xsl:choose>
         <xsl:when test="@count &gt; 1">
 			<xsl:value-of select="@count" />
-			<xsl:text> Résultats </xsl:text>
+			<xsl:text> RÃ©sultats </xsl:text>
 			<xsl:if test="@count != count(resource)">
 			(<xsl:value-of select="count(resource)" />
-			<xsl:text> affichés)</xsl:text>
+			<xsl:text> affichÃ©s)</xsl:text>
 			</xsl:if>
 		</xsl:when>
         <xsl:otherwise>
-			<xsl:value-of select="@count" /><xsl:text> Résultats</xsl:text>
+			<xsl:value-of select="@count" /><xsl:text> RÃ©sultats</xsl:text>
 		</xsl:otherwise>
       </xsl:choose>
     </div>
@@ -43,15 +43,15 @@ version="1.0">
         	<a>
         		<xsl:attribute name="target">_blank</xsl:attribute>
         	<%if (name == "download"){%>
-					<xsl:attribute name="href">../<xsl:value-of select="@href"/></xsl:attribute>
+					<xsl:attribute name="href">../share/proxy/alfresco/api/node/content/workspace/SpacesStore/<xsl:value-of select="@href"/>/ChangeLog.txt?a=true</xsl:attribute>
 					<img src="{$icons_url}/disk.png" class="imgIcon"/>
 			<%}%>
 			<%if (name == "view"){%>
-					<xsl:attribute name="href">../<xsl:value-of select="@href"/></xsl:attribute>
+					<xsl:attribute name="href">../share/page/site/test/document-details?nodeRef=workspace://SpacesStore/<xsl:value-of select="@href"/></xsl:attribute>
 					<img src="{$icons_url}/eye.png" class="imgIcon"/>
 			<%}%>
 			<%if (name == "edit"){%>
-					<xsl:attribute name="href">../<xsl:value-of select="@href"/></xsl:attribute>
+					<xsl:attribute name="href">../share/page/site/test/edit-metadata?nodeRef=workspace://SpacesStore/<xsl:value-of select="@href"/></xsl:attribute>
 					<img src="{$icons_url}/edit.png" class="imgIcon"/>
 			<%}%>
 			</a>
