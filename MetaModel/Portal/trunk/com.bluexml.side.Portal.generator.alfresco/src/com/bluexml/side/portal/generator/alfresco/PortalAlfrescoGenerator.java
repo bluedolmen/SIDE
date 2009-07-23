@@ -11,9 +11,11 @@ import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
 public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
 	private static String MMUri = "http://www.kerblue.org/portal/1.0";
+	static String GENERATOR_OPTIONS_DOCLIST = "com.bluexml.side.Portal.generator.alfresco.doclist";
 
 	@Override
 	public Properties buildModuleProperties(String modelId) {
+
 		Date now = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 		Properties props = new Properties();
@@ -36,7 +38,9 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	@Override
 	protected List<String> getTemplates() {
 		List<String> result = new ArrayList<String>();
-		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/DocumentLibraryProtelView.ftl.mt");
+		if (getGeneratorOptionValue(GENERATOR_OPTIONS_DOCLIST)) {
+			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/DocumentLibraryProtelView.ftl.mt");
+		}
 		return result;
 	}
 

@@ -49,21 +49,22 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
 			result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoGenerator_context.mt");
 
-			if (getGeneratorOptionValue(GENERATOR_OPTIONS_SHARE_EXTENSION)) {
-
-				// DefaultdocListView add custom version of docList webScript
-				// used by AlfrescoShare to render Document list
-				if (getGeneratorOptionValue(GENERATOR_OPTIONS_PORTAL)) {
-					result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/customViews.ftl.mt");
-				}
+			// DefaultdocListView add custom version of docList webScript
+			// used by AlfrescoShare to render Document list
+			if (getGeneratorOptionValue(GENERATOR_OPTIONS_PORTAL)) {
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/customViews.ftl.mt");
+				// default view
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/defaultdoclistView_ftl.mt");
-				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/doclist.get.desc.xml.mt");
-				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/doclist.get.html.ftl.mt");
-				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/doclist.get.js.mt");
-				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/doclist.get.json.ftl.mt");
+			}
+			
+			if (getGeneratorOptionValue(GENERATOR_OPTIONS_SHARE_EXTENSION)) {
+				// static resources to enable to use view in doclist now com.bluexml.side.Integration.alfresco.doclist dependence
+//				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/doclist.get.desc.xml.mt");
+//				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/doclist.get.html.ftl.mt");
+//				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/doclist.get.js.mt");
+//				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/doclist.get.json.ftl.mt");
 
 				// generator for alfresco Share web application
-
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/file-upload-response-get-patch.mt");
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/flash-upload-js-get-patch.mt");
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/html-upload-js-get-patch.mt");

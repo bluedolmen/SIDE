@@ -22,17 +22,21 @@
                      description="Check this to generate a full deployable Alfresco package containing the newly designed content model and other Alfresco artefacts.&lt;br&gt;The generated packages are standard Alfresco Module package which may be deployed in any Alfresco 3.x instance under the &apos;amps&apos; directory.&lt;br&gt;S-IDE provides the necessary components to deploy these packages through the &apos;deployer&apos; tab."
                      id="com.bluexml.side.Portal.generator.alfresco"
                      version="S-IDE Alfresco Portal Generator">
-                  <moduleDependence
-                        moduleId="com.bluexml.side.Integration.alfrescoShare.doclist"
-                        moduleType="zip"
-                        versionMin="1.0.0">
-                  </moduleDependence>
-                  <mustBeUnchecked
-                        pluginId="com.bluexml.side.Class.generator.alfresco">
-                     <optionRef
-                           optionId="alfrescoShare.defaultDocList">
-                     </optionRef>
-                  </mustBeUnchecked>
+                  <option
+                        key="com.bluexml.side.Portal.generator.alfresco.doclist"
+                        label="Alfresco Share document library component">
+                     <moduleDependence
+                           moduleId="com.bluexml.side.Integration.alfrescoShare.doclist"
+                           moduleType="zip"
+                           versionMin="1.0.0">
+                     </moduleDependence>
+                     <mustBeUnchecked
+                           pluginId="com.bluexml.side.Class.generator.alfresco">
+                        <optionRef
+                              optionId="alfrescoShare.defaultDocList">
+                        </optionRef>
+                     </mustBeUnchecked>
+                  </option>
                </generatorVersion>
             </technologyVersion>
          </technology>
