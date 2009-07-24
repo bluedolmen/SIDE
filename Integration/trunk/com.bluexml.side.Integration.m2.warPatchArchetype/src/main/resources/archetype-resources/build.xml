@@ -8,8 +8,6 @@
 	<property name="module.jar" value="./lib/${module.id}.jar" />
 	<property name="module.zip" value="${extensionFolder}/${module.id}-${module.version}.zip" />
 
-
-
 	<property name="packageDescriptionFile" value="moduleDescriptions/module.${module.id}.properties" />
 	<!-- ================================= 
           target: buildExtension              
@@ -19,7 +17,7 @@
 		</echo>
 		<delete dir="${tmpFolder}" failonerror="false" />
 		<mkdir dir="${extensionFolder}" />
-		<!-- TODO: Insert your custom code -->
+		<!-- TODO: Insert your custom code mybe uncomment jar building ...-->
 
 		<!--jar destfile="${module.jar}">
 			<fileset dir="./target/classes" id="id">
@@ -27,6 +25,11 @@
 			</fileset>
 		</jar-->
 		<copy file="${module.properties}" tofile="${tmpFolder}/${packageDescriptionFile}" />
+		<copy todir="${tmpFolder}">
+			<fileset dir="${resources}" id="id">
+				<exclude name="${module.properties}" />
+			</fileset>
+		</copy>
 		<zip destfile="${module.zip}">
 			<fileset dir="${tmpFolder}" id="id">
 				<include name="**/*.*" />

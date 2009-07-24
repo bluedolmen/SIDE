@@ -21,6 +21,15 @@
 		</dependency>
 	</dependencies>
 	<build>
+
+		<resources>
+			<resource>
+				<directory>resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+
 		<extensions>
 			<extension>
 				<groupId>com.bluexml.side.Integration.m2</groupId>
@@ -37,7 +46,10 @@
 						<configuration>
 							<tasks>
 								<ant antfile="build.xml" target="buildExtension">
-									<property name="version" value="1.0.0" />
+									<property name="module.version" value="${project.version}" />
+									<property name="module.title" value="${project.name}" />
+									<property name="module.description" value="${project.description}" />
+									<property name="module.id" value="${artifactId}" />
 								</ant>
 							</tasks>
 						</configuration>
