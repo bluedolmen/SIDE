@@ -71,7 +71,21 @@ public class Utils {
 		}
 		return projects;
 	}
+	
+	/**
+	 * Retourne la liste des projets a versionner
+	 */
+	public static String[] getVersionedProjects() {
 
+		String[] projects = ouvrirFichier("build.properties").getProperty(
+				"projectToVersioned").split(",");
+
+		for (int i = 0; i < projects.length; i++) {
+			projects[i] = projects[i].split("&")[1];
+		}
+		return projects;
+	}
+	
 	/**
 	 * Retourne le chemin pour un projet donné (par exemple
 	 * MetaModel/Application pour le projet com.bluexml.side.Application
@@ -79,9 +93,9 @@ public class Utils {
 	 * @param projectName
 	 * @return
 	 */
-	public static String getProjectPath(String projectName) {
+	public static String getVersionedProjectPath(String projectName) {
 		String[] projects = ouvrirFichier("build.properties").getProperty(
-				"project").split(",");
+				"projectToVersioned").split(",");
 
 		String path = "";
 		for (int i = 0; i < projects.length; i++) {
@@ -93,32 +107,15 @@ public class Utils {
 	}
 
 	/**
-	 * Retourne la liste des projets a compiler seulement
-	 * 
-	 * @return la liste des projets
-	 */
-	public static String[] getProjectsToBuild() {
-		String[] projects = ouvrirFichier("build.properties").getProperty(
-				"projectToBuild").split(",");
-
-		for (int i = 0; i < projects.length; i++) {
-			projects[i] = projects[i].split("&")[1];
-		}
-
-		return projects;
-	}
-
-	/**
-	 * Retourne le chemin pour un projet (de la liste des projets a compiler
-	 * seulement) donné (par exemple MetaModel/Application pour le projet
-	 * com.bluexml.side.Application
+	 * Retourne le chemin pour un projet donné (par exemple
+	 * MetaModel/Application pour le projet com.bluexml.side.Application
 	 * 
 	 * @param projectName
 	 * @return
 	 */
-	public static String getProjectToBuildPath(String projectName) {
+	public static String getProjectPath(String projectName) {
 		String[] projects = ouvrirFichier("build.properties").getProperty(
-				"projectToBuild").split(",");
+				"project").split(",");
 
 		String path = "";
 		for (int i = 0; i < projects.length; i++) {
@@ -408,6 +405,12 @@ public class Utils {
 		for (int i = 0; i < projects.length; i++) {
 			listeProjetReels.add(projects[i]);
 		}
+		
+		String[] projectsToVersioned = getVersionedProjects();
+		
+		for (int i = 0; i < projectsToVersioned.length; i++) {
+			listeProjetReels.add(projectsToVersioned[i]);
+		}
 
 		boolean end = false;
 
@@ -676,8 +679,7 @@ public class Utils {
 						if ("".equals(getForceNumberVersion()))
 							ligne += " " + update(number, pattern);
 						else
-							ligne += " " + getForceNumberVersion() + ".v"
-									+ getRevisionNumber() + "-" + getDate();
+							ligne += " " + update(number, getForceNumberVersion().split("\\."));
 					}
 					// ecriture de la ligne dans le nouveau fichier
 					writer.println(ligne);
@@ -775,8 +777,7 @@ public class Utils {
 					racine.setAttribute("version", update(number, pattern));
 				}
 			} else
-				racine.setAttribute("version", getForceNumberVersion() + ".v"
-						+ getRevisionNumber() + "-" + getDate());
+				racine.setAttribute("version", update(number, getForceNumberVersion().split("\\.")));
 
 			// Enregistrement du fichier
 			try {

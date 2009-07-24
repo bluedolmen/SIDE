@@ -282,7 +282,7 @@ public class Application {
 
 		out += getGenJavadoc();
 
-		out += getBuildProject();
+		//out += getBuildProject();
 
 		out += "</project>\n";
 		return out;
@@ -588,10 +588,12 @@ public class Application {
 		return out;
 	}
 
+	
+	
 	/**
 	 * Retourne le corps de la target buildProject
 	 */
-	private static String getBuildProject() {
+	/*private static String getBuildProject() {
 		String[] projects = Utils.getProjectsToBuild();
 
 		String out = "\n\t<!-- ================================= \n";
@@ -623,7 +625,7 @@ public class Application {
 
 		out += "\t</target>\n";
 		return out;
-	}
+	}*/
 
 	private static String getJarBuilder() {
 
