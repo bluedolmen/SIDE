@@ -21,6 +21,10 @@
                      key="CATALINA_HOME"
                      label="Tomcat installation directory">
                </configurationParameter>
+               <option
+                     key="com.bluexml.side.Deployer.facetMap.clean"
+                     label="clean webapp">
+               </option>
             </deployerVersion>
          </technologyVersion>
       </technology>

@@ -15,7 +15,7 @@ import com.bluexml.side.util.deployer.war.WarDeployer;
 public class FacetMapDeployer extends AbstractMultiDeployer {
 
 	public FacetMapDeployer() {
-		this.cleanKey = "facetMap.deployer.clean";
+		this.cleanKey = "com.bluexml.side.Deployer.facetMap.clean";
 
 		// build map of ModuleID,(facetmap-facets.zip,facetmap-conent.zip)
 		// for each moduleID build 2 war deployer and process them
