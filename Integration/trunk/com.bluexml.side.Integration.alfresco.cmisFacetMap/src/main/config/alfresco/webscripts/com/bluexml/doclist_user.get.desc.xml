@@ -1,0 +1,7 @@
+<webscript>
+  <shortname>BxDS-CMIS</shortname>
+  <description>Un webscript pour tester la recherche JCR170 SQL</description>  
+  <url>/bluexml/doclist_user</url>
+	<authentication>guest</authentication>
+	<transaction>required</transaction>	
+</webscript>
