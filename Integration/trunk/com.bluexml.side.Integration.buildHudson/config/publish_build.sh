@@ -3,7 +3,7 @@
 # dest=devel or public: if devel, on secured devel update site path; public on public update site
 # rev_build_src_nb=the revision and build number to copy; this will take /home/stager/share/SIDE/Update_site/<build_src_number>
 #
-if [ $# -ne 2 ]; then
+if [ $# -ne 3 ]; then
   echo "Usage: publish_build.sh [devel|public] <rev_build_src_nb> <target_dir>"
   echo "       with devel to copy on protected update_site "
   echo "            public to copy on public update_site www.bluexml.com/update-site/SIDE/public/2.0"
@@ -13,7 +13,7 @@ if [ $# -ne 2 ]; then
 else
   dest=$1
   rev_build_src_nb=$2
-  src_dir=/home/stager/share/SIDE/Update-Site/Ankle
+  src_dir=$3
   # set ssh-agent env var to copy on gimly www.bluexml.com
   ssh_agent_pid=`ps -C ssh-agent -o pid=`
   ssh_agent_ppid=`ps -C ssh-agent -o ppid=`
