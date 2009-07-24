@@ -17,14 +17,14 @@ version="1.0">
   	<xsl:choose>
         <xsl:when test="@count &gt; 1">
 			<xsl:value-of select="@count" />
-			<xsl:text> Résultats </xsl:text>
+			<xsl:text> Resultats </xsl:text>
 			<xsl:if test="@count != count(resource)">
 			(<xsl:value-of select="count(resource)" />
-			<xsl:text> affichés)</xsl:text>
+			<xsl:text> affiches)</xsl:text>
 			</xsl:if>
 		</xsl:when>
         <xsl:otherwise>
-			<xsl:value-of select="@count" /><xsl:text> Résultats</xsl:text>
+			<xsl:value-of select="@count" /><xsl:text> Resultats</xsl:text>
 		</xsl:otherwise>
       </xsl:choose>
     </div>

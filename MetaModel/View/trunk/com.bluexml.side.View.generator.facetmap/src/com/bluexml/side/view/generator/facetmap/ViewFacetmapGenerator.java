@@ -94,7 +94,6 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 	}
 
 	public Collection<IFile> complete() throws Exception {
-		// Don't support
 		if (groupedModels.entrySet().size() > 1)
 			throw new Exception("Error too many root packages for facetmap.");
 		setTEMP_FOLDER("generator_" + getClass().getName());
@@ -102,6 +101,10 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 		for (IFile f : generatedFiles) {
 			addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());
 		}
+
+		// add resources to match with package dependencies
+		addDependences();
+		
 		return generatedFiles;
 	}
 

@@ -20,7 +20,7 @@
 	<groupId>com.bluexml.side.Integration.alfresco</groupId>
 	<artifactId>com.bluexml.side.Integration.alfresco.cmisFacetMap</artifactId>
 	<packaging>amp</packaging>
-	<name>TODO :</name>
+	<name>CMIS script for facetmap</name>
 	<!--
 		An Alfresco version number must be of the form 1.2.3.4. Using
 		1.0-SNAPSHOT as the AMP version will create an exception. See
@@ -32,7 +32,7 @@
 		buildnumber-maven-plugin. This requires a scm connection.
 	-->
 	<version>1.0.0</version>
-	<description>TODO </description>
+	<description>A webscript that lists the document of a certain type. It is used by facetmap to browse documents</description>
 	<repositories>
 		<repository>
 			<id>ss-public</id>
