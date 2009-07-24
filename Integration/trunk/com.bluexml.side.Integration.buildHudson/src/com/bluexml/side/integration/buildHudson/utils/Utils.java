@@ -68,7 +68,9 @@ public class Utils {
 
 		if(projects.length > 0){
 			for (int i = 0; i < projects.length; i++) {
-				projects[i] = projects[i].split("&")[1];
+				if(!"".equals(projects[i])){
+					projects[i] = projects[i].split("&")[1];
+				}
 			}
 		}
 		return projects;
@@ -84,7 +86,9 @@ public class Utils {
 
 		if(projects.length > 0){
 			for (int i = 0; i < projects.length; i++) {
-				projects[i] = projects[i].split("&")[1];
+				if(!"".equals(projects[i])){
+					projects[i] = projects[i].split("&")[1];
+				}
 			}
 		}
 		return projects;
