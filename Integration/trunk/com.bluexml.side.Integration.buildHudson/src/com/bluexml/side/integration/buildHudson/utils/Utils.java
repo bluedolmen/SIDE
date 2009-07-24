@@ -952,17 +952,14 @@ public class Utils {
 			buildNumber = "-" + Application.build_number;
 		}
 
-		File finalFeatures = new File(getFinalDirectory() + File.separator
-				+ getArchivePrefix() + File.separator + getCodeName()
+		File finalFeatures = new File(getUpdateSiteDir() + File.separator + getCodeName()
 				+ File.separator + getRevisionNumber() + buildNumber
 				+ File.separator + "features");
-		File finalPlugins = new File(getFinalDirectory() + File.separator
-				+ getArchivePrefix() + File.separator + getCodeName()
+		File finalPlugins = new File(getUpdateSiteDir() + File.separator + getCodeName()
 				+ File.separator + getRevisionNumber() + buildNumber
 				+ File.separator + "plugins");
 
-		File finalSite = new File(getFinalDirectory() + File.separator
-				+ getArchivePrefix() + File.separator + getCodeName()
+		File finalSite = new File(getUpdateSiteDir() + File.separator + getCodeName()
 				+ File.separator + getRevisionNumber() + buildNumber
 				+ File.separator + "site.xml");
 
@@ -983,24 +980,18 @@ public class Utils {
 			if (!new File(getFinalDirectory()).exists())
 				new File(getFinalDirectory()).mkdir();
 
-			if (new File(getFinalDirectory() + File.separator
-					+ getArchivePrefix() + File.separator + getCodeName()
+			if (new File(getUpdateSiteDir() + File.separator + getCodeName()
 					+ File.separator + "features").exists()) {
-				FileHelper.deleteFile(new File(getFinalDirectory()
-						+ File.separator + getArchivePrefix() + File.separator
+				FileHelper.deleteFile(new File(getUpdateSiteDir() + File.separator
 						+ getCodeName() + File.separator + "features"));
-				new File(getFinalDirectory() + File.separator
-						+ getArchivePrefix() + File.separator + getCodeName()
+				new File(getUpdateSiteDir() + File.separator + getCodeName()
 						+ File.separator + "features").mkdir();
 			}
-			if (new File(getFinalDirectory() + File.separator
-					+ getArchivePrefix() + File.separator + getCodeName()
+			if (new File(getUpdateSiteDir() + File.separator + getCodeName()
 					+ File.separator + "plugins").exists()) {
-				FileHelper.deleteFile(new File(getFinalDirectory()
-						+ File.separator + getArchivePrefix() + File.separator
+				FileHelper.deleteFile(new File(getUpdateSiteDir() + File.separator
 						+ getCodeName() + File.separator + "plugins"));
-				new File(getFinalDirectory() + File.separator
-						+ getArchivePrefix() + File.separator + getCodeName()
+				new File(getUpdateSiteDir() + File.separator + getCodeName()
 						+ File.separator + "plugins").mkdir();
 			}
 
@@ -1008,19 +999,17 @@ public class Utils {
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
 					+ getBuildLabel() + File.separator + getArchivePrefix()
 					+ File.separator + "features"), new File(
-					getFinalDirectory() + File.separator + getArchivePrefix()
+							getUpdateSiteDir()
 							+ File.separator + getCodeName() + File.separator
 							+ "features"), true);
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
 					+ getBuildLabel() + File.separator + getArchivePrefix()
-					+ File.separator + "plugins"), new File(getFinalDirectory()
-					+ File.separator + getArchivePrefix() + File.separator
+					+ File.separator + "plugins"), new File(getUpdateSiteDir() + File.separator
 					+ getCodeName() + File.separator + "plugins"), true);
 
 			// copie du site.xml pour l'update site
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
-					+ "site.xml"), new File(getFinalDirectory()
-					+ File.separator + getArchivePrefix() + File.separator
+					+ "site.xml"), new File(getUpdateSiteDir() + File.separator
 					+ getCodeName() + File.separator + "site.xml"), true);
 
 			// copie de la doc
@@ -1121,6 +1110,11 @@ public class Utils {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private static String getUpdateSiteDir() {
+		return ouvrirFichier("build.properties").getProperty("updateSiteDir");
+		
 	}
 
 	/**
