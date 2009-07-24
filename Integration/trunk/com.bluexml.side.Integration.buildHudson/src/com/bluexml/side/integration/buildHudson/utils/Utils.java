@@ -66,8 +66,10 @@ public class Utils {
 		String[] projects = ouvrirFichier("build.properties").getProperty(
 				"project").split(",");
 
-		for (int i = 0; i < projects.length; i++) {
-			projects[i] = projects[i].split("&")[1];
+		if(projects.length > 0){
+			for (int i = 0; i < projects.length; i++) {
+				projects[i] = projects[i].split("&")[1];
+			}
 		}
 		return projects;
 	}
@@ -80,8 +82,10 @@ public class Utils {
 		String[] projects = ouvrirFichier("build.properties").getProperty(
 				"projectToVersioned").split(",");
 
-		for (int i = 0; i < projects.length; i++) {
-			projects[i] = projects[i].split("&")[1];
+		if(projects.length > 0){
+			for (int i = 0; i < projects.length; i++) {
+				projects[i] = projects[i].split("&")[1];
+			}
 		}
 		return projects;
 	}
