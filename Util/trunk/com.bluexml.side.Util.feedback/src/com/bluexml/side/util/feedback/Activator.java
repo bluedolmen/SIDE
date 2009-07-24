@@ -15,11 +15,22 @@ public class Activator extends AbstractUIPlugin {
 
 	public static final String LAST_UPDATE_DATE = "lastUpdateDate";
 
+	// URL to send file
 	public static String SERVICE_URL = "http://www.bluexml.com/ws/upload";
 
+	// Attribute name for the logfile (used by SERVICE_URL with POST method)
+	public static final String LOGFILE_ATTRIBUTE_NAME = "log";
+
+	// URL for stats to show in popup.
+	public static String STATS_URL = "http://www.bluexml.com";
+
+	// Zipe file name
 	public static String ZIP_FILE_NAME = "sideLog.zip";
 
 	public static final long MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+
+	// Period between ech send (in day)
+	public static final int TIME_BETWEEN_SEND = 5;
 
 	// The shared instance
 	private static Activator plugin;

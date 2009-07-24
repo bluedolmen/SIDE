@@ -69,7 +69,7 @@ public class FeedbackSender {
 	private static void sendFile(File file) throws IOException {
 		if (file != null) {
 			ClientHttpRequest request = new ClientHttpRequest(Activator.SERVICE_URL);
-			request.setParameter("log", file);
+			request.setParameter(Activator.LOGFILE_ATTRIBUTE_NAME, file);
 			request.post();
 		}
 	}
