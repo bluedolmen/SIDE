@@ -4,7 +4,17 @@
    <extension
          point="org.eclipse.ui.startup">
       <startup
-            class="com.bluexml.side.util.feedback.startup.Startup"></startup>
+            class="com.bluexml.side.util.feedback.startup.Startup">
+      </startup>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="com.bluexml.side.settings.SideSettingsPreferencesPage"
+            class="com.bluexml.side.util.feedback.SideSettingsFeedbackPreferencesPage"
+            id="com.bluexml.side.Util.feedback.preferences"
+            name="Feedback">
+      </page>
    </extension>
 
 </plugin>
