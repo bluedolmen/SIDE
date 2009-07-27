@@ -519,7 +519,7 @@ public class Application {
 	 * Retourne le corps de la target svnUD
 	 */
 	private static String getTargetSvnCommit() {
-		String[] projects = Utils.getProjects();
+		String[] projects = null;
 
 		String out = "\n\t<!-- ================================= \n";
 		out += "\t\t\ttarget: svnCommit\n";
@@ -530,6 +530,13 @@ public class Application {
 		out += "\t\t<svn>\n";
 		out += "\t\t\t<commit message=\"buildAuto du " + Utils.getDate2()
 				+ "\">\n";
+		
+		for(int j=0; j < 2; j++){
+			if (j == 0)
+					projects = Utils.getProjects();
+			if (j == 1 )
+					projects = Utils.getVersionedProjects();
+		
 		for (int i = 0; i < projects.length; i++) {
 
 			// si le mot 'feature' n'est pas présent dans le nom du projet
@@ -547,6 +554,7 @@ public class Application {
 				out += "\t\t\t\t<include name=\"feature.xml\" />\n";
 				out += "\t\t\t</fileset>\n";
 			}
+		}
 		}
 		out += "\t\t\t</commit>\n";
 		out += "\t\t</svn>\n";

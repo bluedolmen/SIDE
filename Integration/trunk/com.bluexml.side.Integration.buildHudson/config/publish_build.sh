@@ -1,13 +1,13 @@
 # this script will publish the automatic build
 # parameters:
 # dest=devel or public: if devel, on secured devel update site path; public on public update site
-# rev_build_src_nb=the revision and build number to copy; this will take /home/stager/share/SIDE/Update_site/<build_src_number>
-#
+# rev_build_src_nb=the revision and build number to copy; this will take <src_dir>/<build_src_number>
+# src_dir=the folder where the update site is
 if [ $# -ne 3 ]; then
-  echo "Usage: publish_build.sh [devel|public] <rev_build_src_nb> <target_dir>"
+  echo "Usage: publish_build.sh [devel|public] <rev_build_src_nb> <source_dir>"
   echo "       with devel to copy on protected update_site "
   echo "            public to copy on public update_site www.bluexml.com/update-site/SIDE/public/2.0"
-  echo "            build_src_nb the build # to copy (under stager:/home/stager/share/SIDE/Update_Site/Ankle/<build_src_number>)"
+  echo "            build_src_nb the build # to copy (under stager:<src_dir>/<build_src_number>)"
   echo "        build is copied under www.bluexml.com:/data/www/virtuals/b/l/u/bluexml.com/www/html/static/update-site/SIDE/$dest dir"
   exit -2
 else
