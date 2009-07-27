@@ -3,6 +3,8 @@ package com.bluexml.side.util.feedback;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+
+
 /**
  * The activator class controls the plug-in life cycle
  */
@@ -30,7 +32,19 @@ public class Activator extends AbstractUIPlugin {
 	public static final long MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
 
 	// Period between ech send (in day)
-	public static final int TIME_BETWEEN_SEND = 5;
+	public static final int TIME_BETWEEN_SEND = 0;
+
+	public static final String FEEDBACK_PREFERENCE = "DoFeedback";
+
+	public static final String FEEDBACK_PERIOD_PREFERENCE = "feedbackPeriod";
+
+	public static final int FEEDBACK_DEFAULT_PERIOD_IN_DAY = 5;
+
+	public static final int FEEDBACK_PREF_NEVERSETTED = 0;
+	public static final int FEEDBACK_PREF_ALWAYS = 1;
+	public static final int FEEDBACK_PREF_NOW = 2;
+	public static final int FEEDBACK_PREF_NOTNOW = 3;
+	public static final int FEEDBACK_PREF_NEVER = 4;
 
 	// The shared instance
 	private static Activator plugin;
@@ -68,4 +82,20 @@ public class Activator extends AbstractUIPlugin {
 		return plugin;
 	}
 
+	public static void setFeedBackPreference(int feedBackPreference){
+		Activator.getDefault().getPreferenceStore().setValue(Activator.FEEDBACK_PREFERENCE, feedBackPreference);
+	}
+
+	public static int getFeedBackPreference(){
+		return Activator.getDefault().getPreferenceStore().getInt(Activator.FEEDBACK_PREFERENCE);
+	}
+
+	public static int getDefaultFeedbackUploadPeriod() {
+		return Activator.FEEDBACK_DEFAULT_PERIOD_IN_DAY;
+	}
+
+
+	public static int getFeedbackUploadPeriodPreference() {
+		return Activator.getDefault().getPreferenceStore().getInt(Activator.FEEDBACK_PERIOD_PREFERENCE);
+	}
 }

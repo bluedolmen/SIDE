@@ -2,9 +2,14 @@ package com.bluexml.side.util.feedback;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.httpRequest.ClientHttpRequest;
@@ -15,20 +20,36 @@ import de.schlichtherle.io.File;
 
 public class FeedbackSender {
 
-
 	//public static String SERVICE_URL = "http://localhost/upload.php";
+	public static void doSend() {
 
+		Job job = new Job("Sending S-IDE feedback data.") {
+			protected IStatus run(IProgressMonitor monitor) {
+		           if (FeedbackSender.send())
+		        	   return Status.OK_STATUS;
+		           else
+		        	   return Status.CANCEL_STATUS;
+		        }
+		};
+		job.setPriority(Job.SHORT);
+		job.schedule();
+		// Update last update date
+		Date nowDate = new Date();
+		Activator.getDefault().getPreferenceStore().setValue(Activator.LAST_UPDATE_DATE, nowDate.getTime());
+	}
 
 	/**
 	 * Send all *-log.xml files to blueXml server.
 	 */
-	public static void send() {
+	protected static boolean send() {
 		File zipFile = null;
+		boolean noError = true;
 		// Zip creation
 		try {
 			zipFile = createZip();
 		} catch (ArchiveException e) {
 			e.printStackTrace();
+			noError = false;
 		}
 		// Send it
 		try {
@@ -37,7 +58,9 @@ public class FeedbackSender {
 			removeSendedFiles(zipFile);
 		} catch (IOException e) {
 			e.printStackTrace();
+			noError = false;
 		}
+		return noError;
 	}
 
 	/**

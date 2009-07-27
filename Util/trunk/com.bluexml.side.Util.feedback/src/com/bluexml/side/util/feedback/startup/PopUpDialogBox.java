@@ -13,7 +13,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
-import com.bluexml.side.util.settings.SidePreferences;
+import com.bluexml.side.util.feedback.Activator;
 
 public class PopUpDialogBox extends Dialog {
 
@@ -23,7 +23,7 @@ public class PopUpDialogBox extends Dialog {
 	protected Button noFeedbackButton;
 	protected int choice;
 
-	protected PopUpDialogBox(Shell parentShell) {
+	public PopUpDialogBox(Shell parentShell) {
 		super(parentShell);
 	}
 
@@ -49,7 +49,7 @@ public class PopUpDialogBox extends Dialog {
 		uploadNow = new Button(entryTable, SWT.RADIO);
 		uploadNow.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				choice = com.bluexml.side.util.settings.Activator.FEEDBACK_PREF_NOW;
+				choice = Activator.FEEDBACK_PREF_NOW;
 			}
 		});
 		uploadNow.setText("Upload Now");
@@ -65,7 +65,7 @@ public class PopUpDialogBox extends Dialog {
 		uploadAlways = new Button(entryTable, SWT.RADIO);
 		uploadAlways.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				choice = com.bluexml.side.util.settings.Activator.FEEDBACK_PREF_ALWAYS;
+				choice = Activator.FEEDBACK_PREF_ALWAYS;
 			}
 		});
 		uploadAlways.setText("Upload Always");
@@ -79,7 +79,7 @@ public class PopUpDialogBox extends Dialog {
 		dontUploadNowButton = new Button(entryTable, SWT.RADIO);
 		dontUploadNowButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				choice = com.bluexml.side.util.settings.Activator.FEEDBACK_PREF_NOTNOW;
+				choice = Activator.FEEDBACK_PREF_NOTNOW;
 			}
 		});
 		dontUploadNowButton.setText("Don't upload now.");
@@ -96,7 +96,7 @@ public class PopUpDialogBox extends Dialog {
 		noFeedbackButton = new Button(entryTable, SWT.RADIO);
 		noFeedbackButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				choice = com.bluexml.side.util.settings.Activator.FEEDBACK_PREF_NEVER;
+				choice = Activator.FEEDBACK_PREF_NEVER;
 			}
 		});
 		noFeedbackButton.setText("Turn S-IDE Feedback Off");
@@ -121,25 +121,25 @@ public class PopUpDialogBox extends Dialog {
 
 	private void updatePreferences() {
 		switch (choice) {
-		case com.bluexml.side.util.settings.Activator.FEEDBACK_PREF_ALWAYS:
+		case Activator.FEEDBACK_PREF_ALWAYS:
 			// Change preference setting (made after) and send data
 			doSend();
 			break;
-		case com.bluexml.side.util.settings.Activator.FEEDBACK_PREF_NOW:
+		case Activator.FEEDBACK_PREF_NOW:
 			// Send now and change preference setting and send data
 			doSend();
 			break;
-		case com.bluexml.side.util.settings.Activator.FEEDBACK_PREF_NEVER:
+		case Activator.FEEDBACK_PREF_NEVER:
 			// change preference setting (made after)
 			break;
-		case com.bluexml.side.util.settings.Activator.FEEDBACK_PREF_NOTNOW:
+		case Activator.FEEDBACK_PREF_NOTNOW:
 			// change preference setting (made after)
 
 			break;
 		default:
 			break;
 		}
-		SidePreferences.setFeedBackPreference(choice);
+		Activator.setFeedBackPreference(choice);
 	}
 
 	private void doSend() {

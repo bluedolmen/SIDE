@@ -7,7 +7,6 @@ import org.eclipse.ui.IStartup;
 import org.eclipse.ui.PlatformUI;
 
 import com.bluexml.side.util.feedback.Activator;
-import com.bluexml.side.util.settings.SidePreferences;
 
 public class Startup implements IStartup {
 
@@ -15,11 +14,11 @@ public class Startup implements IStartup {
 		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
 			public void run() {
 				// Get preferences :
-				int pref = SidePreferences.getFeedBackPreference();
+				int pref = Activator.getFeedBackPreference();
 				if (pref == 0 ||
-						pref == com.bluexml.side.util.settings.Activator.FEEDBACK_PREF_ALWAYS ||
-						pref == com.bluexml.side.util.settings.Activator.FEEDBACK_PREF_NOTNOW ||
-							pref == com.bluexml.side.util.settings.Activator.FEEDBACK_PREF_NOW) {
+						pref == Activator.FEEDBACK_PREF_ALWAYS ||
+						pref == Activator.FEEDBACK_PREF_NOTNOW ||
+							pref == Activator.FEEDBACK_PREF_NOW) {
 					// Get last update date
 					Long longDate = Activator.getDefault().getPreferenceStore().getLong(Activator.LAST_UPDATE_DATE);
 					if (!longDate.equals(0L)) {
@@ -36,7 +35,7 @@ public class Startup implements IStartup {
 				} else {
 					Date nowDate = new Date();
 					Activator.getDefault().getPreferenceStore().setValue(Activator.LAST_UPDATE_DATE, nowDate.getTime());
-					Activator.getDefault().getPreferenceStore().setValue(com.bluexml.side.util.settings.Activator.FEEDBACK_PREFERENCE, com.bluexml.side.util.settings.Activator.FEEDBACK_PREF_NEVERSETTED);
+					Activator.getDefault().getPreferenceStore().setValue(Activator.FEEDBACK_PREFERENCE, Activator.FEEDBACK_PREF_NEVERSETTED);
 				}
 			}
 		});
