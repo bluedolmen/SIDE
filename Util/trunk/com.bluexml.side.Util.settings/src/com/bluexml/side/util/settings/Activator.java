@@ -13,14 +13,6 @@ public class Activator extends AbstractUIPlugin {
 	public static final String KEY_PREFERENCE = "Key";
 	public static final String KEY_DEFAULT = "";
 
-	public static final String FEEDBACK_PREFERENCE = "DoFeedback";
-
-	public static final int FEEDBACK_PREF_NEVERSETTED = 0;
-	public static final int FEEDBACK_PREF_ALWAYS = 1;
-	public static final int FEEDBACK_PREF_NOW = 2;
-	public static final int FEEDBACK_PREF_NOTNOW = 3;
-	public static final int FEEDBACK_PREF_NEVER = 4;
-
 	// The shared instance
 	private static Activator plugin;
 

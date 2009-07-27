@@ -12,11 +12,5 @@
         id="com.bluexml.side.settings.SideSettingsKeyPreferencesPage"
         name="Licence Key">
 		</page>
-  <page
-        category="com.bluexml.side.settings.SideSettingsPreferencesPage"
-        class="com.bluexml.side.util.settings.SideSettingsFeedbackPreferencesPage"
-        id="com.bluexml.side.Util.settings.feedback"
-        name="Feedback">
-  </page>
-	</extension> 
+	</extension>
 </plugin>

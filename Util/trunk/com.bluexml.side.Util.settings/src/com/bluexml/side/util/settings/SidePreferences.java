@@ -20,12 +20,5 @@ public class SidePreferences {
 		Activator.getDefault().getPreferenceStore().setValue(Activator.KEY_PREFERENCE, Activator.KEY_DEFAULT);
 	}
 
-	public static void setFeedBackPreference(int feedBackPreference){
-		Activator.getDefault().getPreferenceStore().setValue(Activator.FEEDBACK_PREFERENCE, feedBackPreference);
-	}
-
-	public static int getFeedBackPreference(){
-		return Activator.getDefault().getPreferenceStore().getInt(Activator.FEEDBACK_PREFERENCE);
-	}
 
 }
