@@ -9,6 +9,7 @@ Bundle-Vendor: blueXML
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  com.bluexml.side.Util.security,
- com.bluexml.side.Util.libs;bundle-version="1.0.13"
+ com.bluexml.side.Util.libs;bundle-version="1.0.13",
+ com.bluexml.side.Util.feedback;bundle-version="1.0.2"
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.util.settings
