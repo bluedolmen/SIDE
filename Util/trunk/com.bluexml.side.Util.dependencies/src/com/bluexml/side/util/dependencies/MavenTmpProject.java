@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.maven.execution.MavenExecutionResult;
 import org.jdom.Document;
@@ -20,24 +21,18 @@ public class MavenTmpProject {
 	private File pomFile;
 	private File projectFolder;
 	private MavenUtil mavenUtil;
-	private static final String TARGET_ARTIFACT = "tmpProject";
+	private static final String TARGET_ARTIFACT = "tmpProject_";
 
-	private DependencesManager dm;
+	private List<ModuleConstraint> dm;
 	private static final SAXBuilder sxb = new SAXBuilder();
 	private static final XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
-	
 
-
-	public MavenTmpProject(File workingFolder, DependencesManager dm) throws Exception {
-		this.dm = dm;
-		projectFolder = new File(workingFolder,TARGET_ARTIFACT);
+	public MavenTmpProject(File workingFolder, String tech_version, List<ModuleConstraint> mc) throws Exception {
+		this.dm = mc;
+		projectFolder = new File(workingFolder, TARGET_ARTIFACT+tech_version);
 		boolean deleted = FileHelper.deleteFile(projectFolder);
 		boolean created = projectFolder.mkdirs();
 	}
-
-
-
-	
 
 	/**
 	 * build pom dependency fragment from ModuleConstraint
@@ -59,8 +54,6 @@ public class MavenTmpProject {
 		return depends;
 	}
 
-	
-
 	/**
 	 * create a maven project including dependencies from the generated modules
 	 * 
@@ -78,7 +71,7 @@ public class MavenTmpProject {
 		Element project = pom.getRootElement();
 		Namespace n = project.getNamespace();
 		Element dependencies = project.getChild("dependencies", n);
-		for (ModuleConstraint mc : dm.getContraints()) {
+		for (ModuleConstraint mc : dm) {
 			Element depends = buildPomDependency(n, mc);
 			dependencies.addContent(depends);
 		}
@@ -86,21 +79,21 @@ public class MavenTmpProject {
 		outputter.output(pom, os);
 		os.close();
 	}
-	
+
 	public void copyAllDependencies(File whereTocopy) throws Exception {
 		createProject();
-		HashMap<String, String> params = new HashMap<String,String>();
+		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("outputDirectory", whereTocopy.getAbsolutePath());
-		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:copy-dependencies",params);
+		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:copy-dependencies", params);
 		if (result.getExceptions().size() > 0) {
 			List<?> exceps = result.getExceptions();
 			System.err.println("Exception occure during maven process :" + exceps);
 			throw new Exception("Exception occure during maven process :" + exceps);
 		}
 	}
-	
+
 	private MavenUtil getMavenUtil() {
-		if (mavenUtil ==null) {
+		if (mavenUtil == null) {
 			mavenUtil = new MavenUtil();
 		}
 		return mavenUtil;

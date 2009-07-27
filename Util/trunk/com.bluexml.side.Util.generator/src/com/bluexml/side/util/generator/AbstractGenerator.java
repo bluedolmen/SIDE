@@ -342,7 +342,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	 */
 	public void addDependences() throws Exception {
 		// get dependences
-		dm.copyDependencies(getTemporarySystemFile(),getFinalFolder());
+		dm.copyDependencies(getTemporarySystemFile(),getTargetSystemFile());
 		// dependences packages is now with other resources in the target folder
 
 		

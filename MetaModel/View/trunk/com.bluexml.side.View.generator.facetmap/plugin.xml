@@ -24,11 +24,13 @@
                   <moduleDependence
                         moduleId="com.bluexml.side.Integration.alfresco.cmisFacetMap"
                         moduleType="amp"
+                        technologyVersion="alfresco_3.x"
                         versionMin="1.0.0">
                   </moduleDependence>
                   <moduleDependence
                         moduleId="com.bluexml.side.Integration.alfrescoShare.facetMapDashlet"
                         moduleType="zip"
+                        technologyVersion="alfresco_3.x"
                         versionMin="1.0.0">
                   </moduleDependence>
                </generatorVersion>

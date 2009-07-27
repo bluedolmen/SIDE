@@ -499,6 +499,15 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getModuleConstraint_TechnologyVersion() {
+		return (EAttribute)moduleConstraintEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getStaticConfigurationParameters() {
 		return staticConfigurationParametersEEnum;
 	}
@@ -575,6 +584,7 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 		createEAttribute(moduleConstraintEClass, MODULE_CONSTRAINT__VERSION_MIN);
 		createEAttribute(moduleConstraintEClass, MODULE_CONSTRAINT__VERSION_MAX);
 		createEAttribute(moduleConstraintEClass, MODULE_CONSTRAINT__MODULE_TYPE);
+		createEAttribute(moduleConstraintEClass, MODULE_CONSTRAINT__TECHNOLOGY_VERSION);
 
 		// Create enums
 		staticConfigurationParametersEEnum = createEEnum(STATIC_CONFIGURATION_PARAMETERS);
@@ -659,6 +669,7 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 		initEAttribute(getModuleConstraint_VersionMin(), ecorePackage.getEString(), "versionMin", null, 0, 1, ModuleConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getModuleConstraint_VersionMax(), ecorePackage.getEString(), "versionMax", null, 0, 1, ModuleConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getModuleConstraint_ModuleType(), ecorePackage.getEString(), "moduleType", null, 1, 1, ModuleConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModuleConstraint_TechnologyVersion(), ecorePackage.getEString(), "technologyVersion", null, 1, 1, ModuleConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(staticConfigurationParametersEEnum, StaticConfigurationParameters.class, "StaticConfigurationParameters");

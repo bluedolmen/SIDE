@@ -8,6 +8,7 @@ public class ModuleConstraint {
 	protected String artifactId = null;
 	protected String groupId = null;
 	protected String moduleType = null;
+	protected String tech_version ="";
 	protected ModuleVersion versionMin = null;
 	protected ModuleVersion versionMax = null;
 	protected ModuleVersion resolvedVersion = null;
@@ -17,11 +18,16 @@ public class ModuleConstraint {
 	protected static String inclusiveMin = "[";
 	protected static String inclusiveMax = "]";
 
+	public String getTech_version() {
+		return tech_version;
+	}
+
 	public ModuleConstraint() {
 	};
 
-	public ModuleConstraint(String id, String moduleType, String versionNumMin, String versionNumMax) {
+	public ModuleConstraint(String id,String tech_version, String moduleType, String versionNumMin, String versionNumMax) {
 		setGroupAndArtifactId(id);
+		this.tech_version = tech_version;
 		this.moduleType = moduleType;
 		if (versionNumMin != null) {
 			this.versionMin = new ModuleVersion(versionNumMin);

@@ -670,13 +670,22 @@ public interface ApplicationPackage extends EPackage {
 	int MODULE_CONSTRAINT__MODULE_TYPE = 3;
 
 	/**
+	 * The feature id for the '<em><b>Technology Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE_CONSTRAINT__TECHNOLOGY_VERSION = 4;
+
+	/**
 	 * The number of structural features of the '<em>Module Constraint</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE_CONSTRAINT_FEATURE_COUNT = 4;
+	int MODULE_CONSTRAINT_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.application.StaticConfigurationParameters <em>Static Configuration Parameters</em>}' enum.
@@ -1065,6 +1074,17 @@ public interface ApplicationPackage extends EPackage {
 	EAttribute getModuleConstraint_ModuleType();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.ModuleConstraint#getTechnologyVersion <em>Technology Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Technology Version</em>'.
+	 * @see com.bluexml.side.application.ModuleConstraint#getTechnologyVersion()
+	 * @see #getModuleConstraint()
+	 * @generated
+	 */
+	EAttribute getModuleConstraint_TechnologyVersion();
+
+	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.application.StaticConfigurationParameters <em>Static Configuration Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1395,6 +1415,14 @@ public interface ApplicationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MODULE_CONSTRAINT__MODULE_TYPE = eINSTANCE.getModuleConstraint_ModuleType();
+
+		/**
+		 * The meta object literal for the '<em><b>Technology Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODULE_CONSTRAINT__TECHNOLOGY_VERSION = eINSTANCE.getModuleConstraint_TechnologyVersion();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.application.StaticConfigurationParameters <em>Static Configuration Parameters</em>}' enum.

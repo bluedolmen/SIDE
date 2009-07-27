@@ -68,6 +68,7 @@ public class ModuleConstraintItemProvider
 			addVersionMinPropertyDescriptor(object);
 			addVersionMaxPropertyDescriptor(object);
 			addModuleTypePropertyDescriptor(object);
+			addTechnologyVersionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -161,6 +162,28 @@ public class ModuleConstraintItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Technology Version feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTechnologyVersionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ModuleConstraint_technologyVersion_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ModuleConstraint_technologyVersion_feature", "_UI_ModuleConstraint_type"),
+				 ApplicationPackage.Literals.MODULE_CONSTRAINT__TECHNOLOGY_VERSION,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns ModuleConstraint.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -201,6 +224,7 @@ public class ModuleConstraintItemProvider
 			case ApplicationPackage.MODULE_CONSTRAINT__VERSION_MIN:
 			case ApplicationPackage.MODULE_CONSTRAINT__VERSION_MAX:
 			case ApplicationPackage.MODULE_CONSTRAINT__MODULE_TYPE:
+			case ApplicationPackage.MODULE_CONSTRAINT__TECHNOLOGY_VERSION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

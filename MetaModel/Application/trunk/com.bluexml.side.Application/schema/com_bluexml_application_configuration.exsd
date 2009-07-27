@@ -428,6 +428,13 @@ Hidden And Used By Default : To hidde this element and to use this generator by 
                </restriction>
             </simpleType>
          </attribute>
+         <attribute name="technologyVersion" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 

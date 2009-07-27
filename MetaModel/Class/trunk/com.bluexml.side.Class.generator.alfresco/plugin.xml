@@ -35,6 +35,7 @@
                      <moduleDependence
                            moduleId="com.bluexml.side.Integration.alfresco.doclist"
                            moduleType="amp"
+                           technologyVersion="alfresco_3.x"
                            versionMin="1.0.0">
                      </moduleDependence>
                      <mustBeUnchecked
@@ -50,6 +51,7 @@
                      <moduleDependence
                            moduleId="com.bluexml.side.Integration.alfresco.upload"
                            moduleType="amp"
+                           technologyVersion="alfresco_3.x"
                            versionMin="1.0.0">
                      </moduleDependence>
                   </option>

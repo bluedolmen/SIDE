@@ -59,6 +59,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ModuleConstraint/versionMin"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ModuleConstraint/versionMax"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ModuleConstraint/moduleType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ModuleConstraint/technologyVersion"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

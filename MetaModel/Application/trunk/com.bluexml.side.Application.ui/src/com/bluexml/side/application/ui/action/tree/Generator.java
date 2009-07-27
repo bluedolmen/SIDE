@@ -54,6 +54,7 @@ public class Generator extends ImplNode {
 							mc.setVersionMax(module.getVersionMax().toString());
 						}
 						mc.setModuleType(module.getModuleType());
+						mc.setTechnologyVersion(module.getTech_version());
 						elt.getModuleContraints().add(mc);
 					}
 
@@ -75,6 +76,7 @@ public class Generator extends ImplNode {
 									mc.setVersionMax(module.getVersionMax().toString());
 								}
 								mc.setModuleType(module.getModuleType());
+								mc.setTechnologyVersion(module.getTech_version());
 								elt.getModuleContraints().add(mc);
 							}
 						}

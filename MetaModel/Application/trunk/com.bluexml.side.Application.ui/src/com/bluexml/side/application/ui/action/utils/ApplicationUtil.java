@@ -436,6 +436,7 @@ public class ApplicationUtil {
 					moduleConstraint.setModuleType(configurationElement.getAttribute("moduleType"));
 					moduleConstraint.setVersionMax(configurationElement.getAttribute("versionMax"));
 					moduleConstraint.setVersionMin(configurationElement.getAttribute("versionMin"));
+					moduleConstraint.setTechnologyVersion(configurationElement.getAttribute("technologyVersion"));
 					updatedConstraints.add(moduleConstraint.getModuleId());
 				}
 			}
@@ -453,6 +454,7 @@ public class ApplicationUtil {
 				moduleConstraint.setModuleType(newConstraint_ext.getAttribute("moduleType"));
 				moduleConstraint.setVersionMax(newConstraint_ext.getAttribute("versionMax"));
 				moduleConstraint.setVersionMin(newConstraint_ext.getAttribute("versionMin"));
+				moduleConstraint.setTechnologyVersion(newConstraint_ext.getAttribute("technologyVersion"));
 				generatorConfiguration.getModuleContraints().add(moduleConstraint);
 			}
 		}

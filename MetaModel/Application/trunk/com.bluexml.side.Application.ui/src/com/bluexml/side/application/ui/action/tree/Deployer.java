@@ -52,6 +52,7 @@ public class Deployer extends ImplNode {
 							mc.setVersionMax(module.getVersionMax().toString());
 						}
 						mc.setModuleType(module.getModuleType());
+						mc.setTechnologyVersion(module.getTech_version());
 						elt.getModuleContraints().add(mc);
 					}
 					
@@ -73,6 +74,7 @@ public class Deployer extends ImplNode {
 									mc.setVersionMax(module.getVersionMax().toString());
 								}
 								mc.setModuleType(module.getModuleType());
+								mc.setTechnologyVersion(module.getTech_version());
 								elt.getModuleContraints().add(mc);
 							}
 							
