@@ -1,16 +1,23 @@
 package com.bluexml.side.util.settings;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.browser.Browser;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.forms.events.HyperlinkAdapter;
+import org.eclipse.ui.forms.events.HyperlinkEvent;
+import org.eclipse.ui.forms.widgets.FormText;
 
 import com.bluexml.side.util.libs.SystemInfoGetter;
 
@@ -22,30 +29,40 @@ import com.bluexml.side.util.libs.SystemInfoGetter;
 public class SideSettingsPreferencesPage 
 	extends PreferencePage
 	implements IWorkbenchPreferencePage {
-	private static final String linkMembership = "http://www.bluexml.com/v3/membership/";
 	private static final String linkText =
-		"To register go to the <a href='"+linkMembership+"' target='blank'>Membership page</A> on our website.<br />"+
-		"  <a href='"+linkMembership+"' target='blank'>"+linkMembership+"</A>";
+		"<form><p>To register go to the <a href='http://www.bluexml.com/v3/membership/'> Membership page</a> on our website.</p></form>";
 	private static final String iDText ="Unique ID for Registering : (Copy/paste enable)";
 	/*
 	 * @see PreferencePage#createContents(Composite)
 	 */
 	protected Control createContents(Composite parent) {
-
+		
 		Composite entryTable = new Composite(parent, SWT.NULL);
 		GridLayout layout = new GridLayout();
 		entryTable.setLayout(layout);
-
-		String nomMachine = SystemInfoGetter.getHostWithHash();
-
+		//label info for machine name
 		Label lblName = new Label(entryTable,SWT.NONE);
 		lblName.setText(iDText);
-		Text textNomMachine = new Text(entryTable,SWT.NONE);
+		//Machine name
+		Text textNomMachine = new Text(entryTable, SWT.BORDER | SWT.SINGLE);
 		textNomMachine.setEditable(false);
-		textNomMachine.setText(nomMachine);
-		Browser link = new Browser(entryTable, SWT.NONE);
-		link.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-		link.setText(linkText);
+		textNomMachine.setText(SystemInfoGetter.getHostWithHash());
+		//link to SIDE website
+		FormText link = new FormText(entryTable, SWT.NONE);
+		link.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
+		link.setBounds(137, 269, 223, 44);
+		link.setText(linkText, true, true);
+		//Litener for link
+		link.addHyperlinkListener(new HyperlinkAdapter() {
+			@Override
+			public void linkActivated(HyperlinkEvent event) {
+				try {
+					PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(new URL(event.getLabel()));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		return entryTable;
 	}
 
