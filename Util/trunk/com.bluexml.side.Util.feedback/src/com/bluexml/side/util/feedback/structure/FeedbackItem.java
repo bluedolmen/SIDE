@@ -1,8 +1,9 @@
-package com.bluexml.side.util.feedback;
+package com.bluexml.side.util.feedback.structure;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 public class FeedbackItem {
 	protected String id;

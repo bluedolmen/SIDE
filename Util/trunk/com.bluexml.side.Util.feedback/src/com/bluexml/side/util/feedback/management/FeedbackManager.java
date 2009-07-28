@@ -1,4 +1,4 @@
-package com.bluexml.side.util.feedback;
+package com.bluexml.side.util.feedback.management;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -10,6 +10,10 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IPath;
 
+import com.bluexml.side.util.feedback.structure.Feedback;
+import com.bluexml.side.util.feedback.structure.FeedbackItem;
+import com.bluexml.side.util.feedback.structure.Option;
+import com.bluexml.side.util.feedback.utils.FeedbackUtils;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 

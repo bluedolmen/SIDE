@@ -1,4 +1,4 @@
-package com.bluexml.side.util.feedback;
+package com.bluexml.side.util.feedback.management;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +11,8 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 
+import com.bluexml.side.util.feedback.FeedbackActivator;
+import com.bluexml.side.util.feedback.utils.FeedbackUtils;
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.httpRequest.ClientHttpRequest;
 
@@ -20,7 +22,6 @@ import de.schlichtherle.io.File;
 
 public class FeedbackSender {
 
-	//public static String SERVICE_URL = "http://localhost/upload.php";
 	public static void doSend() {
 
 		Job job = new Job("Sending S-IDE feedback data.") {
@@ -35,7 +36,7 @@ public class FeedbackSender {
 		job.schedule();
 		// Update last update date
 		Date nowDate = new Date();
-		Activator.getDefault().getPreferenceStore().setValue(Activator.LAST_UPDATE_DATE, nowDate.getTime());
+		FeedbackActivator.getDefault().getPreferenceStore().setValue(FeedbackActivator.LAST_UPDATE_DATE, nowDate.getTime());
 	}
 
 	/**
@@ -51,14 +52,16 @@ public class FeedbackSender {
 			e.printStackTrace();
 			noError = false;
 		}
-		// Send it
-		try {
-			sendFile(zipFile);
-			// Remove all files send previously
-			removeSendedFiles(zipFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-			noError = false;
+		if (zipFile.list().length > 0) {
+			// Send it
+			try {
+				sendFile(zipFile);
+				// Remove all files send previously
+				removeSendedFiles(zipFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+				noError = false;
+			}
 		}
 		return noError;
 	}
@@ -76,12 +79,9 @@ public class FeedbackSender {
 				f.delete();
 			}
 		}
-		try {
-			zipFile.umount();
-		} catch (ArchiveException e) {
-			e.printStackTrace();
-		}
-		zipFile.delete();
+
+		java.io.File zipFile2 = zipFile;
+		zipFile2.delete();
 	}
 
 	/**
@@ -91,8 +91,8 @@ public class FeedbackSender {
 	 */
 	private static void sendFile(File file) throws IOException {
 		if (file != null) {
-			ClientHttpRequest request = new ClientHttpRequest(Activator.SERVICE_URL);
-			request.setParameter(Activator.LOGFILE_ATTRIBUTE_NAME, file);
+			ClientHttpRequest request = new ClientHttpRequest(FeedbackActivator.SERVICE_URL);
+			request.setParameter(FeedbackActivator.LOGFILE_ATTRIBUTE_NAME, file);
 			request.post();
 		}
 	}
@@ -115,10 +115,10 @@ public class FeedbackSender {
 		}
 
 		// Zip creation
-		File zipFile = new File(source, Activator.ZIP_FILE_NAME);
+		File zipFile = new File(source, FeedbackActivator.ZIP_FILE_NAME);
 		if (zipFile.exists()) {
 			zipFile.delete();
-			zipFile = new File(source, Activator.ZIP_FILE_NAME);
+			zipFile = new File(source, FeedbackActivator.ZIP_FILE_NAME);
 		}
 		zipFile.mkdir();
 

@@ -6,7 +6,9 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IStartup;
 import org.eclipse.ui.PlatformUI;
 
-import com.bluexml.side.util.feedback.Activator;
+import com.bluexml.side.util.feedback.FeedbackActivator;
+import com.bluexml.side.util.feedback.management.FeedbackSender;
+import com.bluexml.side.util.feedback.ui.PopUpDialogBox;
 
 public class Startup implements IStartup {
 
@@ -14,28 +16,29 @@ public class Startup implements IStartup {
 		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
 			public void run() {
 				// Get preferences :
-				int pref = Activator.getFeedBackPreference();
+				int pref = FeedbackActivator.getFeedBackPreference();
 				if (pref == 0 ||
-						pref == Activator.FEEDBACK_PREF_ALWAYS ||
-						pref == Activator.FEEDBACK_PREF_NOTNOW ||
-							pref == Activator.FEEDBACK_PREF_NOW) {
+						pref == FeedbackActivator.FEEDBACK_PREF_NOTNOW ||
+							pref == FeedbackActivator.FEEDBACK_PREF_NOW) {
 					// Get last update date
-					Long longDate = Activator.getDefault().getPreferenceStore().getLong(Activator.LAST_UPDATE_DATE);
+					Long longDate = FeedbackActivator.getDefault().getPreferenceStore().getLong(FeedbackActivator.LAST_UPDATE_DATE);
 					if (!longDate.equals(0L)) {
 						// Does we need to send data?
 						Date lastUpdate = new Date(longDate);
 						Date now = new Date();
 						long delta = now.getTime() - lastUpdate.getTime();
-						if (delta / (Activator.MILLISECONDS_PER_DAY) >= Activator.TIME_BETWEEN_SEND) {
+						if (delta / (FeedbackActivator.MILLISECONDS_PER_DAY) >= FeedbackActivator.getFeedbackUploadPeriodPreference()) {
 							// Show pop up and send data
 							PopUpDialogBox popup = new PopUpDialogBox(Display.getDefault().getActiveShell());
 							popup.open();
 						}
 					}
+				} else if (pref == FeedbackActivator.FEEDBACK_PREF_ALWAYS) {
+					FeedbackSender.doSend();
 				} else {
 					Date nowDate = new Date();
-					Activator.getDefault().getPreferenceStore().setValue(Activator.LAST_UPDATE_DATE, nowDate.getTime());
-					Activator.getDefault().getPreferenceStore().setValue(Activator.FEEDBACK_PREFERENCE, Activator.FEEDBACK_PREF_NEVERSETTED);
+					FeedbackActivator.getDefault().getPreferenceStore().setValue(FeedbackActivator.LAST_UPDATE_DATE, nowDate.getTime());
+					FeedbackActivator.getDefault().getPreferenceStore().setValue(FeedbackActivator.FEEDBACK_PREFERENCE, FeedbackActivator.FEEDBACK_PREF_NEVERSETTED);
 				}
 			}
 		});

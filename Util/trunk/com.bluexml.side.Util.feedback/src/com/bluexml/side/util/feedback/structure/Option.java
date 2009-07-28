@@ -1,4 +1,4 @@
-package com.bluexml.side.util.feedback;
+package com.bluexml.side.util.feedback.structure;
 
 public class Option {
 	String key;

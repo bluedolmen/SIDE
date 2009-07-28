@@ -1,4 +1,4 @@
-package com.bluexml.side.util.feedback;
+package com.bluexml.side.util.feedback.ui;
 
 
 import java.text.MessageFormat;
@@ -26,8 +26,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import com.bluexml.side.util.feedback.Activator;
-import com.bluexml.side.util.feedback.startup.PopUpDialogBox;
+import com.bluexml.side.util.feedback.FeedbackActivator;
 
 public class SideSettingsFeedbackPreferencesPage extends PreferencePage
 		implements IWorkbenchPreferencePage {
@@ -39,6 +38,7 @@ public class SideSettingsFeedbackPreferencesPage extends PreferencePage
 	private Label label;
 	private Text lastUploadText;
 	private Text uploadPeriodText;
+
 
 	@Override
 	protected Control createContents(Composite parent) {
@@ -137,12 +137,12 @@ public class SideSettingsFeedbackPreferencesPage extends PreferencePage
 
 	public void init(IWorkbench workbench) {
 		setDescription(Messages.SideFeedbackPreferencesPage_0);
-		setPreferenceStore(Activator.getDefault().getPreferenceStore());
+		setPreferenceStore(FeedbackActivator.getDefault().getPreferenceStore());
 
 	}
 
 	private void updateUploadPeriodText() {
-		uploadPeriodText.setText(Integer.toString(Activator.getFeedbackUploadPeriodPreference()));
+		uploadPeriodText.setText(Integer.toString(FeedbackActivator.getFeedbackUploadPeriodPreference()));
 	}
 
 	@Override
@@ -158,7 +158,7 @@ public class SideSettingsFeedbackPreferencesPage extends PreferencePage
 	}
 
 	private void setPreferences() {
-
+		FeedbackActivator.setFeedbackUploadPeriod(Integer.parseInt(uploadPeriodText.getText()));
 	}
 
 	private boolean isValidUploadPeriod(String text) {
@@ -175,7 +175,7 @@ public class SideSettingsFeedbackPreferencesPage extends PreferencePage
 	}
 
 	private String getLastUploadDateAsString() {
-		long time = com.bluexml.side.util.feedback.Activator.getDefault().getPreferenceStore().getLong(com.bluexml.side.util.feedback.Activator.LAST_UPDATE_DATE);
+		long time = com.bluexml.side.util.feedback.FeedbackActivator.getDefault().getPreferenceStore().getLong(com.bluexml.side.util.feedback.FeedbackActivator.LAST_UPDATE_DATE);
 		Date date = new Date(time);
 		return date.toString();
 	}

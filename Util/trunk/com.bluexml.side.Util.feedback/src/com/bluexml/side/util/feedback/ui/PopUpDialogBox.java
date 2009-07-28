@@ -1,4 +1,4 @@
-package com.bluexml.side.util.feedback.startup;
+package com.bluexml.side.util.feedback.ui;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
@@ -13,7 +13,8 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
-import com.bluexml.side.util.feedback.Activator;
+import com.bluexml.side.util.feedback.FeedbackActivator;
+import com.bluexml.side.util.feedback.management.FeedbackSender;
 
 public class PopUpDialogBox extends Dialog {
 
@@ -25,6 +26,7 @@ public class PopUpDialogBox extends Dialog {
 
 	public PopUpDialogBox(Shell parentShell) {
 		super(parentShell);
+		choice = FeedbackActivator.getFeedBackPreference();
 	}
 
 	/**
@@ -44,15 +46,17 @@ public class PopUpDialogBox extends Dialog {
 		final Label theSideFeedbackLabel = new Label(entryTable, SWT.WRAP);
 		theSideFeedbackLabel.setLayoutData(new GridData(494, 63));
 		theSideFeedbackLabel
-				.setText("The S-IDE Feedback Data Collector has been collecting data on how you have been using the S-IDE tools. It would like to upload the data on a server at the S-IDE Bluexml.\n\nYou can preview the date before it is upload on the Preview Page.");
+				.setText(Messages.SidePopUp_0);
 
 		uploadNow = new Button(entryTable, SWT.RADIO);
 		uploadNow.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				choice = Activator.FEEDBACK_PREF_NOW;
+				choice = FeedbackActivator.FEEDBACK_PREF_NOW;
 			}
 		});
-		uploadNow.setText("Upload Now");
+		uploadNow.setText(Messages.SidePopUp_1);
+		checkIfSelect(uploadNow,FeedbackActivator.FEEDBACK_PREF_NOW);
+
 		final Label lbluploadNow = new Label(entryTable, SWT.RIGHT);
 		final GridData gd_lbluploadNow = new GridData(SWT.FILL, SWT.CENTER,
 				false, false);
@@ -60,29 +64,32 @@ public class PopUpDialogBox extends Dialog {
 		lbluploadNow.setLayoutData(gd_lbluploadNow);
 		lbluploadNow.setAlignment(SWT.LEFT);
 		lbluploadNow
-				.setText("Upload the data now. Ask before uploading again.");
+				.setText(Messages.SidePopUp_2);
 
 		uploadAlways = new Button(entryTable, SWT.RADIO);
 		uploadAlways.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				choice = Activator.FEEDBACK_PREF_ALWAYS;
+				choice = FeedbackActivator.FEEDBACK_PREF_ALWAYS;
 			}
 		});
-		uploadAlways.setText("Upload Always");
+		uploadAlways.setText(Messages.SidePopUp_3);
+		checkIfSelect(uploadAlways,FeedbackActivator.FEEDBACK_PREF_ALWAYS);
+
 		final Label lbluploadAlways = new Label(entryTable, SWT.WRAP);
 		final GridData gd_lbluploadAlways = new GridData(456, 48);
 		gd_lbluploadAlways.horizontalIndent = 30;
 		lbluploadAlways.setLayoutData(gd_lbluploadAlways);
 		lbluploadAlways
-				.setText("Upload the usage data now. Don't ask the next time; just do the upload in the background. \nNote that you can change this setting in the preferences.");
+				.setText(Messages.SidePopUp_4);
 
 		dontUploadNowButton = new Button(entryTable, SWT.RADIO);
 		dontUploadNowButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				choice = Activator.FEEDBACK_PREF_NOTNOW;
+				choice = FeedbackActivator.FEEDBACK_PREF_NOTNOW;
 			}
 		});
-		dontUploadNowButton.setText("Don't upload now.");
+		dontUploadNowButton.setText(Messages.SidePopUp_5);
+		checkIfSelect(dontUploadNowButton,FeedbackActivator.FEEDBACK_PREF_NOTNOW);
 
 		final Label doNotUploadLabel = new Label(entryTable, SWT.NONE);
 		final GridData gd_doNotUploadLabel = new GridData(SWT.FILL, SWT.CENTER,
@@ -91,15 +98,16 @@ public class PopUpDialogBox extends Dialog {
 		gd_doNotUploadLabel.heightHint = 18;
 		doNotUploadLabel.setLayoutData(gd_doNotUploadLabel);
 		doNotUploadLabel
-				.setText("Do not upload usage data at this time. You will be asked to do the upload later.");
+				.setText(Messages.SidePopUp_6);
 
 		noFeedbackButton = new Button(entryTable, SWT.RADIO);
 		noFeedbackButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				choice = Activator.FEEDBACK_PREF_NEVER;
+				choice = FeedbackActivator.FEEDBACK_PREF_NEVER;
 			}
 		});
-		noFeedbackButton.setText("Turn S-IDE Feedback Off");
+		noFeedbackButton.setText(Messages.SidePopUp_7);
+		checkIfSelect(noFeedbackButton,FeedbackActivator.FEEDBACK_PREF_NEVER);
 
 		final Label stopCollectingDataLabel = new Label(entryTable, SWT.WRAP);
 		final GridData gd_stopCollectingDataLabel = new GridData(SWT.LEFT,
@@ -109,8 +117,14 @@ public class PopUpDialogBox extends Dialog {
 		gd_stopCollectingDataLabel.widthHint = 451;
 		stopCollectingDataLabel.setLayoutData(gd_stopCollectingDataLabel);
 		stopCollectingDataLabel
-				.setText("Stop collecting data. The S-IDE Feedback will be turned off and data will never be uploaded.");
+				.setText(Messages.SidePopUp_8);
 		return entryTable;
+	}
+
+	private void checkIfSelect(Button radio, int correspondingPref) {
+		if (correspondingPref == FeedbackActivator.getFeedBackPreference()) {
+			radio.setSelection(true);
+		}
 	}
 
 	@Override
@@ -121,30 +135,29 @@ public class PopUpDialogBox extends Dialog {
 
 	private void updatePreferences() {
 		switch (choice) {
-		case Activator.FEEDBACK_PREF_ALWAYS:
+		case FeedbackActivator.FEEDBACK_PREF_ALWAYS:
 			// Change preference setting (made after) and send data
 			doSend();
 			break;
-		case Activator.FEEDBACK_PREF_NOW:
+		case FeedbackActivator.FEEDBACK_PREF_NOW:
 			// Send now and change preference setting and send data
 			doSend();
 			break;
-		case Activator.FEEDBACK_PREF_NEVER:
+		case FeedbackActivator.FEEDBACK_PREF_NEVER:
 			// change preference setting (made after)
 			break;
-		case Activator.FEEDBACK_PREF_NOTNOW:
+		case FeedbackActivator.FEEDBACK_PREF_NOTNOW:
 			// change preference setting (made after)
 
 			break;
 		default:
 			break;
 		}
-		Activator.setFeedBackPreference(choice);
+		FeedbackActivator.setFeedBackPreference(choice);
 	}
 
 	private void doSend() {
-		// TODO Auto-generated method stub
-
+		FeedbackSender.doSend();
 	}
 
 	protected void configureShell(Shell newShell) {

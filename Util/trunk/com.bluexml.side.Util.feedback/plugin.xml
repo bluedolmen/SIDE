@@ -11,7 +11,7 @@
          point="org.eclipse.ui.preferencePages">
       <page
             category="com.bluexml.side.settings.SideSettingsPreferencesPage"
-            class="com.bluexml.side.util.feedback.SideSettingsFeedbackPreferencesPage"
+            class="com.bluexml.side.util.feedback.ui.SideSettingsFeedbackPreferencesPage"
             id="com.bluexml.side.Util.feedback.preferences"
             name="Feedback">
       </page>
