@@ -1,6 +1,7 @@
 package com.bluexml.side.application.ui.action.utils;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import java.util.Map;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
@@ -19,6 +21,7 @@ import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.ProgressBar;
+import org.eclipse.ui.PlatformUI;
 import org.osgi.framework.Bundle;
 
 import com.bluexml.side.application.Configuration;
@@ -28,15 +31,20 @@ import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.Option;
 import com.bluexml.side.application.StaticConfigurationParameters;
+import com.bluexml.side.application.ui.Activator;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.util.dependencies.DependencesManager;
 import com.bluexml.side.util.dependencies.ModuleConstraint;
 import com.bluexml.side.util.deployer.Deployer;
 import com.bluexml.side.util.documentation.LogSave;
-import com.bluexml.side.util.feedback.FeedbackManager;
-import com.bluexml.side.util.feedback.FeedbackSender;
+import com.bluexml.side.util.feedback.management.FeedbackManager;
 import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.libs.IFileHelper;
+
+import org.eclipse.ui.forms.events.HyperlinkAdapter;
+import org.eclipse.ui.forms.events.HyperlinkEvent;
+import org.eclipse.ui.forms.widgets.FormText;
+
 
 public class Generate extends Thread {
 
@@ -46,7 +54,7 @@ public class Generate extends Thread {
 	private Label label;
 	private StyledText styletext;
 	private String logPath;
-	private Browser logLink;
+	private FormText logLink;
 	private String genPath;
 	private FeedbackManager feedbackManager;
 
@@ -65,7 +73,7 @@ public class Generate extends Thread {
 	 * @throws IllegalAccessException
 	 * @throws IOException
 	 */
-	public void run(Configuration configuration, List<String> staticParameters, List<Model> models, ProgressBar p_progressBar, Label p_label, StyledText p_styletext, Browser p_logLink) throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
+	public void run(Configuration configuration, List<String> staticParameters, List<Model> models, ProgressBar p_progressBar, Label p_label, StyledText p_styletext, FormText p_logLink) throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
 
 		progressBar = p_progressBar;
 		label = p_label;
@@ -225,10 +233,14 @@ public class Generate extends Thread {
 				try {
 					LogSave.buildGeneraLogFile(logPath);
 					IFileHelper.refreshFolder(logPath);
-					logLink.setText("<html><body style=\"overflow:auto; background-color:#f0f0f0;\"><div style=\"font-family: Verdana; " + "color: #444;" + "text-decoration: none;" + "word-spacing: normal;" + "text-align: justify;" + "letter-spacing: 0;" + "line-height: 1.2em;"
-							+ "font-size: 11px; width:100%; text-align:center;\">Log File can be found <a href=\"file:///" + IFileHelper.createFolder(logPath).getLocation().toOSString() + System.getProperty("file.separator") + LogSave.LOG_FILE_NAME
-							+ "\" target=\"_blank\">here</a><br\\>(" + IFileHelper.createFolder(logPath).getLocation().toOSString() + System.getProperty("file.separator") + LogSave.LOG_FILE_NAME + ")</div></body></html>");
 					logLink.setVisible(true);
+					logLink.addHyperlinkListener(new HyperlinkAdapter() {
+						@Override
+						public void linkActivated(HyperlinkEvent event) {
+								browseTo("file:///" + IFileHelper.getIFolder(logPath).getLocation().toOSString() + System.getProperty("file.separator") + LogSave.LOG_FILE_NAME);
+						}
+					});
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -245,6 +257,15 @@ public class Generate extends Thread {
 		});
 
 	}
+
+	private void browseTo(String url) {
+		try {
+			PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(new URL(url));
+		} catch (Exception e) {
+			Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Error opening browser", e)); //$NON-NLS-1$
+		}
+	}
+
 
 	private void clean() throws CoreException {
 		IFileHelper.deleteFolderContent(IFileHelper.getIFolder(logPath));

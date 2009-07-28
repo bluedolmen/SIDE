@@ -24,6 +24,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.forms.widgets.FormText;
 
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationPackage;
@@ -41,7 +42,7 @@ public class GeneratePopUp extends Dialog {
 
 	/**
 	 * Create the dialog
-	 * 
+	 *
 	 * @param parentShell
 	 * @param list
 	 * @param staticFieldsName
@@ -72,7 +73,7 @@ public class GeneratePopUp extends Dialog {
 
 	/**
 	 * Create contents of the dialog
-	 * 
+	 *
 	 * @param parent
 	 */
 	@Override
@@ -98,10 +99,13 @@ public class GeneratePopUp extends Dialog {
 		final StyledText styletext = new StyledText(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		styletext.setBounds(10, 135, 464, 128);
 
-		final Browser logLink = new Browser(container, SWT.NONE);
+		//final Browser logLink = new Browser(container, SWT.NONE);
+
+		FormText logLink = new FormText(container, SWT.WRAP);
 		logLink.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
-		logLink.setBounds(95, 262, 290, 51);
+		logLink.setBounds(137, 269, 223, 44);
 		logLink.setVisible(false);
+		logLink.setText("<form><p>Log File can be found <a href=\"log\">here</a>.</p></form>", true, true);
 
 		try {
 			Generate gen = new Generate();
@@ -125,7 +129,7 @@ public class GeneratePopUp extends Dialog {
 
 	/**
 	 * Create contents of the button bar
-	 * 
+	 *
 	 * @param parent
 	 */
 	@Override
