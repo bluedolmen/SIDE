@@ -1,10 +1,10 @@
 package com.bluexml.side.util.settings;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -13,7 +13,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.events.HyperlinkAdapter;
 import org.eclipse.ui.forms.events.HyperlinkEvent;
@@ -44,7 +43,7 @@ public class SideSettingsPreferencesPage
 		Label lblName = new Label(entryTable,SWT.NONE);
 		lblName.setText(iDText);
 		//Machine name
-		Text textNomMachine = new Text(entryTable, SWT.BORDER | SWT.SINGLE);
+		Text textNomMachine = new Text(entryTable, SWT.BORDER | SWT.SINGLE| SWT.COLOR_WHITE);
 		textNomMachine.setEditable(false);
 		textNomMachine.setText(SystemInfoGetter.getHostWithHash());
 		//link to SIDE website
