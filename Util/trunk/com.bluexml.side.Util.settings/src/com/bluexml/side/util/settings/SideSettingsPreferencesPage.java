@@ -57,7 +57,7 @@ public class SideSettingsPreferencesPage
 			@Override
 			public void linkActivated(HyperlinkEvent event) {
 				try {
-					PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(new URL(event.getLabel()));
+					PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(new URL(event.getHref().toString()));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
