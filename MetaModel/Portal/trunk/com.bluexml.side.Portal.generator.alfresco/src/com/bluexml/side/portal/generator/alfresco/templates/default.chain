@@ -5,9 +5,11 @@
     <files xsi:type="chain:Folder" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates"/>
     <files xsi:type="chain:Log" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/default.log.txt"/>
     <files xsi:type="chain:EmfMetamodel" path="http://www.kerblue.org/portal/1.0"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/web-framework-config-custom.mt"/>
     <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco/src/com/bluexml/side/portal/generator/alfresco/templates/DocumentLibraryProtelView.ftl.mt"/>
   </repository>
   <actions>
-    <actions xsi:type="chain:Generate" documentation="DocumentLibraryProtelView.ftl" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="DocumentLibraryProtelView.ftl" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.5" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="web-framework" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>
   </actions>
 </chain:Chain>

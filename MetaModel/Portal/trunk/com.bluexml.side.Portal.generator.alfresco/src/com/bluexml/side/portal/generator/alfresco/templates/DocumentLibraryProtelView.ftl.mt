@@ -16,4 +16,4 @@ import com.bluexml.side.portal.generator.alfresco.templates.ClazzService
 </#if>
 <%}%>
 <%}%>
-<%}%>
+<%}%> 
