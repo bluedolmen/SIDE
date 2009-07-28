@@ -1,34 +1,34 @@
 script: {
-default xml namespace = 'http://www.cmis.org/2008/05';
-var query="<cmis:query xmlns:cmis='http://www.cmis.org/2008/05' 	xmlns:p='http://www.w3.org/1999/xhtml' 	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' 	xsi:schemaLocation='http://www.cmis.org/2008/05 CMIS.xsd '>  <cmis:statement>SELECT * FROM document WHERE NOT((CreatedBy = 'System') OR (ContentStreamFilename = 'doclib.png') OR (ContentStreamFilename = 'webpreview.swf'))</cmis:statement>  <cmis:searchAllVersions>false</cmis:searchAllVersions>  <cmis:pageSize>0</cmis:pageSize>  <cmis:skipCount>0</cmis:skipCount>  <cmis:returnAllowableActions>false</cmis:returnAllowableActions></cmis:query>";
-var cmisQuery = new XML(query);
+	var contentType = "Document";
+	if (args["contentType"] && args["contentType"].indexOf(":") !=-1) {
+		contentType = args["contentType"].replace(":", "_");
+	}
+	// extract query statement
+	model.statement = "SELECT * FROM " + contentType;
+	if (model.statement == null || model.statement.length == 0) {
+		//status.setCode(status.STATUS_BAD_REQUEST, "Query statement must be provided");
+		break script;
+	}
 
-    // extract query statement
-    model.statement = cmisQuery.statement.toString();
-    if (model.statement == null || model.statement.length == 0)
-    {
-        //status.setCode(status.STATUS_BAD_REQUEST, "Query statement must be provided");
-        break script;
-    }
-    
-    // process search all versions (NOTE: not supported)
-    var searchAllVersions = cmisQuery.searchAllVersions;
-    if (searchAllVersions != null && searchAllVersions === "true")
-    {
-        //status.setCode(status.STATUS_INTERNAL_SERVER_ERROR, "Search all versions not supported");
-        break script;
-    }
-    
-    // TODO: process allowableActions
-    
-    // process paging
-    var skipCount = parseInt(cmisQuery.skipCount);
-    var pageSize = parseInt(cmisQuery.pageSize);
-    var page = paging.createPageOrWindow(null, null, isNaN(skipCount) ? null : skipCount, isNaN(pageSize) ? null : pageSize);
-    
-    // perform query
-    var paged = cmis.query(model.statement, page);
-    model.resultset = paged.result;
-    model.cursor = paged.cursor;
-        
+	// process paging
+	var skipCount = parseInt("0");
+	if (args["skipCount"] && args["skipCount"].indexOf(":") !=-1) {
+		contentType = parseInt(args["skipCount"]);
+	}
+	var pageSize = parseInt("5");
+	if (args["pageSize"] && args["pageSize"].indexOf(":") !=-1) {
+		contentType = parseInt(args["pageSize"]);
+	}
+	
+	var page = paging.createPageOrWindow(null, null, skipCount, pageSize);
+
+	// perform query
+	var paged = cmis.query(model.statement, page);
+	model.resultset = paged.result;
+	model.cursor = paged.cursor;
+	
+//	logger.warn("CMIS :");
+//	logger.warn("query :" + model.statement);
+//	logger.warn("results number:" + model.resultset.getLength());
+
 }
