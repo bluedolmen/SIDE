@@ -11,82 +11,77 @@ import org.springframework.jdbc.core.ColumnMapRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class SQLSearchServiceImpl implements SQLSearchService {
+	private static String TRUE_SQL_STATEMENT = "TRUE";
 	
-//	public ResultSet query(String typeName) {
-//		String query_ = "SELECT * FROM " + typeName;
-//		//String countQuery_ = "SELECT COUNT(*) FROM " + typeName;
-//		
-//		java.sql.ResultSet resultSet = databaseQuery.executeQuery(query_);
-//		//java.sql.ResultSet countResultSet = databaseQuery.executeQuery(countQuery_);
-//		
-//  		Path[] propertyPaths = new Path[0];
-//  		SearchParameters searchParameters = new SearchParameters();
-//		SQLResultSet sqlResultSet = new SQLResultSet(resultSet, nodeService, tenantService, propertyPaths, searchParameters);
-//		
-//		return sqlResultSet;
-//	}
-	
-//	public Collection<NodeRef> query(String typeName) {
-//		Collection<NodeRef> result = null;
-//		
-//		String query_ = "SELECT * FROM " + typeName;
-//		try {
-//			result = databaseQuery.getResultAsNodeRefs(query_);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		return result;
-//	}
-		
-	@SuppressWarnings("unchecked")
 	public Collection<NodeRef> selectNodes(String typeName, String condition) {
-		String sqlQuery = String.format("SELECT id, uuid FROM %1$s WHERE %2$s",typeName, condition);
+		if (condition == null) {
+			condition = TRUE_SQL_STATEMENT;
+		}
+		String sqlQuery = String.format("SELECT uuid FROM %1$s WHERE %2$s",typeName, condition);
+		return executeQuery(sqlQuery);
+	}
+
+	public Collection<NodeRef> selectNodes(SearchParameters searchParameters) {
+		StringBuilder sqlQuery = new StringBuilder();
+		
+		sqlQuery.append("SELECT uuid FROM ");
+		sqlQuery.append(searchParameters.getTypeName());
+		
+		if (searchParameters.hasAlias()) {
+			sqlQuery.append(" ");
+			sqlQuery.append(searchParameters.getAlias());
+			sqlQuery.append(" ");
+		}
+		
+		if (searchParameters.hasJoinCondition()) {
+			sqlQuery.append(" ");
+			sqlQuery.append(searchParameters.getJoinCondition());
+			sqlQuery.append(" ");
+		}
+
+		if (searchParameters.hasCondition() || searchParameters.hasRestrictingPath()) {
+			sqlQuery.append(" WHERE ");
+		}
+		
+		if (searchParameters.hasCondition()) {
+			sqlQuery.append(searchParameters.getCondition());
+		}
+		
+		if (searchParameters.hasCondition() && searchParameters.hasRestrictingPath()) {
+			sqlQuery.append(" AND ");
+		}
+		
+		if (searchParameters.hasRestrictingPath()) {
+			sqlQuery.append(searchParameters.getRestrictingPath());
+		}
+
+		return executeQuery(sqlQuery.toString());
+	}
+
+	/*
+	 * Helper methods
+	 */
+	@SuppressWarnings("unchecked")
+	private Collection<NodeRef> executeQuery (String sqlQuery) {
 		List<NodeRef> result = jdbcTemplate.query(sqlQuery, 
 				new ColumnMapRowMapper() {
 					public Object mapRow(ResultSet rs, int i) throws SQLException {
-						return new NodeRef(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE, rs.getString(2));
+						return new NodeRef(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE, rs.getString(1));
 					}
 		});
 		
-		return result;
+		return result;		
 	}
-
 	
-	// SPRING BEAN MANAGEMENT
+	/*
+	 * Spring IoC/DI material
+	 */
 
-//	private DatabaseQuery databaseQuery;
-//	private NodeService nodeService;
 	private JdbcTemplate jdbcTemplate;
 	
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate_) {
 		jdbcTemplate = jdbcTemplate_;
 	}
-
-//	public DatabaseQuery getDatabaseQuery() {
-//		return databaseQuery;
-//	}
-//	
-//	public void setDatabaseQuery(DatabaseQuery databaseQuery_) {
-//		databaseQuery = databaseQuery_;
-//	}
-//
-//	public NodeService getNodeService() {
-//		return nodeService;
-//	}
-//
-//	public void setNodeService(NodeService nodeService_) {
-//		nodeService = nodeService_;
-//	}
-//
-//	public TenantService getTenantService() {
-//		return tenantService;
-//	}
-//
-//	public void setTenantService(TenantService tenantService_) {
-//		tenantService = tenantService_;
-//	}
 
 
 	

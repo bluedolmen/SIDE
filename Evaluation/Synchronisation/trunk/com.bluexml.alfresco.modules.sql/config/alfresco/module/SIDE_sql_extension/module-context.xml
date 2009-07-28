@@ -8,7 +8,7 @@
 				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
 
 	<!-- ======================= -->
-    <!-- .utils beans            -->
+    <!-- common beans            -->
     <!-- ======================= -->
  
 	<bean id="synchronisationProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -23,8 +23,6 @@
 	    <property name="username" value="${synchrodb.username}"/>
 	    <property name="password" value="${synchrodb.password}"/>
 	</bean>
-
-	<bean id="sqlDatabaseQuery" class="com.bluexml.alfresco.modules.sql.utils.DatabaseQuery" />
 
 
 	<!-- ======================= -->

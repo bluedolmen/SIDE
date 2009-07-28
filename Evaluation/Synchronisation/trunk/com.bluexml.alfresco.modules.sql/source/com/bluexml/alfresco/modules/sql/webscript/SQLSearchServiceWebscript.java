@@ -13,8 +13,6 @@ import com.bluexml.alfresco.modules.sql.searcher.SQLSearchService;
 
 public class SQLSearchServiceWebscript extends AbstractWebScript {
 	
-	
-	
 	public void init() {
 		// TODO : logger init
 	}
@@ -22,9 +20,7 @@ public class SQLSearchServiceWebscript extends AbstractWebScript {
 	public void execute(WebScriptRequest webscriptrequest, WebScriptResponse webscriptresponse)
 			throws IOException {
 		String result = "";
-		
-		webscriptresponse.setContentType("text/xml");
-		
+				
 		String searchedType = webscriptrequest.getParameter("type");
 		
 		Collection<NodeRef> resultCollection = sqlSearchService.selectNodes(searchedType, "true");
@@ -32,6 +28,8 @@ public class SQLSearchServiceWebscript extends AbstractWebScript {
 		
 		// TODO : Return status as an xml stream?!
 		OutputStream outputStream = webscriptresponse.getOutputStream();
+		webscriptresponse.setContentType(WebScriptResponse.XML_FORMAT);
+		
 		outputStream.write(result.getBytes());
 	}
 
