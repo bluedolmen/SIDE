@@ -34,7 +34,7 @@
 		<!-- test repositories (internal)-->
 		<repository>
 			<id>SIDE-lan-release</id>
-			<url>http://192.168.49.18:8081/nexus/content/repositories/releases</url>
+			<url>http://192.168.49.18:8081/nexus/content/repositories/SIDE-lan-release</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -44,7 +44,7 @@
 		</repository>
 		<repository>
 			<id>SIDE-lan-snapshots</id>
-			<url>http://192.168.49.18:8081/nexus/content/repositories/snapshots</url>
+			<url>http://192.168.49.18:8081/nexus/content/repositories/SIDE-lan-snapshots</url>
 			<releases>
 				<enabled>false</enabled>
 			</releases>
