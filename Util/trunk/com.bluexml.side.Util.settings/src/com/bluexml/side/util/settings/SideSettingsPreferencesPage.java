@@ -4,7 +4,6 @@ import java.net.URL;
 
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -25,7 +24,7 @@ import com.bluexml.side.util.libs.SystemInfoGetter;
  * handles setting the colors used by the editors.
  */
 
-public class SideSettingsPreferencesPage 
+public class SideSettingsPreferencesPage
 	extends PreferencePage
 	implements IWorkbenchPreferencePage {
 	private static final String linkText =
@@ -35,7 +34,7 @@ public class SideSettingsPreferencesPage
 	 * @see PreferencePage#createContents(Composite)
 	 */
 	protected Control createContents(Composite parent) {
-		
+
 		Composite entryTable = new Composite(parent, SWT.NULL);
 		GridLayout layout = new GridLayout();
 		entryTable.setLayout(layout);
@@ -44,6 +43,7 @@ public class SideSettingsPreferencesPage
 		lblName.setText(iDText);
 		//Machine name
 		Text textNomMachine = new Text(entryTable, SWT.BORDER | SWT.SINGLE| SWT.COLOR_WHITE);
+		textNomMachine.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
 		textNomMachine.setEditable(false);
 		textNomMachine.setText(SystemInfoGetter.getHostWithHash());
 		//link to SIDE website
@@ -74,14 +74,14 @@ public class SideSettingsPreferencesPage
 	}
 
 	/**
-	 * Performs special processing when this page's Restore Defaults button has 
+	 * Performs special processing when this page's Restore Defaults button has
 	 * been pressed.
 	 * Sets the contents of the color field to the default value in the preference
 	 * store.
 	 */
 	protected void performDefaults() {}
-	
-	/** 
+
+	/**
 	 * Method declared on IPreferencePage. Save the
 	 * color preference to the preference store.
 	 */
