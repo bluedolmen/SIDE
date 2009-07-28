@@ -14,7 +14,7 @@ public class FeedbackActivator extends AbstractUIPlugin {
 	public static final String PLUGIN_ID = "com.bluexml.side.Util.feedback";
 
 	// URL to send file
-	public static String SERVICE_URL = "http://localhost/upload.php";
+	public static String SERVICE_URL = "http://www.bluexml.com/static/test/upload.php";
 	// URL for stats to show in popup.
 	public static String STATS_URL = "http://www.bluexml.com";
 
