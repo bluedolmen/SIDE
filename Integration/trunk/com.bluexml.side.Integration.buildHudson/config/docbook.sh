@@ -12,7 +12,7 @@ else
 fi
 
 return_code=0
-cd $GENDOC_SRC/src/com/bluexml/side/Util/MetaModel/gendoc
+#cd $GENDOC_SRC/src/com/bluexml/side/Util/MetaModel/gendoc
 #CLASSDIR=".:$GENDOC_SRC/src:$GENDOC_SRC/org.eclipse.emf.common_2.4.0.v200902171115.jar:$GENDOC_SRC/org.eclipse.emf.ecore_2.4.2.v200902171115.jar:$GENDOC_SRC/org.eclipse.emf.ecore.xmi_2.4.1.v200902171115.jar"
 #for i in *.java
 #do
@@ -26,8 +26,15 @@ cd $GENDOC_SRC/src/com/bluexml/side/Util/MetaModel/gendoc
 #cd $EXEC_DIR/gendoc
 
 #jar cmf META-INF/MANIFEST.MF ../Gendoc.jar .
-cd ..
+cd $EXEC_DIR
+var[0]=palette.classDiagram=/root/.hudson/jobs/Build_S-IDE/workspace/S-IDE/MetaModel/Class/trunk/com.bluexml.side.Class.modeler/model/ClasseDiagram.diagramconfigurator
+var[1]=palette.workflow=/root/.hudson/jobs/Build_S-IDE/workspace/S-IDE/MetaModel/Workflow/trunk/com.bluexml.side.Workflow.modeler/model/Workflow.diagramconfigurator
+var[2]=forms.ecore=/root/.hudson/jobs/Build_S-IDE/workspace/S-IDE/MetaModel/Form/trunk/com.bluexml.side.Form/model/Forms.ecore
+for i in `seq 0 2`; do
+echo ${var[i]}
+echo ${var[i]} > modelspath.properties
 java -jar Gendoc.jar
+done
 jar_gendoc=$?
 if [ -f gendoc.log ]; then
   cat gendoc.log
