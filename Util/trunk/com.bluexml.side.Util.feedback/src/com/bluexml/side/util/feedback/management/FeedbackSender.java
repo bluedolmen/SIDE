@@ -52,13 +52,14 @@ public class FeedbackSender {
 			e.printStackTrace();
 			noError = false;
 		}
-		if (zipFile.list().length > 0) {
+
+		if (zipFile != null && zipFile.list() != null && zipFile.list().length > 0) {
 			// Send it
 			try {
-				sendFile(zipFile);
+				//sendFile(zipFile);
 				// Remove all files send previously
 				removeSendedFiles(zipFile);
-			} catch (IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 				noError = false;
 			}
@@ -80,8 +81,18 @@ public class FeedbackSender {
 			}
 		}
 
-		java.io.File zipFile2 = zipFile;
-		zipFile2.delete();
+			java.io.File zipFile2 = (java.io.File) zipFile;
+			try {
+				File.umount();
+			} catch (ArchiveException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (zipFile.exists()) {
+				zipFile2.delete();
+				zipFile2.deleteOnExit();
+			}
+
 	}
 
 	/**
@@ -117,11 +128,11 @@ public class FeedbackSender {
 		// Zip creation
 		File zipFile = new File(source, FeedbackActivator.ZIP_FILE_NAME);
 		if (zipFile.exists()) {
+			zipFile.deleteAll();
 			zipFile.delete();
 			zipFile = new File(source, FeedbackActivator.ZIP_FILE_NAME);
 		}
 		zipFile.mkdir();
-
 		// Add them to the zip
 		for (File f : logFiles) {
 			File zipEntry = new File( zipFile, f.getName(), ArchiveDetector.NULL );
@@ -132,7 +143,7 @@ public class FeedbackSender {
 				System.err.println("Error in copy " + f.getName());
 			}
 		}
-        File.umount();
+		File.update();
         return zipFile;
 	}
 }
