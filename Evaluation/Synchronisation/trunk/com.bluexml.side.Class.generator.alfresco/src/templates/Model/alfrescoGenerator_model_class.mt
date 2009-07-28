@@ -47,7 +47,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 				<%if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()>0){%>
 			<parent>cm:folder</parent>
 			 	<%}else{%>
-			<parent>cm:content</parent>
+			<parent>bxcm:content</parent>
 				<%}%>
 			<%}else{%>
 				<%if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()>0){%>

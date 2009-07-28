@@ -27,7 +27,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 	<type name="<%getFolder()%>:<%getQualifiedName()%>">
 		<title><%name%></title>		
 		<description><%name%></description>		
-		<parent>cm:content</parent>
+		<parent>bxcm:content</parent>
 		
 		<properties>
 			<property name="<%getFolder()%>:<%getQualifiedName()%>_label">
