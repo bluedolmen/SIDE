@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="com.bluexml.alfresco.modules.sql" default="package-amp" basedir=".">
+<project name="com.bluexml.side.Integration.alfresco.sql" default="package-amp" basedir=".">
 
 	<property file="config/module.properties"/>
 	
