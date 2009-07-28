@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collection;
 
-import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.web.scripts.AbstractWebScript;
 import org.alfresco.web.scripts.WebScriptRequest;
@@ -28,9 +27,7 @@ public class SQLSearchServiceWebscript extends AbstractWebScript {
 		
 		String searchedType = webscriptrequest.getParameter("type");
 		
-		//SQLSearch sqlSearch = new SQLSearch();
-		//ResultSet resultSet = sqlSearch.query(searchedType);
-		Collection<NodeRef> resultCollection = sqlSearchService.query(searchedType);
+		Collection<NodeRef> resultCollection = sqlSearchService.selectNodes(searchedType, "true");
 		result = formatResult_(resultCollection);
 		
 		// TODO : Return status as an xml stream?!
@@ -43,7 +40,7 @@ public class SQLSearchServiceWebscript extends AbstractWebScript {
 		
 		result.append("<nodes>");
 		for (NodeRef nodeRef : collection) {
-			result.append("<node>" + nodeRef.getId() + "</node>");
+			result.append("<node>" + nodeRef + "</node>");
 		}
 		result.append("</nodes>");
 		
@@ -52,17 +49,8 @@ public class SQLSearchServiceWebscript extends AbstractWebScript {
 	
 	// BEAN MANAGEMENT
 	
-	private ServiceRegistry serviceRegistry;
 	private SQLSearchService sqlSearchService;
-	
-	public ServiceRegistry getServiceRegistry() {
-		return serviceRegistry;
-	}
-
-	public void setServiceRegistry(ServiceRegistry serviceRegistry) {
-		this.serviceRegistry = serviceRegistry;
-	}
-	
+		
 	public SQLSearchService getSQLSearchService() {
 		return sqlSearchService;
 	}

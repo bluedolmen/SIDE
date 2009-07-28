@@ -17,8 +17,8 @@ import org.alfresco.service.namespace.QName;
 import org.alfresco.service.namespace.RegexQNamePattern;
 import org.apache.log4j.Logger;
 
-import com.bluexml.alfresco.modules.sql.synchronisation.NodeFilterer;
-import com.bluexml.alfresco.modules.sql.synchronisation.NodeService;
+import com.bluexml.alfresco.modules.sql.synchronisation.common.NodeFilterer;
+import com.bluexml.alfresco.modules.sql.synchronisation.nodeService.NodeService;
 
 public class BasicContentReplication implements ContentReplication {
 
@@ -55,6 +55,8 @@ public class BasicContentReplication implements ContentReplication {
 			 */
 			if (nodeFilterer.accept(nodeRef) && currentDictionaryTypes.contains(nodeService.getType(nodeRef)) ) {
 				addNode(nodeRef);
+				
+				customActionManager.doInContentReplication(nodeRef);
 				
 				List<AssociationRef> associations = nodeService.getTargetAssocs(nodeRef, RegexQNamePattern.MATCH_ALL);
 				for (AssociationRef association : associations) {
@@ -117,6 +119,7 @@ public class BasicContentReplication implements ContentReplication {
 	private NodeService synchroNodeService; /* BlueXML Synchronisation NodeService */
 	private org.alfresco.service.cmr.repository.NodeService nodeService;
 	private DictionaryService dictionaryService;
+	private CustomActionManager customActionManager;
 	
 	public void setSearchService (SearchService searchService_) {
 		searchService = searchService_;
@@ -130,7 +133,6 @@ public class BasicContentReplication implements ContentReplication {
 		synchroNodeService = nodeService_;
 	}
 	
-	
 	public void setNodeService (org.alfresco.service.cmr.repository.NodeService nodeService_) {
 		nodeService = nodeService_;
 	}
@@ -139,5 +141,8 @@ public class BasicContentReplication implements ContentReplication {
 		dictionaryService = dictionaryService_;
 	}
 
+	public void setCustomActionManager(CustomActionManager customActionManager_) {
+		customActionManager = customActionManager_;
+	}
 }
 

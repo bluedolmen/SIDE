@@ -7,6 +7,8 @@ import org.alfresco.service.cmr.repository.NodeRef;
 public interface SQLSearchService {
 
 	//public ResultSet query(String query);
-	public Collection<NodeRef> query (String typeName);
+	//public Collection<NodeRef> query (String typeName);
+	
+	public Collection<NodeRef> selectNodes (String typeName, String condition);
 	
 }

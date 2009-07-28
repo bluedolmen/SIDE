@@ -30,7 +30,7 @@ public class DefaultDialect implements SynchronisationDialect {
 			put(DataTypeDefinition.FLOAT, "FLOAT");
 			put(DataTypeDefinition.INT, "INTEGER");
 			put(DataTypeDefinition.LONG, "INTEGER");
-			put(DataTypeDefinition.PATH, "VARCHAR");
+			put(DataTypeDefinition.PATH, "VARCHAR(512)");
 			put(DataTypeDefinition.TEXT, "VARCHAR");	
 		}
 	};
@@ -44,18 +44,25 @@ public class DefaultDialect implements SynchronisationDialect {
 		if (!sqlTypeMapping.containsKey(dataTypeName)) {
 			logger.error("Do not know how to map type \"" + dataTypeName + "\" to SQL");
 		} else {
-			result = sqlTypeMapping.get(dataTypeName);
-			
-			if (result.endsWith("CHAR")) {
-				Integer maxLength = getMaxLength(propertyDefinition);
-				result += "(" + maxLength + ")";
-			}
+			result = decorateCharType(sqlTypeMapping.get(dataTypeName), getMaxLength(propertyDefinition));
 		}
 
 		return result;
-		
 	}
 
+	public String getSQLMapping(QName dataTypeName) {
+		String result = "UNSPECIFIED";
+		
+		if (!sqlTypeMapping.containsKey(dataTypeName)) {
+			logger.error("Do not know how to map type \"" + dataTypeName + "\" to SQL");
+		} else {
+			result = decorateCharType(sqlTypeMapping.get(dataTypeName), getXCharDefaultLength());
+		}
+
+		return result;
+	}
+
+	
 	public Integer getXCharDefaultLength() {
 		return MAX_CHAR_LENGTH;
 	}
@@ -63,6 +70,15 @@ public class DefaultDialect implements SynchronisationDialect {
 	/*
 	 * Helper functions
 	 */
+	
+	private String decorateCharType(String type, Integer charLength) {
+		if (type.endsWith("CHAR")) {
+			Integer maxLength = getXCharDefaultLength();
+			type += "(" + maxLength + ")";
+		}
+		return type;
+		
+	}
 	
 	private Integer getMaxLength(PropertyDefinition propertyDefinition) {
 		Integer result = getXCharDefaultLength();
@@ -77,6 +93,18 @@ public class DefaultDialect implements SynchronisationDialect {
 			}
 		}
 		return result;
+	}
+
+	public String escape(String input) {
+		/*
+		 * Currently only replace single quote by doubled single quote
+		 */
+		return input.replaceAll("'", "''");
+	}
+
+	public String quoteString(String input) {
+		// TODO Auto-generated method stub
+		return "'" + input + "'";
 	}
 
 

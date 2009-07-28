@@ -25,7 +25,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
-import com.bluexml.alfresco.modules.sql.synchronisation.NodeFilterer;
+import com.bluexml.alfresco.modules.sql.synchronisation.common.NodeFilterer;
+import com.bluexml.alfresco.modules.sql.synchronisation.common.SqlCommon.TableType;
 import com.bluexml.alfresco.modules.sql.synchronisation.dialects.DefaultDialect;
 import com.bluexml.alfresco.modules.sql.synchronisation.dialects.SynchronisationDialect;
 import com.bluexml.alfresco.modules.sql.synchronisation.dictionary.DatabaseDictionary;
@@ -39,6 +40,12 @@ public class SchemaCreation {
 	private Logger logger = Logger.getLogger(getClass());
 	private Connection connection = null;
 	private boolean ready = true;
+	
+	enum CheckTableStatus {
+		CREATE_TABLES,
+		NO_ACTION_CLEAN,
+		NO_ACTION_DIRTY
+	}
 	
 	public void init() {
 		logger.debug("Initializing the synchronized database");
@@ -93,7 +100,12 @@ public class SchemaCreation {
 		
 		for (QName type : dictionaryService.getAllTypes()) {
 			if (nodeFilterer.acceptOnName(type)) {
-				createStatements.add(createClass(type));
+				CreateStatement currentCreateStatement = createClass(type); 
+				
+				customActionManager.doInCreateType(type, currentCreateStatement);
+				
+				createStatements.add(currentCreateStatement);
+
 			}
 		}
 		
@@ -101,19 +113,19 @@ public class SchemaCreation {
 			if (nodeFilterer.acceptOnName(associationName)) {
 				ClassDefinition sourceClassDefinition = dictionaryService.getAssociation(associationName).getSourceClass();
 				ClassDefinition targetClassDefinition = dictionaryService.getAssociation(associationName).getTargetClass();
-				createStatements.add(createAssociation(associationName, sourceClassDefinition.getName(), targetClassDefinition.getName()));
+				
+				CreateStatement currentCreateStatement = createAssociation(associationName, sourceClassDefinition.getName(), targetClassDefinition.getName());
+
+				customActionManager.doInCreateAssociation(associationName, currentCreateStatement);
+
+				createStatements.add(currentCreateStatement);
+
 			}
 		}
 		
 		return createStatements;
 	}
-	
-	enum CheckTableStatus {
-		CREATE_TABLES,
-		NO_ACTION_CLEAN,
-		NO_ACTION_DIRTY
-	}
-	
+		
 	private CheckTableStatus doCheckStatus (List<CreateStatement> createStatements) {
 		List<String> matchedTables = new ArrayList<String>();
 		List<String> unmatchedTables = new ArrayList<String>();
@@ -155,6 +167,7 @@ public class SchemaCreation {
 			ready = false;
 		}
 		
+		logger.debug("Global checking status: " + status.name());
 		return status;
 	}
 	
@@ -221,7 +234,7 @@ public class SchemaCreation {
 			}
 		}
 		
-		CreateStatement createStatement = new CreateStatement(tableName, columns);
+		CreateStatement createStatement = new CreateStatement(tableName, columns, TableType.TABLE_CLASS, customActionManager);
 		String idColumnName = databaseDictionary.resolveAttributeAsColumnName(ALFRESCO_DBID_COLUMN_NAME, className);
 		createStatement.addPkConstraint(idColumnName);
 
@@ -245,7 +258,7 @@ public class SchemaCreation {
 		columns.put(databaseDictionary.getSourceAlias(associationName), new ArrayList<String>() {{add("INTEGER"); }});
 		columns.put(databaseDictionary.getTargetAlias(associationName), new ArrayList<String>() {{add("INTEGER"); }});
 
-		CreateStatement createStatement = new CreateStatement(tableName, columns);
+		CreateStatement createStatement = new CreateStatement(tableName, columns, TableType.TABLE_ASSOCIATION, customActionManager);
 		createStatement.addPkConstraint(ASSOCIATION_ID_COLUMN_NAME);
 		
 		String idColumnName = databaseDictionary.resolveAttributeAsColumnName(ALFRESCO_DBID_COLUMN_NAME, sourceClassQName.getLocalName());
@@ -305,7 +318,7 @@ public class SchemaCreation {
 	private ContentReplication contentReplication;
 	private TransactionService transactionService;
 	private SynchronisationDialect synchronisationDialect;
-
+	private CustomActionManager customActionManager;
 
 	public void setDataSource(DataSource dataSource_) {
 		dataSource = dataSource_;
@@ -333,6 +346,10 @@ public class SchemaCreation {
 	
 	public void setSynchronisationDialect(SynchronisationDialect synchronisationDialect_) {
 		synchronisationDialect = synchronisationDialect_;
+	}
+	
+	public void setCustomActionManager(CustomActionManager customActionManager_) {
+		customActionManager = customActionManager_;
 	}
 
 }

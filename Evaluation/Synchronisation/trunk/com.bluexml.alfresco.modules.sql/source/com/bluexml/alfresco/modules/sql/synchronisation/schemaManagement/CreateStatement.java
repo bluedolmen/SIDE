@@ -8,9 +8,12 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+
+import com.bluexml.alfresco.modules.sql.synchronisation.common.SqlCommon.TableType;
 
 /*
  * This inner class is used to store the create statements
@@ -25,10 +28,24 @@ public class CreateStatement {
 	private String tableName;
 	private List<String> pkColumns = new ArrayList<String>() ;
 	private Map<String, TableColumn> fkConstraints = new LinkedHashMap<String, TableColumn>();
+	private CustomActionManager customActionManager = null;
+	private TableType tableType;
 	
-	protected CreateStatement(String tableName_, Map<String, List<String>> columns_) {
+	protected CreateStatement(String tableName_, Map<String, List<String>> columns_, TableType tableType_) {
 		tableName = tableName_;
 		columns = columns_;
+		tableType = (tableType_ == null ? TableType.TABLE_UNSPECIFIED : tableType_);
+	}
+	
+	protected CreateStatement(String tableName_, Map<String, List<String>> columns_, TableType tableType_, CustomActionManager customActionManager_) {
+		tableName = tableName_;
+		columns = columns_;
+		tableType = (tableType_ == null ? TableType.TABLE_UNSPECIFIED : tableType_);
+		customActionManager = customActionManager_;
+	}
+	
+	public void addColumns(Map<String, List<String>> columns_) {
+		columns.putAll(columns_);
 	}
 	
 	public void resetConstraints() {
@@ -79,7 +96,7 @@ public class CreateStatement {
 		}
 		
 		result.append(StringUtils.join(tableDefinitionLines.iterator(),",\n"));
-		result.append("\n);");
+		result.append("\n)");
 		
 		return result.toString();
 	}
@@ -97,31 +114,44 @@ public class CreateStatement {
 			DatabaseMetaData databaseMetaData = connection.getMetaData();
 			rs = databaseMetaData.getColumns(null, null, tableName, "%");
 
-			if (rs.isAfterLast()) {
+			if (!rs.next()) {
 				status = TableStatus.NOT_EXISTS;
 			} else {
 				logger.debug("Checking table '" + tableName + "'");
-				rs.next();						
+				
+				Map<String, Integer> tableColumns = new LinkedHashMap<String, Integer>();
 				do {
 					String columnName = rs.getString("COLUMN_NAME");
-					if (! columns.containsKey(columnName)) {
-						status = TableStatus.EXISTS_UNMATCHED;
-					}
 					Integer dataType = rs.getInt("DATA_TYPE");
 					String dataTypeDepName = rs.getString("TYPE_NAME");
-					// TODO : Implement type checking to return EXIST_SIMILAR if types are compatible
-					
 					logger.debug("Column '" + columnName + "' with type '" + dataTypeDepName + "'(" + dataType + ")");
-					rs.next();						
-				} while (! rs.isAfterLast());
+					tableColumns.put(columnName, dataType);
+				} while (rs.next());
+				rs.close();
+				// TODO : Implement type checking to return EXIST_SIMILAR if types are compatible
+					
+				Set<String> propertySet = columns.keySet();
+				propertySet.removeAll(tableColumns.keySet());
+				
+				if (! propertySet.isEmpty()) {
+					status = TableStatus.EXISTS_UNMATCHED;
+				}
+				
+				if (customActionManager != null) {
+					status = customActionManager.doInSchemaChecking(tableColumns, status, tableType);
+				} else {
+					logger.debug("Cannot execute any custom checking since no custom action manager has been defined on create statement for table '" + tableName + "'");
+				}					
 			}
-			rs.close();
+
 		} catch (SQLException e) {
 			logger.error("Cannot get meta-data for checking table status");
 			logger.debug(e);
 			return TableStatus.NOT_CHECKABLE;
 		}
 		
+		logger.debug("Checking table output status '" + tableName + "': " + status.name());
+
 		return status;
 
 	}

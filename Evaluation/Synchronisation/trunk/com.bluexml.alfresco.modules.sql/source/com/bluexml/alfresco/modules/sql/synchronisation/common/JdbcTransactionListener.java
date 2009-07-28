@@ -1,8 +1,10 @@
-package com.bluexml.alfresco.modules.sql.synchronisation;
+package com.bluexml.alfresco.modules.sql.synchronisation.common;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -18,31 +20,7 @@ public class JdbcTransactionListener implements TransactionListener {
     private static final String SYNCHRO_CONTEXT_KEY = JdbcTransactionListener.class.getName() + ".context";
 	
 
-	private Connection getConnection() {
-//		String currentTransactionId = AlfrescoTransactionSupport.getTransactionId();
-//		
-//		logger.debug("[setConnection] current Alfresco transaction id: " + currentTransactionId);
-//		if (!StringUtils.equals(currentTransactionId, alfrescoTransactionId)) {
-//			if (currentConnection != null) {
-//				logger.debug("PREVIOUS CONNECTION WAS NOT CLOSED CORRECTLY... closing now");
-//				DataSourceUtils.releaseConnection(currentConnection, dataSource);
-//			}
-//			alfrescoTransactionId = currentTransactionId;
-//			currentConnection = DataSourceUtils.getConnection(dataSource);
-//			try {
-//				currentConnection.setAutoCommit(false);
-//			} catch (SQLException e) {
-//				logger.debug("Cannot set autocommit mode on the connection");
-//				logger.debug(e.getMessage());
-//				//e.printStackTrace();
-//			}
-//			AlfrescoTransactionSupport.bindListener(this);
-//			logger.debug("[setConnection] opened: " + currentConnection);
-//		} else {
-//			logger.debug("[setConnection] same transaction, reusing previous opened connection");
-//		}
-//		logger.debug("[setConnection] connection : " + currentConnection);
-		
+	private Connection getConnection() {		
 		Connection connection = (Connection) AlfrescoTransactionSupport.getResource(SYNCHRO_CONTEXT_KEY);
         if (connection == null)
         {
@@ -71,17 +49,19 @@ public class JdbcTransactionListener implements TransactionListener {
 	 * opening/closure of related sql artefacts
 	 * 
 	 * @param query
+	 * @throws SQLException 
 	 */
-	public void executeSQLQuery(String sql_query) {
+	public void executeSQLQuery(String sqlQuery) throws SQLException {
 		Connection connection = getConnection();
 		Statement st = null;
 		try {
-			logger.debug("[executeSQLQuery] " + sql_query);
+			logger.debug("[executeSQLQuery] " + sqlQuery);
 			st = connection.createStatement();
-			int rowCount = st.executeUpdate(sql_query);
-			logger.debug("[executeSQLQuery] Row count : " + rowCount);
+			int rowCount = st.executeUpdate(sqlQuery);
+			logger.debug("[executeSQLQuery] Row count: " + rowCount);
 		} catch (SQLException e) {
 			logger.error("[executeSQLQuery]", e);
+			throw(e);
 		} finally {
 			if (st != null) {
 				try {
@@ -92,16 +72,54 @@ public class JdbcTransactionListener implements TransactionListener {
 				st = null;
 			}
 		}
-}
+	}
+
+	public void executeSQLQuery(List<String> sqlQueries) throws SQLException {
+		Connection connection = getConnection();
+		Statement st = null;
+		
+		// avoid unnecessary processing if there is no queries (opening/closing of a statement) 
+		if (!sqlQueries.isEmpty()){
+			try {
+				st = connection.createStatement();
+				for (String sqlQuery : sqlQueries) {
+					logger.debug("[executeSQLQuery(List<String>)] " + sqlQuery);
+					st.addBatch(sqlQuery);
+				}
+				int[] rowCount = st.executeBatch();
+				if (logger.isDebugEnabled()) {
+					// Just print a log message
+					List<String> rowCountAsString = new ArrayList<String>();
+					for (int i = 0 ; i < rowCount.length; i++) rowCountAsString.add(String.format("%1$s",rowCount[i]));
+					logger.debug("[executeSQLQuery] Row count: [" + StringUtils.join(rowCountAsString.iterator(), ",") + "]");
+				}
+			} catch (SQLException e) {
+				logger.error("[executeSQLQuery]", e);
+				throw(e);
+			} finally {
+				if (st != null) {
+					try {
+						st.close();
+					} catch (SQLException e) {
+						logger.error("[executeSQLQuery] cannot close statement ", e);
+					}
+					st = null;
+				}
+			}
+		}
+	}
 
 	public void afterCommit() {
 		logger.debug("[afterCommit]" + AlfrescoTransactionSupport.getTransactionId());
 		Connection connection = getConnection();
-		logger.debug("[afterCommit] on " + connection);
 		try {
 			connection.commit();
 		} catch (SQLException e) {
-			logger.error("[afterCommit]", e);
+			/*
+			 * If an exception occurs here, then the data will not be committed to database
+			 * and hence the database will no longer be synchronized
+			 */
+			logger.error("COMMIT INTO THE SYNCHRONISATION DATABASE FAILED! THE DATABASE IS NOW UNCONSISTENT...", e);
 		} finally {
 			logger.debug("[afterCommit] Releasing existing connection");
 			releaseConnection(connection);

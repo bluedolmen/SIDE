@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.alfresco.model.ContentModel;
 import org.alfresco.repo.node.NodeServicePolicies.BeforeDeleteNodePolicy;
 import org.alfresco.repo.node.NodeServicePolicies.OnCreateAssociationPolicy;
 import org.alfresco.repo.node.NodeServicePolicies.OnCreateChildAssociationPolicy;
@@ -23,6 +22,8 @@ import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.service.namespace.QName;
 import org.apache.log4j.Logger;
 
+import com.bluexml.alfresco.modules.sql.synchronisation.common.NodeFilterer;
+import com.bluexml.alfresco.modules.sql.synchronisation.nodeService.NodeService;
 import com.bluexml.alfresco.modules.sql.synchronisation.schemaManagement.SchemaCreation;
 
 public class SQLSynchronisationPolicy implements 
@@ -116,13 +117,11 @@ public class SQLSynchronisationPolicy implements
 
 			if (changes.size() > 0) {
 				logger.debug("Synchronisation policy, UPDATE PROPERTIES");
-				nodeService.update(nodeRef, changes);
+				nodeService.updateProperties(nodeRef, changes.keySet());
 			}
 		}
 
 	}
-
-
 
 	public void onCreateAssociation(AssociationRef associationRef) {
 		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {

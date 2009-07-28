@@ -1,15 +1,18 @@
-package com.bluexml.alfresco.modules.sql.synchronisation;
+package com.bluexml.alfresco.modules.sql.synchronisation.nodeService;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.alfresco.model.ContentModel;
 import org.alfresco.repo.transaction.TransactionListener;
@@ -26,17 +29,24 @@ import org.alfresco.service.namespace.QName;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.bluexml.alfresco.modules.sql.synchronisation.common.JdbcTransactionListener;
+import com.bluexml.alfresco.modules.sql.synchronisation.common.NodeFilterer;
+import com.bluexml.alfresco.modules.sql.synchronisation.common.NodeHelper;
+import com.bluexml.alfresco.modules.sql.synchronisation.dialects.SynchronisationDialect;
 import com.bluexml.alfresco.modules.sql.synchronisation.dictionary.DatabaseDictionary;
 
-public class NodeServiceImpl implements com.bluexml.alfresco.modules.sql.synchronisation.NodeService {
+public class NodeServiceImpl implements com.bluexml.alfresco.modules.sql.synchronisation.nodeService.NodeService {
 
 	private Logger logger = Logger.getLogger(getClass());
 	
-	public void create(NodeRef nodeRef) {
+	public void create(NodeRef nodeRef)  {		
 		QName nodeType = nodeService.getType(nodeRef);
 		String type_name = nodeType.getLocalName();
+		List<String> sqlQueries = new ArrayList<String>();
 
-		List<QName> parentNames = getParentQNames(nodeRef);
+		List<QName> parentNames = nodeHelper.getParentQNames(nodeRef);
+		Map<QName, Serializable> nodeProperties = nodeService.getProperties(nodeRef);
+		
 		for (QName type_qname : parentNames) {
 			type_name = type_qname.getLocalName();
 
@@ -52,14 +62,14 @@ public class NodeServiceImpl implements com.bluexml.alfresco.modules.sql.synchro
 				currentTypeProperties.putAll(ad.getProperties());
 			}
 
-			Collection<QName> iterableProperties = nodeService.getProperties(nodeRef).keySet();
-			iterableProperties.retainAll(currentTypeProperties.keySet());
+			Set<QName> iterablePropertiesKeySet = new HashSet<QName>(nodeProperties.keySet());
+			Set<QName> currentTypePropertiesKeySet = currentTypeProperties.keySet();
+			iterablePropertiesKeySet.retainAll(currentTypePropertiesKeySet);
 
-			for (QName key : iterableProperties) {
+			for (QName key : iterablePropertiesKeySet) {
 				if (nodeFilterer.acceptOnName(key)) {
-					Serializable property = nodeService.getProperty(nodeRef, key);
 					PropertyDefinition propertyDefinition = dictionaryService.getProperty(key);
-					String value = getSQLFormatFromSerializable(property, propertyDefinition);
+					String value = getSQLFormatFromSerializable(nodeProperties.get(key), propertyDefinition);
 					
 					String originalName = key.getLocalName();
 					String resolvedColumnName = databaseDictionary.resolveAttributeAsColumnName(originalName, type_name);
@@ -73,16 +83,17 @@ public class NodeServiceImpl implements com.bluexml.alfresco.modules.sql.synchro
 
 			if (!properties.isEmpty()) {
 				String sql_query = String.format("INSERT INTO %1$s ( %2$s ) VALUES ( %3$s )", simplified_type_name, ids, values);
-				executeSQLQuery(sql_query);
+				sqlQueries.add(sql_query);
 			} else {
 				logger.error("You must accept at least the node id in the definition of the node filterer");
-			}
-			
+			}			
 		}
+		
+		executeSQLQuery(sqlQueries);
 	}
 
-	public void delete(NodeRef nodeRef) {
-		List<QName> parentNames = getParentQNames(nodeRef);
+	public void delete(NodeRef nodeRef)  {
+		List<QName> parentNames = nodeHelper.getParentQNames(nodeRef);
 		for (QName type_qname : parentNames) {
 			String type_name = type_qname.getLocalName();
 
@@ -94,10 +105,13 @@ public class NodeServiceImpl implements com.bluexml.alfresco.modules.sql.synchro
 		}
 	}
 	
-	public void update(NodeRef nodeRef, Map<QName, Serializable> changes) {
+	
+	public void updateProperties(NodeRef nodeRef, Collection<QName> changes) { //, Map<QName, Serializable> changes)  {
 		String type_name = nodeService.getType(nodeRef).getLocalName();
+		List<String> sqlQueries = new ArrayList<String>();
 
-		List<QName> parentNames = getParentQNames(nodeRef);
+		List<QName> parentNames = nodeHelper.getParentQNames(nodeRef);
+		Map<QName, Serializable> nodeProperties = nodeService.getProperties(nodeRef);
 
 		for (QName type_qname : parentNames) {
 			type_name = type_qname.getLocalName();
@@ -111,36 +125,34 @@ public class NodeServiceImpl implements com.bluexml.alfresco.modules.sql.synchro
 			for (AspectDefinition ad : currentTypeDefinition.getDefaultAspects()) {
 				currentTypeProperties.putAll(ad.getProperties());
 			}
-			Collection<QName> iterableProperties = changes.keySet();
-			iterableProperties.retainAll(currentTypeProperties.keySet());
-
-			for (QName key : iterableProperties) {
-				if (
-						changes.get(key) != null &&
-						!ContentModel.PROP_NODE_DBID.equals(key) && // omit dbid (once set, it must not be changed)
-						!ContentModel.PROP_NODE_UUID.equals(key)    // the same comment holds for uuid						
-					) 
-				{
-					Serializable property = nodeService.getProperty(nodeRef, key);
-					PropertyDefinition propertyDefinition = dictionaryService.getProperty(key);
-					String value = getSQLFormatFromSerializable(property, propertyDefinition);
-					
-					String originalName = key.getLocalName();
-					String resolvedColumnName = databaseDictionary.resolveAttributeAsColumnName(originalName, type_name);
-					
-					String sql_query = String.format("UPDATE %1$s SET %2$s = %3$s WHERE id = %4$s", 
-							simplified_type_name, (resolvedColumnName != null ? resolvedColumnName : originalName), value, dbid);
-					// Update string only if they are non empty...
-					executeSQLQuery(sql_query);
-					// TODO : performing a BATCH UPDATE WOULD BE PREFERABLE
-				}
+						
+			Set<QName> iterablePropertiesKeySet = new HashSet<QName>(changes);
+			Set<QName> currentTypePropertiesKeySet = currentTypeProperties.keySet();
+			iterablePropertiesKeySet.retainAll(currentTypePropertiesKeySet); 
+			// Remove intrinsic properties
+			iterablePropertiesKeySet.remove(ContentModel.PROP_NODE_DBID);
+			iterablePropertiesKeySet.remove(ContentModel.PROP_NODE_UUID);
+			
+			for (QName key : iterablePropertiesKeySet ) {
+				Serializable property = nodeProperties.get(key); //changes.get(key); //;
+				PropertyDefinition propertyDefinition = dictionaryService.getProperty(key);
+				String value = getSQLFormatFromSerializable(property, propertyDefinition);
+				
+				String originalName = key.getLocalName();
+				String resolvedColumnName = databaseDictionary.resolveAttributeAsColumnName(originalName, type_name);
+				
+				String sql_query = String.format("UPDATE %1$s SET %2$s = %3$s WHERE id = %4$s", 
+						simplified_type_name, (resolvedColumnName != null ? resolvedColumnName : originalName), value, dbid);
+				sqlQueries.add(sql_query);
 			}
 		}
+		
+		executeSQLQuery(sqlQueries);
 
 	}
 
 
-	public void addAssociation(AssociationRef associationRef) {
+	public void addAssociation(AssociationRef associationRef)  {
 		
 		QName associationType = associationRef.getTypeQName();
 		String associationName = associationType.getLocalName();
@@ -151,7 +163,7 @@ public class NodeServiceImpl implements com.bluexml.alfresco.modules.sql.synchro
 		addAssociation(associationName , sourceId, targetId);
 	}
 
-	public void removeAssociation(AssociationRef associationRef) {
+	public void removeAssociation(AssociationRef associationRef)  {
 		
 		QName associationType = associationRef.getTypeQName();
 		String associationName = associationType.getLocalName();
@@ -163,7 +175,7 @@ public class NodeServiceImpl implements com.bluexml.alfresco.modules.sql.synchro
 		removeAssociation(associationName, sourceId, targetId);
 	}
 
-	public void addChildAssociation(ChildAssociationRef associationRef) {
+	public void addChildAssociation(ChildAssociationRef associationRef)  {
 		QName associationType = associationRef.getTypeQName();
 		String associationName = associationType.getLocalName();
 		
@@ -173,7 +185,7 @@ public class NodeServiceImpl implements com.bluexml.alfresco.modules.sql.synchro
 		addAssociation(associationName, sourceId, targetId);
 	}
 
-	public void removeChildAssociation(ChildAssociationRef associationRef) {
+	public void removeChildAssociation(ChildAssociationRef associationRef)  {
 		QName associationType = associationRef.getTypeQName();
 		String associationName = associationType.getLocalName();
 		
@@ -183,7 +195,7 @@ public class NodeServiceImpl implements com.bluexml.alfresco.modules.sql.synchro
 		removeAssociation(associationName, sourceId, targetId);
 	}
 
-	private void addAssociation(String associationName, Serializable sourceId, Serializable targetId) {
+	private void addAssociation(String associationName, Serializable sourceId, Serializable targetId)  {
 		// Retrieve a simplified association name
 		String databaseAssociationName = databaseDictionary.resolveAssociationAsTableName(associationName);
 		String sourceClassName = databaseDictionary.getSourceAlias(associationName);
@@ -193,7 +205,7 @@ public class NodeServiceImpl implements com.bluexml.alfresco.modules.sql.synchro
 		executeSQLQuery(sql_query);
 	}
 
-	private void removeAssociation(String associationName, Serializable sourceId, Serializable targetId) {
+	private void removeAssociation(String associationName, Serializable sourceId, Serializable targetId)  {
 
 		String databaseAssociationName = databaseDictionary.resolveAssociationAsTableName(associationName);
 		String sourceClassName = databaseDictionary.getSourceAlias(associationName);
@@ -208,34 +220,38 @@ public class NodeServiceImpl implements com.bluexml.alfresco.modules.sql.synchro
 	 * Helper methods
 	 */
 	
-	private void executeSQLQuery(String query) {
-		transactionListener.executeSQLQuery(query);
-	}
-	
-	
-	/**
-	 * Return the parent QNames of the nodeRef including self
-	 * 
-	 * @param nodeRef
-	 * @return a list of parent names
+	/*
+	 * Helper methods that call the transaction listener by translating the SQL Exception
+	 * into an higher level one
 	 */
-	private List<QName> getParentQNames(NodeRef nodeRef) {
-		List<QName> result = new ArrayList<QName>();
-
-		QName currentType = nodeService.getType(nodeRef);
-
-		while (nodeFilterer.acceptOnName(currentType)) {
-			result.add(currentType);
-			TypeDefinition nodeRefTypeDefinition = dictionaryService.getType(currentType);
-			if (nodeRefTypeDefinition == null ) {
-				logger.error("Cannot find the type definition of type " + currentType);
-				break;
-			}
-			QName parentType = nodeRefTypeDefinition.getParentName();
-			currentType = parentType;
+	private void executeSQLQuery(String sqlQuery) {
+		try {
+			transactionListener.executeSQLQuery(sqlQuery);
+		} catch (SQLException e) {
+			throw new NodeServiceFailureException(e);
 		}
-		return result;
 	}
+
+	private void executeSQLQuery(List<String> sqlQueries) {
+		try {
+			transactionListener.executeSQLQuery(sqlQueries);
+		} catch (SQLException e) {
+			throw new NodeServiceFailureException(e);
+		}
+	}
+
+//	private Set<QName> __filterSystemProperties(Collection<QName> propertyNames) {
+//		Set<QName> result = new HashSet<QName>();
+//		
+//		for (QName propertyName : propertyNames) {
+//			if (SqlCommon.BLUEXML_NAMESPACE_URI.equals(propertyName.getNamespaceURI()) ) {
+//				result.add(propertyName);
+//			}
+//		}
+//		
+//		return result;
+//	}
+	
 
 	private String getSQLFormatFromSerializable(Serializable property, PropertyDefinition propertyDefinition) {
 		String value = null;
@@ -258,7 +274,7 @@ public class NodeServiceImpl implements com.bluexml.alfresco.modules.sql.synchro
 					dataTypeName.equals(DataTypeDefinition.PATH) ||
 					dataTypeName.equals(DataTypeDefinition.NODE_REF)
 				) {
-				value = "'" + value.replaceAll("\'", "\\'") + "'";
+				value = synchronisationDialect.quoteString(synchronisationDialect.escape(value));
 			} else if ("".equals(value)) {
 				/*
 				 * not a string quoted value and does not have a value implies a NULL value
@@ -311,6 +327,8 @@ public class NodeServiceImpl implements com.bluexml.alfresco.modules.sql.synchro
 	private DatabaseDictionary databaseDictionary;
 	private JdbcTransactionListener transactionListener;
 	private NodeFilterer nodeFilterer;
+	private NodeHelper nodeHelper;
+	private SynchronisationDialect synchronisationDialect;
 
 	public void setNodeService(NodeService nodeService_) {
 		nodeService = nodeService_;
@@ -328,12 +346,20 @@ public class NodeServiceImpl implements com.bluexml.alfresco.modules.sql.synchro
 		nodeFilterer = nodeFilterer_;
 	}
 	
+	public void setNodeHelper(NodeHelper nodeHelper_) {
+		nodeHelper = nodeHelper_;
+	}
+
+	public void setSynchronisationDialect(SynchronisationDialect synchronisationDialect_) {
+		synchronisationDialect = synchronisationDialect_;
+	}
+	
 	public void setTransactionListener(TransactionListener transactionListener_) {
 		if (! (transactionListener_ instanceof JdbcTransactionListener) ) {
 			logger.error("NodeServiceImpl needs a JdbcTransactionListener since implementation is relative to sql synchronisation");
 		}
 		transactionListener = (JdbcTransactionListener) transactionListener_;
 	}
-
+	
 
 }

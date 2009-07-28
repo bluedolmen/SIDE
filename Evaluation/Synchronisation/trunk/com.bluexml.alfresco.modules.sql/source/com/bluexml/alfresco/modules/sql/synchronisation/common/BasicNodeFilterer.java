@@ -1,4 +1,4 @@
-package com.bluexml.alfresco.modules.sql.synchronisation;
+package com.bluexml.alfresco.modules.sql.synchronisation.common;
 
 import java.io.Serializable;
 

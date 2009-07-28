@@ -3,6 +3,6 @@
     <shortname>SQL Search Service</shortname>
     <url>/sql/search</url>
     <format default="xml">any</format>
-    <authentication>none</authentication>
+    <authentication>user</authentication>
     <transaction>none</transaction>
 </webscript>
