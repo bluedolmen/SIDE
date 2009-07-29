@@ -2,7 +2,7 @@
   <shortname>BlueXML File Upload</shortname>
   <description><![CDATA[
   Upload file content and meta-data into repository.
-  
+  custom version that manage SIDE content types
   <BR />
   HTML form data
   <ul>
@@ -35,4 +35,5 @@
   <authentication>user</authentication>
   <transaction>required</transaction>
   <lifecycle>public_api</lifecycle>
+  <family>SIDE</family>
 </webscript>

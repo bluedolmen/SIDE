@@ -65,6 +65,11 @@
                         key="class.alfrescoShare.defaultForms"
                         label="Alfresco Share forms (default forms)">
                   </option>
+                  <configurationParameter
+                        documentation="Alfresco URL"
+                        key="alfresco.url"
+                        label="Alfresco URL">
+                  </configurationParameter>
                </generatorVersion>
             </technologyVersion>
          </technology>

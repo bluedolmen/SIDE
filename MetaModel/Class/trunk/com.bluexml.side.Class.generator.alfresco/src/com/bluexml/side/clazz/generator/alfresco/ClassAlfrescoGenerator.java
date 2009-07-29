@@ -24,7 +24,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	public static String GENERATOR_OPTIONS_WEBSCRIPT_REPORT = "alfresco.webscript.report";
 	public static String GENERATOR_OPTIONS_DEFAULTFORMS = "class.alfrescoShare.defaultForms";
 	public static String GENERATOR_CODE = "CODE_GED_G_C_ALFRESCO_3";
-
+	public static String WEBSCRIPT_SIDE_FAMILY="/service/index/family/SIDE";
 	XMLConflictResolver xmlresolver = null;
 
 	public XMLConflictResolver getXmlresolver() {
@@ -104,7 +104,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/xml/alfrescoGenerator_template_xml.mt");
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/xml/alfrescoGenerator_template_result_post.mt");
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/xml/alfrescoGenerator_template_result_get.mt");
-				addServiceLog("SIDE content type webscript", "webscript can be use to list document for reporting purpose", getConfigurationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME)+"/alfresco/service/com/bluexml/side/");
+				addServiceLog("SIDE content type webscript", "webscript can be use to list document for reporting purpose", getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME)+WEBSCRIPT_SIDE_FAMILY);
 			}
 
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_DEFAULTFORMS)) {

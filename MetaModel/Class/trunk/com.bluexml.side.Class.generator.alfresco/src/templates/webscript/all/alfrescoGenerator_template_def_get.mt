@@ -30,8 +30,21 @@ import com.bluexml.side.clazz.generator.alfresco.services.ClassServices
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <webscript>
   <shortname>All s</shortname>
-  <description>Get s</description>
+  <description><![CDATA[
+This service is used to get all SIDE contents<br/>
+originally designed for birt report<br/>
+<br/>
+Parameters :<br/>
+nodeRef : <br/>
+years 	:<br/>
+months 	:<br/>
+days 	:<br/>
+hours 	:<br/>
+minutes	:<br/>
+]]>
+  </description>
   <url>/com/bluexml/side/contentType/all?nodeRef={nodeRef}&amp;years={years}&amp;months={months}&amp;days={days}&amp;hours={hours}&amp;minutes={minutes}</url>
   <format default="json">any</format>
   <authentication>guest</authentication>
+  <family>SIDE</family>
 </webscript>
