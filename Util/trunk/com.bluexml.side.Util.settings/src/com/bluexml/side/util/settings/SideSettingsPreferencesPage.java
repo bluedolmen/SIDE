@@ -42,7 +42,7 @@ public class SideSettingsPreferencesPage
 		Label lblName = new Label(entryTable,SWT.NONE);
 		lblName.setText(iDText);
 		//Machine name
-		Text textNomMachine = new Text(entryTable, SWT.BORDER | SWT.SINGLE| SWT.COLOR_WHITE);
+		Text textNomMachine = new Text(entryTable, SWT.BORDER | SWT.SINGLE);
 		textNomMachine.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
 		textNomMachine.setEditable(false);
 		textNomMachine.setText(SystemInfoGetter.getHostWithHash());
