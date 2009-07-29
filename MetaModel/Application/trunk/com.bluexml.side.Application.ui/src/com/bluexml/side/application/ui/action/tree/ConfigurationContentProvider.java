@@ -131,10 +131,10 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 	 */
 	public void initialize() {
 		IConfigurationElement[] contributions = Platform.getExtensionRegistry().getConfigurationElementsFor(EXTENSIONPOINT_ID);
-		System.err.println("-----------------------------------------------------------------");
+		//System.err.println("-----------------------------------------------------------------");
 		// Tree initialization
 		for (IConfigurationElement config : contributions) {
-			System.err.println("DEBUG : " + config.getName() + " " + config.getNamespaceIdentifier() + " (" + config.getAttribute("id") + " " + config.getAttribute("name") + ")");
+			//System.err.println("DEBUG : " + config.getName() + " " + config.getNamespaceIdentifier() + " (" + config.getAttribute("id") + " " + config.getAttribute("name") + ")");
 			manageConfiguration(config, null);
 		}
 		// Now we hide branches of the tree without generator or deployer leaf
@@ -193,10 +193,10 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 			// We check if we already have this metamodel in your set
 			if (!metamodelSet.containsKey(m.getId())) {
 				metamodelSet.put(m.getId(), m);
-				System.err.println("\t + Add metamodel " + m.getId());
+				//System.err.println("\t + Add metamodel " + m.getId());
 			} else {
 				m = metamodelSet.get(m.getId());
-				System.err.println("\t * Get metamodel " + m.getId());
+				//System.err.println("\t * Get metamodel " + m.getId());
 			}
 			futurParent = m;
 		}
@@ -207,10 +207,10 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 			String fullId = t.getFullId();
 			if (!technologySet.containsKey(fullId) || (rootSet != technologySet && parent != technologySet.get(fullId).getParent())) {
 				technologySet.put(fullId, t);
-				System.err.println("\t\t + Add techno " + fullId);
+				//System.err.println("\t\t + Add techno " + fullId);
 			} else {
 				t = technologySet.get(fullId);
-				System.err.println("\t\t * Get techno " + fullId);
+				//System.err.println("\t\t * Get techno " + fullId);
 			}
 			futurParent = t;
 		}
@@ -221,10 +221,10 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 			String fullId = tv.getFullId();
 			if (!technologyVersionSet.containsKey(fullId) || (rootSet != technologyVersionSet && parent != technologyVersionSet.get(fullId).getParent())) {
 				technologyVersionSet.put(fullId, tv);
-				System.err.println("\t\t\t + Add technoVersion " + fullId);
+				//System.err.println("\t\t\t + Add technoVersion " + fullId);
 			} else {
 				tv = technologyVersionSet.get(fullId);
-				System.err.println("\t\t\t * Get technoVersion " + fullId);
+				//System.err.println("\t\t\t * Get technoVersion " + fullId);
 			}
 			futurParent = tv;
 		}
@@ -241,10 +241,10 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 				if (!generatorSet.containsKey(fullId) ||
 						(rootSet != technologyVersionSet && parent != generatorSet.get(fullId).getParent())) {
 					generatorSet.put(fullId, gv);
-					System.err.println("\t\t\t\t + Add Generator " + fullId);
+					//System.err.println("\t\t\t\t + Add Generator " + fullId);
 				} else {
 					gv = generatorSet.get(fullId);
-					System.err.println("\t\t\t\t * Get Generator " + fullId);
+					//System.err.println("\t\t\t\t * Get Generator " + fullId);
 				}
 				futurParent = gv;
 			}
@@ -322,7 +322,7 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 		}
 		if (futurParent != null) {
 			for (IConfigurationElement child : config.getChildren()) {
-				// System.err.println("Manage conf for child " +
+				// //System.err.println("Manage conf for child " +
 				// (child.getAttribute("id") != null ? child.getAttribute("id")
 				// : child.getAttribute("key")) + " and parent " + (parent !=
 				// null ? parent.getId() : ""));

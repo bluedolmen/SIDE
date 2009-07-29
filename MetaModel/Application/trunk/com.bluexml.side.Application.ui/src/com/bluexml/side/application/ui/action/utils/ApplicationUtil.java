@@ -472,7 +472,7 @@ public class ApplicationUtil {
 	public static IConfigurationElement getIConfigurationElement(ComponantConfiguration conf) throws Exception {
 		IConfigurationElement[] contributions = Platform.getExtensionRegistry().getConfigurationElementsFor(ConfigurationContentProvider.EXTENSIONPOINT_ID);
 		for (IConfigurationElement config_exp : contributions) {
-			System.err.println("DEBUG getIConfigurationElement: " + config_exp.getName() + " " + config_exp.getNamespaceIdentifier() + " (" + config_exp.getAttribute("id") + " " + config_exp.getAttribute("name") + ")");
+			//System.err.println("DEBUG getIConfigurationElement: " + config_exp.getName() + " " + config_exp.getNamespaceIdentifier() + " (" + config_exp.getAttribute("id") + " " + config_exp.getAttribute("name") + ")");
 			Map<String, String> query = new HashMap<String, String>();
 			query.put("id", conf.getId());
 			String nodeName = "";
