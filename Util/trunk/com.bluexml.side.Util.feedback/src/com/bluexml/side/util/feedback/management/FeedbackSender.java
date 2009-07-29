@@ -82,7 +82,7 @@ public class FeedbackSender {
 		}
 
 		try {
-			File.umount();
+			File.umount(true);
 		} catch (ArchiveException e) {
 			e.printStackTrace();
 		}
@@ -90,7 +90,11 @@ public class FeedbackSender {
 		// Delete with trueZip function doesn't work
 		java.io.File testFile = new java.io.File(source,FeedbackActivator.ZIP_FILE_NAME);
 		if (testFile.exists()) {
-			testFile.delete();
+			try{
+				testFile.delete();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
