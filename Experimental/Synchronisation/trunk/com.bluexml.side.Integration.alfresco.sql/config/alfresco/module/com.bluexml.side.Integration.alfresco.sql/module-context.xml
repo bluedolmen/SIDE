@@ -34,7 +34,7 @@
 	</bean>
 
 	<bean id="databaseDictionary" class="com.bluexml.side.Integration.alfresco.sql.synchronisation.dictionary.PropertyFileDatabaseDictionary" >
-		<property name="resourcePattern" value="classpath*:alfresco/module/*/synchronisation_mapping.properties" />
+		<property name="resourcePattern" value="classpath*:alfresco/module/*/synchronisation-database-mapping.properties" />
 		<property name="renamingStrategy">
 			<bean id="truncateRenamingStrategy" class="com.bluexml.side.Integration.alfresco.sql.synchronisation.dictionary.TruncateRenamingStrategy" parent="abstractRenamingStrategy" />
 		</property>
