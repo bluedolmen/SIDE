@@ -19,6 +19,7 @@ public class Messages extends NLS {
 	public static String SideFeedbackPreferencesPage_5;
 	public static String SideFeedbackPreferencesPage_6;
 	public static String SideFeedbackPreferencesPage_7;
+	public static String SideFeedbackPreferencesPage_8;
 	public static String SidePopUp_0;
 	public static String SidePopUp_1;
 	public static String SidePopUp_2;

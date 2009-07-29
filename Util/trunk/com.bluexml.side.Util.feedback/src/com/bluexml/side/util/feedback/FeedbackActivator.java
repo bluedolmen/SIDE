@@ -15,8 +15,8 @@ public class FeedbackActivator extends AbstractUIPlugin {
 
 	// URL to send file
 	public static String SERVICE_URL = "http://www.bluexml.com/static/test/upload.php";
-	// URL for stats to show in popup.
-	public static String STATS_URL = "http://www.bluexml.com";
+	// URL for image stat to show
+	public static String STATS_URL = "http://www.statssheet.com/images/web_counter_stats.jpg";
 
 	// Zipe file name
 	public static String ZIP_FILE_NAME = "sideLog.zip";
@@ -98,5 +98,9 @@ public class FeedbackActivator extends AbstractUIPlugin {
 
 	public static void setFeedbackUploadPeriod(int period) {
 		FeedbackActivator.getDefault().getPreferenceStore().setValue(FeedbackActivator.FEEDBACK_PERIOD_PREFERENCE, period);
+	}
+
+	public static boolean doFeedback() {
+		return getFeedBackPreference() != FEEDBACK_PREF_NEVER;
 	}
 }

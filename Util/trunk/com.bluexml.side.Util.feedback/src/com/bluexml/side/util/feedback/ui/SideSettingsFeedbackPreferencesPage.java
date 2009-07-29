@@ -1,6 +1,10 @@
 package com.bluexml.side.util.feedback.ui;
 
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.MessageFormat;
 import java.util.Date;
 
@@ -44,9 +48,7 @@ public class SideSettingsFeedbackPreferencesPage extends PreferencePage
 	protected Control createContents(Composite parent) {
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
-
 		composite.setLayout(new GridLayout());
-
 
 		Group group = new Group(composite, SWT.NONE);
 		group.setText(Messages.SideFeedbackPreferencesPage_2);
@@ -71,6 +73,25 @@ public class SideSettingsFeedbackPreferencesPage extends PreferencePage
 		setUploadPreferencesButton.setText(Messages.SideFeedbackPreferencesPage_7);
 		setUploadPreferencesButton.setBounds(10, 126, 156, 25);
 
+		Image imageStats = null;
+
+		final Label lbl = new Label(composite, SWT.NONE);
+		lbl.setText(Messages.SideFeedbackPreferencesPage_8);
+		Label l = new Label(composite, SWT.CENTER);
+		l.setLayoutData(new GridData());
+		try {
+			URL url = new URL(FeedbackActivator.STATS_URL);
+			InputStream is = url.openStream();
+			imageStats = new Image(composite.getDisplay(), is);
+
+			is.close();
+		} catch (MalformedURLException e1) {
+			e1.printStackTrace();
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		l.setImage(imageStats);
 		return composite;
 	}
 

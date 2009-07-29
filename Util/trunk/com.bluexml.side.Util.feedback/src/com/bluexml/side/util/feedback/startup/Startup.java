@@ -35,10 +35,10 @@ public class Startup implements IStartup {
 					}
 				} else if (pref == FeedbackActivator.FEEDBACK_PREF_ALWAYS) {
 					FeedbackSender.doSend();
-				} else {
+				} else if (pref != FeedbackActivator.FEEDBACK_PREF_NEVERSETTED) {
 					Date nowDate = new Date();
+					FeedbackActivator.setFeedBackPreference(FeedbackActivator.FEEDBACK_PREF_NEVERSETTED);
 					FeedbackActivator.getDefault().getPreferenceStore().setValue(FeedbackActivator.LAST_UPDATE_DATE, nowDate.getTime());
-					FeedbackActivator.getDefault().getPreferenceStore().setValue(FeedbackActivator.FEEDBACK_PREFERENCE, FeedbackActivator.FEEDBACK_PREF_NEVERSETTED);
 				}
 			}
 		});

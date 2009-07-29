@@ -33,7 +33,7 @@ public class FeedbackManager {
 	}
 
 	/**
-	 * Save under .metadata/.plugin/pluginid/dd-MM-yy--hh-mm-ss-log.xml the informations for feedback.
+	 * Save under .metadata/.plugin/pluginid/yy-MM-dd--hh-mm-ss-log.xml the informations for feedback.
 	 * @throws IOException
 	 */
 	public void save() throws IOException {
@@ -59,7 +59,7 @@ public class FeedbackManager {
 	 */
 	private String getFileName() {
 		Date date = new Date();
-		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy--hh-mm-ss");
+		DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd--hh-mm-ss");
 		return dateFormat.format(date) + FeedbackUtils.END_FILE_NAME;
 	}
 }
