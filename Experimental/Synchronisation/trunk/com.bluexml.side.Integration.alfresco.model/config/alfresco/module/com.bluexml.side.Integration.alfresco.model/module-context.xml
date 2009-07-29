@@ -10,13 +10,13 @@
 	<bean id="SIDEdictionaryBootstrap" parent="dictionaryModelBootstrap" depends-on="dictionaryBootstrap">
         <property name="models">
             <list>
-                <value>alfresco/module/SIDE_model_extension/model/model.xml</value>
+                <value>alfresco/module/com.bluexml.side.Integration.alfresco.model/model/model.xml</value>
             </list>
         </property>
         
         <property name="labels">
             <list>
-                <value>alfresco/module/SIDE_model_extension/model/messages</value>
+                <value>alfresco/module/com.bluexml.side.Integration.alfresco.model/model/messages</value>
             </list>
         </property>
     </bean>
