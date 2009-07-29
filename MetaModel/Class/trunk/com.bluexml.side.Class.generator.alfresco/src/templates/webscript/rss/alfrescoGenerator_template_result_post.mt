@@ -25,7 +25,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.ClassServices
 %>
 
 <%script type="clazz.Clazz" name="validatedFilename"%>
-webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/<%getQualifiedName().replaceAll("_","/")%>/<%getQualifiedName()%>.post.rss.ftl
+<%getProperty("alf.paths.extension.side.webscripts")%>/<%getQualifiedName().replaceAll("_","/")%>/<%getQualifiedName()%>.post.rss.ftl
 <%script type="clazz.Clazz" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <#assign recordsCount=records?size>
 <#if argsM["start"]?exists><#assign start=argsM["start"][0]></#if>

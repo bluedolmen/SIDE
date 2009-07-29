@@ -25,7 +25,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.ClassServices
 %>
 
 <%script type="clazz.Clazz" name="validatedFilename"%>
-webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/<%getQualifiedName().replaceAll("_","/")%>/json/<%getQualifiedName()%>.ftl
+<%getProperty("alf.paths.extension.side.webscripts")%>/<%getQualifiedName().replaceAll("_","/")%>/json/<%getQualifiedName()%>.ftl
 <%script type="clazz.Clazz" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 {
 		"id":"${child.id}",

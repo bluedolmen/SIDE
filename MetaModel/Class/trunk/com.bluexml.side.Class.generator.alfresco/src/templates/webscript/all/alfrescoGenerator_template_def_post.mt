@@ -25,13 +25,13 @@ import com.bluexml.side.clazz.generator.alfresco.services.ClassServices
 %>
 
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
-<%if (eContainer() == null) {%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/all/all.post.desc.xml<%}%>
+<%if (eContainer() == null) {%><%getProperty("alf.paths.extension.side.webscripts")%>/all/all.post.desc.xml<%}%>
 <%script type="clazz.ClassPackage" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <webscript>
   <shortname>All s</shortname>
   <description>Get s</description>
-  <url>/all?nodeRef={nodeRef}&amp;years={years}&amp;months={months}&amp;days={days}&amp;hours={hours}&amp;minutes={minutes}</url>
+  <url>/com/bluexml/side/contentType/all?nodeRef={nodeRef}&amp;years={years}&amp;months={months}&amp;days={days}&amp;hours={hours}&amp;minutes={minutes}</url>
   <format default="json">any</format>
   <authentication>guest</authentication>
 </webscript>

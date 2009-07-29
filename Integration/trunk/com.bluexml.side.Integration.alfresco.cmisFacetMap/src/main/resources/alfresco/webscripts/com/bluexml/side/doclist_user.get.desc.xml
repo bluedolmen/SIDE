@@ -2,7 +2,7 @@
 	<shortname>BxDS-CMIS</shortname>
 	<description>Un webscript pour tester la recherche JCR170 SQL
 	</description>
-	<url>/bluexml/doclist_user?contentType={model}:{type}&amp;skipCount={skipCount}&amp;pageSize={pageSize}</url>
+	<url>/com/bluexml/side/facetMap/doclist_user?contentType={model}:{type}&amp;skipCount={skipCount}&amp;pageSize={pageSize}</url>
 	<authentication>user</authentication>
 	<transaction allow="readonly" />
 	<format default="xml" />

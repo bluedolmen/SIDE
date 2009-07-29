@@ -12,6 +12,8 @@ import com.bluexml.side.util.libs.IFileHelper;
 public abstract class AbstractAlfrescoGenerator extends AbstractAcceleoPackageGenerator {
 
 	public static final String CONFIGURATION_PARAMETER_CATALINA_HOME = "CATALINA_HOME";
+	public static final String CONFIGURATION_PARAMETER_ALFRESCO_HOME = "alfresco.url";
+	
 	protected Properties moduleProperties;
 
 	public String getTEMP_FOLDER(String model) {

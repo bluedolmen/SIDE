@@ -116,15 +116,17 @@ public abstract class WarDeployer extends Deployer {
 		}
 	}
 
-	public void diffFolder(File folder1, File folder2, Writer log, String filter) {
+	public void diffFolder(File folder1, File folder2, Writer log, String filter) throws IOException {
 		Map<String, List<String>> diff = FileHelper.diffFolder(folder1, folder2, filter);
 
 		String header = "DIFF " + folder1.getAbsolutePath() + " --> " + folder2.getAbsolutePath() + "\n";
-		addInfoLog(this.logChangesMsg, header, null);
+		log.write(header);
+		//addInfoLog(this.logChangesMsg, header, null);
 		for (Map.Entry<String, List<String>> ent : diff.entrySet()) {
 			for (String v : ent.getValue()) {
 				String body = ent.getKey() + " file://" + v + "\n";
-				addInfoLog(this.logChangesMsg, body, null);
+				log.write(body);
+				//addInfoLog(this.logChangesMsg, body, null);
 			}
 		}
 

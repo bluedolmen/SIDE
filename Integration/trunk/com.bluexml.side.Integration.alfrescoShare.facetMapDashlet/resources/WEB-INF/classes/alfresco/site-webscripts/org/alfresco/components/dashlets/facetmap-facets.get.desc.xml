@@ -2,7 +2,7 @@
   <shortname>SIDE-Facetmap-Facet</shortname>
   <description>un webscript pour tester l'appel à un autre webscript</description>
   <family>user-dashlet</family>
-    <url>/bluexml/doclist_user/facet</url>
+    <url>/com/bluexml/side/facetMap/doclist_user/facet</url>
 	<authentication>guest</authentication>
 	<transaction>required</transaction>	
 </webscript>

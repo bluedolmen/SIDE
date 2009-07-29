@@ -104,7 +104,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/xml/alfrescoGenerator_template_xml.mt");
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/xml/alfrescoGenerator_template_result_post.mt");
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/xml/alfrescoGenerator_template_result_get.mt");
-
+				addServiceLog("SIDE content type webscript", "webscript can be use to list document for reporting purpose", getConfigurationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME)+"/alfresco/service/com/bluexml/side/");
 			}
 
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_DEFAULTFORMS)) {
