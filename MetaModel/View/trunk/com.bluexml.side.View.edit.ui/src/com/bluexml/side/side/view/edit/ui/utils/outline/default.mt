@@ -2,7 +2,7 @@
 metamodel http://www.kerblue.org/workflow/1.0
 import com.bluexml.side.side.view.edit.ui.utils.outline.service.OutlineViewService
 import com.bluexml.side.side.view.edit.ui.utils.outline.service.HTMLEncoder
-%> 
+%>
 <%script type="view.ViewCollection" name="default" file="output.html"%>
 <html>
 	<head>
@@ -16,7 +16,7 @@ import com.bluexml.side.side.view.edit.ui.utils.outline.service.HTMLEncoder
 	font-weight:normal;
 	line-height:normal;
 	}
-	
+
 	.dataTable {
 	width: 700px;
 	padding: 0;
@@ -25,7 +25,7 @@ import com.bluexml.side.side.view.edit.ui.utils.outline.service.HTMLEncoder
 
 caption {
 	padding: 0 0 5px 0;
-	width: 700px;	 
+	width: 700px;
 	font: italic 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
 	text-align: right;
 }
@@ -131,7 +131,7 @@ ul#main-nav li a:hover {border:1px solid gray;color:#000;background:#efefef}
 					</div>
 					<div id="">
 						E.G. value, E.G. value, E.G. value,
-						E.G. value, ... 
+						E.G. value, ...
 						<br><br>
 					</div>
 				</div>
@@ -159,7 +159,7 @@ ul#main-nav li a:hover {border:1px solid gray;color:#000;background:#efefef}
 <%script type="view.AbstractView" name="getHTMLForTree"%>
 <ul>
 	<%for (children){%>
-		<li><a href="#">A entry with  
+		<li><a href="#">An entry with
 			<%if (i == 0){%>
 				<%for (current("Tree").children.sep(", ")){%>
 				<%name%>
@@ -167,8 +167,8 @@ ul#main-nav li a:hover {border:1px solid gray;color:#000;background:#efefef}
 				<ul>
 					<li>
 			<%}%>
-			
-			A entry with  
+
+			An entry with
 			<%for (current("Tree").children.sep(", ")){%>
 				<%name%>
 			<%}%> values
@@ -184,7 +184,7 @@ ul#main-nav li a:hover {border:1px solid gray;color:#000;background:#efefef}
 <%script type="view.AbstractView" name="getHTMLForDataList"%>
 <ul id="main-nav">
 	<%for (children){%>
-		<li><a href="#">A entry with 
+		<li><a href="#">An entry with
 			<%for (current("DataList").children.sep(", ")){%>
 				<%name%>
 			<%}%> values
