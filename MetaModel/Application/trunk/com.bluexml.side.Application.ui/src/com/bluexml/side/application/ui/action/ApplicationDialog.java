@@ -951,7 +951,7 @@ public class ApplicationDialog extends Dialog {
 		});
 
 		deployementTabItem = new TabItem(tabFolder, SWT.NONE);
-		deployementTabItem.setText("Deployement");
+		deployementTabItem.setText("Deployment");
 
 		tabFolder.addSelectionListener(new SelectionAdapter() {
 
