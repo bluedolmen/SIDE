@@ -16,7 +16,7 @@
         
         <property name="labels">
             <list>
-                <value>alfresco/module/com.bluexml.side.Integration.alfresco.model/model/messages</value>
+                <value>alfresco/module/com.bluexml.side.Integration.alfresco.model/model/messages.properties</value>
             </list>
         </property>
     </bean>
