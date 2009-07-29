@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
@@ -88,9 +89,6 @@ public class Generate extends Thread {
 		for (ConfigurationParameters param : configuration.getParameters()) {
 			if (staticParameters.contains(param.getKey())) {
 				configurationParameters.put(param.getKey(), param.getValue());
-				// TODO : Check to know if Log Path and Generation Path are set
-				// :
-
 			} else {
 				generationParameters.put(param.getKey(), param.getValue());
 				// Check to know if option have been set, no error but warning
@@ -104,6 +102,7 @@ public class Generate extends Thread {
 		// Secondly we get the meta-model associated to a model
 		HashMap<String, List<IFile>> modelsInfo = null;
 		boolean skipValidation = true;
+		boolean modelWithError = false;
 		if (configurationParameters.containsKey(ApplicationDialog.KEY_SKIPVALIDATION)) {
 			skipValidation = Boolean.valueOf(configurationParameters.get(ApplicationDialog.KEY_SKIPVALIDATION));
 		}
@@ -111,13 +110,14 @@ public class Generate extends Thread {
 		try {
 			modelsInfo = (HashMap<String, List<IFile>>) ApplicationUtil.getAssociatedMetaModel(models);
 		} catch (IOException e) {
+			modelWithError = true;
 			addErrorText(System.getProperty("line.separator") + "Error with model : " + e.getMessage());
 			e.printStackTrace();
 		}
 
 		// Validation :
 		label.setText("Validating models");
-		boolean modelWithError = false;
+
 		if (!skipValidation) {
 			Iterator<List<IFile>> it = modelsInfo.values().iterator();
 			List<IFile> listModel;
@@ -144,6 +144,16 @@ public class Generate extends Thread {
 			addOneStep(progressBar);
 			logPath = getLogPath(configuration, configurationParameters);
 			genPath = getGenerationPath(configuration, configurationParameters);
+
+			IFolder logFolder = IFileHelper.getIFolder(logPath);
+			if (!logFolder.exists()){
+				addErrorText(System.getProperty("line.separator") + "Error with log path : " + logPath + " doesn't exist");
+			}
+			IFolder genFolder = IFileHelper.getIFolder(genPath);
+			if (!genFolder.exists()){
+				addErrorText(System.getProperty("line.separator") + "Error with generation path : " + genPath + " doesn't exist");
+			}
+
 			generate(configuration, modelsInfo, configurationParameters, generationParameters);
 			// All behind this line will be execute before the generation (async method).
 		}
@@ -208,7 +218,7 @@ public class Generate extends Thread {
 				if (doClean) {
 					try {
 						label.setText("Cleaning");
-						addText("Clean Process");
+						addText(System.getProperty("line.separator") + "Clean Process");
 						clean();
 						addText(System.getProperty("line.separator") + "Clean Process completed.");
 						label.setText("Cleaning completed.");
