@@ -14,6 +14,8 @@ import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.GC;
@@ -31,6 +33,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import com.bluexml.side.util.feedback.FeedbackActivator;
+import com.bluexml.side.util.feedback.utils.FeedbackUtils;
 
 public class SideSettingsFeedbackPreferencesPage extends PreferencePage
 		implements IWorkbenchPreferencePage {
@@ -78,6 +81,11 @@ public class SideSettingsFeedbackPreferencesPage extends PreferencePage
 		final Label lbl = new Label(composite, SWT.NONE);
 		lbl.setText(Messages.SideFeedbackPreferencesPage_8);
 		Label l = new Label(composite, SWT.CENTER);
+		l.addMouseListener(new MouseAdapter() {
+			public void mouseDown(final MouseEvent e) {
+				FeedbackUtils.browseTo(FeedbackActivator.STATS_LINK_URL);
+			}
+		});
 		l.setLayoutData(new GridData());
 		try {
 			URL url = new URL(FeedbackActivator.STATS_URL);

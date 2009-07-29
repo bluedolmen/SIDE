@@ -15,8 +15,10 @@ public class FeedbackActivator extends AbstractUIPlugin {
 
 	// URL to send file
 	public static String SERVICE_URL = "http://www.bluexml.com/static/test/upload.php";
-	// URL for image stat to show
+	// URL for image stats to show
 	public static String STATS_URL = "http://www.statssheet.com/images/web_counter_stats.jpg";
+	// URL for link on image :
+	public static String STATS_LINK_URL = "http://www.bluexml.com";
 
 	// Zipe file name
 	public static String ZIP_FILE_NAME = "sideLog.zip";
