@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: AlfrescoShare Plug-in
 Bundle-SymbolicName: com.bluexml.side.Util.deployer.war;singleton:=true
-Bundle-Version: 1.0.1.v7684-20090724
+Bundle-Version: 1.0.2.v7848-20090730
 Bundle-Activator: com.bluexml.side.util.deployer.war.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
