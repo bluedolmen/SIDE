@@ -399,7 +399,7 @@ public class ApplicationDialog extends Dialog {
 			for (ComponantConfiguration elem : ApplicationUtil.getComponantConfigurations(conf)) {
 				confIds.add(elem.getId());
 			}
-			optionsGroup.setText("Options for Deployement");
+			optionsGroup.setText("Options for Deployment");
 		} else {
 			confIds.add(dep.getId());
 			optionsGroup.setText("Options for " + dep.getVersion());
@@ -988,7 +988,7 @@ public class ApplicationDialog extends Dialog {
 
 		final Label chooseYourGenerationLabel_1 = new Label(composite, SWT.NONE);
 		chooseYourGenerationLabel_1.setBounds(10, 15, 456, 15);
-		chooseYourGenerationLabel_1.setText("Choose your deployement options :");
+		chooseYourGenerationLabel_1.setText("Choose your deployment options :");
 
 		for (ModelElement elem : application.getElements()) {
 			if (elem instanceof Model) {
