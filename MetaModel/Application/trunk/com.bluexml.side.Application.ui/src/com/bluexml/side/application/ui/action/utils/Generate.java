@@ -16,13 +16,15 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.forms.events.HyperlinkAdapter;
+import org.eclipse.ui.forms.events.HyperlinkEvent;
+import org.eclipse.ui.forms.widgets.FormText;
 import org.osgi.framework.Bundle;
 
 import com.bluexml.side.application.Configuration;
@@ -38,13 +40,10 @@ import com.bluexml.side.util.dependencies.DependencesManager;
 import com.bluexml.side.util.dependencies.ModuleConstraint;
 import com.bluexml.side.util.deployer.Deployer;
 import com.bluexml.side.util.documentation.LogSave;
+import com.bluexml.side.util.feedback.FeedbackActivator;
 import com.bluexml.side.util.feedback.management.FeedbackManager;
 import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.libs.IFileHelper;
-
-import org.eclipse.ui.forms.events.HyperlinkAdapter;
-import org.eclipse.ui.forms.events.HyperlinkEvent;
-import org.eclipse.ui.forms.widgets.FormText;
 
 
 public class Generate extends Thread {
@@ -254,12 +253,14 @@ public class Generate extends Thread {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				// Feedback
-				try {
-					feedbackManager.save();
-					//FeedbackSender.send();
-				} catch (IOException e) {
-					e.printStackTrace();
+				if (FeedbackActivator.doFeedback()) {
+					// Feedback
+					try {
+						feedbackManager.save();
+						//FeedbackSender.send();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
 				// Refresh log and generation folder
 				refreshFolders();
@@ -321,7 +322,9 @@ public class Generate extends Thread {
 			for (Option option : elem.getOptions()) {
 				generatorOptions.put(option.getKey(), true);
 			}
-			feedbackManager.addFeedBackItem(elem.getId(), elem.getMetaModelName(), id_techno_version, generatorOptions);
+			if (FeedbackActivator.doFeedback()) {
+				feedbackManager.addFeedBackItem(elem.getId(), elem.getMetaModelName(), id_techno_version, generatorOptions);
+			}
 
 			AbstractGenerator generator = null;
 			try {
@@ -481,11 +484,13 @@ public class Generate extends Thread {
 				try {
 					deployer.deploy();
 					// We get the option for this generator
-					Map<String, Boolean> optionsDep = new HashMap<String, Boolean>();
-					for (Option option : depConf.getOptions()) {
-						optionsDep.put(option.getKey(), true);
+					if (FeedbackActivator.doFeedback()) {
+						Map<String, Boolean> optionsDep = new HashMap<String, Boolean>();
+						for (Option option : depConf.getOptions()) {
+							optionsDep.put(option.getKey(), true);
+						}
+						feedbackManager.addFeedBackItem(depConf.getId(), null, id_techno, optionsDep);
 					}
-					feedbackManager.addFeedBackItem(depConf.getId(), null, id_techno, optionsDep);
 				} catch (Exception e) {
 					e.printStackTrace();
 					error = true;
