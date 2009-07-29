@@ -435,8 +435,8 @@ public class Generate extends Thread {
 			for (Option option : options) {
 				deployerOptions.add(option.getKey());
 			}
-			Bundle plugin = Platform.getBundle(id_deployer);
 
+			Bundle plugin = Platform.getBundle(id_deployer);
 			Class<?> gen;
 			Object genObj = null;
 			try {
@@ -470,6 +470,12 @@ public class Generate extends Thread {
 
 				try {
 					deployer.deploy();
+					// We get the option for this generator
+					Map<String, Boolean> optionsDep = new HashMap<String, Boolean>();
+					for (Option option : depConf.getOptions()) {
+						optionsDep.put(option.getKey(), true);
+					}
+					feedbackManager.addFeedBackItem(depConf.getId(), null, id_techno, optionsDep);
 				} catch (Exception e) {
 					e.printStackTrace();
 					error = true;
