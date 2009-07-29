@@ -400,7 +400,7 @@ public class ApplicationUtil {
 			List<String> options_ext = new ArrayList<String>();
 			IConfigurationElement[] arrayOfoptions_ext = extFrag.getChildren("option");
 			for (IConfigurationElement configurationElement : arrayOfoptions_ext) {
-				options_ext.add(configurationElement.getAttribute("id"));
+				options_ext.add(configurationElement.getAttribute("key"));
 			}
 
 			List<Option> optionsToRemove = new ArrayList<Option>();
@@ -409,9 +409,9 @@ public class ApplicationUtil {
 				if (!options_ext.contains(option.getKey())) {
 					// remove this
 					optionsToRemove.add(option);
+					//System.out.println("toRemove !"+option);
 				} else {
-					// check option constraints
-
+					// check option constraints, nothing to to
 				}
 			}
 			generatorConfiguration.getOptions().removeAll(optionsToRemove);
