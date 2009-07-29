@@ -9,7 +9,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 <%script type="workflow.Process" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<model name="wfbx:workflowmodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+<model name="wfbx<%name%>:<%name%>" xmlns="http://www.alfresco.org/model/dictionary/1.0">
 
   <imports>
   		<!-- Import Alfresco Definitions -->
@@ -29,11 +29,11 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
   </imports>
 
   <namespaces>
-     <namespace uri="http://www.bluexml.com/model/workflow/1.0" prefix="wfbx"/>
+     <namespace uri="http://www.bluexml.com/model/workflow/<%name%>/1.0" prefix="wfbx<%name%>"/>
   </namespaces>
   
 	<constraints>
-		<constraint name="wfbx:constraint:mail" type="REGEX">
+		<constraint name="wfbx<%current("Process").name%>:constraint:mail" type="REGEX">
 	        <parameter name="expression"><value>^(|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+)$</value></parameter>
 	        <parameter name="requiresMatch"><value>true</value></parameter>
 	     </constraint>
@@ -42,12 +42,12 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
   <types>
 
   <%for (startstate){%>
-	<type name="wfbx:<%name%>">
+	<type name="wfbx<%current("Process").name%>:<%name%>">
 		<parent>bpm:startTask</parent>
 			<!-- Properties -->
 			<properties>
 				<%for (attributes) {%>
-				<property name="wfbx:<%name%>">
+				<property name="wfbx<%current("Process").name%>:<%name%>">
 					<%if (title != null) {%>
 					<title> <%title%> </title>
 					<%}%>
@@ -59,7 +59,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 			<!-- Associations -->
 			<associations>
 			<%for (clazz){%>
-				<association name="wfbx:<%current("StartState").name%>_<%name%>">
+				<association name="wfbx<%current("Process").name%>:<%current("StartState").name%>_<%name%>">
 					<target>
 						<class><%getFolder()%>:<%getQualifiedName()%></class>
 					</target>
@@ -70,12 +70,12 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
   <%}%>
 
  <%for (tasknode){%>
-	<type name="wfbx:<%name%>">
+	<type name="wfbx<%current("Process").name%>:<%name%>">
 		<parent>bpm:workflowTask</parent>
 			<!-- Properties -->
 			<properties>
 				<%for (attributes){%>
-				<property name="wfbx:<%name%>">
+				<property name="wfbx<%current("Process").name%>:<%name%>">
 					<%if (title != null) {%>
 					<title> <%title%> </title>
 					<%}%>
@@ -87,7 +87,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 			<!-- Associations -->
 			<associations>
 			<%for (clazz){%>
-				<association name="wfbx:<%current("TaskNode").name%>_<%name%>">
+				<association name="wfbx<%current("Process").name%>:<%current("TaskNode").name%>_<%name%>">
 					<target>
 						<class><%getFolder()%>:<%getQualifiedName()%></class>
 					</target>

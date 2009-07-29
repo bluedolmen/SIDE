@@ -24,38 +24,38 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 <%getTEMP_FOLDER()%>/<%getConfModulePath()%>/bpm/messages.properties
 <%script type="workflow.Process" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 #Messages for workflow named <%name%>
-wfbx_<%name%>.workflow.title=<%name%>
+wfbx<%name%>_<%name%>.workflow.title=<%name%>
 
 <%for (startstate){%>
 #Messages for start task named <%name%>
-wfbx_workflowmodel.type.wfbx_<%name%>.title=<%name%>
-wfbx_<%current("Process").name%>.node.<%name%>.title=<%name%>
+wfbx<%current("Process").name%>_<%current("Process").name%>.type.wfbx<%current("Process").name%>_<%name%>.title=<%name%>
+wfbx<%current("Process").name%>_<%current("Process").name%>.node.<%name%>.title=<%name%>
 ## Transitions
 <%for (transition){%>
-wfbx_<%current("Process").name%>.node.<%current("StartState").name%>.transition.<%name%>.title=<%title%>
+wfbx<%current("Process").name%>_<%current("Process").name%>.node.<%current("StartState").name%>.transition.<%name%>.title=<%title%>
 <%}%>
 ## Attributes
 <%for (attributes){%>
-wfbx_workflowmodel.property.wfbx_<%name%>.title=<%title%>
+wfbx<%current("Process").name%>_<%current("Process").name%>.property.wfbx<%current("Process").name%>_<%name%>.title=<%title%>
 <%}%>
 <%}%>
 
 <%for (endstate){%>
 #Messages for end task named <%name%>
-wfbx_workflowmodel.type.wfbx_<%name%>.title=<%name%>
-wfbx_<%current("Process").name%>.node.<%name%>.title=<%name%>
+wfbx<%current("Process").name%>_<%current("Process").name%>.type.wfbx<%current("Process").name%>_<%name%>.title=<%name%>
+wfbx<%current("Process").name%>_<%current("Process").name%>.node.<%name%>.title=<%name%>
 <%}%>
 
 <%for (tasknode){%>
 #Messages for task named <%name%>
-wfbx_workflowmodel.type.wfbx_<%name%>.title=<%name%>
-wfbx_<%current("Process").name%>.node.<%name%>.title=<%name%>
+wfbx<%current("Process").name%>_<%current("Process").name%>.type.wfbx<%current("Process").name%>_<%name%>.title=<%name%>
+wfbx<%current("Process").name%>_<%current("Process").name%>.node.<%name%>.title=<%name%>
 ## Transitions
 <%for (transition){%>
-wfbx_<%current("Process").name%>.node.<%current("TaskNode").name%>.transition.<%name%>.title=<%title%>
+wfbx<%current("Process").name%>_<%current("Process").name%>.node.<%current("TaskNode").name%>.transition.<%name%>.title=<%title%>
 <%}%>
 ## Attributes
 <%for (attributes){%>
-wfbx_workflowmodel.property.wfbx_<%name%>.title=<%title%>
+wfbx<%current("Process").name%>_<%current("Process").name%>.property.wfbx<%current("Process").name%>_<%name%>.title=<%title%>
 <%}%>
 <%}%>

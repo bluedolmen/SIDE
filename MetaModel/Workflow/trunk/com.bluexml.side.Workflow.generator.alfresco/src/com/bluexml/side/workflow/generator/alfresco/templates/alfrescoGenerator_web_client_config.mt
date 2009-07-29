@@ -13,16 +13,16 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
   	<!-- Configuration for BPM -->
 
 	<%for (startstate) {%>
-	<config evaluator="node-type" condition="wfbx:<%name%>" replace="true">
+	<config evaluator="node-type" condition="wfbx<%current("Process").name%>:<%name%>" replace="true">
 	   <property-sheet>	      	      	     
 	      <show-property name="bpm:workflowDescription" component-generator="TextAreaGenerator" />
 	      <show-property name="bpm:workflowPriority" />
 	      <show-property name="bpm:workflowDueDate" />
 	      <%for (attributes){%>
-  	      <show-property name="wfbx:<%name%>"/>
+  	      <show-property name="wfbx<%current("Process").name%>:<%name%>"/>
 	      <%}%>
 	      <%for (clazz){%>
-	      <show-association name="wfbx:<%current("StartState").name%>_<%name%>"/>
+	      <show-association name="wfbx<%current("Process").name%>:<%current("StartState").name%>_<%name%>"/>
 	      <%}%>
 
 		  <%if (current("Process").swimlane[(actorid == null || actorid.length() == 0) && (pooledactors == null || pooledactors.length() == 0) && (name != "initiator")].nSize() > 0){%>
@@ -38,16 +38,16 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 	<%}%>
 	
 	<%for (tasknode) {%>
-	<config evaluator="node-type" condition="wfbx:<%name%>" replace="true">
+	<config evaluator="node-type" condition="wfbx<%current("Process").name%>:<%name%>" replace="true">
 	   <property-sheet>	      	      	     
 	      <show-property name="bpm:workflowDescription" component-generator="TextAreaGenerator" />
 	      <show-property name="bpm:workflowPriority" />
 	      <show-property name="bpm:workflowDueDate" />
 	      <%for (attributes){%>
-  	      <show-property name="wfbx:<%name%>"/>
+  	      <show-property name="wfbx<%current("Process").name%>:<%name%>"/>
 	      <%}%>
 	      <%for (clazz){%>
-	      <show-association name="wfbx:<%current("TaskNode").name%>_<%name%>"/>
+	      <show-association name="wfbx<%current("Process").name%>:<%current("TaskNode").name%>_<%name%>"/>
 	      <%}%>
 	   </property-sheet>
 	</config>	   

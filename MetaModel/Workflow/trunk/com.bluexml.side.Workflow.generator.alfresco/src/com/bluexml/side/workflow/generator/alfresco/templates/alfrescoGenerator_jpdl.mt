@@ -25,7 +25,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 <%script type="workflow.Process" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <?xml version="1.0" encoding="iso-8859-1"?>
 
-<process-definition name="wfbx:<%name%>">
+<process-definition name="wfbx<%name%>:<%name%>">
 
 <%for (swimlane) {%>
   	<swimlane name="<%name%>">
@@ -45,7 +45,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 
 <%for (startstate){%>
 	  <start-state name="<%name%>">
-	  	<task name="wfbx:<%name%>" swimlane="<%initiator.actorid%>">
+	  	<task name="wfbx<%current("Process").name%>:<%name%>" swimlane="<%initiator.actorid%>">
 			<%for (event){%>
 			<event type="<%type%>">
 				<%for (action){%>
@@ -116,7 +116,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 
 <%for (tasknode){%>
 	<task-node name="<%name%>">
-		<task name="wfbx:<%name%>" swimlane="<%swimlane.name%>">
+		<task name="wfbx<%current("Process").name%>:<%name%>" swimlane="<%swimlane.name%>">
 		<%for (event){%>
 		<event type="<%type%>">
 			<%for (action){%>
@@ -332,7 +332,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 
 <%for (processstate){%>
 	<process-state name="<%name%>">
-		<sub-process name="wfbx:<%subprocess.name%>"/>
+		<sub-process name="wfbx<%subprocess.name%>:<%subprocess.name%>"/>
 		<variable name="bpm_package"/>		
 		<%for (variable){%>
 		<variable name="<%name%>" access="<%access%>" mapped-name="<%mappedName%>" />
