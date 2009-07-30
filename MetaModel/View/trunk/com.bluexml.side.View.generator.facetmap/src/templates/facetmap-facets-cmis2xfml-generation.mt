@@ -8,13 +8,19 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 	./facets/WEB-INF/xsl/cmis2xfml.xsl
 
 <%-- get the correct path to the cmis element when you got a FieldElement --%>
-<%script type="view.FieldElement" name="getFieldCmisPathNameAndPackage"%>	
-child::entry/cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribute").typ!="int"{%><%mapTo.filter("Attribute").typ%><%}else{%>Integer<%}%>[@cmis:name='<% current("FacetMap").viewOf.filter("Clazz").getRootContainer().name%>_<%mapTo.filter("Attribute").getFullName().replaceAll("\.","_")%>']/cmis:value
+<%script type="view.FieldElement" name="cmisPath"%>	
+cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribute").typ!="int"{%><%mapTo.filter("Attribute").typ%><%}else{%>Integer<%}%>[@cmis:name='<% current("FacetMap").viewOf.filter("Clazz").getRootContainer().name%>_<%mapTo.filter("Attribute").getFullName().replaceAll("\.","_")%>']/cmis:value
+
+<%script type="view.FieldElement" name="getFieldCmisPath"%>	
+child::<% cmisPath() %>
+
+<%script type="view.FieldElement" name="getFieldCmisPathWithEntry"%>	
+child::entry/<% cmisPath() %>
 
 <%script type="view.FacetMap" name="taxonomy"%>
 		<%for (getFields()){%>
 			<taxonomy title="<%current("FacetMap").viewOf.filter("Clazz").getLabel()%>.<%mapTo.filter("Attribute").name%>" root-heading-title="<%current("FacetMap").viewOf.filter("Clazz").getLabel()%>.<%mapTo.filter("Attribute").name%>" facetid="<%mapTo.filter("Attribute").getFullName()%>">
-				    <xsl:for-each select="<% getFieldCmisPathNameAndPackage() %>">          
+				    <xsl:for-each select="<% getFieldCmisPathWithEntry() %>">          
 				        <heading id="{current()}" title="{current()}"/>             
 				    </xsl:for-each> 
 				</taxonomy>
@@ -23,8 +29,8 @@ child::entry/cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribu
 <%script type="view.FacetMap" name="ressource"%>
 	<%for (getFields()){%>
 		<xsl:choose>	
-			<xsl:when test="not(empty(<% getFieldCmisPathNameAndPackage() %>))">
-				<map heading="{<% getFieldCmisPathNameAndPackage() %>}"/>
+			<xsl:when test="not(empty(<% getFieldCmisPath() %>))">
+				<map heading="{<% getFieldCmisPath() %>}"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<map heading="<%mapTo.filter("TitledNamedClassModelElement").getLabel()%> is null"/>
@@ -50,7 +56,7 @@ child::entry/cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribu
 		<xsl:variable name="idDoc" select="substring(child::id[1],10)"/>  
 		<%-- Use the fields of the innerview in the facetmap and te suffix and prefis to make the title --%>   
 		<resource
-			title="<%for (getInnerView().getFields().nSort()){%><%if (prefix !=null){%><%prefix%><%}%>{<% getFieldCmisPathNameAndPackage() %>}<%if (suffix !=null){%><%suffix%><%}%><%}%>"
+			title="<%for (getInnerView().getFields().nSort()){%><%if (prefix !=null){%><%prefix%><%}%>{<% getFieldCmisPath() %>}<%if (suffix !=null){%><%suffix%><%}%><%}%>"
 			href="{$idDoc}">
 		<%-- Get all the fields of the facetmap and insert for each a piece of xsl that tests if
 		the element is empty.
