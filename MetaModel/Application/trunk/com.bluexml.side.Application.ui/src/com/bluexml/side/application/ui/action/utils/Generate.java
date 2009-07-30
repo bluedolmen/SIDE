@@ -246,7 +246,7 @@ public class Generate extends Thread {
 					logLink.addHyperlinkListener(new HyperlinkAdapter() {
 						@Override
 						public void linkActivated(HyperlinkEvent event) {
-								browseTo("file:///" + IFileHelper.getIFolder(logPath).getRawLocation().toFile().getAbsolutePath() + System.getProperty("file.separator") + LogSave.LOG_FILE_NAME);
+								browseTo("file://" + IFileHelper.getIFolder(logPath).getRawLocation().toFile().getAbsolutePath() + System.getProperty("file.separator") + LogSave.LOG_FILE_NAME);
 						}
 					});
 
