@@ -70,7 +70,6 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 		List<String> templates = new ArrayList<String>();
 		// common
 		templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-propertyfile-generation.mt");
-		templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-cmis-generation.mt");
 		// facets
 		templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-buildproperties-generation.mt");
 		templates.add("/com.bluexml.side.View.generator.facetmap/templates/facetmap-facets-cmis2xfml-generation.mt");

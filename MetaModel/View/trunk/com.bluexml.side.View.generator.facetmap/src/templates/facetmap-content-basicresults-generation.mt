@@ -39,17 +39,21 @@ version="1.0">
   	<xsl:param name="nbParPages"/>
   	<xsl:param name="NbTotal"/>
     <div class="result">
+    <%-- Get the operations of the model and insert an image for each --%>
     	<%for (getInnerView().filter("Actionable").operations.getOperations()){%>
         	<a>
         		<xsl:attribute name="target">_blank</xsl:attribute>
+        	<%-- Download operation --%>
         	<%if (name == "download"){%>
 					<xsl:attribute name="href">../share/proxy/alfresco/api/node/content/workspace/SpacesStore/<xsl:value-of select="@href"/>/ChangeLog.txt?a=true</xsl:attribute>
 					<img src="{$icons_url}/disk.png" class="imgIcon"/>
 			<%}%>
+			<%-- View operation --%>
 			<%if (name == "view"){%>
 					<xsl:attribute name="href">../share/page/site/test/document-details?nodeRef=workspace://SpacesStore/<xsl:value-of select="@href"/></xsl:attribute>
 					<img src="{$icons_url}/eye.png" class="imgIcon"/>
 			<%}%>
+			<%-- Edit operation --%>
 			<%if (name == "edit"){%>
 					<xsl:attribute name="href">../share/page/site/test/edit-metadata?nodeRef=workspace://SpacesStore/<xsl:value-of select="@href"/></xsl:attribute>
 					<img src="{$icons_url}/edit.png" class="imgIcon"/>

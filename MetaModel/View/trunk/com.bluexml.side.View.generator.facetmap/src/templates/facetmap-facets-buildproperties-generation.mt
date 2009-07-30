@@ -8,6 +8,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 	./facets/WEB-INF/build.properties
 
 <%script type="view.FacetMap" name="propertyfileGenerator"  file="<%validatedFilename%>" %>
+<%-- the contentType is used to get the right files in the CMIS webscript --%>
 ant.contentType=<% viewOf.getRootContainer().name %>:<% viewOf.filter("NamedModelElement").getFullName().replaceAll("\.","_") %>
 ant.xslFolder=xsl/
 ant.infFolder=./
