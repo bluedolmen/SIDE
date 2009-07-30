@@ -70,6 +70,16 @@
                         key="alfresco.url"
                         label="Alfresco URL">
                   </configurationParameter>
+                  <option
+                        key="com.bluexml.side.Class.generator.alfresco.sql"
+                        label="Alfresco SQL">
+                     <moduleDependence
+                           moduleId="com.bluexml.side.Integration.alfresco.sql"
+                           moduleType="amp"
+                           technologyVersion="alfresco_3.x"
+                           versionMin="1.0.0">
+                     </moduleDependence>
+                  </option>
                </generatorVersion>
             </technologyVersion>
          </technology>

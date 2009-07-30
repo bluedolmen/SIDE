@@ -23,6 +23,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	public static String GENERATOR_OPTIONS_SHARE_EXTENSION = "alfresco.share.extension";
 	public static String GENERATOR_OPTIONS_WEBSCRIPT_REPORT = "alfresco.webscript.report";
 	public static String GENERATOR_OPTIONS_DEFAULTFORMS = "class.alfrescoShare.defaultForms";
+	public static String GENERATOR_OPTIONS_SQL_EXTENSION = "com.bluexml.side.Class.generator.alfresco.sql";
 	public static String GENERATOR_CODE = "CODE_GED_G_C_ALFRESCO_3";
 	public static String WEBSCRIPT_SIDE_FAMILY="/service/index/family/SIDE";
 	XMLConflictResolver xmlresolver = null;
@@ -49,6 +50,10 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
 			result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoGenerator_context.mt");
 
+			if (getGeneratorOptionValue(GENERATOR_OPTIONS_SQL_EXTENSION)) {
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/sqlTemplates/database_dictionary.mt");
+			}
+			
 			// DefaultdocListView add custom version of docList webScript
 			// used by AlfrescoShare to render Document list
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_PORTAL)) {
