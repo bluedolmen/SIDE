@@ -133,8 +133,8 @@ public class ApplicationDialog extends Dialog {
 	private IFile model;
 	private Table generatorParameters;
 	private String[] columnNames;
-	private String columnNameValue = "Value";
-	private String columnNameLabel = "Label";
+	private String columnNameValue = Messages.getString("ApplicationDialog.0"); //$NON-NLS-1$
+	private String columnNameLabel = Messages.getString("ApplicationDialog.1"); //$NON-NLS-1$
 	private GeneratorParameterDataStructure dataStructure;
 	private TableViewer generatorParametersViewer;
 	private Button verboseButton;
@@ -152,11 +152,11 @@ public class ApplicationDialog extends Dialog {
 	private Table modelPropertiesTable;
 	private Button cleanButton;
 
-	public static String KEY_VERBOSE = "generation.options.verbose";
-	public static String KEY_SKIPVALIDATION = "generation.option.Skip.Validation";
-	public static String KEY_DOCLEAN = "generation.options.clean";
-	public static String KEY_LOGPATH = "generation.options.logPath";
-	public static String KEY_GENPATH = "generation.options.destinationPath";
+	public static String KEY_VERBOSE = Messages.getString("ApplicationDialog.2"); //$NON-NLS-1$
+	public static String KEY_SKIPVALIDATION = Messages.getString("ApplicationDialog.3"); //$NON-NLS-1$
+	public static String KEY_DOCLEAN = Messages.getString("ApplicationDialog.4"); //$NON-NLS-1$
+	public static String KEY_LOGPATH = Messages.getString("ApplicationDialog.5"); //$NON-NLS-1$
+	public static String KEY_GENPATH = Messages.getString("ApplicationDialog.6"); //$NON-NLS-1$
 
 	public static List<String> staticFieldsName = Arrays.asList(KEY_GENPATH, KEY_LOGPATH, KEY_SKIPVALIDATION, KEY_VERBOSE, KEY_DOCLEAN);
 
@@ -250,13 +250,13 @@ public class ApplicationDialog extends Dialog {
 				if (m != null) {
 					TableItem item = new TableItem(modelPropertiesTable, SWT.NONE);
 					// Name
-					item.setText(0, "Name");
+					item.setText(0, Messages.getString("ApplicationDialog.7")); //$NON-NLS-1$
 					item.setText(1, m.getName());
 				}
 				if (metaModel != null) {
 					TableItem item = new TableItem(modelPropertiesTable, SWT.NONE);
 					// Metamodel
-					item.setText(0, "Metamodel");
+					item.setText(0, Messages.getString("ApplicationDialog.8")); //$NON-NLS-1$
 					item.setText(1, metaModel.getNsURI());
 				}
 				if (file != null) {
@@ -265,7 +265,7 @@ public class ApplicationDialog extends Dialog {
 
 					try {
 						item.setText(1, file.getCharset());
-						item.setText(0, "Charset");
+						item.setText(0, Messages.getString("ApplicationDialog.9")); //$NON-NLS-1$
 					} catch (CoreException e) {
 						e.printStackTrace();
 					}
@@ -279,7 +279,7 @@ public class ApplicationDialog extends Dialog {
 							Date date = new Timestamp(ioFile.lastModified());
 							Locale locale = Locale.getDefault();
 							DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.FULL, locale);
-							item2.setText(0, "Last Modification");
+							item2.setText(0, Messages.getString("ApplicationDialog.10")); //$NON-NLS-1$
 							item2.setText(1, dateFormat.format(date));
 						}
 					}
@@ -358,10 +358,10 @@ public class ApplicationDialog extends Dialog {
 			for (ComponantConfiguration elem : ApplicationUtil.getComponantConfigurations(conf)) {
 				confIds.add(elem.getId());
 			}
-			optionsGroup.setText("Options for Generation");
+			optionsGroup.setText(Messages.getString("ApplicationDialog.11")); //$NON-NLS-1$
 		} else {
 			confIds.add(gen.getId());
-			optionsGroup.setText("Options for " + gen.getVersion());
+			optionsGroup.setText(Messages.getString("ApplicationDialog.12") + gen.getVersion()); //$NON-NLS-1$
 		}
 		if (dataStructure != null) {
 			dataStructure.getData().clear();
@@ -381,7 +381,7 @@ public class ApplicationDialog extends Dialog {
 			}
 		}
 		for (GeneratorParameter genParam : neededParam.values()) {
-			genParam.setValue("");
+			genParam.setValue(""); //$NON-NLS-1$
 			dataStructure.addGeneratorParameter(genParam);
 		}
 
@@ -399,10 +399,10 @@ public class ApplicationDialog extends Dialog {
 			for (ComponantConfiguration elem : ApplicationUtil.getComponantConfigurations(conf)) {
 				confIds.add(elem.getId());
 			}
-			optionsGroup.setText("Options for Deployment");
+			optionsGroup.setText(Messages.getString("ApplicationDialog.14")); //$NON-NLS-1$
 		} else {
 			confIds.add(dep.getId());
-			optionsGroup.setText("Options for " + dep.getVersion());
+			optionsGroup.setText(Messages.getString("ApplicationDialog.15") + dep.getVersion()); //$NON-NLS-1$
 		}
 		if (dataStructure != null) {
 			dataStructure.getData().clear();
@@ -423,7 +423,7 @@ public class ApplicationDialog extends Dialog {
 		}
 		for (GeneratorParameter genParam : neededParam.values()) {
 			if (genParam != null) {
-				genParam.setValue("");
+				genParam.setValue(""); //$NON-NLS-1$
 				dataStructure.addGeneratorParameter(genParam);
 			}
 
@@ -660,8 +660,8 @@ public class ApplicationDialog extends Dialog {
 		ElementTreeSelectionDialog ets = new ElementTreeSelectionDialog(Display.getDefault().getActiveShell(), new WorkbenchLabelProvider(), new BaseWorkbenchContentProvider());
 		ets.setBlockOnOpen(true);
 		ets.setAllowMultiple(true);
-		ets.setTitle("Select model file");
-		ets.setMessage("Select model file (no diagram file)");
+		ets.setTitle(Messages.getString("ApplicationDialog.17")); //$NON-NLS-1$
+		ets.setMessage(Messages.getString("ApplicationDialog.18")); //$NON-NLS-1$
 		ets.setInput(ResourcesPlugin.getWorkspace().getRoot());
 		ets.setHelpAvailable(false);
 		ets.addFilter(new SideFileFiter());
@@ -705,7 +705,7 @@ public class ApplicationDialog extends Dialog {
 		tabFolder.setBounds(15, 39, 472, 484);
 
 		final TabItem modelsTabItem = new TabItem(tabFolder, SWT.NONE);
-		modelsTabItem.setText("Models");
+		modelsTabItem.setText(Messages.getString("ApplicationDialog.19")); //$NON-NLS-1$
 
 		final Composite composite_3 = new Composite(tabFolder, SWT.NONE);
 		modelsTabItem.setControl(composite_3);
@@ -716,7 +716,7 @@ public class ApplicationDialog extends Dialog {
 				SelectModelFileDialog();
 			}
 		});
-		addModelButton.setText("Add Model");
+		addModelButton.setText(Messages.getString("ApplicationDialog.20")); //$NON-NLS-1$
 		addModelButton.setBounds(10, 175, 130, 25);
 
 		list = new org.eclipse.swt.widgets.List(composite_3, SWT.BORDER);
@@ -740,13 +740,13 @@ public class ApplicationDialog extends Dialog {
 			}
 
 		});
-		removeModelButton.setText("Remove Model");
+		removeModelButton.setText(Messages.getString("ApplicationDialog.21")); //$NON-NLS-1$
 		removeModelButton.setBounds(146, 175, 130, 25);
 
 		final Label generationsOptionsLabel_2 = new Label(composite_3, SWT.NONE);
 		generationsOptionsLabel_2.setBounds(10, 8, 240, 24);
-		generationsOptionsLabel_2.setFont(SWTResourceManager.getFont("", 12, SWT.BOLD));
-		generationsOptionsLabel_2.setText("Model Lists");
+		generationsOptionsLabel_2.setFont(SWTResourceManager.getFont("", 12, SWT.BOLD)); //$NON-NLS-1$
+		generationsOptionsLabel_2.setText(Messages.getString("ApplicationDialog.23")); //$NON-NLS-1$
 
 		modelPropertiesTable = new Table(composite_3, SWT.BORDER);
 		modelPropertiesTable.setLinesVisible(true);
@@ -756,11 +756,11 @@ public class ApplicationDialog extends Dialog {
 
 		final TableColumn newColumnTableColumn_2 = new TableColumn(modelPropertiesTable, SWT.NONE);
 		newColumnTableColumn_2.setWidth(127);
-		newColumnTableColumn_2.setText("Propertie");
+		newColumnTableColumn_2.setText(Messages.getString("ApplicationDialog.24")); //$NON-NLS-1$
 
 		final TableColumn newColumnTableColumn_3 = new TableColumn(modelPropertiesTable, SWT.NONE);
 		newColumnTableColumn_3.setWidth(294);
-		newColumnTableColumn_3.setText("Value");
+		newColumnTableColumn_3.setText(Messages.getString("ApplicationDialog.25")); //$NON-NLS-1$
 
 		configurationList = new Combo(container, SWT.READ_ONLY);
 		configurationList.setBounds(128, 10, 191, 23);
@@ -787,17 +787,17 @@ public class ApplicationDialog extends Dialog {
 			configurationList.select(0);
 		} else {
 			tabFolder.setEnabled(false);
-			errorMsg.setText("You must create and select a configuration to Edit.");
+			errorMsg.setText(Messages.getString("ApplicationDialog.26")); //$NON-NLS-1$
 		}
 
 		generationConfigurationTabItem = new TabItem(tabFolder, SWT.NONE);
-		generationConfigurationTabItem.setText("Generation");
+		generationConfigurationTabItem.setText(Messages.getString("ApplicationDialog.27")); //$NON-NLS-1$
 
 		final Composite composite_1 = new Composite(tabFolder, SWT.NONE);
 		composite_1.addMouseListener(new MouseAdapter() {
 			public void mouseDown(final MouseEvent e) {
 				if (!tabFolder.getEnabled()) {
-					showAlert("No Configuration", "You must create a configuration to edit it.");
+					showAlert(Messages.getString("ApplicationDialog.28"), Messages.getString("ApplicationDialog.29")); //$NON-NLS-1$ //$NON-NLS-2$
 				}
 			}
 		});
@@ -832,13 +832,13 @@ public class ApplicationDialog extends Dialog {
 
 		final Label logLabel = new Label(composite_1, SWT.NONE);
 		logLabel.setAlignment(SWT.RIGHT);
-		logLabel.setText("Log Path :");
+		logLabel.setText(Messages.getString("ApplicationDialog.30")); //$NON-NLS-1$
 		logLabel.setBounds(20, 10, 93, 15);
 
 		final Label destinationLabel = new Label(composite_1, SWT.NONE);
 		destinationLabel.setAlignment(SWT.RIGHT);
 		destinationLabel.setBounds(20, 54, 93, 15);
-		destinationLabel.setText("Generation path :");
+		destinationLabel.setText(Messages.getString("ApplicationDialog.31")); //$NON-NLS-1$
 
 		destinationText = new Text(composite_1, SWT.BORDER);
 		destinationText.addFocusListener(new FocusAdapter() {
@@ -857,8 +857,8 @@ public class ApplicationDialog extends Dialog {
 		final Button browseLogPathButton = new Button(composite_1, SWT.NONE);
 		browseLogPathButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				String filePath = "";
-				Container folder = displaySelectFolderInWorkspace("Select Log Path");
+				String filePath = ""; //$NON-NLS-1$
+				Container folder = displaySelectFolderInWorkspace(Messages.getString("ApplicationDialog.33")); //$NON-NLS-1$
 
 				if (folder != null) {
 					filePath = folder.getFullPath().toPortableString();
@@ -873,14 +873,14 @@ public class ApplicationDialog extends Dialog {
 			}
 
 		});
-		browseLogPathButton.setText("Browse");
+		browseLogPathButton.setText(Messages.getString("ApplicationDialog.34")); //$NON-NLS-1$
 		browseLogPathButton.setBounds(381, 12, 75, 25);
 
 		final Button browseGenPathButton = new Button(composite_1, SWT.NONE);
 		browseGenPathButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				String filePath = "";
-				Container folder = displaySelectFolderInWorkspace("Select Generation Path");
+				String filePath = ""; //$NON-NLS-1$
+				Container folder = displaySelectFolderInWorkspace(Messages.getString("ApplicationDialog.36")); //$NON-NLS-1$
 
 				if (folder != null) {
 					filePath = folder.getFullPath().toPortableString();
@@ -894,15 +894,15 @@ public class ApplicationDialog extends Dialog {
 				}
 			}
 		});
-		browseGenPathButton.setText("Browse");
+		browseGenPathButton.setText(Messages.getString("ApplicationDialog.37")); //$NON-NLS-1$
 		browseGenPathButton.setBounds(381, 54, 75, 25);
 
 		final Label chooseYourGenerationLabel = new Label(composite_1, SWT.NONE);
-		chooseYourGenerationLabel.setText("Choose your generation options :");
+		chooseYourGenerationLabel.setText(Messages.getString("ApplicationDialog.38")); //$NON-NLS-1$
 		chooseYourGenerationLabel.setBounds(0, 95, 456, 15);
 
 		verboseButton = new Button(composite_1, SWT.CHECK);
-		verboseButton.setToolTipText("Will print out generation information.");
+		verboseButton.setToolTipText(Messages.getString("ApplicationDialog.39")); //$NON-NLS-1$
 		verboseButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
 				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_VERBOSE);
@@ -913,7 +913,7 @@ public class ApplicationDialog extends Dialog {
 				ApplicationDialog.modificationMade();
 			}
 		});
-		verboseButton.setText("Verbose");
+		verboseButton.setText(Messages.getString("ApplicationDialog.40")); //$NON-NLS-1$
 		verboseButton.setBounds(10, 116, 108, 20);
 
 		skipValidationButton = new Button(composite_1, SWT.CHECK);
@@ -927,17 +927,17 @@ public class ApplicationDialog extends Dialog {
 				ApplicationDialog.modificationMade();
 			}
 		});
-		skipValidationButton.setToolTipText("If checked will skip the validation task.");
+		skipValidationButton.setToolTipText(Messages.getString("ApplicationDialog.41")); //$NON-NLS-1$
 		skipValidationButton.getAccessible().addAccessibleListener(new AccessibleAdapter() {
 			public void getHelp(AccessibleEvent e) {
-				e.result = "If checked will move uploaded files to your application.";
+				e.result = Messages.getString("ApplicationDialog.42"); //$NON-NLS-1$
 			}
 		});
-		skipValidationButton.setText("Skip Validation");
+		skipValidationButton.setText(Messages.getString("ApplicationDialog.43")); //$NON-NLS-1$
 		skipValidationButton.setBounds(160, 116, 108, 20);
 
 		cleanButton = new Button(composite_1, SWT.CHECK);
-		cleanButton.setText("Clean");
+		cleanButton.setText(Messages.getString("ApplicationDialog.44")); //$NON-NLS-1$
 		cleanButton.setBounds(297, 116, 93, 16);
 		cleanButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
@@ -951,7 +951,7 @@ public class ApplicationDialog extends Dialog {
 		});
 
 		deployementTabItem = new TabItem(tabFolder, SWT.NONE);
-		deployementTabItem.setText("Deployment");
+		deployementTabItem.setText(Messages.getString("ApplicationDialog.45")); //$NON-NLS-1$
 
 		tabFolder.addSelectionListener(new SelectionAdapter() {
 
@@ -965,7 +965,7 @@ public class ApplicationDialog extends Dialog {
 						refreshModelPropertiesTable();
 					}
 				}
-				documentationText.setText("");
+				documentationText.setText(""); //$NON-NLS-1$
 			}
 		});
 
@@ -988,7 +988,7 @@ public class ApplicationDialog extends Dialog {
 
 		final Label chooseYourGenerationLabel_1 = new Label(composite, SWT.NONE);
 		chooseYourGenerationLabel_1.setBounds(10, 15, 456, 15);
-		chooseYourGenerationLabel_1.setText("Choose your deployment options :");
+		chooseYourGenerationLabel_1.setText(Messages.getString("ApplicationDialog.47")); //$NON-NLS-1$
 
 		for (ModelElement elem : application.getElements()) {
 			if (elem instanceof Model) {
@@ -1003,11 +1003,11 @@ public class ApplicationDialog extends Dialog {
 		// Browser that shows informations on the selected component (right)
 		documentationText = new Browser(container, SWT.BORDER);
 		documentationText.setBounds(493, 88, 297, 197);
-		documentationText.setText(buildHelpDocumentationText(""));
+		documentationText.setText(buildHelpDocumentationText("")); //$NON-NLS-1$
 
 		final Label listOfConfigurayionsLabel = new Label(container, SWT.NONE);
 		listOfConfigurayionsLabel.setBounds(5, 13, 136, 23);
-		listOfConfigurayionsLabel.setText("List of configurations :");
+		listOfConfigurayionsLabel.setText(Messages.getString("ApplicationDialog.49")); //$NON-NLS-1$
 
 		final Button editBt = new Button(container, SWT.NONE);
 		editBt.setBounds(325, 10, 48, 26);
@@ -1035,7 +1035,7 @@ public class ApplicationDialog extends Dialog {
 				}
 			}
 		});
-		editBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class, "tree/img/edit.png"));
+		editBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class, "tree/img/edit.png")); //$NON-NLS-1$
 
 		final Button addBt = new Button(container, SWT.NONE);
 		addBt.setBounds(375, 10, 48, 26);
@@ -1044,10 +1044,10 @@ public class ApplicationDialog extends Dialog {
 				Configuration config = ApplicationFactory.eINSTANCE.createConfiguration();
 
 				int i = 0;
-				String newName = "New configuration";
+				String newName = Messages.getString("ApplicationDialog.51"); //$NON-NLS-1$
 				while (application.getConfiguration(newName) != null) {
 					i++;
-					newName = "New configuration (" + i + ")";
+					newName = "New configuration (" + i + ")"; //$NON-NLS-1$ //$NON-NLS-2$
 				}
 				config.setName(newName);
 				configurationList.add(newName);
@@ -1056,38 +1056,38 @@ public class ApplicationDialog extends Dialog {
 				application.getElements().add(config);
 				modificationMade();
 				tabFolder.setEnabled(true);
-				errorMsg.setText("");
+				errorMsg.setText(""); //$NON-NLS-1$
 				refreshConfiguration();
 			}
 
 			private void addStaticParameters(Configuration config) {
 				ConfigurationParameters verboseParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
 				verboseParam.setKey(KEY_VERBOSE);
-				verboseParam.setValue("false");
+				verboseParam.setValue("false"); //$NON-NLS-1$
 				config.getParameters().add(verboseParam);
 
 				ConfigurationParameters skipValid = ApplicationFactory.eINSTANCE.createConfigurationParameters();
 				skipValid.setKey(KEY_SKIPVALIDATION);
-				skipValid.setValue("false");
+				skipValid.setValue("false"); //$NON-NLS-1$
 				config.getParameters().add(skipValid);
 
 				ConfigurationParameters doClean = ApplicationFactory.eINSTANCE.createConfigurationParameters();
 				doClean.setKey(KEY_DOCLEAN);
-				doClean.setValue("false");
+				doClean.setValue("false"); //$NON-NLS-1$
 				config.getParameters().add(doClean);
 
 				ConfigurationParameters logPathParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
 				logPathParam.setKey(KEY_LOGPATH);
-				logPathParam.setValue("");
+				logPathParam.setValue(""); //$NON-NLS-1$
 				config.getParameters().add(logPathParam);
 
 				ConfigurationParameters generationPathParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
 				generationPathParam.setKey(KEY_GENPATH);
-				generationPathParam.setValue("");
+				generationPathParam.setValue(""); //$NON-NLS-1$
 				config.getParameters().add(generationPathParam);
 			}
 		});
-		addBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class, "tree/img/add.png"));
+		addBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class, "tree/img/add.png")); //$NON-NLS-1$
 
 		final Button deleteBt = new Button(container, SWT.NONE);
 		deleteBt.setBounds(425, 10, 48, 26);
@@ -1108,15 +1108,15 @@ public class ApplicationDialog extends Dialog {
 				modificationMade();
 				if (configurationList.getItemCount() == 0) {
 					tabFolder.setEnabled(false);
-					errorMsg.setText("You must create and select a configuration to Edit.");
+					errorMsg.setText(Messages.getString("ApplicationDialog.61")); //$NON-NLS-1$
 				}
 				refreshConfiguration();
 			}
 		});
-		deleteBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class, "tree/img/delete.png"));
+		deleteBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class, "tree/img/delete.png")); //$NON-NLS-1$
 
 		optionsGroup = new Group(container, SWT.NONE);
-		optionsGroup.setText("Options");
+		optionsGroup.setText(Messages.getString("ApplicationDialog.63")); //$NON-NLS-1$
 		optionsGroup.setBounds(490, 291, 300, 222);
 		optionsGroup.setVisible(false);
 
@@ -1144,8 +1144,8 @@ public class ApplicationDialog extends Dialog {
 		newColumnTableColumn_1.setText(columnNames[1]);
 
 		final Label generationsOptionsLabel_1 = new Label(optionsGroup, SWT.NONE);
-		generationsOptionsLabel_1.setFont(SWTResourceManager.getFont("", 11, SWT.NONE));
-		generationsOptionsLabel_1.setText("Specific configuration generation options");
+		generationsOptionsLabel_1.setFont(SWTResourceManager.getFont("", 11, SWT.NONE)); //$NON-NLS-1$
+		generationsOptionsLabel_1.setText(Messages.getString("ApplicationDialog.65")); //$NON-NLS-1$
 
 		refreshConfiguration();
 
@@ -1165,7 +1165,7 @@ public class ApplicationDialog extends Dialog {
 		ets.setValidator((ISelectionStatusValidator) new FolderSelectionValidator());
 		ets.setAllowMultiple(true);
 
-		ets.setTitle("Select Folder");
+		ets.setTitle(Messages.getString("ApplicationDialog.66")); //$NON-NLS-1$
 		ets.setMessage(message);
 		ets.setInput(ResourcesPlugin.getWorkspace().getRoot());
 		ets.setHelpAvailable(false);
@@ -1254,9 +1254,9 @@ public class ApplicationDialog extends Dialog {
 	 * @return
 	 */
 	private String buildHelpDocumentationText(String documentation) {
-		String result = "<html><body style=\"font-family: Verdana; " + "color: #444;" + "text-decoration: none;" + "word-spacing: normal;" + "text-align: justify;" + "letter-spacing: 0;" + "line-height: 1.2em;" + "font-size: 11px;\">";
+		String result = "<html><body style=\"font-family: Verdana; " + "color: #444;" + "text-decoration: none;" + "word-spacing: normal;" + "text-align: justify;" + "letter-spacing: 0;" + "line-height: 1.2em;" + "font-size: 11px;\">"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
 		result += documentation;
-		result += "</body></html>";
+		result += "</body></html>"; //$NON-NLS-1$
 		return result;
 	}
 
@@ -1266,7 +1266,7 @@ public class ApplicationDialog extends Dialog {
 	 * @return
 	 */
 	private String builDocumentationText() {
-		String result = "<html><body style=\"font-family: Verdana; " + "color: #444;" + "text-decoration: none;" + "word-spacing: normal;" + "text-align: justify;" + "letter-spacing: 0;" + "line-height: 1.2em;" + "font-size: 11px;\">";
+		String result = "<html><body style=\"font-family: Verdana; " + "color: #444;" + "text-decoration: none;" + "word-spacing: normal;" + "text-align: justify;" + "letter-spacing: 0;" + "line-height: 1.2em;" + "font-size: 11px;\">"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
 		TreeItem[] items = genOptionsTree.getTree().getSelection();
 		if (items.length > 0) {
 			TreeItem item = items[0];
@@ -1279,13 +1279,13 @@ public class ApplicationDialog extends Dialog {
 
 				if (treeElem instanceof Metamodel) {
 					Metamodel m = (Metamodel) treeElem;
-					result += "<br/>";
-					result += "Link :";
-					result += "<a href=\"" + m.getURL() + "\" target=\"_blank\">" + m.getURL() + "</a>";
+					result += "<br/>"; //$NON-NLS-1$
+					result += "Link :"; //$NON-NLS-1$
+					result += "<a href=\"" + m.getURL() + "\" target=\"_blank\">" + m.getURL() + "</a>"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}
 			}
 		}
-		result += "</body></html>";
+		result += "</body></html>"; //$NON-NLS-1$
 		return result;
 	}
 
@@ -1296,9 +1296,9 @@ public class ApplicationDialog extends Dialog {
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, GEN_ID, "Launch", false);
-		createButton(parent, APPLY_ID, "Save", false);
-		createButton(parent, IDialogConstants.CLOSE_ID, "Close", false);
+		createButton(parent, GEN_ID, Messages.getString("ApplicationDialog.90"), false); //$NON-NLS-1$
+		createButton(parent, APPLY_ID, Messages.getString("ApplicationDialog.91"), false); //$NON-NLS-1$
+		createButton(parent, IDialogConstants.CLOSE_ID, Messages.getString("ApplicationDialog.92"), false); //$NON-NLS-1$
 	}
 
 	/**
@@ -1307,7 +1307,7 @@ public class ApplicationDialog extends Dialog {
 	protected void buttonPressed(int buttonId) {
 		if (buttonId == IDialogConstants.CLOSE_ID) {
 			if (applicationModified) {
-				int result = showConfirmation("Configuration Modified.", "Configuration modified, do you want to save it before closing?");
+				int result = showConfirmation(Messages.getString("ApplicationDialog.93"), Messages.getString("ApplicationDialog.94")); //$NON-NLS-1$ //$NON-NLS-2$
 				if (result == SWT.YES) {
 					saveData();
 				}
@@ -1321,7 +1321,7 @@ public class ApplicationDialog extends Dialog {
 		}
 		if (buttonId == GEN_ID) {
 			if (applicationModified) {
-				int result = showConfirmation("Configuration Modified.", "Configuration modified, do you want to save it before generating?");
+				int result = showConfirmation(Messages.getString("ApplicationDialog.95"), Messages.getString("ApplicationDialog.96")); //$NON-NLS-1$ //$NON-NLS-2$
 				if (result == SWT.YES) {
 					saveData();
 				}
@@ -1339,7 +1339,7 @@ public class ApplicationDialog extends Dialog {
 	 */
 	protected void saveData() {
 		ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("application", new XMIResourceFactoryImpl());
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("application", new XMIResourceFactoryImpl()); //$NON-NLS-1$
 		resourceSet.getPackageRegistry().put(ApplicationPackage.eNS_URI, ApplicationPackage.eINSTANCE);
 		org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource(URI.createURI(model.getRawLocation().toFile().getAbsolutePath()));
 		resource.getContents().add(application);
@@ -1358,7 +1358,7 @@ public class ApplicationDialog extends Dialog {
 
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setText("Configuration");
+		newShell.setText(Messages.getString("ApplicationDialog.98")); //$NON-NLS-1$
 	}
 
 	/**
@@ -1458,12 +1458,12 @@ public class ApplicationDialog extends Dialog {
 			if (el instanceof ImplNode) {
 				canCheck = ApplicationUtil.checkElementValidity(el);
 				if (!canCheck) {
-					errorMsg.setText("This element is not active in your key");
+					errorMsg.setText(Messages.getString("ApplicationDialog.99")); //$NON-NLS-1$
 				} else {
-					errorMsg.setText("");
+					errorMsg.setText(""); //$NON-NLS-1$
 				}
 			} else {
-				errorMsg.setText("");
+				errorMsg.setText(""); //$NON-NLS-1$
 			}
 			// If click on image : check it, else : just show informations
 			if (canCheck && (item.getImageBounds(0) != null && event.x <= item.getImageBounds(0).x + item.getImageBounds(0).width)) {
