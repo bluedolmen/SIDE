@@ -12,7 +12,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 			<taxonomy title="<%current("FacetMap").viewOf.filter("Clazz").getLabel()%>.<%mapTo.filter("Attribute").name%>" root-heading-title="<%current("FacetMap").viewOf.filter("Clazz").getLabel()%>.<%mapTo.filter("Attribute").name%>" facetid="<%mapTo.filter("Attribute").getFullName()%>">
 					<!-- criteria -->
 				    <!-- On ne prend pas en compte les diff�rentes occurences d'un m�me crit�re car facetmap les r�unit. -->
-				    <xsl:for-each select="child::entry/cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribute").typ!="int"{%><%mapTo.filter("Attribute").typ%><%}else{%>Integer<%}%>[@cmis:name='<%mapTo.filter("Attribute").getFullName()%>']/cmis:value">          
+				    <xsl:for-each select="child::entry/cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribute").typ!="int"{%><%mapTo.filter("Attribute").typ%><%}else{%>Integer<%}%>[@cmis:name='<% current("FacetMap").viewOf.filter("Clazz").getRootContainer().name%>_<%mapTo.filter("Attribute").getFullName().replaceAll("\.","_")%>']/cmis:value">          
 				        <heading id="{current()}" title="{current()}"/>             
 				    </xsl:for-each> 
 				</taxonomy>
@@ -20,10 +20,16 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 	
 <%script type="view.FacetMap" name="ressource"%>
 	<%for (getFields()){%>
-		<map heading="{child::cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribute").typ!="int"{%><%mapTo.filter("Attribute").typ%><%}else{%>Integer<%}%>[@cmis:name='<%mapTo.filter("Attribute").getFullName()%>']/cmis:value}"/>
+		<xsl:choose>	
+			<xsl:when test="not(empty(child::cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribute").typ!="int"{%><%mapTo.filter("Attribute").typ%><%}else{%>Integer<%}%>[@cmis:name='<% current("FacetMap").viewOf.filter("Clazz").getRootContainer().name%>_<%mapTo.filter("Attribute").getFullName().replaceAll("\.","_")%>']/cmis:value))">
+				<map heading="{child::cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribute").typ!="int"{%><%mapTo.filter("Attribute").typ%><%}else{%>Integer<%}%>[@cmis:name='<% current("FacetMap").viewOf.filter("Clazz").getRootContainer().name%>_<%mapTo.filter("Attribute").getFullName().replaceAll("\.","_")%>']/cmis:value}"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<map heading="<%mapTo.filter("TitledNamedClassModelElement").getLabel()%> is null"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	<%}%>
 	
-
 <%script type="view.FacetMap" name="cmis2xfmlGenerator"  file="<%validatedFilename%>" %>
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:cmis="http://www.cmis.org/2008/05" xmlns:alf="http://www.alfresco.com" version="2.0">
@@ -42,7 +48,7 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 	<xsl:template match="entry">
 		<xsl:variable name="idDoc" select="substring(child::id[1],10)"/>     
 		<resource
-			title="<%for (getInnerView().getFields()){%><%if (prefix !=null){%><%prefix%><%}%>{child::cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribute").typ!="int"{%><%mapTo.filter("Attribute").typ%><%}else{%>Integer<%}%>[@cmis:name='<%mapTo.filter("Attribute").getFullName()%>']/cmis:value}<%if (suffix !=null){%><%suffix%><%}%><%}%>"
+			title="<%for (getInnerView().getFields().nSort()){%><%if (prefix !=null){%><%prefix%><%}%>{child::cmis:object/cmis:properties/cmis:property<%if mapTo.filter("Attribute").typ!="int"{%><%mapTo.filter("Attribute").typ%><%}else{%>Integer<%}%>[@cmis:name='<% current("FacetMap").viewOf.filter("Clazz").getRootContainer().name%>_<%mapTo.filter("Attribute").getFullName().replaceAll("\.","_")%>']/cmis:value}<%if (suffix !=null){%><%suffix%><%}%><%}%>"
 			href="{$idDoc}">
 		<%ressource()%>
 		</resource>
