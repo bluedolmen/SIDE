@@ -15,6 +15,7 @@
  	<bean id="associationSynchronisationPolicy" class="com.bluexml.side.Integration.alfresco.associationSynchronisation.AssociationSynchronisationPolicy" init-method="init">
 		<property name="policyComponent" ref="policyComponent" />
 		<property name="nodeService" ref="nodeService" />
+		<property name="nodeDaoService" ref="nodeDaoService" />
 		<property name="resolver" ref="associationSynchronisationResolver" />
 	</bean>
 

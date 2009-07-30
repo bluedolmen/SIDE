@@ -2,10 +2,12 @@ package com.bluexml.side.Integration.alfresco.associationSynchronisation;
 
 import org.alfresco.repo.node.NodeServicePolicies.OnCreateAssociationPolicy;
 import org.alfresco.repo.node.NodeServicePolicies.OnDeleteAssociationPolicy;
+import org.alfresco.repo.node.db.NodeDaoService;
 import org.alfresco.repo.policy.Behaviour;
 import org.alfresco.repo.policy.JavaBehaviour;
 import org.alfresco.repo.policy.PolicyComponent;
 import org.alfresco.repo.policy.Behaviour.NotificationFrequency;
+import org.alfresco.repo.transaction.AlfrescoTransactionSupport;
 import org.alfresco.service.cmr.repository.AssociationRef;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
@@ -18,13 +20,13 @@ public class AssociationSynchronisationPolicy implements
 	OnDeleteAssociationPolicy
 {
 	private static final String BLUEXML_NAMESPACE_URI="http://www.bluexml.com";
+	private static final String CONTEXT_KEY_SEPARATOR = "/";
 
 	// Behaviours
 	private Behaviour onCreateAssociation;
 	private Behaviour onDeleteAssociation;
 
 	private Logger logger = Logger.getLogger(getClass());
-
 
 	public void init() {
 
@@ -41,27 +43,88 @@ public class AssociationSynchronisationPolicy implements
 
 
 	public void onCreateAssociation(AssociationRef associationRef) {
-		if (associationRef.getTypeQName().getLocalName().startsWith(BLUEXML_NAMESPACE_URI)) {
-			logger.debug("Association synchronisation policy, CREATE ASSOCIATION");
+		if (associationRef.getTypeQName().getNamespaceURI().startsWith(BLUEXML_NAMESPACE_URI) ) {
 			QName oppositeAssociationTypeQName = resolver.resolve(associationRef.getTypeQName());
+		
 			if (oppositeAssociationTypeQName != null) {
-				NodeRef sourceRef = associationRef.getSourceRef();
-				NodeRef targetRef = associationRef.getTargetRef();
-				nodeService.createAssociation(targetRef, sourceRef, oppositeAssociationTypeQName);
+				if (! oppositeAssociationInProcess(associationRef)) {
+					logger.debug("Association synchronisation policy, CREATE ASSOCIATION");
+					
+					// Register the association in the transaction
+					setContext(associationRef);
+					
+					NodeRef sourceRef = associationRef.getSourceRef();
+					NodeRef targetRef = associationRef.getTargetRef();
+					nodeService.createAssociation(targetRef, sourceRef, oppositeAssociationTypeQName);
+					
+				} else {
+					logger.debug("Association already in process, removing context");
+					removeContext(associationRef);					
+				}
 			}
 		}
 	}
 	
 	public void onDeleteAssociation(AssociationRef associationRef) {
-		if (associationRef.getTypeQName().getLocalName().startsWith(BLUEXML_NAMESPACE_URI)) {
-			logger.debug("Association synchronisation policy, DELETE ASSOCIATION");
+		if (associationRef.getTypeQName().getNamespaceURI().startsWith(BLUEXML_NAMESPACE_URI) ) {
 			QName oppositeAssociationTypeQName = resolver.resolve(associationRef.getTypeQName());
+			
 			if (oppositeAssociationTypeQName != null) {
-				NodeRef sourceRef = associationRef.getSourceRef();
-				NodeRef targetRef = associationRef.getTargetRef();
-				nodeService.removeAssociation(targetRef, sourceRef, oppositeAssociationTypeQName);
+				if (! oppositeAssociationInProcess(associationRef)) {
+					logger.debug("Association synchronisation policy, DELETE ASSOCIATION");
+					
+					// Register the association in the transaction
+					setContext(associationRef);
+					
+					NodeRef sourceRef = associationRef.getSourceRef();
+					NodeRef targetRef = associationRef.getTargetRef();
+					nodeService.removeAssociation(targetRef, sourceRef, oppositeAssociationTypeQName);
+					
+				} else {
+					logger.debug("Association already in process, removing context");
+					removeContext(associationRef);					
+				}
 			}
 		}
+	}
+
+	/*
+	 * Helper methods
+	 */
+	
+	private boolean oppositeAssociationInProcess(AssociationRef associationRef) {
+		String key = buildKey(associationRef.getTypeQName(), associationRef.getSourceRef(), associationRef.getTargetRef());
+		return AlfrescoTransactionSupport.getResource(key) != null;
+		
+//		Pair<Long, NodeRef> source = nodeDaoService.getNodePair(associationRef.getSourceRef());
+//		Pair<Long, NodeRef> target = nodeDaoService.getNodePair(associationRef.getTargetRef());
+//		QName oppositeAssociationTypeQName = resolver.resolve(associationRef.getTypeQName());
+//		
+//		Pair<Long, AssociationRef> assoc = nodeDaoService.getNodeAssoc(target.getFirst(), source.getFirst(), oppositeAssociationTypeQName);
+//		
+//		return assoc != null;
+	}
+		
+	private void setContext(AssociationRef associationRef) {
+		QName oppositeAssociationTypeQName = resolver.resolve(associationRef.getTypeQName());
+		String key = buildKey(oppositeAssociationTypeQName, associationRef.getTargetRef(), associationRef.getSourceRef());
+		AlfrescoTransactionSupport.bindResource(key, associationRef);
+	}
+	
+	private void removeContext(AssociationRef associationRef) {
+		String key = buildKey(associationRef.getTypeQName(), associationRef.getSourceRef(), associationRef.getTargetRef());
+		AlfrescoTransactionSupport.unbindResource(key);		
+	}
+	
+	private String buildKey(QName associationName, NodeRef firstRef, NodeRef secondRef) {
+		StringBuffer key = new StringBuffer();
+		key.append(associationName.getLocalName());
+		key.append(CONTEXT_KEY_SEPARATOR);
+		key.append(firstRef.getId());
+		key.append(CONTEXT_KEY_SEPARATOR);
+		key.append(secondRef.getId());
+		
+		return key.toString();
 	}
 	
 	/*
@@ -69,6 +132,7 @@ public class AssociationSynchronisationPolicy implements
 	 */
 	private PolicyComponent policyComponent;
 	private NodeService nodeService;
+	private NodeDaoService nodeDaoService;
 	private AssociationSynchronisationResolver resolver;
 	
 	public void setPolicyComponent(PolicyComponent policyComponent_) {
@@ -77,6 +141,10 @@ public class AssociationSynchronisationPolicy implements
 
 	public void setNodeService(NodeService nodeService_) {
 		nodeService = nodeService_;
+	}
+
+	public void setNodeDaoService(NodeDaoService nodeDaoService_) {
+		nodeDaoService = nodeDaoService_;
 	}
 	
 	public void setResolver(AssociationSynchronisationResolver resolver_) {
