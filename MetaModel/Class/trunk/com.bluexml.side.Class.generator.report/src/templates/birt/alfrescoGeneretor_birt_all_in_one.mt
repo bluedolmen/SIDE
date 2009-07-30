@@ -63,12 +63,12 @@ import com.bluexml.side.clazz.generator.alfresco.services.ParameterServices
     </parameters>
     <data-sources>
     	<oda-data-source extensionID="org.eclipse.datatools.enablement.oda.xml" name="Data Source all" id="100">
-            <property name="FILELIST">http://localhost:8080/alfresco/service/com/bluexml/side/contentType/all.xml</property>
+            <property name="FILELIST"><%getAlfrescoURL()%>/service/com/bluexml/side/contentType/all.xml</property>
         </oda-data-source>
     <%for (getAllClasses()){%>
         <oda-data-source extensionID="org.eclipse.datatools.enablement.oda.xml" name="Data Source <%name%>" id="10<%i()+1%>">
             <text-property name="displayName"></text-property>
-            <property name="FILELIST">http://localhost:8080/alfresco/service/com/bluexml/side/contentType/<%getQualifiedName()%>.xml</property>
+            <property name="FILELIST"><%getAlfrescoURL()%>/service/com/bluexml/side/contentType/<%getQualifiedName()%>.xml</property>
         </oda-data-source>
     <%}%>
     </data-sources>
