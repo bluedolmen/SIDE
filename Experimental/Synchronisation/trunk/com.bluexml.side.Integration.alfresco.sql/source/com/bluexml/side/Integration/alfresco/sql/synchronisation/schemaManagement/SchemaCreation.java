@@ -259,7 +259,12 @@ public class SchemaCreation {
 		columns.put(databaseDictionary.getTargetAlias(associationName), new ArrayList<String>() {{add("INTEGER"); }});
 
 		CreateStatement createStatement = new CreateStatement(tableName, columns, TableType.TABLE_ASSOCIATION, customActionManager);
-		createStatement.addPkConstraint(ASSOCIATION_ID_COLUMN_NAME);
+		createStatement.addPkConstraint(
+				new ArrayList<String>() {{ 
+					add(databaseDictionary.getSourceAlias(associationName));
+					add(databaseDictionary.getTargetAlias(associationName)); // ASSOCIATION_ID_COLUMN_NAME)
+				}}
+		);
 		
 		String idColumnName = databaseDictionary.resolveAttributeAsColumnName(ALFRESCO_DBID_COLUMN_NAME, sourceClassQName.getLocalName());
 		createStatement.addFkConstraint(databaseDictionary.getSourceAlias(associationName), databaseDictionary.getSourceClass(associationName), idColumnName);

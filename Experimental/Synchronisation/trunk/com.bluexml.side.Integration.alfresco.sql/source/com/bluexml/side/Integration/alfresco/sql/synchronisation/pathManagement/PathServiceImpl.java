@@ -26,6 +26,7 @@ public class PathServiceImpl implements PathService {
 	public void updatePath(NodeRef nodeRef) {
 		Path path = nodeService.getPath(nodeRef);
 		List<String> sqlQueries = new ArrayList<String>();
+		String escapedPathString = synchronisationDialect.quoteString(synchronisationDialect.escape(path.toPrefixString(namespaceService)));
 		
 		List<QName> parentNames = nodeHelper.getParentQNames(nodeRef);
 
@@ -38,7 +39,7 @@ public class PathServiceImpl implements PathService {
 			String sqlQuery = String.format("UPDATE %1$s SET %2$s = %3$s WHERE id = %4$s", 
 					simplified_type_name, 
 					PathManagementCommon.PATH_COLUMN_NAME, 
-					synchronisationDialect.quoteString(synchronisationDialect.escape(path.toPrefixString(namespaceService))), 
+					escapedPathString, 
 					dbid
 			);
 			sqlQueries.add(sqlQuery);

@@ -12,7 +12,7 @@
     <!-- ======================= -->
  
 	<bean id="synchronisationProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:alfresco/module/com.bluexml.side.Integration.alfresco.sql/synchronisation.properties"/>
+        <property name="location" value="classpath:alfresco/module/com_bluexml_side_Integration_alfresco_sql/synchronisation.properties"/>
         <property name="ignoreUnresolvablePlaceholders" value="true" />
     </bean>
 	 
