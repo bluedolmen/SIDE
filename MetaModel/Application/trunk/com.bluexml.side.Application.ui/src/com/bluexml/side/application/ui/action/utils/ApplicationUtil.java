@@ -382,25 +382,34 @@ public class ApplicationUtil {
 			IConfigurationElement technology = (IConfigurationElement) techVersion.getParent();
 			IConfigurationElement metamodel = (IConfigurationElement) technology.getParent();
 
-			// must update properties
-
+			// update properties
+			// metamodel
 			generatorConfiguration.setId_metamodel(metamodel.getAttribute("id"));
 			generatorConfiguration.setMetaModelName(metamodel.getAttribute("name"));
-
+			// technology
 			generatorConfiguration.setTechnologyName(technology.getAttribute("id"));
-
+			// technology_version
 			generatorConfiguration.setId_techno_version(techVersion.getAttribute("id"));
 			generatorConfiguration.setTechnologyVersionName(techVersion.getAttribute("version"));
-
+			// generatorVersion
 			generatorConfiguration.setGeneratorName(extFrag.getAttribute("version"));
 			generatorConfiguration.setImpl_class(extFrag.getAttribute("class"));
 
+			Map<String, IConfigurationElement> dependencies_ext = new HashMap<String, IConfigurationElement>();
+			
+			
 			// check options
 			EList<Option> options = generatorConfiguration.getOptions();
 			List<String> options_ext = new ArrayList<String>();
 			IConfigurationElement[] arrayOfoptions_ext = extFrag.getChildren("option");
 			for (IConfigurationElement configurationElement : arrayOfoptions_ext) {
 				options_ext.add(configurationElement.getAttribute("key"));
+				
+				IConfigurationElement[] arrayOfConstraints_ext =configurationElement.getChildren("moduleDependence");
+				for (IConfigurationElement configurationElement2 : arrayOfConstraints_ext) {
+					// add to list of dependencies to check
+					dependencies_ext.put(configurationElement2.getAttribute("moduleId"), configurationElement2);
+				}
 			}
 
 			List<Option> optionsToRemove = new ArrayList<Option>();
@@ -411,23 +420,23 @@ public class ApplicationUtil {
 					optionsToRemove.add(option);
 					//System.out.println("toRemove !"+option);
 				} else {
-					// check option constraints, nothing to to
+					// check option constraints
 				}
 			}
 			generatorConfiguration.getOptions().removeAll(optionsToRemove);
 
-			// check dependencies
-			Map<String, IConfigurationElement> dependencies_ext = new HashMap<String, IConfigurationElement>();
+			// add generator/deployer dependencies to check
 			IConfigurationElement[] arrayOfdependencies_ext = extFrag.getChildren("moduleDependence");
 			for (IConfigurationElement configurationElement : arrayOfdependencies_ext) {
 				dependencies_ext.put(configurationElement.getAttribute("moduleId"), configurationElement);
 			}
-
+			
+			// check dependencies
 			EList<ModuleConstraint> mcs = generatorConfiguration.getModuleContraints();
 			List<String> updatedConstraints = new ArrayList<String>();
 			List<ModuleConstraint> mcsToRemove = new ArrayList<ModuleConstraint>();
 			for (ModuleConstraint moduleConstraint : mcs) {
-				if (!dependencies_ext.values().contains(moduleConstraint.getModuleId())) {
+				if (!dependencies_ext.containsKey(moduleConstraint.getModuleId())) {
 					// to remove
 					mcsToRemove.add(moduleConstraint);
 				} else {
