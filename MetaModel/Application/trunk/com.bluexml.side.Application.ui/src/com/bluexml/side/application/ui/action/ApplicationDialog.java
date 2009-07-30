@@ -151,6 +151,7 @@ public class ApplicationDialog extends Dialog {
 	private TabItem deployementTabItem;
 	private Table modelPropertiesTable;
 	private Button cleanButton;
+	private TabItem modelsTabItem;
 
 	public static String KEY_VERBOSE = Messages.getString("ApplicationDialog.2"); //$NON-NLS-1$
 	public static String KEY_SKIPVALIDATION = Messages.getString("ApplicationDialog.3"); //$NON-NLS-1$
@@ -704,7 +705,7 @@ public class ApplicationDialog extends Dialog {
 		tabFolder = new TabFolder(container, SWT.NONE);
 		tabFolder.setBounds(15, 39, 472, 484);
 
-		final TabItem modelsTabItem = new TabItem(tabFolder, SWT.NONE);
+		modelsTabItem = new TabItem(tabFolder, SWT.NONE);
 		modelsTabItem.setText(Messages.getString("ApplicationDialog.19")); //$NON-NLS-1$
 
 		final Composite composite_3 = new Composite(tabFolder, SWT.NONE);
@@ -1267,8 +1268,14 @@ public class ApplicationDialog extends Dialog {
 	 */
 	private String builDocumentationText() {
 		String result = "<html><body style=\"font-family: Verdana; " + "color: #444;" + "text-decoration: none;" + "word-spacing: normal;" + "text-align: justify;" + "letter-spacing: 0;" + "line-height: 1.2em;" + "font-size: 11px;\">"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
-		TreeItem[] items = genOptionsTree.getTree().getSelection();
-		if (items.length > 0) {
+		TreeItem[] items = null;
+		if (isGenTabSelected()) {
+			items = genOptionsTree.getTree().getSelection();
+		} else if (isDeployTabSelected()) {
+			items = deployOptionsTree.getTree().getSelection();
+		}
+
+		if (items != null && items.length > 0) {
 			TreeItem item = items[0];
 
 			if (item.getData() instanceof TreeElement) {
@@ -1570,5 +1577,17 @@ public class ApplicationDialog extends Dialog {
 				disableAllSubElements(ti);
 			}
 		}
+	}
+
+	protected boolean isDeployTabSelected() {
+		return tabFolder.getSelection()[0].equals(deployementTabItem);
+	}
+
+	protected boolean isGenTabSelected() {
+		return tabFolder.getSelection()[0].equals(generationConfigurationTabItem);
+	}
+
+	protected boolean isModelTabSelected() {
+		return tabFolder.getSelection()[0].equals(modelsTabItem);
 	}
 }
