@@ -15,6 +15,12 @@
             id="com.bluexml.side.Util.feedback.preferences"
             name="Feedback">
       </page>
+      <page
+            category="com.bluexml.side.settings.SideSettingsPreferencesPage"
+            class="com.bluexml.side.util.feedback.ui.SideSettingFeedbackTermOfUsePage"
+            id="com.bluexml.side.Util.feedback.termOfUse"
+            name="Term Of Use">
+      </page>
    </extension>
 
 </plugin>

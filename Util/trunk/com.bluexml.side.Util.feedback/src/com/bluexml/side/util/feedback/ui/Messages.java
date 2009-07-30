@@ -29,6 +29,7 @@ public class Messages extends NLS {
 	public static String SidePopUp_6;
 	public static String SidePopUp_7;
 	public static String SidePopUp_8;
+	public static String SideTermsOfUsePage_0;
 
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

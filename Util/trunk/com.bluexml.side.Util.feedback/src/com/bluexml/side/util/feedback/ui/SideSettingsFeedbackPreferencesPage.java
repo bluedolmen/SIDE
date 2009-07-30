@@ -16,8 +16,10 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseTrackAdapter;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -26,8 +28,10 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
@@ -49,7 +53,7 @@ public class SideSettingsFeedbackPreferencesPage extends PreferencePage
 
 	@Override
 	protected Control createContents(Composite parent) {
-		Composite composite = new Composite(parent, SWT.NONE);
+		final Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 		composite.setLayout(new GridLayout());
 
@@ -77,15 +81,10 @@ public class SideSettingsFeedbackPreferencesPage extends PreferencePage
 		setUploadPreferencesButton.setBounds(10, 126, 156, 25);
 
 		Image imageStats = null;
-
 		final Label lbl = new Label(composite, SWT.NONE);
 		lbl.setText(Messages.SideFeedbackPreferencesPage_8);
-		Label l = new Label(composite, SWT.CENTER);
-		l.addMouseListener(new MouseAdapter() {
-			public void mouseDown(final MouseEvent e) {
-				FeedbackUtils.browseTo(FeedbackActivator.STATS_LINK_URL);
-			}
-		});
+
+		final Label l = new Label(composite, SWT.CENTER);
 		l.setLayoutData(new GridData());
 		try {
 			URL url = new URL(FeedbackActivator.STATS_URL);
@@ -100,6 +99,23 @@ public class SideSettingsFeedbackPreferencesPage extends PreferencePage
 			e.printStackTrace();
 		}
 		l.setImage(imageStats);
+		final Cursor cursor = new Cursor(l.getDisplay(), SWT.CURSOR_HAND);
+		l.addMouseTrackListener(new MouseTrackAdapter() {
+			public void mouseHover(final MouseEvent e) {
+				l.setCursor(cursor);
+			}
+		});
+		l.addListener(SWT.Selection, new Listener() {
+		      public void handleEvent(Event e) {
+		        l.setCursor(cursor);
+		      }
+		    });
+
+		l.addMouseListener(new MouseAdapter() {
+			public void mouseDown(final MouseEvent e) {
+				FeedbackUtils.browseTo(FeedbackActivator.STATS_LINK_URL);
+			}
+		});
 		return composite;
 	}
 
@@ -178,6 +194,12 @@ public class SideSettingsFeedbackPreferencesPage extends PreferencePage
 	public void applyData(Object data) {
 		super.applyData(data);
 		setPreferences();
+	}
+
+	@Override
+	protected void performDefaults() {
+		super.performDefaults();
+		uploadPeriodText.setText(Integer.toString(FeedbackActivator.FEEDBACK_DEFAULT_PERIOD_IN_DAY));
 	}
 
 	@Override

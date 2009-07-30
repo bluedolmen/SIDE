@@ -32,6 +32,7 @@ public class FeedbackActivator extends AbstractUIPlugin {
 	public static final String FEEDBACK_PREFERENCE = "DoFeedback";
 	public static final String FEEDBACK_PERIOD_PREFERENCE = "feedbackPeriod";
 	public static final String LAST_UPDATE_DATE = "lastUpdateDate";
+	public static final String TERM_OF_USE = "termOfUse";
 
 	// Default Value
 	public static final int FEEDBACK_DEFAULT_PERIOD_IN_DAY = 5;
@@ -104,5 +105,13 @@ public class FeedbackActivator extends AbstractUIPlugin {
 
 	public static boolean doFeedback() {
 		return getFeedBackPreference() != FEEDBACK_PREF_NEVER;
+	}
+
+	public static boolean getFeedbackTermOfUseAccepted() {
+		return FeedbackActivator.getDefault().getPreferenceStore().getBoolean(FeedbackActivator.TERM_OF_USE);
+	}
+
+	public static void setFeedbackTermOfUseAccepted(boolean accepted) {
+		FeedbackActivator.getDefault().getPreferenceStore().setValue(FeedbackActivator.TERM_OF_USE, accepted);
 	}
 }

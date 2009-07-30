@@ -12,6 +12,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.forms.events.HyperlinkAdapter;
+import org.eclipse.ui.forms.events.HyperlinkEvent;
+import org.eclipse.ui.forms.widgets.FormText;
 
 import com.bluexml.side.util.feedback.FeedbackActivator;
 import com.bluexml.side.util.feedback.management.FeedbackSender;
@@ -23,6 +26,8 @@ public class PopUpDialogBox extends Dialog {
 	protected Button dontUploadNowButton;
 	protected Button noFeedbackButton;
 	protected int choice;
+	private Button acceptTermsButton;
+	protected Shell parentShell;
 
 	public PopUpDialogBox(Shell parentShell) {
 		super(parentShell);
@@ -43,11 +48,17 @@ public class PopUpDialogBox extends Dialog {
 		layout.numColumns = 1;
 		entryTable.setLayout(layout);
 
-		final Label theSideFeedbackLabel = new Label(entryTable, SWT.WRAP);
+		final FormText theSideFeedbackLabel = new FormText(entryTable, SWT.WRAP);
 		theSideFeedbackLabel.setLayoutData(new GridData(494, 63));
 		theSideFeedbackLabel
-				.setText(Messages.SidePopUp_0);
-
+				.setText(Messages.SidePopUp_0, true, true);
+		theSideFeedbackLabel.addHyperlinkListener(new HyperlinkAdapter() {
+			@Override
+			public void linkActivated(HyperlinkEvent event) {
+				TermOfUsePopUp termOfUse = new TermOfUsePopUp(getShell());
+				termOfUse.open();
+			}
+		});
 		uploadNow = new Button(entryTable, SWT.RADIO);
 		uploadNow.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
@@ -118,6 +129,13 @@ public class PopUpDialogBox extends Dialog {
 		stopCollectingDataLabel.setLayoutData(gd_stopCollectingDataLabel);
 		stopCollectingDataLabel
 				.setText(Messages.SidePopUp_8);
+
+		acceptTermsButton = new Button(entryTable, SWT.CHECK);
+		acceptTermsButton.setText(Messages.SideTermsOfUsePage_0);
+		GridData gridData = new GridData(SWT.BEGINNING, SWT.FILL, true, false);
+		acceptTermsButton.setLayoutData(gridData);
+		acceptTermsButton.setSelection(FeedbackActivator.getFeedbackTermOfUseAccepted());
+
 		return entryTable;
 	}
 
@@ -148,12 +166,12 @@ public class PopUpDialogBox extends Dialog {
 			break;
 		case FeedbackActivator.FEEDBACK_PREF_NOTNOW:
 			// change preference setting (made after)
-
 			break;
 		default:
 			break;
 		}
 		FeedbackActivator.setFeedBackPreference(choice);
+		FeedbackActivator.setFeedbackTermOfUseAccepted(acceptTermsButton.getSelection());
 	}
 
 	private void doSend() {
