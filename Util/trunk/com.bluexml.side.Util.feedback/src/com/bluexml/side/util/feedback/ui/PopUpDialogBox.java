@@ -1,6 +1,7 @@
 package com.bluexml.side.util.feedback.ui;
 
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -135,7 +136,6 @@ public class PopUpDialogBox extends Dialog {
 		GridData gridData = new GridData(SWT.BEGINNING, SWT.FILL, true, false);
 		acceptTermsButton.setLayoutData(gridData);
 		acceptTermsButton.setSelection(FeedbackActivator.getFeedbackTermOfUseAccepted());
-
 		return entryTable;
 	}
 

@@ -23,20 +23,21 @@ import de.schlichtherle.io.File;
 public class FeedbackSender {
 
 	public static void doSend() {
-
-		Job job = new Job("Sending S-IDE feedback data.") {
-			protected IStatus run(IProgressMonitor monitor) {
-		           if (FeedbackSender.send())
-		        	   return Status.OK_STATUS;
-		           else
-		        	   return Status.CANCEL_STATUS;
-		        }
-		};
-		job.setPriority(Job.SHORT);
-		job.schedule();
-		// Update last update date
-		Date nowDate = new Date();
-		FeedbackActivator.getDefault().getPreferenceStore().setValue(FeedbackActivator.LAST_UPDATE_DATE, nowDate.getTime());
+		if (FeedbackActivator.getFeedbackTermOfUseAccepted()) {
+			Job job = new Job("Sending S-IDE feedback data.") {
+				protected IStatus run(IProgressMonitor monitor) {
+			           if (FeedbackSender.send())
+			        	   return Status.OK_STATUS;
+			           else
+			        	   return Status.CANCEL_STATUS;
+			        }
+			};
+			job.setPriority(Job.SHORT);
+			job.schedule();
+			// Update last update date
+			Date nowDate = new Date();
+			FeedbackActivator.getDefault().getPreferenceStore().setValue(FeedbackActivator.LAST_UPDATE_DATE, nowDate.getTime());
+		}
 	}
 
 	/**

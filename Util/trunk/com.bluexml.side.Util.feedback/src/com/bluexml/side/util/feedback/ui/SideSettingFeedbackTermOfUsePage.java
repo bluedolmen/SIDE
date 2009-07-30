@@ -17,7 +17,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import com.bluexml.side.util.feedback.FeedbackActivator;
-import com.bluexml.side.util.libs.Activator;
 
 public class SideSettingFeedbackTermOfUsePage extends PreferencePage
 	implements IWorkbenchPreferencePage {
