@@ -49,4 +49,7 @@ public class ParameterServices {
 		return new SimpleDateFormat("ddMMyyyyHHmm").format(new Date());
 	}
 
+	public String getAlfrescoURL(EObject e) {
+		return ReportGenerator.getAlfrescoURL();
+	}
 }

@@ -17,6 +17,7 @@ public class ReportGenerator extends AbstractAcceleoPackageGenerator{
 	public static String GENERATOR_CONFIGURATION_PARAMETER_AUTHOR = "report.author";
 	public static String MMUri = "http://www.kerblue.org/class/1.0";
 	public static String BIRT_WEBAPP_KEY = "birt.webapp";
+	public static final String CONFIGURATION_PARAMETER_ALFRESCO_HOME = "alfresco.url";
 
 
 	public ReportGenerator(){
@@ -58,6 +59,13 @@ public class ReportGenerator extends AbstractAcceleoPackageGenerator{
 		return author;
 	}
 
+	public static String getAlfrescoURL() {
+		String alfrescoURL = "John Doe";
+		if(!"".equals(getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME))){
+			alfrescoURL = getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME);
+		}
+		return alfrescoURL;
+	}
 	public Collection<IFile> complete() throws Exception {
 
 		String target = IFileHelper.getSystemFolderPath(getTargetPath()+File.separator+getTechVersion())+File.separator;

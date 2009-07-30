@@ -37,6 +37,11 @@
                         key="birt.webapp"
                         label="Birt webapp url">
                   </configurationParameter>
+                  <configurationParameter
+                        documentation="Alfresco URL"
+                        key="alfresco.url"
+                        label="Alfresco URL">
+                  </configurationParameter>
                </generatorVersion>
             </technologyVersion>
          </technology>
