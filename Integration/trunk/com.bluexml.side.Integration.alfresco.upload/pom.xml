@@ -208,7 +208,7 @@
 			<resource>
 				<filtering>true</filtering>
 				<directory>src/main/config</directory>
-				<targetPath>alfresco/module/com.bluexml.side.Integration.alfresco.com.bluexml.side.Integration.alfresco.upload</targetPath>
+				<targetPath>alfresco/module/${artifactId}</targetPath>
 				<excludes>
 					<exclude>**README-*</exclude>
 				</excludes>
@@ -375,7 +375,7 @@
 						<includes>
 							<include>module.properties</include>
 						</includes>
-						<targetPath>alfresco/module/com.bluexml.side.Integration.alfresco.com.bluexml.side.Integration.alfresco.upload</targetPath>
+						<targetPath>alfresco/module/${artifactId}</targetPath>
 					</testResource>
 				</testResources>
 			</build>
