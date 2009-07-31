@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <clazz:ClassPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:clazz="http://www.kerblue.org/class/1.0" name="testJPA">
-  <classSet documentation="" name="SingleEmptyClass" description="" title="">
+  <classSet documentation="" description="" name="SingleEmptyClass" title="">
     <metainfo key="visual-component" value=""/>
   </classSet>
   <classSet name="SingleClassWithAttributes">
-    <attributes documentation="" name="attributeBoolean" description="" title="" typ="boolean"/>
-    <attributes documentation="" name="attributeByte" description="" title="" typ="byte"/>
-    <attributes documentation="" name="attributeChar" description="" title="" typ="char"/>
-    <attributes documentation="" name="attributeDate" description="" title="" typ="Date"/>
-    <attributes documentation="" name="attributeDateTime" description="" title="" typ="DateTime"/>
-    <attributes documentation="" name="attributeDouble" description="" title="" typ="double"/>
-    <attributes documentation="" name="attributeFloat" description="" title="" typ="float"/>
-    <attributes documentation="" name="attributeInt" description="" title="" typ="int"/>
-    <attributes documentation="" name="attributeLong" description="" title="" typ="long"/>
-    <attributes documentation="" name="attributeObject" description="" title="" typ="Object"/>
-    <attributes documentation="" name="attributeShort" description="" title="" typ="short"/>
-    <attributes documentation="" name="attributeString" description="" title="" typ="String"/>
-    <attributes documentation="" name="attributeTime" description="" title="" typ="Time"/>
-    <attributes documentation="" name="attributeVoid" description="" title=""/>
+    <attributes documentation="" description="" name="attributeBoolean" title="" typ="boolean"/>
+    <attributes documentation="" description="" name="attributeByte" title="" typ="byte"/>
+    <attributes documentation="" description="" name="attributeChar" title="" typ="char"/>
+    <attributes documentation="" description="" name="attributeDate" title="" typ="Date"/>
+    <attributes documentation="" description="" name="attributeDateTime" title="" typ="DateTime"/>
+    <attributes documentation="" description="" name="attributeDouble" title="" typ="double"/>
+    <attributes documentation="" description="" name="attributeFloat" title="" typ="float"/>
+    <attributes documentation="" description="" name="attributeInt" title="" typ="int"/>
+    <attributes documentation="" description="" name="attributeLong" title="" typ="long"/>
+    <attributes documentation="" description="" name="attributeObject" title="" typ="Object"/>
+    <attributes documentation="" description="" name="attributeShort" title="" typ="short"/>
+    <attributes documentation="" description="" name="attributeString" title="" typ="String"/>
+    <attributes documentation="" description="" name="attributeTime" title="" typ="Time"/>
+    <attributes documentation="" description="" name="attributeVoid" title=""/>
   </classSet>
   <classSet name="InheritedClass" aspects="//@aspectSet.1">
-    <attributes documentation="" name="inheritedAttribute" description="" title="" typ="String"/>
+    <attributes documentation="" description="" name="inheritedAttribute" title="" typ="String"/>
   </classSet>
   <classSet name="SpecializedClass" generalizations="//@classSet.2">
-    <attributes documentation="" name="specializedAttribute" description="" title="" typ="String"/>
+    <attributes documentation="" description="" name="specializedAttribute" title="" typ="String"/>
   </classSet>
   <classSet name="AspectedClass" aspects="//@aspectSet.0">
-    <attributes documentation="" name="aspectedClassAttribute" description="" title="" typ="String"/>
+    <attributes documentation="" description="" name="aspectedClassAttribute" title="" typ="String"/>
   </classSet>
   <classSet name="AssociatedClass"/>
   <classSet name="AssociatingClass"/>
-  <associationSet name="simpleAssociation" description="" title="">
+  <associationSet description="" name="simpleAssociation" title="">
     <firstEnd name="" title="" linkedClass="//@classSet.5"/>
     <secondEnd name="R2" title="" navigable="true" linkedClass="//@classSet.6"/>
   </associationSet>
-  <associationSet name="targetMultipleCardinalityAssociation" description="" title="">
+  <associationSet description="" name="targetMultipleCardinalityAssociation" title="">
     <firstEnd name="" title="" linkedClass="//@classSet.5"/>
     <secondEnd name="R2" title="" cardMax="-1" navigable="true" linkedClass="//@classSet.6"/>
   </associationSet>
-  <associationSet name="bothTargetMultipleCardinalityAssociation" description="" title="">
+  <associationSet description="" name="bothTargetMultipleCardinalityAssociation" title="">
     <firstEnd name="" title="" cardMax="-1" linkedClass="//@classSet.5"/>
     <secondEnd name="R2" title="" cardMax="-1" navigable="true" linkedClass="//@classSet.6"/>
   </associationSet>
-  <associationSet name="bothNavigableAssociation" description="" title="">
-    <firstEnd name="" title="" cardMax="-1" navigable="true" linkedClass="//@classSet.5"/>
+  <associationSet description="" name="bothNavigableAssociation" title="">
+    <firstEnd name="R1" title="" cardMax="-1" navigable="true" linkedClass="//@classSet.5"/>
     <secondEnd name="R2" title="" cardMax="-1" navigable="true" linkedClass="//@classSet.6"/>
   </associationSet>
-  <associationSet name="compositeAssociation" description="" title="" associationType="Composition">
+  <associationSet description="" name="compositeAssociation" title="" associationType="Composition">
     <firstEnd name="" title="" linkedClass="//@classSet.5"/>
     <secondEnd name="R2" title="" cardMax="-1" navigable="true" linkedClass="//@classSet.6"/>
   </associationSet>
-  <associationSet name="inheritedAssociation" description="" title="">
+  <associationSet description="" name="inheritedAssociation" title="">
     <firstEnd name="" title="" linkedClass="//@classSet.2"/>
     <secondEnd name="R2" title="" navigable="true" linkedClass="//@classSet.5"/>
   </associationSet>
-  <associationSet name="reflexiveAssociation" description="" title="">
-    <firstEnd name="" title="" cardMax="-1" navigable="true" linkedClass="//@classSet.5"/>
+  <associationSet description="" name="reflexiveAssociation" title="">
+    <firstEnd name="R1" title="" cardMax="-1" navigable="true" linkedClass="//@classSet.5"/>
     <secondEnd name="R2" title="" cardMax="-1" navigable="true" linkedClass="//@classSet.5"/>
   </associationSet>
   <aspectSet name="Aspect">
-    <attributes documentation="" name="aspectingAttribute" description="" title="" typ="String"/>
+    <attributes documentation="" description="" name="aspectingAttribute" title="" typ="String"/>
   </aspectSet>
   <aspectSet name="InheritedAspect">
-    <attributes documentation="" name="inheritedAspectingAttribute" description="" title="" typ="String"/>
+    <attributes documentation="" description="" name="inheritedAspectingAttribute" title="" typ="String"/>
   </aspectSet>
 </clazz:ClassPackage>
