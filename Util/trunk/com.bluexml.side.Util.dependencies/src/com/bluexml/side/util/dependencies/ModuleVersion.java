@@ -54,6 +54,7 @@ public class ModuleVersion {
 				}
 				break;
 			case 3:
+				// version 1.1.1 version=1.1.1-SNAPSHOT
 				this.major = Integer.parseInt(v[0]);
 				this.middle = Integer.parseInt(v[1]);
 				// search for qualifier
@@ -69,12 +70,14 @@ public class ModuleVersion {
 				}
 				break;
 			case 4:
+				// version 1.1.1.qualifier
 				this.major = Integer.parseInt(v[0]);
 				this.middle = Integer.parseInt(v[1]);
 				this.minor = Integer.parseInt(v[2]);
 				this.qualifier = v[3];
 				break;
 			default:
+				// version 1.1.1.qualifier.qualifier
 				if (v.length > 4) {
 					this.major = Integer.parseInt(v[0]);
 					this.middle = Integer.parseInt(v[1]);
@@ -83,12 +86,13 @@ public class ModuleVersion {
 						this.qualifier += v[i];
 						this.qualifier +=".";
 					}
+					// remove last '.'
 					this.qualifier = this.qualifier.substring(0,this.qualifier.length()-1);
 				}
 				break;
 			}
 		}
-		System.out.println("build VersionNumber ::" + version + "-->" + this.toString());
+		// System.out.println("build VersionNumber ::" + version + "-->" + this.toString());
 	}
 
 	public boolean biggerThan(ModuleVersion mv) {
