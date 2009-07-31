@@ -5,9 +5,9 @@ import java.util.Collection;
 public class ModuleVersion {
 	static String separator = ".";
 	static String splitSeparator = "\\.";
-	int major = 0;
-	int middle = 0;
-	int minor = 0;
+	Integer major = null;
+	Integer middle = null;
+	Integer minor = null;
 	String qualifier = "";
 
 	public ModuleVersion() {
@@ -88,7 +88,7 @@ public class ModuleVersion {
 				break;
 			}
 		}
-		// System.out.println("build VersionNumber ::" + version + "-->" + this.toString());
+		System.out.println("build VersionNumber ::" + version + "-->" + this.toString());
 	}
 
 	public boolean biggerThan(ModuleVersion mv) {
@@ -143,10 +143,24 @@ public class ModuleVersion {
 	}
 
 	public String toString() {
-		if (qualifier.equals("")) {
-			return major + separator + middle + separator + minor;
+		String version="";
+		if (this.major !=null) {
+			version=this.major.toString();
 		}
-		return major + separator + middle + separator + minor + separator + qualifier;
+		if (this.middle !=null) {
+			version+=separator;
+			version+=this.middle.toString();
+		}
+		if (this.minor !=null) {
+			version+=separator;
+			version+=this.middle.toString();
+		}
+		
+		if (!qualifier.equals("")) {
+			version+=qualifier;
+		}
+		return version;
+		
 	}
 
 }
