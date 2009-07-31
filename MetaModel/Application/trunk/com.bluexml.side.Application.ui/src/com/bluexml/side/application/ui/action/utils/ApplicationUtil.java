@@ -397,6 +397,17 @@ public class ApplicationUtil {
 
 			Map<String, IConfigurationElement> dependencies_ext = new HashMap<String, IConfigurationElement>();
 			
+			// Obligatory dependences
+			Map<String, IConfigurationElement> dependencies_extObligatory = new HashMap<String, IConfigurationElement>();
+			// add generator/deployer dependencies to check
+			IConfigurationElement[] arrayOfdependencies_ext = extFrag.getChildren("moduleDependence");
+			for (IConfigurationElement configurationElement : arrayOfdependencies_ext) {
+				dependencies_ext.put(configurationElement.getAttribute("moduleId"), configurationElement);
+				dependencies_extObligatory.put(configurationElement.getAttribute("moduleId"), configurationElement);
+			}
+			
+			
+			
 			
 			// check options
 			EList<Option> options = generatorConfiguration.getOptions();
@@ -425,11 +436,7 @@ public class ApplicationUtil {
 			}
 			generatorConfiguration.getOptions().removeAll(optionsToRemove);
 
-			// add generator/deployer dependencies to check
-			IConfigurationElement[] arrayOfdependencies_ext = extFrag.getChildren("moduleDependence");
-			for (IConfigurationElement configurationElement : arrayOfdependencies_ext) {
-				dependencies_ext.put(configurationElement.getAttribute("moduleId"), configurationElement);
-			}
+			
 			
 			// check dependencies
 			EList<ModuleConstraint> mcs = generatorConfiguration.getModuleContraints();
@@ -453,7 +460,7 @@ public class ApplicationUtil {
 
 			// add new constraints
 			List<String> lnewConstraints = new ArrayList<String>();
-			Set<String> s = dependencies_ext.keySet();
+			Set<String> s = dependencies_extObligatory.keySet();
 			s.removeAll(updatedConstraints);
 			lnewConstraints.addAll(s);
 			for (String string : lnewConstraints) {
