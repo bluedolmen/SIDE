@@ -42,12 +42,12 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 	<imports>
 		<!-- Import Alfresco Definitions -->
 		<import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
-		<import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
 		<import uri="http://www.alfresco.org/model/application/1.0" prefix="app"/>
 		<import uri="http://www.alfresco.org/model/wcmmodel/1.0" prefix="wcm"/>
       	<import uri="http://www.alfresco.org/model/forum/1.0" prefix="fm"/>
       	<import uri="http://www.alfresco.org/model/bpm/1.0" prefix="bpm" />
-      	<!-- <import uri="http://www.alfresco.org/model/blogintegration/1.0" prefix="blg"/> -->
+      	<!-- Import BlueXML Definitions -->
+      	<import uri="http://www.bluexml.com/model/content/1.0" prefix="bxcm" />
 	</imports>
 	
 	<!-- Introduction of new namespaces defined by this model -->

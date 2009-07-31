@@ -71,6 +71,7 @@
                         label="Alfresco URL">
                   </configurationParameter>
                   <option
+                        documentation="This module provides the synchronisation of alfresco data into a relational database. Queries with joins can thus be performed."
                         key="com.bluexml.side.Class.generator.alfresco.sql"
                         label="Alfresco SQL">
                      <moduleDependence
@@ -80,6 +81,12 @@
                            versionMin="1.0.0">
                      </moduleDependence>
                   </option>
+                  <moduleDependence
+                        moduleId="com.bluexml.side.Integration.alfresco.model"
+                        moduleType="amp"
+                        technologyVersion="alfresco_3.x"
+                        versionMin="1.0.0">
+                  </moduleDependence>
                </generatorVersion>
             </technologyVersion>
          </technology>

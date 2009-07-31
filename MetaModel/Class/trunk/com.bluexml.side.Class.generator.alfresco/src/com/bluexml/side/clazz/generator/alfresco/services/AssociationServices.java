@@ -16,10 +16,7 @@
  ******************************************************************************/
 package com.bluexml.side.clazz.generator.alfresco.services;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -27,16 +24,28 @@ import org.eclipse.emf.ecore.EObject;
 import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
+import com.bluexml.side.clazz.AssociationEnd;
 import com.bluexml.side.clazz.AssociationType;
 import com.bluexml.side.clazz.ClassModelElement;
-import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.clazz.ClazzPackage;
 
 
 
 public class AssociationServices {
 
+	/*
+	 * Cannot call EOperation defined with an EParameter inside the Acceleo editor (known limitation)
+	 * thus defined them in Java services (known workaround)
+	 */
+	public static AssociationEnd getAssociationEnd(Association a, Clazz c) {
+		return a.getAssociationEnd(c).get(0); // if empty, generate an exception
+		
+	}
+	
+	public static AssociationEnd getOppositeAssociationEnd(Association a, Clazz c) {
+		return a.getAssociationEnd(c).get(0).getOpposite();
+	}
+	
 	/**
 	 * Private methode returning the top-package of a class
 	 */
