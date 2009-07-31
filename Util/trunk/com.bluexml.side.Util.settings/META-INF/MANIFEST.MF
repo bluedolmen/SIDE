@@ -3,7 +3,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ManifestVersion: 2
 Bundle-Name: S-IDE Settings Plug-in
 Bundle-SymbolicName: com.bluexml.side.Util.settings;singleton:=true
-Bundle-Version: 1.0.18.v7820-20090729
+Bundle-Version: 1.0.19.v7894-20090730
 Bundle-Activator: com.bluexml.side.util.settings.Activator
 Bundle-Vendor: blueXML
 Require-Bundle: org.eclipse.ui,
