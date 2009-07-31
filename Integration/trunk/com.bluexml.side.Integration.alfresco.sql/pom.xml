@@ -30,8 +30,8 @@
   In order to be able to use Maven snapshots we cannot use the <version/> below as the AMP module
   version. Instead we use the buildnumber-maven-plugin. This requires a scm connection.
 	 -->
-	<version>1.0</version>
-	<description>Test AMP project</description>
+	<version>1.0.2</version>
+	<description>BlueXML S-IDE sql extension</description>
 	<repositories>
 		<repository>
 			<id>releases</id>
@@ -225,7 +225,7 @@
 			<resource>
 				<filtering>true</filtering>
 				<directory>src/main/config</directory>
-				<targetPath>alfresco/module/com.bluexml.side.Integration.alfresco.sql</targetPath>
+				<targetPath>alfresco/module/com_bluexml_side_Integration_alfresco_sql</targetPath>
 				<excludes>
 					<exclude>**README-*</exclude>
 				</excludes>
@@ -373,7 +373,7 @@
 						<includes>
 							<include>module.properties</include>
 						</includes>
-						<targetPath>alfresco/module/com.bluexml.side.Integration.alfresco.sql</targetPath>
+						<targetPath>alfresco/module/com_bluexml_side_Integration_alfresco_sql</targetPath>
 					</testResource>
 				</testResources>
 			</build>
