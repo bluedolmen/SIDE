@@ -8,7 +8,7 @@ public class ModuleVersion {
 	int major = 0;
 	int middle = 0;
 	int minor = 0;
-	String buildVersion = "";
+	String qualifier = "";
 
 	public ModuleVersion() {
 
@@ -23,17 +23,72 @@ public class ModuleVersion {
 	public ModuleVersion(String version) {
 		if (version != null) {
 			String[] v = version.split(splitSeparator);
-			this.major = Integer.parseInt(v[0]);
-			if (v.length > 1) {
+
+			switch (v.length) {
+			case 1:
+				// version=1 ; version=1-SNAPSHOT
+				String p1 = v[0];
+				boolean isqualifier_0 = !p1.matches("^[\\d]*$");
+				if (isqualifier_0) {
+					if (!p1.matches("^[^\\d]*$")) {
+						this.major = Integer.parseInt(p1.replaceAll("[^\\d]*$", ""));
+					}
+					this.qualifier = p1.replaceAll("^[\\d]*", "");
+				} else {
+					this.major = Integer.parseInt(v[0]);
+				}
+				break;
+			case 2:
+				// version=1.1 version 1.1-SNAPSHOT
+				this.major = Integer.parseInt(v[0]);
+				// search for qualifier
+				String p2 = v[1];
+				boolean isqualifier_1 = !p2.matches("^[\\d]*$");
+				if (isqualifier_1) {
+					if (!p2.matches("^[^\\d]*$")) {
+						this.middle = Integer.parseInt(p2.replaceAll("[^\\d]*$", ""));
+					}
+					this.qualifier = p2.replaceAll("^[\\d]*", "");
+				} else {
+					this.middle = Integer.parseInt(v[1]);
+				}
+				break;
+			case 3:
+				this.major = Integer.parseInt(v[0]);
 				this.middle = Integer.parseInt(v[1]);
-			}
-			if (v.length > 2) {
+				// search for qualifier
+				String p3 = v[2];
+				boolean isqualifier_2 = !p3.matches("^[\\d]*$");
+				if (isqualifier_2) {
+					if (!p3.matches("^[^\\d]*$")) {
+						this.minor = Integer.parseInt(p3.replaceAll("[^\\d]*$", ""));
+					}
+					this.qualifier = p3.replaceAll("^[\\d]*", "");
+				} else {
+					this.minor = Integer.parseInt(v[2]);
+				}
+				break;
+			case 4:
+				this.major = Integer.parseInt(v[0]);
+				this.middle = Integer.parseInt(v[1]);
 				this.minor = Integer.parseInt(v[2]);
-			}
-			for (int i = 3; v.length < i; i++) {
-				this.buildVersion += v[i];
+				this.qualifier = v[3];
+				break;
+			default:
+				if (v.length > 4) {
+					this.major = Integer.parseInt(v[0]);
+					this.middle = Integer.parseInt(v[1]);
+					this.minor = Integer.parseInt(v[2]);					
+					for (int i = 3; i < v.length; i++) {
+						this.qualifier += v[i];
+						this.qualifier +=".";
+					}
+					this.qualifier = this.qualifier.substring(0,this.qualifier.length()-1);
+				}
+				break;
 			}
 		}
+		// System.out.println("build VersionNumber ::" + version + "-->" + this.toString());
 	}
 
 	public boolean biggerThan(ModuleVersion mv) {
@@ -88,10 +143,10 @@ public class ModuleVersion {
 	}
 
 	public String toString() {
-		if (buildVersion.equals("")) {
+		if (qualifier.equals("")) {
 			return major + separator + middle + separator + minor;
 		}
-		return major + separator + middle + separator + minor + separator + buildVersion;
+		return major + separator + middle + separator + minor + separator + qualifier;
 	}
 
 }
