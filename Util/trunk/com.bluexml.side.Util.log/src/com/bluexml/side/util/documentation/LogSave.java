@@ -267,9 +267,10 @@ public class LogSave {
 	 * @param fileName
 	 * @param folderSource
 	 * @throws IOException
+	 * @throws IOException
 	 */
 	private static void moveFile(String folderDest, String fileName,
-			String folderSource) throws IOException {
+			String folderSource) throws IOException  {
 		InputStream in = LogSave.class.getResourceAsStream(folderSource
 				+ fileName);
 
@@ -279,8 +280,22 @@ public class LogSave {
 		}
 
 		File file = new File(folderDest + fileName);
-		FileOutputStream fos = new FileOutputStream(file);
-		int data = in.read();
+		FileOutputStream fos;
+		try {
+			fos = new FileOutputStream(file);
+		} catch (FileNotFoundException e) {
+			System.err.println("FileOutputStream can't be call.");
+			e.printStackTrace();
+			throw e;
+		}
+		int data;
+		try {
+			data = in.read();
+		} catch (IOException e) {
+			System.err.println("Data can't be read");
+			e.printStackTrace();
+			throw e;
+		}
 		while (data != -1) {
 			fos.write(data);
 			data = in.read();
