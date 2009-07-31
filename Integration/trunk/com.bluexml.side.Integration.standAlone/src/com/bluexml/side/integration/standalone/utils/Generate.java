@@ -34,7 +34,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.osgi.framework.Bundle;
 
-import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationPackage;
 import com.bluexml.side.application.Configuration;
@@ -90,7 +89,18 @@ public class Generate extends Thread {
 		} catch (CoreException e1) {
 			e1.printStackTrace();
 		}
-
+/*		
+		try {
+			IWorkspace ws1 = ResourcesPlugin.getWorkspace();
+			IProject project1 = ws1.getRoot().getProject(".side_generation");
+			if (!project1.exists())
+				project1.create(null);
+			if (!project1.isOpen())
+				project1.open(null);
+		} catch (CoreException e1) {
+			e1.printStackTrace();
+		}
+*/
 		System.out.println("getWorkspace: " + ResourcesPlugin.getWorkspace());
 		System.out.println("getRoot: "
 				+ ResourcesPlugin.getWorkspace().getRoot().exists() + " -> "
