@@ -7,7 +7,7 @@
             class="com.bluexml.side.Class.modeler.editor.ClazzEditor"
             icon="icons/Clazz.gif"
             default="true"
-            name="Class Modeler"
+            name="Data Modeler"
             id="com.bluexml.side.Class.modeler.editor.ClazzEditor"
             contributorClass="com.bluexml.side.Class.modeler.actions.ClazzEditorActionBarContributor"
             extensions="dtdi">
