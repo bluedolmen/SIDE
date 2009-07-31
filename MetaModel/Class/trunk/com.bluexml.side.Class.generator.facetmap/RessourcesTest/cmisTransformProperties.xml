@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:cmis="http://www.cmis.org/2008/05" xmlns:alf="http://www.alfresco.com" version="2.0">
-	<xsl:param name="host">http://Stage2:8080</xsl:param>
-	<xsl:param name="DLUrl">/share/page/site/base/document-details?nodeRef=workspace://SpacesStore/</xsl:param>
-	<xsl:param name="ViewURL">/alfresco/d/a/workspace/SpacesStore/</xsl:param>
-</xsl:stylesheet>
