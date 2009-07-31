@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -23,6 +24,9 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
@@ -30,6 +34,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.osgi.framework.Bundle;
 
+import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationPackage;
 import com.bluexml.side.application.Configuration;
@@ -37,6 +42,7 @@ import com.bluexml.side.application.ConfigurationParameters;
 import com.bluexml.side.application.DeployerConfiguration;
 import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
+import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.Option;
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
@@ -73,18 +79,18 @@ public class Generate extends Thread {
 		IFile file = null;
 		try {
 			IWorkspace ws = ResourcesPlugin.getWorkspace();
-			IProject project = ws.getRoot().getProject("External Files");
+			IProject project = ws.getRoot().getProject("StandAlone");
 			if (!project.exists())
 				project.create(null);
 			if (!project.isOpen())
 				project.open(null);
 			IPath location = new Path(filePath.getAbsolutePath());
 			file = project.getFile(location.lastSegment());
-			//file.createLink(location, IResource.NONE, null);
+			// file.createLink(location, IResource.NONE, null);
 		} catch (CoreException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		System.out.println("getWorkspace: " + ResourcesPlugin.getWorkspace());
 		System.out.println("getRoot: "
 				+ ResourcesPlugin.getWorkspace().getRoot().exists() + " -> "
@@ -110,6 +116,8 @@ public class Generate extends Thread {
 
 			uri = URI.createFileURI(new File(absolutePath).getAbsolutePath());
 
+			System.out.println("URI: " + uri);
+
 		} catch (Exception e) {
 			System.out.println("Exception : " + e.getClass());
 		}
@@ -133,25 +141,39 @@ public class Generate extends Thread {
 				.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION,
 						Boolean.TRUE);
 
+		/*
+		 * InputStreamReader isr = new InputStreamReader(fi); StringBuffer sb =
+		 * new StringBuffer(); int i; char ch; try { while((i = isr.read())>=0){
+		 * ch = (char) i; sb.append(ch); }
+		 * 
+		 * isr.close(); fi.close();
+		 * 
+		 * } catch (IOException e1) { e1.printStackTrace(); }
+		 * System.out.println(sb);
+		 */
+
 		System.out.println("\tLOAD");
 		try {
 			resource.load(fi, map);
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
 
 		try {
 			application = (Application) resource.getContents().get(0);
-			System.out.println("\tapplication: "+ application);
+			System.out.println("\tapplication: " + application);
 			staticParameters = ApplicationDialog.staticFieldsName;
 			System.out.println("\tstaticParameters: " + staticParameters);
 			configuration = application.getConfiguration(name);
-			System.out.println("\tconfiguration: "+ configuration);
-			models = ApplicationUtil.getModels((Application) configuration
-					.eContainer());
-			System.out.println("\tmodels: "+ models);
+			System.out.println("\tconfiguration: " + configuration);
+			models = ApplicationUtil.getModels(application);
+			System.out.println("\tmodels: " + models);
 		} catch (java.lang.NullPointerException e) {
 			e.printStackTrace();
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
 	}
 
@@ -226,12 +248,22 @@ public class Generate extends Thread {
 				}
 			}
 		}
+		System.out.println("modelWithError: " + modelWithError);
 		System.out.println("log4");
 		if (!modelWithError) {
 			logPath = getLogPath(configuration, configurationParameters);
 			genPath = getGenerationPath(configuration, configurationParameters);
 
+			System.out.println("logPath: " + logPath);
+			System.out.println("genPath: " + genPath);
+
 			try {
+				System.out.println("configuration: " + configuration);
+				System.out.println("modelsInfo: " + modelsInfo);
+				System.out.println("configurationParameters: "
+						+ configurationParameters);
+				System.out.println("generationParameters: "
+						+ generationParameters);
 				generate(configuration, modelsInfo, configurationParameters,
 						generationParameters);
 			} catch (ClassNotFoundException e) {
@@ -290,34 +322,40 @@ public class Generate extends Thread {
 			throws ClassNotFoundException, InstantiationException,
 			IllegalAccessException {
 
-		Display.getDefault().asyncExec(new Runnable() {
-			public void run() {
-				// Clean if needed :
-				boolean doClean = Boolean.parseBoolean(configurationParameters
-						.get(ApplicationDialog.KEY_DOCLEAN));
-				if (doClean) {
-					try {
-						clean();
-					} catch (CoreException e) {
-						e.printStackTrace();
-					}
-				}
+		System.out.println("Generate: ");
 
-				boolean error = generate_(configuration, modelsInfo,
-						configurationParameters, generationParameters);
-
-				error &= deploy_(configuration, modelsInfo,
-						configurationParameters, generationParameters);
-
-				try {
-					LogSave.buildGeneraLogFile(logPath);
-					IFileHelper.refreshFolder(logPath);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		System.out.println("\tRun");
+		// Clean if needed :
+		boolean doClean = Boolean.parseBoolean(configurationParameters
+				.get(ApplicationDialog.KEY_DOCLEAN));
+		if (doClean) {
+			try {
+				clean();
+			} catch (CoreException e) {
+				e.printStackTrace();
 			}
+		}
 
-		});
+		System.out.println("\tconfiguration: " + configuration);
+		System.out.println("\tmodelsInfo: " + modelsInfo);
+		System.out.println("\tconfigurationParameters: "
+				+ configurationParameters);
+		System.out.println("\tgenerationParameters: " + generationParameters);
+
+		boolean error = generate_(configuration, modelsInfo,
+				configurationParameters, generationParameters);
+
+		System.out.println("\tError: " + error);
+
+		error &= deploy_(configuration, modelsInfo, configurationParameters,
+				generationParameters);
+
+		try {
+			LogSave.buildGeneraLogFile(logPath);
+			IFileHelper.refreshFolder(logPath);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -352,6 +390,8 @@ public class Generate extends Thread {
 		// For all generator version we will call generation method
 		boolean error = false;
 
+		System.out.println("Generate_");
+
 		for (GeneratorConfiguration elem : configuration
 				.getGeneratorConfigurations()) {
 			String id_techno_version = elem.getId_techno_version();
@@ -365,6 +405,8 @@ public class Generate extends Thread {
 					.getTechnologyName());
 			configurationParameters.put("technologyVersionName", elem
 					.getTechnologyVersionName());
+			
+			System.out.println("\tlog1");
 
 			// We get the option for this generator
 			Map<String, Boolean> generatorOptions = new HashMap<String, Boolean>();
@@ -372,6 +414,7 @@ public class Generate extends Thread {
 				generatorOptions.put(option.getKey(), true);
 			}
 
+			System.out.println("\tlog2");
 			AbstractGenerator generator = null;
 			try {
 				generator = getGeneratorInstance(elem);
@@ -383,18 +426,25 @@ public class Generate extends Thread {
 				e1.printStackTrace();
 			}
 
+			System.out.println("Generator: " + generator);
+
 			// We initialize the generator with all data collected in
 			// application model
 			if (generator != null) {
+				
+				System.out.println("\tlog3");
 				// We generate only if there is meta-model available for
 				// the generator
 				if (generator
 						.shouldGenerate(modelsInfo, elem.getId_metamodel())) {
+					System.out.println("\tlog4");
 					try {
 						List<ModuleConstraint> lmc = new ArrayList<ModuleConstraint>();
 						EList<com.bluexml.side.application.ModuleConstraint> l = elem
 								.getModuleContraints();
+						System.out.println("\tlog5");
 						for (int c = 0; c < l.size(); c++) {
+							System.out.println("\tlog6");
 							com.bluexml.side.application.ModuleConstraint current = l
 									.get(c);
 							lmc.add(new ModuleConstraint(current.getModuleId(),
@@ -403,6 +453,7 @@ public class Generate extends Thread {
 											.getVersionMin(), current
 											.getVersionMax()));
 						}
+						System.out.println("\tlog7");
 						DependencesManager dm = new DependencesManager(lmc);
 
 						generator.initialize(generationParameters,
@@ -414,44 +465,44 @@ public class Generate extends Thread {
 						e.printStackTrace();
 					}
 
-					if (generator.check()) {
-						// The first one
-						if (modelsInfo.size() > 0) {
-							try {
-								generator.generate(modelsInfo, elem
-										.getId_metamodel());
+					System.out.println("\tlog8");
+					// The first one
+					if (modelsInfo.size() > 0) {
+						System.out.println("\tlog9");
+						try {
+							System.out.println("modelsInfo: " + modelsInfo);
+							System.out.println("elem.getId_metamodel(): " + elem.getId_metamodel());
+							generator.generate(modelsInfo, elem.getId_metamodel());
+							System.out.println("\tlog91");
+							Collection<IFile> generatedFiles = new ArrayList<IFile>();
+							System.out.println("\tlog92");
+							generatedFiles = generator.complete();
+							System.out.println("\tlog93");
 
-								Collection<IFile> generatedFiles = new ArrayList<IFile>();
-								generatedFiles = generator.complete();
+							System.out.println("\tlog10");
+							// TODO : add feedback
 
-								// TODO : add feedback
-
-							} catch (Exception e) {
-								error = true;
-								generator.addErrorLog("Generation error : "
-										+ e.getMessage(), e.getStackTrace(),
-										null);
-								e.printStackTrace();
-							}
-
-							try {
-								generator.createStampFile();
-							} catch (Exception e) {
-								generator.addErrorLog(
-										"Generation error : Stamp file error. "
-												+ e.getMessage(), e
-												.getStackTrace(), null);
-								e.printStackTrace();
-							}
+						} catch (Exception e) {
+							error = true;
+							generator.addErrorLog("Generation error : "
+									+ e.getMessage(), e.getStackTrace(), null);
+							e.printStackTrace();
 						}
-					} else {
-						generator
-								.addErrorLog(
-										"Feature not available",
-										"Feature is not activited, please check your plugin licence",
-										null);
+
+						System.out.println("\tlog11");
+						try {
+							generator.createStampFile();
+						} catch (Exception e) {
+							generator.addErrorLog(
+									"Generation error : Stamp file error. "
+											+ e.getMessage(),
+									e.getStackTrace(), null);
+							e.printStackTrace();
+						}
+						System.out.println("\tlog12");
 					}
 				}
+				System.out.println("\tlog13");
 				String fileName = "gen_" + generator.getTechVersion() + ".xml";
 				LogSave.toXml(generator.getLog(), fileName, logPath
 						+ System.getProperty("file.separator") + "work"

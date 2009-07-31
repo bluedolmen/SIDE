@@ -16,7 +16,7 @@ public class Application implements IApplication {
 		System.out.println("Start Generation");
 
 		//File file = new File("workspaceStandAlone/StandAlone/models/My.application");
-		File file = new File("workspace/StandAlone/models/My.application");
+		File file = new File("workspaceStandAlone/StandAlone/models/My.application");
 		
 		System.out.println("file.exists(): " + file.exists());
 		Generate gen = new Generate(file, "ConfigTest");
