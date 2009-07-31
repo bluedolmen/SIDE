@@ -89,18 +89,7 @@ public class Generate extends Thread {
 		} catch (CoreException e1) {
 			e1.printStackTrace();
 		}
-/*		
-		try {
-			IWorkspace ws1 = ResourcesPlugin.getWorkspace();
-			IProject project1 = ws1.getRoot().getProject(".side_generation");
-			if (!project1.exists())
-				project1.create(null);
-			if (!project1.isOpen())
-				project1.open(null);
-		} catch (CoreException e1) {
-			e1.printStackTrace();
-		}
-*/
+		
 		System.out.println("getWorkspace: " + ResourcesPlugin.getWorkspace());
 		System.out.println("getRoot: "
 				+ ResourcesPlugin.getWorkspace().getRoot().exists() + " -> "
@@ -150,17 +139,6 @@ public class Generate extends Thread {
 		map
 				.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION,
 						Boolean.TRUE);
-
-		/*
-		 * InputStreamReader isr = new InputStreamReader(fi); StringBuffer sb =
-		 * new StringBuffer(); int i; char ch; try { while((i = isr.read())>=0){
-		 * ch = (char) i; sb.append(ch); }
-		 * 
-		 * isr.close(); fi.close();
-		 * 
-		 * } catch (IOException e1) { e1.printStackTrace(); }
-		 * System.out.println(sb);
-		 */
 
 		System.out.println("\tLOAD");
 		try {
@@ -416,7 +394,6 @@ public class Generate extends Thread {
 			configurationParameters.put("technologyVersionName", elem
 					.getTechnologyVersionName());
 			
-			System.out.println("\tlog1");
 
 			// We get the option for this generator
 			Map<String, Boolean> generatorOptions = new HashMap<String, Boolean>();
@@ -424,7 +401,6 @@ public class Generate extends Thread {
 				generatorOptions.put(option.getKey(), true);
 			}
 
-			System.out.println("\tlog2");
 			AbstractGenerator generator = null;
 			try {
 				generator = getGeneratorInstance(elem);
@@ -436,25 +412,20 @@ public class Generate extends Thread {
 				e1.printStackTrace();
 			}
 
-			System.out.println("Generator: " + generator);
 
 			// We initialize the generator with all data collected in
 			// application model
 			if (generator != null) {
 				
-				System.out.println("\tlog3");
 				// We generate only if there is meta-model available for
 				// the generator
 				if (generator
 						.shouldGenerate(modelsInfo, elem.getId_metamodel())) {
-					System.out.println("\tlog4");
 					try {
 						List<ModuleConstraint> lmc = new ArrayList<ModuleConstraint>();
 						EList<com.bluexml.side.application.ModuleConstraint> l = elem
 								.getModuleContraints();
-						System.out.println("\tlog5");
 						for (int c = 0; c < l.size(); c++) {
-							System.out.println("\tlog6");
 							com.bluexml.side.application.ModuleConstraint current = l
 									.get(c);
 							lmc.add(new ModuleConstraint(current.getModuleId(),
@@ -463,7 +434,6 @@ public class Generate extends Thread {
 											.getVersionMin(), current
 											.getVersionMax()));
 						}
-						System.out.println("\tlog7");
 						DependencesManager dm = new DependencesManager(lmc);
 
 						generator.initialize(generationParameters,
@@ -475,15 +445,10 @@ public class Generate extends Thread {
 						e.printStackTrace();
 					}
 
-					System.out.println("\tlog8");
 					// The first one
 					if (modelsInfo.size() > 0) {
-						System.out.println("\tlog9");
 						try {
-							System.out.println("modelsInfo: " + modelsInfo);
-							System.out.println("elem.getId_metamodel(): " + elem.getId_metamodel());
 							generator.generate(modelsInfo, elem.getId_metamodel());
-							System.out.println("\tlog91");
 							Collection<IFile> generatedFiles = new ArrayList<IFile>();
 							System.out.println("\tlog92");
 							generatedFiles = generator.complete();
