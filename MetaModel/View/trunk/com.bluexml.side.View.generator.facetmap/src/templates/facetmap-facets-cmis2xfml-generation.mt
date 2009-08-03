@@ -29,7 +29,7 @@ child::entry/<% cmisPath() %>
 <%script type="view.FacetMap" name="ressource"%>
 	<%for (getFields()){%>
 		<xsl:choose>	
-			<xsl:when test="not(empty(<% getFieldCmisPath() %>))">
+			<xsl:when test="<% getFieldCmisPath() %>!= ''">
 				<map heading="{<% getFieldCmisPath() %>}"/>
 			</xsl:when>
 			<xsl:otherwise>
