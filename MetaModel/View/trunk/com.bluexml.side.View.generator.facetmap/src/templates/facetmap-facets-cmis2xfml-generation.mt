@@ -20,6 +20,7 @@ child::entry/<% cmisPath() %>
 <%script type="view.FacetMap" name="taxonomy"%>
 		<%for (getFields()){%>
 			<taxonomy title="<%current("FacetMap").viewOf.filter("Clazz").getLabel()%>.<%mapTo.filter("Attribute").name%>" root-heading-title="<%current("FacetMap").viewOf.filter("Clazz").getLabel()%>.<%mapTo.filter("Attribute").name%>" facetid="<%mapTo.filter("Attribute").getFullName()%>">
+				    <heading id="<%mapTo.filter("TitledNamedClassModelElement").getLabel()%> is null" title="<%mapTo.filter("TitledNamedClassModelElement").getLabel()%> is null"/> 
 				    <xsl:for-each select="<% getFieldCmisPathWithEntry() %>">          
 				        <heading id="{current()}" title="{current()}"/>             
 				    </xsl:for-each> 
