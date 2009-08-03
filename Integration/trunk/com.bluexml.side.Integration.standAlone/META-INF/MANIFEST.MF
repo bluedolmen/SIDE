@@ -18,6 +18,11 @@ Require-Bundle: org.eclipse.ui;bundle-version="3.4.2",
  com.bluexml.side.Util.dependencies;bundle-version="1.0.3",
  com.bluexml.side.Util.libs;bundle-version="1.0.17",
  com.bluexml.side.Util.security;bundle-version="1.0.11",
- com.bluexml.side.Application.ui;bundle-version="1.0.28"
+ com.bluexml.side.Application.ui;bundle-version="1.0.28",
+ fr.obeo.acceleo.chain;bundle-version="2.5.1",
+ fr.obeo.acceleo.ecore;bundle-version="2.5.1",
+ com.bluexml.side.Util.model.merge;bundle-version="1.0.12",
+ fr.obeo.acceleo.gen;bundle-version="2.5.1",
+ com.bluexml.side.Util.generator.acceleo;bundle-version="1.0.15"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
