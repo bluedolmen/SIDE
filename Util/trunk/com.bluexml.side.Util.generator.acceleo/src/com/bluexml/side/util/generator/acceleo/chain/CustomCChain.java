@@ -60,7 +60,7 @@ public class CustomCChain extends CChain {
 		generatedFiles.clear();
 		mode.setMonitor(monitor);
 		try {
-			final Iterator actions = getActions().iterator();
+			final Iterator<?> actions = getActions().iterator();
 			while (actions.hasNext()) {
 				final CObject action = (CObject) actions.next();
 				action.launch(this, genFilter, monitor, mode);

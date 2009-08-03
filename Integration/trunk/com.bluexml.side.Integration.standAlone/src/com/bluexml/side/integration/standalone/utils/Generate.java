@@ -181,7 +181,7 @@ public class Generate extends Thread {
 	// staticParameters, List<Model> models) throws ClassNotFoundException,
 	// InstantiationException, IllegalAccessException, IOException {
 	public void run() {
-		System.out.println("Run !!!!!!!");
+		System.out.println("Run !!!!!!");
 
 		// First we seek the generator parameters, and separate fields
 		// of dynamic fields
