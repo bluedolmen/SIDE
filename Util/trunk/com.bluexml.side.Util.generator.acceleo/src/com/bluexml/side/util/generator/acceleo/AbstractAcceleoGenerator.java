@@ -90,6 +90,9 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 	 */
 
 	public Collection<IFile> generate(Map<String, List<IFile>> modelsInfo, String id_metamodel) throws Exception {
+		
+		System.out.println("Generate Map String");
+		
 		Collection<IFile> results = new ArrayList<IFile>();
 		if (modelsInfo.get(id_metamodel) != null && modelsInfo.get(id_metamodel).size() > 0) {
 			List<IFile> models = modelsInfo.get(id_metamodel);
@@ -99,6 +102,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 				List<IFile> models_ = l.getValue();
 				IFile mergedModel = merging(models_);
 				// initialize generator we must change the TEMP_FOLDER
+				System.out.println("getClass().getName(): " + getClass().getName());
 				setTEMP_FOLDER("generator_" + getClass().getName() + File.separator + rootName);
 				// generate
 				results.addAll(generate(mergedModel));
@@ -120,19 +124,33 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 	}
 
 	public Collection<IFile> generate(IFile model) throws Exception {
+		
+		System.out.println("Generate IFile model");
 
 		// References to files in the project
 		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+		
+		System.out.println("Iworkspace: " + myWorkspaceRoot );
 		// Temporary project
 		IProject tmpProject = myWorkspaceRoot.getProject(projectName);
 
+		System.out.println("tmpProject: " + tmpProject );
+		System.out.println("tmpProject.exists: " + tmpProject.exists() );
+		
+		if (tmpProject.exists()) {
+			tmpProject.delete(true, null);
+		}
 		// create and open if necessary
 		if (!tmpProject.exists()) {
 			tmpProject.create(null);
 		}
+		
+		System.out.println("tmpProject.isOpen(): " + tmpProject.isOpen() );
 		if (!tmpProject.isOpen()) {
 			tmpProject.open(null);
 		}
+		
+		System.out.println("tmpProject.exists(): " + tmpProject.exists() + " -> " + tmpProject.getFullPath());
 
 		// CChain chain = new ChainFactory.eINSTANCE.createChain();
 		CustomCChain chain = new CustomCChain();
@@ -153,6 +171,8 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		// Target folder
 		Folder folder = ChainFactory.eINSTANCE.createFolder();
 
+		System.out.println("folder: " + folder.getPath());
+		
 		EFactory.eAdd(repository, "files", folder);
 		String path = getTemporaryFolder();
 		if (path == null || path.length() == 0) {
@@ -174,6 +194,8 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		EFactory.eSet(pim, "path", getMetamodelURI());
 
 		for (String templateFile : getTemplates()) {
+			
+			System.out.println("Templates: " + templateFile);
 			// Generator
 			Generator generator = ChainFactory.eINSTANCE.createGenerator();
 			EFactory.eAdd(repository, "files", generator);
@@ -192,36 +214,59 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		// Register the default resource factory -- only needed for
 		// stand-alone!
 		IFile fchain = tmpProject.getFile("side_generation.chain");
+		System.out.println("fchain.getFullPath(): " + fchain.getFullPath());
 		URI chainURI = Resources.createPlatformResourceURI(fchain.getFullPath().toString());
+		System.out.println("log1");
 		ResourceSet resourceSet = new ResourceSetImpl();
+		System.out.println("log2");
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
-		Resource chainResource = resourceSet.createResource(chainURI);
-		chainResource.getContents().add(chain);
+		System.out.println("log3");
+		//Resource chainResource = resourceSet.createResource(chainURI);
+		System.out.println("log4");
+		//chainResource.getContents().add(chain);
+		System.out.println("log5");
 		chain.setFile(fchain);
-		chainResource.save(Collections.EMPTY_MAP);
+		System.out.println("log6");
+		//chainResource.save(Collections.EMPTY_MAP);
+		System.out.println("log7");
 		// System.out.println("BeforeGen");
 		// AbstractGenerator.printConfiguration();
-		chain.launch(genFilter, new NullProgressMonitor(), LaunchManager.create("run", true));
+		System.out.println("log8");
+		try{
+			chain.launch(genFilter, new NullProgressMonitor(), LaunchManager.create("run", false));
+		} catch (CoreException e){
+			e.printStackTrace();
+		} catch (Exception e1){
+			e1.printStackTrace();
+		}
+		System.out.println("log9");
 		// System.out.println("AfterGen");
 		// AbstractGenerator.printConfiguration();
 		generatedFiles = (List<IFile>) chain.getGeneratedFiles();
-		List<?> generatedFiles = chain.getGeneratedFiles();
+//		List<?> generatedFiles = chain.getGeneratedFiles();
+		System.out.println("log10");
 		for (Object file : generatedFiles) {
 			filter((IFile) file);
 		}
+		System.out.println("generatedFiles: " + generatedFiles.toString());
 
-		IProject myproject = myWorkspaceRoot.getProject(".side_generation");
-		myproject.delete(true, null);
+//		IProject myproject = myWorkspaceRoot.getProject(".side_generation");
+		tmpProject.delete(true, null);
 
 		Collection<IFile> result = new ArrayList<IFile>();
-		for (Object o : chain.getGeneratedFiles())
-			if (o instanceof IFile)
+		for (Object o : chain.getGeneratedFiles()){
+			if (o instanceof IFile){
 				result.add((IFile) o);
-
+			}
+		}
+		System.out.println("result: " + result.toString());
 		return result;
 	}
 
 	public void filter(IFile file) {
+
+		System.out.println("filter file: " + file.toString());
+
 		BufferedReader br = null;
 		PrintWriter pw = null;
 		try {
