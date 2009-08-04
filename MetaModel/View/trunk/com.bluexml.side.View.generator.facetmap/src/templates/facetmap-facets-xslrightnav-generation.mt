@@ -82,23 +82,58 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
                 </xsl:with-param>
             </xsl:apply-templates>
             <%if (paging.paginationStyle != "none"){%>
-				<%morePagingFacet()%>
+            	<%if (facetDisplayType == "list") {%>
+					<%morePagingFacet()%>
+				<%}%>
 			<%}%>     
         </ul>
     </xsl:template>
 
     <xsl:template match="s" mode="subselection">
-        <xsl:param name="title"/>
-        <li class="facet">
-        	<%if (paging.paginationStyle != "none"){%>
-				<%morePagingFacetDisplay()%>
-			<%}else{%>
-				<xsl:attribute name="style"/>
-			<%}%>
-			<a href="{$server}/{$app2}/{$pre_reference_url}{@ref}"
-                onclick="show_selection('{$server}/{$app}/{$pre_reference_url}{@ref}')">
-                <xsl:value-of select="@title"/>(<xsl:value-of select="@resultcount"/>)
-            </a>
-        </li>
+    	<%if (facetDisplayType == "list") {%>
+	        <xsl:param name="title"/>
+	        <li class="facet">
+	        	<%if (paging.paginationStyle != "none"){%>
+					<%morePagingFacetDisplay()%>
+				<%}else{%>
+					<xsl:attribute name="style"/>
+				<%}%>
+				<a href="{$server}/{$app2}/{$pre_reference_url}{@ref}"
+	                onclick="show_selection('{$server}/{$app}/{$pre_reference_url}{@ref}')">
+	                <xsl:value-of select="@title"/>(<xsl:value-of select="@resultcount"/>)
+	            </a>
+	        </li>
+        <%}%>
+        <%if (facetDisplayType == "cloud"){%>
+              <a href="{$server}/{$app2}/{$pre_reference_url}{@ref}"
+	                onclick="show_selection('{$server}/{$app}/{$pre_reference_url}{@ref}')">
+	                <xsl:value-of select="@title"/>(<xsl:value-of select="@resultcount"/>)
+	          </a>
+            <xsl:text>  </xsl:text>
+        <%}%>
+        <%if (facetDisplayType == "improvedCloud"){%>
+        	
+            <span>
+              <xsl:variable name="fontsize" select="@resultcount div //selection/results/@count * count(../s)" />
+              	<xsl:attribute name="style">
+					<xsl:choose>
+						<xsl:when test="$fontsize &gt; 2.5">
+							font-size:2.5em;
+						</xsl:when>
+						<xsl:when test="$fontsize &lt; 0.7">
+							font-size:0.7em;
+						</xsl:when>
+						<xsl:otherwise>
+							font-size: 1em;
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:attribute>
+              <a href="{$server}/{$app2}/{$pre_reference_url}{@ref}"
+	                onclick="show_selection('{$server}/{$app}/{$pre_reference_url}{@ref}')">
+	                <xsl:value-of select="@title"/>(<xsl:value-of select="@resultcount"/>)
+              </a>
+            </span>
+            <xsl:text>  </xsl:text>
+        <%}%>
     </xsl:template>
 </xsl:transform>
