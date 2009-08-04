@@ -609,6 +609,8 @@ public class ApplicationDialog extends Dialog {
 				t.setChecked(true);
 			}
 		}
+		// Ugly but avoid modification made pop up.
+		saveData();
 	}
 
 	private void refreshParents(TreeItem item, TreeViewer tv) {
