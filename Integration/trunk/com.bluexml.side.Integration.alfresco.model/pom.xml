@@ -101,9 +101,9 @@
 		<dependency>
 			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-repository</artifactId>
-			<version>3.0Stable</version>
+			<version>3.2</version>
 			<scope>provided</scope>
-			<classifier>labs</classifier>
+			<classifier>community</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>

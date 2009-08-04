@@ -1,7 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-  <name>com.bluexml.side.Integration.alfresco.model</name>
-  <comment>Test AMP project</comment>
-  <projects/>
-  <buildSpec/>
-  <natures/>
+	<name>com.bluexml.side.Integration.alfresco.model</name>
+	<comment>Test AMP project</comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.maven.ide.eclipse.maven2Builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.maven.ide.eclipse.maven2Nature</nature>
+	</natures>
 </projectDescription>
