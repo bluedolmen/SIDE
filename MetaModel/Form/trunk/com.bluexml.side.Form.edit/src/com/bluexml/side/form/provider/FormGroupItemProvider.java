@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.AddCommand;
+import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -48,11 +49,11 @@ import com.bluexml.side.form.common.utils.InternalModification;
  */
 public class FormGroupItemProvider
 	extends FormElementItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
 		IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -102,7 +103,7 @@ public class FormGroupItemProvider
 				 null));
 	}
 
-	
+
 
 	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
@@ -190,7 +191,7 @@ public class FormGroupItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-		
+
 		/*
 		newChildDescriptors.add
 			(createChildParameter
@@ -334,12 +335,15 @@ public class FormGroupItemProvider
 		if (InternalModification.getMoveToDisabled()) {
 			for (Object o : collection) {
 				if (o instanceof FormGroup) {
-					if (!(o instanceof FormAspect)) {
-						cmd.append(getMoveCommandForFormGroup(domain, owner, feature, (FormGroup)o));
-					} else {
-						FormGroup fg = (FormGroup) EcoreUtil.copy((FormGroup)o);
-						Command createCmd = AddCommand.create(domain, FormDiagramUtils.getParentFormClass((FormElement)owner), FormPackage.eINSTANCE.getFormGroup_Disabled(), fg);
-						cmd.append(createCmd);
+					FormGroup fg = (FormGroup) o;
+					if (fg.getChildren().size() > 0) {
+						if (!(o instanceof FormAspect)) {
+							cmd.append(getMoveCommandForFormGroup(domain, owner, feature, fg));
+						} else {
+							FormGroup fgCopy = (FormGroup) EcoreUtil.copy(fg);
+							Command createCmd = AddCommand.create(domain, FormDiagramUtils.getParentFormClass((FormElement)owner), FormPackage.eINSTANCE.getFormGroup_Disabled(), fgCopy);
+							cmd.append(createCmd);
+						}
 					}
 				} else if (o instanceof Field & !(o instanceof VirtualField)) {
 					Field f = (Field) o;
@@ -347,14 +351,14 @@ public class FormGroupItemProvider
 					Command createCmd = AddCommand.create(domain, FormDiagramUtils.getParentFormClass((FormElement)owner), FormPackage.eINSTANCE.getFormGroup_Disabled(), fcpy);
 					cmd.append(createCmd);
 				} else {
-					
+
 				}
 			}
 		}
 		cmd.append(super.createRemoveCommand(domain, owner, feature, collection));
 		return cmd;
 	}
-	
+
 	protected Command getMoveCommandForFormGroup(EditingDomain domain, EObject owner, EReference feature, FormGroup fg) {
 		CompoundCommand cmd = new CompoundCommand();
 		for (FormElement fe : fg.getChildren()) {
@@ -365,9 +369,8 @@ public class FormGroupItemProvider
 				Field fcpy = (Field) EcoreUtil.copy(f);
 				Command createCmd = AddCommand.create(domain, FormDiagramUtils.getParentFormClass((FormElement)owner), FormPackage.eINSTANCE.getFormGroup_Disabled(), fcpy);
 				cmd.append(createCmd);
-			} 
+			}
 		}
-		
 		return cmd;
 	}
 }
