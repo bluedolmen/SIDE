@@ -205,7 +205,7 @@ public class ApplicationUtil {
 		try {
 			loadedModel = EResourceUtils.openModel(fullPath, null, rs);
 		} catch (IOException e) {
-			IOException ioe = new IOException(System.getProperty("line.separator") + "Error with file " + file.getName() + " (check that it's a correct model file)");
+			IOException ioe = new IOException(System.getProperty("line.separator") + "Error with file " + file.getName() + " (check that it's a correct model file) ["+e.getMessage()+"]");
 			ioe.setStackTrace(e.getStackTrace());
 			throw ioe;
 		}
