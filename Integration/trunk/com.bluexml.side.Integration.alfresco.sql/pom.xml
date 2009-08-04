@@ -21,7 +21,7 @@
 	<groupId>com.bluexml.side.Integration.alfresco</groupId>
 	<artifactId>com.bluexml.side.Integration.alfresco.sql</artifactId>
 	<packaging>amp</packaging>
-	<name>Maven Alfresco AMP Packaging Sample</name>
+	<name>BlueXML S-IDE sql extension</name>
 	<!-- An Alfresco version number must be of the form 1.2.3.4. Using 1.0-SNAPSHOT as the AMP version 
 	     will create an exception. See http://wiki.alfresco.com/wiki/Developing_an_Alfresco_Module:
 	
@@ -30,8 +30,8 @@
   In order to be able to use Maven snapshots we cannot use the <version/> below as the AMP module
   version. Instead we use the buildnumber-maven-plugin. This requires a scm connection.
 	 -->
-	<version>1.0.2</version>
-	<description>BlueXML S-IDE sql extension</description>
+	<version>1.0.3</version>
+	<description>This module provides a replicate relational database that enables users to perform SQL queries with joins</description>
 	<repositories>
 		<repository>
 			<id>releases</id>
@@ -58,6 +58,8 @@
 			jetty run deployment, does not impact AMP behavior which is typically environment independent
 		-->
 		<env>local</env>
+		<config.target.path>alfresco/module/com_bluexml_side_Integration_alfresco_sql</config.target.path>
+		
 		<!-- Webapp used to test/develop locally the AMP -->
 		<webapp.name>com.bluexml.side.Integration.alfresco.sql-webapp</webapp.name>
 		<!-- 
@@ -93,21 +95,21 @@
 		<dependency>
 			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-repository</artifactId>
-			<version>3.0Stable</version>
+			<version>3.2</version>
 			<scope>provided</scope>
-			<classifier>labs</classifier>
+			<classifier>community</classifier>
 		</dependency>
 		<dependency>
 		  <groupId>org.alfresco</groupId>
 		  <artifactId>alfresco-webscript-framework</artifactId>
-		  <version>3.0Stable</version>
-		  <classifier>labs</classifier>
+		  <version>3.2</version>
+		  <classifier>community</classifier>
 		</dependency>
 		<dependency>
 		  <groupId>org.alfresco</groupId>
 		  <artifactId>alfresco-core</artifactId>
-		  <version>3.0Stable</version>
-		  <classifier>labs</classifier>
+		  <version>3.2</version>
+		  <classifier>community</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -225,7 +227,7 @@
 			<resource>
 				<filtering>true</filtering>
 				<directory>src/main/config</directory>
-				<targetPath>alfresco/module/com_bluexml_side_Integration_alfresco_sql</targetPath>
+				<targetPath>${config.target.path}</targetPath>
 				<excludes>
 					<exclude>**README-*</exclude>
 				</excludes>
@@ -373,7 +375,7 @@
 						<includes>
 							<include>module.properties</include>
 						</includes>
-						<targetPath>alfresco/module/com_bluexml_side_Integration_alfresco_sql</targetPath>
+						<targetPath>${config.target.path}</targetPath>
 					</testResource>
 				</testResources>
 			</build>
