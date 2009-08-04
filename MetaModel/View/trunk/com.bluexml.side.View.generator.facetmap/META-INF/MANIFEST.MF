@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Facetmap generator Plug-in
 Bundle-SymbolicName: com.bluexml.side.View.generator.facetmap;singleton:=true
-Bundle-Version: 1.0.5.v7938-20090803
+Bundle-Version: 1.0.6.v7950-20090804
 Bundle-Activator: com.bluexml.side.view.generator.facetmap.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
