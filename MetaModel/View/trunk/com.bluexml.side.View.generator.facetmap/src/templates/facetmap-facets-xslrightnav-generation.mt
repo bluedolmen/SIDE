@@ -41,11 +41,11 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
         <xsl:apply-templates select="superset"/>
         <div class="facets" id="facets">
 	        <div class="facets-title">
-	            <div style="display: inline; align: left;">Critères</div>
+	            <div style="display: inline; align: left;">Criteres</div>
 		        <div style="display: inline; align: right;">
 				    <input type="button" name="config_facet" id="config_facet" value="Configurer"
 				        onclick="setup()"/>
-				    <input type="button" name="update_facets" id="update_facets" value="Mise à jour" 
+				    <input type="button" name="update_facets" id="update_facets" value="Mise ï¿½ jour" 
 		                    onclick="update_facets()"/>
 				</div>
 	        </div>
@@ -112,7 +112,6 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
             <xsl:text>  </xsl:text>
         <%}%>
         <%if (facetDisplayType == "improvedCloud"){%>
-        	
             <span>
               <xsl:variable name="fontsize" select="@resultcount div //selection/results/@count * count(../s)" />
               	<xsl:attribute name="style">
