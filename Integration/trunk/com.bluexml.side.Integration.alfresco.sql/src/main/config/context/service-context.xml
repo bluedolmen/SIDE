@@ -31,7 +31,7 @@
     <!-- ======================= -->
  
 	<bean id="synchronisationProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:alfresco/module/com_bluexml_side_Integration_alfresco_sql/synchronisation.properties"/>
+        <property name="location" value="classpath:${config.target.path}/synchronisation.properties"/>
         <property name="ignoreUnresolvablePlaceholders" value="true" />
     </bean>
 	 
@@ -264,8 +264,7 @@
     <!-- Webscript definition    -->
     <!-- ======================= -->
 	 
-	 <bean id="webscript.extension.com.bluexml.side.sql.request.get" class="com.bluexml.side.Integration.alfresco.sql.webscript.SQLSearchServiceWebscript" 
-	    init-method="init" parent="webscript">
+	 <bean id="webscript.extension.com.bluexml.side.sql.request.get" class="com.bluexml.side.Integration.alfresco.sql.webscript.SQLSearchServiceWebscript" parent="webscript">
 	    <property name="SQLSearchService" ref="SQLSearchService" />
 	</bean>
 

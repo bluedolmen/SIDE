@@ -2,7 +2,7 @@
 <webscript>
     <shortname>SQL Search Service</shortname>
     <url>/sql/search</url>
-    <format default="xml">any</format>
+    <format default="xml"/>
     <authentication>user</authentication>
     <transaction>none</transaction>
 </webscript>
