@@ -1,7 +1,9 @@
 package com.bluexml.side.util.generator.documentation;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 
@@ -13,6 +15,15 @@ import com.bluexml.side.util.libs.IFileHelper;
 public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 
 	public static String MMUri;
+	protected List<String> templates = new ArrayList<String>();
+
+	public DocumentationGenerator() {
+		// Static templates
+		templates.add("/com.bluexml.side.Util.generator.documentation/src/templates/manifest.mt"); //$NON-NLS-1$
+		templates.add("/com.bluexml.side.Util.generator.documentation/src/templates/meta.mt"); //$NON-NLS-1$
+		templates.add("/com.bluexml.side.Util.generator.documentation/src/templates/mimetype.mt"); //$NON-NLS-1$
+		templates.add("/com.bluexml.side.Util.generator.documentation/src/templates/styles.mt"); //$NON-NLS-1$
+	}
 
 	public Collection<IFile> complete() throws Exception {
 		String target = IFileHelper.getSystemFolderPath(getTargetPath()+File.separator+getTechVersion())+File.separator;
@@ -21,7 +32,7 @@ public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 		FileHelper.copyFiles(new File(source), new File(target), true);
 
 		for (IFile f : generatedFiles) {
-			addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());
+			addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());  //$NON-NLS-1$//$NON-NLS-2$
 		}
 
 		return generatedFiles;
