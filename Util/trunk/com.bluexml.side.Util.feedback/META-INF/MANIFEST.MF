@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Feedback Plug-in
 Bundle-SymbolicName: com.bluexml.side.Util.feedback;singleton:=true
-Bundle-Version: 1.0.9.v7987-20090805
+Bundle-Version: 1.0.10.v7998-20090805
 Bundle-Activator: com.bluexml.side.util.feedback.FeedbackActivator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
