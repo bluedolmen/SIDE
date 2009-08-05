@@ -1,70 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-  <feature url="features/com.bluexml.side.Application.feature_1.0.15.v7169-20090701.jar" id="com.bluexml.side.Application.feature" version="1.0.15.v7169-20090701">
-    <category name="S-IDE Application" />
-  </feature>
-  <feature url="features/com.bluexml.side.Class.generator.alfresco.feature_1.0.17.v7169-20090701.jar" id="com.bluexml.side.Class.generator.alfresco.feature" version="1.0.17.v7169-20090701">
-    <category name="S-IDE Class" />
-  </feature>
-  <feature url="features/com.bluexml.side.Class.generator.facetmap.feature_1.0.1.v7169-20090701.jar" id="com.bluexml.side.Class.generator.facetmap.feature" version="1.0.1.v7169-20090701">
-    <category name="S-IDE Class" />
-  </feature>
-  <feature url="features/com.bluexml.side.Class.generator.report.feature_1.0.1.v7169-20090701.jar" id="com.bluexml.side.Class.generator.report.feature" version="1.0.1.v7169-20090701">
-    <category name="S-IDE Class" />
-  </feature>
-  <feature url="features/com.bluexml.side.Class.modeler.feature_1.0.13.jar" id="com.bluexml.side.Class.modeler.feature" version="1.0.13">
-    <category name="S-IDE Class" />
-  </feature>
-  <feature url="features/com.bluexml.side.Common.feature_1.0.12.jar" id="com.bluexml.side.Common.feature" version="1.0.12">
-    <category name="S-IDE Common" />
-  </feature>
-  <category-def name="S-IDE Other" label="S-IDE Other" />
-  <category-def name="S-IDE Application" label="S-IDE Application" />
-  <category-def name="S-IDE Class" label="S-IDE Class" />
-  <category-def name="S-IDE Form" label="S-IDE Form" />
-  <category-def name="S-IDE Workflow" label="S-IDE Workflow" />
-  <category-def name="S-IDE Requirements" label="S-IDE Requirements" />
-  <category-def name="S-IDE FacetMap" label="S-IDE FacetMap" />
-  <category-def name="S-IDE View" label="S-IDE View" />
-  <category-def name="S-IDE Portal" label="S-IDE Portal" />
-  <category-def name="S-IDE Common" label="S-IDE Common" />
-  <category-def name="S-IDE Util" label="S-IDE Util" />
-  <category-def name="S-IDE Deployer" label="S-IDE Deployer" />
-  <feature url="features/com.bluexml.side.Form.feature_1.0.13.jar" id="com.bluexml.side.Form.feature" version="1.0.13">
-    <category name="S-IDE Form" />
-  </feature>
-  <feature url="features/com.bluexml.side.Util.feature_1.0.13.jar" id="com.bluexml.side.Util.feature" version="1.0.13">
-    <category name="S-IDE Util" />
-  </feature>
-  <feature url="features/com.bluexml.side.Workflow.generator.alfresco.feature_1.0.15.v7134-20090630.jar" id="com.bluexml.side.Workflow.generator.alfresco.feature" version="1.0.15.v7134-20090630">
-    <category name="S-IDE Workflow" />
-  </feature>
-  <feature url="features/com.bluexml.side.Workflow.modeler.feature_1.0.13.jar" id="com.bluexml.side.Workflow.modeler.feature" version="1.0.13">
-    <category name="S-IDE Workflow" />
-  </feature>
-  <feature url="features/com.bluexml.side.Deployer.alfresco.feature_1.0.1.v7169-20090701.jar" id="com.bluexml.side.Deployer.alfresco.feature" version="1.0.1.v7169-20090701">
-    <category name="S-IDE Deployer" />
-  </feature>
-  <feature url="features/com.bluexml.side.Deployer.facetMap.feature_1.0.0.jar" id="com.bluexml.side.Deployer.facetMap.feature" version="1.0.0">
-    <category name="S-IDE Deployer" />
-  </feature>
-  <feature url="features/com.bluexml.side.Deployer.report.feature_1.0.0.jar" id="com.bluexml.side.Deployer.report.feature" version="1.0.0">
-    <category name="S-IDE Deployer" />
-  </feature>
-  <feature url="features/com.bluexml.side.Deployer.xforms.feature_1.0.0.jar" id="com.bluexml.side.Deployer.xforms.feature" version="1.0.0">
-    <category name="S-IDE Deployer" />
-  </feature>
-  <feature url="features/com.bluexml.side.Portal.modeler.feature_1.0.13.v7134-20090630.jar" id="com.bluexml.side.Portal.modeler.feature" version="1.0.13.v7134-20090630">
-    <category name="S-IDE Portal" />
-  </feature>
-  <feature url="features/com.bluexml.side.View.feature_1.0.3.v7134-20090630.jar" id="com.bluexml.side.View.feature" version="1.0.3.v7134-20090630">
-    <category name="S-IDE View" />
-  </feature>
-  <feature url="features/com.bluexml.side.View.generator.alfresco.feature_1.0.1.v7119-20090629.jar" id="com.bluexml.side.View.generator.alfresco.feature" version="1.0.1.v7119-20090629">
-    <category name="S-IDE View" />
-  </feature>
-  <feature url="features/com.bluexml.side.View.generator.facetmap.feature_1.0.0.jar" id="com.bluexml.side.View.generator.facetmap.feature" version="1.0.0">
-    <category name="S-IDE FacetMap" />
-  </feature>
+   <feature url="features/com.bluexml.side.Application.feature_1.0.15.v7169-20090701.jar" id="com.bluexml.side.Application.feature" version="1.0.15.v7169-20090701">
+      <category name="S-IDE Application"/>
+   </feature>
+   <feature url="features/com.bluexml.side.Class.generator.alfresco.feature_1.0.17.v7169-20090701.jar" id="com.bluexml.side.Class.generator.alfresco.feature" version="1.0.17.v7169-20090701">
+      <category name="S-IDE Class"/>
+   </feature>
+   <feature url="features/com.bluexml.side.Class.generator.facetmap.feature_1.0.1.v7169-20090701.jar" id="com.bluexml.side.Class.generator.facetmap.feature" version="1.0.1.v7169-20090701">
+      <category name="S-IDE Class"/>
+   </feature>
+   <feature url="features/com.bluexml.side.Class.generator.report.feature_1.0.1.v7169-20090701.jar" id="com.bluexml.side.Class.generator.report.feature" version="1.0.1.v7169-20090701">
+      <category name="S-IDE Class"/>
+   </feature>
+   <feature url="features/com.bluexml.side.Class.modeler.feature_1.0.13.jar" id="com.bluexml.side.Class.modeler.feature" version="1.0.13">
+      <category name="S-IDE Class"/>
+   </feature>
+   <feature url="features/com.bluexml.side.Common.feature_1.0.12.jar" id="com.bluexml.side.Common.feature" version="1.0.12">
+      <category name="S-IDE Common"/>
+   </feature>
+   <feature url="features/com.bluexml.side.Form.feature_1.0.13.jar" id="com.bluexml.side.Form.feature" version="1.0.13">
+      <category name="S-IDE Form"/>
+   </feature>
+   <feature url="features/com.bluexml.side.Util.feature_1.0.13.jar" id="com.bluexml.side.Util.feature" version="1.0.13">
+      <category name="S-IDE Util"/>
+   </feature>
+   <feature url="features/com.bluexml.side.Workflow.generator.alfresco.feature_1.0.15.v7134-20090630.jar" id="com.bluexml.side.Workflow.generator.alfresco.feature" version="1.0.15.v7134-20090630">
+      <category name="S-IDE Workflow"/>
+   </feature>
+   <feature url="features/com.bluexml.side.Workflow.modeler.feature_1.0.13.jar" id="com.bluexml.side.Workflow.modeler.feature" version="1.0.13">
+      <category name="S-IDE Workflow"/>
+   </feature>
+   <feature url="features/com.bluexml.side.Deployer.alfresco.feature_1.0.1.v7169-20090701.jar" id="com.bluexml.side.Deployer.alfresco.feature" version="1.0.1.v7169-20090701">
+      <category name="S-IDE Deployer"/>
+   </feature>
+   <feature url="features/com.bluexml.side.Deployer.facetMap.feature_1.0.0.jar" id="com.bluexml.side.Deployer.facetMap.feature" version="1.0.0">
+      <category name="S-IDE Deployer"/>
+   </feature>
+   <feature url="features/com.bluexml.side.Deployer.report.feature_1.0.0.jar" id="com.bluexml.side.Deployer.report.feature" version="1.0.0">
+      <category name="S-IDE Deployer"/>
+   </feature>
+   <feature url="features/com.bluexml.side.Deployer.xforms.feature_1.0.0.jar" id="com.bluexml.side.Deployer.xforms.feature" version="1.0.0">
+      <category name="S-IDE Deployer"/>
+   </feature>
+   <feature url="features/com.bluexml.side.Portal.modeler.feature_1.0.13.v7134-20090630.jar" id="com.bluexml.side.Portal.modeler.feature" version="1.0.13.v7134-20090630">
+      <category name="S-IDE Portal"/>
+   </feature>
+   <feature url="features/com.bluexml.side.View.feature_1.0.3.v7134-20090630.jar" id="com.bluexml.side.View.feature" version="1.0.3.v7134-20090630">
+      <category name="S-IDE View"/>
+   </feature>
+   <feature url="features/com.bluexml.side.View.generator.alfresco.feature_1.0.1.v7119-20090629.jar" id="com.bluexml.side.View.generator.alfresco.feature" version="1.0.1.v7119-20090629">
+      <category name="S-IDE View"/>
+   </feature>
+   <feature url="features/com.bluexml.side.View.generator.facetmap.feature_1.0.0.jar" id="com.bluexml.side.View.generator.facetmap.feature" version="1.0.0">
+      <category name="S-IDE View"/>
+   </feature>
+   <category-def name="S-IDE Other" label="S-IDE Other"/>
+   <category-def name="S-IDE Application" label="S-IDE Application"/>
+   <category-def name="S-IDE Class" label="S-IDE Class"/>
+   <category-def name="S-IDE Form" label="S-IDE Form"/>
+   <category-def name="S-IDE Workflow" label="S-IDE Workflow"/>
+   <category-def name="S-IDE Requirements" label="S-IDE Requirements"/>
+   <category-def name="S-IDE View" label="S-IDE View"/>
+   <category-def name="S-IDE Portal" label="S-IDE Portal"/>
+   <category-def name="S-IDE Common" label="S-IDE Common"/>
+   <category-def name="S-IDE Util" label="S-IDE Util"/>
+   <category-def name="S-IDE Deployer" label="S-IDE Deployer"/>
 </site>
-
