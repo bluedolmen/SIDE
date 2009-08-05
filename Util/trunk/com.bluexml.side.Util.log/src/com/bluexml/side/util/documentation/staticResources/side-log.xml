@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='stylesheet/log2html.xsl'?>
+<logRoot>
+  <null/>
+  <SIDELog name="S-IDE Alfresco Workflow Generator"
+    id="com.bluexml.side.Workflow.generator.alfresco" date="2009-07-28 12:55:07.470 CEST"
+    type="GENERATION">
+    <logEntry type="SERVICE">
+      <date>2009-07-28 12:55:07.732 CEST</date>
+      <name>Workflow Console</name>
+      <description>The Workflow Console is an administrator/developer tool for interacting with
+        workflows.</description>
+      <uri>http://localhot:8080/alfresco//faces/jsp/admin/workflow-console.jsp</uri>
+    </logEntry>
+
+    <logEntry type="GENERATED_FILE">
+      <date>2009-07-28 12:55:07.757 CEST</date>
+      <name>module.SIDE_WorkflowExtension_MyProcess.amp created.</name>
+      <description>module.SIDE_WorkflowExtension_MyProcess.amp created in
+        /testWorkflow/out/alfresco_3.x/module.SIDE_WorkflowExtension_MyProcess.amp</description>
+      <uri>file:/Users/bluexml/Documents/workspaces/runtime-New_configuration/testWorkflow/out/alfresco_3.x/module.SIDE_WorkflowExtension_MyProcess.amp</uri>
+    </logEntry>
+    <logEntry type="GENERATED_FILE">
+
+      <date>2009-07-28 12:55:07.757 CEST</date>
+      <name>Files Generated</name>
+      <description>/Users/bluexml/Documents/workspaces/runtime-New_configuration/testWorkflow/out/generator_com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator/MyProcess/config/alfresco/module/SIDE_WorkflowExtension_MyProcess/module-context.xml</description>
+      <uri>file:/Users/bluexml/Documents/workspaces/runtime-New_configuration/testWorkflow/out/generator_com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator/MyProcess/config/alfresco/module/SIDE_WorkflowExtension_MyProcess/module-context.xml</uri>
+    </logEntry>
+    <logEntry type="GENERATED_FILE">
+      <date>2009-07-28 12:55:07.757 CEST</date>
+
+      <name>Files Generated</name>
+      <description>/Users/bluexml/Documents/workspaces/runtime-New_configuration/testWorkflow/out/generator_com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator/MyProcess/config/alfresco/module/SIDE_WorkflowExtension_MyProcess/bpm/processdefinition.xml</description>
+      <uri>file:/Users/bluexml/Documents/workspaces/runtime-New_configuration/testWorkflow/out/generator_com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator/MyProcess/config/alfresco/module/SIDE_WorkflowExtension_MyProcess/bpm/processdefinition.xml</uri>
+    </logEntry>
+    <logEntry type="GENERATED_FILE">
+      <date>2009-07-28 12:55:07.757 CEST</date>
+      <name>Files Generated</name>
+
+      <description>/Users/bluexml/Documents/workspaces/runtime-New_configuration/testWorkflow/out/generator_com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator/MyProcess/config/alfresco/module/SIDE_WorkflowExtension_MyProcess/bpm/model.xml</description>
+      <uri>file:/Users/bluexml/Documents/workspaces/runtime-New_configuration/testWorkflow/out/generator_com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator/MyProcess/config/alfresco/module/SIDE_WorkflowExtension_MyProcess/bpm/model.xml</uri>
+    </logEntry>
+    <logEntry type="GENERATED_FILE">
+      <date>2009-07-28 12:55:07.757 CEST</date>
+      <name>Files Generated</name>
+      <description>/Users/bluexml/Documents/workspaces/runtime-New_configuration/testWorkflow/out/generator_com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator/MyProcess/config/alfresco/module/SIDE_WorkflowExtension_MyProcess/bpm/messages.properties</description>
+
+      <uri>file:/Users/bluexml/Documents/workspaces/runtime-New_configuration/testWorkflow/out/generator_com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator/MyProcess/config/alfresco/module/SIDE_WorkflowExtension_MyProcess/bpm/messages.properties</uri>
+    </logEntry>
+    <logEntry type="GENERATED_FILE">
+      <date>2009-07-28 12:55:07.757 CEST</date>
+      <name>Files Generated</name>
+      <description>/Users/bluexml/Documents/workspaces/runtime-New_configuration/testWorkflow/out/generator_com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator/MyProcess/config/alfresco/module/SIDE_WorkflowExtension_MyProcess/web-client-config-custom.xml</description>
+      <uri>file:/Users/bluexml/Documents/workspaces/runtime-New_configuration/testWorkflow/out/generator_com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator/MyProcess/config/alfresco/module/SIDE_WorkflowExtension_MyProcess/web-client-config-custom.xml</uri>
+
+    </logEntry>
+    <logEntry type="GENERATED_FILE">
+      <date>2009-07-28 12:55:07.757 CEST</date>
+      <name>Files Generated</name>
+      <description>/Users/bluexml/Documents/workspaces/runtime-New_configuration/testWorkflow/out/alfresco_3.x/module.SIDE_WorkflowExtension_MyProcess.amp</description>
+      <uri>file:/Users/bluexml/Documents/workspaces/runtime-New_configuration/testWorkflow/out/alfresco_3.x/module.SIDE_WorkflowExtension_MyProcess.amp</uri>
+    </logEntry>
+
+    <metaModel>KSR600 Workflow</metaModel>
+    <techno>Alfresco-jBPM</techno>
+    <technoVersion>Alfresco3.x Labs and Entreprise</technoVersion>
+    <creator>S-IDE Alfresco Workflow Generator</creator>
+  </SIDELog>
+  <documentation/>
+</logRoot>

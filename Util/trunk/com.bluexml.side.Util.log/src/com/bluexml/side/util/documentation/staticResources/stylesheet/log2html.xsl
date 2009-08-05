@@ -63,7 +63,7 @@
                         generation informations. <br/>
                         <xsl:value-of select="count(//logEntry[@type='DEPLOYMENT_INFORMATION'])"/>
                         deployment informations. <br/>
-                        <xsl:value-of select="count(//logEntry[@type='SERVICE'])"/>
+                        <xsl:value-of select="count(//logEntry[@type='SERVICE' and //deployed/toDeploy[@id=@id]])"/>
                         service(s). <br/>
                         <xsl:value-of select="count(//logEntry[@type='GENERATED_FILE'])"/>
                         generated files logged. <br/>
