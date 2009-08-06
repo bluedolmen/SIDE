@@ -263,8 +263,7 @@
 	<!-- ======================= -->
     <!-- Webscript definition    -->
     <!-- ======================= -->
-	 
-	 <bean id="webscript.extension.com.bluexml.side.sql.request.get" class="com.bluexml.side.Integration.alfresco.sql.webscript.SQLSearchServiceWebscript" parent="webscript">
+	<bean id="webscript.extension.com.bluexml.side.sql.sqlquery.get" class="com.bluexml.side.Integration.alfresco.sql.webscript.SQLSearchServiceWebscript" parent="webscript">
 	    <property name="SQLSearchService" ref="SQLSearchService" />
 	</bean>
 
