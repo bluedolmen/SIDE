@@ -36,9 +36,9 @@ else
       exit -1
     else
       if [ $dest = "public" ]; then
-        scp -r $src_dir/$rev_build_src_nb/* root@www.bluexml.com:/data/www/virtuals/b/l/u/bluexml.com/www/html/static/update-site/SIDE/$dest/2.0
+        scp -i /home/stager/.ssh/id_rsa_gimli -r $src_dir/$rev_build_src_nb/* root@www.bluexml.com:/data/www/virtuals/b/l/u/bluexml.com/www/html/static/update-site/SIDE/$dest/2.0
       else
-        scp -r $src_dir/$rev_build_src_nb root@www.bluexml.com:/data/www/virtuals/b/l/u/bluexml.com/www/html/static/update-site/SIDE/$dest
+        scp -i /home/stager/.ssh/id_rsa_gimli -r $src_dir/$rev_build_src_nb root@www.bluexml.com:/data/www/virtuals/b/l/u/bluexml.com/www/html/static/update-site/SIDE/$dest
       fi
     fi
   else
