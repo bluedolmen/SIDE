@@ -1,8 +1,7 @@
 package com.bluexml.side.util.security.preferences;
 
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
-import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
 
 import com.bluexml.side.util.security.Activator;
@@ -19,18 +18,29 @@ public class SidePreferences {
 	}
 
 	public static void setKey(String value){
-		IEclipsePreferences root = Platform.getPreferencesService().getRootNode();
-		root.node(ConfigurationScope.SCOPE).node(qualifier).put(keyKey, value);
+		//IEclipsePreferences root = Platform.getPreferencesService().getRootNode();
+		//root.node(Location.CONFIGURATION_FILTER).node(qualifier).put(keyKey, value);
+		Preferences preferences = new ConfigurationScope().getNode(qualifier);
+		preferences.put(keyKey, value);
+		try {
+			preferences.flush();
+		} catch (BackingStoreException e) {
+			e.printStackTrace();
+		}
+		//Platform.getConfigurationLocation().CONFIGURATION_FILTER
+		//ConfigurationScope.SCOPE
 	}
 
 	public static String getKey(){
-		Preferences node = Platform.getPreferencesService().getRootNode().node(ConfigurationScope.SCOPE).node(qualifier);
-		return node.get(keyKey, Activator.KEY_DEFAULT);
+		//IEclipsePreferences root = Platform.getPreferencesService().getRootNode();
+		//return root.node(Location.CONFIGURATION_FILTER).node(qualifier).get(keyKey, Activator.KEY_DEFAULT);
+		Preferences preferences = new ConfigurationScope().getNode(qualifier);
+		return preferences.get(keyKey, Activator.KEY_DEFAULT);
 	}
 
 	public static void setDefaultKey() {
-		IEclipsePreferences root = Platform.getPreferencesService().getRootNode();
-		root.node(ConfigurationScope.SCOPE).node(qualifier).put(keyKey, Activator.KEY_DEFAULT);
+		//IEclipsePreferences root = Platform.getPreferencesService().getRootNode();
+		//root.node(ConfigurationScope.SCOPE).node(qualifier).put(keyKey, Activator.KEY_DEFAULT);
 	}
 
 

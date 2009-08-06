@@ -61,24 +61,24 @@ public class SideSettingsKeyPreferencesPage
 		//Label for title
 		lbl = new Label(entryTable,SWT.NONE);
 		lbl.setText("Licence Key :");
+				new Label(entryTable, SWT.NONE);
+		
+				//Input for the key
+				key = new Text(entryTable, SWT.BORDER);
+				{
+					GridData gridData = new GridData(SWT.LEFT, SWT.CENTER,true,false);
+					gridData.widthHint = 359;
+					key.setLayoutData(gridData);
+				}
+				key.setText(SidePreferences.getKey());
+				key.addModifyListener(new ModifyListener() {
+					public void modifyText(final ModifyEvent e) {
+						update();
+					}
+				});
 		
 		//Label for image validity
 		lblValidity = new Label(entryTable, SWT.NONE);
-
-
-		//Input for the key
-		key = new Text(entryTable, SWT.BORDER);
-		{
-			GridData gridData = new GridData(SWT.LEFT, SWT.CENTER,true,false,2,1);
-			gridData.widthHint = 359;
-			key.setLayoutData(gridData);
-		}
-		key.setText(SidePreferences.getKey());
-		key.addModifyListener(new ModifyListener() {
-			public void modifyText(final ModifyEvent e) {
-				update();
-			}
-		});
 
 		//Label for validation Date
 		validationDate = new Label(entryTable, SWT.NONE);
@@ -89,6 +89,7 @@ public class SideSettingsKeyPreferencesPage
 		label.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER,false,false,2,1));
 		label.setText(listComponentText);
 		createTable(entryTable);
+		new Label(entryTable, SWT.NONE);
 		
 		update();
 		return entryTable;
