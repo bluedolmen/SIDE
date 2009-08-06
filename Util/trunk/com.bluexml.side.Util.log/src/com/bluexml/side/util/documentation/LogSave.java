@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
 import java.util.List;
 
 import javax.xml.transform.Transformer;
@@ -17,7 +18,6 @@ import javax.xml.transform.stream.StreamSource;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
-import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.ProcessingInstruction;
@@ -200,35 +200,26 @@ public class LogSave {
 			throws IOException, TransformerException {
 		String folderPath = folderDest.getLocation().toOSString()
 				+ System.getProperty("file.separator");
-		String folderSource = "staticResources"
-				+ System.getProperty("file.separator");
+		String folderSource = "src/com/bluexml/side/util/documentation/staticResources/";
 		// We use xsl transformation and ouput html file into log directory
 		// We move all files to the log directory
 		moveFile(folderPath + "stylesheet"
 				+ System.getProperty("file.separator"), "log2html.xsl",
-				folderSource + "stylesheet"
-						+ System.getProperty("file.separator"));
+				folderSource + "stylesheet");
 		moveFile(folderPath + "css" + System.getProperty("file.separator"),
-				"style.css", folderSource + "css"
-						+ System.getProperty("file.separator"));
+				"style.css", folderSource + "css");
 		moveFile(folderPath + "img" + System.getProperty("file.separator"),
-				"background.png", folderSource + "img"
-						+ System.getProperty("file.separator"));
+				"background.png", folderSource + "img");
 		moveFile(folderPath + "img" + System.getProperty("file.separator"),
-				"link.png", folderSource + "img"
-						+ System.getProperty("file.separator"));
+				"link.png", folderSource + "img");
 		moveFile(folderPath + "img" + System.getProperty("file.separator"),
-				"collapse.png", folderSource + "img"
-						+ System.getProperty("file.separator"));
+				"collapse.png", folderSource + "img");
 		moveFile(folderPath + "img" + System.getProperty("file.separator"),
-				"expand.png", folderSource + "img"
-						+ System.getProperty("file.separator"));
+				"expand.png", folderSource + "img");
 		moveFile(folderPath + "js" + System.getProperty("file.separator"),
-				"jquery.js", folderSource + "js"
-						+ System.getProperty("file.separator"));
+				"jquery.js", folderSource + "js");
 		moveFile(folderPath + "js" + System.getProperty("file.separator"),
-				"log.js", folderSource + "js"
-						+ System.getProperty("file.separator"));
+				"log.js", folderSource + "js");
 		// makeHtml(doc, folderPath, "log2html.xsl", "log.html");
 	}
 
@@ -271,14 +262,14 @@ public class LogSave {
 	 */
 	private static void moveFile(String folderDest, String fileName,
 			String folderSource) throws IOException  {
-		InputStream in = LogSave.class.getResourceAsStream(folderSource
-				+ fileName);
-
+		/*InputStream in = LogSave.class.getResourceAsStream(folderSource
+				+ fileName);*/
+		InputStream in = LogSave.class.getClassLoader().getResourceAsStream(folderSource+"/"+fileName);
 		File dest = new File(folderDest);
 		if (!dest.exists()) {
 			dest.mkdirs();
 		}
-
+		
 		File file = new File(folderDest + fileName);
 		FileOutputStream fos;
 		try {
