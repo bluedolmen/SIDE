@@ -30,7 +30,7 @@ import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.libs.zip.ZipManager;
 import com.bluexml.side.util.security.SecurityHelper;
-import com.bluexml.side.util.settings.SidePreferences;
+import com.bluexml.side.util.security.preferences.SidePreferences;
 import com.bluexml.side.view.generator.facetmap.utils.FacetmapConstants;
 
 /**

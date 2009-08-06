@@ -29,10 +29,10 @@ import org.jdom.output.XMLOutputter;
 
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.form.FormPackage;
-import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.dependencies.DependencesManager;
+import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.security.SecurityHelper;
-import com.bluexml.side.util.settings.SidePreferences;
+import com.bluexml.side.util.security.preferences.SidePreferences;
 
 public class FormGenerator extends AbstractGenerator {
 	public static final Namespace NAMESPACE_MAVENPOM = Namespace.getNamespace("pom", "http://maven.apache.org/POM/4.0.0");

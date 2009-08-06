@@ -30,7 +30,7 @@ import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 import com.bluexml.side.application.ui.action.utils.Generate;
-import com.swtdesigner.SWTResourceManager;
+import com.bluexml.side.util.security.preferences.SWTResourceManager;
 
 public class GeneratePopUp extends Dialog {
 

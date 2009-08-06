@@ -13,7 +13,6 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.Util.generator.acceleo,
  org.eclipse.core.resources,
  com.bluexml.side.Util.libs,
- com.bluexml.side.Util.settings,
  com.bluexml.side.Util.log,
  com.bluexml.side.View,
  com.bluexml.side.Util.dependencies;bundle-version="1.0.0"

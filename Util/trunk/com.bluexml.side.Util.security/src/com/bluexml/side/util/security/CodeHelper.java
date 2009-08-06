@@ -28,15 +28,26 @@ import java.util.HashMap;
  * 
  * @author <a href="mailto:pbertrand@bluexml.com">Pierre BERTRAND</a>
  */
-public class CodeReader implements SecurityConstants {
+public class CodeHelper implements SecurityConstants {
 	// This hashmap contains the values of the codes, the key is the
 	// denomination of the code and refers to its integer value
-	private static HashMap<String, Integer> codeTable = makeHashTable();
+	private static HashMap<String, Integer> stringCodeToCode = makestringCodeToCode();
+	private static HashMap<String, String> codeToName = makecodeToName();
+	private static HashMap<String, String> codeToIcon = makecodeToIcon();
+	
+	public static HashMap<String, String> getCodeToName() {
+		return codeToName;
+	}
 
+	public static HashMap<String, String> getCodeToIcon() {
+		return codeToIcon;
+	}
+	
+	
 	/**
 	 * Utility classes don't need to (and shouldn't) be instantiated.
 	 */
-	private CodeReader() {
+	private CodeHelper() {
 		// prevents instantiation
 	}
 
@@ -44,10 +55,10 @@ public class CodeReader implements SecurityConstants {
 	 * This function read the file which has all the codes and their matches and
 	 * fill an hashtable with them
 	 */
-	private static HashMap<String, Integer> makeHashTable() {
+	private static HashMap<String, Integer> makestringCodeToCode() {
 		HashMap<String, Integer> tableOfCode = new HashMap<String, Integer>();
 		InputStream ipsCODE = null;
-		ipsCODE = CodeReader.class.getResourceAsStream(FILE_NAME);
+		ipsCODE = CodeHelper.class.getResourceAsStream(FILE_NAME);
 		InputStreamReader ipsrCODE = new InputStreamReader(ipsCODE);
 		BufferedReader brCODE = new BufferedReader(ipsrCODE);
 		String ligneCODE;
@@ -61,6 +72,54 @@ public class CodeReader implements SecurityConstants {
 			e.printStackTrace();
 		}
 		return tableOfCode;
+	}
+	
+	/**
+	 * This function read the file which has all the codes and their matches and
+	 * fill an hashtable with them
+	 * It maps the code (integer) ant the name
+	 */
+	private static HashMap<String, String> makecodeToName() {
+		HashMap<String, String> tableCodeToName = new HashMap<String, String>();
+		InputStream ipsCODE = null;
+		ipsCODE = CodeHelper.class.getResourceAsStream(FILE_NAME);
+		InputStreamReader ipsrCODE = new InputStreamReader(ipsCODE);
+		BufferedReader brCODE = new BufferedReader(ipsrCODE);
+		String ligneCODE;
+		// Reading the file "codes" and filling the HashMap
+		try {
+			while ((ligneCODE = brCODE.readLine()) != null) {
+				String[] parsedLine = ligneCODE.split("\\"+CODE_SEPARATOR);
+				tableCodeToName.put(parsedLine[0], parsedLine[2]);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return tableCodeToName;
+	}
+	
+	/**
+	 * This function read the file which has all the codes and their matches and
+	 * fill an hashtable with them
+	 * It maps the code (integer) ant the icon
+	 */
+	private static HashMap<String, String> makecodeToIcon() {
+		HashMap<String, String> tableCodeToName = new HashMap<String, String>();
+		InputStream ipsCODE = null;
+		ipsCODE = CodeHelper.class.getResourceAsStream(FILE_NAME);
+		InputStreamReader ipsrCODE = new InputStreamReader(ipsCODE);
+		BufferedReader brCODE = new BufferedReader(ipsrCODE);
+		String ligneCODE;
+		// Reading the file "codes" and filling the HashMap
+		try {
+			while ((ligneCODE = brCODE.readLine()) != null) {
+				String[] parsedLine = ligneCODE.split("\\"+CODE_SEPARATOR);
+				tableCodeToName.put(parsedLine[0], parsedLine[3]);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return tableCodeToName;
 	}
 
 	/**
@@ -85,7 +144,7 @@ public class CodeReader implements SecurityConstants {
 	}
 	
 	public static Integer getCode(String code){
-		return codeTable.get(code);
+		return stringCodeToCode.get(code);
 	}
 	
 }

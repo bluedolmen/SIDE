@@ -10,13 +10,13 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            category="com.bluexml.side.settings.SideSettingsPreferencesPage"
+            category="com.bluexml.side.util.security.preferences.SideSettingsPreferencesPage"
             class="com.bluexml.side.util.feedback.ui.SideSettingsFeedbackPreferencesPage"
             id="com.bluexml.side.Util.feedback.preferences"
             name="Feedback">
       </page>
       <page
-            category="com.bluexml.side.settings.SideSettingsPreferencesPage"
+            category="com.bluexml.side.util.security.preferences.SideSettingsPreferencesPage"
             class="com.bluexml.side.util.feedback.ui.SideSettingFeedbackTermOfUsePage"
             id="com.bluexml.side.Util.feedback.termOfUse"
             name="Term Of Use">

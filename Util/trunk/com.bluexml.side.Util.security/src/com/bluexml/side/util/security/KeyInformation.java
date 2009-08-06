@@ -151,7 +151,7 @@ public class KeyInformation implements SecurityConstants {
 	 * @return True if the key has the code, False if it doesn't
 	 */
 	public Boolean hasCode(String code) {
-		Boolean result = ((codes & CodeReader.getCode(code)) != 0);
+		Boolean result = ((codes & CodeHelper.getCode(code)) != 0);
 		return result;
 	}
 
