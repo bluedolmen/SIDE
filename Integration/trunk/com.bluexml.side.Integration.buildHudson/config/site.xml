@@ -54,6 +54,15 @@
    <feature url="features/com.bluexml.side.View.generator.facetmap.feature_1.0.0.jar" id="com.bluexml.side.View.generator.facetmap.feature" version="1.0.0">
       <category name="S-IDE View"/>
    </feature>
+   <feature url="features/com.bluexml.side.Requirements.feature_1.0.19.v8013-20090806.jar" id="com.bluexml.side.Requirements.feature" version="1.0.19.v8013-20090806">
+      <category name="S-IDE Requirements"/>
+   </feature>
+   <feature url="features/com.bluexml.side.Deployer.documentation.feature_1.0.1.v7993-20090805.jar" id="com.bluexml.side.Deployer.documentation.feature" version="1.0.1.v7993-20090805">
+      <category name="S-IDE Deployer"/>
+   </feature>
+   <feature url="features/com.bluexml.side.Form.generator.xforms.feature_1.0.20.v8020-20090806.jar" id="com.bluexml.side.Form.generator.xforms.feature" version="1.0.20.v8020-20090806">
+      <category name="S-IDE Form"/>
+   </feature>
    <category-def name="S-IDE Other" label="S-IDE Other"/>
    <category-def name="S-IDE Application" label="S-IDE Application"/>
    <category-def name="S-IDE Class" label="S-IDE Class"/>
