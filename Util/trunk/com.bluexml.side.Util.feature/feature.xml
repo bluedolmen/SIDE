@@ -11,7 +11,6 @@
     <import plugin="org.eclipse.emf.ecore" />
     <import plugin="org.eclipse.emf.ecore.xmi" />
     <import plugin="org.eclipse.ui" />
-    <import plugin="com.bluexml.side.Util.settings" />
     <import plugin="fr.obeo.acceleo.chain" />
     <import plugin="fr.obeo.acceleo.gen" />
     <import plugin="com.bluexml.side.Util.generator" />

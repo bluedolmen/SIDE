@@ -12,7 +12,6 @@
     <import plugin="com.bluexml.side.Util.generator.acceleo" />
     <import plugin="org.eclipse.core.resources" />
     <import plugin="com.bluexml.side.Util.libs" />
-    <import plugin="com.bluexml.side.Util.settings" />
     <import plugin="com.bluexml.side.Util.log" />
     <import plugin="com.bluexml.side.View" />
   </requires>

@@ -21,7 +21,6 @@
     <import plugin="com.bluexml.side.Util.generator.alfresco" />
     <import plugin="com.bluexml.side.Util.metaModel.validate" version="1.0.1" match="greaterOrEqual" />
     <import plugin="com.bluexml.side.Util.security" />
-    <import plugin="com.bluexml.side.Util.settings" version="1.0.8" match="greaterOrEqual" />
   </requires>
   <plugin id="com.bluexml.side.Workflow.generator.alfresco" download-size="0" install-size="0" version="1.0.18.v8020-20090806" unpack="false" />
 </feature>
