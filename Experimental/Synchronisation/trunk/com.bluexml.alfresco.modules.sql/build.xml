@@ -5,7 +5,7 @@
 	<property file="config/module.properties"/>
 	
 	<property name="alfresco.sdk" value="/home/pajot-b/src/Alfresco_SDK/lib/server" />
-	<property name="tomcat.dir" value="/home/pajot-b/opt/alfresco3/tomcat" />
+	<property name="tomcat.dir" value="/home/pajot-b/opt/alfresco3.2/tomcat" />
 	
 	<property name="project.id" value="${module.id}"/>
     <property name="project.dir" value="."/>
