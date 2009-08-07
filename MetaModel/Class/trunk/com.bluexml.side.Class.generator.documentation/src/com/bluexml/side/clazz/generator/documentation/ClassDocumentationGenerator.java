@@ -1,6 +1,5 @@
 package com.bluexml.side.clazz.generator.documentation;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.bluexml.side.util.generator.documentation.DocumentationGenerator;
@@ -8,13 +7,12 @@ import com.bluexml.side.util.generator.documentation.DocumentationGenerator;
 public class ClassDocumentationGenerator extends DocumentationGenerator {
 
 	public ClassDocumentationGenerator() {
-		MMUri = "http://www.kerblue.org/class/1.0";
+		MMUri = "http://www.kerblue.org/class/1.0"; //$NON-NLS-1$
 	}
 
 	@Override
 	protected List<String> getTemplates() {
-		List<String> templates = new ArrayList<String>();
-		templates.add("/com.bluexml.side.Class.generator.documentation/src/templates/model2docBook.mt");
+		templates.add("/com.bluexml.side.Class.generator.documentation/src/templates/content.mt"); //$NON-NLS-1$
 		return templates;
 	}
 }

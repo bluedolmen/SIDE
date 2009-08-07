@@ -23,6 +23,7 @@ public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 		templates.add("/com.bluexml.side.Util.generator.documentation/src/templates/meta.mt"); //$NON-NLS-1$
 		templates.add("/com.bluexml.side.Util.generator.documentation/src/templates/mimetype.mt"); //$NON-NLS-1$
 		templates.add("/com.bluexml.side.Util.generator.documentation/src/templates/styles.mt"); //$NON-NLS-1$
+		templates.add("/com.bluexml.side.Util.generator.documentation/src/templates/settings.mt"); //$NON-NLS-1$
 	}
 
 	public Collection<IFile> complete() throws Exception {

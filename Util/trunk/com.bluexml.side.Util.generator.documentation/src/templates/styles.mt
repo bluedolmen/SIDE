@@ -5,7 +5,7 @@ metamodel /com.bluexml.side.Common/model/Common.ecore
 metamodel http://www.kerblue.org/common/1.0/
 --%>
 
-<%script type="common.Package" name="styles" file="styles.xml"%>
+<%script type="common.Package" name="styles" file="doc/styles.xml"%>
 <?xml version="1.0" encoding="UTF-8"?>
 <office:document-styles
 	xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"

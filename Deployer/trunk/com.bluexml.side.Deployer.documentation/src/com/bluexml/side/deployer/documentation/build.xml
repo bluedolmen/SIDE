@@ -1,0 +1,18 @@
+<project default="createODT_file">
+	<!-- =================================
+          target: createODT_file
+         ================================= -->
+	<target name="createODT_file">
+		<!-- Create configuration directory -->
+		<mkdir dir="${destDir}"/>
+		<mkdir dir="${sourceDir}${file.separator}doc${file.separator}Configurations2"/>
+		<!-- Create the zip file -->
+		<jar destfile="${destDir}${file.separator}${docName}.odt">
+			<fileset dir="${sourceDir}${file.separator}doc">
+				<include name="**/*.xml" />
+				<include name="mimetype" />
+			</fileset>
+		</jar>
+	</target>
+
+</project>
