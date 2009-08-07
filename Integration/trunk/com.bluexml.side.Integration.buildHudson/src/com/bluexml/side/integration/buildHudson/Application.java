@@ -176,7 +176,7 @@ public class Application {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		log.setMessageOutputLevel(Project.MSG_INFO);
+		log.setMessageOutputLevel(Project.MSG_ERR);
 
 		ant.addBuildListener(log);
 
