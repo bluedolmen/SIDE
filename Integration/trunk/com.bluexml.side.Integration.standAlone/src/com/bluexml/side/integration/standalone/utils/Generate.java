@@ -208,7 +208,7 @@ public class Generate extends Thread {
 			skipValidation = Boolean.valueOf(configurationParameters
 					.get(ApplicationDialog.KEY_SKIPVALIDATION));
 		}
-		System.out.println("log2");
+		//System.out.println("log2");
 		try {
 			modelsInfo = (HashMap<String, List<IFile>>) ApplicationUtil
 					.getAssociatedMetaModel(models);
