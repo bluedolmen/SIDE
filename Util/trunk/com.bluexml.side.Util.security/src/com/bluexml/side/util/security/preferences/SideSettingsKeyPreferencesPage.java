@@ -151,6 +151,7 @@ public class SideSettingsKeyPreferencesPage
 	 * This function update the table
 	 */
 	private void tableUpdate(){
+		initTable();
 		KeyInformation ki = new KeyInformation(key.getText());
 		if (ki.getValidity()){
 			Iterator<String> it = (Iterator<String>) codeToIcon.keySet().iterator();
@@ -167,17 +168,6 @@ public class SideSettingsKeyPreferencesPage
 			}
 			codeTable.setEnabled(true);
 		}
-		else{
-			Iterator<String> it = (Iterator<String>) codeToIcon.keySet().iterator();
-			int i=0;
-			while(it.hasNext()){
-				codeTable.remove(i);
-				TableItem item = new TableItem (codeTable, 0, i);
-				item.setText (0,"     ");
-				item.setText (1,"                                                                             ");
-				it.next();i++;
-			}
-		}
 	}
 	
 	private void createTable(Composite parent){
@@ -186,13 +176,24 @@ public class SideSettingsKeyPreferencesPage
 		TableColumn column2 = new TableColumn(codeTable, SWT.NONE);
 		Iterator<String> it = (Iterator<String>) codeToIcon.keySet().iterator();
 		while(it.hasNext()){
-			TableItem item = new TableItem (codeTable, 0);
-			item.setText (0,"     ");
-			item.setText (1,"                                                                             ");
+			new TableItem (codeTable, 0);
 			it.next();
 		}
+		initTable();
 		column1.pack();
 		column2.pack();
+	}
+	
+	private void initTable(){
+		Iterator<String> it = (Iterator<String>) codeToIcon.keySet().iterator();
+		int i=0;
+		while(it.hasNext()){
+			TableItem item = codeTable.getItem(i);
+			item.setImage(0,new Image(item.getDisplay(),SideSettingsKeyPreferencesPage.class.getResourceAsStream("icons/no_value.png")));
+			item.setText (1,"                                                                             ");
+			it.next();
+			i++;
+		}
 		codeTable.setEnabled(false);
 	}
 }
