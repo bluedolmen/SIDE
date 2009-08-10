@@ -13,9 +13,7 @@ metamodel http://www.kerblue.org/class/1.0
 <%}%>
 
 <%script type="clazz.Clazz" name="content_class"%>
-<text:h text:style-name="Heading_20_2" text:outline-level="2">
-	<%getLabel()%> attributes
-</text:h>
+<text:h text:style-name="Heading_20_2" text:outline-level="2"><%getLabel()%> attributes</text:h>
 <table:table table:style-name="Tableau1">
 	<table:table-column table:style-name="Tableau1.A" table:number-columns-repeated="2" />
 		<table:table-row>
@@ -42,9 +40,7 @@ metamodel http://www.kerblue.org/class/1.0
 <%}%>
 </table:table>
 
-<text:h text:style-name="Heading_20_2" text:outline-level="2">
-	<%getLabel()%> associations
-</text:h>
+<text:h text:style-name="Heading_20_2" text:outline-level="2"><%getLabel()%> associations</text:h>
 <table:table table:style-name="Tableau2">
 	<table:table-column table:style-name="Tableau1.A" table:number-columns-repeated="3" />
 		<table:table-row>
@@ -67,7 +63,8 @@ metamodel http://www.kerblue.org/class/1.0
 		</table:table-cell>
 		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
 			<text:p text:style-name="Table_20_Heading">
-				<%getTarget().getLabel()%>
+				<text:a xlink:type="simple"
+                    xlink:href="#1.<%getTarget().getLabel()%>|outline"><%getTarget().getLabel()%></text:a>
 			</text:p>
 		</table:table-cell>
 		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">

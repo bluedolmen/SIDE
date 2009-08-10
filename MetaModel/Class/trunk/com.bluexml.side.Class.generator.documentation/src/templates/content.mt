@@ -247,16 +247,20 @@ import templates.content_chapter
 					</text:index-title-template>
 					<text:table-of-content-entry-template
 						text:outline-level="1" text:style-name="Contents_20_1">
+						<text:index-entry-link-start text:style-name="Internet_20_link"/>
 						<text:index-entry-chapter />
 						<text:index-entry-text />
+						<text:index-entry-link-end/>
 						<text:index-entry-tab-stop style:type="right"
 							style:leader-char="." />
 						<text:index-entry-page-number />
 					</text:table-of-content-entry-template>
 					<text:table-of-content-entry-template
 						text:outline-level="2" text:style-name="Contents_20_2">
+						<text:index-entry-link-start text:style-name="Internet_20_link"/>
 						<text:index-entry-chapter />
 						<text:index-entry-text />
+						<text:index-entry-link-end/>
 						<text:index-entry-tab-stop style:type="right"
 							style:leader-char="." />
 						<text:index-entry-page-number />
@@ -347,9 +351,12 @@ import templates.content_chapter
 						</text:p>
 					</text:index-title>
 					<%for (getAllClasses().sort()){%>
-						<text:p text:style-name="P1"><%getLabel()%><text:tab/>1</text:p>
-						<text:p text:style-name="P2"><%getLabel()%> attributes<text:tab/>1</text:p>
-						<text:p text:style-name="P2"><%getLabel()%> associations<text:tab/>1</text:p>
+						<text:p text:style-name="P1"><text:a xlink:type="simple"
+                    xlink:href="#1.<%getLabel()%>|outline"><%getLabel()%></text:a><text:tab/>1</text:p>
+						<text:p text:style-name="P2"><text:a xlink:type="simple"
+                    xlink:href="#2.<%getLabel()%> attributes|outline"><%getLabel()%> attributes</text:a><text:tab/>1</text:p>
+						<text:p text:style-name="P2"><text:a xlink:type="simple"
+                    xlink:href="#2.<%getLabel()%> associations|outline"><%getLabel()%> associations</text:a><text:tab/>1</text:p>
 					<%}%>
 				</text:index-body>
 			</text:table-of-content>
