@@ -1,41 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature
-      id="com.bluexml.side.View.generator.facetmap.feature"
-      label="S-IDE Facetmap View Generator"
-      version="1.0.8.v8020-20090806"
-      provider-name="BLUEXML">
-
-   <description>
-      This is a BlueXML generator, it generates faceted researches
-of one type of documents.
-   </description>
-
-   <copyright>
-      [Enter Copyright Description here.]
-   </copyright>
-
-   <license>
-      [Enter License Description here.]
-   </license>
-
-   <requires>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="com.bluexml.side.Application"/>
-      <import plugin="com.bluexml.side.Util.security"/>
-      <import plugin="com.bluexml.side.Util.generator"/>
-      <import plugin="com.bluexml.side.Util.generator.acceleo"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="com.bluexml.side.Util.libs"/>
-      <import plugin="com.bluexml.side.Util.log"/>
-      <import plugin="com.bluexml.side.View"/>
-   </requires>
-
-   <plugin
-         id="com.bluexml.side.View.generator.facetmap"
-         download-size="0"
-         install-size="0"
-         version="1.0.8.v8020-20090806"
-         unpack="false"/>
-
+<feature id="com.bluexml.side.View.generator.facetmap.feature" label="S-IDE Facetmap View Generator" version="1.0.9.v8080-20090810" provider-name="BLUEXML">
+  <description>This is a BlueXML generator, it generates faceted researches
+of one type of documents.</description>
+  <copyright>[Enter Copyright Description here.]</copyright>
+  <license>[Enter License Description here.]</license>
+  <requires>
+    <import plugin="org.eclipse.ui" />
+    <import plugin="org.eclipse.core.runtime" />
+    <import plugin="com.bluexml.side.Application" />
+    <import plugin="com.bluexml.side.Util.security" />
+    <import plugin="com.bluexml.side.Util.generator" />
+    <import plugin="com.bluexml.side.Util.generator.acceleo" />
+    <import plugin="org.eclipse.core.resources" />
+    <import plugin="com.bluexml.side.Util.libs" />
+    <import plugin="com.bluexml.side.Util.log" />
+    <import plugin="com.bluexml.side.View" />
+  </requires>
+  <plugin id="com.bluexml.side.View.generator.facetmap" download-size="0" install-size="0" version="1.0.8.v8020-20090806" unpack="false" />
 </feature>
+
