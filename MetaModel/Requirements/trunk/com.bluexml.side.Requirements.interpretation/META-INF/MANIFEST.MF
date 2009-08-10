@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Interpretation
 Bundle-SymbolicName: com.bluexml.side.Requirements.interpretation;singleton:=true
 Bundle-Version: 1.0.19.v8013-20090806
-Bundle-Vendor: blueXML
+Bundle-Vendor: BLUEXML
 Require-Bundle: com.bluexml.side.Requirements.transformation
 Bundle-ClassPath: metamodel/
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

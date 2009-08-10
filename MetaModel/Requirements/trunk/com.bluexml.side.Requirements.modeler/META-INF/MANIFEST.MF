@@ -4,7 +4,7 @@ Bundle-Name: Requirements modeler
 Bundle-SymbolicName: com.bluexml.side.Requirements.modeler; singleton:=true
 Bundle-Version: 1.0.13
 Bundle-Activator: com.bluexml.side.Requirements.modeler.RequirementsPlugin
-Bundle-Vendor: blueXML
+Bundle-Vendor: BLUEXML
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.edit,
