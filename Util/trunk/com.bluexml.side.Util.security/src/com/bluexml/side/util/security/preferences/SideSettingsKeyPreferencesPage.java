@@ -170,6 +170,10 @@ public class SideSettingsKeyPreferencesPage
 		}
 	}
 	
+	/**
+	 * Create the table in the SWT page
+	 * @param parent the component in which is displayed the table 
+	 */
 	private void createTable(Composite parent){
 		codeTable = new Table (parent, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
 		TableColumn column1 = new TableColumn(codeTable, SWT.NONE);
@@ -184,6 +188,9 @@ public class SideSettingsKeyPreferencesPage
 		column2.pack();
 	}
 	
+	/**
+	 * initialize the table with void value and specific icon
+	 */
 	private void initTable(){
 		Iterator<String> it = (Iterator<String>) codeToIcon.keySet().iterator();
 		int i=0;
