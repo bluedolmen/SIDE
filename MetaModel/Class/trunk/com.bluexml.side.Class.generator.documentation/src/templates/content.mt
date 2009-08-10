@@ -1,11 +1,12 @@
 <%--encoding=iso-8859-1--%>
 <%
 metamodel http://www.kerblue.org/class/1.0
+import com.bluexml.side.util.generator.documentation.services.DocumentationServices
 import templates.content_chapter
 %>
 
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
-<%if (eContainer() == null) {%><%getConfModulePath()%>/doc/content.xml<%}%>
+<%if (eContainer() == null) {%><%getModelName()%>/doc/content.xml<%}%>
 <%script type="clazz.ClassPackage" name="docGenerator" file="<%validatedFilename%>"%>
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <office:document-content
