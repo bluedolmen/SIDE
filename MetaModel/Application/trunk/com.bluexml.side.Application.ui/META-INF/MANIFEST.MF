@@ -4,7 +4,7 @@ Bundle-Name: Application UI Plug-in
 Bundle-SymbolicName: com.bluexml.side.Application.ui;singleton:=true
 Bundle-Version: 1.0.32.v8020-20090806
 Bundle-Activator: com.bluexml.side.application.ui.Activator
-Bundle-Vendor: blueXML
+Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  com.bluexml.side.Application,
