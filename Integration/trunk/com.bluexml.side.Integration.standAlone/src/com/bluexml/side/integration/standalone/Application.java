@@ -13,8 +13,9 @@ public class Application implements IApplication {
 	public Object start(IApplicationContext context) throws Exception {
 		System.out.println("Start !!!!!!!!!!");
 
+		  // Start Generation
 		System.out.println("Start Generation");
-
+      
 		//File file = new File("workspaceStandAlone/StandAlone/models/My.application");
 		File file = new File("workspaceStandAlone/StandAlone/models/My.application");
 		
