@@ -3,7 +3,6 @@ package com.bluexml.side.util.security.preferences;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.swt.SWT;
@@ -154,18 +153,16 @@ public class SideSettingsKeyPreferencesPage
 		initTable();
 		KeyInformation ki = new KeyInformation(key.getText());
 		if (ki.getValidity()){
-			Iterator<String> it = (Iterator<String>) codeToIcon.keySet().iterator();
 			int i=0;
-			while(it.hasNext()){
-				String code = it.next();
-				if (ki.hasCode(code)){
-					codeTable.remove(i);
-					TableItem item = new TableItem (codeTable, 0, i);
-					item.setImage(0,new Image(item.getDisplay(),SideSettingsKeyPreferencesPage.class.getResourceAsStream("icons/"+codeToIcon.get(code))));
-					item.setText(1,codeToName.get(code));
-					i++;
-				}
-			}
+			for (String code : codeToIcon.keySet()) {
+				 if (ki.hasCode(code)){
+						codeTable.remove(i);
+						TableItem item = new TableItem (codeTable, 0, i);
+						item.setImage(0,new Image(item.getDisplay(),SideSettingsKeyPreferencesPage.class.getResourceAsStream("icons/"+codeToIcon.get(code))));
+						item.setText(1,codeToName.get(code));
+						i++;
+					}
+           }
 			codeTable.setEnabled(true);
 		}
 	}
@@ -178,10 +175,8 @@ public class SideSettingsKeyPreferencesPage
 		codeTable = new Table (parent, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
 		TableColumn column1 = new TableColumn(codeTable, SWT.NONE);
 		TableColumn column2 = new TableColumn(codeTable, SWT.NONE);
-		Iterator<String> it = (Iterator<String>) codeToIcon.keySet().iterator();
-		while(it.hasNext()){
+		for (String code : codeToIcon.keySet()){
 			new TableItem (codeTable, 0);
-			it.next();
 		}
 		initTable();
 		column1.pack();
@@ -192,13 +187,11 @@ public class SideSettingsKeyPreferencesPage
 	 * initialize the table with void value and specific icon
 	 */
 	private void initTable(){
-		Iterator<String> it = (Iterator<String>) codeToIcon.keySet().iterator();
 		int i=0;
-		while(it.hasNext()){
+		for (String code : codeToIcon.keySet()){
 			TableItem item = codeTable.getItem(i);
 			item.setImage(0,new Image(item.getDisplay(),SideSettingsKeyPreferencesPage.class.getResourceAsStream("icons/no_value.png")));
 			item.setText (1,"                                                                             ");
-			it.next();
 			i++;
 		}
 		codeTable.setEnabled(false);
