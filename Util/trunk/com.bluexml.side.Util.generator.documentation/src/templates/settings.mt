@@ -1,7 +1,10 @@
 <%
-metamodel /com.bluexml.side.Common/model/Common.ecore
+metamodel http://www.kerblue.org/common/1.0/
+import com.bluexml.side.util.generator.documentation.services.DocumentationServices
 %>
-<%script type="common.Package" name="mimetype" file="doc/settings.xml"%>
+<%script type="common.Package" name="validatedFilename"%>
+<%if (eContainer() == null) {%><%getModelName()%>/doc/settings.xml<%}%>
+<%script type="common.Package" name="mimetype" file="<%validatedFilename%>"%>
 <?xml version="1.0" encoding="UTF-8"?>
 <office:document-settings xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
