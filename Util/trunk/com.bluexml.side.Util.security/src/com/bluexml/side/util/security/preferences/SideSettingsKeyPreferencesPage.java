@@ -159,7 +159,6 @@ public class SideSettingsKeyPreferencesPage
 				 if (ki.hasCode(code)){
 						item.setImage(0,new Image(item.getDisplay(),SideSettingsKeyPreferencesPage.class.getResourceAsStream("icons/"+codeToIcon.get(code))));
 						item.setText(1,codeToName.get(code));
-						item.setGrayed(false);
 					}
 				 i++;
            }
@@ -191,7 +190,6 @@ public class SideSettingsKeyPreferencesPage
 			TableItem item = codeTable.getItem(i);
 			item.setImage(0,new Image(item.getDisplay(),SideSettingsKeyPreferencesPage.class.getResourceAsStream("icons/no_value.png")));
 			item.setText (1,codeToName.get(code));
-			item.setGrayed(true);
 			i++;
 		}
 	}
