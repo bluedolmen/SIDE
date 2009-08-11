@@ -9,7 +9,6 @@ import com.bluexml.side.integration.standalone.utils.Generate;
 
 public class Application implements IApplication {
 
-	@Override
 	public Object start(IApplicationContext context) throws Exception {
 		System.out.println("Start !!!!!!!!!!");
 
@@ -32,7 +31,6 @@ public class Application implements IApplication {
 		return EXIT_OK;
 	}
 
-	@Override
 	public void stop() {
 		// nothing to do
 
