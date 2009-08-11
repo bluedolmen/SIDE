@@ -8,13 +8,12 @@ import com.bluexml.side.util.generator.documentation.DocumentationGenerator;
 public class WorkflowDocumentationGenerator extends DocumentationGenerator {
 
 	public WorkflowDocumentationGenerator() {
-		MMUri = "http://www.kerblue.org/workflow/1.0";
+		MMUri = "http://www.kerblue.org/workflow/1.0"; //$NON-NLS-1$
 	}
 
 	@Override
 	protected List<String> getTemplates() {
-		List<String> templates = new ArrayList<String>();
-		templates.add("//com.bluexml.side.Workflow.generator.documentation/src/templates/model2docBook.mt");
+		templates.add("//com.bluexml.side.Workflow.generator.documentation/src/templates/content.mt"); //$NON-NLS-1$
 		return templates;
 	}
 }
