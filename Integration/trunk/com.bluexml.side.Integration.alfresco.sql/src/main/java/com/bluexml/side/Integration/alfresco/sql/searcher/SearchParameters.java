@@ -1,11 +1,58 @@
 package com.bluexml.side.Integration.alfresco.sql.searcher;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchParameters {
 	
 	enum JoinType {
 		LEFT_JOIN
+	}
+
+	public static class Builder  {
+		
+		// Required parameters
+		private final String typeName;
+		
+		// Optional parameters
+		private String alias = null;
+		private String condition = null;
+		private String restrictingPath = null;
+		private List<JoinCondition> joinConditions = new ArrayList<JoinCondition>();
+		
+		public Builder(String typeName_) {
+			typeName = typeName_;
+		}
+		
+		public Builder alias(String alias_) {
+			alias = alias_;
+			return this;
+		}
+		
+		public Builder condition(String condition_) {
+			condition = condition_;
+			return this;
+		}
+		
+		public Builder restrictingPath(String restrictingPath_) {
+			restrictingPath = restrictingPath_;
+			throw new UnsupportedOperationException();
+			//return this;
+		}
+		
+		public Builder joinConditions(List<JoinCondition> joinConditions_) {
+			joinConditions = joinConditions_;
+			return this;
+		}
+		
+		public Builder joinCondition(JoinCondition joinCondition_) {
+			joinConditions.add(joinCondition_);
+			return this;
+		}
+		
+		public SearchParameters build() {
+			return new SearchParameters(this);
+		}
 	}
 	
 	public static class JoinCondition {
@@ -22,22 +69,24 @@ public class SearchParameters {
 		}
 	}
 	
-	private String typeName;
-	private String alias;
-	private String condition;
-	private String path;
-	private List<JoinCondition> joinConditions;
+	private final String typeName;
+	private final String alias;
+	private final String condition;
+	private final String path;
+	private final List<JoinCondition> joinConditions;
 	
-	public SearchParameters(String typeName_) {
-		typeName = typeName_;
+	private SearchParameters(Builder builder_) {
+		typeName = builder_.typeName;
+		alias = builder_.alias;
+		condition = builder_.condition;
+		path = builder_.restrictingPath;
+		joinConditions = builder_.joinConditions;
 	}
+	
 	public String getTypeName() {
 		return typeName;
 	}
 	
-	public void setAlias(String alias_) {
-		alias = alias_;
-	}
 	public String getAlias() {
 		return alias;
 	}
@@ -45,9 +94,6 @@ public class SearchParameters {
 		return alias != null;
 	}
 	
-	public void setCondition(String condition_) {
-		condition = condition_;
-	}
 	public String getCondition() {
 		return condition;
 	}
@@ -55,10 +101,6 @@ public class SearchParameters {
 		return condition != null;
 	}
 	
-	public void setRestrictingPath(String path_) {
-		path = path_;
-		throw new UnsupportedOperationException();
-	}
 	public String getRestrictingPath() {
 		return path;
 	}
@@ -66,9 +108,6 @@ public class SearchParameters {
 		return path != null;
 	}
 	
-	public void setJoinCondition(List<JoinCondition> joinConditions_) {
-		joinConditions = joinConditions_;
-	}
 	public String getJoinCondition() {
 		StringBuilder jc = new StringBuilder();
 		for (JoinCondition joinCondition : joinConditions) {

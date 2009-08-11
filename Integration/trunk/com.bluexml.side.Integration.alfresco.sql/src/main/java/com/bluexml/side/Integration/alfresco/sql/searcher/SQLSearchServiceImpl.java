@@ -17,6 +17,7 @@ public class SQLSearchServiceImpl implements SQLSearchService {
 		if (condition == null) {
 			condition = TRUE_SQL_STATEMENT;
 		}
+		// TODO : check whether the given typeName is an existing Alfresco type
 		String sqlQuery = String.format("SELECT uuid FROM %1$s WHERE %2$s",typeName, condition);
 		return executeQuery(sqlQuery);
 	}
