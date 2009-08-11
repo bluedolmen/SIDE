@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.bluexml.side.Workflow; singleton:=true
-Bundle-Version: 1.0.16.v8080-20090810
+Bundle-Version: 1.0.17.v8124-20090811
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
