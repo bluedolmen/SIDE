@@ -81,7 +81,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	 */
 	public final void createStampFile() throws CoreException, FileNotFoundException, IOException {
 		IFileHelper.refreshFolder(getTargetPath());
-		IFolder	ff = IFileHelper.createFolder(getTargetPath() + System.getProperty("file.separator") + techVersion);
+		IFolder	ff = IFileHelper.createFolder(getTargetPath() + File.separator + techVersion);
 		Element racine = new Element("toDeploy");
 		Attribute classe = new Attribute("id", this.id);
 		racine.setAttribute(classe);
@@ -211,7 +211,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	 * @return
 	 */
 	protected String getLogFile() {
-		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + getClass().getName() + ".txt";
+		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + File.separator + getClass().getName() + ".txt"; //$NON-NLS-1$
 
 	}
 
@@ -345,6 +345,6 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		dm.copyDependencies(getTemporarySystemFile(),getTargetSystemFile());
 		// dependences packages is now with other resources in the target folder
 
-		
+
 	}
 }
