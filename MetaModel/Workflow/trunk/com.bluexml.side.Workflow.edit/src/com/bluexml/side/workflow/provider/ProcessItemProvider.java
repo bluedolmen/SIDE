@@ -262,6 +262,11 @@ public class ProcessItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(WorkflowPackage.Literals.PROCESS__ELEMENTS,
+				 WorkflowFactory.eINSTANCE.createSwimlane()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(WorkflowPackage.Literals.PROCESS__ELEMENTS,
 				 WorkflowFactory.eINSTANCE.createTransitionTask()));
 
 		newChildDescriptors.add
@@ -332,8 +337,9 @@ public class ProcessItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == WorkflowPackage.Literals.PROCESS__STARTSTATE ||
+			childFeature == WorkflowPackage.Literals.PROCESS__SWIMLANE ||
 			childFeature == WorkflowPackage.Literals.PROCESS__ELEMENTS ||
+			childFeature == WorkflowPackage.Literals.PROCESS__STARTSTATE ||
 			childFeature == WorkflowPackage.Literals.PROCESS__ENDSTATE ||
 			childFeature == WorkflowPackage.Literals.PROCESS__NODE ||
 			childFeature == WorkflowPackage.Literals.PROCESS__TASKNODE ||

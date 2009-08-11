@@ -48,7 +48,7 @@ import com.bluexml.side.workflow.WorkflowPackage;
  *
  * @generated
  */
-public class SwimlaneImpl extends EObjectImpl implements Swimlane {
+public class SwimlaneImpl extends WorkflowModelElementImpl implements Swimlane {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->

@@ -39,7 +39,7 @@
         eType="#//WorkflowModelElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="contentType" eType="ecore:EClass ../../com.bluexml.side.Class/model/Class.ecore#//Clazz"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Swimlane">
+  <eClassifiers xsi:type="ecore:EClass" name="Swimlane" eSuperTypes="#//WorkflowModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="ActorNameMustBeUnique" value="Swimlane.allInstances() -> select(n|n.name = self.name and n &lt;> self )->size()=0"/>
       <details key="MustManageAtLeastOneTask" value="(not (self.manage->isEmpty())) or (StartState.allInstances()->collect(ss | ss.initiator)->includes(self))"/>

@@ -128,6 +128,8 @@ public class WorkflowSwitch<T> {
 			case WorkflowPackage.SWIMLANE: {
 				Swimlane swimlane = (Swimlane)theEObject;
 				T result = caseSwimlane(swimlane);
+				if (result == null) result = caseWorkflowModelElement(swimlane);
+				if (result == null) result = caseModelElement(swimlane);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

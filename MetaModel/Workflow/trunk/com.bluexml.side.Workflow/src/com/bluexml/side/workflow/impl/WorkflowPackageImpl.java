@@ -1097,6 +1097,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		// Add supertypes to classes
 		workflowModelElementEClass.getESuperTypes().add(theCommonPackage.getModelElement());
 		processEClass.getESuperTypes().add(theCommonPackage.getPackage());
+		swimlaneEClass.getESuperTypes().add(this.getWorkflowModelElement());
 		startStateEClass.getESuperTypes().add(this.getUserTask());
 		taskNodeEClass.getESuperTypes().add(this.getUserTask());
 		userTaskEClass.getESuperTypes().add(this.getTransitionTask());
