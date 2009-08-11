@@ -227,6 +227,22 @@ public class IFileHelper {
     }
 
     /**
+     * Return all files for the given folder; won't add file in sub folder.
+     * @param folder
+     * @return
+     * @throws Exception
+     */
+    public static List<IFolder> getAllFolderForFolder(IFolder folder) throws Exception {
+        List<IFolder> results = new ArrayList<IFolder>();
+        for (IResource r : folder.members()) {
+            if (r instanceof IFolder) {
+                results.add((IFolder)r);
+            }
+        }
+        return results;
+    }
+
+    /**
      * Refresh the given folder
      * @param folder
      * @throws CoreException
