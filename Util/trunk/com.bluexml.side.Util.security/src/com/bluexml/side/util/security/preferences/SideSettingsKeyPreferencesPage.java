@@ -155,15 +155,14 @@ public class SideSettingsKeyPreferencesPage
 		if (ki.getValidity()){
 			int i=0;
 			for (String code : codeToIcon.keySet()) {
+				TableItem item = codeTable.getItem(i);
 				 if (ki.hasCode(code)){
-						codeTable.remove(i);
-						TableItem item = new TableItem (codeTable, 0, i);
 						item.setImage(0,new Image(item.getDisplay(),SideSettingsKeyPreferencesPage.class.getResourceAsStream("icons/"+codeToIcon.get(code))));
 						item.setText(1,codeToName.get(code));
-						i++;
+						item.setGrayed(false);
 					}
+				 i++;
            }
-			codeTable.setEnabled(true);
 		}
 	}
 	
@@ -175,7 +174,7 @@ public class SideSettingsKeyPreferencesPage
 		codeTable = new Table (parent, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
 		TableColumn column1 = new TableColumn(codeTable, SWT.NONE);
 		TableColumn column2 = new TableColumn(codeTable, SWT.NONE);
-		for (String code : codeToIcon.keySet()){
+		for (int i=0; i< codeToIcon.keySet().size();i++){
 			new TableItem (codeTable, 0);
 		}
 		initTable();
@@ -191,9 +190,9 @@ public class SideSettingsKeyPreferencesPage
 		for (String code : codeToIcon.keySet()){
 			TableItem item = codeTable.getItem(i);
 			item.setImage(0,new Image(item.getDisplay(),SideSettingsKeyPreferencesPage.class.getResourceAsStream("icons/no_value.png")));
-			item.setText (1,"                                                                             ");
+			item.setText (1,codeToName.get(code));
+			item.setGrayed(true);
 			i++;
 		}
-		codeTable.setEnabled(false);
 	}
 }
