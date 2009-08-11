@@ -6,12 +6,19 @@ metamodel http://www.kerblue.org/form/1.0
 <!-- Break line -->
 <%for (forms.sort()){%>
 	<text:h text:style-name="Heading_20_1" text:outline-level="1"><%getLabel()%></text:h>
+	<%if (cast("FormClass")){%>
+		Link to class : <%current("FormClass").real_class.getLabel()%>
+	<%}%>
+	<%if (cast("FormWorkflow")){%>
+		Link to workflow : <%current("FormClass").ref.cast("Workflow").getLabel()%>
+	<%}%>
+
 	<%if (documentation != null){%><%documentation%><%}%>
 	<%content_form%>
 <%}%>
 
 <%script type="form.FormContainer" name="content_form"%>
-<text:h text:style-name="Heading_20_2" text:outline-level="2"><%getLabel()%> fields</text:h>
+<text:h text:style-name="Heading_20_2" text:outline-level="2"><%getLabel()%> Fields</text:h>
 <table:table table:style-name="Tableau1">
 	<table:table-column table:style-name="Tableau1.A" table:number-columns-repeated="3" />
 		<table:table-row>
@@ -39,10 +46,13 @@ metamodel http://www.kerblue.org/form/1.0
 		</table:table-cell>
 		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
 			<text:p text:style-name="Table_20_Heading">
-				<%if (cast("ModelChoiceField")){%>
-					Link to Class <%current("ModelChoiceField").association_class.getLabel()%> with Form
-					<text:a xlink:type="simple"
-                    xlink:href="#1.<%current("ModelChoiceField").ref.cast("FormContainer").getLabel()%>|outline"><%current("ModelChoiceField").ref.cast("FormContainer").getLabel()%></text:a>
+				<%if (cast("Reference")){%>
+					Link to Form :
+					<%for (current("Reference").target) {%>
+						<text:a xlink:type="simple"
+                   		 xlink:href="#1.<%current("FormContainer").getLabel()%>|outline"><%current("FormContainer").getLabel()%></text:a>
+					<%}%>
+                    for Class <%current("Reference").real_class.getLabel()%>.
 				<%}%>
 			</text:p>
 		</table:table-cell>
