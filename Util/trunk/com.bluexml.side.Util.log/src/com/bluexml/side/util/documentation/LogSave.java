@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URL;
 import java.util.List;
 
 import javax.xml.transform.Transformer;
@@ -35,10 +34,11 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class LogSave {
 
-	public static String LOG_FILE_NAME = "side-report.xml";
-	public static String LOG_STAMP_FOLDER = "stamp";
-	public static String LOG_TEMP_FOLDER = "work";
-	public static String LOG_DOC_FOLDER = "doc";
+	public static String LOG_FILE_NAME = "side-report.xml"; //$NON-NLS-1$
+	public static String LOG_STAMP_FOLDER = "stamp"; //$NON-NLS-1$
+	public static String LOG_TEMP_FOLDER = "work"; //$NON-NLS-1$
+	public static String LOG_DOC_FOLDER = "doc"; //$NON-NLS-1$
+	public static String LOG_FILE_EXT = ".odt"; //$NON-NLS-1$
 
 	/**
 	 * Render a SIDELog to a xml file using the given fileName in the given
@@ -80,17 +80,17 @@ public class LogSave {
 		XStream xstream = new XStream(new DomDriver());
 
 		// Improve XML
-		xstream.alias("SIDELog", SIDELog.class);
-		xstream.alias("logEntry", LogEntry.class);
+		xstream.alias("SIDELog", SIDELog.class); //$NON-NLS-1$
+		xstream.alias("logEntry", LogEntry.class); //$NON-NLS-1$
 
-		xstream.addImplicitCollection(SIDELog.class, "logEntries");
+		xstream.addImplicitCollection(SIDELog.class, "logEntries"); //$NON-NLS-1$
 
-		xstream.useAttributeFor(SIDELog.class, "date");
-		xstream.useAttributeFor(SIDELog.class, "name");
-		xstream.useAttributeFor(SIDELog.class, "id");
-		xstream.useAttributeFor(SIDELog.class, "type");
+		xstream.useAttributeFor(SIDELog.class, "date"); //$NON-NLS-1$
+		xstream.useAttributeFor(SIDELog.class, "name"); //$NON-NLS-1$
+		xstream.useAttributeFor(SIDELog.class, "id"); //$NON-NLS-1$
+		xstream.useAttributeFor(SIDELog.class, "type"); //$NON-NLS-1$
 
-		xstream.useAttributeFor(LogEntry.class, "type");
+		xstream.useAttributeFor(LogEntry.class, "type"); //$NON-NLS-1$
 		xstream.registerConverter(new URIConverter());
 
 		xstream.toXML(log, fos);
@@ -143,11 +143,17 @@ public class LogSave {
 		moveStaticRessources(logFolder, doc);
 	}
 
+	/**
+	 * Add link to documentation (put in LOG_DOC_FOLDER)
+	 * @param rootNode
+	 * @param docFolder
+	 * @throws Exception
+	 */
 	private static void addDocLink(Element rootNode, IFolder docFolder) throws Exception {
 		List<IFile> toLink = IFileHelper.getAllFilesForFolder(docFolder);
 		Element rootDoc = new Element("documentation");
 		for (IFile xmlFile : toLink) {
-			if (xmlFile.getName().endsWith(".xml")) {
+			if (xmlFile.getName().endsWith(LOG_FILE_EXT)) {
 				Element entry = new Element("entry");
 				entry.setAttribute("path", LOG_DOC_FOLDER + "/" + xmlFile.getName());
 				rootDoc.addContent(entry);
@@ -156,6 +162,12 @@ public class LogSave {
 		rootNode.addContent(rootDoc);
 	}
 
+	/**
+	 * Aggregate all log files.
+	 * @param rootNode
+	 * @param tmpFolder
+	 * @throws Exception
+	 */
 	private static void agregateLogs(Element rootNode, IFolder tmpFolder) throws Exception {
 		// File f = IFileHelper.getFile(folder);
 		// We get all files
@@ -174,14 +186,21 @@ public class LogSave {
 		}
 	}
 
+	/**
+	 * Seek xml stamp file used as stamp file.
+	 * @param rootNode
+	 * @param logFolder
+	 * @throws Exception
+	 */
 	private static void addGeneratorStamp(Element rootNode, IFolder logFolder)
 			throws Exception {
 		IFolder stampFolder = IFileHelper.getIFolder(logFolder.getFullPath().append(LOG_STAMP_FOLDER).toOSString());
 		if (stampFolder.exists()) {
 			List<IFile> deployedStamps = IFileHelper.getAllFilesForFolder(stampFolder);
-			Element rootDeployed = new Element("deployed");
+			Element rootDeployed = new Element("deployed"); //$NON-NLS-1$
 			for (IFile xmlFile : deployedStamps) {
-				if (xmlFile.getName().endsWith(".xml")
+				//TODO : improve this to avoid error when xml files are generated in the same folder
+				if (xmlFile.getName().endsWith(".xml") //$NON-NLS-1$
 						&& !xmlFile.getName().equals(LOG_FILE_NAME)) {
 					SAXBuilder builder = new SAXBuilder();
 					try {
@@ -196,6 +215,13 @@ public class LogSave {
 		}
 	}
 
+	/**
+	 * Move resources in jar to the given folder.
+	 * @param folderDest
+	 * @param doc
+	 * @throws IOException
+	 * @throws TransformerException
+	 */
 	private static void moveStaticRessources(IFolder folderDest, Document doc)
 			throws IOException, TransformerException {
 		String folderPath = folderDest.getLocation().toOSString()
@@ -269,7 +295,7 @@ public class LogSave {
 		if (!dest.exists()) {
 			dest.mkdirs();
 		}
-		
+
 		File file = new File(folderDest + fileName);
 		FileOutputStream fos;
 		try {
