@@ -33,6 +33,16 @@
                         technologyVersion="alfresco_3.x"
                         versionMin="1.0.0">
                   </moduleDependence>
+                  <configurationParameter
+                        documentation="Alfresco URL"
+                        key="alfresco.url"
+                        label="Alfresco URL">
+                  </configurationParameter>
+                  <configurationParameter
+                        documentation="Alfresco share URL"
+                        key="alfresco.share.url"
+                        label="Alfresco share URL">
+                  </configurationParameter>
                </generatorVersion>
             </technologyVersion>
          </technology>

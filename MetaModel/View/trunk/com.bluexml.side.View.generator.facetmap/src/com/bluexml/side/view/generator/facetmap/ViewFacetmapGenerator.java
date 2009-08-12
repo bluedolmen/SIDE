@@ -39,6 +39,8 @@ import com.bluexml.side.view.generator.facetmap.utils.FacetmapConstants;
  */
 public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator implements FacetmapConstants {
 	public static String GENERATOR_CODE = "CODE_GED_G_C_FACETMAP_2";
+	public static String ALFRESCO_URL_KEY = "alfresco.url";
+	public static String ALFRESCO_SHARE_URL_KEY = "alfresco.share.url";
 	public static String MMUri = "http://www.kerblue.org/view/1.0";
 
 	public ViewFacetmapGenerator() {
@@ -97,6 +99,7 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 		if (groupedModels.entrySet().size() > 1)
 			throw new Exception("Error too many root packages for facetmap.");
 		setTEMP_FOLDER("generator_" + getClass().getName());
+		//Adding file generated to log
 		generatedFiles.addAll(buildPackages(groupedModels.keySet().toArray()[0].toString()));
 		for (IFile f : generatedFiles) {
 			addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());
@@ -104,7 +107,22 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 
 		// add resources to match with package dependencies
 		addDependences();
-		
+		//Adding services to log
+		//CMIS
+			String alfrescoUrl = generationParameters.get(ALFRESCO_URL_KEY);
+			if (!alfrescoUrl.endsWith("/"))
+				alfrescoUrl += "/";
+			String cmisUri = alfrescoUrl + "service/com/bluexml/side/facetMap/doclist_user.xml";
+			addServiceLog("CMIS webscript","The webscript used for updating facetmap, it is used to list all documents from a certain type and retreive their metadatas.", cmisUri);
+		//Dashlets
+			String shareUrl = generationParameters.get(ALFRESCO_SHARE_URL_KEY);
+			if (!shareUrl.endsWith("/"))
+				shareUrl += "/";
+			String dashletContentUri = shareUrl + "service/com/bluexml/side/facetMap/doclist_user/content";
+			String dashletFacetstUri = shareUrl + "service/com/bluexml/side/facetMap/doclist_user/facet";
+			addServiceLog("Facetmap Dashlet for Content","An Alfresco share sashlet that shows the results of the faceted navigation.", dashletContentUri);
+			addServiceLog("Facetmap Dashlet for Facets","An Alfresco share sashlet that shows the facets of the faceted navigation.", dashletFacetstUri);
+			
 		return generatedFiles;
 	}
 
