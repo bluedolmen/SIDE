@@ -60,6 +60,14 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		return TEMP_FOLDER;
 	}
 
+	/**
+	 * Return if this generator is a documentation generator.
+	 * @return
+	 */
+	public boolean isDocumentationGenerator() {
+		return false;
+	}
+
 	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, DependencesManager dm) throws Exception {
 		generationParameters = generationParameters_;
 		generatorOptions = generatorOptions_;
@@ -242,18 +250,6 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	 */
 	public final String getTargetPath() {
 		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral());
-	}
-
-	/**
-	 * Return if generation might be verbose or not
-	 *
-	 * @return
-	 */
-	protected static boolean doVerbose() {
-		if (configurationParameters != null && configurationParameters.containsKey(StaticConfigurationParameters.GENERATIONOPTIONSVERBOSE.getLiteral())) {
-			return Boolean.parseBoolean(configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSVERBOSE.getLiteral()));
-		}
-		return false;
 	}
 
 	/**
