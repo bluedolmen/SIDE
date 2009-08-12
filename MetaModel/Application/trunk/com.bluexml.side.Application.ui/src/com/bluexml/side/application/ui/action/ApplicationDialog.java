@@ -87,6 +87,7 @@ import com.bluexml.side.application.ConfigurationParameters;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.Option;
+import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.ui.SWTResourceManager;
 import com.bluexml.side.application.ui.action.contraints.ConstraintsChecker;
 import com.bluexml.side.application.ui.action.table.GeneratorParameter;
@@ -153,11 +154,11 @@ public class ApplicationDialog extends Dialog {
 	private Button cleanButton;
 	private TabItem modelsTabItem;
 
-	public static String KEY_DOCUMENTATION = "generation.options.documentation"; //$NON-NLS-1$
-	public static String KEY_SKIPVALIDATION = "generation.option.Skip.Validation"; //$NON-NLS-1$
-	public static String KEY_DOCLEAN = "generation.options.clean"; //$NON-NLS-1$
-	public static String KEY_LOGPATH = "generation.options.logPath"; //$NON-NLS-1$
-	public static String KEY_GENPATH = "generation.options.destinationPath"; //$NON-NLS-1$
+	public static String KEY_DOCUMENTATION = StaticConfigurationParameters.GENERATIONOPTIONSDOCUMENTATION.getLiteral();
+	public static String KEY_SKIPVALIDATION = StaticConfigurationParameters.GENERATIONOPTION_SKIP_VALIDATION.getLiteral();
+	public static String KEY_DOCLEAN = StaticConfigurationParameters.GENERATIONOPTIONSCLEAN.getLiteral();
+	public static String KEY_LOGPATH = StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral();
+	public static String KEY_GENPATH = StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral();
 
 	public static List<String> staticFieldsName = Arrays.asList(KEY_GENPATH, KEY_LOGPATH, KEY_SKIPVALIDATION, KEY_DOCUMENTATION, KEY_DOCLEAN);
 
@@ -909,9 +910,11 @@ public class ApplicationDialog extends Dialog {
 		documentationButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
 				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_DOCUMENTATION);
+				Button b = (Button) e.getSource();
 				if (param != null) {
-					Button b = (Button) e.getSource();
 					param.setValue(Boolean.toString(b.getSelection()));
+				} else {
+					addStaticParam(KEY_DOCUMENTATION,Boolean.toString(b.getSelection()));
 				}
 				ApplicationDialog.modificationMade();
 			}
@@ -923,9 +926,11 @@ public class ApplicationDialog extends Dialog {
 		skipValidationButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
 				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_SKIPVALIDATION);
+				Button b = (Button) e.getSource();
 				if (param != null) {
-					Button b = (Button) e.getSource();
 					param.setValue(Boolean.toString(b.getSelection()));
+				} else {
+					addStaticParam(KEY_SKIPVALIDATION,Boolean.toString(b.getSelection()));
 				}
 				ApplicationDialog.modificationMade();
 			}
@@ -940,9 +945,11 @@ public class ApplicationDialog extends Dialog {
 		cleanButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
 				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_DOCLEAN);
+				Button b = (Button) e.getSource();
 				if (param != null) {
-					Button b = (Button) e.getSource();
 					param.setValue(Boolean.toString(b.getSelection()));
+				} else {
+					addStaticParam(KEY_DOCLEAN,Boolean.toString(b.getSelection()));
 				}
 				ApplicationDialog.modificationMade();
 			}
@@ -1058,31 +1065,14 @@ public class ApplicationDialog extends Dialog {
 				refreshConfiguration();
 			}
 
+
+
 			private void addStaticParameters(Configuration config) {
-				ConfigurationParameters docParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
-				docParam.setKey(KEY_DOCUMENTATION);
-				docParam.setValue("false"); //$NON-NLS-1$
-				config.getParameters().add(docParam);
-
-				ConfigurationParameters skipValid = ApplicationFactory.eINSTANCE.createConfigurationParameters();
-				skipValid.setKey(KEY_SKIPVALIDATION);
-				skipValid.setValue("false"); //$NON-NLS-1$
-				config.getParameters().add(skipValid);
-
-				ConfigurationParameters doClean = ApplicationFactory.eINSTANCE.createConfigurationParameters();
-				doClean.setKey(KEY_DOCLEAN);
-				doClean.setValue("false"); //$NON-NLS-1$
-				config.getParameters().add(doClean);
-
-				ConfigurationParameters logPathParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
-				logPathParam.setKey(KEY_LOGPATH);
-				logPathParam.setValue(""); //$NON-NLS-1$
-				config.getParameters().add(logPathParam);
-
-				ConfigurationParameters generationPathParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
-				generationPathParam.setKey(KEY_GENPATH);
-				generationPathParam.setValue(""); //$NON-NLS-1$
-				config.getParameters().add(generationPathParam);
+				addStaticParam(KEY_DOCUMENTATION,"false",config); //$NON-NLS-1$
+				addStaticParam(KEY_SKIPVALIDATION,"false",config); //$NON-NLS-1$
+				addStaticParam(KEY_DOCLEAN,"false",config); //$NON-NLS-1$
+				addStaticParam(KEY_LOGPATH,"",config); //$NON-NLS-1$
+				addStaticParam(KEY_GENPATH,"",config); //$NON-NLS-1$
 			}
 		});
 		addBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class, "tree/img/add.png")); //$NON-NLS-1$
@@ -1148,6 +1138,18 @@ public class ApplicationDialog extends Dialog {
 		refreshConfiguration();
 
 		return container;
+	}
+
+	protected void addStaticParam(String key, String value) {
+		Configuration config = getCurrentConfiguration();
+		addStaticParam(key,value,config);
+	}
+
+	protected void addStaticParam(String key, String value, Configuration config) {
+		ConfigurationParameters param = ApplicationFactory.eINSTANCE.createConfigurationParameters();
+		param.setKey(key);
+		param.setValue(value);
+		config.getParameters().add(param);
 	}
 
 	/**

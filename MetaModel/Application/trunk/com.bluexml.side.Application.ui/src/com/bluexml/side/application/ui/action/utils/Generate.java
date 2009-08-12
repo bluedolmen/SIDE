@@ -60,6 +60,8 @@ public class Generate extends Thread {
 	private FeedbackManager feedbackManager;
 	protected String lineSeparator = System.getProperty("line.separator"); //$NON-NLS-1$
 	protected String fileSeparator = System.getProperty("file.separator"); //$NON-NLS-1$
+	private boolean doDocumentation;
+	private boolean skipValidation;
 
 	/**
 	 * Launch generation on all generator version selected
@@ -100,14 +102,12 @@ public class Generate extends Thread {
 				}
 			}
 		}
+		initOptions(configuration, configurationParameters);
 
 		// Secondly we get the meta-model associated to a model
 		HashMap<String, List<IFile>> modelsInfo = null;
-		boolean skipValidation = true;
 		boolean modelWithError = false;
-		if (configurationParameters.containsKey(ApplicationDialog.KEY_SKIPVALIDATION)) {
-			skipValidation = Boolean.valueOf(configurationParameters.get(ApplicationDialog.KEY_SKIPVALIDATION));
-		}
+
 
 		try {
 			modelsInfo = (HashMap<String, List<IFile>>) ApplicationUtil.getAssociatedMetaModel(models);
@@ -119,7 +119,6 @@ public class Generate extends Thread {
 
 		// Validation :
 		label.setText(Messages.getString("Generate.5")); //$NON-NLS-1$
-
 		if (!skipValidation) {
 			Iterator<List<IFile>> it = modelsInfo.values().iterator();
 			List<IFile> listModel;
@@ -144,8 +143,7 @@ public class Generate extends Thread {
 		}
 		if (!modelWithError) {
 			addOneStep(progressBar);
-			logPath = getLogPath(configuration, configurationParameters);
-			genPath = getGenerationPath(configuration, configurationParameters);
+
 
 			IFolder logFolder = IFileHelper.getIFolder(logPath);
 			if (!logFolder.exists()){
@@ -159,6 +157,13 @@ public class Generate extends Thread {
 			generate(configuration, modelsInfo, configurationParameters, generationParameters);
 			// All behind this line will be execute before the generation (async method).
 		}
+	}
+
+	protected void initOptions(Configuration configuration, Map<String, String> configurationParameters) {
+		logPath = getLogPath(configuration, configurationParameters);
+		genPath = getGenerationPath(configuration, configurationParameters);
+		doDocumentation = getDoDocumentation(configuration, configurationParameters);
+		skipValidation = getSkipValidation(configuration, configurationParameters);
 	}
 
 	/**
@@ -180,12 +185,20 @@ public class Generate extends Thread {
 	 * @param configurationParameters
 	 * @return
 	 */
-	private String getLogPath(Configuration configuration, Map<String, String> configurationParameters) {
+	protected String getLogPath(Configuration configuration, Map<String, String> configurationParameters) {
 		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + fileSeparator + configuration.getName();
 	}
 
-	private String getGenerationPath(Configuration configuration, Map<String, String> configurationParameters) {
+	protected String getGenerationPath(Configuration configuration, Map<String, String> configurationParameters) {
 		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral()) + fileSeparator;
+	}
+
+	protected boolean getDoDocumentation(Configuration configuration, Map<String, String> configurationParameters) {
+		return Boolean.parseBoolean(configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSDOCUMENTATION.getLiteral()));
+	}
+
+	protected boolean getSkipValidation(Configuration configuration, Map<String, String> configurationParameters) {
+		return Boolean.valueOf(configurationParameters.get(ApplicationDialog.KEY_SKIPVALIDATION));
 	}
 
 	private void addText(String text) {
@@ -345,7 +358,7 @@ public class Generate extends Thread {
 
 			// We initialize the generator with all data collected in
 			// application model
-			if (generator != null && (generator.isDocumentationGenerator() && )) {
+			if (generator != null && (generator.isDocumentationGenerator() && doDocumentation)) {
 				// We generate only if there is meta-model available for
 				// the generator
 				if (generator.shouldGenerate(modelsInfo, elem.getId_metamodel())) {
