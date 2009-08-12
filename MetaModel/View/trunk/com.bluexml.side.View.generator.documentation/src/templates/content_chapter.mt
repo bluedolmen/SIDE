@@ -3,19 +3,6 @@ metamodel http://www.kerblue.org/view/1.0
 %>
 
 <%script type="view.ViewCollection" name="content_chapter"%>
-<!-- Break line -->
-<%for (forms.sort()){%>
-	<text:h text:style-name="Heading_20_1" text:outline-level="1"><%getLabel()%></text:h>
-	<%if (cast("FormClass")){%>
-		Link to class : <%current("FormClass").real_class.getLabel()%>
-	<%}%>
-	<%if (cast("FormWorkflow")){%>
-		Link to workflow : <%current("FormClass").ref.cast("Workflow").getLabel()%>
-	<%}%>
-
-	<%if (documentation != null){%><%documentation%><%}%>
-	<%content_form%>
-<%}%>
 <%for (views){%>
 	<text:h text:style-name="Heading_20_1" text:outline-level="1"><%name%></text:h>
 		<%viewFields%>
