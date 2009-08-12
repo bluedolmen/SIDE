@@ -17,6 +17,10 @@ public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 	public static String MMUri;
 	protected List<String> templates = new ArrayList<String>();
 
+	public boolean isDocumentationGenerator() {
+		return true;
+	}
+
 	public DocumentationGenerator() {
 		// Static templates
 		templates.add("/com.bluexml.side.Util.generator.documentation/src/templates/manifest.mt"); //$NON-NLS-1$
