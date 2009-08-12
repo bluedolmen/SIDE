@@ -137,7 +137,7 @@ public class ApplicationDialog extends Dialog {
 	private String columnNameLabel = Messages.getString("ApplicationDialog.1"); //$NON-NLS-1$
 	private GeneratorParameterDataStructure dataStructure;
 	private TableViewer generatorParametersViewer;
-	private Button verboseButton;
+	private Button documentationButton;
 	private Button skipValidationButton;
 	private Text destinationText;
 	private Text logText;
@@ -323,7 +323,7 @@ public class ApplicationDialog extends Dialog {
 	private void initializeStaticParameters() {
 		ConfigurationParameters verboseParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_VERBOSE);
 		if (verboseParam != null) {
-			verboseButton.setSelection(Boolean.parseBoolean(verboseParam.getValue()));
+			documentationButton.setSelection(Boolean.parseBoolean(verboseParam.getValue()));
 		}
 
 		ConfigurationParameters skipValidationParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_SKIPVALIDATION);
@@ -836,11 +836,11 @@ public class ApplicationDialog extends Dialog {
 		final Label logLabel = new Label(composite_1, SWT.NONE);
 		logLabel.setAlignment(SWT.RIGHT);
 		logLabel.setText(Messages.getString("ApplicationDialog.30")); //$NON-NLS-1$
-		logLabel.setBounds(20, 10, 93, 15);
+		logLabel.setBounds(0, 10, 113, 15);
 
 		final Label destinationLabel = new Label(composite_1, SWT.NONE);
 		destinationLabel.setAlignment(SWT.RIGHT);
-		destinationLabel.setBounds(20, 54, 93, 15);
+		destinationLabel.setBounds(0, 54, 113, 15);
 		destinationLabel.setText(Messages.getString("ApplicationDialog.31")); //$NON-NLS-1$
 
 		destinationText = new Text(composite_1, SWT.BORDER);
@@ -904,9 +904,9 @@ public class ApplicationDialog extends Dialog {
 		chooseYourGenerationLabel.setText(Messages.getString("ApplicationDialog.38")); //$NON-NLS-1$
 		chooseYourGenerationLabel.setBounds(0, 95, 456, 15);
 
-		verboseButton = new Button(composite_1, SWT.CHECK);
-		verboseButton.setToolTipText(Messages.getString("ApplicationDialog.39")); //$NON-NLS-1$
-		verboseButton.addSelectionListener(new SelectionAdapter() {
+		documentationButton = new Button(composite_1, SWT.CHECK);
+		documentationButton.setToolTipText(Messages.getString("ApplicationDialog.39")); //$NON-NLS-1$
+		documentationButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
 				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_VERBOSE);
 				if (param != null) {
@@ -916,8 +916,8 @@ public class ApplicationDialog extends Dialog {
 				ApplicationDialog.modificationMade();
 			}
 		});
-		verboseButton.setText(Messages.getString("ApplicationDialog.40")); //$NON-NLS-1$
-		verboseButton.setBounds(10, 116, 108, 20);
+		documentationButton.setText(Messages.getString("ApplicationDialog.40")); //$NON-NLS-1$
+		documentationButton.setBounds(10, 116, 144, 20);
 
 		skipValidationButton = new Button(composite_1, SWT.CHECK);
 		skipValidationButton.addSelectionListener(new SelectionAdapter() {
@@ -931,17 +931,12 @@ public class ApplicationDialog extends Dialog {
 			}
 		});
 		skipValidationButton.setToolTipText(Messages.getString("ApplicationDialog.41")); //$NON-NLS-1$
-		skipValidationButton.getAccessible().addAccessibleListener(new AccessibleAdapter() {
-			public void getHelp(AccessibleEvent e) {
-				e.result = Messages.getString("ApplicationDialog.42"); //$NON-NLS-1$
-			}
-		});
 		skipValidationButton.setText(Messages.getString("ApplicationDialog.43")); //$NON-NLS-1$
-		skipValidationButton.setBounds(160, 116, 108, 20);
+		skipValidationButton.setBounds(160, 116, 131, 20);
 
 		cleanButton = new Button(composite_1, SWT.CHECK);
 		cleanButton.setText(Messages.getString("ApplicationDialog.44")); //$NON-NLS-1$
-		cleanButton.setBounds(297, 116, 93, 16);
+		cleanButton.setBounds(297, 116, 159, 16);
 		cleanButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
 				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_DOCLEAN);
@@ -1124,7 +1119,7 @@ public class ApplicationDialog extends Dialog {
 		optionsGroup.setVisible(false);
 
 		generatorParameters = new Table(optionsGroup, SWT.BORDER);
-		generatorParameters.setBounds(0, 23, 295, 210);
+		generatorParameters.setBounds(0, 23, 295, 199);
 		generatorParameters.setTopIndex(3);
 		generatorParameters.getHorizontalBar().setVisible(false);
 		generatorParameters.getHorizontalBar().setEnabled(false);
