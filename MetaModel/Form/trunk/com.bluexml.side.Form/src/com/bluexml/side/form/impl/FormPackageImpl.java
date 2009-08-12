@@ -1105,6 +1105,15 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getFormWorkflow_DataForm() {
+		return (EReference)formWorkflowEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFormContainer() {
 		return formContainerEClass;
 	}
@@ -1290,6 +1299,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		createEReference(workflowFormCollectionEClass, WORKFLOW_FORM_COLLECTION__LINKED_PROCESS);
 
 		formWorkflowEClass = createEClass(FORM_WORKFLOW);
+		createEReference(formWorkflowEClass, FORM_WORKFLOW__DATA_FORM);
 
 		formContainerEClass = createEClass(FORM_CONTAINER);
 		createEAttribute(formContainerEClass, FORM_CONTAINER__NAME);
@@ -1485,6 +1495,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEReference(getWorkflowFormCollection_Linked_process(), theWorkflowPackage.getProcess(), null, "linked_process", null, 0, 1, WorkflowFormCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(formWorkflowEClass, FormWorkflow.class, "FormWorkflow", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFormWorkflow_DataForm(), this.getFormClass(), null, "DataForm", null, 0, 1, FormWorkflow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(formContainerEClass, FormContainer.class, "FormContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFormContainer_Name(), ecorePackage.getEString(), "name", null, 0, 1, FormContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

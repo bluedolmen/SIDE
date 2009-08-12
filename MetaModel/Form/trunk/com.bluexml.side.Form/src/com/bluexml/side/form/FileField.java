@@ -45,12 +45,12 @@ public interface FileField extends Field {
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'inRepository' attributes specifies if the file will be import in the target repository (for instance Alfresco) or on the disk. 
 	 * In the case of Xforms generation on Alfresco, the target path to store the file is given through:
-	 * - If upload on disk (inRepository=false), the target directory must be set up either in the Alfresco.properties file using the ‘upload.directory’  parameter or through the url parameter ‘uploadDirectory’.
-	 * - if upload on Alfresco repository (inRepository=true), the target space must be set up either in the Alfresco.properties file using the ‘upload.repository’  parameter or through the url parameter ‘uploadRepository’.
+	 * - If upload on disk (inRepository=false), the target directory must be set up either in the Alfresco.properties file using the â€˜upload.directoryâ€™  parameter or through the url parameter â€˜uploadDirectoryâ€™.
+	 * - if upload on Alfresco repository (inRepository=true), the target space must be set up either in the Alfresco.properties file using the â€˜upload.repositoryâ€™  parameter or through the url parameter â€˜uploadRepositoryâ€™.
 	 * 
 	 * Example:
-	 * - 'false': The file will be uploaded to a directory of the file system. For instance, ‘upload.directory=c:\myWorkspace\files’ or ‘uploadDirectory=c:\myWorkspace\files’; if not set up through upload.directory or uploadDirectory, default value is the current directory. 
-	 * - 'true': The file will be uploaded to the target repository. For instance, ‘upload.repository=app:company_home/cm:dictionary’ or ‘uploadRepository’= app:company_home/cm:dictionary’; if not set up through upload.repository or uploadRepository’, default value is ‘app:company_home’ for Alfresco.
+	 * - 'false': The file will be uploaded to a directory of the file system. For instance, â€˜upload.directory=c:\myWorkspace\filesâ€™ or â€˜uploadDirectory=c:\myWorkspace\filesâ€™; if not set up through upload.directory or uploadDirectory, default value is the current directory. 
+	 * - 'true': The file will be uploaded to the target repository. For instance, â€˜upload.repository=app:company_home/cm:dictionaryâ€™ or â€˜uploadRepositoryâ€™= app:company_home/cm:dictionaryâ€™; if not set up through upload.repository or uploadRepositoryâ€™, default value is â€˜app:company_homeâ€™ for Alfresco.
 	 * 
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>In Repository</em>' attribute.

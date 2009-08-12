@@ -19,8 +19,8 @@ package com.bluexml.side.form;
  * Operations: 
  * -	The operation 'Load Ressources...' enables to select and import Class Diagrams in the Form Model. One of the first steps to modelize form is to connect this form diagram with the data diagram through this operation: Right click on the editor and select Load Resource to choose a data model (and not a diagram). The Real Class attribute of Form Class may then be set up by selecting the name of class of the loaded data model. 
  * -	The operation 'Initialize form class' creates the default form from a selected Class. The selected Class is set up with the attribute 'Real class'. This action creates all fields corresponding to the Attributes and Associations defined in the data model: this default may then be refined according to the needs.
- * -	The operation ‘Refresh Outline’ refreshes an outline html view of the form. This view is useful to see the transformations made on the form before generating it and to have a general view of what will be generated. It is important to note that this outline view does not give the final generated form and the shape may be different according to the targeted technology.
- * -	The operation ‘Restore’ allows restoring a field which has been previously deleted.
+ * -	The operation â€˜Refresh Outlineâ€™ refreshes an outline html view of the form. This view is useful to see the transformations made on the form before generating it and to have a general view of what will be generated. It is important to note that this outline view does not give the final generated form and the shape may be different according to the targeted technology.
+ * -	The operation â€˜Restoreâ€™ allows restoring a field which has been previously deleted.
  * Inherits: ClassReference, FormContainer.
  * 
  * <!-- end-model-doc -->

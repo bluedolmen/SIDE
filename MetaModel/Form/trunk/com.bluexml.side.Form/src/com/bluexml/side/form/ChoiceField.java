@@ -170,7 +170,7 @@ public interface ChoiceField extends Field {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'filterParent’ attribute filters choice items in the list according to a parent list value.
+	 * Definition: The 'filterParentâ€™ attribute filters choice items in the list according to a parent list value.
 	 * 
 	 * Example: filter a list of department by country.
 	 * <!-- end-model-doc -->

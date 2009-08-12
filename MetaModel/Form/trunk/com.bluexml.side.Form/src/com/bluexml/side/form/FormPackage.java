@@ -5532,13 +5532,22 @@ public interface FormPackage extends EPackage {
 	int FORM_WORKFLOW__NAME = FORM_CONTAINER__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Data Form</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_WORKFLOW__DATA_FORM = FORM_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Workflow</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_WORKFLOW_FEATURE_COUNT = FORM_CONTAINER_FEATURE_COUNT + 0;
+	int FORM_WORKFLOW_FEATURE_COUNT = FORM_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.FormGroupPresentationType <em>Group Presentation Type</em>}' enum.
@@ -6422,6 +6431,17 @@ public interface FormPackage extends EPackage {
 	EClass getFormWorkflow();
 
 	/**
+	 * Returns the meta object for the reference '{@link com.bluexml.side.form.FormWorkflow#getDataForm <em>Data Form</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Data Form</em>'.
+	 * @see com.bluexml.side.form.FormWorkflow#getDataForm()
+	 * @see #getFormWorkflow()
+	 * @generated
+	 */
+	EReference getFormWorkflow_DataForm();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.FormContainer <em>Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7195,6 +7215,14 @@ public interface FormPackage extends EPackage {
 		 * @generated
 		 */
 		EClass FORM_WORKFLOW = eINSTANCE.getFormWorkflow();
+
+		/**
+		 * The meta object literal for the '<em><b>Data Form</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FORM_WORKFLOW__DATA_FORM = eINSTANCE.getFormWorkflow_DataForm();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.FormContainerImpl <em>Container</em>}' class.

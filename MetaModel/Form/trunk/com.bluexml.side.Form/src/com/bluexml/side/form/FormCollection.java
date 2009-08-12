@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * Definition: This is the root element which is the first created element. All forms will be child of this element. 
  * It has no corresponding elements in the Data model and is usually not generated.
  * Operations:
- * - The operation ‘Synchronize with Class Diagram’ might be called when your Data model has been changed (attribute addition, change of type …) to propagate these changes in your forms. 
+ * - The operation â€˜Synchronize with Class Diagramâ€™ might be called when your Data model has been changed (attribute addition, change of type â€¦) to propagate these changes in your forms. 
  * The changes which will be propagated are: attribute addition, attribute removal.
  * The changes which are not propagated imply a manual update in the concerned forms.
  * 

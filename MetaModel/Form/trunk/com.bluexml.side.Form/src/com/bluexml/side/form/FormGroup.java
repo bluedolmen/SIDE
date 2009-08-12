@@ -14,8 +14,8 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: The FormGroup defines a logical group of fields. This logical grouping is used to generate grouping in the generated form through tabs, rows group, …. 
- * The creation of FormGroup is achieved by using the ‘Group in a new group’ operation of Field. 
+ * Definition: The FormGroup defines a logical group of fields. This logical grouping is used to generate grouping in the generated form through tabs, rows group, â€¦. 
+ * The creation of FormGroup is achieved by using the â€˜Group in a new groupâ€™ operation of Field. 
  * Inherits:  FormElement. 
  * <!-- end-model-doc -->
  *

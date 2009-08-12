@@ -16,9 +16,9 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-model-doc -->
  * Definition: The 'ModelChoiceField' makes reference to the associations of classes. An association is, by default seen as a choices list with all elements of the targeted class. This association can be expanded in order to have a form of the targeted elements in the form itself.
  * Operations:
- * - 'Relation / Expand to reference': Available on association, this action allows having the form of the linked class inside the actual form. It creates another form under the same form collection that can be personalized too: this form is directly inserted in the uniting form; we say the form is ‘inline’ instead of ‘Select’.
- * - 'Relation / Collapse to Model Choice Field’: when an association has been expanded, this operation allows coming back to the Select mode.
- * - ‘Relation -> Add Reference: Available after an ‘expand’ operation, it works the same way. It will add a form to the original form. Only available on associations with max cardinality set to more than one.
+ * - 'Relation / Expand to reference': Available on association, this action allows having the form of the linked class inside the actual form. It creates another form under the same form collection that can be personalized too: this form is directly inserted in the uniting form; we say the form is â€˜inlineâ€™ instead of â€˜Selectâ€™.
+ * - 'Relation / Collapse to Model Choice Fieldâ€™: when an association has been expanded, this operation allows coming back to the Select mode.
+ * - â€˜Relation -> Add Reference: Available after an â€˜expandâ€™ operation, it works the same way. It will add a form to the original form. Only available on associations with max cardinality set to more than one.
  * Inherits: ClassReference, Field.
  * <!-- end-model-doc -->
  *
@@ -171,7 +171,7 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'Show_actions' attribute specifies that the action field ‘edit’, ‘create’, ‘delete’ or others are available if true or are not visible if not.
+	 * Definition: The 'Show_actions' attribute specifies that the action field â€˜editâ€™, â€˜createâ€™, â€˜deleteâ€™ or others are available if true or are not visible if not.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Show actions</em>' attribute.
 	 * @see #setShow_actions(boolean)
