@@ -358,7 +358,7 @@ public class Generate extends Thread {
 
 			// We initialize the generator with all data collected in
 			// application model
-			if (generator != null && (generator.isDocumentationGenerator() && doDocumentation)) {
+			if (generator != null && ((generator.isDocumentationGenerator() && doDocumentation) || !generator.isDocumentationGenerator())) {
 				// We generate only if there is meta-model available for
 				// the generator
 				if (generator.shouldGenerate(modelsInfo, elem.getId_metamodel())) {
