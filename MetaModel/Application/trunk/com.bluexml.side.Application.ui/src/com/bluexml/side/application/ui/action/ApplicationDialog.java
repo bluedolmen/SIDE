@@ -153,13 +153,13 @@ public class ApplicationDialog extends Dialog {
 	private Button cleanButton;
 	private TabItem modelsTabItem;
 
-	public static String KEY_VERBOSE = Messages.getString("ApplicationDialog.2"); //$NON-NLS-1$
-	public static String KEY_SKIPVALIDATION = Messages.getString("ApplicationDialog.3"); //$NON-NLS-1$
-	public static String KEY_DOCLEAN = Messages.getString("ApplicationDialog.4"); //$NON-NLS-1$
-	public static String KEY_LOGPATH = Messages.getString("ApplicationDialog.5"); //$NON-NLS-1$
-	public static String KEY_GENPATH = Messages.getString("ApplicationDialog.6"); //$NON-NLS-1$
+	public static String KEY_DOCUMENTATION = "generation.options.documentation"; //$NON-NLS-1$
+	public static String KEY_SKIPVALIDATION = "generation.option.Skip.Validation"; //$NON-NLS-1$
+	public static String KEY_DOCLEAN = "generation.options.clean"; //$NON-NLS-1$
+	public static String KEY_LOGPATH = "generation.options.logPath"; //$NON-NLS-1$
+	public static String KEY_GENPATH = "generation.options.destinationPath"; //$NON-NLS-1$
 
-	public static List<String> staticFieldsName = Arrays.asList(KEY_GENPATH, KEY_LOGPATH, KEY_SKIPVALIDATION, KEY_VERBOSE, KEY_DOCLEAN);
+	public static List<String> staticFieldsName = Arrays.asList(KEY_GENPATH, KEY_LOGPATH, KEY_SKIPVALIDATION, KEY_DOCUMENTATION, KEY_DOCLEAN);
 
 	/**
 	 * Create the dialog
@@ -321,9 +321,9 @@ public class ApplicationDialog extends Dialog {
 	}
 
 	private void initializeStaticParameters() {
-		ConfigurationParameters verboseParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_VERBOSE);
-		if (verboseParam != null) {
-			documentationButton.setSelection(Boolean.parseBoolean(verboseParam.getValue()));
+		ConfigurationParameters docParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_DOCUMENTATION);
+		if (docParam != null) {
+			documentationButton.setSelection(Boolean.parseBoolean(docParam.getValue()));
 		}
 
 		ConfigurationParameters skipValidationParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_SKIPVALIDATION);
@@ -908,7 +908,7 @@ public class ApplicationDialog extends Dialog {
 		documentationButton.setToolTipText(Messages.getString("ApplicationDialog.39")); //$NON-NLS-1$
 		documentationButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_VERBOSE);
+				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_DOCUMENTATION);
 				if (param != null) {
 					Button b = (Button) e.getSource();
 					param.setValue(Boolean.toString(b.getSelection()));
@@ -1059,10 +1059,10 @@ public class ApplicationDialog extends Dialog {
 			}
 
 			private void addStaticParameters(Configuration config) {
-				ConfigurationParameters verboseParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
-				verboseParam.setKey(KEY_VERBOSE);
-				verboseParam.setValue("false"); //$NON-NLS-1$
-				config.getParameters().add(verboseParam);
+				ConfigurationParameters docParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
+				docParam.setKey(KEY_DOCUMENTATION);
+				docParam.setValue("false"); //$NON-NLS-1$
+				config.getParameters().add(docParam);
 
 				ConfigurationParameters skipValid = ApplicationFactory.eINSTANCE.createConfigurationParameters();
 				skipValid.setKey(KEY_SKIPVALIDATION);
