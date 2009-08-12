@@ -17,6 +17,7 @@
 package com.bluexml.side.view.generator.facetmap;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -95,9 +96,13 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 		return configurationParameters.get(paramName);
 	}
 
-	public Collection<IFile> complete() throws Exception {
+	public Collection<IFile> complete(){
 		if (groupedModels.entrySet().size() > 1)
-			throw new Exception("Error too many root packages for facetmap.");
+			try{
+				throw new Exception("Error too many root packages for facetmap.");
+			} catch (Exception e) {
+				addErrorLog("Too many facetmaps", e.getStackTrace(), null);
+			}
 		setTEMP_FOLDER("generator_" + getClass().getName());
 		//Adding file generated to log
 		generatedFiles.addAll(buildPackages(groupedModels.keySet().toArray()[0].toString()));
@@ -106,7 +111,11 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 		}
 
 		// add resources to match with package dependencies
-		addDependences();
+		try {
+			addDependences();
+		} catch (Exception e) {
+			addErrorLog("Error getting dependancies", e.getStackTrace(), null);
+		}
 		//Adding services to log
 		//CMIS
 			String alfrescoUrl = generationParameters.get(ALFRESCO_URL_KEY);
@@ -127,23 +136,31 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 	}
 
 	@Override
-	public Collection<IFile> buildPackages(String modelId) throws Exception {
+	public Collection<IFile> buildPackages(String modelId){
 		String folder = IFileHelper.getSystemFolderPath(getTemporaryFolder() + FILESEP + modelId) + FILESEP;
 		// Destinations
 		String destFacets = folder + "zip" + FILESEP + WEBAPP_FACETS;
 		String destContent = folder + "zip" + FILESEP + WEBAPP_CONTENT;
+		try{
 		// Copy
 		FileHelper.copyFiles(new File(folder + "common"), new File(destFacets), true);
 		FileHelper.copyFiles(new File(folder + "common"), new File(destContent), true);
 		FileHelper.copyFiles(new File(folder + "facets"), new File(destFacets), true);
 		FileHelper.copyFiles(new File(folder + "content"), new File(destContent), true);
+		}catch (IOException e){
+			addErrorLog("Moving generated files error", e.getStackTrace(), null);
+		}
 		// Zip
 		String zipFolder = IFileHelper.getSystemFolderPath(getTargetPath() + FILESEP + getTechVersion()) + FILESEP;
 		new File(zipFolder).mkdirs();
 		File zipFacets = new File(zipFolder + WEBAPP_FACETS + ".zip");
 		File zipContent = new File(zipFolder + WEBAPP_CONTENT + ".zip");
-		ZipManager.zip(new File(destFacets), zipFacets, false);
-		ZipManager.zip(new File(destContent), zipContent, false);
+		try{
+			ZipManager.zip(new File(destFacets), zipFacets, false);
+			ZipManager.zip(new File(destContent), zipContent, false);
+		}catch (Exception e) {
+			addErrorLog("Packaging generated files error", e.getStackTrace(), null);
+		}
 		// Creating file collection
 		IFolder workingDir = IFileHelper.getIFolder(getTemporaryFolder() + FILESEP + "../");
 		Collection<IFile> pkgs = new ArrayList<IFile>();
