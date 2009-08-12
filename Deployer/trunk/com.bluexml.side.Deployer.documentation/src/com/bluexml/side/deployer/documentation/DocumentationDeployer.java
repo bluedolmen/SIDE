@@ -69,10 +69,9 @@ public class DocumentationDeployer extends Deployer {
 	}
 
 	private File getAntBuildFile(IFolder dest) throws URISyntaxException, IOException {
-		Bundle b = Platform.getBundle(Activator.PLUGIN_ID);
 		String folderPath = dest.getLocation().toOSString() + File.separator;
-		String folderSource = "src/com/bluexml/side/deployer/documentation/";
-		File ant = moveFile(folderPath, "build.xml", folderSource);
+		String folderSource = "src/com/bluexml/side/deployer/documentation/"; //$NON-NLS-1$
+		File ant = moveFile(folderPath, "build.xml", folderSource); //$NON-NLS-1$
 //		URL entry = b.getEntry("src/com/bluexml/side/deployer/documentation/build.xml"); //$NON-NLS-1$
 //		File f = new File(FileLocator.toFileURL(entry).toURI());
 		return ant;
