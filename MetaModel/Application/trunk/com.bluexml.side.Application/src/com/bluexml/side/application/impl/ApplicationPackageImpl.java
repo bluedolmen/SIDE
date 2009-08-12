@@ -674,7 +674,7 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 		// Initialize enums and add enum literals
 		initEEnum(staticConfigurationParametersEEnum, StaticConfigurationParameters.class, "StaticConfigurationParameters");
 		addEEnumLiteral(staticConfigurationParametersEEnum, StaticConfigurationParameters.GENERATIONOPTIONSCLEAN);
-		addEEnumLiteral(staticConfigurationParametersEEnum, StaticConfigurationParameters.GENERATIONOPTIONSVERBOSE);
+		addEEnumLiteral(staticConfigurationParametersEEnum, StaticConfigurationParameters.GENERATIONOPTIONSDOCUMENTATION);
 		addEEnumLiteral(staticConfigurationParametersEEnum, StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH);
 		addEEnumLiteral(staticConfigurationParametersEEnum, StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH);
 		addEEnumLiteral(staticConfigurationParametersEEnum, StaticConfigurationParameters.GENERATIONOPTION_SKIP_VALIDATION);

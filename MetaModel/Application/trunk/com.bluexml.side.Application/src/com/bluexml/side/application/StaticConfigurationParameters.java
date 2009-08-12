@@ -36,16 +36,14 @@ public enum StaticConfigurationParameters implements Enumerator {
 	GENERATIONOPTIONSCLEAN(0, "generationoptionsclean", "generation.options.clean"),
 
 	/**
-	 * The '<em><b>Generationoptionsverbose</b></em>' literal object.
+	 * The '<em><b>Generationoptionsdocumentation</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #GENERATIONOPTIONSVERBOSE_VALUE
+	 * @see #GENERATIONOPTIONSDOCUMENTATION_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	GENERATIONOPTIONSVERBOSE(1, "generationoptionsverbose", "generation.options.verbose"),
-
-	/**
+	GENERATIONOPTIONSDOCUMENTATION(1, "generationoptionsdocumentation", "generation.options.documentation"), /**
 	 * The '<em><b>Generationoptionslog Path</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -53,9 +51,7 @@ public enum StaticConfigurationParameters implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	GENERATIONOPTIONSLOG_PATH(4, "generationoptionslogPath", "generation.options.logPath"),
-
-	/**
+	GENERATIONOPTIONSLOG_PATH(4, "generationoptionslogPath", "generation.options.logPath"), /**
 	 * The '<em><b>Generationoptionsdestination Path</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -89,19 +85,19 @@ public enum StaticConfigurationParameters implements Enumerator {
 	public static final int GENERATIONOPTIONSCLEAN_VALUE = 0;
 
 	/**
-	 * The '<em><b>Generationoptionsverbose</b></em>' literal value.
+	 * The '<em><b>Generationoptionsdocumentation</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Generationoptionsverbose</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Generationoptionsdocumentation</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #GENERATIONOPTIONSVERBOSE
-	 * @model name="generationoptionsverbose" literal="generation.options.verbose"
+	 * @see #GENERATIONOPTIONSDOCUMENTATION
+	 * @model name="generationoptionsdocumentation" literal="generation.options.documentation"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int GENERATIONOPTIONSVERBOSE_VALUE = 1;
+	public static final int GENERATIONOPTIONSDOCUMENTATION_VALUE = 1;
 
 	/**
 	 * The '<em><b>Generationoptionslog Path</b></em>' literal value.
@@ -157,7 +153,7 @@ public enum StaticConfigurationParameters implements Enumerator {
 	private static final StaticConfigurationParameters[] VALUES_ARRAY =
 		new StaticConfigurationParameters[] {
 			GENERATIONOPTIONSCLEAN,
-			GENERATIONOPTIONSVERBOSE,
+			GENERATIONOPTIONSDOCUMENTATION,
 			GENERATIONOPTIONSLOG_PATH,
 			GENERATIONOPTIONSDESTINATION_PATH,
 			GENERATIONOPTION_SKIP_VALIDATION,
@@ -212,7 +208,7 @@ public enum StaticConfigurationParameters implements Enumerator {
 	public static StaticConfigurationParameters get(int value) {
 		switch (value) {
 			case GENERATIONOPTIONSCLEAN_VALUE: return GENERATIONOPTIONSCLEAN;
-			case GENERATIONOPTIONSVERBOSE_VALUE: return GENERATIONOPTIONSVERBOSE;
+			case GENERATIONOPTIONSDOCUMENTATION_VALUE: return GENERATIONOPTIONSDOCUMENTATION;
 			case GENERATIONOPTIONSLOG_PATH_VALUE: return GENERATIONOPTIONSLOG_PATH;
 			case GENERATIONOPTIONSDESTINATION_PATH_VALUE: return GENERATIONOPTIONSDESTINATION_PATH;
 			case GENERATIONOPTION_SKIP_VALIDATION_VALUE: return GENERATIONOPTION_SKIP_VALIDATION;
@@ -290,5 +286,5 @@ public enum StaticConfigurationParameters implements Enumerator {
 	public String toString() {
 		return literal;
 	}
-	
+
 } //StaticConfigurationParameters

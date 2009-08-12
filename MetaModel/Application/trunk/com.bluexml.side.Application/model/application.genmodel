@@ -9,7 +9,7 @@
       ecorePackage="application.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="application.ecore#//StaticConfigurationParameters">
       <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionsclean"/>
-      <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionsverbose"/>
+      <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionsdocumentation"/>
       <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionslogPath"/>
       <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionsdestinationPath"/>
       <genEnumLiterals ecoreEnumLiteral="application.ecore#//StaticConfigurationParameters/generationoptionSkipValidation"/>

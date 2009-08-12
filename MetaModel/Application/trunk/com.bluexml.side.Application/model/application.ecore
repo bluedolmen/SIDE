@@ -47,7 +47,7 @@
       <details key="documentation" value="List of default configurations parameters."/>
     </eAnnotations>
     <eLiterals name="generationoptionsclean" literal="generation.options.clean"/>
-    <eLiterals name="generationoptionsverbose" value="1" literal="generation.options.verbose"/>
+    <eLiterals name="generationoptionsdocumentation" value="1" literal="generation.options.documentation"/>
     <eLiterals name="generationoptionslogPath" value="4" literal="generation.options.logPath"/>
     <eLiterals name="generationoptionsdestinationPath" value="5" literal="generation.options.destinationPath"/>
     <eLiterals name="generationoptionSkipValidation" value="6" literal="generation.option.Skip.Validation"/>
