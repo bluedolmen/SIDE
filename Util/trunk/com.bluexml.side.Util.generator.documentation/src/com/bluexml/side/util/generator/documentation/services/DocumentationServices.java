@@ -8,7 +8,12 @@ public class DocumentationServices {
 	protected static String modelName;
 
 	public static String getModelName(EObject o) {
-		return modelName;
+		if (modelName.length() > 0) {
+			return modelName;
+		} else {
+			Date d = new Date();
+			return  Long.toString(d.getTime());
+		}
 	}
 
 	public static String getModelName() {
@@ -22,7 +27,7 @@ public class DocumentationServices {
 		}
 		if (name.length() == 0) {
 			Date d = new Date();
-			name = d.toString();
+			name = Long.toString(d.getTime());
 		}
 		DocumentationServices.modelName = name;
 	}

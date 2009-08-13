@@ -44,6 +44,7 @@ public class DocumentationDeployer extends Deployer {
 			runner.addUserProperties(properties);
 			File f = getAntBuildFile(dest);
 			if (f != null && f.exists()) {
+				boolean docCreated = false;
 				if (src.getType() == IFile.FOLDER) {
 					List<IFolder> srcFiles = IFileHelper.getAllFolderForFolder((IFolder)src);
 					for (IFolder file : srcFiles) {
@@ -61,11 +62,15 @@ public class DocumentationDeployer extends Deployer {
 								UIUtils.showAvert("Test", "Properties added ");
 								try {
 									runner.run();
+									docCreated = true;
 								} catch (CoreException e) {
 									Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Build run failed.", e)); //$NON-NLS-1$
 								}
 							}
 						}
+					}
+					if (!docCreated) {
+						Activator.getDefault().getLog().log(new Status(Status.INFO, Activator.PLUGIN_ID, "No doc have been generated.")); //$NON-NLS-1$
 					}
 				}
 			} else {
