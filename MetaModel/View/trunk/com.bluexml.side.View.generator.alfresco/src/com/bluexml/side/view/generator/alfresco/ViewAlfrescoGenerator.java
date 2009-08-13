@@ -7,10 +7,12 @@ import java.util.List;
 import java.util.Properties;
 
 import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
+import com.bluexml.side.util.security.SecurityHelper;
+import com.bluexml.side.util.security.preferences.SidePreferences;
 
 public class ViewAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	public static String MMUri = "http://www.kerblue.org/view/1.0";
-
+	public static String GENERATOR_CODE = "CODE_GED_G_V_ALFRESCO_3";
 	public static String GENERATOR_OPTIONS_DOCLIST = "alfresco.view.doclist";
 
 	@Override
@@ -29,7 +31,7 @@ public class ViewAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	}
 
 	public boolean check() {
-		return true;
+		return SecurityHelper.check(GENERATOR_CODE, SidePreferences.getKey());
 	}
 
 	@Override

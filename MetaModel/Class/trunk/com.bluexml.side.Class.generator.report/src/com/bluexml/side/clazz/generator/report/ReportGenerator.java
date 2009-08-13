@@ -10,9 +10,12 @@ import org.eclipse.core.resources.IFile;
 import com.bluexml.side.util.generator.acceleo.AbstractAcceleoPackageGenerator;
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.IFileHelper;
+import com.bluexml.side.util.security.SecurityHelper;
+import com.bluexml.side.util.security.preferences.SidePreferences;
 
 public class ReportGenerator extends AbstractAcceleoPackageGenerator{
 
+	public static String GENERATOR_CODE = "CODE_GED_G_C_REPORT";
 	public static String GENERATOR_OPTIONS_BIRT = "report.birt";
 	public static String GENERATOR_CONFIGURATION_PARAMETER_AUTHOR = "report.author";
 	public static String MMUri = "http://www.kerblue.org/class/1.0";
@@ -42,7 +45,7 @@ public class ReportGenerator extends AbstractAcceleoPackageGenerator{
 	}
 
 	public boolean check() {
-		return true;
+		return SecurityHelper.check(GENERATOR_CODE, SidePreferences.getKey());
 	}
 
 	/**
