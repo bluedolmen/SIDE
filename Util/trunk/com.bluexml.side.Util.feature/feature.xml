@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Util.feature" label="S-IDE Utils" version="1.0.52.v8160-20090812" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Util.feature" label="S-IDE Utils" version="1.0.53.v8199-20090813" provider-name="BLUEXML">
   <description url="CRM.obl CRM.obldi">BlueXML Developer Studio</description>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
   <requires>
@@ -36,7 +36,7 @@
   <plugin id="com.bluexml.side.Util.model.merge" download-size="0" install-size="0" version="1.0.12" unpack="false" />
   <plugin id="com.bluexml.side.Util.security" download-size="0" install-size="0" version="1.0.15.v8113-20090811" unpack="false" />
   <plugin id="com.bluexml.side.Util.dependencies" download-size="0" install-size="0" version="1.0.5.v8080-20090810" unpack="false" />
-  <plugin id="com.bluexml.side.Util.feedback" download-size="0" install-size="0" version="1.0.11.v8020-20090806" unpack="false" />
+  <plugin id="com.bluexml.side.Util.feedback" download-size="0" install-size="0" version="1.0.12.v8199-20090813" unpack="false" />
   <plugin id="com.bluexml.side.Util.generator.documentation" download-size="0" install-size="0" version="1.0.3.v8160-20090812" unpack="false" />
 </feature>
 
