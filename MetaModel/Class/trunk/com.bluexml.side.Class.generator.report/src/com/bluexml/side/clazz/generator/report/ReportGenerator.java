@@ -15,16 +15,15 @@ import com.bluexml.side.util.security.preferences.SidePreferences;
 
 public class ReportGenerator extends AbstractAcceleoPackageGenerator{
 
-	public static String GENERATOR_CODE = "CODE_GED_G_C_REPORT";
-	public static String GENERATOR_OPTIONS_BIRT = "report.birt";
-	public static String GENERATOR_CONFIGURATION_PARAMETER_AUTHOR = "report.author";
-	public static String MMUri = "http://www.kerblue.org/class/1.0";
-	public static String BIRT_WEBAPP_KEY = "birt.webapp";
-	public static final String CONFIGURATION_PARAMETER_ALFRESCO_HOME = "alfresco.url";
+	public static String GENERATOR_CODE = "CODE_GED_G_C_REPORT"; //$NON-NLS-1$
+	public static String GENERATOR_CONFIGURATION_PARAMETER_AUTHOR = "report.author"; //$NON-NLS-1$
+	public static String MMUri = "http://www.kerblue.org/class/1.0"; //$NON-NLS-1$
+	public static String BIRT_WEBAPP_KEY = "birt.webapp"; //$NON-NLS-1$
+	public static final String CONFIGURATION_PARAMETER_ALFRESCO_HOME = "alfresco.url"; //$NON-NLS-1$
 
 
 	public ReportGenerator(){
-		techVersion = "Birt_2.3.x";
+		techVersion = "Birt_2.3.x"; //$NON-NLS-1$
 		this.setTEMP_FOLDER(getTechVersion());
 	}
 
@@ -36,11 +35,7 @@ public class ReportGenerator extends AbstractAcceleoPackageGenerator{
 	@Override
 	protected List<String> getTemplates() {
 		List<String> birtTemplates = new ArrayList<String>();
-
-		if (getGeneratorOptionValue(GENERATOR_OPTIONS_BIRT)) {
-			birtTemplates.add("/com.bluexml.side.Class.generator.report/src/templates/birt/alfrescoGeneretor_birt_all_in_one.mt");
-		}
-
+		birtTemplates.add("/com.bluexml.side.Class.generator.report/src/templates/birt/alfrescoGeneretor_birt_all_in_one.mt"); //$NON-NLS-1$
 		return birtTemplates;
 	}
 
@@ -56,7 +51,7 @@ public class ReportGenerator extends AbstractAcceleoPackageGenerator{
 	public static String getAuthor(){
 
 		String author = "John Doe";
-		if(!"".equals(getGenerationParameter(GENERATOR_CONFIGURATION_PARAMETER_AUTHOR))){
+		if(!"".equals(getGenerationParameter(GENERATOR_CONFIGURATION_PARAMETER_AUTHOR))){ //$NON-NLS-1$
 			author = getGenerationParameter(GENERATOR_CONFIGURATION_PARAMETER_AUTHOR);
 		}
 		return author;
@@ -64,7 +59,7 @@ public class ReportGenerator extends AbstractAcceleoPackageGenerator{
 
 	public static String getAlfrescoURL() {
 		String alfrescoURL = "John Doe";
-		if(!"".equals(getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME))){
+		if(!"".equals(getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME))){ //$NON-NLS-1$
 			alfrescoURL = getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME);
 		}
 		return alfrescoURL;
@@ -81,7 +76,7 @@ public class ReportGenerator extends AbstractAcceleoPackageGenerator{
 			addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());
 			if (generationParameters.containsKey(BIRT_WEBAPP_KEY)) {
 				String birtUrl = generationParameters.get(BIRT_WEBAPP_KEY);
-				String uri = birtUrl + "/frameset?__report=" + IFileHelper.getFile(f).getName();
+				String uri = birtUrl + "/frameset?__report=" + IFileHelper.getFile(f).getName(); //$NON-NLS-1$
 				addServiceLog("Birt Report",uri, uri);
 			}
 		}
