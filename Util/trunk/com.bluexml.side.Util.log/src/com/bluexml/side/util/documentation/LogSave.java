@@ -150,6 +150,7 @@ public class LogSave {
 	 * @throws Exception
 	 */
 	private static void addDocLink(Element rootNode, IFolder docFolder) throws Exception {
+		IFileHelper.refreshFolder(docFolder);
 		List<IFile> toLink = IFileHelper.getAllFilesForFolder(docFolder);
 		Element rootDoc = new Element("documentation");
 		for (IFile xmlFile : toLink) {
