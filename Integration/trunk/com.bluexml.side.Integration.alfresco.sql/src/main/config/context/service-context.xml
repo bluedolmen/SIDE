@@ -215,12 +215,21 @@
         </property>
     </bean>
 
+	<bean id="atSignTagResolver" class="com.bluexml.side.Integration.alfresco.sql.searcher.AtSignTagResolverImpl">
+		<property name="databaseDictionary" ref="databaseDictionary" />	
+	</bean>
+
+	<bean id="searchParameterBuilderFactory" class="com.bluexml.side.Integration.alfresco.sql.searcher.SearchParameters$BuilderFactory">
+		<property name="databaseDictionary" ref="databaseDictionary" />	
+	</bean>
+
 	<bean id="sqlSearchServiceImpl" class="com.bluexml.side.Integration.alfresco.sql.searcher.SQLSearchServiceImpl">
 		<property name="jdbcTemplate">
 			<bean id="synchronisationJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" >
 				<property name="dataSource" ref="synchronisationDataSource" />
 			</bean>
 		</property>
+		<property name="databaseDictionary" ref="databaseDictionary" />
 	</bean>
 
     <bean id="sqlSearchIntegrationService_transaction" class="org.springframework.transaction.interceptor.TransactionInterceptor">
@@ -261,10 +270,17 @@
     </bean>
 
 	<!-- ======================= -->
-    <!-- Webscript definition    -->
+    <!-- Webscript definitions   -->
     <!-- ======================= -->
-	<bean id="webscript.extension.com.bluexml.side.sql.sqlquery.get" class="com.bluexml.side.Integration.alfresco.sql.webscript.SQLSearchServiceWebscript" parent="webscript">
+	<bean id="webscript.extension.com.bluexml.side.sql.selectnodes.get" class="com.bluexml.side.Integration.alfresco.sql.webscript.SelectNodesWebscript" parent="webscript">
 	    <property name="SQLSearchService" ref="SQLSearchService" />
+	</bean>
+
+	<bean id="webscript.extension.com.bluexml.side.sql.selectnodeproperties.get" class="com.bluexml.side.Integration.alfresco.sql.webscript.SelectNodesWebscript" parent="webscript">
+	    <property name="SQLSearchService" ref="SQLSearchService" />
+	    <!-- 
+	    <property name="searchService" ref="searchService" />
+	    --> 
 	</bean>
 
 </beans>

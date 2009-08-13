@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
 
 import com.bluexml.side.Integration.alfresco.sql.searcher.SQLSearchService;
 
-public class SQLSearchServiceWebscript extends DeclarativeWebScript {
+public class SelectNodesWebscript extends DeclarativeWebScript {
 	
 	Logger logger = Logger.getLogger(getClass());
 	
@@ -24,24 +24,6 @@ public class SQLSearchServiceWebscript extends DeclarativeWebScript {
 	private static final String PARAM_ID_CONSTRAINT = "where";
 	private static final String TEMPLATE_PARAM_ID_NODES = "nodes";
 	
-//	public void execute(WebScriptRequest webscriptrequest, WebScriptResponse webscriptresponse)
-//			throws IOException {
-//		String result = "";
-//				
-//		String searchedType = webscriptrequest.getParameter(PARAM_ID_OBJECT_TYPE);
-//		String constraint = webscriptrequest.getParameter(PARAM_ID_CONSTRAINT);
-//		
-//		if (constraint == null || "".equals(constraint)) {
-//			constraint = "true";
-//		}
-//		
-//		Collection<NodeRef> resultCollection = sqlSearchService.selectNodes(searchedType, constraint);
-//		result = formatResult_(resultCollection);
-//		
-//		//webscriptresponse.setContentType(WebScriptResponse.XML_FORMAT);
-//		webscriptresponse.getWriter().write(result);
-//
-//	}
 
     protected Map<String, Object> executeImpl(WebScriptRequest req, Status status, Cache cache) {
     	Map<String, Object> model = new HashMap<String, Object>();
@@ -66,18 +48,6 @@ public class SQLSearchServiceWebscript extends DeclarativeWebScript {
 		
 		return model;
     }
-	
-//	String formatResult_(Collection<NodeRef> collection) {
-//		StringBuilder result = new StringBuilder();
-//		
-//		result.append("<nodes>");
-//		for (NodeRef nodeRef : collection) {
-//			result.append("<node>" + nodeRef + "</node>");
-//		}
-//		result.append("</nodes>");
-//		
-//		return result.toString();
-//	}
 	
 	// BEAN MANAGEMENT
 	

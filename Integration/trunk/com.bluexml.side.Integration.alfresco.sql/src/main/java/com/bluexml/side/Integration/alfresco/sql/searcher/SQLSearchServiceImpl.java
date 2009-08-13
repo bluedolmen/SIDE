@@ -10,6 +10,8 @@ import org.alfresco.service.cmr.repository.StoreRef;
 import org.springframework.jdbc.core.ColumnMapRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.bluexml.side.Integration.alfresco.sql.synchronisation.dictionary.DatabaseDictionary;
+
 public class SQLSearchServiceImpl implements SQLSearchService {
 	private static String TRUE_SQL_STATEMENT = "TRUE";
 	
@@ -17,16 +19,22 @@ public class SQLSearchServiceImpl implements SQLSearchService {
 		if (condition == null) {
 			condition = TRUE_SQL_STATEMENT;
 		}
-		// TODO : check whether the given typeName is an existing Alfresco type
-		String sqlQuery = String.format("SELECT uuid FROM %1$s WHERE %2$s",typeName, condition);
+		
+		String tableName = databaseDictionary.resolveClassAsTableName(typeName);	
+		if (tableName == null) {
+			throw new InvalidTypeException(typeName);
+		}
+		
+		String sqlQuery = String.format("SELECT uuid FROM %1$s WHERE %2$s", tableName, condition);
 		return executeQuery(sqlQuery);
 	}
 
 	public Collection<NodeRef> selectNodes(SearchParameters searchParameters) {
 		StringBuilder sqlQuery = new StringBuilder();
+		String tableName = searchParameters.getTableName(); 
 		
 		sqlQuery.append("SELECT uuid FROM ");
-		sqlQuery.append(searchParameters.getTypeName());
+		sqlQuery.append(tableName);
 		
 		if (searchParameters.hasAlias()) {
 			sqlQuery.append(" ");
@@ -79,11 +87,14 @@ public class SQLSearchServiceImpl implements SQLSearchService {
 	 */
 
 	private JdbcTemplate jdbcTemplate;
+	private DatabaseDictionary databaseDictionary;
 	
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate_) {
 		jdbcTemplate = jdbcTemplate_;
 	}
 
-
+	public void setDatabaseDictionary(DatabaseDictionary databaseDictionary_) {
+		databaseDictionary = databaseDictionary_;
+	}
 	
 }

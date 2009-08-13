@@ -7,7 +7,7 @@ public interface DatabaseDictionary {
 	 * 
 	 * @param class_name the class_name
 	 * 
-	 * @return the string
+	 * @return the resolved table name or null if cannot be resolved
 	 */
 	public abstract String resolveClassAsTableName(String class_name);
 
@@ -16,7 +16,7 @@ public interface DatabaseDictionary {
 	 * 
 	 * @param association_name the association_name
 	 * 
-	 * @return the string
+	 * @return the resolved association name or null if cannot be resolved
 	 */
 	public abstract String resolveAssociationAsTableName(String association_name);
 
@@ -26,7 +26,7 @@ public interface DatabaseDictionary {
 	 * @param attribute_name the attribute_name
 	 * @param class_name the class_name
 	 * 
-	 * @return the string
+	 * @return the resolved attribute name or null if cannot be resolved
 	 */
 	public abstract String resolveAttributeAsColumnName(String attribute_name,
 			String class_name);

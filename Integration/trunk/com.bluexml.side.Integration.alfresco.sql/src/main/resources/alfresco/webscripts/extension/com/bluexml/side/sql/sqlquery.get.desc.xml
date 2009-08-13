@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<webscript>
-    <shortname>SQL Search Service</shortname>
-    <description>This webscript is used to query the SQL replicate database</description>
-    <url>/sql/search?type={type}&amp;where={where?}</url>
-    <format default="xml">argument</format>
-    <authentication>user</authentication>
-    <transaction>none</transaction>
-</webscript>
