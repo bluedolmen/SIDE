@@ -21,10 +21,6 @@
                      key="CATALINA_HOME"
                      label="Tomcat installation directory">
                </configurationParameter>
-               <option
-                     key="birt.deployer"
-                     label="Birt Deployer">
-               </option>
             </deployerVersion>
          </technologyVersion>
       </technology>
