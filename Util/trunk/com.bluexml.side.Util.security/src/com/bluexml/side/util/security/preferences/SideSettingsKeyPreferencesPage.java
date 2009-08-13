@@ -66,7 +66,7 @@ public class SideSettingsKeyPreferencesPage
 				key = new Text(entryTable, SWT.BORDER);
 				{
 					GridData gridData = new GridData(SWT.LEFT, SWT.CENTER,true,false);
-					gridData.widthHint = 359;
+					//gridData.widthHint = 359;
 					key.setLayoutData(gridData);
 				}
 				key.setText(SidePreferences.getKey());
