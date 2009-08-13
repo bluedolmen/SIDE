@@ -50,7 +50,7 @@ public class DocumentationDeployer extends Deployer {
 						String name = file.getName();
 						List<IFolder> docFiles = IFileHelper.getAllFolderForFolder(file);
 						for (IFolder file2 : docFiles) {
-							UIUtils.showAvert("Test", "Test for " + file2.getName());
+							UIUtils.showAvert("Test", "Test for " + file2.getLocation().toFile().getAbsolutePath());
 							if (file2.getName().equals(DOC_FOLDER_NAME)) {
 								UIUtils.showAvert("Test", "Ant run for " + file2.getName());
 								runner.setBuildFileLocation(f.getAbsolutePath());
