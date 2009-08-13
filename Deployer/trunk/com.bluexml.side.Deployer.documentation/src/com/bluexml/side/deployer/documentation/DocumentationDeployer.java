@@ -15,6 +15,7 @@ import org.eclipse.ant.core.AntRunner;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.runtime.Status;
 
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.util.deployer.Deployer;
@@ -67,41 +68,47 @@ public class DocumentationDeployer extends Deployer {
 	private File getAntBuildFile(IFolder dest) throws URISyntaxException, IOException {
 		String folderPath = dest.getLocation().toOSString() + File.separator;
 		String folderSource = "src/com/bluexml/side/deployer/documentation/"; //$NON-NLS-1$
-		File ant = moveFile(folderPath, "build.xml", folderSource); //$NON-NLS-1$
-//		URL entry = b.getEntry("src/com/bluexml/side/deployer/documentation/build.xml"); //$NON-NLS-1$
-//		File f = new File(FileLocator.toFileURL(entry).toURI());
+		File ant = null;
+		try {
+			ant = moveFile(folderPath, "build.xml", folderSource); //$NON-NLS-1$
+		} catch(Exception e) {
+			Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Error while moving file.", e)); //$NON-NLS-1$
+		}
 		return ant;
 	}
 
 	private static File moveFile(String folderDest, String fileName,
 			String folderSource) throws IOException  {
-		/*InputStream in = LogSave.class.getResourceAsStream(folderSource
-				+ fileName);*/
-		InputStream in = DocumentationDeployer.class.getClassLoader().getResourceAsStream(folderSource+"/"+fileName);
+		InputStream in = DocumentationDeployer.class.getClassLoader().getResourceAsStream(folderSource + fileName);
+
 		File dest = new File(folderDest);
 		if (!dest.exists()) {
 			dest.mkdirs();
 		}
 
 		File file = new File(folderDest + fileName);
+
 		FileOutputStream fos;
 		try {
 			fos = new FileOutputStream(file);
 		} catch (FileNotFoundException e) {
-			System.err.println("FileOutputStream can't be call.");
-			e.printStackTrace();
+			Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "FileOutputStream can't be call.", e)); //$NON-NLS-1$
 			throw e;
 		}
 		int data;
 		try {
 			data = in.read();
 		} catch (IOException e) {
-			System.err.println("Data can't be read");
-			e.printStackTrace();
+			Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Data can't be read", e)); //$NON-NLS-1$
 			throw e;
 		}
 		while (data != -1) {
-			fos.write(data);
+			try {
+				fos.write(data);
+			} catch (IOException e) {
+				Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Error during writing", e)); //$NON-NLS-1$
+				throw e;
+			}
 			data = in.read();
 		}
 		fos.close();
