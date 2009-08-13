@@ -9,17 +9,22 @@ import com.bluexml.side.integration.standalone.utils.Generate;
 
 public class Application implements IApplication {
 
+	protected String[] arguments;
+	
 	public Object start(IApplicationContext context) throws Exception {
+		
+		arguments = (String[]) context.getArguments().get("application.args");
+
 		System.out.println("Start !!!!!!!!!!");
 
 		  // Start Generation
 		System.out.println("Start Generation");
       
 		//File file = new File("workspaceStandAlone/StandAlone/models/My.application");
-		File file = new File("workspaceStandAlone/StandAlone/models/My.application");
+		File file = new File(arguments[0]);
 		
 		System.out.println("file.exists(): " + file.exists());
-		Generate gen = new Generate(file, "ConfigTest");
+		Generate gen = new Generate(file, arguments[1]);
 		System.out.println("created");
 
 		gen.run();
