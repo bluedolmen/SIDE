@@ -940,6 +940,7 @@ public class ApplicationDialog extends Dialog {
 		skipValidationButton.setBounds(160, 116, 131, 20);
 
 		cleanButton = new Button(composite_1, SWT.CHECK);
+		cleanButton.setToolTipText(Messages.getString("ApplicationDialog.2")); //$NON-NLS-1$
 		cleanButton.setText(Messages.getString("ApplicationDialog.44")); //$NON-NLS-1$
 		cleanButton.setBounds(297, 116, 159, 16);
 		cleanButton.addSelectionListener(new SelectionAdapter() {
