@@ -510,6 +510,8 @@ public class Generate extends Thread {
 					e.printStackTrace();
 					error = true;
 					addErrorText(lineSeparator + Messages.getString("Generate.56") + e.getMessage()); //$NON-NLS-1$
+					Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Messages.getString("Generate.56"), e)); //$NON-NLS-1$
+					deployer.addErrorLog(Messages.getString("Generate.56"), e.getStackTrace(), null); //$NON-NLS-1$
 				}
 
 				try {
