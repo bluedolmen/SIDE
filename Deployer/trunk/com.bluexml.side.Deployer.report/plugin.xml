@@ -11,11 +11,11 @@
          <technologyVersion
                description="Check this to generate reports on the release 2.3 of the Birt reporting tool.&lt;br&gt;Birt 2.3.x is the leading open source reporting tool which may be easily embedded in web framework like Alfresco.&lt;br&gt;Additionally to content generation, S-IDE provides the generated reports to follow up the lifecycle of the designed objects."
                id="Birt_2.3.x"
-               version="Birt_2.3.x">
+               version="Birt 2.3.x">
             <deployerVersion
                   class="com.bluexml.side.deployer.report.ReportDeployer"
                   id="com.bluexml.side.Deployer.report"
-                  version="S-IDE Report Deployer">
+                  version="S-IDE Report Deployer 1.0.0">
                <configurationParameter
                      documentation="Set this value to the Alfresco Tomcat directory path in order the deployer puts the packaged war file.&lt;br&gt;&lt;b&gt;This option is mandatory.&lt;/b&gt;"
                      key="CATALINA_HOME"
