@@ -10,6 +10,10 @@ if [ $# -eq 3 ]; then
 else
   exit -2
 fi
+
+# delete workingcopy repository
+rm -rf $TARGET_WORKSPACE/workingcopy
+
 #$DF_HOME=`df -k | grep -i /home | awk '{print $5}'|cut -d"%" -f1 |while read LINE; do
 DF_HOME=`df -k | grep -i /home | awk '{print $5}'|cut -d"%" -f1`
 if [ $DF_HOME -gt $FULL ]; then
