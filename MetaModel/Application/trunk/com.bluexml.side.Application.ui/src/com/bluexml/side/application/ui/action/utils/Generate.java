@@ -98,7 +98,7 @@ public class Generate extends Thread {
 				// Check to know if option have been set, no error but warning
 				// message
 				if (param.getValue() == null || param.getValue().length() == 0) {
-					addWarningText(lineSeparator + Messages.getString("Generate.2") + param.getKey() + " isn't set."); //$NON-NLS-1$ //$NON-NLS-2$
+					addWarningText(lineSeparator + Messages.getString("Generate.2", param.getKey())); //$NON-NLS-1$
 				}
 			}
 		}
@@ -397,7 +397,7 @@ public class Generate extends Thread {
 								generatedFiles = generator.complete();
 								addText(lineSeparator + Messages.getString("Generate.36")); //$NON-NLS-1$
 
-								addText(lineSeparator + Messages.getString("Generate.37") + name + " :"); //$NON-NLS-1$ //$NON-NLS-2$
+								addText(lineSeparator + Messages.getString("Generate.37", new Object[] {name})); //$NON-NLS-1$ //$NON-NLS-2$
 								if (generatedFiles != null) {
 									for (IFile filePath : generatedFiles) {
 										addText(lineSeparator + filePath.getRawLocation().makeAbsolute().toOSString());
