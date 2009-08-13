@@ -15,6 +15,7 @@ import org.eclipse.ant.core.AntRunner;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Status;
 
 import com.bluexml.side.application.StaticConfigurationParameters;
@@ -54,7 +55,11 @@ public class DocumentationDeployer extends Deployer {
 								properties.put("sourceDir", file.getLocation().toFile().getAbsolutePath()); //$NON-NLS-1$
 								properties.put("docName", name); //$NON-NLS-1$
 								runner.addUserProperties(properties);
-								runner.run();
+								try {
+									runner.run();
+								} catch (CoreException e) {
+									Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Build run failed.", e)); //$NON-NLS-1$
+								}
 							}
 						}
 					}
