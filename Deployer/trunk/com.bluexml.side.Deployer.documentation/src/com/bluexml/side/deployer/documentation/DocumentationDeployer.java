@@ -22,6 +22,7 @@ import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.util.deployer.Deployer;
 import com.bluexml.side.util.documentation.LogSave;
 import com.bluexml.side.util.libs.IFileHelper;
+import com.bluexml.side.util.libs.ui.UIUtils;
 
 public class DocumentationDeployer extends Deployer {
 
@@ -43,11 +44,14 @@ public class DocumentationDeployer extends Deployer {
 			runner.addUserProperties(properties);
 			File f = getAntBuildFile(dest);
 			if (f != null && f.exists()) {
+				UIUtils.showAvert("Test", "Ant Build File moved.");
 				if (src.getType() == IFile.FOLDER) {
 					List<IFolder> srcFiles = IFileHelper.getAllFolderForFolder((IFolder)src);
+					UIUtils.showAvert("Test", "Listing folder.");
 					for (IFolder file : srcFiles) {
 						String name = file.getName();
 						List<IFolder> docFiles = IFileHelper.getAllFolderForFolder(file);
+						UIUtils.showAvert("Test", "Listing folder 2.");
 						for (IFolder file2 : docFiles) {
 							if (file2.getName().equals(DOC_FOLDER_NAME)) {
 								runner.setBuildFileLocation(f.getAbsolutePath());
@@ -57,6 +61,7 @@ public class DocumentationDeployer extends Deployer {
 								runner.addUserProperties(properties);
 								try {
 									runner.run();
+									UIUtils.showAvert("Test", "Ant build launch.");
 								} catch (CoreException e) {
 									Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Build run failed.", e)); //$NON-NLS-1$
 								}
