@@ -44,24 +44,23 @@ public class DocumentationDeployer extends Deployer {
 			runner.addUserProperties(properties);
 			File f = getAntBuildFile(dest);
 			if (f != null && f.exists()) {
-				UIUtils.showAvert("Test", "Ant Build File moved.");
 				if (src.getType() == IFile.FOLDER) {
 					List<IFolder> srcFiles = IFileHelper.getAllFolderForFolder((IFolder)src);
-					UIUtils.showAvert("Test", "Listing folder.");
 					for (IFolder file : srcFiles) {
 						String name = file.getName();
 						List<IFolder> docFiles = IFileHelper.getAllFolderForFolder(file);
-						UIUtils.showAvert("Test", "Listing folder 2.");
+						UIUtils.showAvert("Test", "Scanning " + file.getLocation().toFile().getAbsolutePath());
 						for (IFolder file2 : docFiles) {
 							if (file2.getName().equals(DOC_FOLDER_NAME)) {
+								UIUtils.showAvert("Test", "Ant run for " + file2.getName());
 								runner.setBuildFileLocation(f.getAbsolutePath());
 								properties.put("destDir", dest.getLocation().toFile().getAbsolutePath()); //$NON-NLS-1$
 								properties.put("sourceDir", file.getLocation().toFile().getAbsolutePath()); //$NON-NLS-1$
 								properties.put("docName", name); //$NON-NLS-1$
 								runner.addUserProperties(properties);
+								UIUtils.showAvert("Test", "Properties added ");
 								try {
 									runner.run();
-									UIUtils.showAvert("Test", "Ant build launch.");
 								} catch (CoreException e) {
 									Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Build run failed.", e)); //$NON-NLS-1$
 								}
