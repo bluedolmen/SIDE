@@ -22,7 +22,6 @@ import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.util.deployer.Deployer;
 import com.bluexml.side.util.documentation.LogSave;
 import com.bluexml.side.util.libs.IFileHelper;
-import com.bluexml.side.util.libs.ui.UIUtils;
 
 public class DocumentationDeployer extends Deployer {
 
@@ -51,15 +50,15 @@ public class DocumentationDeployer extends Deployer {
 						String name = file.getName();
 						List<IFolder> docFiles = IFileHelper.getAllFolderForFolder(file);
 						for (IFolder file2 : docFiles) {
-							UIUtils.showAvert("Test", "Test for " + file2.getLocation().toFile().getAbsolutePath());
+							//UIUtils.showAvert("Test", "Test for " + file2.getLocation().toFile().getAbsolutePath());
 							if (file2.getName().equals(DOC_FOLDER_NAME)) {
-								UIUtils.showAvert("Test", "Ant run for " + file2.getName());
+								//UIUtils.showAvert("Test", "Ant run for " + file2.getName());
 								runner.setBuildFileLocation(f.getAbsolutePath());
 								properties.put("destDir", dest.getLocation().toFile().getAbsolutePath()); //$NON-NLS-1$
 								properties.put("sourceDir", file.getLocation().toFile().getAbsolutePath()); //$NON-NLS-1$
 								properties.put("docName", name); //$NON-NLS-1$
 								runner.addUserProperties(properties);
-								UIUtils.showAvert("Test", "Properties added ");
+								//UIUtils.showAvert("Test", "Properties added ");
 								try {
 									runner.run();
 									docCreated = true;
