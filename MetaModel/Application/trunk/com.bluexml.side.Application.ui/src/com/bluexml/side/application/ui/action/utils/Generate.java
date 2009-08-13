@@ -380,7 +380,7 @@ public class Generate extends Thread {
 						error = true;
 						addErrorText(lineSeparator + "ERROR : " + (e.getMessage() != null ? e.getMessage() : "")); //$NON-NLS-1$ //$NON-NLS-2$
 						generator.addErrorLog(Messages.getString("Generate.32") + e.getMessage(), e.getStackTrace(), null); //$NON-NLS-1$
-						e.printStackTrace();
+						Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Messages.getString("Generate.32"), e)); //$NON-NLS-1$
 					}
 
 					addOneStep(progressBar);
@@ -408,7 +408,7 @@ public class Generate extends Thread {
 								error = true;
 								addErrorText(lineSeparator + Messages.getString("Generate.39") + (e.getMessage() != null ? e.getMessage() : "")); //$NON-NLS-1$ //$NON-NLS-2$
 								generator.addErrorLog(Messages.getString("Generate.41") + e.getMessage(), e.getStackTrace(), null); //$NON-NLS-1$
-								e.printStackTrace();
+								Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Messages.getString("Generate.39"), e)); //$NON-NLS-1$
 							}
 
 							try {
@@ -416,7 +416,7 @@ public class Generate extends Thread {
 							} catch (Exception e) {
 								generator.addErrorLog(Messages.getString("Generate.42") + e.getMessage(), e.getStackTrace(), null); //$NON-NLS-1$
 								addErrorText(lineSeparator + Messages.getString("Generate.43")); //$NON-NLS-1$
-								e.printStackTrace();
+								Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Messages.getString("Generate.42"), e)); //$NON-NLS-1$
 							}
 
 							addOneStep(progressBar);
