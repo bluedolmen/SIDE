@@ -60,6 +60,7 @@ public class DocumentationDeployer extends Deployer {
 					}
 				}
 			} else {
+				Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Build.xml file not found.")); //$NON-NLS-1$
 				throw new Exception("DocumentationDeployer : build.xml file isn't found.");
 			}
 		}
@@ -68,16 +69,16 @@ public class DocumentationDeployer extends Deployer {
 	private File getAntBuildFile(IFolder dest) throws URISyntaxException, IOException {
 		String folderPath = dest.getLocation().toOSString() + File.separator;
 		String folderSource = "src/com/bluexml/side/deployer/documentation/"; //$NON-NLS-1$
-		File ant = null;
 		try {
-			ant = moveFile(folderPath, "build.xml", folderSource); //$NON-NLS-1$
+			moveFile(folderPath, "build.xml", folderSource); //$NON-NLS-1$
 		} catch(Exception e) {
 			Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Error while moving file.", e)); //$NON-NLS-1$
 		}
+		File ant = new File(folderPath + "build.xml");
 		return ant;
 	}
 
-	private static File moveFile(String folderDest, String fileName,
+	private static void moveFile(String folderDest, String fileName,
 			String folderSource) throws IOException  {
 		InputStream in = DocumentationDeployer.class.getClassLoader().getResourceAsStream(folderSource + fileName);
 
@@ -112,7 +113,6 @@ public class DocumentationDeployer extends Deployer {
 			data = in.read();
 		}
 		fos.close();
-		return file;
 	}
 
 	@Override
