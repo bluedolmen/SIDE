@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:ClassPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" name="com">
+  <packageSet xsi:type="clazz:ClassPackage" name="bluexml">
+    <classSet documentation="" description="" name="Car" title="Car">
+      <metainfo key="visual-component" value=""/>
+      <attributes documentation="" description="" name="numId" title="Number Id" typ="String"/>
+      <attributes documentation="" description="" name="Color" title="Color" typ="String" valueList="//@packageSet.0/@enumerationSet.0"/>
+    </classSet>
+    <classSet documentation="" description="" name="Person" title="Person">
+      <metainfo key="visual-component" value=""/>
+      <attributes documentation="" description="" name="name" title="" typ="String"/>
+    </classSet>
+    <associationSet description="" name="own" title="Own">
+      <firstEnd name="" title="" cardMax="-1" linkedClass="//@packageSet.0/@classSet.1"/>
+      <secondEnd name="R2" title="" cardMax="-1" navigable="true" linkedClass="//@packageSet.0/@classSet.0"/>
+    </associationSet>
+    <enumerationSet name="EnumerationColor">
+      <literals name="blue"/>
+      <literals name="black"/>
+      <literals name="red"/>
+    </enumerationSet>
+  </packageSet>
+</clazz:ClassPackage>
