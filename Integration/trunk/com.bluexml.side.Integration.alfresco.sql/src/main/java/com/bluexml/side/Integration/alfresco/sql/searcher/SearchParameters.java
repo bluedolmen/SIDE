@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.bluexml.side.Integration.alfresco.sql.synchronisation.dictionary.DatabaseDictionary;
+import com.bluexml.side.Integration.alfresco.sql.synchronisation.dictionary.BidirectionalDatabaseDictionary;
 
 public class SearchParameters {
 	
@@ -106,7 +106,6 @@ public class SearchParameters {
 		
 		// Required parameters
 		private final String tableName;
-		private final DatabaseDictionary databaseDictionary;
 		
 		// Optional parameters
 		private String alias = null;
@@ -114,10 +113,8 @@ public class SearchParameters {
 		private String restrictingPath = null;
 		private List<JoinCondition> joinConditions = new ArrayList<JoinCondition>();
 		
-		public Builder(String typeName_, DatabaseDictionary databaseDictionary_) {
-			databaseDictionary = databaseDictionary_;
-			
-			String tableName = databaseDictionary.resolveClassAsTableName(typeName_);
+		public Builder(String typeName_) {			
+			String tableName = tagResolver.translate(typeName_);
 			if (tableName == null) {
 				throw new InvalidTypeException(typeName_);
 			}
@@ -130,7 +127,7 @@ public class SearchParameters {
 		}
 		
 		public Builder condition(String condition_) {
-			condition = condition_;
+			condition = tagResolver.translate(condition_);
 			return this;
 		}
 		
@@ -141,18 +138,20 @@ public class SearchParameters {
 		}
 		
 		public Builder leftJoinType(String otherTypeName_, String associationName_) {
-			String otherTableName = databaseDictionary.resolveClassAsTableName(otherTypeName_);
+			String otherTableName = tagResolver.translate(otherTypeName_);
 			if (otherTableName == null) {
 				throw new InvalidTypeException(otherTypeName_);
 			}
-			String associationTableName = databaseDictionary.resolveAssociationAsTableName(associationName_);
+			String associationTableName = tagResolver.translate(associationName_);
 			if (associationTableName == null) {
 				throw new InvalidAssociationException(associationName_);
 			}
 			
+			String fqAssociationName = databaseDictionary.resolveTableAsAssociationName(associationTableName); // fq : full-qualified
+			
 			logger.info("Join condition is made explicitely on column with name \"" + TYPE_TABLE_ID_COLUMN_NAME + "\"");
-			joinConditions.add(new JoinCondition(associationTableName, TYPE_TABLE_ID_COLUMN_NAME, databaseDictionary.getSourceAlias(associationName_), JoinType.LEFT_JOIN));
-			joinConditions.add(new JoinCondition(otherTableName, databaseDictionary.getTargetAlias(associationName_), TYPE_TABLE_ID_COLUMN_NAME, JoinType.LEFT_JOIN));
+			joinConditions.add(new JoinCondition(associationTableName, TYPE_TABLE_ID_COLUMN_NAME, databaseDictionary.getSourceAlias(fqAssociationName), JoinType.LEFT_JOIN));
+			joinConditions.add(new JoinCondition(otherTableName, databaseDictionary.getTargetAlias(fqAssociationName), TYPE_TABLE_ID_COLUMN_NAME, JoinType.LEFT_JOIN));
 			
 			return this;
 		}
@@ -176,21 +175,39 @@ public class SearchParameters {
 			return new SearchParameters(this);
 		}
 		
+		/*
+		 * Setters for static variables
+		 */
+		
+		private static TagResolver tagResolver;
+		private static BidirectionalDatabaseDictionary databaseDictionary;
+		
+		protected static void setTagResolver(TagResolver tagResolver_) {
+			tagResolver = tagResolver_;
+		}
+		
+		protected static void setDatabaseDictionary(BidirectionalDatabaseDictionary databaseDictionary_) {
+			databaseDictionary = databaseDictionary_;
+		}
+		
 	}
 	
 	public static class BuilderFactory {
 		public Builder createInstance(String typeName_) {
-			return new Builder(typeName_, databaseDictionary);
+			return new Builder(typeName_);
 		}
 		
 		/*
 		 * Spring IoC/DI
 		 */
-
-		private DatabaseDictionary databaseDictionary;
 		
-		public void setDatabaseDictionary(DatabaseDictionary databaseDictionary_) {
-			databaseDictionary = databaseDictionary_;
+		public void setTagResolver(TagResolver tagResolver_) {
+			Builder.setTagResolver(tagResolver_);
+			
+		}
+		
+		public void setDatabaseDictionary(BidirectionalDatabaseDictionary databaseDictionary_) {
+			Builder.setDatabaseDictionary(databaseDictionary_);
 		}
 	}
 }

@@ -13,7 +13,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 /**
  * The Class DatabaseDictionary.
  */
-public class PropertyFileDatabaseDictionary implements DatabaseDictionary {
+public class PropertyFileDatabaseDictionary implements BidirectionalDatabaseDictionary {
 	
 	/** The logger. */
 	private Logger logger = Logger.getLogger(getClass());
@@ -47,8 +47,13 @@ public class PropertyFileDatabaseDictionary implements DatabaseDictionary {
 	/** The Constant KEY_SEPARATOR. */
 	private static final String KEY_SEPARATOR = ".";
 	
+	private static final String CLASS_NAME_PREFIX = CLASS_PREFIX + KEY_SEPARATOR + NAME_PREFIX;
+	
+	private static final String ASSOCIATION_NAME_PREFIX = ASSOCIATION_PREFIX + KEY_SEPARATOR + NAME_PREFIX;
+	
 	/** The Dictionary. */
 	private Map<String, String> _dictionary = new HashMap<String, String>();
+	private Map<String, String> _reverseNameDictionary = new HashMap<String, String>();
 		
 		
 	/* (non-Javadoc)
@@ -56,9 +61,7 @@ public class PropertyFileDatabaseDictionary implements DatabaseDictionary {
 	 */
 	public String resolveClassAsTableName (String class_name) {
 		String key = StringUtils.join(new String[] {CLASS_PREFIX, NAME_PREFIX, class_name}, KEY_SEPARATOR);
-		String tableName = getDictionaryValue(key);
-		String tableRename = (tableName != null ? renamingStrategy.renameTable(tableName) : null); 
-		return tableRename;
+		return getDictionaryValue(key);
 	}
 	
 	/* (non-Javadoc)
@@ -66,9 +69,7 @@ public class PropertyFileDatabaseDictionary implements DatabaseDictionary {
 	 */
 	public String resolveAssociationAsTableName (String association_name) {
 		String key = StringUtils.join(new String[] {ASSOCIATION_PREFIX, NAME_PREFIX, association_name}, KEY_SEPARATOR);
-		String tableName = getDictionaryValue(key);
-		String tableRename = (tableName != null ? renamingStrategy.renameTable(tableName) : null); 
-		return tableRename;
+		return getDictionaryValue(key);
 	}
 
 	/* (non-Javadoc)
@@ -124,6 +125,14 @@ public class PropertyFileDatabaseDictionary implements DatabaseDictionary {
 		return getDictionaryValue(key);
 	}
 
+	public String resolveTableAsAssociationName(String tableName) {
+		return getDictionaryKey(tableName);
+	}
+
+	public String resolveTableAsClassName(String tableName) {
+		return getDictionaryKey(tableName);
+	}
+
 	
 	/**
 	 * Gets the dictionary value.
@@ -133,7 +142,7 @@ public class PropertyFileDatabaseDictionary implements DatabaseDictionary {
 	 * @return the dictionary value
 	 */
 	protected String getDictionaryValue(String key) {
-		String result = _dictionary.get(key);
+		String result = (String) _dictionary.get(key);
 		
 		if (result == null) {
 			logger.debug("Cannot find any translation for the key \"" + key + "\"");
@@ -141,14 +150,30 @@ public class PropertyFileDatabaseDictionary implements DatabaseDictionary {
 		return result;
 	}
 	
-			
+
+	/**
+	 * Gets the dictionary key associated to the value.
+	 * 
+	 * @param key the value
+	 * 
+	 * @return the dictionary key
+	 */
+	protected String getDictionaryKey(String value) {
+		String result =  _reverseNameDictionary.get(value);
+		
+		if (result == null) {
+			logger.debug("Cannot find any reverse translation for the value \"" + value + "\"");
+		}
+		return result;
+	}
+
+	
 	private void _loadResource(Resource r) {
 		Properties properties = new Properties();
 		try {
 			properties.load(r.getInputStream());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e);
 		}
 		
 		for (Object property : properties.keySet()) {
@@ -159,6 +184,21 @@ public class PropertyFileDatabaseDictionary implements DatabaseDictionary {
 		
 	}
 
+	public void init() {
+		for (String key : _dictionary.keySet()) {
+			if (key.startsWith(CLASS_NAME_PREFIX) || key.startsWith(ASSOCIATION_NAME_PREFIX)) {
+				// If table or association name, then applies the renaming strategy
+				String value = renamingStrategy.renameTable(_dictionary.get(key));
+				
+				if (_reverseNameDictionary.containsKey(value)) {
+					//logger.error("Table name conflict detected on value \"" + value + "\"");
+					throw new TableNameConflict(value);
+				}
+				_reverseNameDictionary.put(value, key);
+				_dictionary.put(key, value);
+			}			
+		}
+	}
 	
 	/*
 	 * Spring IOC/DI material
@@ -172,13 +212,13 @@ public class PropertyFileDatabaseDictionary implements DatabaseDictionary {
 				_loadResource(r);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 	
 	public void setRenamingStrategy(AbstractRenamingStrategy renamingStrategy_) {
 		renamingStrategy = renamingStrategy_;
 	}
+
 
 }

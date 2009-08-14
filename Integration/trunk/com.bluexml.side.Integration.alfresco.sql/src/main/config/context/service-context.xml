@@ -52,11 +52,11 @@
 		<property name="dataSource" ref="synchronisationDataSource" />
 	</bean>
 
-	<bean id="databaseDictionary" class="com.bluexml.side.Integration.alfresco.sql.synchronisation.dictionary.PropertyFileDatabaseDictionary" >
-		<property name="resourcePattern" value="classpath*:alfresco/module/*/synchronisation-database-mapping.properties" />
+	<bean id="databaseDictionary" class="com.bluexml.side.Integration.alfresco.sql.synchronisation.dictionary.PropertyFileDatabaseDictionary" init-method="init">
 		<property name="renamingStrategy">
 			<bean id="truncateRenamingStrategy" class="com.bluexml.side.Integration.alfresco.sql.synchronisation.dictionary.TruncateRenamingStrategy" parent="abstractRenamingStrategy" />
 		</property>
+		<property name="resourcePattern" value="classpath*:alfresco/module/*/synchronisation-database-mapping.properties" />
 	</bean>
 
  	<bean id="synchronisationPolicy" class="com.bluexml.side.Integration.alfresco.sql.synchronisation.SQLSynchronisationPolicy" init-method="init">
@@ -199,12 +199,8 @@
 
 
 	<bean id="SQLSearchService" class="org.springframework.aop.framework.ProxyFactoryBean">
-        <property name="proxyInterfaces">
-            <value>com.bluexml.side.Integration.alfresco.sql.searcher.SQLSearchService</value>
-        </property>
-        <property name="target">
-            <ref local="sqlSearchServiceImpl"/>
-        </property>
+        <property name="proxyInterfaces" value="com.bluexml.side.Integration.alfresco.sql.searcher.SQLSearchService" />
+        <property name="target" ref="sqlSearchServiceImpl" />
         <property name="interceptorNames">
             <list>
                 <idref local="sqlSearchIntegrationService_transaction"/>
@@ -221,6 +217,7 @@
 
 	<bean id="searchParameterBuilderFactory" class="com.bluexml.side.Integration.alfresco.sql.searcher.SearchParameters$BuilderFactory">
 		<property name="databaseDictionary" ref="databaseDictionary" />	
+		<property name="tagResolver" ref="atSignTagResolver" />
 	</bean>
 
 	<bean id="sqlSearchServiceImpl" class="com.bluexml.side.Integration.alfresco.sql.searcher.SQLSearchServiceImpl">
@@ -229,7 +226,7 @@
 				<property name="dataSource" ref="synchronisationDataSource" />
 			</bean>
 		</property>
-		<property name="databaseDictionary" ref="databaseDictionary" />
+		<property name="tagResolver" ref="atSignTagResolver" />
 	</bean>
 
     <bean id="sqlSearchIntegrationService_transaction" class="org.springframework.transaction.interceptor.TransactionInterceptor">

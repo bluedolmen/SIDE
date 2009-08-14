@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import com.bluexml.side.Integration.alfresco.sql.synchronisation.dictionary.DatabaseDictionary;
 
 public class AtSignTagResolverImpl implements TagResolver {
-	final Pattern pTag = Pattern.compile("@?\\{.+\\}");
+	final Pattern pTag = Pattern.compile("@.?\\{.+\\}");
 	final Pattern pType = Pattern.compile("@T\\{(.+)\\}"); 
 	final Pattern pProperty = Pattern.compile("@P\\{(.+,.+)\\}"); 
 	final Pattern pAssociation = Pattern.compile("@A\\{(.+)\\}"); 
@@ -34,7 +34,7 @@ public class AtSignTagResolverImpl implements TagResolver {
 		StringBuffer result = new StringBuffer();
 		
 		 while (matcher.find()) {
-			 String typeName = matcher.group();
+			 String typeName = matcher.group(1);
 			 String tableName = databaseDictionary.resolveClassAsTableName(typeName);
 		     matcher.appendReplacement(result, tableName);
 		 }
@@ -63,7 +63,7 @@ public class AtSignTagResolverImpl implements TagResolver {
 		StringBuffer result = new StringBuffer();
 		
 		 while (matcher.find()) {
-			 String associationName = matcher.group();
+			 String associationName = matcher.group(1);
 			 String tableName = databaseDictionary.resolveAssociationAsTableName(associationName);
 		     matcher.appendReplacement(result, tableName);
 		 }
