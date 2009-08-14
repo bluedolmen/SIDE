@@ -110,10 +110,10 @@ public class LogSave {
 
 
 		// We create the top root element of the general log file
-		Element rootNode = new Element("logRoot");
+		Element rootNode = new Element("logRoot"); //$NON-NLS-1$
 		Document doc = new Document();
-		ProcessingInstruction pi = new ProcessingInstruction("xml-stylesheet",
-				"type='text/xsl' href='stylesheet/log2html.xsl'");
+		ProcessingInstruction pi = new ProcessingInstruction("xml-stylesheet", //$NON-NLS-1$
+				"type='text/xsl' href='stylesheet/log2html.xsl'"); //$NON-NLS-1$
 		doc.addContent(pi);
 		doc.setRootElement(rootNode);
 
@@ -129,7 +129,7 @@ public class LogSave {
 
 		// We create the general log file
 		IFileHelper.deleteFile(logFolder.getFullPath()
-				+ System.getProperty("file.separator") + LOG_FILE_NAME);
+				+ File.separator + LOG_FILE_NAME);
 		IFile genLog = IFileHelper.createFile(logFolder, LOG_FILE_NAME);
 		if (genLog != null) {
 			File genLogFile = IFileHelper.getFile(genLog);
@@ -152,11 +152,11 @@ public class LogSave {
 	private static void addDocLink(Element rootNode, IFolder docFolder) throws Exception {
 		IFileHelper.refreshFolder(docFolder);
 		List<IFile> toLink = IFileHelper.getAllFilesForFolder(docFolder);
-		Element rootDoc = new Element("documentation");
+		Element rootDoc = new Element("documentation"); //$NON-NLS-1$
 		for (IFile xmlFile : toLink) {
 			if (xmlFile.getName().endsWith(LOG_FILE_EXT)) {
-				Element entry = new Element("entry");
-				entry.setAttribute("path", LOG_DOC_FOLDER + "/" + xmlFile.getName());
+				Element entry = new Element("entry"); //$NON-NLS-1$
+				entry.setAttribute("path", LOG_DOC_FOLDER + "/" + xmlFile.getName());  //$NON-NLS-1$//$NON-NLS-2$
 				rootDoc.addContent(entry);
 			}
 		}
@@ -174,7 +174,7 @@ public class LogSave {
 		// We get all files
 		List<IFile> toMerge = IFileHelper.getAllFilesForFolder(tmpFolder);
 		for (IFile xmlFile : toMerge) {
-			if (xmlFile.getName().endsWith(".xml")
+			if (xmlFile.getName().endsWith(".xml") //$NON-NLS-1$
 					&& !xmlFile.getName().equals(LOG_FILE_NAME)) {
 				SAXBuilder builder = new SAXBuilder();
 				try {

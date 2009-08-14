@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
 import org.jdom.Attribute;
@@ -90,13 +92,33 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	public final void createStampFile() throws CoreException, FileNotFoundException, IOException {
 		IFileHelper.refreshFolder(getTargetPath());
 		IFolder	ff = IFileHelper.createFolder(getTargetPath() + File.separator + techVersion);
-		Element racine = new Element("toDeploy");
-		Attribute classe = new Attribute("id", this.id);
+		Element racine = new Element("toDeploy"); //$NON-NLS-1$
+		Attribute classe = new Attribute("id", this.id); //$NON-NLS-1$
 		racine.setAttribute(classe);
-		Attribute date = new Attribute("date", new Date().toString());
+		Attribute date = new Attribute("date", new Date().toString()); //$NON-NLS-1$
 		racine.setAttribute(date);
 		XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-		sortie.output(racine, new FileOutputStream(IFileHelper.getFile(IFileHelper.createFile(ff, this.id + ".xml"))));
+		sortie.output(racine, new FileOutputStream(IFileHelper.getFile(IFileHelper.createFile(ff, this.id + ".xml")))); //$NON-NLS-1$
+	}
+
+	/**
+	 * Add log to know on each model have been launch generation
+	 * @param name
+	 */
+	public void addModelLog (String name){
+		log.addModel(name);
+	}
+
+	public void addModelLog (List<String> names){
+		for (String name : names) {
+			addModelLog(name);
+		}
+	}
+
+	public void addModelsLog (List<IFile> models){
+		for (IFile model : models) {
+			addModelLog(model.getName());
+		}
 	}
 
 	/**

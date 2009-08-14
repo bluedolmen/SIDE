@@ -60,7 +60,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 
 	/**
 	 * use to give an version number to this generation package
-	 * 
+	 *
 	 * @return
 	 */
 	public String getVersioNumber() {
@@ -90,9 +90,9 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 	 */
 
 	public Collection<IFile> generate(Map<String, List<IFile>> modelsInfo, String id_metamodel) throws Exception {
-		
+
 		System.out.println("Generate Map String");
-		
+
 		Collection<IFile> results = new ArrayList<IFile>();
 		if (modelsInfo.get(id_metamodel) != null && modelsInfo.get(id_metamodel).size() > 0) {
 			List<IFile> models = modelsInfo.get(id_metamodel);
@@ -100,6 +100,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 			for (Map.Entry<String, List<IFile>> l : groupedModels.entrySet()) {
 				String rootName = l.getKey();
 				List<IFile> models_ = l.getValue();
+				addModelsLog(models_);
 				IFile mergedModel = merging(models_);
 				// initialize generator we must change the TEMP_FOLDER
 				System.out.println("getClass().getName(): " + getClass().getName());
@@ -124,19 +125,19 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 	}
 
 	public Collection<IFile> generate(IFile model) throws Exception {
-		
+
 		System.out.println("Generate IFile model");
 
 		// References to files in the project
 		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-		
+
 		System.out.println("Iworkspace: " + myWorkspaceRoot );
 		// Temporary project
 		IProject tmpProject = myWorkspaceRoot.getProject(projectName);
 
 		System.out.println("tmpProject: " + tmpProject );
 		System.out.println("tmpProject.exists: " + tmpProject.exists() );
-		
+
 		if (tmpProject.exists()) {
 			tmpProject.delete(true, null);
 		}
@@ -144,12 +145,12 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		if (!tmpProject.exists()) {
 			tmpProject.create(null);
 		}
-		
+
 		System.out.println("tmpProject.isOpen(): " + tmpProject.isOpen() );
 		if (!tmpProject.isOpen()) {
 			tmpProject.open(null);
 		}
-		
+
 		System.out.println("tmpProject.exists(): " + tmpProject.exists() + " -> " + tmpProject.getFullPath());
 
 		// CChain chain = new ChainFactory.eINSTANCE.createChain();
@@ -172,7 +173,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		Folder folder = ChainFactory.eINSTANCE.createFolder();
 
 		System.out.println("folder: " + folder.getPath());
-		
+
 		EFactory.eAdd(repository, "files", folder);
 		String path = getTemporaryFolder();
 		if (path == null || path.length() == 0) {
@@ -194,7 +195,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		EFactory.eSet(pim, "path", getMetamodelURI());
 
 		for (String templateFile : getTemplates()) {
-			
+
 			System.out.println("Templates: " + templateFile);
 			// Generator
 			Generator generator = ChainFactory.eINSTANCE.createGenerator();
