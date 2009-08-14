@@ -45,8 +45,10 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 		        <div style="display: inline; align: right;">
 				    <input type="button" name="config_facet" id="config_facet" value="Configurer"
 				        onclick="setup()"/>
-				    <input type="button" name="update_facets" id="update_facets" value="Mise � jour" 
+				    <input type="button" name="update_facets" id="update_facets" value="Mise à jour" 
 		                    onclick="update_facets()"/>
+		            <input type="button" name="update_facets_with_SQL" id="update_facets_with_SQL" value="Mise à jour par SQL" 
+		                    onclick="update_facets_with_SQL()"/>
 				</div>
 	        </div>
 	        <hr Class="hr1"/>
