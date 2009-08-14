@@ -80,28 +80,28 @@ public class GeneratePopUp extends Dialog {
 		container.setLayout(null);
 
 		final ProgressBar progressBar = new ProgressBar(container, SWT.SMOOTH);
-		progressBar.setBounds(10, 69, 464, 17);
+		progressBar.setBounds(10, 69, 514, 17);
 		Display.getDefault().getActiveShell();
 
 		final Label label = new Label(container, SWT.NONE);
 		label.setForeground(SWTResourceManager.getColor(92, 92, 92));
 		label.setAlignment(SWT.CENTER);
-		label.setBounds(10, 100, 464, 15);
+		label.setBounds(10, 92, 464, 15);
 
 		final Label generationsOptionsLabel = new Label(container, SWT.NONE);
 		generationsOptionsLabel.setAlignment(SWT.CENTER);
-		generationsOptionsLabel.setBounds(10, 24, 464, 24);
+		generationsOptionsLabel.setBounds(10, 24, 514, 24);
 		generationsOptionsLabel.setFont(SWTResourceManager.getFont("", 12, SWT.BOLD));
 		generationsOptionsLabel.setText("Generation");
 
 		final StyledText styletext = new StyledText(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		styletext.setBounds(10, 135, 464, 128);
+		styletext.setBounds(10, 113, 514, 201);
 
 		//final Browser logLink = new Browser(container, SWT.NONE);
 
 		FormText logLink = new FormText(container, SWT.WRAP);
 		logLink.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
-		logLink.setBounds(137, 269, 223, 44);
+		logLink.setBounds(137, 320, 223, 24);
 		logLink.setVisible(false);
 		logLink.setText("<form><p>Log File can be found <a href=\"log\">here</a>.</p></form>", true, true);
 
@@ -141,7 +141,7 @@ public class GeneratePopUp extends Dialog {
 	 */
 	@Override
 	protected Point getInitialSize() {
-		return new Point(500, 400);
+		return new Point(550, 431);
 	}
 
 }

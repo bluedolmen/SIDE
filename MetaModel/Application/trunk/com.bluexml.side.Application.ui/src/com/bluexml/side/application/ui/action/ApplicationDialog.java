@@ -24,6 +24,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -42,8 +43,6 @@ import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.accessibility.AccessibleAdapter;
-import org.eclipse.swt.accessibility.AccessibleEvent;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
@@ -88,6 +87,7 @@ import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.Option;
 import com.bluexml.side.application.StaticConfigurationParameters;
+import com.bluexml.side.application.ui.Activator;
 import com.bluexml.side.application.ui.SWTResourceManager;
 import com.bluexml.side.application.ui.action.contraints.ConstraintsChecker;
 import com.bluexml.side.application.ui.action.table.GeneratorParameter;
@@ -184,7 +184,7 @@ public class ApplicationDialog extends Dialog {
 			application = (Application) resource.getContents().get(0);
 			model = file;
 		} catch (Exception e) {
-			e.printStackTrace();
+			Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Application Dialog Launch Error", e)); //$NON-NLS-1$
 		}
 		configurationParameters = new HashMap<String, GeneratorParameter>();
 		deployerParameters = new HashMap<String, GeneratorParameter>();
@@ -787,13 +787,6 @@ public class ApplicationDialog extends Dialog {
 		errorMsg.setBounds(493, 67, 297, 15);
 		errorMsg.setForeground(new Color(container.getDisplay(), 255, 0, 0));
 
-		if (configurationList.getItemCount() > 0) {
-			configurationList.select(0);
-		} else {
-			tabFolder.setEnabled(false);
-			errorMsg.setText(Messages.getString("ApplicationDialog.26")); //$NON-NLS-1$
-		}
-
 		generationConfigurationTabItem = new TabItem(tabFolder, SWT.NONE);
 		generationConfigurationTabItem.setText(Messages.getString("ApplicationDialog.27")); //$NON-NLS-1$
 
@@ -1047,33 +1040,7 @@ public class ApplicationDialog extends Dialog {
 		addBt.setBounds(375, 10, 48, 26);
 		addBt.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent e) {
-				Configuration config = ApplicationFactory.eINSTANCE.createConfiguration();
-
-				int i = 0;
-				String newName = Messages.getString("ApplicationDialog.51"); //$NON-NLS-1$
-				while (application.getConfiguration(newName) != null) {
-					i++;
-					newName = "New configuration (" + i + ")"; //$NON-NLS-1$ //$NON-NLS-2$
-				}
-				config.setName(newName);
-				configurationList.add(newName);
-				configurationList.select(configurationList.getItemCount() - 1);
-				addStaticParameters(config);
-				application.getElements().add(config);
-				modificationMade();
-				tabFolder.setEnabled(true);
-				errorMsg.setText(""); //$NON-NLS-1$
-				refreshConfiguration();
-			}
-
-
-
-			private void addStaticParameters(Configuration config) {
-				addStaticParam(KEY_DOCUMENTATION,"false",config); //$NON-NLS-1$
-				addStaticParam(KEY_SKIPVALIDATION,"false",config); //$NON-NLS-1$
-				addStaticParam(KEY_DOCLEAN,"false",config); //$NON-NLS-1$
-				addStaticParam(KEY_LOGPATH,"",config); //$NON-NLS-1$
-				addStaticParam(KEY_GENPATH,"",config); //$NON-NLS-1$
+				createNewConfiguration();
 			}
 		});
 		addBt.setImage(SWTResourceManager.getImage(ApplicationDialog.class, "tree/img/add.png")); //$NON-NLS-1$
@@ -1136,16 +1103,77 @@ public class ApplicationDialog extends Dialog {
 		generationsOptionsLabel_1.setFont(SWTResourceManager.getFont("", 11, SWT.NONE)); //$NON-NLS-1$
 		generationsOptionsLabel_1.setText(Messages.getString("ApplicationDialog.65")); //$NON-NLS-1$
 
+		if (configurationList.getItemCount() > 0) {
+			configurationList.select(0);
+		} else {
+			tabFolder.setEnabled(false);
+			errorMsg.setText(Messages.getString("ApplicationDialog.26")); //$NON-NLS-1$
+			addDefaultConfiguration();
+		}
+
 		refreshConfiguration();
 
 		return container;
 	}
 
+	/**
+	 * Call when .application is open and no Configuration found in it.
+	 */
+	private void addDefaultConfiguration() {
+		createNewConfiguration();
+	}
+
+	/**
+	 * Create a new blank configuration
+	 */
+	private void createNewConfiguration() {
+		Configuration config = ApplicationFactory.eINSTANCE.createConfiguration();
+
+		int i = 0;
+		String newName = Messages.getString("ApplicationDialog.51"); //$NON-NLS-1$
+		while (application.getConfiguration(newName) != null) {
+			i++;
+			newName = "New configuration (" + i + ")"; //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		config.setName(newName);
+		configurationList.add(newName);
+		configurationList.select(configurationList.getItemCount() - 1);
+		addStaticParameters(config);
+		application.getElements().add(config);
+		modificationMade();
+		tabFolder.setEnabled(true);
+		errorMsg.setText(""); //$NON-NLS-1$
+		refreshConfiguration();
+	}
+
+	/**
+	 * Create the static parameters (used for conf init)
+	 * @param config
+	 */
+	private void addStaticParameters(Configuration config) {
+		addStaticParam(KEY_DOCUMENTATION,"false",config); //$NON-NLS-1$
+		addStaticParam(KEY_SKIPVALIDATION,"false",config); //$NON-NLS-1$
+		addStaticParam(KEY_DOCLEAN,"false",config); //$NON-NLS-1$
+		addStaticParam(KEY_LOGPATH,"",config); //$NON-NLS-1$
+		addStaticParam(KEY_GENPATH,"",config); //$NON-NLS-1$
+	}
+
+	/**
+	 * Add a static param to the current configuration
+	 * @param key
+	 * @param value
+	 */
 	protected void addStaticParam(String key, String value) {
 		Configuration config = getCurrentConfiguration();
 		addStaticParam(key,value,config);
 	}
 
+	/**
+	 * Add a static param for a given configuration (useful when a new static param is added)
+	 * @param key
+	 * @param value
+	 * @param config
+	 */
 	protected void addStaticParam(String key, String value, Configuration config) {
 		ConfigurationParameters param = ApplicationFactory.eINSTANCE.createConfigurationParameters();
 		param.setKey(key);
