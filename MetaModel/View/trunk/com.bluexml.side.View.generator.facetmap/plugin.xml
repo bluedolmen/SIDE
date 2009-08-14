@@ -4,7 +4,7 @@
    <extension
          point="com.bluexml.side.Application.com_bluexml_application_configuration">
       <metamodel
-            id="http://www.kerblue.org/v2/ksr300-view"
+            id="http://www.kerblue.org/view/1.0"
             name="KSR300 View"
             url="http://www.kerblue.org/v2/ksr300-view">
          <technology
