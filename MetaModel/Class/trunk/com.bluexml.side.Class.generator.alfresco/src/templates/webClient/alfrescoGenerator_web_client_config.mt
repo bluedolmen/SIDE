@@ -115,6 +115,4 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 	<%alfrescoGenerator_dynamic()%>
 	<%alfrescoGenerator_config_actions() %>
    
-     
-  	
 </alfresco-config>
