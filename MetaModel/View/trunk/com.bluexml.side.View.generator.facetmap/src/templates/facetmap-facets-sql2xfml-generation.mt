@@ -15,10 +15,10 @@ import com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator
 property[@name='<% contentModelUrl %><%mapTo.filter("Attribute").getFullName().replaceAll("\.","_")%>']
 
 <%script type="view.FieldElement" name="getFieldPath"%>	
-child::<% cmisPath() %>
+child::<% Path() %>
 
 <%script type="view.FieldElement" name="getFieldPathWithNode"%>	
-child::node/<% cmisPath() %>
+child::node/<% Path() %>
 
 <%script type="view.FacetMap" name="taxonomy"%>
 		<%for (getFields()){%>
