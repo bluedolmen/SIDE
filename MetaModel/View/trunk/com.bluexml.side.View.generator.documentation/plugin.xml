@@ -6,7 +6,7 @@
       <metamodel
             id="http://www.kerblue.org/view/1.0"
             name="KSR300 View"
-            url="http://www.kerblue.org/view/1.0">
+            url="http://www.kerblue.org/v2/ksr300-view">
          <technology
                description="Generate documentation (in docbook) for the models of the metamodel."
                id="docbook"
