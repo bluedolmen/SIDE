@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Workflow.generator.alfresco.feature" label="S-IDE Alfresco Wokflow Generator" version="1.0.19.v8056-20090807" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Workflow.generator.alfresco.feature" label="S-IDE Alfresco Wokflow Generator" version="1.0.20.v8268-20090814" provider-name="BLUEXML">
   <description url="http://www.example.com/description">License</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
@@ -22,6 +22,6 @@
     <import plugin="com.bluexml.side.Util.metaModel.validate" version="1.0.1" match="greaterOrEqual" />
     <import plugin="com.bluexml.side.Util.security" />
   </requires>
-  <plugin id="com.bluexml.side.Workflow.generator.alfresco" download-size="0" install-size="0" version="1.0.18.v8020-20090806" unpack="false" />
+  <plugin id="com.bluexml.side.Workflow.generator.alfresco" download-size="0" install-size="0" version="1.0.19.v8268-20090814" unpack="false" />
 </feature>
 
