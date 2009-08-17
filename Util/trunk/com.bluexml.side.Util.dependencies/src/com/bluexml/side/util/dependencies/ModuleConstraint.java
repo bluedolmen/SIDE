@@ -8,7 +8,7 @@ public class ModuleConstraint {
 	protected String artifactId = null;
 	protected String groupId = null;
 	protected String moduleType = null;
-	protected String tech_version ="";
+	protected String tech_version = "";
 	protected ModuleVersion versionMin = null;
 	protected ModuleVersion versionMax = null;
 	protected ModuleVersion resolvedVersion = null;
@@ -25,7 +25,7 @@ public class ModuleConstraint {
 	public ModuleConstraint() {
 	};
 
-	public ModuleConstraint(String id,String tech_version, String moduleType, String versionNumMin, String versionNumMax) {
+	public ModuleConstraint(String id, String tech_version, String moduleType, String versionNumMin, String versionNumMax) {
 		setGroupAndArtifactId(id);
 		this.tech_version = tech_version;
 		this.moduleType = moduleType;
@@ -72,10 +72,15 @@ public class ModuleConstraint {
 		this.versionMax = new ModuleVersion(versionMax);
 	}
 
+	/**
+	 * extract from moduleId the maven groupId, and artifactId
+	 * 
+	 * @param id
+	 */
 	public void setGroupAndArtifactId(String id) {
 		this.groupId = id.substring(0, id.lastIndexOf("."));
-		this.artifactId = id;
-		// this.artifactId = id.substring(id.lastIndexOf(".")+1);
+		 this.artifactId = id;
+		//this.artifactId = id.substring(id.lastIndexOf(".") + 1);
 	}
 
 	public static Collection<ModuleVersion> getAllMin(Collection<ModuleConstraint> col) {
