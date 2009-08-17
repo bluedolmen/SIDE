@@ -4,7 +4,7 @@ Bundle-Name: Libs Plug-in
 Bundle-SymbolicName: com.bluexml.side.Util.libs;singleton:=true
 Bundle-Version: 1.0.18.v8119-20090811
 Bundle-Activator: com.bluexml.side.util.libs.Activator
-Bundle-Vendor: BLUEXML
+Bundle-Vendor: www.bluexml.com
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.swt,
  org.eclipse.ui

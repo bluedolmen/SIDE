@@ -4,7 +4,7 @@ Bundle-Name: Util Ecore Plug-in
 Bundle-SymbolicName: com.bluexml.side.Util.ecore
 Bundle-Version: 1.0.11
 Bundle-Activator: com.bluexml.side.Util.ecore.Activator
-Bundle-Vendor: BLUEXML
+Bundle-Vendor: www.bluexml.com
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf,
  org.eclipse.emf.ecore,

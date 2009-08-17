@@ -4,7 +4,7 @@ Bundle-Name: Deployer Plug-in
 Bundle-SymbolicName: com.bluexml.side.Util.deployer;singleton:=true
 Bundle-Version: 1.0.18.v7684-20090724
 Bundle-Activator: com.bluexml.side.util.deployer.Activator
-Bundle-Vendor: BLUEXML
+Bundle-Vendor: www.bluexml.com
 Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Util.libs,
  org.eclipse.core.resources,

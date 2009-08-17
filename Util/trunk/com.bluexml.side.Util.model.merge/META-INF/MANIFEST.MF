@@ -5,7 +5,7 @@ Bundle-Name: Merge Plug-in
 Bundle-SymbolicName: com.bluexml.side.Util.model.merge
 Bundle-Version: 1.0.12
 Bundle-Activator: com.bluexml.side.util.model.merge.Activator
-Bundle-Vendor: BLUEXML
+Bundle-Vendor: www.bluexml.com
 Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Util.ecore,
  org.eclipse.emf.common,

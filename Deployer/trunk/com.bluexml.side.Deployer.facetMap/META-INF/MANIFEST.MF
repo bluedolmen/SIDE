@@ -4,7 +4,7 @@ Bundle-Name: FacetMap Plug-in
 Bundle-SymbolicName: com.bluexml.side.Deployer.facetMap;singleton:=true
 Bundle-Version: 1.0.3.v8268-20090814
 Bundle-Activator: com.bluexml.side.deployer.facetmap.Activator
-Bundle-Vendor: BLUEXML
+Bundle-Vendor: www.bluexml.com
 Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Application;bundle-version="1.0.8",
  com.bluexml.side.Util.deployer;bundle-version="1.0.8",

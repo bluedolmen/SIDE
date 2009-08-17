@@ -4,7 +4,7 @@ Bundle-Name: Chiba Deployer Plug-in
 Bundle-SymbolicName: com.bluexml.side.Deployer.xforms;singleton:=true
 Bundle-Version: 1.0.1.v8268-20090814
 Bundle-Activator: com.bluexml.side.deployer.xforms.Activator
-Bundle-Vendor: BLUEXML
+Bundle-Vendor: www.bluexml.com
 Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Util.deployer,
  com.bluexml.side.Util.security,

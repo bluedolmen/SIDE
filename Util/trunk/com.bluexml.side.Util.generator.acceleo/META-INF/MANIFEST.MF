@@ -4,7 +4,7 @@ Bundle-Name: S-IDE Acceleo Generator Plug-in
 Bundle-SymbolicName: com.bluexml.side.Util.generator.acceleo
 Bundle-Version: 1.0.17.v8308-20090817
 Bundle-Activator: com.bluexml.side.util.generator.acceleo.Activator
-Bundle-Vendor: BLUEXML
+Bundle-Vendor: www.bluexml.com
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  fr.obeo.acceleo.chain,

@@ -4,7 +4,7 @@ Bundle-Name: Report deployer Plug-in
 Bundle-SymbolicName: com.bluexml.side.Deployer.report;singleton:=true
 Bundle-Version: 1.0.3.v8268-20090814
 Bundle-Activator: com.bluexml.side.deployer.report.Activator
-Bundle-Vendor: BLUEXML
+Bundle-Vendor: www.bluexml.com
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  com.bluexml.side.Application,
