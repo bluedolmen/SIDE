@@ -4,7 +4,7 @@ Bundle-Name: View ui Plug-in
 Bundle-SymbolicName: com.bluexml.side.View.edit.ui
 Bundle-Version: 1.0.4.v7820-20090729
 Bundle-Activator: com.bluexml.side.side.view.edit.ui.Activator
-Bundle-Vendor: BLUEXML
+Bundle-Vendor: www.bluexml.com
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jface,
  org.eclipse.emf;bundle-version="2.4.0",
