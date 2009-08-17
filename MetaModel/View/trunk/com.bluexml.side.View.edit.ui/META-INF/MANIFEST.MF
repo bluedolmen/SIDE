@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: View ui Plug-in
 Bundle-SymbolicName: com.bluexml.side.View.edit.ui
-Bundle-Version: 1.0.4.v7820-20090729
+Bundle-Version: 1.0.5.v8336-20090817
 Bundle-Activator: com.bluexml.side.side.view.edit.ui.Activator
 Bundle-Vendor: www.bluexml.com
 Require-Bundle: org.eclipse.core.runtime,
