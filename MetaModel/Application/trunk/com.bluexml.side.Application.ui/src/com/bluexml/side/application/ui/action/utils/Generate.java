@@ -523,7 +523,7 @@ public class Generate extends Thread {
 							addOneStep(progressBar);
 						}
 					} else {
-						addErrorText(Messages.getString("Generate.44") + elem.getId() + " is not activited, please check your plugin licence"); //$NON-NLS-1$ //$NON-NLS-2$
+						addErrorText(Messages.getString("Generate.44") + elem.getId() + " is not activated, please check your plugin licence"); //$NON-NLS-1$ //$NON-NLS-2$
 						generator
 								.addErrorLog(
 										Messages.getString("Generate.46"), Messages.getString("Generate.47"), null); //$NON-NLS-1$ //$NON-NLS-2$
