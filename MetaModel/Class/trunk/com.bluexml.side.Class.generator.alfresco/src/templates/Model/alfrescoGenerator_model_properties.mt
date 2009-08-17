@@ -40,7 +40,7 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 <%getFolder()%>_<%current(2).name%>model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.title=<%getLabel()%>
 <%getFolder()%>_<%current(2).name%>model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.description=<%getDescriptionOrName()%>
 	<%}%>
-	<%for (eContainer("ClassPackage").eAllContents("AssociationEnd")[linkedClass == current("Clazz") && getOpposite().navigable]){%>
+	<%for (getSourceAssociationEnds()){%>
 <%getFolder()%>_<%current(2).name%>model.association.<%eContainer().getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.title=<%getRoleOrTitleFromSource()%>
 <%--<%getFolder()%>_<%current(2).name%>model.association.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>_search.title=<%getRoleOrTitle(current(1))%>--%>
 <%--<%getFolder()%>_<%current(2).name%>model.association.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>_search_operator=Option <%getLabel()%>--%>

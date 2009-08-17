@@ -794,6 +794,14 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 
 		addEOperation(clazzEClass, this.getClazz(), "getLinkedClasses", 0, -1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(clazzEClass, this.getAssociationEnd(), "getAllSourceAssociationEnds", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(clazzEClass, this.getAssociationEnd(), "getAllTargetAssociationEnds", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(clazzEClass, this.getAssociationEnd(), "getSourceAssociationEnds", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(clazzEClass, this.getAssociationEnd(), "getTargetAssociationEnds", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(associationEClass, Association.class, "Association", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAssociation_AssociationType(), this.getAssociationType(), "associationType", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssociation_FirstEnd(), this.getAssociationEnd(), null, "firstEnd", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1029,6 +1037,34 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "body", "self.getAllSourceAssociations().getTarget() ->asOrderedSet()"
+		   });		
+		addAnnotation
+		  (clazzEClass.getEOperations().get(15), 
+		   source, 
+		   new String[] {
+			 "body", "AssociationEnd.allInstances() -> select (ae | ae.getOpposite().navigable and self.getInheritedClasses() -> including (self) ->includes(ae.linkedClass) )",
+			 "description", "returns association ends where this clazz is source including inherited associations (association ends cannot link to aspects)"
+		   });		
+		addAnnotation
+		  (clazzEClass.getEOperations().get(16), 
+		   source, 
+		   new String[] {
+			 "body", "AssociationEnd.allInstances() -> select (ae | ae.navigable and self.getInheritedClasses() -> including (self) ->includes(ae.linkedClass) )",
+			 "description", "returns association ends where this clazz is target including inherited associations (association ends cannot link to aspects)"
+		   });		
+		addAnnotation
+		  (clazzEClass.getEOperations().get(17), 
+		   source, 
+		   new String[] {
+			 "body", "AssociationEnd.allInstances() -> select (ae | ae.getOpposite().navigable and ae.linkedClass = self )",
+			 "description", "returns association ends where this clazz is source"
+		   });		
+		addAnnotation
+		  (clazzEClass.getEOperations().get(18), 
+		   source, 
+		   new String[] {
+			 "body", "AssociationEnd.allInstances() -> select (ae | ae.navigable and ae.linkedClass = self)",
+			 "description", "returns association ends where this clazz is target"
 		   });				
 		addAnnotation
 		  (associationEClass, 
@@ -1146,7 +1182,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "ClassWithTwoAttributesSameName InheritanceCycle"
-		   });																					
+		   });																									
 		addAnnotation
 		  (associationEClass, 
 		   source, 

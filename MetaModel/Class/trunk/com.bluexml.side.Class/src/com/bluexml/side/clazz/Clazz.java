@@ -279,5 +279,41 @@ public interface Clazz extends AbstractClass {
 	 * @generated
 	 */
 	EList<Clazz> getLinkedClasses();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='AssociationEnd.allInstances() -> select (ae | ae.getOpposite().navigable and self.getInheritedClasses() -> including (self) ->includes(ae.linkedClass) )' description='returns association ends where this clazz is source including inherited associations (association ends cannot link to aspects)'"
+	 * @generated
+	 */
+	EList<AssociationEnd> getAllSourceAssociationEnds();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='AssociationEnd.allInstances() -> select (ae | ae.navigable and self.getInheritedClasses() -> including (self) ->includes(ae.linkedClass) )' description='returns association ends where this clazz is target including inherited associations (association ends cannot link to aspects)'"
+	 * @generated
+	 */
+	EList<AssociationEnd> getAllTargetAssociationEnds();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='AssociationEnd.allInstances() -> select (ae | ae.getOpposite().navigable and ae.linkedClass = self )' description='returns association ends where this clazz is source'"
+	 * @generated
+	 */
+	EList<AssociationEnd> getSourceAssociationEnds();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='AssociationEnd.allInstances() -> select (ae | ae.navigable and ae.linkedClass = self)' description='returns association ends where this clazz is target'"
+	 * @generated
+	 */
+	EList<AssociationEnd> getTargetAssociationEnds();
 		
 } // Clazz

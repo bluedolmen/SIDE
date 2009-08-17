@@ -43,7 +43,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 		<%for (getAllAttributes()){%>
 		<show-property name="<%getFolder()%>:<%getQualifiedName()%>" <%if (metainfo[key.equalsIgnoreCase("read-only")].nSize()>0) {%>read-only="true"<%}%> />				
 		<%}%>
-		<%for (eContainer("ClassPackage").eAllContents("AssociationEnd")[linkedClass == current("Clazz") && getOpposite().navigable]){%>
+		<%for (getAllSourceAssociationEnds()){%>
 		<show-<%eContainer().getAssociationType()%> name="<%eContainer().getFolder()%>:<%eContainer().getQualifiedName(current("AssociationEnd"))%>" />
 		<%}%>			
 		
@@ -54,12 +54,12 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 		<show-property name="created"/>
 		<%-- <show-property name="versionLabel"/> 2009-08-14 - removed from generation => should be managed through aspect representation ?--%>
 	</property-sheet>
-
+	<%-- 2009-08-14 removed => useless ???
 	<%for (getAllAttributes()){%>
 	<property name="<%getFolder()%>:<%getQualifiedName()%>" />
 	<%}%>
 
-	<%for (eContainer("ClassPackage").eAllContents("AssociationEnd")[linkedClass == current("Clazz") && getOpposite().navigable]){%>
+	<%for (getAllSourceAssociationEnds()){%>
 	<property name="<%eContainer().getFolder()%>:<%eContainer().getQualifiedName(current("AssociationEnd"))%>" />
 	<%}%>							
 		
@@ -74,8 +74,8 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 	<property name="created"/>		
 	<property name="modifier"/>		
 	<property name="modified"/>
-	<%-- <property name="versionLabel"/> 2009-08-14 - removed from generation => should be managed through aspect representation ?--%>
-	
+	<property name="versionLabel"/>
+	--%>	
 </config>
 
 <%}%>

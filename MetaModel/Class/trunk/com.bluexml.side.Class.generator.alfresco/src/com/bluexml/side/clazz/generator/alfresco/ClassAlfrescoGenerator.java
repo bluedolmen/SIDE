@@ -158,7 +158,8 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	 * @return true if the generator can be used.
 	 */
 	public boolean check() {
-		return SecurityHelper.check(GENERATOR_CODE, SidePreferences.getKey());
+		return true;
+		//return SecurityHelper.check(GENERATOR_CODE, SidePreferences.getKey());
 	}
 
 }

@@ -156,6 +156,30 @@
         <details key="body" value="self.getAllSourceAssociations().getTarget() ->asOrderedSet()"/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="getAllSourceAssociationEnds" upperBound="-1" eType="#//AssociationEnd">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="AssociationEnd.allInstances() -> select (ae | ae.getOpposite().navigable and self.getInheritedClasses() -> including (self) ->includes(ae.linkedClass) )"/>
+        <details key="description" value="returns association ends where this clazz is source including inherited associations (association ends cannot link to aspects)"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAllTargetAssociationEnds" upperBound="-1" eType="#//AssociationEnd">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="AssociationEnd.allInstances() -> select (ae | ae.navigable and self.getInheritedClasses() -> including (self) ->includes(ae.linkedClass) )"/>
+        <details key="description" value="returns association ends where this clazz is target including inherited associations (association ends cannot link to aspects)"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getSourceAssociationEnds" upperBound="-1" eType="#//AssociationEnd">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="AssociationEnd.allInstances() -> select (ae | ae.getOpposite().navigable and ae.linkedClass = self )"/>
+        <details key="description" value="returns association ends where this clazz is source"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getTargetAssociationEnds" upperBound="-1" eType="#//AssociationEnd">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="AssociationEnd.allInstances() -> select (ae | ae.navigable and ae.linkedClass = self)"/>
+        <details key="description" value="returns association ends where this clazz is target"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
         eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//OperationComponent"
         containment="true"/>

@@ -116,7 +116,7 @@ import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
 
 			<!-- Associations -->
 			<associations>
-			<%for (eContainer("ClassPackage").eAllContents("AssociationEnd")[linkedClass == current("Clazz") && getOpposite().navigable]){%>
+			<%for (getSourceAssociationEnds()){%>
 				<<%eContainer().getAssociationType()%> name="<%eContainer().getFolder()%>:<%eContainer().getQualifiedName(current("AssociationEnd"))%>">							
 
 					<title><%getRoleOrTitleFromSource()%></title>
