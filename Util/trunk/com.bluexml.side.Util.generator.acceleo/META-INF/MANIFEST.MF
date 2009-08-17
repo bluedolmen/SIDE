@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: S-IDE Acceleo Generator Plug-in
 Bundle-SymbolicName: com.bluexml.side.Util.generator.acceleo
-Bundle-Version: 1.0.16.v7938-20090803
+Bundle-Version: 1.0.17.v8308-20090817
 Bundle-Activator: com.bluexml.side.util.generator.acceleo.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
