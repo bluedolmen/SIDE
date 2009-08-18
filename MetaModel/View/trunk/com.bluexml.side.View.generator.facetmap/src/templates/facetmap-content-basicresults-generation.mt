@@ -45,7 +45,7 @@ version="1.0">
         		<xsl:attribute name="target">_blank</xsl:attribute>
         	<%-- Download operation --%>
         	<%if (name == "download"){%>
-					<xsl:attribute name="href">../share/proxy/alfresco/api/node/content/workspace/SpacesStore/<xsl:value-of select="@href"/>/ChangeLog.txt?a=true</xsl:attribute>
+					<xsl:attribute name="href">../share/proxy/alfresco/api/node/content/workspace/SpacesStore/<xsl:value-of select="@href"/>/?a=true</xsl:attribute>
 					<img src="{$icons_url}/disk.png" class="imgIcon"/>
 			<%}%>
 			<%-- View operation --%>
