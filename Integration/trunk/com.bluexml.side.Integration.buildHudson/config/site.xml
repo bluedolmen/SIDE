@@ -6,9 +6,6 @@
    <feature url="features/com.bluexml.side.Class.generator.alfresco.feature_1.0.17.v7169-20090701.jar" id="com.bluexml.side.Class.generator.alfresco.feature" version="1.0.17.v7169-20090701">
       <category name="S-IDE Class"/>
    </feature>
-   <feature url="features/com.bluexml.side.Class.generator.facetmap.feature_1.0.1.v7169-20090701.jar" id="com.bluexml.side.Class.generator.facetmap.feature" version="1.0.1.v7169-20090701">
-      <category name="S-IDE Class"/>
-   </feature>
    <feature url="features/com.bluexml.side.Class.generator.report.feature_1.0.1.v7169-20090701.jar" id="com.bluexml.side.Class.generator.report.feature" version="1.0.1.v7169-20090701">
       <category name="S-IDE Class"/>
    </feature>
