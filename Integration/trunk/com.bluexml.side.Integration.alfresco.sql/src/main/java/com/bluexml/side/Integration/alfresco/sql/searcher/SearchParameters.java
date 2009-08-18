@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.bluexml.side.Integration.alfresco.sql.synchronisation.dictionary.BidirectionalDatabaseDictionary;
+import com.bluexml.side.Integration.alfresco.sql.synchronization.dictionary.BidirectionalDatabaseDictionary;
 
 public class SearchParameters {
 	

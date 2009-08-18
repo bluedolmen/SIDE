@@ -1,4 +1,4 @@
-package com.bluexml.side.Integration.alfresco.sql.synchronisation;
+package com.bluexml.side.Integration.alfresco.sql.synchronization;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -22,11 +22,11 @@ import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.service.namespace.QName;
 import org.apache.log4j.Logger;
 
-import com.bluexml.side.Integration.alfresco.sql.synchronisation.common.NodeFilterer;
-import com.bluexml.side.Integration.alfresco.sql.synchronisation.nodeService.NodeService;
-import com.bluexml.side.Integration.alfresco.sql.synchronisation.schemaManagement.SchemaCreation;
+import com.bluexml.side.Integration.alfresco.sql.synchronization.common.NodeFilterer;
+import com.bluexml.side.Integration.alfresco.sql.synchronization.nodeService.NodeService;
+import com.bluexml.side.Integration.alfresco.sql.synchronization.schemaManagement.SchemaCreation;
 
-public class SQLSynchronisationPolicy implements 
+public class SQLSynchronizationPolicy implements 
 	OnCreateNodePolicy, 
 	OnUpdatePropertiesPolicy, 
 	OnCreateAssociationPolicy, 
@@ -53,7 +53,7 @@ public class SQLSynchronisationPolicy implements
 
 	public void init() {
 
-		logger.debug("[init] Initializing relational synchronisation");
+		logger.debug("[init] Initializing relational synchronization");
 
 		if (schemaCreation.isReady()) {
 			// Create behaviours
@@ -75,7 +75,7 @@ public class SQLSynchronisationPolicy implements
 			policyComponent.bindAssociationBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onDeleteChildAssociation"), this,this.onDeleteChildAssociation);
 			policyComponent.bindAssociationBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onDeleteAssociation"), this,this.onDeleteAssociation);
 		} else {
-			logger.warn("Synchronisation was deactivated since schema is marked as not ready");
+			logger.warn("Synchronization was deactivated since schema is marked as not ready");
 		}
 	}
 
@@ -84,14 +84,14 @@ public class SQLSynchronisationPolicy implements
 
 		// Only process bluexml nodes
 		if (nodeFilterer.accept(nodeRef)) {
-			logger.debug("Synchronisation policy, CREATE NODE");
+			logger.debug("Synchronization policy, CREATE NODE");
 			nodeService.create(nodeRef);
 		}
 	}
 
 	public void beforeDeleteNode(NodeRef nodeRef) {
 		if (nodeFilterer.accept(nodeRef)) {
-			logger.debug("Synchronisation policy, DELETE NODE");
+			logger.debug("Synchronization policy, DELETE NODE");
 			nodeService.delete(nodeRef);
 		}
 	}
@@ -116,7 +116,7 @@ public class SQLSynchronisationPolicy implements
 			}
 
 			if (changes.size() > 0) {
-				logger.debug("Synchronisation policy, UPDATE PROPERTIES");
+				logger.debug("Synchronization policy, UPDATE PROPERTIES");
 				nodeService.updateProperties(nodeRef, changes.keySet());
 			}
 		}
@@ -125,14 +125,14 @@ public class SQLSynchronisationPolicy implements
 
 	public void onCreateAssociation(AssociationRef associationRef) {
 		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {
-			logger.debug("Synchronisation policy, CREATE ASSOCIATION");
+			logger.debug("Synchronization policy, CREATE ASSOCIATION");
 			nodeService.addAssociation(associationRef);
 		}
 	}
 	
 	public void onDeleteAssociation(AssociationRef associationRef) {
 		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {
-			logger.debug("Synchronisation policy, DELETE ASSOCIATION");
+			logger.debug("Synchronization policy, DELETE ASSOCIATION");
 			nodeService.removeAssociation(associationRef);
 		}
 	}
@@ -140,7 +140,7 @@ public class SQLSynchronisationPolicy implements
 	public void onCreateChildAssociation(ChildAssociationRef associationRef,
 			boolean isNewNode) {
 		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {
-			logger.debug("Synchronisation policy, CREATE CHILD ASSOCIATION");
+			logger.debug("Synchronization policy, CREATE CHILD ASSOCIATION");
 			nodeService.addChildAssociation(associationRef);
 		}
 	}
@@ -148,7 +148,7 @@ public class SQLSynchronisationPolicy implements
 	public void onDeleteChildAssociation(ChildAssociationRef associationRef) {
 		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {
 
-			logger.debug("Synchronisation policy, DELETE CHILD ASSOCIATION");
+			logger.debug("Synchronization policy, DELETE CHILD ASSOCIATION");
 			nodeService.removeChildAssociation(associationRef);
 		}
 	}

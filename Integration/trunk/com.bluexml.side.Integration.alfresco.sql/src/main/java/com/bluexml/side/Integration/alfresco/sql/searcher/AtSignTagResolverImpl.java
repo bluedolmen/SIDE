@@ -3,7 +3,7 @@ package com.bluexml.side.Integration.alfresco.sql.searcher;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.bluexml.side.Integration.alfresco.sql.synchronisation.dictionary.DatabaseDictionary;
+import com.bluexml.side.Integration.alfresco.sql.synchronization.dictionary.DatabaseDictionary;
 
 public class AtSignTagResolverImpl implements TagResolver {
 	final Pattern pTag = Pattern.compile("@.?\\{.+\\}");
