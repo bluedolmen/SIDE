@@ -7,7 +7,7 @@ import templates.servicesTemplates.Association
 %>
 
 <%script type="clazz.ClassPackage" name="validatedFileName"%>
-<%if (eContainer() == null) {%><%getConfModulePath()%>/synchronisation-database-mapping.properties<%}%>
+<%if (eContainer() == null) {%><%getConfModulePath()%>/synchronization-database-mapping.properties<%}%>
 
 <%script type="clazz.ClassPackage" name="package" file="<%validatedFileName%>" %>
 # ENUMERATIONS

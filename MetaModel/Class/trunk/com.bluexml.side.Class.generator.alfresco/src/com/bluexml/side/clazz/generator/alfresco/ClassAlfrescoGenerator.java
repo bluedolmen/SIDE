@@ -10,8 +10,6 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.util.generator.XMLConflictResolver;
 import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
-import com.bluexml.side.util.security.SecurityHelper;
-import com.bluexml.side.util.security.preferences.SidePreferences;
 
 public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
@@ -45,6 +43,8 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
 			result.add("/com.bluexml.side.Class.generator.alfresco/templates/Model/alfrescoGenerator_model.mt");
 			result.add("/com.bluexml.side.Class.generator.alfresco/templates/Model/alfrescoGenerator_model_properties.mt");
+			// Association synchronisation
+			result.add("/com.bluexml.side.Class.generator.alfresco/templates/Model/association_synchronization.mt");
 
 			result.add("/com.bluexml.side.Class.generator.alfresco/templates/webClient/alfrescoGenerator_web_client_config.mt");
 

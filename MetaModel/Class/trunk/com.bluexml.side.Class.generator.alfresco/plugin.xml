@@ -87,6 +87,12 @@
                         technologyVersion="alfresco_3.x"
                         versionMin="1.0.0">
                   </moduleDependence>
+                  <moduleDependence
+                        moduleId="com.bluexml.side.Integration.alfresco.customAssociationManagement"
+                        moduleType="amp"
+                        technologyVersion="alfresco_3.x"
+                        versionMin="1.0.0">
+                  </moduleDependence>
                </generatorVersion>
             </technologyVersion>
          </technology>
