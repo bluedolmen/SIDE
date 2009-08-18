@@ -2,7 +2,7 @@ package com.bluexml.side.Integration.alfresco.model;
 
 import org.alfresco.service.namespace.QName;
 
-public final class ContentModel {
+public interface ContentModel {
 
 	public static final String BXCONTENT_NAMESPACE_PREFIX = "http://www.bluexml.com/model/content/";
 	
