@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.Collection;
 import java.util.Iterator;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.filefilter.TrueFileFilter;
 
 
 import org.eclipse.equinox.app.IApplication;
