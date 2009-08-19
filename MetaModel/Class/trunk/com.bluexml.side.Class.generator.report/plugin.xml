@@ -5,7 +5,7 @@
          point="com.bluexml.side.Application.com_bluexml_application_configuration">
       <metamodel
             description="Check this to generate data models on leading frameworks.&lt;br&gt; This DataMetamodel allows to model Application Object structure and persistence.&lt;br&gt;S-IDE provides the modeler to graphically produce data models and various generators to instantiate these models on leading frameworks."
-            id="http://www.kerblue.org/v2/ksr500-class/"
+            id="http://www.kerblue.org/class/1.0"
             name="KSR500 Data"
             url="http://www.kerblue.org/v2/ksr500-class/">
          <technology
