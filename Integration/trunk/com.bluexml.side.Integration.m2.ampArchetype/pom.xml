@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.bluexml.side.Integration.m2
-	</groupId>
+	<groupId>com.bluexml.side.Integration.m2</groupId>
 	<artifactId>ampArchetype</artifactId>
 	<packaging>maven-archetype</packaging>
 	<name>ampArchetype</name>
@@ -15,16 +14,14 @@
 	<build>
 		<extensions>
 			<extension>
-				<groupId>org.apache.maven.archetype
-				</groupId>
+				<groupId>org.apache.maven.archetype</groupId>
 				<artifactId>archetype-packaging</artifactId>
 				<version>2.0-alpha-4</version>
 			</extension>
 		</extensions>
 		<plugins>
 			<plugin>
-				<artifactId>maven-archetype-plugin
-				</artifactId>
+				<artifactId>maven-archetype-plugin</artifactId>
 				<version>2.0-alpha-4</version>
 				<extensions>true</extensions>
 			</plugin>

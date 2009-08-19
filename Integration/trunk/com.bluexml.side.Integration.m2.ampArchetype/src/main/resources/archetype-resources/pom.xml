@@ -145,7 +145,7 @@
 -->
 	<scm>
 				<connection>scm:svn:http://domain.com/svn/trunk/</connection>
-				<developerConnection>scm:svn:https://${maven.username}@domain.com/svn/trunk/</developerConnection>
+				<developerConnection>scm:svn:https://${symbol_dollar}{maven.username}@domain.com/svn/trunk/</developerConnection>
 				<url>http://domain.com/svn/trunk/</url>
 	</scm>
 	<build>
@@ -162,7 +162,7 @@
 		          </execution>
 		        </executions>
 		        <configuration>
-			  <revisionOnScmFailure>${project.version}</revisionOnScmFailure>
+			  <revisionOnScmFailure>${symbol_dollar}{project.version}</revisionOnScmFailure>
 		          <doCheck>false</doCheck>
 		          <doUpdate>false</doUpdate>
 		        </configuration>
@@ -215,7 +215,7 @@
 		<profile>
 			<id>webapp</id>
 			<build>
-				<filters><filter>src/test/properties/${env}/application.properties</filter></filters>
+				<filters><filter>src/test/properties/${symbol_dollar}{env}/application.properties</filter></filters>
 				<defaultGoal>jetty:run-exploded</defaultGoal>
 				<plugins>
 					<plugin>
@@ -230,7 +230,7 @@
 								</goals>
 								<configuration>
 									<includeTypes>amp</includeTypes>
-									<outputDirectory>${build.directory}/${webapp.name}</outputDirectory>
+									<outputDirectory>${symbol_dollar}{build.directory}/${symbol_dollar}{webapp.name}</outputDirectory>
 									<excludes>META*</excludes>
 								</configuration>
 							</execution>
@@ -265,7 +265,7 @@
 							<primaryArtifact>false</primaryArtifact>
 							<!-- Don't remove the following line otherwise WAR and AMP builds will be done in the same folder, with unexpected results
 -->
-							<webappDirectory>${build.directory}/${webapp.name}</webappDirectory>
+							<webappDirectory>${symbol_dollar}{build.directory}/${symbol_dollar}{webapp.name}</webappDirectory>
 							<archive>
 								<addMavenDescriptor>false</addMavenDescriptor>
 							</archive>
@@ -273,7 +273,7 @@
 							<webResources></webResources>
 							<webResources>
 								<resource>
-									<directory>${build.testOutputDirectory}</directory>
+									<directory>${symbol_dollar}{build.testOutputDirectory}</directory>
 									<targetPath>WEB-INF/classes</targetPath>
 									<filtering>true</filtering>
 									<includes>
@@ -313,8 +313,8 @@
 									<goal>run-exploded</goal>
 								</goals>
 								<configuration>
-									<contextPath>/${webapp.name}</contextPath>
-									<webApp>${pom.build.directory}/${webapp.name}</webApp>
+									<contextPath>${symbol_dollar}{webapp.name}</contextPath>
+									<webApp>${symbol_dollar}{pom.build.directory}/${symbol_dollar}{webapp.name}</webApp>
 									<scanIntervalSeconds>10</scanIntervalSeconds>
 									<connectors>
 										<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
@@ -338,7 +338,7 @@
 					<!-- Includes default properties  for alfresco test war -->
 					<testResource>
 						<filtering>true</filtering>
-						<directory>src/test/properties/${env}</directory>
+						<directory>src/test/properties/${symbol_dollar}{env}</directory>
 						<targetPath>alfresco/extension</targetPath>
 					</testResource>
 					<!-- src/main/config/ is copied into  ==> target/test-classes/alfresco/module/${mystring}${artifactId.replaceAll("\\.","_")} to

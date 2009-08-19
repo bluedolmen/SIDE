@@ -25,7 +25,7 @@
  * the FLOSS exception, and it is also available here: 
  * http://www.alfresco.com/legal/licensing"
  */
-package ${artifactId};
+package ${package};
 
 /**
  * This class does nothing except dump some output to <i>system.out</i>.

@@ -35,8 +35,8 @@
 			</fileset>
 		</copy>
 		<delete failonerror="false">
-			<fileset dir="${webapps.home}/alfresco/WEB-INF/lib">
-				<include name="${moduleId}-*.jar" />
+			<fileset dir="${symbol_dollar}{webapps.home}/alfresco/WEB-INF/lib">
+				<include name="${symbol_dollar}{moduleId}-*.jar" />
 			</fileset>
 		</delete>
 		<copy todir="${symbol_dollar}{webapps.home}/alfresco/WEB-INF/lib">
