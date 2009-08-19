@@ -1,10 +1,11 @@
 <project xmlns:artifact="antlib:org.apache.maven.artifact.ant" name="alfrescoShare.doclist" default="patchWebapps">
+	<property file="${user.home}/build.properties" />
 	<property file="build.${user.name}.properties" />
 	<path id="maven-ant-tasks.classpath" path="maven-ant-tasks-2.0.10.jar" />
 	<typedef resource="org/apache/maven/artifact/ant/antlib.xml" uri="antlib:org.apache.maven.artifact.ant" classpathref="maven-ant-tasks.classpath" />
 	<artifact:pom id="mypom" file="pom.xml" />
 	<property name="moduleId" value="${mypom.artifactId}" />
-	<property name="webappName" value="share"/>
+	<property name="webappName" value="share" />
 	<!-- ================================= 
 	          target: name              
 	         ================================= -->
@@ -25,7 +26,7 @@
 				<include name="**/**" />
 			</fileset>
 		</copy>
-		
+
 		<echo message="==========" />
 		<!--
 			<echo message="clean project" />
