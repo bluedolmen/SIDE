@@ -44,7 +44,7 @@ public class Deployer extends ImplNode {
 					
 					for (com.bluexml.side.util.dependencies.ModuleConstraint module : integrationModules) {
 						ModuleConstraint mc = ApplicationFactory.eINSTANCE.createModuleConstraint();
-						mc.setModuleId(module.getArtifactId());
+						mc.setModuleId(module.getModuleId());
 						if (module.getVersionMin() != null) {
 							mc.setVersionMin(module.getVersionMin().toString());
 						}
@@ -66,7 +66,7 @@ public class Deployer extends ImplNode {
 							
 							for (com.bluexml.side.util.dependencies.ModuleConstraint module : o.getIntegrationModules()) {
 								ModuleConstraint mc = ApplicationFactory.eINSTANCE.createModuleConstraint();
-								mc.setModuleId(module.getArtifactId());
+								mc.setModuleId(module.getModuleId());
 								if (module.getVersionMin() != null) {
 									mc.setVersionMin(module.getVersionMin().toString());
 								}

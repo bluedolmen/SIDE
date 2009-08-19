@@ -1,4 +1,4 @@
-<project name="module com.bluexml.side.Integration.alfrescoShare.doclist">
+<project name="alfrescoShare.doclist">
 	<property name="docLibPath" value="components/documentlibrary/" />
 	<property name="jsScriptsOut" value="documentlist-min.js" />
 	<property name="jsScriptsIn" value="documentlist-src.js" />
@@ -6,18 +6,21 @@
 	<property name="tmpFolder" value="./tmp" />
 	<property name="extensionFolder" value="./target" />
 	<property name="module.properties" value="${resources}/module.properties" />
-	
-	<property file="${module.properties}" />
+<property name="packageFileName" value="${project.id}-${project.version}.zip"/>
+
+
 	<!-- user properties -->
 	<property file="build.${user.name}.properties" />
 
 
-	<property name="packageDescriptionFile" value="moduleDescriptions/module.${module.id}.properties" />
+	<property name="packageDescriptionFile" value="moduleDescriptions/module.${project.id}.properties" />
 	<!-- ================================= 
           target: buildExtension              
+          build extension archive for alfresco share
          ================================= -->
 	<target name="buildExtension" depends="clean" description="build extension archive for alfresco share">
-		<echo message="${version}"></echo>
+		<echo message="${project.version}">
+		</echo>
 		<delete dir="${tmpFolder}" failonerror="false" />
 		<mkdir dir="${tmpFolder}/${docLibPath} " />
 		<mkdir dir="${extensionFolder}" />
@@ -26,8 +29,12 @@
 			<arg value="${tmpFolder}/${docLibPath}/${jsScriptsOut}" />
 			<arg value="${resources}/${docLibPath}/${jsScriptsIn}" />
 		</java>
-		<copy file="${module.properties}" tofile="${tmpFolder}/${packageDescriptionFile}" />
-		<zip destfile="${extensionFolder}/${module.id}-${version}.zip">
+		<filter token="project.version" value="$project.version}" />
+		<filter token="project.description" value="${project.description}" />
+		<filter token="project.id" value="${project.id}" />
+		<filter token="project.name" value="${project.name}" />
+		<copy file="${module.properties}" tofile="${tmpFolder}/${packageDescriptionFile}" filtering="true" />
+		<zip destfile="${extensionFolder}/${packageFileName}">
 			<fileset dir="${tmpFolder}" id="id">
 				<include name="**/*.*" />
 			</fileset>

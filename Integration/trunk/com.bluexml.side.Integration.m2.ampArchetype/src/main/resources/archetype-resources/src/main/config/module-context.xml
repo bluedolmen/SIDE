@@ -22,7 +22,7 @@
 <!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
 
 <beans>
-	
-    <import resource="classpath:alfresco/module/${symbol_dollar}{groupId}.${symbol_dollar}{artifactId}/context/service-context.xml" />
+
+	<import resource="classpath:${symbol_dollar}{config.target.path}/context/service-context.xml" />
     
 </beans>

@@ -2,9 +2,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.bluexml.side.Integration.alfrescoShare</groupId>
-	<artifactId>com.bluexml.side.Integration.alfrescoShare.doclist</artifactId>
+	<artifactId>doclist</artifactId>
+	<name>S-IDE integration module : Alfresco share docList</name>
 	<version>1.0.1</version>
 	<packaging>zip</packaging>
+	<description>this module contains S-IDE extension to extends Alfresco to support custom type on Alfresco Share</description>
 	<parent>
 		<groupId>org.bluexml</groupId>
 		<artifactId>superpom</artifactId>
@@ -27,7 +29,10 @@
 						<configuration>
 							<tasks>
 								<ant antfile="build.xml" target="buildExtension">
-									<property name="version" value="${version}" />
+									<property name="project.version" value="${project.version}" />
+									<property name="project.id" value="${artifactId}" />
+									<property name="porject.description" value="${description}" />
+									<property name="project.name" value="${title}" />
 								</ant>
 							</tasks>
 						</configuration>
@@ -42,7 +47,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.bluexml.side.Integration.alfresco</groupId>
-			<artifactId>com.bluexml.side.Integration.alfresco.upload</artifactId>
+			<artifactId>upload</artifactId>
 			<version>[0.0.1,)</version>
 			<type>amp</type>
 		</dependency>

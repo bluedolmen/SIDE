@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.bluexml.side.Integration.alfrescoShare</groupId>
-	<artifactId>com.bluexml.side.Integration.alfrescoShare.facetMapDashlet</artifactId>
-	<version>1.0.2</version>
+	<artifactId>facetMapDashlet</artifactId>
+	<version>1.0.3</version>
 	<name>Dashlets Alfresco share</name>
 	<description>including facetmap in alfresco share</description>
 	<packaging>zip</packaging>

@@ -79,8 +79,8 @@ public class ModuleConstraint {
 	 */
 	public void setGroupAndArtifactId(String id) {
 		this.groupId = id.substring(0, id.lastIndexOf("."));
-		 this.artifactId = id;
-		//this.artifactId = id.substring(id.lastIndexOf(".") + 1);
+		// this.artifactId = id;
+		this.artifactId = id.substring(id.lastIndexOf(".") + 1);
 	}
 
 	public static Collection<ModuleVersion> getAllMin(Collection<ModuleConstraint> col) {

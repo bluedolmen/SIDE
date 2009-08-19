@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.bluexml.side.Integration.m2</groupId>
-	<artifactId>com.bluexml.side.Integration.m2.warPatchArchetype</artifactId>
+	<artifactId>warPatchArchetype</artifactId>
 	<version>1.0</version>
 	<name>Archetype - com.bluexml.side.Integration.maven2WarPatchArchetype</name>
 	<description>this archetype can be use to create new warPatch project</description>

@@ -19,7 +19,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.bluexml.side.Integration.alfresco</groupId>
-	<artifactId>com.bluexml.side.Integration.alfresco.customAssociationManagement</artifactId>
+	<artifactId>customAssociationManagement</artifactId>
 	<packaging>amp</packaging>
 	<name>BlueXML S-IDE Alfresco Custom Association Management</name>
 	
@@ -70,7 +70,7 @@
 		<!-- Webapp used to test/develop locally the AMP -->
 		<webapp.name>com.bluexml.side.Integration.alfresco.model-webapp</webapp.name>
 		
-		<config.target.path>alfresco/module/com_bluexml_side_Integration_alfresco_customAssociationManagement</config.target.path>
+		<config.target.path>alfresco/module/SIDE_${project.artifactId}</config.target.path>
 		<!-- 
 			| 
 			| By default the src/test/properties/local/application.properties uses the property "alfresco.data.location" to  specify where

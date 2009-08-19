@@ -19,7 +19,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.bluexml.side.Integration.alfresco</groupId>
-	<artifactId>com.bluexml.side.Integration.alfresco.sql</artifactId>
+	<artifactId>sql</artifactId>
 	<packaging>amp</packaging>
 	<name>BlueXML S-IDE sql extension</name>
 	<!-- An Alfresco version number must be of the form 1.2.3.4. Using 1.0-SNAPSHOT as the AMP version 
@@ -58,7 +58,7 @@
 			jetty run deployment, does not impact AMP behavior which is typically environment independent
 		-->
 		<env>local</env>
-		<config.target.path>alfresco/module/com_bluexml_side_Integration_alfresco_sql</config.target.path>
+		<config.target.path>alfresco/module/SIDE_${project.artifactId}</config.target.path>
 		
 		<!-- Webapp used to test/develop locally the AMP -->
 		<webapp.name>com.bluexml.side.Integration.alfresco.sql-webapp</webapp.name>

@@ -64,7 +64,7 @@ public class Generate extends Thread {
 
 	/**
 	 * Launch generation on all generator version selected
-	 *
+	 * 
 	 * @param configuration
 	 * @param staticParameters
 	 * @param models
@@ -77,11 +77,7 @@ public class Generate extends Thread {
 	 * @throws IllegalAccessException
 	 * @throws IOException
 	 */
-	public void run(Configuration configuration, List<String> staticParameters,
-			List<Model> models, ProgressBar p_progressBar, Label p_label,
-			StyledText p_styletext, FormText p_logLink)
-			throws ClassNotFoundException, InstantiationException,
-			IllegalAccessException, IOException {
+	public void run(Configuration configuration, List<String> staticParameters, List<Model> models, ProgressBar p_progressBar, Label p_label, StyledText p_styletext, FormText p_logLink) throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
 
 		progressBar = p_progressBar;
 		label = p_label;
@@ -101,8 +97,7 @@ public class Generate extends Thread {
 				// Check to know if option have been set, no error but warning
 				// message
 				if (param.getValue() == null || param.getValue().length() == 0) {
-					addWarningText(Messages.getString(
-							"Generate.2", param.getKey())); //$NON-NLS-1$
+					addWarningText(Messages.getString("Generate.2", param.getKey())); //$NON-NLS-1$
 				}
 			}
 		}
@@ -113,8 +108,7 @@ public class Generate extends Thread {
 		boolean modelWithError = false;
 
 		try {
-			modelsInfo = (HashMap<String, List<IFile>>) ApplicationUtil
-					.getAssociatedMetaModel(models);
+			modelsInfo = (HashMap<String, List<IFile>>) ApplicationUtil.getAssociatedMetaModel(models);
 		} catch (IOException e) {
 			modelWithError = true;
 			addErrorText(Messages.getString("Generate.4") + e.getMessage()); //$NON-NLS-1$
@@ -131,8 +125,7 @@ public class Generate extends Thread {
 				for (IFile m : listModel) {
 					try {
 						if (ApplicationUtil.validate(m)) {
-							addText(m.getName()
-									+ Messages.getString("Generate.6")); //$NON-NLS-1$
+							addText(m.getName() + Messages.getString("Generate.6")); //$NON-NLS-1$
 						} else {
 							addErrorText(Messages.getString("Generate.7") + m.getName() + " isn't validated. Please launch 'Validate' on top model element of " + m.getName() + "."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 							modelWithError = true;
@@ -158,21 +151,17 @@ public class Generate extends Thread {
 				addErrorText(Messages.getString("Generate.14") + genPath + " doesn't exist"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 
-			generate(configuration, modelsInfo, configurationParameters,
-					generationParameters);
+			generate(configuration, modelsInfo, configurationParameters, generationParameters);
 			// All behind this line will be execute before the generation (async
 			// method).
 		}
 	}
 
-	protected void initOptions(Configuration configuration,
-			Map<String, String> configurationParameters) {
+	protected void initOptions(Configuration configuration, Map<String, String> configurationParameters) {
 		logPath = getLogPath(configuration, configurationParameters);
 		genPath = getGenerationPath(configuration, configurationParameters);
-		doDocumentation = getDoDocumentation(configuration,
-				configurationParameters);
-		skipValidation = getSkipValidation(configuration,
-				configurationParameters);
+		doDocumentation = getDoDocumentation(configuration, configurationParameters);
+		skipValidation = getSkipValidation(configuration, configurationParameters);
 	}
 
 	/**
@@ -189,39 +178,25 @@ public class Generate extends Thread {
 
 	/**
 	 * Return the log path (folder path + configuration name)
-	 *
+	 * 
 	 * @param configuration
 	 * @param configurationParameters
 	 * @return
 	 */
-	protected String getLogPath(Configuration configuration,
-			Map<String, String> configurationParameters) {
-		return configurationParameters
-				.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH
-						.getLiteral())
-				+ fileSeparator + configuration.getName();
+	protected String getLogPath(Configuration configuration, Map<String, String> configurationParameters) {
+		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + fileSeparator + configuration.getName();
 	}
 
-	protected String getGenerationPath(Configuration configuration,
-			Map<String, String> configurationParameters) {
-		return configurationParameters
-				.get(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH
-						.getLiteral())
-				+ fileSeparator;
+	protected String getGenerationPath(Configuration configuration, Map<String, String> configurationParameters) {
+		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral()) + fileSeparator;
 	}
 
-	protected boolean getDoDocumentation(Configuration configuration,
-			Map<String, String> configurationParameters) {
-		return Boolean
-				.parseBoolean(configurationParameters
-						.get(StaticConfigurationParameters.GENERATIONOPTIONSDOCUMENTATION
-								.getLiteral()));
+	protected boolean getDoDocumentation(Configuration configuration, Map<String, String> configurationParameters) {
+		return Boolean.parseBoolean(configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSDOCUMENTATION.getLiteral()));
 	}
 
-	protected boolean getSkipValidation(Configuration configuration,
-			Map<String, String> configurationParameters) {
-		return Boolean.valueOf(configurationParameters
-				.get(ApplicationDialog.KEY_SKIPVALIDATION));
+	protected boolean getSkipValidation(Configuration configuration, Map<String, String> configurationParameters) {
+		return Boolean.valueOf(configurationParameters.get(ApplicationDialog.KEY_SKIPVALIDATION));
 	}
 
 	private void addText(String text) {
@@ -246,18 +221,13 @@ public class Generate extends Thread {
 		styletext.setTopIndex(styletext.getLineCount());
 	}
 
-	private void generate(final Configuration configuration,
-			final HashMap<String, List<IFile>> modelsInfo,
-			final Map<String, String> configurationParameters,
-			final Map<String, String> generationParameters)
-			throws ClassNotFoundException, InstantiationException,
+	private void generate(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) throws ClassNotFoundException, InstantiationException,
 			IllegalAccessException {
 
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				// Clean if needed :
-				boolean doClean = Boolean.parseBoolean(configurationParameters
-						.get(ApplicationDialog.KEY_DOCLEAN));
+				boolean doClean = Boolean.parseBoolean(configurationParameters.get(ApplicationDialog.KEY_DOCLEAN));
 				if (doClean) {
 					try {
 						label.setText(Messages.getString("Generate.16")); //$NON-NLS-1$
@@ -271,10 +241,8 @@ public class Generate extends Thread {
 					}
 				}
 
-				boolean error = generate_(configuration, modelsInfo,
-						configurationParameters, generationParameters);
-				error &= deploy_(configuration, modelsInfo,
-						configurationParameters, generationParameters);
+				boolean error = generate_(configuration, modelsInfo, configurationParameters, generationParameters);
+				error &= deploy_(configuration, modelsInfo, configurationParameters, generationParameters);
 
 				progressBar.setSelection(progressBar.getMaximum());
 				if (!error) {
@@ -316,12 +284,9 @@ public class Generate extends Thread {
 
 	private void browseTo(String url) {
 		try {
-			PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser()
-					.openURL(new URL(url));
+			PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(new URL(url));
 		} catch (Exception e) {
-			Activator.getDefault().getLog().log(
-					new Status(Status.ERROR, Activator.PLUGIN_ID,
-							"Error opening browser", e)); //$NON-NLS-1$
+			Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Error opening browser", e)); //$NON-NLS-1$
 		}
 	}
 
@@ -330,9 +295,7 @@ public class Generate extends Thread {
 		IFileHelper.deleteFolderContent(IFileHelper.getIFolder(genPath));
 	}
 
-	private AbstractGenerator getGeneratorInstance(GeneratorConfiguration elem)
-			throws ClassNotFoundException, InstantiationException,
-			IllegalAccessException {
+	private AbstractGenerator getGeneratorInstance(GeneratorConfiguration elem) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		String launchGeneratorClass = elem.getImpl_class();
 		String idGenerator = elem.getId();
 		Bundle plugin = Platform.getBundle(idGenerator);
@@ -351,29 +314,20 @@ public class Generate extends Thread {
 		return null;
 	}
 
-	private boolean generate_(final Configuration configuration,
-			final HashMap<String, List<IFile>> modelsInfo,
-			final Map<String, String> configurationParameters,
-			final Map<String, String> generationParameters) {
+	private boolean generate_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) {
 		// For all generator version we will call generation method
-		int nbTask = configuration.getGeneratorConfigurations().size()
-				* NB_GENERATION_STEP;
+		int nbTask = configuration.getGeneratorConfigurations().size() * NB_GENERATION_STEP;
 		progressBar.setMaximum(nbTask);
 		boolean error = false;
 
-		for (GeneratorConfiguration elem : configuration
-				.getGeneratorConfigurations()) {
+		for (GeneratorConfiguration elem : configuration.getGeneratorConfigurations()) {
 			String id_techno_version = elem.getId_techno_version();
 			configurationParameters.put("technologyVersion", id_techno_version); //$NON-NLS-1$
-			configurationParameters.put(
-					"generatorName", elem.getGeneratorName()); //$NON-NLS-1$
+			configurationParameters.put("generatorName", elem.getGeneratorName()); //$NON-NLS-1$
 			configurationParameters.put("generatorId", elem.getId()); //$NON-NLS-1$
-			configurationParameters.put(
-					"metaModelName", elem.getMetaModelName()); //$NON-NLS-1$
-			configurationParameters.put(
-					"technologyName", elem.getTechnologyName()); //$NON-NLS-1$
-			configurationParameters.put(
-					"technologyVersionName", elem.getTechnologyVersionName()); //$NON-NLS-1$
+			configurationParameters.put("metaModelName", elem.getMetaModelName()); //$NON-NLS-1$
+			configurationParameters.put("technologyName", elem.getTechnologyName()); //$NON-NLS-1$
+			configurationParameters.put("technologyVersionName", elem.getTechnologyVersionName()); //$NON-NLS-1$
 
 			// We get the option for this generator
 			Map<String, Boolean> generatorOptions = new HashMap<String, Boolean>();
@@ -381,9 +335,7 @@ public class Generate extends Thread {
 				generatorOptions.put(option.getKey(), true);
 			}
 			if (FeedbackActivator.doFeedback()) {
-				feedbackManager.addFeedBackItem(elem.getId(), elem
-						.getMetaModelName(), id_techno_version,
-						generatorOptions);
+				feedbackManager.addFeedBackItem(elem.getId(), elem.getMetaModelName(), id_techno_version, generatorOptions);
 			}
 
 			AbstractGenerator generator = null;
@@ -402,45 +354,29 @@ public class Generate extends Thread {
 
 			// We initialize the generator with all data collected in
 			// application model
-			if (generator != null
-					&& ((generator.isDocumentationGenerator() && doDocumentation) || !generator
-							.isDocumentationGenerator())) {
+			if (generator != null && ((generator.isDocumentationGenerator() && doDocumentation) || !generator.isDocumentationGenerator())) {
 				// We generate only if there is meta-model available for
 				// the generator
-				if (generator
-						.shouldGenerate(modelsInfo, elem.getId_metamodel())) {
-					String name = elem.getId().substring(
-							elem.getId().lastIndexOf(".") + 1); //$NON-NLS-1$
+				if (generator.shouldGenerate(modelsInfo, elem.getId_metamodel())) {
+					String name = elem.getId().substring(elem.getId().lastIndexOf(".") + 1); //$NON-NLS-1$
 					label.setText(Messages.getString("Generate.30", name)); //$NON-NLS-1$
 					addText(Messages.getString("Generate.59", name)); //$NON-NLS-1$
 
 					try {
 						List<ModuleConstraint> lmc = new ArrayList<ModuleConstraint>();
-						EList<com.bluexml.side.application.ModuleConstraint> l = elem
-								.getModuleContraints();
+						EList<com.bluexml.side.application.ModuleConstraint> l = elem.getModuleContraints();
 						for (int c = 0; c < l.size(); c++) {
-							com.bluexml.side.application.ModuleConstraint current = l
-									.get(c);
-							lmc.add(new ModuleConstraint(current.getModuleId(),
-									current.getTechnologyVersion(), current
-											.getModuleType(), current
-											.getVersionMin(), current
-											.getVersionMax()));
+							com.bluexml.side.application.ModuleConstraint current = l.get(c);
+							lmc.add(new ModuleConstraint(current.getModuleId(), current.getTechnologyVersion(), current.getModuleType(), current.getVersionMin(), current.getVersionMax()));
 						}
 						DependencesManager dm = new DependencesManager(lmc);
 
-						generator.initialize(generationParameters,
-								generatorOptions, configurationParameters, dm);
+						generator.initialize(generationParameters, generatorOptions, configurationParameters, dm);
 					} catch (Exception e) {
 						error = true;
-						addErrorText(Messages.getString(
-								"Generate.60", e.getMessage())); //$NON-NLS-1$
-						generator
-								.addErrorLog(
-										Messages.getString("Generate.32") + e.getMessage(), e.getStackTrace(), null); //$NON-NLS-1$
-						Activator.getDefault().getLog().log(
-								new Status(Status.ERROR, Activator.PLUGIN_ID,
-										Messages.getString("Generate.32"), e)); //$NON-NLS-1$
+						addErrorText(Messages.getString("Generate.60", e.getMessage())); //$NON-NLS-1$
+						generator.addErrorLog(Messages.getString("Generate.32") + e.getMessage(), e.getStackTrace(), null); //$NON-NLS-1$
+						Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Messages.getString("Generate.32"), e)); //$NON-NLS-1$
 					}
 
 					addOneStep(progressBar);
@@ -449,26 +385,14 @@ public class Generate extends Thread {
 						if (modelsInfo.size() > 0) {
 							// Generate
 							try {
-								label
-										.setText(Messages
-												.getString("Generate.33", name)); //$NON-NLS-1$
-								generator.generate(modelsInfo, elem
-										.getId_metamodel());
+								label.setText(Messages.getString("Generate.33", name)); //$NON-NLS-1$
+								generator.generate(modelsInfo, elem.getId_metamodel());
 								addText(Messages.getString("Generate.34")); //$NON-NLS-1$
 							} catch (Exception e) {
 								error = true;
-								addErrorText(Messages.getString(
-										"Generate.39", e.getMessage())); //$NON-NLS-1$
-								generator
-										.addErrorLog(
-												Messages
-														.getString("Generate.41") + e.getMessage(), e.getStackTrace(), null); //$NON-NLS-1$
-								Activator.getDefault().getLog().log(new Status(
-														Status.ERROR,
-														Activator.PLUGIN_ID,
-														Messages
-																.getString(
-																		"Generate.39", e.getMessage()))); //$NON-NLS-1$
+								addErrorText(Messages.getString("Generate.39", e.getMessage())); //$NON-NLS-1$
+								generator.addErrorLog(Messages.getString("Generate.41") + e.getMessage(), e.getStackTrace(), null); //$NON-NLS-1$
+								Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Messages.getString("Generate.39", e.getMessage()))); //$NON-NLS-1$
 							}
 
 							label.setText(Messages.getString("Generate.35", name)); //$NON-NLS-1$
@@ -478,25 +402,16 @@ public class Generate extends Thread {
 							try {
 								generatedFiles = generator.complete();
 							} catch (Exception e) {
-								addErrorText(Messages.getString(
-										"Generate.61", e.getMessage())); //$NON-NLS-1$
-								Activator.getDefault().getLog().log(
-												new Status(
-														Status.ERROR,
-														Activator.PLUGIN_ID,
-														Messages
-																.getString(
-																		"Generate.61", e.getMessage()))); //$NON-NLS-1$
+								addErrorText(Messages.getString("Generate.61", e.getMessage())); //$NON-NLS-1$
+								Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Messages.getString("Generate.61", e.getMessage()))); //$NON-NLS-1$
 								e.printStackTrace();
 							}
 							addText(Messages.getString("Generate.36")); //$NON-NLS-1$
 
-							addText(Messages.getString(
-									"Generate.37", name)); //$NON-NLS-1$ //$NON-NLS-2$
+							addText(Messages.getString("Generate.37", name)); //$NON-NLS-1$ //$NON-NLS-2$
 							if (generatedFiles != null) {
 								for (IFile filePath : generatedFiles) {
-									addText(filePath.getRawLocation()
-											.makeAbsolute().toOSString());
+									addText(filePath.getRawLocation().makeAbsolute().toOSString());
 								}
 							}
 							addOneStep(progressBar);
@@ -504,39 +419,24 @@ public class Generate extends Thread {
 							try {
 								generator.createStampFile();
 							} catch (Exception e) {
-								generator
-										.addErrorLog(
-												Messages
-														.getString("Generate.42") + e.getMessage(), e.getStackTrace(), null); //$NON-NLS-1$
+								generator.addErrorLog(Messages.getString("Generate.42") + e.getMessage(), e.getStackTrace(), null); //$NON-NLS-1$
 								addErrorText(Messages.getString("Generate.43")); //$NON-NLS-1$
-								Activator
-										.getDefault()
-										.getLog()
-										.log(
-												new Status(
-														Status.ERROR,
-														Activator.PLUGIN_ID,
-														Messages
-																.getString("Generate.42"), e)); //$NON-NLS-1$
+								Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Messages.getString("Generate.42"), e)); //$NON-NLS-1$
 							}
 
 							addOneStep(progressBar);
 						}
 					} else {
 						addErrorText(Messages.getString("Generate.44") + elem.getId() + " is not activated, please check your plugin licence"); //$NON-NLS-1$ //$NON-NLS-2$
-						generator
-								.addErrorLog(
-										Messages.getString("Generate.46"), Messages.getString("Generate.47"), null); //$NON-NLS-1$ //$NON-NLS-2$
+						generator.addErrorLog(Messages.getString("Generate.46"), Messages.getString("Generate.47"), null); //$NON-NLS-1$ //$NON-NLS-2$
 					}
 				} else {
 					if (!generator.isDocumentationGenerator()) {
-						addWarningText(Messages.getString(
-								"Generate.58", elem.getId())); //$NON-NLS-1$
+						addWarningText(Messages.getString("Generate.58", elem.getId())); //$NON-NLS-1$
 					}
 				}
 				String fileName = "gen_" + generator.getTechVersion() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
-				LogSave.toXml(generator.getLog(), fileName, logPath
-						+ fileSeparator + "work" + fileSeparator); //$NON-NLS-1$
+				LogSave.toXml(generator.getLog(), fileName, logPath + fileSeparator + "work" + fileSeparator); //$NON-NLS-1$
 			} else {
 				error = true;
 			}
@@ -548,34 +448,23 @@ public class Generate extends Thread {
 		progressBar.setSelection(progressBar.getSelection() + 1);
 	}
 
-	private boolean deploy_(final Configuration configuration,
-			final HashMap<String, List<IFile>> modelsInfo,
-			final Map<String, String> configurationParameters,
-			final Map<String, String> generationParameters) {
+	private boolean deploy_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) {
 		progressBar.setSelection(0);
-		int nbTask = configuration.getDeployerConfigurations().size()
-				* NB_DEPLOY_STEP;
+		int nbTask = configuration.getDeployerConfigurations().size() * NB_DEPLOY_STEP;
 		progressBar.setMaximum(nbTask);
 		boolean error = false;
-		List<DeployerConfiguration> ldeployers = configuration
-				.getDeployerConfigurations();
+		List<DeployerConfiguration> ldeployers = configuration.getDeployerConfigurations();
 		for (DeployerConfiguration depConf : ldeployers) {
 			String deployerClassName = depConf.getImpl_class();
 			String id_deployer = depConf.getId();
 			String id_techno = depConf.getId_techno_version();
 			configurationParameters.put("technologyVersion", id_techno); //$NON-NLS-1$
-			configurationParameters.put(
-					"deployerName", depConf.getDeployerName()); //$NON-NLS-1$
+			configurationParameters.put("deployerName", depConf.getDeployerName()); //$NON-NLS-1$
 			configurationParameters.put("deployerId", id_deployer); //$NON-NLS-1$
-			configurationParameters.put(
-					"metaModelName", depConf.getMetaModelName()); //$NON-NLS-1$
-			configurationParameters.put(
-					"technologyName", depConf.getTechnologyName()); //$NON-NLS-1$
-			configurationParameters
-					.put(
-							"technologyVersionName", depConf.getTechnologyVersionName()); //$NON-NLS-1$
-			configurationParameters.put(
-					"configurationName", configuration.getName()); //$NON-NLS-1$
+			configurationParameters.put("metaModelName", depConf.getMetaModelName()); //$NON-NLS-1$
+			configurationParameters.put("technologyName", depConf.getTechnologyName()); //$NON-NLS-1$
+			configurationParameters.put("technologyVersionName", depConf.getTechnologyVersionName()); //$NON-NLS-1$
+			configurationParameters.put("configurationName", configuration.getName()); //$NON-NLS-1$
 
 			List<Option> options = depConf.getOptions();
 			// We get the option for this generator
@@ -593,19 +482,19 @@ public class Generate extends Thread {
 			} catch (ClassNotFoundException e1) {
 				error = true;
 				e1.printStackTrace();
-				addErrorText(Messages.getString("Generate.48") + id_deployer + " haven't been found."); //$NON-NLS-1$ //$NON-NLS-2$
+				addErrorText(Messages.getString("Deploy.48") + id_deployer + " haven't been found."); //$NON-NLS-1$ //$NON-NLS-2$
 			} catch (InstantiationException e) {
 				error = true;
 				e.printStackTrace();
-				addErrorText(Messages.getString("Generate.50") + id_deployer + " can't be instanciate."); //$NON-NLS-1$ //$NON-NLS-2$
+				addErrorText(Messages.getString("Deploy.50") + id_deployer + " can't be instanciate."); //$NON-NLS-1$ //$NON-NLS-2$
 			} catch (IllegalAccessException e) {
 				error = true;
 				e.printStackTrace();
-				addErrorText(Messages.getString("Generate.52") + id_deployer + " access error."); //$NON-NLS-1$ //$NON-NLS-2$
+				addErrorText(Messages.getString("Deploy.52") + id_deployer + " access error."); //$NON-NLS-1$ //$NON-NLS-2$
 			} catch (Exception e) {
 				error = true;
 				e.printStackTrace();
-				addErrorText(Messages.getString("Generate.54") + id_deployer + "."); //$NON-NLS-1$ //$NON-NLS-2$
+				addErrorText(Messages.getString("Deploy.54") + id_deployer + "."); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			try {
 				IFileHelper.refreshFolder(logPath);
@@ -614,8 +503,7 @@ public class Generate extends Thread {
 			}
 			if (genObj instanceof Deployer) {
 				Deployer deployer = (Deployer) genObj;
-				deployer.initialize(configurationParameters,
-						generationParameters, deployerOptions);
+				deployer.initialize(configurationParameters, generationParameters, deployerOptions);
 
 				try {
 					deployer.deploy();
@@ -625,31 +513,25 @@ public class Generate extends Thread {
 						for (Option option : depConf.getOptions()) {
 							optionsDep.put(option.getKey(), true);
 						}
-						feedbackManager.addFeedBackItem(depConf.getId(), null,
-								id_techno, optionsDep);
+						feedbackManager.addFeedBackItem(depConf.getId(), null, id_techno, optionsDep);
 					}
 				} catch (Exception e) {
-					Activator.getDefault().getLog().log(
-							new Status(Status.ERROR, Activator.PLUGIN_ID,
-									Messages.getString("Generate.56"), e)); //$NON-NLS-1$
+					Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Messages.getString("Generate.56"), e)); //$NON-NLS-1$
 					e.printStackTrace();
 					error = true;
-					addErrorText(Messages.getString("Generate.56") + e.getMessage()); //$NON-NLS-1$
-					deployer
-							.addErrorLog(
-									Messages.getString("Generate.56"), e.getStackTrace(), null); //$NON-NLS-1$
+					addErrorText(Messages.getString("Deploy.56") + e.getMessage()); //$NON-NLS-1$
+					deployer.addErrorLog(Messages.getString("Deploy.56"), e.getStackTrace(), null); //$NON-NLS-1$
 				}
 
 				try {
 					deployer.moveStampFile(logPath);
 				} catch (Exception e) {
 					e.printStackTrace();
-					addWarningText(Messages.getString("Generate.57") + e.getMessage()); //$NON-NLS-1$
+					addWarningText(Messages.getString("Deploy.57") + e.getMessage()); //$NON-NLS-1$
 				}
 
 				String fileName = "dep_" + deployer.getTechVersion() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
-				LogSave.toXml(deployer.getLog(), fileName, logPath
-						+ fileSeparator + "work" + fileSeparator); //$NON-NLS-1$
+				LogSave.toXml(deployer.getLog(), fileName, logPath + fileSeparator + "work" + fileSeparator); //$NON-NLS-1$
 			}
 		}
 		return error;
