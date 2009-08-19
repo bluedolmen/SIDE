@@ -77,16 +77,22 @@ public class Generate extends Thread {
 		// Create the IFile
 		IFile file = null;
 		try {
-			IWorkspace ws = ResourcesPlugin.getWorkspace();
-			IProject project = ws.getRoot().getProject("StandAlone");
-			if (!project.exists())
-				project.create(null);
-			if (!project.isOpen())
-				project.open(null);
-			IPath location = new Path(filePath.getAbsolutePath());
-			file = project.getFile(location.lastSegment());
-			// file.createLink(location, IResource.NONE, null);
-		} catch (CoreException e1) {
+			//IWorkspace ws = ResourcesPlugin.getWorkspace();
+			//IProject project= ws.getRoot().getProject("StandAlone");
+			//if (!project.exists())
+			//	project.create(null);
+			//if (!project.isOpen())
+			//	project.open(null);
+			//IPath location = new Path(filePath.getAbsolutePath());
+			
+			//file = project.getFile(location.lastSegment());
+			
+			IWorkspace workspace= ResourcesPlugin.getWorkspace();
+			IPath location= Path.fromOSString(filePath.getAbsolutePath());
+			file= workspace.getRoot().getFileForLocation(location);
+			
+			
+		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 		
@@ -208,7 +214,7 @@ public class Generate extends Thread {
 			skipValidation = Boolean.valueOf(configurationParameters
 					.get(ApplicationDialog.KEY_SKIPVALIDATION));
 		}
-		//System.out.println("log2");
+		System.out.println("log2");
 		try {
 			modelsInfo = (HashMap<String, List<IFile>>) ApplicationUtil
 					.getAssociatedMetaModel(models);
