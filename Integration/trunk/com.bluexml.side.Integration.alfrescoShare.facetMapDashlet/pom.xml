@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.bluexml.side.Integration.alfrescoShare</groupId>
 	<artifactId>facetMapDashlet</artifactId>
-	<version>1.0.3</version>
+	<version>1.0.4</version>
 	<name>Dashlets Alfresco share</name>
 	<description>including facetmap in alfresco share</description>
 	<packaging>zip</packaging>
@@ -45,7 +45,7 @@
 						<phase>package</phase>
 						<configuration>
 							<tasks>
-								<ant antfile="build.xml" target="buildExtension">
+								<ant antfile="extensionBuilder.xml" target="buildExtension">
 									<property name="module.version" value="${project.version}" />
 									<property name="module.title" value="${project.name}" />
 									<property name="module.description" value="${project.description}" />

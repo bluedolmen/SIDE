@@ -1,63 +1,91 @@
-<project name="com.bluexml.side.Integration.alfrescoShare.facetMapDashlet">
+<project xmlns:artifact="antlib:org.apache.maven.artifact.ant" name="alfrescoShare.facetMapDashlet" default="patchWebapps">
 	<property file="build.${user.name}.properties" />
-	<property name="tmpFolder" value="./tmp" />
-	<property name="extensionFolder" value="./target" />
-	<property name="resources" value="./resources" />
-	<property name="module.properties" value="${resources}/module.properties" />
-
-	<property name="module.jar" value="./lib/${module.id}.jar" />
-	<property name="module.zip" value="${extensionFolder}/${module.id}-${module.version}.zip" />
-
-
-
-	<property name="packageDescriptionFile" value="moduleDescriptions/module.${module.id}.properties" />
+	<path id="maven-ant-tasks.classpath" path="maven-ant-tasks-2.0.10.jar" />
+	<typedef resource="org/apache/maven/artifact/ant/antlib.xml" uri="antlib:org.apache.maven.artifact.ant" classpathref="maven-ant-tasks.classpath" />
+	<artifact:pom id="mypom" file="pom.xml" />
+	<property name="moduleId" value="${mypom.artifactId}" />
+	<property name="webappName" value="share"/>
 	<!-- ================================= 
-          target: buildExtension              
-         ================================= -->
-	<target name="buildExtension" depends="clean" description="build extension archive for alfresco share">
-		<echo message="${module.version}">
-		</echo>
-		<delete dir="${tmpFolder}" failonerror="false" />
-		<mkdir dir="${extensionFolder}" />
-		<!-- TODO: Insert your custom code -->
+	          target: name              
+	         ================================= -->
+	<target name="patchWebapps" depends="" description="build and install in local alfresco">
+		<echo message="use maven to build package..." />
+		<maven basedir="${basedir}" options="" goal="clean" resultproperty="maven.build.result" />
+		<maven basedir="${basedir}" options="" goal="package" resultproperty="maven.build.result" />
+		<!--<artifact:mvn pom="pom.xml" mavenHome="${maven.home}">
+				<arg value="clean" />
+				<arg value="package" />
+			</artifact:mvn>
+			-->
+		<echo message="==========" />
+		<echo message="patch the web application webapps.home=${webapps.home}" />
 
-		<!--jar destfile="${module.jar}">
-			<fileset dir="./target/classes" id="id">
-				<include name="**/*.*"/>
-			</fileset>
-		</jar-->
-		<copy file="${module.properties}" tofile="${tmpFolder}/${packageDescriptionFile}" />
-		<copy todir="${tmpFolder}">
-			<fileset dir="${resources}" id="id">
-				<exclude name="${module.properties}"/>
+		<copy todir="${webapps.home}/${webappName}" overwrite="true" failonerror="false" verbose="true">
+			<fileset dir="target/${moduleId}-${mypom.version}" id="id">
+				<include name="**/**" />
 			</fileset>
 		</copy>
-		<zip destfile="${module.zip}">
-			<fileset dir="${tmpFolder}" id="id">
-				<include name="**/*.*" />
-			</fileset>
-		</zip>
+		
+		<echo message="==========" />
+		<!--
+			<echo message="clean project" />
+			<artifact:mvn pom="pom.xml" mavenHome="${maven.home}">
+				<arg value="clean" />
+			</artifact:mvn>
+			-->
+		<!--<maven basedir="${basedir}" options="" goal="clean" resultproperty="maven.build.result" />-->
 	</target>
 
 
 	<!-- ================================= 
-          target: copyTo
-         ================================= -->
-	<target name="copyTo" depends="buildExtension" description="build and copy package into generated folder (same as generator do)">
-		<copy todir="${generated.home}" overwrite="true">
-			<fileset dir="${extensionFolder}">
-				<include name="*.zip" />
-			</fileset>
-		</copy>
+	          target: name              
+	         ================================= -->
+	<target name="maven_install" depends="" description="do mvn install">
+		<!--<artifact:mvn pom="pom.xml" mavenHome="/usr/share/maven">
+				<arg value="clean" />
+				<arg value="install" />
+			</artifact:mvn>
+			-->
+		<maven basedir="${basedir}" options="" goal="install" resultproperty="maven.build.result" />
 	</target>
 
-
-	<!-- ================================= 
-          target: clean              
-         ================================= -->
-	<target name="clean" depends="" description="delete tmp and builded extension">
-		<delete dir="${tmpFolder}" failonerror="false" />
-		<delete dir="${extensionFolder}" failonerror="false" />
+	<target name="maven_deploy" depends="" description="do mvn deploy">
+		<maven basedir="${basedir}" options="" goal="clean" resultproperty="maven.build.result" />
+		<maven basedir="${basedir}" options="" goal="deploy" resultproperty="maven.build.result" />
+		<!--
+			<artifact:mvn pom="pom.xml" mavenHome="${maven.home}">
+				<arg value="clean" />
+				<arg value="deploy" />
+			</artifact:mvn>
+			-->
 	</target>
+
+	<!-- ========
+			we do not use artifact: to avoid jvm termination error
+		 ======== -->
+	<macrodef name="maven">
+		<attribute name="options" default="" />
+		<attribute name="goal" />
+		<attribute name="basedir" />
+		<attribute name="resultproperty" default="maven.result" />
+		<element name="args" implicit="true" optional="true" />
+		<sequential>
+			<java classname="org.codehaus.classworlds.Launcher" fork="true" dir="@{basedir}" resultproperty="@{resultproperty}">
+				<jvmarg value="-Xmx512m" />
+				<classpath>
+					<fileset dir="${maven.home}/boot">
+						<include name="*.jar" />
+					</fileset>
+					<fileset dir="${maven.home}/lib">
+						<include name="*.jar" />
+					</fileset>
+				</classpath>
+				<sysproperty key="classworlds.conf" value="${maven.home}/bin/m2.conf" />
+				<sysproperty key="maven.home" value="${maven.home}" />
+				<arg line="--batch-mode @{options} @{goal}" />
+			</java>
+			<echo message="exit code : ${maven.build.result}" />
+		</sequential>
+	</macrodef>
 
 </project>
