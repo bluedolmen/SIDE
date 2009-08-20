@@ -333,16 +333,6 @@
         <details key="documentation" value="Definition: allows selecting multiple choices if true and only one if false.&#xD;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filterParent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'filterParent’ attribute filters choice items in the list according to a parent list value.&#xD;&#xD;&#xA;Example: filter a list of department by country."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filterData" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'filterData&quot; attribute filters choice items in the list by data."/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RegexField" eSuperTypes="#//CharField">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
