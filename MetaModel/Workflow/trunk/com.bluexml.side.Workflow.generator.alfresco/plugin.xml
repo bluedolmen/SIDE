@@ -5,7 +5,7 @@
          point="com.bluexml.side.Application.com_bluexml_application_configuration">
       <metamodel
             description="Check this to generate workflow models on leading frameworks.&lt;br&gt; This Workflow Metamodel allows to model Business processes.&lt;br&gt;S-IDE provides the modeler to graphically produce workflow models and various generators to instantiate these models on leading frameworks."
-            id="http://www.kerblue.org/v2/ksr600-workflow/"
+            id="http://www.kerblue.org/workflow/1.0"
             name="KSR600 Workflow"
             url="http://www.kerblue.org/v2/ksr600-workflow/">
          <technology
