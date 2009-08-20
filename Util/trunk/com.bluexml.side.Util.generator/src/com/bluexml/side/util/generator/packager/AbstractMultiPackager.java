@@ -1,5 +1,6 @@
 package com.bluexml.side.util.generator.packager;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -7,6 +8,7 @@ import java.util.Properties;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 
+import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.IFileHelper;
 
 public abstract class AbstractMultiPackager {
@@ -28,7 +30,7 @@ public abstract class AbstractMultiPackager {
 		Map<String, IFile> packageFiles_ = new HashMap<String, IFile>();
 		for (Map.Entry<String, AbstractPackager> p : packagers.entrySet()) {
 			if (p.getValue().getFolderToPackage().exists()) {
-				IFile pp = p.getValue().buildPackage(doClean);
+				IFile pp = p.getValue().buildPackage(false);
 				packageFiles_.put(p.getKey(), pp);
 			} else {
 				// INFO : packager skipped
@@ -36,14 +38,24 @@ public abstract class AbstractMultiPackager {
 					// delete empty package if exist
 					p.getValue().getPackageFile().delete();
 				}
-
 			}
+		}
+		if (doClean) {
+			FileHelper.deleteFile(getWorkingFolder());
 		}
 		return packageFiles_;
 	}
 
 	protected Map<String, IFile> getPackageFiles() {
 		return packageFiles;
+	}
+	
+	public String getWorkingdir() {
+		return workingdir;
+	}
+	
+	protected File getWorkingFolder() {
+		return new File(getWorkingdir());
 	}
 
 }
