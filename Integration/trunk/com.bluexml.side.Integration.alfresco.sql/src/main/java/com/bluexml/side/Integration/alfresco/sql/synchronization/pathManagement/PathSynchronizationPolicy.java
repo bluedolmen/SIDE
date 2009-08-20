@@ -2,7 +2,6 @@ package com.bluexml.side.Integration.alfresco.sql.synchronization.pathManagement
 
 import java.util.List;
 
-import org.alfresco.repo.node.NodeServicePolicies.OnCreateNodePolicy;
 import org.alfresco.repo.node.NodeServicePolicies.OnMoveNodePolicy;
 import org.alfresco.repo.policy.Behaviour;
 import org.alfresco.repo.policy.JavaBehaviour;
@@ -15,6 +14,8 @@ import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.service.namespace.QName;
 import org.apache.log4j.Logger;
 
+import com.bluexml.side.Integration.alfresco.sql.synchronization.common.SqlCommon;
+import com.bluexml.side.Integration.alfresco.sql.synchronization.nodeService.NodeServicePolicies.OnCreateNodePolicy;
 import com.bluexml.side.Integration.alfresco.sql.synchronization.schemaManagement.SchemaCreation;
 
 public class PathSynchronizationPolicy implements 
@@ -37,8 +38,8 @@ public class PathSynchronizationPolicy implements
 			this.onMoveNode = new JavaBehaviour(this, "onMoveNode", NotificationFrequency.TRANSACTION_COMMIT);
 	
 			// Bind behaviours to node policies
-			policyComponent.bindClassBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onCreateNode"), this,this.onCreateNode);
-			policyComponent.bindClassBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onMoveNode"), this,this.onMoveNode);
+			policyComponent.bindClassBehaviour(QName.createQName(SqlCommon.BLUEXML_SQL_EXTENSION_URI, "onCreateNode"), this, this.onCreateNode);
+			policyComponent.bindClassBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onMoveNode"), this, this.onMoveNode);
 		} else {
 			logger.warn("Path synchronization was deactivated since schema is marked as not ready");
 		}
@@ -46,12 +47,14 @@ public class PathSynchronizationPolicy implements
 	}
 		
 
-	
-	public void onCreateNode(ChildAssociationRef childAssocRef) {
-		NodeRef childNodeRef = childAssocRef.getChildRef(); 
+	public void onCreateNode(NodeRef nodeRef) {
+		//NodeRef childNodeRef = childAssocRef.getChildRef(); 
 		//logger.debug("Create node, path = " + path);
 				
-		pathService.updatePath(childNodeRef);
+		pathService.updatePath(nodeRef);
+	}
+
+	public void onCreateNode(ChildAssociationRef childAssocRef) {
 	}
 
 	public void onMoveNode(ChildAssociationRef oldChildAssocRef,ChildAssociationRef newChildAssocRef) {
@@ -62,7 +65,7 @@ public class PathSynchronizationPolicy implements
 
 		List<NodeRef> descendantsNodeRef = searchService.selectNodes(childNodeRef, "*//.", null, namespaceService, false);
 		for (NodeRef nodeRef : descendantsNodeRef) {
-			logger.debug("Descendants: " + nodeRef);		
+			logger.debug("Descendant: " + nodeRef);		
 			pathService.updatePath(nodeRef);			
 		}
 	}
@@ -96,4 +99,7 @@ public class PathSynchronizationPolicy implements
 	public void setPathService(PathService pathService_) {
 		pathService = pathService_;
 	}
+
+
+
 }

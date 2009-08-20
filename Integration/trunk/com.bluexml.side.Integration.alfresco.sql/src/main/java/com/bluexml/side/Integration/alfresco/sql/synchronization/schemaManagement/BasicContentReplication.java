@@ -27,14 +27,14 @@ public class BasicContentReplication implements ContentReplication {
 	/* (non-Javadoc)
 	 * @see com.bluexml.alfresco.modules.sql.synchronization.schemaManagement.ContentReplication#removeExistingData()
 	 */
-	public void removeExistingData() {
+	public void removeExistingData(QName modelName) {
 		throw new UnsupportedOperationException();
 	}
 	
 	/* (non-Javadoc)
 	 * @see com.bluexml.alfresco.modules.sql.synchronization.schemaManagement.ContentReplication#addExistingData()
 	 */
-	public void addExistingData() {
+	public void addExistingData(QName modelName) {
 		
 		// TODO : implement a better strategy to get the whole set of existing nodes
 		ResultSet nodes = searchService.query(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE, SearchService.LANGUAGE_XPATH, "//*");
@@ -44,7 +44,7 @@ public class BasicContentReplication implements ContentReplication {
 		List<ChildAssociationRef> childAssociationsToAdd = new ArrayList<ChildAssociationRef>();
 		
 		HashSet<QName> currentDictionaryTypes = new HashSet<QName>();
-		currentDictionaryTypes.addAll(dictionaryService.getAllTypes());
+		currentDictionaryTypes.addAll(dictionaryService.getTypes(modelName));
 		
 		while (it.hasNext()) {
 			ResultSetRow resultSetRow = it.next();
@@ -102,12 +102,12 @@ public class BasicContentReplication implements ContentReplication {
 	
 	private void addAssociation(AssociationRef associationRef) {
 		logger.debug("Replicating association " + associationRef);
-		synchroNodeService.addAssociation(associationRef);
+		synchroNodeService.createAssociation(associationRef.getSourceRef(), associationRef.getTargetRef(), associationRef.getTypeQName());
 	}
 	
 	private void addChildAssociation(ChildAssociationRef associationRef) {
 		logger.debug("Replicating child association " + associationRef);
-		synchroNodeService.addChildAssociation(associationRef);
+		synchroNodeService.createAssociation(associationRef.getParentRef(), associationRef.getChildRef(), associationRef.getTypeQName());
 	}
 	
 	/*

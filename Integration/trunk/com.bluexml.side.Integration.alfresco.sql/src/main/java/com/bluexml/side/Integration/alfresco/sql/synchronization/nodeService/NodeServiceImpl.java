@@ -21,10 +21,7 @@ import org.alfresco.service.cmr.dictionary.DataTypeDefinition;
 import org.alfresco.service.cmr.dictionary.DictionaryService;
 import org.alfresco.service.cmr.dictionary.PropertyDefinition;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
-import org.alfresco.service.cmr.repository.AssociationRef;
-import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.NodeRef;
-import org.alfresco.service.cmr.repository.NodeService;
 import org.alfresco.service.namespace.QName;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -35,7 +32,7 @@ import com.bluexml.side.Integration.alfresco.sql.synchronization.common.NodeHelp
 import com.bluexml.side.Integration.alfresco.sql.synchronization.dialects.SynchronizationDialect;
 import com.bluexml.side.Integration.alfresco.sql.synchronization.dictionary.DatabaseDictionary;
 
-public class NodeServiceImpl implements com.bluexml.side.Integration.alfresco.sql.synchronization.nodeService.NodeService {
+public class NodeServiceImpl extends AbstractNodeServiceImpl {
 
 	private Logger logger = Logger.getLogger(getClass());
 	
@@ -90,6 +87,8 @@ public class NodeServiceImpl implements com.bluexml.side.Integration.alfresco.sq
 		}
 		
 		executeSQLQuery(sqlQueries);
+	
+		invokeOnCreateNode(nodeRef);
 	}
 
 	public void delete(NodeRef nodeRef)  {
@@ -103,10 +102,12 @@ public class NodeServiceImpl implements com.bluexml.side.Integration.alfresco.sq
 			String sql_query = String.format("DELETE FROM %1$s WHERE id = %2$s", simplified_type_name, dbid);
 			executeSQLQuery(sql_query);
 		}
+		
+		invokeOnDeleteNode(nodeRef);
 	}
 	
 	
-	public void updateProperties(NodeRef nodeRef, Collection<QName> changes) { //, Map<QName, Serializable> changes)  {
+	public void updateProperties(NodeRef nodeRef, Collection<QName> changes) { 
 		String type_name = nodeService.getType(nodeRef).getLocalName();
 		List<String> sqlQueries = new ArrayList<String>();
 
@@ -134,7 +135,7 @@ public class NodeServiceImpl implements com.bluexml.side.Integration.alfresco.sq
 			iterablePropertiesKeySet.remove(ContentModel.PROP_NODE_UUID);
 			
 			for (QName key : iterablePropertiesKeySet ) {
-				Serializable property = nodeProperties.get(key); //changes.get(key); //;
+				Serializable property = nodeProperties.get(key); 
 				PropertyDefinition propertyDefinition = dictionaryService.getProperty(key);
 				String value = getSQLFormatFromSerializable(property, propertyDefinition);
 				
@@ -149,53 +150,35 @@ public class NodeServiceImpl implements com.bluexml.side.Integration.alfresco.sq
 		
 		executeSQLQuery(sqlQueries);
 
+		invokeOnUpdateProperties(nodeRef, changes);
 	}
 
 
-	public void addAssociation(AssociationRef associationRef)  {
+	public void createAssociation(NodeRef sourceNodeRef, NodeRef targetNodeRef, QName typeQName) {
 		
-		QName associationType = associationRef.getTypeQName();
-		String associationName = associationType.getLocalName();
+		String associationName = typeQName.getLocalName();
 		
-		Serializable sourceId = nodeService.getProperty(associationRef.getSourceRef(), ContentModel.PROP_NODE_DBID);
-		Serializable targetId = nodeService.getProperty(associationRef.getTargetRef(), ContentModel.PROP_NODE_DBID);
+		Serializable sourceId = nodeService.getProperty(sourceNodeRef, ContentModel.PROP_NODE_DBID);
+		Serializable targetId = nodeService.getProperty(targetNodeRef, ContentModel.PROP_NODE_DBID);
 
-		addAssociation(associationName , sourceId, targetId);
+		createAssociation(associationName , sourceId, targetId);
+		
+		invokeOnCreateAssociation(sourceNodeRef, targetNodeRef, typeQName);
 	}
 
-	public void removeAssociation(AssociationRef associationRef)  {
+	public void deleteAssociation(NodeRef sourceNodeRef, NodeRef targetNodeRef, QName typeQName)  {
 		
-		QName associationType = associationRef.getTypeQName();
-		String associationName = associationType.getLocalName();
+		String associationName = typeQName.getLocalName();
 
-		Serializable sourceId = nodeService.getProperty(associationRef.getSourceRef(), ContentModel.PROP_NODE_DBID);
-		Serializable targetId = nodeService.getProperty(associationRef.getTargetRef(), ContentModel.PROP_NODE_DBID);
+		Serializable sourceId = nodeService.getProperty(sourceNodeRef, ContentModel.PROP_NODE_DBID);
+		Serializable targetId = nodeService.getProperty(targetNodeRef, ContentModel.PROP_NODE_DBID);
 
+		deleteAssociation(associationName, sourceId, targetId);
 		
-		removeAssociation(associationName, sourceId, targetId);
+		invokeOnDeleteAssociation(sourceNodeRef, targetNodeRef, typeQName);
 	}
 
-	public void addChildAssociation(ChildAssociationRef associationRef)  {
-		QName associationType = associationRef.getTypeQName();
-		String associationName = associationType.getLocalName();
-		
-		Serializable sourceId = nodeService.getProperty(associationRef.getParentRef(), ContentModel.PROP_NODE_DBID);
-		Serializable targetId = nodeService.getProperty(associationRef.getChildRef(), ContentModel.PROP_NODE_DBID);
-		
-		addAssociation(associationName, sourceId, targetId);
-	}
-
-	public void removeChildAssociation(ChildAssociationRef associationRef)  {
-		QName associationType = associationRef.getTypeQName();
-		String associationName = associationType.getLocalName();
-		
-		Serializable sourceId = nodeService.getProperty(associationRef.getParentRef(), ContentModel.PROP_NODE_DBID);
-		Serializable targetId = nodeService.getProperty(associationRef.getChildRef(), ContentModel.PROP_NODE_DBID);
-		
-		removeAssociation(associationName, sourceId, targetId);
-	}
-
-	private void addAssociation(String associationName, Serializable sourceId, Serializable targetId)  {
+	private void createAssociation(String associationName, Serializable sourceId, Serializable targetId)  {
 		// Retrieve a simplified association name
 		String databaseAssociationName = databaseDictionary.resolveAssociationAsTableName(associationName);
 		String sourceClassName = databaseDictionary.getSourceAlias(associationName);
@@ -205,7 +188,7 @@ public class NodeServiceImpl implements com.bluexml.side.Integration.alfresco.sq
 		executeSQLQuery(sql_query);
 	}
 
-	private void removeAssociation(String associationName, Serializable sourceId, Serializable targetId)  {
+	private void deleteAssociation(String associationName, Serializable sourceId, Serializable targetId)  {
 
 		String databaseAssociationName = databaseDictionary.resolveAssociationAsTableName(associationName);
 		String sourceClassName = databaseDictionary.getSourceAlias(associationName);
@@ -240,19 +223,6 @@ public class NodeServiceImpl implements com.bluexml.side.Integration.alfresco.sq
 		}
 	}
 
-//	private Set<QName> __filterSystemProperties(Collection<QName> propertyNames) {
-//		Set<QName> result = new HashSet<QName>();
-//		
-//		for (QName propertyName : propertyNames) {
-//			if (SqlCommon.BLUEXML_NAMESPACE_URI.equals(propertyName.getNamespaceURI()) ) {
-//				result.add(propertyName);
-//			}
-//		}
-//		
-//		return result;
-//	}
-	
-
 	private String getSQLFormatFromSerializable(Serializable property, PropertyDefinition propertyDefinition) {
 		String value = null;
 		QName dataTypeName = propertyDefinition.getDataType().getName();
@@ -283,46 +253,15 @@ public class NodeServiceImpl implements com.bluexml.side.Integration.alfresco.sq
 			}
 		}
 		
-//		else if (property instanceof Collection) {
-//			value = getSQLFormatFromCollection((Collection) property);
-//			is_string = true;
-//		}
-
 		return value;
 	}
-
 	
-	/*
-	 * Obsolete : Collection management
-	 */
-//	private static List<String> __escape(Collection<String> values) {
-//		ArrayList<String> result = new ArrayList<String>();
-//		for (String value : values) {
-//			result.add(__escape(value));
-//		}
-//		return result;
-//	}
-//
-//	private String getSQLFormatFromCollection(Collection properties) {
-//		StringBuffer sb = new StringBuffer();
-//		boolean first = true;
-//		for (Object property : properties) {
-//			if (!first) {
-//				sb.append(" ");
-//			}
-//			sb.append(__escape(property.toString()));
-//			first = false;
-//		}
-//		return sb.toString();
-//	}
-
 	
 	//
 	// IoC/DI Spring
 	//
 
 	// Dependencies
-	private NodeService nodeService;
 	private DictionaryService dictionaryService;
 	private DatabaseDictionary databaseDictionary;
 	private JdbcTransactionListener transactionListener;
@@ -330,9 +269,6 @@ public class NodeServiceImpl implements com.bluexml.side.Integration.alfresco.sq
 	private NodeHelper nodeHelper;
 	private SynchronizationDialect synchronizationDialect;
 
-	public void setNodeService(NodeService nodeService_) {
-		nodeService = nodeService_;
-	}
 
 	public void setDictionaryService(DictionaryService dictionaryService_) {
 		dictionaryService = dictionaryService_;
@@ -361,5 +297,4 @@ public class NodeServiceImpl implements com.bluexml.side.Integration.alfresco.sq
 		transactionListener = (JdbcTransactionListener) transactionListener_;
 	}
 	
-
 }

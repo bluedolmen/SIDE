@@ -91,6 +91,7 @@
 		<property name="dataSource" ref="synchronizationDataSource" />
 		<property name="databaseDictionary" ref="databaseDictionary" />
 		<property name="nodeFilterer" ref="synchronizationNodeFilterer" />	
+		<property name="dictionaryDAO" ref="dictionaryDAO" />
 		<property name="contentReplication" >	
 			<bean id="synchronizationContentReplicator" class="com.bluexml.side.Integration.alfresco.sql.synchronization.schemaManagement.BasicContentReplication" >
 				<property name="nodeFilterer" ref="synchronizationNodeFilterer" />		
@@ -104,7 +105,7 @@
 		<property name="synchronizationDialect" ref="defaultSynchronizationDialect" />
 		<property name="customActionManager" ref="customActionManager" />
 	</bean>
-	
+		
 	<bean id="abstractCreateCustomAction" class="com.bluexml.side.Integration.alfresco.sql.synchronization.schemaManagement.AbstractCustomAction" abstract="true">
 		<property name="synchronizationDialect" ref="defaultSynchronizationDialect" />
 		<property name="synchronizationNodeService" ref="synchronizationNodeService" />
@@ -129,7 +130,7 @@
             <value>com.bluexml.side.Integration.alfresco.sql.synchronization.nodeService.NodeService</value>
         </property>
         <property name="target">
-			<bean id="synchronizationNodeServiceImpl" class="com.bluexml.side.Integration.alfresco.sql.synchronization.nodeService.NodeServiceImpl">
+			<bean id="synchronizationNodeServiceImpl" class="com.bluexml.side.Integration.alfresco.sql.synchronization.nodeService.NodeServiceImpl" init-method="init">
 		 		<property name="nodeService" ref="nodeService" />
 				<property name="dictionaryService" ref="dictionaryService" />
 				<property name="databaseDictionary" ref="databaseDictionary" />
@@ -137,6 +138,7 @@
 				<property name="nodeFilterer" ref="synchronizationNodeFilterer" />
 				<property name="nodeHelper" ref="nodeHelper" />		
 				<property name="synchronizationDialect" ref="defaultSynchronizationDialect" />
+				<property name="policyComponent" ref="policyComponent" />
 			</bean>
         </property>
         <property name="transactionManager" ref="transactionManager" />
@@ -178,7 +180,7 @@
         </property>
     </bean>
 		
- 	<bean id="pathSynchronizationPolicy" class="com.bluexml.side.Integration.alfresco.sql.synchronization.pathManagement.PathSynchronizationPolicy" init-method="init">
+ 	<bean id="pathSynchronizationPolicy" class="com.bluexml.side.Integration.alfresco.sql.synchronization.pathManagement.PathSynchronizationPolicy" init-method="init" depends-on="synchronizationPolicy">
 		<property name="policyComponent" ref="policyComponent" />
 		<property name="namespaceService" ref="namespaceService" />
 		<property name="searchService" ref="searchService" />		

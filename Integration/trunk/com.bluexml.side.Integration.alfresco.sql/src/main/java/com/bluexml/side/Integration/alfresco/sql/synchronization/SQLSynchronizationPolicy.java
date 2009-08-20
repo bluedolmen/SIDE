@@ -126,14 +126,14 @@ public class SQLSynchronizationPolicy implements
 	public void onCreateAssociation(AssociationRef associationRef) {
 		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {
 			logger.debug("Synchronization policy, CREATE ASSOCIATION");
-			nodeService.addAssociation(associationRef);
+			nodeService.createAssociation(associationRef.getSourceRef(), associationRef.getTargetRef(), associationRef.getTypeQName());
 		}
 	}
 	
 	public void onDeleteAssociation(AssociationRef associationRef) {
 		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {
 			logger.debug("Synchronization policy, DELETE ASSOCIATION");
-			nodeService.removeAssociation(associationRef);
+			nodeService.deleteAssociation(associationRef.getSourceRef(), associationRef.getTargetRef(), associationRef.getTypeQName());
 		}
 	}
 
@@ -141,7 +141,7 @@ public class SQLSynchronizationPolicy implements
 			boolean isNewNode) {
 		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {
 			logger.debug("Synchronization policy, CREATE CHILD ASSOCIATION");
-			nodeService.addChildAssociation(associationRef);
+			nodeService.createAssociation(associationRef.getParentRef(), associationRef.getChildRef(), associationRef.getTypeQName());
 		}
 	}
 
@@ -149,7 +149,7 @@ public class SQLSynchronizationPolicy implements
 		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {
 
 			logger.debug("Synchronization policy, DELETE CHILD ASSOCIATION");
-			nodeService.removeChildAssociation(associationRef);
+			nodeService.deleteAssociation(associationRef.getParentRef(), associationRef.getChildRef(), associationRef.getTypeQName());
 		}
 	}
 
