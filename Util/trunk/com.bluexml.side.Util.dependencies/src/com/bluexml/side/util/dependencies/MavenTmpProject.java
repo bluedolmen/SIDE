@@ -87,8 +87,8 @@ public class MavenTmpProject {
 		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:copy-dependencies", params);
 		if (result.getExceptions().size() > 0) {
 			List<?> exceps = result.getExceptions();
-			System.err.println("Exception occure during maven process :" + exceps);
-			throw new Exception("Exception occure during maven process :" + exceps);
+			System.err.println("Exception occured during maven process :" + exceps);
+			throw new Exception("Exception occured during maven process :" + exceps);
 		}
 	}
 
