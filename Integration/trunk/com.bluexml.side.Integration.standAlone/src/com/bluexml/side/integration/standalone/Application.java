@@ -32,10 +32,13 @@ public class Application implements IApplication {
 			        	File file = (File) iterator.next();
 			        	System.out.println("File = " + file.getAbsolutePath());
 			        	File fileAP = new File(file.getAbsolutePath());
-			        	System.out.println("file.exists(): " + fileAP.exists());
+			        	//System.out.println("file.exists(): " + fileAP.exists());
+			        	long time1= System.currentTimeMillis();
 			        	Generate gen = new Generate(fileAP, arguments[1]);
-			        	System.out.println("created");
+			        	//System.out.println("created");
 			        	gen.run();
+			        	long time2= System.currentTimeMillis()-time1;
+			        	System.out.println("Time "+ Long.toString(time2 / 1000)+ " secondes");
 			        }          
 			}
 			catch(Exception e){
@@ -48,11 +51,14 @@ public class Application implements IApplication {
 			//File file = new File("workspaceStandAlone/StandAlone/models/My.application");
 		
 			File file = new File(arguments[0]);
-			System.out.println("file.exists(): " + file.exists());
+			//System.out.println("file.exists(): " + file.exists());
+			long time1= System.currentTimeMillis();
 			Generate gen = new Generate(file, arguments[1]);
-			System.out.println("created");
+			//System.out.println("created");
 
 			gen.run();
+			long time2= System.currentTimeMillis()-time1;
+        	System.out.println("Time "+ Long.toString(time2 / 1000)+ " secondes");
 		}
 
 		System.out.println("End Generation");
