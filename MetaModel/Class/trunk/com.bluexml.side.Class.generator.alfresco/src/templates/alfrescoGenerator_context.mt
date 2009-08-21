@@ -28,7 +28,7 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 
 <beans>
     <!-- Registration of new models -->
-    <bean id="<%getModuleIdService(name)%>.dictionaryBootstrap" parent="dictionaryModelBootstrap" depends-on="dictionaryBootstrap">
+    <bean id="<%getModuleIdService(name)%>.dictionaryBootstrap" parent="dictionaryModelBootstrap" depends-on="SIDEdictionaryBootstrap">
         <property name="models">
             <list>
                 <value><%getModulePath()%>/model/model.xml</value>
