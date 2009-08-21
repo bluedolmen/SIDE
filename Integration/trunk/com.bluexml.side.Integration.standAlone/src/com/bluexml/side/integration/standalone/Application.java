@@ -46,7 +46,7 @@ public class Application implements IApplication {
 			}
 			// Start Generation
 		}else{
-			System.out.println("Start Generation");
+			//System.out.println("Start Generation");
       
 			//File file = new File("workspaceStandAlone/StandAlone/models/My.application");
 		
@@ -63,7 +63,7 @@ public class Application implements IApplication {
 
 		System.out.println("End Generation");
 
-		System.out.println("END !!!!!!!!!!");
+		//System.out.println("END !!!!!!!!!!");
 
 		return EXIT_OK;
 	}
