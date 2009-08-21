@@ -17,9 +17,11 @@ import com.bluexml.side.Integration.alfresco.sql.synchronization.schemaManagemen
 public class PathCustomAction extends AbstractCustomAction {
 
 	public void doInContentReplication(NodeRef nodeRef) {
-		//Path path = nodeService.getPath(nodeRef);
-				
-		pathService.updatePath(nodeRef);
+		/*
+		 * Obsolete since 1.0.9 where sql NodeService also defines policies
+		 */
+		//Path path = nodeService.getPath(nodeRef);	
+		//pathService.updatePath(nodeRef);
 	}
 
 	public void doInCreateAssociation(QName associationName, CreateStatement currentCreateStatement) {
@@ -48,16 +50,6 @@ public class PathCustomAction extends AbstractCustomAction {
 			}
 		}
 		return tableStatus;
-	}
-
-	/*
-	 * Spring IoC/DI material
-	 */
-
-	private PathService pathService;
-	
-	public void setPathService(PathService pathService_) {
-		pathService = pathService_;
 	}
 
 }

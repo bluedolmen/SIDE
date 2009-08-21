@@ -189,7 +189,6 @@
 	</bean>
 	
 	<bean id="pathCustomAction" class="com.bluexml.side.Integration.alfresco.sql.synchronization.pathManagement.PathCustomAction" parent="abstractCreateCustomAction" >
-		<property name="pathService" ref="synchronizationPathService" />
 	</bean>
 	
 
