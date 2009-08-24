@@ -65,8 +65,6 @@ public class ChoiceFieldItemProvider
 			addMax_boundPropertyDescriptor(object);
 			addWidgetPropertyDescriptor(object);
 			addMultiplePropertyDescriptor(object);
-			addFilterParentPropertyDescriptor(object);
-			addFilterDataPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -160,50 +158,6 @@ public class ChoiceFieldItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Filter Parent feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addFilterParentPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ChoiceField_filterParent_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ChoiceField_filterParent_feature", "_UI_ChoiceField_type"),
-				 FormPackage.Literals.CHOICE_FIELD__FILTER_PARENT,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Filter Data feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addFilterDataPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ChoiceField_filterData_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ChoiceField_filterData_feature", "_UI_ChoiceField_type"),
-				 FormPackage.Literals.CHOICE_FIELD__FILTER_DATA,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This returns ChoiceField.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -243,8 +197,6 @@ public class ChoiceFieldItemProvider
 			case FormPackage.CHOICE_FIELD__MAX_BOUND:
 			case FormPackage.CHOICE_FIELD__WIDGET:
 			case FormPackage.CHOICE_FIELD__MULTIPLE:
-			case FormPackage.CHOICE_FIELD__FILTER_PARENT:
-			case FormPackage.CHOICE_FIELD__FILTER_DATA:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
