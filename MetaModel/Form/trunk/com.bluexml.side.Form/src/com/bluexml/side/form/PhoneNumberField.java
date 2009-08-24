@@ -39,6 +39,11 @@ public interface PhoneNumberField extends CharField {
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'input_formats' attribute specifies a format for phone number which is conform to a Java Regular Expression (java.util.regex).
 	 * 
+	 * Example:
+	 * 
+	 * - (\\d-)?(\\d{3}-)?\\d{3}-\\d{4} to match an american phone number format.
+	 * 
+	 * 
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Input formats</em>' attribute.
 	 * @see #setInput_formats(String)

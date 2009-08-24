@@ -12,7 +12,7 @@ package com.bluexml.side.form;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: field for float input.
+ * Definition: The 'FloatField' specifies a field for float input.
  * 
  * 
  * Inherits:
@@ -41,7 +41,8 @@ public interface FloatField extends Field {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: minimum value for the input.
+	 * Definition: minimum value for the input. If the 'min_value' attribute is superior than 0, the Float field is mandatory.
+	 * Constraint/limit: The input value cannot be superior to the ‘max_value’.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Min value</em>' attribute.
 	 * @see #setMin_value(int)
@@ -71,6 +72,7 @@ public interface FloatField extends Field {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: maximum value for the input.
+	 * Constraint/limit: The input value cannot be inferior to the 'min_value'.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Max value</em>' attribute.
 	 * @see #setMax_value(int)

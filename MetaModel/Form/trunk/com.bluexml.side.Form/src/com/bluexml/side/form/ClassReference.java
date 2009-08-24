@@ -18,11 +18,11 @@ import com.bluexml.side.clazz.Clazz;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: The 'ClassReference' is used to reference a form class to a class.
- * 
+ * Definition: The 'ClassReference' is abstract and so in not available through the Form modeler; it has been defined to allow to reference a data class of the data model: for instance, a FormClass and a ModelChoiceField inherits a ClassReference to be associated to a data class of the data model.
+ *  The 'Real class' property of this element allows to select the referenced data class.
  * 
  * Example:
- * - Real class=Class Article.
+ * - Real class=Data class Article.
  * <!-- end-model-doc -->
  *
  * <p>

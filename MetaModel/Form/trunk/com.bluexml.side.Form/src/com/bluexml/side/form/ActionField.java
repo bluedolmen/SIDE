@@ -18,7 +18,7 @@ package com.bluexml.side.form;
  * where :
  * -	‘node’ is the form tree
  * -	‘dataId’ is the id of the node being edited: dataId is null when in creation mode.
- * When the form is initialized, the button is generated. On click, the class loader Java loads and run the class (check that the class location is in the classpath).
+ * When the form is initialized, the button is generated. On click, the Java class loader loads and run the class (check that the class location is in the classpath).
  * 
  * 
  * Inherits:

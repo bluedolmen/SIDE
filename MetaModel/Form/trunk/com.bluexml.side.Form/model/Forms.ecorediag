@@ -650,8 +650,12 @@
     <children xmi:type="notation:Node" xmi:id="_UHmV14nyEd6TQdKNtqitYA" type="4010"/>
     <children xmi:type="notation:Node" xmi:id="_UHmV2InyEd6TQdKNtqitYA" type="5008">
       <children xmi:type="notation:Node" xmi:id="_UHmV2YnyEd6TQdKNtqitYA" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//ChoiceWidgetType/Select"/>
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//ChoiceWidgetType/ListAll"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_UHmV2onyEd6TQdKNtqitYA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_beUCwJCXEd6a1sAdPpV0uA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//ChoiceWidgetType/ShowOne"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_beUCwZCXEd6a1sAdPpV0uA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_UHmV24nyEd6TQdKNtqitYA" type="2006">
         <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//ChoiceWidgetType/Inline"/>

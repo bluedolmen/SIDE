@@ -12,7 +12,7 @@ package com.bluexml.side.form;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: The 'ImageField' is use to upload image.
+ * Definition: The 'ImageField' is use to upload image. It inherits of the FileField and in particular the loaded image may be stored on the filesystem or in an ECM repository.
  * 
  * 
  * Inherits:

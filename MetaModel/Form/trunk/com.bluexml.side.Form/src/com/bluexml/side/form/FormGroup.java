@@ -14,8 +14,8 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: The FormGroup defines a logical group of fields. This logical grouping is used to generate grouping in the generated form through tabs, rows group, …. 
- * The creation of FormGroup is achieved by using the ‘Group in a new group’ operation of Field. 
+ * Definition: The FormGroup defines a logical group of fields. This logical grouping is used to generate tabs, rows group, …. in the generated form. 
+ * Constrinat/Limit: The creation of FormGroup is achieved by using the ‘Group in a new group’ operation of Field. 
  * Inherits:  FormElement. 
  * <!-- end-model-doc -->
  *
@@ -63,7 +63,7 @@ public interface FormGroup extends FormElement {
 	 * - auto: the generator decides the way to present the group.
 	 * - horizontal: the group is available under an horizontal separation.
 	 * - vertical: the group is available under a vertical separation.
-	 * - tabbed: the group is available under a tab.
+	 * - Tabbed: the group is available under a tab.
 	 * - borderless: the group is available under a separation without borders.
 	 * 
 	 * <!-- end-model-doc -->
@@ -106,6 +106,9 @@ public interface FormGroup extends FormElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: to get the list of the fields of the FormGroup.
+	 * <!-- end-model-doc -->
 	 * @model kind="operation"
 	 *        annotation="http://www.bluexml.com/OCL body='self.children->select(oclIsKindOf(Field)).oclAsType(Field)->union(self.children->select(oclIsKindOf(FormGroup)).oclAsType(FormGroup).getFields().oclAsType(Field)).oclAsType(Field)'"
 	 * @generated

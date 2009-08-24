@@ -17,9 +17,8 @@ package com.bluexml.side.form;
  * -	If the input is not a url, the URLField background color will change.
  * -	If you want to add a control of the input, transform to a RegexField and use a Java Regular Expression
  * Operations: same as CharField
- * Example: http://bluexml.com
+ * Example: http://www.bluexml.com
  * Inherits: CharField
- * 
  * <!-- end-model-doc -->
  *
  * <p>
@@ -42,6 +41,9 @@ public interface URLField extends CharField {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: if true, the input value of url will be checked by the modeler; if the url cannot be accessed, an error message is displayed.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Verify exists</em>' attribute.
 	 * @see #setVerify_exists(boolean)
 	 * @see com.bluexml.side.form.FormPackage#getURLField_Verify_exists()

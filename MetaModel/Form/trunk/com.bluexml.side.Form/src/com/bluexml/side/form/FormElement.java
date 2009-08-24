@@ -18,7 +18,7 @@ import com.bluexml.side.clazz.ClassModelElement;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: The FormElement is an element of the form. It can be a form group or a field.
+ * Definition: The FormElement is an element of the form. It can be either a form group or a field. it is an abstract element and so does not directly appear in the Form modeler.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -49,6 +49,7 @@ public interface FormElement extends ModelElement {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'label' attribute specifies the text associated to a form element. This text is displayed on or near the form element.
+	 * Constraint/Limit: The internationalization convention may be used for the label's value; if the value of the label in the form model is of the form "#label",  the token "label" is then considered as a “delayed message”, whose value will be provided by the forms server at runtime from a language resource file. In the case of Xform Chiba for Alfresco, the language resource file is '<xforms_webapp>/WEB-INF/classes/messages.properties'.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Label</em>' attribute.
 	 * @see #setLabel(String)
@@ -78,7 +79,7 @@ public interface FormElement extends ModelElement {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'id' attribute specifies a unique identifier of the form element in the form.
-	 * Constraint/limit: The 'id' value must not contain space.
+	 * Constraint/limit: The 'id' value must not contain space, is mandatory and must be unique in the FormClass or FormWorkflow.
 	 * 
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
@@ -110,8 +111,9 @@ public interface FormElement extends ModelElement {
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'help_text' attribute specifies a text that will appear when the cursor moves over the form element.
 	 * 
+	 * Constraint/Limit: The internationalization convention may be used for the help_text's value; if the value of the help_text in the form model is of the form "#label",  the token "label" is then considered as a “delayed message”, whose value will be provided by the forms server at runtime from a language resource file. In the case of Xform Chiba for Alfresco, the language resource file is '<xforms_webapp>/WEB-INF/classes/messages.properties'.
 	 * 
-	 * Example: help_text=This is a help message
+	 * Example: help_text=This is an help message
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Help text</em>' attribute.
 	 * @see #setHelp_text(String)
@@ -166,7 +168,7 @@ public interface FormElement extends ModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'hidden' attribute specifies that a form element will be hidden in the form if true or will be visible if false.
+	 * Definition: The 'hidden' attribute specifies that a form element will be hidden in the generated form if true or will be visible if false.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Hidden</em>' attribute.
 	 * @see #setHidden(boolean)

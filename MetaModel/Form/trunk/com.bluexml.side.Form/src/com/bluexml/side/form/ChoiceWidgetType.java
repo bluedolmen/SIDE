@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * and utility methods for working with them.
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
- * Definition: The 'ChoiceWidgetType'  is an enumeration list with the different layout for a choice field.
+ * Definition: The 'ChoiceWidgetType'  is an enumeration list with the different layouts for a choice field.
  * <!-- end-model-doc -->
  * @see com.bluexml.side.form.FormPackage#getChoiceWidgetType()
  * @model
@@ -26,16 +26,22 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum ChoiceWidgetType implements Enumerator {
 	/**
-	 * The '<em><b>Select</b></em>' literal object.
+	 * The '<em><b>List All</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #SELECT_VALUE
+	 * @see #LIST_ALL_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	SELECT(0, "Select", "Select"),
-
-	/**
+	LIST_ALL(0, "ListAll", "List All"), /**
+	 * The '<em><b>Show One</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SHOW_ONE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SHOW_ONE(1, "ShowOne", "Show One"), /**
 	 * The '<em><b>Inline</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -43,26 +49,39 @@ public enum ChoiceWidgetType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	INLINE(1, "Inline", "Inline");
+	INLINE(2, "Inline", "Inline");
 
 	/**
-	 * The '<em><b>Select</b></em>' literal value.
+	 * The '<em><b>List All</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * This option specifies a list representation: all litterals are listed in the selection window, possibly with the help of a scrollbar. Several litterals may be visible at once.
+	 * <!-- end-model-doc -->
+	 * @see #LIST_ALL
+	 * @model name="ListAll" literal="List All"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIST_ALL_VALUE = 0;
+
+	/**
+	 * The '<em><b>Show One</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Select</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Show One</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'Select' option specifies the representation of the 
-	 * comboxbox
+	 * This option refers to displaying the enumeration as a combo box: only the chosen enumeration litteral is visible.
 	 * <!-- end-model-doc -->
-	 * @see #SELECT
-	 * @model name="Select"
+	 * @see #SHOW_ONE
+	 * @model name="ShowOne" literal="Show One"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int SELECT_VALUE = 0;
+	public static final int SHOW_ONE_VALUE = 1;
 
 	/**
 	 * The '<em><b>Inline</b></em>' literal value.
@@ -73,14 +92,14 @@ public enum ChoiceWidgetType implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * on peut cree ou editeur , un formulaire inclus
+	 * All options are visible on the page, each tied to a radio button.
 	 * <!-- end-model-doc -->
 	 * @see #INLINE
 	 * @model name="Inline"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int INLINE_VALUE = 1;
+	public static final int INLINE_VALUE = 2;
 
 	/**
 	 * An array of all the '<em><b>Choice Widget Type</b></em>' enumerators.
@@ -90,7 +109,8 @@ public enum ChoiceWidgetType implements Enumerator {
 	 */
 	private static final ChoiceWidgetType[] VALUES_ARRAY =
 		new ChoiceWidgetType[] {
-			SELECT,
+			LIST_ALL,
+			SHOW_ONE,
 			INLINE,
 		};
 
@@ -142,7 +162,8 @@ public enum ChoiceWidgetType implements Enumerator {
 	 */
 	public static ChoiceWidgetType get(int value) {
 		switch (value) {
-			case SELECT_VALUE: return SELECT;
+			case LIST_ALL_VALUE: return LIST_ALL;
+			case SHOW_ONE_VALUE: return SHOW_ONE;
 			case INLINE_VALUE: return INLINE;
 		}
 		return null;

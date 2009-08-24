@@ -13,7 +13,7 @@ package com.bluexml.side.form;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: The 'DateTimeField' specifies a date with time input.
+ * Definition: The 'DateTimeField' specifies a date with time input. The format of the input value must be conform to the 'input_formats' property.
  * 
  * 
  * Inherits:

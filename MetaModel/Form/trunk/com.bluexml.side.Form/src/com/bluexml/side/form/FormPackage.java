@@ -4264,31 +4264,13 @@ public interface FormPackage extends EPackage {
 	int CHOICE_FIELD__MULTIPLE = FIELD_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Filter Parent</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHOICE_FIELD__FILTER_PARENT = FIELD_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Filter Data</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHOICE_FIELD__FILTER_DATA = FIELD_FEATURE_COUNT + 5;
-
-	/**
 	 * The number of structural features of the '<em>Choice Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHOICE_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 6;
+	int CHOICE_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.RegexFieldImpl <em>Regex Field</em>}' class.
@@ -6263,28 +6245,6 @@ public interface FormPackage extends EPackage {
 	EAttribute getChoiceField_Multiple();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.ChoiceField#getFilterParent <em>Filter Parent</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Filter Parent</em>'.
-	 * @see com.bluexml.side.form.ChoiceField#getFilterParent()
-	 * @see #getChoiceField()
-	 * @generated
-	 */
-	EAttribute getChoiceField_FilterParent();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.ChoiceField#getFilterData <em>Filter Data</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Filter Data</em>'.
-	 * @see com.bluexml.side.form.ChoiceField#getFilterData()
-	 * @see #getChoiceField()
-	 * @generated
-	 */
-	EAttribute getChoiceField_FilterData();
-
-	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.RegexField <em>Regex Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7071,22 +7031,6 @@ public interface FormPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CHOICE_FIELD__MULTIPLE = eINSTANCE.getChoiceField_Multiple();
-
-		/**
-		 * The meta object literal for the '<em><b>Filter Parent</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CHOICE_FIELD__FILTER_PARENT = eINSTANCE.getChoiceField_FilterParent();
-
-		/**
-		 * The meta object literal for the '<em><b>Filter Data</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CHOICE_FIELD__FILTER_DATA = eINSTANCE.getChoiceField_FilterData();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.RegexFieldImpl <em>Regex Field</em>}' class.

@@ -12,26 +12,10 @@ package com.bluexml.side.form;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: The 'Charfield' allows to enter char in input field.
+ * Definition: The 'Charfield' allows to enter characters in input field.
  * 
  * 
- * Operations: transformations to other formats
- * 
- * - Transform Charfield into URLField.
- * 
- * - Transform Charfield into EmailField.
- * 
- * - Transform Charfield into PasswordField.
- * 
- * - Transform Charfield into RegexField.
- * 
- * - Transform Charfield into PhoneNumberField.
- * 
- * - Transform Charfield into FileField.
- * 
- * - Transform Charfield into TextField.
- * 
- * 
+ * Operations: Transformations to other formats (URLField, EmailField, PasswordField, RegexField, PhoneNumberField, FileField, TextField)
  * Inherits: Field.
  * <!-- end-model-doc -->
  *
@@ -59,11 +43,8 @@ public interface CharField extends Field {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'min_length' attribute specifies the minimum length of a char field input.
-	 * 
-	 * 
-	 * Constraint/limit: If the 'min_length' attribute is superior than 0, the char field will become mandatory.
-	 * 
-	 * 
+	 * Constraint/limit: If the 'min_length' attribute is superior than 0, the char field is mandatory. If you want to set up a non-mandatory with a mininum length when filled up, use a regular expression.
+	 * The input value cannot be superior to the ‘max_length’.
 	 * Example: min_length=1
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Min length</em>' attribute.
@@ -95,6 +76,7 @@ public interface CharField extends Field {
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'max_length' attribute specifies the maximum length of a char field input.
 	 * 
+	 * Constraint/Limit: The input value cannot be inferior to the ‘min_length’.
 	 * 
 	 * Example: max_length=9
 	 * <!-- end-model-doc -->

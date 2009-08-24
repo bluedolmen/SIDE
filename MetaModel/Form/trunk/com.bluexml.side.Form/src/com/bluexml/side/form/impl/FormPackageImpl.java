@@ -961,24 +961,6 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getChoiceField_FilterParent() {
-		return (EAttribute)choiceFieldEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getChoiceField_FilterData() {
-		return (EAttribute)choiceFieldEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getRegexField() {
 		return regexFieldEClass;
 	}
@@ -1275,8 +1257,6 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		createEAttribute(choiceFieldEClass, CHOICE_FIELD__MAX_BOUND);
 		createEAttribute(choiceFieldEClass, CHOICE_FIELD__WIDGET);
 		createEAttribute(choiceFieldEClass, CHOICE_FIELD__MULTIPLE);
-		createEAttribute(choiceFieldEClass, CHOICE_FIELD__FILTER_PARENT);
-		createEAttribute(choiceFieldEClass, CHOICE_FIELD__FILTER_DATA);
 
 		regexFieldEClass = createEClass(REGEX_FIELD);
 		createEAttribute(regexFieldEClass, REGEX_FIELD__REGEX);
@@ -1439,7 +1419,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEAttribute(getModelChoiceField_Max_bound(), ecorePackage.getEInt(), "max_bound", null, 0, 1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelChoiceField_Target(), this.getFormContainer(), null, "target", null, 0, -1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelChoiceField_Association_formClass(), this.getFormContainer(), null, "association_formClass", null, 0, -1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getModelChoiceField_Widget(), this.getReferenceWidgetType(), "widget", null, 0, 1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModelChoiceField_Widget(), this.getChoiceWidgetType(), "widget", null, 0, 1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getModelChoiceField_Show_actions(), ecorePackage.getEBoolean(), "show_actions", "true", 0, 1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(emailFieldEClass, EmailField.class, "EmailField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1471,8 +1451,6 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEAttribute(getChoiceField_Max_bound(), ecorePackage.getEInt(), "max_bound", null, 0, 1, ChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getChoiceField_Widget(), this.getChoiceWidgetType(), "widget", null, 0, 1, ChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getChoiceField_Multiple(), ecorePackage.getEBoolean(), "multiple", null, 0, 1, ChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getChoiceField_FilterParent(), ecorePackage.getEString(), "filterParent", null, 0, 1, ChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getChoiceField_FilterData(), ecorePackage.getEString(), "filterData", null, 0, 1, ChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(regexFieldEClass, RegexField.class, "RegexField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRegexField_Regex(), ecorePackage.getEString(), "regex", null, 0, 1, RegexField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1515,7 +1493,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		addEEnumLiteral(textWidgetTypeEEnum, TextWidgetType.RICH_TEXT_EDITOR);
 
 		initEEnum(choiceWidgetTypeEEnum, ChoiceWidgetType.class, "ChoiceWidgetType");
-		addEEnumLiteral(choiceWidgetTypeEEnum, ChoiceWidgetType.SELECT);
+		addEEnumLiteral(choiceWidgetTypeEEnum, ChoiceWidgetType.LIST_ALL);
+		addEEnumLiteral(choiceWidgetTypeEEnum, ChoiceWidgetType.SHOW_ONE);
 		addEEnumLiteral(choiceWidgetTypeEEnum, ChoiceWidgetType.INLINE);
 
 		initEEnum(referenceWidgetTypeEEnum, ReferenceWidgetType.class, "ReferenceWidgetType");
@@ -1548,13 +1527,13 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "noSpecialCharacters"
-		   });																					
+		   });																						
 		addAnnotation
 		  (charFieldEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "MinSuperiorToMax"
-		   });																																																
+		   });																																																	
 		addAnnotation
 		  (classReferenceEClass, 
 		   source, 
@@ -1566,13 +1545,13 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "NoLinkForVirtualField"
-		   });																						
+		   });																							
 		addAnnotation
 		  (formContainerEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "validName"
-		   });				
+		   });					
 	}
 
 	/**
@@ -1594,7 +1573,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "body", "self.children->select(oclIsKindOf(Field)).oclAsType(Field)->union(self.children->select(oclIsKindOf(FormGroup)).oclAsType(FormGroup).getFields().oclAsType(Field)).oclAsType(Field)"
-		   });					
+		   });						
 		addAnnotation
 		  (fieldEClass.getEOperations().get(0), 
 		   source, 
@@ -1606,7 +1585,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "MinSuperiorToMax", "self.min_length <= self.max_length"
-		   });																																														
+		   });																																															
 		addAnnotation
 		  (classReferenceEClass, 
 		   source, 
@@ -1618,7 +1597,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "NoLinkForVirtualField", "not self.link.oclIsUndefined()"
-		   });																						
+		   });																							
 		addAnnotation
 		  (formContainerEClass, 
 		   source, 
@@ -1630,7 +1609,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "body", "if self.label.oclIsUndefined() or self.label.size() = 0 then\r self.name \relse\r self.label \rendif"
-		   });	
+		   });		
 	}
 
 	/**
@@ -1640,13 +1619,13 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";												
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";													
 		addAnnotation
 		  (getFormGroup_Presentation(), 
 		   source, 
 		   new String[] {
 			 "name", "presentation"
-		   });																																																																																				
+		   });																																																																																							
 	}
 
 	public FormFactory getFormsFactory() {

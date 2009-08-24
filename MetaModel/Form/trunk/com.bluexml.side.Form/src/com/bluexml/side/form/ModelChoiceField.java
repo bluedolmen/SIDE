@@ -14,11 +14,11 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: The 'ModelChoiceField' makes reference to the associations of classes. An association is, by default seen as a choices list with all elements of the targeted class. This association can be expanded in order to have a form of the targeted elements in the form itself.
+ * Definition: The 'ModelChoiceField' makes reference to the associations of classes. An association is, by default seen as a select list with all elements of the targeted class. This association can be expanded in order to have a form of the targeted elements in the form itself.
  * Operations:
  * - 'Relation / Expand to reference': Available on association, this action allows having the form of the linked class inside the actual form. It creates another form under the same form collection that can be personalized too: this form is directly inserted in the uniting form; we say the form is ‘inline’ instead of ‘Select’.
  * - 'Relation / Collapse to Model Choice Field’: when an association has been expanded, this operation allows coming back to the Select mode.
- * - ‘Relation -> Add Reference: Available after an ‘expand’ operation, it works the same way. It will add a form to the original form. Only available on associations with max cardinality set to more than one.
+ * - ‘Relation / Add Reference': Available after an ‘expand’ operation, it works the same way. It will add a form to the original form. Only available on associations with max cardinality set to more than one.
  * Inherits: ClassReference, Field.
  * <!-- end-model-doc -->
  *
@@ -48,7 +48,8 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: the minimum number of choice items in the list.
+	 * Definition: the number of choice items in the list for pagination.
+	 * Constraint/limit: The input value cannot be not superior to the ‘max_bound’.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Min bound</em>' attribute.
 	 * @see #setMin_bound(int)
@@ -76,6 +77,10 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: the maximum number of choice items in the list. If the number of associated data elements is superior to this value, only the first 'max_bound' number of elements will be returned and processed in the choice list.
+	 * Constraint/limit: The input value cannot be inferior to the 'min_bound'.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Max bound</em>' attribute.
 	 * @see #setMax_bound(int)
 	 * @see com.bluexml.side.form.FormPackage#getModelChoiceField_Max_bound()
@@ -128,7 +133,7 @@ public interface ModelChoiceField extends Field, ClassReference {
 
 	/**
 	 * Returns the value of the '<em><b>Widget</b></em>' attribute.
-	 * The literals are from the enumeration {@link com.bluexml.side.form.ReferenceWidgetType}.
+	 * The literals are from the enumeration {@link com.bluexml.side.form.ChoiceWidgetType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Widget</em>' attribute isn't clear,
@@ -142,24 +147,24 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * - Select: to integrate the targeted  class as a widget of selection
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Widget</em>' attribute.
-	 * @see com.bluexml.side.form.ReferenceWidgetType
-	 * @see #setWidget(ReferenceWidgetType)
+	 * @see com.bluexml.side.form.ChoiceWidgetType
+	 * @see #setWidget(ChoiceWidgetType)
 	 * @see com.bluexml.side.form.FormPackage#getModelChoiceField_Widget()
 	 * @model
 	 * @generated
 	 */
-	ReferenceWidgetType getWidget();
+	ChoiceWidgetType getWidget();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.form.ModelChoiceField#getWidget <em>Widget</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Widget</em>' attribute.
-	 * @see com.bluexml.side.form.ReferenceWidgetType
+	 * @see com.bluexml.side.form.ChoiceWidgetType
 	 * @see #getWidget()
 	 * @generated
 	 */
-	void setWidget(ReferenceWidgetType value);
+	void setWidget(ChoiceWidgetType value);
 
 	/**
 	 * Returns the value of the '<em><b>Show actions</b></em>' attribute.
@@ -171,7 +176,7 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'Show_actions' attribute specifies that the action field ‘edit’, ‘create’, ‘delete’ or others are available if true or are not visible if not.
+	 * Definition: The 'Show_actions' attribute specifies that the action field ‘edit’, ‘create’, ‘delete’ or others are available if true or are not visible if false. If false, this allows to integrated read-only sub-form.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Show actions</em>' attribute.
 	 * @see #setShow_actions(boolean)

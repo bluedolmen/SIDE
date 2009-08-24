@@ -14,7 +14,7 @@ package com.bluexml.side.form;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: The 'ChoiceField' defines a list of values to select.
+ * Definition: The 'ChoiceField' defines a list of values to select. This is related to a static or dynamic enumeration of the Data model.
  * Inherits: Field.
  * <!-- end-model-doc -->
  *
@@ -25,8 +25,6 @@ package com.bluexml.side.form;
  *   <li>{@link com.bluexml.side.form.ChoiceField#getMax_bound <em>Max bound</em>}</li>
  *   <li>{@link com.bluexml.side.form.ChoiceField#getWidget <em>Widget</em>}</li>
  *   <li>{@link com.bluexml.side.form.ChoiceField#isMultiple <em>Multiple</em>}</li>
- *   <li>{@link com.bluexml.side.form.ChoiceField#getFilterParent <em>Filter Parent</em>}</li>
- *   <li>{@link com.bluexml.side.form.ChoiceField#getFilterData <em>Filter Data</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,6 +43,7 @@ public interface ChoiceField extends Field {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: the minimum number of choice items in the list.
+	 * Constraint/limit: The input value cannot be superior to the ‘max_bound’.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Min bound</em>' attribute.
 	 * @see #setMin_bound(int)
@@ -74,6 +73,7 @@ public interface ChoiceField extends Field {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: the maximum number of choice items in the list.
+	 * Constraint/limit: The input value cannot be inferior to the 'min_value'.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Max bound</em>' attribute.
 	 * @see #setMax_bound(int)
@@ -107,8 +107,8 @@ public interface ChoiceField extends Field {
 	 * 
 	 * 
 	 * The possible values are:
-	 * - Inline: to integrate the targeted class as a  form inside the current form
-	 * - Select: to integrate the targeted  class as a widget of selection
+	 * - Inline: check this in order to integrate the targeted class as subforms inside the current form; this may conduce to important form.
+	 * - Select: check this in order to integrate the targeted  class as a widget of selection
 	 * 
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Widget</em>' attribute.
@@ -160,65 +160,5 @@ public interface ChoiceField extends Field {
 	 * @generated
 	 */
 	void setMultiple(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Filter Parent</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Filter Parent</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Definition: The 'filterParent’ attribute filters choice items in the list according to a parent list value.
-	 * 
-	 * Example: filter a list of department by country.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Filter Parent</em>' attribute.
-	 * @see #setFilterParent(String)
-	 * @see com.bluexml.side.form.FormPackage#getChoiceField_FilterParent()
-	 * @model
-	 * @generated
-	 */
-	String getFilterParent();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.form.ChoiceField#getFilterParent <em>Filter Parent</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Filter Parent</em>' attribute.
-	 * @see #getFilterParent()
-	 * @generated
-	 */
-	void setFilterParent(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Filter Data</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Filter Data</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Definition: The 'filterData" attribute filters choice items in the list by data.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Filter Data</em>' attribute.
-	 * @see #setFilterData(String)
-	 * @see com.bluexml.side.form.FormPackage#getChoiceField_FilterData()
-	 * @model
-	 * @generated
-	 */
-	String getFilterData();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.form.ChoiceField#getFilterData <em>Filter Data</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Filter Data</em>' attribute.
-	 * @see #getFilterData()
-	 * @generated
-	 */
-	void setFilterData(String value);
 
 } // ChoiceField

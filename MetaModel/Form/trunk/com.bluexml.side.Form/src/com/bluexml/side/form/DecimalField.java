@@ -43,7 +43,8 @@ public interface DecimalField extends Field {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: minimum value for the input.
+	 * Definition: minimum value for the input. If the 'min_value' attribute is superior than 0, the Decimal field is mandatory.
+	 * Constraint/limit: The input value cannot be superior to the ‘max_value’.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Min value</em>' attribute.
 	 * @see #setMin_value(int)
@@ -73,6 +74,7 @@ public interface DecimalField extends Field {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: maximum value for the input.
+	 * Constraint/limit: The input value cannot be inferior to the 'min_value'.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Max value</em>' attribute.
 	 * @see #setMax_value(int)
@@ -101,7 +103,8 @@ public interface DecimalField extends Field {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: maximum number of digits after decimal.
+	 * Definition: maximum number of digits before and after the decimal point. The maximum length of the value is 'max_digits' plus 1 (decimal separator).
+	 * Example: for '1.2345', 'max_digits' equals 5 and 'decimal_places' equals 4.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Max digits</em>' attribute.
 	 * @see #setMax_digits(int)
@@ -131,7 +134,8 @@ public interface DecimalField extends Field {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * 
-	 * Definition: 
+	 * Definition: number of digits after the decimal separator.
+	 * Example: for '45.12345', 'decimal_places' equals 5 and 'max_digits' equals 7.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Decimal places</em>' attribute.
 	 * @see #setDecimal_places(int)

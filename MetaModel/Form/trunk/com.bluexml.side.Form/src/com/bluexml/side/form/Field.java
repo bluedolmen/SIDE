@@ -14,9 +14,9 @@ import java.util.Map;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: The form has a list of fields which inherits of the Field element. A Field is usually bound to an attribute of the class diagram (except for FreeText) and have some special features (by e.g. a Date Field can have min and max date). Each kind of field will have different generated input field or/and different kind of validation rules. The validation rules are defined to control input in the model. 
- * Operations:
- * - The Operation ‘Group in a new group’ allows to group fields in a FormGroup (logical group). This group can be specialized to change its display (in tab, row or column by e.g.).
+ * Definition: The form has a list of fields which inherits of the 'Field' abstract element. A 'Field' is usually bound to an attribute of the class diagram (except for FreeText) and have some special features (by e.g. a Date Field can have min and max date). 
+ * Each kind of fields will have different generated input field or/and different kind of validation rules. The validation rules are defined to control input in the model. 
+ * Operations: The Operation ‘Group in a new group’ allows to group fields in a FormGroup (logical group). This group can be specialized to change its display (in tab, row or column by e.g.).
  * Inherits: FormElement.
  * <!-- end-model-doc -->
  *
@@ -50,7 +50,7 @@ public interface Field extends FormElement {
 	 * Constraint/limit: The field must be filled up in order to validate the form. A message (validation rule) for all required fields will appear if they are not filled up.
 	 * Example:
 	 * - 'false': the field is not mandatory.
-	 * - 'true': the field is mandatory. The label of the field will be followed by a star.
+	 * - 'true': the field is mandatory. Usually, the label of the field is followed by a star.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Mandatory</em>' attribute.
 	 * @see #setMandatory(boolean)
@@ -80,6 +80,7 @@ public interface Field extends FormElement {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'error_messages' attribute is used to specify a text message in the case where the input is not valid.
+	 * Constraint/Limit: The internationalization convention may be used for the error_message's value; if the value of the error_messages in the form model is of the form "#label",  the token "label" is then considered as a “delayed message”, whose value will be provided by the forms server at runtime from a language resource file. In the case of Xform Chiba for Alfresco, the language resource file is '<xforms_webapp>/WEB-INF/classes/messages.properties'.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Error messages</em>' attribute.
 	 * @see #setError_messages(Map)
@@ -180,7 +181,7 @@ public interface Field extends FormElement {
 	 * Definition: The 'fieldSize' attribute specifies the number of element to show for a selection list.
 	 * 
 	 * 
-	 * Constraint/limit: When there are two relations R1 and R2 between two classes A and B, the value of field size set for R1 will be set for R2 too, even there is no value for field size of R2.
+	 * Constraint/limit: When there are two relations R1 and R2 between the two same classes A and B, the value of field size set for R1 will be set for R2 too, even there is no value for field size of R2.
 	 * 
 	 * 
 	 * Example: Field Size = 10 will limit to 10 the number of elements in a generated selection list.
@@ -212,7 +213,8 @@ public interface Field extends FormElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: a specific style associated to the field which may be defined in style file like css file to be applied on the field input at runtime.
+	 * Definition: a specific style code associated to the field which may be defined in style file like css file to be applied on the field input at runtime.
+	 * Constraint/Limit: the semantic of the style code is not defined in the model but is known by the targeted form engine on which will be deployed the generated forms.  In the case of XForms generation on Alfresco, this style code refers a CSS class.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Style</em>' attribute.
 	 * @see #setStyle(String)

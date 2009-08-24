@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.clazz.Clazz;
+import com.bluexml.side.form.ChoiceWidgetType;
 import com.bluexml.side.form.CharField;
 import com.bluexml.side.form.ClassReference;
 import com.bluexml.side.form.FormContainer;
@@ -135,7 +136,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * @generated
 	 * @ordered
 	 */
-	protected static final ReferenceWidgetType WIDGET_EDEFAULT = ReferenceWidgetType.ASSOCIATION_CLASS_INLINE;
+	protected static final ChoiceWidgetType WIDGET_EDEFAULT = ChoiceWidgetType.LIST_ALL;
 
 	/**
 	 * The cached value of the '{@link #getWidget() <em>Widget</em>}' attribute.
@@ -145,7 +146,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * @generated
 	 * @ordered
 	 */
-	protected ReferenceWidgetType widget = WIDGET_EDEFAULT;
+	protected ChoiceWidgetType widget = WIDGET_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isShow_actions() <em>Show actions</em>}' attribute.
@@ -333,7 +334,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ReferenceWidgetType getWidget() {
+	public ChoiceWidgetType getWidget() {
 		return widget;
 	}
 
@@ -342,8 +343,8 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setWidget(ReferenceWidgetType newWidget) {
-		ReferenceWidgetType oldWidget = widget;
+	public void setWidget(ChoiceWidgetType newWidget) {
+		ChoiceWidgetType oldWidget = widget;
 		widget = newWidget == null ? WIDGET_EDEFAULT : newWidget;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.MODEL_CHOICE_FIELD__WIDGET, oldWidget, widget));
@@ -430,7 +431,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 				getAssociation_formClass().addAll((Collection<? extends FormContainer>)newValue);
 				return;
 			case FormPackage.MODEL_CHOICE_FIELD__WIDGET:
-				setWidget((ReferenceWidgetType)newValue);
+				setWidget((ChoiceWidgetType)newValue);
 				return;
 			case FormPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
 				setShow_actions(((Boolean)newValue).booleanValue());

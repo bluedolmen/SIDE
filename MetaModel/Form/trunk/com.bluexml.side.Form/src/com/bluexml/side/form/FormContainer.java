@@ -13,8 +13,8 @@ package com.bluexml.side.form;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: The 'FormContainer' represents a form and is used as a container for elements. FormClass and FormWorkflow inherits of FormContainer.
- * A FormCollection is composed of at least one FormContainer.
+ * Definition: The 'FormContainer' represents a form and is used as a container for elements. FormClass and FormWorkflow inherits of FormContainer. FormContainer is an abstract element and so does not directly appear in the Form modeler.
+ * A FormCollection is at least composed of one FormContainer.
  * Inherits: FormGroup.
  * <!-- end-model-doc -->
  *
@@ -43,6 +43,7 @@ public interface FormContainer extends FormGroup {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'name' attribute specifies the name of the form container.
+	 * Constraint/limit: this name must be filled up and unique in the form model between all the FormContainer (FormClass and FormWorkflow)
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
@@ -65,6 +66,9 @@ public interface FormContainer extends FormGroup {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: to get the name of the FormContainer (FormClass or FormWorkflow)
+	 * <!-- end-model-doc -->
 	 * @model kind="operation"
 	 *        annotation="http://www.bluexml.com/OCL body='if self.label.oclIsUndefined() or self.label.size() = 0 then\r self.name \relse\r self.label \rendif'"
 	 * @generated

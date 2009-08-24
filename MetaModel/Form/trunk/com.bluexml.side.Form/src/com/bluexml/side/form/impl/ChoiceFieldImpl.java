@@ -27,8 +27,6 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *   <li>{@link com.bluexml.side.form.impl.ChoiceFieldImpl#getMax_bound <em>Max bound</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.ChoiceFieldImpl#getWidget <em>Widget</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.ChoiceFieldImpl#isMultiple <em>Multiple</em>}</li>
- *   <li>{@link com.bluexml.side.form.impl.ChoiceFieldImpl#getFilterParent <em>Filter Parent</em>}</li>
- *   <li>{@link com.bluexml.side.form.impl.ChoiceFieldImpl#getFilterData <em>Filter Data</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,7 +81,7 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final ChoiceWidgetType WIDGET_EDEFAULT = ChoiceWidgetType.SELECT;
+	protected static final ChoiceWidgetType WIDGET_EDEFAULT = ChoiceWidgetType.LIST_ALL;
 
 	/**
 	 * The cached value of the '{@link #getWidget() <em>Widget</em>}' attribute.
@@ -114,46 +112,6 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 	 * @ordered
 	 */
 	protected boolean multiple = MULTIPLE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getFilterParent() <em>Filter Parent</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFilterParent()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String FILTER_PARENT_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getFilterParent() <em>Filter Parent</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFilterParent()
-	 * @generated
-	 * @ordered
-	 */
-	protected String filterParent = FILTER_PARENT_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getFilterData() <em>Filter Data</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFilterData()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String FILTER_DATA_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getFilterData() <em>Filter Data</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFilterData()
-	 * @generated
-	 * @ordered
-	 */
-	protected String filterData = FILTER_DATA_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -263,48 +221,6 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getFilterParent() {
-		return filterParent;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setFilterParent(String newFilterParent) {
-		String oldFilterParent = filterParent;
-		filterParent = newFilterParent;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.CHOICE_FIELD__FILTER_PARENT, oldFilterParent, filterParent));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getFilterData() {
-		return filterData;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setFilterData(String newFilterData) {
-		String oldFilterData = filterData;
-		filterData = newFilterData;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.CHOICE_FIELD__FILTER_DATA, oldFilterData, filterData));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -316,10 +232,6 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 				return getWidget();
 			case FormPackage.CHOICE_FIELD__MULTIPLE:
 				return isMultiple() ? Boolean.TRUE : Boolean.FALSE;
-			case FormPackage.CHOICE_FIELD__FILTER_PARENT:
-				return getFilterParent();
-			case FormPackage.CHOICE_FIELD__FILTER_DATA:
-				return getFilterData();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -345,12 +257,6 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 			case FormPackage.CHOICE_FIELD__MULTIPLE:
 				setMultiple(((Boolean)newValue).booleanValue());
 				return;
-			case FormPackage.CHOICE_FIELD__FILTER_PARENT:
-				setFilterParent((String)newValue);
-				return;
-			case FormPackage.CHOICE_FIELD__FILTER_DATA:
-				setFilterData((String)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -375,12 +281,6 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 			case FormPackage.CHOICE_FIELD__MULTIPLE:
 				setMultiple(MULTIPLE_EDEFAULT);
 				return;
-			case FormPackage.CHOICE_FIELD__FILTER_PARENT:
-				setFilterParent(FILTER_PARENT_EDEFAULT);
-				return;
-			case FormPackage.CHOICE_FIELD__FILTER_DATA:
-				setFilterData(FILTER_DATA_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -401,10 +301,6 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 				return widget != WIDGET_EDEFAULT;
 			case FormPackage.CHOICE_FIELD__MULTIPLE:
 				return multiple != MULTIPLE_EDEFAULT;
-			case FormPackage.CHOICE_FIELD__FILTER_PARENT:
-				return FILTER_PARENT_EDEFAULT == null ? filterParent != null : !FILTER_PARENT_EDEFAULT.equals(filterParent);
-			case FormPackage.CHOICE_FIELD__FILTER_DATA:
-				return FILTER_DATA_EDEFAULT == null ? filterData != null : !FILTER_DATA_EDEFAULT.equals(filterData);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -427,10 +323,6 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 		result.append(widget);
 		result.append(", multiple: ");
 		result.append(multiple);
-		result.append(", filterParent: ");
-		result.append(filterParent);
-		result.append(", filterData: ");
-		result.append(filterData);
 		result.append(')');
 		return result.toString();
 	}

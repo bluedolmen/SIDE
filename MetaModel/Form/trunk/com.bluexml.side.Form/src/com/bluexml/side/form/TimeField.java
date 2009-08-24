@@ -13,7 +13,7 @@ package com.bluexml.side.form;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: The 'TimeField' specifies a time input.
+ * Definition: The 'TimeField' specifies a time input. The format of the input value must be conform to the 'input_formats' property.
  * 
  * 
  * Inherits:

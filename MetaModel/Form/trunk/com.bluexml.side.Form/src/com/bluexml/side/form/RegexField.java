@@ -40,6 +40,10 @@ public interface RegexField extends CharField {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definition: the regex expression.
+	 * Constraint/Limit: the value must be conform to the Standard Java Regular Expression semantic (java.util.regex).
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Regex</em>' attribute.
 	 * @see #setRegex(String)
 	 * @see com.bluexml.side.form.FormPackage#getRegexField_Regex()

@@ -70,10 +70,10 @@ public interface DateField extends Field {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'min_date' attribute specifies a minimum date input.
+	 * Definition: The 'min_date' attribute specifies a minimum date input. The format of the value must be conform to the 'input_formats' attribute of 'DateField'.
 	 * 
 	 * 
-	 * Constraint/limit: The input date cannot be inferior to the 'min_date' and not superior to the ‘max_date’.
+	 * Constraint/limit: The input date cannot be superior to the ‘max_date’. If a 'min_date' has been specified in the form model, the DateField is mandatory.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Min date</em>' attribute.
 	 * @see #setMin_date(Date)
@@ -102,10 +102,11 @@ public interface DateField extends Field {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'max_date' attribute specifies a maximum date input.
+	 * Definition: The 'max_date' attribute specifies a maximum date input. The format of the data must be conform to the 'input_formats' attribute of 'DateField'.
 	 * 
 	 * 
-	 * Constraint/limit: The input date cannot be inferior to the 'min_date' and not superior to the ‘max_date’.
+	 * 
+	 * Constraint/limit: The input date cannot be inferior to the 'min_date'.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Max date</em>' attribute.
 	 * @see #setMax_date(Date)
