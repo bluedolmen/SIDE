@@ -1,15 +1,16 @@
-<archetype>
-  <id>com.bluexml.side.Integration.maven2WarPatchArchetype</id>
-  <sources>
-    <source>src/main/java/App.java</source>
-    
-  </sources>
-  <testSources>
-    <source>src/test/java/AppTest.java</source>
-  </testSources>
+<?xml version="1.0" encoding="UTF-8"?><archetype>
+  <id>facetMapDashlet</id>
   <resources>
-  	<resource>resources/module.properties</resource>
-  	<resource>build.xml</resource>
-  	<resource>lib/readme.txt</resource>
+    <resource>.project</resource>
+    <resource>.settings/org.eclipse.jdt.core.prefs</resource>
+    <resource>build.xml</resource>
+    <resource>extensionBuilder.xml</resource>
+    <resource>lib/readme.txt</resource>
+    <resource>maven-ant-tasks-2.0.10.jar</resource>
+    <resource>resources/module.properties</resource>
+    <resource>resources/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/dashlets/facetmap-content.get.desc.xml</resource>
+    <resource>resources/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/dashlets/facetmap-content.get.html.ftl</resource>
+    <resource>resources/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/dashlets/facetmap-facets.get.desc.xml</resource>
+    <resource>resources/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/dashlets/facetmap-facets.get.html.ftl</resource>
   </resources>
 </archetype>

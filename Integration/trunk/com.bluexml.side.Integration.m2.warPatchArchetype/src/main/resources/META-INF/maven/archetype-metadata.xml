@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><archetype-descriptor name="facetMapDashlet">
+  <fileSets>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>resources</directory>
+      <includes>
+        <include>**/*.properties</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>lib</directory>
+      <includes>
+        <include>**/*.txt</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>resources/WEB-INF</directory>
+      <includes>
+        <include>**/*.xml</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory>.settings</directory>
+      <includes>
+        <include>**/*.prefs</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory>resources/WEB-INF</directory>
+      <includes>
+        <include>**/*.ftl</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory></directory>
+      <includes>
+        <include>.project</include>
+        <include>build.xml</include>
+        <include>extensionBuilder.xml</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory></directory>
+      <includes>
+        <include>maven-ant-tasks-2.0.10.jar</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+</archetype-descriptor>

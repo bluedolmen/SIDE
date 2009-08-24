@@ -1,0 +1,54 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<project name="${package}.${artifactId}">
+	<property file="build.${symbol_dollar}{user.name}.properties" />
+	<property name="extensionFolder" value="./target" />
+	<property name="tmpFolder" value="${symbol_dollar}{extensionFolder}/${symbol_dollar}{module.id}-${symbol_dollar}{module.version}" />
+	<property name="resources" value="./resources" />
+	<property name="module.properties" value="${symbol_dollar}{resources}/module.properties" />
+
+	<property name="module.jar" value="./lib/${symbol_dollar}{module.id}.jar" />
+	<property name="module.zip" value="${symbol_dollar}{extensionFolder}/${symbol_dollar}{module.id}-${symbol_dollar}{module.version}.zip" />
+
+
+
+	<property name="packageDescriptionFile" value="moduleDescriptions/module.${symbol_dollar}{module.id}.properties" />
+	<!-- ================================= 
+          target: buildExtension              
+         ================================= -->
+	<target name="buildExtension" depends="clean" description="build extension archive for alfresco share">
+		<echo message="${symbol_dollar}{module.version}">
+		</echo>
+		<delete dir="${symbol_dollar}{tmpFolder}" failonerror="false" />
+		<mkdir dir="${symbol_dollar}{extensionFolder}" />
+		<!-- TODO: Insert your custom code -->
+
+		<!--jar destfile="${symbol_dollar}{module.jar}">
+			<fileset dir="./target/classes" id="id">
+				<include name="**/*.*"/>
+			</fileset>
+		</jar-->
+		<copy file="${symbol_dollar}{module.properties}" tofile="${symbol_dollar}{tmpFolder}/${symbol_dollar}{packageDescriptionFile}" />
+		<copy todir="${symbol_dollar}{tmpFolder}">
+			<fileset dir="${symbol_dollar}{resources}" id="id">
+				<exclude name="${symbol_dollar}{module.properties}" />
+			</fileset>
+		</copy>
+		<zip destfile="${symbol_dollar}{module.zip}">
+			<fileset dir="${symbol_dollar}{tmpFolder}" id="id">
+				<include name="**/*.*" />
+			</fileset>
+		</zip>
+	</target>
+
+
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+	<target name="clean" depends="" description="delete tmp and builded extension">
+		<delete dir="${symbol_dollar}{tmpFolder}" failonerror="false" />
+		<delete dir="${symbol_dollar}{extensionFolder}" failonerror="false" />
+	</target>
+
+</project>
