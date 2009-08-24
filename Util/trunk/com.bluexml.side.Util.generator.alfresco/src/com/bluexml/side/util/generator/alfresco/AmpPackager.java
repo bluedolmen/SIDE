@@ -77,21 +77,26 @@ public class AmpPackager extends AbstractPackager {
 	 */
 	private Map<String, File> createAMPSkelleton() {
 		File ampRoot = getWorkingFolder();
-
 		Map<String, File> mapper = new HashMap<String, File>();
-		mapper.put("alfresco/WEB-INF/classes/", createAndRegisterDir(ampRoot, "/config"));
-		mapper.put("/config/", createAndRegisterDir(ampRoot, "/config"));
-		mapper.put("/alfresco/lib/", createAndRegisterDir(ampRoot, "/lib"));
-		mapper.put("/licences/", createAndRegisterDir(ampRoot, "/licenses"));
-		mapper.put("/alfresco/jsp/", createAndRegisterDir(ampRoot, "/web/jsp"));
-		mapper.put("/alfresco/css/", createAndRegisterDir(ampRoot, "/web/css"));
-		mapper.put("/alfresco/images/", createAndRegisterDir(ampRoot, "/web/images"));
-		mapper.put("/alfresco/scripts/", createAndRegisterDir(ampRoot, "/web/scripts"));
+
+		addToMap(mapper, "/alfresco/WEB-INF/classes/", ampRoot, "/config");
+		addToMap(mapper, "/config/", ampRoot, "/config/");
+		addToMap(mapper, "/alfresco/lib/", ampRoot, "/lib");
+		addToMap(mapper, "/licences/", ampRoot, "/licences");
+		addToMap(mapper, "/alfresco/jsp/", ampRoot, "/web/jsp");
+		addToMap(mapper, "/alfresco/css/", ampRoot, "/web/css");
+		addToMap(mapper, "/alfresco/images/", ampRoot, "/web/images");
+		addToMap(mapper, "/alfresco/scripts/", ampRoot, "/web/scripts");
+
 		return mapper;
 	}
 
+	private void addToMap(Map<String, File> map, String key, File ampRoot, String target) {
+		map.put(key.replace("/", File.separator), createAndRegisterDir(ampRoot, target.replace("/", File.separator)));
+	}
+
 	private File createAndRegisterDir(File ampRoot, String p) {
-		File dir = new File(getFolderToPackage().getAbsolutePath() + p.replace("/", File.separator));
+		File dir = new File(getFolderToPackage().getAbsolutePath() + p);
 		dir.mkdirs();
 		return dir;
 	}
