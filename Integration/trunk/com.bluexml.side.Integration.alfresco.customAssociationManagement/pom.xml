@@ -36,7 +36,7 @@
   In order to be able to use Maven snapshots we cannot use the <version/> below as the AMP module
   version. Instead we use the buildnumber-maven-plugin. This requires a scm connection.
 	 -->
-	<version>1.0.1</version>
+	<version>1.1.2</version>
 	<description>This module defines the behaviour associated to the
 	associations defined inside the BlueXML (S-IDE) namespace
 	(association synchronisation, cascade deleting of composite
@@ -101,6 +101,13 @@
 		and include them in the AMP, they are provided by Alfresco
 	-->
 	<dependencies>
+		<dependency>
+			<groupId>com.bluexml.side.Integration.alfresco</groupId>
+			<artifactId>model</artifactId>
+			<version>[1.0.0,)</version>
+			<scope>provided</scope>
+			<type>amp</type>
+		</dependency>
 		<dependency>
 			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-repository</artifactId>

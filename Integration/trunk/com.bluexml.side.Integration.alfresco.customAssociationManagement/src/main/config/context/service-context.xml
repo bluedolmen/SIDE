@@ -26,6 +26,7 @@
 				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
 				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
 
+	<!--  Association synchronization -->
 	<bean id="associationSynchronizationResolver" class="com.bluexml.side.Integration.alfresco.customAssociationManagement.associationSynchronization.PropertyFileAssociationSynchronizationResolverImpl" >
 		<property name="resourcePattern" value="classpath*:alfresco/module/*/association-synchronization.properties" />
 	</bean>
@@ -35,5 +36,13 @@
 		<property name="nodeService" ref="nodeService" />
 		<property name="resolver" ref="associationSynchronizationResolver" />
 	</bean>
+	
+	<!-- Cascade delete of composite associations -->
+	
+ 	<bean id="cascadeDeletePolicy" class="com.bluexml.side.Integration.alfresco.customAssociationManagement.cascadeDelete.CascadeDeletePolicy" init-method="init">
+		<property name="policyComponent" ref="policyComponent" />
+		<property name="nodeService" ref="nodeService" />
+	</bean>
+	
 
 </beans>

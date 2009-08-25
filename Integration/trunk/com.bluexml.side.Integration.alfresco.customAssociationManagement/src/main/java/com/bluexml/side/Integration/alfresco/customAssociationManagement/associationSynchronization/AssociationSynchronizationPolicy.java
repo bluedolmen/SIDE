@@ -14,11 +14,21 @@ import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.service.namespace.QName;
 import org.apache.log4j.Logger;
 
+import com.bluexml.side.Integration.alfresco.model.ContentModel;
+
+/*
+ * This implementation uses Alfresco policies to trigger the duplication of the association.
+ * A first implementation tried to use NodeDAOService to check for an existing opposite association, resulting in 
+ * non-explained null pointer exceptions (commented lines).
+ * The current implementation uses Alfresco transaction support to store the current association being duplicated.
+ * If a preceding context cannot be found, we create one and call the nodeService to create the opposite association
+ * (this process triggering the call of this policy).
+ */
+
 public class AssociationSynchronizationPolicy implements 
 	OnCreateAssociationPolicy, 
 	OnDeleteAssociationPolicy
 {
-	private static final String BLUEXML_NAMESPACE_URI="http://www.bluexml.com";
 	private static final String CONTEXT_KEY_SEPARATOR = "/";
 
 	// Behaviours
@@ -42,7 +52,7 @@ public class AssociationSynchronizationPolicy implements
 
 
 	public void onCreateAssociation(AssociationRef associationRef) {
-		if (associationRef.getTypeQName().getNamespaceURI().startsWith(BLUEXML_NAMESPACE_URI) ) {
+		if (associationRef.getTypeQName().getNamespaceURI().startsWith(ContentModel.BXCONTENT_NAMESPACE_PREFIX) ) {
 			QName oppositeAssociationTypeQName = resolver.resolve(associationRef.getTypeQName());
 		
 			if (oppositeAssociationTypeQName != null) {
@@ -65,7 +75,7 @@ public class AssociationSynchronizationPolicy implements
 	}
 	
 	public void onDeleteAssociation(AssociationRef associationRef) {
-		if (associationRef.getTypeQName().getNamespaceURI().startsWith(BLUEXML_NAMESPACE_URI) ) {
+		if (associationRef.getTypeQName().getNamespaceURI().startsWith(ContentModel.BXCONTENT_NAMESPACE_PREFIX) ) {
 			QName oppositeAssociationTypeQName = resolver.resolve(associationRef.getTypeQName());
 			
 			if (oppositeAssociationTypeQName != null) {
