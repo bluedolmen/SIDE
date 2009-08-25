@@ -10,6 +10,8 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.util.generator.XMLConflictResolver;
 import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
+import com.bluexml.side.util.security.SecurityHelper;
+import com.bluexml.side.util.security.preferences.SidePreferences;
 
 public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
@@ -158,8 +160,8 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	 * @return true if the generator can be used.
 	 */
 	public boolean check() {
-		return true;
-		//return SecurityHelper.check(GENERATOR_CODE, SidePreferences.getKey());
+		//return true;
+		return SecurityHelper.check(GENERATOR_CODE, SidePreferences.getKey());
 	}
 
 }
