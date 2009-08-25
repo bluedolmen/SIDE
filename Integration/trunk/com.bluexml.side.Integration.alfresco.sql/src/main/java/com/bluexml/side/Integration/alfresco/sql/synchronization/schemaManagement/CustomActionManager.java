@@ -8,6 +8,7 @@ import org.alfresco.service.namespace.QName;
 import org.apache.log4j.Logger;
 
 import com.bluexml.side.Integration.alfresco.sql.synchronization.common.SqlCommon.TableType;
+import com.bluexml.side.Integration.alfresco.sql.synchronization.dialects.CreateTableStatement;
 
 public class CustomActionManager implements CustomAction {
 
@@ -20,17 +21,17 @@ public class CustomActionManager implements CustomAction {
 		}		
 	}
 
-	public void doInCreateAssociation(QName associationName, CreateStatement currentCreateStatement) {
+	public void doInCreateAssociation(QName associationName, CreateTableStatement.Builder currentBuilder) {
 		logger.debug("Calling custom action create association on association " + associationName);
 		for (CustomAction createCustomAction : createCustomActions) {
-			createCustomAction.doInCreateAssociation(associationName, currentCreateStatement);
+			createCustomAction.doInCreateAssociation(associationName, currentBuilder);
 		}				
 	}
 
-	public void doInCreateType(QName nodeName, CreateStatement currentCreateStatement) {
+	public void doInCreateType(QName nodeName, CreateTableStatement.Builder currentBuilder) {
 		logger.debug("Calling custom action create type on type " + nodeName);
 		for (CustomAction createCustomAction : createCustomActions) {
-			createCustomAction.doInCreateType(nodeName, currentCreateStatement);
+			createCustomAction.doInCreateType(nodeName, currentBuilder);
 		}				
 		
 	}

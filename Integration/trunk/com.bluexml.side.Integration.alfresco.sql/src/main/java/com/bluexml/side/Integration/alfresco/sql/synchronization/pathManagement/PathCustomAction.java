@@ -10,8 +10,8 @@ import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.namespace.QName;
 
 import com.bluexml.side.Integration.alfresco.sql.synchronization.common.SqlCommon.TableType;
+import com.bluexml.side.Integration.alfresco.sql.synchronization.dialects.CreateTableStatement;
 import com.bluexml.side.Integration.alfresco.sql.synchronization.schemaManagement.AbstractCustomAction;
-import com.bluexml.side.Integration.alfresco.sql.synchronization.schemaManagement.CreateStatement;
 import com.bluexml.side.Integration.alfresco.sql.synchronization.schemaManagement.TableStatus;
 
 public class PathCustomAction extends AbstractCustomAction {
@@ -24,11 +24,11 @@ public class PathCustomAction extends AbstractCustomAction {
 		//pathService.updatePath(nodeRef);
 	}
 
-	public void doInCreateAssociation(QName associationName, CreateStatement currentCreateStatement) {
+	public void doInCreateAssociation(QName associationName, CreateTableStatement.Builder currentBuilder) {
 		// DO nothing more
 	}
 
-	public void doInCreateType(QName nodeName, CreateStatement currenCreateStatement) {
+	public void doInCreateType(QName nodeName, CreateTableStatement.Builder currentBuilder) {
 		// add a new column named path
 		Map<String, List<String>> newColumns = new HashMap<String, List<String>>();
 		
@@ -38,7 +38,7 @@ public class PathCustomAction extends AbstractCustomAction {
 		
 		newColumns.put(PathManagementCommon.PATH_COLUMN_NAME, definition);
 		
-		currenCreateStatement.addColumns(newColumns);
+		currentBuilder.columns(newColumns);
 	}
 
 	public TableStatus doInSchemaChecking(Map<String, Integer> columnDefinition, TableStatus tableStatus, TableType tableType) {

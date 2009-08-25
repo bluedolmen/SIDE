@@ -6,6 +6,7 @@ import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.namespace.QName;
 
 import com.bluexml.side.Integration.alfresco.sql.synchronization.common.SqlCommon.TableType;
+import com.bluexml.side.Integration.alfresco.sql.synchronization.dialects.CreateTableStatement;
 
 public interface CustomAction {
 
@@ -13,12 +14,12 @@ public interface CustomAction {
 	/*
 	 * Action that is triggered when the structure of a new type is created in the schema
 	 */
-	public void doInCreateType(QName nodeName, CreateStatement currentCreateStatement);
+	public void doInCreateType(QName nodeName, CreateTableStatement.Builder currentBuilder);
 	
 	/*
 	 * Action that is triggered when the structure of a new association is created in the schema
 	 */
-	public void doInCreateAssociation(QName associationName, CreateStatement currentCreateStatement);
+	public void doInCreateAssociation(QName associationName, CreateTableStatement.Builder currentBuilder);
 	
 	/*
 	 * Action that is triggered when the replication of a node occurs

@@ -28,7 +28,7 @@ public class PathServiceImpl implements PathService {
 		List<String> sqlQueries = new ArrayList<String>();
 		String escapedPathString = synchronizationDialect.quoteString(synchronizationDialect.escape(path.toPrefixString(namespaceService)));
 		
-		List<QName> parentNames = nodeHelper.getParentQNames(nodeRef);
+		List<QName> parentNames = nodeHelper.getParentAndSelfQNames(nodeRef);
 
 		for (QName type_qname : parentNames) {
 			String type_name = type_qname.getLocalName();

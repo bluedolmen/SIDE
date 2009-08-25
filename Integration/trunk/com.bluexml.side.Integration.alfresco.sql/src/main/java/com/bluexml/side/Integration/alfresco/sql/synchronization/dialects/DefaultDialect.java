@@ -16,6 +16,7 @@ public class DefaultDialect implements SynchronizationDialect {
 	
 	private static final Logger logger = Logger.getLogger(DefaultDialect.class);
 	private static final String STRING_LENGTH_CONSTRAINT_IDENTIFIER = "LENGTH";
+	private static final String UNSPECIFIED_TYPE_NAME = "UNSPECIFIED";
 	private static final Integer MAX_CHAR_LENGTH = 255;
 
 	private static Map<QName, String> sqlTypeMapping = new HashMap<QName, String>() {
@@ -39,7 +40,7 @@ public class DefaultDialect implements SynchronizationDialect {
 	public String getSQLMapping(PropertyDefinition propertyDefinition) {
 		DataTypeDefinition dataTypeDefinition = propertyDefinition.getDataType();
 		QName dataTypeName = dataTypeDefinition.getName();
-		String result = "UNSPECIFIED";
+		String result = UNSPECIFIED_TYPE_NAME;
 		
 		if (!sqlTypeMapping.containsKey(dataTypeName)) {
 			logger.error("Do not know how to map type \"" + dataTypeName + "\" to SQL");
@@ -105,6 +106,10 @@ public class DefaultDialect implements SynchronizationDialect {
 	public String quoteString(String input) {
 		// TODO Auto-generated method stub
 		return "'" + input + "'";
+	}
+
+	public CreateTableStatement.Builder newCreateTableStatementBuilder(String tableName_) {
+		return new CreateTableStatement.Builder(tableName_);
 	}
 
 

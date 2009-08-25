@@ -3,6 +3,7 @@ package com.bluexml.side.Integration.alfresco.sql.synchronization.schemaManageme
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.namespace.QName;
 
+import com.bluexml.side.Integration.alfresco.sql.synchronization.dialects.CreateTableStatement;
 import com.bluexml.side.Integration.alfresco.sql.synchronization.dialects.SynchronizationDialect;
 import com.bluexml.side.Integration.alfresco.sql.synchronization.nodeService.NodeService;
 
@@ -14,13 +15,13 @@ public abstract class AbstractCustomAction implements CustomAction {
 	}
 
 	public void doInCreateAssociation(QName associationName,
-			CreateStatement currentCreateStatement) {
+			CreateTableStatement currentCreateStatement) {
 		throw new UnsupportedOperationException();
 
 	}
 
 	public void doInCreateType(QName nodeName,
-			CreateStatement currenCreateStatement) {
+			CreateTableStatement currenCreateStatement) {
 		throw new UnsupportedOperationException();
 
 	}

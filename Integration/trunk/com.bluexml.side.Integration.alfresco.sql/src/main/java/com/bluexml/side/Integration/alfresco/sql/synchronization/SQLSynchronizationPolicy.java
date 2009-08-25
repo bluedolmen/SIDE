@@ -18,6 +18,7 @@ import org.alfresco.repo.policy.Behaviour.NotificationFrequency;
 import org.alfresco.service.cmr.repository.AssociationRef;
 import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.NodeRef;
+import org.alfresco.service.cmr.repository.StoreRef;
 import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.service.namespace.QName;
 import org.apache.log4j.Logger;
@@ -64,7 +65,7 @@ public class SQLSynchronizationPolicy implements
 			
 			this.beforeDeleteNode = new JavaBehaviour(this, "beforeDeleteNode", NotificationFrequency.FIRST_EVENT); 
 			this.onDeleteAssociation = new JavaBehaviour(this, "onDeleteAssociation", NotificationFrequency.TRANSACTION_COMMIT); 
-			this.onDeleteChildAssociation = new JavaBehaviour(this, "onDeleteChildAssociation", NotificationFrequency.EVERY_EVENT);
+			this.onDeleteChildAssociation = new JavaBehaviour(this, "onDeleteChildAssociation", NotificationFrequency.TRANSACTION_COMMIT);
 	
 			// Bind behaviours to node policies
 			policyComponent.bindClassBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onCreateNode"), this,this.onCreateNode);
@@ -83,21 +84,27 @@ public class SQLSynchronizationPolicy implements
 		NodeRef nodeRef = childAssociationRef.getChildRef();
 
 		// Only process bluexml nodes
-		if (nodeFilterer.accept(nodeRef)) {
+		if (acceptNodeRef(nodeRef)) {
 			logger.debug("Synchronization policy, CREATE NODE");
-			nodeService.create(nodeRef);
+			/*
+			 * Here we cannot determine whether this creation originated from a creation of a new node
+			 * or from a restored archived-node. We thus call the create-with-associations method instead
+			 * of the simple create one.
+			 */
+			synchroNodeService.createWithAssociations(nodeRef);
 		}
+
 	}
 
 	public void beforeDeleteNode(NodeRef nodeRef) {
-		if (nodeFilterer.accept(nodeRef)) {
+		if (acceptNodeRef(nodeRef)) {
 			logger.debug("Synchronization policy, DELETE NODE");
-			nodeService.delete(nodeRef);
+			synchroNodeService.delete(nodeRef);
 		}
 	}
 
 	public void onUpdateProperties(NodeRef nodeRef, Map<QName, Serializable> before_properties, Map<QName, Serializable> after_properties) {
-		if (nodeFilterer.accept(nodeRef)) {
+		if (acceptNodeRef(nodeRef)) {
 			Map<QName, Serializable> changes = new HashMap<QName, Serializable>();
 			for (QName key : after_properties.keySet()) {
 				if (nodeFilterer.acceptOnName(key)) {
@@ -117,7 +124,7 @@ public class SQLSynchronizationPolicy implements
 
 			if (changes.size() > 0) {
 				logger.debug("Synchronization policy, UPDATE PROPERTIES");
-				nodeService.updateProperties(nodeRef, changes.keySet());
+				synchroNodeService.updateProperties(nodeRef, changes.keySet());
 			}
 		}
 
@@ -126,14 +133,14 @@ public class SQLSynchronizationPolicy implements
 	public void onCreateAssociation(AssociationRef associationRef) {
 		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {
 			logger.debug("Synchronization policy, CREATE ASSOCIATION");
-			nodeService.createAssociation(associationRef.getSourceRef(), associationRef.getTargetRef(), associationRef.getTypeQName());
+			synchroNodeService.createAssociation(associationRef.getSourceRef(), associationRef.getTargetRef(), associationRef.getTypeQName());
 		}
 	}
 	
 	public void onDeleteAssociation(AssociationRef associationRef) {
 		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {
 			logger.debug("Synchronization policy, DELETE ASSOCIATION");
-			nodeService.deleteAssociation(associationRef.getSourceRef(), associationRef.getTargetRef(), associationRef.getTypeQName());
+			synchroNodeService.deleteAssociation(associationRef.getSourceRef(), associationRef.getTargetRef(), associationRef.getTypeQName());
 		}
 	}
 
@@ -141,7 +148,7 @@ public class SQLSynchronizationPolicy implements
 			boolean isNewNode) {
 		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {
 			logger.debug("Synchronization policy, CREATE CHILD ASSOCIATION");
-			nodeService.createAssociation(associationRef.getParentRef(), associationRef.getChildRef(), associationRef.getTypeQName());
+			synchroNodeService.createAssociation(associationRef.getParentRef(), associationRef.getChildRef(), associationRef.getTypeQName());
 		}
 	}
 
@@ -149,32 +156,80 @@ public class SQLSynchronizationPolicy implements
 		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {
 
 			logger.debug("Synchronization policy, DELETE CHILD ASSOCIATION");
-			nodeService.deleteAssociation(associationRef.getParentRef(), associationRef.getChildRef(), associationRef.getTypeQName());
+			synchroNodeService.deleteAssociation(associationRef.getParentRef(), associationRef.getChildRef(), associationRef.getTypeQName());
 		}
 	}
+
+	/*
+	 * Helper methods
+	 */
+	
+	/*
+	 * Nodes are accepted if they belongs to the workspace space store and if the name is correctly filtered by the node filterer
+	 */
+	private boolean acceptNodeRef (NodeRef nodeRef) {
+		return StoreRef.STORE_REF_WORKSPACE_SPACESSTORE.equals(nodeRef.getStoreRef()) && nodeFilterer.acceptOnName(nodeService.getType(nodeRef));
+	}
+	
+//	private void createAllRelatedAssociations(NodeRef nodeRef) {
+//		Set<AssociationRef> assocs  = new HashSet<AssociationRef>();
+//		assocs.addAll(nodeService.getSourceAssocs(nodeRef, RegexQNamePattern.MATCH_ALL));
+//		assocs.addAll(nodeService.getTargetAssocs(nodeRef, RegexQNamePattern.MATCH_ALL));
+//		
+//		for (AssociationRef assoc : assocs) {
+//			if (
+//					nodeFilterer.acceptOnName(assoc.getTypeQName()) && 
+//					assoc.getSourceRef().getStoreRef() == StoreRef.STORE_REF_WORKSPACE_SPACESSTORE &&
+//					assoc.getTargetRef().getStoreRef() == StoreRef.STORE_REF_WORKSPACE_SPACESSTORE
+//				) {
+//				synchroNodeService.createAssociation(assoc.getSourceRef(), assoc.getTargetRef(), assoc.getTypeQName());
+//			}
+//		}
+//		
+//		Set<ChildAssociationRef> childAssocs = new HashSet<ChildAssociationRef>();
+//		childAssocs.addAll(nodeService.getChildAssocs(nodeRef));
+//		childAssocs.addAll(nodeService.getParentAssocs(nodeRef));
+//
+//		for (ChildAssociationRef assoc : childAssocs) {
+//			if (
+//					nodeFilterer.acceptOnName(assoc.getTypeQName()) && 
+//					assoc.getParentRef().getStoreRef() == StoreRef.STORE_REF_WORKSPACE_SPACESSTORE &&
+//					assoc.getChildRef().getStoreRef() == StoreRef.STORE_REF_WORKSPACE_SPACESSTORE
+//				) {
+//				synchroNodeService.createAssociation(assoc.getParentRef(), assoc.getChildRef(), assoc.getTypeQName());
+//			}
+//		}
+//	}
 
 	
 	/*
 	 * Spring IoC/DI material
 	 */
 	private PolicyComponent policyComponent;
+	private org.alfresco.service.cmr.repository.NodeService nodeService;
 	private NodeFilterer nodeFilterer;
-	private NodeService nodeService;
+	private NodeService synchroNodeService; /* BlueXML NodeService */
 	private SchemaCreation schemaCreation;
 	
 	public void setPolicyComponent(PolicyComponent policyComponent_) {
 		policyComponent = policyComponent_;
 	}
 	
+	public void setNodeService(org.alfresco.service.cmr.repository.NodeService nodeService_) {
+		nodeService = nodeService_;
+	}
+	
 	public void setNodeFilterer(NodeFilterer nodeFilterer_) {
 		nodeFilterer = nodeFilterer_;
 	}
 	
-	public void setNodeService(NodeService nodeService_) {
-		nodeService = nodeService_;
+	public void setSynchroNodeService(NodeService nodeService_) {
+		synchroNodeService = nodeService_;
 	}
 
 	public void setSchemaCreation(SchemaCreation schemaCreation_) {
 		schemaCreation = schemaCreation_;
 	}
+
+
 }

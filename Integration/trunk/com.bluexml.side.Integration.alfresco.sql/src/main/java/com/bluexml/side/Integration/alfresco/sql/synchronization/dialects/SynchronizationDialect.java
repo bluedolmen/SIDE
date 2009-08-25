@@ -19,6 +19,11 @@ public interface SynchronizationDialect {
 	public String getSQLMapping(QName dataTypeName);
 	
 	/*
+	 * Create a CreateStatement that is potentially customized for the considered dialect
+	 */
+	public CreateTableStatement.Builder newCreateTableStatementBuilder(String tableName);
+	
+	/*
 	 * Returns the default length that should be applied on a X-Char (CHAR, VARCHAR)
 	 * sql type if no constraint is given
 	 */

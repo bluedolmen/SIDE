@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,15 +15,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.alfresco.error.AlfrescoRuntimeException;
 import org.alfresco.model.ContentModel;
+import org.alfresco.repo.transaction.AlfrescoTransactionSupport;
 import org.alfresco.repo.transaction.TransactionListener;
 import org.alfresco.service.cmr.dictionary.AspectDefinition;
 import org.alfresco.service.cmr.dictionary.DataTypeDefinition;
 import org.alfresco.service.cmr.dictionary.DictionaryService;
 import org.alfresco.service.cmr.dictionary.PropertyDefinition;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
+import org.alfresco.service.cmr.repository.AssociationRef;
+import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.NodeRef;
+import org.alfresco.service.cmr.repository.StoreRef;
 import org.alfresco.service.namespace.QName;
+import org.alfresco.service.namespace.RegexQNamePattern;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -35,13 +42,21 @@ import com.bluexml.side.Integration.alfresco.sql.synchronization.dictionary.Data
 public class NodeServiceImpl extends AbstractNodeServiceImpl {
 
 	private Logger logger = Logger.getLogger(getClass());
+	private final static String PROCESSED_ASSOCIATION_REF_CONTEXT = NodeServiceImpl.class.getCanonicalName() + ".associationRef";
+	private final static String PROCESSED_CHILD_ASSOCIATION_REF_CONTEXT = NodeServiceImpl.class.getCanonicalName() + ".childAssociationRef";
+	private final static String PROCESSED_ASSOCIATIONS_OPERATION_TYPE = NodeServiceImpl.class.getCanonicalName() + ".type";
 	
-	public void create(NodeRef nodeRef)  {		
+	private enum OperationType {
+		CREATE,
+		DELETE
+	}
+	
+	private void createCore(NodeRef nodeRef) {
 		QName nodeType = nodeService.getType(nodeRef);
 		String type_name = nodeType.getLocalName();
 		List<String> sqlQueries = new ArrayList<String>();
 
-		List<QName> parentNames = nodeHelper.getParentQNames(nodeRef);
+		List<QName> parentNames = nodeHelper.getParentAndSelfQNames(nodeRef);
 		Map<QName, Serializable> nodeProperties = nodeService.getProperties(nodeRef);
 		
 		for (QName type_qname : parentNames) {
@@ -86,23 +101,50 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 			}			
 		}
 		
-		executeSQLQuery(sqlQueries);
+		executeSQLQuery(sqlQueries);		
+	}
+	
+	public void create(NodeRef nodeRef)  {		
+		createCore(nodeRef);
 	
 		invokeOnCreateNode(nodeRef);
 	}
 
+	public void createWithAssociations(NodeRef nodeRef) {
+		createCore(nodeRef);
+		
+		createAllRelatedAssociations(nodeRef);
+	
+		invokeOnCreateNode(nodeRef);
+	}
+	
 	public void delete(NodeRef nodeRef)  {
-		List<QName> parentNames = nodeHelper.getParentQNames(nodeRef);
+		/*
+		 * Remove all the incoming/outcoming associations. This is necessary to ensure that foreign keys constraints
+		 * are not violated.
+		 * When moving a node from workspace to archive, the Alfresco Node Service notify a deletion of the node.
+		 * However, all the associations are still existing and not deleted in the alfresco content store.
+		 * In terms of SQL replication, these references are a nonsense and have to be removed.
+		 * This method has a slight inconvenient since on normal deletion, the delete association methods will be
+		 * called in addition. Even if the SQL statement is harmless, this process is however useless and lose some time.
+		 */
+		deleteAllRelatedAssociations(nodeRef);
+		
+		List<QName> parentNames = nodeHelper.getParentAndSelfQNames(nodeRef);
+		List<String> sqlQueries = new ArrayList<String>(parentNames.size());
+		
 		for (QName type_qname : parentNames) {
 			String type_name = type_qname.getLocalName();
 
 			String simplified_type_name = databaseDictionary.resolveClassAsTableName(type_name);
-			Serializable dbid = nodeService.getProperty(nodeRef, ContentModel.PROP_NODE_DBID);
+			Serializable dbid = getDbId(nodeRef);
 
 			String sql_query = String.format("DELETE FROM %1$s WHERE id = %2$s", simplified_type_name, dbid);
-			executeSQLQuery(sql_query);
+			sqlQueries.add(sql_query);
 		}
-		
+
+		executeSQLQuery(sqlQueries);
+
 		invokeOnDeleteNode(nodeRef);
 	}
 	
@@ -111,14 +153,14 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		String type_name = nodeService.getType(nodeRef).getLocalName();
 		List<String> sqlQueries = new ArrayList<String>();
 
-		List<QName> parentNames = nodeHelper.getParentQNames(nodeRef);
+		List<QName> parentNames = nodeHelper.getParentAndSelfQNames(nodeRef);
 		Map<QName, Serializable> nodeProperties = nodeService.getProperties(nodeRef);
 
 		for (QName type_qname : parentNames) {
 			type_name = type_qname.getLocalName();
 
 			String simplified_type_name = databaseDictionary.resolveClassAsTableName(type_name);
-			Serializable dbid = nodeService.getProperty(nodeRef, ContentModel.PROP_NODE_DBID);
+			Serializable dbid = getDbId(nodeRef);
 
 			TypeDefinition currentTypeDefinition = dictionaryService.getType(type_qname);
 			Map<QName, PropertyDefinition> currentTypeProperties = new HashMap<QName, PropertyDefinition>();
@@ -158,46 +200,104 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		
 		String associationName = typeQName.getLocalName();
 		
-		Serializable sourceId = nodeService.getProperty(sourceNodeRef, ContentModel.PROP_NODE_DBID);
-		Serializable targetId = nodeService.getProperty(targetNodeRef, ContentModel.PROP_NODE_DBID);
+		Serializable sourceId = getDbId(sourceNodeRef);
+		Serializable targetId = getDbId(targetNodeRef);
 
-		createAssociation(associationName , sourceId, targetId);
+		String databaseAssociationName = databaseDictionary.resolveAssociationAsTableName(associationName);
+		String sourceClassName = databaseDictionary.getSourceAlias(associationName);
+		String targetClassName = databaseDictionary.getTargetAlias(associationName);
+
+		String sql_query = String.format("INSERT %1$s ( %2$s , %3$s ) VALUES ( %4$s , %5$s )", databaseAssociationName, sourceClassName, targetClassName, sourceId, targetId);
 		
-		invokeOnCreateAssociation(sourceNodeRef, targetNodeRef, typeQName);
+		if (executeSQLQuery(sql_query) > 0) {
+			invokeOnCreateAssociation(sourceNodeRef, targetNodeRef, typeQName);
+		}
 	}
 
 	public void deleteAssociation(NodeRef sourceNodeRef, NodeRef targetNodeRef, QName typeQName)  {
 		
 		String associationName = typeQName.getLocalName();
 
-		Serializable sourceId = nodeService.getProperty(sourceNodeRef, ContentModel.PROP_NODE_DBID);
-		Serializable targetId = nodeService.getProperty(targetNodeRef, ContentModel.PROP_NODE_DBID);
-
-		deleteAssociation(associationName, sourceId, targetId);
-		
-		invokeOnDeleteAssociation(sourceNodeRef, targetNodeRef, typeQName);
-	}
-
-	private void createAssociation(String associationName, Serializable sourceId, Serializable targetId)  {
-		// Retrieve a simplified association name
-		String databaseAssociationName = databaseDictionary.resolveAssociationAsTableName(associationName);
-		String sourceClassName = databaseDictionary.getSourceAlias(associationName);
-		String targetClassName = databaseDictionary.getTargetAlias(associationName);
-
-		String sql_query = String.format("INSERT %1$s ( %2$s , %3$s ) VALUES ( %4$s , %5$s )", databaseAssociationName, sourceClassName, targetClassName, sourceId, targetId);
-		executeSQLQuery(sql_query);
-	}
-
-	private void deleteAssociation(String associationName, Serializable sourceId, Serializable targetId)  {
+		Serializable sourceId = getDbId(sourceNodeRef);
+		Serializable targetId = getDbId(targetNodeRef);
 
 		String databaseAssociationName = databaseDictionary.resolveAssociationAsTableName(associationName);
 		String sourceClassName = databaseDictionary.getSourceAlias(associationName);
 		String targetClassName = databaseDictionary.getTargetAlias(associationName);
 		
 		String sql_query = String.format("DELETE FROM %1$s WHERE %2$s = %3$s AND %4$s = %5$s", databaseAssociationName, sourceClassName, sourceId, targetClassName, targetId);
-		executeSQLQuery(sql_query);		
+		
+		if (executeSQLQuery(sql_query) > 0) {		
+			invokeOnDeleteAssociation(sourceNodeRef, targetNodeRef, typeQName);
+		}
 	}
 
+	/*
+	 * Create associations related to a particular nodeRef.
+	 * Related associations are those source/target parent/child associations which are linked to the given node
+	 * and which have both association ends (nodes) on the workspace spaces store.
+	 */
+	private void createAllRelatedAssociations(NodeRef nodeRef) {
+		Set<AssociationRef> assocs  = new HashSet<AssociationRef>();
+		assocs.addAll(nodeService.getSourceAssocs(nodeRef, RegexQNamePattern.MATCH_ALL));
+		assocs.addAll(nodeService.getTargetAssocs(nodeRef, RegexQNamePattern.MATCH_ALL));
+		assocs.removeAll(getProcessedAssociations());
+		
+		for (AssociationRef assoc : assocs) {
+			if (	
+					nodeFilterer.acceptOnName(assoc.getTypeQName()) && 
+					StoreRef.STORE_REF_WORKSPACE_SPACESSTORE.equals(assoc.getSourceRef().getStoreRef()) &&
+					StoreRef.STORE_REF_WORKSPACE_SPACESSTORE.equals(assoc.getTargetRef().getStoreRef())
+				) {
+				createAssociation(assoc.getSourceRef(), assoc.getTargetRef(), assoc.getTypeQName());
+			}
+		}
+		
+		Set<ChildAssociationRef> childAssocs = new HashSet<ChildAssociationRef>();
+		childAssocs.addAll(nodeService.getChildAssocs(nodeRef));
+		childAssocs.addAll(nodeService.getParentAssocs(nodeRef));
+		childAssocs.removeAll(getProcessedChildAssociations());
+
+		for (ChildAssociationRef assoc : childAssocs) {
+			if (
+					nodeFilterer.acceptOnName(assoc.getTypeQName()) && 
+					StoreRef.STORE_REF_WORKSPACE_SPACESSTORE.equals(assoc.getParentRef().getStoreRef()) &&
+					StoreRef.STORE_REF_WORKSPACE_SPACESSTORE.equals(assoc.getChildRef().getStoreRef())
+				) {
+				createAssociation(assoc.getParentRef(), assoc.getChildRef(), assoc.getTypeQName());
+			}
+		}
+		
+		setProcessed(assocs, childAssocs, OperationType.CREATE);
+	}
+	
+	// TODO : Refactor to create a generic operation for both create/delete-AllRelatedAssociations
+	private void deleteAllRelatedAssociations(NodeRef nodeRef) {
+		Set<AssociationRef> assocs  = new HashSet<AssociationRef>();
+		assocs.addAll(nodeService.getSourceAssocs(nodeRef, RegexQNamePattern.MATCH_ALL));
+		assocs.addAll(nodeService.getTargetAssocs(nodeRef, RegexQNamePattern.MATCH_ALL));
+		assocs.removeAll(getProcessedAssociations());
+		
+		for (AssociationRef assoc : assocs) {
+			if (nodeFilterer.acceptOnName(assoc.getTypeQName())) {
+				deleteAssociation(assoc.getSourceRef(), assoc.getTargetRef(), assoc.getTypeQName());
+			}
+		}
+		
+		Set<ChildAssociationRef> childAssocs = new HashSet<ChildAssociationRef>();
+		childAssocs.addAll(nodeService.getChildAssocs(nodeRef));
+		childAssocs.addAll(nodeService.getParentAssocs(nodeRef));
+		childAssocs.removeAll(getProcessedChildAssociations());
+
+		for (ChildAssociationRef assoc : childAssocs) {
+			if (nodeFilterer.acceptOnName(assoc.getTypeQName())) {
+				// TODO : check whether the node has several parents => certainly a problem (warn ?) in terms of the composition semantics
+				deleteAssociation(assoc.getParentRef(), assoc.getChildRef(), assoc.getTypeQName());
+			}
+		}
+		
+		setProcessed(assocs, childAssocs, OperationType.DELETE);
+	}
 	
 	/*
 	 * Helper methods
@@ -207,17 +307,17 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 	 * Helper methods that call the transaction listener by translating the SQL Exception
 	 * into an higher level one
 	 */
-	private void executeSQLQuery(String sqlQuery) {
+	private int executeSQLQuery(String sqlQuery) {
 		try {
-			transactionListener.executeSQLQuery(sqlQuery);
+			return transactionListener.executeSQLQuery(sqlQuery);
 		} catch (SQLException e) {
 			throw new NodeServiceFailureException(e);
 		}
 	}
 
-	private void executeSQLQuery(List<String> sqlQueries) {
+	private int[] executeSQLQuery(List<String> sqlQueries) {
 		try {
-			transactionListener.executeSQLQuery(sqlQueries);
+			return transactionListener.executeSQLQuery(sqlQueries);
 		} catch (SQLException e) {
 			throw new NodeServiceFailureException(e);
 		}
@@ -256,7 +356,58 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		return value;
 	}
 	
+	/*
+	 * Material relative to resource transaction management
+	 * We store the set of processed associations when we delete or create a node 
+	 */
+	private void setProcessed(Collection<AssociationRef> associationRefs, Collection<ChildAssociationRef> childAssociationRefs, OperationType operationType) {
+		if (! (associationRefs.isEmpty() && childAssociationRefs.isEmpty()) ) {
+			Set<AssociationRef> processedAssociationRefs = AlfrescoTransactionSupport.getResource(PROCESSED_ASSOCIATION_REF_CONTEXT);
+			Set<ChildAssociationRef> processedChildAssociationRefs = AlfrescoTransactionSupport.getResource(PROCESSED_CHILD_ASSOCIATION_REF_CONTEXT);
+			OperationType previousOperationType = AlfrescoTransactionSupport.getResource(PROCESSED_ASSOCIATIONS_OPERATION_TYPE);
+			
+			if (previousOperationType != null && previousOperationType != operationType) {
+				logger.error("Previous operation does not match the current one. In the same transaction, a mix between creating and deleting nodes cannot be performed");
+				throw new AlfrescoRuntimeException("Previous operation does not match the current one.");
+			}
+			
+			if (processedAssociationRefs == null) {
+				processedAssociationRefs = new HashSet<AssociationRef>(associationRefs);
+			} else {
+				processedAssociationRefs.addAll(associationRefs);
+			}
 	
+			if (processedChildAssociationRefs == null) {
+				processedChildAssociationRefs = new HashSet<ChildAssociationRef>(childAssociationRefs);
+			} else {
+				processedChildAssociationRefs.addAll(childAssociationRefs);
+			}
+			
+			AlfrescoTransactionSupport.bindResource(PROCESSED_ASSOCIATION_REF_CONTEXT, processedAssociationRefs);
+			AlfrescoTransactionSupport.bindResource(PROCESSED_CHILD_ASSOCIATION_REF_CONTEXT, processedChildAssociationRefs);
+			AlfrescoTransactionSupport.bindResource(PROCESSED_ASSOCIATIONS_OPERATION_TYPE, operationType);
+		}
+	}
+	
+	private Set<AssociationRef> getProcessedAssociations() {
+		Set<AssociationRef> processedAssociationRefs = AlfrescoTransactionSupport.getResource(PROCESSED_ASSOCIATION_REF_CONTEXT);
+		if (processedAssociationRefs == null) {
+			processedAssociationRefs = Collections.emptySet();
+		}
+		
+		return processedAssociationRefs;
+	}
+	
+	private Set<AssociationRef> getProcessedChildAssociations() {
+		Set<AssociationRef> processedChildAssociationRefs = AlfrescoTransactionSupport.getResource(PROCESSED_CHILD_ASSOCIATION_REF_CONTEXT);
+		
+		if (processedChildAssociationRefs == null) {
+			processedChildAssociationRefs = Collections.emptySet();
+		}
+		
+		return processedChildAssociationRefs;
+	}
+
 	//
 	// IoC/DI Spring
 	//

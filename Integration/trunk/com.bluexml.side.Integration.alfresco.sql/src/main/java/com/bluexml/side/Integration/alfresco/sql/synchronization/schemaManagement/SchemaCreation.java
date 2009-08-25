@@ -31,18 +31,16 @@ import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import com.bluexml.side.Integration.alfresco.sql.synchronization.common.NodeFilterer;
 import com.bluexml.side.Integration.alfresco.sql.synchronization.common.SqlCommon.TableType;
-import com.bluexml.side.Integration.alfresco.sql.synchronization.dialects.DefaultDialect;
+import com.bluexml.side.Integration.alfresco.sql.synchronization.dialects.CreateTableStatement;
 import com.bluexml.side.Integration.alfresco.sql.synchronization.dialects.SynchronizationDialect;
 import com.bluexml.side.Integration.alfresco.sql.synchronization.dictionary.DatabaseDictionary;
 
 public class SchemaCreation implements DictionaryListener {
 	
-//	private static final String BLUEXML_CONTENT_URI = "http://www.bluexml.com/model/content";
 	public static final String ASSOCIATION_ID_COLUMN_NAME = "id";
 	private static final String ALFRESCO_DBID_COLUMN_NAME = ContentModel.PROP_NODE_DBID.getLocalName();
 	
 	private Logger logger = Logger.getLogger(getClass());
-	//private Connection connection = null;
 	private boolean ready = true;
 	
 	private Set<QName> replicatedModels = new HashSet<QName>();
@@ -55,7 +53,6 @@ public class SchemaCreation implements DictionaryListener {
 	
 	public void init() {
 		logger.debug("Initializing the synchronized database");
-		synchronizationDialect = new DefaultDialect();		
 		dictionaryDAO.register(this);
 		
 		// Remove?
@@ -68,7 +65,7 @@ public class SchemaCreation implements DictionaryListener {
 		if (ready) {
 			Connection connection = DataSourceUtils.getConnection(dataSource);
 			
-			List<CreateStatement> createStatements = doCreateStatement(modelName);
+			List<CreateTableStatement> createStatements = doCreateStatement(modelName);
 			
 			CheckTableStatus checkTableStatus = doCheckStatus(createStatements, connection);
 			
@@ -99,30 +96,26 @@ public class SchemaCreation implements DictionaryListener {
 	}
 	
 	
-	private void executeCreateStatement(CreateStatement createStatement, Connection connection) throws SQLException {
-		try {
-			Statement sqlStatement = connection.createStatement();
-			
-			sqlStatement.executeUpdate(createStatement.toString());
+	private void executeCreateStatement(CreateTableStatement createStatement, Connection connection) throws SQLException {
+		Statement sqlStatement = connection.createStatement();
+		try {			
+			sqlStatement.executeUpdate(createStatement.toSQLString());
 		} catch (SQLException e) {
-			logger.error("Cannot create table due to the following error: " + e.getMessage());
-			//e.printStackTrace();
+			logger.error("Cannot create table due to the following error: ", e);
 			throw(e);
-		}	
+		} finally {
+			sqlStatement.close();
+		}
 	}
 	
 	
-	private List<CreateStatement> doCreateStatement(QName modelName) {
-		List<CreateStatement> createStatements = new ArrayList<CreateStatement>();
+	private List<CreateTableStatement> doCreateStatement(QName modelName) {
+		List<CreateTableStatement> createStatements = new ArrayList<CreateTableStatement>();
 		
 		for (QName type : dictionaryService.getTypes(modelName)) {
 			if (nodeFilterer.acceptOnName(type)) {
-				CreateStatement currentCreateStatement = createClass(type); 
-				
-				customActionManager.doInCreateType(type, currentCreateStatement);
-				
+				CreateTableStatement currentCreateStatement = createClass(type); 								
 				createStatements.add(currentCreateStatement);
-
 			}
 		}
 
@@ -131,24 +124,20 @@ public class SchemaCreation implements DictionaryListener {
 				ClassDefinition sourceClassDefinition = dictionaryService.getAssociation(associationName).getSourceClass();
 				ClassDefinition targetClassDefinition = dictionaryService.getAssociation(associationName).getTargetClass();
 				
-				CreateStatement currentCreateStatement = createAssociation(associationName, sourceClassDefinition.getName(), targetClassDefinition.getName());
-
-				customActionManager.doInCreateAssociation(associationName, currentCreateStatement);
-
+				CreateTableStatement currentCreateStatement = createAssociation(associationName, sourceClassDefinition.getName(), targetClassDefinition.getName());
 				createStatements.add(currentCreateStatement);
-
 			}
 		}
 		
 		return createStatements;
 	}
 		
-	private CheckTableStatus doCheckStatus (List<CreateStatement> createStatements, Connection connection) {
+	private CheckTableStatus doCheckStatus (List<CreateTableStatement> createStatements, Connection connection) {
 		List<String> matchedTables = new ArrayList<String>();
 		List<String> unmatchedTables = new ArrayList<String>();
 		List<String> nonExistingTables = new ArrayList<String>();
 		
-		for (CreateStatement createStatement : createStatements) {
+		for (CreateTableStatement createStatement : createStatements) {
 			TableStatus tableStatus = createStatement.checkStatus(connection);
 			if (tableStatus.equals(TableStatus.EXISTS_MATCHED)) {
 				matchedTables.add(createStatement.getTableName());
@@ -188,11 +177,12 @@ public class SchemaCreation implements DictionaryListener {
 		return status;
 	}
 	
-	private boolean doExecuteCreateStatements(List<CreateStatement> createStatements, Connection connection) {
+	private boolean doExecuteCreateStatements(List<CreateTableStatement> createStatements, Connection connection) {
 		boolean creationSuccess = true;
 		try {
-			for (CreateStatement createStatement : createStatements) {
-				logger.debug(createStatement.getNativeSQL(connection));
+			for (CreateTableStatement createStatement : createStatements) {
+				if (logger.isDebugEnabled())
+					logger.debug(createStatement.getNativeSQL(connection));
 				executeCreateStatement(createStatement, connection);
 			}
 		} catch (SQLException e) {
@@ -222,7 +212,7 @@ public class SchemaCreation implements DictionaryListener {
 		return success;
 	}
 	
-	private CreateStatement createClass(QName classQName) {
+	private CreateTableStatement createClass(QName classQName) {
 		String className = classQName.getLocalName();
 		String tableName = databaseDictionary.resolveClassAsTableName(className);
 		
@@ -251,11 +241,13 @@ public class SchemaCreation implements DictionaryListener {
 			}
 		}
 		
-		CreateStatement createStatement = new CreateStatement(tableName, columns, TableType.TABLE_CLASS, customActionManager);
 		String idColumnName = databaseDictionary.resolveAttributeAsColumnName(ALFRESCO_DBID_COLUMN_NAME, className);
-		createStatement.addPkConstraint(idColumnName);
-
-		return createStatement;
+		CreateTableStatement.Builder builder = 
+			synchronizationDialect.newCreateTableStatementBuilder(tableName).columns(columns).tableType(TableType.TABLE_CLASS).pkConstraint(idColumnName);
+		
+		customActionManager.doInCreateType(classQName, builder);
+		
+		return builder.build();
 	}
 	
 	/*
@@ -265,7 +257,7 @@ public class SchemaCreation implements DictionaryListener {
 	 * @param targetClassQName, same as source for target
 	 */
 	@SuppressWarnings("serial")
-	private CreateStatement createAssociation(QName associationQName, QName sourceClassQName, QName targetClassQName) {
+	private CreateTableStatement createAssociation(QName associationQName, QName sourceClassQName, QName targetClassQName) {
 		final String associationName = associationQName.getLocalName();
 		String tableName = databaseDictionary.resolveAssociationAsTableName(associationName);
 
@@ -275,24 +267,24 @@ public class SchemaCreation implements DictionaryListener {
 		columns.put(databaseDictionary.getSourceAlias(associationName), new ArrayList<String>() {{add("INTEGER"); }});
 		columns.put(databaseDictionary.getTargetAlias(associationName), new ArrayList<String>() {{add("INTEGER"); }});
 
-		CreateStatement createStatement = new CreateStatement(tableName, columns, TableType.TABLE_ASSOCIATION, customActionManager);
-		createStatement.addPkConstraint(
-				new ArrayList<String>() {{ 
-					add(databaseDictionary.getSourceAlias(associationName));
-					add(databaseDictionary.getTargetAlias(associationName)); // ASSOCIATION_ID_COLUMN_NAME)
-				}}
-		);
-		
-		String idColumnName = databaseDictionary.resolveAttributeAsColumnName(ALFRESCO_DBID_COLUMN_NAME, sourceClassQName.getLocalName());
-		createStatement.addFkConstraint(databaseDictionary.getSourceAlias(associationName), databaseDictionary.getSourceClass(associationName), idColumnName);
-		
-		idColumnName = databaseDictionary.resolveAttributeAsColumnName(ALFRESCO_DBID_COLUMN_NAME, targetClassQName.getLocalName());
-		createStatement.addFkConstraint(databaseDictionary.getTargetAlias(associationName), databaseDictionary.getTargetClass(associationName), idColumnName);
+		final String sourceIdColumnName = databaseDictionary.resolveAttributeAsColumnName(ALFRESCO_DBID_COLUMN_NAME, sourceClassQName.getLocalName());
+		final String targetIdColumnName = databaseDictionary.resolveAttributeAsColumnName(ALFRESCO_DBID_COLUMN_NAME, targetClassQName.getLocalName());
 
-		return createStatement;
+		CreateTableStatement.Builder builder = 
+			synchronizationDialect.newCreateTableStatementBuilder(tableName)
+			.columns(columns)
+			.tableType(TableType.TABLE_ASSOCIATION)
+			.pkConstraint(databaseDictionary.getSourceAlias(associationName))
+			.pkConstraint(databaseDictionary.getTargetAlias(associationName))
+			.fkConstraint(databaseDictionary.getSourceAlias(associationName), databaseDictionary.getSourceClass(associationName), sourceIdColumnName)
+			.fkConstraint(databaseDictionary.getTargetAlias(associationName), databaseDictionary.getTargetClass(associationName), targetIdColumnName);
+		
+		customActionManager.doInCreateAssociation(associationQName, builder);
+
+		return builder.build();
 	}
 	
-	
+		
 	/*
 	 * Dictionary Listener methods
 	 */
@@ -363,7 +355,6 @@ public class SchemaCreation implements DictionaryListener {
 	private TransactionService transactionService;
 	private SynchronizationDialect synchronizationDialect;
 	private CustomActionManager customActionManager;
-
 	private DictionaryDAO dictionaryDAO;
 	
 	public void setDataSource(DataSource dataSource_) {

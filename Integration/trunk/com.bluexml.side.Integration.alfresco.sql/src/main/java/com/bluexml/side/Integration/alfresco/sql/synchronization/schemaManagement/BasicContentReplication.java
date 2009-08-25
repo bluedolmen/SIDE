@@ -53,7 +53,8 @@ public class BasicContentReplication implements ContentReplication {
 			/*
 			 * only processes filtered nodes and nodes that are defined in the current model definition (TypeDefinition in the Alfresco dictionary is not null)
 			 */
-			if (nodeFilterer.accept(nodeRef) && currentDictionaryTypes.contains(nodeService.getType(nodeRef)) ) {
+			final QName typeQName = nodeService.getType(nodeRef);
+			if (nodeFilterer.acceptOnName(typeQName) && currentDictionaryTypes.contains(typeQName) ) {
 				addNode(nodeRef);
 				
 				customActionManager.doInContentReplication(nodeRef);
@@ -63,7 +64,9 @@ public class BasicContentReplication implements ContentReplication {
 					/*
 					 * if the target of the association is an acceptable node, then the association will be created
 					 */
-					if (nodeFilterer.accept(association.getTargetRef()) ) {
+					if (nodeFilterer.acceptOnName(association.getTypeQName()) && 
+							nodeFilterer.acceptOnName(nodeService.getType(association.getTargetRef())) ) 
+					{
 						associationsToAdd.add(association);
 					}
 				}
@@ -73,7 +76,9 @@ public class BasicContentReplication implements ContentReplication {
 					/*
 					 * if the target of the association is an acceptable node, then the association will be created
 					 */
-					if (nodeFilterer.accept(association.getChildRef()) ) {
+					if (nodeFilterer.acceptOnName(association.getTypeQName()) && 
+							nodeFilterer.acceptOnName(nodeService.getType(association.getChildRef())) ) 
+					{
 						childAssociationsToAdd.add(association);
 					}
 				}
@@ -81,6 +86,8 @@ public class BasicContentReplication implements ContentReplication {
 				
 			}
 		}
+		
+		nodes.close();
 		
 		for (AssociationRef associationRef : associationsToAdd) {
 			addAssociation(associationRef);

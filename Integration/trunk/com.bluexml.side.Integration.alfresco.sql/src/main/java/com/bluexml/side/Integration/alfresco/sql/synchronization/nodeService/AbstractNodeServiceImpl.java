@@ -1,10 +1,12 @@
 package com.bluexml.side.Integration.alfresco.sql.synchronization.nodeService;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.alfresco.model.ContentModel;
 import org.alfresco.repo.policy.AssociationPolicyDelegate;
 import org.alfresco.repo.policy.ClassPolicyDelegate;
 import org.alfresco.repo.policy.PolicyComponent;
@@ -103,6 +105,10 @@ public abstract class AbstractNodeServiceImpl implements com.bluexml.side.Integr
         return qnames;
     }
 
+    protected Serializable getDbId(NodeRef nodeRef) {
+    	return nodeService.getProperty(nodeRef, ContentModel.PROP_NODE_DBID);
+    }
+    
 	/*
 	 * IoC/DI Spring
 	 */

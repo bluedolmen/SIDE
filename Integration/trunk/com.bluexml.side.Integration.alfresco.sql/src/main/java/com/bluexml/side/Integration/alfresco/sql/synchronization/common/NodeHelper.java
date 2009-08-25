@@ -13,11 +13,12 @@ public class NodeHelper {
 	
 	/**
 	 * Return the parent QNames of the nodeRef including self
+	 * Self has to be the first element of the returned list
 	 * 
 	 * @param nodeRef
 	 * @return a list of parent names
 	 */
-	public List<QName> getParentQNames(NodeRef nodeRef) {
+	public List<QName> getParentAndSelfQNames(NodeRef nodeRef) {
 		List<QName> result = new ArrayList<QName>();
 
 		QName currentType = nodeService.getType(nodeRef);

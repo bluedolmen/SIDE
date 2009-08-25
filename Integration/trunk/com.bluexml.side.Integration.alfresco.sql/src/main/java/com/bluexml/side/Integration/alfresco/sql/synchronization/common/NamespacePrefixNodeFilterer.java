@@ -1,7 +1,5 @@
 package com.bluexml.side.Integration.alfresco.sql.synchronization.common;
 
-import java.io.Serializable;
-
 import org.alfresco.model.ContentModel;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
@@ -11,18 +9,9 @@ import org.alfresco.service.namespace.QName;
 public class NamespacePrefixNodeFilterer implements NodeFilterer {
 
 	public boolean accept(NodeRef nodeRef) {
-		boolean result = false;
 		QName nodeType = nodeService.getType(nodeRef);
-		String uri = nodeType.getNamespaceURI();
-		if (uri.startsWith(namespacePrefix)) {
-			Serializable store_protocol = nodeService.getProperty(nodeRef, ContentModel.PROP_STORE_PROTOCOL);
-			// Only process nodes which are not in the archive space (the node
-			// was deleted)
-			if (!store_protocol.equals(StoreRef.PROTOCOL_ARCHIVE) ){
-				result = true;
-			}
-		}
-		return result;
+		
+		return StoreRef.STORE_REF_WORKSPACE_SPACESSTORE.equals(nodeRef.getStoreRef()) && nodeType.getNamespaceURI().startsWith(namespacePrefix);
 	}
 
 	public boolean acceptOnName(QName qname) {

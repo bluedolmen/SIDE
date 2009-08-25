@@ -51,13 +51,14 @@ public class JdbcTransactionListener implements TransactionListener {
 	 * @param query
 	 * @throws SQLException 
 	 */
-	public void executeSQLQuery(String sqlQuery) throws SQLException {
+	public int executeSQLQuery(String sqlQuery) throws SQLException {
 		Connection connection = getConnection();
 		Statement st = null;
+		int rowCount = -1;
 		try {
 			logger.debug("[executeSQLQuery] " + sqlQuery);
 			st = connection.createStatement();
-			int rowCount = st.executeUpdate(sqlQuery);
+			rowCount = st.executeUpdate(sqlQuery);
 			logger.debug("[executeSQLQuery] Row count: " + rowCount);
 		} catch (SQLException e) {
 			logger.error("[executeSQLQuery]", e);
@@ -72,11 +73,14 @@ public class JdbcTransactionListener implements TransactionListener {
 				st = null;
 			}
 		}
+		
+		return rowCount;
 	}
 
-	public void executeSQLQuery(List<String> sqlQueries) throws SQLException {
+	public int[] executeSQLQuery(List<String> sqlQueries) throws SQLException {
 		Connection connection = getConnection();
 		Statement st = null;
+		int[] rowCount = new int[0];
 		
 		// avoid unnecessary processing if there is no queries (opening/closing of a statement) 
 		if (!sqlQueries.isEmpty()){
@@ -86,7 +90,7 @@ public class JdbcTransactionListener implements TransactionListener {
 					logger.debug("[executeSQLQuery(List<String>)] " + sqlQuery);
 					st.addBatch(sqlQuery);
 				}
-				int[] rowCount = st.executeBatch();
+				rowCount = st.executeBatch();
 				if (logger.isDebugEnabled()) {
 					// Just print a log message
 					List<String> rowCountAsString = new ArrayList<String>();
@@ -107,6 +111,8 @@ public class JdbcTransactionListener implements TransactionListener {
 				}
 			}
 		}
+		
+		return rowCount;
 	}
 
 	public void afterCommit() {

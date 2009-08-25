@@ -1,10 +1,11 @@
-package com.bluexml.side.Integration.alfresco.sql.synchronization.schemaManagement;
+package com.bluexml.side.Integration.alfresco.sql.synchronization.dialects;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.bluexml.side.Integration.alfresco.sql.synchronization.common.SqlCommon.TableType;
+import com.bluexml.side.Integration.alfresco.sql.synchronization.schemaManagement.CustomActionManager;
+import com.bluexml.side.Integration.alfresco.sql.synchronization.schemaManagement.TableStatus;
 
 /*
  * This inner class is used to store the create statements
@@ -21,52 +24,78 @@ import com.bluexml.side.Integration.alfresco.sql.synchronization.common.SqlCommo
  * The constructor get in input a map < ColumnName, List_of_Options >, options being
  * either type declaration of constraints (the order of options must follow the SQL definition)
  */
-public class CreateStatement {
-	private static final Logger logger = Logger.getLogger(CreateStatement.class);
+public class CreateTableStatement {
+	private static final Logger logger = Logger.getLogger(CreateTableStatement.class);
 	
 	private Map<String, List<String>> columns;
 	private String tableName;
 	private List<String> pkColumns = new ArrayList<String>() ;
 	private Map<String, TableColumn> fkConstraints = new LinkedHashMap<String, TableColumn>();
-	private CustomActionManager customActionManager = null;
 	private TableType tableType;
 	
-	protected CreateStatement(String tableName_, Map<String, List<String>> columns_, TableType tableType_) {
-		tableName = tableName_;
-		columns = columns_;
-		tableType = (tableType_ == null ? TableType.TABLE_UNSPECIFIED : tableType_);
+	private static class TableColumn {
+		public String table;
+		public String column;
+		
+		TableColumn(String table_, String column_) {
+			table = table_;
+			column = column_;
+		}
 	}
 	
-	protected CreateStatement(String tableName_, Map<String, List<String>> columns_, TableType tableType_, CustomActionManager customActionManager_) {
-		tableName = tableName_;
-		columns = columns_;
-		tableType = (tableType_ == null ? TableType.TABLE_UNSPECIFIED : tableType_);
-		customActionManager = customActionManager_;
+	public static class Builder {
+
+		private final String tableName;
+
+		private Map<String, List<String>> columns = new HashMap<String, List<String>>();
+		private List<String> pkColumns = new ArrayList<String>() ;
+		private Map<String, TableColumn> fkConstraints = new LinkedHashMap<String, TableColumn>();
+		private TableType tableType = TableType.TABLE_UNSPECIFIED;
+
+		public Builder(String tableName_) {
+			tableName = tableName_;
+		}
+		
+		public Builder tableType(TableType tableType_) {
+			tableType = tableType_;
+			return this;
+		}
+		
+		public Builder columns(Map<String, List<String>> columns_) {
+			columns.putAll(columns_);
+			return this;
+		}
+
+		public Builder pkConstraint(List<String> columnNames) {
+			pkColumns.addAll(columnNames);
+			return this;
+		}
+		
+		public Builder pkConstraint(String columName) {
+			pkColumns.add(columName);
+			return this;
+		}
+		
+		public Builder fkConstraint(String sourceColumnName, String targetTableName, String targetColumnName) {
+			TableColumn tc = new TableColumn(targetTableName, targetColumnName);
+			fkConstraints.put(sourceColumnName, tc);
+			return this;
+		}
+ 
+		public CreateTableStatement build() {
+			return new CreateTableStatement(this);
+		}
 	}
 	
-	public void addColumns(Map<String, List<String>> columns_) {
-		columns.putAll(columns_);
+	protected CreateTableStatement(Builder builder_) {
+		this.tableName = builder_.tableName;
+		this.tableType = builder_.tableType;
+		this.columns = builder_.columns;
+		this.pkColumns = builder_.pkColumns;
+		this.fkConstraints = builder_.fkConstraints;
 	}
 	
-	public void resetConstraints() {
-		pkColumns.clear();
-		fkConstraints.clear();
-	}
-	
-	public void addPkConstraint(List<String> columnNames) {
-		pkColumns.addAll(columnNames);
-	}
-	
-	public void addPkConstraint(String columName) {
-		pkColumns.add(columName);
-	}
-	
-	public void addFkConstraint(String sourceColumnName, String targetTableName, String targetColumnName) {
-		TableColumn tc = new TableColumn(targetTableName, targetColumnName);
-		fkConstraints.put(sourceColumnName, tc);
-	}
-	
-	public String toString() {
+	public String toSQLString() {
 		StringBuffer result = new StringBuffer();
 		result.append("CREATE TABLE " + tableName + " (\n");
 		List<String> tableDefinitionLines = new ArrayList<String>();
@@ -140,7 +169,8 @@ public class CreateStatement {
 				if (customActionManager != null) {
 					status = customActionManager.doInSchemaChecking(tableColumns, status, tableType);
 				} else {
-					logger.debug("Cannot execute any custom checking since no custom action manager has been defined on create statement for table '" + tableName + "'");
+					if (logger.isDebugEnabled())
+						logger.debug("Cannot execute any custom checking since no custom action manager has been defined on create statement for table '" + tableName + "'");
 				}					
 			}
 
@@ -157,7 +187,7 @@ public class CreateStatement {
 	}
 	
 	public String getNativeSQL(Connection connection) {
-		String createStatement = toString();
+		String createStatement = toSQLString();
 		String query = null;
 		try { 
 			query = connection.nativeSQL(createStatement);
@@ -172,18 +202,19 @@ public class CreateStatement {
 		return query;
 	}
 	
-	private class TableColumn {
-		public String table;
-		public String column;
-		
-		TableColumn(String table_, String column_) {
-			table = table_;
-			column = column_;
-		}
-	}
 	
 	public String getTableName() {
 		return tableName;
 	}
 	
+	/*
+	 * IoC/DI Spring
+	 */
+	
+	/* Add custom action manager statically */
+	private static CustomActionManager customActionManager;
+	
+	public void setCustomActionManager (CustomActionManager customActionManager_) {
+		customActionManager = customActionManager_;
+	}
 }
