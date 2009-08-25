@@ -62,11 +62,11 @@ association.target.alias.<%getQualifiedName(firstEnd)%>=<%secondEnd.name%>
 association.name.<%getQualifiedName(secondEnd)%>=<%getAssociationTableName(secondEnd)%>
 association.source.<%getQualifiedName(secondEnd)%>=<%secondEnd.linkedClass.name%>
 <%if (secondEnd.name != ""){%>
-association.source.<%getQualifiedName(secondEnd)%>=<%secondEnd.name%>
+association.source.alias.<%getQualifiedName(secondEnd)%>=<%secondEnd.name%>
 <%}%>
 association.target.<%getQualifiedName(secondEnd)%>=<%firstEnd.linkedClass.name%>
 <%if (firstEnd.name != ""){%>
-association.target.<%getQualifiedName(secondEnd)%>=<%firstEnd.name%>
+association.target.alias.<%getQualifiedName(secondEnd)%>=<%firstEnd.name%>
 <%}%>
 <%}%>
 
