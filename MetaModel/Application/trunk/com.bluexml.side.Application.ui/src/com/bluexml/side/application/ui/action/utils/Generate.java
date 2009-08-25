@@ -482,19 +482,19 @@ public class Generate extends Thread {
 			} catch (ClassNotFoundException e1) {
 				error = true;
 				e1.printStackTrace();
-				addErrorText(Messages.getString("Deploy.48") + id_deployer + " haven't been found."); //$NON-NLS-1$ //$NON-NLS-2$
+				addErrorText(Messages.getString("Generate.48") + id_deployer + " haven't been found."); //$NON-NLS-1$ //$NON-NLS-2$
 			} catch (InstantiationException e) {
 				error = true;
 				e.printStackTrace();
-				addErrorText(Messages.getString("Deploy.50") + id_deployer + " can't be instanciate."); //$NON-NLS-1$ //$NON-NLS-2$
+				addErrorText(Messages.getString("Generate.50") + id_deployer + " can't be instanciate."); //$NON-NLS-1$ //$NON-NLS-2$
 			} catch (IllegalAccessException e) {
 				error = true;
 				e.printStackTrace();
-				addErrorText(Messages.getString("Deploy.52") + id_deployer + " access error."); //$NON-NLS-1$ //$NON-NLS-2$
+				addErrorText(Messages.getString("Generate.52") + id_deployer + " access error."); //$NON-NLS-1$ //$NON-NLS-2$
 			} catch (Exception e) {
 				error = true;
 				e.printStackTrace();
-				addErrorText(Messages.getString("Deploy.54") + id_deployer + "."); //$NON-NLS-1$ //$NON-NLS-2$
+				addErrorText(Messages.getString("Generate.54") + id_deployer + "."); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			try {
 				IFileHelper.refreshFolder(logPath);
@@ -519,15 +519,15 @@ public class Generate extends Thread {
 					Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Messages.getString("Generate.56"), e)); //$NON-NLS-1$
 					e.printStackTrace();
 					error = true;
-					addErrorText(Messages.getString("Deploy.56") + e.getMessage()); //$NON-NLS-1$
-					deployer.addErrorLog(Messages.getString("Deploy.56"), e.getStackTrace(), null); //$NON-NLS-1$
+					addErrorText(Messages.getString("Generate.56") + e.getMessage()); //$NON-NLS-1$
+					deployer.addErrorLog(Messages.getString("Generate.56"), e.getStackTrace(), null); //$NON-NLS-1$
 				}
 
 				try {
 					deployer.moveStampFile(logPath);
 				} catch (Exception e) {
 					e.printStackTrace();
-					addWarningText(Messages.getString("Deploy.57") + e.getMessage()); //$NON-NLS-1$
+					addWarningText(Messages.getString("Generate.57") + e.getMessage()); //$NON-NLS-1$
 				}
 
 				String fileName = "dep_" + deployer.getTechVersion() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
