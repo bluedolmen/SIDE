@@ -6,7 +6,6 @@ import java.util.Properties;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 
-import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.zip.ZipManager;
 
 public class WarPatchPackager extends AbstractPackager {
@@ -17,13 +16,13 @@ public class WarPatchPackager extends AbstractPackager {
 		this.webappName = webappName;
 	}
 
-	public IFile buildPackage(boolean doClean) throws Exception {
+	public IFile buildPackage() throws Exception {
 		File ampFile = getPackageFile();
 		ampFile.createNewFile();
 		ZipManager.zip(getFolderToPackage(), ampFile, false);
-		if (doClean) {
-			FileHelper.deleteFile(getWorkingFolder());
-		}
+//		if (doClean) {
+//			FileHelper.deleteFile(getWorkingFolder());
+//		}
 		IFile ampIFile = getPackageIFile();
 		return ampIFile;
 	}

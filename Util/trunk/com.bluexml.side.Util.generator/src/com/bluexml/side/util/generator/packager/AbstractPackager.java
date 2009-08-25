@@ -23,7 +23,7 @@ public abstract class AbstractPackager {
 		
 	}
 
-	abstract public IFile buildPackage(boolean doClean) throws Exception;
+	abstract public IFile buildPackage() throws Exception;
 	abstract protected String getPackageFileName();
 	
 	

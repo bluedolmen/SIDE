@@ -274,18 +274,6 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral());
 	}
 
-	/**
-	 * Return if cleaning might be done or not.
-	 *
-	 * @return
-	 */
-	protected static boolean doClean() {
-		if (configurationParameters != null && configurationParameters.containsKey(StaticConfigurationParameters.GENERATIONOPTIONSCLEAN.getLiteral())) {
-			return Boolean.parseBoolean(configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSCLEAN.getLiteral()));
-		}
-		return false;
-	}
-
 	public static boolean getGeneratorOptionValue(String key) {
 		if (AbstractGenerator.generatorOptions.containsKey(key)) {
 			return AbstractGenerator.generatorOptions.get(key);

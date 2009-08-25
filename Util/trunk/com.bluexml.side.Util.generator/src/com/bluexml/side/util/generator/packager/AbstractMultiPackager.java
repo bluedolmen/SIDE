@@ -8,7 +8,6 @@ import java.util.Properties;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 
-import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.IFileHelper;
 
 public abstract class AbstractMultiPackager {
@@ -26,11 +25,11 @@ public abstract class AbstractMultiPackager {
 		this.technoV = technoV;
 	}
 
-	public Map<String, IFile> buildPackages(boolean doClean) throws Exception {
+	public Map<String, IFile> buildPackages() throws Exception {
 		Map<String, IFile> packageFiles_ = new HashMap<String, IFile>();
 		for (Map.Entry<String, AbstractPackager> p : packagers.entrySet()) {
 			if (p.getValue().getFolderToPackage().exists()) {
-				IFile pp = p.getValue().buildPackage(false);
+				IFile pp = p.getValue().buildPackage();
 				packageFiles_.put(p.getKey(), pp);
 			} else {
 				// INFO : packager skipped
@@ -40,9 +39,9 @@ public abstract class AbstractMultiPackager {
 				}
 			}
 		}
-		if (doClean) {
-			FileHelper.deleteFile(getWorkingFolder());
-		}
+//		if (doClean) {
+//			FileHelper.deleteFile(getWorkingFolder());
+//		}
 		return packageFiles_;
 	}
 

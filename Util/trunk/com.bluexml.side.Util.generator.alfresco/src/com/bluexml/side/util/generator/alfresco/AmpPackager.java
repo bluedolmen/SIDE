@@ -26,7 +26,7 @@ public class AmpPackager extends AbstractPackager {
 		mapper = createAMPSkelleton();
 	}
 
-	public IFile buildPackage(boolean doClean) throws Exception {
+	public IFile buildPackage() throws Exception {
 		List<IFile> generatedFiles = IFileHelper.getAllFiles(IworkingDir);
 
 		dispatchFiles(generatedFiles, mapper);
@@ -34,9 +34,9 @@ public class AmpPackager extends AbstractPackager {
 		File ampFile = getPackageFile();
 		ampFile.createNewFile();
 		ZipManager.zip(getFolderToPackage(), ampFile, false);
-		if (doClean) {
-			FileHelper.deleteFile(getWorkingFolder());
-		}
+//		if (doClean) {
+//			FileHelper.deleteFile(getWorkingFolder());
+//		}
 		IFile ampIFile = getPackageIFile();
 		return ampIFile;
 	}

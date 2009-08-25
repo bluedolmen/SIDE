@@ -104,10 +104,12 @@ public class FileHelper {
 
 	public static boolean deleteFile(File f) {
 		if (f.isDirectory()) {
+			boolean status=true;
 			File[] fl = f.listFiles();
 			for (int i = 0; i < fl.length; i++) {
-				deleteFile(fl[i]);
+				status &=deleteFile(fl[i]);
 			}
+			return status;
 		}
 		if (f.exists() && f.canWrite()) {
 			return f.delete();

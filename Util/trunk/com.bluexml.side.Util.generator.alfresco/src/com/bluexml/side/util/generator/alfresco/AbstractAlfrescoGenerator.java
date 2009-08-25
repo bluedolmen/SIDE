@@ -25,7 +25,7 @@ public abstract class AbstractAlfrescoGenerator extends AbstractAcceleoPackageGe
 	@Override
 	public Collection<IFile> buildPackages(String modelId) throws Exception {
 		AlfrescoPackager alfrescoPackager = new AlfrescoPackager(IFileHelper.getIFolder(getTemporaryFolder()), buildModuleProperties(modelId), techVersion);
-		Collection<IFile> pkgs = alfrescoPackager.buildPackages(doClean()).values();
+		Collection<IFile> pkgs = alfrescoPackager.buildPackages().values();
 		return pkgs;
 	}
 
