@@ -210,8 +210,8 @@ public class FormValidator extends EObjectValidator {
 				return validateTextWidgetType((TextWidgetType)value, diagnostics, context);
 			case FormPackage.CHOICE_WIDGET_TYPE:
 				return validateChoiceWidgetType((ChoiceWidgetType)value, diagnostics, context);
-			case FormPackage.REFERENCE_WIDGET_TYPE:
-				return validateReferenceWidgetType((ReferenceWidgetType)value, diagnostics, context);
+			case FormPackage.MODEL_CHOICE_WIDGET_TYPE:
+				return validateModelChoiceWidgetType((ModelChoiceWidgetType)value, diagnostics, context);
 			default: 
 				return true;
 		}
@@ -969,7 +969,7 @@ public class FormValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateReferenceWidgetType(ReferenceWidgetType referenceWidgetType, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateModelChoiceWidgetType(ModelChoiceWidgetType modelChoiceWidgetType, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

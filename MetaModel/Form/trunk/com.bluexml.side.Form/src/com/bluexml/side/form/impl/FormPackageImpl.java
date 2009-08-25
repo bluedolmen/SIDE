@@ -43,6 +43,7 @@ import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.ImageField;
 import com.bluexml.side.form.IntegerField;
 import com.bluexml.side.form.ModelChoiceField;
+import com.bluexml.side.form.ModelChoiceWidgetType;
 import com.bluexml.side.form.PasswordField;
 import com.bluexml.side.form.PhoneNumberField;
 import com.bluexml.side.form.Reference;
@@ -307,7 +308,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum referenceWidgetTypeEEnum = null;
+	private EEnum modelChoiceWidgetTypeEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1141,8 +1142,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getReferenceWidgetType() {
-		return referenceWidgetTypeEEnum;
+	public EEnum getModelChoiceWidgetType() {
+		return modelChoiceWidgetTypeEEnum;
 	}
 
 	/**
@@ -1288,7 +1289,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		formGroupPresentationTypeEEnum = createEEnum(FORM_GROUP_PRESENTATION_TYPE);
 		textWidgetTypeEEnum = createEEnum(TEXT_WIDGET_TYPE);
 		choiceWidgetTypeEEnum = createEEnum(CHOICE_WIDGET_TYPE);
-		referenceWidgetTypeEEnum = createEEnum(REFERENCE_WIDGET_TYPE);
+		modelChoiceWidgetTypeEEnum = createEEnum(MODEL_CHOICE_WIDGET_TYPE);
 	}
 
 	/**
@@ -1419,7 +1420,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEAttribute(getModelChoiceField_Max_bound(), ecorePackage.getEInt(), "max_bound", null, 0, 1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelChoiceField_Target(), this.getFormContainer(), null, "target", null, 0, -1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelChoiceField_Association_formClass(), this.getFormContainer(), null, "association_formClass", null, 0, -1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getModelChoiceField_Widget(), this.getChoiceWidgetType(), "widget", null, 0, 1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModelChoiceField_Widget(), this.getModelChoiceWidgetType(), "widget", null, 0, 1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getModelChoiceField_Show_actions(), ecorePackage.getEBoolean(), "show_actions", "true", 0, 1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(emailFieldEClass, EmailField.class, "EmailField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1497,10 +1498,9 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		addEEnumLiteral(choiceWidgetTypeEEnum, ChoiceWidgetType.SHOW_ONE);
 		addEEnumLiteral(choiceWidgetTypeEEnum, ChoiceWidgetType.INLINE);
 
-		initEEnum(referenceWidgetTypeEEnum, ReferenceWidgetType.class, "ReferenceWidgetType");
-		addEEnumLiteral(referenceWidgetTypeEEnum, ReferenceWidgetType.ASSOCIATION_CLASS_INLINE);
-		addEEnumLiteral(referenceWidgetTypeEEnum, ReferenceWidgetType.ASSOCIATION_CLASS_SELECT);
-		addEEnumLiteral(referenceWidgetTypeEEnum, ReferenceWidgetType.INLINE);
+		initEEnum(modelChoiceWidgetTypeEEnum, ModelChoiceWidgetType.class, "ModelChoiceWidgetType");
+		addEEnumLiteral(modelChoiceWidgetTypeEEnum, ModelChoiceWidgetType.SELECT);
+		addEEnumLiteral(modelChoiceWidgetTypeEEnum, ModelChoiceWidgetType.INLINE);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1545,7 +1545,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "NoLinkForVirtualField"
-		   });																							
+		   });																						
 		addAnnotation
 		  (formContainerEClass, 
 		   source, 
@@ -1597,7 +1597,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "NoLinkForVirtualField", "not self.link.oclIsUndefined()"
-		   });																							
+		   });																						
 		addAnnotation
 		  (formContainerEClass, 
 		   source, 
@@ -1625,7 +1625,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "name", "presentation"
-		   });																																																																																							
+		   });																																																																																						
 	}
 
 	public FormFactory getFormsFactory() {

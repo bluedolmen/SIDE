@@ -672,16 +672,12 @@
   <children xmi:type="notation:Node" xmi:id="_UHmV4onyEd6TQdKNtqitYA" type="1005">
     <children xmi:type="notation:Node" xmi:id="_UHmV44nyEd6TQdKNtqitYA" type="4010"/>
     <children xmi:type="notation:Node" xmi:id="_UHmV5InyEd6TQdKNtqitYA" type="5008">
-      <children xmi:type="notation:Node" xmi:id="_UHmV5YnyEd6TQdKNtqitYA" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//ReferenceWidgetType/AssociationClassInline"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_UHmV5onyEd6TQdKNtqitYA"/>
-      </children>
       <children xmi:type="notation:Node" xmi:id="_UHmV54nyEd6TQdKNtqitYA" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//ReferenceWidgetType/AssociationClassSelect"/>
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//ModelChoiceWidgetType/Select"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_UHmV6InyEd6TQdKNtqitYA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_UHmV6YnyEd6TQdKNtqitYA" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//ReferenceWidgetType/Inline"/>
+        <element xmi:type="ecore:EEnumLiteral" href="Forms.ecore#//ModelChoiceWidgetType/Inline"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_UHmV6onyEd6TQdKNtqitYA"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_UHmV64nyEd6TQdKNtqitYA"/>
@@ -689,7 +685,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_UHmV7YnyEd6TQdKNtqitYA"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_UHmV7onyEd6TQdKNtqitYA" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="0"/>
-    <element xmi:type="ecore:EEnum" href="Forms.ecore#//ReferenceWidgetType"/>
+    <element xmi:type="ecore:EEnum" href="Forms.ecore#//ModelChoiceWidgetType"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UHmV74nyEd6TQdKNtqitYA" x="2206"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_UHmV8InyEd6TQdKNtqitYA" type="1001">

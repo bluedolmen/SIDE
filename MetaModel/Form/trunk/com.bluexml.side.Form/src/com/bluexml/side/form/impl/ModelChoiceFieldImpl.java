@@ -23,6 +23,7 @@ import com.bluexml.side.form.ClassReference;
 import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.ModelChoiceField;
+import com.bluexml.side.form.ModelChoiceWidgetType;
 import com.bluexml.side.form.ReferenceWidgetType;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
@@ -136,7 +137,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * @generated
 	 * @ordered
 	 */
-	protected static final ChoiceWidgetType WIDGET_EDEFAULT = ChoiceWidgetType.LIST_ALL;
+	protected static final ModelChoiceWidgetType WIDGET_EDEFAULT = ModelChoiceWidgetType.SELECT;
 
 	/**
 	 * The cached value of the '{@link #getWidget() <em>Widget</em>}' attribute.
@@ -146,7 +147,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * @generated
 	 * @ordered
 	 */
-	protected ChoiceWidgetType widget = WIDGET_EDEFAULT;
+	protected ModelChoiceWidgetType widget = WIDGET_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isShow_actions() <em>Show actions</em>}' attribute.
@@ -334,7 +335,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ChoiceWidgetType getWidget() {
+	public ModelChoiceWidgetType getWidget() {
 		return widget;
 	}
 
@@ -343,8 +344,8 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setWidget(ChoiceWidgetType newWidget) {
-		ChoiceWidgetType oldWidget = widget;
+	public void setWidget(ModelChoiceWidgetType newWidget) {
+		ModelChoiceWidgetType oldWidget = widget;
 		widget = newWidget == null ? WIDGET_EDEFAULT : newWidget;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.MODEL_CHOICE_FIELD__WIDGET, oldWidget, widget));
@@ -431,7 +432,7 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 				getAssociation_formClass().addAll((Collection<? extends FormContainer>)newValue);
 				return;
 			case FormPackage.MODEL_CHOICE_FIELD__WIDGET:
-				setWidget((ChoiceWidgetType)newValue);
+				setWidget((ModelChoiceWidgetType)newValue);
 				return;
 			case FormPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
 				setShow_actions(((Boolean)newValue).booleanValue());

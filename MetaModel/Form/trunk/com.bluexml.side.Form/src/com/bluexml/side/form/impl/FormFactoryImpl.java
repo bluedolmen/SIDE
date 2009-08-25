@@ -138,8 +138,8 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 				return createTextWidgetTypeFromString(eDataType, initialValue);
 			case FormPackage.CHOICE_WIDGET_TYPE:
 				return createChoiceWidgetTypeFromString(eDataType, initialValue);
-			case FormPackage.REFERENCE_WIDGET_TYPE:
-				return createReferenceWidgetTypeFromString(eDataType, initialValue);
+			case FormPackage.MODEL_CHOICE_WIDGET_TYPE:
+				return createModelChoiceWidgetTypeFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -159,8 +159,8 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 				return convertTextWidgetTypeToString(eDataType, instanceValue);
 			case FormPackage.CHOICE_WIDGET_TYPE:
 				return convertChoiceWidgetTypeToString(eDataType, instanceValue);
-			case FormPackage.REFERENCE_WIDGET_TYPE:
-				return convertReferenceWidgetTypeToString(eDataType, instanceValue);
+			case FormPackage.MODEL_CHOICE_WIDGET_TYPE:
+				return convertModelChoiceWidgetTypeToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -502,8 +502,8 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ReferenceWidgetType createReferenceWidgetTypeFromString(EDataType eDataType, String initialValue) {
-		ReferenceWidgetType result = ReferenceWidgetType.get(initialValue);
+	public ModelChoiceWidgetType createModelChoiceWidgetTypeFromString(EDataType eDataType, String initialValue) {
+		ModelChoiceWidgetType result = ModelChoiceWidgetType.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -513,7 +513,7 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertReferenceWidgetTypeToString(EDataType eDataType, Object instanceValue) {
+	public String convertModelChoiceWidgetTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

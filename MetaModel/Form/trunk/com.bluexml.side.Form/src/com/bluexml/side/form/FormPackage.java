@@ -5563,15 +5563,14 @@ public interface FormPackage extends EPackage {
 	int CHOICE_WIDGET_TYPE = 33;
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.form.ReferenceWidgetType <em>Reference Widget Type</em>}' enum.
+	 * The meta object id for the '{@link com.bluexml.side.form.ModelChoiceWidgetType <em>Model Choice Widget Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.form.ReferenceWidgetType
-	 * @see com.bluexml.side.form.impl.FormPackageImpl#getReferenceWidgetType()
+	 * @see com.bluexml.side.form.ModelChoiceWidgetType
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getModelChoiceWidgetType()
 	 * @generated
 	 */
-	int REFERENCE_WIDGET_TYPE = 34;
-
+	int MODEL_CHOICE_WIDGET_TYPE = 34;
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.FormElement <em>Element</em>}'.
@@ -6453,14 +6452,14 @@ public interface FormPackage extends EPackage {
 	EEnum getChoiceWidgetType();
 
 	/**
-	 * Returns the meta object for enum '{@link com.bluexml.side.form.ReferenceWidgetType <em>Reference Widget Type</em>}'.
+	 * Returns the meta object for enum '{@link com.bluexml.side.form.ModelChoiceWidgetType <em>Model Choice Widget Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Reference Widget Type</em>'.
-	 * @see com.bluexml.side.form.ReferenceWidgetType
+	 * @return the meta object for enum '<em>Model Choice Widget Type</em>'.
+	 * @see com.bluexml.side.form.ModelChoiceWidgetType
 	 * @generated
 	 */
-	EEnum getReferenceWidgetType();
+	EEnum getModelChoiceWidgetType();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -7217,14 +7216,14 @@ public interface FormPackage extends EPackage {
 		EEnum CHOICE_WIDGET_TYPE = eINSTANCE.getChoiceWidgetType();
 
 		/**
-		 * The meta object literal for the '{@link com.bluexml.side.form.ReferenceWidgetType <em>Reference Widget Type</em>}' enum.
+		 * The meta object literal for the '{@link com.bluexml.side.form.ModelChoiceWidgetType <em>Model Choice Widget Type</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.form.ReferenceWidgetType
-		 * @see com.bluexml.side.form.impl.FormPackageImpl#getReferenceWidgetType()
+		 * @see com.bluexml.side.form.ModelChoiceWidgetType
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getModelChoiceWidgetType()
 		 * @generated
 		 */
-		EEnum REFERENCE_WIDGET_TYPE = eINSTANCE.getReferenceWidgetType();
+		EEnum MODEL_CHOICE_WIDGET_TYPE = eINSTANCE.getModelChoiceWidgetType();
 
 	}
 

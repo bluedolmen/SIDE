@@ -133,7 +133,7 @@ public interface ModelChoiceField extends Field, ClassReference {
 
 	/**
 	 * Returns the value of the '<em><b>Widget</b></em>' attribute.
-	 * The literals are from the enumeration {@link com.bluexml.side.form.ChoiceWidgetType}.
+	 * The literals are from the enumeration {@link com.bluexml.side.form.ModelChoiceWidgetType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Widget</em>' attribute isn't clear,
@@ -141,30 +141,27 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Definition: The 'widget' attributes provides the layout for model choice field. 
-	 * The possible values are:
-	 * - Inline: to integrate the targeted class as a  form inside the current form
-	 * - Select: to integrate the targeted  class as a widget of selection
+	 * Definition: The 'widget' attributes provides the layout for model choice field.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Widget</em>' attribute.
-	 * @see com.bluexml.side.form.ChoiceWidgetType
-	 * @see #setWidget(ChoiceWidgetType)
+	 * @see com.bluexml.side.form.ModelChoiceWidgetType
+	 * @see #setWidget(ModelChoiceWidgetType)
 	 * @see com.bluexml.side.form.FormPackage#getModelChoiceField_Widget()
 	 * @model
 	 * @generated
 	 */
-	ChoiceWidgetType getWidget();
+	ModelChoiceWidgetType getWidget();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.form.ModelChoiceField#getWidget <em>Widget</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Widget</em>' attribute.
-	 * @see com.bluexml.side.form.ChoiceWidgetType
+	 * @see com.bluexml.side.form.ModelChoiceWidgetType
 	 * @see #getWidget()
 	 * @generated
 	 */
-	void setWidget(ChoiceWidgetType value);
+	void setWidget(ModelChoiceWidgetType value);
 
 	/**
 	 * Returns the value of the '<em><b>Show actions</b></em>' attribute.

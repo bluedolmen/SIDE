@@ -56,7 +56,7 @@ public enum ChoiceWidgetType implements Enumerator {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * This option specifies a list representation: all litterals are listed in the selection window, possibly with the help of a scrollbar. Several litterals may be visible at once.
+	 * This option specifies a list representation: all literals are listed in the selection window, possibly with the help of a scrollbar. Several literals may be visible at once.
 	 * <!-- end-model-doc -->
 	 * @see #LIST_ALL
 	 * @model name="ListAll" literal="List All"
@@ -74,7 +74,7 @@ public enum ChoiceWidgetType implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * This option refers to displaying the enumeration as a combo box: only the chosen enumeration litteral is visible.
+	 * This option refers to displaying the enumeration as a combo box: only the chosen enumeration literal is visible.
 	 * <!-- end-model-doc -->
 	 * @see #SHOW_ONE
 	 * @model name="ShowOne" literal="Show One"

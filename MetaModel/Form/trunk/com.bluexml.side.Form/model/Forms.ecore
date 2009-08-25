@@ -229,9 +229,9 @@
         eType="#//FormContainer"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="association_formClass"
         upperBound="-1" eType="#//FormContainer"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="widget" eType="#//ChoiceWidgetType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="widget" eType="#//ModelChoiceWidgetType">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'widget' attributes provides the layout for model choice field. &#xD;&#xA;The possible values are:&#xD;&#xA;- Inline: to integrate the targeted class as a  form inside the current form&#xD;&#xA;- Select: to integrate the targeted  class as a widget of selection"/>
+        <details key="documentation" value="Definition: The 'widget' attributes provides the layout for model choice field."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="show_actions" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
@@ -443,23 +443,18 @@
       </eAnnotations>
     </eLiterals>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="ReferenceWidgetType">
+  <eClassifiers xsi:type="ecore:EEnum" name="ModelChoiceWidgetType">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The 'ReferenceWidgetType'  is an enumeration list with the different layout for a model choice field."/>
     </eAnnotations>
-    <eLiterals name="AssociationClassInline" literal="Association Class Inline">
+    <eLiterals name="Select" literal="Select">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'AssociationClassInline' option provides for association class a form that will be incluse in the parent form."/>
+        <details key="documentation" value="This option allows selecting the associated items using a selection list. Associated items are considered existent although they may still be created."/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="AssociationClassSelect" value="1" literal="Association Class Select">
+    <eLiterals name="Inline" value="1" literal="Inline">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'AssociationClassSelect' option provides a selection composant that allows to choose existent object of the association class."/>
-      </eAnnotations>
-    </eLiterals>
-    <eLiterals name="Inline" value="2" literal="Inline">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'Inline' option creates a form and include it in the parent form."/>
+        <details key="documentation" value="The form designed for the target class or target form is included in the parent form. Associated items can be defined directly from the currently displayed form."/>
       </eAnnotations>
     </eLiterals>
   </eClassifiers>
