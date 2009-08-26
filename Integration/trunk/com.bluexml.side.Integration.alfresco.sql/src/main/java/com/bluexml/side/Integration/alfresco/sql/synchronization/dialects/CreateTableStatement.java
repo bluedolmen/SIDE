@@ -146,14 +146,17 @@ public class CreateTableStatement {
 			if (!rs.next()) {
 				status = TableStatus.NOT_EXISTS;
 			} else {
-				logger.debug("Checking table '" + tableName + "'");
+				if (logger.isDebugEnabled())
+					logger.debug("Checking table '" + tableName + "'");
 				
 				Map<String, Integer> tableColumns = new LinkedHashMap<String, Integer>();
 				do {
 					String columnName = rs.getString("COLUMN_NAME");
 					Integer dataType = rs.getInt("DATA_TYPE");
-					String dataTypeDepName = rs.getString("TYPE_NAME");
-					logger.debug("Column '" + columnName + "' with type '" + dataTypeDepName + "'(" + dataType + ")");
+					if (logger.isDebugEnabled()) {
+						String dataTypeDepName = rs.getString("TYPE_NAME");
+						logger.debug("Column '" + columnName + "' with type '" + dataTypeDepName + "'(" + dataType + ")");
+					}
 					tableColumns.put(columnName, dataType);
 				} while (rs.next());
 				rs.close();
@@ -180,7 +183,8 @@ public class CreateTableStatement {
 			return TableStatus.NOT_CHECKABLE;
 		}
 		
-		logger.debug("Checking table output status '" + tableName + "': " + status.name());
+		if (logger.isDebugEnabled())
+			logger.debug("Checking table output status '" + tableName + "': " + status.name());
 
 		return status;
 
@@ -196,7 +200,8 @@ public class CreateTableStatement {
 			e.printStackTrace();
 		}
 		if (! createStatement.toString().equals(query)) {
-			logger.debug("Original query : " + createStatement);
+			if (logger.isDebugEnabled())
+				logger.debug("Original query : " + createStatement);
 		}
 		
 		return query;

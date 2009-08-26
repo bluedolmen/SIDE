@@ -15,21 +15,24 @@ public class CustomActionManager implements CustomAction {
 	Logger logger = Logger.getLogger(getClass());
 	
 	public void doInContentReplication(NodeRef nodeRef) {
-		logger.debug("Calling custom action content replication on node " + nodeRef);
+		if (logger.isDebugEnabled())
+			logger.debug("Calling custom action content replication on node " + nodeRef);
 		for (CustomAction createCustomAction : createCustomActions) {
 			createCustomAction.doInContentReplication(nodeRef);
 		}		
 	}
 
 	public void doInCreateAssociation(QName associationName, CreateTableStatement.Builder currentBuilder) {
-		logger.debug("Calling custom action create association on association " + associationName);
+		if (logger.isDebugEnabled())
+			logger.debug("Calling custom action create association on association " + associationName);
 		for (CustomAction createCustomAction : createCustomActions) {
 			createCustomAction.doInCreateAssociation(associationName, currentBuilder);
 		}				
 	}
 
 	public void doInCreateType(QName nodeName, CreateTableStatement.Builder currentBuilder) {
-		logger.debug("Calling custom action create type on type " + nodeName);
+		if (logger.isDebugEnabled())
+			logger.debug("Calling custom action create type on type " + nodeName);
 		for (CustomAction createCustomAction : createCustomActions) {
 			createCustomAction.doInCreateType(nodeName, currentBuilder);
 		}				
@@ -53,7 +56,8 @@ public class CustomActionManager implements CustomAction {
 	
 	public void setCustomActions(List<CustomAction> createCustomActions_) {
 		for (CustomAction createCustomAction : createCustomActions_) {
-			logger.debug("Registering custom action " + createCustomAction);
+			if (logger.isDebugEnabled())
+				logger.debug("Registering custom action " + createCustomAction);
 		}
 		
 		createCustomActions = createCustomActions_;

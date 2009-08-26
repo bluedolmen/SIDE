@@ -34,7 +34,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.bluexml.side.Integration.alfresco.sql.synchronization.common.JdbcTransactionListener;
-import com.bluexml.side.Integration.alfresco.sql.synchronization.common.NodeFilterer;
+import com.bluexml.side.Integration.alfresco.sql.synchronization.common.Filterer;
 import com.bluexml.side.Integration.alfresco.sql.synchronization.common.NodeHelper;
 import com.bluexml.side.Integration.alfresco.sql.synchronization.dialects.SynchronizationDialect;
 import com.bluexml.side.Integration.alfresco.sql.synchronization.dictionary.DatabaseDictionary;
@@ -79,7 +79,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 			iterablePropertiesKeySet.retainAll(currentTypePropertiesKeySet);
 
 			for (QName key : iterablePropertiesKeySet) {
-				if (nodeFilterer.acceptOnName(key)) {
+				if (filterer.acceptPropertyQName(key)) {
 					PropertyDefinition propertyDefinition = dictionaryService.getProperty(key);
 					String value = getSQLFormatFromSerializable(nodeProperties.get(key), propertyDefinition);
 					
@@ -127,6 +127,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		 * In terms of SQL replication, these references are a nonsense and have to be removed.
 		 * This method has a slight inconvenient since on normal deletion, the delete association methods will be
 		 * called in addition. Even if the SQL statement is harmless, this process is however useless and lose some time.
+		 * Practically, when a node is permanently deleted, no delete association policy seems to be raised...
 		 */
 		deleteAllRelatedAssociations(nodeRef);
 		
@@ -241,11 +242,11 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		Set<AssociationRef> assocs  = new HashSet<AssociationRef>();
 		assocs.addAll(nodeService.getSourceAssocs(nodeRef, RegexQNamePattern.MATCH_ALL));
 		assocs.addAll(nodeService.getTargetAssocs(nodeRef, RegexQNamePattern.MATCH_ALL));
-		assocs.removeAll(getProcessedAssociations());
+		//assocs.removeAll(getProcessedAssociations());
 		
 		for (AssociationRef assoc : assocs) {
 			if (	
-					nodeFilterer.acceptOnName(assoc.getTypeQName()) && 
+					filterer.acceptAssociationQName(assoc.getTypeQName()) && 
 					StoreRef.STORE_REF_WORKSPACE_SPACESSTORE.equals(assoc.getSourceRef().getStoreRef()) &&
 					StoreRef.STORE_REF_WORKSPACE_SPACESSTORE.equals(assoc.getTargetRef().getStoreRef())
 				) {
@@ -256,11 +257,11 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		Set<ChildAssociationRef> childAssocs = new HashSet<ChildAssociationRef>();
 		childAssocs.addAll(nodeService.getChildAssocs(nodeRef));
 		childAssocs.addAll(nodeService.getParentAssocs(nodeRef));
-		childAssocs.removeAll(getProcessedChildAssociations());
+		//childAssocs.removeAll(getProcessedChildAssociations());
 
 		for (ChildAssociationRef assoc : childAssocs) {
 			if (
-					nodeFilterer.acceptOnName(assoc.getTypeQName()) && 
+					filterer.acceptAssociationQName(assoc.getTypeQName()) && 
 					StoreRef.STORE_REF_WORKSPACE_SPACESSTORE.equals(assoc.getParentRef().getStoreRef()) &&
 					StoreRef.STORE_REF_WORKSPACE_SPACESSTORE.equals(assoc.getChildRef().getStoreRef())
 				) {
@@ -268,10 +269,23 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 			}
 		}
 		
-		setProcessed(assocs, childAssocs, OperationType.CREATE);
+		//setProcessed(assocs, childAssocs, OperationType.CREATE);
 	}
 	
-	// TODO : Refactor to create a generic operation for both create/delete-AllRelatedAssociations
+	/*
+	 * deleteAllRelatedAssociations uses a transaction support to store the processed associations.
+	 * This mechanism is used since this method is called on the trigger "beforeDelete" (triggering on
+	 * onDelete was not possible since the node is become inaccessible at this step). When cascading
+	 * delete, we might delete previously deleted associations depending on the configuration. 
+	 * More, using an approach like the one performed in the "createAllRelatedAssociations" method is
+	 * not possible since, when executed, delete method did not actually removed the node from the
+	 * workspace.
+	 * The execution of the supplementary delete statements is harmless, so the current transactional
+	 * mechanism could be removed (triggers are not raised if the delete had no effect). However,
+	 * the output would be polluted by extra delete statements and useless connections would be made to
+	 * the replicate database. A comparison in terms of time and memory performances could be performed 
+	 * to evaluate the benefits of each of the approaches.
+	 */
 	private void deleteAllRelatedAssociations(NodeRef nodeRef) {
 		Set<AssociationRef> assocs  = new HashSet<AssociationRef>();
 		assocs.addAll(nodeService.getSourceAssocs(nodeRef, RegexQNamePattern.MATCH_ALL));
@@ -279,7 +293,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		assocs.removeAll(getProcessedAssociations());
 		
 		for (AssociationRef assoc : assocs) {
-			if (nodeFilterer.acceptOnName(assoc.getTypeQName())) {
+			if (filterer.acceptAssociationQName(assoc.getTypeQName()) ) {
 				deleteAssociation(assoc.getSourceRef(), assoc.getTargetRef(), assoc.getTypeQName());
 			}
 		}
@@ -290,7 +304,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		childAssocs.removeAll(getProcessedChildAssociations());
 
 		for (ChildAssociationRef assoc : childAssocs) {
-			if (nodeFilterer.acceptOnName(assoc.getTypeQName())) {
+			if (filterer.acceptAssociationQName(assoc.getTypeQName()) ) {
 				// TODO : check whether the node has several parents => certainly a problem (warn ?) in terms of the composition semantics
 				deleteAssociation(assoc.getParentRef(), assoc.getChildRef(), assoc.getTypeQName());
 			}
@@ -366,26 +380,29 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 			Set<ChildAssociationRef> processedChildAssociationRefs = AlfrescoTransactionSupport.getResource(PROCESSED_CHILD_ASSOCIATION_REF_CONTEXT);
 			OperationType previousOperationType = AlfrescoTransactionSupport.getResource(PROCESSED_ASSOCIATIONS_OPERATION_TYPE);
 			
-			if (previousOperationType != null && previousOperationType != operationType) {
-				logger.error("Previous operation does not match the current one. In the same transaction, a mix between creating and deleting nodes cannot be performed");
-				throw new AlfrescoRuntimeException("Previous operation does not match the current one.");
+			if (previousOperationType != null) {
+				if (previousOperationType != operationType) {
+					logger.error("Previous operation does not match the current one. In the same transaction, a mix between creating and deleting nodes cannot be performed");
+					throw new AlfrescoRuntimeException("Previous operation does not match the current one.");
+				}
+			} else {
+				AlfrescoTransactionSupport.bindResource(PROCESSED_ASSOCIATIONS_OPERATION_TYPE, operationType);				
 			}
 			
 			if (processedAssociationRefs == null) {
 				processedAssociationRefs = new HashSet<AssociationRef>(associationRefs);
+				AlfrescoTransactionSupport.bindResource(PROCESSED_ASSOCIATION_REF_CONTEXT, processedAssociationRefs);
 			} else {
 				processedAssociationRefs.addAll(associationRefs);
 			}
 	
 			if (processedChildAssociationRefs == null) {
 				processedChildAssociationRefs = new HashSet<ChildAssociationRef>(childAssociationRefs);
+				AlfrescoTransactionSupport.bindResource(PROCESSED_CHILD_ASSOCIATION_REF_CONTEXT, processedChildAssociationRefs);
 			} else {
 				processedChildAssociationRefs.addAll(childAssociationRefs);
 			}
 			
-			AlfrescoTransactionSupport.bindResource(PROCESSED_ASSOCIATION_REF_CONTEXT, processedAssociationRefs);
-			AlfrescoTransactionSupport.bindResource(PROCESSED_CHILD_ASSOCIATION_REF_CONTEXT, processedChildAssociationRefs);
-			AlfrescoTransactionSupport.bindResource(PROCESSED_ASSOCIATIONS_OPERATION_TYPE, operationType);
 		}
 	}
 	
@@ -416,7 +433,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 	private DictionaryService dictionaryService;
 	private DatabaseDictionary databaseDictionary;
 	private JdbcTransactionListener transactionListener;
-	private NodeFilterer nodeFilterer;
+	private Filterer filterer;
 	private NodeHelper nodeHelper;
 	private SynchronizationDialect synchronizationDialect;
 
@@ -429,8 +446,8 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		databaseDictionary = dbd_;
 	}
 
-	public void setNodeFilterer(NodeFilterer nodeFilterer_) {
-		nodeFilterer = nodeFilterer_;
+	public void setFilterer(Filterer filterer_) {
+		filterer = filterer_;
 	}
 	
 	public void setNodeHelper(NodeHelper nodeHelper_) {

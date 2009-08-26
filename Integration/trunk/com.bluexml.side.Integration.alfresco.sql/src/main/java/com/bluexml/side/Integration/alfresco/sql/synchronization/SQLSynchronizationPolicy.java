@@ -18,12 +18,11 @@ import org.alfresco.repo.policy.Behaviour.NotificationFrequency;
 import org.alfresco.service.cmr.repository.AssociationRef;
 import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.NodeRef;
-import org.alfresco.service.cmr.repository.StoreRef;
 import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.service.namespace.QName;
 import org.apache.log4j.Logger;
 
-import com.bluexml.side.Integration.alfresco.sql.synchronization.common.NodeFilterer;
+import com.bluexml.side.Integration.alfresco.sql.synchronization.common.Filterer;
 import com.bluexml.side.Integration.alfresco.sql.synchronization.nodeService.NodeService;
 import com.bluexml.side.Integration.alfresco.sql.synchronization.schemaManagement.SchemaCreation;
 
@@ -84,7 +83,7 @@ public class SQLSynchronizationPolicy implements
 		NodeRef nodeRef = childAssociationRef.getChildRef();
 
 		// Only process bluexml nodes
-		if (acceptNodeRef(nodeRef)) {
+		if (filterer.accept(nodeRef)) {
 			logger.debug("Synchronization policy, CREATE NODE");
 			/*
 			 * Here we cannot determine whether this creation originated from a creation of a new node
@@ -97,17 +96,17 @@ public class SQLSynchronizationPolicy implements
 	}
 
 	public void beforeDeleteNode(NodeRef nodeRef) {
-		if (acceptNodeRef(nodeRef)) {
+		if (filterer.accept(nodeRef)) {
 			logger.debug("Synchronization policy, DELETE NODE");
 			synchroNodeService.delete(nodeRef);
 		}
 	}
 
 	public void onUpdateProperties(NodeRef nodeRef, Map<QName, Serializable> before_properties, Map<QName, Serializable> after_properties) {
-		if (acceptNodeRef(nodeRef)) {
+		if (filterer.accept(nodeRef)) {
 			Map<QName, Serializable> changes = new HashMap<QName, Serializable>();
 			for (QName key : after_properties.keySet()) {
-				if (nodeFilterer.acceptOnName(key)) {
+				if (filterer.acceptPropertyQName(key)) {
 					if (
 							!before_properties.containsKey(key) || // new property
 							before_properties.get(key) == null ||  // a property with null value: trick to avoid null pointer exception on the next checking
@@ -131,14 +130,14 @@ public class SQLSynchronizationPolicy implements
 	}
 
 	public void onCreateAssociation(AssociationRef associationRef) {
-		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {
+		if (filterer.accept(associationRef)) {
 			logger.debug("Synchronization policy, CREATE ASSOCIATION");
 			synchroNodeService.createAssociation(associationRef.getSourceRef(), associationRef.getTargetRef(), associationRef.getTypeQName());
 		}
 	}
 	
 	public void onDeleteAssociation(AssociationRef associationRef) {
-		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {
+		if (filterer.accept(associationRef)) {
 			logger.debug("Synchronization policy, DELETE ASSOCIATION");
 			synchroNodeService.deleteAssociation(associationRef.getSourceRef(), associationRef.getTargetRef(), associationRef.getTypeQName());
 		}
@@ -146,14 +145,14 @@ public class SQLSynchronizationPolicy implements
 
 	public void onCreateChildAssociation(ChildAssociationRef associationRef,
 			boolean isNewNode) {
-		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {
+		if (filterer.accept(associationRef)) {
 			logger.debug("Synchronization policy, CREATE CHILD ASSOCIATION");
 			synchroNodeService.createAssociation(associationRef.getParentRef(), associationRef.getChildRef(), associationRef.getTypeQName());
 		}
 	}
 
 	public void onDeleteChildAssociation(ChildAssociationRef associationRef) {
-		if (nodeFilterer.acceptOnName(associationRef.getTypeQName())) {
+		if (filterer.accept(associationRef)) {
 
 			logger.debug("Synchronization policy, DELETE CHILD ASSOCIATION");
 			synchroNodeService.deleteAssociation(associationRef.getParentRef(), associationRef.getChildRef(), associationRef.getTypeQName());
@@ -163,51 +162,12 @@ public class SQLSynchronizationPolicy implements
 	/*
 	 * Helper methods
 	 */
-	
-	/*
-	 * Nodes are accepted if they belongs to the workspace space store and if the name is correctly filtered by the node filterer
-	 */
-	private boolean acceptNodeRef (NodeRef nodeRef) {
-		return StoreRef.STORE_REF_WORKSPACE_SPACESSTORE.equals(nodeRef.getStoreRef()) && nodeFilterer.acceptOnName(nodeService.getType(nodeRef));
-	}
-	
-//	private void createAllRelatedAssociations(NodeRef nodeRef) {
-//		Set<AssociationRef> assocs  = new HashSet<AssociationRef>();
-//		assocs.addAll(nodeService.getSourceAssocs(nodeRef, RegexQNamePattern.MATCH_ALL));
-//		assocs.addAll(nodeService.getTargetAssocs(nodeRef, RegexQNamePattern.MATCH_ALL));
-//		
-//		for (AssociationRef assoc : assocs) {
-//			if (
-//					nodeFilterer.acceptOnName(assoc.getTypeQName()) && 
-//					assoc.getSourceRef().getStoreRef() == StoreRef.STORE_REF_WORKSPACE_SPACESSTORE &&
-//					assoc.getTargetRef().getStoreRef() == StoreRef.STORE_REF_WORKSPACE_SPACESSTORE
-//				) {
-//				synchroNodeService.createAssociation(assoc.getSourceRef(), assoc.getTargetRef(), assoc.getTypeQName());
-//			}
-//		}
-//		
-//		Set<ChildAssociationRef> childAssocs = new HashSet<ChildAssociationRef>();
-//		childAssocs.addAll(nodeService.getChildAssocs(nodeRef));
-//		childAssocs.addAll(nodeService.getParentAssocs(nodeRef));
-//
-//		for (ChildAssociationRef assoc : childAssocs) {
-//			if (
-//					nodeFilterer.acceptOnName(assoc.getTypeQName()) && 
-//					assoc.getParentRef().getStoreRef() == StoreRef.STORE_REF_WORKSPACE_SPACESSTORE &&
-//					assoc.getChildRef().getStoreRef() == StoreRef.STORE_REF_WORKSPACE_SPACESSTORE
-//				) {
-//				synchroNodeService.createAssociation(assoc.getParentRef(), assoc.getChildRef(), assoc.getTypeQName());
-//			}
-//		}
-//	}
-
-	
+		
 	/*
 	 * Spring IoC/DI material
 	 */
 	private PolicyComponent policyComponent;
-	private org.alfresco.service.cmr.repository.NodeService nodeService;
-	private NodeFilterer nodeFilterer;
+	private Filterer filterer;
 	private NodeService synchroNodeService; /* BlueXML NodeService */
 	private SchemaCreation schemaCreation;
 	
@@ -215,12 +175,8 @@ public class SQLSynchronizationPolicy implements
 		policyComponent = policyComponent_;
 	}
 	
-	public void setNodeService(org.alfresco.service.cmr.repository.NodeService nodeService_) {
-		nodeService = nodeService_;
-	}
-	
-	public void setNodeFilterer(NodeFilterer nodeFilterer_) {
-		nodeFilterer = nodeFilterer_;
+	public void setFilterer(Filterer filterer_) {
+		filterer = filterer_;
 	}
 	
 	public void setSynchroNodeService(NodeService nodeService_) {

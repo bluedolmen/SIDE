@@ -9,7 +9,8 @@ public class TruncateRenamingStrategy extends AbstractRenamingStrategy {
 		String result = tableName.substring(0, maxLength);
 
 		if (maxTableNameLength < tableNameLength) {
-			logger.debug("Truncating table name \"" + tableName + "\" to \"" + result + "\"");
+			if (logger.isInfoEnabled())
+				logger.info("Truncating table name \"" + tableName + "\" to \"" + result + "\"");
 		}
 		return result;
 	}

@@ -26,10 +26,12 @@ public abstract class AbstractRenamingStrategy {
 			dmd = connection.getMetaData();			
 			
 			maxTableNameLength = dmd.getMaxTableNameLength();
-			logger.debug("Support max table name length = " + maxTableNameLength);
+			if (logger.isDebugEnabled())
+				logger.debug("Support max table name length = " + maxTableNameLength);
 
 			maxColumnNameLength = dmd.getMaxColumnNameLength();
-			logger.debug("Support max column name length = " + maxColumnNameLength);
+			if (logger.isDebugEnabled())
+				logger.debug("Support max column name length = " + maxColumnNameLength);
 			
 			connection.close();
 			

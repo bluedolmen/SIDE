@@ -24,17 +24,19 @@ public class JdbcTransactionListener implements TransactionListener {
 		Connection connection = (Connection) AlfrescoTransactionSupport.getResource(SYNCHRO_CONTEXT_KEY);
         if (connection == null)
         {
-        	logger.debug("Creating new connection for transaction with id " + AlfrescoTransactionSupport.getTransactionId());
+        	if (logger.isDebugEnabled())
+        		logger.debug("Creating new connection for transaction with id " + AlfrescoTransactionSupport.getTransactionId());
         	connection = DataSourceUtils.getConnection(dataSource);
         	try {
 				connection.setAutoCommit(false);
 			} catch (SQLException e) {
-				logger.debug("Cannot set autocommit mode on the connection");
-				logger.debug(e.getMessage());
+				logger.error("Cannot set autocommit mode on the connection");
+				logger.debug(e);
 			}
             AlfrescoTransactionSupport.bindResource(SYNCHRO_CONTEXT_KEY, connection);
             AlfrescoTransactionSupport.bindListener(this);
-            logger.debug("Attached connection to transaction " + AlfrescoTransactionSupport.getTransactionId());
+            if (logger.isDebugEnabled())
+            	logger.debug("Attached connection to transaction " + AlfrescoTransactionSupport.getTransactionId());
         }
         return connection;
 	}
@@ -56,10 +58,12 @@ public class JdbcTransactionListener implements TransactionListener {
 		Statement st = null;
 		int rowCount = -1;
 		try {
-			logger.debug("[executeSQLQuery] " + sqlQuery);
+			if (logger.isDebugEnabled())
+				logger.debug("[executeSQLQuery] " + sqlQuery);
 			st = connection.createStatement();
 			rowCount = st.executeUpdate(sqlQuery);
-			logger.debug("[executeSQLQuery] Row count: " + rowCount);
+			if (logger.isDebugEnabled())
+				logger.debug("[executeSQLQuery] Row count: " + rowCount);
 		} catch (SQLException e) {
 			logger.error("[executeSQLQuery]", e);
 			throw(e);
@@ -87,7 +91,8 @@ public class JdbcTransactionListener implements TransactionListener {
 			try {
 				st = connection.createStatement();
 				for (String sqlQuery : sqlQueries) {
-					logger.debug("[executeSQLQuery(List<String>)] " + sqlQuery);
+					if (logger.isDebugEnabled())
+						logger.debug("[executeSQLQuery(List<String>)] " + sqlQuery);
 					st.addBatch(sqlQuery);
 				}
 				rowCount = st.executeBatch();
@@ -116,7 +121,8 @@ public class JdbcTransactionListener implements TransactionListener {
 	}
 
 	public void afterCommit() {
-		logger.debug("[afterCommit]" + AlfrescoTransactionSupport.getTransactionId());
+//		if (logger.isDebugEnabled())
+//			logger.debug("[afterCommit]" + AlfrescoTransactionSupport.getTransactionId());
 		Connection connection = getConnection();
 		try {
 			connection.commit();
@@ -127,28 +133,31 @@ public class JdbcTransactionListener implements TransactionListener {
 			 */
 			logger.error("COMMIT INTO THE SYNCHRONIZATION DATABASE FAILED! THE DATABASE IS NOW UNCONSISTENT...", e);
 		} finally {
-			logger.debug("[afterCommit] Releasing existing connection");
+			if (logger.isDebugEnabled())
+				logger.debug("[afterCommit] Releasing existing connection");
 			releaseConnection(connection);
 		}
 	}
 
 	public void afterRollback() {
 		Connection connection = getConnection();
-		logger.debug("[afterRollback] on " + connection);
+//		if (logger.isDebugEnabled())
+//			logger.debug("[afterRollback] on " + connection);
 		try {
 			connection.rollback();
 		} catch (SQLException e) {
 			logger.error("[afterRollback]", e);
 		} finally {
-			logger.debug("[afterRollback] Releasing existing connection");
+			if (logger.isDebugEnabled())
+				logger.debug("[afterRollback] Releasing existing connection");
 			releaseConnection(connection);
 		}
 	}
 
 	public void beforeCommit(boolean readOnly) {
-		if (!readOnly) {
-			logger.debug("[beforeCommit] " + AlfrescoTransactionSupport.getTransactionId());
-		}
+//		if (!readOnly) {
+//			logger.debug("[beforeCommit] " + AlfrescoTransactionSupport.getTransactionId());
+//		}
 	}
 
 	public void beforeCompletion() {

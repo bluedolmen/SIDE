@@ -12,6 +12,7 @@ import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.search.SearchService;
 import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.service.namespace.QName;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.bluexml.side.Integration.alfresco.sql.synchronization.common.SqlCommon;
@@ -64,8 +65,10 @@ public class PathSynchronizationPolicy implements
 		pathService.updatePath(childNodeRef);
 
 		List<NodeRef> descendantsNodeRef = searchService.selectNodes(childNodeRef, "*//.", null, namespaceService, false);
+		if (logger.isDebugEnabled()) {
+			logger.debug("Descendants: [" + StringUtils.join(descendantsNodeRef.iterator(), ",") + "]");
+		}
 		for (NodeRef nodeRef : descendantsNodeRef) {
-			logger.debug("Descendant: " + nodeRef);		
 			pathService.updatePath(nodeRef);			
 		}
 	}

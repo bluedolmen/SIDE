@@ -23,7 +23,7 @@ public class NodeHelper {
 
 		QName currentType = nodeService.getType(nodeRef);
 
-		while (nodeFilterer.acceptOnName(currentType)) {
+		while (filterer.acceptTypeQName(currentType)) {
 			result.add(currentType);
 			TypeDefinition nodeRefTypeDefinition = dictionaryService.getType(currentType);
 			if (nodeRefTypeDefinition == null ) {
@@ -43,7 +43,7 @@ public class NodeHelper {
 	// Dependencies
 	private NodeService nodeService;
 	private DictionaryService dictionaryService;
-	private NodeFilterer nodeFilterer;
+	private Filterer filterer;
 
 	public void setNodeService(NodeService nodeService_) {
 		nodeService = nodeService_;
@@ -53,8 +53,8 @@ public class NodeHelper {
 		dictionaryService = dictionaryService_;
 	}
 
-	public void setNodeFilterer(NodeFilterer nodeFilterer_) {
-		nodeFilterer = nodeFilterer_;
+	public void setFilterer(Filterer filterer_) {
+		filterer = filterer_;
 	}
 	
 

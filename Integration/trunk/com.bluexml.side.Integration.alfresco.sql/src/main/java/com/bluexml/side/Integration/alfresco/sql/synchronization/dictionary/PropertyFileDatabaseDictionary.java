@@ -146,7 +146,8 @@ public class PropertyFileDatabaseDictionary implements BidirectionalDatabaseDict
 		String result = (String) _dictionary.get(key);
 		
 		if (result == null) {
-			logger.debug("Cannot find any translation for the key \"" + key + "\"");
+			if (logger.isDebugEnabled())
+				logger.debug("Cannot find any translation for the key \"" + key + "\"");
 		}
 		return result;
 	}
@@ -163,7 +164,8 @@ public class PropertyFileDatabaseDictionary implements BidirectionalDatabaseDict
 		String result =  _reverseNameDictionary.get(value);
 		
 		if (result == null) {
-			logger.debug("Cannot find any reverse translation for the value \"" + value + "\"");
+			if (logger.isDebugEnabled())
+				logger.debug("Cannot find any reverse translation for the value \"" + value + "\"");
 		}
 		return result;
 	}
@@ -213,7 +215,8 @@ public class PropertyFileDatabaseDictionary implements BidirectionalDatabaseDict
 		try {
 			Resource[] resources = _resolver.getResources(resourcePattern);
 			for (Resource r : resources) {
-				logger.debug("Loading resource " + r.getDescription());
+				if (logger.isDebugEnabled())
+					logger.debug("Loading resource " + r.getDescription());
 				_loadResource(r);
 			}
 		} catch (IOException e) {

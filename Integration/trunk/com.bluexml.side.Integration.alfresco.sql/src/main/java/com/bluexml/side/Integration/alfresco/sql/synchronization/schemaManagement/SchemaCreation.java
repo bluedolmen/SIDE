@@ -29,7 +29,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
-import com.bluexml.side.Integration.alfresco.sql.synchronization.common.NodeFilterer;
+import com.bluexml.side.Integration.alfresco.sql.synchronization.common.Filterer;
 import com.bluexml.side.Integration.alfresco.sql.synchronization.common.SqlCommon.TableType;
 import com.bluexml.side.Integration.alfresco.sql.synchronization.dialects.CreateTableStatement;
 import com.bluexml.side.Integration.alfresco.sql.synchronization.dialects.SynchronizationDialect;
@@ -87,7 +87,8 @@ public class SchemaCreation implements DictionaryListener {
 			
 			DataSourceUtils.releaseConnection(connection, dataSource);
 		} else {
-			logger.debug("Replication of model \"" + modelName + "\" was not performed since the previous process marked the schema as not ready");
+			if (logger.isDebugEnabled())
+				logger.debug("Replication of model \"" + modelName + "\" was not performed since the previous process marked the schema as not ready");
 		}
 	}
 	
@@ -113,14 +114,14 @@ public class SchemaCreation implements DictionaryListener {
 		List<CreateTableStatement> createStatements = new ArrayList<CreateTableStatement>();
 		
 		for (QName type : dictionaryService.getTypes(modelName)) {
-			if (nodeFilterer.acceptOnName(type)) {
+			if (filterer.acceptTypeQName(type)) {
 				CreateTableStatement currentCreateStatement = createClass(type); 								
 				createStatements.add(currentCreateStatement);
 			}
 		}
 
 		for (QName associationName : dictionaryService.getAssociations(modelName)) {
-			if (nodeFilterer.acceptOnName(associationName)) {
+			if (filterer.acceptAssociationQName(associationName)) {
 				ClassDefinition sourceClassDefinition = dictionaryService.getAssociation(associationName).getSourceClass();
 				ClassDefinition targetClassDefinition = dictionaryService.getAssociation(associationName).getTargetClass();
 				
@@ -173,7 +174,8 @@ public class SchemaCreation implements DictionaryListener {
 			ready = false;
 		}
 		
-		logger.debug("Global checking status: " + status.name());
+		if (logger.isDebugEnabled())
+			logger.debug("Global checking status: " + status.name());
 		return status;
 	}
 	
@@ -231,7 +233,7 @@ public class SchemaCreation implements DictionaryListener {
 			QName propertyName = propertyDefinition.getName(); 
 			// TODO : perform checking of existing table here (availability of the current Java type)
 			
-			if (nodeFilterer.acceptOnName(propertyName)) {
+			if (filterer.acceptPropertyQName(propertyName)) {
 				List<String> options = new ArrayList<String>();			
 				String sqlType = synchronizationDialect.getSQLMapping(propertyDefinition);
 				options.add(sqlType);
@@ -302,13 +304,15 @@ public class SchemaCreation implements DictionaryListener {
 		logger.debug("Checking for new model to replicate in synchronization database");
 		Set<QName> acceptableModelNames = new HashSet<QName>();
 		for (QName modelName : dictionaryDAO.getModels()) {
-			if (nodeFilterer.acceptOnName(modelName)) {
+			if (filterer.acceptModelQName(modelName)) {
 				acceptableModelNames.add(modelName);
 			}
 		}
-		logger.debug("Acceptable models: " + StringUtils.join(acceptableModelNames.iterator(),","));
+		if (logger.isDebugEnabled())
+			logger.debug("Acceptable models: [" + StringUtils.join(acceptableModelNames.iterator(),",") + "]");
 		acceptableModelNames.removeAll(replicatedModels);
-		logger.debug("New models: " + StringUtils.join(acceptableModelNames.iterator(),","));
+		if (logger.isDebugEnabled())
+			logger.debug("New models: [" + StringUtils.join(acceptableModelNames.iterator(),",") + "]");
 		
 		for (QName modelName : acceptableModelNames) {
 			processModel(modelName);
@@ -333,7 +337,8 @@ public class SchemaCreation implements DictionaryListener {
 			
 			String dbname = dmd.getDatabaseProductName();
 			String dbversion = dmd.getDatabaseProductVersion();
-			logger.debug("Running sql synchronization on " + dbname + " " + dbversion);
+			if (logger.isDebugEnabled())
+				logger.debug("Running sql synchronization on " + dbname + " " + dbversion);
 			
 		} catch (SQLException e) {
 			logger.error(e);
@@ -350,7 +355,7 @@ public class SchemaCreation implements DictionaryListener {
 	private DataSource dataSource;
 	private DictionaryService dictionaryService;
 	private DatabaseDictionary databaseDictionary;
-	private NodeFilterer nodeFilterer;
+	private Filterer filterer;
 	private ContentReplication contentReplication;
 	private TransactionService transactionService;
 	private SynchronizationDialect synchronizationDialect;
@@ -369,8 +374,8 @@ public class SchemaCreation implements DictionaryListener {
 		databaseDictionary = databaseDictionary_;
 	}
 	
-	public void setNodeFilterer(NodeFilterer nodeFilterer_) {
-		nodeFilterer = nodeFilterer_;
+	public void setFilterer(Filterer filterer_) {
+		filterer = filterer_;
 	}
 	
 	public void setContentReplication (ContentReplication contentReplication_) {
