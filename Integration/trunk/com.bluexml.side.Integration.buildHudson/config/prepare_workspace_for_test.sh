@@ -26,7 +26,7 @@ cp -R $SOURCE_WORKSPACE/* $TARGET_WORKSPACE
 
 # create file for the result
 touch $OUTPUT_FILE
-cho "<html><head><title>S-IDE Automatic Tests</title></head>" >> $OUTPUT_FILE
+echo "<html><head><title>S-IDE Automatic Tests</title></head>" >> $OUTPUT_FILE
 echo "<body><h1>S-IDE Automatic Generator tests</h1>" >> $OUTPUT_FILE
 
 exit 0
