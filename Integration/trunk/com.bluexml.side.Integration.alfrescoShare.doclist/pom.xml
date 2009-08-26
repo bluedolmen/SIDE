@@ -16,7 +16,7 @@
 		<extensions>
 			<extension>
 				<groupId>com.bluexml.side.Integration.m2</groupId>
-				<artifactId>com.bluexml.side.Integration.m2.zipPackage</artifactId>
+				<artifactId>zipPackage</artifactId>
 				<version>1.0</version>
 			</extension>
 		</extensions>

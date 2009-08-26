@@ -128,6 +128,22 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.0.3</version>
 		</dependency>
+		<!--
+		<dependency>
+			<groupId>com.bluexml.side.Integration.alfresco</groupId>
+			<artifactId>model</artifactId>
+			<version>[1.0.1,)</version>
+			<type>amp</type>
+		</dependency>
+		<dependency>
+			<groupId>com.bluexml.side.Integration.alfresco</groupId>
+			<artifactId>model</artifactId>
+			<version>[1.0.1,)</version>
+			<type>jar</type>
+			<classifier>classes</classifier>
+			<scope>provided</scope>
+		</dependency>
+		-->
 		<!-- Don't add here amp dependencies as it will break amp packaging -->
 	</dependencies>
 	<version>1.0.5</version>
@@ -169,11 +185,14 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.alfresco.maven.plugin</groupId>
-				<artifactId>maven-amp-plugin</artifactId>
-				<version>2.0.0</version>
+				<groupId>com.bluexml.side.Integration.m2</groupId>
+				<artifactId>ampMojo</artifactId>
+				<version>1.0</version>
 				<extensions>true</extensions>
 				<configuration>
+					<dependentAmpExcludes>**</dependentAmpExcludes>
+					<dependentAmpIncludes></dependentAmpIncludes>
+					<attachClasses>true</attachClasses>
 					<archive>
 						<addMavenDescriptor>false</addMavenDescriptor>
 					</archive>
