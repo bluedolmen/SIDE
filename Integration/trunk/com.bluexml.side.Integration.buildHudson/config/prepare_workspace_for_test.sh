@@ -22,7 +22,7 @@ if [ $DF_HOME -gt $FULL ]; then
  exit -1
 fi
 # prepare workspace: copy build.properties, script, jar into working space
-cp -R $SOURCE_WORKSPACE/* $TARGET_WORKSPACE
+cp -R $SOURCE_WORKSPACE/ $TARGET_WORKSPACE
 
 # create file for the result
 touch $OUTPUT_FILE
