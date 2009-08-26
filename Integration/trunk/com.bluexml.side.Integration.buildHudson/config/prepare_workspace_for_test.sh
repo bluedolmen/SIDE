@@ -14,6 +14,7 @@ fi
 
 # delete workingcopy repository
 rm -rf $TARGET_WORKSPACE/com.bluexml.Integration.testAuto
+mkdir $TARGET_WORKSPACE/com.bluexml.Integration.testAuto
 
 #$DF_HOME=`df -k | grep -i /home | awk '{print $5}'|cut -d"%" -f1 |while read LINE; do
 DF_HOME=`df -k | grep -i /home | awk '{print $5}'|cut -d"%" -f1`
