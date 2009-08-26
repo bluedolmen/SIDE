@@ -791,6 +791,24 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getModelChoiceField_Format_pattern() {
+		return (EAttribute)modelChoiceFieldEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getModelChoiceField_Label_length() {
+		return (EAttribute)modelChoiceFieldEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEmailField() {
 		return emailFieldEClass;
 	}
@@ -1228,6 +1246,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		createEReference(modelChoiceFieldEClass, MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS);
 		createEAttribute(modelChoiceFieldEClass, MODEL_CHOICE_FIELD__WIDGET);
 		createEAttribute(modelChoiceFieldEClass, MODEL_CHOICE_FIELD__SHOW_ACTIONS);
+		createEAttribute(modelChoiceFieldEClass, MODEL_CHOICE_FIELD__FORMAT_PATTERN);
+		createEAttribute(modelChoiceFieldEClass, MODEL_CHOICE_FIELD__LABEL_LENGTH);
 
 		emailFieldEClass = createEClass(EMAIL_FIELD);
 
@@ -1422,6 +1442,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEReference(getModelChoiceField_Association_formClass(), this.getFormContainer(), null, "association_formClass", null, 0, -1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getModelChoiceField_Widget(), this.getModelChoiceWidgetType(), "widget", null, 0, 1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getModelChoiceField_Show_actions(), ecorePackage.getEBoolean(), "show_actions", "true", 0, 1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModelChoiceField_Format_pattern(), ecorePackage.getEString(), "format_pattern", null, 0, 1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModelChoiceField_Label_length(), ecorePackage.getEInt(), "label_length", "0", 0, 1, ModelChoiceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(emailFieldEClass, EmailField.class, "EmailField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1533,7 +1555,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "MinSuperiorToMax"
-		   });																																																	
+		   });																																																			
 		addAnnotation
 		  (classReferenceEClass, 
 		   source, 
@@ -1585,7 +1607,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "MinSuperiorToMax", "self.min_length <= self.max_length"
-		   });																																															
+		   });																																																	
 		addAnnotation
 		  (classReferenceEClass, 
 		   source, 
@@ -1625,7 +1647,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "name", "presentation"
-		   });																																																																																						
+		   });																																																																																								
 	}
 
 	public FormFactory getFormsFactory() {

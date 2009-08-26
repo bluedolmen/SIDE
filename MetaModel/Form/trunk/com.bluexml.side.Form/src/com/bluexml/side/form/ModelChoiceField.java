@@ -31,6 +31,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.bluexml.side.form.ModelChoiceField#getAssociation_formClass <em>Association form Class</em>}</li>
  *   <li>{@link com.bluexml.side.form.ModelChoiceField#getWidget <em>Widget</em>}</li>
  *   <li>{@link com.bluexml.side.form.ModelChoiceField#isShow_actions <em>Show actions</em>}</li>
+ *   <li>{@link com.bluexml.side.form.ModelChoiceField#getFormat_pattern <em>Format pattern</em>}</li>
+ *   <li>{@link com.bluexml.side.form.ModelChoiceField#getLabel_length <em>Label length</em>}</li>
  * </ul>
  * </p>
  *
@@ -192,5 +194,64 @@ public interface ModelChoiceField extends Field, ClassReference {
 	 * @generated
 	 */
 	void setShow_actions(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Format pattern</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Format pattern</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Specifies how items of the list are displayed. Contains plain text and/or references to properties of the target class.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Format pattern</em>' attribute.
+	 * @see #setFormat_pattern(String)
+	 * @see com.bluexml.side.form.FormPackage#getModelChoiceField_Format_pattern()
+	 * @model
+	 * @generated
+	 */
+	String getFormat_pattern();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.form.ModelChoiceField#getFormat_pattern <em>Format pattern</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Format pattern</em>' attribute.
+	 * @see #getFormat_pattern()
+	 * @generated
+	 */
+	void setFormat_pattern(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Label length</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Label length</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The maximum allowable length for formatted labels, always enforced (independently of whether a format pattern is specified). If 0, no truncating is performed. 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Label length</em>' attribute.
+	 * @see #setLabel_length(int)
+	 * @see com.bluexml.side.form.FormPackage#getModelChoiceField_Label_length()
+	 * @model default="0" unique="false"
+	 * @generated
+	 */
+	int getLabel_length();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.form.ModelChoiceField#getLabel_length <em>Label length</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Label length</em>' attribute.
+	 * @see #getLabel_length()
+	 * @generated
+	 */
+	void setLabel_length(int value);
 
 } // ModelChoiceField

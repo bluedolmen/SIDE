@@ -43,6 +43,8 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *   <li>{@link com.bluexml.side.form.impl.ModelChoiceFieldImpl#getAssociation_formClass <em>Association form Class</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.ModelChoiceFieldImpl#getWidget <em>Widget</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.ModelChoiceFieldImpl#isShow_actions <em>Show actions</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.ModelChoiceFieldImpl#getFormat_pattern <em>Format pattern</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.ModelChoiceFieldImpl#getLabel_length <em>Label length</em>}</li>
  * </ul>
  * </p>
  *
@@ -168,6 +170,46 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * @ordered
 	 */
 	protected boolean show_actions = SHOW_ACTIONS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getFormat_pattern() <em>Format pattern</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFormat_pattern()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String FORMAT_PATTERN_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getFormat_pattern() <em>Format pattern</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFormat_pattern()
+	 * @generated
+	 * @ordered
+	 */
+	protected String format_pattern = FORMAT_PATTERN_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLabel_length() <em>Label length</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabel_length()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int LABEL_LENGTH_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getLabel_length() <em>Label length</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabel_length()
+	 * @generated
+	 * @ordered
+	 */
+	protected int label_length = LABEL_LENGTH_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -377,6 +419,48 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getFormat_pattern() {
+		return format_pattern;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFormat_pattern(String newFormat_pattern) {
+		String oldFormat_pattern = format_pattern;
+		format_pattern = newFormat_pattern;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.MODEL_CHOICE_FIELD__FORMAT_PATTERN, oldFormat_pattern, format_pattern));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getLabel_length() {
+		return label_length;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLabel_length(int newLabel_length) {
+		int oldLabel_length = label_length;
+		label_length = newLabel_length;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.MODEL_CHOICE_FIELD__LABEL_LENGTH, oldLabel_length, label_length));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -398,6 +482,10 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 				return getWidget();
 			case FormPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
 				return isShow_actions() ? Boolean.TRUE : Boolean.FALSE;
+			case FormPackage.MODEL_CHOICE_FIELD__FORMAT_PATTERN:
+				return getFormat_pattern();
+			case FormPackage.MODEL_CHOICE_FIELD__LABEL_LENGTH:
+				return new Integer(getLabel_length());
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -437,6 +525,12 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 			case FormPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
 				setShow_actions(((Boolean)newValue).booleanValue());
 				return;
+			case FormPackage.MODEL_CHOICE_FIELD__FORMAT_PATTERN:
+				setFormat_pattern((String)newValue);
+				return;
+			case FormPackage.MODEL_CHOICE_FIELD__LABEL_LENGTH:
+				setLabel_length(((Integer)newValue).intValue());
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -473,6 +567,12 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 			case FormPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
 				setShow_actions(SHOW_ACTIONS_EDEFAULT);
 				return;
+			case FormPackage.MODEL_CHOICE_FIELD__FORMAT_PATTERN:
+				setFormat_pattern(FORMAT_PATTERN_EDEFAULT);
+				return;
+			case FormPackage.MODEL_CHOICE_FIELD__LABEL_LENGTH:
+				setLabel_length(LABEL_LENGTH_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -501,6 +601,10 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 				return widget != WIDGET_EDEFAULT;
 			case FormPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
 				return show_actions != SHOW_ACTIONS_EDEFAULT;
+			case FormPackage.MODEL_CHOICE_FIELD__FORMAT_PATTERN:
+				return FORMAT_PATTERN_EDEFAULT == null ? format_pattern != null : !FORMAT_PATTERN_EDEFAULT.equals(format_pattern);
+			case FormPackage.MODEL_CHOICE_FIELD__LABEL_LENGTH:
+				return label_length != LABEL_LENGTH_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -557,6 +661,10 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 		result.append(widget);
 		result.append(", show_actions: ");
 		result.append(show_actions);
+		result.append(", format_pattern: ");
+		result.append(format_pattern);
+		result.append(", label_length: ");
+		result.append(label_length);
 		result.append(')');
 		return result.toString();
 	}

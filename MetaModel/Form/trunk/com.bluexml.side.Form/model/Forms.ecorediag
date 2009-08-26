@@ -275,6 +275,14 @@
         <element xmi:type="ecore:EAttribute" href="Forms.ecore#//ModelChoiceField/show_actions"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_UHTbk4nyEd6TQdKNtqitYA"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_ksNKMJJOEd6greoUBZv5nQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="Forms.ecore#//ModelChoiceField/format_pattern"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ksNKMZJOEd6greoUBZv5nQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_18xTEJJOEd6greoUBZv5nQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="Forms.ecore#//ModelChoiceField/label_length"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_18xTEZJOEd6greoUBZv5nQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_UHTblInyEd6TQdKNtqitYA"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_UHTblYnyEd6TQdKNtqitYA"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_UHTblonyEd6TQdKNtqitYA"/>

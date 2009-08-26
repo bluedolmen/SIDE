@@ -69,6 +69,8 @@ public class ModelChoiceFieldItemProvider
 			addAssociation_formClassPropertyDescriptor(object);
 			addWidgetPropertyDescriptor(object);
 			addShow_actionsPropertyDescriptor(object);
+			addFormat_patternPropertyDescriptor(object);
+			addLabel_lengthPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -250,6 +252,50 @@ public class ModelChoiceFieldItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Format pattern feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addFormat_patternPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ModelChoiceField_format_pattern_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ModelChoiceField_format_pattern_feature", "_UI_ModelChoiceField_type"),
+				 FormPackage.Literals.MODEL_CHOICE_FIELD__FORMAT_PATTERN,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Label length feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLabel_lengthPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ModelChoiceField_label_length_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ModelChoiceField_label_length_feature", "_UI_ModelChoiceField_type"),
+				 FormPackage.Literals.MODEL_CHOICE_FIELD__LABEL_LENGTH,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns ModelChoiceField.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -289,6 +335,8 @@ public class ModelChoiceFieldItemProvider
 			case FormPackage.MODEL_CHOICE_FIELD__MAX_BOUND:
 			case FormPackage.MODEL_CHOICE_FIELD__WIDGET:
 			case FormPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
+			case FormPackage.MODEL_CHOICE_FIELD__FORMAT_PATTERN:
+			case FormPackage.MODEL_CHOICE_FIELD__LABEL_LENGTH:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

@@ -240,6 +240,17 @@
         <details key="documentation" value="Definition: The 'Show_actions' attribute specifies that the action field ‘edit’, ‘create’, ‘delete’ or others are available if true or are not visible if false. If false, this allows to integrated read-only sub-form."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="format_pattern" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Specifies how items of the list are displayed. Contains plain text and/or references to properties of the target class."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label_length" unique="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The maximum allowable length for formatted labels, always enforced (independently of whether a format pattern is specified). If 0, no truncating is performed. "/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EmailField" eSuperTypes="#//CharField">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

@@ -2082,13 +2082,31 @@ public interface FormPackage extends EPackage {
 	int MODEL_CHOICE_FIELD__SHOW_ACTIONS = FIELD_FEATURE_COUNT + 7;
 
 	/**
+	 * The feature id for the '<em><b>Format pattern</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_FIELD__FORMAT_PATTERN = FIELD_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Label length</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_FIELD__LABEL_LENGTH = FIELD_FEATURE_COUNT + 9;
+
+	/**
 	 * The number of structural features of the '<em>Model Choice Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_CHOICE_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 8;
+	int MODEL_CHOICE_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 10;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.EmailFieldImpl <em>Email Field</em>}' class.
@@ -3944,6 +3962,24 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int REFERENCE__SHOW_ACTIONS = MODEL_CHOICE_FIELD__SHOW_ACTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Format pattern</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__FORMAT_PATTERN = MODEL_CHOICE_FIELD__FORMAT_PATTERN;
+
+	/**
+	 * The feature id for the '<em><b>Label length</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__LABEL_LENGTH = MODEL_CHOICE_FIELD__LABEL_LENGTH;
 
 	/**
 	 * The number of structural features of the '<em>Reference</em>' class.
@@ -6046,6 +6082,28 @@ public interface FormPackage extends EPackage {
 	EAttribute getModelChoiceField_Show_actions();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.ModelChoiceField#getFormat_pattern <em>Format pattern</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Format pattern</em>'.
+	 * @see com.bluexml.side.form.ModelChoiceField#getFormat_pattern()
+	 * @see #getModelChoiceField()
+	 * @generated
+	 */
+	EAttribute getModelChoiceField_Format_pattern();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.ModelChoiceField#getLabel_length <em>Label length</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Label length</em>'.
+	 * @see com.bluexml.side.form.ModelChoiceField#getLabel_length()
+	 * @see #getModelChoiceField()
+	 * @generated
+	 */
+	EAttribute getModelChoiceField_Label_length();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.EmailField <em>Email Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6856,6 +6914,22 @@ public interface FormPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MODEL_CHOICE_FIELD__SHOW_ACTIONS = eINSTANCE.getModelChoiceField_Show_actions();
+
+		/**
+		 * The meta object literal for the '<em><b>Format pattern</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODEL_CHOICE_FIELD__FORMAT_PATTERN = eINSTANCE.getModelChoiceField_Format_pattern();
+
+		/**
+		 * The meta object literal for the '<em><b>Label length</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODEL_CHOICE_FIELD__LABEL_LENGTH = eINSTANCE.getModelChoiceField_Label_length();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.EmailFieldImpl <em>Email Field</em>}' class.
