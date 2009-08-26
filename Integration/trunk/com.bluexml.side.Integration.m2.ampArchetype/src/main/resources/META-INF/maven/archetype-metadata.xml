@@ -5,9 +5,7 @@
 			<!-- <defaultValue>newAmpProject</defaultValue> -->
 		</requiredProperty>
 		<requiredProperty key="project-description">
-			<defaultValue>this is a new Amp project generated using
-				"com.bluexml.side.Integration.m2.ampArchetype" thanks to change this
-				description</defaultValue>
+			<defaultValue>this is a new Amp project generated using	"com.bluexml.side.Integration.m2.ampArchetype" thanks to change this description</defaultValue>
 		</requiredProperty>
 	</requiredProperties>
 
