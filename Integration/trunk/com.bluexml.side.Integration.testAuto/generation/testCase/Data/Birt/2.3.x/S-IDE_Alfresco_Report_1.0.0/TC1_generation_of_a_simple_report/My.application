@@ -6,7 +6,7 @@
     <generatorConfigurations id_techno_version="docbook_4.x" impl_class="com.bluexml.side.view.generator.documentation.ViewDocumentationGenerator" id="com.bluexml.side.View.generator.documentation" metaModelName="KSR300 View" technologyVersionName="Docbook 4.x" technologyName="docBook" id_metamodel="http://www.kerblue.org/view/1.0" generatorName="S-IDE View Documentation Generator 1.0.0"/>
     <generatorConfigurations id_techno_version="docbook_4.x" impl_class="com.bluexml.side.form.generator.documentation.FormDocumentationGenerator" id="com.bluexml.side.Form.generator.documentation" metaModelName="KSR400 Form" technologyVersionName="Docbook 4.x" technologyName="docBook" id_metamodel="http://www.kerblue.org/form/1.0" generatorName="S-IDE Class Documentation Generator 1.0.0"/>
     <generatorConfigurations id_techno_version="docbook_4.x" impl_class="com.bluexml.side.clazz.generator.documentation.ClassDocumentationGenerator" id="com.bluexml.side.Class.generator.documentation" metaModelName="KSR500 Data" technologyVersionName="Docbook 4.x" technologyName="docBook" id_metamodel="http://www.kerblue.org/class/1.0" generatorName="S-IDE Class Documentation Generator 1.0.0"/>
-    <parameters key="generation.options.documentation" value="false"/>
+    <parameters key="generation.options.documentation" value="true"/>
     <parameters key="generation.option.Skip.Validation" value="true"/>
     <parameters key="generation.options.clean" value="false"/>
     <parameters key="generation.options.logPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/Data/Birt/2.3.x/S-IDE_Alfresco_Report_1.0.0/TC1_generation_of_a_simple_report/log"/>
