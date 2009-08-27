@@ -38,7 +38,7 @@ public class Application implements IApplication {
 			        	//System.out.println("created");
 			        	gen.run();
 			        	long time2= System.currentTimeMillis()-time1;
-			        	System.out.println("Time "+ Long.toString(time2 / 1000)+ " sec");
+			        	System.out.println("Time "+ Long.toString(time2 / 1000));
 			        }          
 			}
 			catch(Exception e){
