@@ -13,7 +13,7 @@
 		<profile>
 			<id>local</id>
 			<activation>
-				<activeByDefault>false</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 			</activation>
 			<repositories>
 				<repository>
@@ -53,25 +53,11 @@
 					</url>
 				</pluginRepository>
 			</pluginRepositories>
-
-			<distributionManagement>
-				<repository>
-					<id>SIDE-lan-release</id>
-					<url>http://localhost:8081/nexus/content/repositories/releases
-					</url>
-				</repository>
-				<snapshotRepository>
-					<id>SIDE-lan-snapshots</id>
-					<url>
-						http://localhost:8081/nexus/content/repositories/snapshots
-					</url>
-				</snapshotRepository>
-			</distributionManagement>
 		</profile>
 		<profile>
 			<id>lan</id>
 			<activation>
-				<activeByDefault>false</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 			</activation>
 			<repositories>
 				<repository>
@@ -113,21 +99,6 @@
 					</url>
 				</pluginRepository>
 			</pluginRepositories>
-
-			<distributionManagement>
-				<repository>
-					<id>SIDE-lan-release</id>
-					<url>
-						http://192.168.49.18:8081/nexus/content/repositories/SIDE-lan-releases
-					</url>
-				</repository>
-				<snapshotRepository>
-					<id>SIDE-lan-snapshots</id>
-					<url>
-						http://192.168.49.18:8081/nexus/content/repositories/SIDE-lan-snapshots
-					</url>
-				</snapshotRepository>
-			</distributionManagement>
 		</profile>
 		<profile>
 			<id>wan</id>
@@ -158,20 +129,6 @@
 					</url>
 				</pluginRepository>
 			</pluginRepositories>
-
-			<distributionManagement>
-				<repository>
-					<id>BXKB-repo</id>
-					<url>scp://merry.bluexml.com/home/m2/repositories/repository
-					</url>
-				</repository>
-				<snapshotRepository>
-					<id>BXKB-repo</id>
-					<url>
-						scp://merry.bluexml.com/home/m2/repositories/snapshotrepository
-					</url>
-				</snapshotRepository>
-			</distributionManagement>
 		</profile>
 	</profiles>
 </project>
