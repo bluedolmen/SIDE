@@ -105,9 +105,16 @@
 			<groupId>com.bluexml.side.Integration.alfresco</groupId>
 			<artifactId>model</artifactId>
 			<version>[1.0.0,)</version>
-			<scope>provided</scope>
 			<type>amp</type>
 		</dependency>
+		<dependency>
+           <groupId>com.bluexml.side.Integration.alfresco</groupId>
+           <artifactId>model</artifactId>
+           <version>[1.0.0,)</version>
+           <type>jar</type>
+           <classifier>classes</classifier>
+           <scope>provided</scope>
+       </dependency> 
 		<dependency>
 			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-repository</artifactId>
