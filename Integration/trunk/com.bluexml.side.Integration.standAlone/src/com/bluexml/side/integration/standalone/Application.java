@@ -58,7 +58,7 @@ public class Application implements IApplication {
 
 			gen.run();
 			long time2= System.currentTimeMillis()-time1;
-        	System.out.println("Time "+ Long.toString(time2 / 1000)+ " sec");
+        	System.out.println("Time "+ Long.toString(time2 / 1000));
 		}
 
 		System.out.println("End Generation");
