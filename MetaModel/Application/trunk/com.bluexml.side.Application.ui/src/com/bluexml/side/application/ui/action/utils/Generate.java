@@ -402,9 +402,9 @@ public class Generate extends Thread {
 							try {
 								generatedFiles = generator.complete();
 							} catch (Exception e) {
-								addErrorText(Messages.getString("Generate.61", e.getMessage())); //$NON-NLS-1$
-								Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Messages.getString("Generate.61", e.getMessage()))); //$NON-NLS-1$
+								addErrorText(Messages.getString("Generate.61", e.getMessage())); //$NON-NLS-1$								
 								e.printStackTrace();
+								Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Messages.getString("Generate.61", e.getMessage()))); //$NON-NLS-1$
 							}
 							addText(Messages.getString("Generate.36")); //$NON-NLS-1$
 
@@ -516,11 +516,13 @@ public class Generate extends Thread {
 						feedbackManager.addFeedBackItem(depConf.getId(), null, id_techno, optionsDep);
 					}
 				} catch (Exception e) {
-					Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Messages.getString("Generate.56"), e)); //$NON-NLS-1$
 					e.printStackTrace();
 					error = true;
 					addErrorText(Messages.getString("Generate.56") + e.getMessage()); //$NON-NLS-1$
 					deployer.addErrorLog(Messages.getString("Generate.56"), e.getStackTrace(), null); //$NON-NLS-1$
+					// must be the last action because this cause a break in the execution stack
+					// so no deployer after this can be executed !
+					Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Messages.getString("Generate.56"), e)); //$NON-NLS-1$
 				}
 
 				try {
