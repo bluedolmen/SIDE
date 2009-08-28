@@ -12,7 +12,7 @@
     <parameters key="generation.options.logPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/Data/Birt/2.3.x/S-IDE_Alfresco_Report_1.0.0/TC1_generation_of_a_simple_report/log"/>
     <parameters key="generation.options.destinationPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/Data/Birt/2.3.x/S-IDE_Alfresco_Report_1.0.0/TC1_generation_of_a_simple_report/target"/>
     <parameters key="birt.webapp" value="http://localhost:8080/birt"/>
-    <parameters key="report.author" value="M"/>
+    <parameters key="report.author" value="Mic"/>
     <parameters key="alfresco.url" value="http://localhost:8080/alfresco"/>
     <deployerConfigurations id_techno_version="docbook_4.x" impl_class="com.bluexml.side.deployer.documentation.DocumentationDeployer" id="com.bluexml.side.Deployer.documentation" technologyVersionName="Docbook 4.x" technologyName="docBook" deployerName="S-IDE Documentation Deployer"/>
   </elements>

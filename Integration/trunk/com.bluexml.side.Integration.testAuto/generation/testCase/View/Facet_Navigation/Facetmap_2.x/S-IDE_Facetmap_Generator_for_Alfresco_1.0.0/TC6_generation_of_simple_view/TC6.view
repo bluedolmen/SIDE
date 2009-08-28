@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view:ViewCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:view="http://www.kerblue.org/view/1.0" name="bluexml">
+  <views xsi:type="view:FacetMap" name="Media Video (FacetMap)" suffix="">
+    <children xsi:type="view:TextField" name="Title">
+      <mapTo href="TC6.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.0"/>
+    </children>
+    <children xsi:type="view:TextField" name="Author">
+      <mapTo href="TC6.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.1"/>
+    </children>
+    <children xsi:type="view:DateField" name="Publishing Date">
+      <mapTo href="TC6.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.2"/>
+    </children>
+    <children xsi:type="view:DataList" name="Media Video (Data List)">
+      <mapTo href="TC6.dt#//@packageSet.0/@packageSet.0/@classSet.0"/>
+      <children xsi:type="view:TextField" name="Title">
+        <mapTo href="TC6.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.0"/>
+      </children>
+      <children xsi:type="view:TextField" name="Author">
+        <mapTo href="TC6.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.1"/>
+      </children>
+      <children xsi:type="view:DateField" name="Publishing Date">
+        <mapTo href="TC6.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.2"/>
+      </children>
+      <viewOf xsi:type="clazz:Clazz" href="TC6.dt#//@packageSet.0/@packageSet.0/@classSet.0"/>
+    </children>
+    <viewOf xsi:type="clazz:Clazz" href="TC6.dt#//@packageSet.0/@packageSet.0/@classSet.0"/>
+  </views>
+</view:ViewCollection>
