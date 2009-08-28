@@ -49,7 +49,7 @@ import com.bluexml.side.util.libs.IFileHelper;
 public class Generate extends Thread {
 
 	private int NB_GENERATION_STEP = 5;
-	private int NB_DEPLOY_STEP = 4;
+	private int NB_DEPLOY_STEP = 2;
 	private ProgressBar progressBar;
 	private Label label;
 	private StyledText styletext;
@@ -358,7 +358,8 @@ public class Generate extends Thread {
 				// We generate only if there is meta-model available for
 				// the generator
 				if (generator.shouldGenerate(modelsInfo, elem.getId_metamodel())) {
-					String name = elem.getId().substring(elem.getId().lastIndexOf(".") + 1); //$NON-NLS-1$
+					//String name = elem.getId().substring(elem.getId().lastIndexOf(".") + 1); //$NON-NLS-1$
+					String name = elem.getGeneratorName();
 					label.setText(Messages.getString("Generate.30", name)); //$NON-NLS-1$
 					addText(Messages.getString("Generate.59", name)); //$NON-NLS-1$
 
@@ -436,7 +437,13 @@ public class Generate extends Thread {
 					}
 				}
 				String fileName = "gen_" + generator.getTechVersion() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
-				LogSave.toXml(generator.getLog(), fileName, logPath + fileSeparator + "work" + fileSeparator); //$NON-NLS-1$
+				try {
+					LogSave.toXml(generator.getLog(), fileName, logPath + fileSeparator + "work" + fileSeparator);
+				} catch (Exception e) {
+					addErrorText(Messages.getString("Generate.62", e.getMessage()));
+					e.printStackTrace();
+					Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Messages.getString("Generate.62"), e)); //$NON-NLS-1$
+				}
 			} else {
 				error = true;
 			}
@@ -454,7 +461,9 @@ public class Generate extends Thread {
 		progressBar.setMaximum(nbTask);
 		boolean error = false;
 		List<DeployerConfiguration> ldeployers = configuration.getDeployerConfigurations();
+		label.setText(Messages.getString("Generate.48"));
 		for (DeployerConfiguration depConf : ldeployers) {
+
 			String deployerClassName = depConf.getImpl_class();
 			String id_deployer = depConf.getId();
 			String id_techno = depConf.getId_techno_version();
@@ -482,7 +491,7 @@ public class Generate extends Thread {
 			} catch (ClassNotFoundException e1) {
 				error = true;
 				e1.printStackTrace();
-				addErrorText(Messages.getString("Generate.48") + id_deployer + " haven't been found."); //$NON-NLS-1$ //$NON-NLS-2$
+				addErrorText(Messages.getString("Generate.50") + id_deployer + " haven't been found."); //$NON-NLS-1$ //$NON-NLS-2$
 			} catch (InstantiationException e) {
 				error = true;
 				e.printStackTrace();
@@ -490,7 +499,7 @@ public class Generate extends Thread {
 			} catch (IllegalAccessException e) {
 				error = true;
 				e.printStackTrace();
-				addErrorText(Messages.getString("Generate.52") + id_deployer + " access error."); //$NON-NLS-1$ //$NON-NLS-2$
+				addErrorText(Messages.getString("Generate.50") + id_deployer + " access error."); //$NON-NLS-1$ //$NON-NLS-2$
 			} catch (Exception e) {
 				error = true;
 				e.printStackTrace();
@@ -506,6 +515,8 @@ public class Generate extends Thread {
 				deployer.initialize(configurationParameters, generationParameters, deployerOptions);
 
 				try {
+					addOneStep(progressBar);
+					addText(Messages.getString("Generate.51", depConf.getDeployerName()));
 					deployer.deploy();
 					// We get the option for this generator
 					if (FeedbackActivator.doFeedback()) {
@@ -520,7 +531,8 @@ public class Generate extends Thread {
 					error = true;
 					addErrorText(Messages.getString("Generate.56") + e.getMessage()); //$NON-NLS-1$
 					deployer.addErrorLog(Messages.getString("Generate.56"), e.getStackTrace(), null); //$NON-NLS-1$
-					// must be the last action because this cause a break in the execution stack
+					// must be the last action because this cause a break in the
+					// execution stack
 					// so no deployer after this can be executed !
 					Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Messages.getString("Generate.56"), e)); //$NON-NLS-1$
 				}
@@ -533,7 +545,15 @@ public class Generate extends Thread {
 				}
 
 				String fileName = "dep_" + deployer.getTechVersion() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
-				LogSave.toXml(deployer.getLog(), fileName, logPath + fileSeparator + "work" + fileSeparator); //$NON-NLS-1$
+				try {
+					LogSave.toXml(deployer.getLog(), fileName, logPath + fileSeparator + "work" + fileSeparator);
+				} catch (Exception e) {
+					addErrorText(Messages.getString("Generate.62", e.getMessage()));
+					e.printStackTrace();
+					Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Messages.getString("Generate.62"), e)); //$NON-NLS-1$
+				}
+				addOneStep(progressBar);
+				addText(Messages.getString("Generate.52"));
 			}
 		}
 		return error;
