@@ -16,7 +16,6 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.runtime.CoreException;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.ProcessingInstruction;
@@ -47,9 +46,9 @@ public class LogSave {
 	 * @param log
 	 * @param fileName
 	 * @param folderName
+	 * @throws Exception 
 	 */
-	public static void toXml(SIDELog log, String fileName, String folderName) {
-		try {
+	public static void toXml(SIDELog log, String fileName, String folderName) throws Exception {
 			IFolder folder = IFileHelper.createFolder(folderName);
 			File f = IFileHelper.getFile(folder);
 
@@ -60,14 +59,7 @@ public class LogSave {
 			toXml(log, fos);
 			IFileHelper.refreshFolder(folder);
 			fos.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
-
+		
 	}
 
 	/**

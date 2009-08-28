@@ -18,7 +18,7 @@ public class TrueZipHelper {
 		archiveDetector = new DefaultArchiveDetector(fileExtentions);
 	}
 
-	public boolean deleteArchiveFile(java.io.File f) {
+	public boolean deleteArchiveFile(java.io.File f) throws Exception {
 		return FileHelper.deleteFile(new File(f, archiveDetector));
 	}
 

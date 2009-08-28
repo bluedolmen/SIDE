@@ -102,17 +102,22 @@ public class FileHelper {
 		}
 	}
 
-	public static boolean deleteFile(File f) {
+	public static boolean deleteFile(File f) throws Exception {
+		return deleteFile(f, true);
+	}
+	public static boolean deleteFile(File f,boolean failonError) throws Exception {
 		if (f.isDirectory()) {
 			boolean status=true;
 			File[] fl = f.listFiles();
 			for (int i = 0; i < fl.length; i++) {
-				status &=deleteFile(fl[i]);
+				status &=deleteFile(fl[i],failonError);
 			}
 			return status;
 		}
 		if (f.exists() && f.canWrite()) {
 			return f.delete();
+		} else if (failonError){
+			throw new Exception("file can't be deleted");
 		}
 		return false;
 	}
