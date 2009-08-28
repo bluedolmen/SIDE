@@ -31,40 +31,44 @@ public class AMPDeployer extends WarDeployer {
 	}
 
 	protected void deployProcess(File fileToDeploy) throws Exception {
-		// build command line
-		String fileToDeployString = fileToDeploy.getAbsolutePath();
-		String filetoPatchString = getWarToPatchFile().getAbsolutePath();
-		List<String> argss = new ArrayList<String>();
-		// argss.add("pwd");
+		if (new File(getMMtPath()).exists()) {
+			// build command line
+			String fileToDeployString = fileToDeploy.getAbsolutePath();
+			String filetoPatchString = getWarToPatchFile().getAbsolutePath();
+			List<String> argss = new ArrayList<String>();
+			// argss.add("pwd");
 
-		argss.add("java");
-		argss.add("-jar");
-		argss.add(getMMtPath());
-		argss.add("install");
-		argss.add(fileToDeployString);
-		argss.add(filetoPatchString);
-		argss.add("-nobackup");
-		argss.add("-force");
-		if (fileToDeploy.isDirectory()) {
-			argss.add("-directory");
-		}
-		String[] args = new String[argss.size()];
-		args = argss.toArray(args);
-		ExecHelper status = ExecHelper.exec(args);
-		try {
-			if (status.getOutput().length() > 0) {
-				throw new Exception("alfresco-mmt.jar exit with errors :\n" + status.getError() + "\n" + status.getOutput());
-			} else if (logChanges()) {
-				File warOrg = TrueZipHelper.getTzFile(getBackupWarFile());
-				File finalwar = TrueZipHelper.getTzFile(getWarToPatchFile());
-				StringWriter sr = new StringWriter();
-				FileHelper.diffFolder(warOrg, finalwar, sr, FileHelper.COMPARE_ADDED + FileHelper.COMPARE_DELETED);
-				addInfoLog(this.logChangesMsg, sr.toString(), null);
-
+			argss.add("java");
+			argss.add("-jar");
+			argss.add(getMMtPath());
+			argss.add("install");
+			argss.add(fileToDeployString);
+			argss.add(filetoPatchString);
+			argss.add("-nobackup");
+			argss.add("-force");
+			if (fileToDeploy.isDirectory()) {
+				argss.add("-directory");
 			}
-		} catch (Exception e) {
-			addErrorLog("AMP deployer Error", e.getStackTrace(), null);
-			e.printStackTrace();
+			String[] args = new String[argss.size()];
+			args = argss.toArray(args);
+			ExecHelper status = ExecHelper.exec(args);
+			try {
+				if (status.getOutput().length() > 0) {
+					throw new Exception("alfresco-mmt.jar exit with errors :\n" + status.getError() + "\n" + status.getOutput());
+				} else if (logChanges()) {
+					File warOrg = TrueZipHelper.getTzFile(getBackupWarFile());
+					File finalwar = TrueZipHelper.getTzFile(getWarToPatchFile());
+					StringWriter sr = new StringWriter();
+					FileHelper.diffFolder(warOrg, finalwar, sr, FileHelper.COMPARE_ADDED + FileHelper.COMPARE_DELETED);
+					addInfoLog(this.logChangesMsg, sr.toString(), null);
+
+				}
+			} catch (Exception e) {
+				addErrorLog("AMP deployer Error", e.getStackTrace(), null);
+				e.printStackTrace();
+			}
+		} else {
+			throw new Exception("deployment tool not found please check the alfresco-mmt.jar file path !");
 		}
 	}
 
