@@ -485,9 +485,14 @@ public class Generate extends Thread {
 				}
 				//System.out.println("\tlog13");
 				String fileName = "gen_" + generator.getTechVersion() + ".xml";
-				LogSave.toXml(generator.getLog(), fileName, logPath
-						+ System.getProperty("file.separator") + "work"
-						+ System.getProperty("file.separator"));
+				try {
+					LogSave.toXml(generator.getLog(), fileName, logPath
+							+ System.getProperty("file.separator") + "work"
+							+ System.getProperty("file.separator"));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} else {
 				error = true;
 			}
@@ -569,9 +574,14 @@ public class Generate extends Thread {
 				}
 
 				String fileName = "dep_" + deployer.getTechVersion() + ".xml";
-				LogSave.toXml(deployer.getLog(), fileName, logPath
-						+ System.getProperty("file.separator") + "work"
-						+ System.getProperty("file.separator"));
+				try {
+					LogSave.toXml(deployer.getLog(), fileName, logPath
+							+ System.getProperty("file.separator") + "work"
+							+ System.getProperty("file.separator"));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		return error;
