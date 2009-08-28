@@ -17,13 +17,19 @@ import org.jdom.Namespace;
 public class MavenUtil {
 	private MavenEmbedder embedder;
 
-	public MavenExecutionResult doMavenGoal(File baseDir, List<String> goals, Map<String, String> parameters) throws Exception {
+	public MavenExecutionResult doMavenGoal(File baseDir, List<String> goals, Map<String, String> parameters, List<String> profiles, Boolean offline) throws Exception {
 		DefaultMavenExecutionRequest archetypeCreateRequest = new DefaultMavenExecutionRequest();
 		archetypeCreateRequest.setBaseDirectory(baseDir);
 		archetypeCreateRequest.setGoals(goals);
-		archetypeCreateRequest.setProperty("interactiveMode", "false");
+		archetypeCreateRequest.setInteractiveMode(false);
 		archetypeCreateRequest.setProperty("basedir", baseDir.getAbsolutePath().toString());
-
+		
+		if (profiles != null && !profiles.isEmpty()) {
+			archetypeCreateRequest.setProfiles(profiles);
+		}
+		if (offline != null) {
+			archetypeCreateRequest.setOffline(offline);
+		}
 		if (parameters != null) {
 			// manage additional parameters
 			for (Map.Entry<String, String> param : parameters.entrySet()) {
@@ -40,16 +46,28 @@ public class MavenUtil {
 		return doMavenGoal(baseDir, new String[] { goal });
 	}
 
+	public MavenExecutionResult doMavenGoal(File baseDir, String goal, Map<String, String> parameters, String[] profiles, Boolean offline) throws Exception {
+		return doMavenGoal(baseDir, new String[] { goal }, parameters, profiles, offline);
+	}
+
 	public MavenExecutionResult doMavenGoal(File baseDir, String goal, Map<String, String> parameters) throws Exception {
 		return doMavenGoal(baseDir, new String[] { goal }, parameters);
 	}
 
 	public MavenExecutionResult doMavenGoal(File baseDir, String[] goals) throws Exception {
-		return doMavenGoal(baseDir, Arrays.asList(goals), null);
+		return doMavenGoal(baseDir, Arrays.asList(goals), null, null, null);
 	}
 
 	public MavenExecutionResult doMavenGoal(File baseDir, String[] goals, Map<String, String> parameters) throws Exception {
-		return doMavenGoal(baseDir, Arrays.asList(goals), parameters);
+		return doMavenGoal(baseDir, Arrays.asList(goals), parameters, null, null);
+	}
+
+	public MavenExecutionResult doMavenGoal(File baseDir, String[] goals, Map<String, String> parameters, String[] profiles, Boolean offline) throws Exception {
+		List<String> profilesList = null;
+		if (profiles != null) {
+			profilesList = Arrays.asList(profiles);
+		}
+		return doMavenGoal(baseDir, Arrays.asList(goals), parameters, profilesList, offline);
 	}
 
 	public MavenEmbedder getEmbedder() throws Exception {

@@ -56,18 +56,15 @@ public abstract class WarDeployer extends Deployer {
 	}
 
 	@Override
-	protected void clean(File fileToDeploy) {
+	protected void clean(File fileToDeploy) throws Exception {
 		// remove existing deployed alfresco webapp.
-		FileHelper.deleteFile(getDeployedWebbAppFolder());
+		if (getDeployedWebbAppFolder().exists()) {
+			FileHelper.deleteFile(getDeployedWebbAppFolder());
+		}
 		// clean war file
 		if (getBackupWarFile().exists()) {
-			// restore from backup
-			try {
-				FileHelper.copyFiles(getBackupWarFile(), getWarToPatchFile(), true);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			// restore from backup		
+			FileHelper.copyFiles(getBackupWarFile(), getWarToPatchFile(), true);
 		}
 	}
 
