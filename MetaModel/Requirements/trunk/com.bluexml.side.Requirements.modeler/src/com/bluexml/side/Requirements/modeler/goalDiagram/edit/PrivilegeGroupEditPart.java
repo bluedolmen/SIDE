@@ -190,21 +190,23 @@ public class PrivilegeGroupEditPart extends EMFGraphEdgeEditPart {
 				}
 				
 				for (int i=begin;i<=end;++i) {
-					switch (i) {
-					case 0:
-						value += "C";
-						break;
-					case 1:
-						value += "R";
-						break;
-					case 2:
-						value += "U";
-						break;
-					case 3:
-						value += "D";
-						break;
-					default:
-						break;
+					if (rules[i]) {
+						switch (i) {
+						case 0:
+							value += "C";
+							break;
+						case 1:
+							value += "R";
+							break;
+						case 2:
+							value += "U";
+							break;
+						case 3:
+							value += "D";
+							break;
+						default:
+							break;
+						}
 					}
 				}
 				value+=")";
