@@ -9,13 +9,13 @@
     <parameters key="generation.options.documentation" value="true"/>
     <parameters key="generation.option.Skip.Validation" value="true"/>
     <parameters key="generation.options.clean" value="false"/>
-    <parameters key="generation.options.logPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/Workflow/Alfresco-jBPM/3.x_Labs_and_Enterprise/S-IDE_Alfresco_Workflow_Generator/TC4_generation_of_a_simple_workflow/log"/>
-    <parameters key="generation.options.destinationPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/Workflow/Alfresco-jBPM/3.x_Labs_and_Enterprise/S-IDE_Alfresco_Workflow_Generator/TC4_generation_of_a_simple_workflow/target"/>
+    <parameters key="generation.options.logPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/Workflow/Alfresco-jBPM/3.x_Labs_and_Enterprise/S-IDE_Alfresco_Workflow_Generator/TCWAL_1_generation_of_a_simple_workflow/log"/>
+    <parameters key="generation.options.destinationPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/Workflow/Alfresco-jBPM/3.x_Labs_and_Enterprise/S-IDE_Alfresco_Workflow_Generator/TCWAL_1_generation_of_a_simple_workflow/target"/>
     <parameters key="birt.webapp" value="http://localhost:8080/birt"/>
     <parameters key="report.author" value="M"/>
     <parameters key="alfresco.url" value="http://localhost:8080/alfresco"/>
     <parameters key="com.bluexml.side.Workflow.generator.alfresco.module.version" value="1.0"/>
     <deployerConfigurations id_techno_version="docbook_4.x" impl_class="com.bluexml.side.deployer.documentation.DocumentationDeployer" id="com.bluexml.side.Deployer.documentation" technologyVersionName="Docbook 4.x" technologyName="docBook" deployerName="S-IDE Documentation Deployer"/>
   </elements>
-  <elements xsi:type="app:Model" name="TC4.workflow" file="/com.bluexml.side.Integration.testAuto/generation/testCase/Workflow/Alfresco-jBPM/3.x_Labs_and_Enterprise/S-IDE_Alfresco_Workflow_Generator/TC4_generation_of_a_simple_workflow/TC4.workflow"/>
+  <elements xsi:type="app:Model" name="TCWAL_1.workflow" file="/com.bluexml.side.Integration.testAuto/generation/testCase/Workflow/Alfresco-jBPM/3.x_Labs_and_Enterprise/S-IDE_Alfresco_Workflow_Generator/TCWAL_1_generation_of_a_simple_workflow/TCWAL_1.workflow"/>
 </app:Application>

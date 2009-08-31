@@ -9,12 +9,12 @@
     <parameters key="generation.options.documentation" value="true"/>
     <parameters key="generation.option.Skip.Validation" value="true"/>
     <parameters key="generation.options.clean" value="false"/>
-    <parameters key="generation.options.logPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/Data/Birt/2.3.x/S-IDE_Alfresco_Report_1.0.0/TC1_generation_of_a_simple_report/log"/>
-    <parameters key="generation.options.destinationPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/Data/Birt/2.3.x/S-IDE_Alfresco_Report_1.0.0/TC1_generation_of_a_simple_report/target"/>
+    <parameters key="generation.options.logPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/Data/Birt/2.3.x/S-IDE_Alfresco_Report_1.0.0/TCDB2_1_generation_of_a_simple_report/log"/>
+    <parameters key="generation.options.destinationPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/Data/Birt/2.3.x/S-IDE_Alfresco_Report_1.0.0/TCDB2_1_generation_of_a_simple_report/target"/>
     <parameters key="birt.webapp" value="http://localhost:8080/birt"/>
     <parameters key="report.author" value="Mic"/>
     <parameters key="alfresco.url" value="http://localhost:8080/alfresco"/>
     <deployerConfigurations id_techno_version="docbook_4.x" impl_class="com.bluexml.side.deployer.documentation.DocumentationDeployer" id="com.bluexml.side.Deployer.documentation" technologyVersionName="Docbook 4.x" technologyName="docBook" deployerName="S-IDE Documentation Deployer"/>
   </elements>
-  <elements xsi:type="app:Model" name="TC1.dt" file="/com.bluexml.side.Integration.testAuto/generation/testCase/Data/Birt/2.3.x/S-IDE_Alfresco_Report_1.0.0/TC1_generation_of_a_simple_report/TC1.dt"/>
+  <elements xsi:type="app:Model" name="TCDB2_1.dt" file="/com.bluexml.side.Integration.testAuto/generation/testCase/Data/Birt/2.3.x/S-IDE_Alfresco_Report_1.0.0/TCDB2_1_generation_of_a_simple_report/TCDB2_1.dt"/>
 </app:Application>

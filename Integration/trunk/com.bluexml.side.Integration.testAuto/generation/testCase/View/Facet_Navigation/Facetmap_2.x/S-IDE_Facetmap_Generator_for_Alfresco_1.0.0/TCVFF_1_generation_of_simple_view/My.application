@@ -5,19 +5,19 @@
       <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.cmisFacetMap" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
       <moduleContraints moduleId="com.bluexml.side.Integration.alfrescoShare.facetMapDashlet" versionMin="1.0.0" moduleType="zip" technologyVersion="alfresco_3.x"/>
     </generatorConfigurations>
+    <generatorConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator" id="com.bluexml.side.Class.generator.alfresco" metaModelName="KSR500 Data" technologyVersionName="Alfresco3.x Labs and Enterprise" technologyName="alfresco" id_metamodel="http://www.kerblue.org/class/1.0" generatorName="S-IDE Alfresco Content Model Generator 1.0.0">
+      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.model" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
+      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.customAssociationManagement" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
+    </generatorConfigurations>
     <generatorConfigurations id_techno_version="docbook_4.x" impl_class="com.bluexml.side.workflow.generator.documentation.WorkflowDocumentationGenerator" id="com.bluexml.side.Workflow.generator.documentation" metaModelName="KSR600 Workflow" technologyVersionName="Docbook 4.x" technologyName="docBook" id_metamodel="http://www.kerblue.org/workflow/1.0" generatorName="S-IDE Workflow Documentation Generator 1.0.0"/>
     <generatorConfigurations id_techno_version="docbook_4.x" impl_class="com.bluexml.side.view.generator.documentation.ViewDocumentationGenerator" id="com.bluexml.side.View.generator.documentation" metaModelName="KSR300 View" technologyVersionName="Docbook 4.x" technologyName="docBook" id_metamodel="http://www.kerblue.org/view/1.0" generatorName="S-IDE View Documentation Generator 1.0.0"/>
     <generatorConfigurations id_techno_version="docbook_4.x" impl_class="com.bluexml.side.form.generator.documentation.FormDocumentationGenerator" id="com.bluexml.side.Form.generator.documentation" metaModelName="KSR400 Form" technologyVersionName="Docbook 4.x" technologyName="docBook" id_metamodel="http://www.kerblue.org/form/1.0" generatorName="S-IDE Class Documentation Generator 1.0.0"/>
     <generatorConfigurations id_techno_version="docbook_4.x" impl_class="com.bluexml.side.clazz.generator.documentation.ClassDocumentationGenerator" id="com.bluexml.side.Class.generator.documentation" metaModelName="KSR500 Data" technologyVersionName="Docbook 4.x" technologyName="docBook" id_metamodel="http://www.kerblue.org/class/1.0" generatorName="S-IDE Class Documentation Generator 1.0.0"/>
-    <generatorConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator" id="com.bluexml.side.Class.generator.alfresco" metaModelName="KSR500 Data" technologyVersionName="Alfresco3.x Labs and Enterprise" technologyName="Alfresco" id_metamodel="http://www.kerblue.org/class/1.0" generatorName="S-IDE Alfresco Content Model Generator 1.0.0">
-      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.model" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
-      <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.customAssociationManagement" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
-    </generatorConfigurations>
     <parameters key="generation.options.documentation" value="true"/>
     <parameters key="generation.option.Skip.Validation" value="true"/>
     <parameters key="generation.options.clean" value="false"/>
-    <parameters key="generation.options.logPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/View/Facet_Navigation/Facetmap_2.x/S-IDE_Facetmap_Generator_for_Alfresco_1.0.0/TC6_generation_of_simple_view/log"/>
-    <parameters key="generation.options.destinationPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/View/Facet_Navigation/Facetmap_2.x/S-IDE_Facetmap_Generator_for_Alfresco_1.0.0/TC6_generation_of_simple_view/target"/>
+    <parameters key="generation.options.logPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/View/Facet_Navigation/Facetmap_2.x/S-IDE_Facetmap_Generator_for_Alfresco_1.0.0/TCVFF_1_generation_of_simple_view/log"/>
+    <parameters key="generation.options.destinationPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/View/Facet_Navigation/Facetmap_2.x/S-IDE_Facetmap_Generator_for_Alfresco_1.0.0/TCVFF_1_generation_of_simple_view/target"/>
     <parameters key="birt.webapp" value="http://localhost:8080/birt"/>
     <parameters key="report.author" value="M"/>
     <parameters key="alfresco.url" value="http://localhost:8080/alfresco"/>
@@ -25,6 +25,6 @@
     <parameters key="com.bluexml.side.Class.generator.alfresco.module.version" value="1.0"/>
     <deployerConfigurations id_techno_version="docbook_4.x" impl_class="com.bluexml.side.deployer.documentation.DocumentationDeployer" id="com.bluexml.side.Deployer.documentation" technologyVersionName="Docbook 4.x" technologyName="docBook" deployerName="S-IDE Documentation Deployer"/>
   </elements>
-  <elements xsi:type="app:Model" name="TC6.view" file="/com.bluexml.side.Integration.testAuto/generation/testCase/View/Facet_Navigation/Facetmap_2.x/S-IDE_Facetmap_Generator_for_Alfresco_1.0.0/TC6_generation_of_simple_view/TC6.view"/>
-  <elements xsi:type="app:Model" name="TC6.dt" file="/com.bluexml.side.Integration.testAuto/generation/testCase/View/Facet_Navigation/Facetmap_2.x/S-IDE_Facetmap_Generator_for_Alfresco_1.0.0/TC6_generation_of_simple_view/TC6.dt"/>
+  <elements xsi:type="app:Model" name="TCVFF_1.dt" file="/com.bluexml.side.Integration.testAuto/generation/testCase/View/Facet_Navigation/Facetmap_2.x/S-IDE_Facetmap_Generator_for_Alfresco_1.0.0/TCVFF_1_generation_of_simple_view/TCVFF_1.dt"/>
+  <elements xsi:type="app:Model" name="TCVFF_1.view" file="/com.bluexml.side.Integration.testAuto/generation/testCase/View/Facet_Navigation/Facetmap_2.x/S-IDE_Facetmap_Generator_for_Alfresco_1.0.0/TCVFF_1_generation_of_simple_view/TCVFF_1.view"/>
 </app:Application>
