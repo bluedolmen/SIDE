@@ -41,6 +41,7 @@ public class Application implements IApplication {
 		 * 4-the log folder (note that if this argument is missing args[1] will be used for log path
 		 * 
 		 */
+
 		arguments = (String[]) context.getArguments().get("application.args");
 		String metaModelDirPath = arguments[0];
 		if(metaModelDirPath==null || metaModelDirPath.equals("")){
@@ -48,19 +49,20 @@ public class Application implements IApplication {
 		}
 		String targetPath = arguments[1];
 		if(targetPath==null || targetPath.equals("")){
-			metaModelDirPath = targetPathC;
+			targetPath = targetPathC;
 		}
 
 		DocumentationGenerator gen = new MetaModelDocumentationGenerator();
 		HashMap<String,String>  configurationParameters_ = getConfigurationParameter(targetPath, "test");
 		gen.initialize(null, null, configurationParameters_, null);
+
 		DocumentationDeployer deployer = new DocumentationDeployer ();
 		deployer.initialize(configurationParameters_, null, null);
 		
 		File[] metaModelFileList = getModelFileList(new File(metaModelDirPath));
 		IWorkspace workspace= ResourcesPlugin.getWorkspace();
 		IWorkspaceRoot workspaceRoot =workspace.getRoot();
-		
+
 		//proceed
 		int c =0;
 		while(c<metaModelFileList.length){
@@ -79,7 +81,7 @@ public class Application implements IApplication {
 			}
 			c++;
 		}
-		
+
 
 		return EXIT_OK;
 	}

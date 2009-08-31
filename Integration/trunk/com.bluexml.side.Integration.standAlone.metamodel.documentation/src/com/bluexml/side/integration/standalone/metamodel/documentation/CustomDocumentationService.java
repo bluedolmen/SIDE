@@ -130,7 +130,7 @@ public class CustomDocumentationService {
 			result = tab.get("description");
 			
 		}
-		return processString(result);
+		return result!=null?processString(result):null;
 	}
 	
 	public static String getSrvValidationRuleDescription(EClassifier ec){

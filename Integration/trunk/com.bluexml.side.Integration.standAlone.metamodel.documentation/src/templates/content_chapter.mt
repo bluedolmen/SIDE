@@ -9,9 +9,9 @@ import com.bluexml.side.integration.standalone.metamodel.documentation.CustomDoc
 	<text:h text:style-name="Heading_20_1" text:outline-level="1">
 		<%name%>
 	</text:h>
-	<%if (null == null){%>
+	<%if (service::getSrvDocumentation() != null){%>
 	<text:p text:style-name="Table_20_Heading">
-		<%null%>
+		<%service::getSrvDocumentation()%>
 	</text:p>
 	<%}%>
 	<%content_class%>
@@ -28,7 +28,7 @@ import com.bluexml.side.integration.standalone.metamodel.documentation.CustomDoc
 				<text:p text:style-name="Table_20_Heading">Attribute Documentation</text:p>
 			</table:table-cell>
 		</table:table-row>
-<%for (getSrvEAttributes()){%>
+<%for (service::getSrvEAttributes()){%>
 	<table:table-row>
 		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
 			<text:p text:style-name="Table_20_Heading">
@@ -37,7 +37,7 @@ import com.bluexml.side.integration.standalone.metamodel.documentation.CustomDoc
 		</table:table-cell>
 		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
 			<text:p text:style-name="Table_20_Heading">
-				<%if (null != null){%><%null%><%}%>
+				<%if (service::getSrvDocumentation()!= service::getSrvDocumentation()){%><%service::getSrvDocumentation()%><%}%>
 			</text:p>
 		</table:table-cell>
 	</table:table-row>
@@ -72,7 +72,7 @@ import com.bluexml.side.integration.standalone.metamodel.documentation.CustomDoc
 		</table:table-cell>
 		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
 			<text:p text:style-name="Table_20_Heading">
-				<%if (null != null){%><%null%><%}%>
+				<%if (service::getSrvDocumentation() != service::getSrvDocumentation()){%><%service::getSrvDocumentation()%><%}%>
 			</text:p>
 		</table:table-cell>
 	</table:table-row>
@@ -80,12 +80,12 @@ import com.bluexml.side.integration.standalone.metamodel.documentation.CustomDoc
 </table:table>
 
 <text:h text:style-name="Heading_20_2" text:outline-level="2"><%name%> validation rules</text:h>
-<%if (null==null){%>
+<%if (service::getSrvValidationRuleDescription()!=null){%>
 	<text:p text:style-name="Table_20_Heading">
-		<%null%>
+		<%service::getSrvValidationRuleDescription()%>
 	</text:p>
 <%}%>
-<%if (null != null){%>
+<%if (service::getSrvValidationRule()!=null){%>
 <table:table table:style-name="Tableau2">
 	<table:table-column table:style-name="Tableau1.A" table:number-columns-repeated="2" />
 		<table:table-row>
@@ -96,7 +96,7 @@ import com.bluexml.side.integration.standalone.metamodel.documentation.CustomDoc
 				<text:p text:style-name="Table_20_Heading">Rule details</text:p>
 			</table:table-cell>
 		</table:table-row>
-<%for (null){%>
+<%for (service::getSrvValidationRule()){%>
 	<table:table-row>
 		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
 			<text:p text:style-name="Table_20_Heading">
