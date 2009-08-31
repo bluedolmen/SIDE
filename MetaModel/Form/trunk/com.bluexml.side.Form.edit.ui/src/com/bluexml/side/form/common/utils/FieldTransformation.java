@@ -37,7 +37,7 @@ public class FieldTransformation {
 			((ModelChoiceField)copy).setMax_bound(((ModelChoiceField)master).getMax_bound());
 			((ModelChoiceField)copy).setMin_bound(((ModelChoiceField)master).getMin_bound());
 			((ModelChoiceField)copy).setReal_class(((ModelChoiceField)master).getReal_class());
-			((ModelChoiceField)copy).setAssociation_class(((ModelChoiceField)master).getAssociation_class());
+//			((ModelChoiceField)copy).setAssociation_class(((ModelChoiceField)master).getAssociation_class());
 		}
 		// Virtual Field
 		if (copy instanceof VirtualField) {
