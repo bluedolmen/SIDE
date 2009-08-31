@@ -18,7 +18,7 @@ import com.bluexml.side.clazz.Clazz;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Definition: The 'ClassReference' is abstract and so in not available through the Form modeler; it has been defined to allow to reference a data class of the data model: for instance, a FormClass and a ModelChoiceField inherits a ClassReference to be associated to a data class of the data model.
+ * Definition: The 'ClassReference' is abstract and so is not available through the Form modeler; it has been defined to allow to reference a data class of the data model: for instance, a FormClass and a ModelChoiceField inherits a ClassReference to be associated to a data class of the data model.
  *  The 'Real class' property of this element allows to select the referenced data class.
  * 
  * Example:
@@ -29,7 +29,6 @@ import com.bluexml.side.clazz.Clazz;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.bluexml.side.form.ClassReference#getReal_class <em>Real class</em>}</li>
- *   <li>{@link com.bluexml.side.form.ClassReference#getAssociation_class <em>Association class</em>}</li>
  * </ul>
  * </p>
  *
@@ -65,31 +64,5 @@ public interface ClassReference extends EObject {
 	 * @generated
 	 */
 	void setReal_class(Clazz value);
-
-	/**
-	 * Returns the value of the '<em><b>Association class</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Association class</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Association class</em>' reference.
-	 * @see #setAssociation_class(Clazz)
-	 * @see com.bluexml.side.form.FormPackage#getClassReference_Association_class()
-	 * @model
-	 * @generated
-	 */
-	Clazz getAssociation_class();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.form.ClassReference#getAssociation_class <em>Association class</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Association class</em>' reference.
-	 * @see #getAssociation_class()
-	 * @generated
-	 */
-	void setAssociation_class(Clazz value);
 
 } // ClassReference

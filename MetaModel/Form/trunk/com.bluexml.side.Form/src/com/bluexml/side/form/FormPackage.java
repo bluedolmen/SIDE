@@ -2019,22 +2019,13 @@ public interface FormPackage extends EPackage {
 	int MODEL_CHOICE_FIELD__REAL_CLASS = FIELD_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Association class</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_CHOICE_FIELD__ASSOCIATION_CLASS = FIELD_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Min bound</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_CHOICE_FIELD__MIN_BOUND = FIELD_FEATURE_COUNT + 2;
+	int MODEL_CHOICE_FIELD__MIN_BOUND = FIELD_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Max bound</b></em>' attribute.
@@ -2043,7 +2034,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_CHOICE_FIELD__MAX_BOUND = FIELD_FEATURE_COUNT + 3;
+	int MODEL_CHOICE_FIELD__MAX_BOUND = FIELD_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference list.
@@ -2052,7 +2043,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_CHOICE_FIELD__TARGET = FIELD_FEATURE_COUNT + 4;
+	int MODEL_CHOICE_FIELD__TARGET = FIELD_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Association form Class</b></em>' reference list.
@@ -2061,7 +2052,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS = FIELD_FEATURE_COUNT + 5;
+	int MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS = FIELD_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Widget</b></em>' attribute.
@@ -2070,7 +2061,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_CHOICE_FIELD__WIDGET = FIELD_FEATURE_COUNT + 6;
+	int MODEL_CHOICE_FIELD__WIDGET = FIELD_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Show actions</b></em>' attribute.
@@ -2079,7 +2070,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_CHOICE_FIELD__SHOW_ACTIONS = FIELD_FEATURE_COUNT + 7;
+	int MODEL_CHOICE_FIELD__SHOW_ACTIONS = FIELD_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Format pattern</b></em>' attribute.
@@ -2088,7 +2079,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_CHOICE_FIELD__FORMAT_PATTERN = FIELD_FEATURE_COUNT + 8;
+	int MODEL_CHOICE_FIELD__FORMAT_PATTERN = FIELD_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Label length</b></em>' attribute.
@@ -2097,7 +2088,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_CHOICE_FIELD__LABEL_LENGTH = FIELD_FEATURE_COUNT + 9;
+	int MODEL_CHOICE_FIELD__LABEL_LENGTH = FIELD_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Model Choice Field</em>' class.
@@ -2106,7 +2097,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_CHOICE_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 10;
+	int MODEL_CHOICE_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.EmailFieldImpl <em>Email Field</em>}' class.
@@ -3711,22 +3702,13 @@ public interface FormPackage extends EPackage {
 	int FORM_CLASS__REAL_CLASS = FORM_CONTAINER_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Association class</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FORM_CLASS__ASSOCIATION_CLASS = FORM_CONTAINER_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_CLASS_FEATURE_COUNT = FORM_CONTAINER_FEATURE_COUNT + 2;
+	int FORM_CLASS_FEATURE_COUNT = FORM_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.ReferenceImpl <em>Reference</em>}' class.
@@ -3899,15 +3881,6 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int REFERENCE__REAL_CLASS = MODEL_CHOICE_FIELD__REAL_CLASS;
-
-	/**
-	 * The feature id for the '<em><b>Association class</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCE__ASSOCIATION_CLASS = MODEL_CHOICE_FIELD__ASSOCIATION_CLASS;
 
 	/**
 	 * The feature id for the '<em><b>Min bound</b></em>' attribute.
@@ -4527,22 +4500,13 @@ public interface FormPackage extends EPackage {
 	int CLASS_REFERENCE__REAL_CLASS = 0;
 
 	/**
-	 * The feature id for the '<em><b>Association class</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_REFERENCE__ASSOCIATION_CLASS = 1;
-
-	/**
 	 * The number of structural features of the '<em>Class Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_REFERENCE_FEATURE_COUNT = 2;
+	int CLASS_REFERENCE_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.PasswordFieldImpl <em>Password Field</em>}' class.
@@ -6344,17 +6308,6 @@ public interface FormPackage extends EPackage {
 	EReference getClassReference_Real_class();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.bluexml.side.form.ClassReference#getAssociation_class <em>Association class</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Association class</em>'.
-	 * @see com.bluexml.side.form.ClassReference#getAssociation_class()
-	 * @see #getClassReference()
-	 * @generated
-	 */
-	EReference getClassReference_Association_class();
-
-	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.PasswordField <em>Password Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7140,14 +7093,6 @@ public interface FormPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CLASS_REFERENCE__REAL_CLASS = eINSTANCE.getClassReference_Real_class();
-
-		/**
-		 * The meta object literal for the '<em><b>Association class</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CLASS_REFERENCE__ASSOCIATION_CLASS = eINSTANCE.getClassReference_Association_class();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.PasswordFieldImpl <em>Password Field</em>}' class.

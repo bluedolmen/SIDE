@@ -60,7 +60,6 @@ public class FormClassItemProvider
 			super.getPropertyDescriptors(object);
 
 			addReal_classPropertyDescriptor(object);
-			addAssociation_classPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -79,28 +78,6 @@ public class FormClassItemProvider
 				 getString("_UI_ClassReference_real_class_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ClassReference_real_class_feature", "_UI_ClassReference_type"),
 				 FormPackage.Literals.CLASS_REFERENCE__REAL_CLASS,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Association class feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addAssociation_classPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ClassReference_association_class_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ClassReference_association_class_feature", "_UI_ClassReference_type"),
-				 FormPackage.Literals.CLASS_REFERENCE__ASSOCIATION_CLASS,
 				 true,
 				 false,
 				 true,

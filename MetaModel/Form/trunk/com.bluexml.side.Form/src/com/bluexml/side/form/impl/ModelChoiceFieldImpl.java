@@ -36,7 +36,6 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.form.impl.ModelChoiceFieldImpl#getReal_class <em>Real class</em>}</li>
- *   <li>{@link com.bluexml.side.form.impl.ModelChoiceFieldImpl#getAssociation_class <em>Association class</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.ModelChoiceFieldImpl#getMin_bound <em>Min bound</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.ModelChoiceFieldImpl#getMax_bound <em>Max bound</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.ModelChoiceFieldImpl#getTarget <em>Target</em>}</li>
@@ -60,16 +59,6 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * @ordered
 	 */
 	protected Clazz real_class;
-
-	/**
-	 * The cached value of the '{@link #getAssociation_class() <em>Association class</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAssociation_class()
-	 * @generated
-	 * @ordered
-	 */
-	protected Clazz association_class;
 
 	/**
 	 * The default value of the '{@link #getMin_bound() <em>Min bound</em>}' attribute.
@@ -273,44 +262,6 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Clazz getAssociation_class() {
-		if (association_class != null && association_class.eIsProxy()) {
-			InternalEObject oldAssociation_class = (InternalEObject)association_class;
-			association_class = (Clazz)eResolveProxy(oldAssociation_class);
-			if (association_class != oldAssociation_class) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS, oldAssociation_class, association_class));
-			}
-		}
-		return association_class;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Clazz basicGetAssociation_class() {
-		return association_class;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAssociation_class(Clazz newAssociation_class) {
-		Clazz oldAssociation_class = association_class;
-		association_class = newAssociation_class;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS, oldAssociation_class, association_class));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public int getMin_bound() {
 		return min_bound;
 	}
@@ -467,9 +418,6 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 			case FormPackage.MODEL_CHOICE_FIELD__REAL_CLASS:
 				if (resolve) return getReal_class();
 				return basicGetReal_class();
-			case FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS:
-				if (resolve) return getAssociation_class();
-				return basicGetAssociation_class();
 			case FormPackage.MODEL_CHOICE_FIELD__MIN_BOUND:
 				return new Integer(getMin_bound());
 			case FormPackage.MODEL_CHOICE_FIELD__MAX_BOUND:
@@ -501,9 +449,6 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 		switch (featureID) {
 			case FormPackage.MODEL_CHOICE_FIELD__REAL_CLASS:
 				setReal_class((Clazz)newValue);
-				return;
-			case FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS:
-				setAssociation_class((Clazz)newValue);
 				return;
 			case FormPackage.MODEL_CHOICE_FIELD__MIN_BOUND:
 				setMin_bound(((Integer)newValue).intValue());
@@ -546,9 +491,6 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 			case FormPackage.MODEL_CHOICE_FIELD__REAL_CLASS:
 				setReal_class((Clazz)null);
 				return;
-			case FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS:
-				setAssociation_class((Clazz)null);
-				return;
 			case FormPackage.MODEL_CHOICE_FIELD__MIN_BOUND:
 				setMin_bound(MIN_BOUND_EDEFAULT);
 				return;
@@ -587,8 +529,6 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 		switch (featureID) {
 			case FormPackage.MODEL_CHOICE_FIELD__REAL_CLASS:
 				return real_class != null;
-			case FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS:
-				return association_class != null;
 			case FormPackage.MODEL_CHOICE_FIELD__MIN_BOUND:
 				return min_bound != MIN_BOUND_EDEFAULT;
 			case FormPackage.MODEL_CHOICE_FIELD__MAX_BOUND:
@@ -619,7 +559,6 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 		if (baseClass == ClassReference.class) {
 			switch (derivedFeatureID) {
 				case FormPackage.MODEL_CHOICE_FIELD__REAL_CLASS: return FormPackage.CLASS_REFERENCE__REAL_CLASS;
-				case FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS: return FormPackage.CLASS_REFERENCE__ASSOCIATION_CLASS;
 				default: return -1;
 			}
 		}
@@ -636,7 +575,6 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 		if (baseClass == ClassReference.class) {
 			switch (baseFeatureID) {
 				case FormPackage.CLASS_REFERENCE__REAL_CLASS: return FormPackage.MODEL_CHOICE_FIELD__REAL_CLASS;
-				case FormPackage.CLASS_REFERENCE__ASSOCIATION_CLASS: return FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_CLASS;
 				default: return -1;
 			}
 		}

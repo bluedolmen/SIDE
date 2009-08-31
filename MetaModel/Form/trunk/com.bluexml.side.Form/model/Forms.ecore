@@ -357,7 +357,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassReference" abstract="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'ClassReference' is abstract and so in not available through the Form modeler; it has been defined to allow to reference a data class of the data model: for instance, a FormClass and a ModelChoiceField inherits a ClassReference to be associated to a data class of the data model.&#xD; The 'Real class' property of this element allows to select the referenced data class.&#xD;&#xD;&#xA;Example:&#xD;- Real class=Data class Article."/>
+      <details key="documentation" value="Definition: The 'ClassReference' is abstract and so is not available through the Form modeler; it has been defined to allow to reference a data class of the data model: for instance, a FormClass and a ModelChoiceField inherits a ClassReference to be associated to a data class of the data model.&#xD; The 'Real class' property of this element allows to select the referenced data class.&#xD;&#xD;&#xA;Example:&#xD;- Real class=Data class Article."/>
     </eAnnotations>
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="mustReferenceClass" value="not self.real_class.oclIsUndefined()"/>
@@ -366,7 +366,6 @@
       <details key="constraints" value="mustReferenceClass"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="real_class" eType="ecore:EClass ../../com.bluexml.side.Class/model/Class.ecore#//Clazz"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="association_class" eType="ecore:EClass ../../com.bluexml.side.Class/model/Class.ecore#//Clazz"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PasswordField" eSuperTypes="#//CharField">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

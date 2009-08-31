@@ -1016,15 +1016,6 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getClassReference_Association_class() {
-		return (EReference)classReferenceEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getPasswordField() {
 		return passwordFieldEClass;
 	}
@@ -1284,7 +1275,6 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 
 		classReferenceEClass = createEClass(CLASS_REFERENCE);
 		createEReference(classReferenceEClass, CLASS_REFERENCE__REAL_CLASS);
-		createEReference(classReferenceEClass, CLASS_REFERENCE__ASSOCIATION_CLASS);
 
 		passwordFieldEClass = createEClass(PASSWORD_FIELD);
 
@@ -1480,7 +1470,6 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 
 		initEClass(classReferenceEClass, ClassReference.class, "ClassReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getClassReference_Real_class(), theClazzPackage.getClazz(), null, "real_class", null, 0, 1, ClassReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClassReference_Association_class(), theClazzPackage.getClazz(), null, "association_class", null, 0, 1, ClassReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(passwordFieldEClass, PasswordField.class, "PasswordField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

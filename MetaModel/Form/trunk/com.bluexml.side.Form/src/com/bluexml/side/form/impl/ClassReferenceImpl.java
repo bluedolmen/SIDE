@@ -27,7 +27,6 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.form.impl.ClassReferenceImpl#getReal_class <em>Real class</em>}</li>
- *   <li>{@link com.bluexml.side.form.impl.ClassReferenceImpl#getAssociation_class <em>Association class</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,16 +42,6 @@ public abstract class ClassReferenceImpl extends EObjectImpl implements ClassRef
 	 * @ordered
 	 */
 	protected Clazz real_class;
-
-	/**
-	 * The cached value of the '{@link #getAssociation_class() <em>Association class</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAssociation_class()
-	 * @generated
-	 * @ordered
-	 */
-	protected Clazz association_class;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -116,53 +105,12 @@ public abstract class ClassReferenceImpl extends EObjectImpl implements ClassRef
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Clazz getAssociation_class() {
-		if (association_class != null && association_class.eIsProxy()) {
-			InternalEObject oldAssociation_class = (InternalEObject)association_class;
-			association_class = (Clazz)eResolveProxy(oldAssociation_class);
-			if (association_class != oldAssociation_class) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FormPackage.CLASS_REFERENCE__ASSOCIATION_CLASS, oldAssociation_class, association_class));
-			}
-		}
-		return association_class;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Clazz basicGetAssociation_class() {
-		return association_class;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAssociation_class(Clazz newAssociation_class) {
-		Clazz oldAssociation_class = association_class;
-		association_class = newAssociation_class;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.CLASS_REFERENCE__ASSOCIATION_CLASS, oldAssociation_class, association_class));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FormPackage.CLASS_REFERENCE__REAL_CLASS:
 				if (resolve) return getReal_class();
 				return basicGetReal_class();
-			case FormPackage.CLASS_REFERENCE__ASSOCIATION_CLASS:
-				if (resolve) return getAssociation_class();
-				return basicGetAssociation_class();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -177,9 +125,6 @@ public abstract class ClassReferenceImpl extends EObjectImpl implements ClassRef
 		switch (featureID) {
 			case FormPackage.CLASS_REFERENCE__REAL_CLASS:
 				setReal_class((Clazz)newValue);
-				return;
-			case FormPackage.CLASS_REFERENCE__ASSOCIATION_CLASS:
-				setAssociation_class((Clazz)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -196,9 +141,6 @@ public abstract class ClassReferenceImpl extends EObjectImpl implements ClassRef
 			case FormPackage.CLASS_REFERENCE__REAL_CLASS:
 				setReal_class((Clazz)null);
 				return;
-			case FormPackage.CLASS_REFERENCE__ASSOCIATION_CLASS:
-				setAssociation_class((Clazz)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -213,8 +155,6 @@ public abstract class ClassReferenceImpl extends EObjectImpl implements ClassRef
 		switch (featureID) {
 			case FormPackage.CLASS_REFERENCE__REAL_CLASS:
 				return real_class != null;
-			case FormPackage.CLASS_REFERENCE__ASSOCIATION_CLASS:
-				return association_class != null;
 		}
 		return super.eIsSet(featureID);
 	}
