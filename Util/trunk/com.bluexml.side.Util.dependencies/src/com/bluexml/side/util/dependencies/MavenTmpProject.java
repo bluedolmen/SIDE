@@ -30,7 +30,7 @@ public class MavenTmpProject {
 	public MavenTmpProject(File workingFolder, String tech_version, List<ModuleConstraint> mc) throws Exception {
 		this.dm = mc;
 		projectFolder = new File(workingFolder, TARGET_ARTIFACT + tech_version);
-		boolean deleted = FileHelper.deleteFile(projectFolder);
+		boolean deleted = FileHelper.deleteFile(projectFolder, false);
 		boolean created = projectFolder.mkdirs();
 	}
 
@@ -84,13 +84,13 @@ public class MavenTmpProject {
 		createProject();
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("outputDirectory", whereTocopy.getAbsolutePath());
-		
-//		Boolean offline = false;
-//		String[] profiles=null;
-//		
-//		if (!offline) {
-//			profiles = new String[] { "lan" };
-//		}
+
+		// Boolean offline = false;
+		// String[] profiles=null;
+		//		
+		// if (!offline) {
+		// profiles = new String[] { "lan" };
+		// }
 		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:copy-dependencies", params);
 		if (result.getExceptions().size() > 0) {
 			List<?> exceps = result.getExceptions();
