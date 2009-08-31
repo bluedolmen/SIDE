@@ -72,11 +72,14 @@ public class Application implements IApplication {
 			if(!(model.exists() && model.isAccessible())){
 				throw new Exception("fichier model non accessible");
 			}else{
-				System.out.println("generating"+model.getName());
+				String modelName = model.getName();
+				System.out.println("generating : "+modelName);
 				gen.generate(model);
-				System.out.println("completing");
+				System.out.println("completing : ");
 				gen.complete();
-				System.out.println("deploying"+model.getName());
+				System.out.println("deploying :  "+modelName);
+				
+				
 				deployer.deploy();
 			}
 			c++;
@@ -99,6 +102,7 @@ public class Application implements IApplication {
 		configurationParameters_.put(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral(),targetPath);
 		configurationParameters_.put(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral(),targetPath);
 		configurationParameters_.put("technologyVersion",techName);
+		configurationParameters_.put("configurationName",techName);
 		return configurationParameters_;
 	}
 	
