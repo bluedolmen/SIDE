@@ -31,8 +31,9 @@ public class CustomDocumentationService {
 	 * @param 
 	 * @return
 	 */
-	private static String processString(String c){
+	public static String processString(String c){
 		String result = new String(c);
+		result =result.replaceAll("&", "&amp;");
 		result =result.replaceAll("<", "&lt;");
 		result =result.replaceAll(">", "&gt;");
 		return c!=null?result:null;
@@ -49,6 +50,9 @@ public class CustomDocumentationService {
 		if(annotation!=null){
 			EMap<String,String> details = annotation.getDetails();
 			result = details.get("documentation");
+			if(result!=null){
+				result = processString(result);
+			}
 		}
 		return result;
 	}
@@ -64,8 +68,8 @@ public class CustomDocumentationService {
 		return getSrvDocumentation((EModelElement)ea);
 	}
 	
-	public static String getSrvDocumentation(EReference ea){
-		return getSrvDocumentation((EModelElement)ea);
+	public static String getSrvDocumentation(EReference er){
+		return getSrvDocumentation((EModelElement)er);
 	}
 	
 	/**
@@ -101,7 +105,7 @@ public class CustomDocumentationService {
 			while(c<tab.length){
 				EStringToStringMapEntryImpl entry = (EStringToStringMapEntryImpl)tab[c];
 				if(!"description".equalsIgnoreCase(entry.getKey())){
-					entry.setValue(processString(entry.getValue()));
+					entry.setValue(entry.getValue());
 					listeBien.add(entry);
 				}
 				c++;

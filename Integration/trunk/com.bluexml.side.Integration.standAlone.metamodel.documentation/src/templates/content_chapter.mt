@@ -105,7 +105,7 @@ import com.bluexml.side.integration.standalone.metamodel.documentation.CustomDoc
 		</table:table-cell>
 		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
 			<text:p text:style-name="Table_20_Heading">
-				<%getValue()%>
+				<%getValue().processString()%>
 			</text:p>
 		</table:table-cell>
 	</table:table-row>	
