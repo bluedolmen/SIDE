@@ -28,7 +28,7 @@
                         versionMin="1.0.0">
                   </moduleDependence>
                   <moduleDependence
-                        moduleId="com.bluexml.side.Integration.alfrescoShare.facetMapDashlet"
+                        moduleId="com.bluexml.side.Integration.alfresco.shareFacetMapDashlet"
                         moduleType="zip"
                         technologyVersion="alfresco_3.x"
                         versionMin="1.0.0">

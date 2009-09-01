@@ -1,4 +1,4 @@
-<project name="com.bluexml.side.Integration.alfrescoShare.facetMapDashlet">
+<project name="com.bluexml.side.Integration.alfresco.shareFacetMapDashlet">
 	<property file="build.${user.name}.properties" />
 	<property name="extensionFolder" value="./target" />
 	<property name="tmpFolder" value="${extensionFolder}/${module.id}-${module.version}" />

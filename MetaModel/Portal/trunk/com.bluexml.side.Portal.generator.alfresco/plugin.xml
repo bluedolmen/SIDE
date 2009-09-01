@@ -26,7 +26,7 @@
                         key="com.bluexml.side.Portal.generator.alfresco.doclist"
                         label="Alfresco Share document library component">
                      <moduleDependence
-                           moduleId="com.bluexml.side.Integration.alfrescoShare.doclist"
+                           moduleId="com.bluexml.side.Integration.alfresco.shareDoclist"
                            moduleType="zip"
                            technologyVersion="alfresco_3.x"
                            versionMin="1.0.0">
