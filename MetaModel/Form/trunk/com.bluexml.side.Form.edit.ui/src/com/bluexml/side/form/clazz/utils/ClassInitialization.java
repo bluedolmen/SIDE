@@ -21,7 +21,7 @@ import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.util.libs.ui.UIUtils;
 
 public class ClassInitialization {
-	
+
 	public static Command initializeClass(FormClass fc, EditingDomain domain) {
 		Command cmd = null;
 		if (fc.getReal_class() != null) {
@@ -29,7 +29,7 @@ public class ClassInitialization {
 			if(fc.getChildren().size() > 0) {
 				doWork = UIUtils.showConfirmation("Class already set","Class have already been set. Do you want to overwrite it?");
 			}
-			
+
 			if (doWork) {
 				Collection<FormElement> c = getChildForFormClassFromClazz(fc);
 				cmd = AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormGroup_Children(), c);
@@ -47,30 +47,30 @@ public class ClassInitialization {
 		fc.getChildren().removeAll(fc.getChildren());
 		Clazz cl = fc.getReal_class();
 		Collection<FormElement> c = new ArrayList<FormElement>();
-		
+
 		if (cl != null) {
 			if (fc.getLabel() == null || fc.getLabel().length() == 0) {
 				fc.setLabel(cl.getTitle());
 			}
-			
+
 			if (fc.getId() == null || fc.getId().length() == 0) {
 				fc.setId(cl.getName());
 			}
-			
+
 			Collection<Clazz> listClazz = new ArrayList<Clazz>();
 			listClazz = ClassDiagramUtils.getInheritedClazzs(cl);
-			for (Clazz Clazz : listClazz) {
+			for (Clazz clazz : listClazz) {
 				// Attributes
-				for (Attribute att : Clazz.getAttributes()) {
+				for (Attribute att : clazz.getAttributes()) {
 					Field field = null;
 					field = ClassDiagramUtils.getFieldForAttribute(att);
 					if (field != null) {
 						c.add(field);
 					}
 				}
-				
+
 				// Aspects
-				for (Aspect asp : Clazz.getAspects()) {
+				for (Aspect asp : clazz.getAspects()) {
 					FormAspect fa = FormFactory.eINSTANCE.createFormAspect();
 					fa.setRef(asp);
 					fa.setId(asp.getName());
@@ -87,15 +87,15 @@ public class ClassInitialization {
 					}
 					c.add(fa);
 				}
-				
+
 				// Associations :
-				for (Association ass : Clazz.getAllSourceAssociations()) {
-					c.add(ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass,true));
-					
+				for (Association ass : clazz.getAllSourceAssociations()) {
+					c.add(ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass,clazz));
+
 				}
-				
+
 				// Operations :
-				for (OperationComponent op : Clazz.getOperations()) {
+				for (OperationComponent op : clazz.getOperations()) {
 					Field field = ClassDiagramUtils.getFieldForOperation(op);
 					c.add(field);
 				}

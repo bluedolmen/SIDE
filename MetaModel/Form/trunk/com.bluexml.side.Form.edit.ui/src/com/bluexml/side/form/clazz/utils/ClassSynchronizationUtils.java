@@ -33,21 +33,21 @@ import com.bluexml.side.form.common.utils.FormDiagramUtils;
 import com.bluexml.side.form.common.utils.InternalModification;
 
 public class ClassSynchronizationUtils {
-	
-	
+
+
 	protected static CompoundCommand cc;
-	
+
 	public static Command synchronizeClass(FormClass fc, EditingDomain domain) {
 		cc = new CompoundCommand();
 		InternalModification.dontMoveToDisabled();
 		if (fc.getReal_class() != null) {
 			Clazz cl = fc.getReal_class();
-			
+
 			Collection<FormElement> cToDelete= new ArrayList<FormElement>();
 			Collection<Clazz> listClazz = ClassDiagramUtils.getInheritedClazzs(cl);
 			HashMap<String, FormElement> formChild = FormDiagramUtils.getFormChild(fc);
 			HashMap<String, ModelElement> ClazzChild = ClassDiagramUtils.getClazzChild(listClazz);
-			
+
 			// First we check for Add and Update
 			getAddCommand(fc, domain, listClazz, formChild);
 			// Then for delete
@@ -63,7 +63,7 @@ public class ClassSynchronizationUtils {
 			}
 			if (cToDelete.size() > 0) {;
 				Command delCmd = RemoveCommand.create(domain, cToDelete);
-				cc.append(delCmd); 
+				cc.append(delCmd);
 			}
 		}
 		InternalModification.moveToDisabled();
@@ -80,9 +80,9 @@ public class ClassSynchronizationUtils {
 			for (Attribute att : Clazz.getAttributes()) {
 				getCommandForAttribute(domain, formChild, att, fc);
 			}
-			
+
 			// Aspects
-			for (Aspect asp : Clazz.getAspects()) { 
+			for (Aspect asp : Clazz.getAspects()) {
 				if (formChild.containsKey(asp.getName())) {
 					// Modification : TODO
 					for (Attribute att : asp.getAttributes()) {
@@ -102,15 +102,15 @@ public class ClassSynchronizationUtils {
 					fa.getChildren().addAll(cf);
 					cToAdd.add(fa);
 				}
-				
+
 			}
-			
+
 			// Associations :
-			
+
 			for (Association ass : Clazz.getSourceAssociations()) {
 				getCommandsForAssociation(fc, domain, formChild, Clazz, ass);
 			}
-			
+
 			// Operations :
 			for (OperationComponent op : Clazz.getOperations()) {
 				if (!formChild.containsKey(op.getName())) {
@@ -122,7 +122,7 @@ public class ClassSynchronizationUtils {
 		if (cToAdd.size() >0) {
 			cc.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormGroup_Children(), cToAdd));
 		}
-		
+
 		if (cToDel.size() > 0) {
 			cc.append(DeleteCommand.create(domain, cToDel));
 		}
@@ -131,52 +131,52 @@ public class ClassSynchronizationUtils {
 
 	private static void getCommandsForAssociation(FormClass fc,
 			EditingDomain domain, HashMap<String, FormElement> formChild,
-			Clazz Clazz, Association ass) {
+			Clazz clazz, Association ass) {
 		// SOURCE
 		String associationId = "";
-		if (ass.getFirstEnd().getLinkedClass().equals(Clazz) && ass.getSecondEnd().isNavigable()) {
+		if (ass.getFirstEnd().getLinkedClass().equals(clazz) && ass.getSecondEnd().isNavigable()) {
 			associationId = ClassDiagramUtils.getAssociationName(ass, false);
 		}
-		
+
 		// Add
 		if (associationId.length() > 0 && !formChild.containsKey(associationId)) {
-			cc.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormGroup_Children(), ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass,false)));
+			cc.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormGroup_Children(), ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass,clazz)));
 		} else {
 			// Modification
 			Field mcf = (ModelChoiceField)formChild.get(associationId);
-			if(ass.getSecondEnd().isNavigable() && ass.getFirstEnd().getLinkedClass().equals(Clazz) && mcf != null) {
+			if(ass.getSecondEnd().isNavigable() && ass.getFirstEnd().getLinkedClass().equals(clazz) && mcf != null) {
 				if (((ModelChoiceField)mcf).getMax_bound() > Integer.parseInt(ass.getSecondEnd().getCardMax()) && Integer.parseInt(ass.getSecondEnd().getCardMax()) != -1) {
 					cc.append(SetCommand.create(domain, mcf, FormPackage.eINSTANCE.getModelChoiceField_Max_bound(), Integer.parseInt(ass.getSecondEnd().getCardMax())));
 				}
 			}
 		}
-		
+
 		// TARGET
 		associationId = "";
-		if (ass.getSecondEnd().getLinkedClass().equals(Clazz) && ass.getFirstEnd().isNavigable()) {
+		if (ass.getSecondEnd().getLinkedClass().equals(clazz) && ass.getFirstEnd().isNavigable()) {
 			associationId = ClassDiagramUtils.getAssociationName(ass, true);
 		}
-		
+
 		// Add
 		if (associationId.length() > 0 && !formChild.containsKey(associationId)) {
-			cc.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormGroup_Children(), ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass,true)));
+			cc.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormGroup_Children(), ClassDiagramUtils.transformAssociationIntoModelChoiceField(ass,clazz)));
 		} else {
 			// Modification
 			Field mcf = (ModelChoiceField)formChild.get(associationId);
-			if(ass.getFirstEnd().isNavigable() && ass.getFirstEnd().getLinkedClass().equals(Clazz) && mcf != null) {
+			if(ass.getFirstEnd().isNavigable() && ass.getFirstEnd().getLinkedClass().equals(clazz) && mcf != null) {
 				if (((ModelChoiceField)mcf).getMax_bound() > Integer.parseInt(ass.getFirstEnd().getCardMax())  && Integer.parseInt(ass.getFirstEnd().getCardMax()) != -1) {
 					cc.append(SetCommand.create(domain, mcf, FormPackage.eINSTANCE.getModelChoiceField_Max_bound(), Integer.parseInt(ass.getFirstEnd().getCardMax())));
 				}
 			}
 		}
 	}
-	
+
 	protected static void getCommandForAttribute(EditingDomain domain, HashMap<String, FormElement> formChild, Attribute att, FormGroup fg) {
 		// is it here?
 		if (formChild.containsKey(att.getName())) {
 			Field actualField = (Field) formChild.get(att.getName());
 			Field transformedAttribute = ClassDiagramUtils.getFieldForAttribute(att);
-			
+
 			// Field Transformation
 			if (!transformedAttribute.getClass().equals(actualField.getClass()) ) {
 				// If a field have been transformed we won't change it

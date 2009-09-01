@@ -39,7 +39,7 @@ ISelectionChangedListener {
 	private EditingDomain domain;
 	private Clazz c;
 	ModelChoiceField mcf;
-	
+
 	public ExpandModelChoice(Clazz p_c, ModelChoiceField p_mcf) {
 		super();
 		c = p_c;
@@ -68,24 +68,23 @@ ISelectionChangedListener {
 
 		return selectedObject != null;
 	}
-	
+
 	@Override
 	public void run() {
 		super.run();
 		doAction();
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	private void doAction() {
 		if (c != null && mcf != null) {
 			InternalModification.dontMoveToDisabled();
 			Reference ref = FormFactory.eINSTANCE.createReference();
 			FieldTransformation.transform(mcf, ref);
-			
+
 			FormContainer form = createFormForRealClass(c,mcf);
 			FormClass formClass = (FormClass) form;
 			ref.getTarget().add(formClass);
-			
+
 			// If association class
 //			FormContainer formAssoClass = null;
 //			FormClass formClassAssoClass = null;
@@ -94,23 +93,23 @@ ISelectionChangedListener {
 //				formClassAssoClass = (FormClass) formAssoClass;
 //				ref.getAssociation_formClass().add(formClassAssoClass);
 //			}
-			
-			// Add the Form	
+
+			// Add the Form
 			CompoundCommand cc = new CompoundCommand();
 			Command addFormCmd = AddCommand.create(domain, FormDiagramUtils.getParentFormCollection(mcf), FormPackage.eINSTANCE.getFormCollection_Forms(), form);
 			cc.append(addFormCmd);
-			
+
 			// We seek virtualized fields of this mcf to change link to the reference
 			List<VirtualField> listVf = FormDiagramUtils.getVirtualizedFields(mcf);
 			for (VirtualField vf : listVf) {
 				cc.append(SetCommand.create(domain, vf, FormPackage.eINSTANCE.getVirtualField_Link(), ref));
 			}
-			
+
 			// Commands :
 			// Delete Model Choice Field
 			Command delCmd = RemoveCommand.create(domain, (Object)mcf);
 			cc.append(delCmd);
-			
+
 			// Add the form class if needed :
 //			if (formAssoClass != null) {
 //				Command addFormCmdAssoClass = AddCommand.create(domain, FormDiagramUtils.getParentFormCollection(mcf), FormPackage.eINSTANCE.getFormCollection_Forms(), formAssoClass);
@@ -125,20 +124,20 @@ ISelectionChangedListener {
 			domain.getCommandStack().execute(cc);
 			InternalModification.moveToDisabled();
 		}
-		
+
 	}
-	
+
 	protected FormContainer createFormForRealClass(Clazz p_class, ModelChoiceField p_mcf) {
 		//FormContainer form =  FormFactory.eINSTANCE.createFormContainer();
 		FormClass formClass = FormFactory.eINSTANCE.createFormClass();
 		//form.setRoot(formClass);
-		
+
 		formClass.setReal_class(p_class);
 		Random random = new Random();
 		int pick = random.nextInt(Integer.MAX_VALUE);
-		
+
 		formClass.setId(p_class.getName() + "_" + pick);
-		
+
 		if (p_class.getTitle() != null && p_class.getTitle().length() > 0) {
 			formClass.setLabel(p_class.getTitle());
 			//form.setName(p_class.getTitle() + " ref from " + ((FormGroup)p_mcf.eContainer()).getLabel() + " (" + p_mcf.getLabel() + ")");
@@ -148,9 +147,9 @@ ISelectionChangedListener {
 		};
 		return formClass;
 	}
-	
-	
-	
+
+
+
 	@Override
 	public String getText() {
 		String label = ((c.getTitle() != null && c.getTitle().length() > 0) ? c.getTitle() : c.getName());
@@ -159,7 +158,7 @@ ISelectionChangedListener {
 		}
 		return label;
 	}
-	
+
 	public void setActiveWorkbenchPart(IWorkbenchPart workbenchPart) {
 		if (workbenchPart instanceof IEditingDomainProvider) {
 			domain = ((IEditingDomainProvider) workbenchPart).getEditingDomain();

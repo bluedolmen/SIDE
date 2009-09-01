@@ -33,7 +33,7 @@ import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.FormFactory;
 
 public class ClassDiagramUtils {
-	
+
 	/**
 	 * Will return the field corresponding to the attribute
 	 * @param att
@@ -49,7 +49,7 @@ public class ClassDiagramUtils {
 				if (metaInfoMap.containsKey("multiple") && metaInfoMap.get("multiple") != null && metaInfoMap.get("multiple").equals("True")) {
 					((ChoiceField) field).setMultiple(true);
 				}
-			} else if (att.getTyp().equals(DataType.STRING)) { 
+			} else if (att.getTyp().equals(DataType.STRING)) {
 				// Email Field
 				if (Boolean.parseBoolean(metaInfoMap.get("email"))) {
 					field = FormFactory.eINSTANCE.createEmailField();
@@ -93,7 +93,7 @@ public class ClassDiagramUtils {
 			} else {
 				EcorePlugin.INSTANCE.log("No field available for " + att.getTyp());
 			}
-			
+
 			if (field == null) {
 				//field = formFactory.eINSTANCE.createField();
 			} else {
@@ -113,7 +113,7 @@ public class ClassDiagramUtils {
 		}
 		return field;
 	}
-	
+
 	public static Field getFieldForOperation(OperationComponent op) {
 		Field f = null;
 		if (op != null) {
@@ -124,21 +124,27 @@ public class ClassDiagramUtils {
 		}
 		return f;
 	}
-	
+
 	/**
 	 * Transform an association into a model choice field
 	 * @param ass
 	 * @param useSource
 	 * @return
 	 */
-	public static FormElement transformAssociationIntoModelChoiceField(Association ass, boolean useSource) {
+	public static FormElement transformAssociationIntoModelChoiceField(Association ass, Clazz srcClazz) {
 		ModelChoiceField f = FormFactory.eINSTANCE.createModelChoiceField();
-		
+
+		// Modification since add of FirstEnd and SecondEnd : TODO : check if all case are OK. Or rewrite method.
+		boolean useSource = true;
+		if (ass.getFirstEnd().getLinkedClass().equals(srcClazz)) {
+			useSource = false;
+		}
+
 		String id = getAssociationName(ass, useSource);
-		
+
 		f.setId(id);
 		f.setRef(ass);
-		
+
 		if (ass.getTitle() != null && ass.getTitle().length() > 0) {
 			f.setLabel(ass.getTitle());
 		} else {
@@ -149,7 +155,7 @@ public class ClassDiagramUtils {
 		} else {
 			f.setReal_class((Clazz)ass.getSecondEnd().getLinkedClass());
 		}
-		
+
 		if (useSource) {
 			f.setMin_bound(Integer.parseInt(ass.getFirstEnd().getCardMin()));
 			f.setMax_bound(Integer.parseInt(ass.getFirstEnd().getCardMax()));
@@ -157,12 +163,12 @@ public class ClassDiagramUtils {
 			f.setMin_bound(Integer.parseInt(ass.getSecondEnd().getCardMin()));
 			f.setMax_bound(Integer.parseInt(ass.getSecondEnd().getCardMax()));
 		}
-		
-		
-		
+
+
+
 		return f;
 	}
-	
+
 	/**
 	 * Return Association Name
 	 * @param ass
@@ -178,7 +184,7 @@ public class ClassDiagramUtils {
 		}
 		return id;
 	}
-	
+
 	/**
 	 * Return inherited Clazzs from a class
 	 * @param cl
@@ -192,9 +198,9 @@ public class ClassDiagramUtils {
 		}
 		return listClazz;
 	}
-	
+
 	protected static Map<Clazz, SortedSet<Clazz>> inheritings = null;
-	
+
 	/**
 	 * Internal class, used in order to have sorted list of Clazz
 	 * @author Eric
@@ -208,9 +214,9 @@ public class ClassDiagramUtils {
 			name2 = c2.getLabel();
 			return name1.compareToIgnoreCase(name2);
 		}
-		
+
 	};
-	
+
 	/**
 	 * Return all sub Clazzs
 	 * @param cl
@@ -220,7 +226,7 @@ public class ClassDiagramUtils {
 		//if (inheritings == null) {
 			SortedSet<Clazz> allClazzs = getAllClazzs(cl);
 			inheritings = new HashMap<Clazz, SortedSet<Clazz>>();
-			
+
 			for (Clazz c : allClazzs) {
 				Collection<Clazz> generalisations = getInheritedClazzs(c);
 				for (Clazz gc : generalisations) {
@@ -233,7 +239,7 @@ public class ClassDiagramUtils {
 		//}
 		return inheritings.get(cl);
 	}
-	
+
 	public static Map<String,String> InitializeMetaInfo(EList<MetaInfo> metainfo) {
 		Map<String,String> metaInfoMap = new HashMap<String,String>(metainfo.size());
 		for (MetaInfo m : metainfo) {
@@ -241,7 +247,7 @@ public class ClassDiagramUtils {
 		}
 		return metaInfoMap;
 	}
-	
+
 	/**
 	 * Return a collection of choices for an Enumeration
 	 * @param list
@@ -254,9 +260,9 @@ public class ClassDiagramUtils {
 		}
 		return choicesList;
 	}
-	
-	
-	
+
+
+
 	/**
 	 * Return all instanceable Clazzs that inherit from the current class
 	 * @param c
@@ -268,7 +274,7 @@ public class ClassDiagramUtils {
 		// We iterate on each Clazzs of the model
 		for (Clazz clazz : allClazzs) {
 			Collection<Clazz> generalisations = getInheritedClazzs(clazz);
-			// We iterate on 
+			// We iterate on
 			for (Clazz gc : generalisations) {
 				if (!inheritings.containsKey(gc)) {
 					inheritings.put(gc, new HashSet<Clazz>());
@@ -278,7 +284,7 @@ public class ClassDiagramUtils {
 		}
 		return inheritings.get(c);
 	}
-	
+
 	/**
 	 * Get all class from the model
 	 * @param c
@@ -294,7 +300,7 @@ public class ClassDiagramUtils {
 
 		return s;
 	}
-	
+
 	/**
 	 * Get all package
 	 * @param c
@@ -304,7 +310,7 @@ public class ClassDiagramUtils {
 		ClassPackage root = getRootPackage(c);
 		return getAllChildrens(root);
 	}
-	
+
 	/**
 	 * Returns the root package
 	 * @param elt
@@ -327,7 +333,7 @@ public class ClassDiagramUtils {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Returns all children packages of the given package.
 	 * @param p
