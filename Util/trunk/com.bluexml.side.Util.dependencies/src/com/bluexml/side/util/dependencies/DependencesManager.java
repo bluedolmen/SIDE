@@ -7,10 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 public class DependencesManager {
-
+	private boolean offline;
 	private Map<String, List<ModuleConstraint>> contraints = new HashMap<String, List<ModuleConstraint>>();
 
-	public DependencesManager(List<ModuleConstraint> lmc) {
+	public DependencesManager(List<ModuleConstraint> lmc,boolean offline) {
+		this.offline = offline;
 		for (ModuleConstraint mc : lmc) {
 			addEntry(contraints, mc.getTech_version(), mc);
 		}
@@ -72,8 +73,18 @@ public class DependencesManager {
 
 	public void copyDependencies(File workFolder, File generateFolder) throws Exception {
 		for (Map.Entry<String, List<ModuleConstraint>> mc : this.getContraints().entrySet()) {
-			MavenTmpProject mvp = new MavenTmpProject(workFolder, mc.getKey(), getConstraintsFor(mc.getKey()));
+			// copy dependencies
+			MavenTmpProject mvp = new MavenTmpProject(workFolder, mc.getKey(), getConstraintsFor(mc.getKey()), offline);
 			mvp.copyAllDependencies(new File(generateFolder, mc.getKey()));
+
+		}
+	}
+
+	public void goOffline(File workFolder) throws Exception {
+		for (Map.Entry<String, List<ModuleConstraint>> mc : this.getContraints().entrySet()) {
+			// take care of offline mode
+			MavenTmpProject mvp_offline = new MavenTmpProject(workFolder, mc.getKey() + "_offline", getConstraintsFor(mc.getKey()), false);
+			mvp_offline.goOffline();
 		}
 	}
 

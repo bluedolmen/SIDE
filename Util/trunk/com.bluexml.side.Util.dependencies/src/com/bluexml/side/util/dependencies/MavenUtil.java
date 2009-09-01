@@ -1,6 +1,7 @@
 package com.bluexml.side.util.dependencies;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -24,9 +25,11 @@ public class MavenUtil {
 		archetypeCreateRequest.setInteractiveMode(false);
 		archetypeCreateRequest.setProperty("basedir", baseDir.getAbsolutePath().toString());
 		
+		// set active profile
 		if (profiles != null && !profiles.isEmpty()) {
-			archetypeCreateRequest.setProfiles(profiles);
+			archetypeCreateRequest.addActiveProfiles(profiles);
 		}
+		// set offline
 		if (offline != null) {
 			archetypeCreateRequest.setOffline(offline);
 		}
@@ -36,8 +39,14 @@ public class MavenUtil {
 				archetypeCreateRequest.setProperty(param.getKey(), param.getValue());
 			}
 		}
-		MavenEmbedder embedder = getEmbedder();
+		MavenEmbedder embedder = getEmbedder();		
 		archetypeCreateRequest.setUpdateSnapshots(true);
+		
+		//System.out.println("Active profiles :"+archetypeCreateRequest.getActiveProfiles());
+		if (archetypeCreateRequest.getActiveProfiles().size() == 0) {
+			throw new Exception("No active profile found report this bug to SIDE developers team");
+		}
+		
 		MavenExecutionResult result = embedder.execute(archetypeCreateRequest);
 		return result;
 	}

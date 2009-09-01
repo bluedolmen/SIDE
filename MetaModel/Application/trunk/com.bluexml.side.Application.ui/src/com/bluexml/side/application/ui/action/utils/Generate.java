@@ -199,6 +199,10 @@ public class Generate extends Thread {
 		return Boolean.valueOf(configurationParameters.get(ApplicationDialog.KEY_SKIPVALIDATION));
 	}
 
+	protected boolean isOfflineMode(Map<String, String> configurationParameters) {
+		return Boolean.valueOf(configurationParameters.get(ApplicationDialog.KEY_OFFLINE));
+	}
+
 	private void addText(String text) {
 		addText(lineSeparator + text, SWT.COLOR_BLACK);
 	}
@@ -236,11 +240,21 @@ public class Generate extends Thread {
 						addText(Messages.getString("Generate.18")); //$NON-NLS-1$
 						label.setText(Messages.getString("Generate.19")); //$NON-NLS-1$
 					} catch (CoreException e) {
-						addErrorText(Messages.getString("Generate.20")); //$NON-NLS-1$
 						e.printStackTrace();
+						addErrorText(Messages.getString("Generate.20")); //$NON-NLS-1$
+
 					}
 				}
-
+				// if work online do a mvn go-offline to prepare maven to work offline if asked
+				if (!isOfflineMode(configurationParameters)) {
+					// get all Integration modules for offline mode
+					try {
+						ApplicationUtil.prepareForOffline();
+					} catch (Exception e1) {
+						e1.printStackTrace();
+						addErrorText(Messages.getString("Generate.15"));
+					}
+				}
 				boolean error = generate_(configuration, modelsInfo, configurationParameters, generationParameters);
 				error &= deploy_(configuration, modelsInfo, configurationParameters, generationParameters);
 
@@ -370,7 +384,8 @@ public class Generate extends Thread {
 							com.bluexml.side.application.ModuleConstraint current = l.get(c);
 							lmc.add(new ModuleConstraint(current.getModuleId(), current.getTechnologyVersion(), current.getModuleType(), current.getVersionMin(), current.getVersionMax()));
 						}
-						DependencesManager dm = new DependencesManager(lmc);
+
+						DependencesManager dm = new DependencesManager(lmc, isOfflineMode(configurationParameters));
 
 						generator.initialize(generationParameters, generatorOptions, configurationParameters, dm);
 					} catch (Exception e) {

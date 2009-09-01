@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.maven.execution.MavenExecutionResult;
 import org.jdom.Document;
@@ -22,16 +21,17 @@ public class MavenTmpProject {
 	private File projectFolder;
 	private MavenUtil mavenUtil;
 	private static final String TARGET_ARTIFACT = "tmpProject_";
-
+	private Boolean offline = false;
 	private List<ModuleConstraint> dm;
 	private static final SAXBuilder sxb = new SAXBuilder();
 	private static final XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
 
-	public MavenTmpProject(File workingFolder, String tech_version, List<ModuleConstraint> mc) throws Exception {
+	public MavenTmpProject(File workingFolder, String tech_version, List<ModuleConstraint> mc, boolean offline) throws Exception {
 		this.dm = mc;
 		projectFolder = new File(workingFolder, TARGET_ARTIFACT + tech_version);
 		boolean deleted = FileHelper.deleteFile(projectFolder, false);
 		boolean created = projectFolder.mkdirs();
+		this.offline = offline;
 	}
 
 	/**
@@ -85,17 +85,18 @@ public class MavenTmpProject {
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("outputDirectory", whereTocopy.getAbsolutePath());
 
-		// Boolean offline = false;
-		// String[] profiles=null;
-		//		
-		// if (!offline) {
-		// profiles = new String[] { "lan" };
-		// }
-		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:copy-dependencies", params);
+		String[] profiles = null;
+
+		if (offline) {
+			profiles = new String[] { "offline" };
+		} else {
+			profiles = new String[] { "wan", "lan", "local" };
+		}
+		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:copy-dependencies", params, profiles, offline);
 		if (result.getExceptions().size() > 0) {
 			List<?> exceps = result.getExceptions();
-			System.err.println("Exception occured during maven process :" + exceps);
-			throw new Exception("Exception occured during maven process :" + exceps);
+			System.err.println("Exception occured during maven process :\n" + exceps);
+			throw new Exception("Exception occured during maven process :\n" + exceps);
 		}
 	}
 
@@ -106,4 +107,39 @@ public class MavenTmpProject {
 		return mavenUtil;
 	}
 
+	public void goOffline() throws Exception {
+		createProject();
+		HashMap<String, String> params = new HashMap<String, String>();
+
+		String[] profiles = null;
+
+		
+		profiles = new String[] { "wan", "lan", "local" };
+		
+		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:go-offline", params, profiles, false);
+		if (result.getExceptions().size() > 0) {
+			System.err.println(this);
+			List<?> exceps = result.getExceptions();
+			System.err.println("Exception occured during maven process :" + exceps);
+			throw new Exception("Exception occured during maven process :" + exceps);
+		}
+	}
+
+	public void setOffline(Boolean offline) {
+		this.offline = offline;
+	}
+
+	public Boolean getOffline() {
+		return offline;
+	}
+
+	public String toString() {
+		String result = "";
+		result += this.TARGET_ARTIFACT + "\n";
+		result += this.dm + "\n";
+		result += this.offline + "\n";
+		result += this.pomFile + "\n";
+		result += this.projectFolder + "\n";
+		return result;
+	}
 }

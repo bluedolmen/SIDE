@@ -350,7 +350,5 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		// get dependences
 		dm.copyDependencies(getTemporarySystemFile(),getTargetSystemFile());
 		// dependences packages is now with other resources in the target folder
-
-
 	}
 }

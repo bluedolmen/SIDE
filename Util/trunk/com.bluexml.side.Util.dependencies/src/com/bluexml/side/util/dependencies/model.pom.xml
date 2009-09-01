@@ -13,11 +13,11 @@
 		<profile>
 			<id>local</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<repositories>
 				<repository>
-					<id>release</id>
+					<id>releases</id>
 					<url>http://localhost:8081/nexus/content/repositories/releases
 					</url>
 					<releases>
@@ -42,13 +42,13 @@
 			</repositories>
 			<pluginRepositories>
 				<pluginRepository>
-					<id>SIDE-lan-snapshots</id>
+					<id>releases</id>
 					<url>
 						http://localhost:8081/nexus/content/repositories/snapshots
 					</url>
 				</pluginRepository>
 				<pluginRepository>
-					<id>SIDE-lan-releases</id>
+					<id>snapshots</id>
 					<url>http://localhost:8081/nexus/content/repositories/releases
 					</url>
 				</pluginRepository>
@@ -57,7 +57,7 @@
 		<profile>
 			<id>lan</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<repositories>
 				<repository>
@@ -103,7 +103,7 @@
 		<profile>
 			<id>wan</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<repositories>
 				<repository>
@@ -129,6 +129,37 @@
 					</url>
 				</pluginRepository>
 			</pluginRepositories>
+		</profile>
+		<profile>
+			<id>offline</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<repositories>
+				<repository>
+					<id>central</id>
+					<url>file:///Users/davidabad/.m2/repository/</url>
+				</repository>
+				<repository>
+					<id>release</id>
+					<url>file:///Users/davidabad/.m2/repository/</url>
+				</repository>
+				<repository>
+					<id>snapshot</id>
+					<url>file:///Users/davidabad/.m2/repository/</url>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>release</id>
+					<url>file:///Users/davidabad/.m2/repository/</url>
+				</pluginRepository>
+				<pluginRepository>
+					<id>snapshot</id>
+					<url>file:///Users/davidabad/.m2/repository/</url>
+				</pluginRepository>
+			</pluginRepositories>
+
 		</profile>
 	</profiles>
 </project>

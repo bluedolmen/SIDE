@@ -1,5 +1,6 @@
 package com.bluexml.side.application.ui.action.utils;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,18 +35,42 @@ import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.ModuleConstraint;
 import com.bluexml.side.application.Option;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
-import com.bluexml.side.application.ui.action.tree.ConfigurationContentProvider;
 import com.bluexml.side.application.ui.action.tree.Deployer;
 import com.bluexml.side.application.ui.action.tree.Generator;
 import com.bluexml.side.application.ui.action.tree.ImplNode;
 import com.bluexml.side.application.ui.action.tree.TreeElement;
+import com.bluexml.side.util.dependencies.DependencesManager;
+import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.security.Checkable;
 
 public class ApplicationUtil {
+	public static final String EXTENSIONPOINT_ID = "com.bluexml.side.Application.com_bluexml_application_configuration";
+
+	public static final String APPLICATION_METAMODEL = "metamodel";
+	public static final String APPLICATION_METAMODEL_ID = "id";
+	public static final String APPLICATION_METAMODEL_NAME = "name";
+
+	public static final String APPLICATION_TECHNO = "technology";
+
+	public static final String APPLICATION_TECHVERSION = "technologyVersion";
+
+	public static final String APPLICATION_GENERATORVERSION = "generatorVersion";
+
+	public static final String APPLICATION_DEPLOYERVERSION = "deployerVersion";
+
+	public static final String APPLICATION_OPTION = "option";
+
+	public static final String APPLICATION_CONSTRAINTS = "moduleDependence";
+	public static final String APPLICATION_CONSTRAINTS_MODULEID = "moduleId";
+	public static final String APPLICATION_CONSTRAINTS_MODULETYPE = "moduleType";
+	public static final String APPLICATION_CONSTRAINTS_TECHVERSION = "technologyVersion";
+	public static final String APPLICATION_CONSTRAINTS_VERSIONMIN = "versionMin";
+	public static final String APPLICATION_CONSTRAINTS_VERSIONMAX = "versionMax";
+
 	/**
 	 * Return the configuration corresponding to the given key in the current
 	 * configuration. Return null if not found.
-	 *
+	 * 
 	 * @param key
 	 * @return
 	 */
@@ -66,7 +91,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return models of the application
-	 *
+	 * 
 	 * @param application
 	 * @return
 	 */
@@ -82,7 +107,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Delete the given generator from the given configuration
-	 *
+	 * 
 	 * @param config
 	 * @param in
 	 */
@@ -99,7 +124,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Delete the given deployer from the given configuration
-	 *
+	 * 
 	 * @param config
 	 * @param in
 	 */
@@ -115,7 +140,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the list of componant configuration for a specific config
-	 *
+	 * 
 	 * @param config
 	 * @return
 	 */
@@ -145,7 +170,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return a map with association model <> metaModel name
-	 *
+	 * 
 	 * @param models
 	 * @param doValidation
 	 * @return
@@ -177,7 +202,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the metamodel of a given model
-	 *
+	 * 
 	 * @param model
 	 * @param file
 	 * @return
@@ -191,7 +216,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the resource for the given model and resource set
-	 *
+	 * 
 	 * @param rs
 	 * @param file
 	 * @return
@@ -205,7 +230,7 @@ public class ApplicationUtil {
 		try {
 			loadedModel = EResourceUtils.openModel(fullPath, null, rs);
 		} catch (IOException e) {
-			IOException ioe = new IOException(System.getProperty("line.separator") + "Error with file " + file.getName() + " (check that it's a correct model file) ["+e.getMessage()+"]");
+			IOException ioe = new IOException(System.getProperty("line.separator") + "Error with file " + file.getName() + " (check that it's a correct model file) [" + e.getMessage() + "]");
 			ioe.setStackTrace(e.getStackTrace());
 			throw ioe;
 		}
@@ -214,7 +239,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the IFiel for the given Model
-	 *
+	 * 
 	 * @param model
 	 * @return
 	 * @throws IOException
@@ -229,7 +254,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the ressourceSet for a model
-	 *
+	 * 
 	 * @param model
 	 * @return
 	 * @throws IOException
@@ -247,7 +272,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the meta model EPackage
-	 *
+	 * 
 	 * @param r
 	 * @return
 	 */
@@ -263,7 +288,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the root element of a model
-	 *
+	 * 
 	 * @param model
 	 * @return
 	 */
@@ -279,7 +304,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Take a EObject and will return the top container
-	 *
+	 * 
 	 * @param eo
 	 * @return
 	 */
@@ -293,7 +318,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Launch validation on given EObject
-	 *
+	 * 
 	 * @param eo
 	 * @return
 	 */
@@ -333,7 +358,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Check if the element given is active in the key
-	 *
+	 * 
 	 * @param el
 	 *            : the element
 	 * @return true if valid, false if not
@@ -364,10 +389,37 @@ public class ApplicationUtil {
 	}
 
 	/**
-	 * take a configuration and update all properties from SIDE extension, this manage :
-	 * <li> deleted elements (options, dependencies)</li>
-	 * <li> added elements</li>
-	 * <li> updates elements</li>
+	 * scan all plugins and build the complete list of ModuleConstraint
+	 * 
+	 * @return
+	 */
+	public static List<com.bluexml.side.util.dependencies.ModuleConstraint> buildOfflineConfiguration() {
+		List<com.bluexml.side.util.dependencies.ModuleConstraint> lmc = new ArrayList<com.bluexml.side.util.dependencies.ModuleConstraint>();
+		IConfigurationElement[] contributions = Platform.getExtensionRegistry().getConfigurationElementsFor(EXTENSIONPOINT_ID);
+		// get all module constraints and construct instance of
+		// com.bluexml.side.util.dependencies.ModuleConstraint
+		for (IConfigurationElement config_exp : contributions) {
+			String nodeName = APPLICATION_CONSTRAINTS;
+			List<IConfigurationElement> matchs = getIConfigurationElementsByName(config_exp, nodeName);
+			for (IConfigurationElement configurationElement : matchs) {
+				String moduleId = configurationElement.getAttribute(APPLICATION_CONSTRAINTS_MODULEID);
+				String moduleType = configurationElement.getAttribute(APPLICATION_CONSTRAINTS_MODULETYPE);
+				String versionMax = configurationElement.getAttribute(APPLICATION_CONSTRAINTS_VERSIONMAX);
+				String versionMin = configurationElement.getAttribute(APPLICATION_CONSTRAINTS_VERSIONMIN);
+				String technologyVersion = configurationElement.getAttribute(APPLICATION_CONSTRAINTS_TECHVERSION);
+				com.bluexml.side.util.dependencies.ModuleConstraint mc = new com.bluexml.side.util.dependencies.ModuleConstraint(moduleId, technologyVersion, moduleType, versionMin, versionMax);
+				lmc.add(mc);
+			}
+		}
+
+		return lmc;
+	}
+
+	/**
+	 * take a configuration and update all properties from SIDE extension, this
+	 * manage : <li>deleted elements (options, dependencies)</li> <li>added
+	 * elements</li> <li>updates elements</li>
+	 * 
 	 * @param config
 	 * @throws Exception
 	 */
@@ -396,30 +448,27 @@ public class ApplicationUtil {
 			generatorConfiguration.setImpl_class(extFrag.getAttribute("class"));
 
 			Map<String, IConfigurationElement> dependencies_ext = new HashMap<String, IConfigurationElement>();
-			
+
 			// Obligatory dependences
 			Map<String, IConfigurationElement> dependencies_extObligatory = new HashMap<String, IConfigurationElement>();
 			// add generator/deployer dependencies to check
-			IConfigurationElement[] arrayOfdependencies_ext = extFrag.getChildren("moduleDependence");
+			IConfigurationElement[] arrayOfdependencies_ext = extFrag.getChildren(APPLICATION_CONSTRAINTS);
 			for (IConfigurationElement configurationElement : arrayOfdependencies_ext) {
-				dependencies_ext.put(configurationElement.getAttribute("moduleId"), configurationElement);
-				dependencies_extObligatory.put(configurationElement.getAttribute("moduleId"), configurationElement);
+				dependencies_ext.put(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_MODULEID), configurationElement);
+				dependencies_extObligatory.put(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_MODULEID), configurationElement);
 			}
-			
-			
-			
-			
+
 			// check options
 			EList<Option> options = generatorConfiguration.getOptions();
 			List<String> options_ext = new ArrayList<String>();
 			IConfigurationElement[] arrayOfoptions_ext = extFrag.getChildren("option");
 			for (IConfigurationElement configurationElement : arrayOfoptions_ext) {
 				options_ext.add(configurationElement.getAttribute("key"));
-				
-				IConfigurationElement[] arrayOfConstraints_ext =configurationElement.getChildren("moduleDependence");
+
+				IConfigurationElement[] arrayOfConstraints_ext = configurationElement.getChildren(APPLICATION_CONSTRAINTS);
 				for (IConfigurationElement configurationElement2 : arrayOfConstraints_ext) {
 					// add to list of dependencies to check
-					dependencies_ext.put(configurationElement2.getAttribute("moduleId"), configurationElement2);
+					dependencies_ext.put(configurationElement2.getAttribute(APPLICATION_CONSTRAINTS_MODULEID), configurationElement2);
 				}
 			}
 
@@ -429,15 +478,13 @@ public class ApplicationUtil {
 				if (!options_ext.contains(option.getKey())) {
 					// remove this
 					optionsToRemove.add(option);
-					//System.out.println("toRemove !"+option);
+					// System.out.println("toRemove !"+option);
 				} else {
 					// check option constraints
 				}
 			}
 			generatorConfiguration.getOptions().removeAll(optionsToRemove);
 
-			
-			
 			// check dependencies
 			EList<ModuleConstraint> mcs = generatorConfiguration.getModuleContraints();
 			List<String> updatedConstraints = new ArrayList<String>();
@@ -449,10 +496,10 @@ public class ApplicationUtil {
 				} else {
 					// update
 					IConfigurationElement configurationElement = dependencies_ext.get(moduleConstraint.getModuleId());
-					moduleConstraint.setModuleType(configurationElement.getAttribute("moduleType"));
-					moduleConstraint.setVersionMax(configurationElement.getAttribute("versionMax"));
-					moduleConstraint.setVersionMin(configurationElement.getAttribute("versionMin"));
-					moduleConstraint.setTechnologyVersion(configurationElement.getAttribute("technologyVersion"));
+					moduleConstraint.setModuleType(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_MODULETYPE));
+					moduleConstraint.setVersionMax(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_VERSIONMAX));
+					moduleConstraint.setVersionMin(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_VERSIONMIN));
+					moduleConstraint.setTechnologyVersion(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_TECHVERSION));
 					updatedConstraints.add(moduleConstraint.getModuleId());
 				}
 			}
@@ -466,11 +513,11 @@ public class ApplicationUtil {
 			for (String string : lnewConstraints) {
 				IConfigurationElement newConstraint_ext = dependencies_ext.get(string);
 				ModuleConstraint moduleConstraint = ApplicationFactory.eINSTANCE.createModuleConstraint();
-				moduleConstraint.setModuleId(newConstraint_ext.getAttribute("moduleId"));
-				moduleConstraint.setModuleType(newConstraint_ext.getAttribute("moduleType"));
-				moduleConstraint.setVersionMax(newConstraint_ext.getAttribute("versionMax"));
-				moduleConstraint.setVersionMin(newConstraint_ext.getAttribute("versionMin"));
-				moduleConstraint.setTechnologyVersion(newConstraint_ext.getAttribute("technologyVersion"));
+				moduleConstraint.setModuleId(newConstraint_ext.getAttribute(APPLICATION_CONSTRAINTS_MODULEID));
+				moduleConstraint.setModuleType(newConstraint_ext.getAttribute(APPLICATION_CONSTRAINTS_MODULETYPE));
+				moduleConstraint.setVersionMax(newConstraint_ext.getAttribute(APPLICATION_CONSTRAINTS_VERSIONMAX));
+				moduleConstraint.setVersionMin(newConstraint_ext.getAttribute(APPLICATION_CONSTRAINTS_VERSIONMIN));
+				moduleConstraint.setTechnologyVersion(newConstraint_ext.getAttribute(APPLICATION_CONSTRAINTS_TECHVERSION));
 				generatorConfiguration.getModuleContraints().add(moduleConstraint);
 			}
 		}
@@ -480,15 +527,18 @@ public class ApplicationUtil {
 	/**
 	 * search in all SIDE extension, an extension fragment that match with this
 	 * ComponantConfiguration
-	 *
+	 * 
 	 * @param conf
 	 * @return
 	 * @throws Exception
 	 */
 	public static IConfigurationElement getIConfigurationElement(ComponantConfiguration conf) throws Exception {
-		IConfigurationElement[] contributions = Platform.getExtensionRegistry().getConfigurationElementsFor(ConfigurationContentProvider.EXTENSIONPOINT_ID);
+		IConfigurationElement[] contributions = Platform.getExtensionRegistry().getConfigurationElementsFor(EXTENSIONPOINT_ID);
 		for (IConfigurationElement config_exp : contributions) {
-			//System.err.println("DEBUG getIConfigurationElement: " + config_exp.getName() + " " + config_exp.getNamespaceIdentifier() + " (" + config_exp.getAttribute("id") + " " + config_exp.getAttribute("name") + ")");
+			// System.err.println("DEBUG getIConfigurationElement: " +
+			// config_exp.getName() + " " + config_exp.getNamespaceIdentifier()
+			// + " (" + config_exp.getAttribute("id") + " " +
+			// config_exp.getAttribute("name") + ")");
 			Map<String, String> query = new HashMap<String, String>();
 			query.put("id", conf.getId());
 			String nodeName = "";
@@ -510,7 +560,7 @@ public class ApplicationUtil {
 	/**
 	 * search in extension fragment that match with given name and a set of
 	 * attributes
-	 *
+	 * 
 	 * @param parent
 	 * @param nodeName
 	 * @param parametersMatchs
@@ -529,7 +579,7 @@ public class ApplicationUtil {
 
 	/**
 	 * return a list of extension fragment that match with the given name
-	 *
+	 * 
 	 * @param parent
 	 * @param name
 	 * @return
@@ -548,7 +598,7 @@ public class ApplicationUtil {
 
 	/**
 	 * test if the given extension fragment match with all attributes values
-	 *
+	 * 
 	 * @param node
 	 * @param parametersMatchs
 	 * @return
@@ -569,5 +619,23 @@ public class ApplicationUtil {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * build a tmp project containning all dependencies and use mvn
+	 * dependency:go-offline to populate local copy (.m2/repository), so SIDE
+	 * can work offline
+	 * 
+	 * @throws Exception
+	 */
+	public static void prepareForOffline() throws Exception {
+		File tmpFile = File.createTempFile("side", "offline");
+		File tmpFolder = new File(tmpFile.getParentFile(), "tmpFolder");
+		FileHelper.deleteFile(tmpFolder, false);
+		tmpFolder.mkdirs();
+		List<com.bluexml.side.util.dependencies.ModuleConstraint> lmc = buildOfflineConfiguration();
+		DependencesManager dm = new DependencesManager(lmc, false);
+		dm.goOffline(tmpFolder);
+
 	}
 }

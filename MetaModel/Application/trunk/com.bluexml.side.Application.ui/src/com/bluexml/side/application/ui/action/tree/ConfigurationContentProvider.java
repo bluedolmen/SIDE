@@ -13,6 +13,7 @@ import org.eclipse.jface.viewers.Viewer;
 
 import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.application.ui.action.table.GeneratorParameter;
+import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 
 public class ConfigurationContentProvider implements ITreeContentProvider {
 
@@ -32,7 +33,7 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 	private Map<String, GeneratorParameter> deployerParameters;
 	private Map<String, List<String>> genParamConfByGenerator;
 	private Map<String, List<String>> deployParamConfByGenerator;
-	public static String EXTENSIONPOINT_ID = "com.bluexml.side.Application.com_bluexml_application_configuration";
+	
 	private List<TreeNode> toCheck = new ArrayList<TreeNode>();
 
 	public ConfigurationContentProvider(Class<?> p_neededRootClass, List<?> p_ommitedObject,
@@ -130,7 +131,7 @@ public class ConfigurationContentProvider implements ITreeContentProvider {
 	 * Read all extension point and construct the tree
 	 */
 	public void initialize() {
-		IConfigurationElement[] contributions = Platform.getExtensionRegistry().getConfigurationElementsFor(EXTENSIONPOINT_ID);
+		IConfigurationElement[] contributions = Platform.getExtensionRegistry().getConfigurationElementsFor(ApplicationUtil.EXTENSIONPOINT_ID);
 		//System.err.println("-----------------------------------------------------------------");
 		// Tree initialization
 		for (IConfigurationElement config : contributions) {

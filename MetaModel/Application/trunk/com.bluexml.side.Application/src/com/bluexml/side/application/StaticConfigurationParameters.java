@@ -67,7 +67,15 @@ public enum StaticConfigurationParameters implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	GENERATIONOPTION_SKIP_VALIDATION(6, "generationoptionSkipValidation", "generation.option.Skip.Validation");
+	GENERATIONOPTION_SKIP_VALIDATION(6, "generationoptionSkipValidation", "generation.option.Skip.Validation"), /**
+	 * The '<em><b>Generation Option Offline Mode</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #GENERATION_OPTION_OFFLINE_MODE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	GENERATION_OPTION_OFFLINE_MODE(7, "generationOptionOfflineMode", "generation.option.offlineMode");
 
 	/**
 	 * The '<em><b>Generationoptionsclean</b></em>' literal value.
@@ -145,6 +153,21 @@ public enum StaticConfigurationParameters implements Enumerator {
 	public static final int GENERATIONOPTION_SKIP_VALIDATION_VALUE = 6;
 
 	/**
+	 * The '<em><b>Generation Option Offline Mode</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Generation Option Offline Mode</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #GENERATION_OPTION_OFFLINE_MODE
+	 * @model name="generationOptionOfflineMode" literal="generation.option.offlineMode"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GENERATION_OPTION_OFFLINE_MODE_VALUE = 7;
+
+	/**
 	 * An array of all the '<em><b>Static Configuration Parameters</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -157,6 +180,7 @@ public enum StaticConfigurationParameters implements Enumerator {
 			GENERATIONOPTIONSLOG_PATH,
 			GENERATIONOPTIONSDESTINATION_PATH,
 			GENERATIONOPTION_SKIP_VALIDATION,
+			GENERATION_OPTION_OFFLINE_MODE,
 		};
 
 	/**
@@ -212,6 +236,7 @@ public enum StaticConfigurationParameters implements Enumerator {
 			case GENERATIONOPTIONSLOG_PATH_VALUE: return GENERATIONOPTIONSLOG_PATH;
 			case GENERATIONOPTIONSDESTINATION_PATH_VALUE: return GENERATIONOPTIONSDESTINATION_PATH;
 			case GENERATIONOPTION_SKIP_VALIDATION_VALUE: return GENERATIONOPTION_SKIP_VALIDATION;
+			case GENERATION_OPTION_OFFLINE_MODE_VALUE: return GENERATION_OPTION_OFFLINE_MODE;
 		}
 		return null;
 	}

@@ -15,9 +15,9 @@ import org.eclipse.emf.common.util.EList;
  *
  * <!-- begin-model-doc -->
  * This element contains all data that define a configuration :
- * –	a set of parameters shared and visible by all components (generators, deployers ).
- * –	a set of GeneratorConfiguration
- * –	a set of DeployerConfiguration
+ * Ð	a set of parameters shared and visible by all components (generators, deployers ).
+ * Ð	a set of GeneratorConfiguration
+ * Ð	a set of DeployerConfiguration
  * <!-- end-model-doc -->
  *
  * <p>

@@ -152,6 +152,7 @@ public class ApplicationDialog extends Dialog {
 	private TabItem deployementTabItem;
 	private Table modelPropertiesTable;
 	private Button cleanButton;
+	private Button offlineMode;
 	private TabItem modelsTabItem;
 
 	public static String KEY_DOCUMENTATION = StaticConfigurationParameters.GENERATIONOPTIONSDOCUMENTATION.getLiteral();
@@ -159,12 +160,12 @@ public class ApplicationDialog extends Dialog {
 	public static String KEY_DOCLEAN = StaticConfigurationParameters.GENERATIONOPTIONSCLEAN.getLiteral();
 	public static String KEY_LOGPATH = StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral();
 	public static String KEY_GENPATH = StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral();
-
-	public static List<String> staticFieldsName = Arrays.asList(KEY_GENPATH, KEY_LOGPATH, KEY_SKIPVALIDATION, KEY_DOCUMENTATION, KEY_DOCLEAN);
+	public static String KEY_OFFLINE = StaticConfigurationParameters.GENERATION_OPTION_OFFLINE_MODE.getLiteral();
+	public static List<String> staticFieldsName = Arrays.asList(KEY_GENPATH, KEY_LOGPATH, KEY_SKIPVALIDATION, KEY_DOCUMENTATION, KEY_DOCLEAN, KEY_OFFLINE);
 
 	/**
 	 * Create the dialog
-	 *
+	 * 
 	 * @param parentShell
 	 * @param rwm_model
 	 */
@@ -226,7 +227,6 @@ public class ApplicationDialog extends Dialog {
 		}
 
 	}
-
 
 	private void refreshModelPropertiesTable() {
 		if (list.getSelection().length == 1) {
@@ -303,7 +303,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Refresh option for the given configuration
-	 *
+	 * 
 	 * @param configuration
 	 */
 	public void refreshOptions(Configuration configuration) {
@@ -345,6 +345,11 @@ public class ApplicationDialog extends Dialog {
 		ConfigurationParameters updatePathParam = ApplicationUtil.getConfigurationParmeterByKey(KEY_GENPATH);
 		if (updatePathParam != null) {
 			destinationText.setText(updatePathParam.getValue());
+		}
+		
+		ConfigurationParameters offline = ApplicationUtil.getConfigurationParmeterByKey(KEY_OFFLINE);
+		if (offline != null) {
+			offlineMode.setSelection(Boolean.parseBoolean(offline.getValue()));
 		}
 	}
 
@@ -434,7 +439,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return all ImplNode (Generator, Deployer) for the given tree
-	 *
+	 * 
 	 * @param tv
 	 * @return
 	 */
@@ -455,7 +460,7 @@ public class ApplicationDialog extends Dialog {
 	/**
 	 * Will search the dataStructure where is save all generation option and
 	 * will add value from the application model
-	 *
+	 * 
 	 * @param configuration
 	 */
 	private void configureGeneratorOptions(Configuration configuration) {
@@ -488,7 +493,7 @@ public class ApplicationDialog extends Dialog {
 	/**
 	 * Return the selected generator, or null if no generator top to the
 	 * selected element or non selected generator.
-	 *
+	 * 
 	 * @param o
 	 * @return
 	 */
@@ -520,7 +525,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return the model for the given FilePath
-	 *
+	 * 
 	 * @param text
 	 * @return
 	 */
@@ -541,7 +546,7 @@ public class ApplicationDialog extends Dialog {
 	/**
 	 * Return the selected generator, or null if no generator top to the
 	 * selected element or non selected generator.
-	 *
+	 * 
 	 * @param o
 	 * @return
 	 */
@@ -563,7 +568,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Load data in given tree for the given configuration
-	 *
+	 * 
 	 * @param configuration
 	 * @param generators
 	 */
@@ -693,7 +698,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Create contents of the dialog
-	 *
+	 * 
 	 * @param parent
 	 */
 	@Override
@@ -706,7 +711,7 @@ public class ApplicationDialog extends Dialog {
 		container.setLayout(null);
 
 		tabFolder = new TabFolder(container, SWT.NONE);
-		tabFolder.setBounds(15, 39, 472, 484);
+		tabFolder.setBounds(15, 39, 472, 520);
 
 		modelsTabItem = new TabItem(tabFolder, SWT.NONE);
 		modelsTabItem.setText(Messages.getString("ApplicationDialog.19")); //$NON-NLS-1$
@@ -802,7 +807,7 @@ public class ApplicationDialog extends Dialog {
 
 		genOptionsTree = new TreeView(composite_1, SWT.BORDER);
 		tree_1 = genOptionsTree.getTree();
-		tree_1.setBounds(0, 142, 459, 304);
+		tree_1.setBounds(0, 160, 459, 304);
 		List<Class<?>> omitedClassForGen = new ArrayList<Class<?>>();
 		omitedClassForGen.add(Deployer.class);
 		genOptionsTree.setContentProvider(new ConfigurationContentProvider(Metamodel.class, omitedClassForGen, genOptionsTree, configurationParameters, deployerParameters, genParamConfByGenerator, deployParamConfByGenerator));
@@ -907,7 +912,7 @@ public class ApplicationDialog extends Dialog {
 				if (param != null) {
 					param.setValue(Boolean.toString(b.getSelection()));
 				} else {
-					addStaticParam(KEY_DOCUMENTATION,Boolean.toString(b.getSelection()));
+					addStaticParam(KEY_DOCUMENTATION, Boolean.toString(b.getSelection()));
 				}
 				ApplicationDialog.modificationMade();
 			}
@@ -923,7 +928,7 @@ public class ApplicationDialog extends Dialog {
 				if (param != null) {
 					param.setValue(Boolean.toString(b.getSelection()));
 				} else {
-					addStaticParam(KEY_SKIPVALIDATION,Boolean.toString(b.getSelection()));
+					addStaticParam(KEY_SKIPVALIDATION, Boolean.toString(b.getSelection()));
 				}
 				ApplicationDialog.modificationMade();
 			}
@@ -943,7 +948,24 @@ public class ApplicationDialog extends Dialog {
 				if (param != null) {
 					param.setValue(Boolean.toString(b.getSelection()));
 				} else {
-					addStaticParam(KEY_DOCLEAN,Boolean.toString(b.getSelection()));
+					addStaticParam(KEY_DOCLEAN, Boolean.toString(b.getSelection()));
+				}
+				ApplicationDialog.modificationMade();
+			}
+		});
+
+		offlineMode = new Button(composite_1, SWT.CHECK);
+		offlineMode.setToolTipText(Messages.getString("ApplicationDialog.53")); //$NON-NLS-1$
+		offlineMode.setText(Messages.getString("ApplicationDialog.52")); //$NON-NLS-1$
+		offlineMode.setBounds(10, 137, 159, 16);
+		offlineMode.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(final SelectionEvent e) {
+				ConfigurationParameters param = ApplicationUtil.getConfigurationParmeterByKey(KEY_OFFLINE);
+				Button b = (Button) e.getSource();
+				if (param != null) {
+					param.setValue(Boolean.toString(b.getSelection()));
+				} else {
+					addStaticParam(KEY_OFFLINE, Boolean.toString(b.getSelection()));
 				}
 				ApplicationDialog.modificationMade();
 			}
@@ -1148,28 +1170,33 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Create the static parameters (used for conf init)
+	 * 
 	 * @param config
 	 */
 	private void addStaticParameters(Configuration config) {
-		addStaticParam(KEY_DOCUMENTATION,"false",config); //$NON-NLS-1$
-		addStaticParam(KEY_SKIPVALIDATION,"false",config); //$NON-NLS-1$
-		addStaticParam(KEY_DOCLEAN,"false",config); //$NON-NLS-1$
-		addStaticParam(KEY_LOGPATH,"",config); //$NON-NLS-1$
-		addStaticParam(KEY_GENPATH,"",config); //$NON-NLS-1$
+		addStaticParam(KEY_DOCUMENTATION, "false", config); //$NON-NLS-1$
+		addStaticParam(KEY_SKIPVALIDATION, "false", config); //$NON-NLS-1$
+		addStaticParam(KEY_DOCLEAN, "true", config); //$NON-NLS-1$
+		addStaticParam(KEY_LOGPATH, "", config); //$NON-NLS-1$
+		addStaticParam(KEY_GENPATH, "", config); //$NON-NLS-1$
+		addStaticParam(KEY_OFFLINE, "false", config);
 	}
 
 	/**
 	 * Add a static param to the current configuration
+	 * 
 	 * @param key
 	 * @param value
 	 */
 	protected void addStaticParam(String key, String value) {
 		Configuration config = getCurrentConfiguration();
-		addStaticParam(key,value,config);
+		addStaticParam(key, value, config);
 	}
 
 	/**
-	 * Add a static param for a given configuration (useful when a new static param is added)
+	 * Add a static param for a given configuration (useful when a new static
+	 * param is added)
+	 * 
 	 * @param key
 	 * @param value
 	 * @param config
@@ -1183,7 +1210,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Display the select folder box (only in workspace)
-	 *
+	 * 
 	 * @param message
 	 * @return
 	 */
@@ -1214,7 +1241,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Remove the selected model(s)
-	 *
+	 * 
 	 * @param selection
 	 */
 	private void removeModel(String[] selection) {
@@ -1279,7 +1306,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Build a html string for documentation on generator parameter
-	 *
+	 * 
 	 * @return
 	 */
 	private String buildHelpDocumentationText(String documentation) {
@@ -1291,7 +1318,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Build the documentation text
-	 *
+	 * 
 	 * @return
 	 */
 	private String builDocumentationText() {
@@ -1326,7 +1353,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Create contents of the button bar
-	 *
+	 * 
 	 * @param parent
 	 */
 	@Override
@@ -1398,7 +1425,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return the configuration equals to the given name.
-	 *
+	 * 
 	 * @param p_name
 	 * @return
 	 */
@@ -1408,7 +1435,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return the current configuration name
-	 *
+	 * 
 	 * @return
 	 */
 	static public String getCurrentConfiguratioName() {
@@ -1421,7 +1448,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return the configuration being edited
-	 *
+	 * 
 	 * @return
 	 */
 	static public Configuration getCurrentConfiguration() {
@@ -1445,7 +1472,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Show a confirmation message
-	 *
+	 * 
 	 * @param title
 	 * @param message
 	 * @return
@@ -1462,7 +1489,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Show an alert message
-	 *
+	 * 
 	 * @param title
 	 * @param message
 	 */
@@ -1562,7 +1589,7 @@ public class ApplicationDialog extends Dialog {
 
 		/**
 		 * Enable sub element of the given item.
-		 *
+		 * 
 		 * @param item
 		 */
 		protected void enableAllSubElements(TreeItem item) {
@@ -1589,7 +1616,7 @@ public class ApplicationDialog extends Dialog {
 
 		/**
 		 * Disable sub element of the given item.
-		 *
+		 * 
 		 * @param item
 		 */
 		protected void disableAllSubElements(TreeItem item) {
