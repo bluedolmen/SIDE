@@ -22,73 +22,108 @@ import com.bluexml.side.util.generator.documentation.DocumentationGenerator;
 /**
  * @author Constantin Madola
  * Standalone  meta model documentation aims to generate an opendoc documentation for each
- * meta model available in the repository.
+ * meta model available in directory passed in arguments.
  * 
  */
 
+/**
+ * @author Constantin Madola
+ *
+ */
 public class Application implements IApplication {
 
 	protected String[] arguments;
-
+	
+	private static final String TECH_NAME 				=	"test";
+	private static final String ECORE_FILE_EXTENSION 	=	"ecore";
+	private static final int MIN_ARGS_NUM				=	2;
+	private static final String ARGS_LIST 				=	" Arguments are : \n "+
+															" 0 -the path where application can find metamodels\n"+
+															" 1 -the target folder\n";
+	private static final String MSG_ERR_ARGS_MISS 		=	" Missing arguments. \n";
+	private static final String MSG_ERR_ARGS_FEW 		=	" Too few arguments \n"+
+															" Applications requires at least "+MIN_ARGS_NUM+" argument(s) \n";
+	/*
+	 * Arguments are :
+	 * 0 -the path where application can find metamodels
+	 * 1 -the target folder
+	 */
 	public Object start(IApplicationContext context) throws Exception {
-		System.out.println("DAMN !!!!!");
-		String filePathC ="C:/Wahork/WorkspaceRun/MetaModelDocumentationGenerator";
-		String targetPathC = "/com.bluexml.side.Class/model/target";
-		/*
-		 * Args are :
-		 * 0 -the path where application can find metamodels
-		 * 1 -the target folder
-		 * 4-the log folder (note that if this argument is missing args[1] will be used for log path
-		 * 
-		 */
-
+		
 		arguments = (String[]) context.getArguments().get("application.args");
+		// arguments checking
+		if(arguments==null ){
+			throw new IllegalArgumentException(MSG_ERR_ARGS_MISS+ARGS_LIST);
+		}else{
+			if(arguments.length<MIN_ARGS_NUM){
+				throw new IllegalArgumentException(MSG_ERR_ARGS_FEW+MSG_ERR_ARGS_MISS);
+			}
+		}
+		
 		String metaModelDirPath = arguments[0];
-		if(metaModelDirPath==null || metaModelDirPath.equals("")){
-			metaModelDirPath = filePathC;
-		}
-		String targetPath = arguments[1];
-		if(targetPath==null || targetPath.equals("")){
-			targetPath = targetPathC;
-		}
+		String targetPath = 	  arguments[1];
+		
+		System.out.println("Starting metaModel documentation generation...");
+		System.out.println("Meta Model Directory = "+metaModelDirPath+" .");
+		System.out.println("Target path          = "+targetPath+" .");
 
-		DocumentationGenerator gen = new MetaModelDocumentationGenerator();
-		HashMap<String,String>  configurationParameters_ = getConfigurationParameter(targetPath, "test");
+		final DocumentationGenerator gen = new MetaModelDocumentationGenerator();
+		HashMap<String,String>  configurationParameters_ = getConfigurationParameter(targetPath, TECH_NAME);
 		gen.initialize(null, null, configurationParameters_, null);
+		
+		System.out.println(gen.getClass().getName() + " Initalized.");
 
-		DocumentationDeployer deployer = new DocumentationDeployer ();
+		final DocumentationDeployer deployer = new DocumentationDeployer ();
 		deployer.initialize(configurationParameters_, null, null);
+		System.out.println(deployer.getClass().getName() + " Initalized.");
 		
 		File[] metaModelFileList = getModelFileList(new File(metaModelDirPath));
-		IWorkspace workspace= ResourcesPlugin.getWorkspace();
-		IWorkspaceRoot workspaceRoot =workspace.getRoot();
+		//EXIT
+		if(metaModelFileList.length<1){
+			System.out.println("Cannot find any meta model file (extension .ecore) in the specified directory.");
+			System.out.println("Ensure that files exists in "+metaModelDirPath+" prior to launch");
+			return EXIT_OK;
+		}
+		
+		
+		final IWorkspace workspace= ResourcesPlugin.getWorkspace();
+		final IWorkspaceRoot workspaceRoot =workspace.getRoot();
 
-		//proceed
 		int c =0;
-		while(c<metaModelFileList.length){
-			
+		while(c<metaModelFileList.length){	
 			File file = metaModelFileList[c];
 			IFile model = getMetaModelIFile(file,workspaceRoot);
+			String modelName = model.getName();
+			//EXCEPTION
 			if(!(model.exists() && model.isAccessible())){
-				throw new Exception("fichier model non accessible");
+				throw new Exception("Requested meta model file ["+ modelName+"] is not accesible. \n"+
+						"This may happen when the metamodel directory path refers to a directory outside of any eclipse project");
 			}else{
-				String modelName = model.getName();
-				System.out.println("generating : "+modelName);
+				System.out.println("| generating : "+modelName);
 				gen.generate(model);
-				System.out.println("completing : ");
+				System.out.print(" -> completing : "+modelName);
 				gen.complete();
-				System.out.println("deploying :  "+modelName);
-				
-				
+				System.out.print(" --> deploying  : "+modelName);
 				deployer.deploy();
+				System.out.println(" ---> deployed  !");
 			}
 			c++;
 		}
-
-
+		System.out.println("------------");
+		System.out.println("Finished  !");
+		System.out.println("------------");
 		return EXIT_OK;
 	}
-
+	
+	/**
+	 *  This method return an IFile from a Java.io.File using 2 different method (getFile,and getFileLocatation)
+	 *  if one of those returns null the second one is called.
+	 *  This is to ensure that the IFile can be retrieved no mater absolute or relative path is used 
+	 * 
+	 * @param file
+	 * @param wsr
+	 * @return
+	 */
 	private IFile getMetaModelIFile(File file,IWorkspaceRoot wsr){
 		IFile result = wsr.getFile(new Path(file.getAbsolutePath()));
 		if(!result.exists()){
@@ -97,22 +132,35 @@ public class Application implements IApplication {
 		return result;
 	}
 	
+	/**
+	 * Returns the configurationParameters for the meta model documentation generation
+	 * @param targetPath
+	 * @param techName
+	 * @return
+	 */
 	private HashMap<String,String> getConfigurationParameter(String targetPath,String techName){
 		HashMap<String,String>  configurationParameters_ = new HashMap<String,String>();
 		configurationParameters_.put(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral(),targetPath);
 		configurationParameters_.put(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral(),targetPath);
 		configurationParameters_.put("technologyVersion",techName);
+		// configurationName, est utilisé par le depoyer pour la tache ant de creation d'ODT
+		// il doit etre = à techName
 		configurationParameters_.put("configurationName",techName);
 		return configurationParameters_;
 	}
 	
-	
+	 
+	/**
+	 * This method returns a list of ecore files contained in the specified directory
+	 * @param file Le repertoire dans lequel trouver les métaModel
+	 * @return
+	 */
 	private File[] getModelFileList(File file){
-		File[]  result =null;
+		File[]  result =new File[0];
+		
 		class EcoreFileFilter implements FileFilter{
-			String extension = ".ecore";
 			public boolean accept(File f) {	
-				return f!=null&&f.getName()!=null&&f.getName().endsWith(extension);
+				return f!=null&&f.getName()!=null&&f.getName().endsWith("."+ECORE_FILE_EXTENSION);
 			}
 		}
 		if(file.isDirectory()){
