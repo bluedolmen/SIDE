@@ -3,7 +3,6 @@
 $file=$ARGV[0];
 $file_out=$ARGV[1];
 
-
 open(OUTF,">$file_out");
 print OUTF "<html><head><title>S-IDE Automatic Tests</title></head>\n";
 print OUTF "<body><h1>S-IDE Automatic Generator tests</h1>\n";
@@ -30,7 +29,10 @@ while (<F>){
     $taille= scalar @values;
     $cpt=1;
     $testtitle=$values[4];
-    if (-z "result_TC$i.xml") {
+    $nametc=$values[4];
+    $nametc=~ /[TC][TC]....[0-9]*/;
+    $nametc=$&;
+    if (-z "result_$nametc.xml") {
       print OUTF "<TD><font color=\"#008000\"><A style=\"color:#008000\" HREF=\"../../com.bluexml.side.Integration.testAuto/generation/testCase/$line\" target=\"_blank\">$testtitle</a></font></TD>\n";
     }
     else {
@@ -52,9 +54,9 @@ while (<F>){
     $time=$_;
     $time=~ /Time /;
     $time=$';
-    print OUTF "<TD><A HREF=\"TC$i\/side-report.xml\" title=\"side-report.xml\" target=\"_blank\">$time</a></TD>\n";
-    if (!(-z "result_TC$i.xml")) {
-      print OUTF "<TD> <A HREF=\"TC$i\/TC_ref_$i.xml\" target=\"_blank\">Reference</a> - <A HREF=\"TC$i\/result_TC$i.xml\" target=\"_blank\">diff</a></TD>";
+    print OUTF "<TD><A HREF=\"$nametc\/side-report.xml\" title=\"side-report.xml\" target=\"_blank\">$time</a></TD>\n";
+    if (!(-z "result_$nametc.xml")) {
+      print OUTF "<TD> <A HREF=\"$nametc\/TC_ref_$i.xml\" target=\"_blank\">Reference</a> - <A HREF=\"$nametc\/result_$nametc.xml\" target=\"_blank\">diff</a></TD>";
     }
     
 
