@@ -16,7 +16,7 @@ fi
 # delete workingcopy repository
 rm -rf $TARGET_WORKSPACE/workingcopy
 
-mkdir $TARGET_WORKSPACE
+mkdir $MAVEN_TARGET
 
 #$DF_HOME=`df -k | grep -i /home | awk '{print $5}'|cut -d"%" -f1 |while read LINE; do
 DF_HOME=`df -k | grep -i /home | awk '{print $5}'|cut -d"%" -f1`
