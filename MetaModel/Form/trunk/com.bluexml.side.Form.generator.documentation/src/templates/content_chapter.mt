@@ -35,17 +35,17 @@ metamodel http://www.kerblue.org/form/1.0
 <%for (getFields()){%>
 	<table:table-row>
 		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
-			<text:p text:style-name="Table_20_Heading">
+			<text:p text:style-name="Table_20_Contents">
 				<%getLabel()%>
 			</text:p>
 		</table:table-cell>
 		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
-			<text:p text:style-name="Table_20_Heading">
+			<text:p text:style-name="Table_20_Contents">
 				<%if (documentation != null){%><%documentation%><%}%>
 			</text:p>
 		</table:table-cell>
 		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
-			<text:p text:style-name="Table_20_Heading">
+			<text:p text:style-name="Table_20_Contents">
 				<%if (cast("Reference")){%>
 					Link to Form :
 					<%for (current("Reference").target) {%>
