@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Birt Plug-in
 Bundle-SymbolicName: com.bluexml.side.Class.generator.report;singleton:=true
-Bundle-Version: 1.0.10.v8467-20090819
+Bundle-Version: 1.0.11.v8690-20090901
 Bundle-Activator: com.bluexml.side.clazz.generator.report.Activator
 Bundle-Vendor: www.bluexml.com
 Require-Bundle: org.eclipse.ui,
