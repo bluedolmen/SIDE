@@ -114,7 +114,7 @@ public class FormGenerator extends AbstractGenerator {
 		cleanPackageRequest.setGoals(Arrays.asList(new String[] { "clean", "package" }));
 
 		cleanPackageRequest.setUpdateSnapshots(false);
-		cleanPackageRequest.setLoggingLevel(0);
+		cleanPackageRequest.setLoggingLevel(1);
 
 		MavenExecutionResult cleanPackageResult = embedder.execute(cleanPackageRequest);
 
@@ -187,16 +187,16 @@ public class FormGenerator extends AbstractGenerator {
 		outputter.output(pom, os);
 		os.close();
 
-		Properties properties = new Properties();
-		FileInputStream in = new FileInputStream(alfrescoProperties);
-		properties.load(in);
-		in.close();
-		// no need to specify additional properties
+		// no need to specify additional properties, these are archetyped, not user-defined
+//		Properties properties = new Properties();
+//		FileInputStream in = new FileInputStream(alfrescoProperties);
+//		properties.load(in);
+//		in.close();
 //		properties.setProperty("temp.directory", "/");
 //		properties.setProperty("upload.directory", "/");
-		os = new FileOutputStream(alfrescoProperties);
-		properties.store(os, null);
-		os.close();
+//		os = new FileOutputStream(alfrescoProperties);
+//		properties.store(os, null);
+//		os.close();
 	}
 
 	/**
