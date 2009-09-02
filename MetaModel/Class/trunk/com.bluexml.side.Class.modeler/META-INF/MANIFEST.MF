@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Class Modeler
 Bundle-SymbolicName: com.bluexml.side.Class.modeler; singleton:=true
-Bundle-Version: 1.0.17.v8336-20090817
+Bundle-Version: 1.0.18.v8758-20090902
 Bundle-Activator: com.bluexml.side.Class.modeler.ClazzPlugin
 Bundle-Vendor: www.bluexml.com
 Bundle-Localization: plugin
