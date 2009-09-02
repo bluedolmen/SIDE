@@ -8,6 +8,7 @@ package com.bluexml.side.form.presentation;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -63,6 +64,7 @@ import com.bluexml.side.form.common.RefreshOutlineAction;
 import com.bluexml.side.form.common.RestoreFormElementAction;
 import com.bluexml.side.form.common.TransformFieldAction;
 import com.bluexml.side.form.common.utils.FieldTransformation;
+import com.bluexml.side.form.common.utils.FormDiagramUtils;
 import com.bluexml.side.form.workflow.InitializeFormWorkflowAction;
 import com.bluexml.side.form.workflow.SynchonizeWithWorkflowDiagramAction;
 
@@ -134,7 +136,7 @@ public class FormActionBarContributor
 				}
 			}
 		};
-	
+
 	protected GroupAttributeAction groupAttributeAction = new GroupAttributeAction();
 	protected InitializeFormClassAction initializeFormClassAction = new InitializeFormClassAction();
 	protected InitializeFormWorkflowAction initializeFormWorkflowAction = new InitializeFormWorkflowAction();
@@ -143,7 +145,7 @@ public class FormActionBarContributor
 	protected CopyFormAction copyFormAction = new CopyFormAction();
 	protected SynchonizeWithClassDiagramAction synchronizeWithClassDiagram = new SynchonizeWithClassDiagramAction();
 	protected SynchonizeWithWorkflowDiagramAction synchronizeWithWorkflowDiagram = new SynchonizeWithWorkflowDiagramAction();
-	
+
 	/**
 	 * This will contain one {@link org.eclipse.emf.edit.ui.action.CreateChildAction} corresponding to each descriptor
 	 * generated for the current selection by the item provider.
@@ -377,7 +379,7 @@ public class FormActionBarContributor
 			}
 		}
 	}
-		
+
 	/**
 	 * This removes from the specified <code>manager</code> all {@link org.eclipse.jface.action.ActionContributionItem}s
 	 * based on the {@link org.eclipse.jface.action.IAction}s contained in the <code>actions</code> collection.
@@ -437,120 +439,151 @@ public class FormActionBarContributor
 	@Override
 	protected void addGlobalActions(IMenuManager menuManager) {
 		Object o =  ((this.selectionProvider != null && this.selectionProvider.getSelection() != null )? ((TreeSelection) this.selectionProvider.getSelection()).getFirstElement() : null);
-		
+
 		menuManager.insertAfter("additions-end", new Separator("ui-actions"));
 		menuManager.insertAfter("ui-actions", showPropertiesViewAction);
 
-		refreshViewerAction.setEnabled(refreshViewerAction.isEnabled());		
+		refreshViewerAction.setEnabled(refreshViewerAction.isEnabled());
 		menuManager.insertAfter("ui-actions", refreshViewerAction);
-		
+
 		menuManager.insertAfter("ui-actions", new Separator("ui-commonActions"));
-		
-		// Addition of ImageDescriptor isn't available in current jface version.
-		if (o instanceof ModelChoiceField) {
-			MenuManager refMenu = new MenuManager("Relation","relation");
-			collapseReferenceAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/collapse.gif"));
-			refMenu.add(collapseReferenceAction);
-			
-			// ---- Expand Menu
-			IMenuManager expandMenu = new MenuManager("Expand to","expand");
-			expandMenu.setRemoveAllWhenShown(true);
-			if (this.selectionProvider != null && this.selectionProvider.getSelection() != null 
-					&& ((TreeSelection) this.selectionProvider.getSelection()).size() == 1
-					&& ((TreeSelection) this.selectionProvider.getSelection()).getFirstElement() instanceof ModelChoiceField) {
-				expandMenu.add(new Action("never shown entry"){});//needed if it's a submenu
-			    IMenuListener expandListener = new IMenuListener() {
-			        public void menuAboutToShow(IMenuManager m) {
-			        	fillExpandContextMenu(m);
-			        }
-			     };
-			    expandMenu.addMenuListener(expandListener);
-			} 
-			refMenu.add(expandMenu);
-		
-			// ---- Add Menu
-			IMenuManager addRefMenu = new MenuManager("Add reference","addRef");
-			addRefMenu.setRemoveAllWhenShown(true);
-			if (this.selectionProvider != null && this.selectionProvider.getSelection() != null 
-					&& ((TreeSelection) this.selectionProvider.getSelection()).size() == 1
-					&& ((TreeSelection) this.selectionProvider.getSelection()).getFirstElement() instanceof Reference
-					 ) {
-				Reference ref = ((Reference)((TreeSelection) this.selectionProvider.getSelection()).getFirstElement());
-				if (ref.getMax_bound() == -1 || ref.getMax_bound() > ref.getTarget().size()) {
-					addRefMenu.add(new Action("never shown entry"){});//needed if it's a submenu
+		if (o != null) {
+			// Addition of ImageDescriptor isn't available in current jface version.
+			if (o instanceof ModelChoiceField) {
+				MenuManager refMenu = new MenuManager("Relation","relation");
+				collapseReferenceAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/collapse.gif"));
+				refMenu.add(collapseReferenceAction);
+
+				// ---- Expand Menu
+				IMenuManager expandMenu = new MenuManager("Expand to","expand");
+				expandMenu.setRemoveAllWhenShown(true);
+				if (this.selectionProvider != null && this.selectionProvider.getSelection() != null
+						&& ((TreeSelection) this.selectionProvider.getSelection()).size() == 1
+						&& ((TreeSelection) this.selectionProvider.getSelection()).getFirstElement() instanceof ModelChoiceField) {
+					expandMenu.add(new Action("never shown entry"){});//needed if it's a submenu
 				    IMenuListener expandListener = new IMenuListener() {
 				        public void menuAboutToShow(IMenuManager m) {
-				        	fillAddRefContextMenu(m);
+				        	fillExpandContextMenu(m);
 				        }
 				     };
-				     addRefMenu.addMenuListener(expandListener);
+				    expandMenu.addMenuListener(expandListener);
 				}
-			} 
-			refMenu.add(addRefMenu);
-			menuManager.insertAfter("ui-actions",refMenu);
-		}
-		// ---- Transform Menu
-		if (o instanceof Field) {
-			IMenuManager transformMenu = new MenuManager("Transform","transform");
-			transformMenu.add(new Action("never shown entry"){}); //needed if it's a submenu
-			transformMenu.setRemoveAllWhenShown(true);
-		    IMenuListener transformListener = new IMenuListener() {
-		        public void menuAboutToShow(IMenuManager m) {
-		        	fillTransformContextMenu(m);
-		        }
-		     };
-		     transformMenu.addMenuListener(transformListener);
-		     menuManager.insertAfter("ui-actions",transformMenu);
-		}
-		
-		
-		if (o instanceof FormContainer) {
-			copyFormAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/copy.png"));
-			menuManager.insertAfter("ui-actions", copyFormAction);
-		}
-		
-		groupAttributeAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/group.png"));
-		menuManager.insertAfter("ui-actions", groupAttributeAction);
-		
-		if (o instanceof FormClass) {
-			initializeFormClassAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/initializeFromClass.png"));
-			menuManager.insertAfter("ui-actions", initializeFormClassAction);
-		}
-		
-		if (o instanceof WorkflowFormCollection) {
-			initializeFormWorkflowAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/initializeFromClass.png"));
-			menuManager.insertAfter("ui-actions", initializeFormWorkflowAction);
-		}
-		
-		if (o instanceof FormContainer) {
-			MenuManager restoreMenu = new MenuManager("Restore","restore");
-			if (((FormContainer)o).getDisabled().size() > 0) {
-				restoreMenu.add(new Action("never shown entry"){});
-				restoreMenu.setRemoveAllWhenShown(true);
-				IMenuListener restoreListener = new IMenuListener() {
+				refMenu.add(expandMenu);
+
+				// ---- Add Menu
+				IMenuManager addRefMenu = new MenuManager("Add reference","addRef");
+				addRefMenu.setRemoveAllWhenShown(true);
+				if (this.selectionProvider != null && this.selectionProvider.getSelection() != null
+						&& ((TreeSelection) this.selectionProvider.getSelection()).size() == 1
+						&& ((TreeSelection) this.selectionProvider.getSelection()).getFirstElement() instanceof Reference
+						 ) {
+					Reference ref = ((Reference)((TreeSelection) this.selectionProvider.getSelection()).getFirstElement());
+					if (ref.getMax_bound() == -1 || ref.getMax_bound() > ref.getTarget().size()) {
+						addRefMenu.add(new Action("never shown entry"){});//needed if it's a submenu
+					    IMenuListener expandListener = new IMenuListener() {
+					        public void menuAboutToShow(IMenuManager m) {
+					        	fillAddRefContextMenu(m);
+					        }
+					     };
+					     addRefMenu.addMenuListener(expandListener);
+					}
+				}
+				refMenu.add(addRefMenu);
+				menuManager.insertAfter("ui-actions",refMenu);
+			}
+			// ---- Transform Menu
+			if (o instanceof Field) {
+				IMenuManager transformMenu = new MenuManager("Transform","transform");
+				transformMenu.add(new Action("never shown entry"){}); //needed if it's a submenu
+				transformMenu.setRemoveAllWhenShown(true);
+			    IMenuListener transformListener = new IMenuListener() {
 			        public void menuAboutToShow(IMenuManager m) {
-			        	fillRestoreContextMenu(m);
+			        	fillTransformContextMenu(m);
 			        }
 			     };
-			     restoreMenu.addMenuListener(restoreListener);
+			     transformMenu.addMenuListener(transformListener);
+			     menuManager.insertAfter("ui-actions",transformMenu);
 			}
-			menuManager.insertAfter("ui-actions",restoreMenu);
-		}
-		
-		refreshOutlineAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/refreshOutline.png"));
-		menuManager.insertAfter("ui-actions", refreshOutlineAction);
-		
-		if (o instanceof FormCollection) {
+
+
+			if (o instanceof FormContainer) {
+				copyFormAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/copy.png"));
+				menuManager.insertAfter("ui-actions", copyFormAction);
+			}
+
+			if (((TreeSelection) this.selectionProvider.getSelection()).size() == 1 ||
+					haveSameFormContainer((TreeSelection) this.selectionProvider.getSelection())) {
+				groupAttributeAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/group.png"));
+				menuManager.insertAfter("ui-actions", groupAttributeAction);
+			}
+
+			if (o instanceof FormClass) {
+				initializeFormClassAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/initializeFromClass.png"));
+				menuManager.insertAfter("ui-actions", initializeFormClassAction);
+			}
+
 			if (o instanceof WorkflowFormCollection) {
-				synchronizeWithWorkflowDiagram.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/synchronizeWithClassDiagram.png"));
-				menuManager.insertAfter("ui-actions", synchronizeWithWorkflowDiagram);
-			} else {
-				synchronizeWithClassDiagram.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/synchronizeWithClassDiagram.png"));
-				menuManager.insertAfter("ui-actions", synchronizeWithClassDiagram);
+				initializeFormWorkflowAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/initializeFromClass.png"));
+				menuManager.insertAfter("ui-actions", initializeFormWorkflowAction);
+			}
+
+			if (o instanceof FormContainer) {
+				MenuManager restoreMenu = new MenuManager("Restore","restore");
+				if (((FormContainer)o).getDisabled().size() > 0) {
+					restoreMenu.add(new Action("never shown entry"){});
+					restoreMenu.setRemoveAllWhenShown(true);
+					IMenuListener restoreListener = new IMenuListener() {
+				        public void menuAboutToShow(IMenuManager m) {
+				        	fillRestoreContextMenu(m);
+				        }
+				     };
+				     restoreMenu.addMenuListener(restoreListener);
+				}
+				menuManager.insertAfter("ui-actions",restoreMenu);
+			}
+
+			refreshOutlineAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/refreshOutline.png"));
+			menuManager.insertAfter("ui-actions", refreshOutlineAction);
+
+			if (o instanceof FormCollection) {
+				if (o instanceof WorkflowFormCollection) {
+					synchronizeWithWorkflowDiagram.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/synchronizeWithClassDiagram.png"));
+					menuManager.insertAfter("ui-actions", synchronizeWithWorkflowDiagram);
+				} else {
+					synchronizeWithClassDiagram.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/synchronizeWithClassDiagram.png"));
+					menuManager.insertAfter("ui-actions", synchronizeWithClassDiagram);
+				}
 			}
 		}
-		
+
 		super.addGlobalActions(menuManager);
+	}
+
+	/**
+	 * Take a TreeSelection and return true if all have the same FormContainer as parent
+	 * @param selection
+	 * @return
+	 */
+	private boolean haveSameFormContainer(TreeSelection selection) {
+		Object o = selection.getFirstElement();
+		boolean result = true;
+		FormContainer parent = null;
+		if (o instanceof FormElement) {
+			parent = FormDiagramUtils.getParentForm((FormElement)o);
+		}
+		if (parent != null) {
+			for (Iterator<Object> iterator = selection.iterator(); iterator.hasNext();) {
+				Object s = (Object) iterator.next();
+				if (s instanceof FormElement) {
+					FormContainer sParent = FormDiagramUtils.getParentForm((FormElement)s);
+					if (!parent.equals(sParent)) {
+						result = false;
+					}
+				}
+
+			}
+		}
+		return result;
 	}
 
 	private void fillTransformContextMenu(IMenuManager mgr)
@@ -569,7 +602,7 @@ public class FormActionBarContributor
 			}
 		}
 	}
-	
+
 	private void fillRestoreContextMenu(IMenuManager mgr)
 	{
          Object o = ((TreeSelection) this.selectionProvider.getSelection()).getFirstElement();
@@ -583,7 +616,7 @@ public class FormActionBarContributor
 			}
 		}
 	}
-	
+
 	protected void fillExpandContextMenu(IMenuManager mgr)
 	{
          Object o = ((TreeSelection) this.selectionProvider.getSelection()).getFirstElement();
@@ -592,13 +625,13 @@ public class FormActionBarContributor
         	Set<Clazz> classes = ClassDiagramUtils.getDescendantClazzs(mcf.getReal_class());
 			for (Clazz c : classes) {
 				ExpandModelChoice emc = new ExpandModelChoice(c,mcf);
-				emc.setActiveWorkbenchPart(activeEditor); 
+				emc.setActiveWorkbenchPart(activeEditor);
 				selectionProvider.addSelectionChangedListener((ISelectionChangedListener)emc);
 				mgr.add(emc);
 			}
 		}
 	}
-	
+
 	protected void fillAddRefContextMenu(IMenuManager mgr)
 	{
          Object o = ((TreeSelection) this.selectionProvider.getSelection()).getFirstElement();
@@ -624,7 +657,7 @@ public class FormActionBarContributor
 	protected boolean removeAllReferencesOnDelete() {
 		return true;
 	}
-	
+
 	@Override
 	public void activate() {
 		super.activate();
