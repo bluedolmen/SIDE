@@ -142,6 +142,7 @@ public class FormGenerator extends AbstractGenerator {
 	private MavenExecutionResult createProject() throws Exception {
 
 		DefaultMavenExecutionRequest archetypeCreateRequest = new DefaultMavenExecutionRequest();
+		archetypeCreateRequest.setUpdateSnapshots(false);
 		archetypeCreateRequest.setBaseDirectory(workFolder);
 		archetypeCreateRequest.setGoals(Arrays.asList(new String[] { "archetype:generate" }));
 		archetypeCreateRequest.setProperty("interactiveMode", "false");
