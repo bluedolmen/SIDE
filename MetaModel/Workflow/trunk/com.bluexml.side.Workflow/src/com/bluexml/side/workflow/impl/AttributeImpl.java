@@ -42,7 +42,7 @@ public class AttributeImpl extends ModelElementImpl implements Attribute {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final DataType TYP_EDEFAULT = DataType.VOID;
+	protected static final DataType TYP_EDEFAULT = DataType.BOOLEAN;
 
 	/**
 	 * The cached value of the '{@link #getTyp() <em>Typ</em>}' attribute.
