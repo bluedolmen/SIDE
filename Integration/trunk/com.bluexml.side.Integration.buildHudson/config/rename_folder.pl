@@ -1,7 +1,9 @@
 #! /usr/bin/perl;
 
-
-
+#================================================
+# rename folder with the last part
+# com.bluexml.side.Integration.alfresco.cmisFacetMap into cmisFacetMap
+#================================================
 
 my $Repertoire = ".";
 my @LesFichiers = ListersFichiers($Repertoire);
