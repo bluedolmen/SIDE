@@ -6,12 +6,37 @@
 #================================================
 
 my $Repertoire = ".";
+$pom=$ARGV[0];
+
 my @LesFichiers = ListersFichiers($Repertoire);
+open (POMF,">>$pom") or die "Cannot open the file $pom";
+
 
 foreach my $nom ( @LesFichiers ) {
+	$delete="true";
 	$rep=$nom;
-	$rep =~ s/.*\.(.+)$/$1/;
-	rename("$nom", "$rep") || die "Fail $!";
+	print "repertoire $rep\n";
+	opendir(RPT,"$rep") or die "Can not open the folder $rep";
+	while($file_name=readdir(RPT)){
+		print "fichier  $pom  $file_name\n";
+		if ($file_name eq $pom){
+			$delete="false";
+		}
+	}
+	closedir(RPT);
+	print "fichier $delete\n";
+	if ($delete eq "true") {
+		use File::Path;
+		rmtree([$rep],0,1) or "Can not delete the folder $rep";
+		print "effacer repertoire $rep\n";
+		
+		
+	}
+	else {
+		$rep =~ s/.*\.(.+)$/$1/;
+		print "renommer repertoire $nom\n";
+		rename("$nom", "$rep") || die "Fail $!";
+	}
 
 
 }
