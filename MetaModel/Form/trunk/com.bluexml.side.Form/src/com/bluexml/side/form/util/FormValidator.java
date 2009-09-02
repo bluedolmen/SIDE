@@ -6,13 +6,11 @@
  */
 package com.bluexml.side.form.util;
 
-import com.bluexml.side.common.util.CommonValidator;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
@@ -23,7 +21,42 @@ import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.OCL;
 
-import com.bluexml.side.form.*;
+import com.bluexml.side.form.ActionField;
+import com.bluexml.side.form.BooleanField;
+import com.bluexml.side.form.CharField;
+import com.bluexml.side.form.ChoiceField;
+import com.bluexml.side.form.ChoiceWidgetType;
+import com.bluexml.side.form.ClassReference;
+import com.bluexml.side.form.DateField;
+import com.bluexml.side.form.DateTimeField;
+import com.bluexml.side.form.DecimalField;
+import com.bluexml.side.form.EmailField;
+import com.bluexml.side.form.Field;
+import com.bluexml.side.form.FileField;
+import com.bluexml.side.form.FloatField;
+import com.bluexml.side.form.FormAspect;
+import com.bluexml.side.form.FormClass;
+import com.bluexml.side.form.FormCollection;
+import com.bluexml.side.form.FormContainer;
+import com.bluexml.side.form.FormElement;
+import com.bluexml.side.form.FormGroup;
+import com.bluexml.side.form.FormGroupPresentationType;
+import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.form.FormWorkflow;
+import com.bluexml.side.form.ImageField;
+import com.bluexml.side.form.IntegerField;
+import com.bluexml.side.form.ModelChoiceField;
+import com.bluexml.side.form.ModelChoiceWidgetType;
+import com.bluexml.side.form.PasswordField;
+import com.bluexml.side.form.PhoneNumberField;
+import com.bluexml.side.form.Reference;
+import com.bluexml.side.form.RegexField;
+import com.bluexml.side.form.TextField;
+import com.bluexml.side.form.TextWidgetType;
+import com.bluexml.side.form.TimeField;
+import com.bluexml.side.form.URLField;
+import com.bluexml.side.form.VirtualField;
+import com.bluexml.side.form.WorkflowFormCollection;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**
@@ -99,6 +132,14 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	private static Constraint virtualField_NoLinkForVirtualFieldInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>ClassMustMatchWithProcessContentType</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint formWorkflow_ClassMustMatchWithProcessContentTypeInvOCL;
 
 	/**
 	 * The parsed OCL expression for the definition of the '<em>validName</em>' invariant constraint.
@@ -877,7 +918,47 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(formWorkflow, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formWorkflow, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormContainer_validName(formWorkflow, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormWorkflow_ClassMustMatchWithProcessContentType(formWorkflow, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the ClassMustMatchWithProcessContentType constraint of '<em>Workflow</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateFormWorkflow_ClassMustMatchWithProcessContentType(FormWorkflow formWorkflow, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (formWorkflow_ClassMustMatchWithProcessContentTypeInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(FormPackage.Literals.FORM_WORKFLOW);
+			
+			EAnnotation ocl = FormPackage.Literals.FORM_WORKFLOW.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("ClassMustMatchWithProcessContentType");
+			
+			try {
+				formWorkflow_ClassMustMatchWithProcessContentTypeInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(formWorkflow_ClassMustMatchWithProcessContentTypeInvOCL);
+		
+		if (!query.check(formWorkflow)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ClassMustMatchWithProcessContentType", getObjectLabel(formWorkflow, context) }),
+						 new Object[] { formWorkflow }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**

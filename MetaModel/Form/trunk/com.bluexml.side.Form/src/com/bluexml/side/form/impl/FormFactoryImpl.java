@@ -6,7 +6,6 @@
  */
 package com.bluexml.side.form.impl;
 
-import com.bluexml.side.form.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -36,10 +35,10 @@ import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.ImageField;
 import com.bluexml.side.form.IntegerField;
 import com.bluexml.side.form.ModelChoiceField;
+import com.bluexml.side.form.ModelChoiceWidgetType;
 import com.bluexml.side.form.PasswordField;
 import com.bluexml.side.form.PhoneNumberField;
 import com.bluexml.side.form.Reference;
-import com.bluexml.side.form.ReferenceWidgetType;
 import com.bluexml.side.form.RegexField;
 import com.bluexml.side.form.TextField;
 import com.bluexml.side.form.TextWidgetType;

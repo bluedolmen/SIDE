@@ -7,10 +7,10 @@
 package com.bluexml.side.form.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.ocl.ecore.OCL;
-import com.bluexml.side.form.ImageField;
+
 import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.form.ImageField;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**

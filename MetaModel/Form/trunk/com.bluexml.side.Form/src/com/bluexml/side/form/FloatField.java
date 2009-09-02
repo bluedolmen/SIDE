@@ -42,7 +42,7 @@ public interface FloatField extends Field {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: minimum value for the input. If the 'min_value' attribute is superior than 0, the Float field is mandatory.
-	 * Constraint/limit: The input value cannot be superior to the â€˜max_valueâ€™.
+	 * Constraint/limit: The input value cannot be superior to the Ômax_valueÕ.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Min value</em>' attribute.
 	 * @see #setMin_value(int)

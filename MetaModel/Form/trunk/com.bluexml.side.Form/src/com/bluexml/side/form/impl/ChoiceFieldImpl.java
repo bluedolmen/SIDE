@@ -9,8 +9,8 @@ package com.bluexml.side.form.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.ocl.ecore.OCL;
+
 import com.bluexml.side.form.ChoiceField;
 import com.bluexml.side.form.ChoiceWidgetType;
 import com.bluexml.side.form.FormPackage;

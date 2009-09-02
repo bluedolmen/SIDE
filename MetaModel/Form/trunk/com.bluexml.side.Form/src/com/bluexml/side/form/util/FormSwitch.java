@@ -6,14 +6,45 @@
  */
 package com.bluexml.side.form.util;
 
-import com.bluexml.side.common.ModelElement;
-import com.bluexml.side.common.NamedModelElement;
-import com.bluexml.side.form.*;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.NamedModelElement;
+import com.bluexml.side.form.ActionField;
+import com.bluexml.side.form.BooleanField;
+import com.bluexml.side.form.CharField;
+import com.bluexml.side.form.ChoiceField;
+import com.bluexml.side.form.ClassReference;
+import com.bluexml.side.form.DateField;
+import com.bluexml.side.form.DateTimeField;
+import com.bluexml.side.form.DecimalField;
+import com.bluexml.side.form.EmailField;
+import com.bluexml.side.form.Field;
+import com.bluexml.side.form.FileField;
+import com.bluexml.side.form.FloatField;
+import com.bluexml.side.form.FormAspect;
+import com.bluexml.side.form.FormClass;
+import com.bluexml.side.form.FormCollection;
+import com.bluexml.side.form.FormContainer;
+import com.bluexml.side.form.FormElement;
+import com.bluexml.side.form.FormGroup;
+import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.form.FormWorkflow;
+import com.bluexml.side.form.ImageField;
+import com.bluexml.side.form.IntegerField;
+import com.bluexml.side.form.ModelChoiceField;
+import com.bluexml.side.form.PasswordField;
+import com.bluexml.side.form.PhoneNumberField;
+import com.bluexml.side.form.Reference;
+import com.bluexml.side.form.RegexField;
+import com.bluexml.side.form.TextField;
+import com.bluexml.side.form.TimeField;
+import com.bluexml.side.form.URLField;
+import com.bluexml.side.form.VirtualField;
+import com.bluexml.side.form.WorkflowFormCollection;
 
 /**
  * <!-- begin-user-doc -->

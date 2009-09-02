@@ -14,18 +14,14 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
 import org.eclipse.ocl.ecore.OCL;
+
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.form.ChoiceWidgetType;
-import com.bluexml.side.form.CharField;
 import com.bluexml.side.form.ClassReference;
 import com.bluexml.side.form.FormContainer;
-import com.bluexml.side.form.FormClass;
+import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.ModelChoiceWidgetType;
-import com.bluexml.side.form.ReferenceWidgetType;
-import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 /**

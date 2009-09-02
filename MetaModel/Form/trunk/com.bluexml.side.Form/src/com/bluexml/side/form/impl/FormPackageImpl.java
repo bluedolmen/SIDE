@@ -47,7 +47,6 @@ import com.bluexml.side.form.ModelChoiceWidgetType;
 import com.bluexml.side.form.PasswordField;
 import com.bluexml.side.form.PhoneNumberField;
 import com.bluexml.side.form.Reference;
-import com.bluexml.side.form.ReferenceWidgetType;
 import com.bluexml.side.form.RegexField;
 import com.bluexml.side.form.TextField;
 import com.bluexml.side.form.TextWidgetType;
@@ -1556,7 +1555,13 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "NoLinkForVirtualField"
-		   });																						
+		   });																							
+		addAnnotation
+		  (formWorkflowEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "ClassMustMatchWithProcessContentType"
+		   });		
 		addAnnotation
 		  (formContainerEClass, 
 		   source, 
@@ -1608,7 +1613,13 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "NoLinkForVirtualField", "not self.link.oclIsUndefined()"
-		   });																						
+		   });																					
+		addAnnotation
+		  (formWorkflowEClass, 
+		   source, 
+		   new String[] {
+			 "ClassMustMatchWithProcessContentType", "(not(self.getContainer().oclIsUndefined()) and not(self.getContainer().oclAsType(WorkflowFormCollection).linked_process.contentType.oclIsUndefined()) and (not self.DataForm.oclIsUndefined())) implies (self.getContainer().oclAsType(WorkflowFormCollection).linked_process.contentType = self.DataForm.real_class)"
+		   });				
 		addAnnotation
 		  (formContainerEClass, 
 		   source, 
@@ -1636,7 +1647,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "name", "presentation"
-		   });																																																																																								
+		   });																																																																																										
 	}
 
 	public FormFactory getFormsFactory() {
