@@ -85,15 +85,6 @@ ISelectionChangedListener {
 			FormClass formClass = (FormClass) form;
 			ref.getTarget().add(formClass);
 
-			// If association class
-//			FormContainer formAssoClass = null;
-//			FormClass formClassAssoClass = null;
-//			if (mcf.getAssociation_class() != null) {
-//				formAssoClass = createFormForRealClass(mcf.getAssociation_class(),mcf);
-//				formClassAssoClass = (FormClass) formAssoClass;
-//				ref.getAssociation_formClass().add(formClassAssoClass);
-//			}
-
 			// Add the Form
 			CompoundCommand cc = new CompoundCommand();
 			Command addFormCmd = AddCommand.create(domain, FormDiagramUtils.getParentFormCollection(mcf), FormPackage.eINSTANCE.getFormCollection_Forms(), form);
@@ -110,12 +101,6 @@ ISelectionChangedListener {
 			Command delCmd = RemoveCommand.create(domain, (Object)mcf);
 			cc.append(delCmd);
 
-			// Add the form class if needed :
-//			if (formAssoClass != null) {
-//				Command addFormCmdAssoClass = AddCommand.create(domain, FormDiagramUtils.getParentFormCollection(mcf), FormPackage.eINSTANCE.getFormCollection_Forms(), formAssoClass);
-//				cc.append(addFormCmdAssoClass);
-//				cc.append(ClassInitialization.initializeClass(formClassAssoClass, domain));
-//			}
 			// Add the reference
 			Command addRefCmd = AddCommand.create(domain, mcf.eContainer(), FormPackage.eINSTANCE.getFormGroup_Children(), ref, ((FormGroup)mcf.eContainer()).getChildren().lastIndexOf(mcf));
 			cc.append(addRefCmd);

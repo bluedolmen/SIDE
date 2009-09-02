@@ -32,7 +32,9 @@ public class ClassInitialization {
 
 			if (doWork) {
 				Collection<FormElement> c = getChildForFormClassFromClazz(fc);
-				cmd = AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormGroup_Children(), c);
+				if (c.size() > 0) {
+					cmd = AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormGroup_Children(), c);
+				}
 			}
 		} else {
 			UIUtils.showError("No Class defined","No class have been defined. \n"
