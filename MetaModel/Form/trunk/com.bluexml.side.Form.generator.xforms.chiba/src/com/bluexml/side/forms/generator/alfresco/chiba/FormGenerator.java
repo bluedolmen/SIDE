@@ -110,9 +110,12 @@ public class FormGenerator extends AbstractGenerator {
 
 	private MavenExecutionResult buildProject() throws IOException {
 		DefaultMavenExecutionRequest cleanPackageRequest = new DefaultMavenExecutionRequest();
-		cleanPackageRequest.setUpdateSnapshots(false);
 		cleanPackageRequest.setBaseDirectory(projectFolder);
 		cleanPackageRequest.setGoals(Arrays.asList(new String[] { "clean", "package" }));
+
+		cleanPackageRequest.setUpdateSnapshots(false);
+		cleanPackageRequest.setLoggingLevel(0);
+
 		MavenExecutionResult cleanPackageResult = embedder.execute(cleanPackageRequest);
 
 		warFile = new File(projectFolder, "target/" + TARGET_ARTIFACT + ".war");
