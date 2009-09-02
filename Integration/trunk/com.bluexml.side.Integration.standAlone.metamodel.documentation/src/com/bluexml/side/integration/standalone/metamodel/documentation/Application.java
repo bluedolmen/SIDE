@@ -3,6 +3,7 @@ package com.bluexml.side.integration.standalone.metamodel.documentation;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 import org.eclipse.core.resources.IFile;
@@ -77,7 +78,13 @@ public class Application implements IApplication {
 		deployer.initialize(configurationParameters_, null, null);
 		System.out.println(deployer.getClass().getName() + " Initalized.");
 		
-		File[] metaModelFileList = getModelFileList(new File(metaModelDirPath));
+		File dir = new File(metaModelDirPath);
+		if(dir==null || dir.exists()==false){
+			System.out.println("File "+metaModelDirPath+" does not exists");
+			throw new FileNotFoundException( "File "+metaModelDirPath+" does not exists");
+		}
+		
+		File[] metaModelFileList = getModelFileList(dir);
 		//EXIT
 		if(metaModelFileList.length<1){
 			System.out.println("Cannot find any meta model file (extension .ecore) in the specified directory.");
