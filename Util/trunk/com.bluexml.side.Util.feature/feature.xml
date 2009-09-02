@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Util.feature" label="S-IDE Utils" version="1.0.68.v8666-20090831" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Util.feature" label="S-IDE Utils" version="1.0.69.v8733-20090902" provider-name="BLUEXML">
   <description url="CRM.obl CRM.obldi">BlueXML Developer Studio</description>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
   <requires>
@@ -27,7 +27,7 @@
   <plugin id="com.bluexml.side.Util.deployer" download-size="0" install-size="0" version="1.0.19.v8336-20090817" unpack="false" />
   <plugin id="com.bluexml.side.Util.deployer.war" download-size="0" install-size="0" version="1.0.4.v8660-20090831" unpack="false" />
   <plugin id="com.bluexml.side.Util.ecore" download-size="0" install-size="0" version="1.0.12.v8336-20090817" unpack="false" />
-  <plugin id="com.bluexml.side.Util.generator" download-size="0" install-size="0" version="1.0.29.v8546-20090826" unpack="false" />
+  <plugin id="com.bluexml.side.Util.generator" download-size="0" install-size="0" version="1.0.30.v8733-20090902" unpack="false" />
   <plugin id="com.bluexml.side.Util.generator.acceleo" download-size="0" install-size="0" version="1.0.20.v8546-20090826" unpack="false" />
   <plugin id="com.bluexml.side.Util.generator.alfresco" download-size="0" install-size="0" version="1.0.17.v8546-20090826" unpack="false" />
   <plugin id="com.bluexml.side.Util.libs" download-size="0" install-size="0" version="1.0.21.v8660-20090831" unpack="false" />
@@ -35,7 +35,7 @@
   <plugin id="com.bluexml.side.Util.metaModel.validate" download-size="0" install-size="0" version="1.0.14.v8336-20090817" unpack="false" />
   <plugin id="com.bluexml.side.Util.model.merge" download-size="0" install-size="0" version="1.0.13.v8336-20090817" unpack="false" />
   <plugin id="com.bluexml.side.Util.security" download-size="0" install-size="0" version="1.0.17.v8336-20090817" unpack="false" />
-  <plugin id="com.bluexml.side.Util.dependencies" download-size="0" install-size="0" version="1.0.12.v8666-20090831" unpack="false" />
+  <plugin id="com.bluexml.side.Util.dependencies" download-size="0" install-size="0" version="1.0.13.v8733-20090902" unpack="false" />
   <plugin id="com.bluexml.side.Util.feedback" download-size="0" install-size="0" version="1.0.13.v8336-20090817" unpack="false" />
   <plugin id="com.bluexml.side.Util.generator.documentation" download-size="0" install-size="0" version="1.0.5.v8243-20090813" unpack="false" />
 </feature>
