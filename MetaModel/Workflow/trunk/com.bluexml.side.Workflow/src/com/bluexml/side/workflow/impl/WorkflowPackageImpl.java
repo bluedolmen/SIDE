@@ -19,7 +19,6 @@ import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.workflow.Action;
 import com.bluexml.side.workflow.Attribute;
-import com.bluexml.side.workflow.BPMAssignmentType;
 import com.bluexml.side.workflow.BPMEventType;
 import com.bluexml.side.workflow.Decision;
 import com.bluexml.side.workflow.EndState;
@@ -203,13 +202,6 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * @generated
 	 */
 	private EEnum bpmEventTypeEEnum = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EEnum bpmAssignmentTypeEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -476,17 +468,8 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getStartState_AssignmentType() {
-		return (EAttribute)startStateEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getStartState_Initiator() {
-		return (EReference)startStateEClass.getEStructuralFeatures().get(1);
+		return (EReference)startStateEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -935,15 +918,6 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getBPMAssignmentType() {
-		return bpmAssignmentTypeEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public WorkflowFactory getWorkflowFactory() {
 		return (WorkflowFactory)getEFactoryInstance();
 	}
@@ -990,7 +964,6 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		createEAttribute(swimlaneEClass, SWIMLANE__CLAZZ);
 
 		startStateEClass = createEClass(START_STATE);
-		createEAttribute(startStateEClass, START_STATE__ASSIGNMENT_TYPE);
 		createEReference(startStateEClass, START_STATE__INITIATOR);
 
 		taskNodeEClass = createEClass(TASK_NODE);
@@ -1060,7 +1033,6 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 
 		// Create enums
 		bpmEventTypeEEnum = createEEnum(BPM_EVENT_TYPE);
-		bpmAssignmentTypeEEnum = createEEnum(BPM_ASSIGNMENT_TYPE);
 	}
 
 	/**
@@ -1133,7 +1105,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		initEClass(swimlaneEClass, Swimlane.class, "Swimlane", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSwimlane_Name(), ecorePackage.getEString(), "name", null, 1, 1, Swimlane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getSwimlane_Manage(), this.getTaskNode(), this.getTaskNode_Swimlane(), "manage", null, 0, -1, Swimlane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSwimlane_Actorid(), ecorePackage.getEString(), "actorid", null, 1, 1, Swimlane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getSwimlane_Actorid(), ecorePackage.getEString(), "actorid", null, 0, 1, Swimlane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getSwimlane_Pooledactors(), ecorePackage.getEString(), "pooledactors", null, 0, 1, Swimlane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getSwimlane_Clazz(), ecorePackage.getEString(), "clazz", null, 0, 1, Swimlane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
@@ -1141,7 +1113,6 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		addEParameter(op, this.getSwimlane(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(startStateEClass, StartState.class, "StartState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getStartState_AssignmentType(), this.getBPMAssignmentType(), "assignmentType", null, 0, 1, StartState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStartState_Initiator(), this.getSwimlane(), null, "initiator", null, 1, 1, StartState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(taskNodeEClass, TaskNode.class, "TaskNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1202,7 +1173,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		initEReference(getState_Event(), this.getEvent(), null, "event", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAttribute_Typ(), theCommonPackage.getDataType(), "typ", "void", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttribute_Typ(), theCommonPackage.getDataType(), "typ", "String", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_Title(), ecorePackage.getEString(), "title", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_Name(), ecorePackage.getEString(), "name", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1227,10 +1198,6 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		addEEnumLiteral(bpmEventTypeEEnum, BPMEventType.SUBPROCESS_END);
 		addEEnumLiteral(bpmEventTypeEEnum, BPMEventType.PROCESS_START);
 		addEEnumLiteral(bpmEventTypeEEnum, BPMEventType.PROCESS_END);
-
-		initEEnum(bpmAssignmentTypeEEnum, BPMAssignmentType.class, "BPMAssignmentType");
-		addEEnumLiteral(bpmAssignmentTypeEEnum, BPMAssignmentType.ONE_USER);
-		addEEnumLiteral(bpmAssignmentTypeEEnum, BPMAssignmentType.ONE_GROUP);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1265,7 +1232,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 			 "ActorNameMustBeUnique", "Swimlane.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0",
 			 "MustManageAtLeastOneTask", "(not (self.manage->isEmpty())) or (StartState.allInstances()->collect(ss | ss.initiator)->includes(self))",
 			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true",
-			 "ActoridOrPooledactorMustBeSetForAllExeptOneActor", "Swimlane.allInstances() -> select(s | s.name <>\'initiator\' and (s.actorid -> isEmpty() or s.actorid=\'\')  and (s.pooledactors  -> isEmpty() or s.pooledactors =\'\'))->size() <=1\n"
+			 "ActoridOrPooledactor", "self.manage->forAll(t | t.oclIsTypeOf(StartState)) or\rnot (((self.actorid -> isEmpty() or self.actorid=\'\')  and (self.pooledactors  -> isEmpty() or self.pooledactors =\'\')) or (not(self.actorid->isEmpty()) and not(self.pooledactors->isEmpty())))"
 		   });				
 		addAnnotation
 		  (swimlaneEClass.getEOperations().get(0), 
@@ -1334,7 +1301,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		  (swimlaneEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "ActorNameMustBeUnique MustManageAtLeastOneTask noSpecialCharacters ActoridOrPooledactorMustBeSetForAllExeptOneActor"
+			 "constraints", "ActorNameMustBeUnique MustManageAtLeastOneTask noSpecialCharacters ActoridOrPooledactor"
 		   });									
 		addAnnotation
 		  (taskNodeEClass, 

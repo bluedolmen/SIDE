@@ -871,22 +871,13 @@ public interface WorkflowPackage extends EPackage {
 	int START_STATE__CLAZZ = USER_TASK__CLAZZ;
 
 	/**
-	 * The feature id for the '<em><b>Assignment Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int START_STATE__ASSIGNMENT_TYPE = USER_TASK_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Initiator</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int START_STATE__INITIATOR = USER_TASK_FEATURE_COUNT + 1;
+	int START_STATE__INITIATOR = USER_TASK_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Start State</em>' class.
@@ -895,7 +886,7 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int START_STATE_FEATURE_COUNT = USER_TASK_FEATURE_COUNT + 2;
+	int START_STATE_FEATURE_COUNT = USER_TASK_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.EndStateImpl <em>End State</em>}' class.
@@ -2227,17 +2218,6 @@ public interface WorkflowPackage extends EPackage {
 	int BPM_EVENT_TYPE = 21;
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.workflow.BPMAssignmentType <em>BPM Assignment Type</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.workflow.BPMAssignmentType
-	 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getBPMAssignmentType()
-	 * @generated
-	 */
-	int BPM_ASSIGNMENT_TYPE = 22;
-
-
-	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.WorkflowModelElement <em>Model Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2452,17 +2432,6 @@ public interface WorkflowPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getStartState();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.StartState#getAssignmentType <em>Assignment Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Assignment Type</em>'.
-	 * @see com.bluexml.side.workflow.StartState#getAssignmentType()
-	 * @see #getStartState()
-	 * @generated
-	 */
-	EAttribute getStartState_AssignmentType();
 
 	/**
 	 * Returns the meta object for the reference '{@link com.bluexml.side.workflow.StartState#getInitiator <em>Initiator</em>}'.
@@ -2997,16 +2966,6 @@ public interface WorkflowPackage extends EPackage {
 	EEnum getBPMEventType();
 
 	/**
-	 * Returns the meta object for enum '{@link com.bluexml.side.workflow.BPMAssignmentType <em>BPM Assignment Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>BPM Assignment Type</em>'.
-	 * @see com.bluexml.side.workflow.BPMAssignmentType
-	 * @generated
-	 */
-	EEnum getBPMAssignmentType();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3195,14 +3154,6 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EClass START_STATE = eINSTANCE.getStartState();
-
-		/**
-		 * The meta object literal for the '<em><b>Assignment Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute START_STATE__ASSIGNMENT_TYPE = eINSTANCE.getStartState_AssignmentType();
 
 		/**
 		 * The meta object literal for the '<em><b>Initiator</b></em>' reference feature.
@@ -3639,16 +3590,6 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum BPM_EVENT_TYPE = eINSTANCE.getBPMEventType();
-
-		/**
-		 * The meta object literal for the '{@link com.bluexml.side.workflow.BPMAssignmentType <em>BPM Assignment Type</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.workflow.BPMAssignmentType
-		 * @see com.bluexml.side.workflow.impl.WorkflowPackageImpl#getBPMAssignmentType()
-		 * @generated
-		 */
-		EEnum BPM_ASSIGNMENT_TYPE = eINSTANCE.getBPMAssignmentType();
 
 	}
 

@@ -8,8 +8,6 @@ package com.bluexml.side.workflow;
 
 import org.eclipse.emf.common.util.EList;
 
-import com.bluexml.side.clazz.Clazz;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Task Node</b></em>'.

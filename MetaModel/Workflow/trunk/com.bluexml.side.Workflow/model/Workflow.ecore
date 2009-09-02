@@ -44,10 +44,10 @@
       <details key="ActorNameMustBeUnique" value="Swimlane.allInstances() -> select(n|n.name = self.name and n &lt;> self )->size()=0"/>
       <details key="MustManageAtLeastOneTask" value="(not (self.manage->isEmpty())) or (StartState.allInstances()->collect(ss | ss.initiator)->includes(self))"/>
       <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') = true"/>
-      <details key="ActoridOrPooledactorMustBeSetForAllExeptOneActor" value="Swimlane.allInstances() -> select(s | s.name &lt;>'initiator' and (s.actorid -> isEmpty() or s.actorid='')  and (s.pooledactors  -> isEmpty() or s.pooledactors =''))->size() &lt;=1&#xA;"/>
+      <details key="ActoridOrPooledactor" value="self.manage->forAll(t | t.oclIsTypeOf(StartState)) or&#xD;not (((self.actorid -> isEmpty() or self.actorid='')  and (self.pooledactors  -> isEmpty() or self.pooledactors ='')) or (not(self.actorid->isEmpty()) and not(self.pooledactors->isEmpty())))"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="ActorNameMustBeUnique MustManageAtLeastOneTask noSpecialCharacters ActoridOrPooledactorMustBeSetForAllExeptOneActor"/>
+      <details key="constraints" value="ActorNameMustBeUnique MustManageAtLeastOneTask noSpecialCharacters ActoridOrPooledactor"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The 'Swimlane' represents the actor that manages one or many tasks of the workflow process. It is a mechanism to specify that multiple tasks in the process should be done by the same actor. So after the first task instance is created for a given swimlane, the actor should be remembered in the process for all subsequent tasks that are in the same swimlane.&#xD;&#xD;Constraint/limit: A 'Swimlane' must manage at least one task.&#xD;"/>
@@ -67,7 +67,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="manage" upperBound="-1"
         eType="#//TaskNode" eOpposite="#//TaskNode/swimlane"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="actorid" ordered="false"
-        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'actorid' attribute specifies the name of an account in the target deploy platform.&#xD;&#xD;Constraint/limit: &#xD;- The actorid value must be the same as the value of the attribute 'name'.&#xD;- If there is a value for the attribute 'actorid', no value must be setted for the attribute 'pooledactors'."/>
       </eAnnotations>
@@ -85,7 +85,6 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The 'StartState' represent the first state of the workflow process. Note that a process without a start-state is valid, but cannot be executed.&#xD;&#xD;Constraint/limit: &#xD;- A worflow process must have only one 'StartState'.&#xD;- A 'Swimlane' must be associated with the 'StartState'.&#xD;&#xD;Inherits: &#xD;- UserTask.&#xD;&#xD;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="assignmentType" eType="#//BPMAssignmentType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initiator" lowerBound="1"
         eType="#//Swimlane"/>
   </eClassifiers>
@@ -330,10 +329,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="event" upperBound="-1"
         eType="#//Event" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="BPMAssignmentType">
-    <eLiterals name="One_user" literal="One user"/>
-    <eLiterals name="One_group" value="2" literal="One group"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="UniqueNameForTaskAttribute" value="Attribute.allInstances() -> select(n|n.name = self.name and n &lt;> self )->size()=0"/>
@@ -345,7 +340,7 @@
       <details key="documentation" value="Definition: 'Attribute' specifies properties for TaskNode or StartState."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="typ" eType="ecore:EEnum ../../com.bluexml.side.Common/model/Common.ecore#//DataType"
-        defaultValueLiteral="void">
+        defaultValueLiteral="String">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The attribute 'typ' specifies the type of an 'Attribute'.&#xD;&#xD;Example: This is the list of the different type of an attribute: boolean, byte, char, double, float, int, long, short, String, void, Date, Object, DateTime and Time."/>
       </eAnnotations>

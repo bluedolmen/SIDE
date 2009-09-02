@@ -15,19 +15,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.ecore.OCL;
 
-import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
-import com.bluexml.side.workflow.Attribute;
-import com.bluexml.side.workflow.Event;
 import com.bluexml.side.workflow.Swimlane;
 import com.bluexml.side.workflow.TaskNode;
 import com.bluexml.side.workflow.Timer;
-import com.bluexml.side.workflow.Transition;
 import com.bluexml.side.workflow.WorkflowPackage;
 
 /**

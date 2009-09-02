@@ -7,12 +7,24 @@
 package com.bluexml.side.workflow.util;
 
 
-import com.bluexml.side.common.util.CommonValidator;
+import java.util.Map;
+
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.ecore.util.EObjectValidator;
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
+import org.eclipse.ocl.ecore.Constraint;
+import org.eclipse.ocl.ecore.OCL;
 
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.workflow.Action;
 import com.bluexml.side.workflow.Attribute;
-import com.bluexml.side.workflow.BPMAssignmentType;
 import com.bluexml.side.workflow.BPMEventType;
 import com.bluexml.side.workflow.Decision;
 import com.bluexml.side.workflow.EndState;
@@ -33,26 +45,6 @@ import com.bluexml.side.workflow.UserTask;
 import com.bluexml.side.workflow.Variable;
 import com.bluexml.side.workflow.WorkflowModelElement;
 import com.bluexml.side.workflow.WorkflowPackage;
-
-import java.util.Map;
-
-import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.DiagnosticChain;
-
-import org.eclipse.emf.ecore.EAnnotation;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EPackage;
-
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.eclipse.emf.ecore.util.EObjectValidator;
-
-import org.eclipse.ocl.ParserException;
-import org.eclipse.ocl.Query;
-
-import org.eclipse.ocl.ecore.Constraint;
-import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->
@@ -141,12 +133,13 @@ public class WorkflowValidator extends EObjectValidator {
 	 */
 	private static Constraint swimlane_noSpecialCharactersInvOCL;
 	/**
-	 * The parsed OCL expression for the definition of the '<em>ActoridOrPooledactorMustBeSetForAllExeptOneActor</em>' invariant constraint.
+	 * The parsed OCL expression for the definition of the '<em>ActoridOrPooledactor</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static Constraint swimlane_ActoridOrPooledactorMustBeSetForAllExeptOneActorInvOCL;
+	private static Constraint swimlane_ActoridOrPooledactorInvOCL;
+
 	/**
 	 * The parsed OCL expression for the definition of the '<em>TaskMustBePointerByTransition</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
@@ -305,8 +298,6 @@ public class WorkflowValidator extends EObjectValidator {
 				return validateTransitionTask((TransitionTask)value, diagnostics, context);
 			case WorkflowPackage.BPM_EVENT_TYPE:
 				return validateBPMEventType((BPMEventType)value, diagnostics, context);
-			case WorkflowPackage.BPM_ASSIGNMENT_TYPE:
-				return validateBPMAssignmentType((BPMAssignmentType)value, diagnostics, context);
 			default: 
 				return true;
 		}
@@ -473,7 +464,7 @@ public class WorkflowValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateSwimlane_ActorNameMustBeUnique(swimlane, diagnostics, context);
 		if (result || diagnostics != null) result &= validateSwimlane_MustManageAtLeastOneTask(swimlane, diagnostics, context);
 		if (result || diagnostics != null) result &= validateSwimlane_noSpecialCharacters(swimlane, diagnostics, context);
-		if (result || diagnostics != null) result &= validateSwimlane_ActoridOrPooledactorMustBeSetForAllExeptOneActor(swimlane, diagnostics, context);
+		if (result || diagnostics != null) result &= validateSwimlane_ActoridOrPooledactor(swimlane, diagnostics, context);
 		return result;
 	}
 
@@ -595,28 +586,28 @@ public class WorkflowValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the ActoridOrPooledactorMustBeSetForAllExeptOneActor constraint of '<em>Swimlane</em>'.
+	 * Validates the ActoridOrPooledactor constraint of '<em>Swimlane</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSwimlane_ActoridOrPooledactorMustBeSetForAllExeptOneActor(Swimlane swimlane, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (swimlane_ActoridOrPooledactorMustBeSetForAllExeptOneActorInvOCL == null) {
+	public boolean validateSwimlane_ActoridOrPooledactor(Swimlane swimlane, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (swimlane_ActoridOrPooledactorInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.SWIMLANE);
 			
 			EAnnotation ocl = WorkflowPackage.Literals.SWIMLANE.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String expr = ocl.getDetails().get("ActoridOrPooledactorMustBeSetForAllExeptOneActor");
+			String expr = ocl.getDetails().get("ActoridOrPooledactor");
 			
 			try {
-				swimlane_ActoridOrPooledactorMustBeSetForAllExeptOneActorInvOCL = helper.createInvariant(expr);
+				swimlane_ActoridOrPooledactorInvOCL = helper.createInvariant(expr);
 			}
 			catch (ParserException e) {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
 		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(swimlane_ActoridOrPooledactorMustBeSetForAllExeptOneActorInvOCL);
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(swimlane_ActoridOrPooledactorInvOCL);
 		
 		if (!query.check(swimlane)) {
 			if (diagnostics != null) {
@@ -625,7 +616,7 @@ public class WorkflowValidator extends EObjectValidator {
 						(Diagnostic.ERROR,
 						 DIAGNOSTIC_SOURCE,
 						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ActoridOrPooledactorMustBeSetForAllExeptOneActor", getObjectLabel(swimlane, context) }),
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ActoridOrPooledactor", getObjectLabel(swimlane, context) }),
 						 new Object[] { swimlane }));
 			}
 			return false;
@@ -1369,15 +1360,6 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateBPMEventType(BPMEventType bpmEventType, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return true;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateBPMAssignmentType(BPMAssignmentType bpmAssignmentType, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

@@ -26,7 +26,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 	      <%}%>
 
 		  <%if (current("Process").swimlane[(actorid == null || actorid.length() == 0) && (pooledactors == null || pooledactors.length() == 0) && (name != "initiator")].nSize() > 0){%>
-		  	<%if (assignmentType.toString().equalsIgnoreCase("one user")) {%>
+		  	<%if (current("StartState").initiator.actorid != null) {%>
 		      	<show-association name="bpm:assignee" />
 		  	<%}else{%>
 			      <show-association name="bpm:groupAssignee" />

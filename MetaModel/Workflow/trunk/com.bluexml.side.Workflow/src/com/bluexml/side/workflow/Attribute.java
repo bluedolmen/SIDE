@@ -35,7 +35,7 @@ import com.bluexml.side.common.ModelElement;
 public interface Attribute extends ModelElement {
 	/**
 	 * Returns the value of the '<em><b>Typ</b></em>' attribute.
-	 * The default value is <code>"void"</code>.
+	 * The default value is <code>"String"</code>.
 	 * The literals are from the enumeration {@link com.bluexml.side.common.DataType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -52,7 +52,7 @@ public interface Attribute extends ModelElement {
 	 * @see com.bluexml.side.common.DataType
 	 * @see #setTyp(DataType)
 	 * @see com.bluexml.side.workflow.WorkflowPackage#getAttribute_Typ()
-	 * @model default="void"
+	 * @model default="String"
 	 * @generated
 	 */
 	DataType getTyp();
