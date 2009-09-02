@@ -143,7 +143,6 @@ public class FormGenerator extends AbstractGenerator {
 	private MavenExecutionResult createProject() throws Exception {
 
 		DefaultMavenExecutionRequest archetypeCreateRequest = new DefaultMavenExecutionRequest();
-		archetypeCreateRequest.setUpdateSnapshots(false);
 		archetypeCreateRequest.setBaseDirectory(workFolder);
 		archetypeCreateRequest.setGoals(Arrays.asList(new String[] { "archetype:generate" }));
 		archetypeCreateRequest.setProperty("interactiveMode", "false");
@@ -160,7 +159,7 @@ public class FormGenerator extends AbstractGenerator {
 		archetypeCreateRequest.setProperty("artifactId", TARGET_ARTIFACT);
 		archetypeCreateRequest.setProperty("version", TARGET_VERSION);
 
-		archetypeCreateRequest.setUpdateSnapshots(true);
+		archetypeCreateRequest.setUpdateSnapshots(false);
 
 		MavenExecutionResult result = embedder.execute(archetypeCreateRequest);
 
