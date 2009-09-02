@@ -368,6 +368,9 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: Comments may be used to describe class. Double click to fill up the comment body with the text you want."/>
     </eAnnotations>
+    <eAnnotations source="InternalDoc">
+      <details key="documentation" value="Used because we can't put a Comment (from Common) on the diagram. "/>
+    </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AssociationEnd" eSuperTypes="#//TitledNamedClassModelElement ../../com.bluexml.side.Common/model/Common.ecore#//Comment">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

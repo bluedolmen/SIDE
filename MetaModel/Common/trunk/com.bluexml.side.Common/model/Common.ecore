@@ -128,7 +128,6 @@
     <eLiterals name="long" value="6" literal="long"/>
     <eLiterals name="short" value="7"/>
     <eLiterals name="String" value="8"/>
-    <eLiterals name="void" value="9"/>
     <eLiterals name="Date" value="10"/>
     <eLiterals name="Object" value="11" literal="Object"/>
     <eLiterals name="DateTime" value="12" literal="DateTime"/>

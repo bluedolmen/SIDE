@@ -19,7 +19,6 @@
       <genEnumLiterals ecoreEnumLiteral="Common.ecore#//DataType/long"/>
       <genEnumLiterals ecoreEnumLiteral="Common.ecore#//DataType/short"/>
       <genEnumLiterals ecoreEnumLiteral="Common.ecore#//DataType/String"/>
-      <genEnumLiterals ecoreEnumLiteral="Common.ecore#//DataType/void"/>
       <genEnumLiterals ecoreEnumLiteral="Common.ecore#//DataType/Date"/>
       <genEnumLiterals ecoreEnumLiteral="Common.ecore#//DataType/Object"/>
       <genEnumLiterals ecoreEnumLiteral="Common.ecore#//DataType/DateTime"/>

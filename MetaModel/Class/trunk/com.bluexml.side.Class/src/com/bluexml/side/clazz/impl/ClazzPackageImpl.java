@@ -880,6 +880,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		createEcoreAnnotations();
 		// http://www.bluexml.com/OCL
 		createOCLAnnotations();
+		// InternalDoc
+		createInternalDocAnnotations();
 	}
 
 	/**
@@ -1139,7 +1141,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "body", "if self.title.oclIsUndefined() or self.title.size() = 0 then\r self.name \relse\r self.title \rendif"
-		   });					
+		   });						
 		addAnnotation
 		  (associationEndEClass.getEOperations().get(0), 
 		   source, 
@@ -1161,6 +1163,22 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 			 "body", "let parent : Association = Association.allInstances() -> select(a | a.firstEnd = self or a.secondEnd = self) -> asSequence() -> first() in if (parent.firstEnd = self) then parent.secondEnd else parent.firstEnd endif",
 			 "description", "returns the other side of the containing association"
 		   });			
+	}
+
+	/**
+	 * Initializes the annotations for <b>InternalDoc</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createInternalDocAnnotations() {
+		String source = "InternalDoc";																																																															
+		addAnnotation
+		  (classCommentEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Used because we can\'t put a Comment (from Common) on the diagram. "
+		   });							
 	}
 
 	/**
@@ -1194,7 +1212,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "TwoModelElementWithSameName NameNull noSpecialCharacters TwoAttributesSameName"
-		   });											
+		   });												
 	}
 
 } //ClazzPackageImpl

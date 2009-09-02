@@ -19,7 +19,7 @@ import com.bluexml.side.common.Comment;
  *
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getClassComment()
- * @model
+ * @model annotation="InternalDoc documentation='Used because we can\'t put a Comment (from Common) on the diagram. '"
  * @generated
  */
 public interface ClassComment extends Comment {

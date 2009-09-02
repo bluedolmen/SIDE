@@ -130,16 +130,6 @@ public enum DataType implements Enumerator {
 	STRING(8, "String", "String"),
 
 	/**
-	 * The '<em><b>Void</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #VOID_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	VOID(9, "void", "void"),
-
-	/**
 	 * The '<em><b>Date</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -315,21 +305,6 @@ public enum DataType implements Enumerator {
 	public static final int STRING_VALUE = 8;
 
 	/**
-	 * The '<em><b>Void</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Void</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #VOID
-	 * @model name="void"
-	 * @generated
-	 * @ordered
-	 */
-	public static final int VOID_VALUE = 9;
-
-	/**
 	 * The '<em><b>Date</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -406,7 +381,6 @@ public enum DataType implements Enumerator {
 			LONG,
 			SHORT,
 			STRING,
-			VOID,
 			DATE,
 			OBJECT,
 			DATE_TIME,
@@ -470,7 +444,6 @@ public enum DataType implements Enumerator {
 			case LONG_VALUE: return LONG;
 			case SHORT_VALUE: return SHORT;
 			case STRING_VALUE: return STRING;
-			case VOID_VALUE: return VOID;
 			case DATE_VALUE: return DATE;
 			case OBJECT_VALUE: return OBJECT;
 			case DATE_TIME_VALUE: return DATE_TIME;

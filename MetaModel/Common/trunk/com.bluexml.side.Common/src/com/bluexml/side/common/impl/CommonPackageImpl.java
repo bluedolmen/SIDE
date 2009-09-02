@@ -813,7 +813,6 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		addEEnumLiteral(dataTypeEEnum, DataType.LONG);
 		addEEnumLiteral(dataTypeEEnum, DataType.SHORT);
 		addEEnumLiteral(dataTypeEEnum, DataType.STRING);
-		addEEnumLiteral(dataTypeEEnum, DataType.VOID);
 		addEEnumLiteral(dataTypeEEnum, DataType.DATE);
 		addEEnumLiteral(dataTypeEEnum, DataType.OBJECT);
 		addEEnumLiteral(dataTypeEEnum, DataType.DATE_TIME);
