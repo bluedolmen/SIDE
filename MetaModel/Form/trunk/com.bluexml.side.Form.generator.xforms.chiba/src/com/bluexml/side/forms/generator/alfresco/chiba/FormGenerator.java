@@ -19,6 +19,7 @@ import org.apache.maven.embedder.MavenEmbedder;
 import org.apache.maven.embedder.MavenEmbedderException;
 import org.apache.maven.execution.DefaultMavenExecutionRequest;
 import org.apache.maven.execution.MavenExecutionResult;
+import org.codehaus.plexus.util.StringUtils;
 import org.eclipse.core.resources.IFile;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -163,7 +164,7 @@ public class FormGenerator extends AbstractGenerator {
 
 		projectFolder = new File(workFolder, TARGET_ARTIFACT);
 		pomFile = new File(projectFolder, "pom.xml");
-		alfrescoProperties = new File(projectFolder, "src/main/resources/alfresco.properties");
+		alfrescoProperties = new File(projectFolder, "src/main/resources/forms.properties");
 
 		return result;
 	}
@@ -173,7 +174,8 @@ public class FormGenerator extends AbstractGenerator {
 		Element project = pom.getRootElement();
 		Element build = project.getChild("build", NAMESPACE_MAVENPOM);
 		Element plugins = build.getChild("plugins", NAMESPACE_MAVENPOM);
-		Element plugin = plugins.getChild("plugin", NAMESPACE_MAVENPOM);
+//		Element plugin = plugins.getChild("plugin", NAMESPACE_MAVENPOM);
+		Element plugin = getBlueXMLGeneratorMojoPlugin(plugins);
 		Element configurationElement = plugin.getChild("configuration", NAMESPACE_MAVENPOM);
 		addFiles("clazzFiles", clazzModels, configurationElement);
 		addFiles("formsFiles", formModels, configurationElement);
@@ -185,11 +187,29 @@ public class FormGenerator extends AbstractGenerator {
 		FileInputStream in = new FileInputStream(alfrescoProperties);
 		properties.load(in);
 		in.close();
-		properties.setProperty("temp.directory", "/");
-		properties.setProperty("upload.directory", "/");
+		// no need to specify additional properties
+//		properties.setProperty("temp.directory", "/");
+//		properties.setProperty("upload.directory", "/");
 		os = new FileOutputStream(alfrescoProperties);
 		properties.store(os, null);
 		os.close();
+	}
+
+	/**
+	 * Finds the "plugin" element that represents the XForms generator.
+	 * @param plugins
+	 * @return
+	 */
+	private Element getBlueXMLGeneratorMojoPlugin(Element plugins) {
+		List<Element> listOfPlugins = plugins.getChildren();
+		for (Element plugin : listOfPlugins) {
+			Element artifact = plugin.getChild("artifactId", NAMESPACE_MAVENPOM);
+			String pluginName = artifact.getText();
+			if (StringUtils.equals(pluginName, "xforms.generator.mojo")) {
+				return plugin;
+			}
+		}
+		return null;
 	}
 
 	private void addFiles(String name, List<String> models, Element configurationElement) {
