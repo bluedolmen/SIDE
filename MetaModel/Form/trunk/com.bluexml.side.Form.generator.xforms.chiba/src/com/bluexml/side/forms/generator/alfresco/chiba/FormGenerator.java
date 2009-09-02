@@ -114,7 +114,7 @@ public class FormGenerator extends AbstractGenerator {
 		cleanPackageRequest.setGoals(Arrays.asList(new String[] { "clean", "package" }));
 
 		cleanPackageRequest.setUpdateSnapshots(false);
-		cleanPackageRequest.setLoggingLevel(0);
+		cleanPackageRequest.setLoggingLevel(1);
 
 		MavenExecutionResult cleanPackageResult = embedder.execute(cleanPackageRequest);
 
