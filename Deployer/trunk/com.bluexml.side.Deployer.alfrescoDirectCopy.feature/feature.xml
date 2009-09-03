@@ -27,10 +27,10 @@
    </requires>
 
    <plugin
-         id="com.bluexml.side.Deployer.alfresco.directCopy"
+         id="com.bluexml.side.Deployer.alfrescoDirectCopy"
          download-size="0"
          install-size="0"
-         version="1.0.0"
+         version="1.0.1.v8815-20090903"
          unpack="false"/>
 
 </feature>
