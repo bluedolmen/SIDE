@@ -178,9 +178,9 @@ public class ClassDiagramUtils {
 	public static String getAssociationName(Association ass, boolean useSource) {
 		String id = ass.getName();
 		if (useSource && ass.getFirstEnd().getName().length() > 0) {
-			id += "." + ass.getFirstEnd().getName();
+			id += ass.getFirstEnd().getName();
 		} else if(ass.getSecondEnd().getName().length() > 0) {
-			id += "." + ass.getSecondEnd().getName();
+			id += ass.getSecondEnd().getName();
 		}
 		return id;
 	}
