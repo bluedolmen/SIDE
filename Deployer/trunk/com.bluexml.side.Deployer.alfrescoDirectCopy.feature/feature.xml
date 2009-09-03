@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="com.bluexml.side.Deployer.alfresco.directCopy.feature"
+      id="com.bluexml.side.Deployer.alfrescoDirectCopy.feature"
       label="Alfresco Direct Deployer"
       version="1.0.0"
       provider-name="www.bluexml.com">
