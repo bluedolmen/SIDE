@@ -18,8 +18,7 @@
 			<repositories>
 				<repository>
 					<id>releases</id>
-					<url>http://localhost:8081/nexus/content/repositories/releases
-					</url>
+					<url>http://localhost:8081/nexus/content/repositories/releases</url>
 					<releases>
 						<enabled>true</enabled>
 					</releases>
@@ -29,9 +28,7 @@
 				</repository>
 				<repository>
 					<id>snapshots</id>
-					<url>
-						http://localhost:8081/nexus/content/repositories/snapshots
-					</url>
+					<url>http://localhost:8081/nexus/content/repositories/snapshots</url>
 					<releases>
 						<enabled>false</enabled>
 					</releases>
@@ -43,14 +40,11 @@
 			<pluginRepositories>
 				<pluginRepository>
 					<id>releases</id>
-					<url>
-						http://localhost:8081/nexus/content/repositories/snapshots
-					</url>
+					<url>http://localhost:8081/nexus/content/repositories/releases</url>
 				</pluginRepository>
 				<pluginRepository>
 					<id>snapshots</id>
-					<url>http://localhost:8081/nexus/content/repositories/releases
-					</url>
+					<url>http://localhost:8081/nexus/content/repositories/snapshots</url>
 				</pluginRepository>
 			</pluginRepositories>
 		</profile>
@@ -61,10 +55,8 @@
 			</activation>
 			<repositories>
 				<repository>
-					<id>SIDE-lan-release</id>
-					<url>
-						http://192.168.49.18:8081/nexus/content/repositories/SIDE-lan-releases
-					</url>
+					<id>releases</id>
+					<url>http://192.168.49.18:8081/nexus/content/repositories/releases</url>
 					<releases>
 						<enabled>true</enabled>
 					</releases>
@@ -73,10 +65,8 @@
 					</snapshots>
 				</repository>
 				<repository>
-					<id>SIDE-lan-snapshots</id>
-					<url>
-						http://192.168.49.18:8081/nexus/content/repositories/SIDE-lan-snapshots
-					</url>
+					<id>snapshots</id>
+					<url>http://192.168.49.18:8081/nexus/content/repositories/snapshots</url>
 					<releases>
 						<enabled>false</enabled>
 					</releases>
@@ -87,16 +77,12 @@
 			</repositories>
 			<pluginRepositories>
 				<pluginRepository>
-					<id>SIDE-lan-snapshots</id>
-					<url>
-						http://192.168.49.18:8081/nexus/content/repositories/SIDE-lan-snapshots
-					</url>
+					<id>snapshots</id>
+					<url>http://192.168.49.18:8081/nexus/content/repositories/snapshots</url>
 				</pluginRepository>
 				<pluginRepository>
-					<id>SIDE-lan-releases</id>
-					<url>
-						http://192.168.49.18:8081/nexus/content/repositories/SIDE-lan-releases
-					</url>
+					<id>releases</id>
+					<url>http://192.168.49.18:8081/nexus/content/repositories/releases</url>
 				</pluginRepository>
 			</pluginRepositories>
 		</profile>
@@ -108,25 +94,21 @@
 			<repositories>
 				<repository>
 					<id>BXKB-repo</id>
-					<url>http://merry.bluexml.com/m2/repository
-					</url>
+					<url>http://merry.bluexml.com/m2/repository</url>
 				</repository>
 				<repository>
 					<id>BXKB-repo-snapshots</id>
-					<url>http://merry.bluexml.com/m2/snapshotrepository
-					</url>
+					<url>http://merry.bluexml.com/m2/snapshotrepository</url>
 				</repository>
 			</repositories>
 			<pluginRepositories>
 				<pluginRepository>
 					<id>BXKB-repo</id>
-					<url>http://merry.bluexml.com/m2/repository
-					</url>
+					<url>http://merry.bluexml.com/m2/repository</url>
 				</pluginRepository>
 				<pluginRepository>
 					<id>BXKB-repo-snapshots</id>
-					<url>http://merry.bluexml.com/m2/snapshotrepository
-					</url>
+					<url>http://merry.bluexml.com/m2/snapshotrepository</url>
 				</pluginRepository>
 			</pluginRepositories>
 		</profile>
@@ -141,25 +123,44 @@
 					<url>file:///Users/davidabad/.m2/repository/</url>
 				</repository>
 				<repository>
-					<id>release</id>
+					<id>releases</id>
 					<url>file:///Users/davidabad/.m2/repository/</url>
 				</repository>
 				<repository>
-					<id>snapshot</id>
+					<id>snapshots</id>
+					<url>file:///Users/davidabad/.m2/repository/</url>
+				</repository>
+				<repository>
+					<id>BXKB-repo</id>
+					<url>file:///Users/davidabad/.m2/repository/</url>
+				</repository>
+				<repository>
+					<id>BXKB-repo-snapshots</id>
 					<url>file:///Users/davidabad/.m2/repository/</url>
 				</repository>
 			</repositories>
 			<pluginRepositories>
 				<pluginRepository>
-					<id>release</id>
+					<id>central</id>
 					<url>file:///Users/davidabad/.m2/repository/</url>
 				</pluginRepository>
 				<pluginRepository>
-					<id>snapshot</id>
+					<id>releases</id>
+					<url>file:///Users/davidabad/.m2/repository/</url>
+				</pluginRepository>
+				<pluginRepository>
+					<id>snapshots</id>
+					<url>file:///Users/davidabad/.m2/repository/</url>
+				</pluginRepository>
+				<pluginRepository>
+					<id>BXKB-repo</id>
+					<url>file:///Users/davidabad/.m2/repository/</url>
+				</pluginRepository>
+				<pluginRepository>
+					<id>BXKB-repo-snapshots</id>
 					<url>file:///Users/davidabad/.m2/repository/</url>
 				</pluginRepository>
 			</pluginRepositories>
-
 		</profile>
 	</profiles>
 </project>
