@@ -106,11 +106,16 @@ public class ClassFormCollectionItemProvider
 	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+		(createChildParameter
+			(FormPackage.Literals.FORM_COLLECTION__FORMS,
+			 FormFactory.eINSTANCE.createFormClass()));
 	}
 
 }
