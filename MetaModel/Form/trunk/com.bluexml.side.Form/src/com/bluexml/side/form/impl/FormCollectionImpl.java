@@ -35,7 +35,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *
  * @generated
  */
-public class FormCollectionImpl extends PackageImpl implements FormCollection {
+public abstract class FormCollectionImpl extends PackageImpl implements FormCollection {
 	/**
 	 * The cached value of the '{@link #getForms() <em>Forms</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

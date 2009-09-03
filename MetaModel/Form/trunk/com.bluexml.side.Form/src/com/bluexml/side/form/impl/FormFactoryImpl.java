@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.form.impl;
 
+import com.bluexml.side.form.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -92,6 +93,10 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case FormPackage.FORM_GROUP: return createFormGroup();
+			case FormPackage.WORKFLOW_FORM_COLLECTION: return createWorkflowFormCollection();
+			case FormPackage.CLASS_FORM_COLLECTION: return createClassFormCollection();
+			case FormPackage.FORM_WORKFLOW: return createFormWorkflow();
+			case FormPackage.FORM_CLASS: return createFormClass();
 			case FormPackage.BOOLEAN_FIELD: return createBooleanField();
 			case FormPackage.CHAR_FIELD: return createCharField();
 			case FormPackage.DATE_FIELD: return createDateField();
@@ -107,17 +112,16 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 			case FormPackage.URL_FIELD: return createURLField();
 			case FormPackage.PHONE_NUMBER_FIELD: return createPhoneNumberField();
 			case FormPackage.FORM_ASPECT: return createFormAspect();
-			case FormPackage.FORM_CLASS: return createFormClass();
 			case FormPackage.REFERENCE: return createReference();
-			case FormPackage.FORM_COLLECTION: return createFormCollection();
 			case FormPackage.CHOICE_FIELD: return createChoiceField();
 			case FormPackage.REGEX_FIELD: return createRegexField();
 			case FormPackage.PASSWORD_FIELD: return createPasswordField();
 			case FormPackage.VIRTUAL_FIELD: return createVirtualField();
 			case FormPackage.ACTION_FIELD: return createActionField();
 			case FormPackage.TEXT_FIELD: return createTextField();
-			case FormPackage.WORKFLOW_FORM_COLLECTION: return createWorkflowFormCollection();
-			case FormPackage.FORM_WORKFLOW: return createFormWorkflow();
+			case FormPackage.SEARCH_FORM: return createSearchForm();
+			case FormPackage.NUMERIC_FIELD: return createNumericField();
+			case FormPackage.SEARCH_OPERATOR_CONFIGURATION: return createSearchOperatorConfiguration();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -350,16 +354,6 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FormCollection createFormCollection() {
-		FormCollectionImpl formCollection = new FormCollectionImpl();
-		return formCollection;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ChoiceField createChoiceField() {
 		ChoiceFieldImpl choiceField = new ChoiceFieldImpl();
 		return choiceField;
@@ -420,9 +414,49 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public SearchForm createSearchForm() {
+		SearchFormImpl searchForm = new SearchFormImpl();
+		return searchForm;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NumericField createNumericField() {
+		NumericFieldImpl numericField = new NumericFieldImpl();
+		return numericField;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SearchOperatorConfiguration createSearchOperatorConfiguration() {
+		SearchOperatorConfigurationImpl searchOperatorConfiguration = new SearchOperatorConfigurationImpl();
+		return searchOperatorConfiguration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public WorkflowFormCollection createWorkflowFormCollection() {
 		WorkflowFormCollectionImpl workflowFormCollection = new WorkflowFormCollectionImpl();
 		return workflowFormCollection;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassFormCollection createClassFormCollection() {
+		ClassFormCollectionImpl classFormCollection = new ClassFormCollectionImpl();
+		return classFormCollection;
 	}
 
 	/**

@@ -31,7 +31,7 @@ package com.bluexml.side.form;
  * @model
  * @generated
  */
-public interface IntegerField extends Field {
+public interface IntegerField extends NumericField {
 	/**
 	 * Returns the value of the '<em><b>Min value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -42,7 +42,7 @@ public interface IntegerField extends Field {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: minimum value for the input. If the 'min_value' attribute is superior than 0, the Interger field is mandatory.
-	 * Constraint/limit: The input value cannot be superior to the ‘max_value’.
+	 * Constraint/limit: The input value cannot be superior to the ëmax_valueí.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Min value</em>' attribute.
 	 * @see #setMin_value(int)

@@ -33,7 +33,7 @@ import com.bluexml.side.form.FormPackage;
  * @generated
  */
 public class FloatFieldItemProvider
-	extends FieldItemProvider
+	extends NumericFieldItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -84,7 +84,7 @@ public class FloatFieldItemProvider
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -106,7 +106,7 @@ public class FloatFieldItemProvider
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}

@@ -33,7 +33,7 @@ import com.bluexml.side.form.FormPackage;
  * @generated
  */
 public class DecimalFieldItemProvider
-	extends FieldItemProvider
+	extends NumericFieldItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -86,7 +86,7 @@ public class DecimalFieldItemProvider
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -108,7 +108,7 @@ public class DecimalFieldItemProvider
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}

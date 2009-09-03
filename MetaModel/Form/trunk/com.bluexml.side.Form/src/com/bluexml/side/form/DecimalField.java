@@ -33,7 +33,7 @@ package com.bluexml.side.form;
  * @model
  * @generated
  */
-public interface DecimalField extends Field {
+public interface DecimalField extends NumericField {
 	/**
 	 * Returns the value of the '<em><b>Min value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -44,15 +44,15 @@ public interface DecimalField extends Field {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: minimum value for the input. If the 'min_value' attribute is superior than 0, the Decimal field is mandatory.
-	 * Constraint/limit: The input value cannot be superior to the ‘max_value’.
+	 * Constraint/limit: The input value cannot be superior to the ëmax_valueí.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Min value</em>' attribute.
-	 * @see #setMin_value(int)
+	 * @see #setMin_value(String)
 	 * @see com.bluexml.side.form.FormPackage#getDecimalField_Min_value()
 	 * @model
 	 * @generated
 	 */
-	int getMin_value();
+	String getMin_value();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.form.DecimalField#getMin_value <em>Min value</em>}' attribute.
@@ -62,7 +62,7 @@ public interface DecimalField extends Field {
 	 * @see #getMin_value()
 	 * @generated
 	 */
-	void setMin_value(int value);
+	void setMin_value(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Max value</b></em>' attribute.
@@ -77,12 +77,12 @@ public interface DecimalField extends Field {
 	 * Constraint/limit: The input value cannot be inferior to the 'min_value'.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Max value</em>' attribute.
-	 * @see #setMax_value(int)
+	 * @see #setMax_value(String)
 	 * @see com.bluexml.side.form.FormPackage#getDecimalField_Max_value()
 	 * @model
 	 * @generated
 	 */
-	int getMax_value();
+	String getMax_value();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.form.DecimalField#getMax_value <em>Max value</em>}' attribute.
@@ -92,7 +92,7 @@ public interface DecimalField extends Field {
 	 * @see #getMax_value()
 	 * @generated
 	 */
-	void setMax_value(int value);
+	void setMax_value(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Max digits</b></em>' attribute.

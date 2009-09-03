@@ -31,7 +31,7 @@ package com.bluexml.side.form;
  * @model
  * @generated
  */
-public interface FloatField extends Field {
+public interface FloatField extends NumericField {
 	/**
 	 * Returns the value of the '<em><b>Min value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -42,15 +42,15 @@ public interface FloatField extends Field {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: minimum value for the input. If the 'min_value' attribute is superior than 0, the Float field is mandatory.
-	 * Constraint/limit: The input value cannot be superior to the ‘max_value’.
+	 * Constraint/limit: The input value cannot be superior to the ëmax_valueí.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Min value</em>' attribute.
-	 * @see #setMin_value(int)
+	 * @see #setMin_value(float)
 	 * @see com.bluexml.side.form.FormPackage#getFloatField_Min_value()
 	 * @model
 	 * @generated
 	 */
-	int getMin_value();
+	float getMin_value();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.form.FloatField#getMin_value <em>Min value</em>}' attribute.
@@ -60,7 +60,7 @@ public interface FloatField extends Field {
 	 * @see #getMin_value()
 	 * @generated
 	 */
-	void setMin_value(int value);
+	void setMin_value(float value);
 
 	/**
 	 * Returns the value of the '<em><b>Max value</b></em>' attribute.
@@ -75,12 +75,12 @@ public interface FloatField extends Field {
 	 * Constraint/limit: The input value cannot be inferior to the 'min_value'.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Max value</em>' attribute.
-	 * @see #setMax_value(int)
+	 * @see #setMax_value(float)
 	 * @see com.bluexml.side.form.FormPackage#getFloatField_Max_value()
 	 * @model
 	 * @generated
 	 */
-	int getMax_value();
+	float getMax_value();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.form.FloatField#getMax_value <em>Max value</em>}' attribute.
@@ -90,6 +90,6 @@ public interface FloatField extends Field {
 	 * @see #getMax_value()
 	 * @generated
 	 */
-	void setMax_value(int value);
+	void setMax_value(float value);
 
 } // FloatField

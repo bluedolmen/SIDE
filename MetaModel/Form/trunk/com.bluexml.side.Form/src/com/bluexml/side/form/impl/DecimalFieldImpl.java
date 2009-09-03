@@ -31,7 +31,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *
  * @generated
  */
-public class DecimalFieldImpl extends FieldImpl implements DecimalField {
+public class DecimalFieldImpl extends NumericFieldImpl implements DecimalField {
 	/**
 	 * The default value of the '{@link #getMin_value() <em>Min value</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -40,7 +40,7 @@ public class DecimalFieldImpl extends FieldImpl implements DecimalField {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int MIN_VALUE_EDEFAULT = 0;
+	protected static final String MIN_VALUE_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getMin_value() <em>Min value</em>}' attribute.
@@ -50,7 +50,7 @@ public class DecimalFieldImpl extends FieldImpl implements DecimalField {
 	 * @generated
 	 * @ordered
 	 */
-	protected int min_value = MIN_VALUE_EDEFAULT;
+	protected String min_value = MIN_VALUE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getMax_value() <em>Max value</em>}' attribute.
@@ -60,7 +60,7 @@ public class DecimalFieldImpl extends FieldImpl implements DecimalField {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int MAX_VALUE_EDEFAULT = 0;
+	protected static final String MAX_VALUE_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getMax_value() <em>Max value</em>}' attribute.
@@ -70,7 +70,7 @@ public class DecimalFieldImpl extends FieldImpl implements DecimalField {
 	 * @generated
 	 * @ordered
 	 */
-	protected int max_value = MAX_VALUE_EDEFAULT;
+	protected String max_value = MAX_VALUE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getMax_digits() <em>Max digits</em>}' attribute.
@@ -136,7 +136,7 @@ public class DecimalFieldImpl extends FieldImpl implements DecimalField {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getMin_value() {
+	public String getMin_value() {
 		return min_value;
 	}
 
@@ -145,8 +145,8 @@ public class DecimalFieldImpl extends FieldImpl implements DecimalField {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMin_value(int newMin_value) {
-		int oldMin_value = min_value;
+	public void setMin_value(String newMin_value) {
+		String oldMin_value = min_value;
 		min_value = newMin_value;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.DECIMAL_FIELD__MIN_VALUE, oldMin_value, min_value));
@@ -157,7 +157,7 @@ public class DecimalFieldImpl extends FieldImpl implements DecimalField {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getMax_value() {
+	public String getMax_value() {
 		return max_value;
 	}
 
@@ -166,8 +166,8 @@ public class DecimalFieldImpl extends FieldImpl implements DecimalField {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMax_value(int newMax_value) {
-		int oldMax_value = max_value;
+	public void setMax_value(String newMax_value) {
+		String oldMax_value = max_value;
 		max_value = newMax_value;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.DECIMAL_FIELD__MAX_VALUE, oldMax_value, max_value));
@@ -224,9 +224,9 @@ public class DecimalFieldImpl extends FieldImpl implements DecimalField {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FormPackage.DECIMAL_FIELD__MIN_VALUE:
-				return new Integer(getMin_value());
+				return getMin_value();
 			case FormPackage.DECIMAL_FIELD__MAX_VALUE:
-				return new Integer(getMax_value());
+				return getMax_value();
 			case FormPackage.DECIMAL_FIELD__MAX_DIGITS:
 				return new Integer(getMax_digits());
 			case FormPackage.DECIMAL_FIELD__DECIMAL_PLACES:
@@ -244,10 +244,10 @@ public class DecimalFieldImpl extends FieldImpl implements DecimalField {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FormPackage.DECIMAL_FIELD__MIN_VALUE:
-				setMin_value(((Integer)newValue).intValue());
+				setMin_value((String)newValue);
 				return;
 			case FormPackage.DECIMAL_FIELD__MAX_VALUE:
-				setMax_value(((Integer)newValue).intValue());
+				setMax_value((String)newValue);
 				return;
 			case FormPackage.DECIMAL_FIELD__MAX_DIGITS:
 				setMax_digits(((Integer)newValue).intValue());
@@ -292,9 +292,9 @@ public class DecimalFieldImpl extends FieldImpl implements DecimalField {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case FormPackage.DECIMAL_FIELD__MIN_VALUE:
-				return min_value != MIN_VALUE_EDEFAULT;
+				return MIN_VALUE_EDEFAULT == null ? min_value != null : !MIN_VALUE_EDEFAULT.equals(min_value);
 			case FormPackage.DECIMAL_FIELD__MAX_VALUE:
-				return max_value != MAX_VALUE_EDEFAULT;
+				return MAX_VALUE_EDEFAULT == null ? max_value != null : !MAX_VALUE_EDEFAULT.equals(max_value);
 			case FormPackage.DECIMAL_FIELD__MAX_DIGITS:
 				return max_digits != MAX_DIGITS_EDEFAULT;
 			case FormPackage.DECIMAL_FIELD__DECIMAL_PLACES:

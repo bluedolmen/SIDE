@@ -46,11 +46,11 @@ import com.bluexml.side.form.provider.command.DragAndDropFormElementCommand;
  */
 public class FormElementItemProvider
 	extends ModelElementItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
 		IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -233,21 +233,12 @@ public class FormElementItemProvider
 	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-		super.collectNewChildDescriptors(newChildDescriptors, object);
+		//super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add
-			(createChildParameter
-				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
-				 ClazzFactory.eINSTANCE.createClassComment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
-				 ClazzFactory.eINSTANCE.createAssociationEnd()));
 	}
 
 	/**
@@ -260,7 +251,7 @@ public class FormElementItemProvider
 	public ResourceLocator getResourceLocator() {
 		return FormsEditPlugin.INSTANCE;
 	}
-	
+
 	@Override
 	protected Command createRemoveCommand(EditingDomain domain, EObject owner,
 			EReference feature, Collection<?> collection) {
@@ -273,14 +264,14 @@ public class FormElementItemProvider
 				}
 			}
 		}
-		
+
 		if (canDelete) {
 			return super.createRemoveCommand(domain, owner, feature, collection);
 		} else {
 			return UnexecutableCommand.INSTANCE;
 		}
 	}
-	
+
 	@Override
 	protected Command createDragAndDropCommand(EditingDomain domain,
 			Object owner, float location, int operations, int operation,

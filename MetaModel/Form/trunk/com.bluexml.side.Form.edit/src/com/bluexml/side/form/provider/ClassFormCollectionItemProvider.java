@@ -7,17 +7,16 @@
 package com.bluexml.side.form.provider;
 
 
+import com.bluexml.side.form.ClassFormCollection;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormPackage;
 
-import com.bluexml.side.form.WorkflowFormCollection;
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -26,12 +25,12 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 /**
- * This is the item provider adapter for a {@link com.bluexml.side.form.WorkflowFormCollection} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.ClassFormCollection} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class WorkflowFormCollectionItemProvider
+public class ClassFormCollectionItemProvider
 	extends FormCollectionItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -45,7 +44,7 @@ public class WorkflowFormCollectionItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public WorkflowFormCollectionItemProvider(AdapterFactory adapterFactory) {
+	public ClassFormCollectionItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -60,42 +59,19 @@ public class WorkflowFormCollectionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addLinked_processPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Linked process feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addLinked_processPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_WorkflowFormCollection_linked_process_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_WorkflowFormCollection_linked_process_feature", "_UI_WorkflowFormCollection_type"),
-				 FormPackage.Literals.WORKFLOW_FORM_COLLECTION__LINKED_PROCESS,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This returns WorkflowFormCollection.gif.
+	 * This returns ClassFormCollection.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/WorkflowFormCollection"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ClassFormCollection"));
 	}
 
 	/**
@@ -106,10 +82,10 @@ public class WorkflowFormCollectionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((WorkflowFormCollection)object).getName();
+		String label = ((ClassFormCollection)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_WorkflowFormCollection_type") :
-			getString("_UI_WorkflowFormCollection_type") + " " + label;
+			getString("_UI_ClassFormCollection_type") :
+			getString("_UI_ClassFormCollection_type") + " " + label;
 	}
 
 	/**
@@ -130,7 +106,7 @@ public class WorkflowFormCollectionItemProvider
 	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @_generated
+	 * @generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
@@ -139,7 +115,7 @@ public class WorkflowFormCollectionItemProvider
 		newChildDescriptors.add
 		(createChildParameter
 			(FormPackage.Literals.FORM_COLLECTION__FORMS,
-			 FormFactory.eINSTANCE.createFormWorkflow()));
+			 FormFactory.eINSTANCE.createFormClass()));
 	}
 
 }

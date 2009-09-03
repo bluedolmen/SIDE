@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
+import com.bluexml.side.form.*;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.BooleanField;
 import com.bluexml.side.form.CharField;
@@ -127,6 +128,15 @@ public class FormSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case FormPackage.FORM_COLLECTION: {
+				FormCollection formCollection = (FormCollection)theEObject;
+				T result = caseFormCollection(formCollection);
+				if (result == null) result = casePackage(formCollection);
+				if (result == null) result = caseNamedModelElement(formCollection);
+				if (result == null) result = caseModelElement(formCollection);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case FormPackage.FORM_GROUP: {
 				FormGroup formGroup = (FormGroup)theEObject;
 				T result = caseFormGroup(formGroup);
@@ -135,11 +145,61 @@ public class FormSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case FormPackage.WORKFLOW_FORM_COLLECTION: {
+				WorkflowFormCollection workflowFormCollection = (WorkflowFormCollection)theEObject;
+				T result = caseWorkflowFormCollection(workflowFormCollection);
+				if (result == null) result = caseFormCollection(workflowFormCollection);
+				if (result == null) result = casePackage(workflowFormCollection);
+				if (result == null) result = caseNamedModelElement(workflowFormCollection);
+				if (result == null) result = caseModelElement(workflowFormCollection);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FormPackage.CLASS_FORM_COLLECTION: {
+				ClassFormCollection classFormCollection = (ClassFormCollection)theEObject;
+				T result = caseClassFormCollection(classFormCollection);
+				if (result == null) result = caseFormCollection(classFormCollection);
+				if (result == null) result = casePackage(classFormCollection);
+				if (result == null) result = caseNamedModelElement(classFormCollection);
+				if (result == null) result = caseModelElement(classFormCollection);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case FormPackage.FIELD: {
 				Field field = (Field)theEObject;
 				T result = caseField(field);
 				if (result == null) result = caseFormElement(field);
 				if (result == null) result = caseModelElement(field);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FormPackage.FORM_CONTAINER: {
+				FormContainer formContainer = (FormContainer)theEObject;
+				T result = caseFormContainer(formContainer);
+				if (result == null) result = caseFormGroup(formContainer);
+				if (result == null) result = caseFormElement(formContainer);
+				if (result == null) result = caseModelElement(formContainer);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FormPackage.FORM_WORKFLOW: {
+				FormWorkflow formWorkflow = (FormWorkflow)theEObject;
+				T result = caseFormWorkflow(formWorkflow);
+				if (result == null) result = caseFormContainer(formWorkflow);
+				if (result == null) result = caseFormGroup(formWorkflow);
+				if (result == null) result = caseFormElement(formWorkflow);
+				if (result == null) result = caseModelElement(formWorkflow);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FormPackage.FORM_CLASS: {
+				FormClass formClass = (FormClass)theEObject;
+				T result = caseFormClass(formClass);
+				if (result == null) result = caseFormContainer(formClass);
+				if (result == null) result = caseClassReference(formClass);
+				if (result == null) result = caseFormGroup(formClass);
+				if (result == null) result = caseFormElement(formClass);
+				if (result == null) result = caseModelElement(formClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -183,6 +243,7 @@ public class FormSwitch<T> {
 			case FormPackage.DECIMAL_FIELD: {
 				DecimalField decimalField = (DecimalField)theEObject;
 				T result = caseDecimalField(decimalField);
+				if (result == null) result = caseNumericField(decimalField);
 				if (result == null) result = caseField(decimalField);
 				if (result == null) result = caseFormElement(decimalField);
 				if (result == null) result = caseModelElement(decimalField);
@@ -192,6 +253,7 @@ public class FormSwitch<T> {
 			case FormPackage.FLOAT_FIELD: {
 				FloatField floatField = (FloatField)theEObject;
 				T result = caseFloatField(floatField);
+				if (result == null) result = caseNumericField(floatField);
 				if (result == null) result = caseField(floatField);
 				if (result == null) result = caseFormElement(floatField);
 				if (result == null) result = caseModelElement(floatField);
@@ -201,6 +263,7 @@ public class FormSwitch<T> {
 			case FormPackage.INTEGER_FIELD: {
 				IntegerField integerField = (IntegerField)theEObject;
 				T result = caseIntegerField(integerField);
+				if (result == null) result = caseNumericField(integerField);
 				if (result == null) result = caseField(integerField);
 				if (result == null) result = caseFormElement(integerField);
 				if (result == null) result = caseModelElement(integerField);
@@ -285,17 +348,6 @@ public class FormSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FormPackage.FORM_CLASS: {
-				FormClass formClass = (FormClass)theEObject;
-				T result = caseFormClass(formClass);
-				if (result == null) result = caseFormContainer(formClass);
-				if (result == null) result = caseClassReference(formClass);
-				if (result == null) result = caseFormGroup(formClass);
-				if (result == null) result = caseFormElement(formClass);
-				if (result == null) result = caseModelElement(formClass);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case FormPackage.REFERENCE: {
 				Reference reference = (Reference)theEObject;
 				T result = caseReference(reference);
@@ -304,15 +356,6 @@ public class FormSwitch<T> {
 				if (result == null) result = caseClassReference(reference);
 				if (result == null) result = caseFormElement(reference);
 				if (result == null) result = caseModelElement(reference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case FormPackage.FORM_COLLECTION: {
-				FormCollection formCollection = (FormCollection)theEObject;
-				T result = caseFormCollection(formCollection);
-				if (result == null) result = casePackage(formCollection);
-				if (result == null) result = caseNamedModelElement(formCollection);
-				if (result == null) result = caseModelElement(formCollection);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -379,32 +422,28 @@ public class FormSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FormPackage.WORKFLOW_FORM_COLLECTION: {
-				WorkflowFormCollection workflowFormCollection = (WorkflowFormCollection)theEObject;
-				T result = caseWorkflowFormCollection(workflowFormCollection);
-				if (result == null) result = caseFormCollection(workflowFormCollection);
-				if (result == null) result = casePackage(workflowFormCollection);
-				if (result == null) result = caseNamedModelElement(workflowFormCollection);
-				if (result == null) result = caseModelElement(workflowFormCollection);
+			case FormPackage.SEARCH_FORM: {
+				SearchForm searchForm = (SearchForm)theEObject;
+				T result = caseSearchForm(searchForm);
+				if (result == null) result = caseFormContainer(searchForm);
+				if (result == null) result = caseFormGroup(searchForm);
+				if (result == null) result = caseFormElement(searchForm);
+				if (result == null) result = caseModelElement(searchForm);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FormPackage.FORM_WORKFLOW: {
-				FormWorkflow formWorkflow = (FormWorkflow)theEObject;
-				T result = caseFormWorkflow(formWorkflow);
-				if (result == null) result = caseFormContainer(formWorkflow);
-				if (result == null) result = caseFormGroup(formWorkflow);
-				if (result == null) result = caseFormElement(formWorkflow);
-				if (result == null) result = caseModelElement(formWorkflow);
+			case FormPackage.NUMERIC_FIELD: {
+				NumericField numericField = (NumericField)theEObject;
+				T result = caseNumericField(numericField);
+				if (result == null) result = caseField(numericField);
+				if (result == null) result = caseFormElement(numericField);
+				if (result == null) result = caseModelElement(numericField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FormPackage.FORM_CONTAINER: {
-				FormContainer formContainer = (FormContainer)theEObject;
-				T result = caseFormContainer(formContainer);
-				if (result == null) result = caseFormGroup(formContainer);
-				if (result == null) result = caseFormElement(formContainer);
-				if (result == null) result = caseModelElement(formContainer);
+			case FormPackage.SEARCH_OPERATOR_CONFIGURATION: {
+				SearchOperatorConfiguration searchOperatorConfiguration = (SearchOperatorConfiguration)theEObject;
+				T result = caseSearchOperatorConfiguration(searchOperatorConfiguration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -833,6 +872,51 @@ public class FormSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Search Form</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Search Form</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSearchForm(SearchForm object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Numeric Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Numeric Field</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNumericField(NumericField object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Search Operator Configuration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Search Operator Configuration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSearchOperatorConfiguration(SearchOperatorConfiguration object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Workflow Form Collection</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -844,6 +928,21 @@ public class FormSwitch<T> {
 	 * @generated
 	 */
 	public T caseWorkflowFormCollection(WorkflowFormCollection object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Class Form Collection</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Class Form Collection</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseClassFormCollection(ClassFormCollection object) {
 		return null;
 	}
 

@@ -490,29 +490,6 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.FormCollection} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected FormCollectionItemProvider formCollectionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.bluexml.side.form.FormCollection}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createFormCollectionAdapter() {
-		if (formCollectionItemProvider == null) {
-			formCollectionItemProvider = new FormCollectionItemProvider(this);
-		}
-
-		return formCollectionItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.ChoiceField} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -651,6 +628,75 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.SearchForm} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SearchFormItemProvider searchFormItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.form.SearchForm}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSearchFormAdapter() {
+		if (searchFormItemProvider == null) {
+			searchFormItemProvider = new SearchFormItemProvider(this);
+		}
+
+		return searchFormItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.NumericField} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NumericFieldItemProvider numericFieldItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.form.NumericField}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNumericFieldAdapter() {
+		if (numericFieldItemProvider == null) {
+			numericFieldItemProvider = new NumericFieldItemProvider(this);
+		}
+
+		return numericFieldItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.SearchOperatorConfiguration} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SearchOperatorConfigurationItemProvider searchOperatorConfigurationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.form.SearchOperatorConfiguration}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSearchOperatorConfigurationAdapter() {
+		if (searchOperatorConfigurationItemProvider == null) {
+			searchOperatorConfigurationItemProvider = new SearchOperatorConfigurationItemProvider(this);
+		}
+
+		return searchOperatorConfigurationItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.WorkflowFormCollection} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -671,6 +717,29 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 		}
 
 		return workflowFormCollectionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.ClassFormCollection} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ClassFormCollectionItemProvider classFormCollectionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.form.ClassFormCollection}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createClassFormCollectionAdapter() {
+		if (classFormCollectionItemProvider == null) {
+			classFormCollectionItemProvider = new ClassFormCollectionItemProvider(this);
+		}
+
+		return classFormCollectionItemProvider;
 	}
 
 	/**
@@ -796,6 +865,10 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 	 */
 	public void dispose() {
 		if (formGroupItemProvider != null) formGroupItemProvider.dispose();
+		if (workflowFormCollectionItemProvider != null) workflowFormCollectionItemProvider.dispose();
+		if (classFormCollectionItemProvider != null) classFormCollectionItemProvider.dispose();
+		if (formWorkflowItemProvider != null) formWorkflowItemProvider.dispose();
+		if (formClassItemProvider != null) formClassItemProvider.dispose();
 		if (booleanFieldItemProvider != null) booleanFieldItemProvider.dispose();
 		if (charFieldItemProvider != null) charFieldItemProvider.dispose();
 		if (dateFieldItemProvider != null) dateFieldItemProvider.dispose();
@@ -811,17 +884,16 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 		if (urlFieldItemProvider != null) urlFieldItemProvider.dispose();
 		if (phoneNumberFieldItemProvider != null) phoneNumberFieldItemProvider.dispose();
 		if (formAspectItemProvider != null) formAspectItemProvider.dispose();
-		if (formClassItemProvider != null) formClassItemProvider.dispose();
 		if (referenceItemProvider != null) referenceItemProvider.dispose();
-		if (formCollectionItemProvider != null) formCollectionItemProvider.dispose();
 		if (choiceFieldItemProvider != null) choiceFieldItemProvider.dispose();
 		if (regexFieldItemProvider != null) regexFieldItemProvider.dispose();
 		if (passwordFieldItemProvider != null) passwordFieldItemProvider.dispose();
 		if (virtualFieldItemProvider != null) virtualFieldItemProvider.dispose();
 		if (actionFieldItemProvider != null) actionFieldItemProvider.dispose();
 		if (textFieldItemProvider != null) textFieldItemProvider.dispose();
-		if (workflowFormCollectionItemProvider != null) workflowFormCollectionItemProvider.dispose();
-		if (formWorkflowItemProvider != null) formWorkflowItemProvider.dispose();
+		if (searchFormItemProvider != null) searchFormItemProvider.dispose();
+		if (numericFieldItemProvider != null) numericFieldItemProvider.dispose();
+		if (searchOperatorConfigurationItemProvider != null) searchOperatorConfigurationItemProvider.dispose();
 	}
 
 }

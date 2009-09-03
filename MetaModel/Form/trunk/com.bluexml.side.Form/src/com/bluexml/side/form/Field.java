@@ -7,6 +7,7 @@
 package com.bluexml.side.form;
 
 import java.util.Map;
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,7 +17,7 @@ import java.util.Map;
  * <!-- begin-model-doc -->
  * Definition: The form has a list of fields which inherits of the 'Field' abstract element. A 'Field' is usually bound to an attribute of the class diagram (except for FreeText) and have some special features (by e.g. a Date Field can have min and max date). 
  * Each kind of fields will have different generated input field or/and different kind of validation rules. The validation rules are defined to control input in the model. 
- * Operations: The Operation ‘Group in a new group’ allows to group fields in a FormGroup (logical group). This group can be specialized to change its display (in tab, row or column by e.g.).
+ * Operations: The Operation ëGroup in a new groupí allows to group fields in a FormGroup (logical group). This group can be specialized to change its display (in tab, row or column by e.g.).
  * Inherits: FormElement.
  * <!-- end-model-doc -->
  *
@@ -29,6 +30,7 @@ import java.util.Map;
  *   <li>{@link com.bluexml.side.form.Field#isDisabled <em>Disabled</em>}</li>
  *   <li>{@link com.bluexml.side.form.Field#getFieldSize <em>Field Size</em>}</li>
  *   <li>{@link com.bluexml.side.form.Field#getStyle <em>Style</em>}</li>
+ *   <li>{@link com.bluexml.side.form.Field#getSearchOperatorConfiguration <em>Search Operator Configuration</em>}</li>
  * </ul>
  * </p>
  *
@@ -80,7 +82,7 @@ public interface Field extends FormElement {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'error_messages' attribute is used to specify a text message in the case where the input is not valid.
-	 * Constraint/Limit: The internationalization convention may be used for the error_message's value; if the value of the error_messages in the form model is of the form "#label",  the token "label" is then considered as a “delayed message”, whose value will be provided by the forms server at runtime from a language resource file. In the case of Xform Chiba for Alfresco, the language resource file is '<xforms_webapp>/WEB-INF/classes/messages.properties'.
+	 * Constraint/Limit: The internationalization convention may be used for the error_message's value; if the value of the error_messages in the form model is of the form "#label",  the token "label" is then considered as a ìdelayed messageî, whose value will be provided by the forms server at runtime from a language resource file. In the case of Xform Chiba for Alfresco, the language resource file is '<xforms_webapp>/WEB-INF/classes/messages.properties'.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Error messages</em>' attribute.
 	 * @see #setError_messages(Map)
@@ -235,6 +237,32 @@ public interface Field extends FormElement {
 	void setStyle(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Search Operator Configuration</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Search Operator Configuration</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Search Operator Configuration</em>' containment reference.
+	 * @see #setSearchOperatorConfiguration(SearchOperatorConfiguration)
+	 * @see com.bluexml.side.form.FormPackage#getField_SearchOperatorConfiguration()
+	 * @model containment="true"
+	 * @generated
+	 */
+	SearchOperatorConfiguration getSearchOperatorConfiguration();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.form.Field#getSearchOperatorConfiguration <em>Search Operator Configuration</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Search Operator Configuration</em>' containment reference.
+	 * @see #getSearchOperatorConfiguration()
+	 * @generated
+	 */
+	void setSearchOperatorConfiguration(SearchOperatorConfiguration value);
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
@@ -242,5 +270,13 @@ public interface Field extends FormElement {
 	 * @generated
 	 */
 	String getLabel();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	EList<String> getProposedOperators();
 
 } // Field

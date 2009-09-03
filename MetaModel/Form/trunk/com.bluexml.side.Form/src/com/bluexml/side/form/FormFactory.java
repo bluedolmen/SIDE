@@ -189,15 +189,6 @@ public interface FormFactory extends EFactory {
 	Reference createReference();
 
 	/**
-	 * Returns a new object of class '<em>Collection</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Collection</em>'.
-	 * @generated
-	 */
-	FormCollection createFormCollection();
-
-	/**
 	 * Returns a new object of class '<em>Choice Field</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -252,6 +243,33 @@ public interface FormFactory extends EFactory {
 	TextField createTextField();
 
 	/**
+	 * Returns a new object of class '<em>Search Form</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Search Form</em>'.
+	 * @generated
+	 */
+	SearchForm createSearchForm();
+
+	/**
+	 * Returns a new object of class '<em>Numeric Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Numeric Field</em>'.
+	 * @generated
+	 */
+	NumericField createNumericField();
+
+	/**
+	 * Returns a new object of class '<em>Search Operator Configuration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Search Operator Configuration</em>'.
+	 * @generated
+	 */
+	SearchOperatorConfiguration createSearchOperatorConfiguration();
+
+	/**
 	 * Returns a new object of class '<em>Workflow Form Collection</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -259,6 +277,15 @@ public interface FormFactory extends EFactory {
 	 * @generated
 	 */
 	WorkflowFormCollection createWorkflowFormCollection();
+
+	/**
+	 * Returns a new object of class '<em>Class Form Collection</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Class Form Collection</em>'.
+	 * @generated
+	 */
+	ClassFormCollection createClassFormCollection();
 
 	/**
 	 * Returns a new object of class '<em>Workflow</em>'.

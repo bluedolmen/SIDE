@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NamedModelElement;
+import com.bluexml.side.form.*;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.BooleanField;
 import com.bluexml.side.form.CharField;
@@ -108,12 +109,36 @@ public class FormAdapterFactory extends AdapterFactoryImpl {
 				return createFormElementAdapter();
 			}
 			@Override
+			public Adapter caseFormCollection(FormCollection object) {
+				return createFormCollectionAdapter();
+			}
+			@Override
 			public Adapter caseFormGroup(FormGroup object) {
 				return createFormGroupAdapter();
 			}
 			@Override
+			public Adapter caseWorkflowFormCollection(WorkflowFormCollection object) {
+				return createWorkflowFormCollectionAdapter();
+			}
+			@Override
+			public Adapter caseClassFormCollection(ClassFormCollection object) {
+				return createClassFormCollectionAdapter();
+			}
+			@Override
 			public Adapter caseField(Field object) {
 				return createFieldAdapter();
+			}
+			@Override
+			public Adapter caseFormContainer(FormContainer object) {
+				return createFormContainerAdapter();
+			}
+			@Override
+			public Adapter caseFormWorkflow(FormWorkflow object) {
+				return createFormWorkflowAdapter();
+			}
+			@Override
+			public Adapter caseFormClass(FormClass object) {
+				return createFormClassAdapter();
 			}
 			@Override
 			public Adapter caseBooleanField(BooleanField object) {
@@ -176,16 +201,8 @@ public class FormAdapterFactory extends AdapterFactoryImpl {
 				return createFormAspectAdapter();
 			}
 			@Override
-			public Adapter caseFormClass(FormClass object) {
-				return createFormClassAdapter();
-			}
-			@Override
 			public Adapter caseReference(Reference object) {
 				return createReferenceAdapter();
-			}
-			@Override
-			public Adapter caseFormCollection(FormCollection object) {
-				return createFormCollectionAdapter();
 			}
 			@Override
 			public Adapter caseChoiceField(ChoiceField object) {
@@ -216,16 +233,16 @@ public class FormAdapterFactory extends AdapterFactoryImpl {
 				return createTextFieldAdapter();
 			}
 			@Override
-			public Adapter caseWorkflowFormCollection(WorkflowFormCollection object) {
-				return createWorkflowFormCollectionAdapter();
+			public Adapter caseSearchForm(SearchForm object) {
+				return createSearchFormAdapter();
 			}
 			@Override
-			public Adapter caseFormWorkflow(FormWorkflow object) {
-				return createFormWorkflowAdapter();
+			public Adapter caseNumericField(NumericField object) {
+				return createNumericFieldAdapter();
 			}
 			@Override
-			public Adapter caseFormContainer(FormContainer object) {
-				return createFormContainerAdapter();
+			public Adapter caseSearchOperatorConfiguration(SearchOperatorConfiguration object) {
+				return createSearchOperatorConfigurationAdapter();
 			}
 			@Override
 			public Adapter caseModelElement(ModelElement object) {
@@ -652,6 +669,48 @@ public class FormAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.SearchForm <em>Search Form</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.form.SearchForm
+	 * @generated
+	 */
+	public Adapter createSearchFormAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.NumericField <em>Numeric Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.form.NumericField
+	 * @generated
+	 */
+	public Adapter createNumericFieldAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.SearchOperatorConfiguration <em>Search Operator Configuration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.form.SearchOperatorConfiguration
+	 * @generated
+	 */
+	public Adapter createSearchOperatorConfigurationAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.WorkflowFormCollection <em>Workflow Form Collection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -662,6 +721,20 @@ public class FormAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createWorkflowFormCollectionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.ClassFormCollection <em>Class Form Collection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.form.ClassFormCollection
+	 * @generated
+	 */
+	public Adapter createClassFormCollectionAdapter() {
 		return null;
 	}
 

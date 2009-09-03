@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.form.util;
 
+import com.bluexml.side.form.*;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
@@ -185,10 +186,22 @@ public class FormValidator extends EObjectValidator {
 		switch (classifierID) {
 			case FormPackage.FORM_ELEMENT:
 				return validateFormElement((FormElement)value, diagnostics, context);
+			case FormPackage.FORM_COLLECTION:
+				return validateFormCollection((FormCollection)value, diagnostics, context);
 			case FormPackage.FORM_GROUP:
 				return validateFormGroup((FormGroup)value, diagnostics, context);
+			case FormPackage.WORKFLOW_FORM_COLLECTION:
+				return validateWorkflowFormCollection((WorkflowFormCollection)value, diagnostics, context);
+			case FormPackage.CLASS_FORM_COLLECTION:
+				return validateClassFormCollection((ClassFormCollection)value, diagnostics, context);
 			case FormPackage.FIELD:
 				return validateField((Field)value, diagnostics, context);
+			case FormPackage.FORM_CONTAINER:
+				return validateFormContainer((FormContainer)value, diagnostics, context);
+			case FormPackage.FORM_WORKFLOW:
+				return validateFormWorkflow((FormWorkflow)value, diagnostics, context);
+			case FormPackage.FORM_CLASS:
+				return validateFormClass((FormClass)value, diagnostics, context);
 			case FormPackage.BOOLEAN_FIELD:
 				return validateBooleanField((BooleanField)value, diagnostics, context);
 			case FormPackage.CHAR_FIELD:
@@ -219,12 +232,8 @@ public class FormValidator extends EObjectValidator {
 				return validatePhoneNumberField((PhoneNumberField)value, diagnostics, context);
 			case FormPackage.FORM_ASPECT:
 				return validateFormAspect((FormAspect)value, diagnostics, context);
-			case FormPackage.FORM_CLASS:
-				return validateFormClass((FormClass)value, diagnostics, context);
 			case FormPackage.REFERENCE:
 				return validateReference((Reference)value, diagnostics, context);
-			case FormPackage.FORM_COLLECTION:
-				return validateFormCollection((FormCollection)value, diagnostics, context);
 			case FormPackage.CHOICE_FIELD:
 				return validateChoiceField((ChoiceField)value, diagnostics, context);
 			case FormPackage.REGEX_FIELD:
@@ -239,12 +248,12 @@ public class FormValidator extends EObjectValidator {
 				return validateActionField((ActionField)value, diagnostics, context);
 			case FormPackage.TEXT_FIELD:
 				return validateTextField((TextField)value, diagnostics, context);
-			case FormPackage.WORKFLOW_FORM_COLLECTION:
-				return validateWorkflowFormCollection((WorkflowFormCollection)value, diagnostics, context);
-			case FormPackage.FORM_WORKFLOW:
-				return validateFormWorkflow((FormWorkflow)value, diagnostics, context);
-			case FormPackage.FORM_CONTAINER:
-				return validateFormContainer((FormContainer)value, diagnostics, context);
+			case FormPackage.SEARCH_FORM:
+				return validateSearchForm((SearchForm)value, diagnostics, context);
+			case FormPackage.NUMERIC_FIELD:
+				return validateNumericField((NumericField)value, diagnostics, context);
+			case FormPackage.SEARCH_OPERATOR_CONFIGURATION:
+				return validateSearchOperatorConfiguration((SearchOperatorConfiguration)value, diagnostics, context);
 			case FormPackage.FORM_GROUP_PRESENTATION_TYPE:
 				return validateFormGroupPresentationType((FormGroupPresentationType)value, diagnostics, context);
 			case FormPackage.TEXT_WIDGET_TYPE:
@@ -899,8 +908,61 @@ public class FormValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean validateSearchForm(SearchForm searchForm, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_EveryMultiplicityConforms(searchForm, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(searchForm, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(searchForm, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(searchForm, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(searchForm, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(searchForm, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(searchForm, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(searchForm, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormContainer_validName(searchForm, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateNumericField(NumericField numericField, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_EveryMultiplicityConforms(numericField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(numericField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(numericField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(numericField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(numericField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(numericField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(numericField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(numericField, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateSearchOperatorConfiguration(SearchOperatorConfiguration searchOperatorConfiguration, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(searchOperatorConfiguration, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean validateWorkflowFormCollection(WorkflowFormCollection workflowFormCollection, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(workflowFormCollection, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateClassFormCollection(ClassFormCollection classFormCollection, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(classFormCollection, diagnostics, context);
 	}
 
 	/**

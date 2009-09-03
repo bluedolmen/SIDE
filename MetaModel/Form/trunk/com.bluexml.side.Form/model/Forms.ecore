@@ -35,6 +35,13 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormCollection" abstract="true" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Package">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: This is the root element which is the first created element of the form model. All forms will be child of this element. &#xD;&#xA;It has no corresponding elements in the Data model and is usually not generated.&#xD;&#xA;Operations:&#xD;&#xA;- The operation ‘Synchronize with Class Diagram’ might be called when your Data model has been changed to propagate these changes in your forms. &#xD;&#xA;The changes which will be propagated are: &#xD;&#xA; . New attribute (in Data Diagram) are added to the form.&#xD;&#xA; . Deleted attribute (in Data Diagram) are removed from the form.&#xD;&#xA; . Attribute which have been put as mandatory (in Data Diagram) will be put in form if they have been deleted in field’s form.&#xD;&#xA; . If an attribute (in Data Diagram) have been changed its type (eg : String to Date) the kind of field will be changed (CharFiled to DateField).&#xD;&#xA;All the other changes which are not propagated imply a manual update in the concerned forms.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="forms" upperBound="-1"
+        eType="#//FormContainer" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormGroup" eSuperTypes="#//FormElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The FormGroup defines a logical group of fields. This logical grouping is used to generate tabs, rows group, …. in the generated form. &#xD;&#xA;Constrinat/Limit: The creation of FormGroup is achieved by using the ‘Group in a new group’ operation of Field. &#xD;&#xA;Inherits:  FormElement. "/>
@@ -60,6 +67,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="disabled" upperBound="-1"
         eType="#//FormElement" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WorkflowFormCollection" eSuperTypes="#//FormCollection">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The 'WorkflowFormCollection' contains all the workflow forms. It is similar to the FormCollection but instead of containing 'FormClass' elements it contains 'FormWorkflow' elements to design paperless procedures. &#xD;&#xA;Inherits: FormCollection."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="linked_process" eType="ecore:EClass ../../com.bluexml.side.Workflow/model/Workflow.ecore#//Process"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassFormCollection" eSuperTypes="#//FormCollection"/>
   <eClassifiers xsi:type="ecore:EClass" name="Field" abstract="true" eSuperTypes="#//FormElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The form has a list of fields which inherits of the 'Field' abstract element. A 'Field' is usually bound to an attribute of the class diagram (except for FreeText) and have some special features (by e.g. a Date Field can have min and max date). &#xD;&#xA;Each kind of fields will have different generated input field or/and different kind of validation rules. The validation rules are defined to control input in the model. &#xD;&#xA;Operations: The Operation ‘Group in a new group’ allows to group fields in a FormGroup (logical group). This group can be specialized to change its display (in tab, row or column by e.g.).&#xD;&#xA;Inherits: FormElement."/>
@@ -106,6 +120,47 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="searchOperatorConfiguration"
         eType="#//SearchOperatorConfiguration" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormContainer" abstract="true" eSuperTypes="#//FormGroup">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="validName"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="validName" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The 'FormContainer' represents a form and is used as a container for elements. FormClass and FormWorkflow inherits of FormContainer. FormContainer is an abstract element and so does not directly appear in the Form modeler.&#xD;&#xA;A FormCollection is at least composed of one FormContainer.&#xD;&#xA;Inherits: FormGroup."/>
+    </eAnnotations>
+    <eOperations name="getLabel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="if self.label.oclIsUndefined() or self.label.size() = 0 then&#xD; self.name &#xD;else&#xD; self.label &#xD;endif"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: to get the name of the FormContainer (FormClass or FormWorkflow)"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition: The 'name' attribute specifies the name of the form container.&#xD;&#xA;Constraint/limit: this name must be filled up and unique in the form model between all the FormContainer (FormClass and FormWorkflow)"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormWorkflow" eSuperTypes="#//FormContainer">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The Form Workflow is a form associated to a task of a Workflow. This means that this Form Workflow allows to shape the form used to enter the tasks attributes. If no attributes have been defined for a task, only the buttons (next task, accept, reject, ...) allowing to make progress the workflow will be displayed on the form.&#xD;&#xA;Constraint/Limit: the FormWorkflow is linked to a single task of a workflow.&#xD;&#xA;Operations: &#xD;&#xA;- The operation 'Load Ressources...' enables to select and import Workflow Diagrams in the Form Model. One of the first steps to modelize workflow form is to connect this form diagram with the workflow model through this operation: Right click on the editor and select 'Load Resource' to choose a workflow model (with suffix .workflow and not a '.workflowdi' workflow diagram). The Real Task attribute of Form Workflow may then be set up by selecting the name of the targeted task of the loaded workflow model. &#xD;&#xA;- The operation 'Initialize form task' creates the default form from a selected Task. The selected Task is set up with the attribute 'Real task'. This action creates all fields corresponding to the Attributes defined in the workflow model: this default form may then be refined according to the needs.&#xD;&#xA;- The operation ‘Refresh Outline’ refreshes an outline html view of the form. This view is useful to see the transformations made on the form before generating it and to have a general view of what will be generated. It is important to note that this outline view does not give the final generated form and the shape may be different according to the targeted technology.&#xD;&#xA;- The operation ‘Restore’ allows restoring a field which has been previously deleted.&#xD;&#xA;Inherits:  FormContainer."/>
+    </eAnnotations>
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="ClassMustMatchWithProcessContentType" value="(not(self.getContainer().oclIsUndefined()) and not(self.getContainer().oclAsType(WorkflowFormCollection).linked_process.contentType.oclIsUndefined()) and (not self.DataForm.oclIsUndefined())) implies (self.getContainer().oclAsType(WorkflowFormCollection).linked_process.contentType = self.DataForm.real_class)"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ClassMustMatchWithProcessContentType"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="DataForm" eType="#//FormClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormClass" eSuperTypes="#//FormContainer #//ClassReference">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definition: The Form Class is the container for the form itself. If not empty, this element generates a form. Moreover, the Form Class is the link between a single data class of the loaded Data Model and the customized form.&#xD;&#xA;Operations: &#xD;&#xA;-&#x9;The operation 'Load Ressources...' enables to select and import Data Models in the Form Model. One of the first steps to modelize form is to connect this form diagram with the data model through this operation: Right click on the editor and select 'Load Resource' to choose a data model (with suffix .dt and not a '.dtdi' data diagram). The Real Class attribute of Form Class may then be set up by selecting the name of the targeted data class of the loaded data model. &#xD;&#xA;-&#x9;The operation 'Initialize form class' creates the default form from a selected Data Class. The selected Data Class is set up with the attribute 'Real class'. This action creates all fields corresponding to the Attributes and Associations defined in the data model: this default form may then be refined according to the needs.&#xD;&#xA;-&#x9;The operation ‘Refresh Outline’ refreshes an outline html view of the form. This view is useful to see the transformations made on the form before generating it and to have a general view of what will be generated. It is important to note that this outline view does not give the final generated form and the shape may be different according to the targeted technology.&#xD;&#xA;-&#x9;The operation ‘Restore’ allows restoring a field which has been previously deleted.&#xD;&#xA;Inherits: ClassReference, FormContainer.&#xD;&#xA;"/>
+    </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanField" eSuperTypes="#//Field">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -306,22 +361,10 @@
       <details key="documentation" value="Definition: related to an aspect of the Data model, the form aspect is similar to a Form group but keeps the link to the data aspect.&#xD;&#xA;Inherits: FormGroup"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FormClass" eSuperTypes="#//FormContainer #//ClassReference">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The Form Class is the container for the form itself. If not empty, this element generates a form. Moreover, the Form Class is the link between a single data class of the loaded Data Model and the customized form.&#xD;&#xA;Operations: &#xD;&#xA;-&#x9;The operation 'Load Ressources...' enables to select and import Data Models in the Form Model. One of the first steps to modelize form is to connect this form diagram with the data model through this operation: Right click on the editor and select 'Load Resource' to choose a data model (with suffix .dt and not a '.dtdi' data diagram). The Real Class attribute of Form Class may then be set up by selecting the name of the targeted data class of the loaded data model. &#xD;&#xA;-&#x9;The operation 'Initialize form class' creates the default form from a selected Data Class. The selected Data Class is set up with the attribute 'Real class'. This action creates all fields corresponding to the Attributes and Associations defined in the data model: this default form may then be refined according to the needs.&#xD;&#xA;-&#x9;The operation ‘Refresh Outline’ refreshes an outline html view of the form. This view is useful to see the transformations made on the form before generating it and to have a general view of what will be generated. It is important to note that this outline view does not give the final generated form and the shape may be different according to the targeted technology.&#xD;&#xA;-&#x9;The operation ‘Restore’ allows restoring a field which has been previously deleted.&#xD;&#xA;Inherits: ClassReference, FormContainer.&#xD;&#xA;"/>
-    </eAnnotations>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Reference" eSuperTypes="#//ModelChoiceField">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The 'Reference' provides an inline reference to another form. It is a ModelChoiceField but which references a form, ie after that an expand operation has been performed.&#xD;&#xA;Inherit: ModelChoiceField."/>
     </eAnnotations>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FormCollection" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//Package">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: This is the root element which is the first created element of the form model. All forms will be child of this element. &#xD;&#xA;It has no corresponding elements in the Data model and is usually not generated.&#xD;&#xA;Operations:&#xD;&#xA;- The operation ‘Synchronize with Class Diagram’ might be called when your Data model has been changed to propagate these changes in your forms. &#xD;&#xA;The changes which will be propagated are: &#xD;&#xA; . New attribute (in Data Diagram) are added to the form.&#xD;&#xA; . Deleted attribute (in Data Diagram) are removed from the form.&#xD;&#xA; . Attribute which have been put as mandatory (in Data Diagram) will be put in form if they have been deleted in field’s form.&#xD;&#xA; . If an attribute (in Data Diagram) have been changed its type (eg : String to Date) the kind of field will be changed (CharFiled to DateField).&#xD;&#xA;All the other changes which are not propagated imply a manual update in the concerned forms.&#xD;&#xA;"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="forms" upperBound="-1"
-        eType="#//FormContainer" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ChoiceField" eSuperTypes="#//Field">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -470,48 +513,6 @@
         <details key="documentation" value="The form designed for the target class or target form is included in the parent form. Associated items can be defined directly from the currently displayed form."/>
       </eAnnotations>
     </eLiterals>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="WorkflowFormCollection" eSuperTypes="#//FormCollection">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'WorkflowFormCollection' contains all the workflow forms. It is similar to the FormCollection but instead of containing 'FormClass' elements it contains 'FormWorkflow' elements to design paperless procedures. &#xD;&#xA;Inherits: FormCollection."/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="linked_process" eType="ecore:EClass ../../com.bluexml.side.Workflow/model/Workflow.ecore#//Process"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FormWorkflow" eSuperTypes="#//FormContainer">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The Form Workflow is a form associated to a task of a Workflow. This means that this Form Workflow allows to shape the form used to enter the tasks attributes. If no attributes have been defined for a task, only the buttons (next task, accept, reject, ...) allowing to make progress the workflow will be displayed on the form.&#xD;&#xA;Constraint/Limit: the FormWorkflow is linked to a single task of a workflow.&#xD;&#xA;Operations: &#xD;&#xA;- The operation 'Load Ressources...' enables to select and import Workflow Diagrams in the Form Model. One of the first steps to modelize workflow form is to connect this form diagram with the workflow model through this operation: Right click on the editor and select 'Load Resource' to choose a workflow model (with suffix .workflow and not a '.workflowdi' workflow diagram). The Real Task attribute of Form Workflow may then be set up by selecting the name of the targeted task of the loaded workflow model. &#xD;&#xA;- The operation 'Initialize form task' creates the default form from a selected Task. The selected Task is set up with the attribute 'Real task'. This action creates all fields corresponding to the Attributes defined in the workflow model: this default form may then be refined according to the needs.&#xD;&#xA;- The operation ‘Refresh Outline’ refreshes an outline html view of the form. This view is useful to see the transformations made on the form before generating it and to have a general view of what will be generated. It is important to note that this outline view does not give the final generated form and the shape may be different according to the targeted technology.&#xD;&#xA;- The operation ‘Restore’ allows restoring a field which has been previously deleted.&#xD;&#xA;Inherits:  FormContainer."/>
-    </eAnnotations>
-    <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="ClassMustMatchWithProcessContentType" value="(not(self.getContainer().oclIsUndefined()) and not(self.getContainer().oclAsType(WorkflowFormCollection).linked_process.contentType.oclIsUndefined()) and (not self.DataForm.oclIsUndefined())) implies (self.getContainer().oclAsType(WorkflowFormCollection).linked_process.contentType = self.DataForm.real_class)"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="ClassMustMatchWithProcessContentType"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="DataForm" eType="#//FormClass"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FormContainer" abstract="true" eSuperTypes="#//FormGroup">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="validName"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="validName" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Definition: The 'FormContainer' represents a form and is used as a container for elements. FormClass and FormWorkflow inherits of FormContainer. FormContainer is an abstract element and so does not directly appear in the Form modeler.&#xD;&#xA;A FormCollection is at least composed of one FormContainer.&#xD;&#xA;Inherits: FormGroup."/>
-    </eAnnotations>
-    <eOperations name="getLabel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="if self.label.oclIsUndefined() or self.label.size() = 0 then&#xD; self.name &#xD;else&#xD; self.label &#xD;endif"/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: to get the name of the FormContainer (FormClass or FormWorkflow)"/>
-      </eAnnotations>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'name' attribute specifies the name of the form container.&#xD;&#xA;Constraint/limit: this name must be filled up and unique in the form model between all the FormContainer (FormClass and FormWorkflow)"/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SearchForm" eSuperTypes="#//FormContainer">
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataForm" eType="#//FormClass"/>

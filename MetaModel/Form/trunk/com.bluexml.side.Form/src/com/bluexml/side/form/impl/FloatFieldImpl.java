@@ -29,7 +29,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *
  * @generated
  */
-public class FloatFieldImpl extends FieldImpl implements FloatField {
+public class FloatFieldImpl extends NumericFieldImpl implements FloatField {
 	/**
 	 * The default value of the '{@link #getMin_value() <em>Min value</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -38,7 +38,7 @@ public class FloatFieldImpl extends FieldImpl implements FloatField {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int MIN_VALUE_EDEFAULT = 0;
+	protected static final float MIN_VALUE_EDEFAULT = 0.0F;
 
 	/**
 	 * The cached value of the '{@link #getMin_value() <em>Min value</em>}' attribute.
@@ -48,7 +48,7 @@ public class FloatFieldImpl extends FieldImpl implements FloatField {
 	 * @generated
 	 * @ordered
 	 */
-	protected int min_value = MIN_VALUE_EDEFAULT;
+	protected float min_value = MIN_VALUE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getMax_value() <em>Max value</em>}' attribute.
@@ -58,7 +58,7 @@ public class FloatFieldImpl extends FieldImpl implements FloatField {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int MAX_VALUE_EDEFAULT = 0;
+	protected static final float MAX_VALUE_EDEFAULT = 0.0F;
 
 	/**
 	 * The cached value of the '{@link #getMax_value() <em>Max value</em>}' attribute.
@@ -68,7 +68,7 @@ public class FloatFieldImpl extends FieldImpl implements FloatField {
 	 * @generated
 	 * @ordered
 	 */
-	protected int max_value = MAX_VALUE_EDEFAULT;
+	protected float max_value = MAX_VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -94,7 +94,7 @@ public class FloatFieldImpl extends FieldImpl implements FloatField {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getMin_value() {
+	public float getMin_value() {
 		return min_value;
 	}
 
@@ -103,8 +103,8 @@ public class FloatFieldImpl extends FieldImpl implements FloatField {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMin_value(int newMin_value) {
-		int oldMin_value = min_value;
+	public void setMin_value(float newMin_value) {
+		float oldMin_value = min_value;
 		min_value = newMin_value;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FLOAT_FIELD__MIN_VALUE, oldMin_value, min_value));
@@ -115,7 +115,7 @@ public class FloatFieldImpl extends FieldImpl implements FloatField {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getMax_value() {
+	public float getMax_value() {
 		return max_value;
 	}
 
@@ -124,8 +124,8 @@ public class FloatFieldImpl extends FieldImpl implements FloatField {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMax_value(int newMax_value) {
-		int oldMax_value = max_value;
+	public void setMax_value(float newMax_value) {
+		float oldMax_value = max_value;
 		max_value = newMax_value;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.FLOAT_FIELD__MAX_VALUE, oldMax_value, max_value));
@@ -140,9 +140,9 @@ public class FloatFieldImpl extends FieldImpl implements FloatField {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FormPackage.FLOAT_FIELD__MIN_VALUE:
-				return new Integer(getMin_value());
+				return new Float(getMin_value());
 			case FormPackage.FLOAT_FIELD__MAX_VALUE:
-				return new Integer(getMax_value());
+				return new Float(getMax_value());
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -156,10 +156,10 @@ public class FloatFieldImpl extends FieldImpl implements FloatField {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FormPackage.FLOAT_FIELD__MIN_VALUE:
-				setMin_value(((Integer)newValue).intValue());
+				setMin_value(((Float)newValue).floatValue());
 				return;
 			case FormPackage.FLOAT_FIELD__MAX_VALUE:
-				setMax_value(((Integer)newValue).intValue());
+				setMax_value(((Float)newValue).floatValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
