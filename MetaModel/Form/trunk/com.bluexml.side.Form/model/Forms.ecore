@@ -139,11 +139,6 @@
         <details key="documentation" value="Definition: to get the name of the FormContainer (FormClass or FormWorkflow)"/>
       </eAnnotations>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Definition: The 'name' attribute specifies the name of the form container.&#xD;&#xA;Constraint/limit: this name must be filled up and unique in the form model between all the FormContainer (FormClass and FormWorkflow)"/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormWorkflow" eSuperTypes="#//FormContainer">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

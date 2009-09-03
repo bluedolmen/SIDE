@@ -26,7 +26,7 @@ import com.bluexml.side.workflow.Transition;
 import com.bluexml.side.workflow.UserTask;
 
 public class WorkflowInitialization {
-	
+
 	/**
 	 * Launch initialization from a Workflow Form Collection
 	 * @param fc
@@ -41,7 +41,7 @@ public class WorkflowInitialization {
 			if(fc.getForms().size() > 0) {
 				doWork = UIUtils.showConfirmation("Workflow already set","Workflow have already been set. Do you want to overwrite it?");
 			}
-			
+
 			if (doWork) {
 				cmd = new CompoundCommand();
 				// Delete all childs:
@@ -52,13 +52,13 @@ public class WorkflowInitialization {
 				List<State> l = new ArrayList<State>();
 				l.add(p.getStartstate());
 				l.addAll(p.getTasknode());
-				
+
 				// List of Form
 				List<FormWorkflow> lf = new ArrayList<FormWorkflow>();
-				
+
 				// For each task we create a form
 				for (State s : l) {
-					FormWorkflow fw = createTaskForForm(p,s); 
+					FormWorkflow fw = createTaskForForm(p,s);
 					fw.setRef(s);
 					lf.add(fw);
 				}
@@ -70,10 +70,10 @@ public class WorkflowInitialization {
 		}
 		return cmd;
 	}
-	
+
 	/**
 	 * Return a form a Task
-	 * @param p 
+	 * @param p
 	 * @param s
 	 * @return
 	 */
@@ -81,9 +81,8 @@ public class WorkflowInitialization {
 		FormWorkflow fw = FormFactory.eINSTANCE.createFormWorkflow();
 		fw.setId(p.getName() + "_" + s.getName());
 		fw.setLabel(s.getName());
-		fw.setName(s.getName());
 		fw.setRef(s);
-		
+
 		if (s instanceof UserTask) {
 			UserTask ut = (UserTask) s;
 			// For all attribute we get the field :
@@ -93,7 +92,7 @@ public class WorkflowInitialization {
 					fw.getChildren().add(f);
 				}
 			}
-			
+
 			// For attached class :
 			if (((UserTask) s).getClazz().size() > 0) {
 				for (Clazz c : ((UserTask) s).getClazz()) {
@@ -101,7 +100,7 @@ public class WorkflowInitialization {
 					if (f != null) {
 						fw.getChildren().add(f);
 					}
-					
+
 					// Commented : add the form class instead of model choice field
 					/*FormClass fc = FormFactory.eINSTANCE.createFormClass();
 					fc.setReal_class(c);
@@ -109,7 +108,7 @@ public class WorkflowInitialization {
 					fw.getChildren().add(fc);*/
 				}
 			}
-			
+
 			// Same for Transition
 			for (Transition t : ut.getTransition()) {
 				 ActionField af = WorkflowDiagramUtils.getOperationForTransition(t);
@@ -117,8 +116,8 @@ public class WorkflowInitialization {
 					 fw.getChildren().add(af);
 				 }
 			}
-			
-			
+
+
 		}
 		return fw;
 	}

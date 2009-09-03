@@ -20,10 +20,10 @@ import com.bluexml.side.form.FormPackage;
 
 public class CopyFormAction extends Action implements
 ISelectionChangedListener {
-	
+
 	protected EObject selectedObject;
 	private EditingDomain domain;
-	
+
 	public void selectionChanged(SelectionChangedEvent event) {
 		if (event.getSelection() instanceof IStructuredSelection) {
 			setEnabled(updateSelection((IStructuredSelection) event
@@ -46,28 +46,27 @@ ISelectionChangedListener {
 
 		return selectedObject != null;
 	}
-	
+
 	@Override
 	public void run() {
 		super.run();
 		doAction((FormContainer) selectedObject);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private void doAction(FormContainer form) {
 		FormContainer newForm = (FormContainer) EcoreUtil.copy(form);
-		newForm.setName("Copy of " + newForm.getName());
 		((FormContainer) newForm).setLabel("Copy of " + ((FormContainer) newForm).getLabel());
 		Command addFormCmd = AddCommand.create(domain, form.eContainer(), FormPackage.eINSTANCE.getFormCollection_Forms(), newForm);
 		//Form newForm = (Form) cpyCmd.getResult().iterator().next();
 		domain.getCommandStack().execute(addFormCmd);
 	}
-	
+
 	@Override
 	public String getText() {
 		return "Copy Form";
 	}
-	
+
 	public void setActiveWorkbenchPart(IWorkbenchPart workbenchPart) {
 		if (workbenchPart instanceof IEditingDomainProvider) {
 			domain = ((IEditingDomainProvider) workbenchPart).getEditingDomain();

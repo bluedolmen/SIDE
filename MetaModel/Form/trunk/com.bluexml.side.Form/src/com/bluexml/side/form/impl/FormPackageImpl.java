@@ -408,7 +408,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
-			(theFormPackage,
+			(theFormPackage, 
 			 new EValidator.Descriptor() {
 				 public EValidator getEValidator() {
 					 return FormValidator.INSTANCE;
@@ -1218,15 +1218,6 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFormContainer_Name() {
-		return (EAttribute)formContainerEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getFormGroupPresentationType() {
 		return formGroupPresentationTypeEEnum;
 	}
@@ -1316,7 +1307,6 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		createEReference(fieldEClass, FIELD__SEARCH_OPERATOR_CONFIGURATION);
 
 		formContainerEClass = createEClass(FORM_CONTAINER);
-		createEAttribute(formContainerEClass, FORM_CONTAINER__NAME);
 
 		formWorkflowEClass = createEClass(FORM_WORKFLOW);
 		createEReference(formWorkflowEClass, FORM_WORKFLOW__DATA_FORM);
@@ -1528,7 +1518,6 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		addEOperation(fieldEClass, ecorePackage.getEString(), "getProposedOperators", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(formContainerEClass, FormContainer.class, "FormContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFormContainer_Name(), ecorePackage.getEString(), "name", null, 0, 1, FormContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(formContainerEClass, ecorePackage.getEString(), "getLabel", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1664,43 +1653,43 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";
+		String source = "http://www.eclipse.org/emf/2002/Ecore";		
 		addAnnotation
-		  (formElementEClass,
-		   source,
+		  (formElementEClass, 
+		   source, 
 		   new String[] {
 			 "constraints", "noSpecialCharacters"
-		   });
+		   });																							
 		addAnnotation
-		  (formContainerEClass,
-		   source,
+		  (formContainerEClass, 
+		   source, 
 		   new String[] {
 			 "constraints", "validName"
-		   });
+		   });								
 		addAnnotation
-		  (formWorkflowEClass,
-		   source,
+		  (formWorkflowEClass, 
+		   source, 
 		   new String[] {
 			 "constraints", "ClassMustMatchWithProcessContentType"
-		   });
+		   });				
 		addAnnotation
-		  (charFieldEClass,
-		   source,
+		  (charFieldEClass, 
+		   source, 
 		   new String[] {
 			 "constraints", "MinSuperiorToMax"
-		   });
+		   });																																																	
 		addAnnotation
-		  (classReferenceEClass,
-		   source,
+		  (classReferenceEClass, 
+		   source, 
 		   new String[] {
 			 "constraints", "mustReferenceClass"
-		   });
+		   });			
 		addAnnotation
-		  (virtualFieldEClass,
-		   source,
+		  (virtualFieldEClass, 
+		   source, 
 		   new String[] {
 			 "constraints", "NoLinkForVirtualField"
-		   });
+		   });																		
 	}
 
 	/**
@@ -1710,61 +1699,61 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * @generated
 	 */
 	protected void createOCLAnnotations() {
-		String source = "http://www.bluexml.com/OCL";
+		String source = "http://www.bluexml.com/OCL";			
 		addAnnotation
-		  (formElementEClass,
-		   source,
+		  (formElementEClass, 
+		   source, 
 		   new String[] {
 			 "noSpecialCharacters", "self.id.regexMatch(\'[\\w]*\') = true"
-		   });
+		   });									
 		addAnnotation
-		  (formGroupEClass.getEOperations().get(0),
-		   source,
+		  (formGroupEClass.getEOperations().get(0), 
+		   source, 
 		   new String[] {
 			 "body", "self.children->select(oclIsKindOf(Field)).oclAsType(Field)->union(self.children->select(oclIsKindOf(FormGroup)).oclAsType(FormGroup).getFields().oclAsType(Field)).oclAsType(Field)"
-		   });
+		   });							
 		addAnnotation
-		  (fieldEClass.getEOperations().get(0),
-		   source,
+		  (fieldEClass.getEOperations().get(0), 
+		   source, 
 		   new String[] {
 			 "body", "if self.label.oclIsUndefined() or self.label.size() = 0 then\r self.id \relse\r self.label \rendif"
-		   });
+		   });									
 		addAnnotation
-		  (formContainerEClass,
-		   source,
+		  (formContainerEClass, 
+		   source, 
 		   new String[] {
 			 "validName", "not self.name.oclIsUndefined() and self.name <> \'\'"
-		   });
+		   });			
 		addAnnotation
-		  (formContainerEClass.getEOperations().get(0),
-		   source,
+		  (formContainerEClass.getEOperations().get(0), 
+		   source, 
 		   new String[] {
 			 "body", "if self.label.oclIsUndefined() or self.label.size() = 0 then\r self.name \relse\r self.label \rendif"
-		   });
+		   });				
 		addAnnotation
-		  (formWorkflowEClass,
-		   source,
+		  (formWorkflowEClass, 
+		   source, 
 		   new String[] {
 			 "ClassMustMatchWithProcessContentType", "(not(self.getContainer().oclIsUndefined()) and not(self.getContainer().oclAsType(WorkflowFormCollection).linked_process.contentType.oclIsUndefined()) and (not self.DataForm.oclIsUndefined())) implies (self.getContainer().oclAsType(WorkflowFormCollection).linked_process.contentType = self.DataForm.real_class)"
-		   });
+		   });						
 		addAnnotation
-		  (charFieldEClass,
-		   source,
+		  (charFieldEClass, 
+		   source, 
 		   new String[] {
 			 "MinSuperiorToMax", "self.min_length <= self.max_length"
-		   });
+		   });																																															
 		addAnnotation
-		  (classReferenceEClass,
-		   source,
+		  (classReferenceEClass, 
+		   source, 
 		   new String[] {
 			 "mustReferenceClass", "not self.real_class.oclIsUndefined()"
-		   });
+		   });					
 		addAnnotation
-		  (virtualFieldEClass,
-		   source,
+		  (virtualFieldEClass, 
+		   source, 
 		   new String[] {
 			 "NoLinkForVirtualField", "not self.link.oclIsUndefined()"
-		   });
+		   });																	
 	}
 
 	/**
@@ -1774,13 +1763,13 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";														
 		addAnnotation
-		  (getFormGroup_Presentation(),
-		   source,
+		  (getFormGroup_Presentation(), 
+		   source, 
 		   new String[] {
 			 "name", "presentation"
-		   });
+		   });																																																																																								
 	}
 
 	public FormFactory getFormsFactory() {

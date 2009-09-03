@@ -1250,22 +1250,13 @@ public interface FormPackage extends EPackage {
 	int FORM_CONTAINER__DISABLED = FORM_GROUP__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FORM_CONTAINER__NAME = FORM_GROUP_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Container</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORM_CONTAINER_FEATURE_COUNT = FORM_GROUP_FEATURE_COUNT + 1;
+	int FORM_CONTAINER_FEATURE_COUNT = FORM_GROUP_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.FormWorkflowImpl <em>Workflow</em>}' class.
@@ -1402,15 +1393,6 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int FORM_WORKFLOW__DISABLED = FORM_CONTAINER__DISABLED;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FORM_WORKFLOW__NAME = FORM_CONTAINER__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Data Form</b></em>' reference.
@@ -1555,15 +1537,6 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int FORM_CLASS__DISABLED = FORM_CONTAINER__DISABLED;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FORM_CLASS__NAME = FORM_CONTAINER__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Real class</b></em>' reference.
@@ -6165,15 +6138,6 @@ public interface FormPackage extends EPackage {
 	int SEARCH_FORM__DISABLED = FORM_CONTAINER__DISABLED;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEARCH_FORM__NAME = FORM_CONTAINER__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Data Form</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7193,17 +7157,6 @@ public interface FormPackage extends EPackage {
 	EClass getFormContainer();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.FormContainer#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see com.bluexml.side.form.FormContainer#getName()
-	 * @see #getFormContainer()
-	 * @generated
-	 */
-	EAttribute getFormContainer_Name();
-
-	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.form.FormGroupPresentationType <em>Group Presentation Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8038,14 +7991,6 @@ public interface FormPackage extends EPackage {
 		 * @generated
 		 */
 		EClass FORM_CONTAINER = eINSTANCE.getFormContainer();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FORM_CONTAINER__NAME = eINSTANCE.getFormContainer_Name();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.FormGroupPresentationType <em>Group Presentation Type</em>}' enum.

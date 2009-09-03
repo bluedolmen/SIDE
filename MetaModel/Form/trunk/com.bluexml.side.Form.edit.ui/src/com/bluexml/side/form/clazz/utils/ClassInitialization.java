@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.edit.command.AddCommand;
+import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 
 import com.bluexml.side.clazz.Aspect;
@@ -23,7 +25,7 @@ import com.bluexml.side.util.libs.ui.UIUtils;
 public class ClassInitialization {
 
 	public static Command initializeClass(FormClass fc, EditingDomain domain) {
-		Command cmd = null;
+		CompoundCommand cc = new CompoundCommand();
 		if (fc.getReal_class() != null) {
 			boolean doWork = true;
 			if(fc.getChildren().size() > 0) {
@@ -31,16 +33,44 @@ public class ClassInitialization {
 			}
 
 			if (doWork) {
+				Command initCmd = initializeAttributeFormClass(fc,domain);
+				if (initCmd.canExecute()) {
+					cc.append(initCmd);
+				}
 				Collection<FormElement> c = getChildForFormClassFromClazz(fc);
 				if (c.size() > 0) {
-					cmd = AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormGroup_Children(), c);
+					Command addCmd = AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormGroup_Children(), c);
+					cc.append(addCmd);
 				}
 			}
 		} else {
 			UIUtils.showError("No Class defined","No class have been defined. \n"
 					+ "Choose one and run Initiliaze again.");
 		}
-		return cmd;
+		return cc;
+	}
+
+	/**
+	 * Will rerturn a compoundCommand with setcommand if needed.
+	 * @param fc
+	 * @param domain
+	 * @return
+	 */
+	private static Command initializeAttributeFormClass(FormClass fc, EditingDomain domain) {
+		CompoundCommand cc = new CompoundCommand();
+		if (fc.getReal_class() != null) {
+			Clazz c = fc.getReal_class();
+			String name = c.getName();
+			String label = (c.getLabel().length() > 0 ? c.getLabel() : c.getName());
+
+			if (fc.getLabel() == null || fc.getLabel().length() == 0) {
+				cc.append(SetCommand.create(domain, fc, FormPackage.eINSTANCE.getFormElement_Label(), label));
+			}
+			if (fc.getId() == null || fc.getId().length() == 0) {
+				cc.append(SetCommand.create(domain, fc, FormPackage.eINSTANCE.getFormElement_Id(), name));
+			}
+		}
+		return cc;
 	}
 
 	public static Collection<FormElement> getChildForFormClassFromClazz(
@@ -51,14 +81,6 @@ public class ClassInitialization {
 		Collection<FormElement> c = new ArrayList<FormElement>();
 
 		if (cl != null) {
-			if (fc.getLabel() == null || fc.getLabel().length() == 0) {
-				fc.setLabel(cl.getTitle());
-			}
-
-			if (fc.getId() == null || fc.getId().length() == 0) {
-				fc.setId(cl.getName());
-			}
-
 			Collection<Clazz> listClazz = new ArrayList<Clazz>();
 			listClazz = ClassDiagramUtils.getInheritedClazzs(cl);
 			for (Clazz clazz : listClazz) {

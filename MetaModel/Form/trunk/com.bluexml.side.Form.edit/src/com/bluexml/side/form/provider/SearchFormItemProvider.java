@@ -105,7 +105,7 @@ public class SearchFormItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((SearchForm)object).getName();
+		String label = ((SearchForm)object).getId();
 		return label == null || label.length() == 0 ?
 			getString("_UI_SearchForm_type") :
 			getString("_UI_SearchForm_type") + " " + label;

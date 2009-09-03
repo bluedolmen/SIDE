@@ -111,11 +111,6 @@ public class ClassFormCollectionItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-		(createChildParameter
-			(FormPackage.Literals.FORM_COLLECTION__FORMS,
-			 FormFactory.eINSTANCE.createFormClass()));
 	}
 
 }

@@ -61,7 +61,6 @@
       <genOperations ecoreOperation="Forms.ecore#//Field/getProposedOperators"/>
     </genClasses>
     <genClasses image="false" ecoreClass="Forms.ecore#//FormContainer">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FormContainer/name"/>
       <genOperations ecoreOperation="Forms.ecore#//FormContainer/getLabel"/>
     </genClasses>
     <genClasses ecoreClass="Forms.ecore#//FormWorkflow">
