@@ -15,7 +15,7 @@
             <deployerVersion
                   class="com.bluexml.side.deployer.alfresco.directcopy.AlfrescoDeployer"
                   description="Check this to generate a full deployable Alfresco package containing the newly generated Alfresco artifacts."
-                  id="com.bluexml.side.Deployer.alfresco.directCopy"
+                  id="com.bluexml.side.Deployer.alfrescoDirectCopy"
                   version="S-IDE Alfresco Direct Deployer 1.0.0">
                <configurationParameter
                      documentation="Set this value to the Alfresco Tomcat directory path in order the deployer puts the packaged war file.&lt;br&gt;&lt;b&gt;This option is mandatory.&lt;/b&gt;"
