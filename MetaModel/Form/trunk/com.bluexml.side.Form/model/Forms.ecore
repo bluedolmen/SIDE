@@ -69,6 +69,7 @@
         <details key="body" value="if self.label.oclIsUndefined() or self.label.size() = 0 then&#xD; self.id &#xD;else&#xD; self.label &#xD;endif"/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="getProposedOperators" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mandatory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'mandatory' attribute specifies if a field is required or not.&#xD;&#xA;Constraint/limit: The field must be filled up in order to validate the form. A message (validation rule) for all required fields will appear if they are not filled up.&#xD;&#xA;Example:&#xD;&#xA;- 'false': the field is not mandatory.&#xD;&#xA;- 'true': the field is mandatory. Usually, the label of the field is followed by a star."/>
@@ -103,6 +104,8 @@
         <details key="documentation" value="Definition: a specific style code associated to the field which may be defined in style file like css file to be applied on the field input at runtime.&#xD;&#xA;Constraint/Limit: the semantic of the style code is not defined in the model but is known by the targeted form engine on which will be deployed the generated forms.  In the case of XForms generation on Alfresco, this style code refers a CSS class."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="searchOperatorConfiguration"
+        eType="#//SearchOperatorConfiguration" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanField" eSuperTypes="#//Field">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -156,16 +159,16 @@
       <details key="documentation" value="Definition: The 'DateTimeField' specifies a date with time input. The format of the input value must be conform to the 'input_formats' property.&#xD;&#xA;&#xD;&#xD;Inherits:&#xD; DateField."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DecimalField" eSuperTypes="#//Field">
+  <eClassifiers xsi:type="ecore:EClass" name="DecimalField" eSuperTypes="#//NumericField">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The 'DecimalField' specifies a field for decimal input.&#xD;&#xA;&#xD;&#xD;Inherits:&#xD; Field."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min_value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min_value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: minimum value for the input. If the 'min_value' attribute is superior than 0, the Decimal field is mandatory.&#xD;&#xA;Constraint/limit: The input value cannot be superior to the ‘max_value’."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max_value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max_value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: maximum value for the input.&#xD;&#xA;Constraint/limit: The input value cannot be inferior to the 'min_value'."/>
       </eAnnotations>
@@ -181,22 +184,22 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FloatField" eSuperTypes="#//Field">
+  <eClassifiers xsi:type="ecore:EClass" name="FloatField" eSuperTypes="#//NumericField">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The 'FloatField' specifies a field for float input.&#xD;&#xA;&#xD;&#xD;Inherits:&#xD; Field."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min_value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min_value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: minimum value for the input. If the 'min_value' attribute is superior than 0, the Float field is mandatory.&#xD;&#xA;Constraint/limit: The input value cannot be superior to the ‘max_value’."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max_value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max_value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: maximum value for the input.&#xD;&#xA;Constraint/limit: The input value cannot be inferior to the 'min_value'."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IntegerField" eSuperTypes="#//Field">
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerField" eSuperTypes="#//NumericField">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The 'IntegerField' specifies a field for integer input.&#xD;&#xA;&#xD;&#xD;Inherits:&#xD; Field."/>
     </eAnnotations>
@@ -509,5 +512,14 @@
         <details key="documentation" value="Definition: The 'name' attribute specifies the name of the form container.&#xD;&#xA;Constraint/limit: this name must be filled up and unique in the form model between all the FormContainer (FormClass and FormWorkflow)"/>
       </eAnnotations>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SearchForm" eSuperTypes="#//FormContainer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataForm" eType="#//FormClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NumericField" eSuperTypes="#//Field"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SearchOperatorConfiguration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultOperator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="proposedOperators" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>
