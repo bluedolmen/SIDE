@@ -165,7 +165,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Create the dialog
-	 * 
+	 *
 	 * @param parentShell
 	 * @param rwm_model
 	 */
@@ -239,7 +239,7 @@ public class ApplicationDialog extends Dialog {
 				EPackage metaModel = null;
 				try {
 					metaModel = ApplicationUtil.getMetaModelForModel(m);
-				} catch (IOException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				IFile file = null;
@@ -303,7 +303,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Refresh option for the given configuration
-	 * 
+	 *
 	 * @param configuration
 	 */
 	public void refreshOptions(Configuration configuration) {
@@ -346,7 +346,7 @@ public class ApplicationDialog extends Dialog {
 		if (updatePathParam != null) {
 			destinationText.setText(updatePathParam.getValue());
 		}
-		
+
 		ConfigurationParameters offline = ApplicationUtil.getConfigurationParmeterByKey(KEY_OFFLINE);
 		if (offline != null) {
 			offlineMode.setSelection(Boolean.parseBoolean(offline.getValue()));
@@ -439,7 +439,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return all ImplNode (Generator, Deployer) for the given tree
-	 * 
+	 *
 	 * @param tv
 	 * @return
 	 */
@@ -460,7 +460,7 @@ public class ApplicationDialog extends Dialog {
 	/**
 	 * Will search the dataStructure where is save all generation option and
 	 * will add value from the application model
-	 * 
+	 *
 	 * @param configuration
 	 */
 	private void configureGeneratorOptions(Configuration configuration) {
@@ -493,7 +493,7 @@ public class ApplicationDialog extends Dialog {
 	/**
 	 * Return the selected generator, or null if no generator top to the
 	 * selected element or non selected generator.
-	 * 
+	 *
 	 * @param o
 	 * @return
 	 */
@@ -525,7 +525,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return the model for the given FilePath
-	 * 
+	 *
 	 * @param text
 	 * @return
 	 */
@@ -546,7 +546,7 @@ public class ApplicationDialog extends Dialog {
 	/**
 	 * Return the selected generator, or null if no generator top to the
 	 * selected element or non selected generator.
-	 * 
+	 *
 	 * @param o
 	 * @return
 	 */
@@ -568,7 +568,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Load data in given tree for the given configuration
-	 * 
+	 *
 	 * @param configuration
 	 * @param generators
 	 */
@@ -698,7 +698,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Create contents of the dialog
-	 * 
+	 *
 	 * @param parent
 	 */
 	@Override
@@ -1170,7 +1170,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Create the static parameters (used for conf init)
-	 * 
+	 *
 	 * @param config
 	 */
 	private void addStaticParameters(Configuration config) {
@@ -1184,7 +1184,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Add a static param to the current configuration
-	 * 
+	 *
 	 * @param key
 	 * @param value
 	 */
@@ -1196,7 +1196,7 @@ public class ApplicationDialog extends Dialog {
 	/**
 	 * Add a static param for a given configuration (useful when a new static
 	 * param is added)
-	 * 
+	 *
 	 * @param key
 	 * @param value
 	 * @param config
@@ -1210,7 +1210,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Display the select folder box (only in workspace)
-	 * 
+	 *
 	 * @param message
 	 * @return
 	 */
@@ -1241,7 +1241,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Remove the selected model(s)
-	 * 
+	 *
 	 * @param selection
 	 */
 	private void removeModel(String[] selection) {
@@ -1306,7 +1306,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Build a html string for documentation on generator parameter
-	 * 
+	 *
 	 * @return
 	 */
 	private String buildHelpDocumentationText(String documentation) {
@@ -1318,7 +1318,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Build the documentation text
-	 * 
+	 *
 	 * @return
 	 */
 	private String builDocumentationText() {
@@ -1353,7 +1353,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Create contents of the button bar
-	 * 
+	 *
 	 * @param parent
 	 */
 	@Override
@@ -1425,7 +1425,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return the configuration equals to the given name.
-	 * 
+	 *
 	 * @param p_name
 	 * @return
 	 */
@@ -1435,7 +1435,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return the current configuration name
-	 * 
+	 *
 	 * @return
 	 */
 	static public String getCurrentConfiguratioName() {
@@ -1448,7 +1448,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return the configuration being edited
-	 * 
+	 *
 	 * @return
 	 */
 	static public Configuration getCurrentConfiguration() {
@@ -1472,7 +1472,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Show a confirmation message
-	 * 
+	 *
 	 * @param title
 	 * @param message
 	 * @return
@@ -1489,7 +1489,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Show an alert message
-	 * 
+	 *
 	 * @param title
 	 * @param message
 	 */
@@ -1589,7 +1589,7 @@ public class ApplicationDialog extends Dialog {
 
 		/**
 		 * Enable sub element of the given item.
-		 * 
+		 *
 		 * @param item
 		 */
 		protected void enableAllSubElements(TreeItem item) {
@@ -1616,7 +1616,7 @@ public class ApplicationDialog extends Dialog {
 
 		/**
 		 * Disable sub element of the given item.
-		 * 
+		 *
 		 * @param item
 		 */
 		protected void disableAllSubElements(TreeItem item) {

@@ -70,7 +70,7 @@ public class ApplicationUtil {
 	/**
 	 * Return the configuration corresponding to the given key in the current
 	 * configuration. Return null if not found.
-	 * 
+	 *
 	 * @param key
 	 * @return
 	 */
@@ -91,7 +91,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return models of the application
-	 * 
+	 *
 	 * @param application
 	 * @return
 	 */
@@ -107,7 +107,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Delete the given generator from the given configuration
-	 * 
+	 *
 	 * @param config
 	 * @param in
 	 */
@@ -124,7 +124,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Delete the given deployer from the given configuration
-	 * 
+	 *
 	 * @param config
 	 * @param in
 	 */
@@ -140,7 +140,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the list of componant configuration for a specific config
-	 * 
+	 *
 	 * @param config
 	 * @return
 	 */
@@ -170,14 +170,14 @@ public class ApplicationUtil {
 
 	/**
 	 * Return a map with association model <> metaModel name
-	 * 
+	 *
 	 * @param models
 	 * @param doValidation
 	 * @return
 	 * @throws IOException
 	 * @throws IOException
 	 */
-	public static Map<String, List<IFile>> getAssociatedMetaModel(List<Model> models) throws IOException {
+	public static Map<String, List<IFile>> getAssociatedMetaModel(List<Model> models) throws Exception {
 		Map<String, List<IFile>> result = new HashMap<String, List<IFile>>();
 		for (Model model : models) {
 
@@ -202,13 +202,13 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the metamodel of a given model
-	 * 
+	 *
 	 * @param model
 	 * @param file
 	 * @return
 	 * @throws IOException
 	 */
-	public static EPackage getMetaModelForModel(Model model) throws IOException {
+	public static EPackage getMetaModelForModel(Model model) throws Exception {
 		Resource loadedModel = getResourceForModel(model);
 		EPackage metaModel = getMetaModelEpackage(loadedModel);
 		return metaModel;
@@ -216,13 +216,13 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the resource for the given model and resource set
-	 * 
+	 *
 	 * @param rs
 	 * @param file
 	 * @return
 	 * @throws IOException
 	 */
-	public static Resource getResourceForModel(Model model) throws IOException {
+	public static Resource getResourceForModel(Model model) throws Exception {
 		ResourceSet rs = getRessourceSetForModel(model);
 		IFile file = getIFileForModel(model);
 		String fullPath = file.getRawLocation().toOSString();
@@ -239,7 +239,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the IFiel for the given Model
-	 * 
+	 *
 	 * @param model
 	 * @return
 	 * @throws IOException
@@ -254,7 +254,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the ressourceSet for a model
-	 * 
+	 *
 	 * @param model
 	 * @return
 	 * @throws IOException
@@ -272,7 +272,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the meta model EPackage
-	 * 
+	 *
 	 * @param r
 	 * @return
 	 */
@@ -288,7 +288,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the root element of a model
-	 * 
+	 *
 	 * @param model
 	 * @return
 	 */
@@ -304,7 +304,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Take a EObject and will return the top container
-	 * 
+	 *
 	 * @param eo
 	 * @return
 	 */
@@ -318,7 +318,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Launch validation on given EObject
-	 * 
+	 *
 	 * @param eo
 	 * @return
 	 */
@@ -328,7 +328,7 @@ public class ApplicationUtil {
 		return diag.validate(eo, diagnostics);
 	}
 
-	public static boolean validate(IFile modelFile) throws IOException {
+	public static boolean validate(IFile modelFile) throws Exception {
 		Resource loadedModel = null;
 		String fullPath = modelFile.getRawLocation().toOSString();
 		Resource modelResource = null;
@@ -358,7 +358,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Check if the element given is active in the key
-	 * 
+	 *
 	 * @param el
 	 *            : the element
 	 * @return true if valid, false if not
@@ -390,7 +390,7 @@ public class ApplicationUtil {
 
 	/**
 	 * scan all plugins and build the complete list of ModuleConstraint
-	 * 
+	 *
 	 * @return
 	 */
 	public static List<com.bluexml.side.util.dependencies.ModuleConstraint> buildOfflineConfiguration() {
@@ -419,7 +419,7 @@ public class ApplicationUtil {
 	 * take a configuration and update all properties from SIDE extension, this
 	 * manage : <li>deleted elements (options, dependencies)</li> <li>added
 	 * elements</li> <li>updates elements</li>
-	 * 
+	 *
 	 * @param config
 	 * @throws Exception
 	 */
@@ -527,7 +527,7 @@ public class ApplicationUtil {
 	/**
 	 * search in all SIDE extension, an extension fragment that match with this
 	 * ComponantConfiguration
-	 * 
+	 *
 	 * @param conf
 	 * @return
 	 * @throws Exception
@@ -560,7 +560,7 @@ public class ApplicationUtil {
 	/**
 	 * search in extension fragment that match with given name and a set of
 	 * attributes
-	 * 
+	 *
 	 * @param parent
 	 * @param nodeName
 	 * @param parametersMatchs
@@ -579,7 +579,7 @@ public class ApplicationUtil {
 
 	/**
 	 * return a list of extension fragment that match with the given name
-	 * 
+	 *
 	 * @param parent
 	 * @param name
 	 * @return
@@ -598,7 +598,7 @@ public class ApplicationUtil {
 
 	/**
 	 * test if the given extension fragment match with all attributes values
-	 * 
+	 *
 	 * @param node
 	 * @param parametersMatchs
 	 * @return
@@ -625,7 +625,7 @@ public class ApplicationUtil {
 	 * build a tmp project containning all dependencies and use mvn
 	 * dependency:go-offline to populate local copy (.m2/repository), so SIDE
 	 * can work offline
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public static void prepareForOffline() throws Exception {
