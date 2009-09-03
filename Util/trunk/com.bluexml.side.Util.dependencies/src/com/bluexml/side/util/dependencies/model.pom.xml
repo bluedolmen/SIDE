@@ -120,45 +120,45 @@
 			<repositories>
 				<repository>
 					<id>central</id>
-					<url>file:///Users/davidabad/.m2/repository/</url>
+					<url>${settings.localRepository}</url>
 				</repository>
 				<repository>
 					<id>releases</id>
-					<url>file:///Users/davidabad/.m2/repository/</url>
+					<url>${settings.localRepository}</url>
 				</repository>
 				<repository>
 					<id>snapshots</id>
-					<url>file:///Users/davidabad/.m2/repository/</url>
+					<url>${settings.localRepository}</url>
 				</repository>
 				<repository>
 					<id>BXKB-repo</id>
-					<url>file:///Users/davidabad/.m2/repository/</url>
+					<url>${settings.localRepository}</url>
 				</repository>
 				<repository>
 					<id>BXKB-repo-snapshots</id>
-					<url>file:///Users/davidabad/.m2/repository/</url>
+					<url>${settings.localRepository}</url>
 				</repository>
 			</repositories>
 			<pluginRepositories>
 				<pluginRepository>
 					<id>central</id>
-					<url>file:///Users/davidabad/.m2/repository/</url>
+					<url>${settings.localRepository}</url>
 				</pluginRepository>
 				<pluginRepository>
 					<id>releases</id>
-					<url>file:///Users/davidabad/.m2/repository/</url>
+					<url>${settings.localRepository}</url>
 				</pluginRepository>
 				<pluginRepository>
 					<id>snapshots</id>
-					<url>file:///Users/davidabad/.m2/repository/</url>
+					<url>${settings.localRepository}</url>
 				</pluginRepository>
 				<pluginRepository>
 					<id>BXKB-repo</id>
-					<url>file:///Users/davidabad/.m2/repository/</url>
+					<url>${settings.localRepository}</url>
 				</pluginRepository>
 				<pluginRepository>
 					<id>BXKB-repo-snapshots</id>
-					<url>file:///Users/davidabad/.m2/repository/</url>
+					<url>${settings.localRepository}</url>
 				</pluginRepository>
 			</pluginRepositories>
 		</profile>
