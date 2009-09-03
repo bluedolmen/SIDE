@@ -24,7 +24,6 @@ public class CreateGenerationConfiguration implements IObjectActionDelegate {
 
 				Shell shell = new Shell();
 				ApplicationDialog dialog = new ApplicationDialog(shell, rwm_model);
-				dialog.setBlockOnOpen(false);
 				if (dialog.open() == Window.OK) {
 
 				}
