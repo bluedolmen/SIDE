@@ -4,12 +4,12 @@
  * This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Boston, MA 02111.
@@ -37,12 +37,12 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 //import com.bluexml.generator.alfresco.chain.Model;
 
 /**
- * 
+ *
  * This class has utility method for model resource
  * It is only aimed to load,save or manage Resource coming from a model file
  * Resource are always loaded and saved using {@link XMIResourceFactoryImpl}
  * @author Constantin Madola
- * 
+ *
  */
 
 public class EResourceUtils {
@@ -50,17 +50,17 @@ public class EResourceUtils {
 	// TODO VisibilityCheck
 
 	/********************** <b>CREATING</b> ************************
-	 *  
+	 *
 	 * <b>Creating :<b> a resource means returning a new resource
 	 * referencing  a given file (existing or not)
 	 * The content <b><i>IS NOT LOADED</i></b> after a "create"
 	 * the resource is just "initialized"
-	 * 
+	 *
 	 * NOTE :Enhancement can be made by using InputStream
 	 ***************************************************************/
 
 	/**
-	 * Create A Resource From a model 
+	 * Create A Resource From a model
 	 * note that the resource is not loaded, just created
 	 * @param model
 	 * @param metaModelUri
@@ -70,7 +70,7 @@ public class EResourceUtils {
 	 public static Resource createResource(Model model) throws IOException{
 		Resource result = null;
 		if(model !=null){
-			// model aperas whith a relative path 
+			// model aperas whith a relative path
 			// to folowing manipulation means only to get an absolute path
 			IPath rawModelFileLocation = toIFile(model.getPath()).getRawLocation();
 			File modelFile = rawModelFileLocation.toFile();
@@ -83,8 +83,8 @@ public class EResourceUtils {
 	}*/
 
 	/**
-	 * Create A Resource From a model absolute path as String 
-	 * the method does verify that a file exist 
+	 * Create A Resource From a model absolute path as String
+	 * the method does verify that a file exist
 	 * note that the resource is not loaded, just created
 	 * @param model
 	 * @param metaModelUri
@@ -109,9 +109,9 @@ public class EResourceUtils {
 	 * @return a resource
 	 */
 	public static Resource createResource(URI modelFileUri){
-		ResourceSet resourceSet = new ResourceSetImpl(); 
+		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(
-				Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());	
+				Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
 		return  createResource(modelFileUri,resourceSet);
 	}
 
@@ -132,13 +132,13 @@ public class EResourceUtils {
 	}
 
 	/********************   OPENING METHOD   ********************
-	 * 
+	 *
 	 * Opening means to return a new resource
 	 * this reosurce <b><i>IS LOADED</i></b>
 	 * If the map is Empty, We use A default map
-	 * Opening methods are rewriting in the same manners as 
+	 * Opening methods are rewriting in the same manners as
 	 * creating method
-	 * 
+	 *
 	 * Note :Enhancement can be made by using InputSteam
 	 ***********************************************************
 
@@ -152,10 +152,10 @@ public class EResourceUtils {
 	 * @throws IOException
 	 */
 	/*public static Resource openModel(Model model,Map<?,?> map) throws IOException{
-		// model aperas whitha relative path 
+		// model aperas whitha relative path
 		// to folowing manipulation mains only to get an aabsolute path
 		IPath rawModelFileLocation = toIFile(model.getPath()).getRawLocation();
-		File modelFile = rawModelFileLocation.toFile();		
+		File modelFile = rawModelFileLocation.toFile();
 		Resource result = openModel(URI.createFileURI(modelFile.getAbsolutePath()),new ResourceSetImpl(),map);
 		return result;
 
@@ -171,17 +171,17 @@ public class EResourceUtils {
 	 _________________ ABANDON ____________________________________
 
       public static Resource openModel(Model model,Map<?,?> map,ResourceSet rs) throws IOException{
-		// model aperas whitha relative path 
+		// model aperas whitha relative path
 		// to folowing manipulation mains only to get an aabsolute path
 		IPath rawModelFileLocation = toIFile(model.getPath()).getRawLocation();
-		File modelFile = rawModelFileLocation.toFile();		
+		File modelFile = rawModelFileLocation.toFile();
 		Resource result = openModel(URI.createFileURI(modelFile.getAbsolutePath()),rs,map);
 		return result;
 
 	}*/
 
 	/**
-	 * Return a new resource created with the given file absoltue path 
+	 * Return a new resource created with the given file absoltue path
 	 * the resource is laoded using the given map
 	 * @param resourceURI
 	 * @param resourceSet
@@ -189,13 +189,13 @@ public class EResourceUtils {
 	 * @return
 	 * @throws IOException
 	 */
-	public static Resource openModel(String absoluteModelPath,Map<?,?> map) throws IOException{
+	public static Resource openModel(String absoluteModelPath,Map<?,?> map) throws Exception{
 		Resource result = openModel(URI.createFileURI(absoluteModelPath),new ResourceSetImpl(),map);
 		return result;
 
 	}
 	/**
-	 * Return a new resource created with the given file absoltue path 
+	 * Return a new resource created with the given file absoltue path
 	 * the resource is laoded using the given map
 	 * @param resourceURI
 	 * @param resourceSet
@@ -203,21 +203,21 @@ public class EResourceUtils {
 	 * @return
 	 * @throws IOException
 	 */
-	public static Resource openModel(String absoluteModelPath,Map<?,?> map,ResourceSet rs) throws IOException{
+	public static Resource openModel(String absoluteModelPath,Map<?,?> map,ResourceSet rs) throws Exception{
 		Resource result = openModel(URI.createFileURI(absoluteModelPath),rs,map);
 		return result;
 
 	}
 
 	/**
-	 * Return a new resource created with the given uri and loaded whith the given map  
+	 * Return a new resource created with the given uri and loaded whith the given map
 	 * if the given map is null default map is used
 	 * @param resourceURI
 	 * @param map
 	 * @return
 	 * @throws IOException
 	 */
-	public static Resource openModel(URI resourceURI,Map<?,?> map) throws IOException{
+	public static Resource openModel(URI resourceURI,Map<?,?> map) throws Exception{
 		Resource result = openModel(resourceURI,new ResourceSetImpl(),map);
 		return result;
 
@@ -232,7 +232,7 @@ public class EResourceUtils {
 	 * @return
 	 * @throws IOException
 	 */
-	public static Resource openModel(URI resourceURI,ResourceSet resourceSet,Map<?,?> map) throws IOException{
+	public static Resource openModel(URI resourceURI,ResourceSet resourceSet,Map<?,?> map) throws Exception{
 		Resource result = createResource(resourceURI,resourceSet);
 		if(map!=null && map.size()>0){
 			result.load(map);
@@ -265,8 +265,8 @@ public class EResourceUtils {
 
 	/**************************** CHECKING ***************************
 	 * Method that helps to know the state of the resource
-	 * 
-	 * 
+	 *
+	 *
 	 *****************************************************************/
 
 	/**
@@ -290,7 +290,7 @@ public class EResourceUtils {
 	}
 
 	/******************************************
-	 * DIVERSE 
+	 * DIVERSE
 	 * Various help method
 	 ******************************************/
 
@@ -313,7 +313,7 @@ public class EResourceUtils {
 	}
 
 	/**
-	 * Save an XMIResourceFactoryImpl for default extension in the 
+	 * Save an XMIResourceFactoryImpl for default extension in the
 	 * resourceSet Extension Factory Map if not loaded
 	 * @param resourceSet
 	 */
@@ -363,15 +363,15 @@ public class EResourceUtils {
 	 */
 	public static boolean resourceSetDoContainsUri(ResourceSet rs, URI uri){
 		boolean result = false;
-		//precondition 
+		//precondition
 		if(uri != null && uri.devicePath().length()>0 && rs != null){
-			
+
 			Iterator<Resource> iterResource = rs.getResources().iterator();
 			while(iterResource.hasNext() && !result){
 				Resource r = iterResource.next();
 				result = r.getURI().devicePath().equals(uri.devicePath());
 			}
-			
+
 		}
 		return result;
 	}

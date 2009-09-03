@@ -25,17 +25,17 @@ import com.bluexml.side.Util.ecore.EResourceUtils;
 
 public class MergeMMUseCase {
 	public static final String DEFAULT_ROOT_PACKAGE_NAME = "common";
-	
-	// CONSTANTS => AVOID A DEPENDENCY ON THE MODELER PROJECT 
+
+	// CONSTANTS => AVOID A DEPENDENCY ON THE MODELER PROJECT
 	// => DO NOT FOLLOW MODEL EVOLUTION
 	// this choice was maid mainly since this functionality is not guaranteed to be reused in future versions
 	private static final String MMUSECASE_NSURI = "http://MMUseCase";
 	private static final String MMUSECASE_PACKAGE_ID = "Package";
 	private static final String MMUSECASE_PACKAGE_NAME_ID = "name";
 	private static final String MMUSECASE_PACKAGE_SET_ID = "packageSet";
-		
+
 	private Resource mergedResource = null;
-	
+
 	public MergeMMUseCase(File destinationFile) {
 		if (destinationFile.exists()) {
 			destinationFile.delete();
@@ -46,7 +46,7 @@ public class MergeMMUseCase {
 			System.err.println("Cannot create resource with file path \"" + destinationFile.getAbsolutePath() + "\"");
 		}
 	}
-	
+
 	public void merge(File[] models) {
 		// get all root elements from each model
 		List<EObject> rootElements = __loadResources(models);
@@ -61,7 +61,7 @@ public class MergeMMUseCase {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/*
 	 * Copy all the objects in the list into the content of the merged resource
 	 * Use of the EcoreUtil.Copier utility function that enables to make a fresh deep copy of an existing model
@@ -71,7 +71,7 @@ public class MergeMMUseCase {
 		Copier copier = new Copier();
 		Collection<EObject> rootObjectCopies = copier.copyAll(rootElements);
 		copier.copyReferences();
-		mergedResource.getContents().addAll(rootObjectCopies);		
+		mergedResource.getContents().addAll(rootObjectCopies);
 	}
 
 	/*
@@ -82,39 +82,39 @@ public class MergeMMUseCase {
 	private List<EObject> __loadResources(File[] modelFiles) {
 		ResourceSet rs = mergedResource.getResourceSet();
 		ArrayList<EObject> rootElements = new ArrayList<EObject>();
-		
+
 		try {
 			for (int i = 0; i < modelFiles.length; i++) {
 				Resource modelResource = EResourceUtils.openModel(modelFiles[i].getAbsolutePath(), null, rs);
 				EPackage metaModelEPackage = __getMetaModelEpackage(modelResource);
-				
+
 				if (! MMUSECASE_NSURI.equals(metaModelEPackage.getNsURI()) ) {
 					//System.err.println("Trying to merge several models with different meta-models");
 					System.err.println("Trying to merge a model that is not defined by the meta-model with URI=\"" + MMUSECASE_NSURI + "\"");
 					throw new RuntimeException("Not Implemented");
 				}
-				
+
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put(metaModelEPackage.getNsURI(), metaModelEPackage);
 				map.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
 				modelResource.load(map);
-				
+
 				rootElements.add(modelResource.getContents().get(0));
-				
+
 			}
-		} catch (IOException e) {
-			e.printStackTrace();	
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		return rootElements;
 	}
-	
+
 	/*
 	 * Main procedure for merging all the elements in the content of the merged resource
 	 */
 	private void __mergeModels() {
 		List<EObject> rootPackageList = __getRootPackageList();
-		
+
 		// Create a map of list of EObject representing the set of unique names
 		// that can be found at the top level. The list contains the set of packages
 		// that have the same name
@@ -126,21 +126,21 @@ public class MergeMMUseCase {
 			}
 			rootPackageMap.get(packageName).add(p_);
 		}
-		
-		// Iterates over each root package name and process merging on similar packages	
+
+		// Iterates over each root package name and process merging on similar packages
 		for (String packageName : rootPackageMap.keySet()) {
 			Iterator<EObject> i = rootPackageMap.get(packageName).iterator();
-			
+
 			// Get the first root element being a package
 			EObject currentElement_ = i.next();
 			EObject followingElement_ = null;
-			
+
 			while (i.hasNext()){
 				followingElement_ = i.next();
 				__mergePackages(currentElement_,followingElement_);
 			}
 		}
-		
+
 		// Keep only the packages having at least one child
 		// others are supposed to be useless
 		for (EObject rootPackage : rootPackageList) {
@@ -161,20 +161,20 @@ public class MergeMMUseCase {
 			newRootPackage.eSet(newRootPackage.eClass().getEStructuralFeature(MMUSECASE_PACKAGE_NAME_ID), DEFAULT_ROOT_PACKAGE_NAME);
 			// Set the children as the list of existing packages
 			// No need to detach the package from the content of the mergedResource since it is a containment
-			newRootPackage.eSet(newRootPackage.eClass().getEStructuralFeature(MMUSECASE_PACKAGE_SET_ID), rootPackageList); 
+			newRootPackage.eSet(newRootPackage.eClass().getEStructuralFeature(MMUSECASE_PACKAGE_SET_ID), rootPackageList);
 			// Adds the new created package to the content of the merged model resource
 			mergedResource.getContents().add(newRootPackage);
 			//throw new RuntimeException("Not implemented");
 		}
-	}	
-	
+	}
+
 	/*
 	 * Filters root elements in content of the merged resource to return only packages elements
 	 */
 	private List<EObject> __getRootPackageList() {
 		Iterator<EObject> i = mergedResource.getContents().iterator();
 		ArrayList<EObject> result = new ArrayList<EObject>();
-		
+
 		EObject currentElement_ = null;
 		do {
 			currentElement_ = i.next();
@@ -198,7 +198,7 @@ public class MergeMMUseCase {
 			__mergeSameNamedPackages(target, source);
 		}
 	}
-	
+
 	/*
 	 * Pre-condition : source and target are packages and got the same name
 	 * Perform merging of packages from source to target
@@ -211,12 +211,12 @@ public class MergeMMUseCase {
 			// If the feature exists in the target, then we add the references to the target
 			if (target.eIsSet(containmentFeature)) {
 				EList<EObject> targetList = (EList<EObject>) target.eGet(containmentFeature);
-				
+
 				if ( MMUSECASE_PACKAGE_SET_ID.equals(containmentFeature.getName()) ) {
 					// if this is the package set, then we check whether there exist similar packages
 					for (EObject targetPackage : targetList) {
 						EObject similarPackage = __findSimilarPackage(targetPackage, containedElements);
-						
+
 						if (similarPackage != null) {
 							__mergeSameNamedPackages(targetPackage, similarPackage);
 							containedElements.remove(similarPackage);
@@ -229,10 +229,10 @@ public class MergeMMUseCase {
 			}
 		}
 	}
-	
+
 	/*
 	 * Precondition : p1 and p2 are two EObject-s being packages
-	 * Compare two packages 
+	 * Compare two packages
 	 * Packages are similar if they got the same name
 	 */
 	private static boolean __isEqualPackage(EObject p1, EObject p2) {
@@ -240,7 +240,7 @@ public class MergeMMUseCase {
 		String packageName2 = __getPackageName(p2);
 		return packageName1.equals(packageName2);
 	}
-	
+
 	/*
 	 * Precondition : package_ is identified as an EOBject being package
 	 * Find the EObject into the list
@@ -249,21 +249,21 @@ public class MergeMMUseCase {
 
 		EObject result = null;
 		for (int i = 0 ; i < list.size(); i++) {
-			EObject otherPackage = list.get(i);			
+			EObject otherPackage = list.get(i);
 			if (__isEqualPackage(package_, otherPackage)) {
 				result = otherPackage;
 				break;
 			}
 		}
-		
+
 		return result;
 	}
-	
-	
+
+
 	/*
 	 * HELPER FUNCTIONS
 	 */
-	
+
 	private static EPackage __getMetaModelEpackage(Resource r) {
 		EPackage result = null;
 		if (r != null) {
@@ -275,17 +275,17 @@ public class MergeMMUseCase {
 	private static boolean __isPackage(EObject o) {
 		return MMUSECASE_PACKAGE_ID.equals(o.eClass().getName());
 	}
-	
+
 	private static String __getPackageName(EObject package_) {
 		String result = "";
-		
+
 		if (__isPackage(package_)) {
 			EStructuralFeature packageNameFeature = package_.eClass().getEStructuralFeature(MMUSECASE_PACKAGE_NAME_ID);
 			result = (String) package_.eGet(packageNameFeature);
 		} else {
 			System.err.println("[__getPackageName] EObject \"" + package_ + "\" is not a package");
 		}
-		
+
 		return result;
 	}
 }

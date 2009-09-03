@@ -16,7 +16,7 @@ import com.bluexml.side.util.libs.IFileHelper;
 
 public class MergeUtil {
 
-	public static Map<String, List<IFile>> groupByRootPackage(List<IFile> models) throws IOException {
+	public static Map<String, List<IFile>> groupByRootPackage(List<IFile> models) throws Exception {
 		Map<String, List<IFile>> gb = new HashMap<String, List<IFile>>();
 		for (IFile model : models) {
 			Resource modelResource = EResourceUtils.openModel(IFileHelper.convertIRessourceToSystemString(model), null);

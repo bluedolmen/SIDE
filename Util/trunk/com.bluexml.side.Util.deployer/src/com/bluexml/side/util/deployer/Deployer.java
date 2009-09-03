@@ -25,7 +25,7 @@ import com.bluexml.side.util.security.Checkable;
  *         technology
  */
 public abstract class Deployer implements Checkable {
-	String workingDirKey = "generation.options.destinationPath";
+	String workingDirKey = "generation.options.destinationPath"; //$NON-NLS-1$
 	private Map<String, String> configurationParameters;
 	private Map<String, String> generationParameters;
 	protected SIDELog log;
@@ -98,6 +98,14 @@ public abstract class Deployer implements Checkable {
 		}
 		deployProcess(fileToDeploy);
 		postProcess(fileToDeploy);
+	}
+
+	/**
+	 * Return if the deployer is a documentation deployer.
+	 * @return
+	 */
+	public boolean isDocumentationDeployer() {
+		return false;
 	}
 
 	/**

@@ -4,12 +4,12 @@
  * This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Boston, MA 02111.
@@ -54,7 +54,7 @@ import com.bluexml.side.Util.ecore.EStructuralFeatureUtils;
  * This class is used to merge models from the same metamodel TODO should
  * replace merge class, by a merge manager class, merge should use an object
  * TODO some information need to be stored through the merging process
- * 
+ *
  * @author Constantin Madola <a href="mailto:gmadola@bluexml.com">G�rard
  *         Constantin Madola</a> TODO those info should be reported in a
  *         changes.xml file
@@ -71,7 +71,7 @@ import com.bluexml.side.Util.ecore.EStructuralFeatureUtils;
  *         <p>
  *         bugX
  *         </p>
- * 
+ *
  *************************************************************************************************/
 
 public abstract class MergeUtils {
@@ -108,7 +108,7 @@ public abstract class MergeUtils {
 	 * <li>call method wich merge current model wich merge resource</li>
 	 * </ul>
 	 * <li>export merge resource</li>
-	 * 
+	 *
 	 * @param chain
 	 *            IFile of the chain
 	 * @param models
@@ -124,18 +124,18 @@ public abstract class MergeUtils {
 		// EResourceUtils.toIFile(chain.eResource().getURI().toPlatformString(true));
 		pathToMergedFile = chain.getParent().getLocation().append(DEFAULT_MERGED_MODEL_NAME).toFile().getAbsolutePath();
 		File mergedFile = new File(pathToMergedFile);
-		
+
 		/*
 		 * Brice 09-06-2009
-		 * Calls the new simplified version of merging 
+		 * Calls the new simplified version of merging
 		 * (only works for package merging of MMUseCase meta-model)
 		 * Old merging procedure is kept but not called
 		 */
 		MergeMMUseCase mergeProcedure = new MergeMMUseCase(mergedFile);
 		mergeProcedure.merge(models);
 		return DEFAULT_MERGED_MODEL_NAME;
-		
-		
+
+
 		//return merge(mergedFile, models, cl);
 	}
 
@@ -151,7 +151,7 @@ public abstract class MergeUtils {
 	 * <li>call method wich merge current model wich merge resource</li>
 	 * </ul>
 	 * <li>export merge resource</li>
-	 * 
+	 *
 	 * @param mergedFile
 	 *            File which will contain merged model
 	 * @param models
@@ -159,7 +159,7 @@ public abstract class MergeUtils {
 	 * @cl the classLoader of the generator
 	 * @throws IOException
 	 */
-	public static String merge(File mergedFile, File[] models, ClassLoader cl) throws IOException {
+	public static String merge(File mergedFile, File[] models, ClassLoader cl) throws Exception {
 		EPackage metaModelPackage = null;
 		// deletion of the previous result
 
@@ -251,7 +251,7 @@ public abstract class MergeUtils {
 	 * <li>load the root of the merge resource</li> <li>call indepth method</li>
 	 * Note that this method can be used to merge resource themselves(without
 	 * any waranty :) ), knowing that the first parameter will store the result.
-	 * 
+	 *
 	 * @param mergeResource
 	 *            the resource in which is stocked the result of the merge
 	 * @param resourceModelToMerge
@@ -290,7 +290,7 @@ public abstract class MergeUtils {
 	 * of Eclass.getName() "toto". An empty "toto" EObject will be created and
 	 * set as the root content of root resource whith 2 attributes, name and
 	 * documentation</li>
-	 * 
+	 *
 	 * @param root
 	 *            the resource to intialize
 	 * @param target
@@ -319,7 +319,7 @@ public abstract class MergeUtils {
 	 * create the root container, it will contains the result of the merge thuss
 	 * be the root patern of all generated model if {@link justifyModels} is not
 	 * called at the end of the treatment
-	 * 
+	 *
 	 * @param root
 	 *            the resource we want to initialize
 	 * @param packageCopyStructure
@@ -358,7 +358,7 @@ public abstract class MergeUtils {
 	 * do the merge on the top package level, if the current package is not
 	 * already present it will add it, otherwise it will call doMergeSameDepth
 	 * between current package and the similar package in the merge resource
-	 * 
+	 *
 	 * @param elMergeResource
 	 * @param elModelToMerge
 	 * @param esf
@@ -401,7 +401,7 @@ public abstract class MergeUtils {
 	 * else add the EObject From the Model in the EObject from the mergeResource
 	 * using ERef
 	 * </ul>
-	 * 
+	 *
 	 * @param elMergeResourceERefLinkResult
 	 * @param elModelToMerge
 	 * @param refLink
@@ -466,7 +466,7 @@ public abstract class MergeUtils {
 	 * Remove the constructed root package of the merge if possible The root
 	 * package of the merge (BXSIDE) can be removed if it owns exactly one child
 	 * and that unique child is from the same ECLASS
-	 * 
+	 *
 	 * @param root
 	 *            the root element of the model
 	 * @parent the merge model resource
@@ -492,7 +492,7 @@ public abstract class MergeUtils {
 	/**
 	 * Add target element has child of source element, link is made using the
 	 * specified Ereference
-	 * 
+	 *
 	 * @param source
 	 * @param target
 	 * @param eRefLink
@@ -515,7 +515,7 @@ public abstract class MergeUtils {
 
 	/**
 	 * return the meta model nsPrefix of the resource
-	 * 
+	 *
 	 * @param r
 	 * @return
 	 */
@@ -532,7 +532,7 @@ public abstract class MergeUtils {
 
 	/**
 	 * return the meta model EPackage
-	 * 
+	 *
 	 * @param r
 	 * @return
 	 */
@@ -546,7 +546,7 @@ public abstract class MergeUtils {
 
 	/**
 	 * ABANDON
-	 * 
+	 *
 	 * @param source
 	 * @param sourceParent
 	 * @param sourceChild
@@ -590,7 +590,7 @@ public abstract class MergeUtils {
 	 * method used before insertion to resolve update links. the method will
 	 * replace all occurrence of parent EObject by source EObject in target
 	 * EObject
-	 * 
+	 *
 	 * @param source
 	 * @param target
 	 * @param parent
@@ -624,7 +624,7 @@ public abstract class MergeUtils {
 	 * resolve them using the resourceSet used during the merging if object is
 	 * resolvable we find the similar object in the merge result and replace it
 	 * with it otherwise the object remains an external reference
-	 * 
+	 *
 	 * @throws NoSuchMethodException
 	 * @throws SecurityException
 	 * @throws InvocationTargetException
@@ -673,7 +673,7 @@ public abstract class MergeUtils {
 
 	/**
 	 * Method called to resolve proxy reference in a EObjectList
-	 * 
+	 *
 	 * @param eo
 	 *            to EObject to resolve
 	 * @param rs
@@ -684,7 +684,7 @@ public abstract class MergeUtils {
 	 *            the classLoader used for method invocation
 	 * @param leo
 	 *            the list in wich the EObject to resolve is contained
-	 * 
+	 *
 	 * @throws SecurityException
 	 * @throws IllegalArgumentException
 	 * @throws NoSuchMethodException
@@ -732,7 +732,7 @@ public abstract class MergeUtils {
 	 * element refers to a model used during the generation and if it is the
 	 * case, to replace that reference with the appropriate EOBject already
 	 * present in the merge model
-	 * 
+	 *
 	 * @param eo
 	 *            The proxy reference to resolve
 	 * @param rs
@@ -745,7 +745,7 @@ public abstract class MergeUtils {
 	 *            the esf which link proxy to its parent
 	 * @param parent
 	 *            the EObject which refers to the proxy
-	 * 
+	 *
 	 * @throws SecurityException
 	 * @throws IllegalArgumentException
 	 * @throws NoSuchMethodException
@@ -784,7 +784,7 @@ public abstract class MergeUtils {
 	 * Method called to find An EObject in a model Method is recursive he
 	 * Eobject we are looking for until equals for merger between the eboject
 	 * returns true.. Each object is compared wit
-	 * 
+	 *
 	 * @param toFind
 	 * @param root
 	 * @param cl
@@ -822,7 +822,7 @@ public abstract class MergeUtils {
 		return result;
 
 	}
-	
+
 	/**
 	 * Method same as other merge but using IFile instead of File
 	 * @param mergedIFile
@@ -830,7 +830,7 @@ public abstract class MergeUtils {
 	 * @param cl
 	 * @throws IOException
 	 */
-	public static void merge(IFile mergedIFile, List<IFile> models, ClassLoader cl) throws IOException {
+	public static void merge(IFile mergedIFile, List<IFile> models, ClassLoader cl) throws Exception {
 		List<File> modelsFile = new ArrayList<File>();
 		for (IFile m : models) {
 			modelsFile.add(m.getLocation().makeAbsolute().toFile());

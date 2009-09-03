@@ -60,7 +60,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 
 	/**
 	 * use to give an version number to this generation package
-	 * 
+	 *
 	 * @return
 	 */
 	public String getVersioNumber() {
@@ -121,7 +121,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		return results;
 	}
 
-	protected IFile merging(List<IFile> models) throws IOException {
+	protected IFile merging(List<IFile> models) throws Exception {
 		if (models.size() == 1) {
 			return models.get(0);
 		} else {
