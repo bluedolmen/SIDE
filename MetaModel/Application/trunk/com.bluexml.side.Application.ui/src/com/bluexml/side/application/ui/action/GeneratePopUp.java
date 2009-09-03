@@ -48,6 +48,8 @@ public class GeneratePopUp extends Dialog {
 	 */
 	public GeneratePopUp(Shell parentShell, Configuration p_configuration) {
 		super(parentShell);
+		setShellStyle(SWT.DIALOG_TRIM | SWT.MODELESS
+                | getDefaultOrientation());
 		configuration = p_configuration;
 		staticParameters = ApplicationDialog.staticFieldsName;
 		models = ApplicationUtil.getModels((Application) p_configuration.eContainer());

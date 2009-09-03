@@ -171,7 +171,8 @@ public class ApplicationDialog extends Dialog {
 	 */
 	public ApplicationDialog(Shell parentShell, IFile file) {
 		super(parentShell);
-
+		setShellStyle(SWT.DIALOG_TRIM | SWT.MODELESS
+                | getDefaultOrientation());
 		try {
 			URI uri = URI.createFileURI(file.getRawLocation().toFile().getAbsolutePath());
 			XMIResource resource = new XMIResourceImpl(uri);
