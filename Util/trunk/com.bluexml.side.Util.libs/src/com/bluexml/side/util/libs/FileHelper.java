@@ -1,10 +1,15 @@
 package com.bluexml.side.util.libs;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -105,18 +110,19 @@ public class FileHelper {
 	public static boolean deleteFile(File f) throws Exception {
 		return deleteFile(f, true);
 	}
-	public static boolean deleteFile(File f,boolean failonError) throws Exception {
+
+	public static boolean deleteFile(File f, boolean failonError) throws Exception {
 		if (f.isDirectory()) {
-			boolean status=true;
+			boolean status = true;
 			File[] fl = f.listFiles();
 			for (int i = 0; i < fl.length; i++) {
-				status &=deleteFile(fl[i],failonError);
+				status &= deleteFile(fl[i], failonError);
 			}
 			return status;
 		}
 		if (f.exists() && f.canWrite()) {
 			return f.delete();
-		} else if (failonError){
+		} else if (failonError) {
 			throw new Exception("file can't be deleted");
 		}
 		return false;
@@ -202,7 +208,6 @@ public class FileHelper {
 		return newList;
 	}
 
-
 	public static void writeStreamInFile(File f, InputStream in) throws Exception {
 		FileOutputStream fout = null;
 		byte[] buffer = new byte[4096]; // Buffer 4K at a time (you can
@@ -216,4 +221,23 @@ public class FileHelper {
 		// InputStream is consumed we close it
 		in.close();
 	}
+
+	public static void readReplace(File file, String oldPattern, String replPattern) throws Exception {
+		String line;
+		
+		StringBuffer sb = new StringBuffer();
+		
+			FileInputStream fis = new FileInputStream(file);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+			while ((line = reader.readLine()) != null) {
+				line = line.replaceAll(oldPattern, replPattern);
+				sb.append(line + "\n");
+			}
+			reader.close();
+			BufferedWriter out = new BufferedWriter(new FileWriter(file));
+			out.write(sb.toString());
+			out.close();
+		
+	}
+
 }

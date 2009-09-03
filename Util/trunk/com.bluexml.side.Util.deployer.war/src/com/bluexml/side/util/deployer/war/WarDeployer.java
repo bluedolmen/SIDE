@@ -1,7 +1,6 @@
 package com.bluexml.side.util.deployer.war;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -9,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.bluexml.side.util.deployer.Deployer;
+import com.bluexml.side.util.libs.FileExtensionFilter;
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.zip.TrueZipHelper;
 
@@ -17,8 +17,8 @@ public abstract class WarDeployer extends Deployer {
 
 	static final String webapps = "webapps";
 	protected String webappName = null;
-	protected String warToPatchExt = ".war";
-	protected String backupWarExt = ".war.org";
+	protected static String warToPatchExt = "war";
+	protected static String backupWarExt = "war.org";
 	File backupWarFile = null;
 	File warToPatchFile = null;
 	File deployedWebbAppFolder = null;
@@ -36,14 +36,14 @@ public abstract class WarDeployer extends Deployer {
 
 	public File getBackupWarFile() {
 		if (backupWarFile == null) {
-			backupWarFile = new File(getTomcatHome() + File.separator + webapps + File.separator + webappName + backupWarExt);
+			backupWarFile = new File(getTomcatHome() + File.separator + webapps + File.separator + webappName + "." +backupWarExt);
 		}
 		return backupWarFile;
 	}
 
 	public File getWarToPatchFile() {
 		if (warToPatchFile == null) {
-			warToPatchFile = new File(getTomcatHome() + File.separator + webapps + File.separator + webappName + warToPatchExt);
+			warToPatchFile = new File(getTomcatHome() + File.separator + webapps + File.separator + webappName + "." +warToPatchExt);
 		}
 		return warToPatchFile;
 	}
@@ -81,7 +81,7 @@ public abstract class WarDeployer extends Deployer {
 	}
 
 	@Override
-	protected final void preProcess(File fileToDeploy) throws Exception {
+	protected void preProcess(File fileToDeploy) throws Exception {
 		initWarToPatch(new File(getTomcatHome()));
 		if (!fileToDeploy.exists()) {
 			throw new Exception("No files to deploy !"+fileToDeploy);
@@ -93,7 +93,7 @@ public abstract class WarDeployer extends Deployer {
 		// copy all files in the package into the WAR
 		TrueZipHelper fh = new TrueZipHelper("zip");
 		if (fileToDeploy.isDirectory()) {
-			for (File f : fileToDeploy.listFiles(new FileExtFilter("zip"))) {
+			for (File f : fileToDeploy.listFiles(new FileExtensionFilter("zip"))) {
 				succes &= fh.copyFiles(f, getWarToPatchFile(), true);
 			}
 		} else {
@@ -134,26 +134,6 @@ public abstract class WarDeployer extends Deployer {
 		return true;
 	}
 
-	class FileExtFilter implements FileFilter {
-		String exts[];
-
-		FileExtFilter(String exts) {
-			this.exts = exts.split("\\|");
-		}
-
-		public boolean accept(File file) {
-			boolean ok = true;
-			try {
-				String ext = FileHelper.getFileExt(file);
-				for (String ext_ : exts) {
-					ok &= ext_.equals(ext);
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return ok;
-		}
-	}
+	
 
 }

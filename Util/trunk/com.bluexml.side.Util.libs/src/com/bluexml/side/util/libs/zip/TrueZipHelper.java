@@ -15,7 +15,12 @@ public class TrueZipHelper {
 	}
 
 	public TrueZipHelper(String fileExtentions) {
-		archiveDetector = new DefaultArchiveDetector(fileExtentions);
+		if (DefaultArchiveDetector.ALL_SUFFIXES.indexOf(fileExtentions) != -1) {
+			archiveDetector = new DefaultArchiveDetector(fileExtentions);
+		} else {
+			archiveDetector = new DefaultArchiveDetector(fileExtentions, new Zip32Driver());
+
+		}
 	}
 
 	public boolean deleteArchiveFile(java.io.File f) throws Exception {
