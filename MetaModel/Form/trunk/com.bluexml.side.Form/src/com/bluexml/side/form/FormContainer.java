@@ -22,7 +22,6 @@ package com.bluexml.side.form;
  * @see com.bluexml.side.form.FormPackage#getFormContainer()
  * @model abstract="true"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='validName'"
- *        annotation="http://www.bluexml.com/OCL validName='not self.name.oclIsUndefined() and self.name <> \'\''"
  * @generated
  */
 public interface FormContainer extends FormGroup {

@@ -142,14 +142,6 @@ public class FormValidator extends EObjectValidator {
 	 */
 	private static Constraint formWorkflow_ClassMustMatchWithProcessContentTypeInvOCL;
 
-	/**
-	 * The parsed OCL expression for the definition of the '<em>validName</em>' invariant constraint.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private static Constraint formContainer_validNameInvOCL;
-
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
 
 	private static final OCL OCL_ENV = KerblueOCL.newInstance();
@@ -1048,24 +1040,11 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFormContainer_validName(FormContainer formContainer, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (formContainer_validNameInvOCL == null) {
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(FormPackage.Literals.FORM_CONTAINER);
-			
-			EAnnotation ocl = FormPackage.Literals.FORM_CONTAINER.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String expr = ocl.getDetails().get("validName");
-			
-			try {
-				formContainer_validNameInvOCL = helper.createInvariant(expr);
-			}
-			catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(formContainer_validNameInvOCL);
-		
-		if (!query.check(formContainer)) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic

@@ -1722,7 +1722,6 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		  (formContainerEClass, 
 		   source, 
 		   new String[] {
-			 "validName", "not self.name.oclIsUndefined() and self.name <> \'\'"
 		   });			
 		addAnnotation
 		  (formContainerEClass.getEOperations().get(0), 
