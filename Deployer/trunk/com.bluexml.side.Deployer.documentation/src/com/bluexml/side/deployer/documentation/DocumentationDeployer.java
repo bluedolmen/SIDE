@@ -142,5 +142,9 @@ public class DocumentationDeployer extends Deployer {
 		return true;
 	}
 
+	public boolean isDocumentationDeployer() {
+		return true;
+	}
+
 }
 
