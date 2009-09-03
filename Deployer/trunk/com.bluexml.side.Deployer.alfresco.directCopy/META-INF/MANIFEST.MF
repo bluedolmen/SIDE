@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SIDE Alfresco Deployer DirectCopy Plug-in
+Bundle-SymbolicName: com.bluexml.side.Deployer.alfresco.directCopy;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: com.bluexml.side.deployer.alfresco.directcopy.Activator
+Bundle-Vendor: www.bluexml.com
+Require-Bundle: org.eclipse.core.runtime,
+ com.bluexml.side.Application;bundle-version="1.0.8",
+ com.bluexml.side.Util.deployer,
+ com.bluexml.side.Util.security,
+ com.bluexml.side.Util.deployer.war;bundle-version="1.0.3",
+ com.bluexml.side.Util.libs;bundle-version="1.0.20"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
