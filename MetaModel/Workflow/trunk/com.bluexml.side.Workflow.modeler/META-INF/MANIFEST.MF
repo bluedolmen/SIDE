@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Workflow Modeler Plug-in
 Bundle-SymbolicName: com.bluexml.side.Workflow.modeler;singleton:=true
-Bundle-Version: 1.0.14.v8336-20090817
+Bundle-Version: 1.0.15.v8881-20090904
 Bundle-Activator: com.bluexml.side.Workflow.modeler.WorkflowPlugin
 Bundle-Vendor: www.bluexml.com
 Require-Bundle: org.eclipse.ui,
