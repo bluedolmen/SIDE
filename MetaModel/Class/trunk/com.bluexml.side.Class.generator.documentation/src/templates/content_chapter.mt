@@ -14,6 +14,9 @@ metamodel http://www.kerblue.org/class/1.0
 
 <%script type="clazz.Clazz" name="content_class"%>
 <text:h text:style-name="Heading_20_2" text:outline-level="2"><%getLabel()%> attributes</text:h>
+<text:p>
+	<%if (documentation != null){%><%documentation%><%}%>
+</text:p>
 <table:table table:style-name="Tableau1">
 	<table:table-column table:style-name="Tableau1.A" table:number-columns-repeated="2" />
 		<table:table-row>
