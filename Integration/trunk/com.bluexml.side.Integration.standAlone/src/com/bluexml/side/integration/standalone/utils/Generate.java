@@ -212,7 +212,7 @@ public class Generate extends Thread {
 		// System.out.println("log2");
 		try {
 			modelsInfo = (HashMap<String, List<IFile>>) ApplicationUtil.getAssociatedMetaModel(models);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		// System.out.println("log3");
@@ -229,7 +229,7 @@ public class Generate extends Thread {
 							modelWithError = true;
 						}
 
-					} catch (IOException e) {
+					} catch (Exception e) {
 						modelWithError = true;
 						e.printStackTrace();
 					}
