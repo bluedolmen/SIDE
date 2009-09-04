@@ -1626,8 +1626,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		addEEnumLiteral(textWidgetTypeEEnum, TextWidgetType.RICH_TEXT_EDITOR);
 
 		initEEnum(choiceWidgetTypeEEnum, ChoiceWidgetType.class, "ChoiceWidgetType");
-		addEEnumLiteral(choiceWidgetTypeEEnum, ChoiceWidgetType.LIST_ALL);
 		addEEnumLiteral(choiceWidgetTypeEEnum, ChoiceWidgetType.SHOW_ONE);
+		addEEnumLiteral(choiceWidgetTypeEEnum, ChoiceWidgetType.LIST_ALL);
 		addEEnumLiteral(choiceWidgetTypeEEnum, ChoiceWidgetType.INLINE);
 
 		initEEnum(modelChoiceWidgetTypeEEnum, ModelChoiceWidgetType.class, "ModelChoiceWidgetType");

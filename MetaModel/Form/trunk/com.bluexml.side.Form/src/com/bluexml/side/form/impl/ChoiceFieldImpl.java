@@ -81,7 +81,7 @@ public class ChoiceFieldImpl extends FieldImpl implements ChoiceField {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final ChoiceWidgetType WIDGET_EDEFAULT = ChoiceWidgetType.LIST_ALL;
+	protected static final ChoiceWidgetType WIDGET_EDEFAULT = ChoiceWidgetType.SHOW_ONE;
 
 	/**
 	 * The cached value of the '{@link #getWidget() <em>Widget</em>}' attribute.

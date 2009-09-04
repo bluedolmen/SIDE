@@ -26,14 +26,6 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum ChoiceWidgetType implements Enumerator {
 	/**
-	 * The '<em><b>List All</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #LIST_ALL_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	LIST_ALL(0, "ListAll", "List All"), /**
 	 * The '<em><b>Show One</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -41,7 +33,15 @@ public enum ChoiceWidgetType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	SHOW_ONE(1, "ShowOne", "Show One"), /**
+	SHOW_ONE(0, "ShowOne", "Show One"), /**
+	 * The '<em><b>List All</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LIST_ALL_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	LIST_ALL(1, "ListAll", "List All"), /**
 	 * The '<em><b>Inline</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -50,20 +50,6 @@ public enum ChoiceWidgetType implements Enumerator {
 	 * @ordered
 	 */
 	INLINE(2, "Inline", "Inline");
-
-	/**
-	 * The '<em><b>List All</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * This option specifies a list representation: all literals are listed in the selection window, possibly with the help of a scrollbar. Several literals may be visible at once.
-	 * <!-- end-model-doc -->
-	 * @see #LIST_ALL
-	 * @model name="ListAll" literal="List All"
-	 * @generated
-	 * @ordered
-	 */
-	public static final int LIST_ALL_VALUE = 0;
 
 	/**
 	 * The '<em><b>Show One</b></em>' literal value.
@@ -81,7 +67,21 @@ public enum ChoiceWidgetType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int SHOW_ONE_VALUE = 1;
+	public static final int SHOW_ONE_VALUE = 0;
+
+	/**
+	 * The '<em><b>List All</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * This option specifies a list representation: all literals are listed in the selection window, possibly with the help of a scrollbar. Several literals may be visible at once.
+	 * <!-- end-model-doc -->
+	 * @see #LIST_ALL
+	 * @model name="ListAll" literal="List All"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIST_ALL_VALUE = 1;
 
 	/**
 	 * The '<em><b>Inline</b></em>' literal value.
@@ -109,8 +109,8 @@ public enum ChoiceWidgetType implements Enumerator {
 	 */
 	private static final ChoiceWidgetType[] VALUES_ARRAY =
 		new ChoiceWidgetType[] {
-			LIST_ALL,
 			SHOW_ONE,
+			LIST_ALL,
 			INLINE,
 		};
 
@@ -162,8 +162,8 @@ public enum ChoiceWidgetType implements Enumerator {
 	 */
 	public static ChoiceWidgetType get(int value) {
 		switch (value) {
-			case LIST_ALL_VALUE: return LIST_ALL;
 			case SHOW_ONE_VALUE: return SHOW_ONE;
+			case LIST_ALL_VALUE: return LIST_ALL;
 			case INLINE_VALUE: return INLINE;
 		}
 		return null;
