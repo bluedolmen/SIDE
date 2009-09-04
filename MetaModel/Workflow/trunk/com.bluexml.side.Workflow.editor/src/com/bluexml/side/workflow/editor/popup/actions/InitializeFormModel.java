@@ -1,7 +1,6 @@
 package com.bluexml.side.workflow.editor.popup.actions;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -16,8 +15,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
@@ -40,7 +37,6 @@ import com.bluexml.side.workflow.Process;
 public class InitializeFormModel implements IObjectActionDelegate {
 
 	private ISelection _selection;
-	private EditingDomain domain;
 
 	/**
 	 * Constructor for Action1.
@@ -137,10 +133,7 @@ public class InitializeFormModel implements IObjectActionDelegate {
 	}
 
 	public void setActivePart(IAction action, IWorkbenchPart workbenchPart) {
-		if (workbenchPart instanceof IEditingDomainProvider) {
-			domain = ((IEditingDomainProvider) workbenchPart)
-					.getEditingDomain();
-		}
+		//Nothing
 	}
 
 }

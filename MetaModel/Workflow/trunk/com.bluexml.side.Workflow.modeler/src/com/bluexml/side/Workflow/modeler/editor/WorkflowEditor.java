@@ -9,8 +9,13 @@ import java.util.List;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.gef.ContextMenuProvider;
+import org.eclipse.gef.ui.actions.ActionRegistry;
+import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
@@ -18,8 +23,10 @@ import org.topcased.modeler.commands.GEFtoEMFCommandStackWrapper;
 import org.topcased.modeler.documentation.EAnnotationDocPage;
 import org.topcased.modeler.documentation.IDocPage;
 import org.topcased.modeler.editor.Modeler;
+import org.topcased.modeler.editor.ModelerGraphicalViewer;
 
 import com.bluexml.side.Workflow.modeler.WorkflowPlugin;
+import com.bluexml.side.Workflow.modeler.actions.popup.ShowFormAction;
 
 /**
  * Generated Model editor
@@ -87,6 +94,31 @@ public class WorkflowEditor extends Modeler {
 			e.printStackTrace();
 		}
 		return WorkflowPlugin.getDefault().getPreferenceStore();
+	}
+	
+	@Override
+	protected void createActions() {
+		super.createActions();
+		ActionRegistry registry = getActionRegistry();
+		
+		IAction action = new ShowFormAction((IWorkbenchPart) this);
+		registry.registerAction(action);
+	}
+	
+	@Override
+	protected ContextMenuProvider getContextMenuProvider(
+			ModelerGraphicalViewer viewer) {
+		return new ModelerContextMenuProvider(viewer, getActionRegistry());
+	}
+	
+	@Override
+	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
+		super.selectionChanged(part, selection);
+		
+		ActionRegistry registry = getActionRegistry();
+		ShowFormAction action = (ShowFormAction) registry.getAction(ShowFormAction.ID);
+		if (action != null)
+			action.setSelection(selection);
 	}
 
 }
