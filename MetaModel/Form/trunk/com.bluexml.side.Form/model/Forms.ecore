@@ -476,14 +476,14 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The 'ChoiceWidgetType'  is an enumeration list with the different layouts for a choice field."/>
     </eAnnotations>
-    <eLiterals name="ListAll" literal="List All">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="This option specifies a list representation: all literals are listed in the selection window, possibly with the help of a scrollbar. Several literals may be visible at once."/>
-      </eAnnotations>
-    </eLiterals>
-    <eLiterals name="ShowOne" value="1" literal="Show One">
+    <eLiterals name="ShowOne" literal="Show One">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="This option refers to displaying the enumeration as a combo box: only the chosen enumeration literal is visible."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="ListAll" value="1" literal="List All">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This option specifies a list representation: all literals are listed in the selection window, possibly with the help of a scrollbar. Several literals may be visible at once."/>
       </eAnnotations>
     </eLiterals>
     <eLiterals name="Inline" value="2" literal="Inline">
