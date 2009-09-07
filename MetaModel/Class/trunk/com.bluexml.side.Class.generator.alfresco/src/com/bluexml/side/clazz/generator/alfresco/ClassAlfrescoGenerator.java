@@ -54,6 +54,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_SQL_EXTENSION)) {
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/sqlTemplates/database_dictionary.mt");
+				addServiceLog("SIDE SQL Search Service webscripts", "webscripts to use the SIDE SQL Search Service module", getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME)+"/service/index/package/extension/com/bluexml/side/sql");
 			}
 			
 			// DefaultdocListView add custom version of docList webScript
@@ -118,7 +119,11 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 				// default Forms for custom types
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/DefaultEditForms/web-framework-config-custom.mt");
 			}
-
+			
+			
+			// standard alfresco services :
+			addServiceLog("Alfresco", "Alfresco Webclient", getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME));
+			addServiceLog("Tomcat Manager list", "list of Alfresco Tomcat webapps (think to update conf/tomcat-users.xml with username and passwd)", getGenerationParameter(CONFIGURATION_PARAMETER_CATALINA_HOME)+"/manager/list");
 			classTemplates = result;
 		}
 		return classTemplates;
