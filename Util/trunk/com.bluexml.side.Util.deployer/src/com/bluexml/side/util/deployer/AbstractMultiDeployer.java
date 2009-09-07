@@ -27,6 +27,7 @@ public abstract class AbstractMultiDeployer extends Deployer {
 		super.initialize(configurationParameters, generationParameters, options);
 		for (Deployer wd : deployers) {
 			wd.initialize(configurationParameters, generationParameters, options);
+			wd.setLog(getLog());
 			// propagate options key
 			wd.setCleanKey(cleanKey);
 			wd.setLogChanges(logChanges);
