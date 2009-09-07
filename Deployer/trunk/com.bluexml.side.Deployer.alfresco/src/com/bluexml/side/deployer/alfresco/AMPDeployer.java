@@ -31,7 +31,7 @@ public class AMPDeployer extends WarDeployer {
 	}
 
 	protected void deployProcess(File fileToDeploy) throws Exception {
-		if (new File(getMMtPath()).exists()) {
+		if (getMMtPath() != null && new File(getMMtPath()).exists()) {
 			// build command line
 			String fileToDeployString = fileToDeploy.getAbsolutePath();
 			String filetoPatchString = getWarToPatchFile().getAbsolutePath();
@@ -61,7 +61,6 @@ public class AMPDeployer extends WarDeployer {
 					StringWriter sr = new StringWriter();
 					FileHelper.diffFolder(warOrg, finalwar, sr, FileHelper.COMPARE_ADDED + FileHelper.COMPARE_DELETED);
 					addInfoLog(this.logChangesMsg, sr.toString(), null);
-
 				}
 			} catch (Exception e) {
 				addErrorLog("AMP deployer Error", e.getStackTrace(), null);
