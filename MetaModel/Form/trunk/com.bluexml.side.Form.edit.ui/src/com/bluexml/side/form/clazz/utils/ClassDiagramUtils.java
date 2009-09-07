@@ -21,10 +21,12 @@ import com.bluexml.side.common.DataType;
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.EnumerationLiteral;
+import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.Operation;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.OperationComponent;
+import com.bluexml.side.common.Stereotype;
 import com.bluexml.side.form.CharField;
 import com.bluexml.side.form.ChoiceField;
 import com.bluexml.side.form.Field;
@@ -36,17 +38,21 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Will return the field corresponding to the attribute
+	 *
 	 * @param att
 	 * @return
 	 */
 	public static Field getFieldForAttribute(Attribute att) {
 		Field field = null;
 		if (att != null) {
-			Map<String, String> metaInfoMap = InitializeMetaInfo(att.getMetainfo());
+			Map<String, String> metaInfoMap = InitializeMetaInfo(att
+					.getMetainfo());
 			// Choice Field
 			if (att.getValueList() != null) {
 				field = FormFactory.eINSTANCE.createChoiceField();
-				if (metaInfoMap.containsKey("multiple") && metaInfoMap.get("multiple") != null && metaInfoMap.get("multiple").equals("True")) {
+				if (metaInfoMap.containsKey("multiple")
+						&& metaInfoMap.get("multiple") != null
+						&& metaInfoMap.get("multiple").equals("True")) {
 					((ChoiceField) field).setMultiple(true);
 				}
 			} else if (att.getTyp().equals(DataType.STRING)) {
@@ -54,48 +60,53 @@ public class ClassDiagramUtils {
 				if (Boolean.parseBoolean(metaInfoMap.get("email"))) {
 					field = FormFactory.eINSTANCE.createEmailField();
 				} else {
-				// Char Field
+					// Char Field
 					field = FormFactory.eINSTANCE.createCharField();
-					if (metaInfoMap.containsKey("max-length") && metaInfoMap.get("max-length") != null) {
-						((CharField)field).setMax_length(Integer.parseInt(metaInfoMap.get("max-length")));
+					if (metaInfoMap.containsKey("max-length")
+							&& metaInfoMap.get("max-length") != null) {
+						((CharField) field).setMax_length(Integer
+								.parseInt(metaInfoMap.get("max-length")));
 					}
-					if (metaInfoMap.containsKey("min-length") && metaInfoMap.get("min-length") != null) {
-						((CharField)field).setMin_length(Integer.parseInt(metaInfoMap.get("min-length")));
+					if (metaInfoMap.containsKey("min-length")
+							&& metaInfoMap.get("min-length") != null) {
+						((CharField) field).setMin_length(Integer
+								.parseInt(metaInfoMap.get("min-length")));
 					}
 				}
-			// Date Time Field
+				// Date Time Field
 			} else if (att.getTyp().equals(DataType.DATE_TIME)) {
 				field = FormFactory.eINSTANCE.createDateTimeField();
-			// Date Field
+				// Date Field
 			} else if (att.getTyp().equals(DataType.DATE)) {
 				field = FormFactory.eINSTANCE.createDateField();
-			// Time Field
+				// Time Field
 			} else if (att.getTyp().equals(DataType.TIME)) {
 				field = FormFactory.eINSTANCE.createTimeField();
-			} else if(att.getTyp().equals(DataType.BOOLEAN)) {
-			// Boolean Field
+			} else if (att.getTyp().equals(DataType.BOOLEAN)) {
+				// Boolean Field
 				field = FormFactory.eINSTANCE.createBooleanField();
-			} else if(att.getTyp().equals(DataType.INT)) {
-			// Integer Field
+			} else if (att.getTyp().equals(DataType.INT)) {
+				// Integer Field
 				field = FormFactory.eINSTANCE.createIntegerField();
-			} else if(att.getTyp().equals(DataType.LONG)) {
-			// Long Field
+			} else if (att.getTyp().equals(DataType.LONG)) {
+				// Long Field
 				field = FormFactory.eINSTANCE.createIntegerField();
-			} else if(att.getTyp().equals(DataType.FLOAT)) {
-			// Float Field
+			} else if (att.getTyp().equals(DataType.FLOAT)) {
+				// Float Field
 				field = FormFactory.eINSTANCE.createFloatField();
-			} else if(att.getTyp().equals(DataType.DOUBLE)) {
-			// Decimal Field
+			} else if (att.getTyp().equals(DataType.DOUBLE)) {
+				// Decimal Field
 				field = FormFactory.eINSTANCE.createDecimalField();
-			} else if(att.getTyp().equals(DataType.SHORT)) {
-			// Short Field
+			} else if (att.getTyp().equals(DataType.SHORT)) {
+				// Short Field
 				field = FormFactory.eINSTANCE.createIntegerField();
 			} else {
-				EcorePlugin.INSTANCE.log("No field available for " + att.getTyp());
+				EcorePlugin.INSTANCE.log("No field available for "
+						+ att.getTyp());
 			}
 
 			if (field == null) {
-				//field = formFactory.eINSTANCE.createField();
+				// field = formFactory.eINSTANCE.createField();
 			} else {
 				field.setRef(att);
 				field.setId(att.getName());
@@ -104,9 +115,12 @@ public class ClassDiagramUtils {
 				} else {
 					field.setLabel(att.getName());
 				}
-				field.setHidden(Boolean.parseBoolean(metaInfoMap.get("hidden")));
+				field
+						.setHidden(Boolean.parseBoolean(metaInfoMap
+								.get("hidden")));
 				field.setHelp_text(att.getDescription());
-				field.setMandatory(Boolean.parseBoolean(metaInfoMap.get("required")));
+				field.setMandatory(Boolean.parseBoolean(metaInfoMap
+						.get("required")));
 				field.setInitial(att.getInitialValue());
 				field.setId(att.getName());
 			}
@@ -127,6 +141,7 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Transform an association into a model choice field
+	 *
 	 * @param ass
 	 * @param useSource
 	 * @return
@@ -151,9 +166,13 @@ public class ClassDiagramUtils {
 			f.setLabel(ass.getName());
 		}
 		if (useSource) {
-			f.setReal_class((Clazz)ass.getFirstEnd().getLinkedClass());
+			Clazz linkedClass = (Clazz)ass.getFirstEnd().getLinkedClass();
+			f.setReal_class(linkedClass);
+			f.setFormat_pattern(getViewForClass(linkedClass));
 		} else {
-			f.setReal_class((Clazz)ass.getSecondEnd().getLinkedClass());
+			Clazz linkedClass = (Clazz)ass.getSecondEnd().getLinkedClass();
+			f.setReal_class(linkedClass);
+			f.setFormat_pattern(getViewForClass(linkedClass));
 		}
 
 		if (useSource) {
@@ -171,6 +190,7 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Return Association Name
+	 *
 	 * @param ass
 	 * @param useSource
 	 * @return
@@ -179,7 +199,7 @@ public class ClassDiagramUtils {
 		String id = ass.getName();
 		if (useSource && ass.getFirstEnd().getName().length() > 0) {
 			id += ass.getFirstEnd().getName();
-		} else if(ass.getSecondEnd().getName().length() > 0) {
+		} else if (ass.getSecondEnd().getName().length() > 0) {
 			id += ass.getSecondEnd().getName();
 		}
 		return id;
@@ -187,14 +207,15 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Return inherited Clazzs from a class
+	 *
 	 * @param cl
 	 * @return
 	 */
 	public static Collection<Clazz> getInheritedClazzs(Clazz cl) {
 		Collection<Clazz> listClazz = new ArrayList<Clazz>();
 		listClazz.add(cl);
-		for(Clazz c : cl.getGeneralizations()) {
-			listClazz.addAll(getInheritedClazzs((Clazz)c));
+		for (Clazz c : cl.getGeneralizations()) {
+			listClazz.addAll(getInheritedClazzs((Clazz) c));
 		}
 		return listClazz;
 	}
@@ -203,6 +224,7 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Internal class, used in order to have sorted list of Clazz
+	 *
 	 * @author Eric
 	 *
 	 */
@@ -219,29 +241,33 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Return all sub Clazzs
+	 *
 	 * @param cl
 	 * @return
 	 */
 	public static SortedSet<Clazz> getDescendantClazzs(Clazz cl) {
-		//if (inheritings == null) {
-			SortedSet<Clazz> allClazzs = getAllClazzs(cl);
-			inheritings = new HashMap<Clazz, SortedSet<Clazz>>();
+		// if (inheritings == null) {
+		SortedSet<Clazz> allClazzs = getAllClazzs(cl);
+		inheritings = new HashMap<Clazz, SortedSet<Clazz>>();
 
-			for (Clazz c : allClazzs) {
-				Collection<Clazz> generalisations = getInheritedClazzs(c);
-				for (Clazz gc : generalisations) {
-					if (!inheritings.containsKey(gc)) {
-						inheritings.put(gc, new TreeSet<Clazz>(new ClazzComparator()));
-					}
-					inheritings.get(gc).add(c);
+		for (Clazz c : allClazzs) {
+			Collection<Clazz> generalisations = getInheritedClazzs(c);
+			for (Clazz gc : generalisations) {
+				if (!inheritings.containsKey(gc)) {
+					inheritings.put(gc, new TreeSet<Clazz>(
+							new ClazzComparator()));
 				}
+				inheritings.get(gc).add(c);
 			}
-		//}
+		}
+		// }
 		return inheritings.get(cl);
 	}
 
-	public static Map<String,String> InitializeMetaInfo(EList<MetaInfo> metainfo) {
-		Map<String,String> metaInfoMap = new HashMap<String,String>(metainfo.size());
+	public static Map<String, String> InitializeMetaInfo(
+			EList<MetaInfo> metainfo) {
+		Map<String, String> metaInfoMap = new HashMap<String, String>(metainfo
+				.size());
 		for (MetaInfo m : metainfo) {
 			metaInfoMap.put(m.getKey(), m.getValue());
 		}
@@ -250,10 +276,12 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Return a collection of choices for an Enumeration
+	 *
 	 * @param list
 	 * @return
 	 */
-	public static Collection<? extends String> getChoices(EList<EnumerationLiteral> list) {
+	public static Collection<? extends String> getChoices(
+			EList<EnumerationLiteral> list) {
 		List<String> choicesList = new ArrayList<String>();
 		for (EnumerationLiteral enumerationLiteral : list) {
 			choicesList.add(enumerationLiteral.getName());
@@ -261,10 +289,9 @@ public class ClassDiagramUtils {
 		return choicesList;
 	}
 
-
-
 	/**
 	 * Return all instanceable Clazzs that inherit from the current class
+	 *
 	 * @param c
 	 * @return
 	 */
@@ -287,6 +314,7 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Get all class from the model
+	 *
 	 * @param c
 	 * @return
 	 */
@@ -303,6 +331,7 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Get all package
+	 *
 	 * @param c
 	 * @return
 	 */
@@ -313,6 +342,7 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Returns the root package
+	 *
 	 * @param elt
 	 * @return
 	 */
@@ -336,6 +366,7 @@ public class ClassDiagramUtils {
 
 	/**
 	 * Returns all children packages of the given package.
+	 *
 	 * @param p
 	 * @return
 	 */
@@ -354,11 +385,14 @@ public class ClassDiagramUtils {
 	}
 
 	/**
-	 * Return a hashmap with all child of the given Clazzs (attributes, aspects, operation, associations)
+	 * Return a hashmap with all child of the given Clazzs (attributes, aspects,
+	 * operation, associations)
+	 *
 	 * @param listClazz
 	 * @return
 	 */
-	public static HashMap<String, ModelElement> getClazzChild(Collection<Clazz> listClazz) {
+	public static HashMap<String, ModelElement> getClazzChild(
+			Collection<Clazz> listClazz) {
 		HashMap<String, ModelElement> listChild = new HashMap<String, ModelElement>();
 		for (Clazz cl : listClazz) {
 			// TODO use OCL method
@@ -369,11 +403,15 @@ public class ClassDiagramUtils {
 				}
 			}
 			for (Association ass : cl.getAllSourceAssociations()) {
-				if (ass.getFirstEnd().getLinkedClass().equals(cl) && ass.getSecondEnd().isNavigable()) {
-					listChild.put(ClassDiagramUtils.getAssociationName(ass, false), ass);
+				if (ass.getFirstEnd().getLinkedClass().equals(cl)
+						&& ass.getSecondEnd().isNavigable()) {
+					listChild.put(ClassDiagramUtils.getAssociationName(ass,
+							false), ass);
 				}
-				if (ass.getSecondEnd().getLinkedClass().equals(cl) && ass.getFirstEnd().isNavigable()) {
-					listChild.put(ClassDiagramUtils.getAssociationName(ass, true), ass);
+				if (ass.getSecondEnd().getLinkedClass().equals(cl)
+						&& ass.getFirstEnd().isNavigable()) {
+					listChild.put(ClassDiagramUtils.getAssociationName(ass,
+							true), ass);
 				}
 			}
 			for (Attribute att : cl.getAllInheritedAttributes()) {
@@ -384,5 +422,21 @@ public class ClassDiagramUtils {
 			}
 		}
 		return listChild;
+	}
+
+	public static String getViewForClass(Clazz clazz) {
+		String result = null;
+		for (Object o : clazz.getComments()) {
+			Comment c = (Comment) o;
+			for (Object obj : c.getStereotypes()) {
+				if (obj instanceof Stereotype) {
+					Stereotype s = (Stereotype) obj;
+					if (s.getName().equalsIgnoreCase("view")) {
+						result = c.getValue();
+					}
+				}
+			}
+		}
+		return result;
 	}
 }
