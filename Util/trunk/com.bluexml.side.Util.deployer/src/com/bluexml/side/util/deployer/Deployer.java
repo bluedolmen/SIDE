@@ -36,6 +36,10 @@ public abstract class Deployer implements Checkable {
 		return log;
 	}
 
+	public void setLog(SIDELog log) {
+		this.log = log;
+	}
+
 	public String getCleanKey() {
 		return cleanKey;
 	}
@@ -92,11 +96,15 @@ public abstract class Deployer implements Checkable {
 		String IfilewkDirPath = getTargetPath();
 		String absoluteWKDirePath = IFileHelper.getSystemFolderPath(IfilewkDirPath);
 		File fileToDeploy = getFileToDeploy(absoluteWKDirePath);
+		// addInfoLog("preProcessing ...", "", null);
 		preProcess(fileToDeploy);
 		if (doClean()) {
+			//addInfoLog("Cleaning ...", "", null);
 			clean(fileToDeploy);
 		}
+		// addInfoLog("Processing ...", "", null);
 		deployProcess(fileToDeploy);
+		// addInfoLog("postProcessing ...", "", null);
 		postProcess(fileToDeploy);
 	}
 
