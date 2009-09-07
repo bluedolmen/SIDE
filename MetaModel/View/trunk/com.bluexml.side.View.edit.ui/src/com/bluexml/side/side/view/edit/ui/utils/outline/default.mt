@@ -102,7 +102,6 @@ ul#main-nav li a:hover {border:1px solid gray;color:#000;background:#efefef}
 
 </script>
 <em>Outline view, generation output may change.</em>
-
 <%for (views){%>
 	<%if (current().name == getNameOfSelectedView()){%>
 		<%if (cast("FacetMap")){%>
@@ -114,6 +113,11 @@ ul#main-nav li a:hover {border:1px solid gray;color:#000;background:#efefef}
 		<%}else if(cast("DataTable")){%>
 			<%current().getHTMLForDataTable()%>
 		<%}%>
+	<%}%>
+<%}%>
+<%for (composedViews){%>
+	<%if (cast("ComposedView")){%>
+		<%current().getHTMLForComposedView()%>
 	<%}%>
 <%}%>
 </body>
@@ -192,6 +196,24 @@ ul#main-nav li a:hover {border:1px solid gray;color:#000;background:#efefef}
 		</li>
 	<%}%>
 </ul>
+
+<%script type="view.AbstractView" name="getHTMLForComposedView"%>
+<br>
+<h1><%name%></h1>
+<br>
+<%for (children){%>
+	<%if (cast("AbstractView")){%>
+		<%if (cast("FacetMap")){%>
+			<%current().getHTMLForFacetMap()%>
+		<%}else if(cast("Tree")){%>
+			<%current().getHTMLForTree()%>
+		<%}else if(cast("DataList")){%>
+			<%current().getHTMLForDataList()%>
+		<%}else if(cast("DataTable")){%>
+			<%current().getHTMLForDataTable()%>
+		<%}%>
+	<%}%>
+<%}%>
 
 <%script type="view.AbstractView" name="getHTMLForDataTable"%>
 <table class="dataTable">
