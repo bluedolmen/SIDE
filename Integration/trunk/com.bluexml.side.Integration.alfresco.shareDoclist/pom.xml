@@ -13,13 +13,13 @@
 		<version>1.8</version>
 	</parent>
 	<build>
-		<extensions>
-			<extension>
-				<groupId>com.bluexml.side.Integration.m2</groupId>
-				<artifactId>zipPackage</artifactId>
-				<version>1.0</version>
-			</extension>
-		</extensions>
+<!--		<extensions>-->
+<!--			<extension>-->
+<!--				<groupId>com.bluexml.side.Integration.m2</groupId>-->
+<!--				<artifactId>zipPackage</artifactId>-->
+<!--				<version>1.0</version>-->
+<!--			</extension>-->
+<!--		</extensions>-->
 		<plugins>
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
@@ -41,6 +41,12 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.bluexml.side.Integration.m2</groupId>
+				<artifactId>zipPackage</artifactId>
+				<version>1.0</version>
+				<extensions>true</extensions>
 			</plugin>
 		</plugins>
 	</build>
