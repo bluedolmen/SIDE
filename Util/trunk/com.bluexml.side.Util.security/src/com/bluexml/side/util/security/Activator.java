@@ -25,7 +25,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.bluexml.side.Application.security";
+	public static final String PLUGIN_ID = "com.bluexml.side.Util.security";
 	public static final String KEY_PREFERENCE = "key";
 	public static final String KEY_DEFAULT = "";
 

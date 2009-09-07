@@ -9,7 +9,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends Plugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.bluexml.side.Application.Deployer.alfresco";
+	public static final String PLUGIN_ID = "com.bluexml.side.Deployer.alfresco";
 
 	// The shared instance
 	private static Activator plugin;
