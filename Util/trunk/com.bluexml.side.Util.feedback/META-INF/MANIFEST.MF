@@ -8,7 +8,7 @@ Bundle-Vendor: www.bluexml.com
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,
- com.bluexml.side.Util.libs;bundle-version="1.0.16",
+ com.bluexml.side.Util.libs,
  org.eclipse.ui.forms
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

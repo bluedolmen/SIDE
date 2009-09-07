@@ -26,6 +26,11 @@
                         key="com.bluexml.side.Class.generator.alfresco.module.version"
                         label="View Module version">
                   </configurationParameter>
+                  <configurationParameter
+                        documentation="put here the url to use for Alfresco Share webapp"
+                        key="alfrescoShare.url"
+                        label="alfrescoShare Url">
+                  </configurationParameter>
                </generatorVersion>
             </technologyVersion>
          </technology>
