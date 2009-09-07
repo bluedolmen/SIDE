@@ -26,7 +26,10 @@ public class ViewAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
 		// doclist
 		result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/doclistView/doclist_ftl.mt");
-
+		
+		// services :
+		addServiceLog("Alfresco Share Views", "Share Document Library", getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCOSHARE_HOME)+"/page/site/yourSiteUrl/documentlibrary");
+		
 		return result;
 	}
 
