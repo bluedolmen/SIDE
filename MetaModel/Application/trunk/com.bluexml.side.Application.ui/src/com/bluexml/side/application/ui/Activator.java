@@ -3,6 +3,8 @@ package com.bluexml.side.application.ui;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import com.bluexml.side.util.libs.Messages;
+
 /**
  * The activator class controls the plug-in life cycle
  */
@@ -13,7 +15,9 @@ public class Activator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static Activator plugin;
-	
+
+	public static final Messages Messages = new Messages(PLUGIN_ID, "com.bluexml.side.application.ui.action.messages");
+
 	/**
 	 * The constructor
 	 */

@@ -1,43 +1,14 @@
 package com.bluexml.side.application.ui.action;
 
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+public class Messages extends com.bluexml.side.util.libs.Messages {
 
-import org.eclipse.osgi.util.NLS;
 
-public class Messages extends NLS{
-	private static final String BUNDLE_NAME = "com.bluexml.side.application.ui.action.messages"; //$NON-NLS-1$
-
-	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
-			.getBundle(BUNDLE_NAME);
-
-	private Messages() {
+	public Messages(String pluginId, String bundleName) {
+		super(pluginId, bundleName);
+		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * Return the string for the given key
-	 * @param key
-	 * @return
-	 */
-	public static String getString(String key) {
-		try {
-			return RESOURCE_BUNDLE.getString(key);
-		} catch (MissingResourceException e) {
-			return '!' + key + '!';
-		}
-	}
+	private static final String url = "com.bluexml.side.application.ui.action.messages"; //$NON-NLS-1$
 
-	/**
-	 * Return the string for the given key using objects to bind {x} param.
-	 * @param key
-	 * @param objects
-	 * @return
-	 */
-	public static String getString(String key, Object[] objects) {
-		return bind(getString(key),objects);
-	}
 
-	public static String getString(String key, Object object) {
-		return bind(getString(key),object);
-	}
 }
