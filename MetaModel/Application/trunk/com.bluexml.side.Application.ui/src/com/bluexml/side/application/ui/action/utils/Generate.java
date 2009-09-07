@@ -36,7 +36,6 @@ import com.bluexml.side.application.Option;
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.ui.Activator;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
-import com.bluexml.side.application.ui.action.Messages;
 import com.bluexml.side.util.dependencies.DependencesManager;
 import com.bluexml.side.util.dependencies.ModuleConstraint;
 import com.bluexml.side.util.deployer.Deployer;
