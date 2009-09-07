@@ -33,6 +33,7 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.topcased.modeler.edit.EMFGraphNodeEditPart;
 
 import com.bluexml.side.Workflow.modeler.WorkflowImageRegistry;
+import com.bluexml.side.Workflow.modeler.WorkflowPlugin;
 import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.WorkflowFormCollection;
@@ -68,9 +69,9 @@ public class ShowFormAction extends WorkbenchPartAction {
 		List<FormWorkflow> forms = searchForm(wfl, selectedObject);
 
 		if (forms.size() == 0)
-			MessageDialog.openInformation(null, Messages
+			MessageDialog.openInformation(null, WorkflowPlugin.Messages
 					.getString("ShowFormAction.1"), //$NON-NLS-1$
-					Messages.getString("ShowFormAction.2", project.getName()) //$NON-NLS-1$
+					WorkflowPlugin.Messages.getString("ShowFormAction.2", project.getName()) //$NON-NLS-1$
 					); //$NON-NLS-1$
 		else {
 			recomputeAndSelect(forms, selectedObject);
@@ -180,7 +181,7 @@ public class ShowFormAction extends WorkbenchPartAction {
 
 	protected void init() {
 		setId(ID);
-		setText(Messages.getString("ShowFormAction.5")); //$NON-NLS-1$
+		setText(WorkflowPlugin.Messages.getString("ShowFormAction.5")); //$NON-NLS-1$
 		setImageDescriptor(WorkflowImageRegistry
 				.getImageDescriptor("FORMMODEL")); //$NON-NLS-1$
 	}

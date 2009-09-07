@@ -18,17 +18,24 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import com.bluexml.side.util.libs.Messages;
+
 /**
  * The main plugin class to be used in the desktop.
  *
  * @generated
  */
 public class WorkflowPlugin extends AbstractUIPlugin {
+	
+	private static final String PLUGIN_ID = "com.bluexml.side.Workflow.modeler";
+
 	/**
 	 * The shared instance
 	 * @generated
 	 */
 	private static WorkflowPlugin plugin;
+	
+	public static final Messages Messages = new Messages(PLUGIN_ID, "com.bluexml.side.Workflow.modeler.messages.messages");
 
 	/**
 	 * The constructor.
