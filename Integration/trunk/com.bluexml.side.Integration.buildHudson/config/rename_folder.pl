@@ -32,18 +32,18 @@ foreach my $nom ( @LesFichiers ) {
 		
 		
 	}
-	else {
-                @nomrepertoire=split(/\./,$rep);
-                $rep =~ s/.*\.(.+)$/$1/;
-                $taille = $#nomrepertoire-1;
-                $repracine=$nomrepertoire[$taille];
-                if (!( -d "$repracine")) {
-                    mkdir ("$repracine",0755) || die ("Err. Cr. répertoire \n");
-                }
-                mkdir ("$repracine/$rep",0755) || die ("Err. Cr. répertoire \n");
-                move ("$nom","$repracine/$rep") or die("Impossible de copier $repertoire1 $!");
+	#else {
+                #@nomrepertoire=split(/\./,$rep);
+                #$rep =~ s/.*\.(.+)$/$1/;
+                #$taille = $#nomrepertoire-1;
+                #$repracine=$nomrepertoire[$taille];
+                #if (!( -d "$repracine")) {
+                #    mkdir ("$repracine",0755) || die ("Err. Cr. répertoire \n");
+                #}
+                #mkdir ("$repracine/$rep",0755) || die ("Err. Cr. répertoire \n");
+                #move ("$nom","$repracine/$rep") or die("Impossible de copier $repertoire1 $!");
 				#rename("$nom", "$rep") || die "Fail $!";
-	}
+	#}
 
 
 }
