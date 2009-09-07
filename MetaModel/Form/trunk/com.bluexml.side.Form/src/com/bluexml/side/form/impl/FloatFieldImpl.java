@@ -29,7 +29,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *
  * @generated
  */
-public class FloatFieldImpl extends NumericFieldImpl implements FloatField {
+public class FloatFieldImpl extends NumericalFieldImpl implements FloatField {
 	/**
 	 * The default value of the '{@link #getMin_value() <em>Min value</em>}' attribute.
 	 * <!-- begin-user-doc -->

@@ -243,7 +243,7 @@ public class FormSwitch<T> {
 			case FormPackage.DECIMAL_FIELD: {
 				DecimalField decimalField = (DecimalField)theEObject;
 				T result = caseDecimalField(decimalField);
-				if (result == null) result = caseNumericField(decimalField);
+				if (result == null) result = caseNumericalField(decimalField);
 				if (result == null) result = caseField(decimalField);
 				if (result == null) result = caseFormElement(decimalField);
 				if (result == null) result = caseModelElement(decimalField);
@@ -253,7 +253,7 @@ public class FormSwitch<T> {
 			case FormPackage.FLOAT_FIELD: {
 				FloatField floatField = (FloatField)theEObject;
 				T result = caseFloatField(floatField);
-				if (result == null) result = caseNumericField(floatField);
+				if (result == null) result = caseNumericalField(floatField);
 				if (result == null) result = caseField(floatField);
 				if (result == null) result = caseFormElement(floatField);
 				if (result == null) result = caseModelElement(floatField);
@@ -263,7 +263,7 @@ public class FormSwitch<T> {
 			case FormPackage.INTEGER_FIELD: {
 				IntegerField integerField = (IntegerField)theEObject;
 				T result = caseIntegerField(integerField);
-				if (result == null) result = caseNumericField(integerField);
+				if (result == null) result = caseNumericalField(integerField);
 				if (result == null) result = caseField(integerField);
 				if (result == null) result = caseFormElement(integerField);
 				if (result == null) result = caseModelElement(integerField);
@@ -432,12 +432,12 @@ public class FormSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FormPackage.NUMERIC_FIELD: {
-				NumericField numericField = (NumericField)theEObject;
-				T result = caseNumericField(numericField);
-				if (result == null) result = caseField(numericField);
-				if (result == null) result = caseFormElement(numericField);
-				if (result == null) result = caseModelElement(numericField);
+			case FormPackage.NUMERICAL_FIELD: {
+				NumericalField numericalField = (NumericalField)theEObject;
+				T result = caseNumericalField(numericalField);
+				if (result == null) result = caseField(numericalField);
+				if (result == null) result = caseFormElement(numericalField);
+				if (result == null) result = caseModelElement(numericalField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -887,17 +887,17 @@ public class FormSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Numeric Field</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Numerical Field</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Numeric Field</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Numerical Field</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNumericField(NumericField object) {
+	public T caseNumericalField(NumericalField object) {
 		return null;
 	}
 

@@ -237,8 +237,8 @@ public class FormAdapterFactory extends AdapterFactoryImpl {
 				return createSearchFormAdapter();
 			}
 			@Override
-			public Adapter caseNumericField(NumericField object) {
-				return createNumericFieldAdapter();
+			public Adapter caseNumericalField(NumericalField object) {
+				return createNumericalFieldAdapter();
 			}
 			@Override
 			public Adapter caseSearchOperatorConfiguration(SearchOperatorConfiguration object) {
@@ -683,16 +683,16 @@ public class FormAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.NumericField <em>Numeric Field</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.NumericalField <em>Numerical Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see com.bluexml.side.form.NumericField
+	 * @see com.bluexml.side.form.NumericalField
 	 * @generated
 	 */
-	public Adapter createNumericFieldAdapter() {
+	public Adapter createNumericalFieldAdapter() {
 		return null;
 	}
 

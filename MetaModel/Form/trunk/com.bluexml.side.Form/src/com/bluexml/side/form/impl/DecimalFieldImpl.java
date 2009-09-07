@@ -31,7 +31,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *
  * @generated
  */
-public class DecimalFieldImpl extends NumericFieldImpl implements DecimalField {
+public class DecimalFieldImpl extends NumericalFieldImpl implements DecimalField {
 	/**
 	 * The default value of the '{@link #getMin_value() <em>Min value</em>}' attribute.
 	 * <!-- begin-user-doc -->

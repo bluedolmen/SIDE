@@ -277,6 +277,6 @@ public interface Field extends FormElement {
 	 * @model kind="operation"
 	 * @generated
 	 */
-	EList<String> getProposedOperators();
+	EList<String> getInitialProposedOperators();
 
 } // Field

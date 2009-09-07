@@ -83,7 +83,7 @@
         <details key="body" value="if self.label.oclIsUndefined() or self.label.size() = 0 then&#xD; self.id &#xD;else&#xD; self.label &#xD;endif"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="getProposedOperators" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getInitialProposedOperators" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mandatory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'mandatory' attribute specifies if a field is required or not.&#xD;&#xA;Constraint/limit: The field must be filled up in order to validate the form. A message (validation rule) for all required fields will appear if they are not filled up.&#xD;&#xA;Example:&#xD;&#xA;- 'false': the field is not mandatory.&#xD;&#xA;- 'true': the field is mandatory. Usually, the label of the field is followed by a star."/>
@@ -207,7 +207,7 @@
       <details key="documentation" value="Definition: The 'DateTimeField' specifies a date with time input. The format of the input value must be conform to the 'input_formats' property.&#xD;&#xA;&#xD;&#xD;Inherits:&#xD; DateField."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DecimalField" eSuperTypes="#//NumericField">
+  <eClassifiers xsi:type="ecore:EClass" name="DecimalField" eSuperTypes="#//NumericalField">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The 'DecimalField' specifies a field for decimal input.&#xD;&#xA;&#xD;&#xD;Inherits:&#xD; Field."/>
     </eAnnotations>
@@ -232,7 +232,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FloatField" eSuperTypes="#//NumericField">
+  <eClassifiers xsi:type="ecore:EClass" name="FloatField" eSuperTypes="#//NumericalField">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The 'FloatField' specifies a field for float input.&#xD;&#xA;&#xD;&#xD;Inherits:&#xD; Field."/>
     </eAnnotations>
@@ -247,7 +247,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IntegerField" eSuperTypes="#//NumericField">
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerField" eSuperTypes="#//NumericalField">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The 'IntegerField' specifies a field for integer input.&#xD;&#xA;&#xD;&#xD;Inherits:&#xD; Field."/>
     </eAnnotations>
@@ -509,11 +509,43 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SearchForm" eSuperTypes="#//FormContainer">
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataForm" eType="#//FormClass"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="combinationOperator" eType="#//CombinationOperators"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NumericField" eSuperTypes="#//Field"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NumericalField" eSuperTypes="#//Field"/>
   <eClassifiers xsi:type="ecore:EClass" name="SearchOperatorConfiguration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultOperator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="proposedOperators" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FieldSearchOperators">
+    <eLiterals name="equals"/>
+    <eLiterals name="empty" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CharFieldSearchOperators">
+    <eLiterals name="contains"/>
+    <eLiterals name="icontains" value="1"/>
+    <eLiterals name="startsWith" value="2"/>
+    <eLiterals name="istartsWith" value="3"/>
+    <eLiterals name="endsWith" value="4"/>
+    <eLiterals name="iendsWith" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="NumericalFieldSearchOperators">
+    <eLiterals name="between"/>
+    <eLiterals name="below" value="1"/>
+    <eLiterals name="above" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ChoiceFieldSearchOperators">
+    <eLiterals name="all"/>
+    <eLiterals name="oneOf" value="1"/>
+    <eLiterals name="none" value="2"/>
+    <eLiterals name="allBut" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FileFieldSearchOperators">
+    <eLiterals name="fileType"/>
+    <eLiterals name="contents" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CombinationOperators">
+    <eLiterals name="and"/>
+    <eLiterals name="or" value="1"/>
   </eClassifiers>
 </ecore:EPackage>

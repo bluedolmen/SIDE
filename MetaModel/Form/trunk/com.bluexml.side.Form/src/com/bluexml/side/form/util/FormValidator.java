@@ -242,8 +242,8 @@ public class FormValidator extends EObjectValidator {
 				return validateTextField((TextField)value, diagnostics, context);
 			case FormPackage.SEARCH_FORM:
 				return validateSearchForm((SearchForm)value, diagnostics, context);
-			case FormPackage.NUMERIC_FIELD:
-				return validateNumericField((NumericField)value, diagnostics, context);
+			case FormPackage.NUMERICAL_FIELD:
+				return validateNumericalField((NumericalField)value, diagnostics, context);
 			case FormPackage.SEARCH_OPERATOR_CONFIGURATION:
 				return validateSearchOperatorConfiguration((SearchOperatorConfiguration)value, diagnostics, context);
 			case FormPackage.FORM_GROUP_PRESENTATION_TYPE:
@@ -254,6 +254,18 @@ public class FormValidator extends EObjectValidator {
 				return validateChoiceWidgetType((ChoiceWidgetType)value, diagnostics, context);
 			case FormPackage.MODEL_CHOICE_WIDGET_TYPE:
 				return validateModelChoiceWidgetType((ModelChoiceWidgetType)value, diagnostics, context);
+			case FormPackage.FIELD_SEARCH_OPERATORS:
+				return validateFieldSearchOperators((FieldSearchOperators)value, diagnostics, context);
+			case FormPackage.CHAR_FIELD_SEARCH_OPERATORS:
+				return validateCharFieldSearchOperators((CharFieldSearchOperators)value, diagnostics, context);
+			case FormPackage.NUMERICAL_FIELD_SEARCH_OPERATORS:
+				return validateNumericalFieldSearchOperators((NumericalFieldSearchOperators)value, diagnostics, context);
+			case FormPackage.CHOICE_FIELD_SEARCH_OPERATORS:
+				return validateChoiceFieldSearchOperators((ChoiceFieldSearchOperators)value, diagnostics, context);
+			case FormPackage.FILE_FIELD_SEARCH_OPERATORS:
+				return validateFileFieldSearchOperators((FileFieldSearchOperators)value, diagnostics, context);
+			case FormPackage.COMBINATION_OPERATORS:
+				return validateCombinationOperators((CombinationOperators)value, diagnostics, context);
 			default: 
 				return true;
 		}
@@ -918,15 +930,15 @@ public class FormValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateNumericField(NumericField numericField, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(numericField, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(numericField, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(numericField, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(numericField, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(numericField, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(numericField, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(numericField, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(numericField, diagnostics, context);
+	public boolean validateNumericalField(NumericalField numericalField, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_EveryMultiplicityConforms(numericalField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(numericalField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(numericalField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(numericalField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(numericalField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(numericalField, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(numericalField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(numericalField, diagnostics, context);
 		return result;
 	}
 
@@ -1092,6 +1104,60 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateModelChoiceWidgetType(ModelChoiceWidgetType modelChoiceWidgetType, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateFieldSearchOperators(FieldSearchOperators fieldSearchOperators, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateCharFieldSearchOperators(CharFieldSearchOperators charFieldSearchOperators, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateNumericalFieldSearchOperators(NumericalFieldSearchOperators numericalFieldSearchOperators, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateChoiceFieldSearchOperators(ChoiceFieldSearchOperators choiceFieldSearchOperators, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateFileFieldSearchOperators(FileFieldSearchOperators fileFieldSearchOperators, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateCombinationOperators(CombinationOperators combinationOperators, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

@@ -242,16 +242,6 @@ public interface FormPackage extends EPackage {
 	int DATE_TIME_FIELD = 12;
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.form.impl.NumericFieldImpl <em>Numeric Field</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.form.impl.NumericFieldImpl
-	 * @see com.bluexml.side.form.impl.FormPackageImpl#getNumericField()
-	 * @generated
-	 */
-	int NUMERIC_FIELD = 33;
-
-	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.impl.DecimalFieldImpl <em>Decimal Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2313,175 +2303,14 @@ public interface FormPackage extends EPackage {
 	int DATE_TIME_FIELD_FEATURE_COUNT = DATE_FIELD_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.NumericalFieldImpl <em>Numerical Field</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.impl.NumericalFieldImpl
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getNumericalField()
 	 * @generated
-	 * @ordered
 	 */
-	int NUMERIC_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_FIELD__TAGS = FIELD__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_FIELD__COMMENTS = FIELD__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_FIELD__METAINFO = FIELD__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_FIELD__LABEL = FIELD__LABEL;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_FIELD__ID = FIELD__ID;
-
-	/**
-	 * The feature id for the '<em><b>Help text</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_FIELD__HELP_TEXT = FIELD__HELP_TEXT;
-
-	/**
-	 * The feature id for the '<em><b>Ref</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_FIELD__REF = FIELD__REF;
-
-	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_FIELD__HIDDEN = FIELD__HIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_FIELD__MANDATORY = FIELD__MANDATORY;
-
-	/**
-	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_FIELD__ERROR_MESSAGES = FIELD__ERROR_MESSAGES;
-
-	/**
-	 * The feature id for the '<em><b>Initial</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_FIELD__INITIAL = FIELD__INITIAL;
-
-	/**
-	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_FIELD__DISABLED = FIELD__DISABLED;
-
-	/**
-	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
-
-	/**
-	 * The feature id for the '<em><b>Style</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_FIELD__STYLE = FIELD__STYLE;
-
-	/**
-	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_FIELD__SEARCH_OPERATOR_CONFIGURATION = FIELD__SEARCH_OPERATOR_CONFIGURATION;
-
-	/**
-	 * The number of structural features of the '<em>Numeric Field</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
+	int NUMERICAL_FIELD = 33;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -2490,7 +2319,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__STEREOTYPES = NUMERIC_FIELD__STEREOTYPES;
+	int NUMERICAL_FIELD__STEREOTYPES = FIELD__STEREOTYPES;
 
 	/**
 	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
@@ -2499,7 +2328,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__TAGS = NUMERIC_FIELD__TAGS;
+	int NUMERICAL_FIELD__TAGS = FIELD__TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
@@ -2508,7 +2337,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__COMMENTS = NUMERIC_FIELD__COMMENTS;
+	int NUMERICAL_FIELD__COMMENTS = FIELD__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
@@ -2517,7 +2346,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__DOCUMENTATION = NUMERIC_FIELD__DOCUMENTATION;
+	int NUMERICAL_FIELD__DOCUMENTATION = FIELD__DOCUMENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -2526,7 +2355,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__DESCRIPTION = NUMERIC_FIELD__DESCRIPTION;
+	int NUMERICAL_FIELD__DESCRIPTION = FIELD__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
@@ -2535,7 +2364,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__METAINFO = NUMERIC_FIELD__METAINFO;
+	int NUMERICAL_FIELD__METAINFO = FIELD__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -2544,7 +2373,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__LABEL = NUMERIC_FIELD__LABEL;
+	int NUMERICAL_FIELD__LABEL = FIELD__LABEL;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -2553,7 +2382,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__ID = NUMERIC_FIELD__ID;
+	int NUMERICAL_FIELD__ID = FIELD__ID;
 
 	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
@@ -2562,7 +2391,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__HELP_TEXT = NUMERIC_FIELD__HELP_TEXT;
+	int NUMERICAL_FIELD__HELP_TEXT = FIELD__HELP_TEXT;
 
 	/**
 	 * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2571,7 +2400,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__REF = NUMERIC_FIELD__REF;
+	int NUMERICAL_FIELD__REF = FIELD__REF;
 
 	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
@@ -2580,7 +2409,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__HIDDEN = NUMERIC_FIELD__HIDDEN;
+	int NUMERICAL_FIELD__HIDDEN = FIELD__HIDDEN;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -2589,7 +2418,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__MANDATORY = NUMERIC_FIELD__MANDATORY;
+	int NUMERICAL_FIELD__MANDATORY = FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -2598,7 +2427,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__ERROR_MESSAGES = NUMERIC_FIELD__ERROR_MESSAGES;
+	int NUMERICAL_FIELD__ERROR_MESSAGES = FIELD__ERROR_MESSAGES;
 
 	/**
 	 * The feature id for the '<em><b>Initial</b></em>' attribute.
@@ -2607,7 +2436,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__INITIAL = NUMERIC_FIELD__INITIAL;
+	int NUMERICAL_FIELD__INITIAL = FIELD__INITIAL;
 
 	/**
 	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
@@ -2616,7 +2445,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__DISABLED = NUMERIC_FIELD__DISABLED;
+	int NUMERICAL_FIELD__DISABLED = FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
@@ -2625,7 +2454,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__FIELD_SIZE = NUMERIC_FIELD__FIELD_SIZE;
+	int NUMERICAL_FIELD__FIELD_SIZE = FIELD__FIELD_SIZE;
 
 	/**
 	 * The feature id for the '<em><b>Style</b></em>' attribute.
@@ -2634,7 +2463,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__STYLE = NUMERIC_FIELD__STYLE;
+	int NUMERICAL_FIELD__STYLE = FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
@@ -2643,7 +2472,178 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__SEARCH_OPERATOR_CONFIGURATION = NUMERIC_FIELD__SEARCH_OPERATOR_CONFIGURATION;
+	int NUMERICAL_FIELD__SEARCH_OPERATOR_CONFIGURATION = FIELD__SEARCH_OPERATOR_CONFIGURATION;
+
+	/**
+	 * The number of structural features of the '<em>Numerical Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__STEREOTYPES = NUMERICAL_FIELD__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__TAGS = NUMERICAL_FIELD__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__COMMENTS = NUMERICAL_FIELD__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__DOCUMENTATION = NUMERICAL_FIELD__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__DESCRIPTION = NUMERICAL_FIELD__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__METAINFO = NUMERICAL_FIELD__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__LABEL = NUMERICAL_FIELD__LABEL;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__ID = NUMERICAL_FIELD__ID;
+
+	/**
+	 * The feature id for the '<em><b>Help text</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__HELP_TEXT = NUMERICAL_FIELD__HELP_TEXT;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__REF = NUMERICAL_FIELD__REF;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__HIDDEN = NUMERICAL_FIELD__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__MANDATORY = NUMERICAL_FIELD__MANDATORY;
+
+	/**
+	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__ERROR_MESSAGES = NUMERICAL_FIELD__ERROR_MESSAGES;
+
+	/**
+	 * The feature id for the '<em><b>Initial</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__INITIAL = NUMERICAL_FIELD__INITIAL;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__DISABLED = NUMERICAL_FIELD__DISABLED;
+
+	/**
+	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__FIELD_SIZE = NUMERICAL_FIELD__FIELD_SIZE;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__STYLE = NUMERICAL_FIELD__STYLE;
+
+	/**
+	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__SEARCH_OPERATOR_CONFIGURATION = NUMERICAL_FIELD__SEARCH_OPERATOR_CONFIGURATION;
 
 	/**
 	 * The feature id for the '<em><b>Min value</b></em>' attribute.
@@ -2652,7 +2652,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__MIN_VALUE = NUMERIC_FIELD_FEATURE_COUNT + 0;
+	int DECIMAL_FIELD__MIN_VALUE = NUMERICAL_FIELD_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Max value</b></em>' attribute.
@@ -2661,7 +2661,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__MAX_VALUE = NUMERIC_FIELD_FEATURE_COUNT + 1;
+	int DECIMAL_FIELD__MAX_VALUE = NUMERICAL_FIELD_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Max digits</b></em>' attribute.
@@ -2670,7 +2670,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__MAX_DIGITS = NUMERIC_FIELD_FEATURE_COUNT + 2;
+	int DECIMAL_FIELD__MAX_DIGITS = NUMERICAL_FIELD_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Decimal places</b></em>' attribute.
@@ -2679,7 +2679,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD__DECIMAL_PLACES = NUMERIC_FIELD_FEATURE_COUNT + 3;
+	int DECIMAL_FIELD__DECIMAL_PLACES = NUMERICAL_FIELD_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Decimal Field</em>' class.
@@ -2688,7 +2688,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_FIELD_FEATURE_COUNT = NUMERIC_FIELD_FEATURE_COUNT + 4;
+	int DECIMAL_FIELD_FEATURE_COUNT = NUMERICAL_FIELD_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -2697,7 +2697,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__STEREOTYPES = NUMERIC_FIELD__STEREOTYPES;
+	int FLOAT_FIELD__STEREOTYPES = NUMERICAL_FIELD__STEREOTYPES;
 
 	/**
 	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
@@ -2706,7 +2706,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__TAGS = NUMERIC_FIELD__TAGS;
+	int FLOAT_FIELD__TAGS = NUMERICAL_FIELD__TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
@@ -2715,7 +2715,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__COMMENTS = NUMERIC_FIELD__COMMENTS;
+	int FLOAT_FIELD__COMMENTS = NUMERICAL_FIELD__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
@@ -2724,7 +2724,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__DOCUMENTATION = NUMERIC_FIELD__DOCUMENTATION;
+	int FLOAT_FIELD__DOCUMENTATION = NUMERICAL_FIELD__DOCUMENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -2733,7 +2733,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__DESCRIPTION = NUMERIC_FIELD__DESCRIPTION;
+	int FLOAT_FIELD__DESCRIPTION = NUMERICAL_FIELD__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
@@ -2742,7 +2742,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__METAINFO = NUMERIC_FIELD__METAINFO;
+	int FLOAT_FIELD__METAINFO = NUMERICAL_FIELD__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -2751,7 +2751,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__LABEL = NUMERIC_FIELD__LABEL;
+	int FLOAT_FIELD__LABEL = NUMERICAL_FIELD__LABEL;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -2760,7 +2760,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__ID = NUMERIC_FIELD__ID;
+	int FLOAT_FIELD__ID = NUMERICAL_FIELD__ID;
 
 	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
@@ -2769,7 +2769,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__HELP_TEXT = NUMERIC_FIELD__HELP_TEXT;
+	int FLOAT_FIELD__HELP_TEXT = NUMERICAL_FIELD__HELP_TEXT;
 
 	/**
 	 * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2778,7 +2778,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__REF = NUMERIC_FIELD__REF;
+	int FLOAT_FIELD__REF = NUMERICAL_FIELD__REF;
 
 	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
@@ -2787,7 +2787,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__HIDDEN = NUMERIC_FIELD__HIDDEN;
+	int FLOAT_FIELD__HIDDEN = NUMERICAL_FIELD__HIDDEN;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -2796,7 +2796,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__MANDATORY = NUMERIC_FIELD__MANDATORY;
+	int FLOAT_FIELD__MANDATORY = NUMERICAL_FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -2805,7 +2805,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__ERROR_MESSAGES = NUMERIC_FIELD__ERROR_MESSAGES;
+	int FLOAT_FIELD__ERROR_MESSAGES = NUMERICAL_FIELD__ERROR_MESSAGES;
 
 	/**
 	 * The feature id for the '<em><b>Initial</b></em>' attribute.
@@ -2814,7 +2814,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__INITIAL = NUMERIC_FIELD__INITIAL;
+	int FLOAT_FIELD__INITIAL = NUMERICAL_FIELD__INITIAL;
 
 	/**
 	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
@@ -2823,7 +2823,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__DISABLED = NUMERIC_FIELD__DISABLED;
+	int FLOAT_FIELD__DISABLED = NUMERICAL_FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
@@ -2832,7 +2832,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__FIELD_SIZE = NUMERIC_FIELD__FIELD_SIZE;
+	int FLOAT_FIELD__FIELD_SIZE = NUMERICAL_FIELD__FIELD_SIZE;
 
 	/**
 	 * The feature id for the '<em><b>Style</b></em>' attribute.
@@ -2841,7 +2841,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__STYLE = NUMERIC_FIELD__STYLE;
+	int FLOAT_FIELD__STYLE = NUMERICAL_FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
@@ -2850,7 +2850,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__SEARCH_OPERATOR_CONFIGURATION = NUMERIC_FIELD__SEARCH_OPERATOR_CONFIGURATION;
+	int FLOAT_FIELD__SEARCH_OPERATOR_CONFIGURATION = NUMERICAL_FIELD__SEARCH_OPERATOR_CONFIGURATION;
 
 	/**
 	 * The feature id for the '<em><b>Min value</b></em>' attribute.
@@ -2859,7 +2859,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__MIN_VALUE = NUMERIC_FIELD_FEATURE_COUNT + 0;
+	int FLOAT_FIELD__MIN_VALUE = NUMERICAL_FIELD_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Max value</b></em>' attribute.
@@ -2868,7 +2868,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD__MAX_VALUE = NUMERIC_FIELD_FEATURE_COUNT + 1;
+	int FLOAT_FIELD__MAX_VALUE = NUMERICAL_FIELD_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Float Field</em>' class.
@@ -2877,7 +2877,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_FIELD_FEATURE_COUNT = NUMERIC_FIELD_FEATURE_COUNT + 2;
+	int FLOAT_FIELD_FEATURE_COUNT = NUMERICAL_FIELD_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -2886,7 +2886,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__STEREOTYPES = NUMERIC_FIELD__STEREOTYPES;
+	int INTEGER_FIELD__STEREOTYPES = NUMERICAL_FIELD__STEREOTYPES;
 
 	/**
 	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
@@ -2895,7 +2895,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__TAGS = NUMERIC_FIELD__TAGS;
+	int INTEGER_FIELD__TAGS = NUMERICAL_FIELD__TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
@@ -2904,7 +2904,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__COMMENTS = NUMERIC_FIELD__COMMENTS;
+	int INTEGER_FIELD__COMMENTS = NUMERICAL_FIELD__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
@@ -2913,7 +2913,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__DOCUMENTATION = NUMERIC_FIELD__DOCUMENTATION;
+	int INTEGER_FIELD__DOCUMENTATION = NUMERICAL_FIELD__DOCUMENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -2922,7 +2922,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__DESCRIPTION = NUMERIC_FIELD__DESCRIPTION;
+	int INTEGER_FIELD__DESCRIPTION = NUMERICAL_FIELD__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
@@ -2931,7 +2931,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__METAINFO = NUMERIC_FIELD__METAINFO;
+	int INTEGER_FIELD__METAINFO = NUMERICAL_FIELD__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -2940,7 +2940,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__LABEL = NUMERIC_FIELD__LABEL;
+	int INTEGER_FIELD__LABEL = NUMERICAL_FIELD__LABEL;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -2949,7 +2949,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__ID = NUMERIC_FIELD__ID;
+	int INTEGER_FIELD__ID = NUMERICAL_FIELD__ID;
 
 	/**
 	 * The feature id for the '<em><b>Help text</b></em>' attribute.
@@ -2958,7 +2958,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__HELP_TEXT = NUMERIC_FIELD__HELP_TEXT;
+	int INTEGER_FIELD__HELP_TEXT = NUMERICAL_FIELD__HELP_TEXT;
 
 	/**
 	 * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2967,7 +2967,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__REF = NUMERIC_FIELD__REF;
+	int INTEGER_FIELD__REF = NUMERICAL_FIELD__REF;
 
 	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
@@ -2976,7 +2976,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__HIDDEN = NUMERIC_FIELD__HIDDEN;
+	int INTEGER_FIELD__HIDDEN = NUMERICAL_FIELD__HIDDEN;
 
 	/**
 	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
@@ -2985,7 +2985,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__MANDATORY = NUMERIC_FIELD__MANDATORY;
+	int INTEGER_FIELD__MANDATORY = NUMERICAL_FIELD__MANDATORY;
 
 	/**
 	 * The feature id for the '<em><b>Error messages</b></em>' attribute.
@@ -2994,7 +2994,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__ERROR_MESSAGES = NUMERIC_FIELD__ERROR_MESSAGES;
+	int INTEGER_FIELD__ERROR_MESSAGES = NUMERICAL_FIELD__ERROR_MESSAGES;
 
 	/**
 	 * The feature id for the '<em><b>Initial</b></em>' attribute.
@@ -3003,7 +3003,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__INITIAL = NUMERIC_FIELD__INITIAL;
+	int INTEGER_FIELD__INITIAL = NUMERICAL_FIELD__INITIAL;
 
 	/**
 	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
@@ -3012,7 +3012,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__DISABLED = NUMERIC_FIELD__DISABLED;
+	int INTEGER_FIELD__DISABLED = NUMERICAL_FIELD__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Field Size</b></em>' attribute.
@@ -3021,7 +3021,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__FIELD_SIZE = NUMERIC_FIELD__FIELD_SIZE;
+	int INTEGER_FIELD__FIELD_SIZE = NUMERICAL_FIELD__FIELD_SIZE;
 
 	/**
 	 * The feature id for the '<em><b>Style</b></em>' attribute.
@@ -3030,7 +3030,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__STYLE = NUMERIC_FIELD__STYLE;
+	int INTEGER_FIELD__STYLE = NUMERICAL_FIELD__STYLE;
 
 	/**
 	 * The feature id for the '<em><b>Search Operator Configuration</b></em>' containment reference.
@@ -3039,7 +3039,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__SEARCH_OPERATOR_CONFIGURATION = NUMERIC_FIELD__SEARCH_OPERATOR_CONFIGURATION;
+	int INTEGER_FIELD__SEARCH_OPERATOR_CONFIGURATION = NUMERICAL_FIELD__SEARCH_OPERATOR_CONFIGURATION;
 
 	/**
 	 * The feature id for the '<em><b>Min value</b></em>' attribute.
@@ -3048,7 +3048,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__MIN_VALUE = NUMERIC_FIELD_FEATURE_COUNT + 0;
+	int INTEGER_FIELD__MIN_VALUE = NUMERICAL_FIELD_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Max value</b></em>' attribute.
@@ -3057,7 +3057,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD__MAX_VALUE = NUMERIC_FIELD_FEATURE_COUNT + 1;
+	int INTEGER_FIELD__MAX_VALUE = NUMERICAL_FIELD_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Integer Field</em>' class.
@@ -3066,7 +3066,7 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_FIELD_FEATURE_COUNT = NUMERIC_FIELD_FEATURE_COUNT + 2;
+	int INTEGER_FIELD_FEATURE_COUNT = NUMERICAL_FIELD_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -6147,13 +6147,22 @@ public interface FormPackage extends EPackage {
 	int SEARCH_FORM__DATA_FORM = FORM_CONTAINER_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Combination Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEARCH_FORM__COMBINATION_OPERATOR = FORM_CONTAINER_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Search Form</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SEARCH_FORM_FEATURE_COUNT = FORM_CONTAINER_FEATURE_COUNT + 1;
+	int SEARCH_FORM_FEATURE_COUNT = FORM_CONTAINER_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Default Operator</b></em>' attribute.
@@ -6222,6 +6231,66 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	int MODEL_CHOICE_WIDGET_TYPE = 38;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.FieldSearchOperators <em>Field Search Operators</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.FieldSearchOperators
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFieldSearchOperators()
+	 * @generated
+	 */
+	int FIELD_SEARCH_OPERATORS = 39;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.CharFieldSearchOperators <em>Char Field Search Operators</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.CharFieldSearchOperators
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getCharFieldSearchOperators()
+	 * @generated
+	 */
+	int CHAR_FIELD_SEARCH_OPERATORS = 40;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.NumericalFieldSearchOperators <em>Numerical Field Search Operators</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.NumericalFieldSearchOperators
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getNumericalFieldSearchOperators()
+	 * @generated
+	 */
+	int NUMERICAL_FIELD_SEARCH_OPERATORS = 41;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.ChoiceFieldSearchOperators <em>Choice Field Search Operators</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.ChoiceFieldSearchOperators
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getChoiceFieldSearchOperators()
+	 * @generated
+	 */
+	int CHOICE_FIELD_SEARCH_OPERATORS = 42;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.FileFieldSearchOperators <em>File Field Search Operators</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.FileFieldSearchOperators
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFileFieldSearchOperators()
+	 * @generated
+	 */
+	int FILE_FIELD_SEARCH_OPERATORS = 43;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.CombinationOperators <em>Combination Operators</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.CombinationOperators
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getCombinationOperators()
+	 * @generated
+	 */
+	int COMBINATION_OPERATORS = 44;
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.FormElement <em>Element</em>}'.
@@ -7053,14 +7122,25 @@ public interface FormPackage extends EPackage {
 	EReference getSearchForm_DataForm();
 
 	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.form.NumericField <em>Numeric Field</em>}'.
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.SearchForm#getCombinationOperator <em>Combination Operator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Numeric Field</em>'.
-	 * @see com.bluexml.side.form.NumericField
+	 * @return the meta object for the attribute '<em>Combination Operator</em>'.
+	 * @see com.bluexml.side.form.SearchForm#getCombinationOperator()
+	 * @see #getSearchForm()
 	 * @generated
 	 */
-	EClass getNumericField();
+	EAttribute getSearchForm_CombinationOperator();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.form.NumericalField <em>Numerical Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Numerical Field</em>'.
+	 * @see com.bluexml.side.form.NumericalField
+	 * @generated
+	 */
+	EClass getNumericalField();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.SearchOperatorConfiguration <em>Search Operator Configuration</em>}'.
@@ -7195,6 +7275,66 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getModelChoiceWidgetType();
+
+	/**
+	 * Returns the meta object for enum '{@link com.bluexml.side.form.FieldSearchOperators <em>Field Search Operators</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Field Search Operators</em>'.
+	 * @see com.bluexml.side.form.FieldSearchOperators
+	 * @generated
+	 */
+	EEnum getFieldSearchOperators();
+
+	/**
+	 * Returns the meta object for enum '{@link com.bluexml.side.form.CharFieldSearchOperators <em>Char Field Search Operators</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Char Field Search Operators</em>'.
+	 * @see com.bluexml.side.form.CharFieldSearchOperators
+	 * @generated
+	 */
+	EEnum getCharFieldSearchOperators();
+
+	/**
+	 * Returns the meta object for enum '{@link com.bluexml.side.form.NumericalFieldSearchOperators <em>Numerical Field Search Operators</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Numerical Field Search Operators</em>'.
+	 * @see com.bluexml.side.form.NumericalFieldSearchOperators
+	 * @generated
+	 */
+	EEnum getNumericalFieldSearchOperators();
+
+	/**
+	 * Returns the meta object for enum '{@link com.bluexml.side.form.ChoiceFieldSearchOperators <em>Choice Field Search Operators</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Choice Field Search Operators</em>'.
+	 * @see com.bluexml.side.form.ChoiceFieldSearchOperators
+	 * @generated
+	 */
+	EEnum getChoiceFieldSearchOperators();
+
+	/**
+	 * Returns the meta object for enum '{@link com.bluexml.side.form.FileFieldSearchOperators <em>File Field Search Operators</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>File Field Search Operators</em>'.
+	 * @see com.bluexml.side.form.FileFieldSearchOperators
+	 * @generated
+	 */
+	EEnum getFileFieldSearchOperators();
+
+	/**
+	 * Returns the meta object for enum '{@link com.bluexml.side.form.CombinationOperators <em>Combination Operators</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Combination Operators</em>'.
+	 * @see com.bluexml.side.form.CombinationOperators
+	 * @generated
+	 */
+	EEnum getCombinationOperators();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -7901,14 +8041,22 @@ public interface FormPackage extends EPackage {
 		EReference SEARCH_FORM__DATA_FORM = eINSTANCE.getSearchForm_DataForm();
 
 		/**
-		 * The meta object literal for the '{@link com.bluexml.side.form.impl.NumericFieldImpl <em>Numeric Field</em>}' class.
+		 * The meta object literal for the '<em><b>Combination Operator</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.form.impl.NumericFieldImpl
-		 * @see com.bluexml.side.form.impl.FormPackageImpl#getNumericField()
 		 * @generated
 		 */
-		EClass NUMERIC_FIELD = eINSTANCE.getNumericField();
+		EAttribute SEARCH_FORM__COMBINATION_OPERATOR = eINSTANCE.getSearchForm_CombinationOperator();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.NumericalFieldImpl <em>Numerical Field</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.impl.NumericalFieldImpl
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getNumericalField()
+		 * @generated
+		 */
+		EClass NUMERICAL_FIELD = eINSTANCE.getNumericalField();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.SearchOperatorConfigurationImpl <em>Search Operator Configuration</em>}' class.
@@ -8031,6 +8179,66 @@ public interface FormPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum MODEL_CHOICE_WIDGET_TYPE = eINSTANCE.getModelChoiceWidgetType();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.FieldSearchOperators <em>Field Search Operators</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.FieldSearchOperators
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getFieldSearchOperators()
+		 * @generated
+		 */
+		EEnum FIELD_SEARCH_OPERATORS = eINSTANCE.getFieldSearchOperators();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.CharFieldSearchOperators <em>Char Field Search Operators</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.CharFieldSearchOperators
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getCharFieldSearchOperators()
+		 * @generated
+		 */
+		EEnum CHAR_FIELD_SEARCH_OPERATORS = eINSTANCE.getCharFieldSearchOperators();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.NumericalFieldSearchOperators <em>Numerical Field Search Operators</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.NumericalFieldSearchOperators
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getNumericalFieldSearchOperators()
+		 * @generated
+		 */
+		EEnum NUMERICAL_FIELD_SEARCH_OPERATORS = eINSTANCE.getNumericalFieldSearchOperators();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.ChoiceFieldSearchOperators <em>Choice Field Search Operators</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.ChoiceFieldSearchOperators
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getChoiceFieldSearchOperators()
+		 * @generated
+		 */
+		EEnum CHOICE_FIELD_SEARCH_OPERATORS = eINSTANCE.getChoiceFieldSearchOperators();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.FileFieldSearchOperators <em>File Field Search Operators</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.FileFieldSearchOperators
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getFileFieldSearchOperators()
+		 * @generated
+		 */
+		EEnum FILE_FIELD_SEARCH_OPERATORS = eINSTANCE.getFileFieldSearchOperators();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.CombinationOperators <em>Combination Operators</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.CombinationOperators
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getCombinationOperators()
+		 * @generated
+		 */
+		EEnum COMBINATION_OPERATORS = eINSTANCE.getCombinationOperators();
 
 	}
 

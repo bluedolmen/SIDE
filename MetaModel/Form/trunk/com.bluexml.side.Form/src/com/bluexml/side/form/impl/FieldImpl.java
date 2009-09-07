@@ -6,12 +6,19 @@
  */
 package com.bluexml.side.form.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.ecore.OCL;
@@ -351,13 +358,37 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Returns all the proposed operators for a given field.
+	 * This method works through convention by looking an enumeration of name 
+	 * "FieldType" + "SearchOperators". For example, if ask for proposed operators
+	 * of the "CharField" class, we have to look for a enumeration of name "CharFieldSearchOperators".
+	 * This method works on inherited classes, thus the returned search operator set is the
+	 * closure of the search operators on all the inherited classes.
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public EList<String> getProposedOperators() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public EList<String> getInitialProposedOperators() {
+		EList<String> result = new UniqueEList<String>();
+		EList<EClass> classesToProcess = new BasicEList<EClass>();
+		classesToProcess.addAll(eClass().getEAllSuperTypes());
+		classesToProcess.removeAll(FormPackage.eINSTANCE.getField().getEAllSuperTypes());
+		classesToProcess.add(eClass());
+
+		for (EClass currentClass : classesToProcess) {
+			String enumerationName = currentClass.getName() + "SearchOperators";
+		
+			EClassifier eClassifier = FormPackage.eINSTANCE.getEClassifier(enumerationName);
+		
+			if (eClassifier != null) {
+				EEnum eEnum = (EEnum) eClassifier;
+				List<EEnumLiteral> enumLiterals = eEnum.getELiterals();
+				for (EEnumLiteral enumLiteral : enumLiterals) {
+					result.add(enumLiteral.getName());
+				}
+			}
+		}
+			
+		return result;
 	}
 
 	/**

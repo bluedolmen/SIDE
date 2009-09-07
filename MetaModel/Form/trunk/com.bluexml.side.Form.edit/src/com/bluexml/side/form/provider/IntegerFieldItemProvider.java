@@ -33,7 +33,7 @@ import com.bluexml.side.form.FormPackage;
  * @generated
  */
 public class IntegerFieldItemProvider
-	extends NumericFieldItemProvider
+	extends NumericalFieldItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	

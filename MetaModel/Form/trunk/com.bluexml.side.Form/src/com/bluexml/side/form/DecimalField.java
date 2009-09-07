@@ -33,7 +33,7 @@ package com.bluexml.side.form;
  * @model
  * @generated
  */
-public interface DecimalField extends NumericField {
+public interface DecimalField extends NumericalField {
 	/**
 	 * Returns the value of the '<em><b>Min value</b></em>' attribute.
 	 * <!-- begin-user-doc -->

@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.form.impl;
 
+import com.bluexml.side.form.CombinationOperators;
 import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.SearchForm;
@@ -29,6 +30,7 @@ import org.eclipse.ocl.ecore.OCL;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.bluexml.side.form.impl.SearchFormImpl#getDataForm <em>Data Form</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.SearchFormImpl#getCombinationOperator <em>Combination Operator</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,6 +46,25 @@ public class SearchFormImpl extends FormContainerImpl implements SearchForm {
 	 * @ordered
 	 */
 	protected FormClass dataForm;
+
+	/**
+	 * The default value of the '{@link #getCombinationOperator() <em>Combination Operator</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCombinationOperator()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final CombinationOperators COMBINATION_OPERATOR_EDEFAULT = CombinationOperators.AND;
+	/**
+	 * The cached value of the '{@link #getCombinationOperator() <em>Combination Operator</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCombinationOperator()
+	 * @generated
+	 * @ordered
+	 */
+	protected CombinationOperators combinationOperator = COMBINATION_OPERATOR_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -107,12 +128,35 @@ public class SearchFormImpl extends FormContainerImpl implements SearchForm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public CombinationOperators getCombinationOperator() {
+		return combinationOperator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCombinationOperator(CombinationOperators newCombinationOperator) {
+		CombinationOperators oldCombinationOperator = combinationOperator;
+		combinationOperator = newCombinationOperator == null ? COMBINATION_OPERATOR_EDEFAULT : newCombinationOperator;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.SEARCH_FORM__COMBINATION_OPERATOR, oldCombinationOperator, combinationOperator));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FormPackage.SEARCH_FORM__DATA_FORM:
 				if (resolve) return getDataForm();
 				return basicGetDataForm();
+			case FormPackage.SEARCH_FORM__COMBINATION_OPERATOR:
+				return getCombinationOperator();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -127,6 +171,9 @@ public class SearchFormImpl extends FormContainerImpl implements SearchForm {
 		switch (featureID) {
 			case FormPackage.SEARCH_FORM__DATA_FORM:
 				setDataForm((FormClass)newValue);
+				return;
+			case FormPackage.SEARCH_FORM__COMBINATION_OPERATOR:
+				setCombinationOperator((CombinationOperators)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -143,6 +190,9 @@ public class SearchFormImpl extends FormContainerImpl implements SearchForm {
 			case FormPackage.SEARCH_FORM__DATA_FORM:
 				setDataForm((FormClass)null);
 				return;
+			case FormPackage.SEARCH_FORM__COMBINATION_OPERATOR:
+				setCombinationOperator(COMBINATION_OPERATOR_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -157,8 +207,26 @@ public class SearchFormImpl extends FormContainerImpl implements SearchForm {
 		switch (featureID) {
 			case FormPackage.SEARCH_FORM__DATA_FORM:
 				return dataForm != null;
+			case FormPackage.SEARCH_FORM__COMBINATION_OPERATOR:
+				return combinationOperator != COMBINATION_OPERATOR_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (combinationOperator: ");
+		result.append(combinationOperator);
+		result.append(')');
+		return result.toString();
 	}
 
 		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";

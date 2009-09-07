@@ -29,7 +29,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *
  * @generated
  */
-public class IntegerFieldImpl extends NumericFieldImpl implements IntegerField {
+public class IntegerFieldImpl extends NumericalFieldImpl implements IntegerField {
 	/**
 	 * The default value of the '{@link #getMin_value() <em>Min value</em>}' attribute.
 	 * <!-- begin-user-doc -->

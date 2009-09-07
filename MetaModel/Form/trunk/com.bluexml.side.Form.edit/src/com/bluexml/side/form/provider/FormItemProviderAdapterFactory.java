@@ -651,26 +651,26 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.NumericField} instances.
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.NumericalField} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected NumericFieldItemProvider numericFieldItemProvider;
+	protected NumericalFieldItemProvider numericalFieldItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link com.bluexml.side.form.NumericField}.
+	 * This creates an adapter for a {@link com.bluexml.side.form.NumericalField}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createNumericFieldAdapter() {
-		if (numericFieldItemProvider == null) {
-			numericFieldItemProvider = new NumericFieldItemProvider(this);
+	public Adapter createNumericalFieldAdapter() {
+		if (numericalFieldItemProvider == null) {
+			numericalFieldItemProvider = new NumericalFieldItemProvider(this);
 		}
 
-		return numericFieldItemProvider;
+		return numericalFieldItemProvider;
 	}
 
 	/**
@@ -892,7 +892,7 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 		if (actionFieldItemProvider != null) actionFieldItemProvider.dispose();
 		if (textFieldItemProvider != null) textFieldItemProvider.dispose();
 		if (searchFormItemProvider != null) searchFormItemProvider.dispose();
-		if (numericFieldItemProvider != null) numericFieldItemProvider.dispose();
+		if (numericalFieldItemProvider != null) numericalFieldItemProvider.dispose();
 		if (searchOperatorConfigurationItemProvider != null) searchOperatorConfigurationItemProvider.dispose();
 	}
 

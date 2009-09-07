@@ -20,16 +20,21 @@ import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.BooleanField;
 import com.bluexml.side.form.CharField;
+import com.bluexml.side.form.CharFieldSearchOperators;
 import com.bluexml.side.form.ChoiceField;
+import com.bluexml.side.form.ChoiceFieldSearchOperators;
 import com.bluexml.side.form.ChoiceWidgetType;
 import com.bluexml.side.form.ClassFormCollection;
 import com.bluexml.side.form.ClassReference;
+import com.bluexml.side.form.CombinationOperators;
 import com.bluexml.side.form.DateField;
 import com.bluexml.side.form.DateTimeField;
 import com.bluexml.side.form.DecimalField;
 import com.bluexml.side.form.EmailField;
 import com.bluexml.side.form.Field;
+import com.bluexml.side.form.FieldSearchOperators;
 import com.bluexml.side.form.FileField;
+import com.bluexml.side.form.FileFieldSearchOperators;
 import com.bluexml.side.form.FloatField;
 import com.bluexml.side.form.FormAspect;
 import com.bluexml.side.form.FormClass;
@@ -45,7 +50,8 @@ import com.bluexml.side.form.ImageField;
 import com.bluexml.side.form.IntegerField;
 import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.ModelChoiceWidgetType;
-import com.bluexml.side.form.NumericField;
+import com.bluexml.side.form.NumericalField;
+import com.bluexml.side.form.NumericalFieldSearchOperators;
 import com.bluexml.side.form.PasswordField;
 import com.bluexml.side.form.PhoneNumberField;
 import com.bluexml.side.form.Reference;
@@ -276,7 +282,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass numericFieldEClass = null;
+	private EClass numericalFieldEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -340,6 +346,48 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * @generated
 	 */
 	private EEnum modelChoiceWidgetTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum fieldSearchOperatorsEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum charFieldSearchOperatorsEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum numericalFieldSearchOperatorsEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum choiceFieldSearchOperatorsEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum fileFieldSearchOperatorsEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum combinationOperatorsEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1128,8 +1176,17 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getNumericField() {
-		return numericFieldEClass;
+	public EAttribute getSearchForm_CombinationOperator() {
+		return (EAttribute)searchFormEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getNumericalField() {
+		return numericalFieldEClass;
 	}
 
 	/**
@@ -1247,6 +1304,60 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 */
 	public EEnum getModelChoiceWidgetType() {
 		return modelChoiceWidgetTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getFieldSearchOperators() {
+		return fieldSearchOperatorsEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getCharFieldSearchOperators() {
+		return charFieldSearchOperatorsEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getNumericalFieldSearchOperators() {
+		return numericalFieldSearchOperatorsEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getChoiceFieldSearchOperators() {
+		return choiceFieldSearchOperatorsEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getFileFieldSearchOperators() {
+		return fileFieldSearchOperatorsEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getCombinationOperators() {
+		return combinationOperatorsEEnum;
 	}
 
 	/**
@@ -1393,8 +1504,9 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 
 		searchFormEClass = createEClass(SEARCH_FORM);
 		createEReference(searchFormEClass, SEARCH_FORM__DATA_FORM);
+		createEAttribute(searchFormEClass, SEARCH_FORM__COMBINATION_OPERATOR);
 
-		numericFieldEClass = createEClass(NUMERIC_FIELD);
+		numericalFieldEClass = createEClass(NUMERICAL_FIELD);
 
 		searchOperatorConfigurationEClass = createEClass(SEARCH_OPERATOR_CONFIGURATION);
 		createEAttribute(searchOperatorConfigurationEClass, SEARCH_OPERATOR_CONFIGURATION__DEFAULT_OPERATOR);
@@ -1405,6 +1517,12 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		textWidgetTypeEEnum = createEEnum(TEXT_WIDGET_TYPE);
 		choiceWidgetTypeEEnum = createEEnum(CHOICE_WIDGET_TYPE);
 		modelChoiceWidgetTypeEEnum = createEEnum(MODEL_CHOICE_WIDGET_TYPE);
+		fieldSearchOperatorsEEnum = createEEnum(FIELD_SEARCH_OPERATORS);
+		charFieldSearchOperatorsEEnum = createEEnum(CHAR_FIELD_SEARCH_OPERATORS);
+		numericalFieldSearchOperatorsEEnum = createEEnum(NUMERICAL_FIELD_SEARCH_OPERATORS);
+		choiceFieldSearchOperatorsEEnum = createEEnum(CHOICE_FIELD_SEARCH_OPERATORS);
+		fileFieldSearchOperatorsEEnum = createEEnum(FILE_FIELD_SEARCH_OPERATORS);
+		combinationOperatorsEEnum = createEEnum(COMBINATION_OPERATORS);
 	}
 
 	/**
@@ -1454,9 +1572,9 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		charFieldEClass.getESuperTypes().add(this.getField());
 		dateFieldEClass.getESuperTypes().add(this.getField());
 		dateTimeFieldEClass.getESuperTypes().add(this.getDateField());
-		decimalFieldEClass.getESuperTypes().add(this.getNumericField());
-		floatFieldEClass.getESuperTypes().add(this.getNumericField());
-		integerFieldEClass.getESuperTypes().add(this.getNumericField());
+		decimalFieldEClass.getESuperTypes().add(this.getNumericalField());
+		floatFieldEClass.getESuperTypes().add(this.getNumericalField());
+		integerFieldEClass.getESuperTypes().add(this.getNumericalField());
 		modelChoiceFieldEClass.getESuperTypes().add(this.getField());
 		modelChoiceFieldEClass.getESuperTypes().add(this.getClassReference());
 		emailFieldEClass.getESuperTypes().add(this.getCharField());
@@ -1474,7 +1592,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		actionFieldEClass.getESuperTypes().add(this.getField());
 		textFieldEClass.getESuperTypes().add(this.getCharField());
 		searchFormEClass.getESuperTypes().add(this.getFormContainer());
-		numericFieldEClass.getESuperTypes().add(this.getField());
+		numericalFieldEClass.getESuperTypes().add(this.getField());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(formElementEClass, FormElement.class, "FormElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1515,7 +1633,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 
 		addEOperation(fieldEClass, ecorePackage.getEString(), "getLabel", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(fieldEClass, ecorePackage.getEString(), "getProposedOperators", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(fieldEClass, ecorePackage.getEString(), "getInitialProposedOperators", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(formContainerEClass, FormContainer.class, "FormContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1606,8 +1724,9 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 
 		initEClass(searchFormEClass, SearchForm.class, "SearchForm", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSearchForm_DataForm(), this.getFormClass(), null, "dataForm", null, 0, 1, SearchForm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSearchForm_CombinationOperator(), this.getCombinationOperators(), "combinationOperator", null, 0, 1, SearchForm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(numericFieldEClass, NumericField.class, "NumericField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(numericalFieldEClass, NumericalField.class, "NumericalField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(searchOperatorConfigurationEClass, SearchOperatorConfiguration.class, "SearchOperatorConfiguration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSearchOperatorConfiguration_DefaultOperator(), ecorePackage.getEString(), "defaultOperator", null, 0, 1, SearchOperatorConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1633,6 +1752,37 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEEnum(modelChoiceWidgetTypeEEnum, ModelChoiceWidgetType.class, "ModelChoiceWidgetType");
 		addEEnumLiteral(modelChoiceWidgetTypeEEnum, ModelChoiceWidgetType.SELECT);
 		addEEnumLiteral(modelChoiceWidgetTypeEEnum, ModelChoiceWidgetType.INLINE);
+
+		initEEnum(fieldSearchOperatorsEEnum, FieldSearchOperators.class, "FieldSearchOperators");
+		addEEnumLiteral(fieldSearchOperatorsEEnum, FieldSearchOperators.EQUALS);
+		addEEnumLiteral(fieldSearchOperatorsEEnum, FieldSearchOperators.EMPTY);
+
+		initEEnum(charFieldSearchOperatorsEEnum, CharFieldSearchOperators.class, "CharFieldSearchOperators");
+		addEEnumLiteral(charFieldSearchOperatorsEEnum, CharFieldSearchOperators.CONTAINS);
+		addEEnumLiteral(charFieldSearchOperatorsEEnum, CharFieldSearchOperators.ICONTAINS);
+		addEEnumLiteral(charFieldSearchOperatorsEEnum, CharFieldSearchOperators.STARTS_WITH);
+		addEEnumLiteral(charFieldSearchOperatorsEEnum, CharFieldSearchOperators.ISTARTS_WITH);
+		addEEnumLiteral(charFieldSearchOperatorsEEnum, CharFieldSearchOperators.ENDS_WITH);
+		addEEnumLiteral(charFieldSearchOperatorsEEnum, CharFieldSearchOperators.IENDS_WITH);
+
+		initEEnum(numericalFieldSearchOperatorsEEnum, NumericalFieldSearchOperators.class, "NumericalFieldSearchOperators");
+		addEEnumLiteral(numericalFieldSearchOperatorsEEnum, NumericalFieldSearchOperators.BETWEEN);
+		addEEnumLiteral(numericalFieldSearchOperatorsEEnum, NumericalFieldSearchOperators.BELOW);
+		addEEnumLiteral(numericalFieldSearchOperatorsEEnum, NumericalFieldSearchOperators.ABOVE);
+
+		initEEnum(choiceFieldSearchOperatorsEEnum, ChoiceFieldSearchOperators.class, "ChoiceFieldSearchOperators");
+		addEEnumLiteral(choiceFieldSearchOperatorsEEnum, ChoiceFieldSearchOperators.ALL);
+		addEEnumLiteral(choiceFieldSearchOperatorsEEnum, ChoiceFieldSearchOperators.ONE_OF);
+		addEEnumLiteral(choiceFieldSearchOperatorsEEnum, ChoiceFieldSearchOperators.NONE);
+		addEEnumLiteral(choiceFieldSearchOperatorsEEnum, ChoiceFieldSearchOperators.ALL_BUT);
+
+		initEEnum(fileFieldSearchOperatorsEEnum, FileFieldSearchOperators.class, "FileFieldSearchOperators");
+		addEEnumLiteral(fileFieldSearchOperatorsEEnum, FileFieldSearchOperators.FILE_TYPE);
+		addEEnumLiteral(fileFieldSearchOperatorsEEnum, FileFieldSearchOperators.CONTENTS);
+
+		initEEnum(combinationOperatorsEEnum, CombinationOperators.class, "CombinationOperators");
+		addEEnumLiteral(combinationOperatorsEEnum, CombinationOperators.AND);
+		addEEnumLiteral(combinationOperatorsEEnum, CombinationOperators.OR);
 
 		// Create resource
 		createResource(eNS_URI);

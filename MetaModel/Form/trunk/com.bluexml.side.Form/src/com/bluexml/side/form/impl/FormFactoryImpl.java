@@ -120,7 +120,7 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 			case FormPackage.ACTION_FIELD: return createActionField();
 			case FormPackage.TEXT_FIELD: return createTextField();
 			case FormPackage.SEARCH_FORM: return createSearchForm();
-			case FormPackage.NUMERIC_FIELD: return createNumericField();
+			case FormPackage.NUMERICAL_FIELD: return createNumericalField();
 			case FormPackage.SEARCH_OPERATOR_CONFIGURATION: return createSearchOperatorConfiguration();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -143,6 +143,18 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 				return createChoiceWidgetTypeFromString(eDataType, initialValue);
 			case FormPackage.MODEL_CHOICE_WIDGET_TYPE:
 				return createModelChoiceWidgetTypeFromString(eDataType, initialValue);
+			case FormPackage.FIELD_SEARCH_OPERATORS:
+				return createFieldSearchOperatorsFromString(eDataType, initialValue);
+			case FormPackage.CHAR_FIELD_SEARCH_OPERATORS:
+				return createCharFieldSearchOperatorsFromString(eDataType, initialValue);
+			case FormPackage.NUMERICAL_FIELD_SEARCH_OPERATORS:
+				return createNumericalFieldSearchOperatorsFromString(eDataType, initialValue);
+			case FormPackage.CHOICE_FIELD_SEARCH_OPERATORS:
+				return createChoiceFieldSearchOperatorsFromString(eDataType, initialValue);
+			case FormPackage.FILE_FIELD_SEARCH_OPERATORS:
+				return createFileFieldSearchOperatorsFromString(eDataType, initialValue);
+			case FormPackage.COMBINATION_OPERATORS:
+				return createCombinationOperatorsFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -164,6 +176,18 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 				return convertChoiceWidgetTypeToString(eDataType, instanceValue);
 			case FormPackage.MODEL_CHOICE_WIDGET_TYPE:
 				return convertModelChoiceWidgetTypeToString(eDataType, instanceValue);
+			case FormPackage.FIELD_SEARCH_OPERATORS:
+				return convertFieldSearchOperatorsToString(eDataType, instanceValue);
+			case FormPackage.CHAR_FIELD_SEARCH_OPERATORS:
+				return convertCharFieldSearchOperatorsToString(eDataType, instanceValue);
+			case FormPackage.NUMERICAL_FIELD_SEARCH_OPERATORS:
+				return convertNumericalFieldSearchOperatorsToString(eDataType, instanceValue);
+			case FormPackage.CHOICE_FIELD_SEARCH_OPERATORS:
+				return convertChoiceFieldSearchOperatorsToString(eDataType, instanceValue);
+			case FormPackage.FILE_FIELD_SEARCH_OPERATORS:
+				return convertFileFieldSearchOperatorsToString(eDataType, instanceValue);
+			case FormPackage.COMBINATION_OPERATORS:
+				return convertCombinationOperatorsToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -424,9 +448,9 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NumericField createNumericField() {
-		NumericFieldImpl numericField = new NumericFieldImpl();
-		return numericField;
+	public NumericalField createNumericalField() {
+		NumericalFieldImpl numericalField = new NumericalFieldImpl();
+		return numericalField;
 	}
 
 	/**
@@ -547,6 +571,126 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 	 * @generated
 	 */
 	public String convertModelChoiceWidgetTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FieldSearchOperators createFieldSearchOperatorsFromString(EDataType eDataType, String initialValue) {
+		FieldSearchOperators result = FieldSearchOperators.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertFieldSearchOperatorsToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CharFieldSearchOperators createCharFieldSearchOperatorsFromString(EDataType eDataType, String initialValue) {
+		CharFieldSearchOperators result = CharFieldSearchOperators.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertCharFieldSearchOperatorsToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NumericalFieldSearchOperators createNumericalFieldSearchOperatorsFromString(EDataType eDataType, String initialValue) {
+		NumericalFieldSearchOperators result = NumericalFieldSearchOperators.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertNumericalFieldSearchOperatorsToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ChoiceFieldSearchOperators createChoiceFieldSearchOperatorsFromString(EDataType eDataType, String initialValue) {
+		ChoiceFieldSearchOperators result = ChoiceFieldSearchOperators.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertChoiceFieldSearchOperatorsToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FileFieldSearchOperators createFileFieldSearchOperatorsFromString(EDataType eDataType, String initialValue) {
+		FileFieldSearchOperators result = FileFieldSearchOperators.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertFileFieldSearchOperatorsToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CombinationOperators createCombinationOperatorsFromString(EDataType eDataType, String initialValue) {
+		CombinationOperators result = CombinationOperators.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertCombinationOperatorsToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
