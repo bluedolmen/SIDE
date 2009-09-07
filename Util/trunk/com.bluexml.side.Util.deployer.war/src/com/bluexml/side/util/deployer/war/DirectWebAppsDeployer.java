@@ -15,7 +15,7 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 
 	public File getWorkingDir() throws Exception {
 		if (wkdir == null) {
-			throw new Exception("Only available after preProcess");
+			throw new Exception(Activator.Messages.getString("DirectWebAppsDeployer.1")); //$NON-NLS-1$
 		}
 		return wkdir;
 	}
@@ -25,22 +25,24 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 		boolean result = true;
 		// delete exploded webapps
 		if (getDeployedWebbAppFolder().exists()) {
+			addInfoLog(Activator.Messages.getString("WarDeployer.1"), Activator.Messages.getString("WarDeployer.2")+getDeployedWebbAppFolder().getName(), null); //$NON-NLS-1$ //$NON-NLS-2$
 			FileHelper.deleteFile(getDeployedWebbAppFolder(), false);
 		}
+
 		// unzip .war or .org if exist
 		if (getBackupWarFile().exists()) {
+			addInfoLog(Activator.Messages.getString("WarDeployer.1"), Activator.Messages.getString("DirectWebAppsDeployer.4")+getBackupWarFile().getName(), null); //$NON-NLS-1$ //$NON-NLS-2$
 			TrueZipHelper tzh2 = new TrueZipHelper(backupWarExt);
 			result = tzh2.copyFiles(getBackupWarFile(), getDeployedWebbAppFolder(), true);
 		} else if (getWarToPatchFile().exists()) {
+			addInfoLog(Activator.Messages.getString("WarDeployer.5"), Activator.Messages.getString("DirectWebAppsDeployer.6")+getWarToPatchFile().getName(), null); //$NON-NLS-1$ //$NON-NLS-2$
 			TrueZipHelper tzh2 = new TrueZipHelper(warToPatchExt);
 			result = tzh2.copyFiles(getWarToPatchFile(), getDeployedWebbAppFolder(), true);
 		} else {
-			System.out.println("can't clean because " + webappName + "." + backupWarExt + " not found");
-
-			throw new Exception("can't clean because " + webappName + "." + warToPatchExt + " not found");
+			throw new Exception(Activator.Messages.getString("DirectWebAppsDeployer.7") + webappName + "." + warToPatchExt + Activator.Messages.getString("DirectWebAppsDeployer.9")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		if (!result) {
-			throw new Exception("Unable to copy files");
+			throw new Exception(Activator.Messages.getString("DirectWebAppsDeployer.10")); //$NON-NLS-1$
 		}
 
 	}
@@ -52,7 +54,8 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 		}
 		if (fileToDeploy.isDirectory()) {
 			for (File f : fileToDeploy.listFiles(new FileExtensionFilter(packageExt))) {
-				File explodedPackage = new File(getWorkingDir(), f.getName().replaceAll("\\." + packageExt, ""));
+				addInfoLog(Activator.Messages.getString("WarDeployer.6"), Activator.Messages.getString("WarDeployer.7")+f.getName(), null); //$NON-NLS-1$ //$NON-NLS-2$
+				File explodedPackage = new File(getWorkingDir(), f.getName().replaceAll("\\." + packageExt, "")); //$NON-NLS-1$ //$NON-NLS-2$
 
 				explodedPackage.mkdirs();
 				// unzip files in tmp
@@ -72,11 +75,13 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 			this.wkdir = new File(fileToDeploy.getParent(), this.getClass().getName());
 
 		} else {
-			throw new Exception("fileToDeploy must be a directory !");
+			throw new Exception(Activator.Messages.getString("DirectWebAppsDeployer.15")); //$NON-NLS-1$
 		}
 		if (getWorkingDir().exists()) {
+			addInfoLog(Activator.Messages.getString("DirectWebAppsDeployer.5"), Activator.Messages.getString("WarDeployer.17")+getWorkingDir().getName(), null); //$NON-NLS-1$ //$NON-NLS-2$
 			FileHelper.deleteFile(getWorkingDir(), false);
 		}
+		addInfoLog(Activator.Messages.getString("DirectWebAppsDeployer.5"), Activator.Messages.getString("WarDeployer.19")+getWorkingDir().getName(), null); //$NON-NLS-1$ //$NON-NLS-2$
 		getWorkingDir().mkdirs();
 	}
 
@@ -93,7 +98,7 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 	public abstract Map<String, File> createMapper(File packageDirectory);
 
 	protected void addToMap(Map<String, File> map, String key, File ampRoot, String target) {
-		map.put(key.replace("/", File.separator), createTargetFolders(ampRoot, target.replace("/", File.separator)));
+		map.put(key.replace("/", File.separator), createTargetFolders(ampRoot, target.replace("/", File.separator))); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	protected File createTargetFolders(File ampRoot, String p) {
