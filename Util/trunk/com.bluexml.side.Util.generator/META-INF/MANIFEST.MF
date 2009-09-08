@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: S-IDE Generator Plug-in
 Bundle-SymbolicName: com.bluexml.side.Util.generator
-Bundle-Version: 1.0.30.v8733-20090902
+Bundle-Version: 1.0.31.v8944-20090908
 Bundle-Activator: com.bluexml.side.util.generator.Activator
 Bundle-Vendor: www.bluexml.com
 Require-Bundle: org.eclipse.ui,
