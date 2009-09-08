@@ -81,11 +81,9 @@ public class ClassInitialization {
 		Collection<FormElement> c = new ArrayList<FormElement>();
 
 		if (cl != null) {
-			Collection<Clazz> listClazz = new ArrayList<Clazz>();
-			listClazz = ClassDiagramUtils.getInheritedClazzs(cl);
-			for (Clazz clazz : listClazz) {
+			Clazz clazz = cl;
 				// Attributes
-				for (Attribute att : clazz.getAttributes()) {
+				for (Attribute att : clazz.getAllInheritedAttributes()) {
 					Field field = null;
 					field = ClassDiagramUtils.getFieldForAttribute(att);
 					if (field != null) {
@@ -94,7 +92,7 @@ public class ClassInitialization {
 				}
 
 				// Aspects
-				for (Aspect asp : clazz.getAspects()) {
+				for (Aspect asp : clazz.getAllAspects()) {
 					FormAspect fa = FormFactory.eINSTANCE.createFormAspect();
 					fa.setRef(asp);
 					fa.setId(asp.getName());
@@ -124,7 +122,7 @@ public class ClassInitialization {
 					c.add(field);
 				}
 			}
-		}
+
 		return c;
 	}
 }

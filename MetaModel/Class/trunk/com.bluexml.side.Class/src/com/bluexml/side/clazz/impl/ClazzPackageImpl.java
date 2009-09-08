@@ -802,6 +802,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 
 		addEOperation(clazzEClass, this.getAssociationEnd(), "getTargetAssociationEnds", 0, -1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(clazzEClass, this.getAspect(), "getAllAspects", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(associationEClass, Association.class, "Association", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAssociation_AssociationType(), this.getAssociationType(), "associationType", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssociation_FirstEnd(), this.getAssociationEnd(), null, "firstEnd", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1067,6 +1069,12 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   new String[] {
 			 "body", "AssociationEnd.allInstances() -> select (ae | ae.navigable and ae.linkedClass = self)",
 			 "description", "returns association ends where this clazz is target"
+		   });		
+		addAnnotation
+		  (clazzEClass.getEOperations().get(19), 
+		   source, 
+		   new String[] {
+			 "body", "self.aspects->asSet()->union(self.getInheritedClasses()->asSet().aspects)"
 		   });				
 		addAnnotation
 		  (associationEClass, 
@@ -1172,7 +1180,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * @generated
 	 */
 	protected void createInternalDocAnnotations() {
-		String source = "InternalDoc";																																																															
+		String source = "InternalDoc";																																																																
 		addAnnotation
 		  (classCommentEClass, 
 		   source, 
@@ -1200,7 +1208,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "ClassWithTwoAttributesSameName InheritanceCycle"
-		   });																									
+		   });																										
 		addAnnotation
 		  (associationEClass, 
 		   source, 

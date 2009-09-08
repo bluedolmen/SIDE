@@ -927,6 +927,43 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Aspect> getAllAspects() {
+		if (getAllAspectsBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(19);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllAspectsBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllAspectsBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Aspect> result = (Collection<Aspect>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Aspect>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllAspects <em>Get All Aspects</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllAspects
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllAspectsBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {

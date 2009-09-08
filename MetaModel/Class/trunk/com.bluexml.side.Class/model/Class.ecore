@@ -180,6 +180,11 @@
         <details key="description" value="returns association ends where this clazz is target"/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="getAllAspects" upperBound="-1" eType="#//Aspect">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.aspects->asSet()->union(self.getInheritedClasses()->asSet().aspects)"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
         eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//OperationComponent"
         containment="true"/>

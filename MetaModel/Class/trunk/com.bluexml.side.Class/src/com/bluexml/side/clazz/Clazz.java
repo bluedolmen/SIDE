@@ -315,5 +315,14 @@ public interface Clazz extends AbstractClass {
 	 * @generated
 	 */
 	EList<AssociationEnd> getTargetAssociationEnds();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.aspects->asSet()->union(self.getInheritedClasses()->asSet().aspects)'"
+	 * @generated
+	 */
+	EList<Aspect> getAllAspects();
 		
 } // Clazz
