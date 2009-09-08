@@ -72,8 +72,10 @@ public class RefreshOutlineAction extends Action implements
 			Object object = objects.next();
 			if (object instanceof FormContainer) {
 				selectedObject = (FormContainer) object;
-				XMIResource xmiRessource = (XMIResource)((EObject)object).eResource();;
-				fileURI = xmiRessource.getURI();
+				XMIResource xmiRessource = (XMIResource)((EObject)object).eResource();
+				if (xmiRessource != null) {
+					fileURI = xmiRessource.getURI();
+				}
 			} else {
 				return false;
 			}
@@ -81,7 +83,7 @@ public class RefreshOutlineAction extends Action implements
 
 		return selectedObject != null;
 	}
-	
+
 	/**
 	 * public boolean updateSelection(IStructuredSelection selection) {
 		fileURI = null;
@@ -108,7 +110,7 @@ public class RefreshOutlineAction extends Action implements
 			EcorePlugin.INSTANCE.log(e);
 		}
 	}
-	
+
 	private static final IGenFilter genFilter = new IGenFilter() {
 		public boolean filter(java.io.File script, IFile targetFile, EObject object) throws CoreException {
 			return true;
@@ -117,104 +119,106 @@ public class RefreshOutlineAction extends Action implements
 
 	@SuppressWarnings("deprecation")
 	private void doAction(URI uri) throws CoreException, FactoryException, IOException {
-		String metamodelURI = "http://www.kerblue.org/form/1.0";
-		OutlineViewService.setNameOfSelectedForm(((FormContainer)selectedObject).getId());
-		
-		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().saveAllEditors(true);
-		// References to files in the project
-		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-		// Temporary project
-		IProject tmpProject = myWorkspaceRoot.getProject(".form");
+		if (uri != null) {
+			String metamodelURI = "http://www.kerblue.org/form/1.0";
+			OutlineViewService.setNameOfSelectedForm(((FormContainer)selectedObject).getId());
 
-		// create and open if necessary
-		if (!tmpProject.exists()) {
-			tmpProject.create(null);
+			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().saveAllEditors(true);
+			// References to files in the project
+			IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+			// Temporary project
+			IProject tmpProject = myWorkspaceRoot.getProject(".form");
+
+			// create and open if necessary
+			if (!tmpProject.exists()) {
+				tmpProject.create(null);
+			}
+			if (!tmpProject.isOpen()) {
+				tmpProject.open(null);
+			}
+
+			CChain chain = new CChain();
+
+			// Repository
+			Repository repository = ChainFactory.eINSTANCE.createRepository();
+			EFactory.eSet(chain, "repository", repository);
+
+			// Action Set
+			ActionSet actionSet = ChainFactory.eINSTANCE.createActionSet();
+			EFactory.eAdd(chain, "actions", actionSet);
+
+			// Model file
+			Model model = ChainFactory.eINSTANCE.createModel();
+			EFactory.eAdd(repository, "files", model);
+	 		IFile modelPath = (IFile) myWorkspaceRoot.findMember(uri.path().substring(10));
+			EFactory.eSet(model, "path", modelPath.getFullPath().toString());
+
+			// Target folder
+			Folder folder = ChainFactory.eINSTANCE.createFolder();
+
+			EFactory.eAdd(repository, "files", folder);
+			EFactory.eSet(folder, "path", modelPath.getFullPath().toString()+".out");
+
+			// Log
+			Log log = ChainFactory.eINSTANCE.createLog();
+			EFactory.eAdd(repository, "files", log);
+			EFactory.eSet(log, "path", modelPath.getFullPath().removeLastSegments(1).append(modelPath.getFullPath().removeFileExtension().lastSegment() + ".log.txt").toString());
+
+			// Metamodel file
+			EmfMetamodel pim = ChainFactory.eINSTANCE.createEmfMetamodel();
+			EFactory.eAdd(repository, "files", pim);
+			EFactory.eSet(pim, "path", metamodelURI);
+
+			List<String> templates = new ArrayList<String>();
+
+			templates.add("/com.bluexml.side.Form.edit.ui/src/com/bluexml/side/form/editor/views/default.mt");
+
+			for (String templateFile : templates) {
+				// Generator
+				Generator generator = ChainFactory.eINSTANCE.createGenerator();
+				EFactory.eAdd(repository, "files", generator);
+				EFactory.eSet(generator, "path", templateFile);
+
+				// Action
+				Generate gAction = ChainFactory.eINSTANCE.createGenerate();
+				EFactory.eAdd(actionSet, "actions", gAction);
+				EFactory.eSet(gAction, "folder", folder);
+				EFactory.eSet(gAction, "log", log);
+				EFactory.eSet(gAction, "metamodel", pim);
+				EFactory.eSet(gAction, "model", model);
+				EFactory.eSet(gAction, "generator", generator);
+			}
+
+			// Register the default resource factory -- only needed for
+			// stand-alone!
+			IFile fchain = tmpProject.getFile("form.chain");
+			URI chainURI = Resources.createPlatformResourceURI(fchain.getFullPath().toString());
+			ResourceSet resourceSet = new ResourceSetImpl();
+			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
+			Resource chainResource = resourceSet.createResource(chainURI);
+			chainResource.getContents().add(chain);
+			chain.setFile(fchain);
+			chainResource.save(Collections.EMPTY_MAP);
+
+			chain.launch(genFilter, new NullProgressMonitor(), LaunchManager.create("run", true));
+
+			//Update Outline View
+			IFolder output_folder = (IFolder) myWorkspaceRoot.findMember(modelPath.getFullPath().toString()+".out");
+			IFile output_file = (IFile) output_folder.members()[0];
+			InputStream is = output_file.getContents();
+			BufferedInputStream bis = new BufferedInputStream(is);
+			DataInputStream dis = new DataInputStream(bis);
+
+			String content = "";
+			while (dis.available() != 0) {
+				content += dis.readLine();
+			}
+			OutlineHTMLView v = (OutlineHTMLView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("com.bluexml.view.OutlineHTMLView");
+			v.setContent(content);
+
+			IProject myproject = myWorkspaceRoot.getProject(".form");
+			myproject.delete(true, new NullProgressMonitor());
 		}
-		if (!tmpProject.isOpen()) {
-			tmpProject.open(null); 
-		}
-
-		CChain chain = new CChain();
-
-		// Repository
-		Repository repository = ChainFactory.eINSTANCE.createRepository();
-		EFactory.eSet(chain, "repository", repository);
-
-		// Action Set
-		ActionSet actionSet = ChainFactory.eINSTANCE.createActionSet();
-		EFactory.eAdd(chain, "actions", actionSet);
-
-		// Model file
-		Model model = ChainFactory.eINSTANCE.createModel();
-		EFactory.eAdd(repository, "files", model);
- 		IFile modelPath = (IFile) myWorkspaceRoot.findMember(uri.path().substring(10));
-		EFactory.eSet(model, "path", modelPath.getFullPath().toString());
-
-		// Target folder
-		Folder folder = ChainFactory.eINSTANCE.createFolder();
-
-		EFactory.eAdd(repository, "files", folder);
-		EFactory.eSet(folder, "path", modelPath.getFullPath().toString()+".out");
-
-		// Log
-		Log log = ChainFactory.eINSTANCE.createLog();
-		EFactory.eAdd(repository, "files", log);
-		EFactory.eSet(log, "path", modelPath.getFullPath().removeLastSegments(1).append(modelPath.getFullPath().removeFileExtension().lastSegment() + ".log.txt").toString());
-
-		// Metamodel file
-		EmfMetamodel pim = ChainFactory.eINSTANCE.createEmfMetamodel();
-		EFactory.eAdd(repository, "files", pim);
-		EFactory.eSet(pim, "path", metamodelURI);
-
-		List<String> templates = new ArrayList<String>();
-
-		templates.add("/com.bluexml.side.Form.edit.ui/src/com/bluexml/side/form/editor/views/default.mt");
-
-		for (String templateFile : templates) {
-			// Generator
-			Generator generator = ChainFactory.eINSTANCE.createGenerator();
-			EFactory.eAdd(repository, "files", generator);
-			EFactory.eSet(generator, "path", templateFile);
-
-			// Action
-			Generate gAction = ChainFactory.eINSTANCE.createGenerate();
-			EFactory.eAdd(actionSet, "actions", gAction);
-			EFactory.eSet(gAction, "folder", folder);
-			EFactory.eSet(gAction, "log", log);
-			EFactory.eSet(gAction, "metamodel", pim);
-			EFactory.eSet(gAction, "model", model);
-			EFactory.eSet(gAction, "generator", generator);
-		}
-
-		// Register the default resource factory -- only needed for
-		// stand-alone!
-		IFile fchain = tmpProject.getFile("form.chain");
-		URI chainURI = Resources.createPlatformResourceURI(fchain.getFullPath().toString());
-		ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
-		Resource chainResource = resourceSet.createResource(chainURI);
-		chainResource.getContents().add(chain);
-		chain.setFile(fchain);
-		chainResource.save(Collections.EMPTY_MAP);
-
-		chain.launch(genFilter, new NullProgressMonitor(), LaunchManager.create("run", true));
-
-		//Update Outline View
-		IFolder output_folder = (IFolder) myWorkspaceRoot.findMember(modelPath.getFullPath().toString()+".out");
-		IFile output_file = (IFile) output_folder.members()[0];
-		InputStream is = output_file.getContents();
-		BufferedInputStream bis = new BufferedInputStream(is);
-		DataInputStream dis = new DataInputStream(bis);
-		
-		String content = "";
-		while (dis.available() != 0) {
-			content += dis.readLine();
-		}
-		OutlineHTMLView v = (OutlineHTMLView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("com.bluexml.view.OutlineHTMLView");
-		v.setContent(content);
-		
-		IProject myproject = myWorkspaceRoot.getProject(".form");
-		myproject.delete(true, new NullProgressMonitor());
 	}
 
 	@Override
