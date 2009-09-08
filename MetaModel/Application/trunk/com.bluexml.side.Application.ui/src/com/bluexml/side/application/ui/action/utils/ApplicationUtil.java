@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -323,9 +324,14 @@ public class ApplicationUtil {
 	 * @return
 	 */
 	public static boolean validate(EObject eo) {
+		boolean result = true;
 		Diagnostician diag = new Diagnostician();
 		BasicDiagnostic diagnostics = diag.createDefaultDiagnostic(eo);
-		return diag.validate(eo, diagnostics);
+		diag.validate(eo, diagnostics);
+		if (diagnostics.getSeverity() == Diagnostic.ERROR) {
+			result = false;
+		}
+		return result;
 	}
 
 	public static boolean validate(IFile modelFile) throws Exception {
