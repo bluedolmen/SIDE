@@ -15,6 +15,11 @@
  * Foundation, Inc., 59 Temple Place, Boston, MA 02111.
  ******************************************************************************/
 package com.bluexml.side.clazz.generator.alfresco.services;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.emf.common.util.EList;
+
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.common.DataType;
 
@@ -23,7 +28,7 @@ import fr.obeo.acceleo.gen.template.eval.ENodeCastException;
 
 public class AttributeServices {
 
-	public String getPropertyType(ENode node) throws ENodeCastException {
+	public String getPropertyType(ENode node) throws Exception {
 		if (node.getEObject() instanceof Attribute) {
 			Attribute object = (Attribute) node.getEObject();
 			if (object.getTyp() == DataType.BOOLEAN) {
@@ -45,7 +50,8 @@ public class AttributeServices {
 			} else if (object.getTyp() == DataType.LONG) {
 				return "d:long";
 			} else if (object.getTyp() == DataType.OBJECT) {
-				return "d:content";
+				//return "d:content";
+				return "d:any";
 			} else if (object.getTyp() == DataType.SHORT) {
 				return "d:int";
 			} else if (object.getTyp() == DataType.STRING) {
@@ -54,6 +60,7 @@ public class AttributeServices {
 				return "d:datetime";
 			}
 		}
-		return "d:any";
+		throw new Exception ("node must be an attribute");
 	}
+	
 }
