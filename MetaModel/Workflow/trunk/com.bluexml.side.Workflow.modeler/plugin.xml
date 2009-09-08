@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 <plugin>
+   <extension-point id="action" name="Transition Action" schema="schema/action.exsd"/>
 
    <extension point="org.eclipse.ui.editors">
       <editor
@@ -120,5 +121,20 @@
 		</page>
     	
 	</extension>
+ <extension
+       point="com.bluexml.side.Workflow.modeler.action">
+    <action
+          code="resources/actions/alfresco/sendemail.js"
+          icon="icons/sendEMail.png"
+          name="Send e-mail"
+          technology="Alfresco">
+    </action>
+    <action
+          code="resources/actions/alfresco/createNewContent.js"
+          icon="icons/document-new.png"
+          name="Create new content"
+          technology="Alfresco">
+    </action>
+ </extension>
 	
 </plugin>

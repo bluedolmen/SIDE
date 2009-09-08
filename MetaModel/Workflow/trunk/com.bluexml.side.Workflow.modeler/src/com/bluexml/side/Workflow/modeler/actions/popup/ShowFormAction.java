@@ -34,6 +34,7 @@ import org.topcased.modeler.edit.EMFGraphNodeEditPart;
 
 import com.bluexml.side.Workflow.modeler.WorkflowImageRegistry;
 import com.bluexml.side.Workflow.modeler.WorkflowPlugin;
+import com.bluexml.side.Workflow.modeler.editor.WorkflowEditor;
 import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.WorkflowFormCollection;
@@ -54,6 +55,10 @@ public class ShowFormAction extends WorkbenchPartAction {
 
 	@Override
 	protected boolean calculateEnabled() {
+		if (selectedObject == null) {
+			WorkflowEditor editor = (WorkflowEditor) getWorkbenchPart();
+			setSelection(editor.getSelection());
+		}
 		return (selectedObject != null);
 	}
 

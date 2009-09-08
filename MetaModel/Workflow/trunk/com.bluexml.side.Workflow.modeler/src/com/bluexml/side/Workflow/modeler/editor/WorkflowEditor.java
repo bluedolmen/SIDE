@@ -108,7 +108,7 @@ public class WorkflowEditor extends Modeler {
 	@Override
 	protected ContextMenuProvider getContextMenuProvider(
 			ModelerGraphicalViewer viewer) {
-		return new ModelerContextMenuProvider(viewer, getActionRegistry());
+		return new ModelerContextMenuProvider(this, viewer, getActionRegistry());
 	}
 	
 	@Override
@@ -116,9 +116,9 @@ public class WorkflowEditor extends Modeler {
 		super.selectionChanged(part, selection);
 		
 		ActionRegistry registry = getActionRegistry();
-		ShowFormAction action = (ShowFormAction) registry.getAction(ShowFormAction.ID);
-		if (action != null)
-			action.setSelection(selection);
+		ShowFormAction SFaction = (ShowFormAction) registry.getAction(ShowFormAction.ID);
+		if (SFaction != null)
+			SFaction.setSelection(selection);
 	}
 
 }
