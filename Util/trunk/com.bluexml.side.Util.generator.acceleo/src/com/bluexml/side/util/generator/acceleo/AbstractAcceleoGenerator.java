@@ -4,7 +4,6 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -20,7 +19,6 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -46,7 +44,6 @@ import fr.obeo.acceleo.chain.Repository;
 import fr.obeo.acceleo.ecore.factories.EFactory;
 import fr.obeo.acceleo.gen.IGenFilter;
 import fr.obeo.acceleo.gen.template.eval.LaunchManager;
-import fr.obeo.acceleo.tools.resources.Resources;
 
 public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 	protected String mergedFilePath = "mergedFile";
@@ -60,7 +57,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 
 	/**
 	 * use to give an version number to this generation package
-	 *
+	 * 
 	 * @return
 	 */
 	public String getVersioNumber() {
@@ -106,10 +103,13 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 				// System.out.println("getClass().getName(): " +
 				// getClass().getName());
 				setTEMP_FOLDER("generator_" + getClass().getName() + File.separator + rootName);
-				// clean directory before generate, needed if cleaning option is not enable
+				// clean directory before generate, needed if cleaning option is
+				// not enable
 				File wkdir = getTemporarySystemFile();
 				if (wkdir.exists()) {
-					boolean result = FileHelper.deleteFile(getTemporarySystemFile());
+					boolean result = FileHelper.deleteFile(wkdir);
+					// update IFolder
+					IFileHelper.refreshFolder(wkdir);
 					if (!result) {
 						addWarningLog("acceleo generator", "working directory not cleaning before generation", "");
 					}
@@ -185,14 +185,14 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		// System.out.println("folder: " + folder.getPath());
 
 		EFactory.eAdd(repository, "files", folder);
-		String path = getTemporaryFolder();
-		if (path == null || path.length() == 0) {
+		String generationPath = getTemporaryFolder();
+		if (generationPath == null || generationPath.length() == 0) {
 			addErrorLog("No Target path setted.", "There is no target path setted for generation.", null);
 			throw new Exception("Target path must be setted !");
 		}
 
-		new File(IFileHelper.getSystemFolderPath(path)).mkdirs();
-		EFactory.eSet(folder, "path", path);
+		new File(IFileHelper.getSystemFolderPath(generationPath)).mkdirs();
+		EFactory.eSet(folder, "path", generationPath);
 
 		// Log
 		Log log = ChainFactory.eINSTANCE.createLog();
@@ -226,7 +226,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		// stand-alone!
 		IFile fchain = tmpProject.getFile("side_generation.chain");
 		// System.out.println("fchain.getFullPath(): " + fchain.getFullPath());
-		URI chainURI = Resources.createPlatformResourceURI(fchain.getFullPath().toString());
+		//URI chainURI = Resources.createPlatformResourceURI(fchain.getFullPath().toString());
 		// System.out.println("log1");
 		ResourceSet resourceSet = new ResourceSetImpl();
 		// System.out.println("log2");
@@ -243,16 +243,20 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		// System.out.println("BeforeGen");
 		// AbstractGenerator.printConfiguration();
 		// System.out.println("log8");
-		try {
-			chain.launch(genFilter, new NullProgressMonitor(), LaunchManager.create("run", false));
-		} catch (CoreException e) {
-			e.printStackTrace();
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
+		// try {
+		chain.launch(genFilter, new NullProgressMonitor(), LaunchManager.create("run", false));
+		// } catch (CoreException e) {
+		// e.printStackTrace();
+		// } catch (Exception e1) {
+		// e1.printStackTrace();
+		// }
 		// System.out.println("log9");
 		// System.out.println("AfterGen");
 		// AbstractGenerator.printConfiguration();
+
+		// files is generated we must update folder before do anything else
+
+		
 		generatedFiles = (List<IFile>) chain.getGeneratedFiles();
 		// List<?> generatedFiles = chain.getGeneratedFiles();
 		// System.out.println("log10");
@@ -274,14 +278,15 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		return result;
 	}
 
-	public void filter(IFile file) {
+	public void filter(IFile file) throws Exception {
 
 		// System.out.println("filter file: " + file.toString());
 
 		BufferedReader br = null;
 		PrintWriter pw = null;
 		try {
-			File source = file.getLocation().toFile();
+			File source = IFileHelper.getFile(file);
+			System.out.println("FILTER :: file :" + source.getName());
 
 			InputStream is = new FileInputStream(source);
 			BufferedInputStream bis = new BufferedInputStream(is);
@@ -301,6 +306,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 			destination.renameTo(source);
 		} catch (Exception e) {
 			e.printStackTrace();
+
 			try {
 				pw.close();
 			} catch (Throwable e1) {
@@ -309,6 +315,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 				br.close();
 			} catch (Throwable e1) {
 			}
+			throw new Exception("Error in generation process :", e);
 		}
 	}
 
