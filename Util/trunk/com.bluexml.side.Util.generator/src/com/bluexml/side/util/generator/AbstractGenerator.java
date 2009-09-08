@@ -64,6 +64,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Return if this generator is a documentation generator.
+	 * 
 	 * @return
 	 */
 	public boolean isDocumentationGenerator() {
@@ -71,6 +72,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	}
 
 	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, DependencesManager dm) throws Exception {
+
 		generationParameters = generationParameters_;
 		generatorOptions = generatorOptions_;
 		configurationParameters = configurationParameters_;
@@ -78,20 +80,38 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		id = configurationParameters_.get("generatorId");
 		log = new SIDELog(configurationParameters_.get("generatorName"), this.id, configurationParameters_.get("technologyVersionName"), configurationParameters_.get("technologyName"), configurationParameters_.get("metaModelName"), new Date(), LogType.GENERATION);
 		this.dm = dm;
+
+		// check parameters add warning if not set or empty
+		// check generationParameters :
+		for (Map.Entry<String, String> iterable_element : generationParameters.entrySet()) {
+			if (iterable_element.getValue() == null || iterable_element.getValue().length() == 0) {
+				addWarningLog("Generation Parameter not set", "parameter (" + iterable_element.getKey() + ") has not been set generation may be corrupted", "");
+			}
+		}
+		// for (Map.Entry<String, String> iterable_element :
+		// configurationParameters.entrySet()) {
+		// if (iterable_element.getValue() != null &&
+		// iterable_element.getValue().length() > 0) {
+		// addWarningLog("Configuration Parameter not set",
+		// "this parameter ("+iterable_element.getKey()+") has not been set generation may be corrupted",
+		// "");
+		// }
+		// }
+
 	}
 
 	/**
 	 * This method must be call after a successful generation to put an XML file
 	 * into the gen path that will be used to know what have been deployed.
 	 * Mainly use for log purpose.
-	 *
+	 * 
 	 * @throws CoreException
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
 	public final void createStampFile() throws CoreException, FileNotFoundException, IOException {
 		IFileHelper.refreshFolder(getTargetPath());
-		IFolder	ff = IFileHelper.createFolder(getTargetPath() + File.separator + techVersion);
+		IFolder ff = IFileHelper.createFolder(getTargetPath() + File.separator + techVersion);
 		Element racine = new Element("toDeploy"); //$NON-NLS-1$
 		Attribute classe = new Attribute("id", this.id); //$NON-NLS-1$
 		racine.setAttribute(classe);
@@ -103,19 +123,20 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Add log to know on each model have been launch generation
+	 * 
 	 * @param name
 	 */
-	public void addModelLog (String name){
+	public void addModelLog(String name) {
 		log.addModel(name);
 	}
 
-	public void addModelLog (List<String> names){
+	public void addModelLog(List<String> names) {
 		for (String name : names) {
 			addModelLog(name);
 		}
 	}
 
-	public void addModelsLog (List<IFile> models){
+	public void addModelsLog(List<IFile> models) {
 		for (IFile model : models) {
 			addModelLog(model.getName());
 		}
@@ -123,7 +144,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Add a Log
-	 *
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -139,7 +160,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Add an Error Log
-	 *
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -150,7 +171,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Add an error log using a stracktrace instead of a string description
-	 *
+	 * 
 	 * @param title
 	 * @param stackTrace
 	 * @param uri
@@ -167,7 +188,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Add a warning log
-	 *
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -183,7 +204,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Add information log
-	 *
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -199,7 +220,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	/**
 	 * Add a service log (service : a webpage or a file that can be acceeded by
 	 * user to test application).
-	 *
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -214,7 +235,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Use to log generated file
-	 *
+	 * 
 	 * @param path
 	 * @param description
 	 * @param uri
@@ -237,7 +258,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Return the log target file (only generator)
-	 *
+	 * 
 	 * @return
 	 */
 	protected String getLogFile() {
@@ -247,7 +268,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Return the absolute path to the generation target path
-	 *
+	 * 
 	 * @return
 	 */
 	protected final String getTargetSystemPath() {
@@ -257,7 +278,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Return the generation target folder (as File).
-	 *
+	 * 
 	 * @return
 	 */
 	protected final File getTargetSystemFile() {
@@ -267,7 +288,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Return the target path (workspace path)
-	 *
+	 * 
 	 * @return
 	 */
 	public final String getTargetPath() {
@@ -297,7 +318,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Return the absolute path for temp folder of generation
-	 *
+	 * 
 	 * @return
 	 */
 	protected final String getTemporarySystemFolder() {
@@ -310,7 +331,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * Return the tempory path to temp folder of generation (wokspace path)
-	 *
+	 * 
 	 * @return
 	 */
 	protected final String getTemporaryFolder() {
@@ -333,7 +354,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 
 	/**
 	 * This method check if the user have the license to use this component.
-	 *
+	 * 
 	 * @return true if the component can be used.
 	 */
 	public boolean check() {
@@ -343,12 +364,12 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	/**
 	 * use DependencesManager to get files required by the generated package and
 	 * copy them in the technology version folder
-	 *
+	 * 
 	 * @throws Exception
 	 */
 	public void addDependences() throws Exception {
 		// get dependences
-		dm.copyDependencies(getTemporarySystemFile(),getTargetSystemFile());
+		dm.copyDependencies(getTemporarySystemFile(), getTargetSystemFile());
 		// dependences packages is now with other resources in the target folder
 	}
 }

@@ -41,7 +41,9 @@ import com.bluexml.side.view.generator.facetmap.utils.FacetmapConstants;
 public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator implements FacetmapConstants {
 	public static String GENERATOR_CODE = "CODE_GED_G_C_FACETMAP_2";
 	public static String ALFRESCO_URL_KEY = "alfresco.url";
+	public static String ALFRESCO_URL_defaultValue = "http://localhost:8080/alfresco";
 	public static String ALFRESCO_SHARE_URL_KEY = "alfresco.share.url";
+	public static String ALFRESCO_SHARE_URL_defaultValue = "http://localhost:8080/share";
 	public static String MMUri = "http://www.kerblue.org/view/1.0";
 
 	public ViewFacetmapGenerator() {
@@ -97,15 +99,15 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 		return configurationParameters.get(paramName);
 	}
 
-	public Collection<IFile> complete(){
+	public Collection<IFile> complete() throws Exception {
 		if (groupedModels.entrySet().size() > 1)
-			try{
+			try {
 				throw new Exception("Error too many root packages for facetmap.");
 			} catch (Exception e) {
 				addErrorLog("Too many facetmaps", e.getStackTrace(), null);
 			}
 		setTEMP_FOLDER("generator_" + getClass().getName());
-		//Adding file generated to log
+		// Adding file generated to log
 		generatedFiles.addAll(buildPackages(groupedModels.keySet().toArray()[0].toString()));
 		for (IFile f : generatedFiles) {
 			addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());
@@ -117,38 +119,51 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 		} catch (Exception e) {
 			addErrorLog("Error getting dependancies", e.getStackTrace(), null);
 		}
-		//Adding services to log
-		//CMIS
-			String alfrescoUrl = generationParameters.get(ALFRESCO_URL_KEY);
-			if (!alfrescoUrl.endsWith("/"))
+		// Adding services to log
+		// CMIS
+		String alfrescoUrl = generationParameters.get(ALFRESCO_URL_KEY);
+		if (alfrescoUrl != null && alfrescoUrl.length() > 0) {
+			if (!alfrescoUrl.endsWith("/")) {
 				alfrescoUrl += "/";
-			String cmisUri = alfrescoUrl + "service/com/bluexml/side/facetMap/doclist_user.xml";
-			addServiceLog("CMIS webscript","The webscript used for updating facetmap, it is used to list all documents from a certain type and retreive their metadatas.", cmisUri);
-		//Dashlets
-			String shareUrl = generationParameters.get(ALFRESCO_SHARE_URL_KEY);
-			if (!shareUrl.endsWith("/"))
+			}
+		} else {
+			alfrescoUrl = ALFRESCO_URL_defaultValue;
+			addWarningLog("missing parameter", "alfresco url is not set ! use default :" + alfrescoUrl, "");
+		}
+		String cmisUri = alfrescoUrl + "service/com/bluexml/side/facetMap/doclist_user.xml";
+		addServiceLog("CMIS webscript", "The webscript used for updating facetmap, it is used to list all documents from a certain type and retreive their metadatas.", cmisUri);
+		// Dashlets
+		String shareUrl = generationParameters.get(ALFRESCO_SHARE_URL_KEY);
+		if (shareUrl != null && shareUrl.length() > 0) {
+			if (!shareUrl.endsWith("/")) {
 				shareUrl += "/";
-			String dashletContentUri = shareUrl + "service/com/bluexml/side/facetMap/doclist_user/content";
-			String dashletFacetstUri = shareUrl + "service/com/bluexml/side/facetMap/doclist_user/facet";
-			addServiceLog("Facetmap Dashlet for Content","An Alfresco share sashlet that shows the results of the faceted navigation.", dashletContentUri);
-			addServiceLog("Facetmap Dashlet for Facets","An Alfresco share sashlet that shows the facets of the faceted navigation.", dashletFacetstUri);
-			
+			}
+		} else {
+			// set to default value
+			shareUrl = ALFRESCO_SHARE_URL_defaultValue;
+			addWarningLog("missing parameter", "alfresco share url is not set ! use default :" + shareUrl, "");
+		}
+		String dashletContentUri = shareUrl + "service/com/bluexml/side/facetMap/doclist_user/content";
+		String dashletFacetstUri = shareUrl + "service/com/bluexml/side/facetMap/doclist_user/facet";
+		addServiceLog("Facetmap Dashlet for Content", "An Alfresco share sashlet that shows the results of the faceted navigation.", dashletContentUri);
+		addServiceLog("Facetmap Dashlet for Facets", "An Alfresco share sashlet that shows the facets of the faceted navigation.", dashletFacetstUri);
+
 		return generatedFiles;
 	}
 
 	@Override
-	public Collection<IFile> buildPackages(String modelId){
+	public Collection<IFile> buildPackages(String modelId) {
 		String folder = IFileHelper.getSystemFolderPath(getTemporaryFolder() + FILESEP + modelId) + FILESEP;
 		// Destinations
 		String destFacets = folder + "zip" + FILESEP + WEBAPP_FACETS;
 		String destContent = folder + "zip" + FILESEP + WEBAPP_CONTENT;
-		try{
-		// Copy
-		FileHelper.copyFiles(new File(folder + "common"), new File(destFacets), true);
-		FileHelper.copyFiles(new File(folder + "common"), new File(destContent), true);
-		FileHelper.copyFiles(new File(folder + "facets"), new File(destFacets), true);
-		FileHelper.copyFiles(new File(folder + "content"), new File(destContent), true);
-		}catch (IOException e){
+		try {
+			// Copy
+			FileHelper.copyFiles(new File(folder + "common"), new File(destFacets), true);
+			FileHelper.copyFiles(new File(folder + "common"), new File(destContent), true);
+			FileHelper.copyFiles(new File(folder + "facets"), new File(destFacets), true);
+			FileHelper.copyFiles(new File(folder + "content"), new File(destContent), true);
+		} catch (IOException e) {
 			addErrorLog("Moving generated files error", e.getStackTrace(), null);
 		}
 		// Zip
@@ -156,10 +171,10 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 		new File(zipFolder).mkdirs();
 		File zipFacets = new File(zipFolder + WEBAPP_FACETS + ".zip");
 		File zipContent = new File(zipFolder + WEBAPP_CONTENT + ".zip");
-		try{
+		try {
 			ZipManager.zip(new File(destFacets), zipFacets, false);
 			ZipManager.zip(new File(destContent), zipContent, false);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			addErrorLog("Packaging generated files error", e.getStackTrace(), null);
 		}
 		// Creating file collection
