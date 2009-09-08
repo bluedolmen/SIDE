@@ -15,6 +15,7 @@ fi
 
 # delete workingcopy repository
 rm -rf $TARGET_WORKSPACE/workingcopy
+rm -rf $MAVEN_TARGET
 
 mkdir $MAVEN_TARGET
 
