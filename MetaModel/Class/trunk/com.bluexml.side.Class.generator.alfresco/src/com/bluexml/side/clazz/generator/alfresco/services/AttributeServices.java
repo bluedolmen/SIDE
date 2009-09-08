@@ -15,16 +15,10 @@
  * Foundation, Inc., 59 Temple Place, Boston, MA 02111.
  ******************************************************************************/
 package com.bluexml.side.clazz.generator.alfresco.services;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.eclipse.emf.common.util.EList;
-
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.common.DataType;
 
 import fr.obeo.acceleo.gen.template.eval.ENode;
-import fr.obeo.acceleo.gen.template.eval.ENodeCastException;
 
 public class AttributeServices {
 
