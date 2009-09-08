@@ -450,7 +450,7 @@ public class Generate extends Thread {
 						addWarningText(Activator.Messages.getString("Generate.58", elem.getId())); //$NON-NLS-1$
 					}
 				}
-				String fileName = "gen_" + generator.getTechVersion() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+				String fileName = "gen_" + generator.getClass().getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
 				try {
 					LogSave.toXml(generator.getLog(), fileName, logPath + fileSeparator + "work" + fileSeparator);
 				} catch (Exception e) {
@@ -558,7 +558,7 @@ public class Generate extends Thread {
 						addWarningText(Activator.Messages.getString("Generate.57") + e.getMessage()); //$NON-NLS-1$
 					}
 
-					String fileName = "dep_" + deployer.getTechVersion() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+					String fileName = "dep_" + deployer.getClass().getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
 					try {
 						LogSave.toXml(deployer.getLog(), fileName, logPath + fileSeparator + "work" + fileSeparator);
 					} catch (Exception e) {
