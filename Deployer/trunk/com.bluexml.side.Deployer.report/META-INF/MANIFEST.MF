@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Report deployer Plug-in
 Bundle-SymbolicName: com.bluexml.side.Deployer.report;singleton:=true
-Bundle-Version: 1.0.4.v8336-20090817
+Bundle-Version: 1.0.5.v8944-20090908
 Bundle-Activator: com.bluexml.side.deployer.report.Activator
 Bundle-Vendor: www.bluexml.com
 Require-Bundle: org.eclipse.ui,
