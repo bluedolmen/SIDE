@@ -14,40 +14,27 @@
  ******************************************************************************/
 package com.bluexml.side.Workflow.modeler.diagram.figures;
 
-import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.LineBorder;
-import org.topcased.draw2d.figures.ComposedLabel;
-import org.topcased.draw2d.figures.EditableLabel;
+import org.eclipse.draw2d.PositionConstants;
+import org.eclipse.swt.graphics.Image;
 import org.topcased.draw2d.figures.ILabel;
-import org.topcased.draw2d.figures.Label;
-import org.topcased.draw2d.figures.ManFigure;
+import org.topcased.draw2d.figures.ILabelFigure;
 
 /**
- * @generated
+ * @_generated
  */
-public class SwimlaneFigure extends
-		org.topcased.draw2d.figures.GraphicWithLabelFigure {
+public class SwimlaneFigure extends ImageWithLabelFigure implements ILabelFigure {
 	/**
 	 * Constructor
 	 *
 	 * @_generated
 	 */
 	public SwimlaneFigure() {
-		super();
-		setBorder(new LineBorder());
+		super(new Image(null, SwimlaneFigure.class
+				.getResourceAsStream("img/agent.png")), PositionConstants.TOP);
 	}
 
-	@Override
-	protected IFigure createBodyFigure() {
-		// TODO : change with imageFigure using binary icon
-		ManFigure man = new ManFigure();
-		man.setSize(30, 30);
-		return man;
+	public ILabel getLabel() {
+		return label;
 	}
 
-	@Override
-	protected ILabel createLabel() {
-		return new ComposedLabel(new Label(), new EditableLabel(), new Label(),
-				false);
-	}
 }
