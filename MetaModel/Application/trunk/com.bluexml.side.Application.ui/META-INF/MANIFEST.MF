@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Application UI Plug-in
 Bundle-SymbolicName: com.bluexml.side.Application.ui;singleton:=true
-Bundle-Version: 1.0.55.v8917-20090907
+Bundle-Version: 1.0.56.v8985-20090908
 Bundle-Activator: com.bluexml.side.application.ui.Activator
 Bundle-Vendor: www.bluexml.com
 Require-Bundle: org.eclipse.ui,
