@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.View.generator.alfresco.feature" label="S-IDE Alfresco View Generator" version="1.0.6.v8690-20090901" provider-name="BLUEXML">
+<feature id="com.bluexml.side.View.generator.alfresco.feature" label="S-IDE Alfresco View Generator" version="1.0.7.v8944-20090908" provider-name="BLUEXML">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
@@ -12,6 +12,6 @@
     <import plugin="com.bluexml.side.Util.security" version="1.0.8" match="greaterOrEqual" />
     <import plugin="com.bluexml.side.Util.generator.alfresco" />
   </requires>
-  <plugin id="com.bluexml.side.View.generator.alfresco" download-size="0" install-size="0" version="1.0.6.v8690-20090901" unpack="false" />
+  <plugin id="com.bluexml.side.View.generator.alfresco" download-size="0" install-size="0" version="1.0.7.v8944-20090908" unpack="false" />
 </feature>
 
