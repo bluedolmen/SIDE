@@ -20,7 +20,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.resources,
  com.bluexml.side.Form;bundle-version="1.0.0",
  com.bluexml.side.Workflow;bundle-version="1.0.0",
- com.bluexml.side.Util.libs;bundle-version="1.0.11"
+ com.bluexml.side.Util.libs;bundle-version="1.0.11",
+ org.eclipse.ui.ide
 Export-Package: com.bluexml.side.form.clazz,
  com.bluexml.side.form.clazz.utils,
  com.bluexml.side.form.common,
