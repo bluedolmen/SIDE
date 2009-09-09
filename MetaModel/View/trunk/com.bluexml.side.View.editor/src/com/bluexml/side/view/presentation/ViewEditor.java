@@ -371,7 +371,7 @@ public class ViewEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected EContentAdapter problemIndicationAdapter = 
+	protected EContentAdapter problemIndicationAdapter =
 		new EContentAdapter() {
 			@Override
 			public void notifyChanged(Notification notification) {
@@ -565,7 +565,7 @@ public class ViewEditor
 			updateProblemIndication();
 		}
 	}
-  
+
 	/**
 	 * Updates the problems indication with the information described in the specified diagnostic.
 	 * <!-- begin-user-doc -->
@@ -884,7 +884,7 @@ public class ViewEditor
 	 * This creates a context menu for the viewer and adds a listener as well registering the menu for extension.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	protected void createContextMenuFor(StructuredViewer viewer) {
 		MenuManager contextMenu = new MenuManager("#PopUp");
@@ -899,6 +899,8 @@ public class ViewEditor
 		Transfer[] transfers = new Transfer[] { LocalTransfer.getInstance() };
 		viewer.addDragSupport(dndOperations, transfers, new ViewerDragAdapter(viewer));
 		viewer.addDropSupport(dndOperations, transfers, new EditingDomainViewerDropAdapter(editingDomain, viewer));
+
+		addDoubleClickEventListener(viewer);
 	}
 
 	/**
@@ -1489,7 +1491,7 @@ public class ViewEditor
 
 	/**
 	 * This returns whether something has been persisted to the URI of the specified resource.
-	 * The implementation uses the URI converter from the editor's resource set to try to open an input stream. 
+	 * The implementation uses the URI converter from the editor's resource set to try to open an input stream.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1608,10 +1610,10 @@ public class ViewEditor
 			getControl(getActivePage()).setFocus();
 		}
 	}
-	
+
 	/**
 	 * Add double click listener to show the properties view on double click
-	 * 
+	 *
 	 * @param viewer
 	 */
 	private void addDoubleClickEventListener(StructuredViewer viewer) {
