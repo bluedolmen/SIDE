@@ -1809,7 +1809,14 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "noSpecialCharacters"
-		   });																							
+		   });																	
+		addAnnotation
+		  (fieldEClass, 
+		   source, 
+		   new String[] {
+			 "warning", "mandatoryHiddenAndNoDefaultValue",
+			 "constraints", "mandatoryHiddenAndNoDefaultValue"
+		   });									
 		addAnnotation
 		  (formContainerEClass, 
 		   source, 
@@ -1862,6 +1869,12 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   new String[] {
 			 "body", "self.children->select(oclIsKindOf(Field)).oclAsType(Field)->union(self.children->select(oclIsKindOf(FormGroup)).oclAsType(FormGroup).getFields().oclAsType(Field)).oclAsType(Field)"
 		   });							
+		addAnnotation
+		  (fieldEClass, 
+		   source, 
+		   new String[] {
+			 "mandatoryHiddenAndNoDefaultValue", "self.initial.oclIsUndefined() or self.initial = \'\' implies self.mandatory = false or self.hidden = false"
+		   });			
 		addAnnotation
 		  (fieldEClass.getEOperations().get(0), 
 		   source, 
@@ -1918,7 +1931,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "name", "presentation"
-		   });																																																																																								
+		   });																																																																																										
 	}
 
 	public FormFactory getFormsFactory() {

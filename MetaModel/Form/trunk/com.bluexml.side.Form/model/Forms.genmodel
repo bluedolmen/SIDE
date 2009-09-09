@@ -21,13 +21,44 @@
       <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//TextWidgetType/RichTextEditor"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Forms.ecore#//ChoiceWidgetType">
-      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//ChoiceWidgetType/ListAll"/>
       <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//ChoiceWidgetType/ShowOne"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//ChoiceWidgetType/ListAll"/>
       <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//ChoiceWidgetType/Inline"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Forms.ecore#//ModelChoiceWidgetType">
       <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//ModelChoiceWidgetType/Select"/>
       <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//ModelChoiceWidgetType/Inline"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Forms.ecore#//FieldSearchOperators">
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//FieldSearchOperators/equals"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//FieldSearchOperators/empty"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Forms.ecore#//CharFieldSearchOperators">
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//CharFieldSearchOperators/contains"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//CharFieldSearchOperators/icontains"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//CharFieldSearchOperators/startsWith"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//CharFieldSearchOperators/istartsWith"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//CharFieldSearchOperators/endsWith"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//CharFieldSearchOperators/iendsWith"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Forms.ecore#//NumericalFieldSearchOperators">
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//NumericalFieldSearchOperators/between"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//NumericalFieldSearchOperators/below"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//NumericalFieldSearchOperators/above"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Forms.ecore#//ChoiceFieldSearchOperators">
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//ChoiceFieldSearchOperators/all"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//ChoiceFieldSearchOperators/oneOf"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//ChoiceFieldSearchOperators/none"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//ChoiceFieldSearchOperators/allBut"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Forms.ecore#//FileFieldSearchOperators">
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//FileFieldSearchOperators/fileType"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//FileFieldSearchOperators/contents"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Forms.ecore#//CombinationOperators">
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//CombinationOperators/and"/>
+      <genEnumLiterals ecoreEnumLiteral="Forms.ecore#//CombinationOperators/or"/>
     </genEnums>
     <genClasses image="false" ecoreClass="Forms.ecore#//FormElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//FormElement/label"/>
@@ -58,7 +89,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/style"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Forms.ecore#//Field/searchOperatorConfiguration"/>
       <genOperations ecoreOperation="Forms.ecore#//Field/getLabel"/>
-      <genOperations ecoreOperation="Forms.ecore#//Field/getProposedOperators"/>
+      <genOperations ecoreOperation="Forms.ecore#//Field/getInitialProposedOperators"/>
     </genClasses>
     <genClasses image="false" ecoreClass="Forms.ecore#//FormContainer">
       <genOperations ecoreOperation="Forms.ecore#//FormContainer/getLabel"/>
@@ -138,8 +169,9 @@
     </genClasses>
     <genClasses ecoreClass="Forms.ecore#//SearchForm">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Forms.ecore#//SearchForm/dataForm"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//SearchForm/combinationOperator"/>
     </genClasses>
-    <genClasses ecoreClass="Forms.ecore#//NumericField"/>
+    <genClasses ecoreClass="Forms.ecore#//NumericalField"/>
     <genClasses ecoreClass="Forms.ecore#//SearchOperatorConfiguration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//SearchOperatorConfiguration/defaultOperator"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//SearchOperatorConfiguration/proposedOperators"/>

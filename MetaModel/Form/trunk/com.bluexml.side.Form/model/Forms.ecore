@@ -78,6 +78,13 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The form has a list of fields which inherits of the 'Field' abstract element. A 'Field' is usually bound to an attribute of the class diagram (except for FreeText) and have some special features (by e.g. a Date Field can have min and max date). &#xD;&#xA;Each kind of fields will have different generated input field or/and different kind of validation rules. The validation rules are defined to control input in the model. &#xD;&#xA;Operations: The Operation ‘Group in a new group’ allows to group fields in a FormGroup (logical group). This group can be specialized to change its display (in tab, row or column by e.g.).&#xD;&#xA;Inherits: FormElement."/>
     </eAnnotations>
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="mandatoryHiddenAndNoDefaultValue" value="self.initial.oclIsUndefined() or self.initial = '' implies self.mandatory = false or self.hidden = false"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="warning" value="mandatoryHiddenAndNoDefaultValue"/>
+      <details key="constraints" value="mandatoryHiddenAndNoDefaultValue"/>
+    </eAnnotations>
     <eOperations name="getLabel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.bluexml.com/OCL">
         <details key="body" value="if self.label.oclIsUndefined() or self.label.size() = 0 then&#xD; self.id &#xD;else&#xD; self.label &#xD;endif"/>

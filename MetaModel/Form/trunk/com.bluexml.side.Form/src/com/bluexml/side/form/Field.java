@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-model-doc -->
  * Definition: The form has a list of fields which inherits of the 'Field' abstract element. A 'Field' is usually bound to an attribute of the class diagram (except for FreeText) and have some special features (by e.g. a Date Field can have min and max date). 
  * Each kind of fields will have different generated input field or/and different kind of validation rules. The validation rules are defined to control input in the model. 
- * Operations: The Operation ‚ÄòGroup in a new group‚Äô allows to group fields in a FormGroup (logical group). This group can be specialized to change its display (in tab, row or column by e.g.).
+ * Operations: The Operation ëGroup in a new groupí allows to group fields in a FormGroup (logical group). This group can be specialized to change its display (in tab, row or column by e.g.).
  * Inherits: FormElement.
  * <!-- end-model-doc -->
  *
@@ -36,6 +36,8 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see com.bluexml.side.form.FormPackage#getField()
  * @model abstract="true"
+ *        annotation="http://www.bluexml.com/OCL mandatoryHiddenAndNoDefaultValue='self.initial.oclIsUndefined() or self.initial = \'\' implies self.mandatory = false or self.hidden = false'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore warning='mandatoryHiddenAndNoDefaultValue' constraints='mandatoryHiddenAndNoDefaultValue'"
  * @generated
  */
 public interface Field extends FormElement {
@@ -82,7 +84,7 @@ public interface Field extends FormElement {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Definition: The 'error_messages' attribute is used to specify a text message in the case where the input is not valid.
-	 * Constraint/Limit: The internationalization convention may be used for the error_message's value; if the value of the error_messages in the form model is of the form "#label",  the token "label" is then considered as a ‚Äúdelayed message‚Äù, whose value will be provided by the forms server at runtime from a language resource file. In the case of Xform Chiba for Alfresco, the language resource file is '<xforms_webapp>/WEB-INF/classes/messages.properties'.
+	 * Constraint/Limit: The internationalization convention may be used for the error_message's value; if the value of the error_messages in the form model is of the form "#label",  the token "label" is then considered as a ìdelayed messageî, whose value will be provided by the forms server at runtime from a language resource file. In the case of Xform Chiba for Alfresco, the language resource file is '<xforms_webapp>/WEB-INF/classes/messages.properties'.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Error messages</em>' attribute.
 	 * @see #setError_messages(Map)
@@ -119,9 +121,9 @@ public interface Field extends FormElement {
 	 * - In the case of XForms generation on Alfresco and considering different fields having the same alfresco attribute, all these fields can have a same initial value by setting '<alfrescoName>=<value>'. A particular field can have a different value to the other by setting '<uniqueName>=<value>'.
 	 * 
 	 * Example: 
-	 * ÔÄ≠	initial=Book
-	 * ÔÄ≠	http://vmbx2k3:8080/pforms/xforms?type=modelcyvel.Article&field_11=valeur
-	 * ÔÄ≠	http://vmbx2k3:8080/pforms/xforms?type=modelcyvel.Article&modelcyvel_Fiche_accroche=valeur
+	 * ?	initial=Book
+	 * ?	http://vmbx2k3:8080/pforms/xforms?type=modelcyvel.Article&field_11=valeur
+	 * ?	http://vmbx2k3:8080/pforms/xforms?type=modelcyvel.Article&modelcyvel_Fiche_accroche=valeur
 	 * 
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Initial</em>' attribute.

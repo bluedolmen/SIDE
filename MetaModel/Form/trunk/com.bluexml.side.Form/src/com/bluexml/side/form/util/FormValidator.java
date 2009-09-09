@@ -7,11 +7,15 @@
 package com.bluexml.side.form.util;
 
 import com.bluexml.side.form.*;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
@@ -111,6 +115,22 @@ public class FormValidator extends EObjectValidator {
 	private static Constraint formElement_noSpecialCharactersInvOCL;
 
 	/**
+	 * The parsed OCL expression for the definition of the '<em>mandatoryHiddenAndNoDefaultValue</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint field_mandatoryHiddenAndNoDefaultValueInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>ClassMustMatchWithProcessContentType</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint formWorkflow_ClassMustMatchWithProcessContentTypeInvOCL;
+
+	/**
 	 * The parsed OCL expression for the definition of the '<em>MinSuperiorToMax</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -133,14 +153,6 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	private static Constraint virtualField_NoLinkForVirtualFieldInvOCL;
-
-	/**
-	 * The parsed OCL expression for the definition of the '<em>ClassMustMatchWithProcessContentType</em>' invariant constraint.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private static Constraint formWorkflow_ClassMustMatchWithProcessContentTypeInvOCL;
 
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
 
@@ -266,7 +278,7 @@ public class FormValidator extends EObjectValidator {
 				return validateFileFieldSearchOperators((FileFieldSearchOperators)value, diagnostics, context);
 			case FormPackage.COMBINATION_OPERATORS:
 				return validateCombinationOperators((CombinationOperators)value, diagnostics, context);
-			default: 
+			default:
 				return true;
 		}
 	}
@@ -298,10 +310,10 @@ public class FormValidator extends EObjectValidator {
         if (formElement_noSpecialCharactersInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(FormPackage.Literals.FORM_ELEMENT);
-			
+
 			EAnnotation ocl = FormPackage.Literals.FORM_ELEMENT.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("noSpecialCharacters");
-			
+
 			try {
 				formElement_noSpecialCharactersInvOCL = helper.createInvariant(expr);
 			}
@@ -309,14 +321,14 @@ public class FormValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(formElement_noSpecialCharactersInvOCL);
-		
+
 		if (!query.check(formElement)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( FormPackage.Literals.FORM_ELEMENT.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"noSpecialCharacters")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noSpecialCharacters", getObjectLabel(formElement, context) }),
@@ -325,6 +337,18 @@ public class FormValidator extends EObjectValidator {
 			return false;
 		}
 		return true;
+	}
+
+	private boolean doThrowError(EAnnotation ecore, String ruleName) {
+		String warningList = ecore.getDetails().get("warning");
+		boolean throwError = true;
+		if (warningList != null) {
+			List<String> list = Arrays.asList(warningList.split(" "));
+			if (list.contains(ruleName)) {
+				throwError = false;
+			}
+		}
+		return throwError;
 	}
 
 	/**
@@ -358,7 +382,47 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(field, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(field, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(field, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(field, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the mandatoryHiddenAndNoDefaultValue constraint of '<em>Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateField_mandatoryHiddenAndNoDefaultValue(Field field, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (field_mandatoryHiddenAndNoDefaultValueInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(FormPackage.Literals.FIELD);
+
+			EAnnotation ocl = FormPackage.Literals.FIELD.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("mandatoryHiddenAndNoDefaultValue");
+
+			try {
+				field_mandatoryHiddenAndNoDefaultValueInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(field_mandatoryHiddenAndNoDefaultValueInvOCL);
+
+		if (!query.check(field)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						((doThrowError( FormPackage.Literals.FIELD.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"mandatoryHiddenAndNoDefaultValue")? Diagnostic.ERROR : Diagnostic.WARNING),
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "mandatoryHiddenAndNoDefaultValue", getObjectLabel(field, context) }),
+						 new Object[] { field }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -375,6 +439,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(booleanField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(booleanField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(booleanField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(booleanField, diagnostics, context);
 		return result;
 	}
 
@@ -392,6 +457,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(charField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(charField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(charField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(charField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCharField_MinSuperiorToMax(charField, diagnostics, context);
 		return result;
 	}
@@ -406,10 +472,10 @@ public class FormValidator extends EObjectValidator {
         if (charField_MinSuperiorToMaxInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(FormPackage.Literals.CHAR_FIELD);
-			
+
 			EAnnotation ocl = FormPackage.Literals.CHAR_FIELD.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("MinSuperiorToMax");
-			
+
 			try {
 				charField_MinSuperiorToMaxInvOCL = helper.createInvariant(expr);
 			}
@@ -417,14 +483,14 @@ public class FormValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(charField_MinSuperiorToMaxInvOCL);
-		
+
 		if (!query.check(charField)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( FormPackage.Literals.CHAR_FIELD.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"MinSuperiorToMax")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "MinSuperiorToMax", getObjectLabel(charField, context) }),
@@ -449,6 +515,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(dateField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(dateField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(dateField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(dateField, diagnostics, context);
 		return result;
 	}
 
@@ -466,6 +533,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(dateTimeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(dateTimeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(dateTimeField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(dateTimeField, diagnostics, context);
 		return result;
 	}
 
@@ -483,6 +551,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(decimalField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(decimalField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(decimalField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(decimalField, diagnostics, context);
 		return result;
 	}
 
@@ -500,6 +569,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(floatField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(floatField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(floatField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(floatField, diagnostics, context);
 		return result;
 	}
 
@@ -517,6 +587,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(integerField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(integerField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(integerField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(integerField, diagnostics, context);
 		return result;
 	}
 
@@ -534,6 +605,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(modelChoiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(modelChoiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(modelChoiceField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(modelChoiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateClassReference_mustReferenceClass(modelChoiceField, diagnostics, context);
 		return result;
 	}
@@ -552,6 +624,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(emailField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(emailField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(emailField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(emailField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCharField_MinSuperiorToMax(emailField, diagnostics, context);
 		return result;
 	}
@@ -570,6 +643,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(fileField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(fileField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(fileField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(fileField, diagnostics, context);
 		return result;
 	}
 
@@ -587,6 +661,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(imageField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(imageField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(imageField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(imageField, diagnostics, context);
 		return result;
 	}
 
@@ -604,6 +679,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(timeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(timeField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(timeField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(timeField, diagnostics, context);
 		return result;
 	}
 
@@ -621,6 +697,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(urlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(urlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(urlField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(urlField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCharField_MinSuperiorToMax(urlField, diagnostics, context);
 		return result;
 	}
@@ -639,6 +716,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(phoneNumberField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(phoneNumberField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(phoneNumberField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(phoneNumberField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCharField_MinSuperiorToMax(phoneNumberField, diagnostics, context);
 		return result;
 	}
@@ -693,6 +771,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(reference, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(reference, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(reference, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(reference, diagnostics, context);
 		if (result || diagnostics != null) result &= validateClassReference_mustReferenceClass(reference, diagnostics, context);
 		return result;
 	}
@@ -720,6 +799,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(choiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(choiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(choiceField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(choiceField, diagnostics, context);
 		return result;
 	}
 
@@ -737,6 +817,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(regexField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(regexField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(regexField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(regexField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCharField_MinSuperiorToMax(regexField, diagnostics, context);
 		return result;
 	}
@@ -768,10 +849,10 @@ public class FormValidator extends EObjectValidator {
         if (classReference_mustReferenceClassInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(FormPackage.Literals.CLASS_REFERENCE);
-			
+
 			EAnnotation ocl = FormPackage.Literals.CLASS_REFERENCE.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("mustReferenceClass");
-			
+
 			try {
 				classReference_mustReferenceClassInvOCL = helper.createInvariant(expr);
 			}
@@ -779,14 +860,14 @@ public class FormValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(classReference_mustReferenceClassInvOCL);
-		
+
 		if (!query.check(classReference)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( FormPackage.Literals.CLASS_REFERENCE.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"mustReferenceClass")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "mustReferenceClass", getObjectLabel(classReference, context) }),
@@ -811,6 +892,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(passwordField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(passwordField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(passwordField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(passwordField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCharField_MinSuperiorToMax(passwordField, diagnostics, context);
 		return result;
 	}
@@ -829,6 +911,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(virtualField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(virtualField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(virtualField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(virtualField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateVirtualField_NoLinkForVirtualField(virtualField, diagnostics, context);
 		return result;
 	}
@@ -843,10 +926,10 @@ public class FormValidator extends EObjectValidator {
         if (virtualField_NoLinkForVirtualFieldInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(FormPackage.Literals.VIRTUAL_FIELD);
-			
+
 			EAnnotation ocl = FormPackage.Literals.VIRTUAL_FIELD.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("NoLinkForVirtualField");
-			
+
 			try {
 				virtualField_NoLinkForVirtualFieldInvOCL = helper.createInvariant(expr);
 			}
@@ -854,14 +937,14 @@ public class FormValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(virtualField_NoLinkForVirtualFieldInvOCL);
-		
+
 		if (!query.check(virtualField)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( FormPackage.Literals.VIRTUAL_FIELD.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"NoLinkForVirtualField")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "NoLinkForVirtualField", getObjectLabel(virtualField, context) }),
@@ -886,6 +969,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(actionField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(actionField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(actionField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(actionField, diagnostics, context);
 		return result;
 	}
 
@@ -903,6 +987,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(textField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(textField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(textField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(textField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCharField_MinSuperiorToMax(textField, diagnostics, context);
 		return result;
 	}
@@ -939,6 +1024,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(numericalField, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(numericalField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(numericalField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(numericalField, diagnostics, context);
 		return result;
 	}
 
@@ -998,10 +1084,10 @@ public class FormValidator extends EObjectValidator {
         if (formWorkflow_ClassMustMatchWithProcessContentTypeInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(FormPackage.Literals.FORM_WORKFLOW);
-			
+
 			EAnnotation ocl = FormPackage.Literals.FORM_WORKFLOW.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("ClassMustMatchWithProcessContentType");
-			
+
 			try {
 				formWorkflow_ClassMustMatchWithProcessContentTypeInvOCL = helper.createInvariant(expr);
 			}
@@ -1009,14 +1095,14 @@ public class FormValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(formWorkflow_ClassMustMatchWithProcessContentTypeInvOCL);
-		
+
 		if (!query.check(formWorkflow)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( FormPackage.Literals.FORM_WORKFLOW.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"ClassMustMatchWithProcessContentType")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ClassMustMatchWithProcessContentType", getObjectLabel(formWorkflow, context) }),
