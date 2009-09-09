@@ -109,10 +109,10 @@ import com.bluexml.side.application.ui.action.tree.TreeView;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 import com.bluexml.side.application.ui.action.utils.validator.FolderSelectionValidator;
 import com.bluexml.side.application.ui.action.utils.viewFilter.SideFileFiter;
-import com.bluexml.side.util.libs.IFileHelper;
 
 @SuppressWarnings("restriction")
-public class ApplicationDialog extends Dialog {
+public class ApplicationDialog extends Window {
+	//public class ApplicationDialog extends Dialog {
 
 	private Group optionsGroup;
 	private static final int APPLY_ID = IDialogConstants.CLIENT_ID + 2;
@@ -172,8 +172,10 @@ public class ApplicationDialog extends Dialog {
 	 */
 	public ApplicationDialog(Shell parentShell, IFile file) {
 		super(parentShell);
-		setShellStyle(SWT.DIALOG_TRIM | SWT.MODELESS
+		this.setParentShell(parentShell);
+		setShellStyle(SWT.CLOSE | SWT.TITLE | SWT.BORDER | SWT.MODELESS | SWT.RESIZE
                 | getDefaultOrientation());
+		setBlockOnOpen(false);
 		try {
 			URI uri = URI.createFileURI(file.getRawLocation().toFile().getAbsolutePath());
 			XMIResource resource = new XMIResourceImpl(uri);
@@ -704,12 +706,14 @@ public class ApplicationDialog extends Dialog {
 	 * @param parent
 	 */
 	@Override
-	protected Control createDialogArea(Composite parent) {
+	protected Control createContents(Composite parent) {
 		columnNames = new String[2];
 		columnNames[0] = columnNameLabel;
 		columnNames[1] = columnNameValue;
 
-		Composite container = (Composite) super.createDialogArea(parent);
+
+		//Composite container = (Composite) super.createDialogArea(parent);
+		Composite container = (Composite) parent.getShell();
 		container.setLayout(null);
 
 		tabFolder = new TabFolder(container, SWT.NONE);
@@ -1361,11 +1365,11 @@ public class ApplicationDialog extends Dialog {
 	 *
 	 * @param parent
 	 */
-	@Override
+
 	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, GEN_ID, Activator.Messages.getString("ApplicationDialog.90"), false); //$NON-NLS-1$
-		createButton(parent, APPLY_ID, Activator.Messages.getString("ApplicationDialog.91"), false); //$NON-NLS-1$
-		createButton(parent, IDialogConstants.CLOSE_ID, Activator.Messages.getString("ApplicationDialog.92"), false); //$NON-NLS-1$
+		//createButton(parent, GEN_ID, Activator.Messages.getString("ApplicationDialog.90"), false); //$NON-NLS-1$
+		//createButton(parent, APPLY_ID, Activator.Messages.getString("ApplicationDialog.91"), false); //$NON-NLS-1$
+		//createButton(parent, IDialogConstants.CLOSE_ID, Activator.Messages.getString("ApplicationDialog.92"), false); //$NON-NLS-1$
 	}
 
 	/**
@@ -1379,6 +1383,7 @@ public class ApplicationDialog extends Dialog {
 					saveData();
 				}
 			}
+			getShell().close();
 			close();
 		}
 		if (buttonId == APPLY_ID) {
@@ -1398,7 +1403,7 @@ public class ApplicationDialog extends Dialog {
 			return;
 		}
 
-		super.buttonPressed(buttonId);
+		//super.buttonPressed(buttonId);
 	}
 
 	/**
