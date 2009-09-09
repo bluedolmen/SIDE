@@ -67,7 +67,7 @@ import com.bluexml.side.form.common.TransformFieldAction;
 import com.bluexml.side.form.common.utils.FieldTransformation;
 import com.bluexml.side.form.common.utils.FormDiagramUtils;
 import com.bluexml.side.form.workflow.InitializeFormWorkflowAction;
-import com.bluexml.side.form.workflow.ShowLinkedTask;
+import com.bluexml.side.form.workflow.ShowLinkedTaskAction;
 import com.bluexml.side.form.workflow.SynchonizeWithWorkflowDiagramAction;
 
 /**
@@ -142,7 +142,7 @@ public class FormActionBarContributor
 	protected GroupAttributeAction groupAttributeAction = new GroupAttributeAction();
 	protected InitializeFormClassAction initializeFormClassAction = new InitializeFormClassAction();
 	protected InitializeFormWorkflowAction initializeFormWorkflowAction = new InitializeFormWorkflowAction();
-	protected ShowLinkedTask showLinkedTask = new ShowLinkedTask();
+	protected ShowLinkedTaskAction showLinkedTaskAction = new ShowLinkedTaskAction();
 	protected RefreshOutlineAction refreshOutlineAction = new RefreshOutlineAction();
 	protected CollapseReferenceAction collapseReferenceAction = new CollapseReferenceAction();
 	protected CopyFormAction copyFormAction = new CopyFormAction();
@@ -530,10 +530,10 @@ public class FormActionBarContributor
 				menuManager.insertAfter("ui-actions", initializeFormWorkflowAction);
 			}
 			
-			/*if (o instanceof FormWorkflow) {
-				showLinkedTask.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/show_link.png"));
-				menuManager.insertAfter("ui-actions", showLinkedTask);
-			}*/
+			if (o instanceof FormWorkflow) {
+				showLinkedTaskAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/show_link.png"));
+				menuManager.insertAfter("ui-actions", showLinkedTaskAction);
+			}
 
 			if (o instanceof FormContainer) {
 				MenuManager restoreMenu = new MenuManager("Restore","restore");
@@ -672,7 +672,6 @@ public class FormActionBarContributor
 		groupAttributeAction.setActiveWorkbenchPart(activeEditor);
 		initializeFormClassAction.setActiveWorkbenchPart(activeEditor);
 		initializeFormWorkflowAction.setActiveWorkbenchPart(activeEditor);
-		//showLinkedTask.setActiveWorkbenchPart(activeEditor);
 		collapseReferenceAction.setActiveWorkbenchPart(activeEditor);
 		copyFormAction.setActiveWorkbenchPart(activeEditor);
 		synchronizeWithClassDiagram.setActiveWorkbenchPart(activeEditor);
@@ -685,7 +684,7 @@ public class FormActionBarContributor
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) groupAttributeAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) initializeFormClassAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) initializeFormWorkflowAction);
-		//selectionProvider.addSelectionChangedListener((ISelectionChangedListener) showLinkedTask);
+		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) showLinkedTaskAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) refreshOutlineAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) collapseReferenceAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) copyFormAction);
