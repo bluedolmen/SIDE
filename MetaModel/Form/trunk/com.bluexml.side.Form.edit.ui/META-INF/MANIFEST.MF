@@ -21,7 +21,9 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.Form;bundle-version="1.0.0",
  com.bluexml.side.Workflow;bundle-version="1.0.0",
  com.bluexml.side.Util.libs;bundle-version="1.0.11",
- org.eclipse.ui.ide
+ org.eclipse.ui.ide,
+ com.bluexml.side.Workflow.editor;bundle-version="1.0.13",
+ org.topcased.modeler;bundle-version="3.0.0"
 Export-Package: com.bluexml.side.form.clazz,
  com.bluexml.side.form.clazz.utils,
  com.bluexml.side.form.common,
@@ -30,3 +32,4 @@ Export-Package: com.bluexml.side.form.clazz,
  com.bluexml.side.form.editor.views.service,
  com.bluexml.side.form.workflow,
  com.bluexml.side.form.workflow.utils
+Bundle-Activator: com.bluexml.side.form.FormUI
