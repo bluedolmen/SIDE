@@ -1,330 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<graphconf:DiagramGraphConf xmlns:graphconf="http://www.topcased.org/1.0/graphconf"
-    id="com.bluexml.side.Workflow.modeler.diagram"
-    defaultBackgroundColor="255,255,255"
-    defaultForegroundColor="0,0,0"
-    defaultFont="Lucida Grande-regular-11">
-    <node
-        presentation="default"
-        defaultHeight="-1"
-        defaultWidth="-1"
-        minimumHeight="30"
-        minimumWidth="50"
-        maximumHeight="-1"
-        maximumWidth="200"
-        defaultBackgroundColor="255,255,255"
-        defaultForegroundColor="0,0,0"
-        defaultFont="Lucida Grande-regular-11"
-        lineWidth="1"
-        lineStyle="SOLID"
-        isWidthResizable="true"
-        isHeightResizable="true">
-        <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kerblue.org/workflow/1.0#//TaskNode"/>
-        </bridge>
-    </node>
-    <node
-        presentation="default"
-        defaultHeight="-1"
-        defaultWidth="-1"
-        minimumHeight="30"
-        minimumWidth="50"
-        maximumHeight="-1"
-        maximumWidth="200"
-        defaultBackgroundColor="255,255,255"
-        defaultForegroundColor="0,0,0"
-        defaultFont="Lucida Grande-regular-11"
-        lineWidth="1"
-        lineStyle="SOLID"
-        isWidthResizable="true"
-        isHeightResizable="true">
-        <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kerblue.org/workflow/1.0#//Node"/>
-        </bridge>
-    </node>
-    <node
-        presentation="default"
-        defaultHeight="-1"
-        defaultWidth="-1"
-        minimumHeight="30"
-        minimumWidth="50"
-        maximumHeight="-1"
-        maximumWidth="200"
-        defaultBackgroundColor="255,255,255"
-        defaultForegroundColor="0,0,0"
-        defaultFont="Lucida Grande-regular-11"
-        lineWidth="1"
-        lineStyle="SOLID"
-        isWidthResizable="true"
-        isHeightResizable="true">
-        <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kerblue.org/workflow/1.0#//StartState"/>
-        </bridge>
-    </node>
-    <node
-        presentation="default"
-        defaultHeight="-1"
-        defaultWidth="-1"
-        minimumHeight="30"
-        minimumWidth="50"
-        maximumHeight="-1"
-        maximumWidth="200"
-        defaultBackgroundColor="255,255,255"
-        defaultForegroundColor="0,0,0"
-        defaultFont="Lucida Grande-regular-11"
-        lineWidth="1"
-        lineStyle="SOLID"
-        isWidthResizable="true"
-        isHeightResizable="true">
-        <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kerblue.org/workflow/1.0#//EndState"/>
-        </bridge>
-    </node>
-    <node
-        presentation="default"
-        defaultHeight="50"
-        defaultWidth="50"
-        minimumHeight="20"
-        minimumWidth="20"
-        maximumHeight="200"
-        maximumWidth="200"
-        defaultBackgroundColor="255,255,255"
-        defaultForegroundColor="0,0,0"
-        defaultFont="Lucida Grande-regular-11"
-        lineWidth="1"
-        lineStyle="SOLID"
-        isWidthResizable="true"
-        isHeightResizable="true">
-        <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kerblue.org/workflow/1.0#//Event"/>
-        </bridge>
-    </node>
-    <node
-        presentation="default"
-        defaultHeight="50"
-        defaultWidth="50"
-        minimumHeight="20"
-        minimumWidth="20"
-        maximumHeight="500"
-        maximumWidth="500"
-        defaultBackgroundColor="166,210,210"
-        defaultForegroundColor="0,0,0"
-        defaultFont="Lucida Grande-regular-11"
-        lineWidth="1"
-        lineStyle="SOLID"
-        isWidthResizable="true"
-        isHeightResizable="true">
-        <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kerblue.org/workflow/1.0#//Action"/>
-        </bridge>
-    </node>
-    <node
-        presentation="default"
-        defaultHeight="50"
-        defaultWidth="50"
-        minimumHeight="20"
-        minimumWidth="20"
-        maximumHeight="200"
-        maximumWidth="200"
-        defaultBackgroundColor="255,255,255"
-        defaultForegroundColor="0,0,0"
-        defaultFont="Lucida Grande-regular-11"
-        lineWidth="1"
-        lineStyle="SOLID"
-        isWidthResizable="true"
-        isHeightResizable="true">
-        <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kerblue.org/workflow/1.0#//Swimlane"/>
-        </bridge>
-    </node>
-    <node
-        presentation="default"
-        defaultHeight="20"
-        defaultWidth="30"
-        minimumHeight="-1"
-        minimumWidth="-1"
-        maximumHeight="-1"
-        maximumWidth="-1"
-        defaultBackgroundColor="211,226,205"
-        defaultForegroundColor="0,0,0"
-        defaultFont="Lucida Grande-regular-11"
-        lineWidth="1"
-        lineStyle="DASH"
-        isWidthResizable="true"
-        isHeightResizable="true">
-        <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kerblue.org/workflow/1.0#//Decision"/>
-        </bridge>
-    </node>
-    <node
-        presentation="default"
-        defaultHeight="20"
-        defaultWidth="30"
-        minimumHeight="-1"
-        minimumWidth="-1"
-        maximumHeight="-1"
-        maximumWidth="-1"
-        defaultBackgroundColor="211,226,205"
-        defaultForegroundColor="0,0,0"
-        defaultFont="Lucida Grande-regular-11"
-        lineWidth="1"
-        lineStyle="DASH"
-        isWidthResizable="true"
-        isHeightResizable="true">
-        <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kerblue.org/workflow/1.0#//Fork"/>
-        </bridge>
-    </node>
-    <node
-        presentation="default"
-        defaultHeight="20"
-        defaultWidth="30"
-        minimumHeight="-1"
-        minimumWidth="-1"
-        maximumHeight="-1"
-        maximumWidth="-1"
-        defaultBackgroundColor="211,226,205"
-        defaultForegroundColor="0,0,0"
-        defaultFont="Lucida Grande-regular-11"
-        lineWidth="1"
-        lineStyle="DASH"
-        isWidthResizable="true"
-        isHeightResizable="true">
-        <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kerblue.org/workflow/1.0#//Join"/>
-        </bridge>
-    </node>
-    <node
-        presentation="default"
-        defaultHeight="20"
-        defaultWidth="30"
-        minimumHeight="-1"
-        minimumWidth="-1"
-        maximumHeight="-1"
-        maximumWidth="-1"
-        defaultBackgroundColor="211,226,205"
-        defaultForegroundColor="0,0,0"
-        defaultFont="Lucida Grande-regular-11"
-        lineWidth="1"
-        lineStyle="DASH"
-        isWidthResizable="true"
-        isHeightResizable="true">
-        <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kerblue.org/workflow/1.0#//Timer"/>
-        </bridge>
-    </node>
-    <edge
-        presentation="default"
-        defaultForegroundColor="156,199,188"
-        defaultFont="Lucida Grande-regular-11"
-        defaultRouter="ObliqueRouter"
-        lineWidth="1"
-        lineStyle="SOLID">
-        <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kerblue.org/workflow/1.0#//Transition"/>
-        </bridge>
-    </edge>
-    <edge
-        presentation="default"
-        defaultForegroundColor="27,134,199"
-        defaultFont="Lucida Grande-regular-11"
-        defaultRouter="ObliqueRouter"
-        lineWidth="1"
-        lineStyle="SOLID">
-        <bridge xsi:type="graphconf:StringBridge" type="manage"/>
-    </edge>
-    <edge
-        presentation="default"
-        defaultForegroundColor="27,134,199"
-        defaultFont="Lucida Grande-regular-11"
-        defaultRouter="ObliqueRouter"
-        lineWidth="1"
-        lineStyle="SOLID">
-        <bridge xsi:type="graphconf:StringBridge" type="initialize"/>
-    </edge>
-    <edge
-        presentation="default"
-        defaultForegroundColor="34,40,161"
-        defaultFont="Lucida Grande-regular-11"
-        defaultRouter="ObliqueRouter"
-        lineWidth="1"
-        lineStyle="SOLID">
-        <bridge xsi:type="graphconf:StringBridge" type="actions"/>
-    </edge>
-    <edge
-        presentation="default"
-        defaultForegroundColor="24,224,0"
-        defaultFont="Lucida Grande-regular-11"
-        defaultRouter="ObliqueRouter"
-        lineWidth="1"
-        lineStyle="SOLID">
-        <bridge xsi:type="graphconf:StringBridge" type="hasTimer"/>
-    </edge>
-    <node
-        presentation="default"
-        defaultHeight="17"
-        defaultWidth="50"
-        minimumHeight="17"
-        minimumWidth="20"
-        maximumHeight="200"
-        maximumWidth="200"
-        defaultBackgroundColor="255,255,255"
-        defaultForegroundColor="0,0,0"
-        defaultFont="Lucida Grande-regular-11"
-        lineWidth="1"
-        lineStyle="SOLID"
-        isWidthResizable="true"
-        isHeightResizable="true">
-        <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kerblue.org/workflow/1.0#//Attribute"/>
-        </bridge>
-    </node>
-    <node
-        presentation="default"
-        defaultHeight="50"
-        defaultWidth="50"
-        minimumHeight="20"
-        minimumWidth="20"
-        maximumHeight="200"
-        maximumWidth="200"
-        defaultBackgroundColor="255,255,255"
-        defaultForegroundColor="0,0,0"
-        defaultFont="Lucida Grande-regular-11"
-        lineWidth="1"
-        lineStyle="SOLID"
-        isWidthResizable="true"
-        isHeightResizable="true">
-        <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kerblue.org/workflow/1.0#//ProcessState"/>
-        </bridge>
-    </node>
-    <node
-        presentation="default"
-        defaultHeight="-1"
-        defaultWidth="-1"
-        minimumHeight="-1"
-        minimumWidth="-1"
-        maximumHeight="-1"
-        maximumWidth="-1"
-        defaultBackgroundColor="25,202,255"
-        defaultForegroundColor="0,0,0"
-        defaultFont="Lucida Grande-regular-11"
-        lineWidth="1"
-        lineStyle="SOLID"
-        isWidthResizable="false"
-        isHeightResizable="false">
-        <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://www.kerblue.org/class/1.0#//Clazz"/>
-        </bridge>
-    </node>
-    <edge
-        presentation="default"
-        defaultForegroundColor="49,125,171"
-        defaultFont="Lucida Grande-regular-11"
-        defaultRouter="ObliqueRouter"
-        lineWidth="1"
-        lineStyle="SOLID">
-        <bridge xsi:type="graphconf:StringBridge" type="isAssociatedWith"/>
-    </edge>
+<graphconf:DiagramGraphConf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:graphconf="http://www.topcased.org/1.0/graphconf" id="com.bluexml.side.Workflow.modeler.diagram" defaultBackgroundColor="255,255,255" defaultForegroundColor="0,0,0" defaultFont="Lucida Grande-regular-11">
+  <node presentation="default" defaultForegroundColor="0,0,0" defaultFont="Lucida Grande-regular-11" lineWidth="1" defaultWidth="-1" defaultHeight="-1" minimumWidth="50" minimumHeight="30" maximumWidth="200" maximumHeight="-1" isWidthResizable="true" isHeightResizable="true" defaultBackgroundColor="255,255,255">
+    <bridge xsi:type="graphconf:EMFBridge">
+      <type href="http://www.kerblue.org/workflow/1.0#//TaskNode"/>
+    </bridge>
+  </node>
+  <node presentation="default" defaultForegroundColor="0,0,0" defaultFont="Lucida Grande-regular-11" lineWidth="1" defaultWidth="-1" defaultHeight="-1" minimumWidth="50" minimumHeight="30" maximumWidth="200" maximumHeight="-1" isWidthResizable="true" isHeightResizable="true" defaultBackgroundColor="255,255,255">
+    <bridge xsi:type="graphconf:EMFBridge">
+      <type href="http://www.kerblue.org/workflow/1.0#//Node"/>
+    </bridge>
+  </node>
+  <node presentation="default" defaultForegroundColor="0,0,0" defaultFont="Lucida Grande-regular-11" lineWidth="1" defaultWidth="-1" defaultHeight="-1" minimumWidth="50" minimumHeight="30" maximumWidth="200" maximumHeight="-1" isWidthResizable="true" isHeightResizable="true" defaultBackgroundColor="255,255,255">
+    <bridge xsi:type="graphconf:EMFBridge">
+      <type href="http://www.kerblue.org/workflow/1.0#//StartState"/>
+    </bridge>
+  </node>
+  <node presentation="default" defaultForegroundColor="0,0,0" defaultFont="Lucida Grande-regular-11" lineWidth="1" defaultWidth="-1" defaultHeight="-1" minimumWidth="50" minimumHeight="30" maximumWidth="200" maximumHeight="-1" isWidthResizable="true" isHeightResizable="true" defaultBackgroundColor="255,255,255">
+    <bridge xsi:type="graphconf:EMFBridge">
+      <type href="http://www.kerblue.org/workflow/1.0#//EndState"/>
+    </bridge>
+  </node>
+  <node presentation="default" defaultForegroundColor="0,0,0" defaultFont="Lucida Grande-regular-11" lineWidth="1" defaultWidth="50" defaultHeight="50" minimumWidth="20" minimumHeight="20" maximumWidth="200" maximumHeight="200" isWidthResizable="true" isHeightResizable="true" defaultBackgroundColor="255,255,255">
+    <bridge xsi:type="graphconf:EMFBridge">
+      <type href="http://www.kerblue.org/workflow/1.0#//Event"/>
+    </bridge>
+  </node>
+  <node presentation="default" defaultForegroundColor="0,0,0" defaultFont="Lucida Grande-regular-11" lineWidth="1" defaultWidth="50" defaultHeight="50" minimumWidth="20" minimumHeight="20" maximumWidth="500" maximumHeight="500" isWidthResizable="true" isHeightResizable="true" defaultBackgroundColor="166,210,210">
+    <bridge xsi:type="graphconf:EMFBridge">
+      <type href="http://www.kerblue.org/workflow/1.0#//Action"/>
+    </bridge>
+  </node>
+  <node presentation="default" defaultForegroundColor="0,0,0" defaultFont="Lucida Grande-regular-11" lineWidth="1" defaultWidth="77" defaultHeight="81" minimumWidth="20" minimumHeight="20" maximumWidth="200" maximumHeight="200" isWidthResizable="true" isHeightResizable="true" defaultBackgroundColor="255,255,255">
+    <bridge xsi:type="graphconf:EMFBridge">
+      <type href="http://www.kerblue.org/workflow/1.0#//Swimlane"/>
+    </bridge>
+  </node>
+  <node presentation="default" defaultForegroundColor="0,0,0" defaultFont="Lucida Grande-regular-11" lineWidth="1" lineStyle="DASH" defaultWidth="30" defaultHeight="20" minimumWidth="-1" minimumHeight="-1" maximumWidth="-1" maximumHeight="-1" isWidthResizable="true" isHeightResizable="true" defaultBackgroundColor="211,226,205">
+    <bridge xsi:type="graphconf:EMFBridge">
+      <type href="http://www.kerblue.org/workflow/1.0#//Decision"/>
+    </bridge>
+  </node>
+  <node presentation="default" defaultForegroundColor="0,0,0" defaultFont="Lucida Grande-regular-11" lineWidth="1" lineStyle="DASH" defaultWidth="30" defaultHeight="20" minimumWidth="-1" minimumHeight="-1" maximumWidth="-1" maximumHeight="-1" isWidthResizable="true" isHeightResizable="true" defaultBackgroundColor="211,226,205">
+    <bridge xsi:type="graphconf:EMFBridge">
+      <type href="http://www.kerblue.org/workflow/1.0#//Fork"/>
+    </bridge>
+  </node>
+  <node presentation="default" defaultForegroundColor="0,0,0" defaultFont="Lucida Grande-regular-11" lineWidth="1" lineStyle="DASH" defaultWidth="30" defaultHeight="20" minimumWidth="-1" minimumHeight="-1" maximumWidth="-1" maximumHeight="-1" isWidthResizable="true" isHeightResizable="true" defaultBackgroundColor="211,226,205">
+    <bridge xsi:type="graphconf:EMFBridge">
+      <type href="http://www.kerblue.org/workflow/1.0#//Join"/>
+    </bridge>
+  </node>
+  <node presentation="default" defaultForegroundColor="0,0,0" defaultFont="Lucida Grande-regular-11" lineWidth="1" lineStyle="DASH" defaultWidth="30" defaultHeight="20" minimumWidth="-1" minimumHeight="-1" maximumWidth="-1" maximumHeight="-1" isWidthResizable="true" isHeightResizable="true" defaultBackgroundColor="211,226,205">
+    <bridge xsi:type="graphconf:EMFBridge">
+      <type href="http://www.kerblue.org/workflow/1.0#//Timer"/>
+    </bridge>
+  </node>
+  <node presentation="default" defaultForegroundColor="0,0,0" defaultFont="Lucida Grande-regular-11" lineWidth="1" defaultWidth="50" defaultHeight="17" minimumWidth="20" minimumHeight="17" maximumWidth="200" maximumHeight="200" isWidthResizable="true" isHeightResizable="true" defaultBackgroundColor="255,255,255">
+    <bridge xsi:type="graphconf:EMFBridge">
+      <type href="http://www.kerblue.org/workflow/1.0#//Attribute"/>
+    </bridge>
+  </node>
+  <node presentation="default" defaultForegroundColor="0,0,0" defaultFont="Lucida Grande-regular-11" lineWidth="1" defaultWidth="50" defaultHeight="50" minimumWidth="20" minimumHeight="20" maximumWidth="200" maximumHeight="200" isWidthResizable="true" isHeightResizable="true" defaultBackgroundColor="255,255,255">
+    <bridge xsi:type="graphconf:EMFBridge">
+      <type href="http://www.kerblue.org/workflow/1.0#//ProcessState"/>
+    </bridge>
+  </node>
+  <node presentation="default" defaultForegroundColor="0,0,0" defaultFont="Lucida Grande-regular-11" lineWidth="1" defaultWidth="-1" defaultHeight="-1" minimumWidth="-1" minimumHeight="-1" maximumWidth="-1" maximumHeight="-1" defaultBackgroundColor="25,202,255">
+    <bridge xsi:type="graphconf:EMFBridge">
+      <type href="http://www.kerblue.org/class/1.0#//Clazz"/>
+    </bridge>
+  </node>
+  <edge presentation="default" defaultForegroundColor="156,199,188" defaultFont="Lucida Grande-regular-11" lineWidth="1">
+    <bridge xsi:type="graphconf:EMFBridge">
+      <type href="http://www.kerblue.org/workflow/1.0#//Transition"/>
+    </bridge>
+  </edge>
+  <edge presentation="default" defaultForegroundColor="27,134,199" defaultFont="Lucida Grande-regular-11" lineWidth="1">
+    <bridge xsi:type="graphconf:StringBridge" type="manage"/>
+  </edge>
+  <edge presentation="default" defaultForegroundColor="27,134,199" defaultFont="Lucida Grande-regular-11" lineWidth="1">
+    <bridge xsi:type="graphconf:StringBridge" type="initialize"/>
+  </edge>
+  <edge presentation="default" defaultForegroundColor="34,40,161" defaultFont="Lucida Grande-regular-11" lineWidth="1">
+    <bridge xsi:type="graphconf:StringBridge" type="actions"/>
+  </edge>
+  <edge presentation="default" defaultForegroundColor="24,224,0" defaultFont="Lucida Grande-regular-11" lineWidth="1">
+    <bridge xsi:type="graphconf:StringBridge" type="hasTimer"/>
+  </edge>
+  <edge presentation="default" defaultForegroundColor="49,125,171" defaultFont="Lucida Grande-regular-11" lineWidth="1">
+    <bridge xsi:type="graphconf:StringBridge" type="isAssociatedWith"/>
+  </edge>
 </graphconf:DiagramGraphConf>
-
