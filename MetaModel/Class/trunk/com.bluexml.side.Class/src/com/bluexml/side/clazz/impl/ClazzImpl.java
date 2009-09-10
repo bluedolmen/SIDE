@@ -964,6 +964,43 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Attribute> getAllAttributesWithoutAspectsAttributes() {
+		if (getAllAttributesWithoutAspectsAttributesBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.CLAZZ.getEOperations().get(20);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.CLAZZ, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllAttributesWithoutAspectsAttributesBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllAttributesWithoutAspectsAttributesBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Attribute> result = (Collection<Attribute>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Attribute>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllAttributesWithoutAspectsAttributes <em>Get All Attributes Without Aspects Attributes</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllAttributesWithoutAspectsAttributes
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllAttributesWithoutAspectsAttributesBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {

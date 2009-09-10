@@ -127,6 +127,8 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="searchOperatorConfiguration"
         eType="#//SearchOperatorConfiguration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mockup" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormContainer" abstract="true" eSuperTypes="#//FormGroup">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">

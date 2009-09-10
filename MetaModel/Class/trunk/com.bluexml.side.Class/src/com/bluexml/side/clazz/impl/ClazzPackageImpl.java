@@ -426,6 +426,15 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAttribute_Mockup() {
+		return (EAttribute)attributeEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEnumeration() {
 		return enumerationEClass;
 	}
@@ -656,6 +665,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		createEAttribute(attributeEClass, ATTRIBUTE__VISIBILITY);
 		createEReference(attributeEClass, ATTRIBUTE__VALUE_LIST);
 		createEAttribute(attributeEClass, ATTRIBUTE__UNIQUE);
+		createEAttribute(attributeEClass, ATTRIBUTE__MOCKUP);
 
 		enumerationEClass = createEClass(ENUMERATION);
 		createEReference(enumerationEClass, ENUMERATION__LITERALS);
@@ -804,6 +814,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 
 		addEOperation(clazzEClass, this.getAspect(), "getAllAspects", 0, -1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(clazzEClass, this.getAttribute(), "getAllAttributesWithoutAspectsAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(associationEClass, Association.class, "Association", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAssociation_AssociationType(), this.getAssociationType(), "associationType", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssociation_FirstEnd(), this.getAssociationEnd(), null, "firstEnd", null, 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -827,6 +839,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		initEAttribute(getAttribute_Visibility(), theCommonPackage.getVisibility(), "visibility", "Private", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAttribute_ValueList(), this.getEnumeration(), null, "valueList", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_Unique(), ecorePackage.getEBoolean(), "unique", "false", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttribute_Mockup(), ecorePackage.getEString(), "mockup", null, 0, -1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(enumerationEClass, Enumeration.class, "Enumeration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEnumeration_Literals(), this.getEnumerationLiteral(), this.getEnumerationLiteral_Enum(), "literals", null, 0, -1, Enumeration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1075,6 +1088,12 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "body", "self.aspects->asSet()->union(self.getInheritedClasses()->asSet().aspects)"
+		   });		
+		addAnnotation
+		  (clazzEClass.getEOperations().get(20), 
+		   source, 
+		   new String[] {
+			 "body", "self.getAllInheritedAttributes()->union(self.attributes)"
 		   });				
 		addAnnotation
 		  (associationEClass, 
@@ -1180,7 +1199,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * @generated
 	 */
 	protected void createInternalDocAnnotations() {
-		String source = "InternalDoc";																																																																
+		String source = "InternalDoc";																																																																	
 		addAnnotation
 		  (classCommentEClass, 
 		   source, 
@@ -1208,7 +1227,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "ClassWithTwoAttributesSameName InheritanceCycle"
-		   });																										
+		   });																											
 		addAnnotation
 		  (associationEClass, 
 		   source, 

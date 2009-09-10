@@ -636,6 +636,15 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getField_Mockup() {
+		return (EAttribute)fieldEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBooleanField() {
 		return booleanFieldEClass;
 	}
@@ -1416,6 +1425,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		createEAttribute(fieldEClass, FIELD__FIELD_SIZE);
 		createEAttribute(fieldEClass, FIELD__STYLE);
 		createEReference(fieldEClass, FIELD__SEARCH_OPERATOR_CONFIGURATION);
+		createEAttribute(fieldEClass, FIELD__MOCKUP);
 
 		formContainerEClass = createEClass(FORM_CONTAINER);
 
@@ -1630,6 +1640,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEAttribute(getField_FieldSize(), ecorePackage.getEInt(), "fieldSize", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_Style(), ecorePackage.getEString(), "style", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getField_SearchOperatorConfiguration(), this.getSearchOperatorConfiguration(), null, "searchOperatorConfiguration", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getField_Mockup(), ecorePackage.getEString(), "mockup", null, 0, -1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(fieldEClass, ecorePackage.getEString(), "getLabel", 0, 1, IS_UNIQUE, IS_ORDERED);
 

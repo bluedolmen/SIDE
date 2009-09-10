@@ -31,6 +31,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.bluexml.side.form.Field#getFieldSize <em>Field Size</em>}</li>
  *   <li>{@link com.bluexml.side.form.Field#getStyle <em>Style</em>}</li>
  *   <li>{@link com.bluexml.side.form.Field#getSearchOperatorConfiguration <em>Search Operator Configuration</em>}</li>
+ *   <li>{@link com.bluexml.side.form.Field#getMockup <em>Mockup</em>}</li>
  * </ul>
  * </p>
  *
@@ -263,6 +264,22 @@ public interface Field extends FormElement {
 	 * @generated
 	 */
 	void setSearchOperatorConfiguration(SearchOperatorConfiguration value);
+
+	/**
+	 * Returns the value of the '<em><b>Mockup</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Mockup</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Mockup</em>' attribute list.
+	 * @see com.bluexml.side.form.FormPackage#getField_Mockup()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getMockup();
 
 	/**
 	 * <!-- begin-user-doc -->

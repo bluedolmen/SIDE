@@ -66,6 +66,7 @@ public class AttributeItemProvider
 			addVisibilityPropertyDescriptor(object);
 			addValueListPropertyDescriptor(object);
 			addUniquePropertyDescriptor(object);
+			addMockupPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -181,6 +182,28 @@ public class AttributeItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Mockup feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addMockupPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Attribute_mockup_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Attribute_mockup_feature", "_UI_Attribute_type"),
+				 ClazzPackage.Literals.ATTRIBUTE__MOCKUP,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Attribute.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -221,6 +244,7 @@ public class AttributeItemProvider
 			case ClazzPackage.ATTRIBUTE__INITIAL_VALUE:
 			case ClazzPackage.ATTRIBUTE__VISIBILITY:
 			case ClazzPackage.ATTRIBUTE__UNIQUE:
+			case ClazzPackage.ATTRIBUTE__MOCKUP:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

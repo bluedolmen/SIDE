@@ -83,7 +83,8 @@ public class ClassInitialization {
 		if (cl != null) {
 			Clazz clazz = cl;
 				// Attributes
-				for (Attribute att : clazz.getAllInheritedAttributes()) {
+
+				for (Attribute att : clazz.getAllAttributesWithoutAspectsAttributes()) {
 					Field field = null;
 					field = ClassDiagramUtils.getFieldForAttribute(att);
 					if (field != null) {

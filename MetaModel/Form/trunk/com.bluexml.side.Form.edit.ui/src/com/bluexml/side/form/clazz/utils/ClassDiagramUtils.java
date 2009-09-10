@@ -115,8 +115,10 @@ public class ClassDiagramUtils {
 				} else {
 					field.setLabel(att.getName());
 				}
-				field
-						.setHidden(Boolean.parseBoolean(metaInfoMap
+				if (att.getMockup().size() > 0) {
+					field.getMockup().addAll(att.getMockup());
+				}
+				field.setHidden(Boolean.parseBoolean(metaInfoMap
 								.get("hidden")));
 				field.setHelp_text(att.getDescription());
 				field.setMandatory(Boolean.parseBoolean(metaInfoMap

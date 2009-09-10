@@ -8,6 +8,7 @@ package com.bluexml.side.clazz;
 
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.Visibility;
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,6 +31,7 @@ import com.bluexml.side.common.Visibility;
  *   <li>{@link com.bluexml.side.clazz.Attribute#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Attribute#getValueList <em>Value List</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Attribute#isUnique <em>Unique</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.Attribute#getMockup <em>Mockup</em>}</li>
  * </ul>
  * </p>
  *
@@ -192,5 +194,21 @@ public interface Attribute extends TitledNamedClassModelElement {
 	 * @generated
 	 */
 	void setUnique(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Mockup</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Mockup</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Mockup</em>' attribute list.
+	 * @see com.bluexml.side.clazz.ClazzPackage#getAttribute_Mockup()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getMockup();
 		
 } // Attribute

@@ -21,12 +21,14 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.ocl.ecore.OCL;
 
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.SearchOperatorConfiguration;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+import java.util.Collection;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,6 +44,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getFieldSize <em>Field Size</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getStyle <em>Style</em>}</li>
  *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getSearchOperatorConfiguration <em>Search Operator Configuration</em>}</li>
+ *   <li>{@link com.bluexml.side.form.impl.FieldImpl#getMockup <em>Mockup</em>}</li>
  * </ul>
  * </p>
  *
@@ -167,6 +170,16 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	 * @ordered
 	 */
 	protected SearchOperatorConfiguration searchOperatorConfiguration;
+
+	/**
+	 * The cached value of the '{@link #getMockup() <em>Mockup</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMockup()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> mockup;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -358,6 +371,18 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getMockup() {
+		if (mockup == null) {
+			mockup = new EDataTypeUniqueEList<String>(String.class, this, FormPackage.FIELD__MOCKUP);
+		}
+		return mockup;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
 	 * Returns all the proposed operators for a given field.
 	 * This method works through convention by looking an enumeration of name 
 	 * "FieldType" + "SearchOperators". For example, if ask for proposed operators
@@ -427,6 +452,8 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 				return getStyle();
 			case FormPackage.FIELD__SEARCH_OPERATOR_CONFIGURATION:
 				return getSearchOperatorConfiguration();
+			case FormPackage.FIELD__MOCKUP:
+				return getMockup();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -461,6 +488,10 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 			case FormPackage.FIELD__SEARCH_OPERATOR_CONFIGURATION:
 				setSearchOperatorConfiguration((SearchOperatorConfiguration)newValue);
 				return;
+			case FormPackage.FIELD__MOCKUP:
+				getMockup().clear();
+				getMockup().addAll((Collection<? extends String>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -494,6 +525,9 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 			case FormPackage.FIELD__SEARCH_OPERATOR_CONFIGURATION:
 				setSearchOperatorConfiguration((SearchOperatorConfiguration)null);
 				return;
+			case FormPackage.FIELD__MOCKUP:
+				getMockup().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -520,6 +554,8 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 				return STYLE_EDEFAULT == null ? style != null : !STYLE_EDEFAULT.equals(style);
 			case FormPackage.FIELD__SEARCH_OPERATOR_CONFIGURATION:
 				return searchOperatorConfiguration != null;
+			case FormPackage.FIELD__MOCKUP:
+				return mockup != null && !mockup.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -546,6 +582,8 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 		result.append(fieldSize);
 		result.append(", style: ");
 		result.append(style);
+		result.append(", mockup: ");
+		result.append(mockup);
 		result.append(')');
 		return result.toString();
 	}

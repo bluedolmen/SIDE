@@ -907,13 +907,22 @@ public interface ClazzPackage extends EPackage {
 	int ATTRIBUTE__UNIQUE = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__MOCKUP = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Attribute</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_FEATURE_COUNT = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 5;
+	int ATTRIBUTE_FEATURE_COUNT = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.EnumerationImpl <em>Enumeration</em>}' class.
@@ -1666,6 +1675,17 @@ public interface ClazzPackage extends EPackage {
 	EAttribute getAttribute_Unique();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link com.bluexml.side.clazz.Attribute#getMockup <em>Mockup</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Mockup</em>'.
+	 * @see com.bluexml.side.clazz.Attribute#getMockup()
+	 * @see #getAttribute()
+	 * @generated
+	 */
+	EAttribute getAttribute_Mockup();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.clazz.Enumeration <em>Enumeration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2092,6 +2112,14 @@ public interface ClazzPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ATTRIBUTE__UNIQUE = eINSTANCE.getAttribute_Unique();
+
+		/**
+		 * The meta object literal for the '<em><b>Mockup</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE__MOCKUP = eINSTANCE.getAttribute_Mockup();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.EnumerationImpl <em>Enumeration</em>}' class.

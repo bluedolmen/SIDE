@@ -69,6 +69,7 @@ public class FieldItemProvider
 			addDisabledPropertyDescriptor(object);
 			addFieldSizePropertyDescriptor(object);
 			addStylePropertyDescriptor(object);
+			addMockupPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -206,6 +207,28 @@ public class FieldItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Mockup feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addMockupPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Field_mockup_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Field_mockup_feature", "_UI_Field_type"),
+				 FormPackage.Literals.FIELD__MOCKUP,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -266,6 +289,7 @@ public class FieldItemProvider
 			case FormPackage.FIELD__DISABLED:
 			case FormPackage.FIELD__FIELD_SIZE:
 			case FormPackage.FIELD__STYLE:
+			case FormPackage.FIELD__MOCKUP:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case FormPackage.FIELD__SEARCH_OPERATOR_CONFIGURATION:

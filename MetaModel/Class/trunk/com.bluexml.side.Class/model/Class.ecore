@@ -185,6 +185,11 @@
         <details key="body" value="self.aspects->asSet()->union(self.getInheritedClasses()->asSet().aspects)"/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="getAllAttributesWithoutAspectsAttributes" upperBound="-1" eType="#//Attribute">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.getAllInheritedAttributes()->union(self.attributes)"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
         eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//OperationComponent"
         containment="true"/>
@@ -289,6 +294,8 @@
         <details key="documentation" value="Definition: if true, this attribute inidcates that the class property is part of the unique constraint of the class. This means that the set of values of all the unique property must be unique through all the instances of the class."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mockup" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

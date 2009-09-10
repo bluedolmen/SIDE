@@ -88,6 +88,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/fieldSize"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/style"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Forms.ecore#//Field/searchOperatorConfiguration"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//Field/mockup"/>
       <genOperations ecoreOperation="Forms.ecore#//Field/getLabel"/>
       <genOperations ecoreOperation="Forms.ecore#//Field/getInitialProposedOperators"/>
     </genClasses>

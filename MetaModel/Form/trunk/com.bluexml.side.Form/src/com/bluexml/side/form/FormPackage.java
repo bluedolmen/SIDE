@@ -1105,13 +1105,22 @@ public interface FormPackage extends EPackage {
 	int FIELD__SEARCH_OPERATOR_CONFIGURATION = FORM_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__MOCKUP = FORM_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_FEATURE_COUNT = FORM_ELEMENT_FEATURE_COUNT + 7;
+	int FIELD_FEATURE_COUNT = FORM_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -1709,6 +1718,15 @@ public interface FormPackage extends EPackage {
 	int BOOLEAN_FIELD__SEARCH_OPERATOR_CONFIGURATION = FIELD__SEARCH_OPERATOR_CONFIGURATION;
 
 	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__MOCKUP = FIELD__MOCKUP;
+
+	/**
 	 * The number of structural features of the '<em>Boolean Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1878,6 +1896,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int CHAR_FIELD__SEARCH_OPERATOR_CONFIGURATION = FIELD__SEARCH_OPERATOR_CONFIGURATION;
+
+	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAR_FIELD__MOCKUP = FIELD__MOCKUP;
 
 	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
@@ -2067,6 +2094,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATE_FIELD__SEARCH_OPERATOR_CONFIGURATION = FIELD__SEARCH_OPERATOR_CONFIGURATION;
+
+	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__MOCKUP = FIELD__MOCKUP;
 
 	/**
 	 * The feature id for the '<em><b>Input formats</b></em>' attribute list.
@@ -2265,6 +2301,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATE_TIME_FIELD__SEARCH_OPERATOR_CONFIGURATION = DATE_FIELD__SEARCH_OPERATOR_CONFIGURATION;
+
+	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__MOCKUP = DATE_FIELD__MOCKUP;
 
 	/**
 	 * The feature id for the '<em><b>Input formats</b></em>' attribute list.
@@ -2475,6 +2520,15 @@ public interface FormPackage extends EPackage {
 	int NUMERICAL_FIELD__SEARCH_OPERATOR_CONFIGURATION = FIELD__SEARCH_OPERATOR_CONFIGURATION;
 
 	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_FIELD__MOCKUP = FIELD__MOCKUP;
+
+	/**
 	 * The number of structural features of the '<em>Numerical Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2644,6 +2698,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int DECIMAL_FIELD__SEARCH_OPERATOR_CONFIGURATION = NUMERICAL_FIELD__SEARCH_OPERATOR_CONFIGURATION;
+
+	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_FIELD__MOCKUP = NUMERICAL_FIELD__MOCKUP;
 
 	/**
 	 * The feature id for the '<em><b>Min value</b></em>' attribute.
@@ -2853,6 +2916,15 @@ public interface FormPackage extends EPackage {
 	int FLOAT_FIELD__SEARCH_OPERATOR_CONFIGURATION = NUMERICAL_FIELD__SEARCH_OPERATOR_CONFIGURATION;
 
 	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__MOCKUP = NUMERICAL_FIELD__MOCKUP;
+
+	/**
 	 * The feature id for the '<em><b>Min value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3042,6 +3114,15 @@ public interface FormPackage extends EPackage {
 	int INTEGER_FIELD__SEARCH_OPERATOR_CONFIGURATION = NUMERICAL_FIELD__SEARCH_OPERATOR_CONFIGURATION;
 
 	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__MOCKUP = NUMERICAL_FIELD__MOCKUP;
+
+	/**
 	 * The feature id for the '<em><b>Min value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3229,6 +3310,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int MODEL_CHOICE_FIELD__SEARCH_OPERATOR_CONFIGURATION = FIELD__SEARCH_OPERATOR_CONFIGURATION;
+
+	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHOICE_FIELD__MOCKUP = FIELD__MOCKUP;
 
 	/**
 	 * The feature id for the '<em><b>Real class</b></em>' reference.
@@ -3483,6 +3573,15 @@ public interface FormPackage extends EPackage {
 	int EMAIL_FIELD__SEARCH_OPERATOR_CONFIGURATION = CHAR_FIELD__SEARCH_OPERATOR_CONFIGURATION;
 
 	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__MOCKUP = CHAR_FIELD__MOCKUP;
+
+	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3672,6 +3771,15 @@ public interface FormPackage extends EPackage {
 	int FILE_FIELD__SEARCH_OPERATOR_CONFIGURATION = FIELD__SEARCH_OPERATOR_CONFIGURATION;
 
 	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__MOCKUP = FIELD__MOCKUP;
+
+	/**
 	 * The feature id for the '<em><b>In Repository</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3852,6 +3960,15 @@ public interface FormPackage extends EPackage {
 	int IMAGE_FIELD__SEARCH_OPERATOR_CONFIGURATION = FILE_FIELD__SEARCH_OPERATOR_CONFIGURATION;
 
 	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__MOCKUP = FILE_FIELD__MOCKUP;
+
+	/**
 	 * The feature id for the '<em><b>In Repository</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4030,6 +4147,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int TIME_FIELD__SEARCH_OPERATOR_CONFIGURATION = DATE_FIELD__SEARCH_OPERATOR_CONFIGURATION;
+
+	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__MOCKUP = DATE_FIELD__MOCKUP;
 
 	/**
 	 * The feature id for the '<em><b>Input formats</b></em>' attribute list.
@@ -4230,6 +4356,15 @@ public interface FormPackage extends EPackage {
 	int URL_FIELD__SEARCH_OPERATOR_CONFIGURATION = CHAR_FIELD__SEARCH_OPERATOR_CONFIGURATION;
 
 	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__MOCKUP = CHAR_FIELD__MOCKUP;
+
+	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4426,6 +4561,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int PHONE_NUMBER_FIELD__SEARCH_OPERATOR_CONFIGURATION = CHAR_FIELD__SEARCH_OPERATOR_CONFIGURATION;
+
+	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__MOCKUP = CHAR_FIELD__MOCKUP;
 
 	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
@@ -4761,6 +4905,15 @@ public interface FormPackage extends EPackage {
 	int REFERENCE__SEARCH_OPERATOR_CONFIGURATION = MODEL_CHOICE_FIELD__SEARCH_OPERATOR_CONFIGURATION;
 
 	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__MOCKUP = MODEL_CHOICE_FIELD__MOCKUP;
+
+	/**
 	 * The feature id for the '<em><b>Real class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5013,6 +5166,15 @@ public interface FormPackage extends EPackage {
 	int CHOICE_FIELD__SEARCH_OPERATOR_CONFIGURATION = FIELD__SEARCH_OPERATOR_CONFIGURATION;
 
 	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_FIELD__MOCKUP = FIELD__MOCKUP;
+
+	/**
 	 * The feature id for the '<em><b>Min bound</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5218,6 +5380,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int REGEX_FIELD__SEARCH_OPERATOR_CONFIGURATION = CHAR_FIELD__SEARCH_OPERATOR_CONFIGURATION;
+
+	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGEX_FIELD__MOCKUP = CHAR_FIELD__MOCKUP;
 
 	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
@@ -5436,6 +5607,15 @@ public interface FormPackage extends EPackage {
 	int PASSWORD_FIELD__SEARCH_OPERATOR_CONFIGURATION = CHAR_FIELD__SEARCH_OPERATOR_CONFIGURATION;
 
 	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__MOCKUP = CHAR_FIELD__MOCKUP;
+
+	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5625,6 +5805,15 @@ public interface FormPackage extends EPackage {
 	int VIRTUAL_FIELD__SEARCH_OPERATOR_CONFIGURATION = FIELD__SEARCH_OPERATOR_CONFIGURATION;
 
 	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_FIELD__MOCKUP = FIELD__MOCKUP;
+
+	/**
 	 * The feature id for the '<em><b>Link</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5805,6 +5994,15 @@ public interface FormPackage extends EPackage {
 	int ACTION_FIELD__SEARCH_OPERATOR_CONFIGURATION = FIELD__SEARCH_OPERATOR_CONFIGURATION;
 
 	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__MOCKUP = FIELD__MOCKUP;
+
+	/**
 	 * The number of structural features of the '<em>Action Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5974,6 +6172,15 @@ public interface FormPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEXT_FIELD__SEARCH_OPERATOR_CONFIGURATION = CHAR_FIELD__SEARCH_OPERATOR_CONFIGURATION;
+
+	/**
+	 * The feature id for the '<em><b>Mockup</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__MOCKUP = CHAR_FIELD__MOCKUP;
 
 	/**
 	 * The feature id for the '<em><b>Min length</b></em>' attribute.
@@ -6486,6 +6693,17 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getField_SearchOperatorConfiguration();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link com.bluexml.side.form.Field#getMockup <em>Mockup</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Mockup</em>'.
+	 * @see com.bluexml.side.form.Field#getMockup()
+	 * @see #getField()
+	 * @generated
+	 */
+	EAttribute getField_Mockup();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.BooleanField <em>Boolean Field</em>}'.
@@ -7507,6 +7725,14 @@ public interface FormPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FIELD__SEARCH_OPERATOR_CONFIGURATION = eINSTANCE.getField_SearchOperatorConfiguration();
+
+		/**
+		 * The meta object literal for the '<em><b>Mockup</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FIELD__MOCKUP = eINSTANCE.getField_Mockup();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.BooleanFieldImpl <em>Boolean Field</em>}' class.

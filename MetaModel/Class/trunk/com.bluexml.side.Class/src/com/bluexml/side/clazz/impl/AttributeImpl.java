@@ -15,13 +15,16 @@ import com.bluexml.side.common.Visibility;
 
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.ocl.ecore.OCL;
 
 /**
@@ -36,6 +39,7 @@ import org.eclipse.ocl.ecore.OCL;
  *   <li>{@link com.bluexml.side.clazz.impl.AttributeImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AttributeImpl#getValueList <em>Value List</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AttributeImpl#isUnique <em>Unique</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.impl.AttributeImpl#getMockup <em>Mockup</em>}</li>
  * </ul>
  * </p>
  *
@@ -131,6 +135,16 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 	 * @ordered
 	 */
 	protected boolean unique = UNIQUE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getMockup() <em>Mockup</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMockup()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> mockup;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -278,6 +292,18 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getMockup() {
+		if (mockup == null) {
+			mockup = new EDataTypeUniqueEList<String>(String.class, this, ClazzPackage.ATTRIBUTE__MOCKUP);
+		}
+		return mockup;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -292,6 +318,8 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 				return basicGetValueList();
 			case ClazzPackage.ATTRIBUTE__UNIQUE:
 				return isUnique() ? Boolean.TRUE : Boolean.FALSE;
+			case ClazzPackage.ATTRIBUTE__MOCKUP:
+				return getMockup();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -301,6 +329,7 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -318,6 +347,10 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 				return;
 			case ClazzPackage.ATTRIBUTE__UNIQUE:
 				setUnique(((Boolean)newValue).booleanValue());
+				return;
+			case ClazzPackage.ATTRIBUTE__MOCKUP:
+				getMockup().clear();
+				getMockup().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -346,6 +379,9 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 			case ClazzPackage.ATTRIBUTE__UNIQUE:
 				setUnique(UNIQUE_EDEFAULT);
 				return;
+			case ClazzPackage.ATTRIBUTE__MOCKUP:
+				getMockup().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -368,6 +404,8 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 				return valueList != null;
 			case ClazzPackage.ATTRIBUTE__UNIQUE:
 				return unique != UNIQUE_EDEFAULT;
+			case ClazzPackage.ATTRIBUTE__MOCKUP:
+				return mockup != null && !mockup.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -390,6 +428,8 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 		result.append(visibility);
 		result.append(", unique: ");
 		result.append(unique);
+		result.append(", mockup: ");
+		result.append(mockup);
 		result.append(')');
 		return result.toString();
 	}
