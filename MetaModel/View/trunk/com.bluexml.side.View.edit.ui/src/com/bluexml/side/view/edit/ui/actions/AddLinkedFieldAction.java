@@ -1,4 +1,4 @@
-package com.bluexml.side.side.view.edit.ui.actions;
+package com.bluexml.side.view.edit.ui.actions;
 
 import java.util.Iterator;
 import java.util.List;
@@ -17,8 +17,6 @@ import org.eclipse.ui.IWorkbenchPart;
 
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
-import com.bluexml.side.side.view.edit.ui.utils.InternalModification;
-import com.bluexml.side.side.view.edit.ui.utils.model.ClassUtils;
 import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.Col;
 import com.bluexml.side.view.DataTable;
@@ -26,6 +24,8 @@ import com.bluexml.side.view.Field;
 import com.bluexml.side.view.FieldElement;
 import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
+import com.bluexml.side.view.edit.ui.utils.InternalModification;
+import com.bluexml.side.view.edit.ui.utils.model.ClassUtils;
 
 public class AddLinkedFieldAction  extends Action implements
 ISelectionChangedListener {

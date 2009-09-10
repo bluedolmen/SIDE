@@ -1,4 +1,4 @@
-package com.bluexml.side.side.view.edit.ui;
+package com.bluexml.side.view.edit.ui;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;

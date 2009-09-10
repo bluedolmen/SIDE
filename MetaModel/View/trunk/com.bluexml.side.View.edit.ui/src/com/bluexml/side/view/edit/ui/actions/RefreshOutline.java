@@ -1,4 +1,4 @@
-package com.bluexml.side.side.view.edit.ui.actions;
+package com.bluexml.side.view.edit.ui.actions;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
@@ -31,9 +31,9 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.PlatformUI;
 
-import com.bluexml.side.side.view.edit.ui.utils.outline.service.OutlineViewService;
 import com.bluexml.side.util.libs.view.OutlineHTMLView;
 import com.bluexml.side.view.FieldContainer;
+import com.bluexml.side.view.edit.ui.utils.outline.service.OutlineViewService;
 
 import fr.obeo.acceleo.chain.ActionSet;
 import fr.obeo.acceleo.chain.ChainFactory;

@@ -1,4 +1,4 @@
-package com.bluexml.side.side.view.edit.ui.actions;
+package com.bluexml.side.view.edit.ui.actions;
 
 import java.util.Iterator;
 
@@ -12,9 +12,9 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
-import com.bluexml.side.side.view.edit.ui.utils.ColConfManager;
-import com.bluexml.side.side.view.edit.ui.utils.InternalModification;
 import com.bluexml.side.view.Col;
+import com.bluexml.side.view.edit.ui.utils.ColConfManager;
+import com.bluexml.side.view.edit.ui.utils.InternalModification;
 
 
 

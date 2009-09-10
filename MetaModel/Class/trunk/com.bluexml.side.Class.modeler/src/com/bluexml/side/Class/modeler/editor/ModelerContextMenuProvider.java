@@ -8,6 +8,7 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
 
 import com.bluexml.side.Class.modeler.actions.ShowFormAction;
+import com.bluexml.side.Class.modeler.actions.ShowViewAction;
 
 public class ModelerContextMenuProvider extends ContextMenuProvider {
 
@@ -31,6 +32,10 @@ public class ModelerContextMenuProvider extends ContextMenuProvider {
 		IAction action;
 
 		action = actionRegistry.getAction(ShowFormAction.ID);
+		if (action.isEnabled())
+			manager.appendToGroup(GEFActionConstants.GROUP_VIEW, action);
+		
+		action = actionRegistry.getAction(ShowViewAction.ID);
 		if (action.isEnabled())
 			manager.appendToGroup(GEFActionConstants.GROUP_VIEW, action);
 	}

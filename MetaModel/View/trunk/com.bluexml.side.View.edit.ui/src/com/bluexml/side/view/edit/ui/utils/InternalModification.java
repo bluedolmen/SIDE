@@ -1,4 +1,4 @@
-package com.bluexml.side.side.view.edit.ui.utils;
+package com.bluexml.side.view.edit.ui.utils;
 
 public class InternalModification {
 

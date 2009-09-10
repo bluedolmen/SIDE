@@ -44,22 +44,23 @@ import org.eclipse.ui.PartInitException;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.side.view.edit.ui.actions.AddLinkedFieldAction;
-import com.bluexml.side.side.view.edit.ui.actions.CopyColConfAction;
-import com.bluexml.side.side.view.edit.ui.actions.InitializeView;
-import com.bluexml.side.side.view.edit.ui.actions.MergeCols;
-import com.bluexml.side.side.view.edit.ui.actions.PasteColConfAction;
-import com.bluexml.side.side.view.edit.ui.actions.RefreshOutline;
-import com.bluexml.side.side.view.edit.ui.actions.RestoreFieldAction;
-import com.bluexml.side.side.view.edit.ui.actions.SynchronizeViews;
-import com.bluexml.side.side.view.edit.ui.actions.TransformField;
-import com.bluexml.side.side.view.edit.ui.utils.FieldTransformation;
 import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.AbstractViewOf;
 import com.bluexml.side.view.Col;
 import com.bluexml.side.view.Field;
 import com.bluexml.side.view.FieldElement;
 import com.bluexml.side.view.ViewCollection;
+import com.bluexml.side.view.edit.ui.actions.AddLinkedFieldAction;
+import com.bluexml.side.view.edit.ui.actions.CopyColConfAction;
+import com.bluexml.side.view.edit.ui.actions.InitializeView;
+import com.bluexml.side.view.edit.ui.actions.MergeCols;
+import com.bluexml.side.view.edit.ui.actions.PasteColConfAction;
+import com.bluexml.side.view.edit.ui.actions.RefreshOutline;
+import com.bluexml.side.view.edit.ui.actions.RestoreFieldAction;
+import com.bluexml.side.view.edit.ui.actions.ShowLinkedClassAction;
+import com.bluexml.side.view.edit.ui.actions.SynchronizeViews;
+import com.bluexml.side.view.edit.ui.actions.TransformField;
+import com.bluexml.side.view.edit.ui.utils.FieldTransformation;
 
 /**
  * This is the action bar contributor for the View model editor. <!--
@@ -76,6 +77,8 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 	protected RefreshOutline refreshOutline = new RefreshOutline();
 	protected CopyColConfAction copyColConfAction = new CopyColConfAction();
 	protected PasteColConfAction pasteColConfAction = new PasteColConfAction();
+	protected ShowLinkedClassAction showLinkedClassAction = new ShowLinkedClassAction();
+	
 
 	/**
 	 * This keeps track of the active editor.
@@ -454,6 +457,9 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 				.insertAfter("ui-actions", new Separator("ui-commonActions"));
 		if (o instanceof AbstractView) {
 			addActionsForViews(menuManager, o);
+			showLinkedClassAction.setImageDescriptor(ImageDescriptor.createFromFile(this
+					.getClass(), "/icons/menu/show_link.png"));
+			menuManager.insertAfter("ui-actions", showLinkedClassAction);
 		}
 
 		if (o instanceof Field) {
@@ -722,6 +728,8 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 		.addSelectionChangedListener((ISelectionChangedListener) copyColConfAction);
 		selectionProvider
 		.addSelectionChangedListener((ISelectionChangedListener) pasteColConfAction);
+		selectionProvider
+		.addSelectionChangedListener((ISelectionChangedListener) showLinkedClassAction);
 
 	}
 }

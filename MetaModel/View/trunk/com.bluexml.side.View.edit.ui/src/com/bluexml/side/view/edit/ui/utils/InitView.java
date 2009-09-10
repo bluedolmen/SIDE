@@ -1,4 +1,4 @@
-package com.bluexml.side.side.view.edit.ui.utils;
+package com.bluexml.side.view.edit.ui.utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,14 +19,14 @@ import org.eclipse.swt.widgets.Shell;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.common.ModelElement;
-import com.bluexml.side.side.view.edit.ui.utils.model.ClassUtils;
-import com.bluexml.side.side.view.edit.ui.utils.model.ViewUtils;
 import com.bluexml.side.util.libs.ui.UIUtils;
 import com.bluexml.side.view.AbstractViewOf;
 import com.bluexml.side.view.FacetMap;
 import com.bluexml.side.view.FieldElement;
 import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
+import com.bluexml.side.view.edit.ui.utils.model.ClassUtils;
+import com.bluexml.side.view.edit.ui.utils.model.ViewUtils;
 
 public class InitView {
 

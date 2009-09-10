@@ -7,11 +7,6 @@
 package com.bluexml.side.view.provider;
 
 
-import com.bluexml.side.side.view.edit.ui.utils.model.ViewUtils;
-import com.bluexml.side.view.FieldContainer;
-import com.bluexml.side.view.ViewFactory;
-import com.bluexml.side.view.ViewPackage;
-
 import java.util.Collection;
 import java.util.List;
 
@@ -19,11 +14,9 @@ import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -32,6 +25,10 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
+import com.bluexml.side.view.FieldContainer;
+import com.bluexml.side.view.ViewPackage;
+import com.bluexml.side.view.edit.ui.utils.model.ViewUtils;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.view.FieldContainer} object.

@@ -30,6 +30,7 @@ import org.topcased.modeler.editor.ModelerGraphicalViewer;
 
 import com.bluexml.side.Class.modeler.ClazzPlugin;
 import com.bluexml.side.Class.modeler.actions.ShowFormAction;
+import com.bluexml.side.Class.modeler.actions.ShowViewAction;
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassAspectAction;
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassGeneralizationAction;
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkEnumerationDependsAction;
@@ -134,6 +135,9 @@ public class ClazzEditor extends Modeler {
         getSelectionActions().add(deleteLinkClassGeneralizationAction.getId());
         
         IAction action = new ShowFormAction((IWorkbenchPart) this);
+		registry.registerAction(action);
+		
+		action = new ShowViewAction((IWorkbenchPart) this);
 		registry.registerAction(action);
     }
     

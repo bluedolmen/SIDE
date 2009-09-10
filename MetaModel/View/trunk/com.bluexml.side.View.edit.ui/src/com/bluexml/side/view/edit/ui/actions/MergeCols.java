@@ -1,8 +1,10 @@
-package com.bluexml.side.side.view.edit.ui.actions;
+package com.bluexml.side.view.edit.ui.actions;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
-import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
@@ -12,19 +14,19 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
-import com.bluexml.side.side.view.edit.ui.utils.InternalModification;
-import com.bluexml.side.side.view.edit.ui.utils.model.ClassUtils;
-import com.bluexml.side.view.AbstractView;
-import com.bluexml.side.view.AbstractViewOf;
-import com.bluexml.side.view.ViewCollection;
+import com.bluexml.side.view.Col;
+import com.bluexml.side.view.FieldContainer;
+import com.bluexml.side.view.edit.ui.utils.InternalModification;
+import com.bluexml.side.view.edit.ui.utils.model.ViewUtils;
 
 
 
 
-public class SynchronizeViews  extends Action implements
+public class MergeCols  extends Action implements
 ISelectionChangedListener {
 
-	protected ViewCollection selectedObject;
+	protected List<Col> selectedObject;
+	protected EObject container;
 	private EditingDomain domain;
 	
 	public void selectionChanged(SelectionChangedEvent event) {
@@ -37,16 +39,23 @@ ISelectionChangedListener {
 	}
 	
 	public boolean updateSelection(IStructuredSelection selection) {
-		selectedObject = null;
+		selectedObject = new ArrayList<Col>();
 		for (Iterator<?> objects = selection.iterator(); objects.hasNext();) {
 			Object object = objects.next();
-			if (object instanceof ViewCollection) {
-				selectedObject = (ViewCollection) object;
+			if (object instanceof Col) {
+				// We add cols having the same parent only
+				Col col = (Col) object;
+				if (selectedObject.size() > 0 && selectedObject.get(0).eContainer().equals(col.eContainer())) {
+					selectedObject.add(col);
+				} else if(selectedObject.size() == 0) {
+					selectedObject.add((Col) object);
+					container = col.eContainer();
+				}
 			} else {
 				return false;
 			}
 		}
-		return selectedObject != null;
+		return selectedObject.size() > 1;
 	}
 	
 	@Override
@@ -55,19 +64,13 @@ ISelectionChangedListener {
 		doAction(selectedObject);
 	}
 
-	private void doAction(ViewCollection av) {
+	private void doAction(List<Col> lc) {
 		InternalModification.dontMoveToDisabled();
 		try {
-			CompoundCommand cmd = new CompoundCommand();
-			for(AbstractView view : av.getViews()) {
-				if (view instanceof AbstractViewOf) {
-					cmd.append(ClassUtils.synchronizeView((AbstractViewOf)view, domain));
-				}
-			}
-			domain.getCommandStack().execute(cmd);
+			domain.getCommandStack().execute(ViewUtils.getCommandForColMerge(selectedObject,(FieldContainer)container,domain));
 		} catch (Exception e) {
 			e.printStackTrace();
-			EcorePlugin.INSTANCE.log("Synchronization failed : " + e.getMessage());
+			EcorePlugin.INSTANCE.log("Merge failed : " + e.getMessage());
 			e.printStackTrace();
 			InternalModification.moveToDisabled(); 
 		}
@@ -76,7 +79,7 @@ ISelectionChangedListener {
 
 	@Override
 	public String getText() {
-		return "Synchronize views with Class Diagram";
+		return "Merge";
 	}
 
 	public void setActiveWorkbenchPart(IWorkbenchPart workbenchPart) {

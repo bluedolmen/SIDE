@@ -1,4 +1,4 @@
-package com.bluexml.side.side.view.edit.ui.utils.model;
+package com.bluexml.side.view.edit.ui.utils.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +19,6 @@ import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.common.Container;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaInfo;
-import com.bluexml.side.side.view.edit.ui.utils.FieldTransformation;
 import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.AbstractViewOf;
 import com.bluexml.side.view.Col;
@@ -28,6 +27,7 @@ import com.bluexml.side.view.Field;
 import com.bluexml.side.view.FieldElement;
 import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
+import com.bluexml.side.view.edit.ui.utils.FieldTransformation;
 
 public class ClassUtils {
 	

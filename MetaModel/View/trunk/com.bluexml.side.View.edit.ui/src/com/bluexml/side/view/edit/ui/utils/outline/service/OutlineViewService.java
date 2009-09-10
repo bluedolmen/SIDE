@@ -1,4 +1,4 @@
-package com.bluexml.side.side.view.edit.ui.utils.outline.service;
+package com.bluexml.side.view.edit.ui.utils.outline.service;
 
 import org.eclipse.emf.ecore.EObject;
 

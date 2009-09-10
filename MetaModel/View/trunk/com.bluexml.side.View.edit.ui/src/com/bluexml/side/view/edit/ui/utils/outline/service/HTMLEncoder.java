@@ -1,4 +1,4 @@
-package com.bluexml.side.side.view.edit.ui.utils.outline.service;
+package com.bluexml.side.view.edit.ui.utils.outline.service;
 
 import java.util.HashMap;
 import java.util.Map;

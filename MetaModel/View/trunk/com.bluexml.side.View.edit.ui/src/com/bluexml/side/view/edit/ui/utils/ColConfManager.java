@@ -1,4 +1,4 @@
-package com.bluexml.side.side.view.edit.ui.utils;
+package com.bluexml.side.view.edit.ui.utils;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;

@@ -1,9 +1,8 @@
-package com.bluexml.side.side.view.edit.ui.actions;
+package com.bluexml.side.view.edit.ui.actions;
 
 import java.util.Iterator;
 
-import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
@@ -13,18 +12,19 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
-import com.bluexml.side.side.view.edit.ui.utils.ColConfManager;
-import com.bluexml.side.side.view.edit.ui.utils.InternalModification;
-import com.bluexml.side.view.Col;
+import com.bluexml.side.view.AbstractView;
+import com.bluexml.side.view.AbstractViewOf;
+import com.bluexml.side.view.ComposedView;
+import com.bluexml.side.view.edit.ui.utils.InitView;
+import com.bluexml.side.view.edit.ui.utils.InternalModification;
 
 
 
 
-public class PasteColConfAction  extends Action implements
+public class InitializeView  extends Action implements
 ISelectionChangedListener {
 
-	protected Col selectedObject = null;
-	protected EObject container;
+	protected AbstractView selectedObject;
 	private EditingDomain domain;
 	
 	public void selectionChanged(SelectionChangedEvent event) {
@@ -37,30 +37,44 @@ ISelectionChangedListener {
 	}
 	
 	public boolean updateSelection(IStructuredSelection selection) {
-		if (selection.size() == 1) {
-			Iterator<?> objects = selection.iterator();
+		selectedObject = null;
+		for (Iterator<?> objects = selection.iterator(); objects.hasNext();) {
 			Object object = objects.next();
-			if (object instanceof Col) {
-				selectedObject = (Col)object;
+			if (object instanceof AbstractView) {
+				selectedObject = (AbstractView) object;
+			} else {
+				return false;
 			}
 		}
-		return (selectedObject != null && ColConfManager.getActualCopiedCol() != null);
+		return selectedObject != null;
 	}
 	
 	@Override
 	public void run() {
 		super.run();
-		doAction(selectedObject);
+		doAction((AbstractView) selectedObject);
 	}
 
-	private void doAction(Col c) {
+	private void doAction(AbstractView av) {
 		InternalModification.dontMoveToDisabled();
 		try {
-			Command cmd = ColConfManager.paste(c, domain);
-			domain.getCommandStack().execute(cmd);
+			CompoundCommand cmd = new CompoundCommand();
+			if (av instanceof ComposedView) {
+				ComposedView cv = (ComposedView) av;
+				for (AbstractView v : cv.getInnerView()) {
+					if (v instanceof AbstractViewOf) {
+						cmd.append(InitView.init((AbstractViewOf)v,domain));
+					}
+				}
+			} else if (av instanceof AbstractViewOf) {
+				cmd.append(InitView.init((AbstractViewOf)av,domain));
+			}
+			if (!cmd.isEmpty()) {
+				domain.getCommandStack().execute(cmd);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			EcorePlugin.INSTANCE.log("Paste Column : " + e.getMessage());
+			EcorePlugin.INSTANCE.log("Init failed : " + e.getMessage());
 			e.printStackTrace();
 			InternalModification.moveToDisabled(); 
 		}
@@ -69,7 +83,7 @@ ISelectionChangedListener {
 
 	@Override
 	public String getText() {
-		return "Paste Column Configuration";
+		return "Initiliaze";
 	}
 
 	public void setActiveWorkbenchPart(IWorkbenchPart workbenchPart) {

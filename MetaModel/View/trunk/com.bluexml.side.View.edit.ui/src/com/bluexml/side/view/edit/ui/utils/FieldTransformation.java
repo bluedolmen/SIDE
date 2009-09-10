@@ -1,4 +1,4 @@
-package com.bluexml.side.side.view.edit.ui.utils;
+package com.bluexml.side.view.edit.ui.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
-import com.bluexml.side.side.view.edit.ui.actions.TransformField;
 import com.bluexml.side.view.Field;
+import com.bluexml.side.view.edit.ui.actions.TransformField;
 
 
 public class FieldTransformation {

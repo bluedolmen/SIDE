@@ -1,4 +1,4 @@
-package com.bluexml.side.side.view.edit.ui.actions;
+package com.bluexml.side.view.edit.ui.actions;
 
 import java.lang.reflect.Method;
 import java.util.Iterator;
@@ -17,12 +17,12 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
 
-import com.bluexml.side.side.view.edit.ui.utils.FieldTransformation;
-import com.bluexml.side.side.view.edit.ui.utils.InternalModification;
 import com.bluexml.side.view.Field;
 import com.bluexml.side.view.FieldContainer;
 import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
+import com.bluexml.side.view.edit.ui.utils.FieldTransformation;
+import com.bluexml.side.view.edit.ui.utils.InternalModification;
 
 
 

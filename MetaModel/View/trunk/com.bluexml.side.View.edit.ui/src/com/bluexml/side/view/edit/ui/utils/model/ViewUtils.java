@@ -1,4 +1,4 @@
-package com.bluexml.side.side.view.edit.ui.utils.model;
+package com.bluexml.side.view.edit.ui.utils.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,7 +12,6 @@ import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.DeleteCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 
-import com.bluexml.side.side.view.edit.ui.utils.InternalModification;
 import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.Col;
 import com.bluexml.side.view.ComposedView;
@@ -25,6 +24,7 @@ import com.bluexml.side.view.FieldElement;
 import com.bluexml.side.view.Tree;
 import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
+import com.bluexml.side.view.edit.ui.utils.InternalModification;
 
 public class ViewUtils {
 	/**
