@@ -18,12 +18,17 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import com.bluexml.side.util.libs.Messages;
+
 /**
  * The main plugin class to be used in the desktop.
  *
  * @generated
  */
 public class ClazzPlugin extends AbstractUIPlugin {
+	
+	public static final Messages Messages = new Messages("com.bluexml.side.Class.modeler", "com.bluexml.side.Class.modeler.messages");
+	
 	/**
 	 * The shared instance
 	 * @generated

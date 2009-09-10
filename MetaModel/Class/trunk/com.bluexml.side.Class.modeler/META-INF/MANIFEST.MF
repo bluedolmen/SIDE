@@ -18,6 +18,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources,
  com.bluexml.side.Class,
  com.bluexml.side.Common,
- org.topcased.modeler
+ org.topcased.modeler,
+ com.bluexml.side.Util.libs;bundle-version="1.0.25",
+ com.bluexml.side.Form;bundle-version="1.0.31",
+ com.bluexml.side.Form.editor;bundle-version="1.0.19"
 Eclipse-LazyStart: true
 Export-Package: com.bluexml.side.Class.modeler.diagram.utils.metainfo.value

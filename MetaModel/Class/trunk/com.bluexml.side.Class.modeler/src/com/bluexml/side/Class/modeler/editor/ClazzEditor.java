@@ -18,6 +18,7 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
@@ -28,7 +29,7 @@ import org.topcased.modeler.editor.Modeler;
 import org.topcased.modeler.editor.ModelerGraphicalViewer;
 
 import com.bluexml.side.Class.modeler.ClazzPlugin;
-import com.bluexml.side.Class.modeler.SideClassContextMenuProvider;
+import com.bluexml.side.Class.modeler.actions.ShowFormAction;
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassAspectAction;
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkClassGeneralizationAction;
 import com.bluexml.side.Class.modeler.diagram.actions.DeleteLinkEnumerationDependsAction;
@@ -103,10 +104,11 @@ public class ClazzEditor extends Modeler {
 	
 	/**
      * @see org.topcased.modeler.editor.Modeler#getContextMenuProvider(org.topcased.modeler.editor.ModelerGraphicalViewer)
+     * @_generated
      */
     protected ContextMenuProvider getContextMenuProvider(ModelerGraphicalViewer viewer)
     {
-        return new SideClassContextMenuProvider(viewer, getActionRegistry());
+        return new ModelerContextMenuProvider(viewer, getActionRegistry());
     }
     
     @Override
@@ -115,8 +117,6 @@ public class ClazzEditor extends Modeler {
         super.createActions();
 
         ActionRegistry registry = getActionRegistry();
-        
-        
         
         // Delete link between Class and Aspect
         DeleteLinkClassAspectAction deleteLinkToAspect = new DeleteLinkClassAspectAction(this);
@@ -132,6 +132,9 @@ public class ClazzEditor extends Modeler {
         DeleteLinkClassGeneralizationAction deleteLinkClassGeneralizationAction = new DeleteLinkClassGeneralizationAction(this);
         registry.registerAction(deleteLinkClassGeneralizationAction);
         getSelectionActions().add(deleteLinkClassGeneralizationAction.getId());
+        
+        IAction action = new ShowFormAction((IWorkbenchPart) this);
+		registry.registerAction(action);
     }
     
     @Override
@@ -154,4 +157,5 @@ public class ClazzEditor extends Modeler {
 		getEditDomain().setPaletteViewer(new PaletteViewer());
 		setGraphicalViewer(viewer);
 	}
+    
 }
