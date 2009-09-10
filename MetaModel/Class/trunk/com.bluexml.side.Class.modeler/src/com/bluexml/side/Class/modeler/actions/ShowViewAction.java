@@ -88,7 +88,7 @@ public class ShowViewAction extends WorkbenchPartAction {
 			if (fc instanceof AbstractViewOf) {
 				AbstractViewOf fw = (AbstractViewOf) fc;
 				if ((view.getName() == null && fw.getName() == null) || (view.getName().equals(fw.getName()) 
-						&& view.eClass().equals(fw.eClass()))) {
+						&& view.getViewOf().eClass().equals(fw.getViewOf().eClass()))) {
 					Container co = fw.getViewOf();
 					if (co instanceof Clazz && view.getViewOf() instanceof Clazz) {
 						Clazz c = (Clazz) co;
@@ -188,7 +188,7 @@ public class ShowViewAction extends WorkbenchPartAction {
 		setId(ID);
 		setText(ClazzPlugin.Messages.getString("ShowViewAction.5")); //$NON-NLS-1$
 		setImageDescriptor(ClazzImageRegistry
-				.getImageDescriptor("FORMMODEL")); //$NON-NLS-1$
+				.getImageDescriptor("VIEWMODEL")); //$NON-NLS-1$
 	}
 
 	public void setSelection(ISelection s) {
