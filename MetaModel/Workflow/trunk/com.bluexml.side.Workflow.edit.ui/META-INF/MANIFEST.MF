@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: com.bluexml.side.Workflow.edit.ui
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.bluexml.side.workflow.edit.ui.Activator
+Bundle-Vendor: %providerName
+Require-Bundle: org.eclipse.gmf.runtime.emf.core;bundle-version="1.2.0",
+ com.bluexml.side.Form.editor;bundle-version="1.0.19",
+ com.bluexml.side.Workflow;bundle-version="1.0.21",
+ com.bluexml.side.Form.edit.ui;bundle-version="1.0.23"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
