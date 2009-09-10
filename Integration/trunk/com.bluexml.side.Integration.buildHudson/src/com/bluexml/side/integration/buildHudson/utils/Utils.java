@@ -82,6 +82,8 @@ public class Utils {
 	 */
 	public static String[] getVersionedProjects() {
 
+		//String[] projects = ouvrirFichier("/home/stager/buildAuto/Ankle/build.properties").getProperty(
+		//		"projectToVersioned").split(",");
 		String[] projects = ouvrirFichier("build.properties").getProperty(
 				"projectToVersioned").split(",");
 
@@ -322,6 +324,63 @@ public class Utils {
 
 		}
 		return version;
+	}
+	
+	
+	/**
+	 * Retourne le num�ro de version pour un pom donn�
+	 * 
+	 * @param projectName
+	 *            le nom du projet
+	 * @return le num�ro de version pour un projet donn�
+	 */
+	public static String getVersionNumberPom(String projectName) {
+		String version = "";
+
+		// En fonction du type du projet (feature ou plugin)
+		// on ira regarder soit dans le MANIFEST ou alors dans le feature.xml
+		
+			org.jdom.Document document = null;
+			org.jdom.Element racine;
+
+			// On cr�e une instance de SAXBuilder
+			SAXBuilder sxb = new SAXBuilder();
+			try {
+				// On cr�e un nouveau document JDOM avec en argument le fichier
+				// XML
+				document = sxb.build(new File(projectName));
+			} catch (Exception e) {
+			}
+
+			// On initialise un nouvel �l�ment racine avec l'�l�ment racine du
+			// document.
+			racine = document.getRootElement();
+
+			String oldVersionNumber = "";
+			
+
+			// On cr�e une List contenant tous les noeuds "version" de
+			// l'Element racine
+			List listVersion=racine.getChildren();
+			
+			Iterator<?> i = listVersion.iterator();
+			// on va parcourir tous les plugins
+			while (i.hasNext()) {
+				// On recr�e l'Element courant � chaque tour de boucle afin de
+				// pouvoir utiliser les m�thodes propres aux Element comme :
+				// selectionner un noeud fils, modifier du texte, etc...
+				Element courant = (Element) i.next();
+
+				// sauvegarde du num�ro de version
+				if (courant.getName().equals("version")){
+					oldVersionNumber = courant.getText();
+					return oldVersionNumber;
+				}
+				
+			}
+
+			return oldVersionNumber;
+		
 	}
 
 	/**
@@ -608,6 +667,16 @@ public class Utils {
 						+ getVersionNumber(feature));
 			}
 		}
+		
+		if (listeProjetPoms.size() != 0) {
+			System.out.println("\nListe des poms modifi�es: ");
+			for (String pom : listeProjetPoms) {
+				String valeurf= pom;
+				String [] tab=valeurf.split("/S-IDE/");
+				System.out.println("\t- " + tab[1] + ": "
+						+ getVersionNumberPom(pom));
+			}
+			}
 		// fin affichage
 
 		copyToRepository();
