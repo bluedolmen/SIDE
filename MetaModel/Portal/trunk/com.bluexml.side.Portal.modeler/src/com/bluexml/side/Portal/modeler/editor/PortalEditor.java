@@ -26,6 +26,7 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
@@ -37,6 +38,7 @@ import org.topcased.modeler.editor.ModelerGraphicalViewer;
 
 import com.bluexml.side.Portal.modeler.PortalPlugin;
 import com.bluexml.side.Portal.modeler.SidePortalContextMenuProvider;
+import com.bluexml.side.Portal.modeler.actions.ShowViewAction;
 import com.bluexml.side.Portal.modeler.diagram.actions.DeleteLinkPageLayoutAction;
 
 /**
@@ -106,7 +108,7 @@ public class PortalEditor extends Modeler {
      */
     protected ContextMenuProvider getContextMenuProvider(ModelerGraphicalViewer viewer)
     {
-        return new SidePortalContextMenuProvider(viewer, getActionRegistry());
+        return new ModelerContextMenuProvider(viewer, getActionRegistry());
     }
 	
 	@Override
@@ -118,6 +120,9 @@ public class PortalEditor extends Modeler {
         DeleteLinkPageLayoutAction deleteLinkToLayout = new DeleteLinkPageLayoutAction(this);
         registry.registerAction(deleteLinkToLayout);
         getSelectionActions().add(deleteLinkToLayout.getId());
+        
+        IAction action = new ShowViewAction((IWorkbenchPart) this);
+		registry.registerAction(action);
     }
 
 	@Override
