@@ -14,8 +14,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.edit;visibility:=reexport,
  com.bluexml.side.Class;visibility:=reexport,
  com.bluexml.side.Class.edit;visibility:=reexport,
- com.bluexml.side.Common;visibility:=reexport,
- com.bluexml.side.Common.edit;visibility:=reexport,
  org.eclipse.ui,
  com.bluexml.side.Workflow.edit,
  com.bluexml.side.Form.edit.ui;bundle-version="1.0.0"
