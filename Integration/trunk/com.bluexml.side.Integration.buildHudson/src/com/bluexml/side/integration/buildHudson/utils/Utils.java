@@ -29,9 +29,10 @@ public class Utils {
 
 	private static ArrayList<String> listeFeatureModif = new ArrayList<String>();
 	private static String revisionNumber;
+	public static ArrayList<String> listefichierpom = new ArrayList<String>();
 
 	/**
-	 * Méthode qui ouvre le fichier de proprerties
+	 * Mï¿½thode qui ouvre le fichier de proprerties
 	 * 
 	 */
 	public static Properties ouvrirFichier(String fichier) {
@@ -95,7 +96,7 @@ public class Utils {
 	}
 	
 	/**
-	 * Retourne le chemin pour un projet donné (par exemple
+	 * Retourne le chemin pour un projet donnï¿½ (par exemple
 	 * MetaModel/Application pour le projet com.bluexml.side.Application
 	 * 
 	 * @param projectName
@@ -115,7 +116,7 @@ public class Utils {
 	}
 
 	/**
-	 * Retourne le chemin pour un projet donné (par exemple
+	 * Retourne le chemin pour un projet donnï¿½ (par exemple
 	 * MetaModel/Application pour le projet com.bluexml.side.Application
 	 * 
 	 * @param projectName
@@ -268,7 +269,7 @@ public class Utils {
 	}
 
 	/**
-	 * Retourne le numéro de version en fonction de l'utilisation de hudson ou
+	 * Retourne le numï¿½ro de version en fonction de l'utilisation de hudson ou
 	 * non
 	 */
 	public static String getRevisionNumber() {
@@ -283,11 +284,11 @@ public class Utils {
 	}
 
 	/**
-	 * Retourne le numéro de version pour un projet donné
+	 * Retourne le numï¿½ro de version pour un projet donnï¿½
 	 * 
 	 * @param projectName
 	 *            le nom du projet
-	 * @return le numéro de version pour un projet donné
+	 * @return le numï¿½ro de version pour un projet donnï¿½
 	 */
 	public static String getVersionNumber(String projectName) {
 		String version = "";
@@ -303,17 +304,17 @@ public class Utils {
 			org.jdom.Document document = null;
 			org.jdom.Element racine;
 
-			// On crée une instance de SAXBuilder
+			// On crï¿½e une instance de SAXBuilder
 			SAXBuilder sxb = new SAXBuilder();
 			try {
-				// On crée un nouveau document JDOM avec en argument le fichier
+				// On crï¿½e un nouveau document JDOM avec en argument le fichier
 				// XML
 				document = sxb.build(new File(getPathToLocalCopy(projectName)
 						+ File.separator + "feature.xml"));
 			} catch (Exception e) {
 			}
 
-			// On initialise un nouvel élément racine avec l'élément racine du
+			// On initialise un nouvel ï¿½lï¿½ment racine avec l'ï¿½lï¿½ment racine du
 			// document.
 			racine = document.getRootElement();
 
@@ -324,8 +325,8 @@ public class Utils {
 	}
 
 	/**
-	 * Copie de la copie local du répository dans le repertoire
-	 * getBuildDirectory() en séparant les features et les plugins
+	 * Copie de la copie local du rï¿½pository dans le repertoire
+	 * getBuildDirectory() en sï¿½parant les features et les plugins
 	 */
 	public static void preTraitement() {
 
@@ -335,7 +336,7 @@ public class Utils {
 
 		try {
 
-			// suppression du dossier final s'il éxiste
+			// suppression du dossier final s'il ï¿½xiste
 			if (new File(getBuildDirectory()).exists()) {
 				FileHelper.deleteFile(new File(getBuildDirectory()));
 			}
@@ -382,7 +383,7 @@ public class Utils {
 			// le chemin 'Application.workspace' est sous la forme
 			// 'chemin/vers/workspace' et on ne veut pas le 'workspace' a la
 			// fin, on va donc le supprimer du chemin et ajouter 'builds' a la
-			// place et le numéro de build
+			// place et le numï¿½ro de build
 			path = Application.workspace.substring(0, Application.workspace
 					.length()
 					- "workspace".length());
@@ -397,22 +398,44 @@ public class Utils {
 		return path;
 	}
 
+	
+	private static void findFile(File f,String s)
+	{
+		boolean stopfind=false;
+		if(f.getName().equals(s)&& !(f.getPath().indexOf("src")>-1)){
+			
+			listefichierpom.add(f.getPath());
+			stopfind=true;
+		}
+		
+		File[] liste_fils = f.listFiles();
+		
+		if(liste_fils!=null && stopfind==false)
+		{
+			for(int i=0;i<liste_fils.length;i++)
+			{
+				findFile(liste_fils[i],s);
+			}
+		}
+	}
 	/**
-	 * Cette méthode analyse le fichier de log (il changera en fonction de
-	 * l'utilisation de Hudson ou non) et regarde si des updates ont été fait et
-	 * ainsi, changer le numéro de version du projet concerné
+	 * Cette mï¿½thode analyse le fichier de log (il changera en fonction de
+	 * l'utilisation de Hudson ou non) et regarde si des updates ont ï¿½tï¿½ fait et
+	 * ainsi, changer le numï¿½ro de version du projet concernï¿½
 	 */
 	public static void traitementUpdate() {
 
 		copyFromRepository();
 
 		ArrayList<String> listeProjetReels = new ArrayList<String>();
+		ArrayList<String> listeProjetPoms = new ArrayList<String>();
 
 		String[] projects = getProjects();
 
 		for (int i = 0; i < projects.length; i++) {
 			listeProjetReels.add(projects[i]);
 		}
+		
 		
 		String[] projectsToVersioned = getVersionedProjects();
 		
@@ -423,8 +446,13 @@ public class Utils {
 		boolean end = false;
 
 		ArrayList<String> listePlugin = new ArrayList<String>();
+		
+		String pathproject = pathproject = getBuildPath() + File.separator + "respositoryCopy";
+		
+		listefichierpom=new ArrayList();
+		findFile(new File(pathproject+"/S-IDE/Integration/trunk"),"pom.xml");
 
-		// si on ne force pas la mise a jour du numéro de version
+		// si on ne force pas la mise a jour du numï¿½ro de version
 		if ("".equals(getForceNumberVersion())) {
 			String ligne = "";
 			String modif = "";
@@ -437,7 +465,7 @@ public class Utils {
 						new File(getPathToLog())));
 
 				if (ficTexte == null) {
-					throw new FileNotFoundException("Fichier non trouvé");
+					throw new FileNotFoundException("Fichier non trouvï¿½");
 				}
 
 				// Analyse et copie de chaque ligne
@@ -478,6 +506,21 @@ public class Utils {
 											|| ligne.charAt(1) == 'U'
 											|| ligne.charAt(1) == 'A' || ligne
 											.charAt(1) == 'D') && update) {
+								
+								if (ligne.indexOf("Integration")> -1) {
+									for (String valeur : listefichierpom) {
+										String valeurf= valeur;
+										String [] tab=valeurf.split("/S-IDE/");
+										String [] tab2=tab[1].split("/pom.xml");
+										if(ligne.indexOf(tab2[0]) > -1){
+											if (!listeProjetPoms.contains(valeur))
+											listeProjetPoms.add(valeur);
+										}
+									}
+								}
+								
+								
+								
 
 								modif = ligne.substring(2, ligne.length());
 								modif.trim();
@@ -499,11 +542,14 @@ public class Utils {
 			} catch (IOException e1) {
 				e1.getMessage();
 			}
-
-			// on parcours la liste des projets qui ont été modifié
+			
+			
+			
+			
+			// on parcours la liste des projets qui ont ï¿½tï¿½ modifiï¿½
 			for (String element : listeProjet) {
 				if (listeProjetReels.contains(element)) {
-					// on met tous les plugins modifiés dans un tableau
+					// on met tous les plugins modifiï¿½s dans un tableau
 					if (element.indexOf("feature") == -1) {
 						listePlugin.add(element);
 					}
@@ -514,10 +560,10 @@ public class Utils {
 				}
 			}
 
-			// si on force la mise a jour du numéro de version
+			// si on force la mise a jour du numï¿½ro de version
 		} else {
 			System.out
-					.println("Les numéros de version de tous les projets sont forcés à: "
+					.println("Les numï¿½ros de version de tous les projets sont forcï¿½s ï¿½: "
 							+ getForceNumberVersion());
 			for (int i = 0; i < projects.length; i++) {
 				if (projects[i].indexOf("feature") == -1)
@@ -525,10 +571,16 @@ public class Utils {
 			}
 
 		}
-
+		
 		// On parcours la liste des plugins et on les met a jour
 		for (String plugin : listePlugin) {
 			updateVersionNumber(plugin);
+
+		}
+		
+		// On parcours la liste des pom et on les met a jour
+		for (String pom : listeProjetPoms) {
+			updateVersionNumberPom(pom);
 
 		}
 
@@ -539,9 +591,9 @@ public class Utils {
 			}
 		}
 
-		// affichage des données
+		// affichage des donnï¿½es
 		if (listePlugin.size() != 0) {
-			System.out.println("\nListe des plugins modifiés: ");
+			System.out.println("\nListe des plugins modifiï¿½s: ");
 			// On parcours la liste des plugins et on les met a jour
 			for (String plugin : listePlugin) {
 				System.out.println("\t- " + plugin + ": "
@@ -550,7 +602,7 @@ public class Utils {
 		}
 
 		if (listeFeatureModif.size() != 0) {
-			System.out.println("\nListe des features modifiées: ");
+			System.out.println("\nListe des features modifiï¿½es: ");
 			for (String feature : listeFeatureModif) {
 				System.out.println("\t- " + feature + ": "
 						+ getVersionNumber(feature));
@@ -647,7 +699,7 @@ public class Utils {
 	}
 
 	/**
-	 * Update le numéro de version du projet, le pattern pour cet update est
+	 * Update le numï¿½ro de version du projet, le pattern pour cet update est
 	 * dans le fichier build.properties
 	 * 
 	 * @param projectName
@@ -665,7 +717,7 @@ public class Utils {
 					+ File.separator + "META-INF" + File.separator
 					+ "MANIFEST.MF";
 
-			// on récupère dans un tableau les 3 numéros de version du projet
+			// on rï¿½cupï¿½re dans un tableau les 3 numï¿½ros de version du projet
 			String[] number = ouvrirFichier(filePluginPath).getProperty(
 					"Bundle-Version").split("\\.");
 
@@ -678,11 +730,11 @@ public class Utils {
 				while ((ligne = reader.readLine()) != null) {
 					// si la ligne contient "Bundle-Version:"
 					if (ligne.indexOf("Bundle-Version:") != -1) {
-						// on supprime tout ce qui se trouve après
+						// on supprime tout ce qui se trouve aprï¿½s
 						// "Bundle-Version:"
 						ligne = ligne.substring(0, "Bundle-Version:".length());
-						// on ajoute a la ligne le nouveau numéro de version
-						// si on ne force pas la mise a jour du numéro de
+						// on ajoute a la ligne le nouveau numï¿½ro de version
+						// si on ne force pas la mise a jour du numï¿½ro de
 						// version
 						if ("".equals(getForceNumberVersion()))
 							ligne += " " + update(number, pattern);
@@ -707,7 +759,7 @@ public class Utils {
 					.renameTo(new File(filePluginPath));
 
 		} else {
-			// boolean qui permet de savoir s'il faut changer le numéro du
+			// boolean qui permet de savoir s'il faut changer le numï¿½ro du
 			// feature ou non
 			boolean featureAModifier = false;
 
@@ -721,62 +773,62 @@ public class Utils {
 			org.jdom.Document document = null;
 			org.jdom.Element racine;
 
-			// On crée une instance de SAXBuilder
+			// On crï¿½e une instance de SAXBuilder
 			SAXBuilder sxb = new SAXBuilder();
 
 			try {
-				// On crée un nouveau document JDOM avec en argument le fichier
+				// On crï¿½e un nouveau document JDOM avec en argument le fichier
 				// XML
 				document = sxb.build(new File(fileFeaturePath));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
-			// On initialise un nouvel élément racine avec l'élément racine du
+			// On initialise un nouvel ï¿½lï¿½ment racine avec l'ï¿½lï¿½ment racine du
 			// document.
 			racine = document.getRootElement();
 
-			// On va maintenant mettre a jour les numéro de version des plugins
-			// associés a la feature
+			// On va maintenant mettre a jour les numï¿½ro de version des plugins
+			// associï¿½s a la feature
 
-			// on garde en mémoire l'ancien numéro de version du plugin pour
+			// on garde en mï¿½moire l'ancien numï¿½ro de version du plugin pour
 			// savoir s'il a changer et ainsi savoir s'il faut changer ou non le
-			// numéro de version de la feature
+			// numï¿½ro de version de la feature
 
 			String oldVersionNumber = "";
 
-			// On crée une List contenant tous les noeuds "plugin" de
+			// On crï¿½e une List contenant tous les noeuds "plugin" de
 			// l'Element racine
 			List<?> listPlugins = racine.getChildren("plugin");
 
-			// On crée un Iterator sur notre liste
+			// On crï¿½e un Iterator sur notre liste
 			Iterator<?> i = listPlugins.iterator();
 			// on va parcourir tous les plugins
 			while (i.hasNext()) {
-				// On recrée l'Element courant à chaque tour de boucle afin de
-				// pouvoir utiliser les méthodes propres aux Element comme :
+				// On recrï¿½e l'Element courant ï¿½ chaque tour de boucle afin de
+				// pouvoir utiliser les mï¿½thodes propres aux Element comme :
 				// selectionner un noeud fils, modifier du texte, etc...
 				Element courant = (Element) i.next();
 
-				// sauvegarde du numéro de version
+				// sauvegarde du numï¿½ro de version
 				oldVersionNumber = courant.getAttributeValue("version");
 
-				// on regarde si le numéro de version du plugin a changé
+				// on regarde si le numï¿½ro de version du plugin a changï¿½
 				if (!oldVersionNumber.equals(getVersionNumber(courant
 						.getAttributeValue("id")))) {
-					// On modifie le numéro de version du plugin courant
+					// On modifie le numï¿½ro de version du plugin courant
 					courant.setAttribute("version", getVersionNumber(courant
 							.getAttributeValue("id")));
 
-					// on indique que le numéro de feature doit changer
+					// on indique que le numï¿½ro de feature doit changer
 					featureAModifier = true;
 				}
 			}
 
-			// on récupère dans un tableau les 3 numéros de version du projet
+			// on rï¿½cupï¿½re dans un tableau les 3 numï¿½ros de version du projet
 			String[] number = racine.getAttributeValue("version").split("\\.");
 
-			// on change le numéro de version (s'il le faut)
+			// on change le numï¿½ro de version (s'il le faut)
 			if ("".equals(getForceNumberVersion())) {
 				if (featureAModifier) {
 					if (!listeFeatureModif.contains(projectName)) {
@@ -799,23 +851,102 @@ public class Utils {
 
 		}
 	}
+	
+	/**
+	 * Update le numï¿½ro de version du projet, le pattern pour cet update est
+	 * dans le fichier build.properties
+	 * 
+	 * @param projectName
+	 */
+	public static void updateVersionNumberPom(String projectName) {
+
+		String[] pattern = ouvrirFichier("build.properties").getProperty(
+		"number-pattern").split("\\.");
+		
+
+		// chemin vers le pom.xml
+		String fileFeaturePath = projectName;
+
+		org.jdom.Document document = null;
+		org.jdom.Element racine;
+
+		// On crï¿½e une instance de SAXBuilder
+		SAXBuilder sxb = new SAXBuilder();
+
+		try {
+			// On crï¿½e un nouveau document JDOM avec en argument le fichier
+			// XML
+			document = sxb.build(new File(fileFeaturePath));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// On initialise un nouvel ï¿½lï¿½ment racine avec l'ï¿½lï¿½ment racine du
+		// document.
+		racine = document.getRootElement();
+
+		// On va maintenant mettre a jour les numï¿½ro de version des plugins
+		// associï¿½s a la feature
+
+		// on garde en mï¿½moire l'ancien numï¿½ro de version du plugin pour
+		// savoir s'il a changer et ainsi savoir s'il faut changer ou non le
+		// numï¿½ro de version de la feature
+
+		String oldVersionNumber = "";
+		
+
+		// On crï¿½e une List contenant tous les noeuds "version" de
+		// l'Element racine
+		List listVersion=racine.getChildren();
+		
+		Iterator<?> i = listVersion.iterator();
+		// on va parcourir tous les plugins
+		while (i.hasNext()) {
+			// On recrï¿½e l'Element courant ï¿½ chaque tour de boucle afin de
+			// pouvoir utiliser les mï¿½thodes propres aux Element comme :
+			// selectionner un noeud fils, modifier du texte, etc...
+			Element courant = (Element) i.next();
+
+			// sauvegarde du numï¿½ro de version
+			if (courant.getName().equals("version")){
+				oldVersionNumber = courant.getText();
+				String[] number = oldVersionNumber.split("\\.");
+				courant.setText(updatepom(number, pattern));
+			}
+			
+		}
+
+		// Enregistrement du fichier
+		try {
+			XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+			sortie.output(document, new FileOutputStream(fileFeaturePath));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+
+		
+	}
+	
 
 	/**
-	 * change le numéro de version en fonction du pattern
+	 * change le numï¿½ro de version en fonction du pattern
 	 * 
 	 * @param number
-	 *            un tableau des 3 numéro de version
+	 *            un tableau des 3 numï¿½ro de version
 	 * @param pattern
-	 *            un tableau avec les 3 éléments du pattern
-	 * @return Le numéro de version sous la forme 1.0.12
+	 *            un tableau avec les 3 ï¿½lï¿½ments du pattern
+	 * @return Le numï¿½ro de version sous la forme 1.0.12
 	 */
 	public static String update(String[] number, String[] pattern) {
 
 		boolean change = false;
 
 		for (int i = 0; i < 3; i++) {
-			// test si l'élément est un nombre si une exception est levée,
-			// l'élément n'est pas un nombre
+			// test si l'ï¿½lï¿½ment est un nombre si une exception est levï¿½e,
+			// l'ï¿½lï¿½ment n'est pas un nombre
 			try {
 				Integer.valueOf(pattern[i]);
 				number[i] = pattern[i];
@@ -834,11 +965,47 @@ public class Utils {
 		return number[0] + "." + number[1] + "." + number[2] + ".v"
 				+ getRevisionNumber() + "-" + getDate();
 	}
+	
+	
+	
+	/**
+	 * change le numï¿½ro de version en fonction du pattern pour pom.xml
+	 * 
+	 * @param number
+	 *            un tableau des 3 numï¿½ro de version
+	 * @param pattern
+	 *            un tableau avec les 3 ï¿½lï¿½ments du pattern
+	 * @return Le numï¿½ro de version sous la forme 1.0.12
+	 */
+	public static String updatepom(String[] number, String[] pattern) {
+
+		boolean change = false;
+
+		for (int i = 0; i < 3; i++) {
+			// test si l'ï¿½lï¿½ment est un nombre si une exception est levï¿½e,
+			// l'ï¿½lï¿½ment n'est pas un nombre
+			try {
+				Integer.valueOf(pattern[i]);
+				number[i] = pattern[i];
+			} catch (NumberFormatException e) {
+				if (change)
+					number[i] = "0";
+				else {
+					if (pattern[i].equals("u")) {
+						change = true;
+						number[i] = String
+								.valueOf(Integer.valueOf(number[i]) + 1);
+					}
+				}
+			}
+		}
+		return number[0] + "." + number[1] + "." + number[2];
+	}
 
 	/**
 	 * Met a jour le site.xml en fonction des features. Si une feature n'est pas
-	 * présente dans le site.xml, elle est ajoutée et placée dans la catégorie
-	 * 'other' (retourné par la méthode getNewCategory() )
+	 * prï¿½sente dans le site.xml, elle est ajoutï¿½e et placï¿½e dans la catï¿½gorie
+	 * 'other' (retournï¿½ par la mï¿½thode getNewCategory() )
 	 * 
 	 */
 	public static void updateSiteXml() {
@@ -862,42 +1029,42 @@ public class Utils {
 		org.jdom.Document document = null;
 		Element racine;
 
-		// On crée une instance de SAXBuilder
+		// On crï¿½e une instance de SAXBuilder
 		SAXBuilder sxb = new SAXBuilder();
 
 		try {
-			// On crée un nouveau document JDOM avec en argument le fichier
+			// On crï¿½e un nouveau document JDOM avec en argument le fichier
 			// XML
 			document = sxb.build(new File(fileSitePath));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		// On initialise un nouvel élément racine avec l'élément racine du
+		// On initialise un nouvel ï¿½lï¿½ment racine avec l'ï¿½lï¿½ment racine du
 		// document.
 		racine = document.getRootElement();
 
-		// On crée une List contenant tous les noeuds "feature" de
+		// On crï¿½e une List contenant tous les noeuds "feature" de
 		// l'Element racine
 		List<?> listFeatures = racine.getChildren("feature");
 
-		// On crée un Iterator sur notre liste
+		// On crï¿½e un Iterator sur notre liste
 		Iterator<?> i = listFeatures.iterator();
 
-		// Boucle qui permet de mettre à jour le numéro de version de chaque
+		// Boucle qui permet de mettre ï¿½ jour le numï¿½ro de version de chaque
 		// feature
 		while (i.hasNext()) {
-			// On recrée l'Element courant à chaque tour de boucle afin de
-			// pouvoir utiliser les méthodes propres aux Element comme :
+			// On recrï¿½e l'Element courant ï¿½ chaque tour de boucle afin de
+			// pouvoir utiliser les mï¿½thodes propres aux Element comme :
 			// selectionner un noeud fils, modifier du texte, etc...
 			Element courant = (Element) i.next();
 
-			// on regarde si l'élément parcouru est dans le tableau de features
+			// on regarde si l'ï¿½lï¿½ment parcouru est dans le tableau de features
 			if (listeFeature.contains(courant.getAttributeValue("id"))) {
 				// on supprime le feature de la liste
 				listeFeature.remove(courant.getAttributeValue("id"));
 
-				// On modifie le numéro de version du plugin courant
+				// On modifie le numï¿½ro de version du plugin courant
 				courant.setAttribute("version", getVersionNumber(courant
 						.getAttributeValue("id")));
 
@@ -909,8 +1076,8 @@ public class Utils {
 		}
 
 		// on parcourt le tableau de feature
-		// on va ajouter les features présentes dans le tableau (et donc qui ne
-		// sont pas présentes dans le site.xml) et les ajouter au site.xml
+		// on va ajouter les features prï¿½sentes dans le tableau (et donc qui ne
+		// sont pas prï¿½sentes dans le site.xml) et les ajouter au site.xml
 
 		for (String feature : listeFeature) {
 			Element newElement = new Element("feature");
@@ -976,7 +1143,7 @@ public class Utils {
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "site.xml"), finalSite, true);
 
-			// creation du dossier final s'il n'éxiste pas
+			// creation du dossier final s'il n'ï¿½xiste pas
 			if (!new File(getFinalDirectory()).exists())
 				new File(getFinalDirectory()).mkdir();
 
@@ -1017,7 +1184,7 @@ public class Utils {
 					+ "doc"), new File(getFinalDirectory() + File.separator
 					+ "doc"), true);
 
-			// copie des fichiers compilés
+			// copie des fichiers compilï¿½s
 			if (!new File(getFinalDirectory() + File.separator + "logs")
 					.exists())
 				new File(getFinalDirectory() + File.separator + "logs").mkdir();
@@ -1053,7 +1220,7 @@ public class Utils {
 						+ getCodeName() + File.separator + "logSVN.txt"), true);
 			}
 
-			// copie des fichiers compilés
+			// copie des fichiers compilï¿½s
 			if (!new File(getFinalDirectory() + File.separator + "bin")
 					.exists())
 				new File(getFinalDirectory() + File.separator + "bin").mkdir();
@@ -1087,7 +1254,7 @@ public class Utils {
 			FileHelper.deleteFile(new File(getBuildPath() + File.separator
 					+ "doc"));
 
-			// suppression des fichiers créés
+			// suppression des fichiers crï¿½ï¿½s
 			FileHelper.deleteFile(new File(Utils.getBuildPath()
 					+ File.separator + "buildSVN.xml"));
 			FileHelper.deleteFile(new File(Utils.getBuildPath()
@@ -1118,8 +1285,8 @@ public class Utils {
 	}
 
 	/**
-	 * Remplace, pour la feature donnée, le texte du copyright et de la licence
-	 * (ainsi que leur url) par rapport au fichier indiqué dans le
+	 * Remplace, pour la feature donnï¿½e, le texte du copyright et de la licence
+	 * (ainsi que leur url) par rapport au fichier indiquï¿½ dans le
 	 * build.properties
 	 * 
 	 * @param featureName
@@ -1141,31 +1308,31 @@ public class Utils {
 		org.jdom.Document document = null;
 		org.jdom.Element racine;
 
-		// On crée une instance de SAXBuilder
+		// On crï¿½e une instance de SAXBuilder
 		SAXBuilder sxb = new SAXBuilder();
 
 		try {
-			// On crée un nouveau document JDOM avec en argument le fichier
+			// On crï¿½e un nouveau document JDOM avec en argument le fichier
 			// XML
 			document = sxb.build(new File(fileFeaturePath));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		// On initialise un nouvel élément racine avec l'élément racine du
+		// On initialise un nouvel ï¿½lï¿½ment racine avec l'ï¿½lï¿½ment racine du
 		// document.
 		racine = document.getRootElement();
 
-		// On crée une List contenant tous les noeuds "copyright" de
+		// On crï¿½e une List contenant tous les noeuds "copyright" de
 		// l'Element racine
 		List<?> listCopyright = racine.getChildren("copyright");
 
-		// On crée un Iterator sur notre liste
+		// On crï¿½e un Iterator sur notre liste
 		Iterator<?> i = listCopyright.iterator();
 		// on va parcourir tous les plugins
 		while (i.hasNext()) {
-			// On recrée l'Element courant à chaque tour de boucle afin de
-			// pouvoir utiliser les méthodes propres aux Element comme :
+			// On recrï¿½e l'Element courant ï¿½ chaque tour de boucle afin de
+			// pouvoir utiliser les mï¿½thodes propres aux Element comme :
 			// selectionner un noeud fils, modifier du texte, etc...
 			Element courant = (Element) i.next();
 
@@ -1176,16 +1343,16 @@ public class Utils {
 			courant.setAttribute("url", getCopyrightURL());
 		}
 
-		// On crée une List contenant tous les noeuds "license" de
+		// On crï¿½e une List contenant tous les noeuds "license" de
 		// l'Element racine
 		List<?> listLicense = racine.getChildren("license");
 
-		// On crée un Iterator sur notre liste
+		// On crï¿½e un Iterator sur notre liste
 		Iterator<?> j = listLicense.iterator();
 		// on va parcourir tous les plugins
 		while (j.hasNext()) {
-			// On recrée l'Element courant à chaque tour de boucle afin de
-			// pouvoir utiliser les méthodes propres aux Element comme :
+			// On recrï¿½e l'Element courant ï¿½ chaque tour de boucle afin de
+			// pouvoir utiliser les mï¿½thodes propres aux Element comme :
 			// selectionner un noeud fils, modifier du texte, etc...
 			Element courant = (Element) j.next();
 
@@ -1209,7 +1376,7 @@ public class Utils {
 	}
 
 	/**
-	 * Méthode qui retourne le contenu du fichier passé en paramètre
+	 * Mï¿½thode qui retourne le contenu du fichier passï¿½ en paramï¿½tre
 	 * 
 	 * @param f
 	 *            Le fichier a retourner
