@@ -6399,6 +6399,133 @@ public interface FormPackage extends EPackage {
 	int SEARCH_OPERATOR_CONFIGURATION_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.form.impl.StaticTextImpl <em>Static Text</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.form.impl.StaticTextImpl
+	 * @see com.bluexml.side.form.impl.FormPackageImpl#getStaticText()
+	 * @generated
+	 */
+	int STATIC_TEXT = 35;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_TEXT__STEREOTYPES = FORM_ELEMENT__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_TEXT__TAGS = FORM_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_TEXT__COMMENTS = FORM_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_TEXT__DOCUMENTATION = FORM_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_TEXT__DESCRIPTION = FORM_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_TEXT__METAINFO = FORM_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_TEXT__LABEL = FORM_ELEMENT__LABEL;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_TEXT__ID = FORM_ELEMENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Help text</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_TEXT__HELP_TEXT = FORM_ELEMENT__HELP_TEXT;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_TEXT__REF = FORM_ELEMENT__REF;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_TEXT__HIDDEN = FORM_ELEMENT__HIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_TEXT__VALUE = FORM_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Static Text</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_TEXT_FEATURE_COUNT = FORM_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.FormGroupPresentationType <em>Group Presentation Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6406,7 +6533,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFormGroupPresentationType()
 	 * @generated
 	 */
-	int FORM_GROUP_PRESENTATION_TYPE = 35;
+	int FORM_GROUP_PRESENTATION_TYPE = 36;
 
 
 	/**
@@ -6417,7 +6544,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getTextWidgetType()
 	 * @generated
 	 */
-	int TEXT_WIDGET_TYPE = 36;
+	int TEXT_WIDGET_TYPE = 37;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.ChoiceWidgetType <em>Choice Widget Type</em>}' enum.
@@ -6427,7 +6554,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getChoiceWidgetType()
 	 * @generated
 	 */
-	int CHOICE_WIDGET_TYPE = 37;
+	int CHOICE_WIDGET_TYPE = 38;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.ModelChoiceWidgetType <em>Model Choice Widget Type</em>}' enum.
@@ -6437,7 +6564,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getModelChoiceWidgetType()
 	 * @generated
 	 */
-	int MODEL_CHOICE_WIDGET_TYPE = 38;
+	int MODEL_CHOICE_WIDGET_TYPE = 39;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.FieldSearchOperators <em>Field Search Operators</em>}' enum.
@@ -6447,7 +6574,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFieldSearchOperators()
 	 * @generated
 	 */
-	int FIELD_SEARCH_OPERATORS = 39;
+	int FIELD_SEARCH_OPERATORS = 40;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.CharFieldSearchOperators <em>Char Field Search Operators</em>}' enum.
@@ -6457,7 +6584,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getCharFieldSearchOperators()
 	 * @generated
 	 */
-	int CHAR_FIELD_SEARCH_OPERATORS = 40;
+	int CHAR_FIELD_SEARCH_OPERATORS = 41;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.NumericalFieldSearchOperators <em>Numerical Field Search Operators</em>}' enum.
@@ -6467,7 +6594,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getNumericalFieldSearchOperators()
 	 * @generated
 	 */
-	int NUMERICAL_FIELD_SEARCH_OPERATORS = 41;
+	int NUMERICAL_FIELD_SEARCH_OPERATORS = 42;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.ChoiceFieldSearchOperators <em>Choice Field Search Operators</em>}' enum.
@@ -6477,7 +6604,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getChoiceFieldSearchOperators()
 	 * @generated
 	 */
-	int CHOICE_FIELD_SEARCH_OPERATORS = 42;
+	int CHOICE_FIELD_SEARCH_OPERATORS = 43;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.FileFieldSearchOperators <em>File Field Search Operators</em>}' enum.
@@ -6487,7 +6614,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getFileFieldSearchOperators()
 	 * @generated
 	 */
-	int FILE_FIELD_SEARCH_OPERATORS = 43;
+	int FILE_FIELD_SEARCH_OPERATORS = 44;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.form.CombinationOperators <em>Combination Operators</em>}' enum.
@@ -6497,7 +6624,7 @@ public interface FormPackage extends EPackage {
 	 * @see com.bluexml.side.form.impl.FormPackageImpl#getCombinationOperators()
 	 * @generated
 	 */
-	int COMBINATION_OPERATORS = 44;
+	int COMBINATION_OPERATORS = 45;
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.FormElement <em>Element</em>}'.
@@ -7391,6 +7518,27 @@ public interface FormPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getSearchOperatorConfiguration_ProposedOperators();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.form.StaticText <em>Static Text</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Static Text</em>'.
+	 * @see com.bluexml.side.form.StaticText
+	 * @generated
+	 */
+	EClass getStaticText();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.form.StaticText#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see com.bluexml.side.form.StaticText#getValue()
+	 * @see #getStaticText()
+	 * @generated
+	 */
+	EAttribute getStaticText_Value();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.form.WorkflowFormCollection <em>Workflow Form Collection</em>}'.
@@ -8309,6 +8457,24 @@ public interface FormPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SEARCH_OPERATOR_CONFIGURATION__PROPOSED_OPERATORS = eINSTANCE.getSearchOperatorConfiguration_ProposedOperators();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.form.impl.StaticTextImpl <em>Static Text</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.form.impl.StaticTextImpl
+		 * @see com.bluexml.side.form.impl.FormPackageImpl#getStaticText()
+		 * @generated
+		 */
+		EClass STATIC_TEXT = eINSTANCE.getStaticText();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATIC_TEXT__VALUE = eINSTANCE.getStaticText_Value();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.form.impl.WorkflowFormCollectionImpl <em>Workflow Form Collection</em>}' class.

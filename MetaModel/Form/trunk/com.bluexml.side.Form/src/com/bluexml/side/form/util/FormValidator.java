@@ -258,6 +258,8 @@ public class FormValidator extends EObjectValidator {
 				return validateNumericalField((NumericalField)value, diagnostics, context);
 			case FormPackage.SEARCH_OPERATOR_CONFIGURATION:
 				return validateSearchOperatorConfiguration((SearchOperatorConfiguration)value, diagnostics, context);
+			case FormPackage.STATIC_TEXT:
+				return validateStaticText((StaticText)value, diagnostics, context);
 			case FormPackage.FORM_GROUP_PRESENTATION_TYPE:
 				return validateFormGroupPresentationType((FormGroupPresentationType)value, diagnostics, context);
 			case FormPackage.TEXT_WIDGET_TYPE:
@@ -1035,6 +1037,23 @@ public class FormValidator extends EObjectValidator {
 	 */
 	public boolean validateSearchOperatorConfiguration(SearchOperatorConfiguration searchOperatorConfiguration, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(searchOperatorConfiguration, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateStaticText(StaticText staticText, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_EveryMultiplicityConforms(staticText, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(staticText, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(staticText, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(staticText, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(staticText, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(staticText, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(staticText, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(staticText, diagnostics, context);
+		return result;
 	}
 
 	/**

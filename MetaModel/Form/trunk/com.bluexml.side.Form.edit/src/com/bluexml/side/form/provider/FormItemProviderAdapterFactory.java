@@ -697,6 +697,29 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.StaticText} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StaticTextItemProvider staticTextItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.form.StaticText}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStaticTextAdapter() {
+		if (staticTextItemProvider == null) {
+			staticTextItemProvider = new StaticTextItemProvider(this);
+		}
+
+		return staticTextItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.form.WorkflowFormCollection} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -894,6 +917,7 @@ public class FormItemProviderAdapterFactory extends FormAdapterFactory implement
 		if (searchFormItemProvider != null) searchFormItemProvider.dispose();
 		if (numericalFieldItemProvider != null) numericalFieldItemProvider.dispose();
 		if (searchOperatorConfigurationItemProvider != null) searchOperatorConfigurationItemProvider.dispose();
+		if (staticTextItemProvider != null) staticTextItemProvider.dispose();
 	}
 
 }

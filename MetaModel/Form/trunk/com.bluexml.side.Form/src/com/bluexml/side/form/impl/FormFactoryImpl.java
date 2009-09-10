@@ -122,6 +122,7 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 			case FormPackage.SEARCH_FORM: return createSearchForm();
 			case FormPackage.NUMERICAL_FIELD: return createNumericalField();
 			case FormPackage.SEARCH_OPERATOR_CONFIGURATION: return createSearchOperatorConfiguration();
+			case FormPackage.STATIC_TEXT: return createStaticText();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -461,6 +462,16 @@ public class FormFactoryImpl extends EFactoryImpl implements FormFactory {
 	public SearchOperatorConfiguration createSearchOperatorConfiguration() {
 		SearchOperatorConfigurationImpl searchOperatorConfiguration = new SearchOperatorConfigurationImpl();
 		return searchOperatorConfiguration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StaticText createStaticText() {
+		StaticTextImpl staticText = new StaticTextImpl();
+		return staticText;
 	}
 
 	/**

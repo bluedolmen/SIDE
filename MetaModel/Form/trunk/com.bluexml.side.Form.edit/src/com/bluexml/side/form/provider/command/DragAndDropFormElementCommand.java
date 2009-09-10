@@ -136,26 +136,26 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 			}
 		}
 		InternalModification.moveToDisabled();
-		System.err.println(">>>>>>>>>>>>>>>>>>>>>>" + isExecutable);
+		//System.err.println(">>>>>>>>>>>>>>>>>>>>>>" + isExecutable);
 		return isExecutable;
 	}
 
 	private void logCanExecute(Object... logs) {
-		
-		StringBuffer sb = new StringBuffer();
-		sb.append("isExecutable :");
-		sb.append(isExecutable);
-		sb.append(" - ");
-		for (Object log : logs) {
-			if (log == null) {
-				sb.append("null");
-			} else {
-				sb.append(log);
-			}
-			sb.append(" ");
-		}
-		System.err.println(sb.toString());
-	
+
+//		StringBuffer sb = new StringBuffer();
+//		sb.append("isExecutable :");
+//		sb.append(isExecutable);
+//		sb.append(" - ");
+//		for (Object log : logs) {
+//			if (log == null) {
+//				sb.append("null");
+//			} else {
+//				sb.append(log);
+//			}
+//			sb.append(" ");
+//		}
+//		System.err.println(sb.toString());
+
 	}
 
 	public void execute() {
@@ -188,22 +188,22 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 		mb.setMessage("You try to drag & drop an attribute using an association with max cardinality set to *. This cardinality must be set to an integer.");
 		mb.open();
 	}
-	
+
 	/**
 	 * This attempts to prepare a drop insert operation.
 	 */
 	protected boolean prepareDropInsert() {
-		
+
 		initializeFormClassTarget();
 		boolean result = false;
-		if (fcTarget != null) { 
+		if (fcTarget != null) {
 			if (collection.size() > 0) {
 				fcOrigin = FormDiagramUtils.getParentFormContainer((FormElement)collection.toArray()[0]);
 				if (fcTarget != fcOrigin) {
 					CompoundCommand cc = new CompoundCommand();
 					// Special case
 					int j = getPos();
-					
+
 					// Create new collection of virtual field :
 					Collection<Field> newCollection = new ArrayList<Field>();
 					for (Object o : collection) {
@@ -215,13 +215,13 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 							newCollection.add(vf);
 						}
 					}
-					
+
 					EObject target = ((EObject) owner).eContainer();
 					if (owner instanceof FormClass) {
 						j = 0;
 						target = (EObject)owner;
 					}
-					
+
 					cc.append(AddCommand.create(domain, target, FormPackage.eINSTANCE
 							.getFormGroup_Children(), newCollection, j));
 					dropCommand = cc;

@@ -177,5 +177,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//SearchOperatorConfiguration/defaultOperator"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//SearchOperatorConfiguration/proposedOperators"/>
     </genClasses>
+    <genClasses ecoreClass="Forms.ecore#//StaticText">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Forms.ecore#//StaticText/value"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

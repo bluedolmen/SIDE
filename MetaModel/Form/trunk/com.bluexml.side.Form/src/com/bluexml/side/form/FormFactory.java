@@ -270,6 +270,15 @@ public interface FormFactory extends EFactory {
 	SearchOperatorConfiguration createSearchOperatorConfiguration();
 
 	/**
+	 * Returns a new object of class '<em>Static Text</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Static Text</em>'.
+	 * @generated
+	 */
+	StaticText createStaticText();
+
+	/**
 	 * Returns a new object of class '<em>Workflow Form Collection</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -2,7 +2,7 @@
 metamodel http://www.kerblue.org/workflow/1.0
 import com.bluexml.side.form.editor.views.service.OutlineViewService
 import com.bluexml.side.form.editor.views.service.HTMLEncoder
-%> 
+%>
 <%script type="form.FormCollection" name="default" file="output.html"%>
 <html>
 	<head>
@@ -58,7 +58,7 @@ select.association{
 	color: #006699;
 	background-color: #FFFFFF;
 	width:150px;
-	border: 2px solid black; 
+	border: 2px solid black;
 }
 
 div.tabs {
@@ -112,12 +112,12 @@ li.tabs, ul.tabs {
 <em>Outline view, generation output may change.</em>
 <%for (forms){%>
 	<%if (current().id == getNameOfSelectedForm()){%>
-		
+
 		<form name="exampleForm" method="post" class="cmxform">
 			<fieldset>
 				<legend><%label.encode()%></legend>
 			<ol>
-			
+
 			<!-- Tabs -->
 			<div id="tab-container-<%id%>" class="tabs">
 				<ul id="tab-container-<%id%>-nav" class="tabs">
@@ -129,11 +129,11 @@ li.tabs, ul.tabs {
 				<%}%>
 			<%}%>
 			 </ul>
-			
+
 			<%for (current().children){%>
 				<%current().getHtmlForFormElem(true)%>
 			<%}%>
-			
+
 			<script type="text/javascript">
 				var tabber<%id%> = new Yetii({
 				id: 'tab-container-<%id%>'
@@ -149,7 +149,7 @@ li.tabs, ul.tabs {
 			</fieldset>
 		</form>
 		<hr>
-		
+
 	<%}%>
 <%}%>
 </body>
@@ -190,10 +190,10 @@ li.tabs, ul.tabs {
 				 || current("Reference").target.nSize() > 1){%>
 					<%for (current("Reference").target){%>
 						<%if (!current().hidden){%>
-							<%if (current("Reference").association_formClass != null){%> 
+							<%if (current("Reference").association_formClass != null){%>
 								<table><tr><td valign="top">
 							<%}%>
-						
+
 							<%-- Default widget : list of type with Add button or inline form --%>
 							<%if (current("Reference").widget.equalsIgnoreCase("AssociationClassSelect")){%>
 								<%if ((!current("Reference").max_bound.equalsIgnoreCase("1")) && (current("Reference").real_class.isAbstract || current("Reference").real_class.generalizations.length() > 0)){%>
@@ -205,8 +205,8 @@ li.tabs, ul.tabs {
 							<%}else{%>
 								<%current().getHtmlForFormElem(true)%>
 							<%}%>
-							
-							<%if (current("Reference").association_formClass != null){%> 
+
+							<%if (current("Reference").association_formClass != null){%>
 								</td>
 								<td  valign="top">
 									<%current("Reference").association_formClass.getHtmlForFormElem(true)%>
@@ -221,26 +221,26 @@ li.tabs, ul.tabs {
 					<%}%>
 				<%}%>
 			<%}%>
-	
+
 	<%if (cast("FormGroup") && current("FormGroup").presentation.equalsIgnoreCase("Tabbed")){%>
 		</div>
 	<%}else if (cast("FormGroup") && current("FormGroup").presentation.equalsIgnoreCase("horizontal")){%>
 	</tr></table>
 	<%}else{%>
 		</ol>
-	</fieldset>	
+	</fieldset>
 	<%}%>
-			
+
 <%}else if (cast("Field")){%>
 	<%if ((args(0) && !current("Field").isVirtualized()) || !args(0)){%>
-		<li> 
+		<li>
 		<%if (current("Field").hidden) {%>
 			<input type="hidden" name="<%id%>" id="<%id%>">
 		<%}else{%>
 			<%if (!cast("ActionField")){%>
 				<label for="<%id%>"><%label.encode()%> :</label>
 			<%}%>
-			
+
 			<%if (eClass().name.equalsIgnoreCase("CharField") || eClass().name.equalsIgnoreCase("RegexField")) {%>
 				<input type="text" name="<%id%>" id="<%id%>" <%if (current("KerblueForms.CharField").max_length > 0){%>maxlength="<%current("KerblueForms.CharField").max_length%>"<%}%> <%if (!current("KerblueForms.CharField").initial.equalsIgnoreCase("")){%>value="<%current("KerblueForms.CharField").initial.encode()%>"<%}%>>
 			<%}else{%>
@@ -295,7 +295,7 @@ li.tabs, ul.tabs {
 				<input type="button" name="<%id%>" id="<%id%>" value="<%if (label.length > 0){%><%label.encode()%><%}else{%><%id%><%}%>">
 			<%}%>
 			<%if (cast("ModelChoiceField") || cast("ChoiceField")) {%>
-				
+
 				<select name="<%id%>" id="<%id%>" <%if (current().max_bound > 1 || current().max_bound == -1){%>MULTIPLE<%}%>
 					<%if (cast("ModelChoiceField")){%>class="association"<%}%>>
 					<%if (cast("ModelChoiceField")){%>
@@ -308,11 +308,6 @@ li.tabs, ul.tabs {
 						<%}%>
 					<%}%>
 				</select>
-				<%if (cast("ModelChoiceField") && current("ModelChoiceField").association_class != null){%>
-					<select name="<%id%>_class" <%if (current().max_bound > 1 || current().max_bound == -1){%>MULTIPLE<%}%> class="association">
-						<option><%current("ModelChoiceField").association_class.title.encode()%></option>
-					</select>
-				<%}%>
 			<%}%>
 		<%}%>
 		<%if (current("Form.Field").mandatory) {%>
@@ -320,4 +315,11 @@ li.tabs, ul.tabs {
 		<%}%>
 		</li>
 	<%}%>
+<%}else if (cast("StaticText")){%>
+	<li>
+		<%if (current("StaticText").label != ""){%>
+			<label for="<%id%>"><%label.encode()%> :</label>
+		<%}%>
+		<%current("StaticText").value%>
+	</li>
 <%}%>

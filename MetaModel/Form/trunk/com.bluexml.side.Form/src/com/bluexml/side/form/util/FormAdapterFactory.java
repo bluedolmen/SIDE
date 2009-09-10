@@ -245,6 +245,10 @@ public class FormAdapterFactory extends AdapterFactoryImpl {
 				return createSearchOperatorConfigurationAdapter();
 			}
 			@Override
+			public Adapter caseStaticText(StaticText object) {
+				return createStaticTextAdapter();
+			}
+			@Override
 			public Adapter caseModelElement(ModelElement object) {
 				return createModelElementAdapter();
 			}
@@ -707,6 +711,20 @@ public class FormAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSearchOperatorConfigurationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.form.StaticText <em>Static Text</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.form.StaticText
+	 * @generated
+	 */
+	public Adapter createStaticTextAdapter() {
 		return null;
 	}
 

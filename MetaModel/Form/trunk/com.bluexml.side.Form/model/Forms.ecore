@@ -557,4 +557,7 @@
     <eLiterals name="and"/>
     <eLiterals name="or" value="1"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StaticText" eSuperTypes="#//FormElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
 </ecore:EPackage>

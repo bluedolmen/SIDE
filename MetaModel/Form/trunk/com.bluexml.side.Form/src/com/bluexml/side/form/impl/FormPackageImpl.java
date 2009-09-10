@@ -58,6 +58,7 @@ import com.bluexml.side.form.Reference;
 import com.bluexml.side.form.RegexField;
 import com.bluexml.side.form.SearchForm;
 import com.bluexml.side.form.SearchOperatorConfiguration;
+import com.bluexml.side.form.StaticText;
 import com.bluexml.side.form.TextField;
 import com.bluexml.side.form.TextWidgetType;
 import com.bluexml.side.form.TimeField;
@@ -290,6 +291,13 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * @generated
 	 */
 	private EClass searchOperatorConfigurationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass staticTextEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1230,6 +1238,24 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getStaticText() {
+		return staticTextEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStaticText_Value() {
+		return (EAttribute)staticTextEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getWorkflowFormCollection() {
 		return workflowFormCollectionEClass;
 	}
@@ -1522,6 +1548,9 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		createEAttribute(searchOperatorConfigurationEClass, SEARCH_OPERATOR_CONFIGURATION__DEFAULT_OPERATOR);
 		createEAttribute(searchOperatorConfigurationEClass, SEARCH_OPERATOR_CONFIGURATION__PROPOSED_OPERATORS);
 
+		staticTextEClass = createEClass(STATIC_TEXT);
+		createEAttribute(staticTextEClass, STATIC_TEXT__VALUE);
+
 		// Create enums
 		formGroupPresentationTypeEEnum = createEEnum(FORM_GROUP_PRESENTATION_TYPE);
 		textWidgetTypeEEnum = createEEnum(TEXT_WIDGET_TYPE);
@@ -1603,6 +1632,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		textFieldEClass.getESuperTypes().add(this.getCharField());
 		searchFormEClass.getESuperTypes().add(this.getFormContainer());
 		numericalFieldEClass.getESuperTypes().add(this.getField());
+		staticTextEClass.getESuperTypes().add(this.getFormElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(formElementEClass, FormElement.class, "FormElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1742,6 +1772,9 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		initEClass(searchOperatorConfigurationEClass, SearchOperatorConfiguration.class, "SearchOperatorConfiguration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSearchOperatorConfiguration_DefaultOperator(), ecorePackage.getEString(), "defaultOperator", null, 0, 1, SearchOperatorConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSearchOperatorConfiguration_ProposedOperators(), ecorePackage.getEString(), "proposedOperators", null, 0, -1, SearchOperatorConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(staticTextEClass, StaticText.class, "StaticText", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStaticText_Value(), ecorePackage.getEString(), "value", null, 0, 1, StaticText.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(formGroupPresentationTypeEEnum, FormGroupPresentationType.class, "FormGroupPresentationType");

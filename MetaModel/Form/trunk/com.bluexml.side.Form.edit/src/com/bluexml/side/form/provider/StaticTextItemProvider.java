@@ -7,9 +7,8 @@
 package com.bluexml.side.form.provider;
 
 
-import com.bluexml.side.form.FormContainer;
-import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.form.StaticText;
 
 import java.util.Collection;
 import java.util.List;
@@ -28,13 +27,13 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link com.bluexml.side.form.FormContainer} object.
+ * This is the item provider adapter for a {@link com.bluexml.side.form.StaticText} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class FormContainerItemProvider
-	extends FormGroupItemProvider
+public class StaticTextItemProvider
+	extends FormElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -47,7 +46,7 @@ public class FormContainerItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FormContainerItemProvider(AdapterFactory adapterFactory) {
+	public StaticTextItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -62,8 +61,42 @@ public class FormContainerItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Value feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addValuePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_StaticText_value_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_StaticText_value_feature", "_UI_StaticText_type"),
+				 FormPackage.Literals.STATIC_TEXT__VALUE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This returns StaticText.gif.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getImage(Object object) {
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/StaticText"));
 	}
 
 	/**
@@ -74,10 +107,10 @@ public class FormContainerItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((FormContainer)object).getId();
+		String label = ((StaticText)object).getId();
 		return label == null || label.length() == 0 ?
-			getString("_UI_FormContainer_type") :
-			getString("_UI_FormContainer_type") + " " + label;
+			getString("_UI_StaticText_type") :
+			getString("_UI_StaticText_type") + " " + label;
 	}
 
 	/**
@@ -90,6 +123,12 @@ public class FormContainerItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(StaticText.class)) {
+			case FormPackage.STATIC_TEXT__VALUE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
@@ -98,39 +137,11 @@ public class FormContainerItemProvider
 	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @_generated
+	 * @generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-		(createChildParameter
-			(FormPackage.Literals.FORM_GROUP__CHILDREN,
-			 FormFactory.eINSTANCE.createStaticText()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == FormPackage.Literals.FORM_GROUP__CHILDREN ||
-			childFeature == FormPackage.Literals.FORM_GROUP__DISABLED;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }
