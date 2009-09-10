@@ -5,16 +5,8 @@ Bundle-SymbolicName: com.bluexml.side.Workflow.modeler;singleton:=true
 Bundle-Version: 1.0.18.v9027-20090910
 Bundle-Activator: com.bluexml.side.Workflow.modeler.WorkflowPlugin
 Bundle-Vendor: www.bluexml.com
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
- org.eclipse.emf.ecore,
- org.topcased.modeler,
- com.bluexml.side.Workflow;bundle-version="1.0.0",
+Require-Bundle: org.topcased.modeler,
  com.bluexml.side.Workflow.edit;bundle-version="1.0.0",
- com.bluexml.side.Class;bundle-version="1.0.0",
- com.bluexml.side.Class.edit;bundle-version="1.0.0",
- org.eclipse.core.resources,
- com.bluexml.side.Form;bundle-version="1.0.25",
  com.bluexml.side.Form.editor;bundle-version="1.0.14",
  com.bluexml.side.Util.libs;bundle-version="1.0.23"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
