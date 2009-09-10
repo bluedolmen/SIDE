@@ -108,6 +108,11 @@ public class FormContainerItemProvider
 		(createChildParameter
 			(FormPackage.Literals.FORM_GROUP__CHILDREN,
 			 FormFactory.eINSTANCE.createStaticText()));
+
+		newChildDescriptors.add
+		(createChildParameter
+			(FormPackage.Literals.FORM_GROUP__CHILDREN,
+			 FormFactory.eINSTANCE.createActionField()));
 	}
 
 	/**
