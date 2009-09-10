@@ -1232,7 +1232,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		  (associationEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "recursiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation"
+			 "constraints", "reflexiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation"
 		   });																						
 		addAnnotation
 		  (abstractClassEClass, 

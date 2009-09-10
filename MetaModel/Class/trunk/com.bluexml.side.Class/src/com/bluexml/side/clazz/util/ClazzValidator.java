@@ -98,6 +98,14 @@ public class ClazzValidator extends EObjectValidator {
 	 */
 	private static Constraint clazz_InheritanceCycleInvOCL;
 	/**
+	 * The parsed OCL expression for the definition of the '<em>reflexiveAssociationMustHaveRole</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint association_reflexiveAssociationMustHaveRoleInvOCL;
+
+	/**
 	 * The parsed OCL expression for the definition of the '<em>MinAndMaxTarget</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -410,7 +418,7 @@ public class ClazzValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(association, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAssociation_recursiveAssociationMustHaveRole(association, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAssociation_reflexiveAssociationMustHaveRole(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAssociation_MinAndMaxTarget(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAssociation_MinAndMaxSource(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAssociation_NameNull(association, diagnostics, context);
@@ -423,24 +431,37 @@ public class ClazzValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the recursiveAssociationMustHaveRole constraint of '<em>Association</em>'.
+	 * Validates the reflexiveAssociationMustHaveRole constraint of '<em>Association</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateAssociation_recursiveAssociationMustHaveRole(Association association, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
+	public boolean validateAssociation_reflexiveAssociationMustHaveRole(Association association, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (association_reflexiveAssociationMustHaveRoleInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(ClazzPackage.Literals.ASSOCIATION);
+
+			EAnnotation ocl = ClazzPackage.Literals.ASSOCIATION.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("reflexiveAssociationMustHaveRole");
+
+			try {
+				association_reflexiveAssociationMustHaveRoleInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(association_reflexiveAssociationMustHaveRoleInvOCL);
+
+		if (!query.check(association)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( ClazzPackage.Literals.ASSOCIATION.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"reflexiveAssociationMustHaveRole")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "recursiveAssociationMustHaveRole", getObjectLabel(association, context) }),
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "reflexiveAssociationMustHaveRole", getObjectLabel(association, context) }),
 						 new Object[] { association }));
 			}
 			return false;
