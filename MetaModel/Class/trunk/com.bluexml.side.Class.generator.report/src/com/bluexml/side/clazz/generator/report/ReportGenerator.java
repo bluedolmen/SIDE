@@ -73,11 +73,11 @@ public class ReportGenerator extends AbstractAcceleoPackageGenerator{
 		FileHelper.copyFiles(new File(source), new File(target), true);
 
 		for (IFile f : generatedFiles) {
-			addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());
+		monitor.getLog().addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());
 			if (generationParameters.containsKey(BIRT_WEBAPP_KEY)) {
 				String birtUrl = generationParameters.get(BIRT_WEBAPP_KEY);
 				String uri = birtUrl + "/frameset?__report=" + IFileHelper.getFile(f).getName(); //$NON-NLS-1$
-				addServiceLog("Birt Report",uri, uri);
+			monitor.getLog().addServiceLog("Birt Report",uri, uri);
 			}
 		}
 

@@ -4,12 +4,12 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +36,7 @@ public class FileHelper {
 	 * @throws IOException
 	 *             if unable to copy.
 	 */
-	public static void copyFiles(File src, File dest, boolean override) throws IOException {
+	public static void copyFiles(File src, File dest, boolean override, StringWriter report) throws IOException {
 		// Check to ensure that the source is valid...
 		if (!src.exists()) {
 			throw new IOException("copyFiles: Can not find source: " + src.getAbsolutePath() + ".");
@@ -59,7 +59,7 @@ public class FileHelper {
 			for (int i = 0; i < list.length; i++) {
 				File dest1 = new File(dest, list[i]);
 				File src1 = new File(src, list[i]);
-				copyFiles(src1, dest1, override);
+				copyFiles(src1, dest1, override, report);
 			}
 		} else {
 			// This was not a directory, so lets just copy the file
@@ -104,7 +104,15 @@ public class FileHelper {
 					fout.close();
 				}
 			}
+			// report action to writer
+			if (report != null) {
+				report.write(dest.toString());
+			}
 		}
+	}
+
+	public static void copyFiles(File src, File dest, boolean override) throws IOException {
+		copyFiles(src, dest, override, null);
 	}
 
 	public static boolean deleteFile(File f) throws Exception {
@@ -224,20 +232,20 @@ public class FileHelper {
 
 	public static void readReplace(File file, String oldPattern, String replPattern) throws Exception {
 		String line;
-		
+
 		StringBuffer sb = new StringBuffer();
-		
-			FileInputStream fis = new FileInputStream(file);
-			BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
-			while ((line = reader.readLine()) != null) {
-				line = line.replaceAll(oldPattern, replPattern);
-				sb.append(line + "\n");
-			}
-			reader.close();
-			BufferedWriter out = new BufferedWriter(new FileWriter(file));
-			out.write(sb.toString());
-			out.close();
-		
+
+		FileInputStream fis = new FileInputStream(file);
+		BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+		while ((line = reader.readLine()) != null) {
+			line = line.replaceAll(oldPattern, replPattern);
+			sb.append(line + "\n");
+		}
+		reader.close();
+		BufferedWriter out = new BufferedWriter(new FileWriter(file));
+		out.write(sb.toString());
+		out.close();
+
 	}
 
 }

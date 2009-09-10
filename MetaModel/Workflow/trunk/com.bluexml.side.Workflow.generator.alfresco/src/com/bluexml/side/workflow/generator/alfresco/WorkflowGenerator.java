@@ -81,7 +81,7 @@ public class WorkflowGenerator extends AbstractAlfrescoGenerator {
 		if (!alfrescoUrl.endsWith("/"))
 			alfrescoUrl += "/";
 		String uri = alfrescoUrl + "faces/jsp/admin/workflow-console.jsp";
-		addServiceLog("Workflow Console","The Workflow Console is an administrator/developer tool for interacting with workflows.", uri);
+	monitor.getLog().addServiceLog("Workflow Console","The Workflow Console is an administrator/developer tool for interacting with workflows.", uri);
 
 		return super.complete();
 	}

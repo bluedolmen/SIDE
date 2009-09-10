@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.bluexml.side.util.componentmonitor.ComponentMonitor;
+
 public abstract class AbstractMultiDeployer extends Deployer {
 
 	protected List<Deployer> deployers = new ArrayList<Deployer>();
@@ -23,11 +25,10 @@ public abstract class AbstractMultiDeployer extends Deployer {
 	}
 
 	@Override
-	public void initialize(Map<String, String> configurationParameters, Map<String, String> generationParameters, List<String> options) {
-		super.initialize(configurationParameters, generationParameters, options);
+	public void initialize(Map<String, String> configurationParameters, Map<String, String> generationParameters, List<String> options,ComponentMonitor monitor) {
+		super.initialize(configurationParameters, generationParameters, options,monitor);
 		for (Deployer wd : deployers) {
-			wd.initialize(configurationParameters, generationParameters, options);
-			wd.setLog(getLog());
+			wd.initialize(configurationParameters, generationParameters, options,monitor);
 			// propagate options key
 			wd.setCleanKey(cleanKey);
 			wd.setLogChanges(logChanges);

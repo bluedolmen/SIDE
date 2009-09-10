@@ -104,20 +104,20 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 			try {
 				throw new Exception("Error too many root packages for facetmap.");
 			} catch (Exception e) {
-				addErrorLog("Too many facetmaps", e.getStackTrace(), null);
+			monitor.getLog().addErrorLog("Too many facetmaps", e.getStackTrace(), null);
 			}
 		setTEMP_FOLDER("generator_" + getClass().getName());
 		// Adding file generated to log
 		generatedFiles.addAll(buildPackages(groupedModels.keySet().toArray()[0].toString()));
 		for (IFile f : generatedFiles) {
-			addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());
+		monitor.getLog().addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());
 		}
 
 		// add resources to match with package dependencies
 		try {
 			addDependences();
 		} catch (Exception e) {
-			addErrorLog("Error getting dependancies", e.getStackTrace(), null);
+		monitor.getLog().addErrorLog("Error getting dependancies", e.getStackTrace(), null);
 		}
 		// Adding services to log
 		// CMIS
@@ -128,10 +128,10 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 			}
 		} else {
 			alfrescoUrl = ALFRESCO_URL_defaultValue;
-			addWarningLog("missing parameter", "alfresco url is not set ! use default :" + alfrescoUrl, "");
+		monitor.getLog().addWarningLog("missing parameter", "alfresco url is not set ! use default :" + alfrescoUrl, "");
 		}
 		String cmisUri = alfrescoUrl + "service/com/bluexml/side/facetMap/doclist_user.xml";
-		addServiceLog("CMIS webscript", "The webscript used for updating facetmap, it is used to list all documents from a certain type and retreive their metadatas.", cmisUri);
+	monitor.getLog().addServiceLog("CMIS webscript", "The webscript used for updating facetmap, it is used to list all documents from a certain type and retreive their metadatas.", cmisUri);
 		// Dashlets
 		String shareUrl = generationParameters.get(ALFRESCO_SHARE_URL_KEY);
 		if (shareUrl != null && shareUrl.length() > 0) {
@@ -141,12 +141,12 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 		} else {
 			// set to default value
 			shareUrl = ALFRESCO_SHARE_URL_defaultValue;
-			addWarningLog("missing parameter", "alfresco share url is not set ! use default :" + shareUrl, "");
+		monitor.getLog().addWarningLog("missing parameter", "alfresco share url is not set ! use default :" + shareUrl, "");
 		}
 		String dashletContentUri = shareUrl + "service/com/bluexml/side/facetMap/doclist_user/content";
 		String dashletFacetstUri = shareUrl + "service/com/bluexml/side/facetMap/doclist_user/facet";
-		addServiceLog("Facetmap Dashlet for Content", "An Alfresco share sashlet that shows the results of the faceted navigation.", dashletContentUri);
-		addServiceLog("Facetmap Dashlet for Facets", "An Alfresco share sashlet that shows the facets of the faceted navigation.", dashletFacetstUri);
+	monitor.getLog().addServiceLog("Facetmap Dashlet for Content", "An Alfresco share sashlet that shows the results of the faceted navigation.", dashletContentUri);
+	monitor.getLog().addServiceLog("Facetmap Dashlet for Facets", "An Alfresco share sashlet that shows the facets of the faceted navigation.", dashletFacetstUri);
 
 		return generatedFiles;
 	}
@@ -164,7 +164,7 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 			FileHelper.copyFiles(new File(folder + "facets"), new File(destFacets), true);
 			FileHelper.copyFiles(new File(folder + "content"), new File(destContent), true);
 		} catch (IOException e) {
-			addErrorLog("Moving generated files error", e.getStackTrace(), null);
+		monitor.getLog().addErrorLog("Moving generated files error", e.getStackTrace(), null);
 		}
 		// Zip
 		String zipFolder = IFileHelper.getSystemFolderPath(getTargetPath() + FILESEP + getTechVersion()) + FILESEP;
@@ -175,7 +175,7 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 			ZipManager.zip(new File(destFacets), zipFacets, false);
 			ZipManager.zip(new File(destContent), zipContent, false);
 		} catch (Exception e) {
-			addErrorLog("Packaging generated files error", e.getStackTrace(), null);
+		monitor.getLog().addErrorLog("Packaging generated files error", e.getStackTrace(), null);
 		}
 		// Creating file collection
 		IFolder workingDir = IFileHelper.getIFolder(getTemporaryFolder() + FILESEP + "../");

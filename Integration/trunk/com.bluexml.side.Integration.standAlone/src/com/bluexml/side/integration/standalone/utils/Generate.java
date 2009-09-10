@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -46,8 +47,13 @@ import com.bluexml.side.application.Option;
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
+import com.bluexml.side.util.componentmonitor.ComponentMonitor;
+import com.bluexml.side.util.componentmonitor.NullComponentMonitor;
 import com.bluexml.side.util.deployer.Deployer;
+import com.bluexml.side.util.documentation.LogHelper;
 import com.bluexml.side.util.documentation.LogSave;
+import com.bluexml.side.util.documentation.structure.SIDELog;
+import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.dependencies.DependencesManager;
 import com.bluexml.side.util.dependencies.ModuleConstraint;
@@ -57,7 +63,8 @@ public class Generate extends Thread {
 
 	private String logPath;
 	private String genPath;
-
+	protected String lineSeparator = System.getProperty("line.separator"); //$NON-NLS-1$
+	protected String fileSeparator = System.getProperty("file.separator"); //$NON-NLS-1$
 	/* ############### GeneratePopUp.java method ################ */
 	public Configuration configuration;
 	public List<String> staticParameters;
@@ -392,6 +399,12 @@ public class Generate extends Thread {
 				// We generate only if there is meta-model available for
 				// the generator
 				if (generator.shouldGenerate(modelsInfo, elem.getId_metamodel())) {
+
+					SIDELog log_ = new SIDELog(configurationParameters.get("generatorName"), configurationParameters.get("generatorId"), configurationParameters.get("technologyVersionName"), configurationParameters.get("technologyName"), configurationParameters
+							.get("metaModelName"), new Date(), LogType.GENERATION);
+					LogHelper log = new LogHelper(log_, configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()));
+					NullComponentMonitor generationMonitor = new NullComponentMonitor(log);
+
 					try {
 						List<ModuleConstraint> lmc = new ArrayList<ModuleConstraint>();
 						EList<com.bluexml.side.application.ModuleConstraint> l = elem.getModuleContraints();
@@ -401,10 +414,10 @@ public class Generate extends Thread {
 						}
 						DependencesManager dm = new DependencesManager(lmc, false);
 
-						generator.initialize(generationParameters, generatorOptions, configurationParameters, dm);
+						generator.initialize(generationParameters, generatorOptions, configurationParameters, dm, generationMonitor);
 					} catch (Exception e) {
 						error = true;
-						generator.addErrorLog("Initialization error : " + e.getMessage(), e.getStackTrace(), null);
+						log.addErrorLog("Initialization error : " + e.getMessage(), e.getStackTrace(), null);
 						e.printStackTrace();
 					}
 
@@ -422,7 +435,7 @@ public class Generate extends Thread {
 
 						} catch (Exception e) {
 							error = true;
-							generator.addErrorLog("Generation error : " + e.getMessage(), e.getStackTrace(), null);
+							log.addErrorLog("Generation error : " + e.getMessage(), e.getStackTrace(), null);
 							e.printStackTrace();
 						}
 
@@ -430,7 +443,7 @@ public class Generate extends Thread {
 						try {
 							generator.createStampFile();
 						} catch (Exception e) {
-							generator.addErrorLog("Generation error : Stamp file error. " + e.getMessage(), e.getStackTrace(), null);
+							log.addErrorLog("Generation error : Stamp file error. " + e.getMessage(), e.getStackTrace(), null);
 							e.printStackTrace();
 						}
 						// System.out.println("\tlog12");
@@ -439,7 +452,9 @@ public class Generate extends Thread {
 				// System.out.println("\tlog13");
 				String fileName = "gen_" + generator.getTechVersion() + ".xml";
 				try {
-					LogSave.toXml(generator.getLog(), fileName, logPath + System.getProperty("file.separator") + "work" + System.getProperty("file.separator"));
+					if (generator.getMonitor() != null) {
+						generator.getMonitor().getLog().saveLog(fileName, logPath + fileSeparator + "work" + fileSeparator);
+					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -499,8 +514,10 @@ public class Generate extends Thread {
 			}
 			if (genObj instanceof Deployer) {
 				Deployer deployer = (Deployer) genObj;
-				deployer.initialize(configurationParameters, generationParameters, deployerOptions);
-
+				SIDELog log_ = new SIDELog(configurationParameters.get("deployerName"), configurationParameters.get("deployerId"), configurationParameters.get("technologyVersionName"), configurationParameters.get("technologyName"), configurationParameters.get("metaModelName"), new Date(), LogType.DEPLOYMENT); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				LogHelper log = new LogHelper(log_, "");
+				NullComponentMonitor deployerMonitor = new NullComponentMonitor(log);
+				deployer.initialize(configurationParameters, generationParameters, deployerOptions, deployerMonitor);
 				try {
 					deployer.deploy();
 				} catch (Exception e) {

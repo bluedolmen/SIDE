@@ -9,6 +9,7 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Application;bundle-version="1.0.8",
  com.bluexml.side.Util.deployer;bundle-version="1.0.8",
  com.bluexml.side.Util.security;bundle-version="1.0.8",
- com.bluexml.side.Util.deployer.war;bundle-version="1.0.0"
+ com.bluexml.side.Util.deployer.war;bundle-version="1.0.0",
+ com.bluexml.side.Util.componentMonitor;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

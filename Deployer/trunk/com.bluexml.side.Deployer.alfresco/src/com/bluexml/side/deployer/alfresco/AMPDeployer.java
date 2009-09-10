@@ -60,10 +60,10 @@ public class AMPDeployer extends WarDeployer {
 					File finalwar = TrueZipHelper.getTzFile(getWarToPatchFile());
 					StringWriter sr = new StringWriter();
 					FileHelper.diffFolder(warOrg, finalwar, sr, FileHelper.COMPARE_ADDED + FileHelper.COMPARE_DELETED);
-					addInfoLog(this.logChangesMsg, sr.toString(), null);
+					monitor.getLog().addInfoLog(this.logChangesMsg, sr.toString(), "");
 				}
 			} catch (Exception e) {
-				addErrorLog("AMP deployer Error", e.getStackTrace(), null);
+			monitor.getLog().addErrorLog("AMP deployer Error", e.getStackTrace(), null);
 				e.printStackTrace();
 			}
 		} else {

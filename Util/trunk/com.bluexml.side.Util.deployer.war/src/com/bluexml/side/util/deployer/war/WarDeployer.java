@@ -59,12 +59,12 @@ public abstract class WarDeployer extends Deployer {
 	protected void clean(File fileToDeploy) throws Exception {
 		// remove existing deployed alfresco webapp.
 		if (getDeployedWebbAppFolder().exists()) {
-			addInfoLog(Activator.Messages.getString("WarDeployer.1"), Activator.Messages.getString("WarDeployer.2")+getDeployedWebbAppFolder().getName(), null); //$NON-NLS-1$ //$NON-NLS-2$
+			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.1"), Activator.Messages.getString("WarDeployer.2")+getDeployedWebbAppFolder().getName(), ""); //$NON-NLS-1$ //$NON-NLS-2$
 			FileHelper.deleteFile(getDeployedWebbAppFolder());
 		}
 		// clean war file
 		if (getBackupWarFile().exists()) {
-			addInfoLog(Activator.Messages.getString("WarDeployer.1"), Activator.Messages.getString("WarDeployer.3")+getBackupWarFile().getName(), null); //$NON-NLS-1$ //$NON-NLS-2$
+			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.1"), Activator.Messages.getString("WarDeployer.3")+getBackupWarFile().getName(), ""); //$NON-NLS-1$ //$NON-NLS-2$
 			// restore from backup		
 			FileHelper.copyFiles(getBackupWarFile(), getWarToPatchFile(), true);
 		}
@@ -72,7 +72,7 @@ public abstract class WarDeployer extends Deployer {
 
 	public File initWarToPatch(File tomcatHome) throws Exception {
 		if (!getBackupWarFile().exists()) {
-			addInfoLog(Activator.Messages.getString("WarDeployer.1"), Activator.Messages.getString("WarDeployer.4")+getBackupWarFile().getName(), null); //$NON-NLS-1$ //$NON-NLS-2$
+			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.1"), Activator.Messages.getString("WarDeployer.4")+getBackupWarFile().getName(), ""); //$NON-NLS-1$ //$NON-NLS-2$
 			// buid backup
 			FileHelper.copyFiles(getWarToPatchFile(), getBackupWarFile(), true);
 		}
@@ -97,25 +97,25 @@ public abstract class WarDeployer extends Deployer {
 		TrueZipHelper fh = new TrueZipHelper("zip"); //$NON-NLS-1$
 		if (fileToDeploy.isDirectory()) {
 			for (File f : fileToDeploy.listFiles(new FileExtensionFilter("zip"))) { //$NON-NLS-1$
-				addInfoLog(Activator.Messages.getString("WarDeployer.6"), Activator.Messages.getString("WarDeployer.7")+f.getName(), null); //$NON-NLS-1$ //$NON-NLS-2$
+				monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.6"), Activator.Messages.getString("WarDeployer.7")+f.getName(), ""); //$NON-NLS-1$ //$NON-NLS-2$
 				succes &= fh.copyFiles(f, getWarToPatchFile(), true);
 			}
 		} else {
-			addInfoLog(Activator.Messages.getString("WarDeployer.6"), Activator.Messages.getString("WarDeployer.7")+fileToDeploy.getName(), null); //$NON-NLS-1$ //$NON-NLS-2$
+			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.6"), Activator.Messages.getString("WarDeployer.7")+fileToDeploy.getName(), ""); //$NON-NLS-1$ //$NON-NLS-2$
 			succes = fh.copyFiles(fileToDeploy, getWarToPatchFile(), true);
 		}
 
 		if (!succes) {
-			addErrorLog(Activator.Messages.getString("WarDeployer.8"), Activator.Messages.getString("WarDeployer.9"), null); //$NON-NLS-1$ //$NON-NLS-2$
+		monitor.getLog().addErrorLog(Activator.Messages.getString("WarDeployer.8"), Activator.Messages.getString("WarDeployer.9"), ""); //$NON-NLS-1$ //$NON-NLS-2$
 			throw new Exception(Activator.Messages.getString("WarDeployer.9")); //$NON-NLS-1$
 		}
 		if (logChanges()) {
-			addInfoLog(Activator.Messages.getString("WarDeployer.6"), Activator.Messages.getString("DirectWebAppsDeployer."), null); //$NON-NLS-1$ //$NON-NLS-2$
+			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.6"), Activator.Messages.getString("DirectWebAppsDeployer."), ""); //$NON-NLS-1$ //$NON-NLS-2$
 			File warOrg = TrueZipHelper.getTzFile(getBackupWarFile());
 			File finalwar = TrueZipHelper.getTzFile(getWarToPatchFile());
 			StringWriter sr = new StringWriter();
 			diffFolder(warOrg, finalwar, sr, FileHelper.COMPARE_ADDED + FileHelper.COMPARE_DELETED);
-			addInfoLog(this.logChangesMsg, sr.toString(), null);
+			monitor.getLog().addInfoLog(this.logChangesMsg, sr.toString(), "");
 		}
 	}
 

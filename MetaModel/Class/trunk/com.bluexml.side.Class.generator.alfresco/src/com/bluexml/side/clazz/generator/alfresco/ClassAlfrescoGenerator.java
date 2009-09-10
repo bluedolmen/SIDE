@@ -54,7 +54,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_SQL_EXTENSION)) {
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/sqlTemplates/database_dictionary.mt");
-				addServiceLog("SIDE SQL Search Service webscripts", "webscripts to use the SIDE SQL Search Service module", getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME)+"/service/index/package/extension/com/bluexml/side/sql");
+				monitor.getLog().addServiceLog("SIDE SQL Search Service webscripts", "webscripts to use the SIDE SQL Search Service module", getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME)+"/service/index/package/extension/com/bluexml/side/sql");
 			}
 			
 			// DefaultdocListView add custom version of docList webScript
@@ -112,7 +112,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/xml/alfrescoGenerator_template_xml.mt");
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/xml/alfrescoGenerator_template_result_post.mt");
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/xml/alfrescoGenerator_template_result_get.mt");
-				addServiceLog("SIDE content type webscript", "webscript can be use to list document for reporting purpose", getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME)+WEBSCRIPT_SIDE_FAMILY);
+				monitor.getLog().addServiceLog("SIDE content type webscript", "webscript can be use to list document for reporting purpose", getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME)+WEBSCRIPT_SIDE_FAMILY);
 			}
 
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_DEFAULTFORMS)) {
@@ -122,8 +122,8 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 			
 			
 			// standard alfresco services :
-			addServiceLog("Alfresco", "Alfresco Webclient", getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME));
-			addServiceLog("Tomcat Manager list", "list of Alfresco Tomcat webapps (think to update conf/tomcat-users.xml with username and passwd)", getGenerationParameter(CONFIGURATION_PARAMETER_CATALINA_HOME)+"/manager/list");
+			monitor.getLog().addServiceLog("Alfresco", "Alfresco Webclient", getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME));
+			monitor.getLog().addServiceLog("Tomcat Manager list", "list of Alfresco Tomcat webapps (think to update conf/tomcat-users.xml with username and passwd)", getGenerationParameter(CONFIGURATION_PARAMETER_CATALINA_HOME)+"/manager/list");
 			classTemplates = result;
 		}
 		return classTemplates;

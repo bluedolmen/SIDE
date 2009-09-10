@@ -109,7 +109,6 @@ import com.bluexml.side.application.ui.action.tree.TreeView;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 import com.bluexml.side.application.ui.action.utils.validator.FolderSelectionValidator;
 import com.bluexml.side.application.ui.action.utils.viewFilter.SideFileFiter;
-import com.bluexml.side.util.libs.IFileHelper;
 
 @SuppressWarnings("restriction")
 public class ApplicationDialog extends Dialog {

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.bluexml.side.util.componentmonitor.MonitorWriter;
 import com.bluexml.side.util.deployer.war.DirectWebAppsDeployer;
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.zip.TrueZipHelper;
@@ -17,12 +18,13 @@ import de.schlichtherle.io.FileInputStream;
 public class AlfrescoAmpDirectDeployer extends DirectWebAppsDeployer {
 
 	public AlfrescoAmpDirectDeployer() {
-		this.webappName = "alfresco";
-		packageExt = "amp";
+		this.webappName = "alfresco"; //$NON-NLS-1$
+		packageExt = "amp"; //$NON-NLS-1$
 		tzh = new TrueZipHelper(packageExt);
 	}
 
 	protected void dispatchFiles(List<File> files, Map<String, File> mapper) throws Exception {
+		MonitorWriter mw = new MonitorWriter(monitor,Activator.Messages.getString("AlfrescoAmpDirectDeployer.2"),""); //$NON-NLS-1$ //$NON-NLS-2$
 		for (File f : files) {
 			for (Map.Entry<String, File> ent : mapper.entrySet()) {
 				if (f.getAbsolutePath().indexOf(ent.getKey()) != -1) {
@@ -31,30 +33,33 @@ public class AlfrescoAmpDirectDeployer extends DirectWebAppsDeployer {
 					File dest = new File(pathIn);
 					dest.getParentFile().mkdirs();
 					// put to this target directory
-					FileHelper.copyFiles(f, dest, true);
+					FileHelper.copyFiles(f, dest, true, mw);
 				}
 			}
-			if (f.getAbsolutePath().indexOf("/module.properties") != -1) {
+			if (f.getAbsolutePath().indexOf("/module.properties") != -1) { //$NON-NLS-1$
 				Properties moduleProperties = getModuleProperties(f);
-				String moduleId = moduleProperties.getProperty("module.id");
+				String moduleId = moduleProperties.getProperty("module.id"); //$NON-NLS-1$
 
-				File dest = new File(getDeployedWebbAppFolder(), "/WEB-INF/classes/alfresco/module/".replace("/", File.separator) + moduleId);
+				File dest = new File(getDeployedWebbAppFolder(), "/WEB-INF/classes/alfresco/module/".replace("/", File.separator) + moduleId); //$NON-NLS-1$ //$NON-NLS-2$
 				dest.mkdirs();
 				// put to this dir
-				FileHelper.copyFiles(f, dest, true);
+				FileHelper.copyFiles(f, dest, true, mw);
 			}
 		}
 
 	}
 
-//	public static void main(String[] args) throws Exception {
-//		AlfrescoAmpDirectDeployer d = new AlfrescoAmpDirectDeployer();
-//		File fileToDeploy = new File("/Users/davidabad/Workspace2.0/bigTest/generated/alfresco_3.x");
-//		d.initialize(new HashMap<String, String>(), new HashMap<String, String>(), new ArrayList<String>());
-//		d.getGenerationParameters().put(CONFIGURATION_PARAMETER_CATALINA_HOME, "/Users/davidabad/servers/Alfresco/tomcat");
-//		d.preProcess(fileToDeploy);
-//		d.deployProcess(fileToDeploy);
-//	}
+	// public static void main(String[] args) throws Exception {
+	// AlfrescoAmpDirectDeployer d = new AlfrescoAmpDirectDeployer();
+	// File fileToDeploy = new
+	// File("/Users/davidabad/Workspace2.0/bigTest/generated/alfresco_3.x");
+	// d.initialize(new HashMap<String, String>(), new HashMap<String,
+	// String>(), new ArrayList<String>());
+	// d.getGenerationParameters().put(CONFIGURATION_PARAMETER_CATALINA_HOME,
+	// "/Users/davidabad/servers/Alfresco/tomcat");
+	// d.preProcess(fileToDeploy);
+	// d.deployProcess(fileToDeploy);
+	// }
 
 	private Properties getModuleProperties(File wkdir) throws FileNotFoundException, IOException {
 		File modulePropertiesfile = new File(wkdir.getAbsolutePath());
@@ -68,10 +73,10 @@ public class AlfrescoAmpDirectDeployer extends DirectWebAppsDeployer {
 		File packageFolder = getDeployedWebbAppFolder();
 
 		Map<String, File> mapper = new HashMap<String, File>();
-		addToMap(mapper, "/config/", packageFolder, "/WEB-INF/classes/");
-		addToMap(mapper, "/web/", packageFolder, "/");
-		addToMap(mapper, "/lib/", packageFolder, "/WEB-INF/lib/");
-		addToMap(mapper, "/licenses/", packageFolder, "/licenses");
+		addToMap(mapper, "/config/", packageFolder, "/WEB-INF/classes/"); //$NON-NLS-1$ //$NON-NLS-2$
+		addToMap(mapper, "/web/", packageFolder, "/"); //$NON-NLS-1$ //$NON-NLS-2$
+		addToMap(mapper, "/lib/", packageFolder, "/WEB-INF/lib/"); //$NON-NLS-1$ //$NON-NLS-2$
+		addToMap(mapper, "/licenses/", packageFolder, "/licenses"); //$NON-NLS-1$ //$NON-NLS-2$
 
 		return mapper;
 	}

@@ -30,6 +30,7 @@ import org.jdom.output.XMLOutputter;
 
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.form.FormPackage;
+import com.bluexml.side.util.componentmonitor.ComponentMonitor;
 import com.bluexml.side.util.dependencies.DependencesManager;
 import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.security.SecurityHelper;
@@ -60,8 +61,8 @@ public class FormGenerator extends AbstractGenerator {
 	private File warFile;
 
 	@Override
-	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, DependencesManager dm) throws Exception {
-		super.initialize(generationParameters_, generatorOptions_, configurationParameters_, dm);
+	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, DependencesManager dm, ComponentMonitor monitor) throws Exception {
+		super.initialize(generationParameters_, generatorOptions_, configurationParameters_, dm, monitor);
 		try {
 			initWorkFolder();
 		} catch (IOException e) {
@@ -178,7 +179,7 @@ public class FormGenerator extends AbstractGenerator {
 		Element project = pom.getRootElement();
 		Element build = project.getChild("build", NAMESPACE_MAVENPOM);
 		Element plugins = build.getChild("plugins", NAMESPACE_MAVENPOM);
-//		Element plugin = plugins.getChild("plugin", NAMESPACE_MAVENPOM);
+		// Element plugin = plugins.getChild("plugin", NAMESPACE_MAVENPOM);
 		Element plugin = getBlueXMLGeneratorMojoPlugin(plugins);
 		Element configurationElement = plugin.getChild("configuration", NAMESPACE_MAVENPOM);
 		addFiles("clazzFiles", clazzModels, configurationElement);
@@ -187,20 +188,22 @@ public class FormGenerator extends AbstractGenerator {
 		outputter.output(pom, os);
 		os.close();
 
-		// no need to specify additional properties, these are archetyped, not user-defined
-//		Properties properties = new Properties();
-//		FileInputStream in = new FileInputStream(alfrescoProperties);
-//		properties.load(in);
-//		in.close();
-//		properties.setProperty("temp.directory", "/");
-//		properties.setProperty("upload.directory", "/");
-//		os = new FileOutputStream(alfrescoProperties);
-//		properties.store(os, null);
-//		os.close();
+		// no need to specify additional properties, these are archetyped, not
+		// user-defined
+		// Properties properties = new Properties();
+		// FileInputStream in = new FileInputStream(alfrescoProperties);
+		// properties.load(in);
+		// in.close();
+		// properties.setProperty("temp.directory", "/");
+		// properties.setProperty("upload.directory", "/");
+		// os = new FileOutputStream(alfrescoProperties);
+		// properties.store(os, null);
+		// os.close();
 	}
 
 	/**
 	 * Finds the "plugin" element that represents the XForms generator.
+	 * 
 	 * @param plugins
 	 * @return
 	 */

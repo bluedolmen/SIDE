@@ -97,7 +97,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 			for (Map.Entry<String, List<IFile>> l : groupedModels.entrySet()) {
 				String rootName = l.getKey();
 				List<IFile> models_ = l.getValue();
-				addModelsLog(models_);
+				monitor.getLog().addModelsLog(models_);
 				IFile mergedModel = merging(models_);
 				// initialize generator we must change the TEMP_FOLDER
 				// System.out.println("getClass().getName(): " +
@@ -111,7 +111,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 					// update IFolder
 					IFileHelper.refreshFolder(wkdir);
 					if (!result) {
-						addWarningLog("acceleo generator", "working directory not cleaning before generation", "");
+						monitor.getLog().addWarningLog("acceleo generator", "working directory not cleaning before generation", "");
 					}
 				}
 				// generate
@@ -187,7 +187,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		EFactory.eAdd(repository, "files", folder);
 		String generationPath = getTemporaryFolder();
 		if (generationPath == null || generationPath.length() == 0) {
-			addErrorLog("No Target path setted.", "There is no target path setted for generation.", null);
+			monitor.getLog().addErrorLog("No Target path setted.", "There is no target path setted for generation.", null);
 			throw new Exception("Target path must be setted !");
 		}
 
@@ -197,7 +197,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		// Log
 		Log log = ChainFactory.eINSTANCE.createLog();
 		EFactory.eAdd(repository, "files", log);
-		EFactory.eSet(log, "path", getLogFile());
+		EFactory.eSet(log, "path", monitor.getLog().getLogFile());
 
 		// Metamodel file
 		EmfMetamodel pim = ChainFactory.eINSTANCE.createEmfMetamodel();
@@ -244,7 +244,13 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		// AbstractGenerator.printConfiguration();
 		// System.out.println("log8");
 		// try {
-		chain.launch(genFilter, new NullProgressMonitor(), LaunchManager.create("run", false));
+		if (monitor != null) {
+			chain.launch(genFilter, monitor, LaunchManager.create("run", false));
+		} else {
+			chain.launch(genFilter, new NullProgressMonitor(), LaunchManager.create("run", false));
+		}
+		
+		
 		// } catch (CoreException e) {
 		// e.printStackTrace();
 		// } catch (Exception e1) {
@@ -286,7 +292,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		PrintWriter pw = null;
 		try {
 			File source = IFileHelper.getFile(file);
-			System.out.println("FILTER :: file :" + source.getName());
+			//System.out.println("FILTER :: file :" + source.getName());
 
 			InputStream is = new FileInputStream(source);
 			BufferedInputStream bis = new BufferedInputStream(is);

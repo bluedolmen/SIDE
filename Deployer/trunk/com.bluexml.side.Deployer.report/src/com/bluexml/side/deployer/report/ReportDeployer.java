@@ -37,7 +37,7 @@ public class ReportDeployer extends Deployer {
 		System.out.println("Tomcat path: "+path);
 		if(!new File(path).exists()){
 			Exception e = new Exception("Birt Webapp not deployed");
-			addErrorLog("Birt Webapp not deployed", e.getStackTrace(), null);
+		monitor.getLog().addErrorLog("Birt Webapp not deployed", e.getStackTrace(), "");
 			throw e;
 		}
 
@@ -65,7 +65,7 @@ public class ReportDeployer extends Deployer {
 		}
 		if (filemissing){
 			Exception e = new Exception("Missing the following generated files:"+list_of_missing_files+"\n deployment aborted.");
-			addErrorLog("Missing files", e.getStackTrace(), null);
+		monitor.getLog().addErrorLog("Missing files", e.getStackTrace(), "");
 			throw e;
 		}
 		// Path where the files need to be copied

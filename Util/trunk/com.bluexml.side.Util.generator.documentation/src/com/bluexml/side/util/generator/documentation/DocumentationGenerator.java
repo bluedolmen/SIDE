@@ -37,7 +37,7 @@ public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 		FileHelper.copyFiles(new File(source), new File(target), true);
 
 		for (IFile f : generatedFiles) {
-			addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());  //$NON-NLS-1$//$NON-NLS-2$
+		monitor.getLog().addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());  //$NON-NLS-1$//$NON-NLS-2$
 		}
 
 		return generatedFiles;

@@ -1,5 +1,4 @@
 package com.bluexml.side.util.generator;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -19,7 +18,9 @@ import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
 import com.bluexml.side.application.StaticConfigurationParameters;
+import com.bluexml.side.util.componentmonitor.ComponentMonitor;
 import com.bluexml.side.util.dependencies.DependencesManager;
+import com.bluexml.side.util.documentation.LogHelper;
 import com.bluexml.side.util.documentation.structure.LogEntry;
 import com.bluexml.side.util.documentation.structure.SIDELog;
 import com.bluexml.side.util.documentation.structure.enumeration.LogEntryType;
@@ -39,12 +40,18 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	protected static Map<String, String> generationParameters = new HashMap<String, String>();
 	protected static Map<String, Boolean> generatorOptions = new HashMap<String, Boolean>();
 	protected static Map<String, String> configurationParameters = new HashMap<String, String>();
-	protected SIDELog log;
+	
+	protected ComponentMonitor monitor;
 	protected String id;
 	public String TEMP_FOLDER = "tmp";
 	public static String GENERATOR_CODE = null;
 	protected static String techVersion = null;
 	protected DependencesManager dm;
+
+	
+	public ComponentMonitor getMonitor() {
+		return monitor;
+	}
 
 	public String getTechVersion() {
 		return techVersion;
@@ -71,28 +78,30 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		return false;
 	}
 
-	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, DependencesManager dm) throws Exception {
-
+	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, DependencesManager dm,ComponentMonitor monitor) throws Exception {
+		this.monitor = monitor;
 		generationParameters = generationParameters_;
 		generatorOptions = generatorOptions_;
 		configurationParameters = configurationParameters_;
 		techVersion = configurationParameters_.get("technologyVersion");
 		id = configurationParameters_.get("generatorId");
-		log = new SIDELog(configurationParameters_.get("generatorName"), this.id, configurationParameters_.get("technologyVersionName"), configurationParameters_.get("technologyName"), configurationParameters_.get("metaModelName"), new Date(), LogType.GENERATION);
+		SIDELog log_ = new SIDELog(configurationParameters_.get("generatorName"), this.id, configurationParameters_.get("technologyVersionName"), configurationParameters_.get("technologyName"), configurationParameters_.get("metaModelName"), new Date(), LogType.GENERATION);
+		LogHelper log = new LogHelper(log_,configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()));
+		monitor.setLog(log);
 		this.dm = dm;
 
 		// check parameters add warning if not set or empty
 		// check generationParameters :
 		for (Map.Entry<String, String> iterable_element : generationParameters.entrySet()) {
 			if (iterable_element.getValue() == null || iterable_element.getValue().length() == 0) {
-				addWarningLog("Generation Parameter not set", "parameter (" + iterable_element.getKey() + ") has not been set generation may be corrupted", "");
+				monitor.getLog().addWarningLog("Generation Parameter not set", "parameter (" + iterable_element.getKey() + ") has not been set generation may be corrupted", "");
 			}
 		}
 		// for (Map.Entry<String, String> iterable_element :
 		// configurationParameters.entrySet()) {
 		// if (iterable_element.getValue() != null &&
 		// iterable_element.getValue().length() > 0) {
-		// addWarningLog("Configuration Parameter not set",
+		//monitor.getLog().addWarningLog("Configuration Parameter not set",
 		// "this parameter ("+iterable_element.getKey()+") has not been set generation may be corrupted",
 		// "");
 		// }
@@ -121,150 +130,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		sortie.output(racine, new FileOutputStream(IFileHelper.getFile(IFileHelper.createFile(ff, this.id + "-stamp.xml")))); //$NON-NLS-1$
 	}
 
-	/**
-	 * Add log to know on each model have been launch generation
-	 * 
-	 * @param name
-	 */
-	public void addModelLog(String name) {
-		log.addModel(name);
-	}
-
-	public void addModelLog(List<String> names) {
-		for (String name : names) {
-			addModelLog(name);
-		}
-	}
-
-	public void addModelsLog(List<IFile> models) {
-		for (IFile model : models) {
-			addModelLog(model.getName());
-		}
-	}
-
-	/**
-	 * Add a Log
-	 * 
-	 * @param title
-	 * @param description
-	 * @param uri
-	 * @param logEntryType
-	 */
-	private void addLog(String title, String description, URI uri, LogEntryType logEntryType) {
-		log.addLogEntry(new LogEntry(title, description, uri, logEntryType));
-	}
-
-	private void addLog(String title, String description, String uri, LogEntryType logEntryType) {
-		log.addLogEntry(new LogEntry(title, description, uri, logEntryType));
-	}
-
-	/**
-	 * Add an Error Log
-	 * 
-	 * @param title
-	 * @param description
-	 * @param uri
-	 */
-	public void addErrorLog(String title, String description, String uri) {
-		addLog(title, description, uri, LogEntryType.ERROR);
-	}
-
-	/**
-	 * Add an error log using a stracktrace instead of a string description
-	 * 
-	 * @param title
-	 * @param stackTrace
-	 * @param uri
-	 */
-	public void addErrorLog(String title, StackTraceElement[] stackTrace, String uri) {
-		String description = "";
-		if (stackTrace != null && stackTrace.length > 0) {
-			for (StackTraceElement se : stackTrace) {
-				description += System.getProperty("line.separator") + se.toString();
-			}
-		}
-		addErrorLog(title, description, uri);
-	}
-
-	/**
-	 * Add a warning log
-	 * 
-	 * @param title
-	 * @param description
-	 * @param uri
-	 *            : null if no uri
-	 */
-	public void addWarningLog(String title, String description, String uri) {
-		addLog(title, description, uri, LogEntryType.WARNING);
-	}
-
-	public void addWarningLog(String title, String description, URI uri) {
-		addLog(title, description, uri, LogEntryType.WARNING);
-	}
-
-	/**
-	 * Add information log
-	 * 
-	 * @param title
-	 * @param description
-	 * @param uri
-	 */
-	public void addInfoLog(String title, String description, URI uri) {
-		addLog(title, description, uri, LogEntryType.GENERATION_INFORMATION);
-	}
-
-	public void addInfoLog(String title, String description, String uri) {
-		addLog(title, description, uri, LogEntryType.GENERATION_INFORMATION);
-	}
-
-	/**
-	 * Add a service log (service : a webpage or a file that can be acceeded by
-	 * user to test application).
-	 * 
-	 * @param title
-	 * @param description
-	 * @param uri
-	 */
-	public void addServiceLog(String title, String description, URI uri) {
-		addLog(title, description, uri, LogEntryType.SERVICE);
-	}
-
-	public void addServiceLog(String title, String description, String uri) {
-		addLog(title, description, uri, LogEntryType.SERVICE);
-	}
-
-	/**
-	 * Use to log generated file
-	 * 
-	 * @param path
-	 * @param description
-	 * @param uri
-	 */
-	public void addFileGeneratedLog(String path, String description, String uri) {
-		addLog(path, description, uri, LogEntryType.GENERATED_FILE);
-	}
-
-	public void addFileGeneratedLog(String path, String description, URI uri) {
-		addLog(path, description, uri, LogEntryType.GENERATED_FILE);
-	}
-
-	public SIDELog getLog() {
-		return log;
-	}
-
-	public void setLog(SIDELog log) {
-		this.log = log;
-	}
-
-	/**
-	 * Return the log target file (only generator)
-	 * 
-	 * @return
-	 */
-	protected String getLogFile() {
-		return configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + File.separator + getClass().getName() + ".txt"; //$NON-NLS-1$
-
-	}
+	
 
 	/**
 	 * Return the absolute path to the generation target path

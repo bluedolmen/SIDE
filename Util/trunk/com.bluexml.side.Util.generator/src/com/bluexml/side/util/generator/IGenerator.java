@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 
+import com.bluexml.side.util.componentmonitor.ComponentMonitor;
 import com.bluexml.side.util.dependencies.DependencesManager;
 
 public interface IGenerator {
@@ -23,7 +24,7 @@ public interface IGenerator {
 	 *            the list of technical parameters, shared by all generators.
 	 * @throws Exception
 	 */
-	public void initialize(Map<String, String> generationParameters, Map<String, Boolean> generatorOptions, Map<String, String> configurationParameters, DependencesManager dm) throws Exception;
+	public void initialize(Map<String, String> generationParameters, Map<String, Boolean> generatorOptions, Map<String, String> configurationParameters, DependencesManager dm,ComponentMonitor monitor) throws Exception;
 
 	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo, String id_metamodel);
 

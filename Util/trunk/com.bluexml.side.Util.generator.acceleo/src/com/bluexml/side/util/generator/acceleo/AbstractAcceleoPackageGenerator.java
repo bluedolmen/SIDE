@@ -20,11 +20,11 @@ public abstract class AbstractAcceleoPackageGenerator extends AbstractAcceleoGen
 			Collection<IFile> packageFile = buildPackages(rootName);
 			generatedFiles.addAll(packageFile);
 			for (IFile p : packageFile) {
-				addFileGeneratedLog(p.getName() + " created.", p.getName() + " created in " + p.getFullPath(), IFileHelper.getFile(p).toURI());
+				monitor.getLog().addFileGeneratedLog(p.getName() + " created.", p.getName() + " created in " + p.getFullPath(), IFileHelper.getFile(p).toURI());
 			}
 		}
 		for (IFile f : generatedFiles) {
-			addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());
+			monitor.getLog().addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());
 		}
 		
 		// add resources to match with package dependencies

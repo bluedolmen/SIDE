@@ -12,6 +12,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 
 import com.bluexml.side.application.StaticConfigurationParameters;
+import com.bluexml.side.util.componentmonitor.ComponentMonitor;
 import com.bluexml.side.util.documentation.LogSave;
 import com.bluexml.side.util.documentation.structure.LogEntry;
 import com.bluexml.side.util.documentation.structure.SIDELog;
@@ -25,9 +26,10 @@ import com.bluexml.side.util.security.Checkable;
  *         technology
  */
 public abstract class Deployer implements Checkable {
-	String workingDirKey = "generation.options.destinationPath"; //$NON-NLS-1$
+	public static String workingDirKey = "generation.options.destinationPath"; //$NON-NLS-1$
 	private Map<String, String> configurationParameters;
 	private Map<String, String> generationParameters;
+	protected ComponentMonitor monitor;
 	protected SIDELog log;
 	protected String id;
 	protected String techVersion = null;
@@ -58,9 +60,9 @@ public abstract class Deployer implements Checkable {
 
 	public static String DEPLOYER_CODE = null;
 	protected String cleanKey = null;
-	protected String cleanKeyMsg = "target cleaned";
+	protected String cleanKeyMsg = Activator.Messages.getString("Deployer.0"); //$NON-NLS-1$
 	protected String logChanges = null;
-	protected String logChangesMsg = "detail about target changes made by this deployer";
+	protected String logChangesMsg = Activator.Messages.getString("Deployer.1"); //$NON-NLS-1$
 	protected List<String> options = null;
 
 	/**
@@ -70,13 +72,20 @@ public abstract class Deployer implements Checkable {
 	 * @param generationParameters
 	 * @param options
 	 */
-	public void initialize(Map<String, String> configurationParameters, Map<String, String> generationParameters, List<String> options) {
+	public void initialize(Map<String, String> configurationParameters, Map<String, String> generationParameters, List<String> options,ComponentMonitor monitor) {
+		this.monitor = monitor;
 		this.configurationParameters = configurationParameters;
 		this.options = options;
 		this.generationParameters = generationParameters;
-		this.techVersion = configurationParameters.get("technologyVersion");
-		this.id = configurationParameters.get("deployerId");
-		log = new SIDELog(configurationParameters.get("deployerName"), id, configurationParameters.get("technologyVersionName"), configurationParameters.get("technologyName"), configurationParameters.get("metaModelName"), new Date(), LogType.DEPLOYMENT);
+		this.techVersion = configurationParameters.get("technologyVersion"); //$NON-NLS-1$
+		this.id = configurationParameters.get("deployerId"); //$NON-NLS-1$
+		
+		
+		for (Map.Entry<String, String> iterable_element : generationParameters.entrySet()) {
+			if (iterable_element.getValue() == null || iterable_element.getValue().length() == 0) {
+			monitor.getLog().addWarningLog(Activator.Messages.getString("Deployer.8"), Activator.Messages.getString("Deployer.9",iterable_element.getKey()), ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			}
+		}
 	}
 
 	public Map<String, String> getGenerationParameters() {
@@ -97,15 +106,21 @@ public abstract class Deployer implements Checkable {
 		String absoluteWKDirePath = IFileHelper.getSystemFolderPath(IfilewkDirPath);
 		File fileToDeploy = getFileToDeploy(absoluteWKDirePath);
 		// addInfoLog("preProcessing ...", "", null);
+		//monitor.beginTask("preProcess start");
 		preProcess(fileToDeploy);
+		monitor.taskDone(Activator.Messages.getString("Deployer.12")); //$NON-NLS-1$
 		if (doClean()) {
 			//addInfoLog("Cleaning ...", "", null);
 			clean(fileToDeploy);
 		}
 		// addInfoLog("Processing ...", "", null);
+		//monitor.customSubTask("main deploy process start");
 		deployProcess(fileToDeploy);
+		monitor.taskDone(Activator.Messages.getString("Deployer.13")); //$NON-NLS-1$
 		// addInfoLog("postProcessing ...", "", null);
+		//monitor.beginTask("postProcess start");
 		postProcess(fileToDeploy);
+		monitor.taskDone(Activator.Messages.getString("Deployer.14")); //$NON-NLS-1$
 	}
 
 	/**
@@ -189,69 +204,7 @@ public abstract class Deployer implements Checkable {
 		return options != null && options.contains(cleanKey);
 	}
 
-	/**
-	 * Add a Log
-	 *
-	 * @param title
-	 * @param description
-	 * @param uri
-	 * @param logEntryType
-	 */
-	protected void addLog(String title, String description, String uri, LogEntryType logEntryType) {
-		log.addLogEntry(new LogEntry(title, description, uri, logEntryType));
-	}
-
-	/**
-	 * Add an Error Log
-	 *
-	 * @param title
-	 * @param description
-	 * @param uri
-	 */
-	public void addErrorLog(String title, String description, String uri) {
-		addLog(title, description, uri, LogEntryType.ERROR);
-	}
-
-	/**
-	 * Add an error log using a stracktrace instead of a string description
-	 *
-	 * @param title
-	 * @param stackTrace
-	 * @param uri
-	 */
-	public void addErrorLog(String title, StackTraceElement[] stackTrace, String uri) {
-		String description = "";
-		if (stackTrace != null && stackTrace.length > 0) {
-			for (StackTraceElement se : stackTrace) {
-				description += System.getProperty("line.separator") + se.toString();
-			}
-		}
-		addErrorLog(title, description, uri);
-	}
-
-	/**
-	 * Add a warning log
-	 *
-	 * @param title
-	 * @param description
-	 * @param uri
-	 *            : null if no uri
-	 */
-	public void addWarningLog(String title, String description, String uri) {
-		addLog(title, description, uri, LogEntryType.WARNING);
-	}
-
-	/**
-	 * Add information log
-	 *
-	 * @param title
-	 * @param description
-	 * @param uri
-	 */
-	public void addInfoLog(String title, String description, String uri) {
-		addLog(title, description, uri, LogEntryType.DEPLOYMENT_INFORMATION);
-	}
-
+	
 	/**
 	 * Move the stamp file added by the generator to the directory into log path
 	 * to be used for log purpose.
@@ -260,10 +213,10 @@ public abstract class Deployer implements Checkable {
 	 */
 	final public void moveStampFile(String logPath) throws Exception {
 		// Seek all .xml files into gen directory
-		IFolder source = IFileHelper.getIFolder(getTargetPath() + System.getProperty("file.separator") + getTechVersion());
+		IFolder source = IFileHelper.getIFolder(getTargetPath() + System.getProperty("file.separator") + getTechVersion()); //$NON-NLS-1$
 		if (source.exists()) {
 			IFileHelper.refreshFolder(source);
-			IFolder dest = IFileHelper.createFolder(logPath + System.getProperty("file.separator") + LogSave.LOG_STAMP_FOLDER + System.getProperty("file.separator"));
+			IFolder dest = IFileHelper.createFolder(logPath + System.getProperty("file.separator") + LogSave.LOG_STAMP_FOLDER + System.getProperty("file.separator")); //$NON-NLS-1$ //$NON-NLS-2$
 			if (dest.exists()) {
 				IFileHelper.refreshFolder(dest);
 				List<IFile> toMove = IFileHelper.getAllFiles(source);
