@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Application.feature" label="S-IDE Application" version="1.0.58.v9003-20090909" provider-name="BlueXML">
+<feature id="com.bluexml.side.Application.feature" label="S-IDE Application" version="1.0.59.v9027-20090910" provider-name="BlueXML">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
@@ -27,6 +27,6 @@
   <plugin id="com.bluexml.side.Application" download-size="0" install-size="0" version="1.0.25.v8733-20090902" unpack="false" />
   <plugin id="com.bluexml.side.Application.edit" download-size="0" install-size="0" version="1.0.19.v8733-20090902" unpack="false" />
   <plugin id="com.bluexml.side.Application.editor" download-size="0" install-size="0" version="1.0.13.v8336-20090817" unpack="false" />
-  <plugin id="com.bluexml.side.Application.ui" download-size="0" install-size="0" version="1.0.57.v9003-20090909" unpack="false" />
+  <plugin id="com.bluexml.side.Application.ui" download-size="0" install-size="0" version="1.0.58.v9027-20090910" unpack="false" />
 </feature>
 
