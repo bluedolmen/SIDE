@@ -57,6 +57,7 @@ import com.bluexml.side.form.clazz.AddRefAction;
 import com.bluexml.side.form.clazz.CollapseReferenceAction;
 import com.bluexml.side.form.clazz.ExpandModelChoice;
 import com.bluexml.side.form.clazz.InitializeFormClassAction;
+import com.bluexml.side.form.clazz.ShowLinkedClassAction;
 import com.bluexml.side.form.clazz.SynchonizeWithClassDiagramAction;
 import com.bluexml.side.form.clazz.utils.ClassDiagramUtils;
 import com.bluexml.side.form.common.CopyFormAction;
@@ -143,6 +144,7 @@ public class FormActionBarContributor
 	protected InitializeFormClassAction initializeFormClassAction = new InitializeFormClassAction();
 	protected InitializeFormWorkflowAction initializeFormWorkflowAction = new InitializeFormWorkflowAction();
 	protected ShowLinkedTaskAction showLinkedTaskAction = new ShowLinkedTaskAction();
+	protected ShowLinkedClassAction showLinkedClassAction = new ShowLinkedClassAction();
 	protected RefreshOutlineAction refreshOutlineAction = new RefreshOutlineAction();
 	protected CollapseReferenceAction collapseReferenceAction = new CollapseReferenceAction();
 	protected CopyFormAction copyFormAction = new CopyFormAction();
@@ -535,6 +537,11 @@ public class FormActionBarContributor
 				menuManager.insertAfter("ui-actions", showLinkedTaskAction);
 			}
 
+			if (o instanceof FormClass) {
+				showLinkedClassAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/show_link.png"));
+				menuManager.insertAfter("ui-actions", showLinkedClassAction);
+			}
+
 			if (o instanceof FormContainer) {
 				MenuManager restoreMenu = new MenuManager("Restore","restore");
 				if (((FormContainer)o).getDisabled().size() > 0) {
@@ -685,6 +692,7 @@ public class FormActionBarContributor
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) initializeFormClassAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) initializeFormWorkflowAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) showLinkedTaskAction);
+		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) showLinkedClassAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) refreshOutlineAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) collapseReferenceAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) copyFormAction);
