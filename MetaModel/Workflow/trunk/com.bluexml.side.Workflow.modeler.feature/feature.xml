@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Workflow.modeler.feature" label="S-IDE Workflow Modeler" version="1.0.27.v9027-20090910" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Workflow.modeler.feature" label="S-IDE Workflow Modeler" version="1.0.28.v9051-20090910" provider-name="BLUEXML">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
@@ -25,8 +25,8 @@
   </requires>
   <plugin id="com.bluexml.side.Workflow" download-size="0" install-size="0" version="1.0.21.v8773-20090902" unpack="false" />
   <plugin id="com.bluexml.side.Workflow.edit" download-size="0" install-size="0" version="1.0.18.v8773-20090902" unpack="false" />
-  <plugin id="com.bluexml.side.Workflow.editor" download-size="0" install-size="0" version="1.0.16.v9027-20090910" unpack="false" />
-  <plugin id="com.bluexml.side.Workflow.modeler" download-size="0" install-size="0" version="1.0.18.v9027-20090910" unpack="false" />
+  <plugin id="com.bluexml.side.Workflow.editor" download-size="0" install-size="0" version="1.0.17.v9051-20090910" unpack="false" />
+  <plugin id="com.bluexml.side.Workflow.modeler" download-size="0" install-size="0" version="1.0.19.v9051-20090910" unpack="false" />
   <plugin id="com.bluexml.side.Workflow.generator.documentation" download-size="0" install-size="0" version="1.0.1.v8124-20090811" unpack="false" />
 </feature>
 
