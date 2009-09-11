@@ -1,144 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature
-      id="com.bluexml.side.Util.feature"
-      label="S-IDE Utils"
-      version="1.0.78.v9102-20090911"
-      provider-name="BLUEXML">
-
-   <description url="CRM.obl CRM.obldi">
-      BlueXML Developer Studio
-   </description>
-
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
-   </license>
-
-   <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="com.bluexml.side.Util.libs"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="com.bluexml.side.Util.security"/>
-      <import plugin="org.eclipse.emf"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="fr.obeo.acceleo.chain"/>
-      <import plugin="fr.obeo.acceleo.gen"/>
-      <import plugin="com.bluexml.side.Util.generator"/>
-      <import plugin="com.bluexml.side.Util.generator.acceleo"/>
-      <import plugin="com.bluexml.side.Util.ecore" version="1.0.1" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Util.model.merge" version="1.0.1" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.common"/>
-      <import plugin="org.eclipse.swt"/>
-      <import plugin="org.eclipse.ocl"/>
-      <import plugin="org.eclipse.ocl.ecore"/>
-      <import plugin="com.bluexml.side.Application" version="1.0.13" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Common" version="1.0.12" match="greaterOrEqual"/>
-   </requires>
-
-   <plugin
-         id="com.bluexml.side.Util.deployer"
-         download-size="0"
-         install-size="0"
-         version="1.0.22.v9102-20090911"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Util.deployer.war"
-         download-size="0"
-         install-size="0"
-         version="1.0.7.v9102-20090911"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Util.ecore"
-         download-size="0"
-         install-size="0"
-         version="1.0.14.v8944-20090908"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Util.generator"
-         download-size="0"
-         install-size="0"
-         version="1.0.33.v9102-20090911"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Util.generator.acceleo"
-         download-size="0"
-         install-size="0"
-         version="1.0.24.v9102-20090911"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Util.generator.alfresco"
-         download-size="0"
-         install-size="0"
-         version="1.0.19.v9102-20090911"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Util.libs"
-         download-size="0"
-         install-size="0"
-         version="1.0.26.v9102-20090911"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Util.log"
-         download-size="0"
-         install-size="0"
-         version="1.0.15.v9102-20090911"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Util.metaModel.validate"
-         download-size="0"
-         install-size="0"
-         version="1.0.16.v9003-20090909"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Util.model.merge"
-         download-size="0"
-         install-size="0"
-         version="1.0.14.v8833-20090903"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Util.security"
-         download-size="0"
-         install-size="0"
-         version="1.0.18.v8944-20090908"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Util.dependencies"
-         download-size="0"
-         install-size="0"
-         version="1.0.16.v8944-20090908"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Util.feedback"
-         download-size="0"
-         install-size="0"
-         version="1.0.14.v8944-20090908"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Util.generator.documentation"
-         download-size="0"
-         install-size="0"
-         version="1.0.7.v9102-20090911"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Util.componentMonitor"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
+<feature id="com.bluexml.side.Util.feature" label="S-IDE Utils" version="1.0.79.v9194-20090911" provider-name="BLUEXML">
+  <description url="CRM.obl CRM.obldi">BlueXML Developer Studio</description>
+  <license url="http://www.example.com/license">[Enter License Description here.]</license>
+  <requires>
+    <import plugin="org.eclipse.core.runtime" />
+    <import plugin="com.bluexml.side.Util.libs" />
+    <import plugin="org.eclipse.core.resources" />
+    <import plugin="com.bluexml.side.Util.security" />
+    <import plugin="org.eclipse.emf" />
+    <import plugin="org.eclipse.emf.ecore" />
+    <import plugin="org.eclipse.emf.ecore.xmi" />
+    <import plugin="org.eclipse.ui" />
+    <import plugin="fr.obeo.acceleo.chain" />
+    <import plugin="fr.obeo.acceleo.gen" />
+    <import plugin="com.bluexml.side.Util.generator" />
+    <import plugin="com.bluexml.side.Util.generator.acceleo" />
+    <import plugin="com.bluexml.side.Util.ecore" version="1.0.1" match="greaterOrEqual" />
+    <import plugin="com.bluexml.side.Util.model.merge" version="1.0.1" match="greaterOrEqual" />
+    <import plugin="org.eclipse.emf.common" />
+    <import plugin="org.eclipse.swt" />
+    <import plugin="org.eclipse.ocl" />
+    <import plugin="org.eclipse.ocl.ecore" />
+    <import plugin="com.bluexml.side.Application" version="1.0.13" match="greaterOrEqual" />
+    <import plugin="com.bluexml.side.Common" version="1.0.12" match="greaterOrEqual" />
+  </requires>
+  <plugin id="com.bluexml.side.Util.deployer" download-size="0" install-size="0" version="1.0.22.v9102-20090911" unpack="false" />
+  <plugin id="com.bluexml.side.Util.deployer.war" download-size="0" install-size="0" version="1.0.7.v9102-20090911" unpack="false" />
+  <plugin id="com.bluexml.side.Util.ecore" download-size="0" install-size="0" version="1.0.14.v8944-20090908" unpack="false" />
+  <plugin id="com.bluexml.side.Util.generator" download-size="0" install-size="0" version="1.0.33.v9102-20090911" unpack="false" />
+  <plugin id="com.bluexml.side.Util.generator.acceleo" download-size="0" install-size="0" version="1.0.24.v9102-20090911" unpack="false" />
+  <plugin id="com.bluexml.side.Util.generator.alfresco" download-size="0" install-size="0" version="1.0.19.v9102-20090911" unpack="false" />
+  <plugin id="com.bluexml.side.Util.libs" download-size="0" install-size="0" version="1.0.26.v9102-20090911" unpack="false" />
+  <plugin id="com.bluexml.side.Util.log" download-size="0" install-size="0" version="1.0.15.v9102-20090911" unpack="false" />
+  <plugin id="com.bluexml.side.Util.metaModel.validate" download-size="0" install-size="0" version="1.0.16.v9003-20090909" unpack="false" />
+  <plugin id="com.bluexml.side.Util.model.merge" download-size="0" install-size="0" version="1.0.14.v8833-20090903" unpack="false" />
+  <plugin id="com.bluexml.side.Util.security" download-size="0" install-size="0" version="1.0.18.v8944-20090908" unpack="false" />
+  <plugin id="com.bluexml.side.Util.dependencies" download-size="0" install-size="0" version="1.0.16.v8944-20090908" unpack="false" />
+  <plugin id="com.bluexml.side.Util.feedback" download-size="0" install-size="0" version="1.0.14.v8944-20090908" unpack="false" />
+  <plugin id="com.bluexml.side.Util.generator.documentation" download-size="0" install-size="0" version="1.0.7.v9102-20090911" unpack="false" />
+  <plugin id="com.bluexml.side.Util.componentMonitor" download-size="0" install-size="0" version="1.0.0" unpack="false" />
 </feature>
+
