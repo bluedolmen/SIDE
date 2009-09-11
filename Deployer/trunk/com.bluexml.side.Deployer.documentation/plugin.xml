@@ -4,13 +4,13 @@
    <extension
          point="com.bluexml.side.Application.com_bluexml_application_configuration">
       <technology
-            description="Generate documentation (in docbook) for the models of the metamodel."
-            id="docbook"
-            name="docBook"
-            url="http://www.docbook.org/">
+            description="Make an .odt file."
+            id="opendocument"
+            name="OpenDocument"
+            url="http://www.odfalliance.org/">
          <technologyVersion
-               id="docbook_4.x"
-               version="Docbook 4.x">
+               id="opendocument1_2"
+               version="OpenDocument 1.2">
             <deployerVersion
                   class="com.bluexml.side.deployer.documentation.DocumentationDeployer"
                   hidden="hidden and used by default"

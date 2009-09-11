@@ -9,13 +9,13 @@
             name="KSR500 Data"
             url="http://www.kerblue.org/class/1.0">
          <technology
-               description="Generate documentation (in docbook) for the models of the metamodel."
-               id="docbook"
-               name="docBook"
-               url="http://www.docbook.org/">
+               description="Generate documentation (in opendocument) for the models of the metamodel."
+               id="opendocument"
+               name="OpenDocument"
+               url="http://www.odfalliance.org/">
             <technologyVersion
-                  id="docbook_4.x"
-                  version="Docbook 4.x">
+                  id="opendocument1_2"
+                  version="OpenDocument 1.2">
                <generatorVersion
                      class="com.bluexml.side.clazz.generator.documentation.ClassDocumentationGenerator"
                      hidden="hidden and used by default"
