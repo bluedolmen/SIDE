@@ -709,6 +709,7 @@ public class ApplicationDialog extends Dialog {
 		columnNames[1] = columnNameValue;
 
 		Composite container = (Composite) super.createDialogArea(parent);
+		//Composite container = (Composite) parent.getShell();
 		container.setLayout(null);
 
 		tabFolder = new TabFolder(container, SWT.NONE);
@@ -1378,6 +1379,7 @@ public class ApplicationDialog extends Dialog {
 					saveData();
 				}
 			}
+			getShell().close();
 			close();
 		}
 		if (buttonId == APPLY_ID) {

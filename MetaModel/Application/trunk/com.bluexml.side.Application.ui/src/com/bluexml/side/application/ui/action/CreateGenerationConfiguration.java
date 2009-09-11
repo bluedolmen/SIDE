@@ -1,5 +1,6 @@
 package com.bluexml.side.application.ui.action;
 
+import java.awt.Event;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,9 +9,13 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.window.Window;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.ShellAdapter;
 import org.eclipse.swt.events.ShellEvent;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
@@ -34,25 +39,17 @@ public class CreateGenerationConfiguration implements IObjectActionDelegate {
 				final IFile rwm_model = (IFile) iss.getFirstElement();
 				// We open a dialog only if no dialog already open on it
 				if (!inUse(rwm_model)) {
-					final Display display = Display.getCurrent();
-
-					Shell shell = new Shell(display);
+					Shell shell = new Shell();
 
 					ApplicationDialog dialog = new ApplicationDialog(shell,
 							rwm_model);
 					addFileUnUse(rwm_model);
-					//shell.open();
-
-					if (dialog.open() == Window.OK) {
-						dialog.getShell().addShellListener(new ShellAdapter() {
-							public void shellClosed(ShellEvent e) {
-								removeFileUnUse(rwm_model);
-							}
-						});
-					}
-				} else {
-					UIUtils.showError(Activator.Messages.getString("Erreur.Title.1"), Activator.Messages.getString("Erreur.Msg.1")); //$NON-NLS-1$ //$NON-NLS-2$
+					dialog.open();
+					removeFileUnUse(rwm_model);
 				}
+			} else {
+				UIUtils.showError(
+								Activator.Messages.getString("Erreur.Title.1"), Activator.Messages.getString("Erreur.Msg.1")); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 	}
