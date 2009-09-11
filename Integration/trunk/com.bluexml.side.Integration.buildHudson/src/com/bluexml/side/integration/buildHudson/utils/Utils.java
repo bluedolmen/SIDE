@@ -72,7 +72,8 @@ public class Utils {
 		if(projects.length > 0){
 			for (int i = 0; i < projects.length; i++) {
 				if(!"".equals(projects[i])){
-					l.add(projects[i].split("&")[1]);
+					if (projects[i].split("&").toString().trim().length()>0)
+						l.add(projects[i].split("&")[1]);
 				}
 			}
 		}
