@@ -16,6 +16,7 @@ import org.eclipse.equinox.app.IApplicationContext;
 
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.deployer.documentation.DocumentationDeployer;
+import com.bluexml.side.util.componentmonitor.NullComponentMonitor;
 import com.bluexml.side.util.generator.documentation.DocumentationGenerator;
 
 
@@ -70,12 +71,13 @@ public class Application implements IApplication {
 
 		final DocumentationGenerator gen = new MetaModelDocumentationGenerator();
 		HashMap<String,String>  configurationParameters_ = getConfigurationParameter(targetPath, TECH_NAME);
-		gen.initialize(null, null, configurationParameters_, null);
+		NullComponentMonitor generationMonitor = new NullComponentMonitor(null);
+		gen.initialize(null, null, configurationParameters_, null,generationMonitor);
 		
 		System.out.println(gen.getClass().getName() + " Initalized.");
 
 		final DocumentationDeployer deployer = new DocumentationDeployer ();
-		deployer.initialize(configurationParameters_, null, null);
+		deployer.initialize(configurationParameters_, null, null,generationMonitor);
 		System.out.println(deployer.getClass().getName() + " Initalized.");
 		
 		File dir = new File(metaModelDirPath);
