@@ -541,6 +541,7 @@ public class Application {
 		for (int i = 0; i < projects.length; i++) {
 
 			if (projects[i].length() > 0) {
+				System.out.println("-->"+projects[i]);
 				// si le mot 'feature' n'est pas présent dans le nom du projet
 				if (projects[i].indexOf("feature") == -1) {
 					out += "\t\t\t<fileset dir=\""
