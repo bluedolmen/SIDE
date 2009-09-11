@@ -32,10 +32,12 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.Field;
 import com.bluexml.side.form.FormAspect;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormGroup;
+import com.bluexml.side.form.StaticText;
 import com.bluexml.side.form.VirtualField;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.common.utils.FormDiagramUtils;
@@ -345,13 +347,11 @@ public class FormGroupItemProvider
 							cmd.append(createCmd);
 						}
 					}
-				} else if (o instanceof Field & !(o instanceof VirtualField)) {
+				} else if (o instanceof Field & !(o instanceof VirtualField) & !(o instanceof StaticText) & !(o instanceof ActionField)) {
 					Field f = (Field) o;
 					Field fcpy = (Field) EcoreUtil.copy(f);
 					Command createCmd = AddCommand.create(domain, FormDiagramUtils.getParentFormClass((FormElement)owner), FormPackage.eINSTANCE.getFormGroup_Disabled(), fcpy);
 					cmd.append(createCmd);
-				} else {
-
 				}
 			}
 		}
