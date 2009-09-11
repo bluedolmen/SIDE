@@ -17,7 +17,6 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.gef.ui.actions.GEFActionConstants;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -83,7 +82,8 @@ public class ModelerContextMenuProvider extends ContextMenuProvider {
 			
 			String codeValue = "";
 			try {
-				InputStream fis = editor.getClass().getClassLoader().getResourceAsStream(code);
+				URL url = Platform.getBundle(configurationElement.getContributor().getName()).getResource(code);				
+				InputStream fis = url.openStream();
 				BufferedInputStream bis = new BufferedInputStream(fis);
 				DataInputStream dis = new DataInputStream(bis);
 				while (dis.available() != 0)
@@ -98,7 +98,7 @@ public class ModelerContextMenuProvider extends ContextMenuProvider {
 			
 			ImageDescriptor iconDescriptor = null;
 			if (icon != null && icon.length() > 0) {
-				URL url = editor.getClass().getClassLoader().getResource(icon);
+				URL url = Platform.getBundle(configurationElement.getContributor().getName()).getResource(icon); 
 				iconDescriptor = ImageDescriptor.createFromURL(url);
 			}
 			
