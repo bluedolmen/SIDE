@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
@@ -53,7 +54,7 @@ public class Application {
 			if (!"".equals(argument2)) {
 				workspace = argument2;
 
-				String[] projects = Utils.getProjects();
+				String[] projects = toArray(Utils.getProjects());
 
 				// On met a jour le texte de la licence et du copyright
 				for (int i = 0; i < projects.length; i++) {
@@ -213,7 +214,7 @@ public class Application {
 	 * Retourne le corps du fichier build.xml pour le projet donné
 	 */
 	private static String getCorpsBuild() {
-		String[] projects = Utils.getProjects();
+		String[] projects = toArray(Utils.getProjects());
 
 		String out = "<?xml version=\"1.0\"?>\n";
 		out += "<project name=\"build\" default=\"build\">\n";
@@ -326,7 +327,7 @@ public class Application {
 	 * Retourne le corps du product
 	 */
 	private static String getCorpsProduct() {
-		String[] projects = Utils.getProjects();
+		String[] projects = toArray(Utils.getProjects());
 
 		String out = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 		out += "<?pde version=\"3.4\"?>\n";
@@ -377,7 +378,7 @@ public class Application {
 	 */
 	@SuppressWarnings("unused")
 	private static String getCorpsSite() {
-		String[] projects = Utils.getProjects();
+		String[] projects = toArray(Utils.getProjects());
 		ArrayList<String> categories = new ArrayList<String>();
 
 		for (int i = 0; i < projects.length; i++) {
@@ -428,7 +429,7 @@ public class Application {
 		if (!new File(Utils.getBuildDirectory() + "_CO").exists())
 			new File(Utils.getBuildDirectory() + "_CO").mkdir();
 
-		String[] projects = Utils.getProjects();
+		String[] projects = toArray(Utils.getProjects());
 
 		// On va lister la liste des dossier qui se trouve dans
 		// ${buildDirectory}_CO et si un projet qui est dans la liste de
@@ -487,7 +488,7 @@ public class Application {
 	 * Retourne le corps de la target svnUD
 	 */
 	private static String getTargetSvnUD() {
-		String[] projects = Utils.getProjects();
+		String[] projects = toArray(Utils.getProjects());
 
 		String out = "\n\t<!-- ================================= \n";
 		out += "\t\t\ttarget: svnUD\n";
@@ -532,8 +533,8 @@ public class Application {
 				+ "\">\n";
 		
 		for(int j=0; j < 2; j++){
-			if (j == 0)
-					projects = Utils.getProjects();
+			if (j == 0) 
+					projects = toArray(Utils.getProjects());
 			if (j == 1 )
 					projects = Utils.getVersionedProjects();
 		
@@ -563,11 +564,21 @@ public class Application {
 		return out;
 	}
 
+	private static String[] toArray(List<String> l) {
+		String[] array = new String[l.size()];
+		int i = 0;
+		for (String string : l) {
+			array[i] = string;
+			i++;
+		}
+		return array;
+	}
+
 	/**
 	 * Retourne le corps de la target genJavadoc
 	 */
 	private static String getGenJavadoc() {
-		String[] projects = Utils.getProjects();
+		String[] projects = toArray(Utils.getProjects());
 
 		if (!new File(Utils.getBuildPath() + File.separator + "doc").exists())
 			new File(Utils.getBuildPath() + File.separator + "doc").mkdir();

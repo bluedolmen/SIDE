@@ -62,19 +62,22 @@ public class Utils {
 	/**
 	 * Retourne la liste des projets
 	 */
-	public static String[] getProjects() {
+	public static List<String> getProjects() {
 
 		String[] projects = ouvrirFichier("build.properties").getProperty(
 				"project").split(",");
+		
+		List<String> l = new ArrayList<String>();
 
 		if(projects.length > 0){
 			for (int i = 0; i < projects.length; i++) {
 				if(!"".equals(projects[i])){
-					projects[i] = projects[i].split("&")[1];
+					l.add(projects[i].split("&")[1]);
 				}
 			}
 		}
-		return projects;
+		
+		return l;
 	}
 	
 	/**
@@ -389,7 +392,7 @@ public class Utils {
 	 */
 	public static void preTraitement() {
 
-		String[] projects = getProjects();
+		List<String> projects = getProjects();
 
 		String path = "";
 
@@ -401,26 +404,26 @@ public class Utils {
 			}
 			new File(getBuildDirectory()).mkdir();
 
-			for (int i = 0; i < projects.length; i++) {
+			for (int i = 0; i < projects.size(); i++) {
 
 				path = Application.workspace + File.separator + "S-IDE"
-						+ File.separator + getProjectPath(projects[i])
+						+ File.separator + getProjectPath(projects.get(i))
 						+ File.separator + "trunk";
 
-				if (projects[i].indexOf("feature") == -1) {
+				if (projects.get(i).indexOf("feature") == -1) {
 
 					FileHelper.copyFiles(new File(path + File.separator
-							+ projects[i]), new File(getBuildDirectory()
+							+ projects.get(i)), new File(getBuildDirectory()
 							+ File.separator + "plugins" + File.separator
-							+ projects[i]), true);
+							+ projects.get(i)), true);
 				}
 
 				else {
 
 					FileHelper.copyFiles(new File(path + File.separator
-							+ projects[i]), new File(getBuildDirectory()
+							+ projects.get(i)), new File(getBuildDirectory()
 							+ File.separator + "features" + File.separator
-							+ projects[i]), true);
+							+ projects.get(i)), true);
 				}
 
 			}
@@ -489,10 +492,10 @@ public class Utils {
 		ArrayList<String> listeProjetReels = new ArrayList<String>();
 		ArrayList<String> listeProjetPoms = new ArrayList<String>();
 
-		String[] projects = getProjects();
+		List<String> projects = getProjects();
 
-		for (int i = 0; i < projects.length; i++) {
-			listeProjetReels.add(projects[i]);
+		for (int i = 0; i < projects.size(); i++) {
+			listeProjetReels.add(projects.get(i));
 		}
 		
 		
@@ -624,9 +627,9 @@ public class Utils {
 			System.out
 					.println("Les num�ros de version de tous les projets sont forc�s �: "
 							+ getForceNumberVersion());
-			for (int i = 0; i < projects.length; i++) {
-				if (projects[i].indexOf("feature") == -1)
-					listePlugin.add(projects[i]);
+			for (int i = 0; i < projects.size(); i++) {
+				if (projects.get(i).indexOf("feature") == -1)
+					listePlugin.add(projects.get(i));
 			}
 
 		}
@@ -644,9 +647,9 @@ public class Utils {
 		}
 
 		// On fait la meme chose mais pour toutes les features
-		for (int i = 0; i < projects.length; i++) {
-			if (projects[i].indexOf("feature") != -1) {
-				updateVersionNumber(projects[i]);
+		for (int i = 0; i < projects.size(); i++) {
+			if (projects.get(i).indexOf("feature") != -1) {
+				updateVersionNumber(projects.get(i));
 			}
 		}
 
@@ -1083,16 +1086,16 @@ public class Utils {
 		String fileSitePath = getBuildPath() + File.separator + "site.xml";
 		// String fileSitePath = getFinalDirectory()+ File.separator +
 		// getArchivePrefix() + File.separator+ "site.xml";
-		String[] projects = getProjects();
+		List<String> projects = getProjects();
 
 		// tableau qui contiendra la liste des features
 		ArrayList<String> listeFeature = new ArrayList<String>();
 
 		// on met tous les features dans le tableau
-		for (int i = 0; i < projects.length; i++) {
+		for (int i = 0; i < projects.size(); i++) {
 
-			if (projects[i].indexOf("feature") != -1)
-				listeFeature.add(projects[i]);
+			if (projects.get(i).indexOf("feature") != -1)
+				listeFeature.add(projects.get(i));
 		}
 
 		org.jdom.Document document = null;
@@ -1294,20 +1297,20 @@ public class Utils {
 					.exists())
 				new File(getFinalDirectory() + File.separator + "bin").mkdir();
 
-			String[] projects = getProjects();
+			List<String> projects = getProjects();
 
-			for (int i = 0; i < projects.length; i++) {
-				if (projects[i].indexOf("feature") == -1) {
+			for (int i = 0; i < projects.size(); i++) {
+				if (projects.get(i).indexOf("feature") == -1) {
 					if (new File(getBuildDirectory() + File.separator
-							+ "plugins" + File.separator + projects[i]
+							+ "plugins" + File.separator + projects.get(i)
 							+ File.separator + "@dot").exists()) {
 						FileHelper.copyFiles(new File(getBuildDirectory()
 								+ File.separator + "plugins" + File.separator
-								+ projects[i] + File.separator + "@dot"),
+								+ projects.get(i) + File.separator + "@dot"),
 								new File(getFinalDirectory() + File.separator
 										+ "bin" + File.separator
 										+ getCodeName() + File.separator
-										+ projects[i]), true);
+										+ projects.get(i)), true);
 					}
 				}
 			}
