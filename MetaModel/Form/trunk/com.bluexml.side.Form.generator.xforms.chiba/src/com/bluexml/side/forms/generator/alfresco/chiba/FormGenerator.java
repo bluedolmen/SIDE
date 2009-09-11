@@ -179,7 +179,6 @@ public class FormGenerator extends AbstractGenerator {
 		Element project = pom.getRootElement();
 		Element build = project.getChild("build", NAMESPACE_MAVENPOM);
 		Element plugins = build.getChild("plugins", NAMESPACE_MAVENPOM);
-		// Element plugin = plugins.getChild("plugin", NAMESPACE_MAVENPOM);
 		Element plugin = getBlueXMLGeneratorMojoPlugin(plugins);
 		Element configurationElement = plugin.getChild("configuration", NAMESPACE_MAVENPOM);
 		addFiles("clazzFiles", clazzModels, configurationElement);
@@ -207,6 +206,7 @@ public class FormGenerator extends AbstractGenerator {
 	 * @param plugins
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	private Element getBlueXMLGeneratorMojoPlugin(Element plugins) {
 		List<Element> listOfPlugins = plugins.getChildren();
 		for (Element plugin : listOfPlugins) {
