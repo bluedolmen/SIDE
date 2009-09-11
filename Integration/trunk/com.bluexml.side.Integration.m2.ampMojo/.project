@@ -1,5 +1,5 @@
 <projectDescription>
-  <name>ampMojo</name>
+  <name>com.bluexml.side.Integration.m2.ampMojo</name>
   <comment/>
   <projects>
     <project>maven-war-plugin</project>
