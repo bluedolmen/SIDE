@@ -525,9 +525,9 @@ public class Application {
 		out += "\t\t\ttarget: svnCommit\n";
 		out += "\t================================= -->\n\n";
 
-		out += "\t<target name=\"svnCommit\" depends=\"\" description=\"description\" username=\"build-auto\" password=\"build.auto\">\n";
+		out += "\t<target name=\"svnCommit\" depends=\"\" description=\"description\">\n";
 
-		out += "\t\t<svn>\n";
+		out += "\t\t<svn username=\"build-auto\" password=\"build.auto\">\n";
 		out += "\t\t\t<commit message=\"buildAuto du " + Utils.getDate2()
 				+ "\">\n";
 		

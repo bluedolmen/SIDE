@@ -2,12 +2,12 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/svnant.jar"/>
-	<classpathentry kind="lib" path="lib/svnClientAdapter.jar"/>
-	<classpathentry kind="lib" path="lib/svnjavahl.jar"/>
-	<classpathentry kind="lib" path="lib/tools.jar"/>
-	<classpathentry kind="lib" path="lib/ant-launcher.jar"/>
-	<classpathentry kind="lib" path="lib/ant.jar"/>
-	<classpathentry kind="lib" path="lib/jdom.jar"/>
+	<classpathentry kind="lib" path="config/lib/ant-launcher.jar"/>
+	<classpathentry kind="lib" path="config/lib/ant.jar"/>
+	<classpathentry kind="lib" path="config/lib/jdom.jar"/>
+	<classpathentry kind="lib" path="config/lib/svnant.jar"/>
+	<classpathentry kind="lib" path="config/lib/svnClientAdapter.jar"/>
+	<classpathentry kind="lib" path="config/lib/svnjavahl.jar"/>
+	<classpathentry kind="lib" path="config/lib/tools.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
