@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.tools.ant.util.StringUtils;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
@@ -71,9 +72,12 @@ public class Utils {
 
 		if(projects.length > 0){
 			for (int i = 0; i < projects.length; i++) {
-				if(!"".equals(projects[i])){
-					if (projects[i].split("&").toString().trim().length()>0)
-						l.add(projects[i].split("&")[1]);
+				String projectName = projects[i].split("&")[1];
+				projectName.trim().replaceAll("\n", "");
+				System.out.println(projectName);
+				if (projectName.length() > 0) {
+					l.add(projectName);
+					System.out.println("OK");
 				}
 			}
 		}
