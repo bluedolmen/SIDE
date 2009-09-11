@@ -540,20 +540,22 @@ public class Application {
 		
 		for (int i = 0; i < projects.length; i++) {
 
-			// si le mot 'feature' n'est pas présent dans le nom du projet
-			if (projects[i].indexOf("feature") == -1) {
-				out += "\t\t\t<fileset dir=\""
-						+ Utils.getPathToLocalCopy(projects[i])
-						+ File.separator + "META-INF\">\n";
-				out += "\t\t\t\t<include name=\"MANIFEST.MF\" />\n";
-				out += "\t\t\t</fileset>\n";
-
-			} // si 'feature' est présent
-			else if (projects[i].indexOf("feature") != -1) {
-				out += "\t\t\t<fileset dir=\""
-						+ Utils.getPathToLocalCopy(projects[i]) + "\">\n";
-				out += "\t\t\t\t<include name=\"feature.xml\" />\n";
-				out += "\t\t\t</fileset>\n";
+			if (projects[i].length() > 0) {
+				// si le mot 'feature' n'est pas présent dans le nom du projet
+				if (projects[i].indexOf("feature") == -1) {
+					out += "\t\t\t<fileset dir=\""
+							+ Utils.getPathToLocalCopy(projects[i])
+							+ File.separator + "META-INF\">\n";
+					out += "\t\t\t\t<include name=\"MANIFEST.MF\" />\n";
+					out += "\t\t\t</fileset>\n";
+	
+				} // si 'feature' est présent
+				else if (projects[i].indexOf("feature") != -1) {
+					out += "\t\t\t<fileset dir=\""
+							+ Utils.getPathToLocalCopy(projects[i]) + "\">\n";
+					out += "\t\t\t\t<include name=\"feature.xml\" />\n";
+					out += "\t\t\t</fileset>\n";
+				}
 			}
 		}
 		}

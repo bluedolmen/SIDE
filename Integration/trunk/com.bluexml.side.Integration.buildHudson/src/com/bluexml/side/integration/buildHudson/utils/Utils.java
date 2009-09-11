@@ -74,10 +74,8 @@ public class Utils {
 			for (int i = 0; i < projects.length; i++) {
 				String projectName = projects[i].split("&")[1];
 				projectName.trim().replaceAll("\n", "");
-				System.out.println(projectName);
 				if (projectName.length() > 0) {
 					l.add(projectName);
-					System.out.println("OK");
 				}
 			}
 		}
