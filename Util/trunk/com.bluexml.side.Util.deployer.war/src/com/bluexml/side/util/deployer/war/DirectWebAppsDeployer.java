@@ -83,7 +83,7 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 			throw new Exception(Activator.Messages.getString("DirectWebAppsDeployer.15")); //$NON-NLS-1$
 		}
 		if (getWorkingDir().exists()) {
-			monitor.getLog().addInfoLog(Activator.Messages.getString("DirectWebAppsDeployer.5"), Activator.Messages.getString("WarDeployer.17") + getWorkingDir().getName(), ""); //$NON-NLS-1$ //$NON-NLS-2$
+			monitor.getLog().addInfoLog(Activator.Messages.getString("DirectWebAppsDeployer.5"), Activator.Messages.getString("DirectWebAppsDeployer.17") + getWorkingDir().getName(), ""); //$NON-NLS-1$ //$NON-NLS-2$
 			FileHelper.deleteFile(getWorkingDir(), false);
 		}
 		monitor.getLog().addInfoLog(Activator.Messages.getString("DirectWebAppsDeployer.5"), Activator.Messages.getString("WarDeployer.19") + getWorkingDir().getName(), ""); //$NON-NLS-1$ //$NON-NLS-2$
