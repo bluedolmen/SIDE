@@ -7,12 +7,13 @@
 package com.bluexml.side.view.util;
 
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
@@ -23,14 +24,15 @@ import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.OCL;
 
-import com.bluexml.side.common.util.CommonValidator;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
-import com.bluexml.side.view.*;
 import com.bluexml.side.view.AbstractDataTable;
 import com.bluexml.side.view.AbstractView;
+import com.bluexml.side.view.AbstractViewOf;
 import com.bluexml.side.view.ActionField;
+import com.bluexml.side.view.Actionable;
 import com.bluexml.side.view.BooleanField;
 import com.bluexml.side.view.Col;
+import com.bluexml.side.view.ComposedView;
 import com.bluexml.side.view.DataList;
 import com.bluexml.side.view.DataTable;
 import com.bluexml.side.view.DataTableElement;
@@ -125,7 +127,7 @@ public class ViewValidator extends EObjectValidator {
 	private static Constraint field_noFieldMappedInvOCL;
 
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
-	
+
 	private static final OCL OCL_ENV = KerblueOCL.newInstance();
 	/**
 	 * Creates an instance of the switch.
@@ -255,7 +257,7 @@ public class ViewValidator extends EObjectValidator {
 				return validateSelectWidgetType((SelectWidgetType)value, diagnostics, context);
 			case ViewPackage.FACET_DISPLAY_TYPE:
 				return validateFacetDisplayType((FacetDisplayType)value, diagnostics, context);
-			default: 
+			default:
 				return true;
 		}
 	}
@@ -431,10 +433,10 @@ public class ViewValidator extends EObjectValidator {
         if (field_noFieldMappedInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(ViewPackage.Literals.FIELD);
-			
+
 			EAnnotation ocl = ViewPackage.Literals.FIELD.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("noFieldMapped");
-			
+
 			try {
 				field_noFieldMappedInvOCL = helper.createInvariant(expr);
 			}
@@ -442,14 +444,14 @@ public class ViewValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(field_noFieldMappedInvOCL);
-		
+
 		if (!query.check(field)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( ViewPackage.Literals.FIELD.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"noFieldMapped")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noFieldMapped", getObjectLabel(field, context) }),
@@ -874,6 +876,18 @@ public class ViewValidator extends EObjectValidator {
 	 */
 	public boolean validateFacetDisplayType(FacetDisplayType facetDisplayType, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
+	}
+
+	protected boolean doThrowError(EAnnotation ecore, String ruleName) {
+		String warningList = ecore.getDetails().get("warning");
+		boolean throwError = true;
+		if (warningList != null) {
+			List<String> list = Arrays.asList(warningList.split(" "));
+			if (list.contains(ruleName)) {
+				throwError = false;
+			}
+		}
+		return throwError;
 	}
 
 } //ViewValidator

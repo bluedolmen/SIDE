@@ -106,10 +106,7 @@ public class SelectFieldItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((SelectField)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_SelectField_type") :
-			label;
+		return super.getText(object);
 	}
 
 	/**

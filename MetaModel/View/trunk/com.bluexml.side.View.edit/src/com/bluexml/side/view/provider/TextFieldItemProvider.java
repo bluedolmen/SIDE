@@ -106,10 +106,7 @@ public class TextFieldItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((TextField)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_TextField_type") :
-			label;
+		return super.getText(object);
 	}
 
 	/**

@@ -116,7 +116,7 @@ public class ActionFieldItemProvider
 		String label = ((ActionField)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ActionField_type") :
-			label;
+			getString("_UI_ActionField_type") + " " + label;
 	}
 
 	/**

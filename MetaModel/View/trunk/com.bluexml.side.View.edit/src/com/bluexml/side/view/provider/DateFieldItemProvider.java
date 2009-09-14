@@ -71,6 +71,8 @@ public class DateFieldItemProvider
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/DateField"));
 	}
 
+
+
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
@@ -79,10 +81,7 @@ public class DateFieldItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DateField)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_DateField_type") :
-			label;
+		return super.getText(object);
 	}
 
 	/**

@@ -110,25 +110,6 @@ public class AbstractViewItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-		newChildDescriptors.add
-		(createChildParameter
-			(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-			 ViewFactory.eINSTANCE.createDataList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createDataTable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createFacetMap()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
-				 ViewFactory.eINSTANCE.createTree()));
 	}
 
 	/**

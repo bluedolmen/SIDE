@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -22,6 +23,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import com.bluexml.side.clazz.Association;
 import com.bluexml.side.view.Field;
 import com.bluexml.side.view.ViewPackage;
 
@@ -152,10 +154,32 @@ public class FieldItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Field)object).getName();
+		Field f = ((Field)object);
+		String label = f.getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_Field_type") :
-			label;
+			getString("_UI_Field_type") + getPathToText(f):
+			label  + getPathToText(f);
+	}
+
+	public String getPathToText(Field f) {
+		String result = "";
+		String separator = " > ";
+		if (f.getPath().size() > 0) {
+			result += " (";
+			int size = f.getPath().size();
+			for (EObject o : f.getPath()) {
+				if (o instanceof Association) {
+					Association a = (Association) o;
+					result += a.getLabel();
+				}
+				size--;
+				if (size != 0) {
+					result += separator;
+				}
+			}
+			result += ")";
+		}
+		return result;
 	}
 
 	/**

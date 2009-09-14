@@ -79,10 +79,7 @@ public class PasswordFieldItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((PasswordField)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_PasswordField_type") :
-			label;
+		return super.getText(object);
 	}
 
 	/**

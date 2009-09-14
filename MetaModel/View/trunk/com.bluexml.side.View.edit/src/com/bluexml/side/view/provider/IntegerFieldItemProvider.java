@@ -79,10 +79,7 @@ public class IntegerFieldItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((IntegerField)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_IntegerField_type") :
-			label;
+		return super.getText(object);
 	}
 
 	/**

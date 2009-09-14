@@ -98,6 +98,8 @@ public class BooleanFieldItemProvider
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/BooleanField"));
 	}
 
+
+
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
@@ -106,10 +108,7 @@ public class BooleanFieldItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((BooleanField)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_BooleanField_type") :
-			label;
+		return super.getText(object);
 	}
 
 	/**

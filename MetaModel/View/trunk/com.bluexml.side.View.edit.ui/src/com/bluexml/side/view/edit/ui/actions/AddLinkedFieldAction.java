@@ -33,14 +33,14 @@ ISelectionChangedListener {
 	protected AbstractView parent;
 	private EditingDomain domain;
 	protected List<Association> path;
-	
+
 	public AddLinkedFieldAction(EObject a, List<Association> path, AbstractView parent) {
 		super();
 		toAdd = a;
 		this.path = path;
 		this.parent = parent;
 	}
-	
+
 	public void selectionChanged(SelectionChangedEvent event) {
 		if (event.getSelection() instanceof IStructuredSelection) {
 			setEnabled(updateSelection((IStructuredSelection) event
@@ -51,7 +51,7 @@ ISelectionChangedListener {
 	}
 
 	public boolean updateSelection(IStructuredSelection selection) {
-		
+
 		for (Iterator<?> objects = selection.iterator(); objects.hasNext();) {
 			Object object = objects.next();
 			if (object instanceof Attribute) {
@@ -63,20 +63,20 @@ ISelectionChangedListener {
 
 		return toAdd != null;
 	}
-	
+
 	@Override
 	public void run() {
 		super.run();
 		doAction();
 	}
-	
+
 	private void doAction() {
 		try {
 			if (toAdd instanceof Attribute) {
 				FieldElement child = null;
 				Field f = ClassUtils.getFieldForAttribute((Attribute)toAdd);
 				f.getPath().addAll(path);
-				
+
 				if (parent instanceof DataTable) {
 					Col col = ViewFactory.eINSTANCE.createCol();
 					col.getChildren().add(f);
@@ -94,7 +94,7 @@ ISelectionChangedListener {
 			e.printStackTrace();
 			EcorePlugin.INSTANCE.log("Get Linked Field : " + e.getMessage());
 			e.printStackTrace();
-			InternalModification.moveToDisabled(); 
+			InternalModification.moveToDisabled();
 		}
 	}
 
@@ -103,20 +103,23 @@ ISelectionChangedListener {
 		String text = "";
 		if (toAdd != null && toAdd instanceof Association) {
 			Association asso = (Association) toAdd;
+			//System.err.println("text (" + text + ") for" + asso);
 			text = asso.getTitle();
 			if (text == null || text.length() == 0) {
 				text = asso.getName();
 			}
 		} else if (toAdd != null && toAdd instanceof Attribute) {
 			Attribute att = (Attribute) toAdd;
+			//System.err.println("text (" + text + ") for" + att);
 			text = att.getTitle();
 			if (text == null || text.length() == 0) {
 				text = att.getName();
 			}
 		}
+
 		return text;
 	}
-	
+
 	public void setActiveWorkbenchPart(IWorkbenchPart workbenchPart) {
 		if (workbenchPart instanceof IEditingDomainProvider) {
 			domain = ((IEditingDomainProvider) workbenchPart).getEditingDomain();

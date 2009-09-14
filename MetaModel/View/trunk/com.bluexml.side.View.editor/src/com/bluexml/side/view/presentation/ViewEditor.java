@@ -1315,7 +1315,7 @@ public class ViewEditor
 					if (!editingDomain.getResourceSet().getResources().isEmpty()) {
 					  // Select the root object in the view.
 					  //
-					  //contentOutlineViewer.setSelection(new StructuredSelection(editingDomain.getResourceSet().getResources().get(0)), true);
+					  contentOutlineViewer.setSelection(new StructuredSelection(editingDomain.getResourceSet().getResources().get(0)), true);
 					}
 				}
 
@@ -1491,7 +1491,7 @@ public class ViewEditor
 
 	/**
 	 * This returns whether something has been persisted to the URI of the specified resource.
-	 * The implementation uses the URI converter from the editor's resource set to try to open an input stream.
+	 * The implementation uses the URI converter from the editor's resource set to try to open an input stream. 
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

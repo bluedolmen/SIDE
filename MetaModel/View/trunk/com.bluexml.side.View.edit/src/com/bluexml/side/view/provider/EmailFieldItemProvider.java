@@ -71,6 +71,7 @@ public class EmailFieldItemProvider
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/EmailField"));
 	}
 
+
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
@@ -79,10 +80,7 @@ public class EmailFieldItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((EmailField)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_EmailField_type") :
-			label;
+		return super.getText(object);
 	}
 
 	/**

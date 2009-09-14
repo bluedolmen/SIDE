@@ -79,10 +79,7 @@ public class FloatFieldItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((FloatField)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_FloatField_type") :
-			label;
+		return super.getText(object);
 	}
 
 	/**

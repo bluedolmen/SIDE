@@ -79,10 +79,7 @@ public class PhoneNumberFieldItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((PhoneNumberField)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_PhoneNumberField_type") :
-			label;
+		return super.getText(object);
 	}
 
 	/**

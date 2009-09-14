@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.action.ControlAction;
@@ -65,7 +66,7 @@ import com.bluexml.side.view.edit.ui.utils.FieldTransformation;
 /**
  * This is the action bar contributor for the View model editor. <!--
  * begin-user-doc --> <!-- end-user-doc -->
- * 
+ *
  * @generated
  */
 public class ViewActionBarContributor extends EditingDomainActionBarContributor
@@ -78,7 +79,7 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 	protected CopyColConfAction copyColConfAction = new CopyColConfAction();
 	protected PasteColConfAction pasteColConfAction = new PasteColConfAction();
 	protected ShowLinkedClassAction showLinkedClassAction = new ShowLinkedClassAction();
-	
+
 
 	/**
 	 * This keeps track of the active editor.
@@ -118,7 +119,7 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 	 * This action refreshes the viewer of the current editor if the editor
 	 * implements {@link org.eclipse.emf.common.ui.viewer.IViewerProvider}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected IAction refreshViewerAction = new Action(ViewEditorPlugin.INSTANCE.getString("_UI_RefreshViewer_menu_item")) {
@@ -150,7 +151,7 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 	 * This is the menu manager into which menu contribution items should be
 	 * added for CreateChild actions. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected IMenuManager createChildMenuManager;
@@ -187,7 +188,7 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 	/**
 	 * This adds Separators for editor additions to the tool bar. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -200,7 +201,7 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 	 * This adds to the menu bar a menu and some separators for editor
 	 * additions, as well as the sub-menus for object creation items. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -274,7 +275,7 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 	 * the children and siblings that can be added to the selected object and
 	 * updating the menus accordingly. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public void selectionChanged(SelectionChangedEvent event) {
@@ -437,7 +438,7 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 	/**
 	 * This inserts global actions before the "additions-end" separator. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @_generated
 	 */
 	@Override
@@ -466,7 +467,7 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 			addActionsForFields(menuManager);
 		}
 
-		
+
 		if (o instanceof Col && !(o instanceof AbstractView)) {
 			addActionsForCols(menuManager);
 		}
@@ -513,7 +514,7 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 		pasteColConfAction.setImageDescriptor(ImageDescriptor.createFromFile(this
 				.getClass(), "/icons/menu/pasteColConf.gif"));
 		menuManager.insertAfter("ui-actions", pasteColConfAction);
-		
+
 		// Copy configuration
 		copyColConfAction.setImageDescriptor(ImageDescriptor.createFromFile(this
 				.getClass(), "/icons/menu/copyColConf.png"));
@@ -592,7 +593,7 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 
 	/**
 	 * Get the selected element of the menu and will show sub element
-	 * 
+	 *
 	 * @param mgr
 	 * @param topMenu
 	 */
@@ -611,33 +612,53 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 
 	/**
 	 * Add a subMenu for Association
-	 * 
+	 *
 	 * @param topMenu
 	 * @param c
 	 * @param av
 	 */
 	private void addLinkedFieldAssociation(IMenuManager topMenu, final Clazz c,
 			final List<Association> path, final AbstractViewOf av) {
-		for (final Association a : c.getAllSourceAssociations()) {
+		for (final Association a : c.getSourceAssociations()) {
+			if (!path.contains(a)) {
+				IMenuManager addLinkedFieldMenu = new MenuManager(a.getLabel(),
+						"browse" + a.getName());
+				addLinkedFieldMenu.add(new Action("never shown entry") {
+				});
+				addLinkedFieldMenu.setRemoveAllWhenShown(true);
+				IMenuListener addLinkedFieldListener = new IMenuListener() {
+					public void menuAboutToShow(IMenuManager m) {
+						fillAddLinkedSubMenu(m, a, path, av, c);
+					}
+				};
+				addLinkedFieldMenu.addMenuListener(addLinkedFieldListener);
+				topMenu.add(addLinkedFieldMenu);
+			}
+		}
 
-			IMenuManager addLinkedFieldMenu = new MenuManager(a.getTitle(),
-					"browse" + a.getName());
-			addLinkedFieldMenu.add(new Action("never shown entry") {
-			});
-			addLinkedFieldMenu.setRemoveAllWhenShown(true);
-			IMenuListener addLinkedFieldListener = new IMenuListener() {
-				public void menuAboutToShow(IMenuManager m) {
-					fillAddLinkedSubMenu(m, a, path, av, c);
+		for (final Clazz inheritedClass : c.getInheritedClasses()) {
+			for (final Association a : inheritedClass.getSourceAssociations()) {
+				if (!path.contains(a)) {
+					IMenuManager addLinkedFieldMenu = new MenuManager(a.getLabel(),
+							"browse" + a.getName());
+					addLinkedFieldMenu.add(new Action("never shown entry") {
+					});
+					addLinkedFieldMenu.setRemoveAllWhenShown(true);
+					IMenuListener addLinkedFieldListener = new IMenuListener() {
+						public void menuAboutToShow(IMenuManager m) {
+							fillAddLinkedSubMenu(m, a, path, av, inheritedClass);
+						}
+					};
+					addLinkedFieldMenu.addMenuListener(addLinkedFieldListener);
+					topMenu.add(addLinkedFieldMenu);
 				}
-			};
-			addLinkedFieldMenu.addMenuListener(addLinkedFieldListener);
-			topMenu.add(addLinkedFieldMenu);
+			}
 		}
 	}
 
 	/**
 	 * Add attributes for sub menu
-	 * 
+	 *
 	 * @param mgr
 	 * @param a
 	 * @param av
@@ -647,28 +668,33 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 			List<Association> p, AbstractViewOf av, Clazz c) {
 		List<Association> path = new ArrayList<Association>(p);
 		path.add(a);
-		if (av.getViewOf() != null && a.getAssociationEnd(c).size() > 0) {
-			if (a.getAssociationEnd(c).get(0).getLinkedClass().equals(c)) {
-				c = a.getAssociationEnd(c).get(0).getOpposite()
-						.getLinkedClass();
-			} else {
-				c = a.getAssociationEnd(c).get(0).getLinkedClass();
+
+		if (av.getViewOf() != null) {
+			EList<Clazz> targets = a.getTarget();
+			if (targets.size() > 0) {
+				//c = targets.get(0);
+				if (a.getAssociationEnd(c).get(0).getLinkedClass().equals(c)) {
+					c = a.getAssociationEnd(c).get(0).getOpposite()
+							.getLinkedClass();
+				} else {
+					c = a.getAssociationEnd(c).get(0).getLinkedClass();
+				}
+				for (Attribute att : c.getAllAttributes()) {
+					AddLinkedFieldAction alfa = new AddLinkedFieldAction(att, path,
+							av);
+					alfa.setActiveWorkbenchPart(activeEditor);
+					selectionProvider
+							.addSelectionChangedListener((ISelectionChangedListener) alfa);
+					mgr.add(alfa);
+				}
+				addLinkedFieldAssociation(mgr, c, path, av);
 			}
-			for (Attribute att : c.getAllAttributes()) {
-				AddLinkedFieldAction alfa = new AddLinkedFieldAction(att, path,
-						av);
-				alfa.setActiveWorkbenchPart(activeEditor);
-				selectionProvider
-						.addSelectionChangedListener((ISelectionChangedListener) alfa);
-				mgr.add(alfa);
-			}
-			addLinkedFieldAssociation(mgr, c, path, av);
 		}
 	}
 
 	/**
 	 * Show deleted field that can be restored
-	 * 
+	 *
 	 * @param mgr
 	 */
 	private void fillRestoreContextMenu(IMenuManager mgr) {
@@ -713,7 +739,7 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 		synchronizeView.setActiveWorkbenchPart(activeEditor);
 		copyColConfAction.setActiveWorkbenchPart(activeEditor);
 		pasteColConfAction.setActiveWorkbenchPart(activeEditor);
-		
+
 		ISelectionProvider selectionProvider = activeEditor instanceof ISelectionProvider ? (ISelectionProvider) activeEditor
 				: activeEditor.getEditorSite().getSelectionProvider();
 		selectionProvider
