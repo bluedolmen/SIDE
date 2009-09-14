@@ -14,8 +14,17 @@
              enablesFor="1"
              icon="icon/manage.png"
              id="com.bluexml.application.ui.createGeneration"
-             label="Manage Configuration">
+             label="Manage Configuration"
+             menubarPath="com.bluexml.side/application">
        </action>
+       <menu
+             id="com.bluexml.side"
+             label="S-IDE"
+             path="additions">
+          <separator
+                name="application">
+          </separator>
+       </menu>
     </objectContribution>
  </extension>
      <extension point = "org.eclipse.ui.popupMenus">
@@ -28,11 +37,19 @@
                label="Launch Generation"
                style="pulldown"
                class="com.bluexml.side.application.ui.menu.DynamicMenuAction"
-               menubarPath="additions"
+               menubarPath="com.bluexml.side/application"
                enablesFor="+"
                icon="icon/launch.png"
                id="com.bluexml.application.ui.generate">
          </action>
+         <menu
+               id="com.bluexml.side"
+               label="S-IDE"
+               path="additions">
+            <separator
+                  name="application">
+            </separator>
+         </menu>
       </objectContribution>
     </extension>
 </plugin>
