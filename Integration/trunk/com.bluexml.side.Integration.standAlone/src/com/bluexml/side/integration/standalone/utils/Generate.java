@@ -4,19 +4,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -25,14 +19,9 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 import org.osgi.framework.Bundle;
 
 import com.bluexml.side.application.Application;
@@ -42,21 +31,17 @@ import com.bluexml.side.application.ConfigurationParameters;
 import com.bluexml.side.application.DeployerConfiguration;
 import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
-import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.Option;
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
-import com.bluexml.side.util.componentmonitor.ComponentMonitor;
 import com.bluexml.side.util.componentmonitor.NullComponentMonitor;
-import com.bluexml.side.util.deployer.Deployer;
-import com.bluexml.side.util.documentation.LogHelper;
-import com.bluexml.side.util.documentation.LogSave;
-import com.bluexml.side.util.documentation.structure.SIDELog;
-import com.bluexml.side.util.documentation.structure.enumeration.LogType;
-import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.dependencies.DependencesManager;
 import com.bluexml.side.util.dependencies.ModuleConstraint;
+import com.bluexml.side.util.deployer.Deployer;
+import com.bluexml.side.util.documentation.LogSave;
+import com.bluexml.side.util.documentation.structure.enumeration.LogType;
+import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.libs.IFileHelper;
 
 public class Generate extends Thread {
@@ -400,10 +385,7 @@ public class Generate extends Thread {
 				// the generator
 				if (generator.shouldGenerate(modelsInfo, elem.getId_metamodel())) {
 
-					SIDELog log_ = new SIDELog(configurationParameters.get("generatorName"), configurationParameters.get("generatorId"), configurationParameters.get("technologyVersionName"), configurationParameters.get("technologyName"), configurationParameters
-							.get("metaModelName"), new Date(), LogType.GENERATION);
-					LogHelper log = new LogHelper(log_, configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()));
-					NullComponentMonitor generationMonitor = new NullComponentMonitor(log);
+					NullComponentMonitor generationMonitor = new NullComponentMonitor(configurationParameters, LogType.GENERATION);
 
 					try {
 						List<ModuleConstraint> lmc = new ArrayList<ModuleConstraint>();
@@ -417,7 +399,7 @@ public class Generate extends Thread {
 						generator.initialize(generationParameters, generatorOptions, configurationParameters, dm, generationMonitor);
 					} catch (Exception e) {
 						error = true;
-						log.addErrorLog("Initialization error : " + e.getMessage(), e.getStackTrace(), null);
+						generationMonitor.getLog().addErrorLog("Initialization error : " + e.getMessage(), e, null);
 						e.printStackTrace();
 					}
 
@@ -425,9 +407,9 @@ public class Generate extends Thread {
 					if (modelsInfo.size() > 0) {
 						try {
 							generator.generate(modelsInfo, elem.getId_metamodel());
-							Collection<IFile> generatedFiles = new ArrayList<IFile>();
+							
 							// System.out.println("\tlog92");
-							generatedFiles = generator.complete();
+							generator.complete();
 							// System.out.println("\tlog93");
 
 							// System.out.println("\tlog10");
@@ -435,7 +417,7 @@ public class Generate extends Thread {
 
 						} catch (Exception e) {
 							error = true;
-							log.addErrorLog("Generation error : " + e.getMessage(), e.getStackTrace(), null);
+							generationMonitor.getLog().addErrorLog("Generation error : " + e.getMessage(), e, null);
 							e.printStackTrace();
 						}
 
@@ -443,7 +425,7 @@ public class Generate extends Thread {
 						try {
 							generator.createStampFile();
 						} catch (Exception e) {
-							log.addErrorLog("Generation error : Stamp file error. " + e.getMessage(), e.getStackTrace(), null);
+							generationMonitor.getLog().addErrorLog("Generation error : Stamp file error. " + e.getMessage(), e, null);
 							e.printStackTrace();
 						}
 						// System.out.println("\tlog12");
@@ -514,9 +496,8 @@ public class Generate extends Thread {
 			}
 			if (genObj instanceof Deployer) {
 				Deployer deployer = (Deployer) genObj;
-				SIDELog log_ = new SIDELog(configurationParameters.get("deployerName"), configurationParameters.get("deployerId"), configurationParameters.get("technologyVersionName"), configurationParameters.get("technologyName"), configurationParameters.get("metaModelName"), new Date(), LogType.DEPLOYMENT); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-				LogHelper log = new LogHelper(log_, "");
-				NullComponentMonitor deployerMonitor = new NullComponentMonitor(log);
+				
+				NullComponentMonitor deployerMonitor = new NullComponentMonitor(configurationParameters, LogType.DEPLOYMENT);
 				deployer.initialize(configurationParameters, generationParameters, deployerOptions, deployerMonitor);
 				try {
 					deployer.deploy();
@@ -533,7 +514,7 @@ public class Generate extends Thread {
 
 				String fileName = "dep_" + deployer.getTechVersion() + ".xml";
 				try {
-					LogSave.toXml(deployer.getLog(), fileName, logPath + System.getProperty("file.separator") + "work" + System.getProperty("file.separator"));
+					deployerMonitor.getLog().saveLog(fileName, logPath + System.getProperty("file.separator") + "work" + System.getProperty("file.separator"));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

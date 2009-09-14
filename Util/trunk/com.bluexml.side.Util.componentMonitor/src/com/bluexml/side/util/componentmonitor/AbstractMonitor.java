@@ -89,10 +89,10 @@ public abstract class AbstractMonitor implements IProgressMonitor {
 		progressBar.setMaximum(nb);
 	}
 
-	public void skeepTasks(int nb) {
-		System.out.println("SKEEP :" + nb);
+	public void skipTasks(int nb) {
+		System.out.println("skip :" + nb);
 		for (int c = 0; c < nb; c++) {
-			System.out.println("SKEEP current skeep :" + c);
+			//System.out.println("skip current skip :" + c);
 			addOneStep();
 		}
 	}

@@ -2,21 +2,33 @@ package com.bluexml.side.util.documentation;
 
 import java.io.File;
 import java.net.URI;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 
+import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.util.documentation.structure.LogEntry;
 import com.bluexml.side.util.documentation.structure.SIDELog;
 import com.bluexml.side.util.documentation.structure.enumeration.LogEntryType;
+import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 
 public class LogHelper {
 	SIDELog log;
 	String logDirectory;
 
-	public LogHelper(SIDELog log, String logDirectory) {
-		this.logDirectory = logDirectory;
-		this.log = log;
+	public LogHelper(final Map<String, String> configurationParameters, LogType logType) {
+		this.logDirectory = configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral());
+		SIDELog log_ = null;
+		if (logType.equals(LogType.GENERATION)) {
+			log_ = new SIDELog(configurationParameters.get("generatorName"), configurationParameters.get("generatorId"), configurationParameters.get("technologyVersionName"), configurationParameters.get("technologyName"), configurationParameters //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+					.get("metaModelName"), new Date(), logType); //$NON-NLS-1$
+		} else if (logType.equals(LogType.DEPLOYMENT)) {
+			log_ = new SIDELog(configurationParameters.get("deployerName"), configurationParameters.get("deployerId"), configurationParameters.get("technologyVersionName"), configurationParameters.get("technologyName"), configurationParameters.get("metaModelName"), new Date(),
+					logType);
+		}
+		this.log = log_;
 	}
 
 	/**
@@ -74,14 +86,18 @@ public class LogHelper {
 	 * @param stackTrace
 	 * @param uri
 	 */
-	public void addErrorLog(String title, StackTraceElement[] stackTrace, String uri) {
+	public void addErrorLog(String title, Throwable error, String uri) {
 		String description = "";
-		if (stackTrace != null && stackTrace.length > 0) {
-			for (StackTraceElement se : stackTrace) {
-				description += System.getProperty("line.separator") + se.toString();
+		if (error != null) {
+			description = error.getMessage();
+			StackTraceElement[] stackTrace = error.getStackTrace();
+			if (stackTrace != null && stackTrace.length > 0) {
+				for (StackTraceElement se : stackTrace) {
+					description += System.getProperty("line.separator") + se.toString();
+				}
 			}
 		}
-	addErrorLog(title, description, uri);
+		addErrorLog(title, description, uri);
 	}
 
 	/**

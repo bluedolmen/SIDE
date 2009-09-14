@@ -7,7 +7,8 @@ Bundle-Activator: com.bluexml.side.util.componentmonitor.Activator
 Bundle-Vendor: www.bluexml.com
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.swt,
- com.bluexml.side.Util.log;bundle-version="1.0.14"
+ com.bluexml.side.Util.log;bundle-version="1.0.14",
+ com.bluexml.side.Application;bundle-version="1.0.25"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.util.componentmonitor

@@ -20,7 +20,7 @@ public class Monitor extends AbstractMonitor {
 	}
 
 	public void subTask(String name) {
-		if (name == null) {
+		if (name != null) {
 			addText(name);
 			progressBarlabel.setText(name);
 		}

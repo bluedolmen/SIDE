@@ -18,12 +18,12 @@ import com.bluexml.side.util.libs.zip.TrueZipHelper;
  */
 public class AMPDeployer extends WarDeployer {
 
-	protected String CONFIGURATION_PARAMETER_MMT_PATH = "com.bluexml.side.deployer.alfresco.mmtPath";
+	protected String CONFIGURATION_PARAMETER_MMT_PATH = "com.bluexml.side.deployer.alfresco.mmtPath"; //$NON-NLS-1$
 
 	public AMPDeployer() {
-		this.webappName = "alfresco";
-		this.cleanKey = "com.bluexml.side.deployer.alfresco.clean";
-		this.logChanges = "com.bluexml.side.deployer.alfresco.logChanges";
+		this.webappName = "alfresco"; //$NON-NLS-1$
+		this.cleanKey = "com.bluexml.side.deployer.alfresco.clean"; //$NON-NLS-1$
+		this.logChanges = "com.bluexml.side.deployer.alfresco.logChanges"; //$NON-NLS-1$
 	}
 
 	public String getMMtPath() {
@@ -38,36 +38,36 @@ public class AMPDeployer extends WarDeployer {
 			List<String> argss = new ArrayList<String>();
 			// argss.add("pwd");
 
-			argss.add("java");
-			argss.add("-jar");
+			argss.add("java"); //$NON-NLS-1$
+			argss.add("-jar"); //$NON-NLS-1$
 			argss.add(getMMtPath());
-			argss.add("install");
+			argss.add("install"); //$NON-NLS-1$
 			argss.add(fileToDeployString);
 			argss.add(filetoPatchString);
-			argss.add("-nobackup");
-			argss.add("-force");
+			argss.add("-nobackup"); //$NON-NLS-1$
+			argss.add("-force"); //$NON-NLS-1$
 			if (fileToDeploy.isDirectory()) {
-				argss.add("-directory");
+				argss.add("-directory"); //$NON-NLS-1$
 			}
 			String[] args = new String[argss.size()];
 			args = argss.toArray(args);
 			ExecHelper status = ExecHelper.exec(args);
 			try {
 				if (status.getOutput().length() > 0) {
-					throw new Exception("alfresco-mmt.jar exit with errors :\n" + status.getError() + "\n" + status.getOutput());
+					throw new Exception(Activator.Messages.getString("AMPDeployer.10") + status.getError() + "\n" + status.getOutput()); //$NON-NLS-1$ //$NON-NLS-2$
 				} else if (logChanges()) {
 					File warOrg = TrueZipHelper.getTzFile(getBackupWarFile());
 					File finalwar = TrueZipHelper.getTzFile(getWarToPatchFile());
 					StringWriter sr = new StringWriter();
 					FileHelper.diffFolder(warOrg, finalwar, sr, FileHelper.COMPARE_ADDED + FileHelper.COMPARE_DELETED);
-					monitor.getLog().addInfoLog(this.logChangesMsg, sr.toString(), "");
+					monitor.getLog().addInfoLog(this.logChangesMsg, sr.toString(), ""); //$NON-NLS-1$
 				}
 			} catch (Exception e) {
-			monitor.getLog().addErrorLog("AMP deployer Error", e.getStackTrace(), null);
+				monitor.addErrorTextAndLog(Activator.Messages.getString("AMPDeployer.13"), e, null); //$NON-NLS-1$
 				e.printStackTrace();
 			}
 		} else {
-			throw new Exception("deployment tool not found please check the alfresco-mmt.jar file path !");
+			throw new Exception(Activator.Messages.getString("AMPDeployer.14")); //$NON-NLS-1$
 		}
 	}
 

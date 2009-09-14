@@ -49,18 +49,6 @@ public class AlfrescoAmpDirectDeployer extends DirectWebAppsDeployer {
 
 	}
 
-	// public static void main(String[] args) throws Exception {
-	// AlfrescoAmpDirectDeployer d = new AlfrescoAmpDirectDeployer();
-	// File fileToDeploy = new
-	// File("/Users/davidabad/Workspace2.0/bigTest/generated/alfresco_3.x");
-	// d.initialize(new HashMap<String, String>(), new HashMap<String,
-	// String>(), new ArrayList<String>());
-	// d.getGenerationParameters().put(CONFIGURATION_PARAMETER_CATALINA_HOME,
-	// "/Users/davidabad/servers/Alfresco/tomcat");
-	// d.preProcess(fileToDeploy);
-	// d.deployProcess(fileToDeploy);
-	// }
-
 	private Properties getModuleProperties(File wkdir) throws FileNotFoundException, IOException {
 		File modulePropertiesfile = new File(wkdir.getAbsolutePath());
 		Properties moduleProperties = new Properties();

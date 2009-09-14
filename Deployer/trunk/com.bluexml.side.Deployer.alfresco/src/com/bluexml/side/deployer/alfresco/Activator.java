@@ -3,6 +3,8 @@ package com.bluexml.side.deployer.alfresco;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
+import com.bluexml.side.util.libs.Messages;
+
 /**
  * The activator class controls the plug-in life cycle
  */
@@ -10,7 +12,7 @@ public class Activator extends Plugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "com.bluexml.side.Deployer.alfresco";
-
+	public static final Messages Messages = new Messages(PLUGIN_ID, "com.bluexml.side.deployer.alfresco.messages");
 	// The shared instance
 	private static Activator plugin;
 	

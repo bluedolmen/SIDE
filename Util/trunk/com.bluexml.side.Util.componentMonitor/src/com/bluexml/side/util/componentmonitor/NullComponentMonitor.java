@@ -1,12 +1,13 @@
 package com.bluexml.side.util.componentmonitor;
 
-import com.bluexml.side.util.documentation.LogHelper;
+import java.util.Map;
+
+import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 
 public class NullComponentMonitor extends ComponentMonitor {
 
-	public NullComponentMonitor(LogHelper log) {
-		super(null, null, -1, null, null, log);
-		// TODO Auto-generated constructor stub
+	public NullComponentMonitor(final Map<String, String> configurationParameters,LogType logType) {
+		super(null, null, -1, null, null, configurationParameters, logType);
 	}
 
 	public void beginTask(String name, int totalWork) {
@@ -63,7 +64,7 @@ public class NullComponentMonitor extends ComponentMonitor {
 
 	}
 
-	public void skeepTasks(int nb) {
+	public void skipTasks(int nb) {
 
 	}
 }

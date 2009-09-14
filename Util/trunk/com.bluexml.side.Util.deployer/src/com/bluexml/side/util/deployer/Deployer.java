@@ -4,7 +4,6 @@
 package com.bluexml.side.util.deployer;
 
 import java.io.File;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -14,10 +13,6 @@ import org.eclipse.core.resources.IFolder;
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.util.componentmonitor.ComponentMonitor;
 import com.bluexml.side.util.documentation.LogSave;
-import com.bluexml.side.util.documentation.structure.LogEntry;
-import com.bluexml.side.util.documentation.structure.SIDELog;
-import com.bluexml.side.util.documentation.structure.enumeration.LogEntryType;
-import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.security.Checkable;
 
@@ -30,17 +25,11 @@ public abstract class Deployer implements Checkable {
 	private Map<String, String> configurationParameters;
 	private Map<String, String> generationParameters;
 	protected ComponentMonitor monitor;
-	protected SIDELog log;
+	
 	protected String id;
 	protected String techVersion = null;
 
-	public SIDELog getLog() {
-		return log;
-	}
-
-	public void setLog(SIDELog log) {
-		this.log = log;
-	}
+	
 
 	public String getCleanKey() {
 		return cleanKey;
@@ -108,7 +97,8 @@ public abstract class Deployer implements Checkable {
 		// addInfoLog("preProcessing ...", "", null);
 		//monitor.beginTask("preProcess start");
 		preProcess(fileToDeploy);
-		monitor.taskDone(Activator.Messages.getString("Deployer.12")); //$NON-NLS-1$
+		monitor.taskDone(null);
+		//monitor.taskDone(Activator.Messages.getString("Deployer.12")); //$NON-NLS-1$
 		if (doClean()) {
 			//addInfoLog("Cleaning ...", "", null);
 			clean(fileToDeploy);
@@ -116,11 +106,12 @@ public abstract class Deployer implements Checkable {
 		// addInfoLog("Processing ...", "", null);
 		//monitor.customSubTask("main deploy process start");
 		deployProcess(fileToDeploy);
-		monitor.taskDone(Activator.Messages.getString("Deployer.13")); //$NON-NLS-1$
-		// addInfoLog("postProcessing ...", "", null);
+		monitor.taskDone(null);
+		//monitor.taskDone(Activator.Messages.getString("Deployer.13")); //$NON-NLS-1$
 		//monitor.beginTask("postProcess start");
 		postProcess(fileToDeploy);
-		monitor.taskDone(Activator.Messages.getString("Deployer.14")); //$NON-NLS-1$
+		monitor.taskDone(null);
+		//monitor.taskDone(Activator.Messages.getString("Deployer.14")); //$NON-NLS-1$
 	}
 
 	/**

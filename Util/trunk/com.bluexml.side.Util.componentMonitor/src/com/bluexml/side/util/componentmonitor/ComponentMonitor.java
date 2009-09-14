@@ -1,23 +1,23 @@
 package com.bluexml.side.util.componentmonitor;
 
+import java.util.Map;
+
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.ProgressBar;
 
 import com.bluexml.side.util.documentation.LogHelper;
+import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 
 public class ComponentMonitor extends AbstractMonitor {
 	private LogHelper log;
 
-//	public ComponentMonitor(StyledText styletext, ProgressBar progressBar, int totalWork, Label progressBarlabel, AbstractMonitor parent) {
-//		super(styletext, progressBar, totalWork, progressBarlabel, parent);
-//		// TODO Auto-generated constructor stub
-//	}
-
-	public ComponentMonitor(StyledText styletext, ProgressBar progressBar, int totalWork, Label progressBarlabel, AbstractMonitor parent, LogHelper log) {
+	public ComponentMonitor(StyledText styletext, ProgressBar progressBar, int totalWork, Label progressBarlabel, AbstractMonitor parent, final Map<String, String> configurationParameters, LogType logType) {
 		super(styletext, progressBar, totalWork, progressBarlabel, parent);
-		setLog(log);
-
+		if (configurationParameters != null && logType != null) {
+			LogHelper log = new LogHelper(configurationParameters, logType);
+			setLog(log);
+		}
 	}
 
 	public void setLog(LogHelper log) {
@@ -50,9 +50,10 @@ public class ComponentMonitor extends AbstractMonitor {
 
 	public void beginTask(String name, int totalWork) {
 		beginTask(name);
-		//progressBar.setMaximum(totalWork);
+		// progressBar.setMaximum(totalWork);
 
 	}
+
 	@Override
 	public void beginTask(String name) {
 		if (name != null) {
@@ -60,7 +61,7 @@ public class ComponentMonitor extends AbstractMonitor {
 			progressBarlabel.setText(name);
 		}
 		currentOpenTask++;
-		
+
 	}
 
 	public void subTask(String name) {
@@ -81,13 +82,26 @@ public class ComponentMonitor extends AbstractMonitor {
 		}
 		currentOpenTask--;
 		addOneStep();
-		
+
 	}
 
 	public void done() {
 		// acceleo use this for generation part, model access, ...
 	}
 
-	
+	public void addTextAndLog(String text, String uri) {
+		addText(text);
+		getLog().addInfoLog(text, "", uri);
+	}
+
+	public void addErrorTextAndLog(String title, Throwable error, String uri) {
+		addErrorText(title);
+		getLog().addErrorLog(title, error, uri);
+	}
+
+	public void addWarningTextAndLog(String title, String uri) {
+		addWarningText(title);
+		getLog().addWarningLog(title, "", uri);
+	}
 
 }

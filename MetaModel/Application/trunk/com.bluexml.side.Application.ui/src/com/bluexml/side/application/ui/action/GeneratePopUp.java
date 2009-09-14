@@ -98,7 +98,7 @@ public class GeneratePopUp extends Dialog {
 		label.setForeground(SWTResourceManager.getColor(92, 92, 92));
 		label.setAlignment(SWT.CENTER);
 		label.setBounds(10, 70, 464, 15);
-		label.setText("TEST TEST TEST");
+		label.setText("");
 
 		// component progressBar
 		final ProgressBar progressBar2 = new ProgressBar(container, SWT.SMOOTH);
@@ -114,7 +114,7 @@ public class GeneratePopUp extends Dialog {
 		FormText logLink = new FormText(container, SWT.WRAP);
 		logLink.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
 		logLink.setBounds(137, 350, 223, 24);
-		logLink.setVisible(true);
+		logLink.setVisible(false);
 		logLink.setText("<form><p>Log File can be found <a href=\"log\">here</a>.</p></form>", true, true);
 
 		try {

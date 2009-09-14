@@ -85,9 +85,6 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		configurationParameters = configurationParameters_;
 		techVersion = configurationParameters_.get("technologyVersion");
 		id = configurationParameters_.get("generatorId");
-		SIDELog log_ = new SIDELog(configurationParameters_.get("generatorName"), this.id, configurationParameters_.get("technologyVersionName"), configurationParameters_.get("technologyName"), configurationParameters_.get("metaModelName"), new Date(), LogType.GENERATION);
-		LogHelper log = new LogHelper(log_,configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()));
-		monitor.setLog(log);
 		this.dm = dm;
 
 		// check parameters add warning if not set or empty
