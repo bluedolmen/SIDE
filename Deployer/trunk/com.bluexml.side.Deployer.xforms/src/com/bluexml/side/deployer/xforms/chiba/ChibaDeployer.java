@@ -40,14 +40,13 @@ public class ChibaDeployer extends Deployer {
 				throw new Exception("Folder " + folderPath + " doesn't exist for Chiba XForms Deployer.");
 			}
 		} else {
-			throw new Exception("No folder destination folder for Chiba XForms Deployer setted.");
+			throw new Exception("No webapp destination folder for Chiba XForms Deployer set.");
 		}
 	}
 
 	@Override
 	protected void postProcess(File fileToDeploy) throws Exception {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
