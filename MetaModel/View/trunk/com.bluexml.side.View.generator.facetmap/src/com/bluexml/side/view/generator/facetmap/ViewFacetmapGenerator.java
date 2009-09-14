@@ -141,7 +141,7 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 		} else {
 			// set to default value
 			shareUrl = ALFRESCO_SHARE_URL_defaultValue;
-			monitor.getLog().addWarningLog(Activator.Messages.getString("ViewFacetmapGenerator.30"), Activator.Messages.getString("ViewFacetmapGenerator.31") + shareUrl, ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			monitor.getLog().addWarningLog(Activator.Messages.getString("ViewFacetmapGenerator.24"), Activator.Messages.getString("ViewFacetmapGenerator.31") + shareUrl, ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		String dashletContentUri = shareUrl + "service/com/bluexml/side/facetMap/doclist_user/content"; //$NON-NLS-1$
 		String dashletFacetstUri = shareUrl + "service/com/bluexml/side/facetMap/doclist_user/facet"; //$NON-NLS-1$
