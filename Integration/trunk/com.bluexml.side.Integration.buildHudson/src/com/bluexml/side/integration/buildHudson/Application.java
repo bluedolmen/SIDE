@@ -21,8 +21,8 @@ public class Application {
 	public static String build_number = "";
 	public static String svn_revision = "";
 
-	// si au moins un paramètre n'est pas renseigné, alors on suppose que le
-	// build est lancé sans hudson
+	// si au moins un paramï¿½tre n'est pas renseignï¿½, alors on suppose que le
+	// build est lancï¿½ sans hudson
 	public static boolean parametre = true;
 
 	/**
@@ -63,10 +63,10 @@ public class Application {
 				}
 			} else {
 				System.out
-						.println("Vous devez renseigner le chemin vers la copie locale du répository (ex: /root/.hudson/jobs/'project name'/workspace)");
+						.println("Vous devez renseigner le chemin vers la copie locale du rï¿½pository (ex: /root/.hudson/jobs/'project name'/workspace)");
 			}
 
-			// Si des paramètres sont en entrée
+			// Si des paramï¿½tres sont en entrï¿½e
 		} else if (parametre) {
 
 			workspace = argument1;
@@ -81,49 +81,49 @@ public class Application {
 		System.out.println("**** Lancement du Build Automatique ****");
 		System.out.println("****************************************");
 
-		System.out.println("\nLancé le " + Utils.getDate2() + " à "
+		System.out.println("\nLancï¿½ le " + Utils.getDate2() + " ï¿½ "
 				+ Utils.getTime());
 
-		// création du buildSVN.xml
-		System.out.println("\n- Création de " + Utils.getBuildPath()
+		// crï¿½ation du buildSVN.xml
+		System.out.println("\n- Crï¿½ation de " + Utils.getBuildPath()
 				+ File.separator + "buildSVN.xml");
 		createFile(getCorpsSVN(), Utils.getBuildPath(), "buildSVN.xml");
 
-		//si on travaille sans Hudson, alors on va réaliser, 
+		//si on travaille sans Hudson, alors on va rï¿½aliser, 
 		//avec ant, le checkout et/ou update
 		if (!parametre) {
 			// Execution du buildSVN.xml
-			System.out.println("\nRéalisation du checkout et du update...");
+			System.out.println("\nRï¿½alisation du checkout et du update...");
 			execBuild("buildSVN", "build");
 		}
 
-		// Mise à jour des numéros de version en fonction du fichier de log
+		// Mise ï¿½ jour des numï¿½ros de version en fonction du fichier de log
 		System.out
-				.println("\nMise à jour des numéros de version (si besoin)...");
+				.println("\nMise ï¿½ jour des numï¿½ros de version (si besoin)...");
 
 		Utils.traitementUpdate();
 
 		// Commit
-		System.out.println("\nCommit des modifications sur le répository...");
+		System.out.println("\nCommit des modifications sur le rï¿½pository...");
 		execBuild("buildSVN", "svnCommit");
 
-		// création du build.xml
-		System.out.println("\n\n- Création de " + Utils.getBuildPath()
+		// crï¿½ation du build.xml
+		System.out.println("\n\n- Crï¿½ation de " + Utils.getBuildPath()
 				+ File.separator + "build.xml");
 		createFile(getCorpsBuild(), Utils.getBuildPath(), "build.xml");
 
-		// création du buildAuto.product
-		System.out.println("- Création du buildAuto.product");
+		// crï¿½ation du buildAuto.product
+		System.out.println("- Crï¿½ation du buildAuto.product");
 		createFile(getCorpsProduct(), Utils.getBuildPath(), "buildAuto.product");
 
 		if (parametre) {
-			// copie du répository dans le repertoire de travail (en séparant
+			// copie du rï¿½pository dans le repertoire de travail (en sï¿½parant
 			// les plugins et les features)
 			Utils.preTraitement();
 		}
 
 		// Execution du build.xml
-		System.out.println("\nRéalisation du Build sur ...");
+		System.out.println("\nRï¿½alisation du Build sur ...");
 
 		for (String projet : Utils.getProjects()) {
 			System.out.println("\t-" + projet);
@@ -131,7 +131,7 @@ public class Application {
 
 		execBuild("build", "build");
 
-		// création du site.xml
+		// crï¿½ation du site.xml
 		System.out.println("\nUpdate du site.xml");
 		Utils.updateSiteXml();
 
@@ -141,8 +141,8 @@ public class Application {
 
 		// traitement final
 
-		// Déplacement et suppression des répertoires
-		System.out.println("\nDéplacement et suppression des répertoires");
+		// Dï¿½placement et suppression des rï¿½pertoires
+		System.out.println("\nDï¿½placement et suppression des rï¿½pertoires");
 		Utils.finalTraitement();
 
 		/*
@@ -155,13 +155,13 @@ public class Application {
 	}
 
 	/**
-	 * Méthode qui execute la target 'target' du build.xml passé en paramètre Un
-	 * fichier de log est crée: log.txt
+	 * Mï¿½thode qui execute la target 'target' du build.xml passï¿½ en paramï¿½tre Un
+	 * fichier de log est crï¿½e: log.txt
 	 * 
 	 * @param build
 	 *            le build.xml a executer (sans le .xml)
 	 * @param target
-	 *            la target présente dans ce build à éxécuter
+	 *            la target prï¿½sente dans ce build ï¿½ ï¿½xï¿½cuter
 	 * 
 	 */
 	private static void execBuild(String build, String target) {
@@ -190,7 +190,7 @@ public class Application {
 	}
 
 	/**
-	 * Créer le fichier build.xml pour chaque projet
+	 * Crï¿½er le fichier build.xml pour chaque projet
 	 */
 	private static void createFile(String corps, String folderName,
 			String fileName) {
@@ -211,7 +211,7 @@ public class Application {
 	}
 
 	/**
-	 * Retourne le corps du fichier build.xml pour le projet donné
+	 * Retourne le corps du fichier build.xml pour le projet donnï¿½
 	 */
 	private static String getCorpsBuild() {
 		String[] projects = toArray(Utils.getProjects());
@@ -369,9 +369,9 @@ public class Application {
 	}
 
 	/**
-	 * @deprecated <i> Plus utilisé car maintenant on traite et on modifie
+	 * @deprecated <i> Plus utilisï¿½ car maintenant on traite et on modifie
 	 *             directement le fichier<br/>
-	 *             (utiliser la méthode updateSiteXML de la classe Utils)</i><br/>
+	 *             (utiliser la mï¿½thode updateSiteXML de la classe Utils)</i><br/>
 	 * <br/>
 	 *             Retourne le corps du site.xml
 	 * 
@@ -462,14 +462,14 @@ public class Application {
 			if (!finalListDirectories.contains(projects[i])) {
 				out += "\t\t<svn>\n";
 
-				// si le mot 'feature' n'est pas présent dans le nom du projet
+				// si le mot 'feature' n'est pas prï¿½sent dans le nom du projet
 				if (projects[i].indexOf("feature") == -1)
 					out += "\t\t\t<checkout url=\"" + Utils.getRepository()
 							+ "S-IDE/" + Utils.getProjectPath(projects[i])
 							+ "/trunk/" + projects[i]
 							+ "\" destPath=\"${pluginsPath}" + File.separator
 							+ projects[i] + "\" />\n";
-				// si 'feature' est présent
+				// si 'feature' est prï¿½sent
 				else if (projects[i].indexOf("feature") != -1)
 					out += "\t\t\t<checkout url=\"" + Utils.getRepository()
 							+ "S-IDE/" + Utils.getProjectPath(projects[i])
@@ -499,12 +499,12 @@ public class Application {
 		out += "\t\t<svn>\n";
 		for (int i = 0; i < projects.length; i++) {
 
-			// si le mot 'feature' n'est pas présent dans le nom du projet
+			// si le mot 'feature' n'est pas prï¿½sent dans le nom du projet
 			if (projects[i].indexOf("feature") == -1)
 				out += "\t\t\t<update dir=\"${buildDirectory}_CO"
 						+ File.separator + "plugins" + File.separator
 						+ projects[i] + "\" recurse=\"yes\"/>\n";
-			// si 'feature' est présent
+			// si 'feature' est prï¿½sent
 			else if (projects[i].indexOf("feature") != -1)
 				out += "\t\t\t<update dir=\"${buildDirectory}_CO"
 						+ File.separator + "features" + File.separator
@@ -542,7 +542,7 @@ public class Application {
 
 			if (projects[i].length() > 0) {
 				System.out.println("-->"+projects[i]);
-				// si le mot 'feature' n'est pas présent dans le nom du projet
+				// si le mot 'feature' n'est pas prï¿½sent dans le nom du projet
 				if (projects[i].indexOf("feature") == -1) {
 					out += "\t\t\t<fileset dir=\""
 							+ Utils.getPathToLocalCopy(projects[i])
@@ -550,7 +550,7 @@ public class Application {
 					out += "\t\t\t\t<include name=\"MANIFEST.MF\" />\n";
 					out += "\t\t\t</fileset>\n";
 	
-				} // si 'feature' est présent
+				} // si 'feature' est prï¿½sent
 				else if (projects[i].indexOf("feature") != -1) {
 					out += "\t\t\t<fileset dir=\""
 							+ Utils.getPathToLocalCopy(projects[i]) + "\">\n";
@@ -560,6 +560,20 @@ public class Application {
 			}
 		}
 		}
+		
+		// fichier pom.xml
+		Utils.listefichierpom=new ArrayList();
+		String pathproject = pathproject = Utils.getBuildPath() + File.separator + "respositoryCopy";
+		
+		Utils.findFile(new File(pathproject+"/S-IDE/Integration/trunk"),"pom.xml");
+		if (Utils.listefichierpom.size() != 0) {
+			for (String pom : Utils.listefichierpom) {
+				out += "\t\t\t<fileset dir=\""
+					+ pom + "\">\n";
+				out += "\t\t\t\t<include name=\"pom.xml\" />\n";
+				out += "\t\t\t</fileset>\n";
+			}
+			}
 		out += "\t\t\t</commit>\n";
 		out += "\t\t</svn>\n";
 
@@ -596,7 +610,7 @@ public class Application {
 				+ Utils.getCodeName() + File.separator + "Javadoc\">\n";
 
 		for (int i = 0; i < projects.length; i++) {
-			// si le mot 'feature' n'est pas présent dans le nom du projet
+			// si le mot 'feature' n'est pas prï¿½sent dans le nom du projet
 			if (projects[i].indexOf("feature") == -1) {
 				out += "\t\t\t<fileset dir=\""
 						+ Utils.getPathToLocalCopy(projects[i]) + "\">\n";
@@ -661,7 +675,7 @@ public class Application {
 
 		out += "\t<target name=\"jarBuilder\" depends=\"\" description=\"description\">\n";
 
-		// On va parcourir les plugins, et si des plugins n'ont pas étés mis en
+		// On va parcourir les plugins, et si des plugins n'ont pas ï¿½tï¿½s mis en
 		// jar on le fait manuelement
 		File pluginRep = new File(Utils.getBuildDirectory() + File.separator
 				+ Utils.getBuildLabel() + File.separator
