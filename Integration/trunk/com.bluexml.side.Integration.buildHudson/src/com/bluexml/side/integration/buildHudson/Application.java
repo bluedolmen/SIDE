@@ -568,8 +568,10 @@ public class Application {
 		Utils.findFile(new File(pathproject+"/S-IDE/Integration/trunk"),"pom.xml");
 		if (Utils.listefichierpom.size() != 0) {
 			for (String pom : Utils.listefichierpom) {
+				String [] tab=pom.split("/pom.xml");
+				
 				out += "\t\t\t<fileset dir=\""
-					+ pom + "\">\n";
+					+ tab[0] + "\">\n";
 				out += "\t\t\t\t<include name=\"pom.xml\" />\n";
 				out += "\t\t\t</fileset>\n";
 			}
