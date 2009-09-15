@@ -2,6 +2,7 @@ package com.bluexml.side.requirements.transformation;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
@@ -18,10 +19,10 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.atl.drivers.emf4atl.ASMEMFModel;
+import org.eclipse.m2m.atl.drivers.emf4atl.AtlEMFModelHandler;
 import org.eclipse.m2m.atl.drivers.emf4atl.EMFModelLoader;
-import org.eclipse.m2m.atl.engine.AtlEMFModelHandler;
-import org.eclipse.m2m.atl.engine.AtlLauncher;
-import org.eclipse.m2m.atl.engine.AtlModelHandler;
+import org.eclipse.m2m.atl.engine.vm.AtlLauncher;
+import org.eclipse.m2m.atl.engine.vm.AtlModelHandler;
 import org.eclipse.m2m.atl.engine.vm.ModelLoader;
 import org.eclipse.m2m.atl.engine.vm.nativelib.ASMModel;
 
@@ -61,7 +62,11 @@ public class TransformModel {
 	private static ASMModel loadModel(ModelLoader ml, String modelId, ASMModel metaModel, InputStream metamodel_stream) throws FileNotFoundException {
 		ASMModel model = null;
 		if (ml instanceof EMFModelLoader) {
-			model = ((EMFModelLoader) ml).loadModel(modelId, metaModel, metamodel_stream);
+			try {
+				model = ((EMFModelLoader) ml).loadModel(modelId, metaModel, metamodel_stream);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return model;
 	}
