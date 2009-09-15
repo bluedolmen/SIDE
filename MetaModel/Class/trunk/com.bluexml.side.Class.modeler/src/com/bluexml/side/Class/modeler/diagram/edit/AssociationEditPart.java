@@ -20,7 +20,6 @@ import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.draw2d.PolylineDecoration;
 import org.eclipse.draw2d.RotatableDecoration;
 import org.eclipse.draw2d.geometry.PointList;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.RequestConstants;
 import org.eclipse.jface.window.Window;
@@ -30,18 +29,21 @@ import org.eclipse.swt.graphics.FontData;
 import org.topcased.draw2d.figures.Label;
 import org.topcased.modeler.ModelerColorConstants;
 import org.topcased.modeler.ModelerEditPolicyConstants;
-import org.topcased.modeler.di.model.GraphConnector;
+import org.topcased.modeler.di.model.EdgeObject;
 import org.topcased.modeler.di.model.GraphEdge;
-import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.edit.EMFGraphEdgeEditPart;
+import org.topcased.modeler.edit.policies.EdgeObjectOffsetEditPolicy;
 import org.topcased.modeler.figures.EdgeObjectOffsetEditableLabel;
+import org.topcased.modeler.figures.IEdgeObjectFigure;
 import org.topcased.modeler.internal.ModelerPlugin;
 import org.topcased.modeler.utils.Utils;
 
+import com.bluexml.side.Class.modeler.diagram.CdEdgeObjectConstants;
 import com.bluexml.side.Class.modeler.diagram.CdEditPolicyConstants;
 import com.bluexml.side.Class.modeler.diagram.commands.update.AssociationUpdateCommand;
 import com.bluexml.side.Class.modeler.diagram.dialogs.AssociationEditDialog;
 import com.bluexml.side.Class.modeler.diagram.figures.AssociationFigure;
+import com.bluexml.side.Class.modeler.diagram.policies.AssociationEdgeObjectUVEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.isAssociationClassEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.isCommentedEdgeCreationEditPolicy;
 import com.bluexml.side.Class.modeler.diagram.policies.isStereotypedEdgeCreationEditPolicy;
@@ -49,9 +51,6 @@ import com.bluexml.side.Class.modeler.diagram.preferences.CdDiagramPreferenceCon
 import com.bluexml.side.Class.modeler.diagram.utils.AssociationHelper;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.AssociationType;
-import com.bluexml.side.clazz.ClassPackage;
-import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.clazz.ClazzFactory;
 
 /**
  * Association controller <br>
@@ -138,6 +137,10 @@ public class AssociationEditPart extends EMFGraphEdgeEditPart {
 		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FONT_EDITPOLICY, null);
 
 		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY, null);
+		
+		 installEditPolicy(ModelerEditPolicyConstants.EDGE_OBJECTS_UV_EDITPOLICY,
+	                new AssociationEdgeObjectUVEditPolicy());
+	        installEditPolicy(ModelerEditPolicyConstants.EDGE_OBJECTS_OFFSET_EDITPOLICY, new EdgeObjectOffsetEditPolicy());
 	}
 
 	/**
@@ -400,4 +403,29 @@ public class AssociationEditPart extends EMFGraphEdgeEditPart {
 		}
 		((PolylineConnection) figure).setTargetDecoration(targetDecor);
 	}
+	
+	@Override
+	public IEdgeObjectFigure getEdgeObjectFigure(EdgeObject edgeObject) {
+		if (CdEdgeObjectConstants.SRCNAME_EDGE_OBJECT_ID.equals(edgeObject.getId()))
+		{
+			return ((AssociationFigure) getFigure()).getsrcNameEdgeObjectFigure();
+		}
+		if (CdEdgeObjectConstants.SRCCOUNT_EDGE_OBJECT_ID.equals(edgeObject.getId()))
+		{
+			return ((AssociationFigure) getFigure()).getsrcCountEdgeObjectFigure();
+		}
+		if (CdEdgeObjectConstants.TARGETNAME_EDGE_OBJECT_ID.equals(edgeObject.getId()))
+		{
+			return ((AssociationFigure) getFigure()).gettargetNameEdgeObjectFigure();
+		}
+		if (CdEdgeObjectConstants.TARGETCOUNT_EDGE_OBJECT_ID.equals(edgeObject.getId()))
+		{
+			return ((AssociationFigure) getFigure()).gettargetCountEdgeObjectFigure();
+		}
+		if (CdEdgeObjectConstants.MIDDLENAME_EDGE_OBJECT_ID.equals(edgeObject.getId()))
+		{
+			return ((AssociationFigure) getFigure()).getmiddleNameEdgeObjectFigure();
+		}
+		return null;
+	    }
 }

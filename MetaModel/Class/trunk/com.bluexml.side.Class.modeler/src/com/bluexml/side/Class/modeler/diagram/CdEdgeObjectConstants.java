@@ -17,7 +17,23 @@ package com.bluexml.side.Class.modeler.diagram;
 /**
  * An interface defining EdgeObject Constants.<br>
  * 
- * @generated
+ * @_generated
  */
 public interface CdEdgeObjectConstants {
+	
+    /** Public constant defining the srcName EdgeObject id. */
+    String SRCNAME_EDGE_OBJECT_ID = "srcNameEdgeObject";
+
+    /** Public constant defining the srcCount EdgeObject id. */
+    String SRCCOUNT_EDGE_OBJECT_ID = "srcCountEdgeObject";
+
+    /** Public constant defining the targetName EdgeObject id. */
+    String TARGETNAME_EDGE_OBJECT_ID = "targetNameEdgeObject";
+
+    /** Public constant defining the targetCount EdgeObject id. */
+    String TARGETCOUNT_EDGE_OBJECT_ID = "targetCountEdgeObject";
+
+    /** Public constant defining the middleName EdgeObject id. */
+    String MIDDLENAME_EDGE_OBJECT_ID = "middleNameEdgeObject";
+
 }

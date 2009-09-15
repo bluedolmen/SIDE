@@ -17,6 +17,7 @@ package com.bluexml.side.Class.modeler.diagram;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.IEditorInput;
@@ -24,6 +25,9 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
+import org.topcased.modeler.di.model.DiagramInterchangeFactory;
+import org.topcased.modeler.di.model.EdgeObjectOffset;
+import org.topcased.modeler.di.model.EdgeObjectUV;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.di.model.GraphNode;
@@ -41,6 +45,8 @@ import com.bluexml.side.clazz.util.ClazzSwitch;
  */
 public class CdCreationUtils extends AbstractCreationUtils {
 
+	private static final int LABEL_OFFSET = 10;
+	
 	/**
 	 * Constructor
 	 *
@@ -260,11 +266,36 @@ public class CdCreationUtils extends AbstractCreationUtils {
 	 * @param element the model element
 	 * @param presentation the presentation of the graphical element
 	 * @return the complete GraphElement
-	 * @generated
+	 * @_generated
 	 */
 	protected GraphElement createGraphElementAssociation(com.bluexml.side.clazz.Association element, String presentation) {
 		GraphEdge graphEdge = createGraphEdge(element, presentation);
-		return graphEdge;
+		
+        EdgeObjectUV srcnameEdgeObjectUV = DiagramInterchangeFactory.eINSTANCE.createEdgeObjectUV();
+        srcnameEdgeObjectUV.setId(CdEdgeObjectConstants.SRCNAME_EDGE_OBJECT_ID);
+        srcnameEdgeObjectUV.setUDistance(LABEL_OFFSET);
+        srcnameEdgeObjectUV.setVDistance(LABEL_OFFSET);
+        graphEdge.getContained().add(srcnameEdgeObjectUV);
+        EdgeObjectUV srccountEdgeObjectUV = DiagramInterchangeFactory.eINSTANCE.createEdgeObjectUV();
+        srccountEdgeObjectUV.setId(CdEdgeObjectConstants.SRCCOUNT_EDGE_OBJECT_ID);
+        srccountEdgeObjectUV.setUDistance(LABEL_OFFSET);
+        srccountEdgeObjectUV.setVDistance(-LABEL_OFFSET);
+        graphEdge.getContained().add(srccountEdgeObjectUV);
+        EdgeObjectUV targetnameEdgeObjectUV = DiagramInterchangeFactory.eINSTANCE.createEdgeObjectUV();
+        targetnameEdgeObjectUV.setId(CdEdgeObjectConstants.TARGETNAME_EDGE_OBJECT_ID);
+        targetnameEdgeObjectUV.setUDistance(LABEL_OFFSET);
+        targetnameEdgeObjectUV.setVDistance(LABEL_OFFSET);
+        graphEdge.getContained().add(targetnameEdgeObjectUV);
+        EdgeObjectUV targetcountEdgeObjectUV = DiagramInterchangeFactory.eINSTANCE.createEdgeObjectUV();
+        targetcountEdgeObjectUV.setId(CdEdgeObjectConstants.TARGETCOUNT_EDGE_OBJECT_ID);
+        targetcountEdgeObjectUV.setUDistance(LABEL_OFFSET);
+        targetcountEdgeObjectUV.setVDistance(-LABEL_OFFSET);
+        graphEdge.getContained().add(targetcountEdgeObjectUV);
+        EdgeObjectOffset middlenameEdgeObjectOffset = DiagramInterchangeFactory.eINSTANCE.createEdgeObjectOffset();
+        middlenameEdgeObjectOffset.setId(CdEdgeObjectConstants.MIDDLENAME_EDGE_OBJECT_ID);
+        middlenameEdgeObjectOffset.setOffset(new Dimension(0, 0));
+        graphEdge.getContained().add(middlenameEdgeObjectOffset);
+        return graphEdge;
 	}
 
 	/**
