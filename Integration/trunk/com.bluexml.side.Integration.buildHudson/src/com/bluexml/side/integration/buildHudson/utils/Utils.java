@@ -464,7 +464,7 @@ public class Utils {
 	}
 
 	
-	private static void findFile(File f,String s)
+	public static void findFile(File f,String s)
 	{
 		boolean stopfind=false;
 		if(f.getName().equals(s)&& !(f.getPath().indexOf("src")>-1)){
