@@ -219,9 +219,10 @@
       <details key="AtLeastOneNavigableEdge" value="(firstEnd.navigable or secondEnd.navigable)"/>
       <details key="ClassCantBeReferencedbyTwoSameNameAssociation" value="self.getSource().getAllSourceAssociations() ->asSet() ->select(a:Association|a.name = self.name)->size() = 1"/>
       <details key="IfAggregationOrCompositionThenUnidirectionalAssociation" value="(self.associationType &lt;> AssociationType::Direct) implies (self.firstEnd.navigable xor self.secondEnd.navigable )"/>
+      <details key="doubleNavigable" value="(self.firstEnd.navigable and self.secondEnd.navigable) implies (self.firstEnd.name &lt;> '' and self.secondEnd.name &lt;> '')"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="reflexiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation"/>
+      <details key="constraints" value="reflexiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation doubleNavigable"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: Association allows to link data sharing particular relationships; for instance, an association may be created between a resume content and a working contract content."/>
