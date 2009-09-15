@@ -563,7 +563,7 @@ public class Application {
 		
 		// fichier pom.xml
 		Utils.listefichierpom=new ArrayList();
-		String pathproject = pathproject = Utils.getBuildPath() + File.separator + "respositoryCopy";
+		String pathproject = pathproject = Utils.getBuildPath() + File.separator + Utils.repositoryCopy;
 		
 		Utils.findFile(new File(pathproject+"/S-IDE/Integration/trunk"),"pom.xml");
 		if (Utils.listefichierpom.size() != 0) {

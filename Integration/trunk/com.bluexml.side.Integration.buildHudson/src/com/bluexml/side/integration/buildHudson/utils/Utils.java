@@ -31,7 +31,8 @@ public class Utils {
 	private static ArrayList<String> listeFeatureModif = new ArrayList<String>();
 	private static String revisionNumber;
 	public static ArrayList<String> listefichierpom = new ArrayList<String>();
-
+	public static String repositoryCopy="repositoryCopy";
+	
 	/**
 	 * M�thode qui ouvre le fichier de proprerties
 	 * 
@@ -512,7 +513,7 @@ public class Utils {
 
 		ArrayList<String> listePlugin = new ArrayList<String>();
 		
-		String pathproject = pathproject = getBuildPath() + File.separator + "respositoryCopy";
+		String pathproject  = getBuildPath() + File.separator + repositoryCopy;
 		
 		listefichierpom=new ArrayList();
 		findFile(new File(pathproject+"/S-IDE/Integration/trunk"),"pom.xml");
@@ -694,9 +695,9 @@ public class Utils {
 	 */
 	public static String getPathToLocalCopy(String projectName) {
 		String path = "";
-		if (new File(getBuildPath() + File.separator + "respositoryCopy")
+		if (new File(getBuildPath() + File.separator + repositoryCopy)
 				.exists()) {
-			path = getBuildPath() + File.separator + "respositoryCopy";
+			path = getBuildPath() + File.separator + repositoryCopy;
 		} else {
 			if (Application.parametre) {
 				path = Application.workspace;
@@ -735,14 +736,14 @@ public class Utils {
 			from = getBuildDirectory() + "_CO";
 		}
 
-		String to = getBuildPath() + File.separator + "respositoryCopy";
+		String to = getBuildPath() + File.separator + repositoryCopy;
 
 		try {
 			if (new File(to).exists()) {
 				FileHelper.deleteFile(new File(to));
 			}
 
-			new File(getBuildPath() + File.separator + "respositoryCopy")
+			new File(getBuildPath() + File.separator + repositoryCopy)
 					.mkdir();
 
 			FileHelper.copyFiles(new File(from), new File(to), true);
@@ -761,7 +762,7 @@ public class Utils {
 			to = getBuildDirectory() + "_CO";
 		}
 
-		String from = getBuildPath() + File.separator + "respositoryCopy";
+		String from = getBuildPath() + File.separator + repositoryCopy;
 
 		try {
 			FileHelper.copyFiles(new File(from), new File(to), true);
