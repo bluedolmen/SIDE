@@ -429,8 +429,7 @@ public class Utils {
 							+ File.separator + "features" + File.separator
 							+ projects.get(i)), true);
 					updateCopyrightLicence(projects.get(i),getBuildDirectory()
-							+ File.separator + "features" + File.separator
-							+ projects.get(i));
+							+ File.separator + "features");
 				}
 
 			}
