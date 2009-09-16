@@ -428,9 +428,13 @@ public class Utils {
 							+ projects.get(i)), new File(getBuildDirectory()
 							+ File.separator + "features" + File.separator
 							+ projects.get(i)), true);
+					updateCopyrightLicence(projects.get(i),getBuildDirectory()
+							+ File.separator + "features" + File.separator
+							+ projects.get(i));
 				}
 
 			}
+			
 
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
@@ -1358,6 +1362,97 @@ public class Utils {
 	private static String getUpdateSiteDir() {
 		return ouvrirFichier("build.properties").getProperty("updateSiteDir");
 		
+	}
+	
+	/**
+	 * Remplace, pour la feature donn�e, le texte du copyright et de la licence
+	 * (ainsi que leur url) par rapport au fichier indiqu� dans le
+	 * build.properties
+	 * 
+	 * @param featureName
+	 */
+	public static void updateCopyrightLicence(String featureName, String path) {
+
+		//String[] tmp = featureName.split("\\.");
+
+		//if (tmp[3].equals("Util")) {
+		//	tmp[3] = "Utils";
+		//}
+
+		//String path = Application.workspace + File.separator + "S-IDE"
+		//		+ File.separator + tmp[3] + File.separator + "trunk";
+
+		String fileFeaturePath = path + File.separator + featureName
+				+ File.separator + "feature.xml";
+
+		org.jdom.Document document = null;
+		org.jdom.Element racine;
+
+		// On cr�e une instance de SAXBuilder
+		SAXBuilder sxb = new SAXBuilder();
+
+		try {
+			// On cr�e un nouveau document JDOM avec en argument le fichier
+			// XML
+			document = sxb.build(new File(fileFeaturePath));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// On initialise un nouvel �l�ment racine avec l'�l�ment racine du
+		// document.
+		racine = document.getRootElement();
+
+		// On cr�e une List contenant tous les noeuds "copyright" de
+		// l'Element racine
+		List<?> listCopyright = racine.getChildren("copyright");
+
+		// On cr�e un Iterator sur notre liste
+		Iterator<?> i = listCopyright.iterator();
+		// on va parcourir tous les plugins
+		while (i.hasNext()) {
+			// On recr�e l'Element courant � chaque tour de boucle afin de
+			// pouvoir utiliser les m�thodes propres aux Element comme :
+			// selectionner un noeud fils, modifier du texte, etc...
+			Element courant = (Element) i.next();
+
+			// on applique le texte du copyright
+			courant.setText(getCopyrightText());
+
+			// on change l'url du copyright
+			courant.setAttribute("url", getCopyrightURL());
+		}
+
+		// On cr�e une List contenant tous les noeuds "license" de
+		// l'Element racine
+		List<?> listLicense = racine.getChildren("license");
+
+		// On cr�e un Iterator sur notre liste
+		Iterator<?> j = listLicense.iterator();
+		// on va parcourir tous les plugins
+		while (j.hasNext()) {
+			// On recr�e l'Element courant � chaque tour de boucle afin de
+			// pouvoir utiliser les m�thodes propres aux Element comme :
+			// selectionner un noeud fils, modifier du texte, etc...
+			Element courant = (Element) j.next();
+
+			// on applique le texte du license
+			courant.setText(getLicenseText());
+
+			// on change l'url du license
+			courant.setAttribute("url", getlicenseURL());
+		}
+
+		// Enregistrement du fichier
+		try {
+			XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+			sortie.output(document, new FileOutputStream(fileFeaturePath));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
