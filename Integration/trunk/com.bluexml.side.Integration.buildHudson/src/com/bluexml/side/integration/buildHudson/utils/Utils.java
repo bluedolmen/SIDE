@@ -18,7 +18,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.tools.ant.util.StringUtils;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
@@ -1359,7 +1358,11 @@ public class Utils {
 	}
 
 	private static String getUpdateSiteDir() {
-		return ouvrirFichier("build.properties").getProperty("updateSiteDir");
+		String updateSiteDir = "updateSiteDir";
+		if (!Application.EnterpriseRelease) {
+			updateSiteDir = "updateSiteDirLabs";
+		}
+		return ouvrirFichier("build.properties").getProperty(updateSiteDir);
 		
 	}
 	

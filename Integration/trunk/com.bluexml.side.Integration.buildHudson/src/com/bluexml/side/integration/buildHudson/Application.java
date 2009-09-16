@@ -24,20 +24,27 @@ public class Application {
 	// si au moins un paramï¿½tre n'est pas renseignï¿½, alors on suppose que le
 	// build est lancï¿½ sans hudson
 	public static boolean parametre = true;
+	
+	// indique si on build la version enterprise ou labs
+	public static boolean EnterpriseRelease = true;
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 
+		// arg[0] = -labs if build of Labs Release, -copy if transfert to final directory, build of Enterprise Release either
 		String argument1 = "";
+		// arg[1] = build workspace
 		String argument2 = "";
 		String argument3 = "";
+		String argument4 = "";
 
 		try {
 			argument1 = args[0];
 			argument2 = args[1];
 			argument3 = args[3];
+			argument4 = args[4];
 		} catch (Exception e) {
 			parametre = false;
 		}
@@ -50,28 +57,16 @@ public class Application {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		} else if ("-copyright".equals(argument1)) {
-			if (!"".equals(argument2)) {
-				workspace = argument2;
-
-				String[] projects = toArray(Utils.getProjects());
-
-				// On met a jour le texte de la licence et du copyright
-				for (int i = 0; i < projects.length; i++) {
-					if (projects[i].indexOf("feature") != -1)
-						Utils.updateCopyrightLicence(projects[i]);
-				}
-			} else {
-				System.out
-						.println("Vous devez renseigner le chemin vers la copie locale du rï¿½pository (ex: /root/.hudson/jobs/'project name'/workspace)");
-			}
 
 			// Si des paramï¿½tres sont en entrï¿½e
 		} else if (parametre) {
+			if ("-labs".equals(argument1)) {
+				EnterpriseRelease = false;
+			}
 
-			workspace = argument1;
-			build_number = argument2;
-			svn_revision = argument3;
+			workspace = argument2;
+			build_number = argument3;
+			svn_revision = argument4;
 
 		} else {
 
@@ -98,14 +93,15 @@ public class Application {
 		}
 
 		// Mise ï¿½ jour des numï¿½ros de version en fonction du fichier de log
-		System.out
-				.println("\nMise ï¿½ jour des numï¿½ros de version (si besoin)...");
-
-		Utils.traitementUpdate();
-
-		// Commit
-		System.out.println("\nCommit des modifications sur le rï¿½pository...");
-		execBuild("buildSVN", "svnCommit");
+		System.out.println("\nMise ï¿½ jour des numï¿½ros de version (si besoin)...");
+        
+		// si labs, on ne met pas à jour les versions des features et on ne commit pas
+		if (EnterpriseRelease) {
+			Utils.traitementUpdate();
+			// Commit
+			System.out.println("\nCommit des modifications sur le rï¿½pository...");
+			execBuild("buildSVN", "svnCommit");
+		}
 
 		// crï¿½ation du build.xml
 		System.out.println("\n\n- Crï¿½ation de " + Utils.getBuildPath()
@@ -563,7 +559,7 @@ public class Application {
 		
 		// fichier pom.xml
 		Utils.listefichierpom=new ArrayList();
-		String pathproject = pathproject = Utils.getBuildPath() + File.separator + Utils.repositoryCopy;
+		String pathproject = Utils.getBuildPath() + File.separator + Utils.repositoryCopy;
 		
 		Utils.findFile(new File(pathproject+"/S-IDE/Integration/trunk"),"pom.xml");
 		if (Utils.listefichierpom.size() != 0) {
