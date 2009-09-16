@@ -1,4 +1,4 @@
-package com.bluexml.side.app;
+package com.bluexml.side.Integration.eclipse.branding;
 
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;

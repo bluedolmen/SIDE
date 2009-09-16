@@ -1,4 +1,4 @@
-package com.bluexml.side.app;
+package com.bluexml.side.Integration.eclipse.branding;
 
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;

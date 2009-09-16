@@ -1,4 +1,4 @@
-package com.bluexml.side.app;
+package com.bluexml.side.Integration.eclipse.branding;
 
 import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
@@ -7,7 +7,7 @@ import org.eclipse.ui.IViewLayout;
 
 public class Perspective implements IPerspectiveFactory {
 
-	private static final String VIEW_ID = "com.bluexml.side.app.intro.Perspective"; //$NON-NLS-1$
+	private static final String VIEW_ID = "com.bluexml.side.Integration.eclipse.branding.intro.Perspective"; //$NON-NLS-1$
 
 
 	public void createInitialLayout(IPageLayout layout) {

@@ -1,4 +1,4 @@
-package com.bluexml.side.app;
+package com.bluexml.side.Integration.eclipse.branding;
 
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.application.ActionBarAdvisor;

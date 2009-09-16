@@ -1,8 +1,10 @@
-package com.bluexml.side.app;
+package com.bluexml.side.Integration.eclipse.branding;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+
+import com.bluexml.side.util.libs.Messages;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -10,11 +12,14 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.bluexml.side.app";
+	public static final String PLUGIN_ID = "com.bluexml.side.Intregation.eclipse.branding"; //$NON-NLS-1$
+
+	public static final Messages Messages = new Messages(PLUGIN_ID, "com.bluexml.side.Integration.eclipse.branding.itl.messages"); //$NON-NLS-1$
+
 
 	// The shared instance
 	private static Activator plugin;
-	
+
 	/**
 	 * The constructor
 	 */
