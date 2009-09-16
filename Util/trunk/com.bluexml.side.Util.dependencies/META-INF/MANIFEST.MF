@@ -2,13 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Dependencies Plug-in
 Bundle-SymbolicName: com.bluexml.side.Util.dependencies
-Bundle-Version: 1.0.17.v9248-20090916
+Bundle-Version: 1.0.16.v8944-20090908
 Bundle-Activator: com.bluexml.side.util.dependencies.Activator
 Bundle-Vendor: www.bluexml.com
 Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Util.libs,
  com.bluexml.side.Util.log,
- org.maven.ide.components.maven_embedder;bundle-version="2.1.0"
+ com.bluexml.side.Form.generator.xforms.maven
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.util.dependencies
