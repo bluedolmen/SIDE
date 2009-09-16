@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphconf:DiagramGraphConf xmlns:graphconf="http://www.topcased.org/1.0/graphconf"
+    id="com.bluexml.side.Requirements.modeler.processDiagram"
+    defaultBackgroundColor="255,255,255"
+    defaultForegroundColor="0,0,0"
+    defaultFont="Lucida Grande-regular-11">
+    <edge
+        presentation="default"
+        defaultForegroundColor="247,165,0"
+        defaultFont="Lucida Grande-regular-11"
+        defaultRouter="ObliqueRouter"
+        lineWidth="3"
+        lineStyle="SOLID">
+        <bridge xsi:type="graphconf:StringBridge" type="is_responsible"/>
+    </edge>
+    <edge
+        presentation="default"
+        defaultForegroundColor="0,78,155"
+        defaultFont="Lucida Grande-regular-11"
+        defaultRouter="ObliqueRouter"
+        lineWidth="10"
+        lineStyle="SOLID">
+        <bridge xsi:type="graphconf:StringBridge" type="is_sub_goal"/>
+    </edge>
+    <edge
+        presentation="default"
+        defaultForegroundColor="136,43,172"
+        defaultFont="Lucida Grande-regular-11"
+        defaultRouter="ObliqueRouter"
+        lineWidth="5"
+        lineStyle="SOLID">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://www.kerblue.org/requirements/1.0#//RelationShip"/>
+        </bridge>
+    </edge>
+    <node
+        presentation="default"
+        defaultHeight="20"
+        defaultWidth="50"
+        minimumHeight="20"
+        minimumWidth="20"
+        maximumHeight="100"
+        maximumWidth="400"
+        defaultBackgroundColor="184,231,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Lucida Grande-regular-11"
+        lineWidth="1"
+        lineStyle="DASH"
+        isWidthResizable="true"
+        isHeightResizable="true">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://www.kerblue.org/requirements/1.0#//Goal"/>
+        </bridge>
+    </node>
+    <node
+        presentation="default"
+        defaultHeight="75"
+        defaultWidth="50"
+        minimumHeight="75"
+        minimumWidth="20"
+        maximumHeight="75"
+        maximumWidth="200"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Lucida Grande-regular-11"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="true"
+        isHeightResizable="false">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://www.kerblue.org/requirements/1.0#//Agent"/>
+        </bridge>
+    </node>
+    <node
+        presentation="default"
+        defaultHeight="50"
+        defaultWidth="50"
+        minimumHeight="20"
+        minimumWidth="20"
+        maximumHeight="200"
+        maximumWidth="200"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Lucida Grande-regular-11"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="true"
+        isHeightResizable="true">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://www.kerblue.org/requirements/1.0#//Entity"/>
+        </bridge>
+    </node>
+    <node
+        presentation="default"
+        defaultHeight="-1"
+        defaultWidth="-1"
+        minimumHeight="-1"
+        minimumWidth="-1"
+        maximumHeight="-1"
+        maximumWidth="-1"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Lucida Grande-regular-11"
+        lineWidth="0"
+        lineStyle="SOLID"
+        isWidthResizable="false"
+        isHeightResizable="false">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://www.kerblue.org/requirements/1.0#//Attribute"/>
+        </bridge>
+    </node>
+    <node
+        presentation="default"
+        defaultHeight="50"
+        defaultWidth="50"
+        minimumHeight="20"
+        minimumWidth="20"
+        maximumHeight="200"
+        maximumWidth="200"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Lucida Grande-regular-11"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="true"
+        isHeightResizable="true">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://www.kerblue.org/requirements/1.0#//Privilege"/>
+        </bridge>
+    </node>
+    <edge
+        presentation="default"
+        defaultForegroundColor="72,230,89"
+        defaultFont="Lucida Grande-regular-11"
+        defaultRouter="ObliqueRouter"
+        lineWidth="1"
+        lineStyle="DASHDOT">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://www.kerblue.org/requirements/1.0#//PrivilegeGroup"/>
+        </bridge>
+    </edge>
+    <edge
+        presentation="default"
+        defaultForegroundColor="156,199,188"
+        defaultFont="Lucida Grande-regular-11"
+        defaultRouter="ObliqueRouter"
+        lineWidth="2"
+        lineStyle="SOLID">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://www.kerblue.org/requirements/1.0#//GoalStep"/>
+        </bridge>
+    </edge>
+</graphconf:DiagramGraphConf>
+
