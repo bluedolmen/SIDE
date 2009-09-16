@@ -31,8 +31,8 @@ import org.topcased.modeler.internal.ModelerPlugin;
 import org.topcased.modeler.utils.Utils;
 
 import com.bluexml.side.Requirements.modeler.RequirementsPlugin;
+import com.bluexml.side.Requirements.modeler.dialogs.PrivilegeDialog;
 import com.bluexml.side.Requirements.modeler.goalDiagram.commands.update.PrivilegeNullUpdateCommand;
-import com.bluexml.side.Requirements.modeler.goalDiagram.dialogs.PrivilegeDialog;
 import com.bluexml.side.Requirements.modeler.goalDiagram.edit.decoration.ImageDecoration;
 import com.bluexml.side.Requirements.modeler.goalDiagram.figures.CommentFigure;
 import com.bluexml.side.Requirements.modeler.goalDiagram.figures.PrivilegeGroupFigure;

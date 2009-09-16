@@ -10,6 +10,7 @@ import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.ToolbarLayout;
 import org.topcased.draw2d.figures.EditableLabel;
+import org.topcased.draw2d.figures.ILabel;
 
 import com.bluexml.side.Requirements.modeler.goalDiagram.figures.ColorScaler.GreyScale;
 
@@ -34,7 +35,7 @@ public class EntityFigure extends org.topcased.draw2d.figures.ClassFigure {
 		setBorder(new CompoundBorder(new LineBorder(), new MarginBorder(1)));
 		setOpaque(true);
 
-		setLabel(new EditableLabel());
+		setLabel(new EditableLabel(true));
 		add(getLabel());
 
 		setContentPane(new Figure());

@@ -37,7 +37,7 @@ public class GoalFigure extends
 
 	@Override
 	protected ILabel createLabel() {
-		return new EditableLabel();
+		return new EditableLabel(true);
 	}
 
 }

@@ -19,7 +19,7 @@ public class RelationShipFigure extends PolylineConnectionEx {
 	private IEdgeObjectFigure middleNameEdgeObject;
 
 	private Locator middleNameLocator;
-	
+
 	/**
 	 * The constructor
 	 *
@@ -28,9 +28,10 @@ public class RelationShipFigure extends PolylineConnectionEx {
 	public RelationShipFigure() {
 		super();
 		setLineStyle(SWT.LINE_SOLID);
-		
+
 		middleNameEdgeObject = new EdgeObjectOffsetEditableLabel(this);
-		middleNameLocator = new EdgeObjectOffsetLocator((IEdgeObjectOffsetFigure) middleNameEdgeObject);
+		middleNameLocator = new EdgeObjectOffsetLocator(
+				(IEdgeObjectOffsetFigure) middleNameEdgeObject);
 		add(middleNameEdgeObject, middleNameLocator);
 	}
 
@@ -43,7 +44,7 @@ public class RelationShipFigure extends PolylineConnectionEx {
 	public IEdgeObjectFigure getmiddleNameEdgeObjectFigure() {
 		return middleNameEdgeObject;
 	}
-	
+
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -58,5 +59,5 @@ public class RelationShipFigure extends PolylineConnectionEx {
 
 		return null;
 	}
-	
+
 }

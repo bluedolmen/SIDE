@@ -81,14 +81,14 @@ public class EntityRestoreConnectionCommand extends
 	/**
 	 * @param srcElt the source element
 	 * @param targetElt the target element
-	 * @generated
+	 * @_generated
 	 */
 	private void createRelationShipFromEntityToEntity_Target(
 			GraphElement srcElt, GraphElement targetElt) {
 		Entity sourceObject = (Entity) Utils.getElement(srcElt);
 		Entity targetObject = (Entity) Utils.getElement(targetElt);
 
-		EList edgeObjectList = ((com.bluexml.side.requirements.RequirementsDefinition) Utils
+		EList edgeObjectList = ((com.bluexml.side.requirements.Process) Utils
 				.getDiagramModelObject(srcElt)).getChildElements();
 		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
 			Object obj = it.next();

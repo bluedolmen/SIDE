@@ -6,7 +6,10 @@ package com.bluexml.side.Requirements.modeler.processDiagram.edit;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.gef.Request;
+import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
@@ -16,14 +19,18 @@ import org.topcased.modeler.edit.EMFGraphNodeEditPart;
 import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
 import org.topcased.modeler.edit.policies.ResizableEditPolicy;
 import org.topcased.modeler.edit.policies.RestoreEditPolicy;
+import org.topcased.modeler.internal.ModelerPlugin;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
+import com.bluexml.side.Requirements.modeler.dialogs.BasicElementDialog;
+import com.bluexml.side.Requirements.modeler.dialogs.BasicElementUpdateCommand;
 import com.bluexml.side.Requirements.modeler.goalDiagram.figures.AgentFigure;
 import com.bluexml.side.Requirements.modeler.processDiagram.ProEditPolicyConstants;
 import com.bluexml.side.Requirements.modeler.processDiagram.commands.AgentRestoreConnectionCommand;
 import com.bluexml.side.Requirements.modeler.processDiagram.policies.is_responsibleEdgeCreationEditPolicy;
 import com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferenceConstants;
+import com.bluexml.side.requirements.BasicElement;
 
 /**
  * The Agent object controller
@@ -122,6 +129,24 @@ public class AgentEditPart extends EMFGraphNodeEditPart {
 		}
 		return null;
 
+	}
+	
+	@Override
+	public void performRequest(Request request) {
+		BasicElement element = (BasicElement) Utils.getElement(getGraphNode());
+
+		if (request.getType() == RequestConstants.REQ_OPEN) {
+			BasicElementDialog dialog = new BasicElementDialog(ModelerPlugin
+					.getActiveWorkbenchShell(), element);
+			if (dialog.open() == Window.OK) {
+				BasicElementUpdateCommand command = new BasicElementUpdateCommand(element, dialog
+						.getData());
+				getViewer().getEditDomain().getCommandStack().execute(command);
+				refresh();
+			}
+		} else {
+			super.performRequest(request);
+		}
 	}
 
 }

@@ -28,16 +28,17 @@ import org.topcased.modeler.internal.ModelerPlugin;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
+import com.bluexml.side.Requirements.modeler.dialogs.BasicElementDialog;
+import com.bluexml.side.Requirements.modeler.dialogs.BasicElementUpdateCommand;
 import com.bluexml.side.Requirements.modeler.goalDiagram.ReqConfiguration;
 import com.bluexml.side.Requirements.modeler.goalDiagram.ReqEditPolicyConstants;
 import com.bluexml.side.Requirements.modeler.goalDiagram.commands.EntityRestoreConnectionCommand;
-import com.bluexml.side.Requirements.modeler.goalDiagram.commands.update.EntityUpdateCommand;
-import com.bluexml.side.Requirements.modeler.goalDiagram.dialogs.EntityDialog;
 import com.bluexml.side.Requirements.modeler.goalDiagram.figures.EntityFigure;
 import com.bluexml.side.Requirements.modeler.goalDiagram.policies.EntityLayoutEditPolicy;
 import com.bluexml.side.Requirements.modeler.goalDiagram.policies.PrivilegeGroupEdgeCreationEditPolicy;
 import com.bluexml.side.Requirements.modeler.goalDiagram.policies.RelationShipEdgeCreationEditPolicy;
 import com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferenceConstants;
+import com.bluexml.side.requirements.BasicElement;
 import com.bluexml.side.requirements.Entity;
 
 /**
@@ -169,13 +170,13 @@ public class EntityEditPart extends EMFGraphNodeEditPart {
 
 	@Override
 	public void performRequest(Request request) {
-		Entity e = (Entity) Utils.getElement(getGraphNode());
+		BasicElement element = (BasicElement) Utils.getElement(getGraphNode());
 
 		if (request.getType() == RequestConstants.REQ_OPEN) {
-			EntityDialog dialog = new EntityDialog(ModelerPlugin
-					.getActiveWorkbenchShell(), e);
+			BasicElementDialog dialog = new BasicElementDialog(ModelerPlugin
+					.getActiveWorkbenchShell(), element);
 			if (dialog.open() == Window.OK) {
-				EntityUpdateCommand command = new EntityUpdateCommand(e, dialog
+				BasicElementUpdateCommand command = new BasicElementUpdateCommand(element, dialog
 						.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
 				refresh();

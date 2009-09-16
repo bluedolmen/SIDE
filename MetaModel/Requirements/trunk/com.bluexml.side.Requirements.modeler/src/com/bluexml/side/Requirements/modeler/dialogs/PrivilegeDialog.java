@@ -1,4 +1,4 @@
-package com.bluexml.side.Requirements.modeler.goalDiagram.dialogs;
+package com.bluexml.side.Requirements.modeler.dialogs;
 
 import java.util.ArrayList;
 import java.util.HashSet;

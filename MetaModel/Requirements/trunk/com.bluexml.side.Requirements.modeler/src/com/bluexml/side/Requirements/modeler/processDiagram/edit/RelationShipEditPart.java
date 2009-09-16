@@ -4,6 +4,9 @@
 package com.bluexml.side.Requirements.modeler.processDiagram.edit;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.gef.Request;
+import org.eclipse.gef.RequestConstants;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
@@ -11,11 +14,13 @@ import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.EdgeObject;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.edit.EMFGraphEdgeEditPart;
-import org.topcased.modeler.edit.policies.EdgeObjectOffsetEditPolicy;
 import org.topcased.modeler.figures.EdgeObjectOffsetEditableLabel;
 import org.topcased.modeler.figures.IEdgeObjectFigure;
+import org.topcased.modeler.internal.ModelerPlugin;
 import org.topcased.modeler.utils.Utils;
 
+import com.bluexml.side.Requirements.modeler.dialogs.RelationShipDialog;
+import com.bluexml.side.Requirements.modeler.goalDiagram.commands.update.RelationShipUpdateCommand;
 import com.bluexml.side.Requirements.modeler.processDiagram.ProEdgeObjectConstants;
 import com.bluexml.side.Requirements.modeler.processDiagram.figures.RelationShipFigure;
 import com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferenceConstants;
@@ -51,8 +56,6 @@ public class RelationShipEditPart extends EMFGraphEdgeEditPart {
 		installEditPolicy(
 				ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY,
 				null);
-		
-		installEditPolicy(ModelerEditPolicyConstants.EDGE_OBJECTS_OFFSET_EDITPOLICY, new EdgeObjectOffsetEditPolicy());
 	}
 
 	/**
@@ -104,22 +107,43 @@ public class RelationShipEditPart extends EMFGraphEdgeEditPart {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public IEdgeObjectFigure getEdgeObjectFigure(EdgeObject edgeObject) {
-		if (ProEdgeObjectConstants.MIDDLENAME_EDGE_OBJECT_ID.equals(edgeObject.getId()))
-		{
-			return ((RelationShipFigure) getFigure()).getmiddleNameEdgeObjectFigure();
+		if (ProEdgeObjectConstants.MIDDLENAME_EDGE_OBJECT_ID.equals(edgeObject
+				.getId())) {
+			return ((RelationShipFigure) getFigure())
+					.getmiddleNameEdgeObjectFigure();
 		}
 		return null;
 	}
-	
+
 	protected void refreshEdgeObjects() {
 		super.refreshEdgeObjects();
-		
-		RelationShip relationship = (RelationShip) Utils.getElement(getGraphEdge());
+
+		RelationShip relationship = (RelationShip) Utils
+				.getElement(getGraphEdge());
 		RelationShipFigure fig = ((RelationShipFigure) getFigure());
-		EdgeObjectOffsetEditableLabel label = (EdgeObjectOffsetEditableLabel) fig.getmiddleNameEdgeObjectFigure();
+		EdgeObjectOffsetEditableLabel label = (EdgeObjectOffsetEditableLabel) fig
+				.getmiddleNameEdgeObjectFigure();
 		label.setText(relationship.getName());
+	}
+	
+	@Override
+	public void performRequest(Request request) {
+		RelationShip rs = (RelationShip) Utils.getElement(getGraphEdge());
+
+		if (request.getType() == RequestConstants.REQ_OPEN) {
+			RelationShipDialog dialog = new RelationShipDialog(ModelerPlugin
+					.getActiveWorkbenchShell(), rs);
+			if (dialog.open() == Window.OK) {
+				RelationShipUpdateCommand command = new RelationShipUpdateCommand(rs,dialog.getData());
+				getViewer().getEditDomain().getCommandStack().execute(
+						command);
+				refresh();
+			} else {
+				super.performRequest(request);
+			}
+		}
 	}
 }

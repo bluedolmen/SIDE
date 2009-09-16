@@ -230,12 +230,14 @@ public class ProCreationUtils extends AbstractCreationUtils {
 			com.bluexml.side.requirements.RelationShip element,
 			String presentation) {
 		GraphEdge graphEdge = createGraphEdge(element, presentation);
-		
-		EdgeObjectOffset middlenameEdgeObjectOffset = DiagramInterchangeFactory.eINSTANCE.createEdgeObjectOffset();
-        middlenameEdgeObjectOffset.setId(ProEdgeObjectConstants.MIDDLENAME_EDGE_OBJECT_ID);
-        middlenameEdgeObjectOffset.setOffset(new Dimension(0, 0));
-        graphEdge.getContained().add(middlenameEdgeObjectOffset);
-		
+
+		EdgeObjectOffset middlenameEdgeObjectOffset = DiagramInterchangeFactory.eINSTANCE
+				.createEdgeObjectOffset();
+		middlenameEdgeObjectOffset
+				.setId(ProEdgeObjectConstants.MIDDLENAME_EDGE_OBJECT_ID);
+		middlenameEdgeObjectOffset.setOffset(new Dimension(0, 0));
+		graphEdge.getContained().add(middlenameEdgeObjectOffset);
+
 		return graphEdge;
 	}
 

@@ -1,6 +1,8 @@
-package com.bluexml.side.Requirements.modeler.goalDiagram.dialogs;
+package com.bluexml.side.Requirements.modeler.dialogs;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jface.dialogs.Dialog;
@@ -10,28 +12,31 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
-import com.bluexml.side.requirements.Entity;
+import com.bluexml.side.requirements.BasicElement;
 
-public class EntityDialog extends Dialog implements IDialogConstants {
+public class BasicElementDialog extends Dialog implements IDialogConstants {
 
 	private static final int MIN_DIALOG_WIDTH = 500;
 	private static final int MIN_DIALOG_HEIGHT = 300;
 	private Text documentation;
-	private Map<String,Object> data;
-	private Entity entity;
+	private Text name;
+	protected Map<String,Object> data;
+	protected BasicElement element;
 
-	public static final String ENTITY_DOCUMENTATION = "entity documentation";
+	public static final String BASICELEMENT_DOCUMENTATION = "basic element documentation";
+	public static final String BASICELEMENT_NAME = "basic element name";
 
-	public EntityDialog(Shell parent, Entity _entity) {
+	public BasicElementDialog(Shell parent, BasicElement _element) {
 		super(parent);
 		setBlockOnOpen(true);
 		setShellStyle(getShellStyle() | SWT.RESIZE);
-		entity = _entity;
+		element = _element;
 	}
 	
 	@Override
@@ -49,30 +54,42 @@ public class EntityDialog extends Dialog implements IDialogConstants {
 		return dialogComposite;
 	}
 
-	private void loadData() {
+	protected void loadData() {
 		//Doc
-		if (entity.getDocumentation() != null)
-			documentation.setText(entity.getDocumentation());
+		if (element.getDocumentation() != null)
+			documentation.setText(element.getDocumentation());
+		//Name
+		if (element.getName() != null)
+			name.setText(element.getName());
 	}
 
 	private void createGoalGroup(Composite parent) {
 		TabFolder tabFolder = new TabFolder(parent, SWT.TOP);
 		tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
 		createDocumentationTab(tabFolder);
+		createCustomItems(tabFolder);
 	}
 
 	private void createDocumentationTab(Composite parent) {
 		// Create tab item and add it composite that fills it
 		TabItem viewItem = new TabItem((TabFolder) parent, SWT.NONE);
-		viewItem.setText("Documentation");
+		viewItem.setText("Properties");
 		Composite composite = new Composite(parent, SWT.NONE);
 		viewItem.setControl(composite);
 
-		composite.setLayout(new GridLayout(2, false));
+		composite.setLayout(new GridLayout(1, false));
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 
+		Label lbl = new Label(composite, SWT.NONE);
+		lbl.setText("Name :");
+		name = new Text(composite, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.BORDER);
+		name.setLayoutData(new GridData(GridData.FILL_BOTH));
+
+		lbl = new Label(composite, SWT.NONE);
+		lbl.setText("Documentation :");
 		documentation = new Text(composite, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.BORDER);
 		documentation.setLayoutData(new GridData(GridData.FILL_BOTH));
+
 	}
 	
 	/**
@@ -81,14 +98,18 @@ public class EntityDialog extends Dialog implements IDialogConstants {
 	 * @see org.eclipse.jface.dialogs.Dialog#okPressed()
 	 */
 	protected void okPressed() {
-		data = new HashMap<String, Object>();
-		data.put(ENTITY_DOCUMENTATION, documentation.getText());
+		if (data == null)
+			data = new HashMap<String, Object>();
+		data.put(BASICELEMENT_DOCUMENTATION, documentation.getText());
+		data.put(BASICELEMENT_NAME, name.getText());
 		super.okPressed();
 	}
 
 	public Map<String, Object> getData() {
 		return data;
 	}
-
 	
+	protected void createCustomItems(Composite parent) {
+	}
+
 }

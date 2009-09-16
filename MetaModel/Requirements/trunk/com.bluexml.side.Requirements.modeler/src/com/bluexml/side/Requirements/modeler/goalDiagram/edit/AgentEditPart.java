@@ -24,14 +24,15 @@ import org.topcased.modeler.internal.ModelerPlugin;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
+import com.bluexml.side.Requirements.modeler.dialogs.BasicElementDialog;
+import com.bluexml.side.Requirements.modeler.dialogs.BasicElementUpdateCommand;
 import com.bluexml.side.Requirements.modeler.goalDiagram.ReqEditPolicyConstants;
 import com.bluexml.side.Requirements.modeler.goalDiagram.commands.AgentRestoreConnectionCommand;
-import com.bluexml.side.Requirements.modeler.goalDiagram.commands.update.AgentUpdateCommand;
-import com.bluexml.side.Requirements.modeler.goalDiagram.dialogs.AgentDialog;
 import com.bluexml.side.Requirements.modeler.goalDiagram.figures.AgentFigure;
 import com.bluexml.side.Requirements.modeler.goalDiagram.policies.is_responsibleEdgeCreationEditPolicy;
 import com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferenceConstants;
 import com.bluexml.side.requirements.Agent;
+import com.bluexml.side.requirements.BasicElement;
 
 /**
  * The Agent object controller
@@ -141,13 +142,13 @@ public class AgentEditPart extends EMFGraphNodeEditPart {
 
 	@Override
 	public void performRequest(Request request) {
-		Agent a = (Agent) Utils.getElement(getGraphNode());
+		BasicElement element = (BasicElement) Utils.getElement(getGraphNode());
 
 		if (request.getType() == RequestConstants.REQ_OPEN) {
-			AgentDialog dialog = new AgentDialog(ModelerPlugin
-					.getActiveWorkbenchShell(), a);
+			BasicElementDialog dialog = new BasicElementDialog(ModelerPlugin
+					.getActiveWorkbenchShell(), element);
 			if (dialog.open() == Window.OK) {
-				AgentUpdateCommand command = new AgentUpdateCommand(a, dialog
+				BasicElementUpdateCommand command = new BasicElementUpdateCommand(element, dialog
 						.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
 				refresh();

@@ -4,27 +4,39 @@
 package com.bluexml.side.Requirements.modeler.processDiagram.edit;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.gef.Request;
+import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.topcased.modeler.ModelerEditPolicyConstants;
+import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.EMFGraphNodeEditPart;
 import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
 import org.topcased.modeler.edit.policies.ResizableEditPolicy;
 import org.topcased.modeler.edit.policies.RestoreEditPolicy;
+import org.topcased.modeler.internal.ModelerPlugin;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
+import com.bluexml.side.Requirements.modeler.dialogs.BasicElementDialog;
+import com.bluexml.side.Requirements.modeler.dialogs.BasicElementUpdateCommand;
 import com.bluexml.side.Requirements.modeler.goalDiagram.figures.EntityFigure;
+import com.bluexml.side.Requirements.modeler.processDiagram.ProConfiguration;
 import com.bluexml.side.Requirements.modeler.processDiagram.ProEditPolicyConstants;
 import com.bluexml.side.Requirements.modeler.processDiagram.commands.EntityRestoreConnectionCommand;
 import com.bluexml.side.Requirements.modeler.processDiagram.policies.EntityLayoutEditPolicy;
 import com.bluexml.side.Requirements.modeler.processDiagram.policies.PrivilegeGroupEdgeCreationEditPolicy;
 import com.bluexml.side.Requirements.modeler.processDiagram.policies.RelationShipEdgeCreationEditPolicy;
 import com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferenceConstants;
+import com.bluexml.side.requirements.BasicElement;
+import com.bluexml.side.requirements.Entity;
 
 /**
  * The Entity object controller
@@ -83,8 +95,25 @@ public class EntityEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure createFigure() {
+		Entity entity = (Entity) Utils.getElement(getGraphNode());
 
-		return new EntityFigure();
+		ProConfiguration config = new ProConfiguration();
+		if (getGraphNode().getContained().size() > 0) {
+			GraphNode attributesListNode = (GraphNode) getGraphNode()
+					.getContained().get(0);
+			EList attributesList = attributesListNode.getContained();
+			while (attributesList.size() > 0)
+				attributesList.remove(0);
+			for (Object o : entity.getAttributes()) {
+				GraphElement elt = config.getCreationUtils()
+						.createGraphElement((EObject) o);
+				if (elt != null)
+					attributesList.add(elt);
+			}
+		}
+
+		IFigure result = new EntityFigure();
+		return result;
 	}
 
 	/**
@@ -125,6 +154,30 @@ public class EntityEditPart extends EMFGraphNodeEditPart {
 		}
 		return null;
 
+	}
+	
+	@Override
+	public void performRequest(Request request) {
+		BasicElement element = (BasicElement) Utils.getElement(getGraphNode());
+
+		if (request.getType() == RequestConstants.REQ_OPEN) {
+			BasicElementDialog dialog = new BasicElementDialog(ModelerPlugin
+					.getActiveWorkbenchShell(), element);
+			if (dialog.open() == Window.OK) {
+				BasicElementUpdateCommand command = new BasicElementUpdateCommand(element, dialog
+						.getData());
+				getViewer().getEditDomain().getCommandStack().execute(command);
+				refresh();
+			}
+		} else {
+			super.performRequest(request);
+		}
+	}
+	
+	@Override
+	protected int getDefaultWidth() {
+		// TODO Auto-generated method stub
+		return super.getDefaultWidth();
 	}
 
 }

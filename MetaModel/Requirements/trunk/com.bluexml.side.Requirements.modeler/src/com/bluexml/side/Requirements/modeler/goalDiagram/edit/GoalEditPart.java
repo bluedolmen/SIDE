@@ -22,15 +22,16 @@ import org.topcased.modeler.internal.ModelerPlugin;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
+import com.bluexml.side.Requirements.modeler.dialogs.BasicElementDialog;
+import com.bluexml.side.Requirements.modeler.dialogs.BasicElementUpdateCommand;
 import com.bluexml.side.Requirements.modeler.goalDiagram.ReqEditPolicyConstants;
 import com.bluexml.side.Requirements.modeler.goalDiagram.commands.GoalRestoreConnectionCommand;
-import com.bluexml.side.Requirements.modeler.goalDiagram.commands.update.GoalUpdateCommand;
-import com.bluexml.side.Requirements.modeler.goalDiagram.dialogs.GoalDialog;
 import com.bluexml.side.Requirements.modeler.goalDiagram.figures.GoalFigure;
 import com.bluexml.side.Requirements.modeler.goalDiagram.policies.PrivilegeGroupEdgeCreationEditPolicy;
 import com.bluexml.side.Requirements.modeler.goalDiagram.policies.is_responsibleEdgeCreationEditPolicy;
 import com.bluexml.side.Requirements.modeler.goalDiagram.policies.is_sub_goalEdgeCreationEditPolicy;
 import com.bluexml.side.Requirements.modeler.goalDiagram.preferences.ReqDiagramPreferenceConstants;
+import com.bluexml.side.requirements.BasicElement;
 import com.bluexml.side.requirements.Goal;
 
 /**
@@ -145,13 +146,13 @@ public class GoalEditPart extends EMFGraphNodeEditPart {
 
 	@Override
 	public void performRequest(Request request) {
-		Goal g = (Goal) Utils.getElement(getGraphNode());
+		BasicElement element = (BasicElement) Utils.getElement(getGraphNode());
 
 		if (request.getType() == RequestConstants.REQ_OPEN) {
-			GoalDialog dialog = new GoalDialog(ModelerPlugin
-					.getActiveWorkbenchShell(), g);
+			BasicElementDialog dialog = new BasicElementDialog(ModelerPlugin
+					.getActiveWorkbenchShell(), element);
 			if (dialog.open() == Window.OK) {
-				GoalUpdateCommand command = new GoalUpdateCommand(g, dialog
+				BasicElementUpdateCommand command = new BasicElementUpdateCommand(element, dialog
 						.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
 				refresh();
