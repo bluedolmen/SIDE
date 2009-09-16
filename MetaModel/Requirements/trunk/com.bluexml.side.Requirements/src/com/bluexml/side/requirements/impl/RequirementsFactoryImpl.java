@@ -18,6 +18,7 @@ import com.bluexml.side.requirements.Attribute;
 import com.bluexml.side.requirements.AttributeType;
 import com.bluexml.side.requirements.Entity;
 import com.bluexml.side.requirements.Goal;
+import com.bluexml.side.requirements.GoalStep;
 import com.bluexml.side.requirements.Organization;
 import com.bluexml.side.requirements.PriorityLevel;
 import com.bluexml.side.requirements.Privilege;
@@ -81,6 +82,8 @@ public class RequirementsFactoryImpl extends EFactoryImpl implements Requirement
 			case RequirementsPackage.PRIVILEGE: return createPrivilege();
 			case RequirementsPackage.REQUIREMENTS_DEFINITION: return createRequirementsDefinition();
 			case RequirementsPackage.PRIVILEGE_GROUP: return createPrivilegeGroup();
+			case RequirementsPackage.PROCESS: return createProcess();
+			case RequirementsPackage.GOAL_STEP: return createGoalStep();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -212,6 +215,26 @@ public class RequirementsFactoryImpl extends EFactoryImpl implements Requirement
 	public PrivilegeGroup createPrivilegeGroup() {
 		PrivilegeGroupImpl privilegeGroup = new PrivilegeGroupImpl();
 		return privilegeGroup;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public com.bluexml.side.requirements.Process createProcess() {
+		ProcessImpl process = new ProcessImpl();
+		return process;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GoalStep createGoalStep() {
+		GoalStepImpl goalStep = new GoalStepImpl();
+		return goalStep;
 	}
 
 	/**

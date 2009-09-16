@@ -19,6 +19,7 @@ import com.bluexml.side.requirements.AttributeType;
 import com.bluexml.side.requirements.BasicElement;
 import com.bluexml.side.requirements.Entity;
 import com.bluexml.side.requirements.Goal;
+import com.bluexml.side.requirements.GoalStep;
 import com.bluexml.side.requirements.ModelElement;
 import com.bluexml.side.requirements.Organization;
 import com.bluexml.side.requirements.PriorityLevel;
@@ -119,6 +120,20 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass processEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass goalStepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum attributeTypeEEnum = null;
 
 	/**
@@ -162,20 +177,10 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this
-	 * model, and for any others upon which it depends.  Simple
-	 * dependencies are satisfied by calling this method on all
-	 * dependent packages before doing anything else.  This method drives
-	 * initialization for interdependent packages directly, in parallel
-	 * with this package, itself.
-	 * <p>Of this package and its interdependencies, all packages which
-	 * have not yet been registered by their URI values are first created
-	 * and registered.  The packages are then initialized in two steps:
-	 * meta-model objects for all of the packages are created before any
-	 * are initialized, since one package's meta-model objects may refer to
-	 * those of another.
-	 * <p>Invocation of this method will not affect any packages that have
-	 * already been initialized.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link RequirementsPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
@@ -187,7 +192,7 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 		if (isInited) return (RequirementsPackage)EPackage.Registry.INSTANCE.getEPackage(RequirementsPackage.eNS_URI);
 
 		// Obtain or create and register package
-		RequirementsPackageImpl theRequirementsPackage = (RequirementsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof RequirementsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new RequirementsPackageImpl());
+		RequirementsPackageImpl theRequirementsPackage = (RequirementsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof RequirementsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new RequirementsPackageImpl());
 
 		isInited = true;
 
@@ -200,6 +205,9 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 		// Mark meta-data to indicate it can't be changed
 		theRequirementsPackage.freeze();
 
+  
+		// Update the registry and return the package
+		EPackage.Registry.INSTANCE.put(RequirementsPackage.eNS_URI, theRequirementsPackage);
 		return theRequirementsPackage;
 	}
 
@@ -442,6 +450,15 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getGoal_Step() {
+		return (EReference)goalEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPrivilege() {
 		return privilegeEClass;
 	}
@@ -532,6 +549,42 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getProcess() {
+		return processEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getGoalStep() {
+		return goalStepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getGoalStep_NextGoals() {
+		return (EReference)goalStepEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getGoalStep_Process() {
+		return (EReference)goalStepEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getAttributeType() {
 		return attributeTypeEEnum;
 	}
@@ -615,6 +668,7 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 		createEAttribute(goalEClass, GOAL__PRIORITY);
 		createEReference(goalEClass, GOAL__RESPONSIBLE);
 		createEReference(goalEClass, GOAL__PRIVILEGE_GROUP);
+		createEReference(goalEClass, GOAL__STEP);
 
 		privilegeEClass = createEClass(PRIVILEGE);
 		createEReference(privilegeEClass, PRIVILEGE__ELEMENT);
@@ -628,6 +682,12 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 		createEReference(privilegeGroupEClass, PRIVILEGE_GROUP__ENTRY_POINT);
 		createEReference(privilegeGroupEClass, PRIVILEGE_GROUP__PRIVILEGES);
 		createEAttribute(privilegeGroupEClass, PRIVILEGE_GROUP__DOCUMENTATION);
+
+		processEClass = createEClass(PROCESS);
+
+		goalStepEClass = createEClass(GOAL_STEP);
+		createEReference(goalStepEClass, GOAL_STEP__NEXT_GOALS);
+		createEReference(goalStepEClass, GOAL_STEP__PROCESS);
 
 		// Create enums
 		attributeTypeEEnum = createEEnum(ATTRIBUTE_TYPE);
@@ -672,6 +732,7 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 		goalEClass.getESuperTypes().add(this.getBasicElement());
 		requirementsDefinitionEClass.getESuperTypes().add(this.getOrganization());
 		privilegeGroupEClass.getESuperTypes().add(this.getModelElement());
+		processEClass.getESuperTypes().add(this.getOrganization());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(modelElementEClass, ModelElement.class, "ModelElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -707,6 +768,7 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 		initEAttribute(getGoal_Priority(), this.getPriorityLevel(), "priority", null, 0, 1, Goal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGoal_Responsible(), this.getAgent(), this.getAgent_IsResponsible(), "responsible", null, 0, -1, Goal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGoal_PrivilegeGroup(), this.getPrivilegeGroup(), null, "privilegeGroup", null, 0, -1, Goal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGoal_Step(), this.getGoalStep(), null, "step", null, 0, -1, Goal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(privilegeEClass, Privilege.class, "Privilege", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPrivilege_Element(), this.getBasicElement(), null, "element", null, 1, 1, Privilege.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -720,6 +782,12 @@ public class RequirementsPackageImpl extends EPackageImpl implements Requirement
 		initEReference(getPrivilegeGroup_EntryPoint(), this.getEntity(), null, "entryPoint", null, 0, 1, PrivilegeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPrivilegeGroup_Privileges(), this.getPrivilege(), null, "privileges", null, 0, -1, PrivilegeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPrivilegeGroup_Documentation(), ecorePackage.getEString(), "documentation", null, 0, 1, PrivilegeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(processEClass, com.bluexml.side.requirements.Process.class, "Process", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(goalStepEClass, GoalStep.class, "GoalStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getGoalStep_NextGoals(), this.getGoal(), null, "nextGoals", null, 0, -1, GoalStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGoalStep_Process(), this.getProcess(), null, "process", null, 0, 1, GoalStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(attributeTypeEEnum, AttributeType.class, "AttributeType");

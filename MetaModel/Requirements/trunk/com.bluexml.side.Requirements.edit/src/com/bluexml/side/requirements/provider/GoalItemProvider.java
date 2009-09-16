@@ -126,6 +126,7 @@ public class GoalItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(RequirementsPackage.Literals.GOAL__SUBGOALS);
 			childrenFeatures.add(RequirementsPackage.Literals.GOAL__PRIVILEGE_GROUP);
+			childrenFeatures.add(RequirementsPackage.Literals.GOAL__STEP);
 		}
 		return childrenFeatures;
 	}
@@ -185,6 +186,7 @@ public class GoalItemProvider
 				return;
 			case RequirementsPackage.GOAL__SUBGOALS:
 			case RequirementsPackage.GOAL__PRIVILEGE_GROUP:
+			case RequirementsPackage.GOAL__STEP:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -207,10 +209,15 @@ public class GoalItemProvider
 				(RequirementsPackage.Literals.GOAL__SUBGOALS,
 				 RequirementsFactory.eINSTANCE.createGoal()));
 
-		newChildDescriptors.add
+		/*newChildDescriptors.add
 			(createChildParameter
 				(RequirementsPackage.Literals.GOAL__PRIVILEGE_GROUP,
 				 RequirementsFactory.eINSTANCE.createPrivilegeGroup()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(RequirementsPackage.Literals.GOAL__STEP,
+				 RequirementsFactory.eINSTANCE.createGoalStep()));*/
 	}
 
 }

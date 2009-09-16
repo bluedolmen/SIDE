@@ -16,6 +16,7 @@ import com.bluexml.side.requirements.Attribute;
 import com.bluexml.side.requirements.BasicElement;
 import com.bluexml.side.requirements.Entity;
 import com.bluexml.side.requirements.Goal;
+import com.bluexml.side.requirements.GoalStep;
 import com.bluexml.side.requirements.ModelElement;
 import com.bluexml.side.requirements.Organization;
 import com.bluexml.side.requirements.Privilege;
@@ -178,6 +179,21 @@ public class RequirementsSwitch<T> {
 				PrivilegeGroup privilegeGroup = (PrivilegeGroup)theEObject;
 				T result = casePrivilegeGroup(privilegeGroup);
 				if (result == null) result = caseModelElement(privilegeGroup);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RequirementsPackage.PROCESS: {
+				com.bluexml.side.requirements.Process process = (com.bluexml.side.requirements.Process)theEObject;
+				T result = caseProcess(process);
+				if (result == null) result = caseOrganization(process);
+				if (result == null) result = caseBasicElement(process);
+				if (result == null) result = caseModelElement(process);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RequirementsPackage.GOAL_STEP: {
+				GoalStep goalStep = (GoalStep)theEObject;
+				T result = caseGoalStep(goalStep);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -347,6 +363,36 @@ public class RequirementsSwitch<T> {
 	 * @generated
 	 */
 	public T casePrivilegeGroup(PrivilegeGroup object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Process</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Process</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseProcess(com.bluexml.side.requirements.Process object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Goal Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Goal Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGoalStep(GoalStep object) {
 		return null;
 	}
 

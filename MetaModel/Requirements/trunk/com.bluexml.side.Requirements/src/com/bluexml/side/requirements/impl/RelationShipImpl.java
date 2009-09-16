@@ -328,13 +328,13 @@ public class RelationShipImpl extends BasicElementImpl implements RelationShip {
 				if (resolve) return getTarget();
 				return basicGetTarget();
 			case RequirementsPackage.RELATION_SHIP__SOURCE_MIN:
-				return new Integer(getSourceMin());
+				return getSourceMin();
 			case RequirementsPackage.RELATION_SHIP__SOURCE_MAX:
-				return new Integer(getSourceMax());
+				return getSourceMax();
 			case RequirementsPackage.RELATION_SHIP__TARGET_MIN:
-				return new Integer(getTargetMin());
+				return getTargetMin();
 			case RequirementsPackage.RELATION_SHIP__TARGET_MAX:
-				return new Integer(getTargetMax());
+				return getTargetMax();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -354,16 +354,16 @@ public class RelationShipImpl extends BasicElementImpl implements RelationShip {
 				setTarget((Entity)newValue);
 				return;
 			case RequirementsPackage.RELATION_SHIP__SOURCE_MIN:
-				setSourceMin(((Integer)newValue).intValue());
+				setSourceMin((Integer)newValue);
 				return;
 			case RequirementsPackage.RELATION_SHIP__SOURCE_MAX:
-				setSourceMax(((Integer)newValue).intValue());
+				setSourceMax((Integer)newValue);
 				return;
 			case RequirementsPackage.RELATION_SHIP__TARGET_MIN:
-				setTargetMin(((Integer)newValue).intValue());
+				setTargetMin((Integer)newValue);
 				return;
 			case RequirementsPackage.RELATION_SHIP__TARGET_MAX:
-				setTargetMax(((Integer)newValue).intValue());
+				setTargetMax((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

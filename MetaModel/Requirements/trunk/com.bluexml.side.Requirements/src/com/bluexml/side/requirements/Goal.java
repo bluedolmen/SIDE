@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.bluexml.side.requirements.Goal#getPriority <em>Priority</em>}</li>
  *   <li>{@link com.bluexml.side.requirements.Goal#getResponsible <em>Responsible</em>}</li>
  *   <li>{@link com.bluexml.side.requirements.Goal#getPrivilegeGroup <em>Privilege Group</em>}</li>
+ *   <li>{@link com.bluexml.side.requirements.Goal#getStep <em>Step</em>}</li>
  * </ul>
  * </p>
  *
@@ -106,5 +107,21 @@ public interface Goal extends BasicElement {
 	 * @generated
 	 */
 	EList<PrivilegeGroup> getPrivilegeGroup();
+
+	/**
+	 * Returns the value of the '<em><b>Step</b></em>' containment reference list.
+	 * The list contents are of type {@link com.bluexml.side.requirements.GoalStep}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Step</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Step</em>' containment reference list.
+	 * @see com.bluexml.side.requirements.RequirementsPackage#getGoal_Step()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<GoalStep> getStep();
 
 } // Goal

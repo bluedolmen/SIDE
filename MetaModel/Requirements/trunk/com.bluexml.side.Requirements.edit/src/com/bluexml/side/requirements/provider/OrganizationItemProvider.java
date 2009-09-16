@@ -159,15 +159,15 @@ public class OrganizationItemProvider
 				(RequirementsPackage.Literals.ORGANIZATION__CHILD_ELEMENTS,
 				 RequirementsFactory.eINSTANCE.createRelationShip()));
 
-		newChildDescriptors.add
+		/*newChildDescriptors.add
 			(createChildParameter
 				(RequirementsPackage.Literals.ORGANIZATION__CHILD_ELEMENTS,
-				 RequirementsFactory.eINSTANCE.createAttribute()));
+				 RequirementsFactory.eINSTANCE.createAttribute()));*/
 
-		newChildDescriptors.add
+		/*newChildDescriptors.add
 			(createChildParameter
 				(RequirementsPackage.Literals.ORGANIZATION__CHILD_ELEMENTS,
-				 RequirementsFactory.eINSTANCE.createOrganization()));
+				 RequirementsFactory.eINSTANCE.createOrganization()));*/
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -179,15 +179,20 @@ public class OrganizationItemProvider
 				(RequirementsPackage.Literals.ORGANIZATION__CHILD_ELEMENTS,
 				 RequirementsFactory.eINSTANCE.createGoal()));
 
-		newChildDescriptors.add
+		/*newChildDescriptors.add
 			(createChildParameter
 				(RequirementsPackage.Literals.ORGANIZATION__CHILD_ELEMENTS,
-				 RequirementsFactory.eINSTANCE.createRequirementsDefinition()));
+				 RequirementsFactory.eINSTANCE.createRequirementsDefinition()));*/
+
+		/*newChildDescriptors.add
+			(createChildParameter
+				(RequirementsPackage.Literals.ORGANIZATION__CHILD_ELEMENTS,
+				 RequirementsFactory.eINSTANCE.createPrivilegeGroup()));*/
 
 		newChildDescriptors.add
 			(createChildParameter
 				(RequirementsPackage.Literals.ORGANIZATION__CHILD_ELEMENTS,
-				 RequirementsFactory.eINSTANCE.createPrivilegeGroup()));
+				 RequirementsFactory.eINSTANCE.createProcess()));
 	}
 
 }

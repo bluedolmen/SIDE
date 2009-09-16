@@ -58,6 +58,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//Goal/priority"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requirements.ecore#//Goal/responsible"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference requirements.ecore#//Goal/privilegeGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference requirements.ecore#//Goal/step"/>
     </genClasses>
     <genClasses ecoreClass="requirements.ecore#//Privilege">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requirements.ecore#//Privilege/element"/>
@@ -71,6 +72,11 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requirements.ecore#//PrivilegeGroup/entryPoint"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference requirements.ecore#//PrivilegeGroup/privileges"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requirements.ecore#//PrivilegeGroup/documentation"/>
+    </genClasses>
+    <genClasses ecoreClass="requirements.ecore#//Process"/>
+    <genClasses ecoreClass="requirements.ecore#//GoalStep">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requirements.ecore#//GoalStep/nextGoals"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requirements.ecore#//GoalStep/process"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

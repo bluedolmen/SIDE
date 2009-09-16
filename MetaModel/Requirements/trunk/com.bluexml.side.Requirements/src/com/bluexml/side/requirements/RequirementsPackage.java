@@ -474,13 +474,22 @@ public interface RequirementsPackage extends EPackage {
 	int GOAL__PRIVILEGE_GROUP = BASIC_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Step</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL__STEP = BASIC_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Goal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GOAL_FEATURE_COUNT = BASIC_ELEMENT_FEATURE_COUNT + 4;
+	int GOAL_FEATURE_COUNT = BASIC_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.requirements.impl.PrivilegeImpl <em>Privilege</em>}' class.
@@ -630,6 +639,89 @@ public interface RequirementsPackage extends EPackage {
 	int PRIVILEGE_GROUP_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.requirements.impl.ProcessImpl <em>Process</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.requirements.impl.ProcessImpl
+	 * @see com.bluexml.side.requirements.impl.RequirementsPackageImpl#getProcess()
+	 * @generated
+	 */
+	int PROCESS = 11;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS__NAME = ORGANIZATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS__DOCUMENTATION = ORGANIZATION__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Child Elements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS__CHILD_ELEMENTS = ORGANIZATION__CHILD_ELEMENTS;
+
+	/**
+	 * The number of structural features of the '<em>Process</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_FEATURE_COUNT = ORGANIZATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link com.bluexml.side.requirements.impl.GoalStepImpl <em>Goal Step</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.requirements.impl.GoalStepImpl
+	 * @see com.bluexml.side.requirements.impl.RequirementsPackageImpl#getGoalStep()
+	 * @generated
+	 */
+	int GOAL_STEP = 12;
+
+	/**
+	 * The feature id for the '<em><b>Next Goals</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_STEP__NEXT_GOALS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Process</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_STEP__PROCESS = 1;
+
+	/**
+	 * The number of structural features of the '<em>Goal Step</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_STEP_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.requirements.AttributeType <em>Attribute Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -637,7 +729,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @see com.bluexml.side.requirements.impl.RequirementsPackageImpl#getAttributeType()
 	 * @generated
 	 */
-	int ATTRIBUTE_TYPE = 11;
+	int ATTRIBUTE_TYPE = 13;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.requirements.PriorityLevel <em>Priority Level</em>}' enum.
@@ -647,7 +739,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @see com.bluexml.side.requirements.impl.RequirementsPackageImpl#getPriorityLevel()
 	 * @generated
 	 */
-	int PRIORITY_LEVEL = 12;
+	int PRIORITY_LEVEL = 14;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.requirements.PrivilegeNature <em>Privilege Nature</em>}' enum.
@@ -657,7 +749,7 @@ public interface RequirementsPackage extends EPackage {
 	 * @see com.bluexml.side.requirements.impl.RequirementsPackageImpl#getPrivilegeNature()
 	 * @generated
 	 */
-	int PRIVILEGE_NATURE = 13;
+	int PRIVILEGE_NATURE = 15;
 
 
 	/**
@@ -939,6 +1031,17 @@ public interface RequirementsPackage extends EPackage {
 	EReference getGoal_PrivilegeGroup();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.requirements.Goal#getStep <em>Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Step</em>'.
+	 * @see com.bluexml.side.requirements.Goal#getStep()
+	 * @see #getGoal()
+	 * @generated
+	 */
+	EReference getGoal_Step();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.requirements.Privilege <em>Privilege</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1044,6 +1147,48 @@ public interface RequirementsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getPrivilegeGroup_Documentation();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.requirements.Process <em>Process</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Process</em>'.
+	 * @see com.bluexml.side.requirements.Process
+	 * @generated
+	 */
+	EClass getProcess();
+
+	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.requirements.GoalStep <em>Goal Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Goal Step</em>'.
+	 * @see com.bluexml.side.requirements.GoalStep
+	 * @generated
+	 */
+	EClass getGoalStep();
+
+	/**
+	 * Returns the meta object for the reference list '{@link com.bluexml.side.requirements.GoalStep#getNextGoals <em>Next Goals</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Next Goals</em>'.
+	 * @see com.bluexml.side.requirements.GoalStep#getNextGoals()
+	 * @see #getGoalStep()
+	 * @generated
+	 */
+	EReference getGoalStep_NextGoals();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.bluexml.side.requirements.GoalStep#getProcess <em>Process</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Process</em>'.
+	 * @see com.bluexml.side.requirements.GoalStep#getProcess()
+	 * @see #getGoalStep()
+	 * @generated
+	 */
+	EReference getGoalStep_Process();
 
 	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.requirements.AttributeType <em>Attribute Type</em>}'.
@@ -1322,6 +1467,14 @@ public interface RequirementsPackage extends EPackage {
 		EReference GOAL__PRIVILEGE_GROUP = eINSTANCE.getGoal_PrivilegeGroup();
 
 		/**
+		 * The meta object literal for the '<em><b>Step</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GOAL__STEP = eINSTANCE.getGoal_Step();
+
+		/**
 		 * The meta object literal for the '{@link com.bluexml.side.requirements.impl.PrivilegeImpl <em>Privilege</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1406,6 +1559,42 @@ public interface RequirementsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PRIVILEGE_GROUP__DOCUMENTATION = eINSTANCE.getPrivilegeGroup_Documentation();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.requirements.impl.ProcessImpl <em>Process</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.requirements.impl.ProcessImpl
+		 * @see com.bluexml.side.requirements.impl.RequirementsPackageImpl#getProcess()
+		 * @generated
+		 */
+		EClass PROCESS = eINSTANCE.getProcess();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.requirements.impl.GoalStepImpl <em>Goal Step</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.requirements.impl.GoalStepImpl
+		 * @see com.bluexml.side.requirements.impl.RequirementsPackageImpl#getGoalStep()
+		 * @generated
+		 */
+		EClass GOAL_STEP = eINSTANCE.getGoalStep();
+
+		/**
+		 * The meta object literal for the '<em><b>Next Goals</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GOAL_STEP__NEXT_GOALS = eINSTANCE.getGoalStep_NextGoals();
+
+		/**
+		 * The meta object literal for the '<em><b>Process</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GOAL_STEP__PROCESS = eINSTANCE.getGoalStep_Process();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.requirements.AttributeType <em>Attribute Type</em>}' enum.

@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import com.bluexml.side.requirements.Agent;
 import com.bluexml.side.requirements.Goal;
+import com.bluexml.side.requirements.GoalStep;
 import com.bluexml.side.requirements.PriorityLevel;
 import com.bluexml.side.requirements.PrivilegeGroup;
 import com.bluexml.side.requirements.RequirementsPackage;
@@ -35,6 +36,7 @@ import com.bluexml.side.requirements.RequirementsPackage;
  *   <li>{@link com.bluexml.side.requirements.impl.GoalImpl#getPriority <em>Priority</em>}</li>
  *   <li>{@link com.bluexml.side.requirements.impl.GoalImpl#getResponsible <em>Responsible</em>}</li>
  *   <li>{@link com.bluexml.side.requirements.impl.GoalImpl#getPrivilegeGroup <em>Privilege Group</em>}</li>
+ *   <li>{@link com.bluexml.side.requirements.impl.GoalImpl#getStep <em>Step</em>}</li>
  * </ul>
  * </p>
  *
@@ -90,6 +92,16 @@ public class GoalImpl extends BasicElementImpl implements Goal {
 	 * @ordered
 	 */
 	protected EList<PrivilegeGroup> privilegeGroup;
+
+	/**
+	 * The cached value of the '{@link #getStep() <em>Step</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStep()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<GoalStep> step;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -172,6 +184,18 @@ public class GoalImpl extends BasicElementImpl implements Goal {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<GoalStep> getStep() {
+		if (step == null) {
+			step = new EObjectContainmentEList<GoalStep>(GoalStep.class, this, RequirementsPackage.GOAL__STEP);
+		}
+		return step;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -196,6 +220,8 @@ public class GoalImpl extends BasicElementImpl implements Goal {
 				return ((InternalEList<?>)getResponsible()).basicRemove(otherEnd, msgs);
 			case RequirementsPackage.GOAL__PRIVILEGE_GROUP:
 				return ((InternalEList<?>)getPrivilegeGroup()).basicRemove(otherEnd, msgs);
+			case RequirementsPackage.GOAL__STEP:
+				return ((InternalEList<?>)getStep()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -216,6 +242,8 @@ public class GoalImpl extends BasicElementImpl implements Goal {
 				return getResponsible();
 			case RequirementsPackage.GOAL__PRIVILEGE_GROUP:
 				return getPrivilegeGroup();
+			case RequirementsPackage.GOAL__STEP:
+				return getStep();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -244,6 +272,10 @@ public class GoalImpl extends BasicElementImpl implements Goal {
 				getPrivilegeGroup().clear();
 				getPrivilegeGroup().addAll((Collection<? extends PrivilegeGroup>)newValue);
 				return;
+			case RequirementsPackage.GOAL__STEP:
+				getStep().clear();
+				getStep().addAll((Collection<? extends GoalStep>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -268,6 +300,9 @@ public class GoalImpl extends BasicElementImpl implements Goal {
 			case RequirementsPackage.GOAL__PRIVILEGE_GROUP:
 				getPrivilegeGroup().clear();
 				return;
+			case RequirementsPackage.GOAL__STEP:
+				getStep().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -288,6 +323,8 @@ public class GoalImpl extends BasicElementImpl implements Goal {
 				return responsible != null && !responsible.isEmpty();
 			case RequirementsPackage.GOAL__PRIVILEGE_GROUP:
 				return privilegeGroup != null && !privilegeGroup.isEmpty();
+			case RequirementsPackage.GOAL__STEP:
+				return step != null && !step.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

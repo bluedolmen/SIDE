@@ -16,6 +16,7 @@ import com.bluexml.side.requirements.Attribute;
 import com.bluexml.side.requirements.BasicElement;
 import com.bluexml.side.requirements.Entity;
 import com.bluexml.side.requirements.Goal;
+import com.bluexml.side.requirements.GoalStep;
 import com.bluexml.side.requirements.ModelElement;
 import com.bluexml.side.requirements.Organization;
 import com.bluexml.side.requirements.Privilege;
@@ -123,6 +124,14 @@ public class RequirementsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter casePrivilegeGroup(PrivilegeGroup object) {
 				return createPrivilegeGroupAdapter();
+			}
+			@Override
+			public Adapter caseProcess(com.bluexml.side.requirements.Process object) {
+				return createProcessAdapter();
+			}
+			@Override
+			public Adapter caseGoalStep(GoalStep object) {
+				return createGoalStepAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -295,6 +304,34 @@ public class RequirementsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPrivilegeGroupAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.requirements.Process <em>Process</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.requirements.Process
+	 * @generated
+	 */
+	public Adapter createProcessAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.requirements.GoalStep <em>Goal Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.requirements.GoalStep
+	 * @generated
+	 */
+	public Adapter createGoalStepAdapter() {
 		return null;
 	}
 

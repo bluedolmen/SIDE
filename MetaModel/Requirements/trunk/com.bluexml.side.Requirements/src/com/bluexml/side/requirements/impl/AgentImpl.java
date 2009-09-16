@@ -156,7 +156,7 @@ public class AgentImpl extends BasicElementImpl implements Agent {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case RequirementsPackage.AGENT__IS_HUMAN:
-				return isIsHuman() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsHuman();
 			case RequirementsPackage.AGENT__IS_RESPONSIBLE:
 				return getIsResponsible();
 		}
@@ -173,7 +173,7 @@ public class AgentImpl extends BasicElementImpl implements Agent {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case RequirementsPackage.AGENT__IS_HUMAN:
-				setIsHuman(((Boolean)newValue).booleanValue());
+				setIsHuman((Boolean)newValue);
 				return;
 			case RequirementsPackage.AGENT__IS_RESPONSIBLE:
 				getIsResponsible().clear();

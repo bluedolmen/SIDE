@@ -282,6 +282,52 @@ public class RequirementsItemProviderAdapterFactory extends RequirementsAdapterF
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.requirements.Process} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ProcessItemProvider processItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.requirements.Process}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createProcessAdapter() {
+		if (processItemProvider == null) {
+			processItemProvider = new ProcessItemProvider(this);
+		}
+
+		return processItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.requirements.GoalStep} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected GoalStepItemProvider goalStepItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.requirements.GoalStep}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createGoalStepAdapter() {
+		if (goalStepItemProvider == null) {
+			goalStepItemProvider = new GoalStepItemProvider(this);
+		}
+
+		return goalStepItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -331,7 +377,7 @@ public class RequirementsItemProviderAdapterFactory extends RequirementsAdapterF
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class) || (((Class<?>)type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
@@ -389,6 +435,8 @@ public class RequirementsItemProviderAdapterFactory extends RequirementsAdapterF
 		if (privilegeItemProvider != null) privilegeItemProvider.dispose();
 		if (requirementsDefinitionItemProvider != null) requirementsDefinitionItemProvider.dispose();
 		if (privilegeGroupItemProvider != null) privilegeGroupItemProvider.dispose();
+		if (processItemProvider != null) processItemProvider.dispose();
+		if (goalStepItemProvider != null) goalStepItemProvider.dispose();
 	}
 
 }

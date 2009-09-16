@@ -107,6 +107,24 @@ public interface RequirementsFactory extends EFactory {
 	PrivilegeGroup createPrivilegeGroup();
 
 	/**
+	 * Returns a new object of class '<em>Process</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Process</em>'.
+	 * @generated
+	 */
+	Process createProcess();
+
+	/**
+	 * Returns a new object of class '<em>Goal Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Goal Step</em>'.
+	 * @generated
+	 */
+	GoalStep createGoalStep();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
