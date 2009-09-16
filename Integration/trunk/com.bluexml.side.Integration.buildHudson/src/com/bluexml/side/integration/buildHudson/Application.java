@@ -39,12 +39,14 @@ public class Application {
 		String argument2 = "";
 		String argument3 = "";
 		String argument4 = "";
+		String argument5 = "";
 
 		try {
 			argument1 = args[0];
 			argument2 = args[1];
-			argument3 = args[3];
-			argument4 = args[4];
+			argument3 = args[2];
+			argument4 = args[3];
+			argument5 = args[4];
 		} catch (Exception e) {
 			parametre = false;
 		}
@@ -66,7 +68,7 @@ public class Application {
 
 			workspace = argument2;
 			build_number = argument3;
-			svn_revision = argument4;
+			svn_revision = argument5;
 
 		} else {
 
@@ -95,7 +97,7 @@ public class Application {
 		// Mise ï¿½ jour des numï¿½ros de version en fonction du fichier de log
 		System.out.println("\nMise ï¿½ jour des numï¿½ros de version (si besoin)...");
         
-		// si labs, on ne met pas à jour les versions des features et on ne commit pas
+		// si labs, on ne met pas ï¿½ jour les versions des features et on ne commit pas
 		if (EnterpriseRelease) {
 			Utils.traitementUpdate();
 			// Commit
