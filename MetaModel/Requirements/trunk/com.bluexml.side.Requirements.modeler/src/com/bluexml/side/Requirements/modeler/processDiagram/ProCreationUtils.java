@@ -6,6 +6,7 @@ package com.bluexml.side.Requirements.modeler.processDiagram;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.IEditorInput;
@@ -13,6 +14,8 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
+import org.topcased.modeler.di.model.DiagramInterchangeFactory;
+import org.topcased.modeler.di.model.EdgeObjectOffset;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.di.model.GraphNode;
@@ -221,12 +224,18 @@ public class ProCreationUtils extends AbstractCreationUtils {
 	 * @param element the model element
 	 * @param presentation the presentation of the graphical element
 	 * @return the complete GraphElement
-	 * @generated
+	 * @_generated
 	 */
 	protected GraphElement createGraphElementRelationShip(
 			com.bluexml.side.requirements.RelationShip element,
 			String presentation) {
 		GraphEdge graphEdge = createGraphEdge(element, presentation);
+		
+		EdgeObjectOffset middlenameEdgeObjectOffset = DiagramInterchangeFactory.eINSTANCE.createEdgeObjectOffset();
+        middlenameEdgeObjectOffset.setId(ProEdgeObjectConstants.MIDDLENAME_EDGE_OBJECT_ID);
+        middlenameEdgeObjectOffset.setOffset(new Dimension(0, 0));
+        graphEdge.getContained().add(middlenameEdgeObjectOffset);
+		
 		return graphEdge;
 	}
 

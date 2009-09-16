@@ -8,12 +8,18 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.topcased.modeler.ModelerEditPolicyConstants;
+import org.topcased.modeler.di.model.EdgeObject;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.edit.EMFGraphEdgeEditPart;
+import org.topcased.modeler.edit.policies.EdgeObjectOffsetEditPolicy;
+import org.topcased.modeler.figures.EdgeObjectOffsetEditableLabel;
+import org.topcased.modeler.figures.IEdgeObjectFigure;
 import org.topcased.modeler.utils.Utils;
 
+import com.bluexml.side.Requirements.modeler.processDiagram.ProEdgeObjectConstants;
 import com.bluexml.side.Requirements.modeler.processDiagram.figures.RelationShipFigure;
 import com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferenceConstants;
+import com.bluexml.side.requirements.RelationShip;
 
 /**
  * RelationShip controller
@@ -45,6 +51,8 @@ public class RelationShipEditPart extends EMFGraphEdgeEditPart {
 		installEditPolicy(
 				ModelerEditPolicyConstants.CHANGE_FOREGROUND_COLOR_EDITPOLICY,
 				null);
+		
+		installEditPolicy(ModelerEditPolicyConstants.EDGE_OBJECTS_OFFSET_EDITPOLICY, new EdgeObjectOffsetEditPolicy());
 	}
 
 	/**
@@ -95,5 +103,23 @@ public class RelationShipEditPart extends EMFGraphEdgeEditPart {
 			return Utils.getFont(new FontData(preferenceFont));
 		}
 		return null;
+	}
+	
+	@Override
+	public IEdgeObjectFigure getEdgeObjectFigure(EdgeObject edgeObject) {
+		if (ProEdgeObjectConstants.MIDDLENAME_EDGE_OBJECT_ID.equals(edgeObject.getId()))
+		{
+			return ((RelationShipFigure) getFigure()).getmiddleNameEdgeObjectFigure();
+		}
+		return null;
+	}
+	
+	protected void refreshEdgeObjects() {
+		super.refreshEdgeObjects();
+		
+		RelationShip relationship = (RelationShip) Utils.getElement(getGraphEdge());
+		RelationShipFigure fig = ((RelationShipFigure) getFigure());
+		EdgeObjectOffsetEditableLabel label = (EdgeObjectOffsetEditableLabel) fig.getmiddleNameEdgeObjectFigure();
+		label.setText(relationship.getName());
 	}
 }
