@@ -1,23 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Class.generator.report.feature" label="S-IDE Report Feature" version="1.0.13.v9102-20090911" provider-name="BLUEXML">
-  <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
-  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
-  <license url="http://www.example.com/license">[Enter License Description here.]</license>
-  <requires>
-    <import plugin="org.eclipse.ui" />
-    <import plugin="org.eclipse.core.runtime" />
-    <import plugin="com.bluexml.side.Util.deployer" version="1.0.8" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Util.generator" version="1.0.8" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Util.generator.acceleo" version="1.0.8" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Util.security" version="1.0.8" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Util.generator.alfresco" version="1.0.8" match="greaterOrEqual" />
-    <import plugin="org.eclipse.core.resources" version="3.4.1" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Application" />
-    <import plugin="com.bluexml.side.Class.generator.alfresco" version="1.0.8" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Common" version="1.0.11" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Class" version="1.0.13" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Class.modeler" version="1.0.13" match="greaterOrEqual" />
-  </requires>
-  <plugin id="com.bluexml.side.Class.generator.report" download-size="0" install-size="0" version="1.0.13.v9102-20090911" unpack="false" />
-</feature>
+<feature
+      id="com.bluexml.side.Class.generator.report.feature"
+      label="S-IDE Report Feature"
+      version="1.0.13.v9102-20090911"
+      provider-name="BLUEXML">
 
+   <description url="http://www.bluexml.com">
+      SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the generator of data models on Birt and Alfresco for content type reporting.
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="com.bluexml.side.Util.deployer" version="1.0.8" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.generator" version="1.0.8" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.generator.acceleo" version="1.0.8" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.security" version="1.0.8" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.generator.alfresco" version="1.0.8" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.resources" version="3.4.1" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Application"/>
+      <import plugin="com.bluexml.side.Class.generator.alfresco" version="1.0.8" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Common" version="1.0.11" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Class" version="1.0.13" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Class.modeler" version="1.0.13" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="com.bluexml.side.Class.generator.report"
+         download-size="0"
+         install-size="0"
+         version="1.0.13.v9102-20090911"
+         unpack="false"/>
+
+</feature>
