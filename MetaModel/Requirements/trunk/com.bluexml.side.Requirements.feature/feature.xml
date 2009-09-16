@@ -1,63 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature
-      id="com.bluexml.side.Requirements.feature"
-      label="S-IDE Requirements Feature"
-      version="1.0.25.v9285-20090916"
-      provider-name="BLUEXML">
-
-   <description url="http://www.bluexml.com">
-      SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the Eclipse-based graphical modeler of requirement models and includes transformation and interpretation of these models to various human-readable classical formats.
-   </description>
-
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
-   </copyright>
-
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
-   </license>
-
-   <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="com.bluexml.side.Requirements"/>
-      <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="com.bluexml.side.Requirements.edit"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="org.eclipse.emf.edit.ui"/>
-      <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.emf.ecore.edit"/>
-      <import plugin="org.topcased.modeler"/>
-   </requires>
-
-   <plugin
-         id="com.bluexml.side.Requirements"
-         download-size="0"
-         install-size="0"
-         version="1.0.14.v8336-20090817"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Requirements.edit"
-         download-size="0"
-         install-size="0"
-         version="1.0.14.v8336-20090817"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Requirements.editor"
-         download-size="0"
-         install-size="0"
-         version="1.0.14.v8336-20090817"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Requirements.modeler"
-         download-size="0"
-         install-size="0"
-         version="1.0.15.v8680-20090831"
-         unpack="false"/>
-
+<feature id="com.bluexml.side.Requirements.feature" label="S-IDE Requirements Feature" version="1.0.26.v9289-20090916" provider-name="BLUEXML">
+  <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the Eclipse-based graphical modeler of requirement models and includes transformation and interpretation of these models to various human-readable classical formats.</description>
+  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
+  <license url="http://www.example.com/license">[Enter License Description here.]</license>
+  <requires>
+    <import plugin="org.eclipse.core.runtime" />
+    <import plugin="org.eclipse.emf.ecore" />
+    <import plugin="org.eclipse.ui" />
+    <import plugin="com.bluexml.side.Requirements" />
+    <import plugin="org.eclipse.emf.edit" />
+    <import plugin="org.eclipse.core.resources" />
+    <import plugin="com.bluexml.side.Requirements.edit" />
+    <import plugin="org.eclipse.emf.ecore.xmi" />
+    <import plugin="org.eclipse.emf.edit.ui" />
+    <import plugin="org.eclipse.ui.ide" />
+    <import plugin="org.eclipse.emf.ecore.edit" />
+    <import plugin="org.topcased.modeler" />
+  </requires>
+  <plugin id="com.bluexml.side.Requirements" download-size="0" install-size="0" version="1.0.14.v8336-20090817" unpack="false" />
+  <plugin id="com.bluexml.side.Requirements.edit" download-size="0" install-size="0" version="1.0.14.v8336-20090817" unpack="false" />
+  <plugin id="com.bluexml.side.Requirements.editor" download-size="0" install-size="0" version="1.0.14.v8336-20090817" unpack="false" />
+  <plugin id="com.bluexml.side.Requirements.modeler" download-size="0" install-size="0" version="1.0.15.v8680-20090831" unpack="false" />
 </feature>
+
