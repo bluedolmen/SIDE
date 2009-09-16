@@ -1516,13 +1516,22 @@ public class ApplicationDialog extends Dialog {
 		}
 
 		public void handleEvent(Event event) {
+			
 			Point point = new Point(event.x, event.y);
+			//System.out.println("EnterInHandlerEvent for :"+event.widget);
 			documentationText.setText(builDocumentationText());
+			//System.out.println("HandlerEvent P0-1");
 			TreeItem item = tv.getTree().getItem(point);
-
+			//System.out.println("HandlerEvent P0-2");
+			if (item == null) {
+				// to avoid bug #1090
+				return;
+			}
 			TreeElement el = (TreeElement) item.getData();
+//			System.out.println("HandlerEvent P0-3");
 			// Check if el is active or not in the key if it is a component
 			boolean canCheck = true;
+//			System.out.println("HandlerEvent P1");
 			if (el instanceof ImplNode) {
 				canCheck = ApplicationUtil.checkElementValidity(el);
 				if (!canCheck) {
@@ -1530,28 +1539,43 @@ public class ApplicationDialog extends Dialog {
 				} else {
 					errorMsg.setText(""); //$NON-NLS-1$
 				}
+				System.out.println("HandlerEvent P2");
 			} else {
 				errorMsg.setText(""); //$NON-NLS-1$
 			}
+//			System.out.println("HandlerEvent P3");
 			// If click on image : check it, else : just show informations
 			if (canCheck && (item.getImageBounds(0) != null && event.x <= item.getImageBounds(0).x + item.getImageBounds(0).width)) {
+//				System.out.println("is check box !");
 				// Check if enabled
 				if (el.isEnabled()) {
+//					System.out.println("isEnabled !");
 					// Inverse
 					el.setChecked(!(el.isChecked()));
 					tv.update(el, null);
 
 					if (el.isChecked()) {
+//						System.out.println("is Checked !");
 						// Enable all sub elements
-						enableAllSubElements(item);
-						ConstraintsChecker.applyConstraints(tv, item, el);
+						int action = ConstraintsChecker.applyConstraints(tv, item, el);
+						if (action== SWT.YES) {
+							enableAllSubElements(item);
+						} else {
+							// uncheck to return to previous state
+							el.setChecked(false);
+							tv.update(el, null);
+						}
+						
+						
 					} else {
+//						System.out.println("is Not Checked !");
 						// Enable all sub elements
 						disableAllSubElements(item);
 					}
 				}
+				refreshOptions();
 			}
-			refreshOptions();
+//			System.out.println("End of HandlerEvent");	
 		}
 	}
 

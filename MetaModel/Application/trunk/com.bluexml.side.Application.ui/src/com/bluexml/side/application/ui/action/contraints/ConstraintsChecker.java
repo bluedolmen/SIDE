@@ -16,7 +16,7 @@ import com.bluexml.side.application.ui.action.tree.TreeNode;
 
 public class ConstraintsChecker {
 
-	public static void applyConstraints(TreeViewer tv, TreeItem item, TreeElement el) {
+	public static int applyConstraints(TreeViewer tv, TreeItem item, TreeElement el) {
 
 		if (el instanceof TreeNode) {
 
@@ -39,7 +39,9 @@ public class ConstraintsChecker {
 					tv.update(tn, null);
 				}
 			}
+			return apply;
 		}
+		return -1;
 	}
 
 	public static int buildConfirmationDialog(TreeViewer tv, TreeItem item, List<TreeItem> mustBeChecked, List<TreeItem> mustBeUnChecked) {
