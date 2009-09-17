@@ -52,4 +52,12 @@
          </menu>
       </objectContribution>
     </extension>
+     <extension
+           point="org.eclipse.ui.preferencePages">
+        <page
+              class="com.bluexml.side.application.ui.preferencePages.PreferencePageSide"
+              id="com.bluexml.side.Application.ui.PreferencePage"
+              name="S-IDE">
+        </page>
+     </extension>
 </plugin>
