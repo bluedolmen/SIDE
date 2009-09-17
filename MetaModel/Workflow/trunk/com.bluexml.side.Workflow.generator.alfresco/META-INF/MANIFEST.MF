@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Workflow Alfresco Generator Plug-in
+Bundle-Name: SIDE Alfresco Workflow Generator
 Bundle-SymbolicName: com.bluexml.side.Workflow.generator.alfresco;singleton:=true
 Bundle-Version: 1.0.25.v9102-20090911
 Bundle-Activator: com.bluexml.side.workflow.generator.alfresco.Activator
-Bundle-Vendor: www.bluexml.com
+Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,

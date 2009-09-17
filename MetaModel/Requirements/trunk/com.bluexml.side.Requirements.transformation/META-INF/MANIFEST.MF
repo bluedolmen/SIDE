@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Transformation Plug-in
+Bundle-Name: SIDE Requirements Transformation
 Bundle-SymbolicName: com.bluexml.side.Requirements.transformation;singleton:=true
 Bundle-Version: 1.0.16.v9271-20090916
 Bundle-Activator: com.bluexml.side.requirements.transformation.Activator
-Bundle-Vendor: www.bluexml.com
+Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.ui,

@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Interpretation
+Bundle-Name: SIDE Requirements Interpretation
 Bundle-SymbolicName: com.bluexml.side.Requirements.interpretation;singleton:=true
 Bundle-Version: 1.0.20.v8336-20090817
-Bundle-Vendor: www.bluexml.com
+Bundle-Vendor: BlueXML
 Require-Bundle: com.bluexml.side.Requirements.transformation
 Bundle-ClassPath: metamodel/
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
