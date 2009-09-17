@@ -22,6 +22,8 @@
 package <%=genPackage.getUtilitiesPackageName()%>;
 
 <%genModel.addImport("java.util.Map");%>
+<%genModel.addImport("java.util.List");%>
+<%genModel.addImport("java.util.Arrays");%>
 <%final String _Map = genModel.useGenerics() ? "Map<" + genModel.getImportedName("java.lang.Object") + ", " + genModel.getImportedName("java.lang.Object") + ">" : "Map";%>
 <%genModel.addImport("org.eclipse.emf.common.util.DiagnosticChain");%>
 <%genModel.addImport("org.eclipse.emf.ecore.EPackage");%>
