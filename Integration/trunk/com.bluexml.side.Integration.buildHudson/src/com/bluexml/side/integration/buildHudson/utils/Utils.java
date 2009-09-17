@@ -84,6 +84,29 @@ public class Utils {
 	}
 	
 	/**
+	 * Retourne la liste des projets
+	 */
+	public static List<String> getProjects(String properties) {
+
+		String[] projects = ouvrirFichier("build.properties").getProperty(
+				properties).split(",");
+		
+		List<String> l = new ArrayList<String>();
+
+		if(projects.length > 0){
+			for (int i = 0; i < projects.length; i++) {
+				String projectName = projects[i].split("&")[1];
+				projectName.trim().replaceAll("\n", "");
+				if (projectName.length() > 0) {
+					l.add(projectName);
+				}
+			}
+		}
+		
+		return l;
+	}
+	
+	/**
 	 * Retourne la liste des projets a versionner
 	 */
 	public static String[] getVersionedProjects() {
@@ -408,27 +431,30 @@ public class Utils {
 			new File(getBuildDirectory()).mkdir();
 
 			for (int i = 0; i < projects.size(); i++) {
+				
+				if (!Application.projectsExcluded.contains(projects.get(i))) {
 
-				path = Application.workspace + File.separator + "S-IDE"
-						+ File.separator + getProjectPath(projects.get(i))
-						+ File.separator + "trunk";
-
-				if (projects.get(i).indexOf("feature") == -1) {
-
-					FileHelper.copyFiles(new File(path + File.separator
-							+ projects.get(i)), new File(getBuildDirectory()
-							+ File.separator + "plugins" + File.separator
-							+ projects.get(i)), true);
-				}
-
-				else {
-
-					FileHelper.copyFiles(new File(path + File.separator
-							+ projects.get(i)), new File(getBuildDirectory()
-							+ File.separator + "features" + File.separator
-							+ projects.get(i)), true);
-					updateCopyrightLicence(projects.get(i),getBuildDirectory()
-							+ File.separator + "features");
+					path = Application.workspace + File.separator + "S-IDE"
+							+ File.separator + getProjectPath(projects.get(i))
+							+ File.separator + "trunk";
+	
+					if (projects.get(i).indexOf("feature") == -1) {
+	
+						FileHelper.copyFiles(new File(path + File.separator
+								+ projects.get(i)), new File(getBuildDirectory()
+								+ File.separator + "plugins" + File.separator
+								+ projects.get(i)), true);
+					}
+	
+					else {
+	
+						FileHelper.copyFiles(new File(path + File.separator
+								+ projects.get(i)), new File(getBuildDirectory()
+								+ File.separator + "features" + File.separator
+								+ projects.get(i)), true);
+						updateCopyrightLicence(projects.get(i),getBuildDirectory()
+								+ File.separator + "features");
+					}
 				}
 
 			}
@@ -1098,10 +1124,14 @@ public class Utils {
 		ArrayList<String> listeFeature = new ArrayList<String>();
 
 		// on met tous les features dans le tableau
+		
 		for (int i = 0; i < projects.size(); i++) {
 
-			if (projects.get(i).indexOf("feature") != -1)
-				listeFeature.add(projects.get(i));
+			if (projects.get(i).indexOf("feature") != -1) {
+				if (!Application.projectsExcluded.contains(projects.get(i))) {
+					listeFeature.add(projects.get(i));
+				}
+			}
 		}
 
 		org.jdom.Document document = null;
