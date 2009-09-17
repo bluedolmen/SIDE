@@ -17,7 +17,8 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.View;bundle-version="1.0.6",
  com.bluexml.side.Requirements;bundle-version="1.0.14",
  com.bluexml.side.Workflow;bundle-version="1.0.21",
- com.bluexml.side.Portal;bundle-version="1.0.13"
+ com.bluexml.side.Portal;bundle-version="1.0.13",
+ org.topcased.modeler;bundle-version="2.4.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.ui.actions,
