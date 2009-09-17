@@ -10,7 +10,6 @@ import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.ToolbarLayout;
 import org.topcased.draw2d.figures.EditableLabel;
-import org.topcased.draw2d.figures.ILabel;
 
 import com.bluexml.side.Requirements.modeler.goalDiagram.figures.ColorScaler.GreyScale;
 
