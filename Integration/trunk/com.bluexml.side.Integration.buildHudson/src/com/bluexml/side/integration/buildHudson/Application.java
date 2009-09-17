@@ -106,13 +106,14 @@ public class Application {
 		System.out.println("\nMise � jour des num�ros de version (si besoin)...");
         
 		// si labs, on ne met pas � jour les versions des features et on ne commit pas
+/*
 		if (EnterpriseRelease) {
 			Utils.traitementUpdate();
 			// Commit
 			System.out.println("\nCommit des modifications sur le r�pository...");
 			execBuild("buildSVN", "svnCommit");
 		}
-
+*/
 		// cr�ation du build.xml
 		System.out.println("\n\n- Cr�ation de " + Utils.getBuildPath()
 				+ File.separator + "build.xml");

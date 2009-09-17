@@ -1365,8 +1365,7 @@ public class Utils {
 					+ "doc"));
 
 			// suppression des fichiers cr��s
-			FileHelper.deleteFile(new File(Utils.getBuildPath()
-					+ File.separator + "buildSVN.xml"));
+			//FileHelper.deleteFile(new File(Utils.getBuildPath()+ File.separator + "buildSVN.xml"));
 			FileHelper.deleteFile(new File(Utils.getBuildPath()
 					+ File.separator + "build.xml"));
 			FileHelper.deleteFile(new File(Utils.getBuildPath()
