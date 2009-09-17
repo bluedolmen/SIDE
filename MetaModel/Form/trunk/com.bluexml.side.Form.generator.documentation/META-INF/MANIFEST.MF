@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: SIDE Model Documentation Generator
+Bundle-Name: SIDE Form Model Documentation Generator
 Bundle-SymbolicName: com.bluexml.side.Form.generator.documentation;singleton:=true
 Bundle-Version: 1.0.5.v9157-20090911
 Bundle-Activator: com.bluexml.side.form.generator.documentation.Activator
