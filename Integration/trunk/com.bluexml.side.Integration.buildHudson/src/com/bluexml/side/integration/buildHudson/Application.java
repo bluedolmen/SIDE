@@ -20,6 +20,7 @@ public class Application {
 	public static String workspace = "";
 	public static String build_number = "";
 	public static String svn_revision = "";
+	public static List<String> projectsExcluded;
 
 	// si au moins un param�tre n'est pas renseign�, alors on suppose que le
 	// build est lanc� sans hudson
@@ -77,6 +78,13 @@ public class Application {
 		System.out.println("****************************************");
 		System.out.println("**** Lancement du Build Automatique ****");
 		System.out.println("****************************************");
+		
+		
+		if (Application.EnterpriseRelease){
+			projectsExcluded = Utils.getProjects("projectEnterpriseExcluded");
+		}else{
+			projectsExcluded = Utils.getProjects("projectLabsExcluded");
+		}
 
 		System.out.println("\nLanc� le " + Utils.getDate2() + " � "
 				+ Utils.getTime());
@@ -122,9 +130,11 @@ public class Application {
 
 		// Execution du build.xml
 		System.out.println("\nR�alisation du Build sur ...");
-
+		
 		for (String projet : Utils.getProjects()) {
-			System.out.println("\t-" + projet);
+			if (!projectsExcluded.contains(projet)){
+				System.out.println("\t-" + projet);
+			}
 		}
 
 		execBuild("build", "build");
@@ -346,9 +356,14 @@ public class Application {
 		out += "\t<vm></vm>\n";
 
 		out += "\t<plugins>\n";
+		
+		
+		
 		for (int i = 0; i < projects.length; i++) {
 			if (projects[i].indexOf("feature") == -1) {
-				out += "\t\t<plugin id=\"" + projects[i] + "\"/>\n";
+				if (!projectsExcluded.contains(projects[i])){
+					out += "\t\t<plugin id=\"" + projects[i] + "\"/>\n";
+				}
 			}
 		}
 		out += "\t</plugins>\n";
@@ -356,8 +371,10 @@ public class Application {
 		out += "\t<features>\n";
 		for (int i = 0; i < projects.length; i++) {
 			if (projects[i].indexOf("feature") != -1) {
-				out += "\t\t<feature id=\"" + projects[i] + "\" version=\""
+				if (!projectsExcluded.contains(projects[i])){
+					out += "\t\t<feature id=\"" + projects[i] + "\" version=\""
 						+ Utils.getVersionNumber(projects[i]) + "\"/>\n";
+				}
 			}
 		}
 		out += "\t</features>\n";
@@ -683,15 +700,17 @@ public class Application {
 
 		File[] list = pluginRep.listFiles();
 		for (File file : list) {
-			if (file.isDirectory()) {
-
-				out += "\t\t<jar destfile=\"" + file.getAbsolutePath()
-						+ ".jar\" basedir=\"" + file.getAbsolutePath()
-						+ "\" manifest=\"" + file.getAbsolutePath()
-						+ File.separator + "META-INF" + File.separator
-						+ "MANIFEST.MF\"/>\n";
-
-				out += "\t\t<delete dir=\"" + file.getAbsolutePath() + "\" />";
+			if (!projectsExcluded.contains(file.getName())){
+				if (file.isDirectory()) {
+					
+					out += "\t\t<jar destfile=\"" + file.getAbsolutePath()
+							+ ".jar\" basedir=\"" + file.getAbsolutePath()
+							+ "\" manifest=\"" + file.getAbsolutePath()
+							+ File.separator + "META-INF" + File.separator
+							+ "MANIFEST.MF\"/>\n";
+	
+					out += "\t\t<delete dir=\"" + file.getAbsolutePath() + "\" />";
+				}
 			}
 		}
 
