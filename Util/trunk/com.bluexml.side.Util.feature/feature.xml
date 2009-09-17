@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Util.feature" label="S-IDE Utils" version="1.0.81.v9271-20090916" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Util.feature" label="S-IDE Utils" version="1.0.82.v9301-20090917" provider-name="BLUEXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature gathers common tools used by the SIDE modeler, generators and deployers.</description>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
   <requires>
@@ -26,7 +26,7 @@
   </requires>
   <plugin id="com.bluexml.side.Util.deployer" download-size="0" install-size="0" version="1.0.22.v9102-20090911" unpack="false" />
   <plugin id="com.bluexml.side.Util.deployer.war" download-size="0" install-size="0" version="1.0.7.v9102-20090911" unpack="false" />
-  <plugin id="com.bluexml.side.Util.ecore" download-size="0" install-size="0" version="1.0.14.v8944-20090908" unpack="false" />
+  <plugin id="com.bluexml.side.Util.ecore" download-size="0" install-size="0" version="1.0.15.v9301-20090917" unpack="false" />
   <plugin id="com.bluexml.side.Util.generator" download-size="0" install-size="0" version="1.0.33.v9102-20090911" unpack="false" />
   <plugin id="com.bluexml.side.Util.generator.acceleo" download-size="0" install-size="0" version="1.0.24.v9102-20090911" unpack="false" />
   <plugin id="com.bluexml.side.Util.generator.alfresco" download-size="0" install-size="0" version="1.0.19.v9102-20090911" unpack="false" />
