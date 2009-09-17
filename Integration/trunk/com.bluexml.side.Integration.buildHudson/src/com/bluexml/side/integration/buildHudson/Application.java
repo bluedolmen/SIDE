@@ -628,11 +628,13 @@ public class Application {
 
 		for (int i = 0; i < projects.length; i++) {
 			// si le mot 'feature' n'est pas pr�sent dans le nom du projet
-			if (projects[i].indexOf("feature") == -1) {
-				out += "\t\t\t<fileset dir=\""
-						+ Utils.getPathToLocalCopy(projects[i]) + "\">\n";
-				out += "\t\t\t\t<include name=\"**/*.java\" />\n";
-				out += "\t\t\t</fileset>\n";
+			if (!projectsExcluded.contains(projects[i])){
+				if (projects[i].indexOf("feature") == -1) {
+					out += "\t\t\t<fileset dir=\""
+							+ Utils.getPathToLocalCopy(projects[i]) + "\">\n";
+					out += "\t\t\t\t<include name=\"**/*.java\" />\n";
+					out += "\t\t\t</fileset>\n";
+				}
 			}
 		}
 		out += "\t\t</javadoc>\n";
