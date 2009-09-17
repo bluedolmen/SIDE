@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
+import com.bluexml.side.Requirements.modeler.RequirementsPlugin;
 import com.bluexml.side.requirements.RelationShip;
 
 public class RelationShipDialog extends BasicElementDialog {
@@ -22,10 +23,10 @@ public class RelationShipDialog extends BasicElementDialog {
 	private Button targetMin; 
 	private Button targetMax;
 	
-	public static final String RELATIONSHIP_SOURCE_MIN = "relationship source min";
-	public static final String RELATIONSHIP_SOURCE_MAX = "relationship source max";
-	public static final String RELATIONSHIP_TARGET_MIN = "relationship target min";
-	public static final String RELATIONSHIP_TARGET_MAX = "relationship target max";
+	public static final String RELATIONSHIP_SOURCE_MIN = "relationship source min"; //$NON-NLS-1$
+	public static final String RELATIONSHIP_SOURCE_MAX = "relationship source max"; //$NON-NLS-1$
+	public static final String RELATIONSHIP_TARGET_MIN = "relationship target min"; //$NON-NLS-1$
+	public static final String RELATIONSHIP_TARGET_MAX = "relationship target max"; //$NON-NLS-1$
 	
 	public RelationShipDialog(Shell parent, RelationShip element) {
 		super(parent, element);
@@ -39,7 +40,7 @@ public class RelationShipDialog extends BasicElementDialog {
 
 		// Create tab item and add it composite that fills it
 		TabItem item = new TabItem((TabFolder) parent, SWT.NONE);
-		item.setText("Options");
+		item.setText("Options"); //$NON-NLS-1$
 		Composite composite = new Composite(parent, SWT.NONE);
 		item.setControl(composite);
 
@@ -47,19 +48,19 @@ public class RelationShipDialog extends BasicElementDialog {
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		Label lbl = new Label(composite, SWT.WRAP);
-		lbl.setText("Is is possible to link many "+r.getTarget().getName()+" to a "+r.getSource().getName()+" ?");
+		lbl.setText(RequirementsPlugin.Messages.getString("RelationShipDialog_5")+r.getTarget().getName()+RequirementsPlugin.Messages.getString("RelationShipDialog_6")+r.getSource().getName()+" ?"); //$NON-NLS-3$
 		targetMax = createRadioButton(composite);
 		
 		lbl = new Label(composite, SWT.WRAP);
-		lbl.setText("Is is possible to link none "+r.getTarget().getName()+" to a "+r.getSource().getName()+" ?");
+		lbl.setText(RequirementsPlugin.Messages.getString("RelationShipDialog_7")+r.getTarget().getName()+RequirementsPlugin.Messages.getString("RelationShipDialog_6")+r.getSource().getName()+" ?"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		targetMin = createRadioButton(composite);
 
 		lbl = new Label(composite, SWT.WRAP);
-		lbl.setText("Is is possible to link many "+r.getSource().getName()+" to a "+r.getTarget().getName()+" ?");
+		lbl.setText(RequirementsPlugin.Messages.getString("RelationShipDialog_5")+r.getSource().getName()+RequirementsPlugin.Messages.getString("RelationShipDialog_6")+r.getTarget().getName()+" ?"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		sourceMax = createRadioButton(composite);
 		
 		lbl = new Label(composite, SWT.WRAP);
-		lbl.setText("Is is possible to link none "+r.getSource().getName()+" to a "+r.getTarget().getName()+" ?");
+		lbl.setText(RequirementsPlugin.Messages.getString("RelationShipDialog_7")+r.getSource().getName()+RequirementsPlugin.Messages.getString("RelationShipDialog_6")+r.getTarget().getName()+" ?"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		sourceMin = createRadioButton(composite);
 	}
 	
@@ -68,9 +69,9 @@ public class RelationShipDialog extends BasicElementDialog {
 	    composite.setLayout(new RowLayout());
 	    
 	    Button yes = new Button(composite, SWT.RADIO);
-	    yes.setText("Yes");
+	    yes.setText(RequirementsPlugin.Messages.getString("RelationShipDialog_17"));
 	    Button no = new Button(composite, SWT.RADIO);
-	    no.setText("No");
+	    no.setText(RequirementsPlugin.Messages.getString("RelationShipDialog_18"));
 	    
 	    return yes;
 	}
