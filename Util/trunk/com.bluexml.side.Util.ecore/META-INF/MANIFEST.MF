@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Util Ecore Plug-in
+Bundle-Name: SIDE Ecore Utilities
 Bundle-SymbolicName: com.bluexml.side.Util.ecore
 Bundle-Version: 1.0.15.v9301-20090917
 Bundle-Activator: com.bluexml.side.Util.ecore.Activator
-Bundle-Vendor: www.bluexml.com
+Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf,
  org.eclipse.emf.ecore,

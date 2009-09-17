@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: S-IDE Security Plug-in
+Bundle-Name: SIDE Security Utilities
 Bundle-Version: 1.0.18.v8944-20090908
 Bundle-Activator: com.bluexml.side.util.security.Activator
-Bundle-Vendor: www.bluexml.com
+Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  com.bluexml.side.Util.libs;bundle-version="1.0.13",
