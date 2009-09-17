@@ -1,0 +1,37 @@
+<project name="com.bluexml.side.Integration.alfresco.shareTest" default="package">	
+	<property name="extensionFolder" value="${baseDir}/target" />
+	<property name="tmpFolder" value="${extensionFolder}/${module.id}-${module.version}" />
+	<property name="resources" value="${baseDir}/src/main/resources" />
+
+	<property name="classesFolder" value="${extensionFolder}/classes" />
+	<property name="module.jar" value="${extensionFolder}/${module.id}-${module.version}-classes.jar" />
+	<property name="module.zip" value="${extensionFolder}/${module.id}-${module.version}.zip" />
+
+
+
+	<!-- ================================= 
+          target: buildExtension              
+         ================================= -->
+	<target name="package" depends="" description="build extension archive for alfresco share">
+		<echo message="module id :${module.id}" />
+		<echo message="module version :${module.version}" />
+		<mkdir dir="${classesFolder}" />
+		<!-- TODO: Insert your custom code -->
+
+		<jar destfile="${module.jar}">
+			<fileset dir="${classesFolder}" id="id">
+				<include name="**/*.*" />
+			</fileset>
+		</jar>
+		<copy todir="${tmpFolder}">
+			<fileset dir="${resources}" id="id" />
+		</copy>
+		<zip destfile="${module.zip}" >
+			<zipfileset dir="${tmpFolder}" id="id">
+				<include name="**/*.*" />
+			</zipfileset>
+			<zipfileset file="${module.jar}" prefix="WEB-INF/lib" />
+		</zip>
+	</target>
+
+</project>
