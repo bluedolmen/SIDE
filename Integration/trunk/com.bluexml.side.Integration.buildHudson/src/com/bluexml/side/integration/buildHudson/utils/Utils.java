@@ -1275,10 +1275,12 @@ public class Utils {
 							+ "compilelogs"), true);
 
 			// copie des fichiers de log (pour tout le traitement)
+			if (Application.EnterpriseRelease) {
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "logbuildSVNsvnCommit.txt"), new File(getFinalDirectory()
 					+ File.separator + "logs" + File.separator + getCodeName()
 					+ File.separator + "logCommit.txt"), true);
+			}
 
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "logbuildbuild.txt"), new File(getFinalDirectory()
@@ -1343,12 +1345,15 @@ public class Utils {
 					+ File.separator + "jarBuilder.xml"));
 
 			// suppression des fichiers de logs
-			FileHelper.deleteFile(new File(getBuildPath() + File.separator
+			if (Application.EnterpriseRelease){
+				FileHelper.deleteFile(new File(getBuildPath() + File.separator
 					+ "logbuildSVNbuild.txt"));
+				FileHelper.deleteFile(new File(getBuildPath() + File.separator
+					+ "logbuildSVNsvnCommit.txt"));
+			}
 			FileHelper.deleteFile(new File(getBuildPath() + File.separator
 					+ "logbuildbuild.txt"));
-			FileHelper.deleteFile(new File(getBuildPath() + File.separator
-					+ "logbuildSVNsvnCommit.txt"));
+			
 			FileHelper.deleteFile(new File(getBuildPath() + File.separator
 					+ "logjarBuilderjarBuilder.txt"));
 
