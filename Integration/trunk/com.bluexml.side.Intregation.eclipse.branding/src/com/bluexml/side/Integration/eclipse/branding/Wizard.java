@@ -16,10 +16,12 @@ import org.eclipse.core.resources.IResourceStatus;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
@@ -71,6 +73,7 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 	protected WizardModelOptionsPage optionsPage;
 	protected IProject newProject;
 	protected List<IFile> createdModels = new ArrayList<IFile>();
+	private IConfigurationElement[] contributions;
 
 	public Wizard() {
 		super();
@@ -143,38 +146,58 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 		return folder.getFile(DEFAULT_MODEL_NAME + extension);
 	}
 
+	protected String getExtensionForExtensionId(String id) {
+		String result = ".";
+		if (contributions == null || contributions.length == 0) {
+			contributions = Platform.getExtensionRegistry().getConfigurationElementsFor("org.eclipse.ui.editors");
+		}
+		if (contributions.length > 0) {
+			for (IConfigurationElement elem : contributions) {
+				if (elem.getAttribute("id").equals(id)) {
+					result += elem.getAttribute("extensions");
+				}
+			}
+		}
+		return result;
+	}
+
 	private void createInitialFormModel() throws CoreException, IOException {
-		IFile file = createFileForModel(".form");
+		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.form.presentation.formEditorID"));
 		ClassFormCollection formCollection = FormFactory.eINSTANCE.createClassFormCollection();
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)formCollection);
+		createdModels.add(file);
 	}
 
 	private void createInitialViewModel() throws CoreException, IOException {
-		IFile file = createFileForModel(".view");
+		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.view.presentation.ViewEditorID"));
 		ViewCollection viewCollection = ViewFactory.eINSTANCE.createViewCollection();
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)viewCollection);
+		createdModels.add(file);
 	}
 
 	private void createInitialWorkflowModel() throws CoreException, IOException {
-		IFile file = createFileForModel(".workflow");
+		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.workflow.presentation.WorkflowEditorID"));
 		com.bluexml.side.workflow.Process process = WorkflowFactory.eINSTANCE.createProcess();
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)process);
+		createdModels.add(file);
 	}
 
 	private void createInitialRequirementModel() throws CoreException, IOException {
-		IFile file = createFileForModel(".requirements");
+		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.requirements.presentation.RequirementsEditorID"));
 		RequirementsDefinition definition = RequirementsFactory.eINSTANCE.createRequirementsDefinition();
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)definition);
+		createdModels.add(file);
 	}
 
 	private void createInitialPortalModel() throws CoreException, IOException {
-		IFile file = createFileForModel(".requirements");
+		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.portal.presentation.PortalEditorID"));
 		Portal portal = PortalFactory.eINSTANCE.createPortal();
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)portal);
+		createdModels.add(file);
 	}
 
 	private void createInitialDataModel() throws IOException, CoreException {
-		IFile file = createFileForModel(".dt");
+		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.clazz.presentation.ClazzEditorID"));
 		createdModels.add(file);
 		ClassPackage packageRoot = ClazzFactory.eINSTANCE.createClassPackage();
 
@@ -207,12 +230,12 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 		// Add initial parameters
 		ConfigurationParameters logPathParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
 		logPathParam.setKey(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral());
-		logPathParam.setValue("/" +newProject.getName() + "/" + DEFAULT_LOG_DIR);
+		logPathParam.setValue("/" + newProject.getName() + "/" + DEFAULT_LOG_DIR);
 		conf.getParameters().add(logPathParam);
 
 		ConfigurationParameters genPathParam = ApplicationFactory.eINSTANCE.createConfigurationParameters();
 		genPathParam.setKey(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral());
-		genPathParam.setValue("/" +newProject.getName() + "/" + DEFAULT_GEN_DIR);
+		genPathParam.setValue("/" + newProject.getName() + "/" + DEFAULT_GEN_DIR);
 		conf.getParameters().add(genPathParam);
 
 		app.getElements().add(conf);
@@ -220,7 +243,7 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 		for (IFile f : createdModels) {
 			Model model = ApplicationFactory.eINSTANCE.createModel();
 			model.setName(f.getName());
-			model.setFile("/" +newProject.getName() + "/" + DEFAULT_MODELS_DIR + "/" + f.getName());
+			model.setFile("/" + newProject.getName() + "/" + DEFAULT_MODELS_DIR + "/" + f.getName());
 			app.getElements().add(model);
 		}
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)app);

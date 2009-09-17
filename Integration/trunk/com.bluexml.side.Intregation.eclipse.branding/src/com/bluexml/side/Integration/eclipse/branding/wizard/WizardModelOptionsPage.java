@@ -1,5 +1,8 @@
 package com.bluexml.side.Integration.eclipse.branding.wizard;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -21,6 +24,7 @@ import com.bluexml.side.Integration.eclipse.branding.Activator;
 public class WizardModelOptionsPage extends WizardPage {
 
 	boolean createDataModel, createFormModel, createWorkflowModel, createPortalModel, createViewModel, createRequirementModel;
+
 	public String getStringPath() {
 		return stringPath;
 	}
@@ -133,6 +137,20 @@ public class WizardModelOptionsPage extends WizardPage {
 		 		stringPath = pathText.getText();
 		 	}
 		 });
+
+		 pathText.addModifyListener(new ModifyListener() {
+				public void modifyText(ModifyEvent e) {
+					String path = pathText.getText();
+					Pattern p = Pattern.compile("((\\w+/)*\\w+)?");
+					Matcher m = p.matcher(path);
+					boolean matchFound = m.matches();
+					if (!matchFound) {
+						setErrorMessage(Activator.Messages.getString("WizardModelOptionsPage.9")); //$NON-NLS-1$
+					} else {
+						setErrorMessage(null);
+					}
+				}
+			});
 		 pathText.setTextLimit(300);
 		 //TODO : add validator
 
