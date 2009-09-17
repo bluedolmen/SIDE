@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Maven Plug-in
+Bundle-Name: SIDE XForms Maven Repository
 Bundle-SymbolicName: com.bluexml.side.Form.generator.xforms.maven;singleton:=true
 Bundle-Version: 1.0.18.v8336-20090817
-Bundle-Vendor: www.bluexml.com
+Bundle-Vendor: BlueXML
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.codehaus.plexus.component.factory,org.apache.maven
  .project.workspace,org.codehaus.plexus.component.discovery,org.codeha
