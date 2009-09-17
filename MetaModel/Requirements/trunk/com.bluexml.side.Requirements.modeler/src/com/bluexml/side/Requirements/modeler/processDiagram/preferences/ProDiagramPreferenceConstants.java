@@ -189,4 +189,22 @@ public interface ProDiagramPreferenceConstants {
 	 */
 	String GOALSTEP_EDGE_DEFAULT_ROUTER = "GoalStep Edge Default Router";
 
+	/**
+	 * The key used to install a <i>is_parent Edge Default Font</i> Preference.
+	 * @generated
+	 */
+	String IS_PARENT_EDGE_DEFAULT_FONT = "is_parent Edge Default Font";
+
+	/**
+	 * The key used to install a <i>is_parent Edge Default Foreground Color</i> Preference.
+	 * @generated
+	 */
+	String IS_PARENT_EDGE_DEFAULT_FOREGROUND_COLOR = "is_parent Edge Default Foreground Color";
+
+	/**
+	 * The key used to install a <i>is_parent Edge Default Router</i> Preference.
+	 * @generated
+	 */
+	String IS_PARENT_EDGE_DEFAULT_ROUTER = "is_parent Edge Default Router";
+
 }

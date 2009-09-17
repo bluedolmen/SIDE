@@ -15,6 +15,7 @@ import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.editor.ICreationUtils;
 import org.topcased.modeler.utils.Utils;
 
+import com.bluexml.side.Requirements.modeler.processDiagram.ProSimpleObjectConstants;
 import com.bluexml.side.requirements.Entity;
 import com.bluexml.side.requirements.Goal;
 import com.bluexml.side.requirements.PrivilegeGroup;
@@ -71,6 +72,19 @@ public class EntityRestoreConnectionCommand extends
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
 						createPrivilegeGroupFromGoalToEntity_EntryPoint(
 								graphElementTgt, graphElementSrc);
+					}
+				}
+
+				if (eObjectTgt instanceof Entity) {
+					if (autoRef) {
+						// autoRef not allowed
+					} else {
+						// if the graphElementSrc is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
+						createis_parentFromEntityToEntity(graphElementSrc,
+								graphElementTgt);
+						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
+						createis_parentFromEntityToEntity(graphElementTgt,
+								graphElementSrc);
 					}
 				}
 
@@ -154,6 +168,30 @@ public class EntityRestoreConnectionCommand extends
 						}
 					}
 				}
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
+	private void createis_parentFromEntityToEntity(GraphElement srcElt,
+			GraphElement targetElt) {
+		Entity sourceObject = (Entity) Utils.getElement(srcElt);
+		Entity targetObject = (Entity) Utils.getElement(targetElt);
+
+		if (targetObject.equals(sourceObject.getParent())) {
+			// check if the relation does not exists yet
+			if (getExistingEdges(srcElt, targetElt,
+					ProSimpleObjectConstants.SIMPLE_OBJECT_IS_PARENT).size() == 0) {
+				GraphEdge edge = Utils
+						.createGraphEdge(ProSimpleObjectConstants.SIMPLE_OBJECT_IS_PARENT);
+				is_parentEdgeCreationCommand cmd = new is_parentEdgeCreationCommand(
+						null, edge, srcElt, false);
+				cmd.setTarget(targetElt);
+				add(cmd);
 			}
 		}
 	}

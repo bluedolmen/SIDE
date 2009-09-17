@@ -4,31 +4,26 @@
 package com.bluexml.side.Requirements.modeler.processDiagram.edit;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.gef.Request;
-import org.eclipse.gef.RequestConstants;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.window.Window;
+import org.eclipse.draw2d.PolygonDecoration;
+import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
+import org.topcased.modeler.ModelerColorConstants;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.GraphEdge;
-import org.topcased.modeler.edit.EMFGraphEdgeEditPart;
-import org.topcased.modeler.internal.ModelerPlugin;
+import org.topcased.modeler.edit.GraphEdgeEditPart;
 import org.topcased.modeler.utils.Utils;
 
-import com.bluexml.side.Requirements.modeler.dialogs.PrivilegeDialog;
-import com.bluexml.side.Requirements.modeler.goalDiagram.commands.update.PrivilegeNullUpdateCommand;
-import com.bluexml.side.Requirements.modeler.processDiagram.figures.PrivilegeGroupFigure;
+import com.bluexml.side.Requirements.modeler.processDiagram.figures.is_parentFigure;
 import com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferenceConstants;
-import com.bluexml.side.requirements.PrivilegeGroup;
 
 /**
- * PrivilegeGroup controller
+ * is_parent controller
  *
  * @generated
  */
-public class PrivilegeGroupEditPart extends EMFGraphEdgeEditPart {
+public class is_parentEditPart extends GraphEdgeEditPart {
 
 	/**
 	 * Constructor
@@ -36,7 +31,7 @@ public class PrivilegeGroupEditPart extends EMFGraphEdgeEditPart {
 	 * @param model the graph object
 	 * @generated
 	 */
-	public PrivilegeGroupEditPart(GraphEdge model) {
+	public is_parentEditPart(GraphEdge model) {
 		super(model);
 	}
 
@@ -57,9 +52,24 @@ public class PrivilegeGroupEditPart extends EMFGraphEdgeEditPart {
 	 * @generated
 	 */
 	protected IFigure createFigure() {
-		PrivilegeGroupFigure connection = new PrivilegeGroupFigure();
+		is_parentFigure connection = new is_parentFigure();
+
+		createTargetDecoration(connection);
 
 		return connection;
+	}
+
+	/**
+	 * @param connection the PolylineConnection
+	 * @generated
+	 */
+	private void createTargetDecoration(PolylineConnection connection) {
+
+		PolygonDecoration decoration = new PolygonDecoration();
+		decoration.setScale(14, 6);
+		decoration.setBackgroundColor(ModelerColorConstants.white);
+		connection.setTargetDecoration(decoration);
+
 	}
 
 	/**
@@ -68,9 +78,8 @@ public class PrivilegeGroupEditPart extends EMFGraphEdgeEditPart {
 	 * @generated
 	 */
 	protected String getPreferenceDefaultRouter() {
-		return getPreferenceStore()
-				.getString(
-						ProDiagramPreferenceConstants.PRIVILEGEGROUP_EDGE_DEFAULT_ROUTER);
+		return getPreferenceStore().getString(
+				ProDiagramPreferenceConstants.IS_PARENT_EDGE_DEFAULT_ROUTER);
 	}
 
 	/**
@@ -81,7 +90,7 @@ public class PrivilegeGroupEditPart extends EMFGraphEdgeEditPart {
 	protected Color getPreferenceDefaultForegroundColor() {
 		String preferenceForeground = getPreferenceStore()
 				.getString(
-						ProDiagramPreferenceConstants.PRIVILEGEGROUP_EDGE_DEFAULT_FOREGROUND_COLOR);
+						ProDiagramPreferenceConstants.IS_PARENT_EDGE_DEFAULT_FOREGROUND_COLOR);
 		if (preferenceForeground.length() != 0) {
 			return Utils.getColor(preferenceForeground);
 		}
@@ -96,32 +105,10 @@ public class PrivilegeGroupEditPart extends EMFGraphEdgeEditPart {
 	 */
 	protected Font getPreferenceDefaultFont() {
 		String preferenceFont = getPreferenceStore().getString(
-				ProDiagramPreferenceConstants.PRIVILEGEGROUP_EDGE_DEFAULT_FONT);
+				ProDiagramPreferenceConstants.IS_PARENT_EDGE_DEFAULT_FONT);
 		if (preferenceFont.length() != 0) {
 			return Utils.getFont(new FontData(preferenceFont));
 		}
 		return null;
-	}
-
-	@Override
-	public void performRequest(Request request) {
-		PrivilegeGroup g = (PrivilegeGroup) Utils.getElement(getGraphEdge());
-
-		if (request.getType() == RequestConstants.REQ_OPEN) {
-			if (g.getEntryPoint() != null) {
-				PrivilegeDialog dialog = new PrivilegeDialog(ModelerPlugin
-						.getActiveWorkbenchShell(), g);
-				if (dialog.open() == Window.OK) {
-					PrivilegeNullUpdateCommand command = new PrivilegeNullUpdateCommand();
-					getViewer().getEditDomain().getCommandStack().execute(
-							command);
-					refresh();
-				}
-			} else
-				MessageDialog.openError(null, "No entry point!",
-						"No entry point has been defined ! Check your model !");
-		} else {
-			super.performRequest(request);
-		}
 	}
 }

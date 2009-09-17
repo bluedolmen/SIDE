@@ -139,7 +139,7 @@ public class GoalEditPart extends EMFGraphNodeEditPart {
 		return null;
 
 	}
-	
+
 	@Override
 	public void performRequest(Request request) {
 		BasicElement element = (BasicElement) Utils.getElement(getGraphNode());
@@ -148,8 +148,8 @@ public class GoalEditPart extends EMFGraphNodeEditPart {
 			BasicElementDialog dialog = new BasicElementDialog(ModelerPlugin
 					.getActiveWorkbenchShell(), element);
 			if (dialog.open() == Window.OK) {
-				BasicElementUpdateCommand command = new BasicElementUpdateCommand(element, dialog
-						.getData());
+				BasicElementUpdateCommand command = new BasicElementUpdateCommand(
+						element, dialog.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
 				refresh();
 			}

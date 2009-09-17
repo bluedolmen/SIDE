@@ -46,7 +46,7 @@ public class RelationShipEditPart extends EMFGraphEdgeEditPart {
 
 	/**
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
-	 * @generated
+	 * @_generated
 	 */
 	protected void createEditPolicies() {
 		super.createEditPolicies();
@@ -131,7 +131,7 @@ public class RelationShipEditPart extends EMFGraphEdgeEditPart {
 				.getmiddleNameEdgeObjectFigure();
 		label.setText(relationship.getName());
 	}
-	
+
 	@Override
 	public void performRequest(Request request) {
 		RelationShip rs = (RelationShip) Utils.getElement(getGraphEdge());
@@ -140,9 +140,9 @@ public class RelationShipEditPart extends EMFGraphEdgeEditPart {
 			RelationShipDialog dialog = new RelationShipDialog(ModelerPlugin
 					.getActiveWorkbenchShell(), rs);
 			if (dialog.open() == Window.OK) {
-				RelationShipUpdateCommand command = new RelationShipUpdateCommand(rs,dialog.getData());
-				getViewer().getEditDomain().getCommandStack().execute(
-						command);
+				RelationShipUpdateCommand command = new RelationShipUpdateCommand(
+						rs, dialog.getData());
+				getViewer().getEditDomain().getCommandStack().execute(command);
 				refresh();
 			} else {
 				super.performRequest(request);

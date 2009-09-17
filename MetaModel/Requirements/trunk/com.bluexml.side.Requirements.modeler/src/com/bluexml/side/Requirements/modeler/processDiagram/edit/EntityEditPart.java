@@ -34,6 +34,7 @@ import com.bluexml.side.Requirements.modeler.processDiagram.commands.EntityResto
 import com.bluexml.side.Requirements.modeler.processDiagram.policies.EntityLayoutEditPolicy;
 import com.bluexml.side.Requirements.modeler.processDiagram.policies.PrivilegeGroupEdgeCreationEditPolicy;
 import com.bluexml.side.Requirements.modeler.processDiagram.policies.RelationShipEdgeCreationEditPolicy;
+import com.bluexml.side.Requirements.modeler.processDiagram.policies.is_parentEdgeCreationEditPolicy;
 import com.bluexml.side.Requirements.modeler.processDiagram.preferences.ProDiagramPreferenceConstants;
 import com.bluexml.side.requirements.BasicElement;
 import com.bluexml.side.requirements.Entity;
@@ -68,6 +69,9 @@ public class EntityEditPart extends EMFGraphNodeEditPart {
 		installEditPolicy(ProEditPolicyConstants.PRIVILEGEGROUP_EDITPOLICY,
 				new PrivilegeGroupEdgeCreationEditPolicy());
 
+		installEditPolicy(ProEditPolicyConstants.IS_PARENT_EDITPOLICY,
+				new is_parentEdgeCreationEditPolicy());
+
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {
 					protected Command getRestoreConnectionsCommand(
@@ -92,7 +96,7 @@ public class EntityEditPart extends EMFGraphNodeEditPart {
 
 	/**
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
-	 * @generated
+	 * @_generated
 	 */
 	protected IFigure createFigure() {
 		Entity entity = (Entity) Utils.getElement(getGraphNode());
@@ -155,7 +159,7 @@ public class EntityEditPart extends EMFGraphNodeEditPart {
 		return null;
 
 	}
-	
+
 	@Override
 	public void performRequest(Request request) {
 		BasicElement element = (BasicElement) Utils.getElement(getGraphNode());
@@ -164,8 +168,8 @@ public class EntityEditPart extends EMFGraphNodeEditPart {
 			BasicElementDialog dialog = new BasicElementDialog(ModelerPlugin
 					.getActiveWorkbenchShell(), element);
 			if (dialog.open() == Window.OK) {
-				BasicElementUpdateCommand command = new BasicElementUpdateCommand(element, dialog
-						.getData());
+				BasicElementUpdateCommand command = new BasicElementUpdateCommand(
+						element, dialog.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
 				refresh();
 			}
@@ -173,7 +177,7 @@ public class EntityEditPart extends EMFGraphNodeEditPart {
 			super.performRequest(request);
 		}
 	}
-	
+
 	@Override
 	protected int getDefaultWidth() {
 		// TODO Auto-generated method stub

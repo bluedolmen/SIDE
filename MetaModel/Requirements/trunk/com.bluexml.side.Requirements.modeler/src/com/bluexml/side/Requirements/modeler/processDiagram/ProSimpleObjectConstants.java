@@ -21,4 +21,9 @@ public interface ProSimpleObjectConstants {
 	 * @generated
 	 */
 	String SIMPLE_OBJECT_IS_RESPONSIBLE = "is_responsible";
+	/**
+	 * The name that identify the <i>is_parent</i> SimpleObject.
+	 * @generated
+	 */
+	String SIMPLE_OBJECT_IS_PARENT = "is_parent";
 }

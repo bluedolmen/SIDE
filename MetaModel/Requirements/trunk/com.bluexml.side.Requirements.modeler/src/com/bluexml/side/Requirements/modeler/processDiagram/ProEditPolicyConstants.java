@@ -70,4 +70,10 @@ public interface ProEditPolicyConstants {
 	 */
 	String GOALSTEP_EDITPOLICY = "GoalStep EditPolicy";
 
+	/**
+	 * The key used to install an <i>is_parent</i> EditPolicy.
+	 * @generated
+	 */
+	String IS_PARENT_EDITPOLICY = "is_parent EditPolicy";
+
 }

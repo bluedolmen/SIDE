@@ -193,6 +193,23 @@ public class ProDiagramTopcasedPreferenceInitializer implements
 				ProDiagramPreferenceConstants.GOALSTEP_EDGE_DEFAULT_ROUTER,
 				"ObliqueRouter");
 
+		// Initialize the default value of the IS_PARENT_EDGE_DEFAULT_FONT property
+		defaultProPreference.put(
+				ProDiagramPreferenceConstants.IS_PARENT_EDGE_DEFAULT_FONT,
+				StringConverter.asFontData("Lucida Grande-regular-11")
+						.toString());
+
+		// Initialize the default value of the IS_PARENT_EDGE_DEFAULT_FOREGROUND_COLOR property
+		defaultProPreference
+				.put(
+						ProDiagramPreferenceConstants.IS_PARENT_EDGE_DEFAULT_FOREGROUND_COLOR,
+						"50,50,50");
+
+		// Initialize the default value of the IS_PARENT_EDGE_DEFAULT_ROUTER property
+		defaultProPreference.put(
+				ProDiagramPreferenceConstants.IS_PARENT_EDGE_DEFAULT_ROUTER,
+				"ObliqueRouter");
+
 		return defaultProPreference;
 	}
 }

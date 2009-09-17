@@ -26,6 +26,7 @@ import com.bluexml.side.Requirements.modeler.processDiagram.edit.PrivilegeEditPa
 import com.bluexml.side.Requirements.modeler.processDiagram.edit.PrivilegeGroupEditPart;
 import com.bluexml.side.Requirements.modeler.processDiagram.edit.ProDiagramEditPart;
 import com.bluexml.side.Requirements.modeler.processDiagram.edit.RelationShipEditPart;
+import com.bluexml.side.Requirements.modeler.processDiagram.edit.is_parentEditPart;
 import com.bluexml.side.Requirements.modeler.processDiagram.edit.is_responsibleEditPart;
 import com.bluexml.side.Requirements.modeler.processDiagram.edit.is_sub_goalEditPart;
 import com.bluexml.side.requirements.util.RequirementsSwitch;
@@ -79,6 +80,11 @@ public class ProEditPartFactory extends ModelerEditPartFactory {
 						.equals(((SimpleSemanticModelElement) edge
 								.getSemanticModel()).getTypeInfo())) {
 					return new is_sub_goalEditPart(edge);
+				}
+				if (ProSimpleObjectConstants.SIMPLE_OBJECT_IS_PARENT
+						.equals(((SimpleSemanticModelElement) edge
+								.getSemanticModel()).getTypeInfo())) {
+					return new is_parentEditPart(edge);
 				}
 			}
 		}

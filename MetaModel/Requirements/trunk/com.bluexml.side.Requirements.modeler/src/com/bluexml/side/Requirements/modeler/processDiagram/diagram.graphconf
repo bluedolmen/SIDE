@@ -150,5 +150,14 @@
             <type href="http://www.kerblue.org/requirements/1.0#//GoalStep"/>
         </bridge>
     </edge>
+    <edge
+        presentation="default"
+        defaultForegroundColor="50,50,50"
+        defaultFont="Lucida Grande-regular-11"
+        defaultRouter="ObliqueRouter"
+        lineWidth="1"
+        lineStyle="SOLID">
+        <bridge xsi:type="graphconf:StringBridge" type="is_parent"/>
+    </edge>
 </graphconf:DiagramGraphConf>
 
