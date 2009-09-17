@@ -32,7 +32,7 @@ public interface WorkflowFactory extends EFactory {
 	 * @return a new object of class '<em>Process</em>'.
 	 * @generated
 	 */
-	com.bluexml.side.workflow.Process createProcess();
+	Process createProcess();
 
 	/**
 	 * Returns a new object of class '<em>Swimlane</em>'.

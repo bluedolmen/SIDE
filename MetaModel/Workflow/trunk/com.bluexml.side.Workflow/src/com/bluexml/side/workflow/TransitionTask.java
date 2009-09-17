@@ -40,5 +40,14 @@ public interface TransitionTask extends State {
 	 * @generated
 	 */
 	EList<Transition> getTransition();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.transition->collect(t | t.to)->union(self.transition->select(t | t.to.oclIsKindOf(TransitionTask))->collect(t | t.to.oclAsType(TransitionTask).getAllNextStates())->flatten())' description='Get all next states'"
+	 * @generated
+	 */
+	EList<State> getAllNextStates();
 		
 } // TransitionTask

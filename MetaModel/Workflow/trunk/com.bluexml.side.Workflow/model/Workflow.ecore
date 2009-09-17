@@ -135,6 +135,12 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The 'Fork' splits one path of execution into multiple concurrent paths of execution.&#xD;&#xD;Inherits: &#xD;- TransitionTask."/>
     </eAnnotations>
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="ForkMustBeFollowedByJoin" value="self.getAllNextStates()->select(s | s.oclIsTypeOf(Join))->size()>0"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ForkMustBeFollowedByJoin"/>
+    </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//TransitionTask">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -357,6 +363,12 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TransitionTask" eSuperTypes="#//State">
+    <eOperations name="getAllNextStates" upperBound="-1" eType="#//State">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.transition->collect(t | t.to)->union(self.transition->select(t | t.to.oclIsKindOf(TransitionTask))->collect(t | t.to.oclAsType(TransitionTask).getAllNextStates())->flatten())"/>
+        <details key="description" value="Get all next states"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
         eType="#//Transition" containment="true"/>
   </eClassifiers>

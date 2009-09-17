@@ -230,20 +230,10 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this
-	 * model, and for any others upon which it depends.  Simple
-	 * dependencies are satisfied by calling this method on all
-	 * dependent packages before doing anything else.  This method drives
-	 * initialization for interdependent packages directly, in parallel
-	 * with this package, itself.
-	 * <p>Of this package and its interdependencies, all packages which
-	 * have not yet been registered by their URI values are first created
-	 * and registered.  The packages are then initialized in two steps:
-	 * meta-model objects for all of the packages are created before any
-	 * are initialized, since one package's meta-model objects may refer to
-	 * those of another.
-	 * <p>Invocation of this method will not affect any packages that have
-	 * already been initialized.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link WorkflowPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
@@ -255,7 +245,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		if (isInited) return (WorkflowPackage)EPackage.Registry.INSTANCE.getEPackage(WorkflowPackage.eNS_URI);
 
 		// Obtain or create and register package
-		WorkflowPackageImpl theWorkflowPackage = (WorkflowPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof WorkflowPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new WorkflowPackageImpl());
+		WorkflowPackageImpl theWorkflowPackage = (WorkflowPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof WorkflowPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new WorkflowPackageImpl());
 
 		isInited = true;
 
@@ -280,6 +270,9 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		// Mark meta-data to indicate it can't be changed
 		theWorkflowPackage.freeze();
 
+  
+		// Update the registry and return the package
+		EPackage.Registry.INSTANCE.put(WorkflowPackage.eNS_URI, theWorkflowPackage);
 		return theWorkflowPackage;
 	}
 
@@ -1180,6 +1173,8 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		initEClass(transitionTaskEClass, TransitionTask.class, "TransitionTask", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransitionTask_Transition(), this.getTransition(), null, "transition", null, 0, -1, TransitionTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(transitionTaskEClass, this.getState(), "getAllNextStates", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(bpmEventTypeEEnum, BPMEventType.class, "BPMEventType");
 		addEEnumLiteral(bpmEventTypeEEnum, BPMEventType.TASK_CREATE);
@@ -1246,7 +1241,13 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		   new String[] {
 			 "TaskMustBePointerByTransition", "Transition.allInstances()-> select(t| t.to = self)->size()=1 or self.transition -> notEmpty()\n",
 			 "TaskMustHaveOneTransitionOut", "self.transition -> size() >0"
-		   });									
+		   });								
+		addAnnotation
+		  (forkEClass, 
+		   source, 
+		   new String[] {
+			 "ForkMustBeFollowedByJoin", "self.getAllNextStates()->select(s | s.oclIsTypeOf(Join))->size()>0"
+		   });				
 		addAnnotation
 		  (decisionEClass, 
 		   source, 
@@ -1280,7 +1281,14 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		   source, 
 		   new String[] {
 			 "UniqueNameForTaskAttribute", "Attribute.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0"
-		   });					
+		   });							
+		addAnnotation
+		  (transitionTaskEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "self.transition->collect(t | t.to)->union(self.transition->select(t | t.to.oclIsKindOf(TransitionTask))->collect(t | t.to.oclAsType(TransitionTask).getAllNextStates())->flatten())",
+			 "description", "Get all next states"
+		   });
 	}
 
 	/**
@@ -1308,7 +1316,13 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		   source, 
 		   new String[] {
 			 "constraints", "TaskMustBePointerByTransition TaskMustHaveOneTransitionOut"
-		   });									
+		   });								
+		addAnnotation
+		  (forkEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "ForkMustBeFollowedByJoin"
+		   });				
 		addAnnotation
 		  (decisionEClass, 
 		   source, 
@@ -1338,7 +1352,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		   source, 
 		   new String[] {
 			 "constraints", "UniqueNameForTaskAttribute"
-		   });				
+		   });					
 	}
 
 } //WorkflowPackageImpl
