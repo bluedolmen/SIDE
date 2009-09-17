@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 
+ *
  ******************************************************************************/
 package com.bluexml.side.Class.modeler.wizards;
 
@@ -38,7 +38,7 @@ public class ClazzDiagramsPage extends DiagramsPage {
 	 * @generated
 	 */
 	public String getFileExtension() {
-		return "clazz";
+		return "dt";
 	}
 
 	/**
