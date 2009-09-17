@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.bluexml.side.Workflow.edit.ui;singleton:=true
-Bundle-Version: 1.0.3.v9330-20090917
+Bundle-Version: 1.0.4.v9351-20090917
 Bundle-Activator: com.bluexml.side.workflow.edit.ui.Activator
 Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.gmf.runtime.emf.core,
