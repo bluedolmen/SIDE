@@ -1524,6 +1524,7 @@ public class ApplicationDialog extends Dialog {
 			TreeItem item = tv.getTree().getItem(point);
 			//System.out.println("HandlerEvent P0-2");
 			if (item == null) {
+				//System.out.println("HandlerEvent bugFix #1090");
 				// to avoid bug #1090
 				return;
 			}
@@ -1557,16 +1558,15 @@ public class ApplicationDialog extends Dialog {
 					if (el.isChecked()) {
 //						System.out.println("is Checked !");
 						// Enable all sub elements
+						// action == SWT.YES or action== SWT.NO if messageBox opened -1 if not
 						int action = ConstraintsChecker.applyConstraints(tv, item, el);
-						if (action== SWT.YES) {
+						if (action== SWT.YES || action == -1) {
 							enableAllSubElements(item);
-						} else {
+						} else if (action== SWT.NO){
 							// uncheck to return to previous state
 							el.setChecked(false);
 							tv.update(el, null);
 						}
-						
-						
 					} else {
 //						System.out.println("is Not Checked !");
 						// Enable all sub elements
