@@ -1,19 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Portal.generator.alfresco.feature" label="Alfresco Share portal generator" version="1.0.2.v9248-20090916" provider-name="www.bluexml.com">
-  <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the generator of portal models on Alfresco share for portal structure deployment.</description>
-  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
-  <license url="http://www.example.com/license">[Enter License Description here.]</license>
-  <requires>
-    <import plugin="org.eclipse.core.runtime" />
-    <import plugin="org.eclipse.core.resources" />
-    <import plugin="com.bluexml.side.Application" version="1.0.8" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Util.generator" version="1.0.8" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Util.generator.acceleo" version="1.0.8" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Util.security" version="1.0.8" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Util.generator.alfresco" version="1.0.12" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Portal" version="1.0.11" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Util.dependencies" version="1.0.0" match="greaterOrEqual" />
-  </requires>
-  <plugin id="com.bluexml.side.Portal.generator.alfresco" download-size="0" install-size="0" version="1.0.6.v9102-20090911" unpack="false" />
-</feature>
+<feature
+      id="com.bluexml.side.Portal.generator.alfresco.feature"
+      label="SIDE Alfresco Share Portal Generator"
+      version="1.0.2.v9248-20090916"
+      provider-name="BlueXML">
 
+   <description url="http://www.bluexml.com">
+      SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the generator of portal models on Alfresco share for portal structure deployment.
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="com.bluexml.side.Application" version="1.0.8" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.generator" version="1.0.8" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.generator.acceleo" version="1.0.8" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.security" version="1.0.8" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.generator.alfresco" version="1.0.12" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Portal" version="1.0.11" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.dependencies" version="1.0.0" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="com.bluexml.side.Portal.generator.alfresco"
+         download-size="0"
+         install-size="0"
+         version="1.0.6.v9102-20090911"
+         unpack="false"/>
+
+</feature>

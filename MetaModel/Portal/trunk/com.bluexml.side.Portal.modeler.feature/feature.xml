@@ -1,38 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Portal.modeler.feature" label="S-IDE Portal Modeler" version="1.0.17.v9248-20090916" provider-name="BLUEXML">
-  <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the Eclipse-based graphical modeler of portal models.</description>
-  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
-  <license url="http://www.example.com/license">[Enter License Description here.]</license>
-  <requires>
-    <import plugin="org.eclipse.core.runtime" />
-    <import plugin="org.eclipse.emf.ecore" />
-    <import plugin="com.bluexml.side.Class" />
-    <import plugin="com.bluexml.side.Common" />
-    <import plugin="com.bluexml.side.Portal" />
-    <import plugin="org.eclipse.emf.edit" />
-    <import plugin="com.bluexml.side.Class.edit" />
-    <import plugin="com.bluexml.side.Common.edit" />
-    <import plugin="org.eclipse.core.resources" />
-    <import plugin="com.bluexml.side.Portal.edit" />
-    <import plugin="org.eclipse.emf.ecore.xmi" />
-    <import plugin="org.eclipse.emf.edit.ui" />
-    <import plugin="org.eclipse.ui.ide" />
-    <import plugin="org.eclipse.emf.ecore.edit" />
-    <import plugin="org.topcased.modeler" />
-    <import plugin="com.bluexml.side.Class.modeler" version="1.0.0" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Util.metaModel.validate" version="1.0.11" match="greaterOrEqual" />
-    <import plugin="org.eclipse.ocl" />
-    <import plugin="org.eclipse.ocl.ecore" />
-    <import plugin="com.bluexml.side.View" version="1.0.0" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Form" version="1.0.12" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Workflow" version="1.0.13" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.View.edit" version="1.0.0" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Form.edit" version="1.0.12" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Workflow.edit" version="1.0.13" match="greaterOrEqual" />
-  </requires>
-  <plugin id="com.bluexml.side.Portal" download-size="0" install-size="0" version="1.0.13.v8336-20090817" unpack="false" />
-  <plugin id="com.bluexml.side.Portal.edit" download-size="0" install-size="0" version="1.0.14.v8336-20090817" unpack="false" />
-  <plugin id="com.bluexml.side.Portal.editor" download-size="0" install-size="0" version="1.0.12.v8336-20090817" unpack="false" />
-  <plugin id="com.bluexml.side.Portal.modeler" download-size="0" install-size="0" version="1.0.14.v9102-20090911" unpack="false" />
-</feature>
+<feature
+      id="com.bluexml.side.Portal.modeler.feature"
+      label="SIDE Portal Modeler"
+      version="1.0.17.v9248-20090916"
+      provider-name="BlueXML">
 
+   <description url="http://www.bluexml.com">
+      SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the Eclipse-based graphical modeler of portal models.
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="com.bluexml.side.Class"/>
+      <import plugin="com.bluexml.side.Common"/>
+      <import plugin="com.bluexml.side.Portal"/>
+      <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="com.bluexml.side.Class.edit"/>
+      <import plugin="com.bluexml.side.Common.edit"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="com.bluexml.side.Portal.edit"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.emf.ecore.edit"/>
+      <import plugin="org.topcased.modeler"/>
+      <import plugin="com.bluexml.side.Class.modeler" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.metaModel.validate" version="1.0.11" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ocl"/>
+      <import plugin="org.eclipse.ocl.ecore"/>
+      <import plugin="com.bluexml.side.View" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Form" version="1.0.12" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Workflow" version="1.0.13" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.View.edit" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Form.edit" version="1.0.12" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Workflow.edit" version="1.0.13" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="com.bluexml.side.Portal"
+         download-size="0"
+         install-size="0"
+         version="1.0.13.v8336-20090817"
+         unpack="false"/>
+
+   <plugin
+         id="com.bluexml.side.Portal.edit"
+         download-size="0"
+         install-size="0"
+         version="1.0.14.v8336-20090817"
+         unpack="false"/>
+
+   <plugin
+         id="com.bluexml.side.Portal.editor"
+         download-size="0"
+         install-size="0"
+         version="1.0.12.v8336-20090817"
+         unpack="false"/>
+
+   <plugin
+         id="com.bluexml.side.Portal.modeler"
+         download-size="0"
+         install-size="0"
+         version="1.0.14.v9102-20090911"
+         unpack="false"/>
+
+</feature>

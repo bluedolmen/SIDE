@@ -1,38 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.View.feature" label="S-IDE View Feature" version="1.0.19.v9248-20090916" provider-name="BLUEXML">
-  <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the Eclipse-based tree modeler of web view models.</description>
-  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
-  <license url="http://www.example.com/license">[Enter License Description here.]</license>
-  <requires>
-    <import plugin="org.eclipse.core.runtime" />
-    <import plugin="org.eclipse.emf.ecore" />
-    <import plugin="org.eclipse.ocl.ecore" />
-    <import plugin="com.bluexml.side.Class" />
-    <import plugin="com.bluexml.side.Common" />
-    <import plugin="com.bluexml.side.Util.metaModel.validate" />
-    <import plugin="com.bluexml.side.View" />
-    <import plugin="org.eclipse.emf.edit" />
-    <import plugin="com.bluexml.side.Common.edit" />
-    <import plugin="com.bluexml.side.View.edit.ui" />
-    <import plugin="org.eclipse.jface" />
-    <import plugin="org.eclipse.emf" version="2.4.0" match="greaterOrEqual" />
-    <import plugin="org.eclipse.emf.ecore" version="2.4.1" match="greaterOrEqual" />
-    <import plugin="org.eclipse.ui" />
-    <import plugin="org.eclipse.emf.edit" version="2.4.1" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Util.libs" version="1.0.11" match="greaterOrEqual" />
-    <import plugin="fr.obeo.acceleo.chain" version="2.5.1" match="greaterOrEqual" />
-    <import plugin="fr.obeo.acceleo.ecore" version="2.5.1" match="greaterOrEqual" />
-    <import plugin="fr.obeo.acceleo.gen" version="2.5.1" match="greaterOrEqual" />
-    <import plugin="org.eclipse.core.resources" />
-    <import plugin="org.eclipse.emf.ecore.xmi" />
-    <import plugin="com.bluexml.side.View.edit" />
-    <import plugin="org.eclipse.emf.edit.ui" />
-    <import plugin="org.eclipse.ui.ide" />
-  </requires>
-  <plugin id="com.bluexml.side.View" download-size="0" install-size="0" version="1.0.6.v8336-20090817" unpack="false" />
-  <plugin id="com.bluexml.side.View.edit" download-size="0" install-size="0" version="1.0.9.v9102-20090911" unpack="false" />
-  <plugin id="com.bluexml.side.View.edit.ui" download-size="0" install-size="0" version="1.0.7.v9102-20090911" unpack="false" />
-  <plugin id="com.bluexml.side.View.editor" download-size="0" install-size="0" version="1.0.8.v9102-20090911" unpack="false" />
-  <plugin id="com.bluexml.side.View.generator.documentation" download-size="0" install-size="0" version="1.0.5.v9157-20090911" unpack="false" />
-</feature>
+<feature
+      id="com.bluexml.side.View.feature"
+      label="SIDE View Modeler"
+      version="1.0.19.v9248-20090916"
+      provider-name="BlueXML">
 
+   <description url="http://www.bluexml.com">
+      SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the Eclipse-based tree modeler of web view models.
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.ocl.ecore"/>
+      <import plugin="com.bluexml.side.Class"/>
+      <import plugin="com.bluexml.side.Common"/>
+      <import plugin="com.bluexml.side.Util.metaModel.validate"/>
+      <import plugin="com.bluexml.side.View"/>
+      <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="com.bluexml.side.Common.edit"/>
+      <import plugin="com.bluexml.side.View.edit.ui"/>
+      <import plugin="org.eclipse.jface"/>
+      <import plugin="org.eclipse.emf" version="2.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore" version="2.4.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.emf.edit" version="2.4.1" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.libs" version="1.0.11" match="greaterOrEqual"/>
+      <import plugin="fr.obeo.acceleo.chain" version="2.5.1" match="greaterOrEqual"/>
+      <import plugin="fr.obeo.acceleo.ecore" version="2.5.1" match="greaterOrEqual"/>
+      <import plugin="fr.obeo.acceleo.gen" version="2.5.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="com.bluexml.side.View.edit"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
+   </requires>
+
+   <plugin
+         id="com.bluexml.side.View"
+         download-size="0"
+         install-size="0"
+         version="1.0.6.v8336-20090817"
+         unpack="false"/>
+
+   <plugin
+         id="com.bluexml.side.View.edit"
+         download-size="0"
+         install-size="0"
+         version="1.0.9.v9102-20090911"
+         unpack="false"/>
+
+   <plugin
+         id="com.bluexml.side.View.edit.ui"
+         download-size="0"
+         install-size="0"
+         version="1.0.7.v9102-20090911"
+         unpack="false"/>
+
+   <plugin
+         id="com.bluexml.side.View.editor"
+         download-size="0"
+         install-size="0"
+         version="1.0.8.v9102-20090911"
+         unpack="false"/>
+
+   <plugin
+         id="com.bluexml.side.View.generator.documentation"
+         download-size="0"
+         install-size="0"
+         version="1.0.5.v9157-20090911"
+         unpack="false"/>
+
+</feature>
