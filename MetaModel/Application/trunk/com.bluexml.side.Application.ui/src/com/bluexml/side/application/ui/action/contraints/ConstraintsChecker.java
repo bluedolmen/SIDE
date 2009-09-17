@@ -67,7 +67,7 @@ public class ConstraintsChecker {
 			message += "Do you want to apply changes ? (if no this options will remain unchecked)";
 			return ApplicationDialog.showConfirmation(title, message);
 		}
-		return SWT.NO;
+		return -1;
 	}
 
 	private static Map<String, List<TreeItem>> buildConstraintsMap(TreeElement el) {
