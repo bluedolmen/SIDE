@@ -56,6 +56,7 @@ import com.bluexml.side.portal.Portal;
 import com.bluexml.side.portal.PortalFactory;
 import com.bluexml.side.requirements.RequirementsDefinition;
 import com.bluexml.side.requirements.RequirementsFactory;
+import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.view.ViewCollection;
 import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.workflow.WorkflowFactory;
@@ -162,50 +163,54 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 	}
 
 	private void createInitialFormModel() throws CoreException, IOException {
-		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.form.presentation.formEditorID"));
+		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.form.presentation.formEditorID")); //$NON-NLS-1$
 		ClassFormCollection formCollection = FormFactory.eINSTANCE.createClassFormCollection();
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)formCollection);
 		createdModels.add(file);
 	}
 
 	private void createInitialViewModel() throws CoreException, IOException {
-		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.view.presentation.ViewEditorID"));
+		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.view.presentation.ViewEditorID")); //$NON-NLS-1$
 		ViewCollection viewCollection = ViewFactory.eINSTANCE.createViewCollection();
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)viewCollection);
 		createdModels.add(file);
 	}
 
 	private void createInitialWorkflowModel() throws CoreException, IOException {
-		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.workflow.presentation.WorkflowEditorID"));
+		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.workflow.presentation.WorkflowEditorID")); //$NON-NLS-1$
 		com.bluexml.side.workflow.Process process = WorkflowFactory.eINSTANCE.createProcess();
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)process);
 		createdModels.add(file);
+		createDiagramFile(file, process, "com.bluexml.side.Workflow.modeler.diagram"); //$NON-NLS-1$
 	}
 
 	private void createInitialRequirementModel() throws CoreException, IOException {
-		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.requirements.presentation.RequirementsEditorID"));
+		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.requirements.presentation.RequirementsEditorID")); //$NON-NLS-1$
 		RequirementsDefinition definition = RequirementsFactory.eINSTANCE.createRequirementsDefinition();
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)definition);
 		createdModels.add(file);
+		createDiagramFile(file, definition, "com.bluexml.side.Requirements.modeler.goalDiagram"); //$NON-NLS-1$
 	}
 
 	private void createInitialPortalModel() throws CoreException, IOException {
-		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.portal.presentation.PortalEditorID"));
+		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.portal.presentation.PortalEditorID")); //$NON-NLS-1$
 		Portal portal = PortalFactory.eINSTANCE.createPortal();
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)portal);
 		createdModels.add(file);
+
+		createDiagramFile(file, portal, "com.bluexml.side.Portal.modeler.diagram"); //$NON-NLS-1$
 	}
 
 	private void createInitialDataModel() throws IOException, CoreException {
-		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.clazz.presentation.ClazzEditorID"));
+		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.clazz.presentation.ClazzEditorID")); //$NON-NLS-1$
 		createdModels.add(file);
 		ClassPackage packageRoot = ClazzFactory.eINSTANCE.createClassPackage();
-
+		ClassPackage lastPackage = packageRoot;
 		String stringPath = optionsPage.getStringPath();
 		if (stringPath != null && stringPath.length() != 0) {
-			String[] segments = stringPath.split("/");
+			String[] segments = stringPath.split("/"); //$NON-NLS-1$
 			packageRoot.setName(segments[0]);
-			ClassPackage lastPackage = packageRoot;
+
 			for (int i = 1; i < segments.length; i++) {
 				ClassPackage p = ClazzFactory.eINSTANCE.createClassPackage();
 				p.setName(segments[i]);
@@ -213,9 +218,16 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 				lastPackage = p;
 			}
 		} else {
-			packageRoot.setName("root");
+			packageRoot.setName("root"); //$NON-NLS-1$
 		}
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)packageRoot);
+		createDiagramFile(file, lastPackage, "com.bluexml.side.Class.modeler.diagram"); //$NON-NLS-1$
+	}
+
+	private void createDiagramFile(IFile file, EObject root, String diagramid)
+			throws IOException {
+		IFile diagramFile = IFileHelper.getIFile(file.getFullPath().toOSString() + "di"); //$NON-NLS-1$
+		ModelInitializationUtils.createDiagramFile(root,diagramid,file.getName() + "di", diagramFile); //$NON-NLS-1$
 	}
 
 
