@@ -15,7 +15,7 @@ import java.util.Properties;
 public class Util {
 
 	/**
-	 * Renvoi vers la bonne méthode en fonction du type (fichier ou repertoire)
+	 * Renvoi vers la bonne mï¿½thode en fonction du type (fichier ou repertoire)
 	 * 
 	 * @param file
 	 * @throws IOException
@@ -48,7 +48,7 @@ public class Util {
 	}
 
 	/**
-	 * Ajout de la licence (en commentaire) au début du fichier
+	 * Ajout de la licence (en commentaire) au dï¿½but du fichier
 	 * 
 	 * @param file
 	 */
@@ -57,7 +57,7 @@ public class Util {
 		String extention = sep[sep.length - 1];
 
 		if (ouvrirFichier("comment.properties").containsKey(extention)) {
-			System.out.println("File: " + file);
+			//System.out.println("File: " + file);
 
 			String type = ouvrirFichier("comment.properties").getProperty(
 					extention).split(",")[0];
@@ -83,7 +83,7 @@ public class Util {
 	}
 
 	/**
-	 * Retourne la licence avec le caractère de commentaire en début de chaque
+	 * Retourne la licence avec le caractï¿½re de commentaire en dï¿½but de chaque
 	 * ligne
 	 * 
 	 * @param type
@@ -111,7 +111,7 @@ public class Util {
 	}
 
 	/**
-	 * Méthode qui ouvre le fichier de proprerties
+	 * Mï¿½thode qui ouvre le fichier de proprerties
 	 * 
 	 */
 	public static Properties ouvrirFichier(String fichier) {
@@ -147,7 +147,7 @@ public class Util {
 	}
 
 	/**
-	 * Retourne le contenu du fichier passé en paramètre
+	 * Retourne le contenu du fichier passï¿½ en paramï¿½tre
 	 * 
 	 * @param f
 	 * @return
