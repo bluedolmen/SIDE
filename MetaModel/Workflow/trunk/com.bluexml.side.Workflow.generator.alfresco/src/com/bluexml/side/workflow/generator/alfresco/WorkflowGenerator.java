@@ -35,6 +35,15 @@ public class WorkflowGenerator extends AbstractAlfrescoGenerator {
 
 	@Override
 	protected List<String> getTemplates() {
+		//Compute services
+		String alfrescoUrl = generationParameters.get(ALFRESCO_URL_KEY);
+		if (alfrescoUrl != null && alfrescoUrl.length() > 0) {
+			if (!alfrescoUrl.endsWith("/"))
+				alfrescoUrl += "/";
+			String uri = alfrescoUrl + "faces/jsp/admin/workflow-console.jsp";
+			monitor.getLog().addServiceLog("Workflow Console","The Workflow Console is an administrator/developer tool for interacting with workflows.", uri);
+		}
+		
 		List<String> result = new ArrayList<String>();
 		result.add("/com.bluexml.side.Workflow.generator.alfresco/templates/alfrescoGenerator_context.mt");
 		result.add("/com.bluexml.side.Workflow.generator.alfresco/templates/alfrescoGenerator_jpdl.mt");
@@ -73,17 +82,6 @@ public class WorkflowGenerator extends AbstractAlfrescoGenerator {
 	 */
 	public boolean check() {
 		return SecurityHelper.check(GENERATOR_CODE, SidePreferences.getKey());
-	}
-	
-	@Override
-	public Collection<IFile> complete() throws Exception {
-		String alfrescoUrl = generationParameters.get(ALFRESCO_URL_KEY);
-		if (!alfrescoUrl.endsWith("/"))
-			alfrescoUrl += "/";
-		String uri = alfrescoUrl + "faces/jsp/admin/workflow-console.jsp";
-	monitor.getLog().addServiceLog("Workflow Console","The Workflow Console is an administrator/developer tool for interacting with workflows.", uri);
-
-		return super.complete();
 	}
 
 }
