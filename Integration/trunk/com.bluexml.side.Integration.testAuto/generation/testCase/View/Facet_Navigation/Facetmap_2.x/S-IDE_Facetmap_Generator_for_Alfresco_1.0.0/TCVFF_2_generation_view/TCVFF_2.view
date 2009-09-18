@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view:ViewCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:view="http://www.kerblue.org/view/1.0" name="views">
+  <views xsi:type="view:FacetMap" name="Personne (FacetMap)" suffix="">
+    <children xsi:type="view:TextField" name="Nom">
+      <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.0"/>
+    </children>
+    <children xsi:type="view:TextField" name="Prénom">
+      <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.1"/>
+    </children>
+    <children xsi:type="view:IntegerField" name="Age">
+      <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.2"/>
+    </children>
+    <children xsi:type="view:TextField" name="Mobilité">
+      <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.3"/>
+    </children>
+    <children xsi:type="view:TextField" name="Permis B">
+      <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.4"/>
+    </children>
+    <children xsi:type="view:DataList" name="Personne (Data List)">
+      <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>
+      <children xsi:type="view:TextField" name="Nom">
+        <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.0"/>
+      </children>
+      <children xsi:type="view:TextField" name="Prénom">
+        <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.1"/>
+      </children>
+      <children xsi:type="view:IntegerField" name="Age">
+        <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.2"/>
+      </children>
+      <children xsi:type="view:TextField" name="Mobilité">
+        <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.3"/>
+      </children>
+      <children xsi:type="view:TextField" name="Permis B">
+        <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.4"/>
+      </children>
+      <viewOf xsi:type="clazz:Clazz" href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>
+    </children>
+    <viewOf xsi:type="clazz:Clazz" href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>
+  </views>
+  <composedViews name="testComposedView">
+    <children xsi:type="view:DataList" name="Personne (Data List)">
+      <children xsi:type="view:TextField" name="Nom">
+        <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.0"/>
+      </children>
+      <children xsi:type="view:IntegerField" name="Age">
+        <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.2"/>
+      </children>
+      <children xsi:type="view:TextField" name="Mobilité">
+        <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.3"/>
+      </children>
+      <children xsi:type="view:TextField" name="Permis B">
+        <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.4"/>
+      </children>
+      <disabled xsi:type="view:TextField" name="Prénom">
+        <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.1"/>
+      </disabled>
+      <viewOf xsi:type="clazz:Clazz" href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>
+    </children>
+    <children xsi:type="view:DataList" name="Formation (Data List)">
+      <children xsi:type="view:TextField" name="Besoin entreprise">
+        <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.4/@attributes.0"/>
+      </children>
+      <children xsi:type="view:TextField" name="Envie Salarié">
+        <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.4/@attributes.1"/>
+      </children>
+      <children xsi:type="view:IntegerField" name="Date souhaitée">
+        <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.4/@attributes.3"/>
+      </children>
+      <children xsi:type="view:TextField" name="Durée">
+        <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.4/@attributes.4"/>
+      </children>
+      <disabled xsi:type="view:TextField" name="Thème">
+        <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.4/@attributes.2"/>
+      </disabled>
+      <viewOf xsi:type="clazz:Clazz" href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.4"/>
+    </children>
+  </composedViews>
+  <composedViews name="vuePourDocDetail">
+    <children xsi:type="view:DataList" name="Personne (Data List)">
+      <children xsi:type="view:TextField" name="Nom">
+        <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.0"/>
+      </children>
+      <children xsi:type="view:TextField" name="Prénom">
+        <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.1"/>
+      </children>
+      <children xsi:type="view:IntegerField" name="Age">
+        <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.2"/>
+      </children>
+      <disabled xsi:type="view:TextField" name="Mobilité">
+        <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.3"/>
+      </disabled>
+      <disabled xsi:type="view:TextField" name="Permis B">
+        <mapTo href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.4"/>
+      </disabled>
+      <viewOf xsi:type="clazz:Clazz" href="MainRH.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>
+    </children>
+    <disabled xsi:type="view:DataList"/>
+  </composedViews>
+</view:ViewCollection>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:ClassPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" name="com">
+  <packageSet xsi:type="clazz:ClassPackage" name="bluexml">
+    <packageSet xsi:type="clazz:ClassPackage" name="demo">
+      <packageSet xsi:type="clazz:ClassPackage" name="rh">
+        <classSet documentation="" description="" name="Personne" title="Personne">
+          <metainfo key="visual-component" value=""/>
+          <attributes documentation="" description="" name="nom" title="Nom" typ="String"/>
+          <attributes documentation="" description="" name="prenom" title="Prénom" typ="String"/>
+          <attributes documentation="" description="" name="age" title="Age" typ="int"/>
+          <attributes documentation="" description="" name="mobilite" title="Mobilité" typ="String"/>
+          <attributes documentation="" description="" name="permisB" title="Permis B" typ="String"/>
+        </classSet>
+        <classSet documentation="" description="" name="Frais" title="Frais">
+          <metainfo key="visual-component" value=""/>
+        </classSet>
+        <classSet documentation="" description="" name="Cv" title="CV">
+          <metainfo key="visual-component" value=""/>
+        </classSet>
+        <classSet documentation="" description="" name="ContratDeTravail" title="Contrat de travail">
+          <metainfo key="visual-component" value=""/>
+          <attributes documentation="" description="" name="type" title="Type" typ="String"/>
+          <attributes documentation="" description="" name="dateDembauche" title="Date d'embauche" typ="int"/>
+          <attributes documentation="" description="" name="statut" title="Statut" typ="String"/>
+          <attributes documentation="" description="" name="niveauContrat" title="Niveau Contrat" typ="String"/>
+          <attributes documentation="" description="" name="fonction" title="Fonction" typ="String"/>
+        </classSet>
+        <classSet documentation="" description="" name="Formation" title="Formation">
+          <metainfo key="visual-component" value=""/>
+          <attributes documentation="" description="" name="besoinEntreprise" title="Besoin entreprise" typ="String"/>
+          <attributes documentation="" description="" name="envieSalarie" title="Envie Salarié" typ="String"/>
+          <attributes documentation="" description="" name="theme" title="Thème" typ="String"/>
+          <attributes documentation="" description="" name="dateSouhaitee" title="Date souhaitée" typ="int"/>
+          <attributes documentation="" description="" name="duree" title="Durée" typ="String"/>
+        </classSet>
+        <classSet documentation="" description="" name="Absence" title="Absence">
+          <metainfo key="visual-component" value=""/>
+          <attributes documentation="" description="" name="dateDeDebut" title="Date de début" typ="int"/>
+          <attributes documentation="" description="" name="duree" title="Durée" typ="String"/>
+          <attributes documentation="" description="" name="motif" title="Motif" typ="String" valueList="//@packageSet.0/@packageSet.0/@packageSet.0/@enumerationSet.0"/>
+          <attributes documentation="" description="" name="nombre" title="Nombre" typ="int"/>
+        </classSet>
+        <associationSet description="Une personne génère des frais" name="Frais" title="Frais">
+          <firstEnd name="" title="" linkedClass="//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>
+          <secondEnd name="R2" title="" navigable="true" linkedClass="//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.1"/>
+        </associationSet>
+        <associationSet description="" name="Cv" title="Cv">
+          <firstEnd name="" title="" linkedClass="//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>
+          <secondEnd name="R2" title="" navigable="true" linkedClass="//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.2"/>
+        </associationSet>
+        <associationSet description="" name="ContratDeTravail" title="Contrat de travail">
+          <firstEnd name="" title="" linkedClass="//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>
+          <secondEnd name="R2" title="" navigable="true" linkedClass="//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.3"/>
+        </associationSet>
+        <associationSet description="" name="Formation" title="Formation">
+          <firstEnd name="" title="" linkedClass="//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>
+          <secondEnd name="R2" title="" navigable="true" linkedClass="//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.4"/>
+        </associationSet>
+        <associationSet description="" name="Absence" title="Absence">
+          <firstEnd name="" title="" linkedClass="//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0"/>
+          <secondEnd name="R2" title="" navigable="true" linkedClass="//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.5"/>
+        </associationSet>
+        <enumerationSet name="Motif">
+          <literals name="Congé"/>
+          <literals name="Maladie"/>
+        </enumerationSet>
+      </packageSet>
+    </packageSet>
+  </packageSet>
+</clazz:ClassPackage>
