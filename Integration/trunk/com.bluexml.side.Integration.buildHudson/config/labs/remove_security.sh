@@ -40,6 +40,11 @@ for f in `find $1 -type f -name "*.java"`; do
 	fi
 done
 
+for f in `find $1 -type f -name "feature.xml"`; do
+
+	perl -0 -p -e 's/( *)<plugin( *)(\s+)( *)id="com.bluexml.side.Util.security"[^<]*//sg' $f
+done
+
 for f in `find $1 -type f -name "*.xml"`; do
 	
 	
