@@ -20,7 +20,7 @@
                      class="com.bluexml.side.form.generator.documentation.FormDocumentationGenerator"
                      hidden="hidden and used by default"
                      id="com.bluexml.side.Form.generator.documentation"
-                     version="S-IDE Class Documentation Generator 1.0.0">
+                     version="S-IDE Form Documentation Generator 1.0.0">
                </generatorVersion>
             </technologyVersion>
          </technology>
