@@ -19,6 +19,9 @@ rm -rf $MAVEN_TARGET
 
 mkdir $MAVEN_TARGET
 
+mkdir $TARGET_WORKSPACE/workingcopy
+chmod -R 777 $TARGET_WORKSPACE/workingcopy
+
 #$DF_HOME=`df -k | grep -i /home | awk '{print $5}'|cut -d"%" -f1 |while read LINE; do
 DF_HOME=`df -k | grep -i /home | awk '{print $5}'|cut -d"%" -f1`
 if [ $DF_HOME -gt $FULL ]; then
