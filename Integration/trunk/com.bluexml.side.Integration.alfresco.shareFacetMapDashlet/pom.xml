@@ -34,39 +34,11 @@
 				<filtering>true</filtering>
 			</resource>
 		</resources>
-		<!--		<extensions>-->
-		<!--			<extension>-->
-		<!--				<groupId>com.bluexml.side.Integration.m2</groupId>-->
-		<!--				<artifactId>zipPackage</artifactId>-->
-		<!--				<version>1.0</version>-->
-		<!--			</extension>-->
-		<!--		</extensions>-->
 		<plugins>
-			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<configuration>
-							<tasks>
-								<ant antfile="extensionBuilder.xml" target="buildExtension">
-									<property name="module.version" value="${project.version}" />
-									<property name="module.title" value="${project.name}" />
-									<property name="module.description" value="${project.description}" />
-									<property name="module.id" value="${artifactId}" />
-								</ant>
-							</tasks>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>com.bluexml.side.Integration.m2</groupId>
 				<artifactId>zipPackage</artifactId>
-				<version>1.0</version>
+				<version>1.0.0</version>
 				<extensions>true</extensions>
 			</plugin>
 		</plugins>
