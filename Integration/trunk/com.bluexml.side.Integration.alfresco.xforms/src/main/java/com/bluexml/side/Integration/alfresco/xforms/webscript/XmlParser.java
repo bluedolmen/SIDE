@@ -15,7 +15,7 @@ import org.w3c.dom.Element;
 /**
  * Builds a map of standard properties for an object. Taken from BxDS dataLayer module.
  * 
- * @author amenel
+ * @author Amenel
  * 
  */
 public class XmlParser {

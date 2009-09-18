@@ -3,7 +3,7 @@ package com.bluexml.side.Integration.alfresco.xforms.webscript;
 /**
  * Taken from BxDS dataLayer module.
  * 
- * @author amenel
+ * @author Amenel
  * 
  */
 public class AssociationBean {
