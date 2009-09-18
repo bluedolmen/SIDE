@@ -30,12 +30,12 @@ metamodel http://www.kerblue.org/class/1.0
 <%for (getAllAttributes()){%>
 	<table:table-row>
 		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
-			<text:p text:style-name="Table_20_Heading">
+			<text:p text:style-name="Table_20_Contents">
 				<%getLabel()%>
 			</text:p>
 		</table:table-cell>
 		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
-			<text:p text:style-name="Table_20_Heading">
+			<text:p text:style-name="Table_20_Contents">
 				<%if (documentation != null){%><%documentation%><%}%>
 			</text:p>
 		</table:table-cell>
@@ -60,18 +60,18 @@ metamodel http://www.kerblue.org/class/1.0
 <%for (getSourceAssociations()){%>
 	<table:table-row>
 		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
-			<text:p text:style-name="Table_20_Heading">
+			<text:p text:style-name="Table_20_Contents">
 				<%getLabel()%>
 			</text:p>
 		</table:table-cell>
 		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
-			<text:p text:style-name="Table_20_Heading">
+			<text:p text:style-name="Table_20_Contents">
 				<text:a xlink:type="simple"
                     xlink:href="#1.<%getTarget().getLabel()%>|outline"><%getTarget().getLabel()%></text:a>
 			</text:p>
 		</table:table-cell>
 		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
-			<text:p text:style-name="Table_20_Heading">
+			<text:p text:style-name="Table_20_Contents">
 				<%if (documentation != null){%><%documentation%><%}%>
 			</text:p>
 		</table:table-cell>

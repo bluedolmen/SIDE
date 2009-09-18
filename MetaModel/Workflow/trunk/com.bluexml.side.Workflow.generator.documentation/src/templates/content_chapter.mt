@@ -76,12 +76,12 @@ metamodel http://www.kerblue.org/workflow/1.0
 --%>
 <table:table-row>
 	<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
-		<text:p text:style-name="Table_20_Heading">
+		<text:p text:style-name="Table_20_Contents">
 			<%args(0)%>
 		</text:p>
 	</table:table-cell>
 	<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
-		<text:p text:style-name="Table_20_Heading">
+		<text:p text:style-name="Table_20_Contents">
 			<%if (args(1) != null){%><%args(1)%><%}%>
 		</text:p>
 	</table:table-cell>
