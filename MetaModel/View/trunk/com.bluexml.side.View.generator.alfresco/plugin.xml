@@ -23,7 +23,7 @@
                      version="S-IDE View Generator for Alfresco Share 1.0.0">
                   <configurationParameter
                         documentation="Set this value to the version of the generated AMPs, default value is &apos;1.0&apos;.&lt;br&gt;At Alfresco start, the version is displayed in the console and may easily be checked to ensure good production deployment."
-                        key="com.bluexml.side.Class.generator.alfresco.module.version"
+                        key="com.bluexml.side.View.generator.alfresco.module.version"
                         label="View Module version">
                   </configurationParameter>
                   <configurationParameter
