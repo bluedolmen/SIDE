@@ -304,4 +304,8 @@ public class IFileHelper {
 			file.move(p, true, null);
 		}
 	}
+
+	public static IFile getIFile(IPath p) {
+		return ResourcesPlugin.getWorkspace().getRoot().getFile(p);
+	}
 }

@@ -18,6 +18,7 @@
 
 package com.bluexml.side.util.model.merge;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -27,7 +28,11 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -159,7 +164,7 @@ public abstract class MergeUtils {
 	 * @cl the classLoader of the generator
 	 * @throws IOException
 	 */
-	public static String merge(File mergedFile, File[] models, ClassLoader cl) throws Exception {
+	public static String merge(File mergedFile, List<IFile> models, ClassLoader cl) throws Exception {
 		EPackage metaModelPackage = null;
 		// deletion of the previous result
 
@@ -174,8 +179,8 @@ public abstract class MergeUtils {
 		ResourceSet rs = mergedResource.getResourceSet();
 		int compteur = 0;
 		// browsing models list
-		while (compteur < models.length) {
-			Resource modelResource = EResourceUtils.openModel(models[compteur].getAbsolutePath(), null, rs);
+		while (compteur < models.size()) {
+			Resource modelResource = EResourceUtils.openModel(models.get(compteur).getRawLocation().toFile().getAbsolutePath(), null, rs);
 			if (metaModelPackage == null) {
 				metaModelPackage = getMetaModelEpackage(modelResource);
 				metaModelPackage.eClass();
@@ -835,9 +840,34 @@ public abstract class MergeUtils {
 		for (IFile m : models) {
 			modelsFile.add(m.getLocation().makeAbsolute().toFile());
 		}
-		File[] ty = new File[models.size()];
+		if (!mergedIFile.exists()) {
+			if (mergedIFile.getParent() instanceof IFolder) {
+				IFolder folder = (IFolder) mergedIFile.getParent();
+				prepareFolder(folder);
+			}
+			mergedIFile.create(new ByteArrayInputStream(new byte[0]), true, new NullProgressMonitor());
+		}
 		File mergedFile = mergedIFile.getLocation().makeAbsolute().toFile();
-		merge(mergedFile, models.toArray(ty), cl);
+		
+		merge(mergedFile, models, cl);
 	}
+	
+	private static void prepareFolder(IFolder folder)
+	{
+		IContainer parent = folder.getParent();
+		if (parent instanceof IFolder)
+		{
+			prepareFolder((IFolder) parent);
+		}
+		if (!folder.exists())
+		{
+			try {
+				folder.create(true, true, new NullProgressMonitor());
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 
 }

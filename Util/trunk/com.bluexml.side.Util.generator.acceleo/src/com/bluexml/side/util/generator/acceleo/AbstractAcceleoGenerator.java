@@ -18,6 +18,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -126,7 +127,9 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 			return models.get(0);
 		} else {
 			// create resource for merged file
-			IFile mergedIFile = IFileHelper.getIFile(models.get(0).getParent().getRawLocation().makeAbsolute().toOSString() + File.separator + mergedFilePath + File.separator + models.get(0).getFileExtension());
+			IPath p = models.get(0).getParent().getFullPath();
+			p = p.append(mergedFilePath+"."+models.get(0).getFileExtension());
+			IFile mergedIFile = IFileHelper.getIFile(p);
 			// do merge
 			MergeUtils.merge(mergedIFile, models, this.getClass().getClassLoader());
 			return mergedIFile;

@@ -100,35 +100,37 @@ public abstract class EObjectUtils {
 	 */
 	public static boolean isTargetPresentHasChildInSourceUsingERefLInk(EObject source,EObject target,EReference eRefLink,ClassLoader cl){
 		boolean result = false;
-		Object eRefLinkContent = source.eGet(eRefLink);
-		if(eRefLinkContent instanceof List<?>){
-			List<EObject> rawList = (List<EObject>) eRefLinkContent;
+		if (eRefLink != null){
+			Object eRefLinkContent = source.eGet(eRefLink);
+			if(eRefLinkContent instanceof List<?>){
+				List<EObject> rawList = (List<EObject>) eRefLinkContent;
 
-			ListIterator<EObject> iterListEObject = rawList.listIterator();
-			while(iterListEObject.hasNext() && !result){
-				EObject current = iterListEObject.next();
-				try {
-					result = equalsForMerge(current,target,cl);
-				} catch (SecurityException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (NoSuchMethodException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}	
+				ListIterator<EObject> iterListEObject = rawList.listIterator();
+				while(iterListEObject.hasNext() && !result){
+					EObject current = iterListEObject.next();
+					try {
+						result = equalsForMerge(current,target,cl);
+					} catch (SecurityException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IllegalArgumentException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (NoSuchMethodException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (InvocationTargetException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}	
+			}
 		}
 		return result;
 	}

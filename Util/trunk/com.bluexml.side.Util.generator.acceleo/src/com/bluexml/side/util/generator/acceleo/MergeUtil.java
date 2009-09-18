@@ -22,7 +22,7 @@ public class MergeUtil {
 			Resource modelResource = EResourceUtils.openModel(IFileHelper.convertIRessourceToSystemString(model), null);
 			EObject root = modelResource.getContents().get(0);
 			if (root instanceof Package) {
-				String pname = ((Package) root).getName();
+				String pname = ((Package) root).getName()+"_"+root.eClass().getName();
 				if (gb.containsKey(pname)) {
 					gb.get(pname).add(model);
 				} else {
