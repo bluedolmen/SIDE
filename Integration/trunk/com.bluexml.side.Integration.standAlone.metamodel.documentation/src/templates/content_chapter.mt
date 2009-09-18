@@ -6,9 +6,7 @@ import com.bluexml.side.integration.standalone.metamodel.documentation.CustomDoc
 <%script type="ecore.EPackage" name="content_chapter"%>
 <!-- Break line -->
 <%for (eClassifiers().sort()){%>
-	<text:h text:style-name="Heading_20_1" text:outline-level="1">
-		<%name%>
-	</text:h>
+	<text:h text:style-name="Heading_20_1" text:outline-level="1"><%name%></text:h>
 	<%if (service::getSrvDocumentation() != null){%>
 	<text:p text:style-name="Table_20_Heading">
 		<%service::getSrvDocumentation()%>
@@ -32,12 +30,12 @@ import com.bluexml.side.integration.standalone.metamodel.documentation.CustomDoc
 	<table:table-row>
 		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
 			<text:p text:style-name="Table_20_Heading">
-				 <%name%> 
+				 <%name%>
 			</text:p>
 		</table:table-cell>
 		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
 			<text:p text:style-name="Table_20_Heading">
-				<%if (service::getSrvDocumentation()!= service::getSrvDocumentation()){%><%service::getSrvDocumentation()%><%}%>
+				<%service::getSrvDocumentation()%>
 			</text:p>
 		</table:table-cell>
 	</table:table-row>
@@ -71,8 +69,8 @@ import com.bluexml.side.integration.standalone.metamodel.documentation.CustomDoc
 			</text:p>
 		</table:table-cell>
 		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
-			<text:p text:style-name="Table_20_Heading">
-				<%if (service::getSrvDocumentation() != service::getSrvDocumentation()){%><%service::getSrvDocumentation()%><%}%>
+			<text:p text:style-name="Table_20_Contents">
+				<%service::getSrvDocumentation()%>
 			</text:p>
 		</table:table-cell>
 	</table:table-row>
@@ -108,7 +106,7 @@ import com.bluexml.side.integration.standalone.metamodel.documentation.CustomDoc
 				<%getValue().processString()%>
 			</text:p>
 		</table:table-cell>
-	</table:table-row>	
+	</table:table-row>
 <%}%>
 </table:table>
 <%}%>

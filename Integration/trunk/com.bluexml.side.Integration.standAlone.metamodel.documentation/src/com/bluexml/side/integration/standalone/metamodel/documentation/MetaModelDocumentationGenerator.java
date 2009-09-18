@@ -25,7 +25,4 @@ public class MetaModelDocumentationGenerator extends DocumentationGenerator {
 		templates.add("/com.bluexml.side.Integration.standAlone.metamodel.documentation/src/templates/content.mt"); //$NON-NLS-1$
 		return templates;
 	}
-	
-
-
 }

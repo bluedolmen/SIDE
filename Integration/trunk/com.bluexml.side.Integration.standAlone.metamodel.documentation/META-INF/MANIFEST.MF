@@ -5,11 +5,11 @@ Bundle-SymbolicName: com.bluexml.side.Integration.standAlone.metamodel.documenta
 Bundle-Version: 1.0.3.v8749-20090902
 Bundle-Activator: com.bluexml.side.integration.standalone.metamodel.documentation.Activator
 Bundle-Vendor: BLUEXML
-Require-Bundle: org.eclipse.ui;bundle-version="3.4.2",
+Require-Bundle: org.eclipse.ui;bundle-version="3.4.0",
  org.eclipse.core.runtime;bundle-version="3.4.0",
- org.eclipse.core.resources;bundle-version="3.4.2",
+ org.eclipse.core.resources;bundle-version="3.4.0",
  org.eclipse.emf.common;bundle-version="2.4.0",
- org.eclipse.emf.ecore;bundle-version="2.4.2",
+ org.eclipse.emf.ecore;bundle-version="2.4.0",
  org.eclipse.emf.ecore.xmi;bundle-version="2.4.1",
  com.bluexml.side.Util.generator.documentation;bundle-version="1.0.5",
  com.bluexml.side.Util.generator.acceleo;bundle-version="1.0.18",
