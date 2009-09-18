@@ -1,4 +1,8 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-put here all jar
+package ${package};
+
+public class Exemple {
+
+}

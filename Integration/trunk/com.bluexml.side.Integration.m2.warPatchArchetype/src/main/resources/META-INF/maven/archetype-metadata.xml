@@ -1,21 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?><archetype-descriptor name="facetMapDashlet">
+<?xml version="1.0" encoding="UTF-8"?><archetype-descriptor name="shareTest">
   <fileSets>
-    <fileSet filtered="true" encoding="UTF-8">
-      <directory>resources</directory>
+    <fileSet filtered="true" packaged="true" encoding="UTF-8">
+      <directory>src/main/java</directory>
       <includes>
-        <include>**/*.properties</include>
+        <include>**/*.java</include>
       </includes>
     </fileSet>
     <fileSet filtered="true" encoding="UTF-8">
-      <directory>lib</directory>
+      <directory>src/main/resources</directory>
       <includes>
         <include>**/*.txt</include>
-      </includes>
-    </fileSet>
-    <fileSet filtered="true" encoding="UTF-8">
-      <directory>resources/WEB-INF</directory>
-      <includes>
-        <include>**/*.xml</include>
+        <include>**/*.properties</include>
       </includes>
     </fileSet>
     <fileSet encoding="UTF-8">
@@ -25,17 +20,17 @@
       </includes>
     </fileSet>
     <fileSet encoding="UTF-8">
-      <directory>resources/WEB-INF</directory>
+      <directory>bin/com</directory>
       <includes>
-        <include>**/*.ftl</include>
+        <include>**/*.class</include>
       </includes>
     </fileSet>
     <fileSet filtered="true" encoding="UTF-8">
       <directory></directory>
       <includes>
+        <include>.classpath</include>
         <include>.project</include>
         <include>build.xml</include>
-        <include>extensionBuilder.xml</include>
       </includes>
     </fileSet>
     <fileSet encoding="UTF-8">
