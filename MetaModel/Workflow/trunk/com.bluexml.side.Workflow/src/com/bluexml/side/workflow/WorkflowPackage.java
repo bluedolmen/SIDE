@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.workflow;
 
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
