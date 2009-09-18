@@ -144,7 +144,7 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 
 	private IFile createFileForModel(String extension) throws CoreException {
 		IFolder folder = newProject.getFolder(DEFAULT_MODELS_DIR);
-		return folder.getFile(DEFAULT_MODEL_NAME + extension);
+		return folder.getFile(optionsPage.getModelNameValue() + extension);
 	}
 
 	protected String getExtensionForExtensionId(String id) {
@@ -233,7 +233,7 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 
 
 	private void createApplicationFile() throws IOException {
-		IFile file = newProject.getFile(DEFAULT_MODEL_NAME + ".application");
+		IFile file = newProject.getFile(optionsPage.getModelNameValue() + ".application");
 		com.bluexml.side.application.Application app = ApplicationFactory.eINSTANCE.createApplication();
 		app.setName(newProject.getName());
 		// Add initial configuration
