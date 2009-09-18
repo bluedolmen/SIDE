@@ -252,6 +252,7 @@ public class Application {
 		out += "\t================================= -->\n\n";
 
 		out += "\t<target name=\"pde-build\">\n";
+		out += "\t\t\t<chmod dir=\"${buildName}\" perm=\"777\" includes=\"\"*/**>\n";
 		out += "\t\t\t<java classname=\"org.eclipse.equinox.launcher.Main\" fork=\"true\" failonerror=\"true\">\n";
 		out += "\t\t\t\t<arg value=\"-application\" />\n";
 		out += "\t\t\t\t<arg value=\"org.eclipse.ant.core.antRunner\" />\n";
