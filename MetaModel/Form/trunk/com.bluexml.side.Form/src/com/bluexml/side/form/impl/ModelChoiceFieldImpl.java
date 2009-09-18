@@ -415,9 +415,9 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 				if (resolve) return getReal_class();
 				return basicGetReal_class();
 			case FormPackage.MODEL_CHOICE_FIELD__MIN_BOUND:
-				return new Integer(getMin_bound());
+				return getMin_bound();
 			case FormPackage.MODEL_CHOICE_FIELD__MAX_BOUND:
-				return new Integer(getMax_bound());
+				return getMax_bound();
 			case FormPackage.MODEL_CHOICE_FIELD__TARGET:
 				return getTarget();
 			case FormPackage.MODEL_CHOICE_FIELD__ASSOCIATION_FORM_CLASS:
@@ -425,11 +425,11 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 			case FormPackage.MODEL_CHOICE_FIELD__WIDGET:
 				return getWidget();
 			case FormPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
-				return isShow_actions() ? Boolean.TRUE : Boolean.FALSE;
+				return isShow_actions();
 			case FormPackage.MODEL_CHOICE_FIELD__FORMAT_PATTERN:
 				return getFormat_pattern();
 			case FormPackage.MODEL_CHOICE_FIELD__LABEL_LENGTH:
-				return new Integer(getLabel_length());
+				return getLabel_length();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -447,10 +447,10 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 				setReal_class((Clazz)newValue);
 				return;
 			case FormPackage.MODEL_CHOICE_FIELD__MIN_BOUND:
-				setMin_bound(((Integer)newValue).intValue());
+				setMin_bound((Integer)newValue);
 				return;
 			case FormPackage.MODEL_CHOICE_FIELD__MAX_BOUND:
-				setMax_bound(((Integer)newValue).intValue());
+				setMax_bound((Integer)newValue);
 				return;
 			case FormPackage.MODEL_CHOICE_FIELD__TARGET:
 				getTarget().clear();
@@ -464,13 +464,13 @@ public class ModelChoiceFieldImpl extends FieldImpl implements ModelChoiceField 
 				setWidget((ModelChoiceWidgetType)newValue);
 				return;
 			case FormPackage.MODEL_CHOICE_FIELD__SHOW_ACTIONS:
-				setShow_actions(((Boolean)newValue).booleanValue());
+				setShow_actions((Boolean)newValue);
 				return;
 			case FormPackage.MODEL_CHOICE_FIELD__FORMAT_PATTERN:
 				setFormat_pattern((String)newValue);
 				return;
 			case FormPackage.MODEL_CHOICE_FIELD__LABEL_LENGTH:
-				setLabel_length(((Integer)newValue).intValue());
+				setLabel_length((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

@@ -140,9 +140,9 @@ public class CharFieldImpl extends FieldImpl implements CharField {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FormPackage.CHAR_FIELD__MIN_LENGTH:
-				return new Integer(getMin_length());
+				return getMin_length();
 			case FormPackage.CHAR_FIELD__MAX_LENGTH:
-				return new Integer(getMax_length());
+				return getMax_length();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -156,10 +156,10 @@ public class CharFieldImpl extends FieldImpl implements CharField {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FormPackage.CHAR_FIELD__MIN_LENGTH:
-				setMin_length(((Integer)newValue).intValue());
+				setMin_length((Integer)newValue);
 				return;
 			case FormPackage.CHAR_FIELD__MAX_LENGTH:
-				setMax_length(((Integer)newValue).intValue());
+				setMax_length((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
