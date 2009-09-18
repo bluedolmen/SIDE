@@ -46,7 +46,7 @@ public class LogSave {
 	 * @param log
 	 * @param fileName
 	 * @param folderName
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public static void toXml(SIDELog log, String fileName, String folderName) throws Exception {
 			IFolder folder = IFileHelper.createFolder(folderName);
@@ -59,7 +59,7 @@ public class LogSave {
 			toXml(log, fos);
 			IFileHelper.refreshFolder(folder);
 			fos.close();
-		
+
 	}
 
 	/**
@@ -85,6 +85,8 @@ public class LogSave {
 		xstream.useAttributeFor(LogEntry.class, "type"); //$NON-NLS-1$
 		xstream.registerConverter(new URIConverter());
 
+		//TODO : use a converter (if we have other List<String>)
+		xstream.alias("model", String.class); //$NON-NLS-1$
 		xstream.toXML(log, fos);
 	}
 

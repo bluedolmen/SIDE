@@ -144,6 +144,12 @@
                                 <xsl:if test="//deployed/toDeploy[@id=$entryId]">
                                     Deployed <xsl:value-of select="//deployed/toDeploy[@id=$entryId]/@date"/>
                                 </xsl:if>
+                                <xsl:if test="$type='GENERATION'">
+                                    <br></br>Models :
+                                    <xsl:for-each select="models/model">
+                                       <xsl:value-of select="text()"/> -
+                                    </xsl:for-each>
+                                </xsl:if>
                             </fieldset>
                         <ul>
                             <xsl:for-each select="logEntry[@type!='SERVICE']">
