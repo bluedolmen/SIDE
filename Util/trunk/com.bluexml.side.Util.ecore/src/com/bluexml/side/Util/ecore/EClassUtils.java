@@ -32,7 +32,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 public class EClassUtils {
 	
 	
-	
 	/**
 	 * @see EStructuralFeature findEStructuralFeature(String name,String eType,String econtainingClass, EClass source )
 	 * @param name
