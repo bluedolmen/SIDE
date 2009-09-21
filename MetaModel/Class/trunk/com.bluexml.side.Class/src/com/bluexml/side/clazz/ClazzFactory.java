@@ -116,6 +116,15 @@ public interface ClazzFactory extends EFactory {
 	AssociationEnd createAssociationEnd();
 
 	/**
+	 * Returns a new object of class '<em>Root Package</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Root Package</em>'.
+	 * @generated
+	 */
+	RootPackage createRootPackage();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

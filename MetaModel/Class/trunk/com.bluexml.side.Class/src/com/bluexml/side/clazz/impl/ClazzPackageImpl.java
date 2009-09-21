@@ -20,6 +20,7 @@ import com.bluexml.side.clazz.ClazzFactory;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.clazz.EnumerationLiteral;
+import com.bluexml.side.clazz.RootPackage;
 import com.bluexml.side.clazz.TitledNamedClassModelElement;
 
 import com.bluexml.side.clazz.util.ClazzValidator;
@@ -126,6 +127,13 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * @generated
 	 */
 	private EClass associationEndEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass rootPackageEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -606,6 +614,15 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getRootPackage() {
+		return rootPackageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getAssociationType() {
 		return associationTypeEEnum;
 	}
@@ -693,6 +710,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		createEAttribute(associationEndEClass, ASSOCIATION_END__NAVIGABLE);
 		createEReference(associationEndEClass, ASSOCIATION_END__LINKED_CLASS);
 
+		rootPackageEClass = createEClass(ROOT_PACKAGE);
+
 		// Create enums
 		associationTypeEEnum = createEEnum(ASSOCIATION_TYPE);
 	}
@@ -742,6 +761,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		classCommentEClass.getESuperTypes().add(theCommonPackage.getComment());
 		associationEndEClass.getESuperTypes().add(this.getTitledNamedClassModelElement());
 		associationEndEClass.getESuperTypes().add(theCommonPackage.getComment());
+		rootPackageEClass.getESuperTypes().add(this.getClassPackage());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(classModelElementEClass, ClassModelElement.class, "ClassModelElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -880,6 +900,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		addEOperation(associationEndEClass, ecorePackage.getEBoolean(), "isMany", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(associationEndEClass, this.getAssociationEnd(), "getOpposite", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(rootPackageEClass, RootPackage.class, "RootPackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(associationTypeEEnum, AssociationType.class, "AssociationType");

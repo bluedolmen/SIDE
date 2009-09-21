@@ -306,6 +306,29 @@ public class ClazzItemProviderAdapterFactory extends ClazzAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.RootPackage} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RootPackageItemProvider rootPackageItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.clazz.RootPackage}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRootPackageAdapter() {
+		if (rootPackageItemProvider == null) {
+			rootPackageItemProvider = new RootPackageItemProvider(this);
+		}
+
+		return rootPackageItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -414,6 +437,7 @@ public class ClazzItemProviderAdapterFactory extends ClazzAdapterFactory impleme
 		if (aspectItemProvider != null) aspectItemProvider.dispose();
 		if (classCommentItemProvider != null) classCommentItemProvider.dispose();
 		if (associationEndItemProvider != null) associationEndItemProvider.dispose();
+		if (rootPackageItemProvider != null) rootPackageItemProvider.dispose();
 	}
 
 }

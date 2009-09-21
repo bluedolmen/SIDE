@@ -254,6 +254,8 @@ public class ClazzValidator extends EObjectValidator {
 				return validateClassComment((ClassComment)value, diagnostics, context);
 			case ClazzPackage.ASSOCIATION_END:
 				return validateAssociationEnd((AssociationEnd)value, diagnostics, context);
+			case ClazzPackage.ROOT_PACKAGE:
+				return validateRootPackage((RootPackage)value, diagnostics, context);
 			case ClazzPackage.ASSOCIATION_TYPE:
 				return validateAssociationType((AssociationType)value, diagnostics, context);
 			default:
@@ -1077,6 +1079,23 @@ public class ClazzValidator extends EObjectValidator {
 	 */
 	public boolean validateAssociationEnd(AssociationEnd associationEnd, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(associationEnd, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRootPackage(RootPackage rootPackage, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_EveryMultiplicityConforms(rootPackage, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(rootPackage, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(rootPackage, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(rootPackage, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(rootPackage, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(rootPackage, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(rootPackage, diagnostics, context);
+		if (result || diagnostics != null) result &= validateClassPackage_PackageNameNull(rootPackage, diagnostics, context);
+		return result;
 	}
 
 	/**

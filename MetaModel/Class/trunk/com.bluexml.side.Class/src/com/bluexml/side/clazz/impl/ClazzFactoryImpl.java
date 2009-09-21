@@ -71,6 +71,7 @@ public class ClazzFactoryImpl extends EFactoryImpl implements ClazzFactory {
 			case ClazzPackage.ASPECT: return createAspect();
 			case ClazzPackage.CLASS_COMMENT: return createClassComment();
 			case ClazzPackage.ASSOCIATION_END: return createAssociationEnd();
+			case ClazzPackage.ROOT_PACKAGE: return createRootPackage();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -204,6 +205,16 @@ public class ClazzFactoryImpl extends EFactoryImpl implements ClazzFactory {
 	public AssociationEnd createAssociationEnd() {
 		AssociationEndImpl associationEnd = new AssociationEndImpl();
 		return associationEnd;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RootPackage createRootPackage() {
+		RootPackageImpl rootPackage = new RootPackageImpl();
+		return rootPackage;
 	}
 
 	/**

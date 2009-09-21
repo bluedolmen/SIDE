@@ -187,19 +187,20 @@ public class ClazzModelWizard extends Wizard implements INewWizard {
 	 * Returns the names of the types that can be created as the root object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	protected Collection<String> getInitialObjectNames() {
 		if (initialObjectNames == null) {
 			initialObjectNames = new ArrayList<String>();
-			for (EClassifier eClassifier : clazzPackage.getEClassifiers()) {
-				if (eClassifier instanceof EClass) {
-					EClass eClass = (EClass)eClassifier;
-					if (!eClass.isAbstract()) {
-						initialObjectNames.add(eClass.getName());
-					}
-				}
-			}
+//			for (EClassifier eClassifier : clazzPackage.getEClassifiers()) {
+//				if (eClassifier instanceof EClass) {
+//					EClass eClass = (EClass)eClassifier;
+//					if (!eClass.isAbstract()) {
+//						initialObjectNames.add(eClass.getName());
+//					}
+//				}
+//			}
+			initialObjectNames.add(clazzPackage.getRootPackage().getName());
 			Collections.sort(initialObjectNames, CommonPlugin.INSTANCE.getComparator());
 		}
 		return initialObjectNames;
