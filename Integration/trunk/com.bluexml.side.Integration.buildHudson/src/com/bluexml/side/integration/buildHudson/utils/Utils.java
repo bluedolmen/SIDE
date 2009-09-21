@@ -1367,7 +1367,7 @@ public class Utils {
 
 			// suppression des fichiers cr��s
 			//FileHelper.deleteFile(new File(Utils.getBuildPath()+ File.separator + "buildSVN.xml"));
-			FileHelper.deleteFile(new File(Utils.getBuildPath()
+			/*FileHelper.deleteFile(new File(Utils.getBuildPath()
 					+ File.separator + "build.xml"));
 			FileHelper.deleteFile(new File(Utils.getBuildPath()
 					+ File.separator + "buildAuto.product"));
@@ -1385,7 +1385,7 @@ public class Utils {
 					+ "logbuildbuild.txt"));
 			
 			FileHelper.deleteFile(new File(getBuildPath() + File.separator
-					+ "logjarBuilderjarBuilder.txt"));
+					+ "logjarBuilderjarBuilder.txt"));*/
 
 		} catch (IOException e) {
 			e.printStackTrace();
