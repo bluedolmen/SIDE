@@ -18,6 +18,7 @@
              menubarPath="com.bluexml.side/application">
        </action>
        <menu
+             icon="icon/side_16.gif"
              id="com.bluexml.side"
              label="S-IDE"
              path="additions">
@@ -43,6 +44,7 @@
                id="com.bluexml.application.ui.generate">
          </action>
          <menu
+               icon="icon/side_16.gif"
                id="com.bluexml.side"
                label="S-IDE"
                path="additions">
