@@ -20,6 +20,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 import com.bluexml.side.view.ComposedView;
+import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
 
 /**
@@ -104,11 +105,30 @@ public class ComposedViewItemProvider
 	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @_generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
+				 ViewFactory.eINSTANCE.createDataList()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
+				 ViewFactory.eINSTANCE.createDataTable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
+				 ViewFactory.eINSTANCE.createFacetMap()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ViewPackage.Literals.FIELD_CONTAINER__CHILDREN,
+				 ViewFactory.eINSTANCE.createTree()));
 	}
 
 	/**
