@@ -1,6 +1,6 @@
 <%
 metamodel http://www.kerblue.org/portal/1.0
-import com.bluexml.side.portal.generator.alfresco.templates.ClazzService
+import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzService
 %>
 
 <%-- 
@@ -20,7 +20,7 @@ import com.bluexml.side.portal.generator.alfresco.templates.ClazzService
    </plug-ins-->
 
 <%for (portletSet){%>
-<%if (name == "DocumentDetail" && isPortletInternal != null && isPortletInternal.view != null) {%>
+<%if (name == "DocumentDetails" && isPortletInternal != null && isPortletInternal.view != null) {%>
 <%for (isPortletInternal.view.getInnerView()){%>
 <!-- START BlueXML custom form configuration for the <%filter("view.AbstractViewOf").viewOf.filter("clazz.Clazz").getContentType()%> content type -->   
    <config evaluator="node-type" condition="<%filter("view.AbstractViewOf").viewOf.filter("clazz.Clazz").getContentType()%>">

@@ -19,10 +19,10 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	/*
 	 * final fields used in generation too
 	 */
-	public static String GENERATOR_OPTIONS_PORTAL = "alfrescoShare.defaultDocList";
+	public static String GENERATOR_OPTIONS_PORTAL_doclist = "alfrescoShare.defaultDocList";
 	public static String GENERATOR_OPTIONS_SHARE_EXTENSION = "alfresco.share.extension";
 	public static String GENERATOR_OPTIONS_WEBSCRIPT_REPORT = "alfresco.webscript.report";
-	public static String GENERATOR_OPTIONS_DEFAULTFORMS = "class.alfrescoShare.defaultForms";
+	//public static String GENERATOR_OPTIONS_DEFAULTFORMS = "class.alfrescoShare.defaultForms";
 	public static String GENERATOR_OPTIONS_SQL_EXTENSION = "com.bluexml.side.Class.generator.alfresco.sql";
 	public static String GENERATOR_CODE = "CODE_GED_G_C_ALFRESCO_3";
 	public static String WEBSCRIPT_SIDE_FAMILY="/service/index/family/SIDE";
@@ -59,25 +59,24 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 			
 			// DefaultdocListView add custom version of docList webScript
 			// used by AlfrescoShare to render Document list
-			if (getGeneratorOptionValue(GENERATOR_OPTIONS_PORTAL)) {
+			if (getGeneratorOptionValue(GENERATOR_OPTIONS_PORTAL_doclist)) {
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/customViews.ftl.mt");
 				// default view
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/defaultdoclistView_ftl.mt");
 			}
 			
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_SHARE_EXTENSION)) {
-				// static resources to enable to use view in doclist now com.bluexml.side.Integration.alfresco.doclist dependence
-//				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/doclist.get.desc.xml.mt");
-//				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/doclist.get.html.ftl.mt");
-//				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/doclist.get.js.mt");
-//				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/doclist.get.json.ftl.mt");
-
 				// generator for alfresco Share web application
+				// upload configuration
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/file-upload-response-get-patch.mt");
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/flash-upload-js-get-patch.mt");
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/html-upload-js-get-patch.mt");
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/defaultdocListView/documentlist.get.properties.mt");
-
+				
+				// add forms/details management
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/DefaultEditForms/custom-web-framework-application-context.mt");
+				// defaults forms
+				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/DefaultEditForms/web-framework-config-defaults.mt");
 			}
 
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_WEBSCRIPT_REPORT)) {
@@ -115,11 +114,6 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 				monitor.getLog().addServiceLog("SIDE content type webscript", "webscript can be use to list document for reporting purpose", getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME)+WEBSCRIPT_SIDE_FAMILY);
 			}
 
-			if (getGeneratorOptionValue(GENERATOR_OPTIONS_DEFAULTFORMS)) {
-				// default Forms for custom types
-				result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/DefaultEditForms/web-framework-config-custom.mt");
-			}
-			
 			
 			// standard alfresco services :
 			monitor.getLog().addServiceLog("Alfresco", "Alfresco Webclient", getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME));

@@ -8,7 +8,7 @@ import templates.servicesTemplates.Common
 --%>
 
 <%script type="clazz.ClassPackage" name="getCustomWebFwkConfigOutputFile"%>
-<%if (eContainer() == null) {%><%getProperty("alf.share.paths.web-ext")%>web-framework-config-custom.xml<%}%>
+<%if (eContainer() == null) {%><%getProperty("alf.share.paths.web-ext")%>web-framework-config-defaults.xml<%}%>
 
 <%script type="clazz.ClassPackage" name="customWebFrameworkConfig" file="<%getCustomWebFwkConfigOutputFile%>"%>
 <alfresco-config>
@@ -34,7 +34,7 @@ import templates.servicesTemplates.Common
 	            <!-- END default Alfresco form configuration (cm:content) -->
 	            
 	            <!-- START BlueXML custom form configuration (<%getContentType()%>) -->
-	            <%getCustomBlueXMLFormConfiguration()%>
+	            <%--getCustomBlueXMLFormConfiguration()--%>
 	            <!-- END BlueXML custom form configuration (<%getContentType()%>) -->
 	         </field-visibility>
 	      </form>
