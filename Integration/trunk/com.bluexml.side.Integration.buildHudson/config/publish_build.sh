@@ -38,8 +38,10 @@ else
        echo " ERROR: ssh-agent is not started; unable to publish local update site on remote update site"
        exit -1
       fi
+      scp -i ~/.ssh/id_rsa_gimli -r $src_dir $dest_dir
       scp -i ~/.ssh/id_rsa_gimli -r $src_dir/* $dest_dir
     else
+      cp -r $src_dir $dest_dir
       cp -r $src_dir/* $dest_dir
     fi
   fi
