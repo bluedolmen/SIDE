@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 # first test disk space: if full, stop build
 # 1st parameter = source workspace path
 # 2nd parameter = target workspace path
