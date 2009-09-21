@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <webscript>
 	<shortname>BlueXML XForms webscript for Alfresco</shortname>
+	<url>/xforms/auth</url>
 	<url>/xforms/batch</url>
 	<url>/xforms/delete</url>
 	<url>/xforms/enum</url>
