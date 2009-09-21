@@ -34,9 +34,6 @@ cp -R $MAVEN_SOURCE/* $MAVEN_TARGET
 cp -R $SOURCE_WORKSPACE/../* $BUILD_JAR
 
 cd $BUILD_JAR
-rm -f buildForLinux.properties
-rm -f buildForWindows.properties
-rm -rf config
 mkdir bin
 ant main
 cp -f Build.jar $BUILD_JAR/..
