@@ -4,12 +4,12 @@
  * This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Boston, MA 02111.
@@ -51,25 +51,25 @@ import com.bluexml.side.common.MetaInfoGroup;
 
 /**
  * Updating association parameters
- * 
+ *
  */
 public class AssociationEditDialog extends Dialog implements IDialogConstants {
 	private static final int MIN_DIALOG_HEIGHT = 300;
 
 	private static final int MIN_DIALOG_WIDTH = 200;
-	
-	
-	
-	
-	
+
+
+
+
+
 	/** Current edited Association */
 	private Association association;
 
 	/** Properties of the Association */
 	private String associationName;
-	
+
 	private String associationTitle;
-	
+
 	private String associationDescription;
 
 	private AssociationType associationKind;
@@ -90,15 +90,15 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 	private Composite dialogComposite;
 
 	private Text associationNameTxt;
-	
+
 	private Text associationTitleTxt;
-	
+
 	private Text associationDescriptionTxt;
 
 	private Text roleTargetNameTxt;
 
 	private Text roleSourceNameTxt;
-	
+
 	private Text roleTargetNameTxtTitle;
 
 	private Text roleSourceNameTxtTitle;
@@ -140,7 +140,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 	private String associationRoleSrc;
 
 	private String associationRoleTarget;
-	
+
 	private String associationRoleSrcTitle;
 
 	private String associationRoleTargetTitle;
@@ -165,7 +165,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Create the dialog for a given association
-	 * 
+	 *
 	 * @param assoc
 	 *            the association to edit
 	 * @param parentShell
@@ -189,15 +189,15 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 		associationTitle = association.getTitle();
 		if (associationTitle == null)
 			associationTitle = new String();
-		
+
 		associationDescription = association.getDescription();
 		if (associationDescription == null)
 			associationDescription = new String();
-		
+
 		associationKind = association.getAssociationType();
 		associationRoleSrc = association.getFirstEnd().getName();
 		associationRoleTarget = association.getSecondEnd().getName();
-		
+
 		associationRoleSrcTitle = association.getFirstEnd().getTitle();
 		associationRoleTargetTitle = association.getSecondEnd().getTitle();
 
@@ -214,7 +214,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 			firstEndClass = ((Clazz)association.getFirstEnd().getLinkedClass()).getName();
 		if (association.getFirstEnd().getLinkedClass() instanceof Aspect)
 			firstEndClass = ((Aspect)association.getFirstEnd().getLinkedClass()).getName();
-		
+
 		secondEndIsNavigable = association.getSecondEnd().isNavigable();
 		secondEndLowerBound = association.getSecondEnd().getCardMin();
 		secondEndUpperBound = association.getSecondEnd().getCardMax();
@@ -232,7 +232,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Set the shell title
-	 * 
+	 *
 	 * @see org.eclipse.jface.window.Window#configureShell(org.eclipse.swt.widgets.Shell)
 	 */
 	protected void configureShell(Shell newShell) {
@@ -244,7 +244,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Create the Dialog area
-	 * 
+	 *
 	 * @see org.eclipse.jface.dialogs.Dialog#createDialogArea(org.eclipse.swt.widgets.Composite)
 	 */
 	protected Control createDialogArea(Composite parent) {
@@ -261,7 +261,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Creates the group
-	 * 
+	 *
 	 * @param parent
 	 *            the parent Composite
 	 */
@@ -299,7 +299,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Create the Tab for the first end of the association
-	 * 
+	 *
 	 * @param parent
 	 *            the owning Tab folder
 	 */
@@ -316,12 +316,12 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 		nameLbl.setText("Role :");
 		roleSourceNameTxt = new Text(composite, SWT.BORDER);
 		roleSourceNameTxt.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
+
 		Label titleLbl = new Label(composite, SWT.NONE);
 		titleLbl.setText("Title :");
 		roleSourceNameTxtTitle = new Text(composite, SWT.BORDER);
 		roleSourceNameTxtTitle.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
+
 		Group emptyGroup = createEmptyTab(composite);
 
 		firstEndIsNavigableBt = createNavigableTab(emptyGroup);
@@ -336,7 +336,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Create the Tab for the second end of the association
-	 * 
+	 *
 	 * @param parent
 	 *            the owning Tab folder
 	 */
@@ -352,7 +352,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 		nameLbl.setText("Role :");
 		roleTargetNameTxt = new Text(composite, SWT.BORDER);
 		roleTargetNameTxt.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
+
 		Label nameLblTitle = new Label(composite, SWT.NONE);
 		nameLblTitle.setText("Title :");
 		roleTargetNameTxtTitle = new Text(composite, SWT.BORDER);
@@ -366,13 +366,13 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 		secondEndLowerBoundTxt = createBoundTab(cardinalityGroup, "Lower bound");
 		secondEndUpperBoundTxt = createBoundTab(cardinalityGroup, "Upper bound");
-		
+
 		secondEndValidationLbl = createValidationMessage(composite);
 	}
 
 	/**
 	 * Create the tab item that contains main data
-	 * 
+	 *
 	 * @param parent
 	 *            the tab folder parent
 	 */
@@ -393,12 +393,12 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 		associationNameTxt = new Text(composite, SWT.BORDER);
 		associationNameTxt
 				.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
+
 		Label titleLbl = new Label(composite, SWT.NONE);
 		titleLbl.setText("Title");
 		associationTitleTxt = new Text(composite, SWT.BORDER);
 		associationTitleTxt.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
+
 		Label descriptionLbl = new Label(composite, SWT.NONE);
 		descriptionLbl.setText("Description");
 		associationDescriptionTxt = new Text(composite, SWT.BORDER);
@@ -406,14 +406,14 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 		Group typeGroup = createGroupTab(composite, "Association Type");
 
-		assoTypeDirecBt = createItemTab(typeGroup, "Simple");
+		assoTypeDirecBt = createItemTab(typeGroup, "Direct");
 		assoTypeCompositeBt = createItemTab(typeGroup, "Composition");
 		assoTypeAggregateBt = createItemTab(typeGroup, "Aggregation");
 	}
 
 	/**
 	 * Create a composite tab
-	 * 
+	 *
 	 * @param parent
 	 *            the parent tab folder
 	 * @param tabName
@@ -436,7 +436,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Create a group for the Property attributes
-	 * 
+	 *
 	 * @param composite
 	 *            the parent composite
 	 * @return the group for the Property attributes
@@ -452,7 +452,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Create the navigable button
-	 * 
+	 *
 	 * @param composite
 	 *            the parent composite
 	 * @return the created button
@@ -468,7 +468,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Create a Group with a given label
-	 * 
+	 *
 	 * @param composite
 	 *            the parent composite
 	 * @param label
@@ -485,7 +485,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Create a RadioButton with a text in the given Group
-	 * 
+	 *
 	 * @param theGroup
 	 *            the owning group for the item
 	 * @param label
@@ -500,7 +500,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Create a group for the cardinality selection
-	 * 
+	 *
 	 * @param composite
 	 *            the parent composite
 	 * @return the group for the cardinality selection
@@ -517,7 +517,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Create the Text field for the cardinality
-	 * 
+	 *
 	 * @param cardinalityGroup
 	 *            the ownng group of cardinality selection
 	 * @param label
@@ -536,7 +536,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 	/**
 	 * Create a Label that will display error and warning messages of the
 	 * validation step
-	 * 
+	 *
 	 * @param composite
 	 *            the parent Composite
 	 * @return the created Label
@@ -563,7 +563,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Check if the informations contained in the Group are valid
-	 * 
+	 *
 	 * @return true if it is OK
 	 */
 	protected boolean validateFirstEndGroup() {
@@ -604,7 +604,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Check if the informations contained in the Group are valid
-	 * 
+	 *
 	 * @return true if it is OK
 	 */
 	protected boolean validateSecondEndGroup() {
@@ -661,12 +661,12 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 			roleSourceNameTxt.setText(associationRoleSrc);
 		if (associationRoleTarget != null)
 			roleTargetNameTxt.setText(associationRoleTarget);
-		
+
 		if (associationRoleSrcTitle != null)
 			roleSourceNameTxtTitle.setText(associationRoleSrcTitle);
 		if (associationRoleTargetTitle != null)
 			roleTargetNameTxtTitle.setText(associationRoleTargetTitle);
-		
+
 
 		// First end data
 		firstEndIsNavigableBt.setSelection(firstEndIsNavigable);
@@ -704,7 +704,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Save the datas before the widgets are disposed
-	 * 
+	 *
 	 * @see org.eclipse.jface.dialogs.Dialog#okPressed()
 	 */
 	protected void okPressed() {
@@ -749,7 +749,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 
 	/**
 	 * Return all the informations concerning an Association
-	 * 
+	 *
 	 * @return a Map
 	 */
 	public Map<String,Object> getAssociationData() {
@@ -762,13 +762,13 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 				associationRoleSrc);
 		resultMap.put(AssociationHelper.ASSOCIATION_ROLE_TARGET,
 				associationRoleTarget);
-		
+
 		resultMap.put(AssociationHelper.ASSOCIATION_ROLE_SRC_TITLE,
 				associationRoleSrcTitle);
 		resultMap.put(AssociationHelper.ASSOCIATION_ROLE_TARGET_TITLE,
 				associationRoleTargetTitle);
-		
-		
+
+
 		resultMap.put(AssociationHelper.ASSOCIATION_TYPE, associationKind);
 
 		resultMap.put(AssociationHelper.FIRST_END_IS_NAVIGABLE, new Boolean(
@@ -786,7 +786,7 @@ public class AssociationEditDialog extends Dialog implements IDialogConstants {
 				secondEndUpperBound);
 
 		resultMap.put(AssociationHelper.META_INFO, dataConstraints);
-		
+
 		return resultMap;
 	}
 
