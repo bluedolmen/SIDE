@@ -14,8 +14,11 @@
  ******************************************************************************/
 package com.bluexml.side.Class.modeler.diagram.commands;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -133,7 +136,7 @@ public class ClazzRestoreConnectionCommand extends AbstractRestoreConnectionComm
 	/**
 	 * @param srcElt the source element
 	 * @param targetElt the target element
-	 * @generated
+	 * @_generated
 	 */
 	private void createAssociationFromClazzToClazz_Associations(GraphElement srcElt, GraphElement targetElt) {
 		Clazz sourceObject = (Clazz) Utils.getElement(srcElt);
@@ -144,7 +147,8 @@ public class ClazzRestoreConnectionCommand extends AbstractRestoreConnectionComm
 			Object obj = it.next();
 			if (obj instanceof Association) {
 				Association edgeObject = (Association) obj;
-				if (sourceObject.getSourceAssociations().contains(edgeObject) && targetObject.getSourceAssociations().contains(edgeObject)) {
+				
+				if (edgeObject.getFirstEnd().getLinkedClass().equals(sourceObject) && edgeObject.getSecondEnd().getLinkedClass().equals(targetObject)) {
 					// check if the relation does not exists yet
 					List<GraphEdge> existing = getExistingEdges(srcElt, targetElt, Association.class);
 					if (!isAlreadyPresent(existing, edgeObject)) {
