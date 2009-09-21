@@ -37,7 +37,8 @@ cd $BUILD_JAR
 rm -f buildForLinux.properties
 rm -f buildForWindows.properties
 rm -rf config
-jar cvmf MANIFEST.MF Build.jar *
+mkdir bin
+ant main
 cp -f Build.jar $BUILD_JAR/..
 
 # give rights for all execute files
