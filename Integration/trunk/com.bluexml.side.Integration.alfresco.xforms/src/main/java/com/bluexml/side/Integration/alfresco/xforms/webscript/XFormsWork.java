@@ -26,6 +26,7 @@ import org.alfresco.repo.search.impl.lucene.ADMLuceneSearcherImpl;
 import org.alfresco.repo.search.impl.lucene.LuceneConfig;
 import org.alfresco.repo.search.impl.lucene.LuceneIndexer;
 import org.alfresco.repo.search.impl.lucene.LuceneSearcher;
+import org.alfresco.repo.security.authentication.AuthenticationException;
 import org.alfresco.repo.security.authentication.AuthenticationUtil.RunAsWork;
 import org.alfresco.repo.security.authority.AuthorityDAO;
 import org.alfresco.repo.transaction.RetryingTransactionHelper;
@@ -46,6 +47,7 @@ import org.alfresco.service.cmr.search.LimitBy;
 import org.alfresco.service.cmr.search.ResultSet;
 import org.alfresco.service.cmr.search.SearchParameters;
 import org.alfresco.service.cmr.search.SearchService;
+import org.alfresco.service.cmr.security.AuthenticationService;
 import org.alfresco.service.cmr.security.AuthorityType;
 import org.alfresco.service.cmr.security.PersonService;
 import org.alfresco.service.cmr.workflow.WorkflowPath;
@@ -137,6 +139,9 @@ public class XFormsWork implements RunAsWork<String> {
 			if (queryType == XFormsWebscript.XFormsQueryType.workflow) {
 				result = wfManage();
 			}
+			if (queryType == XFormsWebscript.XFormsQueryType.addToPackage) {
+				result = addInPackage();
+			}
 			if (queryType == XFormsWebscript.XFormsQueryType.upload) {
 				result = upload();
 			}
@@ -146,8 +151,8 @@ public class XFormsWork implements RunAsWork<String> {
 			if (queryType == XFormsWebscript.XFormsQueryType.createPath) {
 				result = createPath();
 			}
-			if (queryType == XFormsWebscript.XFormsQueryType.addToPackage) {
-				result = addInPackage();
+			if (queryType == XFormsWebscript.XFormsQueryType.auth) {
+				result = authenticate();
 			}
 			dataLayer.setInTransaction(false);
 
@@ -157,7 +162,6 @@ public class XFormsWork implements RunAsWork<String> {
 
 			return result;
 		}
-
 	}
 
 	public String doWork() throws Exception {
@@ -183,6 +187,27 @@ public class XFormsWork implements RunAsWork<String> {
 			result = sb.toString();
 		}
 		return result;
+	}
+
+	/**
+	 * Tests whether user credentials authenticate successfully with Alfresco.
+	 * <p/>
+	 * Parameters: "username", "password".
+	 * <p/>
+	 * 
+	 * @return "success" if successful, "failure" if an exception occurred or the auth failed.
+	 */
+	protected String authenticate() {
+		AuthenticationService authService = serviceRegistry.getAuthenticationService();
+		String username = parameters.get("username");
+		String password = parameters.get("password");
+		
+		try {
+			authService.authenticate(username, password.toCharArray());
+		} catch (AuthenticationException e) {
+			return "failure";
+		}
+		return "success";
 	}
 
 	private void exceptionToString(Throwable e, StringBuffer sb, HashSet<Throwable> causes) {
@@ -643,7 +668,7 @@ public class XFormsWork implements RunAsWork<String> {
 		taskQuery.setTaskState(WorkflowTaskState.COMPLETED);
 		List<WorkflowTask> tasks = wfs.queryTasks(taskQuery);
 		// get the relevant queries
-		if (tasks !=null) {
+		if (tasks != null) {
 			for (WorkflowTask task : tasks) {
 				Set<QName> qnames = task.properties.keySet();
 				for (QName qname : qnames) {

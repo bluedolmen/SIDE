@@ -53,6 +53,7 @@ public class XFormsWebscript extends AbstractWebScript {
 			labels,
 			createPath,
 			addToPackage,
+			auth,
 			batch;
 	}
 
@@ -228,6 +229,9 @@ public class XFormsWebscript extends AbstractWebScript {
 		}
 		if (query.endsWith("mkdir")) {
 			result = XFormsQueryType.createPath;
+		}
+		if (query.endsWith("auth")) {
+			result = XFormsQueryType.auth;
 		}
 		return result;
 	}
