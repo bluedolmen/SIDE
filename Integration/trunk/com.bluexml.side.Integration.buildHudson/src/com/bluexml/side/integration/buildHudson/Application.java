@@ -103,7 +103,7 @@ public class Application {
 		}
 
 		// Mise � jour des num�ros de version en fonction du fichier de log
-		System.out.println("\nMise � jour des num�ros de version (si besoin)...");
+		//System.out.println("\nMise � jour des num�ros de version (si besoin)...");
         
 		// si labs, on ne met pas � jour les versions des features et on ne commit pas
 /*
@@ -152,7 +152,7 @@ public class Application {
 
 		// D�placement et suppression des r�pertoires
 		System.out.println("\nD�placement et suppression des r�pertoires");
-		Utils.finalTraitement();
+		//Utils.finalTraitement();
 
 		/*
 		 * // Build des projets seul
