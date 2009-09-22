@@ -204,6 +204,8 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 	private void createInitialDataModel() throws IOException, CoreException {
 		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.clazz.presentation.ClazzEditorID")); //$NON-NLS-1$
 		createdModels.add(file);
+		com.bluexml.side.clazz.Model model =  ClazzFactory.eINSTANCE.createModel();
+		model.setName(optionsPage.getModelNameValue());
 		ClassPackage packageRoot = ClazzFactory.eINSTANCE.createClassPackage();
 		ClassPackage lastPackage = packageRoot;
 		String stringPath = optionsPage.getStringPath();
@@ -220,7 +222,8 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 		} else {
 			packageRoot.setName("root"); //$NON-NLS-1$
 		}
-		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)packageRoot);
+		model.getPackageSet().add(packageRoot);
+		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)model);
 		createDiagramFile(file, lastPackage, "com.bluexml.side.Class.modeler.diagram"); //$NON-NLS-1$
 	}
 

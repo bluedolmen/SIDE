@@ -82,6 +82,7 @@
             category="com.bluexml.side.Intregation.eclipse.branding.category"
             class="com.bluexml.side.Integration.eclipse.branding.Wizard"
             finalPerspective="com.bluexml.side.Integration.eclipse.branding.perspective"
+            hasPages="true"
             icon="icons/newProject.png"
             id="com.bluexml.side.Integration.eclipse.branding.wizard"
             name="S-IDE Project"
