@@ -39,7 +39,7 @@ public class FileHelper {
 					// mkdirs not mkdir)
 					if (!dest.mkdirs()) {
 						throw new IOException(
-								"copyFiles: Could not create direcotry: "
+								"copyFiles: Could not create directory: "
 										+ dest.getAbsolutePath() + ".");
 					}
 				}
