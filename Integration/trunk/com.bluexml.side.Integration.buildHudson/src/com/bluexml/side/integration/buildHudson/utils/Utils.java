@@ -815,149 +815,151 @@ public class Utils {
 	 */
 	public static void updateVersionNumber(String projectName) {
 
-		String[] pattern = ouvrirFichier("build.properties").getProperty(
-				"number-pattern").split("\\.");
+		if (projectName.length() > 0) {
+			String[] pattern = ouvrirFichier("build.properties").getProperty(
+			"number-pattern").split("\\.");
 
-		// En fonction du type du projet (feature ou plugin)
-		// on ira regarder soit dans le MANIFEST.MF ou alors dans le feature.xml
-		if (projectName.indexOf("feature") == -1) {
-			// chemin vers le MANIFEST.MF
-			String filePluginPath = getPathToLocalCopy(projectName)
-					+ File.separator + "META-INF" + File.separator
-					+ "MANIFEST.MF";
+			// En fonction du type du projet (feature ou plugin)
+			// on ira regarder soit dans le MANIFEST.MF ou alors dans le feature.xml
+			if (projectName.indexOf("feature") == -1) {
+				// chemin vers le MANIFEST.MF
+				String filePluginPath = getPathToLocalCopy(projectName)
+				+ File.separator + "META-INF" + File.separator
+				+ "MANIFEST.MF";
 
-			// on r�cup�re dans un tableau les 3 num�ros de version du projet
-			String[] number = ouvrirFichier(filePluginPath).getProperty(
-					"Bundle-Version").split("\\.");
+				// on r�cup�re dans un tableau les 3 num�ros de version du projet
+				String[] number = ouvrirFichier(filePluginPath).getProperty(
+				"Bundle-Version").split("\\.");
 
-			String ligne = "";
-			try {
-				BufferedReader reader = new BufferedReader(new FileReader(
-						filePluginPath));
-				PrintWriter writer = new PrintWriter(new FileWriter(
-						filePluginPath + ".txt"));
-				while ((ligne = reader.readLine()) != null) {
-					// si la ligne contient "Bundle-Version:"
-					if (ligne.indexOf("Bundle-Version:") != -1) {
-						// on supprime tout ce qui se trouve apr�s
-						// "Bundle-Version:"
-						ligne = ligne.substring(0, "Bundle-Version:".length());
-						// on ajoute a la ligne le nouveau num�ro de version
-						// si on ne force pas la mise a jour du num�ro de
-						// version
-						if ("".equals(getForceNumberVersion()))
-							ligne += " " + update(number, pattern);
-						else
-							ligne += " " + update(number, getForceNumberVersion().split("\\."));
+				String ligne = "";
+				try {
+					BufferedReader reader = new BufferedReader(new FileReader(
+							filePluginPath));
+					PrintWriter writer = new PrintWriter(new FileWriter(
+							filePluginPath + ".txt"));
+					while ((ligne = reader.readLine()) != null) {
+						// si la ligne contient "Bundle-Version:"
+						if (ligne.indexOf("Bundle-Version:") != -1) {
+							// on supprime tout ce qui se trouve apr�s
+							// "Bundle-Version:"
+							ligne = ligne.substring(0, "Bundle-Version:".length());
+							// on ajoute a la ligne le nouveau num�ro de version
+							// si on ne force pas la mise a jour du num�ro de
+							// version
+							if ("".equals(getForceNumberVersion()))
+								ligne += " " + update(number, pattern);
+							else
+								ligne += " " + update(number, getForceNumberVersion().split("\\."));
+						}
+						// ecriture de la ligne dans le nouveau fichier
+						writer.println(ligne);
 					}
-					// ecriture de la ligne dans le nouveau fichier
-					writer.println(ligne);
+					// fermeture des flux
+					reader.close();
+					writer.close();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
-				// fermeture des flux
-				reader.close();
-				writer.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			// Suppression de l'ancien fichier MANIFEST
-			new File(filePluginPath).delete();
-			// Renomage du nouveau MANIFEST
-			new File(filePluginPath + ".txt")
-					.renameTo(new File(filePluginPath));
+				// Suppression de l'ancien fichier MANIFEST
+				new File(filePluginPath).delete();
+				// Renomage du nouveau MANIFEST
+				new File(filePluginPath + ".txt")
+				.renameTo(new File(filePluginPath));
 
-		} else {
-			// boolean qui permet de savoir s'il faut changer le num�ro du
-			// feature ou non
-			boolean featureAModifier = false;
+			} else {
+				// boolean qui permet de savoir s'il faut changer le num�ro du
+				// feature ou non
+				boolean featureAModifier = false;
 
-			if (listeFeatureModif.contains(projectName))
-				featureAModifier = true;
-
-			// chemin vers le feature.xml
-			String fileFeaturePath = getPathToLocalCopy(projectName)
-					+ File.separator + "feature.xml";
-
-			org.jdom.Document document = null;
-			org.jdom.Element racine;
-
-			// On cr�e une instance de SAXBuilder
-			SAXBuilder sxb = new SAXBuilder();
-
-			try {
-				// On cr�e un nouveau document JDOM avec en argument le fichier
-				// XML
-				document = sxb.build(new File(fileFeaturePath));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			// On initialise un nouvel �l�ment racine avec l'�l�ment racine du
-			// document.
-			racine = document.getRootElement();
-
-			// On va maintenant mettre a jour les num�ro de version des plugins
-			// associ�s a la feature
-
-			// on garde en m�moire l'ancien num�ro de version du plugin pour
-			// savoir s'il a changer et ainsi savoir s'il faut changer ou non le
-			// num�ro de version de la feature
-
-			String oldVersionNumber = "";
-
-			// On cr�e une List contenant tous les noeuds "plugin" de
-			// l'Element racine
-			List<?> listPlugins = racine.getChildren("plugin");
-
-			// On cr�e un Iterator sur notre liste
-			Iterator<?> i = listPlugins.iterator();
-			// on va parcourir tous les plugins
-			while (i.hasNext()) {
-				// On recr�e l'Element courant � chaque tour de boucle afin de
-				// pouvoir utiliser les m�thodes propres aux Element comme :
-				// selectionner un noeud fils, modifier du texte, etc...
-				Element courant = (Element) i.next();
-
-				// sauvegarde du num�ro de version
-				oldVersionNumber = courant.getAttributeValue("version");
-
-				// on regarde si le num�ro de version du plugin a chang�
-				if (!oldVersionNumber.equals(getVersionNumber(courant
-						.getAttributeValue("id")))) {
-					// On modifie le num�ro de version du plugin courant
-					courant.setAttribute("version", getVersionNumber(courant
-							.getAttributeValue("id")));
-
-					// on indique que le num�ro de feature doit changer
+				if (listeFeatureModif.contains(projectName))
 					featureAModifier = true;
+
+				// chemin vers le feature.xml
+				String fileFeaturePath = getPathToLocalCopy(projectName)
+				+ File.separator + "feature.xml";
+
+				org.jdom.Document document = null;
+				org.jdom.Element racine;
+
+				// On cr�e une instance de SAXBuilder
+				SAXBuilder sxb = new SAXBuilder();
+
+				try {
+					// On cr�e un nouveau document JDOM avec en argument le fichier
+					// XML
+					document = sxb.build(new File(fileFeaturePath));
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-			}
 
-			// on r�cup�re dans un tableau les 3 num�ros de version du projet
-			String[] number = racine.getAttributeValue("version").split("\\.");
+				// On initialise un nouvel �l�ment racine avec l'�l�ment racine du
+				// document.
+				racine = document.getRootElement();
 
-			// on change le num�ro de version (s'il le faut)
-			if ("".equals(getForceNumberVersion())) {
-				if (featureAModifier) {
-					if (!listeFeatureModif.contains(projectName)) {
-						listeFeatureModif.add(projectName);
+				// On va maintenant mettre a jour les num�ro de version des plugins
+				// associ�s a la feature
+
+				// on garde en m�moire l'ancien num�ro de version du plugin pour
+				// savoir s'il a changer et ainsi savoir s'il faut changer ou non le
+				// num�ro de version de la feature
+
+				String oldVersionNumber = "";
+
+				// On cr�e une List contenant tous les noeuds "plugin" de
+				// l'Element racine
+				List<?> listPlugins = racine.getChildren("plugin");
+
+				// On cr�e un Iterator sur notre liste
+				Iterator<?> i = listPlugins.iterator();
+				// on va parcourir tous les plugins
+				while (i.hasNext()) {
+					// On recr�e l'Element courant � chaque tour de boucle afin de
+					// pouvoir utiliser les m�thodes propres aux Element comme :
+					// selectionner un noeud fils, modifier du texte, etc...
+					Element courant = (Element) i.next();
+
+					// sauvegarde du num�ro de version
+					oldVersionNumber = courant.getAttributeValue("version");
+
+					// on regarde si le num�ro de version du plugin a chang�
+					if (!oldVersionNumber.equals(getVersionNumber(courant
+							.getAttributeValue("id")))) {
+						// On modifie le num�ro de version du plugin courant
+						courant.setAttribute("version", getVersionNumber(courant
+								.getAttributeValue("id")));
+
+						// on indique que le num�ro de feature doit changer
+						featureAModifier = true;
 					}
-					racine.setAttribute("version", update(number, pattern));
 				}
-			} else
-				racine.setAttribute("version", update(number, getForceNumberVersion().split("\\.")));
 
-			// Enregistrement du fichier
-			try {
-				XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-				sortie.output(document, new FileOutputStream(fileFeaturePath));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+				// on r�cup�re dans un tableau les 3 num�ros de version du projet
+				String[] number = racine.getAttributeValue("version").split("\\.");
+
+				// on change le num�ro de version (s'il le faut)
+				if ("".equals(getForceNumberVersion())) {
+					if (featureAModifier) {
+						if (!listeFeatureModif.contains(projectName)) {
+							listeFeatureModif.add(projectName);
+						}
+						racine.setAttribute("version", update(number, pattern));
+					}
+				} else
+					racine.setAttribute("version", update(number, getForceNumberVersion().split("\\.")));
+
+				// Enregistrement du fichier
+				try {
+					XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+					sortie.output(document, new FileOutputStream(fileFeaturePath));
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
 			}
-
 		}
 	}
 	
