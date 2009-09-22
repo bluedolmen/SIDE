@@ -106,6 +106,7 @@ public class FileHelper {
 	}
 
 	public static boolean deleteFile(File f) {
+		System.out.println("DELETE : "+f);
 		if (f.isDirectory()) {
 			File[] fl = f.listFiles();
 			for (int i = 0; i < fl.length; i++) {
