@@ -18,22 +18,16 @@
     </paletteCategories>
   </palette>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_yP16TncBEdyUwq_XzqQQrw" object="_yP_EP3cBEdyUwq_XzqQQrw" type="Container With Inner Label" defaultBackgroundColor="191,249,217" defaultWidth="-1" defaultHeight="-1" minimumWidth="50" maximumHeight="20"/>
-  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_yP16T3cBEdyUwq_XzqQQrw" object="_yP_EQHcBEdyUwq_XzqQQrw" foregroundColorChangeable="false" fontChangeable="false" type="Class" childElements="_yP16UHcBEdyUwq_XzqQQrw _yP16UXcBEdyUwq_XzqQQrw _2n-_MHcBEdyUwq_XzqQQrw" backgroundColorChangeable="false" container="true" layout="ClassLayout" defaultWidth="100" minimumWidth="50" maximumWidth="800" maximumHeight="800"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_yP16T3cBEdyUwq_XzqQQrw" object="_yP_EQHcBEdyUwq_XzqQQrw" foregroundColorChangeable="false" fontChangeable="false" type="Class" childElements="_yP16UHcBEdyUwq_XzqQQrw _2n-_MHcBEdyUwq_XzqQQrw" backgroundColorChangeable="false" container="true" layout="ClassLayout" defaultWidth="100" minimumWidth="50" maximumWidth="800" maximumHeight="800"/>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_2n-_MHcBEdyUwq_XzqQQrw" object="_zofvQHcBEdyUwq_XzqQQrw" foregroundColorChangeable="false" fontChangeable="false" type="Class" childElements="_yP16UHcBEdyUwq_XzqQQrw" backgroundColorChangeable="false" container="true" layout="ClassLayout" maximumWidth="800" maximumHeight="800"/>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_yP16UHcBEdyUwq_XzqQQrw" object="_yP_EQXcBEdyUwq_XzqQQrw" foregroundColorChangeable="false" fontChangeable="false" type="Class" backgroundColorChangeable="false" directEditable="false"/>
-  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_yP16UXcBEdyUwq_XzqQQrw" object="_yP_EQncBEdyUwq_XzqQQrw" foregroundColorChangeable="false" fontChangeable="false" type="Class" backgroundColorChangeable="false" directEditable="false"/>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_yP16UncBEdyUwq_XzqQQrw" object="_yP_EQ3cBEdyUwq_XzqQQrw" foregroundColorChangeable="false" fontChangeable="false" type="Container With Inner Label" defaultBackgroundColor="191,249,217" backgroundColorChangeable="false" defaultWidth="-1" defaultHeight="-1" minimumWidth="-1" minimumHeight="-1" maximumWidth="-1" maximumHeight="-1"/>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_fpn6AHsHEdyp6M5rXUMfSA" object="_aJpqUHsHEdyp6M5rXUMfSA" foregroundColorChangeable="false" fontChangeable="false" type="Class" childElements="_5KhE4HsIEdy7uoUms_Eq3g" backgroundColorChangeable="false" container="true" layout="ClassLayout" defaultWidth="-1" defaultHeight="-1" minimumWidth="-1" minimumHeight="-1" maximumWidth="-1" maximumHeight="-1"/>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_5KhE4HsIEdy7uoUms_Eq3g" object="_2xfYAHsIEdy7uoUms_Eq3g" foregroundColorChangeable="false" fontChangeable="false" type="Label" backgroundColorChangeable="false"/>
-  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_duiSAKy6EdyIeNPv3dqFqw" object="_UWUlcKy6EdyIeNPv3dqFqw" foregroundColorChangeable="false" fontChangeable="false" type="Container With Inner Label" defaultBackgroundColor="218,248,239" backgroundColorChangeable="false" directEditable="false" defaultHeight="20" minimumWidth="50" maximumWidth="-1" maximumHeight="-1"/>
   <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_yP_EMHcBEdyUwq_XzqQQrw" object="_yP_ERHcBEdyUwq_XzqQQrw" foregroundColorChangeable="false" fontChangeable="false">
-    <sourceTargetCouple xmi:id="_ZFCsQEkwEd6Z9Nja0s-4xQ" containerType="DIAGRAM" autoRef="true" sourceNode="_yP16T3cBEdyUwq_XzqQQrw" targetNode="_yP16T3cBEdyUwq_XzqQQrw">
+    <sourceTargetCouple xmi:id="_VwRmAKdNEd6_r9byV7SFtQ" containerType="DIAGRAM" autoRef="true" sourceNode="_yP16T3cBEdyUwq_XzqQQrw" targetNode="_yP16T3cBEdyUwq_XzqQQrw">
       <containerObject href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/ClassPackage"/>
       <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//ClassPackage/associationSet"/>
-      <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//AbstractContainer/associations"/>
-      <refEdgeToSource xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//Association/firstEndClazz"/>
-      <refTargetToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//AbstractContainer/associations"/>
-      <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//Association/secondEndClazz"/>
     </sourceTargetCouple>
   </parts>
   <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_yP_ENHcBEdyUwq_XzqQQrw" object="_yP_ESncBEdyUwq_XzqQQrw" defaultForegroundColor="128,128,192" foregroundColorChangeable="false" fontChangeable="false">
@@ -55,20 +49,9 @@
       <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement/stereotypes"/>
     </sourceTargetCouple>
   </parts>
-  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_yP_EO3cBEdyUwq_XzqQQrw" object="_yP_ETHcBEdyUwq_XzqQQrw" defaultForegroundColor="192,192,192" foregroundColorChangeable="false" fontChangeable="false" targetDecoration="ARROW">
-    <sourceTargetCouple xmi:id="_yP_EPHcBEdyUwq_XzqQQrw" sourceNode="_yP_EMHcBEdyUwq_XzqQQrw" targetNode="_yP16T3cBEdyUwq_XzqQQrw">
-      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//Association/associationsClass"/>
-    </sourceTargetCouple>
-  </parts>
   <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_r_zNoHcDEdyUwq_XzqQQrw" object="_NPn6cHcCEdyUwq_XzqQQrw" defaultForegroundColor="192,192,192" foregroundColorChangeable="false" fontChangeable="false" targetDecoration="ARROW">
     <sourceTargetCouple xmi:id="_GdU1UHcEEdyUwq_XzqQQrw" sourceNode="_yP16T3cBEdyUwq_XzqQQrw" targetNode="_2n-_MHcBEdyUwq_XzqQQrw">
       <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//Clazz/aspects"/>
-    </sourceTargetCouple>
-  </parts>
-  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_tHziEKy6EdyIeNPv3dqFqw" object="_uDaOsKy6EdyIeNPv3dqFqw" defaultForegroundColor="0,128,128" foregroundColorChangeable="false" fontChangeable="false">
-    <sourceTargetCouple xmi:id="_G9-14Ky7EdyIeNPv3dqFqw" sourceNode="_yP16T3cBEdyUwq_XzqQQrw" targetNode="_duiSAKy6EdyIeNPv3dqFqw">
-      <containerObject href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/Clazz"/>
-      <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Class/model/Class.ecore#//Clazz/hasView"/>
     </sourceTargetCouple>
   </parts>
   <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_6boWkA4hEd6vHfpmvyY_hg" object="_yP_ESXcBEdyUwq_XzqQQrw" defaultForegroundColor="0,0,255" targetDecoration="TRIANGLE">
@@ -98,9 +81,6 @@
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_yP_EQXcBEdyUwq_XzqQQrw">
     <genClass href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/Attribute"/>
   </objects>
-  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_yP_EQncBEdyUwq_XzqQQrw">
-    <genClass href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/Operation"/>
-  </objects>
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_yP_EQ3cBEdyUwq_XzqQQrw">
     <genClass href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/ClassComment"/>
   </objects>
@@ -116,9 +96,6 @@
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_2xfYAHsIEdy7uoUms_Eq3g">
     <genClass href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/EnumerationLiteral"/>
   </objects>
-  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_UWUlcKy6EdyIeNPv3dqFqw">
-    <genClass href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/View"/>
-  </objects>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_yP_ESXcBEdyUwq_XzqQQrw" name="Generalization"/>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_yP_ESncBEdyUwq_XzqQQrw" name="isCommented"/>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_yP_ES3cBEdyUwq_XzqQQrw" name="isStereotyped"/>
@@ -127,13 +104,13 @@
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_uDaOsKy6EdyIeNPv3dqFqw" name="hasView"/>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_h7wlEA_nEd6WE5atyWwk_g" name="hasAspect"/>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_FWBNABOzEd6rfbeEUErmOQ" name="depends"/>
-  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_c4jMYUkrEd6Z9Nja0s-4xQ">
-    <genClass href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/FirstEnd"/>
-  </objects>
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_l6TgwEkrEd6Z9Nja0s-4xQ">
-    <genClass href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/SecondEnd"/>
+    <genClass href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/AssociationEnd"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_nlzSkKdMEd6_r9byV7SFtQ">
+    <genClass href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/ClassPackage"/>
   </objects>
   <genModel href="../../com.bluexml.side.Class/model/Class.genmodel#/"/>
-  <templateRootObject href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/ClassPackage"/>
+  <templateRootObject href="../../com.bluexml.side.Class/model/Class.genmodel#//clazz/Model"/>
   <editorConfigurator href="Class.editorconfigurator#_zVIHUHcBEdyUwq_XzqQQrw"/>
 </diagramconfigurator:DiagramConfiguration>
