@@ -30,7 +30,7 @@ public class Utils {
 	private static ArrayList<String> listeFeatureModif = new ArrayList<String>();
 	private static String revisionNumber;
 	public static ArrayList<String> listefichierpom = new ArrayList<String>();
-	public static String repositoryCopy="repositoryCopy";
+	public static String repositoryCopy="workingcopy";
 	
 	/**
 	 * M�thode qui ouvre le fichier de proprerties
