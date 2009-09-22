@@ -345,6 +345,8 @@ public class Utils {
 				// XML
 				document = sxb.build(new File(getPathToLocalCopy(projectName)
 						+ File.separator + "feature.xml"));
+				System.out.println(getPathToLocalCopy(projectName)
+						+ File.separator + "feature.xml");
 			} catch (Exception e) {
 			}
 
