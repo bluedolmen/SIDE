@@ -65,7 +65,7 @@ public class Utils {
 	 */
 	public static List<String> getProjects() {
 
-		String property = ouvrirFichier("config/build.properties").getProperty("project");
+		String property = ouvrirFichier("build.properties").getProperty("project");
 		List<String> l = new ArrayList<String>();
 		if ((property != null)&&(property.length() > 0)) {
 			String[] projects = property.split(",");
@@ -1690,9 +1690,5 @@ public class Utils {
 	 */
 	public static String getTime() {
 		return new SimpleDateFormat("HH:mm:ss").format(new Date());
-	}
-
-	public static void main(String[] args) {
-		System.out.println(getProjects());
 	}
 }
