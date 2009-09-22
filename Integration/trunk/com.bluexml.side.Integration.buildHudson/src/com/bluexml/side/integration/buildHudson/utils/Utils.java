@@ -64,8 +64,14 @@ public class Utils {
 	 * Retourne la liste des projets
 	 */
 	public static List<String> getProjects() {
-
-		String property = ouvrirFichier("build.properties").getProperty("project");
+		return getProjects("project");
+	}
+	
+	/**
+	 * Retourne la liste des projets
+	 */
+	public static List<String> getProjects(String properties) {
+		String property = ouvrirFichier("build.properties").getProperty(properties);
 		List<String> l = new ArrayList<String>();
 		if ((property != null)&&(property.length() > 0)) {
 			String[] projects = property.split(",");
@@ -81,32 +87,6 @@ public class Utils {
 			}
 		}
 		
-		return l;
-	}
-	
-	/**
-	 * Retourne la liste des projets
-	 */
-	public static List<String> getProjects(String properties) {
-
-		String property = ouvrirFichier("build.properties").getProperty(
-				properties);
-		List<String> l = new ArrayList<String>();
-
-		if (property != null && property.length() > 0) {
-			String[] projects = property.split(",");
-
-
-			if(projects.length > 0){
-				for (int i = 0; i < projects.length; i++) {
-					String projectName = projects[i].split("&")[1];
-					projectName.trim().replaceAll("\n", "");
-					if (projectName.length() > 0) {
-						l.add(projectName);
-					}
-				}
-			}
-		}		
 		return l;
 	}
 	
