@@ -155,13 +155,14 @@ public class Utils {
 	 * @return
 	 */
 	public static String getProjectPath(String projectName) {
-		String[] projects = ouvrirFichier("build.properties").getProperty(
-				"project").split(",");
-
+		String property = ouvrirFichier("build.properties").getProperty("project");
 		String path = "";
-		for (int i = 0; i < projects.length; i++) {
-			if (projects[i].split("&")[1].equals(projectName)) {
-				path = projects[i].split("&")[0];
+		if ((property != null)&&(property.length() > 0)) {
+			String[] projects = property.split(",");
+			for (int i = 0; i < projects.length; i++) {
+				if (projects[i].split("&")[1].equals(projectName)) {
+					path = projects[i].split("&")[0];
+				}
 			}
 		}
 		return path;
