@@ -31,7 +31,7 @@
 				<attribute name="Main-Class" value="com.bluexml.side.integration.buildHudson.Application" />
 				<attribute name="Class-Path" value="lib/ant-launcher.jar lib/jdom.jar lib/svnant.jar lib/tools.jar lib/ant.jar lib/svnClientAdapter.jar lib/svnjavahl.jar" />
 			</manifest>
-			<fileset includes="src"/>
+			<fileset dir="src"/>
 		</jar>
 	</target>
 </project>
