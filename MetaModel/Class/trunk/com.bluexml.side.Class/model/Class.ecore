@@ -426,5 +426,5 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="linkedClass" eType="#//Clazz"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RootPackage" eSuperTypes="#//ClassPackage"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//ClassPackage"/>
 </ecore:EPackage>

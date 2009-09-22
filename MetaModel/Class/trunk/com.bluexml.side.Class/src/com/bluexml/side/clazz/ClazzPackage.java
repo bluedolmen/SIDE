@@ -1416,14 +1416,14 @@ public interface ClazzPackage extends EPackage {
 	int ASSOCIATION_END_FEATURE_COUNT = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
-	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.RootPackageImpl <em>Root Package</em>}' class.
+	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.ModelImpl <em>Model</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see com.bluexml.side.clazz.impl.RootPackageImpl
-	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getRootPackage()
+	 * @see com.bluexml.side.clazz.impl.ModelImpl
+	 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getModel()
 	 * @generated
 	 */
-	int ROOT_PACKAGE = 12;
+	int MODEL = 12;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -1432,7 +1432,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_PACKAGE__STEREOTYPES = CLASS_PACKAGE__STEREOTYPES;
+	int MODEL__STEREOTYPES = CLASS_PACKAGE__STEREOTYPES;
 
 	/**
 	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
@@ -1441,7 +1441,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_PACKAGE__TAGS = CLASS_PACKAGE__TAGS;
+	int MODEL__TAGS = CLASS_PACKAGE__TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
@@ -1450,7 +1450,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_PACKAGE__COMMENTS = CLASS_PACKAGE__COMMENTS;
+	int MODEL__COMMENTS = CLASS_PACKAGE__COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
@@ -1459,7 +1459,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_PACKAGE__DOCUMENTATION = CLASS_PACKAGE__DOCUMENTATION;
+	int MODEL__DOCUMENTATION = CLASS_PACKAGE__DOCUMENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -1468,7 +1468,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_PACKAGE__DESCRIPTION = CLASS_PACKAGE__DESCRIPTION;
+	int MODEL__DESCRIPTION = CLASS_PACKAGE__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
@@ -1477,7 +1477,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_PACKAGE__METAINFO = CLASS_PACKAGE__METAINFO;
+	int MODEL__METAINFO = CLASS_PACKAGE__METAINFO;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1486,7 +1486,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_PACKAGE__NAME = CLASS_PACKAGE__NAME;
+	int MODEL__NAME = CLASS_PACKAGE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Stereotype Set</b></em>' containment reference list.
@@ -1495,7 +1495,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_PACKAGE__STEREOTYPE_SET = CLASS_PACKAGE__STEREOTYPE_SET;
+	int MODEL__STEREOTYPE_SET = CLASS_PACKAGE__STEREOTYPE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Package Set</b></em>' containment reference list.
@@ -1504,7 +1504,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_PACKAGE__PACKAGE_SET = CLASS_PACKAGE__PACKAGE_SET;
+	int MODEL__PACKAGE_SET = CLASS_PACKAGE__PACKAGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Class Set</b></em>' containment reference list.
@@ -1513,7 +1513,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_PACKAGE__CLASS_SET = CLASS_PACKAGE__CLASS_SET;
+	int MODEL__CLASS_SET = CLASS_PACKAGE__CLASS_SET;
 
 	/**
 	 * The feature id for the '<em><b>Association Set</b></em>' containment reference list.
@@ -1522,7 +1522,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_PACKAGE__ASSOCIATION_SET = CLASS_PACKAGE__ASSOCIATION_SET;
+	int MODEL__ASSOCIATION_SET = CLASS_PACKAGE__ASSOCIATION_SET;
 
 	/**
 	 * The feature id for the '<em><b>Aspect Set</b></em>' containment reference list.
@@ -1531,7 +1531,7 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_PACKAGE__ASPECT_SET = CLASS_PACKAGE__ASPECT_SET;
+	int MODEL__ASPECT_SET = CLASS_PACKAGE__ASPECT_SET;
 
 	/**
 	 * The feature id for the '<em><b>Enumeration Set</b></em>' containment reference list.
@@ -1540,16 +1540,16 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_PACKAGE__ENUMERATION_SET = CLASS_PACKAGE__ENUMERATION_SET;
+	int MODEL__ENUMERATION_SET = CLASS_PACKAGE__ENUMERATION_SET;
 
 	/**
-	 * The number of structural features of the '<em>Root Package</em>' class.
+	 * The number of structural features of the '<em>Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_PACKAGE_FEATURE_COUNT = CLASS_PACKAGE_FEATURE_COUNT + 0;
+	int MODEL_FEATURE_COUNT = CLASS_PACKAGE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.AssociationType <em>Association Type</em>}' enum.
@@ -2024,14 +2024,14 @@ public interface ClazzPackage extends EPackage {
 	EReference getAssociationEnd_LinkedClass();
 
 	/**
-	 * Returns the meta object for class '{@link com.bluexml.side.clazz.RootPackage <em>Root Package</em>}'.
+	 * Returns the meta object for class '{@link com.bluexml.side.clazz.Model <em>Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Root Package</em>'.
-	 * @see com.bluexml.side.clazz.RootPackage
+	 * @return the meta object for class '<em>Model</em>'.
+	 * @see com.bluexml.side.clazz.Model
 	 * @generated
 	 */
-	EClass getRootPackage();
+	EClass getModel();
 
 	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.clazz.AssociationType <em>Association Type</em>}'.
@@ -2434,14 +2434,14 @@ public interface ClazzPackage extends EPackage {
 		EReference ASSOCIATION_END__LINKED_CLASS = eINSTANCE.getAssociationEnd_LinkedClass();
 
 		/**
-		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.RootPackageImpl <em>Root Package</em>}' class.
+		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.ModelImpl <em>Model</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see com.bluexml.side.clazz.impl.RootPackageImpl
-		 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getRootPackage()
+		 * @see com.bluexml.side.clazz.impl.ModelImpl
+		 * @see com.bluexml.side.clazz.impl.ClazzPackageImpl#getModel()
 		 * @generated
 		 */
-		EClass ROOT_PACKAGE = eINSTANCE.getRootPackage();
+		EClass MODEL = eINSTANCE.getModel();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.clazz.AssociationType <em>Association Type</em>}' enum.

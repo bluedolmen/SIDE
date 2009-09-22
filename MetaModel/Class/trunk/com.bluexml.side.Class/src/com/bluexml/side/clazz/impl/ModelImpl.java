@@ -7,7 +7,7 @@
 package com.bluexml.side.clazz.impl;
 
 import com.bluexml.side.clazz.ClazzPackage;
-import com.bluexml.side.clazz.RootPackage;
+import com.bluexml.side.clazz.Model;
 
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
@@ -17,20 +17,20 @@ import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Root Package</b></em>'.
+ * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class RootPackageImpl extends ClassPackageImpl implements RootPackage {
+public class ModelImpl extends ClassPackageImpl implements Model {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RootPackageImpl() {
+	protected ModelImpl() {
 		super();
 	}
 
@@ -41,9 +41,9 @@ public class RootPackageImpl extends ClassPackageImpl implements RootPackage {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ClazzPackage.Literals.ROOT_PACKAGE;
+		return ClazzPackage.Literals.MODEL;
 	}
 
 		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
 		private static final OCL OCL_ENV = KerblueOCL.newInstance();		
-} //RootPackageImpl
+} //ModelImpl

@@ -118,6 +118,6 @@
       <genOperations ecoreOperation="Class.ecore#//AssociationEnd/isMany"/>
       <genOperations ecoreOperation="Class.ecore#//AssociationEnd/getOpposite"/>
     </genClasses>
-    <genClasses ecoreClass="Class.ecore#//RootPackage"/>
+    <genClasses ecoreClass="Class.ecore#//Model"/>
   </genPackages>
 </genmodel:GenModel>

@@ -254,8 +254,8 @@ public class ClazzValidator extends EObjectValidator {
 				return validateClassComment((ClassComment)value, diagnostics, context);
 			case ClazzPackage.ASSOCIATION_END:
 				return validateAssociationEnd((AssociationEnd)value, diagnostics, context);
-			case ClazzPackage.ROOT_PACKAGE:
-				return validateRootPackage((RootPackage)value, diagnostics, context);
+			case ClazzPackage.MODEL:
+				return validateModel((Model)value, diagnostics, context);
 			case ClazzPackage.ASSOCIATION_TYPE:
 				return validateAssociationType((AssociationType)value, diagnostics, context);
 			default:
@@ -1086,15 +1086,15 @@ public class ClazzValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateRootPackage(RootPackage rootPackage, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(rootPackage, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(rootPackage, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(rootPackage, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(rootPackage, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(rootPackage, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(rootPackage, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(rootPackage, diagnostics, context);
-		if (result || diagnostics != null) result &= validateClassPackage_PackageNameNull(rootPackage, diagnostics, context);
+	public boolean validateModel(Model model, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_EveryMultiplicityConforms(model, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(model, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(model, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(model, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(model, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(model, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(model, diagnostics, context);
+		if (result || diagnostics != null) result &= validateClassPackage_PackageNameNull(model, diagnostics, context);
 		return result;
 	}
 

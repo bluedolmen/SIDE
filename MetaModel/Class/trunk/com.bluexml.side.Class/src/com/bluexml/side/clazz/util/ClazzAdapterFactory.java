@@ -125,8 +125,8 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 				return createAssociationEndAdapter();
 			}
 			@Override
-			public Adapter caseRootPackage(RootPackage object) {
-				return createRootPackageAdapter();
+			public Adapter caseModel(Model object) {
+				return createModelAdapter();
 			}
 			@Override
 			public Adapter caseModelElement(ModelElement object) {
@@ -337,16 +337,16 @@ public class ClazzAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.bluexml.side.clazz.RootPackage <em>Root Package</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.clazz.Model <em>Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see com.bluexml.side.clazz.RootPackage
+	 * @see com.bluexml.side.clazz.Model
 	 * @generated
 	 */
-	public Adapter createRootPackageAdapter() {
+	public Adapter createModelAdapter() {
 		return null;
 	}
 

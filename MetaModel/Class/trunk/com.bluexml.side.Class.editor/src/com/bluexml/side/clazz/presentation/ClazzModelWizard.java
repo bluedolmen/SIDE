@@ -200,7 +200,7 @@ public class ClazzModelWizard extends Wizard implements INewWizard {
 //					}
 //				}
 //			}
-			initialObjectNames.add(clazzPackage.getRootPackage().getName());
+			initialObjectNames.add(clazzPackage.getModel().getName());
 			Collections.sort(initialObjectNames, CommonPlugin.INSTANCE.getComparator());
 		}
 		return initialObjectNames;

@@ -205,13 +205,13 @@ public class ClazzSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClazzPackage.ROOT_PACKAGE: {
-				RootPackage rootPackage = (RootPackage)theEObject;
-				T result = caseRootPackage(rootPackage);
-				if (result == null) result = caseClassPackage(rootPackage);
-				if (result == null) result = casePackage(rootPackage);
-				if (result == null) result = caseNamedModelElement(rootPackage);
-				if (result == null) result = caseModelElement(rootPackage);
+			case ClazzPackage.MODEL: {
+				Model model = (Model)theEObject;
+				T result = caseModel(model);
+				if (result == null) result = caseClassPackage(model);
+				if (result == null) result = casePackage(model);
+				if (result == null) result = caseNamedModelElement(model);
+				if (result == null) result = caseModelElement(model);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -400,17 +400,17 @@ public class ClazzSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Root Package</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Root Package</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRootPackage(RootPackage object) {
+	public T caseModel(Model object) {
 		return null;
 	}
 
