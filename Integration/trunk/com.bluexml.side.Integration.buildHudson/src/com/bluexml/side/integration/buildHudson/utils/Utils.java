@@ -540,7 +540,9 @@ public class Utils {
 		ArrayList<String> listeProjetReels = new ArrayList<String>();
 		ArrayList<String> listeProjetPoms = new ArrayList<String>();
 
-		List<String> projects = getProjects();
+		List<String> projects = new ArrayList<String>();
+		projects.addAll(getProjects());
+		projects.addAll(getProjects("projectToVersioned"));
 
 		for (int i = 0; i < projects.size(); i++) {
 			listeProjetReels.add(projects.get(i));
