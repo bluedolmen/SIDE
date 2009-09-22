@@ -1,7 +1,6 @@
 package com.bluexml.side.workflow.edit.ui.actions;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.eclipse.core.resources.IFile;
@@ -12,9 +11,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
@@ -28,6 +25,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 
+import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.WorkflowFormCollection;
 import com.bluexml.side.form.presentation.FormEditor;
@@ -106,22 +104,11 @@ public class InitializeFormModel implements IObjectActionDelegate {
 	}
 
 	private void saveFormModel(File file, WorkflowFormCollection wfc) throws IOException {
-		FileOutputStream os = new FileOutputStream(file);
-		ResourceSetImpl set = new ResourceSetImpl();
-		Resource outputResource = set.createResource(URI.createFileURI(file
-				.getCanonicalPath()));
-		outputResource.getContents().add(wfc);
-		outputResource.save(os, null);
-		os.close();
+		ModelInitializationUtils.saveModel(file, (EObject) wfc);
 	}
 
 	private Process openWorkflowModel(IFile workflowModel) throws IOException {
-		ResourceSetImpl set = new ResourceSetImpl();
-		Resource inputResource = set.createResource(URI
-				.createFileURI(workflowModel.getRawLocation().toFile()
-						.getCanonicalPath()));
-		inputResource.load(null);
-		EList<?> l = inputResource.getContents();
+		EList<?> l = ModelInitializationUtils.openModel(workflowModel);
 		return (Process) l.get(0);
 	}
 
