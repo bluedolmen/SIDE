@@ -138,6 +138,11 @@ public class Application {
 				System.out.println("\t-" + projet);
 			}
 		}
+		for (String projet : Utils.getProjects("projectToVersioned")) {
+			if (!projectsExcluded.contains(projet)){
+				System.out.println("\t-" + projet);
+			}
+		}
 
 		execBuild("build", "build");
 
