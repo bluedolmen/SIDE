@@ -354,8 +354,6 @@ public class Utils {
 			try {
 				// On cr�e un nouveau document JDOM avec en argument le fichier
 				// XML
-				System.out.println(getPathToLocalCopy(projectName)
-						+ File.separator + "feature.xml");
 				document = sxb.build(new File(getPathToLocalCopy(projectName)
 						+ File.separator + "feature.xml"));
 			} catch (Exception e) {
