@@ -23,8 +23,6 @@ public class FileHelper {
 	public static void copyFiles(File src, File dest, boolean override)
 			throws IOException {
 		
-		System.out.println("COPY : "+src+"-->"+dest);
-		
 		// Check to ensure that the source is valid...
 		if (!src.exists()) {
 			throw new IOException("copyFiles: Can not find source: "
@@ -106,7 +104,6 @@ public class FileHelper {
 	}
 
 	public static boolean deleteFile(File f) {
-		System.out.println("DELETE : "+f);
 		if (f.isDirectory()) {
 			File[] fl = f.listFiles();
 			for (int i = 0; i < fl.length; i++) {

@@ -793,8 +793,6 @@ public class Utils {
 					.mkdir();
 
 			FileHelper.copyFiles(new File(from), new File(to), true);
-			System.out.println(from);
-			System.out.println(to);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

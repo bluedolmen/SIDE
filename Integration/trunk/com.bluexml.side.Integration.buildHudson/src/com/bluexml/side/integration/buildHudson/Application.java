@@ -618,7 +618,11 @@ public class Application {
 	 * Retourne le corps de la target genJavadoc
 	 */
 	private static String getGenJavadoc() {
-		String[] projects = toArray(Utils.getProjects());
+		List<String> list = new ArrayList<String>();
+		list.addAll(Utils.getProjects());
+		list.addAll(Utils.getProjects("projectToVersioned"));
+		
+		String[] projects = toArray(list);
 
 		if (!new File(Utils.getBuildPath() + File.separator + "doc").exists())
 			new File(Utils.getBuildPath() + File.separator + "doc").mkdir();
