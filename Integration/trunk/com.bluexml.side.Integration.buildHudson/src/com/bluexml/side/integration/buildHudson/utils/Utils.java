@@ -1193,7 +1193,7 @@ public class Utils {
 
 			Element newCategory = new Element("category");
 
-			newCategory.setAttribute("name", "S-IDE " + getNewCategory());
+			newCategory.setAttribute("name", "SIDE " + getNewCategory());
 
 			newElement.addContent(newCategory);
 			racine.addContent(newElement);
