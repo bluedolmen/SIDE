@@ -152,7 +152,7 @@ public class Application {
 
 		// D�placement et suppression des r�pertoires
 		System.out.println("\nD�placement et suppression des r�pertoires");
-		//Utils.finalTraitement();
+		Utils.finalTraitement();
 
 		/*
 		 * // Build des projets seul
