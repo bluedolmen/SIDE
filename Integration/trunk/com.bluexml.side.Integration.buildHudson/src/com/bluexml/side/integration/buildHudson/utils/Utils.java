@@ -93,21 +93,8 @@ public class Utils {
 	/**
 	 * Retourne la liste des projets a versionner
 	 */
-	public static String[] getVersionedProjects() {
-
-		//String[] projects = ouvrirFichier("/home/stager/buildAuto/Ankle/build.properties").getProperty(
-		//		"projectToVersioned").split(",");
-		String[] projects = ouvrirFichier("build.properties").getProperty(
-				"projectToVersioned").split(",");
-
-		if(projects.length > 0){
-			for (int i = 0; i < projects.length; i++) {
-				if(!"".equals(projects[i])){
-					projects[i] = projects[i].split("&")[1];
-				}
-			}
-		}
-		return projects;
+	public static List<String> getVersionedProjects() {
+		return getProjects("projectToVersioned");
 	}
 	
 	/**
@@ -533,10 +520,11 @@ public class Utils {
 		}
 		
 		
-		String[] projectsToVersioned = getVersionedProjects();
+		List<String> projectsToVersioned = getVersionedProjects();
 		
-		for (int i = 0; i < projectsToVersioned.length; i++) {
-			listeProjetReels.add(projectsToVersioned[i]);
+		for (int i = 0; i < projectsToVersioned.size(); i++) {
+			if (projectsToVersioned.get(i).length() > 0)
+				listeProjetReels.add(projectsToVersioned.get(i));
 		}
 
 		boolean end = false;

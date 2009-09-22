@@ -557,7 +557,7 @@ public class Application {
 			if (j == 0) 
 					projects = toArray(Utils.getProjects());
 			if (j == 1 )
-					projects = Utils.getVersionedProjects();
+					projects = toArray(Utils.getVersionedProjects());
 		
 		for (int i = 0; i < projects.length; i++) {
 
