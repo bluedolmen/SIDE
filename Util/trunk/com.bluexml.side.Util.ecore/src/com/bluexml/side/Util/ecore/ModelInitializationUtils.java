@@ -6,10 +6,8 @@ import java.io.IOException;
 import java.util.Collections;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.common.util.EList;
@@ -29,15 +27,14 @@ import org.topcased.modeler.di.model.EMFSemanticModelBridge;
 import org.topcased.modeler.diagrams.model.Diagrams;
 import org.topcased.modeler.diagrams.model.DiagramsFactory;
 import org.topcased.modeler.editor.Modeler;
-import org.topcased.modeler.exceptions.BoundsFormatException;
 import org.topcased.modeler.internal.ModelerPlugin;
-import org.topcased.modeler.l10n.Messages;
 import org.topcased.modeler.tools.Importer;
 import org.topcased.modeler.utils.Utils;
 
 public class ModelInitializationUtils {
 
 	private static ResourceSet rsrcSet = new ResourceSetImpl();
+	private static IConfigurationElement[] contributions;
 
 	/**
 	 * Save a new model in file.
@@ -106,6 +103,26 @@ public class ModelInitializationUtils {
         importObjects(resource, root, diagramFile);
 
         return resource;
+	}
+
+	/**
+	 * Get the extension for a given model plugin
+	 * @param id
+	 * @return
+	 */
+	public static String getExtensionForExtensionId(String id) {
+		String result = ".";
+		if (contributions == null || contributions.length == 0) {
+			contributions = Platform.getExtensionRegistry().getConfigurationElementsFor("org.eclipse.ui.editors");
+		}
+		if (contributions.length > 0) {
+			for (IConfigurationElement elem : contributions) {
+				if (elem.getAttribute("id").equals(id)) {
+					result += elem.getAttribute("extensions");
+				}
+			}
+		}
+		return result;
 	}
 
 	private static void importObjects(Resource resource, EObject root, IFile diagramFile) {
