@@ -165,6 +165,18 @@ public class Utils {
 				}
 			}
 		}
+		//We search in versioned projects
+		if (path.length() == 0) {
+			property = ouvrirFichier("build.properties").getProperty("projectToVersioned");
+			if ((property != null)&&(property.length() > 0)) {
+				String[] projects = property.split(",");
+				for (int i = 0; i < projects.length; i++) {
+					if (projects[i].split("&")[1].equals(projectName)) {
+						path = projects[i].split("&")[0];
+					}
+				}
+			}	
+		}
 		return path;
 	}
 
