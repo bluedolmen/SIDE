@@ -1222,6 +1222,7 @@ public class Utils {
 	 */
 	public static void finalTraitement() {
 		String buildNumber = "";
+		System.out.println("Final treatment : ");
 
 		if (Application.parametre) {
 			buildNumber = "-" + Application.build_number;
@@ -1240,21 +1241,31 @@ public class Utils {
 
 		try {
 			// copie de l'update site
+			System.out.println("\t- Update Site copy under <Revision number>-<build number> :" );
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
 					+ getBuildLabel() + File.separator + getArchivePrefix()
 					+ File.separator + "features"), finalFeatures, true);
+			System.out.println("\t\t. on "+ finalFeatures + " from " + getBuildDirectory() + File.separator
+					+ getBuildLabel() + File.separator + getArchivePrefix()
+					+ File.separator + "features DONE");
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
 					+ getBuildLabel() + File.separator + getArchivePrefix()
 					+ File.separator + "plugins"), finalPlugins, true);
+			System.out.println("\t\t. on "+ finalPlugins + " from " + getBuildDirectory() + File.separator
+					+ getBuildLabel() + File.separator + getArchivePrefix()
+					+ File.separator + "plugins DONE");
 
 			// copie du site.xml pour l'update site
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "site.xml"), finalSite, true);
+			System.out.println("\t\t. on "+ finalSite + " from " + getBuildPath() + File.separator
+					+ "site.xml DONE");
 
 			// creation du dossier final s'il n'�xiste pas
 			if (!new File(getFinalDirectory()).exists())
 				new File(getFinalDirectory()).mkdir();
 
+			System.out.println("\t- Suppression de l'ancien update site" );
 			if (new File(getUpdateSiteDir() + File.separator + getCodeName()
 					+ File.separator + "features").exists()) {
 				FileHelper.deleteFile(new File(getUpdateSiteDir() + File.separator
@@ -1271,26 +1282,43 @@ public class Utils {
 			}
 
 			// copie de l'update site
+			System.out.println("\t- Update Site copy :" );
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
 					+ getBuildLabel() + File.separator + getArchivePrefix()
 					+ File.separator + "features"), new File(
 							getUpdateSiteDir()
 							+ File.separator + getCodeName() + File.separator
 							+ "features"), true);
+			System.out.println("\t\t. on "+ getUpdateSiteDir()
+					+ File.separator + getCodeName() + File.separator
+					+ "features from " + getBuildDirectory() + File.separator
+					+ getBuildLabel() + File.separator + getArchivePrefix()
+					+ File.separator + "features DONE");
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
 					+ getBuildLabel() + File.separator + getArchivePrefix()
 					+ File.separator + "plugins"), new File(getUpdateSiteDir() + File.separator
 					+ getCodeName() + File.separator + "plugins"), true);
+			System.out.println("\t\t. on "+ getUpdateSiteDir() + File.separator
+					+ getCodeName() + File.separator + "plugins from " + getBuildDirectory() + File.separator
+					+ getBuildLabel() + File.separator + getArchivePrefix()
+					+ File.separator + "plugins DONE");
 
 			// copie du site.xml pour l'update site
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "site.xml"), new File(getUpdateSiteDir() + File.separator
 					+ getCodeName() + File.separator + "site.xml"), true);
+			System.out.println("\t\t. on "+ getUpdateSiteDir() + File.separator
+					+ getCodeName() + File.separator + "site.xml from " + getBuildPath() + File.separator
+					+ "site.xml DONE");
 
 			// copie de la doc
+			System.out.println("\t- Generated Doc copy :" );
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "doc"), new File(getFinalDirectory() + File.separator
 					+ "doc"), true);
+			System.out.println("\t\t. on "+ getFinalDirectory() + File.separator
+					+ "doc from " + getBuildPath() + File.separator
+					+ "doc DONE");
 
 			// copie des fichiers compil�s
 			if (!new File(getFinalDirectory() + File.separator + "logs")
@@ -1298,11 +1326,16 @@ public class Utils {
 				new File(getFinalDirectory() + File.separator + "logs").mkdir();
 
 			// copie des logs (pour la compilation de chaque projet)
+			System.out.println("\t- Logs copy :" );
 			FileHelper.copyFiles(new File(getBuildDirectory() + File.separator
 					+ getBuildLabel() + File.separator + "compilelogs"),
 					new File(getFinalDirectory() + File.separator + "logs"
 							+ File.separator + getCodeName() + File.separator
 							+ "compilelogs"), true);
+			System.out.println("\t\t. on "+ getFinalDirectory() + File.separator + "logs"
+					+ File.separator + getCodeName() + File.separator
+					+ "compilelogs from " + getBuildDirectory() + File.separator
+					+ getBuildLabel() + File.separator + "compilelogs DONE");
 
 			// copie des fichiers de log (pour tout le traitement)
 /*
@@ -1317,12 +1350,20 @@ public class Utils {
 					+ "logbuildbuild.txt"), new File(getFinalDirectory()
 					+ File.separator + "logs" + File.separator + getCodeName()
 					+ File.separator + "logBuild.txt"), true);
+			System.out.println("\t\t. on "+ getFinalDirectory()
+					+ File.separator + "logs" + File.separator + getCodeName()
+					+ File.separator + "logBuild.txt from " + getBuildPath() + File.separator
+					+ "logbuildbuild.txt DONE");
 
 			FileHelper.copyFiles(new File(getBuildPath() + File.separator
 					+ "logjarBuilderjarBuilder.txt"), new File(
 					getFinalDirectory() + File.separator + "logs"
 							+ File.separator + getCodeName() + File.separator
 							+ "logBuildJar.txt"), true);
+			System.out.println("\t\t. on "+ getFinalDirectory() + File.separator + "logs"
+					+ File.separator + getCodeName() + File.separator
+					+ "logBuildJar.txt from " + getBuildPath() + File.separator
+					+ "logjarBuilderjarBuilder.txt DONE");
 
 			if (!Application.parametre) {
 				FileHelper.copyFiles(new File(getBuildPath() + File.separator
@@ -1332,6 +1373,7 @@ public class Utils {
 			}
 
 			// copie des fichiers compil�s
+			System.out.println("\t- Compiled files copy :" );
 			if (!new File(getFinalDirectory() + File.separator + "bin")
 					.exists())
 				new File(getFinalDirectory() + File.separator + "bin").mkdir();
@@ -1350,6 +1392,12 @@ public class Utils {
 										+ "bin" + File.separator
 										+ getCodeName() + File.separator
 										+ projects.get(i)), true);
+						System.out.println("\t\t. on "+ getFinalDirectory() + File.separator
+								+ "bin" + File.separator
+								+ getCodeName() + File.separator
+								+ projects.get(i) + " from " + getBuildDirectory()
+								+ File.separator + "plugins" + File.separator
+								+ projects.get(i) + File.separator + "@dot DONE");
 					}
 				}
 			}
@@ -1358,12 +1406,19 @@ public class Utils {
 					+ "features"), new File(getFinalDirectory()
 					+ File.separator + "bin" + File.separator + getCodeName()),
 					true);
+			System.out.println("\t\t. on "+ getFinalDirectory()
+					+ File.separator + "bin" + File.separator + getCodeName() + " from " + getBuildDirectory() + File.separator
+					+ "features DONE");
 
 			// suppression du repertoire de travail
+			System.out.println("\t- Working dir Suppression" );
 			FileHelper.deleteFile(new File(getBuildDirectory()));
+			System.out.println("\t\t. " + getBuildDirectory() + " DONE");
 
 			FileHelper.deleteFile(new File(getBuildPath() + File.separator
 					+ "doc"));
+			System.out.println("\t\t. " + getBuildPath() + File.separator
+					+ "doc DONE");
 
 			// suppression des fichiers cr��s
 			//FileHelper.deleteFile(new File(Utils.getBuildPath()+ File.separator + "buildSVN.xml"));
