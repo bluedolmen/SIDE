@@ -74,7 +74,6 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 	protected WizardModelOptionsPage optionsPage;
 	protected IProject newProject;
 	protected List<IFile> createdModels = new ArrayList<IFile>();
-	private IConfigurationElement[] contributions;
 
 	public Wizard() {
 		super();
@@ -147,37 +146,22 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 		return folder.getFile(optionsPage.getModelNameValue() + extension);
 	}
 
-	protected String getExtensionForExtensionId(String id) {
-		String result = ".";
-		if (contributions == null || contributions.length == 0) {
-			contributions = Platform.getExtensionRegistry().getConfigurationElementsFor("org.eclipse.ui.editors");
-		}
-		if (contributions.length > 0) {
-			for (IConfigurationElement elem : contributions) {
-				if (elem.getAttribute("id").equals(id)) {
-					result += elem.getAttribute("extensions");
-				}
-			}
-		}
-		return result;
-	}
-
 	private void createInitialFormModel() throws CoreException, IOException {
-		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.form.presentation.formEditorID")); //$NON-NLS-1$
+		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.form.presentation.formEditorID")); //$NON-NLS-1$
 		ClassFormCollection formCollection = FormFactory.eINSTANCE.createClassFormCollection();
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)formCollection);
 		createdModels.add(file);
 	}
 
 	private void createInitialViewModel() throws CoreException, IOException {
-		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.view.presentation.ViewEditorID")); //$NON-NLS-1$
+		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.view.presentation.ViewEditorID")); //$NON-NLS-1$
 		ViewCollection viewCollection = ViewFactory.eINSTANCE.createViewCollection();
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)viewCollection);
 		createdModels.add(file);
 	}
 
 	private void createInitialWorkflowModel() throws CoreException, IOException {
-		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.workflow.presentation.WorkflowEditorID")); //$NON-NLS-1$
+		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.workflow.presentation.WorkflowEditorID")); //$NON-NLS-1$
 		com.bluexml.side.workflow.Process process = WorkflowFactory.eINSTANCE.createProcess();
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)process);
 		createdModels.add(file);
@@ -185,7 +169,7 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 	}
 
 	private void createInitialRequirementModel() throws CoreException, IOException {
-		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.requirements.presentation.RequirementsEditorID")); //$NON-NLS-1$
+		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.requirements.presentation.RequirementsEditorID")); //$NON-NLS-1$
 		RequirementsDefinition definition = RequirementsFactory.eINSTANCE.createRequirementsDefinition();
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)definition);
 		createdModels.add(file);
@@ -193,7 +177,7 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 	}
 
 	private void createInitialPortalModel() throws CoreException, IOException {
-		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.portal.presentation.PortalEditorID")); //$NON-NLS-1$
+		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.portal.presentation.PortalEditorID")); //$NON-NLS-1$
 		Portal portal = PortalFactory.eINSTANCE.createPortal();
 		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)portal);
 		createdModels.add(file);
@@ -202,7 +186,7 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 	}
 
 	private void createInitialDataModel() throws IOException, CoreException {
-		IFile file = createFileForModel(getExtensionForExtensionId("com.bluexml.side.clazz.presentation.ClazzEditorID")); //$NON-NLS-1$
+		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForExtensionId("com.bluexml.side.clazz.presentation.ClazzEditorID")); //$NON-NLS-1$
 		createdModels.add(file);
 		com.bluexml.side.clazz.Model model =  ClazzFactory.eINSTANCE.createModel();
 		model.setName(optionsPage.getModelNameValue());
