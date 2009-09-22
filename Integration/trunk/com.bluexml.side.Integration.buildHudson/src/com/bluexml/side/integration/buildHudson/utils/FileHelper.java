@@ -22,6 +22,9 @@ public class FileHelper {
 	 */
 	public static void copyFiles(File src, File dest, boolean override)
 			throws IOException {
+		
+		System.out.println("COPY : "+src+"-->"+dest);
+		
 		// Check to ensure that the source is valid...
 		if (!src.exists()) {
 			throw new IOException("copyFiles: Can not find source: "
