@@ -115,20 +115,20 @@ public class Application {
 			//execBuild("buildSVN", "svnCommit");
 		}
 
-		// cr�ation du build.xml
-		System.out.println("\n\n- Cr�ation de " + Utils.getBuildPath()
-				+ File.separator + "build.xml");
-		createFile(getCorpsBuild(), Utils.getBuildPath(), "build.xml");
-
-		// cr�ation du buildAuto.product
-		System.out.println("- Cr�ation du buildAuto.product");
-		createFile(getCorpsProduct(), Utils.getBuildPath(), "buildAuto.product");
-
 		if (parametre) {
 			// copie du r�pository dans le repertoire de travail (en s�parant
 			// les plugins et les features)
 			Utils.preTraitement();
 		}
+		
+		// cr�ation du build.xml
+		System.out.println("\n\n- Cr�ation de " + Utils.getBuildPath()
+				+ File.separator + "build.xml");
+		createFile(getCorpsBuild(), Utils.getBuildPath(), "build.xml");
+		
+		// cr�ation du buildAuto.product
+		System.out.println("- Cr�ation du buildAuto.product");
+		createFile(getCorpsProduct(), Utils.getBuildPath(), "buildAuto.product");
 
 		// Execution du build.xml
 		System.out.println("\nR�alisation du Build sur ...");
@@ -562,7 +562,6 @@ public class Application {
 		for (int i = 0; i < projects.length; i++) {
 
 			if (projects[i].length() > 0) {
-				System.out.println("-->"+projects[i]);
 				// si le mot 'feature' n'est pas pr�sent dans le nom du projet
 				if (projects[i].indexOf("feature") == -1) {
 					out += "\t\t\t<fileset dir=\""
