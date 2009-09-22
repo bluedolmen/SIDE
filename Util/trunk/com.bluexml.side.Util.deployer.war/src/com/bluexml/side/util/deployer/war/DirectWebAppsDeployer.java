@@ -27,17 +27,17 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 		boolean result = true;
 		// delete exploded webapps
 		if (getDeployedWebbAppFolder().exists()) {
-			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.1"), Activator.Messages.getString("WarDeployer.2") + getDeployedWebbAppFolder().getName(), ""); //$NON-NLS-1$ //$NON-NLS-2$
+			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.1"), Activator.Messages.getString("WarDeployer.2", getDeployedWebbAppFolder().getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
 			FileHelper.deleteFile(getDeployedWebbAppFolder(), false);
 		}
 
 		// unzip .war or .org if exist
 		if (getBackupWarFile().exists()) {
-			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.1"), Activator.Messages.getString("DirectWebAppsDeployer.4") + getBackupWarFile().getName(), ""); //$NON-NLS-1$ //$NON-NLS-2$
+			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.1"), Activator.Messages.getString("DirectWebAppsDeployer.4", getWarToPatchFile().getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
 			TrueZipHelper tzh2 = new TrueZipHelper(backupWarExt);
 			result = tzh2.copyFiles(getBackupWarFile(), getDeployedWebbAppFolder(), true);
 		} else if (getWarToPatchFile().exists()) {
-			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.5"), Activator.Messages.getString("DirectWebAppsDeployer.6") + getWarToPatchFile().getName(), ""); //$NON-NLS-1$ //$NON-NLS-2$
+			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.5"), Activator.Messages.getString("DirectWebAppsDeployer.4", getWarToPatchFile().getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
 			TrueZipHelper tzh2 = new TrueZipHelper(warToPatchExt);
 			result = tzh2.copyFiles(getWarToPatchFile(), getDeployedWebbAppFolder(), true);
 		} else {
@@ -56,7 +56,7 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 		}
 		if (fileToDeploy.isDirectory()) {
 			for (File f : fileToDeploy.listFiles(new FileExtensionFilter(packageExt))) {
-				monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.6"), Activator.Messages.getString("WarDeployer.7") + f.getName(), ""); //$NON-NLS-1$ //$NON-NLS-2$
+				monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.6"), Activator.Messages.getString("WarDeployer.7", f.getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
 				File explodedPackage = new File(getWorkingDir(), f.getName().replaceAll("\\." + packageExt, "")); //$NON-NLS-1$ //$NON-NLS-2$
 
 				explodedPackage.mkdirs();
@@ -83,10 +83,10 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 			throw new Exception(Activator.Messages.getString("DirectWebAppsDeployer.15")); //$NON-NLS-1$
 		}
 		if (getWorkingDir().exists()) {
-			monitor.getLog().addInfoLog(Activator.Messages.getString("DirectWebAppsDeployer.5"), Activator.Messages.getString("DirectWebAppsDeployer.17") + getWorkingDir().getName(), ""); //$NON-NLS-1$ //$NON-NLS-2$
+			monitor.getLog().addInfoLog(Activator.Messages.getString("DirectWebAppsDeployer.5"), Activator.Messages.getString("DirectWebAppsDeployer.17", getWorkingDir().getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
 			FileHelper.deleteFile(getWorkingDir(), false);
 		}
-		monitor.getLog().addInfoLog(Activator.Messages.getString("DirectWebAppsDeployer.5"), Activator.Messages.getString("WarDeployer.19") + getWorkingDir().getName(), ""); //$NON-NLS-1$ //$NON-NLS-2$
+		monitor.getLog().addInfoLog(Activator.Messages.getString("DirectWebAppsDeployer.5"), Activator.Messages.getString("WarDeployer.19", getWorkingDir().getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
 		getWorkingDir().mkdirs();
 	}
 
@@ -113,7 +113,7 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 	}
 
 	protected void dispatchFiles(List<File> files, Map<String, File> mapper) throws Exception {
-		MonitorWriter mw = new MonitorWriter(monitor,Activator.Messages.getString("DirectWebAppsDeployer.3"),""); //$NON-NLS-1$ //$NON-NLS-2$
+		MonitorWriter mw = new MonitorWriter(monitor, Activator.Messages.getString("DirectWebAppsDeployer.3"), ""); //$NON-NLS-1$ //$NON-NLS-2$
 		for (File f : files) {
 			for (Map.Entry<String, File> ent : mapper.entrySet()) {
 				if (f.getAbsolutePath().indexOf(ent.getKey()) != -1) {
