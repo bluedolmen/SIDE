@@ -89,21 +89,24 @@ public class Utils {
 	 */
 	public static List<String> getProjects(String properties) {
 
-		String[] projects = ouvrirFichier("build.properties").getProperty(
-				properties).split(",");
-		
+		String property = ouvrirFichier("build.properties").getProperty(
+				properties);
 		List<String> l = new ArrayList<String>();
 
-		if(projects.length > 0){
-			for (int i = 0; i < projects.length; i++) {
-				String projectName = projects[i].split("&")[1];
-				projectName.trim().replaceAll("\n", "");
-				if (projectName.length() > 0) {
-					l.add(projectName);
+		if (property != null && property.length() > 0) {
+			String[] projects = property.split(",");
+
+
+			if(projects.length > 0){
+				for (int i = 0; i < projects.length; i++) {
+					String projectName = projects[i].split("&")[1];
+					projectName.trim().replaceAll("\n", "");
+					if (projectName.length() > 0) {
+						l.add(projectName);
+					}
 				}
 			}
-		}
-		
+		}		
 		return l;
 	}
 	
