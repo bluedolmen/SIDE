@@ -325,6 +325,7 @@ public class Utils {
 	 */
 	public static String getVersionNumber(String projectName) {
 		String version = "";
+		System.out.print("Previous version number ("+projectName+") : ");
 
 		// En fonction du type du projet (feature ou plugin)
 		// on ira regarder soit dans le MANIFEST ou alors dans le feature.xml
@@ -354,6 +355,7 @@ public class Utils {
 			version = racine.getAttributeValue("version");
 
 		}
+		System.out.println(version);
 		return version;
 	}
 	
