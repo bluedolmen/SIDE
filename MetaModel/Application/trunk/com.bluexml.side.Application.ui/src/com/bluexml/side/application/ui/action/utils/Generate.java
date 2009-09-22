@@ -180,11 +180,11 @@ public class Generate extends Thread {
 
 			IFolder logFolder = IFileHelper.getIFolder(logPath);
 			if (!logFolder.exists()) {
-				generalMonitor.addErrorText(Activator.Messages.getString("Generate.12") + logPath + " doesn't exist"); //$NON-NLS-1$ //$NON-NLS-2$
+				generalMonitor.addWarningText(Activator.Messages.getString("Generate.12") + logPath + " doesn't exist"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			IFolder genFolder = IFileHelper.getIFolder(genPath);
 			if (!genFolder.exists()) {
-				generalMonitor.addErrorText(Activator.Messages.getString("Generate.14") + genPath + " doesn't exist"); //$NON-NLS-1$ //$NON-NLS-2$
+				generalMonitor.addWarningText(Activator.Messages.getString("Generate.14") + genPath + " doesn't exist"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 
 			generate(configuration, modelsInfo, configurationParameters, generationParameters);
