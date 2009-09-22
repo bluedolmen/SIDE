@@ -528,7 +528,8 @@ public class Utils {
 		projects.addAll(getProjects("projectToVersioned"));
 
 		for (int i = 0; i < projects.size(); i++) {
-			listeProjetReels.add(projects.get(i));
+			if (projects.get(i).length() > 0)
+				listeProjetReels.add(projects.get(i));
 		}
 		
 		
