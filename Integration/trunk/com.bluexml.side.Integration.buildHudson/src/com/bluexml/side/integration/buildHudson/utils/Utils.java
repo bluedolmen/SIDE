@@ -434,7 +434,9 @@ public class Utils {
 	 */
 	public static void preTraitement() {
 
-		List<String> projects = getProjects();
+		List<String> projects = new ArrayList<String>();
+		projects.addAll(getProjects());
+		projects.addAll(getProjects("projectToVersioned"));
 
 		String path = "";
 
