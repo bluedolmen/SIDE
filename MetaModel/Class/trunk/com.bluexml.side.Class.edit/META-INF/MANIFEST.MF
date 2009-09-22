@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.bluexml.side.Class.edit; singleton:=true
-Bundle-Version: 1.0.16.v9074-20090910
+Bundle-Version: 1.0.18.v9491-20090922
 Bundle-ClassPath: .
 Bundle-Activator: com.bluexml.side.clazz.provider.ClassEditPlugin$Implementation
 Bundle-Vendor: %providerName
