@@ -655,8 +655,11 @@ public class Utils {
 				e1.getMessage();
 			}
 			
-			
-			
+			//Add all projects to version
+			for (String p : projectsToVersioned) {
+				if (!listeProjet.contains(p))
+					listeProjet.add(p);
+			}
 			
 			// on parcours la liste des projets qui ont �t� modifi�
 			for (String element : listeProjet) {
@@ -683,6 +686,7 @@ public class Utils {
 			}
 
 		}
+		
 		
 		// On parcours la liste des plugins et on les met a jour
 		for (String plugin : listePlugin) {
