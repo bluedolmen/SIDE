@@ -1,77 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature
-      id="com.bluexml.side.Application.feature"
-      label="SIDE Application Modeler"
-      version="1.0.66.v9339-20090917"
-      provider-name="BlueXML">
-
-   <description url="http://www.bluexml.com">
-      SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature allows to model the MDA process (modeling, generation, deployment).
-   </description>
-
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
-   </copyright>
-
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
-   </license>
-
-   <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="com.bluexml.side.Application" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="org.eclipse.core.resources" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Application.edit"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="org.eclipse.emf.edit.ui"/>
-      <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="com.bluexml.side.Util.generator" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Util.ecore" version="1.0.1" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.databinding"/>
-      <import plugin="org.eclipse.core.databinding.beans"/>
-      <import plugin="org.eclipse.jface.databinding"/>
-      <import plugin="com.bluexml.side.Util.log"/>
-      <import plugin="com.bluexml.side.Util.libs" version="1.0.11" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Util.security" version="1.0.11" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Util.deployer" version="1.0.13" match="greaterOrEqual"/>
-   </requires>
-
-   <plugin
-         id="com.bluexml.side.Application"
-         download-size="0"
-         install-size="0"
-         version="1.0.25.v8733-20090902"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Application.edit"
-         download-size="0"
-         install-size="0"
-         version="1.0.19.v8733-20090902"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Application.editor"
-         download-size="0"
-         install-size="0"
-         version="1.0.13.v8336-20090817"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Application.ui"
-         download-size="0"
-         install-size="0"
-         version="1.0.63.v9339-20090917"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Application.startup"
-         download-size="0"
-         install-size="0"
-         version="1.0.1.v9248-20090916"
-         unpack="false"/>
-
+<feature id="com.bluexml.side.Application.feature" label="SIDE Application Modeler" version="1.0.68.v9559-20090922" provider-name="BlueXML">
+  <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature allows to model the MDA process (modeling, generation, deployment).</description>
+  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
+  <license url="http://www.example.com/license">[Enter License Description here.]</license>
+  <requires>
+    <import plugin="org.eclipse.core.runtime" />
+    <import plugin="org.eclipse.emf.ecore" />
+    <import plugin="com.bluexml.side.Application" version="1.0.0" match="greaterOrEqual" />
+    <import plugin="org.eclipse.emf.edit" />
+    <import plugin="org.eclipse.core.resources" version="3.4.0" match="greaterOrEqual" />
+    <import plugin="com.bluexml.side.Application.edit" />
+    <import plugin="org.eclipse.emf.ecore.xmi" />
+    <import plugin="org.eclipse.emf.edit.ui" />
+    <import plugin="org.eclipse.ui.ide" />
+    <import plugin="org.eclipse.ui" />
+    <import plugin="com.bluexml.side.Util.generator" version="1.0.0" match="greaterOrEqual" />
+    <import plugin="com.bluexml.side.Util.ecore" version="1.0.1" match="greaterOrEqual" />
+    <import plugin="org.eclipse.core.databinding" />
+    <import plugin="org.eclipse.core.databinding.beans" />
+    <import plugin="org.eclipse.jface.databinding" />
+    <import plugin="com.bluexml.side.Util.log" />
+    <import plugin="com.bluexml.side.Util.libs" version="1.0.11" match="greaterOrEqual" />
+    <import plugin="com.bluexml.side.Util.security" version="1.0.11" match="greaterOrEqual" />
+    <import plugin="com.bluexml.side.Util.deployer" version="1.0.13" match="greaterOrEqual" />
+  </requires>
+  <plugin id="com.bluexml.side.Application" download-size="0" install-size="0" version="1.0.30.v9559-20090922" unpack="false" />
+  <plugin id="com.bluexml.side.Application.edit" download-size="0" install-size="0" version="1.0.24.v9559-20090922" unpack="false" />
+  <plugin id="com.bluexml.side.Application.editor" download-size="0" install-size="0" version="1.0.18.v9559-20090922" unpack="false" />
+  <plugin id="com.bluexml.side.Application.ui" download-size="0" install-size="0" version="1.0.68.v9559-20090922" unpack="false" />
+  <plugin id="com.bluexml.side.Application.startup" download-size="0" install-size="0" version="1.0.6.v9559-20090922" unpack="false" />
 </feature>
+
