@@ -813,7 +813,7 @@ public class Utils {
 		try {
 			FileHelper.copyFiles(new File(from), new File(to), true);
 
-			FileHelper.deleteFile(new File(from));
+			//FileHelper.deleteFile(new File(from));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
