@@ -224,7 +224,10 @@ public class Application {
 	 * Retourne le corps du fichier build.xml pour le projet donn�
 	 */
 	private static String getCorpsBuild() {
-		String[] projects = toArray(Utils.getProjects());
+		List<String> l = new ArrayList<String>();
+		l.addAll(Utils.getProjects());
+		l.addAll(Utils.getProjects("projectToVersioned"));
+		String[] projects = toArray(l);
 
 		String out = "<?xml version=\"1.0\"?>\n";
 		out += "<project name=\"build\" default=\"build\">\n";
