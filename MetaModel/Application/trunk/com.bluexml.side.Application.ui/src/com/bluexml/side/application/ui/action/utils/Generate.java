@@ -68,7 +68,7 @@ public class Generate extends Thread {
 
 	/**
 	 * compute the max number of task for this configuration.
-	 * 
+	 *
 	 * @param configuration
 	 * @return
 	 */
@@ -91,7 +91,7 @@ public class Generate extends Thread {
 
 	/**
 	 * Launch generation on all generator version selected
-	 * 
+	 *
 	 * @param configuration
 	 * @param staticParameters
 	 * @param models
@@ -178,7 +178,7 @@ public class Generate extends Thread {
 		}
 		if (!modelWithError) {
 
-			IFolder logFolder = IFileHelper.getIFolder(logPath);
+			IFolder logFolder = IFileHelper.getIFolder(configurationParameters.get(ApplicationDialog.KEY_LOGPATH));
 			if (!logFolder.exists()) {
 				generalMonitor.addWarningText(Activator.Messages.getString("Generate.12") + logPath + " doesn't exist"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
@@ -215,7 +215,7 @@ public class Generate extends Thread {
 
 	/**
 	 * Return the log path (folder path + configuration name)
-	 * 
+	 *
 	 * @param configuration
 	 * @param configurationParameters
 	 * @return
@@ -274,11 +274,11 @@ public class Generate extends Thread {
 				}
 				boolean error = false;
 				// generate
-				generalMonitor.subTask(Activator.Messages.getString("Generate.48")); //$NON-NLS-1$				
+				generalMonitor.subTask(Activator.Messages.getString("Generate.48")); //$NON-NLS-1$
 				error &= generate_(configuration, modelsInfo, configurationParameters, generationParameters);
 				generalMonitor.taskDone(null); //$NON-NLS-1$
-			
-			
+
+
 				// deploy
 				generalMonitor.subTask(Activator.Messages.getString("Generate.49")); //$NON-NLS-1$
 				error &= deploy_(configuration, modelsInfo, configurationParameters, generationParameters);
