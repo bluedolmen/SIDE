@@ -369,6 +369,7 @@ public class Generate extends Thread {
 			configurationParameters.put("metaModelName", elem.getMetaModelName()); //$NON-NLS-1$
 			configurationParameters.put("technologyName", elem.getTechnologyName()); //$NON-NLS-1$
 			configurationParameters.put("technologyVersionName", elem.getTechnologyVersionName()); //$NON-NLS-1$
+			configurationParameters.put("configurationName", configuration.getName()); //$NON-NLS-1$
 
 			// We get the option for this generator
 			Map<String, Boolean> generatorOptions = new HashMap<String, Boolean>();
