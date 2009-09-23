@@ -13,6 +13,22 @@ else
   echo "            BUILD_PATH =  directory where the build will be performed"
   exit -1
 fi
+
+# build the openSourcePublication project to change license header of source file
+cd $BUILD_PATH
+mkdir buildLicense
+cp -R $SOURCE_PATH/S-IDE/Integration/trunk/com.bluexml.side.Integration.openSourcePublication/* $BUILD_PATH/buildLicense
+cd $BUILD_PATH/buildLicense
+mkdir bin
+ant main
+if [ -f openSourceLicenseHeader.jar ]; then
+  chmod +x openSourceLicenseHeader.jar
+else
+ echo "Unable to build the jar file to change the License and copyright header in source files!"
+ exit -2
+fi
+
+
 cd $BUILD_PATH
 # remove projects not to integrate in labs release
 rm -rf $SOURCE_PATH/S-IDE/Integration
@@ -20,10 +36,12 @@ rm -rf $SOURCE_PATH/S-IDE/Util/trunk/com.bluexml.side.Util.security
 rm -rf $SOURCE_PATH/S-IDE/Experimental
 
 # delete svn folder
+echo "Delete svn folder"
 for f in `find $SOURCE_PATH -type d -name ".svn"`; do
 	rm -rf $f
 done
 
+echo "Process java file to remove reference to package security"
 for f in `find $SOURCE_PATH -type f -name "*.java"`; do
 	
 	# find the text and replace it
@@ -60,34 +78,26 @@ for f in `find $SOURCE_PATH -type f -name "*.java"`; do
 	fi
 done
 
+echo "Process feature.xml file to remove reference to package security"
 for f in `find $SOURCE_PATH -type f -name "feature.xml"`; do
 
 	perl -0 -p -e 's/( *)<plugin( *)(\s+)( *)id="com.bluexml.side.Util.security"[^<]*//sg' $f
 done
 
+echo "Process xml file to remove reference to package security"
 for f in `find $SOURCE_PATH -type f -name "*.xml"`; do
 	# delete line having the pattern 'com.bluexml.side.Util.security'
 	perl -ni -e 'print unless /com.bluexml.side.Util.security/' $f
 done
 
+echo "Process Manifest file to remove reference to package security"
 for f in `find $SOURCE_PATH -type f -name "*.MF"`; do
 	# delete line having the pattern 'com.bluexml.side.Util.security'
 	perl -ni -e 'print unless /com.bluexml.side.Util.security/' $f
 done
 
 # modify header of the source file with license mention and copyright using the openSourcePublication project
-cd $BUILD_PATH
-mkdir buildLicense
-cp -R $SOURCE_PATH/SIDE/Integration/trunk/com.bluexml.side.Integration.openSourcePublication $BUILD_PATH/buildLicense
-cd $BUILD_PATH/buildLicense
-mkdir bin
-ant main
-if [ -f openSourceLicenseHeader.jar ]; then
-  chmod +x openSourceLicenseHeader.jar
-  cd ../labs 
-  java -jar ../buildLicense/openSourceLicenseHeader.jar $SOURCE_PATH
-else
- echo "Unable to build the jar file to change the License and copyright header in source files!"
- exit -2
-fi
+cd $BUILD_PATH/labs
+java -jar ../buildLicense/openSourceLicenseHeader.jar $SOURCE_PATH
+
 
