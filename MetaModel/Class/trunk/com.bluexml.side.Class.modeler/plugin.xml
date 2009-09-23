@@ -68,7 +68,7 @@
             configuration="com.bluexml.side.Class.modeler.diagram.CdConfiguration"
             id="com.bluexml.side.Class.modeler.diagram"
             name="Data Diagram">
-            	<enableFor class="com.bluexml.side.clazz.Model"/>
+            	<enableFor class="com.bluexml.side.clazz.ClassPackage"/>
       </diagram>
 	</extension>
 </plugin>
