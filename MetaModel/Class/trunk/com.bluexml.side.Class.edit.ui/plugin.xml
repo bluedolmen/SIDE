@@ -23,6 +23,14 @@
               label="Initialize Form Model"
               menubarPath="com.bluexml.side.Class.edit.ui.editor.menu1/group1">
         </action>
+        <action
+              class="com.bluexml.side.clazz.edit.ui.actions.InitializeViewModel"
+              enablesFor="1"
+              icon="icons/menu/initializeFormModel.png"
+              id="com.bluexml.side.Class.edit.ui.action1"
+              label="Initialize View Model"
+              menubarPath="com.bluexml.side.Class.edit.ui.editor.menu1/group1">
+        </action>
      </objectContribution>
   </extension>
 
