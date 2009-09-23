@@ -15,7 +15,7 @@
 	<target name="compress" description="Compression target" depends="compile">
 		<jar jarfile="openSourceLicenseHeader.jar" basedir="bin">
 			<manifest>
-				<attribute name="Main-Class" value="com.bluexml.side.integration.buildHudson.Application" />
+				<attribute name="Main-Class" value="com.bluexml.side.integration.openSourvePublication.Application" />
 			</manifest>
 			<fileset dir="src"/>
 		</jar>
