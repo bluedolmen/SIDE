@@ -19,7 +19,7 @@ public class LogHelper {
 	String logDirectory;
 
 	public LogHelper(final Map<String, String> configurationParameters, LogType logType) {
-		this.logDirectory = configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral());
+		this.logDirectory = configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + File.separator + configurationParameters.get("configurationName");
 		SIDELog log_ = null;
 		if (logType.equals(LogType.GENERATION)) {
 			log_ = new SIDELog(configurationParameters.get("generatorName"), configurationParameters.get("generatorId"), configurationParameters.get("technologyVersionName"), configurationParameters.get("technologyName"), configurationParameters //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
@@ -33,7 +33,7 @@ public class LogHelper {
 
 	/**
 	 * Add log to know on each model have been launch generation
-	 * 
+	 *
 	 * @param name
 	 */
 	public void addModelLog(String name) {
@@ -54,7 +54,7 @@ public class LogHelper {
 
 	/**
 	 * Add a Log
-	 * 
+	 *
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -70,7 +70,7 @@ public class LogHelper {
 
 	/**
 	 * Add an Error Log
-	 * 
+	 *
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -81,7 +81,7 @@ public class LogHelper {
 
 	/**
 	 * Add an error log using a stracktrace instead of a string description
-	 * 
+	 *
 	 * @param title
 	 * @param stackTrace
 	 * @param uri
@@ -102,7 +102,7 @@ public class LogHelper {
 
 	/**
 	 * Add a warning log
-	 * 
+	 *
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -118,7 +118,7 @@ public class LogHelper {
 
 	/**
 	 * Add information log
-	 * 
+	 *
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -134,7 +134,7 @@ public class LogHelper {
 	/**
 	 * Add a service log (service : a webpage or a file that can be acceeded by
 	 * user to test application).
-	 * 
+	 *
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -149,7 +149,7 @@ public class LogHelper {
 
 	/**
 	 * Use to log generated file
-	 * 
+	 *
 	 * @param path
 	 * @param description
 	 * @param uri
@@ -172,7 +172,7 @@ public class LogHelper {
 
 	/**
 	 * Return the log target file (only generator)
-	 * 
+	 *
 	 * @return
 	 */
 	public String getLogFile() {
