@@ -83,6 +83,7 @@ cd $BUILD_PATH/buildLicense
 mkdir bin
 ant main
 if [ -f openSourceLicenseHeader.jar ]; then
+  chmod +x openSourceLicenseHeader.jar
   cd ../labs 
   java -jar ../buildLicense/openSourceLicenseHeader.jar $SOURCE_PATH
 else

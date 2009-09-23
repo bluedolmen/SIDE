@@ -56,6 +56,8 @@ fi
 # give rights for all execute files
 cd $TARGET_WORKSPACE
 chmod +x -R *.sh
+chmod +x -R */*.sh
 chmod +x -R *.jar
+chmod +x -R */*.jar
 dos2unix *.sh
 exit 0
