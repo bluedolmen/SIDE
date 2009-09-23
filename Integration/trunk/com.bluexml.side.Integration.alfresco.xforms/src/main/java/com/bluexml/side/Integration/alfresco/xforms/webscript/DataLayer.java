@@ -117,8 +117,9 @@ public class DataLayer implements DataLayerInterface {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#create(java.lang.String,
-	 * org.w3c.dom.Element, java.lang.String)
+	 * @see
+	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#create(java.lang
+	 * .String, org.w3c.dom.Element, java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
 	public NodeRef create(String where, Element what, String nodeName) throws Exception {
@@ -147,8 +148,9 @@ public class DataLayer implements DataLayerInterface {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#update(java.lang.String,
-	 * org.w3c.dom.Element)
+	 * @see
+	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#update(java.lang
+	 * .String, org.w3c.dom.Element)
 	 */
 	@SuppressWarnings("unchecked")
 	public NodeRef update(String nodeId, Element what) throws Exception {
@@ -177,7 +179,9 @@ public class DataLayer implements DataLayerInterface {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#request(java.lang.String)
+	 * @see
+	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#request(java.lang
+	 * .String)
 	 */
 	public List<NodeRef> request(String xpath) throws Exception {
 		// Amenel: replaced Repository.getStoreRef with a direct reference to
@@ -192,7 +196,9 @@ public class DataLayer implements DataLayerInterface {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#deleteNode(java.lang.String)
+	 * @see
+	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#deleteNode(java
+	 * .lang.String)
 	 */
 	public void delete(String objectId) {
 		NodeRef nodeRef = new NodeRef(objectId);
@@ -211,7 +217,9 @@ public class DataLayer implements DataLayerInterface {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#read(java.lang.String)
+	 * @see
+	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#read(java.lang.
+	 * String)
 	 */
 	public String read(String objectId) {
 		Document resultDocument = readAsDocument(objectId);
@@ -323,7 +331,9 @@ public class DataLayer implements DataLayerInterface {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#createPath(java.lang.String)
+	 * @see
+	 * com.bluexml.side.Integration.alfresco.xforms.webscript.DataLayerInterface#createPath(java
+	 * .lang.String)
 	 */
 	public NodeRef createPath(String where) throws Exception {
 		// fix for bug #931: we may be in a transaction. If so, we MUST not try to create the same
@@ -930,10 +940,12 @@ public class DataLayer implements DataLayerInterface {
 
 		StringTokenizer st = new StringTokenizer(view, VIEW_TOKEN_SEPARATOR);
 		boolean lastTokenWasText = false;
+		boolean first = true;
 		while (st.hasMoreTokens()) {
 			String token = st.nextToken().trim();
 			if (token.startsWith("{") && token.endsWith("}")) {
 				result += token.substring(1, token.length() - 1);
+				first = false;
 				lastTokenWasText = true;
 			} else if (token.contains(VIEW_FIELD_SEPARATOR)) {
 				StringTokenizer st2 = new StringTokenizer(token, VIEW_FIELD_SEPARATOR);
@@ -964,6 +976,7 @@ public class DataLayer implements DataLayerInterface {
 											}
 											result += value;
 											lastTokenWasText = false;
+											first = false;
 										}
 									}
 								}
@@ -992,6 +1005,7 @@ public class DataLayer implements DataLayerInterface {
 											result += getPropertyValue(targetProperties,
 													targetType, attribute);
 											lastTokenWasText = false;
+											first = false;
 										}
 									}
 								}
@@ -1007,11 +1021,12 @@ public class DataLayer implements DataLayerInterface {
 					if (key.endsWith("_" + token)) {
 						Serializable value = properties.get(qname);
 						if (value != null && value.toString().length() > 0) {
-							if (lastTokenWasText == false) {
+							if (lastTokenWasText == false && first == false) {
 								result += " ";
 							}
 							result += value;
 							lastTokenWasText = false;
+							first = false;
 						}
 					}
 				}
