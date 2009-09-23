@@ -97,6 +97,7 @@ for f in `find $SOURCE_PATH -type f -name "*.MF"`; do
 done
 
 # modify header of the source file with license mention and copyright using the openSourcePublication project
+echo "Modify header of source file using the openSourcePublication project"
 cd $BUILD_PATH/labs
 java -jar ../buildLicense/openSourceLicenseHeader.jar $SOURCE_PATH
 
