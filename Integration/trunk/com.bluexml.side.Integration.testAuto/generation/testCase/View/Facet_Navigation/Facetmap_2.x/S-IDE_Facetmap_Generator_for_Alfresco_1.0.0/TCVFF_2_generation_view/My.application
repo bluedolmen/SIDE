@@ -21,15 +21,14 @@
     <parameters key="generation.option.Skip.Validation" value="false"/>
     <parameters key="generation.options.logPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/View/Facet_Navigation/Facetmap_2.x/S-IDE_Facetmap_Generator_for_Alfresco_1.0.0/TCVFF_2_generation_view/log"/>
     <parameters key="generation.options.destinationPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/View/Facet_Navigation/Facetmap_2.x/S-IDE_Facetmap_Generator_for_Alfresco_1.0.0/TCVFF_2_generation_view/target"/>
-    <parameters key="CATALINA_HOME" value="C:\NewAlfresco\tomcat\"/>
-    <parameters key="com.bluexml.side.deployer.alfresco.mmtPath" value="C:\NewAlfresco\tomcat\bin\alfresco-mmt-2.1.0.jar"/>
+    <parameters key="CATALINA_HOME" value=""/>
+    <parameters key="com.bluexml.side.deployer.alfresco.mmtPath" value=""/>
     <parameters key="generation.options.clean" value="true"/>
-    <parameters key="alfresco.url" value="C:\NewAlfresco\tomcat"/>
+    <parameters key="alfresco.url" value="http://localhost:8080/alfresco"/>
     <parameters key="FACETMAP_HOST" value=""/>
     <parameters key="generation.options.documentation" value="false"/>
     <parameters key="com.bluexml.side.Class.generator.alfresco.module.version" value="1.0"/>
     <deployerConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.deployer.alfresco.AMPDeployer" id="com.bluexml.side.Deployer.alfresco" technologyVersionName="Alfresco3.x Labs and Entreprise" technologyName="Alfresco" deployerName="S-IDE Alfresco Deployer"/>
-    <deployerConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.deployer.alfresco.AlfrescoDeployer" id="com.bluexml.side.Deployer.alfresco" technologyVersionName="Alfresco3.x Labs and Enterprise" technologyName="Alfresco" deployerName="S-IDE Alfresco Deployer 1.0.0"/>
     <deployerConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.deployer.documentation.DocumentationDeployer" id="com.bluexml.side.Deployer.documentation" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" deployerName="S-IDE Documentation Deployer"/>
   </elements>
   <elements xsi:type="app:Model" name="TCVFF_2.dt" file="/com.bluexml.side.Integration.testAuto/generation/testCase/View/Facet_Navigation/Facetmap_2.x/S-IDE_Facetmap_Generator_for_Alfresco_1.0.0/TCVFF_2_generation_view/TCVFF_2.dt"/>
