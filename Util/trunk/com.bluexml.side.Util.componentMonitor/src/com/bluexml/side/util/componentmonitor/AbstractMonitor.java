@@ -24,7 +24,10 @@ public abstract class AbstractMonitor implements IProgressMonitor {
 		this.styletext = styletext;
 		this.progressBar = progressBar;
 		this.progressBarlabel = progressBarlabel;
-		progressBar.setSelection(0);
+		if (progressBar != null) {
+			progressBar.setSelection(0);
+		}
+
 	}
 
 	public AbstractMonitor(StyledText styletext, ProgressBar progressBar, int totalWork, Label progressBarlabel, AbstractMonitor parent) {
@@ -32,8 +35,10 @@ public abstract class AbstractMonitor implements IProgressMonitor {
 		this.styletext = styletext;
 		this.progressBar = progressBar;
 		this.progressBarlabel = progressBarlabel;
-		progressBar.setSelection(0);
-		progressBar.setMaximum(totalWork);
+		if (progressBar != null) {
+			progressBar.setSelection(0);
+			progressBar.setMaximum(totalWork);
+		}
 	}
 
 	public void addText(String text) {
@@ -64,7 +69,7 @@ public abstract class AbstractMonitor implements IProgressMonitor {
 		if (parent != null) {
 			parent.addOneStep();
 		}
-		System.out.println("New Monitor state :\n" + this);
+		// System.out.println("New Monitor state :\n" + this);
 
 	}
 
@@ -90,9 +95,9 @@ public abstract class AbstractMonitor implements IProgressMonitor {
 	}
 
 	public void skipTasks(int nb) {
-		System.out.println("skip :" + nb);
+		// System.out.println("skip :" + nb);
 		for (int c = 0; c < nb; c++) {
-			//System.out.println("skip current skip :" + c);
+			// System.out.println("skip current skip :" + c);
 			addOneStep();
 		}
 	}
