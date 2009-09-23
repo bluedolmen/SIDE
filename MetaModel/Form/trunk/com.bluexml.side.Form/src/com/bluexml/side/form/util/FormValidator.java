@@ -123,6 +123,14 @@ public class FormValidator extends EObjectValidator {
 	private static Constraint field_mandatoryHiddenAndNoDefaultValueInvOCL;
 
 	/**
+	 * The parsed OCL expression for the definition of the '<em>TwoFormWithSameName</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint formContainer_TwoFormWithSameNameInvOCL;
+
+	/**
 	 * The parsed OCL expression for the definition of the '<em>ClassMustMatchWithProcessContentType</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -755,6 +763,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(formClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormContainer_validName(formClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormContainer_TwoFormWithSameName(formClass, diagnostics, context);
 		if (result || diagnostics != null) result &= validateClassReference_mustReferenceClass(formClass, diagnostics, context);
 		return result;
 	}
@@ -1009,6 +1018,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(searchForm, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(searchForm, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormContainer_validName(searchForm, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormContainer_TwoFormWithSameName(searchForm, diagnostics, context);
 		return result;
 	}
 
@@ -1089,6 +1099,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(formWorkflow, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formWorkflow, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormContainer_validName(formWorkflow, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormContainer_TwoFormWithSameName(formWorkflow, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormWorkflow_ClassMustMatchWithProcessContentType(formWorkflow, diagnostics, context);
 		return result;
 	}
@@ -1147,6 +1158,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(formContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(formContainer, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormContainer_validName(formContainer, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFormContainer_TwoFormWithSameName(formContainer, diagnostics, context);
 		return result;
 	}
 
@@ -1169,6 +1181,45 @@ public class FormValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "validName", getObjectLabel(formContainer, context) }),
+						 new Object[] { formContainer }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the TwoFormWithSameName constraint of '<em>Container</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateFormContainer_TwoFormWithSameName(FormContainer formContainer, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (formContainer_TwoFormWithSameNameInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(FormPackage.Literals.FORM_CONTAINER);
+
+			EAnnotation ocl = FormPackage.Literals.FORM_CONTAINER.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("TwoFormWithSameName");
+
+			try {
+				formContainer_TwoFormWithSameNameInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(formContainer_TwoFormWithSameNameInvOCL);
+
+		if (!query.check(formContainer)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						((doThrowError( FormPackage.Literals.FORM_CONTAINER.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"TwoFormWithSameName")? Diagnostic.ERROR : Diagnostic.WARNING),
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "TwoFormWithSameName", getObjectLabel(formContainer, context) }),
 						 new Object[] { formContainer }));
 			}
 			return false;

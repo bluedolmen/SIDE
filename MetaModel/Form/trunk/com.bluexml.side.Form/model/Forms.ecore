@@ -132,9 +132,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormContainer" abstract="true" eSuperTypes="#//FormGroup">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="validName"/>
+      <details key="constraints" value="validName TwoFormsWithSameName"/>
     </eAnnotations>
-    <eAnnotations source="http://www.bluexml.com/OCL"/>
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="TwoFormsWithSameName" value="AbstractClass.allInstances()->select(a | a.id = self.id a &lt;> self)->size() = 0"/>
+    </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The 'FormContainer' represents a form and is used as a container for elements. FormClass and FormWorkflow inherits of FormContainer. FormContainer is an abstract element and so does not directly appear in the Form modeler.&#xD;&#xA;A FormCollection is at least composed of one FormContainer.&#xD;&#xA;Inherits: FormGroup."/>
     </eAnnotations>

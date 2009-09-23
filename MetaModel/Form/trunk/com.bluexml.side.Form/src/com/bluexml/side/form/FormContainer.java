@@ -21,7 +21,8 @@ package com.bluexml.side.form;
  *
  * @see com.bluexml.side.form.FormPackage#getFormContainer()
  * @model abstract="true"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='validName'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='validName TwoFormWithSameName'"
+ *        annotation="http://www.bluexml.com/OCL TwoFormWithSameName='FormContainer.allInstances()->select(a | a.id = self.id and a <> self)->size() = 0'"
  * @generated
  */
 public interface FormContainer extends FormGroup {
