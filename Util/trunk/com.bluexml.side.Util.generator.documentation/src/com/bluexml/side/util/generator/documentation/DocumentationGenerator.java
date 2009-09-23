@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 
@@ -31,13 +32,20 @@ public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 	}
 
 	public Collection<IFile> complete() throws Exception {
-		String target = IFileHelper.getSystemFolderPath(getTargetPath()+File.separator+getTechVersion())+File.separator;
-		new File(target).mkdirs();
-		String source = IFileHelper.getSystemFolderPath(getTemporaryFolder()) + File.separator;
-		FileHelper.copyFiles(new File(source), new File(target), true);
+		for (Map.Entry<String, List<IFile>> l : groupedModels.entrySet()) {
+			String rootName = l.getKey();
+			setTEMP_FOLDER("generator_" + getClass().getName() + File.separator + rootName);
+
+			String target = IFileHelper.getSystemFolderPath(getTargetPath()+File.separator+getTechVersion())+File.separator;
+			new File(target).mkdirs();
+			String source = IFileHelper.getSystemFolderPath(getTemporaryFolder()) + File.separator;
+			FileHelper.copyFiles(new File(source), new File(target), true);
+		}
+
+
 
 		for (IFile f : generatedFiles) {
-		monitor.getLog().addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());  //$NON-NLS-1$//$NON-NLS-2$
+			monitor.getLog().addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());  //$NON-NLS-1$//$NON-NLS-2$
 		}
 
 		return generatedFiles;
