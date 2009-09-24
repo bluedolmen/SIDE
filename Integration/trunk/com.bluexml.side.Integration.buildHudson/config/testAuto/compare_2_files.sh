@@ -22,9 +22,9 @@ else
         echo "empty"
 fi
 
-#rm res1.xml
-#rm res11.xml
-#rm res111.xml
+rm res1.xml
+rm res11.xml
+rm res111.xml
 rm res2.xml
 rm res22.xml
-#rm res222.xml
+rm res222.xml
