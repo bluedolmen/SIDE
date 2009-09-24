@@ -60,4 +60,6 @@ chmod +x -R */*.sh
 chmod +x -R *.jar
 chmod +x -R */*.jar
 dos2unix *.sh
+dos2unix *.xml
+dos2unix *.properties
 exit 0
