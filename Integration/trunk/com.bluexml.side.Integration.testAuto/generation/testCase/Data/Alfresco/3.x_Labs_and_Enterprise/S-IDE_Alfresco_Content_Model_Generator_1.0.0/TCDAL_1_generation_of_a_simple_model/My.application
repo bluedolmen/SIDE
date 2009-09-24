@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <app:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:app="http://www.bluexml.com/application/1.0/">
-  <elements xsi:type="app:Configuration" name="New configuration">
+  <elements xsi:type="app:Configuration" name="ConfigTest" description="">
     <generatorConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator" id="com.bluexml.side.Class.generator.alfresco" metaModelName="KSR500 Data" technologyVersionName="Alfresco3.x Labs and Enterprise" technologyName="alfresco" id_metamodel="http://www.kerblue.org/class/1.0" generatorName="S-IDE Content Model Generator for Alfresco 1.0.0">
       <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.model" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
       <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.customAssociationManagement" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
