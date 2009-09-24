@@ -1,7 +1,7 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-<project xmlns:artifact="antlib:org.apache.maven.artifact.ant" name="com.bluexml.side.Integration.alfresco.sql" default="patchWebapps">
+<project xmlns:artifact="antlib:org.apache.maven.artifact.ant" name="${groupId}.${artifactId}" default="patchWebapps">
 	<property file="build.${symbol_dollar}{user.name}.properties" />
 	<property file="${symbol_dollar}{user.home}/build.properties" />
 	<path id="maven-ant-tasks.classpath" path="lib/maven-ant-tasks-2.0.10.jar" />
