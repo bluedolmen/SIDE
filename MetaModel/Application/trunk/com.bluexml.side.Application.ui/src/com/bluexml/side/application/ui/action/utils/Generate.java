@@ -68,7 +68,7 @@ public class Generate extends Thread {
 
 	/**
 	 * compute the max number of task for this configuration.
-	 *
+	 * 
 	 * @param configuration
 	 * @return
 	 */
@@ -91,7 +91,7 @@ public class Generate extends Thread {
 
 	/**
 	 * Launch generation on all generator version selected
-	 *
+	 * 
 	 * @param configuration
 	 * @param staticParameters
 	 * @param models
@@ -215,7 +215,7 @@ public class Generate extends Thread {
 
 	/**
 	 * Return the log path (folder path + configuration name)
-	 *
+	 * 
 	 * @param configuration
 	 * @param configurationParameters
 	 * @return
@@ -277,7 +277,6 @@ public class Generate extends Thread {
 				generalMonitor.subTask(Activator.Messages.getString("Generate.48")); //$NON-NLS-1$
 				error &= generate_(configuration, modelsInfo, configurationParameters, generationParameters);
 				generalMonitor.taskDone(null); //$NON-NLS-1$
-
 
 				// deploy
 				generalMonitor.subTask(Activator.Messages.getString("Generate.49")); //$NON-NLS-1$
@@ -463,7 +462,7 @@ public class Generate extends Thread {
 							}
 						}
 					} else {
-						generationMonitor.addErrorTextAndLog(Activator.Messages.getString("Generate.44") + elem.getId() + " is not activated, please check your plugin licence", null, null); //$NON-NLS-1$ //$NON-NLS-2$
+						generationMonitor.addErrorTextAndLog(Activator.Messages.getString("Generate.44", elem.getId()), null, null); //$NON-NLS-1$ //$NON-NLS-2$
 						generationMonitor.skipTasks(NB_GENERATION_STEP);
 					}
 				} else {
