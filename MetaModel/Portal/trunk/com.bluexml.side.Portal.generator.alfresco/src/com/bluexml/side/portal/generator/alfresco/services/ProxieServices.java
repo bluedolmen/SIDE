@@ -1,5 +1,5 @@
 package com.bluexml.side.portal.generator.alfresco.services;
-import com.bluexml.side.clazz.generator.alfresco.services.CommonServices;
+import com.bluexml.side.clazz.service.alfresco.CommonServices;
 import com.bluexml.side.common.NamedModelElement;
 public class ProxieServices {
 
