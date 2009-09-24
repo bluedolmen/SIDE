@@ -19,6 +19,7 @@ public class Application {
 
 	public static String workspace = "";
 	public static String build_number = "";
+	public static String build_id = "";
 	public static String svn_revision = "";
 	public static List<String> projectsExcluded;
 
@@ -27,7 +28,7 @@ public class Application {
 	public static boolean parametre = true;
 	
 	// indique si on build la version enterprise ou labs
-	public static boolean EnterpriseRelease = true;
+	//public static boolean EnterpriseRelease = true;
 
 	/**
 	 * @param args
@@ -40,14 +41,12 @@ public class Application {
 		String argument2 = "";
 		String argument3 = "";
 		String argument4 = "";
-		String argument5 = "";
 
 		try {
 			argument1 = args[0];
 			argument2 = args[1];
 			argument3 = args[2];
 			argument4 = args[3];
-			argument5 = args[4];
 		} catch (Exception e) {
 			parametre = false;
 		}
@@ -63,13 +62,14 @@ public class Application {
 
 			// Si des param�tres sont en entr�e
 		} else if (parametre) {
-			if ("-labs".equals(argument1)) {
-				EnterpriseRelease = false;
-			}
+//			if ("-labs".equals(argument1)) {
+//				EnterpriseRelease = false;
+//			}
 
-			workspace = argument2;
-			build_number = argument3;
-			svn_revision = argument5;
+			workspace = argument1;
+			build_number = argument2;
+			build_id = argument3;
+			svn_revision = argument4;
 
 		} else {
 
@@ -80,11 +80,11 @@ public class Application {
 		System.out.println("****************************************");
 		
 		
-		if (Application.EnterpriseRelease){
-			projectsExcluded = Utils.getProjects("projectEnterpriseExcluded");
-		}else{
-			projectsExcluded = Utils.getProjects("projectLabsExcluded");
-		}
+//		if (Application.EnterpriseRelease){
+			projectsExcluded = Utils.getProjects("projectExcluded");
+//		}else{
+//			projectsExcluded = Utils.getProjects("projectLabsExcluded");
+//		}
 
 		System.out.println("\nLanc� le " + Utils.getDate2() + " � "
 				+ Utils.getTime());
@@ -107,13 +107,13 @@ public class Application {
         
 		// si labs, on ne met pas � jour les versions des features et on ne commit pas
 
-		if (EnterpriseRelease) {
+//		if (EnterpriseRelease) {
 			Utils.traitementUpdate();
 			// Commit
 			// commit is now done at the end of the complete build when all steps (till updae-site copy) are ok
 			//System.out.println("\nCommit des modifications sur le r�pository...");
 			//execBuild("buildSVN", "svnCommit");
-		}
+//		}
 
 		if (parametre) {
 			// copie du r�pository dans le repertoire de travail (en s�parant
