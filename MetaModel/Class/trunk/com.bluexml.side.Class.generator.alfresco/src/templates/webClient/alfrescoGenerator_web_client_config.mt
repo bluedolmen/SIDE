@@ -31,8 +31,9 @@ import templates.webClient.alfrescoGenerator_web_client_config_contentWizards
 import templates.webClient.alfrescoGenerator_web_client_config_simpleSearchAA
 import templates.webClient.alfrescoGenerator_web_client_config_spaceWizards
 import templates.webClient.alfrescoGenerator_web_client_config_dynamic
-import com.bluexml.side.clazz.generator.alfresco.services.AttributeServices
-import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
+import com.bluexml.side.clazz.service.alfresco.CommonServices
+import com.bluexml.side.clazz.service.alfresco.AttributeServices
+import com.bluexml.side.clazz.service.alfresco.AssociationServices
 import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 
 %>

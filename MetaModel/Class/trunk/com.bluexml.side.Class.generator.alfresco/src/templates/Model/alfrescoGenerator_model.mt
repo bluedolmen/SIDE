@@ -21,10 +21,12 @@ import templates.servicesTemplates.Attribute
 import templates.servicesTemplates.Association
 import templates.Model.alfrescoGenerator_model_aspects
 import templates.Model.alfrescoGenerator_model_classes
-import com.bluexml.side.clazz.generator.alfresco.services.AttributeServices
 import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
-import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
+import com.bluexml.side.clazz.service.alfresco.CommonServices
+import com.bluexml.side.clazz.service.alfresco.AttributeServices
+import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
+
 
 <%script type="clazz.ClassPackage" name="validatedFilename"%>
 <%if (eContainer() == null) {%><%getConfModulePath()%>/model/model.xml<%}%>

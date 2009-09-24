@@ -20,9 +20,9 @@ import templates.servicesTemplates.Common
 import templates.servicesTemplates.Attribute
 import templates.servicesTemplates.Association
 import templates.Model.alfrescoGenerator_model_aspect
-import com.bluexml.side.clazz.generator.alfresco.services.AttributeServices
-
-import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
+import com.bluexml.side.clazz.service.alfresco.CommonServices
+import com.bluexml.side.clazz.service.alfresco.AttributeServices
+import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 
 <%script type="clazz.ClassPackage" name="alfrescoGenerator_model_aspects" %>

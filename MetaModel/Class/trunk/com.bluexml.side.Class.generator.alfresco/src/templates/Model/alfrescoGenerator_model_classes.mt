@@ -22,8 +22,9 @@ import templates.servicesTemplates.Association
 import templates.Model.alfrescoGenerator_model_class
 import templates.Model.alfrescoGenerator_model_enum
 
-import com.bluexml.side.clazz.generator.alfresco.services.AttributeServices
-import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
+import com.bluexml.side.clazz.service.alfresco.CommonServices
+import com.bluexml.side.clazz.service.alfresco.AttributeServices
+import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 
 

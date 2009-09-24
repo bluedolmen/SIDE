@@ -23,8 +23,9 @@ import templates.webClient.alfrescoGenerator_web_client_config_actions_nodeType
 import templates.webClient.alfrescoGenerator_web_client_config_actions_browseCreateMenu
 import templates.webClient.alfrescoGenerator_web_client_config_actions_createAction
 import templates.webClient.alfrescoGenerator_web_client_config_actions_dialogs
-import com.bluexml.side.clazz.generator.alfresco.services.AttributeServices
-import com.bluexml.side.clazz.generator.alfresco.services.AssociationServices
+import com.bluexml.side.clazz.service.alfresco.CommonServices
+import com.bluexml.side.clazz.service.alfresco.AttributeServices
+import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 
 <%script type="clazz.ClassPackage" name="alfrescoGenerator_config_actions" %>
