@@ -40,7 +40,8 @@ public class DynamicMenuAction extends CompoundContributionItem implements
 	private Application application;
 
 	public void dispose() {
-		System.err.println("dispose");
+		//System.err.println("dispose");
+		////System.err.println("dispose");
 		if (menu != null) {
 			menu.dispose();
 			menu = null;
@@ -49,12 +50,14 @@ public class DynamicMenuAction extends CompoundContributionItem implements
 	}
 
 	public Menu getMenu(Control parent) {
+		//System.err.println("getMenu(Control parent)");
 		// Never used
 		return null;
 
 	}
 
 	public Menu getMenu(Menu parent) {
+		//System.err.println("getMenu");
 		menu = new Menu(parent);
 
 		try {
@@ -92,7 +95,7 @@ public class DynamicMenuAction extends CompoundContributionItem implements
 								generationPopUp.open();
 							}
 
-							
+
 						});
 					}
 				}
@@ -104,24 +107,27 @@ public class DynamicMenuAction extends CompoundContributionItem implements
 
 		return menu;
 	}
-	
+
 	public boolean isDynamic() {
 		return true;
 	}
 
 	public void selectionChanged(IAction action, ISelection myselection) {
+		//System.err.println("selectionChanged" + myselection.toString());
 		this.selection = (StructuredSelection) myselection;
+
 		action.setMenuCreator(this);
 		action.setEnabled(true);
 	}
 
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
 		// TODO Auto-generated method stub
+		//System.err.println("setActivePart");
 
 	}
 
 	public void run(IAction action) {
-		System.err.println("run");
+		//System.err.println("run");
 		// TODO Auto-generated method stub
 
 	}
@@ -129,7 +135,7 @@ public class DynamicMenuAction extends CompoundContributionItem implements
 	@Override
 	protected IContributionItem[] getContributionItems() {
 		// TODO Auto-generated method stub
-		System.err.println("getContributionItems");
+		//System.err.println("getContributionItems");
 		return null;
 	}
 
