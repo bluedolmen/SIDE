@@ -5,6 +5,7 @@
 	<url>/xforms/batch</url>
 	<url>/xforms/delete</url>
 	<url>/xforms/enum</url>
+	<url>/xforms/help</url>
 	<url>/xforms/labels</url>
 	<url>/xforms/list</url>
 	<url>/xforms/mkdir</url>
