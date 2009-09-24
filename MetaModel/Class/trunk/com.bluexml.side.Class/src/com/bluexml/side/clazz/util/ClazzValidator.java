@@ -162,14 +162,6 @@ public class ClazzValidator extends EObjectValidator {
 	 */
 	private static Constraint association_IfAggregationOrCompositionThenUnidirectionalAssociationInvOCL;
 	/**
-	 * The parsed OCL expression for the definition of the '<em>doubleNavigable</em>' invariant constraint.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private static Constraint association_doubleNavigableInvOCL;
-
-	/**
 	 * The parsed OCL expression for the definition of the '<em>TwoModelElementWithSameName</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -799,28 +791,15 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAssociation_doubleNavigable(Association association, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (association_doubleNavigableInvOCL == null) {
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setContext(ClazzPackage.Literals.ASSOCIATION);
-
-			EAnnotation ocl = ClazzPackage.Literals.ASSOCIATION.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String expr = ocl.getDetails().get("doubleNavigable");
-
-			try {
-				association_doubleNavigableInvOCL = helper.createInvariant(expr);
-			}
-			catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
-
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(association_doubleNavigableInvOCL);
-
-		if (!query.check(association)) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						((doThrowError( ClazzPackage.Literals.ASSOCIATION.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"doubleNavigable")? Diagnostic.ERROR : Diagnostic.WARNING),
+						(Diagnostic.ERROR,
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "doubleNavigable", getObjectLabel(association, context) }),

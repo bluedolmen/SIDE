@@ -1025,9 +1025,9 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 			case ClazzPackage.CLAZZ__ASPECTS:
 				return getAspects();
 			case ClazzPackage.CLAZZ__ABSTRACT:
-				return isAbstract() ? Boolean.TRUE : Boolean.FALSE;
+				return isAbstract();
 			case ClazzPackage.CLAZZ__DEPRECATED:
-				return isDeprecated() ? Boolean.TRUE : Boolean.FALSE;
+				return isDeprecated();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1054,10 +1054,10 @@ public class ClazzImpl extends AbstractClassImpl implements Clazz {
 				getAspects().addAll((Collection<? extends Aspect>)newValue);
 				return;
 			case ClazzPackage.CLAZZ__ABSTRACT:
-				setAbstract(((Boolean)newValue).booleanValue());
+				setAbstract((Boolean)newValue);
 				return;
 			case ClazzPackage.CLAZZ__DEPRECATED:
-				setDeprecated(((Boolean)newValue).booleanValue());
+				setDeprecated((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

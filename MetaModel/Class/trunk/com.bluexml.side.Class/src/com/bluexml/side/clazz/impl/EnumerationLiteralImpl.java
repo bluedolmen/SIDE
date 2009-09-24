@@ -148,7 +148,7 @@ public class EnumerationLiteralImpl extends EObjectImpl implements EnumerationLi
 	 * @generated
 	 */
 	public Enumeration getEnum() {
-		if (eContainerFeatureID != ClazzPackage.ENUMERATION_LITERAL__ENUM) return null;
+		if (eContainerFeatureID() != ClazzPackage.ENUMERATION_LITERAL__ENUM) return null;
 		return (Enumeration)eContainer();
 	}
 
@@ -168,7 +168,7 @@ public class EnumerationLiteralImpl extends EObjectImpl implements EnumerationLi
 	 * @generated
 	 */
 	public void setEnum(Enumeration newEnum) {
-		if (newEnum != eInternalContainer() || (eContainerFeatureID != ClazzPackage.ENUMERATION_LITERAL__ENUM && newEnum != null)) {
+		if (newEnum != eInternalContainer() || (eContainerFeatureID() != ClazzPackage.ENUMERATION_LITERAL__ENUM && newEnum != null)) {
 			if (EcoreUtil.isAncestor(this, newEnum))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -220,7 +220,7 @@ public class EnumerationLiteralImpl extends EObjectImpl implements EnumerationLi
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case ClazzPackage.ENUMERATION_LITERAL__ENUM:
 				return eInternalContainer().eInverseRemove(this, ClazzPackage.ENUMERATION__LITERALS, Enumeration.class, msgs);
 		}

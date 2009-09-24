@@ -317,7 +317,7 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 				if (resolve) return getValueList();
 				return basicGetValueList();
 			case ClazzPackage.ATTRIBUTE__UNIQUE:
-				return isUnique() ? Boolean.TRUE : Boolean.FALSE;
+				return isUnique();
 			case ClazzPackage.ATTRIBUTE__MOCKUP:
 				return getMockup();
 		}
@@ -346,7 +346,7 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 				setValueList((Enumeration)newValue);
 				return;
 			case ClazzPackage.ATTRIBUTE__UNIQUE:
-				setUnique(((Boolean)newValue).booleanValue());
+				setUnique((Boolean)newValue);
 				return;
 			case ClazzPackage.ATTRIBUTE__MOCKUP:
 				getMockup().clear();

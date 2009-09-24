@@ -398,7 +398,7 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl impleme
 			case ClazzPackage.ASSOCIATION_END__CARD_MAX:
 				return getCardMax();
 			case ClazzPackage.ASSOCIATION_END__NAVIGABLE:
-				return isNavigable() ? Boolean.TRUE : Boolean.FALSE;
+				return isNavigable();
 			case ClazzPackage.ASSOCIATION_END__LINKED_CLASS:
 				if (resolve) return getLinkedClass();
 				return basicGetLinkedClass();
@@ -424,7 +424,7 @@ public class AssociationEndImpl extends TitledNamedClassModelElementImpl impleme
 				setCardMax((String)newValue);
 				return;
 			case ClazzPackage.ASSOCIATION_END__NAVIGABLE:
-				setNavigable(((Boolean)newValue).booleanValue());
+				setNavigable((Boolean)newValue);
 				return;
 			case ClazzPackage.ASSOCIATION_END__LINKED_CLASS:
 				setLinkedClass((Clazz)newValue);
