@@ -12,6 +12,7 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
 	private static String MMUri = "http://www.kerblue.org/portal/1.0";
 	static String GENERATOR_OPTIONS_DOCLIST = "com.bluexml.side.Portal.generator.alfresco.doclist";
+	static String GENERATOR_OPTIONS_FORMS = "com.bluexml.side.Portal.generator.alfresco.forms";
 
 	@Override
 	public Properties buildModuleProperties(String modelId) {
@@ -39,7 +40,9 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	protected List<String> getTemplates() {
 		List<String> result = new ArrayList<String>();
 		if (getGeneratorOptionValue(GENERATOR_OPTIONS_DOCLIST)) {
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/documentLibrary/DocumentLibraryPortletView.ftl.mt");
+			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/documentLibrary/DocumentLibraryPortletView.ftl.mt");			
+		}
+		if (getGeneratorOptionValue(GENERATOR_OPTIONS_FORMS)) {
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/formsDetails/web-framework-config-custom.mt");
 		}
 		return result;

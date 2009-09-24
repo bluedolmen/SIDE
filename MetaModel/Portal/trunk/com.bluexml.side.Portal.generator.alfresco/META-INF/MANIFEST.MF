@@ -14,6 +14,8 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Util.generator.alfresco;bundle-version="1.0.12",
  com.bluexml.side.Portal;bundle-version="1.0.11",
  com.bluexml.side.Util.dependencies;bundle-version="1.0.0",
- com.bluexml.side.Util.componentMonitor;bundle-version="1.0.0"
+ com.bluexml.side.Util.componentMonitor;bundle-version="1.0.0",
+ com.bluexml.side.Util.libs,
+ com.bluexml.side.Class.generator.alfresco;bundle-version="1.0.46"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

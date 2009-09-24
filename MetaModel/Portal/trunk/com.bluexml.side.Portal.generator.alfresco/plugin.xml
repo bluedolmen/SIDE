@@ -44,6 +44,16 @@
                            versionMin="1.0.2">
                      </moduleDependence>
                   </option>
+                  <option
+                        key="com.bluexml.side.Portal.generator.alfresco.forms"
+                        label="document details editing">
+                     <moduleDependence
+                           moduleId="com.bluexml.side.framework.alfresco.formProcessor"
+                           moduleType="amp"
+                           technologyVersion="alfresco_3.x"
+                           versionMin="1.0.0">
+                     </moduleDependence>
+                  </option>
                </generatorVersion>
             </technologyVersion>
          </technology>

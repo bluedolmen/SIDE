@@ -1,6 +1,7 @@
 <%
 metamodel http://www.kerblue.org/portal/1.0
 import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzService
+import com.bluexml.side.portal.generator.alfresco.services.ProxieServices
 %>
 
 <%-- 
