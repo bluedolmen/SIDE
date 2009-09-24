@@ -43,7 +43,7 @@
 	associations, ...).</description>
 	<repositories>
 		<repository>
-			<id>releases</id>
+			<id>releases_alfresco</id>
 			<url>http://repository.sourcesense.com/nexus/content/repositories/releases/</url>
 		</repository>
 		<repository>
