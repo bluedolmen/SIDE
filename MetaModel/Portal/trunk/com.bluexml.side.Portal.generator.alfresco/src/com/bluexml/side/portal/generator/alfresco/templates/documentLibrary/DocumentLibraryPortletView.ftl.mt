@@ -1,8 +1,12 @@
 <%
 metamodel http://www.kerblue.org/portal/1.0
 import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzService
-import com.bluexml.side.portal.generator.alfresco.services.ProxieServices
+
+import com.bluexml.side.clazz.service.alfresco.CommonServices
+import com.bluexml.side.clazz.service.alfresco.AttributeServices
+import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
+<%--import com.bluexml.side.portal.generator.alfresco.services.ProxieServices--%>
 <%-- Must be genereated using Portal generator to choose the view --%>
 
 <%script type="Portal" name="validatedFilename"%>
