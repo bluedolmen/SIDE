@@ -1445,9 +1445,9 @@ public class Utils {
 
 	private static String getUpdateSiteDir() {
 		String updateSiteDir = "updateSiteDir";
-		if (!Application.EnterpriseRelease) {
-			updateSiteDir = "updateSiteDirLabs";
-		}
+//		if (!Application.EnterpriseRelease) {
+//			updateSiteDir = "updateSiteDirLabs";
+//		}
 		return ouvrirFichier("build.properties").getProperty(updateSiteDir);
 		
 	}
