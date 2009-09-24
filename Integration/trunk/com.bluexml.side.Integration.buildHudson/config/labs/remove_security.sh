@@ -81,7 +81,7 @@ done
 echo "Process feature.xml file to remove reference to package security"
 for f in `find $SOURCE_PATH -type f -name "feature.xml"`; do
 
-	perl -0 -p -e 's/( *)<plugin( *)(\s+)( *)id="com.bluexml.side.Util.security"[^<]*//sg' $f
+	perl -0 -p -i -e 's/( *)<plugin( *)(\s+)( *)id="com.bluexml.side.Util.security"[^<]*//sg' $f
 done
 
 echo "Process xml file to remove reference to package security"
@@ -102,3 +102,12 @@ cd $BUILD_PATH/labs
 java -jar ../buildLicense/openSourceLicenseHeader.jar $SOURCE_PATH
 
 
+# modify header of the source file with license mention and copyright using the openSourcePublication project
+echo "Update build.properties used by the buildHudson build jar in order to point on"
+echo "SIDE-Labs instead of SIDE-Alfresco and Build_SIDE_Labs instead of Build_SIDE"
+cd $BUILD_PATH
+perl -p -i -e 's/SIDE-Alfresco/SIDE-Labs/g' build.properties
+perl -p -i -e 's/Build_SIDE/Build_SIDE_Labs/g' build.properties
+perl -p -i -e 's/projectExcluded=(.*)$/projectExcluded=Util&com.bluexml.side.Util.security,Integration&com.bluexml.side.Integration.standAlone.metamodel.documentation,Integration&com.bluexml.side.Integration.standAlone/g' build.properties
+
+echo "Build & Source updating performed for Labs"
