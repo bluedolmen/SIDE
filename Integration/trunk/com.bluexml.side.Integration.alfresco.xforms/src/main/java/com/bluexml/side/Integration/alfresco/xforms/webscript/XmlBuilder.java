@@ -65,6 +65,7 @@ public class XmlBuilder {
 		return doc;
 	}
 
+	@SuppressWarnings("unchecked")
 	private static Element buildAttributes(Document doc, Map<QName, Serializable> properties) {
 		Element attributesE = doc.createElement(ENTRY_ATTRIBUTES_NODE);
 		for (Entry<QName, Serializable> entry : properties.entrySet()) {

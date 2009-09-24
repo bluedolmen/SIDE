@@ -54,6 +54,7 @@ public class XFormsWebscript extends AbstractWebScript {
 			createPath,
 			addToPackage,
 			auth,
+			help,
 			batch;
 	}
 
@@ -232,6 +233,9 @@ public class XFormsWebscript extends AbstractWebScript {
 		}
 		if (query.endsWith("auth")) {
 			result = XFormsQueryType.auth;
+		}
+		if (query.endsWith("help")) {
+			result = XFormsQueryType.help;
 		}
 		return result;
 	}

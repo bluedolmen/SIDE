@@ -154,6 +154,9 @@ public class XFormsWork implements RunAsWork<String> {
 			if (queryType == XFormsWebscript.XFormsQueryType.auth) {
 				result = authenticate();
 			}
+			if (queryType == XFormsWebscript.XFormsQueryType.help) {
+				result = help();
+			}
 			dataLayer.setInTransaction(false);
 
 			logger.debug("XFormsWork: returning: ****");
@@ -190,6 +193,37 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
+	 * Displays a help text for the <b>public</b> services of this webscript.
+	 * 
+	 * @return the help text.
+	 */
+	protected String help() {
+		StringBuffer buffer = new StringBuffer();
+		// don't show the lines that are commented out: internal use
+		buffer.append("BlueXML XForms Webscript for Alfresco\n");
+		buffer.append("-------------------------------------\n");
+		buffer.append("List of services (see the documentation for specifics).\n");
+		buffer.append("\n");
+		buffer.append("/xforms/auth: authenticate a user.\n");
+		buffer.append("/xforms/batch: perform a set of CRUD operations against the repository.\n");
+		// buffer.append("/xforms/delete: delete a content from the repository.\n"); 
+		buffer.append("/xforms/enum: list items of a dynamic enumeration.\n");
+		buffer.append("/xforms/help: show this help.\n");
+		// Amenel: never got to know the use of "labels" TODO: check and test
+		buffer.append("/xforms/labels: get a translation for a dynamic enumeration litteral.\n");
+		buffer.append("/xforms/list: list all objects of a given type.\n");
+		buffer.append("/xforms/mkdir: create a path in Alfresco.\n");
+		// buffer.append("/xforms/package: \n"); // don't show: internal use
+		buffer.append("/xforms/read: read an object of any type from the repository.\n");
+		// buffer.append("/xforms/service: call functions of chosen services from the Alfresco's API.\n");
+		buffer.append("/xforms/upload: upload a file to the repository.\n");
+		buffer.append("/xforms/workflow: call functions of the WorkflowService interface.\n");
+		buffer.append("-------------------------------------\n");
+
+		return buffer.toString();
+	}
+
+	/**
 	 * Tests whether user credentials authenticate successfully with Alfresco.
 	 * <p/>
 	 * Parameters: "username", "password".
@@ -201,7 +235,7 @@ public class XFormsWork implements RunAsWork<String> {
 		AuthenticationService authService = serviceRegistry.getAuthenticationService();
 		String username = parameters.get("username");
 		String password = parameters.get("password");
-		
+
 		try {
 			authService.authenticate(username, password.toCharArray());
 		} catch (AuthenticationException e) {
@@ -728,7 +762,7 @@ public class XFormsWork implements RunAsWork<String> {
 
 	/**
 	 * Executes and returns the result of a AuthorityDAO method. <br/>
-	 * Supported methods: getAuthorityNodeRefOrNull, getAllAuthorities.
+	 * Supported methods: getAuthorityNodeRefOrNull, getAllAuthorities, getContainingAuthorities.
 	 * 
 	 * @param methodName
 	 * @param methodParams

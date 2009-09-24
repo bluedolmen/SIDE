@@ -53,7 +53,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * Taken from BxDS dataLayer module.<br/>
+ * Adapted from BxDS dataLayer module.<br/>
  * Amendments are essentially commenting, javadoc-ing and deletion of sections not used by
  * AlfrescoController.
  * 
@@ -484,6 +484,7 @@ public class DataLayer implements DataLayerInterface {
 	 * @param value
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	private Serializable makePropertyValue(PropertyDefinition propertyDef, Serializable value) {
 		// get property attributes
 		QName propertyTypeQName = null;
