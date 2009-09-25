@@ -563,7 +563,7 @@ public class Utils {
 
 					if (Application.parametre) {
 						// condition pour ne pas traiter les logs du checkout
-						if (ligne.indexOf("Updating " + Utils.getRepository()) != -1) {
+						if (ligne.equals("+ svn update")) {
 							update = true;
 						}
 					} else {
