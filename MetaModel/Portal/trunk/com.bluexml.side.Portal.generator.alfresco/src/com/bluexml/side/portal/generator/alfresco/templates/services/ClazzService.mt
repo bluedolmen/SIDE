@@ -1,6 +1,7 @@
 <%
 metamodel http://www.kerblue.org/portal/1.0
 import com.bluexml.side.clazz.service.alfresco.CommonServices
+import com.bluexml.side.clazz.service.alfresco.ClassServices
 import com.bluexml.side.clazz.service.alfresco.AttributeServices
 import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
@@ -12,8 +13,8 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 <%getRootContainer().name%><%}else{%>
 tmp<%}%>
 <%script type="clazz.ClassModelElement" name="getNameSpace"%>
-http://www.bluexml.com/model/content/<%getFolder()%>/1.0
+<%getNamespaceURI()%>
 <%script type="common.NamedModelElement" name="getContentType"%>
-<%getFolder()%>:<%getNamedModelElementQName()%>
+<%getPrefixedQName()%>
 <%script type="common.NamedModelElement" name="getQualifiedName"%>
 <%getNamedModelElementQName()%>
