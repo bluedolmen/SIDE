@@ -18,6 +18,7 @@ import templates.servicesTemplates.Common
 import templates.servicesTemplates.Attribute
 import templates.servicesTemplates.Association
 
+import com.bluexml.side.clazz.service.alfresco.ClassServices
 import com.bluexml.side.clazz.service.alfresco.CommonServices
 import com.bluexml.side.clazz.service.alfresco.AttributeServices
 import com.bluexml.side.clazz.service.alfresco.AssociationServices
@@ -25,7 +26,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 
 
 <%script type="clazz.Clazz" name="alfrescoGenerator_class" %>
-		<type name="<%getFolder()%>:<%getQualifiedName()%>">
+		<type name="<%getPrefixedQName()%>">
 			<%if (title != null){%>
 			<title><%title%></title>
 			<%}%>
@@ -39,9 +40,9 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 			
 			<%for (generalizations){%>
 			    <%if (i() > 0){%>
-			<!-- <parent><%getFolder()%>:<%getQualifiedName()%></parent> -->
+			<!-- <parent><%getPrefixedQName()%></parent> -->
 			    <%}else{%>
-            <parent><%getFolder()%>:<%getQualifiedName()%></parent>			    
+            <parent><%getPrefixedQName()%></parent>			    
 			    <%}%>
 			<%}%>
 			<%if (generalizations.nSize() == 0){%>
@@ -61,7 +62,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 			<!-- Properties -->
 			<properties>
 				<%for (attributes){%>
-				<property name="<%getFolder()%>:<%current(1).getQualifiedName()%>_<%name%>">
+				<property name="<%getPrefixedQName()%>">
 					<%if (title != null) {%>
 					<title> <%title%> </title>
 					<%}%>
@@ -118,7 +119,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 			<!-- Associations -->
 			<associations>
 			<%for (getSourceAssociationEnds()){%>
-				<<%eContainer().getAssociationType()%> name="<%eContainer().getFolder()%>:<%eContainer().getQualifiedName(current("AssociationEnd"))%>">							
+				<<%eContainer().getAssociationType()%> name="<%eContainer().getPrefixedAssociationQName(current("AssociationEnd"))%>">							
 
 					<title><%getRoleOrTitleFromSource()%></title>
 					<source>
@@ -126,7 +127,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 						<many><%if (isMany()){%>true<%}else{%>false<%}%></many>
 					</source>
 					<target>
-						<class><%getOpposite().getFolder()%>:<%getOpposite().linkedClass.getQualifiedName()%></class>
+						<class><%getOpposite().linkedClass.getPrefixedQName()%></class>
 						<mandatory><%if (getOpposite().isMandatory()){%>true<%}else{%>false<%}%></mandatory>
 						<many><%if (getOpposite().isMany()){%>true<%}else{%>false<%}%></many>
 					</target>
@@ -139,7 +140,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		<%if (aspects.nSize()>0){%>
 			<mandatory-aspects>
 			<%for (aspects){%>
-				<aspect><%getFolder()%>:<%getQualifiedName()%></aspect>
+				<aspect><%getPrefixedQName()%></aspect>
 			<%}%>
 			</mandatory-aspects>
 		<%}%>

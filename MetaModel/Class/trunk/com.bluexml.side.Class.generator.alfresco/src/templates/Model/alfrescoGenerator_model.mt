@@ -22,6 +22,7 @@ import templates.servicesTemplates.Association
 import templates.Model.alfrescoGenerator_model_aspects
 import templates.Model.alfrescoGenerator_model_classes
 import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
+import com.bluexml.side.clazz.service.alfresco.ClassServices
 import com.bluexml.side.clazz.service.alfresco.CommonServices
 import com.bluexml.side.clazz.service.alfresco.AttributeServices
 import com.bluexml.side.clazz.service.alfresco.AssociationServices

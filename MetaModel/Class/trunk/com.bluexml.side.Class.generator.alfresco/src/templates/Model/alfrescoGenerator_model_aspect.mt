@@ -17,6 +17,7 @@ metamodel http://www.kerblue.org/class/1.0
 import templates.servicesTemplates.Common
 import templates.servicesTemplates.Attribute
 import templates.servicesTemplates.Association
+import com.bluexml.side.clazz.service.alfresco.ClassServices
 import com.bluexml.side.clazz.service.alfresco.CommonServices
 import com.bluexml.side.clazz.service.alfresco.AttributeServices
 import com.bluexml.side.clazz.service.alfresco.AssociationServices
@@ -24,7 +25,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 
 <%script type="clazz.Aspect" name="alfrescoGeneratorModelAspect" %>
 	
-		<aspect name="<%getFolder()%>:<%getQualifiedName()%>">
+		<aspect name="<%getPrefixedQName()%>">
 			<%if (title != null){%>
 			<title><%title%></title>
 			<%}%>
@@ -36,7 +37,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 			<!-- Properties -->
 			<properties>
 				<%for (attributes){%>
-				<property name="<%getFolder()%>:<%current(1).getQualifiedName()%>_<%name%>">
+				<property name="<%getPrefixedQName()%>">
 
 					<%if (title != null){%>
 					<title> <%title%> </title>
@@ -64,9 +65,9 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 					<%if (valueList) {%>
 
 						<%if (!valueList.dynamic){%>
-							<constraint ref="<%getFolder()%>:nomenclature:<%valueList.getQualifiedName()%>"/>
+							<constraint ref="<%getPrefixe()%>:nomenclature:<%valueList.getQualifiedName()%>"/>
 						<%}else{%>
-							<constraint ref="<%getFolder()%>:enum:<%valueList.getQualifiedName()%>"/>
+							<constraint ref="<%getPrefixe()%>:enum:<%valueList.getQualifiedName()%>"/>
 						<%}%>
 
 					<%}%>
