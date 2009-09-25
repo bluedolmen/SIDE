@@ -371,6 +371,14 @@ import templates.content_chapter
 						<text:p text:style-name="P1"><text:a xlink:type="simple"
 	                    xlink:href="#1.<%name%>|outline"><%name%></text:a><text:tab/>1</text:p>
 					<%}%>
+					<%if (getDiagImgPath.length > 0){%>
+						<text:p text:style-name="P1"><text:a xlink:type="simple"
+                    xlink:href="#1.<%getLabel()%>|outline">Diagrams</text:a><text:tab/>1</text:p>
+                    	<%for (getDiagImgPath) {%>
+                    		<text:p text:style-name="P2"><text:a xlink:type="simple"
+                   		 xlink:href="#2.<%current%> associations|outline"><%current%></text:a><text:tab/>1</text:p>
+                    	<%}%>
+					<%}%>
 				</text:index-body>
 			</text:table-of-content>
 			<text:p text:style-name="LBREAK"/>
