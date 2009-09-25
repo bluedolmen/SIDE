@@ -7,7 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 
+import com.bluexml.side.Util.ecore.DiagramImageExporter;
+import com.bluexml.side.Util.ecore.EResourceUtils;
+import com.bluexml.side.Util.ecore.export.JPEGExporter;
+import com.bluexml.side.common.Package;
 import com.bluexml.side.util.generator.acceleo.AbstractAcceleoGenerator;
 import com.bluexml.side.util.generator.documentation.services.DocumentationServices;
 import com.bluexml.side.util.libs.FileHelper;
@@ -53,7 +59,26 @@ public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 
 	public Collection<IFile> generate(IFile model) throws Exception {
 		DocumentationServices.setModelName(model.getName());
-		return super.generate(model);
+
+		// Check if there is a diagram file :
+		IFile diag = IFileHelper.getIFile(model.getFullPath().toOSString() + "di");
+		if (diag.exists()) {
+			// If one generate image for each diagram :
+			DiagramImageExporter diagExporter = new JPEGExporter();
+			//TODO : add to result[]
+			String pathName = getTemporarySystemFolder() + File.separator + model.getName().replaceAll("\\.", "-") + File.separator + "doc" + File.separator + "Pictures" + File.separator;
+			File f = new File(pathName);
+			f.mkdirs();
+			diagExporter.exportFile(diag, pathName);
+			// Add fileName to list (to include it in generation)
+			List<String> diagImgFileName = diagExporter.getFileNames();
+			for (String name : diagImgFileName) {
+				DocumentationServices.addDiagImgPath(name);
+			}
+		}
+
+		Collection<IFile> result = super.generate(model);
+		return result;
 	}
 
 	protected String getMetamodelURI() {

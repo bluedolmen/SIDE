@@ -244,6 +244,11 @@ import com.bluexml.side.util.generator.documentation.services.DocumentationServi
 			<style:text-properties fo:font-weight="bold"
 				style:font-weight-asian="bold" style:font-weight-complex="bold" />
 		</style:style>
+		 <style:style style:name="Graphics" style:family="graphic">
+            <style:graphic-properties text:anchor-type="paragraph" svg:x="0cm" svg:y="0cm"
+                style:wrap="none" style:vertical-pos="top" style:vertical-rel="paragraph"
+                style:horizontal-pos="center" style:horizontal-rel="paragraph"/>
+        </style:style>
 		<text:outline-style style:name="Outline">
 			<text:outline-level-style text:level="1"
 				style:num-format="">

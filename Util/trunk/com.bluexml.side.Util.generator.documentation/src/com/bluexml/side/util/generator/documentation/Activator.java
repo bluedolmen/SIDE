@@ -1,5 +1,7 @@
 package com.bluexml.side.util.generator.documentation;
 
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -13,7 +15,7 @@ public class Activator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static Activator plugin;
-	
+
 	/**
 	 * The constructor
 	 */
@@ -47,4 +49,22 @@ public class Activator extends AbstractUIPlugin {
 		return plugin;
 	}
 
+	/**
+     * Returns the active workbench window
+     *
+     * @return the active workbench window
+     */
+	public static IWorkbenchWindow getActiveWorkbenchWindow()
+    {
+        if (getDefault() == null)
+        {
+            return null;
+        }
+        IWorkbench workBench = getDefault().getWorkbench();
+        if (workBench == null)
+        {
+            return null;
+        }
+        return workBench.getActiveWorkbenchWindow();
+    }
 }

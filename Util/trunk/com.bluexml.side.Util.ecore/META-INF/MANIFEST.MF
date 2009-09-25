@@ -10,6 +10,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.xmi,
  org.eclipse.core.resources,
- org.topcased.modeler
+ org.topcased.modeler,
+ org.topcased.modeler.export;bundle-version="2.4.0"
 Eclipse-LazyStart: true
-Export-Package: com.bluexml.side.Util.ecore
+Export-Package: com.bluexml.side.Util.ecore,
+ com.bluexml.side.Util.ecore.export
