@@ -140,9 +140,9 @@ public class FloatFieldImpl extends NumericalFieldImpl implements FloatField {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FormPackage.FLOAT_FIELD__MIN_VALUE:
-				return getMin_value();
+				return new Float(getMin_value());
 			case FormPackage.FLOAT_FIELD__MAX_VALUE:
-				return getMax_value();
+				return new Float(getMax_value());
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -156,10 +156,10 @@ public class FloatFieldImpl extends NumericalFieldImpl implements FloatField {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FormPackage.FLOAT_FIELD__MIN_VALUE:
-				setMin_value((Float)newValue);
+				setMin_value(((Float)newValue).floatValue());
 				return;
 			case FormPackage.FLOAT_FIELD__MAX_VALUE:
-				setMax_value((Float)newValue);
+				setMax_value(((Float)newValue).floatValue());
 				return;
 		}
 		super.eSet(featureID, newValue);

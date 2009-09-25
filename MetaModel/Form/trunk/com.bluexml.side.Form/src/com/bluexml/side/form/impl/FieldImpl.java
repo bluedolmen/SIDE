@@ -439,15 +439,15 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FormPackage.FIELD__MANDATORY:
-				return isMandatory();
+				return isMandatory() ? Boolean.TRUE : Boolean.FALSE;
 			case FormPackage.FIELD__ERROR_MESSAGES:
 				return getError_messages();
 			case FormPackage.FIELD__INITIAL:
 				return getInitial();
 			case FormPackage.FIELD__DISABLED:
-				return isDisabled();
+				return isDisabled() ? Boolean.TRUE : Boolean.FALSE;
 			case FormPackage.FIELD__FIELD_SIZE:
-				return getFieldSize();
+				return new Integer(getFieldSize());
 			case FormPackage.FIELD__STYLE:
 				return getStyle();
 			case FormPackage.FIELD__SEARCH_OPERATOR_CONFIGURATION:
@@ -468,7 +468,7 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FormPackage.FIELD__MANDATORY:
-				setMandatory((Boolean)newValue);
+				setMandatory(((Boolean)newValue).booleanValue());
 				return;
 			case FormPackage.FIELD__ERROR_MESSAGES:
 				setError_messages((Map<String, String>)newValue);
@@ -477,10 +477,10 @@ public abstract class FieldImpl extends FormElementImpl implements Field {
 				setInitial((String)newValue);
 				return;
 			case FormPackage.FIELD__DISABLED:
-				setDisabled((Boolean)newValue);
+				setDisabled(((Boolean)newValue).booleanValue());
 				return;
 			case FormPackage.FIELD__FIELD_SIZE:
-				setFieldSize((Integer)newValue);
+				setFieldSize(((Integer)newValue).intValue());
 				return;
 			case FormPackage.FIELD__STYLE:
 				setStyle((String)newValue);

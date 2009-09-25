@@ -285,7 +285,7 @@ public abstract class FormElementImpl extends ModelElementImpl implements FormEl
 				if (resolve) return getRef();
 				return basicGetRef();
 			case FormPackage.FORM_ELEMENT__HIDDEN:
-				return isHidden();
+				return isHidden() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -311,7 +311,7 @@ public abstract class FormElementImpl extends ModelElementImpl implements FormEl
 				setRef((ModelElement)newValue);
 				return;
 			case FormPackage.FORM_ELEMENT__HIDDEN:
-				setHidden((Boolean)newValue);
+				setHidden(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);

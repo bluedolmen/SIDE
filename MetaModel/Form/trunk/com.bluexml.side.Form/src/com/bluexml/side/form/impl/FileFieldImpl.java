@@ -96,7 +96,7 @@ public class FileFieldImpl extends FieldImpl implements FileField {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FormPackage.FILE_FIELD__IN_REPOSITORY:
-				return isInRepository();
+				return isInRepository() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -110,7 +110,7 @@ public class FileFieldImpl extends FieldImpl implements FileField {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FormPackage.FILE_FIELD__IN_REPOSITORY:
-				setInRepository((Boolean)newValue);
+				setInRepository(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);

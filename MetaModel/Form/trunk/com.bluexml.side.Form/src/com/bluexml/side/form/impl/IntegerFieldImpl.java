@@ -140,9 +140,9 @@ public class IntegerFieldImpl extends NumericalFieldImpl implements IntegerField
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FormPackage.INTEGER_FIELD__MIN_VALUE:
-				return getMin_value();
+				return new Integer(getMin_value());
 			case FormPackage.INTEGER_FIELD__MAX_VALUE:
-				return getMax_value();
+				return new Integer(getMax_value());
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -156,10 +156,10 @@ public class IntegerFieldImpl extends NumericalFieldImpl implements IntegerField
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FormPackage.INTEGER_FIELD__MIN_VALUE:
-				setMin_value((Integer)newValue);
+				setMin_value(((Integer)newValue).intValue());
 				return;
 			case FormPackage.INTEGER_FIELD__MAX_VALUE:
-				setMax_value((Integer)newValue);
+				setMax_value(((Integer)newValue).intValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
