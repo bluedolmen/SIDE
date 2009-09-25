@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 public class DocumentationServices {
 	protected static String modelName;
 	protected static List<String> diagImgPath = new ArrayList<String>();
+	protected static List<String> outlineRelativePath = new ArrayList<String>();
 
 	public static String getModelName(EObject o) {
 		if (modelName.length() > 0) {
@@ -43,4 +44,11 @@ public class DocumentationServices {
 		return diagImgPath;
 	}
 
+	public static void addOutlineRelativePath(String string) {
+		outlineRelativePath.add(string);
+	}
+
+	public static List<String> getOutlineRelativePath(EObject o) {
+		return outlineRelativePath;
+	}
 }
