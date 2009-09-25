@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <app:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:app="http://www.bluexml.com/application/1.0/">
-  <elements xsi:type="app:Configuration" name="New configuration">
+  <elements xsi:type="app:Configuration" name="ConfigTest" description="">
     <generatorConfigurations id_techno_version="Facetmap_2.x" impl_class="com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator" id="com.bluexml.side.View.generator.facetmap" metaModelName="KSR300 View" technologyVersionName="Facetmap 2.x" technologyName="Facetmap" id_metamodel="http://www.kerblue.org/view/1.0" generatorName="S-IDE Facetmap Generator for Alfresco 1.0.0">
       <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.cmisFacetMap" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
       <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.shareFacetMapDashlet" versionMin="1.0.0" moduleType="zip" technologyVersion="alfresco_3.x"/>
