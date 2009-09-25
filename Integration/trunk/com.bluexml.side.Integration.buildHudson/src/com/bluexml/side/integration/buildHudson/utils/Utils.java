@@ -638,7 +638,6 @@ public class Utils {
 			
 			// on parcours la liste des projets qui ont �t� modifi�
 			for (String element : listeProjet) {
-				System.out.println(listeProjet);
 				if (listeProjetReels.contains(element)) {
 					// on met tous les plugins modifi�s dans un tableau
 					if (element.indexOf("feature") == -1) {
