@@ -78,7 +78,7 @@
           </semanticModel>
         </contained>
       </contained>
-      <contained xsi:type="di:GraphNode" position="78,172" size="50,50">
+      <contained xsi:type="di:GraphNode" position="51,158" size="75,173">
         <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.4 //@subdiagrams.0/@diagrams.0/@contained.5"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="TCWAL_1.workflow#//@packageSet.0/@swimlane.0"/>

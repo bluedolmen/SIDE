@@ -3,11 +3,11 @@
   <packageSet xsi:type="workflow:Process" name="bluexml">
     <swimlane name="admin" manage="//@packageSet.0/@tasknode.0" actorid="admin"/>
     <startstate name="Statrt1" initiator="//@packageSet.0/@swimlane.0">
-      <transition name="Transition1" to="//@packageSet.0/@tasknode.0"/>
+      <transition name="Transition1" to="//@packageSet.0/@tasknode.0" title="Transition 1"/>
     </startstate>
     <endstate name="EndState1"/>
     <tasknode name="TaskNode1" swimlane="//@packageSet.0/@swimlane.0">
-      <transition name="Transition2" parentTaskNode="//@packageSet.0/@tasknode.0" to="//@packageSet.0/@endstate.0"/>
+      <transition name="Transition2" parentTaskNode="//@packageSet.0/@tasknode.0" to="//@packageSet.0/@endstate.0" title="Transition 2"/>
     </tasknode>
   </packageSet>
 </workflow:Process>
