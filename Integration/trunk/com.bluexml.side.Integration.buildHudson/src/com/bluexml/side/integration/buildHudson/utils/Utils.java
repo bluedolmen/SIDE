@@ -566,6 +566,9 @@ public class Utils {
 						if (ligne.equals("+ svn update")) {
 							update = true;
 						}
+						if (ligne.indexOf("Checking out " + Utils.getRepository()) != -1) {
+							update = true;
+						}
 					} else {
 						if (ligne.indexOf("svnUD:") != -1) {
 							update = true;
