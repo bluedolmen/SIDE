@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clazz:ClassPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" name="TCFXC_1">
+  <packageSet xsi:type="clazz:ClassPackage" name="myCompany">
+    <packageSet xsi:type="clazz:ClassPackage" name="media">
+      <classSet documentation="" description="" name="MediaVideo" title="Media Video">
+        <metainfo key="visual-component" value=""/>
+        <attributes documentation="" description="" name="Title" title="Title" typ="String"/>
+        <attributes documentation="" description="" name="Author" title="Author" typ="String"/>
+        <attributes documentation="" description="" name="PublishingDate" title="Publishing Date" typ="Date"/>
+      </classSet>
+      <classSet documentation="" description="" name="MediaCategory" title="Media Category">
+        <metainfo key="visual-component" value=""/>
+        <attributes documentation="" description="" name="categoryName" title="Category Name" typ="String"/>
+      </classSet>
+      <associationSet description="" name="belongsto" title="belongs to">
+        <firstEnd name="" title="" cardMax="-1" linkedClass="//@packageSet.0/@packageSet.0/@classSet.0"/>
+        <secondEnd name="" title="" navigable="true" linkedClass="//@packageSet.0/@packageSet.0/@classSet.1"/>
+      </associationSet>
+    </packageSet>
+  </packageSet>
+</clazz:ClassPackage>

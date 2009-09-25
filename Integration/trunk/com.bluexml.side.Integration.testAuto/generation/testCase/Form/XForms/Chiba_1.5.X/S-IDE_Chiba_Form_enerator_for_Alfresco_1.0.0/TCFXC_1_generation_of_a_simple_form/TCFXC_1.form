@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form:ClassFormCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://www.kerblue.org/form/1.0" name="TCFXC_1">
+  <forms xsi:type="form:FormClass" label="Media Video" id="MediaVideo">
+    <children xsi:type="form:CharField" label="Title" id="Title" help_text="">
+      <ref href="TCFXC_1.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.0"/>
+    </children>
+    <children xsi:type="form:CharField" label="Author" id="Author" help_text="">
+      <ref href="TCFXC_1.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.1"/>
+    </children>
+    <children xsi:type="form:DateField" label="Publishing Date" id="PublishingDate" help_text="">
+      <ref href="TCFXC_1.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.2"/>
+    </children>
+    <children xsi:type="form:ModelChoiceField" label="belongs to" id="belongsto" max_bound="1">
+      <ref href="TCFXC_1.dt#//@packageSet.0/@packageSet.0/@associationSet.0"/>
+      <real_class href="TCFXC_1.dt#//@packageSet.0/@packageSet.0/@classSet.1"/>
+    </children>
+    <real_class href="TCFXC_1.dt#//@packageSet.0/@packageSet.0/@classSet.0"/>
+  </forms>
+</form:ClassFormCollection>

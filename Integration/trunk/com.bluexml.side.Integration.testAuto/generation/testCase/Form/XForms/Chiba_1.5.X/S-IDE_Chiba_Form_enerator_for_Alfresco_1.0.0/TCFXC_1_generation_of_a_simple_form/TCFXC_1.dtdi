@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@subdiagrams.0/@subdiagrams.0/@diagrams.0">
+  <model href="TCFXC_1.dt#/"/>
+  <diagrams position="0,0" size="100,100" name="TC1" viewport="0,0">
+    <property key="pageFormatName" value="A4"/>
+    <property key="diagramWidth" value="840"/>
+    <property key="diagramHeight" value="1188"/>
+    <property key="pageMarginName" value="Small Margin"/>
+    <property key="diagramTopMargin" value="20"/>
+    <property key="diagramBottomMargin" value="20"/>
+    <property key="diagramLeftMargin" value="20"/>
+    <property key="diagramRightMargin" value="20"/>
+    <property key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="com.bluexml.side.Class.modeler.diagram">
+      <element href="TCFXC_1.dt#/"/>
+    </semanticModel>
+  </diagrams>
+  <subdiagrams>
+    <model href="TCFXC_1.dt#//@packageSet.0"/>
+    <subdiagrams>
+      <model href="TCFXC_1.dt#//@packageSet.0/@packageSet.0"/>
+      <diagrams position="0,0" size="100,100" name="library" viewport="0,57">
+        <property key="pageFormatName" value="A4"/>
+        <property key="diagramWidth" value="840"/>
+        <property key="diagramHeight" value="1188"/>
+        <property key="pageMarginName" value="Small Margin"/>
+        <property key="diagramTopMargin" value="20"/>
+        <property key="diagramBottomMargin" value="20"/>
+        <property key="diagramLeftMargin" value="20"/>
+        <property key="diagramRightMargin" value="20"/>
+        <property key="orientation" value="portrait"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="com.bluexml.side.Class.modeler.diagram">
+          <element href="TCFXC_1.dt#//@packageSet.0/@packageSet.0"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="78,95" size="208,180">
+          <anchorage graphEdge="//@subdiagrams.0/@subdiagrams.0/@diagrams.0/@contained.2"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="TCFXC_1.dt#//@packageSet.0/@packageSet.0/@classSet.0"/>
+          </semanticModel>
+          <contained xsi:type="di:GraphNode">
+            <property key="eStructuralFeatureID" value="9"/>
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="TCFXC_1.dt#//@packageSet.0/@packageSet.0/@classSet.0"/>
+            </semanticModel>
+            <contained xsi:type="di:GraphNode">
+              <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+                <element href="TCFXC_1.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.0"/>
+              </semanticModel>
+            </contained>
+            <contained xsi:type="di:GraphNode">
+              <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+                <element href="TCFXC_1.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.1"/>
+              </semanticModel>
+            </contained>
+            <contained xsi:type="di:GraphNode">
+              <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+                <element href="TCFXC_1.dt#//@packageSet.0/@packageSet.0/@classSet.0/@attributes.2"/>
+              </semanticModel>
+            </contained>
+          </contained>
+          <contained xsi:type="di:GraphNode">
+            <property key="eStructuralFeatureID" value="10"/>
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="TCFXC_1.dt#//@packageSet.0/@packageSet.0/@classSet.0"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode">
+            <property key="eStructuralFeatureID" value="12"/>
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="TCFXC_1.dt#//@packageSet.0/@packageSet.0/@classSet.0"/>
+            </semanticModel>
+          </contained>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="539,150" size="199,162">
+          <anchorage graphEdge="//@subdiagrams.0/@subdiagrams.0/@diagrams.0/@contained.2"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="TCFXC_1.dt#//@packageSet.0/@packageSet.0/@classSet.1"/>
+          </semanticModel>
+          <contained xsi:type="di:GraphNode">
+            <property key="eStructuralFeatureID" value="9"/>
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="TCFXC_1.dt#//@packageSet.0/@packageSet.0/@classSet.1"/>
+            </semanticModel>
+            <contained xsi:type="di:GraphNode">
+              <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+                <element href="TCFXC_1.dt#//@packageSet.0/@packageSet.0/@classSet.1/@attributes.0"/>
+              </semanticModel>
+            </contained>
+          </contained>
+          <contained xsi:type="di:GraphNode">
+            <property key="eStructuralFeatureID" value="10"/>
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="TCFXC_1.dt#//@packageSet.0/@packageSet.0/@classSet.1"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode">
+            <property key="eStructuralFeatureID" value="12"/>
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="TCFXC_1.dt#//@packageSet.0/@packageSet.0/@classSet.1"/>
+            </semanticModel>
+          </contained>
+        </contained>
+        <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0 //@subdiagrams.0/@subdiagrams.0/@diagrams.0/@contained.1/@anchorage.0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="TCFXC_1.dt#//@packageSet.0/@packageSet.0/@associationSet.0"/>
+          </semanticModel>
+        </contained>
+      </diagrams>
+    </subdiagrams>
+  </subdiagrams>
+</diagrams:Diagrams>
