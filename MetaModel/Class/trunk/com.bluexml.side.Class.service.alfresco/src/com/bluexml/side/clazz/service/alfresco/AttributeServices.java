@@ -20,8 +20,6 @@ import org.eclipse.emf.ecore.EObject;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.common.DataType;
 
-import fr.obeo.acceleo.gen.template.eval.ENode;
-
 public class AttributeServices {
 
 	public String getPropertyType(EObject node) throws Exception {
@@ -58,5 +56,38 @@ public class AttributeServices {
 		}
 		throw new Exception ("node must be an attribute");
 	}
-	
+	public String getFtlTypeConverter(EObject node) throws Exception {
+		if (node instanceof Attribute) {
+			Attribute object = (Attribute) node;
+			if (object.getTyp() == DataType.BOOLEAN) {
+				return "?boolean";
+			} else if (object.getTyp() == DataType.BYTE) {
+				return "?int";
+			} else if (object.getTyp() == DataType.CHAR) {
+				return "?string";
+			} else if (object.getTyp() == DataType.DATE) {
+				return "?date";
+			} else if (object.getTyp() == DataType.DATE_TIME) {
+				return "?datetime";
+			} else if (object.getTyp() == DataType.DOUBLE) {
+				return "?double";
+			} else if (object.getTyp() == DataType.FLOAT) {
+				return "?float";
+			} else if (object.getTyp() == DataType.INT) {
+				return "?int";
+			} else if (object.getTyp() == DataType.LONG) {
+				return "?long";
+			} else if (object.getTyp() == DataType.OBJECT) {
+				//return "?content";
+				return "?any";
+			} else if (object.getTyp() == DataType.SHORT) {
+				return "?int";
+			} else if (object.getTyp() == DataType.STRING) {
+				return "?string";
+			} else if (object.getTyp() == DataType.TIME) {
+				return "?datetime";
+			}
+		}
+		throw new Exception ("node must be an attribute");
+	}
 }
