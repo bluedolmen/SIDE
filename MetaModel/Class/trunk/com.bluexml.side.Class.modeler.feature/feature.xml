@@ -1,82 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature
-      id="com.bluexml.side.Class.modeler.feature"
-      label="SIDE Data Modeler"
-      version="1.0.31.v9559-20090922"
-      provider-name="BlueXML">
-
-   <description url="http://www.bluexml.com">
-      SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the Eclipse-based graphical modeler of data/content type models.
-   </description>
-
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
-   </copyright>
-
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
-   </license>
-
-   <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="com.bluexml.side.Common"/>
-      <import plugin="org.eclipse.ocl" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ocl.ecore" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Class"/>
-      <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="com.bluexml.side.Common.edit"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="com.bluexml.side.Class.edit"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="org.eclipse.emf.edit.ui"/>
-      <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.emf.ecore.edit"/>
-      <import plugin="org.topcased.modeler"/>
-      <import plugin="com.bluexml.side.Util.ecore" version="1.0.11" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Util.metaModel.validate" version="1.0.11" match="greaterOrEqual"/>
-   </requires>
-
-   <plugin
-         id="com.bluexml.side.Class"
-         download-size="0"
-         install-size="0"
-         version="1.0.26.v9559-20090922"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Class.edit"
-         download-size="0"
-         install-size="0"
-         version="1.0.21.v9559-20090922"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Class.editor"
-         download-size="0"
-         install-size="0"
-         version="1.0.19.v9559-20090922"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Class.modeler"
-         download-size="0"
-         install-size="0"
-         version="1.0.26.v9559-20090922"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Class.generator.documentation"
-         download-size="0"
-         install-size="0"
-         version="1.0.9.v9559-20090922"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Class.service.alfresco"
-         download-size="0"
-         install-size="0"
-         version="1.0.0.qualifier"
-         unpack="false"/>
-
+<feature id="com.bluexml.side.Class.modeler.feature" label="SIDE Data Modeler" version="1.0.31.v9559-20090922" provider-name="BlueXML">
+  <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the Eclipse-based graphical modeler of data/content type models.</description>
+  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
+  <license url="http://www.example.com/license">[Enter License Description here.]</license>
+  <requires>
+    <import plugin="org.eclipse.core.runtime" />
+    <import plugin="org.eclipse.emf.ecore" />
+    <import plugin="com.bluexml.side.Common" />
+    <import plugin="org.eclipse.ocl" version="1.2.0" match="greaterOrEqual" />
+    <import plugin="org.eclipse.ocl.ecore" version="1.2.0" match="greaterOrEqual" />
+    <import plugin="com.bluexml.side.Class" />
+    <import plugin="org.eclipse.emf.edit" />
+    <import plugin="com.bluexml.side.Common.edit" />
+    <import plugin="org.eclipse.core.resources" />
+    <import plugin="com.bluexml.side.Class.edit" />
+    <import plugin="org.eclipse.emf.ecore.xmi" />
+    <import plugin="org.eclipse.emf.edit.ui" />
+    <import plugin="org.eclipse.ui.ide" />
+    <import plugin="org.eclipse.emf.ecore.edit" />
+    <import plugin="org.topcased.modeler" />
+    <import plugin="com.bluexml.side.Util.ecore" version="1.0.11" match="greaterOrEqual" />
+    <import plugin="com.bluexml.side.Util.metaModel.validate" version="1.0.11" match="greaterOrEqual" />
+  </requires>
+  <plugin id="com.bluexml.side.Class" download-size="0" install-size="0" version="1.0.26.v9559-20090922" unpack="false" />
+  <plugin id="com.bluexml.side.Class.edit" download-size="0" install-size="0" version="1.0.21.v9559-20090922" unpack="false" />
+  <plugin id="com.bluexml.side.Class.editor" download-size="0" install-size="0" version="1.0.19.v9559-20090922" unpack="false" />
+  <plugin id="com.bluexml.side.Class.modeler" download-size="0" install-size="0" version="1.0.26.v9559-20090922" unpack="false" />
+  <plugin id="com.bluexml.side.Class.generator.documentation" download-size="0" install-size="0" version="1.0.9.v9559-20090922" unpack="false" />
+  <plugin id="com.bluexml.side.Class.service.alfresco" download-size="0" install-size="0" version="1.0.0.qualifier" unpack="false" />
 </feature>
+
