@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <app:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:app="http://www.bluexml.com/application/1.0/">
-  <elements xsi:type="app:Configuration" name="ConfigTest" description="">
+  <elements xsi:type="app:Configuration" name="New configuration">
     <generatorConfigurations id_techno_version="Facetmap_2.x" impl_class="com.bluexml.side.view.generator.facetmap.ViewFacetmapGenerator" id="com.bluexml.side.View.generator.facetmap" metaModelName="KSR300 View" technologyVersionName="Facetmap 2.x" technologyName="Facetmap" id_metamodel="http://www.kerblue.org/view/1.0" generatorName="S-IDE Facetmap Generator for Alfresco 1.0.0">
       <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.cmisFacetMap" versionMin="1.0.0" moduleType="amp" technologyVersion="alfresco_3.x"/>
       <moduleContraints moduleId="com.bluexml.side.Integration.alfresco.shareFacetMapDashlet" versionMin="1.0.0" moduleType="zip" technologyVersion="alfresco_3.x"/>
@@ -21,6 +21,7 @@
     <parameters key="generation.option.offlineMode" value="false"/>
     <parameters key="alfresco.url" value="http://localhost:8080/alfresco"/>
     <parameters key="com.bluexml.side.Class.generator.alfresco.module.version" value="1.0"/>
+    <parameters key="alfresco.share.url" value="http://localhost:8080/share/"/>
     <deployerConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.deployer.documentation.DocumentationDeployer" id="com.bluexml.side.Deployer.documentation" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" deployerName="S-IDE Documentation Deployer"/>
   </elements>
   <elements xsi:type="app:Model" name="TCVFF_2.dt" file="/com.bluexml.side.Integration.testAuto/generation/testCase/View/Facet_Navigation/Facetmap_2.x/S-IDE_Facetmap_Generator_for_Alfresco_1.0.0/TCVFF_2_generation_view/TCVFF_2.dt"/>
