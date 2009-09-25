@@ -511,7 +511,7 @@ public class Utils {
 		ArrayList<String> listeProjetPoms = new ArrayList<String>();
 
 		List<String> projects = new ArrayList<String>();
-		projects.addAll(getProjects());
+		projects.addAll(getProjects("project"));
 		projects.addAll(getProjects("projectToVersioned"));
 
 		for (int i = 0; i < projects.size(); i++) {
@@ -635,6 +635,7 @@ public class Utils {
 			
 			// on parcours la liste des projets qui ont �t� modifi�
 			for (String element : listeProjet) {
+				System.out.println(listeProjet);
 				if (listeProjetReels.contains(element)) {
 					// on met tous les plugins modifi�s dans un tableau
 					if (element.indexOf("feature") == -1) {
@@ -658,7 +659,6 @@ public class Utils {
 			}
 
 		}
-		
 		
 		// On parcours la liste des plugins et on les met a jour
 		for (String plugin : listePlugin) {
