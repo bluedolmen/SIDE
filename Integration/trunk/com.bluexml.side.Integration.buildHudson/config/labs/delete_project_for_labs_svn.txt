@@ -1,3 +1,0 @@
-S-IDE/Integration
-S-IDE/Util/trunk/com.bluexml.side.Util.security
-S-IDE/Experimental
