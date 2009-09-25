@@ -145,9 +145,11 @@ public class ClassServices {
 		}
 		return resultLine.replaceAll("\\s", "");
 	}
-
+	public static String getPrefixedQName(NamedModelElement node,String separator) throws Exception {
+		return getPrefixe(node) + separator + CommonServices.getNamedModelElementQName(node);
+	}
 	public static String getPrefixedQName(NamedModelElement node) throws Exception {
-		return getPrefixe(node) + ":" + CommonServices.getNamedModelElementQName(node);
+		return getPrefixedQName(node, ":");
 	}
 
 	public static String getPrefixe(EObject node) throws Exception {
@@ -169,4 +171,7 @@ public class ClassServices {
 		return "http://www.bluexml.com/model/content/" + getPrefixe(node) + "/1.0";
 	}
 
+	public static String getPrefixedNamespaceQName(NamedModelElement node) throws Exception {
+		return "{" + getNamespaceURI(node) + "}" + CommonServices.getNamedModelElementQName(node);
+	}
 }

@@ -11,8 +11,8 @@ public class CommonServices {
 	}
 
 	public static String convertFullNameToQualifiedName(String fullName) {
-		// return fullName.replaceAll("\\.", "_");
-		return StringHelper.getJavaQName(fullName, "\\.");
+		 return fullName.replaceAll("\\.", "_");
+		// return StringHelper.getJavaQName(fullName, "\\.");
 	}
 
 	

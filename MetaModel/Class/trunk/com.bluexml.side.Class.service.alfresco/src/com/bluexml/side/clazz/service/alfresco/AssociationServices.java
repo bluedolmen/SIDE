@@ -487,19 +487,25 @@ public class AssociationServices {
 	 * 
 	 * @param a
 	 * @param source
-	 * @return
+	 * @return <%args(0).linkedClass.getQualifiedName()%>_<%name%><%if
+	 *         (args(0).getOpposite().name !=
+	 *         ""){%>_<%args(0).getOpposite().name
+	 *         %><%}%>_<%args(0).getOpposite().linkedClass.getQualifiedName()%>
 	 */
 	public static String getAssociationQName(Association a, AssociationEnd source) {
-		String qname = CommonServices.getNamedModelElementQName(source.getLinkedClass());
+		String qname = source.getLinkedClass().getFullName();
 		qname += ".";
 		qname += a.getName();
 		if (!source.getOpposite().getName().equals("")) {
 			qname += ".";
 			qname += source.getOpposite().getName();
 		}
-		qname += CommonServices.getNamedModelElementQName(source.getOpposite().getLinkedClass());
+		qname += source.getOpposite().getLinkedClass().getFullName();
 		return CommonServices.convertFullNameToQualifiedName(qname);
+	}
 
+	public static String getPrefixedAssociationQName(Association a, AssociationEnd source) throws Exception {
+		return ClassServices.getPrefixe(a) + ":" + getAssociationQName(a, source);
 	}
 
 }
