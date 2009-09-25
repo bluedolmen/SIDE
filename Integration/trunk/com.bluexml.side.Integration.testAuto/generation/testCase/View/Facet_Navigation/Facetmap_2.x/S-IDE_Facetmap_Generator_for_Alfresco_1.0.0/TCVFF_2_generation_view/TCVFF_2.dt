@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<clazz:ClassPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" name="com">
+<clazz:ClassPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" name="TCVFF_2">
   <packageSet xsi:type="clazz:ClassPackage" name="bluexml">
     <packageSet xsi:type="clazz:ClassPackage" name="demo">
       <packageSet xsi:type="clazz:ClassPackage" name="rh">

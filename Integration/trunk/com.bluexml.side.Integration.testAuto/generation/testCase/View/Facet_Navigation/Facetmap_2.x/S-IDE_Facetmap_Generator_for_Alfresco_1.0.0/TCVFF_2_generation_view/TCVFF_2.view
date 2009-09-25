@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<view:ViewCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:view="http://www.kerblue.org/view/1.0" name="views">
+<view:ViewCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:clazz="http://www.kerblue.org/class/1.0" xmlns:view="http://www.kerblue.org/view/1.0" name="TCVFF_2">
   <views xsi:type="view:FacetMap" name="Personne (FacetMap)" suffix="">
     <children xsi:type="view:TextField" name="Nom">
       <mapTo href="TCVFF_2.dt#//@packageSet.0/@packageSet.0/@packageSet.0/@classSet.0/@attributes.0"/>
