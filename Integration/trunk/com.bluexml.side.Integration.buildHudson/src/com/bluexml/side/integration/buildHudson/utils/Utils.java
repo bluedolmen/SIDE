@@ -1407,6 +1407,7 @@ public class Utils {
 					+ "features DONE");
 
 			// suppression du repertoire de travail
+/*
 			System.out.println("\t- Working dir Suppression" );
 			FileHelper.deleteFile(new File(getBuildDirectory()));
 			System.out.println("\t\t. " + getBuildDirectory() + " DONE");
@@ -1415,6 +1416,7 @@ public class Utils {
 					+ "doc"));
 			System.out.println("\t\t. " + getBuildPath() + File.separator
 					+ "doc DONE");
+*/
 
 			// suppression des fichiers cr��s
 			//FileHelper.deleteFile(new File(Utils.getBuildPath()+ File.separator + "buildSVN.xml"));
