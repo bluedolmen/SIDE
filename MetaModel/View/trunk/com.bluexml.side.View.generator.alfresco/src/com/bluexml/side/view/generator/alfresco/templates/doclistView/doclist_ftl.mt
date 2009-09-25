@@ -1,6 +1,9 @@
 <%
 metamodel http://www.kerblue.org/view/1.0
+import com.bluexml.side.clazz.service.alfresco.CommonServices
+import com.bluexml.side.clazz.service.alfresco.AttributeServices
 import com.bluexml.side.view.generator.alfresco.templates.services.common
+
 %>
 
 <%script type="DataList" name="doclist_ftl" file="webapps/alfresco/WEB-INF/classes/alfresco/extension/templates/webscripts/org/alfresco/slingshot/documentlibrary/doclist_views/doclist_<%name%>.ftl"%>
