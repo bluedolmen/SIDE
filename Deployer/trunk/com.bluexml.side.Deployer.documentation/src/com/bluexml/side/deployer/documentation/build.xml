@@ -10,6 +10,7 @@
 		<jar destfile="${destDir}${file.separator}${docName}.odt">
 			<fileset dir="${sourceDir}${file.separator}doc">
 				<include name="**/*.xml" />
+				<include name="**/*.jpg" />
 				<include name="mimetype" />
 			</fileset>
 		</jar>
