@@ -1,30 +1,16 @@
 package com.bluexml.side.integration.m2.zipPackage;
 
-/*
- * Copyright 2001-2005 The Apache Software Foundation.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.util.Properties;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectHelper;
+import org.apache.tools.ant.DefaultLogger;
+import org.apache.tools.ant.Project;
+import org.apache.tools.ant.ProjectHelper;
 
 /**
  * Goal which touches a timestamp file.
@@ -34,6 +20,7 @@ import org.apache.maven.project.MavenProjectHelper;
  * @phase package
  */
 public class ZipPackage extends AbstractMojo {
+	private File antBuidFile = null;
 	/**
 	 * The maven project.
 	 * 
@@ -99,39 +86,56 @@ public class ZipPackage extends AbstractMojo {
 
 	/**
 	 * use Ant to package all resources and jar
+	 * 
 	 * @throws MojoExecutionException
 	 */
 	public void makePackage() throws MojoExecutionException {
 		// run ant script (much friendly)
+		Project project = new Project();
+		project.init();
+		DefaultLogger logger = new AntLogger(getLog());
+		logger.setMessageOutputLevel(Project.MSG_INFO);
+		logger.setErrorPrintStream(System.err);
+		logger.setOutputPrintStream(System.out);
+		project.addBuildListener(logger);
 
-		Properties additionalUserProperties = new Properties();
-		additionalUserProperties.setProperty("module.version", getProject().getVersion());
-		additionalUserProperties.setProperty("module.title", getProject().getName());
-		additionalUserProperties.setProperty("module.description", getProject().getDescription());
-		additionalUserProperties.setProperty("module.id", getProject().getArtifactId());
-		additionalUserProperties.setProperty("baseDir", getProject().getBasedir().toString());
-		getLog().info("ready to launch ant script");
-		String path = "build.xml";
-		String buildFile = "";
-		InputStream in = ZipPackage.class.getClassLoader().getResourceAsStream(path);
-		getLog().info("Get Stream :" + in);
+		project.setProperty("ant.file", getBuildFile().getAbsolutePath());
+		project.setUserProperty("module.version", getProject().getVersion());
+		project.setUserProperty("module.title", getProject().getName());
+		project.setUserProperty("module.description", getProject().getDescription());
+		project.setUserProperty("module.id", getProject().getArtifactId());
+		project.setUserProperty("baseDir", getProject().getBasedir().toString());
+		project.setBaseDir(getProject().getBasedir());
+		
+		ProjectHelper.configureProject(project, getBuildFile());
+		
 		try {
-			File tmpFile = File.createTempFile("makePackage", "buildFile");
-			writeStreamInFile(tmpFile, in);
-			buildFile = tmpFile.getAbsolutePath();
+			getLog().debug("launch ant script");
+			project.executeTarget("package");
 		} catch (Exception e) {
-			throw new MojoExecutionException("Error when creating tempory file", e);
-			// TODO Auto-generated catch block
+			throw new MojoExecutionException(e.getMessage(), e);
 		}
+		getLog().debug("ant task finished");
+	}
 
-		if (buildFile == null) {
-			throw new MojoExecutionException("Erreur durant la récupération du script ant");
+	public File getBuildFile() throws MojoExecutionException {
+		if (antBuidFile == null) {
+			String path = "build.xml";
+			String buildFilePath = "";
+			InputStream in = ZipPackage.class.getClassLoader().getResourceAsStream(path);
+			getLog().debug("Get Stream :" + in);
+			try {
+				antBuidFile = File.createTempFile("makePackage", "buildFile");
+				writeStreamInFile(antBuidFile, in);
+				buildFilePath = antBuidFile.getAbsolutePath();
+			} catch (Exception e) {
+				throw new MojoExecutionException("Error when creating tempory file", e);
+			}
+			if (buildFilePath == null) {
+				throw new MojoExecutionException("Erreur when getting ant script");
+			}
 		}
-		String[] args = { "package", "-buildfile", buildFile.toString() };
-
-		ClassLoader coreLoader = this.getClass().getClassLoader();
-
-		org.apache.tools.ant.Main.start(args, additionalUserProperties, coreLoader);
+		return antBuidFile;
 	}
 
 	public void execute() throws MojoExecutionException {
@@ -146,12 +150,12 @@ public class ZipPackage extends AbstractMojo {
 
 		project.getArtifact().setFile(custFile);
 		// create the classes to be attached if necessary
-		getLog().info("attached ? :" + isAttachClasses());
+		getLog().debug("attached ? : " + isAttachClasses());
 		if (isAttachClasses()) {
-			getLog().info("attach jar file :getProject()" + getProject());
-			getLog().info("attach jar file :type" + "jar");
-			getLog().info("attach jar file :vClassifier" + "vClassifier");
-			getLog().info("attach jar file :getTargetClassesFile" + getTargetClassesFile());
+			getLog().debug("attach jar file :getProject()" + getProject());
+			getLog().debug("attach jar file :type" + "jar");
+			getLog().debug("attach jar file :vClassifier" + "vClassifier");
+			getLog().debug("attach jar file :getTargetClassesFile" + getTargetClassesFile());
 			getProjectHelper().attachArtifact(getProject(), "jar", getClassesClassifier(), getTargetClassesFile());
 		}
 	}
