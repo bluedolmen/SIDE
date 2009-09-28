@@ -1,6 +1,7 @@
 package com.bluexml.side.deployer.alfresco;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,42 +33,54 @@ public class AMPDeployer extends WarDeployer {
 
 	protected void deployProcess(File fileToDeploy) throws Exception {
 		if (getMMtPath() != null && new File(getMMtPath()).exists()) {
-			// build command line
-			String fileToDeployString = fileToDeploy.getAbsolutePath();
-			String filetoPatchString = getWarToPatchFile().getAbsolutePath();
-			List<String> argss = new ArrayList<String>();
-			// argss.add("pwd");
-
-			argss.add("java"); //$NON-NLS-1$
-			argss.add("-jar"); //$NON-NLS-1$
-			argss.add(getMMtPath());
-			argss.add("install"); //$NON-NLS-1$
-			argss.add(fileToDeployString);
-			argss.add(filetoPatchString);
-			argss.add("-nobackup"); //$NON-NLS-1$
-			argss.add("-force"); //$NON-NLS-1$
-			if (fileToDeploy.isDirectory()) {
-				argss.add("-directory"); //$NON-NLS-1$
-			}
-			String[] args = new String[argss.size()];
-			args = argss.toArray(args);
-			ExecHelper status = ExecHelper.exec(args);
-			try {
-				if (status.getOutput().length() > 0) {
-					throw new Exception(Activator.Messages.getString("AMPDeployer.10") + status.getError() + "\n" + status.getOutput()); //$NON-NLS-1$ //$NON-NLS-2$
-				} else if (logChanges()) {
-					File warOrg = TrueZipHelper.getTzFile(getBackupWarFile());
-					File finalwar = TrueZipHelper.getTzFile(getWarToPatchFile());
-					StringWriter sr = new StringWriter();
-					FileHelper.diffFolder(warOrg, finalwar, sr, FileHelper.COMPARE_ADDED + FileHelper.COMPARE_DELETED);
-					monitor.getLog().addInfoLog(this.logChangesMsg, sr.toString(), ""); //$NON-NLS-1$
+			
+			if (fileToDeploy.isFile() && fileToDeploy.getName().endsWith(".amp"))
+				_deployProcess(fileToDeploy);
+			else if (fileToDeploy.isDirectory()) {
+				for (File f : fileToDeploy.listFiles()) {
+					deployProcess(f);
 				}
-			} catch (Exception e) {
-				monitor.addErrorTextAndLog(Activator.Messages.getString("AMPDeployer.13"), e, null); //$NON-NLS-1$
-				e.printStackTrace();
 			}
+			
 		} else {
 			throw new Exception(Activator.Messages.getString("AMPDeployer.14")); //$NON-NLS-1$
+		}
+	}
+
+	private void _deployProcess(File fileToDeploy) throws IOException {
+		// build command line
+		String fileToDeployString = fileToDeploy.getAbsolutePath();
+		String filetoPatchString = getWarToPatchFile().getAbsolutePath();
+		List<String> argss = new ArrayList<String>();
+		// argss.add("pwd");
+
+		argss.add("java"); //$NON-NLS-1$
+		argss.add("-jar"); //$NON-NLS-1$
+		argss.add(getMMtPath());
+		argss.add("install"); //$NON-NLS-1$
+		argss.add(fileToDeployString);
+		argss.add(filetoPatchString);
+		argss.add("-nobackup"); //$NON-NLS-1$
+		argss.add("-force"); //$NON-NLS-1$
+		if (fileToDeploy.isDirectory()) {
+			argss.add("-directory"); //$NON-NLS-1$
+		}
+		String[] args = new String[argss.size()];
+		args = argss.toArray(args);
+		ExecHelper status = ExecHelper.exec(args);
+		try {
+			if (status.getOutput().length() > 0) {
+				throw new Exception(Activator.Messages.getString("AMPDeployer.10") + status.getError() + "\n" + status.getOutput()); //$NON-NLS-1$ //$NON-NLS-2$
+			} else if (logChanges()) {
+				File warOrg = TrueZipHelper.getTzFile(getBackupWarFile());
+				File finalwar = TrueZipHelper.getTzFile(getWarToPatchFile());
+				StringWriter sr = new StringWriter();
+				FileHelper.diffFolder(warOrg, finalwar, sr, FileHelper.COMPARE_ADDED + FileHelper.COMPARE_DELETED);
+				monitor.getLog().addInfoLog(this.logChangesMsg, sr.toString(), ""); //$NON-NLS-1$
+			}
+		} catch (Exception e) {
+			monitor.addErrorTextAndLog(Activator.Messages.getString("AMPDeployer.13"), e, null); //$NON-NLS-1$
+			e.printStackTrace();
 		}
 	}
 
