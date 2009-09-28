@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE FacetMap Deployer
 Bundle-SymbolicName: com.bluexml.side.Deployer.facetMap;singleton:=true
-Bundle-Version: 1.0.12.v9786-20090925
+Bundle-Version: 1.0.13.v9878-20090928
 Bundle-Activator: com.bluexml.side.deployer.facetmap.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.core.runtime,
