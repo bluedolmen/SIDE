@@ -51,4 +51,8 @@ public class DocumentationServices {
 	public static List<String> getOutlineRelativePath(EObject o) {
 		return outlineRelativePath;
 	}
+	
+	public static void clearOutlineRelativePath() {
+		outlineRelativePath.clear();
+	}
 }

@@ -351,6 +351,14 @@ import templates.content_chapter
 							<text:tab/>
 						</text:p>
 					</text:index-title>
+					<%if (getOutlineRelativePath.length > 0){%>
+						<text:p text:style-name="P1"><text:a xlink:type="simple"
+                    xlink:href="#1.<%getLabel()%>|outline">Outline view</text:a><text:tab/>1</text:p>
+                    	<%for (getOutlineRelativePath) {%>
+                    		<text:p text:style-name="P2"><text:a xlink:type="simple"
+                   		 xlink:href="#2.<%current%> associations|outline"><%current%></text:a><text:tab/>1</text:p>
+                    	<%}%>
+					<%}%>
 					<%for (forms.sort()){%>
 						<text:p text:style-name="P1"><text:a xlink:type="simple"
                     xlink:href="#1.<%getLabel()%>|outline"><%getLabel()%></text:a><text:tab/>1</text:p>

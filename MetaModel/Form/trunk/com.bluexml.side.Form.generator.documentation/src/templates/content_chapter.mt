@@ -1,8 +1,16 @@
 <%
 metamodel http://www.kerblue.org/form/1.0
+import com.bluexml.side.util.generator.documentation.services.DocumentationServices
 %>
 
 <%script type="form.FormCollection" name="content_chapter"%>
+<%if (getOutlineRelativePath.length > 0){%>
+	<text:h text:style-name="Heading_20_1" text:outline-level="1">Outline</text:h>
+	<%for (getOutlineRelativePath) {%>
+		<text:h text:style-name="Heading_20_2" text:outline-level="2"><%current%></text:h>
+	<%}%>
+<%}%>
+
 <!-- Break line -->
 <%for (forms.sort()){%>
 	<text:h text:style-name="Heading_20_1" text:outline-level="1"><%getLabel()%></text:h>
