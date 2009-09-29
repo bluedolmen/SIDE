@@ -536,7 +536,7 @@ public class Utils {
 		String pathproject  = getBuildPath() + File.separator + repositoryCopy;
 		
 		listefichierpom=new ArrayList();
-		findFile(new File(pathproject+"/S-IDE/Integration/trunk"),"pom.xml");
+		findFile(new File(pathproject+"/S-IDE/"),"pom.xml");
 
 		// si on ne force pas la mise a jour du num�ro de version
 		if ("".equals(getForceNumberVersion())) {
