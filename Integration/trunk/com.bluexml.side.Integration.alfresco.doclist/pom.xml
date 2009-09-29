@@ -127,6 +127,7 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.0.3</version>
+			<scope>provided</scope>
 		</dependency>
 		<!-- Don't add here amp dependencies as it will break amp packaging -->
 	</dependencies>
@@ -169,7 +170,7 @@
 			<plugin>
 				<groupId>com.bluexml.side.Integration.m2</groupId>
 				<artifactId>ampMojo</artifactId>
-				<version>1.0</version>
+				<version>1.0.0</version>
 				<extensions>true</extensions>
 				<configuration>
 					<dependentAmpExcludes>**</dependentAmpExcludes>
