@@ -20,6 +20,8 @@ public class MavenTmpProject {
 	private File pomFile;
 	private File projectFolder;
 	private MavenUtil mavenUtil;
+	String[] inline_profiles = new String[] { "public", "dev", "local" };
+	String[] offline_profiles = new String[] { "offline" };
 	private static final String TARGET_ARTIFACT = "tmpProject_";
 	private Boolean offline = false;
 	private List<ModuleConstraint> dm;
@@ -88,9 +90,9 @@ public class MavenTmpProject {
 		String[] profiles = null;
 
 		if (offline) {
-			profiles = new String[] { "offline" };
+			profiles = offline_profiles;
 		} else {
-			profiles = new String[] { "wan", "lan", "local" };
+			profiles = inline_profiles;
 		}
 		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:copy-dependencies", params, profiles, offline);
 		if (result.getExceptions().size() > 0) {
@@ -111,12 +113,7 @@ public class MavenTmpProject {
 		createProject();
 		HashMap<String, String> params = new HashMap<String, String>();
 
-		String[] profiles = null;
-
-		
-		profiles = new String[] { "wan", "lan", "local" };
-		
-		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:go-offline", params, profiles, false);
+		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:go-offline", params, inline_profiles, false);
 		if (result.getExceptions().size() > 0) {
 			System.err.println(this);
 			List<?> exceps = result.getExceptions();
