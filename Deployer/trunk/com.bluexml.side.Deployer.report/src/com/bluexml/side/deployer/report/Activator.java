@@ -11,7 +11,7 @@ import com.bluexml.side.util.libs.Messages;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.bluexml.side.Deployer.facetMap";
+	public static final String PLUGIN_ID = "com.bluexml.side.Deployer.report";
 	public static final Messages Messages = new Messages(PLUGIN_ID, "com.bluexml.side.deployer.report.messages");
 	// The shared instance
 	private static Activator plugin;
