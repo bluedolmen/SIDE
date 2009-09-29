@@ -14,7 +14,7 @@
     <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="com.bluexml.side.Workflow.modeler.diagram">
       <element href="TCWAL_1.workflow#/"/>
     </semanticModel>
-    <contained xsi:type="di:GraphNode" position="146,39" size="200,-1">
+    <contained xsi:type="di:GraphNode" position="191,71" size="158,-1">
       <anchorage graphEdge="//@diagrams.0/@contained.3 //@diagrams.0/@contained.6"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="TCWAL_1.workflow#//@startstate"/>
@@ -32,7 +32,7 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" position="208,154" size="124,-1">
+    <contained xsi:type="di:GraphNode" position="198,192" size="200,-1">
       <anchorage graphEdge="//@diagrams.0/@contained.3 //@diagrams.0/@contained.4 //@diagrams.0/@contained.7"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="TCWAL_1.workflow#//@tasknode.0"/>
@@ -50,7 +50,7 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" position="183,292" size="200,-1">
+    <contained xsi:type="di:GraphNode" position="237,326" size="181,-1">
       <anchorage graphEdge="//@diagrams.0/@contained.4"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="TCWAL_1.workflow#//@endstate.0"/>
@@ -72,7 +72,7 @@
         <element href="TCWAL_1.workflow#//@tasknode.0/@transition.0"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphNode" position="30,153" size="77,81">
+    <contained xsi:type="di:GraphNode" position="22,180" size="77,81">
       <anchorage graphEdge="//@diagrams.0/@contained.6 //@diagrams.0/@contained.7"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="TCWAL_1.workflow#//@swimlane.0"/>
