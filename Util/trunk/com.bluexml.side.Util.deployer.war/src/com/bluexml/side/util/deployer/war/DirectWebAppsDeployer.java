@@ -41,7 +41,7 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 			TrueZipHelper tzh2 = new TrueZipHelper(warToPatchExt);
 			result = tzh2.copyFiles(getWarToPatchFile(), getDeployedWebbAppFolder(), true);
 		} else {
-			throw new Exception(Activator.Messages.getString("DirectWebAppsDeployer.7") + webappName + "." + warToPatchExt + Activator.Messages.getString("DirectWebAppsDeployer.9")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			throw new Exception(Activator.Messages.getString("DirectWebAppsDeployer.7") + getWarToPatchFile().getAbsolutePath() + Activator.Messages.getString("DirectWebAppsDeployer.9")); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		if (!result) {
 			throw new Exception(Activator.Messages.getString("DirectWebAppsDeployer.10")); //$NON-NLS-1$
@@ -68,9 +68,6 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 
 				dispatchFiles(fileList, map);
 			}
-		}
-		if (logChanges()) {
-
 		}
 	}
 
