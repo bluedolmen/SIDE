@@ -27,9 +27,9 @@
                         label="View Module version">
                   </configurationParameter>
                   <configurationParameter
-                        documentation="put here the url to use for Alfresco Share webapp"
-                        key="alfrescoShare.url"
-                        label="alfrescoShare Url">
+                        documentation="Set this value to the URL of the Alfresco Share instance on which you want to generate and deploye the 2 new Facet navigation components (menu and results list)."
+                        key="alfresco.share.url"
+                        label="Alfresco share URL">
                   </configurationParameter>
                </generatorVersion>
             </technologyVersion>

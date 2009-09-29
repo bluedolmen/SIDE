@@ -13,7 +13,7 @@ public abstract class AbstractAlfrescoGenerator extends AbstractAcceleoPackageGe
 
 	public static final String CONFIGURATION_PARAMETER_CATALINA_HOME = "CATALINA_HOME";
 	public static final String CONFIGURATION_PARAMETER_ALFRESCO_HOME = "alfresco.url";
-	public static final String CONFIGURATION_PARAMETER_ALFRESCOSHARE_HOME = "alfrescoShare.url";
+	public static final String CONFIGURATION_PARAMETER_ALFRESCOSHARE_HOME = "alfresco.share.url";
 	
 	protected Properties moduleProperties;
 

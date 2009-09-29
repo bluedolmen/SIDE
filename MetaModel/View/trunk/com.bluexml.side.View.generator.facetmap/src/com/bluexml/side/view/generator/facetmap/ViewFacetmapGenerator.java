@@ -27,6 +27,7 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.util.generator.acceleo.AbstractAcceleoPackageGenerator;
+import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.libs.zip.ZipManager;
@@ -40,9 +41,9 @@ import com.bluexml.side.view.generator.facetmap.utils.FacetmapConstants;
  */
 public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator implements FacetmapConstants {
 	public static String GENERATOR_CODE = "CODE_GED_G_C_FACETMAP_2"; //$NON-NLS-1$
-	public static String ALFRESCO_URL_KEY = "alfresco.url"; //$NON-NLS-1$
+	
 	public static String ALFRESCO_URL_defaultValue = "http://localhost:8080/alfresco"; //$NON-NLS-1$
-	public static String ALFRESCO_SHARE_URL_KEY = "alfresco.share.url"; //$NON-NLS-1$
+	
 	public static String ALFRESCO_SHARE_URL_defaultValue = "http://localhost:8080/share"; //$NON-NLS-1$
 	public static String MMUri = "http://www.kerblue.org/view/1.0"; //$NON-NLS-1$
 
@@ -121,7 +122,7 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 		}
 		// Adding services to log
 		// CMIS
-		String alfrescoUrl = generationParameters.get(ALFRESCO_URL_KEY);
+		String alfrescoUrl = generationParameters.get(AbstractAlfrescoGenerator.CONFIGURATION_PARAMETER_ALFRESCO_HOME);
 		if (alfrescoUrl != null && alfrescoUrl.length() > 0) {
 			if (!alfrescoUrl.endsWith("/")) { //$NON-NLS-1$
 				alfrescoUrl += "/"; //$NON-NLS-1$
@@ -133,7 +134,7 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 		String cmisUri = alfrescoUrl + "service/com/bluexml/side/facetMap/doclist_user.xml"; //$NON-NLS-1$
 		monitor.getLog().addServiceLog(Activator.Messages.getString("ViewFacetmapGenerator.26"), Activator.Messages.getString("ViewFacetmapGenerator.27"), cmisUri); //$NON-NLS-1$ //$NON-NLS-2$
 		// Dashlets
-		String shareUrl = generationParameters.get(ALFRESCO_SHARE_URL_KEY);
+		String shareUrl = generationParameters.get(AbstractAlfrescoGenerator.CONFIGURATION_PARAMETER_ALFRESCOSHARE_HOME);
 		if (shareUrl != null && shareUrl.length() > 0) {
 			if (!shareUrl.endsWith("/")) { //$NON-NLS-1$
 				shareUrl += "/"; //$NON-NLS-1$
