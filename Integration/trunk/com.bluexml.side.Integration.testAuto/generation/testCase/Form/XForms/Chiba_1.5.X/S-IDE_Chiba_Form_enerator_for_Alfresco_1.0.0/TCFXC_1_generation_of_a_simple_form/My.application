@@ -19,11 +19,9 @@
     <parameters key="war.folder" value="/opt/Alfresco/tomcat/webapps"/>
     <parameters key="com.bluexml.side.deployer.alfresco.mmtPath" value="/opt/Alfresco/bin/alfresco-mmt.jar"/>
     <parameters key="CATALINA_HOME" value="/opt/Alfresco/tomcat"/>
-    <deployerConfigurations id_techno_version="chiba_1_5.x" impl_class="com.bluexml.side.deployer.xforms.chiba.ChibaDeployer" id="com.bluexml.side.Deployer.xforms" technologyVersionName="Chiba 1.5.x" technologyName="XForms" deployerName="S-IDE Chiba X-Forms Delpoyer 1.0.0"/>
+    <parameters key="alfresco.url" value="http://localhost:8080/alfresco"/>
+    <parameters key="com.bluexml.side.Class.generator.alfresco.module.version" value="1.0"/>
     <deployerConfigurations id_techno_version="opendocument1_2" impl_class="com.bluexml.side.deployer.documentation.DocumentationDeployer" id="com.bluexml.side.Deployer.documentation" technologyVersionName="OpenDocument 1.2" technologyName="OpenDocument" deployerName="S-IDE Documentation Deployer"/>
-    <deployerConfigurations id_techno_version="alfresco_3.x" impl_class="com.bluexml.side.deployer.alfresco.directcopy.AlfrescoDeployer" id="com.bluexml.side.Deployer.alfrescoDirectCopy" technologyVersionName="Alfresco3.x Labs and Enterprise" technologyName="Alfresco" deployerName="S-IDE Alfresco Direct Deployer 1.0.0">
-      <options key="com.bluexml.side.deployer.alfresco.clean"/>
-    </deployerConfigurations>
   </elements>
   <elements xsi:type="app:Model" name="TCFXC_1.dt" file="/com.bluexml.side.Integration.testAuto/generation/testCase/Form/XForms/Chiba_1.5.X/S-IDE_Chiba_Form_enerator_for_Alfresco_1.0.0/TCFXC_1_generation_of_a_simple_form/TCFXC_1.dt"/>
   <elements xsi:type="app:Model" name="TCFXC_1.form" file="/com.bluexml.side.Integration.testAuto/generation/testCase/Form/XForms/Chiba_1.5.X/S-IDE_Chiba_Form_enerator_for_Alfresco_1.0.0/TCFXC_1_generation_of_a_simple_form/TCFXC_1.form"/>
