@@ -27,11 +27,6 @@
                      key="com.bluexml.side.deployer.alfresco.clean"
                      label="clean">
                </option>
-               <option
-                     documentation="Check this option if you want to log changes made in alfresco war."
-                     key="com.bluexml.side.deployer.alfresco.logChanges"
-                     label="log details">
-               </option>
             </deployerVersion>
          </technologyVersion>
       </technology>
