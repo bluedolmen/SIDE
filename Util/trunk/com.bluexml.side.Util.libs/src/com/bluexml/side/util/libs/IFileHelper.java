@@ -12,6 +12,7 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 
 public class IFileHelper {
@@ -206,13 +207,14 @@ public class IFileHelper {
 
 	public static List<IFile> getAllFiles(IContainer folder) throws Exception {
 		List<IFile> results = new ArrayList<IFile>();
-		for (IResource r : folder.members()) {
-			if (r instanceof IFile) {
-				results.add((IFile) r);
-			} else {
-				results.addAll(getAllFiles((IFolder) r));
+		if (folder.exists())
+			for (IResource r : folder.members()) {
+				if (r instanceof IFile) {
+					results.add((IFile) r);
+				} else {
+					results.addAll(getAllFiles((IFolder) r));
+				}
 			}
-		}
 		return results;
 	}
 
