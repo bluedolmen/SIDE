@@ -100,6 +100,7 @@ done
 echo "Modify header of source file using the openSourcePublication project"
 cd $BUILD_PATH/labs
 #java -jar ../buildLicense/openSourceLicenseHeader.jar $SOURCE_PATH
+chmod +x add_licence.sh
 ./add_licence.sh LICENSE-notices $SOURCE_PATH
 
 
