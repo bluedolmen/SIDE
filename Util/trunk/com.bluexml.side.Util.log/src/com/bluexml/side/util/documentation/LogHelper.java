@@ -17,6 +17,7 @@ import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 public class LogHelper {
 	SIDELog log;
 	String logDirectory;
+	protected String fileSeparator = System.getProperty("file.separator"); //$NON-NLS-1$
 
 	public LogHelper(final Map<String, String> configurationParameters, LogType logType) {
 		this.logDirectory = configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + File.separator + configurationParameters.get("configurationName");
@@ -27,13 +28,15 @@ public class LogHelper {
 		} else if (logType.equals(LogType.DEPLOYMENT)) {
 			log_ = new SIDELog(configurationParameters.get("deployerName"), configurationParameters.get("deployerId"), configurationParameters.get("technologyVersionName"), configurationParameters.get("technologyName"), configurationParameters.get("metaModelName"), new Date(),
 					logType);
+		} else if (logType.equals(LogType.CONSOLE)) {
+			log_ = new SIDELog("name", "deployerId", "technologyVersionName", "technologyName", "metaModelName", new Date(), logType);
 		}
 		this.log = log_;
 	}
 
 	/**
 	 * Add log to know on each model have been launch generation
-	 *
+	 * 
 	 * @param name
 	 */
 	public void addModelLog(String name) {
@@ -54,7 +57,7 @@ public class LogHelper {
 
 	/**
 	 * Add a Log
-	 *
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -70,7 +73,7 @@ public class LogHelper {
 
 	/**
 	 * Add an Error Log
-	 *
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -81,7 +84,7 @@ public class LogHelper {
 
 	/**
 	 * Add an error log using a stracktrace instead of a string description
-	 *
+	 * 
 	 * @param title
 	 * @param stackTrace
 	 * @param uri
@@ -102,7 +105,7 @@ public class LogHelper {
 
 	/**
 	 * Add a warning log
-	 *
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -118,7 +121,7 @@ public class LogHelper {
 
 	/**
 	 * Add information log
-	 *
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -134,7 +137,7 @@ public class LogHelper {
 	/**
 	 * Add a service log (service : a webpage or a file that can be acceeded by
 	 * user to test application).
-	 *
+	 * 
 	 * @param title
 	 * @param description
 	 * @param uri
@@ -149,7 +152,7 @@ public class LogHelper {
 
 	/**
 	 * Use to log generated file
-	 *
+	 * 
 	 * @param path
 	 * @param description
 	 * @param uri
@@ -172,7 +175,7 @@ public class LogHelper {
 
 	/**
 	 * Return the log target file (only generator)
-	 *
+	 * 
 	 * @return
 	 */
 	public String getLogFile() {
@@ -181,6 +184,6 @@ public class LogHelper {
 	}
 
 	public void saveLog(String fileName, String folderName) throws Exception {
-		LogSave.toXml(log, fileName, folderName);
+		LogSave.toXml(log, fileName, folderName + fileSeparator + "work" + fileSeparator);
 	}
 }

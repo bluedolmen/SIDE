@@ -12,8 +12,13 @@ import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 public class ComponentMonitor extends AbstractMonitor {
 	private LogHelper log;
 
-	public ComponentMonitor(StyledText styletext, ProgressBar progressBar, int totalWork, Label progressBarlabel, AbstractMonitor parent, final Map<String, String> configurationParameters, LogType logType) {
-		super(styletext, progressBar, totalWork, progressBarlabel, parent);
+	public ComponentMonitor(StyledText styletext, ProgressBar progressBar, int totalWork, Label progressBarlabel, AbstractMonitor parent, final Map<String, String> configurationParameters, LogType logType,LogHelper consoleLog) {
+		super(styletext, progressBar, progressBarlabel, parent);
+		this.consoleLog = consoleLog;
+		if (progressBar != null) {
+			progressBar.setSelection(0);
+			progressBar.setMaximum(totalWork);
+		}
 		if (configurationParameters != null && logType != null) {
 			LogHelper log = new LogHelper(configurationParameters, logType);
 			setLog(log);
@@ -30,7 +35,6 @@ public class ComponentMonitor extends AbstractMonitor {
 
 	public void internalWorked(double work) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public boolean isCanceled() {
@@ -51,7 +55,6 @@ public class ComponentMonitor extends AbstractMonitor {
 	public void beginTask(String name, int totalWork) {
 		beginTask(name);
 		// progressBar.setMaximum(totalWork);
-
 	}
 
 	@Override

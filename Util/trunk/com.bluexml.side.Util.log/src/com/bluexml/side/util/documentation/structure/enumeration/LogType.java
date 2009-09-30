@@ -1,7 +1,7 @@
 package com.bluexml.side.util.documentation.structure.enumeration;
 
 public enum LogType {
-	GENERATION("Generation"), DEPLOYMENT("Deployment");
+	GENERATION("Generation"), DEPLOYMENT("Deployment"), CONSOLE("ConsoleOutput");
 	
 	private final String name;
 

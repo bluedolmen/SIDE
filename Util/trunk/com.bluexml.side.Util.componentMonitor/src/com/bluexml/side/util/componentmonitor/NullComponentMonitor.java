@@ -2,12 +2,18 @@ package com.bluexml.side.util.componentmonitor;
 
 import java.util.Map;
 
+import com.bluexml.side.util.documentation.structure.enumeration.LogEntryType;
 import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 
 public class NullComponentMonitor extends ComponentMonitor {
 
-	public NullComponentMonitor(final Map<String, String> configurationParameters,LogType logType) {
-		super(null, null, -1, null, null, configurationParameters, logType);
+	public NullComponentMonitor(final Map<String, String> configurationParameters, LogType logType) {
+		super(null, null, -1, null, null, configurationParameters, logType, null);
+	}
+
+	@Override
+	public void logConsole(String txt, LogEntryType type) {
+		// nothing to do
 	}
 
 	public void beginTask(String name, int totalWork) {
@@ -56,7 +62,6 @@ public class NullComponentMonitor extends ComponentMonitor {
 
 	public String toString() {
 		String st = "" + "\n";
-
 		return st;
 	}
 

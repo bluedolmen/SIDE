@@ -31,6 +31,7 @@
                         <a href="#" onclick="javascript:showPannel('stats');">Stats</a> |
                         <a href="#" onclick="javascript:showPannel('generation');">Generation</a> |
                         <a href="#" onclick="javascript:showPannel('deployment');">Deployment</a> |
+                        <a href="#" onclick="javascript:showPannel('console');">Console</a> |
                         <a href="#" onclick="javascript:showPannel('service');">Services</a> |
                         <a href="#" onclick="javascript:showPannel('documentation');">Documentation</a> |
                     </div>
@@ -39,6 +40,7 @@
                         <xsl:call-template name="deploymentDisplay"/>
                         <xsl:call-template name="generationDisplay"/>
                         <xsl:call-template name="statsDisplay"/>
+                        <xsl:call-template name="console"/>
                         <xsl:call-template name="service"/>
                         <xsl:call-template name="documentation"/>
                     </div>
@@ -94,6 +96,14 @@
         <div id="generation" style="display:none;">
             <xsl:call-template name="logerDisplay">
                 <xsl:with-param name="type">GENERATION</xsl:with-param>
+            </xsl:call-template>
+        </div>
+    </xsl:template>
+    
+    <xsl:template name="console">
+        <div id="console" style="display:none;">
+            <xsl:call-template name="logerDisplay">
+                <xsl:with-param name="type">CONSOLE</xsl:with-param>
             </xsl:call-template>
         </div>
     </xsl:template>

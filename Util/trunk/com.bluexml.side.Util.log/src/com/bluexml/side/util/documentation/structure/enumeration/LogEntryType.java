@@ -2,7 +2,7 @@ package com.bluexml.side.util.documentation.structure.enumeration;
 
 public enum LogEntryType {
 	GENERATION_INFORMATION("GenerationInformation"), ERROR("Error"), WARNING(
-			"Warning"), DEPLOYMENT_INFORMATION("DeploymentInformation"), GENERATED_FILE("GeneratedFile"), SERVICE("Service");
+			"Warning"), DEPLOYMENT_INFORMATION("DeploymentInformation"), GENERATED_FILE("GeneratedFile"), SERVICE("Service"), CONSOLE("ConsoleOutput");
 
 	private final String name;
 

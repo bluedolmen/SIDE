@@ -32,7 +32,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class LogSave {
-
+	protected String fileSeparator = System.getProperty("file.separator"); //$NON-NLS-1$
 	public static String LOG_FILE_NAME = "side-report.xml"; //$NON-NLS-1$
 	public static String LOG_STAMP_FOLDER = "stamp"; //$NON-NLS-1$
 	public static String LOG_TEMP_FOLDER = "work"; //$NON-NLS-1$
@@ -42,29 +42,29 @@ public class LogSave {
 	/**
 	 * Render a SIDELog to a xml file using the given fileName in the given
 	 * folderName
-	 *
+	 * 
 	 * @param log
 	 * @param fileName
 	 * @param folderName
 	 * @throws Exception
 	 */
 	public static void toXml(SIDELog log, String fileName, String folderName) throws Exception {
-			IFolder folder = IFileHelper.createFolder(folderName);
-			File f = IFileHelper.getFile(folder);
+		IFolder folder = IFileHelper.createFolder(folderName);
+		File f = IFileHelper.getFile(folder);
 
-			FileOutputStream fos;
-			File file = new File(f, fileName);
-			file.createNewFile();
-			fos = new FileOutputStream(file);
-			toXml(log, fos);
-			IFileHelper.refreshFolder(folder);
-			fos.close();
+		FileOutputStream fos;
+		File file = new File(f, fileName);
+		file.createNewFile();
+		fos = new FileOutputStream(file);
+		toXml(log, fos);
+		IFileHelper.refreshFolder(folder);
+		fos.close();
 
 	}
 
 	/**
 	 * Record the SIDELog into the given outputStream
-	 *
+	 * 
 	 * @param log
 	 * @param fos
 	 */
@@ -85,7 +85,7 @@ public class LogSave {
 		xstream.useAttributeFor(LogEntry.class, "type"); //$NON-NLS-1$
 		xstream.registerConverter(new URIConverter());
 
-		//TODO : use a converter (if we have other List<String>)
+		// TODO : use a converter (if we have other List<String>)
 		xstream.alias("model", String.class); //$NON-NLS-1$
 		xstream.toXML(log, fos);
 	}
@@ -93,7 +93,7 @@ public class LogSave {
 	/**
 	 * Will build a unique log file from all the xml files available in the
 	 * given folder
-	 *
+	 * 
 	 * @param folderName
 	 * @throws Exception
 	 */
@@ -101,7 +101,6 @@ public class LogSave {
 		IFolder logFolder = IFileHelper.createFolder(folderName);
 		IFolder tmpFolder = IFileHelper.createFolder(logFolder.getFullPath().append(LOG_TEMP_FOLDER).toOSString());
 		IFolder docFolder = IFileHelper.createFolder(logFolder.getFullPath().append(LOG_DOC_FOLDER).toOSString());
-
 
 		// We create the top root element of the general log file
 		Element rootNode = new Element("logRoot"); //$NON-NLS-1$
@@ -115,15 +114,15 @@ public class LogSave {
 		// file
 		agregateLogs(rootNode, tmpFolder);
 
-		// We search for xml file in stamp folder to know which generator have been deployed
+		// We search for xml file in stamp folder to know which generator have
+		// been deployed
 		addGeneratorStamp(rootNode, logFolder);
 
 		// We search for all docs
 		addDocLink(rootNode, docFolder);
 
 		// We create the general log file
-		IFileHelper.deleteFile(logFolder.getFullPath()
-				+ File.separator + LOG_FILE_NAME);
+		IFileHelper.deleteFile(logFolder.getFullPath() + File.separator + LOG_FILE_NAME);
 		IFile genLog = IFileHelper.createFile(logFolder, LOG_FILE_NAME);
 		if (genLog != null) {
 			File genLogFile = IFileHelper.getFile(genLog);
@@ -139,6 +138,7 @@ public class LogSave {
 
 	/**
 	 * Add link to documentation (put in LOG_DOC_FOLDER)
+	 * 
 	 * @param rootNode
 	 * @param docFolder
 	 * @throws Exception
@@ -150,7 +150,7 @@ public class LogSave {
 		for (IFile xmlFile : toLink) {
 			if (xmlFile.getName().endsWith(LOG_FILE_EXT)) {
 				Element entry = new Element("entry"); //$NON-NLS-1$
-				entry.setAttribute("path", LOG_DOC_FOLDER + "/" + xmlFile.getName());  //$NON-NLS-1$//$NON-NLS-2$
+				entry.setAttribute("path", LOG_DOC_FOLDER + "/" + xmlFile.getName()); //$NON-NLS-1$//$NON-NLS-2$
 				rootDoc.addContent(entry);
 			}
 		}
@@ -159,6 +159,7 @@ public class LogSave {
 
 	/**
 	 * Aggregate all log files.
+	 * 
 	 * @param rootNode
 	 * @param tmpFolder
 	 * @throws Exception
@@ -183,18 +184,19 @@ public class LogSave {
 
 	/**
 	 * Seek xml stamp file used as stamp file.
+	 * 
 	 * @param rootNode
 	 * @param logFolder
 	 * @throws Exception
 	 */
-	private static void addGeneratorStamp(Element rootNode, IFolder logFolder)
-			throws Exception {
+	private static void addGeneratorStamp(Element rootNode, IFolder logFolder) throws Exception {
 		IFolder stampFolder = IFileHelper.getIFolder(logFolder.getFullPath().append(LOG_STAMP_FOLDER).toOSString());
 		if (stampFolder.exists()) {
 			List<IFile> deployedStamps = IFileHelper.getAllFilesForFolder(stampFolder);
 			Element rootDeployed = new Element("deployed"); //$NON-NLS-1$
 			for (IFile xmlFile : deployedStamps) {
-				//TODO : improve this to avoid error when xml files are generated in the same folder
+				// TODO : improve this to avoid error when xml files are
+				// generated in the same folder
 				if (xmlFile.getName().endsWith(".xml") //$NON-NLS-1$
 						&& !xmlFile.getName().equals(LOG_FILE_NAME)) {
 					SAXBuilder builder = new SAXBuilder();
@@ -212,41 +214,31 @@ public class LogSave {
 
 	/**
 	 * Move resources in jar to the given folder.
+	 * 
 	 * @param folderDest
 	 * @param doc
 	 * @throws IOException
 	 * @throws TransformerException
 	 */
-	private static void moveStaticRessources(IFolder folderDest, Document doc)
-			throws IOException, TransformerException {
-		String folderPath = folderDest.getLocation().toOSString()
-				+ System.getProperty("file.separator");
+	private static void moveStaticRessources(IFolder folderDest, Document doc) throws IOException, TransformerException {
+		String folderPath = folderDest.getLocation().toOSString() + System.getProperty("file.separator");
 		String folderSource = "src/com/bluexml/side/util/documentation/staticResources/";
 		// We use xsl transformation and ouput html file into log directory
 		// We move all files to the log directory
-		moveFile(folderPath + "stylesheet"
-				+ System.getProperty("file.separator"), "log2html.xsl",
-				folderSource + "stylesheet");
-		moveFile(folderPath + "css" + System.getProperty("file.separator"),
-				"style.css", folderSource + "css");
-		moveFile(folderPath + "img" + System.getProperty("file.separator"),
-				"background.png", folderSource + "img");
-		moveFile(folderPath + "img" + System.getProperty("file.separator"),
-				"link.png", folderSource + "img");
-		moveFile(folderPath + "img" + System.getProperty("file.separator"),
-				"collapse.png", folderSource + "img");
-		moveFile(folderPath + "img" + System.getProperty("file.separator"),
-				"expand.png", folderSource + "img");
-		moveFile(folderPath + "js" + System.getProperty("file.separator"),
-				"jquery.js", folderSource + "js");
-		moveFile(folderPath + "js" + System.getProperty("file.separator"),
-				"log.js", folderSource + "js");
+		moveFile(folderPath + "stylesheet" + System.getProperty("file.separator"), "log2html.xsl", folderSource + "stylesheet");
+		moveFile(folderPath + "css" + System.getProperty("file.separator"), "style.css", folderSource + "css");
+		moveFile(folderPath + "img" + System.getProperty("file.separator"), "background.png", folderSource + "img");
+		moveFile(folderPath + "img" + System.getProperty("file.separator"), "link.png", folderSource + "img");
+		moveFile(folderPath + "img" + System.getProperty("file.separator"), "collapse.png", folderSource + "img");
+		moveFile(folderPath + "img" + System.getProperty("file.separator"), "expand.png", folderSource + "img");
+		moveFile(folderPath + "js" + System.getProperty("file.separator"), "jquery.js", folderSource + "js");
+		moveFile(folderPath + "js" + System.getProperty("file.separator"), "log.js", folderSource + "js");
 		// makeHtml(doc, folderPath, "log2html.xsl", "log.html");
 	}
 
 	/**
 	 * Will ouput html using xml with an xsl transfo
-	 *
+	 * 
 	 * @param doc
 	 * @param folderDest
 	 * @param xslName
@@ -255,18 +247,14 @@ public class LogSave {
 	 * @throws IOException
 	 */
 	@SuppressWarnings("unused")
-	private static void makeHtml(Document doc, String folderDest,
-			String xslName, String htmlName) throws TransformerException,
-			FileNotFoundException, IOException {
+	private static void makeHtml(Document doc, String folderDest, String xslName, String htmlName) throws TransformerException, FileNotFoundException, IOException {
 		JDOMResult docResult = new JDOMResult();
 		org.jdom.Document resultat = null;
 		TransformerFactory factory = TransformerFactory.newInstance();
 
-		Transformer transformer = factory.newTransformer(new StreamSource(
-				new File(folderDest + xslName)));
+		Transformer transformer = factory.newTransformer(new StreamSource(new File(folderDest + xslName)));
 
-		transformer
-				.transform(new org.jdom.transform.JDOMSource(doc), docResult);
+		transformer.transform(new org.jdom.transform.JDOMSource(doc), docResult);
 		resultat = docResult.getDocument();
 		XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
 		outputter.output(resultat, new FileOutputStream(folderDest + htmlName));
@@ -274,18 +262,19 @@ public class LogSave {
 
 	/**
 	 * Move file from this jar to the specified folder
-	 *
+	 * 
 	 * @param folderDest
 	 * @param fileName
 	 * @param folderSource
 	 * @throws IOException
 	 * @throws IOException
 	 */
-	private static void moveFile(String folderDest, String fileName,
-			String folderSource) throws IOException  {
-		/*InputStream in = LogSave.class.getResourceAsStream(folderSource
-				+ fileName);*/
-		InputStream in = LogSave.class.getClassLoader().getResourceAsStream(folderSource+"/"+fileName);
+	private static void moveFile(String folderDest, String fileName, String folderSource) throws IOException {
+		/*
+		 * InputStream in = LogSave.class.getResourceAsStream(folderSource +
+		 * fileName);
+		 */
+		InputStream in = LogSave.class.getClassLoader().getResourceAsStream(folderSource + "/" + fileName);
 		File dest = new File(folderDest);
 		if (!dest.exists()) {
 			dest.mkdirs();

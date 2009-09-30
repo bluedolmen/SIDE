@@ -30,6 +30,7 @@ import com.bluexml.side.application.DeployerConfiguration;
 import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.Option;
+import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.ui.Activator;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.util.componentmonitor.ComponentMonitor;
@@ -115,8 +116,14 @@ public class Generate extends Thread {
 		logLink = p_logLink;
 		feedbackManager = new FeedbackManager();
 		// compute total of general step
-
-		generalMonitor = new Monitor(styletext, progressBar, label, null);
+		String configurationName = "";
+		for (ConfigurationParameters p : configuration.getParameters()) {
+			if (p.getKey().equals(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral())) {
+				configurationName = p.getValue();
+				break;
+			}
+		}
+		generalMonitor = new Monitor(styletext, progressBar, label, configurationName, configuration.getName());
 
 		// First we seek the generator parameters, and separate fields
 		// of dynamic fields
@@ -288,7 +295,16 @@ public class Generate extends Thread {
 				} else {
 					generalMonitor.addErrorText(Activator.Messages.getString("Generate.22")); //$NON-NLS-1$
 				}
-
+				String fileName = "general_" + Generate.class.getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+				// write general log file
+				try {
+					if (generalMonitor != null && generalMonitor.getConsoleLog() != null) {
+						generalMonitor.getConsoleLog().saveLog(fileName, logPath);
+					}
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				// Log
 				try {
 					LogSave.buildGeneraLogFile(logPath);
@@ -402,7 +418,7 @@ public class Generate extends Thread {
 					// create monitor
 					int nbTask = NB_GENERATION_STEP;
 
-					ComponentMonitor generationMonitor = new ComponentMonitor(styletext, progressBar2, nbTask, label2, generalMonitor, configurationParameters, LogType.GENERATION);
+					ComponentMonitor generationMonitor = new ComponentMonitor(styletext, progressBar2, nbTask, label2, generalMonitor, configurationParameters, LogType.GENERATION, generalMonitor.getConsoleLog());
 
 					String name = elem.getGeneratorName();
 					generationMonitor.beginTask(Activator.Messages.getString("Generate.30", name)); //$NON-NLS-1$
@@ -474,7 +490,7 @@ public class Generate extends Thread {
 				String fileName = "gen_" + generator.getClass().getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
 				try {
 					if (generator.getMonitor() != null) {
-						generator.getMonitor().getLog().saveLog(fileName, logPath + fileSeparator + "work" + fileSeparator); //$NON-NLS-1$
+						generator.getMonitor().getLog().saveLog(fileName, logPath); //$NON-NLS-1$
 					}
 
 				} catch (Exception e) {
@@ -544,7 +560,7 @@ public class Generate extends Thread {
 			if (genObj instanceof Deployer) {
 				Deployer deployer = (Deployer) genObj;
 				int nbTask = NB_DEPLOY_STEP;
-				ComponentMonitor deployerMonitor = new ComponentMonitor(styletext, progressBar2, nbTask, label2, generalMonitor, configurationParameters, LogType.DEPLOYMENT);
+				ComponentMonitor deployerMonitor = new ComponentMonitor(styletext, progressBar2, nbTask, label2, generalMonitor, configurationParameters, LogType.DEPLOYMENT, generalMonitor.getConsoleLog());
 				// deployer initialization
 				deployer.initialize(configurationParameters, generationParameters, deployerOptions, deployerMonitor);
 				if ((deployer.isDocumentationDeployer() && doDocumentation) || !deployer.isDocumentationDeployer()) {
@@ -580,7 +596,7 @@ public class Generate extends Thread {
 
 					String fileName = "dep_" + deployer.getClass().getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
 					try {
-						deployerMonitor.getLog().saveLog(fileName, logPath + fileSeparator + "work" + fileSeparator); //$NON-NLS-1$
+						deployerMonitor.getLog().saveLog(fileName, logPath); //$NON-NLS-1$
 					} catch (Exception e) {
 						deployerMonitor.addErrorText(Activator.Messages.getString("Generate.62", e.getMessage())); //$NON-NLS-1$
 						e.printStackTrace();
