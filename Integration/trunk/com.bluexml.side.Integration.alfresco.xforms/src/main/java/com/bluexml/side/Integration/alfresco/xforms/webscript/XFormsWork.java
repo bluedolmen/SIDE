@@ -49,7 +49,6 @@ import org.alfresco.service.cmr.search.SearchParameters;
 import org.alfresco.service.cmr.search.SearchService;
 import org.alfresco.service.cmr.security.AuthenticationService;
 import org.alfresco.service.cmr.security.AuthorityType;
-import org.alfresco.service.cmr.security.PersonService;
 import org.alfresco.service.cmr.workflow.WorkflowPath;
 import org.alfresco.service.cmr.workflow.WorkflowService;
 import org.alfresco.service.cmr.workflow.WorkflowTask;
@@ -71,7 +70,10 @@ import com.thoughtworks.xstream.XStream;
 
 public class XFormsWork implements RunAsWork<String> {
 
+	/** */
+	private static final String SERVICE_RESULT_SUCCESS = "success";
 	private static Log logger = LogFactory.getLog(XFormsWork.class);
+	private static XStream xstream = null;
 
 	private final XFormsWebscript formsWebscript;
 	private final XFormsQueryType queryType;
@@ -192,6 +194,13 @@ public class XFormsWork implements RunAsWork<String> {
 		return result;
 	}
 
+	private static XStream getXStream() {
+		if (xstream == null) {
+			xstream = new XStream();
+		}
+		return xstream;
+	}
+
 	/**
 	 * Displays a help text for the <b>public</b> services of this webscript.
 	 * 
@@ -206,7 +215,7 @@ public class XFormsWork implements RunAsWork<String> {
 		buffer.append("\n");
 		buffer.append("/xforms/auth: authenticate a user.\n");
 		buffer.append("/xforms/batch: perform a set of CRUD operations against the repository.\n");
-		// buffer.append("/xforms/delete: delete a content from the repository.\n"); 
+		// buffer.append("/xforms/delete: delete a content from the repository.\n");
 		buffer.append("/xforms/enum: list items of a dynamic enumeration.\n");
 		buffer.append("/xforms/help: show this help.\n");
 		// Amenel: never got to know the use of "labels" TODO: check and test
@@ -562,13 +571,13 @@ public class XFormsWork implements RunAsWork<String> {
 					String transactionId = toCreate.getAttribute("id");
 					currentId = transactionId; // for faulty id management
 					String path = null;
-					NodeRef result = (NodeRef) dataLayer.create(path, toCreate, null);
+					NodeRef result = dataLayer.create(path, toCreate, null);
 					created.put(transactionId, result.toString());
 				} else if (StringUtils.equals(element.getTagName(), "update")) {
 					Element toUpdate = DOMUtil.getChild(element, "class");
 					String nodeId = toUpdate.getAttribute("id");
 					currentId = nodeId; // for faulty id management
-					NodeRef result = (NodeRef) dataLayer.update(nodeId, toUpdate);
+					NodeRef result = dataLayer.update(nodeId, toUpdate);
 					created.put(nodeId, result.toString());
 				} else if (StringUtils.equals(element.getTagName(), "delete")) {
 					dataLayer.delete(element.getTextContent());
@@ -589,7 +598,7 @@ public class XFormsWork implements RunAsWork<String> {
 
 	/**
 	 * Service provider for managing workflows. <br/>
-	 * Required parameters: "method": an idenfier for the service being asked for.<br/>
+	 * Required parameters: "method": an identifier for the service being asked for.<br/>
 	 * Optional parameters: service-specific. See their code.
 	 * <p>
 	 * Services indicated via "method" are either calls to helper functions of ours (prefixed with
@@ -602,7 +611,7 @@ public class XFormsWork implements RunAsWork<String> {
 	protected String wfManage() {
 		WorkflowService wfs = serviceRegistry.getWorkflowService();
 		String result = "";
-		XStream xstream = new XStream();
+		XStream xstream = getXStream();
 
 		String method = parameters.get("method");
 
@@ -643,6 +652,7 @@ public class XFormsWork implements RunAsWork<String> {
 			result = xstream.toXML(properties);
 		} else {
 			// calls a generic method
+			// result = serviceMethodCall(wfs, xstream, method);
 			Method[] methods = wfs.getClass().getDeclaredMethods();
 			Method wfsMethod = null;
 			for (Method aMethod : methods) {
@@ -656,9 +666,9 @@ public class XFormsWork implements RunAsWork<String> {
 				int i = 0;
 				for (Class<?> parameterType : parameterTypes) {
 					String sparameter = parameters.get("arg" + i);
-					if (parameterType.isInstance("a")) {
+					if (parameterType.isInstance("a")) { // String params are not XStream'ed
 						methodParameters[i] = sparameter;
-					} else {
+					} else { // non-String params MUST be XStream'ed
 						methodParameters[i] = (sparameter == null) ? null : xstream
 								.fromXML(sparameter);
 					}
@@ -679,6 +689,43 @@ public class XFormsWork implements RunAsWork<String> {
 				} else {
 					result = "";
 				}
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Calls a method of a target object with the given parameters.
+	 * 
+	 * @param target
+	 *            the service interface that is to be called
+	 * @param xstream
+	 * @param method
+	 * @return
+	 */
+	private String serviceMethodCall(Object target, String method, List<Object> methodParams) {
+		String result = "";
+		XStream xstream = getXStream();
+		Method[] methods = target.getClass().getDeclaredMethods();
+		Method wfsMethod = null;
+		for (Method aMethod : methods) {
+			if (StringUtils.equals(method, aMethod.getName())) {
+				wfsMethod = aMethod;
+			}
+		}
+		if (wfsMethod != null) {
+			Object[] methodParameters = methodParams.toArray();
+
+			Object oresult = null;
+			try {
+				oresult = wfsMethod.invoke(target, methodParameters);
+			} catch (Exception e) {
+				return "";
+			}
+			if (oresult != null) {
+				result = xstream.toXML(oresult);
+			} else {
+				result = "";
 			}
 		}
 		return result;
@@ -739,7 +786,7 @@ public class XFormsWork implements RunAsWork<String> {
 		String serviceName = parameters.get("serviceName");
 		String methodName = parameters.get("methodName");
 		String paramStr = parameters.get("methodParams");
-		XStream xstream = new XStream();
+		XStream xstream = getXStream();
 		List<Object> methodParams = (List<Object>) xstream.fromXML(paramStr);
 		Object result = null;
 		try {
@@ -855,29 +902,16 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	/**
-	 * Supported methods: getPerson.
+	 * Calls a PersonService method.
 	 * 
 	 * @param methodName
+	 *            the method to call, case-sensitive.
 	 * @param methodParams
-	 * @return
-	 * @throws NoSuchMethodException
-	 * @throws SecurityException
-	 * @throws InvocationTargetException
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
+	 *            the parameters to pass to the method.
+	 * @return the result of the call.
 	 */
-	private Object callPersonService(String methodName, List<Object> methodParams)
-			throws SecurityException, NoSuchMethodException, IllegalArgumentException,
-			IllegalAccessException, InvocationTargetException {
-		PersonService theService = serviceRegistry.getPersonService();
-		Class<?> theClass = theService.getClass();
-		Object[] paramArray = methodParams.toArray();
-		if (StringUtils.equals(methodName, "getPerson")) {
-			Method method = theClass.getMethod(methodName, new Class[] { String.class });
-			String userName = (String) paramArray[0];
-			return method.invoke(theService, new Object[] { userName });
-		}
-		return null;
+	private Object callPersonService(String methodName, List<Object> methodParams) {
+		return serviceMethodCall(serviceRegistry.getPersonService(), methodName, methodParams);
 	}
 
 	/**
@@ -920,7 +954,7 @@ public class XFormsWork implements RunAsWork<String> {
 		List<ChildAssociationRef> assocs = nodeService.getChildAssocs(wkPackage);
 		for (ChildAssociationRef asso : assocs) {
 			if (asso.getChildRef().equals(noderef)) {
-				return "SUCCESS";
+				return SERVICE_RESULT_SUCCESS;
 			}
 		}
 		return "";
@@ -957,9 +991,8 @@ public class XFormsWork implements RunAsWork<String> {
 			logger.error("Can't upload to '" + location
 					+ "': the repository folder does not exist.");
 			return FAILURE;
-		} else {
-			parent = results.get(0);
 		}
+		parent = results.get(0);
 		// set node type and other qnames
 		QName assocTypeQName = ContentModel.ASSOC_CONTAINS;
 		QName assocQName = QName.createQName("{http://www.alfresco.org/model/content/1.0}"
@@ -992,9 +1025,8 @@ public class XFormsWork implements RunAsWork<String> {
 			resultId = StringEscapeUtils.escapeXml(newNode.toString());
 			logger.debug(" File '" + filename + "' upload with nodeId: " + resultId);
 			return resultId;
-		} else {
-			return FAILURE;
 		}
+		return FAILURE;
 	}
 
 	/**
@@ -1059,7 +1091,7 @@ public class XFormsWork implements RunAsWork<String> {
 	}
 
 	private LuceneSearcher getUnsecureLuceneSearcher() {
-		LuceneIndexer indexer = (LuceneIndexer) formsWebscript.getIndexerAndSearcherFactory()
+		LuceneIndexer indexer = formsWebscript.getIndexerAndSearcherFactory()
 				.getIndexer(formsWebscript.getStoreRef());
 		LuceneConfig config = formsWebscript.getIndexerAndSearcherFactory();
 		ADMLuceneSearcherImpl searcher = ADMLuceneSearcherImpl.getSearcher(formsWebscript
