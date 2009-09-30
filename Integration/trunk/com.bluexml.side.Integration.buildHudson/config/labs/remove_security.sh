@@ -99,7 +99,8 @@ done
 # modify header of the source file with license mention and copyright using the openSourcePublication project
 echo "Modify header of source file using the openSourcePublication project"
 cd $BUILD_PATH/labs
-java -jar ../buildLicense/openSourceLicenseHeader.jar $SOURCE_PATH
+#java -jar ../buildLicense/openSourceLicenseHeader.jar $SOURCE_PATH
+./add_licence.sh LICENSE-notices $SOURCE_PATH
 
 
 # modify header of the source file with license mention and copyright using the openSourcePublication project
