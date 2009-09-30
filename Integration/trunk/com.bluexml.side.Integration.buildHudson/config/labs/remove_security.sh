@@ -15,18 +15,18 @@ else
 fi
 
 # build the openSourcePublication project to change license header of source file
-cd $BUILD_PATH
-mkdir buildLicense
-cp -R $SOURCE_PATH/S-IDE/Integration/trunk/com.bluexml.side.Integration.openSourcePublication/* $BUILD_PATH/buildLicense
-cd $BUILD_PATH/buildLicense
-mkdir bin
-ant main
-if [ -f openSourceLicenseHeader.jar ]; then
-  chmod +x openSourceLicenseHeader.jar
-else
- echo "Unable to build the jar file to change the License and copyright header in source files!"
- exit -2
-fi
+#cd $BUILD_PATH
+#mkdir buildLicense
+#cp -R $SOURCE_PATH/S-IDE/Integration/trunk/com.bluexml.side.Integration.openSourcePublication/* $BUILD_PATH/buildLicense
+#cd $BUILD_PATH/buildLicense
+#mkdir bin
+#ant main
+#if [ -f openSourceLicenseHeader.jar ]; then
+#  chmod +x openSourceLicenseHeader.jar
+#else
+# echo "Unable to build the jar file to change the License and copyright header in source files!"
+# exit -2
+#fi
 
 
 cd $BUILD_PATH
