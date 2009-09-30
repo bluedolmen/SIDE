@@ -37,7 +37,7 @@ public class GeneratePopUp extends Dialog {
 	private Configuration configuration;
 	private List<String> staticParameters;
 	private List<Model> models;
-
+	private static boolean inAction = false;
 	/**
 	 * Create the dialog
 	 * 
@@ -128,6 +128,16 @@ public class GeneratePopUp extends Dialog {
 		return container;
 	}
 
+	@Override
+	public int open() {
+		if (!inAction) {
+			inAction = true;
+			return super.open();
+		} else {
+			return 0;
+		}
+	}
+
 	/**
 	 * Create contents of the button bar
 	 * 
@@ -137,6 +147,12 @@ public class GeneratePopUp extends Dialog {
 	protected void createButtonsForButtonBar(Composite parent) {
 		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
 		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
+	}
+
+	@Override
+	public boolean close() {
+		inAction = false;
+		return super.close();
 	}
 
 	/**
