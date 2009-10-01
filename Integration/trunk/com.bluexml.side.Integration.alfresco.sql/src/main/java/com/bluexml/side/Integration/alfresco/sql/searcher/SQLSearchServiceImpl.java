@@ -7,10 +7,17 @@ import java.util.List;
 
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.StoreRef;
+import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.ColumnMapRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.bluexml.side.Integration.alfresco.sql.searcher.SearchQuery.JoinCondition;
+
+
 public class SQLSearchServiceImpl implements SQLSearchService {
+	/** The logger. */
+	private Logger logger = Logger.getLogger(getClass());
+	
 	private static String TRUE_SQL_STATEMENT = "TRUE";
 	
 	public Collection<NodeRef> selectNodes(String typeName, String condition) {
@@ -28,39 +35,76 @@ public class SQLSearchServiceImpl implements SQLSearchService {
 		return executeQuery(sqlQuery);
 	}
 
-	public Collection<NodeRef> selectNodes(SearchParameters searchParameters) {
+	// TODO : check whether AS is not a mysql dialect (else remove it or use the dialect interface to provide a generic statement)
+	public Collection<NodeRef> selectNodes(SearchQuery searchQuery_) {
 		StringBuilder sqlQuery = new StringBuilder();
-		String tableName = searchParameters.getTableName(); 
+		String tableName = searchQuery_.getTableName(); 
 		
-		sqlQuery.append("SELECT uuid FROM ");
+		sqlQuery.append("SELECT ");
+		if (searchQuery_.hasAlias()) {
+			sqlQuery.append(searchQuery_.getAlias());
+		} else {
+			sqlQuery.append(tableName);
+		}
+		sqlQuery.append(".uuid FROM ");
 		sqlQuery.append(tableName);
 		
-		if (searchParameters.hasAlias()) {
-			sqlQuery.append(" ");
-			sqlQuery.append(searchParameters.getAlias());
+		if (searchQuery_.hasAlias()) {
+			sqlQuery.append(" AS ");
+			sqlQuery.append(searchQuery_.getAlias());
 			sqlQuery.append(" ");
 		}
 		
-		if (searchParameters.hasJoinCondition()) {
+		if (searchQuery_.hasJoinConditions()) {
+			StringBuilder jc = new StringBuilder();
+			for (JoinCondition joinCondition : searchQuery_.getJoinConditions()) {
+				String joinOperator = null;
+				switch (joinCondition.getJoinType()) {
+				case LEFT_JOIN: 
+					joinOperator = "LEFT JOIN";
+					break;
+				default:
+					throw new UnsupportedOperationException();	
+				}
+				jc.append(joinOperator);
+				jc.append(" ");
+				jc.append(joinCondition.getTableName());
+				jc.append(" AS ");
+				jc.append(joinCondition.getAlias());
+				jc.append(" ON ");
+				if (joinCondition.getAlias() != null) {
+					jc.append(joinCondition.getAlias());
+					jc.append(".");
+				}
+				jc.append(joinCondition.getOwnColumn());
+				jc.append(" = ");
+				if (joinCondition.getForeignTableName() != null) {
+					jc.append(joinCondition.getForeignTableName());
+					jc.append(".");
+				}
+				jc.append(joinCondition.getForeignColumn());
+				jc.append(" ");
+			}
+
 			sqlQuery.append(" ");
-			sqlQuery.append(searchParameters.getJoinCondition());
+			sqlQuery.append(jc);
 			sqlQuery.append(" ");
 		}
 
-		if (searchParameters.hasCondition() || searchParameters.hasRestrictingPath()) {
+		if (searchQuery_.hasCondition() || searchQuery_.hasRestrictingPath()) {
 			sqlQuery.append(" WHERE ");
 		}
 		
-		if (searchParameters.hasCondition()) {
-			sqlQuery.append(searchParameters.getCondition());
+		if (searchQuery_.hasCondition()) {
+			sqlQuery.append(searchQuery_.getCondition());
 		}
 		
-		if (searchParameters.hasCondition() && searchParameters.hasRestrictingPath()) {
+		if (searchQuery_.hasCondition() && searchQuery_.hasRestrictingPath()) {
 			sqlQuery.append(" AND ");
 		}
 		
-		if (searchParameters.hasRestrictingPath()) {
-			sqlQuery.append(searchParameters.getRestrictingPath());
+		if (searchQuery_.hasRestrictingPath()) {
+			sqlQuery.append(searchQuery_.getRestrictingPath());
 		}
 
 		return executeQuery(sqlQuery.toString());
@@ -71,6 +115,8 @@ public class SQLSearchServiceImpl implements SQLSearchService {
 	 */
 	@SuppressWarnings("unchecked")
 	private Collection<NodeRef> executeQuery (String sqlQuery) {
+		if (logger.isDebugEnabled())
+			logger.debug("Executing SQL query \"" + sqlQuery + "\"");
 		List<NodeRef> result = jdbcTemplate.query(sqlQuery, 
 				new ColumnMapRowMapper() {
 					public Object mapRow(ResultSet rs, int i) throws SQLException {

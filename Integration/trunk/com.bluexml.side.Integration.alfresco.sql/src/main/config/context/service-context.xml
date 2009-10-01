@@ -228,6 +228,12 @@
 		<property name="tagResolver" ref="atSignTagResolver" />
 	</bean>
 
+	<bean id="searchQueryBuilderFactory" class="com.bluexml.side.Integration.alfresco.sql.searcher.SearchQuery$BuilderFactory">
+		<property name="databaseDictionary" ref="databaseDictionary" />	
+		<property name="dictionaryService" ref="dictionaryService" />
+	</bean>
+
+
 	<bean id="sqlSearchServiceImpl" class="com.bluexml.side.Integration.alfresco.sql.searcher.SQLSearchServiceImpl">
 		<property name="jdbcTemplate">
 			<bean id="synchronizationJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" >
@@ -278,6 +284,10 @@
     <!-- Webscript definitions   -->
     <!-- ======================= -->
 	<bean id="webscript.extension.com.bluexml.side.sql.selectnodes.get" class="com.bluexml.side.Integration.alfresco.sql.webscript.SelectNodesWebscript" parent="webscript">
+	    <property name="SQLSearchService" ref="SQLSearchService" />
+	</bean>
+
+	<bean id="webscript.extension.com.bluexml.side.sql.selectnodeswithjoin.get" class="com.bluexml.side.Integration.alfresco.sql.webscript.SelectNodesWithJoinWebscript" parent="webscript">
 	    <property name="SQLSearchService" ref="SQLSearchService" />
 	</bean>
 

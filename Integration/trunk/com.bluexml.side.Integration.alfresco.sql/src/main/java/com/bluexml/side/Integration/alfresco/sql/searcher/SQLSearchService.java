@@ -11,6 +11,6 @@ public interface SQLSearchService {
 	 */
 	public Collection<NodeRef> selectNodes (String typeName, String condition);
 	
-	public Collection<NodeRef> selectNodes (SearchParameters searchParameters);
+	public Collection<NodeRef> selectNodes (SearchQuery searchQuery);
 	
 }
