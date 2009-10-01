@@ -493,15 +493,17 @@ public class AssociationServices {
 	 *         %><%}%>_<%args(0).getOpposite().linkedClass.getQualifiedName()%>
 	 */
 	public static String getAssociationQName(Association a, AssociationEnd source) {
-		String qname = source.getLinkedClass().getFullName();
-		qname += ".";
-		qname += a.getName();
+		StringBuffer qname = new StringBuffer(); 
+		qname.append(source.getLinkedClass().getFullName());
+		qname.append(".");
+		qname.append(a.getName());
+		qname.append(".");
 		if (!source.getOpposite().getName().equals("")) {
-			qname += ".";
-			qname += source.getOpposite().getName();
+			qname.append(source.getOpposite().getName());
+			qname.append(".");
 		}
-		qname += source.getOpposite().getLinkedClass().getFullName();
-		return CommonServices.convertFullNameToQualifiedName(qname);
+		qname.append(source.getOpposite().getLinkedClass().getFullName());
+		return CommonServices.convertFullNameToQualifiedName(qname.toString());
 	}
 
 	public static String getPrefixedAssociationQName(Association a, AssociationEnd source) throws Exception {
