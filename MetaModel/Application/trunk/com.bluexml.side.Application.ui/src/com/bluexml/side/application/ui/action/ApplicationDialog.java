@@ -165,14 +165,13 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Create the dialog
-	 *
+	 * 
 	 * @param parentShell
 	 * @param rwm_model
 	 */
 	public ApplicationDialog(Shell parentShell, IFile file) {
 		super(parentShell);
-		setShellStyle(SWT.DIALOG_TRIM | SWT.MODELESS
-                | getDefaultOrientation());
+		setShellStyle(SWT.DIALOG_TRIM | SWT.MODELESS | getDefaultOrientation());
 		try {
 			URI uri = URI.createFileURI(file.getRawLocation().toFile().getAbsolutePath());
 			XMIResource resource = new XMIResourceImpl(uri);
@@ -304,7 +303,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Refresh option for the given configuration
-	 *
+	 * 
 	 * @param configuration
 	 */
 	public void refreshOptions(Configuration configuration) {
@@ -369,7 +368,7 @@ public class ApplicationDialog extends Dialog {
 			optionsGroup.setText(Activator.Messages.getString("ApplicationDialog.11")); //$NON-NLS-1$
 		} else {
 			confIds.add(gen.getId());
-			optionsGroup.setText(Activator.Messages.getString("ApplicationDialog.12") + gen.getVersion()); //$NON-NLS-1$
+			optionsGroup.setText(Activator.Messages.getString("ApplicationDialog.12", gen.getVersion())); //$NON-NLS-1$
 		}
 		if (dataStructure != null) {
 			dataStructure.getData().clear();
@@ -410,7 +409,7 @@ public class ApplicationDialog extends Dialog {
 			optionsGroup.setText(Activator.Messages.getString("ApplicationDialog.14")); //$NON-NLS-1$
 		} else {
 			confIds.add(dep.getId());
-			optionsGroup.setText(Activator.Messages.getString("ApplicationDialog.15") + dep.getVersion()); //$NON-NLS-1$
+			optionsGroup.setText(Activator.Messages.getString("ApplicationDialog.15", dep.getVersion())); //$NON-NLS-1$
 		}
 		if (dataStructure != null) {
 			dataStructure.getData().clear();
@@ -440,7 +439,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return all ImplNode (Generator, Deployer) for the given tree
-	 *
+	 * 
 	 * @param tv
 	 * @return
 	 */
@@ -461,7 +460,7 @@ public class ApplicationDialog extends Dialog {
 	/**
 	 * Will search the dataStructure where is save all generation option and
 	 * will add value from the application model
-	 *
+	 * 
 	 * @param configuration
 	 */
 	private void configureGeneratorOptions(Configuration configuration) {
@@ -494,7 +493,7 @@ public class ApplicationDialog extends Dialog {
 	/**
 	 * Return the selected generator, or null if no generator top to the
 	 * selected element or non selected generator.
-	 *
+	 * 
 	 * @param o
 	 * @return
 	 */
@@ -526,7 +525,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return the model for the given FilePath
-	 *
+	 * 
 	 * @param text
 	 * @return
 	 */
@@ -547,7 +546,7 @@ public class ApplicationDialog extends Dialog {
 	/**
 	 * Return the selected generator, or null if no generator top to the
 	 * selected element or non selected generator.
-	 *
+	 * 
 	 * @param o
 	 * @return
 	 */
@@ -569,7 +568,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Load data in given tree for the given configuration
-	 *
+	 * 
 	 * @param configuration
 	 * @param generators
 	 */
@@ -699,7 +698,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Create contents of the dialog
-	 *
+	 * 
 	 * @param parent
 	 */
 	@Override
@@ -709,7 +708,7 @@ public class ApplicationDialog extends Dialog {
 		columnNames[1] = columnNameValue;
 
 		Composite container = (Composite) super.createDialogArea(parent);
-		//Composite container = (Composite) parent.getShell();
+		// Composite container = (Composite) parent.getShell();
 		container.setLayout(null);
 
 		tabFolder = new TabFolder(container, SWT.NONE);
@@ -1172,14 +1171,14 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Create the static parameters (used for conf init)
-	 *
+	 * 
 	 * @param config
 	 */
 	private void addStaticParameters(Configuration config) {
 		addStaticParam(KEY_DOCUMENTATION, "false", config); //$NON-NLS-1$
 		addStaticParam(KEY_SKIPVALIDATION, "false", config); //$NON-NLS-1$
 		addStaticParam(KEY_DOCLEAN, "true", config); //$NON-NLS-1$
-		//TODO : get
+		// TODO : get
 
 		String projectPath = "/" + model.getProject().getName() + "/";
 		addStaticParam(KEY_LOGPATH, projectPath + "log", config); //$NON-NLS-1$
@@ -1189,7 +1188,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Add a static param to the current configuration
-	 *
+	 * 
 	 * @param key
 	 * @param value
 	 */
@@ -1201,7 +1200,7 @@ public class ApplicationDialog extends Dialog {
 	/**
 	 * Add a static param for a given configuration (useful when a new static
 	 * param is added)
-	 *
+	 * 
 	 * @param key
 	 * @param value
 	 * @param config
@@ -1215,7 +1214,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Display the select folder box (only in workspace)
-	 *
+	 * 
 	 * @param message
 	 * @return
 	 */
@@ -1246,7 +1245,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Remove the selected model(s)
-	 *
+	 * 
 	 * @param selection
 	 */
 	private void removeModel(String[] selection) {
@@ -1311,7 +1310,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Build a html string for documentation on generator parameter
-	 *
+	 * 
 	 * @return
 	 */
 	private String buildHelpDocumentationText(String documentation) {
@@ -1323,7 +1322,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Build the documentation text
-	 *
+	 * 
 	 * @return
 	 */
 	private String builDocumentationText() {
@@ -1358,7 +1357,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Create contents of the button bar
-	 *
+	 * 
 	 * @param parent
 	 */
 	@Override
@@ -1431,7 +1430,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return the configuration equals to the given name.
-	 *
+	 * 
 	 * @param p_name
 	 * @return
 	 */
@@ -1441,7 +1440,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return the current configuration name
-	 *
+	 * 
 	 * @return
 	 */
 	static public String getCurrentConfiguratioName() {
@@ -1454,7 +1453,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Return the configuration being edited
-	 *
+	 * 
 	 * @return
 	 */
 	static public Configuration getCurrentConfiguration() {
@@ -1478,7 +1477,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Show a confirmation message
-	 *
+	 * 
 	 * @param title
 	 * @param message
 	 * @return
@@ -1495,7 +1494,7 @@ public class ApplicationDialog extends Dialog {
 
 	/**
 	 * Show an alert message
-	 *
+	 * 
 	 * @param title
 	 * @param message
 	 */
@@ -1516,23 +1515,23 @@ public class ApplicationDialog extends Dialog {
 		}
 
 		public void handleEvent(Event event) {
-			
+
 			Point point = new Point(event.x, event.y);
-			//System.out.println("EnterInHandlerEvent for :"+event.widget);
+			// System.out.println("EnterInHandlerEvent for :"+event.widget);
 			documentationText.setText(builDocumentationText());
-			//System.out.println("HandlerEvent P0-1");
+			// System.out.println("HandlerEvent P0-1");
 			TreeItem item = tv.getTree().getItem(point);
-			//System.out.println("HandlerEvent P0-2");
+			// System.out.println("HandlerEvent P0-2");
 			if (item == null) {
-				//System.out.println("HandlerEvent bugFix #1090");
+				// System.out.println("HandlerEvent bugFix #1090");
 				// to avoid bug #1090
 				return;
 			}
 			TreeElement el = (TreeElement) item.getData();
-//			System.out.println("HandlerEvent P0-3");
+			// System.out.println("HandlerEvent P0-3");
 			// Check if el is active or not in the key if it is a component
 			boolean canCheck = true;
-//			System.out.println("HandlerEvent P1");
+			// System.out.println("HandlerEvent P1");
 			if (el instanceof ImplNode) {
 				canCheck = ApplicationUtil.checkElementValidity(el);
 				if (!canCheck) {
@@ -1544,38 +1543,40 @@ public class ApplicationDialog extends Dialog {
 			} else {
 				errorMsg.setText(""); //$NON-NLS-1$
 			}
-//			System.out.println("HandlerEvent P3");
+			// System.out.println("HandlerEvent P3");
 			// If click on image : check it, else : just show informations
 			if (canCheck && (item.getImageBounds(0) != null && event.x <= item.getImageBounds(0).x + item.getImageBounds(0).width)) {
-//				System.out.println("is check box !");
+				// System.out.println("is check box !");
 				// Check if enabled
 				if (el.isEnabled()) {
-//					System.out.println("isEnabled !");
+					// System.out.println("isEnabled !");
 					// Inverse
 					el.setChecked(!(el.isChecked()));
 					tv.update(el, null);
 
 					if (el.isChecked()) {
-//						System.out.println("is Checked !");
+						// System.out.println("is Checked !");
 						// Enable all sub elements
-						// action == SWT.YES or action== SWT.NO if messageBox opened -1 if not
+						// action == SWT.YES or action== SWT.NO if messageBox
+						// opened -1 if not
 						int action = ConstraintsChecker.applyConstraints(tv, item, el);
-						if (action== SWT.YES || action == -1) {
+						if (action == SWT.YES || action == -1) {
 							enableAllSubElements(item);
-						} else if (action== SWT.NO){
+						} else if (action == SWT.NO) {
 							// uncheck to return to previous state
 							el.setChecked(false);
 							tv.update(el, null);
 						}
 					} else {
-//						System.out.println("is Not Checked !");
+						// System.out.println("is Not Checked !");
 						// Enable all sub elements
 						disableAllSubElements(item);
 					}
 				}
-				refreshOptions();
+
 			}
-//			System.out.println("End of HandlerEvent");	
+			refreshOptions();
+			// System.out.println("End of HandlerEvent");
 		}
 	}
 
@@ -1619,7 +1620,7 @@ public class ApplicationDialog extends Dialog {
 
 		/**
 		 * Enable sub element of the given item.
-		 *
+		 * 
 		 * @param item
 		 */
 		protected void enableAllSubElements(TreeItem item) {
@@ -1646,7 +1647,7 @@ public class ApplicationDialog extends Dialog {
 
 		/**
 		 * Disable sub element of the given item.
-		 *
+		 * 
 		 * @param item
 		 */
 		protected void disableAllSubElements(TreeItem item) {
