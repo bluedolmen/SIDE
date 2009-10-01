@@ -15,7 +15,9 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
@@ -183,8 +185,10 @@ public class RefreshOutlineAction extends Action implements
 		// Target folder
 		Folder folder = ChainFactory.eINSTANCE.createFolder();
 
+		//IPath outputPath = new Path(modelPath.getFullPath().toString()+".out");
+		IPath outputPath = tmpProject.getFullPath().append("out");
 		EFactory.eAdd(repository, "files", folder);
-		EFactory.eSet(folder, "path", modelPath.getFullPath().toString()+".out");
+		EFactory.eSet(folder, "path", outputPath.toString());
 
 		// Log
 		Log log = ChainFactory.eINSTANCE.createLog();
@@ -230,7 +234,7 @@ public class RefreshOutlineAction extends Action implements
 		chain.launch(genFilter, new NullProgressMonitor(), LaunchManager.create("run", true));
 
 		//Update Outline View
-		IFolder output_folder = (IFolder) myWorkspaceRoot.findMember(modelPath.getFullPath().toString()+".out");
+		IFolder output_folder = (IFolder) myWorkspaceRoot.findMember(outputPath);
 		IFile output_file = (IFile) output_folder.members()[0];
 		return output_file;
 	}
