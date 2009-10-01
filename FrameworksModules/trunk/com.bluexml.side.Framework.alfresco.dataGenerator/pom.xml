@@ -31,7 +31,7 @@
   version. Instead we use the buildnumber-maven-plugin. This requires a scm connection.
 	 -->
 	<version>1.0</version>
-	<description>this is a new Amp project generated using	"com.bluexml.side.Integration.m2.ampArchetype" thanks to change this description</description>
+	<description>Project to generate data test in Alfresco for a given model</description>
 	<parent>
     	<groupId>org.bluexml</groupId>
     	<artifactId>superpom</artifactId>
