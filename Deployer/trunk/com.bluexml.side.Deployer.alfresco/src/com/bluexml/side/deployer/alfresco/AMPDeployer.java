@@ -22,7 +22,7 @@ public class AMPDeployer extends WarDeployer {
 	protected String CONFIGURATION_PARAMETER_MMT_PATH = "com.bluexml.side.deployer.alfresco.mmtPath"; //$NON-NLS-1$
 
 	public AMPDeployer() {
-		this.webappName = "alfresco"; //$NON-NLS-1$
+		super("alfresco");//$NON-NLS-1$
 		this.cleanKey = "com.bluexml.side.deployer.alfresco.clean"; //$NON-NLS-1$
 		this.logChanges = "com.bluexml.side.deployer.alfresco.logChanges"; //$NON-NLS-1$
 	}

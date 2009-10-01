@@ -18,7 +18,7 @@ import de.schlichtherle.io.FileInputStream;
 public class AlfrescoAmpDirectDeployer extends DirectWebAppsDeployer {
 
 	public AlfrescoAmpDirectDeployer() {
-		this.webappName = "alfresco"; //$NON-NLS-1$
+		super("alfresco"); //$NON-NLS-1$
 		packageExt = "amp"; //$NON-NLS-1$
 		tzh = new TrueZipHelper(packageExt);
 	}

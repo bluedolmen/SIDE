@@ -22,7 +22,7 @@ public class FacetMapDeployer extends AbstractMultiDeployer {
 
 		// record first webapp deployer
 		final String webappName1 = "facetmap-facets";
-		WarDeployer wd1 = new WarDeployer() {
+		WarDeployer wd1 = new WarDeployer(webappName1) {
 			@Override
 			protected void postProcess(File fileToDeploy) throws Exception {
 			};
@@ -37,7 +37,7 @@ public class FacetMapDeployer extends AbstractMultiDeployer {
 
 		// record second webapp deployer
 		final String webappName2 = "facetmap-content";
-		WarDeployer wd2 = new WarDeployer() {
+		WarDeployer wd2 = new WarDeployer(webappName2) {
 			@Override
 			protected void postProcess(File fileToDeploy) throws Exception {
 			};

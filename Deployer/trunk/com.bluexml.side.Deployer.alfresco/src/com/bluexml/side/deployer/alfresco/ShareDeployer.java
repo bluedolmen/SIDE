@@ -6,7 +6,7 @@ public class ShareDeployer extends WarDeployer {
 
 	
 	public ShareDeployer() {
-		this.webappName = "share";
+		super("share");
 		this.cleanKey = "com.bluexml.side.Application.deployer.alfrescoshare.clean";
 		this.logChanges ="com.bluexml.side.Application.deployer.alfrescoshare.logChanges";
 	}

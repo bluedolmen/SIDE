@@ -10,7 +10,7 @@ import com.bluexml.side.util.libs.zip.TrueZipHelper;
 public class AlfrescoShareDirectDeployer extends DirectWebAppsDeployer {
 
 	public AlfrescoShareDirectDeployer() {
-		this.webappName = "share";
+		super("share");
 		packageExt = "zip";
 		tzh = new TrueZipHelper(packageExt);
 	}

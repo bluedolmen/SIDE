@@ -23,6 +23,10 @@ public abstract class WarDeployer extends Deployer {
 	File warToPatchFile = null;
 	File deployedWebbAppFolder = null;
 
+	public WarDeployer(String webappName) {
+		this.webappName = webappName;
+	}
+	
 	public String getWebappName() {
 		return webappName;
 	}
