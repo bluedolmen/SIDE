@@ -1,0 +1,28 @@
+<webapp-structure>
+  <registeredFiles>
+    <entry>
+      <string>currentBuild</string>
+      <path-set>
+        <pathsSet class="linked-hash-set">
+          <string>lib/alfresco-webscript-framework-3.2-community.jar</string>
+          <string>lib/alfresco-core-3.2-community.jar</string>
+          <string>lib/mysql-connector-java-5.0.3.jar</string>
+          <string>lib/dataGenerator-1.0.jar</string>
+          <string>config/alfresco/module/SIDE_dataGenerator/context/service-context.xml</string>
+          <string>config/alfresco/module/SIDE_dataGenerator/log4j.properties</string>
+          <string>config/alfresco/module/SIDE_dataGenerator/module-context.xml</string>
+          <string>config/alfresco/webscripts/extension/com/bluexml/side/data/form/fillparameters.get.desc.xml</string>
+          <string>config/alfresco/webscripts/extension/com/bluexml/side/data/form/fillparameters.get.html.ftl</string>
+          <string>config/alfresco/webscripts/extension/com/bluexml/side/data/generate/generate.post.desc.xml</string>
+          <string>config/alfresco/webscripts/extension/com/bluexml/side/data/generate/generate.post.html.ftl</string>
+          <string>web/css/demoamp.css</string>
+          <string>web/images/sourcesense.gif</string>
+          <string>web/jsp/demoamp.jsp</string>
+          <string>web/licenses/README-licenses.txt</string>
+          <string>web/scripts/demoamp.js</string>
+          <string>module.properties</string>
+        </pathsSet>
+      </path-set>
+    </entry>
+  </registeredFiles>
+</webapp-structure>
