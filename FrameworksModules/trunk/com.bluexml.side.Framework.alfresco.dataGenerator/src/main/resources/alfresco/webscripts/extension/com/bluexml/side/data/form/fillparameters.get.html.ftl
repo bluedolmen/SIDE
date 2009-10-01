@@ -2,7 +2,7 @@
 	<body>
 		<h2>Parametrization of Random Datas Model Generator</h2>
 		<table border="0">
-			<form method="post" action="/alfresco/service/datas/generate/generate">
+			<form method="post" action="/alfresco/service/data/generate/generate">
 				<tr>
 				 	<td align="center">Model:
 						<select name="model">
