@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <webscript>
-    <shortname>Generate Random Model Datas</shortname>
+    <shortname>Generate Random Model Data</shortname>
     <description></description>
-    <url>/datas/generate/generate</url>
+    <url>/data/generate/generate</url>
     <format default="html">argument</format>
     <authentication>guest</authentication>
     <transaction>required</transaction>
