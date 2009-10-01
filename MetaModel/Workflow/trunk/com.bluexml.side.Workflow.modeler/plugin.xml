@@ -20,7 +20,7 @@
             icon="icons/Editor.gif"
             class="com.bluexml.side.Workflow.modeler.wizards.NewWorkflowDiagrams"
             category="com.bluexml.side.modeler.category.ID"
-            name="SIDE Workflow Diagram"
+            name="Side Workflow Diagram"
             id="com.bluexml.side.Workflow.modeler.wizards.NewWorkflowDiagrams">
          <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>

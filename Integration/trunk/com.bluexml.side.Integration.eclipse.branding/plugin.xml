@@ -13,13 +13,13 @@
    </extension>
    <extension
          id="perspective"
-         name="SIDE Perpective"
+         name="%extension.name"
          point="org.eclipse.ui.perspectives">
       <perspective
             class="com.bluexml.side.Integration.eclipse.branding.Perspective"
             icon="icons/perspective_icon.png"
             id="com.bluexml.side.Integration.eclipse.branding.perspective"
-            name="SIDE Modeling">
+            name="%perspective.name">
       </perspective>
    </extension>
    <extension
@@ -28,7 +28,7 @@
       <product
             application="org.eclipse.ui.ide.workbench"
             
-            name="SIDE">
+            name="%product.name">
             <!--  application="com.bluexml.side.app.application"  -->
          <property
                name="windowImages"
@@ -76,25 +76,25 @@
    </extension>
    <extension
          id="wizard"
-         name="SIDE project"
+         name="%extension.name.0"
          point="org.eclipse.ui.newWizards">
       <wizard
-            category="com.bluexml.side.Intregation.eclipse.branding.category"
+            category="com.bluexml.side.modeler.category.ID"
             class="com.bluexml.side.Integration.eclipse.branding.Wizard"
             finalPerspective="com.bluexml.side.Integration.eclipse.branding.perspective"
             hasPages="true"
             icon="icons/newProject.png"
             id="com.bluexml.side.Integration.eclipse.branding.wizard"
-            name="SIDE Project"
+            name="%wizard.name"
             project="true">
       </wizard>
       <category
-            id="com.bluexml.side.Intregation.eclipse.branding.category"
-            name="SIDE">
+            id="com.bluexml.side.modeler.category.ID"
+            name="%category.name">
       </category>
       <category
             id="com.bluexml.side.Intregation.eclipse.branding.category.example"
-            name="SIDE Example Project"
+            name="%category.name.0"
             parentCategory="com.bluexml.side.Intregation.eclipse.branding.category">
       </category>
    </extension>

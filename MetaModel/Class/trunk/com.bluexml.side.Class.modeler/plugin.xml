@@ -19,7 +19,7 @@
             icon="icons/Clazz.gif"
             class="com.bluexml.side.Class.modeler.wizards.NewClazzDiagrams"
             category="com.bluexml.side.modeler.category.ID"
-            name="SIDE Data Diagram"
+            name="Side Data Diagram"
             id="com.bluexml.side.Class.modeler.wizards.NewClazzDiagrams">
          <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>

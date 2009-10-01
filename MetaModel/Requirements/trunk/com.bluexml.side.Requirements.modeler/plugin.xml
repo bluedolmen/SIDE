@@ -19,7 +19,7 @@
             icon="icons/Requirements.gif"
             class="com.bluexml.side.Requirements.modeler.wizards.NewRequirementsDiagrams"
             category="com.bluexml.side.modeler.category.ID"
-            name="SIDE Requirements Diagram"
+            name="Side Requirements Diagram"
             id="com.bluexml.side.Requirements.modeler.wizards.NewRequirementsDiagrams">
          <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>
