@@ -1,32 +1,16 @@
 package com.bluexml.side.forms.generator.alfresco.chiba;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.maven.embedder.Configuration;
-import org.apache.maven.embedder.DefaultConfiguration;
-import org.apache.maven.embedder.MavenEmbedder;
-import org.apache.maven.embedder.MavenEmbedderException;
-import org.apache.maven.execution.DefaultMavenExecutionRequest;
-import org.apache.maven.execution.MavenExecutionResult;
-import org.codehaus.plexus.util.StringUtils;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.core.resources.IFile;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.Namespace;
-import org.jdom.input.SAXBuilder;
-import org.jdom.output.Format;
-import org.jdom.output.XMLOutputter;
 
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.form.FormPackage;
@@ -35,39 +19,53 @@ import com.bluexml.side.util.dependencies.DependencesManager;
 import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.security.SecurityHelper;
 import com.bluexml.side.util.security.preferences.SidePreferences;
+import com.bluexml.xforms.generator.DataGenerator;
+import com.bluexml.xforms.generator.forms.XFormsGenerator;
+import com.bluexml.xforms.generator.mapping.MappingGenerator;
 
 public class FormGenerator extends AbstractGenerator {
-	public static final Namespace NAMESPACE_MAVENPOM = Namespace.getNamespace("pom", "http://maven.apache.org/POM/4.0.0");
-	private static final String TARGET_VERSION = "1.0.0";
-	private static final String TARGET_ARTIFACT = "xforms";
-	private static final String TARGET_GROUP = "com.bluexml";
-	private static final String ARCHETYPE_ARTIFACT = "xforms.archetype";
-	private static final String ARCHETYPE_GROUP = "org.bluexml";
-	private static final String ARCHETYPE_VERSION = "2.0.0-SNAPSHOT";
-	private static final String SNAPSHOTREPOSITORY = "http://merry.bluexml.com/m2/snapshotrepository";
-	private static final String REPOSITORY = "http://merry.bluexml.com/m2/repository";
 	private static final String GENERATOR_CODE = "CODE_GED_G_F_CHIBA";
-	private static final SAXBuilder sxb = new SAXBuilder();
-	private static final XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
 
-	private List<String> clazzModels;
-	private List<String> formModels;
+	private List<File> clazzModels;
+	private List<File> formModels;
 	private File workFolder;
-	private Configuration configuration;
-	private MavenEmbedder embedder;
-	private File projectFolder;
-	private File pomFile;
-	private File alfrescoProperties;
-	private File warFile;
+	private File resourcesFolder;
+	private File messagesFilePath;
+	private boolean successfulInit;
+	private List<DataGenerator> generators = new ArrayList<DataGenerator>();
 
 	@Override
-	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, DependencesManager dm, ComponentMonitor monitor) throws Exception {
-		super.initialize(generationParameters_, generatorOptions_, configurationParameters_, dm, monitor);
+	public void initialize(Map<String, String> generationParameters_,
+			Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_,
+			DependencesManager dm, ComponentMonitor monitor) throws Exception {
+		super.initialize(generationParameters_, generatorOptions_, configurationParameters_, dm,
+				monitor);
+
+		successfulInit = false;
 		try {
 			initWorkFolder();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		String baseDir = workFolder.getAbsolutePath();
+		String resDir = resourcesFolder.getAbsolutePath();
+
+		File generateMappingFile = new File(resDir + File.separator + "mapping.xml");
+		File generateRedirectFile = new File(resDir + File.separator + "redirect.xml");
+		File generateCSSFile = new File(resDir + File.separator + "styles.css");
+
+		XFormsGenerator xformsGenerator = new XFormsGenerator();
+		MappingGenerator mappingGenerator = new MappingGenerator();
+		generators.add(mappingGenerator);
+		generators.add(xformsGenerator);
+
+		xformsGenerator.setOutputFolder(baseDir);
+//		MsgPool.setMessagesFile(messagesFilePath.getAbsolutePath());
+		mappingGenerator.setOutputMappingFile(generateMappingFile.getAbsolutePath());
+		mappingGenerator.setOutputCSSFile(generateCSSFile.getAbsolutePath());
+		mappingGenerator.setOutputRedirectFile(generateRedirectFile.getAbsolutePath());
+
+		successfulInit = true;
 	}
 
 	/**
@@ -80,7 +78,8 @@ public class FormGenerator extends AbstractGenerator {
 	}
 
 	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo, String id_metamodel) {
-		return modelsInfo.containsKey(ClazzPackage.eNS_URI) || modelsInfo.containsKey(FormPackage.eNS_URI);
+		return modelsInfo.containsKey(ClazzPackage.eNS_URI)
+				|| modelsInfo.containsKey(FormPackage.eNS_URI);
 	}
 
 	public Collection<IFile> complete() throws Exception {
@@ -90,42 +89,27 @@ public class FormGenerator extends AbstractGenerator {
 
 	public Collection<IFile> generate(Map<String, List<IFile>> modelsInfo, String id_mm) {
 
-		getModels(modelsInfo);
-		try {
-			initMaven();
-			MavenExecutionResult createProjectResult = createProject();
-			if (createProjectResult.hasExceptions()) {
-				throw new RuntimeException(((Exception) createProjectResult.getExceptions().get(0)));
-			}
-			prepareProject();
-			MavenExecutionResult cleanPackageResult = buildProject();
-			if (cleanPackageResult.hasExceptions()) {
-				throw new RuntimeException(((Exception) cleanPackageResult.getExceptions().get(0)));
-			}
-
-		} catch (Exception e) {
-			throw new RuntimeException(e);
+		if (successfulInit == false) {
+			return null;
 		}
+		clazzModels = getModels(modelsInfo, ClazzPackage.eNS_URI);
+		formModels = getModels(modelsInfo, FormPackage.eNS_URI);
+
+		File[] clazzFiles = clazzModels.toArray(new File[clazzModels.size()]);
+		File[] formsFiles = formModels.toArray(new File[formModels.size()]);
+		boolean simplifyClasses = true;
+		boolean renderDataBeforeWorkflow = true;
+
+		com.bluexml.xforms.generator.FormGenerator formGenerator = new com.bluexml.xforms.generator.FormGenerator(
+				clazzFiles, formsFiles, LogFactory.getLog(FormGenerator.class), simplifyClasses,
+				renderDataBeforeWorkflow);
+		formGenerator.generate(generators);
+
 		return null;
 	}
 
-	private MavenExecutionResult buildProject() throws IOException {
-		DefaultMavenExecutionRequest cleanPackageRequest = new DefaultMavenExecutionRequest();
-		cleanPackageRequest.setBaseDirectory(projectFolder);
-		cleanPackageRequest.setGoals(Arrays.asList(new String[] { "clean", "package" }));
-
-		cleanPackageRequest.setUpdateSnapshots(false);
-		cleanPackageRequest.setLoggingLevel(1);
-
-		MavenExecutionResult cleanPackageResult = embedder.execute(cleanPackageRequest);
-
-		warFile = new File(projectFolder, "target/" + TARGET_ARTIFACT + ".war");
-
-		return cleanPackageResult;
-	}
-
 	/**
-	 * Create the work folder
+	 * Sets up the generation environment. Create the folders necessary for the generation.
 	 * 
 	 * @throws IOException
 	 */
@@ -135,113 +119,29 @@ public class FormGenerator extends AbstractGenerator {
 			throw new RuntimeException("Target path must be set !");
 		path += File.separatorChar + getTechVersion();
 		workFolder = new File(path);
+		resourcesFolder = new File(path + File.separator + "resources");
 		FileUtils.forceMkdir(workFolder);
-	}
-
-	private void initMaven() throws MavenEmbedderException {
-		configuration = new DefaultConfiguration();
-		configuration.setClassLoader(Thread.currentThread().getContextClassLoader());
-		embedder = new MavenEmbedder(configuration);
-	}
-
-	private MavenExecutionResult createProject() throws Exception {
-
-		DefaultMavenExecutionRequest archetypeCreateRequest = new DefaultMavenExecutionRequest();
-		archetypeCreateRequest.setBaseDirectory(workFolder);
-		archetypeCreateRequest.setGoals(Arrays.asList(new String[] { "archetype:generate" }));
-		archetypeCreateRequest.setProperty("interactiveMode", "false");
-		archetypeCreateRequest.setProperty("archetypeArtifactId", ARCHETYPE_ARTIFACT);
-		archetypeCreateRequest.setProperty("archetypeGroupId", ARCHETYPE_GROUP);
-		archetypeCreateRequest.setProperty("archetypeVersion", ARCHETYPE_VERSION);
-		if (ARCHETYPE_VERSION.endsWith("SNAPSHOT")) {
-			archetypeCreateRequest.setProperty("archetypeRepository", SNAPSHOTREPOSITORY);
-		} else {
-			archetypeCreateRequest.setProperty("archetypeRepository", REPOSITORY);
-		}
-		archetypeCreateRequest.setProperty("basedir", workFolder.getAbsolutePath());
-		archetypeCreateRequest.setProperty("groupId", TARGET_GROUP);
-		archetypeCreateRequest.setProperty("artifactId", TARGET_ARTIFACT);
-		archetypeCreateRequest.setProperty("version", TARGET_VERSION);
-
-		archetypeCreateRequest.setUpdateSnapshots(false);
-
-		MavenExecutionResult result = embedder.execute(archetypeCreateRequest);
-
-		projectFolder = new File(workFolder, TARGET_ARTIFACT);
-		pomFile = new File(projectFolder, "pom.xml");
-		alfrescoProperties = new File(projectFolder, "src/main/resources/forms.properties");
-
-		return result;
-	}
-
-	private void prepareProject() throws Exception {
-		Document pom = sxb.build(pomFile);
-		Element project = pom.getRootElement();
-		Element build = project.getChild("build", NAMESPACE_MAVENPOM);
-		Element plugins = build.getChild("plugins", NAMESPACE_MAVENPOM);
-		Element plugin = getBlueXMLGeneratorMojoPlugin(plugins);
-		Element configurationElement = plugin.getChild("configuration", NAMESPACE_MAVENPOM);
-		addFiles("clazzFiles", clazzModels, configurationElement);
-		addFiles("formsFiles", formModels, configurationElement);
-		FileOutputStream os = new FileOutputStream(pomFile);
-		outputter.output(pom, os);
-		os.close();
-
-		// no need to specify additional properties, these are archetyped, not
-		// user-defined
-		// Properties properties = new Properties();
-		// FileInputStream in = new FileInputStream(alfrescoProperties);
-		// properties.load(in);
-		// in.close();
-		// properties.setProperty("temp.directory", "/");
-		// properties.setProperty("upload.directory", "/");
-		// os = new FileOutputStream(alfrescoProperties);
-		// properties.store(os, null);
-		// os.close();
+		FileUtils.forceMkdir(resourcesFolder);
+//		messagesFilePath = new File(generationParameters.get("messagesFilePath"));
 	}
 
 	/**
-	 * Finds the "plugin" element that represents the XForms generator.
+	 * Filters a list of models wrt a URI and returns a list of files.
 	 * 
-	 * @param plugins
-	 * @return
+	 * @param modelsInfo
+	 * @param nsURI
+	 * @return the list of files from the models that match the URI
 	 */
-	@SuppressWarnings("unchecked")
-	private Element getBlueXMLGeneratorMojoPlugin(Element plugins) {
-		List<Element> listOfPlugins = plugins.getChildren();
-		for (Element plugin : listOfPlugins) {
-			Element artifact = plugin.getChild("artifactId", NAMESPACE_MAVENPOM);
-			String pluginName = artifact.getText();
-			if (StringUtils.equals(pluginName, "xforms.generator.mojo")) {
-				return plugin;
-			}
-		}
-		return null;
-	}
-
-	private void addFiles(String name, List<String> models, Element configurationElement) {
-		Element files = configurationElement.getChild(name, NAMESPACE_MAVENPOM);
-		for (String model : models) {
-			Element param = new Element("param");
-			param.setText(model);
-			files.addContent(param);
-		}
-	}
-
-	private void getModels(Map<String, List<IFile>> modelsInfo) {
-		clazzModels = getModels(modelsInfo, ClazzPackage.eNS_URI);
-		formModels = getModels(modelsInfo, FormPackage.eNS_URI);
-	}
-
-	private List<String> getModels(Map<String, List<IFile>> modelsInfo, String nsURI) {
-		List<String> models = new ArrayList<String>();
+	private List<File> getModels(Map<String, List<IFile>> modelsInfo, String nsURI) {
+		List<File> modelsFiles = new ArrayList<File>();
 		List<IFile> modelsIFile = modelsInfo.get(nsURI);
 		if (modelsIFile != null) {
 			for (IFile file : modelsIFile) {
-				models.add(file.getLocation().toFile().getAbsolutePath());
+				String fileLocation = file.getLocation().toFile().getAbsolutePath();
+				modelsFiles.add(new File(fileLocation));
 			}
 		}
-		return models;
+		return modelsFiles;
 	}
 
 }
