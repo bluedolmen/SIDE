@@ -99,6 +99,17 @@
                            versionMin="1.0.1">
                      </moduleDependence>
                   </option>
+                  <option
+                        documentation="Generates random data regarding the current Alfresco model. The generated ACP can be imported and reused accross various Alfresco installations."
+                        key="com.bluexml.side.Class.generator.alfresco.randomDataGenerator"
+                        label="Alfresco Random Data Generator">
+                     <moduleDependence
+                           moduleId="com.bluexml.side.Framework.alfresco.dataGenerator"
+                           moduleType="amp"
+                           technologyVersion="alfresco_3.x"
+                           versionMin="1.0.0">
+                     </moduleDependence>
+                  </option>
                </generatorVersion>
             </technologyVersion>
          </technology>

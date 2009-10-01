@@ -4,7 +4,7 @@
     <metainfo key="visual-component" value=""/>
   </classSet>
   <classSet name="SingleClassWithAttributes">
-    <attributes documentation="" description="" name="attributeBoolean" title="" typ="boolean"/>
+    <attributes documentation="" description="" name="attributeBoolean" title=""/>
     <attributes documentation="" description="" name="attributeByte" title="" typ="byte"/>
     <attributes documentation="" description="" name="attributeChar" title="" typ="char"/>
     <attributes documentation="" description="" name="attributeDate" title="" typ="Date"/>
@@ -29,7 +29,9 @@
     <attributes documentation="" description="" name="aspectedClassAttribute" title="" typ="String"/>
   </classSet>
   <classSet name="AssociatedClass"/>
-  <classSet name="AssociatingClass"/>
+  <classSet name="AssociatingClass">
+    <attributes documentation="" description="" name="attributeString" title="" typ="String"/>
+  </classSet>
   <associationSet description="" name="simpleAssociation" title="">
     <firstEnd name="" title="" linkedClass="//@classSet.5"/>
     <secondEnd name="R2" title="" navigable="true" linkedClass="//@classSet.6"/>

@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
+  <model href="testModelJPA.dt#/"/>
+  <diagrams position="0,0" size="100,100" name="No name" viewport="0,219">
+    <property key="pageFormatName" value="A3"/>
+    <property key="diagramWidth" value="1188"/>
+    <property key="diagramHeight" value="1680"/>
+    <property key="pageMarginName" value="Small Margin"/>
+    <property key="diagramTopMargin" value="20"/>
+    <property key="diagramBottomMargin" value="20"/>
+    <property key="diagramLeftMargin" value="20"/>
+    <property key="diagramRightMargin" value="20"/>
+    <property key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="com.bluexml.side.Class.modeler.diagram">
+      <element href="testModelJPA.dt#/"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" position="139,239" size="145,81">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="testModelJPA.dt#//@classSet.0"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.0"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="10"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.0"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="12"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.0"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="344,239" size="218,339">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="testModelJPA.dt#//@classSet.1"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.1"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="testModelJPA.dt#//@classSet.1/@attributes.0"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="testModelJPA.dt#//@classSet.1/@attributes.1"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="testModelJPA.dt#//@classSet.1/@attributes.2"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="testModelJPA.dt#//@classSet.1/@attributes.3"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="testModelJPA.dt#//@classSet.1/@attributes.4"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="testModelJPA.dt#//@classSet.1/@attributes.5"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="testModelJPA.dt#//@classSet.1/@attributes.6"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="testModelJPA.dt#//@classSet.1/@attributes.7"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="testModelJPA.dt#//@classSet.1/@attributes.8"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="testModelJPA.dt#//@classSet.1/@attributes.9"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="testModelJPA.dt#//@classSet.1/@attributes.10"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="testModelJPA.dt#//@classSet.1/@attributes.11"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="testModelJPA.dt#//@classSet.1/@attributes.12"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="testModelJPA.dt#//@classSet.1/@attributes.13"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="10"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.1"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="12"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.1"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="882,779" size="185,92">
+      <anchorage graphEdge="//@diagrams.0/@contained.7 //@diagrams.0/@contained.8"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="testModelJPA.dt#//@classSet.2"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.2"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="testModelJPA.dt#//@classSet.2/@attributes.0"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="10"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.2"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="12"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.2"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="874,931" size="200,92">
+      <anchorage graphEdge="//@diagrams.0/@contained.7"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="testModelJPA.dt#//@classSet.3"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.3"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="testModelJPA.dt#//@classSet.3/@attributes.0"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="10"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.3"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="12"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.3"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="622,239" size="223,92">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="testModelJPA.dt#//@classSet.4"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.4"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="testModelJPA.dt#//@classSet.4/@attributes.0"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="10"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.4"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="12"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.4"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="907,638" size="134,81">
+      <anchorage graphEdge="//@diagrams.0/@contained.8 //@diagrams.0/@contained.9 //@diagrams.0/@contained.10 //@diagrams.0/@contained.11 //@diagrams.0/@contained.12 //@diagrams.0/@contained.13 //@diagrams.0/@contained.14"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.9"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="testModelJPA.dt#//@classSet.5"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.5"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="10"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.5"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="12"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.5"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="905,239" size="138,81">
+      <anchorage graphEdge="//@diagrams.0/@contained.10 //@diagrams.0/@contained.11 //@diagrams.0/@contained.12 //@diagrams.0/@contained.13 //@diagrams.0/@contained.14"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="testModelJPA.dt#//@classSet.6"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.6"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="testModelJPA.dt#//@classSet.6/@attributes.0"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="10"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.6"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="12"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="testModelJPA.dt#//@classSet.6"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.3/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Generalization"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.2/@anchorage.0 //@diagrams.0/@contained.5/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="testModelJPA.dt#//@associationSet.5"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.5/@anchorage.1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="testModelJPA.dt#//@associationSet.6"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.6/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="testModelJPA.dt#//@associationSet.0"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
+      <waypoints>[164, -164, 164, 235]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.6/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="testModelJPA.dt#//@associationSet.1"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject" offset="-1,2"/>
+      <waypoints>[87, -213, 87, 186]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.6/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="testModelJPA.dt#//@associationSet.2"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject" offset="15,-17"/>
+      <waypoints>[-55, -209, -55, 190]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.6/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="testModelJPA.dt#//@associationSet.3"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
+      <waypoints>[-154, -206, -154, 193]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.6/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="testModelJPA.dt#//@associationSet.4"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject" offset="12,-3"/>
+      <waypoints>[-290, -185, -290, 214]</waypoints>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>
