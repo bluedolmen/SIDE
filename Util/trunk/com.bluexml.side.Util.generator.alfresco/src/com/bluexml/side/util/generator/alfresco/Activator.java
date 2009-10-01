@@ -12,7 +12,7 @@ public class Activator extends Plugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "com.bluexml.side.Util.generator.alfresco";
-	public static final Messages Messages = new Messages(PLUGIN_ID, "com.bluexml.side.util.generator.alfresco");
+	public static final Messages Messages = new Messages(PLUGIN_ID, "com.bluexml.side.util.generator.alfresco.messages");
 	// The shared instance
 	private static Activator plugin;
 	
