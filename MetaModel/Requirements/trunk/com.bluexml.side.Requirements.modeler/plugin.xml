@@ -243,7 +243,7 @@
        </action>
        <menu
              id="com.bluexml.side"
-             label="S-IDE"
+             label="SIDE"
              path="additions">
           <separator
                 name="requirements">

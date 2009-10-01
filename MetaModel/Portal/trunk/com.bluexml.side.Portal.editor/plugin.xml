@@ -15,7 +15,7 @@
     point = "org.eclipse.ui.newWizards">
     <category
       id = "com.bluexml.side.modeler.category.ID"
-      name="S-IDE Modeler">
+      name="SIDE Modeler">
     </category>
     <wizard
       id = "com.bluexml.side.portal.presentation.PortalModelWizardID"

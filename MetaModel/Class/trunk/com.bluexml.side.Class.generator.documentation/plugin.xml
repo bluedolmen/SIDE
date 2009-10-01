@@ -4,7 +4,7 @@
    <extension
          point="com.bluexml.side.Application.com_bluexml_application_configuration">
       <metamodel
-            description="Check this to generate class models on leading frameworks.&lt;br&gt; This Class Metamodel allows to model Application Object structure and persistence.&lt;br&gt;S-IDE provides the modeler to graphically produce class models and various generators to instantiate these models on leading frameworks."
+            description="Check this to generate class models on leading frameworks.&lt;br&gt; This Class Metamodel allows to model Application Object structure and persistence.&lt;br&gt;SIDE provides the modeler to graphically produce class models and various generators to instantiate these models on leading frameworks."
             id="http://www.kerblue.org/class/1.0"
             name="KSR500 Data"
             url="http://www.kerblue.org/class/1.0">
@@ -20,7 +20,7 @@
                      class="com.bluexml.side.clazz.generator.documentation.ClassDocumentationGenerator"
                      hidden="hidden and used by default"
                      id="com.bluexml.side.Class.generator.documentation"
-                     version="S-IDE Class Documentation Generator 1.0.0">
+                     version="SIDE Class Documentation Generator 1.0.0">
                </generatorVersion>
             </technologyVersion>
          </technology>

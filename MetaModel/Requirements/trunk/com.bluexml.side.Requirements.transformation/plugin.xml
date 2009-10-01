@@ -21,7 +21,7 @@
        </action>
        <menu
              id="com.bluexml.side"
-             label="S-IDE"
+             label="SIDE"
              path="additions">
           <groupMarker
                 name="requirements">

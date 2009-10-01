@@ -19,7 +19,7 @@
                      class="com.bluexml.side.view.generator.documentation.ViewDocumentationGenerator"
                      hidden="hidden and used by default"
                      id="com.bluexml.side.View.generator.documentation"
-                     version="S-IDE View Documentation Generator 1.0.0">
+                     version="SIDE View Documentation Generator 1.0.0">
                </generatorVersion>
             </technologyVersion>
          </technology>

@@ -9,7 +9,7 @@
            objectClass="org.eclipse.core.resources.IFile">
         <menu
               id="com.bluexml.side.Workflow.editor.menu1"
-              label="S-IDE"
+              label="SIDE"
               path="additions">
            <separator
                  name="group1">

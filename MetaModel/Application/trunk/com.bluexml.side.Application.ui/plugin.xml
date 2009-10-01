@@ -20,7 +20,7 @@
        <menu
              icon="icon/side_16.gif"
              id="com.bluexml.side"
-             label="S-IDE"
+             label="SIDE"
              path="additions">
           <separator
                 name="application">
@@ -46,7 +46,7 @@
          <menu
                icon="icon/side_16.gif"
                id="com.bluexml.side"
-               label="S-IDE"
+               label="SIDE"
                path="additions">
             <separator
                   name="application">
@@ -59,7 +59,7 @@
         <page
               class="com.bluexml.side.application.ui.preferencePages.PreferencePageSide"
               id="com.bluexml.side.Application.ui.PreferencePage"
-              name="S-IDE">
+              name="SIDE">
         </page>
      </extension>
 </plugin>

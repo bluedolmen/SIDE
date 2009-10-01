@@ -4,19 +4,19 @@
    <extension
          point="com.bluexml.side.Application.com_bluexml_application_configuration">
       <technology
-            description="Check this to deploy your generated application components on the Alfresco product line.&lt;br&gt;Alfresco is the leading open source ECM solution.&lt;br&gt;MDA-based S-IDE allows to deploy MDA generated artefacts on main ALfresco releases."
+            description="Check this to deploy your generated application components on the Alfresco product line.&lt;br&gt;Alfresco is the leading open source ECM solution.&lt;br&gt;MDA-based SIDE allows to deploy MDA generated artefacts on main ALfresco releases."
             id="alfresco"
             name="Alfresco"
             url="http://www.alfresco.com">
          <technologyVersion
-               description="Check this to deploy your generated application components on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;MDA-based S-IDE allows to deploy generated artefacts on Alfresco 3.x using AMP-based (Alfresco Module Package) standard packaging."
+               description="Check this to deploy your generated application components on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;MDA-based SIDE allows to deploy generated artefacts on Alfresco 3.x using AMP-based (Alfresco Module Package) standard packaging."
                id="alfresco_3.x"
                version="Alfresco3.x Labs and Enterprise">
             <deployerVersion
                   class="com.bluexml.side.deployer.alfresco.directcopy.AlfrescoDeployer"
                   description="Check this to generate a full deployable Alfresco package containing the newly generated Alfresco artifacts."
                   id="com.bluexml.side.Deployer.alfrescoDirectCopy"
-                  version="S-IDE Alfresco Direct Deployer 1.0.0">
+                  version="SIDE Alfresco Direct Deployer 1.0.0">
                <configurationParameter
                      documentation="Set this value to the Alfresco Tomcat directory path in order the deployer puts the packaged war file.&lt;br&gt;&lt;b&gt;This option is mandatory.&lt;/b&gt;"
                      key="CATALINA_HOME"
