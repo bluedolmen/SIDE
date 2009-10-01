@@ -20,7 +20,7 @@
                      class="com.bluexml.side.form.generator.documentation.FormDocumentationGenerator"
                      hidden="hidden and used by default"
                      id="com.bluexml.side.Form.generator.documentation"
-                     version="SIDE Form Documentation Generator 1.0.0">
+                     version="SIDE Form Documentation Generator">
                </generatorVersion>
             </technologyVersion>
          </technology>

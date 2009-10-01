@@ -19,7 +19,7 @@
             icon="icons/Portal.gif"
             class="com.bluexml.side.Portal.modeler.wizards.NewPortalDiagrams"
             category="com.bluexml.side.modeler.category.ID"
-            name="Portal Diagram"
+            name="SIDE Portal Diagram"
             id="com.bluexml.side.Portal.modeler.wizards.NewPortalDiagrams">
          <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>

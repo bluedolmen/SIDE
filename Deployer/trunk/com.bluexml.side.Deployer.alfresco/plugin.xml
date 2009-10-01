@@ -17,7 +17,7 @@
                   class="com.bluexml.side.deployer.alfresco.AlfrescoDeployer"
                   description="Check this to generate a full deployable Alfresco package containing the newly generated Alfresco artifacts."
                   id="com.bluexml.side.Deployer.alfresco"
-                  version="SIDE Alfresco Deployer 1.0.0">
+                  version="SIDE Alfresco Deployer">
                <configurationParameter
                      documentation="Set this value to the Alfresco Tomcat directory path in order the deployer puts the packaged war file.&lt;br&gt;&lt;b&gt;This option is mandatory.&lt;/b&gt;"
                      key="CATALINA_HOME"

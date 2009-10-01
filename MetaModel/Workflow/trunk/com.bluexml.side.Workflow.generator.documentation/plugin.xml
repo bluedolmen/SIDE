@@ -20,7 +20,7 @@
                      class="com.bluexml.side.workflow.generator.documentation.WorkflowDocumentationGenerator"
                      hidden="hidden and used by default"
                      id="com.bluexml.side.Workflow.generator.documentation"
-                     version="SIDE Workflow Documentation Generator 1.0.0">
+                     version="SIDE Workflow Documentation Generator">
                </generatorVersion>
             </technologyVersion>
          </technology>
