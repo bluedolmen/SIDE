@@ -62,4 +62,12 @@ chmod +x -R */*.jar
 dos2unix *.sh
 dos2unix *.xml
 dos2unix *.properties
+
+if [ `hostname` = "stager.bluexml.com" ]; then
+  perl -p -i -e 's/finalDirectory=\/data\/www\/virtuals\/b\/l\/u\/bluexml\.com\/merry\/html\/devel\/SIDE-Alfresco/\/home\/stager\finalDirectory=/share\/SIDE\/SIDE-Alfresco/g' build.properties
+  perl -p -i -e 's/updateSiteDir=\/data\/www\/virtuals\/b\/l\/u\/bluexml\.com\/merry\/html\/devel\/SIDE-Alfresco/\/home\/stager\updateSiteDir=/share\/Update-Site\/SIDE-Alfresco/g' build.properties
+  perl -p -i -e 's/\/data\/hudson/\/root\/.hudson/g' build.properties
+fi
+
+
 exit 0
