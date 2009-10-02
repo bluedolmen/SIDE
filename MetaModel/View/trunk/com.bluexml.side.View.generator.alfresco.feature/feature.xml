@@ -17,6 +17,20 @@
       [Enter License Description here.]
    </license>
 
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="com.bluexml.side.Application"/>
+      <import plugin="com.bluexml.side.Util.generator"/>
+      <import plugin="com.bluexml.side.Util.generator.acceleo"/>
+      <import plugin="com.bluexml.side.Util.security"/>
+      <import plugin="com.bluexml.side.Util.generator.alfresco"/>
+      <import plugin="com.bluexml.side.Util.dependencies"/>
+      <import plugin="com.bluexml.side.Util.componentMonitor"/>
+      <import plugin="com.bluexml.side.Util.log"/>
+      <import plugin="com.bluexml.side.Class.service.alfresco"/>
+   </requires>
+
    <plugin
          id="com.bluexml.side.View.generator.alfresco"
          download-size="0"
