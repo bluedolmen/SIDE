@@ -17,14 +17,14 @@ public class WarPatchPackager extends AbstractPackager {
 	}
 
 	public IFile buildPackage() throws Exception {
-		File ampFile = getPackageFile();
-		ampFile.createNewFile();
-		ZipManager.zip(getFolderToPackage(), ampFile, false);
+		File packageFile = getPackageFile();
+		packageFile.createNewFile();
+		ZipManager.zip(getFolderToPackage(), packageFile, false);
 //		if (doClean) {
 //			FileHelper.deleteFile(getWorkingFolder());
 //		}
-		IFile ampIFile = getPackageIFile();
-		return ampIFile;
+		IFile packageIFile = getPackageIFile();
+		return packageIFile;
 	}
 
 	@Override
