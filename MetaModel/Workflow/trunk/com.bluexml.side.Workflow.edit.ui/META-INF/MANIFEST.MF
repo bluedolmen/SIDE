@@ -6,9 +6,9 @@ Bundle-Version: 1.0.11.v9878-20090928
 Bundle-Activator: com.bluexml.side.workflow.edit.ui.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.gmf.runtime.emf.core,
- com.bluexml.side.Form.editor;bundle-version="1.0.19",
- com.bluexml.side.Workflow;bundle-version="1.0.21",
- com.bluexml.side.Form.edit.ui;bundle-version="1.0.23",
- com.bluexml.side.Util.ecore;bundle-version="1.0.14"
+ com.bluexml.side.Form.editor,
+ com.bluexml.side.Workflow,
+ com.bluexml.side.Form.edit.ui,
+ com.bluexml.side.Util.ecore
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

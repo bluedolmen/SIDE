@@ -15,6 +15,6 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Common;visibility:=reexport,
  org.eclipse.ocl,
  org.eclipse.ocl.ecore,
- com.bluexml.side.Util.ecore;bundle-version="1.0.11",
- com.bluexml.side.Util.metaModel.validate;bundle-version="1.0.11"
+ com.bluexml.side.Util.ecore,
+ com.bluexml.side.Util.metaModel.validate
 Bundle-ActivationPolicy: lazy

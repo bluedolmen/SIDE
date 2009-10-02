@@ -14,17 +14,17 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.Util.generator.alfresco,
  javax.xml,
  org.eclipse.emf.ecore.xmi,
- com.bluexml.side.Util.ecore;bundle-version="1.0.1",
+ com.bluexml.side.Util.ecore,
  com.bluexml.side.Util.libs,
- com.bluexml.side.Util.metaModel.validate;bundle-version="1.0.1",
- com.bluexml.side.Util.model.merge;bundle-version="1.0.1",
- com.bluexml.side.Application.edit;bundle-version="1.0.0",
- com.bluexml.side.Application.editor;bundle-version="1.0.0",
- com.bluexml.side.Application.ui;bundle-version="1.0.3",
+ com.bluexml.side.Util.metaModel.validate,
+ com.bluexml.side.Util.model.merge,
+ com.bluexml.side.Application.edit,
+ com.bluexml.side.Application.editor,
+ com.bluexml.side.Application.ui,
  com.bluexml.side.Util.security,
- com.bluexml.side.Util.dependencies;bundle-version="1.0.0",
- com.bluexml.side.Util.componentMonitor;bundle-version="1.0.0",
- com.bluexml.side.Util.log;bundle-version="1.0.14"
+ com.bluexml.side.Util.dependencies,
+ com.bluexml.side.Util.componentMonitor,
+ com.bluexml.side.Util.log
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.workflow.generator.alfresco

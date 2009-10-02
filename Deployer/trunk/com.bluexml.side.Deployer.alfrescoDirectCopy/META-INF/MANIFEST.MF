@@ -6,11 +6,11 @@ Bundle-Version: 1.0.13.v10008-20090929
 Bundle-Activator: com.bluexml.side.deployer.alfresco.directcopy.Activator
 Bundle-Vendor: www.bluexml.com
 Require-Bundle: org.eclipse.core.runtime,
- com.bluexml.side.Application;bundle-version="1.0.8",
+ com.bluexml.side.Application,
  com.bluexml.side.Util.deployer,
  com.bluexml.side.Util.security,
- com.bluexml.side.Util.deployer.war;bundle-version="1.0.3",
- com.bluexml.side.Util.libs;bundle-version="1.0.20",
- com.bluexml.side.Util.componentMonitor;bundle-version="1.0.0"
+ com.bluexml.side.Util.deployer.war,
+ com.bluexml.side.Util.libs,
+ com.bluexml.side.Util.componentMonitor
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

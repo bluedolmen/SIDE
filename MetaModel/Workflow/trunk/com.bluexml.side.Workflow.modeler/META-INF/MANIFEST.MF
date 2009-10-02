@@ -6,8 +6,8 @@ Bundle-Version: 1.0.28.v9878-20090928
 Bundle-Activator: com.bluexml.side.Workflow.modeler.WorkflowPlugin
 Bundle-Vendor: BlueXML
 Require-Bundle: org.topcased.modeler,
- com.bluexml.side.Workflow.edit;bundle-version="1.0.0",
- com.bluexml.side.Form.editor;bundle-version="1.0.14",
- com.bluexml.side.Util.libs;bundle-version="1.0.23"
+ com.bluexml.side.Workflow.edit,
+ com.bluexml.side.Form.editor,
+ com.bluexml.side.Util.libs
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

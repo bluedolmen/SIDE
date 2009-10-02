@@ -18,8 +18,8 @@ Require-Bundle: org.eclipse.ui,
  fr.obeo.acceleo.gen,
  org.eclipse.ant.core,
  org.eclipse.m2m.atl.engine,
- com.bluexml.side.Util.ecore;bundle-version="1.0.11",
- com.bluexml.side.Requirements;bundle-version="1.0.11",
- org.eclipse.m2m.atl.drivers.emf4atl;bundle-version="3.0.0",
- org.eclipse.m2m.atl.common;bundle-version="3.0.0"
+ com.bluexml.side.Util.ecore,
+ com.bluexml.side.Requirements,
+ org.eclipse.m2m.atl.drivers.emf4atl,
+ org.eclipse.m2m.atl.common
 Eclipse-LazyStart: true

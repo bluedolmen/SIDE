@@ -23,36 +23,36 @@
       <import plugin="org.eclipse.ocl.ecore"/>
       <import plugin="com.bluexml.side.Class"/>
       <import plugin="com.bluexml.side.Common"/>
-      <import plugin="com.bluexml.side.Util.metaModel.validate" version="1.0.1" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.metaModel.validate"/>
       <import plugin="com.bluexml.side.Workflow"/>
-      <import plugin="com.bluexml.side.Form" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Form"/>
       <import plugin="org.eclipse.emf.edit"/>
       <import plugin="com.bluexml.side.Class.edit"/>
-      <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui"/>
       <import plugin="com.bluexml.side.Workflow.edit"/>
       <import plugin="fr.obeo.acceleo.chain"/>
       <import plugin="fr.obeo.acceleo.gen"/>
-      <import plugin="com.bluexml.side.Util.libs" version="1.0.11" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Workflow.editor" version="1.0.13" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.libs"/>
+      <import plugin="com.bluexml.side.Workflow.editor"/>
       <import plugin="org.topcased.modeler"/>
-      <import plugin="com.bluexml.side.Class.editor" version="1.0.13" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Class.editor"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="com.bluexml.side.Form.edit"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="com.bluexml.side.Workflow.edit" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Workflow.edit"/>
       <import plugin="com.bluexml.side.Form.edit.ui"/>
       <import plugin="com.bluexml.side.Util.generator"/>
       <import plugin="com.bluexml.side.Util.generator.acceleo"/>
       <import plugin="com.bluexml.side.Util.security"/>
       <import plugin="com.bluexml.side.Application"/>
       <import plugin="com.bluexml.side.Util.generator.documentation"/>
-      <import plugin="org.eclipse.core.resources" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Util.dependencies" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="com.bluexml.side.Util.componentMonitor" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="fr.obeo.acceleo.ecore" version="2.5.0" match="greaterOrEqual"/>
-      <import plugin="fr.obeo.acceleo.tools" version="2.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="com.bluexml.side.Util.dependencies"/>
+      <import plugin="com.bluexml.side.Util.componentMonitor"/>
+      <import plugin="fr.obeo.acceleo.ecore"/>
+      <import plugin="fr.obeo.acceleo.tools"/>
    </requires>
 
    <plugin

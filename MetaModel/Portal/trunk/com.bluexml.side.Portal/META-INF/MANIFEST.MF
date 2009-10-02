@@ -14,10 +14,10 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  com.bluexml.side.Class;visibility:=reexport,
  com.bluexml.side.Common;visibility:=reexport,
- com.bluexml.side.Util.metaModel.validate;bundle-version="1.0.11",
+ com.bluexml.side.Util.metaModel.validate,
  org.eclipse.ocl,
  org.eclipse.ocl.ecore,
- com.bluexml.side.View;bundle-version="1.0.0",
- com.bluexml.side.Form;bundle-version="1.0.12",
- com.bluexml.side.Workflow;bundle-version="1.0.13"
+ com.bluexml.side.View,
+ com.bluexml.side.Form,
+ com.bluexml.side.Workflow
 Eclipse-LazyStart: true

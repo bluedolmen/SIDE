@@ -6,10 +6,10 @@ Bundle-Version: 1.0.2.v9878-20090928
 Bundle-Activator: com.bluexml.side.clazz.service.alfresco.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
- com.bluexml.side.Class;bundle-version="1.0.26",
- com.bluexml.side.Util.libs;bundle-version="1.0.31",
- fr.obeo.acceleo.gen;bundle-version="2.5.0",
- com.bluexml.side.Class.modeler;bundle-version="1.0.26"
+ com.bluexml.side.Class,
+ com.bluexml.side.Util.libs,
+ fr.obeo.acceleo.gen,
+ com.bluexml.side.Class.modeler
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.clazz.service.alfresco

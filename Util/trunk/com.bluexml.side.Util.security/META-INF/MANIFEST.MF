@@ -6,7 +6,7 @@ Bundle-Activator: com.bluexml.side.util.security.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- com.bluexml.side.Util.libs;bundle-version="1.0.13",
+ com.bluexml.side.Util.libs,
  org.eclipse.ui.forms
 Bundle-ActivationPolicy: lazy
 Bundle-SymbolicName: com.bluexml.side.Util.security;singleton:=true
