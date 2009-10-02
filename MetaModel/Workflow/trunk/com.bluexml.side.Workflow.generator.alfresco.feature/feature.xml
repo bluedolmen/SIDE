@@ -17,6 +17,30 @@
       [Enter License Description here.]
    </license>
 
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="com.bluexml.side.Application"/>
+      <import plugin="com.bluexml.side.Util.generator"/>
+      <import plugin="com.bluexml.side.Util.generator.acceleo"/>
+      <import plugin="com.bluexml.side.Util.generator.alfresco"/>
+      <import plugin="javax.xml"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="com.bluexml.side.Util.ecore"/>
+      <import plugin="com.bluexml.side.Util.libs"/>
+      <import plugin="com.bluexml.side.Util.metaModel.validate"/>
+      <import plugin="com.bluexml.side.Util.model.merge"/>
+      <import plugin="com.bluexml.side.Application.edit"/>
+      <import plugin="com.bluexml.side.Application.editor"/>
+      <import plugin="com.bluexml.side.Application.ui"/>
+      <import plugin="com.bluexml.side.Util.security"/>
+      <import plugin="com.bluexml.side.Util.dependencies"/>
+      <import plugin="com.bluexml.side.Util.componentMonitor"/>
+      <import plugin="com.bluexml.side.Util.log"/>
+      <import plugin="com.bluexml.side.Class.service.alfresco"/>
+   </requires>
+
    <plugin
          id="com.bluexml.side.Workflow.generator.alfresco"
          download-size="0"
