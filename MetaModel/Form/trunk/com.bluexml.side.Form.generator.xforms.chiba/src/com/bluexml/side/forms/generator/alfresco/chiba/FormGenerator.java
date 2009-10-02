@@ -1,12 +1,14 @@
 package com.bluexml.side.forms.generator.alfresco.chiba;
 
 import java.io.File;
-import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.LogFactory;
@@ -17,6 +19,8 @@ import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.util.componentmonitor.ComponentMonitor;
 import com.bluexml.side.util.dependencies.DependencesManager;
 import com.bluexml.side.util.generator.AbstractGenerator;
+import com.bluexml.side.util.generator.packager.WarPatchPackager;
+import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.security.SecurityHelper;
 import com.bluexml.side.util.security.preferences.SidePreferences;
 import com.bluexml.xforms.generator.DataGenerator;
@@ -26,29 +30,30 @@ import com.bluexml.xforms.generator.mapping.MappingGenerator;
 public class FormGenerator extends AbstractGenerator {
 	private static final String GENERATOR_CODE = "CODE_GED_G_F_CHIBA";
 
+	private static final String defaultModelID = "xformsModel";
+	private static final String webappName = "xform";
+
 	private List<File> clazzModels;
 	private List<File> formModels;
-	private File workFolder;
-	private File resourcesFolder;
+	private File xformGenerationFolder;
+	private File mappingGeenrationFolder;
 	private File messagesFilePath;
 	private boolean successfulInit;
 	private List<DataGenerator> generators = new ArrayList<DataGenerator>();
 
 	@Override
-	public void initialize(Map<String, String> generationParameters_,
-			Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_,
-			DependencesManager dm, ComponentMonitor monitor) throws Exception {
-		super.initialize(generationParameters_, generatorOptions_, configurationParameters_, dm,
-				monitor);
+	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, DependencesManager dm, ComponentMonitor monitor) throws Exception {
+		super.initialize(generationParameters_, generatorOptions_, configurationParameters_, dm, monitor);
 
 		successfulInit = false;
-		try {
-			initWorkFolder();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		String baseDir = workFolder.getAbsolutePath();
-		String resDir = resourcesFolder.getAbsolutePath();
+		setTEMP_FOLDER("generator_" + getClass().getName() + File.separator + defaultModelID);
+		xformGenerationFolder = new File(getTemporarySystemFile(), "webapps" + File.separator + webappName);
+		mappingGeenrationFolder = new File(getTemporarySystemFile(), "webapps" + File.separator + webappName + File.separator + "resources");
+		FileUtils.forceMkdir(xformGenerationFolder);
+		FileUtils.forceMkdir(mappingGeenrationFolder);
+
+		String baseDir = xformGenerationFolder.getAbsolutePath();
+		String resDir = mappingGeenrationFolder.getAbsolutePath();
 
 		File generateMappingFile = new File(resDir + File.separator + "mapping.xml");
 		File generateRedirectFile = new File(resDir + File.separator + "redirect.xml");
@@ -60,7 +65,7 @@ public class FormGenerator extends AbstractGenerator {
 		generators.add(xformsGenerator);
 
 		xformsGenerator.setOutputFolder(baseDir);
-//		MsgPool.setMessagesFile(messagesFilePath.getAbsolutePath());
+		// MsgPool.setMessagesFile(messagesFilePath.getAbsolutePath());
 		mappingGenerator.setOutputMappingFile(generateMappingFile.getAbsolutePath());
 		mappingGenerator.setOutputCSSFile(generateCSSFile.getAbsolutePath());
 		mappingGenerator.setOutputRedirectFile(generateRedirectFile.getAbsolutePath());
@@ -78,16 +83,21 @@ public class FormGenerator extends AbstractGenerator {
 	}
 
 	public boolean shouldGenerate(HashMap<String, List<IFile>> modelsInfo, String id_metamodel) {
-		return modelsInfo.containsKey(ClazzPackage.eNS_URI)
-				|| modelsInfo.containsKey(FormPackage.eNS_URI);
+		return modelsInfo.containsKey(ClazzPackage.eNS_URI) || modelsInfo.containsKey(FormPackage.eNS_URI);
 	}
 
 	public Collection<IFile> complete() throws Exception {
-		// FIXME should return WAR IFile
-		return new ArrayList<IFile>();
+		// must build package
+		// build archive from tmp folder
+		WarPatchPackager wpp = new WarPatchPackager(IFileHelper.getIFolder(getTemporaryFolder()), buildModuleProperties(defaultModelID), techVersion, webappName);
+
+		IFile chibaPackage = wpp.buildPackage();
+		ArrayList<IFile> result = new ArrayList<IFile>();
+		result.add(chibaPackage);
+		return result;
 	}
 
-	public Collection<IFile> generate(Map<String, List<IFile>> modelsInfo, String id_mm) {
+	public Collection<IFile> generate(Map<String, List<IFile>> modelsInfo, String id_mm) throws Exception {
 
 		if (successfulInit == false) {
 			return null;
@@ -99,30 +109,13 @@ public class FormGenerator extends AbstractGenerator {
 		File[] formsFiles = formModels.toArray(new File[formModels.size()]);
 		boolean simplifyClasses = true;
 		boolean renderDataBeforeWorkflow = true;
-
-		com.bluexml.xforms.generator.FormGenerator formGenerator = new com.bluexml.xforms.generator.FormGenerator(
-				clazzFiles, formsFiles, LogFactory.getLog(FormGenerator.class), simplifyClasses,
-				renderDataBeforeWorkflow);
-		formGenerator.generate(generators);
-
-		return null;
-	}
-
-	/**
-	 * Sets up the generation environment. Create the folders necessary for the generation.
-	 * 
-	 * @throws IOException
-	 */
-	private void initWorkFolder() throws IOException {
-		String path = getTargetSystemPath();
-		if (path == null || path.length() == 0)
-			throw new RuntimeException("Target path must be set !");
-		path += File.separatorChar + getTechVersion();
-		workFolder = new File(path);
-		resourcesFolder = new File(path + File.separator + "resources");
-		FileUtils.forceMkdir(workFolder);
-		FileUtils.forceMkdir(resourcesFolder);
-//		messagesFilePath = new File(generationParameters.get("messagesFilePath"));
+		try {
+			com.bluexml.xforms.generator.FormGenerator formGenerator = new com.bluexml.xforms.generator.FormGenerator(clazzFiles, formsFiles, LogFactory.getLog(FormGenerator.class), simplifyClasses, renderDataBeforeWorkflow);
+			formGenerator.generate(generators);
+		} catch (RuntimeException e) {
+			monitor.addErrorTextAndLog("ERROR :" + e.getMessage(), e, "");
+		}
+		return new ArrayList<IFile>();
 	}
 
 	/**
@@ -142,6 +135,18 @@ public class FormGenerator extends AbstractGenerator {
 			}
 		}
 		return modelsFiles;
+	}
+
+	public Properties buildModuleProperties(String rootPackage) {
+		Date now = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss"); //$NON-NLS-1$
+		Properties props = new Properties();
+		props.put("module.id", "SIDE_xformsExtension_" + rootPackage); //$NON-NLS-1$ //$NON-NLS-2$
+		props.put("module.version", ""); //$NON-NLS-1$
+		props.put("module.title", ""); //$NON-NLS-1$
+		props.put("module.description", "xForm plugin generated at "+sdf.format(now)); //$NON-NLS-1$
+		
+		return props;
 	}
 
 }

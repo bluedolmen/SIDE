@@ -7,19 +7,16 @@ import com.bluexml.side.util.deployer.war.WarDeployer;
 public class ChibaDeployer extends WarDeployer {
 	
 	public ChibaDeployer() {
-		super("xforms");
+		super("xform");
 	}
-
 	
 	public boolean check() {
 		return true;
 	}
-
-
+	
 	@Override
 	protected void postProcess(File fileToDeploy) throws Exception {
 		// nothing to do
-		
 	}
 
 }
