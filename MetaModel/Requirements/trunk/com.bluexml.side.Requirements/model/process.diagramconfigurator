@@ -55,6 +55,11 @@
       <refEdgeToTarget xsi:type="ecore:EReference" href="requirements.ecore#//GoalStep/nextGoals"/>
     </sourceTargetCouple>
   </parts>
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_Gh6vIKNgEd602K9pf_MAYg" object="_E8gQgaNgEd602K9pf_MAYg" targetDecoration="TRIANGLE"  defaultForegroundColor="50,50,50">
+    <sourceTargetCouple xmi:id="_I_bTYKNgEd602K9pf_MAYg" sourceNode="_pS43wN8gEd2nIODNIkD2Og" targetNode="_pS43wN8gEd2nIODNIkD2Og">
+      <refSourceToTarget xsi:type="ecore:EReference" href="requirements.ecore#//Entity/parent"/>
+    </sourceTargetCouple>
+  </parts>
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_1N5NEN5jEd2gI7TdoTmi-g">
     <genClass href="requirements.genmodel#//requirements/Goal"/>
   </objects>
@@ -84,6 +89,7 @@
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_03KYYKIREd6kReZizprHxA">
     <genClass href="requirements.genmodel#//requirements/GoalStep"/>
   </objects>
+  <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_E8gQgaNgEd602K9pf_MAYg" name="is_parent"/>
   <genModel href="requirements.genmodel#/"/>
   <templateRootObject href="requirements.genmodel#//requirements/Process"/>
   <editorConfigurator href="requirements.editorconfigurator#_t4YC8d5hEd2gI7TdoTmi-g"/>
