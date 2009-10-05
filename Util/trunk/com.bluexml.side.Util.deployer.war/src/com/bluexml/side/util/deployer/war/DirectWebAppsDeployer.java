@@ -1,6 +1,7 @@
 package com.bluexml.side.util.deployer.war;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,8 @@ import com.bluexml.side.util.libs.zip.TrueZipHelper;
 public abstract class DirectWebAppsDeployer extends WarDeployer {
 	public DirectWebAppsDeployer(String webappName) {
 		super(webappName);
+		packageExt = "zip";
+		tzh = new TrueZipHelper(packageExt);
 	}
 	
 
@@ -92,17 +95,15 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 		getWorkingDir().mkdirs();
 	}
 
-	/**
-	 * Use to map package filePath to corresponding exploded webapp directory
-	 * Exemple of createMapper :<br/>
-	 * File packageFolder = getDeployedWebbAppFolder();<br/>
-	 * Map<String, File> mapper = new HashMap<String, File>();<br/>
-	 * addToMap(mapper, "/config/", packageFolder, "/WEB-INF/classes/");<br/>
-	 * return mapper;<br/>
-	 * 
-	 * @return
-	 */
-	public abstract Map<String, File> createMapper(File packageDirectory);
+	public Map<String, File> createMapper(File packageDirectory) {
+		File packageFolder = getDeployedWebbAppFolder();
+
+		Map<String, File> mapper = new HashMap<String, File>();
+		// all files just copied in same directory organization, so filter is on
+		// packageDirectory
+		addToMap(mapper, packageDirectory.getAbsolutePath(), packageFolder, "/");
+		return mapper;
+	}
 
 	protected void addToMap(Map<String, File> map, String key, File ampRoot, String target) {
 		map.put(key.replace("/", File.separator), createTargetFolders(ampRoot, target.replace("/", File.separator))); //$NON-NLS-1$ //$NON-NLS-2$
@@ -130,6 +131,8 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 		}
 	}
 
+	
+	
 	@Override
 	protected void postProcess(File fileToDeploy) throws Exception {
 		// TODO Auto-generated method stub
