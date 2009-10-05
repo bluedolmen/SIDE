@@ -17,6 +17,7 @@ import org.alfresco.service.cmr.dictionary.DataTypeDefinition;
 import org.alfresco.service.cmr.dictionary.PropertyDefinition;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
 import org.alfresco.service.namespace.QName;
+import org.alfresco.util.ISO8601DateFormat;
 
 import com.bluexml.side.Framework.alfresco.dataGenerator.data.AlfrescoModelData;
 import com.bluexml.side.Framework.alfresco.dataGenerator.data.IData;
@@ -64,10 +65,10 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 			return Double.valueOf(randomGenerator.nextDouble());
 		}
 		
-		static Date generateRandomDate(){
+		static String generateRandomDate(){
 			//TODO besoin contraintes...
-			long data = randomGenerator.nextLong();
-			return new Date(data);
+			Date date = new Date(randomGenerator.nextLong());
+			return ISO8601DateFormat.format(date);
 		}
 		
 		static String generateRandomString(String defaultValue){
