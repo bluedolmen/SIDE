@@ -3,13 +3,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URI;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
 import org.jdom.Attribute;
@@ -20,11 +17,6 @@ import org.jdom.output.XMLOutputter;
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.util.componentmonitor.ComponentMonitor;
 import com.bluexml.side.util.dependencies.DependencesManager;
-import com.bluexml.side.util.documentation.LogHelper;
-import com.bluexml.side.util.documentation.structure.LogEntry;
-import com.bluexml.side.util.documentation.structure.SIDELog;
-import com.bluexml.side.util.documentation.structure.enumeration.LogEntryType;
-import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.security.Checkable;
 
