@@ -31,9 +31,13 @@ rm -rf $BUILD_JAR
 
 mkdir $MAVEN_TARGET
 mkdir $BUILD_JAR
-
-#$DF_HOME=`df -k | grep -i /home | awk '{print $5}'|cut -d"%" -f1 |while read LINE; do
-DF_HOME=`df -k | grep -i /home | awk '{print $5}'|cut -d"%" -f1`
+IFS="/"
+set $TARGET_WORKSPACE
+IFS="
+"
+DFDIR=$2
+#$DF_HOME=`df -k | grep -i /$DFDIR | awk '{print $5}'|cut -d"%" -f1 |while read LINE; do
+DF_HOME=`df -k | grep -i /$DFDIR | awk '{print $5}'|cut -d"%" -f1`
 if [ $DF_HOME -gt $FULL ]; then
  echo "The Filesystem /home on `hostname` is full (more than $FULL)"
  exit -1
