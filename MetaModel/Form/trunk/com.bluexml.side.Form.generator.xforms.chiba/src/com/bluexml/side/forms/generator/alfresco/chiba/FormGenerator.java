@@ -12,7 +12,6 @@ import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.LogFactory;
-import org.codehaus.plexus.util.StringUtils;
 import org.eclipse.core.resources.IFile;
 
 import com.bluexml.side.clazz.ClazzPackage;
@@ -60,13 +59,13 @@ public class FormGenerator extends AbstractGenerator {
 		mappingGenerationFolder = new File(getTemporarySystemFile(), "webapps" + File.separator
 				+ webappName + File.separator + "WEB-INF" + File.separator + "classes");
 
-		boolean shouldClean = generatorOptions.get("clean");
-		if (shouldClean) {
-			FileUtils.forceDelete(mappingGenerationFolder);
-			FileUtils.forceDelete(xformGenerationFolder);
-			FileUtils.forceDelete(webappFolder);
-		}
-		
+		// boolean shouldClean = getGeneratorOptionValue("clean");
+		// if (shouldClean) {
+		// FileUtils.forceDelete(mappingGenerationFolder);
+		// FileUtils.forceDelete(xformGenerationFolder);
+		// FileUtils.forceDelete(webappFolder);
+		// }
+
 		FileUtils.forceMkdir(xformGenerationFolder);
 		FileUtils.forceMkdir(mappingGenerationFolder);
 
@@ -84,13 +83,14 @@ public class FormGenerator extends AbstractGenerator {
 
 		xformsGenerator.setOutputFolder(baseDir);
 		// deal with messages.properties file
-		String messagesFilePath = configurationParameters.get("messages.file");
+		String messagesFilePath = configurationParameters
+				.get("com.bluexml.side.Form.generator.xforms.chiba.messagesFilePath");
 		if (messagesFilePath == null) {
 			monitor.addWarningText("No messages file.");
 		} else {
-			try{
+			try {
 				messagesFile = new File(messagesFilePath);
-//				MsgPool.setMessagesFile(messagesFile.getAbsolutePath()); // FIXME: uncomment
+				// MsgPool.setMessagesFile(messagesFile.getAbsolutePath()); // FIXME: uncomment
 			} catch (Exception e) {
 				monitor.addErrorText("Problem opening the messages file.");
 			}

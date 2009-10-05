@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="lib/com.bluexml.xforms.utils-2.0.0-SNAPSHOT.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/xforms.controller-2.0.0-SNAPSHOT.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jdom.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/activation-1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/alfresco-core-3.2-community.jar"/>
@@ -39,8 +41,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/xmlrpc-server-3.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/xpp3_min-1.1.3.4.O.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/xstream-1.2.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/xforms.controller-2.0.0-SNAPSHOT.jar" sourcepath="/xforms.controller"/>
-	<classpathentry exported="true" kind="lib" path="lib/org.bluexml.xforms.utils-2.0.0-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/activation-1.0.2.jar"/>
 	<classpathentry kind="lib" path="lib/side-utils.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
