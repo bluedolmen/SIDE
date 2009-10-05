@@ -125,6 +125,7 @@
 		  class="com.bluexml.side.Framework.alfresco.dataGenerator.load.ImportACP" >
 		 <property name="fileFolderService" ref="fileFolderService" /> 
 		 <property name="serviceRegistry" ref="ServiceRegistry" />
+		 <property name="nodeService" ref="NodeService" />
 	</bean>
 			
     <!-- webscripts -->
@@ -138,6 +139,10 @@
     <bean id="webscript.extension.com.bluexml.side.data.generate.generate.post"
     	  class="com.bluexml.side.Framework.alfresco.dataGenerator.webscript.Generate"
     	  parent="webscript">
-    	  <property name="context" ref="springContext" />
+    	  <property name="alfrescoModelRandomGenerator" ref="alfrescoModelRandomGenerator" />
+    	  <property name="alfrescoModelDictionary" ref="alfrescoModelDictionary" />
+    	  <property name="XMLForACPSerialization" ref="xmlForACPSerialization" />
+    	  <property name="ACPPackaging" ref="acpPackaging" />
+    	  <property name="importACP" ref="importACP" />
     </bean>
 </beans>

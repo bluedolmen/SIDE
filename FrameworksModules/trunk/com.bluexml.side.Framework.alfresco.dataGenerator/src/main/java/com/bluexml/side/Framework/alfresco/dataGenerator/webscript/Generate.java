@@ -13,9 +13,7 @@ import org.alfresco.web.scripts.Cache;
 import org.alfresco.web.scripts.DeclarativeWebScript;
 import org.alfresco.web.scripts.Status;
 import org.alfresco.web.scripts.WebScriptRequest;
-import org.springframework.context.ApplicationContext;
 
-import com.bluexml.side.Framework.alfresco.dataGenerator.context.SpringContext;
 import com.bluexml.side.Framework.alfresco.dataGenerator.dictionary.AlfrescoModelDictionary;
 import com.bluexml.side.Framework.alfresco.dataGenerator.generator.AlfrescoModelRandomDataGenerator;
 import com.bluexml.side.Framework.alfresco.dataGenerator.load.ImportACP;
@@ -29,9 +27,6 @@ import com.bluexml.side.Framework.alfresco.dataGenerator.structure.IStructure;
  */
 public class Generate extends DeclarativeWebScript {
 	
-	private SpringContext context;
-	private String pathToAlfrescoRepository;
-	
 	//parameters names (cf fillparameters.get.html.ftl)
 	private static final String MODEL_PARAMETER_NAME = "model";
 	private static final String NUMBER_OF_CONTENTS_PARAMETER_NAME ="numOfInstances";
@@ -41,71 +36,52 @@ public class Generate extends DeclarativeWebScript {
 	private static final String XML_FILE_NAME = "test.xml";
 	public static final String ACP_FILE_NAME = "TestACP";
 
-	/**
-	 * @return the context
-	 */
-	public SpringContext getContext() {
-		return context;
-	}
-
-	/**
-	 * @param context the context to set
-	 */
-	public void setContext(SpringContext context) {
-		this.context = context;
-	}
-
+	
 	@Override
-	protected Map<String, Object> executeImpl(WebScriptRequest req,Status status, Cache cache) { 
-		//get context (i.e. access to beans)
-		ApplicationContext ctx = SpringContext.getContext();
-		
+	protected Map<String, Object> executeImpl(WebScriptRequest req,Status status, Cache cache) {		
 		//get and fill generator parameters
-		Object generator = ctx.getBean("alfrescoModelRandomGenerator");
-		String[] numOfContentsParameterValues = req.getParameterValues(NUMBER_OF_CONTENTS_PARAMETER_NAME);
-		String[] numOfOutPutArcsParameterValues = req.getParameterValues(NUMBER_OF_OUTPUT_ARCS_PARAMETER_NAME);
-		((AlfrescoModelRandomDataGenerator) generator).setNumberOfNodes(Integer.valueOf(numOfContentsParameterValues[0]));
-		((AlfrescoModelRandomDataGenerator) generator).setNumberOfOutputArcs(Integer.valueOf(numOfOutPutArcsParameterValues[0]));
-		Object dictionary = ctx.getBean("alfrescoModelDictionary");
-		String[] modelParameterValues = req.getParameterValues(MODEL_PARAMETER_NAME);
-		((AlfrescoModelDictionary) dictionary).setQnameStringModel(modelParameterValues[0]);
+		String numOfContentsParameterValue = req.getParameter(NUMBER_OF_CONTENTS_PARAMETER_NAME);
+		String numOfOutPutArcsParameterValue = req.getParameter(NUMBER_OF_OUTPUT_ARCS_PARAMETER_NAME);
+		generator.setNumberOfNodes(Integer.valueOf(numOfContentsParameterValue));
+		generator.setNumberOfOutputArcs(Integer.valueOf(numOfOutPutArcsParameterValue));
+		
+		String modelParameterValue = req.getParameter(MODEL_PARAMETER_NAME);
+		dictionary.setQnameStringModel(modelParameterValue);
 		
 		//get model structure
-		IStructure structure = ((AlfrescoModelDictionary) dictionary).getStructure(((AlfrescoModelDictionary) dictionary).getQnameStringModel());
+		IStructure structure = dictionary.getStructure(dictionary.getQnameStringModel());
 		
 		//genarate datas 
-		((AlfrescoModelRandomDataGenerator) generator).generateNodesInstances(structure);
-		((AlfrescoModelRandomDataGenerator) generator).generateArcsInstances(structure);
+		generator.generateNodesInstances(structure);
+		generator.generateArcsInstances(structure);
 		
 		//serialize xml for acp
-		Object serializer = ctx.getBean("xmlForACPSerialization");
-		((XMLForACPSerialization) serializer).setFileName(XML_FILE_NAME);
+		serializer.setFileName(XML_FILE_NAME);
 		try {
-			((XMLForACPSerialization) serializer).serializeXml();
+			serializer.serializeXml();
 		} catch (IOException e) {
 			//log
 			e.printStackTrace();
 		}
 		
 		//package to alfresco repository
-		Object packager = ctx.getBean("acpPackaging");
-		((ACPPackaging) packager).setArchiveName(ACP_FILE_NAME);
+		packager.setArchiveName(ACP_FILE_NAME);
 		File acp = null;
 		try {
-			acp = ((ACPPackaging) packager).packageACP();
+			acp = packager.packageACP();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		//manage import repository
-		ImportACP importer = (ImportACP) ctx.getBean("importACP");
-		pathToAlfrescoRepository = req.getParameter(PATH_TO_ALFRESCO_REPOSITORY);
+		String pathToAlfrescoRepository = req.getParameter(PATH_TO_ALFRESCO_REPOSITORY);
 		NodeRef repository = importer.manageAlfrescoRepository(pathToAlfrescoRepository);
 		
 		//import (and deploy) acp to Alfresco repository
 		if (acp != null){
 			importer.importACP(acp,repository);
+			// Brice : First save (in case of problem during import in order to analyze the situation), next import
 			try {
 				importer.saveACP(acp,repository);
 			} catch (IOException e) {
@@ -117,6 +93,35 @@ public class Generate extends DeclarativeWebScript {
 		return new HashMap<String, Object>();
 	}
 	
+	/*
+	 * Spring DI material
+	 */
 	
+	AlfrescoModelRandomDataGenerator generator = null;
+	AlfrescoModelDictionary dictionary = null;
+	XMLForACPSerialization serializer = null;
+	ACPPackaging packager = null;
+	ImportACP importer = null;
+	
+	public void setAlfrescoModelRandomGenerator (AlfrescoModelRandomDataGenerator generator_) {
+		generator = generator_;
+	}
+	
+	public void setAlfrescoModelDictionary (AlfrescoModelDictionary dictionary_) {
+		dictionary = dictionary_;
+	}
+	
+	public void setXMLForACPSerialization (XMLForACPSerialization serializer_) {
+		serializer = serializer_;
+	}
+	
+	public void setACPPackaging (ACPPackaging packager_) {
+		packager = packager_;
+	}
+	
+	public void setImportACP (ImportACP importer_) {
+		importer = importer_;
+	}
+
 
 }
