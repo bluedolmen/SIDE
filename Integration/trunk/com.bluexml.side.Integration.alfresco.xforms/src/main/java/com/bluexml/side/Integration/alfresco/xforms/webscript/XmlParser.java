@@ -9,8 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.bluexml.xforms.utils.DOMUtil;
 import org.w3c.dom.Element;
+
+import com.bluexml.xforms.utils.DOMUtil;
 
 /**
  * Builds a map of standard properties for an object. Taken from BxDS dataLayer module.

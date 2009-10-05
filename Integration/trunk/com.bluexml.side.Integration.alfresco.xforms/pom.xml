@@ -148,7 +148,7 @@
       <version>1.2.2</version>
     </dependency>
     <dependency>
-      <groupId>org.bluexml</groupId>
+      <groupId>com.bluexml</groupId>
       <artifactId>xforms.utils</artifactId>
       <version>[1.0.0,)</version>
     </dependency>

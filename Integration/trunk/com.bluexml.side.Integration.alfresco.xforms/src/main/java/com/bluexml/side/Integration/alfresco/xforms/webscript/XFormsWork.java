@@ -60,12 +60,12 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.queryParser.QueryParser;
-import org.bluexml.xforms.utils.DOMUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 
 import com.bluexml.side.Integration.alfresco.xforms.webscript.XFormsWebscript.XFormsQueryType;
+import com.bluexml.xforms.utils.DOMUtil;
 import com.thoughtworks.xstream.XStream;
 
 public class XFormsWork implements RunAsWork<String> {
