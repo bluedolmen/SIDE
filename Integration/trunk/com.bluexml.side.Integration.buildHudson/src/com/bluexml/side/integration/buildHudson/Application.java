@@ -41,6 +41,10 @@ public class Application {
 		String argument2 = "";
 		String argument3 = "";
 		String argument4 = "";
+		
+		System.out.println("****************************************");
+		System.out.println("**** Lancement du Build Automatique ****");
+		System.out.println("****************************************");
 
 		try {
 			argument1 = args[0];
@@ -65,19 +69,23 @@ public class Application {
 //			if ("-labs".equals(argument1)) {
 //				EnterpriseRelease = false;
 //			}
-
+			
 			workspace = argument1;
 			build_number = argument2;
 			build_id = argument3;
 			svn_revision = argument4;
+			System.out.println("**** Parametre ****");
+			System.out.println("- workspace = "+ workspace);
+			System.out.println("- build_number = "+ build_number);
+			System.out.println("- build_id = "+ build_id);
+			System.out.println("- svn_revision = "+ svn_revision);
 
 		} else {
 
 			workspace = Utils.getBuildDirectory();
+			System.out.println("**** Aucun Parametre ****");
+			System.out.println("- workspace = "+ workspace);
 		}
-		System.out.println("****************************************");
-		System.out.println("**** Lancement du Build Automatique ****");
-		System.out.println("****************************************");
 		
 		
 //		if (Application.EnterpriseRelease){
