@@ -16,7 +16,8 @@ Require-Bundle: com.bluexml.side.Form.generator.xforms.maven;bundle-version="1.0
  com.bluexml.side.Util.componentMonitor,
  com.bluexml.side.Workflow,
  com.bluexml.side.Util.ecore,
- org.eclipse.emf.ecore.xmi
+ org.eclipse.emf.ecore.xmi,
+ com.bluexml.side.Util.log;bundle-version="1.0.22"
 Bundle-ClassPath: lib/activation-1.0.2.jar,
  lib/org.bluexml.xforms.utils-2.0.0-SNAPSHOT.jar,
  lib/xforms.controller-2.0.0-SNAPSHOT.jar,
