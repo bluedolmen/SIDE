@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: XformsDirectCopy
+Bundle-SymbolicName: com.bluexml.side.Deployer.xformsDirectCopy;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.bluexml.side.deployer.xformsdirectcopy.Activator
+Bundle-Vendor: BLUEXML
+Require-Bundle: org.eclipse.core.runtime,
+ com.bluexml.side.Util.deployer.war,
+ com.bluexml.side.Util.deployer,
+ com.bluexml.side.Util.security,
+ com.bluexml.side.Application
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
