@@ -15,6 +15,8 @@ import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -28,6 +30,7 @@ import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationPackage;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.Model;
+import com.bluexml.side.application.ui.Activator;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 import com.bluexml.side.application.ui.action.utils.Generate;
 import com.bluexml.side.util.security.preferences.SWTResourceManager;
@@ -38,6 +41,7 @@ public class GeneratePopUp extends Dialog {
 	private List<String> staticParameters;
 	private List<Model> models;
 	private static boolean inAction = false;
+
 	/**
 	 * Create the dialog
 	 * 
@@ -47,9 +51,8 @@ public class GeneratePopUp extends Dialog {
 	 * @param configuration
 	 */
 	public GeneratePopUp(Shell parentShell, Configuration p_configuration) {
-		super(parentShell);
-		setShellStyle(SWT.DIALOG_TRIM | SWT.MODELESS
-                | getDefaultOrientation());
+		super((Shell)null);
+		setShellStyle(SWT.DIALOG_TRIM | SWT.MODELESS | getDefaultOrientation());
 		setBlockOnOpen(false);
 		configuration = p_configuration;
 		staticParameters = ApplicationDialog.staticFieldsName;
@@ -70,6 +73,7 @@ public class GeneratePopUp extends Dialog {
 		configuration = application.getConfiguration(name);
 		staticParameters = ApplicationDialog.staticFieldsName;
 		models = ApplicationUtil.getModels((Application) configuration.eContainer());
+
 	}
 
 	/**
@@ -86,8 +90,8 @@ public class GeneratePopUp extends Dialog {
 		final Label generationsOptionsLabel = new Label(container, SWT.NONE);
 		generationsOptionsLabel.setAlignment(SWT.CENTER);
 		generationsOptionsLabel.setBounds(10, 24, 514, 24);
-		generationsOptionsLabel.setFont(SWTResourceManager.getFont("", 12, SWT.BOLD));
-		generationsOptionsLabel.setText("Generation");
+		generationsOptionsLabel.setFont(SWTResourceManager.getFont("", 12, SWT.BOLD)); //$NON-NLS-1$
+		generationsOptionsLabel.setText(Activator.Messages.getString("Messages.GeneratePopUp_1"));
 
 		// main proressBar
 		final ProgressBar progressBar = new ProgressBar(container, SWT.SMOOTH);
@@ -98,7 +102,7 @@ public class GeneratePopUp extends Dialog {
 		label.setForeground(SWTResourceManager.getColor(92, 92, 92));
 		label.setAlignment(SWT.CENTER);
 		label.setBounds(10, 70, 464, 15);
-		label.setText("");
+		label.setText(""); //$NON-NLS-1$
 
 		// component progressBar
 		final ProgressBar progressBar2 = new ProgressBar(container, SWT.SMOOTH);
@@ -115,7 +119,7 @@ public class GeneratePopUp extends Dialog {
 		logLink.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
 		logLink.setBounds(137, 350, 223, 24);
 		logLink.setVisible(false);
-		logLink.setText("<form><p>Log File can be found <a href=\"log\">here</a>.</p></form>", true, true);
+		logLink.setText("<form><p>"+Activator.Messages.getString("GeneratePopUp_4")+"<a href=\"log\">"+Activator.Messages.getString("GeneratePopUp_6")+"</a>.</p></form>", true, true); //$NON-NLS-1$ //$NON-NLS-3$ //$NON-NLS-5$
 
 		try {
 			Generate gen = new Generate();
@@ -124,7 +128,15 @@ public class GeneratePopUp extends Dialog {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		getShell().addFocusListener(new FocusListener() {
+			public void focusLost(FocusEvent e) {
+				System.out.println("Focus Lost !"); //$NON-NLS-1$
+			}
 
+			public void focusGained(FocusEvent e) {
+				System.out.println("Focus Gained !"); //$NON-NLS-1$
+			}
+		});
 		return container;
 	}
 
@@ -132,7 +144,9 @@ public class GeneratePopUp extends Dialog {
 	public int open() {
 		if (!inAction) {
 			inAction = true;
-			return super.open();
+			int result = super.open();
+
+			return result;
 		} else {
 			return 0;
 		}
@@ -161,6 +175,11 @@ public class GeneratePopUp extends Dialog {
 	@Override
 	protected Point getInitialSize() {
 		return new Point(550, 460);
+	}
+	
+	protected void configureShell(Shell newShell) {
+		super.configureShell(newShell);
+		newShell.setText(Activator.Messages.getString("GeneratePopUp_10"));
 	}
 
 }

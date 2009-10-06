@@ -113,6 +113,8 @@ import com.bluexml.side.application.ui.action.utils.viewFilter.SideFileFiter;
 @SuppressWarnings("restriction")
 public class ApplicationDialog extends Dialog {
 
+	
+
 	private Group optionsGroup;
 	private static final int APPLY_ID = IDialogConstants.CLIENT_ID + 2;
 	private static final int GEN_ID = IDialogConstants.CLIENT_ID + 1;
@@ -1395,6 +1397,7 @@ public class ApplicationDialog extends Dialog {
 			}
 			GeneratePopUp generationPopUp = new GeneratePopUp(Display.getDefault().getActiveShell(), getCurrentConfiguration());
 			generationPopUp.open();
+			close();
 			return;
 		}
 
@@ -1664,7 +1667,7 @@ public class ApplicationDialog extends Dialog {
 			}
 		}
 	}
-
+	
 	protected boolean isDeployTabSelected() {
 		return tabFolder.getSelection()[0].equals(deployementTabItem);
 	}
@@ -1676,4 +1679,5 @@ public class ApplicationDialog extends Dialog {
 	protected boolean isModelTabSelected() {
 		return tabFolder.getSelection()[0].equals(modelsTabItem);
 	}
+	
 }
