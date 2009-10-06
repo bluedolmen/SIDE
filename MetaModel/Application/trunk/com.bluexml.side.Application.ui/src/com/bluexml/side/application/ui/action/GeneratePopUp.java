@@ -117,7 +117,7 @@ public class GeneratePopUp extends Dialog {
 
 		FormText logLink = new FormText(container, SWT.WRAP);
 		logLink.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
-		logLink.setBounds(137, 350, 223, 24);
+		logLink.setBounds(137, 350, 225, 55);
 		logLink.setVisible(false);
 		logLink.setText("<form><p>"+Activator.Messages.getString("GeneratePopUp_4")+"<a href=\"log\">"+Activator.Messages.getString("GeneratePopUp_6")+"</a>.</p></form>", true, true); //$NON-NLS-1$ //$NON-NLS-3$ //$NON-NLS-5$
 
@@ -174,7 +174,7 @@ public class GeneratePopUp extends Dialog {
 	 */
 	@Override
 	protected Point getInitialSize() {
-		return new Point(550, 460);
+		return new Point(560, 470);
 	}
 	
 	protected void configureShell(Shell newShell) {
