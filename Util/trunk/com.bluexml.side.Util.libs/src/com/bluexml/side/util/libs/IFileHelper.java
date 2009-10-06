@@ -139,19 +139,29 @@ public class IFileHelper {
 	 * @throws CoreException
 	 */
 	public static IFolder createFolder(String ressource) throws CoreException {
-		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-		IFolder folder = myWorkspaceRoot.getFolder(new Path(ressource));
-		if (!folder.exists()) {
-			if (folder.getFullPath().segmentCount() > 1) {
-				String parentPath = folder.getFullPath().removeLastSegments(1).toOSString();
-				IFolder parent = IFileHelper.getIFolder(parentPath);
-				if (!parent.exists()) {
-					IFileHelper.createFolder(parentPath);
+		Path p = new Path(ressource);
+		if (p.segmentCount() > 1) {
+			IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+			IFolder folder = myWorkspaceRoot.getFolder(p);
+			if (!folder.exists()) {
+				if (folder.getFullPath().segmentCount() > 1) {
+					String parentPath = folder.getFullPath().removeLastSegments(1).toOSString();
+					
+					Path parentPathP = new Path(parentPath);
+					IContainer container;
+					if (parentPathP.segmentCount() > 1) {
+						container = IFileHelper.getIFolder(parentPath);
+						if (!container.exists()) {
+							IFileHelper.createFolder(parentPath);
+						}
+					}
 				}
+				folder.create(true, true, null);
 			}
-			folder.create(true, true, null);
-		}
-		return folder;
+			return folder;
+		} else
+			//It's a project
+			return null;
 	}
 
 	/**
