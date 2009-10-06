@@ -452,6 +452,7 @@ public class ApplicationUtil {
 			// generatorVersion
 			generatorConfiguration.setGeneratorName(extFrag.getAttribute("version"));
 			generatorConfiguration.setImpl_class(extFrag.getAttribute("class"));
+			generatorConfiguration.setContributorId(extFrag.getContributor().getName());
 
 			Map<String, IConfigurationElement> dependencies_ext = new HashMap<String, IConfigurationElement>();
 
