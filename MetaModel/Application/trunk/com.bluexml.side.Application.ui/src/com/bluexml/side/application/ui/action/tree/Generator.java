@@ -20,6 +20,7 @@ public class Generator extends ImplNode {
 		id = elt.getAttribute("id");
 		version = elt.getAttribute("version");
 		launchClass = elt.getAttribute("class");
+		contributorId = elt.getContributor().getName();
 		description = elt.getAttribute("description");
 		options = new HashSet<TreeNode>();
 	}
@@ -38,6 +39,7 @@ public class Generator extends ImplNode {
 					elt.setId(getId());
 					elt.setId_techno_version(parent.getId());
 					elt.setImpl_class(getLaunchClass());
+					elt.setContributorId(getContributorId());
 					elt.setId_metamodel(parent.getParent().getParent().getId());
 					elt.setMetaModelName(((Metamodel) parent.getParent().getParent()).getLabel());
 					elt.setTechnologyName(((Technology) parent.getParent()).getLabel());

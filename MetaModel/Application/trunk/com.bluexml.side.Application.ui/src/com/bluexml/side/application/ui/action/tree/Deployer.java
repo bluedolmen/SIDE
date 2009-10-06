@@ -21,6 +21,7 @@ public class Deployer extends ImplNode {
 		description = elt.getAttribute("description");
 		version = elt.getAttribute("version");
 		launchClass = elt.getAttribute("class");
+		contributorId = elt.getContributor().getName();
 		options = new HashSet<TreeNode>();
 	}
 
@@ -38,6 +39,7 @@ public class Deployer extends ImplNode {
 					elt.setId(getId());
 					elt.setId_techno_version(parent.getId());
 					elt.setImpl_class(getLaunchClass());
+					elt.setContributorId(getContributorId());
 					elt.setTechnologyName(((Technology) parent.getParent()).getLabel());
 					elt.setTechnologyVersionName(((TechnologyVersion) parent).getVersion());
 					elt.setDeployerName(this.getVersion());

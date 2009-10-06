@@ -13,9 +13,9 @@ import org.eclipse.core.runtime.IConfigurationElement;
 public abstract class ImplNode extends TreeNode {
 	protected String version;
 	protected String launchClass;
+	protected String contributorId;
+
 	protected Set<TreeNode> options = new HashSet<TreeNode>();
-
-
 
 	public ImplNode(IConfigurationElement elt, TechnologyVersion tv,TreeView root) {
 		super(root);
@@ -40,6 +40,15 @@ public abstract class ImplNode extends TreeNode {
 	public void setChecked(boolean checked) {
 		super.setChecked(checked);
 		updateApplication();
+	}
+
+	public String getContributorId() {
+		return contributorId;
+	}
+	
+	
+	public void setContributorId(String contributorId) {
+		this.contributorId = contributorId;
 	}
 
 	@Override

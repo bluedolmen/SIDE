@@ -352,7 +352,7 @@ public class Generate extends Thread {
 	private AbstractGenerator getGeneratorInstance(GeneratorConfiguration elem) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		String launchGeneratorClass = elem.getImpl_class();
 		String idGenerator = elem.getId();
-		Bundle plugin = Platform.getBundle(idGenerator);
+		Bundle plugin = Platform.getBundle(elem.getContributorId());
 		Class<?> gen;
 		Object genObj = null;
 		if (plugin != null) {
@@ -529,7 +529,7 @@ public class Generate extends Thread {
 				deployerOptions.add(option.getKey());
 			}
 
-			Bundle plugin = Platform.getBundle(id_deployer);
+			Bundle plugin = Platform.getBundle(depConf.getContributorId());
 			Class<?> gen;
 			Object genObj = null;
 			try {

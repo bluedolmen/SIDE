@@ -375,8 +375,8 @@ public class ApplicationUtil {
 		try {
 			ImplNode iN = ((ImplNode) el);
 			Class<Checkable> gen;
-			if (Platform.getBundle(iN.getId()) != null) {
-				gen = Platform.getBundle(iN.getId()).loadClass(iN.getLaunchClass());
+			if (Platform.getBundle(iN.getContributorId()) != null) {
+				gen = Platform.getBundle(iN.getContributorId()).loadClass(iN.getLaunchClass());
 				Checkable gener = gen.newInstance();
 				return gener.check();
 			} else {
