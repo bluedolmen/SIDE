@@ -20,13 +20,15 @@ import com.bluexml.side.Framework.alfresco.dataGenerator.load.ImportACP;
 import com.bluexml.side.Framework.alfresco.dataGenerator.serialization.ACPPackaging;
 import com.bluexml.side.Framework.alfresco.dataGenerator.serialization.XMLForACPSerialization;
 import com.bluexml.side.Framework.alfresco.dataGenerator.structure.IStructure;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * @author davidchevrier
  *
  */
 public class Generate extends DeclarativeWebScript {
-	
+	private static Log logger = LogFactory.getLog(Generate.class);
 	//parameters names (cf fillparameters.get.html.ftl)
 	private static final String MODEL_PARAMETER_NAME = "model";
 	private static final String NUMBER_OF_CONTENTS_PARAMETER_NAME ="numOfInstances";
@@ -52,16 +54,23 @@ public class Generate extends DeclarativeWebScript {
 		IStructure structure = dictionary.getStructure(dictionary.getQnameStringModel());
 		
 		//genarate datas 
-		generator.generateNodesInstances(structure);
-		generator.generateArcsInstances(structure);
+		try {
+			generator.generateNodesInstances(structure);
+		} catch (Exception e1) {
+			logger.error("Error :", e1);
+		}
+		try {
+			generator.generateArcsInstances(structure);
+		} catch (Exception e1) {
+			logger.error("Error :", e1);
+		}
 		
 		//serialize xml for acp
 		serializer.setFileName(XML_FILE_NAME);
 		try {
 			serializer.serializeXml();
 		} catch (IOException e) {
-			//log
-			e.printStackTrace();
+			logger.error("Error :", e);
 		}
 		
 		//package to alfresco repository
@@ -70,24 +79,30 @@ public class Generate extends DeclarativeWebScript {
 		try {
 			acp = packager.packageACP();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Error :", e);
 		}
 		
 		//manage import repository
 		String pathToAlfrescoRepository = req.getParameter(PATH_TO_ALFRESCO_REPOSITORY);
-		NodeRef repository = importer.manageAlfrescoRepository(pathToAlfrescoRepository);
+		pathToAlfrescoRepository="/app:company_home/"+pathToAlfrescoRepository;
+		NodeRef repository=null;
+		try {
+			repository = importer.manageAlfrescoRepository(pathToAlfrescoRepository);
+		} catch (Exception e1) {
+			logger.error("Error :", e1);
+		}
 		
 		//import (and deploy) acp to Alfresco repository
 		if (acp != null){
-			importer.importACP(acp,repository);
-			// Brice : First save (in case of problem during import in order to analyze the situation), next import
 			try {
 				importer.saveACP(acp,repository);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error("Error :", e);
 			}
+			// Brice : First save (in case of problem during import in order to analyze the situation), next import
+			importer.importACP(acp,repository);
+
+			
 		}
 		
 		return new HashMap<String, Object>();

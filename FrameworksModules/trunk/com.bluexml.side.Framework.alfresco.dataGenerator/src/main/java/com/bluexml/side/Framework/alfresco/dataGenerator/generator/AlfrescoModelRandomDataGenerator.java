@@ -3,6 +3,9 @@
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.generator;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -65,9 +68,21 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 			return Double.valueOf(randomGenerator.nextDouble());
 		}
 		
-		static String generateRandomDate(){
+		static String generateRandomDate() throws Exception{
 			//TODO besoin contraintes...
-			Date date = new Date(randomGenerator.nextLong());
+			
+//			Date date = new Date(randomGenerator.nextLong());
+//			return ISO8601DateFormat.format(date);
+			//TODO besoin contraintes...
+			
+			DateFormat df = new SimpleDateFormat("yyyy/mm/dd");
+			Date minDate = df.parse("1970/01/01");			
+			Date maxDate = df.parse("3000/01/01");
+
+			float f = randomGenerator.nextFloat();
+			long l = (long)(f * (maxDate.getTime() - minDate.getTime()) ) + minDate.getTime();
+			Date date = new Date(l);			
+			
 			return ISO8601DateFormat.format(date);
 		}
 		
@@ -89,8 +104,8 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 		}
 		
 
-		static Object generateDataByDataTypeProperty(QName dataType, String defaultValue){
-			//TODO ˆ introduire: gestion des contraintes
+		static Object generateDataByDataTypeProperty(QName dataType, String defaultValue) throws Exception{
+			//TODO ï¿½ introduire: gestion des contraintes
 			Object randomData = null;
 			if (dataType.equals(DataTypeDefinition.BOOLEAN)){
 				randomData = generateRandomBoolean();
@@ -208,7 +223,7 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 		this.alfrescoModelDatas = alfrescoModelDatas;
 	}
 	
-	public boolean generateNodesInstances(IStructure structure){
+	public boolean generateNodesInstances(IStructure structure) throws Exception{
 		List<INode> nodesInstances = new ArrayList<INode>();
 		Collection<TypeDefinition> types = ((AlfrescoModelStructure) structure).getTypes();
 		for (int numOfNodes = 0; numOfNodes < numberOfNodes; numOfNodes++){
@@ -219,7 +234,7 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 		return true;
 	}
 
-	public void generateArcsInstances(IStructure structure){
+	public void generateArcsInstances(IStructure structure) throws Exception{
 		if (generateNodesInstances(structure)){
 			List<IArc> arcsInstances = new ArrayList<IArc>();
 			Collection<AssociationDefinition> associations = ((AlfrescoModelStructure) structure).getAssociations();
@@ -346,7 +361,7 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 	}
 
 
-	public Map<PropertyDefinition,Object> generateDatasProperties(Collection<PropertyDefinition> properties){
+	public Map<PropertyDefinition,Object> generateDatasProperties(Collection<PropertyDefinition> properties) throws Exception{
 		Map<PropertyDefinition,Object> datasProperties = new HashMap<PropertyDefinition,Object>();
 		for (PropertyDefinition propertyDefinition : properties) {
 			datasProperties.put(propertyDefinition, generateDatasProperty(propertyDefinition));
@@ -354,7 +369,7 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 		return datasProperties;
 	}
 
-	private Object generateDatasProperty(PropertyDefinition propertyDefinition) {
+	private Object generateDatasProperty(PropertyDefinition propertyDefinition) throws Exception {
 		Object randomData = new Object();
 		String defaultValue = propertyDefinition.getDefaultValue();
 		QName dataTypeOfProperty = propertyDefinition.getDataType().getName();

@@ -13,6 +13,8 @@ import java.io.OutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import org.apache.commons.io.FileUtils;
+
 /**
  * @author davidchevrier
  *
@@ -85,8 +87,10 @@ public class ACPPackaging implements ISerialization {
 		archiveOutput.closeEntry();
 		xmlFileBuffer.close();
 		archiveOutput.close();
-		
-		return new File(archiveName + ".acp");
+		File acp =new File(archiveName + ".acp"); 
+		System.out.println("ACP File :"+acp.getAbsolutePath());
+		FileUtils.copyFileToDirectory(acp, new File("/Users/davidabad/Desktop/acpTest"));
+		return acp;
 	}
 
 }

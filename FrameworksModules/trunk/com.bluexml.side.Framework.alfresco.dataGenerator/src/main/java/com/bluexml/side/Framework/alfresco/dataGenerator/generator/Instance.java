@@ -93,7 +93,7 @@ public class Instance implements IInstance {
 	}
 
 
-	public INode instanciation(TypeDefinition type){
+	public INode instanciation(TypeDefinition type) throws Exception{
 		INode nodeInstance = new AlfrescoNode();
 		Collection<PropertyDefinition> properties = ((AlfrescoModelStructure) structure).getProperties().get(type);
 		((AlfrescoNode) nodeInstance).setDatasProperties(((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).generateDatasProperties(properties));

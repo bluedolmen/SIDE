@@ -5,8 +5,6 @@ package com.bluexml.side.Framework.alfresco.dataGenerator.load;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.alfresco.model.ContentModel;
@@ -18,15 +16,17 @@ import org.alfresco.service.cmr.repository.ContentWriter;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
 import org.alfresco.service.cmr.repository.StoreRef;
+import org.alfresco.service.cmr.search.ResultSet;
+import org.alfresco.service.cmr.search.SearchService;
 import org.alfresco.service.cmr.view.ImporterService;
 import org.alfresco.service.cmr.view.Location;
 
 /**
  * @author davidchevrier
- *
+ * 
  */
 public class ImportACP {
-	
+
 	private FileFolderService fileFolderService;
 	private ServiceRegistry serviceRegistry;
 	private NodeService nodeService;
@@ -39,19 +39,21 @@ public class ImportACP {
 	}
 
 	/**
-	 * @param fileFolderService the fileFolderService to set
+	 * @param fileFolderService
+	 *            the fileFolderService to set
 	 */
 	public void setFileFolderService(FileFolderService fileFolderService) {
 		this.fileFolderService = fileFolderService;
 	}
 
 	/**
-	 * @param nodeService the nodeService to set
+	 * @param nodeService
+	 *            the nodeService to set
 	 */
 	public void setNodeService(NodeService nodeService) {
 		this.nodeService = nodeService;
 	}
-	
+
 	/**
 	 * @return the serviceRegistry
 	 */
@@ -60,38 +62,49 @@ public class ImportACP {
 	}
 
 	/**
-	 * @param serviceRegistry the serviceRegistry to set
+	 * @param serviceRegistry
+	 *            the serviceRegistry to set
 	 */
 	public void setServiceRegistry(ServiceRegistry serviceRegistry) {
 		this.serviceRegistry = serviceRegistry;
 	}
 
-	public NodeRef manageAlfrescoRepository(String pathToAlfrescoRepository){
-		NodeRef rootNode = nodeService.getRootNode(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE);
+	public NodeRef manageAlfrescoRepository(String pathToAlfrescoRepository) throws Exception {
+		NodeRef container = createOrGiveMeFolder(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE, pathToAlfrescoRepository);
 		
-		List<String> foldersOnPathRepository = Arrays.asList(pathToAlfrescoRepository.split("/"));
-		
-		FileInfo lastFolder = fileFolderService.makeFolders(rootNode, foldersOnPathRepository, ContentModel.TYPE_FOLDER);
-		List<FileInfo> contentFiles = fileFolderService.listFiles(lastFolder.getNodeRef());
-		if (contentFiles.size() > 0){
-			for (FileInfo file : contentFiles){
+		List<FileInfo> contentFiles = fileFolderService.listFiles(container);
+		if (contentFiles.size() > 0) {
+			for (FileInfo file : contentFiles) {
 				fileFolderService.delete(file.getNodeRef());
 			}
-		}
-		//TODO copy of ACP (but where?)
-		return lastFolder.getNodeRef();
-	}
-	
-	public void importACP(File acp,NodeRef repository){
-		ImporterService importerService = serviceRegistry.getImporterService();
-		ACPImportPackageHandler importerHandler = new ACPImportPackageHandler(acp,ACPImportPackageHandler.DEFAULT_ENCODING);
-		importerService.importView(importerHandler, new Location(repository), null, null);
-	}
-	
-	public void saveACP(File acp, NodeRef folder) throws IOException{
-        FileInfo fileNode = fileFolderService.create(folder,acp.getName(),ContentModel.TYPE_CONTENT);
-        ContentWriter writer = fileFolderService.getWriter(fileNode.getNodeRef());
-        writer.putContent(acp);
+		}		
+		return container;
 	}
 
+	public void importACP(File acp, NodeRef repository) {
+		ImporterService importerService = serviceRegistry.getImporterService();
+
+		ACPImportPackageHandler importerHandler = new ACPImportPackageHandler(acp, ACPImportPackageHandler.DEFAULT_ENCODING);
+		importerService.importView(importerHandler, new Location(repository), null, null);
+	}
+
+	public void saveACP(File acp, NodeRef parent) throws IOException {		
+		NodeRef acpFile = fileFolderService.create(parent, acp.getName(), ContentModel.TYPE_CONTENT).getNodeRef();
+		ContentWriter writer = fileFolderService.getWriter(acpFile);
+		writer.putContent(acp);
+	}
+
+	public NodeRef createOrGiveMeFolder(StoreRef store, String xpath) {
+		ResultSet rs = serviceRegistry.getSearchService().query(store, SearchService.LANGUAGE_XPATH, xpath);
+		NodeRef nr = null;
+		if (rs.length() == 1) {
+			nr = rs.getNodeRefs().get(0);
+		} else {
+			// must create the folder
+			NodeRef parent = createOrGiveMeFolder(store, xpath.replaceFirst("/[^/]*$", ""));
+			FileInfo acpHome = serviceRegistry.getFileFolderService().create(parent, "acp", ContentModel.TYPE_FOLDER);
+			nr = acpHome.getNodeRef();
+		}
+		return nr;
+	}
 }
