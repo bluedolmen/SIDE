@@ -32,10 +32,10 @@
 	                    </div>
 	            </div>
 	            <div id="property">
-                        <div id="label">Alfresco path repository to store ACP and its deployement: </div>
+                        <div id="label">Alfresco path repository to store ACP and its deployement (use XPath representation): </div>
                         <div id="field">
-                                Company Home/       
-                                <input name="alfrescoRepository" type="text" value="Guest Home/"/>
+                                /app:company_home/       
+                                <input name="alfrescoRepository" type="text" value="app:guest_home/"/>
                         </div>                        
 	            </div>
 	            <div id="button">
