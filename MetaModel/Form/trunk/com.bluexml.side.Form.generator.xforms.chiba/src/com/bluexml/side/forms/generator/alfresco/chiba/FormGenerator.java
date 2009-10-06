@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.core.resources.IFile;
 
@@ -23,6 +24,7 @@ import com.bluexml.side.util.generator.packager.WarPatchPackager;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.security.SecurityHelper;
 import com.bluexml.side.util.security.preferences.SidePreferences;
+import com.bluexml.xforms.controller.messages.MsgPool;
 import com.bluexml.xforms.generator.DataGenerator;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.mapping.MappingGenerator;
@@ -31,7 +33,7 @@ public class FormGenerator extends AbstractGenerator {
 	private static final String GENERATOR_CODE = "CODE_GED_G_F_CHIBA";
 
 	private static final String defaultModelID = "xformsModel";
-	private static final String webappName = "xform";
+	private static final String webappName = "xforms";
 
 	private List<File> clazzModels;
 	private List<File> formModels;
@@ -40,6 +42,7 @@ public class FormGenerator extends AbstractGenerator {
 	private File messagesFile;
 	private boolean successfulInit;
 	private ComponentMonitor monitor;
+	private String webappContext;
 	private List<DataGenerator> generators = new ArrayList<DataGenerator>();
 
 	@Override
@@ -53,11 +56,11 @@ public class FormGenerator extends AbstractGenerator {
 
 		successfulInit = false;
 		setTEMP_FOLDER("generator_" + getClass().getName() + File.separator + defaultModelID);
-		File webappFolder = new File(getTemporarySystemFile(), "webapps");
-		xformGenerationFolder = new File(getTemporarySystemFile(), "webapps" + File.separator
+		File webappFolder = new File(getTemporarySystemFile(), "webapps" + File.separator
 				+ webappName);
-		mappingGenerationFolder = new File(getTemporarySystemFile(), "webapps" + File.separator
-				+ webappName + File.separator + "WEB-INF" + File.separator + "classes");
+		xformGenerationFolder = new File(webappFolder.getAbsolutePath() + File.separator + "forms");
+		mappingGenerationFolder = new File(webappFolder.getAbsolutePath() + File.separator
+				+ "WEB-INF" + File.separator + "classes");
 
 		// boolean shouldClean = getGeneratorOptionValue("clean");
 		// if (shouldClean) {
@@ -82,23 +85,40 @@ public class FormGenerator extends AbstractGenerator {
 		generators.add(xformsGenerator);
 
 		xformsGenerator.setOutputFolder(baseDir);
+		mappingGenerator.setOutputMappingFile(generateMappingFile.getAbsolutePath());
+		mappingGenerator.setOutputCSSFile(generateCSSFile.getAbsolutePath());
+		mappingGenerator.setOutputRedirectFile(generateRedirectFile.getAbsolutePath());
+
 		// deal with messages.properties file
-		String messagesFilePath = configurationParameters
+		String messagesFilePath = generationParameters
 				.get("com.bluexml.side.Form.generator.xforms.chiba.messagesFilePath");
 		if (messagesFilePath == null) {
 			monitor.addWarningText("No messages file.");
 		} else {
 			try {
 				messagesFile = new File(messagesFilePath);
-				// MsgPool.setMessagesFile(messagesFile.getAbsolutePath()); // FIXME: uncomment
+				MsgPool.setMessagesFile(messagesFile.getAbsolutePath());
 			} catch (Exception e) {
 				monitor.addErrorText("Problem opening the messages file.");
 			}
 		}
-		mappingGenerator.setOutputMappingFile(generateMappingFile.getAbsolutePath());
-		mappingGenerator.setOutputCSSFile(generateCSSFile.getAbsolutePath());
-		mappingGenerator.setOutputRedirectFile(generateRedirectFile.getAbsolutePath());
-
+		// deal with the webapp address (protocol, host, port, context)
+		webappContext = generationParameters
+				.get("com.bluexml.side.Form.generator.xforms.chiba.webappContext");
+		if (StringUtils.trimToNull(webappContext) != null) {
+			int pos = webappContext.lastIndexOf('/');
+			int len = webappContext.length();
+			// if trailing "/", remove it
+			if (pos == (len - 1)) {
+				webappContext = webappContext.substring(0, len - 1);
+			}
+			len = webappContext.length();
+			pos = webappContext.lastIndexOf('/');
+			String context = webappContext.substring(pos + 1, len);
+			if (context.equals("forms")) {
+				monitor.addErrorText("The context of your webapp SHOULD NOT be 'forms'!");
+			}
+		}
 		successfulInit = true;
 	}
 
