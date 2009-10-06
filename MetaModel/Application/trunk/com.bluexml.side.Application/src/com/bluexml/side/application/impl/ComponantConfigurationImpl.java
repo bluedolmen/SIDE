@@ -43,6 +43,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.bluexml.side.application.impl.ComponantConfigurationImpl#getTechnologyVersionName <em>Technology Version Name</em>}</li>
  *   <li>{@link com.bluexml.side.application.impl.ComponantConfigurationImpl#getTechnologyName <em>Technology Name</em>}</li>
  *   <li>{@link com.bluexml.side.application.impl.ComponantConfigurationImpl#getModuleContraints <em>Module Contraints</em>}</li>
+ *   <li>{@link com.bluexml.side.application.impl.ComponantConfigurationImpl#getContributorId <em>Contributor Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -188,6 +189,26 @@ public abstract class ComponantConfigurationImpl extends EObjectImpl implements 
 	 * @ordered
 	 */
 	protected EList<ModuleConstraint> moduleContraints;
+
+	/**
+	 * The default value of the '{@link #getContributorId() <em>Contributor Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContributorId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CONTRIBUTOR_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getContributorId() <em>Contributor Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContributorId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String contributorId = CONTRIBUTOR_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -363,6 +384,27 @@ public abstract class ComponantConfigurationImpl extends EObjectImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getContributorId() {
+		return contributorId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setContributorId(String newContributorId) {
+		String oldContributorId = contributorId;
+		contributorId = newContributorId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ApplicationPackage.COMPONANT_CONFIGURATION__CONTRIBUTOR_ID, oldContributorId, contributorId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -398,6 +440,8 @@ public abstract class ComponantConfigurationImpl extends EObjectImpl implements 
 				return getTechnologyName();
 			case ApplicationPackage.COMPONANT_CONFIGURATION__MODULE_CONTRAINTS:
 				return getModuleContraints();
+			case ApplicationPackage.COMPONANT_CONFIGURATION__CONTRIBUTOR_ID:
+				return getContributorId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -437,6 +481,9 @@ public abstract class ComponantConfigurationImpl extends EObjectImpl implements 
 				getModuleContraints().clear();
 				getModuleContraints().addAll((Collection<? extends ModuleConstraint>)newValue);
 				return;
+			case ApplicationPackage.COMPONANT_CONFIGURATION__CONTRIBUTOR_ID:
+				setContributorId((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -473,6 +520,9 @@ public abstract class ComponantConfigurationImpl extends EObjectImpl implements 
 			case ApplicationPackage.COMPONANT_CONFIGURATION__MODULE_CONTRAINTS:
 				getModuleContraints().clear();
 				return;
+			case ApplicationPackage.COMPONANT_CONFIGURATION__CONTRIBUTOR_ID:
+				setContributorId(CONTRIBUTOR_ID_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -501,6 +551,8 @@ public abstract class ComponantConfigurationImpl extends EObjectImpl implements 
 				return TECHNOLOGY_NAME_EDEFAULT == null ? technologyName != null : !TECHNOLOGY_NAME_EDEFAULT.equals(technologyName);
 			case ApplicationPackage.COMPONANT_CONFIGURATION__MODULE_CONTRAINTS:
 				return moduleContraints != null && !moduleContraints.isEmpty();
+			case ApplicationPackage.COMPONANT_CONFIGURATION__CONTRIBUTOR_ID:
+				return CONTRIBUTOR_ID_EDEFAULT == null ? contributorId != null : !CONTRIBUTOR_ID_EDEFAULT.equals(contributorId);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -527,6 +579,8 @@ public abstract class ComponantConfigurationImpl extends EObjectImpl implements 
 		result.append(technologyVersionName);
 		result.append(", technologyName: ");
 		result.append(technologyName);
+		result.append(", contributorId: ");
+		result.append(contributorId);
 		result.append(')');
 		return result.toString();
 	}

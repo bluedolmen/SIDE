@@ -54,6 +54,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ComponantConfiguration/technologyName"/>
       <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
           ecoreFeature="ecore:EReference application.ecore#//ComponantConfiguration/moduleContraints"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ComponantConfiguration/contributorId"/>
     </genClasses>
     <genClasses ecoreClass="application.ecore#//ModuleConstraint">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ModuleConstraint/moduleId"/>

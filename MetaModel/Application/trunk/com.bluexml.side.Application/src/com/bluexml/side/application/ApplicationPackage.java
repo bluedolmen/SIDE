@@ -339,13 +339,22 @@ public interface ApplicationPackage extends EPackage {
 	int COMPONANT_CONFIGURATION__MODULE_CONTRAINTS = 7;
 
 	/**
+	 * The feature id for the '<em><b>Contributor Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONANT_CONFIGURATION__CONTRIBUTOR_ID = 8;
+
+	/**
 	 * The number of structural features of the '<em>Componant Configuration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONANT_CONFIGURATION_FEATURE_COUNT = 8;
+	int COMPONANT_CONFIGURATION_FEATURE_COUNT = 9;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.application.impl.GeneratorConfigurationImpl <em>Generator Configuration</em>}' class.
@@ -428,6 +437,15 @@ public interface ApplicationPackage extends EPackage {
 	 * @ordered
 	 */
 	int GENERATOR_CONFIGURATION__MODULE_CONTRAINTS = COMPONANT_CONFIGURATION__MODULE_CONTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Contributor Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_CONFIGURATION__CONTRIBUTOR_ID = COMPONANT_CONFIGURATION__CONTRIBUTOR_ID;
 
 	/**
 	 * The feature id for the '<em><b>Id metamodel</b></em>' attribute.
@@ -604,6 +622,15 @@ public interface ApplicationPackage extends EPackage {
 	 * @ordered
 	 */
 	int DEPLOYER_CONFIGURATION__MODULE_CONTRAINTS = COMPONANT_CONFIGURATION__MODULE_CONTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Contributor Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYER_CONFIGURATION__CONTRIBUTOR_ID = COMPONANT_CONFIGURATION__CONTRIBUTOR_ID;
 
 	/**
 	 * The feature id for the '<em><b>Deployer Name</b></em>' attribute.
@@ -1020,6 +1047,17 @@ public interface ApplicationPackage extends EPackage {
 	EReference getComponantConfiguration_ModuleContraints();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.ComponantConfiguration#getContributorId <em>Contributor Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Contributor Id</em>'.
+	 * @see com.bluexml.side.application.ComponantConfiguration#getContributorId()
+	 * @see #getComponantConfiguration()
+	 * @generated
+	 */
+	EAttribute getComponantConfiguration_ContributorId();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.application.ModuleConstraint <em>Module Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1373,6 +1411,14 @@ public interface ApplicationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPONANT_CONFIGURATION__MODULE_CONTRAINTS = eINSTANCE.getComponantConfiguration_ModuleContraints();
+
+		/**
+		 * The meta object literal for the '<em><b>Contributor Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPONANT_CONFIGURATION__CONTRIBUTOR_ID = eINSTANCE.getComponantConfiguration_ContributorId();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.application.impl.ModuleConstraintImpl <em>Module Constraint</em>}' class.

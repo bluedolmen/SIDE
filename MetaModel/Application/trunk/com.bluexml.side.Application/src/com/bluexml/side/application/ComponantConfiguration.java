@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.bluexml.side.application.ComponantConfiguration#getTechnologyVersionName <em>Technology Version Name</em>}</li>
  *   <li>{@link com.bluexml.side.application.ComponantConfiguration#getTechnologyName <em>Technology Name</em>}</li>
  *   <li>{@link com.bluexml.side.application.ComponantConfiguration#getModuleContraints <em>Module Contraints</em>}</li>
+ *   <li>{@link com.bluexml.side.application.ComponantConfiguration#getContributorId <em>Contributor Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -224,5 +225,30 @@ public interface ComponantConfiguration extends EObject {
 	 * @generated
 	 */
 	EList<ModuleConstraint> getModuleContraints();
+
+	/**
+	 * Returns the value of the '<em><b>Contributor Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * doc impl_class
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Contributor Id</em>' attribute.
+	 * @see #setContributorId(String)
+	 * @see com.bluexml.side.application.ApplicationPackage#getComponantConfiguration_ContributorId()
+	 * @model
+	 * @generated
+	 */
+	String getContributorId();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.application.ComponantConfiguration#getContributorId <em>Contributor Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Contributor Id</em>' attribute.
+	 * @see #getContributorId()
+	 * @generated
+	 */
+	void setContributorId(String value);
 
 } // ComponantConfiguration
