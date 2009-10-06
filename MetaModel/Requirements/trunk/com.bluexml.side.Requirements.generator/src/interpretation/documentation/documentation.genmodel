@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.bluexml.side.Requirements.generator/src"
+    modelPluginID="com.bluexml.side.Requirements.generator" modelName="Documentation"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>documentation.ecore</foreignModel>
+  <genPackages prefix="Documentation" basePackage="com.bluexml.side.requirements.generator.metamodel"
+      disposableProviderFactory="true" ecorePackage="documentation.ecore#/">
+    <genClasses ecoreClass="documentation.ecore#//Book">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute documentation.ecore#//Book/title"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference documentation.ecore#//Book/content"/>
+    </genClasses>
+    <genClasses ecoreClass="documentation.ecore#//Paragraph">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference documentation.ecore#//Paragraph/values"/>
+    </genClasses>
+    <genClasses ecoreClass="documentation.ecore#//Section">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference documentation.ecore#//Section/section"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute documentation.ecore#//Section/title"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference documentation.ecore#//Section/para"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="documentation.ecore#//ParagraphValue"/>
+    <genClasses ecoreClass="documentation.ecore#//TextualValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute documentation.ecore#//TextualValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="documentation.ecore#//ItemizedListValue">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference documentation.ecore#//ItemizedListValue/items"/>
+    </genClasses>
+    <genClasses ecoreClass="documentation.ecore#//ItemizedListValueItem"/>
+    <genClasses ecoreClass="documentation.ecore#//EmphasisValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute documentation.ecore#//EmphasisValue/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute documentation.ecore#//EmphasisValue/role"/>
+    </genClasses>
+    <genClasses ecoreClass="documentation.ecore#//XRefValue">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference documentation.ecore#//XRefValue/linkend"/>
+    </genClasses>
+    <genClasses ecoreClass="documentation.ecore#//InformalTableValue">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference documentation.ecore#//InformalTableValue/tgroup"/>
+    </genClasses>
+    <genClasses ecoreClass="documentation.ecore#//InformalTableValueGroup">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute documentation.ecore#//InformalTableValueGroup/cols"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference documentation.ecore#//InformalTableValueGroup/thead"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference documentation.ecore#//InformalTableValueGroup/tbody"/>
+    </genClasses>
+    <genClasses ecoreClass="documentation.ecore#//InformalTableValueHead">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference documentation.ecore#//InformalTableValueHead/rows"/>
+    </genClasses>
+    <genClasses ecoreClass="documentation.ecore#//InformalTableValueBody">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference documentation.ecore#//InformalTableValueBody/rows"/>
+    </genClasses>
+    <genClasses ecoreClass="documentation.ecore#//InformalTableValueRow">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference documentation.ecore#//InformalTableValueRow/entry"/>
+    </genClasses>
+    <genClasses ecoreClass="documentation.ecore#//InformalTableValueEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute documentation.ecore#//InformalTableValueEntry/value"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

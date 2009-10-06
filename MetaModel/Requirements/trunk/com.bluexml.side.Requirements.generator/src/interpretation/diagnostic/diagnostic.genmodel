@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.bluexml.side.Requirements.generator/src"
+    modelPluginID="com.bluexml.side.Requirements.generator" modelName="Diagnostic"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>diagnostic.ecore</foreignModel>
+  <genPackages prefix="Diagnostic" basePackage="com.bluexml.side.requirements.generator.metamodel"
+      disposableProviderFactory="true" ecorePackage="diagnostic.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="diagnostic.ecore#//Severity">
+      <genEnumLiterals ecoreEnumLiteral="diagnostic.ecore#//Severity/error"/>
+      <genEnumLiterals ecoreEnumLiteral="diagnostic.ecore#//Severity/warning"/>
+      <genEnumLiterals ecoreEnumLiteral="diagnostic.ecore#//Severity/critic"/>
+    </genEnums>
+    <genClasses ecoreClass="diagnostic.ecore#//Problem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute diagnostic.ecore#//Problem/severity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute diagnostic.ecore#//Problem/elementType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute diagnostic.ecore#//Problem/elementName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute diagnostic.ecore#//Problem/description"/>
+    </genClasses>
+    <genClasses ecoreClass="diagnostic.ecore#//Diagnostic">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference diagnostic.ecore#//Diagnostic/problem"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

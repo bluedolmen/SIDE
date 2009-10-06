@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.bluexml.side.Requirements.generator/src"
+    modelPluginID="com.bluexml.side.Requirements.generator" modelName="Mindmap" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>mindmap.ecore</foreignModel>
+  <genPackages prefix="mindmap" basePackage="com.bluexml.side.requirements.generator.metamodel"
+      disposableProviderFactory="true" ecorePackage="mindmap.ecore#/">
+    <genClasses ecoreClass="mindmap.ecore#//Maps">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mindmap.ecore#//Maps/maps"/>
+    </genClasses>
+    <genClasses ecoreClass="mindmap.ecore#//Map">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mindmap.ecore#//Map/node"/>
+    </genClasses>
+    <genClasses ecoreClass="mindmap.ecore#//Node">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mindmap.ecore#//Node/font"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mindmap.ecore#//Node/backgroundColor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mindmap.ecore#//Node/color"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mindmap.ecore#//Node/folded"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mindmap.ecore#//Node/text"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mindmap.ecore#//Node/sub"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mindmap.ecore#//Node/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mindmap.ecore#//Node/arrowlink"/>
+    </genClasses>
+    <genClasses ecoreClass="mindmap.ecore#//ArrowLink">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mindmap.ecore#//ArrowLink/color"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mindmap.ecore#//ArrowLink/endarrow"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mindmap.ecore#//ArrowLink/endinclination"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mindmap.ecore#//ArrowLink/startarrow"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mindmap.ecore#//ArrowLink/startinclination"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mindmap.ecore#//ArrowLink/destination"/>
+    </genClasses>
+    <genClasses ecoreClass="mindmap.ecore#//Font">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mindmap.ecore#//Font/bold"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mindmap.ecore#//Font/italic"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mindmap.ecore#//Font/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mindmap.ecore#//Font/size"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

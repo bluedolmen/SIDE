@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.bluexml.side.Requirements.generator/src"
+    modelPluginID="com.bluexml.side.Requirements.generator" modelName="Webproject"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>webproject.ecore</foreignModel>
+  <genPackages prefix="WebProject" basePackage="com.bluexml.side.requirements.generator.metamodel"
+      disposableProviderFactory="true" ecorePackage="webproject.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="webproject.ecore#//dataType">
+      <genEnumLiterals ecoreEnumLiteral="webproject.ecore#//dataType/string"/>
+      <genEnumLiterals ecoreEnumLiteral="webproject.ecore#//dataType/real"/>
+      <genEnumLiterals ecoreEnumLiteral="webproject.ecore#//dataType/dateTime"/>
+      <genEnumLiterals ecoreEnumLiteral="webproject.ecore#//dataType/integer"/>
+    </genEnums>
+    <genClasses ecoreClass="webproject.ecore#//Project">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//Project/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference webproject.ecore#//Project/pages"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference webproject.ecore#//Project/schema"/>
+    </genClasses>
+    <genClasses ecoreClass="webproject.ecore#//Link">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//Link/label"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference webproject.ecore#//Link/page"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="webproject.ecore#//Page">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//Page/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//Page/title"/>
+    </genClasses>
+    <genClasses ecoreClass="webproject.ecore#//LoginPage">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference webproject.ecore#//LoginPage/links"/>
+    </genClasses>
+    <genClasses ecoreClass="webproject.ecore#//GoalPage">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference webproject.ecore#//GoalPage/items"/>
+    </genClasses>
+    <genClasses ecoreClass="webproject.ecore#//GoalItem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//GoalItem/label"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference webproject.ecore#//GoalItem/page"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference webproject.ecore#//GoalItem/sub"/>
+    </genClasses>
+    <genClasses ecoreClass="webproject.ecore#//DataPage">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference webproject.ecore#//DataPage/components"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference webproject.ecore#//DataPage/mainComponent"/>
+    </genClasses>
+    <genClasses ecoreClass="webproject.ecore#//FramePage">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference webproject.ecore#//FramePage/col1"/>
+    </genClasses>
+    <genClasses ecoreClass="webproject.ecore#//Component">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//Component/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//Component/canCreate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//Component/canRead"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//Component/canUpdate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//Component/canDelete"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference webproject.ecore#//Component/table"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference webproject.ecore#//Component/properties"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="webproject.ecore#//ComponentProperty">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//ComponentProperty/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//ComponentProperty/canRead"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//ComponentProperty/canUpdate"/>
+    </genClasses>
+    <genClasses ecoreClass="webproject.ecore#//ComponentAttribute">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference webproject.ecore#//ComponentAttribute/field"/>
+    </genClasses>
+    <genClasses ecoreClass="webproject.ecore#//ComponentRelationShip">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference webproject.ecore#//ComponentRelationShip/idLeft"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference webproject.ecore#//ComponentRelationShip/idRight"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//ComponentRelationShip/mandatoryLeft"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//ComponentRelationShip/mandatoryRight"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//ComponentRelationShip/manyLeft"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//ComponentRelationShip/manyRight"/>
+    </genClasses>
+    <genClasses ecoreClass="webproject.ecore#//Schema">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference webproject.ecore#//Schema/tables"/>
+    </genClasses>
+    <genClasses ecoreClass="webproject.ecore#//Table">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//Table/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference webproject.ecore#//Table/fields"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference webproject.ecore#//Table/primaryKey"/>
+    </genClasses>
+    <genClasses ecoreClass="webproject.ecore#//Field">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//Field/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//Field/dataType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute webproject.ecore#//Field/autoincrement"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
