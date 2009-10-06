@@ -61,4 +61,11 @@
          version="1.0.24.v9878-20090928"
          unpack="false"/>
 
+   <plugin
+         id="com.bluexml.side.Requirements.generator"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
