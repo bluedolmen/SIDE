@@ -62,13 +62,6 @@ public class FormGenerator extends AbstractGenerator {
 		mappingGenerationFolder = new File(webappFolder.getAbsolutePath() + File.separator
 				+ "WEB-INF" + File.separator + "classes");
 
-		// boolean shouldClean = getGeneratorOptionValue("clean");
-		// if (shouldClean) {
-		// FileUtils.forceDelete(mappingGenerationFolder);
-		// FileUtils.forceDelete(xformGenerationFolder);
-		// FileUtils.forceDelete(webappFolder);
-		// }
-
 		FileUtils.forceMkdir(xformGenerationFolder);
 		FileUtils.forceMkdir(mappingGenerationFolder);
 
