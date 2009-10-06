@@ -1,6 +1,5 @@
 package com.bluexml.side.util.generator.acceleo;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +11,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.common.Package;
+import com.bluexml.side.requirements.RequirementsDefinition;
 import com.bluexml.side.util.libs.IFileHelper;
 
 public class MergeUtil {
@@ -23,6 +23,15 @@ public class MergeUtil {
 			EObject root = modelResource.getContents().get(0);
 			if (root instanceof Package) {
 				String pname = ((Package) root).getName()+"_"+root.eClass().getName();
+				if (gb.containsKey(pname)) {
+					gb.get(pname).add(model);
+				} else {
+					ArrayList<IFile> l = new ArrayList<IFile>();
+					l.add(model);
+					gb.put(pname, l);
+				}
+			} else if (root instanceof RequirementsDefinition) {
+				String pname = ((RequirementsDefinition) root).getName()+"_"+root.eClass().getName();
 				if (gb.containsKey(pname)) {
 					gb.get(pname).add(model);
 				} else {

@@ -181,6 +181,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		Model modelPath = ChainFactory.eINSTANCE.createModel();
 		EFactory.eAdd(repository, "files", modelPath);
 		EFactory.eSet(modelPath, "path", model.getFullPath().toString());
+		model.refreshLocal(-1, null);
 
 		// Target folder
 		Folder folder = ChainFactory.eINSTANCE.createFolder();
