@@ -63,9 +63,9 @@ chmod +x -R *.sh
 chmod +x -R */*.sh
 chmod +x -R *.jar
 chmod +x -R */*.jar
-dos2unix *.sh
-dos2unix *.xml
-dos2unix *.properties
+#dos2unix *.sh
+#dos2unix *.xml
+#dos2unix *.properties
 
 if [ `hostname` = "stager.bluexml.com" ]; then
   perl -p -i -e 's/finalDirectory=\/data\/www\/virtuals\/b\/l\/u\/bluexml\.com\/merry\/html\/devel\/SIDE-Alfresco/finalDirectory=\/home\/stager\/share\/SIDE\/SIDE-Alfresco/g' build.properties
