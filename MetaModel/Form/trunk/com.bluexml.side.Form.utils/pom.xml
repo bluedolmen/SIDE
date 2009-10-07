@@ -6,8 +6,8 @@
 		<artifactId>superpom</artifactId>
 		<version>1.8</version>
 	</parent>
-	<groupId>com.bluexml</groupId>
-	<artifactId>xforms.utils</artifactId>
+	<groupId>com.bluexml.side.Form</groupId>
+	<artifactId>utils</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0.1</version>
 	<name>BlueXML XForms Utils</name>

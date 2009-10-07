@@ -65,7 +65,7 @@ import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 
 import com.bluexml.side.Integration.alfresco.xforms.webscript.XFormsWebscript.XFormsQueryType;
-import com.bluexml.xforms.utils.DOMUtil;
+import com.bluexml.side.form.utils.DOMUtil;
 import com.thoughtworks.xstream.XStream;
 
 public class XFormsWork implements RunAsWork<String> {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="lib" path="lib/com.bluexml.xforms.utils-2.0.0-SNAPSHOT.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/com.bluexml.side.Form.utils-1.0.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/xforms.controller-2.0.0-SNAPSHOT.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jdom.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/activation-1.1.jar"/>
