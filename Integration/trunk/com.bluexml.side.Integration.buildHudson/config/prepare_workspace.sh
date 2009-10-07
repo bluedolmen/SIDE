@@ -38,10 +38,10 @@ IFS="
 DFDIR=$2
 #$DF_HOME=`df -k | grep -i /$DFDIR | awk '{print $5}'|cut -d"%" -f1 |while read LINE; do
 DF_HOME=`df -k | grep -i /$DFDIR | awk '{print $5}'|cut -d"%" -f1`
-if [ $DF_HOME -gt $FULL ]; then
- echo "The Filesystem /home on `hostname` is full (more than $FULL)"
- exit -1
-fi
+#if [ $DF_HOME -gt $FULL ]; then
+# echo "The Filesystem /home on `hostname` is full (more than $FULL)"
+# exit -1
+#fi
 # prepare workspace: copy build.properties, script, jar into working space
 cp -R $SOURCE_WORKSPACE/* $TARGET_WORKSPACE
 cp -R $MAVEN_SOURCE/* $MAVEN_TARGET
