@@ -12,8 +12,8 @@ import com.bluexml.side.util.libs.IFileHelper;
 public abstract class AbstractAlfrescoGenerator extends AbstractAcceleoPackageGenerator {
 
 	public static final String CONFIGURATION_PARAMETER_CATALINA_HOME = "CATALINA_HOME";
-	public static final String CONFIGURATION_PARAMETER_ALFRESCO_HOME = "alfresco.url";
-	public static final String CONFIGURATION_PARAMETER_ALFRESCOSHARE_HOME = "alfresco.share.url";
+	public static final String CONFIGURATION_PARAMETER_ALFRESCO_URL = "alfresco.url";
+	public static final String CONFIGURATION_PARAMETER_ALFRESCOSHARE_URL = "alfresco.share.url";
 	
 	protected Properties moduleProperties;
 
