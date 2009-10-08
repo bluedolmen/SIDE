@@ -190,26 +190,25 @@ public class Application {
 	private static void execBuild(String build, String target) {
 		// Update code
 
-/*		
+/*	pb de outOfmemory sur certaines machines quand utilisation de projet ant 
+ *   -> autre piste de solution ci-dessous en lancant en shell:	
+		try {
 		String cmd="ant";
 		Process proc=Runtime.getRuntime().exec(tableau);
 
         Process proc=Runtime.getRuntime().exec("ant build");
         InputStream in = proc.getInputStream();
-    BufferedWriter out=new BufferedWriter(new FileWriter("titi.dat"));
-        
-    int c;
+        BufferedWriter out=new BufferedWriter(new FileWriter("titi.dat"));        
+        int c;
         while ((c = in.read()) != -1) {
             out.write((char)c);
-        }
-        
-    in.close();
-    out.flush();
-    out.close();
-    
-} catch (Exception e) {
-        e.printStackTrace();
-}
+        }        
+        in.close();
+        out.flush();
+        out.close();    
+       } catch (Exception e) {
+          e.printStackTrace();
+       }
 */
 		
 		
@@ -219,7 +218,6 @@ public class Application {
 
 		// add a listener to see ant's log
 		org.apache.tools.ant.DefaultLogger log = new org.apache.tools.ant.DefaultLogger();
-/*
 		try {
 			log.setOutputPrintStream(new PrintStream(new File(Utils
 					.getBuildPath()
@@ -227,10 +225,9 @@ public class Application {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-*/
 		log.setErrorPrintStream(System.err);
-		log.setOutputPrintStream(System.out);
-		log.setMessageOutputLevel(Project.MSG_DEBUG);
+//		log.setOutputPrintStream(System.out);
+		log.setMessageOutputLevel(Project.MSG_ERR);
 		ant.addBuildListener(log);
 		
 		// building ant script
@@ -276,8 +273,7 @@ public class Application {
 		out += "\t<property file=\"build.properties\" />\n";
 
 		if (parametre) {
-//			out += "\n\t<target name=\"build\" depends=\"pde-build, post-build, genJavadoc\" />\n";
-			out += "\n\t<target name=\"build\" depends=\"pde-build, post-build\" />\n";
+			out += "\n\t<target name=\"build\" depends=\"pde-build, post-build, genJavadoc\" />\n";
 		} else {
 			out += "\n\t<target name=\"build\" depends=\"init, pde-build, post-build, genJavadoc\" />\n";
 		}
