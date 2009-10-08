@@ -54,7 +54,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_SQL_EXTENSION)) {
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/sqlTemplates/database_dictionary.mt"); //$NON-NLS-1$
-				monitor.getLog().addServiceLog(Activator.Messages.getString("ClassAlfrescoGenerator_0"), Activator.Messages.getString("ClassAlfrescoGenerator_1"), getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME)+"/service/index/package/extension/com/bluexml/side/sql"); //$NON-NLS-3$
+				monitor.getLog().addServiceLog(Activator.Messages.getString("ClassAlfrescoGenerator_0"), Activator.Messages.getString("ClassAlfrescoGenerator_1"), getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_URL)+"/service/index/package/extension/com/bluexml/side/sql"); //$NON-NLS-3$
 			}
 			
 			// DefaultdocListView add custom version of docList webScript
@@ -111,13 +111,13 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/xml/alfrescoGenerator_template_xml.mt"); //$NON-NLS-1$
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/xml/alfrescoGenerator_template_result_post.mt"); //$NON-NLS-1$
 				result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/xml/alfrescoGenerator_template_result_get.mt"); //$NON-NLS-1$
-				monitor.getLog().addServiceLog(Activator.Messages.getString("ClassAlfrescoGenerator_2"), Activator.Messages.getString("ClassAlfrescoGenerator_3"), getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME)+WEBSCRIPT_SIDE_FAMILY);
+				monitor.getLog().addServiceLog(Activator.Messages.getString("ClassAlfrescoGenerator_2"), Activator.Messages.getString("ClassAlfrescoGenerator_3"), getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_URL)+WEBSCRIPT_SIDE_FAMILY);
 			}
 
 			
 			// standard alfresco services :
-			monitor.getLog().addServiceLog("Alfresco", Activator.Messages.getString("ClassAlfrescoGenerator_4"), getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_HOME)); //$NON-NLS-1$
-			monitor.getLog().addServiceLog(Activator.Messages.getString("ClassAlfrescoGenerator_5"), Activator.Messages.getString("ClassAlfrescoGenerator_6"), getGenerationParameter(CONFIGURATION_PARAMETER_CATALINA_HOME)+"/manager/list"); //$NON-NLS-3$
+			monitor.getLog().addServiceLog("Alfresco", Activator.Messages.getString("ClassAlfrescoGenerator_4"), getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_URL)); //$NON-NLS-1$
+			monitor.getLog().addServiceLog(Activator.Messages.getString("ClassAlfrescoGenerator_5"), Activator.Messages.getString("ClassAlfrescoGenerator_6"), getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_URL)+"/manager/list"); //$NON-NLS-3$
 			classTemplates = result;
 		}
 		return classTemplates;
