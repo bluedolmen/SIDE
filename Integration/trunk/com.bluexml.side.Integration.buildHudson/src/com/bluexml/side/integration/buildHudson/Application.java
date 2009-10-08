@@ -247,7 +247,8 @@ public class Application {
 		out += "\t<property file=\"build.properties\" />\n";
 
 		if (parametre) {
-			out += "\n\t<target name=\"build\" depends=\"pde-build, post-build, genJavadoc\" />\n";
+//			out += "\n\t<target name=\"build\" depends=\"pde-build, post-build, genJavadoc\" />\n";
+			out += "\n\t<target name=\"build\" depends=\"pde-build, post-build\" />\n";
 		} else {
 			out += "\n\t<target name=\"build\" depends=\"init, pde-build, post-build, genJavadoc\" />\n";
 		}
