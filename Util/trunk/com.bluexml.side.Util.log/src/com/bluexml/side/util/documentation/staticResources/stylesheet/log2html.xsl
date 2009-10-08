@@ -87,7 +87,7 @@
     <xsl:template name="deploymentDisplay">
         <div id="deployment" style="display:none;">
             <xsl:call-template name="logerDisplay">
-                <xsl:with-param name="type">DEPLOYMENT</xsl:with-param>
+            	<xsl:with-param name="type" select="'DEPLOYMENT'"></xsl:with-param>
             </xsl:call-template>
         </div>
     </xsl:template>
@@ -95,7 +95,7 @@
     <xsl:template name="generationDisplay">
         <div id="generation" style="display:none;">
             <xsl:call-template name="logerDisplay">
-                <xsl:with-param name="type">GENERATION</xsl:with-param>
+            	<xsl:with-param name="type" select="'GENERATION'"></xsl:with-param>
             </xsl:call-template>
         </div>
     </xsl:template>
@@ -103,25 +103,25 @@
     <xsl:template name="console">
         <div id="console" style="display:none;">
             <xsl:call-template name="logerDisplay">
-                <xsl:with-param name="type">CONSOLE</xsl:with-param>
+            	<xsl:with-param name="type" select="'CONSOLE'"></xsl:with-param>
             </xsl:call-template>
         </div>
     </xsl:template>
 
     <xsl:template name="logerDisplay">
         <xsl:param name="type" required="yes"></xsl:param>
-        <xsl:param name="showServices" required="no">false</xsl:param>
+    	<xsl:param name="showServices" required="no" select="'false'"></xsl:param>
         <xsl:param name="idSuffix" required="no"></xsl:param>
-        <xsl:for-each select="//SIDELog[@type=$type]">
+        <xsl:for-each select="//SIDELog[@type=$type and not(contains(@id,'documentation'))]">
             <xsl:sort select="@name"/>
-            <xsl:variable name="entryId"><xsl:value-of select="@id"/></xsl:variable>
+        	<xsl:variable name="entryId" select="@id"></xsl:variable>
             <xsl:if test="($showServices = 'false') or ($showServices = 'true' and //deployed/toDeploy[@id=$entryId])">
                 <div class="box">
                     <xsl:variable name="name">
-                        <xsl:call-template name="removeSpecialChars"><xsl:with-param name="string"><xsl:value-of select="concat(@name,$idSuffix)"/></xsl:with-param></xsl:call-template>
+                    	<xsl:call-template name="removeSpecialChars"><xsl:with-param name="string" select="concat(@name,$idSuffix)"></xsl:with-param></xsl:call-template>
                     </xsl:variable>
                     <div class="box-header">
-                        <xsl:attribute name="id"><xsl:value-of select="$name"/>-header</xsl:attribute>
+                    	<xsl:attribute name="id" select="concat($name,'-header')"></xsl:attribute>
                         <img src="img/expand.png" align="right" class="clickable" style="display:none;">
                             <xsl:attribute name="id"><xsl:value-of select="$name"/>-ico-expand</xsl:attribute>
                             <xsl:attribute name="onclick">javascript:expandBox('<xsl:value-of select="$name"/>-body',this,'<xsl:value-of select="$name"/>-ico-collapse')</xsl:attribute>
@@ -192,22 +192,7 @@
             </xsl:if>
             <strong><xsl:value-of select="name"/></strong>
             <br/>
-            <xsl:choose>
-                <xsl:when test="string-length(description) > 250">
-                    <div>
-                        <div class="clickable">
-                            <xsl:attribute name="onclick">javascript:switchLog(this);</xsl:attribute>
-                            <xsl:value-of select="substring(description,1,250)"/>...
-                        </div>
-                        <div class="clickable" style="display:none;" onclick="javascript:switchLog(this);">
-                            <xsl:value-of select="description"/>
-                        </div>
-                    </div>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="description"/>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:apply-templates select="description"></xsl:apply-templates>
             <xsl:if test="uri != ''">
                 <a>
                     <xsl:attribute name="href"><xsl:value-of select="uri"/></xsl:attribute>
@@ -220,9 +205,9 @@
     <xsl:template name="service">
         <div id="service" style="display:none;">
             <xsl:call-template name="logerDisplay">
-                <xsl:with-param name="type">GENERATION</xsl:with-param>
-                <xsl:with-param name="showServices">true</xsl:with-param>
-                <xsl:with-param name="idSuffix">srv</xsl:with-param>
+            	<xsl:with-param name="type" select="'GENERATION'"></xsl:with-param>
+            	<xsl:with-param name="showServices" select="'true'"></xsl:with-param>
+            	<xsl:with-param name="idSuffix" select="'srv'"></xsl:with-param>
             </xsl:call-template>
         </div>
     </xsl:template>
@@ -248,6 +233,39 @@
             </div>
         </div>
     </xsl:template>
+
+<xsl:template match="description">
+	<xsl:choose>
+		<xsl:when test="count(model) &lt; 10">
+			<xsl:call-template name="displayAlldescriptionModel"></xsl:call-template>
+		</xsl:when>
+		<xsl:otherwise>
+			<div>
+				<div class="clickable">
+					<xsl:attribute name="onclick">javascript:switchLog(this);</xsl:attribute>
+					<xsl:value-of select="model[1]" />
+					<xsl:for-each select="model[position() != 1 and position() &lt; 11]">
+						<br />
+						<xsl:value-of select="." />
+					</xsl:for-each>
+					...
+				</div>
+				<div class="clickable" style="display:none;" onclick="javascript:switchLog(this);">
+					<xsl:call-template name="displayAlldescriptionModel"></xsl:call-template>
+				</div>
+			</div>
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+
+
+<xsl:template name="displayAlldescriptionModel">
+	<xsl:value-of select="model[1]" />
+	<xsl:for-each select="model[position() != 1]">
+		<br />
+		<xsl:value-of select="." />
+	</xsl:for-each>	
+</xsl:template>
 
     <xsl:template match="node()|@*">
         <xsl:apply-templates/>

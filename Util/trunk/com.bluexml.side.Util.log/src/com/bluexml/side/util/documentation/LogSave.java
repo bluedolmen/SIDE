@@ -7,6 +7,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Writer;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.transform.Transformer;
@@ -14,6 +17,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.commons.io.output.FileWriterWithEncoding;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.jdom.Document;
@@ -32,12 +36,24 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class LogSave {
+	public static final String encoding = "UTF-8";
 	protected String fileSeparator = System.getProperty("file.separator"); //$NON-NLS-1$
 	public static String LOG_FILE_NAME = "side-report.xml"; //$NON-NLS-1$
 	public static String LOG_STAMP_FOLDER = "stamp"; //$NON-NLS-1$
 	public static String LOG_TEMP_FOLDER = "work"; //$NON-NLS-1$
 	public static String LOG_DOC_FOLDER = "doc"; //$NON-NLS-1$
 	public static String LOG_FILE_EXT = ".odt"; //$NON-NLS-1$
+
+	public static void toXml(SIDELog log, String fileName, File folder) throws Exception {
+		folder.mkdirs();
+		FileWriterWithEncoding fos;
+		File file = new File(folder, fileName);
+		file.createNewFile();
+		fos = new FileWriterWithEncoding(file, "UTF-8");
+		toXml(log, fos);
+		fos.close();
+
+	}
 
 	/**
 	 * Render a SIDELog to a xml file using the given fileName in the given
@@ -51,15 +67,13 @@ public class LogSave {
 	public static void toXml(SIDELog log, String fileName, String folderName) throws Exception {
 		IFolder folder = IFileHelper.createFolder(folderName);
 		File f = IFileHelper.getFile(folder);
-
-		FileOutputStream fos;
+		FileWriterWithEncoding fos;
 		File file = new File(f, fileName);
 		file.createNewFile();
-		fos = new FileOutputStream(file);
+		fos = new FileWriterWithEncoding(file, "UTF-8");
 		toXml(log, fos);
 		IFileHelper.refreshFolder(folder);
 		fos.close();
-
 	}
 
 	/**
@@ -68,13 +82,13 @@ public class LogSave {
 	 * @param log
 	 * @param fos
 	 */
-	protected static void toXml(SIDELog log, OutputStream fos) {
+	protected static void toXml(SIDELog log, Writer fos) {
+		System.out.println("Save To XML");
 		XStream xstream = new XStream(new DomDriver());
 
 		// Improve XML
 		xstream.alias("SIDELog", SIDELog.class); //$NON-NLS-1$
 		xstream.alias("logEntry", LogEntry.class); //$NON-NLS-1$
-
 		xstream.addImplicitCollection(SIDELog.class, "logEntries"); //$NON-NLS-1$
 
 		xstream.useAttributeFor(SIDELog.class, "date"); //$NON-NLS-1$
@@ -126,9 +140,10 @@ public class LogSave {
 		IFile genLog = IFileHelper.createFile(logFolder, LOG_FILE_NAME);
 		if (genLog != null) {
 			File genLogFile = IFileHelper.getFile(genLog);
-
-			XMLOutputter outputter = new XMLOutputter();
-			FileWriter writer = new FileWriter(genLogFile, false);
+			FileWriterWithEncoding writer = new FileWriterWithEncoding(genLogFile, encoding, false);
+			Format outputFormat = Format.getCompactFormat();
+			outputFormat.setEncoding(encoding);
+			XMLOutputter outputter = new XMLOutputter(outputFormat);
 			outputter.output(doc, writer);
 			writer.close();
 		}
@@ -169,15 +184,10 @@ public class LogSave {
 		// We get all files
 		List<IFile> toMerge = IFileHelper.getAllFilesForFolder(tmpFolder);
 		for (IFile xmlFile : toMerge) {
-			if (xmlFile.getName().endsWith(".xml") //$NON-NLS-1$
-					&& !xmlFile.getName().equals(LOG_FILE_NAME)) {
+			if (xmlFile.getName().endsWith(".xml") && !xmlFile.getName().equals(LOG_FILE_NAME)) { //$NON-NLS-1$
 				SAXBuilder builder = new SAXBuilder();
-				try {
-					Document xml = builder.build(IFileHelper.getFile(xmlFile));
-					rootNode.addContent((Element) xml.getRootElement().clone());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				Document xml = builder.build(IFileHelper.getFile(xmlFile));
+				rootNode.addContent((Element) xml.getRootElement().clone());
 			}
 		}
 	}
@@ -197,15 +207,10 @@ public class LogSave {
 			for (IFile xmlFile : deployedStamps) {
 				// TODO : improve this to avoid error when xml files are
 				// generated in the same folder
-				if (xmlFile.getName().endsWith(".xml") //$NON-NLS-1$
-						&& !xmlFile.getName().equals(LOG_FILE_NAME)) {
+				if (xmlFile.getName().endsWith(".xml") && !xmlFile.getName().equals(LOG_FILE_NAME)) { //$NON-NLS-1$
 					SAXBuilder builder = new SAXBuilder();
-					try {
-						Document xml = builder.build(IFileHelper.getFile(xmlFile));
-						rootDeployed.addContent((Element) xml.getRootElement().clone());
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+					Document xml = builder.build(IFileHelper.getFile(xmlFile));
+					rootDeployed.addContent((Element) xml.getRootElement().clone());
 				}
 			}
 			rootNode.addContent(rootDeployed);
@@ -217,22 +222,26 @@ public class LogSave {
 	 * 
 	 * @param folderDest
 	 * @param doc
-	 * @throws IOException
-	 * @throws TransformerException
+	 * @throws Exception
 	 */
-	private static void moveStaticRessources(IFolder folderDest, Document doc) throws IOException, TransformerException {
+	private static void moveStaticRessources(IFolder folderDest, Document doc) throws Exception {
 		String folderPath = folderDest.getLocation().toOSString() + System.getProperty("file.separator");
-		String folderSource = "src/com/bluexml/side/util/documentation/staticResources/";
+		String folderSource = "com/bluexml/side/util/documentation/staticResources/";
 		// We use xsl transformation and ouput html file into log directory
 		// We move all files to the log directory
-		moveFile(folderPath + "stylesheet" + System.getProperty("file.separator"), "log2html.xsl", folderSource + "stylesheet");
-		moveFile(folderPath + "css" + System.getProperty("file.separator"), "style.css", folderSource + "css");
-		moveFile(folderPath + "img" + System.getProperty("file.separator"), "background.png", folderSource + "img");
-		moveFile(folderPath + "img" + System.getProperty("file.separator"), "link.png", folderSource + "img");
-		moveFile(folderPath + "img" + System.getProperty("file.separator"), "collapse.png", folderSource + "img");
-		moveFile(folderPath + "img" + System.getProperty("file.separator"), "expand.png", folderSource + "img");
-		moveFile(folderPath + "js" + System.getProperty("file.separator"), "jquery.js", folderSource + "js");
-		moveFile(folderPath + "js" + System.getProperty("file.separator"), "log.js", folderSource + "js");
+		try {
+			moveFile(folderPath + "stylesheet" + System.getProperty("file.separator"), "log2html.xsl", folderSource + "stylesheet");
+			moveFile(folderPath + "css" + System.getProperty("file.separator"), "style.css", folderSource + "css");
+			moveFile(folderPath + "img" + System.getProperty("file.separator"), "background.png", folderSource + "img");
+			moveFile(folderPath + "img" + System.getProperty("file.separator"), "link.png", folderSource + "img");
+			moveFile(folderPath + "img" + System.getProperty("file.separator"), "collapse.png", folderSource + "img");
+			moveFile(folderPath + "img" + System.getProperty("file.separator"), "expand.png", folderSource + "img");
+			moveFile(folderPath + "js" + System.getProperty("file.separator"), "jquery.js", folderSource + "js");
+			moveFile(folderPath + "js" + System.getProperty("file.separator"), "log.js", folderSource + "js");
+		} catch (Exception e) {
+			throw new Exception("Error when copy files from static ressources", e);
+		}
+
 		// makeHtml(doc, folderPath, "log2html.xsl", "log.html");
 	}
 
@@ -266,10 +275,9 @@ public class LogSave {
 	 * @param folderDest
 	 * @param fileName
 	 * @param folderSource
-	 * @throws IOException
-	 * @throws IOException
+	 * @throws Exception
 	 */
-	private static void moveFile(String folderDest, String fileName, String folderSource) throws IOException {
+	private static void moveFile(String folderDest, String fileName, String folderSource) throws Exception {
 		/*
 		 * InputStream in = LogSave.class.getResourceAsStream(folderSource +
 		 * fileName);
@@ -279,24 +287,11 @@ public class LogSave {
 		if (!dest.exists()) {
 			dest.mkdirs();
 		}
-
 		File file = new File(folderDest + fileName);
 		FileOutputStream fos;
-		try {
-			fos = new FileOutputStream(file);
-		} catch (FileNotFoundException e) {
-			System.err.println("FileOutputStream can't be call.");
-			e.printStackTrace();
-			throw e;
-		}
+		fos = new FileOutputStream(file);
 		int data;
-		try {
-			data = in.read();
-		} catch (IOException e) {
-			System.err.println("Data can't be read");
-			e.printStackTrace();
-			throw e;
-		}
+		data = in.read();
 		while (data != -1) {
 			fos.write(data);
 			data = in.read();

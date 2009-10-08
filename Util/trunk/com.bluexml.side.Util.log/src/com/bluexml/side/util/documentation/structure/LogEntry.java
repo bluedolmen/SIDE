@@ -3,18 +3,19 @@ package com.bluexml.side.util.documentation.structure;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Date;
+import java.util.List;
 
 import com.bluexml.side.util.documentation.structure.enumeration.LogEntryType;
 
 public class LogEntry {
 	private Date date;
 	private String name;
-	private String description;
+	private List<String> description;
 	private URI uri;
 	private LogEntryType type;
 	
 	
-	public LogEntry(String name, String description, String uri, LogEntryType logEntryType) {
+	public LogEntry(String name, List<String> description, String uri, LogEntryType logEntryType) {
 		this.name = name;
 		this.description = description;
 		this.date = new Date();
@@ -28,7 +29,7 @@ public class LogEntry {
 		}
 	}
 	
-	public LogEntry(String name, String description, URI uri, LogEntryType logEntryType) {
+	public LogEntry(String name, List<String> description, URI uri, LogEntryType logEntryType) {
 		this.name = name;
 		this.description = description;
 		this.date = new Date();
@@ -48,10 +49,10 @@ public class LogEntry {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getDescription() {
+	public List<String> getDescription() {
 		return description;
 	}
-	public void setDescription(String description) {
+	public void setDescription(List<String> description) {
 		this.description = description;
 	}
 	public URI getUri() {

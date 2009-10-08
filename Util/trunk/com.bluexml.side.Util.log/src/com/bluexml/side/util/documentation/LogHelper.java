@@ -2,6 +2,7 @@ package com.bluexml.side.util.documentation;
 
 import java.io.File;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -64,11 +65,21 @@ public class LogHelper {
 	 * @param logEntryType
 	 */
 	public void addLog(String title, String description, URI uri, LogEntryType logEntryType) {
-		log.addLogEntry(new LogEntry(title, description, uri, logEntryType));
+		List<String> lDesc = new ArrayList<String>();
+		String[] ld = description.split("\n");
+		for (int i = 0; i < ld.length; i++) {
+			lDesc.add(ld[i]);
+		}
+		log.addLogEntry(new LogEntry(title, lDesc, uri, logEntryType));
 	}
 
 	public void addLog(String title, String description, String uri, LogEntryType logEntryType) {
-		log.addLogEntry(new LogEntry(title, description, uri, logEntryType));
+		List<String> lDesc = new ArrayList<String>();
+		String[] ld = description.split("\n");
+		for (int i = 0; i < ld.length; i++) {
+			lDesc.add(ld[i]);
+		}
+		log.addLogEntry(new LogEntry(title, lDesc, uri, logEntryType));
 	}
 
 	/**
@@ -186,4 +197,6 @@ public class LogHelper {
 	public void saveLog(String fileName, String folderName) throws Exception {
 		LogSave.toXml(log, fileName, folderName + fileSeparator + "work" + fileSeparator);
 	}
+	
+	
 }
