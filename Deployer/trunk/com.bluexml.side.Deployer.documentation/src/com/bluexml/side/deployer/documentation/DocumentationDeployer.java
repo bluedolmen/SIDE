@@ -81,7 +81,7 @@ public class DocumentationDeployer extends Deployer {
 
 	private File getAntBuildFile(IFolder dest) throws URISyntaxException, IOException {
 		String folderPath = dest.getLocation().toOSString() + File.separator;
-		String folderSource = "src/com/bluexml/side/deployer/documentation/"; //$NON-NLS-1$
+		String folderSource = "com/bluexml/side/deployer/documentation/"; //$NON-NLS-1$
 		try {
 			moveFile(folderPath, "build.xml", folderSource); //$NON-NLS-1$
 		} catch(Exception e) {
