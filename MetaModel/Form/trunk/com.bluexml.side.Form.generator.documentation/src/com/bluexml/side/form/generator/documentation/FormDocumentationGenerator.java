@@ -28,12 +28,11 @@ public class FormDocumentationGenerator extends DocumentationGenerator {
 
 	@Override
 	protected List<String> getTemplates() {
-		templates.add("/com.bluexml.side.Form.generator.documentation/src/templates/content.mt"); //$NON-NLS-1$
+		templates.add("/com.bluexml.side.Form.generator.documentation/templates/content.mt"); //$NON-NLS-1$
 		return templates;
 	}
 
-	public Collection<IFile> generate(IFile model) throws Exception {
-		DocumentationServices.clearOutlineRelativePath();
+	public Collection<IFile> generate(IFile model) throws Exception {	
 		OutlineViewService.setDoAll(true);
 		
 		RefreshOutlineAction action = new RefreshOutlineAction();
