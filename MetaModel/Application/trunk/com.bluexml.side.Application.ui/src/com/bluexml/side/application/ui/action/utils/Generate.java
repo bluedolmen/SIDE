@@ -318,6 +318,7 @@ public class Generate extends Thread {
 					});
 
 				} catch (Exception e) {
+					generalMonitor.addErrorText("Error when building final log file :"+e.getMessage());
 					e.printStackTrace();
 				}
 				if (FeedbackActivator.doFeedback()) {
@@ -326,6 +327,7 @@ public class Generate extends Thread {
 						feedbackManager.save();
 						// FeedbackSender.send();
 					} catch (IOException e) {
+						generalMonitor.addErrorText("Error when building final log file :"+e.getMessage());
 						e.printStackTrace();
 					}
 				}
