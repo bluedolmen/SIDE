@@ -13,7 +13,7 @@ public class WorkflowDocumentationGenerator extends DocumentationGenerator {
 
 	@Override
 	protected List<String> getTemplates() {
-		templates.add("//com.bluexml.side.Workflow.generator.documentation/src/templates/content.mt"); //$NON-NLS-1$
+		templates.add("//com.bluexml.side.Workflow.generator.documentation/templates/content.mt"); //$NON-NLS-1$
 		return templates;
 	}
 }
