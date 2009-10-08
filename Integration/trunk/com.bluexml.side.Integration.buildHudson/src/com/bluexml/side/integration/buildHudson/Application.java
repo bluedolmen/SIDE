@@ -193,6 +193,7 @@ public class Application {
 
 		// add a listener to see ant's log
 		org.apache.tools.ant.DefaultLogger log = new org.apache.tools.ant.DefaultLogger();
+/*
 		try {
 			log.setOutputPrintStream(new PrintStream(new File(Utils
 					.getBuildPath()
@@ -200,10 +201,12 @@ public class Application {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		log.setMessageOutputLevel(Project.MSG_ERR);
-
+*/
+		log.setErrorPrintStream(System.err);
+		log.setOutputPrintStream(System.out);
+		log.setMessageOutputLevel(Project.MSG_INFO);
 		ant.addBuildListener(log);
-
+		
 		// building ant script
 		File buildFile = new File(Utils.getBuildPath() + File.separator + build
 				+ ".xml");
