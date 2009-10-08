@@ -35,7 +35,7 @@ public class ReportGenerator extends AbstractAcceleoPackageGenerator{
 	@Override
 	protected List<String> getTemplates() {
 		List<String> birtTemplates = new ArrayList<String>();
-		birtTemplates.add("/com.bluexml.side.Class.generator.report/src/templates/birt/alfrescoGeneretor_birt_all_in_one.mt"); //$NON-NLS-1$
+		birtTemplates.add("/com.bluexml.side.Class.generator.report/templates/birt/alfrescoGeneretor_birt_all_in_one.mt"); //$NON-NLS-1$
 		return birtTemplates;
 	}
 
