@@ -152,7 +152,7 @@ public class RefreshOutline extends Action implements
 
 		List<String> templates = new ArrayList<String>();
 
-		templates.add("/com.bluexml.side.View.edit.ui/src/com/bluexml/side/side/view/edit/ui/utils/outline/default.mt");
+		templates.add("/com.bluexml.side.View.edit.ui/com/bluexml/side/side/view/edit/ui/utils/outline/default.mt");
 
 		for (String templateFile : templates) {
 			// Generator
