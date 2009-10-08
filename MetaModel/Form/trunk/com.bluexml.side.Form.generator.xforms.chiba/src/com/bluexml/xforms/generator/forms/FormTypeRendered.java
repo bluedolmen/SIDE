@@ -8,7 +8,7 @@ import com.bluexml.xforms.actions.DeleteAction;
 import com.bluexml.xforms.actions.SetTypeAction;
 import com.bluexml.xforms.actions.SubmitAction;
 import com.bluexml.xforms.actions.WorkflowStartAction;
-import com.bluexml.xforms.controller.messages.MsgId;
+import com.bluexml.xforms.messages.MsgId;
 
 public enum FormTypeRendered {
 

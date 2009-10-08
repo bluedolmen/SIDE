@@ -3,8 +3,8 @@ package com.bluexml.xforms.generator.forms.renderable.classes;
 import java.util.Stack;
 
 import org.apache.commons.lang.StringUtils;
-import com.bluexml.xforms.controller.messages.MsgId;
-import com.bluexml.xforms.controller.messages.MsgPool;
+import com.bluexml.xforms.messages.MsgId;
+import com.bluexml.xforms.messages.MsgPool;
 import org.jdom.Element;
 
 import com.bluexml.side.clazz.AbstractClass;

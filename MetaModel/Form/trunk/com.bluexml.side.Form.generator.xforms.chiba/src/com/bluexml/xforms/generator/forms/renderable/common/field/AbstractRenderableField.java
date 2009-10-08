@@ -7,8 +7,8 @@ import java.util.Stack;
 import javax.xml.namespace.QName;
 
 import org.apache.commons.lang.StringUtils;
-import com.bluexml.xforms.controller.messages.MsgId;
-import com.bluexml.xforms.controller.messages.MsgPool;
+import com.bluexml.xforms.messages.MsgId;
+import com.bluexml.xforms.messages.MsgPool;
 import org.jdom.Element;
 
 import com.bluexml.side.form.ChoiceWidgetType;

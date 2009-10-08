@@ -2,7 +2,7 @@ package com.bluexml.xforms.generator.forms.renderable.common.association.selecti
 
 import java.util.Stack;
 
-import com.bluexml.xforms.controller.messages.MsgPool;
+import com.bluexml.xforms.messages.MsgPool;
 import org.jdom.Element;
 
 import com.bluexml.xforms.generator.forms.Renderable;

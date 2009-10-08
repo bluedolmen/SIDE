@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.xml.namespace.QName;
 
-import com.bluexml.xforms.controller.messages.MsgId;
+import com.bluexml.xforms.messages.MsgId;
 import org.jdom.Element;
 
 import com.bluexml.side.clazz.Clazz;

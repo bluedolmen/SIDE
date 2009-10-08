@@ -2,7 +2,7 @@ package com.bluexml.xforms.generator.forms.renderable.forms.field;
 
 import java.util.Stack;
 
-import com.bluexml.xforms.controller.messages.MsgId;
+import com.bluexml.xforms.messages.MsgId;
 
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.form.ActionField;

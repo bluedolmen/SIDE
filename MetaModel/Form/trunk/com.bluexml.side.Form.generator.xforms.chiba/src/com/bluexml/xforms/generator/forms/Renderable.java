@@ -7,7 +7,7 @@ import java.util.Stack;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.bluexml.xforms.controller.messages.MsgId;
+import com.bluexml.xforms.messages.MsgId;
 
 import com.bluexml.xforms.generator.forms.renderable.forms.group.RenderableFormContainer;
 import com.bluexml.xforms.generator.forms.rendered.RenderedRepeater;

@@ -3,7 +3,7 @@
  */
 package com.bluexml.xforms.generator.forms.modelelement;
 
-import com.bluexml.xforms.controller.messages.MsgId;
+import com.bluexml.xforms.messages.MsgId;
 import org.jdom.Element;
 
 import com.bluexml.xforms.generator.forms.XFormsGenerator;

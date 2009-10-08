@@ -33,7 +33,7 @@ import com.bluexml.xforms.controller.binding.ObjectFactory;
 import com.bluexml.xforms.controller.binding.ReferenceType;
 import com.bluexml.xforms.controller.binding.VirtualFieldType;
 import com.bluexml.xforms.controller.binding.WorkflowTaskType;
-import com.bluexml.xforms.controller.messages.MsgId;
+import com.bluexml.xforms.messages.MsgId;
 import com.bluexml.side.form.utils.DOMUtil;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;

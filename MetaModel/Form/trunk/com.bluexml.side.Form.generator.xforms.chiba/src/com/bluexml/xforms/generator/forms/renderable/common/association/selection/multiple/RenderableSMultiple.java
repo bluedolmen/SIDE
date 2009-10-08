@@ -4,7 +4,7 @@ import java.util.Stack;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.bluexml.xforms.controller.messages.MsgId;
+import com.bluexml.xforms.messages.MsgId;
 
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;

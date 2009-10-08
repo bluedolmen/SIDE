@@ -3,7 +3,7 @@ package com.bluexml.xforms.generator.forms.renderable.common;
 import java.util.List;
 import java.util.Stack;
 
-import com.bluexml.xforms.controller.messages.MsgId;
+import com.bluexml.xforms.messages.MsgId;
 
 import com.bluexml.xforms.generator.forms.Renderable;
 import com.bluexml.xforms.generator.forms.Rendered;

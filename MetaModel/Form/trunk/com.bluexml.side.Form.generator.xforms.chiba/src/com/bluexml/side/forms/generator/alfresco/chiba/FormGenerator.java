@@ -24,7 +24,7 @@ import com.bluexml.side.util.generator.packager.WarPatchPackager;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.security.SecurityHelper;
 import com.bluexml.side.util.security.preferences.SidePreferences;
-import com.bluexml.xforms.controller.messages.MsgPool;
+import com.bluexml.xforms.messages.MsgPool;
 import com.bluexml.xforms.generator.DataGenerator;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.mapping.MappingGenerator;
