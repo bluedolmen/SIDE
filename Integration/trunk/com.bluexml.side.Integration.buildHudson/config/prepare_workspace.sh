@@ -66,11 +66,12 @@ chmod +x -R */*.jar
 #dos2unix *.sh
 #dos2unix *.xml
 #dos2unix *.properties
-
+echo hostname=`hostname`
 if [ `hostname` = "stager.bluexml.com" ]; then
-  perl -p -i -e 's/finalDirectory=\/data\/www\/virtuals\/b\/l\/u\/bluexml\.com\/merry\/html\/devel\/SIDE-Alfresco/finalDirectory=\/home\/stager\/share\/SIDE\/SIDE-Alfresco/g' build.properties
-  perl -p -i -e 's/updateSiteDir=\/data\/www\/virtuals\/b\/l\/u\/bluexml\.com\/merry\/html\/devel\/SIDE-Alfresco/updateSiteDir=\/home\/stager\/share\/Update-Site\/SIDE-Alfresco/g' build.properties
-  perl -p -i -e 's/\/data\/hudson/\/root\/.hudson/g' build.properties
+  echo "Change path in build.properties for host stager"
+  perl -p -i -e 's/finalDirectory=(.*)$/finalDirectory=\/home\/stager\/share\/SIDE\/SIDE-Alfresco/g' build.properties
+  perl -p -i -e 's/updateSiteDir=(.*)$/updateSiteDir=\/home\/stager\/share\/Update-Site\/SIDE-Alfresco/g' build.properties
+  perl -p -i -e 's/\/var\/opt\/hudson/\/root\/.hudson/g' build.properties
 fi
 
 
