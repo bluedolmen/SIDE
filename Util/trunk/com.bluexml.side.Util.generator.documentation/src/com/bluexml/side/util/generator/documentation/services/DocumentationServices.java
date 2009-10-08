@@ -16,7 +16,7 @@ public class DocumentationServices {
 			return modelName;
 		} else {
 			Date d = new Date();
-			return  Long.toString(d.getTime());
+			return Long.toString(d.getTime());
 		}
 	}
 
@@ -51,8 +51,10 @@ public class DocumentationServices {
 	public static List<String> getOutlineRelativePath(EObject o) {
 		return outlineRelativePath;
 	}
-	
-	public static void clearOutlineRelativePath() {
+
+	public static void clearAll() {
+		modelName = null;
 		outlineRelativePath.clear();
+		diagImgPath.clear();
 	}
 }

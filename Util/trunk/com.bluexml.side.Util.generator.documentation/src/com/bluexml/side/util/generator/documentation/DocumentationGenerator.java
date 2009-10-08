@@ -7,13 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 
 import com.bluexml.side.Util.ecore.DiagramImageExporter;
-import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.Util.ecore.export.JPEGExporter;
-import com.bluexml.side.common.Package;
 import com.bluexml.side.util.generator.acceleo.AbstractAcceleoGenerator;
 import com.bluexml.side.util.generator.documentation.services.DocumentationServices;
 import com.bluexml.side.util.libs.FileHelper;
@@ -29,12 +25,13 @@ public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 	}
 
 	public DocumentationGenerator() {
+		DocumentationServices.clearAll();
 		// Static templates
-		templates.add("/com.bluexml.side.Util.generator.documentation/src/templates/manifest.mt"); //$NON-NLS-1$
-		templates.add("/com.bluexml.side.Util.generator.documentation/src/templates/meta.mt"); //$NON-NLS-1$
-		templates.add("/com.bluexml.side.Util.generator.documentation/src/templates/mimetype.mt"); //$NON-NLS-1$
-		templates.add("/com.bluexml.side.Util.generator.documentation/src/templates/styles.mt"); //$NON-NLS-1$
-		templates.add("/com.bluexml.side.Util.generator.documentation/src/templates/settings.mt"); //$NON-NLS-1$
+		templates.add("/com.bluexml.side.Util.generator.documentation/templates/manifest.mt"); //$NON-NLS-1$
+		templates.add("/com.bluexml.side.Util.generator.documentation/templates/meta.mt"); //$NON-NLS-1$
+		templates.add("/com.bluexml.side.Util.generator.documentation/templates/mimetype.mt"); //$NON-NLS-1$
+		templates.add("/com.bluexml.side.Util.generator.documentation/templates/styles.mt"); //$NON-NLS-1$
+		templates.add("/com.bluexml.side.Util.generator.documentation/templates/settings.mt"); //$NON-NLS-1$
 	}
 
 	public Collection<IFile> complete() throws Exception {
