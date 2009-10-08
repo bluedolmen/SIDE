@@ -28,22 +28,22 @@ public class AMPDeployer extends WarDeployer {
 	}
 
 	public String getMMtPath() {
-		return getGenerationParameters().get(CONFIGURATION_PARAMETER_MMT_PATH);
+		return getGenerationParameters().get(CONFIGURATION_PARAMETER_MMT_PATH).trim();
 	}
 
 	protected void deployProcess(File fileToDeploy) throws Exception {
 		if (getMMtPath() != null && new File(getMMtPath()).exists()) {
-			
-			if (fileToDeploy.isFile() && fileToDeploy.getName().endsWith(".amp"))
-				_deployProcess(fileToDeploy);
-			else if (fileToDeploy.isDirectory()) {
-				for (File f : fileToDeploy.listFiles()) {
-					deployProcess(f);
-				}
-			}
-			
+			_deployProcess(fileToDeploy);
+			// FIXME : use a unique call to alfresco-mmt.jar to avoid bug on FileHelper.diffFolder method with File is not java.io.File but trueZip subclass  
+//			if (fileToDeploy.isFile() && fileToDeploy.getName().endsWith(".amp"))
+//				_deployProcess(fileToDeploy);
+//			else if (fileToDeploy.isDirectory()) {
+//				for (File f : fileToDeploy.listFiles()) {
+//					deployProcess(f);
+//				}
+//			}
 		} else {
-			throw new Exception(Activator.Messages.getString("AMPDeployer.14")); //$NON-NLS-1$
+			throw new Exception(Activator.Messages.getString("AMPDeployer.14",getMMtPath())); //$NON-NLS-1$
 		}
 	}
 
@@ -69,12 +69,15 @@ public class AMPDeployer extends WarDeployer {
 		args = argss.toArray(args);
 		ExecHelper status = ExecHelper.exec(args);
 		try {
+			// test made on standard output because alfresco-mmt do not use error output stream
 			if (status.getOutput().length() > 0) {
 				throw new Exception(Activator.Messages.getString("AMPDeployer.10") + status.getError() + "\n" + status.getOutput()); //$NON-NLS-1$ //$NON-NLS-2$
 			} else if (logChanges()) {
+				de.schlichtherle.io.File.update();
 				File warOrg = TrueZipHelper.getTzFile(getBackupWarFile());
 				File finalwar = TrueZipHelper.getTzFile(getWarToPatchFile());
 				StringWriter sr = new StringWriter();
+				de.schlichtherle.io.File.update((de.schlichtherle.io.File)finalwar);				
 				FileHelper.diffFolder(warOrg, finalwar, sr, FileHelper.COMPARE_ADDED + FileHelper.COMPARE_DELETED);
 				monitor.getLog().addInfoLog(this.logChangesMsg, sr.toString(), ""); //$NON-NLS-1$
 			}
