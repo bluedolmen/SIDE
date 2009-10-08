@@ -189,6 +189,32 @@ public class Application {
 	 */
 	private static void execBuild(String build, String target) {
 		// Update code
+
+/*		
+		String cmd="ant";
+		Process proc=Runtime.getRuntime().exec(tableau);
+
+        Process proc=Runtime.getRuntime().exec("ant build");
+        InputStream in = proc.getInputStream();
+    BufferedWriter out=new BufferedWriter(new FileWriter("titi.dat"));
+        
+    int c;
+        while ((c = in.read()) != -1) {
+            out.write((char)c);
+        }
+        
+    in.close();
+    out.flush();
+    out.close();
+    
+} catch (Exception e) {
+        e.printStackTrace();
+}
+*/
+		
+		
+		
+		
 		Project ant = new Project();
 
 		// add a listener to see ant's log
@@ -277,9 +303,9 @@ public class Application {
 		out += "\t\t\t<record name=\"build_pde-build_debug.log\" loglevel=\"debug\" action=\"start\"/>\n";
 //		out += "\t\t\t<chmod dir=\"${buildName}\" perm=\"777\" includes=\"*/**\"/>\n";
 		out += "\t\t\t<java classname=\"org.eclipse.equinox.launcher.Main\" fork=\"true\" failonerror=\"true\">\n";
-		out += "\t\t\t\t<arg value=\"-Xmx512M\"/>\n";
-		out += "\t\t\t\t<arg value=\"-Xms512M\"/>\n";
-		out += "\t\t\t\t<arg value=\"-Xss512k\"/>\n";
+		out += "\t\t\t\t<arg value=\"-Xmx512m\"/>\n";
+		out += "\t\t\t\t<arg value=\"-Xms512m\"/>\n";
+//		out += "\t\t\t\t<arg value=\"-Xss512k\"/>\n";
 		out += "\t\t\t\t<arg value=\"-application\" />\n";
 		out += "\t\t\t\t<arg value=\"org.eclipse.ant.core.antRunner\" />\n";
 		out += "\t\t\t\t<arg value=\"-buildfile\" />\n";
