@@ -26,7 +26,7 @@ public abstract class WarDeployer extends Deployer {
 	public WarDeployer(String webappName) {
 		this.webappName = webappName;
 	}
-	
+
 	public String getWebappName() {
 		return webappName;
 	}
@@ -34,9 +34,6 @@ public abstract class WarDeployer extends Deployer {
 	public void setWebappName(String webappName) {
 		this.webappName = webappName;
 	}
-
-	
-	
 
 	public File getBackupWarFile() {
 		if (backupWarFile == null) {
@@ -63,20 +60,20 @@ public abstract class WarDeployer extends Deployer {
 	protected void clean(File fileToDeploy) throws Exception {
 		// remove existing deployed alfresco webapp.
 		if (getDeployedWebbAppFolder().exists()) {
-			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.1"), Activator.Messages.getString("WarDeployer.2")+getDeployedWebbAppFolder().getName(), ""); //$NON-NLS-1$ //$NON-NLS-2$
+			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.1"), Activator.Messages.getString("WarDeployer.2", getDeployedWebbAppFolder().getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
 			FileHelper.deleteFile(getDeployedWebbAppFolder());
 		}
 		// clean war file
 		if (getBackupWarFile().exists()) {
-			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.1"), Activator.Messages.getString("WarDeployer.3")+getBackupWarFile().getName(), ""); //$NON-NLS-1$ //$NON-NLS-2$
-			// restore from backup		
+			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.1"), Activator.Messages.getString("WarDeployer.3", getBackupWarFile().getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
+			// restore from backup
 			FileHelper.copyFiles(getBackupWarFile(), getWarToPatchFile(), true);
 		}
 	}
 
 	public File initWarToPatch(File tomcatHome) throws Exception {
 		if (!getBackupWarFile().exists()) {
-			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.1"), Activator.Messages.getString("WarDeployer.4")+getBackupWarFile().getName(), ""); //$NON-NLS-1$ //$NON-NLS-2$
+			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.1"), Activator.Messages.getString("WarDeployer.4", getBackupWarFile().getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
 			// buid backup
 			FileHelper.copyFiles(getWarToPatchFile(), getBackupWarFile(), true);
 		}
@@ -91,7 +88,7 @@ public abstract class WarDeployer extends Deployer {
 	protected void preProcess(File fileToDeploy) throws Exception {
 		initWarToPatch(new File(getTomcatHome()));
 		if (!fileToDeploy.exists()) {
-			throw new Exception(Activator.Messages.getString("WarDeployer.5")+fileToDeploy); //$NON-NLS-1$
+			throw new Exception(Activator.Messages.getString("WarDeployer.5") + fileToDeploy); //$NON-NLS-1$
 		}
 	}
 
@@ -101,16 +98,16 @@ public abstract class WarDeployer extends Deployer {
 		TrueZipHelper fh = new TrueZipHelper("zip"); //$NON-NLS-1$
 		if (fileToDeploy.isDirectory()) {
 			for (File f : fileToDeploy.listFiles(new FileExtensionFilter("zip"))) { //$NON-NLS-1$
-				monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.6"), Activator.Messages.getString("WarDeployer.7")+f.getName(), ""); //$NON-NLS-1$ //$NON-NLS-2$
+				monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.6"), Activator.Messages.getString("WarDeployer.7", f.getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
 				succes &= fh.copyFiles(f, getWarToPatchFile(), true);
 			}
 		} else {
-			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.6"), Activator.Messages.getString("WarDeployer.7")+fileToDeploy.getName(), ""); //$NON-NLS-1$ //$NON-NLS-2$
+			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.6"), Activator.Messages.getString("WarDeployer.7", fileToDeploy.getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
 			succes = fh.copyFiles(fileToDeploy, getWarToPatchFile(), true);
 		}
 
 		if (!succes) {
-		monitor.getLog().addErrorLog(Activator.Messages.getString("WarDeployer.8"), Activator.Messages.getString("WarDeployer.9"), ""); //$NON-NLS-1$ //$NON-NLS-2$
+			monitor.getLog().addErrorLog(Activator.Messages.getString("WarDeployer.8"), Activator.Messages.getString("WarDeployer.9"), ""); //$NON-NLS-1$ //$NON-NLS-2$
 			throw new Exception(Activator.Messages.getString("WarDeployer.9")); //$NON-NLS-1$
 		}
 		if (logChanges()) {
@@ -128,7 +125,7 @@ public abstract class WarDeployer extends Deployer {
 
 		String header = Activator.Messages.getString("WarDeployer.11") + folder1.getAbsolutePath() + " --> " + folder2.getAbsolutePath() + "\n"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		log.write(header);
-		//addInfoLog(this.logChangesMsg, header, null);
+		// addInfoLog(this.logChangesMsg, header, null);
 		for (Map.Entry<String, List<String>> ent : diff.entrySet()) {
 			for (String v : ent.getValue()) {
 				String body = ent.getKey() + " file://" + v + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
@@ -142,7 +139,5 @@ public abstract class WarDeployer extends Deployer {
 		// TODO Auto-generated method stub
 		return true;
 	}
-
-	
 
 }
