@@ -273,9 +273,9 @@ public class Application {
 		out += "\t================================= -->\n\n";
 
 		out += "\t<target name=\"pde-build\">\n";
-		out += "\t\t\t<record name=\"build_pde-build_verbose.log\" loglevel=\"verbose\" action=\"start\"/>\n";
+//		out += "\t\t\t<record name=\"build_pde-build_verbose.log\" loglevel=\"verbose\" action=\"start\"/>\n";
 		out += "\t\t\t<record name=\"build_pde-build_debug.log\" loglevel=\"debug\" action=\"start\"/>\n";
-		out += "\t\t\t<chmod dir=\"${buildName}\" perm=\"777\" includes=\"*/**\"/>\n";
+//		out += "\t\t\t<chmod dir=\"${buildName}\" perm=\"777\" includes=\"*/**\"/>\n";
 		out += "\t\t\t<java classname=\"org.eclipse.equinox.launcher.Main\" fork=\"true\" failonerror=\"true\">\n";
 		out += "\t\t\t\t<arg value=\"-application\" />\n";
 		out += "\t\t\t\t<arg value=\"org.eclipse.ant.core.antRunner\" />\n";
@@ -286,7 +286,7 @@ public class Application {
 		out += "\t\t\t\t\t<pathelement location=\"${eclipseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar\" />\n";
 		out += "\t\t\t\t</classpath>\n";
 		out += "\t\t\t</java>\n";
-		out += "\t\t\t<record name=\"build_pde-build_verbose.log\" action=\"stop\"/>\n";
+//		out += "\t\t\t<record name=\"build_pde-build_verbose.log\" action=\"stop\"/>\n";
 		out += "\t\t\t<record name=\"build_pde-build_debug.log\" action=\"stop\"/>\n";
 		out += "\t</target>\n";
 
