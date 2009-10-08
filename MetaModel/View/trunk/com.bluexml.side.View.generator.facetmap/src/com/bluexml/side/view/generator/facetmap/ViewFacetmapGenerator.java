@@ -122,7 +122,7 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 		}
 		// Adding services to log
 		// CMIS
-		String alfrescoUrl = generationParameters.get(AbstractAlfrescoGenerator.CONFIGURATION_PARAMETER_ALFRESCO_HOME);
+		String alfrescoUrl = generationParameters.get(AbstractAlfrescoGenerator.CONFIGURATION_PARAMETER_ALFRESCO_URL);
 		if (alfrescoUrl != null && alfrescoUrl.length() > 0) {
 			if (!alfrescoUrl.endsWith("/")) { //$NON-NLS-1$
 				alfrescoUrl += "/"; //$NON-NLS-1$
@@ -134,7 +134,7 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 		String cmisUri = alfrescoUrl + "service/com/bluexml/side/facetMap/doclist_user.xml"; //$NON-NLS-1$
 		monitor.getLog().addServiceLog(Activator.Messages.getString("ViewFacetmapGenerator.26"), Activator.Messages.getString("ViewFacetmapGenerator.27"), cmisUri); //$NON-NLS-1$ //$NON-NLS-2$
 		// Dashlets
-		String shareUrl = generationParameters.get(AbstractAlfrescoGenerator.CONFIGURATION_PARAMETER_ALFRESCOSHARE_HOME);
+		String shareUrl = generationParameters.get(AbstractAlfrescoGenerator.CONFIGURATION_PARAMETER_ALFRESCOSHARE_URL);
 		if (shareUrl != null && shareUrl.length() > 0) {
 			if (!shareUrl.endsWith("/")) { //$NON-NLS-1$
 				shareUrl += "/"; //$NON-NLS-1$
