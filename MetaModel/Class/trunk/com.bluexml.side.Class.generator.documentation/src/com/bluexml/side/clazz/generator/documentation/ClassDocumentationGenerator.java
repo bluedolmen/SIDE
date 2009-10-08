@@ -12,7 +12,7 @@ public class ClassDocumentationGenerator extends DocumentationGenerator {
 
 	@Override
 	protected List<String> getTemplates() {
-		templates.add("/com.bluexml.side.Class.generator.documentation/src/templates/content.mt"); //$NON-NLS-1$
+		templates.add("/com.bluexml.side.Class.generator.documentation/templates/content.mt"); //$NON-NLS-1$
 		return templates;
 	}
 }
