@@ -278,6 +278,7 @@ public class Application {
 //		out += "\t\t\t<chmod dir=\"${buildName}\" perm=\"777\" includes=\"*/**\"/>\n";
 		out += "\t\t\t<java classname=\"org.eclipse.equinox.launcher.Main\" fork=\"true\" failonerror=\"true\">\n";
 		out += "\t\t\t\t<arg value=\"-Xmx512M\"/>\n";
+		out += "\t\t\t\t<arg value=\"-Xms512M\"/>\n";
 		out += "\t\t\t\t<arg value=\"-Xss512k\"/>\n";
 		out += "\t\t\t\t<arg value=\"-application\" />\n";
 		out += "\t\t\t\t<arg value=\"org.eclipse.ant.core.antRunner\" />\n";
