@@ -18,15 +18,20 @@
                   id="com.bluexml.side.Deployer.xforms"
                   version="SIDE Chiba X-Forms Deployer">
                <configurationParameter
-                     documentation="Set this value to the Alfresco Tomcat directory path in order the deployer puts the packaged war file.&lt;br&gt;&lt;b&gt;This option is mandatory.&lt;/b&gt;"
+                     documentation="Set this value to the Tomcat directory path so that the deployer puts the packaged war file into it.&lt;br&gt;This option is &lt;b&gt;mandatory and must point to the parent folder of &lt;i&gt;webapps&lt;/i&gt;.&lt;/b&gt; Example: /Users/admin/tomcat"
                      key="CATALINA_HOME"
                      label="Tomcat installation directory">
                </configurationParameter>
                <option
-                     documentation="Check this option if you want to completely remove previous deployed packages.&lt;br&gt;May be longer but may avoid some side effects when done from time to time."
+                     documentation="Check this option if you want to completely remove previously deployed packages.&lt;br&gt;May be longer but may avoid some side effects when done from time to time."
                      key="com.bluexml.side.Deployer.xforms.clean"
                      label="clean">
                </option>
+               <configurationParameter
+                     documentation="Set the name of your Chiba webapp. The default name for the war file provided by BlueXML is &quot;xforms&quot;.&lt;br/&gt;If not filled, the default name will be considered."
+                     key="com.bluexml.side.Deployer.xforms.webappName"
+                     label="Webapp context name">
+               </configurationParameter>
             </deployerVersion>
          </technologyVersion>
       </technology>
