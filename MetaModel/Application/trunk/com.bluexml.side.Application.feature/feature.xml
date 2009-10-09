@@ -1,68 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature
-      id="com.bluexml.side.Application.feature"
-      label="SIDE Application Modeler"
-      version="1.0.72.v10045-20090930"
-      provider-name="BlueXML">
-
-   <description url="http://www.bluexml.com">
-      SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature allows to model the MDA process (modeling, generation, deployment).
-   </description>
-
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
-   </copyright>
-
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
-   </license>
-
-   <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="com.bluexml.side.Application"/>
-      <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="com.bluexml.side.Application.edit"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="org.eclipse.emf.edit.ui"/>
-      <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.ui"/>
-   </requires>
-
-   <plugin
-         id="com.bluexml.side.Application"
-         download-size="0"
-         install-size="0"
-         version="1.0.32.v9878-20090928"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Application.edit"
-         download-size="0"
-         install-size="0"
-         version="1.0.26.v9878-20090928"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Application.editor"
-         download-size="0"
-         install-size="0"
-         version="1.0.20.v9878-20090928"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Application.ui"
-         download-size="0"
-         install-size="0"
-         version="1.0.72.v10045-20090930"
-         unpack="false"/>
-
-   <plugin
-         id="com.bluexml.side.Application.startup"
-         download-size="0"
-         install-size="0"
-         version="1.0.8.v9878-20090928"
-         unpack="false"/>
-
+<feature id="com.bluexml.side.Application.feature" label="SIDE Application Modeler" version="1.0.76.v10219-20091008" provider-name="BlueXML">
+  <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature allows to model the MDA process (modeling, generation, deployment).</description>
+  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
+  <license url="http://www.example.com/license">[Enter License Description here.]</license>
+  <requires>
+    <import plugin="org.eclipse.core.runtime" />
+    <import plugin="org.eclipse.emf.ecore" />
+    <import plugin="com.bluexml.side.Application" />
+    <import plugin="org.eclipse.emf.edit" />
+    <import plugin="org.eclipse.core.resources" />
+    <import plugin="com.bluexml.side.Application.edit" />
+    <import plugin="org.eclipse.emf.ecore.xmi" />
+    <import plugin="org.eclipse.emf.edit.ui" />
+    <import plugin="org.eclipse.ui.ide" />
+    <import plugin="org.eclipse.ui" />
+  </requires>
+  <plugin id="com.bluexml.side.Application" download-size="0" install-size="0" version="1.0.36.v10219-20091008" unpack="false" />
+  <plugin id="com.bluexml.side.Application.edit" download-size="0" install-size="0" version="1.0.30.v10219-20091008" unpack="false" />
+  <plugin id="com.bluexml.side.Application.editor" download-size="0" install-size="0" version="1.0.20.v9878-20090928" unpack="false" />
+  <plugin id="com.bluexml.side.Application.ui" download-size="0" install-size="0" version="1.0.76.v10219-20091008" unpack="false" />
+  <plugin id="com.bluexml.side.Application.startup" download-size="0" install-size="0" version="1.0.8.v9878-20090928" unpack="false" />
 </feature>
+
