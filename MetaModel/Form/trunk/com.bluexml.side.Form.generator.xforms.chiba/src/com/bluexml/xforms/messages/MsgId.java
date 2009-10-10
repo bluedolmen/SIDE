@@ -218,6 +218,8 @@ public enum MsgId {
 	PARAM_REDIRECTOR_CONFIG_FILE("redirectXmlFile"),
 	/** whether to reload properties and config files*/
 	PARAM_RELOAD_PROPERTIES("reloadProperties"),
+	/** whether to reload the mapping.xml file*/
+	PARAM_RELOAD_MAPPING_FILE("dynamicReload"),
 	PARAM_SHOW_SUBMITS("showSubmitButtons"),
 	/** whether to avoid contacting the webscript on Alfresco*/
 	PARAM_STANDALONE("standalone"),
