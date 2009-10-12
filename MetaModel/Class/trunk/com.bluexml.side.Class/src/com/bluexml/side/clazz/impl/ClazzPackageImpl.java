@@ -1154,7 +1154,13 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   new String[] {
 			 "body", "Sequence{self.firstEnd,self.secondEnd} -> select(ae | ae.linkedClass = clazz)\n",
 			 "description", "returns the association end for which the parameter class (clazz) is linked to"
-		   });														
+		   });									
+		addAnnotation
+		  (enumerationEClass, 
+		   source, 
+		   new String[] {
+			 "enumDynamicAreNotAvailable", "dynamic=false"
+		   });								
 		addAnnotation
 		  (aspectEClass.getEOperations().get(0), 
 		   source, 
@@ -1212,7 +1218,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * @generated
 	 */
 	protected void createInternalDocAnnotations() {
-		String source = "InternalDoc";																																																																	
+		String source = "InternalDoc";																																																																			
 		addAnnotation
 		  (classCommentEClass, 
 		   source, 
@@ -1247,7 +1253,14 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   new String[] {
 			 "constraints", "reflexiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation doubleNavigable",
 			 "warning", "twoWayNavigation"
-		   });																						
+		   });																
+		addAnnotation
+		  (enumerationEClass, 
+		   source, 
+		   new String[] {
+			 "warning", "enumDynamicAreNotAvailable",
+			 "constraints", "enumDynamicAreNotAvailable"
+		   });									
 		addAnnotation
 		  (abstractClassEClass, 
 		   source, 

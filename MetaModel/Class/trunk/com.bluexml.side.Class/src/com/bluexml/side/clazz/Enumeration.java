@@ -31,7 +31,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.clazz.ClazzPackage#getEnumeration()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL enumDynamicAreNotAvailable='dynamic=false'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore warning='enumDynamicAreNotAvailable' constraints='enumDynamicAreNotAvailable'"
  * @generated
  */
 public interface Enumeration extends NamedModelElement {

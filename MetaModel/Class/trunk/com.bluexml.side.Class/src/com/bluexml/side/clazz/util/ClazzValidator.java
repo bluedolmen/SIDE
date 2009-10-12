@@ -162,6 +162,14 @@ public class ClazzValidator extends EObjectValidator {
 	 */
 	private static Constraint association_IfAggregationOrCompositionThenUnidirectionalAssociationInvOCL;
 	/**
+	 * The parsed OCL expression for the definition of the '<em>enumDynamicAreNotAvailable</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint enumeration_enumDynamicAreNotAvailableInvOCL;
+
+	/**
 	 * The parsed OCL expression for the definition of the '<em>TwoModelElementWithSameName</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -825,7 +833,54 @@ public class ClazzValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateEnumeration(Enumeration enumeration, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(enumeration, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(enumeration, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(enumeration, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(enumeration, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(enumeration, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(enumeration, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(enumeration, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(enumeration, diagnostics, context);
+		if (result || diagnostics != null) result &= validateEnumeration_enumDynamicAreNotAvailable(enumeration, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the enumDynamicAreNotAvailable constraint of '<em>Enumeration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateEnumeration_enumDynamicAreNotAvailable(Enumeration enumeration, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (enumeration_enumDynamicAreNotAvailableInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(ClazzPackage.Literals.ENUMERATION);
+
+			EAnnotation ocl = ClazzPackage.Literals.ENUMERATION.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("enumDynamicAreNotAvailable");
+
+			try {
+				enumeration_enumDynamicAreNotAvailableInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(enumeration_enumDynamicAreNotAvailableInvOCL);
+
+		if (!query.check(enumeration)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						((doThrowError( ClazzPackage.Literals.ENUMERATION.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"enumDynamicAreNotAvailable")? Diagnostic.ERROR : Diagnostic.WARNING),
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "enumDynamicAreNotAvailable", getObjectLabel(enumeration, context) }),
+						 new Object[] { enumeration }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**

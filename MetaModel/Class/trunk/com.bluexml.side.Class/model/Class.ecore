@@ -303,6 +303,13 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: an enumeration represents a list of values which may be associated to a class property.&#xD;&#xA;Example: the list of languages associated to the property 'language' of a book.&#xD;&#xA;Deprecated: the link'depends of' was used in previous release of S-IDE to model a relation between enumeration like between a department list and a country list; this link has been kept for compatibility reason but is no more useful at the data level and is now managed between fields of Form model as a management rule."/>
     </eAnnotations>
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="enumDynamicAreNotAvailable" value="dynamic=false"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="warning" value="enumDynamicAreNotAvailable"/>
+      <details key="constraints" value="enumDynamicAreNotAvailable"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="literals" upperBound="-1"
         eType="#//EnumerationLiteral" containment="true" eOpposite="#//EnumerationLiteral/enum"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dynamic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
