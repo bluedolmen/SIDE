@@ -26,7 +26,7 @@
                   idTechnologyVersion="alfresco_3.0_labs"
                   version="SIDE Chiba Form Generator for Alfresco">
                <configurationParameter
-                     documentation="Set this field to the complete path to your messages.properties file. The file may point to a customized version of the file.&lt;p&gt;It is &lt;b&gt;strongly recommended&lt;/b&gt; to set the option."
+                     documentation="Set this field to the complete path to your messages.properties file. The file may point to a customized version of the file.&lt;p&gt;It is &lt;b&gt;strongly recommended&lt;/b&gt; to set the option. if not specified, a default file is created in the generation folder under xformsModel/defaults."
                      key="com.bluexml.side.Form.generator.xforms.chiba.messagesFilePath"
                      label="Messages file">
                </configurationParameter>

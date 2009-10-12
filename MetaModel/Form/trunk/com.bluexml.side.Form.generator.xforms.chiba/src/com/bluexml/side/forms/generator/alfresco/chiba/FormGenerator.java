@@ -24,6 +24,7 @@ import com.bluexml.side.util.generator.packager.WarPatchPackager;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.security.SecurityHelper;
 import com.bluexml.side.util.security.preferences.SidePreferences;
+import com.bluexml.xforms.messages.DefaultMessages;
 import com.bluexml.xforms.messages.MsgPool;
 import com.bluexml.xforms.generator.DataGenerator;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
@@ -67,6 +68,7 @@ public class FormGenerator extends AbstractGenerator {
 
 		String baseDir = xformGenerationFolder.getAbsolutePath();
 		String resDir = mappingGenerationFolder.getAbsolutePath();
+		String defaultsDir = getTemporarySystemFile() + File.separator + "defaults";
 
 		File generateMappingFile = new File(resDir + File.separator + "mapping.xml");
 		File generateRedirectFile = new File(resDir + File.separator + "redirect.xml");
@@ -85,23 +87,32 @@ public class FormGenerator extends AbstractGenerator {
 		// deal with messages.properties file
 		String messagesFilePath = generationParameters
 				.get("com.bluexml.side.Form.generator.xforms.chiba.messagesFilePath");
-		if (messagesFilePath == null) {
-			monitor.addWarningText("No messages file.");
-		} else {
-			try {
-				messagesFile = new File(messagesFilePath);
-				MsgPool.setMessagesFile(messagesFile.getAbsolutePath());
-			} catch (Exception e) {
-				monitor.addErrorText("Problem opening the messages file.");
+		if (StringUtils.trimToNull(messagesFilePath) != null) {
+			File file = new File(messagesFilePath);
+			if (file.exists()) {
+				setMessagesFilePath(messagesFilePath);
+			} else {
+				monitor
+						.addWarningText("The specified messages file does not exist. Will generate defaults.");
+				messagesFilePath = null;
+			}
+		}
+		if (StringUtils.trimToNull(messagesFilePath) == null) {
+			String filePath = defaultsDir + File.separator + "messages.properties";
+			if (DefaultMessages.generate(filePath)) {
+				setMessagesFilePath(filePath);
+			} else {
+				monitor.addWarningText("Could not generate and set the messages file.");
 			}
 		}
 		// deal with the webapp address (protocol, host, port, context)
 		webappContext = generationParameters
 				.get("com.bluexml.side.Form.generator.xforms.chiba.webappContext");
 		if (StringUtils.trimToNull(webappContext) != null) {
+			// we check that the context is not 'forms'
 			int pos = webappContext.lastIndexOf('/');
 			int len = webappContext.length();
-			// if trailing "/", remove it
+			// if there's a trailing "/", remove it
 			if (pos == (len - 1)) {
 				webappContext = webappContext.substring(0, len - 1);
 			}
@@ -113,6 +124,18 @@ public class FormGenerator extends AbstractGenerator {
 			}
 		}
 		successfulInit = true;
+	}
+
+	/**
+	 * @param filePath
+	 */
+	private void setMessagesFilePath(String filePath) {
+		try {
+			messagesFile = new File(filePath);
+			MsgPool.setMessagesFile(messagesFile.getAbsolutePath());
+		} catch (Exception e) {
+			monitor.addErrorText("Problem opening the messages file.");
+		}
 	}
 
 	/**
