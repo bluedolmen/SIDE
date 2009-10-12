@@ -58,11 +58,10 @@ public class ClazzDiagramsPage extends DiagramsPage {
 	/**
 	 * @see org.topcased.modeler.wizards.DiagramsPage#getDefaultTemplateId()
 	 * @return String
-	 * @generated
+	 * @_generated
 	 */
 	public String getDefaultTemplateId() {
-		// TODO return the corresponding ID of the default template
-		return "";
+		return "com.bluexml.side.Class.modeler.templates.diagram";
 
 	}
 
