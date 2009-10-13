@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Data Model Documentation Generator
 Bundle-SymbolicName: com.bluexml.side.Class.generator.documentation;singleton:=true
-Bundle-Version: 1.0.11.v9878-20090928
+Bundle-Version: 1.0.12.v10368-20091013
 Bundle-Activator: com.bluexml.side.clazz.generator.documentation.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.ui,
