@@ -377,7 +377,6 @@ public class ApplicationUtil {
 			Class<Checkable> gen;
 			if (Platform.getBundle(iN.getContributorId()) != null) {
 				gen = Platform.getBundle(iN.getContributorId()).loadClass(iN.getLaunchClass());
-				System.out.println("coucou");
 				Checkable gener = gen.newInstance();
 				return gener.check();
 			} else {
