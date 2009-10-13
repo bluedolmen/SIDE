@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Workflow Model Documentation Generator
 Bundle-SymbolicName: com.bluexml.side.Workflow.generator.documentation;singleton:=true
-Bundle-Version: 1.0.10.v9878-20090928
+Bundle-Version: 1.0.11.v10368-20091013
 Bundle-Activator: com.bluexml.side.workflow.generator.documentation.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.ui,
