@@ -43,6 +43,7 @@
     </genClasses>
     <genClasses ecoreClass="application.ecore#//DeployerConfiguration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//DeployerConfiguration/deployerName"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//DeployerConfiguration/shared"/>
     </genClasses>
     <genClasses image="false" ecoreClass="application.ecore#//ComponantConfiguration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ComponantConfiguration/id_techno_version"/>

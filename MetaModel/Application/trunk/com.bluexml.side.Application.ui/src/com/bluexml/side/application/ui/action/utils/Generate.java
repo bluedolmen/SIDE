@@ -509,106 +509,131 @@ public class Generate extends Thread {
 
 	private boolean deploy_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) {
 		boolean error = false;
+		
 		List<DeployerConfiguration> ldeployers = configuration.getDeployerConfigurations();
-		//label.setText(Activator.Messages.getString("Generate.48")); //$NON-NLS-1$
-		for (DeployerConfiguration depConf : ldeployers) {
+		List<DeployerConfiguration> sharedDeployers = new ArrayList<DeployerConfiguration>();
+		
+		for (DeployerConfiguration depConf : ldeployers)
+			if (depConf.isShared())
+				sharedDeployers.add(depConf);
+		ldeployers.removeAll(sharedDeployers);
 
-			String deployerClassName = depConf.getImpl_class();
-			String id_deployer = depConf.getId();
-			String id_techno = depConf.getId_techno_version();
-			configurationParameters.put("technologyVersion", id_techno); //$NON-NLS-1$
-			configurationParameters.put("deployerName", depConf.getDeployerName()); //$NON-NLS-1$
-			configurationParameters.put("deployerId", id_deployer); //$NON-NLS-1$
-			configurationParameters.put("metaModelName", depConf.getMetaModelName()); //$NON-NLS-1$
-			configurationParameters.put("technologyName", depConf.getTechnologyName()); //$NON-NLS-1$
-			configurationParameters.put("technologyVersionName", depConf.getTechnologyVersionName()); //$NON-NLS-1$
-			configurationParameters.put("configurationName", configuration.getName()); //$NON-NLS-1$
+		//Call shared deployers
+		for (DeployerConfiguration depConf : sharedDeployers)
+			error &= launchDeployer(depConf, configuration, configurationParameters, generationParameters);
+		//Call others deployers
+		for (DeployerConfiguration depConf : ldeployers)
+			error &= launchDeployer(depConf, configuration, configurationParameters, generationParameters);
+		//Re-call shared deployers
+		for (DeployerConfiguration depConf : sharedDeployers)
+			error &= launchDeployer(depConf, configuration, configurationParameters, generationParameters);
+		
+		return error;
+	}
 
-			List<Option> options = depConf.getOptions();
-			// We get the option for this generator
-			List<String> deployerOptions = new ArrayList<String>();
-			for (Option option : options) {
-				deployerOptions.add(option.getKey());
-			}
+	private boolean launchDeployer(DeployerConfiguration depConf, Configuration configuration, Map<String, String> configurationParameters, Map<String, String> generationParameters) {
+		boolean error = false;
+		String deployerClassName = depConf.getImpl_class();
+		String id_deployer = depConf.getId();
+		String id_techno = depConf.getId_techno_version();
+		configurationParameters.put("technologyVersion", id_techno); //$NON-NLS-1$
+		configurationParameters.put("deployerName", depConf.getDeployerName()); //$NON-NLS-1$
+		configurationParameters.put("deployerId", id_deployer); //$NON-NLS-1$
+		configurationParameters.put("metaModelName", depConf.getMetaModelName()); //$NON-NLS-1$
+		configurationParameters.put("technologyName", depConf.getTechnologyName()); //$NON-NLS-1$
+		configurationParameters.put("technologyVersionName", depConf.getTechnologyVersionName()); //$NON-NLS-1$
+		configurationParameters.put("configurationName", configuration.getName()); //$NON-NLS-1$
 
-			Bundle plugin = Platform.getBundle(depConf.getContributorId());
-			Class<?> gen;
-			Object genObj = null;
-			try {
-				gen = plugin.loadClass(deployerClassName);
-				genObj = gen.newInstance();
-			} catch (ClassNotFoundException e1) {
-				error = true;
-				e1.printStackTrace();
-				generalMonitor.addErrorText(Activator.Messages.getString("Generate.50") + id_deployer + " haven't been found."); //$NON-NLS-1$ //$NON-NLS-2$
-			} catch (InstantiationException e) {
-				error = true;
-				e.printStackTrace();
-				generalMonitor.addErrorText(Activator.Messages.getString("Generate.50") + id_deployer + " can't be instanciate."); //$NON-NLS-1$ //$NON-NLS-2$
-			} catch (IllegalAccessException e) {
-				error = true;
-				e.printStackTrace();
-				generalMonitor.addErrorText(Activator.Messages.getString("Generate.50") + id_deployer + " access error."); //$NON-NLS-1$ //$NON-NLS-2$
-			} catch (Exception e) {
-				error = true;
-				e.printStackTrace();
-				generalMonitor.addErrorText(Activator.Messages.getString("Generate.54") + id_deployer + "."); //$NON-NLS-1$ //$NON-NLS-2$
-			}
-			try {
-				IFileHelper.refreshFolder(logPath);
-			} catch (CoreException e1) {
-				e1.printStackTrace();
-			}
-			if (genObj instanceof Deployer) {
-				Deployer deployer = (Deployer) genObj;
-				int nbTask = NB_DEPLOY_STEP;
-				ComponentMonitor deployerMonitor = new ComponentMonitor(styletext, progressBar2, nbTask, label2, generalMonitor, configurationParameters, LogType.DEPLOYMENT, generalMonitor.getConsoleLog());
-				// deployer initialization
-				deployer.initialize(configurationParameters, generationParameters, deployerOptions, deployerMonitor);
-				if ((deployer.isDocumentationDeployer() && doDocumentation) || !deployer.isDocumentationDeployer()) {
+		List<Option> options = depConf.getOptions();
+		// We get the option for this generator
+		List<String> deployerOptions = new ArrayList<String>();
+		for (Option option : options) {
+			deployerOptions.add(option.getKey());
+		}
 
-					try {
-						deployerMonitor.beginTask(Activator.Messages.getString("Generate.51", depConf.getDeployerName())); //$NON-NLS-1$
-						deployer.deploy();
-						// We get the option for this generator
-						if (FeedbackActivator.doFeedback()) {
-							Map<String, Boolean> optionsDep = new HashMap<String, Boolean>();
-							for (Option option : depConf.getOptions()) {
-								optionsDep.put(option.getKey(), true);
-							}
-							feedbackManager.addFeedBackItem(depConf.getId(), null, id_techno, optionsDep);
+		Bundle plugin = Platform.getBundle(depConf.getContributorId());
+		Class<?> gen;
+		Object genObj = null;
+		try {
+			gen = plugin.loadClass(deployerClassName);
+			genObj = gen.newInstance();
+		} catch (ClassNotFoundException e1) {
+			error = true;
+			e1.printStackTrace();
+			generalMonitor.addErrorText(Activator.Messages.getString("Generate.50") + id_deployer + " haven't been found."); //$NON-NLS-1$ //$NON-NLS-2$
+		} catch (InstantiationException e) {
+			error = true;
+			e.printStackTrace();
+			generalMonitor.addErrorText(Activator.Messages.getString("Generate.50") + id_deployer + " can't be instanciate."); //$NON-NLS-1$ //$NON-NLS-2$
+		} catch (IllegalAccessException e) {
+			error = true;
+			e.printStackTrace();
+			generalMonitor.addErrorText(Activator.Messages.getString("Generate.50") + id_deployer + " access error."); //$NON-NLS-1$ //$NON-NLS-2$
+		} catch (Exception e) {
+			error = true;
+			e.printStackTrace();
+			generalMonitor.addErrorText(Activator.Messages.getString("Generate.54") + id_deployer + "."); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		try {
+			IFileHelper.refreshFolder(logPath);
+		} catch (CoreException e1) {
+			e1.printStackTrace();
+		}
+		if (genObj instanceof Deployer) {
+			Deployer deployer = (Deployer) genObj;
+			int nbTask = NB_DEPLOY_STEP;
+			ComponentMonitor deployerMonitor = new ComponentMonitor(styletext, progressBar2, nbTask, label2, generalMonitor, configurationParameters, LogType.DEPLOYMENT, generalMonitor.getConsoleLog());
+			// deployer initialization
+			deployer.initialize(configurationParameters, generationParameters, deployerOptions, deployerMonitor);
+			boolean showEndMessage = false;
+			if ((deployer.isDocumentationDeployer() && doDocumentation) || !deployer.isDocumentationDeployer()) {
+
+				try {
+					deployerMonitor.beginTask(Activator.Messages.getString("Generate.51", depConf.getDeployerName())); //$NON-NLS-1$
+					showEndMessage = true;
+					deployer.deploy();
+					// We get the option for this generator
+					if (FeedbackActivator.doFeedback()) {
+						Map<String, Boolean> optionsDep = new HashMap<String, Boolean>();
+						for (Option option : depConf.getOptions()) {
+							optionsDep.put(option.getKey(), true);
 						}
-					} catch (Exception e) {
-						e.printStackTrace();
-						error = true;
-						deployerMonitor.addErrorTextAndLog(Activator.Messages.getString("Generate.56") + e.getMessage(), e, null); //$NON-NLS-1$
-						// must be the last action because this cause a break in
-						// the
-						// execution stack
-						// so no deployer after this can be executed !
-						Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString("Generate.56"), e)); //$NON-NLS-1$
+						feedbackManager.addFeedBackItem(depConf.getId(), null, id_techno, optionsDep);
 					}
-
-					try {
-						deployer.moveStampFile(logPath);
-					} catch (Exception e) {
-						e.printStackTrace();
-						deployerMonitor.addWarningTextAndLog(Activator.Messages.getString("Generate.57") + e.getMessage(), null); //$NON-NLS-1$
-					}
-
-					String fileName = "dep_" + deployer.getClass().getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
-					try {
-						deployerMonitor.getLog().saveLog(fileName, logPath); //$NON-NLS-1$
-					} catch (Exception e) {
-						deployerMonitor.addErrorText(Activator.Messages.getString("Generate.62", e.getMessage())); //$NON-NLS-1$
-						e.printStackTrace();
-						Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString("Generate.62"), e)); //$NON-NLS-1$
-					}
-				} else {
-					deployerMonitor.skipTasks(NB_DEPLOY_STEP);
+				} catch (Exception e) {
+					e.printStackTrace();
+					error = true;
+					deployerMonitor.addErrorTextAndLog(Activator.Messages.getString("Generate.56") + e.getMessage(), e, null); //$NON-NLS-1$
+					// must be the last action because this cause a break in
+					// the
+					// execution stack
+					// so no deployer after this can be executed !
+					Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString("Generate.56"), e)); //$NON-NLS-1$
 				}
-				deployerMonitor.taskDone(Activator.Messages.getString("Generate.52")); //$NON-NLS-1$
+
+				try {
+					deployer.moveStampFile(logPath);
+				} catch (Exception e) {
+					e.printStackTrace();
+					deployerMonitor.addWarningTextAndLog(Activator.Messages.getString("Generate.57") + e.getMessage(), null); //$NON-NLS-1$
+				}
+
+				String fileName = "dep_" + deployer.getClass().getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+				try {
+					deployerMonitor.getLog().saveLog(fileName, logPath); //$NON-NLS-1$
+				} catch (Exception e) {
+					deployerMonitor.addErrorText(Activator.Messages.getString("Generate.62", e.getMessage())); //$NON-NLS-1$
+					e.printStackTrace();
+					Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString("Generate.62"), e)); //$NON-NLS-1$
+				}
+			} else {
+				deployerMonitor.skipTasks(NB_DEPLOY_STEP);
 			}
+			if (showEndMessage)
+				deployerMonitor.taskDone(Activator.Messages.getString("Generate.52")); //$NON-NLS-1$
+			else
+				deployerMonitor.taskDone(null); //$NON-NLS-1$
+				
 		}
 		return error;
 	}

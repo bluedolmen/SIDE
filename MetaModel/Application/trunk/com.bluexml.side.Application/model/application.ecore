@@ -55,6 +55,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeployerConfiguration" eSuperTypes="#//ComponantConfiguration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="deployerName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shared" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ComponantConfiguration" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id_techno_version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

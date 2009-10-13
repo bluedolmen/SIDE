@@ -345,6 +345,13 @@ Hidden And Used By Default : To hidde this element and to use this generator by 
                </restriction>
             </simpleType>
          </attribute>
+         <attribute name="shared" type="boolean" use="default" value="false">
+            <annotation>
+               <documentation>
+                  If a deployer is shared, it will be called before all generation and after all generation.
+               </documentation>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 

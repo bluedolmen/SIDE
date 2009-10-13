@@ -366,6 +366,15 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDeployerConfiguration_Shared() {
+		return (EAttribute)deployerConfigurationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getComponantConfiguration() {
 		return componantConfigurationEClass;
 	}
@@ -570,6 +579,7 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 
 		deployerConfigurationEClass = createEClass(DEPLOYER_CONFIGURATION);
 		createEAttribute(deployerConfigurationEClass, DEPLOYER_CONFIGURATION__DEPLOYER_NAME);
+		createEAttribute(deployerConfigurationEClass, DEPLOYER_CONFIGURATION__SHARED);
 
 		componantConfigurationEClass = createEClass(COMPONANT_CONFIGURATION);
 		createEAttribute(componantConfigurationEClass, COMPONANT_CONFIGURATION__ID_TECHNO_VERSION);
@@ -656,6 +666,7 @@ public class ApplicationPackageImpl extends EPackageImpl implements ApplicationP
 
 		initEClass(deployerConfigurationEClass, DeployerConfiguration.class, "DeployerConfiguration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDeployerConfiguration_DeployerName(), ecorePackage.getEString(), "deployerName", null, 0, 1, DeployerConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDeployerConfiguration_Shared(), ecorePackage.getEBoolean(), "shared", "false", 0, 1, DeployerConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(componantConfigurationEClass, ComponantConfiguration.class, "ComponantConfiguration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getComponantConfiguration_Id_techno_version(), ecorePackage.getEString(), "id_techno_version", null, 0, 1, ComponantConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

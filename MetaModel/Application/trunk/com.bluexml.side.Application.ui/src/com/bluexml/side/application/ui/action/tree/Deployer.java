@@ -14,6 +14,8 @@ import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 
 public class Deployer extends ImplNode {
 
+	private boolean shared;
+	
 	public Deployer(IConfigurationElement elt, TechnologyVersion tv, TreeView root) {
 		super(elt, tv, root);
 		parent = tv;
@@ -23,6 +25,8 @@ public class Deployer extends ImplNode {
 		launchClass = elt.getAttribute("class");
 		contributorId = elt.getContributor().getName();
 		options = new HashSet<TreeNode>();
+		if (elt.getAttribute("shared") != null)
+			shared = Boolean.parseBoolean(elt.getAttribute("shared"));
 	}
 
 	public void updateApplication() {
@@ -39,6 +43,7 @@ public class Deployer extends ImplNode {
 					elt.setId(getId());
 					elt.setId_techno_version(parent.getId());
 					elt.setImpl_class(getLaunchClass());
+					elt.setShared(shared);
 					elt.setContributorId(getContributorId());
 					elt.setTechnologyName(((Technology) parent.getParent()).getLabel());
 					elt.setTechnologyVersionName(((TechnologyVersion) parent).getVersion());

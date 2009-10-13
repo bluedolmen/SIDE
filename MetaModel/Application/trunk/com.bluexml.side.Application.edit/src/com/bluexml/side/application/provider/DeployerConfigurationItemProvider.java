@@ -61,6 +61,7 @@ public class DeployerConfigurationItemProvider
 			super.getPropertyDescriptors(object);
 
 			addDeployerNamePropertyDescriptor(object);
+			addSharedPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -83,6 +84,28 @@ public class DeployerConfigurationItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Shared feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSharedPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_DeployerConfiguration_shared_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DeployerConfiguration_shared_feature", "_UI_DeployerConfiguration_type"),
+				 ApplicationPackage.Literals.DEPLOYER_CONFIGURATION__SHARED,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -125,6 +148,7 @@ public class DeployerConfigurationItemProvider
 
 		switch (notification.getFeatureID(DeployerConfiguration.class)) {
 			case ApplicationPackage.DEPLOYER_CONFIGURATION__DEPLOYER_NAME:
+			case ApplicationPackage.DEPLOYER_CONFIGURATION__SHARED:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

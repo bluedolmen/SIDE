@@ -642,13 +642,22 @@ public interface ApplicationPackage extends EPackage {
 	int DEPLOYER_CONFIGURATION__DEPLOYER_NAME = COMPONANT_CONFIGURATION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Shared</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYER_CONFIGURATION__SHARED = COMPONANT_CONFIGURATION_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Deployer Configuration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPLOYER_CONFIGURATION_FEATURE_COUNT = COMPONANT_CONFIGURATION_FEATURE_COUNT + 1;
+	int DEPLOYER_CONFIGURATION_FEATURE_COUNT = COMPONANT_CONFIGURATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.application.impl.ModuleConstraintImpl <em>Module Constraint</em>}' class.
@@ -947,6 +956,17 @@ public interface ApplicationPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDeployerConfiguration_DeployerName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.DeployerConfiguration#isShared <em>Shared</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Shared</em>'.
+	 * @see com.bluexml.side.application.DeployerConfiguration#isShared()
+	 * @see #getDeployerConfiguration()
+	 * @generated
+	 */
+	EAttribute getDeployerConfiguration_Shared();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.application.ComponantConfiguration <em>Componant Configuration</em>}'.
@@ -1337,6 +1357,14 @@ public interface ApplicationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DEPLOYER_CONFIGURATION__DEPLOYER_NAME = eINSTANCE.getDeployerConfiguration_DeployerName();
+
+		/**
+		 * The meta object literal for the '<em><b>Shared</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEPLOYER_CONFIGURATION__SHARED = eINSTANCE.getDeployerConfiguration_Shared();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.application.impl.ComponantConfigurationImpl <em>Componant Configuration</em>}' class.
