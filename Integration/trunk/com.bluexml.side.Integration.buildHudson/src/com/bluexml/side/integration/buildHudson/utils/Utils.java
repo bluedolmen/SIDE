@@ -565,7 +565,7 @@ public class Utils {
 
 					if (Application.parametre) {
 						// condition pour ne pas traiter les logs du checkout
-						if (ligne.equals("+ svn update")) {
+						if (ligne.startsWith("+ svn update")) {
 							update = true;
 						}
 						if (ligne.indexOf("Checking out " + Utils.getRepository()) != -1) {
@@ -684,7 +684,6 @@ public class Utils {
 		}
 
 		// affichage des donn�es
-		System.out.println("\nSize plugins : "+listePlugin.size()+" "+listeFeatureModif.size());
 		if (listePlugin.size() != 0) {
 			System.out.println("\nListe des plugins modifi�s: ");
 			// On parcours la liste des plugins et on les met a jour
