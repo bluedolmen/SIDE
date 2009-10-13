@@ -60,6 +60,9 @@
    <feature url="features/com.bluexml.side.Form.generator.xforms.feature_1.0.20.v8020-20090806.jar" id="com.bluexml.side.Form.generator.xforms.feature" version="1.0.20.v8020-20090806">
       <category name="S-IDE Form"/>
    </feature>
+   <feature url="features/com.bluexml.side.Deployer.alfrescoDirectCopy.feature_1.0.12.v10204-20091006.jar" id="com.bluexml.side.Deployer.alfrescoDirectCopy.feature" version="1.0.12.v10204-20091006">
+      <category name="S-IDE Deployer"/>
+   </feature>
    <category-def name="S-IDE Other" label="S-IDE Other"/>
    <category-def name="S-IDE Application" label="S-IDE Application"/>
    <category-def name="S-IDE Class" label="S-IDE Class"/>
