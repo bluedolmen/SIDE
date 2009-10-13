@@ -684,6 +684,7 @@ public class Utils {
 		}
 
 		// affichage des donn�es
+		System.out.println("\nSize plugins : "+listePlugin.size()+" "+listeFeatureModif.size());
 		if (listePlugin.size() != 0) {
 			System.out.println("\nListe des plugins modifi�s: ");
 			// On parcours la liste des plugins et on les met a jour
