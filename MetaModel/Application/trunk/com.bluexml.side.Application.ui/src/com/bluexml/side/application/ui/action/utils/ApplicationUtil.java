@@ -529,6 +529,100 @@ public class ApplicationUtil {
 			}
 		}
 
+		// scan all deployer
+		List<DeployerConfiguration> ldep = config.getDeployerConfigurations();
+		for (DeployerConfiguration deployerConfiguration : ldep) {
+			// get the extension declaration fragment
+			IConfigurationElement extFrag = getIConfigurationElement(deployerConfiguration);
+			IConfigurationElement techVersion = (IConfigurationElement) extFrag.getParent();
+			IConfigurationElement technology = (IConfigurationElement) techVersion.getParent();
+
+			// update properties
+			// technology
+			deployerConfiguration.setTechnologyName(technology.getAttribute("id"));
+			// technology_version
+			deployerConfiguration.setId_techno_version(techVersion.getAttribute("id"));
+			deployerConfiguration.setTechnologyVersionName(techVersion.getAttribute("version"));
+			// generatorVersion
+			deployerConfiguration.setDeployerName(extFrag.getAttribute("version"));
+			deployerConfiguration.setImpl_class(extFrag.getAttribute("class"));
+			deployerConfiguration.setContributorId(extFrag.getContributor().getName());
+
+			Map<String, IConfigurationElement> dependencies_ext = new HashMap<String, IConfigurationElement>();
+
+			// Obligatory dependences
+			Map<String, IConfigurationElement> dependencies_extObligatory = new HashMap<String, IConfigurationElement>();
+			// add generator/deployer dependencies to check
+			IConfigurationElement[] arrayOfdependencies_ext = extFrag.getChildren(APPLICATION_CONSTRAINTS);
+			for (IConfigurationElement configurationElement : arrayOfdependencies_ext) {
+				dependencies_ext.put(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_MODULEID), configurationElement);
+				dependencies_extObligatory.put(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_MODULEID), configurationElement);
+			}
+
+			// check options
+			EList<Option> options = deployerConfiguration.getOptions();
+			List<String> options_ext = new ArrayList<String>();
+			IConfigurationElement[] arrayOfoptions_ext = extFrag.getChildren("option");
+			for (IConfigurationElement configurationElement : arrayOfoptions_ext) {
+				options_ext.add(configurationElement.getAttribute("key"));
+
+				IConfigurationElement[] arrayOfConstraints_ext = configurationElement.getChildren(APPLICATION_CONSTRAINTS);
+				for (IConfigurationElement configurationElement2 : arrayOfConstraints_ext) {
+					// add to list of dependencies to check
+					dependencies_ext.put(configurationElement2.getAttribute(APPLICATION_CONSTRAINTS_MODULEID), configurationElement2);
+				}
+			}
+
+			List<Option> optionsToRemove = new ArrayList<Option>();
+			for (Option option : options) {
+				// check if defined
+				if (!options_ext.contains(option.getKey())) {
+					// remove this
+					optionsToRemove.add(option);
+					// System.out.println("toRemove !"+option);
+				} else {
+					// check option constraints
+				}
+			}
+			deployerConfiguration.getOptions().removeAll(optionsToRemove);
+
+			// check dependencies
+			EList<ModuleConstraint> mcs = deployerConfiguration.getModuleContraints();
+			List<String> updatedConstraints = new ArrayList<String>();
+			List<ModuleConstraint> mcsToRemove = new ArrayList<ModuleConstraint>();
+			for (ModuleConstraint moduleConstraint : mcs) {
+				if (!dependencies_ext.containsKey(moduleConstraint.getModuleId())) {
+					// to remove
+					mcsToRemove.add(moduleConstraint);
+				} else {
+					// update
+					IConfigurationElement configurationElement = dependencies_ext.get(moduleConstraint.getModuleId());
+					moduleConstraint.setModuleType(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_MODULETYPE));
+					moduleConstraint.setVersionMax(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_VERSIONMAX));
+					moduleConstraint.setVersionMin(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_VERSIONMIN));
+					moduleConstraint.setTechnologyVersion(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_TECHVERSION));
+					updatedConstraints.add(moduleConstraint.getModuleId());
+				}
+			}
+			deployerConfiguration.getModuleContraints().removeAll(mcsToRemove);
+
+			// add new constraints
+			List<String> lnewConstraints = new ArrayList<String>();
+			Set<String> s = dependencies_extObligatory.keySet();
+			s.removeAll(updatedConstraints);
+			lnewConstraints.addAll(s);
+			for (String string : lnewConstraints) {
+				IConfigurationElement newConstraint_ext = dependencies_ext.get(string);
+				ModuleConstraint moduleConstraint = ApplicationFactory.eINSTANCE.createModuleConstraint();
+				moduleConstraint.setModuleId(newConstraint_ext.getAttribute(APPLICATION_CONSTRAINTS_MODULEID));
+				moduleConstraint.setModuleType(newConstraint_ext.getAttribute(APPLICATION_CONSTRAINTS_MODULETYPE));
+				moduleConstraint.setVersionMax(newConstraint_ext.getAttribute(APPLICATION_CONSTRAINTS_VERSIONMAX));
+				moduleConstraint.setVersionMin(newConstraint_ext.getAttribute(APPLICATION_CONSTRAINTS_VERSIONMIN));
+				moduleConstraint.setTechnologyVersion(newConstraint_ext.getAttribute(APPLICATION_CONSTRAINTS_TECHVERSION));
+				deployerConfiguration.getModuleContraints().add(moduleConstraint);
+			}
+		}
+
 	}
 
 	/**
