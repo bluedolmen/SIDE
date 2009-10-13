@@ -42,7 +42,6 @@ public class FormGenerator extends AbstractGenerator {
 	private File mappingGenerationFolder;
 	private File messagesFile;
 	private boolean successfulInit;
-	private ComponentMonitor monitor;
 	private String webappContext;
 	private List<DataGenerator> generators = new ArrayList<DataGenerator>();
 
