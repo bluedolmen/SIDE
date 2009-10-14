@@ -186,9 +186,9 @@ public class StylingImpl extends MetaInfoGroupImpl implements Styling {
 			case ViewPackage.STYLING__STYLE:
 				return getStyle();
 			case ViewPackage.STYLING__HEIGHT:
-				return new Integer(getHeight());
+				return getHeight();
 			case ViewPackage.STYLING__WIDTH:
-				return new Integer(getWidth());
+				return getWidth();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -205,10 +205,10 @@ public class StylingImpl extends MetaInfoGroupImpl implements Styling {
 				setStyle((String)newValue);
 				return;
 			case ViewPackage.STYLING__HEIGHT:
-				setHeight(((Integer)newValue).intValue());
+				setHeight((Integer)newValue);
 				return;
 			case ViewPackage.STYLING__WIDTH:
-				setWidth(((Integer)newValue).intValue());
+				setWidth((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

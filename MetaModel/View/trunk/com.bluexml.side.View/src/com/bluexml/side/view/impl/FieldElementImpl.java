@@ -615,7 +615,7 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 			case ViewPackage.FIELD_ELEMENT__SUFFIX:
 				return getSuffix();
 			case ViewPackage.FIELD_ELEMENT__HIDDEN:
-				return isHidden() ? Boolean.TRUE : Boolean.FALSE;
+				return isHidden();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -664,7 +664,7 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 				setSuffix((String)newValue);
 				return;
 			case ViewPackage.FIELD_ELEMENT__HIDDEN:
-				setHidden(((Boolean)newValue).booleanValue());
+				setHidden((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

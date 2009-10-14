@@ -16,9 +16,9 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.common.Container;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.AbstractViewOf;
 import com.bluexml.side.view.Col;
@@ -129,8 +129,8 @@ public class ClassUtils {
 	 */
 	public static Command synchronizeView(AbstractViewOf view, EditingDomain domain) {
 		CompoundCommand cmd = new CompoundCommand();
-		Container container = view.getViewOf();
-		if (container instanceof Clazz) {
+		ModelElement element = view.getViewOf();
+		if (element instanceof Clazz) {
 			// Collect information on class and view :
 			EList<Field> fields = view.getDisabledAndEnabledField();
 			

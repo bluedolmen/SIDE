@@ -32,10 +32,10 @@ import org.topcased.modeler.utils.Utils;
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.presentation.ClazzEditor;
-import com.bluexml.side.common.Container;
+import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.Package;
 import com.bluexml.side.view.AbstractViewOf;
 import com.bluexml.side.view.edit.ui.ViewUI;
-import com.bluexml.side.common.Package;
 
 public class ShowLinkedClassAction extends Action implements
 		ISelectionChangedListener {
@@ -72,7 +72,7 @@ public class ShowLinkedClassAction extends Action implements
 	}
 
 	private void doAction(AbstractViewOf view) {
-		Container c = view.getViewOf();
+		ModelElement c = view.getViewOf();
 		if (c instanceof Clazz) {
 			Clazz clazz = (Clazz) c;
 			

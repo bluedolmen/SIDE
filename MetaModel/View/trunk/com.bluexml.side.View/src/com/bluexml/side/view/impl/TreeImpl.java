@@ -556,9 +556,9 @@ public class TreeImpl extends AbstractViewOfImpl implements Tree {
 			case ViewPackage.TREE__SORTING:
 				return getSorting();
 			case ViewPackage.TREE__EDITABLE:
-				return isEditable() ? Boolean.TRUE : Boolean.FALSE;
+				return isEditable();
 			case ViewPackage.TREE__MOVABLE:
-				return isMovable() ? Boolean.TRUE : Boolean.FALSE;
+				return isMovable();
 			case ViewPackage.TREE__FILTERING:
 				return getFiltering();
 			case ViewPackage.TREE__OPERATIONS:
@@ -568,9 +568,9 @@ public class TreeImpl extends AbstractViewOfImpl implements Tree {
 			case ViewPackage.TREE__NODE_VALUE:
 				return getNodeValue();
 			case ViewPackage.TREE__DEFAULT_DEPTH:
-				return new Integer(getDefaultDepth());
+				return getDefaultDepth();
 			case ViewPackage.TREE__MAX_DEPTH:
-				return new Integer(getMaxDepth());
+				return getMaxDepth();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -588,10 +588,10 @@ public class TreeImpl extends AbstractViewOfImpl implements Tree {
 				setSorting((Sorting)newValue);
 				return;
 			case ViewPackage.TREE__EDITABLE:
-				setEditable(((Boolean)newValue).booleanValue());
+				setEditable((Boolean)newValue);
 				return;
 			case ViewPackage.TREE__MOVABLE:
-				setMovable(((Boolean)newValue).booleanValue());
+				setMovable((Boolean)newValue);
 				return;
 			case ViewPackage.TREE__FILTERING:
 				setFiltering((Filtering)newValue);
@@ -606,10 +606,10 @@ public class TreeImpl extends AbstractViewOfImpl implements Tree {
 				setNodeValue((FieldElement)newValue);
 				return;
 			case ViewPackage.TREE__DEFAULT_DEPTH:
-				setDefaultDepth(((Integer)newValue).intValue());
+				setDefaultDepth((Integer)newValue);
 				return;
 			case ViewPackage.TREE__MAX_DEPTH:
-				setMaxDepth(((Integer)newValue).intValue());
+				setMaxDepth((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

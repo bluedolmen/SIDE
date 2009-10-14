@@ -332,9 +332,9 @@ public class DataListImpl extends AbstractDataTableImpl implements DataList {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ViewPackage.DATA_LIST__MOVABLE:
-				return isMovable() ? Boolean.TRUE : Boolean.FALSE;
+				return isMovable();
 			case ViewPackage.DATA_LIST__EDITABLE:
-				return isEditable() ? Boolean.TRUE : Boolean.FALSE;
+				return isEditable();
 			case ViewPackage.DATA_LIST__FILTERING:
 				return getFiltering();
 			case ViewPackage.DATA_LIST__SORTING:
@@ -354,10 +354,10 @@ public class DataListImpl extends AbstractDataTableImpl implements DataList {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ViewPackage.DATA_LIST__MOVABLE:
-				setMovable(((Boolean)newValue).booleanValue());
+				setMovable((Boolean)newValue);
 				return;
 			case ViewPackage.DATA_LIST__EDITABLE:
-				setEditable(((Boolean)newValue).booleanValue());
+				setEditable((Boolean)newValue);
 				return;
 			case ViewPackage.DATA_LIST__FILTERING:
 				setFiltering((Filtering)newValue);

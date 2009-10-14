@@ -100,7 +100,7 @@ public abstract class EditableImpl extends EObjectImpl implements Editable {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ViewPackage.EDITABLE__EDITABLE:
-				return isEditable() ? Boolean.TRUE : Boolean.FALSE;
+				return isEditable();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -114,7 +114,7 @@ public abstract class EditableImpl extends EObjectImpl implements Editable {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ViewPackage.EDITABLE__EDITABLE:
-				setEditable(((Boolean)newValue).booleanValue());
+				setEditable((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

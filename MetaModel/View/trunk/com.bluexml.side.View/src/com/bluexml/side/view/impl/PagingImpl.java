@@ -187,9 +187,9 @@ public class PagingImpl extends EObjectImpl implements Paging {
 			case ViewPackage.PAGING__PAGINATION_STYLE:
 				return getPaginationStyle();
 			case ViewPackage.PAGING__MAX_ITEMS:
-				return new Integer(getMaxItems());
+				return getMaxItems();
 			case ViewPackage.PAGING__MAX_PAGE:
-				return new Integer(getMaxPage());
+				return getMaxPage();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -206,10 +206,10 @@ public class PagingImpl extends EObjectImpl implements Paging {
 				setPaginationStyle((PaginationStyle)newValue);
 				return;
 			case ViewPackage.PAGING__MAX_ITEMS:
-				setMaxItems(((Integer)newValue).intValue());
+				setMaxItems((Integer)newValue);
 				return;
 			case ViewPackage.PAGING__MAX_PAGE:
-				setMaxPage(((Integer)newValue).intValue());
+				setMaxPage((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

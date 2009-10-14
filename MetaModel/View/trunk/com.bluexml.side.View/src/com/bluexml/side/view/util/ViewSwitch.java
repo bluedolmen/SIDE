@@ -216,13 +216,13 @@ public class ViewSwitch<T> {
 				if (result == null) result = caseAbstractViewOf(dataList);
 				if (result == null) result = caseDataTableElement(dataList);
 				if (result == null) result = casePaginable(dataList);
-				if (result == null) result = caseFieldContainer(dataList);
 				if (result == null) result = caseMovable(dataList);
 				if (result == null) result = caseEditable(dataList);
 				if (result == null) result = caseFilterable(dataList);
 				if (result == null) result = caseSortable(dataList);
 				if (result == null) result = caseActionable(dataList);
 				if (result == null) result = caseAbstractView(dataList);
+				if (result == null) result = caseFieldContainer(dataList);
 				if (result == null) result = caseFieldElement(dataList);
 				if (result == null) result = caseStylable(dataList);
 				if (result == null) result = caseNamedModelElement(dataList);

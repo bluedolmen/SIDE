@@ -341,7 +341,7 @@ public class FacetMapImpl extends AbstractViewOfImpl implements FacetMap {
 			case ViewPackage.FACET_MAP__OPERATIONS:
 				return getOperations();
 			case ViewPackage.FACET_MAP__DISPLAY_EMPTY_FACET:
-				return isDisplayEmptyFacet() ? Boolean.TRUE : Boolean.FALSE;
+				return isDisplayEmptyFacet();
 			case ViewPackage.FACET_MAP__FACET_DISPLAY_TYPE:
 				return getFacetDisplayType();
 		}
@@ -364,7 +364,7 @@ public class FacetMapImpl extends AbstractViewOfImpl implements FacetMap {
 				setOperations((OperationComponent)newValue);
 				return;
 			case ViewPackage.FACET_MAP__DISPLAY_EMPTY_FACET:
-				setDisplayEmptyFacet(((Boolean)newValue).booleanValue());
+				setDisplayEmptyFacet((Boolean)newValue);
 				return;
 			case ViewPackage.FACET_MAP__FACET_DISPLAY_TYPE:
 				setFacetDisplayType((FacetDisplayType)newValue);

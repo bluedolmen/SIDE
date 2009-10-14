@@ -145,7 +145,7 @@ public class SortingImpl extends EObjectImpl implements Sorting {
 			case ViewPackage.SORTING__SORT_ORDER:
 				return getSortOrder();
 			case ViewPackage.SORTING__SORTED:
-				return isSorted() ? Boolean.TRUE : Boolean.FALSE;
+				return isSorted();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -162,7 +162,7 @@ public class SortingImpl extends EObjectImpl implements Sorting {
 				setSortOrder((SortOrder)newValue);
 				return;
 			case ViewPackage.SORTING__SORTED:
-				setSorted(((Boolean)newValue).booleanValue());
+				setSorted((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

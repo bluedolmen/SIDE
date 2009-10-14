@@ -16,7 +16,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
-
 import com.bluexml.side.view.Field;
 import com.bluexml.side.view.FieldContainer;
 import com.bluexml.side.view.ViewFactory;

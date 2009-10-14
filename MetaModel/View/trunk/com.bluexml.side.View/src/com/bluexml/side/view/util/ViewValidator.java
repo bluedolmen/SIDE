@@ -25,6 +25,7 @@ import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.OCL;
 
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+import com.bluexml.side.view.*;
 import com.bluexml.side.view.AbstractDataTable;
 import com.bluexml.side.view.AbstractView;
 import com.bluexml.side.view.AbstractViewOf;

@@ -100,7 +100,7 @@ public abstract class MovableImpl extends EObjectImpl implements Movable {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ViewPackage.MOVABLE__MOVABLE:
-				return isMovable() ? Boolean.TRUE : Boolean.FALSE;
+				return isMovable();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -114,7 +114,7 @@ public abstract class MovableImpl extends EObjectImpl implements Movable {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ViewPackage.MOVABLE__MOVABLE:
-				setMovable(((Boolean)newValue).booleanValue());
+				setMovable((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

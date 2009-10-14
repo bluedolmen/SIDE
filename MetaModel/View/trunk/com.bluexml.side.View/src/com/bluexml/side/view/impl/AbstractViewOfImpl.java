@@ -6,19 +6,16 @@
  */
 package com.bluexml.side.view.impl;
 
-import com.bluexml.side.common.Container;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.ocl.ecore.OCL;
 
+import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 import com.bluexml.side.view.AbstractViewOf;
 import com.bluexml.side.view.ViewPackage;
-
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,7 +39,7 @@ public abstract class AbstractViewOfImpl extends AbstractViewImpl implements Abs
 	 * @generated
 	 * @ordered
 	 */
-	protected Container viewOf;
+	protected ModelElement viewOf;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -68,10 +65,10 @@ public abstract class AbstractViewOfImpl extends AbstractViewImpl implements Abs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Container getViewOf() {
+	public ModelElement getViewOf() {
 		if (viewOf != null && viewOf.eIsProxy()) {
 			InternalEObject oldViewOf = (InternalEObject)viewOf;
-			viewOf = (Container)eResolveProxy(oldViewOf);
+			viewOf = (ModelElement)eResolveProxy(oldViewOf);
 			if (viewOf != oldViewOf) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ViewPackage.ABSTRACT_VIEW_OF__VIEW_OF, oldViewOf, viewOf));
@@ -85,7 +82,7 @@ public abstract class AbstractViewOfImpl extends AbstractViewImpl implements Abs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Container basicGetViewOf() {
+	public ModelElement basicGetViewOf() {
 		return viewOf;
 	}
 
@@ -94,8 +91,8 @@ public abstract class AbstractViewOfImpl extends AbstractViewImpl implements Abs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setViewOf(Container newViewOf) {
-		Container oldViewOf = viewOf;
+	public void setViewOf(ModelElement newViewOf) {
+		ModelElement oldViewOf = viewOf;
 		viewOf = newViewOf;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_VIEW_OF__VIEW_OF, oldViewOf, viewOf));
@@ -125,7 +122,7 @@ public abstract class AbstractViewOfImpl extends AbstractViewImpl implements Abs
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ViewPackage.ABSTRACT_VIEW_OF__VIEW_OF:
-				setViewOf((Container)newValue);
+				setViewOf((ModelElement)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -140,7 +137,7 @@ public abstract class AbstractViewOfImpl extends AbstractViewImpl implements Abs
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ViewPackage.ABSTRACT_VIEW_OF__VIEW_OF:
-				setViewOf((Container)null);
+				setViewOf((ModelElement)null);
 				return;
 		}
 		super.eUnset(featureID);

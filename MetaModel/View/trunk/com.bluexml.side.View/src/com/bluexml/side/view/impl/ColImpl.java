@@ -331,9 +331,9 @@ public class ColImpl extends FieldContainerImpl implements Col {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ViewPackage.COL__MOVABLE:
-				return isMovable() ? Boolean.TRUE : Boolean.FALSE;
+				return isMovable();
 			case ViewPackage.COL__EDITABLE:
-				return isEditable() ? Boolean.TRUE : Boolean.FALSE;
+				return isEditable();
 			case ViewPackage.COL__FILTERING:
 				return getFiltering();
 			case ViewPackage.COL__SORTING:
@@ -353,10 +353,10 @@ public class ColImpl extends FieldContainerImpl implements Col {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ViewPackage.COL__MOVABLE:
-				setMovable(((Boolean)newValue).booleanValue());
+				setMovable((Boolean)newValue);
 				return;
 			case ViewPackage.COL__EDITABLE:
-				setEditable(((Boolean)newValue).booleanValue());
+				setEditable((Boolean)newValue);
 				return;
 			case ViewPackage.COL__FILTERING:
 				setFiltering((Filtering)newValue);

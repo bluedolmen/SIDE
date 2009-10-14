@@ -99,7 +99,7 @@ public class BooleanFieldImpl extends FieldImpl implements BooleanField {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ViewPackage.BOOLEAN_FIELD__SPLIT:
-				return isSplit() ? Boolean.TRUE : Boolean.FALSE;
+				return isSplit();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -113,7 +113,7 @@ public class BooleanFieldImpl extends FieldImpl implements BooleanField {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ViewPackage.BOOLEAN_FIELD__SPLIT:
-				setSplit(((Boolean)newValue).booleanValue());
+				setSplit((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
