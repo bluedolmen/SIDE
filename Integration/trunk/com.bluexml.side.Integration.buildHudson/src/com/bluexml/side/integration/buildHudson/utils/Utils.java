@@ -596,7 +596,7 @@ public class Utils {
 											|| ligne.charAt(1) == 'A' || ligne
 											.charAt(1) == 'D') && update) {
 								
-								if (ligne.indexOf("Integration")> -1) {
+								if (ligne.indexOf("Integration")> -1 || ligne.indexOf("FrameworksModules")> -1) {
 									for (String valeur : listefichierpom) {
 										String valeurf= valeur;
 										String [] tab=valeurf.split("/S-IDE/");
