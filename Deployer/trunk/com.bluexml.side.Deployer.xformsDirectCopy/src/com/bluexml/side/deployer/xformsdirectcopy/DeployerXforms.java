@@ -12,7 +12,7 @@ import com.bluexml.side.util.deployer.war.DirectWebAppsDeployer;
 public class DeployerXforms extends DirectWebAppsDeployer {
 
 	public DeployerXforms() {
-		super("mywebapp");
+		super("xform");
 	}
 	
 	/**
