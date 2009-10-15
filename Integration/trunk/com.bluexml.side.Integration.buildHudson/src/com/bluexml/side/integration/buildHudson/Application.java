@@ -466,13 +466,13 @@ public class Application {
 						+ projects[i] + "\" version=\""
 						+ Utils.getVersionNumber(projects[i]) + "\">\n";
 				String[] branche = projects[i].split("\\.");
-				out += "\t\t<category name=\"S-IDE " + branche[3] + "\"/>\n";
+				out += "\t\t<category name=\"SIDE " + branche[3] + "\"/>\n";
 				out += "\t</feature>\n\n";
 			}
 		}
 		for (String category : categories) {
-			out += "\t<category-def name=\"S-IDE " + category
-					+ "\" label=\"S-IDE " + category + "\"/>\n";
+			out += "\t<category-def name=\"SIDE " + category
+					+ "\" label=\"SIDE " + category + "\"/>\n";
 		}
 		out += "\n</site>\n";
 
