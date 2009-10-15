@@ -1,5 +1,5 @@
 <projectDescription>
-  <name>formProcessor</name>
+  <name>com.bluexml.side.framework.alfresco.formProcessor</name>
   <comment>this is a new Amp project generated using	&quot;com.bluexml.side.Integration.m2.ampArchetype&quot; thanks to change this description</comment>
   <projects/>
   <buildSpec>
