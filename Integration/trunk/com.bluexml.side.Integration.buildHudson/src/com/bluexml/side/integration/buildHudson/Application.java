@@ -629,10 +629,11 @@ public class Application {
 		
 		// fichier pom.xml
 		Utils.listefichierpom=new ArrayList();
-		String pathproject = Utils.getBuildPath() + File.separator + Utils.repositoryCopy;
+		//String pathproject = Utils.getBuildPath() + File.separator + Utils.repositoryCopy;
+		String pathproject = workspace + "/S-IDE";
 		
-		Utils.findFile(new File(pathproject+"/S-IDE/Integration/trunk"),"pom.xml");
-		Utils.findFile(new File(pathproject+"/S-IDE/FrameworksModules/trunk"),"pom.xml");
+		Utils.findFile(new File(pathproject+"/Integration/trunk"),"pom.xml");
+		Utils.findFile(new File(pathproject+"/FrameworksModules/trunk"),"pom.xml");
 		System.out.println("#### Utils.listefichierpom.size()=" + Utils.listefichierpom.size() );
 		System.out.println("#### Utils.listefichierpom=" + Utils.listefichierpom );
 		if (Utils.listefichierpom.size() != 0) {
