@@ -30,7 +30,7 @@
 		below as the AMP module version. Instead we use the
 		buildnumber-maven-plugin. This requires a scm connection.
 	-->
-  <version>1.0.6</version>
+  <version>1.0.8</version>
   <description>this is a new Amp project generated using	"com.bluexml.side.Integration.m2.ampArchetype" thanks to change this description</description>
   <parent>
     <groupId>org.bluexml</groupId>
@@ -42,18 +42,18 @@
       <id>ss-public</id>
       <url>http://repository.sourcesense.com/maven2</url>
     </repository>
-		<repository>
-			<id>releases</id>
-			<url>http://repository.sourcesense.com/nexus/content/repositories/releases/</url>
-		</repository>
-		<repository>
-			<id>ss-public</id>
-			<url>http://repository.sourcesense.com/maven2</url>
-		</repository>
-		<repository>
-			<id>thirdparty</id>
-			<url>http://repository.sourcesense.com/nexus/content/repositories/thirdparty/</url>
-		</repository>
+    <repository>
+      <id>releases</id>
+      <url>http://repository.sourcesense.com/nexus/content/repositories/releases/</url>
+    </repository>
+    <repository>
+      <id>ss-public</id>
+      <url>http://repository.sourcesense.com/maven2</url>
+    </repository>
+    <repository>
+      <id>thirdparty</id>
+      <url>http://repository.sourcesense.com/nexus/content/repositories/thirdparty/</url>
+    </repository>
   </repositories>
   <pluginRepositories>
     <pluginRepository>
