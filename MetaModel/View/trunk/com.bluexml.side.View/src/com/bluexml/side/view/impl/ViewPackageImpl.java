@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.view.impl;
 
+import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.common.CommonPackage;
 
 import com.bluexml.side.view.AbstractDataTable;
@@ -467,7 +468,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		isInited = true;
 
 		// Initialize simple dependencies
-		CommonPackage.eINSTANCE.eClass();
+		ClazzPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theViewPackage.createPackageContents();
@@ -1501,6 +1502,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 
 		// Obtain other dependent packages
 		CommonPackage theCommonPackage = (CommonPackage)EPackage.Registry.INSTANCE.getEPackage(CommonPackage.eNS_URI);
+		ClazzPackage theClazzPackage = (ClazzPackage)EPackage.Registry.INSTANCE.getEPackage(ClazzPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -1584,7 +1586,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
 		addEOperation(abstractViewEClass, this.getField(), "getDisabledFields", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(abstractViewOfEClass, AbstractViewOf.class, "AbstractViewOf", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAbstractViewOf_ViewOf(), theCommonPackage.getModelElement(), null, "viewOf", null, 0, 1, AbstractViewOf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractViewOf_ViewOf(), theClazzPackage.getAbstractClass(), null, "viewOf", null, 0, 1, AbstractViewOf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractDataTableEClass, AbstractDataTable.class, "AbstractDataTable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractDataTable_HaveRowActions(), theCommonPackage.getOperationComponent(), null, "haveRowActions", null, 0, 1, AbstractDataTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

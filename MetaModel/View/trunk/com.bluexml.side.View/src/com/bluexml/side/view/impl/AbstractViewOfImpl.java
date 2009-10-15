@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.view.impl;
 
+import com.bluexml.side.clazz.AbstractClass;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -39,7 +40,7 @@ public abstract class AbstractViewOfImpl extends AbstractViewImpl implements Abs
 	 * @generated
 	 * @ordered
 	 */
-	protected ModelElement viewOf;
+	protected AbstractClass viewOf;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -65,10 +66,10 @@ public abstract class AbstractViewOfImpl extends AbstractViewImpl implements Abs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelElement getViewOf() {
+	public AbstractClass getViewOf() {
 		if (viewOf != null && viewOf.eIsProxy()) {
 			InternalEObject oldViewOf = (InternalEObject)viewOf;
-			viewOf = (ModelElement)eResolveProxy(oldViewOf);
+			viewOf = (AbstractClass)eResolveProxy(oldViewOf);
 			if (viewOf != oldViewOf) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ViewPackage.ABSTRACT_VIEW_OF__VIEW_OF, oldViewOf, viewOf));
@@ -82,7 +83,7 @@ public abstract class AbstractViewOfImpl extends AbstractViewImpl implements Abs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelElement basicGetViewOf() {
+	public AbstractClass basicGetViewOf() {
 		return viewOf;
 	}
 
@@ -91,8 +92,8 @@ public abstract class AbstractViewOfImpl extends AbstractViewImpl implements Abs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setViewOf(ModelElement newViewOf) {
-		ModelElement oldViewOf = viewOf;
+	public void setViewOf(AbstractClass newViewOf) {
+		AbstractClass oldViewOf = viewOf;
 		viewOf = newViewOf;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.ABSTRACT_VIEW_OF__VIEW_OF, oldViewOf, viewOf));
@@ -122,7 +123,7 @@ public abstract class AbstractViewOfImpl extends AbstractViewImpl implements Abs
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ViewPackage.ABSTRACT_VIEW_OF__VIEW_OF:
-				setViewOf((ModelElement)newValue);
+				setViewOf((AbstractClass)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -137,7 +138,7 @@ public abstract class AbstractViewOfImpl extends AbstractViewImpl implements Abs
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ViewPackage.ABSTRACT_VIEW_OF__VIEW_OF:
-				setViewOf((ModelElement)null);
+				setViewOf((AbstractClass)null);
 				return;
 		}
 		super.eUnset(featureID);

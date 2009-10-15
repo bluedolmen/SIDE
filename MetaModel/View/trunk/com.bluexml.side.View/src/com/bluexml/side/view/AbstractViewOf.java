@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.view;
 
+import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.common.ModelElement;
 
 /**
@@ -34,12 +35,12 @@ public interface AbstractViewOf extends AbstractView {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>View Of</em>' reference.
-	 * @see #setViewOf(ModelElement)
+	 * @see #setViewOf(AbstractClass)
 	 * @see com.bluexml.side.view.ViewPackage#getAbstractViewOf_ViewOf()
 	 * @model
 	 * @generated
 	 */
-	ModelElement getViewOf();
+	AbstractClass getViewOf();
 
 	/**
 	 * Sets the value of the '{@link com.bluexml.side.view.AbstractViewOf#getViewOf <em>View Of</em>}' reference.
@@ -49,6 +50,6 @@ public interface AbstractViewOf extends AbstractView {
 	 * @see #getViewOf()
 	 * @generated
 	 */
-	void setViewOf(ModelElement value);
+	void setViewOf(AbstractClass value);
 
 } // AbstractViewOf

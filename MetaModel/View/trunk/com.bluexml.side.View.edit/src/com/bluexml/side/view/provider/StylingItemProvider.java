@@ -7,6 +7,7 @@
 package com.bluexml.side.view.provider;
 
 
+import com.bluexml.side.clazz.ClazzFactory;
 import java.util.Collection;
 import java.util.List;
 
@@ -198,6 +199,16 @@ public class StylingItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+				 ClazzFactory.eINSTANCE.createClassComment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+				 ClazzFactory.eINSTANCE.createAssociationEnd()));
 
 		newChildDescriptors.add
 			(createChildParameter
