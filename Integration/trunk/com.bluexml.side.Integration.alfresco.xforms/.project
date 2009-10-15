@@ -1,0 +1,13 @@
+<projectDescription>
+  <name>com.bluexml.side.Integration.alfresco.xforms</name>
+  <comment>this is a new Amp project generated using	&quot;com.bluexml.side.Integration.m2.ampArchetype&quot; thanks to change this description</comment>
+  <projects/>
+  <buildSpec>
+    <buildCommand>
+      <name>org.maven.ide.eclipse.maven2Builder</name>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.maven.ide.eclipse.maven2Nature</nature>
+  </natures>
+</projectDescription>
