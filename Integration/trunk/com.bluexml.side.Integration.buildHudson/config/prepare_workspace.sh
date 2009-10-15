@@ -44,7 +44,7 @@ DF_HOME=`df -k | grep -i /$DFDIR | awk '{print $5}'|cut -d"%" -f1`
 #fi
 # prepare workspace: copy build.properties, script, jar into working space
 cp -R $SOURCE_WORKSPACE/* $TARGET_WORKSPACE
-cp -R $MAVEN_SOURCE/* $MAVEN_TARGET
+#cp -R $MAVEN_SOURCE/* $MAVEN_TARGET
 cp -R $SOURCE_WORKSPACE/../* $BUILD_JAR
 
 cd $BUILD_JAR
