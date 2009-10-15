@@ -633,6 +633,8 @@ public class Application {
 		
 		Utils.findFile(new File(pathproject+"/S-IDE/Integration/trunk"),"pom.xml");
 		Utils.findFile(new File(pathproject+"/S-IDE/FrameworksModules/trunk"),"pom.xml");
+		System.out.println("#### Utils.listefichierpom.size()=" + Utils.listefichierpom.size() );
+		System.out.println("#### Utils.listefichierpom=" + Utils.listefichierpom );
 		if (Utils.listefichierpom.size() != 0) {
 			for (String pom : Utils.listefichierpom) {
 				String [] tab=pom.split("/pom.xml");
@@ -641,6 +643,7 @@ public class Application {
 					+ tab[0] + "\">\n";
 				out += "\t\t\t\t<include name=\"pom.xml\" />\n";
 				out += "\t\t\t</fileset>\n";
+				System.out.println("#### tab=" + tab[0] );
 			}
 			}
 		out += "\t\t\t</commit>\n";
