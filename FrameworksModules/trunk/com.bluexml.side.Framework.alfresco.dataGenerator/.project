@@ -1,5 +1,5 @@
 <projectDescription>
-  <name>dataGenerator</name>
+  <name>com.bluexml.side.Framework.alfresco.dataGenerator</name>
   <comment>Project to generate data test in Alfresco for a given model</comment>
   <projects/>
   <buildSpec>
