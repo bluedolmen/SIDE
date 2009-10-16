@@ -44,7 +44,7 @@
       <details key="ActorNameMustBeUnique" value="Swimlane.allInstances() -> select(n|n.name = self.name and n &lt;> self )->size()=0"/>
       <details key="MustManageAtLeastOneTask" value="(not (self.manage->isEmpty())) or (StartState.allInstances()->collect(ss | ss.initiator)->includes(self))"/>
       <details key="noSpecialCharacters" value="self.name.regexMatch('[\w]*') = true"/>
-      <details key="ActoridOrPooledactor" value="self.manage->forAll(t | t.oclIsTypeOf(StartState)) or&#xD;not (((self.actorid -> isEmpty() or self.actorid='')  and (self.pooledactors  -> isEmpty() or self.pooledactors ='')) or (not(self.actorid->isEmpty()) and not(self.pooledactors->isEmpty())))"/>
+      <details key="ActoridOrPooledactor" value="self.manage->forAll(t | t.oclIsTypeOf(StartState)) or&#xA;(not(self.actorid->isEmpty()) and (self.pooledactors  -> isEmpty() or self.pooledactors ='')) or&#xA;(self.actorid -> isEmpty() or self.actorid='') and not(self.pooledactors->isEmpty())"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="ActorNameMustBeUnique MustManageAtLeastOneTask noSpecialCharacters ActoridOrPooledactor"/>

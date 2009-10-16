@@ -45,6 +45,8 @@ import com.bluexml.side.workflow.UserTask;
 import com.bluexml.side.workflow.Variable;
 import com.bluexml.side.workflow.WorkflowModelElement;
 import com.bluexml.side.workflow.WorkflowPackage;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
@@ -306,7 +308,7 @@ public class WorkflowValidator extends EObjectValidator {
 				return validateTransitionTask((TransitionTask)value, diagnostics, context);
 			case WorkflowPackage.BPM_EVENT_TYPE:
 				return validateBPMEventType((BPMEventType)value, diagnostics, context);
-			default: 
+			default:
 				return true;
 		}
 	}
@@ -349,10 +351,10 @@ public class WorkflowValidator extends EObjectValidator {
         if (process_PackageNameNullInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.PROCESS);
-			
+
 			EAnnotation ocl = WorkflowPackage.Literals.PROCESS.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("PackageNameNull");
-			
+
 			try {
 				process_PackageNameNullInvOCL = helper.createInvariant(expr);
 			}
@@ -360,14 +362,14 @@ public class WorkflowValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(process_PackageNameNullInvOCL);
-		
+
 		if (!query.check(process)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( WorkflowPackage.Literals.PROCESS.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"PackageNameNull")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "PackageNameNull", getObjectLabel(process, context) }),
@@ -388,10 +390,10 @@ public class WorkflowValidator extends EObjectValidator {
         if (process_OneStartTaskInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.PROCESS);
-			
+
 			EAnnotation ocl = WorkflowPackage.Literals.PROCESS.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("OneStartTask");
-			
+
 			try {
 				process_OneStartTaskInvOCL = helper.createInvariant(expr);
 			}
@@ -399,14 +401,14 @@ public class WorkflowValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(process_OneStartTaskInvOCL);
-		
+
 		if (!query.check(process)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( WorkflowPackage.Literals.PROCESS.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"OneStartTask")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "OneStartTask", getObjectLabel(process, context) }),
@@ -427,10 +429,10 @@ public class WorkflowValidator extends EObjectValidator {
         if (process_atLeastOneEndTaskInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.PROCESS);
-			
+
 			EAnnotation ocl = WorkflowPackage.Literals.PROCESS.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("atLeastOneEndTask");
-			
+
 			try {
 				process_atLeastOneEndTaskInvOCL = helper.createInvariant(expr);
 			}
@@ -438,14 +440,14 @@ public class WorkflowValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(process_atLeastOneEndTaskInvOCL);
-		
+
 		if (!query.check(process)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( WorkflowPackage.Literals.PROCESS.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"atLeastOneEndTask")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "atLeastOneEndTask", getObjectLabel(process, context) }),
@@ -486,10 +488,10 @@ public class WorkflowValidator extends EObjectValidator {
         if (swimlane_ActorNameMustBeUniqueInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.SWIMLANE);
-			
+
 			EAnnotation ocl = WorkflowPackage.Literals.SWIMLANE.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("ActorNameMustBeUnique");
-			
+
 			try {
 				swimlane_ActorNameMustBeUniqueInvOCL = helper.createInvariant(expr);
 			}
@@ -497,14 +499,14 @@ public class WorkflowValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(swimlane_ActorNameMustBeUniqueInvOCL);
-		
+
 		if (!query.check(swimlane)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( WorkflowPackage.Literals.SWIMLANE.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"ActorNameMustBeUnique")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ActorNameMustBeUnique", getObjectLabel(swimlane, context) }),
@@ -525,10 +527,10 @@ public class WorkflowValidator extends EObjectValidator {
         if (swimlane_MustManageAtLeastOneTaskInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.SWIMLANE);
-			
+
 			EAnnotation ocl = WorkflowPackage.Literals.SWIMLANE.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("MustManageAtLeastOneTask");
-			
+
 			try {
 				swimlane_MustManageAtLeastOneTaskInvOCL = helper.createInvariant(expr);
 			}
@@ -536,14 +538,14 @@ public class WorkflowValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(swimlane_MustManageAtLeastOneTaskInvOCL);
-		
+
 		if (!query.check(swimlane)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( WorkflowPackage.Literals.SWIMLANE.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"MustManageAtLeastOneTask")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "MustManageAtLeastOneTask", getObjectLabel(swimlane, context) }),
@@ -564,10 +566,10 @@ public class WorkflowValidator extends EObjectValidator {
         if (swimlane_noSpecialCharactersInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.SWIMLANE);
-			
+
 			EAnnotation ocl = WorkflowPackage.Literals.SWIMLANE.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("noSpecialCharacters");
-			
+
 			try {
 				swimlane_noSpecialCharactersInvOCL = helper.createInvariant(expr);
 			}
@@ -575,14 +577,14 @@ public class WorkflowValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(swimlane_noSpecialCharactersInvOCL);
-		
+
 		if (!query.check(swimlane)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( WorkflowPackage.Literals.SWIMLANE.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"noSpecialCharacters")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noSpecialCharacters", getObjectLabel(swimlane, context) }),
@@ -603,10 +605,10 @@ public class WorkflowValidator extends EObjectValidator {
         if (swimlane_ActoridOrPooledactorInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.SWIMLANE);
-			
+
 			EAnnotation ocl = WorkflowPackage.Literals.SWIMLANE.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("ActoridOrPooledactor");
-			
+
 			try {
 				swimlane_ActoridOrPooledactorInvOCL = helper.createInvariant(expr);
 			}
@@ -614,14 +616,14 @@ public class WorkflowValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(swimlane_ActoridOrPooledactorInvOCL);
-		
+
 		if (!query.check(swimlane)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( WorkflowPackage.Literals.SWIMLANE.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"ActoridOrPooledactor")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ActoridOrPooledactor", getObjectLabel(swimlane, context) }),
@@ -720,10 +722,10 @@ public class WorkflowValidator extends EObjectValidator {
         if (taskNode_TaskMustBePointerByTransitionInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.TASK_NODE);
-			
+
 			EAnnotation ocl = WorkflowPackage.Literals.TASK_NODE.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("TaskMustBePointerByTransition");
-			
+
 			try {
 				taskNode_TaskMustBePointerByTransitionInvOCL = helper.createInvariant(expr);
 			}
@@ -731,14 +733,14 @@ public class WorkflowValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(taskNode_TaskMustBePointerByTransitionInvOCL);
-		
+
 		if (!query.check(taskNode)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( WorkflowPackage.Literals.TASK_NODE.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"TaskMustBePointerByTransition")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "TaskMustBePointerByTransition", getObjectLabel(taskNode, context) }),
@@ -759,10 +761,10 @@ public class WorkflowValidator extends EObjectValidator {
         if (taskNode_TaskMustHaveOneTransitionOutInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.TASK_NODE);
-			
+
 			EAnnotation ocl = WorkflowPackage.Literals.TASK_NODE.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("TaskMustHaveOneTransitionOut");
-			
+
 			try {
 				taskNode_TaskMustHaveOneTransitionOutInvOCL = helper.createInvariant(expr);
 			}
@@ -770,14 +772,14 @@ public class WorkflowValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(taskNode_TaskMustHaveOneTransitionOutInvOCL);
-		
+
 		if (!query.check(taskNode)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( WorkflowPackage.Literals.TASK_NODE.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"TaskMustHaveOneTransitionOut")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "TaskMustHaveOneTransitionOut", getObjectLabel(taskNode, context) }),
@@ -856,10 +858,10 @@ public class WorkflowValidator extends EObjectValidator {
         if (fork_ForkMustBeFollowedByJoinInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.FORK);
-			
+
 			EAnnotation ocl = WorkflowPackage.Literals.FORK.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("ForkMustBeFollowedByJoin");
-			
+
 			try {
 				fork_ForkMustBeFollowedByJoinInvOCL = helper.createInvariant(expr);
 			}
@@ -867,14 +869,14 @@ public class WorkflowValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(fork_ForkMustBeFollowedByJoinInvOCL);
-		
+
 		if (!query.check(fork)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( WorkflowPackage.Literals.FORK.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"ForkMustBeFollowedByJoin")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ForkMustBeFollowedByJoin", getObjectLabel(fork, context) }),
@@ -934,10 +936,10 @@ public class WorkflowValidator extends EObjectValidator {
         if (decision_DecisionMustHaveOnlyOneTransitionWithConditionInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.DECISION);
-			
+
 			EAnnotation ocl = WorkflowPackage.Literals.DECISION.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("DecisionMustHaveOnlyOneTransitionWithCondition");
-			
+
 			try {
 				decision_DecisionMustHaveOnlyOneTransitionWithConditionInvOCL = helper.createInvariant(expr);
 			}
@@ -945,14 +947,14 @@ public class WorkflowValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(decision_DecisionMustHaveOnlyOneTransitionWithConditionInvOCL);
-		
+
 		if (!query.check(decision)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( WorkflowPackage.Literals.DECISION.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"DecisionMustHaveOnlyOneTransitionWithCondition")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "DecisionMustHaveOnlyOneTransitionWithCondition", getObjectLabel(decision, context) }),
@@ -1026,10 +1028,10 @@ public class WorkflowValidator extends EObjectValidator {
         if (variable_accessMatchesWithReadWriteRequiredInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.VARIABLE);
-			
+
 			EAnnotation ocl = WorkflowPackage.Literals.VARIABLE.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("accessMatchesWithReadWriteRequired");
-			
+
 			try {
 				variable_accessMatchesWithReadWriteRequiredInvOCL = helper.createInvariant(expr);
 			}
@@ -1037,14 +1039,14 @@ public class WorkflowValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(variable_accessMatchesWithReadWriteRequiredInvOCL);
-		
+
 		if (!query.check(variable)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( WorkflowPackage.Literals.VARIABLE.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"accessMatchesWithReadWriteRequired")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "accessMatchesWithReadWriteRequired", getObjectLabel(variable, context) }),
@@ -1084,10 +1086,10 @@ public class WorkflowValidator extends EObjectValidator {
         if (transition_NoTransitionWithSameNameInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.TRANSITION);
-			
+
 			EAnnotation ocl = WorkflowPackage.Literals.TRANSITION.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("NoTransitionWithSameName");
-			
+
 			try {
 				transition_NoTransitionWithSameNameInvOCL = helper.createInvariant(expr);
 			}
@@ -1095,14 +1097,14 @@ public class WorkflowValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(transition_NoTransitionWithSameNameInvOCL);
-		
+
 		if (!query.check(transition)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( WorkflowPackage.Literals.TRANSITION.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"NoTransitionWithSameName")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "NoTransitionWithSameName", getObjectLabel(transition, context) }),
@@ -1123,10 +1125,10 @@ public class WorkflowValidator extends EObjectValidator {
         if (transition_SourceAndTargetMustBeSetInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.TRANSITION);
-			
+
 			EAnnotation ocl = WorkflowPackage.Literals.TRANSITION.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("SourceAndTargetMustBeSet");
-			
+
 			try {
 				transition_SourceAndTargetMustBeSetInvOCL = helper.createInvariant(expr);
 			}
@@ -1134,14 +1136,14 @@ public class WorkflowValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(transition_SourceAndTargetMustBeSetInvOCL);
-		
+
 		if (!query.check(transition)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( WorkflowPackage.Literals.TRANSITION.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"SourceAndTargetMustBeSet")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "SourceAndTargetMustBeSet", getObjectLabel(transition, context) }),
@@ -1162,10 +1164,10 @@ public class WorkflowValidator extends EObjectValidator {
         if (transition_noSpecialCharactersInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.TRANSITION);
-			
+
 			EAnnotation ocl = WorkflowPackage.Literals.TRANSITION.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("noSpecialCharacters");
-			
+
 			try {
 				transition_noSpecialCharactersInvOCL = helper.createInvariant(expr);
 			}
@@ -1173,14 +1175,14 @@ public class WorkflowValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(transition_noSpecialCharactersInvOCL);
-		
+
 		if (!query.check(transition)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( WorkflowPackage.Literals.TRANSITION.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"noSpecialCharacters")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noSpecialCharacters", getObjectLabel(transition, context) }),
@@ -1220,10 +1222,10 @@ public class WorkflowValidator extends EObjectValidator {
         if (state_NoStateWithSameNameInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.STATE);
-			
+
 			EAnnotation ocl = WorkflowPackage.Literals.STATE.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("NoStateWithSameName");
-			
+
 			try {
 				state_NoStateWithSameNameInvOCL = helper.createInvariant(expr);
 			}
@@ -1231,14 +1233,14 @@ public class WorkflowValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(state_NoStateWithSameNameInvOCL);
-		
+
 		if (!query.check(state)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( WorkflowPackage.Literals.STATE.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"NoStateWithSameName")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "NoStateWithSameName", getObjectLabel(state, context) }),
@@ -1259,10 +1261,10 @@ public class WorkflowValidator extends EObjectValidator {
         if (state_noSpecialCharactersInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.STATE);
-			
+
 			EAnnotation ocl = WorkflowPackage.Literals.STATE.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("noSpecialCharacters");
-			
+
 			try {
 				state_noSpecialCharactersInvOCL = helper.createInvariant(expr);
 			}
@@ -1270,14 +1272,14 @@ public class WorkflowValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(state_noSpecialCharactersInvOCL);
-		
+
 		if (!query.check(state)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( WorkflowPackage.Literals.STATE.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"noSpecialCharacters")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "noSpecialCharacters", getObjectLabel(state, context) }),
@@ -1298,10 +1300,10 @@ public class WorkflowValidator extends EObjectValidator {
         if (state_NameNullInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.STATE);
-			
+
 			EAnnotation ocl = WorkflowPackage.Literals.STATE.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("NameNull");
-			
+
 			try {
 				state_NameNullInvOCL = helper.createInvariant(expr);
 			}
@@ -1309,14 +1311,14 @@ public class WorkflowValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(state_NameNullInvOCL);
-		
+
 		if (!query.check(state)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( WorkflowPackage.Literals.STATE.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"NameNull")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "NameNull", getObjectLabel(state, context) }),
@@ -1354,10 +1356,10 @@ public class WorkflowValidator extends EObjectValidator {
         if (attribute_UniqueNameForTaskAttributeInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.ATTRIBUTE);
-			
+
 			EAnnotation ocl = WorkflowPackage.Literals.ATTRIBUTE.getEAnnotation(OCL_ANNOTATION_SOURCE);
 			String expr = ocl.getDetails().get("UniqueNameForTaskAttribute");
-			
+
 			try {
 				attribute_UniqueNameForTaskAttributeInvOCL = helper.createInvariant(expr);
 			}
@@ -1365,14 +1367,14 @@ public class WorkflowValidator extends EObjectValidator {
 				throw new UnsupportedOperationException(e.getLocalizedMessage());
 			}
 		}
-		
+
 		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(attribute_UniqueNameForTaskAttributeInvOCL);
-		
+
 		if (!query.check(attribute)) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
-						(Diagnostic.ERROR,
+						((doThrowError( WorkflowPackage.Literals.ATTRIBUTE.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"UniqueNameForTaskAttribute")? Diagnostic.ERROR : Diagnostic.WARNING),
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "UniqueNameForTaskAttribute", getObjectLabel(attribute, context) }),
@@ -1409,6 +1411,18 @@ public class WorkflowValidator extends EObjectValidator {
 	 */
 	public boolean validateBPMEventType(BPMEventType bpmEventType, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
+	}
+
+	protected boolean doThrowError(EAnnotation ecore, String ruleName) {
+		String warningList = ecore.getDetails().get("warning");
+		boolean throwError = true;
+		if (warningList != null) {
+			List<String> list = Arrays.asList(warningList.split(" "));
+			if (list.contains(ruleName)) {
+				throwError = false;
+			}
+		}
+		return throwError;
 	}
 
 } //WorkflowValidator
