@@ -29,6 +29,11 @@
                      key="com.bluexml.side.Deployer.xformsDirectCopy.clean"
                      label="clean">
                </option>
+               <configurationParameter
+                     documentation="Set the name of your Chiba webapp. The default name for the war file provided by BlueXML is &quot;xforms&quot;.&lt;br/&gt;If not filled, the default name will be considered."
+                     key="com.bluexml.side.Deployer.xforms.webappName"
+                     label="Webapp context name">
+               </configurationParameter>
             </deployerVersion>
          </technologyVersion>
       </technology>
