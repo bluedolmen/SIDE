@@ -10,16 +10,8 @@ import com.bluexml.side.util.deployer.war.DirectWebAppsDeployer;
  * 
  */
 public class DeployerXforms extends DirectWebAppsDeployer {
-
 	public DeployerXforms() {
-		super("xform");
+		super("com.bluexml.side.Deployer.xformsDirectCopy.clean", null, "xforms", "com.bluexml.side.Deployer.xforms.webappName");
 	}
-	
-	/**
-	 * @param webappName
-	 */
-	public DeployerXforms(String webappName) {
-		super("xform");
-		cleanKey = "com.bluexml.side.Deployer.xformsDirectCopy.clean";
-	}
+
 }
