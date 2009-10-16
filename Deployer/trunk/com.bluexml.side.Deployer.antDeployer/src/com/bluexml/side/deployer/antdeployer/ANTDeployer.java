@@ -13,6 +13,10 @@ import com.bluexml.side.util.documentation.structure.enumeration.LogEntryType;
 
 public class ANTDeployer extends Deployer {
 
+	public ANTDeployer() {
+		super("cleankey", "logChangesKey");
+	}
+
 	private static boolean processExecuted;
 	private static String KEY_ANTFILE = "com.bluexml.side.Deployer.antDeployer.param.antFile";
 	
