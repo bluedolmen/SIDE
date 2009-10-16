@@ -18,13 +18,13 @@ import de.schlichtherle.io.FileInputStream;
 public class AlfrescoAmpDirectDeployer extends DirectWebAppsDeployer {
 
 	public AlfrescoAmpDirectDeployer() {
-		super("alfresco"); //$NON-NLS-1$
+		super(null,null, "alfresco", "deployer.webappName.alfresco"); //$NON-NLS-1$
 		packageExt = "amp"; //$NON-NLS-1$
 		tzh = new TrueZipHelper(packageExt);
 	}
 
 	protected void dispatchFiles(List<File> files, Map<String, File> mapper) throws Exception {
-		MonitorWriter mw = new MonitorWriter(monitor,Activator.Messages.getString("AlfrescoAmpDirectDeployer.2"),""); //$NON-NLS-1$ //$NON-NLS-2$
+		MonitorWriter mw = new MonitorWriter(monitor, Activator.Messages.getString("AlfrescoAmpDirectDeployer.2"), ""); //$NON-NLS-1$ //$NON-NLS-2$
 		for (File f : files) {
 			for (Map.Entry<String, File> ent : mapper.entrySet()) {
 				if (f.getAbsolutePath().indexOf(ent.getKey()) != -1) {
