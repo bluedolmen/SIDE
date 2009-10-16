@@ -15,14 +15,14 @@ import com.bluexml.side.util.deployer.war.WarDeployer;
 public class FacetMapDeployer extends AbstractMultiDeployer {
 
 	public FacetMapDeployer() {
-		this.cleanKey = "com.bluexml.side.Deployer.facetMap.clean";
+		super("com.bluexml.side.Deployer.facetMap.clean", null);
 
 		// build map of ModuleID,(facetmap-facets.zip,facetmap-conent.zip)
 		// for each moduleID build 2 war deployer and process them
 
 		// record first webapp deployer
 		final String webappName1 = "facetmap-facets";
-		WarDeployer wd1 = new WarDeployer(webappName1) {
+		WarDeployer wd1 = new WarDeployer(this.cleanKey, this.logChangesKey, webappName1, "") {
 			@Override
 			protected void postProcess(File fileToDeploy) throws Exception {
 			};
@@ -32,12 +32,11 @@ public class FacetMapDeployer extends AbstractMultiDeployer {
 			}
 
 		};
-		wd1.setWebappName(webappName1);
 		addDeployer(wd1);
 
 		// record second webapp deployer
 		final String webappName2 = "facetmap-content";
-		WarDeployer wd2 = new WarDeployer(webappName2) {
+		WarDeployer wd2 = new WarDeployer(this.cleanKey,this.logChangesKey,webappName2,"") {
 			@Override
 			protected void postProcess(File fileToDeploy) throws Exception {
 			};
@@ -46,7 +45,6 @@ public class FacetMapDeployer extends AbstractMultiDeployer {
 				return new File(absoluteWKDirePath + File.separator + techVersion + File.separator + webappName2 + ".zip");
 			}
 		};
-		wd2.setWebappName(webappName2);
 		addDeployer(wd2);
 	}
 
@@ -72,12 +70,12 @@ public class FacetMapDeployer extends AbstractMultiDeployer {
 
 	@Override
 	protected void clean(File fileToDeploy) throws Exception {
-		// nothing to do		
+		// nothing to do
 	}
 
 	@Override
 	protected void preProcess(File fileToDeploy) throws Exception {
-		// nothing to do		
+		// nothing to do
 	}
 
 }
