@@ -7,15 +7,13 @@ import com.bluexml.side.util.deployer.AbstractMultiDeployer;
 public class AlfrescoDeployer extends AbstractMultiDeployer {
 
 	public AlfrescoDeployer() {
-		this.cleanKey = "com.bluexml.side.deployer.alfresco.clean";
-		this.logChanges = "com.bluexml.side.deployer.alfresco.logChanges";
+		super("com.bluexml.side.deployer.alfresco.clean","com.bluexml.side.deployer.alfresco.logChanges");
+		
 
 		AMPDeployer ampDep = new AMPDeployer();
-		ampDep.setWebappName("alfresco");
 		addDeployer(ampDep);
 
 		ShareDeployer shareDep = new ShareDeployer();
-		shareDep.setWebappName("share");
 		addDeployer(shareDep);
 	}
 
