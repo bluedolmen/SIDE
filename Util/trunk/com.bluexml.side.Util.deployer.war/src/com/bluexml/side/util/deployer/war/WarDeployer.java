@@ -43,7 +43,7 @@ public abstract class WarDeployer extends Deployer {
 	public String getWebappName() {
 		if (webappName == null) {
 			try {
-				webappName = getConfigurationParameters().get(webappKeyName);
+				webappName = getGenerationParameters().get(webappKeyName);
 				if (StringUtils.trimToNull(webappName) == null) {
 					webappName = webappDefaultName;
 				}
