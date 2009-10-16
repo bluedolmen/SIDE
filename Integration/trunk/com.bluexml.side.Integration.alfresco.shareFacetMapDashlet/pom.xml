@@ -16,49 +16,48 @@
 	limitations under the License.
 	
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.bluexml.side.Integration.alfresco</groupId>
-	<artifactId>shareFacetMapDashlet</artifactId>
-	<version>1.0.4</version>
-	<name>Dashlets Alfresco share</name>
-	<description>including facetmap in alfresco share</description>
-	<packaging>zip</packaging>
-	<parent>
-		<groupId>org.bluexml</groupId>
-		<artifactId>superpom</artifactId>
-		<version>1.8</version>
-	</parent>
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.bluexml.side.Integration.alfresco</groupId>
-			<artifactId>shareDoclist</artifactId>
-			<version>1.0.2</version>
-			<type>zip</type>
-		</dependency>
-	</dependencies>
-	<build>
-
-		<resources>
-			<resource>
-				<directory>resources</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
-		<plugins>
-			<plugin>
-				<groupId>com.bluexml.side.Integration.m2</groupId>
-				<artifactId>zipPackage</artifactId>
-				<version>1.0.0</version>
-				<extensions>true</extensions>
-			</plugin>
-		</plugins>
-	</build>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.bluexml.side.Integration.alfresco</groupId>
+  <artifactId>shareFacetMapDashlet</artifactId>
+  <version>1.0.5</version>
+  <name>Dashlets Alfresco share</name>
+  <description>including facetmap in alfresco share</description>
+  <packaging>zip</packaging>
+  <parent>
+    <groupId>org.bluexml</groupId>
+    <artifactId>superpom</artifactId>
+    <version>1.8</version>
+  </parent>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.bluexml.side.Integration.alfresco</groupId>
+      <artifactId>shareDoclist</artifactId>
+      <version>1.0.2</version>
+      <type>zip</type>
+    </dependency>
+  </dependencies>
+  <build>
+    <resources>
+      <resource>
+        <directory>resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>com.bluexml.side.Integration.m2</groupId>
+        <artifactId>zipPackage</artifactId>
+        <version>1.0.0</version>
+        <extensions>true</extensions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
+
