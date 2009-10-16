@@ -25,6 +25,10 @@ import com.bluexml.side.util.libs.IFileHelper;
 
 public class DocumentationDeployer extends Deployer {
 
+	public DocumentationDeployer() {
+		super("cleanKey", "logChangesKey");
+	}
+
 	public static String DOC_FOLDER_NAME = "doc"; //$NON-NLS-1$
 
 	@Override
