@@ -24,6 +24,10 @@ import com.bluexml.side.util.libs.IFileHelper;
 
 public class ReportDeployer extends Deployer {
 
+	public ReportDeployer() {
+		super(null, null);
+	}
+
 	public static String CONFIGURATION_TOMCAT_INSTALLATION = "CATALINA_HOME"; //$NON-NLS-1$
 	static final String webapps = "webapps"; //$NON-NLS-1$
 
