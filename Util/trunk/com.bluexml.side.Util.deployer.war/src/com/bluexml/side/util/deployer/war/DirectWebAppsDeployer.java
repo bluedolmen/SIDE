@@ -11,8 +11,8 @@ import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.zip.TrueZipHelper;
 
 public abstract class DirectWebAppsDeployer extends WarDeployer {
-	public DirectWebAppsDeployer(String webappName) {
-		super(webappName);
+	public DirectWebAppsDeployer(String cleanKey,String logChanges,String webappName, String webappKeyName) {
+		super(cleanKey,logChanges,webappName,webappKeyName);
 		packageExt = "zip";
 		tzh = new TrueZipHelper(packageExt);
 	}

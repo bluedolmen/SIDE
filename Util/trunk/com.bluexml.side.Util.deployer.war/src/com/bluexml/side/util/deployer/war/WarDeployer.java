@@ -7,6 +7,8 @@ import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.bluexml.side.util.deployer.Deployer;
 import com.bluexml.side.util.libs.FileExtensionFilter;
 import com.bluexml.side.util.libs.FileHelper;
@@ -17,41 +19,58 @@ public abstract class WarDeployer extends Deployer {
 
 	static final String webapps = "webapps"; //$NON-NLS-1$
 	protected String webappName = null;
+	protected String webappDefaultName = null;
+	protected String webappKeyName = null;
 	protected static String warToPatchExt = "war"; //$NON-NLS-1$
 	protected static String backupWarExt = "war.org"; //$NON-NLS-1$
 	File backupWarFile = null;
 	File warToPatchFile = null;
 	File deployedWebbAppFolder = null;
 
-	public WarDeployer(String webappName) {
-		this.webappName = webappName;
+	/**
+	 * 
+	 * @param cleanKey the option key use in extension point
+	 * @param logChangesKey the option key use in extension point
+	 * @param webappDefaultName the default name for the webapp
+	 * @param webappKeyName the parameter key use in extension point
+	 */
+	public WarDeployer(String cleanKey,String logChangesKey,String webappDefaultName, String webappKeyName) {
+		super(cleanKey,logChangesKey);
+		this.webappDefaultName = webappDefaultName;
+		this.webappKeyName = webappKeyName;
 	}
 
 	public String getWebappName() {
+		if (webappName == null) {
+			try {
+				webappName = getConfigurationParameters().get(webappKeyName);
+				if (StringUtils.trimToNull(webappName) == null) {
+					webappName = webappDefaultName;
+				}
+			} catch (NullPointerException e) {
+				new Exception("getWebappName() MUST be called after initialize() !",e);
+			}
+		}
 		return webappName;
 	}
-
-	public void setWebappName(String webappName) {
-		this.webappName = webappName;
-	}
-
+	
 	public File getBackupWarFile() {
 		if (backupWarFile == null) {
-			backupWarFile = new File(getTomcatHome() + File.separator + webapps + File.separator + webappName + "." +backupWarExt); //$NON-NLS-1$
+			backupWarFile = new File(getTomcatHome() + File.separator + webapps + File.separator + getWebappName() + "." + backupWarExt); //$NON-NLS-1$
 		}
 		return backupWarFile;
 	}
 
 	public File getWarToPatchFile() {
 		if (warToPatchFile == null) {
-			warToPatchFile = new File(getTomcatHome() + File.separator + webapps + File.separator + webappName + "." +warToPatchExt); //$NON-NLS-1$
+			warToPatchFile = new File(getTomcatHome() + File.separator + webapps + File.separator + getWebappName() + "." + warToPatchExt); //$NON-NLS-1$
 		}
 		return warToPatchFile;
 	}
 
 	public File getDeployedWebbAppFolder() {
 		if (deployedWebbAppFolder == null) {
-			deployedWebbAppFolder = new File(getTomcatHome() + File.separator + webapps + File.separator + webappName);
+			deployedWebbAppFolder = new File(getTomcatHome() + File.separator + webapps + File.separator + getWebappName());
 		}
 		return deployedWebbAppFolder;
 	}
