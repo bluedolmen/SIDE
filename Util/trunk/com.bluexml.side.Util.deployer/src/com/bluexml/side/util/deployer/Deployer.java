@@ -29,6 +29,15 @@ public abstract class Deployer implements Checkable {
 	protected String id;
 	protected String techVersion = null;
 
+	/**
+	 * 
+	 * @param cleanKey the option key use in extension point
+	 * @param logChangesKey the option key use in extension point
+	 */
+	public Deployer(String cleanKey,String logChangesKey) {
+		this.cleanKey = cleanKey;
+		this.logChangesKey = logChangesKey;
+	}
 	
 
 	public String getCleanKey() {
@@ -40,17 +49,17 @@ public abstract class Deployer implements Checkable {
 	}
 
 	public String getLogChanges() {
-		return logChanges;
+		return logChangesKey;
 	}
 
 	public void setLogChanges(String logChanges) {
-		this.logChanges = logChanges;
+		this.logChangesKey = logChanges;
 	}
 
 	public static String DEPLOYER_CODE = null;
 	protected String cleanKey = null;
 	protected String cleanKeyMsg = Activator.Messages.getString("Deployer.0"); //$NON-NLS-1$
-	protected String logChanges = null;
+	protected String logChangesKey = null;
 	protected String logChangesMsg = Activator.Messages.getString("Deployer.1"); //$NON-NLS-1$
 	protected List<String> options = null;
 
@@ -183,7 +192,7 @@ public abstract class Deployer implements Checkable {
 	 * @return
 	 */
 	protected boolean logChanges() {
-		return options != null && options.contains(logChanges);
+		return options != null && options.contains(logChangesKey);
 	}
 
 	/**
