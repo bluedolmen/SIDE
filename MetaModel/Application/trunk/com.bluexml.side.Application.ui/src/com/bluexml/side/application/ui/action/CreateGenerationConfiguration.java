@@ -41,15 +41,13 @@ public class CreateGenerationConfiguration implements IObjectActionDelegate {
 				if (!inUse(rwm_model)) {
 					Shell shell = new Shell();
 
-					ApplicationDialog dialog = new ApplicationDialog(shell,
-							rwm_model);
+					ApplicationDialog dialog = new ApplicationDialog(shell, rwm_model);
 					addFileUnUse(rwm_model);
 					dialog.open();
 					removeFileUnUse(rwm_model);
 				}
 			} else {
-				UIUtils.showError(
-								Activator.Messages.getString("Erreur.Title.1"), Activator.Messages.getString("Erreur.Msg.1")); //$NON-NLS-1$ //$NON-NLS-2$
+				UIUtils.showError(Activator.Messages.getString("Erreur.Title.1"), Activator.Messages.getString("Erreur.Msg.1")); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 	}

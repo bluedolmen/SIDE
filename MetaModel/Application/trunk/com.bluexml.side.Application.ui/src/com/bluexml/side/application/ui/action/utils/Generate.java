@@ -116,7 +116,7 @@ public class Generate extends Thread {
 		logLink = p_logLink;
 		feedbackManager = new FeedbackManager();
 		// compute total of general step
-		String configurationName = "";
+		String configurationName = ""; //$NON-NLS-1$
 		for (ConfigurationParameters p : configuration.getParameters()) {
 			if (p.getKey().equals(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral())) {
 				configurationName = p.getValue();
@@ -265,7 +265,6 @@ public class Generate extends Thread {
 					} catch (CoreException e) {
 						e.printStackTrace();
 						generalMonitor.addErrorText(Activator.Messages.getString("Generate.20")); //$NON-NLS-1$
-
 					}
 				}
 				// if work online do a mvn go-offline to prepare maven to work
@@ -273,7 +272,9 @@ public class Generate extends Thread {
 				if (!isOfflineMode(configurationParameters)) {
 					// get all Integration modules for offline mode
 					try {
+						generalMonitor.subTask(Activator.Messages.getString("Generate_101"));
 						ApplicationUtil.prepareForOffline();
+						generalMonitor.taskDone(Activator.Messages.getString("Generate_102"));
 					} catch (Exception e1) {
 						e1.printStackTrace();
 						generalMonitor.addErrorText(Activator.Messages.getString("Generate.15")); //$NON-NLS-1$
@@ -302,7 +303,7 @@ public class Generate extends Thread {
 						generalMonitor.getConsoleLog().saveLog(fileName, logPath);
 					}
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
+					generalMonitor.addErrorText(Activator.Messages.getString("Generate_103",e1.getMessage()));
 					e1.printStackTrace();
 				}
 				// Log
@@ -318,7 +319,7 @@ public class Generate extends Thread {
 					});
 
 				} catch (Exception e) {
-					generalMonitor.addErrorText("Error when building final log file :"+e.getMessage());
+					generalMonitor.addErrorText(Activator.Messages.getString("Generate_104",e.getMessage()));
 					e.printStackTrace();
 				}
 				if (FeedbackActivator.doFeedback()) {
@@ -327,7 +328,7 @@ public class Generate extends Thread {
 						feedbackManager.save();
 						// FeedbackSender.send();
 					} catch (IOException e) {
-						generalMonitor.addErrorText("Error when building final log file :"+e.getMessage());
+						generalMonitor.addErrorText(Activator.Messages.getString("Generate_105",e.getMessage()));
 						e.printStackTrace();
 					}
 				}
@@ -424,7 +425,6 @@ public class Generate extends Thread {
 
 					String name = elem.getGeneratorName();
 					generationMonitor.beginTask(Activator.Messages.getString("Generate.30", name)); //$NON-NLS-1$
-					generationMonitor.beginTask(Activator.Messages.getString("Generate.59", name)); //$NON-NLS-1$
 
 					try {
 						List<ModuleConstraint> lmc = new ArrayList<ModuleConstraint>();
