@@ -17,64 +17,98 @@
 package com.bluexml.side.util.libs.xml;
 
 import java.io.File;
+import java.io.FileOutputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
+import org.jdom.transform.JDOMResult;
 import org.w3c.dom.Document;
 
 /**
  * 
  * @author pbertrand
- *
+ * 
  */
 public class XslTransformer {
 
-	private XslTransformer(){};
-	
+	private XslTransformer() {
+	};
+
 	/**
-	 * Fonction qui transforme un fichier src 
-	 * @param src Source file (path)
-	 * @param xsl Stylesheet (path)
-	 * @param result Result file (path)
+	 * Fonction qui transforme un fichier src
+	 * 
+	 * @param src
+	 *            Source file (path)
+	 * @param xsl
+	 *            Stylesheet (path)
+	 * @param result
+	 *            Result file (path)
 	 * @return A reference on the result file
+	 * @throws Exception 
 	 */
-    public static Result transform(String src, String xsl,String result) {
-    	try {
-    	 // Création de la source DOM
-        DocumentBuilderFactory fabriqueD = DocumentBuilderFactory.newInstance();
-        DocumentBuilder constructeur;
-		
-			constructeur = fabriqueD.newDocumentBuilder();
-        File fileXml = new File(src);
-        Document document = constructeur.parse(fileXml);
-        Source source = new DOMSource(document);
-        
-        // Création du fichier de sortie
-        File fileHtml = new File(result);
-        Result resultat = new StreamResult(fileHtml);
-        
-        // Configuration du transformer
-        TransformerFactory fabriqueT = TransformerFactory.newInstance();
-        StreamSource stylesource = new StreamSource(xsl);
-        Transformer transformer = fabriqueT.newTransformer(stylesource);
-        transformer.setOutputProperty(OutputKeys.METHOD, "html");
-        
-        // Transformation
-        transformer.transform(source, resultat);
-        return resultat;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-    }
+	public static Result transform(String src, String xsl, String result) throws Exception {
+		// get resources
+		DocumentBuilderFactory fabriqueD = DocumentBuilderFactory.newInstance();
+		DocumentBuilder constructeur;
+		constructeur = fabriqueD.newDocumentBuilder();
+		File fileXml = new File(src);
+		Document document = constructeur.parse(fileXml);
+		Source source = new DOMSource(document);
+		File fileHtml = new File(result);
+		Result resultat = new StreamResult(fileHtml);
+
+		// set transformer
+		TransformerFactory fabriqueT = net.sf.saxon.TransformerFactoryImpl.newInstance();
+		StreamSource stylesource = new StreamSource(xsl);
+		Transformer transformer = fabriqueT.newTransformer(stylesource);
+		// transformer.setOutputProperty(OutputKeys.METHOD, "html");
+
+		// Transformation
+		transformer.transform(source, resultat);
+		return resultat;
+	}
+
+	public static Result transform(Document document, String xsl, String result) throws Exception {
+		// get resources
+		File fileHtml = new File(result);
+		Result resultat = new StreamResult(fileHtml);
+		Source source = new DOMSource(document);
+
+		// set transformer
+		TransformerFactory fabriqueT = net.sf.saxon.TransformerFactoryImpl.newInstance();
+		StreamSource stylesource = new StreamSource(xsl);
+		Transformer transformer = fabriqueT.newTransformer(stylesource);
+
+		// Transformation
+		transformer.transform(source, resultat);
+		return resultat;
+	}
+
+	public static void transform(org.jdom.Document doc, File xslName, File htmlName) throws Exception {
+		JDOMResult docResult = new JDOMResult();
+		org.jdom.Document resultat = null;
+		TransformerFactory factory = net.sf.saxon.TransformerFactoryImpl.newInstance();
+
+		Transformer transformer = factory.newTransformer(new StreamSource(xslName));
+
+		transformer.transform(new org.jdom.transform.JDOMSource(doc), docResult);
+		resultat = docResult.getDocument();
+		XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
+		outputter.output(resultat, new FileOutputStream(htmlName));
+
+	}
 
 }
