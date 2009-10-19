@@ -147,10 +147,11 @@ public class ZipPackage extends AbstractMojo {
 
 		String archiveName = project.getBuild().getFinalName() + ".zip";
 		File custFile = new File(outputDirectory, archiveName);
-
+		getLog().debug("Artifact : " + custFile.getName());
 		project.getArtifact().setFile(custFile);
+		getLog().debug("Artifact Type : "+project.getArtifact().getType());
 		// create the classes to be attached if necessary
-		getLog().debug("attached ? : " + isAttachClasses());
+		getLog().debug("attachement ? : " + isAttachClasses());
 		if (isAttachClasses()) {
 			getLog().debug("attach jar file :getProject()" + getProject());
 			getLog().debug("attach jar file :type" + "jar");
