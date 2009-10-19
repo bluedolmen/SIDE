@@ -1,21 +1,10 @@
 package com.bluexml.side.util.documentation;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.Writer;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.io.output.FileWriterWithEncoding;
 import org.eclipse.core.resources.IFile;
@@ -26,12 +15,12 @@ import org.jdom.ProcessingInstruction;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
-import org.jdom.transform.JDOMResult;
 
 import com.bluexml.side.util.documentation.structure.LogEntry;
 import com.bluexml.side.util.documentation.structure.SIDELog;
 import com.bluexml.side.util.documentation.structure.URIConverter;
 import com.bluexml.side.util.libs.IFileHelper;
+import com.bluexml.side.util.libs.xml.XslTransformer;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
@@ -39,6 +28,7 @@ public class LogSave {
 	public static final String encoding = "UTF-8";
 	protected String fileSeparator = System.getProperty("file.separator"); //$NON-NLS-1$
 	public static String LOG_FILE_NAME = "side-report.xml"; //$NON-NLS-1$
+	public static String LOG_HTML_FILE_NAME = "side-report.html"; //$NON-NLS-1$
 	public static String LOG_STAMP_FOLDER = "stamp"; //$NON-NLS-1$
 	public static String LOG_TEMP_FOLDER = "work"; //$NON-NLS-1$
 	public static String LOG_DOC_FOLDER = "doc"; //$NON-NLS-1$
@@ -146,9 +136,9 @@ public class LogSave {
 			XMLOutputter outputter = new XMLOutputter(outputFormat);
 			outputter.output(doc, writer);
 			writer.close();
+			moveStaticRessources(logFolder, genLogFile);
 		}
 
-		moveStaticRessources(logFolder, doc);
 	}
 
 	/**
@@ -224,7 +214,7 @@ public class LogSave {
 	 * @param doc
 	 * @throws Exception
 	 */
-	private static void moveStaticRessources(IFolder folderDest, Document doc) throws Exception {
+	private static void moveStaticRessources(IFolder folderDest, File doc) throws Exception {
 		String folderPath = folderDest.getLocation().toOSString() + System.getProperty("file.separator");
 		String folderSource = "com/bluexml/side/util/documentation/staticResources/";
 		// We use xsl transformation and ouput html file into log directory
@@ -241,32 +231,9 @@ public class LogSave {
 		} catch (Exception e) {
 			throw new Exception("Error when copy files from static ressources", e);
 		}
-
-		// makeHtml(doc, folderPath, "log2html.xsl", "log.html");
-	}
-
-	/**
-	 * Will ouput html using xml with an xsl transfo
-	 * 
-	 * @param doc
-	 * @param folderDest
-	 * @param xslName
-	 * @throws TransformerException
-	 * @throws FileNotFoundException
-	 * @throws IOException
-	 */
-	@SuppressWarnings("unused")
-	private static void makeHtml(Document doc, String folderDest, String xslName, String htmlName) throws TransformerException, FileNotFoundException, IOException {
-		JDOMResult docResult = new JDOMResult();
-		org.jdom.Document resultat = null;
-		TransformerFactory factory = TransformerFactory.newInstance();
-
-		Transformer transformer = factory.newTransformer(new StreamSource(new File(folderDest + xslName)));
-
-		transformer.transform(new org.jdom.transform.JDOMSource(doc), docResult);
-		resultat = docResult.getDocument();
-		XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
-		outputter.output(resultat, new FileOutputStream(folderDest + htmlName));
+		String xsl = new File(folderPath, "stylesheet" + System.getProperty("file.separator") + "log2html.xsl").getAbsolutePath();
+		String output = new File(folderPath, LOG_HTML_FILE_NAME).getAbsolutePath();
+		XslTransformer.transform(doc.getAbsolutePath(), xsl, output);
 	}
 
 	/**
