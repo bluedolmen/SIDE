@@ -64,7 +64,7 @@ public class Generate extends Thread {
 	 */
 	public Generate(File filePath, String name) {
 
-		// System.out.println("Name: " + name);
+		System.out.println("Start Generate with filePath= " + filePath + " & Name: " + name);
 
 		// Create the IFile
 		IFile file = null;
@@ -87,33 +87,31 @@ public class Generate extends Thread {
 			e1.printStackTrace();
 		}
 
-		// System.out.println("getWorkspace: " +
-		// ResourcesPlugin.getWorkspace());
-		// System.out.println("getRoot: "
-		// + ResourcesPlugin.getWorkspace().getRoot().exists() + " -> "
-		// + ResourcesPlugin.getWorkspace().getRoot());
-		// System.out.println("getPath: "
-		// + ResourcesPlugin.getWorkspace().getRoot().getFile(
-		// new Path(filePath.getAbsolutePath())));
+		System.out.println("getWorkspace: " + ResourcesPlugin.getWorkspace());
+		System.out.println("getRoot: " + ResourcesPlugin.getWorkspace().getRoot().exists() + " -> "
+		+ ResourcesPlugin.getWorkspace().getRoot());
+		System.out.println("getPath: "
+		 + ResourcesPlugin.getWorkspace().getRoot().getFile(
+		 new Path(filePath.getAbsolutePath())));
 
-		// System.out.println("\tfile.exists(): " + file.exists());
+		System.out.println("\tfile.exists(): " + file.exists());
 
 		URI uri = null;
-		// System.out.println("\tURI");
+		System.out.println("\tURI");
 		try {
 
-			// System.out.println("\tgetRawLocation: " + file.getRawLocation());
-			// System.out.println("\ttoFile: " +
-			// file.getRawLocation().toFile());
-			// System.out.println("\tpath: "
-			// + file.getRawLocation().toFile().getPath());
+			System.out.println("\tgetRawLocation: " + file.getRawLocation());
+			System.out.println("\ttoFile: " +
+			file.getRawLocation().toFile());
+			System.out.println("\tpath: "
+			+ file.getRawLocation().toFile().getPath());
 
 			String absolutePath = file.getRawLocation().toFile().getAbsolutePath();
-			// System.out.println("\tabsolutePath: " + absolutePath);
+			System.out.println("\tabsolutePath: " + absolutePath);
 
 			uri = URI.createFileURI(new File(absolutePath).getAbsolutePath());
 
-			// System.out.println("URI: " + uri);
+			System.out.println("URI: " + uri);
 
 		} catch (Exception e) {
 			System.out.println("Exception : " + e.getClass());
@@ -130,12 +128,12 @@ public class Generate extends Thread {
 			System.out.println(e.getMessage());
 		}
 
-		// System.out.println("\tMAP");
+		System.out.println("\tMAP");
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		map.put(ApplicationPackage.eINSTANCE.getNsURI(), ApplicationPackage.eINSTANCE);
 		map.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
 
-		// System.out.println("\tLOAD");
+		System.out.println("\tLOAD");
 		try {
 			resource.load(fi, map);
 		} catch (IOException e) {
@@ -146,13 +144,13 @@ public class Generate extends Thread {
 
 		try {
 			application = (Application) resource.getContents().get(0);
-			// System.out.println("\tapplication: " + application);
+			System.out.println("\tapplication: " + application);
 			staticParameters = ApplicationDialog.staticFieldsName;
-			// System.out.println("\tstaticParameters: " + staticParameters);
+			System.out.println("\tstaticParameters: " + staticParameters);
 			configuration = application.getConfiguration(name);
-			// System.out.println("\tconfiguration: " + configuration);
+			System.out.println("\tconfiguration: " + configuration);
 			models = ApplicationUtil.getModels(application);
-			// System.out.println("\tmodels: " + models);
+			System.out.println("\tmodels: " + models);
 		} catch (java.lang.NullPointerException e) {
 			e.printStackTrace();
 		} catch (Exception e1) {
@@ -176,7 +174,7 @@ public class Generate extends Thread {
 	// staticParameters, List<Model> models) throws ClassNotFoundException,
 	// InstantiationException, IllegalAccessException, IOException {
 	public void run() {
-		// System.out.println("Run !!!!!!");
+		System.out.println("Run !!!!!!");
 
 		// First we seek the generator parameters, and separate fields
 		// of dynamic fields
