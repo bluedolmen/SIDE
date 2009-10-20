@@ -20,6 +20,7 @@ metamodel http://www.kerblue.org/class/1.0
 import templates.servicesTemplates.Common
 import templates.servicesTemplates.Attribute
 import templates.servicesTemplates.Association
+import com.bluexml.side.clazz.service.alfresco.ClassServices
 import com.bluexml.side.clazz.service.alfresco.CommonServices
 import com.bluexml.side.clazz.service.alfresco.AttributeServices
 import com.bluexml.side.clazz.service.alfresco.AssociationServices
@@ -30,7 +31,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 <%script type="clazz.ClassPackage" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 
 <%for (getAllClasses()){%>
-	var lucene="TYPE:\"{http://www.bluexml.com/model/content/com/1.0}<%getQualifiedName()%>\"";
+	var lucene="TYPE:\"<%getPrefixedNamespaceQName()%>\"";
     model.records = search.luceneSearch(lucene);
 	model.<%getQualifiedName()%> = model.records;
 <%}%>
