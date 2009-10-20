@@ -37,6 +37,12 @@
                         key="alfresco.url"
                         label="Alfresco URL">
                   </configurationParameter>
+                  <mustBeChecked
+                        pluginId="com.bluexml.side.Class.generator.alfresco">
+                     <optionRef
+                           optionId="alfresco.webscript.report">
+                     </optionRef>
+                  </mustBeChecked>
                </generatorVersion>
             </technologyVersion>
          </technology>
