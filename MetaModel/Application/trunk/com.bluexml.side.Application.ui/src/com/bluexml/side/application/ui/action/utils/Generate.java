@@ -197,6 +197,8 @@ public class Generate extends Thread {
 			generate(configuration, modelsInfo, configurationParameters, generationParameters);
 			// All behind this line will be execute before the generation (async
 			// method).
+		} else {
+			generalMonitor.addErrorText(Activator.Messages.getString("Generate_0"));
 		}
 	}
 
@@ -272,9 +274,9 @@ public class Generate extends Thread {
 				if (!isOfflineMode(configurationParameters)) {
 					// get all Integration modules for offline mode
 					try {
-						generalMonitor.subTask(Activator.Messages.getString("Generate_101"));
+						generalMonitor.subTask(Activator.Messages.getString("Generate_101")); //$NON-NLS-1$
 						ApplicationUtil.prepareForOffline();
-						generalMonitor.taskDone(Activator.Messages.getString("Generate_102"));
+						generalMonitor.taskDone(Activator.Messages.getString("Generate_102")); //$NON-NLS-1$
 					} catch (Exception e1) {
 						e1.printStackTrace();
 						generalMonitor.addErrorText(Activator.Messages.getString("Generate.15")); //$NON-NLS-1$
@@ -303,7 +305,7 @@ public class Generate extends Thread {
 						generalMonitor.getConsoleLog().saveLog(fileName, logPath);
 					}
 				} catch (Exception e1) {
-					generalMonitor.addErrorText(Activator.Messages.getString("Generate_103",e1.getMessage()));
+					generalMonitor.addErrorText(Activator.Messages.getString("Generate_103",e1.getMessage())); //$NON-NLS-1$
 					e1.printStackTrace();
 				}
 				// Log
@@ -319,7 +321,7 @@ public class Generate extends Thread {
 					});
 
 				} catch (Exception e) {
-					generalMonitor.addErrorText(Activator.Messages.getString("Generate_104",e.getMessage()));
+					generalMonitor.addErrorText(Activator.Messages.getString("Generate_104",e.getMessage())); //$NON-NLS-1$
 					e.printStackTrace();
 				}
 				if (FeedbackActivator.doFeedback()) {
@@ -328,7 +330,7 @@ public class Generate extends Thread {
 						feedbackManager.save();
 						// FeedbackSender.send();
 					} catch (IOException e) {
-						generalMonitor.addErrorText(Activator.Messages.getString("Generate_105",e.getMessage()));
+						generalMonitor.addErrorText(Activator.Messages.getString("Generate_105",e.getMessage())); //$NON-NLS-1$
 						e.printStackTrace();
 					}
 				}
