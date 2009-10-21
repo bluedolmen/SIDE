@@ -101,8 +101,10 @@ public class ImportACP {
 			nr = rs.getNodeRefs().get(0);
 		} else {
 			// must create the folder
+			String[] tokenizedXpath = xpath.split("/");
+			String folderTitle = (tokenizedXpath[tokenizedXpath.length-1].split(":"))[1];
 			NodeRef parent = createOrGiveMeFolder(store, xpath.replaceFirst("/[^/]*$", ""));
-			FileInfo acpHome = serviceRegistry.getFileFolderService().create(parent, "acp", ContentModel.TYPE_FOLDER);
+			FileInfo acpHome = serviceRegistry.getFileFolderService().create(parent, folderTitle, ContentModel.TYPE_FOLDER);
 			nr = acpHome.getNodeRef();
 		}
 		return nr;
