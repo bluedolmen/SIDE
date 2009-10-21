@@ -32,10 +32,10 @@ public class Application implements IApplication {
 			        	File file = (File) iterator.next();
 			        	System.out.println("File = " + file.getAbsolutePath());
 			        	File fileAP = new File(file.getAbsolutePath());
-			        	//System.out.println("file.exists(): " + fileAP.exists());
+			        	System.out.println("file.exists(): " + fileAP.exists());
 			        	long time1= System.currentTimeMillis();
 			        	Generate gen = new Generate(fileAP, arguments[1]);
-			        	//System.out.println("created");
+			        	System.out.println("created, let's run");
 			        	gen.run();
 			        	long time2= System.currentTimeMillis()-time1;
 			        	System.out.println("Time "+ Long.toString(time2 / 1000));

@@ -156,6 +156,7 @@ public class Generate extends Thread {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
+		System.out.println("### Generate Done");
 	}
 
 	/* ############################### */
@@ -174,13 +175,13 @@ public class Generate extends Thread {
 	// staticParameters, List<Model> models) throws ClassNotFoundException,
 	// InstantiationException, IllegalAccessException, IOException {
 	public void run() {
-		System.out.println("Run !!!!!!");
+		System.out.println("### Run Start");
 
 		// First we seek the generator parameters, and separate fields
 		// of dynamic fields
 		Map<String, String> configurationParameters = new HashMap<String, String>();
 		Map<String, String> generationParameters = new HashMap<String, String>();
-		// System.out.println("log0");
+		System.out.println("Get Application configuration parameters");
 		for (ConfigurationParameters param : configuration.getParameters()) {
 			if (staticParameters.contains(param.getKey())) {
 				configurationParameters.put(param.getKey(), param.getValue());
@@ -194,6 +195,7 @@ public class Generate extends Thread {
 
 		// System.out.println("log1");
 		// Secondly we get the meta-model associated to a model
+		System.out.println("Get Meta-models");
 		HashMap<String, List<IFile>> modelsInfo = null;
 		boolean skipValidation = true;
 		if (configurationParameters.containsKey(ApplicationDialog.KEY_SKIPVALIDATION)) {
@@ -207,6 +209,7 @@ public class Generate extends Thread {
 		}
 		// System.out.println("log3");
 		// Validation :
+		System.out.println("Validate models if no skip validation: skipValidation="+skipValidation);
 		boolean modelWithError = false;
 		if (!skipValidation) {
 			Iterator<List<IFile>> it = modelsInfo.values().iterator();
@@ -226,22 +229,22 @@ public class Generate extends Thread {
 				}
 			}
 		}
-		// System.out.println("modelWithError: " + modelWithError);
+		System.out.println("Is there model with Error? : " + modelWithError);
 		// System.out.println("log4");
 		if (!modelWithError) {
 			logPath = getLogPath(configuration, configurationParameters);
 			genPath = getGenerationPath(configuration, configurationParameters);
 
-			// System.out.println("logPath: " + logPath);
-			// System.out.println("genPath: " + genPath);
+			System.out.println("logPath: " + logPath);
+			System.out.println("genPath: " + genPath);
 
 			try {
-				// System.out.println("configuration: " + configuration);
-				// System.out.println("modelsInfo: " + modelsInfo);
-				// System.out.println("configurationParameters: "
-				// + configurationParameters);
-				// System.out.println("generationParameters: "
-				// + generationParameters);
+				System.out.println("configuration: " + configuration);
+				System.out.println("modelsInfo: " + modelsInfo);
+				System.out.println("configurationParameters: "
+				 + configurationParameters);
+				 System.out.println("generationParameters: "
+				 + generationParameters);
 				generate(configuration, modelsInfo, configurationParameters, generationParameters);
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
@@ -253,19 +256,21 @@ public class Generate extends Thread {
 			// Refresh log and generation folder
 			refreshFolders();
 		}
-		// System.out.println("log5");
+		System.out.println("### Run Done");
 	}
 
 	/**
 	 * Refresh log and generation paths
 	 */
 	private void refreshFolders() {
+		System.out.println("### refreshFolders Start");
 		try {
 			IFileHelper.refreshFolder(logPath);
 			IFileHelper.refreshFolder(genPath);
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
+		System.out.println("### refreshFolders Done");
 	}
 
 	/**
@@ -286,11 +291,13 @@ public class Generate extends Thread {
 	private void generate(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) throws ClassNotFoundException, InstantiationException,
 			IllegalAccessException {
 
+		System.out.println("### generate Start");
 		// System.out.println("Generate: ");
 
 		// System.out.println("\tRun");
 		// Clean if needed :
 		boolean doClean = Boolean.parseBoolean(configurationParameters.get(ApplicationDialog.KEY_DOCLEAN));
+		System.out.println("Do clean ? : "+doClean);
 		if (doClean) {
 			try {
 				clean();
@@ -319,11 +326,14 @@ public class Generate extends Thread {
 			e.printStackTrace();
 		}
 
+		System.out.println("### generate Done");
 	}
 
 	private void clean() throws CoreException {
+		System.out.println("### clean Start");
 		IFileHelper.deleteFolderContent(IFileHelper.getIFolder(logPath));
 		IFileHelper.deleteFolderContent(IFileHelper.getIFolder(genPath));
+		System.out.println("### clean Done");
 	}
 
 	private AbstractGenerator getGeneratorInstance(GeneratorConfiguration elem) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -344,12 +354,19 @@ public class Generate extends Thread {
 	}
 
 	private boolean generate_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) {
+		System.out.println("### generate_ Start");
 		// For all generator version we will call generation method
 		boolean error = false;
 
 		// System.out.println("Generate_");
 
 		for (GeneratorConfiguration elem : configuration.getGeneratorConfigurations()) {
+			System.out.println("Work on generator "+elem.getGeneratorName());
+			System.out.println("Generation structure is :  technologyVersion ="+elem.getId_techno_version());
+			System.out.println("                           generatorId ="+elem.getId());
+			System.out.println("                           metaModelName ="+elem.getMetaModelName());
+			System.out.println("                           technologyName ="+elem.getTechnologyName());
+			System.out.println("                           technologyVersionName ="+elem.getTechnologyVersionName());
 			String id_techno_version = elem.getId_techno_version();
 			configurationParameters.put("technologyVersion", id_techno_version);
 			configurationParameters.put("generatorName", elem.getGeneratorName());
@@ -379,6 +396,7 @@ public class Generate extends Thread {
 			// application model
 			if (generator != null) {
 
+				System.out.println("Initialize generator "+elem.getGeneratorName() + "on MM " + elem.getId_metamodel());
 				// We generate only if there is meta-model available for
 				// the generator
 				if (generator.shouldGenerate(modelsInfo, elem.getId_metamodel())) {
@@ -387,13 +405,16 @@ public class Generate extends Thread {
 
 					try {
 						List<ModuleConstraint> lmc = new ArrayList<ModuleConstraint>();
+						System.out.println("check module constraints "+getModuleContraints());
 						EList<com.bluexml.side.application.ModuleConstraint> l = elem.getModuleContraints();
 						for (int c = 0; c < l.size(); c++) {
 							com.bluexml.side.application.ModuleConstraint current = l.get(c);
 							lmc.add(new ModuleConstraint(current.getModuleId(), current.getTechnologyVersion(), current.getModuleType(), current.getVersionMin(), current.getVersionMax()));
 						}
+						System.out.println("initialize dependence Manager ");
 						DependencesManager dm = new DependencesManager(lmc, false);
 
+						System.out.println("initialize generation ");
 						generator.initialize(generationParameters, generatorOptions, configurationParameters, dm, generationMonitor);
 					} catch (Exception e) {
 						error = true;
@@ -401,12 +422,15 @@ public class Generate extends Thread {
 						e.printStackTrace();
 					}
 
+					System.out.println("start generation if  modelsInfo.size() > 0: " +modelsInfo.size());
 					// The first one
 					if (modelsInfo.size() > 0) {
 						try {
+							System.out.println("generate");
 							generator.generate(modelsInfo, elem.getId_metamodel());
 							
 							// System.out.println("\tlog92");
+							System.out.println("finalize");
 							generator.complete();
 							// System.out.println("\tlog93");
 
@@ -421,6 +445,7 @@ public class Generate extends Thread {
 
 						// System.out.println("\tlog11");
 						try {
+							System.out.println("Create Stamp File");
 							generator.createStampFile();
 						} catch (Exception e) {
 							generationMonitor.getLog().addErrorLog("Generation error : Stamp file error. " + e.getMessage(), e, null);
@@ -431,6 +456,7 @@ public class Generate extends Thread {
 				}
 				// System.out.println("\tlog13");
 				String fileName = "gen_" + generator.getTechVersion() + ".xml";
+				System.out.println("Log info in "+ fileName);
 				try {
 					if (generator.getMonitor() != null) {
 						generator.getMonitor().getLog().saveLog(fileName, logPath + fileSeparator + "work" + fileSeparator);
@@ -443,20 +469,29 @@ public class Generate extends Thread {
 				error = true;
 			}
 		}
+		System.out.println("### generate_ Done");
 		return error;
 	}
 
 	private boolean deploy_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) {
+		System.out.println("### deploy_ Start");
 		boolean error = false;
 		List<DeployerConfiguration> ldeployers = configuration.getDeployerConfigurations();
 		for (DeployerConfiguration depConf : ldeployers) {
 			String deployerClassName = depConf.getImpl_class();
 			String id_deployer = depConf.getId();
 			String id_techno = depConf.getId_techno_version();
+			System.out.println("Work on deployer "+depConf.getDeployerName());
+			System.out.println("Deployement structure is :  technologyVersion ="+id_techno);
+			System.out.println("                           deployerId ="+id_deployer);
+			System.out.println("                           deployerClassName ="+depConf.getImpl_class());
+			System.out.println("                           technologyName ="+depConf.getTechnologyName());
+			System.out.println("                           technologyVersionName ="+depConf.getTechnologyVersionName());
+			System.out.println("                           configurationName ="+configuration.getName());
 			configurationParameters.put("technologyVersion", id_techno);
 			configurationParameters.put("deployerName", depConf.getDeployerName());
 			configurationParameters.put("deployerId", id_deployer);
-			configurationParameters.put("metaModelName", depConf.getMetaModelName());
+			//configurationParameters.put("metaModelName", depConf.getMetaModelName());
 			configurationParameters.put("technologyName", depConf.getTechnologyName());
 			configurationParameters.put("technologyVersionName", depConf.getTechnologyVersionName());
 			configurationParameters.put("configurationName", configuration.getName());
@@ -472,6 +507,7 @@ public class Generate extends Thread {
 			Class<?> gen;
 			Object genObj = null;
 			try {
+				System.out.println("Load deployer class "+deployerClassName);
 				gen = plugin.loadClass(deployerClassName);
 				genObj = gen.newInstance();
 			} catch (ClassNotFoundException e1) {
@@ -498,6 +534,7 @@ public class Generate extends Thread {
 				NullComponentMonitor deployerMonitor = new NullComponentMonitor(configurationParameters, LogType.DEPLOYMENT);
 				deployer.initialize(configurationParameters, generationParameters, deployerOptions, deployerMonitor);
 				try {
+					System.out.println("Deploy ");
 					deployer.deploy();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -505,6 +542,7 @@ public class Generate extends Thread {
 				}
 
 				try {
+					System.out.println("Move Stampe File to "+logPath);
 					deployer.moveStampFile(logPath);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -519,6 +557,7 @@ public class Generate extends Thread {
 				}
 			}
 		}
+		System.out.println("### deploy_ Done error="+error);
 		return error;
 	}
 }
