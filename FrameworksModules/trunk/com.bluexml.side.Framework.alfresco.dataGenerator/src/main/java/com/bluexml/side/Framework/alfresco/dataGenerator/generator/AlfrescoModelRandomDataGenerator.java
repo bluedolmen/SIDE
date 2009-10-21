@@ -226,13 +226,61 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 	
 	public boolean generateNodesInstances(IStructure structure) throws Exception{
 		List<INode> nodesInstances = new ArrayList<INode>();
+		Collection<TypeDefinition> createdTypes = new ArrayList<TypeDefinition>();
 		Collection<TypeDefinition> types = ((AlfrescoModelStructure) structure).getTypes();
+		Collection<AssociationDefinition> compositions = extractCompositions(((AlfrescoModelStructure) structure).getAssociations());
+		Collection<TypeDefinition> sourcesTypesOfCompositions = getSourcesTypesOfCompositions(compositions);
 		for (int numOfNodes = 0; numOfNodes < numberOfNodes; numOfNodes++){
 				TypeDefinition type = RandomMethods.selectRandomlyType(types);
-				nodesInstances.add(((Instance)instance).instanciation(type));
+				createdTypes.add(type);
+		}
+		Collection<TypeDefinition> deletedTargetsTypes = deleteTargetsTypesOfNotCreatedSourcesTypesOfCompositions(getSourcesTypesOfCompositionsNotCreated(createdTypes, sourcesTypesOfCompositions),compositions);
+		createdTypes.removeAll(deletedTargetsTypes);
+		for (TypeDefinition type : createdTypes){
+			nodesInstances.add(((Instance)instance).instanciation(type));
 		}
 		((AlfrescoModelData) alfrescoModelDatas).setGeneratedTypesInstances(nodesInstances);
 		return true;
+	}
+
+	private Collection<TypeDefinition> deleteTargetsTypesOfNotCreatedSourcesTypesOfCompositions(Collection<TypeDefinition> sourcesTypesOfCompositionsNotCreated, Collection<AssociationDefinition> compositions){
+		Collection<TypeDefinition> deletedTargetsTypes = new ArrayList<TypeDefinition>();
+		for (TypeDefinition sourceTypeNotCreated : sourcesTypesOfCompositionsNotCreated){
+			for (AssociationDefinition composition : compositions){
+				if (((TypeDefinition) composition.getSourceClass()).equals(sourceTypeNotCreated)){
+					deletedTargetsTypes.add((TypeDefinition) composition.getTargetClass());
+				}
+			}
+		}
+		return deletedTargetsTypes;
+	}
+
+	private Collection<TypeDefinition> getSourcesTypesOfCompositionsNotCreated(Collection<TypeDefinition> createdTypes, Collection<TypeDefinition> sourcesTypesOfCompositions) {
+		Collection<TypeDefinition> notCreatedSources = new ArrayList<TypeDefinition>();
+		for (TypeDefinition sourceType : sourcesTypesOfCompositions){
+			if (!createdTypes.contains(sourceType)){
+				notCreatedSources.add(sourceType);
+			}
+		}
+		return notCreatedSources;
+	}
+
+	private Collection<TypeDefinition> getSourcesTypesOfCompositions(Collection<AssociationDefinition> compositions) {
+		Collection<TypeDefinition> sources = new ArrayList<TypeDefinition>();
+		for (AssociationDefinition composition : compositions){
+			sources.add((TypeDefinition) composition.getSourceClass());
+		}
+		return sources;
+	}
+
+	private Collection<AssociationDefinition> extractCompositions(Collection<AssociationDefinition> associations) {
+		Collection<AssociationDefinition> compositions = new ArrayList<AssociationDefinition>();
+		for (AssociationDefinition association : associations){
+			if (association.isChild()){
+				compositions.add(association);
+			}
+		}
+		return compositions;
 	}
 
 	public void generateArcsInstances(IStructure structure) throws Exception{
