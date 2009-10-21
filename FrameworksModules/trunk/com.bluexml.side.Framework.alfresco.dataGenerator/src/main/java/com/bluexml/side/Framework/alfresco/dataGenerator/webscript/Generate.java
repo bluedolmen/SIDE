@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.web.scripts.Cache;
 import org.alfresco.web.scripts.DeclarativeWebScript;
@@ -22,6 +24,7 @@ import com.bluexml.side.Framework.alfresco.dataGenerator.serialization.XMLForACP
 import com.bluexml.side.Framework.alfresco.dataGenerator.structure.IStructure;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.xml.sax.SAXException;
 
 /**
  * @author davidchevrier
@@ -51,7 +54,16 @@ public class Generate extends DeclarativeWebScript {
 		dictionary.setQnameStringModel(modelParameterValue);
 		
 		//get model structure
-		IStructure structure = dictionary.getStructure(dictionary.getQnameStringModel());
+		IStructure structure = null;
+		try {
+			structure = dictionary.getStructure(dictionary.getQnameStringModel());
+		} catch (ParserConfigurationException e2) {
+			logger.error("Error :", e2);
+		} catch (SAXException e2) {
+			logger.error("Error :", e2);
+		} catch (IOException e2) {
+			logger.error("Error :", e2);
+		}
 		
 		//genarate datas 
 		try {
