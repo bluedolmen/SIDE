@@ -3,10 +3,9 @@
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.graph;
 
-import java.util.Collection;
 import java.util.Map;
 
-import org.alfresco.repo.template.TemplateProperties;
+import org.alfresco.service.cmr.dictionary.AspectDefinition;
 import org.alfresco.service.cmr.dictionary.PropertyDefinition;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
 
@@ -18,6 +17,7 @@ public class AlfrescoNode implements INode {
 	
 	private TypeDefinition typeDefinition;
 	private Map<PropertyDefinition,Object> datasProperties;
+	private Map<AspectDefinition,Map<PropertyDefinition,Object>> dataAspects;
 	private INode nativeNode;
 	/**
 	 * @return the type
@@ -43,6 +43,19 @@ public class AlfrescoNode implements INode {
 	public void setDatasProperties(
 			Map<PropertyDefinition, Object> datasProperties) {
 		this.datasProperties = datasProperties;
+	}
+	/**
+	 * @return the dataAspects
+	 */
+	public Map<AspectDefinition, Map<PropertyDefinition, Object>> getDataAspects() {
+		return dataAspects;
+	}
+	/**
+	 * @param dataAspects the dataAspects to set
+	 */
+	public void setDataAspects(
+			Map<AspectDefinition, Map<PropertyDefinition, Object>> dataAspects) {
+		this.dataAspects = dataAspects;
 	}
 	/**
 	 * @return the nativeNode
