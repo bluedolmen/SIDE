@@ -4,7 +4,9 @@
 package com.bluexml.side.Framework.alfresco.dataGenerator.generator;
 
 import java.util.Collection;
+import java.util.Map;
 
+import org.alfresco.service.cmr.dictionary.AspectDefinition;
 import org.alfresco.service.cmr.dictionary.AssociationDefinition;
 import org.alfresco.service.cmr.dictionary.PropertyDefinition;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
@@ -99,6 +101,8 @@ public class Instance implements IInstance {
 		((AlfrescoNode) nodeInstance).setDatasProperties(((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).generateDatasProperties(properties));
 		((AlfrescoNode) nodeInstance).setNativeNode(((NativeInstance) nativeInstance).instanciation(type));
 		((AlfrescoNode) nodeInstance).setTypeDefinition(type);
+		Collection<AspectDefinition> aspects = ((AlfrescoModelStructure) structure).getAspects().get(type);
+		((AlfrescoNode) nodeInstance).setDataAspects(((AlfrescoModelRandomDataGenerator) alfrescoModelRandomGenerator).generateDataAspect(aspects));
 		return nodeInstance;
 	}
 

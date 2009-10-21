@@ -4,7 +4,6 @@
 package com.bluexml.side.Framework.alfresco.dataGenerator.generator;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,7 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
+import org.alfresco.service.cmr.dictionary.AspectDefinition;
 import org.alfresco.service.cmr.dictionary.AssociationDefinition;
 import org.alfresco.service.cmr.dictionary.ConstraintDefinition;
 import org.alfresco.service.cmr.dictionary.DataTypeDefinition;
@@ -292,13 +293,17 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 		List<IArc> arcsInstances = new ArrayList<IArc>();
 		while (!sourcesNodes.isEmpty()){
 			INode source = RandomMethods.selectRandomlyNode(sourcesNodes);
+			Collection<INode> tempTargetsNodes = targetsNodes;
 			int numberOfArcs = 0;
-			while (numberOfArcs < numberOfOutputArcs && targetsNodes.size() >= numberOfOutputArcs){
-				INode target = RandomMethods.selectRandomlyNode(targetsNodes);
-				IArc arc = createRandomlyArc(source,target,associationDefinition);
-				if (arc != null){
-					arcsInstances.add(arc);
-					numberOfArcs++;
+			if (!targetsNodes.isEmpty()){
+				while (numberOfArcs < numberOfOutputArcs && /*targetsNodes.size() >= numberOfOutputArcs*/!tempTargetsNodes.isEmpty()){
+					INode target = RandomMethods.selectRandomlyNode(targetsNodes);
+					IArc arc = createRandomlyArc(source,target,associationDefinition);
+					if (arc != null){
+						arcsInstances.add(arc);
+						numberOfArcs++;
+					}
+					tempTargetsNodes.remove(target);
 				}
 			}
 			sourcesNodes.remove(source);
@@ -345,6 +350,12 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 			}
 			sourcesNodes.remove(source);
 			targetsNodes.remove(target);
+			if (targetsNodes.contains(source)){
+				targetsNodes.remove(source);
+			}
+			if (sourcesNodes.contains(target)){
+				sourcesNodes.remove(target);
+			}
 		}
 		return arcsInstances;
 	}
@@ -383,6 +394,17 @@ public class AlfrescoModelRandomDataGenerator implements IRandomGenerator {
 			randomData = RandomMethods.generateDataByDataTypeProperty(dataTypeOfProperty, defaultValue);
 		}
 		return randomData;
+	}
+	
+	public Map<AspectDefinition,Map<PropertyDefinition,Object>> generateDataAspect(Collection<AspectDefinition> aspects) throws Exception{
+		Map<AspectDefinition,Map<PropertyDefinition,Object>> dataAspects = new HashMap<AspectDefinition,Map<PropertyDefinition,Object>>();
+		for (AspectDefinition aspect : aspects){
+			Map<QName,PropertyDefinition> aspectProperties = aspect.getProperties();
+			Collection<PropertyDefinition> properties = aspectProperties.values();
+			Map<PropertyDefinition,Object> dataProperties = generateDatasProperties(properties);
+			dataAspects.put(aspect,dataProperties);
+		}
+		return dataAspects;
 	}
 
 }

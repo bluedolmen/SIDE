@@ -151,7 +151,7 @@ public class NativeAlfrescoModelRandomDataGenerator implements IRandomGenerator 
 	}
 	private Object fillNativeDataAspect(QNamePattern aspect, TypeDefinition type) {
 		Object data = new Object();
-		if (((QName) aspect).equals(ContentModel.ASPECT_TITLED)){
+		if (((QName) aspect).equals(ContentModel.ASPECT_TEMPORARY)){
 			data = "";
 		}
 		return data;
