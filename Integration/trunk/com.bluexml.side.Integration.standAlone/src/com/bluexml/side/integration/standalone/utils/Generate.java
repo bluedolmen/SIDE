@@ -405,7 +405,7 @@ public class Generate extends Thread {
 
 					try {
 						List<ModuleConstraint> lmc = new ArrayList<ModuleConstraint>();
-						System.out.println("check module constraints "+getModuleContraints());
+						System.out.println("check module constraints "+elem.getModuleContraints());
 						EList<com.bluexml.side.application.ModuleConstraint> l = elem.getModuleContraints();
 						for (int c = 0; c < l.size(); c++) {
 							com.bluexml.side.application.ModuleConstraint current = l.get(c);
