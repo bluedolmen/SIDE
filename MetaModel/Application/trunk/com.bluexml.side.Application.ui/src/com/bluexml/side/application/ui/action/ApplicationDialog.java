@@ -47,9 +47,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
-import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -1121,12 +1121,9 @@ public class ApplicationDialog extends Dialog {
 					// event fire on empty raw
 				}
 			}
-
 			public void widgetDefaultSelected(SelectionEvent e) {
-				
 			}
 		});
-
 
 		final TableColumn newColumnTableColumn = new TableColumn(generatorParameters, SWT.RIGHT);
 		generatorParameters.setSortColumn(newColumnTableColumn);
@@ -1151,6 +1148,17 @@ public class ApplicationDialog extends Dialog {
 
 		refreshConfiguration();
 
+		// bug fix http://bugs.bluexml.net/show_bug.cgi?id=1226
+		tabFolder.addMouseListener(new MouseListener() {
+			public void mouseUp(MouseEvent e) {				
+			}
+			public void mouseDown(MouseEvent e) {
+				generatorParametersViewer.cancelEditing();
+			}
+			public void mouseDoubleClick(MouseEvent e)  {
+			}
+		});
+		
 		return container;
 	}
 
@@ -1297,7 +1305,7 @@ public class ApplicationDialog extends Dialog {
 		generatorParametersViewer = new TableViewer(generatorParameters);
 		generatorParametersViewer.setUseHashlookup(true);
 		generatorParametersViewer.setColumnProperties(columnNames);
-
+		
 		// Create the cell editors
 		CellEditor[] editors = new CellEditor[2];
 
