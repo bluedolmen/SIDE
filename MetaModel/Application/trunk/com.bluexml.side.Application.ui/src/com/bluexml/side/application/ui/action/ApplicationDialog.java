@@ -1114,30 +1114,19 @@ public class ApplicationDialog extends Dialog {
 		generatorParameters.setHeaderVisible(true);
 		generatorParameters.addSelectionListener(new SelectionListener() {
 			public void widgetSelected(SelectionEvent e) {
-				System.out.println("Selection by good Event");
 				GeneratorParameter param = (GeneratorParameter) ((StructuredSelection) generatorParametersViewer.getSelection()).getFirstElement();
 				if (param != null) {
 					documentationText.setText(buildHelpDocumentationText(param.getDocumentation()));
 				} else {
 					// event fire on empty raw
-					System.out.println("Event fire on empty raw do nothing");
 				}
 			}
 
 			public void widgetDefaultSelected(SelectionEvent e) {
-				System.out.println("DefaultSelection");
+				
 			}
 		});
 
-		generatorParameters.addFocusListener(new FocusListener() {
-			public void focusLost(FocusEvent e) {
-				System.out.println("FocusLost");
-			}
-
-			public void focusGained(FocusEvent e) {
-				System.out.println("Focus in");
-			}
-		});
 
 		final TableColumn newColumnTableColumn = new TableColumn(generatorParameters, SWT.RIGHT);
 		generatorParameters.setSortColumn(newColumnTableColumn);
