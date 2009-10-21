@@ -157,7 +157,7 @@ public class Generate extends Thread {
 			System.out.println("NullPointerException  "+e.getMessage());
 			e.printStackTrace();
 		} catch (Exception e1) {
-			System.out.println("Exception  "+e.getMessage());
+			System.out.println("Exception  "+e1.getMessage());
 			e1.printStackTrace();
 		}
 		System.out.println("### Generate Done");
