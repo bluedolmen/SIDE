@@ -137,8 +137,10 @@ public class Generate extends Thread {
 		try {
 			resource.load(fi, map);
 		} catch (IOException e) {
+			System.out.println("Exception  "+e.getMessage());
 			e.printStackTrace();
 		} catch (Exception e1) {
+			System.out.println("Exception  "+e1.getMessage());
 			e1.printStackTrace();
 		}
 
@@ -152,8 +154,10 @@ public class Generate extends Thread {
 			models = ApplicationUtil.getModels(application);
 			System.out.println("\tmodels: " + models);
 		} catch (java.lang.NullPointerException e) {
+			System.out.println("NullPointerException  "+e.getMessage());
 			e.printStackTrace();
 		} catch (Exception e1) {
+			System.out.println("Exception  "+e.getMessage());
 			e1.printStackTrace();
 		}
 		System.out.println("### Generate Done");
@@ -195,16 +199,19 @@ public class Generate extends Thread {
 
 		// System.out.println("log1");
 		// Secondly we get the meta-model associated to a model
-		System.out.println("Get Meta-models");
+		System.out.println("Check if validation necessary");
 		HashMap<String, List<IFile>> modelsInfo = null;
 		boolean skipValidation = true;
 		if (configurationParameters.containsKey(ApplicationDialog.KEY_SKIPVALIDATION)) {
 			skipValidation = Boolean.valueOf(configurationParameters.get(ApplicationDialog.KEY_SKIPVALIDATION));
 		}
+		System.out.println("skipValidation is "+skipValidation);
 		// System.out.println("log2");
+		System.out.println("Get Meta-models");
 		try {
 			modelsInfo = (HashMap<String, List<IFile>>) ApplicationUtil.getAssociatedMetaModel(models);
 		} catch (Exception e) {
+			System.out.println("Exception  "+e.getMessage());
 			e.printStackTrace();
 		}
 		// System.out.println("log3");
@@ -223,6 +230,7 @@ public class Generate extends Thread {
 						}
 
 					} catch (Exception e) {
+						System.out.println("Exception - model with error - "+e.getMessage());
 						modelWithError = true;
 						e.printStackTrace();
 					}
@@ -246,11 +254,15 @@ public class Generate extends Thread {
 				 System.out.println("generationParameters: "
 				 + generationParameters);
 				generate(configuration, modelsInfo, configurationParameters, generationParameters);
+				System.out.println("return from generate");
 			} catch (ClassNotFoundException e) {
+				System.out.println("Exception  "+e.getMessage());
 				e.printStackTrace();
 			} catch (InstantiationException e) {
+				System.out.println("Exception  "+e.getMessage());
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
+				System.out.println("Exception  "+e.getMessage());
 				e.printStackTrace();
 			}
 			// Refresh log and generation folder
@@ -268,6 +280,7 @@ public class Generate extends Thread {
 			IFileHelper.refreshFolder(logPath);
 			IFileHelper.refreshFolder(genPath);
 		} catch (CoreException e) {
+			System.out.println("Exception  "+e.getMessage());
 			e.printStackTrace();
 		}
 		System.out.println("### refreshFolders Done");
@@ -302,6 +315,7 @@ public class Generate extends Thread {
 			try {
 				clean();
 			} catch (CoreException e) {
+				System.out.println("Exception  "+e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -313,16 +327,21 @@ public class Generate extends Thread {
 		// System.out.println("\tgenerationParameters: " +
 		// generationParameters);
 
+		System.out.println("call generate_  ");
 		boolean error = generate_(configuration, modelsInfo, configurationParameters, generationParameters);
+		System.out.println("return generateç  error="+error);
 
 		// System.out.println("\tError: " + error);
 
+		System.out.println("call deploy_  ");
 		error &= deploy_(configuration, modelsInfo, configurationParameters, generationParameters);
+		System.out.println("return deploy_  error="+error);
 
 		try {
 			LogSave.buildGeneraLogFile(logPath);
 			IFileHelper.refreshFolder(logPath);
 		} catch (Exception e) {
+			System.out.println("Exception  "+e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -347,9 +366,11 @@ public class Generate extends Thread {
 			genObj = gen.newInstance();
 			if (genObj instanceof AbstractGenerator) {
 				AbstractGenerator generator = (AbstractGenerator) genObj;
+				System.out.println("getGeneratorInstance initialized  ");
 				return generator;
 			}
 		}
+		System.out.println("getGeneratorInstance is null  ");
 		return null;
 	}
 
@@ -385,10 +406,13 @@ public class Generate extends Thread {
 			try {
 				generator = getGeneratorInstance(elem);
 			} catch (ClassNotFoundException e1) {
+				System.out.println("Exception  "+e1.getMessage());
 				e1.printStackTrace();
 			} catch (InstantiationException e1) {
+				System.out.println("Exception  "+e1.getMessage());
 				e1.printStackTrace();
 			} catch (IllegalAccessException e1) {
+				System.out.println("Exception  "+e1.getMessage());
 				e1.printStackTrace();
 			}
 
@@ -418,6 +442,7 @@ public class Generate extends Thread {
 						generator.initialize(generationParameters, generatorOptions, configurationParameters, dm, generationMonitor);
 					} catch (Exception e) {
 						error = true;
+						System.out.println("Exception  "+e.getMessage());
 						generationMonitor.getLog().addErrorLog("Initialization error : " + e.getMessage(), e, null);
 						e.printStackTrace();
 					}
@@ -439,6 +464,7 @@ public class Generate extends Thread {
 
 						} catch (Exception e) {
 							error = true;
+							System.out.println("Exception  "+e.getMessage());
 							generationMonitor.getLog().addErrorLog("Generation error : " + e.getMessage(), e, null);
 							e.printStackTrace();
 						}
@@ -448,6 +474,7 @@ public class Generate extends Thread {
 							System.out.println("Create Stamp File");
 							generator.createStampFile();
 						} catch (Exception e) {
+							System.out.println("Exception  "+e.getMessage());
 							generationMonitor.getLog().addErrorLog("Generation error : Stamp file error. " + e.getMessage(), e, null);
 							e.printStackTrace();
 						}
@@ -463,13 +490,14 @@ public class Generate extends Thread {
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
+					System.out.println("Exception  "+e.getMessage());
 					e.printStackTrace();
 				}
 			} else {
 				error = true;
 			}
 		}
-		System.out.println("### generate_ Done");
+		System.out.println("### generate_ Done error="+error);
 		return error;
 	}
 
@@ -511,21 +539,26 @@ public class Generate extends Thread {
 				gen = plugin.loadClass(deployerClassName);
 				genObj = gen.newInstance();
 			} catch (ClassNotFoundException e1) {
+				System.out.println("Exception  "+e1.getMessage());
 				error = true;
 				e1.printStackTrace();
 			} catch (InstantiationException e) {
+				System.out.println("Exception  "+e.getMessage());
 				error = true;
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
+				System.out.println("Exception  "+e.getMessage());
 				error = true;
 				e.printStackTrace();
 			} catch (Exception e) {
+				System.out.println("Exception  "+e.getMessage());
 				error = true;
 				e.printStackTrace();
 			}
 			try {
 				IFileHelper.refreshFolder(logPath);
 			} catch (CoreException e1) {
+				System.out.println("Exception  "+e1.getMessage());
 				e1.printStackTrace();
 			}
 			if (genObj instanceof Deployer) {
@@ -537,6 +570,7 @@ public class Generate extends Thread {
 					System.out.println("Deploy ");
 					deployer.deploy();
 				} catch (Exception e) {
+					System.out.println("Exception  "+e.getMessage());
 					e.printStackTrace();
 					error = true;
 				}
@@ -545,6 +579,7 @@ public class Generate extends Thread {
 					System.out.println("Move Stampe File to "+logPath);
 					deployer.moveStampFile(logPath);
 				} catch (Exception e) {
+					System.out.println("Exception  "+e.getMessage());
 					e.printStackTrace();
 				}
 
@@ -553,6 +588,7 @@ public class Generate extends Thread {
 					deployerMonitor.getLog().saveLog(fileName, logPath + System.getProperty("file.separator") + "work" + System.getProperty("file.separator"));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
+					System.out.println("Exception  "+e.getMessage());
 					e.printStackTrace();
 				}
 			}
