@@ -54,7 +54,7 @@ public class NativeAlfrescoModelStructure implements IStructure {
 
 	private Collection<QNamePattern> fillNativeAspects() {
 		Collection<QNamePattern> nativeAspects = new ArrayList<QNamePattern>();
-		nativeAspects.add(ContentModel.ASPECT_TITLED);
+		nativeAspects.add(ContentModel.ASPECT_TEMPORARY);
 		return nativeAspects;
 	}
 

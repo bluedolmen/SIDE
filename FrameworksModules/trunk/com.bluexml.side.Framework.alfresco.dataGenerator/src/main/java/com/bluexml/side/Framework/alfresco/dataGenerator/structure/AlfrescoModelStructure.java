@@ -6,6 +6,7 @@ package com.bluexml.side.Framework.alfresco.dataGenerator.structure;
 import java.util.Collection;
 import java.util.Map;
 
+import org.alfresco.service.cmr.dictionary.AspectDefinition;
 import org.alfresco.service.cmr.dictionary.AssociationDefinition;
 import org.alfresco.service.cmr.dictionary.PropertyDefinition;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
@@ -19,6 +20,7 @@ public class AlfrescoModelStructure implements IStructure {
 	private Collection<TypeDefinition> types;
 	private Map<TypeDefinition,Collection<PropertyDefinition>> properties;
 	private Collection<AssociationDefinition> associations;
+	private Map<TypeDefinition,Collection<AspectDefinition>> aspects;
 	private IStructure nativeStructure;
 	/**
 	 * @return the types
@@ -55,6 +57,18 @@ public class AlfrescoModelStructure implements IStructure {
 	 */
 	public void setAssociations(Collection<AssociationDefinition> associations) {
 		this.associations = associations;
+	}
+	/**
+	 * @return the aspects
+	 */
+	public Map<TypeDefinition, Collection<AspectDefinition>> getAspects() {
+		return aspects;
+	}
+	/**
+	 * @param aspects the aspects to set
+	 */
+	public void setAspects(Map<TypeDefinition, Collection<AspectDefinition>> aspects) {
+		this.aspects = aspects;
 	}
 	/**
 	 * @return the nativeStructure
