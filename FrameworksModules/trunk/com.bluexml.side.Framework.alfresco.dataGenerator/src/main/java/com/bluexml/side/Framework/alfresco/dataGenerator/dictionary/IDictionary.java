@@ -11,6 +11,6 @@ import com.bluexml.side.Framework.alfresco.dataGenerator.structure.IStructure;
  */
 public interface IDictionary {
 	
-	public IStructure getStructure(String modelName);
+	
 
 }

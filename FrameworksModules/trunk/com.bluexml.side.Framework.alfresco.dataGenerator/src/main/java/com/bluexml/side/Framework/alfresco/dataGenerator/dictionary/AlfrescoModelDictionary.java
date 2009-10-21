@@ -3,13 +3,22 @@
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.dictionary;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.alfresco.model.ContentModel;
+import org.alfresco.service.cmr.dictionary.AspectDefinition;
 import org.alfresco.service.cmr.dictionary.AssociationDefinition;
 import org.alfresco.service.cmr.dictionary.ConstraintDefinition;
 import org.alfresco.service.cmr.dictionary.DictionaryService;
@@ -17,6 +26,11 @@ import org.alfresco.service.cmr.dictionary.ModelDefinition;
 import org.alfresco.service.cmr.dictionary.PropertyDefinition;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
 import org.alfresco.service.namespace.QName;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import com.bluexml.side.Framework.alfresco.dataGenerator.structure.AlfrescoModelStructure;
 import com.bluexml.side.Framework.alfresco.dataGenerator.structure.IStructure;
@@ -30,6 +44,8 @@ public class AlfrescoModelDictionary implements IDictionary {
 	private DictionaryService dictionaryService;
 	private String qnameStringModel;
 	private IStructure alfrescoModelStructure;
+	
+	private static final String PATH_TO_ALFRESCO_CONFIG_FILE = "tomcat\\webapps\\alfresco\\WEB-INF\\classes\\alfresco\\module\\SIDE_ModelExtension_enterprise\\web-client-config-custom.xml";
 	
 	/**
 	 * @return the qnameStringModel
@@ -111,23 +127,92 @@ public class AlfrescoModelDictionary implements IDictionary {
 		return property.getConstraints();
 	}
 	
-	public IStructure getStructure(String qnameModel) {
+	public IStructure getStructure(String qnameModel) throws ParserConfigurationException, SAXException, IOException {
 		QName qNameModel = getModel(qnameModel).getName();
-		
-		((AlfrescoModelStructure) alfrescoModelStructure).setTypes(getTypes(qNameModel));
-		
-		Map<TypeDefinition,Collection<PropertyDefinition>> properties = new HashMap<TypeDefinition, Collection<PropertyDefinition>>();
-		for (TypeDefinition typeDefinition : ((AlfrescoModelStructure) alfrescoModelStructure).getTypes()) {
-			//QName typeQNamed = typeDefinition.getName();	
-			//Collection<PropertyDefinition> propertiesByType = getProperties(typeQNamed);
-			Collection<PropertyDefinition> propertiesByType = getProperties(typeDefinition);
-			properties.put(typeDefinition, propertiesByType);
-		}
-		((AlfrescoModelStructure) alfrescoModelStructure).setProperties(properties);
-		
+		Collection<TypeDefinition> types = getTypes(qNameModel);
+		((AlfrescoModelStructure) alfrescoModelStructure).setTypes(types);	
+		((AlfrescoModelStructure) alfrescoModelStructure).setProperties(getProperties(types,qNameModel));
 		((AlfrescoModelStructure) alfrescoModelStructure).setAssociations(getAssociations(qNameModel));
+		((AlfrescoModelStructure) alfrescoModelStructure).setAspects(getAspects(qNameModel,types));
+		Collection<TypeDefinition> notAbstractTypes = removeAbstractTypes(types);
+		((AlfrescoModelStructure) alfrescoModelStructure).setTypes(notAbstractTypes);
 		
 		return alfrescoModelStructure;
 	}
+
+private Collection<TypeDefinition> removeAbstractTypes(Collection<TypeDefinition> types) throws ParserConfigurationException, SAXException, IOException {
+		Collection<TypeDefinition> tempTypes = new ArrayList<TypeDefinition>();
+		Collection<QName> notAbstractTypes = getNotAbstractTypes();
+		for (TypeDefinition type : types){
+			QName qnamedType = type.getName();
+			if (!notAbstractTypes.contains(qnamedType)){
+				tempTypes.add(type);
+			}
+		}
+		types.removeAll(tempTypes);
+		return types;
+	}
+
+private Map<TypeDefinition, Collection<PropertyDefinition>> getProperties(Collection<TypeDefinition> types, QName qNameModel) {
+	Map<TypeDefinition,Collection<PropertyDefinition>> properties = new HashMap<TypeDefinition, Collection<PropertyDefinition>>();
+	for (TypeDefinition typeDefinition : ((AlfrescoModelStructure) alfrescoModelStructure).getTypes()) {
+		Collection<PropertyDefinition> propertiesByType = getProperties(typeDefinition);
+		QName qnamedParent = typeDefinition.getParentName();
+		while (qnamedParent != null){
+			TypeDefinition parentType = dictionaryService.getType(qnamedParent);
+			propertiesByType.addAll(getProperties(parentType));
+			qnamedParent = parentType.getParentName();
+		}
+		properties.put(typeDefinition, propertiesByType);
+	}
+	return properties;
+}
+
+	private Collection<QName> getNotAbstractTypes() throws ParserConfigurationException, SAXException, IOException {
+		Collection<QName> notAbstractTypes = new ArrayList<QName>();
+		Collection<String> stringQNameNotAbstractTypes = parseConfigFile();
+		for (String notAbstractType : stringQNameNotAbstractTypes) {
+			String[] tempNotAbstractType = notAbstractType.split(":");
+			notAbstractType = tempNotAbstractType[1];
+			String uri = QName.createQName(qnameStringModel).getNamespaceURI();
+			notAbstractTypes.add(QName.createQName(uri,notAbstractType));
+		}
+		return notAbstractTypes;
+	}
+
+	private Collection<String> parseConfigFile() throws ParserConfigurationException, SAXException, IOException {
+		Collection<String> notAbstractTypes = new ArrayList<String>();
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		File xmlAlfrescoConfig = new File(PATH_TO_ALFRESCO_CONFIG_FILE);
+		Document document = builder.parse(xmlAlfrescoConfig);
+		Element root = document.getDocumentElement();
+		Element firstChild = (Element)root.getElementsByTagName("config").item(0);
+		Element secondChild = (Element) firstChild.getElementsByTagName("content-types").item(0);
+		NodeList contentsTypes = ((Element) secondChild).getElementsByTagName("type");
+		for (int indexNode = 0; indexNode < contentsTypes.getLength(); indexNode++){
+			//notAbstractTypes.add(contentsTypes.item(indexNode).getAttributes().item(0).getNodeValue());
+			notAbstractTypes.add(((Element)contentsTypes.item(indexNode)).getAttribute("name"));
+		}
+		return notAbstractTypes;
+	}
+
+	private Map<TypeDefinition,Collection<AspectDefinition>> getAspects(QName qNameModel, Collection<TypeDefinition> types) {
+		Map<TypeDefinition,Collection<AspectDefinition>> aspectsByTypes = new HashMap<TypeDefinition, Collection<AspectDefinition>>();
+		Collection<QName> aspectsQNamedForModel = dictionaryService.getAspects(qNameModel);
+		for (TypeDefinition type : types){
+			Collection<AspectDefinition> aspects = new ArrayList<AspectDefinition>();
+			List<AspectDefinition> aspectsByType = type.getDefaultAspects();
+			for (QName aspectQName : aspectsQNamedForModel) {
+				AspectDefinition aspectModel = dictionaryService.getAspect(aspectQName);
+				if (aspectsByType.contains(aspectModel)){
+					aspects.add(aspectModel);
+				}
+			}
+			aspectsByTypes.put(type,aspects);
+		}
+		return aspectsByTypes;
+	}
+
 	
 }
