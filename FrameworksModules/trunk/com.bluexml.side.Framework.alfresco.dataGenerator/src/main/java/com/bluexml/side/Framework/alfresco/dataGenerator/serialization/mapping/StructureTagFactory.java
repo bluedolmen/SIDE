@@ -329,7 +329,7 @@ public class StructureTagFactory extends AbstractXmlOutput {
 	public StringBuffer createOpenNativeAspects(QNamePattern nativeAspect) {
 		xmlOutPut = clear();
 		xmlOutPut.append(TagsConstants.OPEN_TAG);
-		xmlOutPut.append(NamespaceService.CONTENT_MODEL_PREFIX);
+		xmlOutPut.append(NamespaceService.SYSTEM_MODEL_PREFIX);
 		xmlOutPut.append(TagsConstants.SEPARATOR);
 		xmlOutPut.append(((QName) nativeAspect).getLocalName());
 		xmlOutPut.append(TagsConstants.END_TAG);
@@ -339,7 +339,7 @@ public class StructureTagFactory extends AbstractXmlOutput {
 	public StringBuffer createCloseNativeAspects(QNamePattern nativeAspect) {
 		xmlOutPut = clear();
 		xmlOutPut.append(TagsConstants.OPEN_CLOSING_TAG);
-		xmlOutPut.append(NamespaceService.CONTENT_MODEL_PREFIX);
+		xmlOutPut.append(NamespaceService.SYSTEM_MODEL_PREFIX);
 		xmlOutPut.append(TagsConstants.SEPARATOR);
 		xmlOutPut.append(((QName) nativeAspect).getLocalName());
 		xmlOutPut.append(TagsConstants.END_TAG);

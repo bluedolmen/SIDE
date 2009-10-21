@@ -3,10 +3,12 @@
  */
 package com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
 import org.alfresco.model.ContentModel;
+import org.alfresco.service.cmr.dictionary.AspectDefinition;
 import org.alfresco.service.cmr.dictionary.PropertyDefinition;
 import org.alfresco.service.namespace.QName;
 import org.alfresco.service.namespace.QNamePattern;
@@ -137,10 +139,24 @@ public class XMLForACPMappingMethods extends AbstractXmlOutput implements IMappi
 		xmlOutPut.append(tagFactory.createOpenPropertiesTag());
 		xmlOutPut.append(createSideTagsAndFillDatasForPropertiesType(new StringBuffer(), node));
 		xmlOutPut.append(createNativeTagsAndFillDatasForNativePropertiesType(new StringBuffer(), node));
+		xmlOutPut.append(createSideTagsAndFillDataForPropertiesAspects(new StringBuffer(), node));
 		xmlOutPut.append(tagFactory.createClosePropertiesTag());
 		return xmlOutPut;
 	}
 
+
+	private Object createSideTagsAndFillDataForPropertiesAspects(StringBuffer xmlOutPut, INode node) {
+		Collection<Map<PropertyDefinition,Object>> dataAspects = ((AlfrescoNode) node).getDataAspects().values();
+		for (Map<PropertyDefinition, Object> dataProperties : dataAspects) {
+			Set<PropertyDefinition> properties = dataProperties.keySet();
+			for (PropertyDefinition property : properties) {
+				xmlOutPut.append(tagFactory.createSideOpenPropertyTag(property));
+				xmlOutPut.append(datasFactory.fillPropertyTag(dataProperties.get(property)));
+				xmlOutPut.append(tagFactory.createSideClosePropertyTag(property));
+			}
+		}
+		return xmlOutPut;
+	}
 
 	private StringBuffer createNativeTagsAndFillDatasForNativePropertiesType(StringBuffer xmlOutPut, INode node) {
 		Map<QNamePattern,Object> nativeDatasProperties = ((NativeAlfrescoNode) ((AlfrescoNode) node).getNativeNode()).getNativeDatasProperties();
@@ -212,12 +228,27 @@ public class XMLForACPMappingMethods extends AbstractXmlOutput implements IMappi
 	public StringBuffer mapsTypeAspects(INode node) {
 		xmlOutPut = clear();
 		xmlOutPut.append(tagFactory.createOpenAspectTag());
-		xmlOutPut.append(createAndFillAspectTag(new StringBuffer(), node));
+		xmlOutPut.append(createAndFillNativeAspectTag(new StringBuffer(), node));
+		xmlOutPut.append(createSideAspectsTags(new StringBuffer(), node));
 		xmlOutPut.append(tagFactory.createCloseAspectTag());
 		return xmlOutPut;
 	}
 
-	private StringBuffer createAndFillAspectTag(StringBuffer xmlOutPut, INode node) {
+	private Object createSideAspectsTags(StringBuffer xmlOutPut, INode node) {
+		Set<AspectDefinition> aspects = ((AlfrescoNode) node).getDataAspects().keySet();
+		for (AspectDefinition aspect : aspects) {
+			String tagTitle = aspect.getName().toPrefixString();
+			xmlOutPut.append(TagsConstants.OPEN_TAG);
+			xmlOutPut.append(tagTitle);
+			xmlOutPut.append(TagsConstants.END_TAG);
+			xmlOutPut.append(TagsConstants.OPEN_CLOSING_TAG);
+			xmlOutPut.append(tagTitle);
+			xmlOutPut.append(TagsConstants.END_TAG);
+		}
+		return xmlOutPut;
+	}
+
+	private StringBuffer createAndFillNativeAspectTag(StringBuffer xmlOutPut, INode node) {
 		Map<QNamePattern,Object> datasAspects = ((NativeAlfrescoNode) ((AlfrescoNode) node).getNativeNode()).getNativeDatasAspects();
 		Set<QNamePattern> aspects = datasAspects.keySet();
 		for (QNamePattern aspect : aspects) {
