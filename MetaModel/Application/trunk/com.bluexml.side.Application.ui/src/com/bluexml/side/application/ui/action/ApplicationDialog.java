@@ -37,6 +37,7 @@ import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.viewers.TreeSelection;
@@ -46,10 +47,12 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Point;
@@ -112,8 +115,6 @@ import com.bluexml.side.application.ui.action.utils.viewFilter.SideFileFiter;
 
 @SuppressWarnings("restriction")
 public class ApplicationDialog extends Dialog {
-
-	
 
 	private Group optionsGroup;
 	private static final int APPLY_ID = IDialogConstants.CLIENT_ID + 2;
@@ -813,7 +814,8 @@ public class ApplicationDialog extends Dialog {
 		tree_1.setBounds(0, 160, 459, 304);
 		List<Class<?>> omitedClassForGen = new ArrayList<Class<?>>();
 		omitedClassForGen.add(Deployer.class);
-		genOptionsTree.setContentProvider(new ConfigurationContentProvider(Metamodel.class, omitedClassForGen, genOptionsTree, configurationParameters, deployerParameters, genParamConfByGenerator, deployParamConfByGenerator));
+		genOptionsTree.setContentProvider(new ConfigurationContentProvider(Metamodel.class, omitedClassForGen, genOptionsTree, configurationParameters, deployerParameters, genParamConfByGenerator,
+				deployParamConfByGenerator));
 		genOptionsTree.setLabelProvider(new ConfigurationLabelProvider());
 		genOptionsTree.setInput(this);
 		genOptionsTree.expandAll();
@@ -1005,7 +1007,8 @@ public class ApplicationDialog extends Dialog {
 		List<Class<?>> omitedClassForDeploy = new ArrayList<Class<?>>();
 		omitedClassForDeploy.add(Generator.class);
 		omitedClassForDeploy.add(Metamodel.class);
-		deployOptionsTree.setContentProvider(new ConfigurationContentProvider(Technology.class, omitedClassForDeploy, deployOptionsTree, configurationParameters, deployerParameters, genParamConfByGenerator, deployParamConfByGenerator));
+		deployOptionsTree.setContentProvider(new ConfigurationContentProvider(Technology.class, omitedClassForDeploy, deployOptionsTree, configurationParameters, deployerParameters,
+				genParamConfByGenerator, deployParamConfByGenerator));
 		deployOptionsTree.setLabelProvider(new ConfigurationLabelProvider());
 		deployOptionsTree.setInput(this);
 		deployOptionsTree.expandAll();
@@ -1101,20 +1104,41 @@ public class ApplicationDialog extends Dialog {
 		optionsGroup.setBounds(490, 291, 300, 222);
 		optionsGroup.setVisible(false);
 
-		generatorParameters = new Table(optionsGroup, SWT.BORDER);
+		generatorParameters = new Table(optionsGroup, SWT.BORDER + SWT.FULL_SELECTION);
+		generatorParameters.setLayout(new TableLayout());
 		generatorParameters.setBounds(0, 23, 295, 199);
 		generatorParameters.setTopIndex(3);
-		generatorParameters.getHorizontalBar().setVisible(false);
-		generatorParameters.getHorizontalBar().setEnabled(false);
+		generatorParameters.getHorizontalBar().setVisible(true);
+		generatorParameters.getHorizontalBar().setEnabled(true);
 		generatorParameters.setLinesVisible(true);
 		generatorParameters.setHeaderVisible(true);
-		generatorParameters.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e) {
+		generatorParameters.addSelectionListener(new SelectionListener() {
+			public void widgetSelected(SelectionEvent e) {
+				System.out.println("Selection by good Event");
 				GeneratorParameter param = (GeneratorParameter) ((StructuredSelection) generatorParametersViewer.getSelection()).getFirstElement();
-				documentationText.setText(buildHelpDocumentationText(param.getDocumentation()));
+				if (param != null) {
+					documentationText.setText(buildHelpDocumentationText(param.getDocumentation()));
+				} else {
+					// event fire on empty raw
+					System.out.println("Event fire on empty raw do nothing");
+				}
+			}
 
+			public void widgetDefaultSelected(SelectionEvent e) {
+				System.out.println("DefaultSelection");
 			}
 		});
+
+		generatorParameters.addFocusListener(new FocusListener() {
+			public void focusLost(FocusEvent e) {
+				System.out.println("FocusLost");
+			}
+
+			public void focusGained(FocusEvent e) {
+				System.out.println("Focus in");
+			}
+		});
+
 		final TableColumn newColumnTableColumn = new TableColumn(generatorParameters, SWT.RIGHT);
 		generatorParameters.setSortColumn(newColumnTableColumn);
 		newColumnTableColumn.setWidth(109);
@@ -1667,7 +1691,7 @@ public class ApplicationDialog extends Dialog {
 			}
 		}
 	}
-	
+
 	protected boolean isDeployTabSelected() {
 		return tabFolder.getSelection()[0].equals(deployementTabItem);
 	}
@@ -1679,5 +1703,5 @@ public class ApplicationDialog extends Dialog {
 	protected boolean isModelTabSelected() {
 		return tabFolder.getSelection()[0].equals(modelsTabItem);
 	}
-	
+
 }
