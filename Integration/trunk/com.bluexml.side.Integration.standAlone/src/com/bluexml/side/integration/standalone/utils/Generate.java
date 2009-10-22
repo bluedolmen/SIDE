@@ -457,6 +457,7 @@ public class Generate extends Thread {
 							// System.out.println("\tlog92");
 							System.out.println("finalize");
 							generator.complete();
+							System.out.println("finalize Done");
 							// System.out.println("\tlog93");
 
 							// System.out.println("\tlog10");
@@ -473,6 +474,7 @@ public class Generate extends Thread {
 						try {
 							System.out.println("Create Stamp File");
 							generator.createStampFile();
+							System.out.println("Create Stamp File Done");
 						} catch (Exception e) {
 							System.out.println("Exception  "+e.getMessage());
 							generationMonitor.getLog().addErrorLog("Generation error : Stamp file error. " + e.getMessage(), e, null);
@@ -486,7 +488,9 @@ public class Generate extends Thread {
 				System.out.println("Log info in "+ fileName);
 				try {
 					if (generator.getMonitor() != null) {
+						System.out.println("Save Log "+ logPath + fileSeparator + "work" + fileSeparator);
 						generator.getMonitor().getLog().saveLog(fileName, logPath + fileSeparator + "work" + fileSeparator);
+						System.out.println("Save Log Done");
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
