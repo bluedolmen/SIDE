@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.jface.viewers.ICellEditorListener;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
@@ -1153,7 +1154,7 @@ public class ApplicationDialog extends Dialog {
 			public void mouseUp(MouseEvent e) {				
 			}
 			public void mouseDown(MouseEvent e) {
-				generatorParametersViewer.cancelEditing();
+				generatorParameterCellModifier.applyDirtyValue();				
 			}
 			public void mouseDoubleClick(MouseEvent e)  {
 			}
@@ -1201,7 +1202,6 @@ public class ApplicationDialog extends Dialog {
 		addStaticParam(KEY_DOCUMENTATION, "false", config); //$NON-NLS-1$
 		addStaticParam(KEY_SKIPVALIDATION, "false", config); //$NON-NLS-1$
 		addStaticParam(KEY_DOCLEAN, "true", config); //$NON-NLS-1$
-		// TODO : get
 
 		String projectPath = "/" + model.getProject().getName() + "/";
 		addStaticParam(KEY_LOGPATH, projectPath + "log", config); //$NON-NLS-1$
@@ -1314,6 +1314,25 @@ public class ApplicationDialog extends Dialog {
 
 		// Column 2 : Value (Text, editable)
 		TextCellEditor textEditor = new TextCellEditor(generatorParameters);
+		
+		textEditor.addListener(new ICellEditorListener() {
+			
+			public void editorValueChanged(boolean oldValidState, boolean newValidState) {
+				System.out.println("editorValueChanged");
+				
+				
+			}
+			
+			public void cancelEditor() {
+				System.out.println("cancelEditor");
+				
+			}
+			
+			public void applyEditorValue() {
+				System.out.println("applyEditorValue");
+				
+			}
+		});
 		editors[1] = (CellEditor) textEditor;
 
 		// Assign the cell editors to the viewer
@@ -1325,7 +1344,7 @@ public class ApplicationDialog extends Dialog {
 		generatorParametersViewer.setLabelProvider(generatorParameterLabelProvider);
 		generatorParameterCellModifier = new GeneratorParameterCellModifier(dataStructure, columnNames, generatorParametersViewer);
 		generatorParametersViewer.setCellModifier(generatorParameterCellModifier);
-
+		
 		generatorParametersViewer.setInput(dataStructure);
 		generatorParametersViewer.refresh();
 
@@ -1394,6 +1413,10 @@ public class ApplicationDialog extends Dialog {
 	 * Action for Close, Save and Launch
 	 */
 	protected void buttonPressed(int buttonId) {
+		if (generatorParameterCellModifier !=null) {
+			// only for some OS that do not unselect cell Editor before fire this event, so we record changes manually
+			generatorParameterCellModifier.applyDirtyValue();
+		}
 		if (buttonId == IDialogConstants.CLOSE_ID) {
 			if (applicationModified) {
 				int result = showConfirmation(Activator.Messages.getString("ApplicationDialog.93"), Activator.Messages.getString("ApplicationDialog.94")); //$NON-NLS-1$ //$NON-NLS-2$

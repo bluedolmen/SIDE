@@ -2,6 +2,7 @@ package com.bluexml.side.application.ui.action.table;
 
 import java.util.Arrays;
 
+import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.widgets.TableItem;
@@ -16,16 +17,13 @@ public class GeneratorParameterCellModifier implements ICellModifier {
 	private String[] columnNames;
 	private GeneratorParameterDataStructure dataStructure;
 	private TableViewer generatorParametersViewer;
-	
 
-	public GeneratorParameterCellModifier(
-			GeneratorParameterDataStructure p_dataStructure,
-			String[] p_columnNames, TableViewer p_generatorParametersViewer) {
+	public GeneratorParameterCellModifier(GeneratorParameterDataStructure p_dataStructure, String[] p_columnNames, TableViewer p_generatorParametersViewer) {
 		columnNames = p_columnNames;
 		dataStructure = p_dataStructure;
 		generatorParametersViewer = p_generatorParametersViewer;
 	}
-	
+
 	public void setDataStructure(GeneratorParameterDataStructure dataStructure) {
 		this.dataStructure = dataStructure;
 	}
@@ -102,7 +100,16 @@ public class GeneratorParameterCellModifier implements ICellModifier {
 			}
 		}
 	}
-	
-	
+
+	public void applyDirtyValue() {
+		if (generatorParametersViewer.isCellEditorActive()) {
+			CellEditor ce = generatorParametersViewer.getCellEditors()[1];
+			String value = ce.getValue().toString();
+			TableItem ti = generatorParametersViewer.getTable().getItem(generatorParametersViewer.getControl().getLocation());
+			String property = "Valeur";
+			this.modify(ti, property, value);
+			generatorParametersViewer.cancelEditing();
+		}
+	}
 
 }
