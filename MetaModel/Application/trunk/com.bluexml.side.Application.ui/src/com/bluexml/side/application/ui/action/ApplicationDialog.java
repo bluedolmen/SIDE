@@ -1314,25 +1314,6 @@ public class ApplicationDialog extends Dialog {
 
 		// Column 2 : Value (Text, editable)
 		TextCellEditor textEditor = new TextCellEditor(generatorParameters);
-		
-		textEditor.addListener(new ICellEditorListener() {
-			
-			public void editorValueChanged(boolean oldValidState, boolean newValidState) {
-				System.out.println("editorValueChanged");
-				
-				
-			}
-			
-			public void cancelEditor() {
-				System.out.println("cancelEditor");
-				
-			}
-			
-			public void applyEditorValue() {
-				System.out.println("applyEditorValue");
-				
-			}
-		});
 		editors[1] = (CellEditor) textEditor;
 
 		// Assign the cell editors to the viewer
