@@ -29,13 +29,17 @@ public abstract class WarDeployer extends Deployer {
 
 	/**
 	 * 
-	 * @param cleanKey the option key use in extension point
-	 * @param logChangesKey the option key use in extension point
-	 * @param webappDefaultName the default name for the webapp
-	 * @param webappKeyName the parameter key use in extension point
+	 * @param cleanKey
+	 *            the option key use in extension point
+	 * @param logChangesKey
+	 *            the option key use in extension point
+	 * @param webappDefaultName
+	 *            the default name for the webapp
+	 * @param webappKeyName
+	 *            the parameter key use in extension point
 	 */
-	public WarDeployer(String cleanKey,String logChangesKey,String webappDefaultName, String webappKeyName) {
-		super(cleanKey,logChangesKey);
+	public WarDeployer(String cleanKey, String logChangesKey, String webappDefaultName, String webappKeyName) {
+		super(cleanKey, logChangesKey);
 		this.webappDefaultName = webappDefaultName;
 		this.webappKeyName = webappKeyName;
 	}
@@ -48,12 +52,12 @@ public abstract class WarDeployer extends Deployer {
 					webappName = webappDefaultName;
 				}
 			} catch (NullPointerException e) {
-				new Exception("getWebappName() MUST be called after initialize() !",e);
+				new Exception("getWebappName() MUST be called after initialize() !", e);
 			}
 		}
 		return webappName;
 	}
-	
+
 	public File getBackupWarFile() {
 		if (backupWarFile == null) {
 			backupWarFile = new File(getTomcatHome() + File.separator + webapps + File.separator + getWebappName() + "." + backupWarExt); //$NON-NLS-1$
@@ -106,9 +110,6 @@ public abstract class WarDeployer extends Deployer {
 	@Override
 	protected void preProcess(File fileToDeploy) throws Exception {
 		initWarToPatch(new File(getTomcatHome()));
-		if (!fileToDeploy.exists()) {
-			throw new Exception(Activator.Messages.getString("WarDeployer.5") + fileToDeploy); //$NON-NLS-1$
-		}
 	}
 
 	protected void deployProcess(java.io.File fileToDeploy) throws Exception {
@@ -116,15 +117,25 @@ public abstract class WarDeployer extends Deployer {
 		// copy all files in the package into the WAR
 		TrueZipHelper fh = new TrueZipHelper("zip"); //$NON-NLS-1$
 		if (fileToDeploy.isDirectory()) {
-			for (File f : fileToDeploy.listFiles(new FileExtensionFilter("zip"))) { //$NON-NLS-1$
-				monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.6"), Activator.Messages.getString("WarDeployer.7", f.getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
-				succes &= fh.copyFiles(f, getWarToPatchFile(), true);
+			File[] lf = fileToDeploy.listFiles(new FileExtensionFilter("zip"));
+			if (lf.length > 0) {
+				for (File f : fileToDeploy.listFiles(new FileExtensionFilter("zip"))) { //$NON-NLS-1$
+					monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.6"), Activator.Messages.getString("WarDeployer.7", f.getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
+					succes &= fh.copyFiles(f, getWarToPatchFile(), true);
+				}
+			} else {
+				monitor.addWarningTextAndLog(Activator.Messages.getString("WarDeployer.5"), "");//$NON-NLS-1$ //$NON-NLS-1$
+				return;
 			}
 		} else {
-			monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.6"), Activator.Messages.getString("WarDeployer.7", fileToDeploy.getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
-			succes = fh.copyFiles(fileToDeploy, getWarToPatchFile(), true);
+			if (fileToDeploy.exists()) {
+				monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.6"), Activator.Messages.getString("WarDeployer.7", fileToDeploy.getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
+				succes = fh.copyFiles(fileToDeploy, getWarToPatchFile(), true);
+			} else {
+				monitor.addWarningTextAndLog(Activator.Messages.getString("WarDeployer.5"), "");//$NON-NLS-1$ //$NON-NLS-1$
+				return;
+			}
 		}
-
 		if (!succes) {
 			monitor.getLog().addErrorLog(Activator.Messages.getString("WarDeployer.8"), Activator.Messages.getString("WarDeployer.9"), ""); //$NON-NLS-1$ //$NON-NLS-2$
 			throw new Exception(Activator.Messages.getString("WarDeployer.9")); //$NON-NLS-1$
@@ -137,6 +148,7 @@ public abstract class WarDeployer extends Deployer {
 			diffFolder(warOrg, finalwar, sr, FileHelper.COMPARE_ADDED + FileHelper.COMPARE_DELETED);
 			monitor.getLog().addInfoLog(this.logChangesMsg, sr.toString(), "");
 		}
+
 	}
 
 	public void diffFolder(File folder1, File folder2, Writer log, String filter) throws IOException {
