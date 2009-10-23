@@ -21,7 +21,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
    </plug-ins-->
 
 <%for (portletSet){%>
-<%if (name == "DocumentDetails" && isPortletInternal != null && isPortletInternal.view != null) {%>
+<%if (name.toLowerCase() == "documentdetails" && isPortletInternal != null && isPortletInternal.view != null) {%>
 <%for (isPortletInternal.view.getInnerView()){%>
 <!-- START BlueXML custom form configuration for the <%filter("view.AbstractViewOf").viewOf.filter("clazz.Clazz").getContentType()%> content type -->   
    <config evaluator="node-type" condition="<%filter("view.AbstractViewOf").viewOf.filter("clazz.Clazz").getContentType()%>">
