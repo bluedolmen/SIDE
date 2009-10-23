@@ -17,7 +17,7 @@ print OUTF "<TR><TH>Test Title</TH><TH>Main MM</TH><TH>Main Techno</TH><TH>Relea
 $i=1;
 open(F,$file) || die "Can not open the file $file";
 while (<F>){
-  if (/File/){
+  if (/File =/){
     print OUTF "<TR>\n";
     $line=$_;
     $line=~ /testCase\//;
