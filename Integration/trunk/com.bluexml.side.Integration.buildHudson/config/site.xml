@@ -63,15 +63,24 @@
    <feature url="features/com.bluexml.side.Deployer.alfrescoDirectCopy.feature_1.0.12.v10204-20091006.jar" id="com.bluexml.side.Deployer.alfrescoDirectCopy.feature" version="1.0.12.v10204-20091006">
       <category name="S-IDE Deployer"/>
    </feature>
-   <category-def name="S-IDE Other" label="S-IDE Other"/>
-   <category-def name="S-IDE Application" label="S-IDE Application"/>
-   <category-def name="S-IDE Class" label="S-IDE Class"/>
-   <category-def name="S-IDE Form" label="S-IDE Form"/>
-   <category-def name="S-IDE Workflow" label="S-IDE Workflow"/>
-   <category-def name="S-IDE Requirements" label="S-IDE Requirements"/>
-   <category-def name="S-IDE View" label="S-IDE View"/>
-   <category-def name="S-IDE Portal" label="S-IDE Portal"/>
-   <category-def name="S-IDE Common" label="S-IDE Common"/>
-   <category-def name="S-IDE Util" label="S-IDE Util"/>
-   <category-def name="S-IDE Deployer" label="S-IDE Deployer"/>
+   <feature url="features/com.bluexml.side.Portal.generator.alfresco.feature_1.0.7.v10204-20091006.jar" id="com.bluexml.side.Portal.generator.alfresco.feature" version="1.0.7.v10204-20091006">
+      <category name="S-IDE Portal"/>
+   </feature>
+   <feature url="features/com.bluexml.side.Deployer.xformsDirectCopy.feature_1.0.1.v10204-20091006.jar" id="com.bluexml.side.Deployer.xformsDirectCopy.feature" version="1.0.1.v10204-20091006">
+      <category name="S-IDE Form"/>
+   </feature>
+   <feature url="features/com.bluexml.side.Deployer.xforms.feature_1.0.9.v10204-20091006.jar" id="com.bluexml.side.Deployer.xforms.feature" version="1.0.9.v10204-20091006">
+      <category name="S-IDE Form"/>
+   </feature>
+   <category-def name="S-IDE Other" label="SIDE Other"/>
+   <category-def name="S-IDE Application" label="SIDE Application"/>
+   <category-def name="S-IDE Class" label="SIDE Class"/>
+   <category-def name="S-IDE Form" label="SIDE Form"/>
+   <category-def name="S-IDE Workflow" label="SIDE Workflow"/>
+   <category-def name="S-IDE Requirements" label="SIDE Requirements"/>
+   <category-def name="S-IDE View" label="SIDE View"/>
+   <category-def name="S-IDE Portal" label="SIDE Portal"/>
+   <category-def name="S-IDE Common" label="SIDE Common"/>
+   <category-def name="S-IDE Util" label="SIDE Util"/>
+   <category-def name="S-IDE Deployer" label="SIDE Deployer"/>
 </site>
