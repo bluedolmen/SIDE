@@ -28,7 +28,7 @@
                         key="com.bluexml.side.Class.generator.alfresco.module.version"
                         label="Class Module version">
                   </configurationParameter>
-                  <option
+                  <!--<option
                         documentation="Check this option to generate a default view for the document list of the Alfresco Share Document Library page."
                         key="alfrescoShare.defaultDocList"
                         label="Alfresco Share docList (default views)">
@@ -43,7 +43,14 @@
                         <optionRef
                               optionId="com.bluexml.side.Portal.generator.alfresco.doclist"></optionRef>
                      </mustBeUnchecked>
+                     <moduleDependence
+                           moduleId="com.bluexml.side.Integration.alfresco.shareDoclist"
+                           moduleType="zip"
+                           technologyVersion="alfresco_3.x"
+                           versionMin="1.0.0">
+                     </moduleDependence>
                   </option>
+                  -->
                   <option
                         documentation="Check this option to include the production of the Alfresco Share&apos;s module extension in the generation.&lt;br&gt;If not checked, the extension modules are not included in the generated AMPs.&lt;br&gt;SIDE provides extension modules to Alfresco Share in order to view and edit all the metadata of the newly generated content model."
                         key="alfresco.share.extension"

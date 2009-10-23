@@ -61,11 +61,11 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
 			// DefaultdocListView add custom version of docList webScript
 			// used by AlfrescoShare to render Document list
-			if (getGeneratorOptionValue(GENERATOR_OPTIONS_PORTAL_doclist)) {
-				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/customViews.ftl.mt"); //$NON-NLS-1$
+			//if (getGeneratorOptionValue(GENERATOR_OPTIONS_PORTAL_doclist)) {
+				//result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/customViews.ftl.mt"); //$NON-NLS-1$
 				// default view
-				result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/defaultdoclistView_ftl.mt"); //$NON-NLS-1$
-			}
+				//result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/defaultdoclistView_ftl.mt"); //$NON-NLS-1$
+			//}
 
 			if (getGeneratorOptionValue(GENERATOR_OPTIONS_SHARE_EXTENSION)) {
 				// generator for alfresco Share web application
