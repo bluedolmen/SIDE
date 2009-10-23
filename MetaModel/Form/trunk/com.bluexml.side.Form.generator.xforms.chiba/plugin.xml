@@ -35,6 +35,12 @@
                      key="com.bluexml.side.Form.generator.xforms.chiba.webappContext"
                      label="Webapp address">
                </configurationParameter>
+               <mustBeChecked
+                     pluginId="com.bluexml.side.Class.generator.alfresco">
+                  <optionRef
+                        optionId="alfresco.webscripts.common">
+                  </optionRef>
+               </mustBeChecked>
             </generatorVersion>
          </technologyVersion>
       </technology>
