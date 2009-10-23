@@ -80,8 +80,11 @@ public class Generate extends Thread {
 			// file = project.getFile(location.lastSegment());
 
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
+			System.out.println("workspace: " + workspace);
 			IPath location = Path.fromOSString(filePath.getAbsolutePath());
+			System.out.println("location: " + location);
 			file = workspace.getRoot().getFileForLocation(location);
+			System.out.println("file: " + file);
 
 		} catch (Exception e1) {
 			e1.printStackTrace();
