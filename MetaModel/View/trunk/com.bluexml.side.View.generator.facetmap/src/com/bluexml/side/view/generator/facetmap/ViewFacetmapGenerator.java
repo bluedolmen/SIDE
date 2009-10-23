@@ -41,9 +41,9 @@ import com.bluexml.side.view.generator.facetmap.utils.FacetmapConstants;
  */
 public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator implements FacetmapConstants {
 	public static String GENERATOR_CODE = "CODE_GED_G_C_FACETMAP_2"; //$NON-NLS-1$
-	
+
 	public static String ALFRESCO_URL_defaultValue = "http://localhost:8080/alfresco"; //$NON-NLS-1$
-	
+
 	public static String ALFRESCO_SHARE_URL_defaultValue = "http://localhost:8080/share"; //$NON-NLS-1$
 	public static String MMUri = "http://www.kerblue.org/view/1.0"; //$NON-NLS-1$
 
@@ -154,35 +154,42 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator imple
 
 	@Override
 	public Collection<IFile> buildPackages(String modelId) {
+		Collection<IFile> pkgs = new ArrayList<IFile>();
 		String folder = IFileHelper.getSystemFolderPath(getTemporaryFolder() + FILESEP + modelId) + FILESEP;
 		// Destinations
 		String destFacets = folder + "zip" + FILESEP + WEBAPP_FACETS; //$NON-NLS-1$
 		String destContent = folder + "zip" + FILESEP + WEBAPP_CONTENT; //$NON-NLS-1$
-		try {
-			// Copy
-			FileHelper.copyFiles(new File(folder + "common"), new File(destFacets), true); //$NON-NLS-1$
-			FileHelper.copyFiles(new File(folder + "common"), new File(destContent), true); //$NON-NLS-1$
-			FileHelper.copyFiles(new File(folder + "facets"), new File(destFacets), true); //$NON-NLS-1$
-			FileHelper.copyFiles(new File(folder + "content"), new File(destContent), true); //$NON-NLS-1$
-		} catch (IOException e) {
-			monitor.addErrorTextAndLog(Activator.Messages.getString("ViewFacetmapGenerator.45"), e, null); //$NON-NLS-1$
+		if (new File(folder).listFiles().length > 0) {
+			try {
+				// Copy
+				FileHelper.copyFiles(new File(folder + "common"), new File(destFacets), true); //$NON-NLS-1$
+				FileHelper.copyFiles(new File(folder + "common"), new File(destContent), true); //$NON-NLS-1$
+				FileHelper.copyFiles(new File(folder + "facets"), new File(destFacets), true); //$NON-NLS-1$
+				FileHelper.copyFiles(new File(folder + "content"), new File(destContent), true); //$NON-NLS-1$
+			} catch (IOException e) {
+				monitor.addErrorTextAndLog(Activator.Messages.getString("ViewFacetmapGenerator.45"), e, null); //$NON-NLS-1$
+			}
+
+			// Zip
+			String zipFolder = IFileHelper.getSystemFolderPath(getTargetPath() + FILESEP + getTechVersion()) + FILESEP;
+			new File(zipFolder).mkdirs();
+			File zipFacets = new File(zipFolder + WEBAPP_FACETS + ".zip"); //$NON-NLS-1$
+			File zipContent = new File(zipFolder + WEBAPP_CONTENT + ".zip"); //$NON-NLS-1$
+			try {
+				ZipManager.zip(new File(destFacets), zipFacets, false);
+				ZipManager.zip(new File(destContent), zipContent, false);
+			} catch (Exception e) {
+				monitor.addErrorTextAndLog(Activator.Messages.getString("ViewFacetmapGenerator.48"), e, null); //$NON-NLS-1$
+			}
+			// Creating file collection
+			IFolder workingDir = IFileHelper.getIFolder(getTemporaryFolder() + FILESEP + "../"); //$NON-NLS-1$
+
+			pkgs.add(IFileHelper.getIFile(workingDir.toString().replaceFirst("[^/]*/", "/") + FILESEP + getTechVersion() + FILESEP + WEBAPP_FACETS + ".zip")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			pkgs.add(IFileHelper.getIFile(workingDir.toString().replaceFirst("[^/]*/", "/") + FILESEP + getTechVersion() + FILESEP + WEBAPP_CONTENT + ".zip")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		} else {
+			// no files generated, commonly happen when view model do not contains facetmap view 
+			this.monitor.addWarningTextAndLog("FacetMap View Not found, check your view model or unselect this generator", "");
 		}
-		// Zip
-		String zipFolder = IFileHelper.getSystemFolderPath(getTargetPath() + FILESEP + getTechVersion()) + FILESEP;
-		new File(zipFolder).mkdirs();
-		File zipFacets = new File(zipFolder + WEBAPP_FACETS + ".zip"); //$NON-NLS-1$
-		File zipContent = new File(zipFolder + WEBAPP_CONTENT + ".zip"); //$NON-NLS-1$
-		try {
-			ZipManager.zip(new File(destFacets), zipFacets, false);
-			ZipManager.zip(new File(destContent), zipContent, false);
-		} catch (Exception e) {
-			monitor.addErrorTextAndLog(Activator.Messages.getString("ViewFacetmapGenerator.48"), e, null); //$NON-NLS-1$
-		}
-		// Creating file collection
-		IFolder workingDir = IFileHelper.getIFolder(getTemporaryFolder() + FILESEP + "../"); //$NON-NLS-1$
-		Collection<IFile> pkgs = new ArrayList<IFile>();
-		pkgs.add(IFileHelper.getIFile(workingDir.toString().replaceFirst("[^/]*/", "/") + FILESEP + getTechVersion() + FILESEP + WEBAPP_FACETS + ".zip")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		pkgs.add(IFileHelper.getIFile(workingDir.toString().replaceFirst("[^/]*/", "/") + FILESEP + getTechVersion() + FILESEP + WEBAPP_CONTENT + ".zip")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		return pkgs;
 	}
 
