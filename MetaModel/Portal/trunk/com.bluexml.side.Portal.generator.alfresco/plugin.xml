@@ -31,12 +31,12 @@
                            technologyVersion="alfresco_3.x"
                            versionMin="1.0.0">
                      </moduleDependence>
-                     <mustBeUnchecked
+                     <!--<mustBeUnchecked
                            pluginId="com.bluexml.side.Class.generator.alfresco">
                         <optionRef
                               optionId="alfrescoShare.defaultDocList">
                         </optionRef>
-                     </mustBeUnchecked>
+                     </mustBeUnchecked>-->
                      <moduleDependence
                            moduleId="com.bluexml.side.Integration.alfresco.doclist"
                            moduleType="amp"
