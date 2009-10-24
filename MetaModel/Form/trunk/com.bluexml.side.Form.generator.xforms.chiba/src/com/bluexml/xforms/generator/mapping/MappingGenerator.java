@@ -410,19 +410,33 @@ public class MappingGenerator extends AbstractDataGenerator {
 		if (CSSCollector.size() > 0) {
 			FileWriter fw = new FileWriter(CSSFile);
 			PrintWriter pw = new PrintWriter(fw);
+			int nbClasses = 0;
 
-			pw.println("/* Style as class name */");
+			pw.println("/* ************************ */");
+			pw.println("/* BlueXML XForms Generator */");
+			pw.println("/* Generated CSS Template   */");
+			pw.println("/* ************************ */");
+			pw.println("/* Modify this template as suits your needs.*/");
+			pw.println("/* If this file is available as 'resources/styles/custom.css' under */");
+			pw.println("/* your webapp's folder, it will be used by the client browsers.*/");
+			pw.println("/* Otherwise, indicating its location via a URL parameter will be */");
+			pw.println("/* necessary. See the SIDE documentation for further details.*/");
+			pw.println("\n\n");
+
+			pw.println("/* CLASSES */");
 			for (String elt : CSSCollector) {
 				if (StringUtils.trimToNull(elt) != null) {
 					if (!(elt.charAt(0) == '#')) {
-						pw.println(elt + " {");
+						nbClasses++;
+						pw.println("." + elt + " {");
 						pw.println("}");
 						pw.println();
 					}
 				}
 			}
 
-			pw.println("\n/* Style as id name */");
+			pw.println();
+			pw.println("/* ID's */");
 			for (String elt : CSSCollector) {
 				if (StringUtils.trimToNull(elt) != null) {
 					if ((elt.charAt(0) == '#')) {
@@ -431,6 +445,27 @@ public class MappingGenerator extends AbstractDataGenerator {
 						pw.println();
 					}
 				}
+			}
+
+			pw.println("\n/* Styles for aligning the labels*/");
+			int count = 0;
+			for (String elt : CSSCollector) {
+				if (StringUtils.trimToNull(elt) != null) {
+					if (!(elt.charAt(0) == '#')) {
+						count++;
+						String line = "." + MsgId.INT_CSS_CLASS_BLUEXML_AUTOGEN + " > ." + elt
+								+ " > div label" + (count == nbClasses ? " {" : ",");
+						pw.println(line);
+					}
+				}
+			}
+			if (count > 0) {
+				pw.println("\twidth: 120px;");
+				pw.println("\theight: 1em;");
+				pw.println("\toverflow: hidden;");
+				pw.println("\ttext-align: right;");
+				pw.println("}");
+				pw.println();
 			}
 
 			pw.close();
