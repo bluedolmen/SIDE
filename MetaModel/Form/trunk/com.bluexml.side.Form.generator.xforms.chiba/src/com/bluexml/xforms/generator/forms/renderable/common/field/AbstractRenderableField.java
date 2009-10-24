@@ -7,8 +7,6 @@ import java.util.Stack;
 import javax.xml.namespace.QName;
 
 import org.apache.commons.lang.StringUtils;
-import com.bluexml.xforms.messages.MsgId;
-import com.bluexml.xforms.messages.MsgPool;
 import org.jdom.Element;
 
 import com.bluexml.side.form.ChoiceWidgetType;
@@ -18,9 +16,10 @@ import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementBindSimple;
 import com.bluexml.xforms.generator.forms.modelelement.ModelElementEnumeration;
 import com.bluexml.xforms.generator.forms.renderable.common.SelectBean;
-import com.bluexml.xforms.generator.forms.rendered.RenderedInput;
 import com.bluexml.xforms.generator.forms.rendered.RenderedXMLElement;
 import com.bluexml.xforms.generator.tools.ModelTools;
+import com.bluexml.xforms.messages.MsgId;
+import com.bluexml.xforms.messages.MsgPool;
 
 /**
  * The Class AbstractRenderableField.
@@ -61,7 +60,7 @@ public abstract class AbstractRenderableField extends Renderable {
 	public Rendered render(String path, Stack<Renderable> parents, Stack<Rendered> renderedParents) {
 		attributeId = XFormsGenerator.getId(getOwner() + "_" + getName());
 
-		Rendered rendered = new RenderedInput();
+		RenderedXMLElement rendered = new RenderedXMLElement();
 
 		ModelElementBindSimple meb = null;
 		String xsdType = getXsdType();
@@ -85,11 +84,10 @@ public abstract class AbstractRenderableField extends Renderable {
 		element = getCustomElement(rendered, meb, slabel, parents, renderedParents);
 		if (isReadOnly()) {
 			meb.setReadOnly(true);
-			if (StringUtils.equals(getXsdType(), "boolean") == false) {
-				element = getReadOnlyElement(meb, slabel);
-			}
 		}
 		rendered.setXformsElement(element);
+		applyStyle(rendered);
+		
 		return rendered;
 	}
 
