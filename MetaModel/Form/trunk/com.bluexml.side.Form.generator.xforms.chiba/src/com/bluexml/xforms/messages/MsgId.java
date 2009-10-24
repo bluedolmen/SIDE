@@ -1,5 +1,5 @@
 /**
- * 
+ * NE PAS FORMATTER CE FICHIER.
  */
 package com.bluexml.xforms.messages;
 
