@@ -244,7 +244,7 @@ public class RenderableAttribute extends AbstractRenderableField {
 
 	@Override
 	protected void applyStyle(RenderedXMLElement rendered) {
-		// nothing to do for attributes
+		// nothing to do for attributes. No styles are specified in class diagrams.
 	}
 
 }

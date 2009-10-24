@@ -160,7 +160,7 @@ public abstract class RenderableFormElement<FE extends FormElement> extends Rend
 	 */
 	private void renderableCompute(Renderable renderable) {
 		if (renderable != null) {
-			if (renderable instanceof RenderableFormElement) {
+			if (renderable instanceof RenderableFormElement<?>) {
 				((RenderableFormElement<?>) renderable).compute();
 			}
 		}

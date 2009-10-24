@@ -49,7 +49,7 @@ public class RenderableChoiceInput extends RenderableField<ChoiceField> {
 		Enumeration anEnum = null;
 		com.bluexml.side.common.ModelElement ref;
 
-		ref = (com.bluexml.side.common.ModelElement) formElement.getRef();
+		ref = formElement.getRef();
 		ref = (com.bluexml.side.common.ModelElement) generationManager.getFormGenerator()
 				.getRealObject(ref);
 		if (ref instanceof Attribute) {

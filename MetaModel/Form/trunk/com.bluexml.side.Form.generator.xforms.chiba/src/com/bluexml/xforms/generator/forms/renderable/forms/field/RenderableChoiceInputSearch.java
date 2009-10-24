@@ -33,7 +33,7 @@ public class RenderableChoiceInputSearch extends Renderable {
 
 		com.bluexml.side.common.ModelElement ref;
 
-		ref = (com.bluexml.side.common.ModelElement) choiceField.getRef();
+		ref = choiceField.getRef();
 		ref = (com.bluexml.side.common.ModelElement) generationManager.getFormGenerator()
 				.getRealObject(ref);
 

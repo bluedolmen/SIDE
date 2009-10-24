@@ -952,7 +952,7 @@ public class XFormsGenerator extends AbstractDataGenerator {
 		RenderableXForm form = new RenderableXForm(realRenderable, title, actions, isAWorkflowForm,
 				isWrkflwSelectionForm);
 		// #976 adding the status bar
-		RenderableDiv statusDiv = new RenderableDiv(MsgId.INT_STATUS_BAR_ID.getText());
+		RenderableDiv statusDiv = new RenderableDiv(MsgId.INT_CSS_STATUS_BAR_ID.getText());
 		RenderableHR lineAbove = new RenderableHR();
 		RenderableHR lineBelow = new RenderableHR();
 		form.add(lineAbove);

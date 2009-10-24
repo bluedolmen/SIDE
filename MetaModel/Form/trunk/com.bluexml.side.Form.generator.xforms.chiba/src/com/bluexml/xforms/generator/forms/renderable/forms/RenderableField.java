@@ -3,6 +3,8 @@ package com.bluexml.xforms.generator.forms.renderable.forms;
 import java.util.Collection;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+import org.jdom.Element;
 
 import com.bluexml.side.form.ActionField;
 import com.bluexml.side.form.BooleanField;
@@ -40,6 +42,7 @@ import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableSimpl
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableTextInput;
 import com.bluexml.xforms.generator.forms.renderable.forms.field.RenderableURLInput;
 import com.bluexml.xforms.generator.forms.rendered.RenderedXMLElement;
+import com.bluexml.xforms.messages.MsgId;
 
 /**
  * The Class RenderableField.
@@ -205,10 +208,10 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 					(EmailField) formElement);
 		} else if (formElement instanceof ImageField) {
 			renderable = new RenderableFileInput(generationManager, parent,
-					(FileField) formElement, true);
+					formElement, true);
 		} else if (formElement instanceof FileField) {
 			renderable = new RenderableFileInput(generationManager, parent,
-					(FileField) formElement, false);
+					formElement, false);
 		} else if (formElement instanceof FloatField) {
 			renderable = new RenderableSimpleInput<FloatField>(generationManager, parent,
 					(FloatField) formElement, "float");
@@ -270,20 +273,22 @@ public abstract class RenderableField<F extends Field> extends AbstractRenderabl
 	 * value of the property is the CSS class of the div.
 	 * 
 	 * @param rendered
-	 *            the XML element of this field
+	 *            the XML element of this field. WILL BE MODIFIED IF A STYLE IS DEFINED.
 	 */
 	@Override
 	protected void applyStyle(RenderedXMLElement rendered) {
-		// TODO: uncomment
-		// String app = StringUtils.trimToNull(formElement.getStyle());
-		// if (app != null) {
-		// Element div = XFormsGenerator.createElement("div",
-		// XFormsGenerator.NAMESPACE_XHTML);
-		// Element nestedElement = rendered.getXformsElement();
-		// div.setAttribute("class", app);
-		// div.addContent(nestedElement);
-		// rendered.setXMLElement(div);
-		// }
+		String appearance = StringUtils.trimToNull(formElement.getStyle());
+		if (appearance != null) {
+			Element div = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
+			Element nestedElement = rendered.getXformsElement();
+			div.setAttribute("class", appearance);
+			div.addContent(nestedElement);
+			
+			Element divOut = XFormsGenerator.createElement("div", XFormsGenerator.NAMESPACE_XHTML);
+			divOut.setAttribute("class", MsgId.INT_CSS_CLASS_BLUEXML_AUTOGEN.getText());
+			divOut.addContent(div);
+			
+			rendered.setXMLElement(divOut);
+		}
 	}
-
 }

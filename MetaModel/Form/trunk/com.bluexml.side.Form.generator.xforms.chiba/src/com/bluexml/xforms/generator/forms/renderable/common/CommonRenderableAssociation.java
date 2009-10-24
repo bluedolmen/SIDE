@@ -94,9 +94,8 @@ public class CommonRenderableAssociation extends Renderable {
 		if (associationClassBean == null) {
 			return new Path(PathType.relativePath, name + "/"
 					+ ModelTools.getCompleteName(associationBean.getDestinationClass()) + "/");
-		} else {
-			return new Path(PathType.relativePath, name + "/associationItem/");
 		}
+		return new Path(PathType.relativePath, name + "/associationItem/");
 	}
 
 	/*
