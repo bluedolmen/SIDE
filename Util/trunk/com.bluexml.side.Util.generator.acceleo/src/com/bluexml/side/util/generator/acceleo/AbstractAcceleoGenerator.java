@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.generator.ConflitResolverHelper;
+import com.bluexml.side.util.generator.GeneratorException;
 import com.bluexml.side.util.generator.acceleo.chain.CustomCChain;
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.IFileHelper;
@@ -47,13 +48,13 @@ import fr.obeo.acceleo.gen.IGenFilter;
 import fr.obeo.acceleo.gen.template.eval.LaunchManager;
 
 public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
-	protected String mergedFilePath = "mergedFile";
+	protected String mergedFilePath = "mergedFile"; //$NON-NLS-1$
 	protected Map<String, List<IFile>> groupedModels = null;
 	protected List<IFile> generatedFiles;
 	ConflitResolverHelper cresolver;
-	protected final String projectName = ".side_generation";
-	private static final String DEFAULT_ENCODING = "ISO-8859-1";
-	private String fileEncoding = System.getProperty("file.encoding");
+	protected final String projectName = ".side_generation"; //$NON-NLS-1$
+	private static final String DEFAULT_ENCODING = "ISO-8859-1"; //$NON-NLS-1$
+	private String fileEncoding = System.getProperty("file.encoding"); //$NON-NLS-1$
 	protected static final String versionProperty = null;
 
 	/**
@@ -63,8 +64,8 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 	 */
 	public String getVersioNumber() {
 		String vn = getGenerationParameter(versionProperty);
-		if (vn == null || vn.equals("")) {
-			vn = "1.0";
+		if (vn == null || vn.equals("")) { //$NON-NLS-1$
+			vn = "1.0"; //$NON-NLS-1$
 		}
 		return vn;
 	}
@@ -103,7 +104,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 				// initialize generator we must change the TEMP_FOLDER
 				// System.out.println("getClass().getName(): " +
 				// getClass().getName());
-				setTEMP_FOLDER("generator_" + getClass().getName() + File.separator + rootName);
+				setTEMP_FOLDER("generator_" + getClass().getName() + File.separator + rootName); //$NON-NLS-1$
 				// clean directory before generate, needed if cleaning option is
 				// not enable
 				File wkdir = getTemporarySystemFile();
@@ -112,7 +113,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 					// update IFolder
 					IFileHelper.refreshFolder(wkdir);
 					if (!result) {
-						monitor.getLog().addWarningLog("acceleo generator", "working directory not cleaning before generation", "");
+						monitor.getLog().addWarningLog(Activator.Messages.getString("AbstractAcceleoGenerator_7"), Activator.Messages.getString("AbstractAcceleoGenerator_8"), ""); //$NON-NLS-3$
 					}
 				}
 				// generate
@@ -126,12 +127,14 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		if (models.size() == 1) {
 			return models.get(0);
 		} else {
+			monitor.addTextAndLog(Activator.Messages.getString("AbstractAcceleoGenerator_10"), ""); //$NON-NLS-2$
 			// create resource for merged file
 			IPath p = models.get(0).getParent().getFullPath();
-			p = p.append(mergedFilePath+"."+models.get(0).getFileExtension());
+			p = p.append(mergedFilePath + "." + models.get(0).getFileExtension()); //$NON-NLS-1$
 			IFile mergedIFile = IFileHelper.getIFile(p);
 			// do merge
 			MergeUtils.merge(mergedIFile, models, this.getClass().getClassLoader());
+			monitor.addTextAndLog(Activator.Messages.getString("AbstractAcceleoGenerator_13"), ""); //$NON-NLS-2$
 			return mergedIFile;
 		}
 	}
@@ -171,16 +174,16 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 
 		// Repository
 		Repository repository = ChainFactory.eINSTANCE.createRepository();
-		EFactory.eSet(chain, "repository", repository);
+		EFactory.eSet(chain, "repository", repository); //$NON-NLS-1$
 
 		// Action Set
 		ActionSet actionSet = ChainFactory.eINSTANCE.createActionSet();
-		EFactory.eAdd(chain, "actions", actionSet);
+		EFactory.eAdd(chain, "actions", actionSet); //$NON-NLS-1$
 
 		// Model file
 		Model modelPath = ChainFactory.eINSTANCE.createModel();
-		EFactory.eAdd(repository, "files", modelPath);
-		EFactory.eSet(modelPath, "path", model.getFullPath().toString());
+		EFactory.eAdd(repository, "files", modelPath); //$NON-NLS-1$
+		EFactory.eSet(modelPath, "path", model.getFullPath().toString()); //$NON-NLS-1$
 		model.refreshLocal(-1, null);
 
 		// Target folder
@@ -191,46 +194,49 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		EFactory.eAdd(repository, "files", folder);
 		String generationPath = getTemporaryFolder();
 		if (generationPath == null || generationPath.length() == 0) {
-			monitor.getLog().addErrorLog("No Target path setted.", "There is no target path setted for generation.", null);
-			throw new Exception("Target path must be setted !");
+			monitor.getLog().addErrorLog("No Target path setted.", "There is no target path setted for generation.", null); //$NON-NLS-1$ //$NON-NLS-2$
+			throw new Exception("Target path must be setted !"); //$NON-NLS-1$
 		}
 
 		new File(IFileHelper.getSystemFolderPath(generationPath)).mkdirs();
-		EFactory.eSet(folder, "path", generationPath);
+		EFactory.eSet(folder, "path", generationPath); //$NON-NLS-1$
 
 		// Log
+		File flog = new File(IFileHelper.getSystemFolderPath(monitor.getLog().getGeneratorLogFile()));
+		flog.delete();
 		Log log = ChainFactory.eINSTANCE.createLog();
-		EFactory.eAdd(repository, "files", log);
-		EFactory.eSet(log, "path", monitor.getLog().getLogFile());
+		EFactory.eAdd(repository, "files", log); //$NON-NLS-1$
+		EFactory.eSet(log, "path", monitor.getLog().getGeneratorLogFile()); //$NON-NLS-1$
 
 		// Metamodel file
 		EmfMetamodel pim = ChainFactory.eINSTANCE.createEmfMetamodel();
-		EFactory.eAdd(repository, "files", pim);
-		EFactory.eSet(pim, "path", getMetamodelURI());
+		EFactory.eAdd(repository, "files", pim); //$NON-NLS-1$
+		EFactory.eSet(pim, "path", getMetamodelURI()); //$NON-NLS-1$
 
 		for (String templateFile : getTemplates()) {
 
 			// System.out.println("Templates: " + templateFile);
 			// Generator
 			Generator generator = ChainFactory.eINSTANCE.createGenerator();
-			EFactory.eAdd(repository, "files", generator);
-			EFactory.eSet(generator, "path", templateFile);
+			EFactory.eAdd(repository, "files", generator); //$NON-NLS-1$
+			EFactory.eSet(generator, "path", templateFile); //$NON-NLS-1$
 
 			// Action
 			Generate gAction = ChainFactory.eINSTANCE.createGenerate();
-			EFactory.eAdd(actionSet, "actions", gAction);
-			EFactory.eSet(gAction, "folder", folder);
-			EFactory.eSet(gAction, "log", log);
-			EFactory.eSet(gAction, "metamodel", pim);
-			EFactory.eSet(gAction, "model", modelPath);
-			EFactory.eSet(gAction, "generator", generator);
+			EFactory.eAdd(actionSet, "actions", gAction); //$NON-NLS-1$
+			EFactory.eSet(gAction, "folder", folder); //$NON-NLS-1$
+			EFactory.eSet(gAction, "log", log); //$NON-NLS-1$
+			EFactory.eSet(gAction, "metamodel", pim); //$NON-NLS-1$
+			EFactory.eSet(gAction, "model", modelPath); //$NON-NLS-1$
+			EFactory.eSet(gAction, "generator", generator); //$NON-NLS-1$
 		}
 
 		// Register the default resource factory -- only needed for
 		// stand-alone!
-		IFile fchain = tmpProject.getFile("side_generation.chain");
+		IFile fchain = tmpProject.getFile("side_generation.chain"); //$NON-NLS-1$
 		// System.out.println("fchain.getFullPath(): " + fchain.getFullPath());
-		//URI chainURI = Resources.createPlatformResourceURI(fchain.getFullPath().toString());
+		// URI chainURI =
+		// Resources.createPlatformResourceURI(fchain.getFullPath().toString());
 		// System.out.println("log1");
 		ResourceSet resourceSet = new ResourceSetImpl();
 		// System.out.println("log2");
@@ -249,12 +255,11 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		// System.out.println("log8");
 		// try {
 		if (monitor != null) {
-			chain.launch(genFilter, monitor, LaunchManager.create("run", false));
+			chain.launch(genFilter, monitor, LaunchManager.create("run", false)); //$NON-NLS-1$
 		} else {
-			chain.launch(genFilter, new NullProgressMonitor(), LaunchManager.create("run", false));
+			chain.launch(genFilter, new NullProgressMonitor(), LaunchManager.create("run", false)); //$NON-NLS-1$
 		}
-		
-		
+
 		// } catch (CoreException e) {
 		// e.printStackTrace();
 		// } catch (Exception e1) {
@@ -266,7 +271,6 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 
 		// files is generated we must update folder before do anything else
 
-		
 		generatedFiles = (List<IFile>) chain.getGeneratedFiles();
 		// List<?> generatedFiles = chain.getGeneratedFiles();
 		// System.out.println("log10");
@@ -284,6 +288,10 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 				result.add((IFile) o);
 			}
 		}
+		// test if generator has error or not
+		if (flog.exists()) {
+			throw new GeneratorException(Activator.Messages.getString("AbstractAcceleoGenerator_39"));
+		}
 		// System.out.println("result: " + result.toString());
 		return result;
 	}
@@ -296,14 +304,14 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		PrintWriter pw = null;
 		try {
 			File source = IFileHelper.getFile(file);
-			//System.out.println("FILTER :: file :" + source.getName());
+			// System.out.println("FILTER :: file :" + source.getName());
 
 			InputStream is = new FileInputStream(source);
 			BufferedInputStream bis = new BufferedInputStream(is);
 			InputStreamReader isr = new InputStreamReader(bis, fileEncoding);
 			br = new BufferedReader(isr);
 
-			File destination = new File(source.getAbsolutePath() + ".fixed");
+			File destination = new File(source.getAbsolutePath() + ".fixed"); //$NON-NLS-1$
 			pw = new PrintWriter(destination, DEFAULT_ENCODING);
 			String ligne;
 			while ((ligne = br.readLine()) != null) {
@@ -325,7 +333,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 				br.close();
 			} catch (Throwable e1) {
 			}
-			throw new Exception("Error in generation process :", e);
+			throw new Exception(Activator.Messages.getString("AbstractAcceleoGenerator_42"), e);
 		}
 	}
 
