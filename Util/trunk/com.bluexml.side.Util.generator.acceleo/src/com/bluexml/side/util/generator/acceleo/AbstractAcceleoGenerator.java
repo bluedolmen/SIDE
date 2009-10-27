@@ -290,6 +290,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		}
 		// test if generator has error or not
 		if (flog.exists()) {
+			monitor.addTextAndLog("Acceleo logs", flog.getAbsolutePath());
 			throw new GeneratorException(Activator.Messages.getString("AbstractAcceleoGenerator_39"));
 		}
 		// System.out.println("result: " + result.toString());
