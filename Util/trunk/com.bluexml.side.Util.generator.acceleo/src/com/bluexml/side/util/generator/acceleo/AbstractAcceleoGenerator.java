@@ -113,7 +113,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 					// update IFolder
 					IFileHelper.refreshFolder(wkdir);
 					if (!result) {
-						monitor.getLog().addWarningLog(Activator.Messages.getString("AbstractAcceleoGenerator_7"), Activator.Messages.getString("AbstractAcceleoGenerator_8"), ""); //$NON-NLS-3$
+						monitor.getLog().addWarningLog(Activator.Messages.getString("AbstractAcceleoGenerator_7"), Activator.Messages.getString("AbstractAcceleoGenerator_8"), "");  //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$
 					}
 				}
 				// generate
@@ -127,14 +127,14 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		if (models.size() == 1) {
 			return models.get(0);
 		} else {
-			monitor.addTextAndLog(Activator.Messages.getString("AbstractAcceleoGenerator_10"), ""); //$NON-NLS-2$
+			monitor.addTextAndLog(Activator.Messages.getString("AbstractAcceleoGenerator_10"), "");  //$NON-NLS-1$//$NON-NLS-2$
 			// create resource for merged file
 			IPath p = models.get(0).getParent().getFullPath();
 			p = p.append(mergedFilePath + "." + models.get(0).getFileExtension()); //$NON-NLS-1$
 			IFile mergedIFile = IFileHelper.getIFile(p);
 			// do merge
 			MergeUtils.merge(mergedIFile, models, this.getClass().getClassLoader());
-			monitor.addTextAndLog(Activator.Messages.getString("AbstractAcceleoGenerator_13"), ""); //$NON-NLS-2$
+			monitor.addTextAndLog(Activator.Messages.getString("AbstractAcceleoGenerator_13"), "");  //$NON-NLS-1$//$NON-NLS-2$
 			return mergedIFile;
 		}
 	}
@@ -191,7 +191,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 
 		// System.out.println("folder: " + folder.getPath());
 
-		EFactory.eAdd(repository, "files", folder);
+		EFactory.eAdd(repository, "files", folder); //$NON-NLS-1$
 		String generationPath = getTemporaryFolder();
 		if (generationPath == null || generationPath.length() == 0) {
 			monitor.getLog().addErrorLog("No Target path setted.", "There is no target path setted for generation.", null); //$NON-NLS-1$ //$NON-NLS-2$
@@ -290,8 +290,8 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		}
 		// test if generator has error or not
 		if (flog.exists()) {
-			monitor.addTextAndLog("Acceleo logs", flog.getAbsolutePath());
-			throw new GeneratorException(Activator.Messages.getString("AbstractAcceleoGenerator_39"));
+			monitor.addTextAndLog(Activator.Messages.getString("AbstractAcceleoGenerator_5"), flog.getAbsolutePath()); //$NON-NLS-1$
+			throw new GeneratorException(Activator.Messages.getString("AbstractAcceleoGenerator_39")); //$NON-NLS-1$
 		}
 		// System.out.println("result: " + result.toString());
 		return result;
@@ -334,7 +334,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 				br.close();
 			} catch (Throwable e1) {
 			}
-			throw new Exception(Activator.Messages.getString("AbstractAcceleoGenerator_42"), e);
+			throw new Exception(Activator.Messages.getString("AbstractAcceleoGenerator_42"), e); //$NON-NLS-1$
 		}
 	}
 
