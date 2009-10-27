@@ -427,8 +427,8 @@ public class Generate extends Thread {
 				// We generate only if there is meta-model available for
 				// the generator
 				if (generator.shouldGenerate(modelsInfo, elem.getId_metamodel())) {
-
-					NullComponentMonitor generationMonitor = new NullComponentMonitor(configurationParameters, LogType.GENERATION);
+					String fileName = "gen_" + generator.getClass().getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+					NullComponentMonitor generationMonitor = new NullComponentMonitor(configurationParameters, LogType.GENERATION,fileName);
 
 					try {
 						List<ModuleConstraint> lmc = new ArrayList<ModuleConstraint>();
@@ -487,12 +487,12 @@ public class Generate extends Thread {
 					}
 				}
 				// System.out.println("\tlog13");
-				String fileName = "gen_" + generator.getTechVersion() + ".xml";
+				String fileName = generator.getMonitor().getLog().getGeneratorLogFile();
 				System.out.println("Log info in "+ fileName);
 				try {
 					if (generator.getMonitor() != null) {
 						System.out.println("Save Log "+ logPath + fileSeparator + "work" + fileSeparator);
-						generator.getMonitor().getLog().saveLog(fileName, logPath + fileSeparator + "work" + fileSeparator);
+						generator.getMonitor().getLog().saveLog();
 						System.out.println("Save Log Done");
 					}
 				} catch (Exception e) {
@@ -570,8 +570,8 @@ public class Generate extends Thread {
 			}
 			if (genObj instanceof Deployer) {
 				Deployer deployer = (Deployer) genObj;
-				
-				NullComponentMonitor deployerMonitor = new NullComponentMonitor(configurationParameters, LogType.DEPLOYMENT);
+				String fileName = "dep_" + deployer.getClass().getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+				NullComponentMonitor deployerMonitor = new NullComponentMonitor(configurationParameters, LogType.DEPLOYMENT,fileName);
 				deployer.initialize(configurationParameters, generationParameters, deployerOptions, deployerMonitor);
 				try {
 					System.out.println("Deploy ");
@@ -589,10 +589,8 @@ public class Generate extends Thread {
 					System.out.println("Exception  "+e.getMessage());
 					e.printStackTrace();
 				}
-
-				String fileName = "dep_" + deployer.getTechVersion() + ".xml";
 				try {
-					deployerMonitor.getLog().saveLog(fileName, logPath + System.getProperty("file.separator") + "work" + System.getProperty("file.separator"));
+					deployerMonitor.getLog().saveLog();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("Exception  "+e.getMessage());
