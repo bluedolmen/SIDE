@@ -6,7 +6,7 @@
          point="org.eclipse.core.runtime.applications">
       <application>
          <run
-               class="com.bluexml.side.integration.standalone.Application">
+               class="com.bluexml.side.integration.standalone.ApplicationStarter">
          </run>
       </application>
    </extension>
