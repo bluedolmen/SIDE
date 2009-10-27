@@ -33,6 +33,7 @@ import com.bluexml.side.application.Option;
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.ui.Activator;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
+import com.bluexml.side.util.componentmonitor.AbstractMonitor;
 import com.bluexml.side.util.componentmonitor.ComponentMonitor;
 import com.bluexml.side.util.componentmonitor.Monitor;
 import com.bluexml.side.util.dependencies.DependencesManager;
@@ -105,8 +106,8 @@ public class Generate extends Thread {
 	 * @throws IllegalAccessException
 	 * @throws IOException
 	 */
-	public void run(Configuration configuration, List<String> staticParameters, List<Model> models, ProgressBar p_progressBar, Label p_label, ProgressBar p_progressBar2, Label p_label2, StyledText p_styletext, FormText p_logLink) throws ClassNotFoundException,
-			InstantiationException, IllegalAccessException, IOException {
+	public void run(Configuration configuration, List<String> staticParameters, List<Model> models, ProgressBar p_progressBar, Label p_label, ProgressBar p_progressBar2, Label p_label2,
+			StyledText p_styletext, FormText p_logLink) throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
 
 		progressBar = p_progressBar;
 		label = p_label;
@@ -123,7 +124,8 @@ public class Generate extends Thread {
 				break;
 			}
 		}
-		generalMonitor = new Monitor(styletext, progressBar, label, configurationName, configuration.getName());
+		String fileName = "general_" + Generate.class.getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+		generalMonitor = new Monitor(styletext, progressBar, label, configurationName, configuration.getName(),fileName);
 
 		// First we seek the generator parameters, and separate fields
 		// of dynamic fields
@@ -170,7 +172,8 @@ public class Generate extends Thread {
 						if (ApplicationUtil.validate(m)) {
 							generalMonitor.addText(m.getName() + Activator.Messages.getString("Generate.6")); //$NON-NLS-1$
 						} else {
-							generalMonitor.addErrorText(Activator.Messages.getString("Generate.7") + m.getName() + " isn't validated. Please launch 'Validate' on top model element of " + m.getName() + "."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+							generalMonitor
+									.addErrorText(Activator.Messages.getString("Generate.7") + m.getName() + " isn't validated. Please launch 'Validate' on top model element of " + m.getName() + "."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 							modelWithError = true;
 						}
 
@@ -198,7 +201,7 @@ public class Generate extends Thread {
 			// All behind this line will be execute before the generation (async
 			// method).
 		} else {
-			generalMonitor.addErrorText(Activator.Messages.getString("Generate_0"));
+			generalMonitor.addErrorText(Activator.Messages.getString("Generate_0")); //$NON-NLS-1$
 		}
 	}
 
@@ -253,8 +256,8 @@ public class Generate extends Thread {
 		return Boolean.valueOf(configurationParameters.get(ApplicationDialog.KEY_OFFLINE));
 	}
 
-	private void generate(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) throws ClassNotFoundException, InstantiationException,
-			IllegalAccessException {
+	private void generate(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters,
+			final Map<String, String> generationParameters) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
@@ -298,49 +301,32 @@ public class Generate extends Thread {
 				} else {
 					generalMonitor.addErrorText(Activator.Messages.getString("Generate.22")); //$NON-NLS-1$
 				}
-				String fileName = "general_" + Generate.class.getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+				
 				// write general log file
 				try {
 					if (generalMonitor != null && generalMonitor.getConsoleLog() != null) {
-						generalMonitor.getConsoleLog().saveLog(fileName, logPath);
+						generalMonitor.getConsoleLog().saveLog();
 					}
 				} catch (Exception e1) {
-					generalMonitor.addErrorText(Activator.Messages.getString("Generate_103",e1.getMessage())); //$NON-NLS-1$
+					generalMonitor.addErrorText(Activator.Messages.getString("Generate_103", e1.getMessage())); //$NON-NLS-1$
 					e1.printStackTrace();
 				}
-				// Log
-				try {
-					LogSave.buildGeneraLogFile(logPath);
-					IFileHelper.refreshFolder(logPath);
-					logLink.setVisible(true);
-					logLink.addHyperlinkListener(new HyperlinkAdapter() {
-						@Override
-						public void linkActivated(HyperlinkEvent event) {
-							browseTo("file://" + IFileHelper.getIFolder(logPath).getRawLocation().toFile().getAbsolutePath() + fileSeparator + LogSave.LOG_HTML_FILE_NAME); //$NON-NLS-1$
-						}
-					});
-
-				} catch (Exception e) {
-					generalMonitor.addErrorText(Activator.Messages.getString("Generate_104",e.getMessage())); //$NON-NLS-1$
-					e.printStackTrace();
-				}
-				if (FeedbackActivator.doFeedback()) {
-					// Feedback
-					try {
-						feedbackManager.save();
-						// FeedbackSender.send();
-					} catch (IOException e) {
-						generalMonitor.addErrorText(Activator.Messages.getString("Generate_105",e.getMessage())); //$NON-NLS-1$
-						e.printStackTrace();
-					}
-				}
+				generalMonitor.beginTask(Activator.Messages.getString("Generate_1"));
+				// Log and feedback
+				saveSideReportAndFeedBack();
+				
 				// Refresh log and generation folder
 				refreshFolders();
 			}
+
+			
+
+			
 		});
 
 	}
 
+	
 	private void browseTo(String url) {
 		try {
 			PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(new URL(url));
@@ -373,7 +359,8 @@ public class Generate extends Thread {
 		return null;
 	}
 
-	private boolean generate_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) {
+	private boolean generate_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters,
+			final Map<String, String> generationParameters) {
 
 		// For all generator version we will call generation method
 
@@ -422,8 +409,9 @@ public class Generate extends Thread {
 				if (generator.shouldGenerate(modelsInfo, elem.getId_metamodel())) {
 					// create monitor
 					int nbTask = NB_GENERATION_STEP;
-
-					ComponentMonitor generationMonitor = new ComponentMonitor(styletext, progressBar2, nbTask, label2, generalMonitor, configurationParameters, LogType.GENERATION, generalMonitor.getConsoleLog());
+					String fileName = "gen_" + generator.getClass().getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+					ComponentMonitor generationMonitor = new ComponentMonitor(styletext, progressBar2, nbTask, label2, generalMonitor, configurationParameters, LogType.GENERATION, generalMonitor
+							.getConsoleLog(), fileName);
 
 					String name = elem.getGeneratorName();
 					generationMonitor.beginTask(Activator.Messages.getString("Generate.30", name)); //$NON-NLS-1$
@@ -441,8 +429,9 @@ public class Generate extends Thread {
 						generator.initialize(generationParameters, generatorOptions, configurationParameters, dm, generationMonitor);
 					} catch (Exception e) {
 						error = true;
-						generationMonitor.addErrorTextAndLog(Activator.Messages.getString("Generate.32", e.getMessage()), e, null); //$NON-NLS-1$
-						Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString("Generate.32"), e)); //$NON-NLS-1$
+						fatalError("Generate.32", e, generationMonitor); //$NON-NLS-1$
+//						generationMonitor.addErrorTextAndLog(Activator.Messages.getString("Generate.32", e.getMessage()), e, null); //$NON-NLS-1$
+//						Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString("Generate.32"), e)); //$NON-NLS-1$
 					}
 
 					generationMonitor.taskDone(Activator.Messages.getString("Generate.8")); //$NON-NLS-1$
@@ -458,8 +447,9 @@ public class Generate extends Thread {
 								//addText(Activator.Messages.getString("Generate.34")); //$NON-NLS-1$
 							} catch (Exception e) {
 								error = true;
-								generationMonitor.addErrorTextAndLog(Activator.Messages.getString("Generate.39", e.getMessage()), e, null); //$NON-NLS-1$
-								Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString("Generate.39", e.getMessage()))); //$NON-NLS-1$
+								fatalError("Generate.39", e, generationMonitor); //$NON-NLS-1$
+//								generationMonitor.addErrorTextAndLog(Activator.Messages.getString("Generate.39", e.getMessage()), e, null); //$NON-NLS-1$
+//								Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString("Generate.39", e.getMessage()))); //$NON-NLS-1$
 							}
 							generationMonitor.beginTask(Activator.Messages.getString("Generate.35", name)); //$NON-NLS-1$
 							//label.setText(Activator.Messages.getString("Generate.35", name)); //$NON-NLS-1$
@@ -468,17 +458,21 @@ public class Generate extends Thread {
 							try {
 								generator.complete();
 							} catch (Exception e) {
-								generationMonitor.addErrorTextAndLog(Activator.Messages.getString("Generate.61", e.getMessage()), e, null); //$NON-NLS-1$
-								e.printStackTrace();
-								Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString("Generate.61", e.getMessage()))); //$NON-NLS-1$
+								error = true;
+								fatalError("Generate.61", e, generationMonitor); //$NON-NLS-1$
+//								generationMonitor.addErrorTextAndLog(Activator.Messages.getString("Generate.61", e.getMessage()), e, null); //$NON-NLS-1$
+//								e.printStackTrace();
+//								Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString("Generate.61", e.getMessage()))); //$NON-NLS-1$
 							}
 							generationMonitor.taskDone(Activator.Messages.getString("Generate.36")); //$NON-NLS-1$
 
 							try {
 								generator.createStampFile();
 							} catch (Exception e) {
-								generationMonitor.addErrorTextAndLog(Activator.Messages.getString("Generate.42") + e.getMessage(), e, null); //$NON-NLS-1$
-								Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString("Generate.42"), e)); //$NON-NLS-1$
+								error = true;
+								fatalError("Generate.42", e, generationMonitor); //$NON-NLS-1$
+//								generationMonitor.addErrorTextAndLog(Activator.Messages.getString("Generate.42") + e.getMessage(), e, null); //$NON-NLS-1$
+//								Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString("Generate.42"), e)); //$NON-NLS-1$
 							}
 						}
 					} else {
@@ -491,16 +485,18 @@ public class Generate extends Thread {
 					}
 					generalMonitor.skipTasks(NB_GENERATION_STEP);
 				}
-				String fileName = "gen_" + generator.getClass().getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+				
 				try {
 					if (generator.getMonitor() != null) {
-						generator.getMonitor().getLog().saveLog(fileName, logPath); //$NON-NLS-1$
+						generator.getMonitor().getLog().saveLog(); //$NON-NLS-1$
 					}
 
 				} catch (Exception e) {
-					generalMonitor.addErrorText(Activator.Messages.getString("Generate.62", e.getMessage())); //$NON-NLS-1$
-					e.printStackTrace();
-					Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString("Generate.62"), e)); //$NON-NLS-1$
+					error = true;
+					fatalError("Generate.62", e, generalMonitor); //$NON-NLS-1$
+//					generalMonitor.addErrorText(Activator.Messages.getString("Generate.62", e.getMessage())); //$NON-NLS-1$
+//					e.printStackTrace();
+//					Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString("Generate.62"), e)); //$NON-NLS-1$
 				}
 			} else {
 				generalMonitor.skipTasks(NB_GENERATION_STEP);
@@ -509,27 +505,28 @@ public class Generate extends Thread {
 		return error;
 	}
 
-	private boolean deploy_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters, final Map<String, String> generationParameters) {
+	private boolean deploy_(final Configuration configuration, final HashMap<String, List<IFile>> modelsInfo, final Map<String, String> configurationParameters,
+			final Map<String, String> generationParameters) {
 		boolean error = false;
-		
+
 		List<DeployerConfiguration> ldeployers = configuration.getDeployerConfigurations();
 		List<DeployerConfiguration> sharedDeployers = new ArrayList<DeployerConfiguration>();
-		
+
 		for (DeployerConfiguration depConf : ldeployers)
 			if (depConf.isShared())
 				sharedDeployers.add(depConf);
 		ldeployers.removeAll(sharedDeployers);
 
-		//Call shared deployers
+		// Call shared deployers
 		for (DeployerConfiguration depConf : sharedDeployers)
 			error &= launchDeployer(depConf, configuration, configurationParameters, generationParameters);
-		//Call others deployers
+		// Call others deployers
 		for (DeployerConfiguration depConf : ldeployers)
 			error &= launchDeployer(depConf, configuration, configurationParameters, generationParameters);
-		//Re-call shared deployers
+		// Re-call shared deployers
 		for (DeployerConfiguration depConf : sharedDeployers)
 			error &= launchDeployer(depConf, configuration, configurationParameters, generationParameters);
-		
+
 		return error;
 	}
 
@@ -584,7 +581,9 @@ public class Generate extends Thread {
 		if (genObj instanceof Deployer) {
 			Deployer deployer = (Deployer) genObj;
 			int nbTask = NB_DEPLOY_STEP;
-			ComponentMonitor deployerMonitor = new ComponentMonitor(styletext, progressBar2, nbTask, label2, generalMonitor, configurationParameters, LogType.DEPLOYMENT, generalMonitor.getConsoleLog());
+			String fileName = "dep_" + deployer.getClass().getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+			ComponentMonitor deployerMonitor = new ComponentMonitor(styletext, progressBar2, nbTask, label2, generalMonitor, configurationParameters, LogType.DEPLOYMENT, generalMonitor
+					.getConsoleLog(),fileName);
 			// deployer initialization
 			deployer.initialize(configurationParameters, generationParameters, deployerOptions, deployerMonitor);
 			boolean showEndMessage = false;
@@ -603,14 +602,11 @@ public class Generate extends Thread {
 						feedbackManager.addFeedBackItem(depConf.getId(), null, id_techno, optionsDep);
 					}
 				} catch (Exception e) {
-					e.printStackTrace();
 					error = true;
-					deployerMonitor.addErrorTextAndLog(Activator.Messages.getString("Generate.56") + e.getMessage(), e, null); //$NON-NLS-1$
-					// must be the last action because this cause a break in
-					// the
-					// execution stack
-					// so no deployer after this can be executed !
-					Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString("Generate.56"), e)); //$NON-NLS-1$
+					fatalError("Generate.56", e, deployerMonitor); //$NON-NLS-1$
+//					e.printStackTrace();
+//					deployerMonitor.addErrorTextAndLog(Activator.Messages.getString("Generate.56") + e.getMessage(), e, null); //$NON-NLS-1$
+//					Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString("Generate.56"), e)); //$NON-NLS-1$
 				}
 
 				try {
@@ -620,13 +616,15 @@ public class Generate extends Thread {
 					deployerMonitor.addWarningTextAndLog(Activator.Messages.getString("Generate.57") + e.getMessage(), null); //$NON-NLS-1$
 				}
 
-				String fileName = "dep_" + deployer.getClass().getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+				
 				try {
-					deployerMonitor.getLog().saveLog(fileName, logPath); //$NON-NLS-1$
+					deployerMonitor.getLog().saveLog(); //$NON-NLS-1$
 				} catch (Exception e) {
-					deployerMonitor.addErrorText(Activator.Messages.getString("Generate.62", e.getMessage())); //$NON-NLS-1$
-					e.printStackTrace();
-					Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString("Generate.62"), e)); //$NON-NLS-1$
+					error = true;
+					fatalError("Generate.62", e, generalMonitor); //$NON-NLS-1$
+//					deployerMonitor.addErrorText(Activator.Messages.getString("Generate.62", e.getMessage())); //$NON-NLS-1$
+//					e.printStackTrace();
+//					Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString("Generate.62"), e)); //$NON-NLS-1$
 				}
 			} else {
 				deployerMonitor.skipTasks(NB_DEPLOY_STEP);
@@ -635,8 +633,73 @@ public class Generate extends Thread {
 				deployerMonitor.taskDone(Activator.Messages.getString("Generate.52")); //$NON-NLS-1$
 			else
 				deployerMonitor.taskDone(null); //$NON-NLS-1$
-				
+
 		}
 		return error;
+	}
+
+	protected void fatalError(String key, Throwable e, ComponentMonitor monitor) {
+		monitor.addErrorTextAndLog(Activator.Messages.getString(key, e.getMessage()), e, null);
+		try {
+			monitor.getLog().saveLog();
+		} catch (Exception e1) {
+			monitor.addErrorText(e.getMessage());
+			e1.printStackTrace();
+		}
+		monitor.beginTask(e.getMessage());
+		generalMonitor.beginTask(Activator.Messages.getString("Generate_9",e.getMessage()));
+		fatalError_(key, e, monitor);
+	}
+	protected void fatalError(String key, Throwable e, Monitor monitor) {		
+		monitor.addErrorText((Activator.Messages.getString(key, e.getMessage())));
+		monitor.beginTask(Activator.Messages.getString("Generate_9",e.getMessage()));
+		fatalError_(key, e, monitor);
+	}
+
+	protected void fatalError_(String key, Throwable e, AbstractMonitor monitor) {
+		try {
+			monitor.getConsoleLog().saveLog();
+		} catch (Exception e1) {
+			monitor.addErrorText(e.getMessage());
+			e1.printStackTrace();
+		}
+		saveSideReportAndFeedBack();
+		monitor.skipAllTasks(true);
+		e.printStackTrace();		
+		// must be the last action because this cause a break in
+		// the execution stack
+		Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString(key), e));
+	}
+	
+	private void saveSideReportAndFeedBack() {
+		try {
+			LogSave.buildGeneraLogFile(logPath);
+			IFileHelper.refreshFolder(logPath);
+			logLink.setVisible(true);
+			logLink.addHyperlinkListener(new HyperlinkAdapter() {
+				@Override
+				public void linkActivated(HyperlinkEvent event) {
+					browseTo("file://" + IFileHelper.getIFolder(logPath).getRawLocation().toFile().getAbsolutePath() + fileSeparator + LogSave.LOG_HTML_FILE_NAME); //$NON-NLS-1$
+				}
+			});
+
+		} catch (Exception e) {
+			generalMonitor.addErrorText(Activator.Messages.getString("Generate_104", e.getMessage())); //$NON-NLS-1$
+			e.printStackTrace();
+		}
+		saveFeedBack();
+	}
+	
+	private void saveFeedBack() {
+		if (FeedbackActivator.doFeedback()) {
+			// Feedback
+			try {
+				feedbackManager.save();
+				// FeedbackSender.send();
+			} catch (IOException e) {
+				generalMonitor.addErrorText(Activator.Messages.getString("Generate_105", e.getMessage())); //$NON-NLS-1$
+				e.printStackTrace();
+			}
+		}
 	}
 }
