@@ -9,7 +9,6 @@ import org.apache.tools.ant.ProjectHelper;
 import org.apache.tools.ant.helper.ProjectHelperImpl;
 
 import com.bluexml.side.util.deployer.Deployer;
-import com.bluexml.side.util.documentation.structure.enumeration.LogEntryType;
 
 public class ANTDeployer extends Deployer {
 
@@ -19,10 +18,10 @@ public class ANTDeployer extends Deployer {
 
 	private static boolean processExecuted;
 	private static String KEY_ANTFILE = "com.bluexml.side.Deployer.antDeployer.param.antFile";
-	
+
 	@Override
 	protected void clean(File arg0) throws Exception {
-		//Nothing to do
+		// Nothing to do
 	}
 
 	@Override
@@ -36,7 +35,7 @@ public class ANTDeployer extends Deployer {
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
 			if (!f.exists())
-				monitor.addWarningText("The file "+f.getAbsolutePath()+" doesn't exist. ANT deployment is cancelled.");
+				monitor.addWarningText("The file " + f.getAbsolutePath() + " doesn't exist. ANT deployment is cancelled.");
 			else {
 				antProject = new Project();
 
@@ -50,43 +49,27 @@ public class ANTDeployer extends Deployer {
 			}
 
 			if (processExecuted) {
-				System.out.println("Deploy post process");
+				monitor.addTextAndLog("Deploy post process", "");
 
 				if (antProject != null) {
-					try {
-						ProjectHelper helper = new ProjectHelperImpl();
-						helper.parse(antProject, f);
-						antProject.executeTarget("post-build");
-						monitor.logConsole(outputStream.toString(), LogEntryType.DEPLOYMENT_INFORMATION);
-						monitor.addWarningText(outputStream.toString());
-						monitor.logConsole(errorStream.toString(), LogEntryType.DEPLOYMENT_INFORMATION);
-						monitor.addWarningText(errorStream.toString());
-					} catch (Exception e) {
-						e.printStackTrace();
-						monitor.addErrorTextAndLog(e.getMessage(), e, "");
-						//TODO Add in the global log
-					}
+					ProjectHelper helper = new ProjectHelperImpl();
+					helper.parse(antProject, f);
+					antProject.executeTarget("post-build");
+					monitor.addTextAndLog("standard output "+outputStream.toString(), "");
+					antError(errorStream);
 				}
 
 				processExecuted = false;
 			} else {
-				System.out.println("Deploy pre process");
+				monitor.addTextAndLog("Deploy pre process", "");
 
 				if (antProject != null) {
-					try {
-						ProjectHelper helper = new ProjectHelperImpl();
-						helper.parse(antProject, f);
-						antProject.setProperty("directory", arg0.toString());
-						antProject.executeTarget("pre-build");
-						monitor.logConsole(outputStream.toString(), LogEntryType.DEPLOYMENT_INFORMATION);
-						monitor.addWarningText(outputStream.toString());
-						monitor.logConsole(errorStream.toString(), LogEntryType.DEPLOYMENT_INFORMATION);
-						monitor.addWarningText(errorStream.toString());
-					} catch (Exception e) {
-						e.printStackTrace();
-						monitor.addErrorTextAndLog(e.getMessage(), e, "");
-						//TODO Add in the global log
-					}
+					ProjectHelper helper = new ProjectHelperImpl();
+					helper.parse(antProject, f);
+					antProject.setProperty("directory", arg0.toString());
+					antProject.executeTarget("pre-build");
+					monitor.addTextAndLog("standard output "+outputStream.toString(), "");
+					antError(errorStream);
 				}
 
 				processExecuted = true;
@@ -94,16 +77,23 @@ public class ANTDeployer extends Deployer {
 		}
 	}
 
+	private void antError(ByteArrayOutputStream errorStream) throws Exception {
+		if (errorStream.toString().length() > 0) {
+			monitor.addErrorTextAndLog("Error"+"\n" + errorStream.toString(), null, "");
+			throw new Exception("Ant error");
+		}
+	}
+
 	@Override
 	protected void postProcess(File arg0) throws Exception {
-		//Nothing to do
+		// Nothing to do
 	}
 
 	@Override
 	protected void preProcess(File arg0) throws Exception {
-		//Nothing to do
+		// Nothing to do
 	}
-	
+
 	/**
 	 * This method check if the user have the license to use this deployer.
 	 * 
