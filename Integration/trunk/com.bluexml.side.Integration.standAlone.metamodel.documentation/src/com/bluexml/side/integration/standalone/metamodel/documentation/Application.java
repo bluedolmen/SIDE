@@ -65,7 +65,8 @@ public class Application implements IApplication {
 
 		final DocumentationGenerator gen = new MetaModelDocumentationGenerator();
 		HashMap<String, String> configurationParameters_ = getConfigurationParameter(targetPath, TECH_NAME);
-		NullComponentMonitor generationMonitor = new NullComponentMonitor(null, null);
+		String fileName = "gen_" + gen.getClass().getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+		NullComponentMonitor generationMonitor = new NullComponentMonitor(null, null, fileName);
 		gen.initialize(null, null, configurationParameters_, null, generationMonitor);
 
 		System.out.println(gen.getClass().getName() + " Initalized.");
