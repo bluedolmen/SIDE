@@ -18,20 +18,39 @@ import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 public class LogHelper {
 	SIDELog log;
 	String logDirectory;
+	String componentId;
+	String componentName;
+	String componentTechnoVersionName;
+	String componentTechnoName;
+	Date logSate;
+	LogType logType;
+	String metaModel;
+	String logFileName;
+	
 	protected String fileSeparator = System.getProperty("file.separator"); //$NON-NLS-1$
 
-	public LogHelper(final Map<String, String> configurationParameters, LogType logType) {
+	public LogHelper(final Map<String, String> configurationParameters, LogType logType, String logFileName) {
 		this.logDirectory = configurationParameters.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + File.separator + configurationParameters.get("configurationName");
 		SIDELog log_ = null;
-		if (logType.equals(LogType.GENERATION)) {
-			log_ = new SIDELog(configurationParameters.get("generatorName"), configurationParameters.get("generatorId"), configurationParameters.get("technologyVersionName"), configurationParameters.get("technologyName"), configurationParameters //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-					.get("metaModelName"), new Date(), logType); //$NON-NLS-1$
-		} else if (logType.equals(LogType.DEPLOYMENT)) {
-			log_ = new SIDELog(configurationParameters.get("deployerName"), configurationParameters.get("deployerId"), configurationParameters.get("technologyVersionName"), configurationParameters.get("technologyName"), configurationParameters.get("metaModelName"), new Date(),
-					logType);
-		} else if (logType.equals(LogType.CONSOLE)) {
+		this.logFileName = logFileName;
+		logSate = new Date();
+		this.logType = logType;
+		if (logType.equals(LogType.CONSOLE)) {
 			log_ = new SIDELog("name", "deployerId", "technologyVersionName", "technologyName", "metaModelName", new Date(), logType);
+		} else {
+			componentTechnoVersionName = configurationParameters.get("technologyVersionName");
+			componentTechnoName = configurationParameters.get("technologyName");
+			metaModel = configurationParameters.get("metaModelName");
+			if (logType.equals(LogType.GENERATION)) {
+				componentName = configurationParameters.get("generatorName");
+				componentId = configurationParameters.get("generatorId");
+			} else if (logType.equals(LogType.DEPLOYMENT)) {
+				componentId = configurationParameters.get("deployerId");
+				componentName = configurationParameters.get("deployerName");
+			}
 		}
+
+		log_ = new SIDELog(componentName, componentId, componentTechnoVersionName, componentTechnoName, metaModel, logSate, logType);
 		this.log = log_;
 	}
 
@@ -189,14 +208,13 @@ public class LogHelper {
 	 * 
 	 * @return
 	 */
-	public String getLogFile() {
-		return logDirectory + File.separator + getClass().getName() + ".txt"; //$NON-NLS-1$
+	public String getGeneratorLogFile() {
+		return logDirectory + File.separator + componentId + ".txt"; //$NON-NLS-1$
 
 	}
 
-	public void saveLog(String fileName, String folderName) throws Exception {
-		LogSave.toXml(log, fileName, folderName + fileSeparator + "work" + fileSeparator);
+	public void saveLog() throws Exception {
+		LogSave.toXml(log, logFileName, logDirectory + fileSeparator + "work" + fileSeparator);
 	}
-	
-	
+
 }
