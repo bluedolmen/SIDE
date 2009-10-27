@@ -10,12 +10,24 @@ import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.ProgressBar;
 
+import com.bluexml.side.util.componentmonitor.headLessinterface.LabelInterface;
+import com.bluexml.side.util.componentmonitor.headLessinterface.ProgressBarInterface;
+import com.bluexml.side.util.componentmonitor.headLessinterface.StyledTextInterface;
 import com.bluexml.side.util.documentation.LogHelper;
 import com.bluexml.side.util.documentation.structure.enumeration.LogEntryType;
 
 public abstract class AbstractMonitor implements IProgressMonitor {
+	int someOfincrementedStep = 0;
+	int currentOpenTask = 0;
+	boolean nbTaskInitialised = false;
+	protected AbstractMonitor parent;
+	protected StyledTextInterface styletext;
+	protected ProgressBarInterface progressBar;
+	protected LabelInterface progressBarlabel;
+	protected String lineSeparator = System.getProperty("line.separator"); //$NON-NLS-1$
+	protected String fileSeparator = System.getProperty("file.separator"); //$NON-NLS-1$
+	protected DateFormat timestampFormat = new SimpleDateFormat("HH:mm:ss");
 	protected LogHelper consoleLog;
 
 	public LogHelper getConsoleLog() {
@@ -26,18 +38,9 @@ public abstract class AbstractMonitor implements IProgressMonitor {
 		this.consoleLog = consoleLog;
 	}
 
-	int someOfincrementedStep = 0;
-	int currentOpenTask = 0;
-	boolean nbTaskInitialised = false;
-	protected AbstractMonitor parent;
-	protected StyledText styletext;
-	protected ProgressBar progressBar;
-	protected Label progressBarlabel;
-	protected String lineSeparator = System.getProperty("line.separator"); //$NON-NLS-1$
-	protected String fileSeparator = System.getProperty("file.separator"); //$NON-NLS-1$
-	protected DateFormat timestampFormat = new SimpleDateFormat("HH:mm:ss");
+	
 
-	public AbstractMonitor(StyledText styletext, ProgressBar progressBar, Label progressBarlabel, AbstractMonitor parent) {
+	public AbstractMonitor(StyledTextInterface styletext, ProgressBarInterface progressBar, LabelInterface progressBarlabel, AbstractMonitor parent) {
 		this.parent = parent;
 		this.styletext = styletext;
 		this.progressBar = progressBar;

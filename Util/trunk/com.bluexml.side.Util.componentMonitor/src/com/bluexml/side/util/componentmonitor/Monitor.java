@@ -3,16 +3,15 @@ package com.bluexml.side.util.componentmonitor;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.ProgressBar;
-
 import com.bluexml.side.application.StaticConfigurationParameters;
+import com.bluexml.side.util.componentmonitor.headLessinterface.LabelInterface;
+import com.bluexml.side.util.componentmonitor.headLessinterface.ProgressBarInterface;
+import com.bluexml.side.util.componentmonitor.headLessinterface.StyledTextInterface;
 import com.bluexml.side.util.documentation.LogHelper;
 import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 
 public class Monitor extends AbstractMonitor {
-	public Monitor(StyledText styletext, ProgressBar progressBar, Label progressBarlabel, String genPath, String configurationName, String logFileName) {
+	public Monitor(StyledTextInterface styletext, ProgressBarInterface progressBar, LabelInterface progressBarlabel, String genPath, String configurationName, String logFileName) {
 		super(styletext, progressBar, progressBarlabel, null);
 		if (progressBar != null) {
 			progressBar.setSelection(0);

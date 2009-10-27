@@ -2,17 +2,16 @@ package com.bluexml.side.util.componentmonitor;
 
 import java.util.Map;
 
-import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.ProgressBar;
-
+import com.bluexml.side.util.componentmonitor.headLessinterface.LabelInterface;
+import com.bluexml.side.util.componentmonitor.headLessinterface.ProgressBarInterface;
+import com.bluexml.side.util.componentmonitor.headLessinterface.StyledTextInterface;
 import com.bluexml.side.util.documentation.LogHelper;
 import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 
 public class ComponentMonitor extends AbstractMonitor {
 	private LogHelper log;
 
-	public ComponentMonitor(StyledText styletext, ProgressBar progressBar, int totalWork, Label progressBarlabel, AbstractMonitor parent, final Map<String, String> configurationParameters, LogType logType,LogHelper consoleLog,String logFileName) {
+	public ComponentMonitor(StyledTextInterface styletext, ProgressBarInterface progressBar, int totalWork, LabelInterface progressBarlabel, AbstractMonitor parent, final Map<String, String> configurationParameters, LogType logType,LogHelper consoleLog,String logFileName) {
 		super(styletext, progressBar, progressBarlabel, parent);
 		this.consoleLog = consoleLog;
 		if (progressBar != null) {
