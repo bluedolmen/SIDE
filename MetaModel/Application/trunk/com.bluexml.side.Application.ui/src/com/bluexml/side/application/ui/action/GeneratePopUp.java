@@ -33,12 +33,15 @@ import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ui.Activator;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 import com.bluexml.side.application.ui.action.utils.Generate;
+import com.bluexml.side.util.componentmonitor.guiAdapter.FormTextAdapter;
+import com.bluexml.side.util.componentmonitor.guiAdapter.LabelAdapter;
+import com.bluexml.side.util.componentmonitor.guiAdapter.ProgressBarAdapter;
+import com.bluexml.side.util.componentmonitor.guiAdapter.StyledTextAdapter;
 import com.bluexml.side.util.security.preferences.SWTResourceManager;
 
 public class GeneratePopUp extends Dialog {
 
 	private Configuration configuration;
-	private List<String> staticParameters;
 	private List<Model> models;
 	private static boolean inAction = false;
 
@@ -54,8 +57,7 @@ public class GeneratePopUp extends Dialog {
 		super((Shell)null);
 		setShellStyle(SWT.DIALOG_TRIM | SWT.MODELESS | getDefaultOrientation());
 		setBlockOnOpen(false);
-		configuration = p_configuration;
-		staticParameters = ApplicationDialog.staticFieldsName;
+		configuration = p_configuration;		
 		models = ApplicationUtil.getModels((Application) p_configuration.eContainer());
 	}
 
@@ -71,7 +73,6 @@ public class GeneratePopUp extends Dialog {
 		resource.load(fi, map);
 		Application application = (Application) resource.getContents().get(0);
 		configuration = application.getConfiguration(name);
-		staticParameters = ApplicationDialog.staticFieldsName;
 		models = ApplicationUtil.getModels((Application) configuration.eContainer());
 
 	}
@@ -123,7 +124,8 @@ public class GeneratePopUp extends Dialog {
 
 		try {
 			Generate gen = new Generate();
-			gen.run(configuration, staticParameters, models, progressBar, generationsOptionsLabel, progressBar2, label, styletext, logLink);
+			gen.run(configuration, models, new ProgressBarAdapter(progressBar), new LabelAdapter(generationsOptionsLabel), new ProgressBarAdapter(progressBar2), new LabelAdapter(label), new StyledTextAdapter(styletext), new FormTextAdapter(logLink));
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

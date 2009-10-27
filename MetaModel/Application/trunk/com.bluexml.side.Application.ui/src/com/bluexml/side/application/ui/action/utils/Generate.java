@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.events.HyperlinkAdapter;
 import org.eclipse.ui.forms.events.HyperlinkEvent;
@@ -45,6 +44,10 @@ import com.bluexml.side.util.feedback.FeedbackActivator;
 import com.bluexml.side.util.feedback.management.FeedbackManager;
 import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.libs.IFileHelper;
+import com.bluexml.side.util.componentmonitor.headLessinterface.FormTextInterface;
+import com.bluexml.side.util.componentmonitor.headLessinterface.LabelInterface;
+import com.bluexml.side.util.componentmonitor.headLessinterface.ProgressBarInterface;
+import com.bluexml.side.util.componentmonitor.headLessinterface.StyledTextInterface;
 
 public class Generate extends Thread {
 
@@ -52,14 +55,14 @@ public class Generate extends Thread {
 	private static int NB_DEPLOY_STEP = 4;
 	private static int NB_GENERAL_STEP = 2;
 
-	private ProgressBar progressBar;
-	private Label label;
-	private ProgressBar progressBar2;
-	private Label label2;
-	private StyledText styletext;
+	private ProgressBarInterface progressBar;
+	private LabelInterface label;
+	private ProgressBarInterface progressBar2;
+	private LabelInterface label2;
+	private StyledTextInterface styletext;
 	private Monitor generalMonitor;
 	private String logPath;
-	private FormText logLink;
+	private FormTextInterface logLink;
 	private String genPath;
 	private FeedbackManager feedbackManager;
 	protected String lineSeparator = System.getProperty("line.separator"); //$NON-NLS-1$
@@ -106,8 +109,8 @@ public class Generate extends Thread {
 	 * @throws IllegalAccessException
 	 * @throws IOException
 	 */
-	public void run(Configuration configuration, List<String> staticParameters, List<Model> models, ProgressBar p_progressBar, Label p_label, ProgressBar p_progressBar2, Label p_label2,
-			StyledText p_styletext, FormText p_logLink) throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
+	public void run(Configuration configuration, List<Model> models, ProgressBarInterface p_progressBar, LabelInterface p_label, ProgressBarInterface p_progressBar2, LabelInterface p_label2,
+			StyledTextInterface p_styletext, FormTextInterface p_logLink) throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
 
 		progressBar = p_progressBar;
 		label = p_label;
@@ -132,7 +135,7 @@ public class Generate extends Thread {
 		Map<String, String> configurationParameters = new HashMap<String, String>();
 		Map<String, String> generationParameters = new HashMap<String, String>();
 		for (ConfigurationParameters param : configuration.getParameters()) {
-			if (staticParameters.contains(param.getKey())) {
+			if (ApplicationDialog.staticFieldsName.contains(param.getKey())) {
 				configurationParameters.put(param.getKey(), param.getValue());
 			} else {
 				generationParameters.put(param.getKey(), param.getValue());
