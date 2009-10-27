@@ -7,8 +7,8 @@ import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 
 public class NullComponentMonitor extends ComponentMonitor {
 
-	public NullComponentMonitor(final Map<String, String> configurationParameters, LogType logType) {
-		super(null, null, -1, null, null, configurationParameters, logType, null);
+	public NullComponentMonitor(final Map<String, String> configurationParameters, LogType logType,String logFileName) {
+		super(null, null, -1, null, null, configurationParameters, logType, null, logFileName);
 	}
 
 	@Override
@@ -66,10 +66,10 @@ public class NullComponentMonitor extends ComponentMonitor {
 	}
 
 	public void setMaxTaskNb(int nb) {
-
+		
 	}
 
 	public void skipTasks(int nb) {
-
+		
 	}
 }

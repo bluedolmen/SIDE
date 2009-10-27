@@ -12,16 +12,16 @@ import com.bluexml.side.util.documentation.LogHelper;
 import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 
 public class Monitor extends AbstractMonitor {
-	public Monitor(StyledText styletext, ProgressBar progressBar, Label progressBarlabel,String genPath,String configurationName ) {
+	public Monitor(StyledText styletext, ProgressBar progressBar, Label progressBarlabel, String genPath, String configurationName, String logFileName) {
 		super(styletext, progressBar, progressBarlabel, null);
 		if (progressBar != null) {
 			progressBar.setSelection(0);
 		}
 		Map<String, String> configurationParameters = new HashMap<String, String>();
-		configurationParameters.put(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral(),genPath);
-		configurationParameters.put("configurationName",configurationName);
+		configurationParameters.put(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral(), genPath);
+		configurationParameters.put("configurationName", configurationName);
 		LogType logType = LogType.CONSOLE;
-		this.consoleLog = new LogHelper(configurationParameters, logType);
+		this.consoleLog = new LogHelper(configurationParameters, logType, logFileName);
 	}
 
 	public void beginTask(String name, int totalWork) {
@@ -84,7 +84,5 @@ public class Monitor extends AbstractMonitor {
 		currentOpenTask--;
 		addOneStep();
 	}
-
-	
 
 }

@@ -79,11 +79,7 @@ public abstract class AbstractMonitor implements IProgressMonitor {
 	}
 
 	protected void addOneStep() {
-		someOfincrementedStep++;
-		progressBar.setSelection(progressBar.getSelection() + 1);
-		if (parent != null) {
-			parent.addOneStep();
-		}
+		skipTasks(1);
 		// System.out.println("New Monitor state :\n" + this);
 
 	}
@@ -109,11 +105,24 @@ public abstract class AbstractMonitor implements IProgressMonitor {
 		progressBar.setMaximum(nb);
 	}
 
+	public void skipAllTasks(boolean includeParent) {
+		if (includeParent) {
+			// force skipping for parent so fix at 100%
+			progressBar.setSelection(progressBar.getMaximum());
+			if (parent != null) {
+				parent.skipAllTasks(includeParent);
+			}
+		} else {
+			int toskip = progressBar.getMaximum() - progressBar.getSelection();
+			skipTasks(toskip);
+		}
+	}
+
 	public void skipTasks(int nb) {
-		// System.out.println("skip :" + nb);
-		for (int c = 0; c < nb; c++) {
-			// System.out.println("skip current skip :" + c);
-			addOneStep();
+		someOfincrementedStep += nb;
+		progressBar.setSelection(progressBar.getSelection() + nb);
+		if (parent != null) {
+			parent.skipTasks(nb);
 		}
 	}
 
@@ -127,7 +136,7 @@ public abstract class AbstractMonitor implements IProgressMonitor {
 
 	}
 
-	public void logConsole(String txt, LogEntryType type) {
+	protected void logConsole(String txt, LogEntryType type) {
 		if (type.equals(LogEntryType.ERROR)) {
 			consoleLog.addErrorLog(txt, "", "");
 		} else if (type.equals(LogEntryType.WARNING)) {
