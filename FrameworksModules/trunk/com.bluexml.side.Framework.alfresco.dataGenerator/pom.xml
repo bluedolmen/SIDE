@@ -103,12 +103,14 @@
       <artifactId>alfresco-webscript-framework</artifactId>
       <version>3.2</version>
       <classifier>community</classifier>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-core</artifactId>
       <version>3.2</version>
       <classifier>community</classifier>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
