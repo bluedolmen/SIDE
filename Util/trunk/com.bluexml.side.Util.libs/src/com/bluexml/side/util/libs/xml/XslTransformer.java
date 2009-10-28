@@ -72,7 +72,7 @@ public class XslTransformer {
 
 		// set transformer
 		TransformerFactory fabriqueT = net.sf.saxon.TransformerFactoryImpl.newInstance();
-		StreamSource stylesource = new StreamSource(xsl);
+		StreamSource stylesource = new StreamSource(new File(xsl));
 		Transformer transformer = fabriqueT.newTransformer(stylesource);
 		// transformer.setOutputProperty(OutputKeys.METHOD, "html");
 
@@ -89,7 +89,7 @@ public class XslTransformer {
 
 		// set transformer
 		TransformerFactory fabriqueT = net.sf.saxon.TransformerFactoryImpl.newInstance();
-		StreamSource stylesource = new StreamSource(xsl);
+		StreamSource stylesource = new StreamSource(new File(xsl));
 		Transformer transformer = fabriqueT.newTransformer(stylesource);
 
 		// Transformation
