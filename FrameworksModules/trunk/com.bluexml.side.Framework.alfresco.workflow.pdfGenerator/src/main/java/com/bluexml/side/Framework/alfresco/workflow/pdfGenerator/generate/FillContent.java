@@ -5,8 +5,8 @@ package com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.generate;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.cmr.repository.NodeRef;
@@ -14,13 +14,19 @@ import org.alfresco.service.cmr.repository.StoreRef;
 import org.alfresco.service.cmr.search.ResultSet;
 import org.alfresco.service.cmr.search.SearchService;
 
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.AttributeContentException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.DuplicateInputPdfException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.DuplicateOutputContentException;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidAssociationException;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidValueOfParameterException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingInputPdfKeyException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingOutputContentException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.NoContentException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.NoPdfFileException;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.generate.extract.ExtractDataFromPDF;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.generate.fill.FillDataContent;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.language.ConstantsLanguage;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.language.LanguageMethods;
 import com.lowagie.text.pdf.PdfReader;
 
 /**
@@ -37,11 +43,12 @@ public class FillContent {
 		this.serviceRegistry = serviceRegistry;
 	}
 
-	public void execute(Map<String, String> commands) throws DuplicateInputPdfException, MissingInputPdfKeyException, IOException, NoPdfFileException, DuplicateOutputContentException, MissingOutputContentException, NoContentException {
+	public void execute(Map<String, String> commands) throws DuplicateInputPdfException, MissingInputPdfKeyException, IOException, NoPdfFileException, DuplicateOutputContentException, MissingOutputContentException, NoContentException, InvalidValueOfParameterException, AttributeContentException, InvalidAssociationException {
 		PdfReader reader = openAlfrescoPdf(commands);
-		//Collection<String> data = extractData(reader,commands.keySet());
+		HashMap<String,String> data = ExtractDataFromPDF.extractDataFromPDF(reader);
 		NodeRef content = getContent(commands);
-		//fillContent(content,commands,data);
+		HashMap<String,String> importCommands = LanguageMethods.getPdfToContentCommands(commands);
+		FillDataContent.fillContent(serviceRegistry,content,importCommands,data);
 	}
 
 	private NodeRef getContent(Map<String, String> commands) throws DuplicateOutputContentException, MissingOutputContentException, NoContentException {
