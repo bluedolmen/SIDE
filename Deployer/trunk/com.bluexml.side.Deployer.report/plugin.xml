@@ -13,13 +13,23 @@
                id="Birt_2.3.x"
                version="Birt 2.3.x">
             <deployerVersion
-                  class="com.bluexml.side.deployer.report.ReportDeployer"
+                  class="com.bluexml.side.deployer.report.BirtReportDirectDeployer"
                   id="com.bluexml.side.Deployer.report"
                   version="SIDE Report Deployer">
                <configurationParameter
                      documentation="Set this value to the Alfresco Tomcat directory path in order the deployer puts the packaged war file.&lt;br&gt;&lt;b&gt;This option is mandatory.&lt;/b&gt;"
                      key="CATALINA_HOME"
                      label="Tomcat installation directory">
+               </configurationParameter>
+               <option
+                     documentation="deploy in a clean webapp"
+                     key="com.bluexml.side.Deployer.birtReport.clean"
+                     label="clean">
+               </option>
+               <configurationParameter
+                     documentation="default value : birt"
+                     key="com.bluexml.side.Deployer.birtReport.webappName"
+                     label="Birt webapp name">
                </configurationParameter>
             </deployerVersion>
          </technologyVersion>
