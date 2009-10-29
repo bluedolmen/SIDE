@@ -353,7 +353,7 @@ import templates.content_chapter
 					</text:index-title>
 					<%if (getOutlineRelativePath.length > 0){%>
 						<text:p text:style-name="P1"><text:a xlink:type="simple"
-                    xlink:href="#1.<%getLabel()%>|outline">Outline view</text:a><text:tab/>1</text:p>
+                    xlink:href="#1.<%getName()%>|outline">Outline view</text:a><text:tab/>1</text:p>
                     	<%for (getOutlineRelativePath) {%>
                     		<text:p text:style-name="P2"><text:a xlink:type="simple"
                    		 xlink:href="#2.<%current%> associations|outline"><%current%></text:a><text:tab/>1</text:p>
