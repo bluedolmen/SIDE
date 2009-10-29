@@ -5,6 +5,6 @@ import com.bluexml.side.util.deployer.war.DirectWebAppsDeployer;
 public class AlfrescoShareDirectDeployer extends DirectWebAppsDeployer {
 
 	public AlfrescoShareDirectDeployer() {
-		super(null, null, "share", "deployer.webappName.alfrescoshare");
+		super(null, "share", "deployer.webappName.alfrescoshare");
 	}
 }
