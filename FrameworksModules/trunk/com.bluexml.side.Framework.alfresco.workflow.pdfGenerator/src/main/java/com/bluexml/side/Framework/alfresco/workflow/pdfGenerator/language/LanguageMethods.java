@@ -13,7 +13,7 @@ import java.util.Set;
  */
 public class LanguageMethods {
 
-	public static HashMap<String, String> getPdfToContentCommands(Map<String, String> commands) {
+	public static HashMap<String, String> getScriptCommands(Map<String, String> commands) {
 		HashMap<String, String> instructions = new HashMap<String, String>();
 		Set<String> keysCommands = commands.keySet();
 		for (String key : keysCommands) {
