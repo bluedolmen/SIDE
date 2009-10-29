@@ -26,6 +26,7 @@ import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.Missi
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingOutputContentException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.NoContentException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.NoPdfFileException;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.OutputTypeKeyException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.ValueActionException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.generate.FillContent;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.generate.FillPDF;
@@ -114,6 +115,9 @@ public class PdfActionHandler extends JBPMSpringActionHandler {
 		  catch (InvalidAssociationException e) {
 				logger.error("Error :", e);
 		}
+		  catch (OutputTypeKeyException e) {
+				logger.error("Error :", e);
+		}
 	}
 
 	private void executeActionScript(String actionValue, Map<String, String> commands) throws ValueActionException, DuplicateInputPdfException, 
@@ -121,7 +125,7 @@ public class PdfActionHandler extends JBPMSpringActionHandler {
 																							  NoPdfFileException, DuplicateOutputContentException, 
 																							  MissingOutputContentException, NoContentException, 
 																							  InvalidValueOfParameterException, AttributeContentException, 
-																							  InvalidAssociationException {
+																							  InvalidAssociationException, OutputTypeKeyException {
 		if (actionValue.equals(ConstantsLanguage.ACTION_VALUES[0])){
 			fillContent.execute(commands);
 		}
