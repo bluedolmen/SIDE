@@ -52,7 +52,7 @@ public class FillDataContent {
 				}
 				fillAttributeContent(services,finalTarget,navigation[navigation.length-1],data.get(key));
 			}
-			else if(importCommands.get(key).contains(ConstantsLanguage.ATTRIBUTE_INDICATOR)){
+			else if(importCommands.get(key).contains(ConstantsLanguage.CONSTANT_INDICATOR)){
 				throw new InvalidValueOfParameterException(InvalidValueOfParameterException.BAD_FORMAT);
 			}
 			else {
@@ -106,7 +106,7 @@ public class FillDataContent {
 					followAssociations(services,content,target,navigation,indexNavigation++);
 				}
 				else{
-					finalTarget = createTargetContent(services,content,associationName,target);;
+					finalTarget = createTargetContent(services,content,associationName,target);
 				}
 			}
 			else{
