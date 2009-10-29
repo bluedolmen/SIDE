@@ -34,19 +34,32 @@ import com.bluexml.side.util.componentmonitor.headless.FormTextHeadless;
 import com.bluexml.side.util.componentmonitor.headless.LabelHeadLess;
 import com.bluexml.side.util.componentmonitor.headless.StyledTextHeadless;
 import com.bluexml.side.util.componentmonitor.headless.progressBarHeadLess;
+import com.bluexml.side.util.libs.SystemInfoGetter;
+import com.bluexml.side.util.security.preferences.SidePreferences;
 
 public class ApplicationStarter implements IApplication {
 	static final String CONFIGURATION_KEY = "configuration";
 	static final String MODELS_KEY = "models";
 
 	protected String[] arguments;
-
+	
+	/**
+	 * application.args[0] :
+	 * getHostID  : return the hostID
+	 * getLicense : return the recorded license
+	 * setLicense : record a new license (must be generated using the HostID)
+	 * $FilePath  : launch generation process from .application model (or many application files if $FilePath is a directory)
+	 * application.args[1] : the configuration name to use for launch generation process 
+	 */
 	public Object start(IApplicationContext context) throws Exception {
 
 		arguments = (String[]) context.getArguments().get("application.args");
-
+		
+		if (securityServices() == 0) {
+			return EXIT_OK;
+		}
+		
 		System.out.println("Start !!!!!!!!!!");
-
 		if (!arguments[0].toString().contains(".application")) {
 			File root = new File(arguments[0]);
 			String[] extensions = { "application" };
@@ -63,13 +76,8 @@ public class ApplicationStarter implements IApplication {
 					Generate gen = new Generate();
 					Map<String, Object> conf = loadConfiguration(fileAP, arguments[1]);
 					System.out.println("created, let's run");
-					gen.run(
-							(Configuration)conf.get(CONFIGURATION_KEY),
-							(List<Model>)conf.get(MODELS_KEY),
-							 new progressBarHeadLess(), new LabelHeadLess(),
-							 new progressBarHeadLess(), new LabelHeadLess(),
-							 new StyledTextHeadless(), new FormTextHeadless()
-					);
+					gen.run((Configuration) conf.get(CONFIGURATION_KEY), (List<Model>) conf.get(MODELS_KEY), new progressBarHeadLess(), new LabelHeadLess(), new progressBarHeadLess(),
+							new LabelHeadLess(), new StyledTextHeadless(), new FormTextHeadless());
 					long time2 = System.currentTimeMillis() - time1;
 					System.out.println("Time " + Long.toString(time2 / 1000));
 				}
@@ -89,13 +97,8 @@ public class ApplicationStarter implements IApplication {
 			Generate gen = new Generate();
 			Map<String, Object> conf = loadConfiguration(file, arguments[1]);
 
-			gen.run(
-					(Configuration)conf.get(CONFIGURATION_KEY), 
-					(List<Model>)conf.get(MODELS_KEY),
-					 new progressBarHeadLess(), new LabelHeadLess(),
-					 new progressBarHeadLess(), new LabelHeadLess(),
-					 new StyledTextHeadless(), new FormTextHeadless()
-			);
+			gen.run((Configuration) conf.get(CONFIGURATION_KEY), (List<Model>) conf.get(MODELS_KEY), new progressBarHeadLess(), new LabelHeadLess(), new progressBarHeadLess(), new LabelHeadLess(),
+					new StyledTextHeadless(), new FormTextHeadless());
 			long time2 = System.currentTimeMillis() - time1;
 			System.out.println("Time " + Long.toString(time2 / 1000));
 		}
@@ -107,14 +110,29 @@ public class ApplicationStarter implements IApplication {
 		return EXIT_OK;
 	}
 
+	private int securityServices() {
+		if (arguments[0].toString().contains("getHostID")) {
+			System.out.println("hostID :"+SystemInfoGetter.getHostWithHash());
+		} else if (arguments[0].toString().contains("setLicense")) {
+			SidePreferences.setKey(arguments[1].toString());
+			System.out.println("license recorded :"+SidePreferences.getKey());
+		} else if (arguments[0].toString().contains("getLicense")) {
+			System.out.println("recorded license :"+SidePreferences.getKey());
+		}
+		else {
+			return -1;
+		}
+		return 0;
+	}
+
 	public void stop() {
 		// nothing to do
 
 	}
 
-	protected Map<String,Object> loadConfiguration(File filePath, String name) {
-		Map<String,Object> extractedConfiguration = new HashMap<String, Object>();
-		
+	protected Map<String, Object> loadConfiguration(File filePath, String name) {
+		Map<String, Object> extractedConfiguration = new HashMap<String, Object>();
+
 		System.out.println("Start Generate with filePath= " + filePath + " & Name: " + name);
 
 		// Create the IFile
@@ -196,7 +214,7 @@ public class ApplicationStarter implements IApplication {
 		try {
 			Application application = (Application) resource.getContents().get(0);
 			System.out.println("\tapplication: " + application);
-			
+
 			System.out.println("\tstaticParameters: " + ApplicationDialog.staticFieldsName);
 			Configuration configuration = application.getConfiguration(name);
 			System.out.println("\tconfiguration: " + configuration);
