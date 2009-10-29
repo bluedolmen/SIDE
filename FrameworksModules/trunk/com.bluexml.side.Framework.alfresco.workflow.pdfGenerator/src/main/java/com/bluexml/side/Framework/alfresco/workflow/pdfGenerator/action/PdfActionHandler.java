@@ -21,6 +21,7 @@ import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.Dupli
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.EmptyKeyActionException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.EmptyScriptException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidAssociationException;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidContentException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidValueOfParameterException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingInputPdfKeyException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingOutputContentException;
@@ -31,6 +32,7 @@ import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.Value
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.generate.FillContent;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.generate.FillPDF;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.language.ConstantsLanguage;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.structure.AlfrescoStructure;
 
 /**
  * @author dchevrier
@@ -65,6 +67,8 @@ public class PdfActionHandler extends JBPMSpringActionHandler {
 		fillContent = new FillContent();
 		fillContent.setServiceRegistry(services);
 		fillPdf = new FillPDF();
+		fillPdf.setServiceRegistry(services);
+		AlfrescoStructure.setServiceRegistry(services);
 	}
 
 	public void execute(ExecutionContext executionContext) {
@@ -118,6 +122,9 @@ public class PdfActionHandler extends JBPMSpringActionHandler {
 		  catch (OutputTypeKeyException e) {
 				logger.error("Error :", e);
 		}
+		  catch (InvalidContentException e) {
+				logger.error("Error :", e);
+		}
 	}
 
 	private void executeActionScript(String actionValue, Map<String, String> commands) throws ValueActionException, DuplicateInputPdfException, 
@@ -125,7 +132,8 @@ public class PdfActionHandler extends JBPMSpringActionHandler {
 																							  NoPdfFileException, DuplicateOutputContentException, 
 																							  MissingOutputContentException, NoContentException, 
 																							  InvalidValueOfParameterException, AttributeContentException, 
-																							  InvalidAssociationException, OutputTypeKeyException {
+																							  InvalidAssociationException, OutputTypeKeyException, 
+																							  InvalidContentException {
 		if (actionValue.equals(ConstantsLanguage.ACTION_VALUES[0])){
 			fillContent.execute(commands);
 		}
