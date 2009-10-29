@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.Ostermiller.util.ExecHelper;
+import com.bluexml.side.util.deployer.war.Activator;
 import com.bluexml.side.util.deployer.war.WarDeployer;
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.zip.TrueZipHelper;
@@ -22,16 +23,23 @@ public class AMPDeployer extends WarDeployer {
 	protected String CONFIGURATION_PARAMETER_MMT_PATH = "com.bluexml.side.deployer.alfresco.mmtPath"; //$NON-NLS-1$
 
 	public AMPDeployer() {
-		super("com.bluexml.side.deployer.alfresco.clean","com.bluexml.side.deployer.alfresco.logChanges", "alfresco", "deployer.webappName.alfresco");
+		super("com.bluexml.side.deployer.alfresco.clean", "com.bluexml.side.deployer.alfresco.logChanges", "alfresco", "deployer.webappName.alfresco");
 	}
 
 	public String getMMtPath() {
-		return getGenerationParameters().get(CONFIGURATION_PARAMETER_MMT_PATH).trim();
+		if (getGenerationParameters().get(CONFIGURATION_PARAMETER_MMT_PATH) != null) {
+			return getGenerationParameters().get(CONFIGURATION_PARAMETER_MMT_PATH).trim();
+		}
+		return "";
 	}
 
 	protected void deployProcess(File fileToDeploy) throws Exception {
 		if (getMMtPath() != null && new File(getMMtPath()).exists()) {
-			_deployProcess(fileToDeploy);
+			if (fileToDeploy.exists()) {
+				_deployProcess(fileToDeploy);
+			} else {
+				monitor.addWarningTextAndLog(Activator.Messages.getString("WarDeployer.5"), "");
+			}
 			// FIXME : use a unique call to alfresco-mmt.jar to avoid bug on
 			// FileHelper.diffFolder method with File is not java.io.File but
 			// trueZip subclass
