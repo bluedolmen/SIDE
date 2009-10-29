@@ -16,7 +16,7 @@ import com.lowagie.text.pdf.AcroFields.Item;
  */
 public class ExtractDataFromPDF {
 	
-	public static HashMap<String,String> extractDataFromPDF(PdfReader reader){
+	public static HashMap<String,String> extractData(PdfReader reader){
 		HashMap<String,String> data = new HashMap<String, String>();
 		AcroFields form = reader.getAcroFields();
 		HashMap<String,Item> fields = form.getFields();
