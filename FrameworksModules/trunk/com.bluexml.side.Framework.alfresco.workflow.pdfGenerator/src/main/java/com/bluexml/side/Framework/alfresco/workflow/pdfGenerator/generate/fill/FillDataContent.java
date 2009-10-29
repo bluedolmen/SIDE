@@ -11,6 +11,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import org.alfresco.model.ContentModel;
@@ -70,9 +71,26 @@ public class FillDataContent {
 
 	private static NodeRef createTargetContent(ServiceRegistry services, NodeRef content, QName association, QName finalQnameTarget) {
 		NodeRef parent = services.getNodeService().getPrimaryParent(content).getParentRef();
-		QName targetType = services.getDictionaryService().getType(finalQnameTarget).getName();
-		ChildAssociationRef childassoc = services.getNodeService().createNode(parent, ContentModel.ASSOC_CONTAINS, association, targetType);
+		TypeDefinition targetTypeDef = services.getDictionaryService().getType(finalQnameTarget);
+		QName targetType = targetTypeDef.getName();
+		Map<QName,Serializable> properties = createNameProperty(targetTypeDef);
+		ChildAssociationRef childassoc = services.getNodeService().createNode(parent, ContentModel.ASSOC_CONTAINS, association, targetType, properties);
 		return childassoc.getChildRef();
+	}
+
+	public static Map<QName, Serializable> createNameProperty(TypeDefinition targetTypeDef) {
+		Map<QName, Serializable> propertyName = new HashMap<QName, Serializable>();
+		QName key = ContentModel.PROP_NAME;
+		String value = createNameValue(targetTypeDef);
+		propertyName.put(key, value);
+		return propertyName;
+	}
+
+	private static String createNameValue(TypeDefinition targetTypeDef) {
+		Random generator = new Random();
+		String id = String.valueOf(generator.nextInt());
+		String name = targetTypeDef.getTitle();
+		return name + "_" + id;
 	}
 
 	private static NodeRef followAssociations(ServiceRegistry services, NodeRef content, QName qnameType, String[] navigation, int indexNavigation) throws InvalidAssociationException {
