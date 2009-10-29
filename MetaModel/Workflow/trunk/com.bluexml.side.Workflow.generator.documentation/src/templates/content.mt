@@ -373,7 +373,7 @@ import templates.content_chapter
 					<%}%>
 					<%if (getDiagImgPath.length > 0){%>
 						<text:p text:style-name="P1"><text:a xlink:type="simple"
-                    xlink:href="#1.<%getLabel()%>|outline">Diagrams</text:a><text:tab/>1</text:p>
+                    xlink:href="#1.<%getName()%>|outline">Diagrams</text:a><text:tab/>1</text:p>
                     	<%for (getDiagImgPath) {%>
                     		<text:p text:style-name="P2"><text:a xlink:type="simple"
                    		 xlink:href="#2.<%current%> associations|outline"><%current%></text:a><text:tab/>1</text:p>
