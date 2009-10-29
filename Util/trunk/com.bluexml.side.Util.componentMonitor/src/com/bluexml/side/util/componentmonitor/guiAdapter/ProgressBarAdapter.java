@@ -20,7 +20,7 @@ public class ProgressBarAdapter implements ProgressBarInterface {
 	}
 
 	public void setMaximum(int value) {
-		progressBar.setSelection(value);
+		progressBar.setMaximum(value);
 	}
 
 	public Point computeSize(int wHint, int hHint, boolean changed) {
