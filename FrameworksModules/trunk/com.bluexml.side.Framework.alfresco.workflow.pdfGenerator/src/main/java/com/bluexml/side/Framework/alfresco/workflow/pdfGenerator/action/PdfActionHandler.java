@@ -15,10 +15,13 @@ import org.dom4j.Element;
 import org.jbpm.graph.exe.ExecutionContext;
 import org.springframework.beans.factory.BeanFactory;
 
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.AttributeContentException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.DuplicateInputPdfException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.DuplicateOutputContentException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.EmptyKeyActionException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.EmptyScriptException;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidAssociationException;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidValueOfParameterException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingInputPdfKeyException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingOutputContentException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.NoContentException;
@@ -102,12 +105,23 @@ public class PdfActionHandler extends JBPMSpringActionHandler {
 		  catch (NoContentException e) {
 				logger.error("Error :", e);
 		}
+		  catch (InvalidValueOfParameterException e) {
+				logger.error("Error :", e);
+		}
+		  catch (AttributeContentException e) {
+				logger.error("Error :", e);
+		}
+		  catch (InvalidAssociationException e) {
+				logger.error("Error :", e);
+		}
 	}
 
 	private void executeActionScript(String actionValue, Map<String, String> commands) throws ValueActionException, DuplicateInputPdfException, 
 																							  MissingInputPdfKeyException, IOException, 
 																							  NoPdfFileException, DuplicateOutputContentException, 
-																							  MissingOutputContentException, NoContentException {
+																							  MissingOutputContentException, NoContentException, 
+																							  InvalidValueOfParameterException, AttributeContentException, 
+																							  InvalidAssociationException {
 		if (actionValue.equals(ConstantsLanguage.ACTION_VALUES[0])){
 			fillContent.execute(commands);
 		}
