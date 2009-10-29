@@ -8,15 +8,15 @@ import java.util.Map;
 import com.bluexml.side.util.componentmonitor.MonitorWriter;
 import com.bluexml.side.util.libs.FileExtensionFilter;
 import com.bluexml.side.util.libs.FileHelper;
+import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.libs.zip.TrueZipHelper;
 
 public abstract class DirectWebAppsDeployer extends WarDeployer {
-	public DirectWebAppsDeployer(String cleanKey,String logChanges,String webappName, String webappKeyName) {
-		super(cleanKey,logChanges,webappName,webappKeyName);
+	public DirectWebAppsDeployer(String cleanKey, String webappName, String webappKeyName) {
+		super(cleanKey, null, webappName, webappKeyName);
 		packageExt = "zip";
 		tzh = new TrueZipHelper(packageExt);
 	}
-	
 
 	protected TrueZipHelper tzh = null;
 	protected File wkdir = null;
@@ -62,7 +62,7 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 		if (!getDeployedWebbAppFolder().exists()) {
 			this.clean(fileToDeploy);
 		}
-		if (fileToDeploy.isDirectory()) {
+		if (fileToDeploy.exists() && fileToDeploy.isDirectory()) {
 			for (File f : fileToDeploy.listFiles(new FileExtensionFilter(packageExt))) {
 				monitor.getLog().addInfoLog(Activator.Messages.getString("WarDeployer.6"), Activator.Messages.getString("WarDeployer.7", f.getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
 				File explodedPackage = new File(getWorkingDir(), f.getName().replaceAll("\\." + packageExt, "")); //$NON-NLS-1$ //$NON-NLS-2$
@@ -76,17 +76,15 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 
 				dispatchFiles(fileList, map);
 			}
+		} else {
+			monitor.addWarningTextAndLog(Activator.Messages.getString("WarDeployer.5"), "");			
 		}
 	}
 
 	@Override
 	protected void preProcess(File fileToDeploy) throws Exception {
-		if (fileToDeploy.isDirectory()) {
-			this.wkdir = new File(fileToDeploy.getParent(), this.getClass().getName());
-
-		} else {
-			throw new Exception(Activator.Messages.getString("DirectWebAppsDeployer.15")); //$NON-NLS-1$
-		}
+		File out = IFileHelper.getFile(IFileHelper.getIFolder(getTargetPath()));
+		this.wkdir = new File(out, this.getClass().getName());
 		if (getWorkingDir().exists()) {
 			monitor.getLog().addInfoLog(Activator.Messages.getString("DirectWebAppsDeployer.5"), Activator.Messages.getString("DirectWebAppsDeployer.17", getWorkingDir().getName()), ""); //$NON-NLS-1$ //$NON-NLS-2$
 			FileHelper.deleteFile(getWorkingDir(), false);
@@ -131,8 +129,6 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 		}
 	}
 
-	
-	
 	@Override
 	protected void postProcess(File fileToDeploy) throws Exception {
 		// TODO Auto-generated method stub
