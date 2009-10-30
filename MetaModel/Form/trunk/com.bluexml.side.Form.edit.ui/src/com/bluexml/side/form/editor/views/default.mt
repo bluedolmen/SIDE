@@ -111,7 +111,7 @@ li.tabs, ul.tabs {
 </script>
 <em>Outline view, generation output may change.</em>
 <%for (forms){%>
-	<%if (getNameOfSelectedForm().length() == 0 ||Ê(current().id == getNameOfSelectedForm())){%>
+	<%if (getNameOfSelectedForm().length() == 0 || (current().id == getNameOfSelectedForm())){%>
 
 		<form name="exampleForm" method="post" class="cmxform">
 			<fieldset>
