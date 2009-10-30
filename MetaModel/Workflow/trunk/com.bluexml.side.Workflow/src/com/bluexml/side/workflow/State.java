@@ -18,6 +18,8 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link com.bluexml.side.workflow.State#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.State#getEvent <em>Event</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.State#getTitle <em>Title</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.State#getStateDescription <em>State Description</em>}</li>
  * </ul>
  * </p>
  *
@@ -70,4 +72,56 @@ public interface State extends WorkflowModelElement {
 	 * @generated
 	 */
 	EList<Event> getEvent();
+
+	/**
+	 * Returns the value of the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Title</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Title</em>' attribute.
+	 * @see #setTitle(String)
+	 * @see com.bluexml.side.workflow.WorkflowPackage#getState_Title()
+	 * @model
+	 * @generated
+	 */
+	String getTitle();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.workflow.State#getTitle <em>Title</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Title</em>' attribute.
+	 * @see #getTitle()
+	 * @generated
+	 */
+	void setTitle(String value);
+
+	/**
+	 * Returns the value of the '<em><b>State Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>State Description</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>State Description</em>' attribute.
+	 * @see #setStateDescription(String)
+	 * @see com.bluexml.side.workflow.WorkflowPackage#getState_StateDescription()
+	 * @model
+	 * @generated
+	 */
+	String getStateDescription();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.workflow.State#getStateDescription <em>State Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>State Description</em>' attribute.
+	 * @see #getStateDescription()
+	 * @generated
+	 */
+	void setStateDescription(String value);
 } // State

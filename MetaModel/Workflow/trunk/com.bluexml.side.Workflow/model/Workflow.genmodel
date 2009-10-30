@@ -40,6 +40,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Process/decision"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Process/elements"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Workflow.ecore#//Process/contentType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Process/title"/>
+      <genFeatures createChild="false" propertyMultiLine="true" ecoreFeature="ecore:EAttribute Workflow.ecore#//Process/processDescription"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Swimlane">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Swimlane/name"/>
@@ -79,12 +81,12 @@
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Action">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Action/javaClass"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Action/expression"/>
+      <genFeatures createChild="false" propertyMultiLine="true" ecoreFeature="ecore:EAttribute Workflow.ecore#//Action/expression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Action/script"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Script">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//Script/variable"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Script/expression"/>
+      <genFeatures createChild="false" propertyMultiLine="true" ecoreFeature="ecore:EAttribute Workflow.ecore#//Script/expression"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Timer">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Timer/duedate"/>
@@ -106,6 +108,8 @@
     <genClasses image="false" ecoreClass="Workflow.ecore#//State">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//State/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workflow.ecore#//State/event"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//State/title"/>
+      <genFeatures createChild="false" propertyMultiLine="true" ecoreFeature="ecore:EAttribute Workflow.ecore#//State/stateDescription"/>
     </genClasses>
     <genClasses ecoreClass="Workflow.ecore#//Attribute">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workflow.ecore#//Attribute/typ"/>

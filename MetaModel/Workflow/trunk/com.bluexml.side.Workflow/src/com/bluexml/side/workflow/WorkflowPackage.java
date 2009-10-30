@@ -327,13 +327,31 @@ public interface WorkflowPackage extends EPackage {
 	int PROCESS__CONTENT_TYPE = CommonPackage.PACKAGE_FEATURE_COUNT + 10;
 
 	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS__TITLE = CommonPackage.PACKAGE_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Process Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS__PROCESS_DESCRIPTION = CommonPackage.PACKAGE_FEATURE_COUNT + 12;
+
+	/**
 	 * The number of structural features of the '<em>Process</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_FEATURE_COUNT = CommonPackage.PACKAGE_FEATURE_COUNT + 11;
+	int PROCESS_FEATURE_COUNT = CommonPackage.PACKAGE_FEATURE_COUNT + 13;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.SwimlaneImpl <em>Swimlane</em>}' class.
@@ -536,13 +554,31 @@ public interface WorkflowPackage extends EPackage {
 	int STATE__EVENT = WORKFLOW_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__TITLE = WORKFLOW_MODEL_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>State Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__STATE_DESCRIPTION = WORKFLOW_MODEL_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>State</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = WORKFLOW_MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int STATE_FEATURE_COUNT = WORKFLOW_MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.workflow.impl.TransitionTaskImpl <em>Transition Task</em>}' class.
@@ -625,6 +661,24 @@ public interface WorkflowPackage extends EPackage {
 	 * @ordered
 	 */
 	int TRANSITION_TASK__EVENT = STATE__EVENT;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION_TASK__TITLE = STATE__TITLE;
+
+	/**
+	 * The feature id for the '<em><b>State Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION_TASK__STATE_DESCRIPTION = STATE__STATE_DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Transition</b></em>' containment reference list.
@@ -725,6 +779,24 @@ public interface WorkflowPackage extends EPackage {
 	 * @ordered
 	 */
 	int USER_TASK__EVENT = TRANSITION_TASK__EVENT;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_TASK__TITLE = TRANSITION_TASK__TITLE;
+
+	/**
+	 * The feature id for the '<em><b>State Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_TASK__STATE_DESCRIPTION = TRANSITION_TASK__STATE_DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Transition</b></em>' containment reference list.
@@ -843,6 +915,24 @@ public interface WorkflowPackage extends EPackage {
 	 * @ordered
 	 */
 	int START_STATE__EVENT = USER_TASK__EVENT;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int START_STATE__TITLE = USER_TASK__TITLE;
+
+	/**
+	 * The feature id for the '<em><b>State Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int START_STATE__STATE_DESCRIPTION = USER_TASK__STATE_DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Transition</b></em>' containment reference list.
@@ -992,6 +1082,24 @@ public interface WorkflowPackage extends EPackage {
 	int TASK_NODE__EVENT = USER_TASK__EVENT;
 
 	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_NODE__TITLE = USER_TASK__TITLE;
+
+	/**
+	 * The feature id for the '<em><b>State Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_NODE__STATE_DESCRIPTION = USER_TASK__STATE_DESCRIPTION;
+
+	/**
 	 * The feature id for the '<em><b>Transition</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1118,6 +1226,24 @@ public interface WorkflowPackage extends EPackage {
 	int END_STATE__EVENT = STATE__EVENT;
 
 	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int END_STATE__TITLE = STATE__TITLE;
+
+	/**
+	 * The feature id for the '<em><b>State Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int END_STATE__STATE_DESCRIPTION = STATE__STATE_DESCRIPTION;
+
+	/**
 	 * The number of structural features of the '<em>End State</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1197,6 +1323,24 @@ public interface WorkflowPackage extends EPackage {
 	 * @ordered
 	 */
 	int NODE__EVENT = TRANSITION_TASK__EVENT;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__TITLE = TRANSITION_TASK__TITLE;
+
+	/**
+	 * The feature id for the '<em><b>State Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__STATE_DESCRIPTION = TRANSITION_TASK__STATE_DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Transition</b></em>' containment reference list.
@@ -1306,6 +1450,24 @@ public interface WorkflowPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROCESS_STATE__EVENT = TRANSITION_TASK__EVENT;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_STATE__TITLE = TRANSITION_TASK__TITLE;
+
+	/**
+	 * The feature id for the '<em><b>State Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_STATE__STATE_DESCRIPTION = TRANSITION_TASK__STATE_DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Transition</b></em>' containment reference list.
@@ -1426,6 +1588,24 @@ public interface WorkflowPackage extends EPackage {
 	int FORK__EVENT = TRANSITION_TASK__EVENT;
 
 	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK__TITLE = TRANSITION_TASK__TITLE;
+
+	/**
+	 * The feature id for the '<em><b>State Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK__STATE_DESCRIPTION = TRANSITION_TASK__STATE_DESCRIPTION;
+
+	/**
 	 * The feature id for the '<em><b>Transition</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1526,6 +1706,24 @@ public interface WorkflowPackage extends EPackage {
 	int JOIN__EVENT = TRANSITION_TASK__EVENT;
 
 	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOIN__TITLE = TRANSITION_TASK__TITLE;
+
+	/**
+	 * The feature id for the '<em><b>State Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOIN__STATE_DESCRIPTION = TRANSITION_TASK__STATE_DESCRIPTION;
+
+	/**
 	 * The feature id for the '<em><b>Transition</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1624,6 +1822,24 @@ public interface WorkflowPackage extends EPackage {
 	 * @ordered
 	 */
 	int DECISION__EVENT = TRANSITION_TASK__EVENT;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION__TITLE = TRANSITION_TASK__TITLE;
+
+	/**
+	 * The feature id for the '<em><b>State Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION__STATE_DESCRIPTION = TRANSITION_TASK__STATE_DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Transition</b></em>' containment reference list.
@@ -2360,6 +2576,28 @@ public interface WorkflowPackage extends EPackage {
 	EReference getProcess_ContentType();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.Process#getTitle <em>Title</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Title</em>'.
+	 * @see com.bluexml.side.workflow.Process#getTitle()
+	 * @see #getProcess()
+	 * @generated
+	 */
+	EAttribute getProcess_Title();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.Process#getProcessDescription <em>Process Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Process Description</em>'.
+	 * @see com.bluexml.side.workflow.Process#getProcessDescription()
+	 * @see #getProcess()
+	 * @generated
+	 */
+	EAttribute getProcess_ProcessDescription();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.Swimlane <em>Swimlane</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2893,6 +3131,28 @@ public interface WorkflowPackage extends EPackage {
 	EReference getState_Event();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.State#getTitle <em>Title</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Title</em>'.
+	 * @see com.bluexml.side.workflow.State#getTitle()
+	 * @see #getState()
+	 * @generated
+	 */
+	EAttribute getState_Title();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.workflow.State#getStateDescription <em>State Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>State Description</em>'.
+	 * @see com.bluexml.side.workflow.State#getStateDescription()
+	 * @see #getState()
+	 * @generated
+	 */
+	EAttribute getState_StateDescription();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.workflow.Attribute <em>Attribute</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3095,6 +3355,22 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROCESS__CONTENT_TYPE = eINSTANCE.getProcess_ContentType();
+
+		/**
+		 * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROCESS__TITLE = eINSTANCE.getProcess_Title();
+
+		/**
+		 * The meta object literal for the '<em><b>Process Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROCESS__PROCESS_DESCRIPTION = eINSTANCE.getProcess_ProcessDescription();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.SwimlaneImpl <em>Swimlane</em>}' class.
@@ -3529,6 +3805,22 @@ public interface WorkflowPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STATE__EVENT = eINSTANCE.getState_Event();
+
+		/**
+		 * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATE__TITLE = eINSTANCE.getState_Title();
+
+		/**
+		 * The meta object literal for the '<em><b>State Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATE__STATE_DESCRIPTION = eINSTANCE.getState_StateDescription();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.workflow.impl.AttributeImpl <em>Attribute</em>}' class.

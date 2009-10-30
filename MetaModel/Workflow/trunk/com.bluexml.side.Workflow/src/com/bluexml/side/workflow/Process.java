@@ -33,6 +33,8 @@ import com.bluexml.side.clazz.Clazz;
  *   <li>{@link com.bluexml.side.workflow.Process#getDecision <em>Decision</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.Process#getElements <em>Elements</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.Process#getContentType <em>Content Type</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.Process#getTitle <em>Title</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.Process#getProcessDescription <em>Process Description</em>}</li>
  * </ul>
  * </p>
  *
@@ -237,5 +239,57 @@ public interface Process extends com.bluexml.side.common.Package {
 	 * @generated
 	 */
 	void setContentType(Clazz value);
+
+	/**
+	 * Returns the value of the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Title</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Title</em>' attribute.
+	 * @see #setTitle(String)
+	 * @see com.bluexml.side.workflow.WorkflowPackage#getProcess_Title()
+	 * @model
+	 * @generated
+	 */
+	String getTitle();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.workflow.Process#getTitle <em>Title</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Title</em>' attribute.
+	 * @see #getTitle()
+	 * @generated
+	 */
+	void setTitle(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Process Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Process Description</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Process Description</em>' attribute.
+	 * @see #setProcessDescription(String)
+	 * @see com.bluexml.side.workflow.WorkflowPackage#getProcess_ProcessDescription()
+	 * @model
+	 * @generated
+	 */
+	String getProcessDescription();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.workflow.Process#getProcessDescription <em>Process Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Process Description</em>' attribute.
+	 * @see #getProcessDescription()
+	 * @generated
+	 */
+	void setProcessDescription(String value);
 
 } // Process

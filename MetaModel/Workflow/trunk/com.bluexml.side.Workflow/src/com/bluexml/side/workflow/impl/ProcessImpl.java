@@ -51,6 +51,8 @@ import com.bluexml.side.workflow.WorkflowPackage;
  *   <li>{@link com.bluexml.side.workflow.impl.ProcessImpl#getDecision <em>Decision</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.ProcessImpl#getElements <em>Elements</em>}</li>
  *   <li>{@link com.bluexml.side.workflow.impl.ProcessImpl#getContentType <em>Content Type</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.impl.ProcessImpl#getTitle <em>Title</em>}</li>
+ *   <li>{@link com.bluexml.side.workflow.impl.ProcessImpl#getProcessDescription <em>Process Description</em>}</li>
  * </ul>
  * </p>
  *
@@ -166,6 +168,46 @@ public class ProcessImpl extends PackageImpl implements com.bluexml.side.workflo
 	 * @ordered
 	 */
 	protected Clazz contentType;
+
+	/**
+	 * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTitle()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TITLE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTitle()
+	 * @generated
+	 * @ordered
+	 */
+	protected String title = TITLE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getProcessDescription() <em>Process Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProcessDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PROCESS_DESCRIPTION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getProcessDescription() <em>Process Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProcessDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected String processDescription = PROCESS_DESCRIPTION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -380,6 +422,48 @@ public class ProcessImpl extends PackageImpl implements com.bluexml.side.workflo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTitle(String newTitle) {
+		String oldTitle = title;
+		title = newTitle;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.PROCESS__TITLE, oldTitle, title));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getProcessDescription() {
+		return processDescription;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setProcessDescription(String newProcessDescription) {
+		String oldProcessDescription = processDescription;
+		processDescription = newProcessDescription;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WorkflowPackage.PROCESS__PROCESS_DESCRIPTION, oldProcessDescription, processDescription));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -438,6 +522,10 @@ public class ProcessImpl extends PackageImpl implements com.bluexml.side.workflo
 			case WorkflowPackage.PROCESS__CONTENT_TYPE:
 				if (resolve) return getContentType();
 				return basicGetContentType();
+			case WorkflowPackage.PROCESS__TITLE:
+				return getTitle();
+			case WorkflowPackage.PROCESS__PROCESS_DESCRIPTION:
+				return getProcessDescription();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -493,6 +581,12 @@ public class ProcessImpl extends PackageImpl implements com.bluexml.side.workflo
 			case WorkflowPackage.PROCESS__CONTENT_TYPE:
 				setContentType((Clazz)newValue);
 				return;
+			case WorkflowPackage.PROCESS__TITLE:
+				setTitle((String)newValue);
+				return;
+			case WorkflowPackage.PROCESS__PROCESS_DESCRIPTION:
+				setProcessDescription((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -538,6 +632,12 @@ public class ProcessImpl extends PackageImpl implements com.bluexml.side.workflo
 			case WorkflowPackage.PROCESS__CONTENT_TYPE:
 				setContentType((Clazz)null);
 				return;
+			case WorkflowPackage.PROCESS__TITLE:
+				setTitle(TITLE_EDEFAULT);
+				return;
+			case WorkflowPackage.PROCESS__PROCESS_DESCRIPTION:
+				setProcessDescription(PROCESS_DESCRIPTION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -572,8 +672,30 @@ public class ProcessImpl extends PackageImpl implements com.bluexml.side.workflo
 				return elements != null && !elements.isEmpty();
 			case WorkflowPackage.PROCESS__CONTENT_TYPE:
 				return contentType != null;
+			case WorkflowPackage.PROCESS__TITLE:
+				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
+			case WorkflowPackage.PROCESS__PROCESS_DESCRIPTION:
+				return PROCESS_DESCRIPTION_EDEFAULT == null ? processDescription != null : !PROCESS_DESCRIPTION_EDEFAULT.equals(processDescription);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (title: ");
+		result.append(title);
+		result.append(", processDescription: ");
+		result.append(processDescription);
+		result.append(')');
+		return result.toString();
 	}
 
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
