@@ -927,6 +927,29 @@ public class Utils {
 						featureAModifier = true;
 					}
 				}
+				
+				/********************************
+				 * CHECKING OF INCLUDED FEATURES
+				 ********************************/
+				
+				List<?> listIncludedFeatures = racine.getChildren("includes");
+
+				i = listIncludedFeatures.iterator();
+				while (i.hasNext()) {
+					Element currentNode = (Element) i.next();
+					oldVersionNumber = currentNode.getAttributeValue("version");
+
+					// check version of features
+					if (!oldVersionNumber.equals(getVersionNumber(currentNode
+							.getAttributeValue("id")))) {
+						// modify the included features
+						currentNode.setAttribute("version", getVersionNumber(currentNode
+								.getAttributeValue("id")));
+
+						// feature is modified
+						featureAModifier = true;
+					}
+				}
 
 				// on r�cup�re dans un tableau les 3 num�ros de version du projet
 				String[] number = racine.getAttributeValue("version").split("\\.");
@@ -1183,25 +1206,33 @@ public class Utils {
 			}
 		}
 
+		/***********************************************************************
+		 * DEPRECATED PART : BEGIN
+		 ***********************************************************************/
+		
 		// on parcourt le tableau de feature
 		// on va ajouter les features pr�sentes dans le tableau (et donc qui ne
 		// sont pas pr�sentes dans le site.xml) et les ajouter au site.xml
 
-		for (String feature : listeFeature) {
-			Element newElement = new Element("feature");
+//		for (String feature : listeFeature) {
+//			Element newElement = new Element("feature");
+//
+//			newElement.setAttribute("url", "features/" + feature + "_"
+//					+ getVersionNumber(feature) + ".jar");
+//			newElement.setAttribute("id", feature);
+//			newElement.setAttribute("version", getVersionNumber(feature));
+//
+//			Element newCategory = new Element("category");
+//
+//			newCategory.setAttribute("name", "SIDE " + getNewCategory());
+//
+//			newElement.addContent(newCategory);
+//			racine.addContent(newElement);
+//		}
 
-			newElement.setAttribute("url", "features/" + feature + "_"
-					+ getVersionNumber(feature) + ".jar");
-			newElement.setAttribute("id", feature);
-			newElement.setAttribute("version", getVersionNumber(feature));
-
-			Element newCategory = new Element("category");
-
-			newCategory.setAttribute("name", "SIDE " + getNewCategory());
-
-			newElement.addContent(newCategory);
-			racine.addContent(newElement);
-		}
+		/***********************************************************************
+		 * DEPRECATED PART : END
+		 ***********************************************************************/
 
 		// Enregistrement du fichier
 		try {
