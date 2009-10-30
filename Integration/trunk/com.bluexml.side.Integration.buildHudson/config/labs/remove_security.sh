@@ -31,7 +31,7 @@ fi
 
 cd $BUILD_PATH
 # remove projects not to integrate in labs release
-rm -rf $SOURCE_PATH/S-IDE/Integration
+# rm -rf $SOURCE_PATH/S-IDE/Integration
 rm -rf $SOURCE_PATH/S-IDE/Util/trunk/com.bluexml.side.Util.security
 rm -rf $SOURCE_PATH/S-IDE/Experimental
 
