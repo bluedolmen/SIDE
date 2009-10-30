@@ -23,39 +23,41 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 <%script type="workflow.Process" name="validatedFilename"%>
 <%getTEMP_FOLDER()%>/<%getConfModulePath()%>/bpm/messages.properties
 <%script type="workflow.Process" name="alfrescoGenerator" file="<%validatedFilename%>"%>
-#Messages for workflow named <%name%>
-wfbx<%name%>_<%name%>.workflow.title=<%name%>
+#Messages for workflow called <%name%>
+wfbx<%name%>_<%name%>.workflow.title=<%if (title != null && title.length()>0){%><%title%><%}else{%><%name%><%}%>
+wfbx<%name%>_<%name%>.workflow.description=<%if (processDescription != null && processDescription.length()>0){%><%processDescription%><%}%>
 
 <%for (startstate){%>
-#Messages for start task named <%name%>
-wfbx<%current("Process").name%>_<%current("Process").name%>.type.wfbx<%current("Process").name%>_<%name%>.title=<%name%>
-wfbx<%current("Process").name%>_<%current("Process").name%>.node.<%name%>.title=<%name%>
+#Messages for start task called <%name%>
+wfbx<%current("Process").name%>_<%current("Process").name%>.task.wfbx<%current("Process").name%>_<%name%>.title=<%if (title != null && title.length()>0){%><%title%><%}else{%><%name%><%}%>
+wfbx<%current("Process").name%>_<%current("Process").name%>.task.wfbx<%current("Process").name%>_<%name%>.description=<%if (stateDescription != null && stateDescription.length()>0){%><%stateDescription%><%}%>
 ## Transitions
 <%for (transition){%>
-wfbx<%current("Process").name%>_<%current("Process").name%>.node.<%current("StartState").name%>.transition.<%name%>.title=<%title%>
+wfbx<%current("Process").name%>_<%current("Process").name%>.node.<%current("StartState").name%>.transition.<%name%>.title=<%if (title != null && title.length()>0){%><%title%><%}else{%><%name%><%}%>
 <%}%>
 ## Attributes
 <%for (attributes){%>
-wfbx<%current("Process").name%>_<%current("Process").name%>.property.wfbx<%current("Process").name%>_<%name%>.title=<%title%>
+wfbx<%current("Process").name%>_<%current("Process").name%>.property.wfbx<%current("Process").name%>_<%name%>.title=<%if (title != null && title.length()>0){%><%title%><%}else{%><%name%><%}%>
 <%}%>
 <%}%>
 
 <%for (endstate){%>
-#Messages for end task named <%name%>
-wfbx<%current("Process").name%>_<%current("Process").name%>.type.wfbx<%current("Process").name%>_<%name%>.title=<%name%>
-wfbx<%current("Process").name%>_<%current("Process").name%>.node.<%name%>.title=<%name%>
+#Messages for end task called <%name%>
+wfbx<%current("Process").name%>_<%current("Process").name%>.task.wfbx<%current("Process").name%>_<%name%>.title=<%if (title != null && title.length()>0){%><%title%><%}else{%><%name%><%}%>
+wfbx<%current("Process").name%>_<%current("Process").name%>.task.wfbx<%current("Process").name%>_<%name%>.description=<%if (stateDescription != null && stateDescription.length()>0){%><%stateDescription%><%}%>
 <%}%>
 
 <%for (tasknode){%>
-#Messages for task named <%name%>
-wfbx<%current("Process").name%>_<%current("Process").name%>.type.wfbx<%current("Process").name%>_<%name%>.title=<%name%>
-wfbx<%current("Process").name%>_<%current("Process").name%>.node.<%name%>.title=<%name%>
+#Messages for task called <%name%>
+wfbx<%current("Process").name%>_<%current("Process").name%>.task.wfbx<%current("Process").name%>_<%name%>.title=<%if (title != null && title.length()>0){%><%title%><%}else{%><%name%><%}%>
+wfbx<%current("Process").name%>_<%current("Process").name%>.task.wfbx<%current("Process").name%>_<%name%>.description=<%if (stateDescription != null && stateDescription.length()>0){%><%stateDescription%><%}%>
+
 ## Transitions
 <%for (transition){%>
-wfbx<%current("Process").name%>_<%current("Process").name%>.node.<%current("TaskNode").name%>.transition.<%name%>.title=<%title%>
+wfbx<%current("Process").name%>_<%current("Process").name%>.node.<%current("TaskNode").name%>.transition.<%name%>.title=<%if (title != null && title.length()>0){%><%title%><%}else{%><%name%><%}%>
 <%}%>
 ## Attributes
 <%for (attributes){%>
-wfbx<%current("Process").name%>_<%current("Process").name%>.property.wfbx<%current("Process").name%>_<%name%>.title=<%title%>
+wfbx<%current("Process").name%>_<%current("Process").name%>.property.wfbx<%current("Process").name%>_<%name%>.title=<%if (title != null && title.length()>0){%><%title%><%}else{%><%name%><%}%>
 <%}%>
 <%}%>
