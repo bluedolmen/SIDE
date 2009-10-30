@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.bluexml.side.Common.sideForAlfresco.feature"
+      label="SIDE for Alfresco"
+      version="1.0.0"
+      provider-name="blueXML"
+      plugin="com.bluexml.side.Integration.eclipse.branding">
+
+   <description url="http://www.bluexml.com">
+      SIDE MDA environment eases the development of extensions on specialized
+frameworks like Alfresco. This feature gathers common tools for
+SIDE modelers.
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <includes
+         id="com.bluexml.side.Class.generator.alfresco.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Class.generator.report.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Deployer.alfresco.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Deployer.alfrescoDirectCopy.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Deployer.xforms.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Deployer.xformsDirectCopy.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Deployer.facetMap.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Deployer.report.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Form.generator.xforms.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Portal.generator.alfresco.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.View.generator.alfresco.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.View.generator.facetmap.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.bluexml.side.Workflow.generator.alfresco.feature"
+         version="0.0.0"/>
+
+</feature>
