@@ -9,6 +9,8 @@ import java.util.Map;
 
 import org.alfresco.repo.workflow.jbpm.JBPMSpringActionHandler;
 import org.alfresco.service.ServiceRegistry;
+import org.alfresco.service.cmr.model.FileExistsException;
+import org.alfresco.service.cmr.model.FileNotFoundException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dom4j.Element;
@@ -25,6 +27,8 @@ import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.Inval
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidValueOfParameterException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingInputPdfKeyException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingOutputContentException;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingOutputPathForPDFException;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingOverridePdfKeyException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.NoContentException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.NoPdfFileException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.OutputTypeKeyException;
@@ -33,6 +37,7 @@ import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.generate.FillCo
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.generate.FillPDF;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.language.ConstantsLanguage;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.structure.AlfrescoStructure;
+import com.lowagie.text.DocumentException;
 
 /**
  * @author dchevrier
@@ -125,6 +130,21 @@ public class PdfActionHandler extends JBPMSpringActionHandler {
 		  catch (InvalidContentException e) {
 				logger.error("Error :", e);
 		}
+		  catch (MissingOutputPathForPDFException e) {
+				logger.error("Error :", e);
+		}
+		  catch (DocumentException e) {
+				logger.error("Error :", e);
+		}
+		  catch (MissingOverridePdfKeyException e) {
+				logger.error("Error :", e);
+		}
+		  catch (FileExistsException e) {
+				logger.error("Error :", e);
+		}
+		  catch (FileNotFoundException e) {
+				logger.error("Error :", e);
+		}
 	}
 
 	private void executeActionScript(String actionValue, Map<String, String> commands) throws ValueActionException, DuplicateInputPdfException, 
@@ -133,7 +153,9 @@ public class PdfActionHandler extends JBPMSpringActionHandler {
 																							  MissingOutputContentException, NoContentException, 
 																							  InvalidValueOfParameterException, AttributeContentException, 
 																							  InvalidAssociationException, OutputTypeKeyException, 
-																							  InvalidContentException {
+																							  InvalidContentException, MissingOutputPathForPDFException, 
+																							  DocumentException, MissingOverridePdfKeyException, 
+																							  FileExistsException, FileNotFoundException {
 		if (actionValue.equals(ConstantsLanguage.ACTION_VALUES[0])){
 			fillContent.execute(commands);
 		}
@@ -166,9 +188,12 @@ public class PdfActionHandler extends JBPMSpringActionHandler {
 		else{
 			throw new EmptyScriptException(EmptyScriptException.EMPTY_SCRIPT);
 		}
-		String[] expressions = expression.split(ConstantsLanguage.COMMANDS_SEPARATOR);
+		String[] expressions = expression.split(ConstantsLanguage.COMMANDS_SEPARATOR_SPACE);
 		for (int index = 0; index < expressions.length; index++) {
 			String[] keyValue = expressions[index].split(ConstantsLanguage.KEY_VALUE_SEPARATOR);
+			if (index == expressions.length-1){
+				keyValue[1] = keyValue[1].split(ConstantsLanguage.COMMANDS_SEPARATOR)[0];
+			}
 			commands.put(keyValue[0], keyValue[1]);
 		}
 		return commands;
