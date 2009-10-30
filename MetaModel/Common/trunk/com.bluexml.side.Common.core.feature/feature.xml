@@ -1,69 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature
-      id="com.bluexml.side.Common.core.feature"
-      label="SIDE Core Components"
-      version="1.0.0"
-      provider-name="blueXML">
-
-   <description url="http://www.bluexml.com">
-      SIDE MDA environment eases the development of extensions on specialized
+<feature id="com.bluexml.side.Common.core.feature" label="SIDE Core Components" version="1.0.1.v10879-20091030" provider-name="blueXML">
+  <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized
 frameworks like Alfresco. This feature gathers common tools for
-SIDE modelers.
-   </description>
-
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
-   </copyright>
-
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
-   </license>
-
-   <includes
-         id="com.bluexml.side.Application.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.bluexml.side.Class.modeler.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.bluexml.side.Common.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.bluexml.side.Form.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.bluexml.side.Portal.modeler.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.bluexml.side.Requirements.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.bluexml.side.View.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.bluexml.side.Workflow.modeler.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.bluexml.side.Util.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.bluexml.side.Deployer.documentation.feature"
-         version="0.0.0"/>
-
-   <plugin
-         id="com.bluexml.side.Integration.eclipse.branding"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
+SIDE modelers.</description>
+  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
+  <license url="http://www.example.com/license">[Enter License Description here.]</license>
+  <includes id="com.bluexml.side.Application.feature" version="1.0.87.v10799-20091028" />
+  <includes id="com.bluexml.side.Class.modeler.feature" version="1.0.36.v10879-20091030" />
+  <includes id="com.bluexml.side.Common.feature" version="1.0.24.v10368-20091013" />
+  <includes id="com.bluexml.side.Form.feature" version="1.0.61.v10879-20091030" />
+  <includes id="com.bluexml.side.Portal.modeler.feature" version="1.0.22.v10368-20091013" />
+  <includes id="com.bluexml.side.Requirements.feature" version="1.0.34.v10368-20091013" />
+  <includes id="com.bluexml.side.View.feature" version="1.0.28.v10491-20091015" />
+  <includes id="com.bluexml.side.Workflow.modeler.feature" version="1.0.45.v10879-20091030" />
+  <includes id="com.bluexml.side.Util.feature" version="1.0.106.v10879-20091030" />
+  <includes id="com.bluexml.side.Deployer.documentation.feature" version="1.0.23.v10563-20091016" />
+  <plugin id="com.bluexml.side.Integration.eclipse.branding" download-size="0" install-size="0" version="1.0.2.v9878-20090928" unpack="false" />
 </feature>
+
