@@ -84,7 +84,7 @@ public class ScriptItemProvider
 				 getString("_UI_PropertyDescriptor_description", "_UI_Script_expression_feature", "_UI_Script_type"),
 				 WorkflowPackage.Literals.SCRIPT__EXPRESSION,
 				 true,
-				 false,
+				 true,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
@@ -140,7 +140,7 @@ public class ScriptItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Script)object).getExpression();
+		String label = crop(((Script)object).getExpression());
 		return label == null || label.length() == 0 ?
 			getString("_UI_Script_type") :
 			getString("_UI_Script_type") + " " + label;

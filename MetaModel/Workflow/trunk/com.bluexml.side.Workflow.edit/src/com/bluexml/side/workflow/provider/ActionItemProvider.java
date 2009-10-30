@@ -107,7 +107,7 @@ public class ActionItemProvider
 				 getString("_UI_PropertyDescriptor_description", "_UI_Action_expression_feature", "_UI_Action_type"),
 				 WorkflowPackage.Literals.ACTION__EXPRESSION,
 				 true,
-				 false,
+				 true,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,

@@ -64,6 +64,8 @@ public class StateItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
+			addTitlePropertyDescriptor(object);
+			addStateDescriptionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -84,6 +86,50 @@ public class StateItemProvider
 				 WorkflowPackage.Literals.STATE__NAME,
 				 true,
 				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Title feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTitlePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_State_title_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_State_title_feature", "_UI_State_type"),
+				 WorkflowPackage.Literals.STATE__TITLE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the State Description feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStateDescriptionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_State_stateDescription_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_State_stateDescription_feature", "_UI_State_type"),
+				 WorkflowPackage.Literals.STATE__STATE_DESCRIPTION,
+				 true,
+				 true,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
@@ -147,6 +193,8 @@ public class StateItemProvider
 
 		switch (notification.getFeatureID(State.class)) {
 			case WorkflowPackage.STATE__NAME:
+			case WorkflowPackage.STATE__TITLE:
+			case WorkflowPackage.STATE__STATE_DESCRIPTION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case WorkflowPackage.STATE__EVENT:

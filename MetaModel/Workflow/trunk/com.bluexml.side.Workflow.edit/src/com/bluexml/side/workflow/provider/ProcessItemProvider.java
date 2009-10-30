@@ -22,6 +22,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.common.CommonPackage;
@@ -65,6 +66,8 @@ public class ProcessItemProvider
 			super.getPropertyDescriptors(object);
 
 			addContentTypePropertyDescriptor(object);
+			addTitlePropertyDescriptor(object);
+			addProcessDescriptionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -87,6 +90,50 @@ public class ProcessItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Title feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTitlePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Process_title_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Process_title_feature", "_UI_Process_type"),
+				 WorkflowPackage.Literals.PROCESS__TITLE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Process Description feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addProcessDescriptionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Process_processDescription_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Process_processDescription_feature", "_UI_Process_type"),
+				 WorkflowPackage.Literals.PROCESS__PROCESS_DESCRIPTION,
+				 true,
+				 true,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -167,6 +214,10 @@ public class ProcessItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(com.bluexml.side.workflow.Process.class)) {
+			case WorkflowPackage.PROCESS__TITLE:
+			case WorkflowPackage.PROCESS__PROCESS_DESCRIPTION:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case WorkflowPackage.PROCESS__SWIMLANE:
 			case WorkflowPackage.PROCESS__STARTSTATE:
 			case WorkflowPackage.PROCESS__ENDSTATE:
@@ -213,6 +264,11 @@ public class ProcessItemProvider
 			(createChildParameter
 				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
 				 ClazzFactory.eINSTANCE.createClassPackage()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.PACKAGE__PACKAGE_SET,
+				 ClazzFactory.eINSTANCE.createModel()));
 
 		newChildDescriptors.add
 			(createChildParameter
