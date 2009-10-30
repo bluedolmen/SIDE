@@ -34,7 +34,7 @@ cd $BUILD_PATH
 # rm -rf $SOURCE_PATH/S-IDE/Integration
 for f in `ls $SOURCE_PATH/S-IDE/Integration/trunk | grep -v -e 'com.bluexml.side.Integration.eclipse.branding'`
 do
-     rm -rf $f
+     rm -rf $SOURCE_PATH/S-IDE/Integration/trunk/$f
 done
 rm -rf $SOURCE_PATH/S-IDE/Util/trunk/com.bluexml.side.Util.security
 rm -rf $SOURCE_PATH/S-IDE/Experimental
