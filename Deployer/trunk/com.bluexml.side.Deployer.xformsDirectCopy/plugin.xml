@@ -18,7 +18,7 @@
                   class="com.bluexml.side.deployer.xformsdirectcopy.DeployerXforms"
                   hidden="visible"
                   id="com.bluexml.side.Deployer.xformsDirectCopy"
-                  version="SIDE xForm Direct Deployer">
+                  version="SIDE Chiba X-Forms Direct Deployer">
                <configurationParameter
                      documentation="Set this value to the Alfresco Tomcat directory path in order the deployer puts the packaged war file.&lt;br&gt;&lt;b&gt;This option is mandatory.&lt;/b&gt;"
                      key="CATALINA_HOME"
