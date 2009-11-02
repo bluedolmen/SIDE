@@ -153,6 +153,7 @@ public class ApplicationStarter implements IApplication {
 			IPath location = Path.fromOSString(filePath.getAbsolutePath());
 			System.out.println("location: " + location);
 			file = workspace.getRoot().getFileForLocation(location);
+			if (file == null) file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(filePath.getAbsolutePath()));
 			System.out.println("file: " + file);
 
 		} catch (Exception e1) {
