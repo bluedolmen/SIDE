@@ -25,20 +25,25 @@ public abstract class Deployer implements Checkable {
 	private Map<String, String> configurationParameters;
 	private Map<String, String> generationParameters;
 	protected ComponentMonitor monitor;
-	
+	protected File fileToDeploy;
 	protected String id;
 	protected String techVersion = null;
 
+	public void setFileToDeploy(File fileToDeploy) {
+		this.fileToDeploy = fileToDeploy;
+	}
+
 	/**
 	 * 
-	 * @param cleanKey the option key use in extension point
-	 * @param logChangesKey the option key use in extension point
+	 * @param cleanKey
+	 *            the option key use in extension point
+	 * @param logChangesKey
+	 *            the option key use in extension point
 	 */
-	public Deployer(String cleanKey,String logChangesKey) {
+	public Deployer(String cleanKey, String logChangesKey) {
 		this.cleanKey = cleanKey;
 		this.logChangesKey = logChangesKey;
 	}
-	
 
 	public String getCleanKey() {
 		return cleanKey;
@@ -65,23 +70,22 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Use to setup all properties, ordinary used by deployer luncher
-	 *
+	 * 
 	 * @param configurationParameters
 	 * @param generationParameters
 	 * @param options
 	 */
-	public void initialize(Map<String, String> configurationParameters, Map<String, String> generationParameters, List<String> options,ComponentMonitor monitor) {
+	public void initialize(Map<String, String> configurationParameters, Map<String, String> generationParameters, List<String> options, ComponentMonitor monitor) {
 		this.monitor = monitor;
 		this.configurationParameters = configurationParameters;
 		this.options = options;
 		this.generationParameters = generationParameters;
 		this.techVersion = configurationParameters.get("technologyVersion"); //$NON-NLS-1$
 		this.id = configurationParameters.get("deployerId"); //$NON-NLS-1$
-		
-		
+
 		for (Map.Entry<String, String> iterable_element : generationParameters.entrySet()) {
 			if (iterable_element.getValue() == null || iterable_element.getValue().length() == 0) {
-			monitor.getLog().addWarningLog(Activator.Messages.getString("Deployer.8"), Activator.Messages.getString("Deployer.9",iterable_element.getKey()), ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				monitor.getLog().addWarningLog(Activator.Messages.getString("Deployer.8"), Activator.Messages.getString("Deployer.9", iterable_element.getKey()), ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			}
 		}
 	}
@@ -96,28 +100,26 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * do the whole deploy process
-	 *
+	 * 
 	 * @throws Exception
 	 */
 	public void deploy() throws Exception {
-		String IfilewkDirPath = getTargetPath();
-		String absoluteWKDirePath = IFileHelper.getSystemFolderPath(IfilewkDirPath);
-		File fileToDeploy = getFileToDeploy(absoluteWKDirePath);
+		File fileToDeploy = getFileToDeploy();
 		// addInfoLog("preProcessing ...", "", null);
-		//monitor.beginTask("preProcess start");
+		// monitor.beginTask("preProcess start");
 		preProcess(fileToDeploy);
 		monitor.taskDone(null);
 		//monitor.taskDone(Activator.Messages.getString("Deployer.12")); //$NON-NLS-1$
 		if (doClean()) {
-			//addInfoLog("Cleaning ...", "", null);
+			// addInfoLog("Cleaning ...", "", null);
 			clean(fileToDeploy);
 		}
 		// addInfoLog("Processing ...", "", null);
-		//monitor.customSubTask("main deploy process start");
+		// monitor.customSubTask("main deploy process start");
 		deployProcess(fileToDeploy);
 		monitor.taskDone(null);
 		//monitor.taskDone(Activator.Messages.getString("Deployer.13")); //$NON-NLS-1$
-		//monitor.beginTask("postProcess start");
+		// monitor.beginTask("postProcess start");
 		postProcess(fileToDeploy);
 		monitor.taskDone(null);
 		//monitor.taskDone(Activator.Messages.getString("Deployer.14")); //$NON-NLS-1$
@@ -125,6 +127,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Return if the deployer is a documentation deployer.
+	 * 
 	 * @return
 	 */
 	public boolean isDocumentationDeployer() {
@@ -133,17 +136,23 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * default method to get the File to deploy
-	 *
+	 * 
 	 * @param absoluteWKDirPath
 	 * @return
 	 */
-	public File getFileToDeploy(String absoluteWKDirPath) {
-		return new File(absoluteWKDirPath + File.separator + techVersion);
+	public File getFileToDeploy() {
+		if (fileToDeploy == null) {
+			String IfilewkDirPath = getTargetPath();
+			String absoluteWKDirPath = IFileHelper.getSystemFolderPath(IfilewkDirPath);
+			fileToDeploy = new File(absoluteWKDirPath + File.separator + techVersion);
+		}
+		return fileToDeploy;
+
 	}
 
 	/**
 	 * the main deploy process
-	 *
+	 * 
 	 * @param fileToDeploy
 	 * @throws Exception
 	 */
@@ -151,7 +160,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * method that clean the target before deploy resources into
-	 *
+	 * 
 	 * @param fileToDeploy
 	 * @throws Exception
 	 */
@@ -159,7 +168,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Job to do after the main process
-	 *
+	 * 
 	 * @param fileToDeploy
 	 * @throws Exception
 	 */
@@ -167,7 +176,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Job to do before the main process
-	 *
+	 * 
 	 * @param fileToDeploy
 	 * @throws Exception
 	 */
@@ -175,7 +184,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * Return the path where generator have outputed theirs files.
-	 *
+	 * 
 	 * @return
 	 */
 	public final String getTargetPath() {
@@ -188,7 +197,7 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * check if changes made by the deploy process must be logged
-	 *
+	 * 
 	 * @return
 	 */
 	protected boolean logChanges() {
@@ -197,18 +206,17 @@ public abstract class Deployer implements Checkable {
 
 	/**
 	 * check if clean must be done
-	 *
+	 * 
 	 * @return
 	 */
 	protected boolean doClean() {
 		return options != null && options.contains(cleanKey);
 	}
 
-	
 	/**
 	 * Move the stamp file added by the generator to the directory into log path
 	 * to be used for log purpose.
-	 *
+	 * 
 	 * @throws Exception
 	 */
 	final public void moveStampFile(String logPath) throws Exception {
