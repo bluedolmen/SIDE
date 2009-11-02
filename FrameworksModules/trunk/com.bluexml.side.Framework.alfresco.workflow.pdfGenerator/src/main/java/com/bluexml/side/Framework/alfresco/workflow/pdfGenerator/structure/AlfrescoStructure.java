@@ -3,11 +3,17 @@
  */
 package com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.structure;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Map;
 
 import org.alfresco.service.ServiceRegistry;
+import org.alfresco.service.cmr.model.FileExistsException;
+import org.alfresco.service.cmr.model.FileInfo;
+import org.alfresco.service.cmr.model.FileNotFoundException;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.StoreRef;
 import org.alfresco.service.cmr.search.ResultSet;
@@ -17,9 +23,13 @@ import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.Dupli
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.DuplicateOutputContentException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingInputPdfKeyException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingOutputContentException;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingOutputPathForPDFException;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingOverridePdfKeyException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.NoPdfFileException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.language.ConstantsLanguage;
+import com.lowagie.text.DocumentException;
 import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfStamper;
 
 /**
  * @author dchevrier
@@ -83,7 +93,7 @@ public class AlfrescoStructure {
 		if (commands.containsKey(ConstantsLanguage.INPUT_PDF_KEYS[0]) && commands.containsKey(ConstantsLanguage.INPUT_PDF_KEYS[1])){
 			throw new DuplicateInputPdfException(DuplicateInputPdfException.DUPLICATE_INPUT_PDF_KEY);
 		}
-		else if (!commands.containsKey(ConstantsLanguage.INPUT_PDF_KEYS[0]) && !commands.containsKey(ConstantsLanguage.INPUT_PDF_KEYS[1])){
+		else if (!commands.containsKey(ConstantsLanguage.INPUT_PDF_KEYS[0]) & !commands.containsKey(ConstantsLanguage.INPUT_PDF_KEYS[1])){
 			throw new MissingInputPdfKeyException(MissingInputPdfKeyException.MISSING_INPUT_PDF_KEY);
 		}
 		else if (!commands.containsKey(ConstantsLanguage.INPUT_PDF_KEYS[0]) && commands.containsKey(ConstantsLanguage.INPUT_PDF_KEYS[1])){
@@ -95,12 +105,36 @@ public class AlfrescoStructure {
 		return reader;
 	}
 	
-	private static PdfReader getReaderFromAlfrescoPathToPdf(String alfrescoPath) throws IOException, NoPdfFileException {
-		PdfReader reader = null;
+	private static NodeRef getNodeRefFromAlfrescoPathToPdf(String alfrescoPath){
+		NodeRef node =null;
 		ResultSet nodeRefSet = serviceRegistry.getSearchService().query(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE,SearchService.LANGUAGE_XPATH,alfrescoPath);
 		if (nodeRefSet.length() == 1) {
-			NodeRef alfrescoPdf = nodeRefSet.getNodeRefs().get(0);
-			InputStream inputStreamOfAlfrescoPdf = serviceRegistry.getFileFolderService().getReader(alfrescoPdf).getContentInputStream();
+			node = nodeRefSet.getNodeRefs().get(0);
+		} 
+		return node;
+	}
+	
+	private static NodeRef getNodeRefFromAlfrescoUUIDToPdf(String alfrescoUUID){
+		NodeRef node = null;
+		StringBuffer query = new StringBuffer();
+		query.append(LUCENE_SEARCH_QUERY_INDICATOR);
+		query.append("\"");
+		query.append(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE);
+		query.append("/");
+		query.append(alfrescoUUID);
+		query.append("\"");
+		ResultSet nodeRefSet = serviceRegistry.getSearchService().query(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE,SearchService.LANGUAGE_LUCENE,query.toString());
+		if (nodeRefSet.length() == 1) {
+			node = nodeRefSet.getNodeRefs().get(0);
+		} 
+		return node;
+	}
+	
+	private static PdfReader getReaderFromAlfrescoPathToPdf(String alfrescoPath) throws IOException, NoPdfFileException {
+		PdfReader reader = null;
+		NodeRef node = getNodeRefFromAlfrescoPathToPdf(alfrescoPath);
+		if (node != null) {
+			InputStream inputStreamOfAlfrescoPdf = serviceRegistry.getFileFolderService().getReader(node).getContentInputStream();
 			reader = new PdfReader(inputStreamOfAlfrescoPdf);
 		} 
 		else {
@@ -111,23 +145,80 @@ public class AlfrescoStructure {
 	
 	private static PdfReader getReaderFromAlfrescoUUIDToPdf(String alfrescoUUID) throws IOException, NoPdfFileException {
 		PdfReader reader = null;
-		StringBuffer query = new StringBuffer();
-		query.append(LUCENE_SEARCH_QUERY_INDICATOR);
-		query.append("\"");
-		query.append(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE);
-		query.append("/");
-		query.append(alfrescoUUID);
-		query.append("\"");
-		ResultSet nodeRefSet = serviceRegistry.getSearchService().query(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE,SearchService.LANGUAGE_LUCENE,query.toString());
-		if (nodeRefSet.length() == 1) {
-			NodeRef alfrescoPdf = nodeRefSet.getNodeRefs().get(0);
-			InputStream inputStreamOfAlfrescoPdf = serviceRegistry.getFileFolderService().getReader(alfrescoPdf).getContentInputStream();
+		NodeRef node = getNodeRefFromAlfrescoUUIDToPdf(alfrescoUUID);
+		if (node != null) {
+			InputStream inputStreamOfAlfrescoPdf = serviceRegistry.getFileFolderService().getReader(node).getContentInputStream();
 			reader = new PdfReader(inputStreamOfAlfrescoPdf);
 		} 
 		else {
 			throw new NoPdfFileException(NoPdfFileException.FILE_DOES_NOT_EXISTS);
 		}
 		return reader;
+	}
+
+	public static PdfStamper manageAlfrescoPDF(PdfReader reader,Map<String, String> commands) throws IOException, NoPdfFileException, 
+	                                                                                                 MissingOutputPathForPDFException, 
+	                                                                                                 DocumentException, 
+	                                                                                                 MissingOverridePdfKeyException, 
+	                                                                                                 FileExistsException, FileNotFoundException {
+		PdfStamper stamper = null;
+		if (!commands.containsKey(ConstantsLanguage.OUTPUT_PDF_KEY)){
+			throw new MissingOutputPathForPDFException(MissingOutputPathForPDFException.DOES_NOT_EXISTS);
+		}
+		else if (commands.containsKey(ConstantsLanguage.OUTPUT_PDF_KEY)){
+			OutputStream outputStream = null;
+			String path = commands.get(ConstantsLanguage.OUTPUT_PDF_KEY);
+			if (getNodeRefFromAlfrescoPathToPdf(path) == null){
+				outputStream = createPdf(path,commands);
+			}
+			else{
+				if (commands.containsKey(ConstantsLanguage.FORCE_OVERRIDE_PDF_KEY)){
+					if (commands.get(ConstantsLanguage.FORCE_OVERRIDE_PDF_KEY).equals(ConstantsLanguage.FORCE_OVERRIDE_PDF_VALUES[0])){
+						outputStream = getStreamFromAlfrescoPathToPdf(path);
+					}
+				}
+				else{
+					throw new MissingOverridePdfKeyException(MissingOverridePdfKeyException.DOES_NOT_EXISTS);
+				}
+			}
+			stamper = new PdfStamper(reader,outputStream);
+		}
+		return stamper;
+	}
+
+	private static OutputStream createPdf(String path, Map<String, String> commands) throws FileExistsException, FileNotFoundException {
+		NodeRef fillablePdf = null;
+		if (commands.containsKey(ConstantsLanguage.INPUT_PDF_KEYS[0])){
+			fillablePdf = getNodeRefFromAlfrescoUUIDToPdf(commands.get(ConstantsLanguage.INPUT_PDF_KEYS[0]));
+		}
+		else if (commands.containsKey(ConstantsLanguage.INPUT_PDF_KEYS[1])){
+			fillablePdf = getNodeRefFromAlfrescoPathToPdf(commands.get(ConstantsLanguage.INPUT_PDF_KEYS[1]));
+		}
+		String pathToFilledPdfParent = getPathToFilledPdfParent(path);
+		NodeRef filledPdfParent = getNodeRefFromAlfrescoPathToPdf(pathToFilledPdfParent);
+		String filledPdfName = path.split("/")[path.split("/").length-1].split(":")[1];
+		FileInfo filledFile = serviceRegistry.getFileFolderService().copy(fillablePdf, filledPdfParent, filledPdfName);
+		return serviceRegistry.getFileFolderService().getWriter(filledFile.getNodeRef()).getContentOutputStream();
+	
+	}
+
+	private static String getPathToFilledPdfParent(String path) {
+		StringBuffer parentPath = new StringBuffer();
+		String[] pathSteps = path.split("/");
+		for (int i = 1; i < pathSteps.length-1; i++){
+			parentPath.append("/");
+			parentPath.append(pathSteps[i]);
+		}
+		return parentPath.toString();
+	}
+
+	private static OutputStream getStreamFromAlfrescoPathToPdf(String path) {
+		OutputStream outputStream = null;
+		NodeRef node = getNodeRefFromAlfrescoPathToPdf(path);
+		if (node != null) {
+			outputStream = serviceRegistry.getFileFolderService().getWriter(node).getContentOutputStream();
+		} 
+		return outputStream;
 	}
 	
 }
