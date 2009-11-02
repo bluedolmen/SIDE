@@ -4,10 +4,12 @@
 package com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.generate.fill;
 
 import java.io.Serializable;
+import java.security.InvalidParameterException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,12 +22,14 @@ import org.alfresco.service.cmr.dictionary.AspectDefinition;
 import org.alfresco.service.cmr.dictionary.AssociationDefinition;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
 import org.alfresco.service.cmr.repository.ChildAssociationRef;
+import org.alfresco.service.cmr.repository.InvalidNodeRefException;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.namespace.QName;
 import org.alfresco.util.ISO8601DateFormat;
 
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.AttributeContentException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidAssociationException;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidFormatParameterException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidValueOfParameterException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.language.ConstantsLanguage;
 
@@ -37,12 +41,18 @@ public class FillDataContent {
 
 	public static void fillContent(ServiceRegistry services, NodeRef content, HashMap<String, String> importCommands, HashMap<String, String> data) throws InvalidValueOfParameterException, 
 																																						   AttributeContentException, 
-																																						   InvalidAssociationException {
+																																						   InvalidAssociationException, 
+																																						   InvalidNodeRefException, 
+																																						   ParseException, InvalidFormatParameterException {
 		Collection<String> navigations = new ArrayList<String>();
+		Map<String,String> datesFormats = new HashMap<String, String>();
 		Set<String> keysCommands = importCommands.keySet();
 		NodeRef finalTarget = null;
 		for(String key : keysCommands){
-			if (importCommands.get(key).contains(ConstantsLanguage.NAVIGATION_INDICATOR)){
+			if (key.contains(ConstantsLanguage.FORMAT_DATE_INDICATOR)){
+				datesFormats.putAll(getDateFormat(key,importCommands.get(key)));
+			}
+			else if (importCommands.get(key).contains(ConstantsLanguage.NAVIGATION_INDICATOR)){
 				String[] navigation = importCommands.get(key).split(ConstantsLanguage.NAVIGATION_INDICATOR);
 				String pureNavigation = deleteLastElement(navigation);
 				if (!navigations.contains(pureNavigation)){
@@ -50,15 +60,27 @@ public class FillDataContent {
 					QName qnameType = services.getNodeService().getType(content);
 					finalTarget = followAssociations(services,content,qnameType,navigation,0);
 				}
-				fillAttributeContent(services,finalTarget,navigation[navigation.length-1],data.get(key));
+				fillAttributeContent(services,finalTarget,navigation[navigation.length-1],data.get(key),datesFormats);
 			}
 			else if(importCommands.get(key).contains(ConstantsLanguage.CONSTANT_INDICATOR)){
 				throw new InvalidValueOfParameterException(InvalidValueOfParameterException.BAD_FORMAT);
 			}
 			else {
-				fillAttributeContent(services,content,importCommands.get(key),data.get(key));
+				fillAttributeContent(services,content,importCommands.get(key),data.get(key),datesFormats);
 			}
 		}
+	}
+
+	private static Map<String, String> getDateFormat(String key, String format) throws InvalidFormatParameterException {
+		Map<String, String> map = new HashMap<String, String>();
+		String[] dateFormat = key.split(ConstantsLanguage.PARAMETER_SEPARATOR);
+		if (dateFormat.length == 0){
+			throw new InvalidFormatParameterException(InvalidFormatParameterException.BAD_FORMAT);
+		}
+		else{
+			map.put(dateFormat[0], format);
+		}
+		return map;
 	}
 
 	private static String deleteLastElement(String[] navigation) {
@@ -116,7 +138,7 @@ public class FillDataContent {
 		return finalTarget;
 	}
 
-	private static void fillAttributeContent(ServiceRegistry services, NodeRef content, String importCommand, String data) throws AttributeContentException {
+	private static void fillAttributeContent(ServiceRegistry services, NodeRef content, String importCommand, String data, Map<String,String> datesFormats) throws AttributeContentException, InvalidNodeRefException, ParseException {
 		QName contentType = services.getNodeService().getType(content);
 		Map<QName,Object> attributes = getAttributes(services,contentType, new HashMap<QName,Object>());
 		Set<QName> names = attributes.keySet();
@@ -125,7 +147,7 @@ public class FillDataContent {
 		for (QName name : names) {
 			if (name.toString().contains(uri) && name.toString().contains(importCommand)){
 				attributeExists = true;
-				services.getNodeService().setProperty(content,name,convertToAlfrescoType(data));
+				services.getNodeService().setProperty(content,name,convertToAlfrescoType(data,importCommand,datesFormats));
 			}
 		}
 		if (!attributeExists){
@@ -148,10 +170,10 @@ public class FillDataContent {
 		return attributes;
 	}
 
-	private static Serializable convertToAlfrescoType(String data) {
+	private static Serializable convertToAlfrescoType(String data, String importCommandKey, Map<String,String> datesFormats) throws ParseException {
 		Serializable alfrescoData = data;
 		if (data.contains(ConstantsLanguage.DATE_VALUE_INDICATOR)){
-			alfrescoData = convertToAlfrescoDate(data);
+			alfrescoData = convertToAlfrescoDate(data,importCommandKey,datesFormats);
 		}
 		else if (data.equals(ConstantsLanguage.BOOLEAN_VALUES[0])){//and itemType = checkBox
 			alfrescoData = Boolean.TRUE;
@@ -162,13 +184,9 @@ public class FillDataContent {
 		return alfrescoData;
 	}
 
-	private static Serializable convertToAlfrescoDate(String data) {
-		String[] partsDate = data.split(ConstantsLanguage.DATE_VALUE_INDICATOR);
-		GregorianCalendar gc = (GregorianCalendar)GregorianCalendar.getInstance();
-		gc.set(GregorianCalendar.DATE, Integer.valueOf(partsDate[0]));
-		gc.set(GregorianCalendar.MONTH, Integer.valueOf(partsDate[1])-1);
-		gc.set(GregorianCalendar.YEAR, Integer.valueOf(partsDate[2]));
-		Date date = gc.getTime();
+	private static Serializable convertToAlfrescoDate(String data, String importCommandKey, Map<String,String> datesFormats) throws ParseException {
+		SimpleDateFormat dateFormat = new SimpleDateFormat(datesFormats.get(importCommandKey));
+		Date date = dateFormat.parse(data);
 		return ISO8601DateFormat.format(date);
 	}
 	
