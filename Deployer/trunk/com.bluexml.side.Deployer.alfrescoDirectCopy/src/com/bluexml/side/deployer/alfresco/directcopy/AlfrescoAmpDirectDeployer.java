@@ -18,9 +18,7 @@ import de.schlichtherle.io.FileInputStream;
 public class AlfrescoAmpDirectDeployer extends DirectWebAppsDeployer {
 
 	public AlfrescoAmpDirectDeployer() {
-		super(null, "alfresco", "deployer.webappName.alfresco"); //$NON-NLS-1$
-		packageExt = "amp"; //$NON-NLS-1$
-		tzh = new TrueZipHelper(packageExt);
+		super(null, "alfresco", "deployer.webappName.alfresco","amp"); //$NON-NLS-1$ $NON-NLS-1$ $NON-NLS-1$
 	}
 
 	protected void dispatchFiles(List<File> files, Map<String, File> mapper) throws Exception {
@@ -67,6 +65,12 @@ public class AlfrescoAmpDirectDeployer extends DirectWebAppsDeployer {
 		addToMap(mapper, "/licenses/", packageFolder, "/licenses"); //$NON-NLS-1$ //$NON-NLS-2$
 
 		return mapper;
+	}
+
+	@Override
+	protected void postProcess(File fileToDeploy) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
