@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+<!--
    <extension
          point="com.bluexml.side.Application.com_bluexml_application_configuration">
       <technology
@@ -30,5 +31,5 @@
          </technologyVersion>
       </technology>
    </extension>
-
+-->
 </plugin>
