@@ -3,25 +3,10 @@ metamodel http://www.kerblue.org/portal/1.0
 import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzService
 import com.bluexml.side.clazz.service.alfresco.CommonServices
 %>
-<%--import com.bluexml.side.portal.generator.alfresco.services.ProxieServices--%>
-<%-- 
-     
---%>
 
-<%script type="Portal" name="getCustomWebFwkConfigOutputFile"%>
-<%if (eContainer() == null) {%><%getProperty("alf.share.paths.web-ext")%>web-framework-config-custom.xml<%}%>
-<%script type="Portal" name="alfrescoGenerator" file="<%getCustomWebFwkConfigOutputFile%>"%>
-<alfresco-config>
-
-   <!--plug-ins>
-      <evaluators>
-           <evaluator id="node-type" class="org.alfresco.web.config.NodeTypeEvaluator" />
-           <evaluator id="aspect-name" class="org.alfresco.web.config.AspectEvaluator" />
-      </evaluators>
-   </plug-ins-->
-
+<%script type="Portal" name="buildForms"%>
 <%for (portletSet){%>
-<%if (name.toLowerCase() == "documentdetails" && isPortletInternal != null && isPortletInternal.view != null) {%>
+<%if (name.toLowerCase().trim() == "documentdetails" && isPortletInternal != null && isPortletInternal.view != null) {%>
 <%for (isPortletInternal.view.getInnerView()){%>
 <!-- START BlueXML custom form configuration for the <%filter("view.AbstractViewOf").viewOf.filter("clazz.Clazz").getContentType()%> content type -->   
    <config evaluator="node-type" condition="<%filter("view.AbstractViewOf").viewOf.filter("clazz.Clazz").getContentType()%>">
@@ -47,7 +32,6 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 <%}%>
 <%}%>
 <%}%>
-</alfresco-config>
 
 <%-- These default values are taken from web-framework-config-commons.xml --%>
 <%script type="EObject" name="getDefaultAlfrescoContentFormConfiguration"%>

@@ -54,6 +54,16 @@
                            versionMin="1.0.0">
                      </moduleDependence>
                   </option>
+                  <option
+                        key="com.bluexml.side.Portal.generator.alfresco.facetmap"
+                        label="facetMap integration">
+                  </option>
+                  <mustBeChecked
+                        pluginId="com.bluexml.side.Class.generator.alfresco">
+                     <optionRef
+                           optionId="alfresco.share.extension">
+                     </optionRef>
+                  </mustBeChecked>
                </generatorVersion>
             </technologyVersion>
          </technology>

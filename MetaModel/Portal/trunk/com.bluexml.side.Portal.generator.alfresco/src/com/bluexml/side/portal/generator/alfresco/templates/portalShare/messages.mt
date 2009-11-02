@@ -255,7 +255,7 @@ yuieditor.toolbar.item.link=HTML Link CTRL + SHIFT + L
 <%if (current().startsWith("view.FacetMap")){%>
 ## BlueXML SIDE <%nGet("title_name")%> Custom page keys
 page.<%nGet("messages_name")%>.title=<%nGet("title_name")%>
-page.<%nGet("messages_name")%>.description=<%nGet("description_name")%>
+page.<%nGet("messages_name")%>.description=<%if (nGet("description_name") !=null){%><%nGet("description_name")%><%}else{%><%}%>
 <%}%>
 <%}%>
 <%}%>
