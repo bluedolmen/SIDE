@@ -4,6 +4,7 @@
 package com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.action;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.alfresco.repo.workflow.jbpm.JBPMSpringActionHandler;
 import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.cmr.model.FileExistsException;
 import org.alfresco.service.cmr.model.FileNotFoundException;
+import org.alfresco.service.cmr.repository.InvalidNodeRefException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dom4j.Element;
@@ -24,7 +26,9 @@ import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.Empty
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.EmptyScriptException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidAssociationException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidContentException;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidFormatParameterException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidValueOfParameterException;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingDateFormatException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingInputPdfKeyException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingOutputContentException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingOutputPathForPDFException;
@@ -145,6 +149,15 @@ public class PdfActionHandler extends JBPMSpringActionHandler {
 		  catch (FileNotFoundException e) {
 				logger.error("Error :", e);
 		}
+		  catch (MissingDateFormatException e) {
+				logger.error("Error :", e);
+		}
+		  catch (ParseException e) {
+				logger.error("Error :", e);
+		}
+		  catch (InvalidFormatParameterException e) {
+				logger.error("Error :", e);
+		}
 	}
 
 	private void executeActionScript(String actionValue, Map<String, String> commands) throws ValueActionException, DuplicateInputPdfException, 
@@ -155,7 +168,8 @@ public class PdfActionHandler extends JBPMSpringActionHandler {
 																							  InvalidAssociationException, OutputTypeKeyException, 
 																							  InvalidContentException, MissingOutputPathForPDFException, 
 																							  DocumentException, MissingOverridePdfKeyException, 
-																							  FileExistsException, FileNotFoundException {
+																							  FileExistsException, FileNotFoundException, MissingDateFormatException,
+																							  InvalidNodeRefException, ParseException, InvalidFormatParameterException {
 		if (actionValue.equals(ConstantsLanguage.ACTION_VALUES[0])){
 			fillContent.execute(commands);
 		}
