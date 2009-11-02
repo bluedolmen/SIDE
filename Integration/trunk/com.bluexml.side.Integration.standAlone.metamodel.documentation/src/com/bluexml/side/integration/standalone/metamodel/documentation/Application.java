@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspace;
@@ -67,7 +68,9 @@ public class Application implements IApplication {
 		HashMap<String, String> configurationParameters_ = getConfigurationParameter(targetPath, TECH_NAME);
 		String fileName = "gen_" + gen.getClass().getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
 		NullComponentMonitor generationMonitor = new NullComponentMonitor(null, null, fileName);
-		gen.initialize(null, null, configurationParameters_, null, generationMonitor);
+		Map<String, String> generationParameters_ = new HashMap<String, String>();
+		Map<String, Boolean> generatorOptions_ = new HashMap<String, Boolean>();
+		gen.initialize(generationParameters_, generatorOptions_, configurationParameters_, null, generationMonitor);
 
 		System.out.println(gen.getClass().getName() + " Initalized.");
 
