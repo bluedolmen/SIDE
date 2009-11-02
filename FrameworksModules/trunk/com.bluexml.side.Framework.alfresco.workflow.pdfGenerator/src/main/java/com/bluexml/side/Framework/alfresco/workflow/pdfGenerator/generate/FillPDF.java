@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.alfresco.service.ServiceRegistry;
+import org.alfresco.service.cmr.model.FileExistsException;
+import org.alfresco.service.cmr.model.FileNotFoundException;
 import org.alfresco.service.cmr.repository.NodeRef;
 
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.AttributeContentException;
@@ -15,13 +17,17 @@ import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.Inval
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidValueOfParameterException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingInputPdfKeyException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingOutputContentException;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingOutputPathForPDFException;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingOverridePdfKeyException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.NoPdfFileException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.generate.extract.ExtractDataFromContent;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.generate.fill.FillDataPDF;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.language.ConstantsLanguage;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.language.LanguageMethods;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.structure.AlfrescoStructure;
+import com.lowagie.text.DocumentException;
 import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfStamper;
 
 public class FillPDF {
 	
@@ -35,12 +41,15 @@ public class FillPDF {
 	                                                         IOException, NoPdfFileException, DuplicateOutputContentException, 
 	                                                         MissingOutputContentException, InvalidValueOfParameterException, 
 	                                                         AttributeContentException, InvalidAssociationException, 
-	                                                         InvalidContentException {
+	                                                         InvalidContentException, MissingOutputPathForPDFException, 
+	                                                         DocumentException, MissingOverridePdfKeyException, 
+	                                                         FileExistsException, FileNotFoundException {
 		PdfReader reader = AlfrescoStructure.openAlfrescoPdf(commands);
+		PdfStamper stamper = AlfrescoStructure.manageAlfrescoPDF(reader,commands);
 		NodeRef content = AlfrescoStructure.getContent(commands,ConstantsLanguage.INPUT_CONTENT_KEYS);
 		HashMap<String,String> exportCommands = LanguageMethods.getScriptCommands(commands);
 		HashMap<String,Object> data = ExtractDataFromContent.extractData(content,serviceRegistry,exportCommands);
-		FillDataPDF.fillPDF(serviceRegistry,reader,exportCommands,data);
+		FillDataPDF.fillPDF(stamper,exportCommands,data);
 	}
 
 }
