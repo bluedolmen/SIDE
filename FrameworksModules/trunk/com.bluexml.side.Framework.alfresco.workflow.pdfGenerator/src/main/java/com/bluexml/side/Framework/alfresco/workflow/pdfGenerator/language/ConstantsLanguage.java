@@ -29,6 +29,8 @@ public class ConstantsLanguage {
 	public static final String CONSTANT_INDICATOR = "'";	
 	public static final String DATE_VALUE_INDICATOR = "/";
 	public static final String[] BOOLEAN_VALUES = {"Yes","No"};
-	public static final String OUTPUT_TYPE_SEPARATOR = " : ";
-
+	public static final String OUTPUT_TYPE_SEPARATOR = ":";
+	public static final String FORMAT_DATE_INDICATOR = "format";
+	public static final String PARAMETER_SEPARATOR  = "\\.";
+	
 }
