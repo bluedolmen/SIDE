@@ -163,6 +163,8 @@ public class ApplicationStarter implements IApplication {
 		System.out.println("getWorkspace: " + ResourcesPlugin.getWorkspace());
 		System.out.println("getRoot: " + ResourcesPlugin.getWorkspace().getRoot().exists() + " -> " + ResourcesPlugin.getWorkspace().getRoot());
 		System.out.println("getPath: " + ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(filePath.getAbsolutePath())));
+		if (file == null) file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(filePath.getAbsolutePath()));
+		if (file == null) System.out.println("\tfile is null ");
 
 		System.out.println("\tfile.exists(): " + file.exists());
 
