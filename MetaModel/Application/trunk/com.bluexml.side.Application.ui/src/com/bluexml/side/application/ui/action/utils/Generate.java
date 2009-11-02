@@ -671,7 +671,10 @@ public class Generate extends Thread {
 		e.printStackTrace();		
 		// must be the last action because this cause a break in
 		// the execution stack
-		Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString(key), e));
+		//if (Activator.getDefault() != null && Activator.getDefault().getLog() !=null) {
+			Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, Activator.Messages.getString(key), e));
+		//}
+		
 	}
 	
 	private void saveSideReportAndFeedBack() {
