@@ -4,8 +4,8 @@
 package com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.generate;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,16 +15,15 @@ import org.alfresco.model.ContentModel;
 import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
 import org.alfresco.service.cmr.repository.ChildAssociationRef;
+import org.alfresco.service.cmr.repository.InvalidNodeRefException;
 import org.alfresco.service.cmr.repository.NodeRef;
-import org.alfresco.service.cmr.repository.StoreRef;
-import org.alfresco.service.cmr.search.ResultSet;
-import org.alfresco.service.cmr.search.SearchService;
 import org.alfresco.service.namespace.QName;
 
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.AttributeContentException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.DuplicateInputPdfException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.DuplicateOutputContentException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidAssociationException;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidFormatParameterException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidValueOfParameterException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingInputPdfKeyException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingOutputContentException;
@@ -54,7 +53,8 @@ public class FillContent {
 	                                                         IOException, NoPdfFileException, DuplicateOutputContentException, 
 	                                                         MissingOutputContentException, NoContentException, 
 	                                                         InvalidValueOfParameterException, AttributeContentException, 
-	                                                         InvalidAssociationException, OutputTypeKeyException {
+	                                                         InvalidAssociationException, OutputTypeKeyException, InvalidNodeRefException, 
+	                                                         ParseException, InvalidFormatParameterException {
 		PdfReader reader = AlfrescoStructure.openAlfrescoPdf(commands);
 		HashMap<String,String> data = ExtractDataFromPDF.extractData(reader);
 		NodeRef content = AlfrescoStructure.getContent(commands,ConstantsLanguage.OUTPUT_CONTENT_KEYS);

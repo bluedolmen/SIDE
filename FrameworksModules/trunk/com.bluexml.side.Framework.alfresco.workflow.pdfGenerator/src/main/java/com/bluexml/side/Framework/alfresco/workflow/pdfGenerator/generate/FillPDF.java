@@ -15,6 +15,7 @@ import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.Dupli
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidAssociationException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidContentException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidValueOfParameterException;
+import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingDateFormatException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingInputPdfKeyException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingOutputContentException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.MissingOutputPathForPDFException;
@@ -43,7 +44,7 @@ public class FillPDF {
 	                                                         AttributeContentException, InvalidAssociationException, 
 	                                                         InvalidContentException, MissingOutputPathForPDFException, 
 	                                                         DocumentException, MissingOverridePdfKeyException, 
-	                                                         FileExistsException, FileNotFoundException {
+	                                                         FileExistsException, FileNotFoundException, MissingDateFormatException {
 		PdfReader reader = AlfrescoStructure.openAlfrescoPdf(commands);
 		PdfStamper stamper = AlfrescoStructure.manageAlfrescoPDF(reader,commands);
 		NodeRef content = AlfrescoStructure.getContent(commands,ConstantsLanguage.INPUT_CONTENT_KEYS);
