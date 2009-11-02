@@ -17,15 +17,15 @@ import com.bluexml.side.util.libs.zip.TrueZipHelper;
 public abstract class WarDeployer extends Deployer {
 	public static String CONFIGURATION_PARAMETER_CATALINA_HOME = "CATALINA_HOME"; //$NON-NLS-1$
 
-	static final String webapps = "webapps"; //$NON-NLS-1$
+	protected static final String webapps = "webapps"; //$NON-NLS-1$
 	protected String webappName = null;
 	protected String webappDefaultName = null;
 	protected String webappKeyName = null;
 	protected static String warToPatchExt = "war"; //$NON-NLS-1$
 	protected static String backupWarExt = "war.org"; //$NON-NLS-1$
-	File backupWarFile = null;
-	File warToPatchFile = null;
-	File deployedWebbAppFolder = null;
+	protected File backupWarFile = null;
+	protected File warToPatchFile = null;
+	protected File deployedWebbAppFolder = null;
 
 	/**
 	 * 
