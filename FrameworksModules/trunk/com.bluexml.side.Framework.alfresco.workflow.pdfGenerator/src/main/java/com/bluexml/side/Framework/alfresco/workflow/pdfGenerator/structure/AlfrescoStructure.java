@@ -3,11 +3,13 @@
  */
 package com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.structure;
 
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.util.Date;
 import java.util.Map;
 
 import org.alfresco.service.ServiceRegistry;
