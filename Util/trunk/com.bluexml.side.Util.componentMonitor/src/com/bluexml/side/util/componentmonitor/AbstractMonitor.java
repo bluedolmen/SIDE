@@ -7,9 +7,7 @@ import java.util.Date;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
 
 import com.bluexml.side.util.componentmonitor.headLessinterface.LabelInterface;
 import com.bluexml.side.util.componentmonitor.headLessinterface.ProgressBarInterface;
