@@ -10,6 +10,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
@@ -101,9 +102,14 @@ public class Application implements IApplication {
 		while (c < metaModelFileList.length) {
 			File file = metaModelFileList[c];
 			System.out.println("file: " + file.getAbsolutePath());
-			IFile model = getMetaModelIFile(file, workspaceRoot);
+			IPath location = Path.fromOSString(file.getAbsolutePath());
+			System.out.println("location: " + location);
+			//IFile model = getMetaModelIFile(file, workspaceRoot);
+			IFile model = workspaceRoot.getFileForLocation(location);
+			if (model == null) model = workspaceRoot.getFile(new Path(file.getAbsolutePath()));
 			System.out.println("model: " + model);
 			String modelName = model.getName();
+
 			// EXCEPTION
 			if (!(model.exists() && model.isAccessible())) {
 				throw new Exception("Requested meta model file [" + modelName + "] is not accesible. \n" + "This may happen when the metamodel directory path refers to a directory outside of any eclipse project");
