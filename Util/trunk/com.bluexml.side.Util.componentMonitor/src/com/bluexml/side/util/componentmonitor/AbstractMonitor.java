@@ -71,11 +71,7 @@ public abstract class AbstractMonitor implements IProgressMonitor {
 		}
 		text = lineSeparator + text;
 		StyleRange style2 = new StyleRange();
-		if (styletext.getText() != null) {
-		   style2.start = styletext.getText().length();
-		} else {
-		   style2.start = 0;
-		}
+		style2.start = styletext.getText().length();
 		style2.length = text.length();
 		style2.foreground = Display.getDefault().getSystemColor(color);
 
