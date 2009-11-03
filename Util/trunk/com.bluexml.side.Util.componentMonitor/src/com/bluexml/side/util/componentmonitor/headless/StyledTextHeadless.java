@@ -6,7 +6,7 @@ import com.bluexml.side.util.componentmonitor.headLessinterface.StyledTextInterf
 
 public class StyledTextHeadless implements StyledTextInterface {
 	static String linesep = "\n";
-	String text;
+	String text="";
 	int lignCount;
 	int currentTopIndex;
 
