@@ -46,7 +46,7 @@ import com.bluexml.side.form.FormContainer;
 import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.impl.FormFactoryImpl;
-import com.bluexml.side.util.componentmonitor.ComponentMonitor;
+import com.bluexml.side.util.componentmonitor.indy.CoreInterface;
 import com.bluexml.side.workflow.impl.WorkflowFactoryImpl;
 import com.bluexml.side.workflow.WorkflowPackage;
 import com.bluexml.xforms.generator.DataGenerator.AssociationCardinality;
@@ -373,8 +373,10 @@ public class FormGenerator {
 	 * @param generators
 	 *            the generators
 	 */
-	public void generate(List<DataGenerator> generators, ComponentMonitor monitor) {
-		monitor.setTaskName("Collecting data");
+	public void generate(List<DataGenerator> generators, CoreInterface monitor) {
+		if (monitor != null) {
+			monitor.setTaskName("Collecting data");
+		}
 		alfrescoNameStereotype = commonFactory.createStereotype();
 		alfrescoNameStereotype.setName(ALFRESCO_NAME_ASSOCIATION);
 
@@ -407,7 +409,9 @@ public class FormGenerator {
 			processGenerator();
 		}
 		logger.info("End of generation.");
-		monitor.addText("Xforms Generation completed successfully");
+		if (monitor != null) {
+			monitor.addText("Xforms Generation completed successfully");
+		}
 	}
 
 	/**

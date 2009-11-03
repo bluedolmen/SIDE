@@ -275,7 +275,9 @@ public class MappingGenerator extends AbstractDataGenerator {
 	public void beginGeneration() {
 		mapping = new Mapping();
 		genLogger.info("MappingGenerator: Generating required resources");
-		monitor.setTaskName("Generation of resources.");
+		if (monitor != null) {
+			monitor.setTaskName("Generation of resources.");
+		}
 	}
 
 	/*

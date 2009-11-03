@@ -8,7 +8,7 @@ import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.form.FormContainer;
-import com.bluexml.side.util.componentmonitor.ComponentMonitor;
+import com.bluexml.side.util.componentmonitor.indy.CoreInterface;
 
 /**
  * The Interface DataGenerator.
@@ -425,6 +425,6 @@ public interface DataGenerator {
 
 	void setLogger(Log genLogger);
 	
-	void setMonitor(ComponentMonitor monitor);
+	void setMonitor(CoreInterface monitor);
 
 }

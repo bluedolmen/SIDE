@@ -426,7 +426,9 @@ public class XFormsGenerator extends AbstractDataGenerator {
 	 */
 	public void beginGeneration() {
 		genLogger.info("XFormGenerator: Generating XHTML templates.");
-		monitor.setTaskName("Generation of XHTML templates.");
+		if (monitor != null) {
+			monitor.setTaskName("Generation of XHTML templates.");
+		}
 	}
 
 	/*
@@ -519,16 +521,16 @@ public class XFormsGenerator extends AbstractDataGenerator {
 				String formName = ModelTools.getCompleteName(classe);
 				String title = ModelTools.getTitle(classe);
 				if (!classe.isAbstract()) {
-					render(outputXForms, classeBean, formName, title,
-							FormTypeRendered.formClass, false, false);
+					render(outputXForms, classeBean, formName, title, FormTypeRendered.formClass,
+							false, false);
 
 					render(outputXForms, new RenderableClassList(classe), formName, title,
 							FormTypeRendered.formClassList, false, false);
 				}
 				if (classeBean.hasSubClasses()) {
 					render(outputXForms, new RenderableClassSelector(classeBean.getSubClasses()),
-							formName, title, FormTypeRendered.formClassSubClassSelector,
-							false, false);
+							formName, title, FormTypeRendered.formClassSubClassSelector, false,
+							false);
 				}
 			}
 
@@ -540,10 +542,13 @@ public class XFormsGenerator extends AbstractDataGenerator {
 			FormContainer form = formEntry.getKey();
 			boolean isAWorkflowForm = form instanceof FormWorkflow;
 			atLeastOneWorfklowForm = atLeastOneWorfklowForm || isAWorkflowForm;
-			String logText = " Rendering " + (form instanceof FormClass ? "FormClass" : "FormWorkflow") + ": "
+			String logText = " Rendering "
+					+ (form instanceof FormClass ? "FormClass" : "FormWorkflow") + ": "
 					+ form.getId();
 			genLogger.info(logText);
-			monitor.addText(logText);
+			if (monitor != null) {
+				monitor.addText(logText);
+			}
 			RenderableFormContainer value = formEntry.getValue();
 
 			render(outputXForms, form, value, isAWorkflowForm);
@@ -610,9 +615,8 @@ public class XFormsGenerator extends AbstractDataGenerator {
 
 		// RenderableXForm rform = new RenderableXForm(rglobalGroup,
 		// MsgId.MSG_WKFLW_SEL_PAGE_TITLE.getText(), actions, true);
-		render(outputXForms, rglobalGroup, MsgId.INT_WKFLW_SEL_FORM_FILENAME.getText(), 
-				MsgPool.getMsg(MsgId.MSG_WKFLW_SEL_PAGE_TITLE), FormTypeRendered.formWkflwSel,
-				false, true);
+		render(outputXForms, rglobalGroup, MsgId.INT_WKFLW_SEL_FORM_FILENAME.getText(), MsgPool
+				.getMsg(MsgId.MSG_WKFLW_SEL_PAGE_TITLE), FormTypeRendered.formWkflwSel, false, true);
 	}
 
 	/**

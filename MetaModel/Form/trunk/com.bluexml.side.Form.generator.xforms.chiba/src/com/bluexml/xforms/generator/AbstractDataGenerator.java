@@ -2,7 +2,7 @@ package com.bluexml.xforms.generator;
 
 import org.apache.commons.logging.Log;
 
-import com.bluexml.side.util.componentmonitor.ComponentMonitor;
+import com.bluexml.side.util.componentmonitor.indy.CoreInterface;
 
 /**
  * The Class AbstractDataGenerator.
@@ -12,7 +12,7 @@ public abstract class AbstractDataGenerator implements DataGenerator {
 	/** The form generator. */
 	protected FormGenerator formGenerator;
 	protected Log genLogger;
-	protected ComponentMonitor monitor;
+	protected CoreInterface monitor;
 
 	/*
 	 * (non-Javadoc)
@@ -38,7 +38,7 @@ public abstract class AbstractDataGenerator implements DataGenerator {
 		this.genLogger = genLogger;
 	}
 	
-	public void setMonitor(ComponentMonitor monitor) {
+	public void setMonitor(CoreInterface monitor) {
 		this.monitor = monitor;
 	}
 	
