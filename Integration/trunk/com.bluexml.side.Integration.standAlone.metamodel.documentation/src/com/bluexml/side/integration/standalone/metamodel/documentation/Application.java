@@ -109,11 +109,12 @@ public class Application implements IApplication {
 			if (model == null) model = workspaceRoot.getFile(new Path(file.getAbsolutePath()));
 			System.out.println("model: " + model);
 			String modelName = model.getName();
+			System.out.println("modelName: " + modelName);
 
 			// EXCEPTION
-			if (!(model.exists() && model.isAccessible())) {
-				throw new Exception("Requested meta model file [" + modelName + "] is not accesible. \n" + "This may happen when the metamodel directory path refers to a directory outside of any eclipse project");
-			} else {
+//			if (!(model.exists() && model.isAccessible())) {
+//				throw new Exception("Requested meta model file [" + modelName + "] is not accesible. \n" + "This may happen when the metamodel directory path refers to a directory outside of any eclipse project");
+//			} else {
 				System.out.println("| generating : " + modelName);
 				gen.generate(model);
 				System.out.print(" -> completing : " + modelName);
@@ -121,7 +122,7 @@ public class Application implements IApplication {
 				System.out.print(" --> deploying  : " + modelName);
 				deployer.deploy();
 				System.out.println(" ---> deployed  !");
-			}
+//			}
 			c++;
 		}
 		System.out.println("------------");
