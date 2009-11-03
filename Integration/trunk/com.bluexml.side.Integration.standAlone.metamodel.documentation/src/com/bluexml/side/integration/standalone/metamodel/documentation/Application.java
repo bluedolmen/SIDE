@@ -75,7 +75,7 @@ public class Application implements IApplication {
 		System.out.println(gen.getClass().getName() + " Initalized.");
 
 		final DocumentationDeployer deployer = new DocumentationDeployer();
-		deployer.initialize(configurationParameters_, generationParameters_, generatorOptions_, generationMonitor);
+		deployer.initialize(configurationParameters_, generationParameters_, null, generationMonitor);
 		System.out.println(deployer.getClass().getName() + " Initalized.");
 
 		File dir = new File(metaModelDirPath);
