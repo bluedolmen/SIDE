@@ -94,11 +94,15 @@ public class Application implements IApplication {
 
 		final IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		final IWorkspaceRoot workspaceRoot = workspace.getRoot();
+		System.out.println("getWorkspace: " + workspace);
+		System.out.println("getRoot: " + workspaceRoot);
 
 		int c = 0;
 		while (c < metaModelFileList.length) {
 			File file = metaModelFileList[c];
+			System.out.println("file: " + file.getAbsolutePath());
 			IFile model = getMetaModelIFile(file, workspaceRoot);
+			System.out.println("model: " + model);
 			String modelName = model.getName();
 			// EXCEPTION
 			if (!(model.exists() && model.isAccessible())) {
