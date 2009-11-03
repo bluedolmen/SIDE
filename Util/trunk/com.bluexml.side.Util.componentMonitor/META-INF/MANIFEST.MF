@@ -21,5 +21,6 @@ Export-Package: com.bluexml.side.util.componentmonitor;
    org.eclipse.swt.widgets",
  com.bluexml.side.util.componentmonitor.guiAdapter,
  com.bluexml.side.util.componentmonitor.headLessinterface,
- com.bluexml.side.util.componentmonitor.headless
+ com.bluexml.side.util.componentmonitor.headless,
+ com.bluexml.side.util.componentmonitor.indy
 Bundle-ActivationPolicy: lazy
