@@ -5,10 +5,11 @@ import java.util.Map;
 import com.bluexml.side.util.componentmonitor.headLessinterface.LabelInterface;
 import com.bluexml.side.util.componentmonitor.headLessinterface.ProgressBarInterface;
 import com.bluexml.side.util.componentmonitor.headLessinterface.StyledTextInterface;
+import com.bluexml.side.util.componentmonitor.indy.CoreInterface;
 import com.bluexml.side.util.documentation.LogHelper;
 import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 
-public class ComponentMonitor extends AbstractMonitor {
+public class ComponentMonitor extends AbstractMonitor implements CoreInterface {
 	private LogHelper log;
 
 	public ComponentMonitor(StyledTextInterface styletext, ProgressBarInterface progressBar, int totalWork, LabelInterface progressBarlabel, AbstractMonitor parent, final Map<String, String> configurationParameters, LogType logType,LogHelper consoleLog,String logFileName) {
