@@ -14,6 +14,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.form.FormPackage;
@@ -21,14 +25,13 @@ import com.bluexml.side.util.componentmonitor.ComponentMonitor;
 import com.bluexml.side.util.dependencies.DependencesManager;
 import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.generator.packager.WarPatchPackager;
-import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.security.SecurityHelper;
 import com.bluexml.side.util.security.preferences.SidePreferences;
-import com.bluexml.xforms.messages.DefaultMessages;
-import com.bluexml.xforms.messages.MsgPool;
 import com.bluexml.xforms.generator.DataGenerator;
 import com.bluexml.xforms.generator.forms.XFormsGenerator;
 import com.bluexml.xforms.generator.mapping.MappingGenerator;
+import com.bluexml.xforms.messages.DefaultMessages;
+import com.bluexml.xforms.messages.MsgPool;
 
 public class FormGenerator extends AbstractGenerator {
 	private static final String GENERATOR_CODE = "CODE_GED_G_F_CHIBA";
@@ -154,13 +157,25 @@ public class FormGenerator extends AbstractGenerator {
 	public Collection<IFile> complete() throws Exception {
 		// must build package
 		// build archive from tmp folder
-		WarPatchPackager wpp = new WarPatchPackager(IFileHelper.getIFolder(getTemporaryFolder()),
+		WarPatchPackager wpp = new WarPatchPackager(getIFolder(getTemporaryFolder()),
 				buildModuleProperties(defaultModelID), techVersion, webappName);
 
 		IFile chibaPackage = wpp.buildPackage();
 		ArrayList<IFile> result = new ArrayList<IFile>();
 		result.add(chibaPackage);
 		return result;
+	}
+	
+	/**
+	 * Return the IFolder with the with the given project relative path.
+	 *
+	 * @param path
+	 * @return
+	 */
+	public static IFolder getIFolder(String path) {
+		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+		IFolder folder = myWorkspaceRoot.getFolder(new Path(path));
+		return folder;
 	}
 
 	public Collection<IFile> generate(Map<String, List<IFile>> modelsInfo, String id_mm)
