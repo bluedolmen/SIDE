@@ -77,7 +77,7 @@ public interface CommonFactory extends EFactory {
 	 * @return a new object of class '<em>Package</em>'.
 	 * @generated
 	 */
-	com.bluexml.side.common.Package createPackage();
+	Package createPackage();
 
 	/**
 	 * Returns a new object of class '<em>Operation</em>'.

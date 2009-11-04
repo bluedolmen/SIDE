@@ -370,7 +370,7 @@ public class OperationImpl extends OperationComponentImpl implements Operation {
 			case CommonPackage.OPERATION__VISIBILITY:
 				return getVisibility();
 			case CommonPackage.OPERATION__STATIC:
-				return isStatic() ? Boolean.TRUE : Boolean.FALSE;
+				return isStatic();
 			case CommonPackage.OPERATION__BODY:
 				return getBody();
 		}
@@ -397,7 +397,7 @@ public class OperationImpl extends OperationComponentImpl implements Operation {
 				setVisibility((Visibility)newValue);
 				return;
 			case CommonPackage.OPERATION__STATIC:
-				setStatic(((Boolean)newValue).booleanValue());
+				setStatic((Boolean)newValue);
 				return;
 			case CommonPackage.OPERATION__BODY:
 				setBody((String)newValue);
