@@ -1,0 +1,12 @@
+parameter.action=EXPORT_FILLED_PDF;
+parameter.pdf.path=/app:company_home/cm:pdf/cm:fillable_pdf.pdf;
+parameter.input.uuid=workspace://SpacesStore/896ec728-0f4b-49fe-8cae-13d8bfecc1e5;
+field.person_name=name;
+field.person2_name=associationname->name;
+field.person_phone=phonenumber;
+field.address_address1=address->address1;
+field.address_address2=address->address2;
+field.address_city=address->city->cityname;
+field.address_zipCode=address->city->zip;
+parameter.output.path=/app:company_home/cm:pdf/cm:filled_pdf.pdf;
+parameter.output.force=true;

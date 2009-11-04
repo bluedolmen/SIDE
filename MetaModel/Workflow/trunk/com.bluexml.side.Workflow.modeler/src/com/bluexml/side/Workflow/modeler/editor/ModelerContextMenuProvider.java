@@ -78,6 +78,7 @@ public class ModelerContextMenuProvider extends ContextMenuProvider {
 			String name = configurationElement.getAttribute("name");
 			String code = configurationElement.getAttribute("code");
 			String icon = configurationElement.getAttribute("icon");
+			String javaClass = configurationElement.getAttribute("javaClass");
 			String technology = configurationElement.getAttribute("technology");
 			
 			String codeValue = "";
@@ -102,7 +103,7 @@ public class ModelerContextMenuProvider extends ContextMenuProvider {
 				iconDescriptor = ImageDescriptor.createFromURL(url);
 			}
 			
-			AddAction action = new AddAction(editor, name, codeValue, iconDescriptor);
+			AddAction action = new AddAction(editor, name, codeValue, iconDescriptor, javaClass);
 			actionRegistry.registerAction(action);
 			if (!actions.containsKey(technology))
 				actions.put(technology, new HashSet<IAction>());

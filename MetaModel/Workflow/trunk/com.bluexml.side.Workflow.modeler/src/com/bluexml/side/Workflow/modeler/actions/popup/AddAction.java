@@ -37,14 +37,16 @@ public class AddAction extends WorkbenchPartAction {
 	private EObject selectedObject;
 	private String name;
 	private String code;
+	private String javaClass;
 	private ImageDescriptor icon;
 
 	public AddAction(IWorkbenchPart part, String _name, String _code,
-			ImageDescriptor _icon) {
+			ImageDescriptor _icon, String _javaClass) {
 		super(part);
 		name = _name;
 		code = _code;
 		icon = _icon;
+		javaClass = _javaClass;
 
 		setText(name); //$NON-NLS-1$
 		setImageDescriptor(icon); //$NON-NLS-1$
@@ -63,7 +65,10 @@ public class AddAction extends WorkbenchPartAction {
 	@Override
 	public void run() {
 		Action a = WorkflowFactory.eINSTANCE.createAction();
-		a.setJavaClass("org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript");
+		if (javaClass == null || javaClass.trim().length() == 0)
+			a.setJavaClass("org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript");
+		else
+			a.setJavaClass(javaClass);
 		Script s = WorkflowFactory.eINSTANCE.createScript();
 		s.setExpression(code);
 		a.getScript().add(s);

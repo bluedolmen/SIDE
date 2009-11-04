@@ -53,7 +53,7 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 
 	public static final String ACTION_VARIABLE = "action variables";
 
-	private static final int MIN_DIALOG_WIDTH = 400;
+	private static final int MIN_DIALOG_WIDTH = 600;
 
 	private static final int MIN_DIALOG_HEIGHT = 300;
 

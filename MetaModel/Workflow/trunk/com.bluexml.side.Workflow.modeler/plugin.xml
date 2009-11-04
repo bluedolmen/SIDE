@@ -135,6 +135,22 @@
           name="Create new content"
           technology="Alfresco">
     </action>
+    <action
+          code="resources/actions/alfresco/pdf/importPDF.js"
+          icon="icons/file_acrobat.gif"
+          javaClass="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.action.PdfActionHandler"
+          java_class="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.action.PdfActionHandler"
+          name="Import PDF"
+          technology="Alfresco">
+    </action>
+    <action
+          code="resources/actions/alfresco/pdf/exportPDF.js"
+          icon="icons/file_acrobat.gif"
+          javaClass="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.action.PdfActionHandler"
+          java_class="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.action.PdfActionHandler"
+          name="Export PDF"
+          technology="Alfresco">
+    </action>
  </extension>
 	
 </plugin>
