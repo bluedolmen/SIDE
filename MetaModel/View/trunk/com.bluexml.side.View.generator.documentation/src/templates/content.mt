@@ -170,8 +170,10 @@ import templates.content_chapter
 	  <text:a xlink:type="simple" xlink:href="#2.<%name%> Fields|outline" text:style-name="Internet_20_link" text:visited-style-name="Internet_20_link">1</text:a>
 	 </text:p>
 		<%if (getInnerView().length > 0){%>
+			<%for (getInnerView()){%>
      <text:p text:style-name="P6">
 	  <text:a xlink:type="simple" xlink:href="#2.<%name%> inner view|outline" text:style-name="Internet_20_link" text:visited-style-name="Internet_20_link"><%name%> inner view<text:tab/></text:a>
 	  <text:a xlink:type="simple" xlink:href="#2.<%name%> inner view|outline" text:style-name="Internet_20_link" text:visited-style-name="Internet_20_link">1</text:a>
 	 </text:p>
+	 		<%}%>
 		<%}%>
