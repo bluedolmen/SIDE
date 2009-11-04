@@ -4,16 +4,19 @@
 package com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.generate.extract;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript;
 import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.namespace.QName;
+import org.jbpm.graph.exe.ExecutionContext;
 
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.AttributeContentException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.InvalidAssociationException;
@@ -27,7 +30,7 @@ import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.language.Consta
  */
 public class ExtractDataFromContent {
 
-	public static HashMap<String, Object> extractData(NodeRef content, ServiceRegistry services, HashMap<String,String> commands) throws InvalidValueOfParameterException, 
+	public static HashMap<String, Object> extractData(NodeRef content, ServiceRegistry services, HashMap<String,String> commands, ExecutionContext executionContext) throws InvalidValueOfParameterException, 
 	                                                                                                                                     AttributeContentException, 
 	                                                                                                                                     InvalidAssociationException, 
 	                                                                                                                                     InvalidContentException {
@@ -43,8 +46,10 @@ public class ExtractDataFromContent {
 				String[] navigation = commands.get(keyCommand).split(ConstantsLanguage.NAVIGATION_INDICATOR);
 				QName qnameType = services.getNodeService().getType(content);
 				finalTarget = followAssociations(services,content,qnameType,navigation,0);
-				Object value = extractValueFromContent(services,finalTarget,navigation[navigation.length-1]);
-				data.put(keyCommand, value);
+				if (finalTarget != null) {
+					Object value = extractValueFromContent(services,finalTarget,navigation[navigation.length-1]);
+					data.put(keyCommand, value);
+				}
 			}
 			else if (!commands.get(keyCommand).contains(ConstantsLanguage.CONSTANT_INDICATOR) 
 					 && !commands.get(keyCommand).contains(ConstantsLanguage.NAVIGATION_INDICATOR)){
@@ -52,7 +57,16 @@ public class ExtractDataFromContent {
 				data.put(keyCommand, value);
 			}
 			else {
-				throw new InvalidValueOfParameterException(InvalidValueOfParameterException.BAD_FORMAT);
+				Object result = null;
+				try {
+					//We try to evaluate as alfresco javascript expression
+					result = AlfrescoJavaScript.executeScript(executionContext, services,commands.get(keyCommand), Collections.EMPTY_LIST);
+				} catch (Exception e) {
+				}
+				if (result == null)
+					throw new InvalidValueOfParameterException(InvalidValueOfParameterException.BAD_FORMAT);
+				else
+					data.put(keyCommand, result.toString());
 			}
 		}
 		return data;
@@ -64,7 +78,7 @@ public class ExtractDataFromContent {
 		Set<QName> propertiesNames = properties.keySet();
 		boolean attributeExists = false;
 		for (QName propertyName : propertiesNames) {
-			if (propertyName.toString().contains(attribute)){
+			if (propertyName.getLocalName().endsWith(attribute)){
 				attributeExists = true;
 				data = (Object) properties.get(propertyName);
 			}

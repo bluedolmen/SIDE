@@ -44,13 +44,18 @@ public class FillDataPDF {
 		else if (object instanceof Date){
 			String format = getFormat(commandKey,object,commands);
 			if (format == null){
-				throw new MissingDateFormatException(MissingDateFormatException.DOES_NOT_EXISTS);
+				//throw new MissingDateFormatException(MissingDateFormatException.DOES_NOT_EXISTS);
+				//Default format
+				format = "EEE, d MMM yyyy HH:mm:ss";
 			}
 			SimpleDateFormat simpleFormat = new SimpleDateFormat(format);
 			value = simpleFormat.format(object);
 		}
 		else{
-			value = object.toString();
+			if (object == null)
+				value = "";
+			else
+				value = object.toString();
 		}
 		return value;
 	}

@@ -5,9 +5,12 @@ package com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.action;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript;
+import org.alfresco.repo.workflow.jbpm.JBPMNode;
 import org.alfresco.repo.workflow.jbpm.JBPMSpringActionHandler;
 import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.cmr.model.FileExistsException;
@@ -81,6 +84,7 @@ public class PdfActionHandler extends JBPMSpringActionHandler {
 	}
 
 	public void execute(ExecutionContext executionContext) {
+		fillPdf.setExecutionContext(executionContext);
 		Map<String, String> commands = null;
 		try {
 			commands = getScriptAsKeysValues();
@@ -202,13 +206,17 @@ public class PdfActionHandler extends JBPMSpringActionHandler {
 		else{
 			throw new EmptyScriptException(EmptyScriptException.EMPTY_SCRIPT);
 		}
+		
+		//Delete comments
+		expression = expression.replaceAll("/\\*[^(*/)]*\\*/", "");
+		
 		String[] expressions = expression.split(ConstantsLanguage.COMMANDS_SEPARATOR_SPACE);
 		for (int index = 0; index < expressions.length; index++) {
 			String[] keyValue = expressions[index].split(ConstantsLanguage.KEY_VALUE_SEPARATOR);
 			if (index == expressions.length-1){
 				keyValue[1] = keyValue[1].split(ConstantsLanguage.COMMANDS_SEPARATOR)[0];
 			}
-			commands.put(keyValue[0], keyValue[1]);
+			commands.put(keyValue[0].trim(), keyValue[1].trim());
 		}
 		return commands;
 	}

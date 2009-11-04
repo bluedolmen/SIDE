@@ -8,6 +8,7 @@ import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.cmr.model.FileExistsException;
 import org.alfresco.service.cmr.model.FileNotFoundException;
 import org.alfresco.service.cmr.repository.NodeRef;
+import org.jbpm.graph.exe.ExecutionContext;
 
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.AttributeContentException;
 import com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.exception.DuplicateInputPdfException;
@@ -33,9 +34,14 @@ import com.lowagie.text.pdf.PdfStamper;
 public class FillPDF {
 	
 	private ServiceRegistry serviceRegistry;
+	private ExecutionContext executionContext;
 	
 	public void setServiceRegistry(ServiceRegistry serviceRegistry) {
 		this.serviceRegistry = serviceRegistry;
+	}
+	
+	public void setExecutionContext(ExecutionContext executionContext) {
+		this.executionContext = executionContext;
 	}
 
 	public void execute(Map<String, String> commands) throws DuplicateInputPdfException, MissingInputPdfKeyException, 
@@ -45,11 +51,12 @@ public class FillPDF {
 	                                                         InvalidContentException, MissingOutputPathForPDFException, 
 	                                                         DocumentException, MissingOverridePdfKeyException, 
 	                                                         FileExistsException, FileNotFoundException, MissingDateFormatException {
+		AlfrescoStructure.executionContext = executionContext;
 		PdfReader reader = AlfrescoStructure.openAlfrescoPdf(commands);
 		PdfStamper stamper = AlfrescoStructure.manageAlfrescoPDF(reader,commands);
 		NodeRef content = AlfrescoStructure.getContent(commands,ConstantsLanguage.INPUT_CONTENT_KEYS);
 		HashMap<String,String> exportCommands = LanguageMethods.getScriptCommands(commands);
-		HashMap<String,Object> data = ExtractDataFromContent.extractData(content,serviceRegistry,exportCommands);
+		HashMap<String,Object> data = ExtractDataFromContent.extractData(content,serviceRegistry,exportCommands,executionContext);
 		FillDataPDF.fillPDF(stamper,exportCommands,data);
 	}
 
