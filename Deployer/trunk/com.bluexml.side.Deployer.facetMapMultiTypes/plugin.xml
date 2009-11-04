@@ -14,6 +14,7 @@
                version="Facetmap 2.x">
             <deployerVersion
                   class="com.bluexml.side.deployer.facetmapmultitypes.FacetMapMultiDeployer"
+                  hidden="hidden"
                   id="com.bluexml.side.Deployer.facetMapMultiDeployer"
                   version="SIDE Facetmap Portal Deployer">
                <configurationParameter
