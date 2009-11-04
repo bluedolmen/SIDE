@@ -7,7 +7,7 @@ import com.bluexml.side.util.generator.documentation.services.DocumentationServi
 
 <!-- Break line -->
 <%for (forms.sort()){%>
-	<text:h text:style-name="Heading_20_1" text:outline-level="1">Form <%getLabel()%></text:h>
+	<text:h text:style-name="Heading_20_1" text:outline-level="1"><%getLabel()%></text:h>
 	<%if (cast("FormClass")){%>
 		Link to class : <%current("FormClass").real_class.getLabel()%>
 	<%}%>
@@ -19,7 +19,7 @@ import com.bluexml.side.util.generator.documentation.services.DocumentationServi
 	<%content_form%>
 <%}%>
 <%if (getOutlineRelativePath.length > 0){%>
-	<text:h text:style-name="Heading_20_1" text:outline-level="1">Outline</text:h>
+	<text:h text:style-name="Heading_20_1" text:outline-level="1">Outline view</text:h>
 	<%for (getOutlineRelativePath) {%>
 		<text:h text:style-name="Heading_20_2" text:outline-level="2"><%current%></text:h>
 	<%}%>

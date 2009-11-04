@@ -163,14 +163,14 @@ import templates.content_chapter
 					<%}%>
 					<%if (getOutlineRelativePath.length > 0){%>
 					<text:p text:style-name="P5">
-	  <text:a xlink:type="simple" xlink:href="#1.<%getName()%>|outline" text:style-name="Internet_20_link" text:visited-style-name="Internet_20_link">Outline view<text:tab/></text:a>
-	  <text:a xlink:type="simple" xlink:href="#1.<%getName()%>|outline" text:style-name="Internet_20_link" text:visited-style-name="Internet_20_link">1</text:a>
+	  <text:a xlink:type="simple" xlink:href="#1.Outline view|outline" text:style-name="Internet_20_link" text:visited-style-name="Internet_20_link">Outline view<text:tab/></text:a>
+	  <text:a xlink:type="simple" xlink:href="#1.Outline view|outline" text:style-name="Internet_20_link" text:visited-style-name="Internet_20_link">1</text:a>
 	 </text:p>
 
                     	<%for (getOutlineRelativePath) {%>
                     		 <text:p text:style-name="P6">
-	  <text:a xlink:type="simple" xlink:href="#2.<%current%> associations|outline" text:style-name="Internet_20_link" text:visited-style-name="Internet_20_link"><%current%> associations<text:tab/></text:a>
-	  <text:a xlink:type="simple" xlink:href="#2.<%current%> associations|outline" text:style-name="Internet_20_link" text:visited-style-name="Internet_20_link">1</text:a>
+	  <text:a xlink:type="simple" xlink:href="#2.<%current%>|outline" text:style-name="Internet_20_link" text:visited-style-name="Internet_20_link"><%current%><text:tab/></text:a>
+	  <text:a xlink:type="simple" xlink:href="#2.<%current%>|outline" text:style-name="Internet_20_link" text:visited-style-name="Internet_20_link">1</text:a>
 	 </text:p>
 
                     	<%}%>
