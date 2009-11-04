@@ -65,7 +65,7 @@ import com.bluexml.side.util.generator.documentation.services.DocumentationServi
    <style:text-properties fo:font-size="14pt" fo:font-style="italic" fo:font-weight="bold" style:font-size-asian="14pt" style:font-style-asian="italic" style:font-weight-asian="bold" style:font-size-complex="14pt" style:font-style-complex="italic" style:font-weight-complex="bold"/>
   </style:style>
   <style:style style:name="Heading_20_4" style:display-name="Heading 4" style:family="paragraph" style:parent-style-name="Heading" style:next-style-name="Text_20_body" style:default-outline-level="4" style:class="text">
-   <style:paragraph-properties fo:margin-left="1.76cm" fo:margin-right="0cm" fo:text-indent="-0.76cm" style:auto-text-indent="true">
+   <style:paragraph-properties fo:margin-left="1.76cm" fo:margin-right="0cm" fo:text-indent="-0.76cm" style:auto-text-indent="true" fo:text-align="start">
     <style:tab-stops/>
    </style:paragraph-properties>
    <style:text-properties fo:font-size="14pt" fo:font-style="italic" fo:font-weight="bold" style:font-size-asian="85%" style:font-style-asian="italic" style:font-weight-asian="bold" style:font-size-complex="85%" style:font-style-complex="italic" style:font-weight-complex="bold"/>
