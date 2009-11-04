@@ -109,7 +109,7 @@ public class MetaInfoGroupItemProvider
 				 getString("_UI_PropertyDescriptor_description", "_UI_ModelElement_documentation_feature", "_UI_ModelElement_type"),
 				 CommonPackage.Literals.MODEL_ELEMENT__DOCUMENTATION,
 				 true,
-				 false,
+				 true,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,

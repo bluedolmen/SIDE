@@ -83,7 +83,7 @@ public class CommentItemProvider
 				 getString("_UI_PropertyDescriptor_description", "_UI_Comment_value_feature", "_UI_Comment_type"),
 				 CommonPackage.Literals.COMMENT__VALUE,
 				 true,
-				 false,
+				 true,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
@@ -109,7 +109,7 @@ public class CommentItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Comment)object).getDocumentation();
+		String label = crop(((Comment)object).getDocumentation());
 		return label == null || label.length() == 0 ?
 			getString("_UI_Comment_type") :
 			getString("_UI_Comment_type") + " " + label;

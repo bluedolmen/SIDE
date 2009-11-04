@@ -153,7 +153,7 @@ public class OperationItemProvider
 				 getString("_UI_PropertyDescriptor_description", "_UI_Operation_body_feature", "_UI_Operation_type"),
 				 CommonPackage.Literals.OPERATION__BODY,
 				 true,
-				 false,
+				 true,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,

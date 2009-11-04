@@ -115,7 +115,7 @@ public class ModelElementItemProvider
 				 getString("_UI_PropertyDescriptor_description", "_UI_ModelElement_documentation_feature", "_UI_ModelElement_type"),
 				 CommonPackage.Literals.MODEL_ELEMENT__DOCUMENTATION,
 				 true,
-				 false,
+				 true,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
@@ -195,7 +195,7 @@ public class ModelElementItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ModelElement)object).getDocumentation();
+		String label = crop(((ModelElement)object).getDocumentation());
 		return label == null || label.length() == 0 ?
 			getString("_UI_ModelElement_type") :
 			getString("_UI_ModelElement_type") + " " + label;
@@ -251,34 +251,6 @@ public class ModelElementItemProvider
 			(createChildParameter
 				(CommonPackage.Literals.MODEL_ELEMENT__METAINFO,
 				 CommonFactory.eINSTANCE.createMetaInfo()));
-	}
-
-	/**
-	 * This returns the icon image for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getCreateChildImage(Object owner, Object feature, Object child, Collection<?> selection) {
-		if (feature instanceof EStructuralFeature && FeatureMapUtil.isFeatureMap((EStructuralFeature)feature)) {
-			FeatureMap.Entry entry = (FeatureMap.Entry)child;
-			feature = entry.getEStructuralFeature();
-			child = entry.getValue();
-		}
-
-		if (feature instanceof EReference && child instanceof EObject) {
-			String name = "full/obj16/" + ((EObject)child).eClass().getName();
-
-			try {
-				return getResourceLocator().getImage(name);
-			}
-			catch (Exception e) {
-				CommonEditPlugin.INSTANCE.log(e);
-			}
-		}
-
-		return super.getCreateChildImage(owner, feature, child, selection);
 	}
 
 	/**
