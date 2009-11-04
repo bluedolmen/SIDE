@@ -32,6 +32,12 @@
                         key="alfresco.url"
                         label="Alfresco URL">
                   </configurationParameter>
+                  <moduleDependence
+                        moduleId="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator"
+                        moduleType="amp"
+                        technologyVersion="alfresco_3.x"
+                        versionMin="1.0">
+                  </moduleDependence>
                </generatorVersion>
             </technologyVersion>
          </technology>
