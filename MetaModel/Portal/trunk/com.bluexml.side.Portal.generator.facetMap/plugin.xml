@@ -20,6 +20,7 @@
                <generatorVersion
                      class="com.bluexml.side.portal.generator.facetmap.FacetMapPortalGenerator"
                      description="Check this to generate the dynamic files that Facetmap needs in your application.&lt;br&gt;The generated files may be deployed in any Facetmap instance and default implementation on Alfresco and Alfresco Share is provided.&lt;br&gt;SIDE provides the necessary components to deploy these packages through the &apos;deployer&apos; tab."
+                     hidden="hidden"
                      id="com.bluexml.side.Portal.generator.facetMap"
                      version="SIDE Facetmap Generator for Alfresco (Portal)">
                </generatorVersion>
