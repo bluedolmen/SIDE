@@ -87,13 +87,13 @@ public class MavenTmpProject {
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("outputDirectory", whereTocopy.getAbsolutePath());
 
-		String[] profiles = null;
-
-		if (offline) {
-			profiles = offline_profiles;
-		} else {
-			profiles = inline_profiles;
-		}
+		String[] profiles = offline_profiles;
+		boolean offline = true;
+//		if (offline) {
+//			profiles = offline_profiles;
+//		} else {
+//			profiles = inline_profiles;
+//		}
 		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:copy-dependencies", params, profiles, offline);
 		if (result.getExceptions().size() > 0) {
 			List<?> exceps = result.getExceptions();
