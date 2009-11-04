@@ -4,43 +4,31 @@ metamodel http://www.kerblue.org/view/1.0
 
 <%script type="view.ViewCollection" name="content_chapter"%>
 <%for (views){%>
+<%viewsHeader()%>
+<%}%>
+<%for (composedViews){%>
+<%viewsHeader()%>
+<%}%>
+<%script type="view.AbstractView" name="viewsHeader"%>
 	<text:h text:style-name="Heading_20_1" text:outline-level="1"><%name%></text:h>
-		<%viewFields%>
-		<%viewInnerView%>
+		<%viewFields(2)%>
+		<%viewInnerView(2)%>
+<%script type="view.AbstractView" name="viewFields"%>
+<text:h text:style-name="Heading_20_<%args(0)%>" text:outline-level="<%args(0)%>"><%name%> Fields</text:h>
+<%for (getFields()){%>
+<text:h text:style-name="Heading_20_<%args(0)+1%>" text:outline-level="<%args(0)+1%>"><%name%> :</text:h>
+<text:p>
+	<%if (documentation != null){%><%documentation%><%}%>
+</text:p>
 <%}%>
 
-<%script type="view.AbstractView" name="viewFields"%>
-<text:h text:style-name="Heading_20_2" text:outline-level="2"><%name%> Fields</text:h>
-<table:table table:style-name="Tableau1">
-	<table:table-column table:style-name="Tableau1.A" table:number-columns-repeated="2" />
-		<table:table-row>
-			<table:table-cell table:style-name="Tableau1.D1" office:value-type="string">
-				<text:p text:style-name="Table_20_Heading">Field Name</text:p>
-			</table:table-cell>
-			<table:table-cell table:style-name="Tableau1.D1" office:value-type="string">
-				<text:p text:style-name="Table_20_Heading">Field Documentation</text:p>
-			</table:table-cell>
-		</table:table-row>
-<%for (getFields()){%>
-	<table:table-row>
-		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
-			<text:p text:style-name="Table_20_Contents">
-				<%name%>
-			</text:p>
-		</table:table-cell>
-		<table:table-cell table:style-name="Tableau1.D2" office:value-type="string">
-			<text:p text:style-name="Table_20_Contents">
-				<%if (documentation != null){%><%documentation%><%}%>
-			</text:p>
-		</table:table-cell>
-	</table:table-row>
-<%}%>
-</table:table>
 
 <%script type="view.AbstractView" name="viewInnerView"%>
+<%-- args0 : level --%>
 <%if (getInnerView().length() > 0){%>
 	<%for (getInnerView()){%>
-		<text:h text:style-name="Heading_20_2" text:outline-level="2"><%name%> inner view</text:h>
-		<%viewInnerView%>
+		<text:h text:style-name="Heading_20_<%args(0)%>" text:outline-level="<%args(0)%>"><%name%> inner view</text:h>
+		<%viewFields(args(0)+1)%>
+		<%viewInnerView(args(0)+1)%>
 	<%}%>
 <%}%>
