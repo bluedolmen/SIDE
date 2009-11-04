@@ -45,9 +45,9 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		if (getGeneratorOptionValue(GENERATOR_OPTIONS_DOCLIST)) {
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/documentLibrary/DocumentLibraryPortletView.ftl.mt");			
 		}
-		if (getGeneratorOptionValue(GENERATOR_OPTIONS_FORMS)) {
-			//result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/formsDetails/web-framework-config-custom.mt");
-		}
+//		if (getGeneratorOptionValue(GENERATOR_OPTIONS_FORMS)) {
+//			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/formsDetails/web-framework-config-custom.mt");
+//		}
 		if (getGeneratorOptionValue(GENERATOR_OPTIONS_FACETMAP)) {
 			//result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/web-framework-config-custom.mt");
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/page.mt");
@@ -58,12 +58,14 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/template.mt");
 			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/messages.mt");
 		}
+		// shared resources
+		// includes of GENERATOR_OPTIONS_FORMS and GENERATOR_OPTIONS_FACETMAP options 
 		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/shared/web-framework-config-custom.mt");
 		return result;
 	}
 
 	public static boolean getGeneratorOptionValue(EObject o,String key) {
-		System.out.println(AbstractGenerator.generatorOptions.values());
+		//System.out.println(AbstractGenerator.generatorOptions.values());
 		return getGeneratorOptionValue(key);
 	}
 }
