@@ -15,8 +15,6 @@ import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.events.FocusEvent;
-import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -130,15 +128,6 @@ public class GeneratePopUp extends Dialog {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		getShell().addFocusListener(new FocusListener() {
-			public void focusLost(FocusEvent e) {
-				System.out.println("Focus Lost !"); //$NON-NLS-1$
-			}
-
-			public void focusGained(FocusEvent e) {
-				System.out.println("Focus Gained !"); //$NON-NLS-1$
-			}
-		});
 		return container;
 	}
 

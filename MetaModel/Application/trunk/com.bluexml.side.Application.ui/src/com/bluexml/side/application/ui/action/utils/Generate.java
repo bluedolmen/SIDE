@@ -14,13 +14,10 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.events.HyperlinkAdapter;
 import org.eclipse.ui.forms.events.HyperlinkEvent;
-import org.eclipse.ui.forms.widgets.FormText;
 import org.osgi.framework.Bundle;
 
 import com.bluexml.side.application.Configuration;
@@ -35,6 +32,10 @@ import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.util.componentmonitor.AbstractMonitor;
 import com.bluexml.side.util.componentmonitor.ComponentMonitor;
 import com.bluexml.side.util.componentmonitor.Monitor;
+import com.bluexml.side.util.componentmonitor.headLessinterface.FormTextInterface;
+import com.bluexml.side.util.componentmonitor.headLessinterface.LabelInterface;
+import com.bluexml.side.util.componentmonitor.headLessinterface.ProgressBarInterface;
+import com.bluexml.side.util.componentmonitor.headLessinterface.StyledTextInterface;
 import com.bluexml.side.util.dependencies.DependencesManager;
 import com.bluexml.side.util.dependencies.ModuleConstraint;
 import com.bluexml.side.util.deployer.Deployer;
@@ -44,10 +45,6 @@ import com.bluexml.side.util.feedback.FeedbackActivator;
 import com.bluexml.side.util.feedback.management.FeedbackManager;
 import com.bluexml.side.util.generator.AbstractGenerator;
 import com.bluexml.side.util.libs.IFileHelper;
-import com.bluexml.side.util.componentmonitor.headLessinterface.FormTextInterface;
-import com.bluexml.side.util.componentmonitor.headLessinterface.LabelInterface;
-import com.bluexml.side.util.componentmonitor.headLessinterface.ProgressBarInterface;
-import com.bluexml.side.util.componentmonitor.headLessinterface.StyledTextInterface;
 
 public class Generate extends Thread {
 

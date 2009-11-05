@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -36,7 +37,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.CellEditor;
-import org.eclipse.jface.viewers.ICellEditorListener;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
@@ -615,8 +615,19 @@ public class ApplicationDialog extends Dialog {
 			if (!t.isEnabled()) {
 				t.setEnabled(true);
 			}
-			if (!t.isChecked()) {
+			if (!t.isChecked()) {				
 				t.setChecked(true);
+				if (t instanceof ImplNode) {
+					ImplNode tt= (ImplNode)t;
+					for (TreeNode treeNode : tt.getChildren()) {
+						OptionComponant op =(OptionComponant)treeNode;
+						op.setEnabled(true);
+					} 
+					checkDefaultOptions(tt, tv);
+				}
+				
+				
+				
 			}
 		}
 		// Ugly but avoid modification made pop up.
@@ -1122,6 +1133,7 @@ public class ApplicationDialog extends Dialog {
 					// event fire on empty raw
 				}
 			}
+
 			public void widgetDefaultSelected(SelectionEvent e) {
 			}
 		});
@@ -1151,15 +1163,17 @@ public class ApplicationDialog extends Dialog {
 
 		// bug fix http://bugs.bluexml.net/show_bug.cgi?id=1226
 		tabFolder.addMouseListener(new MouseListener() {
-			public void mouseUp(MouseEvent e) {				
+			public void mouseUp(MouseEvent e) {
 			}
+
 			public void mouseDown(MouseEvent e) {
-				generatorParameterCellModifier.applyDirtyValue();				
+				generatorParameterCellModifier.applyDirtyValue();
 			}
-			public void mouseDoubleClick(MouseEvent e)  {
+
+			public void mouseDoubleClick(MouseEvent e) {
 			}
 		});
-		
+
 		return container;
 	}
 
@@ -1305,7 +1319,7 @@ public class ApplicationDialog extends Dialog {
 		generatorParametersViewer = new TableViewer(generatorParameters);
 		generatorParametersViewer.setUseHashlookup(true);
 		generatorParametersViewer.setColumnProperties(columnNames);
-		
+
 		// Create the cell editors
 		CellEditor[] editors = new CellEditor[2];
 
@@ -1325,7 +1339,7 @@ public class ApplicationDialog extends Dialog {
 		generatorParametersViewer.setLabelProvider(generatorParameterLabelProvider);
 		generatorParameterCellModifier = new GeneratorParameterCellModifier(dataStructure, columnNames, generatorParametersViewer);
 		generatorParametersViewer.setCellModifier(generatorParameterCellModifier);
-		
+
 		generatorParametersViewer.setInput(dataStructure);
 		generatorParametersViewer.refresh();
 
@@ -1394,8 +1408,9 @@ public class ApplicationDialog extends Dialog {
 	 * Action for Close, Save and Launch
 	 */
 	protected void buttonPressed(int buttonId) {
-		if (generatorParameterCellModifier !=null) {
-			// only for some OS that do not unselect cell Editor before fire this event, so we record changes manually
+		if (generatorParameterCellModifier != null) {
+			// only for some OS that do not unselect cell Editor before fire
+			// this event, so we record changes manually
 			generatorParameterCellModifier.applyDirtyValue();
 		}
 		if (buttonId == IDialogConstants.CLOSE_ID) {
@@ -1580,7 +1595,7 @@ public class ApplicationDialog extends Dialog {
 					// System.out.println("isEnabled !");
 					// Inverse
 					el.setChecked(!(el.isChecked()));
-					tv.update(el, null);
+					
 
 					if (el.isChecked()) {
 						// System.out.println("is Checked !");
@@ -1590,16 +1605,18 @@ public class ApplicationDialog extends Dialog {
 						int action = ConstraintsChecker.applyConstraints(tv, item, el);
 						if (action == SWT.YES || action == -1) {
 							enableAllSubElements(item);
+							checkDefaultOptions(el, tv);
 						} else if (action == SWT.NO) {
 							// uncheck to return to previous state
 							el.setChecked(false);
-							tv.update(el, null);
+							//tv.update(el, null);
 						}
 					} else {
 						// System.out.println("is Not Checked !");
 						// Enable all sub elements
 						disableAllSubElements(item);
 					}
+					tv.update(el, null);
 				}
 
 			}
@@ -1618,6 +1635,7 @@ public class ApplicationDialog extends Dialog {
 			Point point = new Point(event.x, event.y);
 			documentationText.setText(builDocumentationText());
 			TreeItem item = tv.getTree().getItem(point);
+			
 			TreeElement el = (TreeElement) item.getData();
 			// If click on image : check it, else : just show informations
 			if (item.getImageBounds(0) != null && event.x <= item.getImageBounds(0).x + item.getImageBounds(0).width) {
@@ -1625,17 +1643,17 @@ public class ApplicationDialog extends Dialog {
 				if (el.isEnabled()) {
 					// Inverse
 					el.setChecked(!(el.isChecked()));
-					tv.update(el, null);
-
 					if (el.isChecked()) {
 						// Enable all sub elements
 						enableAllSubElements(item);
+						checkDefaultOptions(el, tv);
 
 						ConstraintsChecker.applyConstraints(tv, item, el);
 					} else {
 						// Enable all sub elements
 						disableAllSubElements(item);
 					}
+					tv.update(el, null);
 				}
 			}
 			refreshOptions();
@@ -1705,4 +1723,19 @@ public class ApplicationDialog extends Dialog {
 		return tabFolder.getSelection()[0].equals(modelsTabItem);
 	}
 
+	protected static void checkDefaultOptions(TreeElement item, TreeViewer tv) {
+
+		// Check the validity if the component
+		if (item instanceof ImplNode) {
+			ImplNode node = (ImplNode) item;
+			Collection<TreeNode> options = node.getChildren();
+			for (TreeNode treeNode : options) {
+				if (((OptionComponant) treeNode).isDefault()) {
+					treeNode.setChecked(true);
+					tv.update(treeNode, null);
+				}
+			}
+		}
+		
+	}
 }

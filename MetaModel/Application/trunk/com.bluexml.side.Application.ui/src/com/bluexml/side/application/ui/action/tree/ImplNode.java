@@ -31,8 +31,6 @@ public abstract class ImplNode extends TreeNode {
 				integrationModules.add(new ModuleConstraint(child,this));
 			}
 		}
-
-
 	}
 
 

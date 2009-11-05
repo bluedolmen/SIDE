@@ -12,6 +12,16 @@ public abstract class OptionComponant extends TreeNode {
 	private String label;
 	private String description;
 
+	private boolean isDefault = false;
+
+	public boolean isDefault() {
+		return isDefault;
+	}
+
+	public void setDefault(boolean isDefault) {
+		this.isDefault = isDefault;
+	}
+
 	public OptionComponant(IConfigurationElement elt, ImplNode implNode, TreeView root) {
 		super(root);
 		root.addOption(this);
@@ -19,6 +29,9 @@ public abstract class OptionComponant extends TreeNode {
 		id = elt.getAttribute("key");
 		key = elt.getAttribute("key");
 		label = elt.getAttribute("label");
+		if (elt.getAttribute("defaultOption") != null) {
+			isDefault = Boolean.parseBoolean(elt.getAttribute("defaultOption"));
+		}
 		description = elt.getAttribute("documentation");
 		mustbechecked = new ArrayList<CheckConstraints>();
 		mustbeUnchecked = new ArrayList<CheckConstraints>();
