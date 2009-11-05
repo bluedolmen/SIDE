@@ -21,6 +21,12 @@
                      hidden="hidden and used by default"
                      id="com.bluexml.side.Workflow.generator.documentation"
                      version="SIDE Workflow Documentation Generator">
+                  <option
+                        defaultOption="true"
+                        documentation="if enabled generator add model screenShoot"
+                        key="doc.gen.screenshoot"
+                        label="includes screen shoots">
+                  </option>
                </generatorVersion>
             </technologyVersion>
          </technology>
