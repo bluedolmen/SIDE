@@ -32,7 +32,7 @@
     </eAnnotations>
     <eOperations name="getFullName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.bluexml.com/OCL">
-        <details key="body" value="if self.getContainer().oclIsUndefined() then&#xD;&#x9;''&#xD;else&#xD;&#x9;if self.getContainer().oclIsKindOf(NamedModelElement) then&#xD;&#x9;&#x9;self.getContainer().oclAsType(NamedModelElement).getFullName().concat('.').concat(self.name)&#xD;&#x9;else&#xD;&#x9;&#x9;''&#xD;&#x9;endif&#x9;&#xD;endif"/>
+        <details key="body" value="if self.getContainer().oclIsUndefined() then&#xD;&#x9;''&#xD;else&#xD;&#x9;if self.getContainer().oclIsKindOf(NamedModelElement) then&#xA;&#x9;&#x9;let parent : String = self.getContainer().oclAsType(NamedModelElement).getFullName()&#xA;&#x9;&#x9;in&#xA;&#x9;&#x9;&#x9;if ((not(parent.oclIsUndefined())) and (parent.size() > 0)) then&#xA;&#x9;&#x9;&#x9;&#x9;parent.concat('.').concat(self.name)&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;self.name&#xA;&#x9;&#x9;&#x9;endif&#xD;&#x9;else&#xD;&#x9;&#x9;''&#xD;&#x9;endif&#x9;&#xD;endif"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getDocumentationOrName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">

@@ -61,7 +61,7 @@ public interface NamedModelElement extends ModelElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" required="true"
-	 *        annotation="http://www.bluexml.com/OCL body='if self.getContainer().oclIsUndefined() then\r\t\'\'\relse\r\tif self.getContainer().oclIsKindOf(NamedModelElement) then\r\t\tself.getContainer().oclAsType(NamedModelElement).getFullName().concat(\'.\').concat(self.name)\r\telse\r\t\t\'\'\r\tendif\t\rendif'"
+	 *        annotation="http://www.bluexml.com/OCL body='if self.getContainer().oclIsUndefined() then\r\t\'\'\relse\r\tif self.getContainer().oclIsKindOf(NamedModelElement) then\n\t\tlet parent : String = self.getContainer().oclAsType(NamedModelElement).getFullName()\n\t\tin\n\t\t\tif ((not(parent.oclIsUndefined())) and (parent.size() > 0)) then\n\t\t\t\tparent.concat(\'.\').concat(self.name)\n\t\t\telse\n\t\t\t\tself.name\n\t\t\tendif\r\telse\r\t\t\'\'\r\tendif\t\rendif'"
 	 * @generated
 	 */
 	String getFullName();
