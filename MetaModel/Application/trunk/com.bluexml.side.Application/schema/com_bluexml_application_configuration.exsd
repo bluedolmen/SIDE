@@ -252,6 +252,13 @@ Hidden And Used By Default : To hidde this element and to use this generator by 
                </documentation>
             </annotation>
          </attribute>
+         <attribute name="defaultOption" type="boolean" use="default" value="false">
+            <annotation>
+               <documentation>
+                  use to enable this option by default
+               </documentation>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 
