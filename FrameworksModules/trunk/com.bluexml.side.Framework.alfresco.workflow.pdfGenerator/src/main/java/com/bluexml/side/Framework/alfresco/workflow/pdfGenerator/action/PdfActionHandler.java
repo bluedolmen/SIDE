@@ -5,12 +5,9 @@ package com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.action;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.alfresco.repo.workflow.jbpm.AlfrescoJavaScript;
-import org.alfresco.repo.workflow.jbpm.JBPMNode;
 import org.alfresco.repo.workflow.jbpm.JBPMSpringActionHandler;
 import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.cmr.model.FileExistsException;
