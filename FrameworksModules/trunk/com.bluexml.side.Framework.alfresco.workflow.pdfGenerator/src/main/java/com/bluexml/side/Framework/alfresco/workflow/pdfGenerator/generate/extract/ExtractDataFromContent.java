@@ -5,7 +5,6 @@ package com.bluexml.side.Framework.alfresco.workflow.pdfGenerator.generate.extra
 
 import java.io.Serializable;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,39 +36,50 @@ public class ExtractDataFromContent {
 		HashMap<String, Object> data = new HashMap<String, Object>();
 		Set<String> keysCommands = commands.keySet();
 		for (String keyCommand : keysCommands) {
-			if (commands.get(keyCommand).contains(ConstantsLanguage.CONSTANT_INDICATOR)){
-				String constant = commands.get(keyCommand).split(ConstantsLanguage.CONSTANT_INDICATOR)[1];
-				data.put(keyCommand,constant);
-			}
-			else if (commands.get(keyCommand).contains(ConstantsLanguage.NAVIGATION_INDICATOR)){
-				NodeRef finalTarget = null;
-				String[] navigation = commands.get(keyCommand).split(ConstantsLanguage.NAVIGATION_INDICATOR);
-				QName qnameType = services.getNodeService().getType(content);
-				finalTarget = followAssociations(services,content,qnameType,navigation,0);
-				if (finalTarget != null) {
-					Object value = extractValueFromContent(services,finalTarget,navigation[navigation.length-1]);
+			if (!isFormatCommand(keyCommand, commands)) {
+				if (commands.get(keyCommand).contains(ConstantsLanguage.CONSTANT_INDICATOR)){
+					String constant = commands.get(keyCommand).split(ConstantsLanguage.CONSTANT_INDICATOR)[1];
+					data.put(keyCommand,constant);
+				}
+				else if (commands.get(keyCommand).contains(ConstantsLanguage.NAVIGATION_INDICATOR)){
+					NodeRef finalTarget = null;
+					String[] navigation = commands.get(keyCommand).split(ConstantsLanguage.NAVIGATION_INDICATOR);
+					QName qnameType = services.getNodeService().getType(content);
+					finalTarget = followAssociations(services,content,qnameType,navigation,0);
+					if (finalTarget != null) {
+						Object value = extractValueFromContent(services,finalTarget,navigation[navigation.length-1]);
+						data.put(keyCommand, value);
+					}
+				}
+				else if (!commands.get(keyCommand).contains(ConstantsLanguage.CONSTANT_INDICATOR) 
+						 && !commands.get(keyCommand).contains(ConstantsLanguage.NAVIGATION_INDICATOR)){
+					Object value = extractValueFromContent(services,content,commands.get(keyCommand));
 					data.put(keyCommand, value);
 				}
-			}
-			else if (!commands.get(keyCommand).contains(ConstantsLanguage.CONSTANT_INDICATOR) 
-					 && !commands.get(keyCommand).contains(ConstantsLanguage.NAVIGATION_INDICATOR)){
-				Object value = extractValueFromContent(services,content,commands.get(keyCommand));
-				data.put(keyCommand, value);
-			}
-			else {
-				Object result = null;
-				try {
-					//We try to evaluate as alfresco javascript expression
-					result = AlfrescoJavaScript.executeScript(executionContext, services,commands.get(keyCommand), Collections.EMPTY_LIST);
-				} catch (Exception e) {
+				else {
+					Object result = null;
+					try {
+						//We try to evaluate as alfresco javascript expression
+						result = AlfrescoJavaScript.executeScript(executionContext, services,commands.get(keyCommand), Collections.EMPTY_LIST);
+					} catch (Exception e) {
+					}
+					if (result == null)
+						throw new InvalidValueOfParameterException(InvalidValueOfParameterException.BAD_FORMAT);
+					else
+						data.put(keyCommand, result.toString());
 				}
-				if (result == null)
-					throw new InvalidValueOfParameterException(InvalidValueOfParameterException.BAD_FORMAT);
-				else
-					data.put(keyCommand, result.toString());
 			}
 		}
 		return data;
+	}
+
+	private static boolean isFormatCommand(String keyCommand,
+			HashMap<String, String> commands) {
+		if (keyCommand.endsWith(".format")) {
+			String subCommand = keyCommand.substring(0, keyCommand.length()-7);
+			return commands.containsKey(subCommand);
+		}
+		return false;
 	}
 
 	private static Object extractValueFromContent(ServiceRegistry services, NodeRef content, String attribute) throws AttributeContentException {
