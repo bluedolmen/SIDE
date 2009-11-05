@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.Util.ecore.DiagramImageExporter;
 import com.bluexml.side.Util.ecore.export.JPEGExporter;
@@ -20,6 +21,9 @@ public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 	public static String MMUri;
 	protected List<String> templates = new ArrayList<String>();
 
+	protected static String GENERATOR_OPTIONS_SCREENSHOOT = "doc.gen.screenshoot";
+	
+	
 	public boolean isDocumentationGenerator() {
 		return true;
 	}
@@ -59,7 +63,7 @@ public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 
 		// Check if there is a diagram file :
 		IFile diag = IFileHelper.getIFile(model.getFullPath().toOSString() + "di");
-		if (diag.exists()) {
+		if (diag.exists() && includeScreenShoot()) {
 			// If one generate image for each diagram :
 			DiagramImageExporter diagExporter = new JPEGExporter();
 			//TODO : add to result[]
@@ -84,5 +88,13 @@ public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 
 	public boolean check() {
 		return true;
+	}
+	
+	public static boolean includeScreenShoot() {
+		return includeScreenShoot(null);
+	}
+	
+	public static boolean includeScreenShoot(EObject o) {
+		return getGeneratorOptionValue(GENERATOR_OPTIONS_SCREENSHOOT);
 	}
 }
