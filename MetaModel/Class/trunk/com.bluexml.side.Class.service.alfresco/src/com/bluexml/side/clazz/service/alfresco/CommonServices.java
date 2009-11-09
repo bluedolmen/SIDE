@@ -3,7 +3,6 @@ package com.bluexml.side.clazz.service.alfresco;
 import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.common.NamedModelElement;
-import com.bluexml.side.util.libs.StringHelper;
 
 public class CommonServices {
 	public static String getNamedModelElementQName(NamedModelElement node) {
