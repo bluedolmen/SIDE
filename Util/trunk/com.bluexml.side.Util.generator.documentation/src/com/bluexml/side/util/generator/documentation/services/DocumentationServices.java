@@ -12,7 +12,7 @@ public class DocumentationServices {
 	protected static List<String> outlineRelativePath = new ArrayList<String>();
 
 	public static String getModelName(EObject o) {
-		if (modelName.length() > 0) {
+		if (modelName !=null && modelName.length() > 0) {
 			return modelName;
 		} else {
 			Date d = new Date();

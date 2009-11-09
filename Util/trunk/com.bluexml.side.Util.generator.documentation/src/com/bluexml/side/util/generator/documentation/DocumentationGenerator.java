@@ -17,25 +17,25 @@ import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.IFileHelper;
 
 public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
-
 	public static String MMUri;
-	protected List<String> templates = new ArrayList<String>();
-
 	protected static String GENERATOR_OPTIONS_SCREENSHOOT = "doc.gen.screenshoot";
-	
-	
+
 	public boolean isDocumentationGenerator() {
 		return true;
 	}
 
 	public DocumentationGenerator() {
 		DocumentationServices.clearAll();
-		// Static templates
+	}
+
+	protected List<String> getDefaultTemplates() {
+		List<String> templates = new ArrayList<String>();
 		templates.add("/com.bluexml.side.Util.generator.documentation/templates/manifest.mt"); //$NON-NLS-1$
 		templates.add("/com.bluexml.side.Util.generator.documentation/templates/meta.mt"); //$NON-NLS-1$
 		templates.add("/com.bluexml.side.Util.generator.documentation/templates/mimetype.mt"); //$NON-NLS-1$
 		templates.add("/com.bluexml.side.Util.generator.documentation/templates/styles.mt"); //$NON-NLS-1$
 		templates.add("/com.bluexml.side.Util.generator.documentation/templates/settings.mt"); //$NON-NLS-1$
+		return templates;
 	}
 
 	public Collection<IFile> complete() throws Exception {
@@ -43,16 +43,14 @@ public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 			String rootName = l.getKey();
 			setTEMP_FOLDER("generator_" + getClass().getName() + File.separator + rootName);
 
-			String target = IFileHelper.getSystemFolderPath(getTargetPath()+File.separator+getTechVersion())+File.separator;
+			String target = IFileHelper.getSystemFolderPath(getTargetPath() + File.separator + getTechVersion()) + File.separator;
 			new File(target).mkdirs();
 			String source = IFileHelper.getSystemFolderPath(getTemporaryFolder()) + File.separator;
 			FileHelper.copyFiles(new File(source), new File(target), true);
 		}
 
-
-
 		for (IFile f : generatedFiles) {
-			monitor.getLog().addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI());  //$NON-NLS-1$//$NON-NLS-2$
+			monitor.getLog().addFileGeneratedLog("Files Generated", f.getLocation().toOSString() + "", IFileHelper.getFile(f).toURI()); //$NON-NLS-1$//$NON-NLS-2$
 		}
 
 		return generatedFiles;
@@ -66,7 +64,7 @@ public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 		if (diag.exists() && includeScreenShoot()) {
 			// If one generate image for each diagram :
 			DiagramImageExporter diagExporter = new JPEGExporter();
-			//TODO : add to result[]
+			// TODO : add to result[]
 			String pathName = getTemporarySystemFolder() + File.separator + model.getName().replaceAll("\\.", "-") + File.separator + "doc" + File.separator + "Pictures" + File.separator;
 			File f = new File(pathName);
 			f.mkdirs();
@@ -89,11 +87,11 @@ public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 	public boolean check() {
 		return true;
 	}
-	
+
 	public static boolean includeScreenShoot() {
 		return includeScreenShoot(null);
 	}
-	
+
 	public static boolean includeScreenShoot(EObject o) {
 		return getGeneratorOptionValue(GENERATOR_OPTIONS_SCREENSHOOT);
 	}
