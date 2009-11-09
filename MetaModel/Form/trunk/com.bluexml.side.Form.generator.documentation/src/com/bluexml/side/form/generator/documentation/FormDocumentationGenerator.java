@@ -28,6 +28,7 @@ public class FormDocumentationGenerator extends DocumentationGenerator {
 
 	@Override
 	protected List<String> getTemplates() {
+		List<String> templates = getDefaultTemplates();
 		templates.add("/com.bluexml.side.Form.generator.documentation/templates/content.mt"); //$NON-NLS-1$
 		return templates;
 	}
