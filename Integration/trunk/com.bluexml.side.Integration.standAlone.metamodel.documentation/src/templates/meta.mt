@@ -1,5 +1,5 @@
 <%
-metamodel http://www.eclipse.org/emf/2002/Ecore
+metamodel http://www.kerblue.org/common/1.0/
 import com.bluexml.side.util.generator.documentation.services.DocumentationServices
 %>
 <%script type="ecore.EPackage" name="validatedFilename"%>

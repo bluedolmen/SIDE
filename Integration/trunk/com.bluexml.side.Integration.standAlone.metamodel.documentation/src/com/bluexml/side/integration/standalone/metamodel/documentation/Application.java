@@ -17,8 +17,17 @@ import org.eclipse.equinox.app.IApplicationContext;
 
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.deployer.documentation.DocumentationDeployer;
-import com.bluexml.side.util.componentmonitor.NullComponentMonitor;
+import com.bluexml.side.util.componentmonitor.ComponentMonitor;
+import com.bluexml.side.util.componentmonitor.Monitor;
+import com.bluexml.side.util.componentmonitor.headLessinterface.LabelInterface;
+import com.bluexml.side.util.componentmonitor.headLessinterface.ProgressBarInterface;
+import com.bluexml.side.util.componentmonitor.headLessinterface.StyledTextInterface;
+import com.bluexml.side.util.componentmonitor.headless.LabelHeadLess;
+import com.bluexml.side.util.componentmonitor.headless.StyledTextHeadless;
+import com.bluexml.side.util.componentmonitor.headless.progressBarHeadLess;
+import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 import com.bluexml.side.util.generator.documentation.DocumentationGenerator;
+import com.bluexml.side.util.libs.IFileHelper;
 
 /**
  * @author Constantin Madola
@@ -65,18 +74,48 @@ public class Application implements IApplication {
 		System.out.println("Meta Model Directory = " + metaModelDirPath + " .");
 		System.out.println("Target path          = " + targetPath + " .");
 
-		final DocumentationGenerator gen = new MetaModelDocumentationGenerator();
+		// initialize Generate Objects
+		ProgressBarInterface progressBar = new progressBarHeadLess();
+		LabelInterface label = new LabelHeadLess();
+		ProgressBarInterface progressBar2 = new progressBarHeadLess();
+		LabelInterface label2 = new LabelHeadLess();
+		StyledTextInterface styletext = new StyledTextHeadless();
+		
+
+		String confName = "test";
 		HashMap<String, String> configurationParameters_ = getConfigurationParameter(targetPath, TECH_NAME);
-		String fileName = "gen_" + gen.getClass().getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
-		NullComponentMonitor generationMonitor = new NullComponentMonitor(null, null, fileName);
+		String logPath = configurationParameters_.get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral());
+		System.out.println("logPath :" + logPath);
+		System.out.println();
+
+		// clean folders
+		IFileHelper.deleteFolderContent(IFileHelper.getIFolder(logPath));
+		IFileHelper.deleteFolderContent(IFileHelper.getIFolder(targetPath));
+		
+		// general monitor
+		String fileName = "general_" + Application.class.getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+		Monitor generalMonitor = new Monitor(styletext, progressBar, label, logPath, confName, fileName);
+
+		final DocumentationGenerator gen = new MetaModelDocumentationGenerator();
+		String fileName2 = "gen_" + gen.getClass().getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+
+		// generator monitor
+		ComponentMonitor generationMonitor = new ComponentMonitor(styletext, progressBar2, 100, label2, generalMonitor, configurationParameters_, LogType.GENERATION, generalMonitor.getConsoleLog(),
+				fileName2);
+
 		Map<String, String> generationParameters_ = new HashMap<String, String>();
 		Map<String, Boolean> generatorOptions_ = new HashMap<String, Boolean>();
 		gen.initialize(generationParameters_, generatorOptions_, configurationParameters_, null, generationMonitor);
 
 		System.out.println(gen.getClass().getName() + " Initalized.");
-
+		
+		
 		final DocumentationDeployer deployer = new DocumentationDeployer();
-		deployer.initialize(configurationParameters_, generationParameters_, null, generationMonitor);
+		String fileName3 = "dep_" + deployer.getClass().getName() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+		ComponentMonitor deployerMonitor = new ComponentMonitor(styletext, progressBar2, 100, label2, generalMonitor, configurationParameters_, LogType.GENERATION, generalMonitor.getConsoleLog(),
+				fileName3);
+		
+		deployer.initialize(configurationParameters_, generationParameters_, null, deployerMonitor);
 		System.out.println(deployer.getClass().getName() + " Initalized.");
 
 		File dir = new File(metaModelDirPath);
@@ -104,27 +143,34 @@ public class Application implements IApplication {
 			System.out.println("file: " + file.getAbsolutePath());
 			IPath location = Path.fromOSString(file.getAbsolutePath());
 			System.out.println("location: " + location);
-			//IFile model = getMetaModelIFile(file, workspaceRoot);
+			// IFile model = getMetaModelIFile(file, workspaceRoot);
 			IFile model = workspaceRoot.getFileForLocation(location);
-			if (model == null) model = workspaceRoot.getFile(new Path(file.getAbsolutePath()));
+			if (model == null) {
+				model = workspaceRoot.getFile(new Path(file.getAbsolutePath()));
+			}
 			System.out.println("model: " + model);
 			String modelName = model.getName();
 			System.out.println("modelName: " + modelName);
 
 			// EXCEPTION
-//			if (!(model.exists() && model.isAccessible())) {
-//				throw new Exception("Requested meta model file [" + modelName + "] is not accesible. \n" + "This may happen when the metamodel directory path refers to a directory outside of any eclipse project");
-//			} else {
-				System.out.println("| generating : " + modelName);
-				gen.generate(model);
-				System.out.print(" -> completing : " + modelName);
-				gen.complete();
-				System.out.print(" --> deploying  : " + modelName);
-				deployer.deploy();
-				System.out.println(" ---> deployed  !");
-//			}
+			// if (!(model.exists() && model.isAccessible())) {
+			// throw new Exception("Requested meta model file [" + modelName +
+			// "] is not accesible. \n" +
+			// "This may happen when the metamodel directory path refers to a directory outside of any eclipse project");
+			// } else {
+			System.out.println("| generating : " + modelName);
+			gen.generate(model);
+			System.out.println(" -> completing : " + modelName);
+			gen.complete();
+			System.out.print(" --> deploying  : " + modelName);
+			deployer.deploy();
+			System.out.println(" ---> deployed  !");
+			// }
 			c++;
 		}
+		generalMonitor.getConsoleLog().saveLog();
+		generationMonitor.getLog().saveLog();
+		deployerMonitor.getLog().saveLog();
 		System.out.println("------------");
 		System.out.println("Finished  !");
 		System.out.println("------------");
@@ -160,7 +206,7 @@ public class Application implements IApplication {
 	private HashMap<String, String> getConfigurationParameter(String targetPath, String techName) {
 		HashMap<String, String> configurationParameters_ = new HashMap<String, String>();
 		configurationParameters_.put(StaticConfigurationParameters.GENERATIONOPTIONSDESTINATION_PATH.getLiteral(), targetPath);
-		configurationParameters_.put(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral(), targetPath);
+		configurationParameters_.put(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral(), targetPath + File.separator + ".." + File.separator + "logs");
 		configurationParameters_.put("technologyVersion", techName);
 		// configurationName, est utilisé par le depoyer pour la tache ant de
 		// creation d'ODT

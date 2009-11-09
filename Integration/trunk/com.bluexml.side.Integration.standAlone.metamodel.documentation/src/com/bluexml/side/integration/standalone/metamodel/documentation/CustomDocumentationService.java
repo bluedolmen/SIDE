@@ -45,7 +45,7 @@ public class CustomDocumentationService {
 	 * @return
 	 */
 	public static String getSrvDocumentation(EModelElement emElt) {
-		String result = null;
+		String result = "";
 		EAnnotation annotation = emElt.getEAnnotation(DOCUMENTATION_SOURCE);
 		if (annotation != null) {
 

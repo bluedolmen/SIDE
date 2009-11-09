@@ -20,6 +20,7 @@ Require-Bundle: org.eclipse.ui;bundle-version="3.4.0",
  com.bluexml.side.Util.deployer;bundle-version="1.0.19",
  com.bluexml.side.Deployer.documentation;bundle-version="1.0.14",
  com.bluexml.side.Util.componentMonitor,
- com.bluexml.side.Util.log
+ com.bluexml.side.Util.log,
+ com.bluexml.side.Util.libs
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
