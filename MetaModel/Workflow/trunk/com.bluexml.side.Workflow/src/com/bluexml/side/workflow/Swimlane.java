@@ -32,7 +32,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.workflow.WorkflowPackage#getSwimlane()
- * @model annotation="http://www.bluexml.com/OCL ActorNameMustBeUnique='Swimlane.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0' MustManageAtLeastOneTask='(not (self.manage->isEmpty())) or (StartState.allInstances()->collect(ss | ss.initiator)->includes(self))' noSpecialCharacters='self.name.regexMatch(\'[\\w]*\') = true' ActoridOrPooledactor='self.manage->forAll(t | t.oclIsTypeOf(StartState)) or\n(not(self.actorid->isEmpty()) and (self.pooledactors  -> isEmpty() or self.pooledactors =\'\')) or\n(self.actorid -> isEmpty() or self.actorid=\'\') and not(self.pooledactors->isEmpty())'"
+ * @model annotation="http://www.bluexml.com/OCL ActorNameMustBeUnique='Swimlane.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0' MustManageAtLeastOneTask='(not (self.manage->isEmpty())) or (StartState.allInstances()->collect(ss | ss.initiator)->includes(self))' noSpecialCharacters='self.name.regexMatch(\'[\\w]*\') = true' ActoridOrPooledactor='not((self.pooledactors  -> isEmpty() or self.pooledactors =\'\') and\n(self.actorid -> isEmpty() or self.actorid=\'\'))'"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='ActorNameMustBeUnique MustManageAtLeastOneTask noSpecialCharacters ActoridOrPooledactor'"
  * @generated
  */

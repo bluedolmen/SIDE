@@ -1271,7 +1271,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 			 "ActorNameMustBeUnique", "Swimlane.allInstances() -> select(n|n.name = self.name and n <> self )->size()=0",
 			 "MustManageAtLeastOneTask", "(not (self.manage->isEmpty())) or (StartState.allInstances()->collect(ss | ss.initiator)->includes(self))",
 			 "noSpecialCharacters", "self.name.regexMatch(\'[\\w]*\') = true",
-			 "ActoridOrPooledactor", "self.manage->forAll(t | t.oclIsTypeOf(StartState)) or\n(not(self.actorid->isEmpty()) and (self.pooledactors  -> isEmpty() or self.pooledactors =\'\')) or\n(self.actorid -> isEmpty() or self.actorid=\'\') and not(self.pooledactors->isEmpty())"
+			 "ActoridOrPooledactor", "not((self.pooledactors  -> isEmpty() or self.pooledactors =\'\') and\n(self.actorid -> isEmpty() or self.actorid=\'\'))"
 		   });				
 		addAnnotation
 		  (swimlaneEClass.getEOperations().get(0), 
