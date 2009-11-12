@@ -343,9 +343,6 @@
       <refSourceToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Swimlane/manage"/>
       <refTargetToSource xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//TaskNode/swimlane"/>
     </sourceTargetCouple>
-    <sourceTargetCouple xmi:id="_YH7FoAyIEd6Mru3BnMqJHQ" sourceNode="_IMmu4I0vEdy2iZ_dX7q7fg" targetNode="_xPUcYIyBEdy0-r37LrMUlA">
-      <refTargetToSource xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//StartState/initiator"/>
-    </sourceTargetCouple>
   </parts>
   <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_Lmi9cAnPEd6njOkWCso0oA" object="_HFcw0AnPEd6njOkWCso0oA" defaultForegroundColor="27,134,199" targetDecoration="ARROW">
     <sourceTargetCouple xmi:id="_R3ewAAnPEd6njOkWCso0oA" sourceNode="_IMmu4I0vEdy2iZ_dX7q7fg" targetNode="_xPUcYIyBEdy0-r37LrMUlA">

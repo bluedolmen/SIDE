@@ -144,15 +144,6 @@ public class StartStateRestoreConnectionCommand extends
 						// autoRef not allowed
 					} else {
 						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-						createmanageFromSwimlaneToStartState_Initiator(
-								graphElementTgt, graphElementSrc);
-					}
-				}
-				if (eObjectTgt instanceof Swimlane) {
-					if (autoRef) {
-						// autoRef not allowed
-					} else {
-						// if graphElementSrc is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
 						createinitializeFromSwimlaneToStartState_Initiator(
 								graphElementTgt, graphElementSrc);
 					}
@@ -440,30 +431,6 @@ public class StartStateRestoreConnectionCommand extends
 						}
 					}
 				}
-			}
-		}
-	}
-
-	/**
-	 * @param srcElt the source element
-	 * @param targetElt the target element
-	 * @generated
-	 */
-	private void createmanageFromSwimlaneToStartState_Initiator(
-			GraphElement srcElt, GraphElement targetElt) {
-		Swimlane sourceObject = (Swimlane) Utils.getElement(srcElt);
-		StartState targetObject = (StartState) Utils.getElement(targetElt);
-
-		if (sourceObject.equals(targetObject.getInitiator())) {
-			// check if the relation does not exists yet
-			if (getExistingEdges(srcElt, targetElt,
-					WfSimpleObjectConstants.SIMPLE_OBJECT_MANAGE).size() == 0) {
-				GraphEdge edge = Utils
-						.createGraphEdge(WfSimpleObjectConstants.SIMPLE_OBJECT_MANAGE);
-				manageEdgeCreationCommand cmd = new manageEdgeCreationCommand(
-						null, edge, srcElt, false);
-				cmd.setTarget(targetElt);
-				add(cmd);
 			}
 		}
 	}
