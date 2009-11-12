@@ -26,6 +26,7 @@ import org.topcased.modeler.editor.Modeler;
 import org.topcased.modeler.editor.ModelerGraphicalViewer;
 
 import com.bluexml.side.Workflow.modeler.WorkflowPlugin;
+import com.bluexml.side.Workflow.modeler.actions.HideResponsibilityLinks;
 import com.bluexml.side.Workflow.modeler.actions.popup.ShowFormAction;
 
 /**
@@ -103,6 +104,10 @@ public class WorkflowEditor extends Modeler {
 		
 		IAction action = new ShowFormAction((IWorkbenchPart) this);
 		registry.registerAction(action);
+		
+		action = new HideResponsibilityLinks((IWorkbenchPart) this);
+        registry.registerAction(action);
+        getSelectionActions().add(action.getId());
 	}
 	
 	@Override

@@ -14,8 +14,11 @@
  ******************************************************************************/
 package com.bluexml.side.Workflow.modeler.diagram.figures;
 
+import org.eclipse.draw2d.Graphics;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.swt.SWT;
+
+import com.bluexml.side.Workflow.modeler.actions.HideResponsibilityLinks;
 
 /**
  * @generated
@@ -30,6 +33,12 @@ public class manageFigure extends PolylineConnectionEx {
 	public manageFigure() {
 		super();
 		setLineStyle(SWT.LINE_SOLID);
+	}
+	
+	@Override
+	public void paint(Graphics graphics) {
+		if (HideResponsibilityLinks.showResponsibilityLinks)
+			super.paint(graphics);
 	}
 
 }
