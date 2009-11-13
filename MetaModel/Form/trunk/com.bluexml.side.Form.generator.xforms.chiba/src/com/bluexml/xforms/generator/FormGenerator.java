@@ -520,9 +520,15 @@ public class FormGenerator {
 		logger.info("Processing Association " + ModelTools.getCompleteName(association));
 
 		AssociationEnd fEnd = association.getFirstEnd();
-		Clazz fEndLinkedClass = fEnd.getLinkedClass();
+		Clazz fEndLinkedClass = null;
+		if (fEnd.getLinkedClass() instanceof Clazz) {
+			fEndLinkedClass = (Clazz) fEnd.getLinkedClass();
+		}
 		AssociationEnd sEnd = association.getSecondEnd();
-		Clazz sEndLinkedClass = sEnd.getLinkedClass();
+		Clazz sEndLinkedClass = null;
+		if (sEnd.getLinkedClass() instanceof Clazz) {
+			sEndLinkedClass = (Clazz) sEnd.getLinkedClass();
+		}
 		if ((fEndLinkedClass != null) && (sEndLinkedClass != null)) {
 			boolean doublenav = sEnd.isNavigable() && fEnd.isNavigable();
 			AssociationCardinality associationType = getAssociationType(association);
@@ -771,9 +777,15 @@ public class FormGenerator {
 		for (Association association : allAssociations) {
 			if (association.getFirstEnd().getLinkedClass() != null
 					&& association.getSecondEnd().getLinkedClass() != null) {
-				Clazz assoSource = association.getFirstEnd().getLinkedClass();
+				Clazz assoSource = null;
+				if (association.getFirstEnd().getLinkedClass() instanceof Clazz) {
+					assoSource = (Clazz) association.getFirstEnd().getLinkedClass();
+				}
 				String assoSourceName = ModelTools.getCompleteName(assoSource);
-				Clazz assoTarget = association.getSecondEnd().getLinkedClass();
+				Clazz assoTarget = null;
+				if (association.getSecondEnd().getLinkedClass() instanceof Clazz) {
+					assoTarget = (Clazz) association.getSecondEnd().getLinkedClass();
+				}
 				String assoTargetName = ModelTools.getCompleteName(assoTarget);
 				String roleSrc = association.getFirstEnd().getName();
 				String roleTarget = association.getSecondEnd().getName();
