@@ -674,10 +674,13 @@ public class ViewActionBarContributor extends EditingDomainActionBarContributor
 			if (targets.size() > 0) {
 				//c = targets.get(0);
 				if (a.getAssociationEnd(c).get(0).getLinkedClass().equals(c)) {
-					c = a.getAssociationEnd(c).get(0).getOpposite()
-							.getLinkedClass();
+					if (a.getAssociationEnd(c).get(0).getOpposite().getLinkedClass() instanceof Clazz) {
+						c = (Clazz) a.getAssociationEnd(c).get(0).getOpposite().getLinkedClass();
+					}
 				} else {
-					c = a.getAssociationEnd(c).get(0).getLinkedClass();
+					if (a.getAssociationEnd(c).get(0).getLinkedClass() instanceof Clazz) {
+						c = (Clazz) a.getAssociationEnd(c).get(0).getLinkedClass();
+					}
 				}
 				for (Attribute att : c.getAllAttributes()) {
 					AddLinkedFieldAction alfa = new AddLinkedFieldAction(att, path,
