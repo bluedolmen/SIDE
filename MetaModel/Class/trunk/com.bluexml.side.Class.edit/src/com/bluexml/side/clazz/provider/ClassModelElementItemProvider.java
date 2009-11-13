@@ -121,7 +121,7 @@ public class ClassModelElementItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ClassModelElement)object).getDocumentation();
+		String label = crop(((ClassModelElement)object).getDocumentation());
 		return label == null || label.length() == 0 ?
 			getString("_UI_ClassModelElement_type") :
 			getString("_UI_ClassModelElement_type") + " " + label;
