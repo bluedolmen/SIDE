@@ -92,12 +92,18 @@ public class AlfrescoStructure {
 		
 		query.append(UUIDContent);
 		query.append("\"");
+		
 		ResultSet nodeRefSet = serviceRegistry.getSearchService().query(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE,SearchService.LANGUAGE_LUCENE,query.toString());
-		if (nodeRefSet.length() > 1) {
+		if (nodeRefSet.length() >= 1) {
 			content = nodeRefSet.getNodeRefs().get(0);
 		} else {
 			//Trying to evaluate as alfresco javascript
-			Object result = AlfrescoJavaScript.executeScript(executionContext, serviceRegistry,UUIDContent, Collections.EMPTY_LIST);
+			Object result = null;
+			try {
+				result = AlfrescoJavaScript.executeScript(executionContext, serviceRegistry,UUIDContent, Collections.EMPTY_LIST);
+			} catch (Exception e) {
+				//Nothing to do
+			}
 			if (result instanceof JBPMNode) {
 				JBPMNode jbpmnode = (JBPMNode) result;
 				if (jbpmnode.getNodeRef() != null)
