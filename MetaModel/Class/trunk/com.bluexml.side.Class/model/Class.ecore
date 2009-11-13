@@ -432,7 +432,7 @@
         <details key="documentation" value="Definition: if false, this boolean indicates that the association is not navigable ie it is not possible to pass through the association.&#xD;&#xA;Example: let's consider a relation between a resume content and a working contract which is not navigable on the resume end association and navigable on the working contract. This means that the working contract instances will not store resume instances list (it is not possible from a working contract to list the associated resume) and that the resume instances will store working contract instances list (it is possible from a resume to list the associated working contracts)."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="linkedClass" eType="#//Clazz"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="linkedClass" eType="#//AbstractClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//ClassPackage"/>
 </ecore:EPackage>
