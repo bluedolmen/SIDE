@@ -151,6 +151,9 @@ public interface AssociationEnd extends TitledNamedClassModelElement, Comment {
 	 * @generated
 	 */
 	void setLinkedClass(AbstractClass value);
+	
+	//Add to be conformed with previous versions
+	void setLinkedClass(Clazz value);
 
 	/**
 	 * <!-- begin-user-doc -->
