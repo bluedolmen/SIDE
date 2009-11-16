@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
+import org.eclipse.core.runtime.jobs.IJobChangeListener;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
@@ -30,6 +33,7 @@ import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationPackage;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ConfigurationParameters;
+import com.bluexml.side.application.Model;
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.application.ui.Activator;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
@@ -132,7 +136,7 @@ public class GeneratePopUp extends Dialog {
 		generalLabel.setAlignment(SWT.CENTER);
 		generalLabel.setBounds(10, 24, 514, 24);
 		generalLabel.setFont(SWTResourceManager.getFont("", 12, SWT.BOLD)); //$NON-NLS-1$
-		generalLabel.setText(Activator.Messages.getString("Messages.GeneratePopUp_1"));
+		generalLabel.setText(Activator.Messages.getString("GeneratePopUp_1"));//$NON-NLS-1$
 
 		// main proressBar
 		final ProgressBar progressBar = new ProgressBar(container, SWT.SMOOTH);
@@ -158,7 +162,7 @@ public class GeneratePopUp extends Dialog {
 		logLink.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
 		logLink.setBounds(137, 350, 225, 55);
 		logLink.setVisible(false);
-		logLink.setText("<form><p>" + Activator.Messages.getString("GeneratePopUp_4") + "<a href=\"log\">" + Activator.Messages.getString("GeneratePopUp_6") + "</a>.</p></form>", true, true); //$NON-NLS-1$ //$NON-NLS-3$ //$NON-NLS-5$
+		logLink.setText("<form><p>" + Activator.Messages.getString("GeneratePopUp_4") + "<a href=\"log\">" + Activator.Messages.getString("GeneratePopUp_6") + "</a>.</p></form>", true, true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 
 		this.progressBar = new ProgressBarAdapter(progressBar);
 		this.label = new LabelAdapter(generalLabel);
@@ -200,8 +204,8 @@ public class GeneratePopUp extends Dialog {
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, IDialogConstants.OK_ID, "Run in background", true);
-		createButton(parent, IDialogConstants.CANCEL_ID, "Cancel process", false);
+		createButton(parent, IDialogConstants.OK_ID, Activator.Messages.getString("GeneratePopUp_3"), true);
+		createButton(parent, IDialogConstants.CANCEL_ID, Activator.Messages.getString("GeneratePopUp_2"), false);
 	}
 
 	/*
@@ -211,8 +215,9 @@ public class GeneratePopUp extends Dialog {
 	 */
 	@Override
 	protected void cancelPressed() {
-		generalMonitor.addErrorText("Cancel requested, please wait");
+		generalMonitor.addErrorText(Activator.Messages.getString("GeneratePopUp_0"));
 		listener.addButtonPressedListener(IDialogConstants.CANCEL_ID);
+		getButton(IDialogConstants.CANCEL_ID).setEnabled(false);
 		// super.cancelPressed();
 	}
 
@@ -232,11 +237,11 @@ public class GeneratePopUp extends Dialog {
 
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setText(Activator.Messages.getString("GeneratePopUp_10"));
+		newShell.setText(Activator.Messages.getString("GeneratePopUp_10")); //$NON-NLS-1$
 	}
 
 	/**
-	 * Method to setup dialog when job's done 
+	 * Method to setup dialog when job's done
 	 */
 	public void displayLink() {
 		Display currentDisp = ApplicationUtil.getDisplay();
@@ -249,9 +254,9 @@ public class GeneratePopUp extends Dialog {
 						ApplicationUtil.browseTo("file://" + IFileHelper.getIFolder(logPath).getRawLocation().toFile().getAbsolutePath() + File.separator + LogSave.LOG_HTML_FILE_NAME); //$NON-NLS-1$
 					}
 				});
-				// change button according to the "done" state 
+				// change button according to the "done" state
 				getButton(IDialogConstants.CANCEL_ID).setEnabled(false);
-				getButton(IDialogConstants.OK_ID).setText("Close");
+				getButton(IDialogConstants.OK_ID).setText(Activator.Messages.getString("GeneratePopUp_9"));
 				setButtonLayoutData(getButton(IDialogConstants.OK_ID));
 				setButtonLayoutData(getButton(IDialogConstants.CANCEL_ID));
 			}
@@ -259,4 +264,54 @@ public class GeneratePopUp extends Dialog {
 
 	}
 
+	
+	public static void launch(final Configuration configuration, final GeneratePopUp generationPopUp) {
+		generationPopUp.setBlockOnOpen(false);
+
+		generationPopUp.open();
+		Display currentDisp = ApplicationUtil.getDisplay();
+		currentDisp.syncExec(new Runnable() {
+			public void run() {
+				List<Model> models;
+				models = ApplicationUtil.getModels((Application) configuration.eContainer());
+				
+				// set job to run
+				final Generate gen = new Generate(configuration, models, generationPopUp.getGeneralMonitor(), generationPopUp.getComponentMonitor());
+				// when job's done dialog must display link to open report html page...
+				gen.addJobChangeListener(new IJobChangeListener() {
+					public void sleeping(IJobChangeEvent event) {
+					}
+
+					public void scheduled(IJobChangeEvent event) {
+					}
+
+					public void running(IJobChangeEvent event) {
+					}
+
+					public void done(IJobChangeEvent event) {
+						// display link
+						generationPopUp.displayLink();
+					}
+
+					public void awake(IJobChangeEvent event) {
+					}
+
+					public void aboutToRun(IJobChangeEvent event) {
+					}
+				});
+
+				// manage cancel
+				generationPopUp.addDialogEventListener(new IDialogEventListener() {
+					public void addButtonPressedListener(int buttonId) {
+						if (buttonId == IDialogConstants.CANCEL_ID) {
+							gen.cancel();
+						}
+					}
+				});
+				
+				// schedule side job
+				gen.schedule();
+			}
+		});
+	}
 }

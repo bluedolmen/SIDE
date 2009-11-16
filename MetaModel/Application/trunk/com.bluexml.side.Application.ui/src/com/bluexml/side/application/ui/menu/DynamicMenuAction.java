@@ -91,57 +91,13 @@ public class DynamicMenuAction extends CompoundContributionItem implements IObje
 								try {
 									generationPopUp = new GeneratePopUp(Display.getDefault().getActiveShell(), file, configuration.getName());
 
-									generationPopUp.setBlockOnOpen(false);
-
-									generationPopUp.open();
-									Display currentDisp = ApplicationUtil.getDisplay();
-									currentDisp.syncExec(new Runnable() {
-										public void run() {
-											List<Model> models;
-											models = ApplicationUtil.getModels((Application) configuration.eContainer());
-											
-											// set job to run
-											final Generate gen = new Generate(configuration, models, generationPopUp.getGeneralMonitor(), generationPopUp.getComponentMonitor());
-											// when job's done dialog must display link to open report html page...
-											gen.addJobChangeListener(new IJobChangeListener() {
-												public void sleeping(IJobChangeEvent event) {
-												}
-
-												public void scheduled(IJobChangeEvent event) {
-												}
-
-												public void running(IJobChangeEvent event) {
-												}
-
-												public void done(IJobChangeEvent event) {
-													// display link
-													generationPopUp.displayLink();
-												}
-
-												public void awake(IJobChangeEvent event) {
-												}
-
-												public void aboutToRun(IJobChangeEvent event) {
-												}
-											});
-
-											// manage cancel
-											generationPopUp.addDialogEventListener(new IDialogEventListener() {
-												public void addButtonPressedListener(int buttonId) {
-													if (buttonId == IDialogConstants.CANCEL_ID) {
-														gen.cancel();
-													}
-												}
-											});
-											
-											// schedule side job
-											gen.schedule();
-										}
-									});
+									GeneratePopUp.launch(configuration, generationPopUp);
 								} catch (IOException e1) {
 									e1.printStackTrace();
 								}
 							}
+
+							
 
 						});
 					}
@@ -185,5 +141,7 @@ public class DynamicMenuAction extends CompoundContributionItem implements IObje
 		// System.err.println("getContributionItems");
 		return null;
 	}
+	
+	
 
 }
