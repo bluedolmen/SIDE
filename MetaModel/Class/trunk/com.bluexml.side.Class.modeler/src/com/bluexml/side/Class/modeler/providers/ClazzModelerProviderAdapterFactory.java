@@ -55,13 +55,6 @@ public class ClazzModelerProviderAdapterFactory extends ClazzAdapterFactory
 	private ClassModelElementModelerProvider classmodelelementModelerProvider;
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.NamedClassModelElement} instances.
-	 * 
-	 * @generated
-	 */
-	private NamedClassModelElementModelerProvider namedclassmodelelementModelerProvider;
-
-	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.ClassPackage} instances.
 	 * 
 	 * @generated
@@ -104,20 +97,6 @@ public class ClazzModelerProviderAdapterFactory extends ClazzAdapterFactory
 	private EnumerationLiteralModelerProvider enumerationliteralModelerProvider;
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.common.Operation} instances.
-	 * 
-	 * @generated
-	 */
-	private OperationModelerProvider operationModelerProvider;
-
-	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.common.Parameter} instances.
-	 * 
-	 * @generated
-	 */
-	private ParameterModelerProvider parameterModelerProvider;
-
-	/**
 	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.Aspect} instances.
 	 * 
 	 * @generated
@@ -132,25 +111,32 @@ public class ClazzModelerProviderAdapterFactory extends ClazzAdapterFactory
 	private AbstractClassModelerProvider abstractclassModelerProvider;
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.AbstractContainer} instances.
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.TitledNamedClassModelElement} instances.
 	 * 
 	 * @generated
 	 */
-	private AbstractContainerModelerProvider abstractcontainerModelerProvider;
-	
-	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.common.MetaInfo} instances.
-	 * 
-	 * @generated
-	 */
-	private MetaInfoModelerProvider metainfoModelerProvider;
+	private TitledNamedClassModelElementModelerProvider titlednamedclassmodelelementModelerProvider;
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.bluexml.side.common.MetaInfoGroup} instances.
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.ClassComment} instances.
 	 * 
 	 * @generated
 	 */
-	private MetaInfoGroupModelerProvider metainfogroupModelerProvider;
+	private ClassCommentModelerProvider classcommentModelerProvider;
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.AssociationEnd} instances.
+	 * 
+	 * @generated
+	 */
+	private AssociationEndModelerProvider associationendModelerProvider;
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.clazz.Model} instances.
+	 * 
+	 * @generated
+	 */
+	private ModelModelerProvider modelModelerProvider;
 
 	/**
 	 * This constructs an instance.
@@ -274,21 +260,6 @@ public class ClazzModelerProviderAdapterFactory extends ClazzAdapterFactory
 	}
 
 	/**
-	 * This creates an adapter for a {@link com.bluexml.side.clazz.NamedClassModelElement}.
-	 *
-	 * @return the Adapter
-	 * @generated
-	 */
-	public Adapter createNamedClassModelElementAdapter() {
-		if (namedclassmodelelementModelerProvider == null) {
-			namedclassmodelelementModelerProvider = new NamedClassModelElementModelerProvider(
-					this);
-		}
-
-		return namedclassmodelelementModelerProvider;
-	}
-
-	/**
 	 * This creates an adapter for a {@link com.bluexml.side.clazz.ClassPackage}.
 	 *
 	 * @return the Adapter
@@ -374,34 +345,6 @@ public class ClazzModelerProviderAdapterFactory extends ClazzAdapterFactory
 	}
 
 	/**
-	 * This creates an adapter for a {@link com.bluexml.side.common.Operation}.
-	 *
-	 * @return the Adapter
-	 * @generated
-	 */
-	public Adapter createOperationAdapter() {
-		if (operationModelerProvider == null) {
-			operationModelerProvider = new OperationModelerProvider(this);
-		}
-
-		return operationModelerProvider;
-	}
-
-	/**
-	 * This creates an adapter for a {@link com.bluexml.side.common.Parameter}.
-	 *
-	 * @return the Adapter
-	 * @generated
-	 */
-	public Adapter createParameterAdapter() {
-		if (parameterModelerProvider == null) {
-			parameterModelerProvider = new ParameterModelerProvider(this);
-		}
-
-		return parameterModelerProvider;
-	}
-
-	/**
 	 * This creates an adapter for a {@link com.bluexml.side.clazz.Aspect}.
 	 *
 	 * @return the Adapter
@@ -431,47 +374,61 @@ public class ClazzModelerProviderAdapterFactory extends ClazzAdapterFactory
 	}
 
 	/**
-	 * This creates an adapter for a {@link com.bluexml.side.clazz.AbstractContainer}.
+	 * This creates an adapter for a {@link com.bluexml.side.clazz.TitledNamedClassModelElement}.
 	 *
 	 * @return the Adapter
 	 * @generated
 	 */
-	public Adapter createAbstractContainerAdapter() {
-		if (abstractcontainerModelerProvider == null) {
-			abstractcontainerModelerProvider = new AbstractContainerModelerProvider(
+	public Adapter createTitledNamedClassModelElementAdapter() {
+		if (titlednamedclassmodelelementModelerProvider == null) {
+			titlednamedclassmodelelementModelerProvider = new TitledNamedClassModelElementModelerProvider(
 					this);
 		}
 
-		return abstractcontainerModelerProvider;
+		return titlednamedclassmodelelementModelerProvider;
 	}
-	
+
 	/**
-	 * This creates an adapter for a {@link com.bluexml.side.common.MetaInfo}.
+	 * This creates an adapter for a {@link com.bluexml.side.clazz.ClassComment}.
 	 *
 	 * @return the Adapter
 	 * @generated
 	 */
-	public Adapter createMetaInfoAdapter() {
-		if (metainfoModelerProvider == null) {
-			metainfoModelerProvider = new MetaInfoModelerProvider(this);
+	public Adapter createClassCommentAdapter() {
+		if (classcommentModelerProvider == null) {
+			classcommentModelerProvider = new ClassCommentModelerProvider(this);
 		}
 
-		return metainfoModelerProvider;
+		return classcommentModelerProvider;
 	}
 
 	/**
-	 * This creates an adapter for a {@link com.bluexml.side.common.MetaInfoGroup}.
+	 * This creates an adapter for a {@link com.bluexml.side.clazz.AssociationEnd}.
 	 *
 	 * @return the Adapter
 	 * @generated
 	 */
-	public Adapter createMetaInfoGroupAdapter() {
-		if (metainfogroupModelerProvider == null) {
-			metainfogroupModelerProvider = new MetaInfoGroupModelerProvider(
+	public Adapter createAssociationEndAdapter() {
+		if (associationendModelerProvider == null) {
+			associationendModelerProvider = new AssociationEndModelerProvider(
 					this);
 		}
 
-		return metainfogroupModelerProvider;
+		return associationendModelerProvider;
+	}
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.clazz.Model}.
+	 *
+	 * @return the Adapter
+	 * @generated
+	 */
+	public Adapter createModelAdapter() {
+		if (modelModelerProvider == null) {
+			modelModelerProvider = new ModelModelerProvider(this);
+		}
+
+		return modelModelerProvider;
 	}
 
 	/**
@@ -482,9 +439,6 @@ public class ClazzModelerProviderAdapterFactory extends ClazzAdapterFactory
 	public void dispose() {
 		if (classmodelelementModelerProvider != null) {
 			classmodelelementModelerProvider.dispose();
-		}
-		if (namedclassmodelelementModelerProvider != null) {
-			namedclassmodelelementModelerProvider.dispose();
 		}
 		if (classpackageModelerProvider != null) {
 			classpackageModelerProvider.dispose();
@@ -504,26 +458,23 @@ public class ClazzModelerProviderAdapterFactory extends ClazzAdapterFactory
 		if (enumerationliteralModelerProvider != null) {
 			enumerationliteralModelerProvider.dispose();
 		}
-		if (operationModelerProvider != null) {
-			operationModelerProvider.dispose();
-		}
-		if (parameterModelerProvider != null) {
-			parameterModelerProvider.dispose();
-		}
 		if (aspectModelerProvider != null) {
 			aspectModelerProvider.dispose();
 		}
 		if (abstractclassModelerProvider != null) {
 			abstractclassModelerProvider.dispose();
 		}
-		if (abstractcontainerModelerProvider != null) {
-			abstractcontainerModelerProvider.dispose();
-		}		
-		if (metainfoModelerProvider != null) {
-			metainfoModelerProvider.dispose();
+		if (titlednamedclassmodelelementModelerProvider != null) {
+			titlednamedclassmodelelementModelerProvider.dispose();
 		}
-		if (metainfogroupModelerProvider != null) {
-			metainfogroupModelerProvider.dispose();
+		if (classcommentModelerProvider != null) {
+			classcommentModelerProvider.dispose();
+		}
+		if (associationendModelerProvider != null) {
+			associationendModelerProvider.dispose();
+		}
+		if (modelModelerProvider != null) {
+			modelModelerProvider.dispose();
 		}
 	}
 

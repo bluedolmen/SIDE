@@ -102,64 +102,72 @@ public class ClazzEditor extends Modeler {
 		}
 		return ClazzPlugin.getDefault().getPreferenceStore();
 	}
-	
-	/**
-     * @see org.topcased.modeler.editor.Modeler#getContextMenuProvider(org.topcased.modeler.editor.ModelerGraphicalViewer)
-     * @_generated
-     */
-    protected ContextMenuProvider getContextMenuProvider(ModelerGraphicalViewer viewer)
-    {
-        return new ModelerContextMenuProvider(viewer, getActionRegistry());
-    }
-    
-    @Override
-    protected void createActions()
-    {
-        super.createActions();
 
-        ActionRegistry registry = getActionRegistry();
-        
-        // Delete link between Class and Aspect
-        DeleteLinkClassAspectAction deleteLinkToAspect = new DeleteLinkClassAspectAction(this);
-        registry.registerAction(deleteLinkToAspect);
-        getSelectionActions().add(deleteLinkToAspect.getId());
-        
-        // Delete link between Enumerations (depends)
-        DeleteLinkEnumerationDependsAction deleteEnumerationDependsAction = new DeleteLinkEnumerationDependsAction(this);
-        registry.registerAction(deleteEnumerationDependsAction);
-        getSelectionActions().add(deleteEnumerationDependsAction.getId());
-        
-        // Delete generalization between Class
-        DeleteLinkClassGeneralizationAction deleteLinkClassGeneralizationAction = new DeleteLinkClassGeneralizationAction(this);
-        registry.registerAction(deleteLinkClassGeneralizationAction);
-        getSelectionActions().add(deleteLinkClassGeneralizationAction.getId());
-        
-        IAction action = new ShowFormAction((IWorkbenchPart) this);
+	/**
+	 * @see org.topcased.modeler.editor.Modeler#getContextMenuProvider(org.topcased.modeler.editor.ModelerGraphicalViewer)
+	 * @_generated
+	 */
+	protected ContextMenuProvider getContextMenuProvider(
+			ModelerGraphicalViewer viewer) {
+		return new ModelerContextMenuProvider(viewer, getActionRegistry());
+	}
+
+	@Override
+	protected void createActions() {
+		super.createActions();
+
+		ActionRegistry registry = getActionRegistry();
+
+		// Delete link between Class and Aspect
+		DeleteLinkClassAspectAction deleteLinkToAspect = new DeleteLinkClassAspectAction(
+				this);
+		registry.registerAction(deleteLinkToAspect);
+		getSelectionActions().add(deleteLinkToAspect.getId());
+
+		// Delete link between Enumerations (depends)
+		DeleteLinkEnumerationDependsAction deleteEnumerationDependsAction = new DeleteLinkEnumerationDependsAction(
+				this);
+		registry.registerAction(deleteEnumerationDependsAction);
+		getSelectionActions().add(deleteEnumerationDependsAction.getId());
+
+		// Delete generalization between Class
+		DeleteLinkClassGeneralizationAction deleteLinkClassGeneralizationAction = new DeleteLinkClassGeneralizationAction(
+				this);
+		registry.registerAction(deleteLinkClassGeneralizationAction);
+		getSelectionActions().add(deleteLinkClassGeneralizationAction.getId());
+
+		IAction action = new ShowFormAction((IWorkbenchPart) this);
 		registry.registerAction(action);
-		
+
 		action = new ShowViewAction((IWorkbenchPart) this);
 		registry.registerAction(action);
-    }
-    
-    @Override
-    protected void configureGraphicalViewer()
-    {
-        super.configureGraphicalViewer();
-               
-        IAction deleteLinkToAspect = getActionRegistry().getAction(DeleteLinkClassAspectAction.ID);
-        getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) deleteLinkToAspect);
-        
-        IAction deleteEnumerationDependsAction = getActionRegistry().getAction(DeleteLinkEnumerationDependsAction.ID);
-        getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) deleteEnumerationDependsAction);
-        
-        IAction deleteLinkClassGeneralizationAction = getActionRegistry().getAction(DeleteLinkClassGeneralizationAction.ID);
-        getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) deleteLinkClassGeneralizationAction);
-    }
-    
-    public void intializeExport(GraphicalViewer viewer) {
+	}
+
+	@Override
+	protected void configureGraphicalViewer() {
+		super.configureGraphicalViewer();
+
+		IAction deleteLinkToAspect = getActionRegistry().getAction(
+				DeleteLinkClassAspectAction.ID);
+		getGraphicalViewer().addSelectionChangedListener(
+				(ISelectionChangedListener) deleteLinkToAspect);
+
+		IAction deleteEnumerationDependsAction = getActionRegistry().getAction(
+				DeleteLinkEnumerationDependsAction.ID);
+		getGraphicalViewer().addSelectionChangedListener(
+				(ISelectionChangedListener) deleteEnumerationDependsAction);
+
+		IAction deleteLinkClassGeneralizationAction = getActionRegistry()
+				.getAction(DeleteLinkClassGeneralizationAction.ID);
+		getGraphicalViewer()
+				.addSelectionChangedListener(
+						(ISelectionChangedListener) deleteLinkClassGeneralizationAction);
+	}
+
+	public void intializeExport(GraphicalViewer viewer) {
 		setEditDomain((DefaultEditDomain) viewer.getEditDomain());
 		getEditDomain().setPaletteViewer(new PaletteViewer());
 		setGraphicalViewer(viewer);
 	}
-    
+
 }

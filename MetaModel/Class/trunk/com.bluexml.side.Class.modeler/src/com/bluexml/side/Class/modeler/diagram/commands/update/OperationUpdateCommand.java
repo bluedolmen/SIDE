@@ -28,7 +28,6 @@ import com.bluexml.side.Class.modeler.diagram.dialogs.OperationDataStructure;
 import com.bluexml.side.Class.modeler.diagram.dialogs.OperationEditDialog;
 import com.bluexml.side.Class.modeler.diagram.dialogs.ConstraintsDataStructure.ConstraintObject;
 import com.bluexml.side.Class.modeler.diagram.utils.metainfo.OblOperationMetaInfo;
-import com.bluexml.side.clazz.ClazzFactory;
 import com.bluexml.side.common.CommonFactory;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaInfo;

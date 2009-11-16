@@ -10,19 +10,19 @@ import org.topcased.modeler.providers.ILabelFeatureProvider;
 import com.bluexml.side.common.CommonPackage;
 
 /**
- * This is the item provider adpater for a {@link com.bluexml.side.clazz.Aspect} object.
+ * This is the item provider adpater for a {@link com.bluexml.side.clazz.Model} object.
  *
  * @generated
  */
-public class AspectModelerProvider extends AbstractClassModelerProvider
-		implements ILabelFeatureProvider {
+public class ModelModelerProvider extends ClassPackageModelerProvider implements
+		ILabelFeatureProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 *
 	 * @param adapterFactory the adapter factory
 	 * @generated
 	 */
-	public AspectModelerProvider(AdapterFactory adapterFactory) {
+	public ModelModelerProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 

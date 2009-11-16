@@ -1,5 +1,5 @@
 /*******************************************************************************
- *
+ * 
  ******************************************************************************/
 package com.bluexml.side.Class.modeler.wizards;
 
@@ -35,7 +35,7 @@ public class ClazzDiagramsPage extends DiagramsPage {
 
 	/**
 	 * @see org.topcased.modeler.wizards.DiagramsPage#getFileExtension()
-	 * @generated
+	 * @_generated
 	 */
 	public String getFileExtension() {
 		return "dt";

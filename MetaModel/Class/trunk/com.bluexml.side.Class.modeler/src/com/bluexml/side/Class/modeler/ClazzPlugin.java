@@ -26,9 +26,11 @@ import com.bluexml.side.util.libs.Messages;
  * @generated
  */
 public class ClazzPlugin extends AbstractUIPlugin {
-	
-	public static final Messages Messages = new Messages("com.bluexml.side.Class.modeler", "com.bluexml.side.Class.modeler.messages");
-	
+
+	public static final Messages Messages = new Messages(
+			"com.bluexml.side.Class.modeler",
+			"com.bluexml.side.Class.modeler.messages");
+
 	/**
 	 * The shared instance
 	 * @generated

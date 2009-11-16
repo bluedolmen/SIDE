@@ -5,6 +5,7 @@ package com.bluexml.side.Class.modeler.providers;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.topcased.modeler.providers.ILabelFeatureProvider;
 
 import com.bluexml.side.common.CommonPackage;
@@ -14,8 +15,8 @@ import com.bluexml.side.common.CommonPackage;
  *
  * @generated
  */
-public class EnumerationModelerProvider extends
-		NamedClassModelElementModelerProvider implements ILabelFeatureProvider {
+public class EnumerationModelerProvider extends ItemProviderAdapter implements
+		ILabelFeatureProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 *

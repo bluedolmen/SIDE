@@ -25,8 +25,8 @@ import com.bluexml.side.Class.modeler.diagram.dialogs.ConstraintsDataStructure;
 import com.bluexml.side.Class.modeler.diagram.dialogs.ConstraintsDataStructure.ConstraintObject;
 import com.bluexml.side.Class.modeler.diagram.utils.metainfo.OblAttributeMetaInfo;
 import com.bluexml.side.clazz.Attribute;
-import com.bluexml.side.common.DataType;
 import com.bluexml.side.clazz.Enumeration;
+import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.Visibility;
 

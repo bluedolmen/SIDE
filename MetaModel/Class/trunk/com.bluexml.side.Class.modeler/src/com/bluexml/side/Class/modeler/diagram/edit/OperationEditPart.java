@@ -44,8 +44,8 @@ import com.bluexml.side.Class.modeler.diagram.preferences.CdDiagramPreferenceCon
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.common.Operation;
 import com.bluexml.side.common.Parameter;
-import com.bluexml.side.common.Visibility;
 import com.bluexml.side.common.Stereotype;
+import com.bluexml.side.common.Visibility;
 
 /**
  * The Operation object controller
