@@ -26,6 +26,9 @@ public class Monitor extends AbstractMonitor {
 	public void beginTask(String name, int totalWork) {
 		beginTask(name);
 		progressBar.setMaximum(totalWork);
+		if (parent !=null) {
+			parent.beginTask(name, totalWork);
+		}
 	}
 
 	public void subTask(String name) {
@@ -34,29 +37,28 @@ public class Monitor extends AbstractMonitor {
 			progressBarlabel.setText(name);
 		}
 		currentOpenTask++;
+		if (parent !=null) {
+			parent.subTask(name);
+		}
 	}
 
 	public void worked(int work) {
-
+		if (parent !=null) {
+			parent.worked(work);
+		}
 	}
 
 	public void internalWorked(double work) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public boolean isCanceled() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public void setCanceled(boolean value) {
-		// TODO Auto-generated method stub
+		if (parent !=null) {
+			parent.internalWorked(work);
+		}
 
 	}
 
 	public void setTaskName(String name) {
-		// TODO Auto-generated method stub
+		if (parent !=null) {
+			parent.setTaskName(name);
+		}
 
 	}
 
@@ -67,7 +69,9 @@ public class Monitor extends AbstractMonitor {
 			progressBarlabel.setText(name);
 		}
 		currentOpenTask++;
-
+		if (parent !=null) {
+			parent.beginTask(name);
+		}
 	}
 
 	public void taskDone(String text) {
@@ -76,12 +80,17 @@ public class Monitor extends AbstractMonitor {
 			addText(text);
 			progressBarlabel.setText(text);
 		}
-
+		if (parent !=null) {
+			parent.taskDone(text);
+		}
 	}
 
 	public void done() {
 		currentOpenTask--;
 		addOneStep();
+		if (parent !=null) {
+			parent.done();
+		}
 	}
 
 }

@@ -11,18 +11,29 @@ import com.bluexml.side.util.documentation.structure.enumeration.LogType;
 
 public class ComponentMonitor extends AbstractMonitor implements CoreInterface {
 	private LogHelper log;
+	boolean initialized = false;
 
-	public ComponentMonitor(StyledTextInterface styletext, ProgressBarInterface progressBar, int totalWork, LabelInterface progressBarlabel, AbstractMonitor parent, final Map<String, String> configurationParameters, LogType logType,LogHelper consoleLog,String logFileName) {
+	public ComponentMonitor(StyledTextInterface styletext, ProgressBarInterface progressBar, Integer totalWork, LabelInterface progressBarlabel, AbstractMonitor parent,
+			final Map<String, String> configurationParameters, LogType logType, LogHelper consoleLog, String logFileName) {
 		super(styletext, progressBar, progressBarlabel, parent);
 		this.consoleLog = consoleLog;
 		if (progressBar != null) {
 			progressBar.setSelection(0);
-			progressBar.setMaximum(totalWork);
+			// progressBar.setMaximum(totalWork);
 		}
 		if (configurationParameters != null && logType != null) {
-			LogHelper log = new LogHelper(configurationParameters, logType,logFileName);
+			LogHelper log = new LogHelper(configurationParameters, logType, logFileName);
 			setLog(log);
 		}
+	}
+
+	public void initialize(int totalWork, final Map<String, String> configurationParameters, LogType logType, String logFileName) {
+		progressBar.setMaximum(totalWork);
+		if (configurationParameters != null && logType != null) {
+			LogHelper log = new LogHelper(configurationParameters, logType, logFileName);
+			setLog(log);
+		}
+		initialized = true;
 	}
 
 	public void setLog(LogHelper log) {

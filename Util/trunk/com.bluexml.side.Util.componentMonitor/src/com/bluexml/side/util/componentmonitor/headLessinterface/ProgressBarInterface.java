@@ -1,16 +1,18 @@
 package com.bluexml.side.util.componentmonitor.headLessinterface;
 import org.eclipse.swt.graphics.Point;
+
+import com.bluexml.side.util.componentmonitor.guiAdapter.AdaptedRunable.WidgetNotAvailable;
 public interface ProgressBarInterface {
 
-	public Point computeSize(int wHint, int hHint, boolean changed);
+	public Point computeSize(int wHint, int hHint, boolean changed) throws WidgetNotAvailable;
 
-	public int getMaximum();
+	public int getMaximum() throws WidgetNotAvailable;
 
-	public int getMinimum();
+	public int getMinimum() throws WidgetNotAvailable;
 
-	public int getSelection();
+	public int getSelection() throws WidgetNotAvailable;
 
-	public int getState();
+	public int getState() throws WidgetNotAvailable;
 
 	public void setMaximum(int value);
 
