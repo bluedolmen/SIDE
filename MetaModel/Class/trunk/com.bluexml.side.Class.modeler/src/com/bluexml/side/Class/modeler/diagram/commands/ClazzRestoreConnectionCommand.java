@@ -14,8 +14,11 @@
  ******************************************************************************/
 package com.bluexml.side.Class.modeler.diagram.commands;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;

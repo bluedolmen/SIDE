@@ -50,7 +50,7 @@ public class NewClazzDiagrams extends Wizard implements INewWizard {
 
 	/**
 	 * @see org.eclipse.ui.IWorkbenchWizard#init(org.eclipse.ui.IWorkbench, org.eclipse.jface.viewers.IStructuredSelection)
-	 * @_generated
+	 * @generated
 	 */
 	public void init(IWorkbench workbench, IStructuredSelection sel) {
 		createdFile = null;
@@ -129,7 +129,7 @@ public class NewClazzDiagrams extends Wizard implements INewWizard {
 	 */
 	public void addPages() {
 		diagPage = new ClazzDiagramsPage("New Class Modeler Diagram", selection);
-		diagPage.setTitle("Clazz Diagrams");
+		diagPage.setTitle("Class Diagrams");
 		diagPage.setDescription("Define the model diagram informations.");
 		addPage(diagPage);
 	}

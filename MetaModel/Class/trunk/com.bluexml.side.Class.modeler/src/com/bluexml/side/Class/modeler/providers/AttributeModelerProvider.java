@@ -15,8 +15,7 @@ import com.bluexml.side.common.CommonPackage;
  * @generated
  */
 public class AttributeModelerProvider extends
-		TitledNamedClassModelElementModelerProvider implements
-		ILabelFeatureProvider {
+		NamedClassModelElementModelerProvider implements ILabelFeatureProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 *

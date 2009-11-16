@@ -20,6 +20,7 @@ import java.util.Collection;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.MetaInfoGroup;
 import com.bluexml.side.common.impl.CommonFactoryImpl;
+import com.bluexml.side.clazz.impl.ClazzFactoryImpl;
 
 
 
