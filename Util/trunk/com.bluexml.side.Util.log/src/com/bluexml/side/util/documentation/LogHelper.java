@@ -55,6 +55,13 @@ public class LogHelper {
 	}
 
 	/**
+	 * @return the logDirectory
+	 */
+	public String getLogDirectory() {
+		return logDirectory;
+	}
+
+	/**
 	 * Add log to know on each model have been launch generation
 	 * 
 	 * @param name
