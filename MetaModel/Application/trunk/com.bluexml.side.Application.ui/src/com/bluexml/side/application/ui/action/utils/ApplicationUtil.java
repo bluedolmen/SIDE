@@ -2,6 +2,7 @@ package com.bluexml.side.application.ui.action.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,6 +15,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
@@ -22,6 +24,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.PlatformUI;
 
 import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.application.Application;
@@ -35,6 +39,7 @@ import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.ModuleConstraint;
 import com.bluexml.side.application.Option;
+import com.bluexml.side.application.ui.Activator;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.application.ui.action.tree.Deployer;
 import com.bluexml.side.application.ui.action.tree.Generator;
@@ -71,7 +76,7 @@ public class ApplicationUtil {
 	/**
 	 * Return the configuration corresponding to the given key in the current
 	 * configuration. Return null if not found.
-	 *
+	 * 
 	 * @param key
 	 * @return
 	 */
@@ -92,7 +97,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return models of the application
-	 *
+	 * 
 	 * @param application
 	 * @return
 	 */
@@ -108,7 +113,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Delete the given generator from the given configuration
-	 *
+	 * 
 	 * @param config
 	 * @param in
 	 */
@@ -125,7 +130,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Delete the given deployer from the given configuration
-	 *
+	 * 
 	 * @param config
 	 * @param in
 	 */
@@ -141,7 +146,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the list of componant configuration for a specific config
-	 *
+	 * 
 	 * @param config
 	 * @return
 	 */
@@ -171,7 +176,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return a map with association model <> metaModel name
-	 *
+	 * 
 	 * @param models
 	 * @param doValidation
 	 * @return
@@ -203,7 +208,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the metamodel of a given model
-	 *
+	 * 
 	 * @param model
 	 * @param file
 	 * @return
@@ -217,7 +222,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the resource for the given model and resource set
-	 *
+	 * 
 	 * @param rs
 	 * @param file
 	 * @return
@@ -240,12 +245,13 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the IFiel for the given Model
-	 *
+	 * 
 	 * @param model
 	 * @return
 	 * @throws IOException
 	 */
 	public static IFile getIFileForModel(Model model) throws IOException {
+		System.out.println(model);
 		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(model.getFile()));
 		if (!file.exists()) {
 			throw new IOException(System.getProperty("line.separator") + "File " + file.getName() + " doesn't exist.");
@@ -255,7 +261,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the ressourceSet for a model
-	 *
+	 * 
 	 * @param model
 	 * @return
 	 * @throws IOException
@@ -273,7 +279,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the meta model EPackage
-	 *
+	 * 
 	 * @param r
 	 * @return
 	 */
@@ -289,7 +295,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Return the root element of a model
-	 *
+	 * 
 	 * @param model
 	 * @return
 	 */
@@ -305,7 +311,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Take a EObject and will return the top container
-	 *
+	 * 
 	 * @param eo
 	 * @return
 	 */
@@ -319,7 +325,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Launch validation on given EObject
-	 *
+	 * 
 	 * @param eo
 	 * @return
 	 */
@@ -364,7 +370,7 @@ public class ApplicationUtil {
 
 	/**
 	 * Check if the element given is active in the key
-	 *
+	 * 
 	 * @param el
 	 *            : the element
 	 * @return true if valid, false if not
@@ -396,7 +402,7 @@ public class ApplicationUtil {
 
 	/**
 	 * scan all plugins and build the complete list of ModuleConstraint
-	 *
+	 * 
 	 * @return
 	 */
 	public static List<com.bluexml.side.util.dependencies.ModuleConstraint> buildOfflineConfiguration() {
@@ -425,7 +431,7 @@ public class ApplicationUtil {
 	 * take a configuration and update all properties from SIDE extension, this
 	 * manage : <li>deleted elements (options, dependencies)</li> <li>added
 	 * elements</li> <li>updates elements</li>
-	 *
+	 * 
 	 * @param config
 	 * @throws Exception
 	 */
@@ -628,7 +634,7 @@ public class ApplicationUtil {
 	/**
 	 * search in all SIDE extension, an extension fragment that match with this
 	 * ComponantConfiguration
-	 *
+	 * 
 	 * @param conf
 	 * @return
 	 * @throws Exception
@@ -661,7 +667,7 @@ public class ApplicationUtil {
 	/**
 	 * search in extension fragment that match with given name and a set of
 	 * attributes
-	 *
+	 * 
 	 * @param parent
 	 * @param nodeName
 	 * @param parametersMatchs
@@ -680,7 +686,7 @@ public class ApplicationUtil {
 
 	/**
 	 * return a list of extension fragment that match with the given name
-	 *
+	 * 
 	 * @param parent
 	 * @param name
 	 * @return
@@ -699,7 +705,7 @@ public class ApplicationUtil {
 
 	/**
 	 * test if the given extension fragment match with all attributes values
-	 *
+	 * 
 	 * @param node
 	 * @param parametersMatchs
 	 * @return
@@ -726,7 +732,7 @@ public class ApplicationUtil {
 	 * build a tmp project containning all dependencies and use mvn
 	 * dependency:go-offline to populate local copy (.m2/repository), so SIDE
 	 * can work offline
-	 *
+	 * 
 	 * @throws Exception
 	 */
 	public static void prepareForOffline() throws Exception {
@@ -738,5 +744,26 @@ public class ApplicationUtil {
 		DependencesManager dm = new DependencesManager(lmc, false);
 		dm.goOffline(tmpFolder);
 
+	}
+
+	public static Display getDisplay() {
+		Display display = Display.getCurrent();
+		// may be null if outside the UI thread
+		if (display == null)
+			display = Display.getDefault();
+		return display;
+	}
+
+	/**
+	 * open the given url into external browser
+	 * 
+	 * @param url
+	 */
+	public static void browseTo(String url) {
+		try {
+			PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(new URL(url));
+		} catch (Exception e) {
+			Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Error opening browser", e)); //$NON-NLS-1$
+		}
 	}
 }

@@ -3,9 +3,12 @@ package com.bluexml.side.application.ui.menu;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
+import org.eclipse.core.runtime.jobs.IJobChangeListener;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
@@ -13,6 +16,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IMenuCreator;
+import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
@@ -29,19 +33,21 @@ import org.eclipse.ui.actions.CompoundContributionItem;
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationPackage;
 import com.bluexml.side.application.Configuration;
+import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.ui.action.GeneratePopUp;
+import com.bluexml.side.application.ui.action.IDialogEventListener;
+import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
+import com.bluexml.side.application.ui.action.utils.Generate;
 
-public class DynamicMenuAction extends CompoundContributionItem implements
-		IObjectActionDelegate, IMenuCreator {
+public class DynamicMenuAction extends CompoundContributionItem implements IObjectActionDelegate, IMenuCreator {
 
 	private Menu menu;
 	private StructuredSelection selection;
 	private Application application;
 
 	public void dispose() {
-		//System.err.println("dispose");
-		////System.err.println("dispose");
+		// System.err.println("dispose");
 		if (menu != null) {
 			menu.dispose();
 			menu = null;
@@ -50,51 +56,92 @@ public class DynamicMenuAction extends CompoundContributionItem implements
 	}
 
 	public Menu getMenu(Control parent) {
-		//System.err.println("getMenu(Control parent)");
+		// System.err.println("getMenu(Control parent)");
 		// Never used
 		return null;
 
 	}
 
 	public Menu getMenu(Menu parent) {
-		//System.err.println("getMenu");
+		// System.err.println("getMenu");
 		menu = new Menu(parent);
 
 		try {
-			if (selection != null && selection.getFirstElement() != null
-					&& selection.getFirstElement() instanceof IFile) {
+			if (selection != null && selection.getFirstElement() != null && selection.getFirstElement() instanceof IFile) {
 				final IFile file = (IFile) selection.getFirstElement();
-				URI uri = URI.createFileURI(file.getRawLocation().toFile()
-						.getAbsolutePath());
+				URI uri = URI.createFileURI(file.getRawLocation().toFile().getAbsolutePath());
 				XMIResource resource = new XMIResourceImpl(uri);
 
-				FileInputStream fi = new FileInputStream(file.getRawLocation()
-						.toFile());
+				FileInputStream fi = new FileInputStream(file.getRawLocation().toFile());
 				Map<Object, Object> map = new HashMap<Object, Object>();
-				map.put(ApplicationPackage.eINSTANCE.getNsURI(),
-						ApplicationPackage.eINSTANCE);
-				map.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION,
-						Boolean.TRUE);
+				map.put(ApplicationPackage.eINSTANCE.getNsURI(), ApplicationPackage.eINSTANCE);
+				map.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
 				resource.load(fi, map);
 
 				application = (Application) resource.getContents().get(0);
 
 				for (ModelElement me : application.getElements()) {
 					if (me instanceof Configuration) {
-						final Configuration conf = (Configuration) me;
+						final Configuration configuration = (Configuration) me;
 						MenuItem item = new MenuItem(menu, SWT.RADIO);
-						item.setText(conf.getName());
-						item.addSelectionListener( new SelectionAdapter() {
+						item.setText(configuration.getName());
+						item.addSelectionListener(new SelectionAdapter() {
 							public void widgetSelected(SelectionEvent e) {
-								GeneratePopUp generationPopUp = null;
+								final GeneratePopUp generationPopUp;
 								try {
-									generationPopUp = new GeneratePopUp(Display.getDefault().getActiveShell(),file,conf.getName());
+									generationPopUp = new GeneratePopUp(Display.getDefault().getActiveShell(), file, configuration.getName());
+
+									generationPopUp.setBlockOnOpen(false);
+
+									generationPopUp.open();
+									Display currentDisp = ApplicationUtil.getDisplay();
+									currentDisp.syncExec(new Runnable() {
+										public void run() {
+											List<Model> models;
+											models = ApplicationUtil.getModels((Application) configuration.eContainer());
+											
+											// set job to run
+											final Generate gen = new Generate(configuration, models, generationPopUp.getGeneralMonitor(), generationPopUp.getComponentMonitor());
+											// when job's done dialog must display link to open report html page...
+											gen.addJobChangeListener(new IJobChangeListener() {
+												public void sleeping(IJobChangeEvent event) {
+												}
+
+												public void scheduled(IJobChangeEvent event) {
+												}
+
+												public void running(IJobChangeEvent event) {
+												}
+
+												public void done(IJobChangeEvent event) {
+													// display link
+													generationPopUp.displayLink();
+												}
+
+												public void awake(IJobChangeEvent event) {
+												}
+
+												public void aboutToRun(IJobChangeEvent event) {
+												}
+											});
+
+											// manage cancel
+											generationPopUp.addDialogEventListener(new IDialogEventListener() {
+												public void addButtonPressedListener(int buttonId) {
+													if (buttonId == IDialogConstants.CANCEL_ID) {
+														gen.cancel();
+													}
+												}
+											});
+											
+											// schedule side job
+											gen.schedule();
+										}
+									});
 								} catch (IOException e1) {
 									e1.printStackTrace();
 								}
-								generationPopUp.open();
 							}
-
 
 						});
 					}
@@ -113,7 +160,7 @@ public class DynamicMenuAction extends CompoundContributionItem implements
 	}
 
 	public void selectionChanged(IAction action, ISelection myselection) {
-		//System.err.println("selectionChanged" + myselection.toString());
+		// System.err.println("selectionChanged" + myselection.toString());
 		this.selection = (StructuredSelection) myselection;
 
 		action.setMenuCreator(this);
@@ -122,12 +169,12 @@ public class DynamicMenuAction extends CompoundContributionItem implements
 
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
 		// TODO Auto-generated method stub
-		//System.err.println("setActivePart");
+		// System.err.println("setActivePart");
 
 	}
 
 	public void run(IAction action) {
-		//System.err.println("run");
+		// System.err.println("run");
 		// TODO Auto-generated method stub
 
 	}
@@ -135,7 +182,7 @@ public class DynamicMenuAction extends CompoundContributionItem implements
 	@Override
 	protected IContributionItem[] getContributionItems() {
 		// TODO Auto-generated method stub
-		//System.err.println("getContributionItems");
+		// System.err.println("getContributionItems");
 		return null;
 	}
 
