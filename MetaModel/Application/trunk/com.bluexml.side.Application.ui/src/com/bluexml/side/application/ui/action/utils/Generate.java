@@ -17,6 +17,8 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.progress.IProgressConstants;
 import org.osgi.framework.Bundle;
 
@@ -27,6 +29,7 @@ import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.Option;
 import com.bluexml.side.application.ui.Activator;
+import com.bluexml.side.application.ui.SWTResourceManager;
 import com.bluexml.side.application.ui.action.ApplicationDialog;
 import com.bluexml.side.application.ui.action.MustBeStopped;
 import com.bluexml.side.util.componentmonitor.AbstractMonitor;
@@ -76,7 +79,8 @@ public class Generate extends WorkspaceJob {
 		this.configuration = configuration;
 		this.models = models;
 		setProperty(IProgressConstants.KEEPONE_PROPERTY, Boolean.TRUE);
-		//setProperty(IProgressConstants.ICON_PROPERTY, null);
+//		Image img = SWTResourceManager.getImage("/com.bluexml.side.Application.ui/icon/side_16.gif");
+//		setProperty(IProgressConstants.ICON_PROPERTY, ImageDescriptor.createFromImage(img));
 
 	}
 
@@ -94,7 +98,7 @@ public class Generate extends WorkspaceJob {
 	 * @param configuration
 	 * @return
 	 */
-	public int computetotalTaskNb(Configuration configuration) {
+	private int computetotalTaskNb(Configuration configuration) {
 		// general steps
 		int generalSteps = NB_GENERAL_STEP;
 		// optional general steps
@@ -127,7 +131,7 @@ public class Generate extends WorkspaceJob {
 	 * @throws IOException
 	 */
 	
-	public IStatus run_(IProgressMonitor monitor) {
+	public IStatus run_(final IProgressMonitor monitor) {
 		try {
 			// bind generalMonitor with given monitor from ProgressManager
 			generalMonitor.setParent(new IProgressMonitorAdapter(monitor));
@@ -136,7 +140,7 @@ public class Generate extends WorkspaceJob {
 				public void skipTasks(int skippedTask) {
 				}
 
-				public void isCanceled() {
+				public void isCanceled() {					
 				}
 
 				public void addText(String txt, LogEntryType type) {
@@ -167,7 +171,7 @@ public class Generate extends WorkspaceJob {
 			// compute total of general step
 			int nbTask = computetotalTaskNb(configuration);
 			generalMonitor.setMaxTaskNb(nbTask);
-			monitor.beginTask("SIDE", nbTask);
+			monitor.beginTask("", nbTask);
 			// Secondly we get the meta-model associated to a model
 			HashMap<String, List<IFile>> modelsInfo = null;
 			boolean modelWithError = false;
@@ -224,7 +228,6 @@ public class Generate extends WorkspaceJob {
 				try {
 					generate(configuration, modelsInfo, configurationParameters, generationParameters);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 					return new Status(Status.ERROR, Activator.PLUGIN_ID, e.getMessage(), e);
 				}
@@ -233,12 +236,14 @@ public class Generate extends WorkspaceJob {
 			}
 
 		} catch (MustBeStopped e1) {
-			generalMonitor.addErrorText(e1.getLocalizedMessage());
-			return Status.CANCEL_STATUS;
+			generalMonitor.addErrorText(e1.getMessage());
+			monitor.subTask(e1.getMessage());
+			setProperty(IProgressConstants.ACTION_PROPERTY, getReservationCompletedAction());			
+			return new Status(Status.CANCEL, Activator.PLUGIN_ID, e1.getMessage());
 		}
 		monitor.done();
 		setProperty(IProgressConstants.ACTION_PROPERTY, getReservationCompletedAction());
-		return Status.OK_STATUS;
+		return new Status(Status.OK, Activator.PLUGIN_ID, Activator.Messages.getString("Generate_1"));
 	}
 
 	protected void initOptions(Configuration configuration, Map<String, String> configurationParameters) {

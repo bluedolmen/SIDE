@@ -305,6 +305,7 @@ public class GeneratePopUp extends Dialog {
 					public void addButtonPressedListener(int buttonId) {
 						if (buttonId == IDialogConstants.CANCEL_ID) {
 							gen.cancel();
+							generationPopUp.displayLink();
 						}
 					}
 				});
