@@ -14,7 +14,7 @@
       <options key="doc.gen.screenshoot"/>
     </generatorConfigurations>
     <parameters key="generation.options.documentation" value="false"/>
-    <parameters key="generation.option.Skip.Validation" value="true"/>
+    <parameters key="generation.option.Skip.Validation" value="false"/>
     <parameters key="generation.options.clean" value="true"/>
     <parameters key="generation.options.logPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/Data/Alfresco/3.x_Labs_and_Enterprise/S-IDE_Alfresco_Content_Model_Generator_1.0.0/TCDAL_1_generation_of_a_simple_model/log"/>
     <parameters key="generation.options.destinationPath" value="/com.bluexml.side.Integration.testAuto/generation/testCase/Data/Alfresco/3.x_Labs_and_Enterprise/S-IDE_Alfresco_Content_Model_Generator_1.0.0/TCDAL_1_generation_of_a_simple_model/target"/>
